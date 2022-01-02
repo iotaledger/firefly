@@ -1,4 +1,4 @@
-import { DUST_THRESHOLD, hasPendingTransactions } from '../wallet'
+import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
@@ -97,7 +97,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
 export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
         return AccountParticipationAbility.HasDustAmount
-    } else if (hasPendingTransactions(account)) {
+    } else if (hasValidPendingTransactions(account)) {
         return AccountParticipationAbility.HasPendingTransaction
     } else if (!canAccountReachMinimumAirdrop(account, StakingAirdrop.Assembly)) {
         return AccountParticipationAbility.WillNotReachMinAirdrop

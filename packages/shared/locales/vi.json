@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Bảo mật các địa chỉ ví đã chi tiêu...",
-            "body1": "Quy trình này sẽ mất {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Máy tính của bạn sẽ chạy hết công suất, bạn có thể làm việc khác trong khi bạn đợi quá trình này hoàn tất."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, other {# định nghĩa không chính xác}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Đặt cọc",
-            "welcome": "Chào mừng tới bản điều khiển đặt cọc\n",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Sự kiện chưa diễn ra",
                 "commencing": "Mở đặt cọc trước",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, other {# Năm}} trước"
     },
     "times": {
-        "second": "{time, plural, other {# Giây}}",
-        "minute": "{time, plural, other {# phút}}",
-        "hour": "{time, plural, other {# Giờ}}",
-        "day": "{time, plural, other {# Ngày}}",
-        "week": "{time, plural, other {# Tuần}}",
-        "month": "{time, plural, other {# Tháng}}",
-        "year": "{time, plural, other {# Năm}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Đang nhận {{value}} từ {{account}}",
@@ -1034,7 +1034,7 @@
         "updateError": "Có lỗi đã xảy ra trong quá trình cập nhật, vui lòng thử lại",
         "restartInstall": "Khởi động lại để cài đặt",
         "calcMinutesRemaining": "Đang tính toán số phút còn lại...",
-        "minutesRemaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Đã sao chép vào bộ nhớ",
         "accountsSynchronized": "\nĐồng bộ hóa Ví hoàn tất",
         "fundsAvailableSoon": "Tài sản của bạn sẽ sớm có",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Tên hồ sơ của bạn không được dài hơn {length, plural, one {1 ký tự} other {# ký tự}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Hồ sơ có tên này đã tồn tại.",
             "delete": {
                 "nonEmptyAccounts": "Bạn phải chuyển tất cả số dư trước khi có thể xóa hồ sơ của mình."
@@ -1076,15 +1076,15 @@
             "similar": "Đây tương tự như một mật khẩu thường gặp.",
             "word": "Một từ dễ đoán.",
             "incorrect": "Mật khẩu của bạn không đúng.",
-            "length": "Mật khẩu của bạn không thể dài hơn {length, plural, other {# ký tự}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Mã PIN của bạn phải có {length, plural, other {# số}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Mã PIN không khớp.",
             "incorrect": "Mã PIN hiện tại của bạn không đúng."
         },
         "account": {
-            "length": "Tên ví của bạn không thể dài hơn {length, plural, other {# ký tự}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Bạn phải sử dụng ví mới nhất của mình trước khi tạo ví mới.",
             "notEmpty": "Bạn phải chuyển số dư của mình trước khi xóa ví này.",
             "duplicate": "Ví có tên này đã tồn tại.",
@@ -1097,7 +1097,7 @@
             "syncing": "Đã xảy ra lỗi khi đồng bộ hóa ví của bạn."
         },
         "send": {
-            "addressLength": "Địa chỉ phải dài {length, plural, other {# ký tự}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Tài sản này lớn hơn số dư hiện có của bạn.",
             "amountNoFloat": "Nếu đơn vị là `i`, bạn không thể sử dụng vị trí thập phân.",
             "amountInvalidFormat": "Số tiền dường như là một số không hợp lệ.",
@@ -1140,9 +1140,9 @@
             "invalid": "Tệp sao lưu không được nhận dạng.",
             "destination": "Địa chỉ bản sao lưu không hợp lệ.",
             "mnemonic": "Mnemonic không hợp lệ.",
-            "seedTooShort": "Cụm ký tự phải dài 81 ký tự, nó {length, plural, other {là #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Cụm ký tự chỉ nên chứa các ký tự A-Z hoặc 9",
-            "phraseWordCount": "Phải có 24 từ trong cụm từ khôi phục của bạn, hiện tại ở đó {length, plural, other {là #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Từ không nhận dạng được \"{word}\" trong cụm từ khôi phục của bạn",
             "phraseCaseWord": "Từ \"{word}\" nên viết thường"
         },

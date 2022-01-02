@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Beveilig tans spandeerde adresse...",
-            "body1": "Hierdie proses sal {minutes, plural, one {1 minuut} other {# minute}} vat.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Jou rekenaar sal op volle kapasiteit werk, jy wil dalk iets anders doen terwyl jy wag totdat dit voltooi is."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Wag asseblief {time, plural, one {1 sekonde} other {# sekondes}}",
-            "incorrectAttempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welkom by die Staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Staking geleentheid het nog nie begin nie",
                 "commencing": "Pre-Staking is oop",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
     },
     "times": {
-        "second": "{time, plural, one {1 sekonde} other {# sekondes}}",
-        "minute": "{time, plural, one {1 minuut} other {# minute}}",
-        "hour": "{time, plural, one {1 uur} other {# ure}}",
-        "day": "{time, plural, one {1 dag} other {# dae}}",
-        "week": "{time, plural, one {1 week} other {# weke}}",
-        "month": "{time, plural, one {1 maand} other {# maande}}",
-        "year": "{time, plural, one {1 jaar} other {# jare}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
@@ -1034,7 +1034,7 @@
         "updateError": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
         "restartInstall": "Herbegin om te installeer",
         "calcMinutesRemaining": "Bereken oorblywende minute...",
-        "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Kopieer na knipbord",
         "accountsSynchronized": "Beursie sinchronisasie voltooi",
         "fundsAvailableSoon": "Jou fondse sal binnekort beskikbaar wees",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam.",
             "delete": {
                 "nonEmptyAccounts": "Jy moet alle saldo's oordra voordat jy jou profiel kan uitvee."
@@ -1076,15 +1076,15 @@
             "similar": "Hierdie is soortgelyk aan 'n gewone wagwoord.",
             "word": "'N Enkele woord is maklik om te raai.",
             "incorrect": "Jou wagwoord is verkeerd.",
-            "length": "Jou wagwoord mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Jou PIN moet wees {length, plural, one {1 syfer} other {# syfers}} lank.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN het nie ooreengestem nie.",
             "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Jou beursie naam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
             "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
             "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
@@ -1097,7 +1097,7 @@
             "syncing": "Kon nie jou beursies sinchroniseer nie."
         },
         "send": {
-            "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Dit is groter as jou beskikbare balans.",
             "amountNoFloat": "As eenhede 'i' is, kan jy nie desimale plekke gebruik nie.",
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
@@ -1140,9 +1140,9 @@
             "invalid": "Die back-up is nie herken nie.",
             "destination": "Die back-up was nie geldig nie.",
             "mnemonic": "Die mnemoniese is nie geldig nie.",
-            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
-            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
         },

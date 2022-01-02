@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Korábban már használt címek biztosítása...",
-            "body1": "A folyamat {minutes, plural, one {1 percig} other {# percig}} is eltarthat.",
+            "body1": "Ez a folyamat {minutes, plural, one {# percig} other {# percig}} is eltarthat.",
             "body2": "A tárca az eszköze teljes kapacitását kihasználva fog futni, ezért érdemes lehet addig valami mást csinálnia."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Kérjük, várjon {time, plural, one {1 másodpercet} other {# másodpercet}}!",
-            "incorrectAttempts": "{attempts, plural, one {1 hibás próbálkozás} other {# hibás próbálkozás}}"
+            "pleaseWait": "Kérjük várjon {time, plural, one {# másodpercet} other {# másodpercet}}",
+            "incorrectAttempts": "{attempts, plural, one {# hibás próbálkozás} other {# hibás próbálkozás}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Üdvözöljük a staking irányítópulton",
+            "welcome": "Üdvözöljük a staking irányítópulton!",
             "status": {
                 "upcoming": "Nincs még esemény",
                 "commencing": "Előzetes staking megnyitva",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
     },
     "times": {
-        "second": "{time, plural, one {1 másodperc} other {# másodperc}}",
-        "minute": "{time, plural, one {1 perc} other {# perc}}",
-        "hour": "{time, plural, one {1 óra} other {# óra}}",
-        "day": "{time, plural, one {1 nap} other {# nap}}",
-        "week": "{time, plural, one {1 hét} other {# hét}}",
-        "month": "{time, plural, one {1 hónap} other {# hónap}}",
-        "year": "{time, plural, one {1 év} other {# év}}"
+        "second": "{time, plural, one {# másodperc} other {# másodperc}}",
+        "minute": "{time, plural, one {# perc} other {# perc}}",
+        "hour": "{time, plural, one {# óra} other {# óra}}",
+        "day": "{time, plural, one {# nap} other {# nap}}",
+        "week": "{time, plural, one {# hét} other {# hét}}",
+        "month": "{time, plural, one {# hónap} other {# hónap}}",
+        "year": "{time, plural, one {# év} other {# év}}"
     },
     "notifications": {
         "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
@@ -1034,7 +1034,7 @@
         "updateError": "Hiba történt a frissítés közben. Kérjük, próbálja újra!",
         "restartInstall": "Újraindítás a telepítés befejezéséhez",
         "calcMinutesRemaining": "Hátralévő idő kiszámítása...",
-        "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
+        "minutesRemaining": "{minutes, plural, one {# perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
         "accountsSynchronized": "Tárca szinkronizálva",
         "fundsAvailableSoon": "Egyenlege hamarosan elérhető lesz",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "A profil neve nem lehet {length, plural, one {1 karakternél} other {# karakternél}} hosszabb.",
+            "length": "A profil neve nem lehet {length, plural, one {# karakternél} other {# karakternél}} hosszabb.",
             "duplicate": "Már létezik ilyen nevű profil.",
             "delete": {
                 "nonEmptyAccounts": "A profilt csak akkor tudja törölni, ha a teljes egyenlegét átutalta egy másik számlára."
@@ -1076,15 +1076,15 @@
             "similar": "Ez nagyon hasonlít egy gyakran használt jelszóra.",
             "word": "Az egyetlen szóból álló jelszót könnyen kitalálhatják.",
             "incorrect": "A jelszó helytelen.",
-            "length": "A jelszó nem lehet hosszabb, mint {length, plural, one {1 karakter} other {# karakter}}."
+            "length": "A jelszó nem lehet {length, plural, one {# karakternél } other {# karakternél}} hosszabb."
         },
         "pincode": {
-            "length": "A PIN-kódnak {length, plural, one {1 számjegyűnek} other {# számjegyűnek}} kell lennie.",
+            "length": "A PIN-kódnak {length, plural, one {# számjegyűnek} other {# számjegyűnek}} kell lennie.",
             "match": "A megadott PIN-kódok nem egyeznek meg.",
             "incorrect": "Jelenlegi PIN-kódja helytelen."
         },
         "account": {
-            "length": "A tárca neve nem lehet {length, plural, one {1 karakternél} other {# karakternél}} hosszabb.",
+            "length": "A tárca neve nem lehet {length, plural, one {# karakternél} other {# karakternél}} hosszabb.",
             "empty": "Új tárcát csak akkor hozhat létre, ha már legalább egyszer használta a legutóbb létrehozott tárcáját.",
             "notEmpty": "A tárca törlése előtt a teljes egyenlegét át kell küldenie egy másik tárcába.",
             "duplicate": "Már létezik ilyen nevű tárca.",
@@ -1097,7 +1097,7 @@
             "syncing": "Hiba történt a tárcák szinkronizálása közben."
         },
         "send": {
-            "addressLength": "A címnek {length, plural, one {1 karakter} other {# karakter}} hosszúnak kell lennie.",
+            "addressLength": "A címnek {length, plural, one {# karakter} other {# karakter}} hosszúnak kell lennie.",
             "amountTooHigh": "Ez több, mint a rendelkezésre álló egyenleg.",
             "amountNoFloat": "Ha az átutalandó összeg egysége `i`, akkor nem használhat tizedesjegyeket.",
             "amountInvalidFormat": "Úgy tűnik, hogy az összeg egy érvénytelen szám.",
@@ -1140,9 +1140,9 @@
             "invalid": "A biztonsági mentés fájl formátuma ismeretlen.",
             "destination": "A biztonsági mentés elérési útvonala érvénytelen.",
             "mnemonic": "Érvénytelen jelszóemlékeztető.",
-            "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {1} other {#}} hosszú",
+            "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {#} other {#}} karakter hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
-            "phraseWordCount": "24 helyett csak {length, plural, one {1} other { #}} helyreállítási szót adott meg.",
+            "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállítási szót adott meg.",
             "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között",
             "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
         },

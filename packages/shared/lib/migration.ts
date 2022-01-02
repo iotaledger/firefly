@@ -360,16 +360,23 @@ export const findMigrationBundle = (bundleIndex: number): Bundle => {
  */
 export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<void> =>
     new Promise((resolve, reject) => {
-        const { accounts } = get(wallet)
-
-        const accountId = get(accounts).find((account) => account.index === get(activeProfile).ledgerMigrationCount).id
-
-        api.getMigrationAddress(false, accountId, {
-            onSuccess(response) {
-                resolve(response.payload)
+        api.getAccounts({
+            onSuccess(getAccountsResponse) {
+                api.getMigrationAddress(
+                    false,
+                    getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
+                    {
+                        onSuccess(response) {
+                            resolve(response.payload)
+                        },
+                        onError(error) {
+                            reject(error)
+                        },
+                    }
+                )
             },
-            onError(error) {
-                reject(error)
+            onError(getAccountsError) {
+                reject(getAccountsError)
             },
         })
     }).then((address: MigrationAddress) => {
@@ -486,16 +493,23 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<MigrationBundle> =>
     new Promise((resolve, reject) => {
-        const { accounts } = get(wallet)
-
-        const accountId = get(accounts).find((account) => account.index === get(activeProfile).ledgerMigrationCount).id
-
-        api.getMigrationAddress(false, accountId, {
-            onSuccess(response) {
-                resolve(response.payload)
+        api.getAccounts({
+            onSuccess(getAccountsResponse) {
+                api.getMigrationAddress(
+                    false,
+                    getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
+                    {
+                        onSuccess(response) {
+                            resolve(response.payload)
+                        },
+                        onError(error) {
+                            reject(error)
+                        },
+                    }
+                )
             },
-            onError(error) {
-                reject(error)
+            onError(getAccountsError) {
+                reject(getAccountsError)
             },
         })
     }).then((address: MigrationAddress) => {

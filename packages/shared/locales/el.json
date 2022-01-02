@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Εξασφάλιση των δαπανημένων διευθύνσεων...",
-            "body1": "Αυτή η διαδικασία θα διαρκέσει {minutes, plural, one {1 λεπτό} other {# λεπτά}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Ο υπολογιστής σας θα τρέξει με πλήρη χωρητικότητα, μπορεί να θέλετε να κάνετε κάτι άλλο ενώ περιμένετε να ολοκληρωθεί."
         },
         "transferFragmentedFunds": {
@@ -440,8 +440,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Παρακαλώ περιμένετε {time, plural, one {1 δευτερόλεπτο} other {# δευτερόλεπτα}}",
-            "incorrectAttempts": "{attempts, plural, one {1 εσφαλμένη προσπάθεια} other {# εσφαλμένες προσπάθειες}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staking (Ποντάρισμα)",
-            "welcome": "Καλώς ήρθατε στον πίνακα ελέγχου staking",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Η διαδικασία δεν ξεκίνησε",
                 "commencing": "Άνοιξε το Pre-staking",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "πριν {time, plural, one {# χρόνο} other {# χρόνια}}"
     },
     "times": {
-        "second": "{time, plural,\n  one {# δευτερόλεπτο}\n  other {# δευτερόλεπτα}\n}",
-        "minute": "{time, plural, one {1 λεπτό} other {# λεπτά}}",
-        "hour": "{time, plural, one {1 ώρα} other {# ώρες}}",
-        "day": "{time, plural, one {1 ημέρα} other {# ημέρες}}",
-        "week": "{time, plural, one {# εβδομάδα} other {# εβδομάδες}}",
-        "month": "{time, plural, one {1 μήνας} other {# μήνες}}",
-        "year": "{time, plural, one {1 χρόνος} other {# χρόνια}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
@@ -1034,7 +1034,7 @@
         "updateError": "Παρουσιάστηκε σφάλμα κατά τη διάρκεια της διαδικασίας. Παρακαλούμε δοκιμάστε ξανά",
         "restartInstall": "Επανεκκίνηση για εγκατάσταση",
         "calcMinutesRemaining": "Υπολογισμός υπολειπόμενων λεπτών...",
-        "minutesRemaining": "{minutes, plural, one {1 λεπτό απομένει} other {# λεπτά απομένουν}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο",
         "accountsSynchronized": "Ο συγχρονισμός πορτοφολιού ολοκληρώθηκε",
         "fundsAvailableSoon": "Τα κεφάλαια σας θα είναι διαθέσιμα σύντομα",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Το όνομα του προφίλ σας δεν μπορεί να είναι μεγαλύτερο από {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Ένα προφίλ με αυτό το όνομα υπάρχει ήδη.",
             "delete": {
                 "nonEmptyAccounts": "Πρέπει να μεταφέρετε όλα τα υπόλοιπα πριν διαγράψετε το προφίλ σας."
@@ -1076,15 +1076,15 @@
             "similar": "Αυτό είναι παρόμοιο με έναν συνήθη κωδικό πρόσβασης.",
             "word": "Μια μόνη λέξη είναι εύκολο να την μαντέψουν.",
             "incorrect": "Ο κωδικός πρόσβασης είναι εσφαλμένος.",
-            "length": "Ο κωδικός πρόσβασής σας δεν μπορεί να είναι μεγαλύτερος από {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Το PIN σας πρέπει να είναι {length, plural, one {1 ψηφίο} other {# ψηφία}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Τα PIN δεν ταιριάζουν.",
             "incorrect": "Το τρέχον PIN είναι λανθασμένο."
         },
         "account": {
-            "length": "Το όνομα του πορτοφολιού σας δεν μπορεί να είναι μεγαλύτερο από {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Πρέπει να χρησιμοποιήσετε το τελευταίο πορτοφόλι σας πριν δημιουργήσετε ένα νέο.",
             "notEmpty": "Πρέπει να μεταφέρετε το υπόλοιπό σας πριν διαγράψετε αυτό το πορτοφόλι.",
             "duplicate": "Υπάρχει ήδη ένα πορτοφόλι με αυτό το όνομα.",
@@ -1097,7 +1097,7 @@
             "syncing": "Παρουσιάστηκε σφάλμα συγχρονισμού των πορτοφολιών σας."
         },
         "send": {
-            "addressLength": "Οι διευθύνσεις πρέπει να είναι {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Αυτό είναι μεγαλύτερο από το διαθέσιμο υπόλοιπο σας.",
             "amountNoFloat": "Εάν οι μονάδες είναι `i` δεν μπορείτε να χρησιμοποιήσετε δεκαδικά ψηφία.",
             "amountInvalidFormat": "Το ποσό φαίνεται να είναι άκυρος αριθμός.",
@@ -1140,9 +1140,9 @@
             "invalid": "Το αντίγραφο ασφαλείας δεν είναι αναγνώσιμο.",
             "destination": "Ο προορισμός αντιγράφου ασφαλείας δεν ήταν έγκυρος.",
             "mnemonic": "Το μνημονικό δεν είναι έγκυρο.",
-            "seedTooShort": "Το seed πρέπει να έχει μήκος 81 χαρακτήρες, είναι {length, plural, one {1 χαρακτήρας} other {# χαρακτήρες}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Το seed πρέπει να περιέχει μόνο χαρακτήρες A-Z ή 9",
-            "phraseWordCount": "Πρέπει να υπάρχουν 24 λέξεις στη φράση ανάκτησής σας, αυτή τη στιγμή {length, plural, one {είναι 1} other {είναι #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Μη αναγνωρίσιμη λέξη \"{word}\" στη φράση ανάκτησης σας",
             "phraseCaseWord": "Η λέξη \"{word}\" πρέπει να είναι πεζή"
         },

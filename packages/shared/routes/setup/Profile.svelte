@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { cleanupSignup } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
@@ -17,7 +17,8 @@
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { openPopup } from 'shared/lib/popup';
 
     export let locale: Locale
 
@@ -83,7 +84,13 @@
                     initialiseMigrationListeners()
                 }
 
-                dispatch('next')
+                if(isDeveloperProfile) {
+                    openPopup({type: 'confirmDeveloperProfile', props: {
+                        handleContinueClick: () => dispatch('next')
+                    }})
+                } else {
+                    dispatch('next')
+                }
             } catch (err) {
                 showAppNotification({
                     type: 'error',
@@ -127,12 +134,14 @@
                 disabled={busy}
                 submitHandler={handleContinueClick} />
 
-            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-                <div class="text-left">
-                    <Text type="p">{locale('views.profile.developer.label')}</Text>
-                    <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-                </div>
-            </ButtonCheckbox>
+            <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                    <div class="text-left">
+                        <Text type="p">{locale('views.profile.developer.label')}</Text>
+                        <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
+                    </div>
+                </ButtonCheckbox>
+            </CollapsibleBlock>
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

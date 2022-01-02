@@ -262,7 +262,7 @@
         },
         "securingSpentAddresses": {
             "title": "Veiligstellen uitgegeven adressen...",
-            "body1": "Dit proces duurt {minutes, plural, one {1 minuut} other {# minuten}}.",
+            "body1": "Dit proces zal {minutes, plural, one {# minuut} other {# minuten}} duren.",
             "body2": "Uw computer zal op volle capaciteit werken, u wilt misschien iets anders doen terwijl u wacht tot het klaar is."
         },
         "transferFragmentedFunds": {
@@ -440,7 +440,7 @@
             }
         },
         "login": {
-            "pleaseWait": "Gelieve {time, plural, one {1 seconde} other {# seconden}} te wachten",
+            "pleaseWait": "Wacht alsjeblieft {time, plural, one {# seconde} other {# seconden}}",
             "incorrectAttempts": "{attempts, plural, one {1 incorrecte poging} other {# incorrecte pogingen}}"
         },
         "dashboard": {
@@ -487,7 +487,7 @@
         },
         "staking": {
             "title": "Staken",
-            "welcome": "Welkom op het staking dashboard",
+            "welcome": "Welkom bij het staking dashboard!",
             "status": {
                 "upcoming": "Evenement nog niet begonnen",
                 "commencing": "Pre-staking geopend",
@@ -1015,13 +1015,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jaren}} geleden"
     },
     "times": {
-        "second": "{time, plural, one {1 seconde} other {# seconden}}",
-        "minute": "{time, plural, one {1 minuut} other {# minuten}}",
-        "hour": "{time, plural, one {1 uur} other {# uur}}",
-        "day": "{time, plural, one {1 dag} other {# dagen}}",
-        "week": "{time, plural, one {1 week} other {# weken}}",
-        "month": "{time, plural, one {1 maand} other {# maanden}}",
-        "year": "{time, plural, one {1 jaar} other {# jaar}}"
+        "second": "{time, plural, one {# seconde} other {# seconden}}",
+        "minute": "{time, plural, one {# minuut} other {# minuten}}",
+        "hour": "{time, plural, one {# uur} other {# uur}}",
+        "day": "{time, plural, one {# dag} other {# dagen}}",
+        "week": "{time, plural, one {# week} other {# weken}}",
+        "month": "{time, plural, one {# maand} other {# maanden}}",
+        "year": "{time, plural, one {# jaar} other {# jaar}}"
     },
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
@@ -1055,7 +1055,7 @@
     },
     "error": {
         "profile": {
-            "length": "Uw profielnaam kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}.",
+            "length": "Je profielnaam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "duplicate": "Een account met deze naam bestaat al.",
             "delete": {
                 "nonEmptyAccounts": "U moet eerst alle saldo's overdragen voordat u uw profiel kunt verwijderen."
@@ -1076,15 +1076,15 @@
             "similar": "Dit is vergelijkbaar met een veelgebruikt wachtwoord.",
             "word": "Een enkel woord is makkelijk te raden.",
             "incorrect": "Uw wachtwoord is niet correct.",
-            "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
+            "length": "Je wachtwoord kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}."
         },
         "pincode": {
-            "length": "Uw pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
+            "length": "Je pincode moet {length, plural, one {# cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },
         "account": {
-            "length": "Uw portemonnee naam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Je wallet naam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "U moet uw laatste portemonnee gebruiken voordat u een nieuwe aanmaakt.",
             "notEmpty": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
             "duplicate": "Een portemonnee met deze naam bestaat al.",
@@ -1142,7 +1142,7 @@
             "mnemonic": "Het mnemonic is niet geldig.",
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
-            "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
+            "phraseWordCount": "Er zouden 24 woorden in uw herstelzin moeten zitten, op dit moment {length, plural, one {is er slechts 1} other {zijn er slechts #}}.",
             "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
             "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
         },
