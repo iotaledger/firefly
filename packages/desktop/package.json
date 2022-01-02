@@ -91,7 +91,9 @@
             ]
         },
         "nsis": {
-            "deleteAppDataOnUninstall": false
+            "oneClick": false,
+            "deleteAppDataOnUninstall": false,
+            "allowToChangeInstallationDirectory": true
         },
         "win": {
             "icon": "./public/assets/icons/win/icon.ico",
