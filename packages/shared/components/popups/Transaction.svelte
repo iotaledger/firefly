@@ -1,26 +1,32 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { isStakingPossible } from 'shared/lib/participation'
+    import type { WalletAccount } from 'lib/typings/wallet'
+    import { wallet } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
+    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { stakingEventState } from '../../lib/participation/stores'
+    import { get } from 'svelte/store'
+    import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
+    export let accountId
     export let internal = false
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let isSendingFromParticpatingAccount = false
 
     export let onConfirm = (..._: any[]): void => {}
 
     const displayAmount = getFormattedAmount()
+
+    const _getAccount = (accounts: WalletAccount[]): WalletAccount =>
+        accounts.find((account) => account.id === accountId)
 
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)
@@ -35,8 +41,17 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    let mustAcknowledgeParticipationWarning
-    $: mustAcknowledgeParticipationWarning = isSendingFromParticpatingAccount && isStakingPossible($stakingEventState)
+    let mustAcknowledgeGenericParticipationWarning
+    $: mustAcknowledgeGenericParticipationWarning = isAccountStaked(accountId) && isStakingPossible($stakingEventState)
+
+    let mustAcknowledgeBelowMinRewardParticipationWarning
+    $: {
+        const { accounts } = get(wallet)
+        const account = _getAccount(get(accounts))
+        const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+        mustAcknowledgeBelowMinRewardParticipationWarning =
+            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+    }
 
     function handleNextClick() {
         /**
@@ -44,7 +59,8 @@
          * it has been acknowledged it does not have to
          * be acknowledged anymore.
          */
-        mustAcknowledgeParticipationWarning = false
+        mustAcknowledgeGenericParticipationWarning = false
+        mustAcknowledgeBelowMinRewardParticipationWarning = false
     }
 
     function handleCancelClick() {
@@ -65,13 +81,14 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    {#if mustAcknowledgeParticipationWarning}
-        <div class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3">
+    {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
+        <div
+            class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3">
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
-                {locale('popups.transaction.sendingFromStakedAccount')}
+                {locale(mustAcknowledgeBelowMinRewardParticipationWarning ? 'popups.transaction.sendingFromStakedAccountBelowMinReward' : 'popups.transaction.sendingFromStakedAccount')}
             </Text>
         </div>
     {:else}
@@ -87,7 +104,7 @@
     {/if}
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        {#if mustAcknowledgeParticipationWarning}
+        {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
             <Button classes="w-full" onClick={handleNextClick}>{locale('actions.next')}</Button>
         {:else}
             <Button classes="w-full" onClick={onConfirm}>{locale('actions.confirm')}</Button>

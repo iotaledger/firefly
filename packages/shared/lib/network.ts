@@ -8,7 +8,6 @@ import { localize } from './i18n'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
-import { pollParticipationOverview } from './participation/participation'
 
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
