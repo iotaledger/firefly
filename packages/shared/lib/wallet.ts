@@ -22,23 +22,35 @@ import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { Electron } from './electron'
+import { deepCopy } from './helpers'
 import { localize } from './i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { getParticipationOverview } from './participation/api'
+import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+// PARTICIPATION
+import {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationAction,
+    ParticipationEvent,
+    ParticipationOverviewResponse,
+    PendingParticipation,
+} from './participation/types'
 import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import type {
     Account,
     Account as BaseAccount,
+    AccountIdentifier,
     AccountToCreate,
     Balance,
     SignerType,
     SyncAccountOptions,
     SyncedAccount,
-    AccountIdentifier,
 } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor, GetMigrationAddressResponse } from './typings/bridge'
@@ -61,20 +73,6 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { deepCopy } from './helpers'
-
-// PARTICIPATION
-import {
-    ParticipateResponsePayload,
-    Participation,
-    ParticipationAction,
-    ParticipationEvent,
-    ParticipationOverviewResponse,
-    PendingParticipation,
-} from './participation/types'
-
-import { removePendingParticipations, hasPendingParticipation, getPendingParticipation } from './participation/stores'
-import { getParticipationOverview } from './participation/api'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -2047,7 +2045,7 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
 }
 
 /**
- * Determines whether an account has any currently pending transactions.
+ * Determines whether an account has any pending transactions.
  *
  * @method hasPendingTransactions
  *
@@ -2059,4 +2057,27 @@ export const hasPendingTransactions = (account: WalletAccount): boolean => {
     if (!account) return false
 
     return account?.messages.some((m) => !m.confirmed)
+}
+
+/**
+ * Determines whether an account has any valid pending transactions i.e. transactions that can confirm.
+ *
+ * @method hasValidPendingTransactions
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {boolean}
+ */
+export const hasValidPendingTransactions = (account: WalletAccount): boolean => {
+    if (!account) return false
+    const pendingMessages = account?.messages.filter((m) => !m.confirmed)
+    const pendingInputs = pendingMessages.flatMap((msg) => {
+        if (msg.payload?.type === 'Transaction') {
+            return msg.payload?.data?.essence?.data?.inputs
+        }
+        return []
+    })
+    const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
+
+    return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
 }
