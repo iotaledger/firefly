@@ -88,7 +88,11 @@ const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
         case NetworkType.ChrysalisDevnet:
             return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
         case NetworkType.ChrysalisMainnet:
-            return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
+            return [
+                'https://chrysalis-nodes.iota.org',
+                'https://chrysalis-nodes.iota.cafe',
+                'https://mainnet-node.tanglebay.com',
+            ]
         default:
             return []
     }
