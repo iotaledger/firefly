@@ -22,9 +22,10 @@
                 "nonFirst": "Aloitetaan nyt profiilisi nimellä."
             },
             "addMore": "Voit tehdä lisää profiileja myöhemmin.",
+            "advancedOptions": "Lisäasetukset",
             "developer": {
                 "label": "Kehittäjäprofiili",
-                "info": "Yhdistä julkisiin ja yksityisiin IOTA-verkkoihin"
+                "info": "Yhdistä devnetiin tai yksityiseen verkkoon"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Vahvista transaktio",
             "body": "Olet lähettämässä {amount} osoitteeseen",
-            "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen."
+            "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
+            "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
@@ -746,6 +748,10 @@
             "title": "Tietoja Assemblystä",
             "body1": "Onnittelut, olet ansainnut ASMB-tokeneita staking-palkkiona. Assembly on moniketjuverkko skaalautuvien älysopimusten käyttöönottoon IOTA:lla.",
             "body2": "Tavoitteenamme on käynnistää Assembly vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Olet luomassa kehittäjäprofiilia",
+            "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Mistä",
         "to": "Mihin",
         "receiveFunds": "Vastaanota varoja",
+        "address": "Osoite",
         "myAddress": "Osoitteeni",
         "shareAddress": "Jaa osoite",
         "yourAddress": "Osoitteesi",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Muotoiltu arvo",
             "date": "Päivämäärä",
             "time": "Aika"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Käytät tällä hetkellä kehittäjäprofiilia ja olet yhdistettynä verkkoon {networkName}"
         }
     }
 }

@@ -22,9 +22,10 @@
                 "nonFirst": "Untuk saat ini, mari kita mulai dengan nama profil Anda."
             },
             "addMore": "Anda dapat menambahkan profil lainnya nanti.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profil pengembang",
-                "info": "Menghubungkan ke publik dan jaringan IOTA pribadi"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Konfirmasi transaksi",
             "body": "Anda akan mengirim {amount} kepada",
-            "sendingFromStakedAccount": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya."
+            "sendingFromStakedAccount": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Pencari saldo",
@@ -746,6 +748,10 @@
             "title": "Tentang Assembly",
             "body1": "Selamat Anda telah mendapatkan ASMB token sebagai hadiah staking. Assembly adalah sebuah jaringan Multi-chain untuk meluncurkan skalabel smart contract pada IOTA.",
             "body2": "Kami menargetkan untuk meluncurkan Assembly pada 2022. Token Anda akan dapat Anda transfer setelah jaringan diluncurkan."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Dari",
         "to": "Ke",
         "receiveFunds": "Terima dana",
+        "address": "Address",
         "myAddress": "Alamat Saya",
         "shareAddress": "Bagikan alamat",
         "yourAddress": "Alamat Anda",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Nilai terformat",
             "date": "Tanggal",
             "time": "Waktu"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

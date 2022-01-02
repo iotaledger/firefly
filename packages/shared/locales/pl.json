@@ -22,9 +22,10 @@
                 "nonFirst": "Zacznijmy od Twojej nazwy profilu."
             },
             "addMore": "Będziesz mógł dodać więcej profili później.",
+            "advancedOptions": "Opcje zaawansowane",
             "developer": {
                 "label": "Profil deweloperski",
-                "info": "Połącz się z publicznymi oraz prywatnymi sieciami IOTA"
+                "info": "Połączenie z devnetem lub prywatną siecią"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Potwierdzanie transakcji",
             "body": "Zamierzasz wysłać {amount} do",
-            "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków."
+            "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
+            "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu."
         },
         "balanceFinder": {
             "title": "Wyszukiwarka środków",
@@ -746,6 +748,10 @@
             "title": "O Assembly",
             "body1": "Gratulacje, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
             "body2": "Uruchomienie Assembly jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Tworzysz profil dewelopera",
+            "body": "Twoim domyślnym połączeniem będzie Chrysalis Devnet. Będziesz mógł przełączać sieci ręcznie. Kontynuuj tylko jeśli wiesz co robisz."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Od",
         "to": "Do",
         "receiveFunds": "Odbierz środki",
+        "address": "Adres",
         "myAddress": "Mój adres",
         "shareAddress": "Udostępnij adres",
         "yourAddress": "Twój adres",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Wartość sformatowana",
             "date": "Data",
             "time": "Godzina"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Aktualnie używasz profilu dewelopera i jesteś połączony z siecią {networkName}"
         }
     }
 }

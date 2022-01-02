@@ -22,9 +22,10 @@
                 "nonFirst": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του προφίλ σας."
             },
             "addMore": "Μπορείτε να προσθέσετε περισσότερα προφίλ αργότερα.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Προφίλ Προγραμματιστή",
-                "info": "Σύνδεση σε δημόσια και ιδιωτικά δίκτυα IOTA"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Επιβεβαίωση συναλλαγής",
             "body": "Είστε έτοιμος να στείλετε {amount} στο",
-            "sendingFromStakedAccount": "Στέλνετε μια μεταβίβαση από ένα πορτοφόλι που βρίσκεται σε staking. Αυτό μπορεί να κάνει unstaking τα token σας. Μη διστάσετε να στείλετε τη μεταφορά, αλλά ίσως χρειαστεί να ξανακάνετε τα υπόλοιπα νομίσματά σας restake στη συνέχεια."
+            "sendingFromStakedAccount": "Στέλνετε μια μεταβίβαση από ένα πορτοφόλι που βρίσκεται σε staking. Αυτό μπορεί να κάνει unstaking τα token σας. Μη διστάσετε να στείλετε τη μεταφορά, αλλά ίσως χρειαστεί να ξανακάνετε τα υπόλοιπα νομίσματά σας restake στη συνέχεια.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Εύρεση υπολοίπου",
@@ -746,6 +748,10 @@
             "title": "Σχετικά Με Συνέλευση",
             "body1": "Συγχαρητήρια που κερδίσατε ASMB token ως staking ανταμοιβή. To Assembly είναι ένα multi-chain δίκτυο για την ανάπτυξη kai επέκταση έξυπνων συμβόλαιον στο IOTA.",
             "body2": "Στόχος μας είναι να ξεκινήσει το Assembly το 2022. Τα tokens σας θα είναι διαθέσιμα για μεταφορά μόλις ξεκινήσει το δίκτυο."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Από",
         "to": "Προς",
         "receiveFunds": "Λήψη Χρημάτων",
+        "address": "Address",
         "myAddress": "Η διεύθυνσή μου",
         "shareAddress": "Μοιραστείτε μια διεύθυνση",
         "yourAddress": "Η διεύθυνση σας",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Μορφοποιημένη Τιμή",
             "date": "Ημερομηνία",
             "time": "Χρόνος"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

@@ -22,9 +22,10 @@
                 "nonFirst": "现在，让我们从您的配置名称开始。"
             },
             "addMore": "您可以稍后添加更多配置文件。",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "开发者模式",
-                "info": "连接到公共或私用IOTA网络"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
-            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。"
+            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -746,6 +748,10 @@
             "title": "关于Assembly",
             "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
             "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "从",
         "to": "到",
         "receiveFunds": "接收资金",
+        "address": "Address",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -1246,6 +1253,11 @@
             "formattedValue": "格式化值",
             "date": "日期",
             "time": "时间"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

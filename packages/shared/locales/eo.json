@@ -22,9 +22,10 @@
                 "nonFirst": "Nuntempe, ni komencu per via profilnomo."
             },
             "addMore": "Vi povas aldoni pliajn profilojn poste.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profilo de programisto",
-                "info": "Konekti al publika kaj privata IOTA-retoj"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Konfirmu transakcion",
             "body": "Vi estas sendonta {amount} al",
-            "sendingFromStakedAccount": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste."
+            "sendingFromStakedAccount": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Enhavo serĉilo",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Gratulon, ke vi gajnis ASMB-ĵetonojn kiel staking rekompencon. Assembly estas plurĉena reto por disfaldi skaleblajn inteligentajn kontraktojn sur IOTA.",
             "body2": "Ni celas lanĉi Assembly en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "Al",
         "receiveFunds": "Ricevu Fondusojn",
+        "address": "Address",
         "myAddress": "Mia adreso",
         "shareAddress": "Kunhavigi adreson",
         "yourAddress": "Via adreso",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Dato",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

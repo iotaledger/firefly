@@ -22,9 +22,10 @@
                 "nonFirst": "Laten we voor nu beginnen met de naam van uw profiel."
             },
             "addMore": "Je kunt later meer profielen toevoegen.\n",
+            "advancedOptions": "Geavanceerde opties",
             "developer": {
                 "label": "Ontwikkelaarsprofiel",
-                "info": "Verbinding maken met publieke en private IOTA-netwerken"
+                "info": "Verbinding maken met het devnet of een privénetwerk"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "U staat op het punt {amount} te sturen naar",
-            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken."
+            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
+            "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest."
         },
         "balanceFinder": {
             "title": "Saldo zoeker",
@@ -746,6 +748,10 @@
             "title": "Over Assembly",
             "body1": "Gefeliciteerd, u heeft ASMB tokens verdiend als stake beloning. Assembly is een multi-chain netwerk voor het inzetten van schaalbare smart contracts op IOTA.",
             "body2": "We streven naar een launch van Assembly in 2022. Uw tokens zullen beschikbaar zijn zodra het netwerk gelanceerd is."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Je maakt een ontwikkelaarsprofiel aan",
+            "body": "Je wordt standaard verbonden met het Chrysalis Devnet en kunt handmatig van netwerk wisselen. Ga alleen verder als je weet wat je doet."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Van",
         "to": "Naar",
         "receiveFunds": "Geld ontvangen",
+        "address": "Adres",
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Opgemaakte waarde",
             "date": "Datum",
             "time": "Tijd"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Je gebruikt momenteel een ontwikkelaarsprofiel en bent verbonden met {networkName}"
         }
     }
 }

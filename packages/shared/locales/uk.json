@@ -22,9 +22,10 @@
                 "nonFirst": "Почніть з назви вашого профілю."
             },
             "addMore": "Ви можете додати більше профілів пізніше.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Профіль розробника",
-                "info": "Підключіться до публічних і приватних мереж IOTA"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Підтвердити транзакцію",
             "body": "Ви збираєтеся надіслати {amount}",
-            "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову."
+            "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Шукач балансу",
@@ -746,6 +748,10 @@
             "title": "Про Assembly",
             "body1": "Вітаємо, ви отримали токени ASMB як винагороду за ставку. Assembly — це багатоланцюгова мережа для розгортання масштабованих смарт-контрактів на IOTA.",
             "body2": "Ми прагнемо запустити Assembly у 2022 році. Ваші токени стануть доступними для передачі після запуску мережі."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Звідки",
         "to": "Кому",
         "receiveFunds": "Отримати кошти",
+        "address": "Address",
         "myAddress": "Моя адреса",
         "shareAddress": "Поділитися адресою",
         "yourAddress": "Ваша адреса",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Стерти значення",
             "date": "Дата",
             "time": "Час"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }
