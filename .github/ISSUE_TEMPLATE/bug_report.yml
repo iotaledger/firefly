@@ -11,7 +11,7 @@ body:
     - type: markdown
       attributes:
           value: |
-              Thank you for helping us make [application name] better, by reporting a bug you have found. This issue may already be reported! Please search on the [issue tracker](https://github.com/iotaledger/firefly/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Abug) before creating one. This form is for bugs only and not for help or support using this application. Please visit the [help and support discussions forum](https://github.com/iotaledger/firefly/discussions/categories/help-support) or join our [discord](https://discord.iota.org/) for help.
+              Thank you for helping us make Firefly better, by reporting a bug you have found. This issue may already be reported! Please search on the [issue tracker](https://github.com/iotaledger/firefly/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Abug) before creating one. This form is for bugs only and not for help or support using this application. Please visit the [help and support discussions forum](https://github.com/iotaledger/firefly/discussions/categories/help-support) or join our [discord](https://discord.iota.org/) for help.
 
     - type: textarea
       id: description
