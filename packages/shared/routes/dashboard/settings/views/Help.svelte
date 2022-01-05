@@ -10,7 +10,7 @@
     // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://wiki.iota.org/')
+        Electron.openUrl('https://wiki.iota.org/learn/wallets/firefly/general')
     }
 
     const handleFaqClick = () => {
