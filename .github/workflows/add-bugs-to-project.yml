@@ -1,0 +1,19 @@
+name: Assign Bugs to Project
+
+on:
+    issues:
+        types: [labeled]
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+    assign_to_project:
+        runs-on: ubuntu-latest
+        name: Assign bug issue to Bug Management project
+        steps:
+            - name: Assign issues with type:bug label to Firefly - Bug Management project
+              uses: srggrs/assign-one-project-github-action@1.2.0
+              if: contains(github.event.issue.labels.*.name, 'type:bug')
+              with:
+                  project: 'https://github.com/iotaledger/firefly/projects/1'
+                  column_name: 'Needs triage'
