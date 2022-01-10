@@ -24,6 +24,7 @@
     let navContainer
     let divContainer
     let focusedItem
+    let search = ''
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
 
@@ -47,6 +48,7 @@
         } else {
             divContainer.focus()
             focusedItem = undefined
+            search = ''
         }
     }
 
@@ -84,14 +86,17 @@
                         e.preventDefault()
                     }
                 }
-            } else if (e.keyCode >= 65 && e.keyCode <= 122) {
+            } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 122)) {
                 const children = [...navContainer.children]
-                const itemsValues = items.map(item => item.value.toLowerCase())
-                const idx = itemsValues.findIndex(item => item.startsWith(e.key.toLowerCase()))
+                const itemsValues = items.map(item => item.label.toLowerCase())
+                search += e.key
+                const idx = itemsValues.findIndex(item => item.includes(search.toLowerCase()))
                 if (idx >= 0) {
                     children[idx].focus()
                     e.preventDefault()
                 }
+            } else if (e.key === 'Backspace') {
+                search = search.slice(0, -1)
             }
         }
     }
@@ -225,7 +230,7 @@
     bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : showBorderWhenClosed ? 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700' : ''}"
         tabindex="0"
         bind:this={divContainer}>
-        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white"><Text type={valueTextType} smaller>{value || placeholder}</Text></div>
+        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white"><Text type={valueTextType} smaller>{search || value || placeholder}</Text></div>
         <Icon
             icon={small ? 'small-chevron-down' : 'chevron-down'}
             width={small ? 16 : 24}
