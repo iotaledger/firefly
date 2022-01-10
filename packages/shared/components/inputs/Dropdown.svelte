@@ -84,6 +84,14 @@
                         e.preventDefault()
                     }
                 }
+            } else if (e.keyCode >= 65 && e.keyCode <= 122) {
+                const children = [...navContainer.children]
+                const itemsValues = items.map(item => item.value.toLowerCase())
+                const idx = itemsValues.findIndex(item => item.startsWith(e.key.toLowerCase()))
+                if (idx >= 0) {
+                    children[idx].focus()
+                    e.preventDefault()
+                }
             }
         }
     }
