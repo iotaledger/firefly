@@ -92,7 +92,7 @@
         <Text smaller secondary>{locale('popups.backup.backupWarning')}</Text>
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
-        <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleBackupClick}>
+        <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit|preventDefault={handleBackupClick}>
             <Password
                 classes="w-full mb-5"
                 bind:value={password}

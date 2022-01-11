@@ -293,7 +293,7 @@
     <!-- TODO: ledger, remove this also from settings index -->
     {#if $isSoftwareProfile}
         <section id="changePassword" class="w-3/4">
-            <form id="form-change-password" on:submit={changePassword}>
+            <form id="form-change-password" on:submit|preventDefault={changePassword}>
                 <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
                 <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
                 <Password
