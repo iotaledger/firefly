@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Error } from 'shared/components'
+    import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
 
     export let value = undefined
@@ -203,7 +204,7 @@
         e.stopPropagation()
         toggleDropDown()
     }}
-    use:handleClickOutside
+    use:clickOutside
     on:clickOutside={handleClickOutside}
     on:keydown={handleKey}
     class:active={dropdown}
