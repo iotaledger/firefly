@@ -114,7 +114,7 @@
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5">{locale('general.transactions')} <span class="text-gray-500">• {queryTransactions.length}</span></Text>
+                <Text type="h5">{locale('general.transactions')} <span class="text-gray-500 font-bold">• {queryTransactions.length}</span></Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
@@ -123,23 +123,29 @@
                     </button>
                 {/if}
             </div>
-            <div class="flex flex-row justify-between text-white mt-4">
-                <ul class="flex flex-row justify-between">
+            <div class="relative flex flex-row items-center justify-between text-white mt-4">
+                <ul class="flex flex-row justify-between space-x-8">
                     {#each filters as filter, i}
                         <li on:click={() => activeFilterIndex = i}>
-                            <Text type="p" overrideColor classes="cursor-pointer mr-8
-                            {activeFilterIndex === i ? "text-blue-500 border-b-2 border-blue-500 border-solid" : "text-gray-500 hover:text-gray-600"}">
+                            <Text type="p" overrideColor classes="cursor-pointer
+                            {activeFilterIndex === i ? "text-blue-500 border-b-2 border-blue-500 border-solid" : "text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"}">
                                 {locale(`general.${filter}`)}
                             </Text>
                         </li>
                     {/each}
                 </ul>
                 <button on:click={() => (searchActive = !searchActive)}>
-                    <Icon icon={searchActive ? 'close' : 'search'} classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+                    <Icon icon="search" classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
                     cursor-pointer ml-2" />
                 </button>
+                <div class="z-0 flex items-center absolute left-0 transition-all {searchActive ? 'w-full' : 'w-0'} overflow-hidden">
+                    <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
+                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" />
+                    <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
+                        <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
+                    </button>
+                </div>
             </div>
-            <Input classes={searchActive ? 'mt-2' : 'hidden'} bind:value={searchValue} />
         {/if}
     </div>
     {#if $selectedMessage}
