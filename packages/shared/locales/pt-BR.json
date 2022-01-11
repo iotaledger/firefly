@@ -527,10 +527,6 @@
                     "description": "A rede de incentivos trará grandes inovações para IOTA. O que quer que aconteça, acontecerá. Como o Shimmer evoluirá depende de você."
                 }
             }
-        },
-        "picker": {
-            "color": "Seletor de cores",
-            "pattern": "Seletor de padrões"
         }
     },
     "popups": {
@@ -1009,26 +1005,13 @@
         "version": "Versão {version}",
         "unknown": "Desconhecido",
         "none": "Nenhum",
-        "days": "dia(s)",
-        "time": {
-            "days": "dias",
-            "day": "dia",
-            "hours": "horas",
-            "hour": "hora",
-            "minutes": "minutos",
-            "minute": "minuto",
-            "seconds": "segundos",
-            "second": "segundo"
-        },
-        "staked": "Apostado",
-        "unstaked": "Não apostado",
-        "staking": "Apostando",
-        "unstaking": "Não apostando",
-        "notStaked": "Não apostado",
-        "stakedFunds": "Fundos de aposta",
-        "unstakedFunds": "Fundos não apostado",
-        "accountColor": "Cor da carteira",
-        "accountPattern": "Padrão da carteira"
+        "staked": "Em staking",
+        "unstaked": "Sem staking",
+        "staking": "Staking",
+        "unstaking": "Parando staking",
+        "notStaked": "Sem staking",
+        "stakedFunds": "Fundos em staking",
+        "unstakedFunds": "Fundos sem staking"
     },
     "dates": {
         "today": "Hoje",
