@@ -128,9 +128,9 @@
                 <ul class="flex flex-row justify-between">
                     {#each filters as filter, i}
                         <li on:click={() => activeFilterIndex = i}>
-                            <Text type="p" overrideColor classes="cursor-pointer mr-8 capitalize
+                            <Text type="p" overrideColor classes="cursor-pointer mr-8
                             {activeFilterIndex === i ? "text-blue-500 border-b-2 border-blue-500 border-solid" : "text-gray-500 hover:text-gray-600"}">
-                                {filter}
+                                {locale(`general.${filter}`)}
                             </Text>
                         </li>
                     {/each}
