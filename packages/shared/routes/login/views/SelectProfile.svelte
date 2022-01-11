@@ -2,7 +2,7 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
     import { createEventDispatcher } from 'svelte'
 
