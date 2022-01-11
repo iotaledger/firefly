@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { SelectProfile, EnterPin } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { migrateProfile, activeProfileId } from 'shared/lib/profile'
+    import { activeProfileId, migrateProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { EnterPin, SelectProfile } from './views/'
 
     export let locale: Locale
 
@@ -17,12 +17,22 @@
 
     const dispatch = createEventDispatcher()
 
-    let state: LoginState = get(activeProfileId) ? LoginState.EnterPin : LoginState.Init
+    let state: LoginState = LoginState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    onMount(() => {
+        if (get(activeProfileId)) {
+            _next()
+        }
+    })
+
+    const _next = (
+        event: {
+            detail: any
+        } = { detail: {} }
+    ) => {
         let nextState
-        const params = event.detail || {}
+        const params = event?.detail || {}
         switch (state) {
             case LoginState.Init: {
                 const { shouldAddProfile } = params
@@ -50,7 +60,6 @@
         if (prevState) {
             state = prevState
         } else {
-            state = LoginState.Init
             dispatch('previous')
         }
     }
