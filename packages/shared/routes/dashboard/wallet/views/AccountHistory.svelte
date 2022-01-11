@@ -84,10 +84,10 @@
             filteredTransactions = transactions
             break
         case 1:
-            filteredTransactions = transactions.filter(transaction => transaction.payload.data.essence.data.incoming)
+            filteredTransactions = transactions.filter(transaction => transaction?.payload?.data?.essence?.data?.incoming)
             break
         case 2:
-            filteredTransactions = transactions.filter(transaction => !transaction.payload.data.essence.data.incoming)
+            filteredTransactions = transactions.filter(transaction => !transaction?.payload?.data?.essence?.data?.incoming)
             break
         default:
             filteredTransactions = transactions
@@ -96,7 +96,7 @@
     let queryTransactions = filteredTransactions
     $: if (searchValue) {
         queryTransactions = filteredTransactions.filter(transaction => {
-            return transaction?.payload.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
+            return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
                 sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
                 receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue))
         })
