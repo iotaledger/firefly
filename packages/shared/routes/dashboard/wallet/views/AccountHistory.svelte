@@ -5,7 +5,6 @@
     import { openPopup } from 'shared/lib/popup';
     import { isLedgerProfile,isSoftwareProfile } from 'shared/lib/profile';
     import type { Locale } from 'shared/lib/typings/i18n';
-    import type { AccountMessage } from 'shared/lib/typings/wallet';
     import { api,isSyncing,selectedAccountId,selectedMessage,sendAddressFromTransactionPayload,receiverAddressesFromTransactionPayload } from 'shared/lib/wallet';
 
     export let locale: Locale
