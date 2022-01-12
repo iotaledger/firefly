@@ -4,11 +4,11 @@ const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const { version } = require('./package.json')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
-const version = '1.2.0'
 const SENTRY = process.env.SENTRY === 'true'
 
 // / ------------------------ Resolve ------------------------
