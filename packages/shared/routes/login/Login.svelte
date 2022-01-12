@@ -21,7 +21,7 @@
     let stateHistory = []
 
     onMount(() => {
-        if (get(profiles).find((p) => p.id === get(activeProfileId))) {
+        if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
             _next()
         } else {
             clearActiveProfile()
