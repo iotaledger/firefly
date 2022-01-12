@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
     import Content from './Content.svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -41,7 +41,9 @@
         <Text type="h2">{locale('views.legal.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
+        {#if !$mobile}
+            <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
+        {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col {$mobile ? 'space-y-4' : 'space-y-8'}">
         <Checkbox label={locale('views.legal.checkbox')} bind:checked />
