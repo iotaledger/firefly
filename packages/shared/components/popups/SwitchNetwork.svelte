@@ -7,11 +7,10 @@
         asyncCreateAccount,
         asyncRemoveWalletAccounts,
         asyncSetStrongholdPassword,
-        resetWallet,
         wallet,
     } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { updateClientOptions } from 'shared/lib/network'
+    import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import {
         activeProfile,
         isLedgerProfile,
@@ -21,8 +20,9 @@
     } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { logout } from 'shared/lib/app'
-    import { showAppNotification } from '../../lib/notifications'
-    import { ErrorType } from '../../lib/typings/events'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { ErrorType } from 'shared/lib/typings/events'
+    import { Node } from 'shared/lib/typings/node'
 
     export let locale: Locale
 
@@ -60,10 +60,13 @@
             return
         }
 
+        const oldAccounts = get($wallet.accounts)
+        const oldConfig = $activeProfile?.settings?.networkConfig
         const newConfig = {
-            ...$activeProfile?.settings?.networkConfig,
+            ...oldConfig,
             network: network,
             nodes: [node],
+            includeOfficialNodes: getOfficialNodes(network.type).find((n) => n.url === node?.url) !== undefined
         } as NetworkConfig
 
         try {
@@ -75,6 +78,16 @@
             await logout()
         } catch (err) {
             isSwitchingNetwork = false
+
+            /**
+             * CAUTION: Because an error has occurred at this point,
+             * we must make sure to revert any changes to the wallet
+             * (namely client options, network config, account data,
+             * etc.)
+             */
+            $wallet.accounts.set(oldAccounts)
+            updateClientOptions(oldConfig)
+            updateProfile('settings.networkConfig', oldConfig)
 
             /**
              * NOTE: It is necessary to override the default locale paths

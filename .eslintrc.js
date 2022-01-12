@@ -4,7 +4,7 @@ const parserOptions = {
 }
 
 const eslintRules = {
-    'arrow-body-style': 'error',
+    'arrow-body-style': 'warn', // WARN b/c blocks style allows for readability and ensure scope
     'arrow-spacing': 'error',
     'eol-last': 'error',
     'func-call-spacing': 'error',

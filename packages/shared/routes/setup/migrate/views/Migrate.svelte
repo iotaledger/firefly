@@ -7,8 +7,7 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { openUrl } from 'shared/lib/device'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -32,7 +31,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
@@ -76,7 +75,7 @@
 
             if (legacyLedger) {
                 const _onConnected = () => {
-                    Electron.ledger
+                    Platform.ledger
                         .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                         .then(({ iota, callback }) => {
                             closeTransport = callback
@@ -145,7 +144,7 @@
 
     // TODO: complete function functionality
     function learnAboutMigrationsClick() {
-        openUrl('https://blog.iota.org/firefly-token-migration/')
+        Platform.openUrl('https://blog.iota.org/firefly-token-migration/')
     }
 
     onDestroy(() => {

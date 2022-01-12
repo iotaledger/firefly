@@ -1,24 +1,24 @@
 <script lang="typescript">
+    import { Platform } from 'shared/lib/platform';
     import { Button, HR, Text } from 'shared/components'
-    import { openUrl } from 'shared/lib/device'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     const handleDocumentationClick = () => {
-        openUrl('https://chrysalis.docs.iota.org/')
+        Platform.openUrl('https://chrysalis.docs.iota.org/')
     }
 
     const handleFaqClick = () => {
-        openUrl('https://firefly.iota.org/faq')
+        Platform.openUrl('https://firefly.iota.org/faq')
     }
 
     const handleDiscordClick = () => {
-        openUrl('https://discord.iota.org')
+        Platform.openUrl('https://discord.iota.org')
     }
 
     const handleReportAnIssueClick = () => {
-        openUrl('https://github.com/iotaledger/firefly/issues')
+        Platform.openUrl('https://github.com/iotaledger/firefly/issues')
     }
 </script>
 

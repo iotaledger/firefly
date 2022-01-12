@@ -1,7 +1,7 @@
 [package]
 name = "wallet-actor-system"
 version = "0.1.0"
-authors = ["Lucas Nogueira <lucas.nogueira@iota.org>"]
+authors = ["IOTA Stiftung"]
 edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
 

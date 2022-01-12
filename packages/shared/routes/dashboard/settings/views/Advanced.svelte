@@ -3,7 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
         ensureSinglePrimaryNode,
@@ -16,9 +16,9 @@
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
+    import type { Node } from 'shared/lib/typings/node'
     import { wallet } from 'shared/lib/wallet'
 
     export let locale: Locale
@@ -36,7 +36,7 @@
     }
 
     $: $appSettings.deepLinking = deepLinkingChecked
-    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
+    $: $appSettings.deepLinking && Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
     $: {
@@ -68,18 +68,7 @@
     }
 
     function ensureValidNodeSelection(): void {
-        /**
-         * NOTE: There's no need to ensure a valid node
-         * selection if it will be handled automatically.
-         */
-        if (networkConfig.automaticNodeSelection) return
-
         networkConfig.nodes = getNodeCandidates(networkConfig)
-        if (!networkConfig.includeOfficialNodes) {
-            networkConfig.nodes = networkConfig.nodes.filter(
-                (n) => !getOfficialNodes(networkConfig.network.type).map((_n) => _n.url.includes(n.url))
-            )
-        }
     }
 
     function ensureOnePrimaryNode(): void {
@@ -201,6 +190,10 @@
 
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
+    }
+
+    function handleExportTransactionHistoryClick() {
+        openPopup({ type: 'exportTransactionHistory', hideClose: false })
     }
 </script>
 
@@ -435,13 +428,12 @@
             </Button>
         </section>
     {/if}
-    <!-- TODO: Implement state export -->
-    <!-- {#if $loggedIn}
+    {#if $loggedIn}
     <HR classes="pb-5 mt-5 justify-center" />
-    <section id="stateExport" class="w-full sm:w-3/4 opacity-50">
-        <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
-        <Button medium inlineStyle="min-width: 156px;" disabled onClick={() => {}}>{locale('actions.exportState')}</Button>
+    <section id="transactionHistory" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.transactionHistory.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.transactionHistory.description')}</Text>
+        <Button classes="px-10" medium inlineStyle="min-width: 156px;"  onClick={handleExportTransactionHistoryClick}>{locale('actions.exportTransactionHistory')}</Button>
     </section>
-    {/if} -->
+    {/if}
 </div>

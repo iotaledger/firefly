@@ -1,27 +1,26 @@
 <script lang="typescript">
-    import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
-    import { AccountMessage } from 'shared/lib/typings/wallet'
+    import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components';
+    import { mobile } from 'shared/lib/app';
+    import { showAppNotification } from 'shared/lib/notifications';
+    import { openPopup } from 'shared/lib/popup';
+    import { isSoftwareProfile } from 'shared/lib/profile';
+    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router';
+    import type { Locale } from 'shared/lib/typings/i18n';
+    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes';
+    import type { AccountMessage,WalletAccount } from 'shared/lib/typings/wallet';
     import {
-        api,
-        asyncSyncAccounts,
-        getSyncAccountOptions,
-        isFirstManualSync,
-        isFirstSessionSync,
-        isSyncing,
-        selectedAccountId,
-        selectedMessage,
-        WalletAccount,
-    } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
-    import { get } from 'svelte/store'
+    api,
+    asyncSyncAccounts,
+    getSyncAccountOptions,
+    isFirstManualSync,
+    isFirstSessionSync,
+    isSyncing,
+    selectedAccountId,
+    selectedMessage
+    } from 'shared/lib/wallet';
+    import { getContext } from 'svelte';
+    import type { Readable,Writable } from 'svelte/store';
+    import { get } from 'svelte/store';
 
     export let locale: Locale
 

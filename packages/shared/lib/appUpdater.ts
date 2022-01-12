@@ -1,4 +1,4 @@
-import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
+import { Platform } from 'shared/lib/platform'
 import { localize } from 'shared/lib/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
@@ -9,6 +9,7 @@ import {
 } from 'shared/lib/notifications'
 import type { NotificationData } from 'shared/lib/typings/notification'
 import { writable } from 'svelte/store'
+import type { NativeProgress, VersionDetails } from './typings/appUpdater'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 
@@ -26,11 +27,11 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
-Electron.onEvent('version-details', (nativeVersionDetails) => {
+Platform.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
 
-Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
+Platform.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
     updateProgress.set(nativeVersionProgress.percent)
 
     const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total
@@ -39,14 +40,14 @@ Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => 
     }
 })
 
-Electron.onEvent('version-complete', () => {
+Platform.onEvent('version-complete', () => {
     updateBusy.set(false)
     updateError.set(false)
     updateComplete.set(true)
     updateMinutesRemaining.set(0)
 })
 
-Electron.onEvent('version-error', (nativeVersionError) => {
+Platform.onEvent('version-error', (nativeVersionError) => {
     console.error(nativeVersionError)
     updateError.set(true)
 })
@@ -154,11 +155,11 @@ export function updateDownload(): void {
         }
     })
 
-    void Electron.updateDownload()
+    void Platform.updateDownload()
 }
 
 export function updateCancel(): void {
-    void Electron.updateCancel()
+    void Platform.updateCancel()
 
     updateProgress.set(0)
     updateBusy.set(false)
@@ -168,15 +169,15 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    void Electron.updateInstall()
+    void Platform.updateInstall()
 }
 
 export function updateCheck(): void {
-    void Electron.updateCheck()
+    void Platform.updateCheck()
 }
 
 export async function getVersionDetails(): Promise<void> {
-    const verDetails = await Electron.getVersionDetails()
+    const verDetails = await Platform.getVersionDetails()
     versionDetails.set(verDetails)
 }
 
