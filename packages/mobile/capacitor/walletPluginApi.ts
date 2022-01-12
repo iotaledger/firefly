@@ -91,6 +91,9 @@ export function init(
         const { walletResponse } = event
         if (!walletResponse) return
         const parsedResponse = JSON.parse(walletResponse)
+        // filter messages without id since the app doesn't use it
+        // and avoid throwing unnecessary errors
+        if (!parsedResponse?.id) return
         onMessageListeners.forEach((listener) => listener(parsedResponse))
     })
     void WalletPlugin.initialize({
