@@ -1,5 +1,8 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
+    import type { Locale } from 'shared/lib/typings/i18n'
+
+    export let locale: Locale
 
     export let value = ''
     export let classes = ''
@@ -8,7 +11,6 @@
     export let showRevealToggle = false
     export let strengthLevels = 4
     export let placeholder = undefined
-    export let locale = undefined
     export let maxlength = undefined
     export let error = null
     export let integer = false

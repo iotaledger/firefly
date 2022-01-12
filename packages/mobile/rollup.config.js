@@ -29,17 +29,17 @@ const plugins = [
             css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
-            postcss: true
-        })
+            postcss: true,
+        }),
     }),
     resolve({
         browser: true,
-        dedupe: ['svelte']
+        dedupe: ['svelte'],
     }),
     ts({ sourceMap: isDev, typescript, include: ['../shared/**/*.ts'] }),
     commonjs(),
     globals(),
-    builtins()
+    builtins(),
 ]
 
 if (isDev) {
@@ -47,7 +47,7 @@ if (isDev) {
         serve({
             contentBase: ['public', 'node_modules/shared-modules'],
             historyApiFallback: true, // for SPAs
-            port
+            port,
         }),
         livereload({ watch: './public' })
     )
@@ -61,7 +61,7 @@ module.exports = {
         name: 'bundle',
         file: 'public/build/bundle.js',
         sourcemap: isDev,
-        format: 'iife'
+        format: 'iife',
     },
     moduleContext: (id) => {
         // In order to match native module behaviour, Rollup
@@ -78,12 +78,12 @@ module.exports = {
             'node_modules/intl-format-cache/lib/index.js',
             'node_modules/intl-messageformat-parser/lib/parser.js',
             'node_modules/intl-messageformat-parser/lib/skeleton.js',
-            'node_modules/intl-messageformat-parser/lib/normalize.js'
+            'node_modules/intl-messageformat-parser/lib/normalize.js',
         ]
 
         if (thisAsWindowForModules.some((id_) => id.trimRight().endsWith(id_))) {
             return 'window'
         }
     },
-    plugins
+    plugins,
 }

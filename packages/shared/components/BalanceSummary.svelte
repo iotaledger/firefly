@@ -1,31 +1,28 @@
 <script lang="typescript">
-    import { Box, Text } from 'shared/components'
+    import { Unit } from '@iota/unit-converter'
+    import { Text } from 'shared/components'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
 
-    export let balance
-    export let transactions
-    export let accounts
+    export let color = 'blue' // TODO: profiles will have different colors
+
+    export let balanceRaw = 0
+    export let balanceFiat = 0
+
+    let showPreciseBalance = false
+
+    function togglePreciseBalance() {
+        showPreciseBalance = !showPreciseBalance
+    }
 </script>
 
-<Box classes="flex flex-col h-full">
-    <Box classes="flex-grow border-solid border-b border-gray-200">
-        <Text type="p" secondary classes="mb-3 uppercase">Balance</Text>
-        <Box classes="flex mb-2">
-            <Text type="h2" classes="uppercase">{balance.split(' ')[0]}</Text>
-            <Text type="p" secondary classes="ml-1">{balance.split(' ')[1]}</Text>
-        </Box>
-        <Text type="h4" highlighted classes="mb-3 uppercase">45000 USD</Text>
-    </Box>
-
-    <Box classes="flex-grow-0 mt-4">
-        <Box classes="flex justify-between">
-            <Box classes="flex flex-col">
-                <Text type="p" secondary classes="uppercase">Transactions</Text>
-                <Text type="h4">{transactions}</Text>
-            </Box>
-            <Box classes="flex flex-col">
-                <Text type="p" secondary classes="uppercase">Accounts</Text>
-                <Text type="h4">{accounts}</Text>
-            </Box>
-        </Box>
-    </Box>
-</Box>
+<div class="flex items-start flex-col flex-wrap space-y-1.5">
+    <balance-box
+        on:click={togglePreciseBalance}>
+        <Text type="h2" overrideColor classes="text-white">
+            {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
+        </Text>
+    </balance-box>
+    {#if balanceFiat}
+        <Text type="p" overrideColor smaller classes="text-{color}-200 dark:text-blue-300">{balanceFiat}</Text>
+    {/if}
+</div>

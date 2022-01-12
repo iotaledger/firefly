@@ -1,6 +1,5 @@
 use riker::actors::*;
-use std::default::Default;
-use std::sync::Arc;
+use std::{default::Default, sync::Arc};
 use tokio::{
     runtime::Runtime,
     sync::{
@@ -10,28 +9,25 @@ use tokio::{
     },
 };
 
-use crate::actors::KillMessage;
-use crate::{dispatch, wallet_actors, DispatchMessage as WalletDispatchMessage, MessageFallback};
-use crate::{extension_actors};
-use glow::{
-    handler::{ExtensionHandler},
-    message::CallbackMessage as ExtensionCallbackMessage,
+use crate::{
+    actors::KillMessage, dispatch, extension_actors, wallet_actors, DispatchMessage as WalletDispatchMessage,
+    MessageFallback,
 };
+use glow::{handler::ExtensionHandler, message::CallbackMessage as ExtensionCallbackMessage};
 use glow_iota::{
-    message::{
-        MessageType as ExtensionMessageType,
-        DispatchMessage as ExtensionDispatchMessage,
-        ExtensionError, Message as ExtensionMessage, Response as ExtensionResponse,
-        ResponseType as ExtensionResponseType, Result as ExtensionResult,
-    },
     handler::translate_message,
+    message::{
+        DispatchMessage as ExtensionDispatchMessage, ExtensionError, Message as ExtensionMessage,
+        MessageType as ExtensionMessageType, Response as ExtensionResponse, ResponseType as ExtensionResponseType,
+        Result as ExtensionResult,
+    },
 };
 
 // pub use iota_wallet::actor::MessageType as WalletMessageType;
 
 #[derive(Debug, Clone)]
 pub struct EventMessage {
-    event: String
+    event: String,
 }
 
 #[actor(ExtensionMessage, KillMessage, EventMessage)]
@@ -55,7 +51,7 @@ impl Receive<ExtensionMessage> for ExtensionActor {
         self.runtime.spawn(async move {
             let mut message_handler = message_handler.lock().await;
             let glow_msg = msg.message_type();
-            if let ExtensionMessageType::CallGlow{method, payload} = glow_msg {
+            if let ExtensionMessageType::CallGlow { method, payload } = glow_msg {
                 let response = message_handler.receive_glow(method, payload).await;
                 let response = match response {
                     Ok(r) => ExtensionResponseType::CalledGlow(r),
@@ -108,9 +104,7 @@ async fn callback(message: String, actor_id: String) -> ExtensionResult<String> 
                         if let Some(response) = response {
                             return Ok(response);
                         } else {
-                            return Err(ExtensionError::MessageError(
-                                "response not ok".to_string(),
-                            ));
+                            return Err(ExtensionError::MessageError("response not ok".to_string()));
                         }
                     }
                     Err(e) => {
@@ -129,11 +123,9 @@ async fn callback(message: String, actor_id: String) -> ExtensionResult<String> 
 
 pub(crate) fn send_event_to_extension(
     extension_actor: &ActorRef<ExtensionActorMsg>,
-    message: String
+    message: String,
 ) -> Result<(), String> {
-    extension_actor.tell(EventMessage{
-        event: message
-    }, None);
+    extension_actor.tell(EventMessage { event: message }, None);
     Ok(())
 }
 
@@ -147,11 +139,9 @@ impl ActorFactoryArgs<String> for ExtensionActor {
         ) = unbounded_channel();
         let aid = actor_id.clone();
 
-        let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) =
-        broadcast_channel(1);
+        let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) = broadcast_channel(1);
 
-        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) =
-        broadcast_channel(99999999);
+        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) = broadcast_channel(99999999);
 
         let h = Arc::new(Mutex::new(ExtensionHandler {
             sender: tx,
@@ -171,9 +161,11 @@ impl ActorFactoryArgs<String> for ExtensionActor {
                     if message_handler.is_initialized() {
                         let (msg, respond_directly) = translate_message(s.as_str());
                         if let Ok(message) = msg {
-                            if respond_directly { // handler created the response
+                            if respond_directly {
+                                // handler created the response
                                 let _ = r.response_tx.send(message);
-                            } else { // get the response from Wallet.rs
+                            } else {
+                                // get the response from Wallet.rs
                                 let res = callback(message.clone(), aid.clone()).await;
                                 if let Ok(payload) = res {
                                     let _ = r.response_tx.send(payload);
@@ -194,10 +186,8 @@ impl ActorFactoryArgs<String> for ExtensionActor {
 
 impl Default for ExtensionActor {
     fn default() -> Self {
-        let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) =
-            broadcast_channel(1);
-        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) =
-            broadcast_channel(1);
+        let (quit_sender, quit_receiver): (BroadcastSender<()>, Receiver<()>) = broadcast_channel(1);
+        let (event_sender, event_receiver): (BroadcastSender<String>, Receiver<String>) = broadcast_channel(1);
         Self {
             runtime: Runtime::new().expect("failed to create tokio runtime"),
             handler: Arc::new(Mutex::new(ExtensionHandler {
@@ -237,7 +227,10 @@ pub(crate) async fn extension_dispatch(
     }
 }
 
-pub async fn check_extension_dispatch(serialized_message:String, error:serde_json::Error) -> Option<(Option<String>, String)> {
+pub async fn check_extension_dispatch(
+    serialized_message: String,
+    error: serde_json::Error,
+) -> Option<(Option<String>, String)> {
     if let Ok(message) = serde_json::from_str::<ExtensionDispatchMessage>(&serialized_message) {
         let ext_actors = extension_actors().lock().await;
         let actor_id = message.actor_id.to_string();

@@ -1,13 +1,13 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Motta og Håndter dine IOTA tokens",
+            "title": "Send, motta og håndter dine IOTA-tokens",
             "body": "Firefly er den offisielle IOTA-lommeboken."
         },
         "legal": {
             "title": "Personvernerklæring & Vilkår for Bruk",
             "body": "Vennligst gå gjennom Personvernerklæring og Vilkår for Bruk.",
-            "checkbox": "Jeg har lest og godtar retningslinjer for personvern og tjenestevilkår"
+            "checkbox": "Jeg har lest og godtar tjenestevilkårene og retningslinjene for personvern"
         },
         "appearance": {
             "title": "Utseende",
@@ -15,20 +15,55 @@
         },
         "profile": {
             "title": "Opprett profil",
+            "profileName": "Profilnavn",
             "body1": "Du kan opprette flere brukerprofiler for å organisere lommebøkene dine og forbedre personvern.",
-            "body2": "La oss begynne med ditt første profilnavn. Du kan legge til flere profiler senere.",
-            "profileName": "Profilnavn"
+            "body2": {
+                "first": "La oss nå starte med det første profilnavnet ditt.",
+                "nonFirst": "La oss nå starte med profilnavnet ditt."
+            },
+            "addMore": "Du kan legge til flere profiler senere.",
+            "advancedOptions": "Advanced options",
+            "developer": {
+                "label": "Utviklerprofil",
+                "info": "Connect to the devnet or a private network"
+            }
         },
         "setup": {
             "title": "Sett opp en lommebok",
             "chrysalisTitle": "Chrysalis Nettverksoppdatering",
-            "chrysalisBody": "Fra 21. april kan brukere migrere tokens til det nye Chrysalis-nettverket. Vi anbefaler at du migrerer dine eksisterende tokens så fort som mulig.",
+            "chrysalisBody": "Fra 21.April 2021, kan brukere migrere deres tokens til det nye Chrysalis nettverket. Vi anbefaler deg å migrere dine tokens så snart som mulig.",
             "learnMore": "Lær om migreringen"
         },
         "secure": {
             "title": "Sikre lommeboken din",
-            "body1": "Last ned og skriv ut Recovery Kit PDF-malen.",
+            "body1": "Lagre og skriv ut PDF-malen for Recovery Kit.",
             "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det trygt, vil du alltid kunne gjenopprette lommebøkene dine."
+        },
+        "create": {
+            "title": "Opprette lommebok",
+            "body": "Opprett en ny lommebok. Du kan velge mellom en vanlig lommebok, eller en Maskinvarelommebok hvis du har en Ledger-enhet.",
+            "softwareAccount": {
+                "title": "Jeg vil ha en programvare lommebok",
+                "description": "Opprett en 24-ord gjenopprettingsfrase"
+            },
+            "ledgerAccount": {
+                "title": "Jeg vil ha en maskinvarelommebok",
+                "description": "Ledger Nano S eller Nano X kreves"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Koble til din Ledger",
+            "progress2": "Generer adresse",
+            "progress3": "Bytt Ledger app",
+            "progress4": "Overfør midler",
+            "watchVideo": "Se video guide",
+            "videoGuide": "Ledger migrasjons videoguide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Har du installert de nødvendige Ledger-appene?",
+            "body1": "Før du fortsetter, må du finne og installere både {legacy} appen og den nye IOTA-appen gjennom Ledger Live.",
+            "body2": "Sørg for at din Ledger firmware er oppdatert. Alle forhåndsinstallerte apper skal oppdateres til sine siste versjoner.",
+            "action": "Ja, jeg har installert disse appene"
         },
         "password": {
             "title": "Opprett et passord",
@@ -85,9 +120,11 @@
         },
         "congratulations": {
             "title": "Oppsett av lommebok fullført",
-            "body": "Din nye lommebok er klar til bruk.",
             "fundsMigrated": "Midlene er migrert",
-            "success": "Migreringen av midlene dine til det nye nettverket var vellykket",
+            "body": "Din nye lommebok er klar til bruk.",
+            "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
+            "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
+            "trinityLedgerBody": "Du har vellykket overført din Ledger til det nye nettverket.",
             "exportMigration": "Eksporter migreringsloggen og fullfør oppsettet"
         },
         "import": {
@@ -98,7 +135,9 @@
             "importMnemonic": "Jeg har en Firefly gjenopprettingsfrase",
             "importMnemonicDescription": "Skriv inn gjenopprettingsfrasen din for å gjenopprette lommebøkene dine",
             "importFile": "Jeg har en sikkerhetskopi-fil",
-            "importFileDescription": "Last opp en Seedvault- eller Stronghold-fil"
+            "importFileDescription": "Last opp en Seedvault- eller Stronghold-fil",
+            "importLedger": "Jeg har en Ledger sikkerhetskopi",
+            "importLedgerDescription": "Gjenopprett eller migrere en Ledger-profil"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +158,63 @@
             "title": "Gjenopprett lommebøkene dine ved hjelp av en sikkerhetskopi-fil",
             "body": "Importer en sikkerhetskopi-fil for å gjenopprette lommebøkene dine. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Gjenopprett eller migrer din Ledger",
+            "body": "Gjenopprett en eksisterende Firefly Ledger profil eller migrerer midlene fra Trinity.",
+            "haveFireflyLedger": "Jeg har en Firefly Ledger sikkerhetskopi",
+            "haveFireflyLedgerDescription": "Gjenopprett en Firefly-profil",
+            "haveTrinityLedger": "Jeg har en Trinity Ledger sikkerhetskopi",
+            "haveTrinityLedgerDescription": "Migrer en Trinity-profil"
+        },
+        "connectLedger": {
+            "title": "Koble din Ledger til Firefly",
+            "body": "For at Ledger-enheten din skal bli funnet av Firefly, vennligst sørg for at den offisielle Ledger Live-applikasjonen er lukket.",
+            "trafficLight1": "Koble til og lås opp din Ledger med PIN-koden",
+            "trafficLight2": "Åpne den nye IOTA-appen på din Ledger",
+            "tips": "Tips hvis din Ledger ikke kobler til"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Gjenopprett din Ledger-profil",
+            "body": "Trykk tilbakestill for å fullføre installasjonsprosessen og gjenopprette lommebøkene, saldoen og transaksjonshistorien.",
+            "restoring": "Gjenoppretter fra Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start din Ledger-migrering med Firefly",
+            "body1": "Firefly vil hjelpe deg med å overføre dine tokens til det nye Chrysalis-nettverket.",
+            "body2": "Etter migrasjonen vil du kunne sende og motta dine tokens ved hjelp av Ledger og Firefly.",
+            "readMore": "Hva du kan forvente fra migrasjonsprosessen"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Generer en ny adresse",
+            "body": "Du må generere en ny adresse for å migrere din tokens med Firefly. Klikk på knappen nedenfor for å fortsette.",
+            "confirmTitle": "Bekreft den nye adressen",
+            "confirmBody": "For sikkerhets skyld, sammenlign adressen generert på Ledger-enheten med adressen nedenfor. Hvis de er like, trykk begge knappene på Ledger-enheten som forespurt.",
+            "confirmedTitle": "Adresse bekreftet",
+            "confirmedBody": "Du har bekreftet at adressen i Firefly samsvarer med den på Ledger-enheten din.",
+            "generating": "Genererer adresse"
+        },
+        "switchLedgerApps": {
+            "title": "Bytt Ledger-apper",
+            "body": "Vennligst bytt til {legacy}-appen på Ledger-enheten for å fortsette migrasjonen. Trykk på fortsette, når den er klar."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Velg din Ledger kontoindeks",
+            "body": "Velg Ledger konto-indeksen du bruker med Trinity. For de fleste brukere vil dette være standardindeksen på 0.",
+            "accountIndex": "Konto-index",
+            "accountPage": "Kontoside",
+            "standard": "Standard",
+            "expert": "Ekspert",
+            "takingAWhile": "Dette tar en stund...",
+            "notGeneratingAddresses": "Generere Ledger-appen din adresser?",
+            "reinstallLegacy": "Hvis ikke, koble fra enheten og prøv igjen. Hvis problemet vedvarer, kan det hende du må installere {legacy} på nytt."
+        },
         "importBackupPassword": {
-            "title": "Gjenopprett lommebøkene dine fra et SeedVault eller Stronghold",
             "body1": "Vennligst skriv inn passordet for sikkerhetskopien.",
             "body2": "Dette er passordet du lagde når du først opprettet sikkerhetskopien."
         },
         "importSuccess": {
             "title": "Gjenopprettingen av sikkerhetskopien var vellykket",
-            "body": "Du kan nå lage din nye profil.",
-            "seedvaultTitle": "Importering vellykket",
-            "seedvaultBody": "Passordet ditt er riktig, du kan nå fortsette.",
-            "strongholdTitle": "Importering vellykket",
-            "strongholdBody": "Passordet er riktig, du kan nå fortsette."
+            "body": "Du kan nå lage din nye profil."
         },
         "migrate": {
             "title": "Overfør midlene dine",
@@ -179,11 +263,12 @@
         },
         "securingSpentAddresses": {
             "title": "Sikrer brukte adresser...",
-            "body1": "Denne prosessen vil ta {minutes, plural, one {1 minutt} other {# minutter}}.",
+            "body1": "Denne prosessen vil ta {minutes, plural, one {# minutt} other {# minutter}}.",
             "body2": "Datamaskinen din vil kjøre med full kapasitet, du kan kanskje ønske å gjøre noe annet mens du venter på at dette skal fullføres."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly vil nå gå videre med migreringen av dine midler. Dette kan ta en stund.",
+            "body2": "Sørg for at din Ledger er tilkoblet og at {legacy}-appen alltid er åpen under migrering.",
             "migrate": "Migrer midler",
             "transaction": "Transaksjon {number}",
             "rerun": "Prøv på nytt"
@@ -196,7 +281,8 @@
             "title": "Din saldo",
             "body": "Kontroller at saldoen stemmer før du fortsetter. Du kan sjekke igjen om det ikke ser riktig ut.",
             "error": "Minste migreringsbeløp er 1 Mi. Sjekk igjen om saldoen ikke ser riktig ut.",
-            "zeroBalance": "Prøv å sjekke igjen. Hvis du fortsatt ikke kan finne balansen din, kan det hende at du har skrevet inn din hovednøkkel feil."
+            "zeroBalance": "Prøv å sjekke igjen. Hvis du fortsatt ikke kan finne balansen din, kan det hende at du har skrevet inn din hovednøkkel feil.",
+            "zeroBalanceLedgerLegacy": "Prøv å sjekke igjen. Hvis du fortsatt ikke finner saldoen din, kan du ha valgt feil kontoindeks."
         },
         "settings": {
             "settings": "Innstillinger",
@@ -226,7 +312,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Start Firefly appen på nytt for at endringer i systemtemaet skal tre i kraft"
             },
             "language": {
                 "title": "Språk",
@@ -242,17 +329,15 @@
             },
             "networkStatus": {
                 "title": "Nettverksstatus",
-                "description": "Viser statusen til noden du er koblet til."
+                "description": "Viser statusen til noden du er koblet til"
             },
             "exportStronghold": {
                 "title": "Eksporter sikkerhetskopi",
                 "description": "Eksporter til en Stronghold-fil - en fullstendig kryptert sikkerhetskopi av lommeboken din og den seneste transaksjonshistorikken"
             },
             "appLock": {
-                "title": "Automatisk lås",
-                "description": "Inaktivitetstid før lommeboken låses og du blir logget ut",
-                "durationMinute": "{time, plural, one {1 minutt} other {# minutter}}",
-                "durationHour": "{time, plural, one {1 time} other {# timer}}"
+                "title": "Lås automatisk",
+                "description": "Inaktivitetstid før lommeboken låses og du blir logget ut"
             },
             "changePassword": {
                 "title": "Endre passord",
@@ -279,28 +364,39 @@
                 "description": "Sletter hele lommeboken, profilen og transaksjonshistorikken. Pass på at du har en sikkerhetskopi"
             },
             "deepLinks": {
-                "title": "Dyplenker",
-                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en iota:// lenke"
+                "title": "IOTA-linker",
+                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en IOTA-lenke"
             },
-            "developerMode": {
-                "title": "Utviklermodus",
-                "description": "Koble til testnett og andre utviklerfunksjoner"
-            },
-            "nodeSettings": {
-                "title": "Node-innstillinger",
-                "description": "Velg Manuell for å konfigurere node-innstillinger og koble til din egen node"
+            "networkConfiguration": {
+                "title": "Nettverks konfigurasjon",
+                "title2": "Nettverkskonfigurasjon",
+                "description": {
+                    "dev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon (hvis nettverket byttes vil det resultere i at lommebokstatusen tilbakestilles)",
+                    "nonDev": "Dine nettverksinnstillinger vil oppdateres automatisk i henhold til gjeldende node-konfigurasjon"
+                },
+                "switchedNetworks": "Nettverket ble endret til \"{networkName}.",
+                "resetWallet": "Din lommebokstatus er tilbakestilt.",
+                "connectedTo": "Koblet til",
+                "nodeConfiguration": {
+                    "title": "Valg av node",
+                    "description": "Velg \"Manual\" for å konfigurere node-innstillinger og koble til en eller flere egne noder",
+                    "automatic": "Automatisk",
+                    "manual": "Manuelt"
+                }
             },
             "configureNodeList": {
-                "title": "Velg en node",
-                "description": "Administrer listen over IOTA nettverksnoder du kobler til",
+                "title": "Rediger nodekonfigurasjon",
+                "description": "Administrer listen med noder du kobler til",
                 "primaryNode": "Primær node",
                 "excludeNode": "Ekskluder node",
                 "includeNode": "Inkluder node",
-                "viewDetails": "Se detaljer",
+                "editDetails": "Rediger detaljer",
+                "viewInfo": "Vis informasjon",
                 "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
                 "includeOfficialNodeList": "Inkluder offisiell liste over noder",
-                "noNodes": "Ingen noder, automatisk selektering brukes i stedet"
+                "noNodes": "Det er ingen noder, og klarer derfor ikke å koble til nettverket",
+                "noNodesAuto": "Ingen noder, automatisk selektering av noder brukes i stedet"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -314,9 +410,9 @@
                 "title": "Diagnostikk",
                 "description": "Vis system- og applikasjonsinformasjon"
             },
-            "stateExport": {
-                "title": "Tilstands-eksportering",
-                "description": "Eksporter transaksjonshistorikken til en .csv-fil"
+            "migrateLedgerIndex": {
+                "title": "Migrer Ledger-indeks",
+                "description": "Overfør en annen Trinity kontoindeks"
             },
             "troubleshoot": {
                 "title": "Feilsøking",
@@ -346,7 +442,7 @@
         },
         "login": {
             "pleaseWait": "Vennligst vent {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 feil forsøk} other {# ugyldige forsøk}}"
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -357,7 +453,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Maskinvareenhet",
-                    "noneDetected": "Ingen oppdaget"
+                    "statuses": {
+                        "appNotOpen": "IOTA-app ikke åpen",
+                        "connected": "Tilkoblet",
+                        "legacyConnected": "{legacy}-app er åpen",
+                        "locked": "Låst",
+                        "mnemonicMismatch": "Feil Ledger eller Mnemonic",
+                        "notDetected": "Ikke funnet",
+                        "otherConnected": "App er åpen"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Lommebok-status",
@@ -375,11 +479,53 @@
                 "networkDown": "Nettverket er frakoblet",
                 "status": "Status",
                 "messagesPerSecond": "Meldinger per sekund",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "Referert-rate"
             },
             "profileModal": {
                 "allSettings": "Alle innstillinger",
                 "logout": "Logg ut"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Velkommen til dashbord for staking!",
+            "status": {
+                "upcoming": "Staking ikke startet",
+                "commencing": "Forhånds-staking åpen",
+                "holdingActive": "Staking pågår",
+                "holdingInactive": "Staking åpen",
+                "inactive": "Ingen staking oppdaget",
+                "ended": "Staking avsluttet"
+            },
+            "summary": {
+                "stakedFunds": "Stakede midler"
+            },
+            "info": {
+                "upcomingSubheader": "Staking har ikke startet",
+                "upcomingHeader": "Sjekk igjen senere",
+                "commencingSubheader": "Gjør deg klar for staking",
+                "commencingHeader": "Forhånds-stake dine tokens!",
+                "holdingSubheaderHolding": "Opptjener nå staking belønninger",
+                "holdingSubheaderNotHolding": "Få belønninger ved å stake IOTA",
+                "holdingHeaderHolding": "{duration} gjenstår",
+                "holdingHeaderNotHolding": "Stake dine tokens!",
+                "endedSubheader": "Stakingen er nå avsluttet",
+                "endedHeader": "Tusen takk!",
+                "inactiveHeader": "Prøv å endre node",
+                "inactiveSubheader": "Ingen staking oppdaget"
+            },
+            "airdrops": {
+                "holding": "Gjenstående",
+                "commencing": "Til stakingen starter",
+                "collectedRewards": "Opptjent belønning",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly er et frittstående, svært skalerbart multi-chain nettverk for å bygge opp og utnytte sammensatte smartkontrakter. Assembly er fremtiden for web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Det insentiverte staging-nettverket som muliggjør store innovasjoner på IOTA. Hva som skjer, og hvordan Shimmer utvikler seg, er opp til deg."
+                }
             }
         }
     },
@@ -429,18 +575,45 @@
         },
         "addressHistory": {
             "title": "{name} adressehistorikk",
-            "currentBalance": "Nåværende saldo: {balance}"
+            "currentBalance": "Balanse",
+            "internal": "Intern adresse",
+            "external": "Innskuddsadresse"
         },
         "node": {
             "titleAdd": "Legg til en node",
             "titleUpdate": "Oppdater en node",
             "titleRemove": "Fjern en node",
+            "titleRemoveAll": "Fjern alle noder",
             "titleDetails": "Detaljer om node",
+            "titleInfo": "Informasjon om node",
+            "addingNode": "Legger til node",
+            "updatingNode": "Oppdaterer node",
+            "loadingNodeInfo": "Laster nodeinformasjon",
             "nodeAddress": "Node-adresse",
             "optionalUsername": "Brukernavn (valgfritt)",
             "optionalPassword": "Passord (valgfritt)",
+            "optionalJwt": "JSON webtoken (valgfritt)",
             "setAsPrimaryNode": "Velg som hoved-node",
-            "removeConfirmation": "Er du sikker på at du ønsker å fjerne denne noden?"
+            "removeConfirmation": "Er du sikker på at du ønsker å fjerne denne noden?",
+            "removeAllConfirmation": "Er du sikker på at du vil fjerne alle noder?",
+            "info": {
+                "url": "Nettadresse",
+                "software": "Programvare",
+                "networkId": "Nettverks-ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Funksjoner",
+                "confirmedMilestoneIndex": "Bekreftet milestone indeks",
+                "pruningIndex": "Ryddeeindeks",
+                "messagesPerSecond": "Meldinger per sekund",
+                "referencedRate": "Referert-rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Bytt nettverk",
+            "newNetwork": "Nytt nettverk",
+            "resetWarning": "Endring av nettverk vil logge deg ut og tilbakestille alle kontoer, saldoer og transaksjonslogger for denne profilen.",
+            "switchingNetwork": "Bytter nettverk",
+            "typePassword": "Skriv inn passordet ditt for å bytte til:"
         },
         "errorLog": {
             "title": "Feilmeldingslogg",
@@ -464,7 +637,9 @@
         },
         "transaction": {
             "title": "Bekreft transaksjon",
-            "body": "Du er i ferd med å sende {amount} til"
+            "body": "Du er i ferd med å sende {amount} til",
+            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Saldo-finner",
@@ -488,6 +663,95 @@
             "body": "Chrysalis nettverksoppgradering har begynt.",
             "bodyMigration": "Migrering er deaktivert inntil den er ferdig.",
             "bodyFirefly": "Firefly er deaktivert til det er fullført. Token migrering vil fortsatt bli mulig etterpå."
+        },
+        "ledgerNotConnected": {
+            "connect": "Åpne den nye IOTA appen på din Ledger enhet for å fortsette",
+            "connectLegacy": "Åpne {legacy}-appen på Ledger-enheten for å fortsette"
+        },
+        "ledgerConfirmation": {
+            "confirm": "For å fortsette, bekreft at ledeteksten vises på din Ledger enhet"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide å installere Ledger-appene",
+            "steps": {
+                "0": "Installer og åpne Ledger Live-appen",
+                "1": "Sjekk at din Ledger er tilkoblet",
+                "2": "Søk etter appene: {legacy} og IOTA (MIOTA)",
+                "3": "Installer begge appene: {legacy} og IOTA (MIOTA)",
+                "4": "Husk at det er viktig å lukke Ledger Live før du kommer tilbake til Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips hvis din Ledger ikke kobler til",
+            "steps": {
+                "0": "Sørg for at Ledger Live ikke er åpen på datamaskinen",
+                "1": "Sørg for at du har låst opp din Ledger-enhet med PIN-koden",
+                "2": "Åpne den nye IOTA-appen på Ledger-enheten",
+                "3": {
+                    "text": "Fortsatt ingen hell?",
+                    "link": "Prøv den offisielle Ledger supportsiden"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Bekreft gjenværende adresse",
+                "info": "Bekreft at den resterende adressen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
+            },
+            "transaction": {
+                "title": "Bekreft transaksjon",
+                "info": "Bekreft at transaksjonsinformasjonen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Bekreft mottaksadressen",
+            "body": "Bekreft at mottaksadressen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Trenger du å overføre til en ny Trinity kontoindeks?",
+            "body": "Du kan også migrere senere i Avanserte Innstillinger."
+        },
+        "exportTransactionHistory": {
+            "title": "Eksport transaksjon historie",
+            "body": "Eksporter transaksjon historie for valgt lommebok. Den eksporterte filen vil bli i .csv format.",
+            "profileName": "Profil navn",
+            "accountName": "Konto navn",
+            "typePassword": "Skriv inn passord for å tillate eksportering"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking har ikke startet ennå",
+            "commencingDate": "Staking har ikke startet ennå",
+            "body": "Ved å forhånds-stake dine midler før stakingen starter, vil du automatisk begynne å motta belønning når staking starter.",
+            "ok": "OK, jeg forstår"
+        },
+        "stakingManager": {
+            "title": "Staking-administrasjon",
+            "description": "Når du staker en lommebok, sendes det en transaksjon til deg selv som markerer midlene dine som \"staket\". Du kan overføre dine tokens til en hver tid, men du vil da ikke fortsette å motta belønninger fra staking.",
+            "totalFundsStaked": "Totalt antall stakede midler",
+            "stakedSuccessfully": "Dine tokens har blitt staket for {account}.",
+            "unstakedSuccessfully": "Staking av tokens er avsluttet for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-deltakelse",
+            "subtitleStake": "Du er i ferd med å stake",
+            "subtitleMerge": "Du er i ferd med å sette sammen",
+            "bodyStake": "Dersom du ikke ønsker å delta i airdrop for begge tokens, kan du velge dette nedenfor. Du kan endre dette ved å stoppe og starte staking til en hver tid.",
+            "bodyMerge": "Dine midler vil bli staket for {airdrop}. For å endre hvilken airdrop du ønsker å delta i, stopp staking av denne lommeboken og start staking på nytt.",
+            "estimatedAirdrop": "Estimert belønning"
+        },
+        "shimmer-info": {
+            "title": "Om Shimmer",
+            "body1": "Gratulerer, du har opptjent SMR tokens som et resultat av staking. Shimmer er et insentivert nettverk for å iscenesette og teste ut store oppdateringer ment for IOTA.",
+            "body2": "Vi sikter oss inn på å lansere Shimmer i 2022. Dine tokens vil bli tilgjengelige å transfere når nettverket lanseres."
+        },
+        "assembly-info": {
+            "title": "Om Assembly",
+            "body1": "Gratulerer, du har tjent ASMB-tokens som belønning for staking. Assembly er et multi-kjede-nettverk for skalerbare smartkontrakter på IOTA.",
+            "body2": "Vi sikter oss inn på å lansere Assembly i 2022. Dine tokens vil bli tilgjengelig å transfere når nettverket lanseres."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -495,6 +759,7 @@
         "outgoingMi": "Utgående {value}",
         "portoflio": "Portefølje",
         "token": "Token",
+        "holdings": "Beholdning",
         "accountValue": "Lommebokens verdi",
         "accountActivity": "Lommebokaktivitet",
         "timeframe1Hour": "1 time",
@@ -505,6 +770,8 @@
     "actions": {
         "continue": "Fortsett",
         "back": "Tilbake",
+        "previous": "Forrige",
+        "next": "Neste",
         "cancel": "Avbryt",
         "close": "Lukk",
         "dismiss": "Avvis",
@@ -540,11 +807,12 @@
         "dropHere": "Slipp filen her",
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
+        "exporting": "Eksporterer",
         "exportNewStronghold": "Eksporter en ny Stronghold",
-        "enableDeepLinks": "Tillat dype lenker.",
+        "enableDeepLinks": "Aktiver IOTA-linker",
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
-        "exportState": "Eksporter status",
+        "exportTransactionHistory": "Eksporter transaksjonshistorie",
         "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås opp",
         "updateFirefly": "Oppdater Firefly",
@@ -559,6 +827,7 @@
         "addNode": "Legg til node",
         "updateNode": "Oppdater node",
         "removeNode": "Fjern node",
+        "removeAllNodes": "Fjern alle noder",
         "hide": "Skjul",
         "hideOthers": "Skjul andre",
         "showAll": "Vis alle",
@@ -573,6 +842,7 @@
         "addAccount": "Legg til lommebok",
         "checkForUpdates": "Søk etter oppdateringer",
         "reportAnIssue": "Rapportér en feil",
+        "restore": "Gjenopprett",
         "clear": "Tøm",
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
@@ -592,7 +862,19 @@
         "searchBalances": "Søk etter saldoer",
         "searchAgain": "Søk på nytt",
         "searching": "Søker...",
-        "closeFirefly": "Lukk Firefly"
+        "closeFirefly": "Lukk Firefly",
+        "generateAddress": "Generer adresse",
+        "migrateAgain": "Migrer en annen indeks",
+        "visitWebsite": "Besøk nettside",
+        "howItWorks": "Hvordan det fungerer",
+        "learnAboutStaking": "Lær om staking",
+        "stake": "Stake",
+        "unstake": "Avslutt staking",
+        "stakeFunds": "Stake midler",
+        "manageStake": "Administrér staking",
+        "merge": "Slå sammen",
+        "mergeFunds": "Slå sammen midler",
+        "done": "Ferdig"
     },
     "general": {
         "password": "Passord",
@@ -607,6 +889,7 @@
         "received": "Mottatt",
         "sendPayment": "Send betaling",
         "moveFunds": "Intern Overføring",
+        "sendTo": "Send Til",
         "sendFunds": "Send midler",
         "sendToAddress": "Send til adresse",
         "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
@@ -622,9 +905,12 @@
         "from": "Fra",
         "to": "Til",
         "receiveFunds": "Motta midler",
+        "address": "Address",
         "myAddress": "Min adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
+        "newRemainder": "Ny gjenværende",
+        "remainder": "Gjenstående",
         "generateNewAddress": "Generer en ny adresse",
         "copyAddress": "Kopier adresse",
         "import": "Importer",
@@ -632,8 +918,9 @@
         "stronghold": "Stronghold",
         "language": "Språk",
         "appearance": "Utseende",
-        "lightTheme": "Lyst tema",
-        "darkTheme": "Mørkt tema",
+        "lightTheme": "Lyst",
+        "darkTheme": "Mørkt",
+        "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Lommebokens saldo",
         "incoming": "Innkommende",
@@ -642,11 +929,7 @@
         "totalOut": "Totalt ut",
         "accounts": "Lommebøker",
         "myAccounts": "Lommebøkene mine",
-        "automaticNodeSelection": "Automatisk node selektering",
-        "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
-        "developerProfile": "Utviklerprofil",
-        "developerProfileDescription": "Lar deg koble til testnett",
         "dev": "Utvikling",
         "createAccount": "Opprette lommebok",
         "accountName": "Navn på lommebok",
@@ -654,6 +937,7 @@
         "transactions": "Transaksjoner",
         "security": "Sikkerhet",
         "accountAddress": "Adressen til lommeboken",
+        "network": "Nettverk",
         "nodes": "Noder",
         "wallet": "Lommebok",
         "help": "Hjelp",
@@ -661,6 +945,7 @@
         "messageId": "Meldings-ID",
         "inputAddress": "Avsenders adresse",
         "receiveAddress": "Mottaksadresse",
+        "newAddress": "Ny adresse",
         "date": "Dato",
         "status": "Status",
         "confirmed": "Bekreftet",
@@ -672,11 +957,15 @@
         "firstSync": "Synkroniserer historikk, dette kan ta en stund...",
         "transferSyncing": "Synkroniserer lommebok",
         "transferSelectingInputs": "Velger inndata",
-        "transferRemainderAddress": "Genererer innskuddsadresse for overskudd",
+        "transferRemainderAddress": "Generer gjenværende adresse",
+        "transferPreparedTransaction": "Forbereder transaksjon",
         "transferSigning": "Signerer transaksjonen",
         "transferPow": "Utfører PoW",
         "transferBroadcasting": "Promoterer transaksjonen",
         "transferComplete": "Overføring fullført",
+        "generatingReceiveAddress": "Genererer mottaksadresse",
+        "broadcasting": "Kringkasting",
+        "confirming": "Bekrefter",
         "creatingAccount": "Oppretter lommebok, vennligst vent...",
         "updatingAccount": "Oppdaterer lommebok, vennligst vent...",
         "accountSyncing": "Lommebok synkroniserer",
@@ -684,6 +973,7 @@
         "passwordUpdating": "Oppdaterer passord...",
         "passwordSuccess": "Oppdatering av passord var vellykket",
         "passwordFailed": "Oppdatering av passord mislyktes",
+        "syncing": "Synkroniserer",
         "syncingAccounts": "Synkroniserer lommeboken...",
         "exportingStronghold": "Eksporterer Stronghold...",
         "exportingStrongholdSuccess": "Eksporten av Stronghold var vellykket",
@@ -704,11 +994,24 @@
         "sendingFrom": "Sender fra {account}",
         "receivedTo": "Mottar til {account}",
         "sentFrom": "Sendt fra {account}",
+        "stakedFor": "Staket for {account}",
+        "unstakedFor": "Stoppet staking for {account}",
+        "votedFor": "Stemte på {account}",
+        "unvotedFor": "Fjernet stemme på {account}",
         "receiving": "Mottar",
         "sending": "Sender",
         "legacyNetwork": "Gammelt Nettverk",
         "capsLock": "Caps Lock er på",
-        "version": "Versjon {version}"
+        "version": "Versjon {version}",
+        "unknown": "Ukjent",
+        "none": "Ingen",
+        "staked": "Staket",
+        "unstaked": "Ikke staket",
+        "staking": "Staking",
+        "unstaking": "Avslutter staking",
+        "notStaked": "Ikke staket",
+        "stakedFunds": "Stakede midler",
+        "unstakedFunds": "Ikke-stakede midler"
     },
     "dates": {
         "today": "I dag",
@@ -717,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# uke} other {# uker}} siden",
         "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
         "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
@@ -729,16 +1041,32 @@
         "updateError": "Det oppsto en feil under oppdateringen, vennligst prøv igjen",
         "restartInstall": "Start på nytt for å installere",
         "calcMinutesRemaining": "Beregner minutter som gjenstår...",
-        "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av lommebok fullført",
-        "migratedAccountChrysalisDown": "Midlene dine vil bli tilgjengelig etter Chrysalis den 28. april",
-        "migratedAccountChrysalisUp": "Dine midler vil bli tilgjengelig snarlig"
+        "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid",
+        "exportTransactionHistory": {
+            "success": "Transaksjonshistorikk for {accountAlias} ble lagret vellykket på {filePath}",
+            "error": "Kan ikke eksportere transaksjonshistorikk for {accountAlias}"
+        },
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Logg inn for å starte IOTA-linken",
+            "notEnabled": "IOTA-linker er ikke aktivert",
+            "invalidFormat": "IOTA-linken du fulgte er ugyldig",
+            "wallet": {
+                "send": {
+                    "success": "Betalingsdetaljer lagt til fra IOTA-link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
-            "length": "Profilnavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
-            "duplicate": "En profil med dette navnet eksisterer allerede."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "En profil med dette navnet eksisterer allerede.",
+            "delete": {
+                "nonEmptyAccounts": "Du må overføre hele balansen før du kan slette profilen din."
+            }
         },
         "password": {
             "doNotMatch": "Passordene samsvarer ikke.",
@@ -755,25 +1083,28 @@
             "similar": "Dette ligner på et ofte brukt passord.",
             "word": "Ett enkelt ord er enkelt å gjette.",
             "incorrect": "Passordet er feil.",
-            "length": "Passordet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "PIN-koden din må bestå av {length, plural, one {1 tall} other {# tall}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-kodene samsvarer ikke.",
             "incorrect": "Gjeldende pinkode er feil."
         },
         "account": {
-            "length": "Lommeboknavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Du må bruke den nyeste lommeboken før du lager en ny.",
             "notEmpty": "Du må overføre midlene før du sletter denne lommeboken.",
             "duplicate": "En lommebok med dette navnet eksisterer allerede.",
             "tilde": "Et profilnavn kan ikke starte med '~'.",
             "control": "Et profilnavn kan ikke inneholde et kontrolltegn.",
             "startDot": "Et profilnavn kan ikke starte med '.'.",
-            "chars": "Et profilnavn kan ikke inneholde følgende tegn: <>:\"/\\|?*"
+            "chars": "Et profilnavn kan ikke inneholde følgende tegn: <>:\"/\\|?*",
+            "index": "Din kontoindeks må være et tall mellom 0 og 2147483647.",
+            "page": "Din kontoside må være et tall mellom 0 og 2147483647.",
+            "syncing": "Det oppstod en feil ved synkronisering av lommeboken din."
         },
         "send": {
-            "addressLength": "Adresser må bestå av {length, plural, one {1} other {#}} tegn.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Dette er mer enn din nåværende balanse.",
             "amountNoFloat": "Om enheter er `i` kan du ikke bruke desimaler.",
             "amountInvalidFormat": "Beløpet ser ut til å være et ugyldig tall.",
@@ -784,14 +1115,30 @@
             "insufficientFunds": "Denne lommeboken har ikke nok midler.",
             "noToAccount": "Du har ikke valgt en lommebok for å sende pengene til.",
             "sendingDust": "Du kan ikke sende mindre enn 1 Mi.",
-            "leavingDust": "Du kan ikke forlate mindre enn 1 Mi på adressen din."
+            "leavingDust": "Du kan ikke forlate mindre enn 1 Mi på adressen din.",
+            "cancelled": "Transaksjonen ble avbrutt.",
+            "transaction": "Det oppstod en feil ved sending av transaksjonen. Prøv på nytt."
         },
         "node": {
             "invalid": "Vennligst angi en gyldig URL-adresse.",
-            "https": "HTTPS må fylles ut. Sett opp en utviklerprofil for å bruke usikrede HTTP-tilkoblinger.",
+            "dns": "Finner ikke DNS-løsning for node.",
+            "timedOut": "Tilkoblingen ble tidsavbrutt.",
+            "refused": "Tilkoblingen ble avvist.",
+            "handshake": "Kan ikke fullføre tilkoblingen med noden.",
+            "invalidCertificate": "Kunne ikke koble til med ugyldig sertifikat.",
+            "https": "HTTPS er nødvendig; usikker tilkopling over HTTP støttes ikke på dette tidspunktet.",
             "duplicate": "Denne noden har allerede blitt lagt til.",
             "unsynced": "Noden er ikke synkronisert.",
-            "noSynced": "Ingen synkroniserte noder er tilgjengelige."
+            "noSynced": "Ingen synkroniserte noder er tilgjengelige.",
+            "answer": "Fikk ikke svar fra alle noder.",
+            "forbidden": "Denne node-tilkoblingen er forbudt.",
+            "pluginNotAvailable": "\"{nodePlugin}\"-plug-in-en er ikke tilgjengelig på den nåværende noden."
+        },
+        "network": {
+            "mismatch": "Nettverk-IDen for denne noden er \"{networkId}\", og samsvarer ikke med det gjeldende nettverket.",
+            "notReachable": "Nettverks-IDen for denne noden kunne ikke hentes, klarer ikke å legge til node.",
+            "badNodes": "Kan ikke koble til nettverket med gjeldende node konfigurasjon.",
+            "nonEmptyAccount": "Du må overføre alle saldoer før du bytter nettverk."
         },
         "global": {
             "generic": "Noe gikk galt."
@@ -800,11 +1147,48 @@
             "invalid": "Sikkerhetskopifilen ble ikke gjenkjent.",
             "destination": "Målet for sikkerhetskopieringen var ikke gyldig.",
             "mnemonic": "Huskeregelen er ugyldig.",
-            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {inneholder nå 1} other {inneholder nå #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Hovednøkkelen skal kun inneholde bokstavene A-Z og tallet 9.",
-            "phraseWordCount": "Det skal være 24 ord i gjenopprettingsfrasen din, akkurat nå er det {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din.",
             "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
+        },
+        "ledger": {
+            "appNotOpen": "Du må åpne IOTA-appen på Ledger-enheten.",
+            "generic": "Det oppstod en feil under tilkoblingen til Ledger-enheten din.",
+            "legacyConnected": "Feil app er åpen på Ledger-enheten din.",
+            "locked": "Vennligst lås opp din Ledger-enhet ved å skrive inn PIN-koden.",
+            "mnemonicMismatch": "Du har koblet til feil Ledger-enhet eller mnemonien er endret.",
+            "notDetected": "Ingen Ledger-enhet oppdaget.",
+            "notFound": "Ledger-enhet ikke funnet.",
+            "otherConnected": "Feil app er åpen på Ledger-enheten din.",
+            "generateAddress": "Det oppstod en feil under generering av adresse.",
+            "timeout": "Det oppstod et tidsavbrudd for Ledger-enheten.",
+            "disconnected": "Ledger-enheten ble frakoblet.",
+            "noStronghold": "Klarte ikke å bruke Stronghold med Ledger-profil."
+        },
+        "popup": {
+            "preventClose": "Denne popup kan ikke stenges."
+        },
+        "migration": {
+            "missingBundle": "Det oppsto en feil under forsøk på å finne transaksjonspakken."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Kan ikke avkode streng som Bech32-adresse."
+        },
+        "participation": {
+            "cannotUseAccount": "Klarte ikke å bruke den valgte kontoen.",
+            "cannotFindStakingEvent": "Klarer ikke å finne staking-hendelsen.",
+            "cannotVisitAirdropWebsite": "Klarte ikke å åpne {airdrop}-nettsiden.",
+            "invalidStakingEventId": "Ugyldig staking-ID."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Bruk noder over HTTP lar trafikken være ukryptert og kan utgjøre en sikkerhetsrisiko."
+        },
+        "participation": {
+            "noAccounts": "Du har ingen IOTA."
         }
     },
     "tooltips": {
@@ -815,6 +1199,65 @@
             "medium": "Middels",
             "low": "Lavt",
             "veryLow": "Veldig lavt"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking har ikke startet ennå",
+                "body": "Prøv igjen senere. Stakingen har ikke startet."
+            },
+            "commencing": {
+                "title": "Forhånds-stakingen er nå åpen",
+                "body": "Forhånds-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinster hvert 10. sekund."
+            },
+            "activeHolding": {
+                "title": "Stakingen er nå i gang",
+                "body": "Bra jobbet. Du vil motta gevinst hvert 10 sekund."
+            },
+            "inactiveHolding": {
+                "title": "Staking er nå åpen",
+                "body": "Stake dine IOTA tokens for å motta gevinst hvert 10. sekund."
+            },
+            "inactive": {
+                "title": "Ingen staking oppdaget",
+                "body": "Åpne nettverkskonfigurasjon i \"Avanserte Innstillinger\" og forsikre deg om at nåværende node har \"Deltakelse\"-egenskapen ved å klikke på \"Se Info\"."
+            },
+            "ended": {
+                "title": "Stakingen er nå avsluttet",
+                "bodyAboveRewardMin": "Assembly- og Shimmer-gevinster blir distribuert til lommeboken din når hvert av disse nettverkene lanseres.",
+                "bodyBelowRewardMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for airdrop belønninger."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nytt antall ikke-stakede midler: {amount}",
+            "titleNoFunds": "Nye ikke-stakede midler",
+            "preBody": "Du har mottatt tokens i en staket lommebok.",
+            "body": "Du må manuelt stake disse nye myntene for å motta airdrop-gevinstene for dem."
+        },
+        "stakingMinRewards": {
+            "title": "Under minimumsverdi for gevinst",
+            "titleMinBalance": "{amount} minimum saldo påkrevd",
+            "bodyMinBalance": "Denne lommeboken har ikke nok IOTA-tokens til å nå den laveste mulige airdrop-belønningen, og kan derfor ikke stakes.",
+            "continue": "Vennligst fortsett å stake i ytterligere {duration}.",
+            "bodyBelowMin": "Denne lommeboken har ikke nådd minimum belønningsverdi for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Du må fortsette å stake i {duration} for å oppnå minsteverdi.",
+            "bodyWillNotReachMin": "Du vil ikke nå minimumsbelønningen i løpet av gjenværende staking periode med mindre du staker mer IOTA.",
+            "bodyDidNotReachMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Denne lommeboken har ikke nok IOTA tokens til å nå den minimale airdrop belønningen for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Meldings-ID",
+            "internal": "Intern",
+            "rawValue": "Rå verdi",
+            "formattedValue": "Formatert verdi",
+            "date": "Dato",
+            "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

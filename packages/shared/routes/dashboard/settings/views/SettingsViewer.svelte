@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
+    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
@@ -14,9 +15,11 @@
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
-    import { Advanced, General, Security, Help } from './'
+    import { Advanced, General, Help, Security } from './'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let scroller
@@ -28,11 +31,23 @@
 
     let settings
 
+    const securitySettings = Object.assign({}, SecuritySettings)
+    const advancedSettings = Object.assign({}, AdvancedSettings)
+
+    // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
+    $: if (!$isSoftwareProfile) {
+        delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
+    }
+    $: if (!$isLedgerProfile) {
+        delete advancedSettings.MigrateLedgerIndex
+    }
+
     if ($loggedIn) {
         settings = {
             generalSettings: GeneralSettings,
-            security: SecuritySettings,
-            advancedSettings: AdvancedSettings,
+            security: securitySettings,
+            advancedSettings: advancedSettings,
             helpAndInfo: HelpAndInfo,
         }
     } else {

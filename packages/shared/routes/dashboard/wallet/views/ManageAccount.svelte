@@ -3,9 +3,12 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
+    export let locale: Locale
+
     export let alias
     export let error = ''
 
@@ -39,21 +42,19 @@
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
-                    accounts.update((_accounts) => {
-                        return _accounts.map((account) => {
-                            if (account.id === $selectedAccountId) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    account,
-                                    {
-                                        alias: trimmedAccountAlias,
-                                    }
-                                )
-                            }
+                    accounts.update((_accounts) => _accounts.map((account) => {
+                        if (account.id === $selectedAccountId) {
+                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                {} as WalletAccount,
+                                account,
+                                {
+                                    alias: trimmedAccountAlias,
+                                }
+                            )
+                        }
 
-                            return account
-                        })
-                    })
+                        return account
+                    }))
 
                     isBusy = false
                     selectedAccountId.set(null)
@@ -89,14 +90,14 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>
+        <Text secondary classes="mb-3 text-center">{locale('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy || accountAlias === alias}>
                 {locale('actions.save')}
             </Button>
         </div>

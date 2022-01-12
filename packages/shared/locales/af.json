@@ -15,20 +15,55 @@
         },
         "profile": {
             "title": "Skep 'n Profiel",
+            "profileName": "Profiel Naam",
             "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
-            "body2": "Kom ons begin nou met jou eerste profielnaam. Jy kan later nog profiele byvoeg.",
-            "profileName": "Profiel Naam"
+            "body2": {
+                "first": "Laat ons eers begin met jou eerste profielnaam.",
+                "nonFirst": "Laat ons eers begin met jou profielnaam."
+            },
+            "addMore": "Jy kan later meer profiele byvoeg.",
+            "advancedOptions": "Gevorderde opsies",
+            "developer": {
+                "label": "Ontwikkelaarsprofiel",
+                "info": "Koppel aan die devnet of 'n privaat netwerk"
+            }
         },
         "setup": {
             "title": "Stel jou beursie op",
             "chrysalisTitle": "Chrysalis-netwerkopdatering",
-            "chrysalisBody": "Vanaf 21 April kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
+            "chrysalisBody": "Vanaf 21 April 2021, kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
             "learnMore": "Leer meer oor die migrasie"
         },
         "secure": {
             "title": "Beveilig U beursie",
             "body1": "Stoor en druk die Recovery Kit PDF form uit.",
             "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
+        },
+        "create": {
+            "title": "Skep 'n Beursie",
+            "body": "Skep 'n nuwe beursie. Jy kan 'n gewone sagteware -beursie kies, of as u 'n Ledger het, kan jy 'n hardeware beursie opstel.",
+            "softwareAccount": {
+                "title": "Ek wil 'n sagteware beursie hê",
+                "description": "Skep 'n herstelfrase van 24 woorde"
+            },
+            "ledgerAccount": {
+                "title": "Ek wil 'n hardeware beursie hê",
+                "description": "Ledger Nano S of Ledger X benodig"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Koppel jou Ledger",
+            "progress2": "Genereer nuwe adres",
+            "progress3": "Switch Ledger app",
+            "progress4": "Oordra fondse",
+            "watchVideo": "Kyk na die videogids",
+            "videoGuide": "Ledger migrasie video gids"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Het jy die nodige Ledger app geïnstalleer?",
+            "body1": "Voordat jy voortgaan, moet jy die {legacy} -program en die nuwe IOTA -app via Ledger Live vind en installeer.",
+            "body2": "Maak seker dat jou Ledger firmware op datum is. Alle vooraf geïnstalleerde programme moet opgedateer word na hul nuutste weergawes.",
+            "action": "Ja, ek het hierdie programme geïnstalleer"
         },
         "password": {
             "title": "Skep 'n wagwoord",
@@ -85,9 +120,11 @@
         },
         "congratulations": {
             "title": "Wallet-opstelling is voltooi",
+            "fundsMigrated": "Fondsmigrasie",
             "body": "Jou nuwe beursie is gereed om te gebruik.",
-            "fundsMigrated": "Fondse migreer",
-            "success": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "softwareMigratedBody": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "fireflyLedgerBody": "Jou Ledger rekening is suksesvol herstel en jy kan nou voortgaan.",
+            "trinityLedgerBody": "Jy het jou Ledger suksesvol na die nuwe netwerk gemigreer.",
             "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
@@ -98,7 +135,9 @@
             "importMnemonic": "Ek het 'n Firefly herstel frase",
             "importMnemonicDescription": "Voer jou geheime frase in om jou beursie te herstel",
             "importFile": "Ek het 'n lêer back-up",
-            "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op"
+            "importFileDescription": "Laai 'n Seedvault of Stronghold-lêer op",
+            "importLedger": "Ek het 'n Ledger back-up",
+            "importLedgerDescription": "Herstel of migreer 'n Ledger-profiel"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +158,63 @@
             "title": "Herstel jou beursie uit 'n back-up lêer",
             "body": "Voer 'n back-up in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
+        "importFromLedger": {
+            "title": "Herstel of migreer jou Ledger",
+            "body": "Herstel jou bestaande Firefly Ledger-profiel, of migreer jou fondse vanaf Trinity.",
+            "haveFireflyLedger": "Ek het 'n Firefly Ledger back-up",
+            "haveFireflyLedgerDescription": "Stel 'n Firefly profiel terug",
+            "haveTrinityLedger": "Ek het 'n Trinity Ledger back-up",
+            "haveTrinityLedgerDescription": "Migreer jou Trinity-profiel"
+        },
+        "connectLedger": {
+            "title": "Koppel jou Ledger aan Firefly",
+            "body": "Om jou Ledger deur Firefly te vind, moet jy seker maak dat die amptelike Ledger Live program gesluit is.",
+            "trafficLight1": "Koppel en ontsluit jou Ledger met u PIN",
+            "trafficLight2": "Maak die nuwe IOTA app op jou Ledger oop",
+            "tips": "Wenke as jou Ledger nie verbind nie"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Herstel jou Ledger profiel",
+            "body": "Druk herstel om die opstelproses te voltooi en jou beursies, saldo's en transaksiegeskiedenis te herstel.",
+            "restoring": "Herstel vanaf Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Begin jou Ledger migrasie met Firefly",
+            "body1": "Firefly sal jou help om jou tokens na die nuwe Chrysalis netwerk oor te dra.",
+            "body2": "Na die migrasie kan jy jou tokens stuur en ontvang met jou Ledger in Firefly.",
+            "readMore": "Wat om te verwag van die migrasieproses"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Genereer nuwe adres",
+            "body": "Jy moet jou nuwe adres genereer om jou tokens met Firefly te migreer. Klik op die knoppie hieronder om voort te gaan.",
+            "confirmTitle": "Bevestig die nuwe adres",
+            "confirmBody": "Ter wille van veiligheid, vergelyk asseblief die adres wat op jou Ledger gegenereer is, met die adres hieronder. As hulle ooreenstem, druk albei knoppies op jou Ledger soos gevra.",
+            "confirmedTitle": "Adres bevestig",
+            "confirmedBody": "Jy het bevestig dat die adres in Firefly ooreenstem met die adres op jou Ledger.",
+            "generating": "Genereer nuwe adres"
+        },
+        "switchLedgerApps": {
+            "title": "Skakel Ledger programme oor",
+            "body": "Skakel asseblief oor na die {legacy} app op jou Ledger om voort te gaan met migrasie. Wanneer gereed, druk voort."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Kies Ledger rekeningindeks",
+            "body": "Kies die Ledger rekeningindeks wat jy saam met Trinity gebruik het. Vir die meeste gebruikers is dit die standaardindeks van 0.",
+            "accountIndex": "Rrekeningindeks",
+            "accountPage": "Rekening bladsy",
+            "standard": "Standaard",
+            "expert": "Expert",
+            "takingAWhile": "Dit neem 'n rukkie...",
+            "notGeneratingAddresses": "Genereer jou Ledger 'n adresse?",
+            "reinstallLegacy": "Indien nie, ontkoppel die toestel en probeer weer. As die probleem voortduur, moet jy die {legacy} program weer installeer."
+        },
         "importBackupPassword": {
-            "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
             "body1": "Sleutel asb jou back-up wagwoord in.",
             "body2": "Dit is die wagwoord wat jy ingestel het toe jy die back-up gemaak het."
         },
         "importSuccess": {
             "title": "Jy het jou back-up suksesvol herwin",
-            "body": "Jy kan nou jou nuwe beursie instel.",
-            "seedvaultTitle": "Suksesvol ingevoer",
-            "seedvaultBody": "Jou wagwoord is korrek, ju kan nou voortgaan.",
-            "strongholdTitle": "Suksesvol ingevoer",
-            "strongholdBody": "Jou wagwoord is korrek, ju kan nou voortgaan."
+            "body": "Jy kan nou jou nuwe beursie instel."
         },
         "migrate": {
             "title": "Migreer jou fondse",
@@ -179,11 +263,12 @@
         },
         "securingSpentAddresses": {
             "title": "Beveilig tans spandeerde adresse...",
-            "body1": "Hierdie proses sal {minutes, plural, one {1 minuut} other {# minute}} vat.",
+            "body1": "Hierdie proses sal {minutes, plural, een {# minuut} other {# minute}} vat.",
             "body2": "Jou rekenaar sal op volle kapasiteit werk, jy wil dalk iets anders doen terwyl jy wag totdat dit voltooi is."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly sal nou jou fondse migreer. Dit kan 'n rukkie neem.",
+            "body2": "Maak seker dat jou Ledger gekoppel is en dat die {legacy} program ten alle tye oop is tydens migrasie.",
             "migrate": "Migreer fondse",
             "transaction": "Transaksie {number}",
             "rerun": "Probeer weer"
@@ -196,7 +281,8 @@
             "title": "Jou balans",
             "body": "Maak seker dat jou balans reg is voordat jy voortgaan. Jy kan weer probeer as dinge nie reg lyk nie.",
             "error": "Die minimum migrasiebedrag is 1 Mi. Probeer weer as jou balans nie reg lyk nie.",
-            "zeroBalance": "Probeer weer. As jy steeds nie jou balans kan vind nie, het jy dalk jou seedd verkeerd ingevoer."
+            "zeroBalance": "Probeer weer. As jy steeds nie jou balans kan vind nie, het jy dalk jou seedd verkeerd ingevoer.",
+            "zeroBalanceLedgerLegacy": "Probeer weer. As jy nog steeds nie jou saldo kan vind nie, het jy moontlik die verkeerde rekeningindeks gekies."
         },
         "settings": {
             "settings": "Instellings",
@@ -226,7 +312,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Herbegin die Firefly app sodat veranderinge aan die stelseltema in werking tree"
             },
             "language": {
                 "title": "Taal",
@@ -241,18 +328,16 @@
                 "description": "Stelselkennisgewings vir transaksiegebeurtenisse"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Netwerk status",
+                "description": "Vertoon die status van die nodes waaraan jy tans gekoppel is"
             },
             "exportStronghold": {
                 "title": "Voer back-up uit",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "description": "Uitvoer na 'n Stronghold lêer - 'n volledige geïnkripteer back-up van jou beursies en die nuutste transaksiegeskiedenis"
             },
             "appLock": {
                 "title": "Sluit outomaties",
-                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken",
-                "durationMinute": "{time, plural, one {1 minuut} other {# minute}}",
-                "durationHour": "{time, plural, one {1 huur} other {# ure}}"
+                "description": "Onaktiwiteitstyd voordat jou beursies sluit en jou uitgeteken"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
@@ -279,28 +364,39 @@
                 "description": "Verwyder jou hele profiel, beursie en transaksiegeskiedenis. Maak seker dat jy 'n back-up het"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Vul transaksiedata outomaties in Firefly deur op 'n iota: // te click"
+                "title": "IOTA links",
+                "description": "Vul transaksiedata outomaties in Firefly deur op 'n IOTA link te click"
             },
-            "developerMode": {
-                "title": "Ontwikkelaar mode",
-                "description": "Koppel aan testnets en ander ontwikkelaarfunksies"
-            },
-            "nodeSettings": {
-                "title": "Node instellings",
-                "description": "Kies Manual om uit die nodelys te kies of koppel aan jou eie node"
+            "networkConfiguration": {
+                "title": "Netwerk konfigurasie",
+                "title2": "Netwerk konfigurasie",
+                "description": {
+                    "dev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie (om van netwerke om te skakel sal lei tot die terugstelling van die beursiestatus)",
+                    "nonDev": "Jou netwerkinstellings sal outomaties opgedateer word volgens die huidige noduskonfigurasie"
+                },
+                "switchedNetworks": "Het netwerk suksesvol na \"{networkName}\" oorgeskakel.",
+                "resetWallet": "Jou beursiestatus is teruggestel.",
+                "connectedTo": "Gekoppel aan",
+                "nodeConfiguration": {
+                    "title": "Node keuse",
+                    "description": "Kies \"Manual\" om nodusinstellings op te stel en aan jou eie node(s) te koppel",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Kies 'n node",
-                "description": "Bestuur die lys van IOTA-netwerk nodes waarmee jy verbind is",
+                "title": "Node konfigurasie",
+                "description": "Bestuur die lys van nodes waaraan jy kan koppel",
                 "primaryNode": "Primêre node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "viewDetails": "Sien besonderhede",
+                "editDetails": "Redigeer details",
+                "viewInfo": "Wys inligting",
                 "setAsPrimary": "Stel as primêre Node",
                 "removeNode": "Verwyder node",
                 "includeOfficialNodeList": "Sluit die amptelike nodelys in",
-                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word"
+                "noNodes": "Daar is geen nodes nie, kan nie aan die netwerk koppel nie",
+                "noNodesAuto": "Daar is geen nodes nie, outomatiese seleksie sal eerder gebruik word"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -314,9 +410,9 @@
                 "title": "Diagnostiek",
                 "description": "Kyk na stelsel- en toepassingsinligting"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Voer jou transaksiegeskiedenis uit na 'n .csv-lêer"
+            "migrateLedgerIndex": {
+                "title": "Migreer Ledger indeks",
+                "description": "Migreer 'n ander Trinity rekeningindeks"
             },
             "troubleshoot": {
                 "title": "Probleemoplossing",
@@ -345,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Wag asseblief {time, plural, one {1 sekonde} other {# sekondes}}",
-            "incorrectAttempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
+            "pleaseWait": "Wag asseblief {time, plural, one {# sekonde} other {# sekondes}}",
+            "incorrectAttempts": "{attempts, plural, one {# verkeerde poging} other {# verkeerde pogings}}"
         },
         "dashboard": {
             "security": {
@@ -357,7 +453,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Hardeware-toestel",
-                    "noneDetected": "Nie bespeur nie"
+                    "statuses": {
+                        "appNotOpen": "IOTA app nie oop nie",
+                        "connected": "Gekoppel",
+                        "legacyConnected": "{legacy} App oop",
+                        "locked": "Gesluit",
+                        "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
+                        "notDetected": "Nie opgespoor nie",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Beursie status",
@@ -380,6 +484,48 @@
             "profileModal": {
                 "allSettings": "Alle instellings",
                 "logout": "Log out"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welkom by die staking dashboard!",
+            "status": {
+                "upcoming": "Staking geleentheid het nog nie begin nie",
+                "commencing": "Pre-Staking is oop",
+                "holdingActive": "Staking ann die gang",
+                "holdingInactive": "Staking is oop",
+                "inactive": "Staking nie bespeur nie",
+                "ended": "Staking is verby"
+            },
+            "summary": {
+                "stakedFunds": "Staked fondse"
+            },
+            "info": {
+                "upcomingSubheader": "Staking geleentheid het nog nie begin nie",
+                "upcomingHeader": "Kom later terug",
+                "commencingSubheader": "Maak gereed vir Staking",
+                "commencingHeader": "Pre-Stake jou tokens vooraf!",
+                "holdingSubheaderHolding": "No besig om Staking rewards te verdien",
+                "holdingSubheaderNotHolding": "Verdien Staking rewards om IOTA te Stake",
+                "holdingHeaderHolding": "{duration} oor",
+                "holdingHeaderNotHolding": "Stake jou tokens!",
+                "endedSubheader": "Staking het geëindig",
+                "endedHeader": "Dankie!",
+                "inactiveHeader": "Probeer om node te verander",
+                "inactiveSubheader": "Staking was nie bespeur nie"
+            },
+            "airdrops": {
+                "holding": "Oorblywende",
+                "commencing": "Totdat staking begin",
+                "collectedRewards": "Ingesamelde beloning",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is 'n toestemminglose, hoogs skaalbare multi-chain netwerk om saamstelbare smart-contracts te bou en te ontplooi. Assembly is die toekoms van web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Die aangespoorde verhoognetwerk om groot innovasies op IOTA te bevorder. Wat ook al gebeur, gebeur. Hoe Shimmer ontwikkel, is aan jou."
+                }
             }
         }
     },
@@ -429,18 +575,45 @@
         },
         "addressHistory": {
             "title": "{name} adresgeskiedenis",
-            "currentBalance": "Huidige balaans: {balance}"
+            "currentBalance": "Balans: {balance}",
+            "internal": "Interne adres",
+            "external": "Deposito adres"
         },
         "node": {
             "titleAdd": "Add Node",
             "titleUpdate": "Dateer 'n node op",
             "titleRemove": "Verwyder 'n node",
+            "titleRemoveAll": "Verwyder alle nodes",
             "titleDetails": "Node besonderhede",
+            "titleInfo": "Node inligting",
+            "addingNode": "Voeg node tans by",
+            "updatingNode": "Dateer tans node op",
+            "loadingNodeInfo": "Opdatering van node inligting",
             "nodeAddress": "Node adres",
             "optionalUsername": "Username (opsioneel)",
             "optionalPassword": "Wagwoord (opsioneel)",
+            "optionalJwt": "JSON-webtoken (opsioneel)",
             "setAsPrimaryNode": "Stel as primêre Node",
-            "removeConfirmation": "Is jy seker dat ujy hierdie node wil verwyder?"
+            "removeConfirmation": "Is jy seker dat ujy hierdie node wil verwyder?",
+            "removeAllConfirmation": "Is jy seker dat jy al die nodes wil verwyder?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Funksies",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "Boodskappe per sekondes",
+                "referencedRate": "Verwysde tempo"
+            }
+        },
+        "switchNetwork": {
+            "title": "Skakel netwerk oor",
+            "newNetwork": "Nuwe netwerk",
+            "resetWarning": "Verandering van netwerke sal jou afmeld en alle rekeninge, balanse en transaksiegeskiedenis vir hierdie profiel terugstel.",
+            "switchingNetwork": "Skakel netwerk oor",
+            "typePassword": "Tik in you wagwoord om oor te skakel na:"
         },
         "errorLog": {
             "title": "Foutlêer",
@@ -464,7 +637,9 @@
         },
         "transaction": {
             "title": "Bevestig die transaksie",
-            "body": "Jy is op die punt om {amount} na"
+            "body": "Jy is op die punt om {amount} na",
+            "sendingFromStakedAccount": "Jy stuur 'n oordrag vanaf 'n beursie wat tans in Staking is. Dit kan jou tokens unstake. Stuur gerus die oordrag, maar jy sal dalk jou oorblywende tokens daarna moet weer stake.",
+            "sendingFromStakedAccountBelowMinReward": "Jy stuur 'n oordrag vanaf 'n beursie wat nog nie die minimum staking belonings bereik het nie. Dit kan jou tokens unstake en jy kan jou staking belonings op hierdie beursie verloor."
         },
         "balanceFinder": {
             "title": "Balans-finder",
@@ -488,6 +663,95 @@
             "body": "Die opgradering van die Chrysalis-netwerk het begin.",
             "bodyMigration": "Migrasie is uitgeskakel totdat dit voltooi is.",
             "bodyFirefly": "Firefly is uitgeskakel totdat dit voltooi is. Token migrasie sal daarna steeds moontlik wees."
+        },
+        "ledgerNotConnected": {
+            "connect": "Maak die nuwe IOTA app oop jou Ledger om voort te gaan",
+            "connectLegacy": "Maak die {legacy} app op jou Ledger oop om voort te gaan"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Bevestig die aanwysing wat op jou Ledger toestel verskyn om voort te gaan"
+        },
+        "ledgerAppGuide": {
+            "title": "Gids vir die installering van die Ledger app",
+            "steps": {
+                "0": "Installeer en maak die Ledger Live app oop",
+                "1": "Maak seker dat jy die Ledger gekoppel het",
+                "2": "Soek vir programme: {legacy} and IOTA (MIOTA)",
+                "3": "Installeer beide programme: {legacy} and IOTA (MIOTA)",
+                "4": "Onthou dat dit is belangrik om Ledger Live te sluit voordat jy na Firefly terugkeer"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Wenke as jou Ledger nie verbind nie",
+            "steps": {
+                "0": "Maak seker dat Ledger Live nie op jou rekenaar oop is nie",
+                "1": "Maak seker dat jy jou Ledger toestel met you PIN ontsluit het",
+                "2": "Maak die nuwe IOTA app oop op jou Ledger",
+                "3": {
+                    "text": "Nog steeds geen geluk nie?",
+                    "link": "Probeer die amptelike Ledger ondersteuningsbladsy"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Bevestig die oorskiet adres",
+                "info": "Bevestig dat die res van die adres wat op jou Ledger verskyn, ooreenstem met die onderstaande. As hulle ooreenstem, druk op beide knoppies op jou Ledger soos aangedui."
+            },
+            "transaction": {
+                "title": "Bevestig die transaksie",
+                "info": "Bevestig dat die transaksie -inligting wat op jou Ledger toestel verskyn, ooreenstem met die inligting hieronder. As hulle ooreenstem, druk op beide knoppies op Ledger soos aangedui."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Bevestig die ontvang adres",
+            "body": "Bevestig dat die ontvangsadres wat op jou Ledger verskyn, ooreenstem met die onderstaande. As hulle ooreenstem, druk op beide knoppies op jou Ledger soos aangedui."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Moet jy 'n ander Trinity rekeningindeks migreer?",
+            "body": "Jy kan ook later in Gevorderde instellings migreer."
+        },
+        "exportTransactionHistory": {
+            "title": "Voer transaksiegeskiedenis uit",
+            "body": "Voer die transaksiegeskiedenis vir die geselekteerde beursie uit. Die uitgevoerde lêer sal in .csv-formaat wees.",
+            "profileName": "Profiel Naam:",
+            "accountName": "Rekening naam:",
+            "typePassword": "Tik jou wagwoord om uitvoer toe te laat"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking het nog nie begin nie",
+            "commencingDate": "Staking het nog nie begin nie",
+            "body": "Deur vooraf jou fondse in te sit voor die staking begin, sal jy outomaties belonings begin ontvang wanneer die staking begin.",
+            "ok": "Ok, Ek verstaan"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "Wanneer jy 'n beursie stake, stuur jy 'n transaksie aan jouself en merk daardie fondse as \"staked\". Jy kan die tokens enige tyd oordra, maar jy sal nie aanhou om staking belonings te ontvang nie.",
+            "totalFundsStaked": "Totale fondse staked",
+            "stakedSuccessfully": "Jou fondse is Staked vir {account}.",
+            "unstakedSuccessfully": "Jou fondse is un-Staked vir {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-deelname",
+            "subtitleStake": "Jy is op die punt om te Stake",
+            "subtitleMerge": "Jy is op die punt om te kombineer",
+            "bodyStake": "As jy nie aan beide airdrops wil deelneem nie, kan jy hieronder onttrek. Jy kan enige tyd unstake en stake om weer in te teken.",
+            "bodyMerge": "Jou fondse sal ge Stake word vir {airdrop}. Om te verander aan watter airdrops jy wil deelneem, un stake hierdie beursie en stake dit weer.",
+            "estimatedAirdrop": "Geskatte belonings"
+        },
+        "shimmer-info": {
+            "title": "Oor Shimmer",
+            "body1": "Baie geluk, jy het SMR-tokens verdien as 'n Staking beloning. Shimmer is 'n aangespoorde staking netwerk om groot opgraderings op IOTA te toets.",
+            "body2": "Ons beoog om Shimmer in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
+        },
+        "assembly-info": {
+            "title": "Oor Assembly",
+            "body1": "Baie geluk, jy het ASMB-tokens verdien as 'n staking beloning. Assembly is 'n multi-chain netwerk vir die implementering van skaalbare smart-contracts op IOTA.",
+            "body2": "Ons beoog om Assembly in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Jy skep 'n ontwikkelaarprofiel",
+            "body": "Jy sal by die Chrysalis Deevnet gekoppel wees, en kan handmatig van netwerke wissel. Gaan net voort as jy weet wat jy doen."
         }
     },
     "charts": {
@@ -495,6 +759,7 @@
         "outgoingMi": "Uitgaande {value}",
         "portoflio": "Portefeulje",
         "token": "Tokenprys",
+        "holdings": "Besittings",
         "accountValue": "Beursie Waarde",
         "accountActivity": "Beursie Aktiwiteit",
         "timeframe1Hour": "1 huur",
@@ -505,6 +770,8 @@
     "actions": {
         "continue": "Gaan voort",
         "back": "Terug",
+        "previous": "Vorige",
+        "next": "Volgende",
         "cancel": "Kanselleer",
         "close": "Maak toe",
         "dismiss": "Ontslaan",
@@ -540,11 +807,12 @@
         "dropHere": "Sit jou lêer hier neer",
         "syncAll": "Sinkroniseer almal",
         "export": "Export",
+        "exporting": "Uitvoer",
         "exportNewStronghold": "Export n nuwe Stronghold",
-        "enableDeepLinks": "Aktiveer deep links",
+        "enableDeepLinks": "Aktiveer IOTA deep links",
         "enableDeveloperMode": "Activeer ontwikkelaarsmode",
         "enableSystemNotifications": "Aktiveer stelselkennisgewings",
-        "exportState": "Export staat",
+        "exportTransactionHistory": "Voer transaksiegeskiedenis uit",
         "localProofOfWork": "Local proof of work",
         "unlock": "Ontsluit",
         "updateFirefly": "Update Firefly",
@@ -559,6 +827,7 @@
         "addNode": "Add Node",
         "updateNode": "Dateer node op",
         "removeNode": "Verwyder node",
+        "removeAllNodes": "Verwyder alle nodes",
         "hide": "Versteek",
         "hideOthers": "Versteek Ander",
         "showAll": "Vertoon alles",
@@ -573,6 +842,7 @@
         "addAccount": "Voeg beursie toe",
         "checkForUpdates": "Soek vir opgraderings",
         "reportAnIssue": "Rapporteer 'n probleem",
+        "restore": "Herstel",
         "clear": "Maak skoon",
         "hideDetails": "Versteek besonderhede",
         "yes": "Ja",
@@ -587,12 +857,24 @@
         "viewStatus": "Sien status",
         "showHiddenAccounts": "Wys versteekte beursie",
         "confirm": "Bevestig",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Versteek netwerkstatistieke",
         "findBalances": "Vind balanse",
         "searchBalances": "Soek na balanse",
         "searchAgain": "Soek weer",
         "searching": "Soek tans...",
-        "closeFirefly": "Maak Firefly toe"
+        "closeFirefly": "Maak Firefly toe",
+        "generateAddress": "Genereer nuwe adres",
+        "migrateAgain": "Migreer 'n ander ndeks",
+        "visitWebsite": "Besoek webwerf",
+        "howItWorks": "Hoe dit werk",
+        "learnAboutStaking": "Leer oor staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake fondse",
+        "manageStake": "Bestuur stake",
+        "merge": "Kombineer",
+        "mergeFunds": "Kombineer fondse",
+        "done": "Klaar"
     },
     "general": {
         "password": "Wagwoord",
@@ -607,6 +889,7 @@
         "received": "Ontvang",
         "sendPayment": "Stuur betaling",
         "moveFunds": "Interne oordrag",
+        "sendTo": "Stuur na",
         "sendFunds": "Stuur fondse",
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
@@ -622,9 +905,12 @@
         "from": "Van",
         "to": "Aan",
         "receiveFunds": "Ontvang fondse",
+        "address": "Adres",
         "myAddress": "My adres",
         "shareAddress": "Deel 'n adres",
         "yourAddress": "Jou adres",
+        "newRemainder": "Nuwe oorskiet",
+        "remainder": "Oordrag",
         "generateNewAddress": "Genereer nuwe adres",
         "copyAddress": "Kopieer Adres",
         "import": "Invoer",
@@ -632,8 +918,9 @@
         "stronghold": "Stronghold",
         "language": "Taal",
         "appearance": "Voorkoms",
-        "lightTheme": "Ligte tema",
-        "darkTheme": "Donker tema",
+        "lightTheme": "Ligte",
+        "darkTheme": "Donker",
+        "systemTheme": "Stelsel",
         "balance": "Balans",
         "accountBalance": "Beursie Waarde",
         "incoming": "Inkomende",
@@ -642,11 +929,7 @@
         "totalOut": "Totaak uit",
         "accounts": "Beursies",
         "myAccounts": "My Beursie",
-        "automaticNodeSelection": "Outomatiese node seleksie",
-        "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
-        "developerProfile": "Ontwikkelaarsprofiel",
-        "developerProfileDescription": "Hiermee kan jy verbind met testnets",
         "dev": "Dev",
         "createAccount": "Skep 'n Beursie",
         "accountName": "Beursie naam",
@@ -654,6 +937,7 @@
         "transactions": "Transaksies",
         "security": "Sekuriteit",
         "accountAddress": "Beursie se Adres",
+        "network": "Netwerk",
         "nodes": "Nodes",
         "wallet": "Beursie",
         "help": "Hulp",
@@ -661,6 +945,7 @@
         "messageId": "Message ID",
         "inputAddress": "Stuur adres",
         "receiveAddress": "Ontvangs Adres",
+        "newAddress": "Nuwe Adres",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bevestig",
@@ -672,11 +957,15 @@
         "firstSync": "Gesinkroniseer geskiedenis, dit kan 'n rukkie neem...",
         "transferSyncing": "Sinkroniseer beursie",
         "transferSelectingInputs": "Kies inputs",
-        "transferRemainderAddress": "Genereer oorblyfsel deposito adres",
+        "transferRemainderAddress": "Genereer oorskiet deposito adres",
+        "transferPreparedTransaction": "Voorberei transaksie",
         "transferSigning": "Onderteken die transaksie",
         "transferPow": "Uitvoering van PoW",
         "transferBroadcasting": "Uitsaai van die transaksie",
         "transferComplete": "Oordrag voltooi",
+        "generatingReceiveAddress": "Genereer deposito adres",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Skep tans beursie, wag asseblief...",
         "updatingAccount": "Opdatering van beursie, wag asseblief...",
         "accountSyncing": "Die beursie word tans gesinkroniseer",
@@ -684,6 +973,7 @@
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
+        "syncing": "Sinchroniseer",
         "syncingAccounts": "Sinkroniseer beursie...",
         "exportingStronghold": "Voer Stronghold uit...",
         "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
@@ -704,11 +994,24 @@
         "sendingFrom": "Stuur vanaf {account}",
         "receivedTo": "Ontvangs na {account}",
         "sentFrom": "Stuur vanaf {account}",
+        "stakedFor": "Staked vir {account}",
+        "unstakedFor": "Unstaked vir {account}",
+        "votedFor": "Gestem vir {account}",
+        "unvotedFor": "Ongestem vir {account}",
         "receiving": "Ontvangs",
         "sending": "Besig om te stuur",
         "legacyNetwork": "Erfenisnetwerk",
         "capsLock": "Hoofletterslot is aan",
-        "version": "Weergawe {version}"
+        "version": "Weergawe {version}",
+        "unknown": "Onbekend",
+        "none": "Geen",
+        "staked": "Stake",
+        "unstaked": "Unstake",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Nie staked",
+        "stakedFunds": "Staked fondse",
+        "unstakedFunds": "Unstaked fondse"
     },
     "dates": {
         "today": "Vandag",
@@ -717,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weke}} terug",
         "monthsAgo": "{time, plural, one {# maand} other {# maande}} terug",
         "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
+    },
+    "times": {
+        "second": "{time, plural, one {# sekonde} other {# sekondes}}",
+        "minute": "{time, plural, one {# minuut} other {# minute}}",
+        "hour": "{time, plural, one {# huur} other {# ure}}",
+        "day": "{time, plural, one {# dag} other {# dae}}",
+        "week": "{time, plural, one {# week} other {# weke}}",
+        "month": "{time, plural, one {# maand} other {# maande}}",
+        "year": "{time, plural, one {# jaar} other {# jare}}"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
@@ -729,16 +1041,32 @@
         "updateError": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
         "restartInstall": "Herbegin om te installeer",
         "calcMinutesRemaining": "Bereken oorblywende minute...",
-        "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
+        "minutesRemaining": "{minutes, plural, one {# minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
         "accountsSynchronized": "Beursie sinchronisasie voltooi",
-        "migratedAccountChrysalisDown": "Jou fondse sal na Chrysalis op 28 April beskikbaar wees",
-        "migratedAccountChrysalisUp": "Jou fondse sal binnekort beskikbaar wees"
+        "fundsAvailableSoon": "Jou fondse sal binnekort beskikbaar wees",
+        "exportTransactionHistory": {
+            "success": "Transaksiegeskiedenis vir {accountAlias} is suksesvol gestoor na {filePath}",
+            "error": "Kan nie transaksiegeskiedenis vir {accountAlias} uitvoer nie"
+        },
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Login om die IOTA link te begin",
+            "notEnabled": "IOTA links is nie geaktiveer nie",
+            "invalidFormat": "Die IOTA link wat jy gevolg het, is ongeldig",
+            "wallet": {
+                "send": {
+                    "success": "Betaalbesonderhede bygevoeg vanaf IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
-            "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
-            "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam."
+            "length": "Jou profielnaam mag nie langer as {length, plural, one {# karakter} other {# karakters}} wees nie.",
+            "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam.",
+            "delete": {
+                "nonEmptyAccounts": "Jy moet alle saldo's oordra voordat jy jou profiel kan uitvee."
+            }
         },
         "password": {
             "doNotMatch": "Wagwoorde stem nie ooreen nie.",
@@ -755,25 +1083,28 @@
             "similar": "Hierdie is soortgelyk aan 'n gewone wagwoord.",
             "word": "'N Enkele woord is maklik om te raai.",
             "incorrect": "Jou wagwoord is verkeerd.",
-            "length": "Jou wagwoord mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie."
+            "length": "Jou wagwoord mag nie langer as {length, plural, one {# karakter} other {# karakters}} wees nie."
         },
         "pincode": {
-            "length": "Jou PIN moet wees {length, plural, one {1 syfer} other {# syfers}} lank.",
+            "length": "Jou PIN moet {length, plural, one {# syfer} other {# syfers}} lank wees.",
             "match": "PIN het nie ooreengestem nie.",
             "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Jou beursie naam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Jou beursie naam mag nie langer as {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
             "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
             "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
             "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
             "control": "'N Profielnaam kan nie 'n beheerkarakter bevat nie.",
             "startDot": "'N Profielnaam kan nie begin met die'. ' karakter.",
-            "chars": "'N Profielnaam kan nie die volgende karakters bevat nie <>: \"/ \\ |? *"
+            "chars": "'N Profielnaam kan nie die volgende karakters bevat nie <>: \"/ \\ |? *",
+            "index": "Jou rekeningindeks moet 'n getal tussen 0 en 2,147,483,647 wees.",
+            "page": "Jou rekeningbladsy moet 'n nommer tussen 0 en 2,147,483,647 hê.",
+            "syncing": "Kon nie jou beursies sinchroniseer nie."
         },
         "send": {
-            "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
+            "addressLength": "Adresse moet {length, plural, one {# karakter} other {# karakters}} lank wees.",
             "amountTooHigh": "Dit is groter as jou beskikbare balans.",
             "amountNoFloat": "As eenhede 'i' is, kan jy nie desimale plekke gebruik nie.",
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
@@ -784,14 +1115,30 @@
             "insufficientFunds": "Hierdie beursie het onvoldoende fondse.",
             "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
-            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
+            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie.",
+            "cancelled": "Die transaksie is gekanselleer.",
+            "transaction": "Daar was 'n fout tydens die transaksie. Probeer asseblief weer."
         },
         "node": {
             "invalid": "Sleutel 'n geldige URL in.",
-            "https": "HTTPS word vereis. Stel 'n ontwikkelaarprofiel op om onveilige HTTP-verbindings te gebruik.",
+            "dns": "Kon nie DNS-resolusie vir die node vind nie.",
+            "timedOut": "Die konneksie tyd is verstreke.",
+            "refused": "Die konneksie was geweier.",
+            "handshake": "Kon nie handdruk met node voltooi nie.",
+            "invalidCertificate": "Kon nie met ongeldige sertifikaat die konneksie maak nie.",
+            "https": "HTTPS word vereis; onveilige konneksie oor HTTP is nie tans ondersteun nie.",
             "duplicate": "Hierdie Node is reeds gebruik.",
             "unsynced": "Die node is nie gesinkroniseer nie.",
-            "noSynced": "Geen gesinkroniseerde node is beskikbaar nie."
+            "noSynced": "Geen gesinkroniseerde node is beskikbaar nie.",
+            "answer": "Kon nie 'n antwoord van alle nodes kry nie.",
+            "forbidden": "Hierdie nodusverbinding is verbode.",
+            "pluginNotAvailable": "Die \"{nodePlugin}\" plugin is nie op die huidige node beskikbaar nie."
+        },
+        "network": {
+            "mismatch": "Die netwerk-ID vir hierdie node is \"{networkId}\", wat nie ooreenstem met die huidige netwerk nie.",
+            "notReachable": "Die netwerk-ID vir hierdie node kon nie herwin word nie, dus kan nie node byvoeg nie.",
+            "badNodes": "Kan nie aan die netwerk koppel met huidige node opstelling nie.",
+            "nonEmptyAccount": "Jy moet alle saldo's oordra voordat jy die netwerk kan verander."
         },
         "global": {
             "generic": "Iets het skeefgeloop."
@@ -800,11 +1147,48 @@
             "invalid": "Die back-up is nie herken nie.",
             "destination": "Die back-up was nie geldig nie.",
             "mnemonic": "Die mnemoniese is nie geldig nie.",
-            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
-            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {#} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
+        },
+        "ledger": {
+            "appNotOpen": "Jy moet die IOTA app oop maak op jou Ledger.",
+            "generic": "Kon nie aan jou Ledger -toestel koppel nie.",
+            "legacyConnected": "Die verkeerde app is oop op Ledger toestel.",
+            "locked": "Ontsluit jou Ledger toestel deur die PIN in te voer.",
+            "mnemonicMismatch": "Jy het die verkeerde Ledger toestel gekoppel of die geheueverandering het verander.",
+            "notDetected": "Geen Ledger toestel bespeur nie.",
+            "notFound": "Ledger toestel nie gevind nie.",
+            "otherConnected": "Die verkeerde app is oop op Ledger toestel.",
+            "generateAddress": "Kon nie 'n adres genereer nie.",
+            "timeout": "Jou Ledger toestel timed out.",
+            "disconnected": "Jou Ledger toestel is ontkoppel.",
+            "noStronghold": "Kan nie Stronghold met Ledger profiel gebruik nie."
+        },
+        "popup": {
+            "preventClose": "Hierdie popup kan nie togemaak word nie."
+        },
+        "migration": {
+            "missingBundle": "'N Fout het voorgekom tydens die poging om die transaksiebundel te vind."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Kan nie string as Bech32-adres dekodeer nie."
+        },
+        "participation": {
+            "cannotUseAccount": "Kan nie die gespesifiseerde rekening gebruik nie.",
+            "cannotFindStakingEvent": "Kan nie staking event vind nie.",
+            "cannotVisitAirdropWebsite": "Kan nie die {airdrop} webwerf oopmaak nie.",
+            "invalidStakingEventId": "Ongeldige staking event ID."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Die gebruik van node oor HTTP laat verkeer ongeënkripteer wees en kan 'n sekuriteitsrisiko inhou."
+        },
+        "participation": {
+            "noAccounts": "Jy hey geen IOTA nie."
         }
     },
     "tooltips": {
@@ -815,6 +1199,65 @@
             "medium": "Gemiddeld",
             "low": "Laag",
             "veryLow": "Baie laag"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking het nog nie begin nie",
+                "body": "Kom kyk later weer. Die staking geleentheid het nie begin nie."
+            },
+            "commencing": {
+                "title": "Pre-staking is nou oop",
+                "body": "Pre-stake tokens vooraf in, en sodra die staking begin, sal jy outomaties elke 10 sekondes belonings begin ontvang."
+            },
+            "activeHolding": {
+                "title": "Staking aan die gang",
+                "body": "Goeie werk. Jy sal elke 10 sekondes belonings ontvang."
+            },
+            "inactiveHolding": {
+                "title": "Staking het geëindig",
+                "body": "Stake jou IOTA-tokens om elke 10 sekondes belonings te ontvang."
+            },
+            "inactive": {
+                "title": "Geen staking gebeurtenisse bespeur nie",
+                "body": "Maak netwerkkonfigurasie in Gevorderde instellings oop en maak seker dat die huidige node die \"Participation\"-funksie het deur op \"Bekyk inligting\" te klik."
+            },
+            "ended": {
+                "title": "Staking het geëindig",
+                "bodyAboveRewardMin": "Assembly en Shimmer belonings sal aan jou beursies uitgedeel word wanneer elk van die onderskeie netwerke begin.",
+                "bodyBelowRewardMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik nie."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nuwe unstaked fondse:{amount}",
+            "titleNoFunds": "Nuwe unstaked fondse",
+            "preBody": "Jy het tokens op 'n staked beursie ontvang.",
+            "body": "Jy moet hierdie nuwe fondse met weer Stake om airdrop belonings daarvoor te ontvang."
+        },
+        "stakingMinRewards": {
+            "title": "Onder minimum beloningswaarde",
+            "titleMinBalance": "{amount} minimum balans benodig",
+            "bodyMinBalance": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum beloning te bereik nie en kan dus nie ge stake word nie.",
+            "continue": "Gaan asseblief voort om vir 'n nog {duration} te stake.",
+            "bodyBelowMin": "Hierdie beursie het nie die minimum beloningswaarde bereik vir {airdrop} nie. ({airdropRewardMin}).",
+            "bodyWillReachMin": "Jy moet nog vir {duration} stake om die minimum te bereik.",
+            "bodyWillNotReachMin": "Jy sal nie die minimum bereik gedurende die oorblywende staking periode nie, tensy jy meer IOTA insit.",
+            "bodyDidNotReachMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik vir {airdrop} nie ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Hierdie beursie het nie genoeg IOTA-tokens om die minimum beloning te bereik vir {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Interne",
+            "rawValue": "Rou waarde",
+            "formattedValue": "Geformateerde waarde",
+            "date": "Datum",
+            "time": "Tyd"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Jy gebruik tans 'n ontwikkelaarprofiel en is gekoppel aan {networkName}"
         }
     }
 }

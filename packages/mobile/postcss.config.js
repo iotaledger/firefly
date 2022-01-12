@@ -1,4 +1,4 @@
 // TODO purge
 module.exports = {
-    plugins: [require('tailwindcss')('./../shared/tailwind.config.js')]
+    plugins: [require('tailwindcss')('./../shared/tailwind.config.js')],
 }

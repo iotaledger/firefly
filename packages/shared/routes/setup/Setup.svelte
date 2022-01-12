@@ -3,8 +3,10 @@
     import { Electron } from 'shared/lib/electron'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()

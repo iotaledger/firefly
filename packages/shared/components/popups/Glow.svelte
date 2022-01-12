@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { wallet, api } from 'shared/lib/wallet'
     import { Button, Checkbox, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
-    import { isStrongholdLocked } from 'shared/lib/profile'
     import { randomEmojis } from 'shared/lib/emojiList'
-    import { activeProfile } from 'shared/lib/profile'
+    import { closePopup } from 'shared/lib/popup'
+    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { wallet, api } from 'shared/lib/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     const { accounts } = $wallet
 
@@ -12,18 +12,18 @@
 
     let emojis = ''
 
+    let hasTimePassed = false
+    let accountsToLink: WalletAccount[] = []
+
     $: accountsDropdownItems = $accounts.map((acc) => acc)
-    $: accountsToLink = []
 
     function handleAccountClick(acc) {
-        if(accountsToLink.findIndex(a=>a.id===acc.id) > -1) {
-            accountsToLink = accountsToLink.filter(a=> a.id!==acc.id)
+        if(accountsToLink.findIndex(a => a.id===acc.id) > -1) {
+            accountsToLink = accountsToLink.filter(a => a.id!==acc.id)
         } else {
             accountsToLink = [...accountsToLink, acc]
         }
     }
-
-    $: timeHasPassed = false
 
     function startLink() {
         emojis = randomEmojis(4)
@@ -39,18 +39,20 @@
                     name: ap.name,
                 })
             }, {
-                onSuccess: r=> console.log("SUCCESS1!", r),
-                onError: r=> console.log("ONERROR", r)
+                /* eslint-disable no-console */
+                onSuccess: r => console.log('SUCCESS1!', r),
+                /* eslint-disable no-console */
+                onError: r => console.log('ONERROR', r)
             })
-            setTimeout(()=>{
-                timeHasPassed = true
+            setTimeout(() => {
+                hasTimePassed = true
             }, 2500)
         } else {
             api.callGlow({
                 method:'Stop'
             }, {
-                onSuccess: r=> glowInitted=false,
-                onError: r=> {}
+                onSuccess: r => glowInitted=false,
+                onError: r => {}
             })
         }
     }
@@ -60,8 +62,9 @@
             method:'Initialize',
             payload: ''
         }, {
-            onSuccess: r=> closePopup(),
-            onError: r=> console.log("ONERROR", r)
+            onSuccess: r => closePopup(),
+            /* eslint-disable no-console */
+            onError: r => console.log('ONERROR', r)
         })
     }
 
@@ -75,18 +78,18 @@
             <Text>Choose which accounts you want to connect to Glow</Text>
         </div>
     {/if}
-    <div class={"overflow-y-auto max-h-80"}>
-        <div class={"flex flex-col justify-center align-center items-center"}>
+    <div class={'overflow-y-auto max-h-80'}>
+        <div class={'flex flex-col justify-center align-center items-center'}>
             {#each accountsDropdownItems as acc}
                 <button type="button"
-                    on:click={()=> handleAccountClick(acc)}
+                    on:click={() => handleAccountClick(acc)}
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 focus:hover:border-gray-700"
                     style="height: 64px">
                     <div class="flex flex-row items-center justify-between w-full pr-5">
                         <Text smaller classes="ml-3">{acc.alias}</Text>
                         <Text smaller classes="ml-3">{acc.balance}</Text>
                     </div>
-                    <Checkbox checked={accountsToLink.findIndex(a=>a.id===acc.id) > -1} classes="mb-0 pointer-events-none" tabindex={-1} />
+                    <Checkbox checked={accountsToLink.findIndex(a => a.id===acc.id) > -1} classes="mb-0 pointer-events-none" tabindex={-1} />
                 </button>
             {/each}
         </div>
@@ -110,7 +113,7 @@
     </div>
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" onClick={finishLink} disabled={!accountsToLink.length || !timeHasPassed}>
+        <Button classes="w-1/2" onClick={finishLink} disabled={!accountsToLink.length || !hasTimePassed}>
             {'They Match! Link Now'}
         </Button>
     </div>

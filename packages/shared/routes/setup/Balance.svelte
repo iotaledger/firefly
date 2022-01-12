@@ -1,16 +1,19 @@
 <script lang="typescript">
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
+    import { Electron } from 'shared/lib/electron'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
+        ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
+        getLedgerMigrationData,
         getMigrationData,
+        hardwareIndexes,
         hasAnySpentAddressWithNoBundleHashes,
         hasLowBalanceOnAllSpentAddresses,
         migration,
@@ -20,14 +23,20 @@
         unselectedInputs,
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     let isCheckingForBalance
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 
@@ -56,11 +65,13 @@
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
 
+    // TODO: add missing unsubscribe to onDestroy
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
         error = getError(_data.balance)
     })
 
+    // TODO: add missing unsubscribe to onDestroy
     unselectedInputs.subscribe(() => {
         error = getError(_data.balance)
     })
@@ -77,7 +88,7 @@
         if (_balance === 0) {
             return {
                 allowToProceed: false,
-                text: locale('views.balance.zeroBalance'),
+                text: locale(`views.balance.${legacyLedger ? 'zeroBalanceLedgerLegacy' : 'zeroBalance'}`),
             }
         }
 
@@ -157,14 +168,35 @@
 
     function checkAgain() {
         isCheckingForBalance = true
-        getMigrationData($seed, $data.lastCheckedAddressIndex)
-            .then(() => {
-                isCheckingForBalance = false
-            })
-            .catch((error) => {
-                isCheckingForBalance = false
-                console.error(error)
-            })
+        if (legacyLedger) {
+            // TODO: add ledger legacy popup when PR merged
+            const _onConnected = () => {
+                Electron.ledger
+                    .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+                    .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
+                    .then(() => {
+                        isCheckingForBalance = false
+                    })
+                    .catch((error) => {
+                        isCheckingForBalance = false
+
+                        console.error(error)
+
+                        displayNotificationForLedgerProfile('error', true, true, false, true, error)
+                    })
+            }
+            const _onCancel = () => (isCheckingForBalance = false)
+            promptUserToConnectLedger(true, _onConnected, _onCancel)
+        } else {
+            getMigrationData($seed, $data.lastCheckedAddressIndex)
+                .then(() => {
+                    isCheckingForBalance = false
+                })
+                .catch((error) => {
+                    isCheckingForBalance = false
+                    console.error(error)
+                })
+        }
     }
 
     onDestroy(unsubscribe)
@@ -173,7 +205,12 @@
 {#if mobile}
     <div>not yet implemented</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout
+        busy={isCheckingForBalance}
+        onBackClick={handleBackClick}
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>

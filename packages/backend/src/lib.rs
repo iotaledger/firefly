@@ -1,40 +1,47 @@
 mod actors;
-
 #[cfg(any(feature = "extension"))]
 mod extension;
 
-use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
+use actors::{WalletActor, WalletActorMsg, WalletMessage};
 
-use iota_client::common::logger::logger_init;
-pub use iota_client::common::logger::LoggerConfigBuilder;
+use bee_common::logger::logger_init;
+pub use bee_common::logger::LoggerConfigBuilder;
 use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
+    actor::{MessageType, Response, ResponseType},
     client::drop_all as drop_clients,
     event::{
-        on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change,
-        on_transfer_progress, remove_balance_change_listener, remove_broadcast_listener,
-        remove_confirmation_state_change_listener, remove_error_listener,
-        remove_migration_progress_listener, remove_new_transaction_listener,
-        remove_reattachment_listener, remove_stronghold_status_change_listener,
+        on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_ledger_address_generation,
+        on_migration_progress, on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
+        remove_balance_change_listener, remove_broadcast_listener, remove_confirmation_state_change_listener,
+        remove_error_listener, remove_ledger_address_generation_listener, remove_migration_progress_listener,
+        remove_new_transaction_listener, remove_reattachment_listener, remove_stronghold_status_change_listener,
         remove_transfer_progress_listener, EventId,
     },
 };
 use once_cell::sync::Lazy;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
-use tokio::sync::Mutex as AsyncMutex;
+use tokio::{
+    runtime::Runtime,
+    sync::{
+        mpsc::{unbounded_channel, UnboundedReceiver},
+        Mutex as AsyncMutex,
+    },
+};
 
-use std::collections::HashMap;
-use std::convert::TryFrom;
-use std::path::{Path, PathBuf};
-use std::sync::{Arc, Mutex};
-use std::time::Duration;
+use std::{
+    collections::HashMap,
+    convert::TryFrom,
+    path::{Path, PathBuf},
+    sync::{mpsc::Sender, Arc, Mutex},
+    time::Duration,
+};
 
 #[cfg(any(feature = "extension"))]
-use extension::{extension_dispatch, ExtensionActor, ExtensionActorMsg, send_event_to_extension, check_extension_dispatch};
-
-const POLLING_INTERVAL_MS: u64 = 30_000;
+use extension::{
+    check_extension_dispatch, extension_dispatch, send_event_to_extension, ExtensionActor, ExtensionActorMsg,
+};
 
 struct WalletActorData {
     listeners: Vec<(EventId, EventType)>,
@@ -42,11 +49,13 @@ struct WalletActorData {
 }
 
 type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
-type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
+type MessageReceiver = Arc<Mutex<Sender<String>>>;
 type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
 #[cfg(any(feature = "extension"))]
 type ExtensionActors = Arc<AsyncMutex<HashMap<String, ActorRef<ExtensionActorMsg>>>>;
+
+pub static RUNTIME: Lazy<Runtime> = Lazy::new(|| Runtime::new().unwrap());
 
 fn wallet_actors() -> &'static WalletActors {
     static ACTORS: Lazy<WalletActors> = Lazy::new(Default::default);
@@ -64,6 +73,15 @@ fn extension_actors() -> &'static ExtensionActors {
     &EXTENSION_ACTORS
 }
 
+#[derive(Deserialize, Clone)]
+pub(crate) struct DispatchMessage {
+    #[serde(rename = "actorId")]
+    pub(crate) actor_id: String,
+    pub(crate) id: String,
+    #[serde(flatten)]
+    pub(crate) message: MessageType,
+}
+
 #[derive(Serialize, Deserialize, Copy, Clone)]
 #[repr(C)]
 pub enum EventType {
@@ -75,6 +93,7 @@ pub enum EventType {
     Broadcast,
     StrongholdStatusChange,
     TransferProgress,
+    LedgerAddressGeneration,
     MigrationProgress,
 }
 
@@ -91,6 +110,7 @@ impl TryFrom<&str> for EventType {
             "Broadcast" => EventType::Broadcast,
             "StrongholdStatusChange" => EventType::StrongholdStatusChange,
             "TransferProgress" => EventType::TransferProgress,
+            "LedgerAddressGeneration" => EventType::LedgerAddressGeneration,
             "MigrationProgress" => EventType::MigrationProgress,
             _ => return Err(format!("invalid event name {}", value)),
         };
@@ -98,13 +118,12 @@ impl TryFrom<&str> for EventType {
     }
 }
 
-pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
+pub async fn init<A: Into<String>>(
     actor_id: A,
-    message_receiver: F,
     storage_path: Option<impl AsRef<Path>>,
+    message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
     let actor_id = actor_id.into();
-
     let mut actors = wallet_actors().lock().await;
 
     #[cfg(any(feature = "extension"))]
@@ -118,8 +137,8 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
             },
             None,
         )
-        .unwrap() //safe to unwrap, the storage password is None ^
-        .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .expect("safe to unwrap, the storage password is None")
+        .with_skip_polling()
         .with_sync_spent_outputs()
         .finish()
         .await
@@ -128,7 +147,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     iota_wallet::with_actor_system(|sys| {
         let wallet_actor = sys
             .actor_of_args::<WalletActor, _>(&actor_id, manager)
-            .unwrap();
+            .expect("Failed to create wallet_actor");
 
         actors.insert(
             actor_id.to_string(),
@@ -140,18 +159,19 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
 
         #[cfg(any(feature = "extension"))]
         {
-            let extension_actor_name = "extenstion-actor-".to_string() + actor_id.as_str();
-            let extension_actor = sys.actor_of_args::<ExtensionActor, _>(extension_actor_name.as_str(), actor_id.clone()).unwrap();
-            extension_actors.insert(
-                actor_id.clone(),
-                extension_actor
-            );
+            let extension_actor_id = "extenstion-actor-".to_string() + actor_id.as_str();
+            let extension_actor = sys
+                .actor_of_args::<ExtensionActor, _>(extension_actor_id.as_str(), actor_id.clone())
+                .expect("Failed to create extension_actor");
+
+            extension_actors.insert(extension_actor_name.clone(), extension_actor);
         }
 
         let mut message_receivers = message_receivers()
             .lock()
             .expect("Failed to lock message_receivers: init()");
-        message_receivers.insert(actor_id, Box::new(message_receiver));
+
+        message_receivers.insert(actor_id, message_receiver);
     })
     .await;
 }
@@ -166,20 +186,17 @@ pub async fn remove_event_listeners<A: Into<String>>(actor_id: A) {
 
 async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
     for (event_id, event_type) in listeners.iter() {
-        match event_type {
-            &EventType::ErrorThrown => remove_error_listener(event_id),
-            &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
-            &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
-            &EventType::ConfirmationStateChange => {
-                remove_confirmation_state_change_listener(event_id).await
-            }
-            &EventType::Reattachment => remove_reattachment_listener(event_id).await,
-            &EventType::Broadcast => remove_broadcast_listener(event_id).await,
-            &EventType::StrongholdStatusChange => {
-                remove_stronghold_status_change_listener(event_id).await
-            }
-            &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
-            &EventType::MigrationProgress => remove_migration_progress_listener(event_id).await,
+        match *event_type {
+            EventType::ErrorThrown => remove_error_listener(event_id),
+            EventType::BalanceChange => remove_balance_change_listener(event_id).await,
+            EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
+            EventType::ConfirmationStateChange => remove_confirmation_state_change_listener(event_id).await,
+            EventType::Reattachment => remove_reattachment_listener(event_id).await,
+            EventType::Broadcast => remove_broadcast_listener(event_id).await,
+            EventType::StrongholdStatusChange => remove_stronghold_status_change_listener(event_id).await,
+            EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
+            EventType::LedgerAddressGeneration => remove_ledger_address_generation_listener(event_id).await,
+            EventType::MigrationProgress => remove_migration_progress_listener(event_id).await,
         };
     }
 }
@@ -231,6 +248,22 @@ pub(crate) struct MessageFallback {
     pub(crate) id: Option<String>,
 }
 
+async fn dispatch(message: DispatchMessage, mut response_rx: UnboundedReceiver<Response>) {
+    let response = response_rx.recv().await;
+    if let Some(res) = response {
+        let msg = match serde_json::to_string(&res) {
+            Ok(msg) => msg,
+            Err(e) => serde_json::to_string(&Response::new(
+                message.id,
+                message.message,
+                ResponseType::Error(e.into()),
+            ))
+            .expect("The response is generated manually, so unwrap is safe."),
+        };
+        respond(&message.actor_id, msg).expect("actor dropped");
+    }
+}
+
 pub async fn send_message(serialized_message: String) {
     println!("SEND MESSAGE {:?}", serialized_message);
     let data = match serde_json::from_str::<DispatchMessage>(&serialized_message) {
@@ -239,22 +272,27 @@ pub async fn send_message(serialized_message: String) {
 
             let actor_id = message.actor_id.to_string();
             if let Some(actor) = actors.get(&actor_id) {
-                match dispatch(&actor.actor, message).await {
-                    Ok(response) => Some((response, actor_id)),
-                    Err(e) => Some((Some(e), actor_id)),
-                }
+                let (response_tx, response_rx) = unbounded_channel();
+                actor.actor.tell(
+                    WalletMessage::new(message.id.clone(), message.message.clone(), response_tx),
+                    None,
+                );
+
+                RUNTIME.spawn(async move {
+                    dispatch(message.clone(), response_rx).await;
+                });
+                None
             } else {
                 Some((
-                    Some(format!(
+                    format!(
                         r#"{{ "type": "ActorNotInitialised", "payload": "{}" }}"#,
                         message.actor_id
-                    )),
+                    ),
                     message.actor_id,
                 ))
             }
         }
         Err(error) => {
-
             // check extension and finally fallback
             #[cfg(any(feature = "extension"))]
             {
@@ -267,15 +305,15 @@ pub async fn send_message(serialized_message: String) {
             {
                 if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
                     Some((
-                        Some(format!(
+                        format!(
                             r#"{{
                                 "type": "Error",
                                 "id": {},
-                                "payload": {{ 
+                                "payload": {{
                                     "type": "InvalidMessage",
                                     "message": {},
                                     "error": {}
-                                }}
+                                 }}
                             }}"#,
                             match message.id {
                                 Some(id) => serde_json::Value::String(id),
@@ -283,7 +321,7 @@ pub async fn send_message(serialized_message: String) {
                             },
                             serialized_message,
                             serde_json::Value::String(error.to_string()),
-                        )),
+                        ),
                         message.actor_id,
                     ))
                 } else {
@@ -295,15 +333,8 @@ pub async fn send_message(serialized_message: String) {
     };
 
     if let Some((message, actor_id)) = data {
-        if let Some(message) = message {
-            println!("RESPONSE {:?}", message);
-            respond(&actor_id, message).expect("actor dropped");
-        } else {
-            log::error!(
-                "[FIREFLY] unexpected empty response for message `{}`, the channel was dropped",
-                serialized_message
-            );
-        }
+        println!("RESPONSE {:?}", message);
+        respond(&actor_id, message).expect("actor dropped");
     }
 }
 
@@ -334,8 +365,11 @@ fn respond<A: AsRef<str>>(actor_id: A, message: String) -> Result<(), String> {
         .lock()
         .expect("Failed to lock message_receivers: respond()");
 
-    if let Some(callback) = message_receivers.get(actor_id.as_ref()) {
-        callback(message);
+    if let Some(message_receiver) = message_receivers.get(actor_id.as_ref()) {
+        let _ = message_receiver
+            .lock()
+            .expect("message_receiver mutex failed to lock.")
+            .send(message);
         Ok(())
     } else {
         Err("message receiver dropped".to_string())
@@ -347,10 +381,9 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
     let actor_id = actor_id.into();
 
     let actor_id_ = actor_id.clone();
-    let event_type_ = event_type.clone();
+    let event_type_ = event_type;
 
     // let ext_actors = extension_actors().lock().await;
-    // let actor_id = actor_id.to_string();
 
     let event_id = match event_type {
         EventType::ErrorThrown => on_error(move |error| {
@@ -363,8 +396,8 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
                 // println!("OK TRY TO GET HE ACTOR");
                 // if let Some(extension_actor) = ext_actors.get(&actor_id) {
                 //     println!("GOT THE ACTOR");
-                //     let _ = send_event_to_extension(&extension_actor, serialize_event(id.clone(), event_type, &event));
-                // }
+                //     let _ = send_event_to_extension(&extension_actor, serialize_event(id.clone(), event_type,
+                // &event)); }
             })
             .await
         }
@@ -404,6 +437,12 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
             })
             .await
         }
+        EventType::LedgerAddressGeneration => {
+            on_ledger_address_generation(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
         EventType::MigrationProgress => {
             on_migration_progress(move |event| {
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
@@ -420,9 +459,11 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
 #[cfg(test)]
 mod tests {
     use iota_wallet::actor::{MessageType, Response, ResponseType};
-    use std::path::PathBuf;
-    use std::sync::{mpsc::channel, Mutex};
-    use std::time::Duration;
+    use std::{
+        path::PathBuf,
+        sync::{mpsc::channel, Mutex},
+        time::Duration,
+    };
     use tokio::runtime::Runtime;
 
     #[test]
@@ -463,10 +504,7 @@ mod tests {
             if let Ok(message) = rx.recv_timeout(Duration::from_secs(1)) {
                 let value: serde_json::Value = serde_json::from_str(&message).unwrap();
                 let json = value.as_object().unwrap();
-                assert_eq!(
-                    json.get("type"),
-                    Some(&serde_json::Value::String("Error".to_string()))
-                );
+                assert_eq!(json.get("type"), Some(&serde_json::Value::String("Error".to_string())));
                 let payload = json.get("payload").unwrap().as_object().unwrap();
                 assert_eq!(
                     payload.get("type"),
@@ -520,8 +558,7 @@ mod tests {
     }
 
     use futures::{Future, FutureExt};
-    use std::any::Any;
-    use std::panic::AssertUnwindSafe;
+    use std::{any::Any, panic::AssertUnwindSafe};
 
     fn panic_message(panic: Box<dyn Any>) -> String {
         if let Some(message) = panic.downcast_ref::<String>() {

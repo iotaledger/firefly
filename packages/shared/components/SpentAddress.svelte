@@ -1,10 +1,8 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import {
-        AvailableExchangeRates,
         convertToFiat,
         currencies,
-        CurrencyTypes,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
@@ -13,51 +11,33 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale
+    export let locale: Locale
+
     export let address = ''
     export let balance = 0
     export let selected = false
     export let risk = undefined
     export let showRiskLevel = false
-    export let onClick = () => {}
 
-    let showErrorTooltip = false
-    let showRiskTooltip = false
-    let errorBox
-    let riskBox
-    let parentTop,
-        parentLeft,
-        parentWidth = 0
+    export let onClick = (): void => {}
 
-    enum TooltipType {
-        Risk,
-        Error,
-    }
+    let showTooltip = false
+    let tooltipAnchor
 
     let riskColor = 'gray'
     let localeRiskLevel = ''
     let riskBars = 0
 
-    let fiatBalance = formatCurrency(
+    const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
         AvailableExchangeRates.USD
     )
 
-    function toggleTooltip(type: TooltipType) {
-        if (risk) {
-            if (type === TooltipType.Risk) {
-                showRiskTooltip = !showRiskTooltip
-                parentWidth = riskBox.offsetWidth / 2
-                parentLeft = riskBox.getBoundingClientRect().left
-                parentTop = riskBox.getBoundingClientRect().top
-            } else if (type === TooltipType.Error) {
-                showErrorTooltip = !showErrorTooltip
-                parentWidth = errorBox.offsetWidth / 2
-                parentLeft = errorBox.getBoundingClientRect().left
-                parentTop = errorBox.getBoundingClientRect().top
-            }
-        }
+    function toggleTooltip(): void {
+        showTooltip = !showTooltip
     }
 
     onMount(() => {
@@ -132,18 +112,21 @@
         </div>
         {#if showRiskLevel}
             <risk-meter
-                bind:this={riskBox}
-                on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
-                on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
-                class="flex flex-row items-center space-x-0.5">
-                <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
-                {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
-                    <span
-                        class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
-                {/each}
+                on:mouseenter={toggleTooltip}
+                on:mouseleave={toggleTooltip}
+                class="flex flex-row items-center">
+                <div bind:this={tooltipAnchor}>
+                    <Icon icon="info" classes="text-gray-800 dark:text-white" width={20} height={20} />
+                </div>
+                <div class="ml-2 flex flex-row items-center space-x-0.5">
+                    {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
+                        <span
+                            class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
+                    {/each}
+                </div>
             </risk-meter>
-            {#if showRiskTooltip && risk}
-                <Tooltip {parentTop} {parentLeft} {parentWidth}>
+            {#if showTooltip && risk}
+                <Tooltip anchor={tooltipAnchor}>
                     <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>
                 </Tooltip>
             {/if}

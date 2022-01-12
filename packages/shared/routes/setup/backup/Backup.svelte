@@ -9,8 +9,10 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     enum BackupState {
@@ -28,7 +30,7 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
+        const params = event.detail || {}
 
         switch (state) {
             case BackupState.Init:
@@ -94,7 +96,7 @@
     }
 
     const _previous = () => {
-        let prevState = stateHistory.pop()
+        const prevState = stateHistory.pop()
         if (prevState) {
             state = prevState
         } else {

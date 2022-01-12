@@ -1,17 +1,23 @@
 <script lang="typescript">
     import { icons } from './icons'
+
     export let icon = undefined
     export let width = undefined
     export let height = undefined
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
+
     $: selected = icons[icon]
 </script>
 
 <style type="text/scss">
     .boxed {
         border-radius: 0.625rem; // TODO: add to tailwind
+    } 
+    /* Hotfix to avoid the SVG slow transition */
+    svg, svg path {
+        transition: background 0.05s, color 0.05s, border-color 0.05s, opacity 0.05s;
     }
 </style>
 
@@ -36,7 +42,7 @@
                         clip-rule={path.clipRule || ''}
                         stroke-width={path.strokeWidth || ''}
                         stroke-linecap={path.strokeLinecap || ''}
-                        stroke={path.strokeColor || ''}
+                        stroke={path.strokeColor || 'white-100'}
                         opacity={path.opacity || 1}
                         fill={path.fill || ''} />
                 {/each}

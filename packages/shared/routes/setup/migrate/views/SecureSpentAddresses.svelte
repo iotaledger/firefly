@@ -3,19 +3,26 @@
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { walletSetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
+
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    let addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
+    const addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
+
     function onAddressClick(address) {
-        var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
+        const index = selectedAddresses.findIndex((_address) => _address.id === address.id)
         if (index === -1) {
             selectedAddresses.push(address)
         } else {
@@ -65,7 +72,11 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout
+        onBackClick={handleBackClick}
+        {locale}
+        showLedgerProgress={legacyLedger}
+        showLedgerVideoButton={legacyLedger}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
             <Text type="p mb-4" secondary>
@@ -88,7 +99,7 @@
             <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="migrate-desktop" />
+            <Animation {animation} />
         </div>
     </OnboardingLayout>
 {/if}

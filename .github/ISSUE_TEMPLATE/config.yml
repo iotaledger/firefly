@@ -1,11 +1,17 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Discord
-    url: https://discord.iota.org/
-    about: Please ask and answer questions here.
-  - name: Translation issues
-    url: https://crowdin.com/project/iota-firefly
-    about: Issues with translations can be resolved on Crowdin.
-  - name: Security vulnerabilities
-    url: security@iota.org
-    about: Please report security vulnerabilities here.
+    - name: Need help?
+      url: https://github.com/iotaledger/firefly/discussions/categories/help-support
+      about: Ask the community for help or support
+    - name: Request a feature
+      url: https://github.com/iotaledger/firefly/discussions/categories/feature-and-enhancements
+      about: Propose a feature or enhancement in GitHub discussions
+    - name: General feedback
+      url: https://github.com/iotaledger/firefly/discussions/categories/feedback
+      about: Leave us some feedback
+    - name: Translation issues
+      url: https://crowdin.com/project/iota-firefly
+      about: Issues with translations can be resolved on Crowdin
+    - name: Join our Discord
+      url: https://discord.iota.org/
+      about: Chat with the devs and the IF community

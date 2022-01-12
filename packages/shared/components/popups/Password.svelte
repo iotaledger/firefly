@@ -2,14 +2,16 @@
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
-    export let onSuccess
-    export let onError
-    export let onCancelled
     export let subtitle
     export let returnPassword = false
+
+    export let onSuccess = (..._: any[]): void => {}
+    export let onError = (..._: any[]): void => {}
+    export let onCancelled = (..._: any[]): void => {}
 
     let password
     let error = ''

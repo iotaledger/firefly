@@ -3,16 +3,21 @@
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { ManageAccount, Receive, Send } from '.'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let locale
-    export let send
-    export let generateAddress
-    export let internalTransfer
+    export let locale: Locale
+
+    export let onSend = (..._: any[]): void => {}
+    export let onGenerateAddress = (..._: any[]): void => {}
+    export let onInternalTransfer = (..._: any[]): void => {}
+
     export let isGeneratingAddress
+
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
@@ -32,13 +37,13 @@
                         {locale('general.sendFunds')}
                         <Text type="p" smaller secondary>{locale('general.sendTokensToAddress')}</Text>
                     </Button>
-                    <Receive {isGeneratingAddress} {generateAddress} {locale} />
+                    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
                 {/if}
             </div>
         </div>
     </div>
 {:else if $accountRoute === AccountRoutes.Send}
-    <Send {send} {internalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
     <ManageAccount {locale} alias={$account.alias} />
 {/if}

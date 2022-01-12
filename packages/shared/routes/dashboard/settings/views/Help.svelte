@@ -1,15 +1,16 @@
 <script lang="typescript">
     import { Electron } from 'shared/lib/electron'
     import { Button, HR, Text } from 'shared/components'
+    import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale
+    export let locale: Locale
 
     // const handleTroubleshootClick = () => {
     //     Electron.openUrl('https://iota.org')
     // }
 
     const handleDocumentationClick = () => {
-        Electron.openUrl('https://chrysalis.docs.iota.org/')
+        Electron.openUrl('https://wiki.iota.org/learn/wallets/firefly/general')
     }
 
     const handleFaqClick = () => {

@@ -1,22 +1,14 @@
 use neon::prelude::*;
-use once_cell::sync::OnceCell;
 use std::convert::TryInto;
 use std::sync::{
     mpsc::{channel, Receiver},
     Arc, Mutex,
 };
-use tokio::runtime::Runtime;
 use wallet_actor_system::{
-    destroy as destroy_actor, remove_event_listeners as remove_actor_event_listeners, init as init_actor, init_logger as init_backend_logger,
-    listen as add_event_listener, send_message as send_actor_message, EventType,
-    LoggerConfigBuilder,
+    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
+    listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,
+    send_message as send_actor_message, EventType, LoggerConfigBuilder, RUNTIME,
 };
-
-pub(crate) fn block_on<C: futures::Future>(cb: C) -> C::Output {
-    static INSTANCE: OnceCell<Mutex<Runtime>> = OnceCell::new();
-    let runtime = INSTANCE.get_or_init(|| Mutex::new(Runtime::new().unwrap()));
-    runtime.lock().unwrap().block_on(cb)
-}
 
 struct SendMessageTask {
     message: String,
@@ -27,8 +19,11 @@ impl Task for SendMessageTask {
     type Error = ();
     type JsEvent = JsUndefined;
     fn perform(&self) -> Result<Self::Output, Self::Error> {
-        let message = &self.message;
-        block_on(send_actor_message(message.to_string()));
+        let message = self.message.clone();
+        RUNTIME.spawn(async move {
+            send_actor_message(message.to_string()).await;
+        });
+
         Ok(())
     }
 
@@ -53,6 +48,7 @@ impl Task for ReceiveMessageTask {
             .0
             .lock()
             .map_err(|_| "Could not obtain lock on receiver".to_string())?;
+
         rx.recv().map_err(|e| e.to_string())
     }
 
@@ -78,6 +74,7 @@ declare_types! {
         // Called by the `JsActorSystem` constructor
         init(mut cx) {
             let actor_id = cx.argument::<JsString>(0)?.value();
+            let clone_actor_id = actor_id.clone();
             let storage_path = match cx.argument_opt(1) {
                 Some(arg) => {
                     Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
@@ -87,10 +84,9 @@ declare_types! {
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            block_on(init_actor(actor_id.to_string(), move |event| {
-                let tx = wrapped_tx.lock().unwrap();
-                let _ = tx.send(event);
-            }, storage_path));
+            RUNTIME.block_on(async move {
+                init_actor(clone_actor_id.to_string(), storage_path, wrapped_tx).await;
+            });
 
             Ok(ActorSystem {
                 actor_id,
@@ -101,14 +97,22 @@ declare_types! {
         method destroy(mut cx) {
             let this = cx.this();
             let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
-            block_on(destroy_actor(actor_id));
+
+            RUNTIME.spawn(async move {
+                destroy_actor(actor_id).await;
+            });
+
             Ok(cx.undefined().upcast())
         }
 
         method removeEventListeners(mut cx) {
             let this = cx.this();
             let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
-            block_on(remove_actor_event_listeners(actor_id));
+
+            RUNTIME.spawn(async move {
+                remove_actor_event_listeners(actor_id).await;
+            });
+
             Ok(cx.undefined().upcast())
         }
 
@@ -138,7 +142,11 @@ fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     let id = cx.argument::<JsString>(1)?.value();
     let event_name = cx.argument::<JsString>(2)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
-    block_on(add_event_listener(actor_id, id, event_type));
+
+    RUNTIME.spawn(async move {
+        add_event_listener(actor_id, id, event_type).await;
+    });
+
     Ok(cx.undefined())
 }
 

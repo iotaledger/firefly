@@ -1,0 +1,91 @@
+---
+name: Found a bug?
+description: Fill in this form to report it, and help us improve
+title: '[Bug]: '
+labels: type:bug
+
+body:
+    - type: markdown
+      attributes:
+          value: '## Reporting a bug'
+    - type: markdown
+      attributes:
+          value: |
+              Thank you for helping us make Firefly better, by reporting a bug you have found. This issue may already be reported! Please search on the [issue tracker](https://github.com/iotaledger/firefly/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Abug) before creating one. This form is for bugs only and not for help or support using this application. Please visit the [help and support discussions forum](https://github.com/iotaledger/firefly/discussions/categories/help-support) or join our [discord](https://discord.iota.org/) for help.
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Issue description
+          description: Briefly describe the issue.
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected_behaviour
+      attributes:
+          label: Expected behaviour
+          description: A concise description of what you expected to happen.
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual_behaviour
+      attributes:
+          label: Actual behaviour
+          description: A concise description of what actually happened.
+      validations:
+          required: true
+
+    - type: dropdown
+      id: can_repro
+      attributes:
+          label: Can the issue reliably be reproduced?
+          options:
+              - 'Yes'
+              - 'No'
+      validations:
+          required: true
+
+    - type: textarea
+      id: repro_steps
+      attributes:
+          label: Steps to reproduce the issue
+          description: Explain how the maintainer can reproduce the issue.
+          placeholder: |
+              1.
+              2.
+              3.
+              ...
+
+    - type: textarea
+      id: diagnostics
+      attributes:
+          label: Diagnostics
+          description: Paste information that you see from the Diagnostics in the Firefly menu.
+          render: shell
+
+    - type: textarea
+      id: errors
+      attributes:
+          label: Errors
+          description: Paste any errors that you see from the Error Log in the Firefly menu.
+          render: shell
+
+    - type: checkboxes
+      id: duplicate_declaration
+      attributes:
+          label: Duplicate declaration
+          description: Please confirm that you are not creating a duplicate issue.
+          options:
+              - label: I have searched the issues tracker this issue and there is none
+                required: true
+
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Code of Conduct
+          description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/iotaledger/firefly/blob/53b11691345897703cc3b2cfd3caa830bc2ff949/.github/CODE_OF_CONDUCT.md).
+          options:
+              - label: I agree to follow this project's Code of Conduct
+                required: true

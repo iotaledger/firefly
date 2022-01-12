@@ -15,20 +15,55 @@
         },
         "profile": {
             "title": "ایجاد پروفایل",
+            "profileName": "نام پروفایل",
             "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
-            "body2": "فعلا با نام اولین پروفایل خود شروع کنید، شما بعدا میتوانید پروفایل های بیشتری اضافه کنید.",
-            "profileName": "نام پروفایل"
+            "body2": {
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
+            },
+            "addMore": "You can add more profiles later.",
+            "advancedOptions": "Advanced options",
+            "developer": {
+                "label": "Developer profile",
+                "info": "Connect to the devnet or a private network"
+            }
         },
         "setup": {
             "title": "راه اندازی کیف پول",
             "chrysalisTitle": "بروزرسانی شبکه Chrysalis",
-            "chrysalisBody": "از 21 آوریل، کاربران می‌توانند توکن های خود را به شبکه جدید Chrysalis منتقل کنند. توصیه ما این است که هرچه زودتر توکن های خود را انتقال دهید.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "کسب اطلاعات در مورد انتقال"
         },
         "secure": {
             "title": "ایمن سازی کیف پول",
             "body1": "قالب PDF کیت بازیابی را ذخیره و پرینت کنید.",
             "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید، همیشه می توانید کیف پول خود را بازیابی کنید."
+        },
+        "create": {
+            "title": "ايجاد كيف پول",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
+            "softwareAccount": {
+                "title": "من کیف پول نرم‌افزاری می‌خواهم",
+                "description": "Create a 24-word Recovery Phrase"
+            },
+            "ledgerAccount": {
+                "title": "کیف پول سخت افزاری میخواهم",
+                "description": "Ledger Nano S or Nano X required"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Connect your Ledger",
+            "progress2": "تولید آدرس",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
             "title": "ایجاد رمز عبور",
@@ -85,9 +120,11 @@
         },
         "congratulations": {
             "title": "راه اندازی کیف پول کامل شد",
-            "body": "کیف پول جدید شما آماده استفاده میباشد.",
             "fundsMigrated": "وجوه منتقل شد",
-            "success": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
+            "body": "کیف پول جدید شما آماده استفاده میباشد.",
+            "softwareMigratedBody": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "گرفتن گزارش انتقال و اتمام راه اندازی"
         },
         "import": {
@@ -98,7 +135,9 @@
             "importMnemonic": "عبارت بازیابی Firefly را در اختیار دارم",
             "importMnemonicDescription": "جهت بازگردانی کیف پول های خود عبارت بازیابی را وارد کنید",
             "importFile": "فایل پشتیبان در اختیار دارم",
-            "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید"
+            "importFileDescription": "فایل SeedVault یا Stronghold را ارسال کنید",
+            "importLedger": "I have a Ledger backup",
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +158,63 @@
             "title": "بازگردانی کیف پول توسط فایل بک آپ",
             "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
+        "importFromLedger": {
+            "title": "Restore or Migrate your Ledger",
+            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
+            "haveFireflyLedger": "I have a Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Restore a Firefly profile",
+            "haveTrinityLedger": "I have a Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+        },
+        "connectLedger": {
+            "title": "Connect your Ledger to Firefly",
+            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
+            "trafficLight1": "Connect and unlock your Ledger with your PIN",
+            "trafficLight2": "Open the new IOTA app on your Ledger",
+            "tips": "Tips if your Ledger isn’t connecting"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restore Your Ledger Profile",
+            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
+            "restoring": "Restoring from Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Start your Ledger migration using Firefly",
+            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
+            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
+            "readMore": "What to expect from the migration process"
+        },
+        "generateNewLedgerAddress": {
+            "title": "تولید آدرس جدید",
+            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
+            "confirmTitle": "Confirm the new address",
+            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
+            "confirmedTitle": "Address confirmed",
+            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
+            "generating": "Generating address"
+        },
+        "switchLedgerApps": {
+            "title": "Switch Ledger apps",
+            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Choose Ledger account index",
+            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "accountIndex": "Account Index",
+            "accountPage": "Account Page",
+            "standard": "Standard",
+            "expert": "Expert",
+            "takingAWhile": "This is taking a while...",
+            "notGeneratingAddresses": "Is your Ledger generating addresses?",
+            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+        },
         "importBackupPassword": {
-            "title": "بازگردانی کیف پول توسط SeedVault یا Stronghold",
             "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
             "body2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
         "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
-            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
-            "seedvaultTitle": "با موفقیت وارد شد",
-            "seedvaultBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید.",
-            "strongholdTitle": "با موفقیت وارد شد",
-            "strongholdBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید."
+            "body": "اکنون میتوانید کیف پول جدید خود را راه اندازی کنید."
         },
         "migrate": {
             "title": "توکن های خود را انتقال دائمی دهید",
@@ -153,7 +237,7 @@
             "miningBundle": "در حال استخراج دسته تراکنش ها",
             "problemRestoringWallet": "بازیابی کیف پول شما با مشکل مواجه شد. لطفا دوباره سعی کنید.",
             "minimumMigrationAmountSpentAddresses": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. موجودی خود را دوباره کنترل کنید.",
-            "tooManyAddressesToMigrate": "تعداد آدرس‌های با موجودی پایین شما جهت انتقال، بیش از حد است. موجودی خود را دوباره کنترل کنید.",
+            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
             "cannotMigrateAllYourFunds": "امکان انتقال تمام وجوه شما به دلیل موجودی بسیار کم بعضی از آدرس‌ها وجود ندارد. با این حال می‌توانید ادامه دهید. مقدار {value} از دست خواهد رفت.",
             "error": "انتقال وجوه شما با مشکل مواجه شد. لطفا دوباره سعی کنید."
         },
@@ -179,11 +263,12 @@
         },
         "securingSpentAddresses": {
             "title": "درحال ایمن سازی آدرس‌ها...",
-            "body1": "این فرایند {minutes, plural, one {1 دقیقه} other {# دقیقه}} طول خواهد کشید.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "کامپیوتر شما با تمام ظرفیت مشغول به کار خواهد شد، بهتر است مشغول کار دیگری شوید تا این عملیات تمام شود."
         },
         "transferFragmentedFunds": {
             "body1": "اکنون Firefly برای انتقال وجوه شما اقدام می‌کند. این کار ممکن است مدتی طول بکشد.",
+            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "انتقال وجوه",
             "transaction": "تراکنش {number}",
             "rerun": "تلاش مجدد"
@@ -196,7 +281,8 @@
             "title": "موجودی شما",
             "body": "پیش از ادامه از موجودی خود مطمئن شوید. اگر مواردی صحیح نبود می‌توانید دوباره بررسی کنید.",
             "error": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. اگر موجودی شما صحیح نیست، دوباره کنترل کنید.",
-            "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید."
+            "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید.",
+            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
             "settings": "تنظیمات",
@@ -226,7 +312,8 @@
             },
             "theme": {
                 "title": "تم",
-                "description": ""
+                "description": "",
+                "advice": "Restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "زبان",
@@ -242,17 +329,15 @@
             },
             "networkStatus": {
                 "title": "وضعیت شبکه",
-                "description": "وضعیت نودی که در حال حاضر به آن متصل هستید را نشان می دهد."
+                "description": "Displays the status of the node you are currently connected to"
             },
             "exportStronghold": {
-                "title": "استخراج بک آپ",
+                "title": "Export backup",
                 "description": "استخراج به صورت فایل Stronghold - یک بک آپ گیری کامل و رمزگذاری شده از کیف پول های شما به همراه آخرین تاریخچه تراکنش ها"
             },
             "appLock": {
-                "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
-                "description": "مدت زمان عدم فعالیت قبل از قفل شدن کیف پول و خارج شدن از سیستم",
-                "durationMinute": "{time, plural, one {۱ دقیقه} other {# دقیقه}}",
-                "durationHour": "{time, plural, one {۱ ساعت} other {# ساعت}}"
+                "title": "Automatic lock",
+                "description": "مدت زمان عدم فعالیت قبل از قفل شدن کیف پول و خارج شدن از سیستم"
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
@@ -279,28 +364,39 @@
                 "description": "کل پروفایل ، کیف پول ها و سابقه تراکنش های شما را حذف می کند. از داشتن نسخه بک آپ مطمئن شوید"
             },
             "deepLinks": {
-                "title": "لینک عمیق",
-                "description": "با کلیک بر لینک //:iota به صورت خودکار اطلاعات تراکنش را در Firefly وارد کنید"
+                "title": "IOTA links",
+                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
             },
-            "developerMode": {
-                "title": "حالت برنامه نویسی",
-                "description": "اتصال به شبکه های آزمایشی و امکانات دیگر برنامه نویسی"
-            },
-            "nodeSettings": {
-                "title": "تنظیمات نود",
-                "description": "برای تغییر تنظیمات گره و اتصال به گره خود Manual یا دستی را انتخاب نمایید"
+            "networkConfiguration": {
+                "title": "Network config",
+                "title2": "Network configuration",
+                "description": {
+                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
+                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                },
+                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "resetWallet": "Your wallet state has been reset.",
+                "connectedTo": "Connected to",
+                "nodeConfiguration": {
+                    "title": "Node selection",
+                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "automatic": "Automatic",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "انتخاب نود",
-                "description": "لیست نودهای شبکه آیوتا را که به آنها متصل می شوید مدیریت کنید",
+                "title": "Node configuration",
+                "description": "Manage the list of nodes you connect to",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
-                "viewDetails": "نمایش جزئیات",
+                "editDetails": "Edit details",
+                "viewInfo": "View info",
                 "setAsPrimary": "تنظیم به عنوان اصلی",
                 "removeNode": "حذف نود",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
-                "noNodes": "نودی وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود"
+                "noNodes": "There are no nodes, unable to connect to the network",
+                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -314,9 +410,9 @@
                 "title": "عیب شناسی",
                 "description": "نمایش اطلاعات سیستم و اپلیکیشن"
             },
-            "stateExport": {
-                "title": "ایجاد فایل گزارش کلی",
-                "description": "استخراج سوابق ترکنش ها به صورت فایل csv"
+            "migrateLedgerIndex": {
+                "title": "Migrate Ledger index",
+                "description": "Migrate another Trinity account index"
             },
             "troubleshoot": {
                 "title": "عیب یابی",
@@ -328,7 +424,7 @@
             },
             "faq": {
                 "title": "پرسش و پاسخ های متداول",
-                "title2": "سوالات متداول",
+                "title2": "Frequently asked questions",
                 "description": "نمایش سوالات متداول برای کمک به حل یک مشکل یا سوال"
             },
             "discord": {
@@ -345,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
-            "incorrectAttempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -357,7 +453,15 @@
                 },
                 "hardwareDevice": {
                     "title": "دستگاه سخت افزاری",
-                    "noneDetected": "چیزی یافت نشد"
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "{legacy} App Open",
+                        "locked": "قفل شد",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "وضعیت کیف پول",
@@ -380,6 +484,48 @@
             "profileModal": {
                 "allSettings": "همه تنظیمات",
                 "logout": "خروج از حساب"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welcome to the staking dashboard!",
+            "status": {
+                "upcoming": "Event not started",
+                "commencing": "Pre-staking open",
+                "holdingActive": "Staking in progress",
+                "holdingInactive": "Staking open",
+                "inactive": "Staking not detected",
+                "ended": "Staking ended"
+            },
+            "summary": {
+                "stakedFunds": "Staked funds"
+            },
+            "info": {
+                "upcomingSubheader": "Event has not started",
+                "upcomingHeader": "Check back later",
+                "commencingSubheader": "Get ready for staking",
+                "commencingHeader": "Pre-stake your tokens!",
+                "holdingSubheaderHolding": "Now earning staking rewards",
+                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderNotHolding": "Stake your tokens!",
+                "endedSubheader": "Staking has now ended",
+                "endedHeader": "Thank you!",
+                "inactiveHeader": "Try changing node",
+                "inactiveSubheader": "Staking not detected"
+            },
+            "airdrops": {
+                "holding": "Remaining",
+                "commencing": "Until staking begins",
+                "collectedRewards": "Collected rewards",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -429,18 +575,45 @@
         },
         "addressHistory": {
             "title": "تاریخچه آدرس {name}",
-            "currentBalance": "موجودی در حال حاضر: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "اضافه کردن نود",
             "titleUpdate": "بروزرسانی یک گره",
             "titleRemove": "حذف نود",
+            "titleRemoveAll": "Remove all nodes",
             "titleDetails": "جزییات نود",
+            "titleInfo": "Node info",
+            "addingNode": "Adding node",
+            "updatingNode": "Updating node",
+            "loadingNodeInfo": "Loading node info",
             "nodeAddress": "آدرس نود",
             "optionalUsername": "نام کاربری (اختیاری)",
             "optionalPassword": "رمز عبور (اختیاری)",
+            "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "تنظیم به عنوان نود اصلی",
-            "removeConfirmation": "آیا مطمئن به حذف این نود هستید؟"
+            "removeConfirmation": "آیا مطمئن به حذف این نود هستید؟",
+            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "Network ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Features",
+                "confirmedMilestoneIndex": "Confirmed milestone index",
+                "pruningIndex": "Pruning index",
+                "messagesPerSecond": "پیام ها در ثانیه",
+                "referencedRate": "Referenced rate"
+            }
+        },
+        "switchNetwork": {
+            "title": "Switch network",
+            "newNetwork": "New network",
+            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "switchingNetwork": "Switching network",
+            "typePassword": "Type your password to switch to:"
         },
         "errorLog": {
             "title": "گزارش خطا",
@@ -464,7 +637,9 @@
         },
         "transaction": {
             "title": "تایید تراکنش",
-            "body": "شما در حال انتقال مقدار {amount} هستید به"
+            "body": "شما در حال انتقال مقدار {amount} هستید به",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "یابنده موجودی",
@@ -488,6 +663,95 @@
             "body": "بروزرسانی شبکه Chrysalis آغاز شده است.",
             "bodyMigration": "نقل و انتقال تا تکمیل آن غیرفعال است.",
             "bodyFirefly": "Firefly تا زمان تکمیل آن غیرفعال شده است. پس از آن انتقال توکن امکان پذیر است."
+        },
+        "ledgerNotConnected": {
+            "connect": "Open the new IOTA app on your Ledger device to continue",
+            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+        },
+        "ledgerConfirmation": {
+            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+        },
+        "ledgerAppGuide": {
+            "title": "Guide to installing the Ledger apps",
+            "steps": {
+                "0": "Install and open the Ledger Live application",
+                "1": "Ensure that your Ledger is connected",
+                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
+                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Tips if your Ledger isn’t connecting",
+            "steps": {
+                "0": "Make sure Ledger Live is not open on your computer",
+                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "2": "Open the new IOTA app on your Ledger device",
+                "3": {
+                    "text": "Still no luck?",
+                    "link": "Try the official Ledger support page"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirm remainder address",
+                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            },
+            "transaction": {
+                "title": "تایید تراکنش",
+                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirm receive address",
+            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Do you need to migrate another Trinity account index?",
+            "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "profileName": "Profile name:",
+            "accountName": "Account name:",
+            "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking has not started yet",
+            "commencingDate": "Staking has not started yet",
+            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "ok": "Ok, I understand"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "Total funds staked",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -495,6 +759,7 @@
         "outgoingMi": "خروجی {value} Mi",
         "portoflio": "سبد سهام",
         "token": "توکن",
+        "holdings": "Holdings",
         "accountValue": "مقدار کیف پول",
         "accountActivity": "فعالیت کیف پول",
         "timeframe1Hour": "۱ ساعت",
@@ -505,6 +770,8 @@
     "actions": {
         "continue": "ادامه",
         "back": "بازگشت",
+        "previous": "Previous",
+        "next": "Next",
         "cancel": "لغو",
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
@@ -540,11 +807,12 @@
         "dropHere": "فایل خود را این جا بیاندازید",
         "syncAll": "همگام‌سازی همه",
         "export": "استخراج",
+        "exporting": "Exporting",
         "exportNewStronghold": "استخراج یک Stronghold جدید",
-        "enableDeepLinks": "فعالسازی لینک عمیق",
+        "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "فعالسازی حالت برنامه نویسی",
         "enableSystemNotifications": "فعالسازی اعلان های سیستم",
-        "exportState": "استخراج وضعیت",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "اثبات کار محلی",
         "unlock": "بازکردن",
         "updateFirefly": "به روز رسانی Firefly",
@@ -559,6 +827,7 @@
         "addNode": "اضافه کردن نود",
         "updateNode": "بروزرسانی گره",
         "removeNode": "حذف نود",
+        "removeAllNodes": "Remove all nodes",
         "hide": "پنهان کردن",
         "hideOthers": "پنهان کردن بقیه",
         "showAll": "نمایش همه",
@@ -573,6 +842,7 @@
         "addAccount": "اضافه کردن کیف پول",
         "checkForUpdates": "بررسی برای بروزرسانی",
         "reportAnIssue": "گزارش مشکل",
+        "restore": "Restore",
         "clear": "پاک کردن",
         "hideDetails": "پنهان کردن جزئیات",
         "yes": "بله",
@@ -592,7 +862,19 @@
         "searchBalances": "جستجو برای موجودی",
         "searchAgain": "جستجوی مجدد",
         "searching": "درحال جستجو...",
-        "closeFirefly": "بستن Firefly"
+        "closeFirefly": "بستن Firefly",
+        "generateAddress": "تولید آدرس",
+        "migrateAgain": "Migrate another index",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "رمز عبور",
@@ -607,6 +889,7 @@
         "received": "دریافت شده",
         "sendPayment": "ارسال پرداخت",
         "moveFunds": "انتقال داخلی",
+        "sendTo": "Send To",
         "sendFunds": "ارسال وجه",
         "sendToAddress": "ارسال به آدرس",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
@@ -622,9 +905,12 @@
         "from": "فرستنده",
         "to": "گیرنده",
         "receiveFunds": "دریافت وجه",
+        "address": "Address",
         "myAddress": "آدرس من",
         "shareAddress": "اشتراک گذاری یک آدرس",
         "yourAddress": "آدرس شما",
+        "newRemainder": "New Remainder",
+        "remainder": "Remainder",
         "generateNewAddress": "تولید آدرس جدید",
         "copyAddress": "کپی کردن آدرس",
         "import": "وارد کردن",
@@ -632,8 +918,9 @@
         "stronghold": "استرانگ هُلد",
         "language": "زبان",
         "appearance": "ظاهر",
-        "lightTheme": "تم روشن",
-        "darkTheme": "تم تاریک",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "موجودی",
         "accountBalance": "موجودی کیف پول",
         "incoming": "ورودی",
@@ -642,11 +929,7 @@
         "totalOut": "کل ارسالی",
         "accounts": "کیف پول ها",
         "myAccounts": "کیف پول من",
-        "automaticNodeSelection": "انتخاب اتوماتیک نُد",
-        "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
-        "developerProfile": "پروفایل برنامه نویسی",
-        "developerProfileDescription": "به شما اجازه اتصال به شبکه آزمایشی را میدهد",
         "dev": "برنامه نویس",
         "createAccount": "ايجاد كيف پول",
         "accountName": "نام کیف پول",
@@ -654,6 +937,7 @@
         "transactions": "تراکنش ها",
         "security": "امنیت",
         "accountAddress": "آدرس کیف پول",
+        "network": "Network",
         "nodes": "نودها",
         "wallet": "کیف پول",
         "help": "راهنما",
@@ -661,6 +945,7 @@
         "messageId": "شناسه پیام",
         "inputAddress": "ارسال آدرس",
         "receiveAddress": "آدرس گیرنده",
+        "newAddress": "New Address",
         "date": "تاریخ",
         "status": "وضعیت",
         "confirmed": "تایید شده",
@@ -672,11 +957,15 @@
         "firstSync": "همگام سازی تاریخچه، ممکن است مدتی طول بکشد...",
         "transferSyncing": "همگام سازی کیف پول",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
-        "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
+        "transferRemainderAddress": "Generating remainder address",
+        "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "در حال صحه گذاری تراکنش",
         "transferPow": "در حال انجام اثبات کار",
         "transferBroadcasting": "در حال انتشار تراکنش",
         "transferComplete": "انتقال کامل شد",
+        "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "در حال ساختن کیف پول، لطفا صبر کنید...",
         "updatingAccount": "در حال بروزرسانی کیف پول، لطفا صبر کنید...",
         "accountSyncing": "کیف پول در حال همگام سازی است",
@@ -684,6 +973,7 @@
         "passwordUpdating": "در حال به روز رسانی رمز عبور...",
         "passwordSuccess": "به روز رسانی رمز عبور کامل شد",
         "passwordFailed": "به روز رسانی رمز عبور ناموفق بود",
+        "syncing": "Syncing",
         "syncingAccounts": "همگام سازی کیف پول ها...",
         "exportingStronghold": "استخراج قلعه...",
         "exportingStrongholdSuccess": "استخراج قلعه با موفقیت انجام شد",
@@ -704,11 +994,24 @@
         "sendingFrom": "در حال ارسال به {account}",
         "receivedTo": "دریافت شده در {account}",
         "sentFrom": "فرستاده شده از {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "در حال دریافت",
         "sending": "در حال ارسال",
         "legacyNetwork": "شبکه قدیمی",
         "capsLock": "کلید caps lock روشن است",
-        "version": "نسخه {version}"
+        "version": "نسخه {version}",
+        "unknown": "Unknown",
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Staked funds",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "امروز",
@@ -717,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# هفته} other {# هفته}} قبل",
         "monthsAgo": "{time, plural, one {# ماه} other {# ماه}} قبل",
         "yearsAgo": "{time, plural, one {# سال} other {#سال}} قبل"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "در حال دریافت {{value}} به {{account}}",
@@ -729,16 +1041,32 @@
         "updateError": "خطایی در طول این به روز رسانی رخ داد، لطفا دوباره امتحان کنید",
         "restartInstall": "برای نصب، مجددا راه اندازی کنید",
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
-        "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
         "accountsSynchronized": "همگام سازی حساب کامل شد",
-        "migratedAccountChrysalisDown": "وجوه شما از ۲۸ آوریل بر روی Chrysalis قابل دسترس میباشد.",
-        "migratedAccountChrysalisUp": "وجوه شما به زودی قابل استفاده خواهد شد"
+        "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
-            "length": "پروفایل شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
-            "duplicate": "یک پروفایل با این نام وجود دارد."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "یک پروفایل با این نام وجود دارد.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "رمزهای عبور یکسان نیستند.",
@@ -755,25 +1083,28 @@
             "similar": "این رمز مشابه یک رمز عبور رایج میباشد.",
             "word": "یک کلمه به راحتی قابل حدس زدن میباشد.",
             "incorrect": "رمز عبور شما نامعتبر است.",
-            "length": "رمز عبور شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "PIN شما باید {length, plural, one {1 عددی} other {# عددی}} باشد.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN مطابقت ندارد.",
             "incorrect": "PIN فعلی شما اشتباه است."
         },
         "account": {
-            "length": "نام کیف پول شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "باید از آخرین کیف پول خود قبل از ایجاد کیف پول جدید استفاده کنید.",
             "notEmpty": "شما باید قبل از حذف این کیف پول، موجودی خود را انتقال دهید.",
             "duplicate": "کیف پولی با این نام وجود دارد.",
             "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
             "control": "اسم پروفایل نمیتواند از کاراکتر کنترلی تشکیل شده باشد.",
             "startDot": "اسم پروفایل نمیتواند با کاراکتر '.' شروع شود.",
-            "chars": "اسم پروفایل نمیتواند از کاراکترهای <>:\"/\\|?* تشکیل شده باشد"
+            "chars": "اسم پروفایل نمیتواند از کاراکترهای <>:\"/\\|?* تشکیل شده باشد",
+            "index": "Your account index must be a number between 0 and 2,147,483,647.",
+            "page": "Your account page must be a number between 0 and 2,147,483,647.",
+            "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "آدرس ها باید {length, plural, one {1 کاراکتری} other {# کاراکتری}} باشند.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "این مقدار بیشتر از موجودی حساب شماست.",
             "amountNoFloat": "اگر واحدها `i` باشند، نمیتوانید از اعشار استفاده کنید.",
             "amountInvalidFormat": "این مقدار نامعتبر میباشد.",
@@ -784,14 +1115,30 @@
             "insufficientFunds": "این کیف پول موجودی کافی ندارد.",
             "noToAccount": "کیف پول مقصد را انتخاب نکرده‌اید.",
             "sendingDust": "شما کمتر از 1Mi نمیتوانید ارسال کنید.",
-            "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد."
+            "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد.",
+            "cancelled": "The transaction was cancelled.",
+            "transaction": "There was an error sending your transaction. Please try again."
         },
         "node": {
             "invalid": "لطفا یک URL معتبر وارد کنید.",
-            "https": "HTTPS لازم است. برای استفاده از اتصالات HTTP بدون امنیت، یک پروفایل برنامه نویس تنظیم کنید.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "این نود قبلا اضافه شده است.",
             "unsynced": "این نود هماهنگ نیست.",
-            "noSynced": "هیچ نود همگام شده ای در دسترس نمیباشد."
+            "noSynced": "هیچ نود همگام شده ای در دسترس نمیباشد.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
             "generic": "مشکلی پیش آمد."
@@ -800,11 +1147,48 @@
             "invalid": "فایل بک اپ یافت نشد.",
             "destination": "مسیر بک اپ معتبر نیست.",
             "mnemonic": "نام حفظی معتبر نمی باشد.",
-            "seedTooShort": "سید باید 81 کاراکتری باشد٬ این {length, plural, one {1 کاراکتریست} other {کاراکتریست #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "سید فقط میتواند از کاراکتر A-Z یا 9 تشکیل شده باشد.",
-            "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد",
             "phraseCaseWord": "کلمه \"{word} \" می بایست حروف کوچک باشد"
+        },
+        "ledger": {
+            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "generic": "There was an error connecting to your Ledger device.",
+            "legacyConnected": "The wrong app is open on your Ledger device.",
+            "locked": "Please unlock your Ledger device by entering the PIN.",
+            "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
+            "notDetected": "No Ledger device detected.",
+            "notFound": "Ledger device not found.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
+            "generateAddress": "There was an error generating an address.",
+            "timeout": "Your Ledger device timed out.",
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
+        },
+        "popup": {
+            "preventClose": "This popup is unable to be closed."
+        },
+        "migration": {
+            "missingBundle": "An error occurred while trying to find the transaction bundle."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -815,6 +1199,65 @@
             "medium": "متوسط",
             "low": "پایین",
             "veryLow": "خیلی پایین"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking has now ended",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "شناسه پیام",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "تاریخ",
+            "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

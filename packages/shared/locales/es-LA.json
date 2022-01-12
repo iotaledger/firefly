@@ -15,20 +15,55 @@
         },
         "profile": {
             "title": "Crear un perfil",
+            "profileName": "Nombre de perfil",
             "body1": "Puedes crear varios perfiles de usuario para organizar tus billeteras y mejorar la privacidad.",
-            "body2": "Por ahora, empieza nombrando tu primer perfil de usuario. Puedes añadir más perfiles luego.",
-            "profileName": "Nombre del perfil"
+            "body2": {
+                "first": "Por ahora, empecemos con el nombre de tu primer perfil.",
+                "nonFirst": "Por ahora, empecemos con el nombre de tu perfil."
+            },
+            "addMore": "Puedes añadir más perfiles después.",
+            "advancedOptions": "Advanced options",
+            "developer": {
+                "label": "Perfil de desarrollador",
+                "info": "Connect to the devnet or a private network"
+            }
         },
         "setup": {
             "title": "Configurar una billetera",
             "chrysalisTitle": "Actualización de red Chrysalis",
-            "chrysalisBody": "Desde el 21 de Abril, los usuarios podrán migrar sus tokens a la nueva red Chrysalis. Te recomendamos migrar tus tokens existentes lo antes posible.",
+            "chrysalisBody": "Desde el 21 de abril de 2021 los usuarios pueden migrar sus tokens a la nueva red Chrysalis. Le recomendamos que migre sus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
         },
         "secure": {
             "title": "Asegure su billetera",
             "body1": "Guarda e imprime la plantilla PDF del Kit de Recuperación.",
             "body2": "Si rellenas el Kit de Recuperación y lo almacenas de forma segura, siempres podrás recuperar tus billeteras."
+        },
+        "create": {
+            "title": "Crear una billetera",
+            "body": "Crea una nueva billetera. Puedes elegir una billetera software o si tienes un Ledger, puedes configurar la billetera hardware.",
+            "softwareAccount": {
+                "title": "Quiero una billetera software",
+                "description": "Crea una Frase de Recuperación de 24 palabras"
+            },
+            "ledgerAccount": {
+                "title": "Quiero una billetera hardware",
+                "description": "Se requiere una Ledger Nano S o Nano X"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Conecta tu Ledger",
+            "progress2": "Generar una address",
+            "progress3": "Cambiar a la aplicación Ledger",
+            "progress4": "Transferir fondos",
+            "watchVideo": "Mira un video de guía",
+            "videoGuide": "Video guía para migrar Ledger"
+        },
+        "ledgerInstallationGuide": {
+            "title": "¿Ha instalado las aplicaciones Ledger necesarias?",
+            "body1": "Antes de continuar, debes encontrar e instalar la aplicación {legacy} así como también la nueva app IOTA a través de Ledger Live.",
+            "body2": "Asegúrate de que el firmware del Ledger esté actualizado. Cualquier aplicación pre instalada debe ser actualizada a la última versión.",
+            "action": "Sí, he instalado estas aplicaciones"
         },
         "password": {
             "title": "Crea una contraseña",
@@ -85,9 +120,11 @@
         },
         "congratulations": {
             "title": "Configuración del monedero completada",
-            "body": "Su nueva billetera está lista para usar.",
             "fundsMigrated": "Fondos migrados",
-            "success": "Tus fondos han sido migrados con éxito a la nueva red",
+            "body": "Su nueva billetera está lista para usar.",
+            "softwareMigratedBody": "Has migrado exitosamente tus fondos a la nueva red",
+            "fireflyLedgerBody": "Tu cuenta Ledger ha sido recuperada con éxito y ahora puedes continuar.",
+            "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
             "exportMigration": "Exportar registro de migración y finalizar la configuración"
         },
         "import": {
@@ -98,7 +135,9 @@
             "importMnemonic": "Tengo una frase the recuperación de Firefly",
             "importMnemonicDescription": "Introduce tu frase de recuperación para recuperar tus billeteras",
             "importFile": "Tengo un archivo de respaldo",
-            "importFileDescription": "Subir un archivo Seedvault o Stronghold"
+            "importFileDescription": "Subir un archivo Seedvault o Stronghold",
+            "importLedger": "Tengo una copia de seguridad de Ledger",
+            "importLedgerDescription": "Restaurar o migrar el perfil de Ledger"
         },
         "importFromText": {
             "seed": {
@@ -119,18 +158,63 @@
             "title": "Restaura tus billeteras usando un archivo de copia de seguridad",
             "body": "Importa un archivo de copia de seguridad para restaurar tus billeteras. Las copias de seguridad pueden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restaurar o Migrar tu Ledger",
+            "body": "Restaurar un perfil existente de Firefly Ledger o migrar tus fondos desde Trinity.",
+            "haveFireflyLedger": "Tengo una copia de restauración de Firefly Ledger",
+            "haveFireflyLedgerDescription": "Restaurar perfil de Firefly",
+            "haveTrinityLedger": "Tengo una copia de seguridad de Trinity Ledger",
+            "haveTrinityLedgerDescription": "Migrar un perfil de Trinity"
+        },
+        "connectLedger": {
+            "title": "Conectar tu Ledger a Firefly",
+            "body": "Para que tu dispositivo Ledger pueda ser encontrado por Firefly, por favor asegúrate de que la aplicación Ledger Live oficial se encuentre cerrada.",
+            "trafficLight1": "Conecta y desbloquea tu Ledger con tu PIN",
+            "trafficLight2": "Abre la nueva aplicación IOTA en tu Ledger",
+            "tips": "Sugerencias en caso de que tu Ledger no se conecte"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restaurar tu perfil de Ledger",
+            "body": "Presiona restaurar para completar el proceso de instalación y restaura tus billeteras, balances y el historial de transacciones.",
+            "restoring": "Restaurando desde Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Comienza la migración de tu Ledger usando Firefly",
+            "body1": "Firefly te ayudará a transferir tus tokens a la nueva red Chrysalis.",
+            "body2": "Luego de la migración, podrás enviar y recibir tus tokens utilizando tu Ledger con Firefly.",
+            "readMore": "Qué esperar del proceso de migración"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Generar nueva dirección",
+            "body": "Necesitas generar una nueva address para migrar tus tokens con Firefly. Clickea el botón de abajo para continuar.",
+            "confirmTitle": "Confirmar la nueva address",
+            "confirmBody": "Por seguridad, por favor compara la address generada en tu dispositivo Ledger con el que figura abajo. Si coinciden, presiona ambos botones en tu Ledger como se indique.",
+            "confirmedTitle": "Address confirmada",
+            "confirmedBody": "Has confirmado que la address en Firefly coincide con la de tu dispositivo Ledger.",
+            "generating": "Generando dirección"
+        },
+        "switchLedgerApps": {
+            "title": "Cambiar aplicaciones Ledger",
+            "body": "Por favor, cambia a la app {legacy} en tu dispositivo Ledger para continuar la migración. Cuando esté listo, aprieta continuar."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Elije el índice de cuenta Ledger",
+            "body": "Elije el índice de cuenta Ledger que utilizó con Trinity. Para la mayoría de los usuarios este será el índice por defecto de 0.",
+            "accountIndex": "Índice de cuenta",
+            "accountPage": "Página de la Cuenta",
+            "standard": "Estándar",
+            "expert": "Experto",
+            "takingAWhile": "Esto está tardando un poco...",
+            "notGeneratingAddresses": "¿Está tu Ledger generando addresses?",
+            "reinstallLegacy": "Si no es así, desconecta el dispositivo y vuelve a intentarlo. Si el problema persiste, puede que necesites reinstalar la aplicación {legacy}."
+        },
         "importBackupPassword": {
-            "title": "Restaura tus billeteras desde un SeedVault o Stronghold",
             "body1": "Por favor, introduce tu contraseña de respaldo.",
             "body2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu respaldo."
         },
         "importSuccess": {
             "title": "Has recuperado con éxito tu respaldo",
-            "body": "Ahora puede configurar su nuevo perfil.",
-            "seedvaultTitle": "Importado con éxito",
-            "seedvaultBody": "Tu contraseña es correcta, ahora puedes continuar.",
-            "strongholdTitle": "Importado con éxito",
-            "strongholdBody": "Tu contraseña es correcta, ahora puedes continuar."
+            "body": "Ahora puede configurar su nuevo perfil."
         },
         "migrate": {
             "title": "Migrar tus fondos",
@@ -153,7 +237,7 @@
             "miningBundle": "Minando paquete",
             "problemRestoringWallet": "Se ha producido un error de red restaurando tu billetera. Por favor inténtalo de nuevo.",
             "minimumMigrationAmountSpentAddresses": "El monto mínimo es de 1 Mi para cada dirección de pago. Revisa, otra vez, si tu saldo no parece correcto.",
-            "tooManyAddressesToMigrate": "Tu tienes muchas direcciones con un saldo bajo para migrar. Revisa de nuevo si tu saldo no parece estar correcto.",
+            "tooManyAddressesToMigrate": "Tienes demasiadas direcciones con balance bajo para poder migrar. Comprueba de nuevo si tu balance no parece ser el correcto.",
             "cannotMigrateAllYourFunds": "No podemos migrar todos los fondos, ya que, algunas direcciones tienen un saldo muy bajo. Tu puedes continuar de todos modos. Se perderá {value}.",
             "error": "Hubo un error en la migración de los fondos. Por favor intente otra vez."
         },
@@ -179,11 +263,12 @@
         },
         "securingSpentAddresses": {
             "title": "Protegiendo direcciones de pago...",
-            "body1": "Este proceso tardará {minutes, plural, one {1 minuto} other {# minutos}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Tu computador procesará a plena capacidad, puede que deses hacer algo más mientras esperas a que esto se complete."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly procederá con la migración de tus fondos. Esto puede tardar un tiempo.",
+            "body2": "Asegúrate de que tu Ledger está conectado y de que la aplicación {legacy} esté abierta en todo momento durante la migración.",
             "migrate": "Migrar fondos",
             "transaction": "Transacción {number}",
             "rerun": "Inténtalo de nuevo"
@@ -196,7 +281,8 @@
             "title": "Tu saldo",
             "body": "Asegúrate de que tu balance es correcto antes de continuar. Puedes comprobarlo de nuevo si no parece ser el correcto.",
             "error": "La cantidad mínima de migración es 1 Mi. Comprueba de nuevo si tu balance no parece ser el correcto.",
-            "zeroBalance": "Intenta comprobar de nuevo. Si todavía no puedes encontrar tu balance, podrías haber introducido tu seed incorrectamente."
+            "zeroBalance": "Intenta comprobar de nuevo. Si todavía no puedes encontrar tu balance, podrías haber introducido tu seed incorrectamente.",
+            "zeroBalanceLedgerLegacy": "Intenta comprobar de nuevo. Si todavía no encuentras tu saldo, puede que hayas seleccionado el índice de cuenta incorrecto."
         },
         "settings": {
             "settings": "Ajustes",
@@ -226,7 +312,8 @@
             },
             "theme": {
                 "title": "Tema",
-                "description": ""
+                "description": "",
+                "advice": "Reinicia la aplicación Firefly para hacer efectivos los cambios en el tema del sistema"
             },
             "language": {
                 "title": "Idioma",
@@ -242,7 +329,7 @@
             },
             "networkStatus": {
                 "title": "Estado de la red",
-                "description": "Muestra el estado del nodo al que actualmente está conectado."
+                "description": "Muestra el estado del nodo al que está conectado actualmente"
             },
             "exportStronghold": {
                 "title": "Exportar copia de seguridad",
@@ -250,9 +337,7 @@
             },
             "appLock": {
                 "title": "Bloqueo automático",
-                "description": "Tiempo de inactividad antes de que se bloqueen tus billeteras y se te cierre la sesión",
-                "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
-                "durationHour": "{time, plural, one {1 hora} other {# horas}}"
+                "description": "Tiempo de inactividad antes de que se bloqueen tus billeteras y se te cierre la sesión"
             },
             "changePassword": {
                 "title": "Cambiar contraseña",
@@ -279,28 +364,39 @@
                 "description": "Elimina por completo su perfil, billeteras e historial de transacciones. Asegúrate de que tienes una copia de seguridad"
             },
             "deepLinks": {
-                "title": "Enlaces profundos",
-                "description": "Rellenar automáticamente los datos de transacción en Firefly al hacer clic en un enlace iota://"
+                "title": "Enlaces IOTA",
+                "description": "Completar automáticamente los datos de transacción en Firefly al hacer clic en un enlace IOTA"
             },
-            "developerMode": {
-                "title": "Modo de desarrollador",
-                "description": "Conectar a redes de pruebas y otras funcionalidades para desarrolladores"
-            },
-            "nodeSettings": {
-                "title": "Configuración de nodo",
-                "description": "Selecciona Manual para configurar los ajustes del nodo y conectarte a tu propio nodo"
+            "networkConfiguration": {
+                "title": "Configuración de red",
+                "title2": "Configuración de red",
+                "description": {
+                    "dev": "Su configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo (cambiar de red resultará en restablecer el estado de la billetera)",
+                    "nonDev": "La configuración de red se actualizará automáticamente de acuerdo a la configuración actual del nodo"
+                },
+                "switchedNetworks": "Se ha cambiado correctamente la red a \"{networkName}\".",
+                "resetWallet": "Su estado de la cartera ha sido restablecido.",
+                "connectedTo": "Conectado a",
+                "nodeConfiguration": {
+                    "title": "Selección de nodo",
+                    "description": "Selecciona \"Manual\" para modificar la configuración del nodo y conéctate a tu(s) nodo(s) propio(s)",
+                    "automatic": "Automático",
+                    "manual": "Manual"
+                }
             },
             "configureNodeList": {
-                "title": "Selecciona un nodo",
-                "description": "Gestiona la lista de nodos de la red IOTA a los que te conectarás",
+                "title": "Configuración de nodo",
+                "description": "Administrar la lista de nodos a los que se conectas",
                 "primaryNode": "Nodo principal",
                 "excludeNode": "Excluir nodo",
                 "includeNode": "Incluir nodo",
-                "viewDetails": "Ver detalles",
+                "editDetails": "Editar detalles",
+                "viewInfo": "Ver info",
                 "setAsPrimary": "Establecer como principal",
                 "removeNode": "Eliminar nodo",
                 "includeOfficialNodeList": "Incluir la lista oficial de nodos",
-                "noNodes": "No hay nodos, se utilizará la selección automática"
+                "noNodes": "No hay nodos, no se puede conectar a la red",
+                "noNodesAuto": "No hay nodos, se utilizará la selección automática"
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -314,9 +410,9 @@
                 "title": "Diagnóstico",
                 "description": "Ver información del sistema y de la aplicación"
             },
-            "stateExport": {
-                "title": "Exportar estado",
-                "description": "Exporta tu historial de transacciones a un archivo .csv"
+            "migrateLedgerIndex": {
+                "title": "Migrar índice Ledger",
+                "description": "Migrar otro índice de cuenta Trinity"
             },
             "troubleshoot": {
                 "title": "Resolución de problemas",
@@ -345,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Por favor, espere {time, plural, one {1 segundo} other {# segundos}}",
-            "incorrectAttempts": "{attempts, plural, one {1 intento incorrecto} other {# intentos incorrectos}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -357,7 +453,15 @@
                 },
                 "hardwareDevice": {
                     "title": "Dispositivo Hardware",
-                    "noneDetected": "Ninguna detectada"
+                    "statuses": {
+                        "appNotOpen": "Aplicación IOTA no abierta",
+                        "connected": "Conectado",
+                        "legacyConnected": "App {legacy} abierta",
+                        "locked": "Bloqueado",
+                        "mnemonicMismatch": "Palabras de seguridad o Ledger incorrecto",
+                        "notDetected": "No detectado",
+                        "otherConnected": "Aplicación Abierta"
+                    }
                 },
                 "strongholdStatus": {
                     "title": "Estado de la billetera",
@@ -380,6 +484,48 @@
             "profileModal": {
                 "allSettings": "Todos los ajustes",
                 "logout": "Cerrar sesión"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Bienvenido al panel de control del staking!",
+            "status": {
+                "upcoming": "Evento no iniciado",
+                "commencing": "Pre-staking abierto",
+                "holdingActive": "Staking en progreso",
+                "holdingInactive": "Staking abierto",
+                "inactive": "No se ha detectado ningún Staking",
+                "ended": "Staking finalizado"
+            },
+            "summary": {
+                "stakedFunds": "Fondos en staking"
+            },
+            "info": {
+                "upcomingSubheader": "Evento aún no ha comenzado",
+                "upcomingHeader": "Vuelve a intentarlo más tarde",
+                "commencingSubheader": "Preparate para empezar el Staking",
+                "commencingHeader": "¡Pon tus tokens en pre-stake!",
+                "holdingSubheaderHolding": "Generando recompensas del staking",
+                "holdingSubheaderNotHolding": "Genera recompensas al poner tus IOTA en Staking",
+                "holdingHeaderHolding": "Quedan {duration}",
+                "holdingHeaderNotHolding": "¡Pon tus tokens en Stake!",
+                "endedSubheader": "El Staking ha finalizado",
+                "endedHeader": "¡Gracias!",
+                "inactiveHeader": "Intenta cambiando de nodo",
+                "inactiveSubheader": "No se ha detectado ningún Staking"
+            },
+            "airdrops": {
+                "holding": "Quedan",
+                "commencing": "Hasta que comience el staking",
+                "collectedRewards": "Recompensas recogidas",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly es una red multicadena altamente escalable que no requiere de permiso para construir y desplegar contratos inteligentes. Assembly es el futuro de la web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "La red incentivada de pruebas para promover innovaciones de gran calado en IOTA. Lo que sea, sucederá: la evolución de Shimmer depende de ti."
+                }
             }
         }
     },
@@ -429,18 +575,45 @@
         },
         "addressHistory": {
             "title": "{name} historial de direcciones",
-            "currentBalance": "Saldo actual: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Dirección interna",
+            "external": "Dirección de depósito"
         },
         "node": {
             "titleAdd": "Añadir un nodo",
             "titleUpdate": "Actualizar un nodo",
             "titleRemove": "Eliminar un nodo",
+            "titleRemoveAll": "Eliminar todos los nodos",
             "titleDetails": "Detalles del nodo",
+            "titleInfo": "Información del Nodo",
+            "addingNode": "Añadiendo nodo",
+            "updatingNode": "Actualizando nodo",
+            "loadingNodeInfo": "Cargando información del nodo",
             "nodeAddress": "Dirección del nodo",
             "optionalUsername": "Nombre de usuario (opcional)",
             "optionalPassword": "Contraseña (opcional)",
+            "optionalJwt": "Token web JSON (opcional)",
             "setAsPrimaryNode": "Establecer como nodo principal",
-            "removeConfirmation": "¿Estás seguro de que quieres eliminar este nodo?"
+            "removeConfirmation": "¿Estás seguro de que quieres eliminar este nodo?",
+            "removeAllConfirmation": "¿Estás seguro que deseas eliminar todas los nodos?",
+            "info": {
+                "url": "URL",
+                "software": "Software",
+                "networkId": "ID de red",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Características",
+                "confirmedMilestoneIndex": "Índice de hitos confirmados",
+                "pruningIndex": "Limpiando índice",
+                "messagesPerSecond": "Mensajes por segundo",
+                "referencedRate": "Tasa referenciada"
+            }
+        },
+        "switchNetwork": {
+            "title": "Cambiar de red",
+            "newNetwork": "Nueva Red",
+            "resetWarning": "Cambiar redes te cerrará la sesión y restablecerá todas las cuentas, los saldos y el historial de transacciones de este perfil.",
+            "switchingNetwork": "Cambiando de red",
+            "typePassword": "Escribe tu contraseña para cambiar a:"
         },
         "errorLog": {
             "title": "Registro de errores",
@@ -464,7 +637,9 @@
         },
         "transaction": {
             "title": "Confirmar transacción",
-            "body": "Estás a punto de enviar {amount} a"
+            "body": "Estás a punto de enviar {amount} a",
+            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Buscador de balances",
@@ -488,6 +663,95 @@
             "body": "La mejora de la red Chrysalis ha empezado.",
             "bodyMigration": "La migración está desactivada hasta que esté completada.",
             "bodyFirefly": "Firefly está desactivado hasta que esté completado. La migración seguirá siendo posible después."
+        },
+        "ledgerNotConnected": {
+            "connect": "Abre la nueva aplicación IOTA en tu dispositivo Ledger para continuar",
+            "connectLegacy": "Abre la app {legacy} en tu dispositivo Ledger para continuar"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Para continuar, confirma el mensaje que se muestra en tu dispositivo Ledger"
+        },
+        "ledgerAppGuide": {
+            "title": "Guía para instalar las aplicaciones Ledger",
+            "steps": {
+                "0": "Instalar y abrir la aplicación Ledger Live",
+                "1": "Asegúrate de que tu Ledger está conectado",
+                "2": "Buscar aplicaciones: {legacy} IOTA Legacy e IOTA (MIOTA)",
+                "3": "Instala ambas aplicaciones: {legacy} e IOTA (MIOTA)",
+                "4": "Recuerda que es importante cerrar Ledger Live antes de regresar a Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Sugerencias en caso de que tu Ledger no se conecte",
+            "steps": {
+                "0": "Asegúrate de que Ledger Live no esté abierto en tu computadora",
+                "1": "Asegúrate de que has desbloqueado tu dispositivo Ledger con tu PIN",
+                "2": "Abra la nueva aplicación IOTA en tu dispositivo Ledger",
+                "3": {
+                    "text": "¿Aún no tienes suerte?",
+                    "link": "Prueba la página oficial de soporte Ledger"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Confirmar dirección restante",
+                "info": "Confirma que la dirección restante mostrada en tu Ledger coincide con la que se muestra a continuación. Si coinciden, pulsa ambos botones en tu Ledger como se ha indicado."
+            },
+            "transaction": {
+                "title": "Confirmar transacción",
+                "info": "Confirma que la información de transacción mostrada en tu dispositivo Ledger coincide con la información mostrada a continuación. Si coinciden, pulsa ambos botones en tu Ledger como se ha indicado."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Confirmar dirección de recepción",
+            "body": "Confirma que la dirección de recepción mostrada en tu Ledger coincide con la que se muestra a continuación. Si coinciden, pulsa ambos botones de tu Ledger como se ha indicado."
+        },
+        "ledgerMigrateIndex": {
+            "title": "¿Necesita migrar otro índice de cuenta Trinity?",
+            "body": "También puedes migrar más tarde en Configuración Avanzada."
+        },
+        "exportTransactionHistory": {
+            "title": "Exportar el historial de transacciones",
+            "body": "Exporta el historial de transacciones de la cartera seleccionada. El archivo exportado estará en formato .csv.",
+            "profileName": "Nombre del perfil:",
+            "accountName": "Nombre de la cuenta:",
+            "typePassword": "Escribe tu contraseña para permitir la exportación"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking aún no ha comenzado",
+            "commencingDate": "Staking aún no ha comenzado",
+            "body": "Al pre-stakear tus fondos antes del comienzo de staking, automaticamente estaras recibiendo los incentivos una vez comience el staking.",
+            "ok": "Ok, entiendo"
+        },
+        "stakingManager": {
+            "title": "Gestión de Staking",
+            "description": "Cuando pones una cartera en staking, estás enviándote una transacción a ti mismo marcando esos fondos como \"staked\". Podrás transferir esos tokens en cualquier momento, pero dejarás de recibir las recompensas del staking correspondientes.",
+            "totalFundsStaked": "Total de fondos en Staking",
+            "stakedSuccessfully": "Tus fondos se han Stakeado para {account}.",
+            "unstakedSuccessfully": "Tus fondos han sido quitados de Staking para {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Participación Airdrop",
+            "subtitleStake": "Estás a punto de iniciar el Staking",
+            "subtitleMerge": "Estás a punto de unirte",
+            "bodyStake": "Si no deseas participar en ambos Airdrop, puedes escoger no hacerlo debajo. Puedes dejar el staking y retomarlo en cualquier momento.",
+            "bodyMerge": "Tus fondos serán puestos en staking para el {airdrop}. Para cambiar los airdrops en los que quieres participar, saca esta cartera del staking y vuelve a ponerla en staking de nuevo.",
+            "estimatedAirdrop": "Recompensa estimada"
+        },
+        "shimmer-info": {
+            "title": "Sobre Shimmer",
+            "body1": "Felicitaciones, has ganado tokens SMR como recompensa a tu staking. Shimmer es una red incentivada de staking para probar actualizaciones importantes en IOTA.",
+            "body2": "Nuestro objetivo es lanzar Shimmer en 2022. Tus tokens estarán disponibles para su transferencia una vez que se lance la red."
+        },
+        "assembly-info": {
+            "title": "Sobre Assembly",
+            "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
+            "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -495,6 +759,7 @@
         "outgoingMi": "{value} saliente",
         "portoflio": "Portafolio",
         "token": "Token",
+        "holdings": "En espera",
         "accountValue": "Valor de Billetera",
         "accountActivity": "Actividad de la Billetera",
         "timeframe1Hour": "1 hora",
@@ -505,6 +770,8 @@
     "actions": {
         "continue": "Continuar",
         "back": "Atrás",
+        "previous": "Anterior",
+        "next": "Siguiente",
         "cancel": "Cancelar",
         "close": "Cerrar",
         "dismiss": "Descartar",
@@ -540,11 +807,12 @@
         "dropHere": "Coloca tu archivo aquí",
         "syncAll": "Sincronizar todo",
         "export": "Exportar",
+        "exporting": "Exportando",
         "exportNewStronghold": "Exportar un nuevo Stronghold",
-        "enableDeepLinks": "Habilitar enlaces profundos",
+        "enableDeepLinks": "Habilitar enlaces IOTA",
         "enableDeveloperMode": "Habilitar modo de desarrollador",
         "enableSystemNotifications": "Habilitar notificaciones del sistema",
-        "exportState": "Exportar estado",
+        "exportTransactionHistory": "Exportar el historial de transacciones",
         "localProofOfWork": "Prueba de trabajo local",
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
@@ -559,6 +827,7 @@
         "addNode": "Añadir nodo",
         "updateNode": "Actualizar nodo",
         "removeNode": "Eliminar nodo",
+        "removeAllNodes": "Eliminar todos los nodos",
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
         "showAll": "Mostrar todo",
@@ -573,6 +842,7 @@
         "addAccount": "Añadir Billetera",
         "checkForUpdates": "Buscar actualizaciones",
         "reportAnIssue": "Reportar un problema",
+        "restore": "Restaurar",
         "clear": "Limpiar",
         "hideDetails": "Ocultar detalles",
         "yes": "Sí",
@@ -592,7 +862,19 @@
         "searchBalances": "Buscar balances",
         "searchAgain": "Buscar de nuevo",
         "searching": "Buscando...",
-        "closeFirefly": "Cerrar Firefly"
+        "closeFirefly": "Cerrar Firefly",
+        "generateAddress": "Generar una address",
+        "migrateAgain": "Migrar otro índice",
+        "visitWebsite": "Visite el sitio web",
+        "howItWorks": "Cómo funciona",
+        "learnAboutStaking": "Aprende sobre el staking",
+        "stake": "En Stake",
+        "unstake": "Quitar stake",
+        "stakeFunds": "Stakear fondos",
+        "manageStake": "Gestionar stake",
+        "merge": "Combinar",
+        "mergeFunds": "Mover fondos",
+        "done": "Hecho"
     },
     "general": {
         "password": "Contraseña",
@@ -607,6 +889,7 @@
         "received": "Recibido",
         "sendPayment": "Enviar pago",
         "moveFunds": "Transferencia interna",
+        "sendTo": "Enviar a",
         "sendFunds": "Enviar fondos",
         "sendToAddress": "Enviar a la dirección",
         "scanQrOrPaste": "Escanea un código QR o pega una dirección",
@@ -622,9 +905,12 @@
         "from": "De",
         "to": "Para",
         "receiveFunds": "Recibir fondos",
+        "address": "Address",
         "myAddress": "Mi dirección",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
+        "newRemainder": "Nuevo recordatorio",
+        "remainder": "Recordatorio",
         "generateNewAddress": "Generar nueva dirección",
         "copyAddress": "Copiar dirección",
         "import": "Importar",
@@ -632,8 +918,9 @@
         "stronghold": "Stronghold",
         "language": "Idioma",
         "appearance": "Apariencia",
-        "lightTheme": "Tema claro",
-        "darkTheme": "Tema oscuro",
+        "lightTheme": "Claro",
+        "darkTheme": "Oscuro",
+        "systemTheme": "Sistema",
         "balance": "Balance",
         "accountBalance": "Balance de Billetera",
         "incoming": "Entrante",
@@ -642,11 +929,7 @@
         "totalOut": "Total enviado",
         "accounts": "Billeteras",
         "myAccounts": "Mis Billeteras",
-        "automaticNodeSelection": "Selección automática de nodo",
-        "manualNodeSelection": "Selección manual de nodo",
         "profiles": "Perfiles",
-        "developerProfile": "Perfil de desarrollador",
-        "developerProfileDescription": "Permite conectarte a redes de prueba",
         "dev": "Dev",
         "createAccount": "Crear una Billetera",
         "accountName": "Nombre de billetera",
@@ -654,6 +937,7 @@
         "transactions": "Transacciones",
         "security": "Seguridad",
         "accountAddress": "Dirección de Billetera",
+        "network": "Red",
         "nodes": "Nodos",
         "wallet": "Billetera",
         "help": "Ayuda",
@@ -661,6 +945,7 @@
         "messageId": "ID del mensaje",
         "inputAddress": "Dirección remitente",
         "receiveAddress": "Dirección de recepción",
+        "newAddress": "Nueva address",
         "date": "Fecha",
         "status": "Estado",
         "confirmed": "Confirmado",
@@ -672,11 +957,15 @@
         "firstSync": "Sincronizando historial, puede tardar un rato...",
         "transferSyncing": "Sincronizando billetera",
         "transferSelectingInputs": "Seleccionando entradas",
-        "transferRemainderAddress": "Generando dirección de depósito restante",
+        "transferRemainderAddress": "Generando address restante",
+        "transferPreparedTransaction": "Preparando transacción",
         "transferSigning": "Firmando la transacción",
         "transferPow": "Ejecutando PoW",
         "transferBroadcasting": "Promoviendo la transacción",
         "transferComplete": "Transferencia completada",
+        "generatingReceiveAddress": "Generando dirección de recepción",
+        "broadcasting": "Transmitiendo",
+        "confirming": "Confirmando",
         "creatingAccount": "Creando billetera, por favor espera...",
         "updatingAccount": "Actualizando billetera, por favor espera...",
         "accountSyncing": "La billetera está sincronizándose",
@@ -684,6 +973,7 @@
         "passwordUpdating": "Actualizando contraseña...",
         "passwordSuccess": "Contraseña actualizada correctamente",
         "passwordFailed": "Error al actualizar la contraseña",
+        "syncing": "Sincronizando",
         "syncingAccounts": "Sincronizando billeteras...",
         "exportingStronghold": "Exportando Stronghold...",
         "exportingStrongholdSuccess": "Stronghold exportado con éxito",
@@ -704,11 +994,24 @@
         "sendingFrom": "Enviando desde {account}",
         "receivedTo": "Recibido desde {account}",
         "sentFrom": "Enviado desde {account}",
+        "stakedFor": "Stakeado para {account}",
+        "unstakedFor": "Quitado Staking para {account}",
+        "votedFor": "Votado para {account}",
+        "unvotedFor": "Voto quitado para {account}",
         "receiving": "Recibiendo",
         "sending": "Enviando",
         "legacyNetwork": "Red heredada",
         "capsLock": "Bloqueo de mayúsculas activado",
-        "version": "Versión {version}"
+        "version": "Versión {version}",
+        "unknown": "Desconocido",
+        "none": "Ninguno",
+        "staked": "En Stake",
+        "unstaked": "No Stakeado",
+        "staking": "Staking",
+        "unstaking": "Quitando Staking",
+        "notStaked": "No en stake",
+        "stakedFunds": "Fondos en staking",
+        "unstakedFunds": "Fondos sin Stake"
     },
     "dates": {
         "today": "Hoy",
@@ -717,6 +1020,15 @@
         "weeksAgo": "hace {time, plural,one {# semana} other {# semanas}}",
         "monthsAgo": "hace {time, plural,one {# mes} other {# meses}}",
         "yearsAgo": "hace {time, plural, one {# año} other {# años}}"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Recibiendo {{value}} a {{account}}",
@@ -729,16 +1041,32 @@
         "updateError": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copiado al portapapeles",
         "accountsSynchronized": "Sincronización de billetera completada",
-        "migratedAccountChrysalisDown": "Tus fondos estarán disponibles después de Chrysalis el 28 de Abril",
-        "migratedAccountChrysalisUp": "Tus fondos estarán disponibles en breve"
+        "fundsAvailableSoon": "Tus fondos estarán disponibles en breve",
+        "exportTransactionHistory": {
+            "success": "El historial de transacciones de {accountAlias} se ha guardado correctamente en {filePath}",
+            "error": "No se ha podido exportar el historial de transacciones de {accountAlias}"
+        },
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Inicie sesión para iniciar el enlace IOTA",
+            "notEnabled": "Los enlaces IOTA no están habilitados",
+            "invalidFormat": "El enlace IOTA que has seguido no es válido",
+            "wallet": {
+                "send": {
+                    "success": "Detalles de pago añadidos desde el enlace IOTA"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
-            "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 character} other {# caracteres}}.",
-            "duplicate": "Ya existe un perfil con este nombre."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "Ya existe un perfil con este nombre.",
+            "delete": {
+                "nonEmptyAccounts": "Debes transferir todos los fondos antes de poder borrar tu perfil."
+            }
         },
         "password": {
             "doNotMatch": "Las contraseñas no coinciden.",
@@ -755,25 +1083,28 @@
             "similar": "Esto es similar a una contraseña común.",
             "word": "Una sola palabra es fácil de adivinar.",
             "incorrect": "Tu contraseña es incorrecta.",
-            "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 character} other {# caracteres}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Tu PIN debe tener {length, plural, one {1 dígito} other {# dígitos}} de largo.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "El nombre de tu billetera no puede tener una longitud mayor que {length, plural, one {1 carácter} other {# caracteres}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Debes utilizar tu última billetera antes de crear una nueva.",
             "notEmpty": "Debes transferir tu balance antes de eliminar esta billetera.",
             "duplicate": "Ya existe una billetera con este nombre.",
             "tilde": "El nombre de perfil no puede empezar con el carácter '~'.",
             "control": "El nombre de perfil no puede contener un caracter de control.",
             "startDot": "El nombre de perfil no puede empezar con el carácter '.'",
-            "chars": "El nombre de perfil no puede contener los siguientes caracteres <>:/\\|?*"
+            "chars": "El nombre de perfil no puede contener los siguientes caracteres <>:/\\|?*",
+            "index": "El índice de tu cuenta debe ser un número entre 0 y 2,147,483,647.",
+            "page": "La página de tu cuenta debe ser un número entre 0 y 2,147,483,647.",
+            "syncing": "Hubo un error al sincronizar sus billeteras."
         },
         "send": {
-            "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
             "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
@@ -784,14 +1115,30 @@
             "insufficientFunds": "Esta billetera tiene fondos insuficientes.",
             "noToAccount": "No has seleccionado una billetera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
-            "leavingDust": "No puede dejar menos de 1 Mi en su dirección."
+            "leavingDust": "No puede dejar menos de 1 Mi en su dirección.",
+            "cancelled": "La transacción fue cancelada.",
+            "transaction": "Hubo un error al enviar su transacción. Por favor, inténtelo de nuevo."
         },
         "node": {
             "invalid": "Por favor, introduzca una URL válida.",
-            "https": "Se requiere HTTPS. Configurar un perfil de desarrollador para usar conexiones HTTP no seguras.",
+            "dns": "No se pudo encontrar resolución DNS para el nodo.",
+            "timedOut": "Tiempo de espera agotado.",
+            "refused": "La conexión fue rechazada.",
+            "handshake": "No se pudo completar el \"apretón de manos\" con el nodo.",
+            "invalidCertificate": "No se pudo conectar con un certificado inválido.",
+            "https": "HTTPS es necesario; las conexiones inseguras sobre HTTP no están soportadas en este momento.",
             "duplicate": "Este nodo ya ha sido añadido.",
             "unsynced": "El nodo no está sincronizado.",
-            "noSynced": "No hay nodos sincronizados disponibles."
+            "noSynced": "No hay nodos sincronizados disponibles.",
+            "answer": "No se pudo obtener una respuesta de todos los nodos.",
+            "forbidden": "Esta conexión de nodo está prohibida.",
+            "pluginNotAvailable": "El complemento \"{nodePlugin}\" no está disponible en el nodo actual."
+        },
+        "network": {
+            "mismatch": "El ID de red para este nodo es \"{networkId}\", el cual no coincide con la red actual.",
+            "notReachable": "El ID de red de este nodo no se pudo recuperar, no se puede agregar el nodo.",
+            "badNodes": "No se puede conectar a la red con la configuración actual del nodo.",
+            "nonEmptyAccount": "Debes transferir todos los saldos antes de cambiar de red."
         },
         "global": {
             "generic": "Algo salió mal."
@@ -800,11 +1147,48 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemotécnico no es válido.",
-            "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {1 carácter} other {# caracteres}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
-            "phraseWordCount": "Debería haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
             "phraseCaseWord": "La palabra \"{word}\" debe estar en minúsculas"
+        },
+        "ledger": {
+            "appNotOpen": "Debes abrir la aplicación IOTA en tu dispositivo Ledger.",
+            "generic": "Se ha producido un error al conectar a tu dispositivo Ledger.",
+            "legacyConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
+            "locked": "Por favor, desbloquea tu dispositivo Ledger ingresando el PIN.",
+            "mnemonicMismatch": "Has conectado un dispositivo Ledger incorrecto o el mnemónico ha cambiado.",
+            "notDetected": "Ningún dispositivo Ledger detectado.",
+            "notFound": "Dispositivo Ledger no encontrado.",
+            "otherConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
+            "generateAddress": "Hubo un error al generar una address.",
+            "timeout": "El tiempo de espera de tu Ledger ha expirado.",
+            "disconnected": "Tu dispositivo Ledger fue desconectado.",
+            "noStronghold": "No se puede utilizar Stronghold con el perfil de Ledger."
+        },
+        "popup": {
+            "preventClose": "Esta ventana emergente no se puede cerrar."
+        },
+        "migration": {
+            "missingBundle": "Ha ocurrido un error al buscar el paquete de la transacción."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "No se puede decodificar la cadena como dirección Bech32."
+        },
+        "participation": {
+            "cannotUseAccount": "No se puede utilizar la cuenta especificada.",
+            "cannotFindStakingEvent": "No se puede encontrar el evento de Staking.",
+            "cannotVisitAirdropWebsite": "No se puede abrir el sitio web de {airdrop}.",
+            "invalidStakingEventId": "ID del evento de Staking es inválido."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "El uso de nodos sobre HTTP deja el tráfico sin cifrar y podría plantear un riesgo de seguridad."
+        },
+        "participation": {
+            "noAccounts": "No tienes ninguna IOTA."
         }
     },
     "tooltips": {
@@ -815,6 +1199,65 @@
             "medium": "Medio",
             "low": "Bajo",
             "veryLow": "Muy bajo"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "El Staking aún no ha comenzado",
+                "body": "Vuelve a intentarlo más tarde. El evento de Staking aún no ha comenzado."
+            },
+            "commencing": {
+                "title": "Pre-staking está ahora disponible",
+                "body": "Deja tus monedas en \"pre-stake\", y una vez el período de Staking empiece, automáticamente recibirás los incentivos cada 10 segundos."
+            },
+            "activeHolding": {
+                "title": "El Staking está en progreso",
+                "body": "Bien hecho. Recibirás recompensas cada 10 segundos."
+            },
+            "inactiveHolding": {
+                "title": "El Staking está disponible",
+                "body": "Haz Stake con tus tokens de IOTA para recibir recompensas cada 10 segundos."
+            },
+            "inactive": {
+                "title": "No se han detectado eventos de Staking",
+                "body": "En Configuración Avanzada, abra la configuración de red y asegúrese de que el nodo actual tiene la función \"Participación\" haciendo clic en \"Ver info\"."
+            },
+            "ended": {
+                "title": "El Staking ha finalizado",
+                "bodyAboveRewardMin": "Las recompensas de Assembly y Shimmer se distribuirán a tus carteras respectivamente, cuando se inaugure la red correspondiente.",
+                "bodyBelowRewardMin": "No has hecho Stake con la suficiente cantidad de IOTA para alcanzar las recompensas mínimas."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nuevos fondos sin Stake: {amount}",
+            "titleNoFunds": "Nuevos fondos sin Stake",
+            "preBody": "Has recibido tokens en una cartera con staking activado.",
+            "body": "Tienes que activar manualmente el staking para estos nuevos fondos para recibir las recompensas de airdrop."
+        },
+        "stakingMinRewards": {
+            "title": "Por debajo del valor mínimo de recompensa",
+            "titleMinBalance": "{amount} saldo mínimo requerido",
+            "bodyMinBalance": "Esta cartera no tiene suficientes tokens IOTA para alcanzar la recompensa mínima del airdrop y por lo tanto no puede entrar en modo stake.",
+            "continue": "Por favor continúa con el staking por otros {duration}.",
+            "bodyBelowMin": "Esta cartera no ha alcanzado el valor mínimo de recompensa para {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Debes hacer Stake por otros {duration} para alcanzar el mínimo.",
+            "bodyWillNotReachMin": "No alcanzarás la cantidad mínima de recompensas durante el periodo restante de Stake a menos que añadas más IOTA.",
+            "bodyDidNotReachMin": "No has hecho Stake con la suficiente cantidad de IOTA para alcanzar las recompensas mínimas de {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Esta cartera no tiene suficientes tokens IOTA para alcanzar la recompensa mínima de airdrop de {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID del mensaje",
+            "internal": "Interno",
+            "rawValue": "Valor sin procesar",
+            "formattedValue": "Valor formateado",
+            "date": "Fecha",
+            "time": "Hora"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

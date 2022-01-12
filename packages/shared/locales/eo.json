@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Sendu, ricevu kaj administru viajn IOTA ĵetonojn",
-            "body": "Firefly estas la oficiala monujo-apo de IOTA."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
-            "title": "Regularo pri Privateco kaj Kondiĉoj de Uzado",
-            "body": "Bonvole kontrolu la regularon pri privateco kaj kondiĉojn de uzado.",
+            "title": "Privacy Policy & Terms of Service",
+            "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "Mi legis kaj akceptas la regularon pri privateco kaj kondiĉojn de uzado"
         },
         "appearance": {
@@ -15,20 +15,55 @@
         },
         "profile": {
             "title": "Krei profilon",
+            "profileName": "Profila nomo",
             "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
-            "body2": "Por nun, komencu per la nomo de via unua profilo. Vi povas aldoni aliajn profilojn poste.",
-            "profileName": "Profilnomo"
+            "body2": {
+                "first": "Nuntempe, ni komencu per via unua profilnomo.",
+                "nonFirst": "Nuntempe, ni komencu per via profilnomo."
+            },
+            "addMore": "Vi povas aldoni pliajn profilojn poste.",
+            "advancedOptions": "Advanced options",
+            "developer": {
+                "label": "Profilo de programisto",
+                "info": "Connect to the devnet or a private network"
+            }
         },
         "setup": {
             "title": "Agordu monujon",
             "chrysalisTitle": "Reta ĝisdatigo de Chrysalis",
-            "chrysalisBody": "Ekde la 21-a de Aprilo, uzantoj povas migrigi siajn ĵetonojn al la nova Chrysalis-reto. Ni rekomendas migrigi viajn nunajn ĵetonojn tiom frue kiom eblas.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Lernu pri la migrado"
         },
         "secure": {
             "title": "Sekurigi vian monujon",
             "body1": "Konservu kaj presu PDF ŝablonon de la restarigo-ilo.",
             "body2": "Se vi plenigu la restarigo-ilon kaj konservu ĝin sekure, vi ĉiam povas restarigi viajn monujojn."
+        },
+        "create": {
+            "title": "Kreu monujon",
+            "body": "Kreu novan monujon. Vi povas elekti regulan programan monujon aŭ se vi havas Ledger-aparaton, vi povas starigi aparatan monujon.",
+            "softwareAccount": {
+                "title": "Mi volas programan monujon",
+                "description": "Kreu 24-vortan Rekuperan Frazon"
+            },
+            "ledgerAccount": {
+                "title": "Mi volas aparatan monujon",
+                "description": "Ledger Nano S aŭ Nano X necesas"
+            }
+        },
+        "setupLedger": {
+            "progress1": "Konekti vian ledger",
+            "progress2": "Generi adreson",
+            "progress3": "Ŝanĝu Ledger-programon",
+            "progress4": "Ĝiri monon",
+            "watchVideo": "Spektu video-gvidilon",
+            "videoGuide": "Video-gvidilo pri Ledger migrado"
+        },
+        "ledgerInstallationGuide": {
+            "title": "Ĉu vi instalis la necesajn Ledger-programojn?",
+            "body1": "Antaŭ ol daŭrigi, vi devas trovi kaj instali ambaŭ la programon {legacy} kaj la novan IOTA-programon per Ledger Live.",
+            "body2": "Certigu, ke via mikroprogramaro Ledger estas ĝisdata. Ĉiuj antaŭinstalitaj programoj devas esti ĝisdatigitaj al siaj plej novaj versioj.",
+            "action": "Jes, mi instalis ĉi tiujn programojn"
         },
         "password": {
             "title": "Krei pasvorton",
@@ -85,33 +120,37 @@
         },
         "congratulations": {
             "title": "La agordado de la monujo estas farita",
-            "body": "Via nova monujo estas preta por uzi.",
             "fundsMigrated": "Fonduso estas migrigita",
-            "success": "Vi sukcese migrigis viajn fondusojn al la nova reto",
+            "body": "Via nova monujo estas preta por uzi.",
+            "softwareMigratedBody": "Vi sukcese migris vian monon al la nova reto",
+            "fireflyLedgerBody": "Via Ledger-konto estas sukcese rekuperita kaj vi nun povas daŭrigi.",
+            "trinityLedgerBody": "Vi sukcese migris vian Ledger al la nova reto.",
             "exportMigration": "Eksportu la protokolon de la migrado kaj finu la agordadon"
         },
         "import": {
             "title": "Restarigu aŭ migrigu fonduson",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "body": "Se vi havas ekzistantan semon/sekurkopian monujon dosieron, vi povas importi ĝin ĉi tie. Se vi posedas pli malnovajn retajn monon, vi estos kondukita tra la migraj paŝoj por transiri al la reto Chrysalis.",
+            "importSeed": "Mi havas 81 ĉeno da literoj/semo",
+            "importSeedDescription": "Enigu la semon kaj migru monon al Chrysalis",
             "importMnemonic": "Mi havas restarigo-frazon de Firefly",
             "importMnemonicDescription": "Enigu vian restarigo-frazon por restarigi viajn monujojn",
             "importFile": "Mi havas savkopio-dosieron",
-            "importFileDescription": "Alŝutu Seedvault aŭ Stronghold dosieron"
+            "importFileDescription": "Alŝutu Seedvault aŭ Stronghold dosieron",
+            "importLedger": "Mi havas kopion de Ledger",
+            "importLedgerDescription": "Restarigu aŭ migru Ledger-profilon"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
-                "enter": "Enter your seed"
+                "title": "Tajpu vian semon por komenci migradon",
+                "body": "Semo konsistas el 81 signoj. Ĉi tio estas uzata por rekuperi de la pli malnova programo Trinity.",
+                "enter": "Enmetu vian semon"
             },
             "mnemonic": {
                 "title": "Tajpu vian restarigo-frazon",
                 "body": "Restarigo-frazo havas 24 vortojn, ĉiuj minusklaj, kun spaco inter ili. Ĉi tiu estas uzata por restarigi ekzistantajn Firefly monujojn.",
                 "enter": "Enigu vian sekretan restarigo-frazon"
             },
-            "seedDetected": "81 character seed detected",
+            "seedDetected": "81-semo detektita",
             "phraseDetected": "24-vorta restarigo-frazo estas detektita",
             "checksum": "Kontrolsumo"
         },
@@ -119,18 +158,63 @@
             "title": "Restaŭru viajn monujojn uzante savkopio-dosieron",
             "body": "Importu savkopio-dosieron por restaŭri viajn monujojn. Savkopioj povas esti kaj Stronghold (.stronghold) kaj Trinity SeedVault (.kdbx)."
         },
+        "importFromLedger": {
+            "title": "Restarigu aŭ migru vian Ledger",
+            "body": "Restarigu ekzistantan profilon de Firefly Ledger, aŭ migru vian monon de Trinity.",
+            "haveFireflyLedger": "Mi havas kopion de Firefly Ledger",
+            "haveFireflyLedgerDescription": "Restarigu profilon de Firefly",
+            "haveTrinityLedger": "Mi havas sekurkopion de Trinity Ledger",
+            "haveTrinityLedgerDescription": "Migru Trinity-profilon"
+        },
+        "connectLedger": {
+            "title": "Konektu vian Ledger al Firefly",
+            "body": "Por ke via Ledger-aparato trovu Firefly, bonvolu certigi, ke la oficiala programo Ledger Live estas fermita.",
+            "trafficLight1": "Konektu kaj malŝlosu vian Ledger per via PIN",
+            "trafficLight2": "Malfermu la novan programon IOTA en via Ledger",
+            "tips": "Konsiloj se via Ledger ne konektas"
+        },
+        "restoreFromFireflyLedger": {
+            "title": "Restarigu Vian Ledger Profilon",
+            "body": "Premu restarigi por kompletigi la agordan procezon kaj restarigi viajn monujojn, monon kaj transakcian historion.",
+            "restoring": "Restarigo de Ledger..."
+        },
+        "legacyLedgerIntro": {
+            "title": "Komencu vian Ledger-migradon per Firefly",
+            "body1": "Firefly helpos vin transsendi viajn ĵetonojn al la nova Chrysalis reto.",
+            "body2": "Post la migrado, vi povos sendi kaj ricevi viajn ĵetonojn per via Ledger kun Firefly.",
+            "readMore": "Kion atendi de la migrada procezo"
+        },
+        "generateNewLedgerAddress": {
+            "title": "Generi novan adreson",
+            "body": "Vi devas generi novan adreson por migri viajn signojn per Firefly. Alklaku la suban butonon por daŭrigi.",
+            "confirmTitle": "Konfirmu la novan adreson",
+            "confirmBody": "Por sekureco, bonvolu kompari la adreson generitan sur via Ledger-aparato kun tiu montrita sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite.",
+            "confirmedTitle": "Adreso konfirmita",
+            "confirmedBody": "Vi konfirmis, ke la adreso en Firefly kongruas kun tiu de via Ledger-aparato.",
+            "generating": "Generanta adreso"
+        },
+        "switchLedgerApps": {
+            "title": "Ŝanĝi Ledger-programojn",
+            "body": "Bonvolu ŝanĝi al la programo {legacy} en via Ledger-aparato por daŭrigi migradon. Kiam vi pretas, premu daŭrigi."
+        },
+        "selectLedgerAccountIndex": {
+            "title": "Elektu Ledger-kontan indekson",
+            "body": "Elektu la indekson de Ledger-konto, kiun vi uzis kun Trinity. Por plej multaj uzantoj ĉi tio estos la defaŭlta indekso de 0.",
+            "accountIndex": "Konto-Indekso",
+            "accountPage": "Konta Paĝo",
+            "standard": "Normo",
+            "expert": "Eksperta",
+            "takingAWhile": "Ĉi tio daŭras iomete...",
+            "notGeneratingAddresses": "Ĉu via Ledger generas adresojn?",
+            "reinstallLegacy": "Se ne, malkonektu la aparaton kaj provu denove. Se la problemo daŭras, vi eble bezonos reinstali la programon {legacy}."
+        },
         "importBackupPassword": {
-            "title": "Restaŭru viajn monujojn de SeedVault aŭ Stronghold",
             "body1": "Tajpu vian savkopio-pasvorton.",
             "body2": "Ĉi tiu estas pasvorto kiun vi agordis, kiam vi por la unua fojo kreis vian savkopion."
         },
         "importSuccess": {
             "title": "Vi sukcese restaŭris vian savkopion",
-            "body": "Vi nun povas agordi vian novan profilon.",
-            "seedvaultTitle": "Sukcese importita",
-            "seedvaultBody": "Via pasvorto estas ĝusta, nun vi povas daŭrigi.",
-            "strongholdTitle": "Sukcese importita",
-            "strongholdBody": "Via pasvorto estas ĝusta, nun vi povas daŭrigi."
+            "body": "Vi nun povas agordi vian novan profilon."
         },
         "migrate": {
             "title": "Migrigi vian fonduson",
@@ -147,28 +231,28 @@
             "restoringWallet": "Restaŭri monujon...",
             "findingBalance": "Trovante bonhavon...",
             "incorrectSeedVaultPassword": "Malĝusta SeedVault pasvorto.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
+            "noDataSeedVault": "Neniuj datumoj troveblis en la SemKluzo.",
+            "signingBundle": "Subskriba pakaĵo",
+            "broadcastingBundle": "Dissendanta pakaĵo",
+            "miningBundle": "Minada pakaĵo",
             "problemRestoringWallet": "Okazis reta eraro dum restaŭri vian monujon. Bonvole provu denove.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "Vi havas tro da adresoj kun malalta bonhavo por migrigi. Kontrolu ree ĉu via bonhavo aspektas ĝuste.",
+            "minimumMigrationAmountSpentAddresses": "La minimuma migrokvanto por ĉiu elspezita adreso estas 1 Mi. Kontrolu denove se via bilancoj ne aspektas ĝusta.",
+            "tooManyAddressesToMigrate": "Vi havas tro da adresojn kun malalta bonhavo por migri. Kontrolu denove ĉu via bonhavo aspektas ĝuste.",
             "cannotMigrateAllYourFunds": "Ni ne povas migrigi la tutan vian fonduson ĉar kelkaj adresoj havas tro malaltan valoron. Vi povas daŭrigi kiel ajn. {value} perdiĝos.",
             "error": "Estis eraro dum migrigi vian fonduson. Bonvole provu denove."
         },
         "bundleMiningWarning": {
             "title": "Averto",
-            "body1": "You have funds on one or more spent addresses.",
+            "body1": "Vi havas monon por unu aŭ pluraj elspezitaj adresoj.",
             "body2": "Ni rekomendas ke vi rulu aŭtomatigitan procezon por helpi sekurecon kaj transpagi ĉi tiun fonduson sekure.",
             "body3": "Se vi fermu la apon, vi bezonos rekomenci la tutan migradon.",
-            "learn": "Learn about spent addresses"
+            "learn": "Lernu pri elspezitaj adresoj"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "title": "Sekuraj elspezitaj adresoj",
+            "body1": "Vi havas monon detektitajn ĉe {number, plural, one {# elspezita adreso} other {# elspezitaj adresoj}}.",
             "body2": "Ni rekomendas ke vi rulu aŭtomatigitan procezon por helpi sekurecon kaj transpagi vian fonduson sekure.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "error": "Vi ne povas migri elspezitajn adresojn kun malpli ol 1 Mi"
         },
         "securityCheckCompleted": {
             "title": "Sekur-kontrolo estas finita",
@@ -178,13 +262,14 @@
             "continueMigration": "Daŭrigu migradon"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "Ĉi tiu procezo eble daŭros {minutes, plural, one {1 minuton} other {# minutojn}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "Sekuraj elspezitaj adresoj...",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body2": "Via komputilo funkcios laŭ plena kapablo, eble vi volas fari ion alian dum vi atendas, ke ĉi tio finiĝos."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "migrate": "Migrate funds",
+            "body1": "Firefly nun migros viajn bonhavojn. Ĉi tio eble daŭros iom da tempo.",
+            "body2": "Certigu, ke via Ledger estas konektita kaj la programo {legacy} estas ĉiam malfermita dum migrado.",
+            "migrate": "Migru bonhavojn",
             "transaction": "Transakcio {number}",
             "rerun": "Reprovi"
         },
@@ -194,39 +279,41 @@
         },
         "balance": {
             "title": "Via bonhavo",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "Certigu, ke via enhavo ĝustas antaŭ ol daŭrigi. Vi povas denove kontroli, ĉu aferoj ne aspektas ĝustaj.",
+            "error": "La minimuma migrokvanto por ĉiu elspezita adreso estas 1 Mi. Kontrolu denove se via bilancoj ne aspektas ĝusta.",
+            "zeroBalance": "Provu kontroli denove. Se vi ankoraŭ ne povas trovi vian bilancon, vi eble eniris malĝustan semon.",
+            "zeroBalanceLedgerLegacy": "Provu kontroli denove. Se vi ankoraŭ ne povas trovi vian bilancon, vi eble eniris malĝustan semon."
         },
         "settings": {
             "settings": "Agordoj",
             "generalSettings": {
                 "title": "Ĝeneralaj Agordoj",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Agordu la aspekton de via programo kaj aliajn ĝeneralajn agordojn"
             },
             "security": {
                 "title": "Sekureco",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Ŝanĝu vian pasvorton kaj ĝustigu sekurecajn agordojn"
             },
             "advancedSettings": {
                 "title": "Detalaj Agordoj",
-                "description": "Tools and manual settings for technical users"
+                "description": "Iloj kaj manaj agordoj por teknikaj uzantoj"
             },
             "helpAndInfo": {
                 "title": "Helpo kaj informoj",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Trovu la respondon al demando aŭ ricevu helpon pri afero"
             },
             "profile": {
                 "title": "Profilo",
                 "description": "Ŝanĝu vian profilnomon aŭ agordu avataron"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Sinkronigi monujojn",
                 "description": ""
             },
             "theme": {
                 "title": "Etoso",
-                "description": ""
+                "description": "",
+                "advice": "Rekomenci la Firefly-aplikaĵon por ke ŝanĝoj al la sistema etoso efektiviĝu"
             },
             "language": {
                 "title": "Lingvo",
@@ -234,77 +321,86 @@
             },
             "currency": {
                 "title": "Monunuo",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Ĝustigu bilancojn konvertiĝon kaj ĝisdatigojn"
             },
             "notifications": {
                 "title": "Sciigoj",
-                "description": "System notifications for transaction events"
+                "description": "Sistemaj sciigoj pri transakciaj eventoj"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to."
+                "title": "Reta stato",
+                "description": "Montras la staton de la nodo al kiu vi estas nuntempe konektita"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "title": "Eksporti Savkopio",
+                "description": "Eksporti al Stronghold dosiero - kompleta ĉifrita sekurkopio de viaj monujoj kaj plej nova transakcia historio"
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "title": "Aŭtomata Ŝlosado",
+                "description": "Neaktiva tempo antaŭ ol viaj monujoj ŝlosiĝas kaj vi estas elsalutita"
             },
             "changePassword": {
-                "title": "Change password",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "title": "Ŝanĝi pasvorton",
+                "description": "Via pasvorto estas uzata por sekurigi viajn monujojn. Vi devas uzi fortan pasvorton por protekti viajn fundusojn"
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
+                "title": "Ŝanĝi PIN-kodon",
+                "description": "Via PIN-kodo tenas vian bonhavon kaj transakciojn private",
+                "currentPincode": "Aktuala PIN",
                 "newPincode": "Nova PIN-kodo",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "confirmNewPincode": "Konfirmu novan PIN-kodon",
+                "action": "Ŝanĝi PIN"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "title": "Enhavo serĉilo",
+                "description": "Faru plilongigitan serĉon de viaj adresoj por ĵetonoj"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "title": "Kaŝitaj monujoj",
+                "description": "Elektante ĉi tiujn opciojn ĝi montros monujojn antaŭe kaŝitajn"
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "title": "Forigi profilon",
+                "description": "Forigas vian tutan profilon, monujojn kaj transakcian historion. Certigu, ke vi havas sekurkopion"
             },
             "deepLinks": {
-                "title": "Profundaj ligiloj",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "title": "IOTA ligiloj",
+                "description": "Aŭtomate plenigu transakciajn datumojn en Firefly alklakante IOTA igilon"
             },
-            "developerMode": {
-                "title": "Developer mode",
-                "description": "Connect to testnets and other developer features"
-            },
-            "nodeSettings": {
-                "title": "Nod-agordoj",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+            "networkConfiguration": {
+                "title": "Reto agordo",
+                "title2": "Reta agordo",
+                "description": {
+                    "dev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo (ŝanĝi retojn rezultos restarigi la monujon)",
+                    "nonDev": "Viaj retaj agordoj aŭtomate ĝisdatigos laŭ la nuna noda agordo"
+                },
+                "switchedNetworks": "Sukcese ŝanĝis reton al \"{networkName}\".",
+                "resetWallet": "Via monujo stato estis rekomencigita.",
+                "connectedTo": "Ligita al",
+                "nodeConfiguration": {
+                    "title": "Elekto de nodo",
+                    "description": "Elektu \"Manlibro\" por agordi nodagordojn kaj konekti al via propra nodo(j)",
+                    "automatic": "Aŭtomata",
+                    "manual": "Manlibro"
+                }
             },
             "configureNodeList": {
-                "title": "Elektu nodon",
-                "description": "Manage the list of IOTA network nodes you connect to",
+                "title": "Noda agordo",
+                "description": "Administru la liston de nodoj al kiuj vi konektas",
                 "primaryNode": "Ĉefa nodo",
                 "excludeNode": "Ekskluzivi nodon",
                 "includeNode": "Inkluzivi nodon",
-                "viewDetails": "Vidu detalojn",
+                "editDetails": "Redakti detalojn",
+                "viewInfo": "Vidi informojn",
                 "setAsPrimary": "Agordi kiel la ĉefa",
                 "removeNode": "Forigi nodon",
                 "includeOfficialNodeList": "Inkluzivi oficialan nod-liston",
-                "noNodes": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "Ne estas nodoj, ne eblas konekti al la reto",
+                "noNodesAuto": "Ne ekzistas nodoj, aŭtomata elektado estos uzata anstataŭe"
             },
             "proofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "Pruvo de funkciado",
+                "description": "Kompleta pruvo de loka funkciado sur via aparato aŭ subkontraktado al la nodo"
             },
             "errorLog": {
                 "title": "Erar-protokolo",
@@ -314,80 +410,130 @@
                 "title": "Diagnozoj",
                 "description": "Vidi la informojn de la sistemo kaj la apo"
             },
-            "stateExport": {
-                "title": "State export",
-                "description": "Eksportu vian transakcio-historion al .csv dosiero"
+            "migrateLedgerIndex": {
+                "title": "Migri Ledger indekson",
+                "description": "Migru alian Trinity-kontan indekson"
             },
             "troubleshoot": {
                 "title": "Problemsolvi",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Uzu la problemsolvan asistilon por solvi oftajn problemojn"
             },
             "documentation": {
-                "title": "Documentation",
-                "description": "View the documentation for in depth explanations of how things work"
+                "title": "Dokumentaro",
+                "description": "Rigardu la dokumentaron por profundaj klarigoj pri kiel funkcias aferoj"
             },
             "faq": {
                 "title": "Oftaj demandoj",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Oftaj Demandoj",
+                "description": "Rigardu la Demandojn por ricevi helpon pri ofta problemo aŭ demando"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Ricevu helpon de IOTA komunumo en Discord"
             },
             "about": {
                 "title": "Pri",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "title": "Raporti problemon",
+                "description": "Raporti cimon al la programistoj. Kontrolu por certigi, ke ĝi ne jam estis raportita"
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "upToDate": "Ĝisdata",
+                    "outOfDate": "Malmodernan"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "title": "Aparataroj",
+                    "statuses": {
+                        "appNotOpen": "IOTA Programo Ne Malfermita",
+                        "connected": "Konektita",
+                        "legacyConnected": "{legacy} Malferma Programo",
+                        "locked": "Ŝlosita",
+                        "mnemonicMismatch": "Malĝusta Ledger aŭ Mnemoniko",
+                        "notDetected": "Ne Detektita",
+                        "otherConnected": "Malferma Aplikaĵo"
+                    }
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Monujo-Stato",
+                    "locked": "Ŝlosita",
+                    "unlocked": "Malŝlosi"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Monujo Savkopio",
+                    "weeksAgo": "{weeks, plural, one {# } other {# semajnoj}} antaŭ"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Retaj administrantoj",
+                "networkDegraded": "Reto Degradita",
+                "networkDown": "Reto Malkonektita",
                 "status": "Stato",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "messagesPerSecond": "Mesaĝoj po sekundo",
+                "referencedRate": "Referencita indico"
             },
             "profileModal": {
                 "allSettings": "Ĉiuj agordoj",
                 "logout": "Elsaluti"
             }
+        },
+        "staking": {
+            "title": "Stakigante",
+            "welcome": "Bonvenon al la staking panelo!",
+            "status": {
+                "upcoming": "Evento ne komenciĝis",
+                "commencing": "Antaŭ-staking malfermita",
+                "holdingActive": "Staking en progreso",
+                "holdingInactive": "Staking malferma",
+                "inactive": "Staking ne detektita",
+                "ended": "Staking finiĝis"
+            },
+            "summary": {
+                "stakedFunds": "Stakitaj bonhavojn"
+            },
+            "info": {
+                "upcomingSubheader": "Evento ne komenciĝis",
+                "upcomingHeader": "Kontrolu poste",
+                "commencingSubheader": "Preparu por staking",
+                "commencingHeader": "Antaŭ-staku viajn ĵetonojn!",
+                "holdingSubheaderHolding": "Nun gajnante stakajn rekompencojn",
+                "holdingSubheaderNotHolding": "Gajnu rekompencojn per staking de IOTA",
+                "holdingHeaderHolding": "{duration} restas",
+                "holdingHeaderNotHolding": "Stake viajn ĵetonojn!",
+                "endedSubheader": "Staking nun finiĝis",
+                "endedHeader": "Dankon!",
+                "inactiveHeader": "Provu ŝanĝi nodon",
+                "inactiveSubheader": "Staking ne detektita"
+            },
+            "airdrops": {
+                "holding": "Restanta",
+                "commencing": "Ĝis staking komenciĝas",
+                "collectedRewards": "Kolektitaj rekompencoj",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly estas senpermesa, tre skalebla plurĉena reto por konstrui kaj disfaldi komponeblajn inteligentajn kontraktojn. Assembly estas la estonteco de web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "La instigita sursceniga reto por antaŭenigi gravajn novigojn pri IOTA. Kio ajn okazas, okazas. Dependas de vi evoluo de Shimmer."
+                }
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "title": "Pasvorto estas bezonata",
+            "subtitle": "Bonvolu enigi vian pasvorton por malŝlosi viajn monujojn",
+            "backup": "Bonvolu enigi vian pasvorton por eksporti la sekurkopion"
         },
         "qr": {
             "title": "Via QR-kodo"
@@ -395,108 +541,227 @@
         "version": {
             "title": "Nuna versio: {version}",
             "upToDateTitle": "Firefly estas ĝisdatigita",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
+            "upToDateDescription": "Vi funkciigas la plej novan kaj plej sekuran version de Firefly.",
+            "updateAvailable": "Firefly ĝisdatigo havebla",
             "updateDetails": "Versio {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "Aŭtomata ĝisdatigo estas malebligita en ĉi tiu Vindozo-versio, bonvolu iri al https://firefly.iota.org por elŝuti la ĝisdatigon."
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your wallets",
+            "title": "Lasta sekurkopio: {date}",
+            "lastBackup": "Vi savis la lastan fojon la {date}",
+            "backupDescription": "Gravas sekurkopii regule por certigi, ke vi havas kopion de viaj monujoj kaj transakcia historio.",
+            "backupWarning": "Se vi perdas vian sekurkopion kaj reakiran frazon, vi perdos aliron al viaj bonhavojn.",
+            "notBackedUp": "Ne sekurkopiita",
+            "notBackedUpDescription": "Vi ne sekurkopiis viajn monujojn",
             "saving": "Konservado..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "title": "Forigi {name}?",
+            "body": "Ĉi tiu monujo ne havas transakciajn historion. Ĝi povas sekure esti forigita.",
+            "typePassword": "Tajpu vian monujan pasvorton por konfirmi.",
+            "hideAccount": "Forigu monujon",
+            "errorTitle": "Ne eblas forigi {name}",
+            "errorBody1": "Vi ne povas forigi ĉi tiun monujon, vi devas havi almenaŭ unu."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "title": "Kaŝi {name}?",
+            "body": "Vi povas trovi ĉi tiun monujon poste ebligante \"Montri kaŝitajn monujojn\" en Altnivelaj Agordoj.",
+            "typePassword": "Tajpu vian monujan pasvorton por konfirmi.",
+            "hideAccount": "Kaŝitaj monujoj",
+            "errorTitle": "Ne eblas kaŝi {name}",
+            "errorBody1": "Por kaŝi monujon ĝi devas havi 0 bilancon.",
+            "errorBody2": "Vi nuntempe havas {balance} restantan sur ĉi tiu monujo. Bonvolu movigi ĉi tiujn bonhavojn al alia monujo kaj reprovi.",
+            "errorBody3": "Vi ne povas forigi ĉi tiun monujon, vi devas havi almenaŭ unu."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "title": "{name} adreshistorio",
+            "currentBalance": "Bonhavojn: {balance}",
+            "internal": "Interna Adreso",
+            "external": "Depona Adreso"
         },
         "node": {
             "titleAdd": "Aldoni nodon",
-            "titleUpdate": "Update a node",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Node details",
-            "nodeAddress": "Node address",
-            "optionalUsername": "Username (optional)",
-            "optionalPassword": "Password (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "titleUpdate": "Ĝisdatigu nodon",
+            "titleRemove": "Forigu nodon",
+            "titleRemoveAll": "Forigu ĉiujn nodojn",
+            "titleDetails": "Nodo detaloj",
+            "titleInfo": "Informo pri la nodo",
+            "addingNode": "Aldoni nodon",
+            "updatingNode": "Ĝisdatigu la nodon",
+            "loadingNodeInfo": "Ŝarĝante nodan informon",
+            "nodeAddress": "Nodo adreso",
+            "optionalUsername": "Uzantnomo (nedeviga)",
+            "optionalPassword": "Pasvorto (nedeviga)",
+            "optionalJwt": "JSON-retĵetono (laŭvole)",
+            "setAsPrimaryNode": "Agordi kiel la ĉefa nodo",
+            "removeConfirmation": "Ĉu vi certe volas forigi ĉi tiun nodon?",
+            "removeAllConfirmation": "Ĉu vi certe volas forigi ĉiujn nodojn?",
+            "info": {
+                "url": "URL",
+                "software": "Programaro",
+                "networkId": "Reto ID",
+                "bech32HRP": "Bech32 HRP",
+                "features": "Karakterizaĵoj",
+                "confirmedMilestoneIndex": "Konfirmita ĵetono indekso",
+                "pruningIndex": "Forviŝa progresindekso",
+                "messagesPerSecond": "Mesaĝoj po sekundo",
+                "referencedRate": "Referencita indico"
+            }
+        },
+        "switchNetwork": {
+            "title": "Ŝanĝi reton",
+            "newNetwork": "Nova reto",
+            "resetWarning": "Ŝanĝi retojn elsalutos vin kaj restarigos ĉiujn kontojn, bonhavojn kaj transakcian historion por ĉi tiu profilo.",
+            "switchingNetwork": "Ŝanĝanta reto",
+            "typePassword": "Tajpu vian pasvorton por ŝanĝi al:"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Eraroj registroj",
+            "empty": "La erarregistro estas malplena."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "title": "Forigi profilon",
+            "confirmation": "Ĉu vi certas, ke vi volas forigi tiun ĉi profilon? Tiu ĉi ago ne estas malfarebla.",
+            "typePassword": "Tajpu vian pasvorton por konfirmi."
         },
         "diagnostics": {
             "title": "Diagnozoj",
             "node": "Nodo",
             "platform": "Platformo",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "platformVersion": "Platformversio",
+            "platformArchitecture": "Platformo-Arkitekturo",
+            "cpuCount": "CPUs Nombro",
+            "totalMem": "Tuta memoro",
+            "freeMem": "Disponebla Memoro",
+            "userPath": "Uzanta Vojo"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Konfirmu transakcion",
+            "body": "Vi estas sendonta {amount} al",
+            "sendingFromStakedAccount": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "Enhavo serĉilo",
+            "body": "Faru pli ĝisfundan serĉon de adresoj por trovi mankantajn bilancojn. Ĉi tio eble daŭros iom da tempo.",
+            "totalWalletBalance": "Entuta bilancoj",
+            "typePassword": "Tajpu vian pasvorton por permesi serĉadon."
         },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Averto: fundusoj en risko dum migrado",
+            "body1": "Estas forte rekomendita sekurigi ĉiujn viajn financojn antaŭ ol daŭrigi migradon. Viaj financoj riskas ŝtelon, se vi ne sekurigas ilin.",
+            "body2": "Oni rekomendas rekomenci la procezon por adresoj kun meza riska nivelo aŭ pli."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Averto: fundusoj en risko dum migrado",
+            "body": "Vi havas fundusojn en adresoj, kiuj antaŭe estis uzataj por sendi fundusojn, sed la informoj necesaj por sekurigi ilin ne estis trovitaj. Ĉi tio povas okazi se vi faris transakciojn delonge. Vi povas daŭrigi, sed vi eble perdos {value} dum la migrado.",
+            "learnMore": "Lernu pri elspezitaj adresoj",
+            "proceed": "Jes, mi komprenas la riskojn"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
-            "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "title": "Reta ĝisdatigo en progreso",
+            "body": "La ĝisdatigo de la reto Chrysalis komenciĝis.",
+            "bodyMigration": "Migrado estas malebligita ĝis ĝi finiĝas.",
+            "bodyFirefly": "Firefly estas malŝaltita ĝis ĝi finiĝas. Migrado de ĵetonoj tiam eblos."
+        },
+        "ledgerNotConnected": {
+            "connect": "Malfermu la novan IOTA apon en via Ledger-aparato por daŭrigi",
+            "connectLegacy": "Malfermu la apon {legacy} en via Ledger-aparato por daŭrigi"
+        },
+        "ledgerConfirmation": {
+            "confirm": "Por daŭrigi, konfirmu la prompton montritan sur via Ledger-aparato"
+        },
+        "ledgerAppGuide": {
+            "title": "Gvidilo por instali la Ledger programojn",
+            "steps": {
+                "0": "Instalu kaj malfermu la programon Ledger Live",
+                "1": "Certigu, ke via Ledger estas konektita",
+                "2": "Serĉu programojn: {legacy} kaj IOTA (MIOTA)",
+                "3": "Instalu ambaŭ programojn: {legacy} kaj IOTA (MIOTA)",
+                "4": "Memoru, ke gravas fermi Ledger Live antaŭ reveni al Firefly"
+            }
+        },
+        "ledgerConnectionGuide": {
+            "title": "Konsiloj se via Ledger ne konektas",
+            "steps": {
+                "0": "Certigu, ke Ledger Live ne estas malfermita en via komputilo",
+                "1": "Certigu, ke vi malŝlosis vian Ledger-aparaton per via PIN",
+                "2": "Malfermu la novan programon IOTA en via Ledger aparato",
+                "3": {
+                    "text": "Ankoraŭ neniu bonŝanco?",
+                    "link": "Provu la oficialan subtenan paĝon de Ledger"
+                }
+            }
+        },
+        "ledgerTransaction": {
+            "remainderAddress": {
+                "title": "Konfirmu la ceteran adreson",
+                "info": "Pro sekurecaj kialoj, bonvolu kompari la adreson generitan sur via Ledger-aparato kun tiu montrita sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite."
+            },
+            "transaction": {
+                "title": "Konfirmu transakcion",
+                "info": "Pro sekurecaj kialoj, bonvolu kompari la informojn generitajn en via Ledger kun tiuj montritaj sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite."
+            }
+        },
+        "ledgerAddress": {
+            "title": "Konfirmu ricevantan adreson",
+            "body": "Bonvolu kompari la adreson generitan sur via Ledger kun tiu montrita sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite."
+        },
+        "ledgerMigrateIndex": {
+            "title": "Ĉu vi bezonas migri alian Trinity-kontan indekson?",
+            "body": "Vi ankaŭ povas migri poste en Altnivelaj Agordoj."
+        },
+        "exportTransactionHistory": {
+            "title": "Eksporti transakciajn historion",
+            "body": "Eksportu la transakcian historion por la elektita monujo. La eksportita dosiero estos en .csv-formato.",
+            "profileName": "Profilnomo:",
+            "accountName": "La nomo de la konto:",
+            "typePassword": "Tajpu vian pasvorton por permesi eksportadon"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking ankoraŭ ne komenciĝis",
+            "commencingDate": "Staking ankoraŭ ne komenciĝis",
+            "body": "Antaŭen staking viajn bonhavojn antaŭ ol la staking komenciĝos, vi aŭtomate komencos ricevi rekompencojn kiam la staking komenciĝos.",
+            "ok": "Bone, mi komprenas"
+        },
+        "stakingManager": {
+            "title": "Staking Administrado",
+            "description": "Kiam vi stakas monujon, vi sendas transakcion al vi mem markante tiujn fondusojn kiel \"stakitaj\". Vi povas translokigi la ĵetonojn iam ajn, sed vi daŭre ne ricevos staking rekompencojn.",
+            "totalFundsStaked": "Totalaj bonhavoj stakita",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Gratulon, ke vi gajnis ASMB-ĵetonojn kiel staking rekompencon. Assembly estas plurĉena reto por disfaldi skaleblajn inteligentajn kontraktojn sur IOTA.",
+            "body2": "Ni celas lanĉi Assembly en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
-        "portoflio": "Portfolio",
+        "incomingMi": "Alvenanta {value}",
+        "outgoingMi": "Eliranta {value}",
+        "portoflio": "Monujo",
         "token": "Ĵetono",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "holdings": "Posedaĵoj",
+        "accountValue": "Valoro de Monujo",
+        "accountActivity": "Aktiveco de Monujo",
         "timeframe1Hour": "1 horo",
         "timeframe1Day": "1 tago",
         "timeframe1Week": "1 semajno",
@@ -505,60 +770,64 @@
     "actions": {
         "continue": "Daŭrigi",
         "back": "Reveni",
+        "previous": "Antaŭe",
+        "next": "Sekva",
         "cancel": "Nuligi",
         "close": "Fermi",
-        "dismiss": "Dismiss",
-        "proceedAnyway": "Proceed anyway",
+        "dismiss": "Eksigi",
+        "proceedAnyway": "Daŭrigi ĉiuokaze",
         "save": "Konservi",
-        "importSeed": "Import an existing seed",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
-        "savePassword": "Save password",
-        "useBiometric": "Use biometric security",
+        "importSeed": "Importi ekzistantan semon",
+        "restoreWallet": "Migri aŭ restarigi monujon",
+        "restoreWalletDescription": "Migri al Chrysalis aŭ restarigi ekzistantan monujon",
+        "createWallet": "Krei novan monujon",
+        "createWalletDescription": "Kreu novan monujon funkciantan per Chrysalis",
+        "savePassword": "Konservu pasvorton",
+        "useBiometric": "Uzu biometrikan sekurecon",
         "setupPin": "Agordu PIN-kodon",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
-        "saveBackupFile": "Save backup file",
-        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "setPin": "Agordi PIN-kodon",
+        "confirmPin": "Konfirmu PIN-kodon",
+        "enterYourPin": "Enmetu vian PIN",
+        "saveBackupFile": "Konservu savkopian dosieron",
+        "iveWrittenRecoveryPhrase": "Mi notis mian retrovan frazon",
         "verifyRecoveryPhrase": "Konfirmu frazo-restarigon",
         "revealRecoveryPhrase": "Malkaŝu restarigo-frazon",
-        "importSeedvault": "Import SeedVault",
+        "importSeedvault": "Importu SeedVault",
         "checkAgain": "Rekontroli",
-        "importFromFile": "Import from a file",
+        "importFromFile": "Enporti el dosiero",
         "send": "Sendi",
         "receive": "Ricevi",
         "create": "Krei",
-        "beginTransfer": "Begin Transfer",
+        "beginTransfer": "Komencu Transakcio",
         "tryAgain": "Reprovi",
-        "visitDiscord": "Visit Discord",
-        "dragDrop": "Drag & Drop",
-        "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Choose a File",
-        "dropHere": "Drop your file here",
+        "visitDiscord": "Vizitu Discord",
+        "dragDrop": "Treni & Deponi",
+        "importExtentions": ".Kdbx aŭ .stronghold dosiero",
+        "chooseFile": "Elekti dosieron",
+        "dropHere": "Ĵetu vian dosieron ĉi tien",
         "syncAll": "Sinkronigi ĉion",
         "export": "Eksporti",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
-        "localProofOfWork": "Local proof of work",
+        "exporting": "Eksportante",
+        "exportNewStronghold": "Eksporti novan Stronghold",
+        "enableDeepLinks": "Ebligu IOTA ligilojn",
+        "enableDeveloperMode": "Aktivigi programan modon",
+        "enableSystemNotifications": "Aktivigi sistemajn sciigojn",
+        "exportTransactionHistory": "Eksporti transakciajn historion",
+        "localProofOfWork": "Loka pruvo de laboro",
         "unlock": "Malŝlosi",
-        "updateFirefly": "Update Firefly",
-        "restartNow": "Restart now",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise wallet",
-        "viewAddressHistory": "View address history",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "updateFirefly": "Ĝisdatigu Firefly",
+        "restartNow": "Rekomencu nun",
+        "saveBackup": "Konservu Stronghold savkopion",
+        "customizeAcount": "Personecigi monujon",
+        "viewAddressHistory": "Vidi adresan historion",
+        "hideAccount": "Kaŝitaj monujoj",
+        "showAccount": "Malkaŝi monujon",
+        "deleteAccount": "Forigu monujon",
         "max": "Maksimume",
         "addNode": "Aldoni nodon",
-        "updateNode": "Update node",
-        "removeNode": "Remove node",
+        "updateNode": "Ĝisdatigu la nodon",
+        "removeNode": "Forigi nodon",
+        "removeAllNodes": "Forigu ĉiujn nodojn",
         "hide": "Kaŝi",
         "hideOthers": "Kaŝi aliajn",
         "showAll": "Montri ĉion",
@@ -569,252 +838,426 @@
         "cut": "Eltranĉi",
         "copy": "Kopi",
         "paste": "Alglui",
-        "selectAll": "Select All",
-        "addAccount": "Add Wallet",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
+        "selectAll": "Elekti Ĉiujn",
+        "addAccount": "Aldoni monujon",
+        "checkForUpdates": "Serĉi ĝisdatigojn",
+        "reportAnIssue": "Raporti problemon",
+        "restore": "Restarigi",
+        "clear": "Forigi ĉion",
+        "hideDetails": "Kaŝi detalojn",
         "yes": "Jes",
         "no": "Ne",
         "skip": "Preterpasi",
-        "reset": "Reset",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden wallets",
+        "reset": "Reigi",
+        "downloadRecoveryKit": "Konservu la ŝablonon de reakira Kit",
+        "skipBackup": "Ignoru konservi dosieran sekurkopion",
+        "finishSetup": "Fini agordojn",
+        "readDocumentation": "Legu la dokumentadon",
+        "visitFaq": "Vizitu Demandojn",
+        "viewStatus": "Vidi statuso",
+        "showHiddenAccounts": "Montri kaŝitajn monujojn",
         "confirm": "Konfirmi",
-        "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly"
+        "hideNetworkStatistics": "Kaŝi retajn statistikojn",
+        "findBalances": "Trovu bonhavojn",
+        "searchBalances": "Serĉu bonhavojn",
+        "searchAgain": "Serĉi denove",
+        "searching": "Serĉante...",
+        "closeFirefly": "Fermu Firefly",
+        "generateAddress": "Generi adreson",
+        "migrateAgain": "Migrigu alian Indekson",
+        "visitWebsite": "Vizitu retejon",
+        "howItWorks": "Kiel ĝi funkcias",
+        "learnAboutStaking": "Lernu pri staking",
+        "stake": "Partoprenu",
+        "unstake": "Ĉesu partopreni",
+        "stakeFunds": "Staku bonhavojn",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "Pasvorto",
-        "confirmPassword": "Confirm password",
-        "currentPassword": "Current password",
+        "confirmPassword": "Konfirmi Pasvorton",
+        "currentPassword": "Aktuala pasvorto",
         "newPassword": "Nova pasvorto",
-        "confirmNewPassword": "Confirm new password",
-        "yourSeed": "Your Seed",
-        "recoveryPhrase": "Recovery Phrase",
-        "recentActivity": "Recent Activity",
+        "confirmNewPassword": "Konfirmu novan pasvorton",
+        "yourSeed": "Via Semo",
+        "recoveryPhrase": "Ripara Frazo",
+        "recentActivity": "Aktivaj antaŭnelonge",
         "sent": "Sendita",
         "received": "Ricevita",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
-        "sendFunds": "Send funds",
+        "sendPayment": "Sendi pagon",
+        "moveFunds": "Interna Transakcio",
+        "sendTo": "Sendi al",
+        "sendFunds": "Sendu bonhavojn",
         "sendToAddress": "Sendu al adreso",
-        "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "scanQrOrPaste": "Skanu QR-kodon aŭ alglui adreson",
+        "moveFundsBetweenAccounts": "Movi bonhavojn inter monujoj",
+        "sendTokensToAddress": "Sendu ĵetonojn al adreso",
+        "manageAccount": "Administri monujon",
+        "customizeAcount": "Agordu vian monujon",
         "account": "Monujo",
-        "sendingToAddress": "Sending to address",
+        "sendingToAddress": "Sendante al adreso",
         "amount": "Kvanto",
         "addAddress": "Aldoni adreson",
         "reference": "Referenco",
         "from": "De",
         "to": "Al",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Ricevu Fondusojn",
+        "address": "Address",
         "myAddress": "Mia adreso",
-        "shareAddress": "Share an address",
+        "shareAddress": "Kunhavigi adreson",
         "yourAddress": "Via adreso",
-        "generateNewAddress": "Generate new address",
+        "newRemainder": "Nova Restaĵo",
+        "remainder": "Restaĵo",
+        "generateNewAddress": "Generi novan adreson",
         "copyAddress": "Kopii la adreson",
         "import": "Importi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Lingvo",
         "appearance": "Aspekto",
-        "lightTheme": "Hela etoso",
-        "darkTheme": "Malhela etoso",
+        "lightTheme": "Light",
+        "darkTheme": "Dark",
+        "systemTheme": "System",
         "balance": "Saldo",
-        "accountBalance": "Wallet Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
+        "accountBalance": "Bilanco de Monujo",
+        "incoming": "Enirante",
+        "outgoing": "Elirante",
+        "totalIn": "Entuta eniro",
+        "totalOut": "Entuta eliro",
+        "accounts": "Monujoj",
+        "myAccounts": "Miaj monujoj",
         "profiles": "Profiloj",
-        "developerProfile": "Developer Profile",
-        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Programisto",
-        "createAccount": "Create a Wallet",
-        "accountName": "Wallet name",
+        "createAccount": "Krei monujon",
+        "accountName": "Nomo de la monujo",
         "latestTransactions": "La lastaj transakcioj",
         "transactions": "Transakcioj",
         "security": "Sekureco",
-        "accountAddress": "Wallet Address",
+        "accountAddress": "Monujo-adreso",
+        "network": "Network",
         "nodes": "Nodo",
         "wallet": "Monujo",
         "help": "Helpo",
         "you": "Vi",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
+        "messageId": "ID de la mesaĝo",
+        "inputAddress": "Sendanta Adreso",
+        "receiveAddress": "Ricevanta Adreso",
+        "newAddress": "Nova Adreso",
         "date": "Dato",
         "status": "Stato",
         "confirmed": "Konfirmita",
-        "pending": "Pending",
-        "noAccounts": "You have no wallets, please create one.",
-        "loadingAccounts": "Loading, please wait...",
+        "pending": "En progreso",
+        "noAccounts": "Vi ne havas monujojn, bonvolu krei unu.",
+        "loadingAccounts": "Ŝarĝante, bonvolu atendi...",
         "addProfile": "Aldoni profilon",
-        "noRecentHistory": "No recent history",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing wallets...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
+        "noRecentHistory": "Neniu freŝa historio",
+        "firstSync": "Sinkronigante historion, ĉi tio eble daŭros iom da tempo...",
+        "transferSyncing": "Sinkronigante monujon",
+        "transferSelectingInputs": "Elektu eniron",
+        "transferRemainderAddress": "Kreanta restaĵa adreso",
+        "transferPreparedTransaction": "Preparanta transakcion",
+        "transferSigning": "Subskribo de la transakcio",
+        "transferPow": "Plenumante PoW",
+        "transferBroadcasting": "Elsenda transakcio",
+        "transferComplete": "Kompleta ĝiro",
+        "generatingReceiveAddress": "Generante ricevan adreson",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
+        "creatingAccount": "Kreante monujon, bonvolu atendi...",
+        "updatingAccount": "Ĝisdatigante monujon, bonvolu atendi...",
+        "accountSyncing": "Monujo sinkronigas",
+        "accountSyncComplete": "La agordado de la monujo estas farita",
+        "passwordUpdating": "Ĝisdatigante pasvorton...",
+        "passwordSuccess": "Pasvorto sukcese ĝisdatigita",
+        "passwordFailed": "Ĝisdatigi pasvorton malsukcesis",
+        "syncing": "Syncing",
+        "syncingAccounts": "Sinkronigante monujojn...",
+        "exportingStronghold": "Eksportanta Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold sukcese eksportita",
+        "exportingStrongholdFailed": "Eksportado de Stronghold malsukcesis",
+        "pinCodeUpdating": "Ĝisdatigante PIN-kodon...",
+        "pinCodeSuccess": "PIN kodo sukcese ĝisdatigita",
+        "pinCodeFailed": "PIN-kodo ĝisdatigo malsukcesis",
+        "passwordStrength": "Pasvorta forto",
         "passwordStrength0": "Malbona",
         "passwordStrength1": "Malbona",
         "passwordStrength2": "Malforta",
         "passwordStrength3": "Averaĝa",
         "passwordStrength4": "Forta",
-        "creatingProfile": "Creating profile, please wait...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending",
-        "legacyNetwork": "Legacy Network",
-        "capsLock": "Caps Lock is on",
-        "version": "Version {version}"
+        "creatingProfile": "Kreante profilon, bonvolu atendi...",
+        "fundMigration": "Fundusoj migrado",
+        "accountRemoved": "Ĉi tiu monujo estas kaŝita. Malkaŝu ĝin por plenumi ĝirojn.",
+        "receivingTo": "Ricevante al {account}",
+        "sendingFrom": "Sendi de {account}",
+        "receivedTo": "Ricevita al {account}",
+        "sentFrom": "Sendita de {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
+        "receiving": "Ricevante",
+        "sending": "Sendante",
+        "legacyNetwork": "Malnova Reto",
+        "capsLock": "Majuskla aktivigita",
+        "version": "Versio {version}",
+        "unknown": "Nekonata",
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Stakigante",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Stakitaj bonhavojn",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Hodiaŭ",
         "yesterday": "Hieraŭ",
         "daysAgo": "antaŭ {time, plural, one {# tago} other {# tagoj}}",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "weeksAgo": "{time, plural, one {# semajno} other {# semajnoj}} antaŭ",
+        "monthsAgo": "{time, plural, one {# monato} other {# monatoj}} antaŭ",
+        "yearsAgo": "{time, plural, one {# jaro} other {# jaroj}} antaŭ"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
-        "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Wallet synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "valueTx": "Ricevante {{value}} al {{account}}",
+        "confirmed": "Eliranta {{value}} de {{account}} konfirmis",
+        "confirmedInternal": "{{value}} de {{senderAccount}} al {{receiverAccount}} konfirmis",
+        "confirmedInternalNoAccounts": "{{value}} interna ĝiro konfirmiĝis",
+        "failed": "Eliranta {{value}} de {{account}} malsukcesis",
+        "downloadingUpdate": "Elŝutante ĝisdatigojn",
+        "updateReady": "Ĝisdatigo preta",
+        "updateError": "Eraro okazis dum la ĝisdatigo, bonvolu reprovi",
+        "restartInstall": "Rekomencu por instali",
+        "calcMinutesRemaining": "Kalkulante minutojn restantajn...",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied al dosierujo",
+        "accountsSynchronized": "Monujo-sinkronigado finiĝis",
+        "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
+        "deepLinkingRequest": {
+            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "notEnabled": "IOTA links are not enabled",
+            "invalidFormat": "The IOTA link you followed is invalid",
+            "wallet": {
+                "send": {
+                    "success": "Payment details added from IOTA link"
+                }
+            }
+        }
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "Profilo kun ĉi tiu nomo jam ekzistas.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "Pasvortoj ne kongruas.",
+            "tooWeak": "Via nova pasvorto estas tro malforta.",
+            "row": "La klavopremoj estas facile devineblaj.",
+            "pattern": "Mallongaj klavaraj ŝablonoj estas facile diveneblaj.",
+            "names": "Oftaj nomoj kaj familiaj nomoj estas facile diveneblaj.",
+            "repeats": "Ripetoj kiel 'aaa' estas facile diveneblaj.",
+            "repeats2": "Ripetoj kiel 'abcabcabc' estas facile diveneblaj.",
+            "sequence": "Sinsekvoj de signoj estas facile diveneblaj.",
+            "years": "Lastatempaj jaroj estas facile diveneblaj.",
+            "dates": "Datoj estas facile diveneblaj.",
+            "common": "Ĉi tio estas tre ofta pasvorto.",
+            "similar": "Ĉi tio similas al ofta pasvorto.",
+            "word": "Ununura vorto estas facile divenebla.",
+            "incorrect": "Via pasvorto estas malĝusta.",
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "match": "PINoj ne kongruas.",
+            "incorrect": "Via nuna PIN estas malĝusta."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this wallet.",
-            "duplicate": "A wallet with this name already exists.",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "empty": "Vi devas uzi vian plej novan monujon antaŭ krei novan.",
+            "notEmpty": "Vi devas transdoni vian bilancon, antaŭ forigi ĉi tiun monujon.",
+            "duplicate": "Monujo kun ĉi tiu nomo jam ekzistas.",
+            "tilde": "Profilnomo ne povas komenci per la signo '~'.",
+            "control": "Profilnomo ne povas enhavi kontrolan signon.",
+            "startDot": "Profila nomo ne povas komenci per la '.' signon.",
+            "chars": "Profilnomo ne povas enhavi la jenajn signojn <>: \"/ \\ |? *",
+            "index": "Via konta indekso devas esti nombro inter 0 kaj 2.147.483.647.",
+            "page": "Via kontpaĝo devas esti nombro inter 0 kaj 2.147.483.647.",
+            "syncing": "Estis eraro dum sinkronigado de viaj monujoj."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This wallet has insufficient funds.",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "amountTooHigh": "Ĉi tio estas pli granda ol via disponebla bonhavo.",
+            "amountNoFloat": "Se unuoj estas `i` vi ne povas uzi dekumajn lokojn.",
+            "amountInvalidFormat": "La kvanto ŝajnas esti nevalida nombro.",
+            "amountZero": "La kvanto devas esti pli granda ol 0.",
+            "wrongAddressPrefix": "Adresoj komenciĝas per la prefikso {prefix}.",
+            "wrongAddressFormat": "La adreso ne estas ĝuste formatita.",
+            "invalidAddress": "La adreso ne validas.",
+            "insufficientFunds": "Ĉi tiu monujo havas nesufiĉajn fondusojn.",
+            "noToAccount": "Vi ne elektis monujon por sendi la fondusojn.",
+            "sendingDust": "Vi ne povas sendi malpli ol 1 Mi.",
+            "leavingDust": "Vi ne povas lasi malpli ol 1 Mi sur via adreso.",
+            "cancelled": "La transakcio estis nuligita.",
+            "transaction": "Estis eraro dum sendado de via transakcio. Bonvolu reprovi."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "Bonvolu enigi validan URL.",
+            "dns": "Could not find DNS resolution for node.",
+            "timedOut": "The connection timed out.",
+            "refused": "The connection was refused.",
+            "handshake": "Could not complete handshake with node.",
+            "invalidCertificate": "Could not connect with invalid certificate.",
+            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "duplicate": "Ĉi tiu nodo jam estis aldonita.",
+            "unsynced": "La nodo ne estas sinkronigita.",
+            "noSynced": "Neniuj sinkronigitaj nodoj disponeblas.",
+            "answer": "Failed to get an answer from all nodes.",
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+        },
+        "network": {
+            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
+            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
+            "badNodes": "Unable to connect to the network with current node configuration.",
+            "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Io fuŝiĝis."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "invalid": "La savkopia dosiero ne estis rekonita.",
+            "destination": "La rezervkopia celloko ne validis.",
+            "mnemonic": "La mnemoniko ne validas.",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedCharacters": "La semo devas enhavi nur signojn A-Z aŭ 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
+            "phraseUnrecognizedWord": "Nekonata vorto \"{word}\" en via retrova frazo",
+            "phraseCaseWord": "La vorto \"{word}\" devas esti skribita minuskle"
+        },
+        "ledger": {
+            "appNotOpen": "Vi devas malfermi la programon IOTA sur via Ledger-aparato.",
+            "generic": "Estis eraro konektante al via Ledger-aparato.",
+            "legacyConnected": "La malĝusta programo estas malfermita sur via Ledger-aparato.",
+            "locked": "Bonvolu malŝlosi vian Ledger-aparaton enigante la PIN.",
+            "mnemonicMismatch": "Vi konektis la malĝustan Ledger-aparaton aŭ la mnemoniko ŝanĝiĝis.",
+            "notDetected": "Neniu Ledger-aparato detektita.",
+            "notFound": "Ledger-aparato ne trovita.",
+            "otherConnected": "La malĝusta programo estas malfermita sur via Ledger-aparato.",
+            "generateAddress": "Estis eraro dum generado de adreso.",
+            "timeout": "La tempolimo sur via Ledger-aparato eksvalidiĝis.",
+            "disconnected": "Via Ledger-aparato estis malkonektita.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
+        },
+        "popup": {
+            "preventClose": "Ĉi tiu ŝprucfenestro ne povas esti fermita."
+        },
+        "migration": {
+            "missingBundle": "Eraro okazis dum provo trovi la transakcion."
+        },
+        "crypto": {
+            "cannotDecodeBech32": "Ne eblas deĉifri ĉenon kiel Bech32-adreso."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
+        }
+    },
+    "warning": {
+        "node": {
+            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
+            "title": "Riska nivelo: {risk}",
             "veryHigh": "Tre alta",
             "high": "Alta",
             "medium": "Meza",
             "low": "Malalta",
             "veryLow": "Tre malalta"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking nun finiĝis",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID de la mesaĝo",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Dato",
+            "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }
