@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { activeProfileId, migrateProfile } from 'shared/lib/profile'
+    import { activeProfileId, clearActiveProfile, migrateProfile, profiles } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -21,8 +21,10 @@
     let stateHistory = []
 
     onMount(() => {
-        if (get(activeProfileId)) {
+        if (get(profiles).find((p) => p.id === get(activeProfileId))) {
             _next()
+        } else {
+            clearActiveProfile()
         }
     })
 
