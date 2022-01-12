@@ -72,7 +72,9 @@
     </div>
     <div slot="leftpane__content">
         {#if !verified}
-            <Text type="p" secondary classes="mb-10">{locale('views.verifyRecoveryPhrase.body')}</Text>
+            <Text type="p" secondary classes={!$mobile ? 'mb-10' : ''}>
+                {locale('views.verifyRecoveryPhrase.body')}
+            </Text>
             {#if !$mobile}
                 <Text type="p" classes="mb-4">{locale('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
                 {#each wordChoices as word}
@@ -113,7 +115,9 @@
             {/each}
         {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}">
         {#if ($mobile && !verified) || !$mobile}
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {verifyRecoveryPhrase} disabled={busy} />
         {/if}
