@@ -15,6 +15,7 @@
         "build": "yarn build:prod",
         "build:dev": "cross-env NODE_ENV=development webpack",
         "build:prod": "cross-env NODE_ENV=production webpack",
+        "build:release": "cross-env NODE_ENV=production SENTRY=true webpack",
         "compile:linux": "electron-builder --linux --x64",
         "compile:mac": "electron-builder --mac --x64",
         "compile:win": "electron-builder --win --x64"

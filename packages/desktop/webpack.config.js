@@ -9,6 +9,7 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const version = '1.2.0'
+const SENTRY = process.env.SENTRY === 'true'
 
 // / ------------------------ Resolve ------------------------
 
@@ -168,7 +169,7 @@ module.exports = [
         },
         mode,
         plugins: [...rendererPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
         devServer: {
             hot: true,
         },
@@ -185,7 +186,7 @@ module.exports = [
         },
         mode,
         plugins: [...mainPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
@@ -208,7 +209,7 @@ module.exports = [
         },
         mode,
         plugins: [...preloadPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
