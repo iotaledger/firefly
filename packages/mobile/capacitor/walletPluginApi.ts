@@ -27,6 +27,17 @@ import {
 import type { BridgeMessage, CommunicationIds, MessageResponse } from '../../shared/lib/typings/bridge'
 import type { ClientOptions } from '../../shared/lib/typings/client'
 import { reattach as _reattach, Transfer } from '../../shared/lib/typings/message'
+import {
+    getMigrationData as _getMigrationData,
+    createMigrationBundle as _createMigrationBundle,
+    sendMigrationBundle as _sendMigrationBundle,
+    getMigrationAddress as _getMigrationAddreess,
+    mineBundle as _mineBundle,
+    getLedgerMigrationData as _getLedgerMigrationData,
+    sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
+    getLegacyAddressChecksum as _getLegacyAddressChecksum,
+    AddressInput,
+} from '../../shared/lib/typings/migration'
 import type { NodeAuth } from '../../shared/lib/typings/node'
 import {
     backup as _backup,
@@ -73,11 +84,12 @@ export function init(
     id: string,
     storagePath?: string
 ): {
-    destroy: () => void
+    destroy: () => void,
     removeEventListeners: () => void
 } {
-    const walletListener = WalletPlugin.addListener('walletEvent', (message) => {
-        const { walletResponse } = message
+    const walletListener = WalletPlugin.addListener('walletEvent', (event) => {
+        const { walletResponse } = event
+        if (!walletResponse) return
         const parsedResponse = JSON.parse(walletResponse)
         onMessageListeners.forEach((listener) => listener(parsedResponse))
     })
@@ -85,7 +97,7 @@ export function init(
         // storagePath: 'data/data/com.iota.wallet/cache/database',
         actorId: id,
     })
-    // for testing purposes
+    // for testing purposes, send undefined id to catch all errors responses
     // void WalletPlugin.listen({
     //     actorId: id,
     //     id: '',
@@ -101,319 +113,306 @@ export function init(
     }
 }
 
+type Api = {(__ids: CommunicationIds): Promise<string>}
 export const api = {
-    setAlias: function (
+    setAlias: (
         accountId: AccountIdentifier,
         newAccountAlias: string
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setAlias(sendMessage, __ids, accountId, newAccountAlias)
-    },
-    getStrongholdStatus: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
-    },
-    lockStronghold: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _lockStronghold(sendMessage, __ids)
-    },
-    generateMnemonic: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
-    },
-    storeMnemonic: function (mnemonic?: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _storeMnemonic(sendMessage, __ids, {
-                signerType: { type: 'Stronghold' },
-                mnemonic: mnemonic || null,
-            })
-    },
-    verifyMnemonic: function (mnemonic: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _verifyMnemonic(sendMessage, __ids, mnemonic)
-    },
-    createAccount: function (account: AccountToCreate): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _createAccount(sendMessage, __ids, account)
-    },
-    removeAccount: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeAccount(sendMessage, __ids, accountId)
-    },
-    getAccount: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getAccount(sendMessage, __ids, accountId)
-    },
-    getAccounts: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
-    },
-    syncAccounts: function (
+    ): Api =>  __ids => _setAlias(
+        sendMessage,
+        __ids,
+        accountId,
+        newAccountAlias
+    ),
+    getStrongholdStatus: (): Api => (__ids) => _getStrongholdStatus(sendMessage, __ids),
+    lockStronghold: (): Api => (__ids) => _lockStronghold(sendMessage, __ids),
+    generateMnemonic: (): Api => (__ids) => _generateMnemonic(sendMessage, __ids),
+    storeMnemonic: (mnemonic?: string): Api => (__ids) => _storeMnemonic(sendMessage, __ids, {
+        signerType: { type: 'Stronghold' },
+        mnemonic: mnemonic || null,
+    }),
+    verifyMnemonic: (mnemonic: string): Api => (__ids) => _verifyMnemonic(
+        sendMessage,
+        __ids,
+        mnemonic
+    ),
+    createAccount: (account: AccountToCreate): Api => (__ids) => _createAccount(
+        sendMessage,
+        __ids,
+        account
+    ),
+    removeAccount: (accountId: AccountIdentifier): Api => (__ids) => _removeAccount(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    getAccount: (accountId: AccountIdentifier): Api => (__ids) => _getAccount(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    getAccounts: (): Api => (__ids) => _getAccounts(sendMessage, __ids),
+    syncAccounts: (
         addressIndex?: number,
         gapLimit?: number,
         accountDiscoveryThreshold?: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
-    },
-    startBackgroundSync: function (
+    ): Api => (__ids) => _syncAccounts(
+        sendMessage,
+        __ids,
+        addressIndex,
+        gapLimit,
+        accountDiscoveryThreshold
+    ),
+    startBackgroundSync: (
         pollingInterval: Duration,
         automaticOutputConsolidation: boolean
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
-    },
-    stopBackgroundSync: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _stopBackgroundSync(sendMessage, __ids)
-    },
-    areLatestAddressesUnused: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
-    },
-    generateAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
-    },
-    getUnusedAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getUnusedAddress(sendMessage, __ids, accountId)
-    },
-    listMessages: function (
+    ): Api => (__ids) => _startBackgroundSync(
+        sendMessage,
+        __ids,
+        pollingInterval,
+        automaticOutputConsolidation
+    ),
+    stopBackgroundSync: (): Api => (__ids) => _stopBackgroundSync(sendMessage, __ids),
+    areLatestAddressesUnused: (): Api => (__ids) => _areLatestAddressesUnused(sendMessage, __ids),
+    generateAddress: (accountId: AccountIdentifier): Api => (__ids) => _generateAddress(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    getUnusedAddress: (accountId: AccountIdentifier): Api => (__ids) => _getUnusedAddress(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    listMessages: (
         accountId: AccountIdentifier,
         filters?: ListMessagesFilter
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _listMessages(sendMessage, __ids, accountId, filters)
-    },
-    listAddresses: function (
+    ): Api => (__ids) => _listMessages(sendMessage, __ids, accountId, filters),
+    listAddresses: (
         accountId: AccountIdentifier,
         unspent?: boolean
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _listAddresses(sendMessage, __ids, accountId, unspent)
-    },
-    getBalance: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getBalance(sendMessage, __ids, accountId)
-    },
-    latestAddress: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _latestAddress(sendMessage, __ids, accountId)
-    },
-    syncAccount: function (
+    ): Api => (__ids) => _listAddresses(sendMessage, __ids, accountId, unspent),
+    getBalance: (accountId: AccountIdentifier): Api => (__ids) => _getBalance(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    latestAddress: (accountId: AccountIdentifier): Api => (__ids) => _latestAddress(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    syncAccount: (
         accountId: AccountIdentifier,
         options?: SyncAccountOptions
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
-    },
-    isLatestAddressUnused: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _isLatestAddressUnused(sendMessage, __ids, accountId)
-    },
-    reattach: function (accountId: AccountIdentifier, messageId: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
-    },
-    backup: function (destinationPath: string, password: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath, password)
-    },
-    restoreBackup: function (backupPath: string, password: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)
-    },
-    setStrongholdPassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
-    },
-    changeStrongholdPassword: function (
+    ): Api => (__ids) => _syncAccount(sendMessage, __ids, accountId, options),
+    isLatestAddressUnused: (accountId: AccountIdentifier): Api => (__ids) => _isLatestAddressUnused(
+        sendMessage,
+        __ids,
+        accountId
+    ),
+    reattach: (accountId: AccountIdentifier, messageId: string): Api => (__ids) => _reattach(
+        sendMessage,
+        __ids,
+        accountId,
+        messageId
+    ),
+    backup: (destinationPath: string, password: string): Api => (__ids) => _backup(
+        sendMessage,
+        __ids,
+        destinationPath,
+        password
+    ),
+    restoreBackup: (backupPath: string, password: string): Api => (__ids) => _restoreBackup(
+        sendMessage,
+        __ids,
+        backupPath,
+        password
+    ),
+    setStrongholdPassword: (password: string): Api => (__ids) => _setStrongholdPassword(
+        sendMessage,
+        __ids,
+        password
+    ),
+    changeStrongholdPassword: (
         currentPassword: string,
         newPassword: string
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _changeStrongholdPassword(sendMessage, __ids, {
-                currentPassword,
-                newPassword,
-            })
-    },
-    setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
-    },
-    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
-    },
-    send: function (
+    ): Api => (__ids) => _changeStrongholdPassword(sendMessage, __ids, {
+        currentPassword,
+        newPassword,
+    }),
+    setStoragePassword: (password: string): Api => (__ids) => _setStoragePassword(
+        sendMessage,
+        __ids,
+        password
+    ),
+    removeStorage: (): Api => (__ids) => _removeStorage(sendMessage, __ids),
+    send: (
         fromAccountId: AccountIdentifier,
         transfer: Transfer
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)
-    },
-    internalTransfer: function (
+    ): Api => (__ids) => _send(sendMessage, __ids, fromAccountId, transfer),
+    internalTransfer: (
         fromAccountId: AccountIdentifier,
         toAccountId: AccountIdentifier,
         amount: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
-    },
-    setClientOptions: function (options: ClientOptions): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
-    },
-    setStrongholdPasswordClearInterval: function (interval: Duration): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
-    },
-    getLegacySeedChecksum: function (seed: string): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getLegacySeedChecksum(sendMessage, __ids, seed)
-    },
+    ): Api => (__ids) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount),
+    setClientOptions: (options: ClientOptions): Api => (__ids) => _setClientOptions(
+        sendMessage,
+        __ids,
+        options
+    ),
+    setStrongholdPasswordClearInterval: (interval: Duration): Api => (__ids) =>
+        _setStrongholdPasswordClearInterval(sendMessage, __ids, interval),
+    getLegacySeedChecksum: (seed: string): Api => (__ids) => _getLegacySeedChecksum(
+        sendMessage,
+        __ids,
+        seed
+    ),
 
-    /*
     // Migration related methods
-    getMigrationData: function (
+    getMigrationData: (
         seed: string,
         nodes: string[],
         securityLevel?: number,
         initialAddressIndex?: number,
         permanode?: string
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _getMigrationData(sendMessage, __ids, seed, nodes, securityLevel, initialAddressIndex, permanode)
-    },
-    createMigrationBundle: function (
+    ): Api => (__ids) => _getMigrationData(
+        sendMessage,
+        __ids,
+        seed,
+        nodes,
+        securityLevel,
+        initialAddressIndex,
+        permanode
+    ),
+    createMigrationBundle: (
         seed: string,
         inputAddressIndexes: number[],
         mine: boolean,
         timeoutSeconds: number,
         offset: number,
         logFileName: string
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _createMigrationBundle(
-                sendMessage,
-                __ids,
-                seed,
-                inputAddressIndexes,
-                mine,
-                timeoutSeconds,
-                offset,
-                logFileName
-            )
-    },
-    sendMigrationBundle: function (
+    ): Api => (__ids) => _createMigrationBundle(
+        sendMessage,
+        __ids,
+        seed,
+        inputAddressIndexes,
+        mine,
+        timeoutSeconds,
+        offset,
+        logFileName
+    ),
+    sendMigrationBundle: (
         nodes: string[],
         bundleHash: string,
         mwm: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
-    },
-    getMigrationAddress: function (
+    ): Api => (__ids) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm),
+    getMigrationAddress: (
         prompt: boolean,
         accountIndex: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
-    },
-    mineBundle: function (
+    ): Api => (__ids) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex),
+    mineBundle: (
         bundle: string[],
         spentBundleHashes: string[],
         securityLevel: number,
         timeout: number,
         offset: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _mineBundle(sendMessage, __ids, bundle, spentBundleHashes, securityLevel, timeout, offset)
-    },
-    getLedgerMigrationData: function (
+    ): Api => (__ids) => _mineBundle(
+        sendMessage,
+        __ids,
+        bundle,
+        spentBundleHashes,
+        securityLevel,
+        timeout,
+        offset
+    ),
+    getLedgerMigrationData: (
         addresses: AddressInput[],
         nodes: string[],
         permanode: string,
         securityLevel: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _getLedgerMigrationData(sendMessage, __ids, addresses, nodes, permanode, securityLevel)
-    },
-    sendLedgerMigrationBundle: function (
+    ): Api => (__ids) => _getLedgerMigrationData(
+        sendMessage,
+        __ids,
+        addresses,
+        nodes,
+        permanode,
+        securityLevel
+    ),
+    sendLedgerMigrationBundle: (
         nodes: string[],
         bundle: string[],
         mwm: number
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm)
-    },*/
-    getNodeInfo: function (
+    ): Api => (__ids) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm),
+    getNodeInfo: (
         accountId: AccountIdentifier,
         url?: string,
         auth?: NodeAuth
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
-    },
-    // getLegacyAddressChecksum: function (address: string): (__ids: CommunicationIds) => Promise<string> {
-    //     return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
-    // },
+    ): Api => (__ids) => _getNodeInfo(sendMessage, __ids, accountId, url, auth),
+    getLegacyAddressChecksum: (address: string): Api => (__ids) => _getLegacyAddressChecksum(
+        sendMessage,
+        __ids,
+        address
+    ),
 
     // Event emitters
-    onError: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'ErrorThrown',
-            })
-    },
-    onBalanceChange: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'BalanceChange',
-            })
-    },
-    onNewTransaction: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'NewTransaction',
-            })
-    },
-    onConfirmationStateChange: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'ConfirmationStateChange',
-            })
-    },
-    onReattachment: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'Reattachment',
-            })
-    },
-    onBroadcast: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'Broadcast',
-            })
-    },
-    onStrongholdStatusChange: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'StrongholdStatusChange',
-            })
-    },
-    onTransferProgress: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            WalletPlugin.listen({
-                actorId: __ids.actorId,
-                id: __ids.messageId,
-                event: 'TransferProgress',
-            })
-    },
-    onLedgerAddressGeneration: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onLedgerAddressGeneration')
-            })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'LedgerAddressGeneration',
-        // })
-    },
-    getLedgerDeviceStatus: function (isSimulator: boolean): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
-    },
-    onMigrationProgress: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            new Promise<string>((resolve) => {
-                resolve('onMigrationProgress')
-            })
-        // WalletPlugin.listen({
-        //     actorId: __ids.actorId,
-        //     id: __ids.messageId,
-        //     event: 'MigrationProgress'
-        // })
-    },
+    onError: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'ErrorThrown',
+    }),
+    onBalanceChange: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'BalanceChange',
+    }),
+    onNewTransaction: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'NewTransaction',
+    }),
+    onConfirmationStateChange: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'ConfirmationStateChange',
+    }),
+    onReattachment: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'Reattachment',
+    }),
+    onBroadcast: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'Broadcast',
+    }),
+    onStrongholdStatusChange: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'StrongholdStatusChange',
+    }),
+    onTransferProgress: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'TransferProgress',
+    }),
+    onLedgerAddressGeneration: (): Api => (__ids) => new Promise<string>((resolve) => {
+        resolve('onLedgerAddressGeneration')
+    }),
+    // TODO not implemented on lib.rs
+    // WalletPlugin.listen({
+    //     actorId: __ids.actorId,
+    //     id: __ids.messageId,
+    //     event: 'LedgerAddressGeneration',
+    // })
+    getLedgerDeviceStatus: (isSimulator: boolean): Api => (__ids) => _getLedgerDeviceStatus(
+        sendMessage,
+        __ids,
+        isSimulator
+    ),
+    onMigrationProgress: (): Api => (__ids) => WalletPlugin.listen({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        event: 'MigrationProgress'
+    })
 }
