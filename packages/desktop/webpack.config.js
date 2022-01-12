@@ -146,12 +146,11 @@ const sentryPlugins = [
     new SentryWebpackPlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
-        release: `firefly-${version}`,
+        release: `Firefly@${version}`,
         ignoreFile: '.sentrycliignore',
-        ignore: ['node_modules', 'webpack.config.js'],
         org: 'iota-foundation-h4',
-        project: 'firefly',
-        configFile: 'sentry.properties',
+        project: 'firefly-desktop',
+        finalize: false,
     }),
 ]
 
