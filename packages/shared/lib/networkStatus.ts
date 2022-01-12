@@ -4,7 +4,8 @@ import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions
 import type { NetworkStatus } from './typings/network'
 import { NetworkStatusHealthText } from './typings/network'
 import { activeProfile } from './profile'
-import type { Node } from './typings/node'
+import type { Node, NodePlugin } from './typings/node'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from './time'
 
 export const NETWORK_HEALTH_COLORS = {
     0: 'red',
@@ -15,9 +16,16 @@ export const NETWORK_HEALTH_COLORS = {
 /**
  * Default interval for polling the network status
  */
-const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
+const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10 * MILLISECONDS_PER_SECOND
 
-export const networkStatus = writable<NetworkStatus>({})
+export const networkStatus = writable<NetworkStatus>({
+    messagesPerSecond: 0,
+    referencedRate: 0,
+    health: 2,
+    healthText: NetworkStatusHealthText.Operational,
+    currentMilestone: -1,
+    nodePlugins: [],
+})
 
 let pollInterval
 
@@ -70,6 +78,9 @@ async function pollNetworkStatusInternal(): Promise<void> {
             messagesPerSecond: 0,
             referencedRate: 0,
             health: 0,
+            healthText: NetworkStatusHealthText.Down,
+            currentMilestone: -1,
+            nodePlugins: [],
         })
     }
 }
@@ -85,9 +96,13 @@ async function pollNetworkStatusInternal(): Promise<void> {
  * @returns {Promise<void>}
  */
 export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
+    if (!accountId || !node) return
+
     if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
         const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
-        const timeSinceLastMsInMinutes = (Date.now() - response.nodeinfo.latestMilestoneTimestamp * 1000) / 60000
+        const timeSinceLastMsInMinutes =
+            (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
+            (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
         let health = 0 // bad
         if (timeSinceLastMsInMinutes < 2) {
@@ -115,6 +130,8 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
             referencedRate: response.nodeinfo.referencedRate,
             health,
             healthText,
+            currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
+            nodePlugins: response.nodeinfo.features,
         })
     } else {
         networkStatus.set({
@@ -122,6 +139,10 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
             referencedRate: 0,
             health: 0,
             healthText: NetworkStatusHealthText.Down,
+            currentMilestone: -1,
+            nodePlugins: [],
         })
     }
 }
+
+export const hasNodePlugin = (plugin: NodePlugin): boolean => get(networkStatus).nodePlugins.includes(plugin)

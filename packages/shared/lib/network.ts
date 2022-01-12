@@ -28,13 +28,15 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  *
  * @returns {NetworkConfig}
  */
-export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
-    network: getOfficialNetwork(type),
-    nodes: getOfficialNodes(type),
-    automaticNodeSelection: true,
-    includeOfficialNodes: true,
-    localPow: true,
-})
+export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => {
+    return {
+        network: getOfficialNetwork(type),
+        nodes: setRandomPrimaryNode(getOfficialNodes(type)),
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        localPow: true,
+    }
+}
 
 /**
  * Constructs an official IOTA network object given the type of network
@@ -86,7 +88,11 @@ const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
         case NetworkType.ChrysalisDevnet:
             return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
         case NetworkType.ChrysalisMainnet:
-            return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
+            return [
+                'https://chrysalis-nodes.iota.org',
+                'https://chrysalis-nodes.iota.cafe',
+                'https://mainnet-node.tanglebay.com',
+            ]
         default:
             return []
     }
@@ -334,8 +340,17 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
 }
 
 const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
-    const officialNodes = getOfficialNodes(networkType)
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.map((_n) => _n.url).includes(n.url))
+    let officialNodes = getOfficialNodes(networkType)
+
+    // If an official node is currently set as primary then keep it as primary
+    officialNodes = officialNodes.map((n) =>
+        Object.assign(
+            n,
+            nodes.find((p) => p.isPrimary && n.url === p.url)
+        )
+    )
+
+    const nonOfficialNodes = nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
 
     return [...officialNodes, ...nonOfficialNodes]
 }
@@ -355,12 +370,16 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
 
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
-        const randIdx = Math.floor(Math.random() * nodes.length)
-        return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+        return setRandomPrimaryNode(nodes)
     } else if (numPrimaryNodes === 1) {
         return nodes
     } else if (numPrimaryNodes > 1) {
         const activeNode = nodes.find((n) => n.isPrimary)
         return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
     }
+}
+
+const setRandomPrimaryNode = (nodes: Node[]): Node[] => {
+    const randIdx = Math.floor(Math.random() * nodes.length)
+    return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
 }

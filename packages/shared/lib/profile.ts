@@ -14,7 +14,7 @@ import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
 import { Electron } from './electron'
 
-export const activeProfileId = writable<string | null>(null)
+export const activeProfileId = persistent<string | null>('activeProfileId', null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 

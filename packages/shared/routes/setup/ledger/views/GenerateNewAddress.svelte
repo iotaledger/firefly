@@ -8,7 +8,7 @@
     } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
 
@@ -43,7 +43,7 @@
                     onSuccess(createAccountResponse) {
                         newAddress = createAccountResponse.payload.addresses[0].address
 
-                        displayAddress()
+                        displayAddress(createAccountResponse.payload.id)
                     },
                     onError(error) {
                         busy = false
@@ -61,9 +61,8 @@
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
-                            newAddress =
-                                getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
-                            displayAddress()
+                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
+                            displayAddress(getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].id)
                         } else {
                             _createAccount($activeProfile.ledgerMigrationCount + 1)
                         }
@@ -82,8 +81,8 @@
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
-    function displayAddress() {
-        api.getMigrationAddress(true, $activeProfile.ledgerMigrationCount, {
+    function displayAddress(accountId: string) {
+        api.getMigrationAddress(true, accountId, {
             onSuccess() {
                 busy = false
 

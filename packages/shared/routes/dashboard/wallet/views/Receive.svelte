@@ -1,15 +1,16 @@
 <script lang="typescript">
-    import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Button,Dropdown,Icon,QR,Spinner,Text } from 'shared/components'
+    import { activeProfile,isLedgerProfile } from 'shared/lib/profile'
+    import { accountRoute,walletRoute } from 'shared/lib/router'
+    import type { AccountIdentifier } from 'shared/lib/typings/account'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AccountRoutes,WalletRoutes } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress,isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+
 
     export let locale: Locale
 
@@ -87,7 +88,7 @@
                     <QR size={98} data={selectedAccount.depositAddress} />
                 </div>
                 <div class="mb-6">
-                    <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
+                    <Text secondary smaller classes="mb-1">{ $activeProfile?.isDeveloperProfile ? `${$activeProfile.settings.networkConfig.network.name} ${locale('general.address')}` : locale('general.myAddress')}</Text>
                     <Text type="pre">{selectedAccount.depositAddress}</Text>
                 </div>
                 <Button

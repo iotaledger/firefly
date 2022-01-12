@@ -1,8 +1,8 @@
 mod actors;
 use actors::{WalletActor, WalletActorMsg, WalletMessage};
 
-use iota_client::common::logger::logger_init;
-pub use iota_client::common::logger::LoggerConfigBuilder;
+use bee_common::logger::logger_init;
+pub use bee_common::logger::LoggerConfigBuilder;
 use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
     actor::{MessageType, Response, ResponseType},

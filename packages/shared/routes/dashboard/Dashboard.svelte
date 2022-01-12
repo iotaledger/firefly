@@ -1,34 +1,36 @@
 <script lang="typescript">
-    import { Idle, Sidebar } from 'shared/components'
-    import { Settings, Wallet } from 'shared/routes'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
+    import { DeveloperProfileIndicator,Idle,Sidebar } from 'shared/components'
+    import { loggedIn,logout,sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking';
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext';
-    import { Platform } from 'shared/lib/platform'
-    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { deepLinkRequestActive,parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+    import { isPollingLedgerDeviceStatus,pollLedgerDeviceStatus,stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
+    import { clearPollNetworkInterval,pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
-        NOTIFICATION_TIMEOUT_NEVER,
-        removeDisplayNotification,
-        showAppNotification,
+    NOTIFICATION_TIMEOUT_NEVER,
+    removeDisplayNotification,
+    showAppNotification
     } from 'shared/lib/notifications'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { clearPollParticipationOverviewInterval,pollParticipationOverview } from 'shared/lib/participation'
+    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { Platform } from 'shared/lib/platform'
+    import { closePopup,openPopup,popupState } from 'shared/lib/popup'
+    import { activeProfile,isLedgerProfile,isSoftwareProfile,updateProfile } from 'shared/lib/profile'
+    import { accountRoute,dashboardRoute,routerNext,settingsChildRoute,settingsRoute,walletRoute } from 'shared/lib/router'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes,AdvancedSettings,SettingsRoutes,Tabs,WalletRoutes } from 'shared/lib/typings/routes'
     import {
-        api,
-        isBackgroundSyncing,
-        selectedAccountId,
-        STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
-        wallet,
+    api,
+    isBackgroundSyncing,
+    selectedAccountId,
+    STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
+    wallet
     } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
+    import { Settings,Staking,Wallet } from 'shared/routes'
+    import { onDestroy,onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 
@@ -37,6 +39,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        staking: Staking,
     }
 
     let startInit
@@ -47,14 +50,17 @@
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
+            void getParticipationEvents()
+
             void pollNetworkStatus()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
+            clearPollParticipationOverviewInterval()
         }
     })
 
-    // TODO: add missing unsubscribe to onDestroy
-    ongoingSnapshot.subscribe((os) => {
+    const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
         }
@@ -113,8 +119,11 @@
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
+        unsubscribeOngoingSnapshot()
+
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
+
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -256,5 +265,8 @@
 <div class="flex flex-row w-full h-full">
     <Sidebar {locale} />
     <!-- Dashboard Pane -->
-    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    <div class="flex flex-col w-full h-full">
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+    </div>
 </div>
