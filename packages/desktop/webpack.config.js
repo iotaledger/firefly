@@ -168,7 +168,7 @@ module.exports = [
         },
         mode,
         plugins: [...rendererPlugins, ...sentryPlugins],
-        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         devServer: {
             hot: true,
         },
@@ -185,7 +185,7 @@ module.exports = [
         },
         mode,
         plugins: [...mainPlugins, ...sentryPlugins],
-        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
@@ -208,7 +208,7 @@ module.exports = [
         },
         mode,
         plugins: [...preloadPlugins, ...sentryPlugins],
-        devtool: (SENTRY && prod) ? 'source-map' : 'cheap-module-source-map',
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
