@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { settingsChildRoute } from 'shared/lib/router'
     import { SecuritySettings } from 'shared/lib/typings/routes'
@@ -27,7 +27,7 @@
     }
 
     function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
-        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+        Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, password, {

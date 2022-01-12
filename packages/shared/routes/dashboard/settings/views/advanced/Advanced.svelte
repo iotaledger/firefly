@@ -12,6 +12,7 @@
         HiddenAccounts,
         MigrateLedgerIndex,
         NetworkConfiguration,
+        TransactionHistory,
     } from './'
 
     const settings: {
@@ -28,7 +29,7 @@
         { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
-        // { component: StateExport, childRoute: AdvancedSettings.StateExport, requireLogin: true },
+        { component: TransactionHistory, childRoute: AdvancedSettings.TransactionHistory },
     ]
 </script>
 

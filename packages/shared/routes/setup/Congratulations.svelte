@@ -7,7 +7,7 @@
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import {
@@ -25,7 +25,7 @@
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
@@ -88,13 +88,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                Electron.getUserDataPath()
+                Platform.getUserDataPath()
                     .then((path) => {
                         const source = getStoragePath(path, $activeProfile.name)
 
                         return $walletSetupType === SetupType.TrinityLedger
-                            ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                            : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                     })
                     .then((result) => {
                         if (result) {

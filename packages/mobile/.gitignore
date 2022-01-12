@@ -3,3 +3,4 @@ capacitor.config.json
 capacitor.plugins.json
 capacitor.settings.gradle
 capacitor.build.gradle
+ios/App/public/

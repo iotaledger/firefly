@@ -18,7 +18,7 @@ export enum SettingsIcons {
     errorLog = 'warning',
     diagnostics = 'tools',
     migrateLedgerIndex = 'ledger',
-    stateExport = 'export',
+    transactionHistory = 'export',
     troubleshoot = 'tools',
     documentation = 'doc',
     faq = 'speech',

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile } from 'shared/lib/profile'
@@ -9,7 +9,7 @@
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
 
     export let locale: Locale
@@ -110,7 +110,7 @@
                         // We do not want to display the spinner in FileImport if stronghold is being imported.
                         isGettingMigrationData = true
 
-                        const legacySeed = await Electron.importLegacySeed(importFile, password)
+                        const legacySeed = await Platform.importLegacySeed(importFile, password)
 
                         if (legacySeed) {
                             await getMigrationData(legacySeed)

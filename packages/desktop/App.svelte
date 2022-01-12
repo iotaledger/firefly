@@ -3,7 +3,7 @@
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
@@ -45,11 +45,11 @@
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
+                Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
-    $: Electron.updateMenu('loggedIn', $loggedIn)
+    $: Platform.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
@@ -73,13 +73,13 @@
             await getVersionDetails()
             pollVersion()
         }
-        Electron.onEvent('menu-navigate-wallet', (route) => {
+        Platform.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
             walletRoute.set(route)
         })
-        Electron.onEvent('menu-navigate-settings', () => {
+        Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
                     dashboardRoute.set(Tabs.Settings)
@@ -88,7 +88,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', () => {
+        Platform.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -96,26 +96,26 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', () => {
+        Platform.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', () => {
+        Platform.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
-        Electron.hookErrorLogger((err) => {
+        Platform.hookErrorLogger((err) => {
             addError(err)
         })
 
         cleanupInProgressProfiles()
 
-        Electron.onEvent('deep-link-request', showDeepLinkNotification)
+        Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
     })
 
     onDestroy(() => {
-        Electron.removeListenersForEvent('deep-link-request')
-        Electron.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-request')
+        Platform.DeepLinkManager.clearDeepLinkRequest()
     })
 
     const showDeepLinkNotification = () => {

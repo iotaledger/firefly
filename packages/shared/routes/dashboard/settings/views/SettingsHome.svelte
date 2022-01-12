@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { openUrl } from 'shared/lib/device'
+    import { Platform } from 'shared/lib/platform'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -44,16 +44,16 @@
         if (route === SettingsRoutes.HelpAndInfo && $mobile) {
             switch (childRoute) {
                 case HelpAndInfo.Documentation:
-                    openUrl(ExternalRoute.Documentation)
+                    Platform.openUrl(ExternalRoute.Documentation)
                     break
                 case HelpAndInfo.Discord:
-                    openUrl(ExternalRoute.Discord)
+                    Platform.openUrl(ExternalRoute.Discord)
                     break
                 case HelpAndInfo.FAQ:
-                    openUrl(ExternalRoute.FAQ)
+                    Platform.openUrl(ExternalRoute.FAQ)
                     break
                 case HelpAndInfo.ReportAnIssue:
-                    openUrl(ExternalRoute.FAQ)
+                    Platform.openUrl(ExternalRoute.FAQ)
                     break
             }
         } else {

@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { openUrl } from 'shared/lib/device'
     import { localize } from 'shared/lib/i18n'
+    import { Platform } from 'shared/lib/platform'
     import { ExternalRoute } from 'shared/lib/typings/routes'
 
     const handleClick = () => {
-        openUrl(ExternalRoute.Discord)
+        Platform.openUrl(ExternalRoute.Discord)
     }
 </script>
 

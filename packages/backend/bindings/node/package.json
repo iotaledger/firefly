@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "description": "",
     "main": "dist/index.js",
-    "author": "Lucas Nogueira <lucas.nogueira@iota.org>",
+    "author": "IOTA Stiftung",
     "license": "MIT",
     "dependencies": {
         "electron-build-env": "^0.2.0",
