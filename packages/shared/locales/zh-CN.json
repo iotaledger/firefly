@@ -7,46 +7,47 @@
         "legal": {
             "title": "隐私政策和服务条款",
             "body": "请查看隐私政策和服务条款。",
-            "checkbox": "我已读过和接受隐私政策和服务条款"
+            "checkbox": "我已通读并接受隐私政策和服务条款"
         },
         "appearance": {
             "title": "外观",
-            "body": "选择您的App主题"
+            "body": "选择您的应用主题"
         },
         "profile": {
             "title": "新建配置文件",
-            "profileName": "Profile name",
+            "profileName": "配置名称",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
             "body2": {
                 "first": "现在，让我们从您的第一个配置文件的名称开始。",
                 "nonFirst": "现在，让我们从您的配置名称开始。"
             },
             "addMore": "您可以稍后添加更多配置文件。",
+            "advancedOptions": "Advanced options",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "开发者模式",
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
-            "title": "设置钱包",
+            "title": "配置钱包",
             "chrysalisTitle": "Chrysalis网络更新",
-            "chrysalisBody": "从4月21日起，用户可以将他们的Token迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的Token。",
+            "chrysalisBody": "从2021年4月21日起，用户可以将他们的代币迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的代币。",
             "learnMore": "了解迁移信息"
         },
         "secure": {
             "title": "保障钱包的安全",
-            "body1": "保存和打印Recovery Kit PDF模板。",
+            "body1": "保存并打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "create": {
             "title": "创建一个钱包",
-            "body": "创建一个新钱包。您可以选择一个普通软件钱包，或者如果您有一个Ledger设备，您可以设置一个硬件钱包。",
+            "body": "创建一个全新的钱包。您可以选择创建一个普通软件钱包。如果您有一个Ledger设备，您也可以创建一个硬件钱包。",
             "softwareAccount": {
-                "title": "我想要一个软件钱包",
-                "description": "创建一个24个字的恢复助记词"
+                "title": "我希望创建一个软件钱包",
+                "description": "创建一个包含24个单词的恢复助记词"
             },
             "ledgerAccount": {
-                "title": "我想要一个硬件钱包",
+                "title": "我希望创建一个硬件钱包",
                 "description": "需要Ledger Nano S 或 Nano X"
             }
         },
@@ -67,7 +68,7 @@
         "password": {
             "title": "设置密码",
             "body1": "您需要一个强大的密码来保护您的资金。可使用一些单词的组合，并避免常见的短语，名称或日期。",
-            "body2": "建议您在Recovery Kit中写下您的密码。"
+            "body2": "建议您在Recovery Kit中抄写下您的密码。"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -76,8 +77,8 @@
         },
         "pin": {
             "title": "设置PIN码",
-            "body1": "请在下方输入 6 位数字的 PIN 码。您在登录钱包时需要输入 PIN 码。",
-            "body2": "仅使用数字"
+            "body1": "请在下方输入 6 位数字作为 PIN 码。您在登录钱包时会被要求输入您设置的 PIN 码。",
+            "body2": "仅限数字"
         },
         "confirmPin": {
             "title": "请验证您的 PIN",
@@ -85,13 +86,13 @@
             "body2": "请重新输入您的 PIN 码以继续操作。"
         },
         "backup": {
-            "title": "请备份您的钱包",
-            "body1": "您现在将看到一个恢复密语。请在Recovery Kit中写下它。",
-            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点访问到您的Token。",
+            "title": "备份您的钱包",
+            "body1": "您现在将看到您的钱包恢复助记词。请将它们抄写在您的Recovery Kit中。",
+            "body2": "请勿与任何人分享您的钱包恢复助记词。因为这些助记词会让别人从任何地方查看并转移走您的代币。",
             "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recoveryPhrase": {
-            "title": "恢复密语",
+            "title": "钱包恢复助记词",
             "body1": "在您的Recovery Kit中，按显示的准确顺序填写单词。",
             "body2": "秘密保管并安全存储",
             "body3": "一个书面备份非常重要。计算机常常失败，文件可能损坏。",
@@ -128,11 +129,11 @@
         },
         "import": {
             "title": "恢复或迁移资金",
-            "body": "如果您已经有一个seed或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
-            "importSeed": "我有一个81个字符的seed",
-            "importSeedDescription": "输入seed并将资金迁移到Chrysalis",
+            "body": "如果您已经有一个私钥种子或钱包备份文件，你可以在这里导入。 如果您在旧的IOTA主网持有资金，您将会通过迁移步骤将资金转移到Chrysalis网络。",
+            "importSeed": "我有一个81个字符的私钥种子",
+            "importSeedDescription": "输入私钥种子并将资金迁移到Chrysalis",
             "importMnemonic": "我有一个Fifrefly恢复密语",
-            "importMnemonicDescription": "输入恢复密语来找回您的钱包",
+            "importMnemonicDescription": "输入私钥助记词来恢复您的钱包",
             "importFile": "我有一个备份文件",
             "importFileDescription": "上传Seedvault或Stronghold 文件",
             "importLedger": "我有一个Ledger 备份",
@@ -140,17 +141,17 @@
         },
         "importFromText": {
             "seed": {
-                "title": "键入您的seed以开始迁移",
-                "body": "一个seed由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
-                "enter": "输入您的seed"
+                "title": "键入您的私钥种子以开始迁移",
+                "body": "一个私钥种子由81个字符组成。它用于从旧的的 Trinity 钱包中进行恢复。",
+                "enter": "输入您的私钥种子"
             },
             "mnemonic": {
-                "title": "输入您的恢复密语",
-                "body": "恢复密语长度为24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
-                "enter": "请输入您的seed或恢复密语"
+                "title": "输入您的钱包恢复助记词",
+                "body": "恢复助记词包含24个单词，单词全部为小写，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
+                "enter": "请输入您的私钥种子或助记词"
             },
-            "seedDetected": "检测到81个字符种子",
-            "phraseDetected": "检测到24个单词恢复密语",
+            "seedDetected": "检测到81个字符的私钥种子",
+            "phraseDetected": "检测到24个单词的私钥助记词",
             "checksum": "校验和"
         },
         "importFromFile": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "保护已花费的地址...",
-            "body1": "这个过程将需要 {minutes, plural, other {# 分钟}}",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "您的计算机将满负荷运行，请等待完成以后再处理其他的事情。"
         },
         "transferFragmentedFunds": {
@@ -280,7 +281,7 @@
             "title": "您的余额",
             "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
             "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
-            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。",
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的私钥种子可能不正确。",
             "zeroBalanceLedgerLegacy": "请再试一次。如果您仍然找不到您的余额，您可能选择了错误的帐户索引。"
         },
         "settings": {
@@ -312,7 +313,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "重新启动Firefly应用程序以使系统主题生效。"
             },
             "language": {
                 "title": "语言",
@@ -328,17 +329,15 @@
             },
             "networkStatus": {
                 "title": "网络状态",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "显示你现在所连接的节点状态"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "导出备份",
                 "description": "导出到 Stronghold文件 - 完整加密备份您的钱包及其最新交易记录"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "自动锁定钱包并登出的待机时间",
-                "durationMinute": "{time, plural, one {1分钟} other {# 分钟}}",
-                "durationHour": "{time, plural, one {1小时} other {# 小时}}"
+                "title": "自动锁定",
+                "description": "自动锁定钱包并登出的待机时间"
             },
             "changePassword": {
                 "title": "修改密码",
@@ -365,39 +364,39 @@
                 "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "IOTA链接",
+                "description": "点击IOTA链接自动填写Firefly交易数据"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "网络配置",
+                "title2": "网络配置",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "您的网络设置将根据当前节点配置自动更新(切换网络将导致重置钱包状态)",
+                    "nonDev": "您的网络设置将根据当前节点配置自动更新"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "成功切换到\"{networkName}\"。",
+                "resetWallet": "您的钱包状态已重置。",
+                "connectedTo": "已连接到",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "节点选择",
+                    "description": "选择“手动”来配置节点设置并连接到您自己的节点",
+                    "automatic": "自动",
+                    "manual": "手动"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "节点配置",
+                "description": "管理您连接的节点列表",
                 "primaryNode": "主节点",
                 "excludeNode": "排除此节点",
                 "includeNode": "包含此节点",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "编辑详情",
+                "viewInfo": "查看信息",
                 "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "没有节点，无法连接到网络",
+                "noNodesAuto": "尚未配置节点，将使用节点自动选择功能"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -412,12 +411,8 @@
                 "description": "查看系统和应用程序信息"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "迁移Ledger索引",
                 "description": "迁移另一个 Trinity 帐户索引"
-            },
-            "stateExport": {
-                "title": "状态导出",
-                "description": "将您的交易历史记录导出到.csv文件"
             },
             "troubleshoot": {
                 "title": "故障排除",
@@ -429,7 +424,7 @@
             },
             "faq": {
                 "title": "常见问题",
-                "title2": "Frequently asked questions",
+                "title2": "常见问题",
                 "description": "查看常见问题以获得帮助"
             },
             "discord": {
@@ -446,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +484,48 @@
             "profileModal": {
                 "allSettings": "所有设置",
                 "logout": "退出账号"
+            }
+        },
+        "staking": {
+            "title": "质押",
+            "welcome": "欢迎来到质押仪表板!",
+            "status": {
+                "upcoming": "活动尚未开始",
+                "commencing": "预约质押开始",
+                "holdingActive": "质押进行中",
+                "holdingInactive": "质押开启",
+                "inactive": "未检测到质押",
+                "ended": "质押已结束"
+            },
+            "summary": {
+                "stakedFunds": "已质押资金"
+            },
+            "info": {
+                "upcomingSubheader": "活动尚未开始",
+                "upcomingHeader": "稍后再试",
+                "commencingSubheader": "已准备好进行质押",
+                "commencingHeader": "预先质押您的代币",
+                "holdingSubheaderHolding": "正在赚取质押奖励",
+                "holdingSubheaderNotHolding": "通过质押IOTA获得奖励",
+                "holdingHeaderHolding": "剩余{duration}",
+                "holdingHeaderNotHolding": "质押您的代币",
+                "endedSubheader": "质押已结束",
+                "endedHeader": "谢谢!",
+                "inactiveHeader": "尝试更改节点",
+                "inactiveSubheader": "未检测到质押"
+            },
+            "airdrops": {
+                "holding": "剩余",
+                "commencing": "直到质押开始",
+                "collectedRewards": "已领取的奖励",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。 "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "一个推进IOTA上的重大创新的激励性的阶段性网络，让我们静观其变。Shimmer如何演化取决于你。"
+                }
             }
         }
     },
@@ -538,43 +575,45 @@
         },
         "addressHistory": {
             "title": "{name} 地址历史记录",
-            "currentBalance": "当前余额: {balance}"
+            "currentBalance": "余额：{balance}",
+            "internal": "内部地址",
+            "external": "充值地址"
         },
         "node": {
             "titleAdd": "添加节点",
             "titleUpdate": "更新节点",
             "titleRemove": "删除节点",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "删除所有节点",
             "titleDetails": "节点详细信息",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "节点信息",
+            "addingNode": "添加节点",
+            "updatingNode": "更新节点",
+            "loadingNodeInfo": "加载节点信息",
             "nodeAddress": "节点地址",
             "optionalUsername": "用户名(选填)",
             "optionalPassword": "密码 (选填)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (可选)",
             "setAsPrimaryNode": "设为主节点",
             "removeConfirmation": "您确定要删除此节点吗？",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "您确定要删除所有节点吗？",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "软件",
+                "networkId": "网络 ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "技术特性",
+                "confirmedMilestoneIndex": "已确认的里程碑索引",
+                "pruningIndex": "裁剪索引",
                 "messagesPerSecond": "每秒信息数",
                 "referencedRate": "确认率"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "切换网络",
+            "newNetwork": "新建网络",
+            "resetWarning": "更改网络将注销并重置此配置文件的所有账户、余额和交易历史记录。",
+            "switchingNetwork": "切换网络",
+            "typePassword": "输入您的密码以切换到："
         },
         "errorLog": {
             "title": "错误日志",
@@ -598,7 +637,9 @@
         },
         "transaction": {
             "title": "确认交易",
-            "body": "您将要发送 {amount} 到"
+            "body": "您将要发送 {amount} 到",
+            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -669,6 +710,48 @@
         "ledgerMigrateIndex": {
             "title": "您需要迁移另一个 Trinity 帐户索引吗？",
             "body": "您也可以稍后在高级设置中迁移Ledger索引。"
+        },
+        "exportTransactionHistory": {
+            "title": "导出交易历史记录",
+            "body": "导出所选钱包的交易历史记录。导出的文件将使用.csv格式。",
+            "profileName": "配置名称:",
+            "accountName": "账户名称:",
+            "typePassword": "输入您的密码以允许导出"
+        },
+        "stakingNotice": {
+            "upcomingDate": "质押尚未开始",
+            "commencingDate": "质押尚未开始",
+            "body": "通过在质押开始前预先质押，你就可以在质押开始后自动收到奖励。",
+            "ok": "是的，我了解了！"
+        },
+        "stakingManager": {
+            "title": "质押管理",
+            "description": "当你质押了一个钱包，你将会发送给你自己一笔交易，将这些资金变成“质押”状态。你可以随时转移这些代币，但是你将不能继续收到质押奖励。",
+            "totalFundsStaked": "总质押资金",
+            "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
+            "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。"
+        },
+        "stakingConfirmation": {
+            "title": "空投参与度",
+            "subtitleStake": "你将要质押",
+            "subtitleMerge": "你将要汇总",
+            "bodyStake": "如果你不想参与者两个质押，您可以选择退出。您随时可以取消或重新质押。",
+            "bodyMerge": "您的资金将为 {airdrop} 进行质押。要更改您想要参与的空投，请取消这个钱包的质押并重新质押。",
+            "estimatedAirdrop": "估计奖励"
+        },
+        "shimmer-info": {
+            "title": "关于 Shimmer",
+            "body1": "恭喜您已经获得SMR代币作为质押奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
+            "body2": "我们的目标是在2022年启动Shimmer。一旦网络启动，您的代币将可进行传输。"
+        },
+        "assembly-info": {
+            "title": "关于Assembly",
+            "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
+            "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -676,7 +759,7 @@
         "outgoingMi": "发送 {value}",
         "portoflio": "资产组合",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "持有",
         "accountValue": "钱包金额",
         "accountActivity": "钱包活动",
         "timeframe1Hour": "1 小时",
@@ -694,7 +777,7 @@
         "dismiss": "取消",
         "proceedAnyway": "仍要继续",
         "save": "保存",
-        "importSeed": "导入已有的种子",
+        "importSeed": "导入已有的私钥种子",
         "restoreWallet": "迁移或恢复钱包",
         "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
@@ -724,11 +807,12 @@
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
         "export": "导出",
+        "exporting": "导出中",
         "exportNewStronghold": "导出一个新的Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "启用 IOTA链接",
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
-        "exportState": "导出状态",
+        "exportTransactionHistory": "导出交易历史记录",
         "localProofOfWork": "本地工作量证明",
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
@@ -743,7 +827,7 @@
         "addNode": "添加节点",
         "updateNode": "更新节点",
         "removeNode": "删除节点",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "删除所有节点",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
@@ -780,7 +864,17 @@
         "searching": "搜索中...",
         "closeFirefly": "关闭Firefly",
         "generateAddress": "生成地址",
-        "migrateAgain": "迁移另一个Ledger索引"
+        "migrateAgain": "迁移另一个Ledger索引",
+        "visitWebsite": "访问网站",
+        "howItWorks": "运行原理",
+        "learnAboutStaking": "了解质押",
+        "stake": "质押",
+        "unstake": "解除质押",
+        "stakeFunds": "质押资金",
+        "manageStake": "管理质押",
+        "merge": "合并",
+        "mergeFunds": "合并资金",
+        "done": "已完成"
     },
     "general": {
         "password": "密码",
@@ -788,7 +882,7 @@
         "currentPassword": "当前使用的密码",
         "newPassword": "新的密码",
         "confirmNewPassword": "再次确认新的密码",
-        "yourSeed": "你的种子",
+        "yourSeed": "您的私钥种子",
         "recoveryPhrase": "恢复密语",
         "recentActivity": "最新活动",
         "sent": "已发送",
@@ -811,6 +905,7 @@
         "from": "从",
         "to": "到",
         "receiveFunds": "接收资金",
+        "address": "Address",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -823,9 +918,9 @@
         "stronghold": "Stronghold",
         "language": "语言",
         "appearance": "外观",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "亮色",
+        "darkTheme": "暗色",
+        "systemTheme": "系统",
         "balance": "余额",
         "accountBalance": "钱包余额",
         "incoming": "收到",
@@ -842,7 +937,7 @@
         "transactions": "交易",
         "security": "安全设置",
         "accountAddress": "钱包地址",
-        "network": "Network",
+        "network": "网络",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
@@ -869,6 +964,8 @@
         "transferBroadcasting": "正在广播交易...",
         "transferComplete": "转账完毕",
         "generatingReceiveAddress": "生成接收地址",
+        "broadcasting": "广播中",
+        "confirming": "正在确认",
         "creatingAccount": "正在创建钱包，请稍候...",
         "updatingAccount": "正在更新钱包，请稍候...",
         "accountSyncing": "正在同步钱包",
@@ -876,6 +973,7 @@
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
+        "syncing": "同步中",
         "syncingAccounts": "正在同步钱包...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
@@ -896,13 +994,24 @@
         "sendingFrom": "正在从 {account} 发送",
         "receivedTo": "已接收至 {account}",
         "sentFrom": "已从 {account} 发送",
+        "stakedFor": "已为 {account} 质押",
+        "unstakedFor": "已为 {account} 解除质押",
+        "votedFor": "投票给 {account}",
+        "unvotedFor": "取消投票给 {account}",
         "receiving": "接收",
         "sending": "发送",
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
-        "unknown": "Unknown",
-        "none": "None"
+        "unknown": "未知",
+        "none": "无",
+        "staked": "已质押",
+        "unstaked": "解除质押",
+        "staking": "质押",
+        "unstaking": "正在解除质押",
+        "notStaked": "未质押",
+        "stakedFunds": "已质押资金",
+        "unstakedFunds": "未质押的资金"
     },
     "dates": {
         "today": "今日",
@@ -911,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
@@ -923,25 +1041,32 @@
         "updateError": "更新过程中发生错误，请重试",
         "restartInstall": "重新启动后安装",
         "calcMinutesRemaining": "正在计算剩余分钟...",
-        "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
         "fundsAvailableSoon": "您的资金将很快变为可用资金。",
+        "exportTransactionHistory": {
+            "success": "{accountAlias} 的交易历史记录已成功保存到 {filePath}",
+            "error": "无法导出 {accountAlias} 的交易历史记录"
+        },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "请登录以启动IOTA链接",
+            "notEnabled": "IOTA链接未启用",
+            "invalidFormat": "您遵循的 IOTA 链接无效",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "从 IOTA 链接添加的付款详细信息"
                 }
             }
         }
     },
     "error": {
         "profile": {
-            "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
-            "duplicate": "同名配置文件已存在。"
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "同名配置文件已存在。",
+            "delete": {
+                "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
+            }
         },
         "password": {
             "doNotMatch": "密码不匹配。",
@@ -958,15 +1083,15 @@
             "similar": "这是一个与常用密码很类似的密码。",
             "word": "单个单词容易被猜测到。",
             "incorrect": "您的密码不正确。",
-            "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "您的 PIN 必须是 {length, plural, one {1 个数字} other {# 个数字}}。",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN 码不匹配",
             "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
             "duplicate": "此名称的钱包已经存在",
@@ -979,7 +1104,7 @@
             "syncing": "钱包同步时出错。"
         },
         "send": {
-            "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "这大于您可用的余额。",
             "amountNoFloat": "如果单位是 `i`，你不能使用小数点。",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
@@ -996,23 +1121,24 @@
         },
         "node": {
             "invalid": "请输入有效的URL",
-            "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
-            "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "dns": "找不到节点的DNS解析。",
+            "timedOut": "连接超时",
+            "refused": "连接被拒绝",
+            "handshake": "无法完成节点握手。",
+            "invalidCertificate": "无法与无效证书连接。",
+            "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
             "duplicate": "此节点已被添加。",
             "unsynced": "节点未同步。",
             "noSynced": "没有可用的同步节点。",
-            "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "answer": "无法从所有节点获得响应。",
+            "forbidden": "此节点连接被禁止。",
+            "pluginNotAvailable": "\"{nodePlugin}\"插件在当前节点上不可用。"
         },
         "network": {
-            "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
-            "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "mismatch": "此节点的网络ID是 \"{networkId}\"，与当前网络不匹配。",
+            "notReachable": "无法检索此节点的网络ID，无法添加节点。",
+            "badNodes": "使用当前节点配置无法连接到网络。",
+            "nonEmptyAccount": "在切换网络之前，您必须转移所有余额。"
         },
         "global": {
             "generic": "发生了一些错误。"
@@ -1021,9 +1147,9 @@
             "invalid": "备份文件无法识别。",
             "destination": "备份路径无效。",
             "mnemonic": "助记符无效。",
-            "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
-            "seedCharacters": "种子只能包含字符 A-Z 或 9",
-            "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
         },
@@ -1038,7 +1164,8 @@
             "otherConnected": "Ledger设备上打开的应用程序不正确。",
             "generateAddress": "地址生成出错。",
             "timeout": "您的Ledger设备连接超时。",
-            "disconnected": "您的Ledger设备已断开."
+            "disconnected": "您的Ledger设备已断开.",
+            "noStronghold": "无法通过 Ledger 配置文件使用Stronghold。"
         },
         "popup": {
             "preventClose": "此弹出窗口无法关闭。"
@@ -1047,12 +1174,21 @@
             "missingBundle": "试图查找交易包信息时发生错误"
         },
         "crypto": {
-            "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+            "cannotDecodeBech32": "无法解码字符串为 Bech32 地址。"
+        },
+        "participation": {
+            "cannotUseAccount": "无法使用指定的帐户。",
+            "cannotFindStakingEvent": "找不到质押活动。",
+            "cannotVisitAirdropWebsite": "无法打开 {airdrop} 网站。",
+            "invalidStakingEventId": "无效的 质押活动 ID。"
         }
     },
     "warning": {
         "node": {
-            "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+            "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
+        },
+        "participation": {
+            "noAccounts": "您没有任何IOTA。"
         }
     },
     "tooltips": {
@@ -1063,6 +1199,65 @@
             "medium": "中",
             "low": "较低",
             "veryLow": "非常低"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "质押尚未开始",
+                "body": "稍后再检查。质押活动尚未开始。"
+            },
+            "commencing": {
+                "title": "预先质押已开放",
+                "body": "预先质押您的代币，一旦质押开始，您将每隔10秒自动开始获得奖励。"
+            },
+            "activeHolding": {
+                "title": "质押进行中",
+                "body": "干得好。你将每10秒获得奖励。"
+            },
+            "inactiveHolding": {
+                "title": "质押正在开放",
+                "body": "质押您的 IOTA代币，每隔10秒获得奖励。"
+            },
+            "inactive": {
+                "title": "未检测到质押活动",
+                "body": "在高级设置中打开网络配置，并点击“查看信息”以确保当前节点具备“参与”功能。"
+            },
+            "ended": {
+                "title": "质押已结束",
+                "bodyAboveRewardMin": "Assembly 和 Shimmer 的奖励将在各自的网络启动时分配到您的钱包。",
+                "bodyBelowRewardMin": "您质押的IOTA不足以达到空投奖励的最低门槛。"
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "新的未质押资金： {amount}",
+            "titleNoFunds": "新的未质押资金",
+            "preBody": "您已经在一个已质押的钱包中收到了代币。",
+            "body": "您需要手动质押这些新的资金才能获得空投奖励。"
+        },
+        "stakingMinRewards": {
+            "title": "低于最低奖励值",
+            "titleMinBalance": "需要 {amount} 的最低余额",
+            "bodyMinBalance": "这个钱包没有足够的 IOTA 代币来达到最低空投奖励，因此不能被质押。",
+            "continue": "请继续为另一个 {duration} 进行质押",
+            "bodyBelowMin": "这个钱包还没有达到 {airdrop} 的最低奖励值({airdropRewardMin})。",
+            "bodyWillReachMin": "您必须再质押 {duration} 能达到最低值。",
+            "bodyWillNotReachMin": "您需要质押更多的IOTA，否则您将无法达到最低奖励值。",
+            "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
+            "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "消息 ID",
+            "internal": "内部",
+            "rawValue": "原始值",
+            "formattedValue": "格式化值",
+            "date": "日期",
+            "time": "时间"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

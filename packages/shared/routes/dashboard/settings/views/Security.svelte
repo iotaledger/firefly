@@ -5,23 +5,26 @@
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
-    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { api, MAX_PASSWORD_LENGTH, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
-    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         if (timeInMinutes >= 60) {
-            return locale('views.settings.appLock.durationHour', { values: { time: timeInMinutes / 60 } })
+            return locale('times.hour', { values: { time: timeInMinutes / 60 } })
         }
 
-        return locale('views.settings.appLock.durationMinute', { values: { time: timeInMinutes } })
+        return locale('times.minute', { values: { time: timeInMinutes } })
     }
 
-    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
+    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({
+        value: time,
+        label: assignTimeoutOptionLabel(time),
+    }))
 
     let exportStrongholdChecked
     let currentPassword = ''
@@ -260,6 +263,12 @@
     }
 
     function reset() {
+        if (get(get(wallet).balanceOverview).balanceRaw > 0) {
+            return showAppNotification({
+                type: 'error',
+                message: locale('error.profile.delete.nonEmptyAccounts'),
+            })
+        }
         openPopup({ type: 'deleteProfile' })
     }
 </script>
@@ -349,7 +358,9 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
 
-            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
+            <Text type="p" secondary smaller classes="mb-2">
+                {locale('views.settings.changePincode.currentPincode')}
+            </Text>
             <Pin
                 smaller
                 error={currentPincodeError}
@@ -365,7 +376,9 @@
                 bind:value={newPincode}
                 disabled={pinCodeBusy}
                 on:submit={changePincode} />
-            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
+            <Text type="p" secondary smaller classes="mb-2">
+                {locale('views.settings.changePincode.confirmNewPincode')}
+            </Text>
             <Pin
                 smaller
                 error={confirmationPincodeError}

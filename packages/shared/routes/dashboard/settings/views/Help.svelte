@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Platform } from 'shared/lib/platform';
     import { Button, HR, Text } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     const handleDocumentationClick = () => {
-        Platform.openUrl('https://chrysalis.docs.iota.org/')
+        Platform.openUrl('https://wiki.iota.org/learn/wallets/firefly/general')
     }
 
     const handleFaqClick = () => {

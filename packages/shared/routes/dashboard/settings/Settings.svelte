@@ -4,10 +4,9 @@
     import { getInitials } from 'shared/lib/helpers'
     import { isLocaleLoaded } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
@@ -33,10 +32,8 @@
     }
 
     function closeSettings() {
-        dashboardRoute.set(Tabs.Wallet)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
-        selectedAccountId.set(null)
+        dashboardRoute.set(get(previousDashboardRoute))
+        previousDashboardRoute.set(undefined)
     }
 
     function scrollTop() {

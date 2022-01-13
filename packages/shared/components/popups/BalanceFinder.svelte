@@ -5,14 +5,15 @@
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     const { balanceOverview } = $wallet
 
-    let addressIndex = 0
-    const gapIndex = $isLedgerProfile ? 10 : 25
+    const addressIndex = 0
+    const gapLimitIncrement = $isLedgerProfile ? 10 : 25
+    let currentGapLimit = gapLimitIncrement
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
@@ -25,7 +26,7 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
-            } else if($isLedgerProfile && !isLedgerConnected()) {
+            } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
                 displayNotificationForLedgerProfile('warning')
@@ -33,19 +34,19 @@
                 return
             }
 
-            await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
+            await asyncSyncAccounts(addressIndex, currentGapLimit, accountDiscoveryThreshold, false)
 
-            addressIndex += gapIndex
+            currentGapLimit += gapLimitIncrement
             accountDiscoveryThreshold++
         } catch (err) {
             error = locale(err.error)
 
-            if($isLedgerProfile) {
+            if ($isLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error)
+                    message: locale(err.error),
                 })
             }
         } finally {
@@ -82,8 +83,13 @@
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={handleFindBalances} disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
+        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
+            {locale('actions.done')}
+        </Button>
+        <Button
+            classes="w-full"
+            onClick={handleFindBalances}
+            disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
             {#if isBusy}
                 <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}

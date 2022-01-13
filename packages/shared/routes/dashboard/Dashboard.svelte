@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { Electron } from 'shared/lib/electron'
@@ -12,6 +12,9 @@
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
@@ -33,7 +36,7 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { Settings, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -44,6 +47,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        staking: Staking,
     }
 
     let startInit
@@ -54,14 +58,17 @@
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
+            void getParticipationEvents()
+
             void pollNetworkStatus()
+            void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
+            clearPollParticipationOverviewInterval()
         }
     })
 
-    // TODO: add missing unsubscribe to onDestroy
-    ongoingSnapshot.subscribe((os) => {
+    const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
         if (os) {
             openSnapshotPopup()
         }
@@ -120,8 +127,10 @@
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
-        Electron.DeepLinkManager.clearDeepLinkRequest()
-        Electron.removeListenersForEvent('deep-link-params')
+        unsubscribeOngoingSnapshot()
+
+        Platform.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-params')
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -268,5 +277,9 @@
 <Idle />
 <div class="flex flex-row w-full h-full">
     <Sidebar {locale} />
-    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    <!-- Dashboard Pane -->
+    <div class="flex flex-col w-full h-full">
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+    </div>
 </div>

@@ -1,14 +1,14 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon,Pin,Profile,Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile } from 'shared/lib/profile'
+    import { Platform } from 'shared/lib/platform'
+    import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { api,getStoragePath,initialise } from 'shared/lib/wallet'
+    import { createEventDispatcher,onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale: Locale
@@ -112,6 +112,7 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
+            clearActiveProfile()
             dispatch('previous')
         }
     }

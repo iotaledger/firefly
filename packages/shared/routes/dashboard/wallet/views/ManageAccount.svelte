@@ -90,14 +90,14 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Text secondary classes="mb-3">{locale('general.updatingAccount')}</Text>
+        <Text secondary classes="mb-3 text-center">{locale('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy || accountAlias === alias}>
                 {locale('actions.save')}
             </Button>
         </div>

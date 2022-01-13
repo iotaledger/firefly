@@ -29,6 +29,7 @@
     const { accounts } = $wallet
 
     let nodeUrl: string = node?.url || ''
+    const oldNodeUrl: string = nodeUrl
     const optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
@@ -117,6 +118,7 @@
                                 network: getNetworkById(nodeInfo?.nodeinfo.networkId),
                                 isPrimary: node?.isPrimary || false,
                             },
+                            oldNodeUrl,
                         )
                         closePopup()
                     })

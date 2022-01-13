@@ -1,5 +1,6 @@
 import type { Bridge, CommunicationIds } from './bridge'
 import type { Writable } from 'svelte/store'
+import type { AccountIdentifier } from './account'
 
 export interface MigrationAddress {
     bech32: string
@@ -224,7 +225,7 @@ export function getMigrationAddress(
     bridge: Bridge,
     __ids: CommunicationIds,
     ledgerPrompt: boolean,
-    accountIndex: number
+    accountIdentifier: AccountIdentifier
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
@@ -232,7 +233,7 @@ export function getMigrationAddress(
         cmd: 'GetMigrationAddress',
         payload: {
             ledger_prompt: ledgerPrompt,
-            account_id: accountIndex,
+            account_id: accountIdentifier,
         },
     })
 }
