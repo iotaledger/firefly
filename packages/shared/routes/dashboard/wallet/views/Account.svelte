@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'

@@ -5,7 +5,16 @@
     import { openPopup } from 'shared/lib/popup';
     import { isLedgerProfile,isSoftwareProfile } from 'shared/lib/profile';
     import type { Locale } from 'shared/lib/typings/i18n';
-    import { api,isSyncing,selectedAccountId,selectedMessage,sendAddressFromTransactionPayload,receiverAddressesFromTransactionPayload } from 'shared/lib/wallet';
+    import {
+        api,
+        isSyncing,
+        selectedAccountId,
+        selectedMessage,
+        sendAddressFromTransactionPayload,
+        receiverAddressesFromTransactionPayload,
+        getIncomingFlag,
+    } from 'shared/lib/wallet';
+    import type { AccountMessage } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -84,10 +93,10 @@
             filteredTransactions = transactions
             break
         case 1:
-            filteredTransactions = transactions.filter(transaction => transaction?.payload?.data?.essence?.data?.incoming)
+            filteredTransactions = transactions.filter(transaction => getIncomingFlag(transaction?.payload))
             break
         case 2:
-            filteredTransactions = transactions.filter(transaction => !transaction?.payload?.data?.essence?.data?.incoming)
+            filteredTransactions = transactions.filter(transaction => !getIncomingFlag(transaction?.payload))
             break
         default:
             filteredTransactions = transactions
@@ -96,9 +105,12 @@
     let queryTransactions = filteredTransactions
     $: if (searchValue) {
         queryTransactions = filteredTransactions.filter(transaction => {
-            return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
-                sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
-                receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue))
+            if (transaction?.payload?.type === 'Transaction') {
+                return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
+                    sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
+                    receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue))
+            }
+            return transaction?.id?.includes(searchValue)
         })
     } else {
         queryTransactions = filteredTransactions
