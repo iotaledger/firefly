@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Route, Toggle, ToastContainer } from 'shared/components'
+    import { Route, ToastContainer, Popup } from 'shared/components'
+    import { popupState } from 'shared/lib/popup'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
@@ -7,7 +8,7 @@
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious, setRoute } from 'shared/lib/router'
-import { Platforms } from 'shared/lib/typings/platform';
+    import { Platforms } from 'shared/lib/typings/platform';
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Appearance,
@@ -77,6 +78,16 @@ import { Platforms } from 'shared/lib/typings/platform';
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}
+    {#if $popupState.active}
+        <Popup
+            type={$popupState.type}
+            props={$popupState.props}
+            hideClose={$popupState.hideClose}
+            fullScreen={$popupState.fullScreen}
+            transition={$popupState.transition}
+            locale={$_}
+        />
+    {/if}
     <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
