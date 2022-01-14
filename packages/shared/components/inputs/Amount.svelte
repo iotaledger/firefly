@@ -99,33 +99,7 @@
         showDropdown = false
     }
 
-    const onUnitClick = (toUnit: AmountUnit) => {
-        updateAmount(unit, toUnit)
-        unit = toUnit
-    }
-
-    const updateAmount = (fromUnit: AmountUnit, toUnit: AmountUnit) => {
-        if (amount.length <= 0 || fromUnit === toUnit) return
-
-        // IOTA -> FIAT
-        if (isFiatCurrency(toUnit)) {
-            let _amount = parseFloat(convertAmountToFiat(amount).slice(2)) ?? 0
-            amount = isNaN(_amount)  ? '0' : _amount.toString()
-        } else {
-            let rawAmount
-
-            // FIAT -> IOTA
-            if (isFiatCurrency(fromUnit)) {
-                rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-            }
-            // IOTA -> IOTA
-            else {
-                rawAmount = changeUnits(parseCurrency(amount), fromUnit as Unit, Unit.i)
-            }
-
-            amount = formatUnitPrecision(rawAmount, toUnit as Unit, false)
-        }
-    }
+    const onUnitClick = (toUnit: AmountUnit) => { unit = toUnit }
 
     const focusItem = (itemId) => {
         const elem = document.getElementById(itemId)
