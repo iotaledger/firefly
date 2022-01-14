@@ -21,7 +21,6 @@
 
     export let amount = undefined
     export let unit: AmountUnit = Unit.Mi
-    export let label = undefined
     export let placeholder = undefined
     export let classes = ''
     export let error = ''
@@ -30,8 +29,8 @@
 
     export let onMaxClick = (): void => {}
 
-    const currency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-    const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
+    const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD as AmountUnit
+    const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
 
     let showDropdown = false
 
@@ -159,7 +158,7 @@
             } else if (e.key === 'Enter') {
                 if (focusedItem) {
                     const idx = [...navContainer.children].indexOf(focusedItem)
-                    onUnitClick(Units[idx])
+                    onUnitClick(units[idx])
                 }
             }
         }
@@ -235,7 +234,7 @@
             <nav
                 class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown ? 'dropdown' : ''}"
                 bind:this={navContainer}>
-                {#each Units as _unit}
+                {#each units as _unit}
                     <button
                         id={_unit}
                         class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
