@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core'
+import { App } from '@capacitor/app'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
@@ -226,9 +227,7 @@ export const CapacitorApi: IPlatform = {
      * Close the app
      * @returns {undefined}
      */
-    close: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    close: () => App.exitApp(),
 
     /*
      * Opens url and checks against acceptlist
