@@ -27,7 +27,8 @@
     },
     "dependencies": {
         "shared-modules": "link:../shared",
-        "wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/"
+        "wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/",
+        "@capacitor/app": "^1.0.7"
     },
     "engineStrict": true,
     "engines": {
