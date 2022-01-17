@@ -28,6 +28,15 @@
         @screen md {
             max-height: inherit;
         }
+        button {
+            &.active {
+                @apply bg-blue-500;
+                @apply bg-opacity-10;
+                :global(p) {
+                    @apply text-blue-500;
+                }
+            }
+        }
     }
 </style>
 
