@@ -2,7 +2,7 @@
     import { Icon } from 'shared/components'
     import { bindEvents } from 'shared/lib/utils'
 
-    export let events = {}
+    export let events = []
     export let href = undefined
     export let secondary = false
     export let disabled = false
