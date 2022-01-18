@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { DeveloperProfileIndicator,Idle,Sidebar } from 'shared/components'
-    import { loggedIn,logout,sendParams } from 'shared/lib/app'
+    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
+    import { Settings, Staking, Wallet, Governance } from 'shared/routes'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive,parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { isPollingLedgerDeviceStatus,pollLedgerDeviceStatus,stopPollingLedgerStatus } from 'shared/lib/ledger'
@@ -28,7 +29,6 @@
     STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
     wallet
     } from 'shared/lib/wallet'
-    import { Settings,Staking,Wallet } from 'shared/routes'
     import { onDestroy,onMount } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -40,6 +40,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        governance: Governance,
     }
 
     let startInit

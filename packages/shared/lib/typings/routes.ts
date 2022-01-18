@@ -60,6 +60,7 @@ export enum Tabs {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
+    Governance = 'governance',
 }
 
 export enum SettingsRoutes {
