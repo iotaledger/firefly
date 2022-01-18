@@ -146,8 +146,6 @@
         @apply pt-12;
     }
 </style>
-<<<<<<< HEAD
-=======
 
 <aside
     class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
@@ -191,4 +189,3 @@
     <NetworkIndicator bind:isActive={showNetwork} {locale} />
     <ProfileActionsModal bind:isActive={showProfile} {locale} />
 </aside>
->>>>>>> c3fad68a... feat: add governance to sidebar (#2164)
