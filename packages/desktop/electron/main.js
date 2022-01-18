@@ -8,7 +8,7 @@ const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
 /**
- * Set AppUserModelID for Windows notifications functionallity
+ * Set AppUserModelID for Windows notifications functionality
  */
 app.setAppUserModelId('org.iota.firefly')
 
@@ -125,6 +125,7 @@ function isUrlAllowed(targetUrl) {
         'iota.org',
         'privacy@iota.org',
         'wiki.iota.org',
+        'explorer.iota.org',
 
         // Assembly / Shimmer
         'assembly.sc',
@@ -136,11 +137,10 @@ function isUrlAllowed(targetUrl) {
         // Other
         'support.ledger.com',
     ]
-
     const url = new URL(targetUrl)
     const domain = url.hostname.replace('www.', '').replace('mailto:', '')
 
-    return externalAllowlist.indexOf(domain) > -1 || externalAllowlist.indexOf(domain + url.pathname) > -1
+    return externalAllowlist.includes(domain) || externalAllowlist.includes(domain + url.pathname)
 }
 
 /**
