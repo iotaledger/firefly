@@ -17,6 +17,7 @@
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
+    import { _ } from 'shared/lib/i18n'
 
     const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
         (route) => route !== SettingsRoutes.Init
@@ -74,38 +75,41 @@
     })
 </script>
 
-<div class="flex flex-1 flex-row items-start">
-    <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
-        <div class="flex items-center space-x-3">
-            <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h5">{localize('actions.back')}</Text>
-        </div>
-    </button>
-    <SettingsNavigator
-        {routes}
-        onSettingClick={(id) => scrollIntoView(id)}
-        icons={SettingsIcons}
-        {settings}
-        bind:route={$settingsRoute} />
-    <div class="h-full w-full pb-10">
-        <Text type="p" secondary highlighted classes="mb-8">
-            {localize('views.settings.settings')}
-            /
-            {localize(`views.settings.${$settingsRoute}.title`)}
-        </Text>
-        <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
-            <div class="md:w-11/12">
-                <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
-                {#if $settingsRoute === SettingsRoutes.GeneralSettings}
-                    <General />
-                {:else if $settingsRoute === SettingsRoutes.Security}
-                    <Security />
-                {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
-                    <Advanced />
-                {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
-                    <Help />
-                {/if}
+<!-- remount on reactive $_ needed to refresh locales -->
+{#key $_}
+    <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center space-x-3">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h5">{localize('actions.back')}</Text>
             </div>
-        </Scroller>
+        </button>
+        <SettingsNavigator
+            {routes}
+            onSettingClick={(id) => scrollIntoView(id)}
+            icons={SettingsIcons}
+            {settings}
+            bind:route={$settingsRoute} />
+        <div class="h-full w-full pb-10">
+            <Text type="p" secondary highlighted classes="mb-8">
+                {localize('views.settings.settings')}
+                /
+                {localize(`views.settings.${$settingsRoute}.title`)}
+            </Text>
+            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
+                <div class="md:w-11/12">
+                    <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
+                    {#if $settingsRoute === SettingsRoutes.GeneralSettings}
+                        <General />
+                    {:else if $settingsRoute === SettingsRoutes.Security}
+                        <Security />
+                    {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
+                        <Advanced />
+                    {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
+                        <Help />
+                    {/if}
+                </div>
+            </Scroller>
+        </div>
     </div>
-</div>
+{/key}
