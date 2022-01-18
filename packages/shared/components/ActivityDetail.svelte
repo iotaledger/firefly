@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { Electron } from 'shared/lib/electron'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import type {  Payload } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
     import {
@@ -21,6 +22,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { getOfficialExplorer } from '../lib/network';
 
     export let locale: Locale
 
@@ -41,7 +43,7 @@
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
 
-    const prepareSenderAddress = () => {
+    const prepareSenderAddress = (): string => {
         if (txPayload) {
             return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
@@ -51,7 +53,7 @@
         return null
     }
 
-    const prepareReceiverAddresses = () => {
+    const prepareReceiverAddresses = (): string[] => {
         if (txPayload) {
             return receiverAddressesFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
@@ -70,7 +72,7 @@
         return []
     }
 
-    const prepareSenderAccount = () => {
+    const prepareSenderAccount = (): WalletAccount => {
         if (txPayload) {
             // There can only be one sender address which either belongs to us or not
             return findAccountWithAddress(senderAddress)
@@ -79,7 +81,7 @@
         return null
     }
 
-    const prepareReceiverAccount = () => {
+    const prepareReceiverAccount = (): WalletAccount => {
         if (milestonePayload) {
             return $accounts.find((acc) => acc.index === 0)
         }
@@ -111,6 +113,7 @@
         }
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+    $: explorerLink = getOfficialExplorer(senderAccount.clientOptions.network)
 </script>
 
 <style type="text/scss">
@@ -174,6 +177,11 @@
                 <Text secondary>{locale('general.messageId')}</Text>
                 <button class="text-left" on:click={() => setClipboard(id.toLowerCase())}>
                     <Text type="pre">{id}</Text>
+                </button>
+                <button 
+                    on:click={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                >
+                    <Icon icon="export" classes="text-gray-500" />
                 </button>
             </div>
         {/if}
