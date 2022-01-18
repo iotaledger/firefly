@@ -81,18 +81,16 @@
 <div
     class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
     use:clickOutside={{ includeScroll: true }}
-    on:clickOutside={() => {
-        nodeContextMenu = undefined
-    }}
+    on:clickOutside={() => (nodeContextMenu = undefined)}
     style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
     {#if !nodeContextMenu?.isDisabled}
         <button
-            onClick={() => handleSetPrimaryNode(nodeContextMenu)}
+            on:click={() => handleSetPrimaryNode(nodeContextMenu)}
             class={'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
             <Text smaller>{localize('views.settings.configureNodeList.setAsPrimary')}</Text>
         </button>
         <button
-            onClick={() => {
+            on:click={() => {
                 handleViewNodeInfoClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
@@ -104,7 +102,7 @@
         .map((n) => n.url)
         .includes(nodeContextMenu?.url)}
         <button
-            onClick={() => {
+            on:click={() => {
                 handleEditNodeDetailsClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
@@ -114,7 +112,7 @@
     {/if}
     {#if nodeContextMenu && nodeContextMenu.url !== networkConfig?.nodes?.find((n) => n.isPrimary)?.url}
         <button
-            onClick={() => {
+            on:click={() => {
                 nodeContextMenu.isDisabled = !nodeContextMenu.isDisabled
                 networkConfig.nodes = networkConfig.nodes.map((n) => ({
                     ...n,
@@ -133,7 +131,7 @@
         .includes(nodeContextMenu?.url)}
         <HR />
         <button
-            onClick={() => {
+            on:click={() => {
                 handleRemoveNodeClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
