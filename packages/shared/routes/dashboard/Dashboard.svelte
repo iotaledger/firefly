@@ -3,7 +3,7 @@
     import { get } from 'svelte/store'
 
     import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet, Governance } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
@@ -42,6 +42,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        governance: Governance,
     }
 
     let startInit

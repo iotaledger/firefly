@@ -54,6 +54,10 @@
         dashboardRoute.set(Tabs.Staking)
     }
 
+    function openGovernance() {
+        dashboardRoute.set(Tabs.Governance)
+    }
+
     const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
@@ -75,7 +79,7 @@
                 <Icon width="24" height="24" icon="wallet" />
             </button>
             <button
-                class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                class="mb-8 {$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
                 on:click={openStaking}>
                 <Icon width="24" height="24" icon="tokens" />
                 {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
@@ -85,6 +89,11 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification ? 'bg-yellow-600' : 'bg-red-500'}" />
                     </span>
                 {/if}
+            </button>
+            <button
+                class="{$dashboardRoute === Tabs.Governance ? 'text-blue-500' : 'text-gray-500'}"
+                on:click={openGovernance}>
+                <Icon width="24" height="24" icon="policy" />
             </button>
         </div>
         <span class="flex flex-col items-center">
