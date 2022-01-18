@@ -548,6 +548,9 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "governance": {
+            "title": "Governance"
         }
     },
     "popups": {

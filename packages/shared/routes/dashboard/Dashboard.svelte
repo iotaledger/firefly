@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet, Governance } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
@@ -42,6 +42,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        governance: Governance,
     }
 
     let startInit
