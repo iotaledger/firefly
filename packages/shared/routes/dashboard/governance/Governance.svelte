@@ -1,7 +1,20 @@
 <script lang="typescript">
-    import { GovernanceHeader } from './views'
+    import { DashboardPane } from 'shared/components'
+    import { GovernanceHeader, GovernanceVotingPower, GovernanceInfo } from './views'
 </script>
 
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
     <GovernanceHeader />
+    <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+        <div class="h-full flex flex-col space-y-3 overflow-hidden">
+            <DashboardPane classes="w-full flex-shrink-0 p-6">
+                <GovernanceVotingPower />
+            </DashboardPane>
+            <DashboardPane classes="w-full flex-grow p-6">
+                <GovernanceInfo />
+            </DashboardPane>
+        </div>
+        <DashboardPane classes="w-full h-full flex col-span-2">
+        </DashboardPane>
+    </div>
 </div>
