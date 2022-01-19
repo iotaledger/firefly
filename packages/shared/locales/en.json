@@ -540,7 +540,10 @@
             },
             "events": {
                 "status": {
-                    "commencing": "Commencing"
+                    "upcoming": "Upcoming",
+                    "commencing": "Commencing",
+                    "holdingPeriod": "Holding period",
+                    "ended": "Ended"
                 },
                 "communityTreasury": {
                     "title": "Participate in community Treasury proposal",
@@ -552,7 +555,8 @@
                     }
                 },
                 "button": "View proposal"
-            }
+            },
+            "votes": "votes"
         }
     },
     "popups": {

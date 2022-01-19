@@ -14,7 +14,7 @@
                 <GovernanceInfo />
             </DashboardPane>
         </div>
-        <DashboardPane classes="w-full h-full p-6 col-span-2 grid grid-cols-3 grid-rows-3">
+        <DashboardPane classes="w-full h-full p-6 col-span-2 flex flex-col items-center">
             <GovernanceEvents />
         </DashboardPane>
     </div>

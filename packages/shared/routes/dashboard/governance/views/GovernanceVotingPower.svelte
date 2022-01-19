@@ -5,8 +5,9 @@
     export let votingPower = 4528125
 </script>
 
-<div class='flex justify-between'>
-    <Text type="p" classes="ml-2.5 mr-5 text-gray-700 mb-5" overrideColor smaller>{localize('views.governance.votingPower.title')}</Text>
-    <Icon icon="info" classes="flex-shrink-0 mx-4 text-gray-500 dark:text-white" />
+<div class='flex items-center mb-5'>
+    <Text type="p" classes="mr-2 text-gray-700" overrideColor smaller>{localize('views.governance.votingPower.title')}</Text>
+    <Icon icon="info-filled" classes="flex-shrink-0 text-gray-500 dark:text-white w-3 h-3" />
 </div>
-<Text type="h1" classes="ml-2.5 mr-5 text-gray-800" overrideColor>{votingPower}</Text>
+<Text type="h1" classes="text-gray-800 inline-flex" overrideColor>{votingPower}</Text>
+<Text type="h3" classes="inline-flex text-gray-800" overrideColor>{localize('views.governance.votes')}</Text>
