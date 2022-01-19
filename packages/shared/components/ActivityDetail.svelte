@@ -114,7 +114,6 @@
         }
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
-
     $: senderColor = getColor($activeProfile, senderAccount?.id) as string
     $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
 </script>
