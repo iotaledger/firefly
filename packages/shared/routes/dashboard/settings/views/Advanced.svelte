@@ -1,25 +1,26 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button,Checkbox,HR,Radio,Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Platform } from 'shared/lib/platform'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import {
-        ensureSinglePrimaryNode,
-        getNodeCandidates,
-        getOfficialNetworkConfig,
-        getOfficialNodes,
-        isOfficialNetwork,
-        updateClientOptions,
+    ensureSinglePrimaryNode,
+    getNodeCandidates,
+    getOfficialNetworkConfig,
+    getOfficialNodes,
+    isOfficialNetwork,
+    updateClientOptions
     } from 'shared/lib/network'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import { Platform } from 'shared/lib/platform'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile,isLedgerProfile,updateProfile } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
+    import { NetworkConfig,NetworkStatusHealthText,NetworkType } from 'shared/lib/typings/network'
     import type { Node } from 'shared/lib/typings/node'
     import { wallet } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -27,7 +28,7 @@
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
 
-    const networkConfig: NetworkConfig = $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    const networkConfig: NetworkConfig = get(activeProfile)?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -78,9 +79,6 @@
     function handleSetPrimaryNode(node: Node) {
         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
         nodeContextMenu = undefined
-
-        updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
     }
 
     function handleAddNodeClick() {
@@ -89,8 +87,8 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    if (node.isPrimary) {
+                onSuccess: (_isNetworkSwitch: boolean, node: Node, _oldNodeUrl: string) => {
+                    if(node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
                         node.isPrimary = true
@@ -98,9 +96,6 @@
 
                     networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
                     if (networkConfig.nodes.length === 0) networkConfig.nodes = [node]
-
-                    updateClientOptions(networkConfig)
-                    updateProfile('settings.networkConfig', networkConfig)
 
                     setTimeout(() => {
                         /**
@@ -122,22 +117,16 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === node.url)
+                onSuccess: (_isNetworkSwitch: boolean, node: Node, oldNodeUrl: string) => {
+                    const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
                     if (idx >= 0) {
-                        if (node.isPrimary) {
-                            networkConfig.nodes = networkConfig.nodes.map((n) => ({
-                                ...n,
-                                isPrimary: n.url === node.url,
-                            }))
+                        if(node.isPrimary) {
+                            networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === oldNodeUrl }))
                         } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
                             node.isPrimary = true
                         }
 
                         networkConfig.nodes[idx] = node
-
-                        updateClientOptions(networkConfig)
-                        updateProfile('settings.networkConfig', networkConfig)
                     }
                 },
             },
@@ -190,10 +179,6 @@
 
     function handleBalanceFinderClick() {
         openPopup({ type: 'balanceFinder', hideClose: true })
-    }
-
-    function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', hideClose: false })
     }
 </script>
 
@@ -427,13 +412,5 @@
                 {locale('views.settings.migrateLedgerIndex.title')}
             </Button>
         </section>
-    {/if}
-    {#if $loggedIn}
-    <HR classes="pb-5 mt-5 justify-center" />
-    <section id="transactionHistory" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.transactionHistory.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.transactionHistory.description')}</Text>
-        <Button classes="px-10" medium inlineStyle="min-width: 156px;"  onClick={handleExportTransactionHistoryClick}>{locale('actions.exportTransactionHistory')}</Button>
-    </section>
     {/if}
 </div>

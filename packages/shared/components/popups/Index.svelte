@@ -1,40 +1,45 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components';
-    import { clickOutside } from 'shared/lib/actions';
-    import { closePopup,popupState } from 'shared/lib/popup';
-    import type { Locale } from 'shared/lib/typings/i18n';
-    import { onMount } from 'svelte';
-    import { fade } from 'svelte/transition';
-    import AddNode from './AddNode.svelte';
-    import AddressHistory from './AddressHistory.svelte';
-    import Backup from './Backup.svelte';
-    import BalanceFinder from './BalanceFinder.svelte';
-    import Busy from './Busy.svelte';
-    import DeleteAccount from './DeleteAccount.svelte';
-    import DeleteProfile from './DeleteProfile.svelte';
-    import Diagnostics from './Diagnostics.svelte';
-    import ErrorLog from './ErrorLog.svelte';
-    import ExportTransactionHistoryPopup from './ExportTransactionHistoryPopup.svelte';
-    import HideAccount from './HideAccount.svelte';
-    import LedgerAddress from './LedgerAddress.svelte';
-    import LedgerAppGuide from './LedgerAppGuide.svelte';
-    import LedgerConfirmation from './LedgerConfirmation.svelte';
-    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte';
-    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte';
-    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte';
-    import LedgerNotConnected from './LedgerNotConnected.svelte';
-    import LedgerTransaction from './LedgerTransaction.svelte';
-    import MissingBundle from './MissingBundle.svelte';
-    import NodeInfo from './NodeInfo.svelte';
-    import Password from './Password.svelte';
-    import QR from './QR.svelte';
-    import RemoveNode from './RemoveNode.svelte';
-    import RiskFunds from './RiskFunds.svelte';
-    import Snapshot from './Snapshot.svelte';
-    import SwitchNetwork from './SwitchNetwork.svelte';
-    import Transaction from './Transaction.svelte';
-    import Version from './Version.svelte';
-    import Video from './Video.svelte';
+    import { Icon } from 'shared/components'
+    import { clickOutside } from 'shared/lib/actions'
+    import { closePopup, popupState } from 'shared/lib/popup'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { onMount } from 'svelte'
+    import { fade } from 'svelte/transition'
+    import AddNode from './AddNode.svelte'
+    import AddressHistory from './AddressHistory.svelte'
+    import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
+    import Backup from './Backup.svelte'
+    import BalanceFinder from './BalanceFinder.svelte'
+    import Busy from './Busy.svelte'
+    import DeleteAccount from './DeleteAccount.svelte'
+    import DeleteProfile from './DeleteProfile.svelte'
+    import Diagnostics from './Diagnostics.svelte'
+    import ErrorLog from './ErrorLog.svelte'
+    import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import HideAccount from './HideAccount.svelte'
+    import LedgerAddress from './LedgerAddress.svelte'
+    import LedgerAppGuide from './LedgerAppGuide.svelte'
+    import LedgerConfirmation from './LedgerConfirmation.svelte'
+    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
+    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
+    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
+    import LedgerNotConnected from './LedgerNotConnected.svelte'
+    import LedgerTransaction from './LedgerTransaction.svelte'
+    import MissingBundle from './MissingBundle.svelte'
+    import NodeInfo from './NodeInfo.svelte'
+    import Password from './Password.svelte'
+    import QR from './QR.svelte'
+    import RemoveNode from './RemoveNode.svelte'
+    import RiskFunds from './RiskFunds.svelte'
+    import Snapshot from './Snapshot.svelte'
+    import StakingConfirmation from './StakingConfirmation.svelte'
+    import StakingManager from './StakingManager.svelte'
+    import StakingNotice from './StakingNotice.svelte'
+    import SwitchNetwork from './SwitchNetwork.svelte'
+    import Transaction from './Transaction.svelte'
+    import Version from './Version.svelte'
+    import Video from './Video.svelte'
+    import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
 
     export let locale: Locale
 
@@ -43,6 +48,8 @@
     export let hideClose = undefined
     export let fullScreen = undefined
     export let transition = true
+
+    let autofocusContent = true
 
     enum PopupSize {
         Small = 'small',
@@ -61,6 +68,9 @@
         case 'ledgerConnectionGuide':
             size = PopupSize.Large
             break
+        case 'stakingManager':
+            autofocusContent = false
+            break
         default:
             size = PopupSize.Medium
             break
@@ -74,6 +84,7 @@
         version: Version,
         backup: Backup,
         deleteAccount: DeleteAccount,
+        exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,
         addressHistory: AddressHistory,
         ledgerNotConnected: LedgerNotConnected,
@@ -98,7 +109,12 @@
         balanceFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
-        exportTransactionHistory: ExportTransactionHistoryPopup
+        // Participation (voting / staking)
+        stakingConfirmation: StakingConfirmation,
+        stakingManager: StakingManager,
+        stakingNotice: StakingNotice,
+        airdropNetworkInfo: AirdropNetworkInfo,
+        confirmDeveloperProfile: ConfirmDeveloperProfile
     }
 
     const onkey = (e) => {
@@ -139,9 +155,9 @@
     }
 
     onMount(() => {
-        const elems = focusableElements()
+        let elems = focusableElements()
         if (elems && elems.length > 0) {
-            elems[hideClose || elems.length === 1 ? 0 : 1].focus()
+            elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
     })
 </script>
@@ -162,6 +178,11 @@
             }
             &.full-screen {
                 box-shadow: none;
+            }
+
+            &:not(.full-screen) {
+                @apply overflow-y-auto;
+                max-height: calc(100vh - 50px);
             }
         }
     }
