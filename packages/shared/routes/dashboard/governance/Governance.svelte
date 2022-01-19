@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { GovernanceHeader, GovernanceVotingPower, GovernanceInfo } from './views'
+    import { GovernanceHeader, GovernanceVotingPower, GovernanceInfo, GovernanceEvents } from './views'
 </script>
 
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
@@ -14,7 +14,8 @@
                 <GovernanceInfo />
             </DashboardPane>
         </div>
-        <DashboardPane classes="w-full h-full flex col-span-2">
+        <DashboardPane classes="w-full h-full p-6 col-span-2 grid grid-cols-3 grid-rows-3">
+            <GovernanceEvents />
         </DashboardPane>
     </div>
 </div>
