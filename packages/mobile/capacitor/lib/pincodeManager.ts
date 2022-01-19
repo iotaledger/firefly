@@ -21,7 +21,7 @@ export const PincodeManager: IPincodeManager = {
     },
     /**
      * Gets pincode from keychain
-     * @method get
+     * @method verify
      */
     verify: async (key: string, pin: string): Promise<boolean> => {
         try {
