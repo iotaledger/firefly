@@ -529,7 +529,30 @@
             }
         },
         "governance": {
-            "title": "Governance"
+            "title": "Governance",
+            "votingPower": {
+                "title": "My voting power"
+            },
+            "info": {
+                "title": "Governance info",
+                "description": "The IOTA community together with the IOTA Foundation, has developed the technology that makes it possible to use your IOTA tokens in governance decisions here in the secure environment of the Firefly Wallet.",
+                "link": "Learn about voting with Firefly"
+            },
+            "events": {
+                "status": {
+                    "commencing": "Commencing"
+                },
+                "communityTreasury": {
+                    "title": "Participate in community Treasury proposal",
+                    "description": {
+                        "text1": "The future of IOTA is in your hands – you can decide the future of 63Ti unclaimed tokens by participating in this community proposal.",
+                        "text2": "You can vote for",
+                        "text3": "building the community treasury",
+                        "text4": "burning the unclaimed tokens."
+                    }
+                },
+                "button": "View proposal"
+            }
         }
     },
     "popups": {
@@ -908,6 +931,7 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
+        "or": "or",
         "receiveFunds": "Receive Funds",
         "address": "Address",
         "myAddress": "My Address",
