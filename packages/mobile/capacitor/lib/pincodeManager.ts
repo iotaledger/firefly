@@ -1,13 +1,13 @@
 import type { IPincodeManager } from 'shared/lib/typings/pincodeManager'
-import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 
 /** Mobile Pincode Manager */
-export const PincodeManager: IPincodeManager =  {
+export const PincodeManager: IPincodeManager = {
     /**
      * Sets pincode in keychain
      * @method set
      */
-     set: async (key: string, pin: string): Promise<void> => {
+    set: async (key: string, pin: string): Promise<void> => {
         try {
             const { value } = await SecureStoragePlugin.set({ key, value: pin })
             if (value) {
@@ -23,7 +23,7 @@ export const PincodeManager: IPincodeManager =  {
      * Gets pincode from keychain
      * @method get
      */
-     verify: async (key: string, pin: string): Promise<boolean> => {
+    verify: async (key: string, pin: string): Promise<boolean> => {
         try {
             const { value } = await SecureStoragePlugin.get({ key })
             return value === pin
@@ -35,12 +35,12 @@ export const PincodeManager: IPincodeManager =  {
      * Removes pincode entry from the keychain
      * @method remove
      */
-     remove: async (key: string): Promise<boolean> => {
+    remove: async (key: string): Promise<boolean> => {
         try {
             const { value } = await SecureStoragePlugin.remove({ key })
             return value
         } catch (error) {
             console.error(error)
         }
-    }
+    },
 }
