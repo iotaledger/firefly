@@ -20,6 +20,7 @@
         "@capacitor/cli": "^3.2.0",
         "@capacitor/core": "3.2.0",
         "@capacitor/ios": "3.2.0",
+        "@capacitor/filesystem": "^1.0.6",
         "mini-css-extract-plugin": "^1.6.0",
         "webpack": "^5.38.1",
         "webpack-cli": "^4.7.2",
