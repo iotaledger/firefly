@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core'
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
@@ -17,8 +18,16 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    removeProfileFolder(profilePath) {
-        return new Promise<void>((resolve, reject) => {})
+    async removeProfileFolder(profilePath) {
+        try {
+            await Filesystem.rmdir({
+                path: profilePath,
+                directory: Directory.Data,
+                recursive: true
+            })
+        } catch (error) {
+            console.error(error)
+        }
     },
 
     listProfileFolders(profileStoragePath) {
