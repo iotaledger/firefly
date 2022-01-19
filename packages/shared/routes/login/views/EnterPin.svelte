@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { mobile } from 'shared/lib/app'
+    import { Icon,Pin,Profile,Text } from 'shared/components'
+    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { Platform } from 'shared/lib/platform'
     import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
