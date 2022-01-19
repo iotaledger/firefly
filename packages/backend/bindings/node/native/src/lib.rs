@@ -5,9 +5,10 @@ use std::sync::{
     Arc, Mutex,
 };
 use wallet_actor_system::{
+    actor::event::{EventType},
     destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
     listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,
-    send_message as send_actor_message, EventType, LoggerConfigBuilder, RUNTIME,
+    send_message as send_actor_message, LoggerConfigBuilder, RUNTIME,
 };
 
 struct SendMessageTask {

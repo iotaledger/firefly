@@ -1,31 +1,34 @@
+use crate::{
+    actor::{
+        event::{EventListener},
+        message::{KillMessage},
+    },
+    RUNTIME,
+};
+
 pub use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
     actor::{Message as WalletMessage, MessageType as WalletMessageType, Response, ResponseType, WalletMessageHandler},
     Error,
 };
+
 use riker::actors::*;
 
-use super::RUNTIME;
 use std::sync::Arc;
-#[derive(Clone, Debug)]
-pub struct KillMessage;
 
 #[actor(WalletMessage, KillMessage)]
 pub struct WalletActor {
-    wallet_message_handler: Arc<WalletMessageHandler>,
+    handler: Arc<WalletMessageHandler>,
 }
 
-impl ActorFactoryArgs<AccountManager> for WalletActor {
-    fn create_args(manager: AccountManager) -> Self {
-        Self {
-            wallet_message_handler: Arc::new(WalletMessageHandler::with_manager(manager)),
-        }
-    }
+pub(crate) struct WalletActorData {
+    pub listeners: Vec<EventListener>,
+    pub actor: ActorRef<WalletActorMsg>,
 }
 
 impl Default for WalletActor {
     fn default() -> Self {
-        let wallet_message_handler = Arc::new(RUNTIME.block_on(async move {
+        let handler = Arc::new(RUNTIME.block_on(async move {
             WalletMessageHandler::with_manager(
                 AccountManager::builder()
                     .with_storage(DEFAULT_STORAGE_FOLDER, None)
@@ -36,7 +39,7 @@ impl Default for WalletActor {
                     .unwrap(),
             )
         }));
-        Self { wallet_message_handler }
+        Self { handler }
     }
 }
 
@@ -48,14 +51,11 @@ impl Actor for WalletActor {
     }
 }
 
-impl Receive<WalletMessage> for WalletActor {
-    type Msg = WalletActorMsg;
-
-    fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: WalletMessage, _sender: Sender) {
-        let wallet_message_handler = self.wallet_message_handler.clone();
-        RUNTIME.spawn(async move {
-            wallet_message_handler.handle(msg).await;
-        });
+impl ActorFactoryArgs<AccountManager> for WalletActor {
+    fn create_args(manager: AccountManager) -> Self {
+        Self {
+            handler: Arc::new(WalletMessageHandler::with_manager(manager)),
+        }
     }
 }
 
@@ -64,5 +64,16 @@ impl Receive<KillMessage> for WalletActor {
 
     fn receive(&mut self, ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
         ctx.stop(ctx.myself());
+    }
+}
+
+impl Receive<WalletMessage> for WalletActor {
+    type Msg = WalletActorMsg;
+
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: WalletMessage, _sender: Sender) {
+        let wallet_message_handler = self.handler.clone();
+        RUNTIME.spawn(async move {
+            wallet_message_handler.handle(msg).await;
+        });
     }
 }

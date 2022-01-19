@@ -1,14 +1,21 @@
-mod actors;
+pub mod actor;
 #[cfg(any(feature = "extension"))]
 mod extension;
+mod wallet;
 
-use actors::{WalletActor, WalletActorMsg, WalletMessage};
+use crate::{
+    actor::{
+        event::{EventListener, EventType, serialize_event},
+        message::{DispatchMessage, FallbackMessage, KillMessage, MessageReceiver},
+    },
+    wallet::actor::{WalletActor, WalletActorData},
+};
 
 use bee_common::logger::logger_init;
 pub use bee_common::logger::LoggerConfigBuilder;
 use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
-    actor::{MessageType, Response, ResponseType},
+    actor::{Message as WalletMessage, Response, ResponseType},
     client::drop_all as drop_clients,
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_ledger_address_generation,
@@ -16,12 +23,12 @@ use iota_wallet::{
         remove_balance_change_listener, remove_broadcast_listener, remove_confirmation_state_change_listener,
         remove_error_listener, remove_ledger_address_generation_listener, remove_migration_progress_listener,
         remove_new_transaction_listener, remove_reattachment_listener, remove_stronghold_status_change_listener,
-        remove_transfer_progress_listener, EventId,
+        remove_transfer_progress_listener,
     },
 };
+
 use once_cell::sync::Lazy;
 use riker::actors::*;
-use serde::{Deserialize, Serialize};
 use tokio::{
     runtime::Runtime,
     sync::{
@@ -32,7 +39,6 @@ use tokio::{
 
 use std::{
     collections::HashMap,
-    convert::TryFrom,
     path::{Path, PathBuf},
     sync::{mpsc::Sender, Arc, Mutex},
     time::Duration,
@@ -40,20 +46,13 @@ use std::{
 
 #[cfg(any(feature = "extension"))]
 use extension::{
-    check_extension_dispatch, extension_dispatch, send_event_to_extension, ExtensionActor, ExtensionActorMsg,
+    check_extension_dispatch, ExtensionActor, ExtensionActorMsg,
 };
 
-struct WalletActorData {
-    listeners: Vec<(EventId, EventType)>,
-    actor: ActorRef<WalletActorMsg>,
-}
-
 type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
-type MessageReceiver = Arc<Mutex<Sender<String>>>;
-type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
-
 #[cfg(any(feature = "extension"))]
 type ExtensionActors = Arc<AsyncMutex<HashMap<String, ActorRef<ExtensionActorMsg>>>>;
+type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
 pub static RUNTIME: Lazy<Runtime> = Lazy::new(|| Runtime::new().unwrap());
 
@@ -62,60 +61,15 @@ fn wallet_actors() -> &'static WalletActors {
     &ACTORS
 }
 
-fn message_receivers() -> &'static MessageReceivers {
-    static RECEIVERS: Lazy<MessageReceivers> = Lazy::new(Default::default);
-    &RECEIVERS
-}
-
 #[cfg(any(feature = "extension"))]
 fn extension_actors() -> &'static ExtensionActors {
     static EXTENSION_ACTORS: Lazy<ExtensionActors> = Lazy::new(Default::default);
     &EXTENSION_ACTORS
 }
 
-#[derive(Deserialize, Clone)]
-pub(crate) struct DispatchMessage {
-    #[serde(rename = "actorId")]
-    pub(crate) actor_id: String,
-    pub(crate) id: String,
-    #[serde(flatten)]
-    pub(crate) message: MessageType,
-}
-
-#[derive(Serialize, Deserialize, Copy, Clone)]
-#[repr(C)]
-pub enum EventType {
-    ErrorThrown,
-    BalanceChange,
-    NewTransaction,
-    ConfirmationStateChange,
-    Reattachment,
-    Broadcast,
-    StrongholdStatusChange,
-    TransferProgress,
-    LedgerAddressGeneration,
-    MigrationProgress,
-}
-
-impl TryFrom<&str> for EventType {
-    type Error = String;
-
-    fn try_from(value: &str) -> Result<Self, Self::Error> {
-        let event_type = match value {
-            "ErrorThrown" => EventType::ErrorThrown,
-            "BalanceChange" => EventType::BalanceChange,
-            "NewTransaction" => EventType::NewTransaction,
-            "ConfirmationStateChange" => EventType::ConfirmationStateChange,
-            "Reattachment" => EventType::Reattachment,
-            "Broadcast" => EventType::Broadcast,
-            "StrongholdStatusChange" => EventType::StrongholdStatusChange,
-            "TransferProgress" => EventType::TransferProgress,
-            "LedgerAddressGeneration" => EventType::LedgerAddressGeneration,
-            "MigrationProgress" => EventType::MigrationProgress,
-            _ => return Err(format!("invalid event name {}", value)),
-        };
-        Ok(event_type)
-    }
+fn message_receivers() -> &'static MessageReceivers {
+    static RECEIVERS: Lazy<MessageReceivers> = Lazy::new(Default::default);
+    &RECEIVERS
 }
 
 pub async fn init<A: Into<String>>(
@@ -164,7 +118,7 @@ pub async fn init<A: Into<String>>(
                 .actor_of_args::<ExtensionActor, _>(extension_actor_id.as_str(), actor_id.clone())
                 .expect("Failed to create extension_actor");
 
-            extension_actors.insert(extension_actor_name.clone(), extension_actor);
+            extension_actors.insert(extension_actor_id.clone(), extension_actor);
         }
 
         let mut message_receivers = message_receivers()
@@ -184,7 +138,7 @@ pub async fn remove_event_listeners<A: Into<String>>(actor_id: A) {
     }
 }
 
-async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
+async fn remove_event_listeners_internal(listeners: &[EventListener]) {
     for (event_id, event_type) in listeners.iter() {
         match *event_type {
             EventType::ErrorThrown => remove_error_listener(event_id),
@@ -208,7 +162,7 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
     if let Some(actor_data) = actors.remove(&actor_id) {
         remove_event_listeners_internal(&actor_data.listeners).await;
 
-        actor_data.actor.tell(actors::KillMessage, None);
+        actor_data.actor.tell(KillMessage, None);
         iota_wallet::with_actor_system(|sys| {
             sys.stop(&actor_data.actor);
         })
@@ -228,7 +182,7 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
     {
         let mut extension_actors = extension_actors().lock().await;
         if let Some(actor) = extension_actors.remove(&actor_id) {
-            actor.tell(actors::KillMessage, None);
+            actor.tell(KillMessage, None);
             iota_wallet::with_actor_system(|sys| {
                 sys.stop(&actor);
             })
@@ -239,13 +193,6 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
 
 pub fn init_logger(config: LoggerConfigBuilder) {
     logger_init(config.finish()).expect("failed to init logger");
-}
-
-#[derive(Deserialize)]
-pub(crate) struct MessageFallback {
-    #[serde(rename = "actorId")]
-    pub(crate) actor_id: String,
-    pub(crate) id: Option<String>,
 }
 
 async fn dispatch(message: DispatchMessage, mut response_rx: UnboundedReceiver<Response>) {
@@ -303,7 +250,7 @@ pub async fn send_message(serialized_message: String) {
             // only check fallback
             #[cfg(not(feature = "extension"))]
             {
-                if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
+                if let Ok(message) = serde_json::from_str::<FallbackMessage>(&serialized_message) {
                     Some((
                         format!(
                             r#"{{
@@ -336,28 +283,6 @@ pub async fn send_message(serialized_message: String) {
         println!("RESPONSE {:?}", message);
         respond(&actor_id, message).expect("actor dropped");
     }
-}
-
-#[derive(Serialize)]
-struct EventResponse<T: Serialize> {
-    id: String,
-    #[serde(rename = "type")]
-    _type: EventType,
-    payload: T,
-}
-
-impl<T: Serialize> EventResponse<T> {
-    fn new<S: Into<String>>(id: S, event: EventType, payload: T) -> Self {
-        Self {
-            id: id.into(),
-            _type: event,
-            payload,
-        }
-    }
-}
-
-fn serialize_event<T: Serialize, S: Into<String>>(id: S, event: EventType, payload: T) -> String {
-    serde_json::to_string(&EventResponse::new(id, event, payload)).unwrap()
 }
 
 fn respond<A: AsRef<str>>(actor_id: A, message: String) -> Result<(), String> {
