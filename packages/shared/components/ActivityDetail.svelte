@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, CopyButton } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import type {  Payload } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
@@ -22,15 +21,15 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { getOfficialExplorer } from '../lib/network';
+    import { getOfficialExplorer } from 'shared/lib/network';
 
     export let locale: Locale
 
-    export let id
-    export let timestamp
-    export let confirmed
+    export let id: string
+    export let timestamp: string
+    export let confirmed: boolean
     export let payload: Payload
-    export let balance // migration tx
+    export let balance: number // migration tx
 
     export let onBackClick = (): void => {}
 
@@ -175,51 +174,51 @@
         {#if id}
             <div class="mb-5">
                 <Text secondary>{locale('general.messageId')}</Text>
-                <button class="text-left" on:click={() => setClipboard(id.toLowerCase())}>
+                <div class="flex flex-row justify-between items-center">
                     <Text type="pre">{id}</Text>
-                </button>
-                <button 
-                    on:click={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
-                >
-                    <Icon icon="export" classes="text-gray-500" />
-                </button>
+                    <CopyButton itemToCopy={id} />
+                    <button 
+                        on:click={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                    >
+                        <Icon icon="export" classes="text-gray-500" />
+                    </button>
+                </div>
             </div>
         {/if}
         {#if senderAddress}
             <div class="mb-5">
                 <Text secondary>{locale('general.inputAddress')}</Text>
-                <button class="text-left" on:click={() => setClipboard(senderAddress.toLowerCase())}>
-                    <Text type="pre">
-                        {senderAddress}
-                        {#if senderAccount}&nbsp;({senderAccount.alias}){/if}
-                    </Text>
-                </button>
+                <div class="flex flex-row justify-between items-center">
+                    <Text type="pre"> {senderAddress} </Text>
+                    <CopyButton itemToCopy={senderAddress} />
+                </div>
+                <Text type="pre">{#if senderAccount} ({senderAccount.alias}) {/if}</Text>
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
                 <Text secondary>{locale('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver, idx}
-                    <button class="text-left" on:click={() => setClipboard(receiver.toLowerCase())}>
-                        <Text type="pre" classes="mb-2">
-                            {receiver}
-                            {#if receiverAddressesYou[idx]}&nbsp;({receiverAddressesYou[idx].alias}){/if}
-                        </Text>
-                    </button>
+                    <div class="flex flex-row justify-between items-center">
+                        <Text type="pre"> {receiver} </Text>
+                        <CopyButton itemToCopy={receiver} />
+                    </div>
+                    <Text type="pre" classes="mb-2 mt-0">
+                        {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
+                    </Text>
                 {/each}
             </div>
         {/if}
         {#if txPayload || milestonePayload}
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
-                <div class="flex flex-row">
-                    <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
+                <div class="flex flex-row justify-between items-center">
+                    <div class="flex flex-row">
                         <Text>{formatUnitBestMatch(value)}</Text>
-                    </button>
-                    &nbsp;
-                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
+                        &nbsp;
                         <Text highlighted>({formatCurrency(currencyValue)})</Text>
-                    </button>
+                    </div>
+                    <CopyButton itemToCopy={formatUnitBestMatch(value)} />
                 </div>
             </div>
         {/if}
