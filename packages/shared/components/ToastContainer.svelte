@@ -13,15 +13,6 @@
     }))
 </script>
 
-<style type="text/scss">
-    toast-container {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-        width: 400px;
-    }
-</style>
-
 <toast-container class="flex flex-col relative z-20">
     <ul class="space-y-2">
         {#each toasts as toast}
@@ -31,3 +22,12 @@
         {/each}
     </ul>
 </toast-container>
+
+<style type="text/scss">
+    toast-container {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        width: 400px;
+    }
+</style>

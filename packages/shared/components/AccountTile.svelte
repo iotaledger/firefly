@@ -215,66 +215,6 @@
     }
 </script>
 
-<style type="text/scss">
-    button {
-        height: auto;
-        min-height: 110px;
-        max-height: 100%;
-        &.size-l {
-            min-height: 140px;
-        }
-        &.partial-stake {
-            @apply border;
-            @apply border-solid;
-            @apply border-yellow-600;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border;
-                @apply border-solid;
-                @apply border-yellow-600;
-                &:hover {
-                    @apply border-transparent;
-                }
-            }
-        }
-        &.staked:not(.partial-stake) {
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border-gray-900;
-            }
-        }
-        &.airdrop {
-            @apply opacity-50;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
-            &:hover {
-                @apply bg-gray-500;
-            }
-            &.darkmode {
-                @apply bg-gray-900;
-                @apply border-transparent;
-                &:hover {
-                    @apply bg-gray-600;
-                }
-            }
-        }
-        &.hidden-wallet {
-            @apply opacity-50;
-        }
-    }
-</style>
-
 <button
     on:click={handleTileClick}
     class="bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}"
@@ -334,3 +274,63 @@
         {/each}
     </Tooltip>
 {/if}
+
+<style type="text/scss">
+    button {
+        height: auto;
+        min-height: 110px;
+        max-height: 100%;
+        &.size-l {
+            min-height: 140px;
+        }
+        &.partial-stake {
+            @apply border;
+            @apply border-solid;
+            @apply border-yellow-600;
+            &:hover {
+                @apply border-transparent;
+            }
+            &.darkmode {
+                @apply border;
+                @apply border-solid;
+                @apply border-yellow-600;
+                &:hover {
+                    @apply border-transparent;
+                }
+            }
+        }
+        &.staked:not(.partial-stake) {
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-200;
+            &:hover {
+                @apply border-transparent;
+            }
+            &.darkmode {
+                @apply border-gray-900;
+            }
+        }
+        &.airdrop {
+            @apply opacity-50;
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-200;
+            &:not(:hover) {
+                @apply bg-transparent;
+            }
+            &:hover {
+                @apply bg-gray-500;
+            }
+            &.darkmode {
+                @apply bg-gray-900;
+                @apply border-transparent;
+                &:hover {
+                    @apply bg-gray-600;
+                }
+            }
+        }
+        &.hidden-wallet {
+            @apply opacity-50;
+        }
+    }
+</style>

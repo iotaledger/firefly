@@ -118,6 +118,42 @@
     })
 </script>
 
+<div class="w-full {classes}">
+    <div class="w-full relative">
+        <input
+            {type}
+            {value}
+            bind:this={inputElement}
+            {maxlength}
+            class="w-full text-12 leading-140 border border-solid
+                {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
+                {isFocused ? 'border-blue-500' : error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+            class:floating-active={value && label}
+            on:input={handleInput}
+            on:keypress={onKeyPress}
+            on:keydown={onKeyCaps}
+            on:keyup={onKeyCaps}
+            on:paste={onPaste}
+            on:contextmenu={handleContextMenu}
+            on:focus={() => hasFocus = true}
+            on:blur={() => hasFocus = false}
+            {disabled}
+            {...$$restProps}
+            {placeholder}
+            {style}
+            spellcheck={false} />
+        {#if label}
+            <floating-label class:floating-active={value && label}>{label}</floating-label>
+        {/if}
+    </div>
+    {#if capsLockWarning && hasFocus && capsLockOn}
+        <Text smaller overrideColor classes="mt-1 text-orange-500">{locale('general.capsLock')}</Text>
+    {/if}
+    {#if error}
+        <Error {error} />
+    {/if}
+</div>
+
 <style type="text/scss">
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -182,39 +218,3 @@
         }
     }
 </style>
-
-<div class="w-full {classes}">
-    <div class="w-full relative">
-        <input
-            {type}
-            {value}
-            bind:this={inputElement}
-            {maxlength}
-            class="w-full text-12 leading-140 border border-solid
-                {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
-                {isFocused ? 'border-blue-500' : error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
-            class:floating-active={value && label}
-            on:input={handleInput}
-            on:keypress={onKeyPress}
-            on:keydown={onKeyCaps}
-            on:keyup={onKeyCaps}
-            on:paste={onPaste}
-            on:contextmenu={handleContextMenu}
-            on:focus={() => hasFocus = true}
-            on:blur={() => hasFocus = false}
-            {disabled}
-            {...$$restProps}
-            {placeholder}
-            {style}
-            spellcheck={false} />
-        {#if label}
-            <floating-label class:floating-active={value && label}>{label}</floating-label>
-        {/if}
-    </div>
-    {#if capsLockWarning && hasFocus && capsLockOn}
-        <Text smaller overrideColor classes="mt-1 text-orange-500">{locale('general.capsLock')}</Text>
-    {/if}
-    {#if error}
-        <Error {error} />
-    {/if}
-</div>

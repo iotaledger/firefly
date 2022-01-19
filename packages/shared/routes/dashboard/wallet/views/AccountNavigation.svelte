@@ -56,14 +56,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        + button {
-            @apply ml-4;
-        }
-    }
-</style>
-
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
@@ -84,3 +76,11 @@
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    button {
+        + button {
+            @apply ml-4;
+        }
+    }
+</style>

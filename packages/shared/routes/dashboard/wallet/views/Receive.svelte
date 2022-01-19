@@ -36,12 +36,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .receive-info {
-        max-height: 350px;
-    }
-</style>
-
 <div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
     <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
         {#if !$currentAccount}
@@ -101,3 +95,9 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .receive-info {
+        max-height: 350px;
+    }
+</style>

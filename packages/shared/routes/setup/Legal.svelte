@@ -23,18 +23,6 @@
     }
 </script>
 
-<style type="text/scss">
-    ul {
-        display: block;
-        list-style-type: disc;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        padding-inline-start: 20px;
-    }
-</style>
-
 {#if mobile}
     <div>foo</div>
 {:else}
@@ -763,3 +751,15 @@
         </div>
     </OnboardingLayout>
 {/if}
+
+<style type="text/scss">
+    ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 20px;
+    }
+</style>

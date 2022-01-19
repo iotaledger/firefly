@@ -45,39 +45,6 @@
     })
 </script>
 
-<style global type="text/scss">
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    @import '../shared/style/style.scss';
-
-    html,
-    body {
-        @apply bg-white;
-        &.scheme-dark {
-            @apply bg-blue-900;
-        }
-    }
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
-    }
-</style>
-
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
 {#if !$isLocaleLoaded || splash}
@@ -132,3 +99,36 @@
         <Dashboard mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}
+
+<style global type="text/scss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    @import '../shared/style/style.scss';
+
+    html,
+    body {
+        @apply bg-white;
+        &.scheme-dark {
+            @apply bg-blue-900;
+        }
+    }
+    // dummy toggles
+    .dummy-toggles {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 10;
+        font-size: 12px;
+        display: flex;
+        padding: 5px;
+        background: #8080803d;
+        border-radius: 10px;
+        button {
+            background: var(--button-bg-color);
+            padding: 0 7px;
+            border-radius: 10px;
+            color: var(--button-text-color);
+        }
+    }
+</style>

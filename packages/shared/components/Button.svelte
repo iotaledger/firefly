@@ -4,7 +4,7 @@
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
 
-    export let events = {}
+    export let events = []
 
     export let secondary = false
     export let disabled = false
@@ -37,6 +37,92 @@
         }
     })
 </script>
+
+{#if xl}
+    <button
+        {type}
+        {form}
+        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:active
+        class:with-icon={icon}
+        class:darkmode={darkModeEnabled}
+        style={inlineStyle}
+        {disabled}
+        bind:this={buttonElement}>
+        <Icon classes="mb-1" {icon} />
+        <span class="text-12 leading-140">
+            <slot />
+        </span>
+    </button>
+{:else}
+    <button
+        {type}
+        {form}
+        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:caution
+        class:warning
+        class:medium
+        class:small
+        class:outline
+        class:with-icon={icon}
+        class:iconReverse
+        class:active
+        class:darkmode={darkModeEnabled}
+        class:showHoverText
+        style={inlineStyle}
+        {disabled}
+        bind:this={buttonElement}>
+        {#if icon}
+            {#if small}
+                {#if iconReverse}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <div class="absolute left-0 flex items-center">
+                                <Icon width="16" height="16" classes="mr-4" {icon} />
+                            </div>
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                        </div>
+                    </div>
+                {:else}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                            <div class="absolute right-0 flex items-center">
+                                <Icon
+                                    width={showHoverText ? 20 : 16}
+                                    height={showHoverText ? 20 : 16}
+                                    classes="ml-4 showHoverText"
+                                    {icon} />
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+            {:else}
+                <div class="relative flex flex-row justify-between">
+                    <div class="relative flex items-center flex-1">
+                        <div class="absolute left-0 flex items-center">
+                            <Icon classes="mr-4" {icon} />
+                        </div>
+                        <span class="font-bold text-12 leading-140"><slot /></span>
+                    </div>
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
+                            <Icon icon="chevron-right" classes="right" />
+                        </div>
+                    {/if}
+                </div>
+            {/if}
+        {:else}
+            <span class="text-12 leading-140"><slot /></span>
+        {/if}
+    </button>
+{/if}
 
 <style type="text/scss">
     button {
@@ -392,89 +478,3 @@
         }
     }
 </style>
-
-{#if xl}
-    <button
-        {type}
-        {form}
-        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
-        use:bindEvents={events}
-        on:click={onClick}
-        class:secondary
-        class:active
-        class:with-icon={icon}
-        class:darkmode={darkModeEnabled}
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}>
-        <Icon classes="mb-1" {icon} />
-        <span class="text-12 leading-140">
-            <slot />
-        </span>
-    </button>
-{:else}
-    <button
-        {type}
-        {form}
-        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
-        use:bindEvents={events}
-        on:click={onClick}
-        class:secondary
-        class:caution
-        class:warning
-        class:medium
-        class:small
-        class:outline
-        class:with-icon={icon}
-        class:iconReverse
-        class:active
-        class:darkmode={darkModeEnabled}
-        class:showHoverText
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}>
-        {#if icon}
-            {#if small}
-                {#if iconReverse}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <div class="absolute left-0 flex items-center">
-                                <Icon width="16" height="16" classes="mr-4" {icon} />
-                            </div>
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                        </div>
-                    </div>
-                {:else}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                            <div class="absolute right-0 flex items-center">
-                                <Icon
-                                    width={showHoverText ? 20 : 16}
-                                    height={showHoverText ? 20 : 16}
-                                    classes="ml-4 showHoverText"
-                                    {icon} />
-                            </div>
-                        </div>
-                    </div>
-                {/if}
-            {:else}
-                <div class="relative flex flex-row justify-between">
-                    <div class="relative flex items-center flex-1">
-                        <div class="absolute left-0 flex items-center">
-                            <Icon classes="mr-4" {icon} />
-                        </div>
-                        <span class="font-bold text-12 leading-140"><slot /></span>
-                    </div>
-                    {#if !disabled}
-                        <div class="absolute right-0 flex items-center h-full">
-                            <Icon icon="chevron-right" classes="right" />
-                        </div>
-                    {/if}
-                </div>
-            {/if}
-        {:else}
-            <span class="text-12 leading-140"><slot /></span>
-        {/if}
-    </button>
-{/if}

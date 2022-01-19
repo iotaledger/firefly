@@ -162,6 +162,29 @@
     })
 </script>
 
+<svelte:window on:keydown={onKey} />
+<popup
+    in:fade={{ duration: transition ? 100 : 0 }}
+    class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
+                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
+    <div tabindex="0" on:focus={handleFocusFirst} />
+    <popup-content
+        use:clickOutside
+        on:clickOutside={tryClosePopup}
+        bind:this={popupContent}
+        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
+        {#if !hideClose}
+            <button
+                on:click={tryClosePopup}
+                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
+                <Icon icon="close" />
+            </button>
+        {/if}
+        <svelte:component this={types[type]} {...props} {locale} />
+    </popup-content>
+    <div tabindex="0" on:focus={handleFocusLast} />
+</popup>
+
 <style type="text/scss">
     popup {
         popup-content {
@@ -187,26 +210,3 @@
         }
     }
 </style>
-
-<svelte:window on:keydown={onKey} />
-<popup
-    in:fade={{ duration: transition ? 100 : 0 }}
-    class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
-    <div tabindex="0" on:focus={handleFocusFirst} />
-    <popup-content
-        use:clickOutside
-        on:clickOutside={tryClosePopup}
-        bind:this={popupContent}
-        class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
-        {#if !hideClose}
-            <button
-                on:click={tryClosePopup}
-                class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500">
-                <Icon icon="close" />
-            </button>
-        {/if}
-        <svelte:component this={types[type]} {...props} {locale} />
-    </popup-content>
-    <div tabindex="0" on:focus={handleFocusLast} />
-</popup>

@@ -29,21 +29,6 @@
     const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
 </script>
 
-<style type="text/scss">
-    div {
-        &:disabled {
-            @apply pointer-events-none;
-            @apply opacity-50;
-        }
-        strength-meter {
-            span {
-                width: 22px;
-                height: 4px;
-            }
-        }
-    }
-</style>
-
 <div class={classes} class:disabled>
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-between items-center mb-2">
@@ -82,3 +67,18 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    div {
+        &:disabled {
+            @apply pointer-events-none;
+            @apply opacity-50;
+        }
+        strength-meter {
+            span {
+                width: 22px;
+                height: 4px;
+            }
+        }
+    }
+</style>

@@ -68,17 +68,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .illustration {
-        height: 250px;
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-        }
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
@@ -111,3 +100,14 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration {
+        height: 250px;
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+        }
+    }
+</style>

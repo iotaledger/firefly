@@ -17,12 +17,6 @@
     const outputString = 'Output'
 </script>
 
-<style>
-    .transaction {
-        max-height: 30vh;
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.ledgerTransaction.transaction.title')}</Text>
 <Text type="p" classes="mb-6" secondary>{locale('popups.ledgerTransaction.transaction.info')}</Text>
 
@@ -54,3 +48,9 @@
         </div>
     {/each}
 </div>
+
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>
