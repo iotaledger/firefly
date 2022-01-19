@@ -30,8 +30,15 @@ export const CapacitorApi: IPlatform = {
         }
     },
 
-    listProfileFolders(profileStoragePath) {
-        return new Promise<string[]>((resolve, reject) => {})
+    async listProfileFolders(profileStoragePath) {
+        try {
+            const { files } = await Filesystem.readdir({
+                path: profileStoragePath
+            })
+            return files
+        } catch (error) {
+            console.error(error)
+        }
     },
 
     PincodeManager: PincodeManager,
