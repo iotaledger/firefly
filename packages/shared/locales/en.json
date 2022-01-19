@@ -531,7 +531,13 @@
         "governance": {
             "title": "Governance",
             "votingPower": {
-                "title": "My voting power"
+                "title": "My voting power",
+                "info": {
+                    "title": "Your voting weight",
+                    "equality": "1000 IOTA = 1 VOTE",
+                    "description1": "Your voting weight is derived from your Profile Balance. 0.001 Mi (1000 IOTA tokens) represent 1 vote.",
+                    "description2": "When the proposal is in the Holding phase, every 10 seconds the amount of votes that you have added in a decision will be added to the counting and accumulated. Your total amount of casted votes raise over time."
+                }
             },
             "info": {
                 "title": "Governance info",
