@@ -20,13 +20,14 @@
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
+    import { SyncAccountOptions } from 'shared/lib/typings/account';
 
     export let locale: Locale
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
-    function handleTransactionClick(transaction) {
+    function handleTransactionClick(transaction: AccountMessage): void {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
         if (sourceAccount) {
             selectedAccountId.set(sourceAccount.id)
@@ -38,7 +39,7 @@
         }
     }
 
-    function handleSyncAccountOptions() {
+    function handleSyncAccountOptions(): SyncAccountOptions {
         if (get(isFirstManualSync)) {
             isFirstManualSync.set(true)
 
@@ -51,7 +52,7 @@
         }
     }
 
-    function handleSyncClick() {
+    function handleSyncClick(): void {
         const { gapLimit, accountDiscoveryThreshold } = handleSyncAccountOptions()
 
         if ($isSoftwareProfile) {
@@ -80,7 +81,7 @@
         }
     }
 
-    function shouldShowFirstSync() {
+    function shouldShowFirstSync(): boolean {
         /**
          * NOTE: The following conditions must be satisfied
          * for the "syncing history, ..." message to show:
