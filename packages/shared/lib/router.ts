@@ -8,6 +8,7 @@ import {
     SetupType,
     Tabs,
     WalletRoutes,
+    GovernanceRoutes,
 } from 'shared/lib/typings/routes'
 import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
@@ -99,6 +100,11 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
  * Settings child route
  */
 export const settingsChildRoute = writable<string>(null)
+
+/**
+ * Governance view route
+ */
+export const governanceRoute = writable<GovernanceRoutes>(GovernanceRoutes.Init)
 
 /**
  * Navigate to initial route
