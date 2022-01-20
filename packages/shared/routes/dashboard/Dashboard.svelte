@@ -19,9 +19,9 @@
     } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
@@ -110,7 +110,6 @@
                     if (get(dashboardRoute) !== Tabs.Wallet) {
                         dashboardRoute.set(Tabs.Wallet)
                     }
-                    walletRoute.set(WalletRoutes.Account)
                     accountRoute.set(AccountRoutes.Init)
                 }
             }
@@ -134,7 +133,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if (!$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -259,6 +258,11 @@
      */
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+    }
+
+    // TODO: remove, dev only
+    $: if(accountsLoaded) {
+        selectedAccountId.set($accounts?.[0]?.id)
     }
 </script>
 

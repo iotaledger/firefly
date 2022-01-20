@@ -2,8 +2,8 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
@@ -52,7 +52,6 @@
                     }
                     selectedAccountId.set(null)
                     selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
                     accountRoute.set(AccountRoutes.Init)
                 },
             },
@@ -75,7 +74,6 @@
                     }
                     selectedAccountId.set(null)
                     selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
                     accountRoute.set(AccountRoutes.Init)
                 },
             },
@@ -91,7 +89,6 @@
         }
         selectedAccountId.set(null)
         selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
     }
 </script>

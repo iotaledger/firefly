@@ -1,11 +1,8 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { getInitials } from 'shared/lib/helpers'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -25,12 +22,6 @@
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
         selectedMessage.set(null)
-    }
-    function handleBackClick() {
-        selectedAccountId.set(null)
-        selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
     }
 
     const calculateWidth = () => {
@@ -65,7 +56,7 @@
 </style>
 
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
-    <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
+    <button data-label="back-button" class="flex-1 mt-1" on:click={() => {}} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
             <Text type="h5">{locale('actions.back')}</Text>
