@@ -2,7 +2,7 @@ use serde::{ser::Serializer, Deserialize, Serialize};
 use std::fmt::Debug;
 use std::clone::Clone;
 use iota_wallet::{
-    account::{Account, AccountIdentifier, AccountBalance},
+    account::{AccountIdentifier, AccountBalance},
     actor::{AccountMethod, MessageType as WalletMessageType, ResponseType as WalletResponseType, AccountDto},
     message::{TransferBuilder, Message as WalletMessage},
 };
