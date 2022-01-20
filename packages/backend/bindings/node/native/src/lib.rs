@@ -4,7 +4,7 @@ use std::sync::{
     mpsc::{channel, Receiver},
     Arc, Mutex,
 };
-use wallet_actor_system::{
+use firefly_actor_system::{
     actor::event::{EventType},
     destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
     listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,

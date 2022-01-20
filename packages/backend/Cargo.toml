@@ -1,9 +1,9 @@
 [package]
-name = "wallet-actor-system"
-version = "0.1.0"
+name = "firefly-actor-system"
+version = "0.2.0"
 authors = ["IOTA Stiftung"]
 edition = "2018"
-exclude = ["/bindings", "/api-wrapper"]
+exclude = ["/bindings"]
 
 [dependencies]
 bee-common = { version = "0.4.1", default-features = false }
