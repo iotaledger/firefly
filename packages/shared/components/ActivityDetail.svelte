@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, CopyButton } from 'shared/components'
+    import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
     import { getInitials, truncateString } from 'shared/lib/helpers'
@@ -175,13 +175,12 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.messageId')}</Text>
                 <div class="flex flex-row justify-between items-center">
-                    <Text type="pre">{id}</Text>
-                    <CopyButton itemToCopy={id} />
-                    <button 
-                        on:click={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                    <Link
+                        onClick={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
                     >
-                        <Icon icon="export" classes="text-gray-500" />
-                    </button>
+                        <Text highlighted type="pre">{id}</Text>
+                    </Link>
+                    <CopyButton itemToCopy={id} />
                 </div>
             </div>
         {/if}
@@ -212,13 +211,10 @@
         {#if txPayload || milestonePayload}
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
-                <div class="flex flex-row justify-between items-center">
-                    <div class="flex flex-row">
-                        <Text>{formatUnitBestMatch(value)}</Text>
-                        &nbsp;
-                        <Text highlighted>({formatCurrency(currencyValue)})</Text>
-                    </div>
-                    <CopyButton itemToCopy={formatUnitBestMatch(value)} />
+                <div class="flex flex-row">
+                    <Text bold>{formatUnitBestMatch(value)}</Text>
+                    &nbsp;
+                    <Text>({formatCurrency(currencyValue)})</Text>
                 </div>
             </div>
         {/if}
