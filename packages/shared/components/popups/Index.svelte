@@ -44,6 +44,7 @@
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import { mobile } from 'shared/lib/app'
+    import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte';
 
     export let locale: Locale
 
@@ -123,6 +124,7 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
+        governanceVotingPowerInfo: GovernanceVotingPowerInfo,
     }
 
     const onKey = (e) => {

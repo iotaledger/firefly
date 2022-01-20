@@ -550,7 +550,31 @@
             }
         },
         "governance": {
-            "title": "Governance"
+            "title": "Governance",
+            "votingPower": {
+                "title": "My voting power",
+                "info": {
+                    "title": "Your voting weight",
+                    "equality": "1000 IOTA = 1 VOTE",
+                    "description1": "Your voting weight is derived from your Profile Balance. 0.001 Mi (1000 IOTA tokens) represent 1 vote.",
+                    "description2": "When the proposal is in the Holding phase, every 10 seconds the amount of votes that you have added in a decision will be added to the counting and accumulated. Your total amount of casted votes raise over time."
+                }
+            },
+            "info": {
+                "title": "Governance info",
+                "description": "The IOTA community together with the IOTA Foundation, has developed the technology that makes it possible to use your IOTA tokens in governance decisions here in the secure environment of the Firefly Wallet.",
+                "link": "Learn about voting with Firefly"
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Upcoming",
+                    "commencing": "Commencing",
+                    "holdingPeriod": "Holding period",
+                    "ended": "Ended"
+                },
+                "button": "View proposal"
+            },
+            "votes": "votes"
         }
     },
     "popups": {
