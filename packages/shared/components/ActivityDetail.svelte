@@ -38,6 +38,7 @@
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
@@ -112,7 +113,6 @@
         }
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
-    $: explorerLink = getOfficialExplorer(senderAccount.clientOptions.network)
 </script>
 
 <style type="text/scss">
