@@ -41,6 +41,7 @@
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import { mobile } from 'shared/lib/app'
+    import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte';
 
     export let locale: Locale
 
@@ -115,7 +116,8 @@
         stakingManager: StakingManager,
         stakingNotice: StakingNotice,
         airdropNetworkInfo: AirdropNetworkInfo,
-        confirmDeveloperProfile: ConfirmDeveloperProfile
+        confirmDeveloperProfile: ConfirmDeveloperProfile,
+        governanceVotingPowerInfo: GovernanceVotingPowerInfo,
     }
 
     const onKey = (e) => {
