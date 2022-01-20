@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "target": "ES2017",
+    "declaration": true
+  }
+}

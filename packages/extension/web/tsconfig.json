@@ -1,0 +1,6 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+
+  "include": ["popup/src/**/*", "confirm/src/**/*", "shared/**/*", "shared/platform/*.ts", "content/**/*", "inpage/**/*", "background/**/*"],
+  "exclude": ["popup/node_modules/*", "popup/__sapper__/*", "popup/public/*"]
+}

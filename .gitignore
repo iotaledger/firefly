@@ -11,6 +11,8 @@ node_modules
 .env.production.local
 
 # Build directories
+**/dist/
+**/target/
 **/public/build/
 **/public/assets/fonts
 **/public/assets/illustrations

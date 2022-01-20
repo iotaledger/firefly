@@ -1,0 +1,37 @@
+{
+    "manifest_version": 2,
+    "name": "Firefly Web",
+    "short_name": "iota web",
+    "description": "Firefly Web Extension",
+    "version": "0.1.0",
+    "author": "Evan Feenstra",
+    "browser_action": {
+        "default_popup": "popup/public/index.html",
+        "default_title": "Firefly Web"
+    },
+    "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
+    "background": {
+        "scripts": ["build/background.js"],
+        "persistent": true
+    },
+    "permissions": [
+        "storage",
+        "activeTab",
+        "notifications",
+        "tabs",
+        "https://*/",
+        "http://localhost:5002/*"
+    ],
+    "web_accessible_resources": [
+        "build/inpage.js"
+    ],
+    "externally_connectable": {
+        "ids": [
+            "*"
+        ]
+    },
+    "icons": {
+        "64": "popup/public/img/logo-64.png",
+        "128": "popup/public/img/logo-128.png"
+    }
+}

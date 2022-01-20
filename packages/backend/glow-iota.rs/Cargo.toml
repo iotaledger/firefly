@@ -1,0 +1,13 @@
+[package]
+name = "glow-iota"
+version = "0.0.3"
+authors = ["Evan Feenstra"]
+edition = "2018"
+
+[dependencies]
+glow = { path = "../glow.rs" }
+iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "fc6451608db70d9c25c26ee86b67f72dfac83a40", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = { version = "1.0.29", default-features = false }
+tokio = { version = "1.12.0", default-features = false, features = ["full", "time"] }

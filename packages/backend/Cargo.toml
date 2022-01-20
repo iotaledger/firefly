@@ -7,8 +7,8 @@ exclude = ["/bindings", "/api-wrapper"]
 
 [dependencies]
 bee-common = { version = "0.4.1", default-features = false }
-glow = { path = "../../../glow/glow.rs", optional = true }
-glow-iota = { path = "../../../glow/glow-iota.rs", optional = true }
+glow = { path = "../extension/server", optional = true }
+glow-iota = { path = "./glow-iota.rs", optional = true }
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "fc6451608db70d9c25c26ee86b67f72dfac83a40", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 log = { version = "0.4.14", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
