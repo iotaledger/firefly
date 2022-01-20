@@ -3,9 +3,9 @@
     import { clickOutside } from 'shared/lib/actions'
 
     export let isActive = false
-    export let position = {}
+    export let position = { top: 'inherit', right: 'inherit', bottom: 'inherit', left: 'inherit'}
 
-    const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+    const { top, right, bottom, left } = position
 </script>
 
 <style type="text/scss">
