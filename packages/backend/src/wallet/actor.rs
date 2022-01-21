@@ -1,8 +1,6 @@
 use crate::{
-    actor::{
-        event::{EventListener},
-        message::{KillMessage},
-    },
+    event::{EventListener},
+    message::{KillMessage},
     RUNTIME,
 };
 

@@ -1,13 +1,12 @@
-pub mod actor;
+pub mod event;
 #[cfg(any(feature = "extension"))]
 mod extension;
+mod message;
 mod wallet;
 
 use crate::{
-    actor::{
-        event::{EventListener, EventType, serialize_event},
-        message::{DispatchMessage, FallbackMessage, KillMessage, MessageReceiver},
-    },
+    event::{EventListener, EventType, serialize_event},
+    message::{DispatchMessage, FallbackMessage, KillMessage, MessageReceiver},
     wallet::actor::{WalletActor, WalletActorData},
 };
 

@@ -5,7 +5,7 @@ use std::sync::{
     Arc, Mutex,
 };
 use firefly_actor_system::{
-    actor::event::{EventType},
+    event::{EventType},
     destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
     listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,
     send_message as send_actor_message, LoggerConfigBuilder, RUNTIME,
