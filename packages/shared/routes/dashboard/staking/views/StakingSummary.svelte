@@ -31,7 +31,7 @@
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    let { accounts } = $wallet
+    const { accounts } = $wallet
     $: cannotStakeAnAccount = $accounts.every(
         (wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.HasDustAmount
     )

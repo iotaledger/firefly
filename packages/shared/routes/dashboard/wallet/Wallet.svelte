@@ -14,11 +14,14 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
+    import { accountRoute } from 'shared/lib/router'
     import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { Message, Transaction } from 'shared/lib/typings/message'
     import type { MigratedTransaction } from 'shared/lib/typings/profile'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import type {
         AccountMessage,
         AccountsBalanceHistory,
@@ -53,8 +56,6 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale: Locale
 
@@ -141,8 +142,8 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
+    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
-    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
@@ -246,13 +247,13 @@
         })
     }
 
-    function onGenerateAddress(accountId) {
+    function onGenerateAddress(accountId: AccountIdentifier) {
         const _generate = () => {
             isGeneratingAddress = true
 
             if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
-            api.getUnusedAddress(accountId, {
+            api.getUnusedAddress(accountId.toString(), {
                 onSuccess(response) {
                     accounts.update((accounts) =>
                         accounts.map((account) => {
@@ -316,37 +317,8 @@
         }
     }
 
-    function findReuseAccount() {
-        // If the last account in the accounts list is "deleted" and has no
-        // messages on it, we can reuse it, otherwise the wallet will complain
-        // about the last account not being used
-        const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
-
-        if (hiddenAccounts.length > 0) {
-            const lastAccount = $accounts[$accounts.length - 1]
-            const hiddenAccountIndex = hiddenAccounts.indexOf(lastAccount.id)
-            if (
-                hiddenAccountIndex >= 0 &&
-                lastAccount.rawIotaBalance === 0 &&
-                lastAccount.messages &&
-                lastAccount.messages.length === 0
-            ) {
-                return lastAccount.id
-            }
-
-            // If we have restarted the app we might not have been notified of the empty account
-            // so it wont appear in the accounts list, so check in the hidden list to see
-            // if there is an id not in the accounts list
-            for (const hiddenAccount of hiddenAccounts) {
-                if (!$accounts.some((a) => a.id === hiddenAccount)) {
-                    return hiddenAccount
-                }
-            }
-        }
-    }
-
-    async function onCreateAccount(alias, onComplete) {
-        const _create = async (): Promise<void> => {
+    async function onCreateAccount(alias: string, onComplete) {
+        const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias)
                 await asyncSyncAccountOffline(account)
@@ -354,9 +326,9 @@
                 // TODO: set selected account to the newly created account
                 accountRoute.set(AccountRoutes.Init)
 
-                onComplete()
+                return onComplete()
             } catch (err) {
-                onComplete(err)
+                return onComplete(err)
             }
         }
 

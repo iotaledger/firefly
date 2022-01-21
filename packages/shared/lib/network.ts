@@ -1,6 +1,6 @@
 import type { Node, NodeAuth } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
-import type { Network, NetworkConfig } from './typings/network'
+import type { Network, NetworkConfig, NetworkId } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
 import { isNewNotification, showAppNotification } from './notifications'
@@ -12,10 +12,12 @@ import { activeProfile } from './profile'
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
 export const CHRYSALIS_MAINNET_BECH32_HRP = 'iota'
+export const CHRYSALIS_MAINNET_EXPLORER = 'https://explorer.iota.org/mainnet'
 
 export const CHRYSALIS_DEVNET_ID = 'chrysalis-devnet'
 export const CHRYSALIS_DEVNET_NAME = 'Chrysalis Devnet'
 export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
+export const CHRYSALIS_DEVNET_EXPLORER = 'https://explorer.iota.org/devnet'
 
 /**
  * Given the type of IOTA network, construct the default official network
@@ -28,15 +30,13 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  *
  * @returns {NetworkConfig}
  */
-export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => {
-    return {
-        network: getOfficialNetwork(type),
-        nodes: setRandomPrimaryNode(getOfficialNodes(type)),
-        automaticNodeSelection: true,
-        includeOfficialNodes: true,
-        localPow: true,
-    }
-}
+export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
+    network: getOfficialNetwork(type),
+    nodes: setRandomPrimaryNode(getOfficialNodes(type)),
+    automaticNodeSelection: true,
+    includeOfficialNodes: true,
+    localPow: true,
+})
 
 /**
  * Constructs an official IOTA network object given the type of network
@@ -105,6 +105,17 @@ const getOfficialNode = (type: NetworkType, url: string): Node => ({
     isPrimary: false,
     isDisabled: false,
 })
+
+export const getOfficialExplorer = (networkId: NetworkId): string => {
+    switch (networkId) {
+        case CHRYSALIS_MAINNET_ID:
+            return CHRYSALIS_MAINNET_EXPLORER
+        case CHRYSALIS_DEVNET_ID:
+            return CHRYSALIS_DEVNET_EXPLORER
+        default:
+            return ''
+    }
+}
 
 /**
  * Determines whether the type of a given network is "official", meaning

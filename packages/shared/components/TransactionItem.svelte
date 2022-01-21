@@ -12,19 +12,19 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale: Locale
-
-    export let name = ''
-    export let balance = 0
-    export let status = Status.ReadyToMigrate
-    export let errorText = null
-
     enum Status {
         ReadyToMigrate = 0,
         Migrating = 1,
         Success = 2,
         Error = -1,
     }
+    
+    export let locale: Locale
+
+    export let name = ''
+    export let balance = 0
+    export let status = Status.ReadyToMigrate
+    export let errorText = null
 
     const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),

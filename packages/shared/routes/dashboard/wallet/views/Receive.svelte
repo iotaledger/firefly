@@ -24,13 +24,13 @@
 
     let selectedAccount = $currentAccount || $liveAccounts[0]
 
-    const handleDropdownSelect = (item) => {
+    const handleDropdownSelect = (item: WalletAccount): void  => {
         selectedAccount = item
     }
-    const generateNewAddress = () => {
+    const generateNewAddress = (): void => {
         onGenerateAddress(selectedAccount.id)
     }
-    const handleCloseClick = () => {
+    const handleCloseClick = (): void => {
         accountRoute.set(AccountRoutes.Init)
     }
 </script>

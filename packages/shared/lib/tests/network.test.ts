@@ -36,8 +36,12 @@ describe('File: network.ts', () => {
         type: NetworkType.ChrysalisMainnet,
         bech32Hrp: 'iota',
     }
-    const MAINNET_URLS = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
-    const MAINNET_NODES = [0, 1].map((i) => _buildNode(MAINNET_URLS[i], MAINNET))
+    const MAINNET_URLS = [
+        'https://chrysalis-nodes.iota.org',
+        'https://chrysalis-nodes.iota.cafe',
+        'https://mainnet-node.tanglebay.com',
+    ]
+    const MAINNET_NODES = MAINNET_URLS.map((url) => _buildNode(url, MAINNET))
     const MAINNET_CONFIG: NetworkConfig = {
         network: MAINNET,
         nodes: MAINNET_NODES,
@@ -56,7 +60,7 @@ describe('File: network.ts', () => {
         'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
         'https://api.lb-1.h.chrysalis-devnet.iota.cafe',
     ]
-    const DEVNET_NODES = [0, 1].map((i) => _buildNode(DEVNET_URLS[i], DEVNET))
+    const DEVNET_NODES = DEVNET_URLS.map((url) => _buildNode(url, DEVNET))
     const DEVNET_CONFIG: NetworkConfig = {
         network: DEVNET,
         nodes: DEVNET_NODES,
@@ -85,7 +89,11 @@ describe('File: network.ts', () => {
                 includeOfficialNodes: true,
                 localPow: true,
                 node: _buildNode(MAINNET_URLS[0], MAINNET, true, false),
-                nodes: [_buildNode(MAINNET_URLS[0], MAINNET, true, false), _buildNode(MAINNET_URLS[1], MAINNET)],
+                nodes: [
+                    _buildNode(MAINNET_URLS[0], MAINNET, true, false),
+                    _buildNode(MAINNET_URLS[1], MAINNET),
+                    _buildNode(MAINNET_URLS[2], MAINNET),
+                ],
             })
         })
     })
@@ -106,6 +114,7 @@ describe('File: network.ts', () => {
             expect(getOfficialNodes(NetworkType.ChrysalisMainnet)).toEqual([
                 _buildNode(MAINNET_URLS[0], MAINNET),
                 _buildNode(MAINNET_URLS[1], MAINNET),
+                _buildNode(MAINNET_URLS[2], MAINNET),
             ])
             expect(getOfficialNodes(NetworkType.ChrysalisDevnet)).toEqual([
                 _buildNode(DEVNET_URLS[0], DEVNET),
