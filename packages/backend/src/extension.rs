@@ -10,8 +10,10 @@ use tokio::{
 };
 
 use crate::{
-    actors::KillMessage, dispatch, extension_actors, wallet_actors, DispatchMessage as WalletDispatchMessage,
-    MessageFallback,
+    message::{DispatchMessage as WalletDispatchMessage, FallbackMessage, KillMessage},
+    dispatch,
+    extension_actors,
+    wallet_actors,
 };
 use glow::{handler::ExtensionHandler, message::CallbackMessage as ExtensionCallbackMessage};
 use glow_iota::{
@@ -249,7 +251,7 @@ pub async fn check_extension_dispatch(
             ))
         }
     } else {
-        if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
+        if let Ok(message) = serde_json::from_str::<FallbackMessage>(&serialized_message) {
             Some((
                 Some(format!(
                     r#"{{

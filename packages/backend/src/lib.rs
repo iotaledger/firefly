@@ -6,7 +6,7 @@ mod wallet;
 
 use crate::{
     event::{EventListener, EventType, serialize_event},
-    message::{DispatchMessage, FallbackMessage, KillMessage, MessageReceiver},
+    message::{DispatchMessage, KillMessage, MessageReceiver},
     wallet::actor::{WalletActor, WalletActorData},
 };
 
