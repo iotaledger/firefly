@@ -1,5 +1,24 @@
+pub(crate) mod handler;
+pub(crate) mod message;
+
+use crate::{
+    dispatch,
+    extension::{
+        handler::translate_message,
+        message::{
+            DispatchMessage as ExtensionDispatchMessage, ExtensionError, Message as ExtensionMessage,
+            MessageType as ExtensionMessageType, Response as ExtensionResponse, ResponseType as ExtensionResponseType,
+            Result as ExtensionResult,
+        },
+    },
+    extension_actors,
+    message::{DispatchMessage as WalletDispatchMessage, FallbackMessage, KillMessage},
+    wallet_actors,
+};
+
+use glow::{handler::ExtensionHandler, message::CallbackMessage as ExtensionCallbackMessage};
+
 use riker::actors::*;
-use std::{default::Default, sync::Arc};
 use tokio::{
     runtime::Runtime,
     sync::{
@@ -9,21 +28,7 @@ use tokio::{
     },
 };
 
-use crate::{
-    message::{DispatchMessage as WalletDispatchMessage, FallbackMessage, KillMessage},
-    dispatch,
-    extension_actors,
-    wallet_actors,
-};
-use glow::{handler::ExtensionHandler, message::CallbackMessage as ExtensionCallbackMessage};
-use glow_iota::{
-    handler::translate_message,
-    message::{
-        DispatchMessage as ExtensionDispatchMessage, ExtensionError, Message as ExtensionMessage,
-        MessageType as ExtensionMessageType, Response as ExtensionResponse, ResponseType as ExtensionResponseType,
-        Result as ExtensionResult,
-    },
-};
+use std::{default::Default, sync::Arc};
 
 // pub use iota_wallet::actor::MessageType as WalletMessageType;
 
@@ -257,7 +262,7 @@ pub async fn check_extension_dispatch(
                     r#"{{
                         "type": "Error",
                         "id": {},
-                        "payload": {{ 
+                        "payload": {{
                             "type": "InvalidMessage",
                             "message": {},
                             "error": {}

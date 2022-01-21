@@ -5,7 +5,7 @@ mod message;
 mod wallet;
 
 use crate::{
-    event::{EventListener, EventType, serialize_event},
+    event::{serialize_event, EventListener, EventType},
     message::{DispatchMessage, KillMessage, MessageReceiver},
     wallet::actor::{WalletActor, WalletActorData},
 };
@@ -44,9 +44,7 @@ use std::{
 };
 
 #[cfg(any(feature = "extension"))]
-use extension::{
-    check_extension_dispatch, ExtensionActor, ExtensionActorMsg,
-};
+use extension::{check_extension_dispatch, ExtensionActor, ExtensionActorMsg};
 
 type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
 #[cfg(any(feature = "extension"))]

@@ -12,8 +12,6 @@ packages/backend/bindings/capacitor/
 packages/backend/bindings/node/dist/
 packages/backend/bindings/node/native/
 
-packages/backend/glow-iota.rs/
-
 packages/backend/src/
 packages/backend/target/
 

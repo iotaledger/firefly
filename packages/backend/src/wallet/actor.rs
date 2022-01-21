@@ -1,8 +1,4 @@
-use crate::{
-    event::{EventListener},
-    message::{KillMessage},
-    RUNTIME,
-};
+use crate::{event::EventListener, message::KillMessage, RUNTIME};
 
 pub use iota_wallet::{
     account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},

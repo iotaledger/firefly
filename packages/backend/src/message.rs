@@ -1,12 +1,8 @@
-use iota_wallet::{
-    actor::{MessageType},
-};
+use iota_wallet::actor::MessageType;
 
-use serde::{Deserialize};
+use serde::Deserialize;
 
-use std::{
-    sync::{mpsc::Sender, Arc, Mutex},
-};
+use std::sync::{mpsc::Sender, Arc, Mutex};
 
 pub(crate) type MessageReceiver = Arc<Mutex<Sender<String>>>;
 

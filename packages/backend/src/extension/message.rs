@@ -1,14 +1,11 @@
-use serde::{ser::Serializer, Deserialize, Serialize};
-use std::fmt::Debug;
-use std::clone::Clone;
 use iota_wallet::{
-    account::{AccountIdentifier, AccountBalance},
-    actor::{AccountMethod, MessageType as WalletMessageType, ResponseType as WalletResponseType, AccountDto},
-    message::{TransferBuilder, Message as WalletMessage},
+    account::{AccountBalance, AccountIdentifier},
+    actor::{AccountDto, AccountMethod, MessageType as WalletMessageType, ResponseType as WalletResponseType},
+    message::{Message as WalletMessage, TransferBuilder},
 };
-use tokio::sync::{
-    mpsc::UnboundedSender
-};
+use serde::{ser::Serializer, Deserialize, Serialize};
+use std::{clone::Clone, fmt::Debug};
+use tokio::sync::mpsc::UnboundedSender;
 
 pub type Result<T> = std::result::Result<T, ExtensionError>;
 
@@ -94,19 +91,19 @@ pub enum MessageType {
 impl From<WalletMessageType> for MessageType {
     fn from(msg: WalletMessageType) -> Self {
         if let WalletMessageType::GetAccount(account_id) = msg {
-            return MessageType::GetAccount(account_id)
+            return MessageType::GetAccount(account_id);
         }
-        if let WalletMessageType::CallAccountMethod{account_id, method} = msg {
-            return MessageType::CallAccountMethod{account_id, method}
+        if let WalletMessageType::CallAccountMethod { account_id, method } = msg {
+            return MessageType::CallAccountMethod { account_id, method };
         }
-        if let WalletMessageType::SendTransfer{account_id, transfer} = msg {
-            return MessageType::SendTransfer{account_id, transfer}
+        if let WalletMessageType::SendTransfer { account_id, transfer } = msg {
+            return MessageType::SendTransfer { account_id, transfer };
         }
         // if let WalletMessageType::CallGlow{plugin, method, payload} = msg {
         //     return MessageType::CallGlow{coin, method, payload}
         // }
         if let WalletMessageType::GetAccounts = msg {
-            return MessageType::GetAccounts
+            return MessageType::GetAccounts;
         }
         MessageType::Empty
     }
@@ -121,7 +118,8 @@ impl From<WalletMessageType> for MessageType {
 /// The response message.
 #[derive(Serialize, Debug)]
 #[serde(tag = "type", content = "payload")]
-pub enum ResponseType { // NOTE: this is for the ExtensionResponse
+pub enum ResponseType {
+    // NOTE: this is for the ExtensionResponse
     ReadAccount(AccountDto),
     ReadAccounts(Vec<AccountDto>),
     Balance(AccountBalance),
@@ -133,19 +131,19 @@ pub enum ResponseType { // NOTE: this is for the ExtensionResponse
 impl From<WalletResponseType> for ResponseType {
     fn from(res: WalletResponseType) -> Self {
         if let WalletResponseType::ReadAccount(account) = res {
-            return ResponseType::ReadAccount(account)
+            return ResponseType::ReadAccount(account);
         }
         if let WalletResponseType::ReadAccounts(accounts) = res {
-            return ResponseType::ReadAccounts(accounts)
+            return ResponseType::ReadAccounts(accounts);
         }
         if let WalletResponseType::Balance(bal) = res {
-            return ResponseType::Balance(bal)
+            return ResponseType::Balance(bal);
         }
         if let WalletResponseType::SentTransfer(tx) = res {
-            return ResponseType::SentTransfer(tx)
+            return ResponseType::SentTransfer(tx);
         }
         if let WalletResponseType::Error(err) = res {
-            return ResponseType::Error(err.to_string())
+            return ResponseType::Error(err.to_string());
         }
         // if let WalletResponseType::CalledGlow(plugin) = res {
         //     return ResponseType::CalledGlow(plugin)
@@ -160,9 +158,7 @@ impl Serialize for MessageType {
         S: Serializer,
     {
         match self {
-            MessageType::GetAccount(_) => {
-                serializer.serialize_unit_variant("MessageType", 0, "GetAccount")
-            },
+            MessageType::GetAccount(_) => serializer.serialize_unit_variant("MessageType", 0, "GetAccount"),
             MessageType::CallAccountMethod {
                 account_id: _,
                 method: _,
@@ -170,15 +166,12 @@ impl Serialize for MessageType {
             MessageType::SendTransfer {
                 account_id: _,
                 transfer: _,
-            } => {
-                serializer.serialize_unit_variant("MessageType", 2, "SendTransfer")
-            },
-            MessageType::CallGlow {
-                method: _,
-                payload: _,
-            } => serializer.serialize_unit_variant("MessageType", 3, "CallGlow"),
-            MessageType::Empty=> serializer.serialize_unit_variant("MessageType", 4, "CallGlow"),
-            MessageType::GetAccounts=> serializer.serialize_unit_variant("MessageType", 5, "GetAccounts"),
+            } => serializer.serialize_unit_variant("MessageType", 2, "SendTransfer"),
+            MessageType::CallGlow { method: _, payload: _ } => {
+                serializer.serialize_unit_variant("MessageType", 3, "CallGlow")
+            }
+            MessageType::Empty => serializer.serialize_unit_variant("MessageType", 4, "CallGlow"),
+            MessageType::GetAccounts => serializer.serialize_unit_variant("MessageType", 5, "GetAccounts"),
         }
     }
 }

@@ -1,12 +1,8 @@
-use iota_wallet::{
-    event::{EventId},
-};
+use iota_wallet::event::EventId;
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use std::{
-    convert::{TryFrom},
-};
+use std::convert::TryFrom;
 
 pub type EventListener = (EventId, EventType);
 

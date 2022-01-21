@@ -8,13 +8,13 @@ exclude = ["/bindings"]
 [dependencies]
 bee-common = { version = "0.4.1", default-features = false }
 glow = { path = "../extension/server", optional = true }
-glow-iota = { path = "./glow-iota.rs", optional = true }
 iota-wallet = { git = "https://github.com/iotaledger/wallet.rs", rev = "fc6451608db70d9c25c26ee86b67f72dfac83a40", default-features = false, features = ["stronghold", "ledger-nano", "ledger-nano-simulator", "participation"] }
 log = { version = "0.4.14", default-features = false }
 once_cell = { version = "1.8.0", default-features = false }
 riker = "0.4.2"
 serde = { version = "1.0.130", default-features = false, features = ["derive"] }
 serde_json = { version = "1.0.68", default-features = false }
+thiserror = { version = "1.0.29", default-features = false }
 tokio = { version = "1.12.0", default-features = false }
 
 [dev-dependencies]
@@ -22,5 +22,5 @@ futures = "0.3"
 
 [features]
 default = ["extension"]
-extension = ["glow", "glow-iota"]
+extension = ["glow"]
 
