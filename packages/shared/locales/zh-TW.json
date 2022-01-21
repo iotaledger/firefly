@@ -22,9 +22,10 @@
                 "nonFirst": "現在，讓我們從您的設定檔名稱開始。"
             },
             "addMore": "您稍後可以添加更多設定檔。",
+            "advancedOptions": "進階選項",
             "developer": {
                 "label": "開發者設定檔",
-                "info": "連線到公共和私人的 IOTA 網路"
+                "info": "連接至開發網或私人網絡"
             }
         },
         "setup": {
@@ -109,9 +110,9 @@
             "title": "備份至一個 Stronghold 檔案",
             "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
             "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
+            "reason1": "無需輸入助記詞即可輕鬆還原錢包",
             "reason2": "將您的錢包導入其他設備",
-            "reason3": "恢復您的完整交易記錄"
+            "reason3": "還原您的完整交易記錄"
         },
         "recoveryPhraseSaved": {
             "title": "備份成功",
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "正在保護「已支出地址」...",
-            "body1": "這個步驟將花費 {minutes, plural, one {1 minute} other {# 分鐘}}。",
+            "body1": "這個步驟將花費 {minutes, plural, one {# 分鐘} other {# 分鐘}}。",
             "body2": "您的電腦將會全速運轉，您在等待期間可以做些其他事情。"
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "請等候 {time, plural, one {1 秒} other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, one {錯誤輸入 1 次} other {輸入錯誤 # 次}}"
+            "pleaseWait": "請等候 {time, plural, one {# 秒} other {# 秒}}",
+            "incorrectAttempts": "{attempts, plural, one {錯誤輸入 # 次} other {輸入錯誤 # 次}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "質押",
-            "welcome": "歡迎來到質押儀錶板",
+            "welcome": "歡迎來到質押儀表板！",
             "status": {
                 "upcoming": "活動尚未開始",
                 "commencing": "預先質押已開放",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "確認交易",
             "body": "您即將發送 {amount} 到",
-            "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。"
+            "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
+            "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
         },
         "balanceFinder": {
             "title": "餘額查詢",
@@ -687,7 +689,7 @@
                 "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
                 "3": {
                     "text": "仍未成功嗎？",
-                    "link": "試試 Ledger 的官方支援頁面"
+                    "link": "嘗試 Ledger 的官方支援頁面"
                 }
             }
         },
@@ -746,6 +748,10 @@
             "title": "關於 Assembly",
             "body1": "恭喜您已賺取質押獎勵的 ASMB 代幣。Assembly 是個多鏈網路，用來把高擴展性智能合約佈署到 IOTA 上。",
             "body2": "我們的目標是 2022 年啟動 Assembly。您的 ASMB 代幣將在網路啟動時開放轉帳。"
+        },
+        "confirmDeveloperProfile": {
+            "title": "您正在建立開發者設定檔。",
+            "body": "您將連結至預設的 Chrysalis 開發網。您可以手動切換網路。在開始之前請先確定您具備相關的知識。"
         }
     },
     "charts": {
@@ -796,7 +802,7 @@
         "tryAgain": "重新嘗試",
         "visitDiscord": "探訪 Discord",
         "dragDrop": "拖曳並釋放",
-        "importExtentions": ".kdbx 或 .stronghold 文件",
+        "importExtentions": ".kdbx 或 .stronghold 檔案",
         "chooseFile": "選擇一個檔案",
         "dropHere": "將檔案拖至此處",
         "syncAll": "同步全部",
@@ -899,6 +905,7 @@
         "from": "由",
         "to": "至",
         "receiveFunds": "接收資金",
+        "address": "地址",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 秒} other {# 秒}}",
-        "minute": "{time, plural, one {1 分鐘} other {# 分鐘}}",
-        "hour": "{time, plural, one {1 小時} other {# 小時}}",
-        "day": "{time, plural, one {1 天} other {# 天}}",
-        "week": "{time, plural, one {1 週} other {# 週}}",
-        "month": "{time, plural, one {1 月} other {# 月}}",
-        "year": "{time, plural, one {1 年} other {# 年}}"
+        "second": "{time, plural, one {# 秒} other {# 秒}}",
+        "minute": "{time, plural, one {# 分鐘} other {# 分鐘}}",
+        "hour": "{time, plural, one {# 小時} other {# 小時}}",
+        "day": "{time, plural, one {# 天} other {# 天}}",
+        "week": "{time, plural, one {# 週} other {# 週}}",
+        "month": "{time, plural, one {# 月} other {# 月}}",
+        "year": "{time, plural, one {# 年} other {# 年}}"
     },
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
@@ -1034,13 +1041,13 @@
         "updateError": "更新時發生錯誤，請重試。",
         "restartInstall": "重新啟動以進行安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
-        "minutesRemaining": "{minutes, plural, one {剩下 1 分鐘} other {剩下 # 分鐘}}",
+        "minutesRemaining": "{minutes, plural, one {# 分鐘剩餘} other {# 分鐘剩餘}}",
         "copiedToClipboard": "已複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
         "fundsAvailableSoon": "您的資金很快就可以使用",
         "exportTransactionHistory": {
             "success": "{accountAlias} 的交易紀錄已順利儲存到 {filePath}",
-            "error": "無法匯出帳戶 {accountAlias} 的交易記錄"
+            "error": "無法匯出 {accountAlias} 的交易記錄"
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "請登入以發起 IOTA 連結",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "您的設定檔名稱不能超過 {length, plural, one {1 character} other {# 字符}}。",
+            "length": "您的設定檔名稱不能超過 {length, plural, one {# 字元} other {# 字元}}。",
             "duplicate": "相同名稱的設定檔已存在。",
             "delete": {
                 "nonEmptyAccounts": "您必須先轉出全部餘額，然後才能刪除您的設定檔。"
@@ -1076,15 +1083,15 @@
             "similar": "這和常見的密碼相似。",
             "word": "只有一個單字很容易被猜中。",
             "incorrect": "密碼不正確",
-            "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}。"
+            "length": "您的密碼長度不能超過 {length, plural, one {# 字元} other {# 字元}}。"
         },
         "pincode": {
-            "length": "你的 PIN 必須符合長度 {length, plural, one {1 位數} other {# 位數}}",
+            "length": "您的 PIN 碼必須符合長度 {length, plural, one {# 位數} other {# 位數}}",
             "match": "PIN 碼不相符",
             "incorrect": "您輸入的 PIN 碼不正確"
         },
         "account": {
-            "length": "您的錢包名稱長度不能超過 {length, plural, one {1 character} other {# 字符}}。",
+            "length": "您的錢包名稱長度不能超過 {length, plural, one {# character} other {# 字元}}。",
             "empty": "在您創建新的錢包之前，您必須使用最後存在的錢包。",
             "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
             "duplicate": "具有相同名稱的錢包已經存在。",
@@ -1097,7 +1104,7 @@
             "syncing": "同步您的錢包時發生錯誤。"
         },
         "send": {
-            "addressLength": "地址應為 {length, plural, one {1 character} other {# 字符}}長度。",
+            "addressLength": "地址長度應符合 {length, plural, one {# character} other {# 字元}}。",
             "amountTooHigh": "您輸入的數值大於您的可用餘額。",
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
@@ -1114,7 +1121,7 @@
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
-            "dns": "無法找到此節點的DNS解析。",
+            "dns": "無法找到此節點的 DNS 解析。",
             "timedOut": "連線逾時。",
             "refused": "此連線被拒絕。",
             "handshake": "無法與節點進行連線交握。",
@@ -1140,9 +1147,9 @@
             "invalid": "無法識別備份文件。",
             "destination": "備份目的地無效。",
             "mnemonic": "助記詞無效。",
-            "seedTooShort": "種子 (Seed) 長度必須為 81 個字符長，目前{length, plural, one {is 1} other {長度是 #}}。",
+            "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前{length, plural, one {is #} other {長度是 #}}。",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
-            "phraseWordCount": "您的助記詞中應該有24個單字，{length, plural, one {is 1} other {目前有 #}}個。",
+            "phraseWordCount": "您的助記詞應該要有24個字，目前為{length, plural, one {是 #} other {是 #}}。",
             "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞 “{word}”",
             "phraseCaseWord": "這個字\"{word}\" 應該要是小寫"
         },
@@ -1173,7 +1180,7 @@
             "cannotUseAccount": "無法使用該指定帳戶。",
             "cannotFindStakingEvent": "未能找到質押活動。",
             "cannotVisitAirdropWebsite": "無法開啟 {airdrop} 網站。",
-            "invalidStakingEventId": "質押活動ID無效。"
+            "invalidStakingEventId": "無效的質押活動ID。"
         }
     },
     "warning": {
@@ -1246,6 +1253,11 @@
             "formattedValue": "格式化數值",
             "date": "日期",
             "time": "時間"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "您正在使用開發者設定檔連結至 {networkName}"
         }
     }
 }

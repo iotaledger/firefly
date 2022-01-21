@@ -22,9 +22,10 @@
                 "nonFirst": "För tillfället, låt oss börja med ditt profilnamn."
             },
             "addMore": "Du kan lägga till fler profiler senare.",
+            "advancedOptions": "Avancerade inställningar",
             "developer": {
                 "label": "Utvecklarprofil",
-                "info": "Anslut till publika och privata IOTA-nätverk"
+                "info": "Anslut till utvecklar-nätverket eller ett privat nätverk"
             }
         },
         "setup": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Vänta {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 felaktigt försök} other {# felaktiga försök}}"
+            "pleaseWait": "Vänligen vänta {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {# felaktigt försök} other {# felaktiga försök}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Välkommen till staking-instrumentpanelen",
+            "welcome": "Välkommen till staking-instrumentpanelen!",
             "status": {
                 "upcoming": "Event inte startat",
                 "commencing": "För-staking öppen",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till",
-            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt."
+            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
+            "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
         },
         "balanceFinder": {
             "title": "Hitta saldo",
@@ -746,6 +748,10 @@
             "title": "Om Assembly",
             "body1": "Grattis du har förtjänat ASMB-tokens som en stakingbelöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
             "body2": "Vi siktar på att lansera Assembly 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Du skapar en utvecklarprofil",
+            "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Från",
         "to": "Till",
         "receiveFunds": "Ta emot IOTA",
+        "address": "Adress",
         "myAddress": "Min adress",
         "shareAddress": "Dela en adress",
         "yourAddress": "Din adress",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# år} other {# år}} sedan"
     },
     "times": {
-        "second": "{time, plural, one {1 sekund} other {# sekunder}}",
-        "minute": "{time, plural, one {1 minut} other {# minuter}}",
-        "hour": "{time, plural, one {1 timme} other {# timmar}}",
-        "day": "{time, plural, one {1 dag} other {# dagar}}",
-        "week": "{time, plural, one {1 vecka} other {# veckor}}",
-        "month": "{time, plural, one {1 månad} other {# månader}}",
-        "year": "{time, plural, one {1 år} other {# år}}"
+        "second": "{time, plural, one {# sekund} other {# sekunder}}",
+        "minute": "{time, plural, one {# minut} other {# minuter}}",
+        "hour": "{time, plural, one {# timme} other {# timmar}}",
+        "day": "{time, plural, one {# dag} other {# dagar}}",
+        "week": "{time, plural, one {# vecka} other {# veckor}}",
+        "month": "{time, plural, one {# månad} other {# månader}}",
+        "year": "{time, plural, one {# år} other {# år}}"
     },
     "notifications": {
         "valueTx": "Tar emot {{value}} till {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Ett fel inträffade under uppdateringen, försök igen",
         "restartInstall": "Starta om för att installera",
         "calcMinutesRemaining": "Beräknar minuter kvar...",
-        "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
+        "minutesRemaining": "{minutes, plural, one {# kvarvarande minut} other {# kvarvarande minuter}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
         "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
+            "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
             "duplicate": "En profil med detta namn finns redan.",
             "delete": {
                 "nonEmptyAccounts": "Du måste överföra alla saldon innan du kan ta bort din profil."
@@ -1076,15 +1083,15 @@
             "similar": "Detta liknar ett vanligt lösenord.",
             "word": "Ett enda ord är enkelt att gissa.",
             "incorrect": "Ditt lösenord är felaktigt.",
-            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}."
+            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}."
         },
         "pincode": {
-            "length": "Din PIN-kod måste vara {length, plural, one {1 siffra} other {# siffror}}.",
+            "length": "Din PIN-kod måste vara {length, plural, one {# siffra} other {# siffror}} lång.",
             "match": "PIN-koder matchar inte.",
             "incorrect": "Din nuvarande PIN-kod är felaktig."
         },
         "account": {
-            "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
+            "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
             "empty": "Du måste använda din senaste plånbok innan du skapar en ny.",
             "notEmpty": "Du måste överföra ditt saldo innan du tar bort denna plånbok.",
             "duplicate": "En plånbok med detta namn finns redan.",
@@ -1097,7 +1104,7 @@
             "syncing": "Det gick inte att synkronisera dina plånböcker."
         },
         "send": {
-            "addressLength": "Adresser bör vara {length, plural, one {1 tecken} other {# tecken}}.",
+            "addressLength": "Adresser bör vara {length, plural, one {# tecken} other {# tecken}} lång.",
             "amountTooHigh": "Detta är större än ditt tillgängliga saldo.",
             "amountNoFloat": "Om enheten är `i` kan du inte använda decimaler.",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
@@ -1140,9 +1147,9 @@
             "invalid": "Säkerhetskopian kändes inte igen.",
             "destination": "Härkomsten för säkerhetskopian var inte giltig.",
             "mnemonic": "Mnemonin är inte giltig.",
-            "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
+            "seedTooShort": "Din seed ska vara 81 tecken lång, den {length, plural, one {är #} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
-            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
+            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är #} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formaterat värde",
             "date": "Datum",
             "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Du använder för närvarande en utvecklarprofil och är ansluten till {networkName}"
         }
     }
 }

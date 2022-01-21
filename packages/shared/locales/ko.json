@@ -22,9 +22,10 @@
                 "nonFirst": "이제 여러분의 프로필 이름부터 만들어볼까요."
             },
             "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다.",
+            "advancedOptions": "고급 설정",
             "developer": {
                 "label": "개발자 프로필",
-                "info": "공용 및 사설 IOTA 네트워크로 연결"
+                "info": "devnet 혹은 사설 네트워크로 연결"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "지출 주소 잠그는 중...",
-            "body1": "이 프로세스는 {minutes, plural, one {1 분} other {# 분}} 소요됩니다.",
+            "body1": "이 작업에는 {minutes, plural, one {1분} other {#분}}이 소요됩니다.",
             "body2": "컴퓨터가 최대 용량으로 실행됩니다. 이 작업이 완료 될 때까지 기다리는 동안 다른 작업을 수행 할 수 있습니다."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "{time, plural, other {#초간}} 기다리세요",
-            "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #번}}"
+            "pleaseWait": "{time, plural, other {#초}} 동안 기다려주십시오.",
+            "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #회}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "스테이킹",
-            "welcome": "환영합니다. 스테이킹 대시보드입니다.",
+            "welcome": "환영합니다. 스테이킹 대시보드입니다!",
             "status": {
                 "upcoming": "이벤트 실행 전",
                 "commencing": "Pre-staking 시작",
@@ -506,7 +507,7 @@
                 "commencingHeader": "여러분의 토큰을 pre-stake 하세요!",
                 "holdingSubheaderHolding": "이제 staking 보상 얻기",
                 "holdingSubheaderNotHolding": "IOTA staking을 통해 보상 받기",
-                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderHolding": "{duration} 남음",
                 "holdingHeaderNotHolding": "여러분의 토큰을 staking 하세요!",
                 "endedSubheader": "Staking이 이제 종료되었습니다.",
                 "endedHeader": "감사합니다!",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "트랜잭션 확인",
             "body": "{amount} 만큼 보내려고 합니다",
-            "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요."
+            "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "잔고 찾기",
@@ -746,6 +748,10 @@
             "title": "Assemby에 대하여",
             "body1": "축하합니다. ASMB 토큰을 staking 보상으로 획득하셨습니다. Assembly는 다중체인 네트워크로 IOTA에서 확장성 있는 스마트 컨트랙트를 배포할 수 있습니다.",
             "body2": "Assembly의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
+        },
+        "confirmDeveloperProfile": {
+            "title": "개발자 프로필을 생성하고 있습니다",
+            "body": "기본적으로 Chrysalis Devnet에 연결될 것이며, 수동으로 네트워크를 전환할 수 있습니다. 무엇을 하고 있는지 잘 알고 있는 경우에만 계속 진행하십시오."
         }
     },
     "charts": {
@@ -866,8 +872,8 @@
         "unstake": "Unstake",
         "stakeFunds": "Stake funds",
         "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
+        "merge": "병합",
+        "mergeFunds": "자금 병합",
         "done": "완료"
     },
     "general": {
@@ -899,6 +905,7 @@
         "from": "보낸이",
         "to": "받는이",
         "receiveFunds": "받기",
+        "address": "주소",
         "myAddress": "내 주소",
         "shareAddress": "주소 공유하기",
         "yourAddress": "내 주소",
@@ -957,7 +964,7 @@
         "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
         "generatingReceiveAddress": "받는 주소 생성하기",
-        "broadcasting": "Broadcasting",
+        "broadcasting": "송출 중",
         "confirming": "Confirming",
         "creatingAccount": "지갑을 만드는 중입니다. 잠시만 기다려 주세요...",
         "updatingAccount": "지갑을 업데이트 중입니다. 잠시만 기다려 주세요...",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, other {#년}} 전"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, other {#초}}",
+        "minute": "{time, plural, other {#분}}",
+        "hour": "{time, plural, other {#시간}}",
+        "day": "{time, plural, other {#일}}",
+        "week": "{time, plural, other {#주}}",
+        "month": "{time, plural, other {#개월}}",
+        "year": "{time, plural, other {#년}}"
     },
     "notifications": {
         "valueTx": "{{account}}에 {{value}}를 받는 중",
@@ -1034,7 +1041,7 @@
         "updateError": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
         "restartInstall": "재시작하여 설치",
         "calcMinutesRemaining": "남은 시간 계산중...",
-        "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
+        "minutesRemaining": "{minutes, plural, other {#분 남음}}",
         "copiedToClipboard": "클립보드에 복사되었습니다.",
         "accountsSynchronized": "지갑 동기화 완료",
         "fundsAvailableSoon": "자금이 곧 사용가능해질 것입니다.",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "사용자 이름은 {length, plural, other {#글자}} 보다 길 수 없습니다.",
+            "length": "사용자 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
             "duplicate": "같은 이름의 사용자가 이미 존재합니다",
             "delete": {
                 "nonEmptyAccounts": "프로필을 삭제하기 전 모든 잔액을 전송해야 합니다."
@@ -1076,7 +1083,7 @@
             "similar": "흔히 사용되는 비밀번호와 유사합니다.",
             "word": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
             "incorrect": "비밀번호가 올바르지 않습니다.",
-            "length": "비밀번호는 {length, plural, other {#글자}}를 초과할 없습니다."
+            "length": "비밀번호는 {length, plural, other {#자}}를 초과할 수 없습니다."
         },
         "pincode": {
             "length": "PIN은 {length, plural, other {#자리}}로 구성되어야 합니다.",
@@ -1084,7 +1091,7 @@
             "incorrect": "PIN이 잘못되었습니다."
         },
         "account": {
-            "length": "지갑 이름은 {length, plural, one {1 글자} other {# 글자}} 보다 길 수 없습니다.",
+            "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
             "empty": "새 지갑을 만들기 전에 아직 사용하지 않은 기존 지갑을 사용해야 합니다.",
             "notEmpty": "이 지갑을 삭제하려면 지갑에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 지갑이 이미 있습니다.",
@@ -1097,7 +1104,7 @@
             "syncing": "지갑을 동기화하는 중 에러가 발생했습니다."
         },
         "send": {
-            "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
+            "addressLength": "주소는 {length, plural, other {#자}}여야 합니다.",
             "amountTooHigh": "사용 가능한 잔액보다 큽니다.",
             "amountNoFloat": "단위가 'i'이면 소수점을 사용할 수 없습니다.",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
@@ -1140,9 +1147,9 @@
             "invalid": "백업 파일이 인식되지 않았습니다.",
             "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
-            "seedTooShort": "시드의 길이는 81글자여야 합니다. 현재 길이는 {length, plural, other {#글자}}입니다.",
+            "seedTooShort": "시드의 길이는 81자여야 합니다. 현재 길이는 {length, plural, other {#자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
-            "phraseWordCount": "복원 문구는 24개의 단어로 이루어지며, 현재 {length, plural, other {#}}개의 단어를 입력하였습니다.",
+            "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
             "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
             "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요."
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "날짜",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "현재 개발자 프로필을 사용하는 중이며 {networkName} 네트워크에 연결되었습니다"
         }
     }
 }

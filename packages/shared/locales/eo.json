@@ -22,9 +22,10 @@
                 "nonFirst": "Nuntempe, ni komencu per via profilnomo."
             },
             "addMore": "Vi povas aldoni pliajn profilojn poste.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profilo de programisto",
-                "info": "Konekti al publika kaj privata IOTA-retoj"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Sekuraj elspezitaj adresoj...",
-            "body1": "Ĉi tiu procezo eble daŭros {minutes, plural, one {1 minuton} other {# minutojn}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Via komputilo funkcios laŭ plena kapablo, eble vi volas fari ion alian dum vi atendas, ke ĉi tio finiĝos."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Bonvolu atendi {time, plural, one {1 sekundo} other {# sekundoj}}",
-            "incorrectAttempts": "{attempts, plural, one {1 malĝusta provo} other {# malĝusta provoj}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Stakigante",
-            "welcome": "Bonvenon al la staking panelo",
+            "welcome": "Bonvenon al la staking panelo!",
             "status": {
                 "upcoming": "Evento ne komenciĝis",
                 "commencing": "Antaŭ-staking malfermita",
@@ -519,11 +520,11 @@
                 "collectedRewards": "Kolektitaj rekompencoj",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly estas senpermesa, tre skalebla plurĉena reto por konstrui kaj disfaldi komponeblajn inteligentajn kontraktojn. Assembly estas la estonteco de web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "La instigita sursceniga reto por antaŭenigi gravajn novigojn pri IOTA. Kio ajn okazas, okazas. Dependas de vi evoluo de Shimmer."
                 }
             }
         }
@@ -574,45 +575,45 @@
         },
         "addressHistory": {
             "title": "{name} adreshistorio",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Bonhavojn: {balance}",
+            "internal": "Interna Adreso",
+            "external": "Depona Adreso"
         },
         "node": {
             "titleAdd": "Aldoni nodon",
             "titleUpdate": "Ĝisdatigu nodon",
             "titleRemove": "Forigu nodon",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Forigu ĉiujn nodojn",
             "titleDetails": "Nodo detaloj",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informo pri la nodo",
+            "addingNode": "Aldoni nodon",
+            "updatingNode": "Ĝisdatigu la nodon",
+            "loadingNodeInfo": "Ŝarĝante nodan informon",
             "nodeAddress": "Nodo adreso",
             "optionalUsername": "Uzantnomo (nedeviga)",
             "optionalPassword": "Pasvorto (nedeviga)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON-retĵetono (laŭvole)",
             "setAsPrimaryNode": "Agordi kiel la ĉefa nodo",
             "removeConfirmation": "Ĉu vi certe volas forigi ĉi tiun nodon?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Ĉu vi certe volas forigi ĉiujn nodojn?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "software": "Programaro",
+                "networkId": "Reto ID",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Karakterizaĵoj",
+                "confirmedMilestoneIndex": "Konfirmita ĵetono indekso",
+                "pruningIndex": "Forviŝa progresindekso",
                 "messagesPerSecond": "Mesaĝoj po sekundo",
                 "referencedRate": "Referencita indico"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Ŝanĝi reton",
+            "newNetwork": "Nova reto",
+            "resetWarning": "Ŝanĝi retojn elsalutos vin kaj restarigos ĉiujn kontojn, bonhavojn kaj transakcian historion por ĉi tiu profilo.",
+            "switchingNetwork": "Ŝanĝanta reto",
+            "typePassword": "Tajpu vian pasvorton por ŝanĝi al:"
         },
         "errorLog": {
             "title": "Eraroj registroj",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Konfirmu transakcion",
             "body": "Vi estas sendonta {amount} al",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Enhavo serĉilo",
@@ -710,22 +712,22 @@
             "body": "Vi ankaŭ povas migri poste en Altnivelaj Agordoj."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Account name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Eksporti transakciajn historion",
+            "body": "Eksportu la transakcian historion por la elektita monujo. La eksportita dosiero estos en .csv-formato.",
+            "profileName": "Profilnomo:",
+            "accountName": "La nomo de la konto:",
+            "typePassword": "Tajpu vian pasvorton por permesi eksportadon"
         },
         "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
+            "upcomingDate": "Staking ankoraŭ ne komenciĝis",
+            "commencingDate": "Staking ankoraŭ ne komenciĝis",
+            "body": "Antaŭen staking viajn bonhavojn antaŭ ol la staking komenciĝos, vi aŭtomate komencos ricevi rekompencojn kiam la staking komenciĝos.",
+            "ok": "Bone, mi komprenas"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
+            "title": "Staking Administrado",
+            "description": "Kiam vi stakas monujon, vi sendas transakcion al vi mem markante tiujn fondusojn kiel \"stakitaj\". Vi povas translokigi la ĵetonojn iam ajn, sed vi daŭre ne ricevos staking rekompencojn.",
+            "totalFundsStaked": "Totalaj bonhavoj stakita",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}."
         },
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Gratulon, ke vi gajnis ASMB-ĵetonojn kiel staking rekompencon. Assembly estas plurĉena reto por disfaldi skaleblajn inteligentajn kontraktojn sur IOTA.",
             "body2": "Ni celas lanĉi Assembly en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "Al",
         "receiveFunds": "Ricevu Fondusojn",
+        "address": "Address",
         "myAddress": "Mia adreso",
         "shareAddress": "Kunhavigi adreson",
         "yourAddress": "Via adreso",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# jaro} other {# jaroj}} antaŭ"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Ricevante {{value}} al {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Eraro okazis dum la ĝisdatigo, bonvolu reprovi",
         "restartInstall": "Rekomencu por instali",
         "calcMinutesRemaining": "Kalkulante minutojn restantajn...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restas} other {# minutoj restas}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied al dosierujo",
         "accountsSynchronized": "Monujo-sinkronigado finiĝis",
         "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Via profilnomo ne povas esti pli longa ol {length, plural, one {1 signo} other {# signoj}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Profilo kun ĉi tiu nomo jam ekzistas.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "Ĉi tio similas al ofta pasvorto.",
             "word": "Ununura vorto estas facile divenebla.",
             "incorrect": "Via pasvorto estas malĝusta.",
-            "length": "Via pasvorto ne povas esti pli longa ol {length, plural, one {1 signo} other {# signoj}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Via PIN devas esti {length, plural, one{1 cifero} other {# ciferoj}} longa.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINoj ne kongruas.",
             "incorrect": "Via nuna PIN estas malĝusta."
         },
         "account": {
-            "length": "Via monujo-nomo ne povas esti pli longa ol {length, plural, one {1 signo} other {# signoj}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Vi devas uzi vian plej novan monujon antaŭ krei novan.",
             "notEmpty": "Vi devas transdoni vian bilancon, antaŭ forigi ĉi tiun monujon.",
             "duplicate": "Monujo kun ĉi tiu nomo jam ekzistas.",
@@ -1097,7 +1104,7 @@
             "syncing": "Estis eraro dum sinkronigado de viaj monujoj."
         },
         "send": {
-            "addressLength": "Adresoj devus esti {length, plural, one {1 signo} other {# signoj}} longa.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Ĉi tio estas pli granda ol via disponebla bonhavo.",
             "amountNoFloat": "Se unuoj estas `i` vi ne povas uzi dekumajn lokojn.",
             "amountInvalidFormat": "La kvanto ŝajnas esti nevalida nombro.",
@@ -1140,9 +1147,9 @@
             "invalid": "La savkopia dosiero ne estis rekonita.",
             "destination": "La rezervkopia celloko ne validis.",
             "mnemonic": "La mnemoniko ne validas.",
-            "seedTooShort": "La semo devas havi 81 signojn, ĝi {length, plural, one {estas 1} other {estas #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "La semo devas enhavi nur signojn A-Z aŭ 9",
-            "phraseWordCount": "Devus esti 24 vortoj en via retrova frazo, nuntempe ekzistas {length, plural, one {estas 1} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Nekonata vorto \"{word}\" en via retrova frazo",
             "phraseCaseWord": "La vorto \"{word}\" devas esti skribita minuskle"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Dato",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

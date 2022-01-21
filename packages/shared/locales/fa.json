@@ -15,16 +15,17 @@
         },
         "profile": {
             "title": "ایجاد پروفایل",
-            "profileName": "Profile name",
+            "profileName": "نام پروفایل",
             "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
             "body2": {
                 "first": "For now, let's start with your first profile name.",
                 "nonFirst": "For now, let's start with your profile name."
             },
             "addMore": "You can add more profiles later.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -39,20 +40,20 @@
             "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید، همیشه می توانید کیف پول خود را بازیابی کنید."
         },
         "create": {
-            "title": "Create a wallet",
+            "title": "ايجاد كيف پول",
             "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
+                "title": "من کیف پول نرم‌افزاری می‌خواهم",
                 "description": "Create a 24-word Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
+                "title": "کیف پول سخت افزاری میخواهم",
                 "description": "Ledger Nano S or Nano X required"
             }
         },
         "setupLedger": {
             "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
+            "progress2": "تولید آدرس",
             "progress3": "Switch Ledger app",
             "progress4": "Transfer funds",
             "watchVideo": "Watch video guide",
@@ -121,7 +122,7 @@
             "title": "راه اندازی کیف پول کامل شد",
             "fundsMigrated": "وجوه منتقل شد",
             "body": "کیف پول جدید شما آماده استفاده میباشد.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "softwareMigratedBody": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
             "exportMigration": "گرفتن گزارش انتقال و اتمام راه اندازی"
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "درحال ایمن سازی آدرس‌ها...",
-            "body1": "این فرایند {minutes, plural, one {1 دقیقه} other {# دقیقه}} طول خواهد کشید.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "کامپیوتر شما با تمام ظرفیت مشغول به کار خواهد شد، بهتر است مشغول کار دیگری شوید تا این عملیات تمام شود."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
-            "incorrectAttempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "تایید تراکنش",
             "body": "شما در حال انتقال مقدار {amount} هستید به",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "یابنده موجودی",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -857,7 +863,7 @@
         "searchAgain": "جستجوی مجدد",
         "searching": "درحال جستجو...",
         "closeFirefly": "بستن Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "تولید آدرس",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -899,6 +905,7 @@
         "from": "فرستنده",
         "to": "گیرنده",
         "receiveFunds": "دریافت وجه",
+        "address": "Address",
         "myAddress": "آدرس من",
         "shareAddress": "اشتراک گذاری یک آدرس",
         "yourAddress": "آدرس شما",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# سال} other {#سال}} قبل"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "در حال دریافت {{value}} به {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "خطایی در طول این به روز رسانی رخ داد، لطفا دوباره امتحان کنید",
         "restartInstall": "برای نصب، مجددا راه اندازی کنید",
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
-        "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
         "accountsSynchronized": "همگام سازی حساب کامل شد",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "پروفایل شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "یک پروفایل با این نام وجود دارد.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "این رمز مشابه یک رمز عبور رایج میباشد.",
             "word": "یک کلمه به راحتی قابل حدس زدن میباشد.",
             "incorrect": "رمز عبور شما نامعتبر است.",
-            "length": "رمز عبور شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "PIN شما باید {length, plural, one {1 عددی} other {# عددی}} باشد.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN مطابقت ندارد.",
             "incorrect": "PIN فعلی شما اشتباه است."
         },
         "account": {
-            "length": "نام کیف پول شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "باید از آخرین کیف پول خود قبل از ایجاد کیف پول جدید استفاده کنید.",
             "notEmpty": "شما باید قبل از حذف این کیف پول، موجودی خود را انتقال دهید.",
             "duplicate": "کیف پولی با این نام وجود دارد.",
@@ -1097,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "آدرس ها باید {length, plural, one {1 کاراکتری} other {# کاراکتری}} باشند.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "این مقدار بیشتر از موجودی حساب شماست.",
             "amountNoFloat": "اگر واحدها `i` باشند، نمیتوانید از اعشار استفاده کنید.",
             "amountInvalidFormat": "این مقدار نامعتبر میباشد.",
@@ -1140,9 +1147,9 @@
             "invalid": "فایل بک اپ یافت نشد.",
             "destination": "مسیر بک اپ معتبر نیست.",
             "mnemonic": "نام حفظی معتبر نمی باشد.",
-            "seedTooShort": "سید باید 81 کاراکتری باشد٬ این {length, plural, one {1 کاراکتریست} other {کاراکتریست #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "سید فقط میتواند از کاراکتر A-Z یا 9 تشکیل شده باشد.",
-            "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد",
             "phraseCaseWord": "کلمه \"{word} \" می بایست حروف کوچک باشد"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "تاریخ",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

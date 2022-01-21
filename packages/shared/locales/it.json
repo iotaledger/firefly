@@ -22,9 +22,10 @@
                 "nonFirst": "Per ora, iniziamo con il nome del tuo profilo."
             },
             "addMore": "È possibile aggiungere ulteriori profili successivamente.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profilo Sviluppatore",
-                "info": "Connettiti a reti IOTA pubbliche e private"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Benvenuto nella dashboard per lo staking",
+            "welcome": "Benvenuto nella dashboard per lo staking!",
             "status": {
                 "upcoming": "Evento non iniziato",
                 "commencing": "Pre-staking iniziato",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Conferma la transazione",
             "body": "Stai per inviare {amount} a",
-            "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti."
+            "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
@@ -746,6 +748,10 @@
             "title": "Informazioni Assembly",
             "body1": "Congratulazioni hai ottenuto token ASMB come ricompensa per lo staking. Assembly è una rete multi-catena per smart contract scalabili su IOTA.",
             "body2": "Miriamo a lanciare Assembly nel 2022. I token saranno disponibili per il trasferimento una volta avviata la rete."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Da",
         "to": "A",
         "receiveFunds": "Ricevi fondi",
+        "address": "Address",
         "myAddress": "Il mio Indirizzo",
         "shareAddress": "Condividi un indirizzo",
         "yourAddress": "Il tuo indirizzo",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valore formattato",
             "date": "Data",
             "time": "Ora"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

@@ -22,9 +22,10 @@
                 "nonFirst": "Por ahora, empecemos con el nombre de tu perfil."
             },
             "addMore": "Puedes añadir más perfiles después.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Perfil de desarrollador",
-                "info": "Conectar a redes IOTA públicas y privadas"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Protegiendo direcciones de pago...",
-            "body1": "Este proceso tardará {minutes, plural, one {1 minuto} other {# minutos}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Tu computador procesará a plena capacidad, puede que deses hacer algo más mientras esperas a que esto se complete."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Por favor, espere {time, plural, one {1 segundo} other {# segundos}}",
-            "incorrectAttempts": "{attempts, plural, one {1 intento incorrecto} other {# intentos incorrectos}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Bienvenido al panel de control de staking",
+            "welcome": "Bienvenido al panel de control del staking!",
             "status": {
                 "upcoming": "Evento no iniciado",
                 "commencing": "Pre-staking abierto",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
-            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después."
+            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Buscador de balances",
@@ -746,6 +748,10 @@
             "title": "Sobre Assembly",
             "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
             "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "Para",
         "receiveFunds": "Recibir fondos",
+        "address": "Address",
         "myAddress": "Mi dirección",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "hace {time, plural, one {# año} other {# años}}"
     },
     "times": {
-        "second": "{time, plural, one {1 segundo} other {# segundos}}",
-        "minute": "{time, plural, one {1 minuto} other {# minutos}}",
-        "hour": "{time, plural, one {1 hora} other {# horas}}",
-        "day": "{time, plural, one {1 día} other {# días}}",
-        "week": "{time, plural, one {1 semana} other {# semanas}}",
-        "month": "{time, plural,one {1 mes} other {# meses}}",
-        "year": "{time, plural, one {1 año} other {# años}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Recibiendo {{value}} a {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copiado al portapapeles",
         "accountsSynchronized": "Sincronización de billetera completada",
         "fundsAvailableSoon": "Tus fondos estarán disponibles en breve",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 character} other {# caracteres}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Ya existe un perfil con este nombre.",
             "delete": {
                 "nonEmptyAccounts": "Debes transferir todos los fondos antes de poder borrar tu perfil."
@@ -1076,15 +1083,15 @@
             "similar": "Esto es similar a una contraseña común.",
             "word": "Una sola palabra es fácil de adivinar.",
             "incorrect": "Tu contraseña es incorrecta.",
-            "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 character} other {# caracteres}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Tu PIN debe tener {length, plural, one {1 dígito} other {# dígitos}} de largo.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "El nombre de tu billetera no puede tener una longitud mayor que {length, plural, one {1 carácter} other {# caracteres}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Debes utilizar tu última billetera antes de crear una nueva.",
             "notEmpty": "Debes transferir tu balance antes de eliminar esta billetera.",
             "duplicate": "Ya existe una billetera con este nombre.",
@@ -1097,7 +1104,7 @@
             "syncing": "Hubo un error al sincronizar sus billeteras."
         },
         "send": {
-            "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
             "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
@@ -1140,9 +1147,9 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemotécnico no es válido.",
-            "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {1 carácter} other {# caracteres}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
-            "phraseWordCount": "Debería haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
             "phraseCaseWord": "La palabra \"{word}\" debe estar en minúsculas"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valor formateado",
             "date": "Fecha",
             "time": "Hora"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

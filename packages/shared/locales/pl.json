@@ -22,9 +22,10 @@
                 "nonFirst": "Zacznijmy od Twojej nazwy profilu."
             },
             "addMore": "Będziesz mógł dodać więcej profili później.",
+            "advancedOptions": "Opcje zaawansowane",
             "developer": {
                 "label": "Profil deweloperski",
-                "info": "Połącz się z publicznymi oraz prywatnymi sieciami IOTA"
+                "info": "Połączenie z devnetem lub prywatną siecią"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Zabezpieczanie zużytych adresów...",
-            "body1": "Ten proces zajmie {minutes, plural, one {1 minutę} few {# minuty} many {# minut} other {# minut}}.",
+            "body1": "Ten proces zajmie {minutes, plural, one {# minutę} few {# minuty} many {# minut} other {# minut}}.",
             "body2": "Twój komputer będzie działał z pełną wydajnością, możesz robić coś innego podczas oczekiwania na zakończenie procesu."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Zaczekaj {time, plural, one {1 sekundę} few {# sekundy} many {# sekund} other {# sekund}}",
-            "incorrectAttempts": "{attempts, plural, one {1 nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudane próby}}"
+            "pleaseWait": "Zaczekaj {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}",
+            "incorrectAttempts": "{attempts, plural, one {# nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudanych prób}}"
         },
         "dashboard": {
             "security": {
@@ -487,10 +488,10 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Witaj w panelu stakingu",
+            "welcome": "Witaj w panelu stakingu!",
             "status": {
                 "upcoming": "Wydarzenie nie zostało rozpoczęte",
-                "commencing": "Pre-staking możliwy",
+                "commencing": "Pre-staking dostępny",
                 "holdingActive": "Staking w toku",
                 "holdingInactive": "Staking możliwy",
                 "inactive": "Nie wykryto stakingu",
@@ -515,7 +516,7 @@
             },
             "airdrops": {
                 "holding": "Pozostało",
-                "commencing": "Do momentu rozpoczęcia stakingu",
+                "commencing": "Do rozpoczęcia stakingu",
                 "collectedRewards": "Otrzymane nagrody",
                 "assembly": {
                     "name": "Assembly",
@@ -637,11 +638,12 @@
         "transaction": {
             "title": "Potwierdzanie transakcji",
             "body": "Zamierzasz wysłać {amount} do",
-            "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków."
+            "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
+            "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu."
         },
         "balanceFinder": {
             "title": "Wyszukiwarka środków",
-            "body": "Wykonaj bardziej dogłębne wyszukiwanie adresów w celu znalezienia brakujących środków. To może chwilę potrwać.",
+            "body": "Wykonaj bardziej dogłębne przeszukanie adresów pod kątem brakujących środków. To może chwilę potrwać.",
             "totalWalletBalance": "Wszystkie środki",
             "typePassword": "Wpisz hasło, aby umożliwić wyszukiwanie."
         },
@@ -719,7 +721,7 @@
         "stakingNotice": {
             "upcomingDate": "Staking jeszcze się nie rozpoczął",
             "commencingDate": "Staking jeszcze się nie rozpoczął",
-            "body": "Dzięki pre-stakowaniu swoich środków, automatycznie zaczniesz otrzymywać nagrody w momencie rozpoczęcia właściwego wydarzenia stakingu.",
+            "body": "Dzięki pre-stakowaniu swoich środków, automatycznie zaczniesz otrzymywać nagrody w momencie rozpoczęcia stakingu.",
             "ok": "Ok, rozumiem"
         },
         "stakingManager": {
@@ -746,6 +748,10 @@
             "title": "O Assembly",
             "body1": "Gratulacje, zdobyłeś tokeny ASMB jako nagrodę za staking. Assembly to wielołańcuchowa sieć do wdrażania skalowalnych smart kontraktów IOTA.",
             "body2": "Uruchomienie Assembly jest planowane na rok 2022. Twoje tokeny będą dostępne do transferu po uruchomieniu sieci."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Tworzysz profil dewelopera",
+            "body": "Twoim domyślnym połączeniem będzie Chrysalis Devnet. Będziesz mógł przełączać sieci ręcznie. Kontynuuj tylko jeśli wiesz co robisz."
         }
     },
     "charts": {
@@ -861,7 +867,7 @@
         "migrateAgain": "Migruj kolejny indeks",
         "visitWebsite": "Odwiedź stronę",
         "howItWorks": "Jak to działa",
-        "learnAboutStaking": "Czym jest staking?",
+        "learnAboutStaking": "Dowiedz się więcej o stakingu",
         "stake": "Stakuj",
         "unstake": "Odstakuj",
         "stakeFunds": "Stakuj środki",
@@ -899,6 +905,7 @@
         "from": "Od",
         "to": "Do",
         "receiveFunds": "Odbierz środki",
+        "address": "Adres",
         "myAddress": "Mój adres",
         "shareAddress": "Udostępnij adres",
         "yourAddress": "Twój adres",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# rok} few {# lata} many {# lat} other {# lat}} temu"
     },
     "times": {
-        "second": "{time, plural, one {1 sekunda} few {# sekundy} many {# sekund} other {# sekund}}",
-        "minute": "{time, plural, one {1 minuta} few {# minuty} many {# minut} other {# minut}}",
-        "hour": "{time, plural, one {1 godzina} few {# godziny} many {# godzin} other {# godzin}}",
-        "day": "{time, plural, one {1 dzień} few {# dni} many {# dni} other {# dni}}",
-        "week": "{time, plural, one {1 tydzień} few {# tygodnie} many {# tygodni} other {# tygodni}}",
-        "month": "{time, plural, one {1 miesiąc} few {# miesiące} many {# miesięcy} other {# miesięcy}}",
-        "year": "{time, plural, one {1 rok} few {# lata} many {# lat} other {# lat}}"
+        "second": "{time, plural, one {# sekunda} few {# sekundy} many {# sekund} other {# sekund}}",
+        "minute": "{time, plural, one {# minuta} few {# minuty} many {# minut} other {# minut}}",
+        "hour": "{time, plural, one {# godzina} few {# godziny} many {# godzin} other {# godzin}}",
+        "day": "{time, plural, one {# dzień} few {# dni} many {# dni} other {# dni}}",
+        "week": "{time, plural, one {# tydzień} few {# tygodnie} many {# tygodni} other {# tygodni}}",
+        "month": "{time, plural, one {# miesiąc} few {# miesiące} many {# miesięcy} other {# miesięcy}}",
+        "year": "{time, plural, one {# rok} few {# lata} many {# lat} other {# lat}}"
     },
     "notifications": {
         "valueTx": "Odbieranie {{value}} na {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
         "restartInstall": "Uruchom ponownie, aby zainstalować",
         "calcMinutesRemaining": "Obliczanie pozostałych minut...",
-        "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
+        "minutesRemaining": "{minutes, plural, one {pozostała # minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
         "copiedToClipboard": "Skopiowano do schowka",
         "accountsSynchronized": "Synchronizacja portfela ukończona",
         "fundsAvailableSoon": "Twoje środki wkrótce staną się dostępne",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Twoja nazwa profilu nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
+            "length": "Twoja nazwa profilu nie może być dłuższa niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "duplicate": "Profil o takiej nazwie już istnieje.",
             "delete": {
                 "nonEmptyAccounts": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć swój profil."
@@ -1076,15 +1083,15 @@
             "similar": "To jest podobne do powszechnie używanego hasła.",
             "word": "Jedno słowo jest łatwe do odgadnięcia.",
             "incorrect": "Twoje hasło jest niepoprawne.",
-            "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}."
+            "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}."
         },
         "pincode": {
-            "length": "Twój PIN musi składać się z {length, plural, one {1 cyfry} few {# cyfr} many {# cyfr} other {# cyfr}}.",
+            "length": "Twój PIN musi składać się z {length, plural, one {# cyfry} few {# cyfr} many {# cyfr} other {# cyfr}}.",
             "match": "Kody PIN nie są zgodne.",
             "incorrect": "Twój aktualny PIN jest nieprawidłowy."
         },
         "account": {
-            "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
+            "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "empty": "Przed utworzeniem nowego portfela musisz użyć poprzedniego.",
             "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego portfela.",
             "duplicate": "Portfel o tej nazwie już istnieje.",
@@ -1097,7 +1104,7 @@
             "syncing": "Wystąpił błąd podczas synchronizacji portfeli."
         },
         "send": {
-            "addressLength": "Adresy powinny składać się z {length, plural, one {1 znaku} few {# znaków} many {# znaków} other {# znaków}}.",
+            "addressLength": "Adresy powinny składać się z {length, plural, one {# znaku} few {# znaków} many {# znaków} other {# znaków}}.",
             "amountTooHigh": "To więcej niż Twoje dostępne saldo.",
             "amountNoFloat": "Jeśli jednostki to \"i\", nie możesz użyć miejsc po przecinku.",
             "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
@@ -1140,9 +1147,9 @@
             "invalid": "Plik kopii zapasowej nie został rozpoznany.",
             "destination": "Miejsce docelowe kopii zapasowej nie jest prawidłowe.",
             "mnemonic": "Błąd w wyrazach ratunkowych.",
-            "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {1 znak} few {# znaki} many {# znaków} other {to #}}",
+            "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
-            "phraseWordCount": "Wyrazy ratunkowe składają się z 24 słów. Aktualnie jest {length, plural, one {ono 1} few {ich #} many {ich #} other {ich #}}.",
+            "phraseWordCount": "Wyrazy ratunkowe powinny zawierać 24 słowa. Aktualnie jest {length, plural, one {ich #} few {ich #} many {ich #} other {ich #}}.",
             "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twoich wyrazach ratunkowych",
             "phraseCaseWord": "Słowo \"{word}\" powinno być pisane małymi literami"
         },
@@ -1200,7 +1207,7 @@
             },
             "commencing": {
                 "title": "Pre-staking jest już dostępny",
-                "body": "Pre-stakuj swoje tokeny, a gdy staking wystartuje, automatycznie zaczniesz otrzymywać nagrody co 10 sekund."
+                "body": "Pre-stakuj swoje tokeny, a w chwili rozpoczęcia stakingu, automatycznie zaczniesz otrzymywać nagrody co 10 sekund."
             },
             "activeHolding": {
                 "title": "Staking jest w toku",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Wartość sformatowana",
             "date": "Data",
             "time": "Godzina"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Aktualnie używasz profilu dewelopera i jesteś połączony z siecią {networkName}"
         }
     }
 }

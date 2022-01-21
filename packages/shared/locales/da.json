@@ -22,9 +22,10 @@
                 "nonFirst": "For nu, lad os starte med dit profilnavn."
             },
             "addMore": "Du kan tilføje flere profiler senere.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Udvikler profil",
-                "info": "Opret forbindelse til offentlige og private IOTA-netværk"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -56,7 +57,7 @@
             "progress3": "Skift Ledger app",
             "progress4": "Overfør midler",
             "watchVideo": "Se video guide",
-            "videoGuide": "Ledger migration video guide"
+            "videoGuide": "Ledger migrering video guide"
         },
         "ledgerInstallationGuide": {
             "title": "Har du installeret de nødvendige Ledger apps?",
@@ -135,8 +136,8 @@
             "importMnemonicDescription": "Indtast dine gendannelsesord for at gendanne dine wallets",
             "importFile": "Jeg har en sikkerhedskopi fil",
             "importFileDescription": "Upload en Seedvault eller Stronghold fil",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Jag har en Ledger backup",
+            "importLedgerDescription": "Gendan eller migrere en Ledger profil"
         },
         "importFromText": {
             "seed": {
@@ -158,27 +159,27 @@
             "body": "Importer en sikkerhedskopi fil for at gendanne dine wallets. Sikkerhedskopier kan enten være et Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
-            "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
-            "haveFireflyLedger": "I have a Firefly Ledger backup",
-            "haveFireflyLedgerDescription": "Restore a Firefly profile",
-            "haveTrinityLedger": "I have a Trinity Ledger backup",
-            "haveTrinityLedgerDescription": "Migrate a Trinity profile"
+            "title": "Gendan eller migrere din Ledger",
+            "body": "Gendan en eksisterende Firefly Ledger profil, eller migrere dine midler fra Trinity.",
+            "haveFireflyLedger": "Jeg har en Firefly Ledger backup",
+            "haveFireflyLedgerDescription": "Gendan en Firefly profil",
+            "haveTrinityLedger": "Jeg har en Trinity Ledger backup",
+            "haveTrinityLedgerDescription": "Migrere en Trinity profil"
         },
         "connectLedger": {
-            "title": "Connect your Ledger to Firefly",
-            "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
-            "trafficLight1": "Connect and unlock your Ledger with your PIN",
-            "trafficLight2": "Open the new IOTA app on your Ledger",
-            "tips": "Tips if your Ledger isn’t connecting"
+            "title": "Tilslut din Ledger til Firefly",
+            "body": "For at din Ledger-enhed kan findes af Firefly, skal du sikre dig, at den officielle Ledger Live-applikation er lukket.",
+            "trafficLight1": "Tilslut og lås op for din Ledger med din PIN-kode",
+            "trafficLight2": "Åbn den nye IOTA-app på din Ledger",
+            "tips": "Tips hvis din Ledger ikke tilslutter"
         },
         "restoreFromFireflyLedger": {
-            "title": "Restore Your Ledger Profile",
-            "body": "Press restore to complete the setup process and restore your wallets, balances and transaction history.",
-            "restoring": "Restoring from Ledger..."
+            "title": "Gendan din Ledger profil",
+            "body": "Tryk på gendan for at fuldføre installationsprocessen og gendanne dine wallets, midler og transaktionshistorik.",
+            "restoring": "Gendanner fra Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
+            "title": "Start din Ledger migrering ved hjælp af Firefly",
             "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
             "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
             "readMore": "What to expect from the migration process"
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Sikring af brugte adresser...",
-            "body1": "Denne proces vil tage {minutes, plural, one {1 minut} other {# minutter}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Din computer vil køre på fuld kapacitet, lav eventuelt noget andet, mens du venter på at dette er fuldendt."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bekræft transaktion",
             "body": "Du er ved at sende {amount} til",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Saldo finder",
@@ -680,7 +682,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Tips hvis din Ledger ikke tilslutter",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -836,7 +842,7 @@
         "addAccount": "Tilføj Wallet",
         "checkForUpdates": "Tjek for opdateringer",
         "reportAnIssue": "Rapportér et problem",
-        "restore": "Restore",
+        "restore": "Gendan",
         "clear": "Ryd",
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
@@ -899,6 +905,7 @@
         "from": "Fra",
         "to": "Til",
         "receiveFunds": "Modtag Midler",
+        "address": "Address",
         "myAddress": "Min Adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Modtager {{value}} til {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Der opstod en fejl under opdateringen, prøv igen",
         "restartInstall": "Genstart for at installere",
         "calcMinutesRemaining": "Beregner minutter tilbage...",
-        "minutesRemaining": "{minutes, plural, one {1 minut tilbage} other {# minutter tilbage}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Kopieret til udklipsholder",
         "accountsSynchronized": "Synkronisering af wallet fuldført",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "En profil med dette navn findes allerede.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "Dette ligner en almen anvendt adgangskode.",
             "word": "Et enkelt ord er nemt at gætte.",
             "incorrect": "Adgangskoden er forkert.",
-            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Din pinkode skal være {length, plural, one {1 ciffer} other {# cifre}} lang.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "Pinkoderne stemmer ikke overens.",
             "incorrect": "Din nuværende pinkode er forkert."
         },
         "account": {
-            "length": "Din wallets navn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Du skal bruge din seneste wallet før du opretter en ny.",
             "notEmpty": "Du skal overføre din saldo før du sletter denne wallet.",
             "duplicate": "En wallet med dette navn findes allerede.",
@@ -1097,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Adresser skal være {length, plural, one {1 tegn} other {# tegn}} langt.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Dette er større end din tilgængelige saldo.",
             "amountNoFloat": "Hvis enheder er `i` kan du ikke bruge decimaler.",
             "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
@@ -1140,9 +1147,9 @@
             "invalid": "Sikkerhedskopifilen blev ikke genkendt.",
             "destination": "Backup-destinationen var ikke gyldig.",
             "mnemonic": "Gendannelsesordene var ikke gyldige.",
-            "seedTooShort": "Seedet skal være 81 tegn langt, det {length, plural, one {er 1} other {er #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
-            "phraseWordCount": "Der bør være 24 ord i dine gendannelsesord, i øjeblikket der {length, plural, one {er 1} other {er #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Ordet \"{word}\" blev ikke genkendt i dine gendannelsesord",
             "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Dato",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

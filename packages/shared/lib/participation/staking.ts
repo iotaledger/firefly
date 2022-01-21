@@ -16,7 +16,6 @@ import {
     partiallyStakedAccounts,
     participationEvents,
     participationOverview,
-    pendingParticipations,
     shimmerStakingRemainingTime,
     stakedAccounts,
     stakingEventState,

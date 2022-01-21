@@ -22,9 +22,10 @@
                 "nonFirst": "Нека да започнем с името на Вашия профил."
             },
             "addMore": "Можете да добавите още профили по-късно.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Режим на разработчик",
-                "info": "Свързване с публични или частни IOTA мрежи"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Подсигуряване на преизползвани адреси...",
-            "body1": "Този процес ще отнеме {minutes, plural, one {1 минута} other {# минути}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Устройството работи на пълна мощност, можете да вършите нещо друго докато чакате това да завърши."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Моля изчакайте {time, plural, one {1 секунда} other {# секунди}}",
-            "incorrectAttempts": "{attempts, plural, one {1 неуспешен опит} other {# неуспешни опита}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Залагане",
-            "welcome": "Добре дошли в таблото за стейкване",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Събитието не е започнало",
                 "commencing": "Предстейкването е отворено",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Потвърдете Транзакция",
             "body": "Ще изпратите {amount} към",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Търсене на средствата",
@@ -746,6 +748,10 @@
             "title": "За Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "От",
         "to": "До",
         "receiveFunds": "Получаване на пари",
+        "address": "Address",
         "myAddress": "Моят адрес",
         "shareAddress": "Сподели адрес",
         "yourAddress": "Вашият адрес",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "преди {time, plural, one {# година} other {# години}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Получаване {{value}} към {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Грешка по време на актуализацията, моля опитайте отново",
         "restartInstall": "Рестартиране за инсталиране",
         "calcMinutesRemaining": "Пресмятане на оставащите минути...",
-        "minutesRemaining": "{minutes, plural, one {оставащи 1 минута} other {оставащи # минути}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Копирано в клипборда",
         "accountsSynchronized": "Синхронизацията на портфейла завършена",
         "fundsAvailableSoon": "Вашите средства ще бъдат налични скоро",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Името на профила не може да бъде по-дълго от {length, plural, one {1 символ} other {# символа}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Профил с това име вече съществува.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "Тази парола е много подобна на често използвана парола.",
             "word": "Една дума е лесна за разгадаване.",
             "incorrect": "Грешна парола.",
-            "length": "Вашата парола не може да бъде по-дълга от {length, plural, one {1 символ} other {# символа}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Вашият ПИН трябва да съдържа {length, plural, one {1 цифра} other {# цифри}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "ПИН кодовете не съвпадат.",
             "incorrect": "Текущият ПИН е неправилен."
         },
         "account": {
-            "length": "Името на портфейла не може да бъде по-дълго от {length, plural, one {1 символ} other {# символа}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Трябва да използвате последния портфейл, за да създадете нов.",
             "notEmpty": "Трябва да прехвърлите наличността преди да изтриете този портфейл.",
             "duplicate": "Портфейл с това име вече съществува.",
@@ -1097,7 +1104,7 @@
             "syncing": "Възникна грешка при синхронизиране на портфейлите."
         },
         "send": {
-            "addressLength": "Адресите трябва да съдържат {length, plural, one {1 символ} other {# символа}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Това е повече от текущата наличност.",
             "amountNoFloat": "Ако мерните единици са \"i\", не можете да използвате десетични стойности.",
             "amountInvalidFormat": "Въведеното не изглежда като валидно число.",
@@ -1140,9 +1147,9 @@
             "invalid": "Резервното копие не е разпознато.",
             "destination": "Невалиден път за резервно копие.",
             "mnemonic": "Фразата не е валидна.",
-            "seedTooShort": "Seed трябва да бъде от 81 символа, в момента {length, plural, one {е 1} other {са #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed съдържа само символите A-Z и 9",
-            "phraseWordCount": "Трябва да има 24 думи във фразата за възстановяване, в момента {length, plural, one {е 1} other {са #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Не разпозната дума \"{word}\" във Вашата фраза за възстановяване",
             "phraseCaseWord": "Думата \"{word}\" трябва да бъде с малки букви"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Форматирана стойност",
             "date": "Дата",
             "time": "Време"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

@@ -22,9 +22,10 @@
                 "nonFirst": "Začnime s menom vášho profilu."
             },
             "addMore": "Viac profilov viete pridať neskôr.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Vývojársky profil",
-                "info": "Pripojiť k verejným a súkromným IOTA sieťam"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Zabezpečujeme použité adresy...",
-            "body1": "Tento proces zaberie {minutes, plural, one {1 minútu} few {# minúty} other {# minút}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Počítač bude bežať na plnú kapacitu, medzitým môžete robiť niečo iné."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Počkajte prosím {time, plural, \none {1 sekundu} \nfew {# sekundy} \nother {# sekúnd}}",
-            "incorrectAttempts": "{attempts, plural, \none {1 nesprávny pokus} \nother {# nesprávnych pokusov}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Stakovanie",
-            "welcome": "Vitaj v staking prehľade",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Udalosť ešte nezačala",
                 "commencing": "Pre-staking otvorený",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Potvrdenie transakcie",
             "body": "Chcete poslať {amount} ",
-            "sendingFromStakedAccount": "Posielaš prevod z peňaženky, ktorá je práve stakovaná. Tento prevod odstakuje tvoje tokeny. Prevod pokojne vykonaj, avšak zvyšné tokeny bude potom treba znovu stakovať."
+            "sendingFromStakedAccount": "Posielaš prevod z peňaženky, ktorá je práve stakovaná. Tento prevod odstakuje tvoje tokeny. Prevod pokojne vykonaj, avšak zvyšné tokeny bude potom treba znovu stakovať.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Vyhľadávač zostatkov",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Od",
         "to": "Komu",
         "receiveFunds": "Prijať prostriedky",
+        "address": "Address",
         "myAddress": "Moja adresa",
         "shareAddress": "Zdieľať adresu",
         "yourAddress": "Vaša adresa",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "pred {time, plural,\n  one {1 rokom}\n  other {# rokmi}\n}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Prijímanie {{value}} na {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Počas aktualizácie sa vyskytla chyba, skúste to znova",
         "restartInstall": "Pre inštaláciu reštartujte",
         "calcMinutesRemaining": "Výpočet zostávajúcich minút...",
-        "minutesRemaining": "{minutes, plural, one {ostáva 1 minúta} \nfew {ostávajú # minúty} \nmany {ostáva # minút} \nother {ostáva # minút}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Skopírované do schránky",
         "accountsSynchronized": "Synchronizácia peňaženky je kompletná",
         "fundsAvailableSoon": "Vaše prostriedky budú čoskoro k dispozícii",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Názov vášho profilu nemôže byť dlhší ako {length, plural, one {1 znak}\n few {# znaky}\n other {# znakov}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Profil s týmto názvom už existuje.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "Toto heslo je podobné bežne používaným heslám.",
             "word": "Jedno slovo je ľahko uhadnuteľné.",
             "incorrect": "Vaše heslo je nesprávne.",
-            "length": "Vaše heslo nesmie byť dlhšie ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Váš PIN kód musí pozostávať z {length, plural, one {1 číslice} other {# číslic}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN kódy sa nezhodujú.",
             "incorrect": "Aktuálny PIN kód je nesprávny."
         },
         "account": {
-            "length": "Názov vašej peňaženky nemôže byť dlhší ako {length, plural, one {1 znak}\n few {# znaky}\n other {# znakov}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Musíte použiť svoju najnovšiu peňaženku pred vytvorením novej.",
             "notEmpty": "Pred odstránením tejto peňaženky musíte previesť svoj zostatok.",
             "duplicate": "Peňaženka s týmto názvom už existuje.",
@@ -1097,7 +1104,7 @@
             "syncing": "Pri synchronizovaní vašich peňaženiek sa vyskytla chyba."
         },
         "send": {
-            "addressLength": "Adresy by mali mať dĺžku {length, plural, one {1 znak} other {# znakov}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Suma je vyššia ako vaše dostupné prostriedky.",
             "amountNoFloat": "Ak sú jednotky `i`, nemôžete použiť desatinné miesta.",
             "amountInvalidFormat": "Zdá sa, že čiastka je neplatné číslo.",
@@ -1140,9 +1147,9 @@
             "invalid": "Súbor zálohy nebol rozpoznaný.",
             "destination": "Cieľ zálohy nebol platný.",
             "mnemonic": "Mnemotechnická pomôcka je neplatná.",
-            "seedTooShort": "Seed by mal byť dlhý 81 znakov, teraz {length, plural, one {je 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed môže obsahovať iba znaky A-Z alebo 9",
-            "phraseWordCount": "Vo vašej fráze obnovenia by malo byť 24 slov, teraz tam {length, plural, one {je 1} other {sú #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Neznáme slovo \"{word}\" vo vašej fráze obnovenia",
             "phraseCaseWord": "Slovo \"{word}\" ma byť napisané malými písmenami"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Dátum",
             "time": "Čas"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

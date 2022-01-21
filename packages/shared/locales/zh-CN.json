@@ -22,9 +22,10 @@
                 "nonFirst": "现在，让我们从您的配置名称开始。"
             },
             "addMore": "您可以稍后添加更多配置文件。",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "开发者模式",
-                "info": "连接到公共或私用IOTA网络"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "保护已花费的地址...",
-            "body1": "这个过程将需要 {minutes, plural, other {# 分钟}}",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "您的计算机将满负荷运行，请等待完成以后再处理其他的事情。"
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "质押",
-            "welcome": "欢迎来到质押仪表板",
+            "welcome": "欢迎来到质押仪表板!",
             "status": {
                 "upcoming": "活动尚未开始",
                 "commencing": "预约质押开始",
@@ -497,7 +498,7 @@
                 "ended": "质押已结束"
             },
             "summary": {
-                "stakedFunds": "质押资金"
+                "stakedFunds": "已质押资金"
             },
             "info": {
                 "upcomingSubheader": "活动尚未开始",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
-            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。"
+            "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -724,7 +726,7 @@
         },
         "stakingManager": {
             "title": "质押管理",
-            "description": "如果你质押了一个钱包，你发送给你自己的交易将使这些资金变成“质押”状态。你可以随时转移这些代币，但是你讲不能继续收到质押奖励。",
+            "description": "当你质押了一个钱包，你将会发送给你自己一笔交易，将这些资金变成“质押”状态。你可以随时转移这些代币，但是你将不能继续收到质押奖励。",
             "totalFundsStaked": "总质押资金",
             "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
             "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。"
@@ -739,13 +741,17 @@
         },
         "shimmer-info": {
             "title": "关于 Shimmer",
-            "body1": "恭喜您已经获得SMR代币作为分期奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
+            "body1": "恭喜您已经获得SMR代币作为质押奖励。Shimmer 是一个激励性的阶段性网络，用于测试IOTA上的重大升级。",
             "body2": "我们的目标是在2022年启动Shimmer。一旦网络启动，您的代币将可进行传输。"
         },
         "assembly-info": {
             "title": "关于Assembly",
             "body1": "恭喜您获得的 ASMB 代币作为质押奖励。Assembly 是一个在IOTA上部署的可缩放的智能合约的多链网络。",
             "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "从",
         "to": "到",
         "receiveFunds": "接收资金",
+        "address": "Address",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -1003,7 +1010,7 @@
         "staking": "质押",
         "unstaking": "正在解除质押",
         "notStaked": "未质押",
-        "stakedFunds": "质押资金",
+        "stakedFunds": "已质押资金",
         "unstakedFunds": "未质押的资金"
     },
     "dates": {
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 秒} other {# 秒}}",
-        "minute": "{time, plural, one {1 分钟} other {# 分钟}}",
-        "hour": "{time, plural, one {1 小时} other {# 小时}}",
-        "day": "{time, plural, one {1 天} other {# 天}}",
-        "week": "{time, plural, one {1 周} other {# 周}}",
-        "month": "{time, plural, one {1 月} other {# 月}}",
-        "year": "{time, plural, one {1 年} other {# 年}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
@@ -1034,7 +1041,7 @@
         "updateError": "更新过程中发生错误，请重试",
         "restartInstall": "重新启动后安装",
         "calcMinutesRemaining": "正在计算剩余分钟...",
-        "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
         "fundsAvailableSoon": "您的资金将很快变为可用资金。",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "同名配置文件已存在。",
             "delete": {
                 "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
@@ -1076,15 +1083,15 @@
             "similar": "这是一个与常用密码很类似的密码。",
             "word": "单个单词容易被猜测到。",
             "incorrect": "您的密码不正确。",
-            "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "您的 PIN 必须是 {length, plural, one {1 个数字} other {# 个数字}}。",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN 码不匹配",
             "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
             "duplicate": "此名称的钱包已经存在",
@@ -1097,7 +1104,7 @@
             "syncing": "钱包同步时出错。"
         },
         "send": {
-            "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "这大于您可用的余额。",
             "amountNoFloat": "如果单位是 `i`，你不能使用小数点。",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
@@ -1140,9 +1147,9 @@
             "invalid": "备份文件无法识别。",
             "destination": "备份路径无效。",
             "mnemonic": "助记符无效。",
-            "seedTooShort": "私钥种子的长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
-            "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "格式化值",
             "date": "日期",
             "time": "时间"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

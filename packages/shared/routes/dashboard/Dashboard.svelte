@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
-    import { Idle, Sidebar } from 'shared/components'
+    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
@@ -269,6 +269,9 @@
     <div class="flex flex-row w-full h-full">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <div class="flex flex-col w-full h-full">
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+            <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+        </div>
     </div>
 {/if}

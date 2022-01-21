@@ -22,9 +22,10 @@
                 "nonFirst": "Untuk saat ini, mari kita mulai dengan nama profil Anda."
             },
             "addMore": "Anda dapat menambahkan profil lainnya nanti.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profil pengembang",
-                "info": "Menghubungkan ke publik dan jaringan IOTA pribadi"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Mengamankan alamat yang dihabiskan...",
-            "body1": "#Proses ini akan memakan waktu {minutes, plural, one {1 menit} other {# menit}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Komputer Anda akan berjalan dengan kapasitas penuh, Anda mungkin ingin melakukan sesuatu yang lain sambil menunggu ini selesai."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Harap tunggu {time, plural,one {1 detik}other {# detik}}",
-            "incorrectAttempts": "{attempts, plural,one {1 upaya gagal}other {# upaya gagal}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Selamat datang di dasbor staking",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event belum dimulai",
                 "commencing": "Pre-staking terbuka",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Konfirmasi transaksi",
             "body": "Anda akan mengirim {amount} kepada",
-            "sendingFromStakedAccount": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya."
+            "sendingFromStakedAccount": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Pencari saldo",
@@ -746,6 +748,10 @@
             "title": "Tentang Assembly",
             "body1": "Selamat Anda telah mendapatkan ASMB token sebagai hadiah staking. Assembly adalah sebuah jaringan Multi-chain untuk meluncurkan skalabel smart contract pada IOTA.",
             "body2": "Kami menargetkan untuk meluncurkan Assembly pada 2022. Token Anda akan dapat Anda transfer setelah jaringan diluncurkan."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Dari",
         "to": "Ke",
         "receiveFunds": "Terima dana",
+        "address": "Address",
         "myAddress": "Alamat Saya",
         "shareAddress": "Bagikan alamat",
         "yourAddress": "Alamat Anda",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# tahun} other {# tahun}} yang lalu"
     },
     "times": {
-        "second": "{time, plural, one {1 detik} other {# detik}}",
-        "minute": "{time, plural, one {1 menit} other {# menit}}",
-        "hour": "{time, plural, one {1 jam} other {# jam}}",
-        "day": "{time, plural, one {1 hari} other {# hari}}",
-        "week": "{time, plural, one {1 minggu} other {# minggu}}",
-        "month": "{time, plural, one {1 bulan} other {# bulan}}",
-        "year": "{time, plural, one {1 tahun} other {# tahun}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Menerima {{value}} ke {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Terjadi kesalahan selama pembaruan. Silakan mencoba kembali",
         "restartInstall": "Start ulang untuk menginstal",
         "calcMinutesRemaining": "Menghitung menit yang tersisa...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Salin ke papan klip",
         "accountsSynchronized": "Sinkronisasi dompet selesai",
         "fundsAvailableSoon": "Dana Anda akan segera tersedia",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Nama profil Anda tidak boleh lebih dari {length, plural, one {1 karakter} other {# karakter}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Profil dengan nama ini sudah ada.",
             "delete": {
                 "nonEmptyAccounts": "Anda harus mentransfer semua saldo sebelum Anda dapat menghapus profil Anda."
@@ -1076,15 +1083,15 @@
             "similar": "Ini mirip dengan kata sandi yang umum digunakan.",
             "word": "Satu kata mudah ditebak.",
             "incorrect": "Kata sandi anda salah.",
-            "length": "Nama profil Anda tidak boleh lebih dari {length, plural, one {1 karakter} other {# karakter}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "kode pin Anda harus terdiri dari {length, plural, one {1 digit} other {# digit}} ",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN tidak sesuai.",
             "incorrect": "Kata sandi Anda saat ini salah."
         },
         "account": {
-            "length": "Nama dompet Anda tidak dapat lebih panjang dari {length, plural, one {1 karakter} other {# karakter}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Anda harus menggunakan akun Anda yang terkini sebelum membuat yang baru.",
             "notEmpty": "Anda harus mentransfer saldo Anda sebelum menghapus dompet/akun ini.",
             "duplicate": "Dompet/akun dengan nama ini sudah ada.",
@@ -1097,7 +1104,7 @@
             "syncing": "Terjadi kesalahan dalam mensinkronisasi dompet/akun Anda."
         },
         "send": {
-            "addressLength": "Alamat harus terdiri dari {length, plural, one {1 karakter} other {# karakter}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Ini lebih besar dari saldo Anda yang tersedia.",
             "amountNoFloat": "Jika unitnya adalah `i` Anda tidak dapat menggunakan tempat desimal.",
             "amountInvalidFormat": "Jumlah tersebut sepertinya merupakan angka yang tidak valid.",
@@ -1140,9 +1147,9 @@
             "invalid": "Jalur file cadangan tidak ditentukan.",
             "destination": "Tujuan cadangan tidak diizinkan.",
             "mnemonic": "Email ini tidak valid.",
-            "seedTooShort": "Benih harus sepanjang 81 karakter, tetapi memang demikian {length, plural, one {1} other {#}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed hanya boleh mengandung karakter A-Z atau 9",
-            "phraseWordCount": "Seharusnya ada 24 kata dalam frasa pemulihan Anda, saat ini ada {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Kata \"{word}\" yang tidak dikenal dalam frasa pemulihan Anda",
             "phraseCaseWord": "Kata \"{word}\" harus menggunakan huruf kecil"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Nilai terformat",
             "date": "Tanggal",
             "time": "Waktu"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

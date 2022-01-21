@@ -22,9 +22,10 @@
                 "nonFirst": "まずは 、あなたのプロフィール名から始めましょう"
             },
             "addMore": "後でプロフィールを追加できます",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "開発者プロフィール",
-                "info": "パブリックおよびプライベートIOTAネットワークに接続します"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "使用済みアドレスを保護しています...",
-            "body1": "このプロセスには {minutes, plural, one {1 分} other {# 分}}かかります.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "この作業中、コンピューターはフル稼働します。作業完了まで、時間を要するため、お待ちいただく間、何か他のことをされて構いません。"
         },
         "transferFragmentedFunds": {
@@ -310,16 +311,16 @@
                 "description": ""
             },
             "theme": {
-                "title": "テーマ",
+                "title": "テーマ：",
                 "description": "",
                 "advice": "Fireflyアプリケーションを再起動して、システムテーマの変更を有効にします"
             },
             "language": {
-                "title": "言語",
+                "title": "言語:",
                 "description": ""
             },
             "currency": {
-                "title": "通貨",
+                "title": "通貨：",
                 "description": "残高変換を調整し、チャートオプションを更新します"
             },
             "notifications": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "お待ちください {time, plural, other {# 秒}}",
-            "incorrectAttempts": "{attempts, plural, other {# 間違った attempt}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "ステーキング",
-            "welcome": "ステーキングダッシュボードへようこそ",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "イベントは開始されていません",
                 "commencing": "事前ステーキングオープン",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "取引を承認する",
             "body": "{amount} を送金しようとしています",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "残高を検索する",
@@ -746,6 +748,10 @@
             "title": "Assemblyについて",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "From",
         "to": "To",
         "receiveFunds": "資金を受け取る",
+        "address": "Address",
         "myAddress": "自分のアドレス",
         "shareAddress": "アドレスを共有",
         "yourAddress": "あなたのアドレス",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
     },
     "times": {
-        "second": "{time, plural, one {1 秒} other {# 秒}}",
-        "minute": "{time, plural, one {1 分} other {# 分}}",
-        "hour": "{time, plural, one {1 時間} other {# 時間}}",
-        "day": "{time, plural, one {1 日} other {# 日}}",
-        "week": "{time, plural, one {1 週間} other {# 週間}}",
-        "month": "{time, plural, one {1 ヶ月} other {# ヶ月}}",
-        "year": "{time, plural, one {1 年} other {# 年}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{account}}に{{value}}を着金中",
@@ -1034,7 +1041,7 @@
         "updateError": "更新中にエラーが発生しました。もう一度やり直してください。",
         "restartInstall": "再起動してインストール",
         "calcMinutesRemaining": "残り時間を計算しています...",
-        "minutesRemaining": "{minutes, plural, one { 残り1分 } other {# 残り分 }}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "クリップボードにコピーしました",
         "accountsSynchronized": "ウォレット同期が完了しました",
         "fundsAvailableSoon": "資金はまもなく利用可能になります",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "プロフィール名は{length, plural, one {1 文字} other {# 文字}}より長くすることはできません。",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "この名前のプロフィールは既に存在します。",
             "delete": {
                 "nonEmptyAccounts": "プロフィールを削除する前に、すべての残高を転送する必要があります。"
@@ -1076,15 +1083,15 @@
             "similar": "このパスワードはよく使われるパスワードに似ています。",
             "word": "1つの単語によるパスワードは簡単に推測されてしまいます。",
             "incorrect": "パスワードが正しくありません。",
-            "length": "パスワードは{length, plural, one {1 文字} other {#文字 }}より長くすることはできません。"
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "PINは{length, plural, one {1 桁} other {# 桁}} でなければなりません。",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN が一致しません",
             "incorrect": "PINが正しくありません。"
         },
         "account": {
-            "length": "ウォレット名は{length, plural, one {1 文字} other {#文字 }}より長くすることはできません。",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "新しいウォレットを作成する前に、最新のウォレットを使用する必要があります。",
             "notEmpty": "このウォレットを削除する前に残高を転送する必要があります。",
             "duplicate": "この名前のウォレットは既に存在して います。",
@@ -1097,7 +1104,7 @@
             "syncing": "ウォレットの同期中にエラーが発生しました。"
         },
         "send": {
-            "addressLength": "アドレスは {length, plural, one {1 文字} other {# 文字}}でなければなりません。",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "この金額は、利用可能な残高を超えています。",
             "amountNoFloat": "単位が `i` の場合、小数点以下は使用できません。",
             "amountInvalidFormat": "金額には無効な数字があるようです。",
@@ -1140,9 +1147,9 @@
             "invalid": "バックアップファイルが認識されませんでした。",
             "destination": "バックアップ先が無効です。",
             "mnemonic": "ニーモニックが無効です。",
-            "seedTooShort": "シードの長さは81文字である必要があります, これ は{length, plural, one { です1} other { #です}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "シードはA〜Zまたは数字の9のみを含める必要があります",
-            "phraseWordCount": "復元フレーズには24単語が含まれているはずですが、現在は {length, plural, one {1です} other {#です}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "復元フレーズの単語「{word}」が認識されません",
             "phraseCaseWord": "単語「{word}」は小文字でなければなりません"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "フォーマットされた値",
             "date": "日付",
             "time": "時間"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

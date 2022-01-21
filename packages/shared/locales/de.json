@@ -22,14 +22,15 @@
                 "nonFirst": "Beginnen wir zunächst mit deinem Profilnamen."
             },
             "addMore": "Du kannst später weitere Profile hinzufügen.",
+            "advancedOptions": "Erweiterte Optionen",
             "developer": {
                 "label": "Entwicklerprofil",
-                "info": "Mit öffentlichen und privaten IOTA-Netzwerken verbinden"
+                "info": "Mit dem Devnet oder einem eigenen Netzwerk verbinden"
             }
         },
         "setup": {
             "title": "Richte eine Wallet ein",
-            "chrysalisTitle": "Chrysalis Netzwerk Update",
+            "chrysalisTitle": "Chrysalis Netzwerk-Update",
             "chrysalisBody": "Ab dem 21. April 2021 können Benutzer ihre Token in das neue Chrysalis-Netzwerk migrieren. Wir empfehlen dir, deine bestehenden Token so schnell wie möglich zu migrieren.",
             "learnMore": "Erfahre mehr über die Migration"
         },
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Willkommen im Staking-Dashboard",
+            "welcome": "Willkommen im Staking-Dashboard!",
             "status": {
                 "upcoming": "Event hat noch nicht begonnen",
                 "commencing": "Pre-Staking möglich",
@@ -515,7 +516,7 @@
             },
             "airdrops": {
                 "holding": "verbleibend",
-                "commencing": "Bis das Staking begonnen hat",
+                "commencing": "Bis das Staking beginnt",
                 "collectedRewards": "Gesammelte Rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -547,7 +548,7 @@
         },
         "backup": {
             "title": "Letztes Backup: {date}",
-            "lastBackup": "Dein letztes Backup ist vom {date}",
+            "lastBackup": "Letztes Backup erstellt: {date}",
             "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, damit du eine Sicherung deiner Wallets und Transaktionen hast.",
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Kein Backup erstellt",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Transaktion bestätigen",
             "body": "Du sendest {amount} an",
-            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst."
+            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
+            "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen."
         },
         "balanceFinder": {
             "title": "Guthabensuche",
@@ -658,7 +660,7 @@
         },
         "snapshot": {
             "title": "Laufendes Netzwerk-Upgrade",
-            "body": "Das Chrysalis Netzwerk Upgrade hat begonnen.",
+            "body": "Das Chrysalis Netzwerk-Upgrade hat begonnen.",
             "bodyMigration": "Migration ist deaktiviert, bis sie abgeschlossen ist.",
             "bodyFirefly": "Firefly ist deaktiviert, bis es abgeschlossen ist. Token Migration wird auch danach möglich sein."
         },
@@ -746,6 +748,10 @@
             "title": "Über Assembly",
             "body1": "Herzlichen Glückwunsch! Für das Staking hast du ASMB Token erhalten. Assembly ist ein Multi-Chain Netzwerk, welches es ermöglicht, skalierbare Smart-Contracts auf IOTA bereitzustellen.",
             "body2": "Unser Ziel ist es, Assembly in 2022 zu starten. Deine Token werden verfügbar sein, sobald das Netzwerk startet."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Du erstellst ein Entwicklerprofil",
+            "body": "Du wirst standardmäßig mit dem Chrysalis-Devnet verbunden, kannst das Netzwerk jedoch manuell wechseln. Fahre nur fort, wenn du weißt, was du tust."
         }
     },
     "charts": {
@@ -863,7 +869,7 @@
         "howItWorks": "Wie es funktioniert",
         "learnAboutStaking": "Erfahre mehr über Staking",
         "stake": "Staken",
-        "unstake": "Beenden",
+        "unstake": "Staking aufheben",
         "stakeFunds": "Guthaben staken",
         "manageStake": "Staking verwalten",
         "merge": "Staken",
@@ -899,6 +905,7 @@
         "from": "Von",
         "to": "An",
         "receiveFunds": "Guthaben empfangen",
+        "address": "Adresse",
         "myAddress": "Meine Adresse",
         "shareAddress": "Adresse teilen",
         "yourAddress": "Deine Adresse",
@@ -1079,7 +1086,7 @@
             "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein."
         },
         "pincode": {
-            "length": "Deine PIN muss noch {length, plural, one {1 Ziffer} other {# Ziffern}} länger sein.",
+            "length": "Deine PIN muss {length, plural, one {1 Ziffer} other {# Ziffern}} lang sein.",
             "match": "Die PINs stimmen nicht überein.",
             "incorrect": "Deine PIN ist nicht korrekt."
         },
@@ -1097,7 +1104,7 @@
             "syncing": "Beim Synchronisieren deiner Wallets ist ein Fehler aufgetreten."
         },
         "send": {
-            "addressLength": "Adressen sollten noch {length, plural, one {1 Zeichen} other {# Zeichen}} länger sein.",
+            "addressLength": "Adressen sollten {length, plural, one {1 Zeichen} other {# Zeichen}} lang sein.",
             "amountTooHigh": "Das übersteigt dein verfügbares Guthaben.",
             "amountNoFloat": "Wenn Einheiten `i` sind, können keine Dezimalstellen verwendet werden.",
             "amountInvalidFormat": "Der Betrag scheint eine ungültige Zahl zu sein.",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatierter Wert",
             "date": "Datum",
             "time": "Uhrzeit"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Du verwendest derzeit ein Entwicklerprofil und bist mit {networkName} verbunden"
         }
     }
 }

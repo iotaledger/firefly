@@ -22,9 +22,10 @@
                 "nonFirst": "Laten we voor nu beginnen met de naam van uw profiel."
             },
             "addMore": "Je kunt later meer profielen toevoegen.\n",
+            "advancedOptions": "Geavanceerde opties",
             "developer": {
                 "label": "Ontwikkelaarsprofiel",
-                "info": "Verbinding maken met publieke en private IOTA-netwerken"
+                "info": "Verbinding maken met het devnet of een privénetwerk"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Veiligstellen uitgegeven adressen...",
-            "body1": "Dit proces duurt {minutes, plural, one {1 minuut} other {# minuten}}.",
+            "body1": "Dit proces zal {minutes, plural, one {# minuut} other {# minuten}} duren.",
             "body2": "Uw computer zal op volle capaciteit werken, u wilt misschien iets anders doen terwijl u wacht tot het klaar is."
         },
         "transferFragmentedFunds": {
@@ -440,7 +441,7 @@
             }
         },
         "login": {
-            "pleaseWait": "Gelieve {time, plural, one {1 seconde} other {# seconden}} te wachten",
+            "pleaseWait": "Wacht alsjeblieft {time, plural, one {# seconde} other {# seconden}}",
             "incorrectAttempts": "{attempts, plural, one {1 incorrecte poging} other {# incorrecte pogingen}}"
         },
         "dashboard": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staken",
-            "welcome": "Welkom op het staking dashboard",
+            "welcome": "Welkom bij het staking dashboard!",
             "status": {
                 "upcoming": "Evenement nog niet begonnen",
                 "commencing": "Pre-staking geopend",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "U staat op het punt {amount} te sturen naar",
-            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken."
+            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
+            "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest."
         },
         "balanceFinder": {
             "title": "Saldo zoeker",
@@ -746,6 +748,10 @@
             "title": "Over Assembly",
             "body1": "Gefeliciteerd, u heeft ASMB tokens verdiend als stake beloning. Assembly is een multi-chain netwerk voor het inzetten van schaalbare smart contracts op IOTA.",
             "body2": "We streven naar een launch van Assembly in 2022. Uw tokens zullen beschikbaar zijn zodra het netwerk gelanceerd is."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Je maakt een ontwikkelaarsprofiel aan",
+            "body": "Je wordt standaard verbonden met het Chrysalis Devnet en kunt handmatig van netwerk wisselen. Ga alleen verder als je weet wat je doet."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Van",
         "to": "Naar",
         "receiveFunds": "Geld ontvangen",
+        "address": "Adres",
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jaren}} geleden"
     },
     "times": {
-        "second": "{time, plural, one {1 seconde} other {# seconden}}",
-        "minute": "{time, plural, one {1 minuut} other {# minuten}}",
-        "hour": "{time, plural, one {1 uur} other {# uur}}",
-        "day": "{time, plural, one {1 dag} other {# dagen}}",
-        "week": "{time, plural, one {1 week} other {# weken}}",
-        "month": "{time, plural, one {1 maand} other {# maanden}}",
-        "year": "{time, plural, one {1 jaar} other {# jaar}}"
+        "second": "{time, plural, one {# seconde} other {# seconden}}",
+        "minute": "{time, plural, one {# minuut} other {# minuten}}",
+        "hour": "{time, plural, one {# uur} other {# uur}}",
+        "day": "{time, plural, one {# dag} other {# dagen}}",
+        "week": "{time, plural, one {# week} other {# weken}}",
+        "month": "{time, plural, one {# maand} other {# maanden}}",
+        "year": "{time, plural, one {# jaar} other {# jaar}}"
     },
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Uw profielnaam kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}.",
+            "length": "Je profielnaam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "duplicate": "Een account met deze naam bestaat al.",
             "delete": {
                 "nonEmptyAccounts": "U moet eerst alle saldo's overdragen voordat u uw profiel kunt verwijderen."
@@ -1076,15 +1083,15 @@
             "similar": "Dit is vergelijkbaar met een veelgebruikt wachtwoord.",
             "word": "Een enkel woord is makkelijk te raden.",
             "incorrect": "Uw wachtwoord is niet correct.",
-            "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
+            "length": "Je wachtwoord kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}."
         },
         "pincode": {
-            "length": "Uw pincode moet {length, plural, one {1 cijfer} other {# cijfers}} lang zijn.",
+            "length": "Je pincode moet {length, plural, one {# cijfer} other {# cijfers}} lang zijn.",
             "match": "Pincodes komen niet overeen.",
             "incorrect": "Uw huidige pincode is onjuist."
         },
         "account": {
-            "length": "Uw portemonnee naam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Je wallet naam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "U moet uw laatste portemonnee gebruiken voordat u een nieuwe aanmaakt.",
             "notEmpty": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
             "duplicate": "Een portemonnee met deze naam bestaat al.",
@@ -1142,7 +1149,7 @@
             "mnemonic": "Het mnemonic is niet geldig.",
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
-            "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
+            "phraseWordCount": "Er zouden 24 woorden in uw herstelzin moeten zitten, op dit moment {length, plural, one {is er slechts 1} other {zijn er slechts #}}.",
             "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
             "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Opgemaakte waarde",
             "date": "Datum",
             "time": "Tijd"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Je gebruikt momenteel een ontwikkelaarsprofiel en bent verbonden met {networkName}"
         }
     }
 }

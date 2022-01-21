@@ -22,9 +22,10 @@
                 "nonFirst": "La oss nå starte med profilnavnet ditt."
             },
             "addMore": "Du kan legge til flere profiler senere.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Utviklerprofil",
-                "info": "Koble til offentlige og private IOTA-nettverk"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Sikrer brukte adresser...",
-            "body1": "Denne prosessen vil ta {minutes, plural, one {1 minutt} other {# minutter}}.",
+            "body1": "Denne prosessen vil ta {minutes, plural, one {# minutt} other {# minutter}}.",
             "body2": "Datamaskinen din vil kjøre med full kapasitet, du kan kanskje ønske å gjøre noe annet mens du venter på at dette skal fullføres."
         },
         "transferFragmentedFunds": {
@@ -441,7 +442,7 @@
         },
         "login": {
             "pleaseWait": "Vennligst vent {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 feil forsøk} other {# ugyldige forsøk}}"
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,10 +488,10 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Velkommen til dashbord for staking",
+            "welcome": "Velkommen til dashbord for staking!",
             "status": {
                 "upcoming": "Staking ikke startet",
-                "commencing": "Pre-staking åpen",
+                "commencing": "Forhånds-staking åpen",
                 "holdingActive": "Staking pågår",
                 "holdingInactive": "Staking åpen",
                 "inactive": "Ingen staking oppdaget",
@@ -502,7 +503,7 @@
             "info": {
                 "upcomingSubheader": "Staking har ikke startet",
                 "upcomingHeader": "Sjekk igjen senere",
-                "commencingSubheader": "Klargjør til staking",
+                "commencingSubheader": "Gjør deg klar for staking",
                 "commencingHeader": "Forhånds-stake dine tokens!",
                 "holdingSubheaderHolding": "Opptjener nå staking belønninger",
                 "holdingSubheaderNotHolding": "Få belønninger ved å stake IOTA",
@@ -515,8 +516,8 @@
             },
             "airdrops": {
                 "holding": "Gjenstående",
-                "commencing": "Inntil staking starter",
-                "collectedRewards": "Innsamlede belønninger",
+                "commencing": "Til stakingen starter",
+                "collectedRewards": "Opptjent belønning",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly er et frittstående, svært skalerbart multi-chain nettverk for å bygge opp og utnytte sammensatte smartkontrakter. Assembly er fremtiden for web3. "
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bekreft transaksjon",
             "body": "Du er i ferd med å sende {amount} til",
-            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens."
+            "sendingFromStakedAccount": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Saldo-finner",
@@ -723,8 +725,8 @@
             "ok": "OK, jeg forstår"
         },
         "stakingManager": {
-            "title": "Staking administrering",
-            "description": "Når du staker en lommebok, sendes det en transaksjon til deg selv som markerer midlene dine som \"staket\". Du kan overføre dine tokens til en hver tid, men du vil da ikke fortsette å motta opptjening fra staking.",
+            "title": "Staking-administrasjon",
+            "description": "Når du staker en lommebok, sendes det en transaksjon til deg selv som markerer midlene dine som \"staket\". Du kan overføre dine tokens til en hver tid, men du vil da ikke fortsette å motta belønninger fra staking.",
             "totalFundsStaked": "Totalt antall stakede midler",
             "stakedSuccessfully": "Dine tokens har blitt staket for {account}.",
             "unstakedSuccessfully": "Staking av tokens er avsluttet for {account}."
@@ -733,7 +735,7 @@
             "title": "Airdrop-deltakelse",
             "subtitleStake": "Du er i ferd med å stake",
             "subtitleMerge": "Du er i ferd med å sette sammen",
-            "bodyStake": "Dersom du ikke ønsker å delta i airdrop for begge tokens, kan du velge dette under. Du kan endre dette ved å stoppe og starte staking til en hver tid.",
+            "bodyStake": "Dersom du ikke ønsker å delta i airdrop for begge tokens, kan du velge dette nedenfor. Du kan endre dette ved å stoppe og starte staking til en hver tid.",
             "bodyMerge": "Dine midler vil bli staket for {airdrop}. For å endre hvilken airdrop du ønsker å delta i, stopp staking av denne lommeboken og start staking på nytt.",
             "estimatedAirdrop": "Estimert belønning"
         },
@@ -746,6 +748,10 @@
             "title": "Om Assembly",
             "body1": "Gratulerer, du har tjent ASMB-tokens som belønning for staking. Assembly er et multi-kjede-nettverk for skalerbare smartkontrakter på IOTA.",
             "body2": "Vi sikter oss inn på å lansere Assembly i 2022. Dine tokens vil bli tilgjengelig å transfere når nettverket lanseres."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Fra",
         "to": "Til",
         "receiveFunds": "Motta midler",
+        "address": "Address",
         "myAddress": "Min adresse",
         "shareAddress": "Del en adresse",
         "yourAddress": "Din adresse",
@@ -966,7 +973,7 @@
         "passwordUpdating": "Oppdaterer passord...",
         "passwordSuccess": "Oppdatering av passord var vellykket",
         "passwordFailed": "Oppdatering av passord mislyktes",
-        "syncing": "Syncing",
+        "syncing": "Synkroniserer",
         "syncingAccounts": "Synkroniserer lommeboken...",
         "exportingStronghold": "Eksporterer Stronghold...",
         "exportingStrongholdSuccess": "Eksporten av Stronghold var vellykket",
@@ -999,7 +1006,7 @@
         "unknown": "Ukjent",
         "none": "Ingen",
         "staked": "Staket",
-        "unstaked": "Avsluttet staking",
+        "unstaked": "Ikke staket",
         "staking": "Staking",
         "unstaking": "Avslutter staking",
         "notStaked": "Ikke staket",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Det oppsto en feil under oppdateringen, vennligst prøv igjen",
         "restartInstall": "Start på nytt for å installere",
         "calcMinutesRemaining": "Beregner minutter som gjenstår...",
-        "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av lommebok fullført",
         "fundsAvailableSoon": "Dine midler vil bli tilgjengelig innen kort tid",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Profilnavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "En profil med dette navnet eksisterer allerede.",
             "delete": {
                 "nonEmptyAccounts": "Du må overføre hele balansen før du kan slette profilen din."
@@ -1076,15 +1083,15 @@
             "similar": "Dette ligner på et ofte brukt passord.",
             "word": "Ett enkelt ord er enkelt å gjette.",
             "incorrect": "Passordet er feil.",
-            "length": "Passordet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "PIN-koden din må bestå av {length, plural, one {1 tall} other {# tall}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-kodene samsvarer ikke.",
             "incorrect": "Gjeldende pinkode er feil."
         },
         "account": {
-            "length": "Lommeboknavnet ditt kan ikke være lenger enn {length, plural, one {1 tegn} other {# tegn}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Du må bruke den nyeste lommeboken før du lager en ny.",
             "notEmpty": "Du må overføre midlene før du sletter denne lommeboken.",
             "duplicate": "En lommebok med dette navnet eksisterer allerede.",
@@ -1097,7 +1104,7 @@
             "syncing": "Det oppstod en feil ved synkronisering av lommeboken din."
         },
         "send": {
-            "addressLength": "Adresser må bestå av {length, plural, one {1} other {#}} tegn.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Dette er mer enn din nåværende balanse.",
             "amountNoFloat": "Om enheter er `i` kan du ikke bruke desimaler.",
             "amountInvalidFormat": "Beløpet ser ut til å være et ugyldig tall.",
@@ -1140,9 +1147,9 @@
             "invalid": "Sikkerhetskopifilen ble ikke gjenkjent.",
             "destination": "Målet for sikkerhetskopieringen var ikke gyldig.",
             "mnemonic": "Huskeregelen er ugyldig.",
-            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {inneholder nå 1} other {inneholder nå #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Hovednøkkelen skal kun inneholde bokstavene A-Z og tallet 9.",
-            "phraseWordCount": "Det skal være 24 ord i gjenopprettingsfrasen din, akkurat nå er det {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din.",
             "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
         },
@@ -1181,7 +1188,7 @@
             "http": "Bruk noder over HTTP lar trafikken være ukryptert og kan utgjøre en sikkerhetsrisiko."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noAccounts": "Du har ingen IOTA."
         }
     },
     "tooltips": {
@@ -1199,8 +1206,8 @@
                 "body": "Prøv igjen senere. Stakingen har ikke startet."
             },
             "commencing": {
-                "title": "Pre-stakingen er nå åpen",
-                "body": "Forhånds-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinst hvert 10. sekund."
+                "title": "Forhånds-stakingen er nå åpen",
+                "body": "Forhånds-stake dine tokens. Når stakingen starter, vil du automatisk motta gevinster hvert 10. sekund."
             },
             "activeHolding": {
                 "title": "Stakingen er nå i gang",
@@ -1216,8 +1223,8 @@
             },
             "ended": {
                 "title": "Stakingen er nå avsluttet",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+                "bodyAboveRewardMin": "Assembly- og Shimmer-gevinster blir distribuert til lommeboken din når hvert av disse nettverkene lanseres.",
+                "bodyBelowRewardMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for airdrop belønninger."
             }
         },
         "partiallyStakedFunds": {
@@ -1229,13 +1236,13 @@
         "stakingMinRewards": {
             "title": "Under minimumsverdi for gevinst",
             "titleMinBalance": "{amount} minimum saldo påkrevd",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "bodyMinBalance": "Denne lommeboken har ikke nok IOTA-tokens til å nå den laveste mulige airdrop-belønningen, og kan derfor ikke stakes.",
             "continue": "Vennligst fortsett å stake i ytterligere {duration}.",
             "bodyBelowMin": "Denne lommeboken har ikke nådd minimum belønningsverdi for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "Du må fortsette å stake i {duration} for å oppnå minsteverdi.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyWillNotReachMin": "Du vil ikke nå minimumsbelønningen i løpet av gjenværende staking periode med mindre du staker mer IOTA.",
+            "bodyDidNotReachMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Denne lommeboken har ikke nok IOTA tokens til å nå den minimale airdrop belønningen for {airdrop}."
         }
     },
     "exports": {
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatert verdi",
             "date": "Dato",
             "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

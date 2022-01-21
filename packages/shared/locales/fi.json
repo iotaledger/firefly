@@ -22,9 +22,10 @@
                 "nonFirst": "Aloitetaan nyt profiilisi nimellä."
             },
             "addMore": "Voit tehdä lisää profiileja myöhemmin.",
+            "advancedOptions": "Lisäasetukset",
             "developer": {
                 "label": "Kehittäjäprofiili",
-                "info": "Yhdistä julkisiin ja yksityisiin IOTA-verkkoihin"
+                "info": "Yhdistä devnetiin tai yksityiseen verkkoon"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Turvataan käytettyjä osoitteita...",
-            "body1": "Tämä prosessi kestää {minutes, plural, one {1 minuutin} other {# minuuttia}}.",
+            "body1": "Tämä prosessi kestää {minutes, plural, one {# minuutin} other {# minuuttia}}.",
             "body2": "Tietokoneesi tulee toimimaan täydellä teholla, saatat haluta tehdä jotain muuta sillä aikaa, kun odotat tämän valmistumista."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Odota {time, plural, one {1 sekunti} other {# sekuntia}}",
-            "incorrectAttempts": "{attempts, plural, one {1 virheellinen yritys} other {# virheellistä yritystä}}"
+            "pleaseWait": "Odota {time, plural, one {# sekunti} other {# sekuntia}}",
+            "incorrectAttempts": "{attempts, plural, one {# virheellinen yritys} other {# virheellistä yritystä}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Tervetuloa staking-käyttöliittymään",
+            "welcome": "Tervetuloa staking-käyttöliittymään!",
             "status": {
                 "upcoming": "Tapahtuma ei ole alkanut",
                 "commencing": "Pre-staking avoinna",
@@ -497,13 +498,13 @@
                 "ended": "Staking päättynyt"
             },
             "summary": {
-                "stakedFunds": "Staketetut varat"
+                "stakedFunds": "Staketut varat"
             },
             "info": {
                 "upcomingSubheader": "Tapahtuma ei ole alkanut",
                 "upcomingHeader": "Katso myöhemmin uudelleen",
                 "commencingSubheader": "Valmistaudu stakingiin",
-                "commencingHeader": "Pre-staketa tokenisi!",
+                "commencingHeader": "Pre-stakea tokenisi!",
                 "holdingSubheaderHolding": "Ansaitaan staking-palkkioita",
                 "holdingSubheaderNotHolding": "Ansaitse palkkioita stakeamalla IOTA:a",
                 "holdingHeaderHolding": "{duration} jäljellä",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Vahvista transaktio",
             "body": "Olet lähettämässä {amount} osoitteeseen",
-            "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen."
+            "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
+            "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
@@ -746,6 +748,10 @@
             "title": "Tietoja Assemblystä",
             "body1": "Onnittelut, olet ansainnut ASMB-tokeneita staking-palkkiona. Assembly on moniketjuverkko skaalautuvien älysopimusten käyttöönottoon IOTA:lla.",
             "body2": "Tavoitteenamme on käynnistää Assembly vuonna 2022. Sinun tokenisi tulevat saataville siirrettäväksi, kun verkko käynnistetään."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Olet luomassa kehittäjäprofiilia",
+            "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Mistä",
         "to": "Mihin",
         "receiveFunds": "Vastaanota varoja",
+        "address": "Osoite",
         "myAddress": "Osoitteeni",
         "shareAddress": "Jaa osoite",
         "yourAddress": "Osoitteesi",
@@ -988,7 +995,7 @@
         "receivedTo": "Vastaanotettu lompakkoon {account}",
         "sentFrom": "Lähetetty lompakosta {account}",
         "stakedFor": "Stakettu tilille {account}",
-        "unstakedFor": "Stake lopetettu tilille {account}",
+        "unstakedFor": "Ei staketut tilille {account}",
         "votedFor": "Äänestetty tilille {account}",
         "unvotedFor": "Äänestys lopetettu tilille {account}",
         "receiving": "Vastaanotetaan",
@@ -999,11 +1006,11 @@
         "unknown": "Tuntematon",
         "none": "Ei mikään",
         "staked": "Stakettu",
-        "unstaked": "Stake lopetettu",
+        "unstaked": "Ei stakettu",
         "staking": "Staking",
         "unstaking": "Lopetetaan staking",
         "notStaked": "Ei stakettu",
-        "stakedFunds": "Staketetut varat",
+        "stakedFunds": "Staketut varat",
         "unstakedFunds": "Varat ilman stakea"
     },
     "dates": {
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# vuosi} other {# vuotta}} sitten"
     },
     "times": {
-        "second": "{time, plural, one {1 sekunti} other {# sekuntia}}",
-        "minute": "{time, plural, one {1 minuutti} other {# minuuttia}}",
-        "hour": "{time, plural, one {1 tunti} other {# tuntia}}",
-        "day": "{time, plural, one {1 päivä} other {# päivää}}",
-        "week": "{time, plural, one {1 viikko} other {# viikkoa}}",
-        "month": "{time, plural, one {1 kuukausi} other {# kuukautta}}",
-        "year": "{time, plural, one {1 vuosi} other {# vuotta}}"
+        "second": "{time, plural, one {# sekunti} other {# sekuntia}}",
+        "minute": "{time, plural, one {# minuutti} other {# minuuttia}}",
+        "hour": "{time, plural, one {# tunti} other {# tuntia}}",
+        "day": "{time, plural, one {# päivä} other {# päivää}}",
+        "week": "{time, plural, one {# viikko} other {# viikkoa}}",
+        "month": "{time, plural, one {# kuukausi} other {# kuukautta}}",
+        "year": "{time, plural, one {# vuosi} other {# vuotta}}"
     },
     "notifications": {
         "valueTx": "Vastaanotetaan {{value}} lompakkoon {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Päivityksen aikana tapahtui virhe, yritä uudelleen",
         "restartInstall": "Käynnistä uudelleen asentaaksesi",
         "calcMinutesRemaining": "Lasketaan jäljellä olevia minuutteja...",
-        "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
+        "minutesRemaining": "{minutes, plural, one {# minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
         "accountsSynchronized": "Lompakon synkronointi valmis",
         "fundsAvailableSoon": "Varasi ovat käytettävissä pian",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Profiilisi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
+            "length": "Profiilisi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
             "duplicate": "Samanniminen profiili on jo olemassa.",
             "delete": {
                 "nonEmptyAccounts": "Sinun täytyy siirtää kaikki saldot ennen kuin voit poistaa profiilisi."
@@ -1076,15 +1083,15 @@
             "similar": "Tämä on samankaltainen yleisesti käytetyn salasanan kanssa.",
             "word": "Yksittäinen sana on helppo arvata.",
             "incorrect": "Salasanasi on virheellinen.",
-            "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}."
+            "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}."
         },
         "pincode": {
-            "length": "PIN-koodisi täytyy olla {length, plural, one {1 numeron pituinen} other {# numeroa pitkä}}.",
+            "length": "PIN-koodisi täytyy olla {length, plural, one {# numeron pituinen} other {# numeroa pitkä}}.",
             "match": "PIN-koodit eivät täsmää.",
             "incorrect": "Nykyinen PIN-koodisi on virheellinen."
         },
         "account": {
-            "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
+            "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
             "empty": "Sinun täytyy käyttää viimeisintä lompakkoasi ennen uuden luomista.",
             "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän lompakon.",
             "duplicate": "Samanniminen lompakko on jo olemassa.",
@@ -1097,7 +1104,7 @@
             "syncing": "Lompakoiden synkronoinnissa tapahtui virhe."
         },
         "send": {
-            "addressLength": "Osoitteiden tulee olla {length, plural, one {1 merkin pituinen} other {# merkkiä pitkä}}.",
+            "addressLength": "Osoitteiden tulee olla {length, plural, one {# merkin pituinen} other {# merkkiä pitkä}}.",
             "amountTooHigh": "Tämä on suurempi kuin käytettävissä oleva saldosi.",
             "amountNoFloat": "Jos yksiköt ovat `i`, et voi käyttää desimaaleja.",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
@@ -1140,9 +1147,9 @@
             "invalid": "Varmuuskopiotiedostoa ei tunnistettu.",
             "destination": "Varmuuskopioinnin kohde ei kelpaa.",
             "mnemonic": "Muistisääntö ei kelpaa.",
-            "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on 1} other {on #}}",
+            "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on #} other {on #}}",
             "seedCharacters": "Seed-merkkijonon tulisi sisältää vain merkkejä A-Z tai 9",
-            "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on 1} other {on #}}.",
+            "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on #} other {on #}}.",
             "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi",
             "phraseCaseWord": "Sana \"{word}\" tulee olla pienillä kirjaimilla kirjoitettu"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Muotoiltu arvo",
             "date": "Päivämäärä",
             "time": "Aika"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Käytät tällä hetkellä kehittäjäprofiilia ja olet yhdistettynä verkkoon {networkName}"
         }
     }
 }

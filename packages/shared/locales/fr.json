@@ -22,9 +22,10 @@
                 "nonFirst": "Pour l'instant, commençons par nommer votre profil."
             },
             "addMore": "Vous pourrez créer d'autres profils par la suite.",
+            "advancedOptions": "Réglages avancés",
             "developer": {
                 "label": "Profil développeur",
-                "info": "Se connecter aux réseaux IOTA publics et privés"
+                "info": "Se connecter au devnet ou à un réseau privé"
             }
         },
         "setup": {
@@ -40,13 +41,13 @@
         },
         "create": {
             "title": "Créer un portefeuille",
-            "body": "Créez un nouveau portefeuille. Vous pouvez choisir un portefeuille logiciel ordinaire ou si vous disposez d'un appareil Ledger vous pouvez configurer un portefeuille matériel.",
+            "body": "Créez un nouveau portefeuille. Vous pouvez choisir un portefeuille logiciel ordinaire ou si vous disposez d'un appareil Ledger vous pouvez configurer un portefeuille physique.",
             "softwareAccount": {
                 "title": "Je veux un portefeuille logiciel",
                 "description": "Créer une phrase de récupération de 24 mots"
             },
             "ledgerAccount": {
-                "title": "Je veux un portefeuille logiciel",
+                "title": "Je veux un portefeuille physique",
                 "description": "Ledger Nano S ou Nano X requis"
             }
         },
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Sécuriser les adresses ayant déjà servi à envoyer des fonds...",
-            "body1": "Ce processus va prendre {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "Ce processus va prendre {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Votre ordinateur fonctionnera en pleine capacité, vous voudrez peut-être faire autre chose pendant que vous attendez que cela soit terminé."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Veuillez attendre {time, plural, one {1 seconde} other {# secondes}}",
-            "incorrectAttempts": "{attempts, plural, one {1 tentative incorrecte} other {# tentatives incorrectes}}"
+            "pleaseWait": "Veuillez patienter {time, plural, one {# seconde} other {# secondes}}",
+            "incorrectAttempts": "{attempts, plural, one {# tentative incorrecte} other {# tentatives incorrectes}}"
         },
         "dashboard": {
             "security": {
@@ -451,7 +452,7 @@
                     "outOfDate": "Obsolète"
                 },
                 "hardwareDevice": {
-                    "title": "Périphérique Matériel",
+                    "title": "Périphérique Physique",
                     "statuses": {
                         "appNotOpen": "L'application IOTA n'est pas ouverte",
                         "connected": "Connecté",
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Bienvenue sur le tableau de bord du Staking",
+            "welcome": "Bienvenue sur le tableau de bord du staking !",
             "status": {
                 "upcoming": "L'événement n'a pas commencé",
                 "commencing": "Pré-Staking à commencé",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmer la transaction",
             "body": "Vous êtes sur le point d'envoyer {amount} à",
-            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez réitérer l'opération de Staking sur vos jetons restant dans votre portefeuille."
+            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez réitérer l'opération de Staking sur vos jetons restant dans votre portefeuille.",
+            "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille."
         },
         "balanceFinder": {
             "title": "Retrouvez vos fonds",
@@ -719,7 +721,7 @@
         "stakingNotice": {
             "upcomingDate": "Le Staking n'a pas encore commencé",
             "commencingDate": "Le Staking n'a pas encore commencé",
-            "body": "En mettons vos fonds avant le début du staking, vous commencerez automatiquement à recevoir des récompenses au début du staking.",
+            "body": "En mettant vos fonds avant le début du staking, vous commencerez automatiquement à recevoir des récompenses au début du staking.",
             "ok": "D'accord, je comprends"
         },
         "stakingManager": {
@@ -746,6 +748,10 @@
             "title": "À propos d'Assembly",
             "body1": "Félicitations, vous avez acquis des jetons ASMB en guise de récompense. Assembly est un réseau multi-chaîne pour le déploiement de contrats intelligents évolutifs sur IOTA.",
             "body2": "Nous espérons lancer Assembly en 2022. Vos jetons pourront être transférés une fois le réseau lancé."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Vous êtes en train de créer un profil développeur",
+            "body": "Par défaut, vous serez connecté au réseau Chrysalis Devnet et pourrez changer de réseau manuellement. Ne continuez que si vous savez ce que vous faites."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "À",
         "receiveFunds": "Recevoir des fonds",
+        "address": "Adresse",
         "myAddress": "Mon Adresse",
         "shareAddress": "Partager une adresse",
         "yourAddress": "Votre adresse",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "il y a {time, plural, one {# année} other {# années}}"
     },
     "times": {
-        "second": "{time, plural, one {1 seconde} other {# secondes}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 heure} other {# heures}}",
-        "day": "{time, plural, one {1 jour} other {# jours}}",
-        "week": "{time, plural, one {1 semaine} other {# semaines}}",
-        "month": "{time, plural, one {1 mois} other {# mois}}",
-        "year": "{time, plural, one {1 an} other {# ans}}"
+        "second": "{time, plural, one {# seconde} other {# secondes}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# heure} other {# heures}}",
+        "day": "{time, plural, one {# jour} other {# jours}}",
+        "week": "{time, plural, one {# semaine} other {# semaines}}",
+        "month": "{time, plural, one {# mois} other {# mois}}",
+        "year": "{time, plural, one {# année} other {# années}}"
     },
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Une erreur s'est produite pendant la mise à jour, veuillez réessayer",
         "restartInstall": "Redémarrer pour installer",
         "calcMinutesRemaining": "Calcul des minutes restantes...",
-        "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
+        "minutesRemaining": "{minutes, plural, one {Il reste # minute} other {# minutes restantes}}",
         "copiedToClipboard": "Copié dans le presse-papier",
         "accountsSynchronized": "Synchronisation du portefeuille terminée",
         "fundsAvailableSoon": "Vos fonds seront bientôt disponibles",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Le nom de votre profil ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
+            "length": "Votre nom de profil ne peut pas être plus long que {length, plural, one {# caractère} other {# caractères}}.",
             "duplicate": "Un profil portant ce nom existe déjà.",
             "delete": {
                 "nonEmptyAccounts": "Vous devez transférer tous les soldes avant de pouvoir supprimer votre profil."
@@ -1076,15 +1083,15 @@
             "similar": "Ceci est similaire à un mot de passe couramment utilisé.",
             "word": "Un simple mot est facile à deviner.",
             "incorrect": "Votre mot de passe est incorrect.",
-            "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}."
+            "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {# caractère} other {# caractères}}."
         },
         "pincode": {
-            "length": "Votre code PIN doit être composé de {length, plural, one {1 chiffre} other {# chiffres}}.",
+            "length": "Votre code PIN doit être composé de {length, plural, one {# chiffre} other {# chiffres}}.",
             "match": "Les codes PIN ne correspondent pas.",
             "incorrect": "Votre code PIN actuel est incorrect."
         },
         "account": {
-            "length": "Le nom de votre portefeuille ne peut pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
+            "length": "Le nom de votre portefeuille ne peut pas contenir plus de {length, plural, one {# caractère} other {# caractères}}.",
             "empty": "Vous devez utiliser votre dernier portefeuille avant d'en créer un nouveau.",
             "notEmpty": "Vous devez transférer votre solde avant de supprimer ce portefeuille.",
             "duplicate": "Un portefeuille avec ce nom existe déjà.",
@@ -1097,7 +1104,7 @@
             "syncing": "Une erreur est survenue lors de la synchronisation de vos comptes."
         },
         "send": {
-            "addressLength": "Les adresses devraient comporter {length, plural, one {1 caractère} other {# caractères}}.",
+            "addressLength": "Les adresses doivent contenir {length, plural, one {# caractère} other {# caractères}}.",
             "amountTooHigh": "Ceci est supérieur à votre solde disponible.",
             "amountNoFloat": "Si les unités sont `i`, vous ne pouvez pas utiliser de décimales.",
             "amountInvalidFormat": "Le montant semble être un nombre invalide.",
@@ -1140,9 +1147,9 @@
             "invalid": "Le fichier de sauvegarde n'a pas été reconnu.",
             "destination": "La destination de la sauvegarde n'était pas valide.",
             "mnemonic": "Le mnémonique n'est pas valide.",
-            "seedTooShort": "La seed devrait contenir 81 caractères, elle en contient {length, plural, one {1} other {#}}",
+            "seedTooShort": "Le seed devrait avoir 81 caractères, le nb. de caractères entrés {length, plural, one {est #} other {est #}}",
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
-            "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération, actuellement il y en a {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération; actuellement, leur nombre {length, plural, one {est #} other {est #}}.",
             "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération",
             "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules"
         },
@@ -1212,7 +1219,7 @@
             },
             "inactive": {
                 "title": "Aucun événement de Staking détecté",
-                "body": "Ouvrez la onfiguration du réseau dans les paramètres avancés et assurez-vous que le noeud actuel possède la fonction \"Participation\" en cliquant sur \"Voir les informations\"."
+                "body": "Ouvrez la configuration du réseau dans les paramètres avancés et assurez-vous que le noeud actuel possède la fonction \"Participation\" en cliquant sur \"Voir les informations\"."
             },
             "ended": {
                 "title": "Le Staking est maintenant terminée",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valeur formatée",
             "date": "Date",
             "time": "Date et heure"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Vous utilisez actuellement un profil développeur et êtes connecté à {networkName}"
         }
     }
 }

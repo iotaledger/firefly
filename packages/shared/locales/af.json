@@ -22,9 +22,10 @@
                 "nonFirst": "Laat ons eers begin met jou profielnaam."
             },
             "addMore": "Jy kan later meer profiele byvoeg.",
+            "advancedOptions": "Gevorderde opsies",
             "developer": {
                 "label": "Ontwikkelaarsprofiel",
-                "info": "Koppel aan publieke en private IOTA-netwerke"
+                "info": "Koppel aan die devnet of 'n privaat netwerk"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Beveilig tans spandeerde adresse...",
-            "body1": "Hierdie proses sal {minutes, plural, one {1 minuut} other {# minute}} vat.",
+            "body1": "Hierdie proses sal {minutes, plural, een {# minuut} other {# minute}} vat.",
             "body2": "Jou rekenaar sal op volle kapasiteit werk, jy wil dalk iets anders doen terwyl jy wag totdat dit voltooi is."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Wag asseblief {time, plural, one {1 sekonde} other {# sekondes}}",
-            "incorrectAttempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
+            "pleaseWait": "Wag asseblief {time, plural, one {# sekonde} other {# sekondes}}",
+            "incorrectAttempts": "{attempts, plural, one {# verkeerde poging} other {# verkeerde pogings}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welkom by die Staking dashboard",
+            "welcome": "Welkom by die staking dashboard!",
             "status": {
                 "upcoming": "Staking geleentheid het nog nie begin nie",
                 "commencing": "Pre-Staking is oop",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bevestig die transaksie",
             "body": "Jy is op die punt om {amount} na",
-            "sendingFromStakedAccount": "Jy stuur 'n oordrag vanaf 'n beursie wat tans in Staking is. Dit kan jou tokens unstake. Stuur gerus die oordrag, maar jy sal dalk jou oorblywende tokens daarna moet weer stake."
+            "sendingFromStakedAccount": "Jy stuur 'n oordrag vanaf 'n beursie wat tans in Staking is. Dit kan jou tokens unstake. Stuur gerus die oordrag, maar jy sal dalk jou oorblywende tokens daarna moet weer stake.",
+            "sendingFromStakedAccountBelowMinReward": "Jy stuur 'n oordrag vanaf 'n beursie wat nog nie die minimum staking belonings bereik het nie. Dit kan jou tokens unstake en jy kan jou staking belonings op hierdie beursie verloor."
         },
         "balanceFinder": {
             "title": "Balans-finder",
@@ -746,6 +748,10 @@
             "title": "Oor Assembly",
             "body1": "Baie geluk, jy het ASMB-tokens verdien as 'n staking beloning. Assembly is 'n multi-chain netwerk vir die implementering van skaalbare smart-contracts op IOTA.",
             "body2": "Ons beoog om Assembly in 2022 bekend te stel. Jou tokens sal beskikbaar wees om oor te dra sodra die netwerk begin."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Jy skep 'n ontwikkelaarprofiel",
+            "body": "Jy sal by die Chrysalis Deevnet gekoppel wees, en kan handmatig van netwerke wissel. Gaan net voort as jy weet wat jy doen."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Van",
         "to": "Aan",
         "receiveFunds": "Ontvang fondse",
+        "address": "Adres",
         "myAddress": "My adres",
         "shareAddress": "Deel 'n adres",
         "yourAddress": "Jou adres",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
     },
     "times": {
-        "second": "{time, plural, one {1 sekonde} other {# sekondes}}",
-        "minute": "{time, plural, one {1 minuut} other {# minute}}",
-        "hour": "{time, plural, one {1 uur} other {# ure}}",
-        "day": "{time, plural, one {1 dag} other {# dae}}",
-        "week": "{time, plural, one {1 week} other {# weke}}",
-        "month": "{time, plural, one {1 maand} other {# maande}}",
-        "year": "{time, plural, one {1 jaar} other {# jare}}"
+        "second": "{time, plural, one {# sekonde} other {# sekondes}}",
+        "minute": "{time, plural, one {# minuut} other {# minute}}",
+        "hour": "{time, plural, one {# huur} other {# ure}}",
+        "day": "{time, plural, one {# dag} other {# dae}}",
+        "week": "{time, plural, one {# week} other {# weke}}",
+        "month": "{time, plural, one {# maand} other {# maande}}",
+        "year": "{time, plural, one {# jaar} other {# jare}}"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
         "restartInstall": "Herbegin om te installeer",
         "calcMinutesRemaining": "Bereken oorblywende minute...",
-        "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
+        "minutesRemaining": "{minutes, plural, one {# minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
         "accountsSynchronized": "Beursie sinchronisasie voltooi",
         "fundsAvailableSoon": "Jou fondse sal binnekort beskikbaar wees",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Jou profielnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Jou profielnaam mag nie langer as {length, plural, one {# karakter} other {# karakters}} wees nie.",
             "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam.",
             "delete": {
                 "nonEmptyAccounts": "Jy moet alle saldo's oordra voordat jy jou profiel kan uitvee."
@@ -1076,15 +1083,15 @@
             "similar": "Hierdie is soortgelyk aan 'n gewone wagwoord.",
             "word": "'N Enkele woord is maklik om te raai.",
             "incorrect": "Jou wagwoord is verkeerd.",
-            "length": "Jou wagwoord mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie."
+            "length": "Jou wagwoord mag nie langer as {length, plural, one {# karakter} other {# karakters}} wees nie."
         },
         "pincode": {
-            "length": "Jou PIN moet wees {length, plural, one {1 syfer} other {# syfers}} lank.",
+            "length": "Jou PIN moet {length, plural, one {# syfer} other {# syfers}} lank wees.",
             "match": "PIN het nie ooreengestem nie.",
             "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Jou beursie naam mag nie langer as {length, plural, one {1 karakter} other {# karakters}}.",
+            "length": "Jou beursie naam mag nie langer as {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
             "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
             "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
@@ -1097,7 +1104,7 @@
             "syncing": "Kon nie jou beursies sinchroniseer nie."
         },
         "send": {
-            "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
+            "addressLength": "Adresse moet {length, plural, one {# karakter} other {# karakters}} lank wees.",
             "amountTooHigh": "Dit is groter as jou beskikbare balans.",
             "amountNoFloat": "As eenhede 'i' is, kan jy nie desimale plekke gebruik nie.",
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
@@ -1140,9 +1147,9 @@
             "invalid": "Die back-up is nie herken nie.",
             "destination": "Die back-up was nie geldig nie.",
             "mnemonic": "Die mnemoniese is nie geldig nie.",
-            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
-            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
+            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {#} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Geformateerde waarde",
             "date": "Datum",
             "time": "Tyd"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Jy gebruik tans 'n ontwikkelaarprofiel en is gekoppel aan {networkName}"
         }
     }
 }

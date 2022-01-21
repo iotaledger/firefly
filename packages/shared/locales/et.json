@@ -22,9 +22,10 @@
                 "nonFirst": "Alustame praegu sinu profiili nimega."
             },
             "addMore": "Sa saad hiljem veel profiile lisada.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "See protsess võtab {minutes, plural, one {1 minuti} other {# minutit}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Palun oota {time, plural, one {1 sekund} other {# sekundit}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Kinnita tehing",
             "body": "Oled saatmas {amount} aadressile",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Kontojäägi otsija",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Kontolt",
         "to": "Kontole",
         "receiveFunds": "Receive Funds",
+        "address": "Address",
         "myAddress": "Minu aadress",
         "shareAddress": "Jaga aadressi",
         "yourAddress": "Sinu aadress",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# aasta} other {# aastat}} tagasi"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "An error occurred during the update, please try again",
         "restartInstall": "Taaskäivita paigaldamiseks",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minut jäänud} other {# minutit jäänud}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Kopeeritud lõikelauale",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Sellenimeline profiil on juba olemas.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "See sarnaneb levinud salasõnadele.",
             "word": "Ühte sõna on lihtne ära arvata.",
             "incorrect": "Sinu salasõna on vale.",
-            "length": "Sinu salasõna ei saa olla pikem kui {length, plural, one {1 tähemärk} other {# tähemärki}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Sinu PIN peab olema {length, plural, one {1 tähemärk} other {# tähemärki}} pikk.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINid ei ühti.",
             "incorrect": "Sinu praegune PIN on vale."
         },
         "account": {
-            "length": "Sinu rahakoti nimi ei saa olla pikem kui {length, plural, one {1 tähemärk} other {# tähemärki}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Sa pead olema kasutanud oma viimast rahakotti enne kui saad uue luua.",
             "notEmpty": "Sa pead enne selle rahakoti kustutamist oma kontojäägi üle kandma.",
             "duplicate": "Selle nimega rahakott on juba olemas.",
@@ -1097,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Aadressid peaksid olema {length, plural, one {1 tähemärgi} other {# tähemärgi}} pikkused.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "See on suurem kui sinu kasutatav kontojääk.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "Kogus näib olevat vale.",
@@ -1140,9 +1147,9 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "Seeme peaks olema 81 tähemärki pikk, see {length, plural, one {on 1} other {on #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seeme peaks sisaldama ainult tähemärke A-Z või 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "Sõna \"{word}\" peaks olema väikestes tähtedes"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Kuupäev",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

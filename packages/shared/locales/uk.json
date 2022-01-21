@@ -22,9 +22,10 @@
                 "nonFirst": "Почніть з назви вашого профілю."
             },
             "addMore": "Ви можете додати більше профілів пізніше.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Профіль розробника",
-                "info": "Підключіться до публічних і приватних мереж IOTA"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Захищаємо витрачені адреси...",
-            "body1": "Цей процес займе {minutes, plural, one {1 хвилину} other {# хвилин}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Ваш комп'ютер буде працювати з повною потужністю, ви можете робити щось інше, поки ви чекаєте завершення."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Будь ласка, зачекайте {time, plural, one {1 секунду} few {# секунди} many {# секунд} other {# секунд}}",
-            "incorrectAttempts": "{attempts, plural, one {1 некоректна спроба} few {# некоректні спроби} many {# некоректних спроб} other {# некоректних спроб}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Ставка",
-            "welcome": "Ласкаво просимо до інформаційної панелі ставок",
+            "welcome": "Ласкаво просимо до інформаційної панелі стекінгу!",
             "status": {
                 "upcoming": "Подія не почалася",
                 "commencing": "Попередня ставка відкрита",
@@ -506,7 +507,7 @@
                 "commencingHeader": "Попередньо поставте свої токени!",
                 "holdingSubheaderHolding": "Тепер ви отримуєте винагороди за ставку",
                 "holdingSubheaderNotHolding": "Заробляйте винагороди, ставлячи токени IOTA",
-                "holdingHeaderHolding": "{duration} ліворуч",
+                "holdingHeaderHolding": "{duration} залишилось",
                 "holdingHeaderNotHolding": "Поставте свої жетони!",
                 "endedSubheader": "Ставка закінчена",
                 "endedHeader": "Дякую!",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Підтвердити транзакцію",
             "body": "Ви збираєтеся надіслати {amount}",
-            "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову."
+            "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Шукач балансу",
@@ -746,6 +748,10 @@
             "title": "Про Assembly",
             "body1": "Вітаємо, ви отримали токени ASMB як винагороду за ставку. Assembly — це багатоланцюгова мережа для розгортання масштабованих смарт-контрактів на IOTA.",
             "body2": "Ми прагнемо запустити Assembly у 2022 році. Ваші токени стануть доступними для передачі після запуску мережі."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Звідки",
         "to": "Кому",
         "receiveFunds": "Отримати кошти",
+        "address": "Address",
         "myAddress": "Моя адреса",
         "shareAddress": "Поділитися адресою",
         "yourAddress": "Ваша адреса",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# рік} other {# роки}} тому"
     },
     "times": {
-        "second": "{time, plural,one {1секунда}other {#секунд}}",
-        "minute": "{time, plural,one {1хвилина} other {#хвилин}}",
-        "hour": "{time, plural,one {1година} other {#годин}}",
-        "day": "{time, plural,one {1день} other {#днів}}",
-        "week": "{time, plural,one {1тиждень} other {#тижнів}}",
-        "month": "{time, plural,one {1місяць} other {#місяців}}",
-        "year": "{time, plural,one {1рік} other {#років}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Отримання {{value}} в {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "Під час оновлення сталася помилка, спробуйте ще раз",
         "restartInstall": "Перезапустіть для встановлення",
         "calcMinutesRemaining": "Обчислення хвилин, що залишились...",
-        "minutesRemaining": "{minutes, plural, one {Залишилось 1 хвилина} other { Залишилось # хвилин}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Скопійовано в буфер обміну",
         "accountsSynchronized": "Синхронізацію гаманця завершено",
         "fundsAvailableSoon": "Незабаром ваші кошти стануть доступними",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Ім'я твого профілю не може бути довшим {length, plural, one {1 символа} few {# символи} many {# символів} other {# символів}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Профіль з таким ім'ям вже існує.",
             "delete": {
                 "nonEmptyAccounts": "Ви повинні перенести всі баланси, перш ніж ви зможете видалити свій профіль."
@@ -1076,15 +1083,15 @@
             "similar": "Схоже на один з широко поширених паролів.",
             "word": "Одне слово легко вгадати.",
             "incorrect": "Неправильний пароль.",
-            "length": "Твій пароль не може бути довшим {length, plural, one {1 символа} few {# символи} many {# символів} other {# символів}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Твій PIN-код повинен бути {length, plural, one {1 цифра} few {# цифр} many {# цифр} other {# цифр}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-код і підтвердження не збігаються.",
             "incorrect": "Твій PIN-код невірний."
         },
         "account": {
-            "length": "Ім’я вашого гаманця не може бути довшим за {length, plural, one {1 символ} other {# символи}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Ви повинні використовувати останній гаманець перед створенням нового.",
             "notEmpty": "Ви повинні перенести свій баланс перед видаленням цього гаманця.",
             "duplicate": "Гаманець з таким іменем уже існує.",
@@ -1097,7 +1104,7 @@
             "syncing": "Під час синхронізації ваших гаманців сталася помилка."
         },
         "send": {
-            "addressLength": "Довжина адрес повинна бути {length, plural, one {1 символ} other {# символів}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Це більше, ніж твій баланс.",
             "amountNoFloat": "Якщо одиниці виміру 'i', то ви не можете використовувати знаки після коми.",
             "amountInvalidFormat": "Сума є неприпустимим числом.",
@@ -1140,9 +1147,9 @@
             "invalid": "Файл резервної копії не розпізнано.",
             "destination": "Резервна копія недійсна.",
             "mnemonic": "Мнемоніка недійсна.",
-            "seedTooShort": "Ключ повинен бути 81 символ довжиною, це {length, plural, one {1} other {#}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Ключ повинен містити тільки символи A-Z або 9",
-            "phraseWordCount": "У твоїй фразі відновлення повинно бути 24 слова, зараз тут {length, plural, one {1} few {#} many {#} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоїй фразі відновлення",
             "phraseCaseWord": "Слово \"{word}\" має бути рядковим регістром"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Стерти значення",
             "date": "Дата",
             "time": "Час"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

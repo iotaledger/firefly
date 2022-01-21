@@ -22,9 +22,10 @@
                 "nonFirst": "За сада, почнимо са именом вашег профила."
             },
             "addMore": "Касније можете додати још профила.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Профил програмера",
-                "info": "Повежите се на јавне и приватне ИОТА мреже"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Од",
         "to": "За",
         "receiveFunds": "Receive Funds",
+        "address": "Address",
         "myAddress": "My Address",
         "shareAddress": "Подели Адресу",
         "yourAddress": "Ваша адреса",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "An error occurred during the update, please try again",
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "A profile with this name already exists.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "You must use your latest wallet before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1097,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -1140,9 +1147,9 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Date",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

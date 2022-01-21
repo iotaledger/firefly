@@ -22,9 +22,10 @@
                 "nonFirst": "Per ara, comencem amb el vostre nom de perfil."
             },
             "addMore": "Després podreu afegir més perfils.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Perfil de desenvolupador",
-                "info": "Connecta a les xarxes IOTA públiques i privades"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Protegint les adreces usades...",
-            "body1": "Aquest procés durarà {minutes, plural, one {1 minut} other {# minuts}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "L'ordinador funcionarà a ple rendiment; potser voldreu fer una altra cosa mentre espereu que es completi."
         },
         "transferFragmentedFunds": {
@@ -370,32 +371,32 @@
                 "title": "Configuració de la xarxa",
                 "title2": "Configuració de la xarxa",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Els paràmetres de la vostra xarxa s'actualitzaran automàticament, d'acord amb la configuració actual del node (canviar de xarxa comportarà el restabliment de l'estat del moneder)",
+                    "nonDev": "Els paràmetres de la vostra xarxa s'actualitzaran automàticament, d'acord amb la configuració actual del node"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "La xarxa ha canviat correctament a \"{networkName}\".",
+                "resetWallet": "S'ha restablert l'estat del vostre moneder.",
+                "connectedTo": "Connectat a",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "title": "Selecció de node",
+                    "description": "Trieu \"Manual\" per a configurar els paràmetres del node i connectar-vos al vostre propi node o nodes",
+                    "automatic": "Automàtic",
                     "manual": "Manual"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
+                "title": "Configuració del node",
+                "description": "Gestiona la llista de nodes als que us connecteu",
                 "primaryNode": "Node primari",
                 "excludeNode": "Excloure node",
                 "includeNode": "Incloure node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
+                "editDetails": "Edita els detalls",
+                "viewInfo": "Veure la informació",
                 "setAsPrimary": "Estableix com a primari",
                 "removeNode": "Elimina el node",
                 "includeOfficialNodeList": "Afegir llista oficial de nodes",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "No hi ha nodes, no us podeu connectar a la xarxa",
+                "noNodesAuto": "No hi ha nodes, en lloc d'això s'utilitzarà la selecció automàtica"
             },
             "proofOfWork": {
                 "title": "Prova de Treball",
@@ -410,7 +411,7 @@
                 "description": "Veure la informació del sistema i de l'aplicació"
             },
             "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
+                "title": "Migra l'índex del Ledger",
                 "description": "Migra un altre índex de compte Trinity"
             },
             "troubleshoot": {
@@ -423,7 +424,7 @@
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently asked questions",
+                "title2": "Preguntes més freqüents",
                 "description": "Consulteu les FAQ per obtenir ajuda amb un problema"
             },
             "discord": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Siusplau espereu {time, plural, one {1 segon} other {# segons}}",
-            "incorrectAttempts": "{attempts, plural, one {1 intent incorrecte} other {# intents incorrectes}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
                 "commencing": "Pre-staking open",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmar la transacció",
             "body": "Estàs a punt d'enviar {amount} a",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Cercador de balanços",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "A",
         "receiveFunds": "Rebre fons",
+        "address": "Address",
         "myAddress": "La meva adreça",
         "shareAddress": "Compartir una adreça",
         "yourAddress": "La teva adreça",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "fa {time, plural, one {# any} other {# anys}}"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "S'està rebent {{value}} a {{account}}",
@@ -1034,7 +1041,7 @@
         "updateError": "S'ha produït un error durant l'actualització. Torneu-ho a provar",
         "restartInstall": "Reinicieu per instal·lar",
         "calcMinutesRemaining": "S'estan calculant els minuts restants...",
-        "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copiat al porta-retalls",
         "accountsSynchronized": "Sincronització completa del moneder",
         "fundsAvailableSoon": "Your funds will become available shortly",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "El nom del vostre perfil no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Ja existeix un perfil amb aquest nom.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "Això és similar a una contrasenya comuna.",
             "word": "Una sola paraula és fàcil d’endevinar.",
             "incorrect": "La contrasenya és incorrecta.",
-            "length": "La vostra contrasenya no pot superar {length, plural, one {1 caràcter} other {# caràcters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "El vostre PIN ha de tenir {length, plural, one {1 dígit} other {# dígits}}.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "El PIN no coincideix.",
             "incorrect": "El vostre PIN actual és incorrecte."
         },
         "account": {
-            "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Cal que utilitzeu el darrer moneder, abans de crear-ne un de nou.",
             "notEmpty": "Cal que transferiu el saldo del moneder, abans d'eliminar-lo.",
             "duplicate": "Ja existeix un moneder amb aquest nom.",
@@ -1097,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Les adreces han de tenir {length, plural, one {1 caràcter} other {# caràcters}} més.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Això és superior al saldo disponible.",
             "amountNoFloat": "Si les unitats són `i` no podeu fer servir decimals.",
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
@@ -1140,9 +1147,9 @@
             "invalid": "No s'ha reconegut el fitxer de còpia de seguretat.",
             "destination": "La destinació de la còpia de seguretat no era vàlida.",
             "mnemonic": "El mnemotècnic no és vàlid.",
-            "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
-            "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació",
             "phraseCaseWord": "La paraula \"{word}\" ha d'estar en minúscules"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Data",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

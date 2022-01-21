@@ -22,9 +22,10 @@
                 "nonFirst": "अभी के लिए, चलिए आपके प्रोफ़ाइल नाम से शुरू करते हैं।"
             },
             "addMore": "आप बाद में और प्रोफाइल जोड़ सकते हैं।",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "डेवलपर प्रोफ़ाइल",
-                "info": "सार्वजनिक और निजी ऐ ओ टा नेटवर्क से कनेक्ट करें"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "सुरक्षित हो रहा है खर्च किए गए एड्रेस...",
-            "body1": "इस प्रक्रिया में {minutes, plural, one {1 मिनट का समय लगेगा} other {# मिनट्स का समय लगेगा}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "आपका कंप्यूटर पूरी क्षमता से चलेगा, आप इसे पूरा करने के लिए प्रतीक्षा करते समय कुछ और करने की इच्छा कर सकते हैं।"
         },
         "transferFragmentedFunds": {
@@ -440,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
-            "incorrectAttempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -487,7 +488,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "स्टेकिंग डैशबोर्ड में आपका स्वागत है",
+            "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "घटना शुरू नहीं हुई",
                 "commencing": "प्री-स्टेकिंग खुला हे",
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "ट्रांसक्शन कन्फर्म करे",
             "body": "आप {amount} को भेजने वाले हैं",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "बैलेंस खोजने वाला",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "से",
         "to": "को",
         "receiveFunds": "पैसे प्राप्त करे",
+        "address": "Address",
         "myAddress": "मेरा पता:",
         "shareAddress": "पता साझा करें",
         "yourAddress": "आपका पता",
@@ -1015,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# साल} other {# साल}} पहले"
     },
     "times": {
-        "second": "{time, plural, one {1 second} other {# seconds}}",
-        "minute": "{time, plural, one {1 minute} other {# minutes}}",
-        "hour": "{time, plural, one {1 hour} other {# hours}}",
-        "day": "{time, plural, one {1 day} other {# days}}",
-        "week": "{time, plural, one {1 week} other {# weeks}}",
-        "month": "{time, plural, one {1 month} other {# months}}",
-        "year": "{time, plural, one {1 year} other {# years}}"
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
@@ -1034,7 +1041,7 @@
         "updateError": "अपडेट के दौरान एक त्रुटि हुई, कृपया पुनः प्रयास करें",
         "restartInstall": "स्थापित करने के लिए पुनरारंभ करें",
         "calcMinutesRemaining": "शेष मिनटों की गणना कर रहा है...",
-        "minutesRemaining": "{minutes, plural, one {1 मिनट बचा हुआ} other {# मिनट्स बचा हुआ}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "क्लिपबोर्ड में कॉपी हो गया",
         "accountsSynchronized": "वॉलेट तुल्यकालन पूरा",
         "fundsAvailableSoon": "जल्द ही आपके फंड उपलब्ध हो जाएंगे",
@@ -1055,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "आपका प्रोफ़ाइल नाम {length, plural, one {1 अक्षर} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है|",
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "इस नाम का प्रोफ़ाइल पहले से मौजूद है।",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
@@ -1076,15 +1083,15 @@
             "similar": "यह आमतौर पर उपयोग किए जाने वाले पासवर्ड के समान है",
             "word": "अकेले शब्द का अनुमान लगाना आसान है",
             "incorrect": "आपका पासवर्ड गलत है।",
-            "length": "आपका पासवर्ड {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है"
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "आपका पिन {length, plural, one {1 अंक} other {# अंक}} लम्बा होना चाहिए",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "पिन मेल नहीं खाता",
             "incorrect": "आपका वर्तमान पिन गलत है"
         },
         "account": {
-            "length": "आपका वॉलेट नाम {length, plural, one {1 वर्ण} other {# अक्षर}} से अधिक लंबा नहीं हो सकता है",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "नया बनाने से पहले आपको अपने नवीनतम वॉलेट का उपयोग करना चाहिए।",
             "notEmpty": "इस वॉलेट को हटाने से पहले आपको अपना बैलेंस ट्रांसफर करना होगा।",
             "duplicate": "इस नाम का एक वॉलेट पहले से मौजूद है।",
@@ -1097,7 +1104,7 @@
             "syncing": "आपके वॉलेट को समन्‍वयित करने में त्रुटि हुई थी।"
         },
         "send": {
-            "addressLength": "पते {length, plural, one {1 वर्ण} other {# वर्ण}} लम्बे होने चाहिए",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "यह आपके उपलब्ध बैलेंस से अधिक है।",
             "amountNoFloat": "यदि इकाइयाँ `i` हैं तो आप दशमलव स्थानों का उपयोग नहीं कर सकते।",
             "amountInvalidFormat": "राशि अमान्य संख्या प्रतीत होती है",
@@ -1140,9 +1147,9 @@
             "invalid": "बैकअप फ़ाइल को पहचाना नहीं गया था।",
             "destination": "बैकअप गंतव्य मान्य नहीं था।",
             "mnemonic": "अक्षर मान्य नहीं है",
-            "seedTooShort": "बीज 81 वर्ण लंबा होना चाहिए, यह {length, plural, one {1} other {#}} वर्ण लंबा है",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "सीड में केवल अक्षर A-Z या 9 होना चाहिए",
-            "phraseWordCount": "आपके पुनर्प्राप्ति वाक्यांश में वर्तमान में 24 शब्द होने चाहिए, और अभी सिर्फ {length, plural, one {1} other {#}} शब्द है",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "आपके पुनर्प्राप्ति वाक्यांश में अपरिचित शब्द {word} पाया गया",
             "phraseCaseWord": "शब्द {word} कम मामला होना चाहिए"
         },
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "तिथि",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

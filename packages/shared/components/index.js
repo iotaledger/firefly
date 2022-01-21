@@ -52,6 +52,8 @@ export { default as Animation } from './Animation.svelte'
 export { default as ProgressFlow } from './ProgressFlow.svelte'
 export { default as Video } from './Video.svelte'
 export { default as WalletPill } from './WalletPill.svelte'
+export { default as DeveloperProfileIndicator } from './DeveloperProfileIndicator.svelte'
+export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 
 export * from './modals'
 // Charts
