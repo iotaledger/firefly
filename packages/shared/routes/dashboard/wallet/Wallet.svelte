@@ -55,6 +55,7 @@
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account';
 
     export let locale: Locale
 
@@ -135,7 +136,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
+    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
@@ -241,13 +242,13 @@
         })
     }
 
-    function onGenerateAddress(accountId) {
+    function onGenerateAddress(accountId: AccountIdentifier) {
         const _generate = () => {
             isGeneratingAddress = true
 
             if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
-            api.getUnusedAddress(accountId, {
+            api.getUnusedAddress(accountId.toString(), {
                 onSuccess(response) {
                     accounts.update((accounts) =>
                         accounts.map((account) => {
@@ -311,36 +312,7 @@
         }
     }
 
-    function findReuseAccount() {
-        // If the last account in the accounts list is "deleted" and has no
-        // messages on it, we can reuse it, otherwise the wallet will complain
-        // about the last account not being used
-        const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
-
-        if (hiddenAccounts.length > 0) {
-            const lastAccount = $accounts[$accounts.length - 1]
-            const hiddenAccountIndex = hiddenAccounts.indexOf(lastAccount.id)
-            if (
-                hiddenAccountIndex >= 0 &&
-                lastAccount.rawIotaBalance === 0 &&
-                lastAccount.messages &&
-                lastAccount.messages.length === 0
-            ) {
-                return lastAccount.id
-            }
-
-            // If we have restarted the app we might not have been notified of the empty account
-            // so it wont appear in the accounts list, so check in the hidden list to see
-            // if there is an id not in the accounts list
-            for (const hiddenAccount of hiddenAccounts) {
-                if (!$accounts.some((a) => a.id === hiddenAccount)) {
-                    return hiddenAccount
-                }
-            }
-        }
-    }
-
-    async function onCreateAccount(alias, onComplete) {
+    async function onCreateAccount(alias: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias)
@@ -348,9 +320,9 @@
 
                 walletRoute.set(WalletRoutes.Init)
 
-                onComplete()
+                return onComplete()
             } catch (err) {
-                onComplete(err)
+                return onComplete(err)
             }
         }
 

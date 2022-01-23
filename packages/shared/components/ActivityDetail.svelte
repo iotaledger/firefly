@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { Electron } from 'shared/lib/electron'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
@@ -21,14 +21,15 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { getOfficialExplorer } from 'shared/lib/network';
 
     export let locale: Locale
 
-    export let id
-    export let timestamp
-    export let confirmed
+    export let id: string
+    export let timestamp: string
+    export let confirmed: boolean
     export let payload: Payload
-    export let balance // migration tx
+    export let balance: number // migration tx
 
     export let onBackClick = (): void => {}
 
@@ -37,11 +38,12 @@
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
 
-    const prepareSenderAddress = () => {
+    const prepareSenderAddress = (): string => {
         if (txPayload) {
             return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
@@ -51,7 +53,7 @@
         return null
     }
 
-    const prepareReceiverAddresses = () => {
+    const prepareReceiverAddresses = (): string[] => {
         if (txPayload) {
             return receiverAddressesFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
@@ -70,7 +72,7 @@
         return []
     }
 
-    const prepareSenderAccount = () => {
+    const prepareSenderAccount = (): WalletAccount => {
         if (txPayload) {
             // There can only be one sender address which either belongs to us or not
             return findAccountWithAddress(senderAddress)
@@ -79,7 +81,7 @@
         return null
     }
 
-    const prepareReceiverAccount = () => {
+    const prepareReceiverAccount = (): WalletAccount => {
         if (milestonePayload) {
             return $accounts.find((acc) => acc.index === 0)
         }
@@ -172,32 +174,37 @@
         {#if id}
             <div class="mb-5">
                 <Text secondary>{locale('general.messageId')}</Text>
-                <button class="text-left" on:click={() => setClipboard(id.toLowerCase())}>
-                    <Text type="pre">{id}</Text>
-                </button>
+                <div class="flex flex-row justify-between items-center">
+                    <Link
+                        onClick={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                    >
+                        <Text highlighted type="pre">{id}</Text>
+                    </Link>
+                    <CopyButton itemToCopy={id} />
+                </div>
             </div>
         {/if}
         {#if senderAddress}
             <div class="mb-5">
                 <Text secondary>{locale('general.inputAddress')}</Text>
-                <button class="text-left" on:click={() => setClipboard(senderAddress.toLowerCase())}>
-                    <Text type="pre">
-                        {senderAddress}
-                        {#if senderAccount}&nbsp;({senderAccount.alias}){/if}
-                    </Text>
-                </button>
+                <div class="flex flex-row justify-between items-center">
+                    <Text type="pre"> {senderAddress} </Text>
+                    <CopyButton itemToCopy={senderAddress} />
+                </div>
+                <Text type="pre">{#if senderAccount} ({senderAccount.alias}) {/if}</Text>
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
                 <Text secondary>{locale('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver, idx}
-                    <button class="text-left" on:click={() => setClipboard(receiver.toLowerCase())}>
-                        <Text type="pre" classes="mb-2">
-                            {receiver}
-                            {#if receiverAddressesYou[idx]}&nbsp;({receiverAddressesYou[idx].alias}){/if}
-                        </Text>
-                    </button>
+                    <div class="flex flex-row justify-between items-center">
+                        <Text type="pre"> {receiver} </Text>
+                        <CopyButton itemToCopy={receiver} />
+                    </div>
+                    <Text type="pre" classes="mb-2 mt-0">
+                        {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
+                    </Text>
                 {/each}
             </div>
         {/if}
@@ -205,13 +212,9 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
                 <div class="flex flex-row">
-                    <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
-                        <Text>{formatUnitBestMatch(value)}</Text>
-                    </button>
+                    <Text bold>{formatUnitBestMatch(value)}</Text>
                     &nbsp;
-                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
-                        <Text highlighted>({formatCurrency(currencyValue)})</Text>
-                    </button>
+                    <Text>({formatCurrency(currencyValue)})</Text>
                 </div>
             </div>
         {/if}
