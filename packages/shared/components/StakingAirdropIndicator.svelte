@@ -6,13 +6,14 @@
 
     export let airdrop: StakingAirdrop
 
-    const isStakedForAirdrop = (overview: ParticipationOverview): boolean => overview.some((_overview) => {
-        if (airdrop === StakingAirdrop.Assembly) {
-            return _overview.assemblyStakedFunds > 0
+    const isStakedForAirdrop = (overview: ParticipationOverview): boolean => overview.some(
+        (_overview) => {
+            if (airdrop === StakingAirdrop.Assembly) {
+                return _overview.assemblyStakedFunds > 0
+            }
+            return _overview.shimmerStakedFunds > 0
         }
-
-        return _overview.shimmerStakedFunds > 0
-    })
+    )
 
     $: isStaked = isStakedForAirdrop($participationOverview)
     $: showIndicator =

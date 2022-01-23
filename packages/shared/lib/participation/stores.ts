@@ -1,6 +1,4 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-
-import { persistent } from '../helpers'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'

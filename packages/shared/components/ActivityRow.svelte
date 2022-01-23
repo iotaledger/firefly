@@ -5,7 +5,7 @@
     import { truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { Locale } from 'shared/lib/typings/i18n'
-    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
@@ -22,7 +22,6 @@
 
     export let locale: Locale
 
-    export let id
     export let timestamp
     export let confirmed
     export let color
@@ -33,10 +32,6 @@
     export let onClick = (): void => {}
 
     let messageValue = ''
-
-    let hasCachedMigrationTx: boolean
-    let milestonePayload: Milestone
-    let txPayload: Transaction
 
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
@@ -60,24 +55,19 @@
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
-    let senderAddress: string
-    let receiverAddresses: string[]
-
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
-    // There can only be one sender address which either belongs to us or not
-    let senderAccount: WalletAccount
+    // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
 
     // For an incoming transaction there might be multiple receiver addresses
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
-    let receiverAccount: WalletAccount
     $: receiverAccount =
         getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
-    let initialsColor
+    let initialsColor: string
     let accountAlias = ''
 
     $: {
@@ -104,7 +94,7 @@
         }
     }
 
-    let direction
+    let direction: string
     $: {
         if (txPayload) {
             if (includeFullSender) {
