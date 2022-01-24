@@ -4,22 +4,9 @@
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
 
-    enum EventStatus {
-        Upcoming = 'upcoming',
-        Commencing = 'commencing',
-        HoldingPeriod = 'holdingPeriod',
-        Ended = 'ended'
-    }
+    export let event
 
-    const event = {
-        title: 'Participate in community Treasury proposal',
-        description: 'The future of IOTA is in your hands – you can decide the future of 63Ti unclaimed tokens by participating in this community proposal.\nYou can vote for building the community treasury or burning the unclaimed tokens.',
-        status: EventStatus.Upcoming,
-    }
-
-    const handleButtonClick = () => {
-        governanceRoute.set(GovernanceRoutes.EventDetails)
-    }
+    const handleButtonClick = () => governanceRoute.set(GovernanceRoutes.EventDetails)
 </script>
 
 <div class="w-full h-full bg-lightblue-200 rounded-2xl"></div>
