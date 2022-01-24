@@ -103,7 +103,9 @@ const rendererRules = [
 const mainPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
-        SENTRY_MAIN: JSON.stringify(true),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(true),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
@@ -131,14 +133,18 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
-        SENTRY_MAIN: JSON.stringify(false),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
 const preloadPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
-        SENTRY_MAIN: JSON.stringify(false),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
@@ -149,7 +155,7 @@ const sentryPlugins = [
         release: `Firefly@${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
-        project: 'firefly-desktop',
+        project: `firefly-${process.env.SENTRY_ENVIRONMENT}-desktop`,
         finalize: false,
     }),
 ]

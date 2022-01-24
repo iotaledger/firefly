@@ -1,16 +1,15 @@
-// SENTRY_MAIN is replaced by Webpack DefinePlugin
+/** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, and SENTRY_ENVIRONMENT are replaced by Webpack at compile-time. */
+
 // eslint-disable-next-line no-undef
-const Sentry = SENTRY_MAIN ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
+const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
 
-const SENTRY_DSN = process.env.SENTRY_DSN || ''
-const SENTRY_ORG_NAME = 'iota-foundation-h4'
-const SENTRY_APP_NAME = 'Firefly'
+const appName = 'Firefly'
+const debug = true
+// eslint-disable-next-line no-undef
+const dsn = SENTRY_DSN || ''
+// eslint-disable-next-line no-undef
+const environment = SENTRY_ENVIRONMENT || ''
 
-Sentry.init({
-    dsn: SENTRY_DSN,
-    debug: true,
-    appName: SENTRY_APP_NAME,
-    environment: process.env.NODE_ENV || 'production',
-})
+if (dsn && dsn.length > 0) Sentry.init({ appName, debug, dsn, environment })
 
 export const captureException = Sentry.captureException
