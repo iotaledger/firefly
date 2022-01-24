@@ -256,6 +256,20 @@
                 @apply border-gray-900;
             }
         }
+        &.disabled-hover {
+            background-color: var(--account-color);
+
+            &.bg-blend-exclusion {
+                background-blend-mode: exclusion;
+            }
+        }
+        &:not(.disabled-hover):hover {
+            background-color: var(--account-color);
+
+            &.bg-blend-exclusion {
+                background-blend-mode: exclusion;
+            }
+        }
         &.airdrop {
             @apply opacity-50;
             @apply border;
@@ -277,22 +291,6 @@
         }
         &.hidden-wallet {
             @apply opacity-50;
-        }
-
-        &.disabled-hover {
-            background-color: var(--account-color);
-
-            &.bg-blend-exclusion {
-                background-blend-mode: exclusion;
-            }
-        }
-
-        &:not(.disabled-hover):hover {
-            background-color: var(--account-color);
-
-            &.bg-blend-exclusion {
-                background-blend-mode: exclusion;
-            }
         }
     }
 </style>
