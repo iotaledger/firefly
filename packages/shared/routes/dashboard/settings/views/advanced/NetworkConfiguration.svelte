@@ -1,21 +1,20 @@
 <script lang="typescript">
-    import { Button,Checkbox,Drawer,HR,Radio,Text } from 'shared/components';
-    import { mobile } from 'shared/lib/app';
-    import { localize } from 'shared/lib/i18n';
+    import { Button, Checkbox, Drawer, HR, Radio, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { localize } from 'shared/lib/i18n'
     import {
-    ensureSinglePrimaryNode,
-    getNodeCandidates,
-    getOfficialNetworkConfig,
-    getOfficialNodes,
-    isOfficialNetwork,
-    updateClientOptions
-    } from 'shared/lib/network';
-    import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus';
-    import { openPopup } from 'shared/lib/popup';
-    import { activeProfile,updateProfile } from 'shared/lib/profile';
-    import { NetworkConfig,NetworkStatusHealthText,NetworkType } from 'shared/lib/typings/network';
-    import type { Node } from 'shared/lib/typings/node';
-    import NodeConfigOptions from './NodeConfigOptions.svelte';
+        ensureSinglePrimaryNode,
+        getNodeCandidates,
+        getOfficialNetworkConfig,
+        isOfficialNetwork,
+        updateClientOptions,
+    } from 'shared/lib/network'
+    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
+    import type { Node } from 'shared/lib/typings/node'
+    import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: NetworkConfig =
         $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
@@ -57,7 +56,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
+                onSuccess: (_isNetworkSwitch: boolean, node: Node, _oldNodeUrl: string) => {
                     if (node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
@@ -193,7 +192,7 @@
                 {/each}
                 {#if nodeContextMenu}
                     {#if $mobile}
-                        <Drawer dimLength={180} on:close={() => nodeContextMenu = undefined}>
+                        <Drawer dimLength={180} on:close={() => (nodeContextMenu = undefined)}>
                             <NodeConfigOptions
                                 bind:nodeContextMenu
                                 bind:networkConfig

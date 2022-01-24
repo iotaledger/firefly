@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Platform } from 'shared/lib/platform'
     import { localize } from 'shared/lib/i18n'
+    import { Platform } from 'shared/lib/platform'
 
     let deepLinkingChecked = $appSettings.deepLinking
 

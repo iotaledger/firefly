@@ -1,45 +1,46 @@
 import type { IPincodeManager } from 'shared/lib/typings/pincodeManager'
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 
-/** Pincode Manager  */
-// Runs in renderer process
+/** Mobile Pincode Manager */
 export const PincodeManager: IPincodeManager = {
     /**
      * Sets pincode in keychain
-     *
      * @method set
-     *
-     * @param {string} key
-     * @param {string} pincode
-     *
-     * @returns {Promise}
      */
-    set(key, pincode) {
-        return new Promise<void>((resolve) => resolve())
+    set: async (key: string, pin: string): Promise<void> => {
+        try {
+            const { value } = await SecureStoragePlugin.set({ key, value: pin })
+            if (value) {
+                return
+            } else {
+                throw new Error('pincode can not be stored')
+            }
+        } catch (error) {
+            console.error(error)
+        }
     },
     /**
-     * Verifies user entered pincode against the one stored in keychain
-     *
+     * Verify pincode from keychain
      * @method verify
-     *
-     * @param {string} key
-     * @param {string} pincode
-     *
-     * @returns {Promise}
      */
-    verify(key, pincode) {
-        return new Promise<boolean>(() => true)
+    verify: async (key: string, pin: string): Promise<boolean> => {
+        try {
+            const { value } = await SecureStoragePlugin.get({ key })
+            return value === pin
+        } catch (error) {
+            console.error(error)
+        }
     },
-
     /**
      * Removes pincode entry from the keychain
-     *
      * @method remove
-     *
-     * @param {string} key
-     *
-     * @returns {Promise}
      */
-    remove(key) {
-        return new Promise<boolean>(() => true)
+    remove: async (key: string): Promise<boolean> => {
+        try {
+            const { value } = await SecureStoragePlugin.remove({ key })
+            return value
+        } catch (error) {
+            console.error(error)
+        }
     },
 }

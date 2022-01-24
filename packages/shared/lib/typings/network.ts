@@ -29,7 +29,6 @@ export interface Network {
  * individual instances of these options.
  */
 export interface NetworkConfig {
-    // node?: Node
     nodes?: Node[]
     network?: Network
     automaticNodeSelection?: boolean

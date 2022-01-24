@@ -12,7 +12,6 @@
         HiddenAccounts,
         MigrateLedgerIndex,
         NetworkConfiguration,
-        TransactionHistory,
     } from './'
 
     const settings: {
@@ -23,13 +22,11 @@
     }[] = [
         { component: NetworkConfiguration, childRoute: AdvancedSettings.NetworkConfiguration, requireLogin: true },
         { component: DeepLinks, childRoute: AdvancedSettings.DeepLinks },
-        // { component: DeveloperMode, childRoute: AdvancedSettings.DeveloperMode, requireLogin: true },
         { component: BalanceFinder, childRoute: AdvancedSettings.BalanceFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettings.HiddenAccounts, requireLogin: true },
         { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
-        { component: TransactionHistory, childRoute: AdvancedSettings.TransactionHistory },
     ]
 </script>
 

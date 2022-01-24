@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { ButtonRadio, Radio, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
+    import type { AppTheme } from 'shared/lib/typings/app'
 
     let appTheme: AppTheme = $appSettings.theme
 

@@ -42,13 +42,13 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (isNetworkSwitch: boolean, node: Node) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === node.url)
+                onSuccess: (_isNetworkSwitch: boolean, node: Node, oldNodeUrl: string) => {
+                    const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
                     if (idx >= 0) {
                         if (node.isPrimary) {
                             networkConfig.nodes = networkConfig.nodes.map((n) => ({
                                 ...n,
-                                isPrimary: n.url === node.url,
+                                isPrimary: n.url === oldNodeUrl,
                             }))
                         } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
                             node.isPrimary = true

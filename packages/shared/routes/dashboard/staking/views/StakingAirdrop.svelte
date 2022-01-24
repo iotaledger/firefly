@@ -13,16 +13,15 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
 
     export let airdrop: StakingAirdrop
 
     const isAssembly = (): boolean => airdrop === StakingAirdrop.Assembly
-    const isShimmer = (): boolean => airdrop === StakingAirdrop.Shimmer
 
-    const parseRemainingTime = (overview: ParticipationOverview): [string, string] => {
+    const parseRemainingTime = (): [string, string] => {
         const formattedValue = getBestTimeDuration(
             isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
         )
@@ -32,8 +31,7 @@
         return [timeAmount, timeUnit]
     }
 
-    let remainingTimeAmount, remainingTimeUnit
-    $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime($participationOverview)
+    $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime()
 
     $: stakedAccountsInCurrentAirdrop =
         $stakedAccounts?.filter((account) =>
@@ -44,7 +42,7 @@
             )
         ) ?? []
 
-    let video = {
+    const video = {
         [StakingAirdrop.Assembly]: null,
         [StakingAirdrop.Shimmer]: null,
     }

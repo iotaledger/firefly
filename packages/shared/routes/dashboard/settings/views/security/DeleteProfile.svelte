@@ -1,9 +1,18 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
+    import { wallet } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     function handleDeleteClick() {
+        if (get(get(wallet).balanceOverview).balanceRaw > 0) {
+            return showAppNotification({
+                type: 'error',
+                message: localize('error.profile.delete.nonEmptyAccounts'),
+            })
+        }
         openPopup({ type: 'deleteProfile' })
     }
 </script>

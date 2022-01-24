@@ -118,7 +118,7 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
     }
 
-    const onkey = (e) => {
+    const onKey = (e) => {
         if (e.key === 'Escape') {
             tryClosePopup()
         }
@@ -156,7 +156,7 @@
     }
 
     onMount(() => {
-        let elems = focusableElements()
+        const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
@@ -189,7 +189,7 @@
     }
 </style>
 
-<svelte:window on:keydown={onkey} />
+<svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
     <Drawer preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
         <div bind:this={popupContent} class="p-8">
@@ -200,7 +200,7 @@
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
         class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-            h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
+                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
         <div tabindex="0" on:focus={handleFocusFirst} />
         <popup-content
             use:clickOutside

@@ -2,16 +2,14 @@
     import { Drawer, Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { isLocaleLoaded } from 'shared/lib/i18n'
+    import { isLocaleLoaded, localize } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
-    export let locale: Locale
     export let handleClose
 
     const profileColor = 'blue' // TODO: each profile has a different color
@@ -63,7 +61,7 @@
                 on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
-                    {locale($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsChildRoute}.title`)}
+                    {localize($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsChildRoute}.title`)}
                 </Text>
             </div>
             <div class="flex-1 overflow-y-auto px-6" id="scroller">
@@ -79,9 +77,9 @@
                     </div>
                 {/if}
                 {#if $settingsRoute === SettingsRoutes.Init}
-                    <SettingsHome {locale} />
+                    <SettingsHome />
                 {:else}
-                    <SettingsViewer {locale} />
+                    <SettingsViewer />
                 {/if}
             </div>
         </div>
@@ -93,9 +91,9 @@
             <Icon icon="close" classes="text-gray-800 dark:text-white" />
         </button>
         {#if $settingsRoute === SettingsRoutes.Init}
-            <SettingsHome {locale} />
+            <SettingsHome />
         {:else}
-            <SettingsViewer {locale} />
+            <SettingsViewer />
         {/if}
     </div>
 {/if}
