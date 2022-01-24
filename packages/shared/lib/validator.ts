@@ -774,6 +774,8 @@ export default class ValidatorService {
                 .getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
+            [ResponseTypes.ReadAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
+
             [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
@@ -822,6 +824,11 @@ export default class ValidatorService {
             [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
             [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
+
+            // Participation
+            [ResponseTypes.ParticipationOverview]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.EventsData]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.SentParticipation]: this.createBaseEventValidator().getFirst(),
 
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),

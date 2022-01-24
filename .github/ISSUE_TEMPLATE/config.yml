@@ -1,14 +1,17 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
-  - name: Guide to issues
-    url: https://github.com/iotaledger/firefly/wiki/Issues-Guide
-    about: Read our guide to see how we are using GitHub issues.
-  - name: Request a feature
-    url: https://github.com/iotaledger/firefly/discussions/categories/feature-and-enhancements
-    about: Propose a feature or enhancement in GitHub discussions.
-  - name: Request support
-    url: https://discord.iota.org/
-    about: Ask for help in our discord server.
-  - name: Translation issues
-    url: https://crowdin.com/project/iota-firefly
-    about: Issues with translations can be resolved on Crowdin.
+    - name: Need help?
+      url: https://github.com/iotaledger/firefly/discussions/categories/help-support
+      about: Ask the community for help or support
+    - name: Request a feature
+      url: https://github.com/iotaledger/firefly/discussions/categories/feature-and-enhancements
+      about: Propose a feature or enhancement in GitHub discussions
+    - name: General feedback
+      url: https://github.com/iotaledger/firefly/discussions/categories/feedback
+      about: Leave us some feedback
+    - name: Translation issues
+      url: https://crowdin.com/project/iota-firefly
+      about: Issues with translations can be resolved on Crowdin
+    - name: Join our Discord
+      url: https://discord.iota.org/
+      about: Chat with the devs and the IF community

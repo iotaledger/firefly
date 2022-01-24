@@ -12,19 +12,19 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let locale: Locale
-
-    export let name = ''
-    export let balance = 0
-    export let status = Status.ReadyToMigrate
-    export let errorText = null
-
     enum Status {
         ReadyToMigrate = 0,
         Migrating = 1,
         Success = 2,
         Error = -1,
     }
+    
+    export let locale: Locale
+
+    export let name = ''
+    export let balance = 0
+    export let status = Status.ReadyToMigrate
+    export let errorText = null
 
     const fiatBalance = formatCurrency(
         convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
@@ -34,16 +34,10 @@
     const balanceString = `${formatUnitBestMatch(balance, true, 3)} • ${fiatBalance}`
 
     let showTooltip = false
-    let errorBox
-    let tooltipTop,
-        tooltipLeft,
-        iconWidth = 0
+    let tooltipAnchor
 
     function toggleShow() {
         showTooltip = !showTooltip
-        iconWidth = errorBox.offsetWidth / 2
-        tooltipLeft = errorBox.getBoundingClientRect().left
-        tooltipTop = errorBox.getBoundingClientRect().top
     }
 </script>
 
@@ -65,14 +59,14 @@
             {:else if status === -1}
                 <div class="flex items-center relative">
                     <Text type="p" secondary smaller classes="mr-3">{locale('views.migrate.migrationFailed')}</Text>
-                    <div class="relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={errorBox}>
+                    <div class="relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={tooltipAnchor}>
                         <Icon icon="status-error" classes="text-white bg-red-500 rounded-full " />
-                        {#if showTooltip && errorText}
-                            <Tooltip topOffset={tooltipTop} leftOffset={tooltipLeft} elementWidth={iconWidth}>
-                                <Text>{errorText}</Text>
-                            </Tooltip>
-                        {/if}
                     </div>
+                    {#if showTooltip && errorText}
+                        <Tooltip anchor={tooltipAnchor}>
+                            <Text>{errorText}</Text>
+                        </Tooltip>
+                    {/if}
                 </div>
             {/if}
         </div>

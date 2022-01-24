@@ -30,6 +30,7 @@ export interface Profile {
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
+    hasVisitedStaking?: boolean
 }
 
 /**

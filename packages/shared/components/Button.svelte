@@ -8,8 +8,10 @@
 
     export let secondary = false
     export let disabled = false
+    export let caution = false
     export let warning = false
     export let active = false
+    export let outline = false
     export let icon = undefined
     export let iconReverse = false
     export let xl = false
@@ -57,6 +59,34 @@
             &:active {
                 @apply bg-blue-700;
             }
+            &.caution {
+                @apply bg-yellow-600;
+                min-width: 100px;
+                span {
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-yellow-700;
+                }
+                &:active,
+                &:focus {
+                    @apply bg-yellow-800;
+                }
+                &:disabled {
+                    @apply pointer-events-none;
+                    @apply bg-gray-200;
+                    span {
+                        @apply text-gray-500;
+                    }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
+                    }
+                }
+            }
             &.warning {
                 @apply bg-red-500;
                 min-width: 100px;
@@ -75,6 +105,13 @@
                     @apply bg-gray-200;
                     span {
                         @apply text-gray-500;
+                    }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
                     }
                 }
             }
@@ -134,6 +171,35 @@
                     span {
                         @apply text-gray-700;
                     }
+                }
+            }
+        }
+        &.outline {
+            @apply bg-opacity-0;
+            @apply border-2;
+            span {
+                @apply text-blue-500;
+            }
+            &.secondary {
+                @apply border-white;
+                span {
+                    @apply text-white;
+                }
+            }
+            &.caution {
+                span {
+                    @apply text-yellow-600;
+                }
+            }
+            &.warning {
+                span {
+                    @apply text-red-500;
+                }
+            }
+            &:hover {
+                @apply border-opacity-0;
+                span {
+                    @apply text-gray-900;
                 }
             }
         }
@@ -356,9 +422,11 @@
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
+        class:caution
         class:warning
         class:medium
         class:small
+        class:outline
         class:with-icon={icon}
         class:iconReverse
         class:active
