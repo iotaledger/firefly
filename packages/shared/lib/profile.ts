@@ -12,7 +12,7 @@ import {
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { ValuesOf } from './typings/utils'
-import type { Profile, UserSettings, ProfileAccount } from './typings/profile'
+import type { Profile, UserSettings } from './typings/profile'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
