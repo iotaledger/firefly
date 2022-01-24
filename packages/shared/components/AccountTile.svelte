@@ -49,18 +49,13 @@
     const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
-    let isPartiallyStaked = false
     $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
-
-    let isActivelyStaking = false
     $: isActivelyStaking = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
-
-    let isStakingEnded = false
     $: isStakingEnded = $stakingEventState === ParticipationEventState.Ended
 
-    let isBelowMinimumStakingRewards
-    let isBelowMinimumAssemblyRewards
-    let isBelowMinimumShimmerRewards
+    let isBelowMinimumStakingRewards: boolean
+    let isBelowMinimumAssemblyRewards: boolean
+    let isBelowMinimumShimmerRewards: boolean
 
     $: {
         const { accounts } = get(wallet)
@@ -77,7 +72,6 @@
         }
     }
 
-    let showWarningState = false
     $: showWarningState =
         isPartiallyStaked ||
         (isBelowMinimumStakingRewards && !_hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
@@ -134,7 +128,7 @@
 
             if ($stakingEventState === ParticipationEventState.Ended) {
                 const _getBody = () => {
-                    let body = []
+                    const body = []
                     if (isBelowMinimumAssemblyRewards) {
                         body.push(`${localize('tooltips.stakingMinRewards.bodyDidNotReachMin', {
                             values: {
@@ -163,7 +157,7 @@
                 const remainingTime =
                     airdrop === StakingAirdrop.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
                 const _getBody = () => {
-                    let body = []
+                    const body = []
                     if (isBelowMinimumAssemblyRewards) {
                         if (timeNeededAssembly > remainingTime) {
                             body.push(`${localize('tooltips.stakingMinRewards.bodyBelowMin', {

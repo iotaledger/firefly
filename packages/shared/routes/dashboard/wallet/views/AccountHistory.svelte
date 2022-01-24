@@ -10,14 +10,14 @@
 
     export let locale: Locale
 
-    export let transactions = []
+    export let transactions: AccountMessage[] = []
     export let color = 'blue'
 
-    function handleTransactionClick(transaction) {
+    function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void  {
         selectedMessage.set(null)
     }
 

@@ -310,13 +310,12 @@ export const isStakingForAssembly = (participations: Participation[]): boolean =
 export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
     stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
 
-const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number => {
-    return airdrop === StakingAirdrop.Assembly
+const getAirdropRewardMultipler = (airdrop: StakingAirdrop): number =>
+    airdrop === StakingAirdrop.Assembly
         ? ASSEMBLY_REWARD_MULTIPLIER
         : airdrop === StakingAirdrop.Shimmer
         ? SHIMMER_REWARD_MULTIPLIER
         : 0
-}
 
 const calculateNumMilestonesUntilMinimumReward = (
     rewardsNeeded: number,

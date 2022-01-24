@@ -2,14 +2,12 @@
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
-    import { dashboardRoute,previousDashboardRoute,settingsChildRoute,settingsRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { SettingsHome,SettingsViewer } from './views'
+    import { SettingsHome, SettingsViewer } from './views'
 
-    export let locale: Locale
     export let handleClose
 
     function closeSettings() {
@@ -35,8 +33,8 @@
         </button>
     {/if}
     {#if $settingsRoute === SettingsRoutes.Init}
-        <SettingsHome {locale} />
+        <SettingsHome />
     {:else}
-        <SettingsViewer {locale} />
+        <SettingsViewer />
     {/if}
 </div>
