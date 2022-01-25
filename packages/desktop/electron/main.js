@@ -18,7 +18,7 @@ const canSendDiagnostics = () => {
     return sendDiagnostics
 }
 
-const CAN_LOAD_SENTRY = app.isPackaged && process.env.SENTRY === 'true'
+const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_DIAGNOSTICS = CAN_LOAD_SENTRY && canSendDiagnostics()
 
 if (SEND_DIAGNOSTICS) {
