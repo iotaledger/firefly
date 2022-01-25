@@ -38,7 +38,6 @@
     async function handleContinueClick() {
         const trimmedProfileName = profileName.trim()
         if (trimmedProfileName) {
-            let profile
             error = ''
 
             const validateError = validateFilenameChars(trimmedProfileName)
@@ -74,7 +73,7 @@
                 busy = true
 
                 if (nameChanged || isDeveloperProfileChanged) {
-                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
+                    createProfile(trimmedProfileName, isDeveloperProfile)
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Platform.getUserDataPath()
