@@ -59,6 +59,9 @@
         document.dir = $dir
     }
 
+
+
+    
     let splash = true
     let settings = false
 
