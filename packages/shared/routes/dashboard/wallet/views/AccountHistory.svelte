@@ -15,6 +15,7 @@
         getIncomingFlag,
     } from 'shared/lib/wallet';
     import type { AccountMessage } from 'shared/lib/typings/wallet'
+    import { debounce } from 'shared/lib/utils'
 
     export let locale: Locale
 
@@ -85,6 +86,8 @@
     let activeFilterIndex = 0
 
     let searchActive = false
+    let inputElement: HTMLInputElement
+    $: if (searchActive) inputElement.focus()
     $: searchValue = searchActive ? searchValue : ''
 
     let filteredTransactions = transactions
@@ -103,15 +106,19 @@
     }
 
     let queryTransactions = filteredTransactions
+
     $: if (searchValue) {
-        queryTransactions = filteredTransactions.filter(transaction => {
-            if (transaction?.payload?.type === 'Transaction') {
-                return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
-                    sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
-                    receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue))
-            }
-            return transaction?.id?.includes(searchValue)
-        })
+        (debounce(function() {
+            queryTransactions = filteredTransactions.filter(transaction => {
+                if (transaction?.payload?.type === 'Transaction') {
+                    return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
+                        sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
+                        receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue)) ||
+                        transaction?.id.includes(searchValue)
+                }
+                return transaction?.id?.includes(searchValue)
+            })
+        }))()
     } else {
         queryTransactions = filteredTransactions
     }
@@ -152,7 +159,7 @@
                 </button>
                 <div class="z-0 flex items-center absolute left-0 transition-all {searchActive ? 'w-full' : 'w-0'} overflow-hidden">
                     <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
-                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" />
+                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" bind:inputElement />
                     <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
                         <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
                     </button>

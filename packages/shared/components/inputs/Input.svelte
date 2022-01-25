@@ -23,8 +23,8 @@
     export let maxDecimals = undefined
     export let disableContextMenu = false
     export let capsLockWarning = false
+    export let inputElement
 
-    let inputElement
     const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()
     let capsLockOn = false
