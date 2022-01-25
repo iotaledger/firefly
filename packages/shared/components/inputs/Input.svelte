@@ -1,8 +1,8 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Error, Text } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
-    import { onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -12,7 +12,7 @@
     export let label = undefined
     export let placeholder = undefined
     export let type = 'text'
-    export let error
+    export let error: string
     export let maxlength = null
     export let float = false
     export let integer = false
