@@ -8,20 +8,20 @@ const { execSync } = require('child_process')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-let sendDiagnostics = loadJsonConfig('settings.json').sendDiagnostics && app.isPackaged
-if (typeof sendDiagnostics === 'undefined') {
-    /**
-     * NOTE: If the diagnostic reporting metadata
-     * is undefined (will be the case for existing
-     * settings files), then set it to false by default
-     * and update the actual JSON file.
-     */
-    sendDiagnostics = false
+const canSendDiagnostics = () => {
+    let sendDiagnostics = loadJsonConfig('settings.json')?.sendDiagnostics
+    if (typeof sendDiagnostics === 'undefined') {
+        sendDiagnostics = false
+        updateSettings({ sendDiagnostics })
+    }
 
-    updateSettings({ sendDiagnostics })
+    return sendDiagnostics
 }
 
-if (sendDiagnostics) {
+const CAN_LOAD_SENTRY = process.env.SENTRY === 'true' && app.isPackaged
+const SEND_DIAGNOSTICS = CAN_LOAD_SENTRY && canSendDiagnostics()
+
+if (SEND_DIAGNOSTICS) {
     module.require('../sentry')
 }
 
@@ -64,16 +64,18 @@ const handleError = (errorType, error, isRenderProcessError) => {
             errorType,
         }
 
-        Sentry.captureException(
-            new Error(
-                JSON.stringify({
-                    type: errorType,
-                    message: error.message || error.reason || error,
-                    stack: error.stack || undefined,
-                    diagnostics,
-                })
+        if (SEND_DIAGNOSTICS) {
+            Sentry.captureException(
+                new Error(
+                    JSON.stringify({
+                        type: errorType,
+                        message: error.message || error.reason || error,
+                        stack: error.stack || undefined,
+                        diagnostics,
+                    })
+                )
             )
-        )
+        }
 
         openErrorWindow()
     } else {
@@ -123,7 +125,7 @@ const defaultWebPreferences = {
     webviewTag: false,
     enableWebSQL: false,
     devTools: !app.isPackaged,
-    additionalArguments: [`--send-diagnostics=${sendDiagnostics}`],
+    additionalArguments: [`--send-diagnostics=${SEND_DIAGNOSTICS}`],
 }
 
 if (app.isPackaged) {

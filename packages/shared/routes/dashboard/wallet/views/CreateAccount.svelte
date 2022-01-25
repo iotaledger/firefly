@@ -84,6 +84,9 @@
     const handleCancelClick = () => {
         error = ''
         walletRoute.set(WalletRoutes.Init)
+
+        /* eslint-disable no-undef */
+        sentryErrorTestFunction()
     }
 </script>
 
