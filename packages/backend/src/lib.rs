@@ -123,10 +123,7 @@ pub async fn init<A: Into<String>>(
     send_diagnostics: Option<bool>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
-    let send_diagnostics = match send_diagnostics {
-        Some(arg) => arg,
-        None => false,
-    };
+    let send_diagnostics = send_diagnostics.unwrap_or(false);
     if send_diagnostics {
         // NOTE: unsafe is required here so that the Sentry guard can be
         // re-initialized with this init call.
