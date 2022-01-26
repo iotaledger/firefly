@@ -4,11 +4,12 @@ const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const { version } = require('./package.json')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
-const version = '1.2.0'
+const SENTRY = process.env.SENTRY === 'true'
 
 // / ------------------------ Resolve ------------------------
 
@@ -102,7 +103,9 @@ const rendererRules = [
 const mainPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
-        SENTRY_MAIN: JSON.stringify(true),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(true),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
@@ -130,14 +133,18 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
-        SENTRY_MAIN: JSON.stringify(false),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
 const preloadPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
-        SENTRY_MAIN: JSON.stringify(false),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
     }),
 ]
 
@@ -145,12 +152,11 @@ const sentryPlugins = [
     new SentryWebpackPlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
-        release: `firefly-${version}`,
+        release: `Firefly@${version}`,
         ignoreFile: '.sentrycliignore',
-        ignore: ['node_modules', 'webpack.config.js'],
         org: 'iota-foundation-h4',
-        project: 'firefly-test-desktop',
-        configFile: 'sentry.properties',
+        project: `firefly-${process.env.SENTRY_ENVIRONMENT}-desktop`,
+        finalize: false,
     }),
 ]
 
@@ -167,8 +173,8 @@ module.exports = [
             rules: rendererRules,
         },
         mode,
-        plugins: [...rendererPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        plugins: [...rendererPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         devServer: {
             hot: true,
         },
@@ -184,8 +190,8 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: [...mainPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        plugins: [...mainPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
@@ -207,8 +213,8 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: [...preloadPlugins, ...sentryPlugins],
-        devtool: prod ? false : 'cheap-module-source-map',
+        plugins: [...preloadPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: SENTRY && prod ? 'source-map' : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,
