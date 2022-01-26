@@ -218,6 +218,8 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
             .expect("Failed to lock message_receivers: respond()");
         message_receivers.remove(&actor_id);
     }
+
+    panic!("[Sentry Error Test] lib.rs")
 }
 
 pub fn init_logger(config: LoggerConfigBuilder) {

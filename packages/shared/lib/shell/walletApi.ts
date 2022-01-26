@@ -157,6 +157,10 @@ Wallet.onMessage((message: MessageResponse) => {
         return
     }
 
+    if (message && message.type === ResponseTypes.LockedStronghold) {
+        throw '[Sentry Error Test] walletApi.ts'
+    }
+
     const _deleteCallbackId = (_id: string) => {
         // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {
