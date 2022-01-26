@@ -416,8 +416,8 @@
                 "description": "View system and application information",
                 "reporting": {
                     "title": "Send reports",
-                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data for any errors or crashes.",
-                    "checkbox": "Share diagnostic data",
+                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data for any errors or crashes",
+                    "checkbox": "Send diagnostic reports",
                     "advice": "Please restart the Firefly application to {sendDiagnostics, select, true {start sharing diagnostic reports} false {stop sharing diagnostic reports} other {apply this change}}"
                 }
             },

@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfDiagnosticSharing } from 'shared/lib/appSettings'
 
     export let locale: Locale
     export let mobile
@@ -19,6 +19,9 @@
 
     const handleContinueClick = () => {
         appSettings.set({ ...get(appSettings), sendDiagnostics })
+
+        if (!$isAwareOfDiagnosticSharing)
+            isAwareOfDiagnosticSharing.set(true)
 
         dispatch('next')
     }

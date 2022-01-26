@@ -31,6 +31,7 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
+    import SendDiagnosticReports from './SendDiagnosticReports.svelte'
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
@@ -103,6 +104,7 @@
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
+        sendDiagnosticReports: SendDiagnosticReports,
         transaction: Transaction,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
