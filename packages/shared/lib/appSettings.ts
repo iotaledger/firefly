@@ -12,14 +12,14 @@ export const appSettings = persistent<AppSettings>('settings', {
     theme: 'light',
     darkMode: false,
     notifications: true,
-    sendDiagnostics: true,
+    sendCrashReports: false,
 })
 
 /**
  * The initial application settings, useful for things that require
  * Firefly to restart\*:
  * - Sentry diagnostic reporting for errors and crashes - the Electron
- *    app and Rust bindings both need to know if sendDiagnostics is true
+ *    app and Rust bindings both need to know if sendCrashReports is true
  *    when creating the actor system.
  *
  * \* The reason is that whenever the normal appSettings changes against this
@@ -32,9 +32,9 @@ export const initAppSettings = writable<Readonly<Partial<AppSettings>>>(null)
 
 /**
  * A persisted boolean value indicating whether the user has already been prompted to choose
- * between sending or not sending diagnostic reports.
+ * between sending or not sending crash reports.
  */
-export const isAwareOfDiagnosticSharing = persistent<boolean>('isAwareOfDiagnosticSharing', false)
+export const isAwareOfCrashReporting = persistent<boolean>('isAwareOfCrashReporting', false)
 
 /**
  * NOTE: This media query is performed only once to help make the UX

@@ -1,7 +1,7 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const { captureException } = require('../sentry')
 
-const SEND_DIAGNOSTICS = window.process.argv.includes('--send-diagnostics=true')
+const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -10,12 +10,12 @@ window.addEventListener('error', (event) => {
             message: event.error.message,
             stack: event.error.stack,
         })
-        if (SEND_DIAGNOSTICS) {
+        if (SEND_CRASH_REPORTS) {
             captureException(event.error)
         }
     } else {
         ipcRenderer.invoke('handle-error', 'Preload Context Error', event.error || event)
-        if (SEND_DIAGNOSTICS) {
+        if (SEND_CRASH_REPORTS) {
             captureException(event)
         }
     }

@@ -69,7 +69,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
-            const { sendDiagnostics } = get(initAppSettings)
+            const { sendCrashReports } = get(initAppSettings)
 
             isBusy = true
 
@@ -77,7 +77,7 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name), sendDiagnostics)
+                            initialise(profile.id, getStoragePath(path, profile.name), sendCrashReports)
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
                                     dispatch('next')

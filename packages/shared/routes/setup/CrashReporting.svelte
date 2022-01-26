@@ -3,13 +3,13 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { appSettings, isAwareOfDiagnosticSharing } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
 
     export let locale: Locale
     export let mobile
 
     let busy = false
-    let sendDiagnostics = $appSettings.sendDiagnostics
+    let sendCrashReports = $appSettings.sendCrashReports
 
     const dispatch = createEventDispatcher()
 
@@ -18,10 +18,10 @@
     }
 
     const handleContinueClick = () => {
-        appSettings.set({ ...get(appSettings), sendDiagnostics })
+        appSettings.set({ ...get(appSettings), sendCrashReports })
 
-        if (!$isAwareOfDiagnosticSharing)
-            isAwareOfDiagnosticSharing.set(true)
+        if (!$isAwareOfCrashReporting)
+            isAwareOfCrashReporting.set(true)
 
         dispatch('next')
     }
@@ -32,11 +32,11 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.diagnostics.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.diagnostics.body')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.crashReporting.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.crashReporting.body')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Checkbox label={locale('views.diagnostics.checkbox')} bind:checked={sendDiagnostics} classes="mb-8" />
+            <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} classes="mb-8" />
             <Button classes="w-full" onClick={handleContinueClick}>
                 {locale('actions.continue')}
             </Button>

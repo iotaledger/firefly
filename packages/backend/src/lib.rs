@@ -120,11 +120,11 @@ fn init_sentry() -> Option<sentry::ClientInitGuard> {
 pub async fn init<A: Into<String>>(
     actor_id: A,
     storage_path: Option<impl AsRef<Path>>,
-    send_diagnostics: Option<bool>,
+    send_crash_reports: Option<bool>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
-    let send_diagnostics = send_diagnostics.unwrap_or(false);
-    if send_diagnostics {
+    let send_crash_reports = send_crash_reports.unwrap_or(false);
+    if send_crash_reports {
         // NOTE: unsafe is required here so that the Sentry guard can be
         // re-initialized with this init call.
         unsafe {

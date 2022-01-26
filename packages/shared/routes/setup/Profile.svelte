@@ -80,8 +80,8 @@
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
-                    const { sendDiagnostics } = $initAppSettings
-                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name), sendDiagnostics)
+                    const { sendCrashReports } = $initAppSettings
+                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name), sendCrashReports)
 
                     initialiseMigrationListeners()
                 }

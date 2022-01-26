@@ -9,10 +9,10 @@
             "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "diagnostics": {
-            "title": "Send diagnostic reports",
-            "body": "Help improve Firefly by automatically sending anonymous diagnostic data.",
-            "checkbox": "Share diagnostic data with the IOTA Foundation"
+        "crashReporting": {
+            "title": "Crash Reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
             "title": "Appearance",
@@ -411,15 +411,15 @@
                 "title": "Error log",
                 "description": "View errors to debug an issue"
             },
+            "crashReporting": {
+                "title": "Crash reports",
+                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
+                "checkbox": "Send crash reports",
+                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+            },
             "diagnostics": {
                 "title": "Diagnostics",
-                "description": "View system and application information",
-                "reporting": {
-                    "title": "Send reports",
-                    "body": "Help improve Firefly by automatically sending anonymous diagnostic data for any errors or crashes",
-                    "checkbox": "Send diagnostic reports",
-                    "advice": "Please restart the Firefly application to {sendDiagnostics, select, true {start sharing diagnostic reports} false {stop sharing diagnostic reports} other {apply this change}}"
-                }
+                "description": "View system and application information"
             },
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger index",
@@ -764,6 +764,11 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "crashReporting": {
+            "title": "Crash reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
         }
     },
     "charts": {

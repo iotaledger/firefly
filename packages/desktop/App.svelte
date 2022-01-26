@@ -15,35 +15,35 @@
     import type { Locale } from 'shared/lib/typings/i18n';
     import { AppRoute,Tabs } from 'shared/lib/typings/routes';
     import {
-    Appearance,
-    Backup,
-    Balance,
-    Congratulations,
-    Create,
-    Dashboard,
-    Diagnostics,
-    Import,
-    Ledger,
-    Legal,
-    Login,
-    Migrate,
-    Password,
-    Profile,
-    Protect,
-    Secure,
-    Settings,
-    Setup,
-    Splash,
-    Welcome
+        Appearance,
+        Backup,
+        Balance,
+        Congratulations,
+        CrashReporting,
+        Create,
+        Dashboard,
+        Import,
+        Ledger,
+        Legal,
+        Login,
+        Migrate,
+        Password,
+        Profile,
+        Protect,
+        Secure,
+        Settings,
+        Setup,
+        Splash,
+        Welcome
     } from 'shared/routes'
     import { onDestroy,onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    const handleDiagnosticReporting = async (sendDiagnostics: boolean): Promise<void> =>
-        Electron.updateAppSettings({ sendDiagnostics })
+    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
+        Electron.updateAppSettings({ sendCrashReports })
 
-    $: void handleDiagnosticReporting($appSettings.sendDiagnostics)
+    $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: {
@@ -249,8 +249,8 @@
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
-        <Route route={AppRoute.Diagnostics}>
-            <Diagnostics on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

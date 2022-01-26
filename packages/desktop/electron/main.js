@@ -8,20 +8,20 @@ const { execSync } = require('child_process')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
-const canSendDiagnostics = () => {
-    let sendDiagnostics = loadJsonConfig('settings.json')?.sendDiagnostics
-    if (typeof sendDiagnostics === 'undefined') {
-        sendDiagnostics = false
-        updateSettings({ sendDiagnostics })
+const canSendCrashReports = () => {
+    let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
+    if (typeof sendCrashReports === 'undefined') {
+        sendCrashReports = false
+        updateSettings({ sendCrashReports })
     }
 
-    return sendDiagnostics
+    return sendCrashReports
 }
 
 const CAN_LOAD_SENTRY = app.isPackaged
-const SEND_DIAGNOSTICS = CAN_LOAD_SENTRY && canSendDiagnostics()
+const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 
-if (SEND_DIAGNOSTICS) {
+if (SEND_CRASH_REPORTS) {
     module.require('../sentry')
 }
 
@@ -64,7 +64,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
             errorType,
         }
 
-        if (SEND_DIAGNOSTICS) {
+        if (SEND_CRASH_REPORTS) {
             Sentry.captureException(
                 new Error(
                     JSON.stringify({
@@ -125,7 +125,7 @@ const defaultWebPreferences = {
     webviewTag: false,
     enableWebSQL: false,
     devTools: !app.isPackaged,
-    additionalArguments: [`--send-diagnostics=${SEND_DIAGNOSTICS}`],
+    additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
 if (app.isPackaged) {

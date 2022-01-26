@@ -81,7 +81,7 @@ declare_types! {
                 },
                 None => None,
             };
-            let send_diagnostics = match cx.argument_opt(2) {
+            let send_crash_reports = match cx.argument_opt(2) {
                 Some(arg) => {
                     Some(arg.downcast::<JsBoolean>().or_throw(&mut cx)?.value())
                 },
@@ -91,7 +91,7 @@ declare_types! {
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
             RUNTIME.block_on(async move {
-                init_actor(clone_actor_id.to_string(), storage_path, send_diagnostics, wrapped_tx).await;
+                init_actor(clone_actor_id.to_string(), storage_path, send_crash_reports, wrapped_tx).await;
             });
 
             Ok(ActorSystem {

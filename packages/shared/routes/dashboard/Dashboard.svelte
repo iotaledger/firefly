@@ -5,7 +5,7 @@
     import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, sendParams } from 'shared/lib/app'
-    import {appSettings, isAwareOfDiagnosticSharing} from 'shared/lib/appSettings'
+    import {appSettings, isAwareOfCrashReporting} from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
@@ -122,11 +122,10 @@
          * NOTE: We check for mobile because it's only necessary
          * for existing desktop installation.
          */
-        if (!mobile && !$isAwareOfDiagnosticSharing) {
-            /** NOTE: The timeout is to make it seem less abrupt. */
-            setTimeout(() => openPopup({
-                type: 'sendDiagnosticReports',
-            }), 1500)
+        if (!mobile && !$isAwareOfCrashReporting) {
+            openPopup({
+                type: 'crashReporting',
+            })
         }
     })
 

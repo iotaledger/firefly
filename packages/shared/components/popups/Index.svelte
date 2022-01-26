@@ -11,6 +11,7 @@
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
+    import CrashReporting from './CrashReporting.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -31,7 +32,6 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
-    import SendDiagnosticReports from './SendDiagnosticReports.svelte'
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
@@ -102,9 +102,9 @@
         switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
+        crashReporting: CrashReporting,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        sendDiagnosticReports: SendDiagnosticReports,
         transaction: Transaction,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,

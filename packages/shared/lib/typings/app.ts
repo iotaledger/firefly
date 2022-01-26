@@ -12,5 +12,5 @@ export interface AppSettings {
     theme: AppTheme
     darkMode: boolean
     notifications: boolean
-    sendDiagnostics: boolean
+    sendCrashReports: boolean
 }
