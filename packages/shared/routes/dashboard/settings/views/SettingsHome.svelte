@@ -46,6 +46,8 @@
     <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
     <div class="flex items-start flex-row space-x-10">
         <SettingsMenu
+            icon="settings"
+            iconColor="bg-blue-500"
             icons={SettingsIcons}
             settings={GeneralSettings}
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
@@ -54,6 +56,8 @@
             onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
             {localize} />
         <SettingsMenu
+            icon="security"
+            iconColor="bg-yellow-500"
             icons={SettingsIcons}
             settings={securitySettings}
             activeSettings={$loggedIn ? SecuritySettings : undefined}
@@ -62,6 +66,8 @@
             onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
             {localize} />
         <SettingsMenu
+            icon="tools"
+            iconColor="bg-green-600"
             icons={SettingsIcons}
             settings={advancedSettings}
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
@@ -70,6 +76,8 @@
             onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
             {localize} />
         <SettingsMenu
+            icon="info"
+            iconColor="bg-purple-500"
             icons={SettingsIcons}
             settings={HelpAndInfo}
             activeSettings={HelpAndInfo}
