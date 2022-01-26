@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -8,20 +9,20 @@
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
+    import type { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
+    import type { DateDiff } from 'shared/lib/typings/wallet';
 
     export let locale: Locale
 
-    let lastBackupDate
-    let lastBackupDateFormatted
-    let backupSafe
-    let color
-    let isCheckingLedger
-    let ledgerSpinnerTimeout
-
+    let lastBackupDate: Date
+    let lastBackupDateFormatted: DateDiff
+    let backupSafe: Date
+    let color: string
+    let isCheckingLedger: boolean
+    let ledgerSpinnerTimeout: NodeJS.Timeout
     let hardwareDeviceColor = 'gray'
+    let hardwareDeviceStatus: string
+
     $: {
         switch ($ledgerDeviceState) {
             default:
@@ -37,12 +38,27 @@
                 break
         }
     }
+    $: checkHardwareDeviceStatus($ledgerDeviceState)
+    $: setup(), profiles // Runs setup when profiles changes
 
-    const unsubscribe = profiles.subscribe(() => {
+
+    onMount(() => {
         setup()
     })
 
-    const checkHardwareDeviceStatus = (state: LedgerDeviceState): void => {
+    onDestroy(() => {
+        clearTimeout(ledgerSpinnerTimeout)
+    })
+
+    function setup() {
+        const lastStrongholdBackupTime = $activeProfile.lastStrongholdBackupTime
+        lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+        lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+        backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
+        color = getBackupWarningColor(lastBackupDate)
+    }
+
+    function checkHardwareDeviceStatus(state: LedgerDeviceState): void {
         const values: LocaleArgs = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
@@ -63,27 +79,6 @@
         } else {
             hardwareDeviceStatus = text
         }
-    }
-
-    let hardwareDeviceStatus
-    $: checkHardwareDeviceStatus($ledgerDeviceState)
-
-    onMount(() => {
-        setup()
-    })
-
-    onDestroy(() => {
-        clearTimeout(ledgerSpinnerTimeout)
-        unsubscribe()
-    })
-
-    function setup() {
-        const ap = get(activeProfile)
-        const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
-        lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
-        lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
-        backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
-        color = getBackupWarningColor(lastBackupDate)
     }
 
     function handleSecurityTileClick(popupType) {

@@ -4,11 +4,10 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api,getStoragePath,initialise } from 'shared/lib/wallet'
-    import { createEventDispatcher,onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
+    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -61,11 +60,11 @@
     }
 
     function onSubmit() {
-        if (get(ongoingSnapshot) === true) {
+        if ($ongoingSnapshot === true) {
             return openSnapshotPopup()
         }
         if (!hasReachedMaxAttempts) {
-            const profile = get(activeProfile)
+            const profile = $activeProfile
 
             isBusy = true
 
