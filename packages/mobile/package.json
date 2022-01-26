@@ -28,7 +28,7 @@
     "dependencies": {
         "shared-modules": "link:../shared",
         "@capacitor/filesystem": "^1.0.6",
-        "wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/"
+        "capacitor-native-filepicker": "https://github.com/ourcodeworld/capacitor-native-filepicker","wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/"
     },
     "engineStrict": true,
     "engines": {
