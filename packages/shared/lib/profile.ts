@@ -1,3 +1,4 @@
+import { derived, get, Readable, writable } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
@@ -8,39 +9,31 @@ import {
     getWalletStoragePath,
     AccountColors,
 } from 'shared/lib/wallet'
-import { derived, get, Readable, writable } from 'svelte/store'
 import { Platform } from './platform'
-import type { ValuesOf } from './typings/utils'
-import type { Profile, UserSettings } from './typings/profile'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
-import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import { account } from './typings'
+import type { ValuesOf } from './typings/utils'
+import type { Profile, UserSettings } from './typings/profile'
+import type { WalletAccount } from './typings/wallet'
 
-export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export interface ProfileAccount {
     id: string
     color: string
 }
 
+export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export const profiles = persistent<Profile[]>('profiles', [])
-
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
 export const newProfile = writable<Profile | null>(null)
-
 export const isStrongholdLocked = writable<boolean>(true)
 
-/**
- * Currently active profile
- */
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
-    ([$profiles, $newProfile, $activeProfileId]) =>
-        $newProfile || $profiles.find((_profile) => _profile.id === $activeProfileId)
+    ([$profiles, $newProfile, $activeProfileId]) => $newProfile || $profiles.find((p) => p.id === $activeProfileId)
 )
 
 activeProfileId.subscribe((profileId) => {
@@ -146,15 +139,15 @@ export const migrateProfile = (): void => {
  * @returns {void}
  */
 export const disposeNewProfile = async (): Promise<void> => {
-    const _newProfile = get(newProfile)
-    if (_newProfile) {
+    const profile = get(newProfile)
+    if (profile) {
         try {
             await asyncDeleteStorage()
-            await removeProfileFolder(_newProfile.name)
+            await removeProfileFolder(profile.name)
         } catch (err) {
             console.error(err)
         }
-        destroyActor(_newProfile.id)
+        destroyActor(profile.id)
     }
 
     newProfile.set(null)
@@ -207,6 +200,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
+// TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
 export const updateProfile = (
     path: string,
     value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<NetworkConfig>
