@@ -821,6 +821,23 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
     })
 }
 
+export const asyncStopBackgroundSync = (): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
+        api.stopBackgroundSync({
+            onSuccess() {
+                isBackgroundSyncing.set(false)
+                resolve()
+            },
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize('error.global.generic'),
+                })
+                reject()
+            },
+        })
+    })
+
 /**
  * Displays participation (stake/unstake) notification
  *
