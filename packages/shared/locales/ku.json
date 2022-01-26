@@ -22,9 +22,10 @@
                 "nonFirst": "Ji bo niha, em bi navê profîla xweya yekem dest pê bikin."
             },
             "addMore": "Hûn dikarin paşê profîlên din zêde bikin.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profîla Pêşvebir",
-                "info": "Bi torên giştî û taybet ên IOTA-yê ve girêdin"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Kirarê bipêjirîn",
             "body": "Wê tu ewqasî {amount} hinêrî",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Gerdîta mayîna",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Şander",
         "to": "Kî",
         "receiveFunds": "Heyînên hatîn",
+        "address": "Address",
         "myAddress": "Navnîşana Min",
         "shareAddress": "Navnîşanekê parve bike",
         "yourAddress": "Navnîşana we",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Rojmêr",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

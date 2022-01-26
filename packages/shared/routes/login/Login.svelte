@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { SelectProfile, EnterPin } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { migrateProfile } from 'shared/lib/profile'
+    import { activeProfileId, clearActiveProfile, migrateProfile, profiles } from 'shared/lib/profile'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
+    import { EnterPin, SelectProfile } from './views/'
 
     export let locale: Locale
 
@@ -19,9 +20,21 @@
     let state: LoginState = LoginState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    onMount(() => {
+        if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
+            _next()
+        } else {
+            clearActiveProfile()
+        }
+    })
+
+    const _next = (
+        event: {
+            detail: any
+        } = { detail: {} }
+    ) => {
         let nextState
-        const params = event.detail || {}
+        const params = event?.detail || {}
         switch (state) {
             case LoginState.Init: {
                 const { shouldAddProfile } = params

@@ -3,7 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -115,6 +115,7 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
+            clearActiveProfile()
             dispatch('previous')
         }
     }

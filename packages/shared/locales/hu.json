@@ -22,9 +22,10 @@
                 "nonFirst": "Egyelőre kezdjük a profiljának nevével."
             },
             "addMore": "Később további profilokat is felvehet.",
+            "advancedOptions": "Haladó beállítások",
             "developer": {
                 "label": "Fejlesztői profil",
-                "info": "Kapcsolódás publikus és privát IOTA hálózatokhoz"
+                "info": "Csatlakozzon a fejlesztői vagy egy privát hálózatra"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése",
-            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie."
+            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
+            "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat."
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
@@ -746,6 +748,10 @@
             "title": "Az Assembly-ről",
             "body1": "Gratulálunk! A staking eseményen ASMB tokeneket kapott jutalmul. Az Assembly egy többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható az IOTA hálózat felett.",
             "body2": "Az Assembly hálózatot várhatóan 2022-ben fogjuk elindítani. A hálózat indulásakor fogja tudni az SMR tokenjeit felhasználni."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Egy fejlesztői profilt hoz létre",
+            "body": "Alapértelmezetten a Chrysalis fejlesztői hálózatra csatlakozik és kézzel válthat a hálózatok között. Csak akkor folytassa, ha pontosan tudja mit csinál."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Feladó",
         "to": "Címzett",
         "receiveFunds": "Utalás fogadása",
+        "address": "Számlacím",
         "myAddress": "Címem",
         "shareAddress": "Cím megosztása",
         "yourAddress": "Az Ön címe",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formázott adat",
             "date": "Dátum",
             "time": "Idő"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Jelenleg a fejlesztői profilt használja és a {networkName} hálózatra van csatlakozva"
         }
     }
 }

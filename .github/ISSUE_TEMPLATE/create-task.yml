@@ -1,0 +1,50 @@
+---
+name: New task
+description: Create a new work task
+title: '[Task]: '
+
+body:
+    - type: markdown
+      attributes:
+          value: '## Creating a task'
+    - type: markdown
+      attributes:
+          value: |
+              This form should be used by official maintainers only to create new work tasks. Most tasks should be assigned to a milestone and the task management project.
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Task description
+          description: Describe the task that needs to be completed.
+      validations:
+          required: true
+
+    - type: textarea
+      id: requirements
+      attributes:
+          label: Requirements
+          description: What are the requirements for this task, this could be a checklist of subtasks.
+      validations:
+          required: true
+
+    - type: textarea
+      id: acceptance_criteria
+      attributes:
+          label: Acceptance criteria
+          description: What is the criteria for this task to be marked as done? This will help anyone approving any PRs related to this task.
+      validations:
+          required: true
+
+    - type: checkboxes
+      id: checklist
+      attributes:
+          label: Creation checklist
+          description: 'Before submitting this task please ensure you have done the following if necessary:'
+          options:
+              - label: I have assigned this task to the correct people
+                required: false
+              - label: I have added the most appropriate labels
+                required: false
+              - label: I have linked the correct milestone and/or project
+                required: false

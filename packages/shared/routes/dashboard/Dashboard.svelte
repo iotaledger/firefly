@@ -281,8 +281,8 @@
         <Sidebar {locale} />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
-            <DeveloperProfileIndicator {locale}/>
             <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+            <DeveloperProfileIndicator {locale} classes="absolute top-0" />
         </div>
     </div>
 {/if}

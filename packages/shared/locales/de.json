@@ -22,9 +22,10 @@
                 "nonFirst": "Beginnen wir zunächst mit deinem Profilnamen."
             },
             "addMore": "Du kannst später weitere Profile hinzufügen.",
+            "advancedOptions": "Erweiterte Optionen",
             "developer": {
                 "label": "Entwicklerprofil",
-                "info": "Mit öffentlichen und privaten IOTA-Netzwerken verbinden"
+                "info": "Mit dem Devnet oder einem eigenen Netzwerk verbinden"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Transaktion bestätigen",
             "body": "Du sendest {amount} an",
-            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst."
+            "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
+            "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen."
         },
         "balanceFinder": {
             "title": "Guthabensuche",
@@ -746,6 +748,10 @@
             "title": "Über Assembly",
             "body1": "Herzlichen Glückwunsch! Für das Staking hast du ASMB Token erhalten. Assembly ist ein Multi-Chain Netzwerk, welches es ermöglicht, skalierbare Smart-Contracts auf IOTA bereitzustellen.",
             "body2": "Unser Ziel ist es, Assembly in 2022 zu starten. Deine Token werden verfügbar sein, sobald das Netzwerk startet."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Du erstellst ein Entwicklerprofil",
+            "body": "Du wirst standardmäßig mit dem Chrysalis-Devnet verbunden, kannst das Netzwerk jedoch manuell wechseln. Fahre nur fort, wenn du weißt, was du tust."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Von",
         "to": "An",
         "receiveFunds": "Guthaben empfangen",
+        "address": "Adresse",
         "myAddress": "Meine Adresse",
         "shareAddress": "Adresse teilen",
         "yourAddress": "Deine Adresse",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatierter Wert",
             "date": "Datum",
             "time": "Uhrzeit"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Du verwendest derzeit ein Entwicklerprofil und bist mit {networkName} verbunden"
         }
     }
 }

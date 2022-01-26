@@ -22,9 +22,10 @@
                 "nonFirst": "Şimdilik, profil adınızla başlayalım."
             },
             "addMore": "Daha sonra daha fazla profil ekleyebilirsiniz.",
+            "advancedOptions": "Gelişmiş seçenekler",
             "developer": {
                 "label": "Geliştirici profili",
-                "info": "Genel ve özel IOTA ağlarına bağlan"
+                "info": "Devnet'e veya özel bir ağa bağlanın"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "İşlemi onayla",
             "body": "Bu kadar miktar göndermek üzeresiniz {amount}",
-            "sendingFromStakedAccount": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir."
+            "sendingFromStakedAccount": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir.",
+            "sendingFromStakedAccountBelowMinReward": "Henüz minimum stake ödüllerine ulaşmamış bir cüzdandan transfer gönderiyorsunuz.\nBu jetonlarınızı geri alabilir ve bu cüzdandaki stake ödüllerinizi kaybedebilirsiniz."
         },
         "balanceFinder": {
             "title": "Bakiye bulucu",
@@ -746,6 +748,10 @@
             "title": "Assembly Hakkında",
             "body1": "Tebrikler, staking ödülü olarak ASMB tokenları kazandınız. Assembly, IOTA'da ölçeklenebilir akıllı sözleşmeler yerleştirmek için çok zincirli bir ağdır.",
             "body2": "Assembly'i 2022'de piyasaya sürmeyi hedefliyoruz. Ağ başlatıldığında tokenlarınız transfer edilebilir hale gelecek."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Bir geliştirici profili oluşturuyorsunuz",
+            "body": "Varsayılan olarak Chrysalis Devnet'e bağlanacaksınız ve ağları manuel olarak değiştirebilirsiniz. Sadece ne yaptığınızı biliyorsanız devam edin."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Gönderen",
         "to": "Kime",
         "receiveFunds": "Gelen varlıklar",
+        "address": "Adres",
         "myAddress": "Adresim",
         "shareAddress": "Bir adres paylaşın",
         "yourAddress": "Adresiniz",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Biçimlenmiş Değer",
             "date": "Tarih",
             "time": "Zaman"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Şu anda bir geliştirici profili kullanıyorsunuz ve şuraya bağlısınız {networkName}"
         }
     }
 }

@@ -1,5 +1,5 @@
 import { app, ipcMain, Menu, shell } from 'electron'
-import { WalletRoutes } from 'shared/lib/typings/routes'
+import { WalletRoutes, ExternalRoute } from 'shared/lib/typings/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState } from './menuState'
 
@@ -208,25 +208,25 @@ const buildTemplate = () => {
             {
                 label: state.strings.faq,
                 click: function () {
-                    shell.openExternal('https://firefly.iota.org/faq')
+                    shell.openExternal(ExternalRoute.FAQ)
                 },
             },
             {
                 label: state.strings.documentation,
                 click: function () {
-                    shell.openExternal('https://wiki.iota.org/')
+                    shell.openExternal(ExternalRoute.Documentation)
                 },
             },
             {
                 label: state.strings.discord,
                 click: function () {
-                    shell.openExternal('https://discord.iota.org')
+                    shell.openExternal(ExternalRoute.Discord)
                 },
             },
             {
                 label: state.strings.reportAnIssue,
                 click: function () {
-                    shell.openExternal('https://github.com/iotaledger/firefly/issues')
+                    shell.openExternal(ExternalRoute.IssueReport)
                 },
             },
         ],

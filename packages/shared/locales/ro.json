@@ -22,9 +22,10 @@
                 "nonFirst": "Deocamdată, să începem cu numele de profil."
             },
             "addMore": "Puteți adăuga mai multe profiluri mai târziu.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Profil developer",
-                "info": "Conectare la rețelele publice și private IOTA"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmați tranzacția",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards."
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -746,6 +748,10 @@
             "title": "About Assembly",
             "body1": "Felicitări ai câștigat jetoane ASMB ca o recompensă din mizare. Assembly este o rețea multi-lanț pentru implementarea de contracte inteligente scalabile pe IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De la",
         "to": "Către",
         "receiveFunds": "Receive Funds",
+        "address": "Address",
         "myAddress": "My Address",
         "shareAddress": "Partajează o adresă",
         "yourAddress": "Adresa ta",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formatted Value",
             "date": "Date",
             "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

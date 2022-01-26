@@ -22,9 +22,10 @@
                 "nonFirst": "Por ahora, empecemos con el nombre de tu perfil."
             },
             "addMore": "Puedes añadir más perfiles después.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Perfil de desarrollador",
-                "info": "Conectar a redes IOTA públicas y privadas"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
-            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después."
+            "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Buscador de balances",
@@ -746,6 +748,10 @@
             "title": "Sobre Assembly",
             "body1": "Felicitaciones, has ganado tokens ASMB como recompensa por tu staking. Assembly es una red multi-cadena para desplegar contratos inteligentes escalables en IOTA.",
             "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "De",
         "to": "Para",
         "receiveFunds": "Recibir fondos",
+        "address": "Address",
         "myAddress": "Mi dirección",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Valor formateado",
             "date": "Fecha",
             "time": "Hora"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

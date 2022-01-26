@@ -22,9 +22,10 @@
                 "nonFirst": "För tillfället, låt oss börja med ditt profilnamn."
             },
             "addMore": "Du kan lägga till fler profiler senare.",
+            "advancedOptions": "Avancerade inställningar",
             "developer": {
                 "label": "Utvecklarprofil",
-                "info": "Anslut till publika och privata IOTA-nätverk"
+                "info": "Anslut till utvecklar-nätverket eller ett privat nätverk"
             }
         },
         "setup": {
@@ -637,7 +638,8 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till",
-            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt."
+            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
+            "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
         },
         "balanceFinder": {
             "title": "Hitta saldo",
@@ -746,6 +748,10 @@
             "title": "Om Assembly",
             "body1": "Grattis du har förtjänat ASMB-tokens som en stakingbelöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
             "body2": "Vi siktar på att lansera Assembly 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Du skapar en utvecklarprofil",
+            "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
         }
     },
     "charts": {
@@ -899,6 +905,7 @@
         "from": "Från",
         "to": "Till",
         "receiveFunds": "Ta emot IOTA",
+        "address": "Adress",
         "myAddress": "Min adress",
         "shareAddress": "Dela en adress",
         "yourAddress": "Din adress",
@@ -1246,6 +1253,11 @@
             "formattedValue": "Formaterat värde",
             "date": "Datum",
             "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Du använder för närvarande en utvecklarprofil och är ansluten till {networkName}"
         }
     }
 }

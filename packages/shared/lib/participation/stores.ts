@@ -1,6 +1,4 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-
-import { persistent } from '../helpers'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
@@ -84,8 +82,8 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
  * between airdrops, so we pick the highest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const stakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    return overview.reduce((total, accountOverview) => {
+export const stakedAmount: Readable<number> = derived(participationOverview, (overview) =>
+    overview.reduce((total, accountOverview) => {
         const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview
 
         if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
@@ -97,22 +95,22 @@ export const stakedAmount: Readable<number> = derived(participationOverview, (ov
 
         return total
     }, 0)
-})
+)
 
 /**
  * The amount of funds that are currently unstaked. This amount may differ
  * between airdrops, so we pick the lowest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) => {
-    return overview.reduce((total, accountOverview) => {
+export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) =>
+    overview.reduce((total, accountOverview) => {
         const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview
 
         total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
 
         return total
     }, 0)
-})
+)
 
 /**
  * The store for accounts that contain partially staked funds.
