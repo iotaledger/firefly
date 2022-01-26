@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem'
+import { CapacitorNativeFilePicker } from 'capacitor-native-filepicker'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
@@ -47,8 +48,16 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    getStrongholdBackupDestination: (defaultPath) => {
-        return new Promise<string>((resolve, reject) => {})
+    getStrongholdBackupDestination: async (defaultPath) => {
+        const { folders } = await CapacitorNativeFilePicker.launchFolderPicker({
+            limit: 1,
+            showHiddenFiles: true
+        })
+        const docUri = await Filesystem.getUri({
+            path: '',
+            directory: Directory.Data
+        })
+        return `${docUri?.uri.replace(/^file:\/\//,'')}`
     },
 
     /**
