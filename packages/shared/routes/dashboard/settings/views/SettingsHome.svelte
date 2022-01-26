@@ -53,8 +53,7 @@
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
-            {localize} />
+            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)} />
         <SettingsMenu
             icon="security"
             iconColor="bg-yellow-500"
@@ -63,8 +62,7 @@
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={localize('views.settings.security.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
-            {localize} />
+            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)} />
         <SettingsMenu
             icon="tools"
             iconColor="bg-green-600"
@@ -73,8 +71,7 @@
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
-            {localize} />
+            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)} />
         <SettingsMenu
             icon="info"
             iconColor="bg-purple-500"
@@ -83,7 +80,6 @@
             activeSettings={HelpAndInfo}
             title={localize('views.settings.helpAndInfo.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)}
-            {localize} />
+            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)} />
     </div>
 </div>
