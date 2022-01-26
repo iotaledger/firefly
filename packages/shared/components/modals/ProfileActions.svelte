@@ -1,26 +1,26 @@
 <script lang="typescript">
+    import { fade } from 'svelte/transition'
     import { Icon, Modal, Text, HR } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { activeProfile } from 'shared/lib/profile'
-    import { get } from 'svelte/store'
-    import { fade } from 'svelte/transition'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { openSettings } from 'shared/lib/router';
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let isActive
+    export let isActive: boolean
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const profileName = get(activeProfile)?.name
-    const profileInitial = getInitials(profileName, 1)
 
-    const handleSettingsClick = () => {
+    $: profileName = $activeProfile?.name
+    $: profileInitial = getInitials(profileName, 1)
+
+    const handleSettingsClick = (): void => {
         openSettings()
         isActive = false
     }
-    const handleLogoutClick = () => {
+    
+    const handleLogoutClick = (): void => {
         void logout()
     }
 </script>
