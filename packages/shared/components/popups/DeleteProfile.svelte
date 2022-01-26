@@ -6,7 +6,7 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api, asyncRemoveStorage, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
+    import { api, asyncDeleteStorage, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import type { Locale } from 'shared/lib/typings/i18n'
 
@@ -49,7 +49,7 @@
              * to free the locks on the files within the profile folder (removed
              * later).
              */
-            await asyncRemoveStorage()
+            await asyncDeleteStorage()
 
             /**
              * CAUTION: Logout must occur before the profile is removed
