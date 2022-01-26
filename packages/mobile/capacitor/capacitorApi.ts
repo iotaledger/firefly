@@ -297,8 +297,19 @@ export const CapacitorApi: IPlatform = {
      * Save the recovery kit
      * @returns
      */
-    saveRecoveryKit: (recoverKitData) => {
-        return new Promise<void>((resolve, reject) => {})
+    saveRecoveryKit: async (recoverKitData) => {
+        const selectedFolder = await CapacitorNativeFilePicker.launchFolderPicker({
+            limit: 1,
+            showHiddenFiles: false
+        })
+        const docUri = await Filesystem.getUri({
+            path: 'assets/docs/firefly-recovery-kit.pdf',
+            directory: Directory.Data
+        })
+        await Filesystem.copy({
+            from: docUri?.uri,
+            to: `${selectedFolder[0]}`
+        })
     },
 
     /**
