@@ -7,47 +7,37 @@
     import { partiallyUnstakedAmount,stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute,resetWalletRoute,settingsRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { SettingsRoutes,Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
-    import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     let showNetwork = false
-    let healthStatus = 2
     let showProfile = false
     let drawer: Drawer
-    let _prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
+    let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
 
+    const hasTitleBar = document.body.classList.contains('platform-win32')
     const profileColor = 'blue' // TODO: each profile has a different color
 
-    const profileInitial = getInitials(get(activeProfile)?.name, 1)
-
-    const unsubscribe = networkStatus.subscribe((data) => {
-        healthStatus = data.health ?? 0
-    })
-
+    $: profileInitial = getInitials($activeProfile?.name, 1)
+    $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > _prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
             }
-            _prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
+            prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
         } else {
             showStakingNotification = false
         }
     }
-
-    onDestroy(() => {
-        unsubscribe()
-    })
 
     function openWallet() {
         resetWalletRoute()
@@ -64,8 +54,6 @@
     function openStaking() {
         dashboardRoute.set(Tabs.Staking)
     }
-
-    const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
 {#if $mobile}
