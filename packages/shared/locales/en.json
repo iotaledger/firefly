@@ -351,6 +351,10 @@
                 "confirmNewPincode": "Confirm new PIN",
                 "action": "Change PIN"
             },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name"
+            },
             "balanceFinder": {
                 "title": "Balance finder",
                 "description": "Perform an extended search of your addresses for tokens"
