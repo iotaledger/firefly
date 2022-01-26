@@ -404,13 +404,12 @@
 
         <Text type="h5" classes="mb-3">{locale('views.settings.diagnostics.reporting.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.reporting.body')}</Text>
-        {#if $appSettings.sendDiagnostics !== $initAppSettings.sendDiagnostics}
-            <div class="flex flex-row space-x-3 mb-5">
-                <Icon icon="info" classes="x-1" />
-                <Text type="p" classes="x-3">You must restart Firefly to apply this change</Text>
-            </div>
-        {/if}
         <Checkbox label={locale('views.settings.diagnostics.reporting.checkbox')} bind:checked={$appSettings.sendDiagnostics} />
+        {#if $appSettings.sendDiagnostics !== $initAppSettings.sendDiagnostics}
+            <Text type="p" secondary classes="mt-4">
+                {locale('views.settings.diagnostics.reporting.advice', { values: { sendDiagnostics: $appSettings.sendDiagnostics } })}
+            </Text>
+        {/if}
     </section>
     {#if $isLedgerProfile}
         <HR classes="pb-5 mt-5 justify-center" />

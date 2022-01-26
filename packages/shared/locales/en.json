@@ -417,7 +417,8 @@
                 "reporting": {
                     "title": "Send reports",
                     "body": "Help improve Firefly by automatically sending anonymous diagnostic data for any errors or crashes.",
-                    "checkbox": "Share diagnostic data"
+                    "checkbox": "Share diagnostic data",
+                    "advice": "Please restart the Firefly application to {sendDiagnostics, select, true {start sharing diagnostic reports} false {stop sharing diagnostic reports}}"
                 }
             },
             "migrateLedgerIndex": {
