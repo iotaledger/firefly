@@ -130,6 +130,12 @@ pub async fn init<A: Into<String>>(
         unsafe {
             SENTRY_GUARD = init_sentry();
         }
+
+        sentry::configure_scope(|scope| {
+            // The device hostname can include a person's name
+            // We don't want to store this
+            scope.remove_tag("server_name");
+        });
     }
 
     let actor_id = actor_id.into();
