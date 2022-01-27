@@ -100,20 +100,19 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
  *
- * @method createProfile
+ * @method storeProfile
  *
  * @param {string} profileName
  * @param {boolean} isDeveloperProfile
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
+export const storeProfile = (profileName: string, isDeveloperProfile: boolean): void => {
     const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
-
-    return profile
+    profileInProgress.set(profileName)
 }
 
 /**
