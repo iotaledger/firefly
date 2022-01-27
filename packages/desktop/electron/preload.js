@@ -35,6 +35,19 @@ try {
     let activeProfileId = null
 
     const Wallet = binding
+
+    if (process.env.NODE_ENV == 'development') {
+        Wallet.initLogger({
+            color_enabled: true,
+            outputs: [
+                {
+                    name: 'wallet.log',
+                    level_filter: 'debug',
+                },
+            ],
+        })
+    }
+
     Wallet.api = proxyApi(() => activeProfileId)
 
     const eventListeners = {}
