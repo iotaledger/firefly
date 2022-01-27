@@ -17,13 +17,11 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    removeProfileFolder(profilePath) {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
 
-    listProfileFolders(profileStoragePath) {
-        return new Promise<string[]>((resolve, reject) => {})
-    },
+    removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
+
+    listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
     PincodeManager: PincodeManager,
 
@@ -31,13 +29,9 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    getStrongholdBackupDestination: (defaultPath) => {
-        return new Promise<string>((resolve, reject) => {})
-    },
+    getStrongholdBackupDestination: (defaultPath) => new Promise<string>((resolve, reject) => {}),
 
-    exportTransactionHistory: async (defaultPath, content) => {
-        return new Promise<string>((resolve, reject) => {})
-    },
+    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
     /**
      * Exports migration log
@@ -49,9 +43,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Exports ledger migration log
@@ -63,9 +55,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    exportLedgerMigrationLog: (content, defaultFileName) => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    exportLedgerMigrationLog: (content, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Imports legacy IOTA seed
@@ -77,9 +67,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise<string>}
      */
-    importLegacySeed: (buffer, password) => {
-        return new Promise<string>((resolve, reject) => {})
-    },
+    importLegacySeed: (buffer, password) => new Promise<string>((resolve, reject) => {}),
 
     /**
      * Validates Seed Vault
@@ -90,9 +78,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {boolean}
      */
-    validateSeedVault: (buffer) => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    validateSeedVault: (buffer) => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Gets directory for app's configuration files
@@ -101,11 +87,9 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: () => {
-        return new Promise<string>((resolve, reject) => {
+    getUserDataPath: () => new Promise<string>((resolve, reject) => {
             resolve('DATA')
-        })
-    },
+        }),
 
     /**
      * Gets diagnostics information for the system
@@ -114,9 +98,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getDiagnostics: () => {
-        return new Promise<{ label: string; value: string }[]>((resolve, reject) => {})
-    },
+    getDiagnostics: () => new Promise<{ label: string; value: string }[]>((resolve, reject) => {}),
 
     /**
      * Gets os information for the system
@@ -125,9 +107,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getOS: () => {
-        return new Promise<string>((resolve) => resolve(Capacitor.getPlatform()))
-    },
+    getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
     /**
      * Starts an update of the application
@@ -136,9 +116,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateDownload: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    updateDownload: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Cancels an update of the application
@@ -147,9 +125,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateCancel: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    updateCancel: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Install an update of the application
@@ -158,9 +134,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateInstall: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    updateInstall: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Check for an update of the application
@@ -169,9 +143,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateCheck: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    updateCheck: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Get version details
@@ -180,9 +152,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getVersionDetails: () => {
-        return new Promise<VersionDetails>((resolve, reject) => {})
-    },
+    getVersionDetails: () => new Promise<VersionDetails>((resolve, reject) => {}),
 
     /**
      * Change menu state to determine what menu items to display
@@ -190,67 +160,51 @@ export const CapacitorApi: IPlatform = {
      * @param {any} Value - Target attribute value
      * @returns {undefined}
      */
-    updateMenu: (attribute, value) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    updateMenu: (attribute, value) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Show the popup menu
      * @returns {undefined}
      */
-    popupMenu: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    popupMenu: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Minimize the app
      * @returns {undefined}
      */
-    minimize: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    minimize: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Maximize the app
      * @returns {undefined}
      */
-    maximize: () => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    maximize: () => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Is the app maximized
      * @returns {boolean}
      */
-    isMaximized: () => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    isMaximized: () => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    close: () => new Promise<void>((resolve, reject) => {}),
 
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
      * @returns {undefined}
      */
-    openUrl: (url) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    openUrl: (url) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror
      * @param {Errir} error The error
      */
-    unhandledException: (errorType, error) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    unhandledException: (errorType, error) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Add native window wallet event listener
@@ -258,9 +212,7 @@ export const CapacitorApi: IPlatform = {
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    onEvent: (event, callback) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    onEvent: (event, callback) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Remove native window wallet event listener
@@ -268,17 +220,13 @@ export const CapacitorApi: IPlatform = {
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    removeListenersForEvent: (event) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    removeListenersForEvent: (event) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Save the recovery kit
      * @returns
      */
-    saveRecoveryKit: (recoverKitData) => {
-        return new Promise<void>((resolve, reject) => {})
-    },
+    saveRecoveryKit: (recoverKitData) => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Hook the logger
