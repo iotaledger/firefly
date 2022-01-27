@@ -6,7 +6,7 @@
     export let hint: string = ''
 </script>
 
-{#if hint !== ''}
+{#if hint}
     <div class="flex flex-row justify-center items-center {classes}">
         {#if icon !== 'none'}
             <Icon {icon} classes="mr-3 fill-current text-black dark:text-white" />
