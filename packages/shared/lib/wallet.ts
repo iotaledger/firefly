@@ -698,7 +698,14 @@ export const asyncCreateAccount = (alias?: string, color?: string, pattern?: str
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color, pattern })
+
+                    const accountColors = Object.values(AccountColors)
+                    const profileAccount = {
+                        id: preparedAccount.id,
+                        color: color || accountColors[Math.floor(Math.random() * accountColors.length)].toString(),
+                        pattern,
+                    }
+                    setProfileAccount(get(activeProfile), profileAccount)
 
                     resolve(preparedAccount)
                 },
