@@ -76,6 +76,9 @@
         error = ''
         accountRoute.set(AccountRoutes.Init)
     }
+
+    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
+    $: hasColorOrPatternChanged = getColor($activeProfile, account.id) !== color || getPattern($activeProfile, account.id) !== pattern
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-8 pt-10">
@@ -88,7 +91,7 @@
                 balance={account.balance}
                 balanceEquiv={account.balanceEquiv}
                 {color}
-                disabledHover=true
+                disabledHover
                 name={accountAlias || account.alias}
                 {pattern}
                 size='m'
@@ -114,7 +117,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy || accountAlias === alias}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={invalidAliasUpdate && !hasColorOrPatternChanged}>
                 {locale('actions.save')}
             </Button>
         </div>
