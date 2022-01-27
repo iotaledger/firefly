@@ -56,10 +56,7 @@ export enum AccountColors {
     Pink = configColors['pink']['500'],
 }
 
-export const MAX_PROFILE_NAME_LENGTH = 20
-
 export const MAX_ACCOUNT_NAME_LENGTH = 20
-
 export const MAX_PASSWORD_LENGTH = 256
 
 /**

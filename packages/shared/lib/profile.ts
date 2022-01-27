@@ -1,5 +1,6 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import { persistent } from 'shared/lib/helpers'
+import { _ } from 'svelte-i18n'
+import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
@@ -18,6 +19,9 @@ import { NetworkConfig, NetworkType } from './typings/network'
 import type { ValuesOf } from './typings/utils'
 import type { Profile, UserSettings } from './typings/profile'
 import type { WalletAccount } from './typings/wallet'
+import type { Locale } from './typings/i18n'
+
+const MAX_PROFILE_NAME_LENGTH = 20
 
 export interface ProfileAccount {
     id: string
@@ -414,5 +418,37 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
         const profileAccount = { id: accountId, color: '' }
         setProfileAccount(activeProfile, profileAccount)
         return getColor(activeProfile, accountId)
+    }
+}
+
+/**
+ * Validates the trimmed profile name
+ *
+ * @method validateProfileName
+ *
+ * @param {string} trimmedName
+ *
+ * @returns {void}
+ */
+export const validateProfileName = (trimmedName: string): void => {
+    const locale = get(_) as Locale
+    const validateError = validateFilenameChars(trimmedName)
+
+    if (validateError) {
+        throw new Error(locale(`error.account.${validateError}`))
+    }
+
+    if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
+        throw new Error(
+            locale('error.profile.length', {
+                values: {
+                    length: MAX_PROFILE_NAME_LENGTH,
+                },
+            })
+        )
+    }
+
+    if (get(profiles).some((p) => p.name === trimmedName)) {
+        throw new Error(locale('error.profile.duplicate'))
     }
 }
