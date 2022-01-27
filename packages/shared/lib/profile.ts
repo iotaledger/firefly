@@ -6,8 +6,8 @@ import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
     asyncDeleteStorage,
     destroyActor,
-    getStoragePath,
-    getWalletStoragePath,
+    getProfileDataPath,
+    getWalletDataPath,
     AccountColors,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
@@ -268,9 +268,8 @@ export const cleanupInProgressProfiles = (): void => {
  */
 export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
-        const userDataPath = await Platform.getUserDataPath()
-        const profileStoragePath = getStoragePath(userDataPath, profileName)
-        await Platform.removeProfileFolder(profileStoragePath)
+        const profileDataPath = await getProfileDataPath(profileName)
+        await Platform.removeProfileFolder(profileDataPath)
     } catch (err) {
         console.error(err)
     }
@@ -285,9 +284,8 @@ export const removeProfileFolder = async (profileName: string): Promise<void> =>
  */
 export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
-        const userDataPath = await Platform.getUserDataPath()
-        const profileStoragePath = getWalletStoragePath(userDataPath)
-        const storedProfiles = await Platform.listProfileFolders(profileStoragePath)
+        const profileDataPath = await getWalletDataPath()
+        const storedProfiles = await Platform.listProfileFolders(profileDataPath)
 
         profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 

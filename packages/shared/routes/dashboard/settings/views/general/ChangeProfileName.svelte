@@ -3,7 +3,7 @@
     import { localize } from 'shared/lib/i18n'
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { Electron } from 'shared/lib/electron';
-    import { getStoragePath } from 'shared/lib/wallet';
+    import { getProfileDataPath } from 'shared/lib/wallet';
 
     let newName: string
     let error = ''
@@ -20,9 +20,8 @@
     }
 
     async function renameProfileFolder(newName: string): Promise<void> {
-        const userDataPath = await Electron.getUserDataPath();
-        const oldPath = getStoragePath(userDataPath, $activeProfile.name)
-        const newPath = getStoragePath(userDataPath, newName)
+        const oldPath = await getProfileDataPath($activeProfile.name)
+        const newPath = await getProfileDataPath(newName)
         await Electron.renameProfileFolder(oldPath, newPath);
     }
 </script>

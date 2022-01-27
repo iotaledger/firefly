@@ -5,7 +5,7 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import type { Locale } from 'shared/lib/typings/i18n'
 
@@ -71,8 +71,8 @@
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Platform.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
+                        return getProfileDataPath(profile.name).then((path) => {
+                            initialise(profile.id, path)
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
                                     dispatch('next')

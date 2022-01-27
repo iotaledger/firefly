@@ -183,10 +183,15 @@ export const api: IWalletApi = new Proxy(
     }
 )
 
-export const getWalletStoragePath = (appPath: string): string => `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
+export const getWalletDataPath = async (): Promise<string> => {
+    const appPath = await Platform.getUserDataPath()
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
+}
 
-export const getStoragePath = (appPath: string, profileName: string): string =>
-    `${getWalletStoragePath(appPath)}${profileName}`
+export const getProfileDataPath = async (profileName: string): Promise<string> => {
+    const walletPath = await getWalletDataPath()
+    return `${walletPath}${profileName}`
+}
 
 export const initialise = (id: string, storagePath: string): void => {
     if (Object.keys(actors).length > 0) {

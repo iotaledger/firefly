@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Animation,Button,ButtonCheckbox,CollapsibleBlock,Input,OnboardingLayout,Text } from 'shared/components'
     import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { Platform } from 'shared/lib/platform'
     import { openPopup } from 'shared/lib/popup'
     import {
         cleanupInProgressProfiles,
@@ -15,7 +14,7 @@
         newProfile,
         validateProfileName
     } from 'shared/lib/profile'
-    import { destroyActor,getStoragePath,initialise } from 'shared/lib/wallet'
+    import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -57,8 +56,8 @@
             if (nameChanged || hasDeveloperProfileChanged) {
                 storeProfile(name, isDeveloperProfile)
 
-                const userDataPath = await Platform.getUserDataPath()
-                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                const path = await getProfileDataPath($newProfile.name)
+                initialise($newProfile.id, path)
                 initialiseMigrationListeners()
             }
 
