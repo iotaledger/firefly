@@ -7,6 +7,7 @@ const Sentry = require('@sentry/electron')
 const { execSync } = require('child_process')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+const { captureException } = require('../sentry')
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -20,10 +21,6 @@ const canSendCrashReports = () => {
 
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
-
-if (SEND_CRASH_REPORTS) {
-    module.require('../sentry')
-}
 
 /**
  * Set AppUserModelID for Windows notifications functionality
@@ -65,7 +62,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
         }
 
         if (SEND_CRASH_REPORTS) {
-            Sentry.captureException(
+            captureException(
                 new Error(
                     JSON.stringify({
                         type: errorType,
