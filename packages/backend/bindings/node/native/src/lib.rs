@@ -77,7 +77,7 @@ declare_types! {
             let clone_actor_id = actor_id.clone();
             let storage_path = match cx.argument_opt(1) {
                 Some(arg) => {
-                     Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
+                    Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
                 },
                 None => None,
             };
