@@ -53,7 +53,7 @@
     style="--account-color: {color}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
     class="{size === 'm' ? 'w-10 h-10 rounded-xl p-2 text-14' : 'w-8 h-8 rounded-lg p-1 text-12'} leading-100 font-bold text-center
             {active ? `disabled-hover text-${textColor}` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} bg-no-repeat bg-right-top
-            bg-cover hover:text-{textColor} {classes}">{getInitials(name, 2)}"
+            bg-cover hover:text-{textColor} {classes}">{getInitials(name, 2)}
 </button>
 
 {#if enableTooltip && showTooltip}

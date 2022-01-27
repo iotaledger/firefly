@@ -35,16 +35,15 @@
             data: {
                 labels,
                 datasets: datasets.map((dataset) => {
-                    const themeColor = fullConfig.theme.colors[dataset.color || color]
                     const gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
-                    gradient.addColorStop(0, convertHexToRGBA(themeColor['500'], 30))
-                    gradient.addColorStop(1, convertHexToRGBA(themeColor['500'], 0))
+                    gradient.addColorStop(0, convertHexToRGBA(color, 30))
+                    gradient.addColorStop(1, convertHexToRGBA(color, 0))
                     return {
                         backgroundColor: gradient,
-                        borderColor: themeColor['500'],
+                        borderColor: color,
                         borderWidth: 1.5,
-                        pointBackgroundColor: themeColor['500'],
-                        pointBorderColor: themeColor['500'],
+                        pointBackgroundColor: color,
+                        pointBorderColor: color,
                         pointRadius: 0,
                         hoverRadius: 4,
                         ...dataset,
@@ -70,7 +69,7 @@
                     bodyFontSize: 11,
                     titleFontFamily: 'Inter',
                     bodyFontFamily: 'Inter',
-                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    bodyFontColor: fullConfig.theme.colors.gray['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
                             const dataset = datasets[tooltipItem.datasetIndex]

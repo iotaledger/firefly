@@ -168,7 +168,7 @@
                     bodyFontSize: 11,
                     titleFontFamily: 'Inter',
                     bodyFontFamily: 'Inter',
-                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    bodyFontColor: fullConfig.theme.colors.gray['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
                             const dataset = datasets[tooltipItem.datasetIndex]

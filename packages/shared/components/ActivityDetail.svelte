@@ -116,8 +116,8 @@
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
 
-    const senderColor = getColor($activeProfile, senderAccount?.id) as string
-    const receiverColor = getColor($activeProfile, receiverAccount?.id || $account.id) as string
+    $: senderColor = getColor($activeProfile, senderAccount?.id) as string
+    $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
 </script>
 
 <style type="text/scss">
