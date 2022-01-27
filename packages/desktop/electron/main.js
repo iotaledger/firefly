@@ -5,6 +5,7 @@ const os = require('os')
 const fs = require('fs')
 const Sentry = require('@sentry/electron')
 const { execSync } = require('child_process')
+const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 const { captureException } = require('../sentry')
@@ -47,6 +48,7 @@ if (
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
 let lastError = {}
+let machineId = null
 
 /**
  * Setup the error handlers early so they catch any issues
@@ -366,6 +368,19 @@ ipcMain.handle('get-path', (_e, path) => {
         throw Error(`Path ${path} is not allowed`)
     }
     return app.getPath(path)
+})
+ipcMain.handle('get-machine-id', (_e) => {
+    // Will only be null the first time
+    // If this fails, it will probably fail again, so set it to an empty string
+    if (machineId === null) {
+        try {
+            machineId = machineIdSync()
+        } catch (error) {
+            machineId = ''
+            console.error(error)
+        }
+    }
+    return machineId
 })
 
 // Diagnostics
