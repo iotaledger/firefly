@@ -87,7 +87,7 @@
 
     let searchActive = false
     let inputElement: HTMLInputElement
-    $: if (searchActive) inputElement.focus()
+    $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue : ''
 
     let filteredTransactions = transactions
