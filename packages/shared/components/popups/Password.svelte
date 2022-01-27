@@ -44,7 +44,7 @@
     <Text type="h4">{locale('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? locale('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
+<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit|preventDefault={handleSubmit}>
     <Password
         {error}
         classes="w-full mb-5"
