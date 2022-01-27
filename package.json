@@ -3,7 +3,9 @@
     "workspaces": [
         "packages/desktop",
         "packages/shared",
-        "packages/backend/bindings/node"
+        "packages/backend/bindings/node",
+        "packages/extension/web",
+        "packages/extension/lib"
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
