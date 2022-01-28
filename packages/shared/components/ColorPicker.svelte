@@ -23,7 +23,7 @@
     } else {
         active = accountColors[activeElement]
     }
-    let inputValue = activeAccountColorIndex >= 0 ? '#' : active
+    let inputValue = activeAccountColorIndex >= 0 ? '#FFFFFF' : active
     $: inputValue = `#${inputValue?.match(/[0-9|a-f|A-F]+/) || ''}`
     let inputColor
     $: if (inputValue.length >= 7) {
