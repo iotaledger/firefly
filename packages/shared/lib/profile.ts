@@ -19,6 +19,7 @@ import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
+import { account } from './typings'
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export interface ProfileAccount {
@@ -391,7 +392,16 @@ const getUpdatedAccounts = (
  * @returns {void}
  */
 export const setProfileAccount = (activeProfile: Profile, profileAccount: ProfileAccount): void => {
-    updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
+    if (profileAccount.color) {
+        updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
+    } else if (profileAccount.id) {
+        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
+        updateProfile(
+            'accounts',
+            getUpdatedAccounts(activeProfile, profileAccount.id, { ...profileAccount, color: randomColor })
+        )
+    }
 }
 
 /**
@@ -405,9 +415,15 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
     const { accounts } = activeProfile || {}
 
     if (accounts?.length) {
-        return accounts.find((account) => account.id === accountId)?.color || AccountColors.Blue
+        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
+        if (foundAccountColor) return foundAccountColor
     }
-    return AccountColors.Blue
+
+    if (accountId) {
+        const profileAccount = { id: accountId, color: '', pattern: '' }
+        setProfileAccount(activeProfile, profileAccount)
+        return getColor(activeProfile, accountId)
+    }
 }
 
 /**

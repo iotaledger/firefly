@@ -699,13 +699,7 @@ export const asyncCreateAccount = (alias?: string, color?: string, pattern?: str
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
-                    const accountColors = Object.values(AccountColors)
-                    const profileAccount = {
-                        id: preparedAccount.id,
-                        color: color || accountColors[Math.floor(Math.random() * accountColors.length)].toString(),
-                        pattern,
-                    }
-                    setProfileAccount(get(activeProfile), profileAccount)
+                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color, pattern })
 
                     resolve(preparedAccount)
                 },
