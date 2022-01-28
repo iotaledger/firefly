@@ -48,7 +48,7 @@ import {
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
     getStrongholdStatus as _getStrongholdStatus,
-    removeStorage as _removeStorage,
+    deleteStorage as _deleteStorage,
     lockStronghold as _lockStronghold,
     changeStrongholdPassword as _changeStrongholdPassword,
     setClientOptions as _setClientOptions,
@@ -243,8 +243,8 @@ export const api = {
     setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
     },
-    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
+    deleteStorage: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _deleteStorage(sendMessage, __ids)
     },
     send: function (
         fromAccountId: AccountIdentifier,
