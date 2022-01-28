@@ -265,7 +265,7 @@ export const isBright = (color: string): boolean => {
                 : color.match(/[0-9]+/g)?.map((c) => parseInt(c, 10))
         if (rgb) {
             const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
-            return yiq >= 128
+            return yiq >= 186
         }
     }
 }
