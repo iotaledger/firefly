@@ -111,7 +111,7 @@
             <div class="flex flex-row flex-wrap mb-2">
                 {#each stakedAccountsInCurrentAirdrop as acc}
                     <div class="mb-2 mr-2">
-                        <WalletPill active enableTooltip size="s" name={acc.alias} color={acc.color} classes="cursor-default" />
+                        <WalletPill account={acc} size="s" active enableTooltip classes="cursor-default" />
                     </div>
                 {/each}
             </div>

@@ -5,7 +5,6 @@
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { activeProfile, getColor, getPattern } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -76,10 +75,8 @@
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
                 <WalletPill
+                    account={acc}
                     active={activeAccount.id === acc.id}
-                    name={acc.alias}
-                    color={getColor($activeProfile, acc.id)}
-                    pattern={getPattern($activeProfile, acc.id)}
                     onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
