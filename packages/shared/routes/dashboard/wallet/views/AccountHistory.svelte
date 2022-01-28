@@ -15,7 +15,8 @@
         getIncomingFlag,
     } from 'shared/lib/wallet';
     import type { AccountMessage } from 'shared/lib/typings/wallet'
-    import { debounce } from 'shared/lib/utils'
+    import type { Transaction } from 'shared/lib/typings/message'
+    import { debounce, unitStringToValue } from 'shared/lib/utils'
 
     export let locale: Locale
 
@@ -83,12 +84,13 @@
     }
 
     const filters = ['all', 'incoming', 'outgoing']
-    let activeFilterIndex = 0
+    $: activeFilterIndex = searchActive ? 0 : (activeFilterIndex || 0)
 
     let searchActive = false
     let inputElement: HTMLInputElement
+    let searchValue: string
     $: if (searchActive && inputElement) inputElement.focus()
-    $: searchValue = searchActive ? searchValue : ''
+    $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
     let filteredTransactions = transactions
     $: switch (activeFilterIndex) {
@@ -107,18 +109,22 @@
 
     let queryTransactions = filteredTransactions
 
+    function search() {
+        queryTransactions = filteredTransactions.filter(transaction => {
+            const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
+            return (
+                sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
+                receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr === searchValue) ||
+                transaction?.id.toLowerCase() === searchValue ||
+                (searchValue[0] === '>' && unitStringToValue(searchValue.substring(1)) < transactionValue) ||
+                (searchValue[0] === '<' && unitStringToValue(searchValue.substring(1)) > transactionValue) ||
+                transactionValue === unitStringToValue(searchValue)
+            )
+        })
+    }
+
     $: if (searchValue) {
-        (debounce(function() {
-            queryTransactions = filteredTransactions.filter(transaction => {
-                if (transaction?.payload?.type === 'Transaction') {
-                    return transaction?.payload?.data?.essence?.data?.value?.toString()?.includes(searchValue) ||
-                        sendAddressFromTransactionPayload(transaction?.payload).includes(searchValue) ||
-                        receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr.includes(searchValue)) ||
-                        transaction?.id.includes(searchValue)
-                }
-                return transaction?.id?.includes(searchValue)
-            })
-        }))()
+        (debounce(search))()
     } else {
         queryTransactions = filteredTransactions
     }

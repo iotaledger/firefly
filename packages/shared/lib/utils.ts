@@ -386,3 +386,31 @@ export const clamp = (n: number, min: number, max: number): number => {
 
     return Math.min(Math.max(n, min), max)
 }
+
+/**
+ * Converts iota value-unit string to int value
+ *
+ * @method unitStringToValue
+ * @param {string}
+ *
+ * @returns {number}
+ */
+export const unitStringToValue = (str: string): number => {
+    const value = parseInt(str, 10)
+    const unit = str.substring(value.toString().length).toLowerCase()
+
+    switch (unit) {
+        case 'ki':
+            return value * 1000
+        case 'mi':
+            return value * 1000000
+        case 'gi':
+            return value * 1000000000
+        case 'ti':
+            return value * 1000000000000
+        case 'pi':
+            return value * 1000000000000000
+        default:
+            return value
+    }
+}
