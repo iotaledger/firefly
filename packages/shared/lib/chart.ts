@@ -124,7 +124,7 @@ export const getAccountActivityData = (
         data: [],
         tooltips: [],
         label: localize('general.outgoing'),
-        color: AccountColors.Blue,
+        color: 'gray',
     } // TODO: profile colors
     const labels: string[] = []
     const messages: Message[] =
