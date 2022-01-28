@@ -55,11 +55,11 @@
                 {#if activeElement === i}<Icon icon="checkmark" classes="text-white" />{/if}
             </li>
         {/each}
-        <li><input type="text" placeholder="#FFFFFF" pattern="[A-F0-9]{10}" maxlength="7" bind:value={inputValue} on:click={() => handleInputClick()}
-            class='w-24 h-full text-16 uppercase leading-140 border border-solid
-            {inputValue.length >= 7 && activeElement === accountColors.length ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'}
-            bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center
-            {activeElement === accountColors.length ? 'ring-4' : ''}'
-            class:active={activeElement === accountColors.length && inputValue.length >= 7}></li>
     </ul>
+    <input type="text" placeholder="#FFFFFF" pattern="[A-F0-9]{10}" maxlength="7" bind:value={inputValue} on:click={() => handleInputClick()}
+        class='w-24 h-full text-16 uppercase leading-140 border border-solid mt-4
+        {inputValue.length >= 7 && activeElement === accountColors.length ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'}
+        bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center
+        {activeElement === accountColors.length ? 'ring-4' : ''}'
+        class:active={activeElement === accountColors.length && inputValue.length >= 7}>    
 </div>

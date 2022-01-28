@@ -25,7 +25,7 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { wallet, AccountColors, AccountPatterns } from 'shared/lib/wallet'
+    import { wallet, AccountPatterns } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { isBright } from 'shared/lib/helpers'
 

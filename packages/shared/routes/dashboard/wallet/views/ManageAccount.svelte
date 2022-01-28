@@ -81,7 +81,7 @@
     $: hasColorOrPatternChanged = getColor($activeProfile, account.id) !== color || getPattern($activeProfile, account.id) !== pattern
 </script>
 
-<div class="w-full h-full flex flex-col justify-between p-8 pt-10">
+<div class="w-full h-full flex flex-col justify-between px-8 py-10">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.manageAccount')}</Text>
@@ -113,7 +113,7 @@
         <Text secondary classes="mb-3 text-center">{locale('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
-        <div class="flex flex-row justify-between px-2">
+        <div class="flex flex-row justify-between mt-2 px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
