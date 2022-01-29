@@ -26,9 +26,12 @@
     }
 </script>
 
-<style>
+<style type="text/scss">
     .history {
-        max-height: 30vh;
+        max-height: 50vh;
+        @screen md {
+            max-height: 30vh;
+        }
     }
 </style>
 
