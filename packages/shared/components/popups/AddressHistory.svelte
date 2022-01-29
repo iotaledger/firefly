@@ -55,6 +55,9 @@
 
 <style>
     .history {
-        max-height: 30vh;
+        max-height: 50vh;
+        @screen md {
+            max-height: 30vh;
+        }
     }
 </style>

@@ -23,7 +23,7 @@
 <div class="relative w-full h-1/2 bg-white dark:bg-gray-900 justify-center">
     <Animation animation="import-from-text-success-desktop" />
 </div>
-<div class="flex flex-row justify-between w-full space-x-4 px-8">
+<div class="flex flex-row justify-between w-full space-x-4 md:px-8">
     <Button secondary classes="w-1/2" onClick={handleMigrateClick}>{locale('actions.migrateAgain')}</Button>
     <Button autofocus classes="w-1/2" onClick={handleCloseClick}>{locale('actions.close')}</Button>
 </div>
