@@ -219,6 +219,12 @@
             onClick()
         }
     }
+    
+    let showStyles = false
+
+    const toggleStyles = (): void => {
+        showStyles = !showStyles
+    }
 </script>
 
 <style type="text/scss">
@@ -297,6 +303,8 @@
 
 <button
     on:click={handleTileClick}
+    on:mouseenter={toggleStyles}
+    on:mouseleave={toggleStyles}
     class="{classes} {disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-auto"
     class:staked={isActivelyStaking}
     class:partial-stake={showWarningState}
@@ -304,7 +312,7 @@
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}
     class:bg-blend-exclusion={isBright(color)}
-    style="--account-color: {color}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
+    style="--account-color: {color}; {pattern && showStyles ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
