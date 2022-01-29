@@ -21,12 +21,6 @@
 
     export let isGeneratingAddress
 
-    let drawer: Drawer
-
-    $: if (($mobile && drawer && $walletRoute === WalletRoutes.Receive) || drawer && $walletRoute === WalletRoutes.Send) {
-        drawer.open()
-    }
-
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
@@ -79,13 +73,15 @@
                 {/if}
             </div>
         </div>
-        <Drawer dimLength={180} opened={false} bind:this={drawer} on:close={() => walletRoute.set(WalletRoutes.Init)}>
-            {#if $walletRoute === WalletRoutes.Send}
-                <Send {onSend} {onInternalTransfer} {locale} />
-            {:else if $walletRoute === WalletRoutes.Receive}
-                <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
-            {/if}
-        </Drawer>
+        {#if $walletRoute === WalletRoutes.Receive || $walletRoute === WalletRoutes.Send}
+            <Drawer dimLength={180} on:close={() => walletRoute.set(WalletRoutes.Init)}>
+                {#if $walletRoute === WalletRoutes.Send}
+                    <Send {onSend} {onInternalTransfer} {locale} />
+                {:else if $walletRoute === WalletRoutes.Receive}
+                    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
+                {/if}
+            </Drawer>
+        {/if}
     {/if}
 {:else}
     {#if $walletRoute === WalletRoutes.Init}

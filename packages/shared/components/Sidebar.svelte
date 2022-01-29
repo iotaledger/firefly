@@ -1,15 +1,14 @@
 <script lang="typescript">
-    import { Drawer,Icon,Logo,NetworkIndicator,ProfileActionsModal,Text } from 'shared/components'
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { networkStatus,NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
-    import { partiallyUnstakedAmount,stakingEventState } from 'shared/lib/participation/stores'
+    import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute,resetWalletRoute,settingsRoute } from 'shared/lib/router'
+    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { SettingsRoutes,Tabs } from 'shared/lib/typings/routes'
-    import { Settings } from 'shared/routes'
+    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -18,7 +17,6 @@
     let showNetwork = false
     let healthStatus = 2
     let showProfile = false
-    let drawer: Drawer
     let _prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
 
@@ -53,14 +51,11 @@
         resetWalletRoute()
     }
 
-    function handleBackClick() {
-        if ($settingsRoute === SettingsRoutes.Init) {
-            drawer?.close()
-        } else {
-            settingsRoute.set(SettingsRoutes.Init)
-        }
+    function openSettings() {
+        dashboardRoute.set(Tabs.Settings)
+        settingsRoute.set(SettingsRoutes.Init)
     }
-    
+
     function openStaking() {
         dashboardRoute.set(Tabs.Staking)
     }
@@ -78,31 +73,9 @@
 {#if $mobile}
     <button
         class="absolute top-10 right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
-        on:click={() => drawer.open()}>
+        on:click={openSettings}>
         <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
     </button>
-    <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex">
-        <div class="flex flex-col flex-1">
-            <div
-                class="cursor-pointer w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
-                on:click={handleBackClick}>
-                <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
-                <Text type="h4" classes="text-center">
-                    {locale($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsRoute}.title`)}
-                </Text>
-            </div>
-            {#if $settingsRoute === SettingsRoutes.Init}
-                <!-- TODO: add real profile data -->
-                <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
-                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100">
-                        <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial || 'A'}</span>
-                    </div>
-                    <Text type="h4">John Doe</Text>
-                </div>
-            {/if}
-            <Settings {locale} />
-        </div>
-    </Drawer>
 {:else}
     <aside
         class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
@@ -122,14 +95,19 @@
                         <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
                             <span
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full {showStakingNotification ? 'bg-yellow-400' : 'bg-red-300'} opacity-75" />
-                            <span class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification ? 'bg-yellow-600' : 'bg-red-500'}" />
+                            <span
+                                class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification ? 'bg-yellow-600' : 'bg-red-500'}" />
                         </span>
                     {/if}
                 </button>
             </div>
             <span class="flex flex-col items-center">
                 <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                    <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+                    <Icon
+                        width="24"
+                        height="24"
+                        icon="network"
+                        classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
                 </button>
                 <button
                     class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
