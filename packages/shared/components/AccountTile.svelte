@@ -329,7 +329,7 @@
                     icon="tokens"
                     width="16"
                     height="16"
-                    classes="fill-current mt-0.5 text-gray-800 dark:text-white group-hover:text-{textColor}" />
+                    classes="fill-current mt-0.5 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-{textColor}`}" />
             {/if}
             <Text
                 bold
