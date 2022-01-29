@@ -322,14 +322,14 @@
                         icon="exclamation"
                         width="16"
                         height="16"
-                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-white" />
+                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{textColor}" />
                 </div>
             {:else if isActivelyStaking}
                 <Icon
                     icon="tokens"
                     width="16"
                     height="16"
-                    classes="fill-current mt-0.5 text-gray-800 dark:text-white group-hover:text-white" />
+                    classes="fill-current mt-0.5 text-gray-800 dark:text-white group-hover:text-{textColor}" />
             {/if}
             <Text
                 bold
