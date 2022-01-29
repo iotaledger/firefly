@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Button, Input, Text, AccountTile, ColorPicker, PatternPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
@@ -29,8 +29,7 @@
         setProfileAccount($activeProfile, { id: $selectedAccountId, color, pattern })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
-            selectedAccountId.set(null)
-            walletRoute.set(WalletRoutes.Init)
+            accountRoute.set(AccountRoutes.Init)
             return
         }
         if (trimmedAccountAlias) {
@@ -62,8 +61,7 @@
                     }))
 
                     isBusy = false
-                    selectedAccountId.set(null)
-                    walletRoute.set(WalletRoutes.Init)
+                    accountRoute.set(AccountRoutes.Init)
                 },
                 onError(err) {
                     isBusy = false
