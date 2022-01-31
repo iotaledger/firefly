@@ -10,7 +10,7 @@ Please write an accurate and concise changelog for your changes.
 Please list any related issues (e.g. bug, task).
 
 ## Type of Change
-Please select any type below that is applicable to your changes.
+Please select any type below that is applicable to your changes, and delete those that are not.
 - [ ] __Breaking__ - any change that would cause existing functionality to not work as expected
 - [ ] __Chore__ - refactoring, build scripts or anything else that isn't user-facing
 - [ ] __Docs__ - changes to the documentation
@@ -33,7 +33,7 @@ Please select any platforms where your changes have been tested.
 Please describe the specific instructions, configurations, and/or test cases necessary to __test and verify__ that your changes work as intended.
 
 ## Checklist
-Please tick any of the following boxes that are relevant to your changes, and delete those that are not.
+Please tick all of the following boxes that are relevant to your changes, and delete those that are not.
 - [ ] I have followed the contribution guidelines for this project
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
