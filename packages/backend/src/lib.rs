@@ -104,12 +104,19 @@ impl TryFrom<&str> for EventType {
     }
 }
 
-fn init_sentry() -> Option<sentry::ClientInitGuard> {
+fn init_sentry(machine_id: Option<String>) -> Option<sentry::ClientInitGuard> {
     match env::var("SENTRY_DSN") {
         Ok(sentry_dsn) => Some(sentry::init((
             sentry_dsn,
             sentry::ClientOptions {
                 release: sentry::release_name!(),
+                debug: true,
+                before_send: Some(Arc::new(move |mut event| {
+                    // The device hostname can include a person's name
+                    // We don't want to store this
+                    event.server_name = None;
+                    Some(event)
+                })),
                 ..Default::default()
             },
         ))),
@@ -129,20 +136,8 @@ pub async fn init<A: Into<String>>(
         // NOTE: unsafe is required here so that the Sentry guard can be
         // re-initialized with this init call.
         unsafe {
-            SENTRY_GUARD = init_sentry();
+            SENTRY_GUARD = init_sentry(machine_id);
         }
-
-        let user = sentry::protocol::User {
-            id: machine_id,
-            ..Default::default()
-        };
-
-        sentry::configure_scope(|scope| {
-            scope.set_user(Some(user));
-            // The device hostname can include a person's name
-            // We don't want to store this
-            scope.remove_tag("server_name");
-        });
     }
 
     let actor_id = actor_id.into();
