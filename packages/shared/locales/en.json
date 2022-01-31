@@ -529,7 +529,10 @@
             }
         },
         "picker": {
-            "color": "Color picker"
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
+            }
         }
     },
     "popups": {
