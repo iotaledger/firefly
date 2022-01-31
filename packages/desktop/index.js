@@ -1,4 +1,4 @@
-import { Platform } from 'lib/platform'
+import { Platform } from 'shared/lib/platform'
 import App from './App.svelte'
 
 window.addEventListener('error', (event) => {

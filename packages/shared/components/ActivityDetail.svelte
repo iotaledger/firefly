@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Platform } from 'lib/platform';
+    import { Platform } from 'shared/lib/platform';
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'

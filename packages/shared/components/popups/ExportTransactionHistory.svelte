@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { generateTransactionHistoryCsvFromAccount, generateTransactionHistoryFileName } from 'shared/lib/transactionHistory'
     import { Button,Password,Spinner,Text } from 'shared/components'
-    import { Platform } from 'lib/platform';
+    import { Platform } from 'shared/lib/platform';
     import { displayNotificationForLedgerProfile,isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'

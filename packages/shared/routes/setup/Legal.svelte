@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Link, OnboardingLayout, Text } from 'shared/components'
-    import { Platform } from 'lib/platform';
+    import { Platform } from 'shared/lib/platform';
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 

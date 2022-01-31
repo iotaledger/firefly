@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
-    import { Platform } from 'lib/platform';
+    import { Platform } from 'shared/lib/platform';
     import { localize } from 'shared/lib/i18n'
     import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
