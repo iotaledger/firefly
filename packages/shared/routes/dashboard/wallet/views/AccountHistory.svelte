@@ -110,17 +110,16 @@
     let queryTransactions = filteredTransactions
 
     function search() {
-        queryTransactions = filteredTransactions.filter(transaction => {
+        const searchResult = filteredTransactions.filter(transaction => {
             const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
-            return (
-                sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
+            return sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
                 receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr === searchValue) ||
                 transaction?.id.toLowerCase() === searchValue ||
                 (searchValue[0] === '>' && unitStringToValue(searchValue.substring(1)) < transactionValue) ||
                 (searchValue[0] === '<' && unitStringToValue(searchValue.substring(1)) > transactionValue) ||
                 transactionValue === unitStringToValue(searchValue)
-            )
-        })
+        }) || filteredTransactions
+        queryTransactions = searchResult.length > 0 ? searchResult : filteredTransactions
     }
 
     $: if (searchValue) {
