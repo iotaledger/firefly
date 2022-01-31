@@ -1,8 +1,10 @@
-## Description
+## Summary
 Please summarize your changes, describing __what__ they are and __why__ they were made.
 
-## Changelog
+### Changelog
+```
 Please write an accurate and concise changelog for your changes.
+```
 
 ## Relevant Issues
 Please list any related issues (e.g. bug, task).
@@ -19,11 +21,11 @@ Please select any type below that is applicable to your changes.
 ## Testing
 ### Platforms
 Please select any platforms where your changes have been tested.
-- Desktop
+- __Desktop__
 	- [ ] MacOS
 	- [ ] Linux
 	- [ ] Windows
-- Mobile
+- __Mobile__
 	- [ ] iOS
 	- [ ] Android
 
