@@ -75,5 +75,4 @@ export enum ImportType {
 export interface ProfileAccount {
     id: string
     color: string
-    pattern: string
 }

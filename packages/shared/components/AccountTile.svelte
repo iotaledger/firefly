@@ -25,7 +25,7 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { wallet, AccountPatterns } from 'shared/lib/wallet'
+    import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { isBright } from 'shared/lib/helpers'
 
@@ -42,7 +42,6 @@
     export let classes = ''
     export let onClick = (): void | string => ''
     export let disabledHover = false
-    export let pattern = AccountPatterns.Default
 
     $: darkModeEnabled = $appSettings.darkMode
 
@@ -264,17 +263,9 @@
         }
         &.disabled-hover {
             background-color: var(--account-color);
-
-            &.bg-blend-exclusion {
-                background-blend-mode: exclusion;
-            }
         }
         &:not(.disabled-hover):hover {
             background-color: var(--account-color);
-
-            &.bg-blend-exclusion {
-                background-blend-mode: exclusion;
-            }
         }
         &.airdrop {
             @apply opacity-50;
@@ -311,8 +302,7 @@
     class:airdrop
     class:hidden-wallet={hidden}
     class:darkmode={darkModeEnabled}
-    class:bg-blend-exclusion={isBright(color)}
-    style="--account-color: {color}; {pattern && (showStyles || disabledHover) ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
+    style="--account-color: {color};"
     {disabled}>
     <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
         <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">

@@ -14,7 +14,6 @@ export interface WalletAccount extends Account {
     balance: string
     balanceEquiv: string
     color: string
-    pattern: string
 }
 
 export interface AccountMessage extends Message {

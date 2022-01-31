@@ -30,17 +30,9 @@
     button {
         &.disabled-hover {
                 background-color: var(--account-color);
-
-                &.bg-blend-exclusion {
-                    background-blend-mode: exclusion;
-                }
             }
         &:not(.disabled-hover):hover {
             background-color: var(--account-color);
-
-            &.bg-blend-exclusion {
-                background-blend-mode: exclusion;
-            }
         }
     }
 </style>
@@ -50,7 +42,6 @@
     on:mouseenter={toggleTooltip}
     on:mouseleave={toggleTooltip}
     bind:this={tooltipAnchor}
-    class:bg-blend-exclusion={bright}
     style="--account-color: {backgroundColor}"
     class="{size === 'm' ? 'w-10 h-10 rounded-xl p-2 text-14' : 'w-8 h-8 rounded-lg p-1 text-12'} leading-100 font-bold text-center
             {active ? `disabled-hover text-${textColor}` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} bg-no-repeat bg-right-top

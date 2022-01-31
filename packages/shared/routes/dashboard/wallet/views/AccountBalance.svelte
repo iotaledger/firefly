@@ -6,7 +6,6 @@
     export let locale: Locale
 
     export let color
-    export let pattern
     export let balance
     export let balanceEquiv
     export let classes = ''
@@ -20,16 +19,11 @@
     .account-color {
         background-color: var(--account-color);
     }
-
-    .bg-blend-exclusion {
-        background-blend-mode: exclusion;
-    }
 </style>
 
 <div
-    style="--account-color: {color}; {pattern ? `background-image: url("assets/patterns/${pattern}-gradient.svg")` : null}"
-    class="relative account-color dark:from-gray-800 dark:to-gray-900 pt-6 pb-10 px-8 z-0 bg-no-repeat bg-right-top bg-auto {classes}"
-    class:bg-blend-exclusion={isBright(color)}>
+    style="--account-color: {color};}"
+    class="relative account-color dark:from-gray-800 dark:to-gray-900 pt-6 pb-10 px-8 z-0 bg-no-repeat bg-right-top bg-auto {classes}">
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
         <p class="text-11 leading-120 text-{textColor}">{locale('general.accountBalance')}</p>

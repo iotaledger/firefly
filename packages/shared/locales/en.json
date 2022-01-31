@@ -529,8 +529,7 @@
             }
         },
         "picker": {
-            "color": "Color picker",
-            "pattern": "Pattern picker"
+            "color": "Color picker"
         }
     },
     "popups": {
@@ -1017,8 +1016,7 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color",
-        "accountPattern": "Wallet pattern"
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Today",

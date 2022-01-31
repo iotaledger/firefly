@@ -56,7 +56,6 @@ export { default as Transition } from './Transition.svelte'
 export { default as Video } from './Video.svelte'
 export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
-export { default as PatternPicker } from './PatternPicker.svelte'
 
 export * from './modals'
 // Charts

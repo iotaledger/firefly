@@ -91,17 +91,6 @@ export enum AccountColors {
     Pink = configColors['pink']['500'],
 }
 
-export enum AccountPatterns {
-    Default = '',
-    Clover = 'clover',
-    Circles = 'circles',
-    Clouds = 'clouds',
-    Shapes = 'shapes',
-    Wind = 'wind',
-    Rain = 'rain',
-    Organic = 'organic',
-}
-
 export const MAX_PROFILE_NAME_LENGTH = 20
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
@@ -682,7 +671,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias?: string, color?: string, pattern?: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string, color?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
@@ -703,7 +692,7 @@ export const asyncCreateAccount = (alias?: string, color?: string, pattern?: str
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
-                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color, pattern })
+                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
 
                     resolve(preparedAccount)
                 },

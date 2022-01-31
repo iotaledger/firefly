@@ -7,7 +7,6 @@ import {
     getStoragePath,
     getWalletStoragePath,
     AccountColors,
-    AccountPatterns,
 } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
@@ -25,7 +24,6 @@ export const activeProfileId = persistent<string | null>('activeProfileId', null
 export interface ProfileAccount {
     id: string
     color: string
-    pattern: string
 }
 
 export const profiles = persistent<Profile[]>('profiles', [])
@@ -385,7 +383,7 @@ const getUpdatedAccounts = (
 }
 
 /**
- * Sets profile account object color and pattern found by id inside profiles object
+ * Sets profile account object color found by id inside profiles object
  *
  * @method setProfileAccount
  *
@@ -420,24 +418,8 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
     }
 
     if (accountId) {
-        const profileAccount = { id: accountId, color: '', pattern: '' }
+        const profileAccount = { id: accountId, color: '' }
         setProfileAccount(activeProfile, profileAccount)
         return getColor(activeProfile, accountId)
     }
-}
-
-/**
- * Gets account pattern from activeProfile using account id
- *
- * @method getPattern
- *
- * @returns {string}
- */
-export const getPattern = (activeProfile: Profile, accountId: string): string => {
-    const { accounts } = activeProfile
-
-    if (accounts?.length) {
-        return accounts.find((account) => account.id === accountId)?.pattern || AccountPatterns.Default
-    }
-    return AccountPatterns.Default
 }

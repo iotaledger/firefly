@@ -3,7 +3,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { activeProfile, getColor, getPattern } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
@@ -45,7 +45,6 @@
                     <AccountBalance
                         {locale}
                         color={getColor($activeProfile, $account.id)}
-                        pattern={getPattern($activeProfile, $account.id)}
                         balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick}

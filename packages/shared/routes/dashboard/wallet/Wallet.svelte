@@ -312,10 +312,10 @@
         }
     }
 
-    async function onCreateAccount(alias: string, color: string, pattern: string, onComplete) {
+    async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias, color, pattern)
+                const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 walletRoute.set(WalletRoutes.Init)

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Text, AccountTile, ColorPicker, PatternPicker } from 'shared/components'
+    import { Button, Input, Text, AccountTile, ColorPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
@@ -8,7 +8,7 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
-    import { activeProfile, getColor, getPattern } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { setProfileAccount } from 'shared/lib/profile'
 
     export let alias
@@ -19,14 +19,13 @@
 
     let accountAlias = alias
     let isBusy = false
-    let color = getColor($activeProfile, account.id)
-    let pattern = getPattern($activeProfile, account.id)
+    let color = getColor($activeProfile, account.id) as string
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setProfileAccount($activeProfile, { id: $selectedAccountId, color, pattern })
+        setProfileAccount($activeProfile, { id: $selectedAccountId, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             accountRoute.set(AccountRoutes.Init)
@@ -76,7 +75,7 @@
     }
 
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
-    $: hasColorOrPatternChanged = getColor($activeProfile, account.id) !== color || getPattern($activeProfile, account.id) !== pattern
+    $: hasColorChanged = getColor($activeProfile, account.id) !== color
 </script>
 
 <div class="w-full h-full flex flex-col justify-between px-8 py-10">
@@ -91,7 +90,6 @@
                 {color}
                 disabledHover
                 name={accountAlias || account.alias}
-                {pattern}
                 size='m'
                 classes='mb-4' />
             <Input
@@ -103,7 +101,6 @@
                 disabled={isBusy}
                 classes='mb-4' />
             <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes='mb-4' />
-            <PatternPicker title={locale('general.accountPattern')} bind:color bind:active={pattern} {locale} classes='mb-4' />
         </div>
     </div>
     <!-- Action -->
@@ -115,7 +112,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={invalidAliasUpdate && !hasColorOrPatternChanged}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={invalidAliasUpdate && !hasColorChanged}>
                 {locale('actions.save')}
             </Button>
         </div>

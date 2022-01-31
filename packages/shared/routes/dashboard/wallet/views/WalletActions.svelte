@@ -2,12 +2,12 @@
     import { AccountTile, Button, Text } from 'shared/components'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
-    import { activeProfile, getColor, getPattern } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccountId, AccountColors, AccountPatterns } from 'shared/lib/wallet'
+    import { selectedAccountId, AccountColors } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
@@ -48,7 +48,6 @@
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={getColor($activeProfile, account.id)}
-                            pattern={getPattern($activeProfile, account.id)}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
