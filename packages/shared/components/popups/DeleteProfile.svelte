@@ -6,9 +6,9 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api, asyncRemoveStorage, asyncRemoveWalletAccounts, wallet } from 'shared/lib/wallet'
+    import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -40,23 +40,23 @@
             if (!_activeProfile) return
 
             /**
-             * CAUTION: The individual accounts must be removed from wallet.rs.
+             * CAUTION: We need to stop the background sync before we delete the profile.
              */
-            await asyncRemoveWalletAccounts(get(get(wallet).accounts).map((a) => a.id))
+            await asyncStopBackgroundSync()
 
             /**
              * CAUTION: The storage for wallet.rs must also be deleted in order
              * to free the locks on the files within the profile folder (removed
              * later).
              */
-            await asyncRemoveStorage()
+            await asyncDeleteStorage()
 
             /**
              * CAUTION: Logout must occur before the profile is removed
              * from the Svelte store list of profiles, otherwise the
              * actor is not able to be destroyed.
              */
-            await logout()
+            await logout(true, false)
 
             /**
              * CAUTION: The profile must be removed from the
@@ -78,10 +78,18 @@
              */
             await removeProfileFolder(_activeProfile.name)
         } catch (err) {
-            showAppNotification({
-                type: 'error',
-                message: locale('error.global.generic'),
-            })
+            if (err && err?.type && err?.type == 'AccountNotEmpty') {
+                showAppNotification({
+                    type: 'error',
+                    message: locale('error.profile.delete.nonEmptyAccounts'),
+                })
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale('error.global.generic'),
+                })
+            }
+
         } finally {
             isBusy = false
         }

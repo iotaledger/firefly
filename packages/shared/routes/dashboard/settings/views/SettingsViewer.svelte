@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
+    import { localize, _ } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
@@ -16,12 +17,6 @@
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
-    import { Locale } from 'shared/lib/typings/i18n'
-
-    export let locale: Locale
-
-    let scroller
-    let index
 
     const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
         (route) => route !== SettingsRoutes.Init
@@ -79,45 +74,46 @@
     })
 </script>
 
-<div class="flex flex-1 flex-row items-start">
-    {#if !$mobile}
-        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
-            <div class="flex items-center space-x-3">
-                <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{locale('actions.back')}</Text>
-            </div>
-        </button>
-        <SettingsNavigator
-            {routes}
-            onSettingClick={(id) => scrollIntoView(id)}
-            icons={SettingsIcons}
-            {settings}
-            {locale}
-            bind:route={$settingsRoute} />
-    {/if}
-    <div class="h-full w-full pb-10">
+{#key $_}
+    <div class="flex flex-1 flex-row items-start">
         {#if !$mobile}
-            <Text type="p" secondary highlighted classes="mb-8">
-                {locale('views.settings.settings')}
-                /
-                {locale(`views.settings.${$settingsRoute}.title`)}
-            </Text>
+            <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+                <div class="flex items-center space-x-3">
+                    <Icon icon="arrow-left" classes="text-blue-500" />
+                    <Text type="h5">{localize('actions.back')}</Text>
+                </div>
+            </button>
+            <SettingsNavigator
+                {routes}
+                onSettingClick={(id) => scrollIntoView(id)}
+                icons={SettingsIcons}
+                {settings}
+                bind:route={$settingsRoute} />
         {/if}
-        <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70} bind:index bind:this={scroller}>
-            <div class="md:w-11/12">
-                {#if !$mobile}
-                    <Text type="h2" classes="mb-7">{locale(`views.settings.${$settingsRoute}.title`)}</Text>
-                {/if}
-                {#if $settingsRoute === 'generalSettings'}
-                    <General {locale} />
-                {:else if $settingsRoute === 'security'}
-                    <Security {locale} />
-                {:else if $settingsRoute === 'advancedSettings'}
-                    <Advanced {locale} />
-                {:else if $settingsRoute === 'helpAndInfo'}
-                    <Help {locale} />
-                {/if}
-            </div>
-        </Scroller>
+        <div class="h-full w-full pb-10">
+            {#if !$mobile}
+                <Text type="p" secondary highlighted classes="mb-8">
+                    {localize('views.settings.settings')}
+                    /
+                    {localize(`views.settings.${$settingsRoute}.title`)}
+                </Text>
+            {/if}
+            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
+                <div class="md:w-11/12">
+                    {#if !$mobile}
+                        <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
+                    {/if}
+                    {#if $settingsRoute === SettingsRoutes.GeneralSettings}
+                        <General />
+                    {:else if $settingsRoute === SettingsRoutes.Security}
+                        <Security />
+                    {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
+                        <Advanced />
+                    {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
+                        <Help />
+                    {/if}
+                </div>
+            </Scroller>
+        </div>
     </div>
-</div>
+{/key}

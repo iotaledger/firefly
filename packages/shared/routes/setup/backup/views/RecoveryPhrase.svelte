@@ -50,7 +50,7 @@
             {locale($mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
+    <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
         {#if mnemonic !== undefined && mnemonic !== null}
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
             {#if !$mobile}

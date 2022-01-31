@@ -5,6 +5,7 @@ import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
+import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
@@ -82,7 +83,7 @@ export const login = (): void => {
 
  * Logout from current profile
  */
-export const logout = (): Promise<void> =>
+export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
     new Promise<void>((resolve) => {
         const _activeProfile = get(activeProfile)
 
@@ -106,7 +107,8 @@ export const logout = (): Promise<void> =>
 
             clearSendParams()
             closePopup(true)
-            clearActiveProfile()
+            if (_clearActiveProfile) clearActiveProfile()
+            resetParticipation()
             resetWallet()
             resetRouter()
 
@@ -115,7 +117,9 @@ export const logout = (): Promise<void> =>
             resolve()
         }
 
-        if (get(isSoftwareProfile) && !get(isStrongholdLocked)) {
+        // no need to lock strong hold if we are logging out after deleting a profile
+        // or we are not using a software profile
+        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
                 onSuccess() {
                     _cleanup()

@@ -72,13 +72,15 @@
     </div>
     <div slot="leftpane__content">
         {#if !verified}
-            <Text type="p" secondary classes="mb-10">{locale('views.verifyRecoveryPhrase.body')}</Text>
+            <Text type="p" secondary classes={!$mobile ? 'mb-10' : ''}>
+                {locale('views.verifyRecoveryPhrase.body')}
+            </Text>
             {#if !$mobile}
                 <Text type="p" classes="mb-4">{locale('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
                 {#each wordChoices as word}
                     <button
                         type="button"
-                        class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
+                        class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
                         on:click={() => handleChoice(word)}>
                         <Text smaller classes="ml-3">{word}</Text>
                         <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
@@ -113,7 +115,9 @@
             {/each}
         {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}">
         {#if ($mobile && !verified) || !$mobile}
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {verifyRecoveryPhrase} disabled={busy} />
         {/if}

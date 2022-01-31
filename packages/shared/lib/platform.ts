@@ -87,6 +87,18 @@ export const Platform: IPlatform = {
         }
     },
 
+    exportTransactionHistory: async (defaultPath, contents) => {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.exportTransactionHistory(defaultPath, contents)
+            case Platforms.MOBILE:
+                // TODO: Export transaction history on capacitor
+                return Promise.resolve(null)
+            default:
+                return
+        }
+    },
+
     /**
      * Exports migration log
      *

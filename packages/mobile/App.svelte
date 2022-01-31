@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { QRScanner, Route, ToastContainer } from 'shared/components'
+    import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { popupState } from 'shared/lib/popup'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
@@ -96,6 +97,16 @@
     <Splash />
 {:else}
     <div class="scanner-hide">
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_}
+            />
+        {/if}
         <!-- TODO: remove locale={$_} everywhere -->
         <Route route={AppRoute.Welcome}>
             <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />

@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -15,8 +15,14 @@
 
     export let onBackClick = (): void => {}
 
+    let mobileTopContentHeight,
+        leftpaneContentHeight = 0
+
     function handleWatchVideoClick() {
-        openPopup({ type: 'video', props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') } })
+        openPopup({
+            type: 'video',
+            props: { video: LEDGER_MIGRATION_VIDEO, title: locale('views.setupLedger.videoGuide') },
+        })
     }
 </script>
 
@@ -55,12 +61,13 @@
         </div>
         <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
         <div
+            bind:clientHeight={mobileTopContentHeight}
             data-label="mobile-top-content"
             class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5">
-            <div>
+            <div style={$mobile && `max-height: ${mobileTopContentHeight - leftpaneContentHeight - 20}px;`}>
                 <slot name="rightpane" />
             </div>
-            <div>
+            <div bind:clientHeight={leftpaneContentHeight}>
                 <slot name="leftpane__content" />
             </div>
         </div>
@@ -70,7 +77,10 @@
     </div>
 {:else}
     <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
-        <div data-label="leftpane" class="h-full flex justify-center p-10 bg-white dark:bg-gray-800" style="width: 38%;">
+        <div
+            data-label="leftpane"
+            class="h-full flex justify-center p-10 bg-white dark:bg-gray-800"
+            style="width: 38%;">
             <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">
                 <div class="flex flex-col h-full">
                     {#if allowBack}

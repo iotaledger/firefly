@@ -1,4 +1,4 @@
-import type { Node } from './node'
+import type { Node, NodePlugin } from './node'
 
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',
@@ -29,7 +29,6 @@ export interface Network {
  * individual instances of these options.
  */
 export interface NetworkConfig {
-    // node?: Node
     nodes?: Node[]
     network?: Network
     automaticNodeSelection?: boolean
@@ -44,6 +43,8 @@ export type NetworkStatus = {
     referencedRate?: number
     health?: number
     healthText?: NetworkStatusHealthText
+    currentMilestone?: number
+    nodePlugins?: NodePlugin[]
 }
 
 export enum NetworkStatusHealthText {

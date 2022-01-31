@@ -103,7 +103,8 @@ export function getLedgerOpenedApp(): Promise<LedgerApp> {
 export function promptUserToConnectLedger(
     legacy: boolean = false,
     onConnected: () => void = () => {},
-    onCancel: () => void = () => {}
+    onCancel: () => void = () => {},
+    overridePopup: boolean = false
 ): void {
     const _onCancel = () => {
         onCancel()
@@ -112,15 +113,19 @@ export function promptUserToConnectLedger(
         onConnected()
     }
     const _onDisconnected = () => {
-        if (!get(popupState).active) {
-            openLedgerNotConnectedPopup(legacy, onCancel, () =>
-                pollLedgerDeviceStatus(
-                    legacy,
-                    LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
-                    _onConnected,
-                    _onDisconnected,
-                    _onCancel
-                )
+        if (!get(popupState).active || overridePopup) {
+            openLedgerNotConnectedPopup(
+                legacy,
+                onCancel,
+                () =>
+                    pollLedgerDeviceStatus(
+                        legacy,
+                        LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
+                        _onConnected,
+                        _onDisconnected,
+                        _onCancel
+                    ),
+                overridePopup
             )
         }
     }
@@ -216,9 +221,10 @@ export function pollLedgerDeviceStatus(
 function openLedgerNotConnectedPopup(
     legacy: boolean = false,
     cancel: () => void = () => {},
-    poll: () => void = () => {}
+    poll: () => void = () => {},
+    overridePopup: boolean = false
 ) {
-    if (!get(popupState).active) {
+    if (!get(popupState).active || overridePopup) {
         openPopup({
             type: 'ledgerNotConnected',
             hideClose: true,
