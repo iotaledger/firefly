@@ -80,7 +80,7 @@
                 {#each wordChoices as word}
                     <button
                         type="button"
-                        class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
+                        class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
                         on:click={() => handleChoice(word)}>
                         <Text smaller classes="ml-3">{word}</Text>
                         <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />

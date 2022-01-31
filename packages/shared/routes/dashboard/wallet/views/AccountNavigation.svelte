@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, WalletPill } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -73,14 +73,13 @@
     </button>
     <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto scroll-tertiary">
-        <div class="flex flex-row pb-1" bind:this={accountElement}>
+        <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
-                <button
-                    on:click={() => handleAccountClick(acc.id)}
-                    class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
-            {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} 
-            hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
-                </button>
+                <WalletPill
+                    active={activeAccount.id === acc.id}
+                    name={acc.alias}
+                    color={acc.color}
+                    onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
     </div>

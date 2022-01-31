@@ -35,6 +35,10 @@ export const CapacitorApi: IPlatform = {
         return new Promise<string>((resolve, reject) => {})
     },
 
+    exportTransactionHistory: async (defaultPath, content) => {
+        return new Promise<string>((resolve, reject) => {})
+    },
+
     /**
      * Exports migration log
      *

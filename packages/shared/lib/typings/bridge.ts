@@ -1,11 +1,12 @@
 import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { ErrorEventPayload } from './events'
-import type { LedgerApp, LedgerStatus } from './ledger'
+import type { LedgerStatus } from './ledger'
 import type { Message } from './message'
 import type { NodeInfo } from './node'
 import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import type { StrongholdStatus } from './wallet'
+import type { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
 
 export interface Actor {
     destroy(): void
@@ -80,6 +81,15 @@ export enum ResponseTypes {
     MinedBundle = 'MinedBundle',
     MineBundle = 'MineBundle',
     LegacyAddressChecksum = 'GetLegacyAddressChecksum',
+
+    // Staking
+    ParticipationOverview = 'ParticipationOverview',
+    EventsData = 'EventsData',
+    SentParticipation = 'SentParticipation',
+    StakingOverview = 'StakingOverview',
+    StakedAccount = 'StakedAccount',
+    UnstakedAccount = 'UnstakedAccount',
+    AdditionalFundsStaked = 'AdditionalFundsStaked',
 }
 
 export enum Actions {
@@ -87,6 +97,7 @@ export enum Actions {
 }
 
 export type Response<T, P> = { id: string; action: Actions; type: T; payload?: P }
+
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
 export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>
@@ -134,6 +145,14 @@ export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>
 export type LegacyAddressChecksumResponse = Response<ResponseTypes.LegacyAddressChecksum, string>
 
+/**
+ * Staking responses
+ */
+export type StakingOverviewResponse = Response<ResponseTypes.StakingOverview, ParticipationOverviewResponse>
+export type StakedAccountResponse = Response<ResponseTypes.StakedAccount, ParticipateResponsePayload>
+export type UnstakedAccountResponse = Response<ResponseTypes.UnstakedAccount, ParticipateResponsePayload>
+export type AdditionalFundsStakedResponse = Response<ResponseTypes.AdditionalFundsStaked, ParticipateResponsePayload>
+
 export type MessageResponse =
     | RemovedAccountResponse
     | CreatedAccountResponse
@@ -177,5 +196,10 @@ export type MessageResponse =
     | GetMigrationAddressResponse
     | MinedBundleResponse
     | LegacyAddressChecksumResponse
+    // Staking types
+    | StakingOverviewResponse
+    | StakedAccountResponse
+    | UnstakedAccountResponse
+    | AdditionalFundsStakedResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

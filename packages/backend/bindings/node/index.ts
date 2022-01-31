@@ -48,7 +48,7 @@ import {
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
     getStrongholdStatus as _getStrongholdStatus,
-    removeStorage as _removeStorage,
+    deleteStorage as _deleteStorage,
     lockStronghold as _lockStronghold,
     changeStrongholdPassword as _changeStrongholdPassword,
     setClientOptions as _setClientOptions,
@@ -58,6 +58,16 @@ import {
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 import { NodeAuth } from '../../../shared/lib/typings/node'
+
+// Participation (staking, voting)
+import {
+    getParticipationEvents as _getParticipationEvents,
+    getParticipationOverview as _getParticipationOverview,
+    participate as _participate,
+    participateWithRemainingFunds as _participateWithRemainingFunds,
+    stopParticipating as _stopParticipating,
+} from '../../../shared/lib/participation/bridge'
+import { Participation } from '../../../shared/lib/participation/types'
 
 // @ts-ignore
 import addon = require('../index.node')
@@ -233,8 +243,8 @@ export const api = {
     setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
     },
-    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
+    deleteStorage: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _deleteStorage(sendMessage, __ids)
     },
     send: function (
         fromAccountId: AccountIdentifier,
@@ -299,9 +309,9 @@ export const api = {
     },
     getMigrationAddress: function (
         prompt: boolean,
-        accountIndex: number
+        accountIdentifier: AccountIdentifier
     ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIndex)
+        return (__ids: CommunicationIds) => _getMigrationAddreess(sendMessage, __ids, prompt, accountIdentifier)
     },
     mineBundle: function (
         bundle: string[],
@@ -339,6 +349,31 @@ export const api = {
     getLegacyAddressChecksum: function (address: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)
     },
+
+    // Participation related methods (voting / staking)
+    getParticipationOverview: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids)
+    },
+    getParticipationEvents: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationEvents(sendMessage, __ids)
+    },
+    participate: function (
+        accountId: string,
+        participations: Participation[]
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _participate(sendMessage, __ids, accountId, participations)
+    },
+    stopParticipating: function (accountId: string, eventIds: string[]): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _stopParticipating(sendMessage, __ids, accountId, eventIds)
+    },
+    participateWithRemainingFunds: function (
+        accountId: string,
+        participations: Participation[]
+    ): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) =>
+            _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
+    },
+
     // Event emitters
     onError: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')

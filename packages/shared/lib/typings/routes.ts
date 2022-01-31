@@ -58,6 +58,7 @@ export enum AccountRoutes {
 export enum Tabs {
     Wallet = 'wallet',
     Settings = 'settings',
+    Staking = 'staking',
 }
 
 export enum SettingsRoutes {
@@ -76,8 +77,6 @@ export enum SettingsRoutesNoProfile {
 }
 
 export enum GeneralSettings {
-    // TODO: Implement and enable
-    // Profile = 'profile',
     Theme = 'theme',
     Language = 'language',
     Currency = 'currency',
@@ -101,27 +100,30 @@ export enum SecuritySettings {
 
 export enum AdvancedSettings {
     NetworkConfiguration = 'networkConfiguration',
-    // DeveloperMode = 'developerMode',
     DeepLinks = 'deepLinks',
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
-    TransactionHistory = 'transactionHistory',
 }
 
 export enum AdvancedSettingsNoProfile {
-    // DeveloperMode = 'developerMode',
     DeepLinks = 'deepLinks',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {
-    // Troubleshoot = 'troubleshoot',
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',
     ReportAnIssue = 'reportAnIssue',
+}
+
+export enum ExternalRoute {
+    Documentation = 'https://wiki.iota.org/learn/wallets/firefly/general',
+    Discord = 'https://discord.iota.org',
+    FAQ = 'https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting',
+    IssueReport = 'https://github.com/iotaledger/firefly/issues',
 }

@@ -1,21 +1,22 @@
 <script lang="typescript">
-    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup, mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
-    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
+    import { Animation,Button,ButtonCheckbox,CollapsibleBlock,Input,OnboardingLayout,Text } from 'shared/components'
+    import { cleanupSignup,mobile } from 'shared/lib/app'
+    import { getTrimmedLength,validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { Platform } from 'shared/lib/platform'
+    import { openPopup } from 'shared/lib/popup'
     import {
-        cleanupInProgressProfiles,
-        createProfile,
-        disposeNewProfile,
-        hasNoProfiles,
-        newProfile,
-        profileInProgress,
-        profiles,
+    cleanupInProgressProfiles,
+    createProfile,
+    disposeNewProfile,
+    hasNoProfiles,
+    newProfile,
+    profileInProgress,
+    profiles
     } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { destroyActor,getStoragePath,initialise,MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -59,10 +60,11 @@
 
             const previousInitializedId = $newProfile?.id
             const nameChanged = $newProfile?.name !== trimmedProfileName
+            const isDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
             // If the name has changed from the previous initialization
             // then make sure we cleanup the last profile and actor
-            if (nameChanged && previousInitializedId) {
+            if ((nameChanged || isDeveloperProfileChanged) && previousInitializedId) {
                 // The initialized profile name has changed
                 // so we need to destroy the previous actor
                 destroyActor(previousInitializedId)
@@ -71,7 +73,7 @@
             try {
                 busy = true
 
-                if (nameChanged) {
+                if (nameChanged || isDeveloperProfileChanged) {
                     profile = createProfile(trimmedProfileName, isDeveloperProfile)
                     profileInProgress.set(trimmedProfileName)
 
@@ -81,7 +83,13 @@
                     initialiseMigrationListeners()
                 }
 
-                dispatch('next')
+                if(isDeveloperProfile) {
+                    openPopup({type: 'confirmDeveloperProfile', props: {
+                        handleContinueClick: () => dispatch('next')
+                    }})
+                } else {
+                    dispatch('next')
+                }
             } catch (err) {
                 showAppNotification({
                     type: 'error',
@@ -121,12 +129,14 @@
             autofocus
             disabled={busy}
             submitHandler={handleContinueClick} />
-        <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-            <div class="text-left">
-                <Text type="p">{locale('views.profile.developer.label')}</Text>
-                <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-            </div>
-        </ButtonCheckbox>
+        <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                <div class="text-left">
+                    <Text type="p">{locale('views.profile.developer.label')}</Text>
+                    <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
+                </div>
+            </ButtonCheckbox>
+        </CollapsibleBlock>
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
