@@ -44,14 +44,20 @@
         background-color: transparent;
     }
 
-    .active {
+    .active, .custom-color {
         background-color: rgb(var(--account-color));
         --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
         --tw-ring-opacity: 0.3;
     }
+
+    .custom-color {
+        background-color: rgb(var(--custom-color));
+        --tw-ring-color: rgba(var(--custom-color), var(--tw-ring-opacity));
+        --tw-ring-opacity: 0.3;
+    }
 </style>
 
-<div style="--account-color: {inputValue ? hex2rgb(active) : ''}" class={classes}>
+<div style="--account-color: {inputValue ? hex2rgb(active) : ''}; --custom-color: {hex2rgb(inputValue)};" class={classes}>
     <div class="flex flex-row mb-4">
         <Text type="h5">{title}</Text>
     </div>
@@ -64,10 +70,10 @@
             </li>
         {/each}
         <li tabindex="0" class='w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-        bg-white hover:bg-gray-50 focus:bg-white ring-white' on:click={toggleTooltip} bind:this={tooltipAnchor}
+        custom-color hover:bg-gray-50 focus:bg-white ring-white' on:click={toggleTooltip} bind:this={tooltipAnchor}
         class:active={activeElement === accountColors.length && inputValue.length >= 7}
         class:ring-4={activeElement === accountColors.length} on:click={activeCustomColor}>
-            <Icon icon="edit" classes="text-gray-600" />
+            <Icon icon="edit" classes="text-{inputColor}" />
         </li>
     </ul>
     {#if showTooltip}
