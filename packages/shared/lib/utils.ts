@@ -390,12 +390,12 @@ export const clamp = (n: number, min: number, max: number): number => {
 /**
  * Converts iota value-unit string to int value
  *
- * @method unitStringToValue
+ * @method unitToValue
  * @param {string}
  *
  * @returns {number}
  */
-export const unitStringToValue = (str: string): number => {
+export const unitToValue = (str: string): number => {
     const value = parseInt(str, 10)
     const unit = str.substring(value.toString().length).toLowerCase()
 
@@ -412,5 +412,37 @@ export const unitStringToValue = (str: string): number => {
             return value * 1000000000000000
         default:
             return value
+    }
+}
+
+/**
+ * Check if value is in unit range
+ *
+ * @method isValueInUnitRange
+ * @param {number} value
+ * @param {string} unit
+ *
+ * @returns {boolean}
+ */
+ export const isValueInUnitRange = (value: number, unit: string): boolean => {
+    const ki = 1000,
+        mi = 1000000,
+        gi = 1000000000,
+        ti = 1000000000000,
+        pi = 1000000000000000
+
+    switch (unit) {
+        case 'ki':
+            return value >= ki && value <= mi
+        case 'mi':
+            return value >= mi && value <= gi
+        case 'gi':
+            return value >= gi && value <= ti
+        case 'ti':
+            return value >= ti && value <= pi
+        case 'pi':
+            return value >= pi
+        default:
+            return false
     }
 }

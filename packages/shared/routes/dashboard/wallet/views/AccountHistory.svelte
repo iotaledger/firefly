@@ -16,7 +16,7 @@
     } from 'shared/lib/wallet';
     import type { AccountMessage } from 'shared/lib/typings/wallet'
     import type { Transaction } from 'shared/lib/typings/message'
-    import { debounce, unitStringToValue } from 'shared/lib/utils'
+    import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
 
     export let locale: Locale
 
@@ -110,19 +110,21 @@
     let queryTransactions = filteredTransactions
 
     function search() {
-        const searchResult = filteredTransactions.filter(transaction => {
-            const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
-            return sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
-                receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr === searchValue) ||
-                transaction?.id.toLowerCase() === searchValue ||
-                (searchValue[0] === '>' && unitStringToValue(searchValue.substring(1)) < transactionValue) ||
-                (searchValue[0] === '<' && unitStringToValue(searchValue.substring(1)) > transactionValue) ||
-                transactionValue === unitStringToValue(searchValue)
-        }) || filteredTransactions
-        queryTransactions = searchResult.length > 0 ? searchResult : filteredTransactions
+        if (searchValue) {
+            queryTransactions = filteredTransactions.filter(transaction => {
+                const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
+                return sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
+                    receiverAddressesFromTransactionPayload(transaction?.payload).find(addr => addr === searchValue) ||
+                    transaction?.id.toLowerCase() === searchValue ||
+                    (searchValue[0] === '>' && unitToValue(searchValue.substring(1)) < transactionValue) ||
+                    (searchValue[0] === '<' && unitToValue(searchValue.substring(1)) > transactionValue) ||
+                    transactionValue === unitToValue(searchValue) ||
+                    (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue))
+            })
+        }
     }
 
-    $: if (searchValue) {
+    $: if (searchActive && searchValue) {
         (debounce(search))()
     } else {
         queryTransactions = filteredTransactions
