@@ -6,7 +6,7 @@
 
     export let active
     export let locale
-    export let title = locale('views.pickers.color.title')
+    export let title = locale('views.picker.color.title')
     export let classes = ''
 
     const accountColors = Object.values(AccountColors).filter(c => /[#]/.test(c as string))
@@ -73,7 +73,7 @@
     {#if showTooltip}
         <div use:clickOutside on:clickOutside={toggleTooltip}>
             <Tooltip anchor={tooltipAnchor} position="top">
-                <Text type="p">{locale('views.pickers.color.hexCode')}</Text>
+                <Text type="p">{locale('views.picker.color.hexCode')}</Text>
                 <input type="text" placeholder="#FFFFFF" pattern="[A-F0-9]{10}" maxlength="7" bind:value={inputValue} on:click={activeCustomColor}
                     class='w-24 h-full text-16 uppercase leading-140 border border-solid mt-2
                     {inputValue.length >= 7 && activeElement === accountColors.length ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'}
