@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Illustration, Link, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'lib/platform';
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { StakingAirdrop } from 'shared/lib/participation/types'
@@ -18,7 +18,7 @@
                 }),
             })
         }
-        Electron.openUrl(getLearnMoreUrl())
+        Platform.openUrl(getLearnMoreUrl())
     }
     const getLearnMoreUrl = (): string => {
         switch (airdrop) {

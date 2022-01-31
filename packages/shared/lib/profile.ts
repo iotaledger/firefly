@@ -1,7 +1,7 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { asyncDeleteStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Platform } from './platform'
 import type { ValuesOf } from './typings/utils'
@@ -138,7 +138,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     const _newProfile = get(newProfile)
     if (_newProfile) {
         try {
-            await asyncRemoveStorage()
+            await asyncDeleteStorage()
             await removeProfileFolder(_newProfile.name)
         } catch (err) {
             console.error(err)

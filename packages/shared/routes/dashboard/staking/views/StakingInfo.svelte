@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'lib/platform';
     import { localize } from 'shared/lib/i18n'
     import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
@@ -77,7 +77,7 @@
     })
 
     const handleLearnMoreClick = (): void => {
-        Electron.openUrl('https://blog.iota.org/iota-staking-start/')
+        Platform.openUrl('https://blog.iota.org/iota-staking-start/')
     }
 </script>
 

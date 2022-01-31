@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { generateTransactionHistoryCsvFromAccount, generateTransactionHistoryFileName } from 'shared/lib/transactionHistory'
     import { Button,Password,Spinner,Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'lib/platform';
     import { displayNotificationForLedgerProfile,isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
@@ -38,7 +38,7 @@
                     const fileName = generateTransactionHistoryFileName(profileName, $account.alias)
                     const contents = generateTransactionHistoryCsvFromAccount($account, {id: true, internal: true, value: true, formattedValue: true, date: true, time: true})
                     try {
-                        const filePath = await Electron.exportTransactionHistory(fileName, contents)
+                        const filePath = await Platform.exportTransactionHistory(fileName, contents)
                         if(filePath) {
                             closePopup()
                             showAppNotification({type: 'info', message: locale('notifications.exportTransactionHistory.success', {values: {accountAlias: $account.alias, filePath: filePath}})})

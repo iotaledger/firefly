@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
@@ -16,6 +15,7 @@
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
+    import { Platform } from 'shared/lib/platform';
 
     export let airdrop: StakingAirdrop
 
@@ -58,7 +58,7 @@
             })
         }
 
-        Electron.openUrl(getLearnMoreUrl())
+        Platform.openUrl(getLearnMoreUrl())
     }
 
     const getLearnMoreUrl = (): string => {

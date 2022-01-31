@@ -412,9 +412,9 @@ export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
 export const asyncRemoveWalletAccounts = (accountIds: string[]): Promise<void[]> =>
     Promise.all(accountIds.map((id) => asyncRemoveWalletAccount(id)))
 
-export const asyncRemoveStorage = (): Promise<void> =>
+export const asyncDeleteStorage = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
-        api.removeStorage({
+        api.deleteStorage({
             onSuccess() {
                 resolve()
             },
@@ -512,6 +512,23 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
         })
     })
 }
+
+export const asyncStopBackgroundSync = (): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
+        api.stopBackgroundSync({
+            onSuccess() {
+                isBackgroundSyncing.set(false)
+                resolve()
+            },
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize('error.global.generic'),
+                })
+                reject()
+            },
+        })
+    })
 
 /**
  * Displays participation (stake/unstake) notification

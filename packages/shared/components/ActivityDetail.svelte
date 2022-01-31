@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'lib/platform';
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
@@ -176,7 +176,7 @@
                 <Text secondary>{locale('general.messageId')}</Text>
                 <div class="flex flex-row justify-between items-center">
                     <Link
-                        onClick={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                        onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
                     >
                         <Text highlighted type="pre">{id}</Text>
                     </Link>
