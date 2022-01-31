@@ -35,7 +35,7 @@
 {#if recoveryPhrase}
     <div
         data-label="recovery-phrase"
-        class="grid w-full text-12 {$mobile ? 'grid-cols-1' : 'grid-cols-3'} gap-3 {classes}"
+        class="grid w-full text-12 {$mobile ? 'grid-cols-1 overflow-y-auto p-3' : 'grid-cols-3'} gap-3 {classes}"
         class:hide>
         {#each recoveryPhrase as word, i}
             <span
