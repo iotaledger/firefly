@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { appSettings, AppTheme, shouldBeDarkMode } from 'shared/lib/appSettings'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -15,11 +15,10 @@
 
     let _clonedVariable = undefined
     let segments = BLINK_SEGMENTS
+    let appTheme = $appSettings.theme
 
-    let appTheme: AppTheme = $appSettings.theme
     $: $appSettings.theme = appTheme
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
-
     $: if (_clonedVariable !== undefined && _clonedVariable !== appTheme) {
         _clonedVariable = appTheme // ghetto reactive implementation
         segments = SWITCH_SEGMENTS

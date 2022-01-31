@@ -20,8 +20,8 @@
         isActive = false
     }
     
-    const handleLogoutClick = (): void => {
-        void logout()
+    const handleLogoutClick = async (): Promise<void> => {
+        await logout()
     }
 </script>
 
