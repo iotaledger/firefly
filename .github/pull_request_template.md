@@ -1,6 +1,9 @@
 ## Description
 Please summarize your changes, describing __what__ they are and __why__ they were made.
 
+## Changelog
+Please write an accurate and concise changelog for your changes.
+
 ## Relevant Issues
 Please list any related issues (e.g. bug, task).
 
