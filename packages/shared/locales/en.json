@@ -292,7 +292,7 @@
         "settings": {
             "settings": "Settings",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
@@ -300,7 +300,7 @@
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Advanced",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Theme",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Language",
