@@ -3,12 +3,10 @@ const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = requir
 const path = require('path')
 const os = require('os')
 const fs = require('fs')
-const Sentry = require('@sentry/electron')
 const { execSync } = require('child_process')
 const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
-const { captureException } = require('../sentry')
 
 const canSendCrashReports = () => {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
@@ -22,6 +20,11 @@ const canSendCrashReports = () => {
 
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
+
+let captureException = (..._) => {}
+if (SEND_CRASH_REPORTS) {
+    captureException = require('../sentry')(true).captureException
+}
 
 /**
  * Set AppUserModelID for Windows notifications functionality

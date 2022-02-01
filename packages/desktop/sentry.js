@@ -12,6 +12,7 @@ const environment = SENTRY_ENVIRONMENT || ''
 
 let machineId = ''
 
+/* eslint-disable no-undef */
 if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
     const { machineIdSync } = require('node-machine-id')
     try {
@@ -25,7 +26,13 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
     })
 }
 
-Sentry.init({ appName, debug, dsn, environment })
-Sentry.setUser({ id: machineId })
+module.exports = function (initialize) {
+    if (initialize) {
+        Sentry.init({ appName, debug, dsn, environment })
+        Sentry.setUser({ id: machineId })
+    }
 
-export const captureException = Sentry.captureException
+    return {
+        captureException: Sentry.captureException,
+    }
+}
