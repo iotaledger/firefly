@@ -1,5 +1,5 @@
-import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
+import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
+import { newProfile, profiles, saveProfile, setActiveProfile, setProfileType } from 'shared/lib/profile'
 import {
     AccountRoutes,
     AppRoute,
@@ -169,7 +169,7 @@ export const routerNext = (event: { detail }): void => {
             break
         }
         case AppRoute.Create: {
-            const profileType = get(activeProfile)?.type
+            const profileType = get(newProfile)?.type
             if (profileType === ProfileType.Software) {
                 nextRoute = AppRoute.Secure
             } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
@@ -193,7 +193,7 @@ export const routerNext = (event: { detail }): void => {
             if (pin) {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
-                const profileType = get(activeProfile)?.type
+                const profileType = get(newProfile)?.type
                 if ([SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)) {
                     nextRoute = AppRoute.Congratulations
                 } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
@@ -242,6 +242,11 @@ export const routerNext = (event: { detail }): void => {
             }
             break
         case AppRoute.Congratulations:
+            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
+            // When this component mounts, ensure that the profile is persisted in the local storage.
+            saveProfile(get(newProfile))
+            setActiveProfile(get(newProfile))
+
             cleanupSignup()
             login()
 

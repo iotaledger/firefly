@@ -38,14 +38,7 @@ export const newProfile = writable<Profile | null>(null)
 
 export const isStrongholdLocked = writable<boolean>(true)
 
-/**
- * Currently active profile
- */
-export const activeProfile: Readable<Profile | undefined> = derived(
-    [profiles, newProfile, activeProfileId],
-    ([$profiles, $newProfile, $activeProfileId]) =>
-        $newProfile || $profiles.find((_profile) => _profile.id === $activeProfileId)
-)
+export const activeProfile = writable<Profile | null>(null)
 
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
@@ -122,7 +115,6 @@ export const createProfile = (profileName: string, isDeveloperProfile: boolean):
     const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
-    activeProfileId.set(profile.id)
 
     return profile
 }
@@ -166,17 +158,16 @@ export const disposeNewProfile = async (): Promise<void> => {
 }
 
 /**
- * Sets profile with provided id as active
+ * Sets active (logged in) profile
  *
  * @method setActiveProfile
  *
- * @param {string} id
+ * @param {Profile} profile
  *
  * @returns {void}
  */
-export const setActiveProfile = (id: string): void => {
-    lastActiveProfileId.set(id)
-    activeProfileId.set(id)
+export const setActiveProfile = (profile: Profile): void => {
+    activeProfile.set(profile)
 }
 
 /**

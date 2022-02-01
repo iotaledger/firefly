@@ -9,15 +9,8 @@
     } from 'shared/lib/currency'
     import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
-    import {
-        activeProfile,
-        newProfile,
-        profileInProgress,
-        saveProfile,
-        setActiveProfile,
-        updateProfile,
-    } from 'shared/lib/profile'
+    import { getMigratedProfile, LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -38,26 +31,19 @@
     let localizedValues = {}
     let logExported = false
 
-    onMount(() => {
-        if (!wasMigrated) {
-            if ($walletSetupType === SetupType.FireflyLedger) {
-                localizedBody = 'fireflyLedgerBody'
-            }
-            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
-            // When this component mounts, ensure that the profile is persisted in the local storage.
-            saveProfile($newProfile)
-            setActiveProfile($newProfile.id)
-
-            profileInProgress.set(undefined)
-            newProfile.set(null)
-        } else {
+    onMount(() => {        
+        if (wasMigrated) {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
-
-                updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
+                const profile = getMigratedProfile()
+                updateProfile('ledgerMigrationCount', profile.ledgerMigrationCount + 1)
             } else {
                 localizedBody = 'softwareMigratedBody'
+            }
+        } else {
+            if ($walletSetupType === SetupType.FireflyLedger) {
+                localizedBody = 'fireflyLedgerBody'
             }
         }
     })
@@ -90,11 +76,12 @@
             const _exportMigrationLog = () => {
                 Platform.getUserDataPath()
                     .then((path) => {
-                        const source = getStoragePath(path, $activeProfile.name)
+                        const profile = getMigratedProfile()
+                        const source = getStoragePath(path, profile.name)
 
                         return $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                            : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${profile.name}-${LOG_FILE_NAME}`)
+                            : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${profile.name}-${LOG_FILE_NAME}`)
                     })
                     .then((result) => {
                         if (result) {

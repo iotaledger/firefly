@@ -1,6 +1,6 @@
 import type { Unit as UnitType } from '@iota/unit-converter'
 import { Unit } from '@iota/unit-converter'
-import { isSoftwareProfile } from 'shared/lib/profile'
+import { isSoftwareProfile, newProfile, profileInProgress } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
@@ -66,6 +66,8 @@ export const loggedIn = writable<boolean>(false)
  * Cleanup the signup vars
  */
 export const cleanupSignup = (): void => {
+    profileInProgress.set(null)
+    newProfile.set(null)
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)

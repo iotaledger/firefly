@@ -26,7 +26,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let state: ProtectState = ProtectState.Pin
+    let state = ProtectState.Pin
     let stateHistory = []
 
     let pin = null

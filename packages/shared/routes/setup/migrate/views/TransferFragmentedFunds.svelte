@@ -254,7 +254,7 @@
         // When the first migration bundle is broadcast, then persist profile
 
         saveProfile($newProfile)
-        setActiveProfile($newProfile.id)
+        setActiveProfile($newProfile)
 
         profileInProgress.set(undefined)
         newProfile.set(null)

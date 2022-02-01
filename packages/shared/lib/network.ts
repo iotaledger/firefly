@@ -7,7 +7,7 @@ import { isNewNotification, showAppNotification } from './notifications'
 import { localize } from './i18n'
 import type { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
-import { activeProfile } from './profile'
+import { newProfile } from './profile'
 
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
@@ -308,7 +308,7 @@ export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
 
 export const getDefaultClientOptions = (): ClientOptions => {
     const { id, type } =
-        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
+        get(newProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
 
     const node = getOfficialNodes(type)[0]
     node.isPrimary = true

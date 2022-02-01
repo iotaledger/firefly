@@ -490,7 +490,7 @@
             if (!$accountsLoaded) {
                 loadAccounts()
             }
-
+            console.log(1)
             removeEventListeners($activeProfile.id)
 
             initialiseListeners()

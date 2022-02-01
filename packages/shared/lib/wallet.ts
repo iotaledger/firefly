@@ -12,7 +12,6 @@ import { buildClientOptions } from './network'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { getParticipationOverview } from './participation/api'
 import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
-// PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { Platform } from './platform'
 import { openPopup } from './popup'
@@ -211,6 +210,9 @@ export const initialise = (id: string, storagePath: string): void => {
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
+    console.log('Inside Remove event listeners')
+    console.log(id);
+    console.log(actors)
     didInitialiseMigrationListeners.set(false)
     actors[id].removeEventListeners()
 }
@@ -363,7 +365,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
     })
 
 export const asyncCreateAccount = (alias?: string, color?: string): Promise<WalletAccount> =>
-    new Promise<WalletAccount>((resolve, reject) => {
+    new Promise((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
             {
@@ -488,7 +490,7 @@ export const asyncSyncAccounts = (
 export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =>
     new Promise((resolve) => {
         api.syncAccount(account.id, {
-            onSuccess(response) {
+            onSuccess() {
                 getAccountMeta(account.id, (err, meta) => {
                     if (!err) {
                         const _account = prepareAccountInfo(account, meta) as WalletAccount
@@ -504,7 +506,7 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
                     resolve()
                 })
             },
-            onError(err) {
+            onError() {
                 resolve()
             },
         })

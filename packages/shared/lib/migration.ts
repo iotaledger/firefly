@@ -3,7 +3,7 @@ import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { activeProfile, newProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
 import type {
@@ -26,6 +26,7 @@ import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+import { Profile } from './typings/profile'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -85,9 +86,6 @@ export const ledgerMigrationProgresses = derived(currentLedgerMigrationProgress,
 
 export const LEDGER_MIGRATION_VIDEO = 'https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v12.mp4'
 
-/*
- * Migration state
- */
 export const migration = writable<MigrationState>({
     didComplete: writable<boolean>(false),
     data: writable<MigrationData>({
@@ -98,19 +96,12 @@ export const migration = writable<MigrationState>({
     seed: writable<string>(null),
     bundles: writable<Bundle[]>([]),
 })
-
 export const didInitialiseMigrationListeners = writable<boolean>(false)
-
 export const hardwareIndexes = writable<HardwareIndexes>({
     accountIndex: 0,
     pageIndex: 0,
 })
-
 export const migrationLog = writable<MigrationLog[]>([])
-
-/*
- * ongoingSnapshot
- */
 export const ongoingSnapshot = writable<boolean>(false)
 
 export const createUnsignedBundle = (
@@ -364,7 +355,7 @@ export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<v
             onSuccess(getAccountsResponse) {
                 api.getMigrationAddress(
                     false,
-                    getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
+                    getAccountsResponse.payload[getMigratedProfile().ledgerMigrationCount]?.id,
                     {
                         onSuccess(response) {
                             resolve(response.payload)
@@ -497,7 +488,7 @@ export const createLedgerMigrationBundle = (
             onSuccess(getAccountsResponse) {
                 api.getMigrationAddress(
                     false,
-                    getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
+                    getAccountsResponse.payload[getMigratedProfile().ledgerMigrationCount].id,
                     {
                         onSuccess(response) {
                             resolve(response.payload)
@@ -632,9 +623,6 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
         })
     )
 
-    // Persist these bundles in local storage
-    const _activeProfile = get(activeProfile)
-
     const migratedTransaction = {
         address: data.address,
         balance: data.value,
@@ -644,10 +632,13 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
         account: 0,
     }
 
+    const profile = getMigratedProfile()
+
+    // Persist these bundles in local storage
     updateProfile(
         'migratedTransactions',
-        _activeProfile.migratedTransactions
-            ? [..._activeProfile.migratedTransactions, migratedTransaction]
+        profile.migratedTransactions
+            ? [...profile.migratedTransactions, migratedTransaction]
             : [migratedTransaction]
     )
 }
@@ -1304,4 +1295,8 @@ function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): 
             inputs,
         },
     })
+}
+
+export function getMigratedProfile(): Profile {
+    return get(newProfile) ?? get(activeProfile)
 }

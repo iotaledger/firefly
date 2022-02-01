@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { clearLastActiveProfile, lastActiveProfileId, migrateProfile, profiles, setActiveProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { clearLastActiveProfile, lastActiveProfileId, migrateProfile, newProfile, profiles, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -19,8 +19,9 @@
     let stateHistory = []
 
     onMount(() => {
-        if (get(lastActiveProfileId) && get(profiles)?.find((p) => p.id === get(lastActiveProfileId))) {
-            setActiveProfile(get(lastActiveProfileId))
+        const lastActiveProfile = $profiles?.find((p) => p.id === $lastActiveProfileId)
+        if (lastActiveProfile) {
+            setActiveProfile(lastActiveProfile)
             _next()
         } else {
             clearLastActiveProfile()
@@ -32,7 +33,7 @@
             detail: any
         } = { detail: {} }
     ) => {
-        let nextState
+        let nextState: LoginState
         const params = event?.detail || {}
         switch (state) {
             case LoginState.Init: {
