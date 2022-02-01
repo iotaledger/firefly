@@ -58,6 +58,7 @@ export { default as Video } from './Video.svelte'
 export { default as TransactionTabs } from './TransactionTabs.svelte'
 export { default as Drawer } from './Drawer.svelte'
 export { default as WalletPill } from './WalletPill.svelte'
+export { default as ColorPicker } from './ColorPicker.svelte'
 
 export * from './modals'
 // Charts

@@ -1,7 +1,13 @@
 import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import { asyncDeleteStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import {
+    asyncDeleteStorage,
+    destroyActor,
+    getStoragePath,
+    getWalletStoragePath,
+    AccountColors,
+} from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Platform } from './platform'
 import type { ValuesOf } from './typings/utils'
@@ -12,9 +18,12 @@ import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import { Electron } from './electron'
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
+export interface ProfileAccount {
+    id: string
+    color: string
+}
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
@@ -91,6 +100,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
         },
     },
     ledgerMigrationCount: 0,
+    accounts: [],
 })
 
 /**
@@ -345,3 +355,70 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
  * @returns {boolean}
  */
 export const hasNoProfiles = (): boolean => get(profiles).length === 0
+
+/*
+ * Maps accounts key values creating or updating existing objects with param profileAccount searching by account id
+ *
+ * @method getUpdatedAccounts
+ *
+ * @returns {ProfileAccount[]}
+ */
+const getUpdatedAccounts = (
+    activeProfile: Profile,
+    accountId: string,
+    profileAccount: ProfileAccount
+): ProfileAccount[] => {
+    const { accounts } = activeProfile
+
+    if (accounts?.length) {
+        if (accounts?.find((account) => account.id === accountId)) {
+            return accounts.map((account) => (account.id === accountId ? profileAccount : account))
+        } else {
+            return [...accounts, profileAccount]
+        }
+    }
+
+    return [profileAccount]
+}
+
+/**
+ * Sets profile account object color found by id inside profiles object
+ *
+ * @method setProfileAccount
+ *
+ * @returns {void}
+ */
+export const setProfileAccount = (activeProfile: Profile, profileAccount: ProfileAccount): void => {
+    if (profileAccount.color) {
+        updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
+    } else if (profileAccount.id) {
+        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
+        updateProfile(
+            'accounts',
+            getUpdatedAccounts(activeProfile, profileAccount.id, { ...profileAccount, color: randomColor })
+        )
+    }
+}
+
+/**
+ * Gets account color from activeProfile using account id
+ *
+ * @method getColor
+ *
+ * @returns {string}
+ */
+export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
+    const { accounts } = activeProfile || {}
+
+    if (accounts?.length) {
+        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
+        if (foundAccountColor) return foundAccountColor
+    }
+
+    if (accountId) {
+        const profileAccount = { id: accountId, color: '' }
+        setProfileAccount(activeProfile, profileAccount)
+        return getColor(activeProfile, accountId)
+    }
+}
