@@ -73,9 +73,23 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { Error } from './typings/error'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from 'shared/tailwind.config.js'
+import { setProfileAccount } from 'shared/lib/profile'
 
-const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
+const configColors = resolveConfig(tailwindConfig).theme.colors
+
+export enum AccountColors {
+    Blue = configColors['blue']['500'],
+    LightBlue = configColors['lightblue']['500'],
+    Purple = configColors['purple']['500'],
+    Turquoise = configColors['turquoise']['500'],
+    Green = configColors['green']['500'],
+    Yellow = configColors['yellow']['500'],
+    Orange = configColors['orange']['500'],
+    Red = configColors['red']['500'],
+    Pink = configColors['pink']['500'],
+}
 
 export const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -674,7 +688,7 @@ export const asyncRestoreBackup = (importFilePath: string, password: string): Pr
         })
     })
 
-export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
+export const asyncCreateAccount = (alias?: string, color?: string): Promise<WalletAccount> =>
     new Promise<WalletAccount>((resolve, reject) => {
         const accounts = get(get(wallet)?.accounts)
         api.createAccount(
@@ -694,6 +708,8 @@ export const asyncCreateAccount = (alias?: string): Promise<WalletAccount> =>
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+
+                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
 
                     resolve(preparedAccount)
                 },
@@ -1768,7 +1784,6 @@ export const prepareAccountInfo = (
         balanceEquiv: formatCurrency(
             convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
         ),
-        color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
 }
 

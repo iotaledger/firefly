@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { Button, Input, Spinner, Text, AccountTile, ColorPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors } from 'shared/lib/wallet'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -20,6 +20,7 @@
 
     let accountAlias = ''
     let isBusy = false
+    let color = AccountColors.Blue
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -57,7 +58,7 @@
 
             const _cancel = () => (isBusy = false)
             const _create = () =>
-                onCreate(trimmedAccountAlias, (err) => {
+                onCreate(trimmedAccountAlias, color, (err) => {
                     isBusy = false
 
                     if(err) {
@@ -95,14 +96,24 @@
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="w-full flex flex-col justify-between">
+            <AccountTile
+                balance={'0 Mi'}
+                balanceEquiv={'US$ 0,00'}
+                {color}
+                disabledHover=true
+                name={accountAlias || locale('general.accountName')}
+                size='l'
+                classes='mb-4' />
             <Input
                 {error}
                 bind:value={accountAlias}
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
-                disabled={isBusy} />
+                disabled={isBusy}
+                classes='mb-4' />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes='mb-4' />
         </div>
     </div>
     <!-- Action -->

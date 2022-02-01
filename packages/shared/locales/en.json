@@ -538,6 +538,12 @@
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
             }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
+            }
         }
     },
     "popups": {
@@ -940,6 +946,7 @@
         "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
+        "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "totalIn": "Total in",
@@ -1028,7 +1035,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Today",

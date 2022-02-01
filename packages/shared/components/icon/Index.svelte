@@ -7,6 +7,7 @@
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
+    export let boxStyles = ''
 
     $: selected = icons[icon]
 </script>
@@ -23,7 +24,7 @@
 
 {#if selected}
     {#if boxed}
-        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}">
+        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}" style={boxStyles}>
             <svg
                 data-label="icon"
                 class="flex-shrink-0 {classes}"

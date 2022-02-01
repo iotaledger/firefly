@@ -115,8 +115,8 @@
             data: {
                 labels,
                 datasets: datasets.map((dataset) => ({
-                    backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
-                    hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                    backgroundColor: fullConfig.theme.colors[dataset.color]?.['500'] || color,
+                    hoverBackgroundColor: fullConfig.theme.colors[dataset.color]?.['500'] || color,
                     barThickness: 7,
                     ...dataset,
                 }))
@@ -168,7 +168,7 @@
                     bodyFontSize: 11,
                     titleFontFamily: 'Inter',
                     bodyFontFamily: 'Inter',
-                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    bodyFontColor: fullConfig.theme.colors.gray['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
                             const dataset = datasets[tooltipItem.datasetIndex]
