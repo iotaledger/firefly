@@ -3,12 +3,12 @@
     import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { activeProfile, activeProfileId, clearLastActiveProfile, lastActiveProfileId, profiles } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api,getStoragePath,initialise } from 'shared/lib/wallet'
     import { createEventDispatcher,onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -65,7 +65,7 @@
             return openSnapshotPopup()
         }
         if (!hasReachedMaxAttempts) {
-            const profile = get(activeProfile)
+            const profile = $profiles?.find((p) => p.id === $lastActiveProfileId)
 
             isBusy = true
 
@@ -76,6 +76,7 @@
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
+                                    activeProfileId.set(profile?.id)
                                     dispatch('next')
                                 },
                                 onError(err) {
@@ -111,7 +112,7 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
-            clearActiveProfile()
+            clearLastActiveProfile()
             dispatch('previous')
         }
     }

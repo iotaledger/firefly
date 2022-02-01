@@ -20,11 +20,15 @@ import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
 import { account } from './typings'
 
-export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export interface ProfileAccount {
     id: string
     color: string
 }
+export const activeProfileId = writable<string | null>(null)
+/**
+ * Used to remember the last active profile to display the pin page directly
+ */
+export const lastActiveProfileId = persistent<string | null>('lastActiveProfileId', null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
@@ -171,6 +175,7 @@ export const disposeNewProfile = async (): Promise<void> => {
  * @returns {void}
  */
 export const setActiveProfile = (id: string): void => {
+    lastActiveProfileId.set(id)
     activeProfileId.set(id)
 }
 
@@ -183,6 +188,17 @@ export const setActiveProfile = (id: string): void => {
  */
 export const clearActiveProfile = (): void => {
     activeProfileId.set(null)
+}
+
+/**
+ * Clears the last active profile
+ *
+ * @method clearLastActiveProfile
+ *
+ * @returns {void}
+ */
+export const clearLastActiveProfile = (): void => {
+    lastActiveProfileId.set(null)
 }
 
 /**

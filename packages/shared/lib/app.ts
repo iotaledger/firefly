@@ -83,7 +83,7 @@ export const login = (): void => {
 
  * Logout from current profile
  */
-export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
+export const logout = (_lockStronghold: boolean = true): Promise<void> =>
     new Promise<void>((resolve) => {
         const _activeProfile = get(activeProfile)
 
@@ -108,7 +108,8 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
             clearSendParams()
             closePopup(true)
             loggedIn.set(false)
-            if (_clearActiveProfile) clearActiveProfile()
+            clearActiveProfile()
+            clearActiveProfile()
             resetParticipation()
             resetWallet()
             resetRouter()
