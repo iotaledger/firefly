@@ -637,9 +637,7 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
     // Persist these bundles in local storage
     updateProfile(
         'migratedTransactions',
-        profile.migratedTransactions
-            ? [...profile.migratedTransactions, migratedTransaction]
-            : [migratedTransaction]
+        profile.migratedTransactions ? [...profile.migratedTransactions, migratedTransaction] : [migratedTransaction]
     )
 }
 

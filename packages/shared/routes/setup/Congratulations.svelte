@@ -31,7 +31,7 @@
     let localizedValues = {}
     let logExported = false
 
-    onMount(() => {        
+    onMount(() => {
         if (wasMigrated) {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
