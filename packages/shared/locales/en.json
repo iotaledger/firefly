@@ -930,6 +930,7 @@
         "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
+        "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "totalIn": "Total in",
