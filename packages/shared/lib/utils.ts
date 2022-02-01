@@ -424,7 +424,7 @@ export const unitToValue = (str: string): number => {
  *
  * @returns {boolean}
  */
- export const isValueInUnitRange = (value: number, unit: string): boolean => {
+export const isValueInUnitRange = (value: number, unit: string): boolean => {
     const ki = 1000,
         mi = 1000000,
         gi = 1000000000,

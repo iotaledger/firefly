@@ -17,6 +17,7 @@
     import type { AccountMessage } from 'shared/lib/typings/wallet'
     import type { Transaction } from 'shared/lib/typings/message'
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
+    import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let locale: Locale
 
@@ -118,8 +119,9 @@
                     transaction?.id.toLowerCase() === searchValue ||
                     (searchValue[0] === '>' && unitToValue(searchValue.substring(1)) < transactionValue) ||
                     (searchValue[0] === '<' && unitToValue(searchValue.substring(1)) > transactionValue) ||
+                    (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue)) ||
                     transactionValue === unitToValue(searchValue) ||
-                    (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue))
+                    formatUnitBestMatch(transactionValue).toString()?.includes(searchValue)
             })
         }
     }
