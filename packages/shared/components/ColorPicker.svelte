@@ -37,6 +37,8 @@
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
     }
+
+    $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
 </script>
 
 <style type="text/scss">
@@ -44,7 +46,7 @@
         background-color: transparent;
     }
 
-    .active, .custom-color {
+    .active {
         background-color: rgb(var(--account-color));
         --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
         --tw-ring-opacity: 0.3;
@@ -64,15 +66,14 @@
     <ul class="flex flex-row flex-wrap gap-3.5">
         {#each Object.keys(AccountColors).reduce((acc, val) => /[#]/.test(val) ? acc : [...acc, val.toLowerCase()], []) as color, i}
             <li tabindex="0" class='w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-            bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500' class:ring-4="{activeElement === i}"
-            on:click={() => handleColorClick(i)} on:keypress={(event) => handleKeyPress(event, i)} aria-label={color}>
+                bg-{color}-500 hover:bg-{color}-600 focus:bg-{color}-600 ring-{color}-500' class:ring-4="{activeElement === i}"
+                on:click={() => handleColorClick(i)} on:keypress={(event) => handleKeyPress(event, i)} aria-label={color}>
                 {#if activeElement === i}<Icon icon="checkmark" classes="text-white" />{/if}
             </li>
         {/each}
         <li tabindex="0" class='w-12 h-12 rounded-lg ring-opacity-30 hover:ring-opacity-40 cursor-pointer flex justify-center items-center
-        custom-color hover:bg-gray-50 focus:bg-white ring-white' on:click={toggleTooltip} bind:this={tooltipAnchor}
-        class:active={activeElement === accountColors.length && inputValue.length >= 7}
-        class:ring-4={activeElement === accountColors.length} on:click={activeCustomColor}>
+            custom-color hover:bg-gray-50 focus:bg-white ring-white' on:click={toggleTooltip} bind:this={tooltipAnchor}
+            class:active={customActiveFilled} class:ring-4={customActiveFilled} on:click={activeCustomColor}>
             <Icon icon="edit" classes="text-{inputColor}" />
         </li>
     </ul>
@@ -81,11 +82,10 @@
             <Tooltip anchor={tooltipAnchor} position="top">
                 <Text type="p">{locale('views.picker.color.hexCode')}</Text>
                 <input type="text" placeholder="#FFFFFF" pattern="[A-F0-9]{10}" maxlength="7" bind:value={inputValue} on:click={activeCustomColor}
-                    class='w-24 h-full text-16 uppercase leading-140 border border-solid mt-2
-                    {inputValue.length >= 7 && activeElement === accountColors.length ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'}
-                    bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center
-                    {activeElement === accountColors.length ? 'ring-4' : ''}'
-                    class:active={activeElement === accountColors.length && inputValue.length >= 7}>
+                    class='w-24 h-full text-16 uppercase leading-140 border border-solid mt-2 bg-white dark:bg-gray-800 border-gray-300
+                    {customActiveFilled ? `text-${inputColor} border-none` : 'text-gray-800 dark:text-white'} dark:border-gray-700
+                    hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center' class:ring-4={customActiveFilled}
+                    class:active={customActiveFilled}>
             </Tooltip>
         </div>
     {/if}
