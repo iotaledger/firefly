@@ -1,6 +1,7 @@
 import { Electron } from 'shared/lib/electron'
 import App from './App.svelte'
-import { captureException } from './sentry'
+
+const captureException = require('./sentry')(false).captureException || function (..._) {}
 
 window.addEventListener('error', (event) => {
     const errorType = 'Render Context (Error)'
@@ -17,7 +18,7 @@ window.addEventListener('error', (event) => {
 window.addEventListener('unhandledrejection', (event) => {
     const errorType = 'Render Context (Unhandled Rejection)'
 
-    captureException(event.reason)
+    captureException(event.reason || event)
     Electron.unhandledException(errorType, event.reason || event)
 
     event.preventDefault()

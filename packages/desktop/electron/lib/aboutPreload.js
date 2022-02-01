@@ -6,7 +6,7 @@ const {
 
 const sendCrashReportsArg = '--send-crash-reports=true'
 if (window.process.argv.includes(sendCrashReportsArg)) {
-    require('../../sentry')
+    require('../../sentry')(true)
 }
 
 contextBridge.exposeInMainWorld('about', {

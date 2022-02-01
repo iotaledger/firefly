@@ -1,7 +1,10 @@
 const { ipcRenderer, contextBridge } = require('electron')
-const { captureException } = require('../sentry')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
+let captureException = (..._) => {}
+if (SEND_CRASH_REPORTS) {
+    captureException = require('../sentry')(true).captureException
+}
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
