@@ -630,6 +630,12 @@
                         and fix crashes. Further information regarding their privacy policy can be found under 
                         https://sentry.io/privacy/.
                     </Text>
+                    <Text type="h3" classes="mb-5">Cloudflare</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We use the load balancing and the Web Application Firewall (WAF) services of Cloudflare, Inc.,
+                        101 Townsend St, San Francisco, CA 94107 to improve the performance and availability of the App. Further
+                        information regarding their privacy policy can be found under https://www.cloudflare.com/privacypolicy/.
+                    </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Providers of Operating Systems and Telecommunication Services</Text>
                     <Text type="p" secondary classes="mb-4">
