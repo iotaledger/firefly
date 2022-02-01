@@ -2,23 +2,21 @@
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { Profile, ProfileType } from 'shared/lib/typings/profile';
 
     export let locale: Locale
-
     export let classes = undefined
+    export let profile: Profile
+    export let bgColor: string
+    export let onClick: (profile: Profile) => void
 
-    export let name = ''
-    export let id = ''
-    export let isDeveloper = false
-    export let isLedgerProfile = false
-    export let bgColor
-
-    export let onClick = (): void | string => ''
-
+    $: name = profile?.name ?? locale('general.addProfile')
+    $: isDeveloperProfile = profile?.isDeveloperProfile
+    $: isLedgerProfile = profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator
     const slots = $$props.$$slots
-
+    
     function getInitials() {
-        const initials = _getInitials(name)
+        const initials = _getInitials(name, 1)
         if (initials.length === 1) {
             return initials
         } else {
@@ -31,7 +29,7 @@
 <div class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center">
         <div
-            on:click={() => onClick(id)}
+            on:click={() => onClick(profile)}
             class="h-20 w-20 {bgColor ? `bg-${bgColor}-500` : ''} rounded-full font-bold text-center flex items-center justify-center {classes}">
             {#if slots}
                 <slot />
@@ -45,7 +43,7 @@
             {/if}
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
-        {#if isDeveloper}
+        {#if isDeveloperProfile}
             <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1 mt-3">
                 <Text type="p" smaller classes="text-white">{locale('general.dev').toUpperCase()}</Text>
             </div>
