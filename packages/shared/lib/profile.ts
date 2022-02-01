@@ -24,25 +24,26 @@ export interface ProfileAccount {
     id: string
     color: string
 }
-export const activeProfileId = writable<string | null>(null)
-/**
- * Used to remember the last active profile to display the pin page directly
- */
-export const lastActiveProfileId = persistent<string | null>('lastActiveProfileId', null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
-export const newProfile = writable<Profile | null>(null)
-
 export const isStrongholdLocked = writable<boolean>(true)
+
+export const newProfile = writable<Profile | null>(null)
 
 export const activeProfile = writable<Profile | null>(null)
 
-activeProfileId.subscribe((profileId) => {
-    Platform.updateActiveProfile(profileId)
+activeProfile.subscribe((profile) => {
+    Platform.updateActiveProfile(profile.id)
 })
+
+/**
+ * Used to remember the last active profile to display the pin page directly
+ */
+
+export const lastActiveProfileId = persistent<string | null>('lastActiveProfileId', null)
 
 export const isSoftwareProfile: Readable<boolean> = derived(
     activeProfile,
@@ -154,7 +155,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     }
 
     newProfile.set(null)
-    activeProfileId.set(null)
+    clearActiveProfile()
 }
 
 /**
@@ -178,7 +179,7 @@ export const setActiveProfile = (profile: Profile): void => {
  * @returns {void}
  */
 export const clearActiveProfile = (): void => {
-    activeProfileId.set(null)
+    activeProfile.set(null)
 }
 
 /**

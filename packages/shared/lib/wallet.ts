@@ -210,9 +210,6 @@ export const initialise = (id: string, storagePath: string): void => {
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
-    console.log('Inside Remove event listeners')
-    console.log(id);
-    console.log(actors)
     didInitialiseMigrationListeners.set(false)
     actors[id].removeEventListeners()
 }
