@@ -56,6 +56,7 @@ export { default as TransactionItem } from './TransactionItem.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as Video } from './Video.svelte'
 export { default as WalletPill } from './WalletPill.svelte'
+export { default as ColorPicker } from './ColorPicker.svelte'
 
 export * from './modals'
 // Charts

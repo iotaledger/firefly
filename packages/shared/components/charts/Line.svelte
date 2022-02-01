@@ -5,13 +5,14 @@
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
+    import { AccountColors } from 'shared/lib/wallet'
 
     export let labels = []
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
     export let formatYAxis = (value: unknown): number => Number(value.toString())
-    export let color = 'blue' // TODO: each profile has a different color
+    export let color = AccountColors.Blue.toString()
     export let beginAtZero = false
     export let inlineStyle = 'height: calc(50vh - 130px);'
 
@@ -35,16 +36,15 @@
             data: {
                 labels,
                 datasets: datasets.map((dataset) => {
-                    const themeColor = fullConfig.theme.colors[dataset.color || color]
                     const gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
-                    gradient.addColorStop(0, convertHexToRGBA(themeColor['500'], 30))
-                    gradient.addColorStop(1, convertHexToRGBA(themeColor['500'], 0))
+                    gradient.addColorStop(0, convertHexToRGBA(color, 30))
+                    gradient.addColorStop(1, convertHexToRGBA(color, 0))
                     return {
                         backgroundColor: gradient,
-                        borderColor: themeColor['500'],
+                        borderColor: color,
                         borderWidth: 1.5,
-                        pointBackgroundColor: themeColor['500'],
-                        pointBorderColor: themeColor['500'],
+                        pointBackgroundColor: color,
+                        pointBorderColor: color,
                         pointRadius: 0,
                         hoverRadius: 4,
                         ...dataset,
@@ -70,7 +70,7 @@
                     bodyFontSize: 11,
                     titleFontFamily: 'Inter',
                     bodyFontFamily: 'Inter',
-                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    bodyFontColor: fullConfig.theme.colors.gray['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
                             const dataset = datasets[tooltipItem.datasetIndex]
