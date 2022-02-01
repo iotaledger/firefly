@@ -3,6 +3,8 @@
     import { Electron } from 'shared/lib/electron'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -16,6 +18,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
+        lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         dispatch('next')
     }
     function handleBackClick() {
