@@ -2,7 +2,7 @@ import { persistent } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
-    asyncRemoveStorage,
+    asyncDeleteStorage,
     destroyActor,
     getStoragePath,
     getWalletStoragePath,
@@ -149,7 +149,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     const _newProfile = get(newProfile)
     if (_newProfile) {
         try {
-            await asyncRemoveStorage()
+            await asyncDeleteStorage()
             await removeProfileFolder(_newProfile.name)
         } catch (err) {
             console.error(err)
