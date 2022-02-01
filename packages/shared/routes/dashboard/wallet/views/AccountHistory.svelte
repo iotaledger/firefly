@@ -121,7 +121,7 @@
                     (searchValue[0] === '<' && unitToValue(searchValue.substring(1)) > transactionValue) ||
                     (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue)) ||
                     transactionValue === unitToValue(searchValue) ||
-                    formatUnitBestMatch(transactionValue).toString()?.includes(searchValue)
+                    formatUnitBestMatch(transactionValue).toString().toLowerCase()?.includes(searchValue)
             })
         }
     }
