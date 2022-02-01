@@ -8,7 +8,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes,WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccountId, AccountColors } from 'shared/lib/wallet'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { Receive,Send } from '.'

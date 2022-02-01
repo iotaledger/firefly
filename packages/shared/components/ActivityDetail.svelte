@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { CopyButton,Icon,Link,Text } from 'shared/components'
-    import { convertToFiat,currencies,exchangeRates,formatCurrency } from 'shared/lib/currency'
-    import { getInitials,isBright,truncateString } from 'shared/lib/helpers'
+    import { CopyButton, Icon, Link, Text } from 'shared/components'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
@@ -21,7 +21,7 @@
         sendAddressFromTransactionPayload
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable,Writable } from 'svelte/store'
+    import type { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 

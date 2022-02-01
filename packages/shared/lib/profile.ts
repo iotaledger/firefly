@@ -18,6 +18,7 @@ import { AvailableExchangeRates } from './typings/currency'
 import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
+import { account } from './typings'
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export interface ProfileAccount {
