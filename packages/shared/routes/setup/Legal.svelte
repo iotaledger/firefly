@@ -609,19 +609,19 @@
                     <Text type="p" secondary classes="mb-4">
                         We use CoinGeckoAPI of Gecko Labs Pte. Ltd, 101 Upper Cross Street, #05-16 People's Park Centre, Singapore
                         058357 ("CoinGecko") to obtain historical price and market data for cryptocurrencies. Further information
-                        regarding their privacy policy can be found under https://www.coingecko.com/en/privacy
+                        regarding their privacy policy can be found under https://www.coingecko.com/en/privacy.
                     </Text>
                     <Text type="h3" classes="mb-5">GitHub</Text>
                     <Text type="p" secondary classes="mb-4">
-                        We use GitHub of GitHub Inc 88 Colin P. Kelly Street, San Francisco, CA 94107, USA ("GitHub" - in the
+                        We use GitHub of GitHub Inc., 88 Colin P. Kelly Street, San Francisco, CA 94107, USA ("GitHub" - in the
                         European Union: GitHub BV Vijzelstraat 68-72, 1017 HL Amsterdam, The Netherlands) to check for app updates
                         in order to provide the auto-update functionality. Further information regarding their privacy policy can
-                        be found under https://help.github.com/articles/github-privacy-statement/
+                        be found under https://help.github.com/articles/github-privacy-statement/.
                     </Text>
                     <Text type="h3" classes="mb-5">Amazon Web Services</Text>
                     <Text type="p" secondary classes="mb-4">
                         We use Amazon Web Services to host our website and any updated versions of the App. Further information
-                        regarding their privacy policy can be found under https://aws.amazon.com/privacy/
+                        regarding their privacy policy can be found under https://aws.amazon.com/privacy/.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Providers of Operating Systems and Telecommunication Services</Text>
