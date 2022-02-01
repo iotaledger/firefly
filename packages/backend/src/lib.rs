@@ -30,7 +30,6 @@ use tokio::{
 use std::{
     collections::HashMap,
     convert::TryFrom,
-    env,
     path::{Path, PathBuf},
     sync::{mpsc::Sender, Arc, Mutex},
     time::Duration,
@@ -105,8 +104,8 @@ impl TryFrom<&str> for EventType {
 }
 
 fn init_sentry(machine_id: Option<String>) -> Option<sentry::ClientInitGuard> {
-    match env::var("SENTRY_DSN") {
-        Ok(sentry_dsn) => Some(sentry::init((
+    option_env!("SENTRY_DSN").map(|sentry_dsn| {
+        sentry::init((
             sentry_dsn,
             sentry::ClientOptions {
                 release: sentry::release_name!(),
@@ -119,9 +118,8 @@ fn init_sentry(machine_id: Option<String>) -> Option<sentry::ClientInitGuard> {
                 })),
                 ..Default::default()
             },
-        ))),
-        Err(_) => None,
-    }
+        ))
+    })
 }
 
 pub async fn init<A: Into<String>>(
