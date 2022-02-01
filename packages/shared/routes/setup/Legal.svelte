@@ -57,7 +57,7 @@
                     <Text type="p" secondary classes="mb-4">
                         These conditions of use (the "<strong>Conditions</strong>") apply to you (hereinafter, "<strong>User</strong>"
                         or "<strong>you</strong>") and the IOTA Foundation, a non-profit foundation with its registered address at
-                        c/o Nextland, Strassburger Strasse 55, 10405 Berlin (hereinafter, "<strong>IOTA</strong>" or "<strong>we/us</strong>"),
+                        Pappelallee 78/79, 10437 Berlin (hereinafter, "<strong>IOTA</strong>" or "<strong>we/us</strong>"),
                         regarding your use of the "Firefly App" (the "<strong>App</strong>"). Use of the App is also governed by
                         the App's Privacy Policy (the "<strong>Privacy Policy</strong>").
                     </Text>
@@ -694,7 +694,7 @@
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         To withdraw your consent, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation,
-                        c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        Pappelallee 78/79, 10437 Berlin.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Legitimate Interest and Right to Object</Text>
@@ -705,8 +705,8 @@
                         unacceptable for you.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
-                        To object, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation, c/o Nextland,
-                        Strassburgerstr. 55, 10405 Berlin.
+                        To object, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation, Pappelallee 78/79,
+                        10437 Berlin.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">When we Erase Personal Data</Text>
@@ -731,7 +731,7 @@
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         To exercise any of these rights, please send us an e-mail to: privacy@iota.org or a letter to IOTA
-                        Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        Foundation, Pappelallee 78/79, 10437 Berlin.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         A copy of the Personal Data undergoing processing can be requested.
@@ -742,7 +742,7 @@
                         For any requests, you can contact us as follows: privacy@iota.org.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
-                        IOTA Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        IOTA Foundation, Pappelallee 78/79, 10437 Berlin, Germany.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Changes to the Privacy Policy</Text>
