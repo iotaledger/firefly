@@ -623,6 +623,13 @@
                         We use Amazon Web Services to host our website and any updated versions of the App. Further information
                         regarding their privacy policy can be found under https://aws.amazon.com/privacy/.
                     </Text>
+                    <Text type="h3" classes="mb-5">Sentry</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We use Sentry of Functional Software, Inc., dba Sentry, 45 Fremont Street, 8th Floor, San Francisco,
+                        CA 94105 (”Sentry”) to track errors in the App in real time and obtain the insight needed to reproduce
+                        and fix crashes. Further information regarding their privacy policy can be found under 
+                        https://sentry.io/privacy/.
+                    </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Providers of Operating Systems and Telecommunication Services</Text>
                     <Text type="p" secondary classes="mb-4">
