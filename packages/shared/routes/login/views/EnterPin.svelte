@@ -76,21 +76,23 @@
             Electron.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name), sendCrashReports)
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
+                        return Electron.getMachineId().then((machineId) =>
+                            Electron.getUserDataPath().then((path) => {
+                                initialise(profile.id, getStoragePath(path, profile.name), sendCrashReports, machineId)
+                                api.setStoragePassword(pinCode, {
+                                    onSuccess() {
+                                        dispatch('next')
+                                    },
+                                    onError(err) {
+                                        isBusy = false
+                                        showAppNotification({
+                                            type: 'error',
+                                            message: locale(err.error),
+                                        })
+                                    },
+                                })
                             })
-                        })
+                        )
                     } else {
                         shake = true
                         shakeTimeout = setTimeout(() => {

@@ -96,12 +96,15 @@ function sendMessage(message: BridgeMessage): Promise<string> {
 export function init(
     id: string,
     storagePath?: string,
-    sendCrashReports?: boolean
+    sendCrashReports?: boolean,
+    machineId?: string
 ): { destroy: () => void; removeEventListeners: () => void } {
     /* NOTE: This ensures that if no argument is passed then it is still a boolean */
     sendCrashReports = sendCrashReports || false
 
-    const runtime = storagePath ? new addon.ActorSystem(id, storagePath, sendCrashReports) : new addon.ActorSystem(id)
+    const runtime = storagePath
+        ? new addon.ActorSystem(id, storagePath, sendCrashReports, machineId)
+        : new addon.ActorSystem(id)
 
     let destroyed = false
     _poll(

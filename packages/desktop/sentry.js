@@ -1,4 +1,4 @@
-/** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, and SENTRY_ENVIRONMENT are replaced by Webpack at compile-time. */
+/** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Webpack at compile-time. */
 
 /* eslint-disable no-undef */
 const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
@@ -10,6 +10,22 @@ const dsn = SENTRY_DSN || ''
 /* eslint-disable no-undef */
 const environment = SENTRY_ENVIRONMENT || ''
 
+let machineId = ''
+
+if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
+    const { machineIdSync } = require('node-machine-id')
+    try {
+        machineId = machineIdSync()
+    } catch (error) {
+        console.error(error)
+    }
+} else {
+    Electron.getMachineId().then((id) => {
+        machineId = id
+    })
+}
+
 Sentry.init({ appName, debug, dsn, environment })
+Sentry.setUser({ id: machineId })
 
 export const captureException = Sentry.captureException

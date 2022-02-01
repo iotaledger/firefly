@@ -499,15 +499,16 @@ export const getStoragePath = (appPath: string, profileName: string): string =>
  * @param {string} id The identifier to use for the wallet actor system.
  * @param {string} storagePath The storage directory to use for profile data.
  * @param {boolean} sendCrashReports Determines whether crash reports should be sent from the wallet actor.
+ * @param {string} machineId Machine ID for crash reporting
  *
  * CAUTION: Only use the app settings from startup as the wallet actor is initialized dynamically while the
  * Electron app is not.
  */
-export const initialise = (id: string, storagePath: string, sendCrashReports: boolean): void => {
+export const initialise = (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
-    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath, sendCrashReports)
+    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath, sendCrashReports, machineId)
 
     actors[id] = actor
 }

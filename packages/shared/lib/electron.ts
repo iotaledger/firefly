@@ -70,6 +70,7 @@ export interface IElectron {
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
+    getMachineId(): Promise<string>
     updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>

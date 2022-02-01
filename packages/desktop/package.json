@@ -31,6 +31,7 @@
         "hw-app-iota": "0.6.5",
         "kdbxweb": "^1.14.4",
         "keytar": "^7.3.0",
+        "node-machine-id": "^1.1.12",
         "shared": "0.0.0",
         "wallet-nodejs-binding": "0.1.0"
     },

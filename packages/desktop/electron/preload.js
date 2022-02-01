@@ -262,6 +262,14 @@ try {
          */
         getOS: () => ipcRenderer.invoke('get-os'),
         /**
+         * Gets machine ID
+         *
+         * @method getMachineId
+         *
+         * @returns {Promise}
+         */
+        getMachineId: () => ipcRenderer.invoke('get-machine-id'),
+        /**
          * Starts an update of the application
          *
          * @method updateDownload

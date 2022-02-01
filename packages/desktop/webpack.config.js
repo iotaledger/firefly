@@ -106,6 +106,7 @@ const mainPlugins = [
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(false),
     }),
 ]
 
@@ -136,6 +137,7 @@ const rendererPlugins = [
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(false),
     }),
 ]
 
@@ -145,6 +147,7 @@ const preloadPlugins = [
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(true),
     }),
 ]
 
