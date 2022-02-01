@@ -74,6 +74,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-+  	<string>To scan QR codes</string>
+  	<string>To scan QR codes</string>
 </dict>
 </plist>
