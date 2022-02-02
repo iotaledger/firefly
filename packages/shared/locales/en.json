@@ -773,7 +773,7 @@
         },
         "crashReporting": {
             "title": "Crash reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will be applied after restarting Firefly.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         }
     },
