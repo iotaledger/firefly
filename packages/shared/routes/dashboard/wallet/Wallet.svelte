@@ -486,7 +486,7 @@
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
-        if ($activeProfile && loggedIn) {
+        if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
                 loadAccounts()
             }
