@@ -183,13 +183,13 @@ export const clearActiveProfile = (): void => {
 }
 
 /**
- * Clears the last active profile
+ * Clears the last active profile ID
  *
- * @method clearLastActiveProfile
+ * @method clearLastActiveProfileId
  *
  * @returns {void}
  */
-export const clearLastActiveProfile = (): void => {
+export const clearLastActiveProfileId = (): void => {
     lastActiveProfileId.set(null)
 }
 

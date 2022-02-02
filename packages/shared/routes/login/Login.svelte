@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { clearLastActiveProfile, lastActiveProfileId, migrateProfile, newProfile, profiles, setActiveProfile } from 'shared/lib/profile'
+    import { clearLastActiveProfileId, lastActiveProfileId, migrateProfile, profiles, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
     import type { Locale } from 'shared/lib/typings/i18n'
 
@@ -24,7 +23,7 @@
             setActiveProfile(lastActiveProfile)
             _next()
         } else {
-            clearLastActiveProfile()
+            clearLastActiveProfileId()
         }
     })
 
