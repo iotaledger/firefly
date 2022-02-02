@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -486,7 +486,7 @@
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
-        if ($activeProfile) {
+        if ($activeProfile && loggedIn) {
             if (!$accountsLoaded) {
                 loadAccounts()
             }
