@@ -97,16 +97,6 @@
     <Splash />
 {:else}
     <div class="scanner-hide">
-        {#if $popupState.active}
-            <Popup
-                type={$popupState.type}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                locale={$_}
-            />
-        {/if}
         <!-- TODO: remove locale={$_} everywhere -->
         <Route route={AppRoute.Welcome}>
             <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
@@ -156,6 +146,16 @@
         <Route route={AppRoute.Login}>
             <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
         </Route>
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_}
+            />
+        {/if}
         <ToastContainer />
     </div>
     <div class="scanner-ui">
