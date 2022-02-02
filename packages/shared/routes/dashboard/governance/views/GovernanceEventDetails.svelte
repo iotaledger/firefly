@@ -5,8 +5,9 @@
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
     import { ParticipationEventState } from 'shared/lib/participation/types'
+    import type { ParticipationEvent } from 'shared/lib/participation/types'
 
-    export let event;
+    export let event: ParticipationEvent;
 
     const handleBackClick = () => governanceRoute.set(GovernanceRoutes.Init)
 </script>
@@ -21,17 +22,19 @@
 
 <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
     <DashboardPane classes="w-full h-full p-6 col-span-2 flex flex-col">
-        <Text type="p" classes="mr-auto uppercase px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{event.status}</Text>
-        <Text type="h2" classes="mb-4">{event.title}</Text>
-        <Text type="p" classes="mb-6">{event.description.slice(0, 130) + '...'} <Link>Read more</Link></Text>
-        {#each event.options as option, i}
+        <Text type="p" classes="mr-auto uppercase px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{event.status.status}</Text>
+        <Text type="h2" classes="mb-4">{event.information.name}</Text>
+        <Text type="p" classes="mb-2">{event.information.additionalInfo}</Text>
+        <Text type="p" classes="mb-2">{event.information.payload.questions[0].text}</Text>
+        <Text type="p" classes="mb-6">{event.information.payload.questions[0].additionalInfo}</Text>
+        {#each event.information.payload.questions[0].answers as answer, i}
             <div class="py-4 px-6 bg-gray-50 border border-solid border-gray-100 rounded-lg flex mb-4">
                 <div>
                     <Text type="p" classes="uppercase text-blue-500 mb-2" overrideColor smaller bold>{`Option ${i + 1}`}</Text>
-                    <Text type="h3" classes="mb-2">{option.title}</Text>
-                    <Text type="p">{option.description}</Text>
+                    <Text type="h3" classes="mb-2">{answer.text}</Text>
+                    <Text type="p">{answer.additionalInfo}</Text>
                 </div>
-                <Button medium classes="my-auto ml-44" disabled={event.status === ParticipationEventState.Upcoming}>Cast votes</Button>
+                <Button medium classes="my-auto ml-44" disabled={event.status.status === ParticipationEventState.Upcoming}>Cast votes</Button>
             </div>
         {/each}
     </DashboardPane>

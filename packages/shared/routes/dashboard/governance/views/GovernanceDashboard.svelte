@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { GovernanceVotingPower, GovernanceInfo, GovernanceEvents } from './'
+    import type { ParticipationEvent } from 'shared/lib/participation/types'
 
-    export let event
+    export let event: ParticipationEvent
 </script>
 
 <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
