@@ -48,6 +48,8 @@
     {/if}
     <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
         <SettingsMenu
+            icon="settings"
+            iconColor="bg-blue-500"
             icons={SettingsIcons}
             settings={GeneralSettings}
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
@@ -55,6 +57,8 @@
             description=""
             onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)} />
         <SettingsMenu
+            icon="security"
+            iconColor="bg-yellow-500"
             icons={SettingsIcons}
             settings={securitySettings}
             activeSettings={$loggedIn ? SecuritySettings : undefined}
@@ -62,6 +66,8 @@
             description=""
             onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)} />
         <SettingsMenu
+            icon="tools"
+            iconColor="bg-green-600"
             icons={SettingsIcons}
             settings={advancedSettings}
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
@@ -69,6 +75,8 @@
             description=""
             onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)} />
         <SettingsMenu
+            icon="info"
+            iconColor="bg-purple-500"
             icons={SettingsIcons}
             settings={HelpAndInfo}
             activeSettings={HelpAndInfo}
