@@ -37,7 +37,7 @@
             <svelte:component this={component} route={childRoute} {url} {actionLocale} />
         </section>
         {#if index < settings.length - 1}
-            <HR classes="pb-5 mt-5 justify-center" />
+            <HR classes="pb-5 mt-5 justify-center hidden md:block" />
         {/if}
     {/each}
 </div>
