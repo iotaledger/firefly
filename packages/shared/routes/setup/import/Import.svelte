@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile } from 'shared/lib/profile'
@@ -9,12 +9,10 @@
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
 
     export let locale: Locale
-
-    export let mobile
 
     let isGettingMigrationData = false
 
@@ -112,7 +110,7 @@
                         // We do not want to display the spinner in FileImport if stronghold is being imported.
                         isGettingMigrationData = true
 
-                        const legacySeed = await Electron.importLegacySeed(importFile, password)
+                        const legacySeed = await Platform.importLegacySeed(importFile, password)
 
                         if (legacySeed) {
                             await getMigrationData(legacySeed)
@@ -169,26 +167,26 @@
 
 {#if state === ImportState.Init}
     <Transition>
-        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Import on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.TextImport}
     <Transition>
-        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.FileImport}
     <Transition>
-        <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <FileImport on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.LedgerImport}
     <Transition>
-        <Ledger on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Ledger on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {mobile} {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {error} {locale} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>
-        <Success on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Success on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}
