@@ -75,12 +75,8 @@ interface ActorState {
     [id: string]: Actor
 }
 
-/** Active actors state */
 const actors: ActorState = {}
 
-/*
- * Wallet state
- */
 export const wallet = writable<WalletState>({
     balanceOverview: writable<BalanceOverview>({
         incoming: '0 Mi',

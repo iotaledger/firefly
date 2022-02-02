@@ -158,7 +158,7 @@ export const disposeNewProfile = async (): Promise<void> => {
 }
 
 /**
- * Sets active (logged in) profile
+ * Sets active profile (logged in or selected from Select Profile page)
  *
  * @method setActiveProfile
  *
