@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, newProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -15,8 +15,6 @@
 
     export let locale: Locale
 
-    let busy = false
-
     enum ProtectState {
         Init = 'init',
         Biometric = 'biometric',
@@ -28,7 +26,7 @@
 
     let state = ProtectState.Pin
     let stateHistory = []
-
+    let busy = false
     let pin = null
 
     // Reset variables based on state
@@ -40,7 +38,7 @@
     }
 
     const _next = async (event) => {
-        let nextState
+        let nextState: ProtectState
         const params = event.detail || {}
         const { pinCandidate, type } = params
 
@@ -64,7 +62,7 @@
                         throw new Error('Invalid pin code!')
                     }
 
-                    await Platform.PincodeManager.set(get(activeProfile)?.id, pin)
+                    await Platform.PincodeManager.set(get(newProfile)?.id, pin)
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
@@ -105,14 +103,6 @@
         }
     }
 </script>
-
-<!-- TODO: Readd Protect Init page
-    
-#if state === ProtectState.Init || state === ProtectState.Biometric}
-    <Transition>
-        <Protect on:next={_next} on:previous={_previous} {locale} />
-    </Transition>
-{/if}-->
 
 {#if state === ProtectState.Pin}
     <Transition>
