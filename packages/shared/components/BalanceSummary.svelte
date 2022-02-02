@@ -3,9 +3,7 @@
     import { Text } from 'shared/components'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
 
-    export let color = 'blue' // TODO: profiles will have different colors
     export let textColor = 'white'
-
     export let balanceRaw = 0
     export let balanceFiat = 0
 
