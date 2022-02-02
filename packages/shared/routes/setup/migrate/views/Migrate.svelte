@@ -88,11 +88,10 @@
                         })
                         .then((data) => {
                             if ($newProfile) {
-                                // Save profile
                                 saveProfile($newProfile)
-                                setActiveProfile($newProfile.id)
+                                setActiveProfile($newProfile)
 
-                                profileInProgress.set(undefined)
+                                profileInProgress.set(null)
                                 newProfile.set(null)
                             }
                         })
@@ -116,9 +115,8 @@
                     .then((data) => {
                         singleMigrationBundleHash = data.bundleHash
                         return sendMigrationBundle(data.bundleHash).then(() => {
-                            // Save profile
                             saveProfile($newProfile)
-                            setActiveProfile($newProfile.id)
+                            setActiveProfile($newProfile)
 
                             profileInProgress.set(undefined)
                             newProfile.set(null)
