@@ -431,3 +431,4 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
         return getColor(activeProfile, accountId)
     }
 }
+export const getProfile = (): Profile => get(newProfile) ?? get(activeProfile)

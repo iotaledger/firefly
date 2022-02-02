@@ -9,8 +9,8 @@
     } from 'shared/lib/currency'
     import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { getMigratedProfile, LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
+    import { getProfile, updateProfile } from 'shared/lib/profile'
     import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -36,7 +36,7 @@
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
-                const profile = getMigratedProfile()
+                const profile = getProfile()
                 updateProfile('ledgerMigrationCount', profile.ledgerMigrationCount + 1)
             } else {
                 localizedBody = 'softwareMigratedBody'
@@ -76,7 +76,7 @@
             const _exportMigrationLog = () => {
                 Platform.getUserDataPath()
                     .then((path) => {
-                        const profile = getMigratedProfile()
+                        const profile = getProfile()
                         const source = getStoragePath(path, profile.name)
 
                         return $walletSetupType === SetupType.TrinityLedger

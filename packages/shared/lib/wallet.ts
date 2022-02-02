@@ -15,7 +15,7 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { Platform } from './platform'
 import { openPopup } from './popup'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, newProfile, updateProfile } from './profile'
+import { activeProfile, getProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
 import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
@@ -367,10 +367,10 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
         api.createAccount(
             {
                 alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
-                signerType: getSignerType(get(newProfile)?.type),
+                signerType: getSignerType(getProfile().type),
                 clientOptions: accounts.length
                     ? accounts[0]?.clientOptions
-                    : buildClientOptions(get(newProfile)?.settings.networkConfig),
+                    : buildClientOptions(getProfile().settings.networkConfig),
             },
             {
                 onSuccess(response) {
