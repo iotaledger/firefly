@@ -49,13 +49,14 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair
+        addMessagesPair,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account';
+    import { setProfileAccount } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -67,7 +68,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -312,10 +312,10 @@
         }
     }
 
-    async function onCreateAccount(alias: string, onComplete) {
+    async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias)
+                const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 walletRoute.set(WalletRoutes.Init)

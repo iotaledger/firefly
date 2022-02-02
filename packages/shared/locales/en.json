@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Settings",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Advanced",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Theme",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Language",
@@ -526,6 +526,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -924,6 +930,7 @@
         "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
+        "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "totalIn": "Total in",
@@ -1013,7 +1020,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Today",
@@ -1260,6 +1268,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

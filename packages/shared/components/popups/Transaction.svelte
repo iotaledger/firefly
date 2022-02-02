@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import type { WalletAccount } from 'lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { wallet } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
