@@ -153,7 +153,6 @@ export const disposeNewProfile = async (): Promise<void> => {
         }
         destroyActor(_newProfile.id)
     }
-
     newProfile.set(null)
     clearActiveProfile()
 }
@@ -263,10 +262,9 @@ export const updateProfile = (
  *
  * @returns {void}
  */
-export const cleanupInProgressProfiles = (): void => {
-    const inProgressProfile = get(profileInProgress)
-    if (inProgressProfile) {
-        profileInProgress.update(() => undefined)
+export const cleanupInProgressProfile = (): void => {
+    if (get(profileInProgress)) {
+        profileInProgress.set(null)
     }
 }
 

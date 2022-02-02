@@ -66,8 +66,6 @@ export const loggedIn = writable<boolean>(false)
  * Cleanup the signup vars
  */
 export const cleanupSignup = (): void => {
-    profileInProgress.set(null)
-    newProfile.set(null)
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)

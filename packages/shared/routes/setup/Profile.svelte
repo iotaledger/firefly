@@ -7,13 +7,13 @@
     import { Platform } from 'shared/lib/platform'
     import { openPopup } from 'shared/lib/popup'
     import {
-    cleanupInProgressProfiles,
-    createProfile,
-    disposeNewProfile,
-    hasNoProfiles,
-    newProfile,
-    profileInProgress,
-    profiles
+        cleanupInProgressProfile,
+        createProfile,
+        disposeNewProfile,
+        hasNoProfiles,
+        newProfile,
+        profileInProgress,
+        profiles,
     } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { destroyActor,getStoragePath,initialise,MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
@@ -103,10 +103,8 @@
 
     async function handleBackClick() {
         cleanupSignup()
-        cleanupInProgressProfiles()
-
+        cleanupInProgressProfile()
         await disposeNewProfile()
-
         dispatch('previous')
     }
 </script>
