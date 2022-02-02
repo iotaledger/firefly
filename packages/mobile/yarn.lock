@@ -41,6 +41,13 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/core@^3.0.0", "@capacitor/core@latest":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.4.0.tgz#c0e8c36fe9d3dbc05f57e644aa1aefa2184d20d8"
+  integrity sha512-utfMAYZyU8SL+JkVOcqanjmWarSBlvCyVDPL6AnXG/B//9VtleZ5NtorUXL0ggnK7t+Zbd8xGgA+LN7mn4+3Lw==
+  dependencies:
+    tslib "^2.1.0"
+
 "@capacitor/ios@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.2.0.tgz#46f8cdf34d45a2791d002e9640472eef65b11ff6"
@@ -813,6 +820,13 @@ caniuse-lite@^1.0.30001219:
   version "1.0.30001238"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001238.tgz#e6a8b45455c5de601718736d0242feef0ecdda15"
   integrity sha512-bZGam2MxEt7YNsa2VwshqWQMwrYs5tR5WZQRYSuFxsBQunWjBuXhN4cS9nV5FFb1Z9y+DoQcQ0COyQbv6A+CKw==
+
+capacitor-secure-storage-plugin@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/capacitor-secure-storage-plugin/-/capacitor-secure-storage-plugin-0.6.2.tgz#6044222607f0469d30ebf3cfd6a72723e1480d2b"
+  integrity sha512-f05BLb98TG5qqxN8FvTOLPNvtoebdZyrWAueoyw25Xip7nJBkFqrGxZtcFDMONi4DZRz/z9DMz1Bw8F/8fPAJA==
+  dependencies:
+    "@capacitor/core" "^3.0.0"
 
 chart.js@^2.9.3:
   version "2.9.4"
@@ -3187,7 +3201,20 @@ shallow-clone@^3.0.0:
 
 "shared-modules@link:../shared":
   version "0.0.0"
-  uid ""
+  dependencies:
+    "@iota/bundle" "^1.0.0-beta.30"
+    "@iota/converter" "^1.0.0-beta.30"
+    "@iota/transaction" "^1.0.0-beta.30"
+    "@iota/transaction-converter" "^1.0.0-beta.30"
+    "@iota/unit-converter" "^1.0.0-beta.30"
+    big.js "^6.0.3"
+    chart.js "^2.9.3"
+    iota.lib.js "^0.5.3"
+    lottie-web "^5.7.8"
+    qr.js "0.0.0"
+    svelte "^3.30.1"
+    svelte-i18n "^3.0.4"
+    zxcvbn "^4.4.2"
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -3632,9 +3659,9 @@ urix@^0.1.0:
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
 url-parse@^1.4.3, url-parse@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
-  integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.4.tgz#e4f645a7e2a0852cc8a66b14b292a3e9a11a97fd"
+  integrity sha512-ITeAByWWoqutFClc/lRZnFplgXgEZr3WJ6XngMM/N9DMIm4K8zXPCZ1Jdu0rERwO84w1WC5wkle2ubwTA4NTBg==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
@@ -3676,6 +3703,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+wallet-actor-system-capacitor-binding@../backend/bindings/capacitor/:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" latest
 
 warning@^4.0.3:
   version "4.0.3"
