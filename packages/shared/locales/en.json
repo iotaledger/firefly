@@ -1011,6 +1011,7 @@
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1267,6 +1268,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

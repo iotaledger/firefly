@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { loggedIn, mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
@@ -42,9 +42,11 @@
     }
 </script>
 
-<div class="flex flex-col flex-initial h-full w-full">
-    <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
-    <div class="flex items-start flex-row space-x-10">
+<div class="h-full w-full flex flex-col">
+    {#if !$mobile}
+        <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
+    {/if}
+    <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
         <SettingsMenu
             icon="settings"
             iconColor="bg-blue-500"

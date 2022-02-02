@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="flex items-start flex-col flex-wrap space-y-1.5">
+<div class="flex flex-col flex-wrap items-start space-y-1.5">
     <balance-box
         on:click={togglePreciseBalance}>
         <Text type="h2" overrideColor classes="text-{textColor}">

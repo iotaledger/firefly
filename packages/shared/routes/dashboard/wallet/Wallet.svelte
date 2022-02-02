@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { DashboardPane } from 'shared/components'
-    import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { DashboardPane, Drawer } from 'shared/components'
+    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -30,8 +30,8 @@
     import {
         api,
         asyncCreateAccount,
-        asyncSyncAccounts,
         asyncSyncAccountOffline,
+        asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
@@ -59,6 +59,8 @@
     import { setProfileAccount } from 'shared/lib/profile'
 
     export let locale: Locale
+
+    let drawer: Drawer
 
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -476,6 +478,10 @@
         }
     }
 
+    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
+        drawer.open()
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -516,39 +522,67 @@
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
 {:else}
-    <div class="wallet-wrapper relative w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900 z-0">
-        <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-            <DashboardPane classes="h-full">
+    {#if $mobile}
+        <div class="wallet-wrapper w-full h-full flex flex-col flex-1 bg-gray-50 dark:bg-gray-900">
+            <div class="w-full h-full grid grid-cols-1 min-h-0">
                 <!-- Total Balance, Accounts list & Send/Receive -->
-                <div class="flex flex-auto flex-col h-full">
+                <div class="flex flex-auto flex-col w-full">
+                    <WalletBalance {locale} />
+                    <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount onCreate={onCreateAccount} {locale} />
-                    {:else}
-                        <WalletBalance {locale} />
-                        <DashboardPane classes="-mt-5 h-full z-10">
-                            <WalletActions
-                                {isGeneratingAddress}
-                                {onSend}
-                                {onInternalTransfer}
-                                {onGenerateAddress}
-                                {locale} />
-                        </DashboardPane>
+                        <Drawer
+                            dimLength={180}
+                            opened={true}
+                            bind:this={drawer}
+                            on:close={() => walletRoute.set(WalletRoutes.Init)}>
+                            <CreateAccount onCreate={onCreateAccount} {locale} />
+                        </Drawer>
                     {/if}
                 </div>
-            </DashboardPane>
-            <div class="flex flex-col col-span-2 h-full space-y-4">
-                <DashboardPane classes="w-full h-1/2">
-                    <LineChart {locale} />
-                </DashboardPane>
-                <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
-                    <DashboardPane classes="w-1/2">
-                        <WalletHistory {locale} />
-                    </DashboardPane>
-                    <DashboardPane classes="w-1/2">
-                        <Security {locale} />
-                    </DashboardPane>
+                <div class="flex flex-col col-span-2 h-full space-y-4">
+                    <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
+                        <DashboardPane classes="w-full rounded-br-none rounded-bl-none">
+                            <WalletHistory {locale} />
+                        </DashboardPane>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {:else}
+        <div class="wallet-wrapper relative w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900 z-0">
+            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+                <DashboardPane classes="h-full">
+                    <!-- Total Balance, Accounts list & Send/Receive -->
+                    <div class="flex flex-auto flex-col h-full">
+                        {#if $walletRoute === WalletRoutes.CreateAccount}
+                            <CreateAccount onCreate={onCreateAccount} {locale} />
+                        {:else}
+                            <WalletBalance {locale} />
+                            <DashboardPane classes="-mt-5 h-full z-10">
+                                <WalletActions
+                                    {isGeneratingAddress}
+                                    {onSend}
+                                    {onInternalTransfer}
+                                    {onGenerateAddress}
+                                    {locale} />
+                            </DashboardPane>
+                        {/if}
+                    </div>
+                </DashboardPane>
+                <div class="flex flex-col col-span-2 h-full space-y-4">
+                    <DashboardPane classes="w-full h-1/2">
+                        <LineChart {locale} />
+                    </DashboardPane>
+                    <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
+                        <DashboardPane classes="w-1/2">
+                            <WalletHistory {locale} />
+                        </DashboardPane>
+                        <DashboardPane classes="w-1/2">
+                            <Security {locale} />
+                        </DashboardPane>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/if}
 {/if}
