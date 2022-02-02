@@ -21,6 +21,7 @@
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
+    export let preventClose = false
 
     const dispatch = createEventDispatcher()
 
@@ -124,7 +125,9 @@
     }
 
     function close(): void {
-        dispatch('close')
+        if (!preventClose) {
+            dispatch('close')
+        }
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
@@ -179,7 +182,7 @@
 <drawer class="fixed left-0 top-0 z-30">
     <slide-zone
         class="fixed h-screen w-screen"
-        use:slidable
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}>
