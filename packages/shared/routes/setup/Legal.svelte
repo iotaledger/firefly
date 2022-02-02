@@ -608,12 +608,12 @@
                     <Text type="h3" classes="mb-5">CoinGecko</Text>
                     <Text type="p" secondary classes="mb-4">
                         We use CoinGeckoAPI of Gecko Labs Pte. Ltd, 101 Upper Cross Street, #05-16 People's Park Centre, Singapore
-                        058357 ("CoinGecko") to obtain historical price and market data for cryptocurrencies. Further information
+                        058357 to obtain historical price and market data for cryptocurrencies. Further information
                         regarding their privacy policy can be found under https://www.coingecko.com/en/privacy.
                     </Text>
                     <Text type="h3" classes="mb-5">GitHub</Text>
                     <Text type="p" secondary classes="mb-4">
-                        We use GitHub of GitHub Inc., 88 Colin P. Kelly Street, San Francisco, CA 94107, USA ("GitHub" - in the
+                        We use GitHub of GitHub Inc., 88 Colin P. Kelly Street, San Francisco, CA 94107, USA (in the
                         European Union: GitHub BV Vijzelstraat 68-72, 1017 HL Amsterdam, The Netherlands) to check for app updates
                         in order to provide the auto-update functionality. Further information regarding their privacy policy can
                         be found under https://help.github.com/articles/github-privacy-statement/.
@@ -626,7 +626,7 @@
                     <Text type="h3" classes="mb-5">Sentry</Text>
                     <Text type="p" secondary classes="mb-4">
                         We use Sentry of Functional Software, Inc., dba Sentry, 45 Fremont Street, 8th Floor, San Francisco,
-                        CA 94105 (”Sentry”) to track errors in the App in real time and obtain the insight needed to reproduce
+                        CA 94105 to track errors in the App in real time and obtain the insight needed to reproduce
                         and fix crashes. Further information regarding their privacy policy can be found under 
                         https://sentry.io/privacy/.
                     </Text>
