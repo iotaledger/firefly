@@ -482,7 +482,8 @@ export const createLedgerMigrationBundle = (
     new Promise((resolve, reject) => {
         api.getAccounts({
             onSuccess(getAccountsResponse) {
-                api.getMigrationAddress(false, getAccountsResponse.payload[getProfile().ledgerMigrationCount].id, {
+                const migrationCount = getProfile().ledgerMigrationCount
+                api.getMigrationAddress(false, getAccountsResponse.payload[migrationCount].id, {
                     onSuccess(response) {
                         resolve(response.payload)
                     },
@@ -583,7 +584,6 @@ export const createMigrationBundle = (
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> =>
     new Promise((resolve, reject) => {
-        /* eslint-disable @typescript-eslint/no-misused-promises */
         if (get(ongoingSnapshot) === true) {
             reject({ snapshot: true })
             openSnapshotPopup()
@@ -624,12 +624,12 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
         account: 0,
     }
 
-    const profile = getProfile()
+    const migratedTransactions = getProfile().migratedTransactions
 
     // Persist these bundles in local storage
     updateProfile(
         'migratedTransactions',
-        profile.migratedTransactions ? [...profile.migratedTransactions, migratedTransaction] : [migratedTransaction]
+        migratedTransactions ? [...migratedTransactions, migratedTransaction] : [migratedTransaction]
     )
 }
 
