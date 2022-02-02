@@ -759,6 +759,12 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "privacyPolicyUpdate": {
+            "title": "Privacy Policy",
+            "body": "We have made some modifications to the way we share and disclose your personal data when you use Firefly.",
+            "checkbox": "I've read and I accept the updated Privacy Policy",
+            "viewButton": "View privacy policy"
         }
     },
     "charts": {

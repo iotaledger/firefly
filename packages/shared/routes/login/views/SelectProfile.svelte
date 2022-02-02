@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
+    import { needsToAcceptLatestPrivacyPolicy } from 'shared/lib/app'
+    import { openPopup } from 'shared/lib/popup'
 
     export let locale: Locale
 
@@ -19,6 +21,17 @@
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
     }
+
+    onMount(() => {
+        if (needsToAcceptLatestPrivacyPolicy()) {
+            openPopup({
+                type: 'privacyPolicyUpdate',
+                hideClose: true,
+                preventClose: true,
+            })
+        }
+    })
+
 </script>
 
 {#if mobile}

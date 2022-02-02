@@ -40,6 +40,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import PrivacyPolicyUpdate from './PrivacyPolicyUpdate.svelte'
 
     export let locale: Locale
 
@@ -114,7 +115,8 @@
         stakingManager: StakingManager,
         stakingNotice: StakingNotice,
         airdropNetworkInfo: AirdropNetworkInfo,
-        confirmDeveloperProfile: ConfirmDeveloperProfile
+        confirmDeveloperProfile: ConfirmDeveloperProfile,
+        privacyPolicyUpdate: PrivacyPolicyUpdate,
     }
 
     const onKey = (e) => {
