@@ -10,7 +10,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup,popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles,cleanupInProgressProfile } from 'shared/lib/profile'
     import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute,Tabs } from 'shared/lib/typings/routes'
@@ -106,7 +106,7 @@
             addError(err)
         })
 
-        cleanupInProgressProfiles()
+        cleanupInProgressProfile()
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
