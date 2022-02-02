@@ -40,7 +40,20 @@
             | HelpAndInfo
     ) {
         if (route === SettingsRoutes.HelpAndInfo && $mobile) {
-            Platform.openUrl(ExternalRoute[childRoute])
+            switch (childRoute) {
+                case HelpAndInfo.Documentation:
+                    Platform.openUrl(ExternalRoute.Documentation)
+                    break
+                case HelpAndInfo.Discord:
+                    Platform.openUrl(ExternalRoute.Discord)
+                    break
+                case HelpAndInfo.FAQ:
+                    Platform.openUrl(ExternalRoute.FAQ)
+                    break
+                case HelpAndInfo.ReportAnIssue:
+                    Platform.openUrl(ExternalRoute.FAQ)
+                    break
+            }
         } else {
             settingsRoute.set(route)
             settingsChildRoute.set(childRoute)
