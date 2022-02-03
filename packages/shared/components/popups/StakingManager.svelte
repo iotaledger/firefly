@@ -255,7 +255,7 @@
             <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
-                        <div class="bg-green-100 rounded-2xl">
+                        <div class="bg-green-500 rounded-2xl">
                             <Icon icon="success-check" width="18" height="18" classes="text-white" />
                         </div>
                     {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}

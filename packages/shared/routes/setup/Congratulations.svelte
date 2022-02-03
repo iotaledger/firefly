@@ -126,7 +126,7 @@
     <div slot="leftpane__content">
         {#if wasMigrated}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
@@ -138,7 +138,7 @@
             </div>
         {:else}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
