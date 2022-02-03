@@ -2,58 +2,25 @@
     import { Text, Button } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
 
-    export let locale: Locale
-
+    export let locale: Locale = undefined
+    export let onDrop = (event?: Event): void => {}
     export let extentionsLabel = ''
     export let allowedExtensions
+    export let dropping
+    export let fileName
 
-    export let onDrop = (buffer?: ArrayBufferLike, name?: string, path?: string): void => {}
-
-    let dropping = false
-    let fileName = null
-
-    const onFile = (e) => {
-        e.preventDefault()
-        dropping = false
-
-        const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0]
-
-        if (!file) {
-            fileName = null
-            return onDrop()
-        }
-
-        if (allowedExtensions && allowedExtensions.length > 0) {
-            const ext = /\.([0-9a-z]+)$/i.exec(file.name)
-            if (!ext || !allowedExtensions.includes(ext[1])) {
-                fileName = null
-                return onDrop()
-            }
-        }
-
-        fileName = file.name
-
-        const reader = new FileReader()
-
-        reader.onload = (e) => {
-            onDrop(e.target.result, file.name, file.path)
-        }
-
-        reader.readAsArrayBuffer(file)
-    }
-
-    const onEnter = () => {
+    const onEnter = (): void => {
         dropping = true
     }
 
-    const onLeave = () => {
+    const onLeave = (): void => {
         dropping = false
     }
 </script>
 
 <dropzone
     class="flex items-center justify-center p-7 w-full rounded-lg border border-solid bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
-    on:drop={onFile}
+    on:drop={onDrop}
     on:dragenter={onEnter}
     on:dragleave={onLeave}
     on:dragover|preventDefault>
@@ -81,11 +48,11 @@
             <input
                 class="absolute opacity-0 w-full h-full"
                 type="file"
-                on:change={onFile}
+                on:change={onDrop}
                 accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
             <Text type="h4">{locale('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
-            <Button secondary onClick={onFile}>{locale('actions.chooseFile')}</Button>
+            <Button secondary onClick={onDrop}>{locale('actions.chooseFile')}</Button>
         {/if}
     </content>
 </dropzone>

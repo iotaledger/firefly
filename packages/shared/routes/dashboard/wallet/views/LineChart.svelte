@@ -13,7 +13,7 @@
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
     import { wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
@@ -39,7 +39,7 @@
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
-    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
     const walletBalance = derived(wallet, ($wallet) => {
         const { balanceOverview } = $wallet

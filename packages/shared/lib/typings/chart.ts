@@ -1,5 +1,6 @@
 import type { HistoryDataProps } from './market'
 import type { AvailableExchangeRates } from './currency'
+import type { AccountColors } from 'lib/wallet'
 
 export interface Tooltip {
     title: string
@@ -11,7 +12,7 @@ export interface ChartData {
     label?: string
     labels?: string[]
     tooltips?: Tooltip[]
-    color?: string
+    color?: string | AccountColors
     steppedLine?: boolean
 }
 

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
+    import { Platform } from 'shared/lib/platform'
     import { ExternalRoute, HelpAndInfo } from 'shared/lib/typings/routes'
 
     export let route: HelpAndInfo
@@ -9,7 +9,7 @@
     export let actionLocale: string
 
     const handleClick = () => {
-        Electron.openUrl(url)
+        Platform.openUrl(url)
     }
 </script>
 

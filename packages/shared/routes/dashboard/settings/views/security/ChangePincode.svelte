@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Pin, Spinner, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
+    import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
@@ -45,13 +45,13 @@
                     }
                 }
 
-                Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
+                Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
                     .then((valid) => {
                         if (valid) {
                             return new Promise<void>((resolve, reject) => {
                                 api.setStoragePassword(newPincode, {
                                     onSuccess() {
-                                        Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                                        Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
                                             .then(() => {
                                                 currentPincode = ''
                                                 newPincode = ''

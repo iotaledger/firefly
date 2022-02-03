@@ -107,12 +107,11 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
 
             clearSendParams()
             closePopup(true)
+            loggedIn.set(false)
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
             resetRouter()
-
-            loggedIn.set(false)
 
             resolve()
         }

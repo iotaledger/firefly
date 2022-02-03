@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Link, OnboardingLayout, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform';
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -45,7 +45,7 @@
                     <Text type="p" secondary classes="mb-4">
                         These conditions of use (the "<strong>Conditions</strong>") apply to you (hereinafter, "<strong>User</strong>"
                         or "<strong>you</strong>") and the IOTA Foundation, a non-profit foundation with its registered address at
-                        c/o Nextland, Strassburger Strasse 55, 10405 Berlin (hereinafter, "<strong>IOTA</strong>" or "<strong>we/us</strong>"),
+                        Pappelallee 78/79, 10437 Berlin (hereinafter, "<strong>IOTA</strong>" or "<strong>we/us</strong>"),
                         regarding your use of the "Firefly App" (the "<strong>App</strong>"). Use of the App is also governed by
                         the App's Privacy Policy (the "<strong>Privacy Policy</strong>").
                     </Text>
@@ -142,7 +142,7 @@
                     <Text type="p" secondary classes="mb-4">
                         IOTA does not collect any of your personal data through the App. Please refer to the Firefly Privacy
                         Policy (
-                        <Link onClick={() => Electron.openUrl('https://firefly.iota.org/privacy')}>
+                        <Link onClick={() => Platform.openUrl('https://firefly.iota.org/privacy')}>
                             https://firefly.iota.org/privacy
                         </Link>) for information on how we and our third-party service providers process data in relation to the
                         App.
@@ -449,7 +449,7 @@
                         IOTA Foundation (hereinafter "IOTA", "we", "us", "our") processes Personal Data collected and processed in
                         connection with other services and activities offered by IOTA, please see IOTA's general Privacy Policy
                         available at
-                        <Link onClick={() => Electron.openUrl('https://www.iota.org/privacy-policy')}>
+                        <Link onClick={() => Platform.openUrl('https://www.iota.org/privacy-policy')}>
                             https://www.iota.org/privacy-policy
                         </Link>
                         .
@@ -596,20 +596,33 @@
                     <Text type="h3" classes="mb-5">CoinGecko</Text>
                     <Text type="p" secondary classes="mb-4">
                         We use CoinGeckoAPI of Gecko Labs Pte. Ltd, 101 Upper Cross Street, #05-16 People's Park Centre, Singapore
-                        058357 ("CoinGecko") to obtain historical price and market data for cryptocurrencies. Further information
-                        regarding their privacy policy can be found under https://www.coingecko.com/en/privacy
+                        058357 to obtain historical price and market data for cryptocurrencies. Further information
+                        regarding their privacy policy can be found under https://www.coingecko.com/en/privacy.
                     </Text>
                     <Text type="h3" classes="mb-5">GitHub</Text>
                     <Text type="p" secondary classes="mb-4">
-                        We use GitHub of GitHub Inc 88 Colin P. Kelly Street, San Francisco, CA 94107, USA ("GitHub" - in the
+                        We use GitHub of GitHub Inc., 88 Colin P. Kelly Street, San Francisco, CA 94107, USA (in the
                         European Union: GitHub BV Vijzelstraat 68-72, 1017 HL Amsterdam, The Netherlands) to check for app updates
                         in order to provide the auto-update functionality. Further information regarding their privacy policy can
-                        be found under https://help.github.com/articles/github-privacy-statement/
+                        be found under https://help.github.com/articles/github-privacy-statement/.
                     </Text>
                     <Text type="h3" classes="mb-5">Amazon Web Services</Text>
                     <Text type="p" secondary classes="mb-4">
                         We use Amazon Web Services to host our website and any updated versions of the App. Further information
-                        regarding their privacy policy can be found under https://aws.amazon.com/privacy/
+                        regarding their privacy policy can be found under https://aws.amazon.com/privacy/.
+                    </Text>
+                    <Text type="h3" classes="mb-5">Sentry</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We use Sentry of Functional Software, Inc., dba Sentry, 45 Fremont Street, 8th Floor, San Francisco,
+                        CA 94105 to track errors in the App in real time and obtain the insight needed to reproduce
+                        and fix crashes. Further information regarding their privacy policy can be found under 
+                        https://sentry.io/privacy/.
+                    </Text>
+                    <Text type="h3" classes="mb-5">Cloudflare</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We use the load balancing and the Web Application Firewall (WAF) services of Cloudflare, Inc.,
+                        101 Townsend St, San Francisco, CA 94107 to improve the performance and availability of the App. Further
+                        information regarding their privacy policy can be found under https://www.cloudflare.com/privacypolicy/.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Providers of Operating Systems and Telecommunication Services</Text>
@@ -682,7 +695,7 @@
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         To withdraw your consent, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation,
-                        c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        Pappelallee 78/79, 10437 Berlin.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Legitimate Interest and Right to Object</Text>
@@ -693,8 +706,8 @@
                         unacceptable for you.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
-                        To object, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation, c/o Nextland,
-                        Strassburgerstr. 55, 10405 Berlin.
+                        To object, please send us an e-mail to: privacy@iota.org or a letter to IOTA Foundation, Pappelallee 78/79,
+                        10437 Berlin.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">When we Erase Personal Data</Text>
@@ -719,7 +732,7 @@
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         To exercise any of these rights, please send us an e-mail to: privacy@iota.org or a letter to IOTA
-                        Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        Foundation, Pappelallee 78/79, 10437 Berlin.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         A copy of the Personal Data undergoing processing can be requested.
@@ -730,7 +743,7 @@
                         For any requests, you can contact us as follows: privacy@iota.org.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
-                        IOTA Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
+                        IOTA Foundation, Pappelallee 78/79, 10437 Berlin, Germany.
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Changes to the Privacy Policy</Text>
