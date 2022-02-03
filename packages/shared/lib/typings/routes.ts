@@ -4,6 +4,7 @@ export enum AppRoute {
     Appearance = 'appearance',
     Profile = 'profile',
     Setup = 'setup',
+    Settings = 'settings',
     // TODO: ledger replace create
     Create = 'create',
     Secure = 'secure',

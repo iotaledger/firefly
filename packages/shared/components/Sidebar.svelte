@@ -68,13 +68,6 @@
     const hasTitleBar = document.body.classList.contains('platform-win32')
 </script>
 
-<style type="text/scss">
-    :global(body.platform-win32) aside {
-        @apply -top-12;
-        @apply pt-12;
-    }
-</style>
-
 {#if $mobile}
     <button
         class="absolute top-10 right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
@@ -142,3 +135,10 @@
         <ProfileActionsModal bind:isActive={showProfile} {locale} />
     </aside>
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) aside {
+        @apply -top-12;
+        @apply pt-12;
+    }
+</style>

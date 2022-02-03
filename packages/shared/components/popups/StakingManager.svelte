@@ -41,15 +41,17 @@
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
-    let canStake
-    $: canStake = canParticipate($stakingEventState)
-
-    let { accounts } = $wallet
-
-    const hasStakedAccounts = $stakedAccounts.length > 0
-
     let pendingParticipationIds = []
     let previousPendingParticipationsLength = 0
+    let { accounts } = $wallet
+
+    $: accountsWithParticipationAbilities = $accounts.map(account => ({
+        account,
+        participationAbility: getAccountParticipationAbility(account)
+    }))
+    
+    $: canStake = canParticipate($stakingEventState)
+    
 
     pendingParticipations.subscribe((participations) => {
         const currentParticipationsLength = participations.length
@@ -241,16 +243,10 @@
     }
 </script>
 
-<style>
-    .staking {
-        max-height: 36vh;
-    }
-</style>
-
 <Text type="h5">{locale('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mt-6 mb-4">{locale('popups.stakingManager.description')}</Text>
 <div class="staking flex flex-col scrollable-y">
-    {#each $accounts.map((a) => [a, getAccountParticipationAbility(a)]) as [account, participationAbility]}
+    {#each accountsWithParticipationAbilities as { account, participationAbility }}
         {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
             <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
@@ -369,3 +365,9 @@
         </Text>
     </Tooltip>
 {/if}
+
+<style>
+    .staking {
+        max-height: 36vh;
+    }
+</style>
