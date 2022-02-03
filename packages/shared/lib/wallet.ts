@@ -15,7 +15,14 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { Platform } from './platform'
 import { openPopup } from './popup'
-import { activeProfile, getProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
+import {
+    activeProfile,
+    getProfile,
+    isLedgerProfile,
+    isStrongholdLocked,
+    setProfileAccount,
+    updateProfile,
+} from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
 import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
@@ -39,7 +46,6 @@ import type {
 import type { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
-import { setProfileAccount } from 'shared/lib/profile'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -377,7 +383,6 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-
                     setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
 
                     resolve(preparedAccount)

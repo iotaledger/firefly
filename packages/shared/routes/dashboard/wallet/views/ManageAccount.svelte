@@ -4,13 +4,11 @@
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { setProfileAccount } from 'shared/lib/profile'
-
     export let alias
     export let account
     export let error = ''
