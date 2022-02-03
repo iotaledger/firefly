@@ -1,4 +1,4 @@
-import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
+import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { newProfile, profiles, saveProfile, setActiveProfile, setProfileType } from 'shared/lib/profile'
 import {
     AccountRoutes,
