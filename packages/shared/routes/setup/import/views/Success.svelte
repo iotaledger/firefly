@@ -25,7 +25,7 @@
     </div>
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
-            <div class="bg-green-100 rounded-2xl relative -top-10">
+            <div class="bg-green-500 rounded-2xl relative -top-10">
                 <Icon icon="success-check" classes="text-white" />
             </div>
             <Text type="h2" classes="mb-5 text-center">{locale('views.importSuccess.title')}</Text>
