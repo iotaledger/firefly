@@ -82,7 +82,7 @@ const _didUserGrantPermission = async (): Promise<boolean> => {
 /** Mobile Barcode Manager */
 export const BarcodeManager: IBarcodeManager = {
     /**
-     * Prepares barcode scanner
+     * Prepares qr code scanner
      * @method prepare
      */
     prepare: async (): Promise<void> => {
@@ -90,7 +90,7 @@ export const BarcodeManager: IBarcodeManager = {
     },
 
     /**
-     * Verify pincode from keychain
+     * start qr code scanner
      * @method startScanner
      */
     startScanner: async (onSuccess: (response: string) => void, onError: () => void): Promise<void> => {
@@ -120,19 +120,19 @@ export const BarcodeManager: IBarcodeManager = {
 
     /**
      * Removes pincode entry from the keychain
-     * @method remove
+     * @method stopScanner
      */
     stopScanner: _stopScanner,
 
     /**
-     * Removes pincode entry from the keychain
-     * @method remove
+     * Check permission, and navigate to settings if denied
+     * @method checkPermission
      */
     checkPermission: _checkPermission,
 
     /**
-     * Removes pincode entry from the keychain
-     * @method remove
+     * Check if user has granted permission
+     * @method didUserGrantPermission
      */
     didUserGrantPermission: _didUserGrantPermission,
 }
