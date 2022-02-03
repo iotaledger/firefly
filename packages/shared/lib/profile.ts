@@ -35,7 +35,9 @@ export const newProfile = writable<Profile | null>(null)
 export const activeProfile = writable<Profile | null>(null)
 
 activeProfile.subscribe((profile) => {
-    Platform.updateActiveProfile(profile.id)
+    if (profile) {
+        Platform.updateActiveProfile(profile.id)
+    }
 })
 
 /**
@@ -415,11 +417,17 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  * @returns {string}
  */
 export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
+    if (!activeProfile) {
+        return 'blue'
+    }
+
     const { accounts } = activeProfile || {}
 
     if (accounts?.length) {
         const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
-        if (foundAccountColor) return foundAccountColor
+        if (foundAccountColor) {
+            return foundAccountColor
+        }
     }
 
     if (accountId) {
@@ -428,4 +436,5 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
         return getColor(activeProfile, accountId)
     }
 }
+
 export const getProfile = (): Profile => get(newProfile) ?? get(activeProfile)
