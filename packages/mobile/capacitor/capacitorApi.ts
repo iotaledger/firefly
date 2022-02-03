@@ -5,6 +5,7 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
+import { BarcodeManager } from '../../mobile/capacitor/lib/barcodeManager'
 
 let activeProfileId = null
 
@@ -30,6 +31,8 @@ export const CapacitorApi: IPlatform = {
     DeepLinkManager: DeepLinkManager,
 
     NotificationManager: NotificationManager,
+
+    BarcodeManager: BarcodeManager,
 
     getStrongholdBackupDestination: (defaultPath) => {
         return new Promise<string>((resolve, reject) => {})

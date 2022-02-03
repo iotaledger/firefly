@@ -5,6 +5,7 @@ import type { IPincodeManager } from './pincodeManager'
 import type { VersionDetails } from './appUpdater'
 import type { Error } from './error'
 import type { EventMap } from './events'
+import type { IBarcodeManager } from './barcodeManager'
 
 export enum Platforms {
     MOBILE = 'mobile',
@@ -33,9 +34,11 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: Error) => void): void
+
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
     PincodeManager: IPincodeManager | undefined
+    BarcodeManager: IBarcodeManager | undefined
 
     getVersionDetails(): Promise<VersionDetails>
     updateCheck(): Promise<void>
