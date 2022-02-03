@@ -1128,7 +1128,7 @@
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/core@^3.0.0", "@capacitor/core@latest":
+"@capacitor/core@^3.0.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.4.0.tgz#c0e8c36fe9d3dbc05f57e644aa1aefa2184d20d8"
   integrity sha512-utfMAYZyU8SL+JkVOcqanjmWarSBlvCyVDPL6AnXG/B//9VtleZ5NtorUXL0ggnK7t+Zbd8xGgA+LN7mn4+3Lw==
@@ -10477,10 +10477,10 @@ walker@^1.0.7:
   dependencies:
     makeerror "1.0.x"
 
-wallet-actor-system-capacitor-binding@packages/backend/bindings/capacitor/:
+wallet-actor-system-capacitor-binding@./packages/backend/bindings/capacitor/:
   version "0.0.1"
   dependencies:
-    "@capacitor/core" latest
+    "@capacitor/core" "^3.0.0"
 
 warning@^4.0.3:
   version "4.0.3"
