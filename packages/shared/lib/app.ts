@@ -1,6 +1,6 @@
 import type { Unit as UnitType } from '@iota/unit-converter'
 import { Unit } from '@iota/unit-converter'
-import { isSoftwareProfile, newProfile, profileInProgress } from 'shared/lib/profile'
+import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
@@ -108,7 +108,6 @@ export const logout = (_lockStronghold: boolean = true): Promise<void> =>
             clearSendParams()
             closePopup(true)
             loggedIn.set(false)
-            clearActiveProfile()
             clearActiveProfile()
             resetParticipation()
             resetWallet()
