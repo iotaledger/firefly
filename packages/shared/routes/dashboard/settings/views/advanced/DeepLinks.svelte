@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Electron } from 'shared/lib/electron'
     import { localize } from 'shared/lib/i18n'
+    import { Platform } from 'shared/lib/platform'
 
     let deepLinkingChecked = $appSettings.deepLinking
 
     $: $appSettings.deepLinking = deepLinkingChecked
-    $: $appSettings.deepLinking && Electron.DeepLinkManager.checkDeepLinkRequestExists()
+    $: $appSettings.deepLinking && Platform.DeepLinkManager.checkDeepLinkRequestExists()
 </script>
 
 <Text type="h4" classes="mb-3">{localize('views.settings.deepLinks.title')}</Text>

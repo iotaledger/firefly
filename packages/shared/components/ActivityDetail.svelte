@@ -1,11 +1,15 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
-    import type { Payload } from 'shared/lib/typings/message'
-    import { getInitials, truncateString, isBright } from 'shared/lib/helpers'
+    import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { getOfficialExplorer } from 'shared/lib/network'
+    import { Platform } from 'shared/lib/platform'
+    import { activeProfile,getColor } from 'shared/lib/profile'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { Payload } from 'shared/lib/typings/message'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -14,15 +18,10 @@
         getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
-        sendAddressFromTransactionPayload,
-        AccountColors,
+        sendAddressFromTransactionPayload
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Writable, Readable } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { getOfficialExplorer } from 'shared/lib/network';
+    import type { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -189,7 +188,7 @@
                 <Text secondary>{locale('general.messageId')}</Text>
                 <div class="flex flex-row justify-between items-center">
                     <Link
-                        onClick={() => Electron.openUrl(`${explorerLink}/message/${id}`)}
+                        onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
                     >
                         <Text highlighted type="pre">{id}</Text>
                     </Link>

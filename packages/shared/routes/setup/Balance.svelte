@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import {
         convertToFiat,
         currencies,
         exchangeRates,
         formatCurrency,
     } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -28,12 +29,10 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let locale: Locale
-
-    export let mobile
 
     let isCheckingForBalance
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
@@ -171,7 +170,7 @@
         if (legacyLedger) {
             // TODO: add ledger legacy popup when PR merged
             const _onConnected = () => {
-                Electron.ledger
+                Platform.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                     .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                     .then(() => {
@@ -202,44 +201,36 @@
     onDestroy(unsubscribe)
 </script>
 
-{#if mobile}
-    <div>not yet implemented</div>
-{:else}
-    <OnboardingLayout
-        busy={isCheckingForBalance}
-        onBackClick={handleBackClick}
-        {locale}
-        showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
-            <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
-                <Text type="h2">{formattedBalance}</Text>
-                <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
-            </Box>
-            {#if error.text}
-                <Toast classes="mt-4" type="error" message={error.text} />
-            {/if}
-        </div>
-        <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
-                {#if isCheckingForBalance}
-                    <Spinner
-                        busy={isCheckingForBalance}
-                        message={locale('views.migrate.findingBalance')}
-                        classes="justify-center" />
-                {:else}{locale('actions.checkAgain')}{/if}
-            </Button>
-            <Button
-                classes="flex-1"
-                disabled={isCheckingForBalance || !error.allowToProceed}
-                onClick={() => handleContinueClick()}>
-                {locale('actions.continue')}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
-            <Animation animation="balance-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+<OnboardingLayout
+    busy={isCheckingForBalance}
+    onBackClick={handleBackClick}
+    {locale}
+    showLedgerProgress={legacyLedger}
+    showLedgerVideoButton={legacyLedger}>
+    <div slot="title">
+        <Text type="h2">{locale('views.balance.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
+        <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
+            <Text type="h2">{formattedBalance}</Text>
+            <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
+        </Box>
+        {#if error.text}
+            <Toast classes="mt-4" type="error" message={error.text} />
+        {/if}
+    </div>
+    <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
+        <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
+            {#if isCheckingForBalance}
+                <Spinner busy={isCheckingForBalance} message={locale('views.migrate.findingBalance')} classes="justify-center" />
+            {:else}{locale('actions.checkAgain')}{/if}
+        </Button>
+        <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={() => handleContinueClick()}>
+            {locale('actions.continue')}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="balance-desktop" />
+    </div>
+</OnboardingLayout>

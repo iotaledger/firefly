@@ -8,8 +8,6 @@
 
     export let locale: Locale
 
-    export let mobile
-
     enum LoginState {
         Init = 'init',
         EnterPin = 'enterPin',
@@ -69,10 +67,10 @@
 
 {#if state === LoginState.Init}
     <Transition>
-        <SelectProfile on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <SelectProfile on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === LoginState.EnterPin}
     <Transition>
-        <EnterPin on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <EnterPin on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}

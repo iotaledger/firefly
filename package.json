@@ -3,6 +3,7 @@
     "workspaces": [
         "packages/desktop",
         "packages/shared",
+        "packages/mobile",
         "packages/backend/bindings/node"
     ],
     "devDependencies": {

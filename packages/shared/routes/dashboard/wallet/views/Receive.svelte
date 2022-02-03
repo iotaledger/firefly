@@ -1,16 +1,15 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
-    import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
+    import { Button,Dropdown,Icon,QR,Spinner,Text } from 'shared/components'
+    import { activeProfile,isLedgerProfile } from 'shared/lib/profile'
+    import { accountRoute,walletRoute } from 'shared/lib/router'
     import type { AccountIdentifier } from 'shared/lib/typings/account'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
+    import { AccountRoutes,WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { activeProfile } from 'shared/lib/profile'
+    import { setClipboard } from 'shared/lib/utils'
+    import { hasGeneratedALedgerReceiveAddress,isSyncing } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
 
     export let locale: Locale
@@ -62,15 +61,16 @@
         {/if}
         {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
             <div class="flex w-full h-full items-end">
-                <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
+                <Button
+                    disabled={isGeneratingAddress || $isSyncing}
+                    classes="w-full"
+                    onClick={() => generateNewAddress()}>
                     {#if isGeneratingAddress}
                         <Spinner
                             busy={isGeneratingAddress}
                             message={locale('general.generatingReceiveAddress')}
                             classes="justify-center" />
-                    {:else}
-                        {locale('actions.generateAddress')}
-                    {/if}
+                    {:else}{locale('actions.generateAddress')}{/if}
                 </Button>
             </div>
         {:else}
