@@ -2,8 +2,8 @@
     import { Button, Input, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
-    import { Electron } from 'shared/lib/electron';
     import { getProfileDataPath } from 'shared/lib/wallet';
+    import { Platform } from 'shared/lib/platform';
 
     let newName: string
     let error = ''
@@ -22,7 +22,7 @@
     async function renameProfileFolder(newName: string): Promise<void> {
         const oldPath = await getProfileDataPath($activeProfile.name)
         const newPath = await getProfileDataPath(newName)
-        await Electron.renameProfileFolder(oldPath, newPath);
+        await Platform.renameProfileFolder(oldPath, newPath);
     }
 </script>
 
