@@ -93,9 +93,9 @@
         class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
         <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
         <nav class="flex flex-grow flex-col items-center justify-between">
-            <div class="flex flex-col">
+            <div class="flex flex-col space-y-8">
                 <button
-                    class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                    class="{$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
                     on:click={openWallet}>
                     <Icon width="24" height="24" icon="wallet" />
                 </button>
