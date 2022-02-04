@@ -6,11 +6,12 @@
     import { Platform } from 'shared/lib/platform';
     import { showAppNotification } from 'shared/lib/notifications';
 
-    let newName = ''
+    let newName = $activeProfile.name
     let error = ''
 
     $: trimmedProfileName = newName.trim()
     $: newName, (error = '')
+    $: disabled = invalidName(trimmedProfileName)
 
     async function onSubmitClick(): Promise<void> {
         try {
@@ -31,6 +32,12 @@
         const newPath = await getProfileDataPath(newName)
         await Platform.renameProfileFolder(oldPath, newPath);
     }
+
+    function invalidName(name: string): boolean {
+        const isSameName = name === $activeProfile.name
+        const isTooShort = name?.length < 1
+        return isSameName || isTooShort
+    }
 </script>
 
 <form id="form-change-profile-name" on:submit={onSubmitClick}>
@@ -46,7 +53,7 @@
         bind:value={newName}
         classes="mb-5"
     />
-    <Button medium form="form-change-profile-name" type="submit" disabled={trimmedProfileName.length === 0}>
+    <Button medium form="form-change-profile-name" type="submit" {disabled}>
         {localize('views.settings.changeProfileName.title')}
     </Button>   
 </form>
