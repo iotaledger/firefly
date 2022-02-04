@@ -22,24 +22,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .languages {
-        max-height: calc(100vh - 100vw - 150px);
-        @screen md {
-            max-height: inherit;
-        }
-        button {
-            &.active {
-                @apply bg-blue-500;
-                @apply bg-opacity-10;
-                :global(p) {
-                    @apply text-blue-500;
-                }
-            }
-        }
-    }
-</style>
-
 <OnboardingLayout allowBack={false}>
     <div slot="leftpane__content">
         <div class="flex flex-col {$mobile && 'items-center text-center px-10'} space-y-4 mb-8">
@@ -75,3 +57,21 @@
         <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
     </div>
 </OnboardingLayout>
+
+<style type="text/scss">
+    .languages {
+        max-height: calc(100vh - 100vw - 150px);
+        @screen md {
+            max-height: inherit;
+        }
+        button {
+            &.active {
+                @apply bg-blue-500;
+                @apply bg-opacity-10;
+                :global(p) {
+                    @apply text-blue-500;
+                }
+            }
+        }
+    }
+</style>

@@ -56,7 +56,6 @@
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account';
-    import { setProfileAccount } from 'shared/lib/profile'
 
     export let locale: Locale
 

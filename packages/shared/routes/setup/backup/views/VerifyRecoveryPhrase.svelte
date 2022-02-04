@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { english } from 'shared/lib/wordlists/english'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
     export let mnemonic
@@ -23,8 +23,8 @@
         wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
     }
 
-    const generateRandomWord = (excludeWords) => {
-        let word
+    const generateRandomWord = (excludeWords: string[]) => {
+        let word: string
 
         do {
             const wordIndex = Math.floor(Math.random() * english.length)
