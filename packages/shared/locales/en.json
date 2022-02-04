@@ -291,7 +291,7 @@
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Security Settings",
+                "title": "Security",
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
