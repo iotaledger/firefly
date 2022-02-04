@@ -353,7 +353,8 @@
             },
             "changeProfileName": {
                 "title": "Change profile name",
-                "description": "Change your Firefly profile name"
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Balance finder",

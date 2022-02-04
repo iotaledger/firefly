@@ -4,16 +4,23 @@
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { getProfileDataPath } from 'shared/lib/wallet';
     import { Platform } from 'shared/lib/platform';
+    import { showAppNotification } from 'shared/lib/notifications';
 
-    let newName: string
+    let newName = ''
     let error = ''
 
+    $: trimmedProfileName = newName.trim()
+    $: newName, (error = '')
+
     async function onSubmitClick(): Promise<void> {
-        const trimmedProfileName = newName.trim();
         try {
             validateProfileName(trimmedProfileName)
             await renameProfileFolder(trimmedProfileName)
-            updateProfile('name', newName)
+            updateProfile('name', trimmedProfileName)
+            showAppNotification({
+                type: 'info',
+                message: localize('views.settings.changeProfileName.success')
+            })
         } catch (err) {
             return (error = err.message)
         }
@@ -39,7 +46,7 @@
         bind:value={newName}
         classes="mb-5"
     />
-    <Button medium form="form-change-profile-name" type="submit">
+    <Button medium form="form-change-profile-name" type="submit" disabled={trimmedProfileName.length === 0}>
         {localize('views.settings.changeProfileName.title')}
     </Button>   
 </form>
