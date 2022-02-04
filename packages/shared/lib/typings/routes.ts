@@ -84,6 +84,7 @@ export enum GeneralSettings {
     Currency = 'currency',
     Notifications = 'notifications',
     NetworkStatus = 'networkStatus',
+    ChangeProfileName = 'changeProfileName',
 }
 
 export enum GeneralSettingsNoProfile {

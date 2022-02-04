@@ -22,11 +22,11 @@
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getStoragePath } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -88,14 +88,11 @@
                 }
             }
             const _exportMigrationLog = () => {
-                Platform.getUserDataPath()
-                    .then((path) => {
-                        const source = getStoragePath(path, $activeProfile.name)
-
-                        return $walletSetupType === SetupType.TrinityLedger
+                getProfileDataPath($activeProfile.name)
+                    .then((source) => $walletSetupType === SetupType.TrinityLedger
                             ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                    })
+                    )
                     .then((result) => {
                         if (result) {
                             logExported = true

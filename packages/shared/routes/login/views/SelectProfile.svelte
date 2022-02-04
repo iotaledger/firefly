@@ -1,16 +1,16 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
-    import { createEventDispatcher } from 'svelte'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(id) {
+    function handleContinueClick(id: string) {
         setActiveProfile(id)
         dispatch('next')
     }
