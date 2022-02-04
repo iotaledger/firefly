@@ -56,7 +56,7 @@ export const getTrimmedLength = (name: string | undefined): number => {
  */
 export const validateFilenameChars = (name: string | undefined): string => {
     if (!name) {
-        return
+        return 'emptyName'
     }
     if (name.startsWith('~')) {
         return 'tilde'
