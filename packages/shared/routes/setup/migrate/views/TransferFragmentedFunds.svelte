@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, ledgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -24,11 +25,9 @@
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let mobile
 
     let busy = false
     let migrated = false
@@ -148,7 +147,7 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
+                                return Platform.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
@@ -168,7 +167,7 @@
                                     })
                             }
 
-                            return Electron.ledger
+                            return Platform.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback
@@ -282,7 +281,7 @@
                     .then((acc) => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
-                                return Electron.ledger
+                                return Platform.ledger
                                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                     .then(({ iota, callback }) => {
                                         closeTransport = callback
@@ -316,7 +315,7 @@
                                     })
                             }
 
-                            return Electron.ledger
+                            return Platform.ledger
                                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
                                 .then(({ iota, callback }) => {
                                     closeTransport = callback
@@ -409,52 +408,50 @@
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout
-        allowBack={!$hasMigratedAnyBundle && !busy}
-        {locale}
-        onBackClick={handleBackClick}
-        class=""
-        showLedgerProgress={legacyLedger}
-        showLedgerVideoButton={legacyLedger}>
-        <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
-            <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
-            {#if legacyLedger}
-                <Text type="p" secondary classes="mb-4">
-                    {locale('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
-                </Text>
-            {/if}
-            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
-                {#each transactions as transaction}
-                    <TransactionItem {...transaction} {locale} />
-                {/each}
-            </div>
+<OnboardingLayout
+    allowBack={!$hasMigratedAnyBundle && !busy}
+    {locale}
+    onBackClick={handleBackClick}
+    class=""
+    showLedgerProgress={legacyLedger}
+    showLedgerVideoButton={legacyLedger}>
+    <div slot="title">
+        <Text type="h2">{locale('views.migrate.title')}</Text>
+    </div>
+    <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
+        <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
+        {#if legacyLedger}
+            <Text type="p" secondary classes="mb-4">
+                {locale('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
+            </Text>
+        {/if}
+        <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
+            {#each transactions as transaction}
+                <TransactionItem {...transaction} {locale} />
+            {/each}
         </div>
-        <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
-            {#if !migrated}
-                <Button
-                    disabled={busy}
-                    classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
-                    onClick={() => handleMigrateClick()}>
-                    {#if !busy}
-                        {locale('views.transferFragmentedFunds.migrate')}
-                    {:else}
-                        <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
-                    {/if}
-                </Button>
-            {:else if fullSuccess}
-                <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
-            {:else}
-                <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
-                    {locale('views.transferFragmentedFunds.rerun')}
-                </Button>
-            {/if}
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation {animation} />
-        </div>
-    </OnboardingLayout>
-{/if}
+    </div>
+    <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
+        {#if !migrated}
+            <Button
+                disabled={busy}
+                classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
+                onClick={() => handleMigrateClick()}>
+                {#if !busy}
+                    {locale('views.transferFragmentedFunds.migrate')}
+                {:else}
+                    <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
+                {/if}
+            </Button>
+        {:else if fullSuccess}
+            <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+        {:else}
+            <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
+                {locale('views.transferFragmentedFunds.rerun')}
+            </Button>
+        {/if}
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" {animation} />
+    </div>
+</OnboardingLayout>
