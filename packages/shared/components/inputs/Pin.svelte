@@ -113,6 +113,48 @@
     }
 </script>
 
+<div class="w-full {classes}">
+    <pin-input
+        style="--pin-input-size: {PIN_LENGTH}"
+        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
+            bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
+            ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
+        class:disabled
+        bind:this={root}
+        on:click={selectFirstEmptyRoot}
+        on:focus={selectFirstEmptyRoot}
+        tabindex="0">
+        <div class="flex flex-row inputs-wrapper">
+            <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
+                {#each inputs as item, i}
+                    <input
+                        bind:value={inputs[i]}
+                        maxLength="1"
+                        id={`input-${i}`}
+                        type="text"
+                        bind:this={inputElements[i]}
+                        class:active={!inputs[i] || inputs[i].length === 0}
+                        class:glimpse
+                        {disabled}
+                        on:keydown={(event) => changeHandler(event, i)}
+                        on:contextmenu|preventDefault />
+                {/each}
+            </div>
+            <div class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between">
+                {#each inputs as item, i}
+                    <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
+                {/each}
+            </div>
+        </div>
+        <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
+            <Icon icon="backspace" classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
+        </button>
+    </pin-input>
+    {#if error}
+        <Error {error} />
+    {/if}
+</div>
+
 <style type="text/scss">
     pin-input {
         @apply cursor-pointer;
@@ -180,45 +222,3 @@
         }
     }
 </style>
-
-<div class="w-full {classes}">
-    <pin-input
-        style="--pin-input-size: {PIN_LENGTH}"
-        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
-            bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
-            ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
-        class:disabled
-        bind:this={root}
-        on:click={selectFirstEmptyRoot}
-        on:focus={selectFirstEmptyRoot}
-        tabindex="0">
-        <div class="flex flex-row inputs-wrapper">
-            <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
-                {#each inputs as item, i}
-                    <input
-                        bind:value={inputs[i]}
-                        maxLength="1"
-                        id={`input-${i}`}
-                        type="text"
-                        bind:this={inputElements[i]}
-                        class:active={!inputs[i] || inputs[i].length === 0}
-                        class:glimpse
-                        {disabled}
-                        on:keydown={(event) => changeHandler(event, i)}
-                        on:contextmenu|preventDefault />
-                {/each}
-            </div>
-            <div class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between">
-                {#each inputs as item, i}
-                    <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
-                {/each}
-            </div>
-        </div>
-        <button type="button" on:click={handleBackspace} {disabled} tabindex="-1">
-            <Icon icon="backspace" classes={smaller ? 'text-blue-500' : 'text-gray-500'} />
-        </button>
-    </pin-input>
-    {#if error}
-        <Error {error} />
-    {/if}
-</div>

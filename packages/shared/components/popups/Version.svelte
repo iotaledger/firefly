@@ -35,15 +35,6 @@
     })
 </script>
 
-<style type="text/scss">
-    img {
-        width: 196px;
-    }
-    .changelog {
-        max-height: 50vh;
-    }
-</style>
-
 <Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
@@ -87,3 +78,12 @@
         </div>
     {/if}
 </div>
+
+<style type="text/scss">
+    img {
+        width: 196px;
+    }
+    .changelog {
+        max-height: 50vh;
+    }
+</style>

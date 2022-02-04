@@ -81,14 +81,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .animation-wrapper {
-        max-height: calc(100% - 80px);
-        max-width: 700px;
-        padding-bottom: 66.56%;
-    }
-</style>
-
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
     {#if animation}
         <div class="animation-wrapper relative w-full">
@@ -101,3 +93,11 @@
         <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
     </div>
 </div>
+
+<style type="text/scss">
+    .animation-wrapper {
+        max-height: calc(100% - 80px);
+        max-width: 700px;
+        padding-bottom: 66.56%;
+    }
+</style>

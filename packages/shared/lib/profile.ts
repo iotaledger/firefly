@@ -1,46 +1,43 @@
-import { persistent } from 'shared/lib/helpers'
+import { derived, get, Readable, writable } from 'svelte/store'
+import { _ } from 'svelte-i18n'
+import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
     asyncDeleteStorage,
     destroyActor,
-    getStoragePath,
-    getWalletStoragePath,
+    getProfileDataPath,
+    getWalletDataPath,
     AccountColors,
 } from 'shared/lib/wallet'
-import { derived, get, Readable, writable } from 'svelte/store'
 import { Platform } from './platform'
-import type { ValuesOf } from './typings/utils'
-import type { Profile, UserSettings } from './typings/profile'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
-import type { WalletAccount } from './typings/wallet'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import { account } from './typings'
+import type { ValuesOf } from './typings/utils'
+import type { Profile, UserSettings } from './typings/profile'
+import type { WalletAccount } from './typings/wallet'
+import type { Locale } from './typings/i18n'
 
-export const activeProfileId = persistent<string | null>('activeProfileId', null)
+const MAX_PROFILE_NAME_LENGTH = 20
+
 export interface ProfileAccount {
     id: string
     color: string
 }
 
+export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export const profiles = persistent<Profile[]>('profiles', [])
-
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
 export const newProfile = writable<Profile | null>(null)
-
 export const isStrongholdLocked = writable<boolean>(true)
 
-/**
- * Currently active profile
- */
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
-    ([$profiles, $newProfile, $activeProfileId]) =>
-        $newProfile || $profiles.find((_profile) => _profile.id === $activeProfileId)
+    ([$profiles, $newProfile, $activeProfileId]) => $newProfile || $profiles.find((p) => p.id === $activeProfileId)
 )
 
 activeProfileId.subscribe((profileId) => {
@@ -107,20 +104,19 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
  *
- * @method createProfile
+ * @method storeProfile
  *
  * @param {string} profileName
  * @param {boolean} isDeveloperProfile
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName: string, isDeveloperProfile: boolean): Profile => {
+export const storeProfile = (profileName: string, isDeveloperProfile: boolean): void => {
     const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
-
-    return profile
+    profileInProgress.set(profileName)
 }
 
 /**
@@ -146,15 +142,15 @@ export const migrateProfile = (): void => {
  * @returns {void}
  */
 export const disposeNewProfile = async (): Promise<void> => {
-    const _newProfile = get(newProfile)
-    if (_newProfile) {
+    const profile = get(newProfile)
+    if (profile) {
         try {
             await asyncDeleteStorage()
-            await removeProfileFolder(_newProfile.name)
+            await removeProfileFolder(profile.name)
         } catch (err) {
             console.error(err)
         }
-        destroyActor(_newProfile.id)
+        destroyActor(profile.id)
     }
 
     newProfile.set(null)
@@ -207,6 +203,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
+// TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
 export const updateProfile = (
     path: string,
     value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<NetworkConfig>
@@ -271,9 +268,8 @@ export const cleanupInProgressProfiles = (): void => {
  */
 export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
-        const userDataPath = await Platform.getUserDataPath()
-        const profileStoragePath = getStoragePath(userDataPath, profileName)
-        await Platform.removeProfileFolder(profileStoragePath)
+        const profileDataPath = await getProfileDataPath(profileName)
+        await Platform.removeProfileFolder(profileDataPath)
     } catch (err) {
         console.error(err)
     }
@@ -288,9 +284,8 @@ export const removeProfileFolder = async (profileName: string): Promise<void> =>
  */
 export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
-        const userDataPath = await Platform.getUserDataPath()
-        const profileStoragePath = getWalletStoragePath(userDataPath)
-        const storedProfiles = await Platform.listProfileFolders(profileStoragePath)
+        const profileDataPath = await getWalletDataPath()
+        const storedProfiles = await Platform.listProfileFolders(profileDataPath)
 
         profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 
@@ -421,5 +416,37 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
         const profileAccount = { id: accountId, color: '' }
         setProfileAccount(activeProfile, profileAccount)
         return getColor(activeProfile, accountId)
+    }
+}
+
+/**
+ * Validates the trimmed profile name
+ *
+ * @method validateProfileName
+ *
+ * @param {string} trimmedName
+ *
+ * @returns {void}
+ */
+export const validateProfileName = (trimmedName: string): void => {
+    const locale = get(_) as Locale
+    const validateError = validateFilenameChars(trimmedName)
+
+    if (validateError) {
+        throw new Error(locale(`error.account.${validateError}`))
+    }
+
+    if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
+        throw new Error(
+            locale('error.profile.length', {
+                values: {
+                    length: MAX_PROFILE_NAME_LENGTH,
+                },
+            })
+        )
+    }
+
+    if (get(profiles).some((p) => p.name === trimmedName)) {
+        throw new Error(locale('error.profile.duplicate'))
     }
 }
