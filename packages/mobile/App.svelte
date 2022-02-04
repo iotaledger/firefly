@@ -26,6 +26,7 @@
         Protect,
         Secure,
         Setup,
+        Settings,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -77,6 +78,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Settings}>
+            <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />

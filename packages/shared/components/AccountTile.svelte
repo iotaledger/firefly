@@ -29,8 +29,6 @@
     import { get } from 'svelte/store'
     import { isBright } from 'shared/lib/helpers'
 
-    const NEW_LINE = '\r\n'
-
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''

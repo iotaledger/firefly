@@ -3,6 +3,22 @@
     import { showCameraScanner, stopQRScanner } from 'shared/lib/device'
 </script>
 
+{#if $showCameraScanner}
+    <div class="fixed top-0 left-0 w-screen h-screen z-50 flex items-center justify-center">
+        <div class="absolute top-0 bottom-0 left-0 right-0 bg-gray-300 bg-opacity-20" />
+        <div class="barcode-scanner--area--container">
+            <div class="square surround-cover">
+                <div class="barcode-scanner--area--outer surround-cover">
+                    <div class="barcode-scanner--area--inner" />
+                </div>
+            </div>
+        </div>
+        <button on:click={stopQRScanner} class="absolute top-6 right-8 text-white">
+            <Icon icon="close" />
+        </button>
+    </div>
+{/if}
+
 <style global type="text/scss">
     .barcode-scanner--area--container {
         @apply w-2/3;
@@ -68,19 +84,3 @@
         }
     }
 </style>
-
-{#if $showCameraScanner}
-    <div class="fixed top-0 left-0 w-screen h-screen z-50 flex items-center justify-center">
-        <div class="absolute top-0 bottom-0 left-0 right-0 bg-gray-300 bg-opacity-20" />
-        <div class="barcode-scanner--area--container">
-            <div class="square surround-cover">
-                <div class="barcode-scanner--area--outer surround-cover">
-                    <div class="barcode-scanner--area--inner" />
-                </div>
-            </div>
-        </div>
-        <button on:click={stopQRScanner} class="absolute top-6 right-8 text-white">
-            <Icon icon="close" />
-        </button>
-    </div>
-{/if}

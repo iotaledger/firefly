@@ -33,6 +33,17 @@ export const Platform: IPlatform = {
         }
     },
 
+    renameProfileFolder(oldPath, newPath) {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.renameProfileFolder(oldPath, newPath)
+            case Platforms.MOBILE:
+                return CapacitorApi.renameProfileFolder(oldPath, newPath)
+            default:
+                return
+        }
+    },
+
     removeProfileFolder(profilePath) {
         switch (PLATFORM) {
             case Platforms.DESKTOP:

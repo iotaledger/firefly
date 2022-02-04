@@ -8,14 +8,14 @@
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
-    export let handleClose
+    export let handleClose: () => void
 
-    function closeSettings() {
+    function closeSettings(): void {
         dashboardRoute.set(get(previousDashboardRoute))
         previousDashboardRoute.set(undefined)
     }
 
-    onDestroy(() => {
+    onDestroy((): void => {
         // When a new locale is loaded the pages are reloaded
         // so don't reset the router in this case
         if ($isLocaleLoaded) {

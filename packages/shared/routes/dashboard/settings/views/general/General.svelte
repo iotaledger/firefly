@@ -3,6 +3,7 @@
     import { loggedIn } from 'shared/lib/app'
     import { GeneralSettings } from 'shared/lib/typings/routes'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
+    import ChangeProfileName from './ChangeProfileName.svelte';
 
     const settings: {
         component: unknown
@@ -14,6 +15,7 @@
         { component: Currency, childRoute: GeneralSettings.Currency, requireLogin: true },
         { component: Notifications, childRoute: GeneralSettings.Notifications },
         { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
+        { component: ChangeProfileName, childRoute: GeneralSettings.ChangeProfileName, requireLogin: true },
     ]
 </script>
 
