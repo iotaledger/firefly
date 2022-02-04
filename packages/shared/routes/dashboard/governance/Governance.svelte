@@ -24,21 +24,25 @@
 
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
     {#if $governanceRoute === GovernanceRoutes.Init}
-        <div class='flex justify-between'>
+        <div class="flex justify-between">
             <GovernanceHeader />
             <div>
                 {#each $accounts as acc}
-                    <WalletPill active={acc.id === $selectedAccountId} 
-                        name={acc.alias} color={acc.color} onClick={() => handleAccountClick(acc.id)} />
+                    <WalletPill
+                        account={acc}
+                        active={acc.id === $selectedAccountId}
+                        onClick={() => handleAccountClick(acc.id)} />
                 {/each}
             </div>
         </div>
         <GovernanceDashboard {event} />
     {:else if $governanceRoute === GovernanceRoutes.EventDetails}
-        <div class='ml-auto'>
+        <div class="ml-auto">
             {#each $accounts as acc}
-                <WalletPill active={acc.id === $selectedAccountId}
-                    name={acc.alias} color={acc.color} onClick={() => handleAccountClick(acc.id)} />
+                <WalletPill
+                    account={acc}
+                    active={acc.id === $selectedAccountId}
+                    onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
         <GovernanceEventDetails {event} {locale} />
