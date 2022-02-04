@@ -38,15 +38,6 @@
     })
 </script>
 
-<style type="text/scss">
-    .animation {
-        max-height: calc(100vh - 460px);
-        @screen md {
-            max-height: inherit;
-        }
-    }
-</style>
-
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
         <Text type="h2">{locale('views.appearance.title')}</Text>
@@ -69,3 +60,12 @@
         <Animation classes="setup-anim-aspect-ratio" animation="appearance-desktop" {segments} />
     </div>
 </OnboardingLayout>
+
+<style type="text/scss">
+    .animation {
+        max-height: calc(100vh - 460px);
+        @screen md {
+            max-height: inherit;
+        }
+    }
+</style>

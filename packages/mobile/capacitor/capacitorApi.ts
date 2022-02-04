@@ -87,7 +87,8 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: () => new Promise<string>((resolve, reject) => {
+    getUserDataPath: () =>
+        new Promise<string>((resolve, reject) => {
             resolve('DATA')
         }),
 

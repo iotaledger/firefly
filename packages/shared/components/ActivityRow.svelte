@@ -149,9 +149,6 @@
     }
 </script>
 
-<style>
-</style>
-
 <button
     on:click={onClick}
     data-label="transaction-row"
