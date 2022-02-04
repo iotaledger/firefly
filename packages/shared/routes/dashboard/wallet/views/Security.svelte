@@ -51,7 +51,7 @@
     })
 
     function setup() {
-        const lastStrongholdBackupTime = $activeProfile.lastStrongholdBackupTime
+        const lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
         backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
