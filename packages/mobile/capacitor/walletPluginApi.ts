@@ -48,7 +48,7 @@ import {
     getLegacySeedChecksum as _getLegacySeedChecksum,
     getStrongholdStatus as _getStrongholdStatus,
     lockStronghold as _lockStronghold,
-    removeStorage as _removeStorage,
+    deleteStorage as _deleteStorage,
     restoreBackup as _restoreBackup,
     send as _send,
     setClientOptions as _setClientOptions,
@@ -222,7 +222,7 @@ export const api = {
         (password: string): Api =>
         (__ids) =>
             _setStoragePassword(sendMessage, __ids, password),
-    removeStorage: (): Api => (__ids) => _removeStorage(sendMessage, __ids),
+    deleteStorage: (): Api => (__ids) => _deleteStorage(sendMessage, __ids),
     send:
         (fromAccountId: AccountIdentifier, transfer: Transfer): Api =>
         (__ids) =>
