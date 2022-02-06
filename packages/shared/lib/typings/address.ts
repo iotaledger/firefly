@@ -4,7 +4,7 @@ export interface AddressOutput {
     index: number
     isSpent: boolean
     messageId: string
-    transactionId: number[]
+    transactionId: string
 }
 
 export interface Address {

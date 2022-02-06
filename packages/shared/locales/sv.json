@@ -22,15 +22,16 @@
                 "nonFirst": "För tillfället, låt oss börja med ditt profilnamn."
             },
             "addMore": "Du kan lägga till fler profiler senare.",
+            "advancedOptions": "Avancerade inställningar",
             "developer": {
                 "label": "Utvecklarprofil",
-                "info": "Anslut till publika och privata IOTA-nätverk"
+                "info": "Anslut till utvecklar-nätverket eller ett privat nätverk"
             }
         },
         "setup": {
             "title": "Konfigurera en plånbok",
             "chrysalisTitle": "Chrysalis nätverksuppdatering",
-            "chrysalisBody": "Från och med den 21 april kan man migrera sina tokens till det nya Chrysalis-nätverket. Vi rekommenderar att du migrerar dina befintliga tokens så snart som möjligt.",
+            "chrysalisBody": "Från och med den 21 april 2021 kunde användarna börja migrera sina tokens till det nya Chrysalis-nätverket. Vi rekommenderar att du migrerar dina befintliga tokens så snart som möjligt.",
             "learnMore": "Läs mer om migreringen"
         },
         "secure": {
@@ -235,7 +236,7 @@
             "broadcastingBundle": "Sänder bundle",
             "miningBundle": "Utvinner säker bundle",
             "problemRestoringWallet": "Det uppstod ett nätverksfel när din plånbok skulle återställas. Försök igen.",
-            "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "minimumMigrationAmountSpentAddresses": "Lägsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
             "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt totala saldo inte ser rätt ut.",
             "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
             "error": "Det gick inte att migrera dina tillgångar. Försök igen."
@@ -279,7 +280,7 @@
         "balance": {
             "title": "Ditt saldo",
             "body": "Se till att ditt saldo är korrekt innan du fortsätter. Du kan kontrollera igen om det inte ser rätt ut.",
-            "error": "Minsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "error": "Lägsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
             "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt.",
             "zeroBalanceLedgerLegacy": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett fel konto-index."
         },
@@ -336,9 +337,7 @@
             },
             "appLock": {
                 "title": "Automatiskt lås",
-                "description": "Inaktivitetstid innan din plånbok låses och du loggas ut",
-                "durationMinute": "{time, plural, one {1 minut} other {# minuter}}",
-                "durationHour": "{time, plural, one {1 timme} other {# timmar}}"
+                "description": "Inaktivitetstid innan din plånbok låses och du loggas ut"
             },
             "changePassword": {
                 "title": "Ändra lösenord",
@@ -415,10 +414,6 @@
                 "title": "Migrera Ledger-index",
                 "description": "Migrera ett annat kontoindex från Trinity"
             },
-            "stateExport": {
-                "title": "Tillstånds-exportering",
-                "description": "Exportera din transaktionshistorik till en .csv-fil"
-            },
             "troubleshoot": {
                 "title": "Felsök",
                 "description": "Använd felsökningsguiden för att lösa vanliga problem"
@@ -446,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Vänta {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 felaktigt försök} other {# felaktiga försök}}"
+            "pleaseWait": "Vänligen vänta {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrectAttempts": "{attempts, plural, one {# felaktigt försök} other {# felaktiga försök}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +484,48 @@
             "profileModal": {
                 "allSettings": "Alla inställningar",
                 "logout": "Logga ut"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Välkommen till staking-instrumentpanelen!",
+            "status": {
+                "upcoming": "Event inte startat",
+                "commencing": "För-staking öppen",
+                "holdingActive": "Staking pågår",
+                "holdingInactive": "Staking öppen",
+                "inactive": "Ingen staking upptäckt",
+                "ended": "Staking avslutad"
+            },
+            "summary": {
+                "stakedFunds": "Stakade tillgångar"
+            },
+            "info": {
+                "upcomingSubheader": "Eventet har inte startat",
+                "upcomingHeader": "Kom tillbaka senare",
+                "commencingSubheader": "Gör dig redo för staking",
+                "commencingHeader": "För-staka dina tokens!",
+                "holdingSubheaderHolding": "Tjänar nu staking-belöningar",
+                "holdingSubheaderNotHolding": "Tjäna belöningar genom att staka IOTA",
+                "holdingHeaderHolding": "{duration} kvar",
+                "holdingHeaderNotHolding": "Staka dina tokens!",
+                "endedSubheader": "Staking har nu avslutats",
+                "endedHeader": "Tack så mycket!",
+                "inactiveHeader": "Försök att ändra nod",
+                "inactiveSubheader": "Ingen staking upptäckt"
+            },
+            "airdrops": {
+                "holding": "Återstående",
+                "commencing": "Tills staking börjar",
+                "collectedRewards": "Samlade belöningar",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly är ett tillståndsfritt, mycket skalbart multikedjenätverk för att bygga och distribuera sammansättningsbara smartkontrakt. Assembly är framtiden för web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Det belöningsmotiverade förestående nätverket för att främja stora innovationer med IOTA. Det som händer, händer. Hur Shimmer utvecklas är upp till dig."
+                }
             }
         }
     },
@@ -538,7 +575,9 @@
         },
         "addressHistory": {
             "title": "{name} adresshistorik",
-            "currentBalance": "Nuvarande saldo: {balance}"
+            "currentBalance": "Saldo: {balance}",
+            "internal": "Intern adress",
+            "external": "Insättningsadress"
         },
         "node": {
             "titleAdd": "Lägg till nod",
@@ -598,7 +637,9 @@
         },
         "transaction": {
             "title": "Bekräfta transaktion",
-            "body": "Du håller på att skicka {amount} till"
+            "body": "Du håller på att skicka {amount} till",
+            "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
+            "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
         },
         "balanceFinder": {
             "title": "Hitta saldo",
@@ -669,6 +710,48 @@
         "ledgerMigrateIndex": {
             "title": "Behöver du migrera ytterligare ett Trinity kontoindex?",
             "body": "Du kan också migrera senare i Avancerade inställningar."
+        },
+        "exportTransactionHistory": {
+            "title": "Exportera transaktionshistoriken",
+            "body": "Exportera transaktionshistoriken för den valda plånboken. Den exporterade filen kommer att vara i .csv-format.",
+            "profileName": "Profilnamn:",
+            "accountName": "Kontonamn:",
+            "typePassword": "Ange ditt lösenord för att tillåta export"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking har inte påbörjats",
+            "commencingDate": "Staking har inte påbörjats",
+            "body": "Genom att förbereda staking av dina tillgångar, kommer du automatiskt att börja få belöningar när stakingen börjar.",
+            "ok": "Ok, jag förstår"
+        },
+        "stakingManager": {
+            "title": "Staking-hantering",
+            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"stakade\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
+            "totalFundsStaked": "Totala tillgångar för staking",
+            "stakedSuccessfully": "Dina tillgångar har blivit stakade för {account}.",
+            "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop-deltagande",
+            "subtitleStake": "Du är på väg att staka",
+            "subtitleMerge": "Du är på väg att slå ihop",
+            "bodyStake": "Om du inte vill delta i båda airdropsen kan du välja bort dem nedan. Du kan ta bort dina stakade tillgångar och sedan välja att gå tillbaka när som helst.",
+            "bodyMerge": "Dina tillgångar kommer att stakas för {airdrop}. För att ändra vilka airdrops du vill delta i, ta bort tillgångarna för staking i denna plånbok och välj sedan att staka dem igen.",
+            "estimatedAirdrop": "Beräknade belöningar"
+        },
+        "shimmer-info": {
+            "title": "Om Shimmer",
+            "body1": "Grattis du har förtjänat SMR-tokens som en stakingbelöning. Shimmer är ett belöningsmotiverat förestående nätverk för att testa stora uppgraderingar på IOTA.",
+            "body2": "Vi siktar på att lansera Shimmer 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+        },
+        "assembly-info": {
+            "title": "Om Assembly",
+            "body1": "Grattis du har förtjänat ASMB-tokens som en stakingbelöning. Assembly är ett multi-kedje-nätverk för att distribuera skalbara smarta kontrakt på IOTA.",
+            "body2": "Vi siktar på att lansera Assembly 2022. Dina tokens kommer att bli tillgängliga för överföring när nätverket lanserats."
+        },
+        "confirmDeveloperProfile": {
+            "title": "Du skapar en utvecklarprofil",
+            "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
         }
     },
     "charts": {
@@ -724,11 +807,12 @@
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
         "export": "Exportera",
+        "exporting": "Exporterar",
         "exportNewStronghold": "Exportera en ny Stronghold",
         "enableDeepLinks": "Aktivera IOTA-länkar",
         "enableDeveloperMode": "Aktivera utvecklarläge",
         "enableSystemNotifications": "Aktivera systemaviseringar",
-        "exportState": "Exportera tillstånd",
+        "exportTransactionHistory": "Exportera transaktionshistoriken",
         "localProofOfWork": "Lokalt proof of work",
         "unlock": "Lås upp",
         "updateFirefly": "Uppdatera Firefly",
@@ -780,7 +864,17 @@
         "searching": "Söker...",
         "closeFirefly": "Stäng Firefly",
         "generateAddress": "Generera adress",
-        "migrateAgain": "Migrera ett annat index"
+        "migrateAgain": "Migrera ett annat index",
+        "visitWebsite": "Besök webbplats",
+        "howItWorks": "Så funkar det",
+        "learnAboutStaking": "Lär dig om staking",
+        "stake": "Staka",
+        "unstake": "Avstaka",
+        "stakeFunds": "Staka tillgångar",
+        "manageStake": "Hantera staking",
+        "merge": "Slå ihop",
+        "mergeFunds": "Slå ihop tillgångar",
+        "done": "Klar"
     },
     "general": {
         "password": "Lösenord",
@@ -811,6 +905,7 @@
         "from": "Från",
         "to": "Till",
         "receiveFunds": "Ta emot IOTA",
+        "address": "Adress",
         "myAddress": "Min adress",
         "shareAddress": "Dela en adress",
         "yourAddress": "Din adress",
@@ -869,6 +964,8 @@
         "transferBroadcasting": "Sänder transaktion",
         "transferComplete": "Överföring slutförd",
         "generatingReceiveAddress": "Genererar mottagaradress",
+        "broadcasting": "Utsända",
+        "confirming": "Bekräftar",
         "creatingAccount": "Skapar plånbok, vänligen vänta...",
         "updatingAccount": "Uppdaterar plånbok, vänligen vänta...",
         "accountSyncing": "Plånboken synkroniseras",
@@ -876,6 +973,7 @@
         "passwordUpdating": "Uppdaterar lösenord...",
         "passwordSuccess": "Lösenordet har uppdaterats",
         "passwordFailed": "Det gick inte att uppdatera lösenord",
+        "syncing": "Synkroniserar",
         "syncingAccounts": "Synkroniserar plånböcker...",
         "exportingStronghold": "Exporterar Stronghold...",
         "exportingStrongholdSuccess": "Exportering av Stronghold lyckades",
@@ -896,13 +994,24 @@
         "sendingFrom": "Skickar från {account}",
         "receivedTo": "Mottaget till {account}",
         "sentFrom": "Skickat från {account}",
+        "stakedFor": "Stakade för {account}",
+        "unstakedFor": "Ej stakade för {account}",
+        "votedFor": "Röstade för {account}",
+        "unvotedFor": "Ej röstade för {account}",
         "receiving": "Tar emot",
         "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",
         "capsLock": "Caps Lock är på",
         "version": "Version {version}",
         "unknown": "Okänd",
-        "none": "Ingen"
+        "none": "Ingen",
+        "staked": "Stakad",
+        "unstaked": "Ej stakad",
+        "staking": "Staking",
+        "unstaking": "Tar bort staking",
+        "notStaked": "Ej stakad",
+        "stakedFunds": "Stakade tillgångar",
+        "unstakedFunds": "Ej stakade tillgångar"
     },
     "dates": {
         "today": "Idag",
@@ -911,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# vecka} other {# veckor}} sedan",
         "monthsAgo": "{time, plural, one {# månad} other {# månader}} sedan",
         "yearsAgo": "{time, plural, one {# år} other {# år}} sedan"
+    },
+    "times": {
+        "second": "{time, plural, one {# sekund} other {# sekunder}}",
+        "minute": "{time, plural, one {# minut} other {# minuter}}",
+        "hour": "{time, plural, one {# timme} other {# timmar}}",
+        "day": "{time, plural, one {# dag} other {# dagar}}",
+        "week": "{time, plural, one {# vecka} other {# veckor}}",
+        "month": "{time, plural, one {# månad} other {# månader}}",
+        "year": "{time, plural, one {# år} other {# år}}"
     },
     "notifications": {
         "valueTx": "Tar emot {{value}} till {{account}}",
@@ -923,10 +1041,14 @@
         "updateError": "Ett fel inträffade under uppdateringen, försök igen",
         "restartInstall": "Starta om för att installera",
         "calcMinutesRemaining": "Beräknar minuter kvar...",
-        "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
+        "minutesRemaining": "{minutes, plural, one {# kvarvarande minut} other {# kvarvarande minuter}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
         "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga",
+        "exportTransactionHistory": {
+            "success": "Transaktionshistorik för {accountAlias} har sparats till {filePath}",
+            "error": "Det gick inte att exportera transaktionshistorik för {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Logga in för att initiera IOTA-länken",
             "notEnabled": "IOTA-länkar är inte aktiverade",
@@ -940,8 +1062,11 @@
     },
     "error": {
         "profile": {
-            "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
-            "duplicate": "En profil med detta namn finns redan."
+            "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
+            "duplicate": "En profil med detta namn finns redan.",
+            "delete": {
+                "nonEmptyAccounts": "Du måste överföra alla saldon innan du kan ta bort din profil."
+            }
         },
         "password": {
             "doNotMatch": "Lösenorden matchar inte.",
@@ -958,15 +1083,15 @@
             "similar": "Detta liknar ett vanligt lösenord.",
             "word": "Ett enda ord är enkelt att gissa.",
             "incorrect": "Ditt lösenord är felaktigt.",
-            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}."
+            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}."
         },
         "pincode": {
-            "length": "Din PIN-kod måste vara {length, plural, one {1 siffra} other {# siffror}}.",
+            "length": "Din PIN-kod måste vara {length, plural, one {# siffra} other {# siffror}} lång.",
             "match": "PIN-koder matchar inte.",
             "incorrect": "Din nuvarande PIN-kod är felaktig."
         },
         "account": {
-            "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
+            "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
             "empty": "Du måste använda din senaste plånbok innan du skapar en ny.",
             "notEmpty": "Du måste överföra ditt saldo innan du tar bort denna plånbok.",
             "duplicate": "En plånbok med detta namn finns redan.",
@@ -979,7 +1104,7 @@
             "syncing": "Det gick inte att synkronisera dina plånböcker."
         },
         "send": {
-            "addressLength": "Adresser bör vara {length, plural, one {1 tecken} other {# tecken}}.",
+            "addressLength": "Adresser bör vara {length, plural, one {# tecken} other {# tecken}} lång.",
             "amountTooHigh": "Detta är större än ditt tillgängliga saldo.",
             "amountNoFloat": "Om enheten är `i` kan du inte använda decimaler.",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
@@ -1006,7 +1131,8 @@
             "unsynced": "Noden är inte synkroniserad.",
             "noSynced": "Inga synkroniserade noder är tillgängliga.",
             "answer": "Det gick inte att få svar från alla noder.",
-            "forbidden": "Denna nodanslutning är förbjuden."
+            "forbidden": "Denna nodanslutning är förbjuden.",
+            "pluginNotAvailable": "Pluginet \"{nodePlugin}\" är inte tillgänglig på den aktuella noden."
         },
         "network": {
             "mismatch": "Nätverks-ID för denna nod är \"{networkId}\", som inte matchar det nuvarande nätverket.",
@@ -1021,9 +1147,9 @@
             "invalid": "Säkerhetskopian kändes inte igen.",
             "destination": "Härkomsten för säkerhetskopian var inte giltig.",
             "mnemonic": "Mnemonin är inte giltig.",
-            "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
+            "seedTooShort": "Din seed ska vara 81 tecken lång, den {length, plural, one {är #} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
-            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
+            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är #} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
         },
@@ -1038,7 +1164,8 @@
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",
             "timeout": "Din Ledger-enhet nådde time out.",
-            "disconnected": "Din Ledger-enhet kopplades bort."
+            "disconnected": "Din Ledger-enhet kopplades bort.",
+            "noStronghold": "Kan inte använda Stronghold med Ledger-profil."
         },
         "popup": {
             "preventClose": "Detta popup-fönster kan inte stängas."
@@ -1048,11 +1175,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Det går inte att avkoda strängen som Bech32-adress."
+        },
+        "participation": {
+            "cannotUseAccount": "Det går inte att använda det angivna kontot.",
+            "cannotFindStakingEvent": "Det gick inte att hitta staking-event.",
+            "cannotVisitAirdropWebsite": "Det går inte att öppna {airdrop} s webbplats.",
+            "invalidStakingEventId": "Ogiltigt staking-event ID."
         }
     },
     "warning": {
         "node": {
             "http": "Att använda noder över HTTP lämnar trafik okrypterad och kan utgöra en säkerhetsrisk."
+        },
+        "participation": {
+            "noAccounts": "Du har inga IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1199,65 @@
             "medium": "Medel",
             "low": "Låg",
             "veryLow": "Mycket låg"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking har inte startat ännu",
+                "body": "Kom tillbaka senare. Staking-eventet har inte börjat."
+            },
+            "commencing": {
+                "title": "För-staking är nu öppen",
+                "body": "Förbered staking av dina tokens, och när stakingen börjar, kommer du automatiskt att börja få belöningar var 10: e sekund."
+            },
+            "activeHolding": {
+                "title": "Staking pågår nu",
+                "body": "Bra jobbat. Du kommer att få belöningar var 10:e sekund."
+            },
+            "inactiveHolding": {
+                "title": "Staking har nu påbörjats",
+                "body": "Staka dina IOTA tokens för att få belöningar var 10: e sekund."
+            },
+            "inactive": {
+                "title": "Inga staking-event upptäckta",
+                "body": "Öppna nätverkskonfiguration i Avancerade inställningar och se till att den aktuella noden har funktionen \"Deltagande\" genom att klicka på \"Visa Info\"."
+            },
+            "ended": {
+                "title": "Staking har nu avslutats",
+                "bodyAboveRewardMin": "Assembly- och Shimmerbelöningar kommer att distribueras till dina plånböcker när var och en av de respektive nätverken lanseras.",
+                "bodyBelowRewardMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "Nya ostakade tillgångar: {amount}",
+            "titleNoFunds": "Nya ostakade tillgångar",
+            "preBody": "Du har fått tokens till en stakad plånbok.",
+            "body": "Du måste manuellt staka dessa nya tillgångar för att få airdrop-belöningar för dem."
+        },
+        "stakingMinRewards": {
+            "title": "Under lägsta belöningsvärde",
+            "titleMinBalance": "{amount} lägsta saldo krävs",
+            "bodyMinBalance": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån och kan därför inte stakas.",
+            "continue": "Vänligen fortsätt staka för ytterligare {duration}.",
+            "bodyBelowMin": "Denna plånbok har inte nått det lägsta belöningsvärdet för {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Du måste staka ytterligare {duration} för att nå minimum.",
+            "bodyWillNotReachMin": "Du kommer inte att nå den lägsta belöningsnivån under den återstående stakingperioden om du inte lägger till mer IOTA.",
+            "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån för {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Meddelande-ID",
+            "internal": "Intern",
+            "rawValue": "Obearbetat värde",
+            "formattedValue": "Formaterat värde",
+            "date": "Datum",
+            "time": "Tid"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "Du använder för närvarande en utvecklarprofil och är ansluten till {networkName}"
         }
     }
 }

@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
-    import { getInitials } from 'shared/lib/helpers'
+    import { Icon, Text, WalletPill } from 'shared/components'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -56,14 +55,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        + button {
-            @apply ml-4;
-        }
-    }
-</style>
-
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
@@ -73,15 +64,21 @@
     </button>
     <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto scroll-tertiary">
-        <div class="flex flex-row pb-1" bind:this={accountElement}>
+        <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
-                <button
-                    on:click={() => handleAccountClick(acc.id)}
-                    class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
-            {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} 
-            hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
-                </button>
+                <WalletPill
+                    account={acc}
+                    active={activeAccount.id === acc.id}
+                    onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    button {
+        + button {
+            @apply ml-4;
+        }
+    }
+</style>

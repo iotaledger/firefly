@@ -1,9 +1,9 @@
 {
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
-        "outDir": "out",
         "baseUrl": "./",
-        "lib": ["DOM", "ESNext"]
+        "lib": ["DOM", "ESNext"],
+        "outDir": "out"
     },
     "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]

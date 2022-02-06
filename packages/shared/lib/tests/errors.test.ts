@@ -1,6 +1,8 @@
+import './mocks/matchMedia'
+
+import { get } from 'svelte/store'
 import { addError, errorLog } from '../errors'
 import type { Error } from '../typings/error'
-import { get } from 'svelte/store'
 
 describe('File: errors.ts', () => {
     describe('Function: addError', () => {

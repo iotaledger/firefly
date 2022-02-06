@@ -1,23 +1,21 @@
 <script lang="typescript">
-    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { cleanupSignup, mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
-    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
     import {
         cleanupInProgressProfiles,
-        createProfile,
+        storeProfile,
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
-        profileInProgress,
-        profiles,
+        validateProfileName
     } from 'shared/lib/profile'
+    import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -26,79 +24,65 @@
 
     const dispatch = createEventDispatcher()
 
-    let profileName = get(newProfile)?.name ?? ''
-    let isDeveloperProfile = get(newProfile)?.isDeveloperProfile ?? false
+    let profileName = $newProfile?.name ?? ''
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
 
     $: isProfileNameValid = profileName && profileName.trim()
+    $: profileName, (error = '') // Error clears when profileName changes
+    $: nameChanged = $newProfile?.name !== profileName.trim()
+    $: hasDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
-    // This looks odd but sets a reactive dependency on profileName, so when it changes the error will clear
-    $: profileName, (error = '')
-
-    async function handleContinueClick() {
+    async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
-        if (trimmedProfileName) {
-            let profile
-            error = ''
+        try {
+            validateProfileName(trimmedProfileName)
+        } catch (err) {
+            return (error = err.message)
+        }
+        cleanUpIfPreviouslyInitialized()
+        await initialiseProfile(trimmedProfileName)
+    }
 
-            const validateError = validateFilenameChars(trimmedProfileName)
-            if (validateError) {
-                return (error = locale(`error.account.${validateError}`))
-            }
-
-            if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
-                return (error = locale('error.profile.length', {
-                    values: {
-                        length: MAX_PROFILE_NAME_LENGTH,
-                    },
-                }))
-            }
-
-            if (get(profiles).some((profile) => profile.name === trimmedProfileName)) {
-                return (error = locale('error.profile.duplicate'))
-            }
-
-            const previousInitializedId = $newProfile?.id
-            const nameChanged = $newProfile?.name !== trimmedProfileName
-
-            // If the name has changed from the previous initialization
-            // then make sure we cleanup the last profile and actor
-            if (nameChanged && previousInitializedId) {
-                // The initialized profile name has changed
-                // so we need to destroy the previous actor
-                destroyActor(previousInitializedId)
-            }
-
-            try {
-                busy = true
-
-                if (nameChanged) {
-                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
-                    profileInProgress.set(trimmedProfileName)
-
-                    const userDataPath = await Platform.getUserDataPath()
-                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
-
-                    initialiseMigrationListeners()
-                }
-
-                dispatch('next')
-            } catch (err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error ? err.error : 'error.global.generic'),
-                })
-            } finally {
-                busy = false
-            }
+    function cleanUpIfPreviouslyInitialized(): void {
+        const previousInitializedId = $newProfile?.id
+        if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
+            destroyActor(previousInitializedId)
         }
     }
 
+    async function initialiseProfile(name: string): Promise<void> {
+        try {
+            busy = true
+            if (nameChanged || hasDeveloperProfileChanged) {
+                storeProfile(name, isDeveloperProfile)
+
+                const path = await getProfileDataPath($newProfile.name)
+                initialise($newProfile.id, path)
+                initialiseMigrationListeners()
+            }
+
+            if(isDeveloperProfile) {
+                openPopup({type: 'confirmDeveloperProfile', props: {
+                    handleContinueClick: () => dispatch('next')
+                }})
+            } else {
+                dispatch('next')
+            }
+
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error ? err.error : 'error.global.generic'),
+            })
+        } finally {
+            busy = false
+        }
+    }
+    
     async function handleBackClick() {
         cleanupSignup()
         cleanupInProgressProfiles()
-
         await disposeNewProfile()
-
         dispatch('previous')
     }
 </script>
@@ -121,12 +105,14 @@
             autofocus
             disabled={busy}
             submitHandler={handleContinueClick} />
-        <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-            <div class="text-left">
-                <Text type="p">{locale('views.profile.developer.label')}</Text>
-                <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-            </div>
-        </ButtonCheckbox>
+        <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                <div class="text-left">
+                    <Text type="p">{locale('views.profile.developer.label')}</Text>
+                    <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
+                </div>
+            </ButtonCheckbox>
+        </CollapsibleBlock>
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

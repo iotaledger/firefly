@@ -7,7 +7,6 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { CallbackFn } from 'shared/lib/typings/utils'
 
     export let locale: Locale
 
@@ -56,12 +55,6 @@
     })
 </script>
 
-<style>
-    .transaction {
-        max-height: 30vh;
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
@@ -99,3 +92,9 @@
         </div>
     {/if}
 </div>
+
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>

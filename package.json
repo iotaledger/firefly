@@ -3,6 +3,7 @@
     "workspaces": [
         "packages/desktop",
         "packages/shared",
+        "packages/mobile",
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
@@ -29,6 +30,8 @@
         "test:shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
-        "lodash": ">=4.17.21"
+        "lodash": ">=4.17.21",
+        "ansi-regex": "5.0.1",
+        "glob-parent": " >=5.1.2"
     }
 }

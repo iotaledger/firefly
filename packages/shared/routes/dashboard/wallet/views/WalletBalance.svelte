@@ -27,31 +27,6 @@
     }
 </script>
 
-<style type="text/scss">
-    wallet-balance {
-        @apply pt-8;
-        padding-bottom: 42px;
-        &.compressed {
-            padding-top: 32px;
-        }
-        &.mobile {
-            padding-bottom: 0px;
-            background: transparent;
-        }
-        .bg-pattern {
-            min-height: 234px;
-            z-index: -1;
-            @apply absolute;
-            @apply w-full;
-            @apply h-full;
-            @apply h-auto;
-            @apply object-cover;
-            @apply top-0;
-            @apply left-0;
-        }
-    }
-</style>
-
 <wallet-balance
     class="relative z-0 bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-xl px-8"
     class:compressed={$walletRoute !== WalletRoutes.Init}
@@ -80,3 +55,28 @@
         {/if}
     {/if}
 </wallet-balance>
+
+<style type="text/scss">
+    wallet-balance {
+        @apply pt-8;
+        padding-bottom: 42px;
+        &.compressed {
+            padding-top: 32px;
+        }
+        &.mobile {
+            padding-bottom: 0px;
+            background: transparent;
+        }
+        .bg-pattern {
+            min-height: 234px;
+            z-index: -1;
+            @apply absolute;
+            @apply w-full;
+            @apply h-full;
+            @apply h-auto;
+            @apply object-cover;
+            @apply top-0;
+            @apply left-0;
+        }
+    }
+</style>

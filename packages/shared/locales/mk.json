@@ -22,15 +22,16 @@
                 "nonFirst": "For now, let's start with your profile name."
             },
             "addMore": "You can add more profiles later.",
+            "advancedOptions": "Advanced options",
             "developer": {
                 "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
             "title": "Конфигурирај паричник",
             "chrysalisTitle": "Chrysalis ажурирање на мрежата",
-            "chrysalisBody": "Почнувајќи од 21 април, корисниците можат да ги мигрираат токените на новата Chrysalis мрежа. Препорачуваме да ги мигрирате постоечките токени најскоро што можете.",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Дознајте повеќе за миграцијата"
         },
         "secure": {
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Обезбедување на искористените адреси...",
-            "body1": "Овој процес ќе трае {minutes, plural, one {1 минута} other {# минути}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Вашиот компјутер ќе работи со целосен капацитет, можеби би сакале да правите нешто друго додека чекате ова да заврши."
         },
         "transferFragmentedFunds": {
@@ -336,9 +337,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "Време на неактивност пред вашите паричници да се заклучат и да бидете одјавени",
-                "durationMinute": "{time, plural, one {1 минута} other {# минути}}",
-                "durationHour": "{time, plural, one {1 час} other {# часа}}"
+                "description": "Време на неактивност пред вашите паричници да се заклучат и да бидете одјавени"
             },
             "changePassword": {
                 "title": "Промени ја лозинката",
@@ -415,10 +414,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "Експорт на состојбата",
-                "description": "Експортирајте ја вашата историјата на трансакции во .csv датотека"
-            },
             "troubleshoot": {
                 "title": "Дијагностика",
                 "description": "Искористете го волшебникот за решавање проблеми за да решите некој чест проблем"
@@ -446,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Ве молиме почекајте {time, plural, one {1 секунда} other {# секунди}}",
-            "incorrectAttempts": "{attempts, plural, one {1 неточен обид} other {# неточни обиди}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +484,48 @@
             "profileModal": {
                 "allSettings": "Сите поставки",
                 "logout": "Одјави се"
+            }
+        },
+        "staking": {
+            "title": "Staking",
+            "welcome": "Welcome to the staking dashboard!",
+            "status": {
+                "upcoming": "Event not started",
+                "commencing": "Pre-staking open",
+                "holdingActive": "Staking in progress",
+                "holdingInactive": "Staking open",
+                "inactive": "Staking not detected",
+                "ended": "Staking ended"
+            },
+            "summary": {
+                "stakedFunds": "Staked funds"
+            },
+            "info": {
+                "upcomingSubheader": "Event has not started",
+                "upcomingHeader": "Check back later",
+                "commencingSubheader": "Get ready for staking",
+                "commencingHeader": "Pre-stake your tokens!",
+                "holdingSubheaderHolding": "Now earning staking rewards",
+                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
+                "holdingHeaderHolding": "{duration} left",
+                "holdingHeaderNotHolding": "Stake your tokens!",
+                "endedSubheader": "Staking has now ended",
+                "endedHeader": "Thank you!",
+                "inactiveHeader": "Try changing node",
+                "inactiveSubheader": "Staking not detected"
+            },
+            "airdrops": {
+                "holding": "Remaining",
+                "commencing": "Until staking begins",
+                "collectedRewards": "Collected rewards",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                }
             }
         }
     },
@@ -538,7 +575,9 @@
         },
         "addressHistory": {
             "title": "Историја на адресата на {name}",
-            "currentBalance": "Актуелен биланс: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Додај јазол",
@@ -598,7 +637,9 @@
         },
         "transaction": {
             "title": "Потврди ја трансакцијата",
-            "body": "Ќе испратите {amount} до"
+            "body": "Ќе испратите {amount} до",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Пронаоѓач на салдото",
@@ -669,6 +710,48 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "profileName": "Profile name:",
+            "accountName": "Account name:",
+            "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Staking has not started yet",
+            "commencingDate": "Staking has not started yet",
+            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "ok": "Ok, I understand"
+        },
+        "stakingManager": {
+            "title": "Staking Management",
+            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "totalFundsStaked": "Total funds staked",
+            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Airdrop Participation",
+            "subtitleStake": "You are about to stake",
+            "subtitleMerge": "You are about to merge",
+            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "estimatedAirdrop": "Estimated rewards"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -724,11 +807,12 @@
         "dropHere": "Спуштете ја вашата дадотека овде",
         "syncAll": "Синхронизирај сè",
         "export": "Експортирај",
+        "exporting": "Exporting",
         "exportNewStronghold": "Експортирајте нов Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Овозможи режим за девелопери",
         "enableSystemNotifications": "Овозможете системски известувања",
-        "exportState": "Експортирај состојба",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Локален proof of work",
         "unlock": "Отклучи",
         "updateFirefly": "Ажурирај го Firefly",
@@ -780,7 +864,17 @@
         "searching": "Се пребарува...",
         "closeFirefly": "Затвори го Firefly",
         "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "migrateAgain": "Migrate another index",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Learn about staking",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "Лозинка",
@@ -811,6 +905,7 @@
         "from": "Од",
         "to": "До",
         "receiveFunds": "Прими ги средствата",
+        "address": "Address",
         "myAddress": "Моја адреса",
         "shareAddress": "Сподели адреса",
         "yourAddress": "Ваша адреса",
@@ -869,6 +964,8 @@
         "transferBroadcasting": "Емитување трансакција",
         "transferComplete": "Трансферот е завршен",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Креирање паричник, ве молиме почекајте...",
         "updatingAccount": "Ажурирање на паричникот, ве молиме почекајте...",
         "accountSyncing": "Паричникот се синхронизира",
@@ -876,6 +973,7 @@
         "passwordUpdating": "Се ажурира лозинката...",
         "passwordSuccess": "Успешно ажурирање на лозинката",
         "passwordFailed": "Неуспешно ажурирање на лозинката",
+        "syncing": "Syncing",
         "syncingAccounts": "Синхронизација на паричниците...",
         "exportingStronghold": "Експортирање на Stronghold...",
         "exportingStrongholdSuccess": "Експортирањето на Stronghold беше успешно",
@@ -896,13 +994,24 @@
         "sendingFrom": "Праќање од {account}",
         "receivedTo": "Примено на {account}",
         "sentFrom": "Испратено од {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "Се прима",
         "sending": "Се испраќа",
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Вклучен ви е Caps Lock",
         "version": "Верзија {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Staking",
+        "unstaking": "Unstaking",
+        "notStaked": "Not staked",
+        "stakedFunds": "Staked funds",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Денес",
@@ -911,6 +1020,15 @@
         "weeksAgo": "пред {time, plural, one {# седмица} other {# седмици}}",
         "monthsAgo": "пред {time, plural, one {# месец} other {# месеци}}",
         "yearsAgo": "пред {time, plural, one {# година} other {# години}}"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Примање {{value}} на {{account}}",
@@ -923,10 +1041,14 @@
         "updateError": "Се случи грешка за време на ажурирањето, ве молиме пробајте повторно",
         "restartInstall": "Рестартирај за да се инсталира",
         "calcMinutesRemaining": "Пресметување на преостанати минути...",
-        "minutesRemaining": "{minutes, plural, one {Преостанува 1 минута} other {Преостануваат # минути}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Ископирано во clipboard",
         "accountsSynchronized": "Синхронизацијата на паричникот е завршена",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -940,8 +1062,11 @@
     },
     "error": {
         "profile": {
-            "length": "Името на вашиот профил не може биде подолго од {length, plural, one {1 карактер} other {# карактери}}.",
-            "duplicate": "Профил со ова име веќе постои."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "Профил со ова име веќе постои.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Лозинките не се совпаѓаат.",
@@ -958,15 +1083,15 @@
             "similar": "Ова е лозинка слична на честите лозинки.",
             "word": "Еден збор е лесен за погодување.",
             "incorrect": "Вашата лозинка е погрешна.",
-            "length": "Вашата лозинка не може да биде подолга од {length, plural, one {1 карактер} other {# карактери}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Вашиот PIN мора да биде {length, plural, one {1 цифра} other {# цифри}} долг.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-овите не се совпаѓаат.",
             "incorrect": "Вашиот тековен PIN е неточен."
         },
         "account": {
-            "length": "Името на вашиот паричник не може да биде подолго од {length, plural, one {1 карактер} other {# карактери}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Морате да го искористите вашиот најскорешен паричник пред да направите нов.",
             "notEmpty": "Морате да го пренесете вашиот баланс пред да го избришете овој паричник.",
             "duplicate": "Веќе постои паричник со тоа име.",
@@ -979,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Адресите треба да се долги {length, plural, one {1 карактер} other {# карактери}}.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Ова е повеќе од достапниот баланс.",
             "amountNoFloat": "Ако единиците се `i` не можете да користите децимални места.",
             "amountInvalidFormat": "Износот изгледа како невалиден број.",
@@ -1006,7 +1131,8 @@
             "unsynced": "Јазолот не е синхронизиран.",
             "noSynced": "Нема достапни синхронизирани јазли.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1021,9 +1147,9 @@
             "invalid": "Фајлот за резервната копија не може да се прочита.",
             "destination": "Дестинацијата на резервната копија не беше валидна.",
             "mnemonic": "Мнемониката не е валидна.",
-            "seedTooShort": "Seed-от треба да содржи 81 карактер, а {length, plural, one {е 1} other {e #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed-от треба да се состои само од карактерите A-Z или 9",
-            "phraseWordCount": "Треба да има 24 збора во вашата фраза за опоравување, тековно има {length, plural, one {еден} other {#}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Непрепознаен збор \"{word}\" во вашата фраза за опоравување",
             "phraseCaseWord": "Зборот \"{word}\" треба да биде напишан со мали букви"
         },
@@ -1038,7 +1164,8 @@
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
@@ -1048,11 +1175,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Unable to find staking event.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "Invalid staking event ID."
         }
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1199,65 @@
             "medium": "Среден",
             "low": "Низок",
             "veryLow": "Многу низок"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Staking has not started yet",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-staking is now open",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Staking is now in progress",
+                "body": "Good job. You will receive rewards every 10 seconds."
+            },
+            "inactiveHolding": {
+                "title": "Staking is now open",
+                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
+            },
+            "inactive": {
+                "title": "No staking events detected",
+                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
+            },
+            "ended": {
+                "title": "Staking has now ended",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Below minimum reward value",
+            "titleMinBalance": "{amount} minimum balance required",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Please continue staking for another {duration}.",
+            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "ID на пораката",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Датум",
+            "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

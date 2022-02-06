@@ -107,6 +107,9 @@ export const isFiatCurrency = (currency: string): boolean =>
  *
  * @param {number | string} data
  * @param {string} currency
+ * @param {number} fiatFixed
+ * @param {number} btcFixed
+ * @param {number} ethFixed
  *
  * @returns {string}
  */

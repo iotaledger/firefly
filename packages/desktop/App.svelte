@@ -1,19 +1,20 @@
 <script lang="typescript">
-    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
-    import { Platform } from 'shared/lib/platform'
+    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import { Platform } from 'shared/lib/platform'
+    import { openPopup,popupState } from 'shared/lib/popup'
+    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
+    import { AppRoute,Tabs } from 'shared/lib/typings/routes'
+    import { onDestroy,onMount } from 'svelte'
     import {
         Appearance,
         Backup,
@@ -35,7 +36,6 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
@@ -82,7 +82,7 @@
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
-                    dashboardRoute.set(Tabs.Settings)
+                    openSettings()
                 }
             } else {
                 settings = true
@@ -127,6 +127,83 @@
         }
     }
 </script>
+
+<TitleBar>
+    <!-- empty div to avoid auto-purge removing dark classes -->
+    <div class="scheme-dark" />
+    {#if !$isLocaleLoaded || splash}
+        <Splash />
+    {:else}
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_}
+            />
+        {/if}
+        <Route route={AppRoute.Welcome}>
+            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Legal}>
+            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Appearance}>
+            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Setup}>
+            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <!--  -->
+        <Route route={AppRoute.Secure}>
+            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Password}>
+            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protect} transition={false}>
+            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Backup} transition={false}>
+            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Import} transition={false}>
+            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Balance}>
+            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Migrate}>
+            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Congratulations}>
+            <Congratulations on:next={routerNext} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Dashboard}>
+            <Dashboard locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Login}>
+            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        </Route>
+        {#if settings}
+            <Settings locale={$_} handleClose={() => (settings = false)} />
+        {/if}
+
+        <ToastContainer />
+    {/if}
+</TitleBar>
 
 <style global type="text/scss">
     @tailwind base;
@@ -224,80 +301,3 @@
         -webkit-user-drag: none;
     }
 </style>
-
-<TitleBar>
-    <!-- empty div to avoid auto-purge removing dark classes -->
-    <div class="scheme-dark" />
-    {#if !$isLocaleLoaded || splash}
-        <Splash />
-    {:else}
-        {#if $popupState.active}
-            <Popup
-                type={$popupState.type}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                locale={$_}
-            />
-        {/if}
-        <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <!-- TODO: fix ledger -->
-        <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.LedgerSetup}>
-            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <!--  -->
-        <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
-        </Route>
-        {#if settings}
-            <Settings locale={$_} handleClose={() => (settings = false)} />
-        {/if}
-
-        <ToastContainer />
-    {/if}
-</TitleBar>

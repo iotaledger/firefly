@@ -15,22 +15,23 @@
         },
         "profile": {
             "title": "Crează un profil",
-            "profileName": "Profile name",
+            "profileName": "Nume profil",
             "body1": "Poți crea mai multe profiluri de utilizator pentru a îți organiza portofelele și pentru a îmbunătăți confidențialitatea.",
             "body2": {
-                "first": "For now, let's start with your first profile name.",
-                "nonFirst": "For now, let's start with your profile name."
+                "first": "Deocamdată, să începem cu primul tău nume de profil.",
+                "nonFirst": "Deocamdată, să începem cu numele de profil."
             },
-            "addMore": "You can add more profiles later.",
+            "addMore": "Puteți adăuga mai multe profiluri mai târziu.",
+            "advancedOptions": "Advanced options",
             "developer": {
-                "label": "Developer profile",
-                "info": "Connect to public and private IOTA networks"
+                "label": "Profil developer",
+                "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
             "title": "Configurează un portofel",
             "chrysalisTitle": "Actualizare rețea Chrysalis",
-            "chrysalisBody": "Începând cu 21 aprilie, utilizatorii pot migra monedele lor în noua rețea Chrysalis. Vă recomandăm să migrați monedele existente cât mai curând posibil.",
+            "chrysalisBody": "Din 21 aprilie 2021, utilizatorii pot migra tokenurile în noua rețea Chrysalis. Vă recomandăm să migrați tokenurile deținute cât mai curând.",
             "learnMore": "Află mai multe despre migrație"
         },
         "secure": {
@@ -51,18 +52,18 @@
             }
         },
         "setupLedger": {
-            "progress1": "Connect your Ledger",
-            "progress2": "Generate address",
-            "progress3": "Switch Ledger app",
-            "progress4": "Transfer funds",
-            "watchVideo": "Watch video guide",
-            "videoGuide": "Ledger migration video guide"
+            "progress1": "Conectează-ți dispozitivul Ledger",
+            "progress2": "Generează adresa",
+            "progress3": "Comutare aplicație Ledger",
+            "progress4": "Transfer fonduri",
+            "watchVideo": "Urmărește ghidul video",
+            "videoGuide": "Ghid video pentru migrarea Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
-            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
-            "action": "Yes, I've installed these apps"
+            "title": "Ați instalat aplicațiile Ledger necesare?",
+            "body1": "Înainte de a continua, trebuie să găsiți și să instalați atât aplicația {legacy}, cât și noua aplicație IOTA prin Ledger Live.",
+            "body2": "Asigurați-vă că firmware-ul Ledger este actualizat. Orice aplicație preinstalată trebuie să fie actualizată la cele mai recente versiuni.",
+            "action": "Da, am instalat aceste aplicații"
         },
         "password": {
             "title": "Creează o parolă",
@@ -121,9 +122,9 @@
             "title": "Configurarea portofelului finalizată",
             "fundsMigrated": "Fonduri migrate",
             "body": "Noul tău portofel este gata de utilizare.",
-            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "softwareMigratedBody": "Ați migrat cu succes fondurile către noua rețea",
+            "fireflyLedgerBody": "Contul dvs Ledger a fost recuperat cu succes și acum puteți continua.",
+            "trinityLedgerBody": "Ați migrat cu succes Ledger în noua rețea.",
             "exportMigration": "Exportă jurnalul migrarii și finalizează configurarea"
         },
         "import": {
@@ -135,8 +136,8 @@
             "importMnemonicDescription": "Introduceți fraza de recuperare pentru a recupera portofelele",
             "importFile": "Am o copie de rezervă a fișierului",
             "importFileDescription": "Încarcă un Seedvault sau un fișier Stronghold",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importLedger": "Am o copie de rezervă a Ledger",
+            "importLedgerDescription": "Restaurați sau migrați un profil Ledger"
         },
         "importFromText": {
             "seed": {
@@ -158,7 +159,7 @@
             "body": "Importă un fişier de rezervă pentru a restaura portofelele personale. Fisierele de rezervă pot fi Stronghold (.stronghold) sau Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
-            "title": "Restore or Migrate your Ledger",
+            "title": "Restaurați sau migrați Ledger-ul dvs",
             "body": "Restore an existing Firefly Ledger profile, or migrate your funds from Trinity.",
             "haveFireflyLedger": "I have a Firefly Ledger backup",
             "haveFireflyLedgerDescription": "Restore a Firefly profile",
@@ -262,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -336,9 +337,7 @@
             },
             "appLock": {
                 "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Schimbă parola",
@@ -415,10 +414,6 @@
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
-            "stateExport": {
-                "title": "Exportare stare",
-                "description": "Exportă istoricul tranzacțiilor tale într-un fișier .csv"
-            },
             "troubleshoot": {
                 "title": "Depanare",
                 "description": "Foloseşte asistentul de depanare pentru a rezolva problemele comune"
@@ -446,8 +441,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Așteaptă {time, plural, one {1 secundă} few {# secunde} other {# secunde}}",
-            "incorrectAttempts": "{attempts, plural, one {1 încercare incorectă} few {# încercări incorecte} other {# încercări incorecte}}"
+            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -489,6 +484,48 @@
             "profileModal": {
                 "allSettings": "Toate setările",
                 "logout": "Deconectează-te"
+            }
+        },
+        "staking": {
+            "title": "Mizare",
+            "welcome": "Bine ați venit la panoul de control pentru mizare!",
+            "status": {
+                "upcoming": "Evenimentul nu a început",
+                "commencing": "Pre-mizarea este deschisa",
+                "holdingActive": "Mizare aflată în curs",
+                "holdingInactive": "Mizare deschisă",
+                "inactive": "Mizare nedetectată",
+                "ended": "Mizarea s-a încheiat"
+            },
+            "summary": {
+                "stakedFunds": "Fonduri mizate"
+            },
+            "info": {
+                "upcomingSubheader": "Evenimentul nu a început",
+                "upcomingHeader": "Întoarceti-va mai târziu",
+                "commencingSubheader": "Pregătește-te pentru mizare",
+                "commencingHeader": "Pre-mizeaza-ti monedele!",
+                "holdingSubheaderHolding": "Acum incasezi recompense din mizare",
+                "holdingSubheaderNotHolding": "Câștigă recompense mizând cu IOTA",
+                "holdingHeaderHolding": "{duration} rămase",
+                "holdingHeaderNotHolding": "Mizeaza-ti monedele!",
+                "endedSubheader": "Mizarea s-a încheiat acum",
+                "endedHeader": "Mulțumim!",
+                "inactiveHeader": "Încercați să schimbați nodul",
+                "inactiveSubheader": "Mizare nedetectată"
+            },
+            "airdrops": {
+                "holding": "Rămase",
+                "commencing": "Până la începerea mizarii",
+                "collectedRewards": "Recompense colectate",
+                "assembly": {
+                    "name": "Assembly",
+                    "description": "Assembly este o rețea multi-lanț, lipsită de permisiuni, de mare amploare, pentru a construi și a implementa contracte inteligente compuse. Assembly este viitorul web3. "
+                },
+                "shimmer": {
+                    "name": "Shimmer",
+                    "description": "Rețeaua de stagii stimulată pentru a avansa inovații majore în IOTA. Orice se întâmplă, se întâmplă. Cum evoluează Shimmer depinde de dumneavoastra."
+                }
             }
         }
     },
@@ -538,7 +575,9 @@
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Balance: {balance}",
+            "internal": "Internal Address",
+            "external": "Deposit Address"
         },
         "node": {
             "titleAdd": "Add a node",
@@ -598,7 +637,9 @@
         },
         "transaction": {
             "title": "Confirmați tranzacția",
-            "body": "You’re about to send {amount} to"
+            "body": "You’re about to send {amount} to",
+            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -669,6 +710,48 @@
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
+        },
+        "exportTransactionHistory": {
+            "title": "Export transaction history",
+            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "profileName": "Profile name:",
+            "accountName": "Account name:",
+            "typePassword": "Type your password to allow exporting"
+        },
+        "stakingNotice": {
+            "upcomingDate": "Mizarea încă nu a început",
+            "commencingDate": "Mizarea încă nu a început",
+            "body": "Prin pre-mizarea fondurilor dumneavoastră înainte de a începe mizarea propriu-zisa, veți începe automat să primiți recompense la începerea mizarii.",
+            "ok": "Ok, am înțeles"
+        },
+        "stakingManager": {
+            "title": "Managementul mizarii",
+            "description": "Atunci când mizati cu un portofel, trimiteți o tranzacție pentru a vă marca aceste fonduri ca fiind „mizate\". Puteti transfera jetoanele în orice moment, dar nu veti continua să primiti recompense in urma mizarii.",
+            "totalFundsStaked": "Total fonduri mizate",
+            "stakedSuccessfully": "Fondurile dumneavoastra au fost mizate din contul {account}.",
+            "unstakedSuccessfully": "Fondurile dumneavoastra au fost scoase din mizare din contul {account}."
+        },
+        "stakingConfirmation": {
+            "title": "Participare la Airdrop",
+            "subtitleStake": "Sunteți pe cale să mizati",
+            "subtitleMerge": "Sunteți pe cale să fuzionați",
+            "bodyStake": "Dacă nu doriţi să participaţi la ambele airdrop-uri, puteţi opta pentru excluderea voluntară de mai jos. Puteti renunţa şi să optati în orice moment.",
+            "bodyMerge": "Fondurile dumneavoastra vor fi alocate pentru {airdrop}. Pentru a schimba în ce airdrop-uri doriți să participați, opriti mizarea pe acest portofel și dati-i drumul din nou.",
+            "estimatedAirdrop": "Recompense estimate"
+        },
+        "shimmer-info": {
+            "title": "About Shimmer",
+            "body1": "Felicitări ati câștigat jetoane SMR ca o recompensă din mizare. Shimmer este o rețea stimulată de stagii pentru a testa îmbunătățiri majore la IOTA.",
+            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "assembly-info": {
+            "title": "About Assembly",
+            "body1": "Felicitări ai câștigat jetoane ASMB ca o recompensă din mizare. Assembly este o rețea multi-lanț pentru implementarea de contracte inteligente scalabile pe IOTA.",
+            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+        },
+        "confirmDeveloperProfile": {
+            "title": "You are creating a developer profile",
+            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
     "charts": {
@@ -724,11 +807,12 @@
         "dropHere": "Eliberează fișierul tău aici",
         "syncAll": "Sync all",
         "export": "Export",
+        "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
@@ -779,8 +863,18 @@
         "searchAgain": "Caută din nou",
         "searching": "Căutare...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generate address",
-        "migrateAgain": "Migrate another index"
+        "generateAddress": "Generează adresa",
+        "migrateAgain": "Migrate another index",
+        "visitWebsite": "Visit website",
+        "howItWorks": "How it works",
+        "learnAboutStaking": "Află mai multe despre mizare",
+        "stake": "Stake",
+        "unstake": "Unstake",
+        "stakeFunds": "Stake funds",
+        "manageStake": "Manage stake",
+        "merge": "Merge",
+        "mergeFunds": "Merge funds",
+        "done": "Done"
     },
     "general": {
         "password": "Parolă",
@@ -811,6 +905,7 @@
         "from": "De la",
         "to": "Către",
         "receiveFunds": "Receive Funds",
+        "address": "Address",
         "myAddress": "My Address",
         "shareAddress": "Partajează o adresă",
         "yourAddress": "Adresa ta",
@@ -869,6 +964,8 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
+        "broadcasting": "Broadcasting",
+        "confirming": "Confirming",
         "creatingAccount": "Creating wallet, please wait...",
         "updatingAccount": "Updating wallet, please wait...",
         "accountSyncing": "Wallet is syncing",
@@ -876,6 +973,7 @@
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
+        "syncing": "Syncing",
         "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
@@ -896,13 +994,24 @@
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "receiving": "Se primește",
         "sending": "Se trimite",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
         "unknown": "Unknown",
-        "none": "None"
+        "none": "None",
+        "staked": "Staked",
+        "unstaked": "Unstaked",
+        "staking": "Mizare",
+        "unstaking": "Oprirea mizarii",
+        "notStaked": "Not staked",
+        "stakedFunds": "Fonduri mizate",
+        "unstakedFunds": "Unstaked funds"
     },
     "dates": {
         "today": "Today",
@@ -911,6 +1020,15 @@
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "times": {
+        "second": "{time, plural, one {# second} other {# seconds}}",
+        "minute": "{time, plural, one {# minute} other {# minutes}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "day": "{time, plural, one {# day} other {# days}}",
+        "week": "{time, plural, one {# week} other {# weeks}}",
+        "month": "{time, plural, one {# month} other {# months}}",
+        "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -923,10 +1041,14 @@
         "updateError": "An error occurred during the update, please try again",
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
         "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
+        "exportTransactionHistory": {
+            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
+            "error": "Unable to export transaction history for {accountAlias}"
+        },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
@@ -940,8 +1062,11 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "duplicate": "A profile with this name already exists.",
+            "delete": {
+                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+            }
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
@@ -958,15 +1083,15 @@
             "similar": "This is similar to a common password.",
             "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "You must use your latest wallet before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -979,7 +1104,7 @@
             "syncing": "There was an error syncing your wallets."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -1006,7 +1131,8 @@
             "unsynced": "The node is not in sync.",
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
-            "forbidden": "This node connection is forbidden."
+            "forbidden": "This node connection is forbidden.",
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1021,9 +1147,9 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
@@ -1038,7 +1164,8 @@
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
             "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected."
+            "disconnected": "Your Ledger device was disconnected.",
+            "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
             "preventClose": "This popup is unable to be closed."
@@ -1048,11 +1175,20 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
+        },
+        "participation": {
+            "cannotUseAccount": "Unable to use the specified account.",
+            "cannotFindStakingEvent": "Evenimentul de mizat nu poate fi găsit.",
+            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
+            "invalidStakingEventId": "ID eveniment de mizare nevalid."
         }
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
+        },
+        "participation": {
+            "noAccounts": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1063,6 +1199,65 @@
             "medium": "Medium",
             "low": "Low",
             "veryLow": "Very low"
+        },
+        "stakingIndicator": {
+            "upcoming": {
+                "title": "Mizarea încă nu a început",
+                "body": "Check back later. The staking event has not begun."
+            },
+            "commencing": {
+                "title": "Pre-mizarea este acum deschisă",
+                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+            },
+            "activeHolding": {
+                "title": "Mizare aflată în curs",
+                "body": "Bună treabă. Veti primi recompense la fiecare 10 secunde."
+            },
+            "inactiveHolding": {
+                "title": "Mizarea este acum deschisă",
+                "body": "Mizati jetoanele IOTA pentru a primi recompense la fiecare 10 secunde."
+            },
+            "inactive": {
+                "title": "Nici un eveniment de mizare detectat",
+                "body": "Deschideti configurarea rețelei în Setări Avansate și asigurati-va că nodul curent are funcția \"Participare\" făcând clic pe \"Vezi informația\"."
+            },
+            "ended": {
+                "title": "Mizarea s-a încheiat acum",
+                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
+                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
+            }
+        },
+        "partiallyStakedFunds": {
+            "title": "New unstaked funds: {amount}",
+            "titleNoFunds": "New unstaked funds",
+            "preBody": "You have received tokens on a staked wallet.",
+            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+        },
+        "stakingMinRewards": {
+            "title": "Sub valoarea minimă a recompensei",
+            "titleMinBalance": "Soldul minim {amount} este necesar",
+            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
+            "continue": "Vă rugăm să continuați să mizati pentru inca {duration}.",
+            "bodyBelowMin": "Acest portofel nu a atins valoarea minimă de recompensă pentru {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Trebuie să mizati pentru inca {duration} să ajungeti la minimum.",
+            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
+            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
+            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        }
+    },
+    "exports": {
+        "transactionHistoryCsv": {
+            "messageId": "Message ID",
+            "internal": "Internal",
+            "rawValue": "Raw Value",
+            "formattedValue": "Formatted Value",
+            "date": "Date",
+            "time": "Time"
+        }
+    },
+    "indicators": {
+        "developerProfileIndicator": {
+            "warningText": "You are currently using a developer profile and are connected to {networkName}"
         }
     }
 }

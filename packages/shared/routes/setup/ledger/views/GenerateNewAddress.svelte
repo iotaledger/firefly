@@ -8,7 +8,7 @@
     } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
 
@@ -43,7 +43,7 @@
                     onSuccess(createAccountResponse) {
                         newAddress = createAccountResponse.payload.addresses[0].address
 
-                        displayAddress()
+                        displayAddress(createAccountResponse.payload.id)
                     },
                     onError(error) {
                         busy = false
@@ -61,9 +61,8 @@
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
-                            newAddress =
-                                getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
-                            displayAddress()
+                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
+                            displayAddress(getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].id)
                         } else {
                             _createAccount($activeProfile.ledgerMigrationCount + 1)
                         }
@@ -82,8 +81,8 @@
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
-    function displayAddress() {
-        api.getMigrationAddress(true, $activeProfile.ledgerMigrationCount, {
+    function displayAddress(accountId: string) {
+        api.getMigrationAddress(true, accountId, {
             onSuccess() {
                 busy = false
 
@@ -129,7 +128,7 @@
             <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
             <Text type="p" secondary classes="mb-12">{locale('views.generateNewLedgerAddress.confirmedBody')}</Text>
             <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-900 rounded-lg p-5 text-center">
-                <div class="bg-green-100 rounded-2xl relative -mt-10 mb-4">
+                <div class="bg-green-500 rounded-2xl relative -mt-10 mb-4">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>

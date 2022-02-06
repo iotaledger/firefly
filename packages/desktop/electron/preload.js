@@ -26,8 +26,19 @@ try {
 
     const Wallet = binding
 
-    contextBridge.exposeInMainWorld('__WALLET__', Wallet)
+    if (process.env.NODE_ENV == 'development') {
+        Wallet.initLogger({
+            color_enabled: true,
+            outputs: [
+                {
+                    name: 'wallet.log',
+                    level_filter: 'debug',
+                },
+            ],
+        })
+    }
 
+    contextBridge.exposeInMainWorld('__WALLET__', Wallet)
     contextBridge.exposeInMainWorld('Electron', ElectronApi)
 } catch (error) {
     ipcRenderer.invoke('handle-error', 'Preload Error', error)

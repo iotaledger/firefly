@@ -1,15 +1,13 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { Icon,Pin,Profile,Text } from 'shared/components'
+    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Platform } from 'shared/lib/platform'
+    import { activeProfile,clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -62,19 +60,19 @@
     }
 
     function onSubmit() {
-        if (get(ongoingSnapshot) === true) {
+        if ($ongoingSnapshot === true) {
             return openSnapshotPopup()
         }
         if (!hasReachedMaxAttempts) {
-            const profile = get(activeProfile)
+            const profile = $activeProfile
 
             isBusy = true
 
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Platform.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
+                        return getProfileDataPath(profile.name).then((path) => {
+                            initialise(profile.id, path)
                             api.setStoragePassword(pinCode, {
                                 onSuccess() {
                                     dispatch('next')
@@ -112,6 +110,7 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
+            clearActiveProfile()
             dispatch('previous')
         }
     }
@@ -122,39 +121,35 @@
     })
 </script>
 
-{#if $mobile}
-    <div>foo</div>
-{:else}
-    <div class="relative w-full h-full bg-white dark:bg-gray-900">
-        <button
-            data-label="back-button"
-            class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
-            disabled={hasReachedMaxAttempts}
-            on:click={handleBackClick}>
-            <div class="flex items-center space-x-3">
-                <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{locale('general.profiles')}</Text>
-            </div>
-        </button>
-        <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-            <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-                <Profile name={$activeProfile?.name} bgColor="blue" />
-                <Pin
-                    bind:this={pinRef}
-                    bind:value={pinCode}
-                    classes="mt-10 {shake && 'animate-shake'}"
-                    on:submit={onSubmit}
-                    disabled={hasReachedMaxAttempts || isBusy}
-                    autofocus />
-                <Text type="p" bold classes="mt-4 text-center">
-                    {attempts > 0 ? locale('views.login.incorrectAttempts', {
-                              values: { attempts: attempts.toString() },
-                          }) : locale('actions.enterYourPin')}
-                </Text>
-                {#if hasReachedMaxAttempts}
-                    <Text error classes="mt-6">{buttonText}</Text>
-                {/if}
-            </div>
+<div class="relative w-full h-full bg-white dark:bg-gray-900">
+    <button
+        data-label="back-button"
+        class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+        disabled={hasReachedMaxAttempts}
+        on:click={handleBackClick}>
+        <div class="flex items-center space-x-3">
+            <Icon icon="arrow-left" classes="text-blue-500" />
+            <Text type="h5">{locale('general.profiles')}</Text>
+        </div>
+    </button>
+    <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
+        <div class="w-96 flex flex-col flex-wrap items-center mb-20">
+            <Profile name={$activeProfile?.name} bgColor="blue" />
+            <Pin
+                bind:this={pinRef}
+                bind:value={pinCode}
+                classes="mt-10 {shake && 'animate-shake'}"
+                on:submit={onSubmit}
+                disabled={hasReachedMaxAttempts || isBusy}
+                autofocus />
+            <Text type="p" bold classes="mt-4 text-center">
+                {attempts > 0 ? locale('views.login.incorrectAttempts', {
+                            values: { attempts: attempts.toString() },
+                        }) : locale('actions.enterYourPin')}
+            </Text>
+            {#if hasReachedMaxAttempts}
+                <Text error classes="mt-6">{buttonText}</Text>
+            {/if}
         </div>
     </div>
-{/if}
+</div>

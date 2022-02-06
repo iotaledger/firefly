@@ -1,6 +1,6 @@
 import type { Node, NodeAuth } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
-import type { Network, NetworkConfig } from './typings/network'
+import type { Network, NetworkConfig, NetworkId } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
 import { isNewNotification, showAppNotification } from './notifications'
@@ -12,10 +12,12 @@ import { activeProfile } from './profile'
 export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
 export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
 export const CHRYSALIS_MAINNET_BECH32_HRP = 'iota'
+export const CHRYSALIS_MAINNET_EXPLORER = 'https://explorer.iota.org/mainnet'
 
 export const CHRYSALIS_DEVNET_ID = 'chrysalis-devnet'
 export const CHRYSALIS_DEVNET_NAME = 'Chrysalis Devnet'
 export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
+export const CHRYSALIS_DEVNET_EXPLORER = 'https://explorer.iota.org/devnet'
 
 /**
  * Given the type of IOTA network, construct the default official network
@@ -30,7 +32,7 @@ export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
  */
 export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
     network: getOfficialNetwork(type),
-    nodes: getOfficialNodes(type),
+    nodes: setRandomPrimaryNode(getOfficialNodes(type)),
     automaticNodeSelection: true,
     includeOfficialNodes: true,
     localPow: true,
@@ -86,7 +88,11 @@ const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
         case NetworkType.ChrysalisDevnet:
             return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
         case NetworkType.ChrysalisMainnet:
-            return ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe']
+            return [
+                'https://chrysalis-nodes.iota.org',
+                'https://chrysalis-nodes.iota.cafe',
+                'https://mainnet-node.tanglebay.com',
+            ]
         default:
             return []
     }
@@ -99,6 +105,17 @@ const getOfficialNode = (type: NetworkType, url: string): Node => ({
     isPrimary: false,
     isDisabled: false,
 })
+
+export const getOfficialExplorer = (networkId: NetworkId): string => {
+    switch (networkId) {
+        case CHRYSALIS_MAINNET_ID:
+            return CHRYSALIS_MAINNET_EXPLORER
+        case CHRYSALIS_DEVNET_ID:
+            return CHRYSALIS_DEVNET_EXPLORER
+        default:
+            return ''
+    }
+}
 
 /**
  * Determines whether the type of a given network is "official", meaning
@@ -334,8 +351,17 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
 }
 
 const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
-    const officialNodes = getOfficialNodes(networkType)
-    const nonOfficialNodes = nodes.filter((n) => !officialNodes.map((_n) => _n.url).includes(n.url))
+    let officialNodes = getOfficialNodes(networkType)
+
+    // If an official node is currently set as primary then keep it as primary
+    officialNodes = officialNodes.map((n) =>
+        Object.assign(
+            n,
+            nodes.find((p) => p.isPrimary && n.url === p.url)
+        )
+    )
+
+    const nonOfficialNodes = nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
 
     return [...officialNodes, ...nonOfficialNodes]
 }
@@ -355,12 +381,16 @@ export const ensureSinglePrimaryNode = (nodes: Node[]): Node[] => {
 
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
-        const randIdx = Math.floor(Math.random() * nodes.length)
-        return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
+        return setRandomPrimaryNode(nodes)
     } else if (numPrimaryNodes === 1) {
         return nodes
     } else if (numPrimaryNodes > 1) {
         const activeNode = nodes.find((n) => n.isPrimary)
         return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
     }
+}
+
+const setRandomPrimaryNode = (nodes: Node[]): Node[] => {
+    const randIdx = Math.floor(Math.random() * nodes.length)
+    return nodes.map((n, idx) => ({ ...n, isPrimary: idx === randIdx }))
 }

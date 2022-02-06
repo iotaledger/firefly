@@ -59,12 +59,6 @@
     }
 </script>
 
-<style type="text/scss">
-    img {
-        width: 196px;
-    }
-</style>
-
 <div class="flex w-full flex-row flex-wrap">
     <Text type="h4" classes="mb-5">
         {lastBackupDate ? locale('popups.backup.title', {
@@ -92,7 +86,7 @@
         <Text smaller secondary>{locale('popups.backup.backupWarning')}</Text>
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
-        <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleBackupClick}>
+        <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit|preventDefault={handleBackupClick}>
             <Password
                 classes="w-full mb-5"
                 bind:value={password}
@@ -102,7 +96,7 @@
                 placeholder={locale('general.password')}
                 autofocus 
                 error={error} />
-            <div class="flex flex-row justify-between w-full space-x-4 px-8">
+            <div class="flex flex-row justify-between w-full space-x-4">
                 <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>{locale('actions.cancel')}</Button>
                 <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0 || busy}>
                     {#if busy}
@@ -115,3 +109,9 @@
         </form>
     </div>
 </div>
+
+<style type="text/scss">
+    img {
+        width: 196px;
+    }
+</style>

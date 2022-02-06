@@ -9,10 +9,9 @@
         formatCurrency,
         isFiatCurrency,
         parseCurrency,
-        replaceCurrencyDecimal,
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
-    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
+    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
@@ -22,7 +21,6 @@
 
     export let amount = undefined
     export let unit: AmountUnit = Unit.Mi
-    export let label = undefined
     export let placeholder = undefined
     export let classes = ''
     export let error = ''
@@ -31,9 +29,8 @@
 
     export let onMaxClick = (): void => {}
 
-    const currency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-    const Units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
-    const MAX_VALUE = 2_779_530_283_000_000
+    const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD as AmountUnit
+    const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
 
     let showDropdown = false
 
@@ -51,14 +48,14 @@
             if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
                 const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)
-                if (rawAmount > MAX_VALUE) {
-                    amount = formatUnitPrecision(MAX_VALUE, unit as Unit, false)
+                if (rawAmount > MAX_NUM_IOTAS) {
+                    amount = formatUnitPrecision(MAX_NUM_IOTAS, unit as Unit, false)
                 }
             } else {
                 const rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-                if (rawAmount > MAX_VALUE) {
+                if (rawAmount > MAX_NUM_IOTAS) {
                     amount = convertToFiat(
-                        MAX_VALUE,
+                        MAX_NUM_IOTAS,
                         $currencies[CurrencyTypes.USD],
                         $exchangeRates[currency]
                     ).toString()
@@ -74,7 +71,7 @@
             const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
             const fiatAmount = convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
-            return fiatAmount === 0 ? replaceCurrencyDecimal('< 0.01') : formatCurrency(fiatAmount)
+            return fiatAmount === 0 ? rawAmount === 0 ? formatCurrency(0) : '< ' + formatCurrency(0.01) : formatCurrency(fiatAmount)
         }
 
         return convertAmount(_amount, undefined, _convert)
@@ -92,10 +89,8 @@
     }
 
     const convertAmount = (_amount, _unit, convertFn) => {
-        if (!amount) return null
-
         const amountAsFloat = parseCurrency(_amount, _unit)
-        if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) return null
+        if (Number.isNaN(amountAsFloat)) return null
 
         return convertFn(amountAsFloat)
     }
@@ -104,32 +99,7 @@
         showDropdown = false
     }
 
-    const onUnitClick = (toUnit: AmountUnit) => {
-        updateAmount(unit, toUnit)
-        unit = toUnit
-    }
-
-    const updateAmount = (fromUnit: AmountUnit, toUnit: AmountUnit) => {
-        if (amount.length <= 0 || fromUnit === toUnit) return
-
-        // IOTA -> FIAT
-        if (isFiatCurrency(toUnit)) {
-            amount = convertAmountToFiat(amount).slice(2)
-        } else {
-            let rawAmount
-
-            // FIAT -> IOTA
-            if (isFiatCurrency(fromUnit)) {
-                rawAmount = convertFromFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
-            }
-            // IOTA -> IOTA
-            else {
-                rawAmount = changeUnits(parseCurrency(amount), fromUnit as Unit, Unit.i)
-            }
-
-            amount = formatUnitPrecision(rawAmount, toUnit as Unit, false)
-        }
-    }
+    const onUnitClick = (toUnit: AmountUnit) => { unit = toUnit }
 
     const focusItem = (itemId) => {
         const elem = document.getElementById(itemId)
@@ -162,7 +132,7 @@
             } else if (e.key === 'Enter') {
                 if (focusedItem) {
                     const idx = [...navContainer.children].indexOf(focusedItem)
-                    onUnitClick(Units[idx])
+                    onUnitClick(units[idx])
                 }
             }
         }
@@ -187,29 +157,11 @@
     const getMaxDecimals = (_unit: AmountUnit) => (isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp)
 </script>
 
-<style type="text/scss">
-    amount-input {
-        nav {
-            &.dropdown {
-                @apply opacity-100;
-                @apply pointer-events-auto;
-            }
-        }
-
-        &.disabled {
-            @apply pointer-events-none;
-            actions {
-                @apply opacity-50;
-            }
-        }
-    }
-</style>
-
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={amountForLabel ?? (label || locale('general.amount'))}
+        label={amountForLabel || locale('general.amount')}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}
@@ -238,7 +190,7 @@
             <nav
                 class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown ? 'dropdown' : ''}"
                 bind:this={navContainer}>
-                {#each Units as _unit}
+                {#each units as _unit}
                     <button
                         id={_unit}
                         class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
@@ -255,3 +207,22 @@
         </button>
     </actions>
 </amount-input>
+
+<style type="text/scss">
+    amount-input {
+      nav {
+        &.dropdown {
+          @apply opacity-100;
+          @apply pointer-events-auto;
+        }
+      }
+  
+      &.disabled {
+        @apply pointer-events-none;
+        actions {
+          @apply opacity-50;
+        }
+      }
+    }
+  </style>
+  

@@ -35,7 +35,7 @@
         <Text type="h2">{locale('views.backupWallet.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit={onSubmit} id="backup-form">
+        <form on:submit|preventDefault={onSubmit} id="backup-form">
             <Text type="p" secondary classes="mb-8">{locale('views.backupWallet.body1')}</Text>
             <Password bind:value={confirmPassword} {locale} autofocus disabled={busy} showRevealToggle classes="mb-8" />
             <Text type="p" secondary classes="mb-4">{locale('views.backupWallet.body2')}</Text>

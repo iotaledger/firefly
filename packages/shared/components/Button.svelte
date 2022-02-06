@@ -4,12 +4,14 @@
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
 
-    export let events = {}
+    export let events = []
 
     export let secondary = false
     export let disabled = false
+    export let caution = false
     export let warning = false
     export let active = false
+    export let outline = false
     export let icon = undefined
     export let iconReverse = false
     export let xl = false
@@ -37,6 +39,94 @@
     })
 </script>
 
+{#if xl}
+    <button
+        {type}
+        {form}
+        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:active
+        class:with-icon={icon}
+        class:darkmode={darkModeEnabled}
+        style={inlineStyle}
+        {disabled}
+        bind:this={buttonElement}>
+        <Icon classes="mb-1" {icon} />
+        <span class="text-12 leading-140">
+            <slot />
+        </span>
+    </button>
+{:else}
+    <button
+        {type}
+        {form}
+        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:caution
+        class:warning
+        class:medium
+        class:small
+        class:outline
+        class:with-icon={icon}
+        class:iconReverse
+        class:active
+        class:darkmode={darkModeEnabled}
+        class:showHoverText
+        style={inlineStyle}
+        {disabled}
+        bind:this={buttonElement}>
+        {#if icon}
+            {#if small}
+                {#if iconReverse}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <div class="absolute left-0 flex items-center">
+                                <Icon width="16" height="16" classes="mr-4" {icon} />
+                            </div>
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                        </div>
+                    </div>
+                {:else}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                            <div class="absolute right-0 flex items-center">
+                                <Icon
+                                    width={showHoverText ? 20 : 16}
+                                    height={showHoverText ? 20 : 16}
+                                    classes="ml-4 showHoverText"
+                                    {icon} />
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+            {:else if iconOnly}
+                <Icon width="24" height="24" {icon} />
+            {:else}
+                <div class="relative flex flex-row justify-between">
+                    <div class="relative flex items-center flex-1">
+                        <div class="absolute left-0 flex items-center">
+                            <Icon classes="mr-4" {icon} />
+                        </div>
+                        <span class="font-bold text-12 leading-140"><slot /></span>
+                    </div>
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
+                            <Icon icon="chevron-right" classes="right" />
+                        </div>
+                    {/if}
+                </div>
+            {/if}
+        {:else}
+            <span class="text-12 leading-140"><slot /></span>
+        {/if}
+    </button>
+{/if}
+
 <style type="text/scss">
     button {
         @apply bg-blue-500;
@@ -57,6 +147,34 @@
             &:active {
                 @apply bg-blue-700;
             }
+            &.caution {
+                @apply bg-yellow-600;
+                min-width: 100px;
+                span {
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-yellow-700;
+                }
+                &:active,
+                &:focus {
+                    @apply bg-yellow-800;
+                }
+                &:disabled {
+                    @apply pointer-events-none;
+                    @apply bg-gray-200;
+                    span {
+                        @apply text-gray-500;
+                    }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
+                    }
+                }
+            }
             &.warning {
                 @apply bg-red-500;
                 min-width: 100px;
@@ -75,6 +193,13 @@
                     @apply bg-gray-200;
                     span {
                         @apply text-gray-500;
+                    }
+                    &.darkmode {
+                        @apply bg-gray-700;
+                        @apply bg-opacity-10;
+                        span {
+                            @apply text-gray-700;
+                        }
                     }
                 }
             }
@@ -134,6 +259,35 @@
                     span {
                         @apply text-gray-700;
                     }
+                }
+            }
+        }
+        &.outline {
+            @apply bg-opacity-0;
+            @apply border-2;
+            span {
+                @apply text-blue-500;
+            }
+            &.secondary {
+                @apply border-white;
+                span {
+                    @apply text-white;
+                }
+            }
+            &.caution {
+                span {
+                    @apply text-yellow-600;
+                }
+            }
+            &.warning {
+                span {
+                    @apply text-red-500;
+                }
+            }
+            &:hover {
+                @apply border-opacity-0;
+                span {
+                    @apply text-gray-900;
                 }
             }
         }
@@ -328,89 +482,3 @@
         }
     }
 </style>
-
-{#if xl}
-    <button
-        {type}
-        {form}
-        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
-        use:bindEvents={events}
-        on:click={onClick}
-        class:secondary
-        class:active
-        class:with-icon={icon}
-        class:darkmode={darkModeEnabled}
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}>
-        <Icon classes="mb-1" {icon} />
-        <span class="text-12 leading-140">
-            <slot />
-        </span>
-    </button>
-{:else}
-    <button
-        {type}
-        {form}
-        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
-        use:bindEvents={events}
-        on:click={onClick}
-        class:secondary
-        class:warning
-        class:medium
-        class:small
-        class:with-icon={icon}
-        class:iconReverse
-        class:active
-        class:darkmode={darkModeEnabled}
-        class:showHoverText
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}>
-        {#if icon}
-            {#if small}
-                {#if iconReverse}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <div class="absolute left-0 flex items-center">
-                                <Icon width="16" height="16" classes="mr-4" {icon} />
-                            </div>
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                        </div>
-                    </div>
-                {:else}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                            <div class="absolute right-0 flex items-center">
-                                <Icon
-                                    width={showHoverText ? 20 : 16}
-                                    height={showHoverText ? 20 : 16}
-                                    classes="ml-4 showHoverText"
-                                    {icon} />
-                            </div>
-                        </div>
-                    </div>
-                {/if}
-            {:else if iconOnly}
-                <Icon width="24" height="24" {icon} />
-            {:else}
-                <div class="relative flex flex-row justify-between">
-                    <div class="relative flex items-center flex-1">
-                        <div class="absolute left-0 flex items-center">
-                            <Icon classes="mr-4" {icon} />
-                        </div>
-                        <span class="font-bold text-12 leading-140"><slot /></span>
-                    </div>
-                    {#if !disabled}
-                        <div class="absolute right-0 flex items-center h-full">
-                            <Icon icon="chevron-right" classes="right" />
-                        </div>
-                    {/if}
-                </div>
-            {/if}
-        {:else}
-            <span class="text-12 leading-140"><slot /></span>
-        {/if}
-    </button>
-{/if}

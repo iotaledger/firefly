@@ -36,21 +36,6 @@
     }
 </script>
 
-<style type="text/scss">
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        @apply m-0;
-    }
-
-    button {
-        border-radius: 10px 0 0 10px;
-        &:nth-last-of-type(1) {
-            border-radius: 0 10px 10px 0;
-        }
-    }
-</style>
-
 <div class="flex flex-row {disabled && 'opacity-50'} {classes}">
     <button
         {disabled}
@@ -78,3 +63,18 @@
 {#if error}
     <Error {error} />
 {/if}
+
+<style type="text/scss">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        @apply m-0;
+    }
+
+    button {
+        border-radius: 10px 0 0 10px;
+        &:nth-last-of-type(1) {
+            border-radius: 0 10px 10px 0;
+        }
+    }
+</style>

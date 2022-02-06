@@ -1,4 +1,10 @@
-import type { Account, AccountToCreate, Balance, SyncedAccount } from './account'
+import type {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationEvent,
+    ParticipationOverviewResponse,
+} from 'shared/lib/participation/types'
+import type { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
 import type { Address } from './address'
 import type { GetMigrationAddressResponse } from './bridge'
 import type { ClientOptions } from './client'
@@ -31,6 +37,10 @@ export interface IWalletApi {
     verifyMnemonic(
         mnemonic: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+    getAccount(
+        accountId: AccountIdentifier,
+        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
     )
     getAccounts(callbacks: {
         onSuccess: (response: Event<Account[]>) => void
@@ -130,7 +140,7 @@ export interface IWalletApi {
         newPinCode: string,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
-    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
+    deleteStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
     setClientOptions(
         clientOptions: ClientOptions,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
@@ -214,7 +224,7 @@ export interface IWalletApi {
     )
     getMigrationAddress(
         prompt: boolean,
-        accountIndex: number,
+        accountIdentifier: AccountIdentifier,
         callbacks: {
             onSuccess: (response: Event<GetMigrationAddressResponse>) => void
             onError: (err: ErrorEventPayload) => void
@@ -254,5 +264,39 @@ export interface IWalletApi {
     getLegacyAddressChecksum(
         address: string,
         callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+    )
+
+    // Participation (voting / staking)
+    getParticipationOverview(callbacks: {
+        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    getParticipationEvents(callbacks: {
+        onSuccess: (response: Event<ParticipationEvent[]>) => void
+        onError: (err: ErrorEventPayload) => void
+    })
+    participate(
+        accountId: string,
+        participations: Participation[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    stopParticipating(
+        accountId: string,
+        eventIds: string[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
+    participateWithRemainingFunds(
+        accountId: string,
+        participations: Participation[],
+        callbacks: {
+            onSuccess: (response: Event<ParticipateResponsePayload>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
     )
 }

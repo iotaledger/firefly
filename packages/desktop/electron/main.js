@@ -8,7 +8,7 @@ const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
 /**
- * Set AppUserModelID for Windows notifications functionallity
+ * Set AppUserModelID for Windows notifications functionality
  */
 app.setAppUserModelId('org.iota.firefly')
 
@@ -116,21 +116,31 @@ if (app.isPackaged) {
  */
 function isUrlAllowed(targetUrl) {
     const externalAllowlist = [
-        'privacy@iota.org',
-        'iota.org',
-        'github.com/iotaledger/firefly/issues',
-        'discord.iota.org',
+        // IOTA Foundation
+        'blog.iota.org',
         'chrysalis.iota.org',
         'chrysalis.docs.iota.org',
+        'discord.iota.org',
         'firefly.iota.org',
-        'blog.iota.org',
+        'iota.org',
+        'privacy@iota.org',
+        'wiki.iota.org',
+        'explorer.iota.org',
+
+        // Assembly / Shimmer
+        'assembly.sc',
+        'shimmer.network',
+
+        // GitHub
+        'github.com/iotaledger/firefly/issues',
+
+        // Other
         'support.ledger.com',
     ]
-
     const url = new URL(targetUrl)
     const domain = url.hostname.replace('www.', '').replace('mailto:', '')
 
-    return externalAllowlist.indexOf(domain) > -1 || externalAllowlist.indexOf(domain + url.pathname) > -1
+    return externalAllowlist.includes(domain) || externalAllowlist.includes(domain + url.pathname)
 }
 
 /**
