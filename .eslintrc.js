@@ -8,7 +8,7 @@ const eslintRules = {
     'arrow-spacing': 'error',
     'eol-last': 'error',
     'func-call-spacing': 'error',
-    indent: 'off', // OFF b/c causes problems between Prettier and ESLint
+    'indent': 'off', // OFF b/c causes problems between Prettier and ESLint
     'linebreak-style': 'off', // OFF b/c Windows (Git) puts CRLF line endings
     'missing-declaration': 'off', // OFF b/c throws errors on imports / require statements
     'multiline-ternary': 'off', // OFF b/c causes problems between Prettier and ESLint
@@ -38,10 +38,14 @@ const eslintRules = {
     'prefer-arrow-callback': 'warn',
     'prefer-const': 'warn',
     'prefer-destructuring': 'off', // OFF b/c it's not really correct
-    quotes: ['error', 'single'],
-    semi: 'off', // OFF b/c we aren't using semicolons
+    'quotes': ['error', 'single'],
+    'semi': 'off', // OFF b/c we aren't using semicolons
     'space-before-function-paren': 'off', // OFF b/c we aren't using spaces before function parameters / signatures
     'spaced-comment': 'error',
+}
+
+const eslintRulesOnlyTypescript = {
+    'no-undef': 'off' // Typescript handles undefined variables better than eslint
 }
 
 const typescriptEslintRules = {
@@ -112,6 +116,7 @@ module.exports = {
             plugins: ['@typescript-eslint', 'svelte3'],
             rules: {
                 ...eslintRules,
+                ...eslintRulesOnlyTypescript,
                 ...typescriptEslintRules,
             },
             settings: svelteSettings,
@@ -122,6 +127,7 @@ module.exports = {
             settings: svelteSettings,
             rules: {
                 ...eslintRules,
+                ...eslintRulesOnlyTypescript,
                 ...typescriptEslintRules,
                 ...svelteRules,
             }

@@ -11,6 +11,7 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
+    import { startQRScanner } from 'shared/lib/device'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -40,6 +41,7 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { mobile } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -62,7 +64,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    const addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    const addressPrefix = ($account ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
     let addressError = ''
     let toError = ''
     let amountRaw
@@ -458,6 +460,19 @@
         updateFromSendParams(s)
     })
 
+    const onQRClick = (): void => {
+        const onSuccess = (result: string) => {
+            address = result
+        }
+        const onError = () => {
+            showAppNotification({
+                type: 'error',
+                message: locale('error.global.generic'),
+            })
+        }
+        void startQRScanner(onSuccess, onError)
+    }
+
     onMount(() => {
         updateFromSendParams($sendParams)
     })
@@ -467,22 +482,6 @@
         sendSubscription()
     })
 </script>
-
-<style type="text/scss">
-    button.active {
-        @apply relative;
-        &:after {
-            content: '';
-            @apply bg-blue-500;
-            @apply w-full;
-            @apply rounded;
-            @apply h-0.5;
-            @apply absolute;
-            @apply -bottom-2.5;
-            @apply left-0;
-        }
-    }
-</style>
 
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
@@ -515,9 +514,16 @@
                     </button>
                 {/if}
             </div>
-            <button on:click={handleBackClick}>
-                <Icon icon="close" classes="text-gray-800 dark:text-white" />
-            </button>
+            <div class="flex flex-row space-x-4">
+                {#if $mobile}
+                    <button on:click={onQRClick}>
+                        <Icon icon="qr" classes="text-blue-500" />
+                    </button>
+                {/if}
+                <button on:click={handleBackClick}>
+                    <Icon icon="close" classes="text-gray-800 dark:text-white" />
+                </button>
+            </div>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
@@ -583,3 +589,19 @@
             percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
     {/if}
 </div>
+
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>

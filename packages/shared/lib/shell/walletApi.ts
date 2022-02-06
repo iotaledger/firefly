@@ -1,4 +1,11 @@
 import Validator from 'shared/lib/validator'
+import { ResponseTypes } from '../typings/bridge'
+import { ErrorType } from '../typings/events'
+import { logError } from './errorLogger'
+import { getErrorMessage } from './walletErrors'
+import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { Platform } from 'shared/lib/platform'
+import { NodePlugin } from '../typings/node'
 import type {
     CreatedAccountResponse,
     LatestAddressResponse,
@@ -7,17 +14,10 @@ import type {
     SetStrongholdPasswordResponse,
     SyncAccountsResponse,
 } from '../typings/bridge'
-import { ResponseTypes } from '../typings/bridge'
-import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
-import { ErrorType } from '../typings/events'
-import { logError } from './errorLogger'
-import { getErrorMessage } from './walletErrors'
-import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
-import { Platform } from 'shared/lib/platform'
-import { NodePlugin } from '../typings/node'
 import type { IWalletApi } from 'shared/lib/typings/walletApi'
+import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 
-export let WALLET = window['__WALLET__']
+export const WALLET = window['__WALLET__']
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -81,7 +81,7 @@ const apiToResponseTypeMap = {
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
     setAlias: ResponseTypes.UpdatedAlias,
-    removeStorage: ResponseTypes.DeletedStorage,
+    deleteStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     getLedgerDeviceStatus: ResponseTypes.LedgerStatus,

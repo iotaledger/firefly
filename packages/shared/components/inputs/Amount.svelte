@@ -157,24 +157,6 @@
     const getMaxDecimals = (_unit: AmountUnit) => (isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp)
 </script>
 
-<style type="text/scss">
-  amount-input {
-    nav {
-      &.dropdown {
-        @apply opacity-100;
-        @apply pointer-events-auto;
-      }
-    }
-
-    &.disabled {
-      @apply pointer-events-none;
-      actions {
-        @apply opacity-50;
-      }
-    }
-  }
-</style>
-
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
@@ -225,3 +207,22 @@
         </button>
     </actions>
 </amount-input>
+
+<style type="text/scss">
+    amount-input {
+      nav {
+        &.dropdown {
+          @apply opacity-100;
+          @apply pointer-events-auto;
+        }
+      }
+  
+      &.disabled {
+        @apply pointer-events-none;
+        actions {
+          @apply opacity-50;
+        }
+      }
+    }
+  </style>
+  

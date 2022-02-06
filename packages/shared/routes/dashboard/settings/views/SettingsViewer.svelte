@@ -51,7 +51,7 @@
         }
     }
 
-    function scrollIntoView(id, options = null) {
+    function scrollIntoView(id: string, options = null) {
         if (id) {
             const elem = document.getElementById(id)
             if (elem) {

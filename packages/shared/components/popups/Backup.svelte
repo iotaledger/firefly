@@ -59,12 +59,6 @@
     }
 </script>
 
-<style type="text/scss">
-    img {
-        width: 196px;
-    }
-</style>
-
 <div class="flex w-full flex-row flex-wrap">
     <Text type="h4" classes="mb-5">
         {lastBackupDate ? locale('popups.backup.title', {
@@ -115,3 +109,9 @@
         </form>
     </div>
 </div>
+
+<style type="text/scss">
+    img {
+        width: 196px;
+    }
+</style>

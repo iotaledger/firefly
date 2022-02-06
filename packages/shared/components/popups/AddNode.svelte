@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
@@ -10,12 +11,12 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
-    import { Network } from 'shared/lib/typings/network'
     import { activeProfile } from 'shared/lib/profile'
     import { updateNetworkStatus } from '../../lib/networkStatus'
-    import { get } from 'svelte/store'
+
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
+    import type { Network } from 'shared/lib/typings/network'
 
     export let locale: Locale
 

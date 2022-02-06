@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -49,7 +49,7 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair
+        addMessagesPair,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -69,7 +69,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -314,10 +313,10 @@
         }
     }
 
-    async function onCreateAccount(alias: string, onComplete) {
+    async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias)
+                const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 walletRoute.set(WalletRoutes.Init)
@@ -486,7 +485,7 @@
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
-        if ($activeProfile) {
+        if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
                 loadAccounts()
             }
@@ -512,12 +511,6 @@
         }
     })
 </script>
-
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
@@ -586,3 +579,9 @@
         </div>
     {/if}
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>

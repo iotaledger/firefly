@@ -83,7 +83,7 @@ export const login = (): void => {
 
  * Logout from current profile
  */
-export const logout = (_clearActiveProfile: boolean = false): Promise<void> =>
+export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
     new Promise<void>((resolve) => {
         const _activeProfile = get(activeProfile)
 
@@ -107,17 +107,18 @@ export const logout = (_clearActiveProfile: boolean = false): Promise<void> =>
 
             clearSendParams()
             closePopup(true)
+            loggedIn.set(false)
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
             resetRouter()
 
-            loggedIn.set(false)
-
             resolve()
         }
 
-        if (get(isSoftwareProfile) && !get(isStrongholdLocked)) {
+        // no need to lock strong hold if we are logging out after deleting a profile
+        // or we are not using a software profile
+        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
                 onSuccess() {
                     _cleanup()

@@ -21,19 +21,6 @@
         $stakingEventState === ParticipationEventState.Holding
 </script>
 
-<style>
-    .pulse {
-        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-    @keyframes -ping {
-        30%,
-        100% {
-            transform: scale(1.5);
-            opacity: 0;
-        }
-    }
-</style>
-
 {#if showIndicator}
     <div class="rounded-2xl bg-white bg-opacity-20 pl-2 pr-3 py-1 flex flex-row space-x-2 items-center">
         <span class="relative flex justify-center items-center h-3 w-3">
@@ -49,3 +36,16 @@
         </Text>
     </div>
 {/if}
+
+<style>
+    .pulse {
+        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes -ping {
+        30%,
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>

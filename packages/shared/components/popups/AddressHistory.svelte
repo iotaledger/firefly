@@ -26,12 +26,6 @@
     }
 </script>
 
-<style>
-    .history {
-        max-height: 30vh;
-    }
-</style>
-
 <div class="mb-5">
     <Text type="h4">{locale('popups.addressHistory.title', { values: { name: $account.alias } })}</Text>
 </div>
@@ -53,3 +47,9 @@
 <div class="flex w-full justify-center pt-8">
     <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
 </div>
+
+<style>
+    .history {
+        max-height: 30vh;
+    }
+</style>

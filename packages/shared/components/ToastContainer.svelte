@@ -14,6 +14,16 @@
     }))
 </script>
 
+<toast-container class="flex flex-col relative z-20 {$mobile ? 'mobile-container' : 'desktop-container'}">
+    <ul class="space-y-2">
+        {#each toasts as toast}
+            <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
+                <Toast {...toast} />
+            </li>
+        {/each}
+    </ul>
+</toast-container>
+
 <style type="text/scss">
     .mobile-container {
         position: absolute;
@@ -29,13 +39,3 @@
         width: 400px;
     }
 </style>
-
-<toast-container class="flex flex-col relative z-20 {$mobile ? 'mobile-container' : 'desktop-container'}">
-    <ul class="space-y-2">
-        {#each toasts as toast}
-            <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-                <Toast {...toast} />
-            </li>
-        {/each}
-    </ul>
-</toast-container>

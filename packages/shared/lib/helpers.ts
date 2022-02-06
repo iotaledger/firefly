@@ -56,7 +56,7 @@ export const getTrimmedLength = (name: string | undefined): number => {
  */
 export const validateFilenameChars = (name: string | undefined): string => {
     if (!name) {
-        return
+        return 'emptyName'
     }
     if (name.startsWith('~')) {
         return 'tilde'
@@ -249,5 +249,23 @@ export function deepCopy(obj: unknown): unknown {
             newObj[key] = deepCopy(obj[key])
             return newObj
         }, {})
+    }
+}
+
+/**
+ * Returns a boolean indicating if color is bright using YIQ conversion
+ * @param color The color to be tested (can be HEX or RGB)
+ * @returns Boolean true if color is bright
+ */
+export const isBright = (color: string): boolean => {
+    if (color) {
+        const rgb =
+            color.includes('#') && color.length >= 7
+                ? color.match(/\w\w/g)?.map((x) => parseInt(x, 16))
+                : color.match(/[0-9]+/g)?.map((c) => parseInt(c, 10))
+        if (rgb) {
+            const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
+            return yiq >= 186
+        }
     }
 }

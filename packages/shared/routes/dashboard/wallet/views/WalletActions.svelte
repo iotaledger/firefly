@@ -3,8 +3,8 @@
     import { mobile } from 'shared/lib/app'
     import { assemblyStakingRewards,shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
-    import { activeProfile,isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute,walletRoute } from 'shared/lib/router'
+    import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes,WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
@@ -39,16 +39,6 @@
         walletRoute.set(WalletRoutes.CreateAccount)
     }
 </script>
-
-<style type="text/scss">
-    #add-wallet {
-        width: 40px;
-        height: 40px;
-        padding: 11px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 6px rgba(0, 25, 66, 0.08);
-    }
-</style>
 
 {#if $mobile}
     {#if $walletRoute === WalletRoutes.Init || $walletRoute === WalletRoutes.Send || $walletRoute === WalletRoutes.Receive || $walletRoute === WalletRoutes.CreateAccount}
@@ -101,14 +91,15 @@
                     <div
                         class="grid {$viewableAccounts.length === 1 && !$assemblyStakingRewards && !$shimmerStakingRewards ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                         {#each $viewableAccounts as account}
-                            <AccountTile
-                                color={account.color}
-                                name={account.alias}
-                                balance={account.balance}
-                                balanceEquiv={account.balanceEquiv}
-                                size={$viewableAccounts.length === 1 && (!$assemblyStakingRewards || !$shimmerStakingRewards) ? 'l' : 'm'}
-                                hidden={hiddenAccounts.includes(account.id)}
-                                onClick={() => handleAccountClick(account.id)} />
+                        <AccountTile
+                            color={getColor($activeProfile, account.id)}
+                            name={account.alias}
+                            balance={account.balance}
+                            balanceEquiv={account.balanceEquiv}
+                            size={$viewableAccounts.length === 1 && (!$assemblyStakingRewards || !$shimmerStakingRewards) ? 'l' : 'm'}
+                            hidden={hiddenAccounts.includes(account.id)}
+                            onClick={() => handleAccountClick(account.id)} 
+                        />
                         {/each}
                         {#if $assemblyStakingRewards}
                             <AccountTile airdrop={StakingAirdrop.Assembly} balance={$assemblyStakingRewards} size="m" />
@@ -128,3 +119,13 @@
         <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
     {/if}
 {/if}
+
+<style type="text/scss">
+    #add-wallet {
+        width: 40px;
+        height: 40px;
+        padding: 11px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 25, 66, 0.08);
+    }
+</style>

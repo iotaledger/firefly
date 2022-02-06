@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import type { WalletAccount } from 'lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { wallet } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
@@ -68,17 +68,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .illustration {
-        height: 250px;
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-        }
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
@@ -111,3 +100,14 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration {
+        height: 250px;
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+        }
+    }
+</style>

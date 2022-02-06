@@ -14,6 +14,7 @@ export enum Platforms {
 export interface IPlatform {
     ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
@@ -22,6 +23,7 @@ export interface IPlatform {
     getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
+    renameProfileFolder(oldPath: string, newPath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>
     updateMenu(attribute: string, value: unknown): void
     popupMenu(): void

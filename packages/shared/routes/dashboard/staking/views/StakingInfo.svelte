@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform';
     import { localize } from 'shared/lib/i18n'
     import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
@@ -77,17 +77,9 @@
     })
 
     const handleLearnMoreClick = (): void => {
-        Electron.openUrl('https://blog.iota.org/iota-staking-start/')
+        Platform.openUrl('https://blog.iota.org/iota-staking-start/')
     }
 </script>
-
-<style type="text/scss">
-    .animation-wrapper {
-        max-height: calc(100% - 80px);
-        max-width: 700px;
-        padding-bottom: 66.56%;
-    }
-</style>
 
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
     {#if animation}
@@ -101,3 +93,11 @@
         <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
     </div>
 </div>
+
+<style type="text/scss">
+    .animation-wrapper {
+        max-height: calc(100% - 80px);
+        max-width: 700px;
+        padding-bottom: 66.56%;
+    }
+</style>
