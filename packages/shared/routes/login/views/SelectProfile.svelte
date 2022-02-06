@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher, onMount } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy } from 'shared/lib/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
@@ -21,9 +21,9 @@
     }
 
     onMount(() => {
-        if (needsToAcceptLatestPrivacyPolicy()) {
+        if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTos()) {
             openPopup({
-                type: 'privacyPolicyUpdate',
+                type: 'legalUpdate',
                 hideClose: true,
                 preventClose: true,
             })

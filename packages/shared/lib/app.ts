@@ -2,7 +2,7 @@ import type { Unit as UnitType } from '@iota/unit-converter'
 import { Unit } from '@iota/unit-converter'
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
-import { lastAcceptedPrivacyPolicy } from './appSettings'
+import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
@@ -143,4 +143,10 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
  */
 export const PRIVACY_POLICY_VERSION = 2
 
+/**
+ * The Terms of Service packaged with the current version of Firefly
+ */
+export const TOS_VERSION = 2
+
 export const needsToAcceptLatestPrivacyPolicy = (): boolean => get(lastAcceptedPrivacyPolicy) < PRIVACY_POLICY_VERSION
+export const needsToAcceptLatestTos = (): boolean => get(lastAcceptedTos) < TOS_VERSION

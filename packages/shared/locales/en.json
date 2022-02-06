@@ -773,9 +773,7 @@
             "privPolicyBody": "We have updated Firefly's Privacy Policy.",
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy",
-            "viewTosButton": "View Terms of Service",
-            "viewPrivPolicyButton": "View Privacy Policy"
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
