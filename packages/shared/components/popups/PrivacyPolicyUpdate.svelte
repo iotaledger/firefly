@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
     import { Button, Checkbox, Text } from 'shared/components'
     import { lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
@@ -20,7 +19,6 @@
         closePopup(true)
     }
 
-    onDestroy(() => closePopup)
 </script>
 
 <div class="mb-6">
