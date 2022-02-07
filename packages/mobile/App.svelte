@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
-    import { mobile } from 'shared/lib/app'
+    import { beta, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
@@ -33,6 +33,7 @@
     import { onMount } from 'svelte'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
+    beta.set(process.env.RELEASE == 'beta')
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')

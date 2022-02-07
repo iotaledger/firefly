@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { beta, cleanupSignup, mobile } from 'shared/lib/app'
     import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -25,7 +25,7 @@
     const dispatch = createEventDispatcher()
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? $beta
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes

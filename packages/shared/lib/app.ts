@@ -12,6 +12,11 @@ import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
 /**
+ * Beta mode
+ */
+export const beta = writable<boolean>(false)
+
+/**
  * Mobile mode
  */
 export const mobile = writable<boolean>(false)

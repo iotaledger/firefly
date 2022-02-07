@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Popup,Route,TitleBar,ToastContainer } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { beta, loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
@@ -38,6 +38,8 @@
     } from 'shared/routes'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+
+    beta.set(process.env.RELEASE == 'beta')
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')

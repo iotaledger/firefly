@@ -13,6 +13,8 @@
         "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "cross-env NODE_ENV=production PLATFORM=desktop webpack",
+        "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=beta webpack",
+        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=prod webpack",
         "compile:linux": "electron-builder --linux --x64",
         "compile:mac": "electron-builder --mac --x64",
         "compile:win": "electron-builder --win --x64"
