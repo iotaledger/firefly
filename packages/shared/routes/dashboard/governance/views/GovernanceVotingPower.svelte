@@ -4,7 +4,6 @@
     import { openPopup } from 'shared/lib/popup'
 
     export let votingPower = 4528125
-
 </script>
 
 <div class='flex items-center mb-5 cursor-pointer' on:click={() => openPopup({ type: 'governanceVotingPowerInfo' })}>
