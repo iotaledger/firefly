@@ -64,18 +64,6 @@
 
 </script>
 
-<style type="text/scss">
-    ul {
-        display: block;
-        list-style-type: disc;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-        padding-inline-start: 20px;
-    }
-</style>
-
 <div class="mb-6">
     <Text type="h4" classes="mb-4">{localize(getTitleText())}</Text>
     <Text type="p" secondary>{localize(getBodyText())}</Text>
@@ -94,3 +82,15 @@
 <div class="flex flex-row flex-nowrap w-full space-x-4">
     <Button autofocus classes="w-full" onClick={handleConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </div>
+
+<style type="text/scss">
+    ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 20px;
+    }
+</style>
