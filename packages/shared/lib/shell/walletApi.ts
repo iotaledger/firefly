@@ -18,6 +18,10 @@ import type { IWalletApi } from 'shared/lib/typings/walletApi'
 import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 
 export const WALLET = window['__WALLET__']
+/* eslint-disable no-console */
+console.log('[walletApi.ts] WALLET: ', WALLET)
+/* eslint-disable no-console */
+console.trace()
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
