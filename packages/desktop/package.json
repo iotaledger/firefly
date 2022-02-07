@@ -4,7 +4,7 @@
     "version": "1.3.3",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
-    "repository": "git@github.com:iotaledger/new-wallet.git",
+    "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
