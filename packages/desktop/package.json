@@ -14,10 +14,12 @@
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "cross-env NODE_ENV=production PLATFORM=desktop webpack",
         "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=beta webpack",
-        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=prod webpack",
-        "compile:linux": "electron-builder --linux --x64",
-        "compile:mac": "electron-builder --mac --x64",
-        "compile:win": "electron-builder --win --x64"
+        "compile:beta:linux": "electron-builder --linux --x64 --config electron-builder-beta.cofig.json",
+        "compile:beta:mac": "electron-builder --mac --x64 --config electron-builder-beta.cofig.json",
+        "compile:beta:win": "electron-builder --win --x64 --config electron-builder-beta.cofig.json",
+        "compile:prod:linux": "electron-builder --linux --x64 --config electron-builder-prod.cofig.json",
+        "compile:prod:mac": "electron-builder --mac --x64 --config electron-builder-prod.cofig.json",
+        "compile:prod:win": "electron-builder --win --x64 --config electron-builder-prod.cofig.json"
     },
     "dependencies": {
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
@@ -48,92 +50,5 @@
         "webpack": "^5.16.0",
         "webpack-cli": "^4.4.0",
         "webpack-dev-server": "^3.11.2"
-    },
-    "build": {
-        "productName": "Firefly",
-        "artifactName": "firefly-desktop-${version}.${ext}",
-        "copyright": "IOTA Foundation",
-        "directories": {
-            "buildResources": "./public",
-            "output": "./out"
-        },
-        "files": [
-            "public/",
-            "package.json",
-            "!node_modules/wallet-nodejs-binding/native/*"
-        ],
-        "appId": "org.iota.firefly",
-        "afterSign": "./scripts/notarize.macos.js",
-        "asar": true,
-        "protocols": [
-            {
-                "name": "IOTA URL Scheme",
-                "schemes": [
-                    "iota"
-                ]
-            }
-        ],
-        "dmg": {
-            "iconSize": 120,
-            "title": "${productName}",
-            "background": "public/assets/background/mac/background.png",
-            "sign": false,
-            "contents": [
-                {
-                    "x": 500,
-                    "y": 250,
-                    "type": "link",
-                    "path": "/Applications"
-                },
-                {
-                    "x": 170,
-                    "y": 250,
-                    "type": "file"
-                }
-            ]
-        },
-        "nsis": {
-            "oneClick": false,
-            "deleteAppDataOnUninstall": false,
-            "allowToChangeInstallationDirectory": true
-        },
-        "win": {
-            "icon": "./public/assets/icons/win/icon.ico",
-            "publisherName": "IOTA Stiftung",
-            "target": "nsis",
-            "timeStampServer": "http://timestamp.digicert.com"
-        },
-        "linux": {
-            "target": [
-                "AppImage"
-            ],
-            "desktop": {
-                "Name": "Firefly",
-                "Comment": "Desktop wallet for IOTA",
-                "Categories": "Office;Network;Finance"
-            },
-            "icon": "./public/assets/icons/linux/icon256x256.png"
-        },
-        "mac": {
-            "icon": "./public/assets/icons/mac/icon.icns",
-            "category": "public.app-category.finance",
-            "target": [
-                "dmg",
-                "zip"
-            ],
-            "entitlements": "./entitlements.mac.plist",
-            "entitlementsInherit": "./entitlements.mac.plist",
-            "hardenedRuntime": true,
-            "gatekeeperAssess": false,
-            "asarUnpack": [
-                "**/*.node"
-            ]
-        },
-        "publish": {
-            "provider": "generic",
-            "url": "https://dl.firefly.iota.org/",
-            "publishAutoUpdate": true,
-            "channel": "latest"
-        }
     }
 }
