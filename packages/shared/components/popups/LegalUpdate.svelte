@@ -4,7 +4,7 @@
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { needsToAcceptLatestTos, needsToAcceptLatestPrivacyPolicy, TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
@@ -14,11 +14,11 @@
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     const handleViewTosClick = () => {
-        Electron.openUrl(TOS_LINK)
+        Platform.openUrl(TOS_LINK)
     }
 
     const handleViewPrivPolicyClick = () => {
-        Electron.openUrl(PRIVACY_POLICY_LINK)
+        Platform.openUrl(PRIVACY_POLICY_LINK)
     }
 
     const handleConfirmClick = () => {
