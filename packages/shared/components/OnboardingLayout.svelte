@@ -33,7 +33,7 @@
 <!--  -->
 {#if $mobile}
     <div data-label="mobile-onboarding-layout" class="relative h-full px-5 flex flex-col justify-between">
-        <div class="mobile-top-bar relative w-full flex justify-center px-8 py-3">
+        <header class="relative w-full flex justify-center px-8 py-3">
             <Text type="h4" classes="text-center">
                 <slot name="title" />
             </Text>
@@ -44,7 +44,7 @@
                         classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'} />
                 </button>
             {/if}
-        </div>
+        </header>
         <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
         <div
             bind:clientHeight={mobileTopContentHeight}
@@ -57,9 +57,9 @@
                 <slot name="leftpane__content" />
             </div>
         </div>
-        <div class="py-3">
+        <footer class="py-3">
             <slot name="leftpane__action" />
-        </div>
+        </footer>
     </div>
 {:else}
     <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
@@ -111,7 +111,8 @@
 {/if}
 
 <style type="text/scss">
-    .mobile-top-bar {
+    header {
+        margin-top: env(safe-area-inset-top);
         :global(h1),
         :global(h2),
         :global(h3),
@@ -121,5 +122,8 @@
             @apply text-16;
             @apply leading-140;
         }
+    }
+    footer {
+        margin-bottom: env(safe-area-inset-bottom);
     }
 </style>
