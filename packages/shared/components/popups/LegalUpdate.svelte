@@ -73,9 +73,13 @@
             <li><Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
         </ul>
     {:else if tos}
-        <Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link>
+        <ul>
+            <li><Link onClick={handleViewTosClick}>{localize('popups.legalUpdate.tosTitle')}</Link></li>
+        </ul>
     {:else if privacyPolicy}
-        <Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link>
+        <ul>
+            <li><Link onClick={handleViewPrivPolicyClick}>{localize('popups.legalUpdate.privPolicyTitle')}</Link></li>
+        </ul>
     {/if}
     <Checkbox label={localize(getCheckboxText())} bind:checked classes="mt-4" />
 </div>
