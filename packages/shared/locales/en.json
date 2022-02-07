@@ -569,7 +569,7 @@
                 "status": {
                     "upcoming": "Upcoming",
                     "commencing": "Commencing",
-                    "holdingPeriod": "Holding period",
+                    "holding": "Holding period",
                     "ended": "Ended"
                 },
                 "button": "View proposal"

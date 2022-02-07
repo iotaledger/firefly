@@ -1,6 +1,14 @@
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
-import { AccountRoutes, AppRoute, LedgerRoutes, SettingsRoutes, SetupType, Tabs } from 'shared/lib/typings/routes'
+import {
+    AccountRoutes,
+    AppRoute,
+    LedgerRoutes,
+    SettingsRoutes,
+    SetupType,
+    Tabs,
+    GovernanceRoutes,
+} from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
 
 import { isDeepLinkRequestActive } from '@common/deep-links'
@@ -86,6 +94,11 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
  * Settings child route
  */
 export const settingsChildRoute = writable<string>(null)
+
+/**
+ * Governance view route
+ */
+export const governanceRoute = writable<GovernanceRoutes>(GovernanceRoutes.Init)
 
 /**
  * Navigate to initial route

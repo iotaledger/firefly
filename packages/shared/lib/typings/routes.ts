@@ -73,6 +73,11 @@ export enum SettingsRoutesNoProfile {
     HelpAndInfo = 'helpAndInfo',
 }
 
+export enum GovernanceRoutes {
+    Init = 'init',
+    EventDetails = 'eventDetails',
+}
+
 export enum GeneralSettings {
     Theme = 'theme',
     Language = 'language',

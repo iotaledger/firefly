@@ -65,12 +65,13 @@ export type ParticipationEventStatus = {
  */
 export type ParticipationEventInformationPayload = {
     type: ParticipationEventType
-    numerator: number
-    denominator: number
-    requiredMinimumRewards: number
-    symbol: string
-    text: string
-    additionalInfo: string
+    numerator?: number
+    denominator?: number
+    requiredMinimumRewards?: number
+    symbol?: string
+    text?: string
+    additionalInfo?: string
+    questions?: unknown
 }
 
 /**
@@ -83,6 +84,7 @@ export type ParticipationEventInformation = {
     milestoneIndexEnd: number
     additionalInfo: string
     payload: ParticipationEventInformationPayload
+    name?: string
 }
 
 /**
