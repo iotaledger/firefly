@@ -10,8 +10,8 @@
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
 
     let checked = false
-    let tos = needsToAcceptLatestTos()
-    let privacyPolicy = needsToAcceptLatestPrivacyPolicy()
+    const tos = needsToAcceptLatestTos()
+    const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     const handleViewTosClick = () => {
         Electron.openUrl(TOS_LINK)
