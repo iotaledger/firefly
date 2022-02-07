@@ -56,3 +56,17 @@ const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').mat
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean =>
     theme === 'system' ? isSystemInDarkMode : theme === 'dark'
+
+/**
+ * The version of the privacy policy that the user last accepted
+ *
+ * Note: The initial value must be set to 1 to support existing users and alert them
+ */
+export const lastAcceptedPrivacyPolicy = persistent<number>('lastAcceptedPrivacyPolicy', 1)
+
+/**
+ * The version of the Terms of Service that the user last accepted
+ *
+ * Note: The initial value must be set to 1 to support existing users and alert them
+ */
+export const lastAcceptedTos = persistent<number>('lastAcceptedTos', 1)
