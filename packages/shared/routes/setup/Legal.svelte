@@ -3,8 +3,8 @@
     import { Platform } from 'shared/lib/platform';
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
-    import { PRIVACY_POLICY_VERSION } from 'shared/lib/app'
+    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -18,6 +18,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
+        lastAcceptedTos.set(TOS_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         dispatch('next')
     }
