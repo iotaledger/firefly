@@ -1,25 +1,23 @@
 <script lang="typescript">
-    import { Animation,Button,ButtonCheckbox,CollapsibleBlock,Input,OnboardingLayout,Text } from 'shared/components'
-    import { cleanupSignup,mobile } from 'shared/lib/app'
-    import { getTrimmedLength,validateFilenameChars } from 'shared/lib/helpers'
-    import { initialiseMigrationListeners } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { Platform } from 'shared/lib/platform'
-    import { openPopup } from 'shared/lib/popup'
-    import {
-    cleanupInProgressProfiles,
-    createProfile,
-    disposeNewProfile,
-    hasNoProfiles,
-    newProfile,
-    profileInProgress,
-    profiles
-    } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { destroyActor,getStoragePath,initialise,MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
+    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
+    import { initialiseMigrationListeners } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import {
+        cleanupInProgressProfiles,
+        storeProfile,
+        disposeNewProfile,
+        hasNoProfiles,
+        newProfile,
+        validateProfileName
+    } from 'shared/lib/profile'
+    import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Platform } from 'shared/lib/platform';
 
     export let locale: Locale
 
@@ -28,88 +26,67 @@
 
     const dispatch = createEventDispatcher()
 
-    let profileName = get(newProfile)?.name ?? ''
-    let isDeveloperProfile = get(newProfile)?.isDeveloperProfile ?? false
+    let profileName = $newProfile?.name ?? ''
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
 
     $: isProfileNameValid = profileName && profileName.trim()
+    $: profileName, (error = '') // Error clears when profileName changes
+    $: nameChanged = $newProfile?.name !== profileName.trim()
+    $: hasDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
-    // This looks odd but sets a reactive dependency on profileName, so when it changes the error will clear
-    $: profileName, (error = '')
-
-    async function handleContinueClick() {
+    async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
-        if (trimmedProfileName) {
-            let profile
-            error = ''
+        try {
+            validateProfileName(trimmedProfileName)
+        } catch (err) {
+            return (error = err.message)
+        }
+        cleanUpIfPreviouslyInitialized()
+        await initialiseProfile(trimmedProfileName)
+    }
 
-            const validateError = validateFilenameChars(trimmedProfileName)
-            if (validateError) {
-                return (error = locale(`error.account.${validateError}`))
-            }
-
-            if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
-                return (error = locale('error.profile.length', {
-                    values: {
-                        length: MAX_PROFILE_NAME_LENGTH,
-                    },
-                }))
-            }
-
-            if (get(profiles).some((profile) => profile.name === trimmedProfileName)) {
-                return (error = locale('error.profile.duplicate'))
-            }
-
-            const previousInitializedId = $newProfile?.id
-            const nameChanged = $newProfile?.name !== trimmedProfileName
-            const isDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
-
-            // If the name has changed from the previous initialization
-            // then make sure we cleanup the last profile and actor
-            if ((nameChanged || isDeveloperProfileChanged) && previousInitializedId) {
-                // The initialized profile name has changed
-                // so we need to destroy the previous actor
-                destroyActor(previousInitializedId)
-            }
-
-            try {
-                busy = true
-
-                if (nameChanged || isDeveloperProfileChanged) {
-                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
-                    profileInProgress.set(trimmedProfileName)
-
-                    const userDataPath = await Platform.getUserDataPath()
-                    const machineId = await Platform.getMachineId()
-                    const { sendCrashReports } = $initAppSettings
-                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name), sendCrashReports, machineId)
-
-                    initialiseMigrationListeners()
-                }
-
-                if(isDeveloperProfile) {
-                    openPopup({type: 'confirmDeveloperProfile', props: {
-                        handleContinueClick: () => dispatch('next')
-                    }})
-                } else {
-                    dispatch('next')
-                }
-            } catch (err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error ? err.error : 'error.global.generic'),
-                })
-            } finally {
-                busy = false
-            }
+    function cleanUpIfPreviouslyInitialized(): void {
+        const previousInitializedId = $newProfile?.id
+        if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
+            destroyActor(previousInitializedId)
         }
     }
 
+    async function initialiseProfile(name: string): Promise<void> {
+        try {
+            busy = true
+            if (nameChanged || hasDeveloperProfileChanged) {
+                storeProfile(name, isDeveloperProfile)
+
+                const path = await getProfileDataPath($newProfile.name)
+                const machineId = await Platform.getMachineId()
+                const { sendCrashReports } = $initAppSettings
+                initialise($newProfile.id, path, sendCrashReports, machineId)
+                initialiseMigrationListeners()
+            }
+
+            if(isDeveloperProfile) {
+                openPopup({type: 'confirmDeveloperProfile', props: {
+                    handleContinueClick: () => dispatch('next')
+                }})
+            } else {
+                dispatch('next')
+            }
+
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error ? err.error : 'error.global.generic'),
+            })
+        } finally {
+            busy = false
+        }
+    }
+    
     async function handleBackClick() {
         cleanupSignup()
         cleanupInProgressProfiles()
-
         await disposeNewProfile()
-
         dispatch('previous')
     }
 </script>

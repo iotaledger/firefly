@@ -24,22 +24,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .illustration-wrapper {
-        height: 320px;
-        .animation {
-            width: 117%;
-            height: 117%;
-        }
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-            z-index: 1;
-        }
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
     <div class="illustration-wrapper relative w-full bg-white dark:bg-gray-900 flex justify-center items-center">
@@ -64,3 +48,19 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration-wrapper {
+        height: 320px;
+        .animation {
+            width: 117%;
+            height: 117%;
+        }
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+            z-index: 1;
+        }
+    }
+</style>

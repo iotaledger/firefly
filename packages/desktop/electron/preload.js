@@ -50,7 +50,7 @@ try {
     }
 
     contextBridge.exposeInMainWorld('__WALLET__', Wallet)
-    contextBridge.exposeInMainWorld('__ELECTRON_API__', ElectronApi)
+    contextBridge.exposeInMainWorld('Electron', ElectronApi)
 } catch (error) {
     ipcRenderer.invoke('handle-error', 'Preload Error', error)
 }

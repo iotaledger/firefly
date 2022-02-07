@@ -128,7 +128,7 @@
             <Text type="h2" classes="mb-5">{locale('views.generateNewLedgerAddress.confirmedTitle')}</Text>
             <Text type="p" secondary classes="mb-12">{locale('views.generateNewLedgerAddress.confirmedBody')}</Text>
             <div class="flex flex-col items-center bg-gray-50 dark:bg-gray-900 rounded-lg p-5 text-center">
-                <div class="bg-green-100 rounded-2xl relative -mt-10 mb-4">
+                <div class="bg-green-500 rounded-2xl relative -mt-10 mb-4">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h5" highlighted classes="mb-2">{locale('general.newAddress')}</Text>

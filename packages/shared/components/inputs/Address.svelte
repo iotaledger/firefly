@@ -20,6 +20,28 @@
     })
 </script>
 
+<div class={classes}>
+    <address-input class="flex relative" {disabled}>
+        <textarea
+            bind:this={textAreaElement}
+            bind:value={address}
+            class="w-full text-12 leading-140 border border-solid resize-none
+                {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
+                {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'} "
+            class:floating-active={address && label}
+            {placeholder}
+            {disabled}
+            spellcheck={false}
+            maxlength={ADDRESS_LENGTH} />
+        {#if label}
+            <floating-label class:floating-active={address && label}>{label}</floating-label>
+        {/if}
+    </address-input>
+    {#if error}
+        <Error {error} />
+    {/if}
+</div>
+
 <style type="text/scss">
     textarea {
         @apply py-4;
@@ -77,25 +99,3 @@
         }
     }
 </style>
-
-<div class={classes}>
-    <address-input class="flex relative" {disabled}>
-        <textarea
-            bind:this={textAreaElement}
-            bind:value={address}
-            class="w-full text-12 leading-140 border border-solid resize-none
-                {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
-                {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'} "
-            class:floating-active={address && label}
-            {placeholder}
-            {disabled}
-            spellcheck={false}
-            maxlength={ADDRESS_LENGTH} />
-        {#if label}
-            <floating-label class:floating-active={address && label}>{label}</floating-label>
-        {/if}
-    </address-input>
-    {#if error}
-        <Error {error} />
-    {/if}
-</div>

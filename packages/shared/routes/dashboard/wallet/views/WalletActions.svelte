@@ -40,16 +40,6 @@
     }
 </script>
 
-<style type="text/scss">
-    #add-wallet {
-        width: 40px;
-        height: 40px;
-        padding: 11px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 6px rgba(0, 25, 66, 0.08);
-    }
-</style>
-
 {#if $mobile}
     {#if $walletRoute === WalletRoutes.Init || $walletRoute === WalletRoutes.Send || $walletRoute === WalletRoutes.Receive || $walletRoute === WalletRoutes.CreateAccount}
         <div class="p-8 pt-4 flex flex-col h-full justify-between">
@@ -129,3 +119,13 @@
         <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
     {/if}
 {/if}
+
+<style type="text/scss">
+    #add-wallet {
+        width: 40px;
+        height: 40px;
+        padding: 11px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 25, 66, 0.08);
+    }
+</style>

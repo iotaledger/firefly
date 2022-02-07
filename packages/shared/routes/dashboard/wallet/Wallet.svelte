@@ -56,7 +56,6 @@
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account';
-    import { setProfileAccount } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -513,12 +512,6 @@
     })
 </script>
 
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
-
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
 {:else}
@@ -586,3 +579,9 @@
         </div>
     {/if}
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>

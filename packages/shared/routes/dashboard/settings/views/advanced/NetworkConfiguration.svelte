@@ -94,12 +94,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .nodes-container {
-        max-height: 338px;
-    }
-</style>
-
 <div>
     <Text type="h4" classes="mb-3">{localize('views.settings.networkConfiguration.title2')}</Text>
     <Text type="p" secondary classes="mb-3">
@@ -215,3 +209,9 @@
         <Checkbox label={localize('actions.localProofOfWork')} bind:checked={networkConfig.localPow} />
     </section>
 </div>
+
+<style type="text/scss">
+    .nodes-container {
+        max-height: 338px;
+    }
+</style>

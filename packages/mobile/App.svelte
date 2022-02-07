@@ -26,6 +26,7 @@
         Protect,
         Secure,
         Setup,
+        Settings,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -55,42 +56,6 @@
     })
 </script>
 
-<style global type="text/scss">
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    @import '../shared/style/style.scss';
-
-    html,
-    body {
-        @apply bg-white;
-        &.scheme-dark {
-            @apply bg-gray-900;
-        }
-    }
-    .setup-anim-aspect-ratio {
-        aspect-ratio: 19/15;
-    }
-    // QR Scanner
-    .scanner-ui {
-        @apply hidden;
-    }
-    .scanner-hide {
-        @apply visible;
-    }
-    body {
-        &.qr-scanner {
-            @apply bg-transparent;
-            .scanner-ui {
-                @apply block;
-            }
-            .scanner-hide {
-                @apply hidden;
-            }
-        }
-    }
-</style>
-
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
 {#if !$isLocaleLoaded || splash}
@@ -113,6 +78,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Settings}>
+            <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
@@ -162,3 +130,39 @@
         <QRScanner />
     </div>
 {/if}
+
+<style global type="text/scss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    @import '../shared/style/style.scss';
+
+    html,
+    body {
+        @apply bg-white;
+        &.scheme-dark {
+            @apply bg-gray-900;
+        }
+    }
+    .setup-anim-aspect-ratio {
+        aspect-ratio: 19/15;
+    }
+    // QR Scanner
+    .scanner-ui {
+        @apply hidden;
+    }
+    .scanner-hide {
+        @apply visible;
+    }
+    body {
+        &.qr-scanner {
+            @apply bg-transparent;
+            .scanner-ui {
+                @apply block;
+            }
+            .scanner-hide {
+                @apply hidden;
+            }
+        }
+    }
+</style>
