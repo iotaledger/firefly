@@ -114,20 +114,9 @@
         }
     }
     $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
-
     $: senderColor = getColor($activeProfile, senderAccount?.id) as string
     $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
 </script>
-
-<style type="text/scss">
-    .visualization {
-        min-height: 84px;
-    }
-
-    .account-color {
-        background-color: var(--account-color);
-    }
-</style>
 
 <div class="flex flex-col h-full min-h-0">
     <div
@@ -236,3 +225,13 @@
         <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hideDetails')}</Text></button>
     </div>
 </div>
+
+<style type="text/scss">
+    .visualization {
+        min-height: 84px;
+    }
+
+    .account-color {
+        background-color: var(--account-color);
+    }
+</style>

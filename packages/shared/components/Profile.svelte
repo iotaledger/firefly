@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -11,14 +11,14 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let bgColor
+    export let bgColor: string
 
-    export let onClick = (): void | string => ''
+    export let onClick: (id: string) => void | string
 
     const slots = $$props.$$slots
 
     function getInitials() {
-        const initials = _getInitials(name)
+        const initials = _getInitials(name, 1)
         if (initials.length === 1) {
             return initials
         } else {

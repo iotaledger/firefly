@@ -23,14 +23,6 @@
     }
 </script>
 
-<style>
-    svg {
-        display: block;
-        position: relative;
-        margin: 0 auto;
-    }
-</style>
-
 {#key data}
     {#if cells}
         <svg width={size} height={size} viewBox={`0 0 ${cells.length} ${cells.length}`}>
@@ -48,3 +40,11 @@
         </svg>
     {/if}
 {/key}
+
+<style>
+    svg {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+    }
+</style>
