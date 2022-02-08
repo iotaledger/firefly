@@ -29,15 +29,16 @@ public class WalletPlugin extends Plugin {
             return;
         }
         String actorId = call.getString("actorId");
-        call.setKeepAlive(true);
-
+        String dbPath = getContext().getFilesDir() + "/database";
+        
         final ActorCallback callback = response -> {
             JSObject walletResponse = new JSObject();
             walletResponse.put("walletResponse", response);
             notifyListeners("walletEvent", walletResponse);
         };
-
-        Actor.iotaInitialize(callback, actorId, "data/data/com.iota.wallet/cache/database");
+        
+        call.setKeepAlive(true);
+        Actor.iotaInitialize(callback, actorId, dbPath);
         isInitialized = true;
     }
 
