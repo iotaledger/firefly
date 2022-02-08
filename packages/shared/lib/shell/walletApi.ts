@@ -18,10 +18,6 @@ import type { IWalletApi } from 'shared/lib/typings/walletApi'
 import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 
 export const WALLET = window['__WALLET__']
-/* eslint-disable no-console */
-console.log('[walletApi.ts] WALLET: ', WALLET)
-/* eslint-disable no-console */
-console.trace()
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -162,10 +158,6 @@ WALLET.onMessage((message: MessageResponse) => {
         const newError = { type: ErrorType.ClientError, message: messageData, time: Date.now() }
         logError(newError)
         return
-    }
-
-    if (message && message.type === ResponseTypes.LockedStronghold) {
-        throw '[Sentry Error Test] walletApi.ts'
     }
 
     const _deleteCallbackId = (_id: string) => {

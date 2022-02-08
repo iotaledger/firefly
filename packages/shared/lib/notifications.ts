@@ -18,8 +18,7 @@ export function showSystemNotification(notificationData: NotificationData): stri
 }
 
 export function showAppNotification(notificationData: NotificationData): string {
-    throw '[Sentry Error Test] notification.ts'
-    // return showNotification(notificationData, false)
+    return showNotification(notificationData, false)
 }
 
 export function showNotification(notificationData: NotificationData, showSystemNotification: boolean): string {
