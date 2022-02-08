@@ -155,7 +155,8 @@
         use:slidable
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
-        on:tap={close}>
+        on:tap={close}
+    >
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
     </slide-zone>
     <main
@@ -168,7 +169,8 @@
 			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
 			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
 			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromRight ? 'none' : 'block'}">
+			--display-indicator: {fromRight ? 'none' : 'block'}"
+    >
         <slot />
     </main>
 </drawer>

@@ -72,12 +72,17 @@
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
-            class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3">
+            class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
+        >
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
-                {locale(mustAcknowledgeBelowMinRewardParticipationWarning ? 'popups.transaction.sendingFromStakedAccountBelowMinReward' : 'popups.transaction.sendingFromStakedAccount')}
+                {locale(
+                    mustAcknowledgeBelowMinRewardParticipationWarning
+                        ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
+                        : 'popups.transaction.sendingFromStakedAccount'
+                )}
             </Text>
         </div>
     {:else}

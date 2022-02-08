@@ -11,7 +11,7 @@
     <iframe
         srcdoc={`
             <head>
-                <style type="text/css">
+                <${'style'} type="text/css">
                     body {
                         margin: 0px;
                     }
@@ -35,7 +35,8 @@
         {scrolling}
         {sandbox}
         frameborder="0"
-        title="video" />
+        title="video"
+    />
 </div>
 
 <style type="text/css">

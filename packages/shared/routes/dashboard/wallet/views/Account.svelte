@@ -48,14 +48,16 @@
                         balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick}
-                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''} />
+                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
+                    />
                     <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions
                             {isGeneratingAddress}
                             {onSend}
                             {onInternalTransfer}
                             {onGenerateAddress}
-                            {locale} />
+                            {locale}
+                        />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>

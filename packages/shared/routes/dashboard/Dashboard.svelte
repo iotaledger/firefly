@@ -2,36 +2,43 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
-    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
-    import {appSettings, isAwareOfCrashReporting} from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
-        showAppNotification
+        showAppNotification,
     } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval,pollParticipationOverview } from 'shared/lib/participation'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
-    import { closePopup,openPopup,popupState } from 'shared/lib/popup'
-    import { activeProfile,isLedgerProfile,isSoftwareProfile,updateProfile } from 'shared/lib/profile'
-    import { accountRoute,dashboardRoute,routerNext,settingsChildRoute,settingsRoute,walletRoute } from 'shared/lib/router'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import {
+        accountRoute,
+        dashboardRoute,
+        routerNext,
+        settingsChildRoute,
+        settingsRoute,
+        walletRoute,
+    } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes,AdvancedSettings,SettingsRoutes,Tabs,WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
         selectedAccountId,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
-        wallet
+        wallet,
     } from 'shared/lib/wallet'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 
@@ -135,7 +142,6 @@
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
 
-
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }
@@ -207,9 +213,15 @@
                         ...parsedDeepLink.params,
                         isInternal: false,
                     })
-                    showAppNotification({ type: parsedDeepLink.notification.type, message: parsedDeepLink.notification.message })
+                    showAppNotification({
+                        type: parsedDeepLink.notification.type,
+                        message: parsedDeepLink.notification.message,
+                    })
                 } else {
-                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingRequest.invalidFormat') })
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('notifications.deepLinkingRequest.invalidFormat'),
+                    })
                 }
                 Platform.DeepLinkManager.clearDeepLinkRequest()
             }

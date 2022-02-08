@@ -7,7 +7,12 @@
     export let locale: Locale
 
     let stepIndex = 0
-    const stepAnimations = ['ledger-background-live-desktop', 'ledger-pin-desktop', 'ledger-open-app-desktop', 'ledger-support']
+    const stepAnimations = [
+        'ledger-background-live-desktop',
+        'ledger-pin-desktop',
+        'ledger-open-app-desktop',
+        'ledger-support',
+    ]
 
     function changeIndex(increment) {
         stepIndex += increment
@@ -30,10 +35,16 @@
         {#if typeof locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`) === 'string'}
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
         {:else}
-            <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text>
+            <Text secondary classes="inline-block"
+                >{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.text`)}</Text
+            >
             <Link
                 classes="ml-0.5 inline-block text-13 leading-160"
-                onClick={() => Platform.openUrl('https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true')}>
+                onClick={() =>
+                    Platform.openUrl(
+                        'https://support.ledger.com/hc/en-us/articles/360019868977-Fix-USB-connection-issues-with-Ledger-Live?support=true'
+                    )}
+            >
                 {locale(`popups.ledgerConnectionGuide.steps.${stepIndex}.link`)}
             </Link>
         {/if}

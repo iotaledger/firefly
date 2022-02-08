@@ -68,7 +68,12 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+<OnboardingLayout
+    onBackClick={handleBackClick}
+    {locale}
+    showLedgerProgress={legacyLedger}
+    showLedgerVideoButton={legacyLedger}
+>
     <div slot="title">
         <Text type="h2">{locale('views.secureSpentAddresses.title')}</Text>
     </div>
@@ -84,7 +89,8 @@
                     {...address}
                     {locale}
                     selected={selectedAddresses.find((_address) => _address.id === address.id)}
-                    onClick={() => onAddressClick(address)} />
+                    onClick={() => onAddressClick(address)}
+                />
             {/each}
         </div>
         <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>

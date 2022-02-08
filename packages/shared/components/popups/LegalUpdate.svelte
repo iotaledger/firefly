@@ -3,7 +3,12 @@
     import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { needsToAcceptLatestTos, needsToAcceptLatestPrivacyPolicy, TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
+    import {
+        needsToAcceptLatestTos,
+        needsToAcceptLatestPrivacyPolicy,
+        TOS_VERSION,
+        PRIVACY_POLICY_VERSION,
+    } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
@@ -61,7 +66,6 @@
             return 'popups.legalUpdate.privPolicyCheckbox'
         }
     }
-
 </script>
 
 <div class="mb-6">
@@ -84,7 +88,9 @@
     <Checkbox label={localize(getCheckboxText())} bind:checked classes="mt-4" />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button autofocus classes="w-full" onClick={handleConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
+    <Button autofocus classes="w-full" onClick={handleConfirmClick} disabled={!checked}
+        >{localize('actions.confirm')}</Button
+    >
 </div>
 
 <style type="text/scss">

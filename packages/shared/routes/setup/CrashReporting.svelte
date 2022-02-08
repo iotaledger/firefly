@@ -20,8 +20,9 @@
     const handleContinueClick = () => {
         appSettings.set({ ...get(appSettings), sendCrashReports })
 
-        if (!$isAwareOfCrashReporting)
+        if (!$isAwareOfCrashReporting) {
             isAwareOfCrashReporting.set(true)
+        }
 
         dispatch('next')
     }
@@ -42,7 +43,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">
-            <Animation animation="secure-desktop"/>
+            <Animation animation="secure-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

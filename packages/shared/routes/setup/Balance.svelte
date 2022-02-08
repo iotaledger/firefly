@@ -1,12 +1,7 @@
 <script lang="typescript">
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-    } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
@@ -148,9 +143,11 @@
                         closePopup()
                         dispatch('next')
                     },
-                    balance: `${formatUnitBestMatch(spentAddressesWithNoBundleHashesTotalBalance, true, 3)} (${getFiatBalance(
-                        spentAddressesWithNoBundleHashesTotalBalance
-                    ).toUpperCase()})`,
+                    balance: `${formatUnitBestMatch(
+                        spentAddressesWithNoBundleHashesTotalBalance,
+                        true,
+                        3
+                    )} (${getFiatBalance(spentAddressesWithNoBundleHashesTotalBalance).toUpperCase()})`,
                 },
             })
         } else {
@@ -206,13 +203,16 @@
     onBackClick={handleBackClick}
     {locale}
     showLedgerProgress={legacyLedger}
-    showLedgerVideoButton={legacyLedger}>
+    showLedgerVideoButton={legacyLedger}
+>
     <div slot="title">
         <Text type="h2">{locale('views.balance.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
-        <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
+        <Box
+            classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg "
+        >
             <Text type="h2">{formattedBalance}</Text>
             <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
         </Box>
@@ -223,10 +223,18 @@
     <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
         <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
             {#if isCheckingForBalance}
-                <Spinner busy={isCheckingForBalance} message={locale('views.migrate.findingBalance')} classes="justify-center" />
+                <Spinner
+                    busy={isCheckingForBalance}
+                    message={locale('views.migrate.findingBalance')}
+                    classes="justify-center"
+                />
             {:else}{locale('actions.checkAgain')}{/if}
         </Button>
-        <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={() => handleContinueClick()}>
+        <Button
+            classes="flex-1"
+            disabled={isCheckingForBalance || !error.allowToProceed}
+            onClick={() => handleContinueClick()}
+        >
             {locale('actions.continue')}
         </Button>
     </div>

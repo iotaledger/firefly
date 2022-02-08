@@ -52,7 +52,8 @@
         class:darkmode={darkModeEnabled}
         style={inlineStyle}
         {disabled}
-        bind:this={buttonElement}>
+        bind:this={buttonElement}
+    >
         <Icon classes="mb-1" {icon} />
         <span class="text-12 leading-140">
             <slot />
@@ -78,7 +79,8 @@
         class:showHoverText
         style={inlineStyle}
         {disabled}
-        bind:this={buttonElement}>
+        bind:this={buttonElement}
+    >
         {#if icon}
             {#if small}
                 {#if iconReverse}
@@ -99,7 +101,8 @@
                                     width={showHoverText ? 20 : 16}
                                     height={showHoverText ? 20 : 16}
                                     classes="ml-4 showHoverText"
-                                    {icon} />
+                                    {icon}
+                                />
                             </div>
                         </div>
                     </div>

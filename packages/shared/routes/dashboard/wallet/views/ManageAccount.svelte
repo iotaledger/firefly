@@ -46,18 +46,20 @@
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
-                    accounts.update((_accounts) => _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: trimmedAccountAlias,
-                                }
-                            )
-                        }
-                        return account
-                    }))
+                    accounts.update((_accounts) =>
+                        _accounts.map((account) => {
+                            if (account.id === $selectedAccountId) {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        alias: trimmedAccountAlias,
+                                    }
+                                )
+                            }
+                            return account
+                        })
+                    )
 
                     isBusy = false
                     accountRoute.set(AccountRoutes.Init)
@@ -90,8 +92,9 @@
                 {color}
                 disabledHover
                 name={accountAlias || account.alias}
-                size='m'
-                classes='mb-4' />
+                size="m"
+                classes="mb-4"
+            />
             <Input
                 {error}
                 bind:value={accountAlias}
@@ -99,8 +102,9 @@
                 autofocus
                 submitHandler={handleSaveClick}
                 disabled={isBusy}
-                classes='mb-4' />
-            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes='mb-4' />
+                classes="mb-4"
+            />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes="mb-4" />
         </div>
     </div>
     <!-- Action -->
@@ -112,7 +116,11 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={invalidAliasUpdate && !hasColorChanged}>
+            <Button
+                classes="-mx-2 w-1/2"
+                onClick={() => handleSaveClick()}
+                disabled={invalidAliasUpdate && !hasColorChanged}
+            >
                 {locale('actions.save')}
             </Button>
         </div>
