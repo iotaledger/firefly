@@ -72,11 +72,19 @@ jobs:
     - name: Install dependencies
       run: yarn
 
+    - name: Build backend actor system
+      run: yarn
+      working-directory: packages/backend/bindings/node
+      env:
+        SENTRY_DSN: ${{ secrets.SENTRY_PROD_BACKEND_DSN }}
+
     - name: Bundle desktop JS
       run: yarn build
       working-directory: packages/desktop
       env:
         HARDCODE_NODE_ENV: true
+        SENTRY_DSN: ${{ secrets.SENTRY_PROD_DESKTOP_DSN }}
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     - name: Build Electron app (macOS)
       run: yarn compile:mac
