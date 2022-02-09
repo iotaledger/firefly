@@ -913,7 +913,8 @@
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "castVotes": "Cast votes"
     },
     "general": {
         "password": "Password",

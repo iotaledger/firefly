@@ -1,14 +1,10 @@
 <script lang="typescript">
-    import { Text, Icon, Button, DashboardPane } from 'shared/components'
+    import { Text, Icon, DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
-    import { ParticipationEventState, ParticipationEvent } from 'shared/lib/participation/types'
-    import { participate } from 'shared/lib/participation/api';
-    import { api, selectedAccountId } from 'shared/lib/wallet'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import type { ParticipationEvent, VotingEventAnswer } from 'shared/lib/participation/types'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     
     export let event: ParticipationEvent;
@@ -16,42 +12,14 @@
 
     const handleBackClick = () => governanceRoute.set(GovernanceRoutes.Init)
 
-    const castVote = async (answer: string) => {
-        try {
-            await participate($selectedAccountId, [{ eventId: event.eventId, answers: [answer] }])
-        } catch (err) {
-            showAppNotification({
-                type: 'error',
-                message: locale(err.error),
-            })
-        }
-    }
-
-    const handleCastClick = (answer: string) => {
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({
-                            type: 'password',
-                            props: {
-                                onSuccess: () => castVote(answer),
-                            },
-                        })
-                    } else {
-                        void castVote(answer)
-                    }
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            })
-        } else {
-            void castVote(answer)
-        }
+    const handleClick = (answer: VotingEventAnswer) => {
+        openPopup({
+            type: 'governanceCastVote',
+            props: {
+                answer,
+                event: event?.eventId
+            }
+        })
     }
 </script>
 
@@ -70,17 +38,19 @@
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
         <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
-        {#each event?.information?.payload?.questions[0]?.answers as answer, i}
-            <div class="py-4 px-6 bg-gray-50 border border-solid border-gray-100 rounded-lg flex mb-4">
+        {#each event?.information?.payload?.questions[0]?.answers as answer}
+            <div
+                on:click={() => handleClick(answer)} 
+                class="py-4 px-6 bg-gray-50 hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
+            >
                 <div>
                     <Text type="p" classes="uppercase text-blue-500 mb-2" overrideColor smaller bold>{`Option ${answer?.value}`}</Text>
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
                     <Text type="p">{answer?.additionalInfo}</Text>
                 </div>
-                <Button medium classes="my-auto ml-44" disabled={event.status.status === ParticipationEventState.Upcoming}
-                    onClick={() => handleCastClick(answer?.value)}>
-                    Cast votes
-                </Button>
+                <div class="my-auto">
+                    <Icon icon="chevron-right" />
+                </div>
             </div>
         {/each}
     </DashboardPane>

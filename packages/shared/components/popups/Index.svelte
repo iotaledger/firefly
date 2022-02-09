@@ -16,6 +16,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import GovernanceCastVote from './GovernanceCastVote.svelte'
     import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
@@ -118,6 +119,7 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
+        governanceCastVote: GovernanceCastVote,
     }
 
     const onKey = (e) => {
