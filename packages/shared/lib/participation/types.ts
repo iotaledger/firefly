@@ -71,11 +71,23 @@ export type ParticipationEventInformationPayload = {
     symbol?: string
     text?: string
     additionalInfo?: string
-    questions?: unknown
+    questions?: VotingEventQuestion[]
+}
+
+export type VotingEventQuestion = {
+    text: string
+    additionalInfo: string
+    answers: VotingEventAnswer[]
+}
+
+export type VotingEventAnswer = {
+    text: string
+    additionalInfo: string
+    value: string
 }
 
 /**
- * The more specific particiaption event information, indicating
+ * The more specific participation event information, indicating
  * the event's specific phase milestone transitions, and some more data.
  */
 export type ParticipationEventInformation = {
