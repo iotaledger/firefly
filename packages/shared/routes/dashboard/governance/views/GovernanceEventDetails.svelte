@@ -8,8 +8,10 @@
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { selectedAccount } from 'shared/lib/wallet'
-
-    export let event: ParticipationEvent
+    import type { WalletAccount } from 'shared/lib/typings/wallet';
+    
+    export let event: ParticipationEvent;
+    export let account: WalletAccount
 
     let currentVoteValue: string
     // TODO: base it on selectedAccountId when exposed in feat/single-wallet

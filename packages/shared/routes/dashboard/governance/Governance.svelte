@@ -31,7 +31,7 @@
                 {/each}
             </div>
         </div>
-        <GovernanceDashboard {event} />
+        <GovernanceDashboard {event} account={$selectedAccount} />
     {:else if $governanceRoute === GovernanceRoutes.EventDetails}
         <div class="ml-auto">
             {#each $accounts as acc}
@@ -42,6 +42,6 @@
                 />
             {/each}
         </div>
-        <GovernanceEventDetails {event} />
+        <GovernanceEventDetails {event} account={$selectedAccount} />
     {/if}
 </div>
