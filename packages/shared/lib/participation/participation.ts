@@ -12,7 +12,7 @@ import {
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { AccountParticipationAbility, Participation, ParticipationEventState, StakingAirdrop } from './types'
+import { AccountParticipationAbility, ParticipationEventState, StakingAirdrop } from './types'
 
 let participationPollInterval
 
