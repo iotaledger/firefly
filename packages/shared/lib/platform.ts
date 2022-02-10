@@ -98,6 +98,13 @@ export const Platform: IPlatform = {
             ? CapacitorApi.NotificationManager
             : undefined,
 
+    BarcodeManager:
+        PLATFORM == Platforms.DESKTOP
+            ? undefined
+            : PLATFORM == Platforms.MOBILE
+            ? CapacitorApi.BarcodeManager
+            : undefined,
+
     getStrongholdBackupDestination: (defaultPath) => {
         switch (PLATFORM) {
             case Platforms.DESKTOP:

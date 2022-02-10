@@ -6,6 +6,7 @@ import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
 import type { AppSettings } from 'shared/lib/typings/app'
+import { BarcodeManager } from '../../mobile/capacitor/lib/barcodeManager'
 
 let activeProfileId = null
 
@@ -33,6 +34,8 @@ export const CapacitorApi: IPlatform = {
     DeepLinkManager: DeepLinkManager,
 
     NotificationManager: NotificationManager,
+
+    BarcodeManager: BarcodeManager,
 
     getStrongholdBackupDestination: (defaultPath) => new Promise<string>((resolve, reject) => {}),
 
@@ -123,7 +126,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getMachineId: () => {
-        return new Promise<string>((resolve) => resolve())
+        return new Promise<string>((resolve) => resolve(''))
     },
 
     /**

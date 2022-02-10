@@ -1,41 +1,13 @@
 import type { CheckPermissionResult, ScanResult } from '@capacitor-community/barcode-scanner'
 import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner'
 import { localize } from 'shared/lib/i18n'
+import type { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
 
 const openQRBodyClass: string = 'qr-scanner'
 
 void BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] }) // this will now only target QR-codes
 
-export const prepare = async (): Promise<void> => {
-    await BarcodeScanner.prepare()
-}
-
-export const startScanner = async (onSuccess: (response: string) => void, onError: () => void): Promise<void> => {
-    try {
-        const permissionGranted = await didUserGrantPermission()
-        if (permissionGranted) {
-            await BarcodeScanner.hideBackground()
-            document.body.classList.add(openQRBodyClass)
-            const result: ScanResult = await BarcodeScanner.startScan()
-            if (result?.hasContent && result?.content) {
-                document.body.classList.remove(openQRBodyClass)
-                onSuccess(result.content)
-            }
-        } else {
-            await checkPermission()
-        }
-    } catch (err) {
-        try {
-            await stopScanner()
-        } catch (err) {
-            // eslint-disable-next-line no-empty
-        }
-        document.body.classList.remove(openQRBodyClass)
-        onError()
-    }
-}
-
-export const stopScanner = async (): Promise<void> => {
+const _stopScanner = async (): Promise<void> => {
     try {
         document.body.classList.remove(openQRBodyClass)
         await BarcodeScanner.showBackground()
@@ -45,7 +17,7 @@ export const stopScanner = async (): Promise<void> => {
     }
 }
 
-export const checkPermission = async (): Promise<void> => {
+const _checkPermission = async (): Promise<void> => {
     const status: CheckPermissionResult = await BarcodeScanner.checkPermission()
     if (status.denied) {
         // the user denied permission for good
@@ -58,7 +30,7 @@ export const checkPermission = async (): Promise<void> => {
     }
 }
 
-export const didUserGrantPermission = async (): Promise<boolean> => {
+const _didUserGrantPermission = async (): Promise<boolean> => {
     // check if user already granted permission
     const status: CheckPermissionResult = await BarcodeScanner.checkPermission({ force: false })
 
@@ -105,4 +77,62 @@ export const didUserGrantPermission = async (): Promise<boolean> => {
 
     // user did not grant the permission, so he/she must have declined the request
     return false
+}
+
+/** Mobile Barcode Manager */
+export const BarcodeManager: IBarcodeManager = {
+    /**
+     * Prepares qr code scanner
+     * @method prepare
+     */
+    prepare: async (): Promise<void> => {
+        await BarcodeScanner.prepare()
+    },
+
+    /**
+     * start qr code scanner
+     * @method startScanner
+     */
+    startScanner: async (onSuccess: (response: string) => void, onError: () => void): Promise<void> => {
+        try {
+            const permissionGranted = await _didUserGrantPermission()
+            if (permissionGranted) {
+                await BarcodeScanner.hideBackground()
+                document.body.classList.add(openQRBodyClass)
+                const result: ScanResult = await BarcodeScanner.startScan()
+                if (result?.hasContent && result?.content) {
+                    document.body.classList.remove(openQRBodyClass)
+                    onSuccess(result.content)
+                }
+            } else {
+                await _checkPermission()
+            }
+        } catch (err) {
+            try {
+                await _stopScanner()
+            } catch (err) {
+                // eslint-disable-next-line no-empty
+            }
+            document.body.classList.remove(openQRBodyClass)
+            onError()
+        }
+    },
+
+    /**
+     * Removes pincode entry from the keychain
+     * @method stopScanner
+     */
+    stopScanner: _stopScanner,
+
+    /**
+     * Check permission, and navigate to settings if denied
+     * @method checkPermission
+     */
+    checkPermission: _checkPermission,
+
+    /**
+     * Check if user has granted permission
+     * @method didUserGrantPermission
+     */
+    didUserGrantPermission: _didUserGrantPermission,
 }
