@@ -766,9 +766,7 @@
         "stakingManager": {
             "title": "Staking Management",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "totalFundsStaked": "Total funds staked"
         },
         "stakingConfirmation": {
             "title": "Airdrop Participation",
@@ -1101,6 +1099,12 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
+        },
+        "success": {
+            "stake": "Your funds have been staked for {account}.",
+            "unstake": "Your funds have been unstaked for {account}.",
+            "vote": "You voted with {account}",
+            "unvote": "You unvoted with {account}"
         }
     },
     "error": {
