@@ -3,12 +3,10 @@
     import { localize } from 'shared/lib/i18n'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
-    import type { ParticipationEvent, VotingEventAnswer } from 'shared/lib/participation/types'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { openPopup } from 'shared/lib/popup'
+    import type { ParticipationEvent, VotingEventAnswer } from 'shared/lib/participation/types'
     
     export let event: ParticipationEvent;
-    export let locale: Locale
 
     const handleBackClick = () => governanceRoute.set(GovernanceRoutes.Init)
 
@@ -17,7 +15,7 @@
             type: 'governanceCastVote',
             props: {
                 answer,
-                event: event?.eventId
+                eventId: event?.eventId
             }
         })
     }
