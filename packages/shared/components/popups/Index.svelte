@@ -36,6 +36,7 @@
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
     import StakingNotice from './StakingNotice.svelte'
+    import Success from './Success.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
@@ -120,6 +121,7 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
         governanceCastVote: GovernanceCastVote,
+        success: Success
     }
 
     const onKey = (e) => {
