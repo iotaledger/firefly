@@ -77,8 +77,8 @@
             darkmode: 'governance/governance-info.svg'
         },
         'treasury-bg': {
-            lightmode: 'governance/treasury.jpg',
-            darkmode: 'governance/treasury.jpg'
+            lightmode: 'governance/treasury.png',
+            darkmode: 'governance/treasury.png'
         },
     }
 </script>
