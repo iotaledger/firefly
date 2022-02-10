@@ -13,7 +13,7 @@
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
     import { wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
@@ -39,7 +39,7 @@
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
-    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
     const walletBalance = derived(wallet, ($wallet) => {
         const { balanceOverview } = $wallet
@@ -174,22 +174,6 @@
     }
 </script>
 
-<style type="text/scss">
-    button.active {
-        @apply relative;
-        &:after {
-            content: '';
-            @apply bg-blue-500;
-            @apply w-full;
-            @apply rounded;
-            @apply h-0.5;
-            @apply absolute;
-            @apply -bottom-2.5;
-            @apply left-0;
-        }
-    }
-</style>
-
 <div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
@@ -256,3 +240,19 @@
         {formatYAxis}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>
+
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>

@@ -1,26 +1,27 @@
 <script lang="typescript">
-    import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components';
-    import { mobile } from 'shared/lib/app';
-    import { showAppNotification } from 'shared/lib/notifications';
-    import { openPopup } from 'shared/lib/popup';
-    import { isSoftwareProfile } from 'shared/lib/profile';
-    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router';
-    import type { Locale } from 'shared/lib/typings/i18n';
-    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes';
-    import type { AccountMessage,WalletAccount } from 'shared/lib/typings/wallet';
+    import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
+    import { SyncAccountOptions } from 'shared/lib/typings/account'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import type { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
-    api,
-    asyncSyncAccounts,
-    getSyncAccountOptions,
-    isFirstManualSync,
-    isFirstSessionSync,
-    isSyncing,
-    selectedAccountId,
-    selectedMessage
-    } from 'shared/lib/wallet';
-    import { getContext } from 'svelte';
-    import type { Readable,Writable } from 'svelte/store';
-    import { get } from 'svelte/store';
+        api,
+        asyncSyncAccounts,
+        getSyncAccountOptions,
+        isFirstManualSync,
+        isFirstSessionSync,
+        isSyncing,
+        selectedAccountId,
+        selectedMessage,
+    } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -29,7 +30,7 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
-    function handleTransactionClick(transaction) {
+    function handleTransactionClick(transaction: AccountMessage): void {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
         if (sourceAccount) {
             selectedAccountId.set(sourceAccount.id)
@@ -43,7 +44,7 @@
         if ($mobile) drawer.open()
     }
 
-    function handleSyncAccountOptions() {
+    function handleSyncAccountOptions(): SyncAccountOptions {
         if (get(isFirstManualSync)) {
             isFirstManualSync.set(true)
 
@@ -56,7 +57,7 @@
         }
     }
 
-    function handleSyncClick() {
+    function handleSyncClick(): void {
         const { gapLimit, accountDiscoveryThreshold } = handleSyncAccountOptions()
 
         if ($isSoftwareProfile) {
@@ -85,7 +86,7 @@
         }
     }
 
-    function shouldShowFirstSync() {
+    function shouldShowFirstSync(): boolean {
         /**
          * NOTE: The following conditions must be satisfied
          * for the "syncing history, ..." message to show:

@@ -7,7 +7,6 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "preinstall": "cd ./../shared && yarn && cd ./../mobile",
         "build": "NODE_ENV=production PLATFORM=mobile webpack",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
@@ -21,14 +20,17 @@
         "@capacitor/core": "3.2.0",
         "@capacitor/ios": "3.2.0",
         "mini-css-extract-plugin": "^1.6.0",
-        "webpack": "^5.38.1",
-        "webpack-cli": "^4.7.2",
+        "webpack": "^5.16.0",
+        "webpack-cli": "^4.4.0",
         "webpack-dev-server": "^3.11.2"
     },
     "dependencies": {
-        "shared-modules": "link:../shared",
         "@capacitor/filesystem": "^1.0.6",
-        "capacitor-native-filepicker": "https://github.com/ourcodeworld/capacitor-native-filepicker","wallet-actor-system-capacitor-binding": "../backend/bindings/capacitor/"
+        "capacitor-native-filepicker": "https://github.com/ourcodeworld/capacitor-native-filepicker",
+        "@capacitor-community/barcode-scanner": "^2.0.1",
+        "capacitor-secure-storage-plugin": "^0.6.2",
+        "shared": "0.0.0",
+        "wallet-actor-system-capacitor-binding": "./packages/backend/bindings/capacitor/"
     },
     "engineStrict": true,
     "engines": {

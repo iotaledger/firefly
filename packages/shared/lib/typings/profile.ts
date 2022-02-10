@@ -31,6 +31,7 @@ export interface Profile {
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
     hasVisitedStaking?: boolean
+    accounts?: ProfileAccount[]
 }
 
 /**
@@ -67,4 +68,11 @@ export enum ImportType {
     Ledger = 'ledger',
     TrinityLedger = 'trinityLedger',
     FireflyLedger = 'fireflyLedger',
+}
+/**
+ * Profile account settings
+ */
+export interface ProfileAccount {
+    id: string
+    color: string
 }

@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { getInitials } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -56,14 +55,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        + button {
-            @apply ml-4;
-        }
-    }
-</style>
-
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
@@ -76,11 +67,18 @@
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
                 <WalletPill
+                    account={acc}
                     active={activeAccount.id === acc.id}
-                    name={acc.alias}
-                    color={acc.color}
                     onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    button {
+        + button {
+            @apply ml-4;
+        }
+    }
+</style>

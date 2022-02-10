@@ -65,30 +65,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        &:not(:disabled):hover {
-            .radio-button {
-                @apply border-blue-500;
-            }
-        }
-        &:disabled {
-            @apply cursor-not-allowed;
-        }
-        .radio-button {
-            :global(svg path) {
-                @apply text-white;
-                @apply stroke-current;
-                fill: none;
-            }
-            &.active {
-                @apply border-0;
-                @apply bg-blue-500;
-            }
-        }
-    }
-</style>
-
 <button
     class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
     rounded-2xl"
@@ -133,3 +109,27 @@
         {/if}
     </div>
 </button>
+
+<style type="text/scss">
+    button {
+        &:not(:disabled):hover {
+            .radio-button {
+                @apply border-blue-500;
+            }
+        }
+        &:disabled {
+            @apply cursor-not-allowed;
+        }
+        .radio-button {
+            :global(svg path) {
+                @apply text-white;
+                @apply stroke-current;
+                fill: none;
+            }
+            &.active {
+                @apply border-0;
+                @apply bg-blue-500;
+            }
+        }
+    }
+</style>

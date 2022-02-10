@@ -45,5 +45,5 @@
 {:else if $accountRoute === AccountRoutes.Send}
     <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} alias={$account.alias} />
+    <ManageAccount {locale} alias={$account.alias} account={$account} />
 {/if}

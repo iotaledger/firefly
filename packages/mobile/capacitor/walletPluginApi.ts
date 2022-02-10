@@ -37,7 +37,7 @@ import {
     getLegacySeedChecksum as _getLegacySeedChecksum,
     getStrongholdStatus as _getStrongholdStatus,
     lockStronghold as _lockStronghold,
-    removeStorage as _removeStorage,
+    deleteStorage as _deleteStorage,
     restoreBackup as _restoreBackup,
     send as _send,
     setClientOptions as _setClientOptions,
@@ -218,8 +218,8 @@ export const api = {
     setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
     },
-    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
+    deleteStorage: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _deleteStorage(sendMessage, __ids)
     },
     send: function (
         fromAccountId: AccountIdentifier,

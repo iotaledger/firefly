@@ -17,59 +17,6 @@
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 
-<style type="text/scss">
-    p {
-        &.smaller {
-            @apply text-12;
-            &:not(.overrideLeading) {
-                @apply leading-120;
-            }
-        }
-        &.bigger {
-            @apply text-16;
-            @apply leading-140;
-        }
-    }
-    pre {
-        &.smaller {
-            @apply text-11;
-        }
-        &.bigger {
-            @apply text-13;
-        }
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    p,
-    pre {
-        // TODO: tailwindify
-        &.secondary {
-            @apply text-gray-500;
-        }
-        &.disabled {
-            @apply text-gray-400;
-            &.darkmode {
-                @apply text-gray-600;
-            }
-        }
-        &.highlighted {
-            @apply text-blue-500;
-        }
-        &.error {
-            @apply text-red-500;
-        }
-    }
-    pre {
-        font-family: 'IBM Plex Mono', monospace;
-        @apply font-normal;
-        @apply break-all;
-        @apply whitespace-pre-line;
-    }
-</style>
-
 {#if type === 'h1'}
     <h1
         class={`font-bold text-32 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
@@ -148,3 +95,56 @@
         <slot />
     </pre>
 {/if}
+
+<style type="text/scss">
+    p {
+        &.smaller {
+            @apply text-12;
+            &:not(.overrideLeading) {
+                @apply leading-120;
+            }
+        }
+        &.bigger {
+            @apply text-16;
+            @apply leading-140;
+        }
+    }
+    pre {
+        &.smaller {
+            @apply text-11;
+        }
+        &.bigger {
+            @apply text-13;
+        }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    pre {
+        // TODO: tailwindify
+        &.secondary {
+            @apply text-gray-500;
+        }
+        &.disabled {
+            @apply text-gray-400;
+            &.darkmode {
+                @apply text-gray-600;
+            }
+        }
+        &.highlighted {
+            @apply text-blue-500;
+        }
+        &.error {
+            @apply text-red-500;
+        }
+    }
+    pre {
+        font-family: 'IBM Plex Mono', monospace;
+        @apply font-normal;
+        @apply break-all;
+        @apply whitespace-pre-line;
+    }
+</style>

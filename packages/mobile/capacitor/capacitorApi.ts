@@ -41,6 +41,7 @@ export const CapacitorApi: IPlatform = {
             console.error(error)
         }
     },
+    renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
 
     PincodeManager: PincodeManager,
 
@@ -59,6 +60,7 @@ export const CapacitorApi: IPlatform = {
         })
         return `${docUri?.uri.replace(/^file:\/\//,'')}`
     },
+    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
     /**
      * Exports migration log
@@ -70,9 +72,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => {
-        return new Promise<boolean>((resolve, reject) => {})
-    },
+    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
 
     /**
      * Exports ledger migration log

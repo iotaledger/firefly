@@ -5,6 +5,7 @@
     import type { Readable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -18,7 +19,7 @@
     $: incoming = chartData.incoming
     $: outgoing = chartData.outgoing
     $: labels = chartData.labels
-    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
+    $: color = getColor($activeProfile, $selectedAccount?.id)
 
     $: {
         if (locale || $selectedAccount) {

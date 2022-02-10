@@ -2,10 +2,10 @@
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { Icon, Text } from 'shared/components'
-    import { truncateString } from 'shared/lib/helpers'
+    import { truncateString, isBright } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
@@ -16,13 +16,13 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        isParticipationPayload
+        isParticipationPayload,
     } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let locale: Locale
 
-    export let id
     export let timestamp
     export let confirmed
     export let color
@@ -33,10 +33,6 @@
     export let onClick = (): void => {}
 
     let messageValue = ''
-
-    let hasCachedMigrationTx: boolean
-    let milestonePayload: Milestone
-    let txPayload: Transaction
 
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
@@ -60,24 +56,19 @@
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
-    let senderAddress: string
-    let receiverAddresses: string[]
-
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
-    // There can only be one sender address which either belongs to us or not
-    let senderAccount: WalletAccount
+    // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
 
     // For an incoming transaction there might be multiple receiver addresses
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
-    let receiverAccount: WalletAccount
     $: receiverAccount =
         getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
-    let initialsColor
+    let initialsColor: string
     let accountAlias = ''
 
     $: {
@@ -90,7 +81,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                initialsColor = acc.color
+                initialsColor = getColor($activeProfile, acc.id)
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
@@ -104,7 +95,7 @@
         }
     }
 
-    let direction
+    let direction: string
     $: {
         if (txPayload) {
             if (includeFullSender) {
@@ -162,8 +153,7 @@
     on:click={onClick}
     data-label="transaction-row"
     class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) ? 'opacity-50' : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
-    disabled={hasCachedMigrationTx}
->
+    disabled={hasCachedMigrationTx}>
     <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
             <Icon
@@ -186,9 +176,11 @@
         {:else}
             <Icon
                 boxed
-                classes={`text-white dark:text-${initialsColor}-600`}
+                classes={`text-${isBright(initialsColor) ? 'gray-800' : 'white'}`}
                 boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
                 icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'}
+                fill={isBright(initialsColor) ? '#000000' : ''}
+                boxStyles={`background-color: ${initialsColor || (txPayload.data.essence.data.internal && 'gray')};`}
             />
         {/if}
     </div>

@@ -18,6 +18,17 @@ const ElectronApi = {
     updateActiveProfile(id) {
         activeProfileId = id
     },
+    renameProfileFolder(oldPath, newPath) {
+        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+            if (oldPath.startsWith(userDataPath)) {
+                try {
+                    fs.renameSync(oldPath, newPath)
+                } catch (err) {
+                    console.error(err)
+                }
+            }
+        })
+    },
     removeProfileFolder(profilePath) {
         ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the removing profile path matches the user data path
@@ -67,6 +78,27 @@ const ElectronApi = {
                 }
 
                 return result.filePath
+            }),
+
+    exportTransactionHistory: async (defaultPath, contents) =>
+        ipcRenderer
+            .invoke('show-save-dialog', {
+                properties: ['createDirectory', 'showOverwriteConfirmation'],
+                defaultPath,
+                filters: [{ name: 'CSV Files', extensions: ['csv'] }],
+            })
+            .then((result) => {
+                if (result.canceled) {
+                    return null
+                }
+                return new Promise((resolve, reject) => {
+                    try {
+                        fs.writeFileSync(result.filePath, contents)
+                        resolve(result.filePath)
+                    } catch (err) {
+                        reject(err)
+                    }
+                })
             }),
 
     /**

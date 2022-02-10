@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -49,12 +49,13 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair
+        addMessagesPair,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account';
 
     export let locale: Locale
 
@@ -68,7 +69,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -137,7 +137,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
+    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
@@ -243,13 +243,13 @@
         })
     }
 
-    function onGenerateAddress(accountId) {
+    function onGenerateAddress(accountId: AccountIdentifier) {
         const _generate = () => {
             isGeneratingAddress = true
 
             if ($isLedgerProfile) displayNotificationForLedgerProfile('error', true, true)
 
-            api.getUnusedAddress(accountId, {
+            api.getUnusedAddress(accountId.toString(), {
                 onSuccess(response) {
                     accounts.update((accounts) =>
                         accounts.map((account) => {
@@ -313,46 +313,17 @@
         }
     }
 
-    function findReuseAccount() {
-        // If the last account in the accounts list is "deleted" and has no
-        // messages on it, we can reuse it, otherwise the wallet will complain
-        // about the last account not being used
-        const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
-
-        if (hiddenAccounts.length > 0) {
-            const lastAccount = $accounts[$accounts.length - 1]
-            const hiddenAccountIndex = hiddenAccounts.indexOf(lastAccount.id)
-            if (
-                hiddenAccountIndex >= 0 &&
-                lastAccount.rawIotaBalance === 0 &&
-                lastAccount.messages &&
-                lastAccount.messages.length === 0
-            ) {
-                return lastAccount.id
-            }
-
-            // If we have restarted the app we might not have been notified of the empty account
-            // so it wont appear in the accounts list, so check in the hidden list to see
-            // if there is an id not in the accounts list
-            for (const hiddenAccount of hiddenAccounts) {
-                if (!$accounts.some((a) => a.id === hiddenAccount)) {
-                    return hiddenAccount
-                }
-            }
-        }
-    }
-
-    async function onCreateAccount(alias, onComplete) {
+    async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias)
+                const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 walletRoute.set(WalletRoutes.Init)
 
-                onComplete()
+                return onComplete()
             } catch (err) {
-                onComplete(err)
+                return onComplete(err)
             }
         }
 
@@ -514,7 +485,7 @@
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
-        if ($activeProfile) {
+        if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
                 loadAccounts()
             }
@@ -540,12 +511,6 @@
         }
     })
 </script>
-
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
@@ -614,3 +579,9 @@
         </div>
     {/if}
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>

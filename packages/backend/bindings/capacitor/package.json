@@ -34,7 +34,7 @@
   "author": "IOTA Stiftung",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "latest"
+    "@capacitor/core": "^3.0.0"
   },
   "devDependencies": {
     "@capacitor/android": "^3.0.0",

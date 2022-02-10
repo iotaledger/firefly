@@ -18,18 +18,6 @@
     export let onClick = (): void => {}
 </script>
 
-<style type="text/scss">
-    button {
-        &:not(.wide) {
-            min-height: 120px;
-        }
-        &:disabled {
-            @apply opacity-50;
-            @apply pointer-events-none;
-        }
-    }
-</style>
-
 <button
     on:click={() => onClick()}
     class="relative flex {wide ? 'flex-row items-center space-x-4' : 'flex-col flex-wrap '} justify-between text-left rounded-xl {wide ? 'bg-gray-100 p-4' : `bg-${color}-50 px-4 pt-4 pb-5`} dark:bg-gray-900 dark:bg-opacity-50 {classes}"
@@ -54,3 +42,15 @@
         <Icon icon="refresh" classes="{loading && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
     {/if}
 </button>
+
+<style type="text/scss">
+    button {
+        &:not(.wide) {
+            min-height: 120px;
+        }
+        &:disabled {
+            @apply opacity-50;
+            @apply pointer-events-none;
+        }
+    }
+</style>

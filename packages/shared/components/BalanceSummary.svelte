@@ -6,6 +6,7 @@
     import { mobile } from 'shared/lib/app'
 
     export let color = 'blue' // TODO: profiles will have different colors
+    export let textColor = 'white'
 
     export let balanceRaw = 0
     export let balanceFiat = 0
@@ -20,13 +21,11 @@
 <div class="flex flex-col flex-wrap items-start space-y-1.5">
     <balance-box
         on:click={togglePreciseBalance}>
-        <Text type="h2" overrideColor classes={$mobile ? 'text-black dark:text-white' : 'text-white'}>
+        <Text type="h2" overrideColor classes="text-{textColor}">
             {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
         </Text>
     </balance-box>
     {#if balanceFiat}
-        <Text type="p" overrideColor smaller classes={$mobile ? 'text-gray-500' : `text-${color}-200 dark:text-blue-300`}>
-            {balanceFiat}
-        </Text>
+        <Text type="p" overrideColor smaller classes="text-{textColor} dark:text-{textColor}">{balanceFiat}</Text>
     {/if}
 </div>

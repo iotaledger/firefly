@@ -18,20 +18,6 @@
     }
 </script>
 
-<style type="text/scss">
-    dropzone {
-        height: 290px;
-        content {
-            &.dropping {
-                @apply pointer-events-none;
-            }
-            * {
-                @apply cursor-pointer;
-            }
-        }
-    }
-</style>
-
 <dropzone
     class="flex items-center justify-center p-7 w-full rounded-lg border border-solid bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
     on:drop={onDrop}
@@ -70,3 +56,17 @@
         {/if}
     </content>
 </dropzone>
+
+<style type="text/scss">
+    dropzone {
+        height: 290px;
+        content {
+            &.dropping {
+                @apply pointer-events-none;
+            }
+            * {
+                @apply cursor-pointer;
+            }
+        }
+    }
+</style>

@@ -33,6 +33,17 @@ export const Platform: IPlatform = {
         }
     },
 
+    renameProfileFolder(oldPath, newPath) {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.renameProfileFolder(oldPath, newPath)
+            case Platforms.MOBILE:
+                return CapacitorApi.renameProfileFolder(oldPath, newPath)
+            default:
+                return
+        }
+    },
+
     removeProfileFolder(profilePath) {
         switch (PLATFORM) {
             case Platforms.DESKTOP:
@@ -82,6 +93,18 @@ export const Platform: IPlatform = {
                 return Electron.getStrongholdBackupDestination(defaultPath)
             case Platforms.MOBILE:
                 return CapacitorApi.getStrongholdBackupDestination(defaultPath)
+            default:
+                return
+        }
+    },
+
+    exportTransactionHistory: async (defaultPath, contents) => {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.exportTransactionHistory(defaultPath, contents)
+            case Platforms.MOBILE:
+                // TODO: Export transaction history on capacitor
+                return Promise.resolve(null)
             default:
                 return
         }

@@ -7,23 +7,14 @@
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
+    export let boxStyles = ''
 
     $: selected = icons[icon]
 </script>
 
-<style type="text/scss">
-    .boxed {
-        border-radius: 0.625rem; // TODO: add to tailwind
-    } 
-    /* Hotfix to avoid the SVG slow transition */
-    svg, svg path {
-        transition: background 0.05s, color 0.05s, border-color 0.05s, opacity 0.05s;
-    }
-</style>
-
 {#if selected}
     {#if boxed}
-        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}">
+        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}" style={boxStyles}>
             <svg
                 data-label="icon"
                 class="flex-shrink-0 {classes}"
@@ -74,3 +65,13 @@
         </svg>
     {/if}
 {/if}
+
+<style type="text/scss">
+    .boxed {
+        border-radius: 0.625rem; // TODO: add to tailwind
+    } 
+    /* Hotfix to avoid the SVG slow transition */
+    svg, svg path {
+        transition: background 0.05s, color 0.05s, border-color 0.05s, opacity 0.05s;
+    }
+</style>

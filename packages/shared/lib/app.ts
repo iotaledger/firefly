@@ -2,6 +2,7 @@ import type { Unit as UnitType } from '@iota/unit-converter'
 import { Unit } from '@iota/unit-converter'
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
+import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
 import { localize } from './i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
@@ -83,7 +84,7 @@ export const login = (): void => {
 
  * Logout from current profile
  */
-export const logout = (_clearActiveProfile: boolean = false): Promise<void> =>
+export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
     new Promise<void>((resolve) => {
         const _activeProfile = get(activeProfile)
 
@@ -107,17 +108,18 @@ export const logout = (_clearActiveProfile: boolean = false): Promise<void> =>
 
             clearSendParams()
             closePopup(true)
+            loggedIn.set(false)
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
             resetRouter()
 
-            loggedIn.set(false)
-
             resolve()
         }
 
-        if (get(isSoftwareProfile) && !get(isStrongholdLocked)) {
+        // no need to lock strong hold if we are logging out after deleting a profile
+        // or we are not using a software profile
+        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             api.lockStronghold({
                 onSuccess() {
                     _cleanup()
@@ -135,3 +137,16 @@ export const logout = (_clearActiveProfile: boolean = false): Promise<void> =>
             _cleanup()
         }
     })
+
+/**
+ * The privacy policy packaged with the current version of Firefly
+ */
+export const PRIVACY_POLICY_VERSION = 2
+
+/**
+ * The Terms of Service packaged with the current version of Firefly
+ */
+export const TOS_VERSION = 2
+
+export const needsToAcceptLatestPrivacyPolicy = (): boolean => get(lastAcceptedPrivacyPolicy) < PRIVACY_POLICY_VERSION
+export const needsToAcceptLatestTos = (): boolean => get(lastAcceptedTos) < TOS_VERSION

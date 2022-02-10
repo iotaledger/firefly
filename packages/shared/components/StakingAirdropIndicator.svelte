@@ -6,34 +6,20 @@
 
     export let airdrop: StakingAirdrop
 
-    const isStakedForAirdrop = (overview: ParticipationOverview): boolean => {
-        return overview.some((_overview) => {
+    const isStakedForAirdrop = (overview: ParticipationOverview): boolean => overview.some(
+        (_overview) => {
             if (airdrop === StakingAirdrop.Assembly) {
                 return _overview.assemblyStakedFunds > 0
             }
-
             return _overview.shimmerStakedFunds > 0
-        })
-    }
+        }
+    )
 
     $: isStaked = isStakedForAirdrop($participationOverview)
     $: showIndicator =
         $stakingEventState === ParticipationEventState.Commencing ||
         $stakingEventState === ParticipationEventState.Holding
 </script>
-
-<style>
-    .pulse {
-        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-    @keyframes -ping {
-        30%,
-        100% {
-            transform: scale(1.5);
-            opacity: 0;
-        }
-    }
-</style>
 
 {#if showIndicator}
     <div class="rounded-2xl bg-white bg-opacity-20 pl-2 pr-3 py-1 flex flex-row space-x-2 items-center">
@@ -50,3 +36,16 @@
         </Text>
     </div>
 {/if}
+
+<style>
+    .pulse {
+        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes -ping {
+        30%,
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
