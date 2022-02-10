@@ -113,7 +113,7 @@
             </Button>
         {/each}
     </DashboardPane>
-    <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 space-y-3 overflow-hidden p-6">
+    <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 overflow-hidden p-6">
         <div class="space-y-3">
             <Text type="p" smaller>My voting power</Text>
             <Text type="h1" classes="inline-flex items-end">
@@ -126,6 +126,6 @@
                 <Text type="h4" classes="ml-1 mb-1">votes</Text>
             </Text>
         </div>
-        <Icon icon="info" classes="ml-auto mt-0" />
+        <Icon icon="info-filled" classes="ml-auto mt-0 text-gray-400" />
     </DashboardPane>
 </div>
