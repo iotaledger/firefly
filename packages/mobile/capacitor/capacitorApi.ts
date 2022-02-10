@@ -24,7 +24,7 @@ export const CapacitorApi: IPlatform = {
             await Filesystem.rmdir({
                 path: profilePath,
                 directory: Directory.Data,
-                recursive: true
+                recursive: true,
             })
         } catch (error) {
             console.error(error)
@@ -34,7 +34,7 @@ export const CapacitorApi: IPlatform = {
     async listProfileFolders(profileStoragePath) {
         try {
             const { files } = await Filesystem.readdir({
-                path: profileStoragePath
+                path: profileStoragePath,
             })
             return files
         } catch (error) {
@@ -52,13 +52,13 @@ export const CapacitorApi: IPlatform = {
     getStrongholdBackupDestination: async (defaultPath) => {
         const { folders } = await CapacitorNativeFilePicker.launchFolderPicker({
             limit: 1,
-            showHiddenFiles: true
+            showHiddenFiles: true,
         })
         const docUri = await Filesystem.getUri({
             path: '',
-            directory: Directory.Data
+            directory: Directory.Data,
         })
-        return `${docUri?.uri.replace(/^file:\/\//,'')}`
+        return `${docUri?.uri.replace(/^file:\/\//, '')}`
     },
     exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
