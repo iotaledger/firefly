@@ -8,19 +8,23 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import type { VotingEventAnswer } from 'shared/lib/participation/types';
-    import type { Locale } from 'shared/lib/typings/i18n';
     
-    export let locale: Locale
     export let answer: VotingEventAnswer
     export let eventId: string
 
     const castVote = async () => {
         try {
             await participate($selectedAccountId, [{ eventId, answers: [answer?.value] }])
+            openPopup({
+                type: 'success',
+                props: {
+                    successText: 'Success!',
+                }
+            })
         } catch (err) {
             showAppNotification({
                 type: 'error',
-                message: locale(err.error),
+                message: localize(err.error),
             })
         }
     }
@@ -43,7 +47,7 @@
                 onError(err) {
                     showAppNotification({
                         type: 'error',
-                        message: locale(err.error),
+                        message: localize(err.error),
                     })
                 },
             })
