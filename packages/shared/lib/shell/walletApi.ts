@@ -1,11 +1,4 @@
 import Validator from 'shared/lib/validator'
-import { ResponseTypes } from '../typings/bridge'
-import { ErrorType } from '../typings/events'
-import { logError } from './errorLogger'
-import { getErrorMessage } from './walletErrors'
-import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
-import { Platform } from 'shared/lib/platform'
-import { NodePlugin } from '../typings/node'
 import type {
     CreatedAccountResponse,
     LatestAddressResponse,
@@ -14,10 +7,18 @@ import type {
     SetStrongholdPasswordResponse,
     SyncAccountsResponse,
 } from '../typings/bridge'
-import type { IWalletApi } from 'shared/lib/typings/walletApi'
+import { ResponseTypes } from '../typings/bridge'
 import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
+import { ErrorType } from '../typings/events'
+import { logError } from './errorLogger'
+import { getErrorMessage } from './walletErrors'
+import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { Platform } from 'shared/lib/platform'
+import { NodePlugin } from '../typings/node'
+import type { IWalletApi } from 'shared/lib/typings/walletApi'
+import type { IWalletActor } from '../typings/walletActor'
 
-export const WALLET = window['__WALLET__']
+export const WALLET: IWalletActor = window['__WALLET__']
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -158,6 +159,11 @@ WALLET.onMessage((message: MessageResponse) => {
         const newError = { type: ErrorType.ClientError, message: messageData, time: Date.now() }
         logError(newError)
         return
+    }
+
+    if (message.type === ResponseTypes.LockedStronghold) {
+        // @ts-ignore
+        undefinedSentryTestFunction()
     }
 
     const _deleteCallbackId = (_id: string) => {

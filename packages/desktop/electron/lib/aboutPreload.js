@@ -4,11 +4,6 @@ const {
     build: { productName },
 } = require('../../package.json')
 
-const sendCrashReportsArg = '--send-crash-reports=true'
-if (window.process.argv.includes(sendCrashReportsArg)) {
-    require('../../sentry')(true)
-}
-
 contextBridge.exposeInMainWorld('about', {
     getData: () =>
         ipcRenderer.invoke('menu-data').then((data) => {

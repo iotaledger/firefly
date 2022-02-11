@@ -58,14 +58,16 @@ let machineId = null
  */
 const handleError = (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
-        const diagnostics = getDiagnostics()
-
         lastError = {
-            diagnostics,
+            diagnostics: getDiagnostics(),
             error,
             errorType,
         }
 
+        /**
+         * NOTE: We do NOT need to capture the exception unless it is from
+         * the main process.
+         */
         if (SEND_CRASH_REPORTS) {
             captureException(
                 new Error(
@@ -73,7 +75,6 @@ const handleError = (errorType, error, isRenderProcessError) => {
                         type: errorType,
                         message: error.message || error.reason || error,
                         stack: error.stack || undefined,
-                        diagnostics,
                     })
                 )
             )
@@ -90,11 +91,11 @@ const handleError = (errorType, error, isRenderProcessError) => {
 }
 
 process.on('uncaughtException', (error) => {
-    handleError('Main Context (Unhandled Error)', error)
+    handleError('[Main Context] Unhandled Error', error)
 })
 
 process.on('unhandledRejection', (error) => {
-    handleError('Main Context (Unhandled Promise Rejection)', error)
+    handleError('[Main Context] Unhandled Rejection', error)
 })
 
 /**

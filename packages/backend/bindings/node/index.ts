@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '../../../shared/lib/typings/bridge'
 import {
     AccountToCreate,
     AccountIdentifier,
@@ -93,12 +93,7 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(
-    id: string,
-    storagePath?: string,
-    sendCrashReports?: boolean,
-    machineId?: string
-): { destroy: () => void; removeEventListeners: () => void } {
+export function init(id: string, storagePath?: string, sendCrashReports?: boolean, machineId?: string): IActorHandler {
     /* NOTE: This ensures that if no argument is passed then it is still a boolean */
     sendCrashReports = sendCrashReports || false
 
@@ -125,6 +120,7 @@ export function init(
         },
         removeEventListeners() {
             runtime.removeEventListeners()
+            return ''
         },
     }
 }

@@ -1,11 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const { version } = require('../../package.json')
 
-const sendCrashReportsArg = '--send-crash-reports=true'
-if (window.process.argv.includes(sendCrashReportsArg)) {
-    require('../../sentry')(true)
-}
-
 contextBridge.exposeInMainWorld('error', {
     getData: () =>
         ipcRenderer.invoke('error-data').then((data) => ({

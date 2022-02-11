@@ -21,7 +21,7 @@ import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
 import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
-import type { Actor } from './typings/bridge'
+import type { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import type { Message } from './typings/message'
@@ -70,7 +70,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 interface ActorState {
-    [id: string]: Actor
+    [id: string]: IActorHandler
 }
 
 /** Active actors state */
@@ -211,9 +211,7 @@ export const initialise = (id: string, storagePath: string, sendCrashReports: bo
         console.error('Initialise called when another actor already initialised')
     }
 
-    const actor: Actor = WALLET.init(id, storagePath, sendCrashReports, machineId)
-
-    actors[id] = actor
+    actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
 }
 
 /**

@@ -83,6 +83,7 @@ jobs:
       working-directory: packages/desktop
       env:
         HARDCODE_NODE_ENV: true
+        SENTRY: true
         SENTRY_DSN: ${{ secrets.SENTRY_PROD_DESKTOP_DSN }}
         SENTRY_ENVIRONMENT: 'prod'
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
