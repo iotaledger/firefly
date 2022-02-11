@@ -161,11 +161,6 @@ WALLET.onMessage((message: MessageResponse) => {
         return
     }
 
-    if (message.type === ResponseTypes.LockedStronghold) {
-        // @ts-ignore
-        undefinedSentryTestFunction()
-    }
-
     const _deleteCallbackId = (_id: string) => {
         // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {

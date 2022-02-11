@@ -50,8 +50,22 @@ if (
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
-let lastError = {}
 let machineId = null
+function getMachineId() {
+    // Will only be null the first time
+    // If this fails, it will probably fail again, so set it to an empty string
+    if (machineId === null) {
+        try {
+            machineId = machineIdSync()
+        } catch (error) {
+            machineId = ''
+            console.error(error)
+        }
+    }
+    return machineId
+}
+
+let lastError = {}
 
 /**
  * Setup the error handlers early so they catch any issues
@@ -373,19 +387,6 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
-ipcMain.handle('get-machine-id', (_e) => {
-    // Will only be null the first time
-    // If this fails, it will probably fail again, so set it to an empty string
-    if (machineId === null) {
-        try {
-            machineId = machineIdSync()
-        } catch (error) {
-            machineId = ''
-            console.error(error)
-        }
-    }
-    return machineId
-})
 
 // Diagnostics
 const getDiagnostics = () => {
@@ -447,8 +448,9 @@ ipcMain.handle('handle-error', (_e, errorType, error) => {
     handleError(errorType, error, true)
 })
 
-// Os
+// System
 ipcMain.handle('get-os', (_e) => process.platform)
+ipcMain.handle('get-machine-id', (_e) => getMachineId())
 
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
