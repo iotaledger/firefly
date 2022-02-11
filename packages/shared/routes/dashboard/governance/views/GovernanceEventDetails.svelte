@@ -9,6 +9,7 @@
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { selectedAccount } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet';
+    import { milestoneToDate } from 'shared/lib/time'
     
     export let event: ParticipationEvent;
     export let account: WalletAccount
@@ -105,14 +106,20 @@
             </Button>
         {/each}
     </DashboardPane>
-    <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 overflow-hidden p-6">
-        <div class="space-y-3">
-            <Text type="p" smaller>{localize('views.governance.votingPower.title')}</Text>
-            <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
-            <Text type="p" smaller>Voting opens on</Text>
-            <Text type="h2" classes="inline-flex items-end">Sat, 23rd Feb, 13:00 CET</Text>
-            <Text type="p" smaller>Counting starts on</Text>
-            <Text type="h2" classes="inline-flex items-end">Sat, 4th Mar, 13:00 CET</Text>
+    <DashboardPane classes="w-full h-1/2 flex flex-row flex-shrink-0 overflow-hidden p-6">
+        <div class="space-y-5">
+            <div>
+                <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.votingPower.title')}</Text>
+                <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
+            </div>
+            <div>
+                <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingOpens')}</Text>
+                <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text>
+            </div>
+            <div>
+                <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
+                <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text>
+            </div>
         </div>
         <Icon icon="info-filled" classes="ml-auto mt-0 text-gray-400" />
     </DashboardPane>

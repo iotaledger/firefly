@@ -575,6 +575,10 @@
                 },
                 "button": "View proposal"
             },
+            "eventDetails": {
+                "votingOpens": "Voting opens on",
+                "countingStarts": "Counting starts on"
+            },
             "votes": "votes"
         }
     },
