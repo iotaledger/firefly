@@ -83,8 +83,6 @@
         }
     }
     const handleCancelClick = () => {
-        throw '[CreateAccount.svelte] Sentry test error'
-
         error = ''
         walletRoute.set(WalletRoutes.Init)
     }
