@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Theme",
                 "description": "",
-                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
+                "advice": "You must restart Firefly for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Language",

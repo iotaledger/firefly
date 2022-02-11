@@ -120,7 +120,6 @@ export function init(id: string, storagePath?: string, sendCrashReports?: boolea
         },
         removeEventListeners() {
             runtime.removeEventListeners()
-            return ''
         },
     }
 }
