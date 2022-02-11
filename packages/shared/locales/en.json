@@ -568,9 +568,9 @@
             },
             "events": {
                 "status": {
-                    "upcoming": "Upcoming",
-                    "commencing": "Commencing",
-                    "holding": "Holding period",
+                    "upcoming": "Announcement",
+                    "commencing": "Voting open",
+                    "holding": "Counting",
                     "ended": "Ended"
                 },
                 "button": "View proposal"

@@ -71,15 +71,7 @@
 
 <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
     <DashboardPane classes="w-full h-full p-6 col-span-2 flex flex-col">
-        <Text
-            type="p"
-            classes="mr-auto uppercase px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg"
-            smaller
-            bold
-            overrideColor
-        >
-            {event?.status?.status}
-        </Text>
+        <Text type="p" classes="mr-auto px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
@@ -115,16 +107,12 @@
     </DashboardPane>
     <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 overflow-hidden p-6">
         <div class="space-y-3">
-            <Text type="p" smaller>My voting power</Text>
-            <Text type="h1" classes="inline-flex items-end">
-                4528
-                <Text type="h4" classes="ml-1 mb-1">votes</Text>
-            </Text>
-            <Text type="p" smaller>My max voting power</Text>
-            <Text type="h1" classes="inline-flex items-end">
-                195609600
-                <Text type="h4" classes="ml-1 mb-1">votes</Text>
-            </Text>
+            <Text type="p" smaller>{localize('views.governance.votingPower.title')}</Text>
+            <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
+            <Text type="p" smaller>Voting opens on</Text>
+            <Text type="h2" classes="inline-flex items-end">Sat, 23rd Feb, 13:00 CET</Text>
+            <Text type="p" smaller>Counting starts on</Text>
+            <Text type="h2" classes="inline-flex items-end">Sat, 4th Mar, 13:00 CET</Text>
         </div>
         <Icon icon="info-filled" classes="ml-auto mt-0 text-gray-400" />
     </DashboardPane>
