@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly",
-    "version": "1.3.3",
+    "version": "1.4.0-beta",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/new-wallet.git",
@@ -12,17 +12,17 @@
         "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack serve --content-base public",
         "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
-        "build": "yarn:dev",
+        "build": "yarn build:dev",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
         "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=alpha webpack",
         "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=beta webpack",
         "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop RELEASE=prod webpack",
-        "compile:beta:linux": "electron-builder --linux --x64 --config electron-builder-beta.cofig.json",
-        "compile:beta:mac": "electron-builder --mac --x64 --config electron-builder-beta.cofig.json",
-        "compile:beta:win": "electron-builder --win --x64 --config electron-builder-beta.cofig.json",
-        "compile:prod:linux": "electron-builder --linux --x64 --config electron-builder-prod.cofig.json",
-        "compile:prod:mac": "electron-builder --mac --x64 --config electron-builder-prod.cofig.json",
-        "compile:prod:win": "electron-builder --win --x64 --config electron-builder-prod.cofig.json"
+        "compile:beta:linux": "electron-builder --linux --x64 --config electron-builder-beta.config.json",
+        "compile:beta:mac": "electron-builder --mac --x64 --config electron-builder-beta.config.json",
+        "compile:beta:win": "electron-builder --win --x64 --config electron-builder-beta.config.json",
+        "compile:prod:linux": "electron-builder --linux --x64 --config electron-builder-prod.config.json",
+        "compile:prod:mac": "electron-builder --mac --x64 --config electron-builder-prod.config.json",
+        "compile:prod:win": "electron-builder --win --x64 --config electron-builder-prod.config.json"
     },
     "dependencies": {
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
