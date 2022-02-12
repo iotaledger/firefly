@@ -40,6 +40,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import LegalUpdate from './LegalUpdate.svelte'
     import { mobile } from 'shared/lib/app'
 
     export let locale: Locale
@@ -115,7 +116,8 @@
         stakingManager: StakingManager,
         stakingNotice: StakingNotice,
         airdropNetworkInfo: AirdropNetworkInfo,
-        confirmDeveloperProfile: ConfirmDeveloperProfile
+        confirmDeveloperProfile: ConfirmDeveloperProfile,
+        legalUpdate: LegalUpdate,
     }
 
     const onKey = (e) => {
