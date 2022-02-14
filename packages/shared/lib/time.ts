@@ -65,5 +65,7 @@ export const milestoneToDate = (milestone: number): Date => {
     const currentMilestone = get(networkStatus)?.currentMilestone
     const firstMilestoneMillis = Date.now() - currentMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
-    return new Date(milestoneMillis)
+    const date = new Date(milestoneMillis)
+    date.setMinutes(0) && date.setSeconds(0)
+    return date
 }
