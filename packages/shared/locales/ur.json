@@ -287,7 +287,7 @@
         "settings": {
             "settings": "ترتیبات",
             "generalSettings": {
-                "title": "عام ترتیبات",
+                "title": "General",
                 "description": "اپنی ایپ کی ظاہری شکل اور دیگر عام ترتیبات کو تشکیل دیں"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "اپنا پاس ورڈ تبدیل کریں اور سیکیورٹی سے متعلق ترتیبات کو ایڈجسٹ کریں"
             },
             "advancedSettings": {
-                "title": "اعلی درجے کی ترتیبات",
+                "title": "Advanced",
                 "description": "تکنیکی صارفین کے لیئے ٹولز اور دستی ترتیبات"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "تھیم",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "زبان",
@@ -350,6 +350,11 @@
                 "newPincode": "‏نیا پن",
                 "confirmNewPincode": "‏نئے پن کی توثیق کریں",
                 "action": "‏پن تبدیل کریں"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "بلینس کا متلاشی",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "بیلنس",
         "accountBalance": "والیٹ کا بیلینس",
+        "all": "All",
         "incoming": "آنے والی",
         "outgoing": "ارسال شدہ",
         "totalIn": "کل ملا کر وصول شدہ",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "لیگیسی نیٹ ورک",
         "capsLock": "کیپس لاک آن ہے",
         "version": "ورژن {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "اجنبی",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "آج",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "نیا والیٹ بنانے سے پہلے آپ کو اپنا تازہ ترین والیٹ استعمال کرنا ہوگا.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "اس والیٹ کو حذف کرنے سے پہلے آپ کو اپنا بیلنس منتقل کرنا ہوگا.",
             "duplicate": "اس نام کا والیٹ پہلے سے موجود ہے.",
             "tilde": "پروفائل کا نام '~' کردار سے شروع نہیں ہوسکتا.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

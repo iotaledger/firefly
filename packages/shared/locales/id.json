@@ -22,10 +22,10 @@
                 "nonFirst": "Untuk saat ini, mari kita mulai dengan nama profil Anda."
             },
             "addMore": "Anda dapat menambahkan profil lainnya nanti.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Pengaturanlanjutan",
             "developer": {
                 "label": "Profil pengembang",
-                "info": "Connect to the devnet or a private network"
+                "info": "Hubungkan ke jaringan devnet atau jaringan pribadi"
             }
         },
         "setup": {
@@ -263,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Mengamankan alamat yang dihabiskan...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Proses ini akan memakan waktu {minutes, plural, one {1 menit} other {# menit}}.",
             "body2": "Komputer Anda akan berjalan dengan kapasitas penuh, Anda mungkin ingin melakukan sesuatu yang lain sambil menunggu ini selesai."
         },
         "transferFragmentedFunds": {
@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Pengaturan",
             "generalSettings": {
-                "title": "Pengaturan Umum",
+                "title": "Umum",
                 "description": "Atur penampilan aplikasi Anda dan pengaturan umum lainnya"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Ganti kata sandi Anda dan atur pengaturan terkait keamanan"
             },
             "advancedSettings": {
-                "title": "Pengaturan Lanjutan",
+                "title": "Tingkat Lanjut",
                 "description": "Alat dan pengaturan manual untuk pengguna teknis"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Motif",
                 "description": "",
-                "advice": "Restart kembali aplikasi Firefly agar perubahan pada sistem dapat diterapkan"
+                "advice": "Tolong mulai kembali aplikasi Firefly agar perubahan pada sistem dapat diterapkan"
             },
             "language": {
                 "title": "Bahasa",
@@ -350,6 +350,11 @@
                 "newPincode": "PIN Baru",
                 "confirmNewPincode": "Konfirmasi PIN baru",
                 "action": "Ganti pin"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Pencari saldo",
@@ -441,7 +446,7 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "pleaseWait": "Harap tunggu {time, plural,one {#second}other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
@@ -488,7 +493,7 @@
         },
         "staking": {
             "title": "Staking",
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Selamat datang di beranda staking!",
             "status": {
                 "upcoming": "Event belum dimulai",
                 "commencing": "Pre-staking terbuka",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Pemberian insentif jaringan staging untuk memajukan inovasi pada IOTA. Apapun yang terjadi, terjadilah. Bagaimana Shimmer berkembang terserah kepada Anda."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Pemilih warna",
+                "hexCode": "Kode heks warna"
             }
         }
     },
@@ -639,7 +650,7 @@
             "title": "Konfirmasi transaksi",
             "body": "Anda akan mengirim {amount} kepada",
             "sendingFromStakedAccount": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "Anda mengirim transaksi dari dompet yang belum mencapai minimal hadiah taruhan. Ini dapat melepaskan token Anda dan Anda mungkin akan kehilangan hadiah taruhan Anda di dompet ini."
         },
         "balanceFinder": {
             "title": "Pencari saldo",
@@ -750,8 +761,18 @@
             "body2": "Kami menargetkan untuk meluncurkan Assembly pada 2022. Token Anda akan dapat Anda transfer setelah jaringan diluncurkan."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Anda sedang membuat akun pengembang",
+            "body": "Anda akan terhubung ke Chrysalis Devnet dalam pengaturan bawaan, dan dapat berpindah jaringan secara manual. Hanya lanjutkan jika Anda tahu apa yang Anda lakukan."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -905,7 +926,7 @@
         "from": "Dari",
         "to": "Ke",
         "receiveFunds": "Terima dana",
-        "address": "Address",
+        "address": "Alamat",
         "myAddress": "Alamat Saya",
         "shareAddress": "Bagikan alamat",
         "yourAddress": "Alamat Anda",
@@ -923,6 +944,7 @@
         "systemTheme": "Sistem",
         "balance": "Saldo",
         "accountBalance": "Saldo Dompet",
+        "all": "Semua",
         "incoming": "Pemasukkan",
         "outgoing": "Pengeluaran",
         "totalIn": "Jumlah pemasukan",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Jaringan Legacy",
         "capsLock": "Caps Lock menyala",
         "version": "Versi {version}",
+        "yourWallets": "Dompet Anda",
         "unknown": "Tak diketahui",
         "none": "Tidak ada",
         "staked": "Jumlah Staking",
@@ -1011,7 +1034,8 @@
         "unstaking": "Di-Unstake",
         "notStaked": "Tidak di-stake",
         "stakedFunds": "Dana yang di-stake",
-        "unstakedFunds": "Dana yang tidak di-stake"
+        "unstakedFunds": "Dana yang tidak di-stake",
+        "accountColor": "Warna dompet"
     },
     "dates": {
         "today": "Hari ini",
@@ -1024,7 +1048,7 @@
     "times": {
         "second": "{time, plural, one {# second} other {# seconds}}",
         "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
+        "hour": "{time, plural, one {# hour} other {# hours}}\n",
         "day": "{time, plural, one {# day} other {# days}}",
         "week": "{time, plural, one {# week} other {# weeks}}",
         "month": "{time, plural, one {# month} other {# months}}",
@@ -1062,7 +1086,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "Nama akun Anda tidak dapat lebih panjang dari {length, plural, one {# character} other {# characters}}.",
             "duplicate": "Profil dengan nama ini sudah ada.",
             "delete": {
                 "nonEmptyAccounts": "Anda harus mentransfer semua saldo sebelum Anda dapat menghapus profil Anda."
@@ -1083,16 +1107,17 @@
             "similar": "Ini mirip dengan kata sandi yang umum digunakan.",
             "word": "Satu kata mudah ditebak.",
             "incorrect": "Kata sandi anda salah.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Kata sandi akun Anda tidak boleh lebih dari {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "Kode pin Anda harus terdiri dari {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN tidak sesuai.",
             "incorrect": "Kata sandi Anda saat ini salah."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "Nama dompet Anda tidak dapat lebih panjang dari {length, plural, one {# character} other {# characters}}.",
             "empty": "Anda harus menggunakan akun Anda yang terkini sebelum membuat yang baru.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Anda harus mentransfer saldo Anda sebelum menghapus dompet/akun ini.",
             "duplicate": "Dompet/akun dengan nama ini sudah ada.",
             "tilde": "Nama profil tidak boleh dimulai dengan karakter '~'.",
@@ -1104,7 +1129,7 @@
             "syncing": "Terjadi kesalahan dalam mensinkronisasi dompet/akun Anda."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "Alamat harus terdiri dari {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Ini lebih besar dari saldo Anda yang tersedia.",
             "amountNoFloat": "Jika unitnya adalah `i` Anda tidak dapat menggunakan tempat desimal.",
             "amountInvalidFormat": "Jumlah tersebut sepertinya merupakan angka yang tidak valid.",
@@ -1147,9 +1172,9 @@
             "invalid": "Jalur file cadangan tidak ditentukan.",
             "destination": "Tujuan cadangan tidak diizinkan.",
             "mnemonic": "Email ini tidak valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedTooShort": "Kata kunci harus sepanjang 81 karakter, tetapi memang demikian {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed hanya boleh mengandung karakter A-Z atau 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
+            "phraseWordCount": "Harus ada 24 kata dalam frase pemulihan Anda, saat ini ada {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Kata \"{word}\" yang tidak dikenal dalam frasa pemulihan Anda",
             "phraseCaseWord": "Kata \"{word}\" harus menggunakan huruf kecil"
         },
@@ -1257,7 +1282,13 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "Anda saat ini menggunakan profil pengembang dan terhubung ke {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Mohon berikan izin untuk menggunakan kamera agar bisa memindai kode barcode.",
+            "requestInAppSettings": "Jika Anda ingin memberikan izin untuk menggunakan kamera Anda untuk memindai kode barcode, silakan aktifkan di pengaturan aplikasi."
         }
     }
 }

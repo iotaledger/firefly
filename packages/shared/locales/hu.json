@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Beállítások",
             "generalSettings": {
-                "title": "Általános beállítások",
+                "title": "Általános",
                 "description": "Applikáció megjelenésének és általános beállításainak módosítása"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Jelszóváltoztatás és biztonsági beállítások"
             },
             "advancedSettings": {
-                "title": "Haladó beállítások",
+                "title": "Haladó",
                 "description": "Eszközök és beállítások haladó felhasználók számára"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Megjelenés",
                 "description": "",
-                "advice": "Az új megjelenéshez indítsa újra a Firefly-t"
+                "advice": "Az új megjelenéshez kérjük indítsa újra a Firefly-t"
             },
             "language": {
                 "title": "Nyelv",
@@ -350,6 +350,11 @@
                 "newPincode": "Új PIN-kód",
                 "confirmNewPincode": "Új PIN-kód megerősítése",
                 "action": "PIN-kód módosítása"
+            },
+            "changeProfileName": {
+                "title": "Profilnév megváltoztatása",
+                "description": "A Firefly profil nevének megváltoztatása",
+                "success": "A profilnév megváltoztatása sikeres"
             },
             "balanceFinder": {
                 "title": "Egyenlegkereső",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "A Shimmer az IOTA ösztönzőkkel ellátott teszt hálózata, ahova a jövőbeli nagy fejlesztések először kerülnek fel. A Shimmer további fejlődésének kulcsa a felhasználók kezében van."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Színválasztó",
+                "hexCode": "Színkód"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Egy fejlesztői profilt hoz létre",
             "body": "Alapértelmezetten a Chrysalis fejlesztői hálózatra csatlakozik és kézzel válthat a hálózatok között. Csak akkor folytassa, ha pontosan tudja mit csinál."
+        },
+        "legalUpdate": {
+            "tosTitle": "Szolgáltatási feltételek",
+            "privPolicyTitle": "Adatvédelmi irányelvek",
+            "tosAndPrivPolicyBody": "Módosítottuk a Firefly Felhasználási feltételeit és Adatvédelmi irányelveit.",
+            "tosBody": "Módosítottuk a Firefly Felhasználási feltételeit.",
+            "privPolicyBody": "Módosítottuk a Firefly Adatvédelmi irányelveit.",
+            "tosAndPrivPolicyCheckbox": "Elolvastam és elfogadom a Szolgáltatási feltételeket és az Adatvédelmi irányelveket",
+            "tosCheckbox": "Elolvastam és elfogadom a Szolgáltatási feltételeket",
+            "privPolicyCheckbox": "Elolvastam és elfogadom az Adatvédelmi irányelveket"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Rendszer",
         "balance": "Egyenleg",
         "accountBalance": "Tárca egyenleg",
+        "all": "Összes",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
         "totalIn": "Összes beérkező",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Régi hálózat",
         "capsLock": "A nagybetűzár be van kapcsolva",
         "version": "{version} verzió",
+        "yourWallets": "Tárcák",
         "unknown": "Ismeretlen",
         "none": "Nincs",
         "staked": "Letétbe helyezve",
@@ -1011,7 +1034,8 @@
         "unstaking": "Letétből kivétel folyamatban",
         "notStaked": "Nincs letétben",
         "stakedFunds": "Letétbe helyezett összeg",
-        "unstakedFunds": "Letétben nem lévő összeg"
+        "unstakedFunds": "Letétben nem lévő összeg",
+        "accountColor": "Tárcaszín"
     },
     "dates": {
         "today": "Ma",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "A tárca neve nem lehet {length, plural, one {# karakternél} other {# karakternél}} hosszabb.",
             "empty": "Új tárcát csak akkor hozhat létre, ha már legalább egyszer használta a legutóbb létrehozott tárcáját.",
+            "emptyName": "A profilnévnek legalább 1 karakterből kell állnia.",
             "notEmpty": "A tárca törlése előtt a teljes egyenlegét át kell küldenie egy másik tárcába.",
             "duplicate": "Már létezik ilyen nevű tárca.",
             "tilde": "A profilnév nem kezdődhet “~” karakterrel.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Jelenleg a fejlesztői profilt használja és a {networkName} hálózatra van csatlakozva"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Az Ön engedélye szükséges ahhoz, hogy a kamerát a QR kódok olvasáshoz használni tudja.",
+            "requestInAppSettings": "Ha szeretné engedélyezni a kamerával a QR kódok olvasását, azt az applikáció beallításainál megteheti."
         }
     }
 }

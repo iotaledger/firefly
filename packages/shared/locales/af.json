@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Instellings",
             "generalSettings": {
-                "title": "Algemene instellings",
+                "title": "Algemeen",
                 "description": "Steljou app se voorkoms en ander algemene instellings op"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Verander kou wagwoord en pas die veiligheidsverwante instellings aan"
             },
             "advancedSettings": {
-                "title": "Gevorderde instellings",
+                "title": "Gevorderd",
                 "description": "Gereedskap en handinstellings vir tegniese gebruikers"
             },
             "helpAndInfo": {
@@ -350,6 +350,11 @@
                 "newPincode": "Nuwe PIN",
                 "confirmNewPincode": "Bevestig nuwe PIN",
                 "action": "Verander PIN"
+            },
+            "changeProfileName": {
+                "title": "Verander profiel naam",
+                "description": "Verander you Firefly profiel naam",
+                "success": "Jy het jou profiel naam verander"
             },
             "balanceFinder": {
                 "title": "Balans-finder",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Die aangespoorde verhoognetwerk om groot innovasies op IOTA te bevorder. Wat ook al gebeur, gebeur. Hoe Shimmer ontwikkel, is aan jou."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Jy skep 'n ontwikkelaarprofiel",
             "body": "Jy sal by die Chrysalis Deevnet gekoppel wees, en kan handmatig van netwerke wissel. Gaan net voort as jy weet wat jy doen."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Stelsel",
         "balance": "Balans",
         "accountBalance": "Beursie Waarde",
+        "all": "All",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "totalIn": "Totaal in",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Erfenisnetwerk",
         "capsLock": "Hoofletterslot is aan",
         "version": "Weergawe {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Onbekend",
         "none": "Geen",
         "staked": "Stake",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Nie staked",
         "stakedFunds": "Staked fondse",
-        "unstakedFunds": "Unstaked fondse"
+        "unstakedFunds": "Unstaked fondse",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Vandag",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Jou beursie naam mag nie langer as {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "Jy moet jou nuutste beursie gebruik voordat jy 'n nuwe een skep.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Jy moet jou balans oordra voordat jy hierdie beursie uitvee.",
             "duplicate": "Daar bestaan ​​reeds 'n beursie met hierdie naam.",
             "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Jy gebruik tans 'n ontwikkelaarprofiel en is gekoppel aan {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

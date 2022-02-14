@@ -287,7 +287,7 @@
         "settings": {
             "settings": "تنظیمات",
             "generalSettings": {
-                "title": "تنظیمات عمومی",
+                "title": "General",
                 "description": "تنظیمات ظاهری و عمومی کیف پول خود را پیکربندی کنید"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "تغییر رمز عبور و تنظیمات مربوط به امنیت"
             },
             "advancedSettings": {
-                "title": "تنظیمات پیشرفته",
+                "title": "Advanced",
                 "description": "تنظیمات مربوط به ابزار و راهنما برای کاربران فنی"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "تم",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "زبان",
@@ -350,6 +350,11 @@
                 "newPincode": "PIN جدید",
                 "confirmNewPincode": "تایید PIN جدید",
                 "action": "تغییر PIN"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "یابنده موجودی",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "موجودی",
         "accountBalance": "موجودی کیف پول",
+        "all": "All",
         "incoming": "ورودی",
         "outgoing": "خروجی",
         "totalIn": "کل دریافتی",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "شبکه قدیمی",
         "capsLock": "کلید caps lock روشن است",
         "version": "نسخه {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "امروز",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "باید از آخرین کیف پول خود قبل از ایجاد کیف پول جدید استفاده کنید.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "شما باید قبل از حذف این کیف پول، موجودی خود را انتقال دهید.",
             "duplicate": "کیف پولی با این نام وجود دارد.",
             "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Nastavení",
             "generalSettings": {
-                "title": "Obecné nastavení",
+                "title": "Všeobecné",
                 "description": "Konfigurace vzhledu aplikace a další nastavení"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Změňte své heslo a upravte nastavení bezpečnosti"
             },
             "advancedSettings": {
-                "title": "Pokročilé nastavení",
+                "title": "Pokočilý",
                 "description": "Nástroje a manuální nastavení pro technické uživatele"
             },
             "helpAndInfo": {
@@ -350,6 +350,11 @@
                 "newPincode": "Nový PIN",
                 "confirmNewPincode": "Potvrďte nový PIN",
                 "action": "Změnit PIN"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Hledač zůstatku",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Zkušební síť pro inovace IOTA. Cokoli se stane, stane se. Jak se vyvíjí Shimmer, záleží na vás."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Výběr barev",
+                "hexCode": "Barevný hex kód"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Systém",
         "balance": "Zůstatek",
         "accountBalance": "Zůstatek peněženky",
+        "all": "Vše",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
         "totalIn": "Přijato celkově",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Zastaralá síť",
         "capsLock": "Caps Lock je zapnutý",
         "version": "Verze {version}",
+        "yourWallets": "Vaše peněženky",
         "unknown": "Neznámý",
         "none": "Žádný",
         "staked": "Stakováno",
@@ -1011,7 +1034,8 @@
         "unstaking": "Zrušení stakování",
         "notStaked": "Nestakováno",
         "stakedFunds": "Stakované prostředky",
-        "unstakedFunds": "Prostředky, které byly stakovány"
+        "unstakedFunds": "Prostředky, které byly stakovány",
+        "accountColor": "Barva peněženky"
     },
     "dates": {
         "today": "Dnes",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Před vytvořením nové peněženky musíte použít poslední peněženku.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Před smazáním tohoto účtu musíte převést svůj zůstatek.",
             "duplicate": "Peněženka s tímto názvem již existuje.",
             "tilde": "Název profilu nemůže začínat znakem '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Potřebujeme Vaše oprávnění k použití fotoaparátu, abychom mohli naskenovat QR kód.",
+            "requestInAppSettings": "Pokud chcete udělit oprávnění pro používání fotoaparátu k naskenování QR kódů, povolte jej v nastavení aplikace."
         }
     }
 }

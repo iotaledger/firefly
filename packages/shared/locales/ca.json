@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Preferències",
             "generalSettings": {
-                "title": "Configuració General",
+                "title": "General",
                 "description": "Configureu l'aparença de l'aplicació i altres paràmetres generals"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Canvieu la contrasenya i ajusteu la configuració relacionada amb la seguretat"
             },
             "advancedSettings": {
-                "title": "Configuració avançada",
+                "title": "Advanced",
                 "description": "Eines i configuració manual per a usuaris tècnics"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Reinicieu l'aplicació Firefly perquè els canvis al tema del sistema facin efecte"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Llengua",
@@ -350,6 +350,11 @@
                 "newPincode": "Nou PIN",
                 "confirmNewPincode": "Confirma el nou PIN",
                 "action": "Canvia el PIN"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Cercador de balanços",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Balanç",
         "accountBalance": "Balanç del moneder",
+        "all": "All",
         "incoming": "Entrant",
         "outgoing": "Sortint",
         "totalIn": "Total entrant",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Xarxa Legacy",
         "capsLock": "El bloqueig de majúscules està activat",
         "version": "Versió {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Desconegut",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Avui",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Cal que utilitzeu el darrer moneder, abans de crear-ne un de nou.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Cal que transferiu el saldo del moneder, abans d'eliminar-lo.",
             "duplicate": "Ja existeix un moneder amb aquest nom.",
             "tilde": "El nom de perfil no pot començar amb el caràcter '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }
