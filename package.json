@@ -14,6 +14,7 @@
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^3.2.0",
         "husky": "^7.0.0",
+        "lint-staged": "^12.3.3",
         "patch-package": "^6.2.2",
         "prettier": "^2.3.2"
     },
@@ -33,5 +34,9 @@
         "lodash": ">=4.17.21",
         "ansi-regex": "5.0.1",
         "glob-parent": " >=5.1.2"
+    },
+    "lint-staged": {
+        "*.{ts,js,scss,css,svelte}": "eslint --cache --fix",
+        "*.{ts,js,json,scss,css}": "prettier --write"
     }
 }
