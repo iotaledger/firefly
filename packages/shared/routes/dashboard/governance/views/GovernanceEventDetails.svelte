@@ -72,7 +72,10 @@
 
 <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
     <DashboardPane classes="w-full h-full p-6 col-span-2 flex flex-col">
-        <Text type="p" classes="mr-auto px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text>
+        <div class="flex flex-start items-center mb-2">
+            <Text type="p" classes="px-2 py-1 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text>
+            <Icon icon="info-filled" classes="ml-2 text-gray-400" />
+        </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
