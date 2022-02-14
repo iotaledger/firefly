@@ -8,8 +8,8 @@
     export let locale: Locale
     export let mobile
 
-    let busy = false
-    let sendCrashReports = $appSettings.sendCrashReports
+    const busy = false
+    let sendCrashReports = true
 
     const dispatch = createEventDispatcher()
 
