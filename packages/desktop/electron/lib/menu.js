@@ -140,7 +140,7 @@ const buildTemplate = () => {
     template[0].submenu = template[0].submenu.concat([
         {
             label: state.strings.quit,
-            accelerator: process.platform === 'win32' ? 'Alt+F4' : 'Cmd+Q',
+            accelerator: process.platform === 'win32' ? 'Alt+F4' : 'CmdOrCtrl+Q',
             click: function () {
                 app.quit()
             },
