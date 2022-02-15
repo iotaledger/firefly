@@ -1,79 +1,101 @@
 import Foundation
 import Capacitor
-import Wallet
+import MobileCoreServices
 
 @objc(SecureFilesystemAccess)
-public class SecureFilesystemAccess: CAPPlugin {
+public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
 
-    private var isInitialized: Bool = false
-
-    @objc func initialize(_ call: CAPPluginCall) {
-        do {
-            guard !isInitialized else { return }
-            guard let actorId = call.getString("actorId") else {
-                return call.reject("actorId is required")
+    private var pickerType: String = ""
+    public var _call: CAPPluginCall? = nil
+    
+    @objc func launchFilePicker(_ call: CAPPluginCall){
+        let allowMultipleSelection = ((call.getInt("limit") ?? -1) == -1) ? true: false
+        
+        let this = self
+        
+        self._call = call
+        self.pickerType = "files"
+         
+        DispatchQueue.main.async { [weak self] in
+            let documentPicker = UIDocumentPickerViewController(
+                documentTypes: [String(kUTTypeItem)],
+                in: UIDocumentPickerMode.open
+            )
+            
+            documentPicker.allowsMultipleSelection = allowMultipleSelection
+            
+            if #available(iOS 13.0, *) {
+                documentPicker.shouldShowFileExtensions = true
             }
-            let fm = FileManager.default
-            let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent("database", isDirectory: true).path
-            if !fm.fileExists(atPath: path) {
-                try fm.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
-            }
-            call.keepAlive = true
-            // TODO: it's possible to make this better? investigate for implications
-            // based on: https://vmanot.com/context-capturing-c-function-pointers-in-swift
-            typealias cCallback = Optional<@convention(c) (Optional<UnsafePointer<CChar>>) -> ()>
-            func cFunction(_ block: (@escaping @convention(block) (Optional<UnsafePointer<Int8>>) -> ())) -> (cCallback) {
-                return unsafeBitCast(imp_implementationWithBlock(block), to: (cCallback).self)
-            }
-            let callback: cCallback = cFunction { result in
-                let data: String = String(cString: result!)
-                self.notifyListeners("walletEvent", data: ["walletResponse": data])
-            }
-            Wallet.iota_initialize(callback, actorId.cString(using: .utf8), path.cString(using: .utf8))
-            call.resolve()
-            isInitialized = true
-        } catch {
-            call.reject("failed to initialize stronghold")
+            
+            documentPicker.delegate = this
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+            
+            self?.bridge?.viewController?.present(
+                documentPicker,
+                animated: true,
+                completion: nil
+            )
         }
     }
-
-    @objc func destroy(_ call: CAPPluginCall) {
-        guard let actorId = call.getString("actorId") else {
-            return call.reject("actorId is required")
+    
+    @objc func launchFolderPicker(_ call: CAPPluginCall){
+        let this = self
+        call.keepAlive = true
+        self._call = call
+        
+        self.pickerType = "folders"
+        
+        DispatchQueue.main.async { [weak self] in
+            let documentPicker = UIDocumentPickerViewController(
+                documentTypes: [String(kUTTypeFolder)],
+                in:
+                    UIDocumentPickerMode.open
+            )
+            
+            documentPicker.allowsMultipleSelection = true
+            documentPicker.delegate = this
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.popover
+            
+            self!.bridge?.viewController?.present(
+                documentPicker,
+                animated: true,
+                completion: nil
+            )
         }
-        Wallet.iota_destroy(actorId.cString(using: .utf8))
-        isInitialized = false
-        call.resolve()
-        // TODO: we need to release calls? verify if is automatically removed as are saved
     }
-
-    @objc func sendMessage(_ call: CAPPluginCall) {
-        guard let message = call.getObject("message") else {
-            return call.reject("message is required")
+    
+    /// This method responds when the user selects the file(s) or folder(s).
+    /// If the user selects something, the Capacitor plugin will return the array with the defined key to the view.
+    /// - Parameters:
+    ///   - controller: <#controller description#>
+    ///   - urls: urls contains an array of URL objects with the selected elements (files or folders).
+    public func documentPicker(
+        _ controller: UIDocumentPickerViewController,
+        didPickDocumentsAt url: [URL]
+    ){
+        //var items: [String] = []
+        //let url = urls[0].absoluteString
+        //for url in urls {
+          //  items.append(url.absoluteString)
+        print("starting...")
+        // Start accessing a security-scoped resource.
+        guard url[0].startAccessingSecurityScopedResource() else {
+            // Handle the failure here.
+            print("failed to access the security-scoped resource!")
+            return
         }
-        guard JSONSerialization.isValidJSONObject(message) else {
-            return call.reject("Invalid JSON object")
+        let fileURL = URL(string: url[0].absoluteString)!
+        print(fileURL)
+        self._call?.resolve([
+            self.pickerType: [url[0].relativePath]
+        ])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 34.0) {
+            // Make sure you release the security-scoped resource when you finish.
+            url[0].stopAccessingSecurityScopedResource()
+            print("stopped!C")
         }
-        let jsonData = try? JSONSerialization.data(withJSONObject: message)
-        // TODO: replacing for urls slashes temporaly, make better using Codable structs with URL type?
-        let jsonString = String(data: jsonData!, encoding: .utf8)!.replacingOccurrences(of: "\\", with: "")
-        iota_send_message(jsonString)
-        call.resolve()
-    }
-
-    @objc func listen(_ call: CAPPluginCall) {
-        guard isInitialized else { return call.reject("actor not initialized") }
-        guard let actorId = call.getString("actorId") else {
-            return call.reject("actorId is required")
-        }
-        guard let id = call.getString("id") else {
-            return call.reject("id is required")
-        }
-        guard let event = call.getString("event") else {
-            return call.reject("event is required")
-        }
-        Wallet.iota_listen(actorId, id, event)
-        call.resolve()
+        
     }
 }
