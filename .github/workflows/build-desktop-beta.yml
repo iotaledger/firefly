@@ -3,7 +3,7 @@ name: Build Firefly Desktop - Beta
 on:
     push:
         tags:
-            - 'desktop-*-beta'
+            - 'desktop-*-beta-*'
     workflow_dispatch:
         inputs:
             debugElectronBuilder:
