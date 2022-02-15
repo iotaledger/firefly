@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Paramètres",
             "generalSettings": {
-                "title": "Réglages Généraux",
+                "title": "Général",
                 "description": "Configurez l'apparence de votre application et d'autres paramètres généraux"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Changez votre mot de passe et ajustez les paramètres de sécurité"
             },
             "advancedSettings": {
-                "title": "Réglages Avancés",
+                "title": "Avancé",
                 "description": "Outils et paramètres manuels pour les utilisateurs avancés"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Thème",
                 "description": "",
-                "advice": "Redémarrez l'application Firefly pour que les modifications du thème visuel prennent effet"
+                "advice": "Veuillez redémarrer l'application Firefly pour que les modifications du thème système prennent effet"
             },
             "language": {
                 "title": "Langue",
@@ -350,6 +350,11 @@
                 "newPincode": "Nouveau code PIN",
                 "confirmNewPincode": "Confirmer le nouveau code PIN",
                 "action": "Modifier le code PIN"
+            },
+            "changeProfileName": {
+                "title": "Modifier le nom du profil",
+                "description": "Modifier le nom de votre profil Firefly",
+                "success": "Vous avez modifié le nom de votre profil"
             },
             "balanceFinder": {
                 "title": "Retrouvez vos fonds",
@@ -407,7 +412,7 @@
                 "description": "Afficher les erreurs pour débuguer"
             },
             "diagnostics": {
-                "title": "Diagnostiques",
+                "title": "Diagnostics",
                 "description": "Voir les informations du système et de l'application"
             },
             "migrateLedgerIndex": {
@@ -491,7 +496,7 @@
             "welcome": "Bienvenue sur le tableau de bord du staking !",
             "status": {
                 "upcoming": "L'événement n'a pas commencé",
-                "commencing": "Pré-Staking à commencé",
+                "commencing": "Pré-Staking a commencé",
                 "holdingActive": "Staking en cours",
                 "holdingInactive": "Staking ouvert",
                 "inactive": "Staking non détecté",
@@ -508,8 +513,8 @@
                 "holdingSubheaderHolding": "Gagnez maintenant des récompenses de Staking",
                 "holdingSubheaderNotHolding": "Gagnez des récompenses en plaçant vos IOTA pour le Staking",
                 "holdingHeaderHolding": "{duration} restants",
-                "holdingHeaderNotHolding": "Placez vos jetons pour le Staking !",
-                "endedSubheader": "Le Staking est maintenant terminée",
+                "holdingHeaderNotHolding": "Placez vos jetons !",
+                "endedSubheader": "Le Staking est maintenant terminé",
                 "endedHeader": "Merci !",
                 "inactiveHeader": "Essayez de changer de noeud",
                 "inactiveSubheader": "Staking non détecté"
@@ -520,12 +525,18 @@
                 "collectedRewards": "Récompenses récupérées",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly est un réseau multi-chaîne sans permission, hautement évolutif pour construire et déployer des contrats intelligents composables. Assembly est l'avenir du web3. "
+                    "description": "Assembly est un réseau multi-chaînes, sans permission et hautement évolutif, qui permet de construire et déployer des contrats intelligents composables. Assembly est l'avenir du web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
                     "description": "Le réseau de test avec incitatif pour faire avancer les innovations majeures sur IOTA. Quoi qu'il arrive, c'est à vous de décider comment Shimmer évolue."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Sélecteur de couleur",
+                "hexCode": "Code couleur hexadécimal"
             }
         }
     },
@@ -625,7 +636,7 @@
             "typePassword": "Saisissez votre mot de passe pour confirmer."
         },
         "diagnostics": {
-            "title": "Diagnostiques",
+            "title": "Diagnostics",
             "node": "Noeud",
             "platform": "Plateforme",
             "platformVersion": "Version de la plateforme",
@@ -638,7 +649,7 @@
         "transaction": {
             "title": "Confirmer la transaction",
             "body": "Vous êtes sur le point d'envoyer {amount} à",
-            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez réitérer l'opération de Staking sur vos jetons restant dans votre portefeuille.",
+            "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez recommencer l'opération de Staking sur les jetons restant dans votre portefeuille.",
             "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille."
         },
         "balanceFinder": {
@@ -721,12 +732,12 @@
         "stakingNotice": {
             "upcomingDate": "Le Staking n'a pas encore commencé",
             "commencingDate": "Le Staking n'a pas encore commencé",
-            "body": "En mettant vos fonds avant le début du staking, vous commencerez automatiquement à recevoir des récompenses au début du staking.",
+            "body": "En plaçant vos fonds avant le début du staking, vous commencerez automatiquement à recevoir des récompenses lorsque le staking débutera.",
             "ok": "D'accord, je comprends"
         },
         "stakingManager": {
             "title": "Gestion du Staking",
-            "description": "Lorsque vous placez en Staking un portefeuille, vous vous envoyez une transaction en marquant ces fonds comme étant « mis en jeu ». Vous pouvez transférer votre balance à tout moment, mais vous ne pourrez pas continuer à recevoir les récompenses de Staking.",
+            "description": "Lorsque vous placez en Staking un portefeuille, vous vous envoyez une transaction en marquant ces fonds comme étant « mis en jeu ». Vous pouvez transférer les jetons à tout moment, mais vous ne pourrez pas continuer à recevoir les récompenses de Staking.",
             "totalFundsStaked": "Total des fonds placés",
             "stakedSuccessfully": "Vos fonds ont été placés pour {account}.",
             "unstakedSuccessfully": "Vos fonds ont été déverrouillé pour {account}."
@@ -734,9 +745,9 @@
         "stakingConfirmation": {
             "title": "Participation au Airdrop",
             "subtitleStake": "Vous êtes sur le point de faire le staking",
-            "subtitleMerge": "Vous êtes sur le point de fusionner",
+            "subtitleMerge": "Vous êtes sur le point de placer",
             "bodyStake": "Si vous ne voulez pas participer aux deux airdrops, vous pouvez vous désinscrire ci-dessous. Vous pouvez vous défaire et revenir en arrière pour vous retirer à tout moment.",
-            "bodyMerge": "Vos fonds seront pris en compte pour {airdrop}. Pour changer votre participation aux évènement désirés, retirez puis remettez la participation de ce portefeuille.",
+            "bodyMerge": "Vos fonds seront mis en jeu pour {airdrop}. Pour changer votre participation aux événement désirés, retirez puis remettez la participation de ce portefeuille.",
             "estimatedAirdrop": "Récompenses estimées"
         },
         "shimmer-info": {
@@ -746,12 +757,22 @@
         },
         "assembly-info": {
             "title": "À propos d'Assembly",
-            "body1": "Félicitations, vous avez acquis des jetons ASMB en guise de récompense. Assembly est un réseau multi-chaîne pour le déploiement de contrats intelligents évolutifs sur IOTA.",
+            "body1": "Félicitations, vous avez acquis des jetons ASMB en guise de récompense. Assembly est un réseau multi-chaînes pour le déploiement de contrats intelligents évolutifs sur IOTA.",
             "body2": "Nous espérons lancer Assembly en 2022. Vos jetons pourront être transférés une fois le réseau lancé."
         },
         "confirmDeveloperProfile": {
             "title": "Vous êtes en train de créer un profil développeur",
             "body": "Par défaut, vous serez connecté au réseau Chrysalis Devnet et pourrez changer de réseau manuellement. Ne continuez que si vous savez ce que vous faites."
+        },
+        "legalUpdate": {
+            "tosTitle": "Conditions d'Utilisation",
+            "privPolicyTitle": "Politique de Confidentialité",
+            "tosAndPrivPolicyBody": "Nous avons mis à jour les Conditions d'Utilisation et la Politique de Confidentialité de Firefly.",
+            "tosBody": "Nous avons mis à jour les Conditions d'Utilisation de Firefly.",
+            "privPolicyBody": "Nous avons mis à jour la Politique de Confidentialité de Firefly.",
+            "tosAndPrivPolicyCheckbox": "J'ai lu et j'accepte la mise à jour des Conditions d'Utilisation et de la Politique de Confidentialité",
+            "tosCheckbox": "J'ai lu et j'accepte la mise à jour des Conditions d'Utilisation",
+            "privPolicyCheckbox": "J'ai lu et j'accepte la mise à jour de la Politique de Confidentialité"
         }
     },
     "charts": {
@@ -872,7 +893,7 @@
         "unstake": "Stopper la participation",
         "stakeFunds": "Fonds engagés",
         "manageStake": "Gérer la participation",
-        "merge": "Fusion en cours",
+        "merge": "Participer",
         "mergeFunds": "Fusion des fonds",
         "done": "Terminé"
     },
@@ -923,6 +944,7 @@
         "systemTheme": "Système",
         "balance": "Solde",
         "accountBalance": "Solde du Portefeuille",
+        "all": "Tout",
         "incoming": "Entrant",
         "outgoing": "Sortant",
         "totalIn": "Total entrées",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Ancien Réseau",
         "capsLock": "Majuscules activées",
         "version": "Version {version}",
+        "yourWallets": "Vos Portefeuilles",
         "unknown": "Inconnu",
         "none": "Aucun",
         "staked": "Placé",
@@ -1011,7 +1034,8 @@
         "unstaking": "Déverrouillage",
         "notStaked": "Non engagé",
         "stakedFunds": "Fonds placés",
-        "unstakedFunds": "Fond débloquée"
+        "unstakedFunds": "Fonds non placés",
+        "accountColor": "Couleur du portefeuille"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Le nom de votre portefeuille ne peut pas contenir plus de {length, plural, one {# caractère} other {# caractères}}.",
             "empty": "Vous devez utiliser votre dernier portefeuille avant d'en créer un nouveau.",
+            "emptyName": "Un nom de profil doit contenir au moins 1 caractère.",
             "notEmpty": "Vous devez transférer votre solde avant de supprimer ce portefeuille.",
             "duplicate": "Un portefeuille avec ce nom existe déjà.",
             "tilde": "Un nom de profil ne peut pas commencer par le caractère '~'.",
@@ -1222,7 +1247,7 @@
                 "body": "Ouvrez la configuration du réseau dans les paramètres avancés et assurez-vous que le noeud actuel possède la fonction \"Participation\" en cliquant sur \"Voir les informations\"."
             },
             "ended": {
-                "title": "Le Staking est maintenant terminée",
+                "title": "Le Staking est maintenant terminé",
                 "bodyAboveRewardMin": "Les récompenses d'Assembly et de Shimmer seront distribuées à vos portefeuilles lorsque chacun des réseaux respectifs sera lancé.",
                 "bodyBelowRewardMin": "Vous n'avez pas engagé assez de IOTA pour atteindre la récompense minimale."
             }
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Vous utilisez actuellement un profil développeur et êtes connecté à {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Nous avons besoin de votre autorisation pour utiliser votre caméra afin de pouvoir scanner les codes QR.",
+            "requestInAppSettings": "Si vous souhaitez autoriser l'utilisation de votre caméra pour scanner les codes QR, veuillez l'activer dans les paramètres de l'application."
         }
     }
 }

@@ -22,10 +22,10 @@
                 "nonFirst": "Nuntempe, ni komencu per via profilnomo."
             },
             "addMore": "Vi povas aldoni pliajn profilojn poste.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Altnivelaj opcioj",
             "developer": {
                 "label": "Profilo de programisto",
-                "info": "Connect to the devnet or a private network"
+                "info": "Konekti al la devnet aŭ privata reto"
             }
         },
         "setup": {
@@ -263,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "Sekuraj elspezitaj adresoj...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Ĉi tiu procezo daŭros {minutes, plural, one {# minuto} other{# minutoj}}.",
             "body2": "Via komputilo funkcios laŭ plena kapablo, eble vi volas fari ion alian dum vi atendas, ke ĉi tio finiĝos."
         },
         "transferFragmentedFunds": {
@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Agordoj",
             "generalSettings": {
-                "title": "Ĝeneralaj Agordoj",
+                "title": "General",
                 "description": "Agordu la aspekton de via programo kaj aliajn ĝeneralajn agordojn"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Ŝanĝu vian pasvorton kaj ĝustigu sekurecajn agordojn"
             },
             "advancedSettings": {
-                "title": "Detalaj Agordoj",
+                "title": "Advanced",
                 "description": "Iloj kaj manaj agordoj por teknikaj uzantoj"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Etoso",
                 "description": "",
-                "advice": "Rekomenci la Firefly-aplikaĵon por ke ŝanĝoj al la sistema etoso efektiviĝu"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Lingvo",
@@ -350,6 +350,11 @@
                 "newPincode": "Nova PIN-kodo",
                 "confirmNewPincode": "Konfirmu novan PIN-kodon",
                 "action": "Ŝanĝi PIN"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Enhavo serĉilo",
@@ -441,8 +446,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Bonvolu atendi {time, plural, one {# sekundon} other {# sekundojn}}",
+            "incorrectAttempts": "{attempts, plural, one {# malĝusta provo} other {# malĝusta provoj}}"
         },
         "dashboard": {
             "security": {
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "La instigita sursceniga reto por antaŭenigi gravajn novigojn pri IOTA. Kio ajn okazas, okazas. Dependas de vi evoluo de Shimmer."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -639,7 +650,7 @@
             "title": "Konfirmu transakcion",
             "body": "Vi estas sendonta {amount} al",
             "sendingFromStakedAccount": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "Vi transendas de monujo, kiu ankoraŭ ne atingis la minimumajn rekompencojn. Ĉi tio povas malsukcesigi viajn ĵetonojn kaj vi povas perdi viajn stakajn rekompencojn sur ĉi tiu monujo."
         },
         "balanceFinder": {
             "title": "Enhavo serĉilo",
@@ -728,30 +739,40 @@
             "title": "Staking Administrado",
             "description": "Kiam vi stakas monujon, vi sendas transakcion al vi mem markante tiujn fondusojn kiel \"stakitaj\". Vi povas translokigi la ĵetonojn iam ajn, sed vi daŭre ne ricevos staking rekompencojn.",
             "totalFundsStaked": "Totalaj bonhavoj stakita",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "stakedSuccessfully": "Viaj bonhavoj estis rezervitaj por {account}.",
+            "unstakedSuccessfully": "Viaj bonhavoj estis malŝlositaj por {account}."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "title": "Airdrop Partopreno",
+            "subtitleStake": "Vi estas faronta la staking",
+            "subtitleMerge": "Vi estas kunfandonta",
+            "bodyStake": "Se vi ne volas partopreni en ambaŭ aerĵetoj, vi povas elekti malaboni. Vi povas malfari kaj reiri por retiriĝi iam ajn.",
+            "bodyMerge": "Viaj bonhavoj estos prizorgataj por {airdrop}. Por ŝanĝi vian partoprenon en la dezirataj eventoj, retiriĝu kaj poste resendu la partoprenon el ĉi tiu monujo.",
+            "estimatedAirdrop": "Estimataj rekompencoj"
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Pri Shimmer",
+            "body1": "Gratulon, ke vi gajnis SMR-ĵetonojn kiel rekompencon de stak. Shimmer estas instigita pagita antaŭprodukta reto por testi gravajn ĝisdatigojn sur IOTA.",
+            "body2": "Ni celas lanĉi Shimmer en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
         },
         "assembly-info": {
-            "title": "About Assembly",
+            "title": "Pri Assembly",
             "body1": "Gratulon, ke vi gajnis ASMB-ĵetonojn kiel staking rekompencon. Assembly estas plurĉena reto por disfaldi skaleblajn inteligentajn kontraktojn sur IOTA.",
             "body2": "Ni celas lanĉi Assembly en 2022. Viaj ĵetonoj estos disponeblaj por translokiĝi post kiam la reto estas lanĉita."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Vi kreas programistan profilon",
+            "body": "Vi estos konektita al la Chrysalis Devnet defaŭlte, kaj povas ŝanĝi retojn permane. Daŭru nur se vi scias, kion vi faras."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -871,10 +892,10 @@
         "stake": "Partoprenu",
         "unstake": "Ĉesu partopreni",
         "stakeFunds": "Staku bonhavojn",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done"
+        "manageStake": "Administri partoprenon",
+        "merge": "Kunigi",
+        "mergeFunds": "Kunigi bonhavojn",
+        "done": "Farita"
     },
     "general": {
         "password": "Pasvorto",
@@ -905,7 +926,7 @@
         "from": "De",
         "to": "Al",
         "receiveFunds": "Ricevu Fondusojn",
-        "address": "Address",
+        "address": "Adreso",
         "myAddress": "Mia adreso",
         "shareAddress": "Kunhavigi adreson",
         "yourAddress": "Via adreso",
@@ -918,11 +939,12 @@
         "stronghold": "Stronghold",
         "language": "Lingvo",
         "appearance": "Aspekto",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "lightTheme": "Hela",
+        "darkTheme": "Malhela",
+        "systemTheme": "Sistemon",
         "balance": "Saldo",
         "accountBalance": "Bilanco de Monujo",
+        "all": "All",
         "incoming": "Enirante",
         "outgoing": "Elirante",
         "totalIn": "Entuta eniro",
@@ -937,7 +959,7 @@
         "transactions": "Transakcioj",
         "security": "Sekureco",
         "accountAddress": "Monujo-adreso",
-        "network": "Network",
+        "network": "Reto",
         "nodes": "Nodo",
         "wallet": "Monujo",
         "help": "Helpo",
@@ -964,8 +986,8 @@
         "transferBroadcasting": "Elsenda transakcio",
         "transferComplete": "Kompleta ĝiro",
         "generatingReceiveAddress": "Generante ricevan adreson",
-        "broadcasting": "Broadcasting",
-        "confirming": "Confirming",
+        "broadcasting": "Elsendado",
+        "confirming": "Konfirmado",
         "creatingAccount": "Kreante monujon, bonvolu atendi...",
         "updatingAccount": "Ĝisdatigante monujon, bonvolu atendi...",
         "accountSyncing": "Monujo sinkronigas",
@@ -973,7 +995,7 @@
         "passwordUpdating": "Ĝisdatigante pasvorton...",
         "passwordSuccess": "Pasvorto sukcese ĝisdatigita",
         "passwordFailed": "Ĝisdatigi pasvorton malsukcesis",
-        "syncing": "Syncing",
+        "syncing": "Sinkronigado",
         "syncingAccounts": "Sinkronigante monujojn...",
         "exportingStronghold": "Eksportanta Stronghold...",
         "exportingStrongholdSuccess": "Stronghold sukcese eksportita",
@@ -994,24 +1016,26 @@
         "sendingFrom": "Sendi de {account}",
         "receivedTo": "Ricevita al {account}",
         "sentFrom": "Sendita de {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "stakedFor": "Engaĝita al {account}",
+        "unstakedFor": "Engaĝita al {account}",
+        "votedFor": "Voĉdonis por {account}",
+        "unvotedFor": "Forigi voĉdonon por {account}",
         "receiving": "Ricevante",
         "sending": "Sendante",
         "legacyNetwork": "Malnova Reto",
         "capsLock": "Majuskla aktivigita",
         "version": "Versio {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Nekonata",
-        "none": "None",
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "none": "Neniu",
+        "staked": "Metita",
+        "unstaked": "Malŝlosita",
         "staking": "Stakigante",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
+        "unstaking": "Malŝlosu",
+        "notStaked": "Ne engaĝita",
         "stakedFunds": "Stakitaj bonhavojn",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Bonhavoj ne investitaj",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Hodiaŭ",
@@ -1022,13 +1046,13 @@
         "yearsAgo": "{time, plural, one {# jaro} other {# jaroj}} antaŭ"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
-        "week": "{time, plural, one {# week} other {# weeks}}",
-        "month": "{time, plural, one {# month} other {# months}}",
-        "year": "{time, plural, one {# year} other {# years}}"
+        "second": "{time, plural, one {# sekundo} other {# sekundoj}}",
+        "minute": "{time, plural, one {# minuto} other {# minutoj}}",
+        "hour": "{time, plural, one {# horo} other {# horoj}}",
+        "day": "{time, plural, one {# tago} other {# tagoj}}",
+        "week": "{time, plural, one {# semajno} other {# semajnoj}}",
+        "month": "{time, plural, one {# monato} other {# monatoj}}",
+        "year": "{time, plural, one {# jaro} other {# jaroj}}"
     },
     "notifications": {
         "valueTx": "Ricevante {{value}} al {{account}}",
@@ -1041,31 +1065,31 @@
         "updateError": "Eraro okazis dum la ĝisdatigo, bonvolu reprovi",
         "restartInstall": "Rekomencu por instali",
         "calcMinutesRemaining": "Kalkulante minutojn restantajn...",
-        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minuto restas} other {# minutoj restas}}",
         "copiedToClipboard": "Copied al dosierujo",
         "accountsSynchronized": "Monujo-sinkronigado finiĝis",
         "fundsAvailableSoon": "Viaj fondusoj baldaŭ disponeblos",
         "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
+            "success": "Transakcia historio por {accountAlias} estis sukcese konservita al {filePath}",
+            "error": "Ne eblas eksporti transakcian historion por {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "recievedWhileLoggedOut": "Bonvolu ensaluti por komenci la IOTA ligilon",
+            "notEnabled": "IOTA ligiloj ne estas ebligitaj",
+            "invalidFormat": "La IOTA ligo, kiun vi sekvis, estas nevalida",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Pagdetaloj aldonitaj de IOTA-ligo"
                 }
             }
         }
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "Via profilnomo ne povas esti pli longa ol {length, plural, one {1 signo} other {# signoj}}.",
             "duplicate": "Profilo kun ĉi tiu nomo jam ekzistas.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Vi devas translokigi ĉiujn bonhavojn antaŭ ol vi povas forigi vian profilon."
             }
         },
         "password": {
@@ -1083,16 +1107,17 @@
             "similar": "Ĉi tio similas al ofta pasvorto.",
             "word": "Ununura vorto estas facile divenebla.",
             "incorrect": "Via pasvorto estas malĝusta.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Via pasvorto ne povas esti pli longa ol {length, plural, one {# signo} other {# signoj}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "Via PIN devas esti {length, plural, one {# cifero} other {# ciferoj}} longa.",
             "match": "PINoj ne kongruas.",
             "incorrect": "Via nuna PIN estas malĝusta."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "Via monujo nomo ne povas esti pli longa ol {length, plural, one {# signo} other {# signoj}}.",
             "empty": "Vi devas uzi vian plej novan monujon antaŭ krei novan.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Vi devas transdoni vian bilancon, antaŭ forigi ĉi tiun monujon.",
             "duplicate": "Monujo kun ĉi tiu nomo jam ekzistas.",
             "tilde": "Profilnomo ne povas komenci per la signo '~'.",
@@ -1104,7 +1129,7 @@
             "syncing": "Estis eraro dum sinkronigado de viaj monujoj."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "Adresoj estu {length, plural, one {# signo} other {# signoj}} longaj.",
             "amountTooHigh": "Ĉi tio estas pli granda ol via disponebla bonhavo.",
             "amountNoFloat": "Se unuoj estas `i` vi ne povas uzi dekumajn lokojn.",
             "amountInvalidFormat": "La kvanto ŝajnas esti nevalida nombro.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

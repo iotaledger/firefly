@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Настройки",
             "generalSettings": {
-                "title": "Общие настройки",
+                "title": "Общие сведения",
                 "description": "Настройте внешний вид приложения и другие общие параметры"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Измени пароль и настрой параметры безопасности"
             },
             "advancedSettings": {
-                "title": "Дополнительные Настройки",
+                "title": "Дополнительно",
                 "description": "Инструменты и настройки для технических пользователей"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Внешний Вид",
                 "description": "",
-                "advice": "Перезапустите приложение Firefly, чтобы изменения в теме системы вступили в силу"
+                "advice": "Пожалуйста, перезапустите приложение Firefly, чтобы изменения в теме системы вступили в силу"
             },
             "language": {
                 "title": "Язык",
@@ -350,6 +350,11 @@
                 "newPincode": "Новый PIN-код",
                 "confirmNewPincode": "Подтвердите новый PIN",
                 "action": "Изменить PIN-код"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Определитель баланса",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Стимулируемая промежуточная сеть для продвижения основных инноваций на IOTA. Все, что происходит, происходит. Как будет развиваться Shimmer, зависит от вас."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Выбор цвета",
+                "hexCode": "Шестнадцатеричный код цвета"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Вы создаете профиль разработчика",
             "body": "По умолчанию вы будете подключены к Chrysalis Devnet и сможете переключить сеть вручную. Продолжайте только в том случае, если вы знаете, что делаете."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Система",
         "balance": "Баланс",
         "accountBalance": "Баланс кошелька",
+        "all": "Все",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
         "totalIn": "Всего (вх.)",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Неизвестно",
         "none": "Отсутствует",
         "staked": "Поставлено",
@@ -1011,7 +1034,8 @@
         "unstaking": "Выведение",
         "notStaked": "Не поставлено",
         "stakedFunds": "Ставочные средства",
-        "unstakedFunds": "Выведеноные средства"
+        "unstakedFunds": "Выведеноные средства",
+        "accountColor": "Цвет кошелька"
     },
     "dates": {
         "today": "Сегодня",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символ} other {# символов}}.",
             "empty": "Вы должны использовать ваш последний кошелёк перед созданием нового.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Вы должны перевести баланс перед удалением этого кошелька.",
             "duplicate": "Кошелек с таким именем уже существует.",
             "tilde": "Имя профиля не может начинаться с символа '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Вы используете профиль разработчика и подключены к {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }
