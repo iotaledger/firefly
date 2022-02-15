@@ -76,7 +76,7 @@ jobs:
       run: yarn build:binding
       working-directory: packages/backend/bindings/node
       env:
-        SENTRY_DSN: ${{ secrets.SENTRY_PROD_BACKEND_DSN }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
 
     - name: Bundle desktop JS
       run: yarn build
@@ -84,7 +84,7 @@ jobs:
       env:
         HARDCODE_NODE_ENV: true
         SENTRY: true
-        SENTRY_DSN: ${{ secrets.SENTRY_PROD_DESKTOP_DSN }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_DESKTOP }}
         SENTRY_ENVIRONMENT: 'prod'
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
