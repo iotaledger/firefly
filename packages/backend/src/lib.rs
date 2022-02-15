@@ -46,6 +46,8 @@ type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
 pub static RUNTIME: Lazy<Runtime> = Lazy::new(|| Runtime::new().unwrap());
 
+static mut SENTRY_GUARD: Option<sentry::ClientInitGuard> = None;
+
 fn wallet_actors() -> &'static WalletActors {
     static ACTORS: Lazy<WalletActors> = Lazy::new(Default::default);
     &ACTORS
@@ -101,11 +103,49 @@ impl TryFrom<&str> for EventType {
     }
 }
 
+fn init_sentry() -> Option<sentry::ClientInitGuard> {
+    option_env!("SENTRY_DSN").map(|sentry_dsn| {
+        sentry::init((
+            sentry_dsn,
+            sentry::ClientOptions {
+                release: sentry::release_name!(),
+                before_send: Some(Arc::new(|mut event| {
+                    // The device hostname can include a person's name
+                    // We don't want to store this
+                    event.server_name = None;
+                    Some(event)
+                })),
+                ..Default::default()
+            },
+        ))
+    })
+}
+
 pub async fn init<A: Into<String>>(
     actor_id: A,
     storage_path: Option<impl AsRef<Path>>,
+    send_crash_reports: Option<bool>,
+    machine_id: Option<String>,
     message_receiver: Arc<Mutex<Sender<String>>>,
 ) {
+    let send_crash_reports = send_crash_reports.unwrap_or(false);
+    if send_crash_reports {
+        // NOTE: unsafe is required here so that the Sentry guard can be
+        // re-initialized with this init call.
+        unsafe {
+            SENTRY_GUARD = init_sentry();
+        }
+
+        let user = Some(sentry::protocol::User {
+            id: machine_id,
+            ..Default::default()
+        });
+
+        sentry::configure_scope(|scope| {
+            scope.set_user(user);
+        });
+    }
+
     let actor_id = actor_id.into();
     let mut actors = wallet_actors().lock().await;
     let manager = AccountManager::builder()

@@ -17,6 +17,7 @@ export enum SettingsIcons {
     developerMode = 'dev',
     networkConfiguration = 'wifi',
     errorLog = 'warning',
+    crashReporting = 'doc',
     diagnostics = 'tools',
     migrateLedgerIndex = 'ledger',
     transactionHistory = 'export',

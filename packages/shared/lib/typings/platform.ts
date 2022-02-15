@@ -1,3 +1,4 @@
+import type { AppSettings } from './app'
 import type { IDeepLinkManager } from './deepLinking/deepLinkManager'
 import type { ILedger } from './ledger'
 import type { INotificationManager } from './notificationManager'
@@ -21,6 +22,8 @@ export interface IPlatform {
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
+    getMachineId(): Promise<string>
+    updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>

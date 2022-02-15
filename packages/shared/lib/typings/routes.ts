@@ -1,6 +1,7 @@
 export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
+    CrashReporting = 'crashReporting',
     Appearance = 'appearance',
     Profile = 'profile',
     Setup = 'setup',
@@ -106,6 +107,7 @@ export enum AdvancedSettings {
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
+    CrashReporting = 'crashReporting',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
 }

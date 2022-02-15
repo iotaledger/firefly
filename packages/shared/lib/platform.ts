@@ -2,6 +2,7 @@ import { Electron } from 'shared/lib/electron'
 import { CapacitorApi } from '../../mobile/capacitor/capacitorApi'
 import { IPlatform, Platforms } from './typings/platform'
 import * as binding from '../../mobile/capacitor/walletPluginApi'
+import type { AppSettings } from './typings/app'
 
 const PLATFORM = process.env.PLATFORM
 
@@ -11,6 +12,16 @@ if (PLATFORM == Platforms.MOBILE) {
 }
 
 export const Platform: IPlatform = {
+    updateAppSettings(settings: Partial<AppSettings>) {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.updateAppSettings(settings)
+            case Platforms.MOBILE:
+                return CapacitorApi.updateAppSettings(settings)
+            default:
+                return
+        }
+    },
     getActiveProfile() {
         switch (PLATFORM) {
             case Platforms.DESKTOP:
@@ -249,6 +260,24 @@ export const Platform: IPlatform = {
                 return Electron.getOS()
             case Platforms.MOBILE:
                 return CapacitorApi.getOS()
+            default:
+                return
+        }
+    },
+
+    /**
+     * Gets machine ID
+     *
+     * @method getMachineId
+     *
+     * @returns {Promise}
+     */
+    getMachineId: () => {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Electron.getMachineId()
+            case Platforms.MOBILE:
+                return CapacitorApi.getMachineId()
             default:
                 return
         }

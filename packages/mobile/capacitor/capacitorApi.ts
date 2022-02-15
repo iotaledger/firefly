@@ -5,11 +5,16 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 import type { IPlatform } from 'shared/lib/typings/platform'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
+import type { AppSettings } from 'shared/lib/typings/app'
 import { BarcodeManager } from '../../mobile/capacitor/lib/barcodeManager'
 
 let activeProfileId = null
 
 export const CapacitorApi: IPlatform = {
+    updateAppSettings(settings: Partial<AppSettings>) {
+        return new Promise((resolve) => resolve())
+    },
+
     getActiveProfile() {
         return activeProfileId
     },
@@ -112,6 +117,15 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
+
+    /**
+     * Gets machine ID
+     *
+     * @method getMachineId
+     *
+     * @returns {Promise}
+     */
+    getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
     /**
      * Starts an update of the application
