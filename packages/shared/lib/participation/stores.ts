@@ -326,15 +326,15 @@ export const removePendingParticipations = (ids: string[]): void => {
 }
 
 /**
- * Determines if has a pending participation
+ * Determines if a participation message is attached to the Tangle
  *
- * @method hasPendingParticipation
+ * @method isPendingParticipation
  *
  * @param {string} id
  *
  * @returns {boolean}
  */
-export const hasPendingParticipation = (id: string): boolean =>
+export const isParticipationPending = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
 
 /**

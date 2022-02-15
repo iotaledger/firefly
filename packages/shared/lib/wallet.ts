@@ -11,7 +11,7 @@ import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+import { getPendingParticipation, isParticipationPending, removePendingParticipations } from './participation/stores'
 // PARTICIPATION
 import type { PendingParticipation } from './participation/types'
 import { Platform } from './platform'
@@ -700,7 +700,7 @@ export const initialiseListeners = (): void => {
             const { message } = response.payload
 
             // Checks if this was a message sent for participating in an event
-            if (hasPendingParticipation(message.id)) {
+            if (isParticipationPending(message.id)) {
                 // Instantly pull in latest participation overview.
                 await getParticipationOverview()
 
