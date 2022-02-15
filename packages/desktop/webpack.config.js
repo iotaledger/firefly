@@ -3,10 +3,13 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
+const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const { version } = require('./package.json')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
+const SENTRY = process.env.SENTRY === 'true'
 
 // / ------------------------ Resolve ------------------------
 
@@ -100,6 +103,10 @@ const rendererRules = [
 const mainPlugins = [
     new DefinePlugin({
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(true),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(false),
     }),
 ]
 
@@ -127,7 +134,33 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
-        'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
+        'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(false),
+    }),
+]
+
+const preloadPlugins = [
+    new DefinePlugin({
+        PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_MAIN_PROCESS: JSON.stringify(false),
+        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        PRELOAD_SCRIPT: JSON.stringify(true),
+    }),
+]
+
+const sentryPlugins = [
+    new SentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        include: '.',
+        release: `Firefly@${version}`,
+        ignoreFile: '.sentrycliignore',
+        org: 'iota-foundation-h4',
+        project: `firefly-${process.env.SENTRY_ENVIRONMENT}-desktop`,
+        finalize: false,
     }),
 ]
 
@@ -144,19 +177,36 @@ module.exports = [
             rules: rendererRules,
         },
         mode,
-        plugins: rendererPlugins,
-        devtool: prod ? false : 'cheap-module-source-map',
+        plugins: [...rendererPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
         devServer: {
             hot: true,
+        },
+    },
+    {
+        target: 'electron-main',
+        entry: {
+            'build/main': ['./electron/main.js'],
+        },
+        resolve,
+        output,
+        module: {
+            rules: mainRules,
+        },
+        mode,
+        plugins: [...mainPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
+        optimization: {
+            nodeEnv: hardcodeNodeEnv ? mode : false,
+            minimize: true,
         },
     },
     {
         externals: {
             argon2: 'commonjs argon2',
         },
-        target: 'electron-main',
+        target: 'electron-renderer',
         entry: {
-            'build/main': ['./electron/main.js'],
             'build/preload': ['./electron/preload.js'],
             'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
             'build/lib/errorPreload': ['./electron/lib/errorPreload.js'],
@@ -167,8 +217,8 @@ module.exports = [
             rules: mainRules,
         },
         mode,
-        plugins: mainPlugins,
-        devtool: prod ? false : 'cheap-module-source-map',
+        plugins: [...preloadPlugins, ...(SENTRY ? sentryPlugins : [])],
+        devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
         optimization: {
             nodeEnv: hardcodeNodeEnv ? mode : false,
             minimize: true,

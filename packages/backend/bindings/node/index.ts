@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '../../../shared/lib/typings/bridge'
 import {
     AccountToCreate,
     AccountIdentifier,
@@ -93,8 +93,11 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string): { destroy: () => void; removeEventListeners: () => void } {
-    const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
+export function init(id: string, storagePath?: string, sendCrashReports?: boolean, machineId?: string): IActorHandler {
+    const runtime = storagePath
+        ? new addon.ActorSystem(id, storagePath, sendCrashReports || false, machineId || '')
+        : new addon.ActorSystem(id)
+
     let destroyed = false
     _poll(
         runtime,

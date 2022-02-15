@@ -1,15 +1,20 @@
 <script lang="typescript">
-    import { DeveloperProfileIndicator,Idle,Sidebar } from 'shared/components'
-    import { loggedIn,logout,sendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive,parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { isPollingLedgerDeviceStatus,pollLedgerDeviceStatus,stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
-    import { clearPollNetworkInterval,pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
+
+    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
+    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import {appSettings, isAwareOfCrashReporting} from 'shared/lib/appSettings'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
+    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import {
-    NOTIFICATION_TIMEOUT_NEVER,
-    removeDisplayNotification,
-    showAppNotification
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification
     } from 'shared/lib/notifications'
     import { clearPollParticipationOverviewInterval,pollParticipationOverview } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
@@ -17,20 +22,16 @@
     import { closePopup,openPopup,popupState } from 'shared/lib/popup'
     import { activeProfile,isLedgerProfile,isSoftwareProfile,updateProfile } from 'shared/lib/profile'
     import { accountRoute,dashboardRoute,routerNext,settingsChildRoute,settingsRoute,walletRoute } from 'shared/lib/router'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes,AdvancedSettings,SettingsRoutes,Tabs,WalletRoutes } from 'shared/lib/typings/routes'
     import {
-    api,
-    isBackgroundSyncing,
-    selectedAccountId,
-    STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
-    wallet
+        api,
+        isBackgroundSyncing,
+        selectedAccountId,
+        STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
+        wallet
     } from 'shared/lib/wallet'
-    import { Settings,Staking,Wallet } from 'shared/routes'
-    import { onDestroy,onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
 
     export let locale: Locale
 
@@ -115,6 +116,16 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+
+        /**
+         * NOTE: We check for mobile because it's only necessary
+         * for existing desktop installation.
+         */
+        if (!mobile && !$isAwareOfCrashReporting) {
+            openPopup({
+                type: 'crashReporting',
+            })
+        }
     })
 
     onDestroy(() => {

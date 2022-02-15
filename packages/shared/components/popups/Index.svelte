@@ -11,6 +11,7 @@
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
+    import CrashReporting from './CrashReporting.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -103,6 +104,7 @@
         switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
+        crashReporting: CrashReporting,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
