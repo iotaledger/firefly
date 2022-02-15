@@ -125,9 +125,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getMachineId: () => {
-        return new Promise<string>((resolve) => resolve(''))
-    },
+    getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
     /**
      * Starts an update of the application
