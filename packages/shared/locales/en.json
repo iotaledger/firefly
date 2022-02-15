@@ -912,7 +912,10 @@
         "merge": "Merge",
         "mergeFunds": "Merge funds",
         "done": "Done",
-        "castVotes": "Cast votes"
+        "castVotes": "Cast votes",
+        "changeVotes": "Change votes",
+        "mergeVotes": "Merge votes",
+        "stopVotes": "Stop votes"
     },
     "general": {
         "password": "Password",
