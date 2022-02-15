@@ -8,13 +8,14 @@
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api';
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isParticipationPending, participationOverview } from 'shared/lib/participation/stores';
+    import { isParticipationPending } from 'shared/lib/participation/stores';
     import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types';
     import { sleep } from 'shared/lib/utils';
     
-    export let answer: VotingEventAnswer
+    export let currentVoteValue: string
+    export let nextVote: VotingEventAnswer
     export let eventId: string
-    
+
     enum VotingAction {
         Cast = 'castVotes',
         Merge = 'mergeVotes',
@@ -33,14 +34,9 @@
     })
 
     const setVotingAction = (): void => {
-        const overview = $participationOverview[0];
-        const participation = overview?.participations.find(
-            (participation) => participation.eventId === eventId
-        )
-        const answerValue = participation?.answers[0] ?? null
-        if (!answerValue) {
+        if (!currentVoteValue) {
             votingAction = VotingAction.Cast
-        } else if (answerValue !== answer.value) {
+        } else if (currentVoteValue !== nextVote.value) {
             votingAction = VotingAction.Change
         } else {
             votingAction = VotingAction.Merge
@@ -69,10 +65,10 @@
     const vote = async (): Promise<void> => {
         switch (votingAction) {
             case VotingAction.Cast:
-                await participate($selectedAccountId, [{ eventId, answers: [answer?.value] }], ParticipationAction.Vote)
+                await participate($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
                 break
             case VotingAction.Merge:
-                await participateWithRemainingFunds($selectedAccountId, [{ eventId, answers: [answer?.value] }], ParticipationAction.Vote)
+                await participateWithRemainingFunds($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
                 break
             case VotingAction.Change:
                 await changeVote()
@@ -88,9 +84,9 @@
     const changeVote = async (): Promise<void> => {
         const [ messageId ] = await stopParticipating($selectedAccountId, [ eventId ], ParticipationAction.Unvote)
         while (isParticipationPending(messageId)) {
-            await sleep(5000)
+            await sleep(2000)
         }
-        await participate($selectedAccountId, [{ eventId, answers: [answer?.value] }], ParticipationAction.Vote)
+        await participate($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
     }
 
     const handleStopClick = (): void => {
@@ -128,8 +124,8 @@
 </script>
 
 <div>
-    <Text type="h3" classes="mb-8">{answer?.text}</Text>
-    <Text type="p" classes="mb-5">{answer?.additionalInfo}</Text>
+    <Text type="h3" classes="mb-8">{nextVote?.text}</Text>
+    <Text type="p" classes="mb-5">{nextVote?.additionalInfo}</Text>
     {#if showAdditionalInfo}
         <div class="flex items-center mb-6 bg-blue-100 rounded-xl p-3">
             <Icon icon="info" classes="text-gray-500 font-bold"></Icon>

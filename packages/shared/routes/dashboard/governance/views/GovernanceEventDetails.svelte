@@ -4,20 +4,41 @@
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
     import { openPopup } from 'shared/lib/popup'
+    import { participationOverview } from 'shared/lib/participation/stores';
     import type { ParticipationEvent, VotingEventAnswer } from 'shared/lib/participation/types'
     
     export let event: ParticipationEvent;
 
-    const handleBackClick = () => governanceRoute.set(GovernanceRoutes.Init)
+    let currentVoteValue: string;
+    $: {
+        const overview = $participationOverview[0];
+        const participation = overview?.participations.find(
+            (participation) => participation.eventId === event.eventId
+        )
+        currentVoteValue = participation?.answers[0] ?? null
+    }
 
-    const handleClick = (answer: VotingEventAnswer) => {
+    const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
+
+    const handleClick = (nextVote: VotingEventAnswer): void => {
         openPopup({
             type: 'governanceCastVote',
             props: {
-                answer,
-                eventId: event?.eventId
+                currentVoteValue,
+                eventId: event?.eventId,
+                nextVote,
             }
         })
+    }
+
+    const getAnswerHeader = (answerValue: string): string => {
+        if (currentVoteValue === answerValue) {
+            return 'Selected'
+        } else if (currentVoteValue) {
+            return 'Not Selected'
+        } else {
+            return `Option ${answerValue}`
+        }
     }
 </script>
 
@@ -42,7 +63,10 @@
                 class="py-4 px-6 bg-gray-50 hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
             >
                 <div>
-                    <Text type="p" classes="uppercase text-blue-500 mb-2" overrideColor smaller bold>{`Option ${answer?.value}`}</Text>
+                    <div class="flex items-center mb-2">
+                        <Icon width=16 height=16 icon="checkbox-round" classes="text-blue-500 mr-2" show={false}></Icon>
+                        <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>{getAnswerHeader(answer?.value)}</Text>
+                    </div>
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
                     <Text type="p">{answer?.additionalInfo}</Text>
                 </div>
