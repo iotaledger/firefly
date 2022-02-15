@@ -776,6 +776,11 @@
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },
+        "votingConfirmation": {
+            "additionalInfo": "Please be aware that changing or stopping your vote during the counting period won’t impact any votes that have been counted prior to this change.",
+            "votesSubmitted": "Your votes are submitted",
+            "votesStopped": "Your vote has been stopped"
+        },
         "shimmer-info": {
             "title": "About Shimmer",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",

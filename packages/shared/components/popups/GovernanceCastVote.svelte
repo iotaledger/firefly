@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte';
-    import { Text, Button } from 'shared/components'
+    import { Button, Icon, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile';
@@ -15,15 +15,18 @@
     export let answer: VotingEventAnswer
     export let eventId: string
     
-    let votingAction: VotingAction
-    let disabled = false
-
     enum VotingAction {
         Cast = 'castVotes',
         Merge = 'mergeVotes',
         Stop = 'stopVotes',
         Change = 'changeVotes'
     }
+
+    let votingAction = VotingAction.Cast
+    let disabled = false
+    let successText = localize('popups.votingConfirmation.votesSubmitted')
+
+    $: showAdditionalInfo = (votingAction === VotingAction.Change || votingAction === VotingAction.Stop)
 
     onMount(() => {
         setVotingAction()
@@ -44,14 +47,14 @@
         }
     }
 
-    const castVote = async () => {
+    const castVote = async (): Promise<void> => {
         disabled = true
         try {
             await vote()
             openPopup({
                 type: 'success',
                 props: {
-                    successText: 'Success!',
+                    successText,
                 }
             })
         } catch (err) {
@@ -63,7 +66,7 @@
         disabled = false
     }
 
-    const vote = async () => {
+    const vote = async (): Promise<void> => {
         switch (votingAction) {
             case VotingAction.Cast:
                 await participate($selectedAccountId, [{ eventId, answers: [answer?.value] }], ParticipationAction.Vote)
@@ -90,12 +93,13 @@
         await participate($selectedAccountId, [{ eventId, answers: [answer?.value] }], ParticipationAction.Vote)
     }
 
-    const handleStopClick = () => {
+    const handleStopClick = (): void => {
         votingAction = VotingAction.Stop;
+        successText = localize('popups.votingConfirmation.votesStopped')
         handleCastClick()
     }
 
-    const handleCastClick = () => {
+    const handleCastClick = (): void => {
         if ($isSoftwareProfile) {
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
@@ -126,6 +130,12 @@
 <div>
     <Text type="h3" classes="mb-8">{answer?.text}</Text>
     <Text type="p" classes="mb-5">{answer?.additionalInfo}</Text>
+    {#if showAdditionalInfo}
+        <div class="flex items-center mb-6 bg-blue-100 rounded-xl p-3">
+            <Icon icon="info" classes="text-gray-500 font-bold"></Icon>
+            <Text type="p" classes="px-3">{localize('popups.votingConfirmation.additionalInfo')}</Text>
+        </div>
+    {/if}
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">{localize(`actions.${votingAction}`)}</Button>
