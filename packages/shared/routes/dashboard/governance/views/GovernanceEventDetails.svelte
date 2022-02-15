@@ -5,7 +5,7 @@
     import { governanceRoute } from 'shared/lib/router'
     import { openPopup } from 'shared/lib/popup'
     import { participationOverview } from 'shared/lib/participation/stores';
-    import type { ParticipationEvent, VotingEventAnswer } from 'shared/lib/participation/types'
+    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
     
     export let event: ParticipationEvent;
 
@@ -32,14 +32,23 @@
     }
 
     const getAnswerHeader = (answerValue: string): string => {
-        if (currentVoteValue === answerValue) {
-            return 'Selected'
+        if (isSelected(answerValue)) {
+            return setActiveText()
         } else if (currentVoteValue) {
             return 'Not Selected'
         } else {
             return `Option ${answerValue}`
         }
     }
+
+    const setActiveText = (): string => {
+        if (event?.status?.status === ParticipationEventState.Holding) {
+            return 'Active Voting'
+        }
+        return 'Selected'
+    }
+
+    const isSelected = (answerValue: string): boolean => currentVoteValue === answerValue
 </script>
 
 <div
@@ -60,11 +69,13 @@
         {#each event?.information?.payload?.questions[0]?.answers as answer}
             <div
                 on:click={() => handleClick(answer)} 
-                class="py-4 px-6 bg-gray-50 hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
+                class="py-4 px-6 bg-{isSelected(answer?.value) ? 'blue-100' : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
             >
                 <div>
                     <div class="flex items-center mb-2">
-                        <Icon width=16 height=16 icon="checkbox-round" classes="text-blue-500 mr-2" show={false}></Icon>
+                        {#if isSelected(answer?.value)}
+                            <Icon width=16 height=16 icon="checkbox-round" classes="text-blue-500 mr-2"></Icon>
+                        {/if}
                         <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>{getAnswerHeader(answer?.value)}</Text>
                     </div>
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
