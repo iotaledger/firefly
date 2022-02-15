@@ -1,5 +1,3 @@
-import type { PluginListenerHandle } from "@capacitor/core";
-
 export type FilePickerOptions = {
   limit?: number;
   allowedExtensions?: Array<string>;
