@@ -13,7 +13,7 @@
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
-        validateProfileName
+        validateProfileName,
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'

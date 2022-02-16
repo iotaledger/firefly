@@ -343,5 +343,4 @@ const proxyApi = (activeProfileIdGetter: () => string): IWalletApi => {
     return new Proxy({ ...WALLET.api }, _generateMiddleware(activeProfileIdGetter))
 }
 
-// eslint-disable-next-line
-export const WalletApi = proxyApi(Platform.getActiveProfile)
+export const WalletApi = proxyApi(() => Platform.getActiveProfile())
