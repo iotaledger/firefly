@@ -9,7 +9,7 @@
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { selectedAccount } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet';
-    import { milestoneToDate } from 'shared/lib/time'
+    import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     
     export let event: ParticipationEvent;
     export let account: WalletAccount
@@ -31,6 +31,10 @@
         })
     }
 
+    const length = milestoneToDate(event?.information?.milestoneIndexEnd).getMilliseconds() - milestoneToDate(event?.information?.milestoneIndexStart).getMilliseconds()
+    const progress = new Date().getMilliseconds() - milestoneToDate(event?.information?.milestoneIndexEnd).getMilliseconds()
+    const totalVotes = 2000
+    
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
         if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
@@ -115,14 +119,36 @@
                 <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.votingPower.title')}</Text>
                 <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
             </div>
-            <div>
-                <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingOpens')}</Text>
-                <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text>
-            </div>
-            <div>
-                <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
-                <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text>
-            </div>
+            {#if event?.status?.status === ParticipationEventState.Upcoming}
+                <div>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingOpens')}</Text>
+                    <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text>
+                </div>
+            {/if}
+            {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
+                <div>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
+                    <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text>
+                </div>
+            {/if}
+            {#if event?.status?.status === ParticipationEventState.Commencing}
+                <div>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
+                    <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
+                </div>
+            {/if}
+            {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
+                <div>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votesCounted')}</Text>
+                    <Text type="h3" classes="inline-flex items-end">{totalVotes}</Text>
+                </div>
+            {/if}
+            {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
+                <div>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingProgress')}</Text>
+                    <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
+                </div>
+            {/if}
         </div>
         <Icon icon="info-filled" classes="ml-auto mt-0 text-gray-400" />
     </DashboardPane>
