@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
+    import { initAppSettings } from 'shared/lib/appSettings'
     import { cleanupSignup, mobile } from 'shared/lib/app'
     import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
@@ -16,6 +17,7 @@
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
+    import { Platform } from 'shared/lib/platform';
 
     export let locale: Locale
 
@@ -57,7 +59,9 @@
                 storeProfile(name, isDeveloperProfile)
 
                 const path = await getProfileDataPath($newProfile.name)
-                initialise($newProfile.id, path)
+                const machineId = await Platform.getMachineId()
+                const { sendCrashReports } = $initAppSettings
+                initialise($newProfile.id, path, sendCrashReports, machineId)
                 initialiseMigrationListeners()
             }
 

@@ -1,8 +1,10 @@
+import { writable } from 'svelte/store'
 import { persistent } from './helpers'
 import type { AppSettings, AppTheme } from './typings/app'
 
 /**
- * Persisted data for the application settings.
+ * The application settings used throughout the application code, useful for
+ * global settings beyond individual profile settings.
  */
 export const appSettings = persistent<AppSettings>('settings', {
     deepLinking: false,
@@ -10,7 +12,29 @@ export const appSettings = persistent<AppSettings>('settings', {
     theme: 'light',
     darkMode: false,
     notifications: true,
+    sendCrashReports: false,
 })
+
+/**
+ * The initial application settings, useful for things that require
+ * Firefly to restart\*:
+ * - Sentry diagnostic reporting for errors and crashes - the Electron
+ *    app and Rust bindings both need to know if sendCrashReports is true
+ *    when creating the actor system.
+ *
+ * \* The reason is that whenever the normal appSettings changes against this
+ * object, we can determine if the user has restarted the application or not and
+ * more importantly notify them if they need to do so.
+ *
+ * CAUTION: This variable is READ-ONLY - you write at your own risk.
+ */
+export const initAppSettings = writable<Readonly<Partial<AppSettings>>>(null)
+
+/**
+ * A persisted boolean value indicating whether the user has already been prompted to choose
+ * between sending or not sending crash reports.
+ */
+export const isAwareOfCrashReporting = persistent<boolean>('isAwareOfCrashReporting', false)
 
 /**
  * NOTE: This media query is performed only once to help make the UX
@@ -32,3 +56,17 @@ const isSystemInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').mat
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean =>
     theme === 'system' ? isSystemInDarkMode : theme === 'dark'
+
+/**
+ * The version of the privacy policy that the user last accepted
+ *
+ * Note: The initial value must be set to 1 to support existing users and alert them
+ */
+export const lastAcceptedPrivacyPolicy = persistent<number>('lastAcceptedPrivacyPolicy', 1)
+
+/**
+ * The version of the Terms of Service that the user last accepted
+ *
+ * Note: The initial value must be set to 1 to support existing users and alert them
+ */
+export const lastAcceptedTos = persistent<number>('lastAcceptedTos', 1)

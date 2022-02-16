@@ -22,10 +22,10 @@
                 "nonFirst": "Počnimo s imenom tvojeg profila."
             },
             "addMore": "Kasnije možeš dodati još profila.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Napredne opcije",
             "developer": {
                 "label": "Profil developera",
-                "info": "Povežite se s devnet-om ili privatnom mrežom"
+                "info": "Povežite se s devnetom ili privatnom mrežom"
             }
         },
         "setup": {
@@ -160,7 +160,7 @@
         },
         "importFromLedger": {
             "title": "Oporavi ili migriraj svoj Ledger",
-            "body": "Oporavi postojeći Firefly Ledger profil ili migriraj sredstva s Trinity-a.",
+            "body": "Oporavi postojeći Firefly Ledger profil ili migriraj sredstva s Trinitya.",
             "haveFireflyLedger": "Imam Firefly Ledger pričuvnu kopiju",
             "haveFireflyLedgerDescription": "Oporavi Firefly profil",
             "haveTrinityLedger": "Imam Trinity Ledger pričuvnu kopiju",
@@ -179,18 +179,18 @@
             "restoring": "Oporavljam s Ledgera..."
         },
         "legacyLedgerIntro": {
-            "title": "Započni svoju Ledger migraciju pomoću Firefly-a",
+            "title": "Započni svoju Ledger migraciju pomoću Fireflya",
             "body1": "Firefly će ti pomoći da prebaciš svoja sredstva na novu Chrysalis mrežu.",
             "body2": "Nakon migracije moći ćete slati i primati tokene koristeći Ledger i Firefly.",
             "readMore": "Što očekivati od postupka migracije"
         },
         "generateNewLedgerAddress": {
             "title": "Stvorite novu adresu",
-            "body": "Za migraciju pomoću Firefly-a prvo moraš generirati novu adresu. Klikni ispod za početak.",
+            "body": "Za migraciju pomoću Fireflya prvo moraš generirati novu adresu. Klikni ispod za početak.",
             "confirmTitle": "Potvrdi novu adresu",
             "confirmBody": "Zbog sigurnosti te molimo da provjeriš adresu generiranu na tvojem Ledger uređaju s adresom koju ti prikazujemo ispod. Ukoliko su iste, pritisni oba gumba na svojem Ledgeru kada te uređaj to zatraži.",
             "confirmedTitle": "Adresa je potvrđena",
-            "confirmedBody": "Potvrdili ste da adresa u Firefly-u odgovara onoj prikazanoj na Ledger uređaju.",
+            "confirmedBody": "Potvrdili ste da adresa u Fireflyu odgovara onoj prikazanoj na Ledger uređaju.",
             "generating": "Generiram adresu"
         },
         "switchLedgerApps": {
@@ -199,7 +199,7 @@
         },
         "selectLedgerAccountIndex": {
             "title": "Odaberi indeks Ledger računa",
-            "body": "Odaberi index Ledger računa korišten s Trinity-em. Kod većine korisnika ova će vrijednost biti 0.",
+            "body": "Odaberi index Ledger računa korišten s Trinityem. Kod većine korisnika ova će vrijednost biti 0.",
             "accountIndex": "Indeks računa",
             "accountPage": "Stranica računa",
             "standard": "Standardno",
@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Postavke",
             "generalSettings": {
-                "title": "Opće postavke",
+                "title": "Opće",
                 "description": "Odredite izgled aplikacije i druge opće postavke"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Promijena lozinke i ostale postavke sigurnosti"
             },
             "advancedSettings": {
-                "title": "Napredne postavke",
+                "title": "Napredne",
                 "description": "Alati i ručne postavke za tehnički potkovane korisnike"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Ponovno pokrenite Firefly aplikaciju da bi se promjene sistemske teme mogle primijeniti"
+                "advice": "Molimo Vas da ponovno pokrenete Firefly aplikaciju kako bi se promjene sistemske teme mogle primijeniti"
             },
             "language": {
                 "title": "Jezik",
@@ -329,7 +329,7 @@
             },
             "networkStatus": {
                 "title": "Status mreže",
-                "description": "Prikazuje status node-a s kojim ste trenutno spojeni"
+                "description": "Prikazuje status nodea s kojim ste trenutno spojeni"
             },
             "exportStronghold": {
                 "title": "Izvezi pričuvnu kopiju",
@@ -351,6 +351,11 @@
                 "confirmNewPincode": "Potvrdite novi PIN",
                 "action": "Promijenite PIN"
             },
+            "changeProfileName": {
+                "title": "Promijeni ime profila",
+                "description": "Promijeni ime svog Firefly profila",
+                "success": "Promijenili ste ime profila"
+            },
             "balanceFinder": {
                 "title": "Pronalazak sredstava",
                 "description": "Izvršite detaljnu pretragu svojih adresa kako bi pronašli tokene"
@@ -365,7 +370,7 @@
             },
             "deepLinks": {
                 "title": "IOTA poveznice",
-                "description": "Automatski ispuni podatke o transakciji unutar Firefly-a nakon klika na IOTA poveznicu"
+                "description": "Automatski ispuni podatke o transakciji unutar Fireflya nakon klika na IOTA poveznicu"
             },
             "networkConfiguration": {
                 "title": "Mrežna konfiguracija",
@@ -378,15 +383,15 @@
                 "resetWallet": "Stanje vašeg novčanika je resetirano.",
                 "connectedTo": "Povezano s",
                 "nodeConfiguration": {
-                    "title": "Odabir node-a",
-                    "description": "Odaberi \"Ručni odabir node-a\" za konfiguriranje node-a i spajanje na vlastiti node",
-                    "automatic": "Automatski odabir node-a",
-                    "manual": "Ručni odabir node-a"
+                    "title": "Odabir nodea",
+                    "description": "Odaberi \"Ručni odabir nodea\" za konfiguriranje node-a i spajanje na vlastiti node",
+                    "automatic": "Automatski odabir nodea",
+                    "manual": "Ručni odabir nodea"
                 }
             },
             "configureNodeList": {
                 "title": "Node konfiguracija",
-                "description": "Upravljanje popisom node-ova na koje se spajate",
+                "description": "Upravljanje popisom nodeova na koje se spajate",
                 "primaryNode": "Primarni node",
                 "excludeNode": "Izuzmi node",
                 "includeNode": "Priključi node",
@@ -395,12 +400,12 @@
                 "setAsPrimary": "Postavi kao primarni node",
                 "removeNode": "Ukloni node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
-                "noNodes": "Nema node-ova, nije se moguće povezati s mrežom",
-                "noNodesAuto": "Nema node-ova na raspolaganju. Upotrijebit ćemo automatski odabir."
+                "noNodes": "Nema nodeova, nije se moguće povezati s mrežom",
+                "noNodesAuto": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": "Odradi Proof of Work lokalno na svojem uređaju ili ga outsource-aj node-u"
+                "description": "Odradi Proof of Work lokalno na svojem uređaju ili ga outsourceaj nodeu"
             },
             "errorLog": {
                 "title": "Evidencija grešaka",
@@ -449,7 +454,7 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Aktualna",
-                    "outOfDate": "Zastarjelo"
+                    "outOfDate": "Zastarjela"
                 },
                 "hardwareDevice": {
                     "title": "Hardverski uređaj",
@@ -498,14 +503,14 @@
                 "ended": "Staking je završio"
             },
             "summary": {
-                "stakedFunds": "Sredstva na stake-u"
+                "stakedFunds": "Sredstva na stakeu"
             },
             "info": {
                 "upcomingSubheader": "Događaj nije započeo",
                 "upcomingHeader": "Provjerite kasnije",
                 "commencingSubheader": "Pripremite se za staking",
                 "commencingHeader": "Pokrenite pred-staking svojih tokena!",
-                "holdingSubheaderHolding": "Zarada od staking-a u tijeku",
+                "holdingSubheaderHolding": "Zarada od stakinga u tijeku",
                 "holdingSubheaderNotHolding": "Zaradite nagrade stakingom IOTA-e",
                 "holdingHeaderHolding": "{duration} preostalo",
                 "holdingHeaderNotHolding": "Pokrenite staking svojih tokena!",
@@ -516,7 +521,7 @@
             },
             "airdrops": {
                 "holding": "Preostalo",
-                "commencing": "Do početka staking-a",
+                "commencing": "Do početka stakinga",
                 "collectedRewards": "Prikupljene nagrade",
                 "assembly": {
                     "name": "Assembly",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Testna mreža s poticajima namijenjena razvoju i testiranju većih inovacija kojima će glavna IOTA mreža naposljetku biti nadograđena. Što god se dogodi, dogodi se. Kako će se Shimmer razvijati ovisi o vama."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Birač boje",
+                "hexCode": "Hex kod boje"
             }
         }
     },
@@ -541,7 +552,7 @@
         "version": {
             "title": "Trenutna verzija: {version}",
             "upToDateTitle": "Firefly je ažuriran",
-            "upToDateDescription": "Koristiš najnoviju i najsigurniju verziju Firefly-a.",
+            "upToDateDescription": "Koristiš najnoviju i najsigurniju verziju Fireflya.",
             "updateAvailable": "Dostupno je Firefly ažuriranje",
             "updateDetails": "Verzija {version} - {date}",
             "noAutoUpdate": "Automatsko ažuriranje je onemogućeno u ovoj verziji Windowsa, molimo posjetite https://firefly.iota.org kako biste skinuli novu verziju."
@@ -583,19 +594,19 @@
             "titleAdd": "Dodaj node",
             "titleUpdate": "Obnovi node",
             "titleRemove": "Ukloni node",
-            "titleRemoveAll": "Ukloni sve node-ove",
+            "titleRemoveAll": "Ukloni sve nodeove",
             "titleDetails": "Pojedinosti nodea",
-            "titleInfo": "Informacije o node-u",
+            "titleInfo": "Informacije o nodeu",
             "addingNode": "Dodajem node",
-            "updatingNode": "Ažuriranje node-a",
-            "loadingNodeInfo": "Učitavanje podataka o node-u",
+            "updatingNode": "Ažuriranje nodea",
+            "loadingNodeInfo": "Učitavanje podataka o nodeu",
             "nodeAddress": "Adresa nodea",
             "optionalUsername": "Korisničko ime (opcionalno)",
             "optionalPassword": "Lozinka (opcionalno)",
             "optionalJwt": "JSON web token (opcionalno)",
             "setAsPrimaryNode": "Postavi kao glavni node",
             "removeConfirmation": "Jeste li sigurni da želite ukloniti ovaj node?",
-            "removeAllConfirmation": "Jeste li sigurni da želite ukloniti sve node-ove?",
+            "removeAllConfirmation": "Jeste li sigurni da želite ukloniti sve nodeove?",
             "info": {
                 "url": "URL",
                 "software": "Softver",
@@ -638,7 +649,7 @@
         "transaction": {
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun",
-            "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stake-a. Ovo može prekinuti stake vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti stake vaših preostalih tokena.",
+            "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
             "sendingFromStakedAccountBelowMinReward": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku."
         },
         "balanceFinder": {
@@ -721,37 +732,47 @@
         "stakingNotice": {
             "upcomingDate": "Staking još nije započeo",
             "commencingDate": "Staking još nije započeo",
-            "body": "Pokretanjem pred-staking-a vaših sredstava, automatski ćete početi dobivati nagrade kad staking događaj započne.",
+            "body": "Pokretanjem pred-stakinga vaših sredstava, automatski ćete početi dobivati nagrade kad staking događaj započne.",
             "ok": "U redu, razumijem"
         },
         "stakingManager": {
-            "title": "Upravljanje staking-om",
-            "description": "Kada pokrećete stake novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stake-ana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stake-a.",
-            "totalFundsStaked": "Ukupna sredstva na staking-u",
-            "stakedSuccessfully": "Vaša sredstva su stake-ana za {account}.",
-            "unstakedSuccessfully": "Vaša sredstva više nisu na stake-u za {account}."
+            "title": "Upravljanje stakingom",
+            "description": "Kada pokrećete stake novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stakeana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stakea.",
+            "totalFundsStaked": "Ukupna sredstva na stakingu",
+            "stakedSuccessfully": "Vaša sredstva su stakeana za {account}.",
+            "unstakedSuccessfully": "Vaša sredstva više nisu na stakeu za {account}."
         },
         "stakingConfirmation": {
-            "title": "Sudjelovanje u Airdrop-u",
+            "title": "Sudjelovanje u Airdropu",
             "subtitleStake": "Upravo ćete pokrenuti staking",
             "subtitleMerge": "Upravo ćete spojiti sredstva",
-            "bodyStake": "Ukoliko ne želite sudjelovati u oba airdrop-a, možete odustati od jednog od njih ispod. Možete prekinuti staking i ponovno ga započeti za pojedini airdrop u bilo koje vrijeme.",
-            "bodyMerge": "Vaša sredstva će biti na stake-u za {airdrop}. Da biste promijenili u kojem airdrop-u želite sudjelovati, potrebno je prekinuti te zatim ponovno pokrenuti stake za ovaj novčanik.",
+            "bodyStake": "Ukoliko ne želite sudjelovati u oba airdropa, možete odustati od jednog od njih ispod. Možete prekinuti staking i ponovno ga započeti za pojedini airdrop u bilo koje vrijeme.",
+            "bodyMerge": "Vaša sredstva će biti na stakeu za {airdrop}. Da biste promijenili u kojem airdropu želite sudjelovati, potrebno je prekinuti te zatim ponovno pokrenuti stake za ovaj novčanik.",
             "estimatedAirdrop": "Procijenjene nagrade"
         },
         "shimmer-info": {
-            "title": "O Shimmer-u",
+            "title": "O Shimmeru",
             "body1": "Čestitamo, zaradili ste SMR tokene kao nagradu za staking. Shimmer je mreža s poticajima namijenjena razvoju i testiranju većih inovacija kojima će glavna IOTA mreža naposljetku biti nadograđena.",
             "body2": "Cilj nam je pokrenuti Shimmer u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Shimmer mreže."
         },
         "assembly-info": {
-            "title": "O Assembly-u",
+            "title": "O Assemblyu",
             "body1": "Čestitamo, zaradili ste ASMB tokene kao nagradu za staking. Assembly je multi-chain mreža namijenjena implementaciji pametnih ugovora na IOTA-i.",
             "body2": "Cilj nam je pokrenuti Assembly u 2022. Vaši tokeni će postati dostupni za transfer nakon pokretanja Assembly mreže."
         },
         "confirmDeveloperProfile": {
             "title": "Trenutno kreirate developerski profil",
             "body": "Prema zadanim postavkama bit ćete spojeni na Chrysalis Devnet, te možete ručno mijenjati mreže. Nastavite samo ako znate što radite."
+        },
+        "legalUpdate": {
+            "tosTitle": "Uvjeti korištenja",
+            "privPolicyTitle": "Politika privatnosti",
+            "tosAndPrivPolicyBody": "Promijenili smo Firefly Uvjete korištenja i Pravila o privatnosti.",
+            "tosBody": "Promijenili smo Firefly Uvjete korištenja.",
+            "privPolicyBody": "Promijenili smo Firefly Pravila o privatnosti.",
+            "tosAndPrivPolicyCheckbox": "Pročitao sam i slažem se s Firefly Uvjetima korištenja i Pravilima o privatnosti",
+            "tosCheckbox": "Pročitao sam i slažem se s Firefly Uvjetima korištenja",
+            "privPolicyCheckbox": "Pročitao sam i slažem se s Firefly Pravilima o privatnosti"
         }
     },
     "charts": {
@@ -827,7 +848,7 @@
         "addNode": "Dodaj node",
         "updateNode": "Obnovi node",
         "removeNode": "Ukloni node",
-        "removeAllNodes": "Ukloni sve node-ove",
+        "removeAllNodes": "Ukloni sve nodeove",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
         "showAll": "Pokaži sve",
@@ -867,11 +888,11 @@
         "migrateAgain": "Migriraj drugi index",
         "visitWebsite": "Posjeti web-stranicu",
         "howItWorks": "Kako funkcionira",
-        "learnAboutStaking": "Saznajte više o staking-u",
+        "learnAboutStaking": "Saznajte više o stakingu",
         "stake": "Pokreni staking",
         "unstake": "Prekini staking",
-        "stakeFunds": "Stake-aj sredstva",
-        "manageStake": "Upravljaj staking-om",
+        "stakeFunds": "Stakeaj sredstva",
+        "manageStake": "Upravljaj stakingom",
         "merge": "Spoji",
         "mergeFunds": "Spoji sredstva",
         "done": "Izvršeno"
@@ -923,6 +944,7 @@
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "accountBalance": "Stanje novčanika",
+        "all": "Sve",
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
         "totalIn": "Ukupno unutra",
@@ -1003,15 +1025,17 @@
         "legacyNetwork": "Stara mreža",
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
+        "yourWallets": "Vaši novčanici",
         "unknown": "Nepoznato",
         "none": "Nijedan",
         "staked": "Staking pokrenut",
-        "unstaked": "Nije na stake-u",
+        "unstaked": "Nije na stakeu",
         "staking": "Staking",
-        "unstaking": "Poništenje staking-a",
+        "unstaking": "Poništenje stakinga",
         "notStaked": "Staking nije pokrenut",
-        "stakedFunds": "Sredstva na stake-u",
-        "unstakedFunds": "Sredstva koja nisu na stake-u"
+        "stakedFunds": "Sredstva na stakeu",
+        "unstakedFunds": "Sredstva koja nisu na stakeu",
+        "accountColor": "Boja novčanika"
     },
     "dates": {
         "today": "Danas",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Ime novčanika ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "empty": "Morate upotrijebiti najnoviji novčanik prije no što možete stvoriti još jedan.",
+            "emptyName": "Ime profila mora sadržavati najmanje 1 znak.",
             "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati novčanik.",
             "duplicate": "Novčanik s ovim imenom već postoji.",
             "tilde": "Ime profila ne može početi znakom '~'.",
@@ -1124,18 +1149,18 @@
             "dns": "Nije bilo moguće izvršiti DNS rezoluciju za node.",
             "timedOut": "Veza je istekla.",
             "refused": "Veza je odbijena.",
-            "handshake": "Nije bilo moguće dovršiti rukovanje s node-om.",
+            "handshake": "Nije bilo moguće dovršiti rukovanje s nodeom.",
             "invalidCertificate": "Nije bilo moguće povezivanje s nevažećim certifikatom.",
             "https": "HTTPS je obavezan; nesigurne veze putem HTTP-a trenutno nisu podržane.",
             "duplicate": "Ovaj je node već dodan.",
             "unsynced": "Node nije sinkroniziran.",
             "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
-            "answer": "Nije bilo moguće dobiti odgovor od svih node-ova.",
-            "forbidden": "Povezivanje s ovim node-om je zabranjeno.",
-            "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom node-u."
+            "answer": "Nije bilo moguće dobiti odgovor od svih nodeova.",
+            "forbidden": "Povezivanje s ovim nodeom je zabranjeno.",
+            "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom nodeu."
         },
         "network": {
-            "mismatch": "Mrežni ID ovog node-a je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
+            "mismatch": "Mrežni ID ovog nodea je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
             "notReachable": "Nije bilo moguće dohvatiti mrežni ID za ovaj node, nije moguće dodati node.",
             "badNodes": "Nije se moguće povezati s mrežom s trenutnom node konfiguracijom.",
             "nonEmptyAccount": "Potrebno je prenijeti sva stanja prije promjene mreže."
@@ -1185,7 +1210,7 @@
     },
     "warning": {
         "node": {
-            "http": "Korištenje node-ova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
+            "http": "Korištenje nodeova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
         },
         "participation": {
             "noAccounts": "Nemate niti jedan IOTA token."
@@ -1224,24 +1249,24 @@
             "ended": {
                 "title": "Staking je završio",
                 "bodyAboveRewardMin": "Assembly i Shimmer nagrade će biti distribuirane u vaše novčanike nakon pokretanja svake od pripadajućih mreža.",
-                "bodyBelowRewardMin": "Niste stake-ali dovoljno IOTA tokena da bi dosegnuli minimalnu nagradu za airdrop."
+                "bodyBelowRewardMin": "Niste stakeali dovoljno IOTA tokena da bi dosegnuli minimalnu nagradu za airdrop."
             }
         },
         "partiallyStakedFunds": {
-            "title": "Nova sredstva koja nisu na stake-u: {amount}",
-            "titleNoFunds": "Nova sredstva koja nisu na stake-u",
-            "preBody": "Primili ste tokene na novčanik koji trenutno stake-a.",
-            "body": "Potrebno je ručno stake-ati ova sredstva kako bi primili airdrop nagrade za njih."
+            "title": "Nova sredstva koja nisu na stakeu: {amount}",
+            "titleNoFunds": "Nova sredstva koja nisu na stakeu",
+            "preBody": "Primili ste tokene na novčanik koji trenutno stakea.",
+            "body": "Potrebno je ručno stakeati ova sredstva kako bi primili airdrop nagrade za njih."
         },
         "stakingMinRewards": {
             "title": "Ispod minimalne vrijednosti nagrade",
             "titleMinBalance": "Potrebno minimalno stanje od {amount}",
-            "bodyMinBalance": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne nagrade za airdrop, te stoga ne može biti stake-an.",
-            "continue": "Molimo nastavite sa staking-om još {duration}.",
+            "bodyMinBalance": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne nagrade za airdrop, te stoga ne može biti stakean.",
+            "continue": "Molimo nastavite sa stakingom još {duration}.",
             "bodyBelowMin": "Ovaj novčanik nije dosegao minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "Morate stake-ati još {duration} da bi dosegli minimum.",
-            "bodyWillNotReachMin": "Nećete dosegnuti minimalni iznos nagrade tijekom preostalog razdoblja staking-a osim ako ne pridodate još IOTA tokena.",
-            "bodyDidNotReachMin": "Niste stake-ali dovoljno IOTA tokena da bi dosegnuli minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
+            "bodyWillReachMin": "Morate stakeati još {duration} da bi dosegli minimum.",
+            "bodyWillNotReachMin": "Nećete dosegnuti minimalni iznos nagrade tijekom preostalog razdoblja stakinga osim ako ne pridodate još IOTA tokena.",
+            "bodyDidNotReachMin": "Niste stakeali dovoljno IOTA tokena da bi dosegnuli minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne airdrop nagrade za {airdrop}."
         }
     },
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Trenutno koristite developerski profil i povezani ste s {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Trebamo vaše dopuštenje za korištenje kamere kako bi mogli skenirati QR kodove.",
+            "requestInAppSettings": "Ako želite dati dopuštenje za korištenje vaše kamere za skeniranje QR kodova, omogućite to u postavkama aplikacije."
         }
     }
 }
