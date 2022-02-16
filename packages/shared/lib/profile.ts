@@ -35,10 +35,13 @@ export const isStrongholdLocked = writable<boolean>(true)
 export const newProfile = writable<Profile | null>(null)
 export const activeProfile = writable<Profile | null>(null)
 
-activeProfile.subscribe((profile) => {
-    if (profile) {
-        Platform.updateActiveProfile(profile.id)
-    }
+export const referenceProfileId: Readable<string | null> = derived(
+    [newProfile, activeProfile],
+    ([$newProfile, $activeProfile]) => $newProfile?.id ?? $activeProfile?.id
+)
+
+referenceProfileId.subscribe(($referenceProfileId) => {
+    Platform?.updateActiveProfile($referenceProfileId)
 })
 
 /**
