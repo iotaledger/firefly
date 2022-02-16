@@ -66,6 +66,23 @@ export const milestoneToDate = (milestone: number): Date => {
     const firstMilestoneMillis = Date.now() - currentMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     const date = new Date(milestoneMillis)
-    date.setMinutes(0) && date.setSeconds(0)
+    date.setSeconds(Math.floor(date.getSeconds() / 10) * 10)
     return date
+}
+
+/**
+ * Gets string duration from millis in days, hours and minutes
+ * 
+ * @method getDurationString
+ * 
+ * @param {number} millis
+ * 
+ * @returns {string}
+ */
+export const getDurationString = (millis: number): string => {
+    const durationInMinutes = millis / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+    const minutes = Math.floor(durationInMinutes % MINUTES_PER_HOUR)
+    const hours = Math.floor((durationInMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY)
+    const days = Math.floor(durationInMinutes / (MINUTES_PER_HOUR * HOURS_PER_DAY))
+    return `${localize('times.day', { values: { time: days } })}  ${localize('times.hour', { values: { time: hours } })}  ${localize('times.minute', { values: { time: minutes } })}`
 }
