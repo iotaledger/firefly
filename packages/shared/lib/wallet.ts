@@ -27,7 +27,7 @@ import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
 import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
-import type { Actor } from './typings/bridge'
+import type { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import type { Message } from './typings/message'
@@ -61,10 +61,7 @@ export enum AccountColors {
     Pink = configColors['pink']['500'],
 }
 
-export const MAX_PROFILE_NAME_LENGTH = 20
-
 export const MAX_ACCOUNT_NAME_LENGTH = 20
-
 export const MAX_PASSWORD_LENGTH = 256
 
 /**
@@ -78,7 +75,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 interface ActorState {
-    [id: string]: Actor
+    [id: string]: IActorHandler
 }
 
 const actors: ActorState = {}
@@ -187,19 +184,35 @@ export const api: IWalletApi = new Proxy(
     }
 )
 
-export const getWalletStoragePath = (appPath: string): string => `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
+export const getWalletDataPath = async (): Promise<string> => {
+    const appPath = await Platform.getUserDataPath()
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
+}
 
-export const getStoragePath = (appPath: string, profileName: string): string =>
-    `${getWalletStoragePath(appPath)}${profileName}`
+export const getProfileDataPath = async (profileName: string): Promise<string> => {
+    const walletPath = await getWalletDataPath()
+    return `${walletPath}${profileName}`
+}
 
-export const initialise = (id: string, storagePath: string): void => {
+/**
+ * Initialise the actor system with the Rust wallet.rs bindings.
+ *
+ * @method initialise
+ *
+ * @param {string} id The identifier to use for the wallet actor system.
+ * @param {string} storagePath The storage directory to use for profile data.
+ * @param {boolean} sendCrashReports Determines whether crash reports should be sent from the wallet actor.
+ * @param {string} machineId Machine ID for crash reporting
+ *
+ * CAUTION: Only use the app settings from startup as the wallet actor is initialized dynamically while the
+ * Electron app is not.
+ */
+export const initialise = (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void => {
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
 
-    const actor: Actor = WALLET.init(id, storagePath)
-
-    actors[id] = actor
+    actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
 }
 
 /**

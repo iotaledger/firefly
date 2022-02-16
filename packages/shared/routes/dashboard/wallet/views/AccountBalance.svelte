@@ -15,12 +15,6 @@
     $: textColor = isBright(color) ? 'gray-800' : 'white'
 </script>
 
-<style>
-    .account-color {
-        background-color: var(--account-color);
-    }
-</style>
-
 <div
     style="--account-color: {color};}"
     class="relative account-color dark:from-gray-800 dark:to-gray-900 pt-6 pb-10 px-8 z-0 bg-no-repeat bg-right-top bg-auto {classes}">
@@ -39,3 +33,9 @@
         {/each}
     </button>
 </div>
+
+<style>
+    .account-color {
+        background-color: var(--account-color);
+    }
+</style>

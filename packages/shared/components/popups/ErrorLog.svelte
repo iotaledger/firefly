@@ -4,7 +4,6 @@
     import { closePopup } from 'shared/lib/popup'
     import { setClipboard } from 'shared/lib/utils'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { Error } from 'shared/lib/typings/error'
 
     export let locale: Locale
 
@@ -16,7 +15,7 @@
     const handleCopyClick = () => {
         const str = []
 
-        for (const err: Error of $errorLog) {
+        for (const err of $errorLog) {
             str.push(new Date(err.time).toUTCString())
             str.push(`${err.type}: ${err.message}`)
             str.push('')
@@ -25,12 +24,6 @@
         setClipboard(str.join('\r\n'))
     }
 </script>
-
-<style>
-    .history {
-        max-height: 30vh;
-    }
-</style>
 
 <div class="mb-5">
     <Text type="h4">{locale('popups.errorLog.title')}</Text>
@@ -56,3 +49,9 @@
         <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
     </div>
 {/if}
+
+<style>
+    .history {
+        max-height: 30vh;
+    }
+</style>

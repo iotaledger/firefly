@@ -26,20 +26,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .mobile-top-bar {
-        :global(h1),
-        :global(h2),
-        :global(h3),
-        :global(h4),
-        :global(h5) {
-            @apply font-bold;
-            @apply text-16;
-            @apply leading-140;
-        }
-    }
-</style>
-
 <!-- https://github.com/sveltejs/svelte/issues/4546 -->
 {#if false}
     <slot />
@@ -123,3 +109,17 @@
         </div>
     </div>
 {/if}
+
+<style type="text/scss">
+    .mobile-top-bar {
+        :global(h1),
+        :global(h2),
+        :global(h3),
+        :global(h4),
+        :global(h5) {
+            @apply font-bold;
+            @apply text-16;
+            @apply leading-140;
+        }
+    }
+</style>

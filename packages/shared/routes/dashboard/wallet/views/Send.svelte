@@ -483,22 +483,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button.active {
-        @apply relative;
-        &:after {
-            content: '';
-            @apply bg-blue-500;
-            @apply w-full;
-            @apply rounded;
-            @apply h-0.5;
-            @apply absolute;
-            @apply -bottom-2.5;
-            @apply left-0;
-        }
-    }
-</style>
-
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
         <div class="flex flex-row w-full justify-between mb-8">
@@ -605,3 +589,19 @@
             percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
     {/if}
 </div>
+
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>

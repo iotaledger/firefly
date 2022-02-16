@@ -1,7 +1,7 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
+
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { Network, NetworkConfig } from 'shared/lib/typings/network'
     import { closePopup } from 'shared/lib/popup'
     import {
         asyncCreateAccount,
@@ -9,7 +9,6 @@
         asyncSetStrongholdPassword,
         wallet,
     } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import {
         activeProfile,
@@ -22,7 +21,10 @@
     import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
-    import { Node } from 'shared/lib/typings/node'
+    
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { Network, NetworkConfig } from 'shared/lib/typings/network'
+    import type { Node } from 'shared/lib/typings/node'
 
     export let locale: Locale
 

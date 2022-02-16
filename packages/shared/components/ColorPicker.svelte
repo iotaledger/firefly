@@ -50,24 +50,6 @@
     $: customActiveFilled = activeElement === accountColors.length && inputValue.length >= 7
 </script>
 
-<style type="text/scss">
-    input {
-        background-color: transparent;
-    }
-
-    .active {
-        background-color: rgb(var(--account-color));
-        --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
-    }
-
-    .custom-color {
-        background-color: rgb(var(--custom-color));
-        --tw-ring-color: rgba(var(--custom-color), var(--tw-ring-opacity));
-        --tw-ring-opacity: 0.3;
-    }
-</style>
-
 <div style="--account-color: {inputValue ? hex2rgb(active) : ''}; --custom-color: {hex2rgb(inputValue)};" class={classes}>
     <div class="flex flex-row mb-4">
         <Text type="h5">{title}</Text>
@@ -99,3 +81,21 @@
         </div>
     {/if}
 </div>
+
+<style type="text/scss">
+    input {
+        background-color: transparent;
+    }
+
+    .active {
+        background-color: rgb(var(--account-color));
+        --tw-ring-color: rgba(var(--account-color), var(--tw-ring-opacity));
+        --tw-ring-opacity: 0.3;
+    }
+
+    .custom-color {
+        background-color: rgb(var(--custom-color));
+        --tw-ring-color: rgba(var(--custom-color), var(--tw-ring-opacity));
+        --tw-ring-opacity: 0.3;
+    }
+</style>

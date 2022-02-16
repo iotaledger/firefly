@@ -29,8 +29,6 @@
     import { get } from 'svelte/store'
     import { isBright } from 'shared/lib/helpers'
 
-    const NEW_LINE = '\r\n'
-
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
@@ -226,6 +224,70 @@
     }
 </script>
 
+<button
+    on:click={handleTileClick}
+    on:mouseenter={toggleStyles}
+    on:mouseleave={toggleStyles}
+    class="{classes} {disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-auto"
+    class:staked={isActivelyStaking}
+    class:partial-stake={showWarningState}
+    class:airdrop
+    class:hidden-wallet={hidden}
+    class:darkmode={darkModeEnabled}
+    style="--account-color: {color};"
+    {disabled}>
+    <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
+        <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
+            {#if showWarningState}
+                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                    <Icon
+                        icon="exclamation"
+                        width="16"
+                        height="16"
+                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{textColor}" />
+                </div>
+            {:else if isActivelyStaking}
+                <Icon
+                    icon="tokens"
+                    width="16"
+                    height="16"
+                    classes="fill-current mt-0.5 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-{textColor}`}" />
+            {/if}
+            <Text
+                bold
+                smaller={size === 's'}
+                overrideColor
+                classes="inline text-gray-800 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`} overflow-hidden overflow-ellipsis">
+                {getName()}
+            </Text>
+        </div>
+        {#if airdrop}
+            <Icon
+                icon={airdrop}
+                classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700 group-hover:text-white"
+                width={size === 's' ? 13 : 18}
+                height={size === 's' ? 13 : 18} />
+        {/if}
+    </div>
+    <div
+        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
+        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`}">
+            {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
+        </Text>
+        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-blue-500 dark:text-gray-600 group-hover:text-${textColor}`}">
+            {balanceEquiv}
+        </Text>
+    </div>
+</button>
+{#if showTooltip && tooltipText?.body}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
+        {#each tooltipText?.body as paragraph}
+            <Text type="p" secondary classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}">{paragraph}</Text>
+        {/each}
+    </Tooltip>
+{/if}
+
 <style type="text/scss">
     button {
         height: auto;
@@ -291,67 +353,3 @@
         }
     }
 </style>
-
-<button
-    on:click={handleTileClick}
-    on:mouseenter={toggleStyles}
-    on:mouseleave={toggleStyles}
-    class="{classes} {disabledHover ? 'disabled-hover' : 'bg-gray-100 dark:bg-gray-900'} size-{size} group rounded-xl font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} bg-no-repeat bg-right-top bg-auto"
-    class:staked={isActivelyStaking}
-    class:partial-stake={showWarningState}
-    class:airdrop
-    class:hidden-wallet={hidden}
-    class:darkmode={darkModeEnabled}
-    style="--account-color: {color};"
-    {disabled}>
-    <div class="mb-2 w-full flex flex-row justify-between items-start space-x-1.5">
-        <div class="flex flex-row space-x-1.5 items-start w-full whitespace-nowrap">
-            {#if showWarningState}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                    <Icon
-                        icon="exclamation"
-                        width="16"
-                        height="16"
-                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{textColor}" />
-                </div>
-            {:else if isActivelyStaking}
-                <Icon
-                    icon="tokens"
-                    width="16"
-                    height="16"
-                    classes="fill-current mt-0.5 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-{textColor}`}" />
-            {/if}
-            <Text
-                bold
-                smaller={size === 's'}
-                overrideColor
-                classes="inline text-gray-800 {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`} overflow-hidden overflow-ellipsis">
-                {getName()}
-            </Text>
-        </div>
-        {#if airdrop}
-            <Icon
-                icon={airdrop}
-                classes="fill-current text-gray-{disabled ? '500' : '400'} dark:text-gray-700 group-hover:text-white"
-                width={size === 's' ? 13 : 18}
-                height={size === 's' ? 13 : 18} />
-        {/if}
-    </div>
-    <div
-        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
-        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-gray-800 dark:text-white group-hover:text-${textColor}`}">
-            {#if airdrop}{formatStakingAirdropReward(airdrop, Number(balance), 6)}{:else}{balance}{/if}
-        </Text>
-        <Text smaller overrideColor classes="block {disabledHover ? `text-${textColor}` : `text-blue-500 dark:text-gray-600 group-hover:text-${textColor}`}">
-            {balanceEquiv}
-        </Text>
-    </div>
-</button>
-{#if showTooltip && tooltipText?.body}
-    <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
-        {#each tooltipText?.body as paragraph}
-            <Text type="p" secondary classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}">{paragraph}</Text>
-        {/each}
-    </Tooltip>
-{/if}

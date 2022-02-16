@@ -1,3 +1,4 @@
+import type { AppSettings } from './app'
 import type { IDeepLinkManager } from './deepLinking/deepLinkManager'
 import type { ILedger } from './ledger'
 import type { INotificationManager } from './notificationManager'
@@ -5,6 +6,7 @@ import type { IPincodeManager } from './pincodeManager'
 import type { VersionDetails } from './appUpdater'
 import type { Error } from './error'
 import type { EventMap } from './events'
+import type { IBarcodeManager } from './barcodeManager'
 
 export enum Platforms {
     MOBILE = 'mobile',
@@ -20,9 +22,12 @@ export interface IPlatform {
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
+    getMachineId(): Promise<string>
+    updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
+    renameProfileFolder(oldPath: string, newPath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>
     updateMenu(attribute: string, value: unknown): void
     popupMenu(): void
@@ -33,9 +38,11 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: Error) => void): void
+
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
     PincodeManager: IPincodeManager | undefined
+    BarcodeManager: IBarcodeManager | undefined
 
     getVersionDetails(): Promise<VersionDetails>
     updateCheck(): Promise<void>

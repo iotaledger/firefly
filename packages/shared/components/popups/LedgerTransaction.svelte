@@ -55,12 +55,6 @@
     })
 </script>
 
-<style>
-    .transaction {
-        max-height: 30vh;
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
@@ -98,3 +92,9 @@
         </div>
     {/if}
 </div>
+
+<style>
+    .transaction {
+        max-height: 30vh;
+    }
+</style>

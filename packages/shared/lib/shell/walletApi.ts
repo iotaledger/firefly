@@ -16,8 +16,9 @@ import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
 import { NodePlugin } from '../typings/node'
 import type { IWalletApi } from 'shared/lib/typings/walletApi'
+import type { IWalletActor } from '../typings/walletActor'
 
-export let WALLET = window['__WALLET__']
+export const WALLET: IWalletActor = window['__WALLET__']
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern

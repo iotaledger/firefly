@@ -26,17 +26,6 @@
     $: textColor = bright ? 'gray-800' : 'white'
 </script>
 
-<style type="text/scss">
-    button {
-        &.disabled-hover {
-                background-color: var(--account-color);
-            }
-        &:not(.disabled-hover):hover {
-            background-color: var(--account-color);
-        }
-    }
-</style>
-
 <button
     on:click={onClick}
     on:mouseenter={toggleTooltip}
@@ -54,3 +43,14 @@
         </Text>
     </Tooltip>
 {/if}
+
+<style type="text/scss">
+    button {
+        &.disabled-hover {
+                background-color: var(--account-color);
+            }
+        &:not(.disabled-hover):hover {
+            background-color: var(--account-color);
+        }
+    }
+</style>

@@ -22,20 +22,6 @@
     }
 </script>
 
-<style type="text/scss">
-    .legal-content {
-        :global(ul) {
-            display: block;
-            list-style-type: disc;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            padding-inline-start: 20px;
-        }
-    }
-</style>
-
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
         <Text type="h2">{locale('views.legal.title')}</Text>
@@ -58,3 +44,17 @@
         </div>
     </div>
 </OnboardingLayout>
+
+<style type="text/scss">
+    .legal-content {
+        :global(ul) {
+            display: block;
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 20px;
+        }
+    }
+</style>

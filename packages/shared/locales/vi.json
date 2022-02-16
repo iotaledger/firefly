@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Cấu hình",
             "generalSettings": {
-                "title": "Thiết lập chung",
+                "title": "General",
                 "description": "Thiết lập giao diện ứng dụng của bạn và các cặt đặt chung khác"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Thay đổi mật khẩu của bạn và chỉnh các cài đặt liên quan bảo mật"
             },
             "advancedSettings": {
-                "title": "Thiết lập nâng cao",
+                "title": "Advanced",
                 "description": "Những công cụ và cài đặt thủ công cho người dùng kỹ thuật"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Giao diện",
                 "description": "",
-                "advice": "Khởi động lại ứng dụng Firefly để các thay đổi với chủ đề hệ thống có hiệu lực"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Ngôn ngữ",
@@ -350,6 +350,11 @@
                 "newPincode": "Mã PIN mới",
                 "confirmNewPincode": "Xác nhận mã PIN mới",
                 "action": "Thay đổi mã PIN"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Công cụ tìm số dư",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Mạng thử nghiệm được khuyến khích để thúc đẩy cải tiến quan trọng trên IOTA. Bất cứ điều gì xảy ra, diễn ra. Cách Shimmer phát triển tùy thuộc vào bạn."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Hệ thống",
         "balance": "Số dư",
         "accountBalance": "Số dư Ví",
+        "all": "All",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
         "totalIn": "Tổng vào",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Mạng Legacy",
         "capsLock": "Phím CapsLock đang bật",
         "version": "Phiên bản {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Không biết",
         "none": "Trống",
         "staked": "Đã đặt cọc",
@@ -1011,7 +1034,8 @@
         "unstaking": "Đang hủy đặt cọc",
         "notStaked": "Không đặt cọc",
         "stakedFunds": "Tài sản đã đặt cọc",
-        "unstakedFunds": "Tài sản không đặt cọc"
+        "unstakedFunds": "Tài sản không đặt cọc",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Bạn phải sử dụng ví mới nhất của mình trước khi tạo ví mới.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Bạn phải chuyển số dư của mình trước khi xóa ví này.",
             "duplicate": "Ví có tên này đã tồn tại.",
             "tilde": "Tên hồ sơ không được bắt đầu bằng ký tự '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

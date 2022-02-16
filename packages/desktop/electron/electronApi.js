@@ -12,11 +12,25 @@ let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
+    updateAppSettings(settings) {
+        return ipcRenderer.invoke('update-app-settings', settings)
+    },
     getActiveProfile() {
         return activeProfileId
     },
     updateActiveProfile(id) {
         activeProfileId = id
+    },
+    renameProfileFolder(oldPath, newPath) {
+        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+            if (oldPath.startsWith(userDataPath)) {
+                try {
+                    fs.renameSync(oldPath, newPath)
+                } catch (err) {
+                    console.error(err)
+                }
+            }
+        })
     },
     removeProfileFolder(profilePath) {
         ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
@@ -212,6 +226,14 @@ const ElectronApi = {
      * @returns {Promise}
      */
     getOS: () => ipcRenderer.invoke('get-os'),
+    /**
+     * Gets machine ID
+     *
+     * @method getMachineId
+     *
+     * @returns {Promise}
+     */
+    getMachineId: () => ipcRenderer.invoke('get-machine-id'),
     /**
      * Starts an update of the application
      *

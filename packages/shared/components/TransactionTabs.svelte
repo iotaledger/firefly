@@ -24,6 +24,33 @@
     )
 </script>
 
+<nav class="w-full flex flex-row justify-between items-center mb-5">
+    <ul class="relative flex rounded-lg items-center p-0 bg-gray-50 dark:bg-gray-900">
+        {#each tabs as tab, i}
+            <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
+                <button on:click={() => (current = tab)}>
+                    <Text bold={current === tab} highlighted={current === tab} secondary={current !== tab}>{locale(tab)}</Text>
+                </button>
+            </li>
+        {/each}
+        <span id="check-square" class="absolute z-0 rounded-md bg-white dark:bg-gray-800" />
+    </ul>
+    <button id="search" class="rounded-xl bg-white dark:bg-gray-900">
+        <Icon icon="search" classes="text-blue-500 dark:text-white" width="22" height="22" />
+    </button>
+</nav>
+<main class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
+    {#if filtered.length > 0}
+        {#each filtered as item (item.id)}
+            <div in:fly={{ y: 40, duration: 357, easing: easing.quadIn }} animate:flip={{ duration: 757 }}>
+                <slot {item} />
+            </div>
+        {/each}
+    {:else}
+        <slot />
+    {/if}
+</main>
+
 <style type="text/scss">
     ul {
         --offset: 1px;
@@ -65,30 +92,3 @@
         height: 36px;
     }
 </style>
-
-<nav class="w-full flex flex-row justify-between items-center mb-5">
-    <ul class="relative flex rounded-lg items-center p-0 bg-gray-50 dark:bg-gray-900">
-        {#each tabs as tab, i}
-            <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
-                <button on:click={() => (current = tab)}>
-                    <Text bold={current === tab} highlighted={current === tab} secondary={current !== tab}>{locale(tab)}</Text>
-                </button>
-            </li>
-        {/each}
-        <span id="check-square" class="absolute z-0 rounded-md bg-white dark:bg-gray-800" />
-    </ul>
-    <button id="search" class="rounded-xl bg-white dark:bg-gray-900">
-        <Icon icon="search" classes="text-blue-500 dark:text-white" width="22" height="22" />
-    </button>
-</nav>
-<main class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
-    {#if filtered.length > 0}
-        {#each filtered as item (item.id)}
-            <div in:fly={{ y: 40, duration: 357, easing: easing.quadIn }} animate:flip={{ duration: 757 }}>
-                <slot {item} />
-            </div>
-        {/each}
-    {:else}
-        <slot />
-    {/if}
-</main>

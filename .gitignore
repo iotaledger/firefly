@@ -225,3 +225,6 @@ DerivedData/
 
 # Testing
 **/coverage
+
+# Environment variable files
+**/*.env

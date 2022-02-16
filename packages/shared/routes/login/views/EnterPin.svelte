@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { Icon,Pin,Profile,Text } from 'shared/components'
+    import { initAppSettings } from 'shared/lib/appSettings'
     import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api,getStoragePath,initialise } from 'shared/lib/wallet'
-    import { createEventDispatcher,onDestroy } from 'svelte'
+    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import type { Locale } from 'shared/lib/typings/i18n'
 
@@ -61,10 +62,11 @@
     }
 
     function onSubmit() {
-        if (get(ongoingSnapshot) === true) {
+        if ($ongoingSnapshot === true) {
             return openSnapshotPopup()
         }
         if (!hasReachedMaxAttempts) {
+            const { sendCrashReports } = get(initAppSettings)
             const profile = get(activeProfile)
 
             isBusy = true
@@ -72,21 +74,23 @@
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Platform.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
+                        return Platform.getMachineId().then((machineId) =>
+                            getProfileDataPath(profile.name).then((path) => {
+                                initialise(profile.id, path, sendCrashReports, machineId)
+                                api.setStoragePassword(pinCode, {
+                                    onSuccess() {
+                                        dispatch('next')
+                                    },
+                                    onError(err) {
+                                        isBusy = false
+                                        showAppNotification({
+                                            type: 'error',
+                                            message: locale(err.error),
+                                        })
+                                    },
+                                })
                             })
-                        })
+                        )
                     } else {
                         shake = true
                         shakeTimeout = setTimeout(() => {
@@ -135,7 +139,7 @@
     </button>
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile {locale} profile={$activeProfile} bgColor="blue" />
+            <Profile name={$activeProfile?.name} bgColor="blue" />
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}

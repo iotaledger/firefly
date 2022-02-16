@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { Profile, ProfileType } from 'shared/lib/typings/profile';
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-    export let classes = undefined
+    export let classes: string
     export let profile: Profile
     export let bgColor: string
     export let onClick: (profile: Profile) => void
@@ -13,6 +13,7 @@
     $: name = profile?.name ?? locale('general.addProfile')
     $: isDeveloperProfile = profile?.isDeveloperProfile
     $: isLedgerProfile = profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator
+
     const slots = $$props.$$slots
     
     function getInitials() {

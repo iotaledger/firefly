@@ -149,6 +149,30 @@
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
+<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
+    <slide-zone
+        class="fixed h-screen w-screen"
+        use:slidable
+        on:slideMove={handleSlideMove}
+        on:slideEnd={handleSlideEnd}
+        on:tap={close}>
+        <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
+    </slide-zone>
+    <main
+        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+        class:darkmode={darkModeEnabled}
+        class:fullScreen
+        style="--y: {fromRight ? 0 : $coords.y}px; 
+			--x: {fromRight ? $coords.x : 0}px; 
+			--opacity: {contentOpacity}; 
+			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
+			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
+			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
+			--display-indicator: {fromRight ? 'none' : 'block'}">
+        <slot />
+    </main>
+</drawer>
+
 <style type="text/scss">
     main {
         will-change: transform;
@@ -198,27 +222,3 @@
         display: none;
     }
 </style>
-
-<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
-    <slide-zone
-        class="fixed h-screen w-screen"
-        use:slidable
-        on:slideMove={handleSlideMove}
-        on:slideEnd={handleSlideEnd}
-        on:tap={close}>
-        <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
-    </slide-zone>
-    <main
-        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
-        class:darkmode={darkModeEnabled}
-        class:fullScreen
-        style="--y: {fromRight ? 0 : $coords.y}px; 
-			--x: {fromRight ? $coords.x : 0}px; 
-			--opacity: {contentOpacity}; 
-			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
-			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
-			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromRight ? 'none' : 'block'}">
-        <slot />
-    </main>
-</drawer>
