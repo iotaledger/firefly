@@ -1,4 +1,4 @@
-const baseConfig = {
+const baseConfig = () => ({
     productName: 'Firefly',
     artifactName: 'firefly-desktop-${version}.${ext}',
     copyright: 'IOTA Foundation',
@@ -44,10 +44,66 @@ const baseConfig = {
         gatekeeperAssess: false,
         asarUnpack: ['**/*.node'],
     },
-    publish: {
-        provider: 'generic',
-        url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: true,
-        channel: 'latest',
+})
+
+const getIconPaths = (stage) => {
+    const prefix = './public/assets/icons'
+    const stagePrefix = stage === 'prod' ? '' : `${stage}-`
+    const winIconName = 'icon.ico'
+    const linuxIconName = 'icon256x256.png'
+    const macIconName = 'icon.icns'
+
+    return {
+        win: {
+            icon: `${prefix}/win/${stagePrefix}${winIconName}`,
+        },
+        linux: {
+            icon: `${prefix}/linux/${stagePrefix}${linuxIconName}`,
+        },
+        mac: {
+            icon: `${prefix}/mac/${stagePrefix}${macIconName}`,
+        },
+    }
+}
+
+/**
+ * If stage = 'prod' -> 'Firefly'
+ * If stage = 'alpha' -> 'Firefly Alpha'
+ * @param {string} stage
+ * @returns
+ */
+const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage[0].toUpperCase()}${stage.slice(1)}`)
+
+const getLinuxDesktopName = (stage) => ({
+    linux: {
+        desktop: {
+            Name: getAppName(stage),
+        },
     },
+})
+
+const prodConfig = () => {
+    const publish = {
+        publish: {
+            provider: 'generic',
+            url: 'https://dl.firefly.iota.org/',
+            publishAutoUpdate: true,
+            channel: 'latest',
+        },
+    }
+    return Object.assign({}, baseConfig(), { publish })
+}
+
+const alphaConfig = () => {
+    const icons = getIconPaths('alpha')
+    const names = {
+        productName: getAppName('alpha'),
+        linux: {
+            desktop: {
+                Name: getAppName('alpha'),
+            },
+        },
+    }
+
+    return Object.assign({}, baseConfig(), icons, { productName: getAppName('alpha') }, getLinuxDesktopName('alpha'))
 }
