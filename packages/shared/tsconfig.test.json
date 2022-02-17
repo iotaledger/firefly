@@ -1,7 +1,15 @@
 {
-    "extends": "./tsconfig.json",
+    "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
+        "baseUrl": "./",
         "isolatedModules": false,
+        "lib": ["DOM", "ESNext"],
+        "paths": {
+            "@lib/*": ["./lib/*"],
+            "@mocks/*": ["./lib/tests/mocks/*"]
+        },
         "types": ["jest"]
-    }
+    },
+    "include": ["./lib"],
+    "exclude": ["**/node_modules"]
 }
