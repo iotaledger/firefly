@@ -123,11 +123,25 @@
         let messageIds: string[]
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                messageIds = await participate($selectedAccountId, participations)
+                await participate($selectedAccountId, participations, $participationAction)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             }
             case ParticipationAction.Unstake:
-                messageIds = await stopParticipating($selectedAccountId, STAKING_EVENT_IDS)
+                await stopParticipating($selectedAccountId, STAKING_EVENT_IDS, $participationAction)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             default:
                 break

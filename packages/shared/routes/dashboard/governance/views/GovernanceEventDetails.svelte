@@ -1,58 +1,54 @@
 <script lang="typescript">
-    import { Text, Icon, Button, DashboardPane } from 'shared/components'
+    import { Text, Icon, DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
-    import { ParticipationEventState, ParticipationEvent } from 'shared/lib/participation/types'
-    import { participate } from 'shared/lib/participation/api';
-    import { api, selectedAccountId } from 'shared/lib/wallet'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
+    import { participationOverview } from 'shared/lib/participation/stores';
+    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
     
     export let event: ParticipationEvent;
-    export let locale: Locale
 
-    const handleBackClick = () => governanceRoute.set(GovernanceRoutes.Init)
-
-    const castVote = async (answer: string) => {
-        try {
-            await participate($selectedAccountId, [{ eventId: event.eventId, answers: [answer] }])
-        } catch (err) {
-            showAppNotification({
-                type: 'error',
-                message: locale(err.error),
-            })
-        }
+    let currentVoteValue: string;
+    $: {
+        const overview = $participationOverview[0];
+        const participation = overview?.participations.find(
+            (participation) => participation.eventId === event.eventId
+        )
+        currentVoteValue = participation?.answers[0] ?? null
     }
 
-    const handleCastClick = (answer: string) => {
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({
-                            type: 'password',
-                            props: {
-                                onSuccess: () => castVote(answer),
-                            },
-                        })
-                    } else {
-                        void castVote(answer)
-                    }
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            })
+    const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
+
+    const handleClick = (nextVote: VotingEventAnswer): void => {
+        openPopup({
+            type: 'governanceCastVote',
+            props: {
+                currentVoteValue,
+                eventId: event?.eventId,
+                nextVote,
+            }
+        })
+    }
+
+    const getAnswerHeader = (answerValue: string): string => {
+        if (isSelected(answerValue)) {
+            return setActiveText()
+        } else if (currentVoteValue) {
+            return 'Not Selected'
         } else {
-            void castVote(answer)
+            return `Option ${answerValue}`
         }
     }
+
+    const setActiveText = (): string => {
+        if (event?.status?.status === ParticipationEventState.Holding) {
+            return 'Active Voting'
+        }
+        return 'Selected'
+    }
+
+    const isSelected = (answerValue: string): boolean => currentVoteValue === answerValue
 </script>
 
 <div
@@ -70,17 +66,24 @@
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
         <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
-        {#each event?.information?.payload?.questions[0]?.answers as answer, i}
-            <div class="py-4 px-6 bg-gray-50 border border-solid border-gray-100 rounded-lg flex mb-4">
+        {#each event?.information?.payload?.questions[0]?.answers as answer}
+            <div
+                on:click={() => handleClick(answer)} 
+                class="py-4 px-6 bg-{isSelected(answer?.value) ? 'blue-100' : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
+            >
                 <div>
-                    <Text type="p" classes="uppercase text-blue-500 mb-2" overrideColor smaller bold>{`Option ${answer?.value}`}</Text>
+                    <div class="flex items-center mb-2">
+                        {#if isSelected(answer?.value)}
+                            <Icon width=16 height=16 icon="checkbox-round" classes="text-blue-500 mr-2"></Icon>
+                        {/if}
+                        <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>{getAnswerHeader(answer?.value)}</Text>
+                    </div>
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
                     <Text type="p">{answer?.additionalInfo}</Text>
                 </div>
-                <Button medium classes="my-auto ml-44" disabled={event.status.status === ParticipationEventState.Upcoming}
-                    onClick={() => handleCastClick(answer?.value)}>
-                    Cast votes
-                </Button>
+                <div class="my-auto">
+                    <Icon icon="chevron-right" />
+                </div>
             </div>
         {/each}
     </DashboardPane>

@@ -776,9 +776,7 @@
         "stakingManager": {
             "title": "Staking Management",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "totalFundsStaked": "Total funds staked"
         },
         "stakingConfirmation": {
             "title": "Airdrop Participation",
@@ -787,6 +785,11 @@
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
+        },
+        "votingConfirmation": {
+            "additionalInfo": "Please be aware that changing or stopping your vote during the counting period won’t impact any votes that have been counted prior to this change.",
+            "votesSubmitted": "Your votes are submitted",
+            "votesStopped": "Your vote has been stopped"
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -938,7 +941,11 @@
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "castVotes": "Cast votes",
+        "changeVotes": "Change votes",
+        "mergeVotes": "Merge votes",
+        "stopVotes": "Stop votes"
     },
     "general": {
         "password": "Password",
@@ -1126,6 +1133,12 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
+        },
+        "success": {
+            "stake": "Your funds have been staked for {account}.",
+            "unstake": "Your funds have been unstaked for {account}.",
+            "vote": "You voted with {account}",
+            "unvote": "You unvoted with {account}"
         }
     },
     "error": {
