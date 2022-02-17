@@ -10,6 +10,11 @@ const config: CapacitorConfig = {
         url: 'http://XXX.XXX.XXX.XXX:8080',
         cleartext: true,
     },
+    cordova: {
+        preferences: {
+            DisableDeploy: 'true',
+        }
+    }
 }
 
 export default config
