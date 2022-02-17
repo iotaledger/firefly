@@ -8,13 +8,14 @@
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
-    import { Platforms } from 'shared/lib/typings/platform';
+    import { Platforms } from 'shared/lib/typings/platform'
     import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Appearance,
         Backup,
         Balance,
         Congratulations,
+        CrashReporting,
         Create,
         Dashboard,
         Import,
@@ -78,6 +79,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Settings}>
             <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />

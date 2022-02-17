@@ -9,7 +9,6 @@
     }
 </script>
 
-
 <div class="w-full overflow-hidden">
     <div on:click={toggleBlockContent} class="flex flex-row justify-between w-full overflow-hidden cursor-pointer">
         <div class="grow"><Text type="p" secondary={!showBlock}>{label}</Text></div>
@@ -18,6 +17,6 @@
     {#if showBlock}
         <div class="w-full overflow-hidden pt-4">
             <slot />
-        </div>     
+        </div>
     {/if}
 </div>

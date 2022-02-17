@@ -106,12 +106,16 @@
         disabled={showSpinner || !canParticipateInEvent}
         caution={isStaked && isPartiallyStaked}
         secondary={isStaked && !isPartiallyStaked}
-        onClick={() => (canParticipateWithNode ? handleStakeFundsClick() : showAppNotification({
+        onClick={() =>
+            canParticipateWithNode
+                ? handleStakeFundsClick()
+                : showAppNotification({
                       type: 'warning',
                       message: localize('error.node.pluginNotAvailable', {
                           values: { nodePlugin: NodePlugin.Participation },
                       }),
-                  }))}>
+                  })}
+    >
         {#if showSpinner}
             <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
         {:else}{localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}{/if}
@@ -121,7 +125,12 @@
     <Tooltip anchor={tooltipAnchor} position="right">
         {#if isPartiallyStaked}
             <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-                {localize(`tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`, $partiallyStakedAccounts.length > 0 ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } } : {})}
+                {localize(
+                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
+                    $partiallyStakedAccounts.length > 0
+                        ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } }
+                        : {}
+                )}
             </Text>
             <Text type="p" secondary classes="text-left">
                 {localize('tooltips.partiallyStakedFunds.preBody')}

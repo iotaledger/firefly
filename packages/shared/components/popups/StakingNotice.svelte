@@ -26,9 +26,12 @@
     const handleContinueClick = () => {
         const canStake = $stakingEventState === ParticipationEventState.Commencing
         if (canStake) {
-            openPopup({
-                type: 'stakingManager',
-            }, true)
+            openPopup(
+                {
+                    type: 'stakingManager',
+                },
+                true
+            )
         } else {
             closePopup(true)
         }
@@ -42,5 +45,7 @@
     {#if canPreStake}
         <Button secondary classes="w-1/2" onClick={closePopup}>{locale('actions.cancel')}</Button>
     {/if}
-    <Button classes={canPreStake ? 'w-1/2' : 'w-full'} onClick={handleContinueClick}>{locale('popups.stakingNotice.ok')}</Button>
+    <Button classes={canPreStake ? 'w-1/2' : 'w-full'} onClick={handleContinueClick}
+        >{locale('popups.stakingNotice.ok')}</Button
+    >
 </div>

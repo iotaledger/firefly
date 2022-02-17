@@ -24,4 +24,5 @@
     sortItems={true}
     onSelect={handleCurrencySelect}
     value={$activeProfile?.settings.currency}
-    items={currencyList} />
+    items={currencyList}
+/>

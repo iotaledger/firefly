@@ -11,7 +11,7 @@
     import { cleanNodeAuth } from 'shared/lib/network'
 
     export let locale: Locale
-    export let node: Node = { url: '', }
+    export let node: Node = { url: '' }
 
     let nodeContent = ''
 
@@ -25,30 +25,43 @@
                 closePopup()
                 showAppNotification({
                     type: 'error',
-                    message: locale(err?.error)
+                    message: locale(err?.error),
                 })
             })
     })
 
     const combineNodeInfo = (nodeUrl: string, nodeInfo: NodeInfo): string => {
-        const usedKeys = ['name', 'networkId', 'bech32HRP', 'features', 'confirmedMilestoneIndex', 'pruningIndex', 'messagesPerSecond', 'referencedRate']
-        return [`${locale('popups.node.info.url')}: ${nodeUrl}`].concat(usedKeys.map((k) => {
-            let keyLocale = `popups.node.info.${k}`
-            let val
-            if (k === 'name') {
-                val = `${nodeInfo?.nodeinfo['name']} ${nodeInfo?.nodeinfo['version']}`
-                keyLocale = 'popups.node.info.software'
-            } else if (k === 'features') {
-                const hasFeatures = nodeInfo?.nodeinfo[k]?.length
-                val = hasFeatures ? nodeInfo?.nodeinfo[k]?.join(', ') : locale('general.none')
-            } else if (k === 'messagesPerSecond' || k === 'referencedRate') {
-                val = nodeInfo?.nodeinfo[k]?.toFixed(2)
-            } else {
-                val = nodeInfo?.nodeinfo[k]
-            }
+        const usedKeys = [
+            'name',
+            'networkId',
+            'bech32HRP',
+            'features',
+            'confirmedMilestoneIndex',
+            'pruningIndex',
+            'messagesPerSecond',
+            'referencedRate',
+        ]
+        return [`${locale('popups.node.info.url')}: ${nodeUrl}`]
+            .concat(
+                usedKeys.map((k) => {
+                    let keyLocale = `popups.node.info.${k}`
+                    let val
+                    if (k === 'name') {
+                        val = `${nodeInfo?.nodeinfo['name']} ${nodeInfo?.nodeinfo['version']}`
+                        keyLocale = 'popups.node.info.software'
+                    } else if (k === 'features') {
+                        const hasFeatures = nodeInfo?.nodeinfo[k]?.length
+                        val = hasFeatures ? nodeInfo?.nodeinfo[k]?.join(', ') : locale('general.none')
+                    } else if (k === 'messagesPerSecond' || k === 'referencedRate') {
+                        val = nodeInfo?.nodeinfo[k]?.toFixed(2)
+                    } else {
+                        val = nodeInfo?.nodeinfo[k]
+                    }
 
-            return `${locale(keyLocale)}: ${val}`
-        })).join('\r\n')
+                    return `${locale(keyLocale)}: ${val}`
+                })
+            )
+            .join('\r\n')
     }
 
     const handleCopyNodeInfoClick = () => {
