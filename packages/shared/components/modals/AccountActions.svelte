@@ -10,7 +10,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { get } from 'svelte/store'
-    import { SettingsIcons } from 'shared/lib/typings/icons';
+    import { SettingsIcons } from 'shared/lib/typings/icons'
 
     export let locale: Locale
 
@@ -22,7 +22,8 @@
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const hidden = hiddenAccounts.includes($selectedAccountId)
-    const canDelete = $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
+    const canDelete =
+        $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
         accountRoute.set(AccountRoutes.Manage)
@@ -35,7 +36,7 @@
     }
 
     function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', props: { account } ,hideClose: false })
+        openPopup({ type: 'exportTransactionHistory', props: { account }, hideClose: false })
         isActive = false
     }
 
@@ -98,29 +99,36 @@
         <!-- Customize -->
         <button
             on:click={() => handleCustomiseAccountClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {hidden ? 'opacity-50 pointer-events-none' : ''}"
-            disabled={hidden}>
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {hidden
+                ? 'opacity-50 pointer-events-none'
+                : ''}"
+            disabled={hidden}
+        >
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale('actions.customizeAcount')}</Text>
         </button>
         <!-- Address history -->
         <button
             on:click={() => handleViewAddressHistoryClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+        >
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale('actions.viewAddressHistory')}</Text>
         </button>
         <button
             on:click={handleExportTransactionHistoryClick}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+        >
             <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale('actions.exportTransactionHistory')}</Text>
         </button>
         <HR />
         <!-- Delete -->
         <button
-            on:click={() => (canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick())}
-            class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full">
+            on:click={() =>
+                canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick()}
+            class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full"
+        >
             <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>
                 {locale(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}

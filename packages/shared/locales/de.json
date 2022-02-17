@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Einstellungen",
             "generalSettings": {
-                "title": "Allgemeine Einstellungen",
+                "title": "Allgemein",
                 "description": "Passe das Erscheinungsbild deiner Wallet an und nimm weitere allgemeine Einstellungen vor"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Ändere dein Passwort und passe sicherheitsrelevante Einstellungen an"
             },
             "advancedSettings": {
-                "title": "Erweiterte Einstellungen",
+                "title": "Erweitert",
                 "description": "Werkzeuge und Einstellungen für technisch versierte Benutzer"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Erscheinungsbild",
                 "description": "",
-                "advice": "Starte die Firefly Anwendung neu, damit Änderungen am System-Erscheinungsbild wirksam werden"
+                "advice": "Starte die Firefly-Anwendung neu, damit Änderungen am System-Erscheinungsbild wirksam werden"
             },
             "language": {
                 "title": "Sprache",
@@ -350,6 +350,11 @@
                 "newPincode": "Neue PIN",
                 "confirmNewPincode": "Neue PIN bestätigen",
                 "action": "PIN ändern"
+            },
+            "changeProfileName": {
+                "title": "Profilname ändern",
+                "description": "Ändere deinen Firefly-Profilnamen",
+                "success": "Du hast deinen Profilnamen geändert"
             },
             "balanceFinder": {
                 "title": "Guthaben suchen",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Das incentivierte Staging-Netzwerk, auf welchem wichtige Innovationen für IOTA vorangetrieben werden. Wie sich Shimmer in Zukunft entwickelt, liegt ganz bei dir. Alles ist möglich."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Farbauswahl",
+                "hexCode": "Hex-Farbcode"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Du erstellst ein Entwicklerprofil",
             "body": "Du wirst standardmäßig mit dem Chrysalis-Devnet verbunden, kannst das Netzwerk jedoch manuell wechseln. Fahre nur fort, wenn du weißt, was du tust."
+        },
+        "legalUpdate": {
+            "tosTitle": "Nutzungsbedingungen",
+            "privPolicyTitle": "Datenschutzbestimmungen",
+            "tosAndPrivPolicyBody": "Wir haben die Nutzungsbedingungen und Datenschutzbestimmungen von Firefly aktualisiert.",
+            "tosBody": "Wir haben die Nutzungsbedingungen von Firefly aktualisiert.",
+            "privPolicyBody": "Wir haben die Datenschutzbestimmungen von Firefly aktualisiert.",
+            "tosAndPrivPolicyCheckbox": "Ich habe die aktualisierten Nutzungsbedingungen und Datenschutzbestimmungen gelesen und akzeptiere diese",
+            "tosCheckbox": "Ich habe die aktualisierten Nutzungsbedingungen gelesen und akzeptiere diese",
+            "privPolicyCheckbox": "Ich habe die aktualisierten Datenschutzbestimmungen gelesen und akzeptiere diese"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Guthaben",
         "accountBalance": "Wallet Guthaben",
+        "all": "Alle",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
         "totalIn": "Gesamt eingehend",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Altes Netzwerk",
         "capsLock": "Feststelltaste ist aktiviert",
         "version": "Version {version}",
+        "yourWallets": "Deine Wallets",
         "unknown": "Unbekannt",
         "none": "Keine",
         "staked": "Gestaked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Staking aufheben",
         "notStaked": "Nicht gestaked",
         "stakedFunds": "Gestaktes Guthaben",
-        "unstakedFunds": "Ungestaktes Guthaben"
+        "unstakedFunds": "Ungestaktes Guthaben",
+        "accountColor": "Wallet-Farbe"
     },
     "dates": {
         "today": "Heute",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Der Name deiner Wallet darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "empty": "Du musst deine letzte Wallet erst verwenden, bevor du eine neue erstellen kannst.",
+            "emptyName": "Ein Profilname muss mindestens 1 Zeichen enthalten.",
             "notEmpty": "Du musst dein Guthaben übertragen, bevor diese Wallet gelöscht werden kann.",
             "duplicate": "Eine Wallet mit diesem Namen existiert bereits.",
             "tilde": "Ein Profilname darf nicht mit dem Zeichen '~' beginnen.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Du verwendest derzeit ein Entwicklerprofil und bist mit {networkName} verbunden"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Wir benötigen deine Erlaubnis, die Kamera zu nutzen, um QR-Codes zu scannen.",
+            "requestInAppSettings": "Wenn du die Verwendung deiner Kamera zum scannen von QR-Codes erlauben möchtest, aktiviere dies bitte in den App-Einstellungen."
         }
     }
 }

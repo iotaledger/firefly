@@ -1,45 +1,60 @@
 <script lang="typescript">
-    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components';
-    import { loggedIn,mobile } from 'shared/lib/app';
-    import { appSettings } from 'shared/lib/appSettings';
-    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater';
-    import { Electron } from 'shared/lib/electron';
-    import { addError } from 'shared/lib/errors';
-    import { goto } from 'shared/lib/helpers';
-    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n';
-    import { pollMarketData } from 'shared/lib/market';
-    import { showAppNotification } from 'shared/lib/notifications';
-    import { openPopup,popupState } from 'shared/lib/popup';
-    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile';
-    import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router';
-    import type { Locale } from 'shared/lib/typings/i18n';
-    import { AppRoute,Tabs } from 'shared/lib/typings/routes';
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import { addError } from 'shared/lib/errors'
+    import { goto } from 'shared/lib/helpers'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { pollMarketData } from 'shared/lib/market'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { Electron } from 'shared/lib/electron'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import {
-    Appearance,
-    Backup,
-    Balance,
-    Congratulations,
-    Create,
-    Dashboard,
-    Import,
-    Ledger,
-    Legal,
-    Login,
-    Migrate,
-    Password,
-    Profile,
-    Protect,
-    Secure,
-    Settings,
-    Setup,
-    Splash,
-    Welcome
-    } from 'shared/routes';
-    import { onDestroy,onMount } from 'svelte';
-    import { get } from 'svelte/store';
-    import { getLocalisedMenuItems } from './lib/helpers';
+        dashboardRoute,
+        initRouter,
+        openSettings,
+        routerNext,
+        routerPrevious,
+        walletRoute,
+    } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
+    import { onDestroy, onMount } from 'svelte'
+    import {
+        Appearance,
+        Backup,
+        Balance,
+        Congratulations,
+        CrashReporting,
+        Create,
+        Dashboard,
+        Import,
+        Ledger,
+        Legal,
+        Login,
+        Migrate,
+        Password,
+        Profile,
+        Protect,
+        Secure,
+        Settings,
+        Setup,
+        Splash,
+        Welcome,
+    } from 'shared/routes'
+    import { get } from 'svelte/store'
+    import { getLocalisedMenuItems } from './lib/helpers'
 
-    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
+        Electron.updateAppSettings({ sendCrashReports })
+
+    $: void handleCrashReporting($appSettings.sendCrashReports)
+    $: $appSettings.darkMode
+        ? document.body.classList.add('scheme-dark')
+        : document.body.classList.remove('scheme-dark')
+
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
@@ -62,6 +77,8 @@
             splash = false
             initRouter()
         }, 3000)
+
+        initAppSettings.set($appSettings)
 
         await pollMarketData()
 
@@ -118,11 +135,94 @@
     })
 
     const showDeepLinkNotification = () => {
-        if(!$loggedIn) {
-            showAppNotification({ type: 'info', message: $_('notifications.deepLinkingRequest.recievedWhileLoggedOut') })
+        if (!$loggedIn) {
+            showAppNotification({
+                type: 'info',
+                message: $_('notifications.deepLinkingRequest.recievedWhileLoggedOut'),
+            })
         }
     }
 </script>
+
+<TitleBar>
+    <!-- empty div to avoid auto-purge removing dark classes -->
+    <div class="scheme-dark" />
+    {#if !$isLocaleLoaded || splash}
+        <Splash />
+    {:else}
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_}
+            />
+        {/if}
+        <Route route={AppRoute.Welcome}>
+            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Legal}>
+            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Appearance}>
+            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Setup}>
+            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <!-- TODO: fix ledger -->
+        <Route route={AppRoute.Create}>
+            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.LedgerSetup}>
+            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <!--  -->
+        <Route route={AppRoute.Secure}>
+            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Password}>
+            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protect} transition={false}>
+            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Backup} transition={false}>
+            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Import} transition={false}>
+            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Balance}>
+            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Migrate}>
+            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Congratulations}>
+            <Congratulations on:next={routerNext} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Dashboard}>
+            <Dashboard locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Login}>
+            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        </Route>
+        {#if settings}
+            <Settings locale={$_} handleClose={() => (settings = false)} />
+        {/if}
+
+        <ToastContainer />
+    {/if}
+</TitleBar>
 
 <style global type="text/scss">
     @tailwind base;
@@ -220,79 +320,3 @@
         -webkit-user-drag: none;
     }
 </style>
-
-<TitleBar>
-    <!-- empty div to avoid auto-purge removing dark classes -->
-    <div class="scheme-dark" />
-    {#if !$isLocaleLoaded || splash}
-        <Splash />
-    {:else}
-        {#if $popupState.active}
-            <Popup
-                type={$popupState.type}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                locale={$_} />
-        {/if}
-        <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <!-- TODO: fix ledger -->
-        <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.LedgerSetup}>
-            <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <!--  -->
-        <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Dashboard}>
-            <Dashboard mobile={$mobile} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
-        </Route>
-        {#if settings}
-            <Settings locale={$_} handleClose={() => (settings = false)} />
-        {/if}
-
-        <ToastContainer />
-    {/if}
-</TitleBar>

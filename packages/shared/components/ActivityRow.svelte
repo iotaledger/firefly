@@ -2,10 +2,10 @@
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { Icon, Text } from 'shared/components'
-    import { truncateString } from 'shared/lib/helpers'
+    import { truncateString, isBright } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
     import type { Payload } from 'shared/lib/typings/message'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
@@ -16,9 +16,10 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        isParticipationPayload
+        isParticipationPayload,
     } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let locale: Locale
 
@@ -46,11 +47,9 @@
             return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
         }
 
-        return `${(!txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload)) ? '-' : ''}${formatUnitBestMatch(
-            txPayload.data.essence.data.value,
-            true,
-            2
-        )}`
+        return `${
+            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
+        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
     }
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -65,7 +64,9 @@
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
     $: receiverAccount =
-        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload)
+            ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
+            : null
 
     let initialsColor: string
     let accountAlias = ''
@@ -80,7 +81,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                initialsColor = acc.color
+                initialsColor = getColor($activeProfile, acc.id)
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
@@ -101,11 +102,11 @@
                 if (isParticipationPayload(txPayload)) {
                     direction = 'staking.stakedFunds'
                 } else {
-                   direction = confirmed
-                    ? txPayload.data.essence.data.incoming
-                        ? 'general.receivedTo'
-                        : 'general.sentFrom'
-                    : txPayload.data.essence.data.incoming
+                    direction = confirmed
+                        ? txPayload.data.essence.data.incoming
+                            ? 'general.receivedTo'
+                            : 'general.sentFrom'
+                        : txPayload.data.essence.data.incoming
                         ? 'general.receivingTo'
                         : 'general.sendingFrom'
                 }
@@ -115,8 +116,8 @@
                         ? 'general.received'
                         : 'general.sent'
                     : txPayload.data.essence.data.incoming
-                        ? 'general.receiving'
-                        : 'general.sending'
+                    ? 'general.receiving'
+                    : 'general.sending'
             }
         }
     }
@@ -130,7 +131,6 @@
             case ParticipationAction.Unvote:
             default:
                 return 'blue-500'
-
         }
     }
 
@@ -151,7 +151,10 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) ? 'opacity-50' : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {!confirmed ||
+    hasCachedMigrationTx
+        ? 'opacity-50'
+        : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
@@ -176,9 +179,19 @@
         {:else}
             <Icon
                 boxed
-                classes={`text-white dark:text-${initialsColor}-600`}
-                boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'}
+                classes={`text-${isBright(initialsColor) ? 'gray-800' : 'white'}`}
+                boxClasses="bg-{initialsColor
+                    ? `${initialsColor}-500`
+                    : txPayload.data.essence.data.internal
+                    ? 'gray-500'
+                    : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
+                icon={txPayload.data.essence.data.internal
+                    ? 'transfer'
+                    : txPayload.data.essence.data.incoming
+                    ? 'chevron-down'
+                    : 'chevron-up'}
+                fill={isBright(initialsColor) ? '#000000' : ''}
+                boxStyles={`background-color: ${initialsColor || (txPayload.data.essence.data.internal && 'gray')};`}
             />
         {/if}
     </div>

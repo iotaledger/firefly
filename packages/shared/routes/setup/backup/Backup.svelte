@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { showAppNotification } from 'shared/lib/notifications'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
@@ -9,11 +9,9 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let mobile
 
     enum BackupState {
         Init = 'init',
@@ -67,9 +65,8 @@
                         await asyncCreateAccount()
                         dispatch('next')
                     } else {
-                        const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+                        const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
-
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()
@@ -107,18 +104,24 @@
 
 {#if state === BackupState.Init}
     <Transition>
-        <Backup on:next={_next} on:previous={_previous} {busy} {locale} {mobile} />
+        <Backup on:next={_next} on:previous={_previous} {busy} {locale} />
     </Transition>
 {:else if state === BackupState.RecoveryPhrase}
     <Transition>
-        <RecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} {mobile} />
+        <RecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} />
     </Transition>
 {:else if state === BackupState.Verify}
     <Transition>
-        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} {mobile} />
+        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} />
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>
-        <BackupToFile on:next={_next} on:previous={_previous} {busy} strongholdPassword={$strongholdPassword} {locale} {mobile} />
+        <BackupToFile
+            on:next={_next}
+            on:previous={_previous}
+            {busy}
+            strongholdPassword={$strongholdPassword}
+            {locale}
+        />
     </Transition>
 {/if}

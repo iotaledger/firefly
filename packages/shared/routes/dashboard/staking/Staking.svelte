@@ -2,11 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import {
-        accountToParticipate,
-        participationAction,
-        stakingEventState,
-    } from 'shared/lib/participation/stores'
+    import { accountToParticipate, participationAction, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
@@ -149,12 +145,6 @@
     })
 </script>
 
-<style type="text/scss">
-    :global(body.platform-win32) .staking-wrapper {
-        @apply pt-0;
-    }
-</style>
-
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
     <StakingHeader />
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
@@ -174,3 +164,9 @@
         </DashboardPane>
     </div>
 </div>
+
+<style type="text/scss">
+    :global(body.platform-win32) .staking-wrapper {
+        @apply pt-0;
+    }
+</style>

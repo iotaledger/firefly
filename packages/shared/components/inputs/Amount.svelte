@@ -29,7 +29,7 @@
 
     export let onMaxClick = (): void => {}
 
-    const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD as AmountUnit
+    const currency = $activeProfile?.settings.currency ?? (AvailableExchangeRates.USD as AmountUnit)
     const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
 
     let showDropdown = false
@@ -71,7 +71,11 @@
             const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
             const fiatAmount = convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
-            return fiatAmount === 0 ? rawAmount === 0 ? formatCurrency(0) : '< ' + formatCurrency(0.01) : formatCurrency(fiatAmount)
+            return fiatAmount === 0
+                ? rawAmount === 0
+                    ? formatCurrency(0)
+                    : '< ' + formatCurrency(0.01)
+                : formatCurrency(fiatAmount)
         }
 
         return convertAmount(_amount, undefined, _convert)
@@ -99,7 +103,9 @@
         showDropdown = false
     }
 
-    const onUnitClick = (toUnit: AmountUnit) => { unit = toUnit }
+    const onUnitClick = (toUnit: AmountUnit) => {
+        unit = toUnit
+    }
 
     const focusItem = (itemId) => {
         const elem = document.getElementById(itemId)
@@ -157,24 +163,6 @@
     const getMaxDecimals = (_unit: AmountUnit) => (isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp)
 </script>
 
-<style type="text/scss">
-  amount-input {
-    nav {
-      &.dropdown {
-        @apply opacity-100;
-        @apply pointer-events-auto;
-      }
-    }
-
-    &.disabled {
-      @apply pointer-events-none;
-      actions {
-        @apply opacity-50;
-      }
-    }
-  }
-</style>
-
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
@@ -189,12 +177,16 @@
         integer={unit === Unit.i}
         float={unit !== Unit.i}
         style={showDropdown ? 'border-bottom-right-radius: 0' : ''}
-        isFocused={showDropdown} />
+        isFocused={showDropdown}
+    />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={onMaxClick}
             class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
-            {disabled}>{locale('actions.max').toUpperCase()}</button>
+            {disabled}
+        >
+            {locale('actions.max').toUpperCase()}
+        </button>
         <button
             on:click={(e) => {
                 e.preventDefault()
@@ -202,22 +194,30 @@
                 toggleDropDown()
             }}
             bind:this={unitsButton}
-            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
-            {disabled}>
+            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${
+                disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'
+            }`}
+            {disabled}
+        >
             {unit}
             <nav
-                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown ? 'dropdown' : ''}"
-                bind:this={navContainer}>
+                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
+                    ? 'dropdown'
+                    : ''}"
+                bind:this={navContainer}
+            >
                 {#each units as _unit}
                     <button
                         id={_unit}
-                        class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
+                        class="text-center w-full py-2 {unit === _unit &&
+                            'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
                         on:click={() => onUnitClick(_unit)}
                         on:focus={() => focusItem(_unit)}
                         class:active={unit === _unit}
-                        tabindex={showDropdown ? 0 : -1}>
+                        tabindex={showDropdown ? 0 : -1}
+                    >
                         <Text type="p" smaller>{_unit}</Text>
                     </button>
                 {/each}
@@ -225,3 +225,21 @@
         </button>
     </actions>
 </amount-input>
+
+<style type="text/scss">
+    amount-input {
+        nav {
+            &.dropdown {
+                @apply opacity-100;
+                @apply pointer-events-auto;
+            }
+        }
+
+        &.disabled {
+            @apply pointer-events-none;
+            actions {
+                @apply opacity-50;
+            }
+        }
+    }
+</style>

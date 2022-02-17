@@ -32,18 +32,24 @@
             <Text type="h3" classes="px-7 pt-5">{locale('general.network')}</Text>
             <Text type="p" highlighted classes="px-7">{$activeProfile.settings.networkConfig.network.name}</Text>
         {/if}
-        <Text type="h3" classes="px-7 pt-{$activeProfile.isDeveloperProfile ? '2' : '5'}">{locale('views.dashboard.network.status')}</Text>
+        <Text type="h3" classes="px-7 pt-{$activeProfile.isDeveloperProfile ? '2' : '5'}"
+            >{locale('views.dashboard.network.status')}</Text
+        >
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
         {#if !$activeProfile?.settings.hideNetworkStatistics}
             <HR />
             <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
+                <span class="text-12 text-gray-800 dark:text-white"
+                    >{locale('views.dashboard.network.messagesPerSecond')}</span
+                >
                 <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
             </div>
             <div class="flex flex-row justify-between px-7 pb-5">
-                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
+                <span class="text-12 text-gray-800 dark:text-white"
+                    >{locale('views.dashboard.network.referencedRate')}</span
+                >
                 <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
             </div>
         {/if}

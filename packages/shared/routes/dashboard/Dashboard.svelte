@@ -1,25 +1,24 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-
-    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
-    import { Settings, Staking, Wallet } from 'shared/routes'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
-    import { Electron } from 'shared/lib/electron'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -29,12 +28,11 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { getParticipationEvents } from 'shared/lib/participation/api'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
-    export let mobile
 
     const { accountsLoaded, accounts } = $wallet
 
@@ -94,11 +92,11 @@
             )
         }
 
-        Electron.onEvent('menu-logout', () => {
+        Platform.onEvent('menu-logout', () => {
             void logout()
         })
 
-        Electron.onEvent('notification-activated', (contextData) => {
+        Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
                     (contextData.type === 'confirmed' ||
@@ -115,15 +113,25 @@
             }
         })
 
-        Electron.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+        Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+
+        /**
+         * NOTE: We check for mobile because it's only necessary
+         * for existing desktop installation.
+         */
+        if (!mobile && !$isAwareOfCrashReporting) {
+            openPopup({
+                type: 'crashReporting',
+            })
+        }
     })
 
     onDestroy(() => {
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
 
-        Electron.DeepLinkManager.clearDeepLinkRequest()
-        Electron.removeListenersForEvent('deep-link-params')
+        Platform.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-params')
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -154,7 +162,7 @@
                 if (get(popupState).type === 'busy') {
                     closePopup()
                 }
-                Electron.DeepLinkManager.checkDeepLinkRequestExists()
+                Platform.DeepLinkManager.checkDeepLinkRequestExists()
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -196,11 +204,17 @@
                         ...parsedDeepLink.params,
                         isInternal: false,
                     })
-                    showAppNotification({ type: parsedDeepLink.notification.type, message: parsedDeepLink.notification.message })
+                    showAppNotification({
+                        type: parsedDeepLink.notification.type,
+                        message: parsedDeepLink.notification.message,
+                    })
                 } else {
-                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingRequest.invalidFormat') })
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('notifications.deepLinkingRequest.invalidFormat'),
+                    })
                 }
-                Electron.DeepLinkManager.clearDeepLinkRequest()
+                Platform.DeepLinkManager.clearDeepLinkRequest()
             }
         }
     }
@@ -261,21 +275,23 @@
     }
 
     // TODO: remove, dev only
-    $: if(accountsLoaded) {
+    $: if (accountsLoaded) {
         selectedAccountId.set($accounts?.[0]?.id)
     }
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <Idle />
-    <div class="flex flex-row w-full h-full">
-        <Sidebar {locale} />
-        <!-- Dashboard Pane -->
-        <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-            <DeveloperProfileIndicator {locale} classes="absolute top-0" />
-        </div>
+<Idle />
+<div class="dashboard-wrapper flex flex-row w-full h-full">
+    <Sidebar {locale} />
+    <!-- Dashboard Pane -->
+    <div class="flex flex-col w-full h-full">
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
-{/if}
+</div>
+
+<style type="text/scss">
+    :global(:not(body.platform-win32)) .dashboard-wrapper {
+        margin-top: calc(env(safe-area-inset-top) / 2);
+    }
+</style>

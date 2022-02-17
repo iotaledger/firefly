@@ -83,7 +83,9 @@
             accountToParticipate.set(accountToStake)
             participationAction.set(ParticipationAction.Stake)
 
-            const selections = !isPartialStake ? Object.keys(airdropSelections).filter((as) => airdropSelections[as]) : activeAirdrops
+            const selections = !isPartialStake
+                ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
+                : activeAirdrops
             const participations: Participation[] = selections.map(
                 (selection) =>
                     <Participation>{
@@ -148,7 +150,16 @@
         {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
             <div
                 on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
-                class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(airdrop) ? 'cursor-default' : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[airdrop] || !canReachAirdropMinimum(airdrop) ? 'border-gray-300' : 'border-blue-500'}">
+                class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
+                    airdrop
+                )
+                    ? 'cursor-default'
+                    : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[
+                    airdrop
+                ] || !canReachAirdropMinimum(airdrop)
+                    ? 'border-gray-300'
+                    : 'border-blue-500'}"
+            >
                 <div class="mb-2 flex flex-row justify-center">
                     <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
                     <Text type="p" bigger>({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
@@ -159,7 +170,8 @@
                         class="py-5"
                         bind:this={tooltipAnchors[airdrop]}
                         on:mouseenter={() => toggleTooltip(airdrop)}
-                        on:mouseleave={() => toggleTooltip(airdrop)}>
+                        on:mouseleave={() => toggleTooltip(airdrop)}
+                    >
                         <Icon icon="exclamation" width="26" height="26" classes="text-orange-500" />
                     </div>
                 {:else}
@@ -168,13 +180,20 @@
                         bind:checked={airdropSelections[airdrop]}
                         onClick={() => toggleAirdropSelection(airdrop)}
                         disabled={!canReachAirdropMinimum(airdrop)}
-                        classes="my-5" />
+                        classes="my-5"
+                    />
                 {/if}
                 <Text type="p" classes="font-bold text-lg w-full break-all">
-                    {(airdropSelections[airdrop] ? getRewards(airdrop) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[0]}
+                    {(airdropSelections[airdrop]
+                        ? getRewards(airdrop)
+                        : estimateStakingAirdropReward(airdrop, 0, true, 0)
+                    ).split(' ')[0]}
                 </Text>
                 <Text type="p" secondary classes="font-bold text-lg">
-                    {(airdropSelections[airdrop] ? getRewards(airdrop) : estimateStakingAirdropReward(airdrop, 0, true, 0)).split(' ')[1]}
+                    {(airdropSelections[airdrop]
+                        ? getRewards(airdrop)
+                        : estimateStakingAirdropReward(airdrop, 0, true, 0)
+                    ).split(' ')[1]}
                 </Text>
             </div>
         {/each}
@@ -183,7 +202,8 @@
 <Button
     classes="w-full"
     onClick={handleConfirmClick}
-    disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}>
+    disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}
+>
     {locale('actions.confirm')}
 </Button>
 
@@ -192,6 +212,8 @@
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
             {locale('tooltips.stakingMinRewards.title')}
         </Text>
-        <Text type="p" secondary classes="text-left">{locale('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', { values: { airdrop: tooltipAirdrop } })}</Text>
+        <Text type="p" secondary classes="text-left"
+            >{locale('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', { values: { airdrop: tooltipAirdrop } })}</Text
+        >
     </Tooltip>
 {/if}

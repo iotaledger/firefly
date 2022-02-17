@@ -23,14 +23,6 @@
     }
 </script>
 
-<style>
-    svg {
-        display: block;
-        position: relative;
-        margin: 0 auto;
-    }
-</style>
-
 {#key data}
     {#if cells}
         <svg width={size} height={size} viewBox={`0 0 ${cells.length} ${cells.length}`}>
@@ -42,9 +34,18 @@
                         style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
                         width={1}
                         x={cellIndex}
-                        y={rowIndex} />
+                        y={rowIndex}
+                    />
                 {/each}
             {/each}
         </svg>
     {/if}
 {/key}
+
+<style>
+    svg {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+    }
+</style>

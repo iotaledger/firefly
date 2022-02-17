@@ -24,17 +24,50 @@
     }
 
     const handleValueChange = (increment: number) => {
-        if('number' !== typeof value)
-            value = 0
-        else
-            value += increment
+        if ('number' !== typeof value) value = 0
+        else value += increment
     }
 
     function validate(_value) {
-        if('number' === typeof _value && String(_value).length >= 1)
-            value = Math.min(Math.max(_value, min), max)
+        if ('number' === typeof _value && String(_value).length >= 1) value = Math.min(Math.max(_value, min), max)
     }
 </script>
+
+<div class="flex flex-row {disabled && 'opacity-50'} {classes}">
+    <button
+        {disabled}
+        class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
+        on:click={() => handleValueChange(-1)}
+    >
+        <Icon
+            width={16}
+            height={16}
+            classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500"
+            icon="minus"
+        />
+    </button>
+    <input
+        class="px-4 text-center text-12 font-700 bg-transparent border-t border-b border-solid border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
+        bind:this={input}
+        type="number"
+        on:input={handleInput}
+        bind:value
+        {disabled}
+        {min}
+        {max}
+    />
+    <button
+        {disabled}
+        class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
+        on:click={() => handleValueChange(1)}
+    >
+        <Icon width={16} height={16} icon="plus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
+    </button>
+</div>
+
+{#if error}
+    <Error {error} />
+{/if}
 
 <style type="text/scss">
     input::-webkit-outer-spin-button,
@@ -50,31 +83,3 @@
         }
     }
 </style>
-
-<div class="flex flex-row {disabled && 'opacity-50'} {classes}">
-    <button
-        {disabled}
-        class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => handleValueChange(-1)}>
-        <Icon width={16} height={16} classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" icon="minus" />
-    </button>
-    <input
-        class="px-4 text-center text-12 font-700 bg-transparent border-t border-b border-solid border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
-        bind:this={input}
-        type="number"
-        on:input={handleInput}
-        bind:value
-        {disabled}
-        {min}
-        {max} />
-    <button
-        {disabled}
-        class="group flex items-center justify-center w-8 h-10 border border-solid border-gray-300 dark:border-gray-700"
-        on:click={() => handleValueChange(1)}>
-        <Icon width={16} height={16} icon="plus" classes="text-gray-500 dark:text-gray-100 group-hover:text-blue-500" />
-    </button>
-</div>
-
-{#if error}
-    <Error {error} />
-{/if}

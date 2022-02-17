@@ -11,6 +11,7 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
+    import { startQRScanner } from 'shared/lib/device'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -40,6 +41,7 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { mobile } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -62,7 +64,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    const addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
+    const addressPrefix = ($account ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
     let addressError = ''
     let toError = ''
     let amountRaw
@@ -459,6 +461,19 @@
         updateFromSendParams(s)
     })
 
+    const onQRClick = (): void => {
+        const onSuccess = (result: string) => {
+            address = result
+        }
+        const onError = () => {
+            showAppNotification({
+                type: 'error',
+                message: locale('error.global.generic'),
+            })
+        }
+        void startQRScanner(onSuccess, onError)
+    }
+
     onMount(() => {
         updateFromSendParams($sendParams)
     })
@@ -469,22 +484,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button.active {
-        @apply relative;
-        &:after {
-            content: '';
-            @apply bg-blue-500;
-            @apply w-full;
-            @apply rounded;
-            @apply h-0.5;
-            @apply absolute;
-            @apply -bottom-2.5;
-            @apply left-0;
-        }
-    }
-</style>
-
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
         <div class="flex flex-row w-full justify-between mb-8">
@@ -493,11 +492,13 @@
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                     disabled={$isTransferring}
                     class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
+                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}
+                >
                     <Text
                         classes="text-left"
                         type="h5"
-                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}
+                    >
                         {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
@@ -506,19 +507,28 @@
                         on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                         disabled={$isTransferring}
                         class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
+                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}
+                    >
                         <Text
                             classes="text-left"
                             type="h5"
-                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
+                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}
+                        >
                             {locale(`general.${SEND_TYPE.INTERNAL}`)}
                         </Text>
                     </button>
                 {/if}
             </div>
-            <button on:click={handleBackClick}>
-                <Icon icon="close" classes="text-gray-800 dark:text-white" />
-            </button>
+            <div class="flex flex-row space-x-4">
+                {#if $mobile}
+                    <button on:click={onQRClick}>
+                        <Icon icon="qr" classes="text-blue-500" />
+                    </button>
+                {/if}
+                <button on:click={handleBackClick}>
+                    <Icon icon="close" classes="text-gray-800 dark:text-white" />
+                </button>
+            </div>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
@@ -530,7 +540,8 @@
                             placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
-                            disabled={$liveAccounts.length === 1 || $isTransferring} />
+                            disabled={$liveAccounts.length === 1 || $isTransferring}
+                        />
                     </div>
                 {/if}
                 <div class="w-full block">
@@ -544,7 +555,8 @@
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
                             classes="mb-6"
-                            autofocus={$liveAccounts.length > 2} />
+                            autofocus={$liveAccounts.length > 2}
+                        />
                     {:else}
                         <Address
                             error={addressError}
@@ -554,7 +566,8 @@
                             disabled={$isTransferring}
                             placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}
                             classes="mb-6"
-                            autofocus />
+                            autofocus
+                        />
                     {/if}
                     <Amount
                         error={amountError}
@@ -563,7 +576,8 @@
                         onMaxClick={handleMaxClick}
                         {locale}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2} />
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                    />
                 </div>
             </div>
         </div>
@@ -581,6 +595,23 @@
             preloading={!$transferState}
             secondary
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
-            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent} />
+            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
+        />
     {/if}
 </div>
+
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>

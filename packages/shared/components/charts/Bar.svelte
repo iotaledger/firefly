@@ -31,11 +31,11 @@
 
         Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
             draw: function () {
-                const {ctx} = this._chart
+                const { ctx } = this._chart
                 const vm = this._view
 
                 let left, right, top, bottom, signX, signY, borderSkipped
-                let {borderWidth} = vm
+                let { borderWidth } = vm
 
                 if (!vm.horizontal) {
                     left = vm.x - vm.width / 2
@@ -90,7 +90,14 @@
                 ctx.strokeStyle = vm.borderColor
                 ctx.lineWidth = borderWidth
 
-                Chart.helpers.drawRoundedTopRectangle(ctx, left, top - barRadius + 1, barWidth, bottom - prevTop, barRadius)
+                Chart.helpers.drawRoundedTopRectangle(
+                    ctx,
+                    left,
+                    top - barRadius + 1,
+                    barWidth,
+                    bottom - prevTop,
+                    barRadius
+                )
 
                 ctx.fill()
                 if (borderWidth) {
@@ -115,11 +122,11 @@
             data: {
                 labels,
                 datasets: datasets.map((dataset) => ({
-                    backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
-                    hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                    backgroundColor: fullConfig.theme.colors[dataset.color]?.['500'] || color,
+                    hoverBackgroundColor: fullConfig.theme.colors[dataset.color]?.['500'] || color,
                     barThickness: 7,
                     ...dataset,
-                }))
+                })),
             },
             options: {
                 animation: false,
@@ -168,7 +175,7 @@
                     bodyFontSize: 11,
                     titleFontFamily: 'Inter',
                     bodyFontFamily: 'Inter',
-                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    bodyFontColor: fullConfig.theme.colors.gray['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
                             const dataset = datasets[tooltipItem.datasetIndex]

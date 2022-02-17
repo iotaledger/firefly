@@ -1,5 +1,4 @@
 import Validator from 'shared/lib/validator'
-import * as Wallet from 'wallet-nodejs-binding'
 import type {
     CreatedAccountResponse,
     LatestAddressResponse,
@@ -14,7 +13,12 @@ import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { Platform } from 'shared/lib/platform'
 import { NodePlugin } from '../typings/node'
+import type { IWalletApi } from 'shared/lib/typings/walletApi'
+import type { IWalletActor } from '../typings/walletActor'
+
+export const WALLET: IWalletActor = window['__WALLET__']
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -78,7 +82,7 @@ const apiToResponseTypeMap = {
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
     setAlias: ResponseTypes.UpdatedAlias,
-    removeStorage: ResponseTypes.DeletedStorage,
+    deleteStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
@@ -143,7 +147,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 
-Wallet.onMessage((message: MessageResponse) => {
+WALLET.onMessage((message: MessageResponse) => {
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error
@@ -302,39 +306,42 @@ const generateRandomId = (): string =>
         ''
     )
 
-const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
-    get:
-        (_target, prop) =>
-        async (...payload): Promise<void> => {
-            const actorId = activeProfileIdGetter()
+const proxyApi = (activeProfileIdGetter: () => string): IWalletApi => {
+    const _generateMiddleware = (activeProfileIdGetter: () => string) => ({
+        get:
+            (_target, prop) =>
+            async (...payload): Promise<void> => {
+                const actorId = activeProfileIdGetter()
 
-            const messageId = generateRandomId()
+                const messageId = generateRandomId()
 
-            const hasPayload = payload.length
+                const hasPayload = payload.length
 
-            let shouldOverrideDefaultCallbacks = false
-            let lastArgument = null
+                let shouldOverrideDefaultCallbacks = false
+                let lastArgument = null
 
-            if (hasPayload) {
-                lastArgument = payload[payload.length - 1]
+                if (hasPayload) {
+                    lastArgument = payload[payload.length - 1]
 
-                shouldOverrideDefaultCallbacks =
-                    typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
-            }
+                    shouldOverrideDefaultCallbacks =
+                        typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
+                }
 
-            storeCallbacks(
-                messageId,
-                apiToResponseTypeMap[prop],
-                shouldOverrideDefaultCallbacks ? lastArgument : undefined
-            )
+                storeCallbacks(
+                    messageId,
+                    apiToResponseTypeMap[prop],
+                    shouldOverrideDefaultCallbacks ? lastArgument : undefined
+                )
 
-            const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
+                const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
-            await _target[prop](...actualPayload)({ actorId, messageId })
-        },
-    set: () => false,
-})
+                await _target[prop](...actualPayload)({ actorId, messageId })
+            },
+        set: () => false,
+    })
 
-export function proxyApi(activeProfileIdGetter: () => string): typeof Wallet.api {
-    return new Proxy(Wallet.api, GenerateMiddleware(activeProfileIdGetter))
+    return new Proxy({ ...WALLET.api }, _generateMiddleware(activeProfileIdGetter))
 }
+
+// eslint-disable-next-line
+export const WalletApi = proxyApi(Platform.getActiveProfile)

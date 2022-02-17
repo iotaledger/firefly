@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Innstillinger",
             "generalSettings": {
-                "title": "Generelle innstillinger",
+                "title": "General",
                 "description": "Konfigurer appens utseende og andre generelle innstillinger"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Endre passordet ditt og juster sikkerhetsrelaterte innstillinger"
             },
             "advancedSettings": {
-                "title": "Avanserte innstillinger",
+                "title": "Advanced",
                 "description": "Verktøy og manuelle innstillinger for tekniske brukere"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Start Firefly appen på nytt for at endringer i systemtemaet skal tre i kraft"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Språk",
@@ -350,6 +350,11 @@
                 "newPincode": "Ny PIN-kode",
                 "confirmNewPincode": "Bekreft ny PIN-kode",
                 "action": "Endre PIN-koden"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Saldo-finner",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Det insentiverte staging-nettverket som muliggjør store innovasjoner på IOTA. Hva som skjer, og hvordan Shimmer utvikler seg, er opp til deg."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Lommebokens saldo",
+        "all": "All",
         "incoming": "Innkommende",
         "outgoing": "Utgående",
         "totalIn": "Totalt inn",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Gammelt Nettverk",
         "capsLock": "Caps Lock er på",
         "version": "Versjon {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Ukjent",
         "none": "Ingen",
         "staked": "Staket",
@@ -1011,7 +1034,8 @@
         "unstaking": "Avslutter staking",
         "notStaked": "Ikke staket",
         "stakedFunds": "Stakede midler",
-        "unstakedFunds": "Ikke-stakede midler"
+        "unstakedFunds": "Ikke-stakede midler",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "I dag",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Du må bruke den nyeste lommeboken før du lager en ny.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Du må overføre midlene før du sletter denne lommeboken.",
             "duplicate": "En lommebok med dette navnet eksisterer allerede.",
             "tilde": "Et profilnavn kan ikke starte med '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

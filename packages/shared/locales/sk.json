@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Nastavenia",
             "generalSettings": {
-                "title": "Všeobecné nastavenia",
+                "title": "General",
                 "description": "Konfigurácia vzhľadu aplikácie a ďalších všeobecných nastavení"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Zmeňte svoje heslo a upravte nastavenia bezpečnosti"
             },
             "advancedSettings": {
-                "title": "Rozšírené nastavenia",
+                "title": "Advanced",
                 "description": "Nástroje a manuálne nastavenia pre skúsených používateľov"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Motív",
                 "description": "",
-                "advice": "Pre aplikáciu zmien systémovej témy si prosím reštartujte aplikáciu Firefly"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Jazyk",
@@ -350,6 +350,11 @@
                 "newPincode": "Nový PIN kód",
                 "confirmNewPincode": "Potvrďte nový PIN kód",
                 "action": "Zmeniť PIN kód"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Vyhľadávač zostatkov",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Zostatok",
         "accountBalance": "Zostatok peňaženky",
+        "all": "All",
         "incoming": "Prichádzajúce",
         "outgoing": "Odchádzajúce",
         "totalIn": "Celkovo prijatých",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Zastaralá sieť",
         "capsLock": "Caps Lock je zapnutý",
         "version": "Verzia {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Neuvedené",
         "none": "Žiadne",
         "staked": "Stakované",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Nestakované",
         "stakedFunds": "Stakované prostriedky",
-        "unstakedFunds": "Odstakované prostriedky"
+        "unstakedFunds": "Odstakované prostriedky",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Dnes",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Musíte použiť svoju najnovšiu peňaženku pred vytvorením novej.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Pred odstránením tejto peňaženky musíte previesť svoj zostatok.",
             "duplicate": "Peňaženka s týmto názvom už existuje.",
             "tilde": "Profilové meno sa nemože začínať znakom '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

@@ -7,30 +7,22 @@
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
+    export let boxStyles = ''
 
     $: selected = icons[icon]
 </script>
 
-<style type="text/scss">
-    .boxed {
-        border-radius: 0.625rem; // TODO: add to tailwind
-    } 
-    /* Hotfix to avoid the SVG slow transition */
-    svg, svg path {
-        transition: background 0.05s, color 0.05s, border-color 0.05s, opacity 0.05s;
-    }
-</style>
-
 {#if selected}
     {#if boxed}
-        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}">
+        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}" style={boxStyles}>
             <svg
                 data-label="icon"
                 class="flex-shrink-0 {classes}"
                 width={width || selected.width || '100%'}
                 height={height || selected.height || '100%'}
                 viewBox="0 0 {selected.width} {selected.height}"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+            >
                 {#each selected.path as path}
                     <path
                         class:stroke={path.strokeWidth}
@@ -44,7 +36,8 @@
                         stroke-linecap={path.strokeLinecap || ''}
                         stroke={path.strokeColor || 'white-100'}
                         opacity={path.opacity || 1}
-                        fill={path.fill || ''} />
+                        fill={path.fill || ''}
+                    />
                 {/each}
             </svg>
         </div>
@@ -55,7 +48,8 @@
             width={width || selected.width || '100%'}
             height={height || selected.height || '100%'}
             viewBox="0 0 {selected.width} {selected.height}"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+        >
             {#each selected.path as path}
                 <path
                     class:stroke={path.strokeWidth}
@@ -69,8 +63,20 @@
                     stroke-linecap={path.strokeLinecap || ''}
                     stroke={path.strokeColor || ''}
                     opacity={path.opacity || 1}
-                    fill={path.fill || ''} />
+                    fill={path.fill || ''}
+                />
             {/each}
         </svg>
     {/if}
 {/if}
+
+<style type="text/scss">
+    .boxed {
+        border-radius: 0.625rem; // TODO: add to tailwind
+    }
+    /* Hotfix to avoid the SVG slow transition */
+    svg,
+    svg path {
+        transition: background 0.05s, color 0.05s, border-color 0.05s, opacity 0.05s;
+    }
+</style>

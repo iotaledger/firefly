@@ -313,7 +313,7 @@
             "theme": {
                 "title": "佈景主題",
                 "description": "",
-                "advice": "重新啟動 Firefly，使系統佈景主題的變更生效。"
+                "advice": "請重啟 Firefly 以讓系統主題佈景變更生效。"
             },
             "language": {
                 "title": "語言",
@@ -350,6 +350,11 @@
                 "newPincode": "新的 PIN 碼",
                 "confirmNewPincode": "確認新的 Pin 碼",
                 "action": "變更 PIN 碼"
+            },
+            "changeProfileName": {
+                "title": "變更設定檔名稱",
+                "description": "變更您的Firefly設定檔名稱",
+                "success": "您已更換您的設定檔名稱"
             },
             "balanceFinder": {
                 "title": "餘額查詢",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "利用先行的激勵網路來推進 IOTA 的重大創新。無論未來如何發展，Shimmer 的演進由你決定。"
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "色彩選擇器",
+                "hexCode": "Hex 色碼"
             }
         }
     },
@@ -751,7 +762,17 @@
         },
         "confirmDeveloperProfile": {
             "title": "您正在建立開發者設定檔。",
-            "body": "您將連結至預設的 Chrysalis 開發網。您可以手動切換網路。在開始之前請先確定您具備相關的知識。"
+            "body": "您將連結至預設的 Chrysalis 開發網，並且可以手動切換網路。在開始前請先確定您具備相關的知識。"
+        },
+        "legalUpdate": {
+            "tosTitle": "服務條款",
+            "privPolicyTitle": "隱私權政策",
+            "tosAndPrivPolicyBody": "我們更新了Firefly的服務條款和隱私權政策。",
+            "tosBody": "我們更新了Firefly的服務條款。",
+            "privPolicyBody": "我們更新了Firefly的隱私權政策。",
+            "tosAndPrivPolicyCheckbox": "我已閱讀並且接受更新後的服務條款和隱私權政策",
+            "tosCheckbox": "我已閱讀並且接受更新後的服務條款",
+            "privPolicyCheckbox": "我已閱讀並且接受更新後的隱私權政策"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "系統",
         "balance": "餘額",
         "accountBalance": "錢包餘額",
+        "all": "全部",
         "incoming": "傳入",
         "outgoing": "發送",
         "totalIn": "合計",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "舊版網路",
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
+        "yourWallets": "您的錢包",
         "unknown": "未知",
         "none": "無",
         "staked": "已質押",
@@ -1011,7 +1034,8 @@
         "unstaking": "正在解除質押",
         "notStaked": "未質押",
         "stakedFunds": "已質押的資金",
-        "unstakedFunds": "未質押的資金"
+        "unstakedFunds": "未質押的資金",
+        "accountColor": "錢包顏色"
     },
     "dates": {
         "today": "今天",
@@ -1041,7 +1065,7 @@
         "updateError": "更新時發生錯誤，請重試。",
         "restartInstall": "重新啟動以進行安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
-        "minutesRemaining": "{minutes, plural, one {# 分鐘剩餘} other {# 分鐘剩餘}}",
+        "minutesRemaining": "{minutes, plural, one {剩下 # 分鐘} other {剩下 # 分鐘}}",
         "copiedToClipboard": "已複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
         "fundsAvailableSoon": "您的資金很快就可以使用",
@@ -1091,8 +1115,9 @@
             "incorrect": "您輸入的 PIN 碼不正確"
         },
         "account": {
-            "length": "您的錢包名稱長度不能超過 {length, plural, one {# character} other {# 字元}}。",
+            "length": "您的錢包名稱長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
             "empty": "在您創建新的錢包之前，您必須使用最後存在的錢包。",
+            "emptyName": "設定檔名稱需包含至少1個字元。",
             "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
             "duplicate": "具有相同名稱的錢包已經存在。",
             "tilde": "設定檔名稱不能以“〜”字符開頭。",
@@ -1104,7 +1129,7 @@
             "syncing": "同步您的錢包時發生錯誤。"
         },
         "send": {
-            "addressLength": "地址長度應符合 {length, plural, one {# character} other {# 字元}}。",
+            "addressLength": "地址長度應符合 {length, plural, one {# 字元} other {# 字元}}。",
             "amountTooHigh": "您輸入的數值大於您的可用餘額。",
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
@@ -1147,9 +1172,9 @@
             "invalid": "無法識別備份文件。",
             "destination": "備份目的地無效。",
             "mnemonic": "助記詞無效。",
-            "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前{length, plural, one {is #} other {長度是 #}}。",
+            "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前長度{length, plural, one {是 #} other {是 #}}。",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
-            "phraseWordCount": "您的助記詞應該要有24個字，目前為{length, plural, one {是 #} other {是 #}}。",
+            "phraseWordCount": "您的助記詞應該要有 24 個單字，目前有{length, plural, one { # } other { # }}個單字。",
             "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞 “{word}”",
             "phraseCaseWord": "這個字\"{word}\" 應該要是小寫"
         },
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "您正在使用開發者設定檔連結至 {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "我們需要您的相機使用權限以掃描QR條碼。",
+            "requestInAppSettings": "若您同意取用相機以掃描QR條碼，請在app設定裡開啟權限。"
         }
     }
 }

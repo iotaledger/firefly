@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text } from 'shared/components'
+    import { AccountTile, Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { popupState } from 'shared/lib/popup'
+    import { isLedgerProfile } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
 
     export let locale: Locale
 
@@ -18,6 +18,7 @@
 
     let accountAlias = ''
     let isBusy = false
+    let color = AccountColors.Blue
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -55,24 +56,24 @@
 
             const _cancel = () => (isBusy = false)
             const _create = () =>
-                onCreate(trimmedAccountAlias, (err) => {
+                onCreate(trimmedAccountAlias, color, (err) => {
                     isBusy = false
 
-                    if(err) {
+                    if (err) {
                         console.error(err?.error || err)
 
-                        if($isLedgerProfile) {
+                        if ($isLedgerProfile) {
                             displayNotificationForLedgerProfile('error', true, false, false, false, err)
                         } else {
                             showAppNotification({
                                 type: 'error',
-                                message: localize(err?.error || err)
+                                message: localize(err?.error || err),
                             })
                         }
                     }
                 })
 
-            if($isLedgerProfile) {
+            if ($isLedgerProfile) {
                 promptUserToConnectLedger(false, _create, _cancel)
             } else {
                 _create()
@@ -91,14 +92,26 @@
         <div class="flex flex-row mb-6">
             <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="w-full flex flex-col justify-between">
+            <AccountTile
+                balance={'0 Mi'}
+                balanceEquiv={'US$ 0,00'}
+                {color}
+                disabledHover="true"
+                name={accountAlias || locale('general.accountName')}
+                size="l"
+                classes="mb-4"
+            />
             <Input
                 {error}
                 bind:value={accountAlias}
                 placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
-                disabled={isBusy} />
+                disabled={isBusy}
+                classes="mb-4"
+            />
+            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes="mb-4" />
         </div>
     </div>
     <!-- Action -->
@@ -107,11 +120,14 @@
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
+                {locale('actions.cancel')}
+            </Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}>
+                onClick={() => handleCreateClick()}
+            >
                 {locale('actions.create')}
             </Button>
         </div>

@@ -26,25 +26,24 @@
     }
 </script>
 
-<style>
-    .history {
-        max-height: 30vh;
-    }
-</style>
-
 <div class="mb-5">
     <Text type="h4">{locale('popups.addressHistory.title', { values: { name: $account.alias } })}</Text>
 </div>
 <div class="history scrollable-y flex flex-row flex-wrap space-y-7">
     {#each addresses as _addr}
         <div class="flex flex-row flex-wrap space-y-1">
-            <Text type="p">{_addr.internal ? locale('popups.addressHistory.internal') : locale('popups.addressHistory.external')} {_addr.keyIndex}</Text>
+            <Text type="p"
+                >{_addr.internal ? locale('popups.addressHistory.internal') : locale('popups.addressHistory.external')}
+                {_addr.keyIndex}</Text
+            >
             <button class="text-left" on:click={() => setClipboard(_addr.address.toLowerCase())}>
                 <Text type="pre">{_addr.address}</Text>
             </button>
             <div class="flex flex-row py-1 items-center">
                 <Text classes="mr-4" type="p">
-                    {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnitBestMatch(_addr.balance) } })}
+                    {locale('popups.addressHistory.currentBalance', {
+                        values: { balance: formatUnitBestMatch(_addr.balance) },
+                    })}
                 </Text>
             </div>
         </div>
@@ -53,3 +52,9 @@
 <div class="flex w-full justify-center pt-8">
     <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
 </div>
+
+<style>
+    .history {
+        max-height: 30vh;
+    }
+</style>

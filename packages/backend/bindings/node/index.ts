@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '../../../shared/lib/typings/bridge'
 import {
     AccountToCreate,
     AccountIdentifier,
@@ -48,7 +48,7 @@ import {
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
     getStrongholdStatus as _getStrongholdStatus,
-    removeStorage as _removeStorage,
+    deleteStorage as _deleteStorage,
     lockStronghold as _lockStronghold,
     changeStrongholdPassword as _changeStrongholdPassword,
     setClientOptions as _setClientOptions,
@@ -93,8 +93,11 @@ function sendMessage(message: BridgeMessage): Promise<string> {
     return new Promise((resolve) => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(id: string, storagePath?: string): { destroy: () => void; removeEventListeners: () => void } {
-    const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
+export function init(id: string, storagePath?: string, sendCrashReports?: boolean, machineId?: string): IActorHandler {
+    const runtime = storagePath
+        ? new addon.ActorSystem(id, storagePath, sendCrashReports || false, machineId || '')
+        : new addon.ActorSystem(id)
+
     let destroyed = false
     _poll(
         runtime,
@@ -243,8 +246,8 @@ export const api = {
     setStoragePassword: function (password: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
     },
-    removeStorage: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
+    deleteStorage: function (): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _deleteStorage(sendMessage, __ids)
     },
     send: function (
         fromAccountId: AccountIdentifier,

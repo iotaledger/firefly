@@ -5,6 +5,7 @@
     import { AdvancedSettings } from 'shared/lib/typings/routes'
     import {
         BalanceFinder,
+        CrashReporting,
         DeepLinks,
         Diagnostics,
         ErrorLog,
@@ -24,6 +25,7 @@
         { component: BalanceFinder, childRoute: AdvancedSettings.BalanceFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettings.HiddenAccounts, requireLogin: true },
         { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
+        { component: CrashReporting, childRoute: AdvancedSettings.CrashReporting },
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
     ]

@@ -1,9 +1,11 @@
 export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
+    CrashReporting = 'crashReporting',
     Appearance = 'appearance',
     Profile = 'profile',
     Setup = 'setup',
+    Settings = 'settings',
     // TODO: ledger replace create
     Create = 'create',
     Secure = 'secure',
@@ -83,6 +85,7 @@ export enum GeneralSettings {
     Currency = 'currency',
     Notifications = 'notifications',
     NetworkStatus = 'networkStatus',
+    ChangeProfileName = 'changeProfileName',
 }
 
 export enum GeneralSettingsNoProfile {
@@ -105,6 +108,7 @@ export enum AdvancedSettings {
     BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
+    CrashReporting = 'crashReporting',
     Diagnostics = 'diagnostics',
     MigrateLedgerIndex = 'migrateLedgerIndex',
 }

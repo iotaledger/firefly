@@ -47,14 +47,6 @@
     })
 </script>
 
-<style type="text/scss">
-    button {
-        + button {
-            @apply ml-4;
-        }
-    }
-</style>
-
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={() => {}} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
@@ -67,11 +59,19 @@
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
                 <WalletPill
+                    account={acc}
                     active={activeAccount.id === acc.id}
-                    name={acc.alias}
-                    color={acc.color}
-                    onClick={() => handleAccountClick(acc.id)} />
+                    onClick={() => handleAccountClick(acc.id)}
+                />
             {/each}
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    button {
+        + button {
+            @apply ml-4;
+        }
+    }
+</style>

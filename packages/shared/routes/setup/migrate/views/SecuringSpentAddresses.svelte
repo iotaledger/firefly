@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import {
         createMigrationBundle,
         getInputIndexesForBundle,
@@ -11,11 +11,9 @@
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let mobile
 
     const dispatch = createEventDispatcher()
 
@@ -87,7 +85,7 @@
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor(timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length) * 100)
+        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 
@@ -105,29 +103,30 @@
     })
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
-        <div slot="icon_boxed">
-            <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
-                <Icon boxed="true" icon="history" classes="text-white" />
-            </div>
+<!-- TODO: missing mobile -->
+<BundleMiningLayout allowBack={false} {locale} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+    <div slot="icon_boxed">
+        <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
+            <Icon boxed="true" icon="history" classes="text-white" />
         </div>
-        <div slot="box_content">
-            <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
-            <Text type="p" secondary classes="mb-4 text-center">
-                {locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}
-            </Text>
-            <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
-            <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
-                    {locale('views.bundleMiningWarning.learn')}
-                </Button>
-            </div>
+    </div>
+    <div slot="box_content">
+        <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
+        <Text type="p" secondary classes="mb-4 text-center">
+            {locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}
+        </Text>
+        <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
+        <div class="flex flex-col flex-grow items-center">
+            <Button
+                secondary
+                classes="w-56"
+                onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}
+            >
+                {locale('views.bundleMiningWarning.learn')}
+            </Button>
         </div>
-        <div slot="actions" class="w-2/5 mt-8">
-            <ProgressBar narrow percent={progressBarPercent} message={progressBarMessage} />
-        </div>
-    </BundleMiningLayout>
-{/if}
+    </div>
+    <div slot="actions" class="w-2/5 mt-8">
+        <ProgressBar narrow percent={progressBarPercent} message={progressBarMessage} />
+    </div>
+</BundleMiningLayout>

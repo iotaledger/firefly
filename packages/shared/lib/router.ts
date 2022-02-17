@@ -1,5 +1,5 @@
-import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, profiles } from 'shared/lib/profile'
+import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
+import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, LedgerRoutes, SettingsRoutes, SetupType, Tabs } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking/deepLinking'
@@ -129,6 +129,9 @@ export const routerNext = (event: { detail }): void => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
+            nextRoute = AppRoute.CrashReporting
+            break
+        case AppRoute.CrashReporting:
             nextRoute = AppRoute.Appearance
             break
         case AppRoute.Appearance:
@@ -142,7 +145,12 @@ export const routerNext = (event: { detail }): void => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Create
+                    if (get(mobile)) {
+                        setProfileType(ProfileType.Software)
+                        nextRoute = AppRoute.Secure
+                    } else {
+                        nextRoute = AppRoute.Create
+                    }
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }

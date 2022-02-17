@@ -1,9 +1,14 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import {
+        asyncSetStoragePassword,
+        asyncVerifyMnemonic,
+        asyncStoreMnemonic,
+        asyncCreateAccount,
+    } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, RepeatPin } from './views/'
@@ -14,8 +19,6 @@
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let mobile
 
     let busy = false
 
@@ -66,7 +69,7 @@
                         throw new Error('Invalid pin code!')
                     }
 
-                    await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
+                    await Platform.PincodeManager.set(get(activeProfile)?.id, pin)
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
@@ -112,16 +115,16 @@
     
 #if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
-        <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Protect on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {/if}-->
 
 {#if state === ProtectState.Pin}
     <Transition>
-        <Pin {busy} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Pin {busy} on:next={_next} on:previous={_previous} {locale} />
     </Transition>
 {:else if state === ProtectState.RepeatPin}
     <Transition>
-        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} />
     </Transition>
 {/if}

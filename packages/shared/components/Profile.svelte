@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -11,14 +11,14 @@
     export let id = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let bgColor
+    export let bgColor: string
 
-    export let onClick = (): void | string => ''
+    export let onClick: (id: string) => void | string
 
     const slots = $$props.$$slots
 
     function getInitials() {
-        const initials = _getInitials(name)
+        const initials = _getInitials(name, 1)
         if (initials.length === 1) {
             return initials
         } else {
@@ -32,7 +32,10 @@
     <div class="flex flex-col justify-between items-center">
         <div
             on:click={() => onClick(id)}
-            class="h-20 w-20 {bgColor ? `bg-${bgColor}-500` : ''} rounded-full font-bold text-center flex items-center justify-center {classes}">
+            class="h-20 w-20 {bgColor
+                ? `bg-${bgColor}-500`
+                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
+        >
             {#if slots}
                 <slot />
             {:else}
@@ -41,7 +44,12 @@
         </div>
         <div class="mt-5 flex flex-row items-baseline space-x-1.5">
             {#if isLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-400 dark:text-gray-700 relative top-0.5" width={14} height={14} />
+                <Icon
+                    icon="ledger"
+                    classes="text-gray-400 dark:text-gray-700 relative top-0.5"
+                    width={14}
+                    height={14}
+                />
             {/if}
             <Text type="h5" classes="text-center">{name}</Text>
         </div>

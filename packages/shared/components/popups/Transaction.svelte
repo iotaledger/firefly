@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import type { WalletAccount } from 'lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { wallet } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
@@ -68,27 +68,21 @@
     }
 </script>
 
-<style type="text/scss">
-    .illustration {
-        height: 250px;
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-        }
-    }
-</style>
-
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
-            class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3">
+            class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
+        >
             <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="warning" classes="text-white" />
             </div>
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
-                {locale(mustAcknowledgeBelowMinRewardParticipationWarning ? 'popups.transaction.sendingFromStakedAccountBelowMinReward' : 'popups.transaction.sendingFromStakedAccount')}
+                {locale(
+                    mustAcknowledgeBelowMinRewardParticipationWarning
+                        ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
+                        : 'popups.transaction.sendingFromStakedAccount'
+                )}
             </Text>
         </div>
     {:else}
@@ -111,3 +105,14 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration {
+        height: 250px;
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+        }
+    }
+</style>

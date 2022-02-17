@@ -13,7 +13,7 @@
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
     import { wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
@@ -39,7 +39,7 @@
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
-    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
     const walletBalance = derived(wallet, ($wallet) => {
         const { balanceOverview } = $wallet
@@ -174,6 +174,81 @@
     }
 </script>
 
+<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
+    <div class="flex justify-between items-center mb-2">
+        {#if !$selectedAccount}
+            <div class="flex space-x-4">
+                {#each Object.values(DashboardChartType) as chart}
+                    <button
+                        on:click={() => handleDashboardChartTypeSelect(chart)}
+                        class:active={chart === $selectedDashboardChart}
+                    >
+                        <Text type="h5" secondary={chart !== $selectedDashboardChart}>{locale(`charts.${chart}`)}</Text>
+                    </button>
+                {/each}
+            </div>
+        {:else}
+            <div class="flex space-x-4 -ml-3">
+                <Dropdown
+                    small
+                    value={locale(`charts.${$selectedWalletChart}`)}
+                    items={chartTypeDropdownItems}
+                    onSelect={handleWalletChartTypeSelect}
+                    contentWidth={true}
+                    valueTextType="h5"
+                    showBorderWhenClosed={false}
+                />
+            </div>
+        {/if}
+        <div class="flex justify-between items-center space-x-2">
+            {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)}
+                <span>
+                    <Dropdown
+                        small
+                        value={tokenDropdownItems[0].label}
+                        items={tokenDropdownItems}
+                        contentWidth={true}
+                    />
+                </span>
+            {:else}
+                <span>
+                    <Dropdown
+                        small
+                        value={$activeProfile?.settings.chartSelectors.currency}
+                        items={currencyDropdownItems}
+                        onSelect={handleCurrencySelect}
+                        contentWidth={true}
+                    />
+                </span>
+            {/if}
+            <span>
+                <Dropdown
+                    small
+                    value={$activeProfile?.settings.chartSelectors.timeframe
+                        ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)
+                        : undefined}
+                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({
+                        label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
+                        value,
+                    }))}
+                    onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
+                    contentWidth={true}
+                />
+            </span>
+        </div>
+    </div>
+    <Chart
+        type="line"
+        {datasets}
+        beginAtZero={$selectedAccount || $selectedDashboardChart !== DashboardChartType.TOKEN}
+        {labels}
+        {color}
+        {xMaxTicks}
+        {formatYAxis}
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
+    />
+</div>
+
 <style type="text/scss">
     button.active {
         @apply relative;
@@ -189,70 +264,3 @@
         }
     }
 </style>
-
-<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
-    <div class="flex justify-between items-center mb-2">
-        {#if !$selectedAccount}
-            <div class="flex space-x-4">
-                {#each Object.values(DashboardChartType) as chart}
-                    <button
-                        on:click={() => handleDashboardChartTypeSelect(chart)}
-                        class:active={chart === $selectedDashboardChart}>
-                        <Text type="h5" secondary={chart !== $selectedDashboardChart}>{locale(`charts.${chart}`)}</Text>
-                    </button>
-                {/each}
-            </div>
-        {:else}
-            <div class="flex space-x-4 -ml-3">
-                <Dropdown
-                    small
-                    value={locale(`charts.${$selectedWalletChart}`)}
-                    items={chartTypeDropdownItems}
-                    onSelect={handleWalletChartTypeSelect}
-                    contentWidth={true}
-                    valueTextType="h5"
-                    showBorderWhenClosed={false} />
-            </div>
-        {/if}
-        <div class="flex justify-between items-center space-x-2">
-            {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)}
-                <span>
-                    <Dropdown
-                        small
-                        value={tokenDropdownItems[0].label}
-                        items={tokenDropdownItems}
-                        contentWidth={true} />
-                </span>
-            {:else}
-                <span>
-                    <Dropdown
-                        small
-                        value={$activeProfile?.settings.chartSelectors.currency}
-                        items={currencyDropdownItems}
-                        onSelect={handleCurrencySelect}
-                        contentWidth={true} />
-                </span>
-            {/if}
-            <span>
-                <Dropdown
-                    small
-                    value={$activeProfile?.settings.chartSelectors.timeframe ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`) : undefined}
-                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({
-                        label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
-                        value,
-                    }))}
-                    onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
-                    contentWidth={true} />
-            </span>
-        </div>
-    </div>
-    <Chart
-        type="line"
-        {datasets}
-        beginAtZero={$selectedAccount || $selectedDashboardChart !== DashboardChartType.TOKEN}
-        {labels}
-        {color}
-        {xMaxTicks}
-        {formatYAxis}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
-</div>

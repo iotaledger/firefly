@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { AccountActionsModal, DashboardPane, Drawer } from 'shared/components'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -9,19 +9,20 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        getColor,
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { Message, Transaction } from 'shared/lib/typings/message'
     import type { MigratedTransaction } from 'shared/lib/typings/profile'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type {
         AccountMessage,
         AccountsBalanceHistory,
@@ -59,6 +60,8 @@
 
     export let locale: Locale
 
+    let drawer: Drawer
+
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
     let showActionsModal = false
@@ -69,7 +72,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -317,10 +319,10 @@
         }
     }
 
-    async function onCreateAccount(alias: string, onComplete) {
+    async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias)
+                const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 // TODO: set selected account to the newly created account
@@ -482,11 +484,15 @@
         }
     }
 
+    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
+        drawer.open()
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
-        if ($activeProfile) {
+        if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
                 loadAccounts()
             }
@@ -515,12 +521,6 @@
     }
 </script>
 
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
-
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
         <AccountNavigation {locale} accounts={navAccounts} />
@@ -529,17 +529,20 @@
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
                         {locale}
-                        color={$selectedAccount.color}
+                        color={getColor($activeProfile, $selectedAccountId)}
                         balance={$selectedAccount.rawIotaBalance}
                         balanceEquiv={$selectedAccount.balanceEquiv}
-                        onMenuClick={handleMenuClick} />
+                        onMenuClick={handleMenuClick}
+                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
+                    />
                     <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions
                             {isGeneratingAddress}
                             {onSend}
                             {onInternalTransfer}
                             {onGenerateAddress}
-                            {locale} />
+                            {locale}
+                        />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
@@ -558,3 +561,9 @@
         <AccountActionsModal bind:isActive={showActionsModal} {locale} />
     </div>
 {/if}
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>

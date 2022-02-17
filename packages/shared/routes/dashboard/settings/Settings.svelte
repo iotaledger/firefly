@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
     import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
@@ -7,14 +8,14 @@
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
-    export let handleClose
+    export let handleClose: () => void
 
-    function closeSettings() {
+    function closeSettings(): void {
         dashboardRoute.set(get(previousDashboardRoute))
         previousDashboardRoute.set(undefined)
     }
 
-    onDestroy(() => {
+    onDestroy((): void => {
         // When a new locale is loaded the pages are reloaded
         // so don't reset the router in this case
         if ($isLocaleLoaded) {
@@ -25,10 +26,14 @@
 </script>
 
 <div
-    class="relative w-full h-full px-16 py-12 flex flex-1 bg-white dark:bg-gray-900 {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
-    <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
-        <Icon icon="close" classes="text-gray-800 dark:text-white" />
-    </button>
+    class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
+        SettingsRoutes.Init && 'md:pt-20'} "
+>
+    {#if !$mobile}
+        <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
+            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+        </button>
+    {/if}
     {#if $settingsRoute === SettingsRoutes.Init}
         <SettingsHome />
     {:else}

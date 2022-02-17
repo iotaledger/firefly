@@ -7,24 +7,11 @@
     export let scrolling = 'no'
 </script>
 
-<style type="text/css">
-    div {
-        padding-top: 56.25%;
-    }
-    iframe {
-        @apply h-full;
-        @apply w-full;
-        @apply absolute;
-        @apply left-0;
-        @apply top-0;
-    }
-</style>
-
 <div class="relative w-full h-auto overflow-hidden rounded-2xl">
     <iframe
         srcdoc={`
             <head>
-                <style type="text/css">
+                <${'style'} type="text/css">
                     body {
                         margin: 0px;
                     }
@@ -48,6 +35,19 @@
         {scrolling}
         {sandbox}
         frameborder="0"
-        title="video" />
+        title="video"
+    />
 </div>
 
+<style type="text/css">
+    div {
+        padding-top: 56.25%;
+    }
+    iframe {
+        @apply h-full;
+        @apply w-full;
+        @apply absolute;
+        @apply left-0;
+        @apply top-0;
+    }
+</style>

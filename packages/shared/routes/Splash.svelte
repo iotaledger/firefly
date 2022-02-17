@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { Animation } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
-    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings';
+    import { onMount } from 'svelte'
 
     /**
      * NOTE: This reactive dependency ensures that darkMode is set to the
@@ -17,7 +18,7 @@
 </script>
 
 <div class="w-full h-full flex justify-center items-center bg-white dark:bg-gray-900">
-    <div class="w-1/3">
+    <div class={$mobile ? 'w-full px-4' : 'w-1/3'}>
         <Animation classes="w-full h-auto" animation="splashscreen-desktop" loop={false} renderer="canvas" />
     </div>
 </div>

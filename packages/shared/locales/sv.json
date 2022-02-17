@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Inställningar",
             "generalSettings": {
-                "title": "Allmänna inställningar",
+                "title": "Allmänt",
                 "description": "Konfigurera appens utseende och andra allmänna inställningar"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Ändra ditt lösenord och anpassa efter säkerhetsinställningar"
             },
             "advancedSettings": {
-                "title": "Avancerade inställningar",
+                "title": "Avancerad",
                 "description": "Verktyg och manuella inställningar för avancerade användare"
             },
             "helpAndInfo": {
@@ -350,6 +350,11 @@
                 "newPincode": "Ny PIN-kod",
                 "confirmNewPincode": "Bekräfta ny PIN-kod",
                 "action": "Ändra PIN-kod"
+            },
+            "changeProfileName": {
+                "title": "Ändra profilnamn",
+                "description": "Ändra ditt Firefly profilnamn",
+                "success": "Du ändrade ditt profilnamn"
             },
             "balanceFinder": {
                 "title": "Hitta saldo",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Det belöningsmotiverade förestående nätverket för att främja stora innovationer med IOTA. Det som händer, händer. Hur Shimmer utvecklas är upp till dig."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Färgväljare",
+                "hexCode": "Färg hex-kod"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Du skapar en utvecklarprofil",
             "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
+        },
+        "legalUpdate": {
+            "tosTitle": "Användarvillkor",
+            "privPolicyTitle": "Sekretesspolicy",
+            "tosAndPrivPolicyBody": "Vi har uppdaterat Fireflys användarvillkor och sekretesspolicy.",
+            "tosBody": "Vi har uppdaterat Fireflys användarvillkor.",
+            "privPolicyBody": "Vi har uppdaterat Fireflys sekretesspolicy.",
+            "tosAndPrivPolicyCheckbox": "Jag har läst och jag accepterar de uppdaterade användarvillkoren och sekretesspolicyn",
+            "tosCheckbox": "Jag har läst och jag godkänner de uppdaterade användarvillkoren",
+            "privPolicyCheckbox": "Jag har läst och jag accepterar den uppdaterade sekretesspolicyn"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Saldo",
         "accountBalance": "Plånbokssaldo",
+        "all": "Alla",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
         "totalIn": "Totalt in",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Ursprungliga nätverket",
         "capsLock": "Caps Lock är på",
         "version": "Version {version}",
+        "yourWallets": "Dina plånböcker",
         "unknown": "Okänd",
         "none": "Ingen",
         "staked": "Stakad",
@@ -1011,7 +1034,8 @@
         "unstaking": "Tar bort staking",
         "notStaked": "Ej stakad",
         "stakedFunds": "Stakade tillgångar",
-        "unstakedFunds": "Ej stakade tillgångar"
+        "unstakedFunds": "Ej stakade tillgångar",
+        "accountColor": "Plånboksfärg"
     },
     "dates": {
         "today": "Idag",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
             "empty": "Du måste använda din senaste plånbok innan du skapar en ny.",
+            "emptyName": "Ett profilnamn måste innehålla minst 1 tecken.",
             "notEmpty": "Du måste överföra ditt saldo innan du tar bort denna plånbok.",
             "duplicate": "En plånbok med detta namn finns redan.",
             "tilde": "Ett profilnamn kan inte börja med '~' tecken.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Du använder för närvarande en utvecklarprofil och är ansluten till {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Vi behöver ditt tillåtande för att kunna använda kameran och skanna QR-koder.",
+            "requestInAppSettings": "Om du vill tillåta Firefly att använda din kamera för att skanna QR-koder, vänligen aktivera det i appinställningarna."
         }
     }
 }

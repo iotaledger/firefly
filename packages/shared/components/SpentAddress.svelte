@@ -1,11 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-    } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { truncateString } from 'shared/lib/helpers'
     import { RiskLevel } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -65,6 +60,57 @@
     })
 </script>
 
+<button
+    class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
+    rounded-2xl"
+    class:selected
+    on:click={onClick}
+>
+    <div class="flex items-center justify-between w-full">
+        <div class="flex items-center space-x-4 text-left">
+            <div
+                class="radio-button w-6 h-6 mr-3 rounded-full border border-solid border-gray-300 dark:border-gray-700"
+                class:active={selected}
+            >
+                <Icon icon={selected ? 'radio' : 'radio-unchecked'} />
+            </div>
+            <div>
+                <Text type="pre" smaller>{truncateString(address, 9, 9)}</Text>
+                <Text type="p" secondary smaller>
+                    {formatUnitBestMatch(balance, true, 3)}
+                    ·
+                    <span class="uppercase">{fiatBalance}</span>
+                </Text>
+            </div>
+        </div>
+        {#if showRiskLevel}
+            <risk-meter on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip} class="flex flex-row items-center">
+                <div bind:this={tooltipAnchor}>
+                    <Icon icon="info" classes="text-gray-800 dark:text-white" width={20} height={20} />
+                </div>
+                <div class="ml-2 flex flex-row items-center space-x-0.5">
+                    {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
+                        <span
+                            class="h-4 w-1 rounded-2xl {i <= riskBars - 1
+                                ? `bg-${riskColor}-500`
+                                : 'bg-gray-300 dark:bg-gray-700'}"
+                        />
+                    {/each}
+                </div>
+            </risk-meter>
+            {#if showTooltip && risk}
+                <Tooltip anchor={tooltipAnchor}>
+                    <Text
+                        >{locale('tooltips.risk.title', {
+                            values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) },
+                        })}</Text
+                    >
+                </Tooltip>
+            {/if}
+        {/if}
+    </div>
+</button>
+
 <style type="text/scss">
     button {
         &:not(:disabled):hover {
@@ -88,48 +134,3 @@
         }
     }
 </style>
-
-<button
-    class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
-    rounded-2xl"
-    class:selected
-    on:click={onClick}>
-    <div class="flex items-center justify-between w-full">
-        <div class="flex items-center space-x-4 text-left">
-            <div
-                class="radio-button w-6 h-6 mr-3 rounded-full border border-solid border-gray-300 dark:border-gray-700"
-                class:active={selected}>
-                <Icon icon={selected ? 'radio' : 'radio-unchecked'} />
-            </div>
-            <div>
-                <Text type="pre" smaller>{truncateString(address, 9, 9)}</Text>
-                <Text type="p" secondary smaller>
-                    {formatUnitBestMatch(balance, true, 3)}
-                    ·
-                    <span class="uppercase">{fiatBalance}</span>
-                </Text>
-            </div>
-        </div>
-        {#if showRiskLevel}
-            <risk-meter
-                on:mouseenter={toggleTooltip}
-                on:mouseleave={toggleTooltip}
-                class="flex flex-row items-center">
-                <div bind:this={tooltipAnchor}>
-                    <Icon icon="info" classes="text-gray-800 dark:text-white" width={20} height={20} />
-                </div>
-                <div class="ml-2 flex flex-row items-center space-x-0.5">
-                    {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
-                        <span
-                            class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
-                    {/each}
-                </div>
-            </risk-meter>
-            {#if showTooltip && risk}
-                <Tooltip anchor={tooltipAnchor}>
-                    <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>
-                </Tooltip>
-            {/if}
-        {/if}
-    </div>
-</button>

@@ -1,28 +1,35 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-    } from 'shared/lib/currency'
-    import { Electron } from 'shared/lib/electron'
+    import { mobile } from 'shared/lib/app'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+    import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
-    import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile, updateProfile } from 'shared/lib/profile'
+    import {
+        LOG_FILE_NAME,
+        migration,
+        migrationLog,
+        resetMigrationState,
+        totalMigratedBalance,
+    } from 'shared/lib/migration'
+    import {
+        activeProfile,
+        newProfile,
+        profileInProgress,
+        saveProfile,
+        setActiveProfile,
+        updateProfile,
+    } from 'shared/lib/profile'
     import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getStoragePath } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
-
-    export let mobile
 
     const { didComplete } = $migration
 
@@ -82,14 +89,18 @@
                 }
             }
             const _exportMigrationLog = () => {
-                Electron.getUserDataPath()
-                    .then((path) => {
-                        const source = getStoragePath(path, $activeProfile.name)
-
-                        return $walletSetupType === SetupType.TrinityLedger
-                            ? Electron.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                            : Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                    })
+                getProfileDataPath($activeProfile.name)
+                    .then((source) =>
+                        $walletSetupType === SetupType.TrinityLedger
+                            ? Platform.exportLedgerMigrationLog(
+                                  $migrationLog,
+                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                              )
+                            : Platform.exportMigrationLog(
+                                  `${source}/${LOG_FILE_NAME}`,
+                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                              )
+                    )
                     .then((result) => {
                         if (result) {
                             logExported = true
@@ -116,40 +127,38 @@
     })
 </script>
 
-{#if mobile}
-    <div>foo</div>
-{:else}
-    <OnboardingLayout allowBack={false}>
-        <div slot="leftpane__content">
-            {#if wasMigrated}
-                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
-                        <Icon icon="success-check" classes="text-white" />
-                    </div>
-                    <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                    <Text type="p" secondary classes="mb-6 text-center">
-                        {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
-                    </Text>
-                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
-                    <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
+<OnboardingLayout allowBack={false}>
+    <div slot="leftpane__content">
+        {#if wasMigrated}
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                    <Icon icon="success-check" classes="text-white" />
                 </div>
-            {:else}
-                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
-                        <Icon icon="success-check" classes="text-white" />
-                    </div>
-                    <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                    <Text type="p" secondary classes="mb-2 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
+                <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                <Text type="p" secondary classes="mb-6 text-center">
+                    {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
+                </Text>
+                <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
+                <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
+            </div>
+        {:else}
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                    <Icon icon="success-check" classes="text-white" />
                 </div>
-            {/if}
-        </div>
-        <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()}>
-                {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
-            </Button>
-        </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation animation="congratulations-desktop" />
-        </div>
-    </OnboardingLayout>
-{/if}
+                <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                <Text type="p" secondary classes="mb-2 text-center"
+                    >{locale(`views.congratulations.${localizedBody}`)}</Text
+                >
+            </div>
+        {/if}
+    </div>
+    <div slot="leftpane__action">
+        <Button classes="w-full" onClick={() => handleContinueClick()}>
+            {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
+        </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="congratulations-desktop" />
+    </div>
+</OnboardingLayout>
