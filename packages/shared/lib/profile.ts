@@ -419,7 +419,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  */
 export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
     if (!activeProfile) {
-        return 'blue'
+        return AccountColors.Blue
     }
 
     const { accounts } = activeProfile || {}
