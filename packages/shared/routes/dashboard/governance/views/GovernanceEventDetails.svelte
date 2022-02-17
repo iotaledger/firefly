@@ -32,8 +32,11 @@
         })
     }
 
-    const length = milestoneToDate(event?.information?.milestoneIndexEnd).getMilliseconds() - milestoneToDate(event?.information?.milestoneIndexStart).getMilliseconds()
-    const progress = new Date().getMilliseconds() - milestoneToDate(event?.information?.milestoneIndexEnd).getMilliseconds()
+    const length = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - milestoneToDate(event?.information?.milestoneIndexStart).getTime()
+    $: getProgress = () => {
+        const _progress = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - Date.now()
+        return _progress > 0 ? _progress : 0
+    }
 
     // const totalVotes = $participationOverview.find(acc => acc?.accountIndex === account?.index)?.trackedParticipations?.amount // TODO: fix object structure 
     const totalVotes = 2000
@@ -147,7 +150,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingLength')}</Text>
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
                     </div>
                 {/if}
@@ -160,7 +163,7 @@
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingProgress')}</Text>
-                        <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
+                        <Text type="h3" classes="inline-flex items-end">{getDurationString(getProgress())}</Text>
                     </div>
                 {/if}
             </div>
