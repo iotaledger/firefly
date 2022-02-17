@@ -580,7 +580,8 @@
                 "votingProgress": "Voting progress",
                 "votesCounted": "Your total votes counted",
                 "countingStarts": "Counting starts on",
-                "countingLength": "Counting length"
+                "countingLength": "Counting length",
+                "currentResults": "Current results"
             },
             "votes": "votes"
         }
