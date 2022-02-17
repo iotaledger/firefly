@@ -4,6 +4,7 @@
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
+    import { popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
@@ -31,6 +32,11 @@
     $: {
         if (validatePinFormat(pinCode)) {
             void onSubmit()
+        }
+    }
+    $: {
+        if (pinRef && !$popupState.active) {
+            pinRef.focus()
         }
     }
 
