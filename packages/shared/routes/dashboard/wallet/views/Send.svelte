@@ -19,7 +19,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -32,7 +32,7 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import type { NotificationType } from 'shared/lib/typings/notification'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
@@ -427,7 +427,8 @@
 
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
-            walletRoute.set(WalletRoutes.Init)
+            // TODO: handle this case for single wallet view
+            accountRoute.set(AccountRoutes.Init)
         }
     }
 
