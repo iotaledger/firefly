@@ -11,7 +11,6 @@
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
 
-
     export let locale: Locale
 
     export let isGeneratingAddress = false

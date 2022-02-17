@@ -8,7 +8,7 @@ import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, Migra
 import type { StrongholdStatus } from './wallet'
 import type { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
 
-export interface Actor {
+export interface IActorHandler {
     destroy(): void
     removeEventListeners(): void
 }

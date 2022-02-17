@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon,Pin,Profile,Text } from 'shared/components'
+    import { initAppSettings } from 'shared/lib/appSettings'
     import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
@@ -8,6 +9,7 @@
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import type { Locale } from 'shared/lib/typings/i18n'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -65,27 +67,30 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
+            const { sendCrashReports } = get(initAppSettings)
 
             isBusy = true
 
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return getProfileDataPath(profile.name).then((path) => {
-                            initialise(profile.id, path)
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
+                        return Platform.getMachineId().then((machineId) =>
+                            getProfileDataPath(profile.name).then((path) => {
+                                initialise(profile.id, path, sendCrashReports, machineId)
+                                api.setStoragePassword(pinCode, {
+                                    onSuccess() {
+                                        dispatch('next')
+                                    },
+                                    onError(err) {
+                                        isBusy = false
+                                        showAppNotification({
+                                            type: 'error',
+                                            message: locale(err.error),
+                                        })
+                                    },
+                                })
                             })
-                        })
+                        )
                     } else {
                         shake = true
                         shakeTimeout = setTimeout(() => {

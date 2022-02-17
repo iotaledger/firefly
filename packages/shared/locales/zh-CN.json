@@ -22,10 +22,10 @@
                 "nonFirst": "现在，让我们从您的配置名称开始。"
             },
             "addMore": "您可以稍后添加更多配置文件。",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "高级选项",
             "developer": {
                 "label": "开发者模式",
-                "info": "Connect to the devnet or a private network"
+                "info": "连接到devnet或一个私有网络"
             }
         },
         "setup": {
@@ -263,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "保护已花费的地址...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "这个过程将需要 {minutes, plural, other {# 分钟}}",
             "body2": "您的计算机将满负荷运行，请等待完成以后再处理其他的事情。"
         },
         "transferFragmentedFunds": {
@@ -287,7 +287,7 @@
         "settings": {
             "settings": "设置",
             "generalSettings": {
-                "title": "常规设置",
+                "title": "通用",
                 "description": "配置您的应用外观和其他常规设置"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "更改您的密码并调整安全相关的设置"
             },
             "advancedSettings": {
-                "title": "高级设置",
+                "title": "高级",
                 "description": "技术用户的工具和手动设置"
             },
             "helpAndInfo": {
@@ -303,8 +303,8 @@
                 "description": "找到问题的答案或通过提交Issue来获得帮助"
             },
             "profile": {
-                "title": "配置信息",
-                "description": "更改您的账户名称或设置头像"
+                "title": "个人档案",
+                "description": "更改您的档案名称或设置头像"
             },
             "sync": {
                 "title": "同步钱包",
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "重新启动Firefly应用程序以使系统主题生效。"
+                "advice": "请重新启动Firefly应用程序以使系统主题的变更生效。"
             },
             "language": {
                 "title": "语言",
@@ -351,6 +351,11 @@
                 "confirmNewPincode": "确认新PIN码",
                 "action": "更改 PIN 码"
             },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
+            },
             "balanceFinder": {
                 "title": "余额搜索器",
                 "description": "对您的币地址进行扩展搜索"
@@ -360,7 +365,7 @@
                 "description": "选择此选项将显示以前隐藏的钱包"
             },
             "deleteProfile": {
-                "title": "删除配置文件",
+                "title": "删除个人档案",
                 "description": "删除您的整个账户信息、钱包和交易历史。请确保您有一个备份"
             },
             "deepLinks": {
@@ -441,8 +446,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
+            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
         },
         "dashboard": {
             "security": {
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "一个推进IOTA上的重大创新的激励性的阶段性网络，让我们静观其变。Shimmer如何演化取决于你。"
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -620,7 +631,7 @@
             "empty": "错误日志为空。"
         },
         "deleteProfile": {
-            "title": "删除配置文件",
+            "title": "删除个人档案",
             "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。",
             "typePassword": "请输入您的密码以确认。"
         },
@@ -639,7 +650,7 @@
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -750,16 +761,26 @@
             "body2": "我们的目标是在2022年启动Assembly。一旦网络启动，您的代币将可进行传输。"
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "您正在创建一个开发者配置",
+            "body": "你将被默认连接到Chrysalis Devnet，你可以手动切换网络。你需要知道自己在做什么的情况下才能继续。"
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
         "incomingMi": "转入 {value}",
         "outgoingMi": "发送 {value}",
-        "portoflio": "资产组合",
-        "token": "Token",
-        "holdings": "持有",
+        "portoflio": "市值",
+        "token": "币价",
+        "holdings": "代币持有",
         "accountValue": "钱包金额",
         "accountActivity": "钱包活动",
         "timeframe1Hour": "1 小时",
@@ -905,7 +926,7 @@
         "from": "从",
         "to": "到",
         "receiveFunds": "接收资金",
-        "address": "Address",
+        "address": "地址",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -923,6 +944,7 @@
         "systemTheme": "系统",
         "balance": "余额",
         "accountBalance": "钱包余额",
+        "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
         "totalIn": "收入总计",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "未知",
         "none": "无",
         "staked": "已质押",
@@ -1011,7 +1034,8 @@
         "unstaking": "正在解除质押",
         "notStaked": "未质押",
         "stakedFunds": "已质押资金",
-        "unstakedFunds": "未质押的资金"
+        "unstakedFunds": "未质押的资金",
+        "accountColor": "钱包颜色"
     },
     "dates": {
         "today": "今日",
@@ -1022,13 +1046,13 @@
         "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
-        "week": "{time, plural, one {# week} other {# weeks}}",
-        "month": "{time, plural, one {# month} other {# months}}",
-        "year": "{time, plural, one {# year} other {# years}}"
+        "second": "{time, plural, one {1 秒} other {# 秒}}",
+        "minute": "{time, plural, one {1分钟} other {# 分钟}}",
+        "hour": "{time, plural, one {1小时} other {# 小时}}",
+        "day": "{time, plural, one {1 天} other {# 天}}",
+        "week": "{time, plural, one {1 周} other {# 周}}",
+        "month": "{time, plural, one {1 月} other {# 月}}",
+        "year": "{time, plural, one {1 年} other {# 年}}"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
@@ -1041,7 +1065,7 @@
         "updateError": "更新过程中发生错误，请重试",
         "restartInstall": "重新启动后安装",
         "calcMinutesRemaining": "正在计算剩余分钟...",
-        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
         "accountsSynchronized": "钱包同步完成",
         "fundsAvailableSoon": "您的资金将很快变为可用资金。",
@@ -1062,7 +1086,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "duplicate": "同名配置文件已存在。",
             "delete": {
                 "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
@@ -1083,16 +1107,17 @@
             "similar": "这是一个与常用密码很类似的密码。",
             "word": "单个单词容易被猜测到。",
             "incorrect": "您的密码不正确。",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "您的 PIN 必须是 {length, plural, one {1 个数字} other {# 个数字}}。",
             "match": "PIN 码不匹配",
             "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
             "duplicate": "此名称的钱包已经存在",
             "tilde": "配置名称不能以“~”字符开头。",
@@ -1104,7 +1129,7 @@
             "syncing": "钱包同步时出错。"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
             "amountTooHigh": "这大于您可用的余额。",
             "amountNoFloat": "如果单位是 `i`，你不能使用小数点。",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
@@ -1147,9 +1172,9 @@
             "invalid": "备份文件无法识别。",
             "destination": "备份路径无效。",
             "mnemonic": "助记符无效。",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedTooShort": "私钥种子的长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
+            "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写"
         },
@@ -1257,7 +1282,13 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "您目前正在使用一个开发者配置并已连接到 {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

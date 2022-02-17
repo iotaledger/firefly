@@ -287,7 +287,7 @@
         "settings": {
             "settings": "설정",
             "generalSettings": {
-                "title": "일반 설정",
+                "title": "일반",
                 "description": "앱 모양 및 기타 일반 설정 구성"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "비밀번호 변경 및 다른 보안 관련 설정들"
             },
             "advancedSettings": {
-                "title": "고급 설정",
+                "title": "고급",
                 "description": "고급 사용자들을 위한 도구들 및 설정들"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "테마",
                 "description": "",
-                "advice": "시스템 테마를 적용하려면 Firefly 앱을 다시 시작하십시오."
+                "advice": "시스템 테마를 적용하려면 Firefly 앱을 다시 시작하십시오"
             },
             "language": {
                 "title": "언어",
@@ -350,6 +350,11 @@
                 "newPincode": "새 PIN",
                 "confirmNewPincode": "새 PIN 확인",
                 "action": "PIN 변경하기"
+            },
+            "changeProfileName": {
+                "title": "프로필 이름 변경",
+                "description": "내 Firefly 프로필 이름을 바꿉니다",
+                "success": "프로필 이름을 변경했습니다"
             },
             "balanceFinder": {
                 "title": "잔고 찾기",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "색상 선택",
+                "hexCode": "색상 헥스 코드"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "개발자 프로필을 생성하고 있습니다",
             "body": "기본적으로 Chrysalis Devnet에 연결될 것이며, 수동으로 네트워크를 전환할 수 있습니다. 무엇을 하고 있는지 잘 알고 있는 경우에만 계속 진행하십시오."
+        },
+        "legalUpdate": {
+            "tosTitle": "서비스 약관",
+            "privPolicyTitle": "개인정보 보호 정책",
+            "tosAndPrivPolicyBody": "Firefly 서비스 약관 및 개인정보 보호 정책을 갱신했습니다.",
+            "tosBody": "Firefly 서비스 약관을 갱신했습니다.",
+            "privPolicyBody": "Firefly 개인정보 보호 정책을 갱신했습니다.",
+            "tosAndPrivPolicyCheckbox": "변경된 서비스 약관 및 개인정보 보호 정책을 읽었으며 이에 동의합니다",
+            "tosCheckbox": "변경된 서비스 약관을 읽었으며 이에 동의합니다",
+            "privPolicyCheckbox": "변경된 개인정보 보호 정책을 읽었으며 이에 동의합니다"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "시스템",
         "balance": "잔고",
         "accountBalance": "지갑 잔고",
+        "all": "전부",
         "incoming": "받음",
         "outgoing": "보냄",
         "totalIn": "전체 받은 양",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
+        "yourWallets": "Your Wallets",
         "unknown": "알 수 없음",
         "none": "없음",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staking 자금",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "지갑 색상"
     },
     "dates": {
         "today": "오늘",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
             "empty": "새 지갑을 만들기 전에 아직 사용하지 않은 기존 지갑을 사용해야 합니다.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "이 지갑을 삭제하려면 지갑에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 지갑이 이미 있습니다.",
             "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "현재 개발자 프로필을 사용하는 중이며 {networkName} 네트워크에 연결되었습니다"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

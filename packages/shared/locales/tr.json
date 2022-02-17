@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Ayarlar",
             "generalSettings": {
-                "title": "Genel ayarlar",
+                "title": "Görünümler -> ayarlar -> genel Ayarlar -> başlık",
                 "description": "Uygulamanızın görünümünü ve diğer genel ayarları düzenleyin"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Parolanızı değiştirin ve güvenlikle ilgili ayarları yapın"
             },
             "advancedSettings": {
-                "title": "Gelişmiş Ayarlar",
+                "title": "Görünümler -> ayarlar -> gelişmiş Ayarlar -> başlık",
                 "description": "Teknik kullanıcılar için araçlar ve manuel ayarlar"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Sistem temasındaki değişikliklerin geçerli olması için Firefly uygulamasını yeniden başlatın"
+                "advice": "Sistem temasındaki değişikliklerin yürürlüğe girmesi için lütfen Firefly uygulamasını yeniden başlatın"
             },
             "language": {
                 "title": "Dil",
@@ -350,6 +350,11 @@
                 "newPincode": "Yeni PIN",
                 "confirmNewPincode": "Yeni PIN'i doğrulayın",
                 "action": "PIN'i değiştir"
+            },
+            "changeProfileName": {
+                "title": "görünümler -> ayarlar -> profil adını değiştir -> başlık",
+                "description": "görünümler -> ayarlar -> profil adını değiştir -> açıklama",
+                "success": "görünümler -> ayarlar -> profil adını değiştir -> başarılı"
             },
             "balanceFinder": {
                 "title": "Bakiye bulucu",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "IOTA'da büyük yenilikleri ilerletmek için teşvik edilen evreleme ağı. Ne olursa olsun, olur. Shimmer'ın nasıl gelişeceği size kalmış."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Görünümler -> seçici -> renk -> başlık",
+                "hexCode": "Görünümler -> seçici -> renk -> hexkodu"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Bir geliştirici profili oluşturuyorsunuz",
             "body": "Varsayılan olarak Chrysalis Devnet'e bağlanacaksınız ve ağları manuel olarak değiştirebilirsiniz. Sadece ne yaptığınızı biliyorsanız devam edin."
+        },
+        "legalUpdate": {
+            "tosTitle": "Kullanım Şartları",
+            "privPolicyTitle": "Gizlilik Politikası",
+            "tosAndPrivPolicyBody": "Firefly'ın Hizmet Koşullarını ve Gizlilik Politikasını güncelledik.",
+            "tosBody": "Firefly'ın Hizmet Koşullarını güncelledik.",
+            "privPolicyBody": "Firefly'ın Gizlilik Politikasını güncelledik.",
+            "tosAndPrivPolicyCheckbox": "Güncellenmiş Hizmet Koşullarını ve Gizlilik Politikasını okudum ve kabul ediyorum",
+            "tosCheckbox": "Güncellenmiş Hizmet Şartlarını okudum ve kabul ediyorum",
+            "privPolicyCheckbox": "Güncellenmiş Gizlilik Politikasını okudum ve kabul ediyorum"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Sistem",
         "balance": "Bakiye",
         "accountBalance": "Cüzdan Bakiyesi",
+        "all": "Genel -> hepsi",
         "incoming": "Gelen",
         "outgoing": "Giden",
         "totalIn": "Toplam giriş",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
         "version": "Sürüm {version}",
+        "yourWallets": "Genel -> Cüzdanlarınız",
         "unknown": "Bilinmeyen",
         "none": "Hiçbiri",
         "staked": "Stake edildi",
@@ -1011,7 +1034,8 @@
         "unstaking": "Stake geri alınıyor",
         "notStaked": "Stake edilmemiş",
         "stakedFunds": "Stake edilen fonlar",
-        "unstakedFunds": "Tahsis edilmemiş fonlar"
+        "unstakedFunds": "Tahsis edilmemiş fonlar",
+        "accountColor": "Genel -> hesap rengi"
     },
     "dates": {
         "today": "Bugün",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Cüzdan adınız şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n",
             "empty": "Yenisini oluşturmadan önce en son cüzdanınızı kullanmalısınız.",
+            "emptyName": "hata -> hesap -> boş ad",
             "notEmpty": "Bu cüzdanı silmeden önce bakiyenizi transfer etmelisiniz.",
             "duplicate": "Bu isimde bir cüzdan zaten var.",
             "tilde": "Profile ismi '~' karakteri ile başlayamaz.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Şu anda bir geliştirici profili kullanıyorsunuz ve şuraya bağlısınız {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Izinler -> kamera -> istek.",
+            "requestInAppSettings": "Izinler -> kamera -> Uygulama Ayarları isteğinde bulunun."
         }
     }
 }

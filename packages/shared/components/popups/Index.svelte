@@ -11,6 +11,7 @@
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
+    import CrashReporting from './CrashReporting.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -42,6 +43,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import LegalUpdate from './LegalUpdate.svelte'
     import { mobile } from 'shared/lib/app'
     import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte';
 
@@ -105,6 +107,7 @@
         switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
+        crashReporting: CrashReporting,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
@@ -121,7 +124,8 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
         governanceCastVote: GovernanceCastVote,
-        success: Success
+        success: Success,
+        legalUpdate: LegalUpdate,
     }
 
     const onKey = (e) => {

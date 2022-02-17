@@ -62,20 +62,20 @@
 
 {#if $mobile}
     <button
-        class="absolute top-10 right-8 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+        class="menu-button z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
         on:click={() => drawer.open()}>
         <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
     </button>
     <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex">
         <div class="flex flex-col flex-1">
-            <div
-                class="cursor-pointer w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
+            <header
+                class="w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
                 on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
                     {locale($settingsRoute === SettingsRoutes.Init ? 'general.yourWallets' : `views.settings.${$settingsRoute}.title`)}
                 </Text>
-            </div>
+            </header>
             {#if $settingsRoute === SettingsRoutes.Init}
                 <!-- TODO: add real profile data -->
                 <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
@@ -137,5 +137,16 @@
     :global(body.platform-win32) aside {
         @apply -top-12;
         @apply pt-12;
+    }
+    .menu-button {
+        position: absolute;
+        top: calc(env(safe-area-inset-top) * 2.2);
+        right: 30px;
+    }
+    header {
+        position: sticky;
+        top: 0;
+        padding-top: calc(env(safe-area-inset-top) * 2.2);
+        z-index: 10;
     }
 </style>

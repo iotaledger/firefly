@@ -1,35 +1,42 @@
 <script lang="typescript">
-    import { Idle, Sidebar, DeveloperProfileIndicator } from 'shared/components'
-    import { Settings, Staking, Wallet, Governance } from 'shared/routes'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive,parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { isPollingLedgerDeviceStatus,pollLedgerDeviceStatus,stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { ongoingSnapshot,openSnapshotPopup } from 'shared/lib/migration'
-    import { clearPollNetworkInterval,pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
-    NOTIFICATION_TIMEOUT_NEVER,
-    removeDisplayNotification,
-    showAppNotification
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification,
     } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval,pollParticipationOverview } from 'shared/lib/participation'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
-    import { closePopup,openPopup,popupState } from 'shared/lib/popup'
-    import { activeProfile,isLedgerProfile,isSoftwareProfile,updateProfile } from 'shared/lib/profile'
-    import { accountRoute,dashboardRoute,routerNext,settingsChildRoute,settingsRoute,walletRoute } from 'shared/lib/router'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import {
+        accountRoute,
+        dashboardRoute,
+        routerNext,
+        settingsChildRoute,
+        settingsRoute,
+        walletRoute,
+    } from 'shared/lib/router'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes,AdvancedSettings,SettingsRoutes,Tabs,WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
-    api,
-    isBackgroundSyncing,
-    selectedAccountId,
-    STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
-    wallet
+        api,
+        isBackgroundSyncing,
+        selectedAccountId,
+        STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
+        wallet,
     } from 'shared/lib/wallet'
-    import { onDestroy,onMount } from 'svelte'
+    import { Governance, Settings, Staking, Wallet } from 'shared/routes'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale: Locale
@@ -116,6 +123,16 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+
+        /**
+         * NOTE: We check for mobile because it's only necessary
+         * for existing desktop installation.
+         */
+        if (!mobile && !$isAwareOfCrashReporting) {
+            openPopup({
+                type: 'crashReporting',
+            })
+        }
     })
 
     onDestroy(() => {
@@ -124,7 +141,6 @@
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
-
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
@@ -197,9 +213,15 @@
                         ...parsedDeepLink.params,
                         isInternal: false,
                     })
-                    showAppNotification({ type: parsedDeepLink.notification.type, message: parsedDeepLink.notification.message })
+                    showAppNotification({
+                        type: parsedDeepLink.notification.type,
+                        message: parsedDeepLink.notification.message,
+                    })
                 } else {
-                    showAppNotification({ type: 'error', message: locale('notifications.deepLinkingRequest.invalidFormat') })
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('notifications.deepLinkingRequest.invalidFormat'),
+                    })
                 }
                 Platform.DeepLinkManager.clearDeepLinkRequest()
             }
@@ -262,8 +284,14 @@
     }
 </script>
 
+<style type="text/scss">
+    :global(:not(body.platform-win32)) .dashboard-wrapper {
+        margin-top: calc(env(safe-area-inset-top) / 2);
+    }
+</style>
+
 <Idle />
-<div class="flex flex-row w-full h-full">
+<div class="dashboard-wrapper flex flex-row w-full h-full">
     <Sidebar {locale} />
     <!-- Dashboard Pane -->
     <div class="flex flex-col w-full h-full">
