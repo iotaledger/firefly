@@ -37,7 +37,8 @@
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
                         on:click={() => handleLanguage(language)}
-                        class:active={language?.label === locales[$appSettings.language]}>
+                        class:active={language?.label === locales[$appSettings.language]}
+                    >
                         <Text type="p" smaller>{language?.label}</Text>
                     </button>
                 {/each}
@@ -47,7 +48,8 @@
                 sortItems={true}
                 onSelect={handleLanguage}
                 value={locales[$appSettings.language]}
-                items={languageList} />
+                items={languageList}
+            />
         {/if}
     </div>
     <div slot="leftpane__action">

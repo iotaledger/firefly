@@ -30,7 +30,8 @@
 <wallet-balance
     class="relative z-0 bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-xl px-8"
     class:compressed={$walletRoute !== WalletRoutes.Init}
-    class:mobile={$mobile}>
+    class:mobile={$mobile}
+>
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-5">
         {#if !$mobile}
             <p class="text-11 leading-120 text-white uppercase tracking-widest">{locale('general.balance')}</p>
@@ -42,7 +43,8 @@
         width="100%"
         height="auto"
         src={`assets/patterns/${darkModeEnabled ? 'wallet-balance-darkmode.svg' : 'wallet-balance.svg'}`}
-        alt="" />
+        alt=""
+    />
     {#if $walletRoute === WalletRoutes.Init || $mobile}
         {#if $accounts.length > 0 || $mobile}
             <!-- Action Send / Receive -->

@@ -115,7 +115,8 @@
         locale={localize}
         placeholder={localize('general.currentPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword} />
+        submitHandler={changePassword}
+    />
     <Password
         error={newPasswordError}
         classes="mb-4"
@@ -127,7 +128,8 @@
         locale={localize}
         placeholder={localize('general.newPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword} />
+        submitHandler={changePassword}
+    />
     <Password
         classes="mb-5"
         bind:value={confirmedPassword}
@@ -135,18 +137,21 @@
         locale={localize}
         placeholder={localize('general.confirmNewPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword} />
+        submitHandler={changePassword}
+    />
     <Checkbox
         classes="mb-5"
         label={localize('actions.exportNewStronghold')}
         bind:checked={exportStrongholdChecked}
-        disabled={passwordChangeBusy} />
+        disabled={passwordChangeBusy}
+    />
     <div class="flex flex-row items-center">
         <Button
             medium
             form="form-change-password"
             type="submit"
-            disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
+            disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}
+        >
             {localize('views.settings.changePassword.title')}
         </Button>
         <Spinner busy={passwordChangeBusy} message={passwordChangeMessage} classes="ml-2" />

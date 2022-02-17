@@ -31,11 +31,11 @@
 
         Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
             draw: function () {
-                const {ctx} = this._chart
+                const { ctx } = this._chart
                 const vm = this._view
 
                 let left, right, top, bottom, signX, signY, borderSkipped
-                let {borderWidth} = vm
+                let { borderWidth } = vm
 
                 if (!vm.horizontal) {
                     left = vm.x - vm.width / 2
@@ -90,7 +90,14 @@
                 ctx.strokeStyle = vm.borderColor
                 ctx.lineWidth = borderWidth
 
-                Chart.helpers.drawRoundedTopRectangle(ctx, left, top - barRadius + 1, barWidth, bottom - prevTop, barRadius)
+                Chart.helpers.drawRoundedTopRectangle(
+                    ctx,
+                    left,
+                    top - barRadius + 1,
+                    barWidth,
+                    bottom - prevTop,
+                    barRadius
+                )
 
                 ctx.fill()
                 if (borderWidth) {
@@ -119,7 +126,7 @@
                     hoverBackgroundColor: fullConfig.theme.colors[dataset.color]?.['500'] || color,
                     barThickness: 7,
                     ...dataset,
-                }))
+                })),
             },
             options: {
                 animation: false,

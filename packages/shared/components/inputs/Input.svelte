@@ -126,8 +126,14 @@
             bind:this={inputElement}
             {maxlength}
             class="w-full text-12 leading-140 border border-solid
-                {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
-                {isFocused ? 'border-blue-500' : error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+                {disabled
+                ? 'text-gray-400 dark:text-gray-700'
+                : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
+                {isFocused
+                ? 'border-blue-500'
+                : error
+                ? 'border-red-300 hover:border-red-500 focus:border-red-500'
+                : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
@@ -135,13 +141,14 @@
             on:keyup={onKeyCaps}
             on:paste={onPaste}
             on:contextmenu={handleContextMenu}
-            on:focus={() => hasFocus = true}
-            on:blur={() => hasFocus = false}
+            on:focus={() => (hasFocus = true)}
+            on:blur={() => (hasFocus = false)}
             {disabled}
             {...$$restProps}
             {placeholder}
             {style}
-            spellcheck={false} />
+            spellcheck={false}
+        />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}

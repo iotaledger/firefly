@@ -116,6 +116,12 @@
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>
-        <BackupToFile on:next={_next} on:previous={_previous} {busy} strongholdPassword={$strongholdPassword} {locale} />
+        <BackupToFile
+            on:next={_next}
+            on:previous={_previous}
+            {busy}
+            strongholdPassword={$strongholdPassword}
+            {locale}
+        />
     </Transition>
 {/if}

@@ -30,4 +30,5 @@
 <Dropdown
     onSelect={updateLockTimeout}
     value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
-    items={lockOptions} />
+    items={lockOptions}
+/>

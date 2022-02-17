@@ -1,17 +1,24 @@
 <script lang="typescript">
-    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n,_ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, openSettings, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import {
+        dashboardRoute,
+        initRouter,
+        openSettings,
+        routerNext,
+        routerPrevious,
+        walletRoute,
+    } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy, onMount } from 'svelte'
@@ -35,7 +42,7 @@
         Settings,
         Setup,
         Splash,
-        Welcome
+        Welcome,
     } from 'shared/routes'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
@@ -44,7 +51,9 @@
         Electron.updateAppSettings({ sendCrashReports })
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
-    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: $appSettings.darkMode
+        ? document.body.classList.add('scheme-dark')
+        : document.body.classList.remove('scheme-dark')
 
     $: {
         isLocaleLoaded.subscribe((loaded) => {

@@ -38,7 +38,7 @@
 
     const handleChoice = (word) => {
         if ($mobile) {
-            let wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
+            const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
             wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
         verifyRecoveryPhrase[verifyIndex] = word
@@ -81,7 +81,8 @@
                     <button
                         type="button"
                         class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
-                        on:click={() => handleChoice(word)}>
+                        on:click={() => handleChoice(word)}
+                    >
                         <Text smaller classes="ml-3">{word}</Text>
                         <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
                     </button>
@@ -108,7 +109,8 @@
                 <button
                     type="button"
                     class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
-                    on:click={() => handleChoice(word)}>
+                    on:click={() => handleChoice(word)}
+                >
                     <Text smaller classes="ml-3">{word}</Text>
                     <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
                 </button>
@@ -117,7 +119,8 @@
     </div>
     <div
         slot="rightpane"
-        class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}">
+        class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}"
+    >
         {#if ($mobile && !verified) || !$mobile}
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {verifyRecoveryPhrase} disabled={busy} />
         {/if}
