@@ -1,4 +1,4 @@
-package com.iota.wallet;
+package org.iota.firefly;
 
 import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
