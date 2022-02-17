@@ -44,3 +44,5 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  * participation information.
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
+
+export const TREASURY_VOTE_EVENT_ID = '01fa9037f57cec5ced5b4b3525cc0e4952bf2f7707822ea9e3dbb637e2229f33'
