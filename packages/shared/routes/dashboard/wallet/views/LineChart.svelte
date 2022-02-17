@@ -14,7 +14,7 @@
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
-    import { wallet } from 'shared/lib/wallet'
+    import { selectedAccount, wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
 
@@ -22,7 +22,6 @@
 
     const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
     const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
-    const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const chartTypeDropdownItems: { value: string; label: string }[] = []

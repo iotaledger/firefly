@@ -49,6 +49,7 @@
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
+        selectedAccount,
         selectedAccountId,
         transferState,
         updateBalanceOverview,
@@ -77,9 +78,6 @@
     )
     const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
         getWalletBalanceHistory($accountsBalanceHistory)
-    )
-    const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
-        $accounts.find((acc) => acc.id === $selectedAccountId)
     )
     const accountTransactions = derived([selectedAccount], ([$selectedAccount]) =>
         $selectedAccount ? getAccountMessages($selectedAccount) : []

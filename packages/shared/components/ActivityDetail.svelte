@@ -38,7 +38,6 @@
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount

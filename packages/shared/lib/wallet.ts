@@ -1,7 +1,7 @@
 import type { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
 import type { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
@@ -126,6 +126,9 @@ export const resetWallet = (): void => {
 }
 
 export const selectedAccountId = writable<string | null>(null)
+export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $selectedAccountId)
+)
 
 export const selectedMessage = writable<Message | null>(null)
 

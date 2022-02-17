@@ -7,7 +7,7 @@
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
 
@@ -18,24 +18,23 @@
     export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
-    const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    let selectedAccount = $currentAccount || $liveAccounts[0]
+    let selectedSendAccount = $selectedAccount
 
     const handleDropdownSelect = (item: WalletAccount): void => {
-        selectedAccount = item
+        selectedSendAccount = item
     }
     const generateNewAddress = (): void => {
-        onGenerateAddress(selectedAccount.id)
+        onGenerateAddress(selectedSendAccount.id)
     }
     const handleCloseClick = (): void => {
         accountRoute.set(AccountRoutes.Init)
     }
 </script>
 
-<div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
+<div class="w-full h-full flex flex-col justify-between {!$selectedAccount ? 'p-8' : ''}">
     <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-        {#if !$currentAccount}
+        {#if !$selectedAccount}
             <div>
                 <div class="w-full flex flex-row justify-between items-start">
                     <Text type="h5" classes="mb-6">{locale('general.receiveFunds')}</Text>
@@ -45,7 +44,7 @@
                 </div>
                 <Dropdown
                     valueKey={'alias'}
-                    value={selectedAccount.alias}
+                    value={selectedSendAccount.alias}
                     items={$liveAccounts}
                     onSelect={handleDropdownSelect}
                     disabled={$liveAccounts.length === 1}
@@ -82,7 +81,7 @@
                     </button>
                 </div>
                 <div class="flex flex-auto items-center justify-center mb-4">
-                    <QR size={98} data={selectedAccount.depositAddress} />
+                    <QR size={98} data={selectedSendAccount.depositAddress} />
                 </div>
                 <div class="mb-6">
                     <Text secondary smaller classes="mb-1">
@@ -90,12 +89,12 @@
                             ? `${$activeProfile.settings.networkConfig.network.name} ${locale('general.address')}`
                             : locale('general.myAddress')}
                     </Text>
-                    <Text type="pre">{selectedAccount.depositAddress}</Text>
+                    <Text type="pre">{selectedSendAccount.depositAddress}</Text>
                 </div>
                 <Button
                     disabled={isGeneratingAddress}
                     classes="w-full"
-                    onClick={() => setClipboard(selectedAccount.depositAddress)}
+                    onClick={() => setClipboard(selectedSendAccount.depositAddress)}
                 >
                     {locale('general.copyAddress')}
                 </Button>

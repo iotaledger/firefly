@@ -2,13 +2,10 @@
     import { Button, Text } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
+    import { selectedAccount, selectedAccountId } from 'shared/lib/wallet'
     import { ManageAccount, Receive, Send } from '.'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -20,7 +17,6 @@
 
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     function handleSendClick() {
         accountRoute.set(AccountRoutes.Send)
     }
@@ -45,5 +41,5 @@
 {:else if $accountRoute === AccountRoutes.Send}
     <Send {onSend} {onInternalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} alias={$account.alias} account={$account} />
+    <ManageAccount {locale} alias={$selectedAccount.alias} account={$selectedAccount} />
 {/if}
