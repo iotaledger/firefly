@@ -68,7 +68,8 @@
     {locale}
     classes="relative"
     showLedgerProgress={legacyLedger}
-    showLedgerVideoButton={legacyLedger}>
+    showLedgerVideoButton={legacyLedger}
+>
     <div slot="title">
         <Text type="h2">{locale('views.securityCheckCompleted.title')}</Text>
     </div>
@@ -82,7 +83,8 @@
                     {locale}
                     selected={selectedAddresses.find((_address) => _address.id === address.id)}
                     showRiskLevel
-                    onClick={() => onAddressClick(address)} />
+                    onClick={() => onAddressClick(address)}
+                />
             {/each}
         </div>
     </div>

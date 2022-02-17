@@ -10,7 +10,9 @@
 {#if $appSettings.sendCrashReports !== $initAppSettings.sendCrashReports}
     <TextHint
         icon="exclamation"
-        hint={localize('views.settings.crashReporting.advice', { values: { sendCrashReports: $appSettings.sendCrashReports } })}
+        hint={localize('views.settings.crashReporting.advice', {
+            values: { sendCrashReports: $appSettings.sendCrashReports },
+        })}
         classes="mt-4"
     />
 {/if}

@@ -88,7 +88,8 @@
                 onSettingClick={(id) => scrollIntoView(id)}
                 icons={SettingsIcons}
                 {settings}
-                bind:route={$settingsRoute} />
+                bind:route={$settingsRoute}
+            />
         {/if}
         <div class="h-full w-full pb-10">
             {#if !$mobile}

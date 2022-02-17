@@ -10,7 +10,7 @@
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import type { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
-    import type { DateDiff } from 'shared/lib/typings/wallet';
+    import type { DateDiff } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -41,7 +41,6 @@
     $: checkHardwareDeviceStatus($ledgerDeviceState)
     $: setup(), profiles // Runs setup when profiles changes
 
-
     onMount(() => {
         setup()
     })
@@ -59,7 +58,8 @@
     }
 
     function checkHardwareDeviceStatus(state: LedgerDeviceState): void {
-        const values: LocaleArgs = state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
+        const values: LocaleArgs =
+            state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
         /**
@@ -119,13 +119,16 @@
             <!-- Stronghold backup -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdBackup.title')}
-                message={$activeProfile?.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                message={$activeProfile?.lastStrongholdBackupTime
+                    ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                           values: { time: lastBackupDateFormatted.value },
-                      }) : locale('popups.backup.notBackedUp')}
+                      })
+                    : locale('popups.backup.notBackedUp')}
                 onClick={() => handleSecurityTileClick('backup')}
                 icon="shield"
                 warning={!backupSafe}
-                {color} />
+                {color}
+            />
         {:else}
             <!-- Ledger profile backup -->
             <SecurityTile
@@ -133,28 +136,35 @@
                 message={''}
                 icon="shield"
                 color="gray"
-                disabled />
+                disabled
+            />
         {/if}
         <!-- Firefly version -->
         <SecurityTile
-            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
+            title={locale('views.dashboard.security.version.title', {
+                values: { version: $versionDetails.currentVersion },
+            })}
             message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             warning={!$versionDetails.upToDate}
             icon="firefly"
-            onClick={() => handleSecurityTileClick('version')} />
+            onClick={() => handleSecurityTileClick('version')}
+        />
         {#if $isSoftwareProfile}
             <!-- Stronghold status -->
             <SecurityTile
                 title={locale('views.dashboard.security.strongholdStatus.title')}
-                message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
+                message={locale(
+                    `views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
+                )}
                 color="yellow"
                 icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-                onClick={() => $isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold()}
+                onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
                 classes="col-span-2"
                 toggle
                 wide
-                toggleActive={!$isStrongholdLocked} />
+                toggleActive={!$isStrongholdLocked}
+            />
         {:else}
             <!-- Hardware Device -->
             <SecurityTile
@@ -167,7 +177,8 @@
                 refreshIcon
                 loading={isCheckingLedger}
                 classes="col-span-2"
-                wide />
+                wide
+            />
         {/if}
     </div>
 </div>

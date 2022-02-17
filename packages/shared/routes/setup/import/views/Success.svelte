@@ -38,6 +38,9 @@
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation
             classes="setup-anim-aspect-ratio"
-            animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+            animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic
+                ? 'import-from-text-success-desktop'
+                : 'import-from-file-success-desktop'}
+        />
     </div>
 </OnboardingLayout>

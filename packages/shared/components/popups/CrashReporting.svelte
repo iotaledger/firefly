@@ -15,7 +15,7 @@
     }
 
     const handleConfirmClick = () => {
-        appSettings.set(<AppSettings>{ ...$appSettings, sendCrashReports, })
+        appSettings.set(<AppSettings>{ ...$appSettings, sendCrashReports })
 
         closePopup()
     }
