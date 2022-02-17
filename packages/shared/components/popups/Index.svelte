@@ -16,6 +16,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import GovernanceCastVote from './GovernanceCastVote.svelte'
     import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
@@ -35,6 +36,7 @@
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
     import StakingNotice from './StakingNotice.svelte'
+    import Success from './Success.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
@@ -118,6 +120,8 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
+        governanceCastVote: GovernanceCastVote,
+        success: Success
     }
 
     const onKey = (e) => {

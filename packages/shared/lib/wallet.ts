@@ -11,9 +11,9 @@ import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+import { getPendingParticipation, isParticipationPending, removePendingParticipations } from './participation/stores'
 // PARTICIPATION
-import { ParticipationAction, PendingParticipation } from './participation/types'
+import type { PendingParticipation } from './participation/types'
 import { Platform } from './platform'
 import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
@@ -565,12 +565,9 @@ function displayParticipationNotification(pendingParticipation: PendingParticipa
 
         showAppNotification({
             type: 'info',
-            message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
-                }Successfully`,
-                { values: { account: account.alias } }
-            ),
+            message: localize(`notifications.success.${pendingParticipation.action}`, {
+                values: { account: account.alias },
+            }),
         })
     }
 }
@@ -703,7 +700,7 @@ export const initialiseListeners = (): void => {
             const { message } = response.payload
 
             // Checks if this was a message sent for participating in an event
-            if (hasPendingParticipation(message.id)) {
+            if (isParticipationPending(message.id)) {
                 // Instantly pull in latest participation overview.
                 await getParticipationOverview()
 

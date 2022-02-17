@@ -7,9 +7,6 @@
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import type { Locale } from 'shared/lib/typings/i18n'
-
-    export let locale: Locale
 
     const { accounts } = get(wallet)
 
@@ -45,6 +42,6 @@
                     onClick={() => handleAccountClick(acc.id)} />
             {/each}
         </div>
-        <GovernanceEventDetails {event} {locale} />
+        <GovernanceEventDetails {event}/>
     {/if}
 </div>

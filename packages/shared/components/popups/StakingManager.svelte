@@ -133,7 +133,7 @@
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($accountToParticipate?.id, participations)
+                await participate($accountToParticipate?.id, participations, $participationAction)
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
@@ -144,7 +144,7 @@
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS)
+                await stopParticipating($accountToParticipate?.id, STAKING_EVENT_IDS, $participationAction)
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
