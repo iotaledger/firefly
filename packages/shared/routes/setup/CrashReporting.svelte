@@ -2,11 +2,10 @@
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
 
     export let locale: Locale
-    export let mobile
 
     const busy = false
     let sendCrashReports = true
@@ -28,8 +27,10 @@
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
-    <div slot="leftpane__content">
+    <div slot="title">
         <Text type="h2" classes="mb-5">{locale('views.crashReporting.title')}</Text>
+    </div>
+    <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{locale('views.crashReporting.body')}</Text>
     </div>
     <div slot="leftpane__action">
