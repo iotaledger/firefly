@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-    appId: 'com.iota.wallet',
+    appId: 'org.iota.firefly',
     appName: 'Firefly',
     webDir: 'public',
     bundledWebRuntime: false,
