@@ -5,7 +5,7 @@
     import { formatDate } from 'shared/lib/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile,getColor } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { Payload } from 'shared/lib/typings/message'
@@ -18,7 +18,7 @@
         getInternalFlag,
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
-        sendAddressFromTransactionPayload
+        sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -58,7 +58,7 @@
         if (txPayload) {
             return receiverAddressesFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
-            const {funds} = milestonePayload.data.essence.receipt.data
+            const { funds } = milestonePayload.data.essence.receipt.data
 
             const firstAccount = $accounts.find((acc) => acc.index === 0)
             const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
@@ -113,20 +113,27 @@
             value = txPayload.data.essence.data.value
         }
     }
-    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+    $: currencyValue = convertToFiat(
+        value,
+        $currencies[CurrencyTypes.USD],
+        $exchangeRates[$activeProfile?.settings.currency]
+    )
     $: senderColor = getColor($activeProfile, senderAccount?.id) as string
     $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
 </script>
 
 <div class="flex flex-col h-full min-h-0">
     <div
-        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed && 'opacity-50'}">
+        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+            'opacity-50'}"
+    >
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if senderAccount}
                 <div
                     style="--account-color: {senderColor}"
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
-                    {isBright(senderColor) ? 'text-gray-900' : 'text-white'}">
+                    {isBright(senderColor) ? 'text-gray-900' : 'text-white'}"
+                >
                     {getInitials(senderAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
@@ -142,7 +149,8 @@
                 <div
                     style="--account-color: {receiverColor}"
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
-                    {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}">
+                    {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}"
+                >
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
                 <Text smaller>{locale('general.you')}</Text>
@@ -176,9 +184,7 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.messageId')}</Text>
                 <div class="flex flex-row justify-between items-center">
-                    <Link
-                        onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
-                    >
+                    <Link onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}>
                         <Text highlighted type="pre">{id}</Text>
                     </Link>
                     <CopyButton itemToCopy={id} />
@@ -189,10 +195,12 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.inputAddress')}</Text>
                 <div class="flex flex-row justify-between items-center">
-                    <Text type="pre"> {senderAddress} </Text>
+                    <Text type="pre">{senderAddress}</Text>
                     <CopyButton itemToCopy={senderAddress} />
                 </div>
-                <Text type="pre">{#if senderAccount} ({senderAccount.alias}) {/if}</Text>
+                <Text type="pre"
+                    >{#if senderAccount} ({senderAccount.alias}) {/if}</Text
+                >
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
@@ -200,7 +208,7 @@
                 <Text secondary>{locale('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver, idx}
                     <div class="flex flex-row justify-between items-center">
-                        <Text type="pre"> {receiver} </Text>
+                        <Text type="pre">{receiver}</Text>
                         <CopyButton itemToCopy={receiver} />
                     </div>
                     <Text type="pre" classes="mb-2 mt-0">

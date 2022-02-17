@@ -16,11 +16,12 @@
         "husky": "^7.0.0",
         "lint-staged": "^12.3.3",
         "patch-package": "^6.2.2",
-        "prettier": "^2.3.2"
+        "prettier": "^2.3.2",
+        "prettier-plugin-svelte": "^2.6.0"
     },
     "scripts": {
-        "format": "prettier -w \"**/*.{ts,js,json,scss,css}\"",
-        "format-check": "prettier -c \"**/*.{ts,js,json,scss,css}\"",
+        "format": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
+        "format-check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
         "lint": "eslint . --cache",
         "lint-debug": "eslint . --cache --debug",
         "lint-fix": "eslint . --cache --fix",
@@ -37,6 +38,6 @@
     },
     "lint-staged": {
         "*.{ts,js,scss,css,svelte}": "eslint --cache --fix",
-        "*.{ts,js,json,scss,css}": "prettier --write"
+        "*.{ts,js,json,scss,css,svelte}": "prettier --write"
     }
 }

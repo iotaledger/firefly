@@ -82,11 +82,13 @@
     class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
     use:clickOutside={{ includeScroll: true }}
     on:clickOutside={() => (nodeContextMenu = undefined)}
-    style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
+    style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
+>
     {#if !nodeContextMenu?.isDisabled}
         <button
             on:click={() => handleSetPrimaryNode(nodeContextMenu)}
-            class={'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            class={'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             <Text smaller>{localize('views.settings.configureNodeList.setAsPrimary')}</Text>
         </button>
         <button
@@ -94,7 +96,8 @@
                 handleViewNodeInfoClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+        >
             <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
         </button>
     {/if}
@@ -106,7 +109,8 @@
                 handleEditNodeDetailsClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+        >
             <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
         </button>
     {/if}
@@ -120,9 +124,14 @@
                 }))
                 nodeContextMenu = undefined
             }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+        >
             <Text smaller>
-                {localize(nodeContextMenu.isDisabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
+                {localize(
+                    nodeContextMenu.isDisabled
+                        ? 'views.settings.configureNodeList.includeNode'
+                        : 'views.settings.configureNodeList.excludeNode'
+                )}
             </Text>
         </button>
     {/if}
@@ -135,7 +144,8 @@
                 handleRemoveNodeClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+        >
             <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
         </button>
     {/if}

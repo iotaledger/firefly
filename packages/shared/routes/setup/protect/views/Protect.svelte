@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Button,OnboardingLayout,Text } from 'shared/components';
-    import type { Locale } from 'shared/lib/typings/i18n';
-    import { createEventDispatcher } from 'svelte';
+    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale
 
@@ -22,7 +22,13 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{locale('views.protect.body1')}</Text>
         <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.protect.body2')}</Text>
-        <Button icon="biometric" classes="w-full mb-5" secondary disabled onClick={() => handleContinueClick('biometric')}>
+        <Button
+            icon="biometric"
+            classes="w-full mb-5"
+            secondary
+            disabled
+            onClick={() => handleContinueClick('biometric')}
+        >
             {locale('actions.useBiometric')}
         </Button>
         <Button icon="pin" classes="w-full mb-8" secondary onClick={() => handleContinueClick('pin')}>

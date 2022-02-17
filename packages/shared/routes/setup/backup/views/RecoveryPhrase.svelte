@@ -46,8 +46,11 @@
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick('verify') : handleMnemonicVisibilityClick}>
-            {locale($mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue')}
+            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick('verify') : handleMnemonicVisibilityClick}
+        >
+            {locale(
+                $mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue'
+            )}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
@@ -64,7 +67,8 @@
                     <button
                         on:click={handleMnemonicVisibilityClick}
                         class="absolute top-10 right-10 flex flex-row items-center"
-                        type="button">
+                        type="button"
+                    >
                         <Text smaller overrideColor classes="text-blue-500 mr-2">
                             {locale(`views.recoveryPhrase.${hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'}`)}
                         </Text>

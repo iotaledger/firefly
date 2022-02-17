@@ -20,7 +20,10 @@
     const filterBy = (item) => item.payload?.data?.essence?.data?.incoming
 
     $: filtered = list.filter(
-        (item) => current === 'All' || (current === 'Incoming' && filterBy(item)) || (current === 'Outgoing' && !filterBy(item))
+        (item) =>
+            current === 'All' ||
+            (current === 'Incoming' && filterBy(item)) ||
+            (current === 'Outgoing' && !filterBy(item))
     )
 </script>
 
@@ -29,7 +32,9 @@
         {#each tabs as tab, i}
             <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
                 <button on:click={() => (current = tab)}>
-                    <Text bold={current === tab} highlighted={current === tab} secondary={current !== tab}>{locale(tab)}</Text>
+                    <Text bold={current === tab} highlighted={current === tab} secondary={current !== tab}
+                        >{locale(tab)}</Text
+                    >
                 </button>
             </li>
         {/each}

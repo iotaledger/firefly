@@ -69,7 +69,8 @@
                 <WalletPill
                     account={acc}
                     active={activeAccount.id === acc.id}
-                    onClick={() => handleAccountClick(acc.id)} />
+                    onClick={() => handleAccountClick(acc.id)}
+                />
             {/each}
         </div>
     </div>

@@ -3,7 +3,12 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import {
+        asyncSetStoragePassword,
+        asyncVerifyMnemonic,
+        asyncStoreMnemonic,
+        asyncCreateAccount,
+    } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, RepeatPin } from './views/'
