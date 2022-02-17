@@ -9,7 +9,7 @@
     export let bgColor: string
     export let onClick: (profile: Profile) => void
 
-    $: name = profile?.name
+    $: name = profile?.name ?? localize('general.addProfile')
     $: isDeveloperProfile = profile?.isDeveloperProfile
     $: isLedgerProfile = profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator
 
