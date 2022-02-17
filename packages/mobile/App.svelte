@@ -15,6 +15,7 @@
         Backup,
         Balance,
         Congratulations,
+        CrashReporting,
         Create,
         Dashboard,
         Import,
@@ -78,6 +79,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Settings}>
             <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
