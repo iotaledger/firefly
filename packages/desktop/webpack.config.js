@@ -5,6 +5,7 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -13,9 +14,14 @@ const SENTRY = process.env.SENTRY === 'true'
 
 // / ------------------------ Resolve ------------------------
 
+const tsConfigOptions = {
+    configFile: './tsconfig.json',
+}
+
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
+        '@routes': path.join(__dirname, '/../shared/lib/routes'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
@@ -23,6 +29,7 @@ const resolve = {
         path: false,
         fs: false,
     },
+    plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
 
 // / ------------------------ Output ------------------------

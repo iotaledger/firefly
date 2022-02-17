@@ -3,7 +3,12 @@
     "compilerOptions": {
         "isolatedModules": false,
         "allowJs": true,
-        "lib": ["DOM", "ESNext"]
+        "lib": ["DOM", "ESNext"],
+        "baseUrl": ".",
+        "paths": {
+            "@lib/*": ["../shared/lib/*"],
+            "@routes/*": ["../shared/routes/*"]
+        }
     },
-    "include": ["../shared/**/*.ts"]
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
 }
