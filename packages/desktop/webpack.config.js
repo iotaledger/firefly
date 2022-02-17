@@ -21,7 +21,6 @@ const tsConfigOptions = {
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
-        '@routes': path.join(__dirname, '/../shared/lib/routes'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
