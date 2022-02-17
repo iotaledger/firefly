@@ -1,13 +1,9 @@
 <script lang="typescript">
     import { createEventDispatcher, onMount } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import { ProfileType } from 'shared/lib/typings/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
-
-    export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
@@ -38,7 +34,6 @@
             <div class="mx-4 mb-8">
                 <Profile
                     bgColor="blue"
-                    {locale}
                     onClick={handleContinueClick}
                     profile={profile}
                     classes="cursor-pointer" />
@@ -47,7 +42,6 @@
         <div class="mx-4 mb-8">
             <Profile
                 onClick={addProfile}
-                {locale}
                 classes="border-solid border-2 border-gray-400 cursor-pointer">
                 <Icon icon="plus" classes="text-blue-500" />
             </Profile>
