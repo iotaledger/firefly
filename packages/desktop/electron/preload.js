@@ -36,7 +36,7 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const binding = require('wallet-nodejs-binding')
+    const binding = require('firefly-actor-system-nodejs-bindings')
     const Wallet = binding
 
     if (process.env.NODE_ENV == 'development') {
