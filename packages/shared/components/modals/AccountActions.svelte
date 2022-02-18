@@ -32,12 +32,12 @@
     }
 
     const handleViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { selectedAccount } })
+        openPopup({ type: 'addressHistory', props: { account: selectedAccount } })
         isActive = false
     }
 
     function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', props: { selectedAccount }, hideClose: false })
+        openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccount }, hideClose: false })
         isActive = false
     }
 
@@ -45,7 +45,7 @@
         openPopup({
             type: 'hideAccount',
             props: {
-                selectedAccount,
+                account: selectedAccount,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 hideAccount: (id) => {
                     if (!hiddenAccounts.includes(id)) {
@@ -66,7 +66,7 @@
         openPopup({
             type: 'deleteAccount',
             props: {
-                selectedAccount,
+                account: selectedAccount,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 deleteAccount: async (id) => {
                     await asyncRemoveWalletAccount(get(selectedAccount).id)
