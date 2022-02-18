@@ -4974,6 +4974,11 @@ find-yarn-workspace-root@^1.2.1:
     fs-extra "^4.0.3"
     micromatch "^3.1.4"
 
+firefly-actor-system-capacitor-bindings@./packages/backend/bindings/capacitor/:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^3.4.0"
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
@@ -10632,11 +10637,6 @@ walker@^1.0.7:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-wallet-actor-system-capacitor-binding@./packages/backend/bindings/capacitor/:
-  version "0.0.1"
-  dependencies:
-    "@capacitor/core" "^3.4.0"
 
 warning@^4.0.3:
   version "4.0.3"

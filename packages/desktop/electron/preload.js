@@ -36,11 +36,10 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const binding = require('firefly-actor-system-nodejs-bindings')
-    const Wallet = binding
+    const WalletApi = require('firefly-actor-system-nodejs-bindings')
 
     if (process.env.NODE_ENV == 'development') {
-        Wallet.initLogger({
+        WalletApi.initLogger({
             color_enabled: true,
             outputs: [
                 {
@@ -51,7 +50,7 @@ try {
         })
     }
 
-    contextBridge.exposeInMainWorld('__WALLET__', Wallet)
+    contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {
     ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
