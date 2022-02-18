@@ -1,9 +1,10 @@
 {
-    "name": "mobile-wallet",
+    "name": "firefly-mobile",
+    "productName": "Firefly Mobile",
     "version": "1.0.0",
-    "description": "IOTA wallet mobile",
+    "description": "Official IOTA wallet on mobile",
     "main": "main.js",
-    "repository": "git@github.com:iotaledger/new-wallet.git",
+    "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
