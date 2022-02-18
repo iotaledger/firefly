@@ -1,5 +1,5 @@
 {
-    "name": "wallet-nodejs-binding",
+    "name": "firefly-actor-system-nodejs-bindings",
     "version": "0.1.0",
     "description": "",
     "main": "dist/index.js",
