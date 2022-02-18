@@ -1,9 +1,9 @@
 import { Capacitor } from '@capacitor/core'
 
-import { BarcodeManager } from '@lib/barcodeManager'
-import { DeepLinkManager } from '@lib/deepLinkManager'
-import { NotificationManager } from '@lib/notificationManager'
-import { PincodeManager } from '@lib/pincodeManager'
+import { BarcodeManager } from './lib/barcodeManager'
+import { DeepLinkManager } from './lib/deepLinkManager'
+import { NotificationManager } from './lib/notificationManager'
+import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
 import type { AppSettings } from 'shared/lib/typings/app'
