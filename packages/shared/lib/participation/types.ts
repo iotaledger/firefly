@@ -57,6 +57,23 @@ export type ParticipationEventStatus = {
      */
     status: ParticipationEventState
     checksum: string
+    questions: ParticipationEventStatusQuestion[]
+}
+
+/**
+ * The question of a participation event status.
+ */
+ export type ParticipationEventStatusQuestion = {
+    answers: ParticipationEventStatusQuestionAnswer[]
+}
+
+/**
+ * The answer of a participation event status question.
+ */
+ export type ParticipationEventStatusQuestionAnswer = {
+    value: number
+    current: number
+    accumulated: number
 }
 
 /**
@@ -129,6 +146,21 @@ export type Participation = {
 }
 
 /**
+ * Tracked participation content
+ */
+ export type TrackedParticipation = TrackedParticipationItem[]
+
+/**
+ * An individual tracked participation item struct.
+ */
+ export type TrackedParticipationItem = {
+    messageId: string
+    amount: number
+    startMilestoneIndex: number
+    endMilestoneIndex: number
+}
+
+/**
  * The struct containing all account-specific information
  * regarding staking, airdrop, rewards, participations
  * (including voting), and so on.
@@ -144,6 +176,7 @@ export type AccountParticipationOverview = {
     shimmerStakedFunds: number
     shimmerUnstakedFunds: number
     participations: Participation[]
+    trackedParticipations: TrackedParticipation[]
 }
 
 /**

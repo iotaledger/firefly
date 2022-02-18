@@ -11,6 +11,8 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet';
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
+    import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
+    import { delineateNumber } from 'shared/lib/utils';
     
     export let event: ParticipationEvent;
     export let account: WalletAccount
@@ -38,8 +40,7 @@
         return _progress > 0 ? _progress : 0
     }
 
-    // const totalVotes = $participationOverview.find(acc => acc?.accountIndex === account?.index)?.trackedParticipations?.amount // TODO: fix object structure 
-    const totalVotes = 2000
+    $: totalVotes = calculateVotesByTrackedParticipation($participationOverview.find(acc => acc?.accountIndex === account?.index)?.trackedParticipations[event?.eventId])
     
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
         if (isSelected(castedAnswerValue, answerValue)) {
@@ -51,10 +52,9 @@
         }
     }
 
-    // const results = $participationOverview?.status?.questions?.answers?.filter(answer => event?.information?.payload?.questions[0]?.answers?.find(_answer => _answer?.value === answer?.value)) // TODO: fix object structure
-    const results = [ { "value": 1, "current": 0, "accumulated": 38000 }, { "value": 2, "current": 0, "accumulated": 62000 } ]
-    const totalVotesResult = results.reduce((acc, val) => acc + val.accumulated, 0)
-    const displayedPercentages = results.map((result) => {
+    $: results = event?.status?.questions[0]?.answers?.filter(answer => answer?.value !== 0 && answer?.value !== 255)
+    $: totalVotesResult = results.reduce((acc, val) => acc + val.accumulated, 0)
+    $: displayedPercentages = results.map((result) => {
         return { 
             percentage: `${Math.round(result.accumulated / totalVotesResult * 100)}%`,
             relativePercentage: `${result.accumulated / Math.max(...results.map(result => result.accumulated)) * 100}%`,
@@ -157,7 +157,7 @@
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votesCounted')}</Text>
-                        <Text type="h3" classes="inline-flex items-end">{totalVotes}</Text>
+                        <Text type="h3" classes="inline-flex items-end">{delineateNumber(totalVotes.toString())}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
@@ -181,7 +181,7 @@
                         <Text type="h3">{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(" ")[0]}</Text>
                         <Text type="h3" overrideColor classes="text-gray-500">{displayedPercentages[i].percentage}</Text>
                     </div>
-                    <Text type="p" overrideColor bigger classes="text-gray-500 m-0">{result.accumulated.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                    <Text type="p" overrideColor bigger classes="text-gray-500 m-0">{delineateNumber(result.accumulated.toString())}</Text>
                 </div>
             {/each}
             </div>
