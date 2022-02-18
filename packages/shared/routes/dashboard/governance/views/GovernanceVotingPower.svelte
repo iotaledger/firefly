@@ -13,4 +13,4 @@
     </Text>
     <Icon icon="info-filled" classes="flex-shrink-0 text-gray-500 dark:text-white w-3 h-3" />
 </div>
-<Text type="h1" classes="text-gray-800 inline-flex" overrideColor>{account.balance}</Text>
+<Text type="h1" classes="text-gray-800 inline-flex" overrideColor>{account?.balance}</Text>

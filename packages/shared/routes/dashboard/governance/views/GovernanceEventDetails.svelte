@@ -34,7 +34,7 @@
         })
     }
 
-    const length = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - milestoneToDate(event?.information?.milestoneIndexStart).getTime()
+    const length = milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() - milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
     $: getProgress = () => {
         const _progress = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - Date.now()
         return _progress > 0 ? _progress : 0
@@ -52,12 +52,12 @@
         }
     }
 
-    $: results = event?.status?.questions[0]?.answers?.filter(answer => answer?.value !== 0 && answer?.value !== 255)
-    $: totalVotesResult = results.reduce((acc, val) => acc + val.accumulated, 0)
-    $: displayedPercentages = results.map((result) => {
+    $: results = event?.status?.questions?.[0]?.answers?.filter(answer => answer?.value !== 0 && answer?.value !== 255)
+    $: totalVotesResult = results?.reduce((acc, val) => acc + val?.accumulated, 0)
+    $: displayedPercentages = results?.map((result) => {
         return { 
-            percentage: `${Math.round(result.accumulated / totalVotesResult * 100)}%`,
-            relativePercentage: `${result.accumulated / Math.max(...results.map(result => result.accumulated)) * 100}%`,
+            percentage: `${Math.round(result?.accumulated / totalVotesResult * 100)}%`,
+            relativePercentage: `${result?.accumulated / Math.max(...results.map(result => result?.accumulated)) * 100}%`,
         }
     })
 
@@ -174,14 +174,14 @@
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
             <Text type="p" smaller classes="mb-8 text-gray-700" overrideColor>{localize('views.governance.eventDetails.currentResults')}</Text>
             <div class="w-full h-full flex justify-center space-x-16">
-            {#each results as result, i}
+            {#each results || [] as result, i}
                 <div class="h-full flex flex-col justify-end items-center">
                     <div class="w-12 rounded-t-lg" style="height: {displayedPercentages[i]?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"></div>
                     <div class="flex space-x-1 mt-3">
                         <Text type="h3">{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(" ")[0]}</Text>
                         <Text type="h3" overrideColor classes="text-gray-500">{displayedPercentages[i].percentage}</Text>
                     </div>
-                    <Text type="p" overrideColor bigger classes="text-gray-500 m-0">{delineateNumber(result.accumulated.toString())}</Text>
+                    <Text type="p" overrideColor bigger classes="text-gray-500 m-0">{delineateNumber(result?.accumulated.toString())}</Text>
                 </div>
             {/each}
             </div>
