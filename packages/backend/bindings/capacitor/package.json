@@ -9,7 +9,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "WalletActorSystemCapacitorBinding.podspec"
+      "FireflyActorSystemCapacitorBindings.podspec"
   ],
   "types": "dist/esm/index.d.ts",
   "scripts": {

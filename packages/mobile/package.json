@@ -1,6 +1,5 @@
 {
     "name": "firefly-mobile",
-    "productName": "Firefly Mobile",
     "version": "1.0.0",
     "description": "Official IOTA wallet on mobile",
     "main": "main.js",
