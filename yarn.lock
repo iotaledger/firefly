@@ -1099,6 +1099,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.0.tgz#0331f9f286fdf3f351ef2783c2f1e9c113d423e8"
   integrity sha512-O2hHGVzdTH2Lsmz58EI8zHY5byEFIWl9KrW60WSrO/tV6u9DpfaUq56FaejvfU27GFXDZkmoQNa33EvDYWp4wA==
 
+"@capacitor/android@^3.4.0":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.1.tgz#d4accc41c843927853d27c7f638487bd52633486"
+  integrity sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag==
+
 "@capacitor/cli@^3.4.0":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-3.4.1.tgz#0664ee82215071553174a7a0cb3378d77f9a5d2b"
@@ -1135,10 +1140,25 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/docgen@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@capacitor/docgen/-/docgen-0.0.10.tgz#5d69db6862f5d7e3be101651b2fd528a482432ec"
+  integrity sha512-zHzWBDiidONOKipn1ZCc1Q8FvnmKDRXBl0NU/haiWXek9WhrhmGhN5Vbm9RK9LXkEKfkdJn6G+eht5wqVrJCsA==
+  dependencies:
+    colorette "^1.2.1"
+    github-slugger "^1.3.0"
+    minimist "^1.2.5"
+    typescript "^4.0.3"
+
 "@capacitor/ios@3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.0.tgz#ce51ac6bf98e10b1b8c030d8e48dfe81886b21f5"
   integrity sha512-S500W45rxLrcrrt+Vx4fJDhmt+07P6yaiE+l32ANV3SHcUvQMWOLXQ7JlKqwkec5er1xonmtor7PQhIt/5UKAA==
+
+"@capacitor/ios@^3.4.0":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.1.tgz#0ae173056924294aa1e468b70377d603abea790e"
+  integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
 
 "@develar/schema-utils@~2.6.5":
   version "2.6.5"
@@ -5082,7 +5102,7 @@ fsevents@^1.2.7:
     bindings "^1.5.0"
     nan "^2.12.1"
 
-fsevents@^2.3.2, fsevents@~2.3.1:
+fsevents@^2.3.2, fsevents@~2.3.1, fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
@@ -5180,6 +5200,11 @@ github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
   integrity sha1-l/tdlr/eiXMxPyDoKI75oWf6ZM4=
+
+github-slugger@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-1.4.0.tgz#206eb96cdb22ee56fdc53a28d5a302338463444e"
+  integrity sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==
 
 "glob-parent@ >=5.1.2", glob-parent@^3.1.0, glob-parent@^5.1.0, glob-parent@^5.1.1, glob-parent@^5.1.2, glob-parent@~5.1.0:
   version "6.0.2"
@@ -9036,6 +9061,13 @@ rollup@2.28.1:
   optionalDependencies:
     fsevents "~2.1.2"
 
+rollup@^2.32.0:
+  version "2.67.3"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.67.3.tgz#3f04391fc296f807d067c9081d173e0a33dbd37e"
+  integrity sha512-G/x1vUwbGtP6O5ZM8/sWr8+p7YfZhI18pPqMRtMYMWSbHjKZ/ajHGiM+GWNTlWyOR0EHIdT8LHU+Z4ciIZ1oBw==
+  optionalDependencies:
+    fsevents "~2.3.2"
+
 run-async@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.4.1.tgz#8440eccf99ea3e70bd409d49aab88e10c189a455"
@@ -10349,6 +10381,11 @@ typescript@^3.9.5:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+
+typescript@~4.0.3:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.8.tgz#5739105541db80a971fdbd0d56511d1a6f17d37f"
+  integrity sha512-oz1765PN+imfz1MlZzSZPtC/tqcwsCyIYA8L47EkRnRW97ztRk83SzMiWLrnChC0vqoYxSU1fcFUDA5gV/ZiPg==
 
 typical@^4.0.0:
   version "4.0.0"

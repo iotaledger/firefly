@@ -1,5 +1,5 @@
 {
-  "name": "wallet-actor-system-capacitor-binding",
+  "name": "firefly-actor-system-capacitor-bindings",
   "version": "0.0.1",
   "description": "Capacitor binding to the Wallet's actor system",
   "main": "dist/esm/index.js",
