@@ -6,8 +6,10 @@
 
 <div>
     <Text type="h2" classes="mb-10">{localize('views.governance.votingPower.info.title')}</Text>
-    <div class='w-full h-48 bg-lightblue-100 rounded-2xl mb-8 flex justify-center items-center'>
-        <Text type="h3" classes="text-gray-800" overrideColor>{localize('views.governance.votingPower.info.equality')}</Text>
+    <div class="w-full h-48 bg-lightblue-100 rounded-2xl mb-8 flex justify-center items-center">
+        <Text type="h3" classes="text-gray-800" overrideColor
+            >{localize('views.governance.votingPower.info.equality')}</Text
+        >
     </div>
     <Text type="p" classes="mb-2">{localize('views.governance.votingPower.info.description1')}</Text>
     <Text type="p">{localize('views.governance.votingPower.info.description2')}</Text>

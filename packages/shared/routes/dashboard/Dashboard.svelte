@@ -284,12 +284,6 @@
     }
 </script>
 
-<style type="text/scss">
-    :global(:not(body.platform-win32)) .dashboard-wrapper {
-        margin-top: calc(env(safe-area-inset-top) / 2);
-    }
-</style>
-
 <Idle />
 <div class="dashboard-wrapper flex flex-row w-full h-full">
     <Sidebar {locale} />
@@ -299,3 +293,9 @@
         <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
 </div>
+
+<style type="text/scss">
+    :global(:not(body.platform-win32)) .dashboard-wrapper {
+        margin-top: calc(env(safe-area-inset-top) / 2);
+    }
+</style>

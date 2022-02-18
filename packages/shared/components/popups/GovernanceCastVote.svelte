@@ -1,17 +1,17 @@
 <script lang="typescript">
-    import { onMount } from 'svelte';
+    import { onMount } from 'svelte'
     import { Button, Icon, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile';
-    import { selectedAccountId, api } from 'shared/lib/wallet';
-    import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api';
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { selectedAccountId, api } from 'shared/lib/wallet'
+    import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isParticipationPending } from 'shared/lib/participation/stores';
-    import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types';
-    import { sleep } from 'shared/lib/utils';
-    
+    import { isParticipationPending } from 'shared/lib/participation/stores'
+    import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types'
+    import { sleep } from 'shared/lib/utils'
+
     export let currentVoteValue: string
     export let nextVote: VotingEventAnswer
     export let eventId: string
@@ -20,14 +20,14 @@
         Cast = 'castVotes',
         Merge = 'mergeVotes',
         Stop = 'stopVotes',
-        Change = 'changeVotes'
+        Change = 'changeVotes',
     }
 
     let votingAction = VotingAction.Cast
     let disabled = false
     let successText = localize('popups.votingConfirmation.votesSubmitted')
 
-    $: showAdditionalInfo = (votingAction === VotingAction.Change || votingAction === VotingAction.Stop)
+    $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
 
     onMount(() => {
         setVotingAction()
@@ -51,7 +51,7 @@
                 type: 'success',
                 props: {
                     successText,
-                }
+                },
             })
         } catch (err) {
             showAppNotification({
@@ -65,16 +65,24 @@
     const vote = async (): Promise<void> => {
         switch (votingAction) {
             case VotingAction.Cast:
-                await participate($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
+                await participate(
+                    $selectedAccountId,
+                    [{ eventId, answers: [nextVote?.value] }],
+                    ParticipationAction.Vote
+                )
                 break
             case VotingAction.Merge:
-                await participateWithRemainingFunds($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
+                await participateWithRemainingFunds(
+                    $selectedAccountId,
+                    [{ eventId, answers: [nextVote?.value] }],
+                    ParticipationAction.Vote
+                )
                 break
             case VotingAction.Change:
                 await changeVote()
                 break
             case VotingAction.Stop:
-                await stopParticipating($selectedAccountId, [ eventId ], ParticipationAction.Unvote)
+                await stopParticipating($selectedAccountId, [eventId], ParticipationAction.Unvote)
                 break
             default:
                 throw new Error('Unimplemented voting action!')
@@ -82,7 +90,7 @@
     }
 
     const changeVote = async (): Promise<void> => {
-        const [ messageId ] = await stopParticipating($selectedAccountId, [ eventId ], ParticipationAction.Unvote)
+        const [messageId] = await stopParticipating($selectedAccountId, [eventId], ParticipationAction.Unvote)
         while (isParticipationPending(messageId)) {
             await sleep(2000)
         }
@@ -90,7 +98,7 @@
     }
 
     const handleStopClick = (): void => {
-        votingAction = VotingAction.Stop;
+        votingAction = VotingAction.Stop
         successText = localize('popups.votingConfirmation.votesStopped')
         handleCastClick()
     }
@@ -128,15 +136,19 @@
     <Text type="p" classes="mb-5">{nextVote?.additionalInfo}</Text>
     {#if showAdditionalInfo}
         <div class="flex items-center mb-6 bg-blue-100 rounded-xl p-3">
-            <Icon icon="info" classes="text-gray-500 font-bold"></Icon>
+            <Icon icon="info" classes="text-gray-500 font-bold" />
             <Text type="p" classes="px-3">{localize('popups.votingConfirmation.additionalInfo')}</Text>
         </div>
     {/if}
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
-        <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">{localize(`actions.${votingAction}`)}</Button>
+        <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
+            {localize(`actions.${votingAction}`)}
+        </Button>
         {#if votingAction === `${VotingAction.Merge}`}
-            <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">{localize(`actions.${VotingAction.Stop}`)}</Button>
+            <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
+                {localize(`actions.${VotingAction.Stop}`)}
+            </Button>
         {/if}
     </div>
 </div>
