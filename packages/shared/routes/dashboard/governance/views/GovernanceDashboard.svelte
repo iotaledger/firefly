@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { GovernanceVotingPower, GovernanceInfo, GovernanceEvents } from './'
     import type { ParticipationEvent } from 'shared/lib/participation/types'
-    import type { WalletAccount } from 'shared/lib/typings/wallet';
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let event: ParticipationEvent
     export let account: WalletAccount

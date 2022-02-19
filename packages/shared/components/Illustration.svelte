@@ -74,11 +74,11 @@
         // Governance
         'governance-info': {
             lightmode: 'governance/governance-info.svg',
-            darkmode: 'governance/governance-info.svg'
+            darkmode: 'governance/governance-info.svg',
         },
         'treasury-bg': {
             lightmode: 'governance/treasury.png',
-            darkmode: 'governance/treasury.png'
+            darkmode: 'governance/treasury.png',
         },
     }
 </script>

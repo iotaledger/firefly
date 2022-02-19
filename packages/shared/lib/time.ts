@@ -72,11 +72,11 @@ export const milestoneToDate = (milestone: number): Date => {
 
 /**
  * Gets string duration from millis in days, hours and minutes
- * 
+ *
  * @method getDurationString
- * 
+ *
  * @param {number} millis
- * 
+ *
  * @returns {string}
  */
 export const getDurationString = (millis: number): string => {
@@ -84,5 +84,7 @@ export const getDurationString = (millis: number): string => {
     const minutes = Math.floor(durationInMinutes % MINUTES_PER_HOUR)
     const hours = Math.floor((durationInMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY)
     const days = Math.floor(durationInMinutes / (MINUTES_PER_HOUR * HOURS_PER_DAY))
-    return `${localize('times.day', { values: { time: days } })}  ${localize('times.hour', { values: { time: hours } })}  ${localize('times.minute', { values: { time: minutes } })}`
+    return `${localize('times.day', { values: { time: days } })}  ${localize('times.hour', {
+        values: { time: hours },
+    })}  ${localize('times.minute', { values: { time: minutes } })}`
 }

@@ -12,9 +12,9 @@
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
-    import { delineateNumber } from 'shared/lib/utils';
-    
-    export let event: ParticipationEvent;
+    import { delineateNumber } from 'shared/lib/utils'
+
+    export let event: ParticipationEvent
     export let account: WalletAccount
 
     let currentVoteValue: string
@@ -34,14 +34,21 @@
         })
     }
 
-    const length = milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() - milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
+    const length =
+        milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
+        milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
     $: getProgress = () => {
         const _progress = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - Date.now()
         return _progress > 0 ? _progress : 0
     }
 
-    $: totalVotes = calculateVotesByTrackedParticipation($participationOverview.find(acc => acc?.accountIndex === account?.index)?.trackedParticipations[event?.eventId])
     
+    $: totalVotes = calculateVotesByTrackedParticipation(
+        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations[
+            event?.eventId
+        ]
+    )
+        
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
         if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
@@ -52,12 +59,16 @@
         }
     }
 
-    $: results = event?.status?.questions?.[0]?.answers?.filter(answer => answer?.value !== 0 && answer?.value !== 255)
+    $: results = event?.status?.questions?.[0]?.answers?.filter(
+        (answer) => answer?.value !== 0 && answer?.value !== 255
+    )
     $: totalVotesResult = results?.reduce((acc, val) => acc + val?.accumulated, 0)
     $: displayedPercentages = results?.map((result) => {
-        return { 
-            percentage: `${Math.round(result?.accumulated / totalVotesResult * 100)}%`,
-            relativePercentage: `${result?.accumulated / Math.max(...results.map(result => result?.accumulated)) * 100}%`,
+        return {
+            percentage: `${Math.round((result?.accumulated / totalVotesResult) * 100)}%`,
+            relativePercentage: `${
+                (result?.accumulated / Math.max(...results.map((result) => result?.accumulated))) * 100
+            }%`,
         }
     })
 
@@ -93,7 +104,9 @@
 <div class="w-full h-full grid grid-cols-3 grid-rows-2 gap-4 min-h-0">
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
         <div class="flex flex-start items-center mb-2">
-            <Text type="p" classes="px-2 py-1 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text>
+            <Text type="p" classes="px-2 py-1 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor
+                >{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
+            >
             <Icon icon="info-filled" classes="ml-2 text-gray-400" />
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
@@ -133,36 +146,52 @@
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
                 <div>
-                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.votingPower.title')}</Text>
+                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        >{localize('views.governance.votingPower.title')}</Text
+                    >
                     <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
                 </div>
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingOpens')}</Text>
-                        <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                            >{localize('views.governance.eventDetails.votingOpens')}</Text
+                        >
+                        <Text type="h3" classes="inline-flex items-end"
+                            >{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text
+                        >
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingStarts')}</Text>
-                        <Text type="h3" classes="inline-flex items-end">{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                            >{localize('views.governance.eventDetails.countingStarts')}</Text
+                        >
+                        <Text type="h3" classes="inline-flex items-end"
+                            >{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text
+                        >
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.countingLength')}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                            >{localize('views.governance.eventDetails.countingLength')}</Text
+                        >
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votesCounted')}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                            >{localize('views.governance.eventDetails.votesCounted')}</Text
+                        >
                         <Text type="h3" classes="inline-flex items-end">{delineateNumber(totalVotes.toString())}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor>{localize('views.governance.eventDetails.votingProgress')}</Text>
+                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                            >{localize('views.governance.eventDetails.votingProgress')}</Text
+                        >
                         <Text type="h3" classes="inline-flex items-end">{getDurationString(getProgress())}</Text>
                     </div>
                 {/if}
@@ -172,18 +201,30 @@
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
-            <Text type="p" smaller classes="mb-8 text-gray-700" overrideColor>{localize('views.governance.eventDetails.currentResults')}</Text>
+            <Text type="p" smaller classes="mb-8 text-gray-700" overrideColor
+                >{localize('views.governance.eventDetails.currentResults')}</Text
+            >
             <div class="w-full h-full flex justify-center space-x-16">
-            {#each results || [] as result, i}
-                <div class="h-full flex flex-col justify-end items-center">
-                    <div class="w-12 rounded-t-lg" style="height: {displayedPercentages[i]?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"></div>
-                    <div class="flex space-x-1 mt-3">
-                        <Text type="h3">{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(" ")[0]}</Text>
-                        <Text type="h3" overrideColor classes="text-gray-500">{displayedPercentages[i].percentage}</Text>
+                {#each results || [] as result, i}
+                    <div class="h-full flex flex-col justify-end items-center">
+                        <div
+                            class="w-12 rounded-t-lg"
+                            style="height: {displayedPercentages[i]
+                                ?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"
+                        />
+                        <div class="flex space-x-1 mt-3">
+                            <Text type="h3"
+                                >{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}</Text
+                            >
+                            <Text type="h3" overrideColor classes="text-gray-500"
+                                >{displayedPercentages[i].percentage}</Text
+                            >
+                        </div>
+                        <Text type="p" overrideColor bigger classes="text-gray-500 m-0"
+                            >{delineateNumber(result?.accumulated.toString())}</Text
+                        >
                     </div>
-                    <Text type="p" overrideColor bigger classes="text-gray-500 m-0">{delineateNumber(result?.accumulated.toString())}</Text>
-                </div>
-            {/each}
+                {/each}
             </div>
         </DashboardPane>
     {/if}

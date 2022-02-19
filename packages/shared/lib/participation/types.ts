@@ -63,14 +63,14 @@ export type ParticipationEventStatus = {
 /**
  * The question of a participation event status.
  */
- export type ParticipationEventStatusQuestion = {
+export type ParticipationEventStatusQuestion = {
     answers: ParticipationEventStatusQuestionAnswer[]
 }
 
 /**
  * The answer of a participation event status question.
  */
- export type ParticipationEventStatusQuestionAnswer = {
+export type ParticipationEventStatusQuestionAnswer = {
     value: number
     current: number
     accumulated: number
@@ -148,12 +148,12 @@ export type Participation = {
 /**
  * Tracked participation content
  */
- export type TrackedParticipation = TrackedParticipationItem[]
+export type TrackedParticipation = TrackedParticipationItem[]
 
 /**
  * An individual tracked participation item struct.
  */
- export type TrackedParticipationItem = {
+export type TrackedParticipationItem = {
     messageId: string
     amount: number
     startMilestoneIndex: number
