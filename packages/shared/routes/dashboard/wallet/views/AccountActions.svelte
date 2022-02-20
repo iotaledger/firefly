@@ -4,7 +4,7 @@
     import { accountRoute } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccount, selectedAccountId } from 'shared/lib/wallet'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { ManageAccount, Receive, Send } from '.'
 
     export let locale: Locale
@@ -26,7 +26,7 @@
     <div class="w-full h-full flex flex-col justify-between p-8">
         <div class="flex flex-col justify-between h-full">
             <div class="flex flex-col justify-between items-center h-full">
-                {#if hiddenAccounts.includes($selectedAccountId)}
+                {#if hiddenAccounts.includes($selectedAccount?.id)}
                     <Text type="p" secondary>{locale('general.accountRemoved')}</Text>
                 {:else}
                     <Button icon="send" classes="w-full mb-6 p-4" secondary onClick={() => handleSendClick()}>

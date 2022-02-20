@@ -16,8 +16,8 @@
         isFirstManualSync,
         isFirstSessionSync,
         isSyncing,
-        selectedAccountId,
         selectedMessage,
+        setSelectedAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -33,7 +33,7 @@
     function handleTransactionClick(transaction: AccountMessage): void {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
         if (sourceAccount) {
-            selectedAccountId.set(sourceAccount.id)
+            setSelectedAccount(sourceAccount.id)
             selectedMessage.set(transaction)
             walletRoute.set(WalletRoutes.Account)
             accountRoute.set(AccountRoutes.Init)

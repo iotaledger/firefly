@@ -4,7 +4,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { asyncRemoveWalletAccount, selectedAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, selectedAccount, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import type { Locale } from 'shared/lib/typings/i18n'
@@ -20,7 +20,7 @@
     const allAccounts = getContext<Readable<WalletAccount[]>>('walletAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    const hidden = hiddenAccounts.includes($selectedAccountId)
+    const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
         $selectedAccount.index === $allAccounts.length - 1 &&
         $selectedAccount.rawIotaBalance === 0 &&
@@ -53,7 +53,6 @@
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
                     // TODO: handle for single wallet view
-                    selectedAccountId.set(null)
                     selectedMessage.set(null)
                     accountRoute.set(AccountRoutes.Init)
                 },
@@ -76,7 +75,6 @@
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
                     // TODO: handle for single wallet view
-                    selectedAccountId.set(null)
                     selectedMessage.set(null)
                     accountRoute.set(AccountRoutes.Init)
                 },
@@ -86,13 +84,12 @@
     }
 
     const handleShowAccountClick = () => {
-        const idx = hiddenAccounts.indexOf($selectedAccountId)
+        const idx = hiddenAccounts.indexOf($selectedAccount?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)
         }
         // TODO: handle for single wallet view
-        selectedAccountId.set(null)
         selectedMessage.set(null)
         accountRoute.set(AccountRoutes.Init)
     }

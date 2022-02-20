@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import { selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
 
     export let locale: Locale
@@ -20,7 +20,7 @@
     $: activeAccount = accounts.find((acc) => acc.active)
 
     function handleAccountClick(accountId) {
-        selectedAccountId.set(accountId)
+        setSelectedAccount(accountId)
         selectedMessage.set(null)
     }
 
@@ -54,13 +54,13 @@
             <Text type="h5">{locale('actions.back')}</Text>
         </div>
     </button>
-    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
+    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount?.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto scroll-tertiary">
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
             {#each accounts as acc}
                 <WalletPill
                     account={acc}
-                    active={activeAccount.id === acc.id}
+                    active={activeAccount?.id === acc.id}
                     onClick={() => handleAccountClick(acc.id)}
                 />
             {/each}

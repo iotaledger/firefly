@@ -50,7 +50,7 @@
         processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
-        selectedAccountId,
+        setSelectedAccount,
         transferState,
         updateBalanceOverview,
         wallet,
@@ -80,9 +80,12 @@
         getWalletBalanceHistory($accountsBalanceHistory)
     )
 
-    $: navAccounts = $selectedAccount
-        ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $selectedAccount.id === id }))
-        : []
+    $: navAccounts = $viewableAccounts?.map(({ id, alias, color }) => ({
+        id,
+        alias,
+        color,
+        active: $selectedAccount?.id === id,
+    }))
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -146,7 +149,8 @@
 
     // If account changes force regeneration of Ledger receive address
     $: {
-        $selectedAccountId
+        // TODO: fix this, selectedAccount changes triggers too many times
+        selectedAccount?.id
         if ($isLedgerProfile) {
             hasGeneratedALedgerReceiveAddress.set(false)
         }
@@ -480,6 +484,11 @@
         drawer.open()
     }
 
+    $: if ($accountsLoaded && $viewableAccounts.length) {
+        // TODO: persist last selected account
+        setSelectedAccount($viewableAccounts[0]?.id)
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -516,12 +525,12 @@
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
         <AccountNavigation {locale} accounts={navAccounts} />
-        {#key $selectedAccountId}
+        {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
                         {locale}
-                        color={getColor($activeProfile, $selectedAccountId)}
+                        color={getColor($activeProfile, $selectedAccount?.id)}
                         balance={$selectedAccount.rawIotaBalance}
                         balanceEquiv={$selectedAccount.balanceEquiv}
                         onMenuClick={handleMenuClick}

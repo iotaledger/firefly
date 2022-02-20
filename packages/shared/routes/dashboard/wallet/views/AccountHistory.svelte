@@ -8,7 +8,7 @@
     import {
         api,
         isSyncing,
-        selectedAccountId,
+        selectedAccount,
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
@@ -36,7 +36,7 @@
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccountId, {
+                api.syncAccount($selectedAccount?.id, {
                     onSuccess() {
                         $isSyncing = false
                     },

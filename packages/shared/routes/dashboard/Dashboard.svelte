@@ -24,7 +24,7 @@
     import {
         api,
         isBackgroundSyncing,
-        selectedAccountId,
+        setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
@@ -104,7 +104,7 @@
                         contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
-                    selectedAccountId.set(contextData.accountId)
+                    setSelectedAccount(contextData.accountId)
                     if (get(dashboardRoute) !== Tabs.Wallet) {
                         dashboardRoute.set(Tabs.Wallet)
                     }
@@ -272,11 +272,6 @@
      */
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
-    }
-
-    // TODO: remove, dev only
-    $: if (accountsLoaded) {
-        selectedAccountId.set($accounts?.[0]?.id)
     }
 </script>
 

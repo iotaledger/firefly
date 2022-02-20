@@ -19,7 +19,14 @@ import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountIdentifier,
+    SignerType,
+    SyncAccountOptions,
+    SyncedAccount,
+} from './typings/account'
 import type { Address } from './typings/address'
 import type { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -113,7 +120,7 @@ export const resetWallet = (): void => {
     accounts.set([])
     accountsLoaded.set(false)
     internalTransfersInProgress.set({})
-    selectedAccountId.set(null)
+    setSelectedAccount(null)
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
@@ -125,10 +132,17 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
-export const selectedAccountId = writable<string | null>(null)
-export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $selectedAccountId)
+// used to make selectedAccount reactive to changes in the wallet
+const _selectedAccountId = writable<AccountIdentifier | null>(null)
+
+export const selectedAccount = derived([_selectedAccountId, get(wallet).accounts], ([$_selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $_selectedAccountId)
 )
+export const setSelectedAccount = (id: AccountIdentifier): void => _selectedAccountId.set(id)
+export const getAccountById = (id: AccountIdentifier): WalletAccount | null => {
+    const accounts = get(wallet)?.accounts
+    return get(accounts)?.find((account) => account.id === id) || null
+}
 
 export const selectedMessage = writable<Message | null>(null)
 
