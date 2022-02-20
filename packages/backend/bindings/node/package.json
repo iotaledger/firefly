@@ -1,7 +1,7 @@
 {
     "name": "firefly-actor-system-nodejs-bindings",
     "version": "0.1.0",
-    "description": "",
+    "description": "NodeJS bindings for Firefly's actor system",
     "main": "dist/index.js",
     "author": "IOTA Stiftung",
     "license": "MIT",
