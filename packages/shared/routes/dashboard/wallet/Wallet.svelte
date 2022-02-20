@@ -79,9 +79,6 @@
     const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
         getWalletBalanceHistory($accountsBalanceHistory)
     )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) =>
-        $selectedAccount ? getAccountMessages($selectedAccount) : []
-    )
 
     $: navAccounts = $selectedAccount
         ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $selectedAccount.id === id }))
@@ -141,11 +138,8 @@
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-    setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
-    setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
-    setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
@@ -544,7 +538,11 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory {locale} color={$selectedAccount.color} transactions={$accountTransactions} />
+                    <AccountHistory
+                        {locale}
+                        color={$selectedAccount.color}
+                        transactions={getAccountMessages($selectedAccount)}
+                    />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">
