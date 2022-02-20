@@ -1,5 +1,5 @@
 {
-  "name": "secure-filesystem-access",
+  "name": "capacitor-secure-filesystem-access",
   "version": "0.0.1",
   "description": "Capacitor plugin to secure access the mobile OS filesystem",
   "main": "dist/esm/index.js",
