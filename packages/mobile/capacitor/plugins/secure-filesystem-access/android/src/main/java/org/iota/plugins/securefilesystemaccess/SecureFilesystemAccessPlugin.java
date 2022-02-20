@@ -49,10 +49,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
     private PluginCall PUBLIC_CALL = null;
 
     @PluginMethod
-    public void echo(PluginCall call) {
-    }
-
-    @PluginMethod
     public void getFileUrlForUri(PluginCall call){
         JSObject response = new JSObject();
 
@@ -83,6 +79,33 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             intent.setType("*/*");
             getActivity().startActivity(Intent.createChooser(intent, "Share file via..."));
         }catch (Exception ex){}
+    }
+
+    @PluginMethod
+    public void showPicker(PluginCall call){
+        if (getPermissionState("storage") != PermissionState.GRANTED) {
+            requestPermissionForAlias("storage", call, "pickerPermsCallback");
+        } else {
+            if (!call.getData().has("type")) {
+                call.reject("type, id and event are required");
+                return;
+            }
+            String type = call.getString("type");
+            
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            Intent intent = new Intent(test.equals("file") 
+                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE)
+            
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("*/*"); // see for stronhold file type
+
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+
+            String pickerType = test.equals("file") ? "pickFilesResult" : "pickFoldersResult";
+            startActivityForResult(call, intent, pickerType);
+        }
     }
 
     @PluginMethod
