@@ -1,4 +1,4 @@
-package org.iota.securefilesystemaccess;
+package org.iota.plugins.securefilesystemaccess;
 
 import android.Manifest;
 import android.app.Activity;
@@ -44,7 +44,7 @@ import java.io.OutputStream;
     }
 )
 
-public class SecureFilesystemAccess extends Plugin {
+public class SecureFilesystemAccessPlugin extends Plugin {
 
     private PluginCall PUBLIC_CALL = null;
 
