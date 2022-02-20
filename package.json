@@ -1,11 +1,11 @@
 {
     "private": true,
     "workspaces": [
-        "packages/desktop",
-        "packages/shared",
-        "packages/mobile",
         "packages/backend/bindings/capacitor",
-        "packages/backend/bindings/node"
+        "packages/backend/bindings/node",
+        "packages/desktop",
+        "packages/mobile",
+        "packages/shared"
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",

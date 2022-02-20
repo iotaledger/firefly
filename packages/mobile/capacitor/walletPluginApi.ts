@@ -1,4 +1,4 @@
-import { WalletPlugin } from 'wallet-actor-system-capacitor-binding'
+import { WalletPlugin } from 'firefly-actor-system-capacitor-bindings'
 import {
     AccountIdentifier,
     AccountToCreate,

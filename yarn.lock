@@ -1126,14 +1126,14 @@
     tslib "^2.1.0"
     xml2js "^0.4.23"
 
-"@capacitor/core@3.4.0", "@capacitor/core@^3.0.0":
+"@capacitor/core@3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.4.0.tgz#c0e8c36fe9d3dbc05f57e644aa1aefa2184d20d8"
   integrity sha512-utfMAYZyU8SL+JkVOcqanjmWarSBlvCyVDPL6AnXG/B//9VtleZ5NtorUXL0ggnK7t+Zbd8xGgA+LN7mn4+3Lw==
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/core@^3.4.0":
+"@capacitor/core@^3.0.0", "@capacitor/core@^3.4.0":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.4.1.tgz#110e59eef7344ddc2d5642fbdc48a79caf0435d7"
   integrity sha512-BwN925gwXGEVAhnnVAXH57cp+/YW5PhFZloGYaN3Sm8eKcYDNeti38lV9DQ8A/T5PYkJw/+TSu8SsuoEQD0vwQ==
@@ -4973,6 +4973,11 @@ find-yarn-workspace-root@^1.2.1:
   dependencies:
     fs-extra "^4.0.3"
     micromatch "^3.1.4"
+
+firefly-actor-system-capacitor-bindings@./packages/backend/bindings/capacitor/:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^3.4.0"
 
 flat-cache@^3.0.4:
   version "3.0.4"
@@ -10632,11 +10637,6 @@ walker@^1.0.7:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-wallet-actor-system-capacitor-binding@./packages/backend/bindings/capacitor/:
-  version "0.0.1"
-  dependencies:
-    "@capacitor/core" "^3.4.0"
 
 warning@^4.0.3:
   version "4.0.3"
