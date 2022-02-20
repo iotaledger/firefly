@@ -46,8 +46,6 @@ import java.io.OutputStream;
 
 public class SecureFilesystemAccessPlugin extends Plugin {
 
-    private PluginCall PUBLIC_CALL = null;
-
     @PluginMethod
     public void getFileUrlForUri(PluginCall call){
         JSObject response = new JSObject();
@@ -87,24 +85,45 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             requestPermissionForAlias("storage", call, "pickerPermsCallback");
         } else {
             if (!call.getData().has("type")) {
-                call.reject("type, id and event are required");
+                call.reject("Resource type is required");
                 return;
             }
-            String type = call.getString("type");
-            
+            String resourceType = call.getString("type");
+            assert resourceType != null;
+            Intent intent = new Intent(resourceType.equals("file") 
+                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-            Intent intent = new Intent(test.equals("file") 
-                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE)
-            
             intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("*/*"); // see for stronhold file type
-
+            String type = resourceType.equals("file") ? "*/*.stronghold" : "*/*";
+            intent.setType(type);
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
 
-            String pickerType = test.equals("file") ? "pickFilesResult" : "pickFoldersResult";
-            startActivityForResult(call, intent, pickerType);
+            startActivityForResult(call, intent, "pickResult");
+        }
+    }
+
+    @ActivityCallback
+    private void pickResult(PluginCall call, ActivityResult result) {
+        if (result.getResultCode() == Activity.RESULT_CANCELED) {
+            call.reject("Activity canceled");
+        } else {
+            Intent data = result.getData();
+            assert data != null;
+            Uri resourcePath = data.getData();
+            JSObject response = new JSObject();
+            response.put("selected", resourcePath.toString());
+            call.resolve(response);
+        }
+    }
+
+    @PermissionCallback
+    private void pickerPermsCallback(PluginCall call) {
+        if (getPermissionState("storage") == PermissionState.GRANTED) {
+            launchPicker(call);
+        } else {
+            call.reject("Permission is required to take a picture");
         }
     }
 
@@ -157,15 +176,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
         startActivityForResult(call, intent, "pickFoldersResult");
-    }
-
-    @PermissionCallback
-    private void pickerPermsCallback(PluginCall call) {
-        if (getPermissionState("storage") == PermissionState.GRANTED) {
-            launchPicker(call);
-        } else {
-            call.reject("Permission is required to take a picture");
-        }
     }
 
     @ActivityCallback
