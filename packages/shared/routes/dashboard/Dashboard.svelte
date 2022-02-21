@@ -365,15 +365,12 @@
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-col w-full h-full">
-    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
-    <TopNavigation {onCreateAccount} />
-    <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
-        <!-- Dashboard Pane -->
-        <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        </div>
+<div class="dashboard-wrapper flex flex-row w-full h-full">
+    <Sidebar {locale} />
+    <!-- Dashboard Pane -->
+    <div class="flex flex-col w-full h-full">
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
 </div>
 

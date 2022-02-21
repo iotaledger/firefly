@@ -71,17 +71,8 @@ export const resetParticipation = (): void => {
  *
  * @returns {boolean}
  */
-export const canParticipate = (eventState: ParticipationEventState): boolean => {
-    switch (eventState) {
-        case ParticipationEventState.Commencing:
-        case ParticipationEventState.Holding:
-            return true
-        case ParticipationEventState.Upcoming:
-        case ParticipationEventState.Ended:
-        default:
-            return false
-    }
-}
+export const canParticipate = (eventState: ParticipationEventState): boolean =>
+    eventState === ParticipationEventState.Commencing || eventState === ParticipationEventState.Holding
 
 /**
  * Determines whether an account can participate in an event.

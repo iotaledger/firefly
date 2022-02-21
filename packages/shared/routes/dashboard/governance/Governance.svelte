@@ -6,7 +6,7 @@
     import { participationEvents } from 'shared/lib/participation/stores'
     import { wallet } from 'shared/lib/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants';
+    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
 
     const { accounts } = $wallet
 
@@ -28,7 +28,8 @@
                     <WalletPill
                         account={acc}
                         active={acc.id === $selectedAccountId}
-                        onClick={() => handleAccountClick(acc.id)} />
+                        onClick={() => handleAccountClick(acc.id)}
+                    />
                 {/each}
             </div>
         </div>
@@ -39,9 +40,10 @@
                 <WalletPill
                     account={acc}
                     active={acc.id === $selectedAccountId}
-                    onClick={() => handleAccountClick(acc.id)} />
+                    onClick={() => handleAccountClick(acc.id)}
+                />
             {/each}
         </div>
-        <GovernanceEventDetails {event}/>
+        <GovernanceEventDetails {event} />
     {/if}
 </div>
