@@ -18,23 +18,22 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        wallet,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
 
     export let id: string
     export let timestamp: string
     export let confirmed: boolean
     export let payload: Payload
     export let balance: number // migration tx
-
     export let onBackClick = (): void => {}
+
+    const { accounts } = $wallet
 
     const cachedMigrationTx = !payload
     const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount

@@ -299,10 +299,14 @@
         const isFiat = isFiatCurrency(unit)
         const isMaxAmount =
             amount ===
-            convertToFiat($selectedAccount.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        const hasDustRemaining = Math.abs($selectedAccount.balance - _amount) < DUST_THRESHOLD
+            convertToFiat(
+                $selectedAccount.rawIotaBalance,
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[unit]
+            ).toString()
+        const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - _amount) < DUST_THRESHOLD
 
-        return isFiat && isMaxAmount && hasDustRemaining ? $selectedAccount.balance : _amount
+        return isFiat && isMaxAmount && hasDustRemaining ? $selectedAccount.rawIotaBalance : _amount
     }
 
     const handleSendClick = () => {
@@ -341,7 +345,7 @@
                     : changeUnits(amountAsFloat, unit, Unit.i)
                 amountRaw = ensureMaxAmount(amountRaw)
 
-                if (amountRaw > $selectedAccount.balance) {
+                if (amountRaw > $selectedAccount.rawIotaBalance) {
                     amountError = localize('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = localize('error.send.amountZero')
@@ -416,9 +420,9 @@
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)
             ? formatNumber(
-                  convertToFiat($selectedAccount.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+                  convertToFiat($selectedAccount.rawIotaBalance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
               )
-            : formatUnitPrecision($selectedAccount.balance, unit, false)
+            : formatUnitPrecision($selectedAccount.rawIotaBalance, unit, false)
     }
 
     const updateFromSendParams = (sendParams) => {

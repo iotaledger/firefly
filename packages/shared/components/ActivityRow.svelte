@@ -5,7 +5,6 @@
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import type { Payload } from 'shared/lib/typings/message'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -16,9 +15,8 @@
         isParticipationPayload,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        wallet,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
 
     export let timestamp
     export let confirmed
@@ -26,8 +24,9 @@
     export let includeFullSender
     export let payload: Payload
     export let balance // migration tx
-
     export let onClick = (): void => {}
+
+    const { accounts } = $wallet
 
     let messageValue = ''
 
@@ -48,8 +47,6 @@
             !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
         }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
     }
-
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)

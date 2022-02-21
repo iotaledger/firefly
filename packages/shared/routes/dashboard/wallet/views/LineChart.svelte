@@ -1,25 +1,19 @@
 <script lang="typescript">
-    import { Chart, Dropdown, Text } from 'shared/components'
-    import {
-        getChartDataForTokenValue,
-        getChartDataFromBalanceHistory,
-        selectedDashboardChart,
-        selectedWalletChart,
-    } from 'shared/lib/chart'
+    import { Chart, Dropdown } from 'shared/components'
+    import { getChartDataFromBalanceHistory, selectedDashboardChart, selectedWalletChart } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from 'shared/lib/i18n'
-    import { TIMEFRAME_MAP } from 'shared/lib/market'
+    import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, getColor, updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
-    import type { AccountsBalanceHistory, BalanceHistory } from 'shared/lib/typings/wallet'
-    import { selectedAccount, wallet } from 'shared/lib/wallet'
-    import { getContext, onMount } from 'svelte'
-    import { derived, get, Readable } from 'svelte/store'
+    import type { BalanceHistory } from 'shared/lib/typings/wallet'
+    import { getAccountBalanceHistory, selectedAccount } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
 
-    const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
-    const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
+    let balanceHistory: BalanceHistory
+    $: $selectedAccount, priceData, (balanceHistory = getAccountBalanceHistory())
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const chartTypeDropdownItems: { value: string; label: string }[] = []
@@ -38,79 +32,42 @@
     $: labels = chartData.labels
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
-    const walletBalance = derived(wallet, ($wallet) => {
-        const { balanceOverview } = $wallet
-        return get(balanceOverview)?.balanceRaw
-    })
-
     const hasTitleBar = document.body.classList.contains('platform-win32')
 
     /** Chart data */
     $: {
-        if (
-            localize ||
-            $selectedDashboardChart ||
-            $activeProfile?.settings.chartSelectors ||
-            $walletBalanceHistory ||
-            $selectedAccount
-        ) {
+        if (localize || $selectedDashboardChart || $activeProfile?.settings.chartSelectors || $selectedAccount) {
             if ($activeProfile?.settings) {
                 // Account value chart
-                if ($selectedAccount) {
-                    switch ($selectedWalletChart) {
-                        case WalletChartType.HOLDINGS:
-                            chartData = getChartDataFromBalanceHistory({
-                                balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
-                                currentBalance: $selectedAccount.rawIotaBalance,
-                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
-                                convertToSelectedCurrency: false,
-                            })
-                            break
-                        case WalletChartType.PORTFOLIO:
-                            chartData = getChartDataFromBalanceHistory({
-                                balanceHistory: $accountsBalanceHistory[$selectedAccount.index],
-                                currentBalance: $selectedAccount.rawIotaBalance,
-                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
-                                convertToSelectedCurrency: true,
-                            })
-                            break
-                        default:
-                            break
-                    }
-                    switch ($activeProfile?.settings.chartSelectors.timeframe) {
-                        case HistoryDataProps.ONE_HOUR:
-                        case HistoryDataProps.TWENTY_FOUR_HOURS:
-                            xMaxTicks = 4
-                            break
-                        case HistoryDataProps.SEVEN_DAYS:
-                        case HistoryDataProps.ONE_MONTH:
-                            xMaxTicks = 6
-                            break
-                    }
-                } else {
-                    switch ($selectedDashboardChart) {
-                        case DashboardChartType.HOLDINGS:
-                            chartData = getChartDataFromBalanceHistory({
-                                balanceHistory: $walletBalanceHistory,
-                                currentBalance: get(walletBalance),
-                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
-                            })
-                            break
-                        case DashboardChartType.PORTFOLIO:
-                            chartData = getChartDataFromBalanceHistory({
-                                balanceHistory: $walletBalanceHistory,
-                                currentBalance: get(walletBalance),
-                                tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
-                                convertToSelectedCurrency: true,
-                            })
-                            break
-                        case DashboardChartType.TOKEN:
-                            chartData = getChartDataForTokenValue()
-                            break
-                        default:
-                            break
-                    }
-                    xMaxTicks = undefined
+                switch ($selectedWalletChart) {
+                    case WalletChartType.HOLDINGS:
+                        chartData = getChartDataFromBalanceHistory({
+                            balanceHistory,
+                            currentBalance: $selectedAccount.rawIotaBalance,
+                            tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                            convertToSelectedCurrency: false,
+                        })
+                        break
+                    case WalletChartType.PORTFOLIO:
+                        chartData = getChartDataFromBalanceHistory({
+                            balanceHistory,
+                            currentBalance: $selectedAccount.rawIotaBalance,
+                            tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
+                            convertToSelectedCurrency: true,
+                        })
+                        break
+                    default:
+                        break
+                }
+                switch ($activeProfile?.settings.chartSelectors.timeframe) {
+                    case HistoryDataProps.ONE_HOUR:
+                    case HistoryDataProps.TWENTY_FOUR_HOURS:
+                        xMaxTicks = 4
+                        break
+                    case HistoryDataProps.SEVEN_DAYS:
+                    case HistoryDataProps.ONE_MONTH:
+                        xMaxTicks = 6
+                        break
                 }
             }
         }
@@ -180,7 +137,7 @@
             />
         </div>
         <div class="flex justify-between items-center space-x-2">
-            {#if $selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS}
+            {#if $selectedWalletChart === WalletChartType.HOLDINGS}
                 <span>
                     <Dropdown
                         small

@@ -7,20 +7,21 @@
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { asyncRemoveWalletAccount, selectedAccount, selectedMessage } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, selectedAccount, selectedMessage, wallet } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
 
     export let isActive
 
+    const { accounts } = $wallet
+
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
-    const allAccounts = getContext<Readable<WalletAccount[]>>('walletAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
-        $selectedAccount.index === $allAccounts.length - 1 &&
+        $selectedAccount.index === $accounts.length - 1 &&
         $selectedAccount.rawIotaBalance === 0 &&
         $selectedAccount.messages.length === 0
 

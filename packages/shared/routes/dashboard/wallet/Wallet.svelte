@@ -5,7 +5,7 @@
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
@@ -21,15 +21,8 @@
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Message, Transaction } from 'shared/lib/typings/message'
-    import type { MigratedTransaction } from 'shared/lib/typings/profile'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import type {
-        AccountMessage,
-        AccountsBalanceHistory,
-        BalanceHistory,
-        BalanceOverview,
-        WalletAccount,
-    } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         addMessagesPair,
         api,
@@ -38,10 +31,7 @@
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
-        getAccountsBalanceHistory,
         getSyncAccountOptions,
-        getTransactions,
-        getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
         isFirstSessionSync,
@@ -56,12 +46,12 @@
         wallet,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
+    import { derived, Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
 
     let drawer: Drawer
 
-    const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
+    const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
     let showActionsModal = false
 
@@ -71,12 +61,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
-        getAccountsBalanceHistory($accounts, $priceData)
-    )
-    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
-        getWalletBalanceHistory($accountsBalanceHistory)
-    )
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -122,19 +106,8 @@
         }
     )
 
-    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        const _migratedTransactions = $activeProfile?.migratedTransactions || []
-
-        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
-    })
-
-    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
-    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
-    setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
-    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 

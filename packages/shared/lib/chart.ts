@@ -41,11 +41,6 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
     }
 })
 
-const walletBalance = derived(wallet, ($wallet) => {
-    const { balanceOverview } = $wallet
-    return get(balanceOverview)?.balanceRaw
-})
-
 export function getChartDataFromBalanceHistory({
     balanceHistory,
     currentBalance,
