@@ -80,13 +80,6 @@
         getWalletBalanceHistory($accountsBalanceHistory)
     )
 
-    $: navAccounts = $viewableAccounts?.map(({ id, alias, color }) => ({
-        id,
-        alias,
-        color,
-        active: $selectedAccount?.id === id,
-    }))
-
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
         ([$activeProfile, $accounts]) => {
@@ -524,7 +517,7 @@
 
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        <AccountNavigation {locale} accounts={navAccounts} />
+        <AccountNavigation {locale} />
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">

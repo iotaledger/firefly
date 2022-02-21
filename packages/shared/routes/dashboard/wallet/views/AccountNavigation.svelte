@@ -1,23 +1,18 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { selectedAccount, selectedMessage, setSelectedAccount, wallet } from 'shared/lib/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
     export let locale: Locale
-
-    export let accounts: {
-        id: string
-        alias: string
-        color: string
-        active: boolean
-    }[]
 
     let rootElement
     let buttonElement
     let accountElement
 
-    $: activeAccount = accounts.find((acc) => acc.active)
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     function handleAccountClick(accountId) {
         setSelectedAccount(accountId)
@@ -54,13 +49,13 @@
             <Text type="h5">{locale('actions.back')}</Text>
         </div>
     </button>
-    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount?.alias}</Text>
+    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{$selectedAccount?.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto scroll-tertiary">
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
-            {#each accounts as acc}
+            {#each $viewableAccounts as acc}
                 <WalletPill
                     account={acc}
-                    active={activeAccount?.id === acc.id}
+                    active={$selectedAccount?.id === acc.id}
                     onClick={() => handleAccountClick(acc.id)}
                 />
             {/each}
