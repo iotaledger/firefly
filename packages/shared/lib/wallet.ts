@@ -396,7 +396,7 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
                         depositAddress: response.payload.addresses[0].address,
                     }) as WalletAccount
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-                    setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
+                    setProfileAccount(getProfile(), { id: preparedAccount.id, color })
 
                     resolve(preparedAccount)
                 },
