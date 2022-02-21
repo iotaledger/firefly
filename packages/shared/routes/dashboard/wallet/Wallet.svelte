@@ -49,7 +49,8 @@
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
-        selectedAccountId,
+        selectedAccount,
+        setSelectedAccount,
         transferState,
         updateBalanceOverview,
         wallet,
@@ -78,16 +79,6 @@
     const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
         getWalletBalanceHistory($accountsBalanceHistory)
     )
-    const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
-        $accounts.find((acc) => acc.id === $selectedAccountId)
-    )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) =>
-        $selectedAccount ? getAccountMessages($selectedAccount) : []
-    )
-
-    $: navAccounts = $selectedAccount
-        ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $selectedAccount.id === id }))
-        : []
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -143,18 +134,16 @@
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-    setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
-    setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
-    setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
     // If account changes force regeneration of Ledger receive address
     $: {
-        $selectedAccountId
+        // TODO: fix this, selectedAccount changes triggers too many times
+        selectedAccount?.id
         if ($isLedgerProfile) {
             hasGeneratedALedgerReceiveAddress.set(false)
         }
@@ -488,6 +477,11 @@
         drawer.open()
     }
 
+    $: if ($accountsLoaded && $viewableAccounts.length) {
+        // TODO: persist last selected account
+        setSelectedAccount($viewableAccounts[0]?.id)
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -523,13 +517,13 @@
 
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        <AccountNavigation {locale} accounts={navAccounts} />
-        {#key $selectedAccountId}
+        <AccountNavigation {locale} />
+        {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
                         {locale}
-                        color={getColor($activeProfile, $selectedAccountId)}
+                        color={getColor($activeProfile, $selectedAccount?.id)}
                         balance={$selectedAccount.rawIotaBalance}
                         balanceEquiv={$selectedAccount.balanceEquiv}
                         onMenuClick={handleMenuClick}
@@ -546,7 +540,11 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory {locale} color={$selectedAccount.color} transactions={$accountTransactions} />
+                    <AccountHistory
+                        {locale}
+                        color={$selectedAccount.color}
+                        transactions={getAccountMessages($selectedAccount)}
+                    />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

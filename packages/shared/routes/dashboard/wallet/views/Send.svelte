@@ -37,7 +37,7 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
@@ -50,7 +50,6 @@
 
     const { accounts } = $wallet
 
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
 
     enum SEND_TYPE {
@@ -64,7 +63,7 @@
     let address = ''
     let to = undefined
     let amountError = ''
-    const addressPrefix = ($account ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
+    const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
     let addressError = ''
     let toError = ''
     let amountRaw
@@ -128,7 +127,9 @@
         if (from) {
             from = accountsDropdownItems.find((a) => a.id === from.id)
         } else {
-            from = $account ? accountsDropdownItems.find((a) => a.id === $account.id) : accountsDropdownItems[0]
+            from = $selectedAccount
+                ? accountsDropdownItems.find((a) => a.id === $selectedAccount.id)
+                : accountsDropdownItems[0]
         }
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
@@ -428,7 +429,7 @@
         clearSendParams()
 
         accountRoute.set(AccountRoutes.Init)
-        if (!$account) {
+        if (!$selectedAccount) {
             // TODO: handle this case for single wallet view
             accountRoute.set(AccountRoutes.Init)
         }
@@ -532,7 +533,8 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                {#if !$account}
+                <!-- TODO: handle this case for single wallet view -->
+                {#if !$selectedAccount}
                     <div class="block mb-6">
                         <Dropdown
                             value={from?.label || null}

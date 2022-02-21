@@ -8,9 +8,9 @@
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { setSelectedAccount } from 'shared/lib/wallet'
     import { Receive, Send } from '.'
 
     export let locale: Locale
@@ -34,7 +34,7 @@
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     function handleAccountClick(accountId) {
-        selectedAccountId.set(accountId)
+        setSelectedAccount(accountId)
         walletRoute.set(WalletRoutes.Account)
         accountRoute.set(AccountRoutes.Init)
     }

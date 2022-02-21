@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -25,7 +25,7 @@
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setProfileAccount($activeProfile, { id: $selectedAccountId, color })
+        setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             // TODO: double check if we do want this change
@@ -45,11 +45,11 @@
                 return (error = locale('error.account.duplicate'))
             }
             isBusy = true
-            api.setAlias($selectedAccountId, trimmedAccountAlias, {
+            api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
                 onSuccess(res) {
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
-                            if (account.id === $selectedAccountId) {
+                            if (account.id === $selectedAccount?.id) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     account,
