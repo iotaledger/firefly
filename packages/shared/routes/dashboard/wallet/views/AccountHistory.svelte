@@ -12,6 +12,7 @@
     import {
         api,
         getIncomingFlag,
+        isFirstSessionSync,
         isSyncing,
         receiverAddressesFromTransactionPayload,
         selectedAccount,
@@ -133,6 +134,21 @@
     } else {
         queryTransactions = filteredTransactions
     }
+
+    function shouldShowFirstSync(): boolean {
+        /**
+         * NOTE: The following conditions must be satisfied
+         * for the "syncing history, ..." message to show:
+         *
+         *      1. It must be the first sync of the user's session
+         *      2. The wallet setup type must exist (a null value indicates an existing profile)
+         *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
+         *      4. Account must have no transactions (the length of $transactions must be zero)
+         */
+        return (
+            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
+        )
+    }
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
@@ -199,7 +215,9 @@
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-            {#if queryTransactions.length}
+            {#if $isSyncing && shouldShowFirstSync()}
+                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+            {:else if queryTransactions.length}
                 {#each queryTransactions as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
                 {/each}
