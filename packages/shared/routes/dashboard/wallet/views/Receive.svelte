@@ -1,54 +1,21 @@
 <script lang="typescript">
-    import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
+    import { Button, Icon, QR, Spinner, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import type { AccountIdentifier } from 'shared/lib/typings/account'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
 
     export let isGeneratingAddress = false
 
-    export let onGenerateAddress = (accountId: AccountIdentifier): void => {}
+    export let onGenerateAddress: (id: string) => void = () => {}
 
-    const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
-
-    let selectedSendAccount = $selectedAccount
-
-    const handleDropdownSelect = (item: WalletAccount): void => {
-        selectedSendAccount = item
-    }
     const generateNewAddress = (): void => {
-        onGenerateAddress(selectedSendAccount.id)
-    }
-    const handleCloseClick = (): void => {
-        accountRoute.set(AccountRoutes.Init)
+        onGenerateAddress($selectedAccount.id)
     }
 </script>
 
-<div class="w-full h-full flex flex-col justify-between {!$selectedAccount ? 'p-8' : ''}">
+<div class="w-full h-full flex flex-col justify-between">
     <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-        {#if !$selectedAccount}
-            <div>
-                <div class="w-full flex flex-row justify-between items-start">
-                    <Text type="h5" classes="mb-6">{localize('general.receiveFunds')}</Text>
-                    <button on:click={handleCloseClick}>
-                        <Icon icon="close" classes="text-gray-800 dark:text-white" />
-                    </button>
-                </div>
-                <Dropdown
-                    valueKey={'alias'}
-                    value={selectedSendAccount.alias}
-                    items={$liveAccounts}
-                    onSelect={handleDropdownSelect}
-                    disabled={$liveAccounts.length === 1}
-                />
-            </div>
-        {/if}
         {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
             <div class="flex w-full h-full items-end">
                 <Button
@@ -79,7 +46,7 @@
                     </button>
                 </div>
                 <div class="flex flex-auto items-center justify-center mb-4">
-                    <QR size={98} data={selectedSendAccount.depositAddress} />
+                    <QR size={98} data={$selectedAccount.depositAddress} />
                 </div>
                 <div class="mb-6">
                     <Text secondary smaller classes="mb-1">
@@ -87,12 +54,12 @@
                             ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                             : localize('general.myAddress')}
                     </Text>
-                    <Text type="pre">{selectedSendAccount.depositAddress}</Text>
+                    <Text type="pre">{$selectedAccount.depositAddress}</Text>
                 </div>
                 <Button
                     disabled={isGeneratingAddress}
                     classes="w-full"
-                    onClick={() => setClipboard(selectedSendAccount.depositAddress)}
+                    onClick={() => setClipboard($selectedAccount.depositAddress)}
                 >
                     {localize('general.copyAddress')}
                 </Button>

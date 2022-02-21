@@ -143,10 +143,6 @@
         })
     })
 
-    function handleDashboardChartTypeSelect(chart) {
-        selectedDashboardChart.set(chart)
-    }
-
     function handleWalletChartTypeSelect({ value: chart }) {
         selectedWalletChart.set(chart)
     }
@@ -158,8 +154,7 @@
     function formatYAxis(value) {
         return formatCurrencyValue(
             value,
-            (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) ||
-                ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)
+            $selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS
                 ? CurrencyTypes.IOTA
                 : $activeProfile?.settings.chartSelectors.currency
                 ? $activeProfile?.settings.chartSelectors.currency
@@ -173,34 +168,19 @@
 
 <div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
     <div class="flex justify-between items-center mb-2">
-        {#if !$selectedAccount}
-            <div class="flex space-x-4">
-                {#each Object.values(DashboardChartType) as chart}
-                    <button
-                        on:click={() => handleDashboardChartTypeSelect(chart)}
-                        class:active={chart === $selectedDashboardChart}
-                    >
-                        <Text type="h5" secondary={chart !== $selectedDashboardChart}>
-                            {localize(`charts.${chart}`)}
-                        </Text>
-                    </button>
-                {/each}
-            </div>
-        {:else}
-            <div class="flex space-x-4 -ml-3">
-                <Dropdown
-                    small
-                    value={localize(`charts.${$selectedWalletChart}`)}
-                    items={chartTypeDropdownItems}
-                    onSelect={handleWalletChartTypeSelect}
-                    contentWidth={true}
-                    valueTextType="h5"
-                    showBorderWhenClosed={false}
-                />
-            </div>
-        {/if}
+        <div class="flex space-x-4 -ml-3">
+            <Dropdown
+                small
+                value={localize(`charts.${$selectedWalletChart}`)}
+                items={chartTypeDropdownItems}
+                onSelect={handleWalletChartTypeSelect}
+                contentWidth={true}
+                valueTextType="h5"
+                showBorderWhenClosed={false}
+            />
+        </div>
         <div class="flex justify-between items-center space-x-2">
-            {#if (!$selectedAccount && $selectedDashboardChart === DashboardChartType.HOLDINGS) || ($selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS)}
+            {#if $selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS}
                 <span>
                     <Dropdown
                         small

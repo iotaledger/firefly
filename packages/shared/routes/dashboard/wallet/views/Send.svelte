@@ -118,17 +118,8 @@
     }
 
     let accountsDropdownItems
-    let from
     $: {
         accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
-
-        if (from) {
-            from = accountsDropdownItems.find((a) => a.id === from.id)
-        } else {
-            from = $selectedAccount
-                ? accountsDropdownItems.find((a) => a.id === $selectedAccount.id)
-                : accountsDropdownItems[0]
-        }
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
         }
@@ -277,8 +268,6 @@
         }
     }
 
-    let _ledgerDeviceState
-    $: _ledgerDeviceState = $ledgerDeviceState
     $: {
         checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
     }
@@ -294,19 +283,8 @@
         clearErrors()
     }
 
-    const handleFromSelect = (item) => {
-        from = item
-        if (to === from) {
-            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
-        }
-        clearErrors()
-    }
-
     const handleToSelect = (item) => {
         to = item
-        if (from === to) {
-            from = undefined
-        }
         clearErrors()
     }
 
@@ -320,10 +298,11 @@
 
         const isFiat = isFiatCurrency(unit)
         const isMaxAmount =
-            amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        const hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
+            amount ===
+            convertToFiat($selectedAccount.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
+        const hasDustRemaining = Math.abs($selectedAccount.balance - _amount) < DUST_THRESHOLD
 
-        return isFiat && isMaxAmount && hasDustRemaining ? from.balance : _amount
+        return isFiat && isMaxAmount && hasDustRemaining ? $selectedAccount.balance : _amount
     }
 
     const handleSendClick = () => {
@@ -362,7 +341,7 @@
                     : changeUnits(amountAsFloat, unit, Unit.i)
                 amountRaw = ensureMaxAmount(amountRaw)
 
-                if (amountRaw > from.balance) {
+                if (amountRaw > $selectedAccount.balance) {
                     amountError = localize('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = localize('error.send.amountZero')
@@ -392,7 +371,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    accountId: from.id,
+                    accountId: $selectedAccount.id,
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
@@ -413,8 +392,8 @@
              * in another account. Send parameters are reset once the transfer completes.
              */
             isInternal
-                ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                : onSend(from.id, address, amountRaw)
+                ? onInternalTransfer($selectedAccount.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : onSend($selectedAccount.id, address, amountRaw)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
@@ -425,12 +404,7 @@
 
     const handleBackClick = () => {
         clearSendParams()
-
         accountRoute.set(AccountRoutes.Init)
-        if (!$selectedAccount) {
-            // TODO: handle this case for single wallet view
-            accountRoute.set(AccountRoutes.Init)
-        }
     }
 
     const format = (account: WalletAccount) => ({
@@ -441,8 +415,10 @@
 
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)
-            ? formatNumber(convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]))
-            : formatUnitPrecision(from.balance, unit, false)
+            ? formatNumber(
+                  convertToFiat($selectedAccount.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+              )
+            : formatUnitPrecision($selectedAccount.balance, unit, false)
     }
 
     const updateFromSendParams = (sendParams) => {
@@ -451,8 +427,11 @@
         const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
         amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
         address = sendParams.address
-        if (from && accountsDropdownItems) {
-            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
+        if (accountsDropdownItems) {
+            to =
+                $liveAccounts.length === 2
+                    ? accountsDropdownItems[$selectedAccount.id === $liveAccounts[0].id ? 1 : 0]
+                    : to
         }
     }
 
@@ -531,26 +510,13 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                <!-- TODO: handle this case for single wallet view -->
-                {#if !$selectedAccount}
-                    <div class="block mb-6">
-                        <Dropdown
-                            value={from?.label || null}
-                            label={localize('general.from')}
-                            placeholder={localize('general.from')}
-                            items={accountsDropdownItems}
-                            onSelect={handleFromSelect}
-                            disabled={$liveAccounts.length === 1 || $isTransferring}
-                        />
-                    </div>
-                {/if}
                 <div class="w-full block">
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || null}
                             label={localize('general.to')}
                             placeholder={localize('general.to')}
-                            items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
+                            items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
@@ -573,7 +539,6 @@
                         bind:amount
                         bind:unit
                         onMaxClick={handleMaxClick}
-                        {locale}
                         disabled={$isTransferring}
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                     />
