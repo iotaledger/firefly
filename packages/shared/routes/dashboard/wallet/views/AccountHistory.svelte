@@ -5,7 +5,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { walletSetupType } from 'shared/lib/router'
     import type { Transaction } from 'shared/lib/typings/message'
+    import { SetupType } from 'shared/lib/typings/routes'
     import type { AccountMessage } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { debounce, isValueInUnitRange, unitToValue } from 'shared/lib/utils'
@@ -146,7 +148,7 @@
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
         return (
-            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $transactions.length === 0
+            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && transactions.length === 0
         )
     }
 </script>
