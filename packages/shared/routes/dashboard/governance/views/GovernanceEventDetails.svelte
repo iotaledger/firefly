@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Text, Icon, DashboardPane } from 'shared/components'
+    import { Button, Text, Icon, DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { governanceRoute } from 'shared/lib/router'
     import { openPopup } from 'shared/lib/popup'
     import { participationOverview } from 'shared/lib/participation/stores'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
+    import { canParticipate } from 'shared/lib/participation'
 
     export let event: ParticipationEvent
 
@@ -15,23 +16,18 @@
         const participation = overview?.participations.find((participation) => participation.eventId === event.eventId)
         currentVoteValue = participation?.answers[0] ?? null
     }
-    $: isEventDisabled =
-        event?.status?.status === ParticipationEventState.Ended ||
-        event?.status?.status === ParticipationEventState.Inactive
 
     const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
 
     const handleClick = (nextVote: VotingEventAnswer): void => {
-        if (!isEventDisabled) {
-            openPopup({
-                type: 'governanceCastVote',
-                props: {
-                    currentVoteValue,
-                    eventId: event?.eventId,
-                    nextVote,
-                },
-            })
-        }
+        openPopup({
+            type: 'governanceCastVote',
+            props: {
+                currentVoteValue,
+                eventId: event?.eventId,
+                nextVote,
+            },
+        })
     }
 
     const getAnswerHeader = (answerValue: string): string => {
@@ -77,11 +73,13 @@
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
         <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
         {#each event?.information?.payload?.questions[0]?.answers as answer}
-            <div
-                on:click={() => handleClick(answer)}
-                class="py-4 px-6 bg-{isSelected(answer?.value)
+            <Button
+                onClick={() => handleClick(answer)}
+                secondary
+                disabled={!canParticipate(event?.status?.status)}
+                classes="px-6 bg-{isSelected(answer?.value)
                     ? 'blue-100'
-                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 rounded-lg flex justify-between mb-4 cursor-pointer"
+                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4"
             >
                 <div>
                     <div class="flex items-center mb-2">
@@ -95,12 +93,12 @@
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
                     <Text type="p">{answer?.additionalInfo}</Text>
                 </div>
-                {#if !isEventDisabled}
+                {#if canParticipate(event?.status?.status)}
                     <div class="my-auto">
                         <Icon icon="chevron-right" />
                     </div>
                 {/if}
-            </div>
+            </Button>
         {/each}
     </DashboardPane>
     <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 space-y-3 overflow-hidden p-6">
