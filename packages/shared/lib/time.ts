@@ -84,7 +84,9 @@ export const getDurationString = (millis: number): string => {
     const minutes = Math.floor(durationInMinutes % MINUTES_PER_HOUR)
     const hours = Math.floor((durationInMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY)
     const days = Math.floor(durationInMinutes / (MINUTES_PER_HOUR * HOURS_PER_DAY))
-    return `${localize('times.day', { values: { time: days } })}  ${localize('times.hour', {
-        values: { time: hours },
-    })}  ${localize('times.minute', { values: { time: minutes } })}`
+
+    const minutesString = minutes ? localize('times.minute', { values: { time: minutes } }) : ''
+    const hoursString = hours ? localize('times.hour', { values: { time: hours } }) : ''
+    const daysString = days ? localize('times.day', { values: { time: days } }) : ''
+    return `${daysString} ${hoursString} ${minutesString}`.trim()
 }
