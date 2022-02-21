@@ -34,7 +34,11 @@ export const calculateVotesByMilestones = (
  */
 export const calculateVotesByTrackedParticipation = (trackedParticipation: TrackedParticipation | null): number => {
     if (trackedParticipation) {
-        return Object.values(trackedParticipation)?.reduce((acc, val) => acc + calculateVotesByMilestones(val?.startMilestoneIndex, val?.endMilestoneIndex, val?.amount), 0)
+        return Object.values(trackedParticipation)?.reduce(
+            (acc, val) =>
+                acc + calculateVotesByMilestones(val?.startMilestoneIndex, val?.endMilestoneIndex, val?.amount),
+            0
+        )
     }
     return 0
 }

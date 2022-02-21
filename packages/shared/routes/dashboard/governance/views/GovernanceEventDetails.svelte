@@ -64,12 +64,10 @@
     )
     $: totalVotesResult = results?.reduce((acc, val) => acc + val?.accumulated, 0)
     $: displayedPercentages = results?.map((result) => {
-        return {
-            percentage: `${Math.round((result?.accumulated / totalVotesResult) * 100)}%`,
-            relativePercentage: `${
-                (result?.accumulated / Math.max(...results.map((result) => result?.accumulated))) * 100
-            }%`,
-        }
+        const percentage = Math.round((result?.accumulated / totalVotesResult) * 100).toString() + '%'
+        const relativePercentage =
+            (result?.accumulated / Math.max(...results.map((result) => result?.accumulated))) * 100 + '%'
+        return { percentage, relativePercentage }
     })
 
     const setActiveText = (): string => {
@@ -139,7 +137,7 @@
                         <Icon icon="chevron-right" />
                     </div>
                 {/if}
-            </Button>
+            </div>
         {/each}
     </DashboardPane>
     <div class="row-span-1">
