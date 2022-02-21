@@ -1,15 +1,12 @@
 <script lang="typescript">
-    import { Button, Input, Text, AccountTile, ColorPicker } from 'shared/components'
+    import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
+    import { localize } from 'shared/lib/i18n'
+    import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-
-    export let locale: Locale
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { setProfileAccount } from 'shared/lib/profile'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
 
     export let alias
     export let account
@@ -35,14 +32,14 @@
         if (trimmedAccountAlias) {
             error = ''
             if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
-                return (error = locale('error.account.length', {
+                return (error = localize('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
                     },
                 }))
             }
             if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
-                return (error = locale('error.account.duplicate'))
+                return (error = localize('error.account.duplicate'))
             }
             isBusy = true
             api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
@@ -68,7 +65,7 @@
                 },
                 onError(err) {
                     isBusy = false
-                    error = locale(err.error)
+                    error = localize(err.error)
                 },
             })
         }
@@ -85,7 +82,7 @@
 <div class="w-full h-full flex flex-col justify-between px-8 py-10">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.manageAccount')}</Text>
+            <Text type="h5">{localize('general.manageAccount')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <AccountTile
@@ -100,30 +97,30 @@
             <Input
                 {error}
                 bind:value={accountAlias}
-                placeholder={locale('general.accountName')}
+                placeholder={localize('general.accountName')}
                 autofocus
                 submitHandler={handleSaveClick}
                 disabled={isBusy}
                 classes="mb-4"
             />
-            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes="mb-4" />
+            <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Text secondary classes="mb-3 text-center">{locale('general.updatingAccount')}</Text>
+        <Text secondary classes="mb-3 text-center">{localize('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between mt-2 px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
-                {locale('actions.cancel')}
+                {localize('actions.cancel')}
             </Button>
             <Button
                 classes="-mx-2 w-1/2"
                 onClick={() => handleSaveClick()}
                 disabled={invalidAliasUpdate && !hasColorChanged}
             >
-                {locale('actions.save')}
+                {localize('actions.save')}
             </Button>
         </div>
     {/if}

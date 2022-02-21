@@ -1,24 +1,22 @@
 <script lang="typescript">
-    import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { HistoryDataProps } from 'shared/lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
-        getChartDataFromBalanceHistory,
         getChartDataForTokenValue,
+        getChartDataFromBalanceHistory,
         selectedDashboardChart,
         selectedWalletChart,
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
+    import { localize } from 'shared/lib/i18n'
     import { TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, updateProfile, getColor } from 'shared/lib/profile'
+    import { activeProfile, getColor, updateProfile } from 'shared/lib/profile'
+    import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { HistoryDataProps } from 'shared/lib/typings/market'
+    import type { AccountsBalanceHistory, BalanceHistory } from 'shared/lib/typings/wallet'
     import { selectedAccount, wallet } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
-
-    export let locale: Locale
 
     const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
     const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
@@ -50,7 +48,7 @@
     /** Chart data */
     $: {
         if (
-            locale ||
+            localize ||
             $selectedDashboardChart ||
             $activeProfile?.settings.chartSelectors ||
             $walletBalanceHistory ||
@@ -140,7 +138,7 @@
         Object.values(WalletChartType).forEach((chartType) => {
             chartTypeDropdownItems.push({
                 value: chartType,
-                label: locale(`charts.${chartType}`),
+                label: localize(`charts.${chartType}`),
             })
         })
     })
@@ -182,7 +180,9 @@
                         on:click={() => handleDashboardChartTypeSelect(chart)}
                         class:active={chart === $selectedDashboardChart}
                     >
-                        <Text type="h5" secondary={chart !== $selectedDashboardChart}>{locale(`charts.${chart}`)}</Text>
+                        <Text type="h5" secondary={chart !== $selectedDashboardChart}>
+                            {localize(`charts.${chart}`)}
+                        </Text>
                     </button>
                 {/each}
             </div>
@@ -190,7 +190,7 @@
             <div class="flex space-x-4 -ml-3">
                 <Dropdown
                     small
-                    value={locale(`charts.${$selectedWalletChart}`)}
+                    value={localize(`charts.${$selectedWalletChart}`)}
                     items={chartTypeDropdownItems}
                     onSelect={handleWalletChartTypeSelect}
                     contentWidth={true}
@@ -224,10 +224,12 @@
                 <Dropdown
                     small
                     value={$activeProfile?.settings.chartSelectors.timeframe
-                        ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)
+                        ? localize(
+                              `charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`
+                          )
                         : undefined}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({
-                        label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
+                        label: localize(`charts.timeframe${TIMEFRAME_MAP[value]}`),
                         value,
                     }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}

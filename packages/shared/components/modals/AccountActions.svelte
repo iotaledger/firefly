@@ -1,18 +1,16 @@
 <script lang="typescript">
     import { HR, Icon, Modal, Text } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
+    import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AccountRoutes } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { asyncRemoveWalletAccount, selectedAccount, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { get } from 'svelte/store'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
-
-    export let locale: Locale
 
     export let isActive
 
@@ -106,7 +104,7 @@
             disabled={hidden}
         >
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.customizeAcount')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.customizeAcount')}</Text>
         </button>
         <!-- Address history -->
         <button
@@ -114,14 +112,14 @@
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.viewAddressHistory')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.viewAddressHistory')}</Text>
         </button>
         <button
             on:click={handleExportTransactionHistoryClick}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.exportTransactionHistory')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
         </button>
         <HR />
         <!-- Delete -->
@@ -132,7 +130,7 @@
         >
             <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>
-                {locale(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
+                {localize(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
             </Text>
         </button>
     </div>

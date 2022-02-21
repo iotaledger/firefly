@@ -1,25 +1,23 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Icon, Input, Text } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { Transaction } from 'shared/lib/typings/message'
+    import type { AccountMessage } from 'shared/lib/typings/wallet'
+    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { debounce, isValueInUnitRange, unitToValue } from 'shared/lib/utils'
     import {
         api,
+        getIncomingFlag,
         isSyncing,
+        receiverAddressesFromTransactionPayload,
         selectedAccount,
         selectedMessage,
         sendAddressFromTransactionPayload,
-        receiverAddressesFromTransactionPayload,
-        getIncomingFlag,
     } from 'shared/lib/wallet'
-    import type { AccountMessage } from 'shared/lib/typings/wallet'
-    import type { Transaction } from 'shared/lib/typings/message'
-    import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-
-    export let locale: Locale
 
     export let transactions: AccountMessage[] = []
     export let color = 'blue'
@@ -51,7 +49,7 @@
                             } else {
                                 showAppNotification({
                                     type: 'error',
-                                    message: locale(err.error),
+                                    message: localize(err.error),
                                 })
                             }
                         }
@@ -74,7 +72,7 @@
                     onError(err) {
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: localize(err.error),
                         })
                     },
                 })
@@ -142,14 +140,14 @@
         {#if $selectedMessage}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{locale('general.transactions')}</Text>
+                <Text type="h5">{localize('general.transactions')}</Text>
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5"
-                    >{locale('general.transactions')}
-                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span></Text
-                >
+                <Text type="h5">
+                    {localize('general.transactions')}
+                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
+                </Text>
                 {#if !$selectedMessage}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
@@ -171,7 +169,7 @@
                                     ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
                                     : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
                             >
-                                {locale(`general.${filter}`)}
+                                {localize(`general.${filter}`)}
                             </Text>
                         </li>
                     {/each}
@@ -198,21 +196,16 @@
         {/if}
     </div>
     {#if $selectedMessage}
-        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if queryTransactions.length}
                 {#each queryTransactions as transaction}
-                    <ActivityRow
-                        onClick={() => handleTransactionClick(transaction)}
-                        {...transaction}
-                        {color}
-                        {locale}
-                    />
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{locale('general.noRecentHistory')}</Text>
+                    <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
         </div>

@@ -1,11 +1,9 @@
 <script lang="typescript">
     import { Chart, Text } from 'shared/components'
     import { getAccountActivityData } from 'shared/lib/chart'
+    import { localize } from 'shared/lib/i18n'
     import { activeProfile, getColor } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { selectedAccount } from 'shared/lib/wallet'
-
-    export let locale: Locale
 
     let chartData = {
         incoming: {},
@@ -18,13 +16,13 @@
     $: color = getColor($activeProfile, $selectedAccount?.id)
 
     $: {
-        if (locale || $selectedAccount) {
+        if (localize || $selectedAccount) {
             chartData = getAccountActivityData($selectedAccount)
         }
     }
 </script>
 
 <div data-label="bar-chart" class="flex flex-col justify-between w-full h-full px-8 pt-6 pb-4">
-    <Text type="h5" classes="mb-4">{locale('charts.accountActivity')}</Text>
+    <Text type="h5" classes="mb-4">{localize('charts.accountActivity')}</Text>
     <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} formatYAxis={(value) => value.toFixed(2)} />
 </div>

@@ -1,13 +1,11 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { selectedAccount } from 'shared/lib/wallet'
     import { ManageAccount, Receive, Send } from '.'
-
-    export let locale: Locale
 
     export let onSend = (..._: any[]): void => {}
     export let onGenerateAddress = (..._: any[]): void => {}
@@ -27,19 +25,19 @@
         <div class="flex flex-col justify-between h-full">
             <div class="flex flex-col justify-between items-center h-full">
                 {#if hiddenAccounts.includes($selectedAccount?.id)}
-                    <Text type="p" secondary>{locale('general.accountRemoved')}</Text>
+                    <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
                 {:else}
                     <Button icon="send" classes="w-full mb-6 p-4" secondary onClick={() => handleSendClick()}>
-                        {locale('general.sendFunds')}
-                        <Text type="p" smaller secondary>{locale('general.sendTokensToAddress')}</Text>
+                        {localize('general.sendFunds')}
+                        <Text type="p" smaller secondary>{localize('general.sendTokensToAddress')}</Text>
                     </Button>
-                    <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
+                    <Receive {isGeneratingAddress} {onGenerateAddress} />
                 {/if}
             </div>
         </div>
     </div>
 {:else if $accountRoute === AccountRoutes.Send}
-    <Send {onSend} {onInternalTransfer} {locale} />
+    <Send {onSend} {onInternalTransfer} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} alias={$selectedAccount.alias} account={$selectedAccount} />
+    <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
 {/if}
