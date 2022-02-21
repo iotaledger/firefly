@@ -1,15 +1,19 @@
 package org.iota.plugins.securefilesystemaccess;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.OpenableColumns;
 
 import androidx.activity.result.ActivityResult;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.getcapacitor.FileUtils;
@@ -30,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.file.Path;
 
 @CapacitorPlugin(
     name = "SecureFilesystemAccess",
@@ -45,7 +50,8 @@ import java.io.OutputStream;
 )
 
 public class SecureFilesystemAccessPlugin extends Plugin {
-
+    private String resourceType = "";
+    
     @PluginMethod
     public void getFileUrlForUri(PluginCall call){
         JSObject response = new JSObject();
@@ -79,8 +85,9 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }catch (Exception ex){}
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     @PluginMethod
-    public void showPicker(PluginCall call){
+    public void showPicker(PluginCall call) throws IOException {
         if (getPermissionState("storage") != PermissionState.GRANTED) {
             requestPermissionForAlias("storage", call, "pickerPermsCallback");
         } else {
@@ -88,42 +95,76 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 call.reject("Resource type is required");
                 return;
             }
-            String resourceType = call.getString("type");
+            resourceType = call.getString("type");
             assert resourceType != null;
             Intent intent = new Intent(resourceType.equals("file") 
-                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
+                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_CREATE_DOCUMENT);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String type = resourceType.equals("file") ? "*/*.stronghold" : "*/*";
-            intent.setType(type);
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
-
-            startActivityForResult(call, intent, "pickResult");
+//            intent.addCategory(Intent.CATEGORY_OPENABLE);
+//            intent.addCategory(Intent.EXTRA_LOCAL_ONLY);
+//            String type = resourceType.equals("file") ? "*/*.stronghold" : "*/*";
+//            intent.setType(type);
+//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+//            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(call, intent, "pickResult");
+//            }
+//            else {
+//                System.out.println("picker package not installed");
+//            }
         }
     }
 
     @ActivityCallback
-    private void pickResult(PluginCall call, ActivityResult result) {
+    private void pickResult(PluginCall call, ActivityResult result) throws IOException {
+        if (call == null) {
+            return;
+        }
+        JSObject response = new JSObject();
         if (result.getResultCode() == Activity.RESULT_CANCELED) {
-            call.reject("Activity canceled");
+            response.put("selected", "");
+            call.resolve(response);
         } else {
             Intent data = result.getData();
             assert data != null;
-            Uri resourcePath = data.getData();
-            JSObject response = new JSObject();
-            response.put("selected", resourcePath.toString());
+            Uri resourceUri = data.getData();
+            String resourcePath = resourceUri.getPath();
+            Uri child = DocumentsContract.buildChildDocumentsUriUsingTree(resourceUri,
+                    DocumentsContract.getTreeDocumentId(resourceUri));
+            // File file = FileUtil.from(getContext(), resourceUri);
+            // File backupFile = new File(resourceUri.getPath());
+            // Path resourcePath = backupFile.toPath();
+            // String resourcePath = FileUtils.getFileUrlForUri(getContext(), resourceUri);
+            // Get uri related document id.
+//            String documentId = DocumentsContract.getDocumentId(resourceUri);
+//            String[] idArr = documentId.split(":");
+//            String resourcePath = "";
+//            if(idArr.length == 2) {
+//                String type = idArr[0];
+//                String realDocId = idArr[1];
+//                if("primary".equalsIgnoreCase(type)) {
+//                    resourcePath = Environment.getExternalStorageDirectory() + "/" + realDocId;
+//                }
+//            }
+            
+//            call.setKeepAlive(true);
+            System.out.println(child.getPath());
+//            System.out.println(documentId);
+            System.out.println(resourcePath);
+            response.put("selected", child.getPath()); // to file  -> resourcePath.toString());
             call.resolve(response);
         }
     }
 
     @PermissionCallback
-    private void pickerPermsCallback(PluginCall call) {
+    private void pickerPermsCallback(PluginCall call) throws IOException {
         if (getPermissionState("storage") == PermissionState.GRANTED) {
-            launchPicker(call);
+            showPicker(call);
         } else {
-            call.reject("Permission is required to take a picture");
+            JSObject response = new JSObject();
+            response.put("selected", "");
+            call.resolve(response);
         }
     }
 
