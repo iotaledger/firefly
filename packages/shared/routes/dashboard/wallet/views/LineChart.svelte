@@ -13,7 +13,7 @@
     import { onMount } from 'svelte'
 
     let balanceHistory: BalanceHistory
-    $: $selectedAccount, priceData, (balanceHistory = getAccountBalanceHistory())
+    $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const chartTypeDropdownItems: { value: string; label: string }[] = []
