@@ -1,8 +1,7 @@
 {
     "name": "firefly-mobile",
-    "productName": "Firefly Mobile",
     "version": "1.0.0",
-    "description": "IOTA wallet mobile",
+    "description": "Official IOTA wallet on mobile",
     "main": "main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
@@ -30,7 +29,7 @@
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "capacitor-secure-storage-plugin": "^0.6.2",
         "shared": "0.0.0",
-        "wallet-actor-system-capacitor-binding": "./packages/backend/bindings/capacitor/"
+        "firefly-actor-system-capacitor-bindings": "./packages/backend/bindings/capacitor/"
     },
     "engineStrict": true,
     "engines": {
