@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Configurações",
             "generalSettings": {
-                "title": "Configurações Gerais",
+                "title": "Geral",
                 "description": "Configurar a aparência do seu aplicativo e outras configurações gerais"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Altere sua senha e ajuste as configurações de segurança relacionadas"
             },
             "advancedSettings": {
-                "title": "Configurações Avançadas",
+                "title": "Avançado",
                 "description": "Ferramentas e configurações manuais para usuários técnicos"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Reiniciar o aplicativo Firefly para que as alterações no tema do sistema entrem em vigor"
+                "advice": "Por favor, reinicie o aplicativo Firefly para que as alterações no tema do sistema entrem em vigortenham efeito"
             },
             "language": {
                 "title": "Idioma",
@@ -350,6 +350,11 @@
                 "newPincode": "Novo PIN",
                 "confirmNewPincode": "Confirme o novo PIN",
                 "action": "Alterar PIN"
+            },
+            "changeProfileName": {
+                "title": "Alterar nome do perfil",
+                "description": "Alterar o nome do seu perfil Firefly",
+                "success": "Você alterou o nome do seu perfil"
             },
             "balanceFinder": {
                 "title": "Localizador de saldo",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "A rede de incentivos trará grandes inovações para IOTA. O que quer que aconteça, acontecerá. Como o Shimmer evoluirá depende de você."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Paleta de cores",
+                "hexCode": "Código hexadecimal da cor"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Você está criando um perfil de desenvolvedor",
             "body": "Você estará conectado a Chrysalis Devnet por padrão e poderá alternar as redes manualmente. Somente continue se você souber o que está fazendo."
+        },
+        "legalUpdate": {
+            "tosTitle": "Termos de Serviço",
+            "privPolicyTitle": "Política de Privacidade",
+            "tosAndPrivPolicyBody": "Atualizamos os Termos de Serviço e a Política de Privacidade da Firefly.",
+            "tosBody": "Atualizamos os Termos de Serviço da Firefly.",
+            "privPolicyBody": "Atualizamos a Política de Privacidade da Firefly.",
+            "tosAndPrivPolicyCheckbox": "Eu li e aceito a atualização dos Termos de Serviço e da Política de Privacidade",
+            "tosCheckbox": "Eu li e aceito a atualização dos Termos de Serviço",
+            "privPolicyCheckbox": "Eu li e aceito a atualização da Política de Privacidade"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Sistema",
         "balance": "Saldo",
         "accountBalance": "Saldo da carteira",
+        "all": "Todos",
         "incoming": "Recebendo",
         "outgoing": "Enviando",
         "totalIn": "Total recebido",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Rede Legada",
         "capsLock": "O Caps Lock está ativado",
         "version": "Versão {version}",
+        "yourWallets": "Suas Carteiras",
         "unknown": "Desconhecido",
         "none": "Nenhum",
         "staked": "Em staking",
@@ -1011,7 +1034,8 @@
         "unstaking": "Parando staking",
         "notStaked": "Sem staking",
         "stakedFunds": "Fundos em staking",
-        "unstakedFunds": "Fundos sem staking"
+        "unstakedFunds": "Fundos sem staking",
+        "accountColor": "Cor da carteira"
     },
     "dates": {
         "today": "Hoje",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "O nome da sua carteira não pode ser maior que {length, plural, one {# caractere} other {# caracteres}}.",
             "empty": "Você deve usar sua carteira mais recente antes de criar uma nova.",
+            "emptyName": "O nome do perfil deve conter pelo menos 1 caractere.",
             "notEmpty": "Você deve transferir seu saldo antes de apagar esta carteira.",
             "duplicate": "Uma carteira com esse nome já existe.",
             "tilde": "O nome do perfil não pode começar com o caractere '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Você está usando atualmente um perfil de desenvolvedor e está conectado a {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Precisamos da sua permissão para usar a sua câmera para podermos escanear QR codes.",
+            "requestInAppSettings": "Se você deseja conceder permissão de uso da sua câmera para escanear QR codes, por favor ative-a nas configurações do aplicativo."
         }
     }
 }

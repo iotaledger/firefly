@@ -2,72 +2,72 @@
     "views": {
         "onboarding1": {
             "title": "Invia, Ricevi e Gestisci i tuoi token IOTA",
-            "body": "Firefly è il wallet ufficiale di IOTA."
+            "body": "Firefly è il software di portafoglio ufficiale di IOTA."
         },
         "legal": {
-            "title": "Informativa sulla Privacy e Termini di Servizio",
+            "title": "Politica sulla Privacy e Termini di Servizio",
             "body": "Si prega di prendere visione dell'Informativa sulla privacy e i termini di servizio.",
-            "checkbox": "Ho letto e accetto l'Informativa sulla Privacy ed i Termini di Servizio"
+            "checkbox": "Ho letto e accetto la Politica sulla Privacy e i Termini di Servizio"
         },
         "appearance": {
             "title": "Aspetto",
-            "body": "Scegli il tema dell'app."
+            "body": "Scegli il tema della tua app."
         },
         "profile": {
             "title": "Crea un profilo",
-            "profileName": "Profilo",
-            "body1": "È possibile creare più profili utente per organizzare i wallet e migliorare la privacy.",
+            "profileName": "Nome del profilo",
+            "body1": "Puoi creare più profili utente per organizzare i tuoi portafogli e migliorare la privacy.",
             "body2": {
                 "first": "Per ora, iniziamo con il nome del tuo primo profilo.",
                 "nonFirst": "Per ora, iniziamo con il nome del tuo profilo."
             },
-            "addMore": "È possibile aggiungere ulteriori profili successivamente.",
-            "advancedOptions": "Advanced options",
+            "addMore": "Puoi aggiungere altri profili in seguito.",
+            "advancedOptions": "Opzioni avanzate",
             "developer": {
                 "label": "Profilo Sviluppatore",
-                "info": "Connect to the devnet or a private network"
+                "info": "Connettiti al devnet o a una rete privata"
             }
         },
         "setup": {
-            "title": "Configura un wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "Dal 21 aprile 2021, gli utenti possono migrare i loro token alla nuova rete Chrysalis. Si consiglia di migrare i token esistenti il prima possibile.",
-            "learnMore": "Approfondimenti sulla migrazione"
+            "title": "Configura un portafoglio",
+            "chrysalisTitle": "Aggiornamento della Rete Chrysalis",
+            "chrysalisBody": "Dal 21 aprile 2021, gli utenti possono migrare i loro token alla nuova rete Chrysalis. Ti consigliamo di migrare i tuoi token esistenti appena possibile.",
+            "learnMore": "Impara sulla migrazione"
         },
         "secure": {
-            "title": "Proteggi il tuo wallet",
-            "body1": "Salva e stampa il modello PDF Recovery Kit.",
-            "body2": "Se si compila il Recovery kit e lo si conserva in modo sicuro, si sarà sempre in grado di recuperare i wallet."
+            "title": "Proteggi il tuo portafoglio",
+            "body1": "Salva e stampa il modello PDF del Kit di Recupero.",
+            "body2": "Se compili il Kit di Recupero e lo conservi in sicurezza, potrai sempre recuperare i tuoi portafogli."
         },
         "create": {
             "title": "Crea un portafoglio",
-            "body": "Crea un nuovo portafoglio. Puoi scegliere un normale portafoglio software oppure se hai un dispositivo Ledger puoi impostare un portafoglio hardware.",
+            "body": "Crea un nuovo portafoglio. Puoi scegliere un normale software del portafoglio o, se hai un dispositivo Ledger, puoi configurarne uno hardware.",
             "softwareAccount": {
-                "title": "Voglio un portafoglio software",
-                "description": "Crea una frase di recupero di 24 parole"
+                "title": "Voglio un software portafoglio",
+                "description": "Crea una Frase di Recupero di 24 parole"
             },
             "ledgerAccount": {
                 "title": "Voglio un portafoglio hardware",
-                "description": "Richiesto Ledger Nano S o Nano X"
+                "description": "Ledger Nano S o Nano X necessario"
             }
         },
         "setupLedger": {
-            "progress1": "Collega il Ledger",
+            "progress1": "Connetti il tuo Ledger",
             "progress2": "Genera un indirizzo",
-            "progress3": "Accedi all'app Ledger",
+            "progress3": "Passa all'app Ledger",
             "progress4": "Trasferisci fondi",
             "watchVideo": "Guarda la video guida",
-            "videoGuide": "Video guida migrazione Ledger"
+            "videoGuide": "Video guida di migrazione di Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Hai installato le app Ledger necessarie?",
+            "title": "Hai installato le app del Ledger necessarie?",
             "body1": "Prima di procedere, è necessario trovare e installare sia l'app IOTA Legacy e la nuova app IOTA tramite Ledger Live.",
             "body2": "Assicurati che il tuo firmware Ledger sia aggiornato. Tutte le app preinstallate dovrebbero essere aggiornate alle loro ultime versioni.",
             "action": "Sì, ho installato queste app"
         },
         "password": {
             "title": "Scegli una password",
-            "body1": "È necessaria una password più sicura. Usa una combinazione di parole ed evita frasi comuni, nomi o date.",
+            "body1": "Necessiti di una password forte per proteggere i tuoi fondi. Usa una combinazione di parole ed evita frasi, nomi o date comuni.",
             "body2": "Si consiglia di annotare la password nel vostro Recovery Kit."
         },
         "protect": {
@@ -77,199 +77,199 @@
         },
         "pin": {
             "title": "Imposta un codice PIN",
-            "body1": "Inserire un PIN a 6 cifre qui sotto. Sarà chiesto di inserire il PIN per accedere al profilo.",
-            "body2": "Utilizzare solo numeri"
+            "body1": "Inserisci di seguito un PIN a 6 cifre. Ti sarà chiesto di inserire il tuo PIN per accedere al tuo profilo.",
+            "body2": "Usa solo numeri"
         },
         "confirmPin": {
             "title": "Verifica il tuo codice PIN",
-            "body1": "Il PIN mantiene privato il saldo e le transazioni.",
+            "body1": "Il PIN mantiene privato il tuo saldo e le tue transazioni.",
             "body2": "Reinserisci il codice PIN per procedere. "
         },
         "backup": {
-            "title": "Esegui il back up del tuo portafoglio",
-            "body1": "Ora verrà mostrata una frase di recupero. Scrivila nel Recovery Kit.",
-            "body2": "Non condividere la frase di recupero con nessuno. Può essere utilizzata per accedere ai tuoi token da qualsiasi luogo.",
+            "title": "Esegui il backup del tuo portafoglio",
+            "body1": "Ti sarà ora mostrata una frase di recupero. Annotala nel tuo Kit di Recupero.",
+            "body2": "Non condividere la tua frase di recupero con nessuno. È utilizzabile per accedere ai tuoi token da ovunque.",
             "body3": "Se perdi la tua frase di recupero, potresti perdere i tuoi fondi."
         },
         "recoveryPhrase": {
             "title": "Frase di recupero",
-            "body1": "Nel Recovery Kit, annotare le parole nell'ordine esatto mostrato.",
-            "body2": "Mantenere queste informazioni private ed conservarle in modo sicuro.",
-            "body3": "È importante avere un backup scritto. I computer possono fallire ed i file possono corrompersi.",
-            "revealRecoveryPhrase": "Rivela frase di recupero",
-            "hideRecoveryPhrase": "Nascondi frase di recupero"
+            "body1": "Nel tuo Kit di Recupero, annota le parole nell'ordine esatto mostrato.",
+            "body2": "Mantienila privata e conservata in sicurezza.",
+            "body3": "È importante avere un backup scritto. Spesso, i computer si guastano e i file possono corrompersi.",
+            "revealRecoveryPhrase": "Rivela la frase di recupero",
+            "hideRecoveryPhrase": "Nascondi la frase di recupero"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifica la frase di recupero",
-            "body": "Verifica che la frase sia stata scritta correttamente. Seleziona ogni parola nell'ordine indicato.",
+            "body": "Verifica di aver annotato correttamente la frase. Sei pregato di selezionare ogni parola nell'ordine indicato.",
             "word": "Parola",
             "verified": "Frase di recupero verificata",
             "verifiedBody": "Ricordati di tenerla privata e di conservarla in sicurezza."
         },
         "backupWallet": {
-            "title": "Esegui il backup di un file Stronghold",
-            "body1": "Inserisci la tua password per eseguire il backup del tuo wallet in un file Stronghold. La tua password viene utilizzata per crittografare il backup.",
+            "title": "Esegui il backup in un file Stronghold",
+            "body1": "Inserisci la tua password per eseguire il backup dei tuoi portafogli in un file Stronghold. La tua password è usata per crittografare il backup.",
             "body2": "Motivi per cui i backup digitali sono importanti:",
-            "reason1": "Recupera facilmente i tuoi wallet senza digitare la tua frase di recupero",
-            "reason2": "Importa i tuoi wallet su altri dispositivi",
-            "reason3": "Recupera la cronologia completa delle transazioni"
+            "reason1": "Recupera facilmente i tuoi portafogli senza digitare la tua frase di recupero",
+            "reason2": "Importa i tuoi portafogli su altri dispositivi",
+            "reason3": "Recupera lo storico completo delle tue transazioni"
         },
         "recoveryPhraseSaved": {
-            "title": "Backup effettuato correttamente",
-            "body": "Hai eseguito il backup del tuo wallet in uno Stronghold."
+            "title": "Backup riuscito",
+            "body": "Hai eseguito il backup dei tuoi portafogli in uno Stronghold."
         },
         "congratulations": {
-            "title": "Impostazione portafoglio completata",
+            "title": "Configurazione del portafoglio completata",
             "fundsMigrated": "Fondi migrati",
-            "body": "Il tuo portafoglio è pronto all'uso.",
-            "softwareMigratedBody": "Hai migrato con successo i tuoi fondi alla nuova rete",
-            "fireflyLedgerBody": "Il tuo account Ledger è stato recuperato con successo e ora puoi continuare.",
+            "body": "Il tuo nuovo portafoglio è pronto all'uso.",
+            "softwareMigratedBody": "Hai migrato correttamente i tuoi fondi alla nuova rete",
+            "fireflyLedgerBody": "Il tuo conto Ledger è stato recuperato correttamente e puoi ora continuare.",
             "trinityLedgerBody": "Hai migrato con successo i fondi sul Ledger alla nuova rete.",
-            "exportMigration": "Esporta il log di migrazione e termina la configurazione"
+            "exportMigration": "Esporta il registro di migrazione e termina la configurazione"
         },
         "import": {
-            "title": "Recuperare o migrare fondi",
-            "body": "Se hai un seed esistente o un file di backup del wallet, puoi importarlo qui. Se disponi di fondi di rete più vecchi, verranno effettuati i passaggi di migrazione per passare alla rete Chrysalis.",
+            "title": "Recupera o migra i fondi",
+            "body": "Se hai un seed esistente o un file di backup del portafoglio, puoi importarlo qui. Se detieni fondi di una rete più vecchia, sarai guidato per i passaggi di migrazione per passare alla rete Chrysalis.",
             "importSeed": "Ho un seed di 81 caratteri",
-            "importSeedDescription": "Inserisci un seed e migra fondi in Crisalide",
+            "importSeedDescription": "Inserisci un seed e migra i fondi a Chrysalis",
             "importMnemonic": "Ho una frase di recupero di Firefly",
-            "importMnemonicDescription": "Inserisci la tua frase segreta per recuperare i tuoi wallet",
-            "importFile": "Ho un file di backup",
+            "importMnemonicDescription": "Inserisci la tua frase di recupero per recuperare i tuoi portafogli",
+            "importFile": "Ho un backup su file",
             "importFileDescription": "Carica un file Seedvault o Stronghold",
-            "importLedger": "Ho un backup Ledger",
-            "importLedgerDescription": "Ripristina o migra un profilo Ledger"
+            "importLedger": "Ho un backup di Ledger",
+            "importLedgerDescription": "Ripristina o migra un profilo di Ledger"
         },
         "importFromText": {
             "seed": {
-                "title": "Digita il tuo seed per iniziare la migrazione",
-                "body": "Un seed è composto da 81 caratteri. Questo è usato per recuperare dati da un portafoglio Trinity.",
+                "title": "Digita il tuo seed per cominciare la migrazione",
+                "body": "Un seed consiste in 81 caratteri. È usato per il recupero dalla vecchia app di Trinity.",
                 "enter": "Inserisci il tuo seed"
             },
             "mnemonic": {
-                "title": "Digita la frase di recupero",
-                "body": "Una frase di recupero è lunga 24 parole, tutte minuscole, con spazi. Viene utilizzata per recuperare un wallet Firefly.",
+                "title": "Digita la tua frase di recupero",
+                "body": "Una frase di recupero è lunga 24 parole, tutte minuscole, con spazi. È usata per recuperare portafogli Firefly esistenti.",
                 "enter": "Inserisci la tua frase segreta di recupero"
             },
             "seedDetected": "Rilevato seed di 81 caratteri",
             "phraseDetected": "Rilevata frase di recupero da 24 parole",
-            "checksum": "Codice di verifica"
+            "checksum": "Codice di controllo"
         },
         "importFromFile": {
-            "title": "Ripristina il tuo wallet da un file di backup",
-            "body": "Importa un file di backup per ripristinare il tuo wallet. I backup possono essere o una Stronghold (.stronghold) od un Trinity SeedVault (.kdbx)."
+            "title": "Ripristina i tuoi portafogli da un backup su file",
+            "body": "Importa un backup su file per ripristinare i tuoi portafogli. I backup possono essere Stronghold (.stronghold) o un SeedVault di Trinity (.kdbx)."
         },
         "importFromLedger": {
             "title": "Ripristina o Migra il tuo Ledger",
-            "body": "Ripristina un profilo Firefly Ledger esistente o migra i tuoi fondi da Trinity.",
-            "haveFireflyLedger": "Ho un backup di Firefly Ledger",
-            "haveFireflyLedgerDescription": "Ripristina un profilo Firefly",
-            "haveTrinityLedger": "Ho un backup Trinity Ledger",
-            "haveTrinityLedgerDescription": "Migra un profilo Trinity"
+            "body": "Ripristina un profilo di Ledger di Firefly esistente o migra i tuoi fondi da Trinity.",
+            "haveFireflyLedger": "Ho un backup di Firefly di Ledger",
+            "haveFireflyLedgerDescription": "Ripristina un profilo di Firefly",
+            "haveTrinityLedger": "Ho un backup Trinity di Ledger",
+            "haveTrinityLedgerDescription": "Migra un profilo di Trinity"
         },
         "connectLedger": {
             "title": "Collega il tuo Ledger a Firefly",
-            "body": "Per trovare il tuo dispositivo Ledger da Firefly, assicurati che l'applicazione Ledger Live ufficiale sia chiusa.",
-            "trafficLight1": "Collega e sblocca il tuo Ledger con il PIN",
+            "body": "Per trovare il tuo dispositivo Ledger con Firefly, sei pregato di assicurarti che l'applicazione ufficiale Ledger Live sia chiusa.",
+            "trafficLight1": "Connetti e sblocca il tuo Ledger con il tuo PIN",
             "trafficLight2": "Apri la nuova app IOTA sul tuo Ledger",
             "tips": "Suggerimenti se il tuo Ledger non si connette"
         },
         "restoreFromFireflyLedger": {
             "title": "Ripristina Il Tuo Profilo Ledger",
-            "body": "Premere ripristino per completare il processo di configurazione e ripristinare i portafogli, i saldi e la cronologia delle transazioni.",
-            "restoring": "Ripristino da Ledger..."
+            "body": "Premi ripristina per completare il processo di configurazione e ripristinare i tuoi portafogli, saldi e storico delle transazioni.",
+            "restoring": "Ripristinando da Ledger..."
         },
         "legacyLedgerIntro": {
-            "title": "Avvia la tua migrazione Ledger usando Firefly",
+            "title": "Avvia la tua migrazione di Ledger usando Firefly",
             "body1": "Firefly ti aiuterà a trasferire i tuoi token alla nuova rete Chrysalis.",
-            "body2": "Dopo la migrazione, sarai in grado di inviare e ricevere i tuoi token utilizzando il tuo Ledger con Firefly.",
+            "body2": "Dopo la migrazione, potrai inviare e ricevere i tuoi token usando il tuo Ledger con Firefly.",
             "readMore": "Cosa aspettarsi dal processo di migrazione"
         },
         "generateNewLedgerAddress": {
             "title": "Genera un nuovo indirizzo",
-            "body": "È necessario generare un nuovo indirizzo per migrare i tuoi token con Firefly. Fare clic sul pulsante qui sotto per continuare.",
+            "body": "Devi generare un nuovo indirizzo per migare i tuoi token con Firefly. Clicca il seguente pulsante per continuare.",
             "confirmTitle": "Conferma il nuovo indirizzo",
-            "confirmBody": "Per sicurezza, si prega di confrontare l'indirizzo generato sul tuo dispositivo Ledger con quello visualizzato qui sotto. Se corrispondono, premi entrambi i pulsanti sul tuo Ledger come richiesto.",
+            "confirmBody": "Per sicurezza, sei pregato di confrontare l'indirizzo generato sul tuo dispositivo Ledger con quello mostrato sotto. Se corrispondono, premi entrambi i pulsanti sul tuo Ledger come richiesto.",
             "confirmedTitle": "Indirizzo confermato",
-            "confirmedBody": "Hai confermato che l'indirizzo in Firefly corrisponde a quello sul tuo dispositivo Ledger.",
-            "generating": "Generazione indirizzo"
+            "confirmedBody": "Hai confermato che l'indirizzo su Firefly corrisponde a quello sul tuo dispositivo Ledger.",
+            "generating": "Generando l'indirizzo"
         },
         "switchLedgerApps": {
-            "title": "Cambia app Ledger",
-            "body": "Passa all'app IOTA Legacy sul tuo dispositivo Ledger per continuare la migrazione. Quando sei pronto, premi continua."
+            "title": "Passa tra le app del Ledger",
+            "body": "Sei pregato di passare all'app {legacy} sul tuo dispositivo Ledger per continuare la migazione. Quando sei pronto, premi continua."
         },
         "selectLedgerAccountIndex": {
-            "title": "Scegli l'indice dell'account Ledger",
-            "body": "Scegli l'indice dell'account Ledger che hai usato con Trinity. Per la maggior parte degli utenti sarà l'indice predefinito 0.",
-            "accountIndex": "Indice Account",
-            "accountPage": "Pagina del conto",
+            "title": "Scegli l'indice del conto di Ledger",
+            "body": "Scegli l'indice del conto del Ledger che hai usato con Trinity. Per gran parte degli utenti sarà l'indice predefinito di 0.",
+            "accountIndex": "Indice del Conto",
+            "accountPage": "Pagina del Conto",
             "standard": "Standard",
             "expert": "Esperto",
-            "takingAWhile": "Questo processo richiederà del tempo...",
+            "takingAWhile": "Ci sta volendo un po'...",
             "notGeneratingAddresses": "Il tuo Ledger sta generando indirizzi?",
-            "reinstallLegacy": "In caso contrario, disconnetti il dispositivo e riprova. Se il problema persiste, potrebbe essere necessario reinstallare l'app {legacy}."
+            "reinstallLegacy": "In caso contrario, disconnetti il dispositivo e riprova. Se il problema persiste, potresti dover reinstallare l'app {legacy}."
         },
         "importBackupPassword": {
-            "body1": "Per favore inserisci la tua password di backup.",
-            "body2": "Questa è la password impostata quando hai creato per la prima volta il backup."
+            "body1": "Sei pregato di inserire la tua password di backup.",
+            "body2": "Questa è la password che hai impostato alla creazione del tuo backup."
         },
         "importSuccess": {
-            "title": "Hai recuperato con successo il backup",
-            "body": "Ora puoi configurare il tuo nuovo profilo."
+            "title": "Hai recuperato correttamente il tuo backup",
+            "body": "Puoi ora configurare il tuo nuovo profilo."
         },
         "migrate": {
-            "title": "Trasferisci i tuoi fondi",
-            "body1": "Questo è un processo automatizzato per trasferire i tuoi fondi al tuo nuovo wallet.",
-            "body2": "Potrebbe volerci del tempo. Non spegnere il dispositivo durante il trasferimento.",
+            "title": "Migra i tuoi fondi",
+            "body1": "Questo è un processo automatizzato per trasferire i tuoi fondi al tuo nuovo portafoglio.",
+            "body2": "Potrebbe volerci un po'. Non spegnere il tuo dispositivo durante la migrazione.",
             "existing": "Il tuo vecchio portafoglio",
             "new": "Il tuo nuovo portafoglio",
-            "learn": "Informazioni sulla migrazione",
-            "beginMigration": "Inizia la Migrazione",
-            "migrating": "Migrazione fondi...",
+            "learn": "Impara sulla migrazione",
+            "beginMigration": "Avvia la Migrazione",
+            "migrating": "Migrando i fondi...",
             "migrated": "{balance} migrato",
-            "migrationFailed": "Migrazione non riuscita",
-            "noAddressesForMigration": "Seleziona gli indirizzi che desideri proteggere.",
-            "restoringWallet": "Ripristino del wallet...",
-            "findingBalance": "Ricerca del saldo...",
-            "incorrectSeedVaultPassword": "Password del SeedVault non corretta.",
+            "migrationFailed": "Migrazione Fallita",
+            "noAddressesForMigration": "Sei pregato di selezionare gli indirizzi che desideri proteggere.",
+            "restoringWallet": "Ripristinando il portafoglio...",
+            "findingBalance": "Trovando il saldo...",
+            "incorrectSeedVaultPassword": "Password del SeedVault errata.",
             "noDataSeedVault": "Non è stato possibile trovare dati nel SeedVault.",
-            "signingBundle": "Firma del bundle",
-            "broadcastingBundle": "Trasmissione del bundle",
-            "miningBundle": "Mining del bundle",
-            "problemRestoringWallet": "Si è verificato un errore di rete nel ripristino del wallet. Riprova.",
-            "minimumMigrationAmountSpentAddresses": "L'importo minimo di migrazione per ogni indirizzo speso è 1 Mi. Controlla di nuovo se il tuo saldo non è corretto.",
+            "signingBundle": "Firmando il pacchetto",
+            "broadcastingBundle": "Trasmettendo il pacchetto",
+            "miningBundle": "Minando il pacchetto",
+            "problemRestoringWallet": "Si è verificato un errore di rete ripristinando il tuo portafoglio. Sei pregato di riprovare.",
+            "minimumMigrationAmountSpentAddresses": "L'importo minimo di migrazione per ogni indirizzo speso è di 1 Mi. Ricontrolla se il tuo saldo sembra errato.",
             "tooManyAddressesToMigrate": "Hai troppi indirizzi con un saldo basso per migrare. Controlla di nuovo se il tuo saldo totale non sembra corretto.",
-            "cannotMigrateAllYourFunds": "Non possiamo migrare tutti i tuoi fondi perché alcuni indirizzi sono troppo bassi. Puoi procedere comunque. {value} andrà perso.",
-            "error": "Si è verificato un errore durante la migrazione dei fondi. Per favore riprova."
+            "cannotMigrateAllYourFunds": "Non possiamo migrare tutti i tuoi fondi perché alcuni indirizzi hanno un valore troppo basso. Puoi procedere comunque. {value} sarà perso.",
+            "error": "Si è verificato un errore migando i tuoi fondi. Sei pregato di riprovare."
         },
         "bundleMiningWarning": {
             "title": "Attenzione",
             "body1": "Hai fondi su uno o più indirizzi spesi.",
-            "body2": "Si consiglia di eseguire un processo automatizzato per aiutare a proteggere e trasferire questi fondi in modo sicuro.",
-            "body3": "Se chiudi l'app dovrai riavviare l'intera migrazione.",
-            "learn": "Informazioni sugli indirizzi spesi"
+            "body2": "Ti consigliamo di eseguire un processo automatizzato per aiutare a proteggere e trasferire in sicurezza questi fondi.",
+            "body3": "Se chiudi l'app, dovrai riavviare l'intera migrazione.",
+            "learn": "Impara sugli indirizzi spesi"
         },
         "secureSpentAddresses": {
             "title": "Indirizzi spesi sicuri",
-            "body1": "Hai fondi su {number, plural, one {# indirizzo speso} other {# indirizzi spesi}}.",
-            "body2": "Si consiglia di eseguire un processo automatizzato per aiutare a proteggere e trasferire questi fondi in modo sicuro.",
+            "body1": "Hai fondi rilevati su {number, plural, one {# indirizzo speso} other {# indirizzi spesi}}.",
+            "body2": "Ti consigliamo di eseguire un processo automatizzato per aiutare a proteggere e trasferire in sicurezza i tuoi fondi.",
             "error": "Non puoi migrare gli indirizzi spesi con meno di 1 Mi"
         },
         "securityCheckCompleted": {
             "title": "Controllo di sicurezza completato",
-            "body1": "Abbiamo calcolato il livello di rischio per la sicurezza. L'esecuzione di questo processo potrebbe ridurre il livello di rischio.",
-            "body2": "Quando si è soddisfatti del livello di rischio (s) premere continua.",
+            "body1": "Abbiamo calcolato il livello di rischio di sicurezza. Eseguire nuovamente questo processo potrebe ridurlo.",
+            "body2": "Quando sei felice del livello di rischio, premi continua.",
             "rerun": "Ripeti il processo per gli indirizzi selezionati",
             "continueMigration": "Continua la migrazione"
         },
         "securingSpentAddresses": {
-            "title": "Protezione degli indirizzi spesi...",
-            "body1": "Questo processo richiederà {minutes, plural, one {1 minuto} other {# minuti}}.",
-            "body2": "Il computer verrà utilizzato alla massima capacità, potresti fare qualcos'altro mentre attendi."
+            "title": "Proteggendo gli indirizzi spesi...",
+            "body1": "Questo processo impiegherà {minutes, plural, one {1 minuto} other {# minuti}}.",
+            "body2": "Il tuo computer opererà alla massima capacità, potresti voler far qualcos'altro attenendo che si completi."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly ora procederà alla migrazione dei tuoi fondi. Questo potrebbe richiedere un po' di tempo.",
+            "body1": "Firefly procederà ora alla migrazione dei tuoi fondi. Potrebbe volerci un po'.",
             "body2": "Assicurati che il tuo Ledger sia connesso e che l'app {legacy} sia sempre aperta durante la migrazione.",
-            "migrate": "Migrazione fondi",
+            "migrate": "Migra i fondi",
             "transaction": "Transazione {number}",
             "rerun": "Riprova"
         },
@@ -279,41 +279,41 @@
         },
         "balance": {
             "title": "Il tuo saldo",
-            "body": "Assicurati che il tuo saldo sia corretto prima di continuare. Puoi controllare di nuovo se le cose non sembrano corrette.",
-            "error": "L'importo minimo di migrazione è 1 Mi. Controlla di nuovo se il tuo saldo non sembra corretto.",
-            "zeroBalance": "Prova a controllare di nuovo. Se ancora non riesci a trovare il tuo saldo potresti aver inserito il tuo seed in modo errato.",
-            "zeroBalanceLedgerLegacy": "Controlla di nuovo. Se ancora non riesci a trovare il tuo saldo potresti aver selezionato l'indice sbagliato dell'account."
+            "body": "Assicurati che il tuo saldo sia corretto prima di continuare. Puoi ricontrollare se le cose sembrano errate.",
+            "error": "L'importo minimo di migrazione è di 1 Mi. Ricontrolla se il tuo saldo sembra errato.",
+            "zeroBalance": "Prova a ricontrollare. Se non riesci ancora a trovare il tuo saldo potresti aver inserito il tuo seed in modo errato.",
+            "zeroBalanceLedgerLegacy": "Prova a ricontrollare. Se non riesci ancora a trovare il tuo saldo potresti aver selezionato l'indice del conto errato."
         },
         "settings": {
             "settings": "Impostazioni",
             "generalSettings": {
-                "title": "Impostazioni Generali",
-                "description": "Configura l'aspetto della tua app ed altre impostazioni generali"
+                "title": "Generali",
+                "description": "Configura l'aspetto della tua app e altre impostazioni generali"
             },
             "security": {
                 "title": "Sicurezza",
-                "description": "Cambia la tua password e seleziona le impostazioni di sicurezza"
+                "description": "Modifica la tua password e regola le impostazioni correlate alla sicurezza"
             },
             "advancedSettings": {
-                "title": "Impostazioni avanzate",
-                "description": "Strumenti e impostazioni per gli utenti tecnici"
+                "title": "Avanzate",
+                "description": "Strumenti e impostazioni manuali per utenti tecnici"
             },
             "helpAndInfo": {
-                "title": "Aiuto & Informazioni",
-                "description": "Trova la risposta a una domanda o ottieni aiuto con un problema"
+                "title": "Supporto e Informazioni",
+                "description": "Trova la risposta a una domanda o ricevi supporto con un problema"
             },
             "profile": {
                 "title": "Profilo",
                 "description": "Cambia il nome del tuo profilo o imposta un avatar"
             },
             "sync": {
-                "title": "Sincronizza wallet",
+                "title": "Sincronizza i portafogli",
                 "description": ""
             },
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Riavvia l'applicazione Firefly per rendere effettive le modifiche al tema di sistema"
+                "advice": "Sei pregato di riavviare l'applicazione di Firefly perché le modifiche al tema di sistema siano effettive"
             },
             "language": {
                 "title": "Lingua",
@@ -321,57 +321,62 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Imposta la conversione del saldo e aggiorna le opzioni del grafico"
+                "description": "Regola la conversione del saldo e aggiorna le opzioni del grafico"
             },
             "notifications": {
                 "title": "Notifiche",
-                "description": "Notifiche di sistema per eventi delle transazione"
+                "description": "Notifiche di sistema per gli eventi di transazione"
             },
             "networkStatus": {
-                "title": "Stato della rete",
-                "description": "Visualizza lo stato del nodo a cui sei attualmente connesso"
+                "title": "Stato di rete",
+                "description": "Mostra lo stato del nodo a cui sei correntemente connesso"
             },
             "exportStronghold": {
-                "title": "Esporta backup",
-                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni"
+                "title": "Esporta il backup",
+                "description": "Esporta in un file Stronghold; un backup crittografato compleot dei tuoi portafogli e lo storico delle transazioni più recenti"
             },
             "appLock": {
                 "title": "Blocco Automatico",
-                "description": "Tempo di inattività prima del blocco dei wallet e disconnessione"
+                "description": "Tempo d'inattività prima del blocco dei tuoi portafogli e della tua disconnessione"
             },
             "changePassword": {
-                "title": "Cambia password",
-                "description": "La tua password è utilizzata per proteggere i tuoi wallet. Devi usare una password sicura per proteggere i tuoi fondi"
+                "title": "Modifica la password",
+                "description": "La tua password è usata per proteggere i tuoi portafogli. Devi usare una password forte per proteggere i tuoi fondi"
             },
             "changePincode": {
-                "title": "Cambia il PIN",
+                "title": "Cambia il codice PIN",
                 "description": "Il PIN mantiene privato il saldo e le transazioni",
-                "currentPincode": "PIN attuale",
+                "currentPincode": "PIN corrente",
                 "newPincode": "Nuovo PIN",
                 "confirmNewPincode": "Conferma il nuovo PIN",
                 "action": "Cambia PIN"
             },
+            "changeProfileName": {
+                "title": "Cambia il nome del profilo",
+                "description": "Cambia il nome del tuo profilo di Firefly",
+                "success": "Hai cambiato il nome del tuo profilo"
+            },
             "balanceFinder": {
-                "title": "Rivaluta il saldo",
-                "description": "Esegui una ricerca estesa di token nei tuoi indirizzi"
+                "title": "Rilevatore del saldo",
+                "description": "Esegui una ricerca avanzata di token ai tuoi indirizzi"
             },
             "hiddenAccounts": {
-                "title": "Wallet nascosti",
-                "description": "Selezionando questa opzione, verranno visualizzati i wallet precedentemente nascosti"
+                "title": "Portafogli nascosti",
+                "description": "Selezionare queste opzioni mostrerà i portafogli precedentemente nascosti"
             },
             "deleteProfile": {
-                "title": "Elimina profilo",
-                "description": "Elimina l'intero profilo, wallet e cronologia delle transazioni. Assicurati di avere un backup"
+                "title": "Elimina il profilo",
+                "description": "Elimina il tuo intero profilo, portafogli e lo storico delle transazioni. Assicurati di avere un backup"
             },
             "deepLinks": {
                 "title": "Collegamenti IOTA",
-                "description": "Riempi automaticamente i dati delle transazioni in Firefly facendo clic su un collegamento iota://"
+                "description": "Compila automaticamente i dati della transazione in Firefly al click del link IOTA"
             },
             "networkConfiguration": {
                 "title": "Configurazione di rete",
                 "title2": "Configurazione di rete",
                 "description": {
-                    "dev": "Le impostazioni di rete si aggiorneranno automaticamente in base alla configurazione del nodo corrente (modificare le connessioni di rete comporterà il ripristino dello stato del portafoglio)",
+                    "dev": "Le tue impostazioni di rete si aggiorneranno automaticamente secondo la configurazione corrente del nodo (cambiare reti risulterà nel ripristino dello stato del portafoglio)",
                     "nonDev": "Le impostazioni di rete verranno aggiornate automaticamente in base alla configurazione del nodo corrente"
                 },
                 "switchedNetworks": "Rete commutata con successo a \"{networkName}\".",
@@ -527,6 +532,12 @@
                     "description": "La rete di staging incentivata per promuovere importanti innovazioni su IOTA. Che sarà, sarà. L'evoluzione di Shimmer è nelle vostre mani."
                 }
             }
+        },
+        "picker": {
+            "color": {
+                "title": "Selezione Colore",
+                "hexCode": "Codice colore"
+            }
         }
     },
     "popups": {
@@ -620,7 +631,7 @@
             "empty": "Il log degli errori è vuoto."
         },
         "deleteProfile": {
-            "title": "Elimina profilo",
+            "title": "Elimina il profilo",
             "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata.",
             "typePassword": "Digita la password per confermare."
         },
@@ -639,7 +650,7 @@
             "title": "Conferma la transazione",
             "body": "Stai per inviare {amount} a",
             "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio."
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
@@ -750,8 +761,18 @@
             "body2": "Miriamo a lanciare Assembly nel 2022. I token saranno disponibili per il trasferimento una volta avviata la rete."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Stai creando un profilo sviluppatore",
+            "body": "Sarai connesso al Chrysalis Devnet di default e puoi passare manualmente tra le reti. Continua solo se sai cosa stai facendo."
+        },
+        "legalUpdate": {
+            "tosTitle": "Termini di Servizio",
+            "privPolicyTitle": "Politica sulla Privacy",
+            "tosAndPrivPolicyBody": "Abbiamo aggiornato i Termini di Servizio e la Politica sulla Privacy di Firefly.",
+            "tosBody": "Abbiamo aggiornato i Termini di Servizio di Firefly.",
+            "privPolicyBody": "Abbiamo aggiornato la Politica sulla Privacy di Firefly.",
+            "tosAndPrivPolicyCheckbox": "Ho letto e acconsento ai Termini di Servizio e la Politica sulla Privacy aggiornati",
+            "tosCheckbox": "Ho letto e acconsento ai Termini di Servizio aggiornati",
+            "privPolicyCheckbox": "Ho letto e acconsento alla Politica sulla Privacy aggiornata"
         }
     },
     "charts": {
@@ -905,7 +926,7 @@
         "from": "Da",
         "to": "A",
         "receiveFunds": "Ricevi fondi",
-        "address": "Address",
+        "address": "Indirizzo",
         "myAddress": "Il mio Indirizzo",
         "shareAddress": "Condividi un indirizzo",
         "yourAddress": "Il tuo indirizzo",
@@ -923,6 +944,7 @@
         "systemTheme": "Sistema",
         "balance": "Saldo",
         "accountBalance": "Saldo Wallet",
+        "all": "Tutto",
         "incoming": "In entrata",
         "outgoing": "In uscita",
         "totalIn": "Totale in",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Rete Legacy",
         "capsLock": "Blocco maiuscole è attivo",
         "version": "Versione {version}",
+        "yourWallets": "I Tuoi Portafogli",
         "unknown": "Sconosciuto",
         "none": "Nessuno",
         "staked": "In staking",
@@ -1011,7 +1034,8 @@
         "unstaking": "Togliere dallo staking",
         "notStaked": "Non in stake",
         "stakedFunds": "Fondi in staking",
-        "unstakedFunds": "Fondi non in staking"
+        "unstakedFunds": "Fondi non in staking",
+        "accountColor": "Colore Wallet"
     },
     "dates": {
         "today": "Oggi",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Il nome del wallet non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
             "empty": "Devi usare il tuo ultimo wallet prima di crearne uno nuovo.",
+            "emptyName": "Un nome del profilo deve contenere almeno 1 carattere.",
             "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo wallet.",
             "duplicate": "Un wallet con questo nome esiste già.",
             "tilde": "Un nome del profilo non può iniziare con il carattere '~'.",
@@ -1257,7 +1282,13 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "Stai correntemente usando un profilo sviluppatore e sei connesso a {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Necessitiamo del tuo permesso a usare la tua fotocamera per poter scansionare i codici QR.",
+            "requestInAppSettings": "Se desideri concedere l'autorizzazione per usare la tua fotocamera per scansionare i codici QR, sei pregato di consentirlo nelle impostazioni dell'app."
         }
     }
 }

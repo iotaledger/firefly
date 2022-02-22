@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Asetukset",
             "generalSettings": {
-                "title": "Yleiset asetukset",
+                "title": "Yleiset",
                 "description": "Määritä sovelluksen ulkoasu ja muut yleiset asetukset"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Vaihda salasanasi ja säädä turvallisuuteen liittyviä asetuksia"
             },
             "advancedSettings": {
-                "title": "Lisäasetukset",
+                "title": "Edistyneet",
                 "description": "Työkalut ja manuaaliset asetukset edistyneille käyttäjille"
             },
             "helpAndInfo": {
@@ -350,6 +350,11 @@
                 "newPincode": "Uusi PIN-koodi",
                 "confirmNewPincode": "Vahvista uusi PIN-koodi",
                 "action": "Vaihda PIN-koodi"
+            },
+            "changeProfileName": {
+                "title": "Muuta profiilin nimi",
+                "description": "Muuta Firefly-profiilisi nimeä",
+                "success": "Olet muuttanut profiilisi nimeä"
             },
             "balanceFinder": {
                 "title": "Saldon etsijä",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Kannustettu valmisteluverkko IOTA:n merkittävien innovaatioiden edistämiseen. Mitä tahansa tapahtuu, tapahtuu. Miten Shimmer kehittyy, riippuu sinusta."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Värin valinta",
+                "hexCode": "Värin heksakoodi"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Olet luomassa kehittäjäprofiilia",
             "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
+        },
+        "legalUpdate": {
+            "tosTitle": "Käyttöehdot",
+            "privPolicyTitle": "Tietosuojakäytäntö",
+            "tosAndPrivPolicyBody": "Olemme päivittäneet Fireflyn käyttöehtoja ja tietosuojakäytäntöä.",
+            "tosBody": "Olemme päivittäneet Fireflyn käyttöehtoja.",
+            "privPolicyBody": "Olemme päivittäneet Fireflyn tietosuojakäytäntöä.",
+            "tosAndPrivPolicyCheckbox": "Olen lukenut ja hyväksyn päivitetyt käyttöehdot ja tietosuojakäytännön",
+            "tosCheckbox": "Olen lukenut ja hyväksyn päivitetyt käyttöehdot",
+            "privPolicyCheckbox": "Olen lukenut ja hyväksyn päivitetyn tietosuojakäytännön"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Järjestelmä",
         "balance": "Saldo",
         "accountBalance": "Lompakon saldo",
+        "all": "Kaikki",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
         "totalIn": "Yhteensä sisään",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Vanha verkko",
         "capsLock": "Caps Lock on päällä",
         "version": "Versio {version}",
+        "yourWallets": "Sinun lompakkosi",
         "unknown": "Tuntematon",
         "none": "Ei mikään",
         "staked": "Stakettu",
@@ -1011,7 +1034,8 @@
         "unstaking": "Lopetetaan staking",
         "notStaked": "Ei stakettu",
         "stakedFunds": "Staketut varat",
-        "unstakedFunds": "Varat ilman stakea"
+        "unstakedFunds": "Varat ilman stakea",
+        "accountColor": "Lompakon väri"
     },
     "dates": {
         "today": "Tänään",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
             "empty": "Sinun täytyy käyttää viimeisintä lompakkoasi ennen uuden luomista.",
+            "emptyName": "Profiilin nimessä on oltava vähintään yksi merkki.",
             "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän lompakon.",
             "duplicate": "Samanniminen lompakko on jo olemassa.",
             "tilde": "Profiilin nimi ei voi alkaa merkillä '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Käytät tällä hetkellä kehittäjäprofiilia ja olet yhdistettynä verkkoon {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "Tarvitsemme luvan käyttää kameraasi QR-koodien skannaamiseen.",
+            "requestInAppSettings": "Jos haluat antaa luvan käyttää kameraasi QR-koodien skannaukseen, ota se käyttöön sovelluksen asetuksista."
         }
     }
 }

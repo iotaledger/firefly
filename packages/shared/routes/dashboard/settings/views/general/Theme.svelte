@@ -15,5 +15,5 @@
 <Radio value={'dark'} bind:group={appTheme} label={localize('general.darkTheme')} />
 <Radio value={'system'} bind:group={appTheme} label={localize('general.systemTheme')} />
 {#if appTheme === 'system'}
-    <TextHint classes="mb-5" icon="exclamation" hint={localize('views.settings.theme.advice')}/>
+    <TextHint classes="mb-5" icon="info" hint={localize('views.settings.theme.advice')} />
 {/if}

@@ -17,8 +17,7 @@
 </script>
 
 <div class="flex flex-col flex-wrap items-start space-y-1.5">
-    <balance-box
-        on:click={togglePreciseBalance}>
+    <balance-box on:click={togglePreciseBalance}>
         <Text type="h2" overrideColor classes="text-{textColor}">
             {showPreciseBalance ? formatUnitPrecision(balanceRaw, Unit.Mi) : formatUnitBestMatch(balanceRaw, true, 3)}
         </Text>

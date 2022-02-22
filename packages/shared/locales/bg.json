@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Настройки",
             "generalSettings": {
-                "title": "Общи настройки",
+                "title": "General",
                 "description": "Настройка на облика на приложението и други общи настройки"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Промяна на паролата и промяна на настройки за сигурността"
             },
             "advancedSettings": {
-                "title": "Разширени настройки",
+                "title": "Advanced",
                 "description": "Инструменти и ръчни настройки за напреднали потребители"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Тема",
                 "description": "",
-                "advice": "Рестартирайте приложението Firefly, за да станат активни промените по визуалната тема"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Език",
@@ -350,6 +350,11 @@
                 "newPincode": "Нов ПИН код",
                 "confirmNewPincode": "Потвърдете новия ПИН код",
                 "action": "Смяна на ПИН кода"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Търсене на налични средства",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Система",
         "balance": "Баланс/сума",
         "accountBalance": "Наличност в портфейла",
+        "all": "All",
         "incoming": "Входящи",
         "outgoing": "Изходящи",
         "totalIn": "Сума входящи",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Стара мрежа",
         "capsLock": "Caps Lock е включен",
         "version": "Версия {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Неизвестен",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Стейкнати средства",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Днес",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Трябва да използвате последния портфейл, за да създадете нов.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Трябва да прехвърлите наличността преди да изтриете този портфейл.",
             "duplicate": "Портфейл с това име вече съществува.",
             "tilde": "Името на профила не може да започва със символа '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

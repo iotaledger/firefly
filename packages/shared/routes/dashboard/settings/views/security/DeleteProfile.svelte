@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button,Text } from 'shared/components'
+    import { Button, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { openPopup } from 'shared/lib/popup'
 

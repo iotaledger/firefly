@@ -1,8 +1,8 @@
 <script lang="typescript">
-import { setClipboard } from 'shared/lib/utils';
-import { Icon } from 'shared/components'
+    import { setClipboard } from 'shared/lib/utils'
+    import { Icon } from 'shared/components'
 
-export let itemToCopy: string;
+    export let itemToCopy: string
 </script>
 
 <button class="ml-2" on:click={() => setClipboard(itemToCopy.toLowerCase())}>

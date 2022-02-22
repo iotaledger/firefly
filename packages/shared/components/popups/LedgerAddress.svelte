@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Animation,Text } from 'shared/components';
-    import { formatAddressForLedger } from 'shared/lib/ledger';
-    import { showAppNotification } from 'shared/lib/notifications';
-    import { closePopup,popupState } from 'shared/lib/popup';
-    import { onMount } from 'svelte';
-    import { get } from 'svelte/store';
+    import { Animation, Text } from 'shared/components'
+    import { formatAddressForLedger } from 'shared/lib/ledger'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, popupState } from 'shared/lib/popup'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -32,7 +32,8 @@
     <Animation
         width="100%"
         animation="ledger-bg-desktop"
-        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    />
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">

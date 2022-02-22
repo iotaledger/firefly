@@ -1,25 +1,33 @@
 <script lang="typescript">
-    import { Popup,Route,TitleBar,ToastContainer } from 'shared/components'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { beta, loggedIn } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails,pollVersion,versionDetails } from 'shared/lib/appUpdater'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir,isLocaleLoaded,setupI18n,_ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { Platform } from 'shared/lib/platform'
-    import { openPopup,popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles,cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { dashboardRoute,initRouter,openSettings,routerNext,routerPrevious,walletRoute } from 'shared/lib/router'
+    import { Electron } from 'shared/lib/electron'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
+    import {
+        dashboardRoute,
+        initRouter,
+        openSettings,
+        routerNext,
+        routerPrevious,
+        walletRoute,
+    } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AppRoute,Tabs } from 'shared/lib/typings/routes'
-    import { onDestroy,onMount } from 'svelte'
+    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
+    import { onDestroy, onMount } from 'svelte'
     import {
         Appearance,
         Backup,
         Balance,
         Congratulations,
+        CrashReporting,
         Create,
         Dashboard,
         Import,
@@ -41,17 +49,22 @@
 
     beta.set(process.env.RELEASE == 'beta')
 
+    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
+        Electron.updateAppSettings({ sendCrashReports })
+
+    $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
+
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
+                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
-    $: Platform.updateMenu('loggedIn', $loggedIn)
+    $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
@@ -67,6 +80,8 @@
             initRouter()
         }, 3000)
 
+        initAppSettings.set($appSettings)
+
         await pollMarketData()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
@@ -75,13 +90,13 @@
             await getVersionDetails()
             pollVersion()
         }
-        Platform.onEvent('menu-navigate-wallet', (route) => {
+        Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
             walletRoute.set(route)
         })
-        Platform.onEvent('menu-navigate-settings', () => {
+        Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
                     openSettings()
@@ -90,7 +105,7 @@
                 settings = true
             }
         })
-        Platform.onEvent('menu-check-for-update', () => {
+        Electron.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -98,26 +113,26 @@
                 },
             })
         })
-        Platform.onEvent('menu-error-log', () => {
+        Electron.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Platform.onEvent('menu-diagnostics', () => {
+        Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
-        Platform.hookErrorLogger((err) => {
+        Electron.hookErrorLogger((err) => {
             addError(err)
         })
 
         cleanupInProgressProfiles()
 
-        Platform.onEvent('deep-link-request', showDeepLinkNotification)
+        Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
     })
 
     onDestroy(() => {
-        Platform.removeListenersForEvent('deep-link-request')
-        Platform.DeepLinkManager.clearDeepLinkRequest()
+        Electron.removeListenersForEvent('deep-link-request')
+        Electron.DeepLinkManager.clearDeepLinkRequest()
     })
 
     const showDeepLinkNotification = () => {
@@ -151,6 +166,9 @@
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        </Route>
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />

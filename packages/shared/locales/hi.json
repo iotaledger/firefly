@@ -287,7 +287,7 @@
         "settings": {
             "settings": "सैटिन्ग्स",
             "generalSettings": {
-                "title": "सामान्य सेटिंग्स",
+                "title": "General",
                 "description": "अपने ऐप की उपस्थिति और अन्य सामान्य सेटिंग्स कॉन्फ़िगर करें"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "अपना पासवर्ड बदलें और सुरक्षा-संबंधी सेटिंग्स समायोजित करें"
             },
             "advancedSettings": {
-                "title": "उच्च सेटिंग्स",
+                "title": "Advanced",
                 "description": "उपकरण और तकनीकी उपयोगकर्ताओं के लिए मैनुअल सेटिंग्स"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "थीम",
                 "description": "",
-                "advice": "प्रभावी होने के लिए सिस्टम थीम में परिवर्तन के लिए फ़ायरफ्लाई एप्लिकेशन को पुनरारंभ करें"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "भाषा ",
@@ -350,6 +350,11 @@
                 "newPincode": "नया पिन",
                 "confirmNewPincode": "पिन की पुष्टि करें",
                 "action": "पिन बदलें"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "बैलेंस खोजने वाला",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "बैलेंस",
         "accountBalance": "वॉलेट शेष राशि",
+        "all": "All",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "totalIn": "कुल प्राप्त",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "विरासत नेटवर्क",
         "capsLock": "कैप्स लॉक ऑन है",
         "version": "संस्करण {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "जमा धन",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "आज",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "नया बनाने से पहले आपको अपने नवीनतम वॉलेट का उपयोग करना चाहिए।",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "इस वॉलेट को हटाने से पहले आपको अपना बैलेंस ट्रांसफर करना होगा।",
             "duplicate": "इस नाम का एक वॉलेट पहले से मौजूद है।",
             "tilde": "एक प्रोफ़ाइल नाम '~' वर्ण से शुरू नहीं हो सकता।",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

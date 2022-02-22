@@ -1,8 +1,17 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
+    import { initAppSettings } from 'shared/lib/appSettings'
     import { beta, cleanupSignup, mobile } from 'shared/lib/app'
-    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
+    import {
+        Animation,
+        Button,
+        ButtonCheckbox,
+        Input,
+        OnboardingLayout,
+        Text,
+        CollapsibleBlock,
+    } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
@@ -12,10 +21,11 @@
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
-        validateProfileName
+        validateProfileName,
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
+    import { Platform } from 'shared/lib/platform'
 
     export let locale: Locale
 
@@ -57,18 +67,22 @@
                 storeProfile(name, isDeveloperProfile)
 
                 const path = await getProfileDataPath($newProfile.name)
-                initialise($newProfile.id, path)
+                const machineId = await Platform.getMachineId()
+                const { sendCrashReports } = $initAppSettings
+                initialise($newProfile.id, path, sendCrashReports, machineId)
                 initialiseMigrationListeners()
             }
 
-            if(isDeveloperProfile) {
-                openPopup({type: 'confirmDeveloperProfile', props: {
-                    handleContinueClick: () => dispatch('next')
-                }})
+            if (isDeveloperProfile) {
+                openPopup({
+                    type: 'confirmDeveloperProfile',
+                    props: {
+                        handleContinueClick: () => dispatch('next'),
+                    },
+                })
             } else {
                 dispatch('next')
             }
-
         } catch (err) {
             showAppNotification({
                 type: 'error',
@@ -78,7 +92,7 @@
             busy = false
         }
     }
-    
+
     async function handleBackClick() {
         cleanupSignup()
         cleanupInProgressProfiles()
@@ -104,8 +118,12 @@
             classes="w-full mb-6"
             autofocus
             disabled={busy}
-            submitHandler={handleContinueClick} />
-        <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+            submitHandler={handleContinueClick}
+        />
+        <CollapsibleBlock
+            label={locale('views.profile.advancedOptions')}
+            showBlock={get(newProfile)?.isDeveloperProfile ?? false}
+        >
             <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
                 <div class="text-left">
                     <Text type="p">{locale('views.profile.developer.label')}</Text>

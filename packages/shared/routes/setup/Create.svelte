@@ -29,7 +29,8 @@
             icon="settings"
             classes="w-full mb-5"
             secondary
-            onClick={() => handleContinueClick(ProfileType.Software)}>
+            onClick={() => handleContinueClick(ProfileType.Software)}
+        >
             {locale('views.create.softwareAccount.title')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>

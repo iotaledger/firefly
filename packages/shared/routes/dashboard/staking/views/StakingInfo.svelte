@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform';
+    import { Platform } from 'shared/lib/platform'
     import { localize } from 'shared/lib/i18n'
     import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
@@ -72,9 +72,7 @@
     let header, subHeader
     $: $participationOverview, ([header, subHeader] = getHeaders())
 
-    stakingEventState.subscribe(() => {
-        [header, subHeader] = getHeaders()
-    })
+    stakingEventState.subscribe(() => ([header, subHeader] = getHeaders()))
 
     const handleLearnMoreClick = (): void => {
         Platform.openUrl('https://blog.iota.org/iota-staking-start/')
@@ -84,7 +82,10 @@
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
     {#if animation}
         <div class="animation-wrapper relative w-full">
-            <Animation {animation} classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <Animation
+                {animation}
+                classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
         </div>
     {/if}
     <div class="w-full mt-4 flex flex-col items-center text-center">

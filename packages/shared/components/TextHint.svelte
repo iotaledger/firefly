@@ -7,7 +7,7 @@
 </script>
 
 {#if hint}
-    <div class="flex flex-row justify-center items-center {classes}">
+    <div class="flex flex-row items-center {classes}">
         {#if icon !== 'none'}
             <Icon {icon} classes="mr-3 fill-current text-black dark:text-white" />
         {/if}

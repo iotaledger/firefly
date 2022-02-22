@@ -17,7 +17,7 @@
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale(`popups.node.titleRemove${removeAll ? 'All' : ''}` )}</Text>
+<Text type="h4" classes="mb-5">{locale(`popups.node.titleRemove${removeAll ? 'All' : ''}`)}</Text>
 <div class="w-full h-full mb-7">
     <Text>{locale(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>

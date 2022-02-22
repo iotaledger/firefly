@@ -4,7 +4,7 @@ use std::sync::{
     mpsc::{channel, Receiver},
     Arc, Mutex,
 };
-use wallet_actor_system::{
+use firefly_actor_system::{
     destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
     listen as add_event_listener, remove_event_listeners as remove_actor_event_listeners,
     send_message as send_actor_message, EventType, LoggerConfigBuilder, RUNTIME,
@@ -78,14 +78,26 @@ declare_types! {
             let storage_path = match cx.argument_opt(1) {
                 Some(arg) => {
                     Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
-                }
+                },
+                None => None,
+            };
+            let send_crash_reports = match cx.argument_opt(2) {
+                Some(arg) => {
+                    Some(arg.downcast::<JsBoolean>().or_throw(&mut cx)?.value())
+                },
+                None => Some(false),
+            };
+            let machine_id = match cx.argument_opt(3) {
+                Some(arg) => {
+                    Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
+                },
                 None => None,
             };
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
             RUNTIME.block_on(async move {
-                init_actor(clone_actor_id.to_string(), storage_path, wrapped_tx).await;
+                init_actor(clone_actor_id.to_string(), storage_path, send_crash_reports, machine_id, wrapped_tx).await;
             });
 
             Ok(ActorSystem {

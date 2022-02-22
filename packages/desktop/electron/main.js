@@ -4,8 +4,27 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs')
 const { execSync } = require('child_process')
+const { machineIdSync } = require('node-machine-id')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+
+const canSendCrashReports = () => {
+    let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
+    if (typeof sendCrashReports === 'undefined') {
+        sendCrashReports = false
+        updateSettings({ sendCrashReports })
+    }
+
+    return sendCrashReports
+}
+
+const CAN_LOAD_SENTRY = app.isPackaged
+const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
+
+let captureException = (..._) => {}
+if (SEND_CRASH_REPORTS) {
+    captureException = require('../sentry')(true).captureException
+}
 
 /**
  * Set AppUserModelID for Windows notifications functionality
@@ -31,6 +50,21 @@ if (
  */
 app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
+let machineId = null
+function getMachineId() {
+    // Will only be null the first time
+    // If this fails, it will probably fail again, so set it to an empty string
+    if (machineId === null) {
+        try {
+            machineId = machineIdSync()
+        } catch (error) {
+            machineId = ''
+            console.error(error)
+        }
+    }
+    return machineId
+}
+
 let lastError = {}
 
 /**
@@ -40,8 +74,24 @@ const handleError = (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
         lastError = {
             diagnostics: getDiagnostics(),
-            errorType,
             error,
+            errorType,
+        }
+
+        /**
+         * NOTE: We do NOT need to capture the exception unless it is from
+         * the main process.
+         */
+        if (SEND_CRASH_REPORTS) {
+            captureException(
+                new Error(
+                    JSON.stringify({
+                        type: errorType,
+                        message: error.message || error.reason || error,
+                        stack: error.stack || undefined,
+                    })
+                )
+            )
         }
 
         openErrorWindow()
@@ -55,11 +105,11 @@ const handleError = (errorType, error, isRenderProcessError) => {
 }
 
 process.on('uncaughtException', (error) => {
-    handleError('Main Unhandled Error', error)
+    handleError('[Main Context] Unhandled Error', error)
 })
 
 process.on('unhandledRejection', (error) => {
-    handleError('Main Unhandled Promise Rejection', error)
+    handleError('[Main Context] Unhandled Rejection', error)
 })
 
 /**
@@ -92,6 +142,7 @@ const defaultWebPreferences = {
     webviewTag: false,
     enableWebSQL: false,
     devTools: !app.isPackaged,
+    additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
 if (app.isPackaged) {
@@ -397,8 +448,12 @@ ipcMain.handle('handle-error', (_e, errorType, error) => {
     handleError(errorType, error, true)
 })
 
-// Os
+// System
 ipcMain.handle('get-os', (_e) => process.platform)
+ipcMain.handle('get-machine-id', (_e) => getMachineId())
+
+// Settings
+ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
 
 /**
  * Define deep link state
@@ -629,11 +684,21 @@ function windowStateKeeper(windowName, settingsFilename) {
     }
 }
 
+function updateSettings(data) {
+    const filename = 'settings.json'
+    const config = loadJsonConfig(filename)
+
+    /**
+     * CAUTION: We must be careful saving properties to this file, as
+     * once we decide to save it there then it will be there forever
+     * even if the name changes later.
+     */
+    saveJsonConfig(filename, { ...config, ...data })
+}
+
 function saveJsonConfig(filename, data) {
     try {
-        const userDataPath = app.getPath('userData')
-        const configFilename = path.join(userDataPath, filename)
-        fs.writeFileSync(configFilename, JSON.stringify(data))
+        fs.writeFileSync(getJsonConfig(filename), JSON.stringify(data))
     } catch (err) {
         console.error(err)
     }
@@ -641,12 +706,15 @@ function saveJsonConfig(filename, data) {
 
 function loadJsonConfig(filename) {
     try {
-        const userDataPath = app.getPath('userData')
-        const configFilename = path.join(userDataPath, filename)
-        return JSON.parse(fs.readFileSync(configFilename).toString())
+        return JSON.parse(fs.readFileSync(getJsonConfig(filename)).toString())
     } catch (err) {
         if (!err.message.includes('ENOENT')) {
             console.error(err)
         }
     }
+}
+
+function getJsonConfig(filename) {
+    const userDataPath = app.getPath('userData')
+    return path.join(userDataPath, filename)
 }

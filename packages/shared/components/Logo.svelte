@@ -46,7 +46,7 @@
                 lightmode: 'chrysalis_gem.svg',
                 darkmode: 'chrysalis_gem.svg',
             },
-        }
+        },
     }
 </script>
 
@@ -57,5 +57,6 @@
         width={width || '100%'}
         height={height || '100%'}
         src={`assets/logos/${selected}`}
-        alt="" />
+        alt=""
+    />
 {/if}

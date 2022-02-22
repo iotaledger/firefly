@@ -1,6 +1,6 @@
 {
     "productName": "Firefly Beta",
-    "artifactName": "firefly-desktop-${version}-${channel}.${ext}",
+    "artifactName": "firefly-desktop-${version}.${ext}",
     "copyright": "IOTA Foundation",
     "directories": {
         "buildResources": "./public",
@@ -56,7 +56,7 @@
         "icon": "./public/assets/icons/linux/firefly_app_icon_beta.png"
     },
     "mac": {
-        "icon": "./public/assets/icons/mac/firefly_app_icon_beta1024x1024.png",
+        "icon": "./public/assets/icons/mac/firefly_app_icon_beta-1024.png",
         "category": "public.app-category.finance",
         "target": ["dmg", "zip"],
         "entitlements": "./entitlements.mac.plist",

@@ -6,7 +6,7 @@ This is the directory for the desktop application of Firefly - IOTA's new offici
 
 The following __must__ be installed on all platforms:
 
-- [Node.js](https://nodejs.org/en/) 12+ (NOTE: There may be issues with Node.js 15 on Windows)
+- [Node.js](https://nodejs.org/en/) 14+ (NOTE: There may be issues with Node.js 15 on Windows)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - [Rust](https://www.rust-lang.org/tools/install)
 
