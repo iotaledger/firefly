@@ -1,12 +1,10 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { localize } from 'shared/lib/i18n'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccount, selectedMessage, setSelectedAccount, wallet } from 'shared/lib/wallet'
+    import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
-
-    export let locale: Locale
 
     let rootElement
     let buttonElement
@@ -46,7 +44,7 @@
     <button data-label="back-button" class="flex-1 mt-1" on:click={() => {}} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h5">{locale('actions.back')}</Text>
+            <Text type="h5">{localize('actions.back')}</Text>
         </div>
     </button>
     <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{$selectedAccount?.alias}</Text>

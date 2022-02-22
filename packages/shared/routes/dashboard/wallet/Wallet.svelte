@@ -3,8 +3,9 @@
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
+    import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
@@ -19,17 +20,9 @@
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import type { Message, Transaction } from 'shared/lib/typings/message'
-    import type { MigratedTransaction } from 'shared/lib/typings/profile'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import type {
-        AccountMessage,
-        AccountsBalanceHistory,
-        BalanceHistory,
-        BalanceOverview,
-        WalletAccount,
-    } from 'shared/lib/typings/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         addMessagesPair,
         api,
@@ -38,10 +31,7 @@
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
-        getAccountsBalanceHistory,
         getSyncAccountOptions,
-        getTransactions,
-        getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
         initialiseListeners,
         isFirstSessionSync,
@@ -56,14 +46,12 @@
         wallet,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
+    import { derived, Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
-
-    export let locale: Locale
 
     let drawer: Drawer
 
-    const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
+    const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
     let showActionsModal = false
 
@@ -73,12 +61,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
-        getAccountsBalanceHistory($accounts, $priceData)
-    )
-    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
-        getWalletBalanceHistory($accountsBalanceHistory)
-    )
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -124,19 +106,8 @@
         }
     )
 
-    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        const _migratedTransactions = $activeProfile?.migratedTransactions || []
-
-        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
-    })
-
-    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
-    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
-    setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
-    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
@@ -165,7 +136,7 @@
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(error?.error || 'error.global.generic'),
+                    message: localize(error?.error || 'error.global.generic'),
                 })
             }
         }
@@ -283,7 +254,7 @@
                             isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(localePath),
+                            message: localize(localePath),
                         })
                     }
                 },
@@ -385,7 +356,7 @@
                         isTransferring.set(false)
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: localize(err.error),
                         })
                     },
                 }
@@ -449,7 +420,7 @@
                     isTransferring.set(false)
                     showAppNotification({
                         type: 'error',
-                        message: locale(err.error),
+                        message: localize(err.error),
                     })
                 },
             })
@@ -517,12 +488,11 @@
 
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        <AccountNavigation {locale} />
+        <AccountNavigation />
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
-                        {locale}
                         color={getColor($activeProfile, $selectedAccount?.id)}
                         balance={$selectedAccount.rawIotaBalance}
                         balanceEquiv={$selectedAccount.balanceEquiv}
@@ -530,33 +500,26 @@
                         classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
                     />
                     <DashboardPane classes="h-full -mt-5 z-0">
-                        <AccountActions
-                            {isGeneratingAddress}
-                            {onSend}
-                            {onInternalTransfer}
-                            {onGenerateAddress}
-                            {locale}
-                        />
+                        <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
                     <AccountHistory
-                        {locale}
                         color={$selectedAccount.color}
                         transactions={getAccountMessages($selectedAccount)}
                     />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">
-                        <LineChart {locale} />
+                        <LineChart />
                     </DashboardPane>
                     <DashboardPane classes="w-full h-1/2">
-                        <BarChart {locale} />
+                        <BarChart />
                     </DashboardPane>
                 </div>
             </div>
         {/key}
-        <AccountActionsModal bind:isActive={showActionsModal} {locale} />
+        <AccountActionsModal bind:isActive={showActionsModal} />
     </div>
 {/if}
 

@@ -30,7 +30,6 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes } from 'shared/lib/typings/routes'
@@ -42,8 +41,7 @@
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
     import { mobile } from 'shared/lib/app'
-
-    export let locale: Locale
+    import { localize } from 'shared/lib/i18n'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -86,51 +84,42 @@
         }
     } = {
         SyncingAccount: {
-            label: locale('general.transferSyncing'),
+            label: localize('general.transferSyncing'),
             percent: 20,
         },
         SelectingInputs: {
-            label: locale('general.transferSelectingInputs'),
+            label: localize('general.transferSelectingInputs'),
             percent: 30,
         },
         GeneratingRemainderDepositAddress: {
-            label: locale('general.transferRemainderAddress'),
+            label: localize('general.transferRemainderAddress'),
             percent: 40,
         },
         PreparedTransaction: {
-            label: locale('general.transferPreparedTransaction'),
+            label: localize('general.transferPreparedTransaction'),
             percent: 50,
         },
         SigningTransaction: {
-            label: locale('general.transferSigning'),
+            label: localize('general.transferSigning'),
             percent: 60,
         },
         PerformingPoW: {
-            label: locale('general.transferPow'),
+            label: localize('general.transferPow'),
             percent: 70,
         },
         Broadcasting: {
-            label: locale('general.transferBroadcasting'),
+            label: localize('general.transferBroadcasting'),
             percent: 80,
         },
         Complete: {
-            label: locale('general.transferComplete'),
+            label: localize('general.transferComplete'),
             percent: 100,
         },
     }
 
     let accountsDropdownItems
-    let from
     $: {
         accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
-
-        if (from) {
-            from = accountsDropdownItems.find((a) => a.id === from.id)
-        } else {
-            from = $selectedAccount
-                ? accountsDropdownItems.find((a) => a.id === $selectedAccount.id)
-                : accountsDropdownItems[0]
-        }
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
         }
@@ -177,7 +166,7 @@
             if (get(displayNotifications).length === 0)
                 showAppNotification({
                     type: 'error',
-                    message: locale('error.send.transaction'),
+                    message: localize('error.send.transaction'),
                 })
         }
 
@@ -279,8 +268,6 @@
         }
     }
 
-    let _ledgerDeviceState
-    $: _ledgerDeviceState = $ledgerDeviceState
     $: {
         checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
     }
@@ -296,19 +283,8 @@
         clearErrors()
     }
 
-    const handleFromSelect = (item) => {
-        from = item
-        if (to === from) {
-            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
-        }
-        clearErrors()
-    }
-
     const handleToSelect = (item) => {
         to = item
-        if (from === to) {
-            from = undefined
-        }
         clearErrors()
     }
 
@@ -322,10 +298,15 @@
 
         const isFiat = isFiatCurrency(unit)
         const isMaxAmount =
-            amount === convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        const hasDustRemaining = Math.abs(from.balance - _amount) < DUST_THRESHOLD
+            amount ===
+            convertToFiat(
+                $selectedAccount.rawIotaBalance,
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[unit]
+            ).toString()
+        const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - _amount) < DUST_THRESHOLD
 
-        return isFiat && isMaxAmount && hasDustRemaining ? from.balance : _amount
+        return isFiat && isMaxAmount && hasDustRemaining ? $selectedAccount.rawIotaBalance : _amount
     }
 
     const handleSendClick = () => {
@@ -334,7 +315,7 @@
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
             // Validate address length
             if (address.length !== ADDRESS_LENGTH) {
-                addressError = locale('error.send.addressLength', {
+                addressError = localize('error.send.addressLength', {
                     values: {
                         length: ADDRESS_LENGTH,
                     },
@@ -344,32 +325,32 @@
             }
         } else {
             if (!to) {
-                toError = locale('error.send.noToAccount')
+                toError = localize('error.send.noToAccount')
             }
         }
 
         if (amount.length === 0) {
-            amountError = locale('error.send.amountInvalidFormat')
+            amountError = localize('error.send.amountInvalidFormat')
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
-            amountError = locale('error.send.amountNoFloat')
+            amountError = localize('error.send.amountNoFloat')
         } else {
             const isFiat = isFiatCurrency(unit)
             const amountAsFloat = parseCurrency(amount)
 
             if (Number.isNaN(amountAsFloat)) {
-                amountError = locale('error.send.amountInvalidFormat')
+                amountError = localize('error.send.amountInvalidFormat')
             } else {
                 amountRaw = isFiat
                     ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
                     : changeUnits(amountAsFloat, unit, Unit.i)
                 amountRaw = ensureMaxAmount(amountRaw)
 
-                if (amountRaw > from.balance) {
-                    amountError = locale('error.send.amountTooHigh')
+                if (amountRaw > $selectedAccount.rawIotaBalance) {
+                    amountError = localize('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
-                    amountError = locale('error.send.amountZero')
+                    amountError = localize('error.send.amountZero')
                 } else if (amountRaw < DUST_THRESHOLD) {
-                    amountError = locale('error.send.sendingDust')
+                    amountError = localize('error.send.sendingDust')
                 }
             }
         }
@@ -394,7 +375,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    accountId: from.id,
+                    accountId: $selectedAccount.id,
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
@@ -415,8 +396,8 @@
              * in another account. Send parameters are reset once the transfer completes.
              */
             isInternal
-                ? onInternalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                : onSend(from.id, address, amountRaw)
+                ? onInternalTransfer($selectedAccount.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
+                : onSend($selectedAccount.id, address, amountRaw)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
@@ -427,12 +408,7 @@
 
     const handleBackClick = () => {
         clearSendParams()
-
         accountRoute.set(AccountRoutes.Init)
-        if (!$selectedAccount) {
-            // TODO: handle this case for single wallet view
-            accountRoute.set(AccountRoutes.Init)
-        }
     }
 
     const format = (account: WalletAccount) => ({
@@ -443,8 +419,10 @@
 
     const handleMaxClick = () => {
         amount = isFiatCurrency(unit)
-            ? formatNumber(convertToFiat(from.balance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]))
-            : formatUnitPrecision(from.balance, unit, false)
+            ? formatNumber(
+                  convertToFiat($selectedAccount.rawIotaBalance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+              )
+            : formatUnitPrecision($selectedAccount.rawIotaBalance, unit, false)
     }
 
     const updateFromSendParams = (sendParams) => {
@@ -453,8 +431,11 @@
         const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
         amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
         address = sendParams.address
-        if (from && accountsDropdownItems) {
-            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
+        if (accountsDropdownItems) {
+            to =
+                $liveAccounts.length === 2
+                    ? accountsDropdownItems[$selectedAccount.id === $liveAccounts[0].id ? 1 : 0]
+                    : to
         }
     }
 
@@ -469,7 +450,7 @@
         const onError = () => {
             showAppNotification({
                 type: 'error',
-                message: locale('error.global.generic'),
+                message: localize('error.global.generic'),
             })
         }
         void startQRScanner(onSuccess, onError)
@@ -500,7 +481,7 @@
                         type="h5"
                         secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}
                     >
-                        {locale(`general.${SEND_TYPE.EXTERNAL}`)}
+                        {localize(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
                 {#if $liveAccounts.length > 1}
@@ -515,7 +496,7 @@
                             type="h5"
                             secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}
                         >
-                            {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                            {localize(`general.${SEND_TYPE.INTERNAL}`)}
                         </Text>
                     </button>
                 {/if}
@@ -533,26 +514,13 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                <!-- TODO: handle this case for single wallet view -->
-                {#if !$selectedAccount}
-                    <div class="block mb-6">
-                        <Dropdown
-                            value={from?.label || null}
-                            label={locale('general.from')}
-                            placeholder={locale('general.from')}
-                            items={accountsDropdownItems}
-                            onSelect={handleFromSelect}
-                            disabled={$liveAccounts.length === 1 || $isTransferring}
-                        />
-                    </div>
-                {/if}
                 <div class="w-full block">
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || null}
-                            label={locale('general.to')}
-                            placeholder={locale('general.to')}
-                            items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
+                            label={localize('general.to')}
+                            placeholder={localize('general.to')}
+                            items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
@@ -563,10 +531,9 @@
                         <Address
                             error={addressError}
                             bind:address
-                            {locale}
-                            label={locale('general.sendToAddress')}
+                            label={localize('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}
+                            placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
                             classes="mb-6"
                             autofocus
                         />
@@ -576,7 +543,6 @@
                         bind:amount
                         bind:unit
                         onMaxClick={handleMaxClick}
-                        {locale}
                         disabled={$isTransferring}
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                     />
@@ -587,9 +553,9 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
-                {locale('actions.cancel')}
+                {localize('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
         </div>
     {/if}
     {#if $isTransferring}

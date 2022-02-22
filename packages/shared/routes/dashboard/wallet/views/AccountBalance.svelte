@@ -1,9 +1,7 @@
 <script lang="typescript">
     import { BalanceSummary } from 'shared/components'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { isBright } from 'shared/lib/helpers'
-
-    export let locale: Locale
+    import { localize } from 'shared/lib/i18n'
 
     export let color
     export let balance
@@ -21,7 +19,7 @@
 >
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
-        <p class="text-11 leading-120 text-{textColor}">{locale('general.accountBalance')}</p>
+        <p class="text-11 leading-120 text-{textColor}">{localize('general.accountBalance')}</p>
         <BalanceSummary balanceRaw={balance} balanceFiat={balanceEquiv} {textColor} />
     </div>
     <button
