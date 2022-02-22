@@ -1,7 +1,7 @@
 import type { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
 import type { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
@@ -19,7 +19,14 @@ import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import type {
+    Account,
+    Account as BaseAccount,
+    AccountIdentifier,
+    SignerType,
+    SyncAccountOptions,
+    SyncedAccount,
+} from './typings/account'
 import type { Address } from './typings/address'
 import type { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -29,14 +36,7 @@ import type { RecoveryPhrase } from './typings/mnemonic'
 import type { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
-import type {
-    AccountMessage,
-    AccountsBalanceHistory,
-    BalanceHistory,
-    BalanceOverview,
-    WalletAccount,
-    WalletState,
-} from './typings/wallet'
+import type { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import type { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
@@ -113,7 +113,7 @@ export const resetWallet = (): void => {
     accounts.set([])
     accountsLoaded.set(false)
     internalTransfersInProgress.set({})
-    selectedAccountId.set(null)
+    setSelectedAccount(null)
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
@@ -125,7 +125,17 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
-export const selectedAccountId = writable<string | null>(null)
+// used to make selectedAccount reactive to changes in the wallet
+const _selectedAccountId = writable<AccountIdentifier | null>(null)
+
+export const selectedAccount = derived([_selectedAccountId, get(wallet).accounts], ([$_selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $_selectedAccountId)
+)
+export const setSelectedAccount = (id: AccountIdentifier): void => _selectedAccountId.set(id)
+export const getAccountById = (id: AccountIdentifier): WalletAccount | null => {
+    const accounts = get(wallet)?.accounts
+    return get(accounts)?.find((account) => account.id === id) || null
+}
 
 export const selectedMessage = writable<Message | null>(null)
 
@@ -1071,44 +1081,6 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 }
 
 /**
- * Gets a slice of all transactions (on all accounts). Appends account index and sort the message list.
- *
- * @method getTransactions
- *
- * @param {WalletAccount} accounts
- * @param {number} [count]
- *
- * @returns {AccountMessage[]}
- */
-export const getTransactions = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: {
-        [key: string]: AccountMessage
-    } = {}
-
-    accounts.forEach((account) => {
-        account.messages.forEach((message) => {
-            let extraId = ''
-            if (message.payload?.type === 'Transaction') {
-                extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
-            }
-            messages[account.index + message.id + extraId] = {
-                ...message,
-                account: account.index,
-            }
-        })
-    })
-
-    return Object.values(messages)
-        .sort((a, b) => {
-            if (a.id === b.id && a.payload.type == 'Transaction') {
-                return getIncomingFlag(a.payload) ? -1 : 1
-            }
-            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        })
-        .slice(0, count)
-}
-
-/**
  * Updates balance overview
  *
  * @method updateBalanceOverview
@@ -1299,113 +1271,78 @@ export const updateAccountsBalanceEquiv = (): void => {
 /**
  * Gets balance history for each account in market data timestamps
  *
- * @method getAccountsBalanceHistory
+ * @method getAccountBalanceHistory
  *
  * @param {Account} accounts
  * @param {number} balanceRaw
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
-    const balanceHistory: AccountsBalanceHistory = {}
-    if (priceData && accounts) {
-        accounts.forEach((account) => {
-            const accountBalanceHistory: BalanceHistory = {
-                [HistoryDataProps.ONE_HOUR]: [],
-                [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-                [HistoryDataProps.SEVEN_DAYS]: [],
-                [HistoryDataProps.ONE_MONTH]: [],
-            }
-            const messages: Message[] =
-                account?.messages
-                    ?.slice()
-                    ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
-                    ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
-            // Calculate the variations for each account
-            let trackedBalance = account.rawIotaBalance
-            const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
-            messages.forEach((message) => {
-                const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
-
-                if (essence && essence.incoming) {
-                    trackedBalance -= essence.value || 0
-                } else {
-                    trackedBalance += essence.value || 0
-                }
-                accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
-            })
-            // Calculate the balance in each market data timestamp
-            let balanceHistoryInTimeframe = []
-            Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-                // sort market data from newest to last
-                const sortedData = data.slice().sort((a, b) => b[0] - a[0])
-                balanceHistoryInTimeframe = []
-                // if there are no balance variations
-                if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map((_data) => ({
-                        timestamp: _data[0],
-                        balance: trackedBalance,
-                    }))
-                } else {
-                    let i = 0
-                    sortedData.forEach((data) => {
-                        const marketTimestamp = new Date(data[0] * 1000).getTime()
-                        // find balance for each market data timepstamp
-                        for (i; i < accountBalanceVariations.length - 1; i++) {
-                            const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
-                            if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({
-                                    timestamp: data[0],
-                                    balance: accountBalanceVariations[i].balance,
-                                })
-                                return
-                            } else if (
-                                marketTimestamp <= nextBalanceTimestamp &&
-                                i === accountBalanceVariations.length - 2
-                            ) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
-                                return
-                            }
-                        }
-                    })
-                }
-                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
-            })
-            balanceHistory[account.index] = accountBalanceHistory
-        })
-    }
-    return balanceHistory
-}
-
-/**
- * Gets balance history for all accounts combined in market data timestamps
- *
- * @method getWalletBalanceHistory
- *
- * @param {Account} accounts
- * @param {PriceData} [priceData]
- *
- */
-export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceHistory): BalanceHistory => {
+export const getAccountBalanceHistory = (account: WalletAccount, priceData: PriceData): BalanceHistory => {
     const balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
         [HistoryDataProps.SEVEN_DAYS]: [],
         [HistoryDataProps.ONE_MONTH]: [],
     }
-    Object.values(accountsBalanceHistory).forEach((accBalanceHistory) => {
-        Object.entries(accBalanceHistory).forEach(([timeframe, data]) => {
-            if (!balanceHistory[timeframe].length) {
-                balanceHistory[timeframe] = data
+    if (priceData) {
+        const messages: Message[] =
+            account?.messages
+                ?.slice()
+                ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
+        // Calculate the variations for each account
+        let trackedBalance = account.rawIotaBalance
+        const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
+        messages.forEach((message) => {
+            const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
+
+            if (essence && essence.incoming) {
+                trackedBalance -= essence.value || 0
             } else {
-                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
-                    timestamp,
-                    balance: balance + data[index].balance,
-                }))
+                trackedBalance += essence.value || 0
             }
+            accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
         })
-    })
+        // Calculate the balance in each market data timestamp
+        let balanceHistoryInTimeframe = []
+        Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
+            // sort market data from newest to last
+            const sortedData = data.slice().sort((a, b) => b[0] - a[0])
+            balanceHistoryInTimeframe = []
+            // if there are no balance variations
+            if (accountBalanceVariations.length === 1) {
+                balanceHistoryInTimeframe = sortedData.map((_data) => ({
+                    timestamp: _data[0],
+                    balance: trackedBalance,
+                }))
+            } else {
+                let i = 0
+                sortedData.forEach((data) => {
+                    const marketTimestamp = new Date(data[0] * 1000).getTime()
+                    // find balance for each market data timepstamp
+                    for (i; i < accountBalanceVariations.length - 1; i++) {
+                        const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+                        const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                        if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+                            balanceHistoryInTimeframe.push({
+                                timestamp: data[0],
+                                balance: accountBalanceVariations[i].balance,
+                            })
+                            return
+                        } else if (
+                            marketTimestamp <= nextBalanceTimestamp &&
+                            i === accountBalanceVariations.length - 2
+                        ) {
+                            balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
+                            return
+                        }
+                    }
+                })
+            }
+            balanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
+        })
+    }
     return balanceHistory
 }
 

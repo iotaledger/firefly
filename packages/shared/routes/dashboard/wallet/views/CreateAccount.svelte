@@ -1,15 +1,13 @@
 <script lang="typescript">
-    import { Button, Input, Spinner, Text, AccountTile, ColorPicker } from 'shared/components'
+    import { AccountTile, Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { walletRoute } from 'shared/lib/router'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors } from 'shared/lib/wallet'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { popupState } from 'shared/lib/popup'
+    import { isLedgerProfile } from 'shared/lib/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
 
     export let locale: Locale
 
@@ -84,7 +82,8 @@
     }
     const handleCancelClick = () => {
         error = ''
-        walletRoute.set(WalletRoutes.Init)
+        // TODO: replace with account routes
+        // walletRoute.set(WalletRoutes.Init)
     }
 </script>
 
@@ -121,9 +120,9 @@
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}
-                >{locale('actions.cancel')}</Button
-            >
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
+                {locale('actions.cancel')}
+            </Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"

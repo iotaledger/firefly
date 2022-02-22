@@ -16,22 +16,15 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import {
-        accountRoute,
-        dashboardRoute,
-        routerNext,
-        settingsChildRoute,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
-        selectedAccountId,
+        setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
@@ -112,11 +105,10 @@
                         contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
-                    selectedAccountId.set(contextData.accountId)
+                    setSelectedAccount(contextData.accountId)
                     if (get(dashboardRoute) !== Tabs.Wallet) {
                         dashboardRoute.set(Tabs.Wallet)
                     }
-                    walletRoute.set(WalletRoutes.Account)
                     accountRoute.set(AccountRoutes.Init)
                 }
             }
@@ -150,7 +142,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if (!$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {

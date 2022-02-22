@@ -92,6 +92,7 @@
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
+            // TODO: update to single wallet
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {

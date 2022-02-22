@@ -3,14 +3,12 @@ import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
 import {
     AccountRoutes,
     AppRoute,
+    GovernanceRoutes,
     LedgerRoutes,
     SettingsRoutes,
     SetupType,
     Tabs,
-    WalletRoutes,
-    GovernanceRoutes,
 } from 'shared/lib/typings/routes'
-import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking/deepLinking'
 import { closePopup } from './popup'
@@ -80,11 +78,6 @@ export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)
  * Ledger setup routing history
  */
 export const ledgerRouteHistory = writable<string[]>([])
-
-/**
- * Wallet view route
- */
-export const walletRoute = writable<WalletRoutes>(WalletRoutes.Init)
 
 /**
  * Account view route
@@ -307,7 +300,6 @@ export const resetRouter = (): void => {
         setRoute(AppRoute.Welcome)
     }
 
-    walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
@@ -316,9 +308,7 @@ export const resetRouter = (): void => {
 
 export const resetWalletRoute = (): void => {
     dashboardRoute.set(Tabs.Wallet)
-    walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
-    selectedAccountId.set(null)
 }
 
 export const resetLedgerRoute = (): void => {

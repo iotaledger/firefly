@@ -1,35 +1,20 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { onDestroy, onMount } from 'svelte'
-    import type { Locale } from 'shared/lib/typings/i18n'
-
-    export let locale: Locale
-
-    export let accounts: {
-        id: string
-        alias: string
-        color: string
-        active: boolean
-    }[]
+    import { localize } from 'shared/lib/i18n'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
     let rootElement
     let buttonElement
     let accountElement
 
-    $: activeAccount = accounts.find((acc) => acc.active)
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     function handleAccountClick(accountId) {
-        selectedAccountId.set(accountId)
+        setSelectedAccount(accountId)
         selectedMessage.set(null)
-    }
-    function handleBackClick() {
-        selectedAccountId.set(null)
-        selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
     }
 
     const calculateWidth = () => {
@@ -56,19 +41,19 @@
 </script>
 
 <div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
-    <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
+    <button data-label="back-button" class="flex-1 mt-1" on:click={() => {}} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h5">{locale('actions.back')}</Text>
+            <Text type="h5">{localize('actions.back')}</Text>
         </div>
     </button>
-    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
+    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{$selectedAccount?.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto scroll-tertiary">
         <div class="flex flex-row pb-1 space-x-4" bind:this={accountElement}>
-            {#each accounts as acc}
+            {#each $viewableAccounts as acc}
                 <WalletPill
                     account={acc}
-                    active={activeAccount.id === acc.id}
+                    active={$selectedAccount?.id === acc.id}
                     onClick={() => handleAccountClick(acc.id)}
                 />
             {/each}
