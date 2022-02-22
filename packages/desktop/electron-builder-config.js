@@ -84,26 +84,16 @@ const getLinuxDesktopName = (stage) => ({
 
 const prodConfig = () => {
     const publish = {
-        publish: {
-            provider: 'generic',
-            url: 'https://dl.firefly.iota.org/',
-            publishAutoUpdate: true,
-            channel: 'latest',
-        },
+        provider: 'generic',
+        url: 'https://dl.firefly.iota.org/',
+        publishAutoUpdate: true,
+        channel: 'latest',
     }
     return Object.assign({}, baseConfig(), { publish })
 }
 
 const alphaConfig = () => {
     const icons = getIconPaths('alpha')
-    const names = {
-        productName: getAppName('alpha'),
-        linux: {
-            desktop: {
-                Name: getAppName('alpha'),
-            },
-        },
-    }
 
     return Object.assign({}, baseConfig(), icons, { productName: getAppName('alpha') }, getLinuxDesktopName('alpha'))
 }
