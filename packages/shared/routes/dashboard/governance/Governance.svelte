@@ -5,15 +5,13 @@
     import { governanceRoute } from 'shared/lib/router'
     import { participationEvents } from 'shared/lib/participation/stores'
     import { wallet } from 'shared/lib/wallet'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { selectedAccount, setSelectedAccount } from 'shared/lib/wallet'
     import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
 
     const { accounts } = $wallet
 
-    selectedAccountId.set($accounts[0]?.id)
-
     function handleAccountClick(accountId: string): void {
-        selectedAccountId.set(accountId)
+        setSelectedAccount(accountId)
     }
 
     $: event = $participationEvents.find((p) => p.eventId === TREASURY_VOTE_EVENT_ID)
@@ -27,7 +25,7 @@
                 {#each $accounts as acc}
                     <WalletPill
                         account={acc}
-                        active={acc.id === $selectedAccountId}
+                        active={acc.id === $selectedAccount?.id}
                         onClick={() => handleAccountClick(acc.id)}
                     />
                 {/each}
@@ -39,7 +37,7 @@
             {#each $accounts as acc}
                 <WalletPill
                     account={acc}
-                    active={acc.id === $selectedAccountId}
+                    active={acc.id === $selectedAccount?.id}
                     onClick={() => handleAccountClick(acc.id)}
                 />
             {/each}
