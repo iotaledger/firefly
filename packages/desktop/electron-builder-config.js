@@ -82,6 +82,13 @@ const getLinuxDesktopName = (stage) => ({
     },
 })
 
+const prereleaseNsisOptions = {
+    nsis: {
+        oneClick: false,
+        allowToChangeInstallationDirectory: true,
+    },
+}
+
 const prodConfig = () => {
     const publish = {
         provider: 'generic',
@@ -95,5 +102,25 @@ const prodConfig = () => {
 const alphaConfig = () => {
     const icons = getIconPaths('alpha')
 
-    return Object.assign({}, baseConfig(), icons, { productName: getAppName('alpha') }, getLinuxDesktopName('alpha'))
+    return Object.assign(
+        {},
+        baseConfig(),
+        icons,
+        { productName: getAppName('alpha') },
+        getLinuxDesktopName('alpha'),
+        prereleaseNsisOptions
+    )
+}
+
+const betaConfig = () => {
+    const icons = getIconPaths('beta')
+
+    return Object.assign(
+        {},
+        baseConfig(),
+        icons,
+        { productName: getAppName('beta') },
+        getLinuxDesktopName('beta'),
+        prereleaseNsisOptions
+    )
 }
