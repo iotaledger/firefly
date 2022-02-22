@@ -4,7 +4,7 @@
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { selectedAccount, api } from 'shared/lib/wallet'
+    import { selectedAccount, api, isSyncing } from 'shared/lib/wallet'
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
@@ -28,7 +28,6 @@
     let successText = localize('popups.votingConfirmation.votesSubmitted')
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
-    $: showSpinner = true
 
     onMount(() => {
         setVotingAction()
@@ -130,6 +129,13 @@
             void castVote()
         }
     }
+
+    const getSpinnerMessage = (): string => {
+        if ($isSyncing) {
+            return 'general.syncing'
+        }
+        return 'general.broadcasting'
+    }
 </script>
 
 <div>
@@ -144,16 +150,16 @@
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
-            {#if showSpinner}
-                <Spinner busy message={'loading...'} classes="mx-2 justify-center" />
+            {#if disabled || $isSyncing}
+                <Spinner busy message={`${localize(getSpinnerMessage())}...`} classes="mx-2 justify-center" />
             {:else}
                 {localize(`actions.${votingAction}`)}
             {/if}
         </Button>
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
-                {#if showSpinner}
-                    <Spinner busy message={'loading...'} classes="mx-2 justify-center" />
+                {#if disabled || $isSyncing}
+                    <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
                 {:else}
                     {localize(`actions.${VotingAction.Stop}`)}
                 {/if}
