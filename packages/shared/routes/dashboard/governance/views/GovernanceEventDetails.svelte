@@ -1,21 +1,19 @@
 <script lang="typescript">
-    import { Button, Text, Icon, DashboardPane } from 'shared/components'
+    import { Button, DashboardPane, Icon, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { GovernanceRoutes } from 'shared/lib/typings/routes'
-    import { governanceRoute } from 'shared/lib/router'
-    import { openPopup } from 'shared/lib/popup'
+    import { canParticipate } from 'shared/lib/participation'
     import { participationOverview } from 'shared/lib/participation/stores'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { canParticipate } from 'shared/lib/participation'
+    import { openPopup } from 'shared/lib/popup'
+    import { governanceRoute } from 'shared/lib/router'
+    import { GovernanceRoutes } from 'shared/lib/typings/routes'
+    import { selectedAccount } from 'shared/lib/wallet'
 
     export let event: ParticipationEvent
 
     let currentVoteValue: string
-    $: {
-        const overview = $participationOverview[0]
-        const participation = overview?.participations.find((participation) => participation.eventId === event.eventId)
-        currentVoteValue = participation?.answers[0] ?? null
-    }
+    // TODO: base it on selectedAccountId when exposed in feat/single-wallet
+    $: $selectedAccount, $participationOverview, updateCurrentVoteValue()
 
     const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
 
@@ -30,10 +28,10 @@
         })
     }
 
-    const getAnswerHeader = (answerValue: string): string => {
-        if (isSelected(answerValue)) {
+    const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
+        if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
-        } else if (currentVoteValue) {
+        } else if (castedAnswerValue) {
             return 'Not Selected'
         } else {
             return `Option ${answerValue}`
@@ -47,7 +45,17 @@
         return 'Selected'
     }
 
-    const isSelected = (answerValue: string): boolean => currentVoteValue === answerValue
+    const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
+
+    const updateCurrentVoteValue = (): void => {
+        const selectedAccountOverview = $participationOverview.find(
+            ({ accountIndex }) => accountIndex === $selectedAccount.index
+        )
+        const participation = selectedAccountOverview?.participations?.find(
+            (participation) => participation.eventId === event.eventId
+        )
+        currentVoteValue = participation?.answers[0] ?? null
+    }
 </script>
 
 <div
@@ -66,8 +74,10 @@
             classes="mr-auto uppercase px-2 py-1 mb-2 text-blue-500 bg-blue-100 rounded-lg"
             smaller
             bold
-            overrideColor>{event?.status?.status}</Text
+            overrideColor
         >
+            {event?.status?.status}
+        </Text>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
@@ -77,17 +87,17 @@
                 onClick={() => handleClick(answer)}
                 secondary
                 disabled={!canParticipate(event?.status?.status)}
-                classes="px-6 bg-{isSelected(answer?.value)
+                classes="px-6 bg-{isSelected(currentVoteValue, answer?.value)
                     ? 'blue-100'
                     : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4"
             >
                 <div>
                     <div class="flex items-center mb-2">
-                        {#if isSelected(answer?.value)}
+                        {#if isSelected(currentVoteValue, answer?.value)}
                             <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
                         {/if}
                         <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>
-                            {getAnswerHeader(answer?.value)}
+                            {getAnswerHeader(currentVoteValue, answer?.value)}
                         </Text>
                     </div>
                     <Text type="h3" classes="mb-2">{answer?.text}</Text>
@@ -104,10 +114,14 @@
     <DashboardPane classes="w-full h-1/3 flex flex-row flex-shrink-0 space-y-3 overflow-hidden p-6">
         <div class="space-y-3">
             <Text type="p" smaller>My voting power</Text>
-            <Text type="h1" classes="inline-flex items-end">4528 <Text type="h4" classes="ml-1 mb-1">votes</Text></Text>
+            <Text type="h1" classes="inline-flex items-end">
+                4528
+                <Text type="h4" classes="ml-1 mb-1">votes</Text>
+            </Text>
             <Text type="p" smaller>My max voting power</Text>
             <Text type="h1" classes="inline-flex items-end">
-                195609600 <Text type="h4" classes="ml-1 mb-1">votes</Text>
+                195609600
+                <Text type="h4" classes="ml-1 mb-1">votes</Text>
             </Text>
         </div>
         <Icon icon="info" classes="ml-auto mt-0" />
