@@ -3,7 +3,7 @@ const baseConfig = () => ({
     artifactName: 'firefly-desktop-${version}.${ext}',
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
-    files: ['public/', 'package.json', '!node_modules/wallet-nodejs-binding/native/*'],
+    files: ['public/', 'package.json', '!node_modules/firefly-actor-system-nodejs-bindings/native/*'],
     appId: 'org.iota.firefly',
     afterSign: './scripts/notarize.macos.js',
     asar: true,
