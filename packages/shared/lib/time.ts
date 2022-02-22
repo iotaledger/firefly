@@ -65,9 +65,7 @@ export const milestoneToDate = (milestone: number): Date => {
     const currentMilestone = get(networkStatus)?.currentMilestone
     const firstMilestoneMillis = Date.now() - currentMilestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
     const milestoneMillis = firstMilestoneMillis + milestone * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
-    const date = new Date(milestoneMillis)
-    date.setSeconds(Math.floor(date.getSeconds() / 10) * 10)
-    return date
+    return new Date(milestoneMillis)
 }
 
 /**
@@ -79,8 +77,8 @@ export const milestoneToDate = (milestone: number): Date => {
  *
  * @returns {string}
  */
-export const getDurationString = (millis: number): string => {
-    const durationInMinutes = millis / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+export const getDurationString = (durationInMillis: number): string => {
+    const durationInMinutes = durationInMillis / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
     const minutes = Math.floor(durationInMinutes % MINUTES_PER_HOUR)
     const hours = Math.floor((durationInMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY)
     const days = Math.floor(durationInMinutes / (MINUTES_PER_HOUR * HOURS_PER_DAY))

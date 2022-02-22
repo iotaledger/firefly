@@ -21,6 +21,33 @@
     // TODO: base it on selectedAccountId when exposed in feat/single-wallet
     $: $selectedAccount, $participationOverview, updateCurrentVoteValue()
 
+    $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
+
+    $: displayedPercentages = results?.map((result) => {
+        const percentage = getPercentageString(result?.accumulated, totalVotes)
+        const relativePercentage = getPercentageString(
+            result?.accumulated,
+            Math.max(...results.map((result) => result?.accumulated))
+        )
+        return { percentage, relativePercentage }
+    })
+
+    $: accountVotes = calculateVotesByTrackedParticipation(
+        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations[
+            event?.eventId
+        ]
+    )
+
+    $: results = event?.status?.questions?.[0]?.answers?.filter(
+        (answer) => answer?.value !== 0 && answer?.value !== 255
+    )
+
+    $: totalVotes = results?.reduce((acc, val) => acc + val?.accumulated, 0)
+
+    $: length =
+        milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
+        milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
+
     const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
 
     const handleClick = (nextVote: VotingEventAnswer): void => {
@@ -34,20 +61,6 @@
         })
     }
 
-    const length =
-        milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
-        milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
-    $: getProgress = () => {
-        const _progress = milestoneToDate(event?.information?.milestoneIndexEnd).getTime() - Date.now()
-        return _progress > 0 ? _progress : 0
-    }
-
-    $: totalVotes = calculateVotesByTrackedParticipation(
-        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations[
-            event?.eventId
-        ]
-    )
-
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
         if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
@@ -58,16 +71,12 @@
         }
     }
 
-    $: results = event?.status?.questions?.[0]?.answers?.filter(
-        (answer) => answer?.value !== 0 && answer?.value !== 255
-    )
-    $: totalVotesResult = results?.reduce((acc, val) => acc + val?.accumulated, 0)
-    $: displayedPercentages = results?.map((result) => {
-        const percentage = Math.round((result?.accumulated / totalVotesResult) * 100).toString() + '%'
-        const relativePercentage =
-            (result?.accumulated / Math.max(...results.map((result) => result?.accumulated))) * 100 + '%'
-        return { percentage, relativePercentage }
-    })
+    const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
+
+    const getProgressByMilestone = (milestone: number) => {
+        const progress = milestoneToDate(milestone).getTime() - Date.now()
+        return progress > 0 ? progress : 0
+    }
 
     const setActiveText = (): string => {
         if (event?.status?.status === ParticipationEventState.Holding) {
@@ -181,15 +190,14 @@
                         <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
                             >{localize('views.governance.eventDetails.votesCounted')}</Text
                         >
-                        <Text type="h3" classes="inline-flex items-end">{delineateNumber(totalVotes.toString())}</Text>
+                        <Text type="h3" classes="inline-flex items-end">{delineateNumber(accountVotes.toString())}</Text
+                        >
                     </div>
-                {/if}
-                {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
                             >{localize('views.governance.eventDetails.votingProgress')}</Text
                         >
-                        <Text type="h3" classes="inline-flex items-end">{getDurationString(getProgress())}</Text>
+                        <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
                     </div>
                 {/if}
             </div>
