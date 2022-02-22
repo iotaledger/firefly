@@ -56,7 +56,10 @@
     <div slot="leftpane__action">
         <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
     </div>
-    <div slot="rightpane" class="animation w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
+    <div
+        slot="rightpane"
+        class="animation w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}"
+    >
         <Animation classes="setup-anim-aspect-ratio" animation="appearance-desktop" {segments} />
     </div>
 </OnboardingLayout>

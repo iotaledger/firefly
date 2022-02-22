@@ -1,4 +1,4 @@
-package org.iota.walletactorsystem;
+package org.iota.fireflyactorsystem;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -19,8 +19,9 @@ public class WalletPlugin extends Plugin {
         NativeAPI.verifyLink();
     }
     private boolean isInitialized = false;
+    private static final Object lock = new Object();
 
-    @PluginMethod
+    @PluginMethod()
     public void initialize(final PluginCall call) {
         if (isInitialized) return;
         if (!call.getData().has("actorId")) {
@@ -28,16 +29,16 @@ public class WalletPlugin extends Plugin {
             return;
         }
         String actorId = call.getString("actorId");
-        call.setKeepAlive(true);
+        String dbPath = getContext().getFilesDir() + "/database";
 
         final ActorCallback callback = response -> {
-            System.out.println("walletEvent " + response);
             JSObject walletResponse = new JSObject();
             walletResponse.put("walletResponse", response);
             notifyListeners("walletEvent", walletResponse);
         };
 
-        Actor.iotaInitialize(callback, actorId, "./database");
+        call.setKeepAlive(true);
+        Actor.iotaInitialize(callback, actorId, dbPath);
         isInitialized = true;
     }
 
@@ -48,6 +49,7 @@ public class WalletPlugin extends Plugin {
                 call.reject("message is required");
                 return;
             }
+
             Actor.iotaSendMessage(call.getObject("message").toString());
             call.resolve();
         } catch (Exception ex) {
@@ -55,36 +57,52 @@ public class WalletPlugin extends Plugin {
         }
     }
 
-    @PluginMethod
+    @PluginMethod()
     public void destroy(final PluginCall call) {
-        if (isInitialized) return;
+        if (!isInitialized) {
+            call.reject("Wallet is not initialized yet");
+            return;
+        }
         try {
             if (!call.getData().has("actorId")) {
                 call.reject("actorId is required");
                 return;
             }
             String actorId = call.getString("actorId");
+
             Actor.iotaDestroy(actorId);
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
         }
     }
 
-    @PluginMethod
+    @PluginMethod()
     public void listen(final PluginCall call) {
-        if (isInitialized) return;
-        try {
-            if (!call.getData().has("actorId")
-                    || !call.getData().has("id")
-                    || !call.getData().has("event")) {
-                call.reject("actorId, id and event are required");
-                return;
+        if (!isInitialized) {
+            call.reject("Wallet is not initialized yet");
+            return;
+        }
+        if (!call.getData().has("actorId")
+                || !call.getData().has("id")
+                || !call.getData().has("event")) {
+            call.reject("actorId, id and event are required");
+            return;
+        }
+        String actorId = call.getString("actorId");
+        String id = call.getString("id");
+        String event = call.getString("event");
+        if (event == null) {
+            call.reject("event is null");
+            return;
+        }
+        String snakedEvent = event.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase();
+
+        synchronized (lock) {
+            try {
+                Actor.iotaListen(actorId, id, EventType.valueOf(snakedEvent));
+            } catch (Exception ex) {
+                call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
             }
-            String actorId = call.getString("actorId");
-            //String event = call.getString("event");
-            Actor.iotaListen(actorId, "", EventType.valueOf("ERROR_THROWN"));
-        } catch (Exception ex) {
-            call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
         }
     }
 }

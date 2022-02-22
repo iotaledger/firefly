@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Mîhengên",
             "generalSettings": {
-                "title": "Serdilkirinên tevayî",
+                "title": "General",
                 "description": "Xûyakirina cuzdanka xwe biguherîne û mîhengên gelemperî serast bikin"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Pêborîna xwe biguherîne û mihengên ewlehiyê çêbike"
             },
             "advancedSettings": {
-                "title": "Sazkariyên pêşketî",
+                "title": "Advanced",
                 "description": "Jibo bikarhênerên teknîkî alav û mihengên dest"
             },
             "helpAndInfo": {
@@ -313,7 +313,7 @@
             "theme": {
                 "title": "Mijad",
                 "description": "",
-                "advice": "Restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Ziman",
@@ -350,6 +350,11 @@
                 "newPincode": "PIN'a nû",
                 "confirmNewPincode": "PIN'a nû tomarbike",
                 "action": "PIN'ê biguherîne"
+            },
+            "changeProfileName": {
+                "title": "Change profile name",
+                "description": "Change your Firefly profile name",
+                "success": "You changed your profile name"
             },
             "balanceFinder": {
                 "title": "Gerdîta mayîna",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Color picker",
+                "hexCode": "Color hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "legalUpdate": {
+            "tosTitle": "Terms of Service",
+            "privPolicyTitle": "Privacy Policy",
+            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
+            "tosBody": "We have updated Firefly's Terms of Service.",
+            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
+            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosCheckbox": "I've read and I accept the updated Terms of Service",
+            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "System",
         "balance": "Mayîn",
         "accountBalance": "Mayîna Cuzdankê",
+        "all": "All",
         "incoming": "Yên hatî",
         "outgoing": "Yên çûyî",
         "totalIn": "Têketina giştî",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Tora Kevn",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
+        "yourWallets": "Your Wallets",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1011,7 +1034,8 @@
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds"
+        "unstakedFunds": "Unstaked funds",
+        "accountColor": "Wallet color"
     },
     "dates": {
         "today": "Evro",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Berîya hûn yek nû çêkin, divê hûn Cuzdankê xwe ya kevin bikarbînin.",
+            "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Berîya hûn vê Cuzdankê binbibin, pêdiviye hûn transfera mayînên xwe bikin.",
             "duplicate": "Li ser vî navî jixwe Cuzdank heye.",
             "tilde": "Nabe navê profîlê bi qerekteran '~' destpêbike.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We need your permission to use your camera to be able to scan QR codes.",
+            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
     }
 }

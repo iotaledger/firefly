@@ -287,7 +287,7 @@
         "settings": {
             "settings": "Instellingen",
             "generalSettings": {
-                "title": "Algemene instellingen",
+                "title": "Algemeen",
                 "description": "Het uiterlijk van uw portemonnee en andere algemene instellingen configureren"
             },
             "security": {
@@ -295,7 +295,7 @@
                 "description": "Wijzig uw wachtwoord en pas de beveiligingsinstellingen aan"
             },
             "advancedSettings": {
-                "title": "Geavanceerde instellingen",
+                "title": "Geavanceerd",
                 "description": "Hulpmiddelen en handmatige instellingen voor technische gebruikers"
             },
             "helpAndInfo": {
@@ -350,6 +350,11 @@
                 "newPincode": "Nieuwe PIN",
                 "confirmNewPincode": "Bevestig nieuwe PIN",
                 "action": "Wijzig PIN"
+            },
+            "changeProfileName": {
+                "title": "Verander profielnaam",
+                "description": "Verander je FireFly profielnaam",
+                "success": "Je hebt je profielnaam gewijzigd"
             },
             "balanceFinder": {
                 "title": "Saldo zoeker",
@@ -526,6 +531,12 @@
                     "name": "Shimmer",
                     "description": "Hét ontwikkel netwerk voor belangrijke ontwikkelingen rond IOTA. Jij bepaalt de toekomst van Shimmer. Leer, bouw, verdien en groei met elkaar."
                 }
+            }
+        },
+        "picker": {
+            "color": {
+                "title": "Kleur kiezer",
+                "hexCode": "Kleur hex code"
             }
         }
     },
@@ -752,6 +763,16 @@
         "confirmDeveloperProfile": {
             "title": "Je maakt een ontwikkelaarsprofiel aan",
             "body": "Je wordt standaard verbonden met het Chrysalis Devnet en kunt handmatig van netwerk wisselen. Ga alleen verder als je weet wat je doet."
+        },
+        "legalUpdate": {
+            "tosTitle": "Gebruikersvoorwaarden",
+            "privPolicyTitle": "Privacybeleid",
+            "tosAndPrivPolicyBody": "We hebben de gebruikersvoorwaarden en het privacybeleid van Firefly bijgewerkt.",
+            "tosBody": "We hebben de gebruiksvoorwaarden van Firefly bijgewerkt.",
+            "privPolicyBody": "We hebben het privacybeleid van Firefly bijgewerkt.",
+            "tosAndPrivPolicyCheckbox": "Ik heb de bijgewerkte gebruikersvoorwaarden en privacybeleid gelezen en ga hiermee akkoord",
+            "tosCheckbox": "Ik heb de bijgewerkte gebruikersvoorwaarden gelezen en ga hiermee akkoord",
+            "privPolicyCheckbox": "Ik heb de bijgewerkte privacybeleid gelezen en ga hiermee akkoord"
         }
     },
     "charts": {
@@ -923,6 +944,7 @@
         "systemTheme": "Systeem",
         "balance": "Saldo",
         "accountBalance": "Portemonnee saldo",
+        "all": "Alle",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "totalIn": "Totaal inkomend",
@@ -1003,6 +1025,7 @@
         "legacyNetwork": "Verouderd netwerk",
         "capsLock": "Caps Lock staat aan",
         "version": "Versie {version}",
+        "yourWallets": "Jouw wallets",
         "unknown": "Onbekend",
         "none": "Geen",
         "staked": "Gestaket",
@@ -1011,7 +1034,8 @@
         "unstaking": "Stoppen met staken",
         "notStaked": "Niet gestaked",
         "stakedFunds": "Gestaketet saldo",
-        "unstakedFunds": "Niet ingezet saldo"
+        "unstakedFunds": "Niet ingezet saldo",
+        "accountColor": "Kleur portemonnee"
     },
     "dates": {
         "today": "Vandaag",
@@ -1093,6 +1117,7 @@
         "account": {
             "length": "Je wallet naam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "empty": "U moet uw laatste portemonnee gebruiken voordat u een nieuwe aanmaakt.",
+            "emptyName": "Een profielnaam moet ten minste 1 teken bevatten.",
             "notEmpty": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
             "duplicate": "Een portemonnee met deze naam bestaat al.",
             "tilde": "Een profielnaam kan niet beginnen met het teken '~'.",
@@ -1258,6 +1283,12 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Je gebruikt momenteel een ontwikkelaarsprofiel en bent verbonden met {networkName}"
+        }
+    },
+    "permissions": {
+        "camera": {
+            "request": "We hebben je toestemming nodig om gebruik te maken van je camera voor het scannen van QR codes.",
+            "requestInAppSettings": "Als je toestemming wilt geven voor het gebruik van je camera zodat je QR codes kan scannen, schakel dit dan in in de instellingen van de app."
         }
     }
 }

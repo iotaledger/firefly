@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
     import Content from './Content.svelte'
+    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -15,6 +17,8 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
+        lastAcceptedTos.set(TOS_VERSION)
+        lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         dispatch('next')
     }
     function handleBackClick() {
@@ -39,7 +43,9 @@
     </div>
     <div slot="rightpane" class={!$mobile && 'w-full h-full flex items-center px-40 py-20'}>
         <div
-            class="legal-content {!$mobile && 'block relative max-h-full overflow-y-auto w-full text-justify pr-10 scroll-quaternary'}">
+            class="legal-content {!$mobile &&
+                'block relative max-h-full overflow-y-auto w-full text-justify pr-10 scroll-quaternary'}"
+        >
             <Content />
         </div>
     </div>

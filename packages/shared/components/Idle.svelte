@@ -20,11 +20,9 @@
 
             const ap = get(activeProfile)
             if (ap) {
-                const timeoutDuration =
-                    MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeout
+                const timeoutDuration = MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeout
 
-                if(!isIdleTimeValid(new Date(), timeoutDuration))
-                    lock()
+                if (!isIdleTimeValid(new Date(), timeoutDuration)) lock()
 
                 timeout = setTimeout(lock, timeoutDuration)
             }
@@ -68,4 +66,5 @@
     on:mousemove={debounce(updateIdleTime)}
     on:mousedown={debounce(updateIdleTime)}
     on:touchstart={debounce(updateIdleTime)}
-    on:scroll={debounce(updateIdleTime)}/>
+    on:scroll={debounce(updateIdleTime)}
+/>

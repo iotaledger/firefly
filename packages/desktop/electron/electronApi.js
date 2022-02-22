@@ -12,6 +12,9 @@ let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
+    updateAppSettings(settings) {
+        return ipcRenderer.invoke('update-app-settings', settings)
+    },
     getActiveProfile() {
         return activeProfileId
     },
@@ -223,6 +226,14 @@ const ElectronApi = {
      * @returns {Promise}
      */
     getOS: () => ipcRenderer.invoke('get-os'),
+    /**
+     * Gets machine ID
+     *
+     * @method getMachineId
+     *
+     * @returns {Promise}
+     */
+    getMachineId: () => ipcRenderer.invoke('get-machine-id'),
     /**
      * Starts an update of the application
      *
