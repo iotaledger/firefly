@@ -46,7 +46,7 @@
                 lightmode: 'chrysalis_gem.svg',
                 darkmode: 'chrysalis_gem.svg',
             },
-        }
+        },
     }
 </script>
 
