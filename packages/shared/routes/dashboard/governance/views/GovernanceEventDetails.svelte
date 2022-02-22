@@ -8,7 +8,7 @@
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { selectedAccount } from 'shared/lib/wallet'
-    import type { WalletAccount } from 'shared/lib/typings/wallet';
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
@@ -42,13 +42,12 @@
         return _progress > 0 ? _progress : 0
     }
 
-    
     $: totalVotes = calculateVotesByTrackedParticipation(
         $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations[
             event?.eventId
         ]
     )
-        
+
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
         if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
@@ -137,7 +136,7 @@
                         <Icon icon="chevron-right" />
                     </div>
                 {/if}
-            </div>
+            </Button>
         {/each}
     </DashboardPane>
     <div class="row-span-1">
