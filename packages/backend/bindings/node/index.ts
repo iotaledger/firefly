@@ -72,7 +72,7 @@ import { Participation } from '../../../shared/lib/participation/types'
 // @ts-ignore
 import addon = require('../index.node')
 
-const onMessageListeners: ((payload: MessageResponse) => void)[] = []
+const responseListeners: ((payload: MessageResponse) => void)[] = []
 
 function _poll(
     runtime: typeof addon.ActorSystem,
@@ -106,7 +106,7 @@ export function init(id: string, storagePath?: string, sendCrashReports?: boolea
             if (error && error.message.includes('receiving on a closed channel')) return
             const message = error || data
             // @ts-ignore
-            onMessageListeners.forEach((listener) => listener(message))
+            responseListeners.forEach((listener) => listener(message))
         },
         () => destroyed
     )
@@ -121,12 +121,12 @@ export function init(id: string, storagePath?: string, sendCrashReports?: boolea
     }
 }
 
-export function onMessage(cb: (payload: unknown) => void): void {
-    onMessageListeners.push(cb)
-}
-
 export function initLogger(config: LoggerConfig): void {
     addon.initLogger(JSON.stringify(config))
+}
+
+export function onResponse(cb: (payload: unknown) => void): void {
+    responseListeners.push(cb)
 }
 
 export const api = {
