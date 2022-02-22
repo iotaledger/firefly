@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, Text } from 'shared/components'
+    import { Button, Icon, Spinner, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
@@ -28,6 +28,7 @@
     let successText = localize('popups.votingConfirmation.votesSubmitted')
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
+    $: showSpinner = true
 
     onMount(() => {
         setVotingAction()
@@ -143,11 +144,19 @@
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
-            {localize(`actions.${votingAction}`)}
+            {#if showSpinner}
+                <Spinner busy message={'loading...'} classes="mx-2 justify-center" />
+            {:else}
+                {localize(`actions.${votingAction}`)}
+            {/if}
         </Button>
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
-                {localize(`actions.${VotingAction.Stop}`)}
+                {#if showSpinner}
+                    <Spinner busy message={'loading...'} classes="mx-2 justify-center" />
+                {:else}
+                    {localize(`actions.${VotingAction.Stop}`)}
+                {/if}
             </Button>
         {/if}
     </div>
