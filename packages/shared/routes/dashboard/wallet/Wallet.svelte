@@ -46,8 +46,7 @@
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
-    import { derived, Readable } from 'svelte/store'
+    import { onMount } from 'svelte'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
 
     let drawer: Drawer
@@ -62,53 +61,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
-    const viewableAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-
-            if ($activeProfile.settings.showHiddenAccounts) {
-                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
-
-                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
-                // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
-                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
-                    if (
-                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
-                        lastAccount.rawIotaBalance === 0 &&
-                        lastAccount.messages.length === 0
-                    ) {
-                        sortedAccounts.pop()
-                    }
-                }
-
-                return sortedAccounts
-            }
-
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    const liveAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
     let isGeneratingAddress = false
 
@@ -443,11 +395,6 @@
 
     $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
         drawer.open()
-    }
-
-    $: if ($accountsLoaded && $viewableAccounts.length) {
-        // TODO: persist last selected account
-        setSelectedAccount($viewableAccounts[0]?.id)
     }
 
     onMount(() => {

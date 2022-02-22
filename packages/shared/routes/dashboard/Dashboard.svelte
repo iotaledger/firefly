@@ -21,6 +21,7 @@
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
         isBackgroundSyncing,
@@ -29,8 +30,8 @@
         wallet,
     } from 'shared/lib/wallet'
     import { Settings, Staking, Wallet } from 'shared/routes'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -65,6 +66,54 @@
             openSnapshotPopup()
         }
     })
+
+    const viewableAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+
+            if ($activeProfile.settings.showHiddenAccounts) {
+                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+
+                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+                // This account will get re-used if someone creates a new one
+                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                    if (
+                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        lastAccount.rawIotaBalance === 0 &&
+                        lastAccount.messages.length === 0
+                    ) {
+                        sortedAccounts.pop()
+                    }
+                }
+
+                return sortedAccounts
+            }
+
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    const liveAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    // TODO: move these stores to lib when we fix the circular imports issue
+    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
     onMount(() => {
         if ($isSoftwareProfile) {
@@ -272,6 +321,11 @@
      */
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+    }
+
+    $: if ($accountsLoaded && $viewableAccounts.length) {
+        // TODO: persist last selected account
+        setSelectedAccount($viewableAccounts[0]?.id)
     }
 </script>
 
