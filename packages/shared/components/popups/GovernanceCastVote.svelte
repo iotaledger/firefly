@@ -4,7 +4,7 @@
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { selectedAccountId, api } from 'shared/lib/wallet'
+    import { selectedAccount, api } from 'shared/lib/wallet'
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
@@ -66,14 +66,14 @@
         switch (votingAction) {
             case VotingAction.Cast:
                 await participate(
-                    $selectedAccountId,
+                    $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
                 )
                 break
             case VotingAction.Merge:
                 await participateWithRemainingFunds(
-                    $selectedAccountId,
+                    $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
                 )
@@ -82,7 +82,7 @@
                 await changeVote()
                 break
             case VotingAction.Stop:
-                await stopParticipating($selectedAccountId, [eventId], ParticipationAction.Unvote)
+                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
                 break
             default:
                 throw new Error('Unimplemented voting action!')
@@ -90,11 +90,11 @@
     }
 
     const changeVote = async (): Promise<void> => {
-        const [messageId] = await stopParticipating($selectedAccountId, [eventId], ParticipationAction.Unvote)
+        const [messageId] = await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
         while (isParticipationPending(messageId)) {
             await sleep(2000)
         }
-        await participate($selectedAccountId, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
+        await participate($selectedAccount?.id, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
     }
 
     const handleStopClick = (): void => {
