@@ -1,3 +1,4 @@
+import { get, readable, writable } from 'svelte/store'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
 import {
@@ -9,8 +10,6 @@ import {
     Tabs,
     GovernanceRoutes,
 } from 'shared/lib/typings/routes'
-import { get, readable, writable } from 'svelte/store'
-
 import { isDeepLinkRequestActive } from '@common/deep-links'
 import { closePopup } from './popup'
 import { ProfileType } from './typings/profile'
@@ -294,22 +293,23 @@ export const routerPrevious = (): void => {
 
 export const resetRouter = (): void => {
     history.set([])
-    const hasCompletedSetup: boolean = get(profiles).length > 0
+    const hasCompletedSetup = get(profiles).length > 0
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
 
-    accountRoute.set(AccountRoutes.Init)
+    resetWalletRoute()
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     isDeepLinkRequestActive.set(false)
+    governanceRoute.set(GovernanceRoutes.Init)
 }
 
 export const resetWalletRoute = (): void => {
-    dashboardRoute.set(Tabs.Wallet)
     accountRoute.set(AccountRoutes.Init)
+    dashboardRoute.set(Tabs.Wallet)
 }
 
 export const resetLedgerRoute = (): void => {
