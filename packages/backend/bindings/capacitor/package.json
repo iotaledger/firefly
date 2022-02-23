@@ -13,15 +13,15 @@
   ],
   "types": "dist/esm/index.d.ts",
   "scripts": {
-    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "verify": "yarn verify:ios && yarn verify:android && yarn verify:web",
     "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin && cd ..",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
-    "verify:web": "npm run build",
-    "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "verify:web": "yarn build",
+    "build": "yarn clean && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build",
-    "preinstall": "npm run clean && npm run build"
+    "prepublishOnly": "yarn build",
+    "postinstall": "yarn build"
   },
   "private": true,
   "repository": {
