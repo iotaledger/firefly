@@ -54,6 +54,12 @@ const baseConfig = () => ({
         gatekeeperAssess: false,
         asarUnpack: ['**/*.node'],
     },
+    publish: {
+        provider: 'generic',
+        url: 'https://dl.firefly.iota.org/',
+        publishAutoUpdate: true,
+        channel: 'latest',
+    },
 })
 
 const getIconPaths = (stage) => {
@@ -99,18 +105,13 @@ const prereleaseNsisOptions = {
     },
 }
 
-const prodConfig = () => {
-    const publish = {
-        provider: 'generic',
-        url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: true,
-        channel: 'latest',
-    }
-    return Object.assign({}, baseConfig(), { publish })
-}
+const prodConfig = () => baseConfig()
 
 const alphaConfig = () => {
     const icons = getIconPaths('alpha')
+    const publish = {
+        publishAutoUpdate: false,
+    }
 
     return Object.assign(
         {},
@@ -118,12 +119,16 @@ const alphaConfig = () => {
         icons,
         { productName: getAppName('alpha') },
         getLinuxDesktopName('alpha'),
-        prereleaseNsisOptions
+        prereleaseNsisOptions,
+        { publish }
     )
 }
 
 const betaConfig = () => {
     const icons = getIconPaths('beta')
+    const publish = {
+        publishAutoUpdate: false,
+    }
 
     return Object.assign(
         {},
@@ -131,7 +136,8 @@ const betaConfig = () => {
         icons,
         { productName: getAppName('beta') },
         getLinuxDesktopName('beta'),
-        prereleaseNsisOptions
+        prereleaseNsisOptions,
+        { publish }
     )
 }
 
