@@ -1,4 +1,5 @@
 const notarize = require('./scripts/notarize.macos.js')
+const merge = require('lodash.merge')
 
 const baseConfig = () => ({
     productName: 'Firefly',
@@ -113,7 +114,7 @@ const alphaConfig = () => {
         publishAutoUpdate: false,
     }
 
-    return Object.assign(
+    return merge(
         {},
         baseConfig(),
         icons,
@@ -130,7 +131,7 @@ const betaConfig = () => {
         publishAutoUpdate: false,
     }
 
-    return Object.assign(
+    return merge(
         {},
         baseConfig(),
         icons,
