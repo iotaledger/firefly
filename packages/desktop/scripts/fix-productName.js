@@ -1,6 +1,7 @@
 /**
  * Electron reads the app name from the productName property of the package.json. For alpha and beta releases,
- * we need to rename the app so that it stores user data in the correct folders.
+ * we need to rename the app so that it stores user data in the correct folders. This is also used in
+ * electron/lib/errorPreload and electron/lib/keychain
  */
 
 const { readFileSync, writeFileSync } = require('fs')
