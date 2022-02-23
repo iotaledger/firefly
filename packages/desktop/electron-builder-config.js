@@ -148,10 +148,8 @@ const build = () => {
             return alphaConfig()
         case 'beta':
             return betaConfig()
-        case 'prod':
-            return prodConfig()
         default:
-            return null
+            return prodConfig()
     }
 }
 
