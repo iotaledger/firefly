@@ -28,8 +28,8 @@
             <button
                 on:click={() => handleAccountClick(account.id)}
                 class="{account.id === $selectedAccount?.id
-                    ? 'bg-gray-50 dark:bg-gray-900'
-                    : ''} hover:bg-gray-50 dark:hover:bg-gray-900 flex flex-row items-center space-x-4 p-4 rounded"
+                    ? 'bg-gray-50 dark:bg-gray-800'
+                    : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
             >
                 <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
                 <Text secondary={account.id !== $selectedAccount?.id} type="h4">{account.alias}</Text>
@@ -37,7 +37,10 @@
         {/each}
     </div>
     <HR />
-    <button class="flex flex-row items-center space-x-2 px-7 py-4" on:click={handleCreateAccountClick}>
+    <button
+        class="w-full hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-2 px-7 py-4"
+        on:click={handleCreateAccountClick}
+    >
         <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
         <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
     </button>

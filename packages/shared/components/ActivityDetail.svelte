@@ -156,7 +156,7 @@
             {/if}
         </div>
     </div>
-    <div class="mb-6 h-full overflow-y-auto pr-2 -mr-2 scroll-secondary">
+    <div class="mb-6 overflow-y-auto pr-2 -mr-2 flex-auto h-1 scroll-secondary">
         <div class="mb-5">
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
