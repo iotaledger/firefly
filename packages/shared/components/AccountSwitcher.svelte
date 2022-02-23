@@ -14,11 +14,11 @@
     }
 </script>
 
-<button on:click={toggleModal} class="flex flex-row justify-center items-center space-x-4">
+<button on:click={toggleModal} class="flex flex-row justify-center items-center space-x-2">
     <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
     <Text type="h4">{$selectedAccount?.alias}</Text>
     <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
-        <Icon icon="chevron-down" classes="text-gray-800 dark:text-white" />
+        <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
     </div>
 </button>
 <AccountSwitcherModal {onCreateAccount} {accounts} bind:isActive={showModal} />
