@@ -568,12 +568,20 @@
             },
             "events": {
                 "status": {
-                    "upcoming": "Upcoming",
-                    "commencing": "Commencing",
-                    "holding": "Holding period",
+                    "upcoming": "Announcement",
+                    "commencing": "Voting open",
+                    "holding": "Counting",
                     "ended": "Ended"
                 },
                 "button": "View proposal"
+            },
+            "eventDetails": {
+                "votingOpens": "Voting opens on",
+                "votingProgress": "Voting progress",
+                "votesCounted": "Your total votes counted",
+                "countingStarts": "Counting starts on",
+                "countingLength": "Counting length",
+                "currentResults": "Current results"
             },
             "votes": "votes"
         }
