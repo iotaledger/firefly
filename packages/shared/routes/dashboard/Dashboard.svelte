@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Idle, Sidebar } from 'shared/components'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
@@ -367,7 +367,7 @@
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <!-- <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" /> -->
+    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
     <TopNavigation {onCreateAccount} />
     <div class="flex flex-row w-full h-full">
         <Sidebar {locale} />
