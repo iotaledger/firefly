@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { wallet } from 'shared/lib/wallet'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
@@ -10,7 +9,6 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { get } from 'svelte/store'
     import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
 
     export let locale: Locale
@@ -25,9 +23,6 @@
 
     const displayAmount = getFormattedAmount()
 
-    const _getAccount = (accounts: WalletAccount[]): WalletAccount =>
-        accounts.find((account) => account.id === accountId)
-
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
@@ -41,11 +36,9 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    $: accountOverview = $participationOverview.find(
-        (apo) => apo?.accountIndex === _getAccount(get(get(wallet)?.accounts))?.index
-    )
-    $: isAccountVoting = accountOverview?.trackedParticipations?.find((tp) =>
-        tp.find((p) => p?.milestoneIndexEnd === 0)
+    $: accountOverview = $participationOverview?.find((apo) => apo?.accountIndex === $selectedAccount.index)
+    $: isAccountVoting = Object.values(accountOverview?.trackedParticipations)?.find((tp) =>
+        tp?.find((p) => p?.endMilestoneIndex === 0)
     )
 
     let mustAcknowledgeGenericParticipationWarning
