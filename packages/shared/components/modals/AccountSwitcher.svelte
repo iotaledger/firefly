@@ -1,0 +1,55 @@
+<script lang="typescript">
+    import { HR, Icon, Modal, Text } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, getColor } from 'shared/lib/profile'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
+
+    export let isActive: boolean = false
+    export let accounts: WalletAccount[] = []
+    export let onCreateAccount = (..._: any[]): void => {}
+
+    const handleAccountClick = (accountId) => {
+        setSelectedAccount(accountId)
+        selectedMessage.set(null)
+        isActive = false
+    }
+
+    const handleCreateAccountClick = () => {
+        isActive = false
+        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+    }
+</script>
+
+<Modal bind:isActive classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
+    <div class="flex flex-col space-y-1 p-4">
+        {#each accounts as account}
+            <button
+                on:click={() => handleAccountClick(account.id)}
+                class="{account.id === $selectedAccount?.id
+                    ? 'bg-gray-50 dark:bg-gray-900'
+                    : ''} hover:bg-gray-50 dark:hover:bg-gray-900 flex flex-row items-center space-x-4 p-4 rounded"
+            >
+                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                <Text secondary={account.id !== $selectedAccount?.id} type="h4">{account.alias}</Text>
+            </button>
+        {/each}
+    </div>
+    <HR />
+    <button class="flex flex-row items-center space-x-2 px-7 py-4" on:click={handleCreateAccountClick}>
+        <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
+        <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
+    </button>
+</Modal>
+
+<style type="text/scss">
+    button {
+        .circle {
+            @apply rounded-full;
+            @apply w-3;
+            @apply h-3;
+            background-color: var(--account-color);
+        }
+    }
+</style>

@@ -26,8 +26,6 @@
     import {
         addMessagesPair,
         api,
-        asyncCreateAccount,
-        asyncSyncAccountOffline,
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
@@ -41,13 +39,12 @@
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
-        setSelectedAccount,
         transferState,
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
-    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
+    import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
 
     let drawer: Drawer
 
@@ -228,39 +225,6 @@
         }
     }
 
-    async function onCreateAccount(alias: string, color: string, onComplete) {
-        const _create = async (): Promise<unknown> => {
-            try {
-                const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
-
-                // TODO: set selected account to the newly created account
-                accountRoute.set(AccountRoutes.Init)
-
-                return onComplete()
-            } catch (err) {
-                return onComplete(err)
-            }
-        }
-
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _create } })
-                    } else {
-                        void _create()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            await _create()
-        }
-    }
-
     function onSend(senderAccountId, receiveAddress, amount) {
         const _send = () => {
             isTransferring.set(true)
@@ -432,7 +396,6 @@
 
 {#if $selectedAccount}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        <AccountNavigation />
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">

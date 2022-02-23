@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { Idle, Sidebar } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
@@ -24,6 +24,8 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
+        asyncCreateAccount,
+        asyncSyncAccountOffline,
         isBackgroundSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
@@ -32,6 +34,7 @@
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
+    import AccountNavigation from './AccountNavigation.svelte'
 
     export let locale: Locale
 
@@ -268,6 +271,39 @@
         }
     }
 
+    async function onCreateAccount(alias: string, color: string, onComplete) {
+        const _create = async (): Promise<unknown> => {
+            try {
+                const account = await asyncCreateAccount(alias, color)
+                await asyncSyncAccountOffline(account)
+
+                // TODO: set selected account to the newly created account
+                accountRoute.set(AccountRoutes.Init)
+
+                return onComplete()
+            } catch (err) {
+                return onComplete(err)
+            }
+        }
+
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        void _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            await _create()
+        }
+    }
+
     $: if (!busy && $accountsLoaded) {
         /**
          * If the profile has dummy migration transactions,
@@ -330,12 +366,15 @@
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-row w-full h-full">
-    <Sidebar {locale} />
-    <!-- Dashboard Pane -->
-    <div class="flex flex-col w-full h-full">
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+<div class="dashboard-wrapper flex flex-col w-full h-full">
+    <!-- <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" /> -->
+    <AccountNavigation {onCreateAccount} />
+    <div class="flex flex-row w-full h-full">
+        <Sidebar {locale} />
+        <!-- Dashboard Pane -->
+        <div class="flex flex-col w-full h-full">
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        </div>
     </div>
 </div>
 
