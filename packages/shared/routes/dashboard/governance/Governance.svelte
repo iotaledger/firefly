@@ -14,7 +14,7 @@
         setSelectedAccount(accountId)
     }
 
-    $: event = $participationEvents.find((p) => p.eventId === TREASURY_VOTE_EVENT_ID)
+    $: event = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
 </script>
 
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
@@ -31,7 +31,7 @@
                 {/each}
             </div>
         </div>
-        <GovernanceDashboard {event} />
+        <GovernanceDashboard {event} account={$selectedAccount} />
     {:else if $governanceRoute === GovernanceRoutes.EventDetails}
         <div class="ml-auto">
             {#each $accounts as acc}
@@ -42,6 +42,6 @@
                 />
             {/each}
         </div>
-        <GovernanceEventDetails {event} />
+        <GovernanceEventDetails {event} account={$selectedAccount} />
     {/if}
 </div>
