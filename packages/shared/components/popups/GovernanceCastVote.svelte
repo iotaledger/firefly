@@ -8,7 +8,7 @@
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isParticipationPending } from 'shared/lib/participation/stores'
+    import { isParticipationPending, pendingParticipations } from 'shared/lib/participation/stores'
     import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types'
     import { sleep } from 'shared/lib/utils'
 
@@ -26,9 +26,11 @@
     let votingAction = VotingAction.Cast
     let isVoting = false
     let successText = localize('popups.votingConfirmation.votesSubmitted')
+    let spinnerText = localize('general.syncing')
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
-    $: disabled = isVoting || $isSyncing
+    $: disabled = isVoting || $isSyncing || $pendingParticipations?.length !== 0
+    $: disabled, setSpinnerMessage()
 
     onMount(() => {
         setVotingAction()
@@ -131,7 +133,13 @@
         }
     }
 
-    const getSpinnerMessage = (): string => ($isSyncing ? 'general.syncing' : 'general.broadcasting')
+    const setSpinnerMessage = (): void => {
+        if ($isSyncing || $pendingParticipations.length !== 0) {
+            spinnerText = localize('general.syncing')
+        } else {
+            spinnerText = localize('general.broadcasting')
+        }
+    }
 </script>
 
 <div>
@@ -147,7 +155,7 @@
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
             {#if disabled}
-                <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
+                <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
             {:else}
                 {localize(`actions.${votingAction}`)}
             {/if}
@@ -155,7 +163,7 @@
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
                 {#if disabled}
-                    <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
+                    <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
                 {:else}
                     {localize(`actions.${VotingAction.Stop}`)}
                 {/if}
