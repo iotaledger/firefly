@@ -40,6 +40,7 @@
         processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
+        selectedAccountId,
         setSelectedAccount,
         transferState,
         updateBalanceOverview,
@@ -112,12 +113,8 @@
     let isGeneratingAddress = false
 
     // If account changes force regeneration of Ledger receive address
-    $: {
-        // TODO: fix this, selectedAccount changes triggers too many times
-        selectedAccount?.id
-        if ($isLedgerProfile) {
-            hasGeneratedALedgerReceiveAddress.set(false)
-        }
+    $: if ($selectedAccountId && $isLedgerProfile) {
+        hasGeneratedALedgerReceiveAddress.set(false)
     }
 
     $: if ($accountsLoaded) {

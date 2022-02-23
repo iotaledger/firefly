@@ -125,13 +125,14 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
-// used to make selectedAccount reactive to changes in the wallet
-const _selectedAccountId = writable<AccountIdentifier | null>(null)
+// Created to help selectedAccount reactivity.
+// Use it to detected switches on selectedAccount
+export const selectedAccountId = writable<AccountIdentifier | null>(null)
 
-export const selectedAccount = derived([_selectedAccountId, get(wallet).accounts], ([$_selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $_selectedAccountId)
+export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $selectedAccountId)
 )
-export const setSelectedAccount = (id: AccountIdentifier): void => _selectedAccountId.set(id)
+export const setSelectedAccount = (id: AccountIdentifier): void => selectedAccountId.set(id)
 export const getAccountById = (id: AccountIdentifier): WalletAccount | null => {
     const accounts = get(wallet)?.accounts
     return get(accounts)?.find((account) => account.id === id) || null
