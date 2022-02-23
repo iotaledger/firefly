@@ -23,7 +23,7 @@
 </script>
 
 <Modal bind:isActive classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
-    <div class="flex flex-col space-y-1 p-4">
+    <div class="accounts flex flex-col space-y-1 p-4 scrollable-y">
         {#each accounts as account}
             <button
                 on:click={() => handleAccountClick(account.id)}
@@ -47,6 +47,9 @@
 </Modal>
 
 <style type="text/scss">
+    .accounts {
+        max-height: 40vh;
+    }
     button {
         .circle {
             @apply rounded-full;
