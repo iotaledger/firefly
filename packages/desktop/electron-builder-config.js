@@ -1,3 +1,5 @@
+const notarize = require('./scripts/notarize.macos.js')
+
 const baseConfig = () => ({
     productName: 'Firefly',
     artifactName: 'firefly-desktop-${version}.${ext}',
@@ -5,7 +7,15 @@ const baseConfig = () => ({
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/firefly-actor-system-nodejs-bindings/native/*'],
     appId: 'org.iota.firefly',
-    afterSign: './scripts/notarize.macos.js',
+    afterSign: async () => {
+        // eslint-disable-next-line no-useless-catch
+        try {
+            await notarize(getAppName(process.env.RELEASE))
+        } catch (error) {
+            // This catch is necessary or the promise rejection is swallowed
+            throw error
+        }
+    },
     asar: true,
     protocols: [{ name: 'IOTA URL Scheme', schemes: ['iota'] }],
     dmg: {
@@ -124,3 +134,18 @@ const betaConfig = () => {
         prereleaseNsisOptions
     )
 }
+
+const build = () => {
+    switch (process.env.RELEASE) {
+        case 'alpha':
+            return alphaConfig()
+        case 'beta':
+            return betaConfig()
+        case 'prod':
+            return prodConfig()
+        default:
+            return null
+    }
+}
+
+module.exports = build
