@@ -13,8 +13,8 @@ const config: CapacitorConfig = {
     cordova: {
         preferences: {
             DisableDeploy: 'true',
-        }
-    }
+        },
+    },
 }
 
 export default config
