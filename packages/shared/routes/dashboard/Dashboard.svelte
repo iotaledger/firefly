@@ -34,7 +34,7 @@
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
-    import AccountNavigation from './AccountNavigation.svelte'
+    import TopNavigation from './TopNavigation.svelte'
 
     export let locale: Locale
 
@@ -368,7 +368,7 @@
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
     <!-- <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" /> -->
-    <AccountNavigation {onCreateAccount} />
+    <TopNavigation {onCreateAccount} />
     <div class="flex flex-row w-full h-full">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->
