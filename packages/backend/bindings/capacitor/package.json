@@ -20,8 +20,7 @@
     "build": "yarn clean && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "yarn build",
-    "postinstall": "yarn build"
+    "prepublishOnly": "yarn build"
   },
   "private": true,
   "repository": {
