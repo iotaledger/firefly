@@ -24,10 +24,11 @@
     }
 
     let votingAction = VotingAction.Cast
-    let disabled = false
+    let isVoting = false
     let successText = localize('popups.votingConfirmation.votesSubmitted')
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
+    $: disabled = isVoting || $isSyncing
 
     onMount(() => {
         setVotingAction()
@@ -44,7 +45,7 @@
     }
 
     const castVote = async (): Promise<void> => {
-        disabled = true
+        isVoting = true
         try {
             await vote()
             openPopup({
@@ -59,7 +60,7 @@
                 message: localize(err.error),
             })
         }
-        disabled = false
+        isVoting = false
     }
 
     const vote = async (): Promise<void> => {
@@ -130,12 +131,7 @@
         }
     }
 
-    const getSpinnerMessage = (): string => {
-        if ($isSyncing) {
-            return 'general.syncing'
-        }
-        return 'general.broadcasting'
-    }
+    const getSpinnerMessage = (): string => ($isSyncing ? 'general.syncing' : 'general.broadcasting')
 </script>
 
 <div>
@@ -150,15 +146,15 @@
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
-            {#if disabled || $isSyncing}
-                <Spinner busy message={`${localize(getSpinnerMessage())}...`} classes="mx-2 justify-center" />
+            {#if disabled}
+                <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
             {:else}
                 {localize(`actions.${votingAction}`)}
             {/if}
         </Button>
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
-                {#if disabled || $isSyncing}
+                {#if disabled}
                     <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
                 {:else}
                     {localize(`actions.${VotingAction.Stop}`)}
