@@ -41,14 +41,32 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
+    $: accountOverview = $participationOverview.find(
+        (apo) => apo?.accountIndex === _getAccount(get(get(wallet)?.accounts))?.index
+    )
+    $: isAccountVoting = accountOverview?.trackedParticipations?.find((tp) =>
+        tp.find((p) => p?.milestoneIndexEnd === 0)
+    )
+
     let mustAcknowledgeGenericParticipationWarning
-    $: mustAcknowledgeGenericParticipationWarning = isAccountStaked(accountId) && isStakingPossible($stakingEventState)
+    $: mustAcknowledgeGenericParticipationWarning =
+        (isAccountStaked(accountId) && isStakingPossible($stakingEventState)) || isAccountVoting
+
+    let activeParticipationType
+    $: {
+        if (isAccountStaked(accountId) && isAccountVoting) {
+            activeParticipationType = 'stakeVote'
+        } else if (isAccountStaked(accountId)) {
+            activeParticipationType = 'stake'
+        } else if (isAccountVoting) {
+            activeParticipationType = 'vote'
+        } else {
+            activeParticipationType = ''
+        }
+    }
 
     let mustAcknowledgeBelowMinRewardParticipationWarning
     $: {
-        const { accounts } = get(wallet)
-        const account = _getAccount(get(accounts))
-        const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
         mustAcknowledgeBelowMinRewardParticipationWarning =
             accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
     }
@@ -81,7 +99,7 @@
                 {locale(
                     mustAcknowledgeBelowMinRewardParticipationWarning
                         ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
-                        : 'popups.transaction.sendingFromStakedAccount'
+                        : `popups.transaction.sendingFromActiveParticipationAccount.${activeParticipationType}`
                 )}
             </Text>
         </div>
