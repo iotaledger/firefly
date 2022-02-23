@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, Text } from 'shared/components'
+    import { Button, Icon, Spinner, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { selectedAccount, api } from 'shared/lib/wallet'
+    import { selectedAccount, api, isSyncing } from 'shared/lib/wallet'
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isParticipationPending } from 'shared/lib/participation/stores'
+    import { isParticipationPending, pendingParticipations } from 'shared/lib/participation/stores'
     import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types'
     import { sleep } from 'shared/lib/utils'
 
@@ -24,10 +24,13 @@
     }
 
     let votingAction = VotingAction.Cast
-    let disabled = false
+    let isVoting = false
     let successText = localize('popups.votingConfirmation.votesSubmitted')
+    let spinnerText = localize('general.syncing')
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
+    $: disabled = isVoting || $isSyncing || $pendingParticipations?.length !== 0
+    $: disabled, setSpinnerMessage()
 
     onMount(() => {
         setVotingAction()
@@ -44,7 +47,7 @@
     }
 
     const castVote = async (): Promise<void> => {
-        disabled = true
+        isVoting = true
         try {
             await vote()
             openPopup({
@@ -59,7 +62,7 @@
                 message: localize(err.error),
             })
         }
-        disabled = false
+        isVoting = false
     }
 
     const vote = async (): Promise<void> => {
@@ -129,6 +132,14 @@
             void castVote()
         }
     }
+
+    const setSpinnerMessage = (): void => {
+        if ($isSyncing || $pendingParticipations.length !== 0) {
+            spinnerText = localize('general.syncing')
+        } else {
+            spinnerText = localize('general.broadcasting')
+        }
+    }
 </script>
 
 <div>
@@ -143,11 +154,19 @@
     <div class="flex justify-between space-x-2">
         <Button onClick={closePopup} secondary classes="mb-0 w-full block text-15">{localize('actions.cancel')}</Button>
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
-            {localize(`actions.${votingAction}`)}
+            {#if disabled}
+                <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
+            {:else}
+                {localize(`actions.${votingAction}`)}
+            {/if}
         </Button>
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
-                {localize(`actions.${VotingAction.Stop}`)}
+                {#if disabled}
+                    <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
+                {:else}
+                    {localize(`actions.${VotingAction.Stop}`)}
+                {/if}
             </Button>
         {/if}
     </div>
