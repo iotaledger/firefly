@@ -89,7 +89,7 @@ const getIconPaths = (stage) => {
  * @param {string} stage
  * @returns
  */
-const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage[0].toUpperCase()}${stage.slice(1)}`)
+const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`)
 
 const getLinuxDesktopName = (stage) => ({
     linux: {

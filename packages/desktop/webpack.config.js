@@ -15,7 +15,7 @@ const stage = process.env.RELEASE || 'prod'
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
  */
-const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage[0].toUpperCase()}${stage.slice(1)}`
+const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 
 // / ------------------------ Resolve ------------------------
 
