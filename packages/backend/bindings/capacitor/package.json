@@ -20,8 +20,7 @@
     "build": "npm run clean && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build",
-    "preinstall": "npm run clean && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "private": true,
   "repository": {
