@@ -48,7 +48,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
 
-    stage.set(Stage[process.env.STAGE] ?? Stage.ALPHA)
+    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
