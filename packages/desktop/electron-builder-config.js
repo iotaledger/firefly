@@ -31,7 +31,7 @@ const baseConfig = () => ({
     },
     nsis: { oneClick: true, deleteAppDataOnUninstall: false },
     win: {
-        icon: './public/assets/icons/win/prod/icon.ico',
+        icon: './public/assets/icons/win/prod/icon.png',
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
         timeStampServer: 'http://timestamp.digicert.com',
@@ -70,8 +70,8 @@ const getIconPaths = (stage) => {
     const WINDOWS_PATH = 'win'
     const ICON_NAME = 'icon'
     const LINUX_ICON_EXTENSION = 'png'
-    const MAC_ICON_EXTENSION = 'ico'
-    const WINDOWS_ICON_EXTENSION = 'icns'
+    const MAC_ICON_EXTENSION = 'icns'
+    const WINDOWS_ICON_EXTENSION = 'png'
 
     return {
         linux: {
