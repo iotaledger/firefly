@@ -23,15 +23,14 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { isSyncing, wallet } from 'shared/lib/wallet'
+    import { isSyncing, selectedAccount, wallet } from 'shared/lib/wallet'
 
-    $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts
+    const { accounts } = $wallet
 
     $: showSpinner = (!$popupState.active && $participationAction && $accountToParticipate) || $isSyncing
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    const { accounts } = $wallet
     $: cannotStakeAnAccount = $accounts.every(
         (wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.HasDustAmount
     )

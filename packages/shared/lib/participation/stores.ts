@@ -2,7 +2,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { wallet } from '../wallet'
+import { selectedAccount, wallet } from '../wallet'
 import type { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
@@ -78,50 +78,55 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
 )
 
 /**
- * The amount of funds that are currently staked. This amount may differ
+ * The amount of funds that are currently staked on the selected account. This amount may differ
  * between airdrops, so we pick the highest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const stakedAmount: Readable<number> = derived(participationOverview, (overview) =>
-    overview.reduce((total, accountOverview) => {
-        const { shimmerStakedFunds, assemblyStakedFunds } = accountOverview
-
-        if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
-            total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
-        } else {
-            total += shimmerStakedFunds
-            total += assemblyStakedFunds
+export const stakedAmount: Readable<number> = derived(
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) => {
+        let total = 0
+        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
+        if (participation) {
+            const { shimmerStakedFunds, assemblyStakedFunds } = participation
+            if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
+                total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
+            } else {
+                total += shimmerStakedFunds
+                total += assemblyStakedFunds
+            }
         }
-
         return total
-    }, 0)
+    }
 )
 
 /**
- * The amount of funds that are currently unstaked. This amount may differ
+ * The amount of funds that are currently unstaked on the selected account. This amount may differ
  * between airdrops, so we pick the lowest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
-export const unstakedAmount: Readable<number> = derived(participationOverview, (overview) =>
-    overview.reduce((total, accountOverview) => {
-        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = accountOverview
-
+export const unstakedAmount: Readable<number> = derived(
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) => {
+        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
+        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = participation
+        let total = 0
         total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
-
         return total
-    }, 0)
+    }
 )
 
 /**
- * The store for accounts that contain partially staked funds.
+ * Check .
  *
  * Accounts are added if upon receiving a new transaction they
  * are currently staked (checks stakedAccounts). Accounts are removed
  * within the staking flow.
  */
-export const partiallyStakedAccounts: Readable<WalletAccount[]> = derived(
-    [participationOverview],
-    ([$participationOverview]) =>
+// TODO: replace its old use partiallyStakedAccounts
+export const isPartiallyStaked: Readable<WalletAccount[]> = derived(
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) =>
         $participationOverview
             .filter(
                 (apo) =>
