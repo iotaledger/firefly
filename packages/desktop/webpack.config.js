@@ -16,6 +16,7 @@ const stage = process.env.RELEASE || 'prod'
  * If stage = 'alpha' -> 'Firefly Alpha'
  */
 const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+const appId = stage === 'prod' ? 'org.iota.firefly' : `org.iota.firefly.${stage}`
 
 // / ------------------------ Resolve ------------------------
 
@@ -114,6 +115,7 @@ const mainPlugins = [
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
         PRELOAD_SCRIPT: JSON.stringify(false),
         APP_NAME: JSON.stringify(appName),
+        APP_ID: JSON.stringify(appId),
     }),
 ]
 

@@ -29,7 +29,9 @@ if (SEND_CRASH_REPORTS) {
 /**
  * Set AppUserModelID for Windows notifications functionality
  */
-app.setAppUserModelId('org.iota.firefly')
+// APP_ID is replaced by Webpack
+// eslint-disable-next-line no-undef
+app.setAppUserModelId(APP_ID)
 
 /**
  * Terminate application if Node remote debugging detected
