@@ -35,7 +35,7 @@
     const dispatch = createEventDispatcher()
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? $beta
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(beta)
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes

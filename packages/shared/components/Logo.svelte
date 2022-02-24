@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { beta } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { get } from 'svelte/store'
 
     export let logo = undefined
     export let width = undefined
@@ -8,7 +9,7 @@
     export let classes = ''
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[beta ? 'beta' : 'prod']?.[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
+    $: selected = logos[get(beta) ? 'beta' : 'prod']?.[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     const logos = {
         prod: {
