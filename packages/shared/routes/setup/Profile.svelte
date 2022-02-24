@@ -26,6 +26,7 @@
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { Platform } from 'shared/lib/platform'
+    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
@@ -35,7 +36,7 @@
     const dispatch = createEventDispatcher()
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage)
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage) !== Stage.PROD
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes

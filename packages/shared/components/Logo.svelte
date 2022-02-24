@@ -48,6 +48,24 @@
                 darkmode: 'chrysalis_gem.svg',
             },
         },
+        alpha: {
+            'logo-firefly-full': {
+                lightmode: 'firefly_logo_full_beta.svg',
+                darkmode: 'firefly_logo_full_darkmode_beta.svg',
+            },
+            'logo-firefly': {
+                lightmode: 'firefly_logo_beta.svg',
+                darkmode: 'firefly_logo_beta.svg',
+            },
+            'logo-stronghold': {
+                lightmode: 'stronghold.svg',
+                darkmode: 'stronghold_darkmode.svg',
+            },
+            'logo-chrysalis-gem': {
+                lightmode: 'chrysalis_gem.svg',
+                darkmode: 'chrysalis_gem.svg',
+            },
+        },
     }
 </script>
 
