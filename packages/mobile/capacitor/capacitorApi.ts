@@ -1,12 +1,14 @@
 import { Capacitor } from '@capacitor/core'
-import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
-import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
-import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
-import type { IPlatform } from 'shared/lib/typings/platform'
-import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
+
+import { BarcodeManager } from './lib/barcodeManager'
+import { DeepLinkManager } from './lib/deepLinkManager'
+import { NotificationManager } from './lib/notificationManager'
+import { PincodeManager } from './lib/pincodeManager'
+
+import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
 import type { AppSettings } from 'shared/lib/typings/app'
-import { BarcodeManager } from '../../mobile/capacitor/lib/barcodeManager'
+import type { VersionDetails } from 'shared/lib/typings/appUpdater'
+import type { IPlatform } from 'shared/lib/typings/platform'
 
 let activeProfileId = null
 

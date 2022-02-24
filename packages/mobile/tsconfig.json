@@ -1,7 +1,13 @@
 {
-    "extends": "@tsconfig/svelte/tsconfig.json"
-    // "compilerOptions": {
-    //     "isolatedModules": false,
-    //     "allowJs": false
-    // }
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions": {
+        //         "isolatedModules": false,
+        //         "allowJs": false
+        "baseUrl": ".",
+        "paths": {
+            "@common/*": ["../shared/lib/common/*"],
+            "@core/*": ["../shared/lib/core/*"],
+            "@lib/*": ["./capacitor/lib/*"]
+        }
+    }
 }
