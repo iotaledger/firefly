@@ -10,6 +10,13 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
+const stage = process.env.STAGE || 'prod'
+/**
+ * If stage = 'prod' -> 'Firefly'
+ * If stage = 'alpha' -> 'Firefly Alpha'
+ */
+const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+const appId = stage === 'prod' ? 'org.iota.firefly' : `org.iota.firefly.${stage}`
 
 // / ------------------------ Resolve ------------------------
 
@@ -107,6 +114,8 @@ const mainPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
         PRELOAD_SCRIPT: JSON.stringify(false),
+        APP_NAME: JSON.stringify(appName),
+        APP_ID: JSON.stringify(appId),
     }),
 ]
 
@@ -135,7 +144,7 @@ const rendererPlugins = [
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
-        'process.env.RELEASE': JSON.stringify(process.env.RELEASE),
+        'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
@@ -150,6 +159,7 @@ const preloadPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
         PRELOAD_SCRIPT: JSON.stringify(true),
+        APP_NAME: JSON.stringify(appName),
     }),
 ]
 

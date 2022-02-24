@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { beta } from 'shared/lib/app'
+    import { stage } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { get } from 'svelte/store'
 
     export let logo = undefined
     export let width = undefined
@@ -8,7 +9,7 @@
     export let classes = ''
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[beta ? 'beta' : 'prod']?.[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
+    $: selected = logos[get(stage)]?.[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     const logos = {
         prod: {
@@ -30,6 +31,24 @@
             },
         },
         beta: {
+            'logo-firefly-full': {
+                lightmode: 'firefly_logo_full_beta.svg',
+                darkmode: 'firefly_logo_full_darkmode_beta.svg',
+            },
+            'logo-firefly': {
+                lightmode: 'firefly_logo_beta.svg',
+                darkmode: 'firefly_logo_beta.svg',
+            },
+            'logo-stronghold': {
+                lightmode: 'stronghold.svg',
+                darkmode: 'stronghold_darkmode.svg',
+            },
+            'logo-chrysalis-gem': {
+                lightmode: 'chrysalis_gem.svg',
+                darkmode: 'chrysalis_gem.svg',
+            },
+        },
+        alpha: {
             'logo-firefly-full': {
                 lightmode: 'firefly_logo_full_beta.svg',
                 darkmode: 'firefly_logo_full_darkmode_beta.svg',
