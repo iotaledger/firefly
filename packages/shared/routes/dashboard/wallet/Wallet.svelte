@@ -33,7 +33,6 @@
         getAccountMeta,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners,
         isFirstSessionSync,
         isTransferring,
         prepareAccountInfo,
@@ -46,6 +45,7 @@
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
+    import { initialiseListeners } from 'shared/lib/listeners'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
