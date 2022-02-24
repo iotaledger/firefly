@@ -10,7 +10,7 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
-const stage = process.env.RELEASE || 'prod'
+const stage = process.env.STAGE || 'prod'
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
@@ -142,7 +142,7 @@ const rendererPlugins = [
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
-        'process.env.RELEASE': JSON.stringify(stage),
+        'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),

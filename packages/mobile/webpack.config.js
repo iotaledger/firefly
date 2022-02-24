@@ -102,7 +102,7 @@ const rendererPlugins = [
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
-        'process.env.RELEASE': JSON.stringify(process.env.RELEASE),
+        'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),
 ]
 

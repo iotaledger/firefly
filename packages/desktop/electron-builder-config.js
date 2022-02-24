@@ -11,7 +11,7 @@ const baseConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(getAppName(process.env.RELEASE || 'prod'))
+            await notarize(getAppName(process.env.STAGE || 'prod'))
         } catch (error) {
             // This catch is necessary or the promise rejection is swallowed
             throw error
@@ -143,7 +143,7 @@ const betaConfig = () => {
 }
 
 const build = () => {
-    switch (process.env.RELEASE) {
+    switch (process.env.STAGE) {
         case 'alpha':
             return alphaConfig()
         case 'beta':

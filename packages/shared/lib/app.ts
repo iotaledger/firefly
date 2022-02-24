@@ -10,12 +10,13 @@ import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
+import type { Stage } from './typings/stage'
 import { api, destroyActor, resetWallet } from './wallet'
 
 /**
  * Beta mode
  */
-export const beta = writable<boolean>(false)
+export const stage = writable<Stage>('alpha')
 
 /**
  * Mobile mode

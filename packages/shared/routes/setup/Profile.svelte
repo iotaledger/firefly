@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
-    import { beta, cleanupSignup, mobile } from 'shared/lib/app'
+    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
     import {
         Animation,
         Button,
@@ -35,7 +35,7 @@
     const dispatch = createEventDispatcher()
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(beta)
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage)
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
