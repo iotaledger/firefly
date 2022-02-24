@@ -11,7 +11,7 @@ const baseConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(getAppName(process.env.RELEASE))
+            await notarize(getAppName(process.env.RELEASE || 'prod'))
         } catch (error) {
             // This catch is necessary or the promise rejection is swallowed
             throw error
@@ -89,7 +89,7 @@ const getIconPaths = (stage) => {
  * @param {string} stage
  * @returns
  */
-const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage[0].toUpperCase()}${stage.slice(1)}`)
+const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`)
 
 const getLinuxDesktopName = (stage) => ({
     linux: {
