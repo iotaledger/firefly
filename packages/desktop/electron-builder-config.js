@@ -11,7 +11,7 @@ const baseConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(getAppName(process.env.STAGE || 'prod'))
+            await notarize(getAppId(process.env.STAGE || 'prod'), getAppName(process.env.STAGE || 'prod'))
         } catch (error) {
             // This catch is necessary or the promise rejection is swallowed
             throw error
@@ -91,6 +91,14 @@ const getIconPaths = (stage) => {
  */
 const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`)
 
+const getAppId = (stage) => {
+    const defaultAppId = 'org.iota.firefly'
+    if (stage === 'prod') {
+        return defaultAppId
+    }
+    return `${defaultAppId}.${stage}`
+}
+
 const getLinuxDesktopName = (stage) => ({
     linux: {
         desktop: {
@@ -119,6 +127,7 @@ const alphaConfig = () => {
         baseConfig(),
         icons,
         { productName: getAppName('alpha') },
+        { appId: getAppId('alpha') },
         getLinuxDesktopName('alpha'),
         prereleaseNsisOptions,
         { publish }
@@ -136,6 +145,7 @@ const betaConfig = () => {
         baseConfig(),
         icons,
         { productName: getAppName('beta') },
+        { appId: getAppId('beta') },
         getLinuxDesktopName('beta'),
         prereleaseNsisOptions,
         { publish }
