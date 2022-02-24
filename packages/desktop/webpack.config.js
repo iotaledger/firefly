@@ -10,7 +10,7 @@ const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
-const stage = process.env.STAGE || 'prod'
+const stage = process.env.STAGE || 'alpha'
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'

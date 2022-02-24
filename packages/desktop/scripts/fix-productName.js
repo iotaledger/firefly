@@ -11,7 +11,7 @@ if (!process.env.CI) {
     console.warn('Warning: These changes should not be checked into Git!')
 }
 
-const stage = process.env.STAGE || 'prod'
+const stage = process.env.STAGE || 'alpha'
 const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 const packageJsonPath = path.resolve(__dirname, '../package.json')
 

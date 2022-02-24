@@ -11,7 +11,7 @@ const baseConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(getAppId(process.env.STAGE || 'prod'), getAppName(process.env.STAGE || 'prod'))
+            await notarize(getAppId(process.env.STAGE || 'alpha'), getAppName(process.env.STAGE || 'alpha'))
         } catch (error) {
             // This catch is necessary or the promise rejection is swallowed
             throw error
