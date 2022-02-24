@@ -31,7 +31,7 @@ const baseConfig = () => ({
     },
     nsis: { oneClick: true, deleteAppDataOnUninstall: false },
     win: {
-        icon: './public/assets/icons/win/icon.ico',
+        icon: './public/assets/icons/win/prod/icon.ico',
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
         timeStampServer: 'http://timestamp.digicert.com',
@@ -43,10 +43,10 @@ const baseConfig = () => ({
             Comment: 'Desktop wallet for IOTA',
             Categories: 'Office;Network;Finance',
         },
-        icon: './public/assets/icons/linux/icon256x256.png',
+        icon: './public/assets/icons/linux/prod/icon.png',
     },
     mac: {
-        icon: './public/assets/icons/mac/icon.icns',
+        icon: './public/assets/icons/mac/prod/icon.icns',
         category: 'public.app-category.finance',
         target: ['dmg', 'zip'],
         entitlements: './entitlements.mac.plist',
@@ -64,21 +64,24 @@ const baseConfig = () => ({
 })
 
 const getIconPaths = (stage) => {
-    const prefix = './public/assets/icons'
-    const stagePrefix = stage === 'prod' ? '' : `${stage}-`
-    const winIconName = 'icon.ico'
-    const linuxIconName = 'icon256x256.png'
-    const macIconName = 'icon.icns'
+    const PATH = './public/assets/icons'
+    const LINUX_PATH = 'linux'
+    const MAC_PATH = 'mac'
+    const WINDOWS_PATH = 'win'
+    const ICON_NAME = 'icon'
+    const LINUX_ICON_EXTENSION = 'png'
+    const MAC_ICON_EXTENSION = 'ico'
+    const WINDOWS_ICON_EXTENSION = 'icns'
 
     return {
-        win: {
-            icon: `${prefix}/win/${stagePrefix}${winIconName}`,
-        },
         linux: {
-            icon: `${prefix}/linux/${stagePrefix}${linuxIconName}`,
+            icon: `${PATH}/${LINUX_PATH}/${stage}/${ICON_NAME}.${LINUX_ICON_EXTENSION}`,
         },
         mac: {
-            icon: `${prefix}/mac/${stagePrefix}${macIconName}`,
+            icon: `${PATH}/${MAC_PATH}/${stage}/${ICON_NAME}.${MAC_ICON_EXTENSION}`,
+        },
+        win: {
+            icon: `${PATH}/${WINDOWS_PATH}/${stage}/${ICON_NAME}.${WINDOWS_ICON_EXTENSION}`,
         },
     }
 }
