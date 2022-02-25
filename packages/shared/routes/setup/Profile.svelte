@@ -74,7 +74,7 @@
                 initialiseMigrationListeners()
             }
 
-            if (isDeveloperProfile) {
+            if (get(stage) === Stage.PROD && isDeveloperProfile) {
                 openPopup({
                     type: 'confirmDeveloperProfile',
                     props: {
@@ -121,17 +121,19 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        <CollapsibleBlock
-            label={locale('views.profile.advancedOptions')}
-            showBlock={get(newProfile)?.isDeveloperProfile ?? false}
-        >
-            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-                <div class="text-left">
-                    <Text type="p">{locale('views.profile.developer.label')}</Text>
-                    <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-                </div>
-            </ButtonCheckbox>
-        </CollapsibleBlock>
+        {#if get(stage) === Stage.PROD}
+            <CollapsibleBlock
+                label={locale('views.profile.advancedOptions')}
+                showBlock={get(newProfile)?.isDeveloperProfile ?? false}
+            >
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                    <div class="text-left">
+                        <Text type="p">{locale('views.profile.developer.label')}</Text>
+                        <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
+                    </div>
+                </ButtonCheckbox>
+            </CollapsibleBlock>
+        {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
