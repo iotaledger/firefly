@@ -31,7 +31,7 @@ const baseConfig = () => ({
     },
     nsis: { oneClick: true, deleteAppDataOnUninstall: false },
     win: {
-        icon: './public/assets/icons/win/prod/icon.png',
+        icon: './public/assets/icons/prod-icon.png',
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
         timeStampServer: 'http://timestamp.digicert.com',
@@ -43,10 +43,10 @@ const baseConfig = () => ({
             Comment: 'Desktop wallet for IOTA',
             Categories: 'Office;Network;Finance',
         },
-        icon: './public/assets/icons/linux/prod/icon.png',
+        icon: './public/assets/icons/prod-icon.png',
     },
     mac: {
-        icon: './public/assets/icons/mac/prod/icon.icns',
+        icon: './public/assets/icons/prod-icon.png',
         category: 'public.app-category.finance',
         target: ['dmg', 'zip'],
         entitlements: './entitlements.mac.plist',
@@ -68,20 +68,21 @@ const getIconPaths = (stage) => {
     const LINUX_PATH = 'linux'
     const MAC_PATH = 'mac'
     const WINDOWS_PATH = 'win'
-    const ICON_NAME = 'icon'
+    const NAME = 'icon'
+    const EXTENSION = 'png'
     const LINUX_ICON_EXTENSION = 'png'
     const MAC_ICON_EXTENSION = 'icns'
     const WINDOWS_ICON_EXTENSION = 'png'
 
     return {
         linux: {
-            icon: `${PATH}/${LINUX_PATH}/${stage}/${ICON_NAME}.${LINUX_ICON_EXTENSION}`,
+            icon: `${PATH}/${stage}-${NAME}.${EXTENSION}`,
         },
         mac: {
-            icon: `${PATH}/${MAC_PATH}/${stage}/${ICON_NAME}.${MAC_ICON_EXTENSION}`,
+            icon: `${PATH}/${stage}-${NAME}.${EXTENSION}`,
         },
         win: {
-            icon: `${PATH}/${WINDOWS_PATH}/${stage}/${ICON_NAME}.${WINDOWS_ICON_EXTENSION}`,
+            icon: `${PATH}/${stage}-${NAME}.${EXTENSION}`,
         },
     }
 }

@@ -7,64 +7,31 @@
     export let width = undefined
     export let height = undefined
     export let classes = ''
+    export let overrideStage: undefined | 'alpha' | 'beta' | 'prod' = undefined
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[get(stage)]?.[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
+    $: selected = logos[logo]?.[overrideStage ?? get(stage)]
 
     const logos = {
-        prod: {
-            'logo-firefly-full': {
-                lightmode: 'firefly_logo_full.svg',
-                darkmode: 'firefly_logo_full_darkmode.svg',
-            },
-            'logo-firefly': {
-                lightmode: 'firefly_logo.svg',
-                darkmode: 'firefly_logo.svg',
-            },
-            'logo-stronghold': {
-                lightmode: 'stronghold.svg',
-                darkmode: 'stronghold_darkmode.svg',
-            },
-            'logo-chrysalis-gem': {
-                lightmode: 'chrysalis_gem.svg',
-                darkmode: 'chrysalis_gem.svg',
-            },
+        'logo-firefly-full': {
+            alpha: 'beta_firefly_logo_full.svg',
+            beta: 'beta_firefly_logo_full.svg',
+            prod: 'prod_firefly_logo_full.svg',
         },
-        beta: {
-            'logo-firefly-full': {
-                lightmode: 'firefly_logo_full_beta.svg',
-                darkmode: 'firefly_logo_full_darkmode_beta.svg',
-            },
-            'logo-firefly': {
-                lightmode: 'firefly_logo_beta.svg',
-                darkmode: 'firefly_logo_beta.svg',
-            },
-            'logo-stronghold': {
-                lightmode: 'stronghold.svg',
-                darkmode: 'stronghold_darkmode.svg',
-            },
-            'logo-chrysalis-gem': {
-                lightmode: 'chrysalis_gem.svg',
-                darkmode: 'chrysalis_gem.svg',
-            },
+        'logo-firefly': {
+            alpha: 'alpha_firefly_logo.svg',
+            beta: 'beta_firefly_logo.svg',
+            prod: 'prod_firefly_logo.svg',
         },
-        alpha: {
-            'logo-firefly-full': {
-                lightmode: 'firefly_logo_full_beta.svg',
-                darkmode: 'firefly_logo_full_darkmode_beta.svg',
-            },
-            'logo-firefly': {
-                lightmode: 'firefly_logo_beta.svg',
-                darkmode: 'firefly_logo_beta.svg',
-            },
-            'logo-stronghold': {
-                lightmode: 'stronghold.svg',
-                darkmode: 'stronghold_darkmode.svg',
-            },
-            'logo-chrysalis-gem': {
-                lightmode: 'chrysalis_gem.svg',
-                darkmode: 'chrysalis_gem.svg',
-            },
+        'logo-stronghold': {
+            alpha: 'stronghold.svg',
+            beta: 'stronghold.svg',
+            prod: 'stronghold.svg',
+        },
+        'logo-chrysalis-gem': {
+            alpha: 'chrysalis_gem.svg',
+            beta: 'chrysalis_gem.svg',
+            prod: 'chrysalis_gem.svg',
         },
     }
 </script>
@@ -75,7 +42,7 @@
         class={classes}
         width={width || '100%'}
         height={height || '100%'}
-        src={`assets/logos/${selected}`}
+        src={`assets/logos/${darkModeEnabled ? 'darkmode' : 'lightmode'}/${selected}`}
         alt=""
     />
 {/if}
