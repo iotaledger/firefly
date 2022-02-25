@@ -5,6 +5,7 @@ const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
 const { version } = require('./package.json')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
@@ -20,6 +21,10 @@ const appId = stage === 'prod' ? 'org.iota.firefly' : `org.iota.firefly.${stage}
 
 // / ------------------------ Resolve ------------------------
 
+const tsConfigOptions = {
+    configFile: './tsconfig.json',
+}
+
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -30,6 +35,7 @@ const resolve = {
         path: false,
         fs: false,
     },
+    plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
 
 // / ------------------------ Output ------------------------
