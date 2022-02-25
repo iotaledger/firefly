@@ -258,7 +258,9 @@ function createWindow() {
 
         windows.main.loadURL('http://localhost:8080')
     } else {
-        initAutoUpdate(windows.main)
+        if (process.env.STAGE === 'prod') {
+            initAutoUpdate(windows.main)
+        }
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }

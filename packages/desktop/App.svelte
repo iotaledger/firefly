@@ -87,7 +87,7 @@
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
-        if (!devMode) {
+        if (!devMode && $stage === Stage.PROD) {
             await getVersionDetails()
             pollVersion()
         }

@@ -5,7 +5,10 @@
     import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { stage } from 'shared/lib/app'
+    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
@@ -28,7 +31,9 @@
         /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            updateCheck()
+            if (get(stage) === Stage.PROD) {
+                updateCheck()
+            }
         }
         const os = await Platform.getOS()
         hasAutoUpdate = os !== 'win32'
