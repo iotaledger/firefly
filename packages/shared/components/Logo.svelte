@@ -14,9 +14,9 @@
 
     const logos = {
         'logo-firefly-full': {
-            alpha: 'beta_firefly_logo_full.svg',
-            beta: 'beta_firefly_logo_full.svg',
-            prod: 'prod_firefly_logo_full.svg',
+            alpha: 'firefly_logo_full.svg',
+            beta: 'firefly_logo_full.svg',
+            prod: 'firefly_logo_full.svg',
         },
         'logo-firefly': {
             alpha: 'alpha_firefly_logo.svg',
