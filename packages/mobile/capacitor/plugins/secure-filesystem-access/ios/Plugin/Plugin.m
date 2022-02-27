@@ -3,4 +3,9 @@
 
 CAP_PLUGIN(SecureFilesystemAccess, "SecureFilesystemAccess",
     CAP_PLUGIN_METHOD(showPicker, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(allowAccess, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(revokeAccess, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(removeProfileFolder, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(renameProfileFolder, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(listProfileFolders, CAPPluginReturnPromise);
 )
