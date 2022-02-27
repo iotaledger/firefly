@@ -16,6 +16,7 @@ export enum Platforms {
 export interface IPlatform {
     ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
+    saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
