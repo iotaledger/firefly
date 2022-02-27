@@ -45,7 +45,7 @@
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
-    import { initialiseListeners } from 'lib/walletApiListeners'
+    import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
