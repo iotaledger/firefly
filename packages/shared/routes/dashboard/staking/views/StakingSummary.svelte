@@ -5,12 +5,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
     import {
-        accountToParticipate,
-        partiallyStakedAccounts,
+        isPartiallyStaked,
         partiallyUnstakedAmount,
         participationAction,
-        participationOverview,
-        stakedAccounts,
         stakedAmount,
         stakingEventState,
         unstakedAmount,
@@ -23,28 +20,25 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { isSyncing, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 
-    const { accounts } = $wallet
-
-    $: showSpinner = (!$popupState.active && $participationAction && $accountToParticipate) || $isSyncing
+    $: showSpinner = (!$popupState.active && $participationAction) || $isSyncing
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    $: cannotStakeAnAccount = $accounts.every(
-        (wa) => getAccountParticipationAbility(wa) === AccountParticipationAbility.HasDustAmount
-    )
+    $: cannotStakeAnAccount =
+        getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
 
-    $: isStaked = $stakedAmount > 0 && canParticipateInEvent
+    $: isStakedAndCanParticipate = $stakedAmount > 0 && canParticipateInEvent
 
-    $: isPartiallyStaked = $partiallyStakedAccounts.length > 0 && canParticipateInEvent
+    $: isPartiallyStakedAndCanParticipate = $isPartiallyStaked && canParticipateInEvent
 
     let canParticipateWithNode = false
     $: $networkStatus, (canParticipateWithNode = hasNodePlugin(NodePlugin.Participation))
 
     let showTooltip = false
     $: {
-        if (!isPartiallyStaked) showTooltip = false
+        if (!isPartiallyStakedAndCanParticipate) showTooltip = false
     }
 
     let tooltipAnchor
@@ -57,7 +51,7 @@
         if (cannotStakeAnAccount) {
             showAppNotification({
                 type: 'warning',
-                message: localize('warning.participation.noAccounts'),
+                message: localize('warning.participation.noFunds'),
             })
 
             return
@@ -66,7 +60,7 @@
         const showNotice =
             $stakingEventState === ParticipationEventState.Upcoming ||
             $stakingEventState === ParticipationEventState.Commencing
-        const type = !isStaked && showNotice ? 'stakingNotice' : 'stakingManager'
+        const type = !isStakedAndCanParticipate && showNotice ? 'stakingNotice' : 'stakingManager'
 
         openPopup({ type, hideClose: false })
     }
@@ -86,7 +80,7 @@
             <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">
                 {localize('views.staking.summary.stakedFunds')}
             </Text>
-            {#if isPartiallyStaked}
+            {#if isPartiallyStakedAndCanParticipate}
                 <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon icon="exclamation" classes="fill-current text-yellow-600" />
                 </div>
@@ -103,8 +97,8 @@
     <Button
         classes="w-full text-14"
         disabled={showSpinner || !canParticipateInEvent}
-        caution={isStaked && isPartiallyStaked}
-        secondary={isStaked && !isPartiallyStaked}
+        caution={isStakedAndCanParticipate && isPartiallyStakedAndCanParticipate}
+        secondary={isStakedAndCanParticipate && !isPartiallyStakedAndCanParticipate}
         onClick={() =>
             canParticipateWithNode
                 ? handleStakeFundsClick()
@@ -117,18 +111,16 @@
     >
         {#if showSpinner}
             <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
-        {:else}{localize(`actions.${isStaked ? 'manageStake' : 'stakeFunds'}`)}{/if}
+        {:else}{localize(`actions.${isStakedAndCanParticipate ? 'manageStake' : 'stakeFunds'}`)}{/if}
     </Button>
 </div>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
-        {#if isPartiallyStaked}
+        {#if isPartiallyStakedAndCanParticipate}
             <Text type="p" classes="text-gray-900 bold mb-1 text-left">
                 {localize(
-                    `tooltips.partiallyStakedFunds.title${$partiallyStakedAccounts.length > 0 ? '' : 'NoFunds'}`,
-                    $partiallyStakedAccounts.length > 0
-                        ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } }
-                        : {}
+                    `tooltips.partiallyStakedFunds.title${$isPartiallyStaked ? '' : 'NoFunds'}`,
+                    $isPartiallyStaked ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } } : {}
                 )}
             </Text>
             <Text type="p" secondary classes="text-left">

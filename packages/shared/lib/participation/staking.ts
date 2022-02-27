@@ -13,7 +13,6 @@ import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EV
 import {
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
-    partiallyStakedAccounts,
     participationEvents,
     participationOverview,
     shimmerStakingRemainingTime,
@@ -64,17 +63,6 @@ export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAir
 
     return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
 }
-
-/**
- * Determines if an account is partially staked.
- *
- * @method isAccountPartiallyStaked
- *
- * @param {string} accountId
- * @returns {boolean}
- */
-export const isAccountPartiallyStaked = (accountId: string): boolean =>
-    get(partiallyStakedAccounts).find((psa) => psa.id === accountId) !== undefined
 
 /**
  * Determines the staking airdrop from a given participation event ID.

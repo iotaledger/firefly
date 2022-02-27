@@ -30,6 +30,7 @@ export const pendingParticipations = writable<PendingParticipation[]>([])
  * If this store is empty (e.g. undefined or null), then there is NOT an account
  * currently trying to participate (or stop) in an event.
  */
+// TODO: remove this, accountToParticipate now is selectedAccount
 export const accountToParticipate = writable<WalletAccount>(null)
 
 /**
@@ -59,6 +60,7 @@ export const isPerformingParticipation = writable<boolean>(false)
  * This is updated regularly by the polling
  * in `wallet.rs`.
  */
+// TODO: remove this
 export const stakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
@@ -116,51 +118,41 @@ export const unstakedAmount: Readable<number> = derived(
     }
 )
 
-/**
- * Check .
- *
- * Accounts are added if upon receiving a new transaction they
- * are currently staked (checks stakedAccounts). Accounts are removed
- * within the staking flow.
- */
 // TODO: replace its old use partiallyStakedAccounts
-export const isPartiallyStaked: Readable<WalletAccount[]> = derived(
+export const isPartiallyStaked: Readable<boolean> = derived(
     [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        $participationOverview
-            .filter(
-                (apo) =>
-                    (apo.assemblyStakedFunds > 0 && apo.assemblyUnstakedFunds > 0) ||
-                    (apo.shimmerStakedFunds > 0 && apo.shimmerUnstakedFunds > 0)
-            )
-            .map((apo) => get(get(wallet).accounts).find((wa) => wa.index === apo.accountIndex))
+    ([$participationOverview, $selectedAccount]) => {
+        const participation = $participationOverview.find(
+            (overview) => $selectedAccount?.index === overview.accountIndex
+        )
+
+        return (
+            (participation?.assemblyStakedFunds > 0 && participation?.assemblyUnstakedFunds > 0) ||
+            (participation?.shimmerStakedFunds > 0 && participation?.shimmerUnstakedFunds > 0)
+        )
+    }
 )
 
 /**
  * The store for the total amount of funds that are partially (un)staked for
- * all accounts.
+ * the selected account.
  */
 export const partiallyUnstakedAmount: Readable<number> = derived(
-    [participationOverview, partiallyStakedAccounts],
-    ([$participationOverview, $partiallyStakedAccounts]) => {
-        if ($partiallyStakedAccounts.length <= 0) return 0
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) => {
+        const participation = $participationOverview.find(
+            (overview) => $selectedAccount?.index === overview.accountIndex
+        )
+        const assemblyPartialFunds =
+            participation?.assemblyStakedFunds > 0 && participation?.assemblyUnstakedFunds > 0
+                ? participation?.assemblyUnstakedFunds
+                : 0
+        const shimmerPartialFunds =
+            participation?.shimmerStakedFunds > 0 && participation?.shimmerUnstakedFunds > 0
+                ? participation?.shimmerUnstakedFunds
+                : 0
 
-        const _eval = (overview: AccountParticipationOverview): number => {
-            const assemblyPartialFunds =
-                overview?.assemblyStakedFunds > 0 && overview?.assemblyUnstakedFunds > 0
-                    ? overview?.assemblyUnstakedFunds
-                    : 0
-            const shimmerPartialFunds =
-                overview?.shimmerStakedFunds > 0 && overview?.shimmerUnstakedFunds > 0
-                    ? overview?.shimmerUnstakedFunds
-                    : 0
-
-            return Math.max(assemblyPartialFunds, shimmerPartialFunds)
-        }
-
-        return $partiallyStakedAccounts
-            .map((psa) => $participationOverview.find((apo) => apo.accountIndex === psa.index))
-            .reduce((total, apo) => total + _eval(apo), 0)
+        return Math.max(assemblyPartialFunds, shimmerPartialFunds)
     }
 )
 
