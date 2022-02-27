@@ -116,6 +116,17 @@ export const Platform: IPlatform = {
         }
     },
 
+    saveStrongholdBackup: ({ allowAccess }) => {
+        switch (PLATFORM) {
+            case Platforms.DESKTOP:
+                return Promise.resolve(null)
+            case Platforms.MOBILE:
+                return CapacitorApi.saveStrongholdBackup({ allowAccess })
+            default:
+                return
+        }
+    },
+
     exportTransactionHistory: async (defaultPath, contents) => {
         switch (PLATFORM) {
             case Platforms.DESKTOP:
