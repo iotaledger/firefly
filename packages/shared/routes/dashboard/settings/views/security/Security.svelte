@@ -28,8 +28,10 @@
         Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
+                    Platform.saveStrongholdBackup({ allowAccess: true })
                     api.backup(result, password, {
                         onSuccess() {
+                            Platform.saveStrongholdBackup({ allowAccess: false })
                             updateProfile('lastStrongholdBackupTime', new Date())
                             callback(false)
                         },
