@@ -12,7 +12,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         call.keepAlive = true
         self._call = call
         guard let pickerType = call.getString("type") else {
-            return call.reject("actorId is required")
+            return call.reject("type is required")
         }
         
         DispatchQueue.main.async {
@@ -35,7 +35,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt url: [URL]) {
         _url = url[0]
         self._call?.resolve([
-            "selected": [url[0].relativePath]
+            "selected": url[0].relativePath
         ])
     }
 
@@ -70,6 +70,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         if FileManager.default.fileExists(atPath: fileUrl.path) {
             try? FileManager.default.removeItem(atPath: fileUrl.path)
         }
+        
         call.resolve()
     }
 
@@ -93,5 +94,19 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         let fileUrl = getAppPath(folder: folder)
         let result = try? FileManager.default.contentsOfDirectory(at: fileUrl, includingPropertiesForKeys: nil, options: [])
         call.resolve(["result": result!])
+    }
+    
+    @objc func saveRecoveryKit(_ call: CAPPluginCall) {
+        guard let selectedPath = call.getString("selectedPath") else {
+            return call.reject("selectedPath is required")
+        }
+        guard let fromRelativePath = call.getString("fromRelativePath") else {
+            return call.reject("fromRelativePath is required")
+        }
+        let _url = (self.bridge?.config.appLocation.path)! + fromRelativePath // "/assets/docs/recovery-kit.pdf"
+        let srcUrl = Capacitor.URL(fileURLWithPath: _url, isDirectory: false)
+        let dstUrl = Capacitor.URL(fileURLWithPath: selectedPath, isDirectory: true)
+        try? FileManager.default.copyItem(at: srcUrl, to: dstUrl)
+        call.resolve()
     }
 }
