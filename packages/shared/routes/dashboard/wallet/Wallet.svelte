@@ -26,8 +26,6 @@
     import {
         addMessagesPair,
         api,
-        asyncCreateAccount,
-        asyncSyncAccountOffline,
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
@@ -40,15 +38,13 @@
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
-        setSelectedAccount,
         transferState,
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { onMount, setContext } from 'svelte'
-    import { derived, Readable } from 'svelte/store'
-    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from './views/'
+    import { onMount } from 'svelte'
+    import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
 
     let drawer: Drawer
 
@@ -62,53 +58,6 @@
             deepLinkRequestActive.set(false)
         }
     }
-
-    const viewableAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-
-            if ($activeProfile.settings.showHiddenAccounts) {
-                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
-
-                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
-                // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
-                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
-                    if (
-                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
-                        lastAccount.rawIotaBalance === 0 &&
-                        lastAccount.messages.length === 0
-                    ) {
-                        sortedAccounts.pop()
-                    }
-                }
-
-                return sortedAccounts
-            }
-
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    const liveAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
     let isGeneratingAddress = false
 
@@ -276,39 +225,6 @@
         }
     }
 
-    async function onCreateAccount(alias: string, color: string, onComplete) {
-        const _create = async (): Promise<unknown> => {
-            try {
-                const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
-
-                // TODO: set selected account to the newly created account
-                accountRoute.set(AccountRoutes.Init)
-
-                return onComplete()
-            } catch (err) {
-                return onComplete(err)
-            }
-        }
-
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _create } })
-                    } else {
-                        void _create()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            await _create()
-        }
-    }
-
     function onSend(senderAccountId, receiveAddress, amount) {
         const _send = () => {
             isTransferring.set(true)
@@ -445,11 +361,6 @@
         drawer.open()
     }
 
-    $: if ($accountsLoaded && $viewableAccounts.length) {
-        // TODO: persist last selected account
-        setSelectedAccount($viewableAccounts[0]?.id)
-    }
-
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -484,8 +395,7 @@
 </script>
 
 {#if $selectedAccount}
-    <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        <AccountNavigation />
+    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
