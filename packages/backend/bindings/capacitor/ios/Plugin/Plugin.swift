@@ -15,7 +15,7 @@ public class WalletPlugin: CAPPlugin {
             }
             let fm = FileManager.default
             let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent("database", isDirectory: true).path
+            let path = documents.appendingPathComponent("__storage__", isDirectory: true).path
             if !fm.fileExists(atPath: path) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
             }

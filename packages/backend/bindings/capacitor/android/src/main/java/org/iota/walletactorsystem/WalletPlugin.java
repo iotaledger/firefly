@@ -29,7 +29,7 @@ public class WalletPlugin extends Plugin {
             return;
         }
         String actorId = call.getString("actorId");
-        String dbPath = getContext().getFilesDir() + "/database";
+        String dbPath = getContext().getFilesDir() + "/__storage__";
 
         final ActorCallback callback = response -> {
             JSObject walletResponse = new JSObject();
