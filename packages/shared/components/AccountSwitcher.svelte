@@ -7,9 +7,9 @@
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
 
-    let showModal: boolean = false
+    let showModal = false
 
-    function toggleModal() {
+    function toggleModal(): void {
         showModal = !showModal
     }
 </script>

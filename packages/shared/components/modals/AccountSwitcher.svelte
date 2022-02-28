@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import type { AccountIdentifier } from 'lib/typings/account'
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { openPopup } from 'shared/lib/popup'
@@ -6,17 +7,17 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
 
-    export let isActive: boolean = false
+    export let isActive = false
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
 
-    const handleAccountClick = (accountId) => {
+    const handleAccountClick = (accountId: AccountIdentifier): void => {
         setSelectedAccount(accountId)
         selectedMessage.set(null)
         isActive = false
     }
 
-    const handleCreateAccountClick = () => {
+    const handleCreateAccountClick = (): void => {
         isActive = false
         openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
     }
