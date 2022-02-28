@@ -40,8 +40,35 @@ export const CapacitorApi: IPlatform = {
 
     BarcodeManager: BarcodeManager,
 
-    getStrongholdBackupDestination: (defaultPath) => new Promise<string>((resolve, reject) => {}),
+    getStrongholdBackupDestination: async (defaultPath) => {
+        // only with folder param the picker needs filename to save,
+        // we pass explicity null on mobile to pick files
+        const type = defaultPath === null ? 'file' : 'folder'
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type,
+        })
+        return `${selected}`
+    },
 
+    saveStrongholdBackup: async ({ allowAccess }) => {
+        const os: string = Capacitor.getPlatform()
+        switch (os) {
+            case 'ios':
+                if (allowAccess) {
+                    await SecureFilesystemAccess.allowAccess()
+                } else {
+                    await SecureFilesystemAccess.revokeAccess()
+                }
+                break
+            case 'android':
+                if (!allowAccess) {
+                    await SecureFilesystemAccess.finishBackup()
+                }
+                break
+        }
+        return
+    },
+    
     exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
     /**
