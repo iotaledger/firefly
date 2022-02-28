@@ -14,7 +14,7 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import { transferState } from 'shared/lib/wallet'
+    import { transferState, handleTransactionEventData } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
     import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
@@ -27,35 +27,6 @@
             })
 
             updateProfile('hasVisitedStaking', true)
-        }
-    }
-
-    // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
-    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
-        if (!eventData) return {}
-
-        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if (remainderData?.address) return { remainderAddress: remainderData?.address }
-
-        const txData = eventData as PreparedTransactionEvent
-        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
-
-        const numOutputs = txData.outputs.length
-        if (numOutputs === 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-            }
-        } else if (numOutputs > 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-
-                remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount,
-            }
-        } else {
-            return txData
         }
     }
 
