@@ -110,10 +110,12 @@ export const stakedAmount: Readable<number> = derived(
 export const unstakedAmount: Readable<number> = derived(
     [participationOverview, selectedAccount],
     ([$participationOverview, $selectedAccount]) => {
-        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
-        const { shimmerUnstakedFunds, assemblyUnstakedFunds } = participation
         let total = 0
-        total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
+        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
+        if (participation) {
+            const { shimmerUnstakedFunds, assemblyUnstakedFunds } = participation
+            total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
+        }
         return total
     }
 )
