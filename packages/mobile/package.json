@@ -15,10 +15,10 @@
         "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
     },
     "devDependencies": {
-        "@capacitor/android": "3.4.0",
-        "@capacitor/cli": "^3.4.0",
-        "@capacitor/core": "3.4.0",
-        "@capacitor/ios": "3.4.0",
+        "@capacitor/android": "3.4.1",
+        "@capacitor/cli": "^3.4.1",
+        "@capacitor/core": "3.4.1",
+        "@capacitor/ios": "3.4.1",
         "mini-css-extract-plugin": "^1.6.0",
         "tsconfig-paths-webpack-plugin": "^3.5.2",
         "webpack": "^5.16.0",
