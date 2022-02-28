@@ -79,18 +79,23 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
     }
 )
 
+export const selectedAccountParticipationOverview = derived(
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) =>
+        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
+)
+
 /**
  * The amount of funds that are currently staked on the selected account. This amount may differ
  * between airdrops, so we pick the highest number (this is only possible
  * because the same funds may be staked for both airdrops).
  */
 export const stakedAmount: Readable<number> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) => {
+    selectedAccountParticipationOverview,
+    ($selectedAccountParticipationOverview) => {
         let total = 0
-        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
-        if (participation) {
-            const { shimmerStakedFunds, assemblyStakedFunds } = participation
+        if ($selectedAccountParticipationOverview) {
+            const { shimmerStakedFunds, assemblyStakedFunds } = $selectedAccountParticipationOverview
             if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
                 total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
             } else {
@@ -108,12 +113,11 @@ export const stakedAmount: Readable<number> = derived(
  * because the same funds may be staked for both airdrops).
  */
 export const unstakedAmount: Readable<number> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) => {
+    selectedAccountParticipationOverview,
+    ($selectedAccountParticipationOverview) => {
         let total = 0
-        const participation = $participationOverview.find(({ accountIndex }) => accountIndex === $selectedAccount.index)
-        if (participation) {
-            const { shimmerUnstakedFunds, assemblyUnstakedFunds } = participation
+        if ($selectedAccountParticipationOverview) {
+            const { shimmerUnstakedFunds, assemblyUnstakedFunds } = $selectedAccountParticipationOverview
             total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
         }
         return total
@@ -122,17 +126,12 @@ export const unstakedAmount: Readable<number> = derived(
 
 // TODO: replace its old use partiallyStakedAccounts
 export const isPartiallyStaked: Readable<boolean> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) => {
-        const participation = $participationOverview.find(
-            (overview) => $selectedAccount?.index === overview.accountIndex
-        )
-
-        return (
-            (participation?.assemblyStakedFunds > 0 && participation?.assemblyUnstakedFunds > 0) ||
-            (participation?.shimmerStakedFunds > 0 && participation?.shimmerUnstakedFunds > 0)
-        )
-    }
+    selectedAccountParticipationOverview,
+    ($selectedAccountParticipationOverview) =>
+        ($selectedAccountParticipationOverview?.assemblyStakedFunds > 0 &&
+            $selectedAccountParticipationOverview?.assemblyUnstakedFunds > 0) ||
+        ($selectedAccountParticipationOverview?.shimmerStakedFunds > 0 &&
+            $selectedAccountParticipationOverview?.shimmerUnstakedFunds > 0)
 )
 
 /**
@@ -140,18 +139,17 @@ export const isPartiallyStaked: Readable<boolean> = derived(
  * the selected account.
  */
 export const partiallyUnstakedAmount: Readable<number> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) => {
-        const participation = $participationOverview.find(
-            (overview) => $selectedAccount?.index === overview.accountIndex
-        )
+    selectedAccountParticipationOverview,
+    ($selectedAccountParticipationOverview) => {
         const assemblyPartialFunds =
-            participation?.assemblyStakedFunds > 0 && participation?.assemblyUnstakedFunds > 0
-                ? participation?.assemblyUnstakedFunds
+            $selectedAccountParticipationOverview?.assemblyStakedFunds > 0 &&
+            $selectedAccountParticipationOverview?.assemblyUnstakedFunds > 0
+                ? $selectedAccountParticipationOverview?.assemblyUnstakedFunds
                 : 0
         const shimmerPartialFunds =
-            participation?.shimmerStakedFunds > 0 && participation?.shimmerUnstakedFunds > 0
-                ? participation?.shimmerUnstakedFunds
+            $selectedAccountParticipationOverview?.shimmerStakedFunds > 0 &&
+            $selectedAccountParticipationOverview?.shimmerUnstakedFunds > 0
+                ? $selectedAccountParticipationOverview?.shimmerUnstakedFunds
                 : 0
 
         return Math.max(assemblyPartialFunds, shimmerPartialFunds)
