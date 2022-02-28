@@ -971,7 +971,6 @@
         "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
-        "addWallet": "Add a wallet",
         "createNewWallet": "Create a new wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
