@@ -1,14 +1,15 @@
+import type { IPlatform } from 'shared/lib/typings/platform'
 import { Capacitor } from '@capacitor/core'
 
 import { BarcodeManager } from './lib/barcodeManager'
-import { DeepLinkManager } from './lib/deepLinkManager'
-import { NotificationManager } from './lib/notificationManager'
-import { PincodeManager } from './lib/pincodeManager'
+import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
+import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
+import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
+import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
 import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
-import type { AppSettings } from 'shared/lib/typings/app'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import type { IPlatform } from 'shared/lib/typings/platform'
+import type { AppSettings } from 'shared/lib/typings/app'
 
 let activeProfileId = null
 
