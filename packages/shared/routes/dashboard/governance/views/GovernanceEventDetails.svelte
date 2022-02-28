@@ -13,6 +13,8 @@
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
     import { delineateNumber } from 'shared/lib/utils'
+    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
@@ -51,14 +53,20 @@
     const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
 
     const handleClick = (nextVote: VotingEventAnswer): void => {
-        openPopup({
-            type: 'governanceCastVote',
-            props: {
-                currentVoteValue,
-                eventId: event?.eventId,
-                nextVote,
-            },
-        })
+        const openGovernanceCastVotePopup = () =>
+            openPopup({
+                type: 'governanceCastVote',
+                props: {
+                    currentVoteValue,
+                    eventId: event?.eventId,
+                    nextVote,
+                },
+            })
+        if ($isSoftwareProfile) {
+            openGovernanceCastVotePopup()
+        } else {
+            promptUserToConnectLedger(false, () => openGovernanceCastVotePopup(), undefined, true)
+        }
     }
 
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
@@ -119,7 +127,7 @@
         <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
         <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
         <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
-        {#each event?.information?.payload?.questions[0]?.answers as answer}
+        {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
                 onClick={() => handleClick(answer)}
                 secondary
