@@ -25,7 +25,6 @@
         "webpack-dev-server": "^3.11.2"
     },
     "dependencies": {
-        "@capacitor/filesystem": "^1.0.6",
         "capacitor-native-filepicker": "https://github.com/ourcodeworld/capacitor-native-filepicker",
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "capacitor-secure-storage-plugin": "^0.6.2",
