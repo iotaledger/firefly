@@ -4,12 +4,9 @@
     import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { popupState } from 'shared/lib/popup'
+    import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-
-    export let locale: Locale
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
@@ -41,7 +38,7 @@
             error = ''
 
             if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
-                return (error = locale('error.account.length', {
+                return (error = localize('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
                     },
@@ -49,7 +46,7 @@
             }
 
             if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
-                return (error = locale('error.account.duplicate'))
+                return (error = localize('error.account.duplicate'))
             }
 
             isBusy = true
@@ -70,6 +67,8 @@
                                 message: localize(err?.error || err),
                             })
                         }
+                    } else {
+                        closePopup()
                     }
                 })
 
@@ -81,16 +80,14 @@
         }
     }
     const handleCancelClick = () => {
-        error = ''
-        // TODO: replace with account routes
-        // walletRoute.set(WalletRoutes.Init)
+        closePopup()
     }
 </script>
 
 <div class="px-8 py-6 flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.createAccount')}</Text>
+            <Text type="h5">{localize('general.createNewWallet')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <AccountTile
@@ -98,37 +95,37 @@
                 balanceEquiv={'US$ 0,00'}
                 {color}
                 disabledHover="true"
-                name={accountAlias || locale('general.accountName')}
+                name={accountAlias || localize('general.accountName')}
                 size="l"
                 classes="mb-4"
             />
             <Input
                 {error}
                 bind:value={accountAlias}
-                placeholder={locale('general.accountName')}
+                placeholder={localize('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy}
                 classes="mb-4"
             />
-            <ColorPicker title={locale('general.accountColor')} bind:active={color} {locale} classes="mb-4" />
+            <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center mb-4" />
+        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center mb-4" />
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
-                {locale('actions.cancel')}
+                {localize('actions.cancel')}
             </Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
                 onClick={() => handleCreateClick()}
             >
-                {locale('actions.create')}
+                {localize('actions.create')}
             </Button>
         </div>
     {/if}

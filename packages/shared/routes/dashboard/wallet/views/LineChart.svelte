@@ -183,7 +183,7 @@
         {color}
         {xMaxTicks}
         {formatYAxis}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '160'}px);`}
     />
 </div>
 
