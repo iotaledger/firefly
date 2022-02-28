@@ -16,12 +16,12 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Message, Transaction } from 'shared/lib/typings/message'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         addMessagesPair,
@@ -355,10 +355,6 @@
         } else {
             _internalTransfer()
         }
-    }
-
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
-        drawer.open()
     }
 
     onMount(() => {
