@@ -49,15 +49,32 @@ export const CapacitorApi: IPlatform = {
     NotificationManager: NotificationManager,
 
     getStrongholdBackupDestination: async (defaultPath) => {
-        const { folders } = await CapacitorNativeFilePicker.launchFolderPicker({
-            limit: 1,
-            showHiddenFiles: true,
+        // only with folder param the picker needs filename to save,
+        // we pass explicity null on mobile to pick files
+        const type = defaultPath === null ? 'file' : 'folder'
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type,
         })
-        const docUri = await Filesystem.getUri({
-            path: '',
-            directory: Directory.Data,
-        })
-        return `${docUri?.uri.replace(/^file:\/\//, '')}`
+        return `${selected}`
+    },
+
+    saveStrongholdBackup: async ({ allowAccess }) => {
+        const os: string = Capacitor.getPlatform()
+        switch (os) {
+            case 'ios':
+                if (allowAccess) {
+                    await SecureFilesystemAccess.allowAccess()
+                } else {
+                    await SecureFilesystemAccess.revokeAccess()
+                }
+                break
+            case 'android':
+                if (!allowAccess) {
+                    await SecureFilesystemAccess.finishBackup()
+                }
+                break
+        }
+        return
     },
     exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
