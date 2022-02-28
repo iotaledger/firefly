@@ -695,7 +695,12 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "You are sending a transfer from a wallet that is currently being staked and voted. This may unstake and unvote your tokens. Feel free to send the transfer but you may need to restake and revote your remaining tokens afterwards.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
+                "vote": "You are sending a transfer from a wallet that is currently being voted. This may unvote your tokens. Feel free to send the transfer but you may need to revote your remaining tokens afterwards."
+            }
         },
         "balanceFinder": {
             "title": "Balance finder",
