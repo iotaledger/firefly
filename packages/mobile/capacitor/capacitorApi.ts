@@ -1,5 +1,4 @@
 import { Capacitor } from '@capacitor/core'
-import { CapacitorNativeFilePicker } from 'capacitor-native-filepicker'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
