@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core'
+import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
