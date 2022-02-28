@@ -369,7 +369,7 @@
 <div class="dashboard-wrapper flex flex-col w-full h-full">
     <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
     <TopNavigation {onCreateAccount} />
-    <div class="flex flex-row w-full h-full">
+    <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
