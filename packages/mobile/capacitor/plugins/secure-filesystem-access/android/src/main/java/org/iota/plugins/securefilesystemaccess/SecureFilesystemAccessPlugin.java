@@ -23,7 +23,10 @@ import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.Objects;
 
 import static android.os.Environment.DIRECTORY_ALARMS;
@@ -54,10 +57,51 @@ import static android.os.Environment.DIRECTORY_RINGTONES;
 public class SecureFilesystemAccessPlugin extends Plugin {
     private String resourceType = "";
     private String fileName = "";
-
+    
     @PluginMethod
     public void finishBackup(PluginCall call) {
         // we keep this method for continue working on Android 11+ new storage
+    }
+
+    @PluginMethod
+    public void saveRecoveryKit(PluginCall call) throws IOException {
+        if (!call.getData().has("selectedPath")
+                || !call.getData().has("fromRelativePath")) {
+            call.reject("selectedPath & fromRelativePath are required");
+            return;
+        }
+        String selectedPath = call.getString("selectedPath");
+        String fromRelativePath = call.getString("fromRelativePath");
+
+        assert fromRelativePath != null;
+        File srcUrl = new File(getDirectory(DIRECTORY_DOWNLOADS).toString(), fromRelativePath);
+        Log.d("srcUrl", srcUrl.toString());
+        assert selectedPath != null;
+        File dstUrl = new File(selectedPath);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            // copy file
+            try (
+                FileChannel source = new FileInputStream(srcUrl).getChannel();
+                FileChannel destination = new FileOutputStream(dstUrl).getChannel()
+            ) {
+                destination.transferFrom(source, 0, source.size());
+            }
+        } else {
+            final Mediastore implementation = new Mediastore();
+            String path = selectedPath;
+            if (path.startsWith("file:///")) {
+                path = path.substring(8);
+            }
+            Log.d("PATH!!!", path);
+            try {
+                implementation.saveToDownloads(bridge.getActivity().getApplicationContext(), fileName, path);
+            } catch (Exception e) {
+                call.reject(e.toString());
+                return;
+            }
+        }
+        call.resolve();
     }
 
     @PluginMethod
@@ -136,13 +180,11 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         if (getPermissionState("storage") != PermissionState.GRANTED) {
             requestPermissionForAlias("storage", call, "pickerPermsCallback");
         } else {
-            if (!call.getData().has("type")
-                    || !call.getData().has("filename")) {
-                call.reject("Resource type and filename is required");
+            if (!call.getData().has("type")) {
+                call.reject("Resource type is required");
                 return;
             }
             resourceType = call.getString("type");
-            fileName = call.getString("filename");
             assert resourceType != null;
 
             Intent intent = new Intent(resourceType.equals("file")
@@ -157,7 +199,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             } else if (resourceType.equals("folder")) {
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                intent.putExtra(Intent.EXTRA_TITLE, fileName);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     // this is not working on Android 11+
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
