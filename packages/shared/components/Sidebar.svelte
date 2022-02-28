@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Drawer, Icon, SidebarTab, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
+    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
@@ -7,9 +7,10 @@
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
-    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -25,30 +26,25 @@
     $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
 
-    $: $dashboardRoute, $activeProfile?.hasVisitedStaking || showStakingNotification, updateSidebar()
+    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
 
-    let sidebarTabs = [
+    let sidebarTabs: SidebarTabType[] = [
         {
-            active: false,
             icon: 'wallet',
             label: locale('tabs.wallet'),
             route: Tabs.Wallet,
-            notificationType: undefined,
             onClick: openWallet,
         },
         {
-            active: false,
             icon: 'tokens',
             label: locale('tabs.staking'),
             route: Tabs.Staking,
-            notificationType: undefined,
             onClick: openStaking,
         },
     ]
 
-    function updateSidebar() {
+    function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
-            tab.active = tab.route === $dashboardRoute
             if (Tabs.Staking === tab.route) {
                 tab.notificationType = !$activeProfile?.hasVisitedStaking
                     ? 'warning'
@@ -136,7 +132,7 @@
             <div class="flex flex-col space-y-8">
                 {#each sidebarTabs as tab}
                     <div class="flex">
-                        <SidebarTab {...tab} />
+                        <SidebarTab {tab} />
                     </div>
                 {/each}
             </div>

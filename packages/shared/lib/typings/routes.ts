@@ -1,3 +1,5 @@
+import type { NotificationType } from './notification'
+
 export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
@@ -131,4 +133,12 @@ export enum ExternalRoute {
     Discord = 'https://discord.iota.org',
     FAQ = 'https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting',
     IssueReport = 'https://github.com/iotaledger/firefly/issues',
+}
+
+export type SidebarTab = {
+    icon: string
+    label: string
+    route: Tabs
+    onClick: () => void
+    notificationType?: NotificationType
 }
