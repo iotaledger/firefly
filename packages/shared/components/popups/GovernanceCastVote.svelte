@@ -8,8 +8,12 @@
     import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isParticipationPending, pendingParticipations } from 'shared/lib/participation/stores'
-    import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types'
+    import {
+        isParticipationPending,
+        participationOverview,
+        pendingParticipations,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationAction, TrackedParticipationItem, VotingEventAnswer } from 'shared/lib/participation/types'
     import { sleep } from 'shared/lib/utils'
 
     export let currentVoteValue: string
@@ -41,9 +45,19 @@
             votingAction = VotingAction.Cast
         } else if (currentVoteValue !== nextVote.value) {
             votingAction = VotingAction.Change
-        } else {
+        } else if (hasReceivedFundsSinceLastVote()) {
             votingAction = VotingAction.Merge
+        } else {
+            votingAction = VotingAction.Stop
         }
+    }
+
+    const hasReceivedFundsSinceLastVote = (): boolean => {
+        const { trackedParticipations } =
+            $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? {}
+        const currentParticipation = trackedParticipations?.[eventId]?.slice(-1)?.[0] as TrackedParticipationItem
+        const { amount } = currentParticipation ?? {}
+        return amount !== $selectedAccount.rawIotaBalance
     }
 
     const castVote = async (): Promise<void> => {
