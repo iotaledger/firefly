@@ -17,11 +17,13 @@
     "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin && cd ..",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
-    "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "build": "node ./scripts/build.js",
+    "build:clean" : "rimraf ./dist",
+    "build:bundle": "tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "preinstall": "npm run clean && npm run build"
+    "preinstall": "npm run build"
   },
   "private": true,
   "repository": {
