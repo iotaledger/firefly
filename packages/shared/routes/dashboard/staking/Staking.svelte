@@ -6,14 +6,7 @@
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import {
-        GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
-        TransactionEventData,
-        TransferProgressEventData,
-        TransferProgressEventType,
-        TransferState,
-    } from 'shared/lib/typings/events'
+    import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { transferState, handleTransactionEventData } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
