@@ -53,11 +53,10 @@
     }
 
     const hasReceivedFundsSinceLastVote = (): boolean => {
-        const { trackedParticipations } = $participationOverview?.find(
-            ({ accountIndex }) => accountIndex === $selectedAccount?.index
-        )
-        const lastIndex = trackedParticipations[eventId].length - 1
-        const { amount } = trackedParticipations[eventId][lastIndex] as TrackedParticipationItem
+        const { trackedParticipations } =
+            $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? {}
+        const currentParticipation = trackedParticipations?.[eventId]?.slice(-1)?.[0] as TrackedParticipationItem
+        const { amount } = currentParticipation ?? {}
         return amount !== $selectedAccount.rawIotaBalance
     }
 
