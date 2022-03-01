@@ -1761,7 +1761,7 @@ export const hasValidPendingTransactions = (account: WalletAccount): boolean => 
 }
 
 /**
- * Handles transaction event data, converting it into TransactionEventData
+ * Handles transaction event data, converting TransferProgressEventData into TransactionEventData
  *
  * @method handleTransactionEventData
  *
