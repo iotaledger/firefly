@@ -5,7 +5,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { selectedAccount, api, isSyncing } from 'shared/lib/wallet'
-    import { participate, participateWithRemainingFunds, stopParticipating } from 'shared/lib/participation/api'
+    import { participate, stopParticipating } from 'shared/lib/participation/api'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import {
@@ -82,14 +82,8 @@
     const vote = async (): Promise<void> => {
         switch (votingAction) {
             case VotingAction.Cast:
-                await participate(
-                    $selectedAccount?.id,
-                    [{ eventId, answers: [nextVote?.value] }],
-                    ParticipationAction.Vote
-                )
-                break
             case VotingAction.Merge:
-                await participateWithRemainingFunds(
+                await participate(
                     $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
