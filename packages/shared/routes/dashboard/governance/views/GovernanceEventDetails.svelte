@@ -1,13 +1,14 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import { Button, DashboardPane, Icon, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { canParticipate } from 'shared/lib/participation'
-    import { participationOverview } from 'shared/lib/participation/stores'
+    import { participationAction, participationOverview } from 'shared/lib/participation/stores'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
@@ -15,10 +16,13 @@
     import { delineateNumber } from 'shared/lib/utils'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
 
+    let transactionEventData: TransferProgressEventData = null
+    let ledgerAwaitingConfirmation = false
     let currentVoteValue: string
     // TODO: base it on selectedAccountId when exposed in feat/single-wallet
     $: $selectedAccount, $participationOverview, updateCurrentVoteValue()
@@ -104,6 +108,54 @@
         )
         currentVoteValue = participation?.answers[0] ?? null
     }
+
+    const handleTransferState = (state: TransferState): void => {
+        if (!state) return
+
+        const _onCancel = () => {
+            transferState.set(null)
+
+            closePopup(true)
+        }
+
+        const { data, type } = state
+
+        switch (type) {
+            case TransferProgressEventType.PerformingPoW:
+                closePopup(true)
+                break
+            case TransferProgressEventType.SigningTransaction:
+                ledgerAwaitingConfirmation = true
+                openPopup(
+                    {
+                        type: 'ledgerTransaction',
+                        hideClose: true,
+                        preventClose: true,
+                        props: {
+                            ...handleTransactionEventData(transactionEventData),
+                            onCancel: _onCancel,
+                        },
+                    },
+                    true
+                )
+                break
+            case TransferProgressEventType.PreparedTransaction:
+                transactionEventData = data
+                break
+            default:
+                break
+        }
+    }
+
+    const unsubscribeFromTransferState = transferState.subscribe((state) => {
+        if (!$isSoftwareProfile) {
+            handleTransferState(state)
+        }
+    })
+
+    onDestroy(() => {
+        unsubscribeFromTransferState()
+    })
 </script>
 
 <div
