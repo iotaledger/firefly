@@ -1,4 +1,3 @@
-import type { Unit as UnitType } from '@iota/unit-converter'
 import { Unit } from '@iota/unit-converter'
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
@@ -11,6 +10,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
+import type { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
  * Mobile mode
@@ -36,14 +36,6 @@ export const mnemonic = writable<string[]>(null)
  * The last timestamp that the app user was active
  */
 export const lastActiveAt = writable<Date>(new Date())
-
-interface SendParams {
-    amount: number
-    unit?: UnitType
-    address: string
-    message: string
-    isInternal: boolean
-}
 
 /**
  * Input parameters for sending transactions
