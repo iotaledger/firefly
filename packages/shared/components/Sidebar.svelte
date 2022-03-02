@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
+    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
@@ -7,9 +7,10 @@
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
-    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -19,12 +20,41 @@
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
 
-    const hasTitleBar = document.body.classList.contains('platform-win32')
     const profileColor = 'blue' // TODO: each profile has a different color
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
+
+    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+
+    let sidebarTabs: SidebarTabType[] = [
+        {
+            icon: 'wallet',
+            label: locale('tabs.wallet'),
+            route: Tabs.Wallet,
+            onClick: openWallet,
+        },
+        {
+            icon: 'tokens',
+            label: locale('tabs.staking'),
+            route: Tabs.Staking,
+            onClick: openStaking,
+        },
+    ]
+
+    function updateSidebarNotification() {
+        sidebarTabs = sidebarTabs.map((tab) => {
+            if (Tabs.Staking === tab.route) {
+                tab.notificationType = !$activeProfile?.hasVisitedStaking
+                    ? 'warning'
+                    : showStakingNotification
+                    ? 'error'
+                    : null
+            }
+            return tab
+        })
+    }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
@@ -96,37 +126,15 @@
     </Drawer>
 {:else}
     <aside
-        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800"
+        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-5 pt-10 border-solid border-r border-gray-100 dark:border-gray-800"
     >
-        <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
         <nav class="flex flex-grow flex-col items-center justify-between">
-            <div class="flex flex-col">
-                <button
-                    class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
-                    on:click={openWallet}
-                >
-                    <Icon width="24" height="24" icon="wallet" />
-                </button>
-                <button
-                    class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
-                    on:click={openStaking}
-                >
-                    <Icon width="24" height="24" icon="tokens" />
-                    {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
-                        <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full {showStakingNotification
-                                    ? 'bg-yellow-400'
-                                    : 'bg-red-300'} opacity-75"
-                            />
-                            <span
-                                class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification
-                                    ? 'bg-yellow-600'
-                                    : 'bg-red-500'}"
-                            />
-                        </span>
-                    {/if}
-                </button>
+            <div class="flex flex-col space-y-8">
+                {#each sidebarTabs as tab}
+                    <div class="flex">
+                        <SidebarTab {tab} />
+                    </div>
+                {/each}
             </div>
             <span class="flex flex-col items-center">
                 <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
