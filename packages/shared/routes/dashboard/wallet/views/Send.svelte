@@ -307,21 +307,19 @@
         clearErrors()
     }
 
-    const ensureMaxAmount = (_amount: number): number => {
+    const setRawAmount = (amountAsFloat: number): number => {
+        const isFiat = isFiatCurrency(unit)
+        const amountAsIota = isFiat
+            ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+            : changeUnits(amountAsFloat, unit, Unit.i)
         /**
          * NOTE: Sometimes max values from fiat calculations
-         * aren't precise enough, so we have to ensure that the
-         * actual max amount is applied when the user clicks
-         * the button.
+         * aren't precise enough, therefore we round the
+         * amounts to 1 MI to compare them.
          */
-
-        const isFiat = isFiatCurrency(unit)
-        const isMaxAmount =
-            amount ===
-            convertToFiat(from.rawIotaBalance, $currencies[CurrencyTypes.USD], $exchangeRates[unit]).toString()
-        const hasDustRemaining = Math.abs(from.rawIotaBalance - _amount) < DUST_THRESHOLD
-
-        return isFiat && isMaxAmount && hasDustRemaining ? from.rawIotaBalance : _amount
+        const isMaxAmount = Math.round(amountAsIota / 10e6) === Math.round(from.rawIotaBalance / 10e6)
+        const hasDustRemaining = Math.abs(from.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
+        return isMaxAmount && isFiat && hasDustRemaining ? from.rawIotaBalance : amountAsIota
     }
 
     const handleSendClick = (): void => {
@@ -349,16 +347,12 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
-            const isFiat = isFiatCurrency(unit)
             const amountAsFloat = parseCurrency(amount)
 
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                amountRaw = isFiat
-                    ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
-                    : changeUnits(amountAsFloat, unit, Unit.i)
-                amountRaw = ensureMaxAmount(amountRaw)
+                amountRaw = setRawAmount(amountAsFloat)
 
                 if (amountRaw > from.rawIotaBalance) {
                     amountError = locale('error.send.amountTooHigh')
