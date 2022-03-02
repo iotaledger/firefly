@@ -16,7 +16,7 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
@@ -45,8 +45,6 @@
     } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
     import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
-
-    let drawer: Drawer
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -355,10 +353,6 @@
         } else {
             _internalTransfer()
         }
-    }
-
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
-        drawer.open()
     }
 
     onMount(() => {
