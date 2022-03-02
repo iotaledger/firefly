@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
     import { Button, DashboardPane, Icon, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { canParticipate } from 'shared/lib/participation'
-    import { participationAction, participationOverview } from 'shared/lib/participation/stores'
+    import { participationOverview } from 'shared/lib/participation/stores'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
     import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
@@ -22,7 +21,6 @@
     export let account: WalletAccount
 
     let transactionEventData: TransferProgressEventData = null
-    let ledgerAwaitingConfirmation = false
     let currentVoteValue: string
     // TODO: base it on selectedAccountId when exposed in feat/single-wallet
     $: $selectedAccount, $participationOverview, updateCurrentVoteValue()
@@ -110,11 +108,12 @@
     }
 
     const handleTransferState = (state: TransferState): void => {
-        if (!state) return
+        if (!state) {
+            return
+        }
 
         const _onCancel = () => {
             transferState.set(null)
-
             closePopup(true)
         }
 
@@ -125,7 +124,6 @@
                 closePopup(true)
                 break
             case TransferProgressEventType.SigningTransaction:
-                ledgerAwaitingConfirmation = true
                 openPopup(
                     {
                         type: 'ledgerTransaction',
@@ -147,15 +145,12 @@
         }
     }
 
-    const unsubscribeFromTransferState = transferState.subscribe((state) => {
+    $: $transferState, handleLedgerTransferState()
+    const handleLedgerTransferState = () => {
         if (!$isSoftwareProfile) {
-            handleTransferState(state)
+            handleTransferState($transferState)
         }
-    })
-
-    onDestroy(() => {
-        unsubscribeFromTransferState()
-    })
+    }
 </script>
 
 <div
