@@ -28,9 +28,8 @@
     }
 
     $: accountOverview = $participationOverview?.find((apo) => apo?.accountIndex === $selectedAccount.index)
-    $: isAccountVoting =
-        Object.values(accountOverview?.trackedParticipations)?.find((tp) => tp?.find((p) => p?.endMilestoneIndex === 0))
-            .length > 0
+    $: isAccountVoting = Object.values(accountOverview.trackedParticipations)
+        ?.find((tp) => tp?.find((p) => p?.endMilestoneIndex === 0))?.length > 0 ?? false
 
     let activeParticipationType: ActiveParticipationType | ''
     $: {
