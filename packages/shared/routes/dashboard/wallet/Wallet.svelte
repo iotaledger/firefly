@@ -400,9 +400,6 @@
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
-                        color={getColor($activeProfile, $selectedAccount?.id)}
-                        balance={$selectedAccount.rawIotaBalance}
-                        balanceEquiv={$selectedAccount.balanceEquiv}
                         onMenuClick={handleMenuClick}
                         classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
                     />
