@@ -14,7 +14,7 @@
 
     const handleFileSelectMobile = async () => {
         filePath = await Platform.getStrongholdBackupDestination(null)
-        const [ _fileName ] = filePath.match(/\w+.stronghold$/)
+        const [_fileName] = filePath.match(/\w+.stronghold$/)
         dispatch('next', { file, fileName: _fileName, filePath })
     }
 
@@ -89,7 +89,8 @@
                 {allowedExtensions}
                 onDrop={handleFileSelect}
                 bind:dropping
-                extentionsLabel={locale('actions.importExtentions')} />
+                extentionsLabel={locale('actions.importExtentions')}
+            />
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
@@ -98,12 +99,14 @@
                 class="absolute opacity-0 w-full h-full"
                 type="file"
                 on:change={handleFileSelect}
-                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
+                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
+            />
         {/if}
         <Button
             classes="flex-1"
             disabled={!$mobile && !file}
-            onClick={$mobile ? handleFileSelectMobile : handleContinueClick}>
+            onClick={$mobile ? handleFileSelectMobile : handleContinueClick}
+        >
             {locale(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}
         </Button>
     </div>

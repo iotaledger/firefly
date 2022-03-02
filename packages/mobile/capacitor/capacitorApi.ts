@@ -68,7 +68,7 @@ export const CapacitorApi: IPlatform = {
         }
         return
     },
-    
+
     exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
     /**
