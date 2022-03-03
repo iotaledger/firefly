@@ -242,22 +242,22 @@ export const CapacitorApi: IPlatform = {
      */
     removeListenersForEvent: (event) => new Promise<void>((resolve, reject) => {}),
 
-   /**
+    /**
      * Save the recovery kit
      * @returns
      */
     saveRecoveryKit: async (recoverKitData) => {
         const os: string = Capacitor.getPlatform()
         const { selected } = await SecureFilesystemAccess.showPicker({
-            type: 'folder'
+            type: 'folder',
         })
         if (os === 'ios') {
-            void await SecureFilesystemAccess.allowAccess()
+            void (await SecureFilesystemAccess.allowAccess())
         }
-        void await SecureFilesystemAccess.saveRecoveryKit({
+        void (await SecureFilesystemAccess.saveRecoveryKit({
             selectedPath: `${selected}/recovery-kit.pdf`,
-            fromRelativePath: '/assets/docs/recovery-kit.pdf'
-        })
+            fromRelativePath: '/assets/docs/recovery-kit.pdf',
+        }))
         if (os === 'ios') {
             void SecureFilesystemAccess.revokeAccess()
         }
