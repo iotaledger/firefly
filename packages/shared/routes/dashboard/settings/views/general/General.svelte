@@ -3,7 +3,7 @@
     import { loggedIn } from 'shared/lib/app'
     import { GeneralSettings } from 'shared/lib/typings/routes'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
-    import ChangeProfileName from './ChangeProfileName.svelte';
+    import ChangeProfileName from './ChangeProfileName.svelte'
 
     const settings: {
         component: unknown

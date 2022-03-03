@@ -96,7 +96,8 @@
         classes="mb-4"
         bind:value={currentPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode} />
+        on:submit={changePincode}
+    />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text>
     <Pin
         smaller
@@ -104,7 +105,8 @@
         classes="mb-4"
         bind:value={newPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode} />
+        on:submit={changePincode}
+    />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.confirmNewPincode')}</Text>
     <Pin
         smaller
@@ -112,13 +114,15 @@
         classes="mb-4"
         bind:value={confirmedPincode}
         disabled={pinCodeBusy}
-        on:submit={changePincode} />
+        on:submit={changePincode}
+    />
     <div class="flex flex-row items-center">
         <Button
             medium
             type="submit"
             form="pincode-change-form"
-            disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
+            disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
+        >
             {localize('views.settings.changePincode.action')}
         </Button>
         <Spinner busy={pinCodeBusy} message={pinCodeMessage} classes="ml-2" />

@@ -85,7 +85,7 @@
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor(timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length) * 100)
+        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 
@@ -117,7 +117,11 @@
         </Text>
         <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
         <div class="flex flex-col flex-grow items-center">
-            <Button secondary classes="w-56" onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+            <Button
+                secondary
+                classes="w-56"
+                onClick={() => Platform.openUrl('https://firefly.iota.org/faq#spent-addresses')}
+            >
                 {locale('views.bundleMiningWarning.learn')}
             </Button>
         </div>

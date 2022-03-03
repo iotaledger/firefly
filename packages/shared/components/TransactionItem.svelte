@@ -1,11 +1,6 @@
 <script lang="typescript">
     import { Icon, Tooltip } from 'shared/components'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-    } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import Text from './Text.svelte'
@@ -18,7 +13,7 @@
         Success = 2,
         Error = -1,
     }
-    
+
     export let locale: Locale
 
     export let name = ''
@@ -42,7 +37,8 @@
 </script>
 
 <div
-    class="transaction-item relative flex justify-between border-solid border border-gray-200 dark:border-gray-700 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4">
+    class="transaction-item relative flex justify-between border-solid border border-gray-200 dark:border-gray-700 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4"
+>
     <div class="flex items-center justify-between w-full space-x-4">
         <div class="flex items-center">
             <Icon icon="transfer" classes="text-blue-500" />
@@ -54,12 +50,19 @@
             {:else if status === Status.Migrating}
                 <Text type="p" secondary smaller>{locale('views.migrate.migrating')}</Text>
             {:else if status === Status.Success}
-                <Text type="p" secondary smaller>{locale('views.migrate.migrated', { values: { balance: balanceString } })}</Text>
+                <Text type="p" secondary smaller
+                    >{locale('views.migrate.migrated', { values: { balance: balanceString } })}</Text
+                >
                 <Icon icon="status-success" classes="text-white bg-green-600 rounded-full ml-3" />
             {:else if status === -1}
                 <div class="flex items-center relative">
                     <Text type="p" secondary smaller classes="mr-3">{locale('views.migrate.migrationFailed')}</Text>
-                    <div class="relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={tooltipAnchor}>
+                    <div
+                        class="relative"
+                        on:mouseenter={toggleShow}
+                        on:mouseleave={toggleShow}
+                        bind:this={tooltipAnchor}
+                    >
                         <Icon icon="status-error" classes="text-white bg-red-500 rounded-full " />
                     </div>
                     {#if showTooltip && errorText}

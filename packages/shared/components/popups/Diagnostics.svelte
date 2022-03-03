@@ -12,12 +12,15 @@
     let contentApp = ''
     let contentSystem = ''
 
-    const combineValues = (values) => values.map((c) => (c.label ? `${locale(c.label)}: ${c.value}` : c.value)).join('\r\n')
+    const combineValues = (values) =>
+        values.map((c) => (c.label ? `${locale(c.label)}: ${c.value}` : c.value)).join('\r\n')
 
     const appVars = [
         {
             label: '',
-            value: locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } }),
+            value: locale('views.dashboard.security.version.title', {
+                values: { version: $versionDetails.currentVersion },
+            }),
         },
     ]
 
@@ -32,9 +35,11 @@
         })
         appVars.push({
             label: 'views.settings.networkConfiguration.nodeConfiguration.title',
-            value: locale(`views.settings.networkConfiguration.nodeConfiguration.${
-                $activeProfile.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
-            }`),
+            value: locale(
+                `views.settings.networkConfiguration.nodeConfiguration.${
+                    $activeProfile.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+                }`
+            ),
         })
     }
 

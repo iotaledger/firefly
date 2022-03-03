@@ -1,4 +1,3 @@
-
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
 
@@ -24,7 +23,8 @@
         class:disabled
         class:highlighted
         class:error
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </h1>
 {:else if type === 'h2'}
@@ -34,7 +34,8 @@
         class:disabled
         class:highlighted
         class:error
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </h2>
 {:else if type === 'h3'}
@@ -44,7 +45,8 @@
         class:disabled
         class:highlighted
         class:error
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </h3>
 {:else if type === 'h4'}
@@ -54,7 +56,8 @@
         class:disabled
         class:highlighted
         class:error
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </h4>
 {:else if type === 'h5'}
@@ -64,12 +67,15 @@
         class:disabled
         class:highlighted
         class:error
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </h5>
 {:else if type === 'p'}
     <p
-        class={`text-13 ${overrideLeading ? '' : 'leading-160'}  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class={`text-13 ${overrideLeading ? '' : 'leading-160'}  ${
+            overrideColor ? '' : 'text-gray-800 dark:text-white'
+        } ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -78,7 +84,8 @@
         class:overrideLeading
         class:bigger
         class:font-bold={bold}
-        class:darkmode={darkModeEnabled}>
+        class:darkmode={darkModeEnabled}
+    >
         <slot />
     </p>
 {:else if type === 'pre'}

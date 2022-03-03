@@ -35,12 +35,17 @@
         <ImportTextfield disabled={isGettingMigrationData} type={$importType} bind:value={input} {locale} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={input.length === 0 || isGettingMigrationData} onClick={() => handleContinueClick()}>
+        <Button
+            classes="flex-1"
+            disabled={input.length === 0 || isGettingMigrationData}
+            onClick={() => handleContinueClick()}
+        >
             {#if isGettingMigrationData}
                 <Spinner
                     busy={isGettingMigrationData}
                     message={locale('views.migrate.restoringWallet')}
-                    classes="justify-center" />
+                    classes="justify-center"
+                />
             {:else}{locale('actions.continue')}{/if}
         </Button>
     </div>

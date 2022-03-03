@@ -2,7 +2,7 @@
 export { default as Splash } from 'shared/routes/Splash.svelte'
 // onboarding/setup
 export { default as Welcome } from 'shared/routes/setup/Welcome.svelte'
-export { default as Legal } from 'shared/routes/setup/Legal.svelte'
+export { default as Legal } from 'shared/routes/setup/legal/Legal.svelte'
 export { default as CrashReporting } from 'shared/routes/setup/CrashReporting.svelte'
 export { default as Appearance } from 'shared/routes/setup/Appearance.svelte'
 export { default as Secure } from 'shared/routes/setup/Secure.svelte'

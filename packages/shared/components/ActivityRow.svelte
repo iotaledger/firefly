@@ -47,11 +47,9 @@
             return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
         }
 
-        return `${(!txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload)) ? '-' : ''}${formatUnitBestMatch(
-            txPayload.data.essence.data.value,
-            true,
-            2
-        )}`
+        return `${
+            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
+        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
     }
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -66,7 +64,9 @@
     // especially if there was a remainder, so if any account addresses match
     // we need to find the account details for our address match
     $: receiverAccount =
-        getIncomingFlag(txPayload) || getInternalFlag(txPayload) ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
+        getIncomingFlag(txPayload) || getInternalFlag(txPayload)
+            ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
+            : null
 
     let initialsColor: string
     let accountAlias = ''
@@ -102,11 +102,11 @@
                 if (isParticipationPayload(txPayload)) {
                     direction = 'staking.stakedFunds'
                 } else {
-                   direction = confirmed
-                    ? txPayload.data.essence.data.incoming
-                        ? 'general.receivedTo'
-                        : 'general.sentFrom'
-                    : txPayload.data.essence.data.incoming
+                    direction = confirmed
+                        ? txPayload.data.essence.data.incoming
+                            ? 'general.receivedTo'
+                            : 'general.sentFrom'
+                        : txPayload.data.essence.data.incoming
                         ? 'general.receivingTo'
                         : 'general.sendingFrom'
                 }
@@ -116,8 +116,8 @@
                         ? 'general.received'
                         : 'general.sent'
                     : txPayload.data.essence.data.incoming
-                        ? 'general.receiving'
-                        : 'general.sending'
+                    ? 'general.receiving'
+                    : 'general.sending'
             }
         }
     }
@@ -131,7 +131,6 @@
             case ParticipationAction.Unvote:
             default:
                 return 'blue-500'
-
         }
     }
 
@@ -152,8 +151,12 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || hasCachedMigrationTx) ? 'opacity-50' : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
-    disabled={hasCachedMigrationTx}>
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {!confirmed ||
+    hasCachedMigrationTx
+        ? 'opacity-50'
+        : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
+    disabled={hasCachedMigrationTx}
+>
     <div class="w-8 flex flex-row justify-center items-center">
         {#if hasCachedMigrationTx || milestonePayload}
             <Icon
@@ -177,8 +180,16 @@
             <Icon
                 boxed
                 classes={`text-${isBright(initialsColor) ? 'gray-800' : 'white'}`}
-                boxClasses="bg-{initialsColor ? `${initialsColor}-500` : txPayload.data.essence.data.internal ? 'gray-500' : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'}
+                boxClasses="bg-{initialsColor
+                    ? `${initialsColor}-500`
+                    : txPayload.data.essence.data.internal
+                    ? 'gray-500'
+                    : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
+                icon={txPayload.data.essence.data.internal
+                    ? 'transfer'
+                    : txPayload.data.essence.data.incoming
+                    ? 'chevron-down'
+                    : 'chevron-up'}
                 fill={isBright(initialsColor) ? '#000000' : ''}
                 boxStyles={`background-color: ${initialsColor || (txPayload.data.essence.data.internal && 'gray')};`}
             />

@@ -1,6 +1,10 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { promptUserToConnectLedger, displayNotificationForLedgerProfile, ledgerDeviceState } from 'shared/lib/ledger'
+    import {
+        promptUserToConnectLedger,
+        displayNotificationForLedgerProfile,
+        ledgerDeviceState,
+    } from 'shared/lib/ledger'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -61,7 +65,8 @@
         <Animation
             width="100%"
             animation="ledger-bg-desktop"
-            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
         <Animation width="100%" animation="ledger-switch-app-desktop" />
     </div>
 </OnboardingLayout>
