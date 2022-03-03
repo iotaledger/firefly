@@ -12,7 +12,7 @@ import type { IPlatform } from 'shared/lib/typings/platform'
 
 let activeProfileId = null
 
-export const CapacitorApi: IPlatform = {
+const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
         return new Promise((resolve) => resolve())
     },
@@ -255,3 +255,5 @@ export const CapacitorApi: IPlatform = {
     hookErrorLogger,
     ledger: undefined,
 }
+
+window['__CAPACITOR__'] = CapacitorApi
