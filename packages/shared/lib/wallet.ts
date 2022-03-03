@@ -1,5 +1,12 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
-import { Payload } from 'shared/lib/typings/message'
+import type {
+    ErrorEventPayload,
+    GeneratingRemainderDepositAddressEvent,
+    PreparedTransactionEvent,
+    TransactionEventData,
+    TransferProgressEventData,
+    TransferState,
+} from 'shared/lib/typings/events'
+import type { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
@@ -1741,4 +1748,41 @@ export const hasValidPendingTransactions = (account: WalletAccount): boolean => 
     const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
 
     return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
+}
+
+/**
+ * Handles transaction event data, converting TransferProgressEventData into TransactionEventData
+ *
+ * @method handleTransactionEventData
+ *
+ * @param {TransferProgressEventData} eventData
+ *
+ * @returns {TransactionEventData}
+ */
+export const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+    if (!eventData) return {}
+
+    const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+    if (remainderData?.address) return { remainderAddress: remainderData?.address }
+
+    const txData = eventData as PreparedTransactionEvent
+    if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+
+    const numOutputs = txData.outputs.length
+    if (numOutputs === 1) {
+        return {
+            toAddress: txData.outputs[0].address,
+            toAmount: txData.outputs[0].amount,
+        }
+    } else if (numOutputs > 1) {
+        return {
+            toAddress: txData.outputs[0].address,
+            toAmount: txData.outputs[0].amount,
+
+            remainderAddress: txData.outputs[numOutputs - 1].address,
+            remainderAmount: txData.outputs[numOutputs - 1].amount,
+        }
+    } else {
+        return txData
+    }
 }

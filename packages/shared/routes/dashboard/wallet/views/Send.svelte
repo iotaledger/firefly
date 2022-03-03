@@ -26,9 +26,6 @@
     import { accountRoute } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
-        GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
-        TransactionEventData,
         TransferProgressEventData,
         TransferProgressEventType,
         TransferState,
@@ -37,7 +34,14 @@
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
+    import {
+        DUST_THRESHOLD,
+        isTransferring,
+        selectedAccount,
+        transferState,
+        wallet,
+        handleTransactionEventData,
+    } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
@@ -121,34 +125,6 @@
         accountsDropdownItems = $liveAccounts.map((acc) => addLabel(acc))
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
-        }
-    }
-
-    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
-        if (!eventData) return {}
-
-        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if (remainderData?.address) return { remainderAddress: remainderData?.address }
-
-        const txData = eventData as PreparedTransactionEvent
-        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
-
-        const numOutputs = txData.outputs.length
-        if (numOutputs === 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-            }
-        } else if (numOutputs > 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-
-                remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount,
-            }
-        } else {
-            return txData
         }
     }
 
