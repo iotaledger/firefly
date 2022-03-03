@@ -8,7 +8,7 @@ const config: CapacitorConfig = {
     plugins: {
         PrivacyScreen: {
             enable: true,
-          },
+        },
     },
     server: {
         url: 'http://XXX.XXX.XXX.XXX:8080',
