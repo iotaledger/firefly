@@ -10,6 +10,10 @@ import type { AppSettings } from 'shared/lib/typings/app'
 import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import type { IPlatform } from 'shared/lib/typings/platform'
 
+import * as WalletBindings from './walletPluginApi'
+
+window['__WALLET__'] = WalletBindings
+
 let activeProfileId = null
 
 const CapacitorApi: IPlatform = {
