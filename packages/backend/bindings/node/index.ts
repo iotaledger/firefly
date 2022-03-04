@@ -64,7 +64,6 @@ import {
     getParticipationEvents as _getParticipationEvents,
     getParticipationOverview as _getParticipationOverview,
     participate as _participate,
-    participateWithRemainingFunds as _participateWithRemainingFunds,
     stopParticipating as _stopParticipating,
 } from '../../../shared/lib/participation/bridge'
 import { Participation } from '../../../shared/lib/participation/types'
@@ -368,13 +367,6 @@ export const api = {
     },
     stopParticipating: function (accountId: string, eventIds: string[]): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopParticipating(sendMessage, __ids, accountId, eventIds)
-    },
-    participateWithRemainingFunds: function (
-        accountId: string,
-        participations: Participation[]
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
     },
 
     // Event emitters
