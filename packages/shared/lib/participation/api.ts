@@ -106,26 +106,3 @@ export function stopParticipating(
         })
     })
 }
-
-export function participateWithRemainingFunds(
-    accountId: string,
-    participations: Participation[],
-    action: ParticipationAction
-): Promise<string[]> {
-    return new Promise((resolve, reject) => {
-        api.participateWithRemainingFunds(accountId, participations, {
-            onSuccess(response: Event<ParticipateResponsePayload>) {
-                response.payload.forEach((message) => saveNewMessage(accountId, message))
-
-                addNewPendingParticipation(response.payload, accountId, action)
-
-                resolve(response.payload.map((message) => message.id))
-            },
-            onError(error) {
-                console.error(error)
-
-                reject(error)
-            },
-        })
-    })
-}
