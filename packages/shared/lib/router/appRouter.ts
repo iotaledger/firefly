@@ -27,7 +27,8 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
-    public nextRoute(event: { detail }): void {
+    public next(event: { detail }): void {
+        // TODO: only handle route changes, not app variables
         const params = event.detail || {}
         const currentRoute = get(appRoute)
 
@@ -169,7 +170,7 @@ export class AppRouter extends Router<AppRoute> {
                 break
         }
 
-        this.next(nextRoute)
+        this.setNext(nextRoute)
     }
 
     public forceNextRoute(route: AppRoute): void {
