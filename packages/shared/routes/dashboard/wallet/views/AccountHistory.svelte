@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import {
         api,
         isSyncing,
@@ -14,8 +14,8 @@
         receiverAddressesFromTransactionPayload,
         getIncomingFlag,
     } from 'shared/lib/wallet'
-    import type { AccountMessage } from 'shared/lib/typings/wallet'
-    import type { Transaction } from 'shared/lib/typings/message'
+    import { AccountMessage } from 'shared/lib/typings/wallet'
+    import { Transaction } from 'shared/lib/typings/message'
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
 

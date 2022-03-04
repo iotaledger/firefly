@@ -9,7 +9,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

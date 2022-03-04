@@ -6,9 +6,9 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
-import type { AppSettings } from 'shared/lib/typings/app'
-import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import type { IPlatform } from 'shared/lib/typings/platform'
+import { AppSettings } from 'shared/lib/typings/app'
+import { VersionDetails } from 'shared/lib/typings/appUpdater'
+import { IPlatform } from 'shared/lib/typings/platform'
 
 let activeProfileId = null
 

@@ -6,7 +6,7 @@ import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { isNewNotification, showAppNotification } from './notifications'
-import type { Event } from './typings/events'
+import { Event } from './typings/events'
 import {
     LedgerApp,
     LedgerAppName,
@@ -15,7 +15,7 @@ import {
     LegacyLedgerErrorCode,
     LegacyLedgerErrorName,
 } from './typings/ledger'
-import type { NotificationType } from './typings/notification'
+import { NotificationType } from './typings/notification'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90

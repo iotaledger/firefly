@@ -2,7 +2,7 @@ import { Electron } from 'shared/lib/electron'
 import { CapacitorApi } from '../../mobile/capacitor/capacitorApi'
 import { IPlatform, Platforms } from './typings/platform'
 import * as binding from '../../mobile/capacitor/walletPluginApi'
-import type { AppSettings } from './typings/app'
+import { AppSettings } from './typings/app'
 
 const PLATFORM = process.env.PLATFORM
 

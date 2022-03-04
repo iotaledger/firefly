@@ -1,5 +1,5 @@
-import type { PluginListenerHandle } from "@capacitor/core";
-//import type { MessageResponse } from '../../../../shared/lib/typings/bridge'
+import { PluginListenerHandle } from "@capacitor/core";
+//import { MessageResponse } from '../../../../shared/lib/typings/bridge'
 export interface WalletPluginTypes {
   initialize(options: { actorId: string }): Promise<void>
   listen(options: { actorId: string, id: string, event: string }): Promise<string>

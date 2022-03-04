@@ -1,5 +1,5 @@
-import type { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
-import type { Payload } from 'shared/lib/typings/message'
+import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
@@ -19,17 +19,17 @@ import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import type { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
-import type { Address } from './typings/address'
-import type { IActorHandler } from './typings/bridge'
+import { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Address } from './typings/address'
+import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
-import type { Message } from './typings/message'
-import type { RecoveryPhrase } from './typings/mnemonic'
-import type { NodeAuth, NodeInfo } from './typings/node'
+import { Message } from './typings/message'
+import { RecoveryPhrase } from './typings/mnemonic'
+import { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
-import type {
+import {
     AccountMessage,
     AccountsBalanceHistory,
     BalanceHistory,
@@ -37,7 +37,7 @@ import type {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import type { IWalletApi } from './typings/walletApi'
+import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'

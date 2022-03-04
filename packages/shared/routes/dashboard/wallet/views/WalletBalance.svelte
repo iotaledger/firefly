@@ -3,11 +3,11 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
+    import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 

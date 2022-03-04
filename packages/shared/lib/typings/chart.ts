@@ -1,6 +1,6 @@
-import type { HistoryDataProps } from './market'
-import type { AvailableExchangeRates } from './currency'
-import type { AccountColors } from 'lib/wallet'
+import { HistoryDataProps } from './market'
+import { AvailableExchangeRates } from './currency'
+import { AccountColors } from 'lib/wallet'
 
 export interface Tooltip {
     title: string

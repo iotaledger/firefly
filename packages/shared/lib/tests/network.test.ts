@@ -13,8 +13,8 @@ import {
     isOfficialNetwork,
 } from '../network'
 import { Network, NetworkConfig, NetworkType } from '../typings/network'
-import type { ClientOptions } from '../typings/client'
-import type { Node, NodeAuth } from '../typings/node'
+import { ClientOptions } from '../typings/client'
+import { Node, NodeAuth } from '../typings/node'
 
 describe('File: network.ts', () => {
     const _buildNode = (
