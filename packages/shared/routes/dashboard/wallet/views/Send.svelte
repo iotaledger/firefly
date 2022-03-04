@@ -317,7 +317,10 @@
          * aren't precise enough, therefore we round the
          * amounts to 1 MI to compare them.
          */
-        const isMaxAmount = Math.round(amountAsIota / 10e6) === Math.round(from.rawIotaBalance / 10e6)
+        const amountAsMi = changeUnits(amountAsIota, Unit.i, Unit.Mi)
+        const balanceAsMi = changeUnits(from.rawIotaBalance, Unit.i, Unit.Mi)
+        const isMaxAmount = Math.round(amountAsMi) === Math.round(balanceAsMi)
+
         const hasDustRemaining = Math.abs(from.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
         return isMaxAmount && isFiat && hasDustRemaining ? from.rawIotaBalance : amountAsIota
     }
