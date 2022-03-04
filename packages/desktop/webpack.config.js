@@ -122,6 +122,7 @@ const mainPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(false),
         APP_NAME: JSON.stringify(appName),
         APP_ID: JSON.stringify(appId),
+        'process.env.STAGE': JSON.stringify(stage),
     }),
 ]
 

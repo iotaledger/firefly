@@ -239,7 +239,10 @@ function createWindow() {
         minHeight: 720,
         titleBarStyle: 'hidden',
         frame: process.platform === 'linux',
-        icon: process.platform === 'linux' ? path.join(__dirname, '../assets/icons/linux/icon256x256.png') : undefined,
+        icon:
+            process.platform === 'linux'
+                ? path.join(__dirname, `../assets/icons/${process.env.STAGE}/icon1024x1024.png`)
+                : undefined,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
