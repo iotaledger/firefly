@@ -16,4 +16,5 @@
     s.platform = :ios, "12.0"
     s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Plugin/Libraries' }
     s.preserve_paths = ['ios/Plugin/Libraries/module.modulemap']
+    s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   end
