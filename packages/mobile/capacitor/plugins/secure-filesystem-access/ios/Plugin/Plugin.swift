@@ -1,7 +1,8 @@
 import Foundation
 import Capacitor
-import MobileCoreServices
+import UniformTypeIdentifiers
 
+@available(iOS 13.0, *)
 @objc(SecureFilesystemAccess)
 public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
 
@@ -15,32 +16,42 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
             return call.reject("type is required")
         }
         
-        DispatchQueue.main.async {
-            let documentPicker = UIDocumentPickerViewController(
-                documentTypes: pickerType == "file" 
-                    ? ["org.iota.firefly-stronghold"] // [String(kUTTypeItem)] 
-                    : [String(kUTTypeFolder)],
-                in: UIDocumentPickerMode.open
-            )
-            documentPicker.allowsMultipleSelection = false
-            if #available(iOS 13.0, *) {
-                documentPicker.shouldShowFileExtensions = true
+        DispatchQueue.main.async { [self] in
+            var documentPicker: UIDocumentPickerViewController? = nil
+            if #available(iOS 14.0, *) {
+                if (pickerType == "file") {
+                    let strongholdType: UTType = UTType("org.iota.firefly-stronghold")!
+                    documentPicker = UIDocumentPickerViewController(
+                        forOpeningContentTypes: [strongholdType], asCopy: true)
+                } else if (pickerType == "folder") {
+                    documentPicker = UIDocumentPickerViewController(
+                        documentTypes: ["public.folder"],
+                        in: UIDocumentPickerMode.open)
+                }
+            } else {
+                documentPicker = UIDocumentPickerViewController(
+                    documentTypes: pickerType == "file" 
+                        ? ["org.iota.firefly-stronghold"]
+                        : ["public.folder"],
+                    in: UIDocumentPickerMode.open)
             }
-            documentPicker.delegate = self
-            documentPicker.modalPresentationStyle = UIModalPresentationStyle.formSheet
-            self.bridge?.viewController?.present(documentPicker, animated: true, completion: nil)
+            documentPicker!.allowsMultipleSelection = false
+            documentPicker!.shouldShowFileExtensions = true
+            documentPicker!.delegate = self
+            documentPicker!.modalPresentationStyle = UIModalPresentationStyle.formSheet
+            self.bridge?.viewController?.present(documentPicker!, animated: true, completion: nil)
         }
     }
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt url: [URL]) {
-        _url = url[0]
+        self._url = url[0]
         self._call?.resolve([
             "selected": url[0].relativePath
         ])
     }
 
     @objc func allowAccess(_ call: CAPPluginCall) {
-        guard _url!.startAccessingSecurityScopedResource() else {
+        guard self._url!.startAccessingSecurityScopedResource() else {
             call.reject("failed to access the security-scoped resource!")
             return
         }
@@ -48,9 +59,9 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     }
 
     @objc func revokeAccess(_ call: CAPPluginCall) {
-        _url!.stopAccessingSecurityScopedResource()
-        _url = nil
-        _call?.keepAlive = false
+        self._url!.stopAccessingSecurityScopedResource()
+        self._url = nil
+        self._call?.keepAlive = false
         call.resolve()
     }
 
