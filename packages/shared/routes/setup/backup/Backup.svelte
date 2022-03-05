@@ -70,7 +70,9 @@
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()
+                            await Platform.saveStrongholdBackup({ allowAccess: true })
                             await asyncBackup(dest, get(strongholdPassword))
+                            await Platform.saveStrongholdBackup({ allowAccess: false })
                             updateProfile('lastStrongholdBackupTime', new Date())
                             dispatch('next')
                         }
