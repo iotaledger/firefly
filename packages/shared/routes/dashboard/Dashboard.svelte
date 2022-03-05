@@ -5,9 +5,6 @@
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
@@ -39,6 +36,7 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
 
     export let locale: Locale
 
@@ -188,7 +186,7 @@
      */
     const handleDeepLinkRequest = (data) => {
         const _redirect = (tab) => {
-            deepLinkRequestActive.set(true)
+            isDeepLinkRequestActive.set(true)
             if (get(dashboardRoute) !== tab) {
                 dashboardRoute.set(tab)
             }
@@ -201,16 +199,16 @@
         } else {
             if ($accounts && $accounts.length > 0) {
                 const addressPrefix = $accounts[0].depositAddress.split('1')[0]
-                const parsedDeepLink = parseDeepLink(addressPrefix, data)
+                const parsedDeepLink = parseDeepLinkRequest(addressPrefix, data)
                 if (
                     parsedDeepLink &&
-                    parsedDeepLink.context === DeepLinkingContexts.Wallet &&
-                    parsedDeepLink.operation === WalletOperations.Send &&
-                    parsedDeepLink.params
+                    parsedDeepLink.context === DeepLinkContext.Wallet &&
+                    parsedDeepLink.operation === WalletOperation.Send &&
+                    parsedDeepLink.parameters
                 ) {
                     _redirect(Tabs.Wallet)
                     sendParams.set({
-                        ...parsedDeepLink.params,
+                        ...parsedDeepLink.parameters,
                         isInternal: false,
                     })
                     showAppNotification({
