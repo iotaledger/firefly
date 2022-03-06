@@ -7,9 +7,9 @@ ios/App/public/
 resources/android/icon
 resources/ios/icon
 resources/icon.png
-android/app/src/main/res/mipmap-hdpi
-android/app/src/main/res/mipmap-mdpi
-android/app/src/main/res/mipmap-xhdpi
-android/app/src/main/res/mipmap-xxhdpi
-android/app/src/main/res/mipmap-xxxhdpi
-ios/App/App/Assets.xcassets/AppIcon.appiconset
+android/app/src/main/res/mipmap-hdpi/ic_launcher*
+android/app/src/main/res/mipmap-mdpi/ic_launcher*
+android/app/src/main/res/mipmap-xhdpi/ic_launcher*
+android/app/src/main/res/mipmap-xxhdpi/ic_launcher*
+android/app/src/main/res/mipmap-xxxhdpi/ic_launcher*
+ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon*
