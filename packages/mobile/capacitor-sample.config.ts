@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-    appId: 'com.iota.wallet',
+    appId: 'org.iota.firefly.mobile',
     appName: 'Firefly',
     webDir: 'public',
     bundledWebRuntime: false,
@@ -9,6 +9,11 @@ const config: CapacitorConfig = {
     server: {
         url: 'http://XXX.XXX.XXX.XXX:8080',
         cleartext: true,
+    },
+    cordova: {
+        preferences: {
+            DisableDeploy: 'true',
+        },
     },
 }
 

@@ -2,7 +2,7 @@
 name: Found a bug?
 description: Fill in this form to report it, and help us improve
 title: '[Bug]: '
-labels: type:bug
+labels: 'bug report'
 
 body:
     - type: markdown
