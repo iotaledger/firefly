@@ -12,7 +12,11 @@
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
         "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
+        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none",
+        "create-icons": "cordova-res ios --skip-config --copy --type icon && cordova-res android --skip-config --copy --type icon --icon-background-source '#FFFFFF'",
+        "icons:alpha" : "cp resources/alpha/Icon-App-large.png resources/icon.png && npm run create-icons",
+        "icons:beta" : "cp resources/alpha/Icon-App-large.png resources/icon.png && npm run create-icons",
+        "icons:prod" : "cp resources/alpha/Icon-App-large.png resources/icon.png && npm run create-icons"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.0",
