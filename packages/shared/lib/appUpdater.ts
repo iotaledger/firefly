@@ -8,10 +8,8 @@ import {
     updateDisplayNotificationProgress,
 } from 'shared/lib/notifications'
 import type { NotificationData } from 'shared/lib/typings/notification'
-import { get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
 import type { NativeProgress, VersionDetails } from './typings/appUpdater'
-import { stage } from 'shared/lib/app'
-import { Stage } from './typings/stage'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 
@@ -30,10 +28,6 @@ export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
 Platform.onEvent('version-details', (nativeVersionDetails) => {
-    if (get(stage) !== Stage.PROD) {
-        // Always true on prereleases to avoid triggering the auto-updater
-        nativeVersionDetails.upToDate = true
-    }
     versionDetails.set(nativeVersionDetails)
 })
 
@@ -184,10 +178,6 @@ export function updateCheck(): void {
 
 export async function getVersionDetails(): Promise<void> {
     const verDetails = await Platform.getVersionDetails()
-    if (get(stage) !== Stage.PROD) {
-        // Always true on prereleases to avoid triggering the auto-updater
-        verDetails.upToDate = true
-    }
     versionDetails.set(verDetails)
 }
 
