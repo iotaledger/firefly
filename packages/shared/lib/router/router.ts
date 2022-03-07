@@ -8,10 +8,17 @@ export abstract class Router<IRoute> {
         this.route = storeRoute
     }
 
-    abstract next(event: { detail }): void
-
     protected setRoute(route: IRoute): void {
         this.route.set(route)
+    }
+
+    protected setNext(route: IRoute): void {
+        if (route) {
+            this.updateHistory(route)
+            this.setRoute(route)
+        } else {
+            console.error('Routing Error: Could not find next route')
+        }
     }
 
     protected updateHistory(newRoute: IRoute): void {
@@ -21,14 +28,8 @@ export abstract class Router<IRoute> {
         })
     }
 
-    setNext(route: IRoute): void {
-        if (route) {
-            this.updateHistory(route)
-            this.setRoute(route)
-        } else {
-            console.error('Routing Error: Could not find next route')
-        }
-    }
+    // Implements the state machine for each router
+    abstract next(event: { detail }): void
 
     previous(): void {
         let previousRoute: IRoute

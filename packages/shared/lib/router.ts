@@ -55,10 +55,6 @@ export const walletSetupType = writable<SetupType>(null)
 export const appRoute = writable<AppRoute>(null)
 
 export const appRouter = writable<AppRouter>(null)
-/**
- * Application route history
- */
-const history = writable<string[]>([])
 
 /**
  * Active dashboard tab
@@ -109,15 +105,7 @@ export const initRouter = (): void => {
 
 // TODO: only handle route changes, not app variables
 export const routerNext = (event: { detail }): void => {
-    get(appRouter).nextRoute(event)
-}
-
-/**
- * Forces app next route, updating the route history
- * @param route next route
- */
-export const forceNextRoute = (route: AppRoute): void => {
-    get(appRouter).forceNextRoute(route)
+    get(appRouter).next(event)
 }
 
 // TODO: only handle route changes, not app variables
