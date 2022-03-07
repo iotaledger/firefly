@@ -10,7 +10,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
-import type { SendParams } from 'shared/lib/typings/sendParams'
+import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
  * Mobile mode

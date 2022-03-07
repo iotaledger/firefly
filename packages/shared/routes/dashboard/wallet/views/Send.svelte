@@ -30,7 +30,7 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
@@ -39,10 +39,10 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { mobile } from 'shared/lib/app'
-    import type { NotificationType } from 'shared/lib/typings/notification'
-    import type { Readable } from 'svelte/store'
-    import type { SendParams } from 'shared/lib/typings/sendParams'
-    import type { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { NotificationType } from 'shared/lib/typings/notification'
+    import { Readable } from 'svelte/store'
+    import { SendParams } from 'shared/lib/typings/sendParams'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
     export let onSend = (..._: any[]): void => {}
