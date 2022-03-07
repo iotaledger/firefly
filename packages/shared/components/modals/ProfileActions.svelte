@@ -49,7 +49,7 @@
     }
 </script>
 
-<Modal bind:isActive position={{ bottom: '16px', left: '80px' }}>
+<Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-64">
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
@@ -58,12 +58,13 @@
             <Text>{profileName}</Text>
         </div>
         <HR />
-        <div class="flex justify-between items-center p-2">
+        <div class="flex justify-between items-center p-3">
             <div class="flex items-center">
                 <Icon
                     icon={$isStrongholdLocked ? 'lock' : 'unlock'}
                     boxed
-                    classes="text-blue-500 bg-blue-100 mr-2 rounded"
+                    classes="text-blue-500"
+                    boxClasses="bg-blue-100 mr-3"
                 />
                 <div>
                     <Text type="p">{locale('views.dashboard.profileModal.stronghold.title')}</Text>
