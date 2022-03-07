@@ -29,6 +29,12 @@ else
   convert "$base" -resize 1024x1024!     "$dest_ios/AppIcon-512@2x.png"
   
   ## Android files
+  ### Ensure needed directories exist
+  mkdir -p mipmap-mdpi
+  mkdir -p mipmap-hdpi
+  mkdir -p mipmap-xhdpi
+  mkdir -p mipmap-xxhdpi
+  mkdir -p mipmap-xxxhdpi
   ### Add margin for adaptive icons
   add_margin="-background none -gravity center -scale 96x96 -extent 165x165"
   convert "$base" -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher.png"
