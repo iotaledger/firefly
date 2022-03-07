@@ -27,7 +27,7 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
-    public next(event: { detail }): void {
+    public next(event: CustomEvent): void {
         // TODO: only handle route changes, not app variables
         const params = event.detail || {}
         const currentRoute = get(appRoute)

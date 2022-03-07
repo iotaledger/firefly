@@ -14,6 +14,7 @@ import { isDeepLinkRequestActive } from '@common/deep-links'
 import { selectedAccountId } from './wallet'
 import { closePopup } from './popup'
 import { DashboardRouter } from 'shared/lib/router/dashboardRouter'
+import { LedgerRouter } from 'shared/lib/router/ledgerRouter'
 
 /**
  * Sets next route
@@ -67,12 +68,9 @@ export const dashboardRouter = writable<DashboardRouter>(null)
 /**
  * Ledger setup route
  */
-export const ledgerRoute = writable<LedgerRoutes>(LedgerRoutes.LegacyIntro)
+export const ledgerRoute = writable<LedgerRoutes>(null)
 
-/**
- * Ledger setup routing history
- */
-export const ledgerRouteHistory = writable<string[]>([])
+export const ledgerRouter = writable<LedgerRouter>(null)
 
 /**
  * Wallet view route
@@ -100,10 +98,11 @@ export const settingsChildRoute = writable<string>(null)
 export const initRouter = (): void => {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
+    ledgerRouter.set(new LedgerRouter())
 }
 
 // TODO: only handle route changes, not app variables
-export const routerNext = (event: { detail }): void => {
+export const routerNext = (event: CustomEvent): void => {
     get(appRouter).next(event)
 }
 
@@ -126,11 +125,6 @@ export const resetWalletRoute = (): void => {
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
-}
-
-export const resetLedgerRoute = (): void => {
-    ledgerRoute.set(LedgerRoutes.LegacyIntro)
-    ledgerRouteHistory.set([])
 }
 
 export const openSettings = (): void => {

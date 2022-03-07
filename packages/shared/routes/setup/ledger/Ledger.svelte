@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
-    import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { ledgerRoute, ledgerRouter } from 'shared/lib/router'
+    import { LedgerRoutes } from 'shared/lib/typings/routes'
+    import { onMount } from 'svelte'
     import {
         AccountIndex,
         Connect,
@@ -19,23 +18,14 @@
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
-
     $: $ledgerRoute, updateMigrationProgress()
 
     onMount(() => {
-        // reinitialize the init view only if we are not in the middle of a ledger flow
-        if (!$ledgerRouteHistory.length) {
-            if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
-                ledgerRoute.set(LedgerRoutes.Connect)
-            } else {
-                ledgerRoute.set(LedgerRoutes.LegacyIntro)
-            }
-        }
+        $ledgerRouter.restartIfNotInLedgerFlow()
     })
 
     const updateMigrationProgress = () => {
-        switch (get(ledgerRoute)) {
+        switch ($ledgerRoute) {
             case LedgerRoutes.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
@@ -54,49 +44,12 @@
         }
     }
 
-    const _next = (event) => {
-        let nextState
-        switch (get(ledgerRoute)) {
-            case LedgerRoutes.Connect:
-                if ($walletSetupType === SetupType.New) {
-                    dispatch('next')
-                } else if ($walletSetupType === SetupType.FireflyLedger) {
-                    nextState = LedgerRoutes.RestoreFromLedger
-                } else if ($walletSetupType === SetupType.TrinityLedger) {
-                    nextState = LedgerRoutes.GenerateAddress
-                }
-                break
-            case LedgerRoutes.RestoreFromLedger:
-                dispatch('next')
-                break
-            case LedgerRoutes.LegacyIntro:
-                nextState = LedgerRoutes.InstallationGuide
-                break
-            case LedgerRoutes.InstallationGuide:
-                nextState = LedgerRoutes.Connect
-                break
-            case LedgerRoutes.GenerateAddress:
-                nextState = LedgerRoutes.SwitchApps
-                break
-            case LedgerRoutes.SwitchApps:
-                nextState = LedgerRoutes.AccountIndex
-                break
-            case LedgerRoutes.AccountIndex:
-                dispatch('next')
-                break
-        }
-        if (nextState) {
-            $ledgerRouteHistory.push(get(ledgerRoute))
-            ledgerRoute.set(nextState)
-        }
+    const _next = (event: CustomEvent) => {
+        $ledgerRouter.next(event)
     }
+
     const _previous = () => {
-        const prevState = $ledgerRouteHistory.pop() as LedgerRoutes
-        if (prevState) {
-            ledgerRoute.set(prevState)
-        } else {
-            dispatch('previous')
-        }
+        $ledgerRouter.previousIfPossible()
     }
 </script>
 

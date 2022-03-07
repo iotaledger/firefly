@@ -19,7 +19,7 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
+    import { ledgerRouter, walletSetupType } from 'shared/lib/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -123,7 +123,7 @@
         if (wasMigrated) {
             resetMigrationState()
         }
-        resetLedgerRoute()
+        $ledgerRouter.reset()
     })
 </script>
 
