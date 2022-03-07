@@ -2,7 +2,7 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, resetWalletRoute } from 'shared/lib/router'
+    import { accountRouter, resetWalletRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
@@ -26,7 +26,7 @@
         $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
-        accountRoute.set(AccountRoutes.Manage)
+        $accountRouter.goTo(AccountRoutes.Manage)
         isActive = false
     }
 

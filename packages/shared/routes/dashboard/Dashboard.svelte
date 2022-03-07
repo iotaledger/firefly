@@ -20,7 +20,7 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRoute,
+        accountRouter,
         dashboardRoute,
         dashboardRouter,
         routerNext,
@@ -115,7 +115,7 @@
                     selectedAccountId.set(contextData.accountId)
                     $dashboardRouter.goTo(Tabs.Wallet)
                     $walletRouter.goTo(WalletRoutes.Account)
-                    accountRoute.set(AccountRoutes.Init)
+                    $accountRouter.goTo(AccountRoutes.Init)
                 }
             }
         })

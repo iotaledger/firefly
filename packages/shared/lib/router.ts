@@ -15,6 +15,7 @@ import { closePopup } from './popup'
 import { DashboardRouter } from 'shared/lib/router/dashboardRouter'
 import { LedgerRouter } from 'shared/lib/router/ledgerRouter'
 import { WalletRouter } from 'shared/lib/router/walletRouter'
+import { AccountRouter } from 'shared/lib/router/accountRouter'
 
 /**
  * Sets next route
@@ -81,7 +82,9 @@ export const walletRouter = writable<WalletRouter>(null)
 /**
  * Account view route
  */
-export const accountRoute = writable<AccountRoutes>(AccountRoutes.Init)
+export const accountRoute = writable<AccountRoutes>(null)
+
+export const accountRouter = writable<AccountRouter>(null)
 
 /**
  * Settings view route
@@ -101,6 +104,7 @@ export const initRouter = (): void => {
     dashboardRouter.set(new DashboardRouter())
     ledgerRouter.set(new LedgerRouter())
     walletRouter.set(new WalletRouter())
+    accountRouter.set(new AccountRouter())
 }
 
 // TODO: only handle route changes, not app variables
@@ -117,7 +121,7 @@ export const resetRouter = (): void => {
     get(appRouter).reset()
     get(dashboardRouter).reset()
     get(walletRouter).reset()
-    accountRoute.set(AccountRoutes.Init)
+    get(accountRouter).reset()
     settingsRoute.set(SettingsRoutes.Init)
     isDeepLinkRequestActive.set(false)
 }
@@ -125,7 +129,7 @@ export const resetRouter = (): void => {
 export const resetWalletRoute = (): void => {
     get(dashboardRouter).reset()
     get(walletRouter).reset()
-    accountRoute.set(AccountRoutes.Init)
+    get(accountRouter).reset()
     selectedAccountId.set(null)
     selectedMessage.set(null)
 }

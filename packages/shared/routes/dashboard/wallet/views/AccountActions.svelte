@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRoute, accountRouter } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
@@ -21,8 +21,9 @@
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
+
     function handleSendClick() {
-        accountRoute.set(AccountRoutes.Send)
+        $accountRouter.goTo(AccountRoutes.Send)
     }
 </script>
 

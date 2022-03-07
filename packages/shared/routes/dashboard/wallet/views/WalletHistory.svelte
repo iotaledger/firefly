@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRouter, walletSetupType } from 'shared/lib/router'
+    import { accountRouter, walletRouter, walletSetupType } from 'shared/lib/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
@@ -39,7 +39,7 @@
         } else {
             console.error('Could not find source account')
         }
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.goTo(AccountRoutes.Init)
         if ($mobile) {
             drawer.open()
         }

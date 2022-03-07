@@ -3,7 +3,7 @@
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRouter } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
@@ -46,7 +46,7 @@
     function handleMoveFundsClick() {
         closePopup()
         sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance, isInternal: true }))
-        accountRoute.set(AccountRoutes.Send)
+        $accountRouter.goTo(AccountRoutes.Send)
     }
     function handleCancelClick() {
         closePopup()

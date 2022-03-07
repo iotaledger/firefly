@@ -4,7 +4,7 @@
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute, walletRouter } from 'shared/lib/router'
+    import { accountRouter, walletRoute, walletRouter } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -36,7 +36,7 @@
     function handleAccountClick(accountId: string) {
         selectedAccountId.set(accountId)
         $walletRouter.goTo(WalletRoutes.Account)
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.goTo(AccountRoutes.Init)
     }
     function handleCreateClick() {
         $walletRouter.goTo(WalletRoutes.CreateAccount)
