@@ -27,7 +27,11 @@ export const CapacitorApi: IPlatform = {
 
     renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
 
-    removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
+    removeProfileFolder: async (profilePath) => {
+        void await SecureFilesystemAccess.removeProfileFolder({
+            folder: profilePath
+        })
+    },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
@@ -98,9 +102,7 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getUserDataPath: () =>
-        new Promise<string>((resolve, reject) => {
-            resolve('DATA')
-        }),
+        new Promise<string>((resolve, reject) => resolve('')),
 
     /**
      * Gets diagnostics information for the system
