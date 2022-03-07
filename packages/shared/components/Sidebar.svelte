@@ -6,7 +6,7 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import { appRouter, dashboardRoute, dashboardRouter, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -52,7 +52,7 @@
     }
 
     function openStaking() {
-        dashboardRoute.set(Tabs.Staking)
+        $dashboardRouter.goTo(Tabs.Staking)
     }
 </script>
 

@@ -169,12 +169,10 @@ export class AppRouter extends Router<AppRoute> {
 
                 break
         }
-
         this.setNext(nextRoute)
     }
 
     public forceNextRoute(route: AppRoute): void {
-        this.updateHistory(get(appRoute))
-        this.setRoute(route)
+        this.setNext(route)
     }
 }

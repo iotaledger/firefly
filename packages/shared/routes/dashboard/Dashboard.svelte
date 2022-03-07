@@ -22,6 +22,7 @@
     import {
         accountRoute,
         dashboardRoute,
+        dashboardRouter,
         routerNext,
         settingsChildRoute,
         settingsRoute,
@@ -111,9 +112,7 @@
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)
-                    if (get(dashboardRoute) !== Tabs.Wallet) {
-                        dashboardRoute.set(Tabs.Wallet)
-                    }
+                    $dashboardRouter.goTo(Tabs.Wallet)
                     walletRoute.set(WalletRoutes.Account)
                     accountRoute.set(AccountRoutes.Init)
                 }
@@ -181,15 +180,10 @@
         }
     }
 
-    /**
-     * Handles deep link request
-     */
-    const handleDeepLinkRequest = (data) => {
-        const _redirect = (tab) => {
+    const handleDeepLinkRequest = (data: string): void => {
+        const _redirect = (tab: Tabs) => {
             isDeepLinkRequestActive.set(true)
-            if (get(dashboardRoute) !== tab) {
-                dashboardRoute.set(tab)
-            }
+            $dashboardRouter.goTo(tab)
         }
         if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)

@@ -2,17 +2,15 @@
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
-    import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { dashboardRouter, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
     export let handleClose: () => void
 
     function closeSettings(): void {
-        dashboardRoute.set(get(previousDashboardRoute))
-        previousDashboardRoute.set(undefined)
+        $dashboardRouter.previous()
     }
 
     onDestroy((): void => {

@@ -12,7 +12,7 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import {
-        dashboardRoute,
+        dashboardRouter,
         initRouter,
         openSettings,
         routerNext,
@@ -44,7 +44,6 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
@@ -89,16 +88,12 @@
             pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
-            if (get(dashboardRoute) !== Tabs.Wallet) {
-                dashboardRoute.set(Tabs.Wallet)
-            }
+            $dashboardRouter.goTo(Tabs.Wallet)
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
-                if (get(dashboardRoute) !== Tabs.Settings) {
-                    openSettings()
-                }
+                openSettings()
             } else {
                 settings = true
             }

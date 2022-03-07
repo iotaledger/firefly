@@ -13,6 +13,7 @@ import { get, readable, writable } from 'svelte/store'
 import { isDeepLinkRequestActive } from '@common/deep-links'
 import { selectedAccountId } from './wallet'
 import { closePopup } from './popup'
+import { DashboardRouter } from 'shared/lib/router/dashboardRouter'
 
 /**
  * Sets next route
@@ -59,12 +60,9 @@ export const appRouter = writable<AppRouter>(null)
 /**
  * Active dashboard tab
  */
-export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
+export const dashboardRoute = writable<Tabs>(null)
 
-/**
- * Previous dashboard tab
- */
-export const previousDashboardRoute = writable<Tabs>(undefined)
+export const dashboardRouter = writable<DashboardRouter>(null)
 
 /**
  * Ledger setup route
@@ -101,6 +99,7 @@ export const settingsChildRoute = writable<string>(null)
  */
 export const initRouter = (): void => {
     appRouter.set(new AppRouter())
+    dashboardRouter.set(new DashboardRouter())
 }
 
 // TODO: only handle route changes, not app variables
@@ -115,16 +114,15 @@ export const routerPrevious = (): void => {
 
 export const resetRouter = (): void => {
     get(appRouter).reset()
-
+    get(dashboardRouter).reset()
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
-    dashboardRoute.set(Tabs.Wallet)
     isDeepLinkRequestActive.set(false)
 }
 
 export const resetWalletRoute = (): void => {
-    dashboardRoute.set(Tabs.Wallet)
+    get(dashboardRouter).reset()
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
@@ -137,7 +135,6 @@ export const resetLedgerRoute = (): void => {
 
 export const openSettings = (): void => {
     closePopup()
-    previousDashboardRoute.set(get(dashboardRoute))
-    dashboardRoute.set(Tabs.Settings)
+    get(dashboardRouter).goTo(Tabs.Settings)
     settingsRoute.set(SettingsRoutes.Init)
 }
