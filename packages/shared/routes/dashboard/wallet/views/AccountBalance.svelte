@@ -33,7 +33,7 @@
 
 <div
     style="--account-color: {color};"
-    class="relative account-color pt-6 px-8 pb-12 {$mobile ? 'pb-0 bg-transparent' : ''} {classes}"
+    class="relative account-color p-6 {$mobile ? 'pb-0 bg-transparent' : 'pb-12'} {classes}"
 >
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">

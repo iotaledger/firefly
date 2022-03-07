@@ -466,9 +466,9 @@
     })
 </script>
 
-<div class="w-full h-full flex flex-col justify-between p-8">
+<div class="w-full h-full flex flex-col justify-between p-6">
     <div>
-        <div class="flex flex-row w-full justify-between mb-8">
+        <div class="flex flex-row w-full justify-between mb-6">
             <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}

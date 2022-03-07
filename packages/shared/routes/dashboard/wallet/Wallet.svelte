@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { AccountActionsModal, DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
+    import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
+    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
@@ -10,7 +10,6 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
-        getColor,
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
@@ -21,7 +20,7 @@
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import type { Message, Transaction } from 'shared/lib/typings/message'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         addMessagesPair,
@@ -44,7 +43,16 @@
         wallet,
     } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
-    import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
+    import {
+        AccountAssets,
+        AccountBalance,
+        AccountHistory,
+        BarChart,
+        LineChart,
+        ManageAccount,
+        Send,
+        Receive,
+    } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -393,12 +401,24 @@
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    <AccountBalance
-                        onMenuClick={handleMenuClick}
-                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
-                    />
+                    {#if $accountRoute !== AccountRoutes.Manage}
+                        <AccountBalance onMenuClick={handleMenuClick} />
+                    {/if}
                     <DashboardPane classes="h-full -mt-5 z-0">
-                        <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} />
+                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                            <div class="px-6 my-4">
+                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                            </div>
+                        {/if}
+                        {#if $accountRoute === AccountRoutes.Init}
+                            <AccountAssets />
+                        {:else if $accountRoute === AccountRoutes.Send}
+                            <Send {onSend} {onInternalTransfer} />
+                        {:else if $accountRoute === AccountRoutes.Receive}
+                            <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoutes.Manage}
+                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                        {/if}
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
