@@ -8,6 +8,10 @@ import type { Message } from './message'
 import type { Writable } from 'svelte/store'
 import { HistoryDataProps } from './market'
 
+export interface LabeledWalletAccount extends WalletAccount {
+    label: string
+}
+
 export interface WalletAccount extends Account {
     depositAddress: string
     rawIotaBalance: number
