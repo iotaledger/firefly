@@ -35,7 +35,8 @@
     "resolutions": {
         "lodash": ">=4.17.21",
         "ansi-regex": "5.0.1",
-        "glob-parent": " >=5.1.2"
+        "glob-parent": " >=5.1.2",
+        "node-abi": "^3.8.0"
     },
     "lint-staged": {
         "*.{ts,js,scss,css,svelte}": "eslint --cache --fix",
