@@ -6,8 +6,8 @@
         "isolatedModules": false,
         "lib": ["DOM", "ESNext"],
         "paths": {
-            "@common": ["../shared/lib/common/*"],
-            "@core": ["../shared/lib/core/*"]
+            "@common/*": ["../shared/lib/common/*"],
+            "@core/*": ["../shared/lib/core/*"]
         }
     },
     "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
