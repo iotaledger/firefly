@@ -30,11 +30,11 @@ else
   
   ## Android files
   ### Ensure needed directories exist
-  mkdir -p mipmap-mdpi
-  mkdir -p mipmap-hdpi
-  mkdir -p mipmap-xhdpi
-  mkdir -p mipmap-xxhdpi
-  mkdir -p mipmap-xxxhdpi
+  mkdir -p "$dest_android/mipmap-mdpi"
+  mkdir -p "$dest_android/mipmap-hdpi"
+  mkdir -p "$dest_android/mipmap-xhdpi"
+  mkdir -p "$dest_android/mipmap-xxhdpi"
+  mkdir -p "$dest_android/mipmap-xxxhdpi"
   ### Add margin for adaptive icons
   add_margin="-background none -gravity center -scale 96x96 -extent 165x165"
   convert "$base" -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher.png"
