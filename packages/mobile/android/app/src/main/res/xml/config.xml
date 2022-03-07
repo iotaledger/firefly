@@ -3,4 +3,5 @@
   <access origin="*" />
   
   
+  <preference name="DisableDeploy" value="true" />
 </widget>
