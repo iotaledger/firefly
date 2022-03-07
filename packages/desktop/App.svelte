@@ -17,7 +17,7 @@
         openSettings,
         routerNext,
         routerPrevious,
-        walletRoute,
+        walletRouter,
     } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
@@ -89,7 +89,7 @@
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(Tabs.Wallet)
-            walletRoute.set(route)
+            $walletRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {

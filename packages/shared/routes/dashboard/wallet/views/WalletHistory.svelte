@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
+    import { accountRoute, walletRouter, walletSetupType } from 'shared/lib/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
@@ -35,13 +35,14 @@
         if (sourceAccount) {
             selectedAccountId.set(sourceAccount.id)
             selectedMessage.set(transaction)
-            walletRoute.set(WalletRoutes.Account)
-            accountRoute.set(AccountRoutes.Init)
+            $walletRouter.goTo(WalletRoutes.Account)
         } else {
             console.error('Could not find source account')
         }
         accountRoute.set(AccountRoutes.Init)
-        if ($mobile) drawer.open()
+        if ($mobile) {
+            drawer.open()
+        }
     }
 
     function handleSyncAccountOptions(): SyncAccountOptions {

@@ -1,3 +1,5 @@
+import { get, readable, writable } from 'svelte/store'
+import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 import { AppRouter } from 'shared/lib/router/appRouter'
 import {
     AccountRoutes,
@@ -8,13 +10,11 @@ import {
     Tabs,
     WalletRoutes,
 } from 'shared/lib/typings/routes'
-import { get, readable, writable } from 'svelte/store'
-
 import { isDeepLinkRequestActive } from '@common/deep-links'
-import { selectedAccountId } from './wallet'
 import { closePopup } from './popup'
 import { DashboardRouter } from 'shared/lib/router/dashboardRouter'
 import { LedgerRouter } from 'shared/lib/router/ledgerRouter'
+import { WalletRouter } from 'shared/lib/router/walletRouter'
 
 /**
  * Sets next route
@@ -75,8 +75,9 @@ export const ledgerRouter = writable<LedgerRouter>(null)
 /**
  * Wallet view route
  */
-export const walletRoute = writable<WalletRoutes>(WalletRoutes.Init)
+export const walletRoute = writable<WalletRoutes>(null)
 
+export const walletRouter = writable<WalletRouter>(null)
 /**
  * Account view route
  */
@@ -99,6 +100,7 @@ export const initRouter = (): void => {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     ledgerRouter.set(new LedgerRouter())
+    walletRouter.set(new WalletRouter())
 }
 
 // TODO: only handle route changes, not app variables
@@ -114,7 +116,7 @@ export const routerPrevious = (): void => {
 export const resetRouter = (): void => {
     get(appRouter).reset()
     get(dashboardRouter).reset()
-    walletRoute.set(WalletRoutes.Init)
+    get(walletRouter).reset()
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     isDeepLinkRequestActive.set(false)
@@ -122,9 +124,10 @@ export const resetRouter = (): void => {
 
 export const resetWalletRoute = (): void => {
     get(dashboardRouter).reset()
-    walletRoute.set(WalletRoutes.Init)
+    get(walletRouter).reset()
     accountRoute.set(AccountRoutes.Init)
     selectedAccountId.set(null)
+    selectedMessage.set(null)
 }
 
 export const openSettings = (): void => {

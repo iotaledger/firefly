@@ -27,6 +27,7 @@
         settingsChildRoute,
         settingsRoute,
         walletRoute,
+        walletRouter,
     } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
@@ -113,7 +114,7 @@
                 ) {
                     selectedAccountId.set(contextData.accountId)
                     $dashboardRouter.goTo(Tabs.Wallet)
-                    walletRoute.set(WalletRoutes.Account)
+                    $walletRouter.goTo(WalletRoutes.Account)
                     accountRoute.set(AccountRoutes.Init)
                 }
             }

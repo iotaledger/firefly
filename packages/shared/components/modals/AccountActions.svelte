@@ -2,9 +2,9 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+    import { accountRoute, resetWalletRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -46,15 +46,12 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                hideAccount: (id) => {
+                hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
-                    selectedAccountId.set(null)
-                    selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
                 },
             },
         })
@@ -67,17 +64,14 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                deleteAccount: async (id) => {
+                deleteAccount: async (id: string) => {
                     await asyncRemoveWalletAccount(get(account).id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
-                    selectedAccountId.set(null)
-                    selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
                 },
             },
         })
@@ -90,10 +84,7 @@
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)
         }
-        selectedAccountId.set(null)
-        selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
+        resetWalletRoute()
     }
 </script>
 

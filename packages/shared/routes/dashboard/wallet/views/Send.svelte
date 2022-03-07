@@ -22,7 +22,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute, walletRouter } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -422,7 +422,7 @@
 
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
-            walletRoute.set(WalletRoutes.Init)
+            $walletRouter.goTo(WalletRoutes.Init)
         }
     }
 

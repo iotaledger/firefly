@@ -13,7 +13,7 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletRouter } from 'shared/lib/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'
@@ -65,7 +65,7 @@
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
-            walletRoute.set(WalletRoutes.Send)
+            $walletRouter.goTo(WalletRoutes.Send)
             isDeepLinkRequestActive.set(false)
         }
     }
@@ -319,7 +319,7 @@
                 const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
-                walletRoute.set(WalletRoutes.Init)
+                $walletRouter.reset()
 
                 return onComplete()
             } catch (err) {
@@ -520,12 +520,7 @@
                 <WalletBalance {locale} />
                 <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
                 {#if $walletRoute === WalletRoutes.CreateAccount}
-                    <Drawer
-                        dimLength={180}
-                        opened={true}
-                        bind:this={drawer}
-                        on:close={() => walletRoute.set(WalletRoutes.Init)}
-                    >
+                    <Drawer dimLength={180} opened={true} bind:this={drawer} on:close={() => $walletRouter.reset()}>
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     </Drawer>
                 {/if}

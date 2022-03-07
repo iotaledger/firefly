@@ -2,7 +2,7 @@
     import { BalanceSummary, Button } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletRouter } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
@@ -20,10 +20,10 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     function handleSendClick() {
-        walletRoute.set(WalletRoutes.Send)
+        $walletRouter.goTo(WalletRoutes.Send)
     }
     function handleReceiveClick() {
-        walletRoute.set(WalletRoutes.Receive)
+        $walletRouter.goTo(WalletRoutes.Receive)
     }
 </script>
 

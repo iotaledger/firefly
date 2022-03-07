@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -29,7 +29,7 @@
         onGenerateAddress(selectedAccount.id)
     }
     const handleCloseClick = (): void => {
-        walletRoute.set(WalletRoutes.Init)
+        $walletRouter.goTo(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
     }
 </script>

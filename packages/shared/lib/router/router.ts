@@ -32,7 +32,9 @@ export abstract class Router<IRoute> {
     }
 
     // Implements the state machine for each router
-    abstract next(event: { detail }): void
+    next(_: CustomEvent): void {
+        throw Error('Unimplemented next method!')
+    }
 
     previous(): void {
         let previousRoute: IRoute
@@ -44,6 +46,13 @@ export abstract class Router<IRoute> {
         if (previousRoute) {
             this.setRoute(previousRoute)
         }
+    }
+
+    goTo(route: IRoute): void {
+        if (get(this.route) === route) {
+            return
+        }
+        this.setNext(route)
     }
 
     reset(): void {
