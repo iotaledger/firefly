@@ -12,7 +12,11 @@
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
         "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
+        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none",
+        "dev:device": "NODE_ENV=development PLATFORM=mobile webpack --stats && cap copy",
+        "icons:alpha" : "icons/icongen.sh icons/alpha.png",
+        "icons:beta" : "icons/icongen.sh icons/beta.png",
+        "icons:prod" : "icons/icongen.sh icons/prod.png"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.0",
