@@ -1,9 +1,9 @@
-import type { Bridge, CommunicationIds } from './bridge'
-import type { Message } from './message'
-import type { Address } from './address'
-import type { ClientOptions } from './client'
-import type { NodeAuth } from './node'
-import type { Duration } from './wallet'
+import { Bridge, CommunicationIds } from './bridge'
+import { Message } from './message'
+import { Address } from './address'
+import { ClientOptions } from './client'
+import { NodeAuth } from './node'
+import { Duration } from './wallet'
 
 export enum MessageType {}
 

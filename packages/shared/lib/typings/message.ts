@@ -1,5 +1,5 @@
-import type { Bridge, CommunicationIds } from './bridge'
-import type { AccountIdentifier } from './account'
+import { Bridge, CommunicationIds } from './bridge'
+import { AccountIdentifier } from './account'
 
 type MessageVersion = 1
 

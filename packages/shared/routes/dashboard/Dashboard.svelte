@@ -30,7 +30,7 @@
         settingsRoute,
         walletRoute,
     } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,

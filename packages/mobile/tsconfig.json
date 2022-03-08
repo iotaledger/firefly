@@ -3,6 +3,7 @@
     "compilerOptions": {
         //         "isolatedModules": false,
         //         "allowJs": false
+        "importsNotUsedAsValues": "remove",
         "baseUrl": ".",
         "paths": {
             "@common/*": ["../shared/lib/common/*"],

@@ -1,6 +1,6 @@
 import { registerPlugin } from '@capacitor/core'
 
-import type { WalletPluginTypes } from './definitions'
+import { WalletPluginTypes } from './definitions'
 
 const WalletPlugin = registerPlugin<WalletPluginTypes>('WalletPlugin')
 

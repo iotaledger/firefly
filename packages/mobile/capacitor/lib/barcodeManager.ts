@@ -1,7 +1,7 @@
-import type { CheckPermissionResult, ScanResult } from '@capacitor-community/barcode-scanner'
+import { CheckPermissionResult, ScanResult } from '@capacitor-community/barcode-scanner'
 import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner'
 import { localize } from 'shared/lib/i18n'
-import type { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
+import { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
 
 const openQRBodyClass: string = 'qr-scanner'
 
