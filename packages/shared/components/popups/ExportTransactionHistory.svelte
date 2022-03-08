@@ -9,10 +9,10 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
     import { get, Readable } from 'svelte/store'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
     export let account: Readable<WalletAccount>

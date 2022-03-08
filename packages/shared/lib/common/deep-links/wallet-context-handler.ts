@@ -5,7 +5,7 @@ import { addError } from '../../errors'
 import { localize } from '../../i18n'
 
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
-import type { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
+import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 
 /**
  * Parses a deep link within the wallet context.

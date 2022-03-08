@@ -3,6 +3,7 @@
         "strict": true,
         "esModuleInterop": true,
         "baseUrl": ".",
+        "importsNotUsedAsValues": "remove",
         "paths": {
             "types": ["@types"]
         }
