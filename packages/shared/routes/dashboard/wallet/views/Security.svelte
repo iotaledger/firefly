@@ -11,6 +11,8 @@
     import { api } from 'shared/lib/wallet'
     import type { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
     import type { DateDiff } from 'shared/lib/typings/wallet'
+    import { stage } from 'shared/lib/app'
+    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
@@ -144,7 +146,9 @@
             title={locale('views.dashboard.security.version.title', {
                 values: { version: $versionDetails.currentVersion },
             })}
-            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
+            message={$stage === Stage.PROD
+                ? locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)
+                : locale('views.dashboard.security.version.updatesDisabled')}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             warning={!$versionDetails.upToDate}
             icon="firefly"

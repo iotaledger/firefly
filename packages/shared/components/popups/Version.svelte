@@ -13,6 +13,7 @@
     export let locale: Locale
 
     let hasAutoUpdate = true
+    let isPreRelease = false
 
     function handleDownload() {
         if (hasAutoUpdate) {
@@ -28,11 +29,12 @@
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
-        /* eslint-disable no-undef */
-        if (!devMode) {
+        if (devMode) {
             await getVersionDetails()
             if (get(stage) === Stage.PROD) {
                 updateCheck()
+            } else {
+                isPreRelease = true
             }
         }
         const os = await Platform.getOS()
@@ -49,9 +51,22 @@
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.upToDateTitle')}</Text>
+            <Text type="h5" highlighted classes="mb-2">
+                {#if isPreRelease}
+                    <!-- Capitalize first letter of stage name -->
+                    {`Firefly ${$stage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
+                {:else}
+                    {locale('popups.version.upToDateTitle')}
+                {/if}
+            </Text>
             <Text smaller secondary>
-                {locale('popups.version.upToDateDescription', { values: { version: $versionDetails.currentVersion } })}
+                {#if isPreRelease}
+                    {locale('popups.version.preReleaseDescription')}
+                {:else}
+                    {locale('popups.version.upToDateDescription', {
+                        values: { version: $versionDetails.currentVersion },
+                    })}
+                {/if}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
