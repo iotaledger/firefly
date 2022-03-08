@@ -2,7 +2,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { dashboardRoute } from 'shared/lib/router'
+    import { dashboardRoute } from 'shared/lib/core/router/dashboardRouter'
     import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'

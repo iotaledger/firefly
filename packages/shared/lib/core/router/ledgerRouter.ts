@@ -1,7 +1,11 @@
 import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
 import { Router } from 'shared/lib/core/router/router'
-import { get } from 'svelte/store'
-import { appRouter, ledgerRoute, walletSetupType } from 'shared/lib/router'
+import { get, writable } from 'svelte/store'
+import { walletSetupType } from 'shared/lib/router'
+import { appRouter } from 'shared/lib/core/router/appRouter'
+
+export const ledgerRoute = writable<LedgerRoutes>(null)
+export const ledgerRouter = writable<LedgerRouter>(null)
 
 export class LedgerRouter extends Router<LedgerRoutes> {
     constructor() {

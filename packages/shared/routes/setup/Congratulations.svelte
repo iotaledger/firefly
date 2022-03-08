@@ -19,7 +19,8 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { ledgerRouter, walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from 'shared/lib/router'
+    import { ledgerRouter } from 'shared/lib/core/router/ledgerRouter'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'

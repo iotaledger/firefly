@@ -22,7 +22,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter, walletRouter } from 'shared/lib/router'
+    import { walletRouter } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -34,8 +34,6 @@
     } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { NotificationType } from 'shared/lib/typings/notification'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
@@ -43,6 +41,7 @@
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { accountRouter } from 'shared/lib/core/router/accountRouter'
 
     export let locale: Locale
     export let onSend = (..._: any[]): void => {}

@@ -13,7 +13,7 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute, walletRouter } from 'shared/lib/router'
+    import { walletRoute, walletRouter } from 'shared/lib/core/router/walletRouter'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'

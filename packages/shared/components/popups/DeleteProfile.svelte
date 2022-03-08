@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { appRouter } from 'shared/lib/router'
+    import { appRouter } from 'shared/lib/core/router/appRouter'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'

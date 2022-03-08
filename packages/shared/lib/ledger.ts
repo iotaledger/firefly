@@ -1,6 +1,7 @@
 import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-import { appRouter, resetWalletRoute, walletSetupType } from 'shared/lib/router'
+import { resetWalletRoute, walletSetupType } from 'shared/lib/router'
+import { appRouter } from 'shared/lib/core/router/appRouter'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'

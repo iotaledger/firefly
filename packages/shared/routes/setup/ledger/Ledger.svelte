@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { ledgerRoute, ledgerRouter } from 'shared/lib/router'
+    import { ledgerRoute, ledgerRouter } from 'shared/lib/core/router/ledgerRouter'
     import { LedgerRoutes } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
     import {

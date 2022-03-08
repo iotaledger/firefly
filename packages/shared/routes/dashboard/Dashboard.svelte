@@ -19,16 +19,10 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import {
-        accountRouter,
-        dashboardRoute,
-        dashboardRouter,
-        routerNext,
-        settingsChildRoute,
-        settingsRoute,
-        walletRoute,
-        walletRouter,
-    } from 'shared/lib/router'
+    import { routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { accountRouter } from 'shared/lib/core/router/accountRouter'
+    import { dashboardRoute, dashboardRouter } from 'lib/core/router/dashboardRouter'
+    import { walletRoute, walletRouter } from 'lib/core/router/walletRouter'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {

@@ -7,6 +7,7 @@ import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { get, writable } from 'svelte/store'
 
 export const appRoute = writable<AppRoute>(null)
+export const appRouter = writable<AppRouter>(null)
 
 export class AppRouter extends Router<AppRoute> {
     constructor() {
