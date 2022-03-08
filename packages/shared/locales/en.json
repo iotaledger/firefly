@@ -504,6 +504,11 @@
                     "title": "Profile lock",
                     "locked": "Stronghold locked",
                     "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware device",
+                    "detected": "Device connected",
+                    "notDetected": "Not detected"
                 }
             }
         },

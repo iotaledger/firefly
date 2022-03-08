@@ -9,6 +9,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { api } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
+    import { getLedgerDeviceStatus, isLedgerConnected } from 'shared/lib/ledger'
 
     export let locale: Locale
     export let isActive: boolean
@@ -47,6 +48,15 @@
             })
         }
     }
+
+    let isCheckingLedger: boolean = false
+    let _isLedgerConnected: boolean = false
+    function syncLedgerDeviceStatus() {
+        isCheckingLedger = true
+        const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
+        getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
+        _isLedgerConnected = isLedgerConnected()
+    }
 </script>
 
 <Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-64">
@@ -77,6 +87,34 @@
                     </div>
                 </div>
                 <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
+            </div>
+        {:else}
+            <div class="flex justify-between items-center p-3">
+                <div class="flex items-center">
+                    <Icon
+                        icon="chip"
+                        boxed
+                        classes={_isLedgerConnected ? 'text-blue-500' : 'text-gray-500'}
+                        boxClasses="{_isLedgerConnected ? 'bg-blue-100' : 'bg-gray-100'} mr-3"
+                    />
+                    <div>
+                        <Text type="p">{locale('views.dashboard.profileModal.hardware.title')}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1"
+                            >{locale(
+                                `views.dashboard.profileModal.hardware.${
+                                    _isLedgerConnected ? 'detected' : 'notDetected'
+                                }`
+                            )}</Text
+                        >
+                    </div>
+                </div>
+                <button on:click={syncLedgerDeviceStatus}>
+                    <Icon
+                        icon="refresh"
+                        classes="{isCheckingLedger &&
+                            'animate-spin-reverse'} text-gray-500 dark:text-white cursor-pointer"
+                    />
+                </button>
             </div>
         {/if}
         <HR />
