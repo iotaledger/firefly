@@ -89,9 +89,7 @@
                 balance={account.balance}
                 balanceEquiv={account.balanceEquiv}
                 {color}
-                disabledHover
                 name={accountAlias || account.alias}
-                size="m"
                 classes="mb-4"
             />
             <Input
