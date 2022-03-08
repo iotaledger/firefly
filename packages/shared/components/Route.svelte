@@ -1,12 +1,16 @@
 <script lang="typescript">
+    import { AppRoute } from 'shared/lib/typings/routes'
     import { Transition } from 'shared/components'
-    import { appRoute } from 'shared/lib/router'
+    import { appRouter } from 'shared/lib/router'
 
     export let transition = true
-    export let route = undefined
+    export let route: AppRoute
+
+    const { routeStore } = $appRouter
+    $: currentRoute = $routeStore
 </script>
 
-{#if $appRoute === route}
+{#if currentRoute === route}
     {#if transition}
         <Transition>
             <slot />

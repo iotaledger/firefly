@@ -5,8 +5,8 @@ export abstract class Router<IRoute> {
     public history = writable<IRoute[]>([])
     public routeStore: Writable<IRoute>
 
-    constructor(protected initialRoute: IRoute, storeRoute: Writable<IRoute>) {
-        this.routeStore = storeRoute
+    constructor(protected initialRoute: IRoute, storeRoute?: Writable<IRoute>) {
+        this.routeStore = storeRoute ?? writable<IRoute>(null)
         this.setRoute(initialRoute)
     }
 
@@ -31,9 +31,14 @@ export abstract class Router<IRoute> {
         }
     }
 
-    // Implements the state machine for each router
+    // Watch out! This is not reactive!
+    get route(): IRoute {
+        return get(this.routeStore)
+    }
+
+    // This function should be implemented in the child router
     next(_: CustomEvent): void {
-        throw Error('Unimplemented next method!')
+        throw Error('Unimplemented state machine within custom router!')
     }
 
     previous(): void {

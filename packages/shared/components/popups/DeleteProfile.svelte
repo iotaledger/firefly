@@ -4,8 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { setRoute } from 'shared/lib/router'
-    import { AppRoute } from 'shared/lib/typings/routes'
+    import { appRouter } from 'shared/lib/router'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -69,7 +68,7 @@
              * routed to the welcome screen.
              */
             if (get(profiles).length === 0) {
-                setRoute(AppRoute.Welcome)
+                $appRouter.reset()
             }
 
             /**

@@ -1,14 +1,14 @@
 import { setProfileType, activeProfile, profiles } from 'shared/lib/profile'
 import { ProfileType } from 'shared/lib/typings/profile'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
-import { appRoute, walletSetupType } from 'shared/lib/router'
+import { walletSetupType } from 'shared/lib/router'
 import { Router } from 'shared/lib/core/router/router'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { get } from 'svelte/store'
 
 export class AppRouter extends Router<AppRoute> {
     constructor() {
-        super(AppRoute.Welcome, appRoute)
+        super(AppRoute.Welcome)
         this.init()
     }
 
@@ -16,9 +16,9 @@ export class AppRouter extends Router<AppRoute> {
         const hasCompletedSetup = get(profiles).length > 0
 
         if (hasCompletedSetup) {
-            appRoute.set(AppRoute.Login)
+            this.routeStore.set(AppRoute.Login)
         } else {
-            appRoute.set(AppRoute.Welcome)
+            this.routeStore.set(AppRoute.Welcome)
         }
     }
 
@@ -30,7 +30,7 @@ export class AppRouter extends Router<AppRoute> {
     public next(event: CustomEvent): void {
         // TODO: only handle route changes, not app variables
         const params = event.detail || {}
-        const currentRoute = get(appRoute)
+        const currentRoute = this.route
 
         let nextRoute: AppRoute
 

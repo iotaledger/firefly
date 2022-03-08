@@ -4,7 +4,7 @@ import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { appRoute, walletSetupType } from 'shared/lib/router'
+import { appRouter, walletSetupType } from 'shared/lib/router'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,
@@ -21,7 +21,7 @@ import {
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
-import { api, wallet } from 'shared/lib/wallet'
+import { api } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
@@ -1235,11 +1235,12 @@ export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<v
 }
 
 export function openSnapshotPopup(): void {
+    const appRoute = get(appRouter).route
     openPopup({
         type: 'snapshot',
         hideClose: true,
         props: {
-            dashboard: get(appRoute) === AppRoute.Dashboard || get(appRoute) === AppRoute.Login,
+            dashboard: appRoute === AppRoute.Dashboard || appRoute === AppRoute.Login,
         },
     })
 }

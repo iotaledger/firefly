@@ -1,34 +1,13 @@
 import { get, readable, writable } from 'svelte/store'
 import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 import { AppRouter } from 'shared/lib/core/router/appRouter'
-import {
-    AccountRoutes,
-    AppRoute,
-    LedgerRoutes,
-    SettingsRoutes,
-    SetupType,
-    Tabs,
-    WalletRoutes,
-} from 'shared/lib/typings/routes'
 import { isDeepLinkRequestActive } from '@common/deep-links'
+import { AccountRoutes, LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { closePopup } from './popup'
 import { DashboardRouter } from 'shared/lib/core/router/dashboardRouter'
 import { LedgerRouter } from 'shared/lib/core/router/ledgerRouter'
 import { WalletRouter } from 'shared/lib/core/router/walletRouter'
 import { AccountRouter } from 'shared/lib/core/router/accountRouter'
-
-/**
- * Sets next route
- *
- * @method setRoute
- *
- * @param {string} path
- *
- * @returns {void}
- */
-export const setRoute = (path: AppRoute): void => {
-    appRoute.set(path)
-}
 
 /**
  * Application path based on location hash
@@ -55,16 +34,15 @@ export const walletSetupType = writable<SetupType>(null)
 /*
  * Current view
  */
-export const appRoute = writable<AppRoute>(null)
 
 export const appRouter = writable<AppRouter>(null)
 
 /**
  * Active dashboard tab
  */
-export const dashboardRoute = writable<Tabs>(null)
-
 export const dashboardRouter = writable<DashboardRouter>(null)
+
+export const dashboardRoute = writable<Tabs>(null)
 
 /**
  * Ledger setup route
