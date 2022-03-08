@@ -1,3 +1,4 @@
+export { default as AccountAssets } from './AccountAssets.svelte'
 export { default as AccountBalance } from './AccountBalance.svelte'
 export { default as AccountHistory } from './AccountHistory.svelte'
 export { default as BarChart } from './BarChart.svelte'
