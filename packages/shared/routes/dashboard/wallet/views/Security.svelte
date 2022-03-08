@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
@@ -146,7 +147,7 @@
             title={locale('views.dashboard.security.version.title', {
                 values: { version: $versionDetails.currentVersion },
             })}
-            message={$stage === Stage.PROD
+            message={get(stage) === Stage.PROD
                 ? locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)
                 : locale('views.dashboard.security.version.updatesDisabled')}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
