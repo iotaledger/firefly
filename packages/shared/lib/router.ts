@@ -1,13 +1,13 @@
 import { get, readable, writable } from 'svelte/store'
 import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 import { AppRouter } from 'shared/lib/core/router/appRouter'
+import { LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { isDeepLinkRequestActive } from '@common/deep-links'
-import { AccountRoutes, LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { closePopup } from './popup'
 import { DashboardRouter } from 'shared/lib/core/router/dashboardRouter'
 import { LedgerRouter } from 'shared/lib/core/router/ledgerRouter'
 import { WalletRouter } from 'shared/lib/core/router/walletRouter'
-import { AccountRouter } from 'shared/lib/core/router/accountRouter'
+import { accountRouter, AccountRouter } from 'shared/lib/core/router/accountRouter'
 
 /**
  * Application path based on location hash
@@ -60,9 +60,6 @@ export const walletRouter = writable<WalletRouter>(null)
 /**
  * Account view route
  */
-export const accountRoute = writable<AccountRoutes>(null)
-
-export const accountRouter = writable<AccountRouter>(null)
 
 /**
  * Settings view route

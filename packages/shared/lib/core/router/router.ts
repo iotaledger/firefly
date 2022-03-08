@@ -2,11 +2,11 @@ import { get, Writable, writable } from 'svelte/store'
 
 export abstract class Router<IRoute> {
     // TODO make protected
-    public history = writable<IRoute[]>([])
-    public routeStore: Writable<IRoute>
+    public readonly history = writable<IRoute[]>([])
+    public readonly routeStore: Writable<IRoute>
 
-    constructor(protected initialRoute: IRoute, storeRoute?: Writable<IRoute>) {
-        this.routeStore = storeRoute ?? writable<IRoute>(null)
+    constructor(protected initialRoute: IRoute, storeRoute: Writable<IRoute>) {
+        this.routeStore = storeRoute
         this.setRoute(initialRoute)
     }
 
@@ -29,11 +29,6 @@ export abstract class Router<IRoute> {
         } else {
             console.error('Routing Error: Could not find next route')
         }
-    }
-
-    // Watch out! This is not reactive!
-    get route(): IRoute {
-        return get(this.routeStore)
     }
 
     // This function should be implemented in the child router

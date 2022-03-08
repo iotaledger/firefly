@@ -7,7 +7,7 @@
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/core/router/accountRouter'
     import { AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale: Locale
@@ -23,7 +23,6 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
-    let navAccounts
     $: navAccounts = $account
         ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
         : []
@@ -61,7 +60,7 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory {locale} color={$account.color} transactions={$accountTransactions} {account} />
+                    <AccountHistory {locale} color={$account.color} transactions={$accountTransactions} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

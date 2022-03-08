@@ -4,7 +4,8 @@ import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { appRouter, walletSetupType } from 'shared/lib/router'
+import { walletSetupType } from 'shared/lib/router'
+import { appRoute } from 'shared/lib/core/router/appRouter'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,
@@ -1235,12 +1236,11 @@ export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<v
 }
 
 export function openSnapshotPopup(): void {
-    const appRoute = get(appRouter).route
     openPopup({
         type: 'snapshot',
         hideClose: true,
         props: {
-            dashboard: appRoute === AppRoute.Dashboard || appRoute === AppRoute.Login,
+            dashboard: get(appRoute) === AppRoute.Dashboard || get(appRoute) === AppRoute.Login,
         },
     })
 }

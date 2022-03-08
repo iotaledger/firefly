@@ -4,11 +4,13 @@ import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'sha
 import { walletSetupType } from 'shared/lib/router'
 import { Router } from 'shared/lib/core/router/router'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
+
+export const appRoute = writable<AppRoute>(null)
 
 export class AppRouter extends Router<AppRoute> {
     constructor() {
-        super(AppRoute.Welcome)
+        super(AppRoute.Welcome, appRoute)
         this.init()
     }
 
@@ -30,7 +32,7 @@ export class AppRouter extends Router<AppRoute> {
     public next(event: CustomEvent): void {
         // TODO: only handle route changes, not app variables
         const params = event.detail || {}
-        const currentRoute = this.route
+        const currentRoute = get(this.routeStore)
 
         let nextRoute: AppRoute
 
