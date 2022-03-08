@@ -29,7 +29,7 @@
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
-        if (devMode) {
+        if (!devMode) {
             await getVersionDetails()
             if (get(stage) === Stage.PROD) {
                 updateCheck()
