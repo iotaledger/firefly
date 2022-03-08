@@ -8,7 +8,7 @@
     import { AppRoute } from 'shared/lib/typings/routes'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

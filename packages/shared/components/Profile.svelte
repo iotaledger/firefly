@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

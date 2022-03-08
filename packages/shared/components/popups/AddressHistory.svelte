@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import type { Address } from 'shared/lib/typings/address'
+    import { Address } from 'shared/lib/typings/address'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import type { Readable } from 'svelte/store'
+    import { Readable } from 'svelte/store'
     import { setClipboard } from 'shared/lib/utils'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 

@@ -1,12 +1,12 @@
-import type { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
-import type { Address } from './address'
-import type { ErrorEventPayload } from './events'
-import type { LedgerStatus } from './ledger'
-import type { Message } from './message'
-import type { NodeInfo } from './node'
-import type { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
-import type { StrongholdStatus } from './wallet'
-import type { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
+import { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
+import { Address } from './address'
+import { ErrorEventPayload } from './events'
+import { LedgerStatus } from './ledger'
+import { Message } from './message'
+import { NodeInfo } from './node'
+import { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
+import { StrongholdStatus } from './wallet'
+import { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
 
 export interface IActorHandler {
     destroy(): void
