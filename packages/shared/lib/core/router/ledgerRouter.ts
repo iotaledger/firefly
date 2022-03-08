@@ -1,5 +1,5 @@
 import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
-import { Router } from 'shared/lib/router/router'
+import { Router } from 'shared/lib/core/router/router'
 import { get } from 'svelte/store'
 import { appRouter, ledgerRoute, walletSetupType } from 'shared/lib/router'
 
@@ -23,7 +23,7 @@ export class LedgerRouter extends Router<LedgerRoutes> {
 
     next(event: CustomEvent): void {
         let nextRoute: LedgerRoutes
-        const currentRoute = get(this.route)
+        const currentRoute = get(this.routeStore)
         const setupType = get(walletSetupType)
 
         switch (currentRoute) {

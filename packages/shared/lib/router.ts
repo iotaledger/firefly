@@ -1,6 +1,6 @@
 import { get, readable, writable } from 'svelte/store'
 import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-import { AppRouter } from 'shared/lib/router/appRouter'
+import { AppRouter } from 'shared/lib/core/router/appRouter'
 import {
     AccountRoutes,
     AppRoute,
@@ -12,10 +12,10 @@ import {
 } from 'shared/lib/typings/routes'
 import { isDeepLinkRequestActive } from '@common/deep-links'
 import { closePopup } from './popup'
-import { DashboardRouter } from 'shared/lib/router/dashboardRouter'
-import { LedgerRouter } from 'shared/lib/router/ledgerRouter'
-import { WalletRouter } from 'shared/lib/router/walletRouter'
-import { AccountRouter } from 'shared/lib/router/accountRouter'
+import { DashboardRouter } from 'shared/lib/core/router/dashboardRouter'
+import { LedgerRouter } from 'shared/lib/core/router/ledgerRouter'
+import { WalletRouter } from 'shared/lib/core/router/walletRouter'
+import { AccountRouter } from 'shared/lib/core/router/accountRouter'
 
 /**
  * Sets next route

@@ -2,7 +2,7 @@ import { setProfileType, activeProfile, profiles } from 'shared/lib/profile'
 import { ProfileType } from 'shared/lib/typings/profile'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { appRoute, walletSetupType } from 'shared/lib/router'
-import { Router } from 'shared/lib/router/router'
+import { Router } from 'shared/lib/core/router/router'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { get } from 'svelte/store'
 
