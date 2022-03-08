@@ -5,11 +5,15 @@
     import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { stage } from 'shared/lib/app'
+    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
     let hasAutoUpdate = true
+    let isPreRelease = true
 
     function handleDownload() {
         if (hasAutoUpdate) {
@@ -25,10 +29,12 @@
 
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
-        /* eslint-disable no-undef */
         if (!devMode) {
             await getVersionDetails()
-            updateCheck()
+            if (get(stage) === Stage.PROD) {
+                isPreRelease = false
+                updateCheck()
+            }
         }
         const os = await Platform.getOS()
         hasAutoUpdate = os !== 'win32'
@@ -44,9 +50,22 @@
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.upToDateTitle')}</Text>
+            <Text type="h5" highlighted classes="mb-2">
+                {#if isPreRelease}
+                    <!-- Capitalize first letter of stage name -->
+                    {`Firefly ${$stage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
+                {:else}
+                    {locale('popups.version.upToDateTitle')}
+                {/if}
+            </Text>
             <Text smaller secondary>
-                {locale('popups.version.upToDateDescription', { values: { version: $versionDetails.currentVersion } })}
+                {#if isPreRelease}
+                    {locale('popups.version.preReleaseDescription')}
+                {:else}
+                    {locale('popups.version.upToDateDescription', {
+                        values: { version: $versionDetails.currentVersion },
+                    })}
+                {/if}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">

@@ -132,6 +132,14 @@ const paths = {
     errorPreload: '',
 }
 
+let versionDetails = {
+    upToDate: true,
+    currentVersion: app.getVersion(),
+    newVersion: '',
+    newVersionReleaseDate: new Date(),
+    changelog: '',
+}
+
 /**
  * Default web preferences (see https://www.electronjs.org/docs/tutorial/security)
  */
@@ -261,7 +269,9 @@ function createWindow() {
 
         windows.main.loadURL('http://localhost:8080')
     } else {
-        initAutoUpdate(windows.main)
+        if (process.env.STAGE === 'prod') {
+            initAutoUpdate()
+        }
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
@@ -289,6 +299,10 @@ function createWindow() {
 
     windows.main.on('closed', () => {
         windows.main = null
+    })
+
+    windows.main.webContents.on('did-finish-load', () => {
+        windows.main.webContents.send('version-details', versionDetails)
     })
 
     /**
@@ -392,6 +406,7 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
+ipcMain.handle('get-version-details', (_e) => versionDetails)
 
 // Diagnostics
 const getDiagnostics = () => {
@@ -722,4 +737,14 @@ function loadJsonConfig(filename) {
 function getJsonConfig(filename) {
     const userDataPath = app.getPath('userData')
     return path.join(userDataPath, filename)
+}
+
+export const updateVersionDetails = (details) => {
+    versionDetails = Object.assign({}, versionDetails, details)
+    if (process.env.STAGE !== 'prod') {
+        // Always true to avoid triggering auto-updater
+        versionDetails.upToDate = true
+    }
+
+    getOrInitWindow('main').webContents.send('version-details', versionDetails)
 }
