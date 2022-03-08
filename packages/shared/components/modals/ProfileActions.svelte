@@ -3,7 +3,7 @@
     import { Icon, Modal, Text, HR, Toggle } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { activeProfile, isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, isSoftwareProfile, isLedgerProfile } from 'shared/lib/profile'
     import { openSettings } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -66,6 +66,9 @@
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
             <Text>{profileName}</Text>
+            {#if isLedgerProfile}
+                <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
+            {/if}
         </div>
         <HR />
         {#if $isSoftwareProfile}
