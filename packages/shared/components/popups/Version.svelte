@@ -13,7 +13,7 @@
     export let locale: Locale
 
     let hasAutoUpdate = true
-    let isPreRelease = false
+    let isPreRelease = true
 
     function handleDownload() {
         if (hasAutoUpdate) {
@@ -34,7 +34,7 @@
             if (get(stage) === Stage.PROD) {
                 updateCheck()
             } else {
-                isPreRelease = true
+                isPreRelease = false
             }
         }
         const os = await Platform.getOS()
