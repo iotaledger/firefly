@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { settingsRouter } from 'shared/lib/core/router/settingsRouter'
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -37,8 +37,7 @@
             | AdvancedSettingsNoProfile
             | HelpAndInfo
     ) {
-        settingsRoute.set(route)
-        settingsChildRoute.set(childRoute)
+        $settingsRouter.goToChildRoute(route, childRoute)
     }
 </script>
 

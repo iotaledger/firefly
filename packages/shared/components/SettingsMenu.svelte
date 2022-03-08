@@ -2,7 +2,6 @@
     import { Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
 
     export let settings
     export let activeSettings = []

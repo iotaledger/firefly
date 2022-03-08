@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { settingsRouter, settingsRoute } from 'shared/lib/core/router/settingsRouter'
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize, _ } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -63,11 +63,11 @@
     }
 
     function handleBackClick() {
-        settingsRoute.set(SettingsRoutes.Init)
+        $settingsRouter.previous()
     }
+
     onMount(() => {
-        const child = $settingsChildRoute
-        settingsChildRoute.set(null)
+        const child = $settingsRouter.getChildRouteAndReset()
         if (child) {
             scrollIntoView(child, { behavior: 'auto' })
         }

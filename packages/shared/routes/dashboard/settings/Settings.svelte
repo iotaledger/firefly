@@ -2,11 +2,11 @@
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
+    import { settingsRouter, settingsRoute } from 'shared/lib/core/router/settingsRouter'
 
     export let handleClose: () => void
 
@@ -18,8 +18,7 @@
         // When a new locale is loaded the pages are reloaded
         // so don't reset the router in this case
         if ($isLocaleLoaded) {
-            settingsRoute.set(SettingsRoutes.Init)
-            settingsChildRoute.set(null)
+            $settingsRouter.reset()
         }
     })
 </script>

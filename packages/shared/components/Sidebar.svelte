@@ -6,7 +6,8 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { resetWalletRoute, settingsRoute } from 'shared/lib/router'
+    import { resetWalletRoute } from 'shared/lib/router'
+    import { settingsRoute, settingsRouter } from 'shared/lib/core/router/settingsRouter'
     import { dashboardRoute, dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
@@ -48,7 +49,7 @@
         if ($settingsRoute === SettingsRoutes.Init) {
             drawer?.close()
         } else {
-            settingsRoute.set(SettingsRoutes.Init)
+            $settingsRouter.previous()
         }
     }
 

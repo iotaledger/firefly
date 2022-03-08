@@ -9,6 +9,7 @@ import { ledgerRouter, LedgerRouter } from 'shared/lib/core/router/ledgerRouter'
 import { walletRouter, WalletRouter } from 'shared/lib/core/router/walletRouter'
 import { accountRouter, AccountRouter } from 'shared/lib/core/router/accountRouter'
 import { appRouter } from 'shared/lib/core/router/appRouter'
+import { SettingsRouter, settingsRouter } from 'shared/lib/core/router/settingsRouter'
 
 /**
  * Application path based on location hash
@@ -33,19 +34,6 @@ export const path = readable<string>(null, (set) => {
 export const walletSetupType = writable<SetupType>(null)
 
 /**
- * Wallet view route
- */
-/**
- * Settings view route
- */
-export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
-
-/**
- * Settings child route
- */
-export const settingsChildRoute = writable<string>(null)
-
-/**
  * Navigate to initial route
  */
 export const initRouter = (): void => {
@@ -54,6 +42,7 @@ export const initRouter = (): void => {
     ledgerRouter.set(new LedgerRouter())
     walletRouter.set(new WalletRouter())
     accountRouter.set(new AccountRouter())
+    settingsRouter.set(new SettingsRouter())
 }
 
 // TODO: only handle route changes, not app variables
@@ -71,7 +60,7 @@ export const resetRouter = (): void => {
     get(dashboardRouter).reset()
     get(walletRouter).reset()
     get(accountRouter).reset()
-    settingsRoute.set(SettingsRoutes.Init)
+    get(settingsRouter).reset()
     isDeepLinkRequestActive.set(false)
 }
 
@@ -86,5 +75,5 @@ export const resetWalletRoute = (): void => {
 export const openSettings = (): void => {
     closePopup()
     get(dashboardRouter).goTo(Tabs.Settings)
-    settingsRoute.set(SettingsRoutes.Init)
+    get(settingsRouter).reset()
 }

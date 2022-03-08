@@ -19,7 +19,7 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { routerNext } from 'shared/lib/router'
     import { accountRouter } from 'shared/lib/core/router/accountRouter'
     import { dashboardRoute, dashboardRouter } from 'lib/core/router/dashboardRouter'
     import { walletRoute, walletRouter } from 'lib/core/router/walletRouter'
@@ -33,6 +33,7 @@
         wallet,
     } from 'shared/lib/wallet'
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { settingsRouter } from 'shared/lib/core/router/settingsRouter'
 
     export let locale: Locale
 
@@ -182,8 +183,7 @@
         }
         if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
-            settingsRoute.set(SettingsRoutes.AdvancedSettings)
-            settingsChildRoute.set(AdvancedSettings.DeepLinks)
+            $settingsRouter.goToChildRoute(SettingsRoutes.AdvancedSettings, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
