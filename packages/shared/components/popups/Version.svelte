@@ -32,9 +32,8 @@
         if (!devMode) {
             await getVersionDetails()
             if (get(stage) === Stage.PROD) {
-                updateCheck()
-            } else {
                 isPreRelease = false
+                updateCheck()
             }
         }
         const os = await Platform.getOS()
