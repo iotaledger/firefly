@@ -2,7 +2,7 @@
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
 
     export let locale: Locale

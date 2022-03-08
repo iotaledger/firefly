@@ -10,9 +10,9 @@
     import { activeProfile } from 'shared/lib/profile'
     import { updateNetworkStatus } from '../../lib/networkStatus'
 
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
-    import type { Network } from 'shared/lib/typings/network'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
+    import { Network } from 'shared/lib/typings/network'
 
     export let locale: Locale
 

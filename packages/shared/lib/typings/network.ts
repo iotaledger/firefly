@@ -1,4 +1,4 @@
-import type { Node, NodePlugin } from './node'
+import { Node, NodePlugin } from './node'
 
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',

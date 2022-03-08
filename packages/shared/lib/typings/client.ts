@@ -1,5 +1,5 @@
-import type { Node } from './node'
-import type { NetworkId } from './network'
+import { Node } from './node'
+import { NetworkId } from './network'
 
 /**
  * A subset of the client options offered in the

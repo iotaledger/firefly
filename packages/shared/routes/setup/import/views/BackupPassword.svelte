@@ -4,7 +4,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
     import { createEventDispatcher, getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 

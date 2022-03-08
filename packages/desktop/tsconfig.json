@@ -4,6 +4,7 @@
         "allowJs": true,
         "baseUrl": ".",
         "isolatedModules": false,
+        "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@common/*": ["../shared/lib/common/*"],

@@ -24,8 +24,8 @@ import {
     SyncAccountOptions,
     syncAccounts as _syncAccounts,
 } from '../../shared/lib/typings/account'
-import type { BridgeMessage, CommunicationIds, MessageResponse } from '../../shared/lib/typings/bridge'
-import type { ClientOptions } from '../../shared/lib/typings/client'
+import { BridgeMessage, CommunicationIds, MessageResponse } from '../../shared/lib/typings/bridge'
+import { ClientOptions } from '../../shared/lib/typings/client'
 import { reattach as _reattach, Transfer } from '../../shared/lib/typings/message'
 import {
     getMigrationData as _getMigrationData,
@@ -38,7 +38,7 @@ import {
     getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput,
 } from '../../shared/lib/typings/migration'
-import type { NodeAuth } from '../../shared/lib/typings/node'
+import { NodeAuth } from '../../shared/lib/typings/node'
 import {
     backup as _backup,
     changeStrongholdPassword as _changeStrongholdPassword,

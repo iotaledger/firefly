@@ -1,0 +1,52 @@
+PODS:
+  - Capacitor (3.4.0):
+    - CapacitorCordova
+  - CapacitorCommunityBarcodeScanner (2.0.1):
+    - Capacitor
+  - CapacitorCordova (3.4.0)
+  - CapacitorSecureStoragePlugin (0.6.2):
+    - Capacitor
+    - SwiftKeychainWrapper
+  - FireflyActorSystemCapacitorBindings (0.0.1):
+    - Capacitor
+  - IotaWalletInternal (0.2.0)
+  - SwiftKeychainWrapper (3.4.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
+  - "CapacitorCommunityBarcodeScanner (from `../../../../node_modules/@capacitor-community/barcode-scanner`)"
+  - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
+  - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
+  - FireflyActorSystemCapacitorBindings (from `../../node_modules/firefly-actor-system-capacitor-bindings`)
+  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec`)
+
+SPEC REPOS:
+  trunk:
+    - SwiftKeychainWrapper
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorCommunityBarcodeScanner:
+    :path: "../../../../node_modules/@capacitor-community/barcode-scanner"
+  CapacitorCordova:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorSecureStoragePlugin:
+    :path: "../../../../node_modules/capacitor-secure-storage-plugin"
+  FireflyActorSystemCapacitorBindings:
+    :path: "../../node_modules/firefly-actor-system-capacitor-bindings"
+  IotaWalletInternal:
+    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec
+
+SPEC CHECKSUMS:
+  Capacitor: 8e3b84d09c7b599d8d19d48ab121320cb7058953
+  CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
+  CapacitorCordova: b1af29a04884895a52d00050de49a330a9cece30
+  CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
+  FireflyActorSystemCapacitorBindings: b65f3d4441d6d8af7797c1e87b1ee81f00400003
+  IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+
+PODFILE CHECKSUM: 0dab9d058dcfb08c1e7004de80f7a10cd2a0ad78
+
+COCOAPODS: 1.11.2
