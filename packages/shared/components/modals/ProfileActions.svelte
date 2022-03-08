@@ -3,7 +3,7 @@
     import { Icon, Modal, Text, HR, Toggle } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
     import { openSettings } from 'shared/lib/router'
     import type { Locale } from 'shared/lib/typings/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -58,25 +58,27 @@
             <Text>{profileName}</Text>
         </div>
         <HR />
-        <div class="flex justify-between items-center p-3">
-            <div class="flex items-center">
-                <Icon
-                    icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-                    boxed
-                    classes="text-blue-500"
-                    boxClasses="bg-blue-100 mr-3"
-                />
-                <div>
-                    <Text type="p">{locale('views.dashboard.profileModal.stronghold.title')}</Text>
-                    <Text type="p" overrideColor classes="text-gray-500 -mt-1"
-                        >{locale(
-                            `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
-                        )}</Text
-                    >
+        {#if $isSoftwareProfile}
+            <div class="flex justify-between items-center p-3">
+                <div class="flex items-center">
+                    <Icon
+                        icon={$isStrongholdLocked ? 'lock' : 'unlock'}
+                        boxed
+                        classes="text-blue-500"
+                        boxClasses="bg-blue-100 mr-3"
+                    />
+                    <div>
+                        <Text type="p">{locale('views.dashboard.profileModal.stronghold.title')}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1"
+                            >{locale(
+                                `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
+                            )}</Text
+                        >
+                    </div>
                 </div>
+                <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
             </div>
-            <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
-        </div>
+        {/if}
         <HR />
         <button
             on:click={() => handleSettingsClick()}
