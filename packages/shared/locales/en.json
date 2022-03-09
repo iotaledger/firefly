@@ -1363,6 +1363,7 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Governance"
     }
 }
