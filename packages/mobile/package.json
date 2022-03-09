@@ -23,6 +23,7 @@
         "@capacitor/cli": "^3.4.0",
         "@capacitor/core": "3.4.0",
         "@capacitor/ios": "3.4.0",
+        "imagemagick": "^0.1.3",
         "mini-css-extract-plugin": "^1.6.0",
         "tsconfig-paths-webpack-plugin": "^3.5.2",
         "webpack": "^5.16.0",
@@ -32,8 +33,8 @@
     "dependencies": {
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "capacitor-secure-storage-plugin": "^0.6.2",
-        "shared": "0.0.0",
-        "firefly-actor-system-capacitor-bindings": "./packages/backend/bindings/capacitor/"
+        "firefly-actor-system-capacitor-bindings": "./packages/backend/bindings/capacitor/",
+        "shared": "0.0.0"
     },
     "engineStrict": true,
     "engines": {
