@@ -5,8 +5,8 @@
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let alias
     export let account

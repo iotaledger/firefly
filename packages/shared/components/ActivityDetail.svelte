@@ -7,8 +7,8 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Payload } from 'shared/lib/typings/message'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Payload } from 'shared/lib/typings/message'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,

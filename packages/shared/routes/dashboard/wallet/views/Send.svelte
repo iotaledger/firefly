@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -12,6 +14,7 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { startQRScanner } from 'shared/lib/device'
+    import { localize } from 'shared/lib/i18n'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -31,17 +34,14 @@
         TransferState,
     } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import type { NotificationType } from 'shared/lib/typings/notification'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import type { Readable } from 'svelte/store'
-    import { get } from 'svelte/store'
     import { mobile } from 'shared/lib/app'
-    import { localize } from 'shared/lib/i18n'
+    import { NotificationType } from 'shared/lib/typings/notification'
+    import { SendParams } from 'shared/lib/typings/sendParams'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -49,6 +49,7 @@
     const { accounts } = $wallet
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
+    const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
 
     enum SEND_TYPE {
         EXTERNAL = 'sendPayment',
@@ -59,12 +60,11 @@
     let unit = Unit.Mi
     let amount = ''
     let address = ''
-    let to = undefined
     let amountError = ''
-    const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
     let addressError = ''
     let toError = ''
-    let amountRaw
+    let to: LabeledWalletAccount
+    let amountRaw: number
 
     let ledgerAwaitingConfirmation = false
 
@@ -72,7 +72,6 @@
     let transactionTimeoutId = null
     let transactionNotificationId = null
 
-    // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
@@ -117,9 +116,9 @@
         },
     }
 
-    let accountsDropdownItems
+    let accountsDropdownItems: LabeledWalletAccount[]
     $: {
-        accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
+        accountsDropdownItems = $liveAccounts.map((acc) => addLabel(acc))
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
         }
@@ -272,13 +271,13 @@
         checkLedgerDeviceState($ledgerDeviceState, 'warning', true)
     }
 
-    const clearErrors = () => {
+    const clearErrors = (): void => {
         amountError = ''
         addressError = ''
         toError = ''
     }
 
-    const handleSendTypeClick = (type) => {
+    const handleSendTypeClick = (type: SEND_TYPE): void => {
         selectedSendType = type
         clearErrors()
     }
@@ -288,28 +287,25 @@
         clearErrors()
     }
 
-    const ensureMaxAmount = (_amount) => {
+    const setRawAmount = (amountAsFloat: number): number => {
+        const isFiat = isFiatCurrency(unit)
+        const amountAsIota = isFiat
+            ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+            : changeUnits(amountAsFloat, unit, Unit.i)
         /**
          * NOTE: Sometimes max values from fiat calculations
-         * aren't precise enough, so we have to ensure that the
-         * actual max amount is applied when the user clicks
-         * the button.
+         * aren't precise enough, therefore we round the
+         * amounts to 1 MI to compare them.
          */
+        const amountAsMi = changeUnits(amountAsIota, Unit.i, Unit.Mi)
+        const balanceAsMi = changeUnits($selectedAccount.rawIotaBalance, Unit.i, Unit.Mi)
+        const isMaxAmount = Math.round(amountAsMi) === Math.round(balanceAsMi)
 
-        const isFiat = isFiatCurrency(unit)
-        const isMaxAmount =
-            amount ===
-            convertToFiat(
-                $selectedAccount.rawIotaBalance,
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[unit]
-            ).toString()
-        const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - _amount) < DUST_THRESHOLD
-
-        return isFiat && isMaxAmount && hasDustRemaining ? $selectedAccount.rawIotaBalance : _amount
+        const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
+        return isMaxAmount && isFiat && hasDustRemaining ? $selectedAccount.rawIotaBalance : amountAsIota
     }
 
-    const handleSendClick = () => {
+    const handleSendClick = (): void => {
         clearErrors()
 
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
@@ -334,16 +330,12 @@
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = localize('error.send.amountNoFloat')
         } else {
-            const isFiat = isFiatCurrency(unit)
             const amountAsFloat = parseCurrency(amount)
 
             if (Number.isNaN(amountAsFloat)) {
                 amountError = localize('error.send.amountInvalidFormat')
             } else {
-                amountRaw = isFiat
-                    ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
-                    : changeUnits(amountAsFloat, unit, Unit.i)
-                amountRaw = ensureMaxAmount(amountRaw)
+                amountRaw = setRawAmount(amountAsFloat)
 
                 if (amountRaw > $selectedAccount.rawIotaBalance) {
                     amountError = localize('error.send.amountTooHigh')
@@ -386,10 +378,10 @@
         }
     }
 
-    const triggerSend = (isInternal) => {
+    const triggerSend = (isInternal: boolean): void => {
         closePopup()
 
-        const _send = (isInternal: boolean): any =>
+        const _send = (isInternal: boolean): void =>
             /**
              * NOTE: selectedSendType is passed (only to the internalTransfer method) in the
              * case that we are masquerading as an internal transfer by sending to an address
@@ -406,18 +398,17 @@
         }
     }
 
-    const handleBackClick = () => {
+    const handleBackClick = (): void => {
         clearSendParams()
         accountRoute.set(AccountRoutes.Init)
     }
 
-    const format = (account: WalletAccount) => ({
+    const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
         ...account,
         label: `${account.alias} • ${account.balance}`,
-        balance: account.rawIotaBalance,
     })
 
-    const handleMaxClick = () => {
+    const handleMaxClick = (): void => {
         amount = isFiatCurrency(unit)
             ? formatNumber(
                   convertToFiat($selectedAccount.rawIotaBalance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
@@ -425,7 +416,7 @@
             : formatUnitPrecision($selectedAccount.rawIotaBalance, unit, false)
     }
 
-    const updateFromSendParams = (sendParams) => {
+    const updateFromSendParams = (sendParams: SendParams): void => {
         selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         unit = sendParams.unit ?? (sendParams.amount === 0 ? Unit.Mi : Unit.i)
         const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
@@ -439,7 +430,7 @@
         }
     }
 
-    const sendSubscription = sendParams.subscribe((s) => {
+    const sendSubscription = sendParams.subscribe((s): void => {
         updateFromSendParams(s)
     })
 
@@ -447,7 +438,7 @@
         const onSuccess = (result: string) => {
             address = result
         }
-        const onError = () => {
+        const onError = (): void => {
             showAppNotification({
                 type: 'error',
                 message: localize('error.global.generic'),
@@ -456,11 +447,11 @@
         void startQRScanner(onSuccess, onError)
     }
 
-    onMount(() => {
+    onMount((): void => {
         updateFromSendParams($sendParams)
     })
 
-    onDestroy(() => {
+    onDestroy((): void => {
         if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
         sendSubscription()
     })

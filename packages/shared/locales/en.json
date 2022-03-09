@@ -499,7 +499,12 @@
             },
             "profileModal": {
                 "allSettings": "All settings",
-                "logout": "Log out"
+                "logout": "Log out",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                }
             }
         },
         "staking": {
