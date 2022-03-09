@@ -23,10 +23,11 @@ public class WalletPlugin extends Plugin {
 
     @PluginMethod()
     public void initialize(final PluginCall call) {
-        if (isInitialized) return;
+        if (isInitialized) {
+            call.reject("Wallet is yet initialized!");
+        }
         if (!call.getData().has("actorId") || !call.getData().has("storagePath")) {
             call.reject("actorId & storagePath are required");
-            return;
         }
         String actorId = call.getString("actorId");
         String storagePath = call.getString("storagePath");
@@ -49,7 +50,6 @@ public class WalletPlugin extends Plugin {
         try {
             if (!call.getData().has("message")) {
                 call.reject("message is required");
-                return;
             }
 
             Actor.iotaSendMessage(call.getObject("message").toString());
@@ -63,12 +63,10 @@ public class WalletPlugin extends Plugin {
     public void destroy(final PluginCall call) {
         if (!isInitialized) {
             call.reject("Wallet is not initialized yet");
-            return;
         }
         try {
             if (!call.getData().has("actorId")) {
                 call.reject("actorId is required");
-                return;
             }
             String actorId = call.getString("actorId");
             assert actorId != null;
@@ -83,13 +81,11 @@ public class WalletPlugin extends Plugin {
     public void listen(final PluginCall call) {
         if (!isInitialized) {
             call.reject("Wallet is not initialized yet");
-            return;
         }
         if (!call.getData().has("actorId")
                 || !call.getData().has("id")
                 || !call.getData().has("event")) {
             call.reject("actorId, id and event are required");
-            return;
         }
         String actorId = call.getString("actorId");
         String id = call.getString("id");
