@@ -441,8 +441,8 @@
                     </DashboardPane>
                 </div>
             </div>
+            <AccountActionsModal bind:isActive={showActionsModal} />
         {/key}
-        <AccountActionsModal bind:isActive={showActionsModal} />
     </div>
 {/if}
 
