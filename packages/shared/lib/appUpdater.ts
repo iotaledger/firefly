@@ -7,9 +7,9 @@ import {
     updateDisplayNotification,
     updateDisplayNotificationProgress,
 } from 'shared/lib/notifications'
-import type { NotificationData } from 'shared/lib/typings/notification'
+import { NotificationData } from 'shared/lib/typings/notification'
 import { writable } from 'svelte/store'
-import type { NativeProgress, VersionDetails } from './typings/appUpdater'
+import { NativeProgress, VersionDetails } from './typings/appUpdater'
 
 const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
 

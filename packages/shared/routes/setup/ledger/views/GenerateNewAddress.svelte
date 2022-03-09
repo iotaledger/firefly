@@ -8,7 +8,7 @@
     } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
 

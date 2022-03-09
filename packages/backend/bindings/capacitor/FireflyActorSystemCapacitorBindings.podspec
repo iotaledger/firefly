@@ -1,6 +1,6 @@
 
   Pod::Spec.new do |s|
-    s.name = 'WalletActorSystemCapacitorBinding'
+    s.name = 'FireflyActorSystemCapacitorBindings'
     s.version = '0.0.1'
     s.summary = 'Capacitor binding to the Wallet\'s actor system'
     s.license = { :type => 'MIT' }

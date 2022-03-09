@@ -1,4 +1,4 @@
-import type { DeepLinkParameters } from 'shared/lib/typings/deepLinking/deepLinking'
+import { DeepLinkParameters } from 'shared/lib/typings/deepLinking/deepLinking'
 import { addError } from 'shared/lib/errors'
 import { writable } from 'svelte/store'
 import { parseWalletRequest } from './contextHandlers/walletContextHandler'

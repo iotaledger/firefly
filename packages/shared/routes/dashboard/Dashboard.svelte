@@ -1,10 +1,15 @@
 <script lang="typescript">
-    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
+    import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { deepLinkRequestActive, parseDeepLink } from 'shared/lib/deepLinking/deepLinking'
+    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
+    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { DeveloperProfileIndicator, Idle, Sidebar, TopNavigation } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -17,11 +22,9 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
-    import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
-    import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
         asyncCreateAccount,
@@ -31,10 +34,6 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { Settings, Staking, Wallet } from 'shared/routes'
-    import { onDestroy, onMount, setContext } from 'svelte'
-    import { derived, get, Readable } from 'svelte/store'
-    import TopNavigation from './TopNavigation.svelte'
 
     export let locale: Locale
 

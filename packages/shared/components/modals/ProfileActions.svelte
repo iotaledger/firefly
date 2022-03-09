@@ -5,10 +5,10 @@
     import { getInitials } from 'shared/lib/helpers'
     import { activeProfile, isStrongholdLocked, isSoftwareProfile } from 'shared/lib/profile'
     import { openSettings } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
     export let isActive: boolean

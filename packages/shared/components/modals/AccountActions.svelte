@@ -6,10 +6,10 @@
     import { accountRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { asyncRemoveWalletAccount, selectedAccount, selectedMessage, wallet } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable } from 'svelte/store'
+    import { Readable } from 'svelte/store'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { get } from 'svelte/store'
 
     export let isActive
