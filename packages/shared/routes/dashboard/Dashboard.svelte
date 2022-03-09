@@ -9,7 +9,7 @@
     import { WalletOperations } from 'shared/lib/typings/deepLinking/walletContext'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { DeveloperProfileIndicator, Idle, Sidebar, TopNavigation } from 'shared/components'
+    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -34,6 +34,7 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import TopNavigation from './TopNavigation.svelte'
 
     export let locale: Locale
 
