@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import { fade } from 'svelte/transition'
+    import { Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
@@ -11,7 +12,7 @@
     import { LocaleArgs } from 'shared/lib/typings/i18n'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { fade } from 'svelte/transition'
+    import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
 
     export let isActive: boolean
 
@@ -87,9 +88,25 @@
             ledgerConnectionText = text
         }
     }
+
+    function handleBackupClick() {
+        openPopup({
+            type: 'backup',
+            props: {
+                lastBackupDate,
+                lastBackupDateFormatted,
+            },
+        })
+    }
+
+    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
+    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+    $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+    $: backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
+    $: backupColor = getBackupWarningColor(lastBackupDate)
 </script>
 
-<Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-64">
+<Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-80">
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
@@ -100,8 +117,27 @@
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
         </div>
-        <HR />
         {#if $isSoftwareProfile}
+            <HR />
+            <div class="items-center p-3">
+                <div class="flex items-center justify-between bg-{backupColor}-100 p-3 rounded">
+                    <Icon icon={backupSafe ? 'shield' : 'warning'} boxed classes="text-{backupColor}-500" />
+                    <div class="ml-2 mr-auto">
+                        <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
+                            {$activeProfile?.lastStrongholdBackupTime
+                                ? localize(`dates.${lastBackupDateFormatted?.unit}`, {
+                                      values: { time: lastBackupDateFormatted?.value },
+                                  })
+                                : localize('popups.backup.notBackedUp')}
+                        </Text>
+                    </div>
+                    <Button secondary xsmall onClick={handleBackupClick}
+                        ><Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text></Button
+                    >
+                </div>
+            </div>
+            <HR />
             <div class="flex justify-between items-center p-3">
                 <div class="flex items-center">
                     <Icon
@@ -122,6 +158,7 @@
                 <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
             </div>
         {:else}
+            <HR />
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
                     <Icon

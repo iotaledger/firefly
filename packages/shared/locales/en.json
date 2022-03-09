@@ -488,6 +488,10 @@
                         "notDetected": "Not Detected",
                         "otherConnected": "App Open"
                     }
+                },
+                "backup": {
+                    "title": "Save wallet backup",
+                    "button": "Backup"
                 }
             }
         },
