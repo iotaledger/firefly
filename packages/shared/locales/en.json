@@ -494,6 +494,11 @@
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
+                },
+                "version": {
+                    "title": "Version",
+                    "titleUpdate": "New update available",
+                    "button": "Update"
                 }
             }
         },
