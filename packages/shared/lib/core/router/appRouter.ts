@@ -3,8 +3,8 @@ import { ProfileType } from 'shared/lib/typings/profile'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { walletSetupType } from 'shared/lib/router'
 import { Router } from 'shared/lib/core/router/router'
-import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { get, writable } from 'svelte/store'
+import { AppRoute } from '@core/router/enum/routes'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)

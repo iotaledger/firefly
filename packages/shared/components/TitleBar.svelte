@@ -3,17 +3,17 @@
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
     import { dashboardRoute } from 'shared/lib/core/router/dashboardRouter'
-    import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
+    import { DashboardRoutes } from '@core/router/enum/routes'
 
     const { accountsLoaded } = $wallet
 
     $: showingDashboard = $accountsLoaded && $popupState.type !== 'busy'
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
-    $: showingSettings = $dashboardRoute === Tabs.Settings
+    $: showingSettings = $dashboardRoute === DashboardRoutes.Settings
 
     let os = ''
     let isMaximized = false

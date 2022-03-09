@@ -11,16 +11,8 @@
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import {
-        dashboardRouter,
-        initRouter,
-        openSettings,
-        routerNext,
-        routerPrevious,
-        walletRouter,
-    } from 'shared/lib/router'
+    import { initRouter, openSettings, routerNext, routerPrevious } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy, onMount } from 'svelte'
     import {
         Appearance,
@@ -45,6 +37,9 @@
         Welcome,
     } from 'shared/routes'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { AppRoute, DashboardRoutes } from '@core/router/enum/routes'
+    import { dashboardRouter } from '@core/router/dashboardRouter'
+    import { walletRouter } from '@core/router/walletRouter'
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -88,7 +83,7 @@
             pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
-            $dashboardRouter.goTo(Tabs.Wallet)
+            $dashboardRouter.goTo(DashboardRoutes.Wallet)
             $walletRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {

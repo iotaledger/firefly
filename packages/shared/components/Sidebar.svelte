@@ -9,9 +9,9 @@
     import { resetWalletRoute } from 'shared/lib/router'
     import { settingsRoute, settingsRouter } from 'shared/lib/core/router/settingsRouter'
     import { dashboardRoute, dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { DashboardRoutes, SettingsRoutes } from '@core/router/enum/routes'
 
     export let locale: Locale
 
@@ -30,7 +30,7 @@
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== DashboardRoutes.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
@@ -54,7 +54,7 @@
     }
 
     function openStaking() {
-        $dashboardRouter.goTo(Tabs.Staking)
+        $dashboardRouter.goTo(DashboardRoutes.Staking)
     }
 </script>
 
@@ -104,13 +104,13 @@
         <nav class="flex flex-grow flex-col items-center justify-between">
             <div class="flex flex-col">
                 <button
-                    class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                    class="mb-8 {$dashboardRoute === DashboardRoutes.Wallet ? 'text-blue-500' : 'text-gray-500'}"
                     on:click={openWallet}
                 >
                     <Icon width="24" height="24" icon="wallet" />
                 </button>
                 <button
-                    class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                    class="{$dashboardRoute === DashboardRoutes.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
                     on:click={openStaking}
                 >
                     <Icon width="24" height="24" icon="tokens" />

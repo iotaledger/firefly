@@ -57,7 +57,7 @@ export enum AccountRoutes {
     Receive = 'receive',
 }
 
-export enum Tabs {
+export enum DashboardRoutes {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',

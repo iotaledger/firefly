@@ -24,7 +24,13 @@
     import { dashboardRoute, dashboardRouter } from 'lib/core/router/dashboardRouter'
     import { walletRoute, walletRouter } from 'lib/core/router/walletRouter'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import {
+        AccountRoutes,
+        AdvancedSettings,
+        SettingsRoutes,
+        DashboardRoutes,
+        WalletRoutes,
+    } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
@@ -108,7 +114,7 @@
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)
-                    $dashboardRouter.goTo(Tabs.Wallet)
+                    $dashboardRouter.goTo(DashboardRoutes.Wallet)
                     $walletRouter.goTo(WalletRoutes.Account)
                     $accountRouter.goTo(AccountRoutes.Init)
                 }
@@ -177,12 +183,12 @@
     }
 
     const handleDeepLinkRequest = (data: string): void => {
-        const _redirect = (tab: Tabs) => {
+        const _redirect = (tab: DashboardRoutes): void => {
             isDeepLinkRequestActive.set(true)
             $dashboardRouter.goTo(tab)
         }
         if (!$appSettings.deepLinking) {
-            _redirect(Tabs.Settings)
+            _redirect(DashboardRoutes.Settings)
             $settingsRouter.goToChildRoute(SettingsRoutes.AdvancedSettings, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
@@ -195,7 +201,7 @@
                     parsedDeepLink.operation === WalletOperation.Send &&
                     parsedDeepLink.parameters
                 ) {
-                    _redirect(Tabs.Wallet)
+                    _redirect(DashboardRoutes.Wallet)
                     sendParams.set({
                         ...parsedDeepLink.parameters,
                         isInternal: false,

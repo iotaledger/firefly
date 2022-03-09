@@ -1,5 +1,5 @@
+import { AccountRoutes } from '@core/router/enum/routes'
 import { Router } from 'shared/lib/core/router/router'
-import { AccountRoutes } from 'shared/lib/typings/routes'
 import { writable } from 'svelte/store'
 
 export const accountRoute = writable<AccountRoutes>(null)
