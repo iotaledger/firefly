@@ -22,7 +22,6 @@ export const assets = derived(
     ]) => {
         if (!$activeProfile || !$selectedAccount) return []
         const profileCurrency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
-        // const fiatPrice = convertToFiat(UNIT_MAP[Unit.Mi].val, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency ?? AvailableExchangeRates.USD])
         const assets: Asset[] = [
             {
                 name: Token.IOTA,
