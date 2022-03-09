@@ -30,6 +30,7 @@ public class WalletPlugin extends Plugin {
         }
         String actorId = call.getString("actorId");
         String storagePath = call.getString("storagePath");
+        assert actorId != null && storagePath != null;
         String dbPath = getContext().getFilesDir() + storagePath;
 
         final ActorCallback callback = response -> {
@@ -70,6 +71,7 @@ public class WalletPlugin extends Plugin {
                 return;
             }
             String actorId = call.getString("actorId");
+            assert actorId != null;
 
             Actor.iotaDestroy(actorId);
         } catch (Exception ex) {
@@ -92,10 +94,7 @@ public class WalletPlugin extends Plugin {
         String actorId = call.getString("actorId");
         String id = call.getString("id");
         String event = call.getString("event");
-        if (event == null) {
-            call.reject("event is null");
-            return;
-        }
+        assert actorId != null && id != null && event != null;
         String snakedEvent = event.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase();
 
         synchronized (lock) {
