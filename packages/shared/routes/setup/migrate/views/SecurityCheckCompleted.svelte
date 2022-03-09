@@ -3,9 +3,9 @@
     import { mobile } from 'shared/lib/app'
     import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from '@core/router'
     import { RiskLevel } from 'shared/lib/typings/migration'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { SetupType } from '@core/router/enum/routes'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 

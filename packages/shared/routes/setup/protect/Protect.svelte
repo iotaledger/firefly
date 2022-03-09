@@ -13,9 +13,9 @@
     import { get } from 'svelte/store'
     import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from '@core/router'
     import { mnemonic } from 'shared/lib/app'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { SetupType } from '@core/router/enum/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale

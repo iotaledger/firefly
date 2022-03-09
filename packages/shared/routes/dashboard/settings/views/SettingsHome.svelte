@@ -13,7 +13,7 @@
         HelpAndInfo,
         SecuritySettings,
         SettingsRoutes,
-    } from 'shared/lib/typings/routes'
+    } from '@core/router/enum/routes'
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)

@@ -1,8 +1,8 @@
 import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-import { resetWalletRoute, walletSetupType } from 'shared/lib/router'
+import { resetWalletRoute, walletSetupType } from '@core/router'
 import { appRouter } from 'shared/lib/core/router/appRouter'
-import { AppRoute, SetupType } from 'shared/lib/typings/routes'
+import { AppRoute } from '@core/router/enum/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
@@ -17,6 +17,7 @@ import {
     LegacyLedgerErrorName,
 } from './typings/ledger'
 import { NotificationType } from './typings/notification'
+import { SetupType } from 'shared/lib/typings/setup'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90

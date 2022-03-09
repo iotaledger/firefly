@@ -4,8 +4,8 @@
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { walletSetupType } from '@core/router'
+    import { SetupType } from '@core/router/enum/routes'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 

@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, accountRouter } from 'shared/lib/core/router/accountRouter'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes } from '@core/router/enum/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'

@@ -4,10 +4,10 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter, walletRouter, walletSetupType } from 'shared/lib/router'
+    import { accountRouter, walletRouter, walletSetupType } from '@core/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, WalletRoutes } from '@core/router/enum/routes'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
@@ -22,6 +22,7 @@
     import { getContext } from 'svelte'
     import { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

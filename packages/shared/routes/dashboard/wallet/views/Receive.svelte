@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRouter, walletRouter } from 'shared/lib/router'
+    import { accountRouter, walletRouter } from '@core/router'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'

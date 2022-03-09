@@ -11,7 +11,7 @@
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { initRouter, openSettings, routerNext, routerPrevious } from 'shared/lib/router'
+    import { initRouter, openSettings, routerNext, routerPrevious } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { onDestroy, onMount } from 'svelte'
     import {

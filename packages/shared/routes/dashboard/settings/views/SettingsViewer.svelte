@@ -14,7 +14,7 @@
         SecuritySettings,
         SettingsRoutes,
         SettingsRoutesNoProfile,
-    } from 'shared/lib/typings/routes'
+    } from '@core/router/enum/routes'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
 

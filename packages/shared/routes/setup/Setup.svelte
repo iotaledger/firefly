@@ -3,7 +3,7 @@
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { SetupType } from '@core/router/enum/routes'
     import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale

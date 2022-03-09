@@ -1,5 +1,5 @@
 import { app, ipcMain, Menu, shell } from 'electron'
-import { WalletRoutes, ExternalRoute } from 'shared/lib/typings/routes'
+import { WalletRoutes, ExternalRoute } from '@core/router/enum/routes'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState } from './menuState'
 

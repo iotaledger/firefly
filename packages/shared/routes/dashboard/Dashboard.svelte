@@ -19,10 +19,8 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { routerNext } from 'shared/lib/router'
     import { accountRouter } from 'shared/lib/core/router/accountRouter'
-    import { dashboardRoute, dashboardRouter } from 'lib/core/router/dashboardRouter'
-    import { walletRoute, walletRouter } from 'lib/core/router/walletRouter'
+    import { dashboardRoute, dashboardRouter, walletRoute, walletRouter, routerNext } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         AccountRoutes,
@@ -30,7 +28,7 @@
         SettingsRoutes,
         DashboardRoutes,
         WalletRoutes,
-    } from 'shared/lib/typings/routes'
+    } from '@core/router/enum/routes'
     import {
         api,
         isBackgroundSyncing,

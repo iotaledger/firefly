@@ -18,7 +18,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { MigratedTransaction } from 'shared/lib/typings/profile'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { WalletRoutes } from '@core/router/enum/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,

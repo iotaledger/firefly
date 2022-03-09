@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
     import { dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
-    import { SettingsRoutes } from 'shared/lib/typings/routes'
+    import { SettingsRoutes } from '@core/router/enum/routes'
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
     import { settingsRouter, settingsRoute } from 'shared/lib/core/router/settingsRouter'

@@ -21,17 +21,6 @@ export enum AppRoute {
     Login = 'login',
 }
 
-export enum SetupType {
-    New = 'new',
-    Import = 'import',
-    Mnemonic = 'mnemonic',
-    Seed = 'seed',
-    Stronghold = 'stronghold',
-    Seedvault = 'seedvault',
-    TrinityLedger = 'trinityLedger',
-    FireflyLedger = 'fireflyLedger',
-}
-
 export enum LedgerRoutes {
     Connect = 'connect',
     RestoreFromLedger = 'restoreFromLedger',

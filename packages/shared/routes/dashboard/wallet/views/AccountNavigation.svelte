@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { resetWalletRoute } from 'shared/lib/router'
+    import { resetWalletRoute } from '@core/router'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'

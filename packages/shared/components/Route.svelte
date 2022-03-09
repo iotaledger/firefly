@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { AppRoute } from 'shared/lib/typings/routes'
+    import { AppRoute } from '@core/router/enum/routes'
     import { Transition } from 'shared/components'
     import { appRoute } from 'shared/lib/core/router/appRouter'
 

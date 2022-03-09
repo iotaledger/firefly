@@ -19,10 +19,10 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from '@core/router'
     import { ledgerRouter } from 'shared/lib/core/router/ledgerRouter'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { SetupType } from '@core/router/enum/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getProfileDataPath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'

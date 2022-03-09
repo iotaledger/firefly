@@ -8,7 +8,7 @@
     import { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
     import { accountRoute } from 'shared/lib/core/router/accountRouter'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes } from '@core/router/enum/routes'
 
     export let locale: Locale
 
