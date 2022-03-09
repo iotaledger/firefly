@@ -6,9 +6,9 @@
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, getColor, updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
+    import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
-    import type { BalanceHistory } from 'shared/lib/typings/wallet'
     import { getAccountBalanceHistory, selectedAccount } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
@@ -183,7 +183,7 @@
         {color}
         {xMaxTicks}
         {formatYAxis}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '160'}px);`}
     />
 </div>
 

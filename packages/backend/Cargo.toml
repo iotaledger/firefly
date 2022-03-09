@@ -1,5 +1,5 @@
 [package]
-name = "wallet-actor-system"
+name = "firefly-actor-system"
 version = "0.1.0"
 authors = ["IOTA Stiftung"]
 edition = "2018"

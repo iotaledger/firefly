@@ -1,14 +1,14 @@
-import type {
+import {
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from 'shared/lib/participation/types'
-import type { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
-import type { Address } from './address'
-import type { GetMigrationAddressResponse } from './bridge'
-import type { ClientOptions } from './client'
-import type {
+import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
+import { Address } from './address'
+import { GetMigrationAddressResponse } from './bridge'
+import { ClientOptions } from './client'
+import {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
     ErrorEventPayload,
@@ -19,11 +19,11 @@ import type {
     TransactionEventPayload,
     TransferProgressEventPayload,
 } from './events'
-import type { LedgerStatus } from './ledger'
-import type { Message } from './message'
-import type { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
-import type { NodeAuth, NodeInfo } from './node'
-import type { Duration, StrongholdStatus } from './wallet'
+import { LedgerStatus } from './ledger'
+import { Message } from './message'
+import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
+import { NodeAuth, NodeInfo } from './node'
+import { Duration, StrongholdStatus } from './wallet'
 
 export interface IWalletApi {
     generateMnemonic(callbacks: {

@@ -6,7 +6,7 @@
     import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

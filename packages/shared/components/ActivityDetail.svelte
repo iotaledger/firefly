@@ -7,8 +7,8 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Payload } from 'shared/lib/typings/message'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Payload } from 'shared/lib/typings/message'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -156,7 +156,7 @@
             {/if}
         </div>
     </div>
-    <div class="mb-6 h-full overflow-y-auto pr-2 -mr-2 scroll-secondary">
+    <div class="mb-6 overflow-y-auto pr-2 -mr-2 flex-auto h-1 scroll-secondary">
         <div class="mb-5">
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>

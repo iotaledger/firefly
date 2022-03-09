@@ -7,7 +7,7 @@
     export let labels = []
     export let datasets = []
     export let color = 'blue'
-    export let inlineStyle = 'height: calc(50vh - 130px);'
+    export let inlineStyle = 'height: calc(50vh - 140px);'
     export let formatYAxis = (value: unknown): number => Number(value.toString())
 
     let canvas

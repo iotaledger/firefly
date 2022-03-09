@@ -1,4 +1,4 @@
-import type { Message } from '../typings/message'
+import { Message } from '../typings/message'
 
 export enum AccountParticipationAbility {
     Ok = 'ok',

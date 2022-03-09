@@ -8,11 +8,11 @@ import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
-import type { Message } from './typings/message'
+import { Message } from './typings/message'
 import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
-import type { BalanceHistory, WalletAccount } from './typings/wallet'
+import { BalanceHistory, WalletAccount } from './typings/wallet'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 

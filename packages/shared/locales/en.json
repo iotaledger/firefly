@@ -499,7 +499,12 @@
             },
             "profileModal": {
                 "allSettings": "All settings",
-                "logout": "Log out"
+                "logout": "Log out",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                }
             }
         },
         "staking": {
@@ -1018,6 +1023,7 @@
         "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -1360,5 +1366,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Wallet",
+        "staking": "Staking"
     }
 }

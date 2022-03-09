@@ -4,11 +4,12 @@
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
+    import { popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { get } from 'svelte/store'
 
     export let locale: Locale
@@ -31,6 +32,11 @@
     $: {
         if (validatePinFormat(pinCode)) {
             void onSubmit()
+        }
+    }
+    $: {
+        if (pinRef && !$popupState.active) {
+            pinRef.focus()
         }
     }
 

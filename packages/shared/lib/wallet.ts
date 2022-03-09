@@ -1,4 +1,4 @@
-import type {
+import {
     ErrorEventPayload,
     GeneratingRemainderDepositAddressEvent,
     PreparedTransactionEvent,
@@ -6,7 +6,7 @@ import type {
     TransferProgressEventData,
     TransferState,
 } from 'shared/lib/typings/events'
-import type { Payload } from 'shared/lib/typings/message'
+import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
@@ -26,7 +26,7 @@ import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import type {
+import {
     Account,
     Account as BaseAccount,
     AccountIdentifier,
@@ -34,17 +34,17 @@ import type {
     SyncAccountOptions,
     SyncedAccount,
 } from './typings/account'
-import type { Address } from './typings/address'
-import type { IActorHandler } from './typings/bridge'
+import { Address } from './typings/address'
+import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
-import type { Message } from './typings/message'
-import type { RecoveryPhrase } from './typings/mnemonic'
-import type { NodeAuth, NodeInfo } from './typings/node'
+import { Message } from './typings/message'
+import { RecoveryPhrase } from './typings/mnemonic'
+import { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
-import type { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
-import type { IWalletApi } from './typings/walletApi'
+import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
+import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
@@ -132,13 +132,14 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
-// used to make selectedAccount reactive to changes in the wallet
-const _selectedAccountId = writable<AccountIdentifier | null>(null)
+// Created to help selectedAccount reactivity.
+// Use it to detected switches on selectedAccount
+export const selectedAccountId = writable<AccountIdentifier | null>(null)
 
-export const selectedAccount = derived([_selectedAccountId, get(wallet).accounts], ([$_selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $_selectedAccountId)
+export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $selectedAccountId)
 )
-export const setSelectedAccount = (id: AccountIdentifier): void => _selectedAccountId.set(id)
+export const setSelectedAccount = (id: AccountIdentifier): void => selectedAccountId.set(id)
 export const getAccountById = (id: AccountIdentifier): WalletAccount | null => {
     const accounts = get(wallet)?.accounts
     return get(accounts)?.find((account) => account.id === id) || null

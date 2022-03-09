@@ -60,6 +60,8 @@ export { default as Drawer } from './Drawer.svelte'
 export { default as QRScanner } from './QRScanner.svelte'
 export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
+export { default as AccountSwitcher } from './AccountSwitcher.svelte'
+export { default as SidebarTab } from './SidebarTab.svelte'
 
 export * from './modals'
 // Charts

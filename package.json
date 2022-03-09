@@ -1,10 +1,11 @@
 {
     "private": true,
     "workspaces": [
+        "packages/backend/bindings/capacitor",
+        "packages/backend/bindings/node",
         "packages/desktop",
-        "packages/shared",
         "packages/mobile",
-        "packages/backend/bindings/node"
+        "packages/shared"
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
@@ -34,7 +35,8 @@
     "resolutions": {
         "lodash": ">=4.17.21",
         "ansi-regex": "5.0.1",
-        "glob-parent": " >=5.1.2"
+        "glob-parent": " >=5.1.2",
+        "node-abi": "^3.8.0"
     },
     "lint-staged": {
         "*.{ts,js,scss,css,svelte}": "eslint --cache --fix",
