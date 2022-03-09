@@ -24,12 +24,13 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void initialize(final PluginCall call) {
         if (isInitialized) return;
-        if (!call.getData().has("actorId")) {
-            call.reject("actorId is required");
+        if (!call.getData().has("actorId") || !call.getData().has("storagePath")) {
+            call.reject("actorId & storagePath are required");
             return;
         }
         String actorId = call.getString("actorId");
-        String dbPath = getContext().getFilesDir() + "/database";
+        String storagePath = call.getString("storagePath");
+        String dbPath = getContext().getFilesDir() + storagePath;
 
         final ActorCallback callback = response -> {
             JSObject walletResponse = new JSObject();
