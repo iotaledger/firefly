@@ -1,10 +1,10 @@
 import { get, writable } from 'svelte/store'
 import { asyncGetNodeInfo, wallet } from './wallet'
 import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions } from './network'
-import type { NetworkStatus } from './typings/network'
+import { NetworkStatus } from './typings/network'
 import { NetworkStatusHealthText } from './typings/network'
 import { activeProfile } from './profile'
-import type { Node, NodePlugin } from './typings/node'
+import { Node, NodePlugin } from './typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from './time'
 
 export const NETWORK_HEALTH_COLORS = {

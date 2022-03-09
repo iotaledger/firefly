@@ -1003,6 +1003,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "firefly-actor-system"
+version = "0.1.0"
+dependencies = [
+ "bee-common 0.4.1",
+ "iota-wallet",
+ "log",
+ "once_cell",
+ "riker",
+ "sentry",
+ "serde 1.0.136",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "flate2"
 version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2018,13 +2033,13 @@ dependencies = [
 name = "node-neon"
 version = "0.1.0"
 dependencies = [
+ "firefly-actor-system",
  "futures",
  "neon",
  "neon-build",
  "once_cell",
  "serde_json",
  "tokio",
- "wallet-actor-system",
 ]
 
 [[package]]
@@ -3537,21 +3552,6 @@ dependencies = [
  "same-file",
  "winapi",
  "winapi-util",
-]
-
-[[package]]
-name = "wallet-actor-system"
-version = "0.1.0"
-dependencies = [
- "bee-common 0.4.1",
- "iota-wallet",
- "log",
- "once_cell",
- "riker",
- "sentry",
- "serde 1.0.136",
- "serde_json",
- "tokio",
 ]
 
 [[package]]

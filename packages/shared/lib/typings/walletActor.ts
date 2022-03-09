@@ -1,6 +1,6 @@
-import type { IActorHandler } from './bridge'
-import type { LoggerConfig } from './wallet'
-import type { IWalletApi } from './walletApi'
+import { IActorHandler } from './bridge'
+import { LoggerConfig } from './wallet'
+import { IWalletApi } from './walletApi'
 
 export interface IWalletActor {
     api: IWalletApi

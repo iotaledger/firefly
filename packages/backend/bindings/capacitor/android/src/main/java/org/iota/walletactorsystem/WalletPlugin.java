@@ -1,4 +1,4 @@
-package org.iota.walletactorsystem;
+package org.iota.fireflyactorsystem;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -30,13 +30,13 @@ public class WalletPlugin extends Plugin {
         }
         String actorId = call.getString("actorId");
         String dbPath = getContext().getFilesDir() + "/database";
-        
+
         final ActorCallback callback = response -> {
             JSObject walletResponse = new JSObject();
             walletResponse.put("walletResponse", response);
             notifyListeners("walletEvent", walletResponse);
         };
-        
+
         call.setKeepAlive(true);
         Actor.iotaInitialize(callback, actorId, dbPath);
         isInitialized = true;
@@ -49,7 +49,7 @@ public class WalletPlugin extends Plugin {
                 call.reject("message is required");
                 return;
             }
-            
+
             Actor.iotaSendMessage(call.getObject("message").toString());
             call.resolve();
         } catch (Exception ex) {
@@ -69,7 +69,7 @@ public class WalletPlugin extends Plugin {
                 return;
             }
             String actorId = call.getString("actorId");
-            
+
             Actor.iotaDestroy(actorId);
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));

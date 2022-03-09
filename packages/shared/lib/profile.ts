@@ -16,10 +16,10 @@ import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import type { ValuesOf } from './typings/utils'
-import type { Profile, UserSettings } from './typings/profile'
-import type { WalletAccount } from './typings/wallet'
-import type { Locale } from './typings/i18n'
+import { ValuesOf } from './typings/utils'
+import { Profile, UserSettings } from './typings/profile'
+import { WalletAccount } from './typings/wallet'
+import { Locale } from './typings/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 

@@ -19,7 +19,7 @@
         routerPrevious,
         walletRoute,
     } from 'shared/lib/router'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy, onMount } from 'svelte'
     import {
