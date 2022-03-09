@@ -1,6 +1,6 @@
-import { Router } from 'shared/lib/core/router/router'
-import { SettingsRoutes } from '@core/router/enum/routes'
 import { get, writable } from 'svelte/store'
+import { Router } from './router'
+import { SettingsRoutes } from '@core/router'
 
 export const settingsRouter = writable<SettingsRouter>(null)
 export const settingsRoute = writable<SettingsRoutes>(null)

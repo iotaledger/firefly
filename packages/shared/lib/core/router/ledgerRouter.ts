@@ -1,9 +1,8 @@
-import { LedgerRoutes } from '@core/router/enum/routes'
-import { Router } from 'shared/lib/core/router/router'
 import { get, writable } from 'svelte/store'
-import { walletSetupType } from '@core/router'
-import { appRouter } from 'shared/lib/core/router/appRouter'
+import { appRouter, LedgerRoutes } from '@core/router'
+import { Router } from './router'
 import { SetupType } from 'shared/lib/typings/setup'
+import { walletSetupType } from 'shared/lib/wallet'
 
 export const ledgerRoute = writable<LedgerRoutes>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)

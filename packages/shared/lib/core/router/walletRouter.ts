@@ -1,6 +1,6 @@
-import { Router } from 'shared/lib/core/router/router'
-import { WalletRoutes } from '@core/router/enum/routes'
 import { writable } from 'svelte/store'
+import { WalletRoutes } from '@core/router'
+import { Router } from './router'
 
 export const walletRoute = writable<WalletRoutes>(null)
 export const walletRouter = writable<WalletRouter>(null)

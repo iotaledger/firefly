@@ -17,7 +17,6 @@ import { ParticipationAction, PendingParticipation } from './participation/types
 import { Platform } from './platform'
 import { openPopup } from './popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
-import { walletSetupType } from './core/router/helper'
 import { WALLET, WalletApi } from './shell/walletApi'
 import { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
@@ -125,8 +124,8 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
+export const walletSetupType = writable<SetupType>(null)
 export const selectedAccountId = writable<string | null>(null)
-
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)

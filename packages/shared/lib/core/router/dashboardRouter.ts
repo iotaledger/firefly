@@ -1,5 +1,5 @@
-import { DashboardRoutes } from '@core/router/enum/routes'
-import { Router } from 'shared/lib/core/router/router'
+import { DashboardRoutes } from '@core/router'
+import { Router } from './router'
 import { writable } from 'svelte/store'
 
 export const dashboardRouter = writable<DashboardRouter>(null)
