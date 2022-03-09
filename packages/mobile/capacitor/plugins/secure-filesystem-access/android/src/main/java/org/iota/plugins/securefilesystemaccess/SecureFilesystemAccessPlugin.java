@@ -106,7 +106,13 @@ public class SecureFilesystemAccessPlugin extends Plugin {
 
     @PluginMethod
     public void removeProfileFolder(PluginCall call) throws IOException {
-        File toDelete = new File(getContext().getFilesDir(), "__storage__");
+        if (!call.getData().has("folder")) {
+            call.reject("folder is required");
+            return;
+        }
+        String folder = call.getString("folder");
+        assert folder != null;
+        File toDelete = new File(getContext().getFilesDir(), folder);
         deleteRecursively(toDelete);
         call.resolve();
     }
@@ -115,7 +121,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         boolean isDeleted;
         if (file.isFile()) {
             isDeleted = file.delete();
-            if (isDeleted) {
+            if (!isDeleted) {
                 throw new IOException("Can't delete file");
             }
             return;
@@ -124,7 +130,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             deleteRecursively(f);
         }
         isDeleted = file.delete();
-        if (isDeleted) {
+        if (!isDeleted) {
             throw new IOException("Can't delete folder");
         }
     }
