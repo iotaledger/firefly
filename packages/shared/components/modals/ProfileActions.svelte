@@ -24,6 +24,11 @@
 
     $: profileName = $activeProfile?.name
     $: profileInitial = getInitials(profileName, 1)
+    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
+    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+    $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+    $: backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
+    $: backupColor = getBackupWarningColor(lastBackupDate)
 
     $: if ($isLedgerProfile && $ledgerDeviceState) {
         updateLedgerConnectionText()
@@ -98,12 +103,6 @@
             },
         })
     }
-
-    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
-    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
-    $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
-    $: backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
-    $: backupColor = getBackupWarningColor(lastBackupDate)
 </script>
 
 <Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-80">
