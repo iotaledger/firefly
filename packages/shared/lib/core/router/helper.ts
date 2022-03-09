@@ -37,7 +37,7 @@ export const walletSetupType = writable<SetupType>(null)
 /**
  * Navigate to initial route
  */
-export const initRouter = (): void => {
+export const initRouters = (): void => {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     ledgerRouter.set(new LedgerRouter())
@@ -56,7 +56,7 @@ export const routerPrevious = (): void => {
     get(appRouter).previous()
 }
 
-export const resetRouter = (): void => {
+export const resetRouters = (): void => {
     get(appRouter).reset()
     get(dashboardRouter).reset()
     get(walletRouter).reset()

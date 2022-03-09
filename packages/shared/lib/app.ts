@@ -8,7 +8,7 @@ import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouter } from './core/router'
+import { resetRouters } from '@core/router'
 import { api, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
@@ -104,7 +104,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
-            resetRouter()
+            resetRouters()
 
             resolve()
         }
