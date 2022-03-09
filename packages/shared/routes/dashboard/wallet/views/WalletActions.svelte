@@ -1,16 +1,15 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable } from 'svelte/store'
     import { AccountTile, Button, Drawer, Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRouter, walletRoute, walletRouter } from '@core/router'
+    import { accountRouter, AccountRoutes, walletRoute, walletRouter, WalletRoutes } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, WalletRoutes } from '@core/router/enum/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
 
     export let locale: Locale

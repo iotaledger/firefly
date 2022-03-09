@@ -6,12 +6,17 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { resetWalletRoute } from '@core/router'
-    import { settingsRoute, settingsRouter } from 'shared/lib/core/router/settingsRouter'
-    import { dashboardRoute, dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
+    import {
+        dashboardRoute,
+        dashboardRouter,
+        DashboardRoutes,
+        resetWalletRoute,
+        settingsRoute,
+        settingsRouter,
+        SettingsRoutes,
+    } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { DashboardRoutes, SettingsRoutes } from '@core/router/enum/routes'
 
     export let locale: Locale
 

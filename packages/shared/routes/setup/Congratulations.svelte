@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
@@ -19,16 +21,13 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { walletSetupType } from '@core/router'
-    import { ledgerRouter } from 'shared/lib/core/router/ledgerRouter'
+    import { ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { SetupType } from '@core/router/enum/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getProfileDataPath } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

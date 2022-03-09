@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { Transition } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
@@ -9,13 +11,11 @@
         asyncStoreMnemonic,
         asyncCreateAccount,
     } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
     import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { walletSetupType } from '@core/router'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
     import { mnemonic } from 'shared/lib/app'
-    import { SetupType } from '@core/router/enum/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale

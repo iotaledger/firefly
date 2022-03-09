@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
+    import { onMount } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { mobile } from 'shared/lib/app'
@@ -8,9 +9,8 @@
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { initRouters, routerNext, routerPrevious } from '@core/router'
+    import { AppRoute, initRouters, routerNext, routerPrevious } from '@core/router'
     import { Platforms } from 'shared/lib/typings/platform'
-    import { AppRoute } from '@core/router/enum/routes'
     import {
         Appearance,
         Backup,
@@ -31,7 +31,6 @@
         Settings,
         Welcome,
     } from 'shared/routes'
-    import { onMount } from 'svelte'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
 

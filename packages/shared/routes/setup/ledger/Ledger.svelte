@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { ledgerRoute, ledgerRouter } from 'shared/lib/core/router/ledgerRouter'
-    import { LedgerRoutes } from '@core/router/enum/routes'
+    import { ledgerRoute, ledgerRouter, LedgerRoutes } from '@core/router'
     import { onMount } from 'svelte'
     import {
         AccountIndex,

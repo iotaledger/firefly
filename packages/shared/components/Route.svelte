@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { AppRoute } from '@core/router/enum/routes'
+    import { appRoute, AppRoute } from '@core/router'
     import { Transition } from 'shared/components'
-    import { appRoute } from 'shared/lib/core/router/appRouter'
 
     export let transition = true
     export let route: AppRoute

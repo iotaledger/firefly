@@ -22,7 +22,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { walletRouter } from '@core/router'
+    import { accountRouter, walletRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -41,7 +41,6 @@
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
-    import { accountRouter } from 'shared/lib/core/router/accountRouter'
 
     export let locale: Locale
     export let onSend = (..._: any[]): void => {}

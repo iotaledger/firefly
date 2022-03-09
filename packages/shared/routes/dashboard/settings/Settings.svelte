@@ -2,11 +2,9 @@
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { isLocaleLoaded } from 'shared/lib/i18n'
-    import { dashboardRouter } from 'shared/lib/core/router/dashboardRouter'
-    import { SettingsRoutes } from '@core/router/enum/routes'
+    import { dashboardRouter, settingsRouter, settingsRoute, SettingsRoutes } from '@core/router'
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
-    import { settingsRouter, settingsRoute } from 'shared/lib/core/router/settingsRouter'
 
     export let handleClose: () => void
 

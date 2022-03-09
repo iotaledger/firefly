@@ -1,13 +1,12 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
     import { appSettings } from 'shared/lib/appSettings'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { dashboardRoute } from 'shared/lib/core/router/dashboardRouter'
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
-    import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { DashboardRoutes } from '@core/router/enum/routes'
+    import { dashboardRoute, DashboardRoutes } from '@core/router'
 
     const { accountsLoaded } = $wallet
 

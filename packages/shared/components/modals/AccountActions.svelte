@@ -1,15 +1,13 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { get, Readable } from 'svelte/store'
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRouter, resetWalletRoute } from '@core/router'
-    import { AccountRoutes } from '@core/router/enum/routes'
+    import { accountRouter, AccountRoutes, resetWalletRoute } from '@core/router'
     import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { get } from 'svelte/store'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
     export let locale: Locale

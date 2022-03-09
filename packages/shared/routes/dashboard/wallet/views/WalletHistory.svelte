@@ -1,13 +1,14 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { get, Readable, Writable } from 'svelte/store'
     import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter, walletRouter, walletSetupType } from '@core/router'
+    import { accountRouter, AccountRoutes, walletRouter, WalletRoutes } from '@core/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, WalletRoutes } from '@core/router/enum/routes'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
@@ -18,10 +19,8 @@
         isSyncing,
         selectedAccountId,
         selectedMessage,
+        walletSetupType,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
-    import { get } from 'svelte/store'
     import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale

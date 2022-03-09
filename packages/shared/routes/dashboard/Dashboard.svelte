@@ -19,8 +19,15 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRouter } from 'shared/lib/core/router/accountRouter'
-    import { dashboardRoute, dashboardRouter, walletRoute, walletRouter, routerNext } from '@core/router'
+    import {
+        accountRouter,
+        dashboardRoute,
+        dashboardRouter,
+        walletRoute,
+        walletRouter,
+        settingsRouter,
+        routerNext,
+    } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         AccountRoutes,
@@ -37,7 +44,6 @@
         wallet,
     } from 'shared/lib/wallet'
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
-    import { settingsRouter } from 'shared/lib/core/router/settingsRouter'
 
     export let locale: Locale
 

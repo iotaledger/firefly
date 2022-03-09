@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Button, Input, Text, AccountTile, ColorPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { accountRouter } from '@core/router'
-    import { AccountRoutes } from '@core/router/enum/routes'
+    import { accountRouter, AccountRoutes } from '@core/router'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'

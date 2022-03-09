@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount, setContext } from 'svelte'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { DashboardPane, Drawer } from 'shared/components'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
@@ -13,12 +15,11 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute, walletRouter } from 'shared/lib/core/router/walletRouter'
+    import { walletRoute, walletRouter, WalletRoutes } from '@core/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { MigratedTransaction } from 'shared/lib/typings/profile'
-    import { WalletRoutes } from '@core/router/enum/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -50,8 +51,6 @@
         wallet,
         addMessagesPair,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'

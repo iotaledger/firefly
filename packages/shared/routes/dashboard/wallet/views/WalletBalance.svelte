@@ -1,13 +1,12 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable, Writable } from 'svelte/store'
     import { BalanceSummary, Button } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { walletRoute, walletRouter } from '@core/router'
+    import { walletRoute, walletRouter, WalletRoutes } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletRoutes } from '@core/router/enum/routes'
     import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
-    import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 

@@ -1,14 +1,13 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable } from 'svelte/store'
     import { AccountActionsModal, DashboardPane } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
-    import { accountRoute } from 'shared/lib/core/router/accountRouter'
-    import { AccountRoutes } from '@core/router/enum/routes'
+    import { accountRoute, AccountRoutes } from '@core/router'
 
     export let locale: Locale
 

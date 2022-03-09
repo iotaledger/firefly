@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { settingsRouter, settingsRoute } from 'shared/lib/core/router/settingsRouter'
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize, _ } from 'shared/lib/i18n'
@@ -14,7 +13,9 @@
         SecuritySettings,
         SettingsRoutes,
         SettingsRoutesNoProfile,
-    } from '@core/router/enum/routes'
+        settingsRouter,
+        settingsRoute,
+    } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
 

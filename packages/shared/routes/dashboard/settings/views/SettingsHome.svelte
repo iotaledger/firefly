@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { settingsRouter } from 'shared/lib/core/router/settingsRouter'
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
@@ -13,7 +12,8 @@
         HelpAndInfo,
         SecuritySettings,
         SettingsRoutes,
-    } from '@core/router/enum/routes'
+        settingsRouter,
+    } from '@core/router'
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)

@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
@@ -19,13 +20,12 @@
         unselectedInputs,
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { walletSetupType } from '@core/router'
-    import { SetupType } from '@core/router/enum/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

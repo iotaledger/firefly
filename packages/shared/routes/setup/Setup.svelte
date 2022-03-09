@@ -1,16 +1,16 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Platform } from 'shared/lib/platform'
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { SetupType } from '@core/router/enum/routes'
-    import { createEventDispatcher } from 'svelte'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(setupType) {
+    function handleContinueClick(setupType: SetupType) {
         dispatch('next', { setupType })
     }
     function handleBackClick() {
