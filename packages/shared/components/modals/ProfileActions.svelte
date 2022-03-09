@@ -49,8 +49,9 @@
         }
     }
 
-    let isCheckingLedger: boolean = false
-    let _isLedgerConnected: boolean = false
+    let isCheckingLedger = false
+    let _isLedgerConnected = false
+
     function syncLedgerDeviceStatus() {
         isCheckingLedger = true
         const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
