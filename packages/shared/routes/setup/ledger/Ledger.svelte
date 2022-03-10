@@ -1,8 +1,8 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
     import { ledgerRoute, ledgerRouter, LedgerRoutes } from '@core/router'
-    import { onMount } from 'svelte'
     import {
         AccountIndex,
         Connect,
@@ -43,41 +43,36 @@
         }
     }
 
-    const _next = (event: CustomEvent) => {
-        $ledgerRouter.next(event)
-    }
-
-    const _previous = () => {
-        $ledgerRouter.previousIfPossible()
-    }
+    const next = (event: CustomEvent): void => $ledgerRouter.next(event)
+    const previous = (): void => $ledgerRouter.previousIfPossible()
 </script>
 
 {#if $ledgerRoute === LedgerRoutes.Connect}
     <Transition>
-        <Connect on:next={_next} on:previous={_previous} {locale} />
+        <Connect on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.RestoreFromLedger}
     <Transition>
-        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} />
+        <RestoreFromLedger on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.LegacyIntro}
     <Transition>
-        <LegacyIntro on:next={_next} on:previous={_previous} {locale} />
+        <LegacyIntro on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.InstallationGuide}
     <Transition>
-        <InstallationGuide on:next={_next} on:previous={_previous} {locale} />
+        <InstallationGuide on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.GenerateAddress}
     <Transition>
-        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} />
+        <GenerateNewAddress on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.SwitchApps}
     <Transition>
-        <SwitchApps on:next={_next} on:previous={_previous} {locale} />
+        <SwitchApps on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $ledgerRoute === LedgerRoutes.AccountIndex}
     <Transition>
-        <AccountIndex on:next={_next} on:previous={_previous} {locale} />
+        <AccountIndex on:next={next} on:previous={previous} {locale} />
     </Transition>
 {/if}

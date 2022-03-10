@@ -209,7 +209,7 @@
             <Dashboard locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+            <Login locale={$_} {goto} />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />

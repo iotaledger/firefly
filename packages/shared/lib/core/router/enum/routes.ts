@@ -120,3 +120,8 @@ export enum ExternalRoute {
     FAQ = 'https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting',
     IssueReport = 'https://github.com/iotaledger/firefly/issues',
 }
+
+export enum LoginRoutes {
+    Init = 'init',
+    EnterPin = 'enterPin',
+}
