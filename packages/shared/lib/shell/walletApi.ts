@@ -1,5 +1,5 @@
 import Validator from 'shared/lib/validator'
-import type {
+import {
     CreatedAccountResponse,
     LatestAddressResponse,
     MessageResponse,
@@ -8,15 +8,15 @@ import type {
     SyncAccountsResponse,
 } from '../typings/bridge'
 import { ResponseTypes } from '../typings/bridge'
-import type { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
+import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
 import { NodePlugin } from '../typings/node'
-import type { IWalletApi } from 'shared/lib/typings/walletApi'
-import type { IWalletActor } from '../typings/walletActor'
+import { IWalletApi } from 'shared/lib/typings/walletApi'
+import { IWalletActor } from '../typings/walletActor'
 
 export const WALLET: IWalletActor = window['__WALLET__']
 
