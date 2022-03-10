@@ -1,8 +1,6 @@
 <script lang="typescript">
-    import { fade } from 'svelte/transition'
-    import { Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
+    import { Button, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -12,7 +10,8 @@
     import { LocaleArgs } from 'shared/lib/typings/i18n'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
+    import { fade } from 'svelte/transition'
 
     export let isActive: boolean
 
@@ -27,8 +26,8 @@
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
-    $: backupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
-    $: backupColor = getBackupWarningColor(lastBackupDate)
+    $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
+    $: backupWarningColor = getBackupWarningColor(lastBackupDate)
 
     $: if ($isLedgerProfile && $ledgerDeviceState) {
         updateLedgerConnectionText()
@@ -116,11 +115,12 @@
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
         </div>
+        <HR />
         {#if $isSoftwareProfile}
             <HR />
             <div class="items-center p-3">
-                <div class="flex items-center justify-between bg-{backupColor}-100 p-3 rounded">
-                    <Icon icon={backupSafe ? 'shield' : 'warning'} boxed classes="text-{backupColor}-500" />
+                <div class="flex items-center justify-between bg-{backupWarningColor}-100 p-3 rounded">
+                    <Icon icon={isBackupSafe ? 'shield' : 'warning'} boxed classes="text-{backupWarningColor}-500" />
                     <div class="ml-2 mr-auto">
                         <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
                         <Text type="p" overrideColor classes="text-gray-500 -mt-1">
@@ -131,12 +131,38 @@
                                 : localize('popups.backup.notBackedUp')}
                         </Text>
                     </div>
-                    <Button secondary xsmall onClick={handleBackupClick}
-                        ><Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text></Button
-                    >
+                    <Button secondary xsmall onClick={handleBackupClick}>
+                        <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
+                    </Button>
                 </div>
             </div>
-            <HR />
+            {#if !isBackupSafe}
+                <div class="items-center p-3">
+                    <div
+                        class="flex items-center space-x-2 justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded"
+                    >
+                        <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
+                        <div>
+                            <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
+                            <Text type="p" overrideColor classes="text-gray-500">
+                                {$activeProfile?.lastStrongholdBackupTime
+                                    ? localize('views.dashboard.profileModal.backup.lastBackup', {
+                                          values: {
+                                              date: localize(`dates.${lastBackupDateFormatted.unit}`, {
+                                                  values: { time: lastBackupDateFormatted.value },
+                                              }),
+                                          },
+                                      })
+                                    : localize('views.dashboard.profileModal.backup.notBackedUp')}
+                            </Text>
+                        </div>
+                        <Button secondary xsmall onClick={handleBackupClick}>
+                            <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
+                        </Button>
+                    </div>
+                </div>
+                <HR />
+            {/if}
             <div class="flex justify-between items-center p-3">
                 <div class="flex items-center">
                     <Icon
@@ -156,7 +182,6 @@
                 </div>
                 <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
             </div>
-        {:else}
             <HR />
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
@@ -182,7 +207,6 @@
                 </button>
             </div>
         {/if}
-        <HR />
         <button
             on:click={() => handleSettingsClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
