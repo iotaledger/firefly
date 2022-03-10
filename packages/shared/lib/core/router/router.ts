@@ -2,7 +2,6 @@ import { get, Writable } from 'svelte/store'
 import { FireflyEvent } from '@core/router/typings/event'
 
 export abstract class Router<Route> {
-    // TODO make protected
     protected history: Route[] = []
     protected readonly routeStore: Writable<Route>
 

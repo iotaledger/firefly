@@ -106,12 +106,4 @@ export class ImportRouter extends Router<ImportRoutes> {
             this.setNext(nextRoute)
         }
     }
-
-    previous(): void {
-        if (this.history.length === 0) {
-            get(appRouter).previous()
-        } else {
-            super.previous()
-        }
-    }
 }

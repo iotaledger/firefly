@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { LoginRoutes } from '@core/router'
-    import { loginRoute, LoginRouter } from '@core/router/loginRouter'
+    import { loginRoute, LoginRouter, LoginRoutes } from '@core/router'
     import { FireflyEvent } from '@core/router/typings/event'
 
     import { Transition } from 'shared/components'

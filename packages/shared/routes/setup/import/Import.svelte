@@ -5,8 +5,7 @@
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
-    import { importRoute, ImportRouter } from '@core/router/importRouter'
-    import { ImportRoutes } from '@core/router'
+    import { importRoute, ImportRouter, ImportRoutes } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
     import { FireflyEvent } from '@core/router/typings/event'
 

@@ -1,14 +1,14 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, LedgerRoutes } from '@core/router'
-import { Router } from './router'
 import { SetupType } from 'shared/lib/typings/setup'
 import { walletSetupType } from 'shared/lib/wallet'
 import { FireflyEvent } from '@core/router/typings/event'
+import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const ledgerRoute = writable<LedgerRoutes>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)
 
-export class LedgerRouter extends Router<LedgerRoutes> {
+export class LedgerRouter extends Subrouter<LedgerRoutes> {
     constructor() {
         super(LedgerRoutes.LegacyIntro, ledgerRoute)
     }
@@ -63,14 +63,6 @@ export class LedgerRouter extends Router<LedgerRoutes> {
 
         if (nextRoute) {
             this.setNext(nextRoute)
-        }
-    }
-
-    previousIfPossible(): void {
-        if (this.history.length === 0) {
-            get(appRouter).previous()
-        } else {
-            this.previous()
         }
     }
 }

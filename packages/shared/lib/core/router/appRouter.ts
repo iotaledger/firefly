@@ -32,7 +32,7 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
-    public next(event: FireflyEvent): void {
+    public next(event?: FireflyEvent): void {
         // TODO: only handle route changes, not app variables
         const params = event || {}
         const currentRoute = get(this.routeStore)

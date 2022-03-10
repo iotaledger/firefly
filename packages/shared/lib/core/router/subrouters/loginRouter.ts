@@ -32,11 +32,4 @@ export class LoginRouter extends Router<LoginRoutes> {
             this.setNext(nextRoute)
         }
     }
-
-    previous(): void {
-        super.previous()
-        if (this.history.length === 0) {
-            get(appRouter).previous()
-        }
-    }
 }

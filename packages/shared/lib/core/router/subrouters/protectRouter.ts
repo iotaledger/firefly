@@ -63,12 +63,4 @@ export class ProtectRouter extends Router<ProtectRoutes> {
             this.setNext(nextRoute)
         }
     }
-
-    previous(): void {
-        if (this.history.length === 0) {
-            get(appRouter).previous()
-        } else {
-            super.previous()
-        }
-    }
 }

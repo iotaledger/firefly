@@ -7,10 +7,11 @@ import { Platform } from 'shared/lib/platform'
 import { getDefaultStrongholdName } from 'shared/lib/utils'
 import { updateProfile } from 'shared/lib/profile'
 import { FireflyEvent } from '@core/router/typings/event'
+import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const backupRoute = writable<BackupRoutes>(null)
 
-export class BackupRouter extends Router<BackupRoutes> {
+export class BackupRouter extends Subrouter<BackupRoutes> {
     constructor() {
         super(BackupRoutes.Init, backupRoute)
     }
@@ -51,14 +52,6 @@ export class BackupRouter extends Router<BackupRoutes> {
         }
         if (nextRoute) {
             this.setNext(nextRoute)
-        }
-    }
-
-    previous(): void {
-        if (this.history.length === 0) {
-            get(appRouter).previous()
-        } else {
-            super.previous()
         }
     }
 }
