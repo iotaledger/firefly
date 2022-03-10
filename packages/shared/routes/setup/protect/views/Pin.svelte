@@ -18,7 +18,7 @@
     function onSubmit() {
         error = ''
         if (validatePinFormat(pinInput)) {
-            dispatch('next', { pinCandidate: pinInput })
+            dispatch('next', { pin: pinInput })
         }
     }
     function handleBackClick() {

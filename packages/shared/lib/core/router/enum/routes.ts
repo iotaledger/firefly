@@ -141,3 +141,10 @@ export enum ImportRoutes {
     BackupPassword = 'backupPassword',
     Success = 'Success',
 }
+
+export enum ProtectRoutes {
+    Init = 'init',
+    Biometric = 'biometric',
+    Pin = 'pin',
+    RepeatPin = 'repeatPin',
+}
