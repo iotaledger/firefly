@@ -461,22 +461,6 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
-                },
-                "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
-                },
-                "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
-                }
-            },
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
