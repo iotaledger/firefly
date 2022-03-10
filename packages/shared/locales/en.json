@@ -496,8 +496,8 @@
                     "button": "Backup"
                 },
                 "version": {
-                    "title": "Version",
-                    "titleUpdate": "New update available",
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
                     "button": "Update"
                 }
             }

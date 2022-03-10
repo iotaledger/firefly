@@ -18,7 +18,6 @@
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $versionDetails.upToDate
-    const versionColor = isUpToDate ? 'blue' : 'yellow'
 
     let isLedgerConnected = false
     let isCheckingLedger = false
@@ -123,25 +122,25 @@
             {/if}
         </div>
         <HR />
-        <div class="items-center p-3">
-            <div class="flex items-center justify-between bg-{versionColor}-100 p-3 rounded">
-                <Icon icon={isUpToDate ? 'firefly' : 'warning'} boxed classes="text-{versionColor}-500" />
-                <div class="ml-2 mr-auto">
-                    <Text type="p"
-                        >{localize(`views.dashboard.profileModal.version.${isUpToDate ? 'title' : 'titleUpdate'}`)}</Text
-                    >
-                    <Text type="p" overrideColor classes="text-gray-500 -mt-1">
-                        {localize(`views.dashboard.security.version.${isUpToDate ? 'upToDate' : 'outOfDate'}`)}
-                    </Text>
-                </div>
-                {#if !isUpToDate}
+        {#if !isUpToDate}
+            <div class="items-center p-3">
+                <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded">
+                    <Icon icon="warning" boxed classes="text-blue-500" />
+                    <div class="ml-2 mr-auto">
+                        <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
+                            {localize('views.dashboard.security.version.title', {
+                                values: { version: $versionDetails.newVersion },
+                            })}
+                        </Text>
+                    </div>
                     <Button secondary xsmall onClick={handleVersionUpdateClick}
                         ><Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
                     </Button>
-                {/if}
+                </div>
             </div>
-        </div>
-        <HR />
+            <HR />
+        {/if}
         {#if $isSoftwareProfile}
             <HR />
             <div class="items-center p-3">
