@@ -132,3 +132,12 @@ export enum BackupRoutes {
     Verify = 'verify',
     Backup = 'backup',
 }
+
+export enum ImportRoutes {
+    Init = 'init',
+    TextImport = 'textImport',
+    FileImport = 'fileImport',
+    LedgerImport = 'ledgerImport',
+    BackupPassword = 'backupPassword',
+    Success = 'Success',
+}
