@@ -32,7 +32,7 @@ export abstract class Router<IRoute> {
     }
 
     // This function should be implemented in the child router
-    next(_: CustomEvent): void {
+    next(_?: CustomEvent): void {
         throw Error('Unimplemented state machine within custom router!')
     }
 
