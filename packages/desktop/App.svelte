@@ -191,7 +191,7 @@
             <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Backup locale={$_} />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
             <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />

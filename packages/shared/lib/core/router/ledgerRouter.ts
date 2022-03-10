@@ -66,7 +66,7 @@ export class LedgerRouter extends Router<LedgerRoutes> {
     }
 
     previousIfPossible(): void {
-        if (get(this.history).length === 0) {
+        if (this.history.length === 0) {
             get(appRouter).previous()
         } else {
             this.previous()

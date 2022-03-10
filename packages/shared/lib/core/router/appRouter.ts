@@ -27,7 +27,7 @@ export class AppRouter extends Router<AppRoute> {
     }
 
     public reset(): void {
-        this.history.set([])
+        this.history = []
         this.init()
     }
 

@@ -125,3 +125,10 @@ export enum LoginRoutes {
     Init = 'init',
     EnterPin = 'enterPin',
 }
+
+export enum BackupRoutes {
+    Init = 'init',
+    RecoveryPhrase = 'recoveryPhrase',
+    Verify = 'verify',
+    Backup = 'backup',
+}
