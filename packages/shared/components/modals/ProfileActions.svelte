@@ -194,7 +194,7 @@
                         icon={$isStrongholdLocked ? 'lock' : 'unlock'}
                         boxed
                         classes="text-blue-500"
-                        boxClasses="bg-blue-100 mr-3"
+                        boxClasses="bg-blue-100 dark:bg-gray-800 mr-3"
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.stronghold.title')}</Text>
