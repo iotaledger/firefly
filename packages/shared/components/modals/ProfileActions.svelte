@@ -67,7 +67,7 @@
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
             <Text>{profileName}</Text>
-            {#if isLedgerProfile}
+            {#if $isLedgerProfile}
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
         </div>
