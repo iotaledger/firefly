@@ -467,18 +467,6 @@
                     "upToDate": "Up to date",
                     "outOfDate": "Out of date"
                 },
-                "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
-                    }
-                },
                 "strongholdStatus": {
                     "title": "Wallet Status",
                     "locked": "Locked",
@@ -506,9 +494,16 @@
                     "unlocked": "Stronghold unlocked"
                 },
                 "hardware": {
-                    "title": "Hardware device",
-                    "detected": "Device connected",
-                    "notDetected": "Not detected"
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy App Open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
                 }
             }
         },
