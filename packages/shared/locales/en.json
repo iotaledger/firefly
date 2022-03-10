@@ -494,6 +494,11 @@
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
                 }
             }
         },

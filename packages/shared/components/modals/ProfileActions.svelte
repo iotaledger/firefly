@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import { fade } from 'svelte/transition'
+    import { Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
@@ -11,11 +12,12 @@
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
-    import { fade } from 'svelte/transition'
+    import { versionDetails } from 'shared/lib/appUpdater'
 
     export let isActive: boolean
 
     const profileColor = 'blue' // TODO: each profile has a different color
+    const isUpToDate = $versionDetails.upToDate
 
     let isLedgerConnected = false
     let isCheckingLedger = false
@@ -101,6 +103,10 @@
                 lastBackupDateFormatted,
             },
         })
+    }''
+
+    function handleVersionUpdateClick() {
+        openPopup({ type: 'version' })
     }
 </script>
 
@@ -116,6 +122,25 @@
             {/if}
         </div>
         <HR />
+        {#if !isUpToDate}
+            <div class="items-center p-3">
+                <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded">
+                    <Icon icon="warning" boxed classes="text-blue-500" />
+                    <div class="ml-2 mr-auto">
+                        <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
+                            {localize('views.dashboard.security.version.title', {
+                                values: { version: $versionDetails.newVersion },
+                            })}
+                        </Text>
+                    </div>
+                    <Button secondary xsmall onClick={handleVersionUpdateClick}
+                        ><Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
+                    </Button>
+                </div>
+            </div>
+            <HR />
+        {/if}
         {#if $isSoftwareProfile}
             <HR />
             <div class="items-center p-3">
@@ -169,7 +194,7 @@
                         icon={$isStrongholdLocked ? 'lock' : 'unlock'}
                         boxed
                         classes="text-blue-500"
-                        boxClasses="bg-blue-100 mr-3"
+                        boxClasses="bg-blue-100 dark:bg-gray-800 mr-3"
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.stronghold.title')}</Text>
