@@ -1,16 +1,16 @@
 import { get, Writable } from 'svelte/store'
 
-export abstract class Router<IRoute> {
+export abstract class Router<Route> {
     // TODO make protected
-    protected history: IRoute[] = []
-    protected readonly routeStore: Writable<IRoute>
+    protected history: Route[] = []
+    protected readonly routeStore: Writable<Route>
 
-    constructor(protected initialRoute: IRoute, storeRoute: Writable<IRoute>) {
+    constructor(protected initialRoute: Route, storeRoute: Writable<Route>) {
         this.routeStore = storeRoute
         this.setRoute(initialRoute)
     }
 
-    private setRoute(route: IRoute): void {
+    private setRoute(route: Route): void {
         this.routeStore.set(route)
     }
 
@@ -19,7 +19,7 @@ export abstract class Router<IRoute> {
         this.history.push(currentRoute)
     }
 
-    protected setNext(route: IRoute): void {
+    protected setNext(route: Route): void {
         if (route) {
             this.updateHistory()
             this.setRoute(route)
@@ -40,7 +40,7 @@ export abstract class Router<IRoute> {
         }
     }
 
-    goTo(route: IRoute): void {
+    goTo(route: Route): void {
         if (get(this.routeStore) === route) {
             return
         }
