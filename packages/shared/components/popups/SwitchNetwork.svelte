@@ -22,9 +22,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
 
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Network, NetworkConfig } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Network, NetworkConfig } from 'shared/lib/typings/network'
+    import { Node } from 'shared/lib/typings/node'
 
     export let locale: Locale
 

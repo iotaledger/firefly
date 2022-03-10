@@ -1,5 +1,5 @@
 import { formatDate } from './i18n'
-import type { WalletAccount } from './typings/wallet'
+import { WalletAccount } from './typings/wallet'
 import { formatUnitBestMatch } from './units'
 import { localize } from 'shared/lib/i18n'
 

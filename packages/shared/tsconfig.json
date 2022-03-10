@@ -2,8 +2,13 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "baseUrl": "./",
+        "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
-        "outDir": "out"
+        "outDir": "out",
+        "paths": {
+            "@common/*": ["./lib/common/*"],
+            "@core/*": ["./lib/core/*"]
+        }
     },
     "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]

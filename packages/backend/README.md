@@ -15,10 +15,6 @@ Run `yarn` in `firefly/packages/backend/bindings/node` to bundle and build the J
 
 TODO
 
-### C
-
-TODO
-
 ## Other Branches / Commits
 
 The default branch of wallet.rs is `dev`, however to test another branch one follow these steps:

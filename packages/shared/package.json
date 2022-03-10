@@ -46,30 +46,5 @@
         "typescript": "^3.9.5",
         "valid-url": "^1.0.9",
         "zxcvbn": "^4.4.2"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "ts",
-            "js"
-        ],
-        "transform": {
-            "^.+\\.ts$": "ts-jest"
-        },
-        "globals": {
-            "ts-jest": {
-                "tsconfig": "tsconfig.test.json"
-            }
-        },
-        "testEnvironment": "jsdom",
-        "testMatch": [
-            "**/tests/**/*.+(test).+(ts|js)"
-        ],
-        "testPathIgnorePatterns": [
-            "./node_modules/"
-        ],
-        "setupFilesAfterEnv": [
-            "./lib/tests/setup.ts"
-        ],
-        "verbose": true
     }
 }

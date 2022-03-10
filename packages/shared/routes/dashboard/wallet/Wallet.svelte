@@ -17,14 +17,11 @@
         setMissingProfileType,
     } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import type { Message, Transaction } from 'shared/lib/typings/message'
+    import { Message, Transaction } from 'shared/lib/typings/message'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        addMessagesPair,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -41,10 +38,13 @@
         transferState,
         updateBalanceOverview,
         wallet,
+        addMessagesPair,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
 
     let drawer: Drawer
 
@@ -356,6 +356,11 @@
             _internalTransfer()
         }
     }
+
+    // TODO: fix this for mobile
+    // $: if (mobile && drawer && $accountRoute === AccountRoutes.CreateAccount) {
+    //     drawer.open()
+    // }
 
     onMount(() => {
         // If we are in settings when logged out the router reset

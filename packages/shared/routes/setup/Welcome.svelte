@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale
