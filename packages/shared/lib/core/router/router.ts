@@ -1,9 +1,9 @@
-import { get, Writable, writable } from 'svelte/store'
+import { get, Writable } from 'svelte/store'
 
 export abstract class Router<IRoute> {
     // TODO make protected
-    public readonly history = writable<IRoute[]>([])
-    public readonly routeStore: Writable<IRoute>
+    protected history: IRoute[] = []
+    protected readonly routeStore: Writable<IRoute>
 
     constructor(protected initialRoute: IRoute, storeRoute: Writable<IRoute>) {
         this.routeStore = storeRoute
@@ -16,10 +16,7 @@ export abstract class Router<IRoute> {
 
     private updateHistory(): void {
         const currentRoute = get(this.routeStore)
-        this.history.update((history) => {
-            history.push(currentRoute)
-            return history
-        })
+        this.history.push(currentRoute)
     }
 
     protected setNext(route: IRoute): void {
@@ -37,12 +34,7 @@ export abstract class Router<IRoute> {
     }
 
     previous(): void {
-        let previousRoute: IRoute
-        this.history.update((history) => {
-            previousRoute = history.pop()
-            return history
-        })
-
+        const previousRoute = this.history.pop()
         if (previousRoute) {
             this.setRoute(previousRoute)
         }
@@ -56,7 +48,7 @@ export abstract class Router<IRoute> {
     }
 
     reset(): void {
-        this.history.set([])
+        this.history = []
         this.setRoute(this.initialRoute)
     }
 }

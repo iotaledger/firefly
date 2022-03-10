@@ -37,7 +37,7 @@ export class LoginRouter extends Router<LoginRoutes> {
 
     previous(): void {
         super.previous()
-        if (get(this.history).length === 0) {
+        if (this.history.length === 0) {
             get(appRouter).previous()
         }
     }

@@ -16,7 +16,7 @@ export class LedgerRouter extends Router<LedgerRoutes> {
         const setupType = get(walletSetupType)
 
         // reinitialize the init view only if we are not in the middle of a ledger flow
-        if (!get(this.history).length) {
+        if (this.history.length !== 0) {
             if (setupType === SetupType.New || setupType === SetupType.FireflyLedger) {
                 this.setNext(LedgerRoutes.Connect)
             } else {
