@@ -6,6 +6,7 @@
     import { BackupRoutes } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { FireflyEvent } from '@core/router/typings/event'
 
     export let locale: Locale
 
@@ -13,10 +14,10 @@
 
     let busy = false
 
-    async function next(event: CustomEvent): Promise<void> {
+    async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await backupRouter.next(event)
+            await backupRouter.next(event.detail)
         } catch (err) {
             showAppNotification({
                 type: 'error',

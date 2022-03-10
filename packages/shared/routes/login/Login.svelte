@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { LoginRoutes } from '@core/router'
     import { loginRoute, LoginRouter } from '@core/router/loginRouter'
+    import { FireflyEvent } from '@core/router/typings/event'
 
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
@@ -21,7 +22,7 @@
         }
     })
 
-    const next = (event: CustomEvent): void => loginRouter.next(event)
+    const next = (event: CustomEvent<FireflyEvent>): void => loginRouter.next(event.detail)
     const previous = (): void => loginRouter.previous()
 </script>
 

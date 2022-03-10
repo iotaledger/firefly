@@ -6,6 +6,7 @@ import { Router } from './router'
 import { AppRoute } from '@core/router'
 import { SetupType } from 'shared/lib/typings/setup'
 import { walletSetupType } from 'shared/lib/wallet'
+import { FireflyEvent } from '@core/router/typings/event'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -31,18 +32,15 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
-    public next(event: CustomEvent): void {
+    public next(event: FireflyEvent): void {
         // TODO: only handle route changes, not app variables
-        const params = event.detail || {}
+        const params = event || {}
         const currentRoute = get(this.routeStore)
-
         let nextRoute: AppRoute
 
         switch (currentRoute) {
             case AppRoute.Login: {
-                const { shouldAddProfile } = params
-
-                if (shouldAddProfile) {
+                if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Profile
                 } else {
                     login()
@@ -51,9 +49,7 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Dashboard: {
-                const { reset } = params
-
-                if (reset) {
+                if (params.reset) {
                     nextRoute = AppRoute.Login
                 }
                 break
@@ -134,16 +130,17 @@ export class AppRouter extends Router<AppRoute> {
                 }
                 break
             case AppRoute.Import: {
+                const { setupType } = params
+                walletSetupType.set(setupType)
+
                 nextRoute = AppRoute.Congratulations
-                const { importType } = params
-                walletSetupType.set(importType)
-                if (importType === SetupType.Mnemonic) {
+                if (setupType === SetupType.Mnemonic) {
                     nextRoute = AppRoute.Secure
                 } else if (
-                    [SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(importType)
+                    [SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(setupType)
                 ) {
                     nextRoute = AppRoute.Protect
-                } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
+                } else if (setupType === SetupType.Seed || setupType === SetupType.Seedvault) {
                     nextRoute = AppRoute.Balance
                 }
                 break
@@ -170,7 +167,6 @@ export class AppRouter extends Router<AppRoute> {
                 login()
 
                 nextRoute = AppRoute.Dashboard
-
                 break
         }
         this.setNext(nextRoute)

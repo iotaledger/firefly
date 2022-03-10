@@ -1,4 +1,5 @@
 import { get, Writable } from 'svelte/store'
+import { FireflyEvent } from '@core/router/typings/event'
 
 export abstract class Router<Route> {
     // TODO make protected
@@ -29,7 +30,7 @@ export abstract class Router<Route> {
     }
 
     // This function should be implemented in the child router
-    next(_?: CustomEvent): void {
+    next(_?: FireflyEvent): void {
         throw Error('Unimplemented state machine within custom router!')
     }
 

@@ -17,6 +17,7 @@ import {
     settingsRouter,
 } from '@core/router'
 import { closePopup } from 'shared/lib/popup'
+import { FireflyEvent } from '@core/router/typings/event'
 
 export const initRouters = (): void => {
     appRouter.set(new AppRouter())
@@ -27,8 +28,8 @@ export const initRouters = (): void => {
     settingsRouter.set(new SettingsRouter())
 }
 
-export const routerNext = (event: CustomEvent): void => {
-    get(appRouter).next(event)
+export const routerNext = (event: CustomEvent<FireflyEvent>): void => {
+    get(appRouter).next(event.detail)
 }
 
 export const routerPrevious = (): void => {

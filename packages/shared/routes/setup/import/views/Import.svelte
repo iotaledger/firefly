@@ -10,10 +10,10 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(type: ImportType) {
-        const profileType = type === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
+    function handleContinueClick(importType: ImportType) {
+        const profileType = importType === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setProfileType(profileType)
-        dispatch('next', { type })
+        dispatch('next', { importType })
     }
     function handleBackClick() {
         dispatch('previous')

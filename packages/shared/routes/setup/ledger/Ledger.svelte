@@ -14,6 +14,7 @@
     } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+    import { FireflyEvent } from '@core/router/typings/event'
 
     export let locale: Locale
 
@@ -43,7 +44,7 @@
         }
     }
 
-    const next = (event: CustomEvent): void => $ledgerRouter.next(event)
+    const next = (event: CustomEvent<FireflyEvent>): void => $ledgerRouter.next(event.detail)
     const previous = (): void => $ledgerRouter.previousIfPossible()
 </script>
 

@@ -3,6 +3,7 @@ import { appRouter, LedgerRoutes } from '@core/router'
 import { Router } from './router'
 import { SetupType } from 'shared/lib/typings/setup'
 import { walletSetupType } from 'shared/lib/wallet'
+import { FireflyEvent } from '@core/router/typings/event'
 
 export const ledgerRoute = writable<LedgerRoutes>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)
@@ -25,7 +26,7 @@ export class LedgerRouter extends Router<LedgerRoutes> {
         }
     }
 
-    next(event: CustomEvent): void {
+    next(event: FireflyEvent): void {
         let nextRoute: LedgerRoutes
         const currentRoute = get(this.routeStore)
         const setupType = get(walletSetupType)

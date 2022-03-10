@@ -10,8 +10,8 @@
 
     export let error = ''
     export let busy = false
+    export let isGettingMigrationData: boolean
 
-    export let isGettingMigrationData
     const importType = getContext<Writable<ImportType>>('importType')
 
     let password = ''

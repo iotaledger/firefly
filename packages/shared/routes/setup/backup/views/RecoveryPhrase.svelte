@@ -13,8 +13,8 @@
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(options) {
-        dispatch('next', { options })
+    function handleContinueClick(skipVerify: boolean) {
+        dispatch('next', { skip: skipVerify })
     }
     function handleBackClick() {
         dispatch('previous')
@@ -46,7 +46,7 @@
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick('verify') : handleMnemonicVisibilityClick}
+            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick(false) : handleMnemonicVisibilityClick}
         >
             {locale(
                 $mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue'

@@ -6,6 +6,7 @@ import { mnemonic, strongholdPassword } from 'shared/lib/app'
 import { Platform } from 'shared/lib/platform'
 import { getDefaultStrongholdName } from 'shared/lib/utils'
 import { updateProfile } from 'shared/lib/profile'
+import { FireflyEvent } from '@core/router/typings/event'
 
 export const backupRoute = writable<BackupRoutes>(null)
 
@@ -14,9 +15,8 @@ export class BackupRouter extends Router<BackupRoutes> {
         super(BackupRoutes.Init, backupRoute)
     }
 
-    async next(event: CustomEvent): Promise<void> {
+    async next(event: FireflyEvent): Promise<void> {
         let nextRoute: BackupRoutes
-        const params = event.detail || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
@@ -33,7 +33,7 @@ export class BackupRouter extends Router<BackupRoutes> {
                 break
 
             case BackupRoutes.Backup:
-                if (params.skip) {
+                if (event?.skip) {
                     await asyncStoreMnemonic(get(mnemonic).join(' '))
                     await asyncCreateAccount()
                     get(appRouter).next(event)

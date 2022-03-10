@@ -16,7 +16,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        dispatch('next', { input })
+        dispatch('next', { importType })
     }
     function handleBackClick() {
         if (!isGettingMigrationData) {
