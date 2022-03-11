@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 
+import { SplashScreen } from '@capacitor/splash-screen'
 import { BarcodeManager } from './lib/barcodeManager'
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
@@ -11,6 +12,8 @@ import type { VersionDetails } from 'shared/lib/typings/appUpdater'
 import type { IPlatform } from 'shared/lib/typings/platform'
 
 let activeProfileId = null
+
+export const nativeSplash = SplashScreen
 
 export const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
