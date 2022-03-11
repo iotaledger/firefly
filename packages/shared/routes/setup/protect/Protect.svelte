@@ -11,19 +11,18 @@
     const protectRouter = new ProtectRouter()
 
     let busy = false
-    let pin: number
 
     $: switch ($protectRoute) {
         case ProtectRoutes.Init:
         case ProtectRoutes.Pin:
-            pin = null
+            protectRouter.pin = null
             break
     }
 
-    function next(event: CustomEvent<FireflyEvent>): void {
+    async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            protectRouter.next(event.detail)
+            await protectRouter.next(event?.detail)
         } catch (err) {
             showAppNotification({
                 type: 'error',
@@ -44,6 +43,6 @@
     </Transition>
 {:else if $protectRoute === ProtectRoutes.RepeatPin}
     <Transition>
-        <RepeatPin {busy} on:next={next} on:previous={previous} pinCandidate={pin} {locale} />
+        <RepeatPin {busy} on:next={next} on:previous={previous} pinCandidate={protectRouter.pin} {locale} />
     </Transition>
 {/if}

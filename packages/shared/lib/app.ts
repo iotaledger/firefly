@@ -20,7 +20,7 @@ export const mobile = writable<boolean>(false)
 /**
  * Wallet access pin
  */
-export const walletPin = writable<number>(null)
+export const walletPin = writable<string>(null)
 
 /**
  * Stronghold password

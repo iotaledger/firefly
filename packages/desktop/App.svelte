@@ -188,7 +188,7 @@
             <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Protect locale={$_} />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
             <Backup locale={$_} />

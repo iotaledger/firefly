@@ -8,7 +8,7 @@ export type FireflyEvent = {
     importType?: ImportType
     migrationSeed?: string
     password?: string
-    pin?: number
+    pin?: string
     protectionType?: string
     reset?: boolean
     setupType?: SetupType
