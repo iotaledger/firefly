@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { nativeSplash } from 'capacitor/capacitorApi'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { mobile } from 'shared/lib/app'
@@ -47,6 +48,7 @@
 
     void setupI18n()
     onMount(async () => {
+        nativeSplash.hide()
         setTimeout(() => {
             splash = false
             initRouter()
