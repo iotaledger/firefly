@@ -126,14 +126,16 @@
         {#if !isUpToDate}
             <div class="items-center p-3">
                 <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded">
-                    <Icon icon="warning" boxed classes="text-blue-500" />
-                    <div class="ml-2 mr-auto">
-                        <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
-                            {localize('views.dashboard.security.version.title', {
-                                values: { version: $versionDetails.newVersion },
-                            })}
-                        </Text>
+                    <div class="flex flex-row items-center space-x-3">
+                        <Icon icon="warning" boxed classes="text-blue-500" />
+                        <div>
+                            <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
+                            <Text type="p" overrideColor classes="text-gray-500">
+                                {localize('views.dashboard.profileModal.version.updateVersion', {
+                                    values: { version: $versionDetails.newVersion },
+                                })}
+                            </Text>
+                        </div>
                     </div>
                     <Button secondary xsmall onClick={handleVersionUpdateClick}>
                         <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
@@ -146,22 +148,24 @@
             {#if !isBackupSafe}
                 <div class="items-center p-3">
                     <div
-                        class="flex items-center space-x-2 justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded"
+                        class="flex items-center justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded"
                     >
-                        <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
-                        <div>
-                            <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
-                            <Text type="p" overrideColor classes="text-gray-500">
-                                {$activeProfile?.lastStrongholdBackupTime
-                                    ? localize('views.dashboard.profileModal.backup.lastBackup', {
-                                          values: {
-                                              date: localize(`dates.${lastBackupDateFormatted.unit}`, {
-                                                  values: { time: lastBackupDateFormatted.value },
-                                              }),
-                                          },
-                                      })
-                                    : localize('views.dashboard.profileModal.backup.notBackedUp')}
-                            </Text>
+                        <div class="flex flex-row items-center space-x-3">
+                            <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
+                            <div>
+                                <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
+                                <Text type="p" overrideColor classes="text-gray-500">
+                                    {$activeProfile?.lastStrongholdBackupTime
+                                        ? localize('views.dashboard.profileModal.backup.lastBackup', {
+                                              values: {
+                                                  date: localize(`dates.${lastBackupDateFormatted.unit}`, {
+                                                      values: { time: lastBackupDateFormatted.value },
+                                                  }),
+                                              },
+                                          })
+                                        : localize('views.dashboard.profileModal.backup.notBackedUp')}
+                                </Text>
+                            </div>
                         </div>
                         <Button secondary xsmall onClick={handleBackupClick}>
                             <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
@@ -171,16 +175,16 @@
                 <HR />
             {/if}
             <div class="flex justify-between items-center p-3">
-                <div class="flex items-center">
+                <div class="flex flex-row items-center space-x-3">
                     <Icon
                         icon={$isStrongholdLocked ? 'lock' : 'unlock'}
                         boxed
                         classes="text-blue-500"
-                        boxClasses="bg-blue-100 dark:bg-gray-800 mr-3"
+                        boxClasses="bg-blue-100 dark:bg-gray-800"
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.stronghold.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
+                        <Text type="p" overrideColor classes="text-gray-500">
                             {localize(
                                 `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
                             )}
@@ -197,11 +201,11 @@
                         icon="chip"
                         boxed
                         classes={isLedgerConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
-                        boxClasses={isLedgerConnected ? 'bg-blue-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-900'}
+                        boxClasses={isLedgerConnected ? 'bg-blue-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-800'}
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">{ledgerConnectionText}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500">{ledgerConnectionText}</Text>
                     </div>
                 </div>
                 <button on:click={syncLedgerDeviceStatus}>
@@ -216,18 +220,18 @@
         {/if}
         <button
             on:click={() => handleSettingsClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+            class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
-            <Icon icon="settings" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
+            <Icon icon="settings" classes="text-gray-500 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">
                 {localize('views.dashboard.profileModal.allSettings')}
             </Text>
         </button>
         <button
             on:click={() => handleLogoutClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+            class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
-            <Icon icon="logout" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
+            <Icon icon="logout" classes="text-gray-500 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{localize('views.dashboard.profileModal.logout')}</Text>
         </button>
     </profile-modal-content>
