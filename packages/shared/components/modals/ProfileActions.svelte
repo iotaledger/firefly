@@ -135,33 +135,14 @@
                             })}
                         </Text>
                     </div>
-                    <Button secondary xsmall onClick={handleVersionUpdateClick}
-                        ><Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
+                    <Button secondary xsmall onClick={handleVersionUpdateClick}>
+                        <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
                     </Button>
                 </div>
             </div>
             <HR />
         {/if}
         {#if $isSoftwareProfile}
-            <HR />
-            <div class="items-center p-3">
-                <div class="flex items-center justify-between bg-{backupWarningColor}-100 p-3 rounded">
-                    <Icon icon={isBackupSafe ? 'shield' : 'warning'} boxed classes="text-{backupWarningColor}-500" />
-                    <div class="ml-2 mr-auto">
-                        <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
-                            {$activeProfile?.lastStrongholdBackupTime
-                                ? localize(`dates.${lastBackupDateFormatted?.unit}`, {
-                                      values: { time: lastBackupDateFormatted?.value },
-                                  })
-                                : localize('popups.backup.notBackedUp')}
-                        </Text>
-                    </div>
-                    <Button secondary xsmall onClick={handleBackupClick}>
-                        <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
-                    </Button>
-                </div>
-            </div>
             {#if !isBackupSafe}
                 <div class="items-center p-3">
                     <div
@@ -209,6 +190,7 @@
                 <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
             </div>
             <HR />
+        {:else}
             <div class="flex justify-between items-center p-3">
                 <div class="flex flex-row items-center space-x-3">
                     <Icon
@@ -219,9 +201,7 @@
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">
-                            {ledgerConnectionText}
-                        </Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-1">{ledgerConnectionText}</Text>
                     </div>
                 </div>
                 <button on:click={syncLedgerDeviceStatus}>
@@ -232,6 +212,7 @@
                     />
                 </button>
             </div>
+            <HR />
         {/if}
         <button
             on:click={() => handleSettingsClick()}
