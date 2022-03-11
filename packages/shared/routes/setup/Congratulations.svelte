@@ -21,7 +21,7 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { ledgerRouter } from '@core/router'
+    import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
@@ -75,7 +75,7 @@
         AvailableExchangeRates.USD
     )
 
-    const handleContinueClick = () => {
+    const handleContinueClick = (): void => {
         if (wasMigrated) {
             const _continue = () => {
                 if ($walletSetupType === SetupType.TrinityLedger) {
@@ -83,9 +83,9 @@
                      * We check for the new Ledger IOTA app to be connected after migration
                      * because the last app the user had open was the legacy one
                      */
-                    promptUserToConnectLedger(false, () => dispatch('next'))
+                    promptUserToConnectLedger(false, () => $appRouter.next())
                 } else {
-                    dispatch('next')
+                    $appRouter.next()
                 }
             }
             const _exportMigrationLog = () => {

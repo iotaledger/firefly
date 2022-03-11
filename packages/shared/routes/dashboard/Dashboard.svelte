@@ -21,12 +21,12 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
         accountRouter,
+        appRouter,
         dashboardRoute,
         dashboardRouter,
         walletRoute,
         walletRouter,
         settingsRouter,
-        routerNext,
     } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
@@ -286,7 +286,7 @@
     <Sidebar {locale} />
     <!-- Dashboard Pane -->
     <div class="flex flex-col w-full h-full">
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
         <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
 </div>

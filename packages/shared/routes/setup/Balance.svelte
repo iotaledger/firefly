@@ -21,15 +21,16 @@
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
-    let isCheckingForBalance
+    let isCheckingForBalance: boolean
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
 
     const { seed, data, bundles } = $migration
@@ -37,7 +38,7 @@
     let _data = $data
     let _bundles = $bundles
 
-    const getFiatBalance = (balance) => {
+    const getFiatBalance = (balance: number) => {
         const balanceAsFiat = convertToFiat(
             balance,
             get(currencies)[CurrencyTypes.USD],
@@ -50,7 +51,7 @@
         return formatCurrency(balanceAsFiat, AvailableExchangeRates.USD)
     }
 
-    const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
+    const hasInsufficientBalance = (balance: number) => balance < MINIMUM_MIGRATION_BALANCE
 
     const { balance } = _data
 
@@ -128,8 +129,6 @@
         }
     }
 
-    const dispatch = createEventDispatcher()
-
     function handleContinueClick() {
         const spentAddressesWithNoBundleHashesTotalBalance = $spentAddressesWithNoBundleHashes.reduce(
             (acc, input) => acc + input.balance,
@@ -141,7 +140,7 @@
                 props: {
                     onProceed: () => {
                         closePopup()
-                        dispatch('next')
+                        $appRouter.next()
                     },
                     balance: `${formatUnitBestMatch(
                         spentAddressesWithNoBundleHashesTotalBalance,
@@ -151,18 +150,19 @@
                 },
             })
         } else {
-            dispatch('next')
-        }
-    }
-    function handleBackClick() {
-        if (!isCheckingForBalance) {
-            // If a user goes back from this point, reset migration state
-            resetMigrationState()
-            dispatch('previous')
+            $appRouter.next()
         }
     }
 
-    function checkAgain() {
+    function handleBackClick(): void {
+        if (!isCheckingForBalance) {
+            // If a user goes back from this point, reset migration state
+            resetMigrationState()
+            $appRouter.previous
+        }
+    }
+
+    function checkAgain(): void {
         isCheckingForBalance = true
         if (legacyLedger) {
             // TODO: add ledger legacy popup when PR merged

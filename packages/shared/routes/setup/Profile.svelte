@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
     import { cleanupSignup, mobile } from 'shared/lib/app'
@@ -26,13 +25,12 @@
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Platform } from 'shared/lib/platform'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
     let error = ''
     let busy = false
-
-    const dispatch = createEventDispatcher()
 
     let profileName = $newProfile?.name ?? ''
     let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
@@ -77,11 +75,11 @@
                 openPopup({
                     type: 'confirmDeveloperProfile',
                     props: {
-                        handleContinueClick: () => dispatch('next'),
+                        handleContinueClick: () => $appRouter.next(),
                     },
                 })
             } else {
-                dispatch('next')
+                $appRouter.next()
             }
         } catch (err) {
             showAppNotification({
@@ -93,11 +91,11 @@
         }
     }
 
-    async function handleBackClick() {
+    async function handleBackClick(): Promise<void> {
         cleanupSignup()
         cleanupInProgressProfiles()
         await disposeNewProfile()
-        dispatch('previous')
+        $appRouter.previous()
     }
 </script>
 

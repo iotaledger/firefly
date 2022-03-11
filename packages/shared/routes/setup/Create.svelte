@@ -1,21 +1,20 @@
 <script lang="typescript">
+    import { appRouter } from '@core/router'
+
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { setProfileType } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
-    import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick(profileType: ProfileType) {
+    function handleContinueClick(profileType: ProfileType): void {
         setProfileType(profileType)
-        dispatch('next')
+        $appRouter.next()
     }
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 </script>
 

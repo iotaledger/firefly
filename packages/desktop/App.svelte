@@ -12,16 +12,7 @@
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import {
-        AppRoute,
-        DashboardRoutes,
-        dashboardRouter,
-        walletRouter,
-        initRouters,
-        openSettings,
-        routerNext,
-        routerPrevious,
-    } from '@core/router'
+    import { AppRoute, DashboardRoutes, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         Appearance,
@@ -156,36 +147,36 @@
             />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Welcome locale={$_} />
         </Route>
         <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Legal locale={$_} />
         </Route>
         <Route route={AppRoute.CrashReporting}>
-            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <CrashReporting locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Appearance locale={$_} />
         </Route>
         <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Profile locale={$_} />
         </Route>
         <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Setup locale={$_} />
         </Route>
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Create locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
-            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Ledger locale={$_} />
         </Route>
         <!--  -->
         <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Secure locale={$_} />
         </Route>
         <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Password locale={$_} />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
             <Protect locale={$_} />
@@ -194,16 +185,16 @@
             <Backup locale={$_} />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Import locale={$_} />
         </Route>
         <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Balance locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+            <Migrate locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} locale={$_} {goto} />
+            <Congratulations locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Dashboard}>
             <Dashboard locale={$_} {goto} />

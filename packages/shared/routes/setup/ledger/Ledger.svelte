@@ -24,7 +24,7 @@
         $ledgerRouter.restartIfNotInLedgerFlow()
     })
 
-    const updateMigrationProgress = () => {
+    const updateMigrationProgress = (): void => {
         switch ($ledgerRoute) {
             case LedgerRoutes.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
@@ -45,7 +45,7 @@
     }
 
     const next = (event: CustomEvent<FireflyEvent>): void => $ledgerRouter.next(event.detail)
-    const previous = (): void => $ledgerRouter.previousIfPossible()
+    const previous = (): void => $ledgerRouter.previous()
 </script>
 
 {#if $ledgerRoute === LedgerRoutes.Connect}
