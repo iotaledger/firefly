@@ -49,9 +49,6 @@ export class MigrateRouter extends Router<MigrateRoutes> {
                 nextRoute = MigrateRoutes.TransferFragmentedFunds
                 break
         }
-
-        if (nextRoute) {
-            this.setNext(nextRoute)
-        }
+        this.setNext(nextRoute)
     }
 }

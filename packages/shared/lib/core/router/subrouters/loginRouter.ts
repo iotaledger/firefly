@@ -28,8 +28,6 @@ export class LoginRouter extends Router<LoginRoutes> {
                 get(appRouter).next(event)
                 break
         }
-        if (nextRoute) {
-            this.setNext(nextRoute)
-        }
+        this.setNext(nextRoute)
     }
 }

@@ -56,8 +56,6 @@ export class ProtectRouter extends Subrouter<ProtectRoutes> {
                 break
             }
         }
-        if (nextRoute) {
-            this.setNext(nextRoute)
-        }
+        this.setNext(nextRoute)
     }
 }

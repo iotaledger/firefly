@@ -102,8 +102,6 @@ export class ImportRouter extends Router<ImportRoutes> {
                 get(appRouter).next({ importType: get(this.importType) })
                 break
         }
-        if (nextRoute) {
-            this.setNext(nextRoute)
-        }
+        this.setNext(nextRoute)
     }
 }
