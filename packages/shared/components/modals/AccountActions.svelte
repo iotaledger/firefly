@@ -3,10 +3,16 @@
     import { localize } from 'shared/lib/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRoute, resetWalletRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { asyncRemoveWalletAccount, selectedAccount, selectedMessage, wallet } from 'shared/lib/wallet'
+    import {
+        asyncRemoveWalletAccount,
+        setSelectedAccount,
+        selectedAccount,
+        selectedMessage,
+        wallet,
+    } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -53,7 +59,7 @@
                     }
                     // TODO: handle for single wallet view
                     selectedMessage.set(null)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
                 },
             },
         })
@@ -75,7 +81,8 @@
                     }
                     // TODO: handle for single wallet view
                     selectedMessage.set(null)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
+                    setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
                 },
             },
         })
@@ -90,11 +97,11 @@
         }
         // TODO: handle for single wallet view
         selectedMessage.set(null)
-        accountRoute.set(AccountRoutes.Init)
+        resetWalletRoute()
     }
 </script>
 
-<Modal bind:isActive position={{ top: '121px', right: 'calc((100% + 16px) * 0.6666666)' }}>
+<Modal bind:isActive position={{ top: '90px', right: 'calc((100% + 16px) * 0.6666666)' }}>
     <div class="flex flex-col">
         <!-- Customize -->
         <button

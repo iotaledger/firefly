@@ -960,7 +960,6 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
-        "accountBalance": "Wallet Balance",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
@@ -1053,7 +1052,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Today",

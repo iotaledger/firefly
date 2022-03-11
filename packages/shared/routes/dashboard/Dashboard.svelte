@@ -359,9 +359,9 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded && $viewableAccounts.length) {
+    $: if ($accountsLoaded) {
         // TODO: persist last selected account
-        setSelectedAccount($viewableAccounts[0]?.id)
+        setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
     }
 </script>
 

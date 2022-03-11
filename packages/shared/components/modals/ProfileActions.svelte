@@ -103,7 +103,8 @@
                 lastBackupDateFormatted,
             },
         })
-    }''
+    }
+    ('')
 
     function handleVersionUpdateClick() {
         openPopup({ type: 'version' })
