@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BalanceSummary } from 'shared/components'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { isBright } from 'shared/lib/helpers'
 
     export let locale: Locale

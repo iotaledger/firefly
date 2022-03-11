@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { createEventDispatcher } from 'svelte'
     import Content from './Content.svelte'
     import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'

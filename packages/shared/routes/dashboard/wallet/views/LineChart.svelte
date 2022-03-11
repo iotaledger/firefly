@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'

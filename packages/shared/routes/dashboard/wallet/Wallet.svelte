@@ -16,11 +16,11 @@
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Message, Transaction } from 'shared/lib/typings/message'
-    import type { MigratedTransaction } from 'shared/lib/typings/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Message, Transaction } from 'shared/lib/typings/message'
+    import { MigratedTransaction } from 'shared/lib/typings/profile'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type {
+    import {
         AccountMessage,
         AccountsBalanceHistory,
         BalanceHistory,

@@ -1,5 +1,5 @@
-import type { NotificationData } from '../notification'
-import type { SendOperationParameters } from './walletContext'
+import { NotificationData } from '../notification'
+import { SendOperationParameters } from './walletContext'
 
 export enum DeepLinkingContexts {
     Wallet = 'wallet',

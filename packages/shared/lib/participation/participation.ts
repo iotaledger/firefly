@@ -1,5 +1,5 @@
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
-import type { WalletAccount } from '../typings/wallet'
+import { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
