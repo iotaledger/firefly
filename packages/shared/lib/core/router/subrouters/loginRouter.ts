@@ -1,12 +1,12 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, LoginRoutes } from '@core/router'
-import { Router } from '@core/router/router'
 import { migrateProfile } from 'shared/lib/profile'
 import { FireflyEvent } from '@core/router/typings/event'
+import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const loginRoute = writable<LoginRoutes>(null)
 
-export class LoginRouter extends Router<LoginRoutes> {
+export class LoginRouter extends Subrouter<LoginRoutes> {
     constructor() {
         super(LoginRoutes.Init, loginRoute)
     }

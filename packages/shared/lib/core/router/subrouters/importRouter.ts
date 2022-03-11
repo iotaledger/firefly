@@ -1,6 +1,5 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, ImportRoutes } from '@core/router'
-import { Router } from '@core/router/router'
 import { ImportType } from 'shared/lib/typings/profile'
 import { getMigrationData } from 'shared/lib/migration'
 import { mnemonic } from 'shared/lib/app'
@@ -8,10 +7,11 @@ import { Platform } from 'shared/lib/platform'
 import { asyncRestoreBackup } from 'shared/lib/wallet'
 import { newProfile } from 'shared/lib/profile'
 import { FireflyEvent } from '@core/router/typings/event'
+import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const importRoute = writable<ImportRoutes>(null)
 
-export class ImportRouter extends Router<ImportRoutes> {
+export class ImportRouter extends Subrouter<ImportRoutes> {
     public importType = writable<ImportType>(null)
     public importFile: Buffer
     public importFilePath: string

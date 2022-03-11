@@ -1,12 +1,12 @@
 import { appRouter, MigrateRoutes } from '@core/router'
-import { Router } from '@core/router/router'
+import { Subrouter } from '@core/router/subrouters/subrouter'
 import { FireflyEvent } from '@core/router/typings/event'
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from 'shared/lib/migration'
 import { get, writable } from 'svelte/store'
 
 export const migrateRoute = writable<MigrateRoutes>(null)
 
-export class MigrateRouter extends Router<MigrateRoutes> {
+export class MigrateRouter extends Subrouter<MigrateRoutes> {
     constructor() {
         super(MigrateRoutes.Init, migrateRoute)
     }
@@ -14,7 +14,6 @@ export class MigrateRouter extends Router<MigrateRoutes> {
     next(event: FireflyEvent): void {
         let nextRoute: MigrateRoutes
         const currentRoute = get(this.routeStore)
-
         switch (currentRoute) {
             case MigrateRoutes.Init:
                 if (get(hasBundlesWithSpentAddresses)) {
