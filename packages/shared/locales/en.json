@@ -461,34 +461,6 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
-                },
-                "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
-                },
-                "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
-                }
-            },
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
@@ -504,6 +476,29 @@
                     "title": "Profile lock",
                     "locked": "Stronghold locked",
                     "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA App Not Open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy App Open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
+                        "notDetected": "Not Detected",
+                        "otherConnected": "App Open"
+                    }
+                },
+                "backup": {
+                    "title": "Save wallet backup",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
                 }
             }
         },
