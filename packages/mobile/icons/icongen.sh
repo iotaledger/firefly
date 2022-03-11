@@ -1,6 +1,7 @@
 #!/bin/sh
 base=$1
 dest_ios="ios/App/App/Assets.xcassets/AppIcon.appiconset"
+dest_ios_splash="ios/App/App/Assets.xcassets/Splash.imageset"
 dest_android="android/app/src/main/res"
 
 if [ -z $base ]
@@ -35,8 +36,16 @@ else
   mkdir -p "$dest_android/mipmap-xhdpi"
   mkdir -p "$dest_android/mipmap-xxhdpi"
   mkdir -p "$dest_android/mipmap-xxxhdpi"
+  mkdir -p "$dest_android/drawable"
+  mkdir -p "$dest_android/drawable-port-mdpi"
+  mkdir -p "$dest_android/drawable-port-hdpi"
+  mkdir -p "$dest_android/drawable-port-xhdpi"
+  mkdir -p "$dest_android/drawable-port-xxhdpi"
+  mkdir -p "$dest_android/drawable-port-xxxhdpi"
+  
   ### Add margin for adaptive icons
-  add_margin="-background none -gravity center -scale 96x96 -extent 165x165"
+  add_margin="-background #ffffff -gravity center -scale 248x248 -extent 384x384 -adaptive-blur 1,1"
+  
   convert "$base" -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher.png"
   convert "$base" -resize 108x108!   $add_margin   "$dest_android/mipmap-mdpi/ic_launcher_foreground.png"
   convert "$base" -resize 48x48!                   "$dest_android/mipmap-mdpi/ic_launcher_round.png"
@@ -52,4 +61,22 @@ else
   convert "$base" -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher.png"
   convert "$base" -resize 432x432!   $add_margin   "$dest_android/mipmap-xxxhdpi/ic_launcher_foreground.png"
   convert "$base" -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher_round.png"
+
+  ## Lauch screen
+  ### Add margin for center logo
+  add_margin="-background #ffffff -gravity center -scale 256x256 -extent 660x2420"
+  
+  ## iOS
+  convert "$base" -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732.png"
+  convert "$base" -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-1.png"
+  convert "$base" -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-2.png"
+  
+  ## Android
+  convert "$base" -resize 480x320!   $add_margin  "$dest_android/drawable/splash.png"
+  convert "$base" -resize 320x480!   $add_margin  "$dest_android/drawable-port-mdpi/splash.png"
+  convert "$base" -resize 480x800!   $add_margin  "$dest_android/drawable-port-hdpi/splash.png"
+  convert "$base" -resize 720x1200!  $add_margin  "$dest_android/drawable-port-xhdpi/splash.png"
+  convert "$base" -resize 720x1280!  $add_margin  "$dest_android/drawable-port-xxhdpi/splash.png"
+  convert "$base" -resize 720x1600!  $add_margin  "$dest_android/drawable-port-xxhdpi/splash.png"
+  convert "$base" -resize 1280x1920! $add_margin  "$dest_android/drawable-port-xxxhdpi/splash.png"
 fi
