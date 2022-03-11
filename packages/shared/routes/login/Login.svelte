@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { loginRoute, LoginRouter, LoginRoutes } from '@core/router'
     import { FireflyEvent } from '@core/router/typings/event'
-
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -11,9 +10,10 @@
 
     export let locale: Locale
 
-    const loginRouter = new LoginRouter()
+    let loginRouter: LoginRouter
 
     onMount(() => {
+        loginRouter = new LoginRouter()
         if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
             loginRouter.next()
         } else {
