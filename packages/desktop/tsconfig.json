@@ -9,7 +9,7 @@
         "paths": {
             "@common/*": ["../shared/lib/common/*"],
             "@core/*": ["../shared/lib/core/*"],
-            "@lib/*": ["../shared/lib/*"]
+            "@shared/*": ["../shared/lib/*"]
         }
     },
     "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
