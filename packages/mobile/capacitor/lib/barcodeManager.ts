@@ -5,8 +5,6 @@ import { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
 
 const openQRBodyClass: string = 'qr-scanner'
 
-void BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] }) // this will now only target QR-codes
-
 const _stopScanner = async (): Promise<void> => {
     try {
         document.body.classList.remove(openQRBodyClass)
@@ -99,7 +97,9 @@ export const BarcodeManager: IBarcodeManager = {
             if (permissionGranted) {
                 await BarcodeScanner.hideBackground()
                 document.body.classList.add(openQRBodyClass)
-                const result: ScanResult = await BarcodeScanner.startScan()
+                const result: ScanResult = await BarcodeScanner.startScan({
+                    targetedFormats: [SupportedFormat.QR_CODE],
+                })
                 if (result?.hasContent && result?.content) {
                     document.body.classList.remove(openQRBodyClass)
                     onSuccess(result.content)
