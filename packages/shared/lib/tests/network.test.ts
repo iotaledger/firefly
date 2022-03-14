@@ -1,6 +1,4 @@
 import './mocks/matchMedia'
-import './mocks/platform'
-import './mocks/walletActor'
 
 import {
     checkNodeUrlValidity,
