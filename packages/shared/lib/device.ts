@@ -1,5 +1,5 @@
 import { mobile } from 'shared/lib/app'
-import type { Writable } from 'svelte/store'
+import { Writable } from 'svelte/store'
 import { get, writable } from 'svelte/store'
 import { Platform } from './platform'
 

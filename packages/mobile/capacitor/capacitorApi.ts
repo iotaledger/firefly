@@ -6,13 +6,17 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
-import type { AppSettings } from 'shared/lib/typings/app'
-import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import type { IPlatform } from 'shared/lib/typings/platform'
+import { AppSettings } from 'shared/lib/typings/app'
+import { VersionDetails } from 'shared/lib/typings/appUpdater'
+import { IPlatform } from 'shared/lib/typings/platform'
+
+import * as WalletBindings from './walletPluginApi'
+
+window['__WALLET__'] = WalletBindings
 
 let activeProfileId = null
 
-export const CapacitorApi: IPlatform = {
+const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
         return new Promise((resolve) => resolve())
     },
@@ -255,3 +259,5 @@ export const CapacitorApi: IPlatform = {
     hookErrorLogger,
     ledger: undefined,
 }
+
+window['__CAPACITOR__'] = CapacitorApi

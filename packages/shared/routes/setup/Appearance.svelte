@@ -3,7 +3,7 @@
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 

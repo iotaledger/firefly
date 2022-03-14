@@ -1,11 +1,9 @@
-import type { CheckPermissionResult, ScanResult } from '@capacitor-community/barcode-scanner'
+import { CheckPermissionResult, ScanResult } from '@capacitor-community/barcode-scanner'
 import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner'
 import { localize } from 'shared/lib/i18n'
-import type { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
+import { IBarcodeManager } from 'shared/lib/typings/barcodeManager'
 
 const openQRBodyClass: string = 'qr-scanner'
-
-void BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] }) // this will now only target QR-codes
 
 const _stopScanner = async (): Promise<void> => {
     try {
@@ -99,7 +97,9 @@ export const BarcodeManager: IBarcodeManager = {
             if (permissionGranted) {
                 await BarcodeScanner.hideBackground()
                 document.body.classList.add(openQRBodyClass)
-                const result: ScanResult = await BarcodeScanner.startScan()
+                const result: ScanResult = await BarcodeScanner.startScan({
+                    targetedFormats: [SupportedFormat.QR_CODE],
+                })
                 if (result?.hasContent && result?.content) {
                     document.body.classList.remove(openQRBodyClass)
                     onSuccess(result.content)

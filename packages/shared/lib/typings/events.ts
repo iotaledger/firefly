@@ -1,7 +1,7 @@
-import type { NativeProgress, VersionDetails } from './appUpdater'
-import type { ResponseTypes } from './bridge'
-import type { Message, UTXOEventData } from './message'
-import type { WalletRoutes } from './routes'
+import { NativeProgress, VersionDetails } from './appUpdater'
+import { ResponseTypes } from './bridge'
+import { Message, UTXOEventData } from './message'
+import { WalletRoutes } from './routes'
 
 export interface EventMap {
     'menu-logout': void

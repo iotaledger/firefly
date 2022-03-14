@@ -1,6 +1,6 @@
-import type { Bridge, CommunicationIds } from '../typings/bridge'
+import { Bridge, CommunicationIds } from '../typings/bridge'
 
-import type { Participation } from './types'
+import { Participation } from './types'
 
 /**
  * Gets an overview of participation for accounts.

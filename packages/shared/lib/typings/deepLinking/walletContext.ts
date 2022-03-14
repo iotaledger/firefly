@@ -1,4 +1,4 @@
-import type { Unit } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
 
 export enum WalletOperations {
     Send = 'send',
