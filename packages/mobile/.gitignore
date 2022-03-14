@@ -4,3 +4,12 @@ capacitor.plugins.json
 capacitor.settings.gradle
 capacitor.build.gradle
 ios/App/public/
+resources/android/icon
+resources/ios/icon
+resources/icon.png
+android/app/src/main/res/mipmap-hdpi/ic_launcher*
+android/app/src/main/res/mipmap-mdpi/ic_launcher*
+android/app/src/main/res/mipmap-xhdpi/ic_launcher*
+android/app/src/main/res/mipmap-xxhdpi/ic_launcher*
+android/app/src/main/res/mipmap-xxxhdpi/ic_launcher*
+ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon*

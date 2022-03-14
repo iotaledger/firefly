@@ -43,10 +43,10 @@ SPEC CHECKSUMS:
   CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
   CapacitorCordova: b1af29a04884895a52d00050de49a330a9cece30
   CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
-  FireflyActorSystemCapacitorBindings: b65f3d4441d6d8af7797c1e87b1ee81f00400003
+  FireflyActorSystemCapacitorBindings: 59b64ff1b4cb89779283816f7d2c385849ee5247
   IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 0dab9d058dcfb08c1e7004de80f7a10cd2a0ad78
+PODFILE CHECKSUM: fd7fb43df14cdafc0168d35f6684881c67a39193
 
 COCOAPODS: 1.11.2
