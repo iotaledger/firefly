@@ -2,7 +2,7 @@
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
-    import type { Input, Transfer } from 'shared/lib/typings/migration'
+    import { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Locale } from 'shared/lib/typings/i18n'
 

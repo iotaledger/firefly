@@ -1,6 +1,6 @@
-import type { Bridge, CommunicationIds } from './bridge'
-import type { Writable } from 'svelte/store'
-import type { AccountIdentifier } from './account'
+import { Bridge, CommunicationIds } from './bridge'
+import { Writable } from 'svelte/store'
+import { AccountIdentifier } from './account'
 
 export interface MigrationAddress {
     bech32: string

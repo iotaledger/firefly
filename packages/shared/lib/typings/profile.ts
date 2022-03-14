@@ -1,6 +1,6 @@
-import type { AvailableExchangeRates } from './currency'
-import type { ChartSelectors } from './chart'
-import type { NetworkConfig } from './network'
+import { AvailableExchangeRates } from './currency'
+import { ChartSelectors } from './chart'
+import { NetworkConfig } from './network'
 
 export interface MigratedTransaction {
     address: string
@@ -57,7 +57,7 @@ export enum ProfileType {
 }
 
 /**
- * Profile import types
+ * Profile imports
  */
 export enum ImportType {
     Seed = 'seed',

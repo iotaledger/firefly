@@ -1,13 +1,17 @@
 {
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
-        //         "isolatedModules": false,
-        //         "allowJs": false
+        "allowJs": true,
         "baseUrl": ".",
+        "isolatedModules": false,
+        "importsNotUsedAsValues": "remove",
+        "lib": ["DOM", "ESNext"],
         "paths": {
             "@common/*": ["../shared/lib/common/*"],
             "@core/*": ["../shared/lib/core/*"],
             "@lib/*": ["./capacitor/lib/*"]
         }
-    }
+    },
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"],
+    "exclude": ["../shared/**/tests"]
 }

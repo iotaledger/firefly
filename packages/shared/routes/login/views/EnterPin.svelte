@@ -9,7 +9,7 @@
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { get } from 'svelte/store'
 
     export let locale: Locale
@@ -73,7 +73,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
-            const { sendCrashReports } = get(initAppSettings)
+            const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }
 
             isBusy = true
 

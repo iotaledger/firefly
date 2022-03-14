@@ -3,7 +3,7 @@ import { Platform } from 'shared/lib/platform'
 import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
-import type { Event } from './typings/events'
+import { Event } from './typings/events'
 import { Buffer } from 'buffer'
 
 export const ADDRESS_LENGTH = 64

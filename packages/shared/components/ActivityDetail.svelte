@@ -7,9 +7,9 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Payload } from 'shared/lib/typings/message'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Payload } from 'shared/lib/typings/message'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -21,7 +21,7 @@
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 
