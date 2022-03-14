@@ -1,4 +1,6 @@
 import './mocks/matchMedia'
+import './mocks/platform'
+import './mocks/walletActor'
 
 import { convertFromFiat, convertToFiat, isFiatCurrency } from '../currency'
 import { AvailableExchangeRates, CurrencyTypes } from '../typings/currency'
