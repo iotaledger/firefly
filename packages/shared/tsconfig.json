@@ -7,7 +7,8 @@
         "outDir": "out",
         "paths": {
             "@common/*": ["./lib/common/*"],
-            "@core/*": ["./lib/core/*"]
+            "@core/*": ["./lib/core/*"],
+            "@lib/*": ["./lib/*"]
         }
     },
     "include": ["./lib"],
