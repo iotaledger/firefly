@@ -1,4 +1,4 @@
-import type { IPincodeManager } from 'shared/lib/typings/pincodeManager'
+import { IPincodeManager } from 'shared/lib/typings/pincodeManager'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 
 /** Mobile Pincode Manager */

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.iota.wallet">
+    package="org.iota.firefly.mobile">
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,7 +13,6 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
             tools:ignore="ScopedStorage" />
     <!--        android:maxSdkVersion="28" -->
-
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
@@ -27,7 +26,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="com.iota.wallet.MainActivity"
+            android:name="org.iota.firefly.mobile.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"

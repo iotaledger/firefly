@@ -9,7 +9,7 @@
     import { createEventDispatcher, setContext } from 'svelte'
     import { get, Writable, writable } from 'svelte/store'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
 
     export let locale: Locale

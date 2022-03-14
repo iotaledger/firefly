@@ -8,7 +8,7 @@ import {
     SendRequestParameters,
     WalletOperations,
 } from 'shared/lib/typings/deepLinking/walletContext'
-import type { NotificationData } from 'shared/lib/typings/notification'
+import { NotificationData } from 'shared/lib/typings/notification'
 
 /**
  * Parse the wallet context from a deeplink

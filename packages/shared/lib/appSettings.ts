@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 import { persistent } from './helpers'
-import type { AppSettings, AppTheme } from './typings/app'
+import { AppSettings, AppTheme } from './typings/app'
 
 /**
  * The application settings used throughout the application code, useful for

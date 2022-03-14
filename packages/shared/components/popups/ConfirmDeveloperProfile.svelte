@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
     export let handleCancelClick: () => void

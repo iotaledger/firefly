@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 30
     defaultConfig {
-        applicationId "com.iota.wallet"
+        applicationId "org.iota.firefly.mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk 30
         versionCode 1

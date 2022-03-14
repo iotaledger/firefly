@@ -22,7 +22,7 @@
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { wallet } from 'shared/lib/wallet'
