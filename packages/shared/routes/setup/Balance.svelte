@@ -129,7 +129,7 @@
         }
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         const spentAddressesWithNoBundleHashesTotalBalance = $spentAddressesWithNoBundleHashes.reduce(
             (acc, input) => acc + input.balance,
             0
@@ -158,7 +158,7 @@
         if (!isCheckingForBalance) {
             // If a user goes back from this point, reset migration state
             resetMigrationState()
-            $appRouter.previous
+            $appRouter.previous()
         }
     }
 
