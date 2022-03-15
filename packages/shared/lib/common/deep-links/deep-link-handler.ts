@@ -1,22 +1,19 @@
-import { DeepLinkParameters } from 'shared/lib/typings/deepLinking/deepLinking'
-import { addError } from 'shared/lib/errors'
-import { writable } from 'svelte/store'
-import { parseWalletRequest } from './contextHandlers/walletContextHandler'
+import { addError } from '../../errors'
+
+import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
+import type { DeepLinkRequest } from '@common/deep-links/types'
 
 /**
- * Indicates that a deep link request is active
- */
-export const deepLinkRequestActive = writable<boolean>(false)
-
-/**
- * Parse an IOTA deep link i.e. a link that begins with the scheme iota://
+ * Parses an IOTA deep link, i.e. a URL that begins with the scheme "iota://".
  *
- * @method parseDeepLink
+ * @method parseDeepLinkRequest
  *
- * @param {string} addressPrefix First four characters of address
- * @param {string} input The link that was opened
+ * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
+ * @param {string} input The URL that was opened by the user.
+ *
+ * @returns {void | DeepLinkRequest} The formatted content of a deep link request.
  */
-export const parseDeepLink = (addressPrefix: string, input: string): void | DeepLinkParameters => {
+export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: string): void | DeepLinkRequest => {
     if (!input || typeof input !== 'string') {
         return
     }
@@ -26,7 +23,7 @@ export const parseDeepLink = (addressPrefix: string, input: string): void | Deep
 
         if (url.protocol === 'iota:') {
             if (url.hostname === 'wallet') {
-                return parseWalletRequest(url, addressPrefix)
+                return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
             } else {
                 return addError({ time: Date.now(), type: 'deepLink', message: `Unrecognized context '${url.host}'` })
             }
