@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { locales, localize, setLanguage } from 'shared/lib/i18n'
+    import { locales, localize, setLanguage } from '@core/i18n'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
 
     $: languageList = Object.values(locales).map((locale) => ({ value: locale, label: locale }))

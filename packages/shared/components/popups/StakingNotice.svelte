@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'

@@ -1,7 +1,7 @@
 import { Unit } from '@iota/unit-converter'
 import { isValidAddressAndPrefix } from 'shared/lib/address'
 import { addError } from 'shared/lib/errors'
-import { localize } from 'shared/lib/i18n'
+import { localize } from '@core/i18n'
 import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
 import {
     SendOperationParameters,

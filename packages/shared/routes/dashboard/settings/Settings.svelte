@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { isLocaleLoaded } from 'shared/lib/i18n'
+    import { isLocaleLoaded } from '@core/i18n'
     import { dashboardRoute, previousDashboardRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'

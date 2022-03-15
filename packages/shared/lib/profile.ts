@@ -1,5 +1,6 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import { _ } from 'svelte-i18n'
+
+import { localize } from '@core/i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
@@ -11,15 +12,14 @@ import {
     AccountColors,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
 import { ValuesOf } from './typings/utils'
-import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from './typings/i18n'
+
+import { Profile, ProfileType, UserSettings } from './typings/profile'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -429,16 +429,15 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
  * @returns {void}
  */
 export const validateProfileName = (trimmedName: string): void => {
-    const locale = get(_) as Locale
     const validateError = validateFilenameChars(trimmedName)
 
     if (validateError) {
-        throw new Error(locale(`error.account.${validateError}`))
+        throw new Error(localize(`error.account.${validateError}`))
     }
 
     if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
         throw new Error(
-            locale('error.profile.length', {
+            localize('error.profile.length', {
                 values: {
                     length: MAX_PROFILE_NAME_LENGTH,
                 },
@@ -447,6 +446,6 @@ export const validateProfileName = (trimmedName: string): void => {
     }
 
     if (get(profiles).some((p) => p.name === trimmedName)) {
-        throw new Error(locale('error.profile.duplicate'))
+        throw new Error(localize('error.profile.duplicate'))
     }
 }

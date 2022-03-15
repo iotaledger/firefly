@@ -3,7 +3,7 @@
     import { errorLog } from 'shared/lib/errors'
     import { closePopup } from 'shared/lib/popup'
     import { setClipboard } from 'shared/lib/utils'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

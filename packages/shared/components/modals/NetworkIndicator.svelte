@@ -3,7 +3,7 @@
     import { NETWORK_HEALTH_COLORS, networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { onDestroy } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { NetworkStatusHealthText } from 'shared/lib/typings/network'
 
     export let locale: Locale

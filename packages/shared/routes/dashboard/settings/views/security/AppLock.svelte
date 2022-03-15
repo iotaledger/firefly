@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
 
     function updateLockTimeout(option) {

@@ -6,7 +6,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {

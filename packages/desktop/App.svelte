@@ -5,7 +5,7 @@
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
@@ -19,7 +19,7 @@
         routerPrevious,
         walletRoute,
     } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy, onMount } from 'svelte'
     import {

@@ -2,8 +2,8 @@
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { locales, setLanguage, _ } from '@core/i18n'
+    import { Locale } from '@core/i18n'
     import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale

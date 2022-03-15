@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { getProfileDataPath } from 'shared/lib/wallet'
     import { Platform } from 'shared/lib/platform'

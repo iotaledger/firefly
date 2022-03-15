@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
-import { localize } from '../i18n'
+import { localize } from '@core/i18n'
 import { networkStatus } from '../networkStatus'
 import { showAppNotification } from '../notifications'
 import { activeProfile } from '../profile'

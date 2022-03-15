@@ -1,7 +1,9 @@
-import { appSettings } from 'shared/lib/appSettings'
-import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
-import { LocaleOptions } from './typings/i18n'
+import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
+
+import { appSettings } from 'shared/lib/appSettings'
+
+import { LocaleOptions } from '@core/i18n/types'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/

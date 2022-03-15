@@ -32,7 +32,7 @@
         TransferProgressEventType,
         TransferState,
     } from 'shared/lib/typings/events'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'

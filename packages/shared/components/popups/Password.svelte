@@ -2,7 +2,7 @@
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

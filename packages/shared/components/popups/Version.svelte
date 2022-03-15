@@ -2,10 +2,10 @@
     import { Button, Logo, Text } from 'shared/components'
     import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from 'shared/lib/platform'
-    import { formatDate } from 'shared/lib/i18n'
+    import { formatDate } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

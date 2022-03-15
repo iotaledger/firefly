@@ -9,7 +9,7 @@
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
+    import { Locale, LocaleArgs } from '@core/i18n'
     import { DateDiff } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

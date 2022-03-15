@@ -7,7 +7,7 @@
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

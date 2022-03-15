@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Checkbox, Text, TextHint } from 'shared/components'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 </script>
 
 <Text type="h4" classes="mb-3">{localize('views.settings.crashReporting.title')}</Text>
