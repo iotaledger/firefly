@@ -2,6 +2,7 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "baseUrl": "./",
+        "importsNotUsedAsValues": "remove",
         "isolatedModules": false,
         "lib": ["DOM", "ESNext"],
         "paths": {
