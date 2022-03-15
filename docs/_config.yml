@@ -1,0 +1,3 @@
+domain: iotaledger.github.io
+url: https://iotaledger.github.io/firefly  # the base hostname and protocol for your site, e.g. http://example.com
+baseurl: /handbook

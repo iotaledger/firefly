@@ -228,3 +228,6 @@ DerivedData/
 
 # Environment variable files
 **/*.env
+
+# Static site generations from Retype
+**/.retype
