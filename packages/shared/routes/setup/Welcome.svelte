@@ -2,7 +2,7 @@
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { locales, setLanguage, _ } from '@core/i18n'
+    import { LANGUAGES, setLanguage, _ } from '@core/i18n'
     import { Locale } from '@core/i18n'
     import { createEventDispatcher } from 'svelte'
 
@@ -10,7 +10,7 @@
 
     const dispatch = createEventDispatcher()
 
-    $: languageList = Object.values(locales).map((locale) => ({ value: locale, label: locale }))
+    $: languageList = Object.values(LANGUAGES).map((locale) => ({ value: locale, label: locale }))
 
     function handleContinueClick() {
         dispatch('next')
@@ -37,7 +37,7 @@
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
                         on:click={() => handleLanguage(language)}
-                        class:active={language?.label === locales[$appSettings.language]}
+                        class:active={language?.label === LANGUAGES[$appSettings.language]}
                     >
                         <Text type="p" smaller>{language?.label}</Text>
                     </button>
@@ -47,7 +47,7 @@
             <Dropdown
                 sortItems={true}
                 onSelect={handleLanguage}
-                value={locales[$appSettings.language]}
+                value={LANGUAGES[$appSettings.language]}
                 items={languageList}
             />
         {/if}

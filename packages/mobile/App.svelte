@@ -4,7 +4,7 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
+    import { localeDirectionality, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
@@ -39,8 +39,8 @@
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
 
-    $: if (document.dir !== $dir) {
-        document.dir = $dir
+    $: if (document.dir !== $localeDirectionality) {
+        document.dir = $localeDirectionality
     }
 
     let splash = true

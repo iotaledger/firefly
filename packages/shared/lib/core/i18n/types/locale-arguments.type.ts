@@ -1,6 +1,6 @@
 type LocaleValue = string | number | unknown
 
 /**
- * Type for providing dynamic data to the locale function.
+ * The type for providing dynamic data for a locale.
  */
 export type LocaleArguments = Record<string, LocaleValue>
