@@ -1,6 +1,6 @@
 input: ./
 output: .retype
-url: # Add your website address here
+url: iotaledger.github.io/firefly/
 favicon: static/icon_firefly.png
 
 branding:
