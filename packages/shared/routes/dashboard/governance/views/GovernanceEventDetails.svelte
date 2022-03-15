@@ -16,6 +16,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
+    import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
@@ -175,9 +176,11 @@
             <Icon icon="info-filled" classes="ml-2 text-gray-400" />
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
-        <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
-        <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
-        <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
+        <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
+        <div class="min-h-0 overflow-auto mb-6">
+            <Text type="p" classes="mb-1">{event?.information?.payload?.questions[0]?.text}</Text>
+            <Text type="p">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
+        </div>
         {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
                 onClick={() => handleClick(answer)}
@@ -185,10 +188,10 @@
                 disabled={!canParticipate(event?.status?.status)}
                 classes="px-6 bg-{isSelected(currentVoteValue, answer?.value)
                     ? 'blue-100'
-                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4"
+                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4 overflow-hidden"
             >
                 <div class="flex justify-between w-full items-center">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mr-32">
                         <div class="flex items-center mb-2">
                             {#if isSelected(currentVoteValue, answer?.value)}
                                 <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
@@ -198,7 +201,7 @@
                             </Text>
                         </div>
                         <Text type="h3" classes="mb-2 text-left">{answer?.text}</Text>
-                        <Text type="p">{answer?.additionalInfo}</Text>
+                        <Text type="p" classes="text-left max-h-32 overflow-auto">{answer?.additionalInfo}</Text>
                     </div>
                     {#if canParticipate(event?.status?.status)}
                         <div>
@@ -251,8 +254,7 @@
                         <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votesCounted')}</Text
                         >
-                        <Text type="h3" classes="inline-flex items-end">{delineateNumber(accountVotes.toString())}</Text
-                        >
+                        <Text type="h3" classes="inline-flex items-end">{formatUnitBestMatch(accountVotes)}</Text>
                     </div>
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
@@ -278,8 +280,8 @@
                             style="height: {displayedPercentages[i]
                                 ?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"
                         />
-                        <div class="flex space-x-1 mt-3">
-                            <Text type="h3"
+                        <div class="flex space-x-1 mt-3" style="max-width: 7rem">
+                            <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden"
                                 >{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}</Text
                             >
                             <Text type="h3" overrideColor classes="text-gray-500"
@@ -287,7 +289,7 @@
                             >
                         </div>
                         <Text type="p" overrideColor bigger classes="text-gray-500 m-0"
-                            >{delineateNumber(result?.accumulated.toString())}</Text
+                            >{formatUnitBestMatch(result?.accumulated)}</Text
                         >
                     </div>
                 {/each}
