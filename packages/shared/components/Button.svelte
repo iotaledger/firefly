@@ -125,7 +125,7 @@
                 </div>
             {/if}
         {:else}
-            <span class="text-12 leading-140"><slot /></span>
+            <span class="text-12 leading-140 w-full"><slot /></span>
         {/if}
     </button>
 {/if}

@@ -154,7 +154,7 @@
     <Text type="h3" classes="mb-8">{nextVote?.text}</Text>
     <Text type="p" classes="mb-5">{nextVote?.additionalInfo}</Text>
     {#if showAdditionalInfo}
-        <div class="flex items-center mb-6 bg-blue-100 rounded-xl p-3">
+        <div class="flex items-center mb-6 bg-blue-100 dark:bg-gray-800 rounded-xl p-3">
             <Icon icon="info" classes="text-gray-500 font-bold" />
             <Text type="p" classes="px-3">{localize('popups.votingConfirmation.additionalInfo')}</Text>
         </div>

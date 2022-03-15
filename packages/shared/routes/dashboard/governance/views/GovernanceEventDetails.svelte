@@ -162,11 +162,15 @@
     <Text type="p" smaller overrideColor classes="text-gray-800">{localize('actions.back')}</Text>
 </div>
 
-<div class="w-full h-full grid grid-cols-3 grid-rows-2 gap-4 min-h-0">
+<div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
         <div class="flex flex-start items-center mb-2">
-            <Text type="p" classes="px-2 py-1 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor
-                >{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
+            <Text
+                type="p"
+                classes="px-2 py-1 text-blue-500 bg-blue-100 dark:bg-gray-900 rounded-lg"
+                smaller
+                bold
+                overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
             >
             <Icon icon="info-filled" classes="ml-2 text-gray-400" />
         </div>
@@ -183,38 +187,40 @@
                     ? 'blue-100'
                     : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4"
             >
-                <div>
-                    <div class="flex items-center mb-2">
-                        {#if isSelected(currentVoteValue, answer?.value)}
-                            <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
-                        {/if}
-                        <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>
-                            {getAnswerHeader(currentVoteValue, answer?.value)}
-                        </Text>
+                <div class="flex justify-between w-full items-center">
+                    <div class="flex flex-col">
+                        <div class="flex items-center mb-2">
+                            {#if isSelected(currentVoteValue, answer?.value)}
+                                <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
+                            {/if}
+                            <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>
+                                {getAnswerHeader(currentVoteValue, answer?.value)}
+                            </Text>
+                        </div>
+                        <Text type="h3" classes="mb-2 text-left">{answer?.text}</Text>
+                        <Text type="p">{answer?.additionalInfo}</Text>
                     </div>
-                    <Text type="h3" classes="mb-2">{answer?.text}</Text>
-                    <Text type="p">{answer?.additionalInfo}</Text>
+                    {#if canParticipate(event?.status?.status)}
+                        <div>
+                            <Icon icon="chevron-right" />
+                        </div>
+                    {/if}
                 </div>
-                {#if canParticipate(event?.status?.status)}
-                    <div class="my-auto">
-                        <Icon icon="chevron-right" />
-                    </div>
-                {/if}
             </Button>
         {/each}
     </DashboardPane>
-    <div class="row-span-1">
+    <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
                 <div>
-                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                    <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                         >{localize('views.governance.votingPower.title')}</Text
                     >
                     <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
                 </div>
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votingOpens')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end"
@@ -224,7 +230,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.countingStarts')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end"
@@ -234,7 +240,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.countingLength')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
@@ -242,14 +248,14 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votesCounted')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end">{delineateNumber(accountVotes.toString())}</Text
                         >
                     </div>
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votingProgress')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
@@ -261,7 +267,7 @@
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
-            <Text type="p" smaller classes="mb-8 text-gray-700" overrideColor
+            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-white" overrideColor
                 >{localize('views.governance.eventDetails.currentResults')}</Text
             >
             <div class="w-full h-full flex justify-center space-x-16">
