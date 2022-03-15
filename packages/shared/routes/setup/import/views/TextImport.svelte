@@ -10,13 +10,13 @@
 
     const importType = getContext<Writable<ImportType>>('importType')
 
-    export let isGettingMigrationData
+    export let isGettingMigrationData: boolean
     let input = ''
 
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        dispatch('next', { importType })
+        dispatch('next', { migrationSeed: input })
     }
     function handleBackClick() {
         if (!isGettingMigrationData) {
