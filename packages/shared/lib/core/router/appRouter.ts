@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { setProfileType, activeProfile, profiles } from 'shared/lib/profile'
-import { ProfileType } from 'shared/lib/typings/profile'
+import { ImportType, ProfileType } from 'shared/lib/typings/profile'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
 import { Router } from './router'
 import { AppRoute } from '@core/router'
@@ -110,9 +110,8 @@ export class AppRouter extends Router<AppRoute> {
                 const { pin } = params
                 if (pin) {
                     walletPin.set(pin)
-                    const walletSetupType_ = get(walletSetupType)
                     const profileType = get(activeProfile)?.type
-                    if ([SetupType.Mnemonic, SetupType.Stronghold].includes(walletSetupType_)) {
+                    if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
                         nextRoute = AppRoute.Congratulations
                     } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
                         nextRoute = AppRoute.LedgerSetup
@@ -130,17 +129,17 @@ export class AppRouter extends Router<AppRoute> {
                 }
                 break
             case AppRoute.Import: {
-                const { setupType } = params
-                walletSetupType.set(setupType)
+                const { importType } = params
+                walletSetupType.set(importType as unknown as SetupType)
 
                 nextRoute = AppRoute.Congratulations
-                if (setupType === SetupType.Mnemonic) {
+                if (importType === ImportType.Mnemonic) {
                     nextRoute = AppRoute.Secure
                 } else if (
-                    [SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(setupType)
+                    [ImportType.Stronghold, ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)
                 ) {
                     nextRoute = AppRoute.Protect
-                } else if (setupType === SetupType.Seed || setupType === SetupType.Seedvault) {
+                } else if (importType === ImportType.Seed || importType === ImportType.SeedVault) {
                     nextRoute = AppRoute.Balance
                 }
                 break

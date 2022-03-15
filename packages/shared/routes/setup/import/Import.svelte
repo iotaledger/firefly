@@ -1,10 +1,8 @@
 <script lang="typescript">
     import { setContext } from 'svelte'
-    import { Writable } from 'svelte/store'
     import { Transition } from 'shared/components'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { ImportType } from 'shared/lib/typings/profile'
     import { importRoute, ImportRouter, ImportRoutes } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
     import { FireflyEvent } from '@core/router/typings/event'
@@ -13,7 +11,7 @@
 
     const importRouter = new ImportRouter()
 
-    setContext<Writable<ImportType>>('importType', importRouter.importType)
+    setContext<ImportRouter>('importRouter', importRouter)
 
     let busy = false
     let error = ''
@@ -52,12 +50,7 @@
     </Transition>
 {:else if $importRoute === ImportRoutes.TextImport}
     <Transition>
-        <TextImport
-            isGettingMigrationData={importRouter.isGettingMigrationData}
-            on:next={next}
-            on:previous={previous}
-            {locale}
-        />
+        <TextImport on:next={next} on:previous={previous} {locale} />
     </Transition>
 {:else if $importRoute === ImportRoutes.FileImport}
     <Transition>
@@ -69,14 +62,7 @@
     </Transition>
 {:else if $importRoute === ImportRoutes.BackupPassword}
     <Transition>
-        <BackupPassword
-            on:next={next}
-            on:previous={previous}
-            isGettingMigrationData={importRouter.isGettingMigrationData}
-            {error}
-            {locale}
-            {busy}
-        />
+        <BackupPassword on:next={next} on:previous={previous} {error} {locale} {busy} />
     </Transition>
 {:else if $importRoute === ImportRoutes.Success}
     <Transition>

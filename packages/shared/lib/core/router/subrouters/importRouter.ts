@@ -12,10 +12,10 @@ import { Subrouter } from '@core/router/subrouters/subrouter'
 export const importRoute = writable<ImportRoutes>(null)
 
 export class ImportRouter extends Subrouter<ImportRoutes> {
+    public isGettingMigrationData = writable(false)
     public importType = writable<ImportType>(null)
     public importFile: Buffer
     public importFilePath: string
-    public isGettingMigrationData = false
 
     constructor() {
         super(ImportRoutes.Init, importRoute)
@@ -43,28 +43,30 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                 const { migrationSeed } = params
                 const importType = get(this.importType)
                 if (importType === ImportType.Seed) {
-                    this.isGettingMigrationData = true
+                    this.isGettingMigrationData.set(true)
                     await getMigrationData(migrationSeed)
-                    get(appRouter).next({ importType })
-                    this.isGettingMigrationData = false
+                    this.isGettingMigrationData.set(false)
                 } else if (importType === ImportType.Mnemonic) {
                     mnemonic.set(migrationSeed.split(' '))
-                    nextRoute = ImportRoutes.Success
                 }
+                nextRoute = ImportRoutes.Success
                 break
             }
             case ImportRoutes.FileImport: {
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
                 const { file, fileName, filePath } = params
-                this.importFile = file
-                this.importFilePath = filePath
 
                 if (seedvaultRegex.test(fileName)) {
                     this.importType.set(ImportType.SeedVault)
                 } else if (strongholdRegex.test(fileName)) {
                     this.importType.set(ImportType.Stronghold)
                 }
+                // } else {
+                //     throw new Error(`Expected stronghold or kdbx filetype, but received file: ${fileName}`)
+                // }
+                this.importFile = file
+                this.importFilePath = filePath
                 nextRoute = ImportRoutes.BackupPassword
                 break
             }
@@ -74,7 +76,7 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                     if (get(this.importType) === ImportType.SeedVault) {
                         // Instead of using "busy", we are deliberately using "isGettingMigrationData"
                         // We do not want to display the spinner in FileImport if stronghold is being imported.
-                        this.isGettingMigrationData = true
+                        this.isGettingMigrationData.set(true)
 
                         const legacySeed = await Platform.importLegacySeed(this.importFile, password)
 
@@ -88,14 +90,14 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
 
                     nextRoute = ImportRoutes.Success
                 } finally {
-                    this.isGettingMigrationData = false
+                    this.isGettingMigrationData.set(false)
                 }
                 break
             }
             case ImportRoutes.LedgerImport: {
                 const { importType } = params
                 this.importType.set(importType)
-                get(appRouter).next({ importType })
+                nextRoute = ImportRoutes.Success
                 break
             }
             case ImportRoutes.Success:
