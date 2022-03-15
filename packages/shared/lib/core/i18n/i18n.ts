@@ -1,18 +1,26 @@
+/*
+ * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
+ */
+
 import { get } from 'svelte/store'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 
 import { appSettings } from 'shared/lib/appSettings'
 
 import { LOCALE_OPTIONS, LANGUAGES } from '@core/i18n/constants'
-import { LocaleDateOptions, LocaleOptions } from '@core/i18n/types'
-
-/*
- * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
- */
+import { LanguageChoice, LocaleDateOptions, LocaleOptions } from '@core/i18n/types'
 
 const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 
-const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> => {
+/**
+ * Initializes the internationalization capabilities for Firefly, loading the appropriate locale
+ * dictionary and preparing it for use.
+ *
+ * @param {LocaleOptions} options
+ *
+ * @returns {Promise<unknown>}
+ */
+export const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
@@ -21,7 +29,7 @@ const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocal
     init({ ...LOCALE_OPTIONS, initialLocale: _locale } as LocaleOptions)
 
     // Don't re-download translation files
-    if (!hasLoadedLocale(_locale)) {
+    if (!hasLocaleEntry(_locale)) {
         const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', _locale)
         // Download translation file for given locale/language
         return loadJson(messagesFileUrl).then((messages) => {
@@ -33,7 +41,7 @@ const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocal
 
             // If we have not loaded "en" make sure we have it as a backup language
             // in case the chosen language does not have all the translations
-            if (_locale !== 'en' && !hasLoadedLocale('en')) {
+            if (_locale !== 'en' && !hasLocaleEntry('en')) {
                 const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
                 void loadJson(messagesFileUrl).then((messages) => {
                     addMessages('en', messages)
@@ -43,20 +51,23 @@ const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocal
     }
 }
 
-const hasLoadedLocale = (locale: string) =>
-    // If the svelte-i18n dictionary has an entry for the
-    // locale, then the locale has already been added
-    get(dictionary)[locale]
+/**
+ * Determines whether a locale has a corresponding dictionary entry.
+ */
+const hasLocaleEntry = (locale: string) => get(dictionary)[locale]
 
-// Extract the "en" bit from fully qualified
-// locales, like "en-US"
+/**
+ * Extract "en" from the list of supported languages.
+ */
 function reduceLocale(locale) {
     return locale.replace('_', '-').split('-')[0]
 }
 
-// Check to see if the given locale is supported
-// by our app. If it isn't, return our app's
-// configured fallback locale.
+/**
+ * Check to see if the given locale is supported
+ * by Firefly (if not then return the fallback locale
+ * from the default locale options).
+ */
 function supported(locale) {
     if (Object.keys(LANGUAGES).includes(locale)) {
         return locale
@@ -65,12 +76,22 @@ function supported(locale) {
     }
 }
 
+/**
+ * Loads an arbitrary json file at a given path.
+ */
 function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const setLanguage = (item: { value }): void => {
-    const locale = Object.keys(LANGUAGES).find((key) => LANGUAGES[key] === item.value)
+/**
+ * Sets a language for Firefly, overwriting any currently set language.
+ *
+ * @param {LanguageChoice} language
+ *
+ * @returns {void}
+ */
+export const setLanguage = (language: LanguageChoice): void => {
+    const locale = Object.keys(LANGUAGES).find((key) => LANGUAGES[key] === language.value)
     appSettings.set({
         ...get(appSettings),
         language: locale,
@@ -79,16 +100,24 @@ const setLanguage = (item: { value }): void => {
     void setupI18n({ fallbackLocale: 'en', initialLocale: locale })
 }
 
-const localize = get(_) as (string, values?) => string
+/**
+ * Wraps the internationalization dictionary, allowing for usage
+ * in either Svelte components or other TypeScript library files.
+ */
+export const localize = get(_) as (string, values?) => string
 
 /**
- * @param date
- * @param options
- * @returns Formatted date
+ * Formats a date according to the current locale and provided date options.
+ *
+ * @param {Date} date
+ * @param {LocaleDateOptions} options
+ *
+ * @returns {string} The formatted date as a string.
  */
-const formatDate = (date: Date, options: LocaleDateOptions): string =>
+export const formatDate = (date: Date, options: LocaleDateOptions): string =>
     getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
 
-// We expose the svelte-i18n _ store so that our app has
-// a single API for i18n
-export { _, setupI18n, localize, setLanguage, formatDate }
+/**
+ * Expose a single API svelte-i1un store for internationalization.
+ */
+export { _ }

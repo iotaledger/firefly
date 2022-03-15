@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { LANGUAGES, localize, setLanguage } from '@core/i18n'
+    import { LanguageChoice, LANGUAGES, localize, setLanguage } from '@core/i18n'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
 
+    let languageList: LanguageChoice[]
     $: languageList = Object.values(LANGUAGES).map((locale) => ({ value: locale, label: locale }))
 
     const handleLanguage = (item) => {
