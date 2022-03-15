@@ -131,7 +131,6 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Import: {
                 const { importType } = params
                 walletSetupType.set(importType as unknown as SetupType)
-
                 nextRoute = AppRoute.Congratulations
                 if (importType === ImportType.Mnemonic) {
                     nextRoute = AppRoute.Secure
@@ -164,7 +163,6 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Congratulations:
                 cleanupSignup()
                 login()
-
                 nextRoute = AppRoute.Dashboard
                 break
         }

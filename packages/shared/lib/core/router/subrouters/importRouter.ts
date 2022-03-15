@@ -46,10 +46,11 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                     this.isGettingMigrationData.set(true)
                     await getMigrationData(migrationSeed)
                     this.isGettingMigrationData.set(false)
+                    get(appRouter).next({ importType })
                 } else if (importType === ImportType.Mnemonic) {
                     mnemonic.set(migrationSeed.split(' '))
+                    nextRoute = ImportRoutes.Success
                 }
-                nextRoute = ImportRoutes.Success
                 break
             }
             case ImportRoutes.FileImport: {
@@ -62,9 +63,7 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                 } else if (strongholdRegex.test(fileName)) {
                     this.importType.set(ImportType.Stronghold)
                 }
-                // } else {
-                //     throw new Error(`Expected stronghold or kdbx filetype, but received file: ${fileName}`)
-                // }
+
                 this.importFile = file
                 this.importFilePath = filePath
                 nextRoute = ImportRoutes.BackupPassword
@@ -97,7 +96,7 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
             case ImportRoutes.LedgerImport: {
                 const { importType } = params
                 this.importType.set(importType)
-                nextRoute = ImportRoutes.Success
+                get(appRouter).next({ importType })
                 break
             }
             case ImportRoutes.Success:

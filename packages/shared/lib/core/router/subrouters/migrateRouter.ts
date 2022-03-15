@@ -20,17 +20,11 @@ export class MigrateRouter extends Subrouter<MigrateRoutes> {
                     nextRoute = MigrateRoutes.BundleMiningWarning
                     break
                 }
-
                 if (get(hasSingleBundle)) {
                     get(appRouter).next()
                 } else {
                     nextRoute = MigrateRoutes.TransferFragmentedFunds
                 }
-
-                break
-
-            case MigrateRoutes.TransferFragmentedFunds:
-                get(appRouter).next()
                 break
             case MigrateRoutes.BundleMiningWarning:
                 nextRoute = MigrateRoutes.SecureSpentAddresses
@@ -46,6 +40,9 @@ export class MigrateRouter extends Subrouter<MigrateRoutes> {
                 break
             case MigrateRoutes.SecurityCheckCompleted:
                 nextRoute = MigrateRoutes.TransferFragmentedFunds
+                break
+            case MigrateRoutes.TransferFragmentedFunds:
+                get(appRouter).next()
                 break
         }
         this.setNext(nextRoute)
