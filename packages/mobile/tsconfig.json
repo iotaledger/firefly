@@ -9,9 +9,8 @@
         "paths": {
             "@common/*": ["../shared/lib/common/*"],
             "@core/*": ["../shared/lib/core/*"],
-            "@lib/*": ["./capacitor/lib/*"]
+            "@lib/*": ["../shared/lib/*"]
         }
     },
-    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"],
-    "exclude": ["../shared/**/tests"]
+    "include": ["./capacitor"]
 }

@@ -1,4 +1,4 @@
-import { IDeepLinkManager } from 'shared/lib/typings/deepLinking/deepLinkManager'
+import { IDeepLinkManager } from '@lib/typings/deepLinking/deepLinkManager'
 
 /** Deep link manager  */
 // Runs in renderer process
