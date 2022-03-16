@@ -12,7 +12,7 @@ import { LanguageChoice, LocaleDateOptions, LocaleOptions } from '@core/i18n/typ
 
 const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 
-export const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> => {
+export function setupI18n(options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
@@ -43,7 +43,9 @@ export const setupI18n = (options: LocaleOptions = { fallbackLocale: 'en', initi
     }
 }
 
-const hasLocaleEntry = (locale: string) => get(dictionary)[locale]
+function hasLocaleEntry(locale: string): boolean {
+    return locale in get(dictionary)
+}
 
 function reduceLocale(locale) {
     return locale.replace('_', '-').split('-')[0]
@@ -61,7 +63,7 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-export const setLanguage = (language: LanguageChoice): void => {
+export function setLanguage(language: LanguageChoice): void {
     const locale = Object.keys(LANGUAGES).find((key) => LANGUAGES[key] === language.value)
     appSettings.set({
         ...get(appSettings),
@@ -71,9 +73,11 @@ export const setLanguage = (language: LanguageChoice): void => {
     void setupI18n({ fallbackLocale: 'en', initialLocale: locale })
 }
 
+export function formatDate(date: Date, options: LocaleDateOptions): string {
+    return getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
+}
+
 export const localize = get(_) as (string, values?) => string
 
-export const formatDate = (date: Date, options: LocaleDateOptions): string =>
-    getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
-
+// Export the svelte-i18n dictionary
 export { _ }

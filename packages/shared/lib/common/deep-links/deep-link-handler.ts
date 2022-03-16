@@ -3,7 +3,7 @@ import { addError } from '../../errors'
 import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
 import type { DeepLinkRequest } from '@common/deep-links/types'
 
-export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: string): void | DeepLinkRequest => {
+export function parseDeepLinkRequest(expectedAddressPrefix: string, input: string): void | DeepLinkRequest {
     if (!input || typeof input !== 'string') {
         return
     }

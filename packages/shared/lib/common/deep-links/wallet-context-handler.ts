@@ -7,7 +7,7 @@ import { addError } from '../../errors'
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
 import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 
-export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: string): void | DeepLinkRequest => {
+export function parseWalletDeepLinkRequest(url: URL, expectedAddressPrefix: string): void | DeepLinkRequest {
     let parameters
 
     // Remove any leading and trailing slashes
@@ -40,11 +40,11 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
     }
 }
 
-const parseSendOperation = (
+function parseSendOperation(
     address: string,
     searchParams: URLSearchParams,
     expectedAddressPrefix: string
-): void | SendOperationParameters => {
+): void | SendOperationParameters {
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
 
