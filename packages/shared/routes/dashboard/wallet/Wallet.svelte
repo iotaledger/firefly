@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { AccountActionsModal, DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
+    import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
+    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
@@ -10,7 +10,6 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
-        getColor,
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
@@ -42,11 +41,18 @@
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
-    import { AccountActions, AccountBalance, AccountHistory, BarChart, LineChart } from './views/'
+    import {
+        AccountAssets,
+        AccountBalance,
+        AccountHistory,
+        BarChart,
+        LineChart,
+        ManageAccount,
+        Send,
+        Receive,
+    } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-
-    let drawer: Drawer
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -400,15 +406,24 @@
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    <AccountBalance
-                        color={getColor($activeProfile, $selectedAccount?.id)}
-                        balance={$selectedAccount.rawIotaBalance}
-                        balanceEquiv={$selectedAccount.balanceEquiv}
-                        onMenuClick={handleMenuClick}
-                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
-                    />
+                    {#if $accountRoute !== AccountRoutes.Manage}
+                        <AccountBalance onMenuClick={handleMenuClick} />
+                    {/if}
                     <DashboardPane classes="h-full -mt-5 z-0">
-                        <AccountActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} />
+                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                            <div class="px-6 my-4">
+                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                            </div>
+                        {/if}
+                        {#if $accountRoute === AccountRoutes.Init}
+                            <AccountAssets />
+                        {:else if $accountRoute === AccountRoutes.Send}
+                            <Send {onSend} {onInternalTransfer} />
+                        {:else if $accountRoute === AccountRoutes.Receive}
+                            <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoutes.Manage}
+                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                        {/if}
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
@@ -426,8 +441,8 @@
                     </DashboardPane>
                 </div>
             </div>
+            <AccountActionsModal bind:isActive={showActionsModal} />
         {/key}
-        <AccountActionsModal bind:isActive={showActionsModal} />
     </div>
 {/if}
 

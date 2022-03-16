@@ -94,9 +94,7 @@
                 balance={'0 Mi'}
                 balanceEquiv={'US$ 0,00'}
                 {color}
-                disabledHover="true"
                 name={accountAlias || localize('general.accountName')}
-                size="l"
                 classes="mb-4"
             />
             <Input
