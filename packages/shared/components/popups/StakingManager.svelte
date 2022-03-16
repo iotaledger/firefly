@@ -32,7 +32,7 @@
         ParticipationAction,
         StakingAirdrop,
     } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup, popupState } from '@core/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'

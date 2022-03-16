@@ -3,7 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'
     import { NetworkConfig } from 'shared/lib/typings/network'
     import { Node } from 'shared/lib/typings/node'

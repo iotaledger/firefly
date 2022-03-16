@@ -13,7 +13,7 @@
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
     import { accountToParticipate, participationAction, participationOverview } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { Locale } from '@core/i18n'

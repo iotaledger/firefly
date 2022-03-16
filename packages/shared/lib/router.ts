@@ -5,7 +5,7 @@ import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from './a
 import { activeProfile, profiles, setProfileType } from './profile'
 import { AccountRoutes, AppRoute, LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from './typings/routes'
 import { selectedAccountId } from './wallet'
-import { closePopup } from './popup'
+import { closePopup } from '@core/popup'
 import { ProfileType } from './typings/profile'
 
 /**

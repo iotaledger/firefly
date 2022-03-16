@@ -9,7 +9,7 @@
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup, popupState } from '@core/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import {
         dashboardRoute,

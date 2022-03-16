@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { api } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
 

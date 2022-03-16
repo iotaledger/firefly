@@ -2,7 +2,7 @@
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'

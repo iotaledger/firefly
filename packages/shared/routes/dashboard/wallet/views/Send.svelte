@@ -20,7 +20,7 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from '@core/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'

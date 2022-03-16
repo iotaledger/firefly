@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { openPopup } from './popup'
+import { openPopup } from '@core/popup'
 import { api } from './wallet'
 import { Event } from './typings/events'
 import { StrongholdStatus } from './typings/wallet'

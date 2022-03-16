@@ -9,7 +9,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from '@core/i18n'
     import { Locale } from '@core/i18n'
-    import { popupState } from 'shared/lib/popup'
+    import { popupState } from '@core/popup'
 
     export let locale: Locale
 

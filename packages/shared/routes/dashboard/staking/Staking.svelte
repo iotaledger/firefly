@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { accountToParticipate, participationAction, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from '@core/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
         GeneratingRemainderDepositAddressEvent,

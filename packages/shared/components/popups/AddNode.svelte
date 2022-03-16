@@ -5,7 +5,7 @@
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import { cleanNodeAuth, getNetworkById, checkNodeUrlValidity } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { activeProfile } from 'shared/lib/profile'
     import { updateNetworkStatus } from '../../lib/networkStatus'

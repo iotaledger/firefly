@@ -2,7 +2,7 @@
     import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'

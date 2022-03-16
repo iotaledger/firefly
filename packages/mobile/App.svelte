@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { popupState } from 'shared/lib/popup'
+    import { popupState } from '@core/popup'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'

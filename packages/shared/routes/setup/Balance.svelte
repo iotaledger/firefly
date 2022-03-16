@@ -18,7 +18,7 @@
         spentAddressesWithNoBundleHashes,
         unselectedInputs,
     } from 'shared/lib/migration'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from '@core/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'

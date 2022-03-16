@@ -20,7 +20,7 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'

@@ -2,7 +2,7 @@
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
+    import { closePopup, popupState } from '@core/popup'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'

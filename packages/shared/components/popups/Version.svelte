@@ -3,7 +3,7 @@
     import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from 'shared/lib/platform'
     import { formatDate } from '@core/i18n'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { onMount } from 'svelte'
     import { Locale } from '@core/i18n'
 

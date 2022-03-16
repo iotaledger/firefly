@@ -15,7 +15,7 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { Platform } from './platform'
-import { openPopup } from './popup'
+import { openPopup } from '@core/popup'
 import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'

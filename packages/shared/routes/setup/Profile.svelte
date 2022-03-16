@@ -14,7 +14,7 @@
     } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import {
         cleanupInProgressProfiles,
         storeProfile,

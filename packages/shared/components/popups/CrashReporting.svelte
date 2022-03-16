@@ -3,7 +3,7 @@
     import { Button, Checkbox, Text, TextHint } from 'shared/components'
     import { appSettings, initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
-    import { closePopup as closePopupInternal } from 'shared/lib/popup'
+    import { closePopup as closePopupInternal } from '@core/popup'
     import { AppSettings } from 'shared/lib/typings/app'
 
     let sendCrashReports = true

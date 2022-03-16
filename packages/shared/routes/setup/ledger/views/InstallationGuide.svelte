@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Icon, Illustration, Link, OnboardingLayout, Text } from 'shared/components'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'

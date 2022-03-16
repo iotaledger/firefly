@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { Platform } from 'shared/lib/platform'
-    import { popupState } from 'shared/lib/popup'
+    import { popupState } from '@core/popup'
     import { dashboardRoute } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'

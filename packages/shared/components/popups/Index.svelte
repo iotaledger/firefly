@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { closePopup, popupState } from 'shared/lib/popup'
+    import { closePopup, popupState } from '@core/popup'
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'

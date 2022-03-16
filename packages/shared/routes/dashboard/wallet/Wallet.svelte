@@ -5,7 +5,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from '@core/popup'
     import {
         activeProfile,
         isLedgerProfile,

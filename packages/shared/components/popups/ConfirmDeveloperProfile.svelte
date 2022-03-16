@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

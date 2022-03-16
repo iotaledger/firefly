@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text, Animation } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { Locale } from '@core/i18n'
 

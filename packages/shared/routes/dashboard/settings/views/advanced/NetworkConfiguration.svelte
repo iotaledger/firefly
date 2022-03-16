@@ -9,7 +9,7 @@
         updateClientOptions,
     } from 'shared/lib/network'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
     import { Node } from 'shared/lib/typings/node'

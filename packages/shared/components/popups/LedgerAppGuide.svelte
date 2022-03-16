@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Illustration, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { Locale } from '@core/i18n'
 

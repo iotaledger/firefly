@@ -20,7 +20,7 @@
         ParticipationAction,
         ParticipationEventState,
     } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup, popupState } from '@core/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing, wallet } from 'shared/lib/wallet'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'

@@ -4,7 +4,7 @@
     import { Button, Spinner, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
     import { Node, NodeInfo } from 'shared/lib/typings/node'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { setClipboard } from 'shared/lib/utils'

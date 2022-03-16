@@ -9,7 +9,7 @@
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'

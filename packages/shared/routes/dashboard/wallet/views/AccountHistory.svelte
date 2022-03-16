@@ -2,7 +2,7 @@
     import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import {

@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
 
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import {
         asyncCreateAccount,
         asyncRemoveWalletAccounts,

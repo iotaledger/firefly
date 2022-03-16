@@ -2,7 +2,7 @@
     import { Icon, ProgressFlow, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@core/popup'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

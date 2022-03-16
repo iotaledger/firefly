@@ -7,7 +7,7 @@
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@core/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
