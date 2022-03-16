@@ -224,6 +224,7 @@
                 @apply border-blue-200;
             }
             &:active,
+            &.active,
             &:focus {
                 @apply bg-blue-100;
                 @apply border-blue-400;

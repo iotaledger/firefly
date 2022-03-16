@@ -598,7 +598,8 @@
                 "answerHeader": {
                     "activeVoting": "Active voting",
                     "selected": "Selected",
-                    "notSelected": "Not selected"
+                    "notSelected": "Not selected",
+                    "winner": "Winner"
                 }
             },
             "votes": "votes"

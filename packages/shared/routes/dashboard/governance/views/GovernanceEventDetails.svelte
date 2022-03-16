@@ -3,7 +3,12 @@
     import { localize } from 'shared/lib/i18n'
     import { canParticipate } from 'shared/lib/participation'
     import { participationOverview } from 'shared/lib/participation/stores'
-    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
+    import {
+        ParticipationEvent,
+        ParticipationEventState,
+        VotingEventAnswer,
+        VotingEventQuestion,
+    } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
@@ -72,7 +77,9 @@
     }
 
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
-        if (isSelected(castedAnswerValue, answerValue)) {
+        if (isWinnerAnswer(answerValue)) {
+            return localize('views.governance.eventDetails.answerHeader.winner')
+        } else if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
         } else if (castedAnswerValue) {
             return localize('views.governance.eventDetails.answerHeader.notSelected')
@@ -151,6 +158,16 @@
             handleTransferState($transferState)
         }
     }
+
+    const isWinnerAnswer = (answerValue: string): boolean => {
+        if (event?.status?.status === ParticipationEventState.Ended) {
+            const resultsAccumulated = results.map((result) => result?.accumulated)
+            const max = Math.max(...resultsAccumulated)
+            const indexOfMax = resultsAccumulated.indexOf(max)
+            return answerValue == results[indexOfMax]?.value.toString()
+        }
+        return false
+    }
 </script>
 
 <div
@@ -183,11 +200,10 @@
         {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
                 onClick={() => handleClick(answer)}
-                secondary
+                secondary={!isWinnerAnswer(answer?.value)}
                 disabled={!canParticipate(event?.status?.status)}
-                classes="px-6 bg-{isSelected(currentVoteValue, answer?.value)
-                    ? 'blue-100'
-                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4 overflow-hidden"
+                active={isSelected(currentVoteValue, answer?.value)}
+                classes="px-6 flex justify-between mb-4 overflow-hidden"
             >
                 <div class="flex justify-between w-full items-center">
                     <div class="flex flex-col mr-32">
@@ -202,7 +218,13 @@
                                         <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
                                     </span>
                                 {:else}
-                                    <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
+                                    <Icon
+                                        width="16"
+                                        height="16"
+                                        icon="checkbox-round"
+                                        classes="{isWinnerAnswer(answer?.value) ? 'text-black' : 'text-blue-500'} mr-2"
+                                        inlineStyle={isWinnerAnswer(answer?.value) ? 'filter: invert(1)' : ''}
+                                    />
                                 {/if}
                             {/if}
                             <Text
@@ -210,7 +232,8 @@
                                 classes="uppercase text-blue-500 {currentVoteValue &&
                                 !isSelected(currentVoteValue, answer?.value)
                                     ? 'text-gray-500'
-                                    : ''}"
+                                    : ''}
+                                {isWinnerAnswer(answer?.value) ? 'text-white' : ''}"
                                 overrideColor
                                 smaller
                                 bold
@@ -218,8 +241,22 @@
                                 {getAnswerHeader(currentVoteValue, answer?.value)}
                             </Text>
                         </div>
-                        <Text type="h3" classes="mb-2 text-left">{answer?.text}</Text>
-                        <Text type="p" classes="text-left max-h-32 overflow-auto">{answer?.additionalInfo}</Text>
+                        <Text
+                            type="h3"
+                            classes="mb-2 text-left {isWinnerAnswer(answer?.value)
+                                ? 'text-white'
+                                : 'text-gray-800 dark:text-white'}"
+                            overrideColor>{answer?.text}</Text
+                        >
+                        <Text
+                            type="p"
+                            classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
+                                ? 'text-white'
+                                : 'text-gray-800 dark:text-white'}"
+                            overrideColor
+                        >
+                            {answer?.additionalInfo}
+                        </Text>
                     </div>
                     {#if canParticipate(event?.status?.status)}
                         <div>
