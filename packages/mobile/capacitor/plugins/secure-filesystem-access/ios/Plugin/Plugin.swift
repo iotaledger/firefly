@@ -25,8 +25,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
                         forOpeningContentTypes: [strongholdType], asCopy: true)
                 } else if (pickerType == "folder") {
                     documentPicker = UIDocumentPickerViewController(
-                        documentTypes: ["public.folder"],
-                        in: UIDocumentPickerMode.open)
+                        forOpeningContentTypes: [.folder])
                 }
             } else {
                 documentPicker = UIDocumentPickerViewController(
