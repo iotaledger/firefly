@@ -7,16 +7,6 @@ import { addError } from '../../errors'
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
 import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 
-/**
- * Parses a deep link within the wallet context.
- *
- * @method parseWalletDeepLinkRequest
- *
- * @param {URL} url The URL that was opened by the user.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
- *
- * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
- */
 export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: string): void | DeepLinkRequest => {
     let parameters
 
@@ -50,17 +40,6 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
     }
 }
 
-/**
- * Parses a deep link for the send operation.
- *
- * @method parseSendOperation
- *
- * @param {string} address The recipient's Bech32 address.
- * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
- *
- * @return {void | SendOperationParameters} The formatted parameters for the send operation.
- */
 const parseSendOperation = (
     address: string,
     searchParams: URLSearchParams,

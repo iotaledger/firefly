@@ -1,6 +1,3 @@
-/**
- * The available languages supported by Firefly.
- */
 export const LANGUAGES = {
     en: 'English',
     af: 'Afrikaans',

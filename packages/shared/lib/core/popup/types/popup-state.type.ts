@@ -1,7 +1,3 @@
-/**
- * The type for the popup state, used when
- * trying to to open or close a popup.
- */
 export type PopupState = {
     active: boolean
     type: string

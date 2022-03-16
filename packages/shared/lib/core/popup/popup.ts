@@ -6,17 +6,6 @@ import { localize } from '@core/i18n'
 import { PopupState } from '@core/popup/types'
 import { popupState } from '@core/popup/stores'
 
-/**
- * Opens a popup component with given properties,
- * internally modifying the popup state.
- *
- * @method openPopup
- *
- * @param {PopupState}
- * @param {boolean} forceClose
- *
- * @returns {void}
- */
 export function openPopup(
     {
         type,
@@ -31,16 +20,6 @@ export function openPopup(
     modifyPopupState({ active: true, type, hideClose, preventClose, fullScreen, transition, props }, forceClose)
 }
 
-/**
- * Closes the currently open popup component,
- * internally modifying the popup state.
- *
- * @method closePopup
- *
- * @param {boolean} forceClose
- *
- * @returns {void}
- */
 export function closePopup(forceClose: boolean = false): void {
     modifyPopupState(
         { active: false, type: null, hideClose: false, preventClose: false, fullScreen: false, props: null },
@@ -48,17 +27,6 @@ export function closePopup(forceClose: boolean = false): void {
     )
 }
 
-/**
- * Modifies the internal popup state store, used when opening
- * or closing a popup.
- *
- * @internal
- *
- * @param {PopupState} state
- * @param {boolean} forceClose
- *
- * @returns {void}
- */
 function modifyPopupState(state: PopupState, forceClose: boolean = false): void {
     /**
      * NOTE: There are some cases where a popup needs to stay open despite

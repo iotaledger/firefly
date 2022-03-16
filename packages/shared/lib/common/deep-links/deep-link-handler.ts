@@ -3,16 +3,6 @@ import { addError } from '../../errors'
 import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
 import type { DeepLinkRequest } from '@common/deep-links/types'
 
-/**
- * Parses an IOTA deep link, i.e. a URL that begins with the scheme "iota://".
- *
- * @method parseDeepLinkRequest
- *
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
- * @param {string} input The URL that was opened by the user.
- *
- * @returns {void | DeepLinkRequest} The formatted content of a deep link request.
- */
 export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: string): void | DeepLinkRequest => {
     if (!input || typeof input !== 'string') {
         return
