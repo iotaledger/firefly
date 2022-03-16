@@ -578,7 +578,15 @@
                     "holding": "Counting",
                     "ended": "Ended"
                 },
-                "button": "View proposal"
+                "button": "View proposal",
+                "treasury": {
+                    "notFound": {
+                        "title": "Couldn't load Community Treasury vote.",
+                        "subtitle": "Please connect to nodes that support this proposal",
+                        "buttonConnect": "Connect to default node",
+                        "buttonSettings": "View node settings"
+                    }
+                }
             },
             "eventDetails": {
                 "votingOpens": "Voting opens on",
