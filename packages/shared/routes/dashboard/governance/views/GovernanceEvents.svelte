@@ -71,8 +71,8 @@
                 </Text>
             </Button>
         {/if}
-        <Button secondary outline onClick={handleViewNodeSettingsClick}>
-            <Text type="h5" bold classes="text-blue-500" overrideColor>
+        <Button secondary onClick={handleViewNodeSettingsClick} classes="border-transparent">
+            <Text type="h5" bold classes="text-blue-500 dark:text-white" overrideColor>
                 {localize('views.governance.events.treasury.notFound.buttonSettings')}
             </Text>
         </Button>
