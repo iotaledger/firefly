@@ -17,7 +17,7 @@
     import { transferState } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
+    import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
     const handleNewStakingFeature = (): void => {
         if (!$activeProfile?.hasVisitedStaking) {
@@ -145,8 +145,7 @@
     })
 </script>
 
-<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
-    <StakingHeader />
+<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3 overflow-hidden">
             <DashboardPane classes="w-full flex-shrink-0">

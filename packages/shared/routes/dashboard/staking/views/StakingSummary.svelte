@@ -17,17 +17,16 @@
         ParticipationAction,
         ParticipationEventState,
     } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 
-    $: showSpinner = (!$popupState.active && $participationAction) || $isSyncing
+    $: showSpinner = $participationAction || $isSyncing
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
-    $: cannotStakeAnAccount =
-        getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
+    $: cannotStake = getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
 
     $: isStakedAndCanParticipate = $stakedAmount > 0 && canParticipateInEvent
 
@@ -37,18 +36,18 @@
     $: $networkStatus, (canParticipateWithNode = hasNodePlugin(NodePlugin.Participation))
 
     let showTooltip = false
+    // hide tooltip if tooltipAnchor destroys
     $: {
         if (!isPartiallyStakedAndCanParticipate) showTooltip = false
     }
 
     let tooltipAnchor
-
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
     }
 
     const handleStakeFundsClick = (): void => {
-        if (cannotStakeAnAccount) {
+        if (cannotStake) {
             showAppNotification({
                 type: 'warning',
                 message: localize('warning.participation.noFunds'),
@@ -62,7 +61,7 @@
             $stakingEventState === ParticipationEventState.Commencing
         const type = !isStakedAndCanParticipate && showNotice ? 'stakingNotice' : 'stakingManager'
 
-        openPopup({ type, hideClose: false })
+        openPopup({ type })
     }
 
     const getSpinnerMessage = (): string => {

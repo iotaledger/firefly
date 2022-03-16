@@ -508,7 +508,6 @@
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",

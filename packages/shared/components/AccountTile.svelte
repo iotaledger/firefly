@@ -52,7 +52,8 @@
     const _getAccount = (accounts: WalletAccount[]): WalletAccount => accounts.find((account) => account.alias === name)
     const _hasAccount = (accounts: WalletAccount[]): boolean => _getAccount(accounts) !== undefined
 
-    $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
+    // $: isPartiallyStaked = _hasAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
+    $: isPartiallyStaked = false
     $: isActivelyStaking = _hasAccount($stakedAccounts) && isStakingPossible($stakingEventState)
     $: isStakingEnded = $stakingEventState === ParticipationEventState.Ended
 

@@ -191,17 +191,17 @@ const SHIMMER_REWARD_MULTIPLIER = 1.0
  * @param {boolean} formatAmount
  * @param {number} decimalPlaces
  *
- * @returns {number | string}
+ * @returns {string}
  */
 export const estimateStakingAirdropReward = (
     airdrop: StakingAirdrop,
     amountToStake: number,
     formatAmount: boolean = false,
     decimalPlaces: number = 6
-): number | string => {
+): string => {
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     if (!stakingEvent || amountToStake <= 0) {
-        return formatAmount ? formatStakingAirdropReward(airdrop, 0, decimalPlaces) : 0
+        return formatAmount ? formatStakingAirdropReward(airdrop, 0, decimalPlaces) : '0'
     }
 
     /**
