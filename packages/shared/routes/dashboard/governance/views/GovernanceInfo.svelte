@@ -16,7 +16,7 @@
     </div>
     <Link
         classes="mr-5 text-13 text-gray-800 dark:text-white border border-solid border-gray-300 dark:border-transparent
-        py-4 pl-6 flex justify-between bg-gray-50 hover:bg-blue-100 dark:hover:bg-gray-700 bg-gray-900 rounded-xl w-full h-fit"
+        py-4 pl-6 flex justify-between bg-gray-50 hover:bg-blue-100 dark:hover:bg-gray-700 dark:bg-gray-900 rounded-xl w-full h-fit"
         onClick={() => Electron.openUrl('https://iotatreasury.org/how-voting-works.html')}
     >
         <Text type="p" classes="truncate">{localize('views.governance.info.link')}</Text>
