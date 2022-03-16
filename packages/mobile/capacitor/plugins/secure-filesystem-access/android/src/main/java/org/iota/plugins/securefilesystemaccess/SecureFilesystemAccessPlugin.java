@@ -206,9 +206,8 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    // this is not working on Android 11+
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
-                            Uri.parse(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).toString()));
+                            getContext().getExternalFilesDir(DIRECTORY_DOWNLOADS));
                 }
             }
 
