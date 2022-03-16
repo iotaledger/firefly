@@ -1,10 +1,4 @@
-export type NotificationType = 'info' | 'warning' | 'error'
-
-export type NotificationAction = {
-    label: string
-    isPrimary?: boolean
-    callback?: (notificationData: NotificationData, actionIndex: number) => void
-}
+import { NotificationAction, NotificationType } from '@core/notifications/types'
 
 export type NotificationData = {
     type: NotificationType

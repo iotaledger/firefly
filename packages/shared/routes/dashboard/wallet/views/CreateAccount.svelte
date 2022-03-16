@@ -6,7 +6,7 @@
     import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors } from 'shared/lib/wallet'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import { localize } from '@core/i18n'
     import { Locale } from '@core/i18n'
     import { popupState } from '@core/popup'

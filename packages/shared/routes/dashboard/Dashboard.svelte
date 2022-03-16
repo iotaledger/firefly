@@ -9,11 +9,7 @@
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
-    import {
-        NOTIFICATION_TIMEOUT_NEVER,
-        removeDisplayNotification,
-        showAppNotification,
-    } from 'shared/lib/notifications'
+    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from '@core/notifications'
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'

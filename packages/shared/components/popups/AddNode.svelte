@@ -4,7 +4,7 @@
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import { cleanNodeAuth, getNetworkById, checkNodeUrlValidity } from 'shared/lib/network'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import { closePopup } from '@core/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { activeProfile } from 'shared/lib/profile'

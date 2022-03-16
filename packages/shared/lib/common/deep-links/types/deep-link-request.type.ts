@@ -1,4 +1,4 @@
-import type { NotificationData } from '../../../typings/notification'
+import type { NotificationData } from '@core/notifications'
 
 import type { DeepLinkContext, SendOperationParameters, WalletOperation } from '@common/deep-links'
 

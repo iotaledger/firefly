@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@core/notifications'
 import { localize } from '@core/i18n'
 
 import { PopupState } from '@core/popup/types'

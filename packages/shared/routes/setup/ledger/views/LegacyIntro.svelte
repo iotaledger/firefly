@@ -2,7 +2,7 @@
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import { api, isBackgroundSyncing } from 'shared/lib/wallet'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'

@@ -19,7 +19,12 @@
         ledgerDeviceState,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import {
+        displayNotifications,
+        NotificationType,
+        removeDisplayNotification,
+        showAppNotification,
+    } from '@core/notifications'
     import { closePopup, openPopup, popupState } from '@core/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -39,7 +44,6 @@
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
-    import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
 

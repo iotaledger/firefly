@@ -5,7 +5,7 @@ import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
-import { isNewNotification, showAppNotification } from './notifications'
+import { isNewNotification, NotificationType, showAppNotification } from '@core/notifications'
 import { Event } from './typings/events'
 import {
     LedgerApp,
@@ -15,7 +15,6 @@ import {
     LegacyLedgerErrorCode,
     LegacyLedgerErrorName,
 } from './typings/ledger'
-import { NotificationType } from './typings/notification'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90

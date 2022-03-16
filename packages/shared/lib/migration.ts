@@ -24,7 +24,7 @@ import Validator from 'shared/lib/validator'
 import { api, wallet } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
-import { showAppNotification } from './notifications'
+import { showAppNotification } from '@core/notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81

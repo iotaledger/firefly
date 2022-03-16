@@ -2,12 +2,12 @@ import { Platform } from 'shared/lib/platform'
 import { localize } from '@core/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
+    NotificationData,
     removeDisplayNotification,
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from 'shared/lib/notifications'
-import { NotificationData } from 'shared/lib/typings/notification'
+} from '@core/notifications'
 import { writable } from 'svelte/store'
 import { NativeProgress, VersionDetails } from './typings/appUpdater'
 

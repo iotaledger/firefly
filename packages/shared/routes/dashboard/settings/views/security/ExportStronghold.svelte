@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import { openPopup } from '@core/popup'
 
     export let exportStronghold: (password: string, callback?: (cancelled: boolean, err?: string) => void) => void

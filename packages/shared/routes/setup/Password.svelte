@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { mobile, strongholdPassword } from 'shared/lib/app'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'

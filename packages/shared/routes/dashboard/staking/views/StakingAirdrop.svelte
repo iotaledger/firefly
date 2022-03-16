@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,

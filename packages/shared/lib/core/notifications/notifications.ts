@@ -1,13 +1,17 @@
-import { appSettings } from 'shared/lib/appSettings'
-import { generateRandomId } from 'shared/lib/utils'
-import { get, writable } from 'svelte/store'
-import { Platform } from './platform'
-import { NotificationData, NotificationType } from './typings/notification'
+import { get } from 'svelte/store'
+
+import { appSettings } from '@lib/appSettings'
+import { Platform } from '@lib/platform'
+import { generateRandomId } from '@lib/utils'
+
+import {
+    displayNotifications,
+    NOTIFICATION_TIMEOUT_NEVER,
+    NotificationData,
+    NotificationType,
+} from '@core/notifications'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
-export const NOTIFICATION_TIMEOUT_NEVER = -1
-
-export const displayNotifications = writable<NotificationData[]>([])
 
 export function isNewNotification(type: NotificationType): boolean {
     return get(displayNotifications).filter((nd: NotificationData) => nd.type === type).length === 0

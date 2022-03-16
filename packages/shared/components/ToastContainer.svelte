@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Toast } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { displayNotifications } from 'shared/lib/notifications'
+    import { displayNotifications } from '@core/notifications'
     import { fade } from 'svelte/transition'
 
     let toasts

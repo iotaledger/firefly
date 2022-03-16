@@ -4,7 +4,7 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@core/notifications'
     import {
         canParticipate,
         getAccountParticipationAbility,
