@@ -594,7 +594,12 @@
                 "votesCounted": "Your total votes counted",
                 "countingStarts": "Counting starts on",
                 "countingLength": "Counting length",
-                "currentResults": "Current results"
+                "currentResults": "Current results",
+                "answerHeader": {
+                    "activeVoting": "Active voting",
+                    "selected": "Selected",
+                    "notSelected": "Not selected"
+                }
             },
             "votes": "votes"
         }
@@ -1113,7 +1118,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "option": "Option"
     },
     "dates": {
         "today": "Today",

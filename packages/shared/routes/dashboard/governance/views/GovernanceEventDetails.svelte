@@ -12,7 +12,6 @@
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
-    import { delineateNumber } from 'shared/lib/utils'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
@@ -76,9 +75,9 @@
         if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
         } else if (castedAnswerValue) {
-            return 'Not Selected'
+            return localize('views.governance.eventDetails.answerHeader.notSelected')
         } else {
-            return `Option ${answerValue}`
+            return `${localize('general.option')} ${answerValue}`
         }
     }
 
@@ -91,9 +90,9 @@
 
     const setActiveText = (): string => {
         if (event?.status?.status === ParticipationEventState.Holding) {
-            return 'Active Voting'
+            return localize('views.governance.eventDetails.answerHeader.activeVoting')
         }
-        return 'Selected'
+        return localize('views.governance.eventDetails.answerHeader.selected')
     }
 
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
@@ -194,9 +193,28 @@
                     <div class="flex flex-col mr-32">
                         <div class="flex items-center mb-2">
                             {#if isSelected(currentVoteValue, answer?.value)}
-                                <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
+                                {#if event?.status?.status === ParticipationEventState.Holding}
+                                    <span class="relative flex justify-center items-center h-3 w-3 mr-2">
+                                        <span
+                                            class="pulse absolute inline-flex h-full w-full rounded-full bg-blue-400
+                                            opacity-75"
+                                        />
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                                    </span>
+                                {:else}
+                                    <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
+                                {/if}
                             {/if}
-                            <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>
+                            <Text
+                                type="p"
+                                classes="uppercase text-blue-500 {currentVoteValue &&
+                                !isSelected(currentVoteValue, answer?.value)
+                                    ? 'text-gray-500'
+                                    : ''}"
+                                overrideColor
+                                smaller
+                                bold
+                            >
                                 {getAnswerHeader(currentVoteValue, answer?.value)}
                             </Text>
                         </div>
@@ -297,3 +315,16 @@
         </DashboardPane>
     {/if}
 </div>
+
+<style>
+    .pulse {
+        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes -ping {
+        30%,
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
