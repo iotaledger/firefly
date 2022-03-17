@@ -14,14 +14,7 @@ import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import {
-    Account,
-    Account as BaseAccount,
-    AccountIdentifier,
-    SignerType,
-    SyncAccountOptions,
-    SyncedAccount,
-} from './typings/account'
+import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -122,16 +115,12 @@ export const resetWallet = (): void => {
 
 // Created to help selectedAccount reactivity.
 // Use it to detected switches on selectedAccount
-export const selectedAccountId = writable<AccountIdentifier | null>(null)
+export const selectedAccountId = writable<string>(null)
 
 export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
     $accounts.find((acc) => acc.id === $selectedAccountId)
 )
-export const setSelectedAccount = (id: AccountIdentifier): void => selectedAccountId.set(id)
-export const getAccountById = (id: AccountIdentifier): WalletAccount | null => {
-    const accounts = get(wallet)?.accounts
-    return get(accounts)?.find((account) => account.id === id) || null
-}
+export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
 
 export const selectedMessage = writable<Message | null>(null)
 
@@ -1011,7 +1000,7 @@ export const getAccountMeta = (
 }
 
 export const prepareAccountInfo = (
-    account: BaseAccount,
+    account: Account,
     meta: {
         balance: number
         incoming: number
@@ -1024,7 +1013,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,
