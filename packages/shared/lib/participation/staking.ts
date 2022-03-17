@@ -223,7 +223,7 @@ export const estimateStakingAirdropReward = (
             : 0
     const estimation = multiplier * (amountToStake / 1_000_000) * (endMilestone - beginMilestone)
 
-    return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation
+    return formatAmount ? formatStakingAirdropReward(airdrop, estimation, decimalPlaces) : estimation.toString()
 }
 
 /**
