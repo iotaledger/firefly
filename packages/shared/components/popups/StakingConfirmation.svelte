@@ -8,10 +8,14 @@
         getAirdropFromEventId,
         getStakingEventFromAirdrop,
         getUnstakedFunds,
-        isAccountPartiallyStaked,
     } from 'shared/lib/participation'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { accountToParticipate, participationAction, participationOverview } from 'shared/lib/participation/stores'
+    import {
+        accountToParticipate,
+        participationAction,
+        participationOverview,
+        isPartiallyStaked,
+    } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
@@ -25,12 +29,12 @@
     export let locale: Locale
     export let accountToStake: WalletAccount
 
-    let tooltipAirdrop
+    let tooltipAirdrop: string
     let showTooltip = false
     let tooltipAnchor: unknown
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
 
-    const toggleTooltip = (airdrop: string): void => {
+    const toggleTooltip = (airdrop: StakingAirdrop): void => {
         tooltipAirdrop = capitalize(airdrop)
         showTooltip = !showTooltip
         if (showTooltip) {
@@ -40,18 +44,14 @@
         }
     }
 
-    const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
-
-    const canReachAirdropMinimum = (airdrop: string) => canAccountReachMinimumAirdrop(accountToStake, airdrop)
+    const canReachAirdropMinimum = (airdrop: StakingAirdrop) => canAccountReachMinimumAirdrop(accountToStake, airdrop)
 
     const getRewards = (airdrop: StakingAirdrop): string => {
         if (!canReachAirdropMinimum(airdrop)) return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
-        return <string>(
-            estimateStakingAirdropReward(
-                airdrop,
-                isPartialStake ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
-                true
-            )
+        return estimateStakingAirdropReward(
+            airdrop,
+            $isPartiallyStaked ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
+            true
         )
     }
 
@@ -79,34 +79,8 @@
     }
 
     const handleConfirmClick = (): void => {
-        const _onConfirm = (): void => {
-            accountToParticipate.set(accountToStake)
-            participationAction.set(ParticipationAction.Stake)
-
-            const selections = !isPartialStake
-                ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
-                : activeAirdrops
-            const participations: Participation[] = selections.map(
-                (selection) =>
-                    <Participation>{
-                        eventId: getStakingEventFromAirdrop(<StakingAirdrop>selection.toLowerCase())?.eventId,
-                        answers: [],
-                    }
-            )
-            openPopup(
-                {
-                    type: 'stakingManager',
-                    props: {
-                        shouldParticipateOnMount: true,
-                        participations,
-                    },
-                },
-                true
-            )
-        }
-
         if ($isSoftwareProfile) {
-            checkStronghold(_onConfirm)
+            checkStronghold(openStakingManager)
         } else {
             if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
                 showAppNotification({
@@ -114,12 +88,39 @@
                     message: locale('error.ledger.appNotOpen'),
                 })
             } else {
-                _onConfirm()
+                openStakingManager()
             }
         }
     }
 
-    const getAirdropParticipation = () => {
+    const openStakingManager = (): void => {
+        accountToParticipate.set(accountToStake)
+        participationAction.set(ParticipationAction.Stake)
+
+        const selections = !$isPartiallyStaked
+            ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
+            : activeAirdrops
+
+        const participations = selections.map(
+            (selection): Participation => ({
+                eventId: getStakingEventFromAirdrop(selection.toLowerCase() as StakingAirdrop)?.eventId,
+                answers: [],
+            })
+        )
+
+        openPopup(
+            {
+                type: 'stakingManager',
+                props: {
+                    shouldParticipateOnMount: true,
+                    participations,
+                },
+            },
+            true
+        )
+    }
+
+    const getAirdropParticipation = (): string => {
         if (activeAirdrops.length === 1) {
             return capitalize(activeAirdrops.join())
         } else {
@@ -134,20 +135,20 @@
 <Text type="h3" classes="px-4 mb-4 text-center">{locale('popups.stakingConfirmation.title')}</Text>
 <div class="rounded-2xl	flex flex-col space-y-1 self-center text-center p-5 bg-gray-100 dark:bg-gray-800">
     <Text type="p" highlighted bigger>
-        {locale(`popups.stakingConfirmation.subtitle${isPartialStake ? 'Merge' : 'Stake'}`)}
+        {locale(`popups.stakingConfirmation.subtitle${isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
+        {isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">
-    {locale(`popups.stakingConfirmation.body${isPartialStake ? 'Merge' : 'Stake'}`, {
+    {locale(`popups.stakingConfirmation.body${isPartiallyStaked ? 'Merge' : 'Stake'}`, {
         values: { airdrop: getAirdropParticipation() },
     })}
 </Text>
-{#if !isPartialStake}
+{#if !isPartiallyStaked}
     <div class="flex flex-row mb-6 space-x-2 flex-1">
-        {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
+        {#each Object.values(StakingAirdrop) as airdrop}
             <div
                 on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
                 class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(

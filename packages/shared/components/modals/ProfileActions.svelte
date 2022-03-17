@@ -104,7 +104,6 @@
             },
         })
     }
-    ('')
 
     function handleVersionUpdateClick() {
         openPopup({ type: 'version' })
