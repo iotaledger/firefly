@@ -5,10 +5,9 @@
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
-        assemblyStakingRewards,
         participationOverview,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards,
+        selectedAccountStakingRewards,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
@@ -141,14 +140,18 @@
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly()
+                                ? $selectedAccountStakingRewards.assembly
+                                : $selectedAccountStakingRewards.shimmer,
                             6
                         ).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly()
+                                ? $selectedAccountStakingRewards.assembly
+                                : $selectedAccountStakingRewards.shimmer,
                             6
                         ).split(' ')[1]}
                     </Text>
