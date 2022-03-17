@@ -11,7 +11,7 @@ import {
     getWalletDataPath,
     AccountColors,
 } from 'shared/lib/wallet'
-import { Platform } from './platform'
+import { Platform } from '@core/platform/platform'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'

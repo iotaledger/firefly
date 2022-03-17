@@ -25,7 +25,7 @@
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
 
     export let locale: Locale
 

@@ -4,7 +4,7 @@
     import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
     import { formatDate } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'

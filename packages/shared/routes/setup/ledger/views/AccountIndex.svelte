@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from 'shared/lib/migration'
     import { popupState } from '@core/popup'

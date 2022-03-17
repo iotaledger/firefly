@@ -1,5 +1,5 @@
-import { Electron } from 'shared/lib/electron'
 import App from './App.svelte'
+import { Platform } from 'shared/lib/core/platform'
 
 const captureException = require('./sentry')(false).captureException || function (..._) {}
 
@@ -8,7 +8,7 @@ window.addEventListener('error', (event) => {
     const hasErrorMessage = event.error && event.error.message
     const error = hasErrorMessage ? { message: event.error.message, stack: event.error.stack } : event.error || event
 
-    Electron.unhandledException(errorType, error)
+    Platform.unhandledException(errorType, error)
     captureException(error)
 
     event.preventDefault()

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text, Link } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { closePopup } from '@core/popup'
     import { Locale } from '@core/i18n'
 

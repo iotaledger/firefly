@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'

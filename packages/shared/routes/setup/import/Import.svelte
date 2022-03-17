@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notifications'
     import { newProfile } from 'shared/lib/profile'

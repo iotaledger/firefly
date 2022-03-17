@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { showAppNotification } from '@core/notifications'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'

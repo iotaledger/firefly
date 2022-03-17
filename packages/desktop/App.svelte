@@ -8,7 +8,7 @@
     import { localeDirectionality, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from '@core/notifications'
-    import { Electron } from 'shared/lib/electron'
+    import { Platform } from '@core/platform'
     import { openPopup, popupState } from '@core/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import {
@@ -47,8 +47,9 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
-        Electron.updateAppSettings({ sendCrashReports })
+    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> => {
+        await Platform.updateAppSettings({ sendCrashReports })
+    }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode
@@ -58,11 +59,11 @@
     $: {
         isLocaleLoaded.subscribe((loaded) => {
             if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
+                Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
             }
         })
     }
-    $: Electron.updateMenu('loggedIn', $loggedIn)
+    $: Platform.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $localeDirectionality) {
         document.dir = $localeDirectionality
@@ -88,13 +89,13 @@
             await getVersionDetails()
             pollVersion()
         }
-        Electron.onEvent('menu-navigate-wallet', (route) => {
+        Platform.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
             walletRoute.set(route)
         })
-        Electron.onEvent('menu-navigate-settings', () => {
+        Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 if (get(dashboardRoute) !== Tabs.Settings) {
                     openSettings()
@@ -103,7 +104,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', () => {
+        Platform.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -111,26 +112,26 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', () => {
+        Platform.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', () => {
+        Platform.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
-        Electron.hookErrorLogger((err) => {
+        Platform.hookErrorLogger((err) => {
             addError(err)
         })
 
         cleanupInProgressProfiles()
 
-        Electron.onEvent('deep-link-request', showDeepLinkNotification)
+        Platform.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
     })
 
     onDestroy(() => {
-        Electron.removeListenersForEvent('deep-link-request')
-        Electron.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-request')
+        Platform.DeepLinkManager.clearDeepLinkRequest()
     })
 
     const showDeepLinkNotification = () => {

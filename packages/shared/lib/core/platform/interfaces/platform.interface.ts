@@ -1,17 +1,14 @@
-import { IDeepLinkManager } from '@common/deep-links'
-import { AppSettings } from './app'
-import { ILedger } from './ledger'
 import { INotificationManager } from '@core/notifications'
-import { IPincodeManager } from './pincodeManager'
-import { VersionDetails } from './appUpdater'
-import { Error } from './error'
-import { EventMap } from './events'
-import { IBarcodeManager } from './barcodeManager'
 
-export enum Platforms {
-    MOBILE = 'mobile',
-    DESKTOP = 'desktop',
-}
+import { IDeepLinkManager } from '@common/deep-links'
+
+import { ILedger } from '@lib/typings/ledger'
+import { AppSettings } from '@lib/typings/app'
+import { Error } from '@lib/typings/error'
+import { IPincodeManager } from '@lib/typings/pincodeManager'
+import { IBarcodeManager } from '@lib/typings/barcodeManager'
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { EventMap } from '@lib/typings/events'
 
 export interface IPlatform {
     ledger: ILedger

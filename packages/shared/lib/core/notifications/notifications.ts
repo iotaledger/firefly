@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { appSettings } from '@lib/appSettings'
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/platform/platform'
 import { generateRandomId } from '@lib/utils'
 
 import {

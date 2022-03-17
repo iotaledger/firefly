@@ -3,7 +3,7 @@
     import { initAppSettings } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notifications'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { popupState } from '@core/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import {
         createMigrationBundle,
         getInputIndexesForBundle,

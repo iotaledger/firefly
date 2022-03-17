@@ -1,7 +1,7 @@
 import { mobile } from 'shared/lib/app'
 import { Writable } from 'svelte/store'
 import { get, writable } from 'svelte/store'
-import { Platform } from './platform'
+import { Platform } from '@core/platform/platform'
 
 const BarcodeManager = Platform.BarcodeManager
 

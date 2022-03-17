@@ -1,4 +1,4 @@
-import { Platform } from 'shared/lib/platform'
+import { Platform } from '@core/platform/platform'
 import { localize } from '@core/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,

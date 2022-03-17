@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -302,7 +302,7 @@
     function migrateFunds() {
         migratingFundsMessage = locale('views.migrate.migrating')
 
-        transactions.reduce(
+        void transactions.reduce(
             (promise, transaction, idx) =>
                 // @ts-ignore
                 promise

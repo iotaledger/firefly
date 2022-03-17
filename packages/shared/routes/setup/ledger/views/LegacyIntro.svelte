@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notifications'
     import { api, isBackgroundSyncing } from 'shared/lib/wallet'

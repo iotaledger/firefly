@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'

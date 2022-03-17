@@ -4,7 +4,7 @@
         generateTransactionHistoryFileName,
     } from 'shared/lib/transactionHistory'
     import { Button, Password, Spinner, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from '@core/notifications'
     import { closePopup } from '@core/popup'

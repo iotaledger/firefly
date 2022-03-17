@@ -9,7 +9,7 @@
         TOS_VERSION,
         PRIVACY_POLICY_VERSION,
     } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'

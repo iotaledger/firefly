@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { Locale } from '@core/i18n'

@@ -12,7 +12,7 @@
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from '@core/notifications'
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { closePopup, openPopup, popupState } from '@core/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {

@@ -1,1 +1,1 @@
-export * from './deep-links'
+export * as deepLinks from './deep-links'

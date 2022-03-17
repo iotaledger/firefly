@@ -2,7 +2,7 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { getLegacyErrorMessage, promptUserToConnectLedger } from 'shared/lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,

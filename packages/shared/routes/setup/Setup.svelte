@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Locale } from '@core/i18n'

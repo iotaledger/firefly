@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { getProfileDataPath } from 'shared/lib/wallet'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { showAppNotification } from '@core/notifications'
 
     let newName = $activeProfile.name

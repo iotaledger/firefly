@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

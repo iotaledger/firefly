@@ -1,5 +1,5 @@
 import { Bech32 } from 'shared/lib/bech32'
-import { Platform } from 'shared/lib/platform'
+import { Platform } from '@core/platform/platform'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@core/notifications'
 import validUrl from 'valid-url'

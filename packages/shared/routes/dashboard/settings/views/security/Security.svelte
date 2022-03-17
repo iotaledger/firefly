@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/platform'
     import { isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { SecuritySettings } from 'shared/lib/typings/routes'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
