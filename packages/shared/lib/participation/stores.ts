@@ -192,6 +192,24 @@ export const shimmerStakingRewards: Readable<number> = derived(participationOver
 )
 
 /**
+ * The total accumulated rewards for selected account
+ */
+export const selectedAccountStakingRewards: Readable<{ assembly: number; shimmer: number }> = derived(
+    participationOverview,
+    (overview) => {
+        const selectedAccountOverview = overview.find(
+            (accountOverview) => accountOverview.accountIndex === get(selectedAccount).index
+        )
+        if (selectedAccountOverview) {
+            return {
+                assembly: selectedAccountOverview.assemblyRewards,
+                shimmer: selectedAccountOverview.shimmerRewards,
+            }
+        }
+    }
+)
+
+/**
  * The available participation events (staking AND voting).
  */
 export const participationEvents = writable<ParticipationEvent[]>([])
