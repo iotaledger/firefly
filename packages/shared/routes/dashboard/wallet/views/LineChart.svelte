@@ -1,6 +1,11 @@
 <script lang="typescript">
     import { Chart, Dropdown } from 'shared/components'
-    import { getChartDataFromBalanceHistory, selectedDashboardChart, selectedWalletChart } from 'shared/lib/chart'
+    import {
+        getChartDataForTokenValue,
+        getChartDataFromBalanceHistory,
+        selectedDashboardChart,
+        selectedWalletChart,
+    } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from 'shared/lib/i18n'
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
@@ -55,6 +60,9 @@
                             tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
                             convertToSelectedCurrency: true,
                         })
+                        break
+                    case WalletChartType.TOKEN:
+                        chartData = getChartDataForTokenValue()
                         break
                     default:
                         break
