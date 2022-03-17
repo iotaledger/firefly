@@ -400,19 +400,21 @@ const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdr
  * @param {StakingAirdrop} airdrop
  * @param {boolean} format
  *
- * @returns {number | string}
+ * @returns {string}
  */
 export const getIotasUntilMinimumAirdropReward = (
     account: WalletAccount,
     airdrop: StakingAirdrop,
     format: boolean = false
-): number | string => {
-    if (!account) return format ? formatUnitBestMatch(0) : 0
+): string => {
+    if (!account) {
+        return format ? formatUnitBestMatch(0) : '0'
+    }
 
     const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
     const iotasRequired = Math.round(calculateIotasUntilMinimumReward(currentRewards, airdrop))
 
-    return format ? formatUnitBestMatch(iotasRequired) : iotasRequired
+    return format ? formatUnitBestMatch(iotasRequired) : iotasRequired.toString()
 }
 
 /**
