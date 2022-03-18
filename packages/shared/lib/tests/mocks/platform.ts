@@ -1,8 +1,9 @@
-import { IPlatform } from '../../typings/platform'
-import { VersionDetails } from '../../typings/appUpdater'
-import { EventMap } from '../../typings/events'
-import { AppSettings } from '../../typings/app'
-import { Error } from '../../typings/error'
+import { IPlatform } from '@core/platform'
+
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { EventMap } from '@lib/typings/events'
+import { AppSettings } from '@lib/typings/app'
+import { Error } from '@lib/typings/error'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,

@@ -1,6 +1,6 @@
-import { IWalletActor } from '../../typings/walletActor'
-import { LoggerConfig } from '../../typings/wallet'
-import { IActorHandler } from '../../typings/bridge'
+import { IWalletActor } from '@lib/typings/walletActor'
+import { LoggerConfig } from '@lib/typings/wallet'
+import { IActorHandler } from '@lib/typings/bridge'
 
 const walletActor: IWalletActor = {
     api: undefined,
