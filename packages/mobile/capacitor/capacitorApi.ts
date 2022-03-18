@@ -1,14 +1,15 @@
 import { Capacitor } from '@capacitor/core'
 
-import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { AppSettings } from '@lib/typings/app'
-import { VersionDetails } from '@lib/typings/appUpdater'
-import { IPlatform } from '@lib/typings/platform'
-
+import { SplashScreen } from '@capacitor/splash-screen'
 import { BarcodeManager } from './lib/barcodeManager'
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
+
+import { hookErrorLogger } from '@lib/shell/errorLogger'
+import { AppSettings } from '@lib/typings/app'
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { IPlatform } from '@lib/typings/platform'
 
 import * as WalletBindings from './walletPluginApi'
 
@@ -16,7 +17,9 @@ window['__WALLET__'] = WalletBindings
 
 let activeProfileId = null
 
-const CapacitorApi: IPlatform = {
+export const nativeSplash = SplashScreen
+
+export const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
         return new Promise((resolve) => resolve())
     },

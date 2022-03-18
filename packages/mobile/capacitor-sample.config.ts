@@ -5,7 +5,12 @@ const config: CapacitorConfig = {
     appName: 'Firefly',
     webDir: 'public',
     bundledWebRuntime: false,
-    plugins: {},
+    plugins: {
+        SplashScreen: {
+            launchAutoHide: false,
+            backgroundColor: '#ffffffff',
+        },
+    },
     server: {
         url: 'http://XXX.XXX.XXX.XXX:8080',
         cleartext: true,
