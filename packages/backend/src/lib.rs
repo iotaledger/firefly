@@ -115,6 +115,7 @@ fn init_sentry() -> Option<sentry::ClientInitGuard> {
                     event.server_name = None;
                     Some(event)
                 })),
+                environment: option_env!("SENTRY_ENVIRONMENT"),
                 ..Default::default()
             },
         ))
