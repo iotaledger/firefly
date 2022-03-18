@@ -12,7 +12,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+    import { Node } from 'shared/lib/typings/node'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: NetworkConfig =
