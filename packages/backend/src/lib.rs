@@ -33,6 +33,7 @@ use std::{
     path::{Path, PathBuf},
     sync::{mpsc::Sender, Arc, Mutex},
     time::Duration,
+    borrow::Cow,
 };
 
 struct WalletActorData {
@@ -104,6 +105,7 @@ impl TryFrom<&str> for EventType {
 }
 
 fn init_sentry() -> Option<sentry::ClientInitGuard> {
+    let environment = option_env!("SENTRY_ENVIRONMENT").unwrap_or("prod");
     option_env!("SENTRY_DSN").map(|sentry_dsn| {
         sentry::init((
             sentry_dsn,
@@ -115,7 +117,7 @@ fn init_sentry() -> Option<sentry::ClientInitGuard> {
                     event.server_name = None;
                     Some(event)
                 })),
-                environment: option_env!("SENTRY_ENVIRONMENT"),
+                environment: Some(Cow::from(environment)),
                 ..Default::default()
             },
         ))
