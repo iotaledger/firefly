@@ -186,13 +186,17 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         if (getPermissionState("storage") != PermissionState.GRANTED) {
             requestPermissionForAlias("storage", call, "pickerPermsCallback");
         } else {
-            if (!call.getData().has("type")) {
-                call.reject("Resource type is required");
+            if (!call.getData().has("type") || !call.getData().has("defaultPath")) {
+                call.reject("Resource type and defaultPath are required");
                 return;
             }
             resourceType = call.getString("type");
-            assert resourceType != null;
-
+            fileName = call.getString("defaultPath");
+            if (resourceType == null) {
+                call.reject("Resource type is null");
+                return;
+            }
+            
             Intent intent = new Intent(resourceType.equals("file")
                 ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
