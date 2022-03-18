@@ -1,0 +1,58 @@
+PODS:
+  - Capacitor (3.2.0):
+    - CapacitorCordova
+  - CapacitorCommunityBarcodeScanner (2.0.1):
+    - Capacitor
+  - CapacitorCommunityPrivacyScreen (2.1.1):
+    - Capacitor
+  - CapacitorCordova (3.2.0)
+  - CapacitorSecureStoragePlugin (0.6.2):
+    - Capacitor
+    - SwiftKeychainWrapper
+  - IotaWalletInternal (0.2.0)
+  - SwiftKeychainWrapper (4.0.1)
+  - WalletActorSystemCapacitorBinding (0.0.1):
+    - Capacitor
+
+DEPENDENCIES:
+  - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
+  - "CapacitorCommunityBarcodeScanner (from `../../../../node_modules/@capacitor-community/barcode-scanner`)"
+  - "CapacitorCommunityPrivacyScreen (from `../../../../node_modules/@capacitor-community/privacy-screen`)"
+  - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
+  - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
+  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec`)
+  - WalletActorSystemCapacitorBinding (from `../../../../node_modules/wallet-actor-system-capacitor-binding`)
+
+SPEC REPOS:
+  trunk:
+    - SwiftKeychainWrapper
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorCommunityBarcodeScanner:
+    :path: "../../../../node_modules/@capacitor-community/barcode-scanner"
+  CapacitorCommunityPrivacyScreen:
+    :path: "../../../../node_modules/@capacitor-community/privacy-screen"
+  CapacitorCordova:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorSecureStoragePlugin:
+    :path: "../../../../node_modules/capacitor-secure-storage-plugin"
+  IotaWalletInternal:
+    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec
+  WalletActorSystemCapacitorBinding:
+    :path: "../../../../node_modules/wallet-actor-system-capacitor-binding"
+
+SPEC CHECKSUMS:
+  Capacitor: 97ac74f937eb9cd098b067c48f2e00de62c8b3c9
+  CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
+  CapacitorCommunityPrivacyScreen: e5c4100887b28805918f92c28d3948b41cb8cc37
+  CapacitorCordova: 643fc644c43204cf1a344b19ef0423beae5ae9ff
+  CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
+  IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+  WalletActorSystemCapacitorBinding: 1e64bcb41827428c357c9191330f69c7306b1120
+
+PODFILE CHECKSUM: 3c6530e541a297d221dc1bf984753c57bd494a54
+
+COCOAPODS: 1.11.2
