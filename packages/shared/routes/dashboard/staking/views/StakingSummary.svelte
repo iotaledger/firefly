@@ -38,7 +38,9 @@
     let showTooltip = false
     // hide tooltip if tooltipAnchor destroys
     $: {
-        if (!isPartiallyStakedAndCanParticipate) showTooltip = false
+        if (!isPartiallyStakedAndCanParticipate) {
+            showTooltip = false
+        }
     }
 
     let tooltipAnchor
