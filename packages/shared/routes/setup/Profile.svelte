@@ -24,7 +24,7 @@
         validateProfileName,
     } from 'shared/lib/profile'
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { Platform } from 'shared/lib/platform'
 
     export let locale: Locale
@@ -68,7 +68,7 @@
 
                 const path = await getProfileDataPath($newProfile.name)
                 const machineId = await Platform.getMachineId()
-                const { sendCrashReports } = $initAppSettings
+                const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
                 initialise($newProfile.id, path, sendCrashReports, machineId)
                 initialiseMigrationListeners()
             }

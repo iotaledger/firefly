@@ -5,8 +5,8 @@ import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { appRoute, walletSetupType } from 'shared/lib/router'
-import type { Address } from 'shared/lib/typings/address'
-import type {
+import { Address } from 'shared/lib/typings/address'
+import {
     AddressInput,
     Bundle,
     HardwareIndexes,

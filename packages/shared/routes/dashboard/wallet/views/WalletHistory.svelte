@@ -6,9 +6,9 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
-    import type { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
+    import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
         asyncSyncAccounts,
@@ -20,7 +20,7 @@
         selectedMessage,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
 
     export let locale: Locale
