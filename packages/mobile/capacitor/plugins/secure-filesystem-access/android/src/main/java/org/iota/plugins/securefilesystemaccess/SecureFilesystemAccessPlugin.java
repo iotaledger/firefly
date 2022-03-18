@@ -60,7 +60,18 @@ public class SecureFilesystemAccessPlugin extends Plugin {
     
     @PluginMethod
     public void finishBackup(PluginCall call) {
-        // we keep this method for continue working on Android 11+ new storage
+        if (Build.VERSION.SDK_INT == 29) {
+            final Mediastore implementation = new Mediastore();
+            try {
+                implementation.saveToDownloads(
+                        bridge.getActivity().getApplicationContext(),
+                        fileName,
+                        selectedPath
+                );
+            } catch (Exception e) {
+                call.reject(e.toString());
+            }
+        }
     }
 
     @PluginMethod
@@ -196,7 +207,17 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 call.reject("Resource type is null");
                 return;
             }
-            
+            if (Build.VERSION.SDK_INT == 29) {
+                // Temporary hotfix for Android 10, it's uses new storage later deprecated on API 30,
+                // We don't show the picker, as Stronghold can only copy on cache, then we copy
+                // on Downloads folder calling finishBackup() to give to the user an accessible location
+                JSObject response = new JSObject();
+                selectedPath = getContext().getExternalCacheDir().getPath() + File.separator + fileName;
+                response.put("selected", selectedPath);
+                call.resolve(response);
+                return;
+            }
+
             Intent intent = new Intent(resourceType.equals("file")
                 ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
