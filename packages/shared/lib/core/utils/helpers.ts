@@ -1,7 +1,7 @@
 /**
  * Returns a new object of the same type with updated data.
  */
-export const migrateObjects = <T>(oldObj: T, newObj: T): T => {
+export function migrateObjects<T>(oldObj: T, newObj: T): T {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const _helper = (curObj: any, oldObj: any, newObj: any): any => {
         // Iterate through each key of a new object...

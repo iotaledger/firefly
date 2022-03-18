@@ -5,7 +5,7 @@ import { Platform } from '@core/platform'
 /**
  * Downloads the mnemonic phrase recovery kit.
  */
-export const downloadRecoveryKit = (): void => {
+export function downloadRecoveryKit(): void {
     fetch('assets/docs/recovery-kit.pdf')
         .then((response) => response.arrayBuffer())
         .then((data) => {
@@ -19,7 +19,7 @@ export const downloadRecoveryKit = (): void => {
 /**
  * Copies text to the system clipboard.
  */
-export const setClipboard = (input: string): boolean => {
+export function setClipboard(input: string): boolean {
     try {
         const textArea = document.createElement('textarea')
         textArea.value = input

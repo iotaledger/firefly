@@ -1,7 +1,7 @@
 /**
  * Returns a capitalized version of a string.
  */
-export const capitalize = (str: string): string => {
+export function capitalize(str: string): string {
     if (!str) return str
     else return str[0].toUpperCase() + str.substr(1).toLowerCase()
 }
@@ -9,7 +9,7 @@ export const capitalize = (str: string): string => {
 /**
  * Returns an array of strings as the result of splitting a given string into chunks of a given size.
  */
-export const chunkString = (str: string, size: number = 0): string[] => {
+export function chunkString(str: string, size: number = 0): string[] {
     if (!str) return []
 
     const numChunks = Math.ceil(str.length / size)
@@ -25,7 +25,7 @@ export const chunkString = (str: string, size: number = 0): string[] => {
 /**
  * Returns a delineated format of a number.
  */
-export const delineateNumber = (str: string, delineator: ',' | '.' | '' = ','): string => {
+export function delineateNumber(str: string, delineator: ',' | '.' | '' = ','): string {
     if (!str) return ''
 
     return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delineator)

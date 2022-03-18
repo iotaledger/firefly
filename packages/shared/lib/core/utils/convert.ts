@@ -1,10 +1,10 @@
-export const toHexString = (bytes: number[]): string | undefined => {
+export function toHexString(bytes: number[]): string | undefined {
     if (!bytes || bytes.length <= 0) return undefined
 
     return bytes.map((byte) => (byte & 0xff).toString(16).padStart(2, '0')).join('')
 }
 
-export const toUtf8String = (bytes: Uint8Array | number[]): string | undefined => {
+export function toUtf8String(bytes: Uint8Array | number[]): string | undefined {
     if (!bytes || bytes.length <= 0) return undefined
 
     const extraByteMap = [1, 1, 1, 1, 2, 2, 3, 0]

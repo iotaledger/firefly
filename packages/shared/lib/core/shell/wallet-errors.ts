@@ -58,7 +58,7 @@ const errorMessages: {
     DustError: 'error.send.leavingDust',
 }
 
-export const getErrorMessage = (type: ErrorType | ValidatorErrorTypes): string => {
+export function getErrorMessage(type: ErrorType | ValidatorErrorTypes): string {
     const message = errorMessages?.[type]
     return message ? message : 'error.global.generic'
 }

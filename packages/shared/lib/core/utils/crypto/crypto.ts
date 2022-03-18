@@ -1,7 +1,7 @@
 import { localize } from '@core/i18n'
 import { Bech32 } from '@core/utils/crypto/bech32'
 
-export const getDefaultStrongholdName = (): string => {
+export function getDefaultStrongholdName(): string {
     // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
     // Trim milliseconds and replace colons with dashes
     const tzoffset = new Date().getTimezoneOffset() * 60000 // offset in milliseconds
@@ -10,7 +10,7 @@ export const getDefaultStrongholdName = (): string => {
     return `firefly-backup-${date}.stronghold`
 }
 
-export const validateBech32Address = (prefix: string, addr: string): undefined | string => {
+export function validateBech32Address(prefix: string, addr: string): undefined | string {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {

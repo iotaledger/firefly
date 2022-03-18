@@ -9,10 +9,11 @@ export const generateRandomId = (): string =>
 /**
  * Returns a randomly generated integer within a specified range (inclusive of beginning, exclusive of end).
  */
-export const generateRandomInteger = (beginning: number, end: number): number =>
-    Math.floor(Math.random() * end + beginning)
+export function generateRandomInteger(beginning: number, end: number): number {
+    return Math.floor(Math.random() * end + beginning)
+}
 
-export const pick = <T>(arr: T[]): T | undefined => {
+export function pick<T>(arr: T[]): T | undefined {
     const length = arr?.length
     if (length < 1) return undefined
 
