@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 import { appRouter, LedgerRoutes } from '@core/router'
 import { SetupType } from 'shared/lib/typings/setup'
 import { walletSetupType } from 'shared/lib/wallet'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const ledgerRoute = writable<LedgerRoutes>(null)

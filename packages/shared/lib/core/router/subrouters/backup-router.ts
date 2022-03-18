@@ -1,12 +1,11 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, BackupRoutes } from '@core/router'
-import { Router } from '@core/router/router'
 import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from 'shared/lib/wallet'
 import { mnemonic, strongholdPassword } from 'shared/lib/app'
 import { Platform } from 'shared/lib/platform'
 import { getDefaultStrongholdName } from 'shared/lib/utils'
 import { updateProfile } from 'shared/lib/profile'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const backupRoute = writable<BackupRoutes>(null)

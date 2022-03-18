@@ -6,7 +6,7 @@ import { mnemonic } from 'shared/lib/app'
 import { Platform } from 'shared/lib/platform'
 import { asyncRestoreBackup } from 'shared/lib/wallet'
 import { newProfile } from 'shared/lib/profile'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const importRoute = writable<ImportRoutes>(null)

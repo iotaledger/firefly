@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, LoginRoutes } from '@core/router'
 import { migrateProfile } from 'shared/lib/profile'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { Subrouter } from '@core/router/subrouters/subrouter'
 
 export const loginRoute = writable<LoginRoutes>(null)

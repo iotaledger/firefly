@@ -5,7 +5,7 @@
     import { backupRoute, BackupRouter, BackupRoutes } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { FireflyEvent } from '@core/router/typings/event'
+    import { FireflyEvent } from '@core/router/types/event'
 
     export let locale: Locale
 

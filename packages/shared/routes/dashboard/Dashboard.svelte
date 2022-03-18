@@ -35,7 +35,7 @@
         SettingsRoutes,
         DashboardRoutes,
         WalletRoutes,
-    } from '@core/router/enum/routes'
+    } from '@core/router/enums/routes'
     import {
         api,
         isBackgroundSyncing,

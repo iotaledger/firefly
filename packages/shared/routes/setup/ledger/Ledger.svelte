@@ -14,7 +14,7 @@
     } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
-    import { FireflyEvent } from '@core/router/typings/event'
+    import { FireflyEvent } from '@core/router/types/event'
 
     export let locale: Locale
 

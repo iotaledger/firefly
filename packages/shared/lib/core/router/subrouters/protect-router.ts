@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { appRouter, ProtectRoutes } from '@core/router'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { mnemonic } from 'shared/lib/app'
 import { Platform } from 'shared/lib/platform'
 import { activeProfile } from 'shared/lib/profile'

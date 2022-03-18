@@ -9,7 +9,7 @@
         TransferFragmentedFunds,
     } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { FireflyEvent } from '@core/router/typings/event'
+    import { FireflyEvent } from '@core/router/types/event'
     import { migrateRoute, MigrateRouter, MigrateRoutes } from '@core/router'
 
     export let locale: Locale

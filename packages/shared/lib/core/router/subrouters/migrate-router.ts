@@ -1,6 +1,6 @@
 import { appRouter, MigrateRoutes } from '@core/router'
 import { Subrouter } from '@core/router/subrouters/subrouter'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from 'shared/lib/migration'
 import { get, writable } from 'svelte/store'
 

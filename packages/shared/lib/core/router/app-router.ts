@@ -6,7 +6,7 @@ import { Router } from './router'
 import { AppRoute } from '@core/router'
 import { SetupType } from 'shared/lib/typings/setup'
 import { walletSetupType } from 'shared/lib/wallet'
-import { FireflyEvent } from '@core/router/typings/event'
+import { FireflyEvent } from '@core/router/types/event'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
