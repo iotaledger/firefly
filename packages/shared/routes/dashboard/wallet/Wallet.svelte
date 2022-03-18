@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -53,15 +52,16 @@
     } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { isDeepLinkRequestActive } from '@common/deep-links'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
     let showActionsModal = false
 
     $: {
-        if ($deepLinkRequestActive && $sendParams && $sendParams.address) {
+        if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
             accountRoute.set(AccountRoutes.Send)
-            deepLinkRequestActive.set(false)
+            isDeepLinkRequestActive.set(false)
         }
     }
 
