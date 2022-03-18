@@ -6,6 +6,9 @@ const config: CapacitorConfig = {
     webDir: 'public',
     bundledWebRuntime: false,
     plugins: {
+        PrivacyScreen: {
+            enable: true,
+        },
         SplashScreen: {
             launchAutoHide: false,
             backgroundColor: '#ffffffff',
