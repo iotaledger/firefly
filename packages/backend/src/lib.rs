@@ -28,12 +28,12 @@ use tokio::{
 };
 
 use std::{
+    borrow::Cow,
     collections::HashMap,
     convert::TryFrom,
     path::{Path, PathBuf},
     sync::{mpsc::Sender, Arc, Mutex},
     time::Duration,
-    borrow::Cow,
 };
 
 struct WalletActorData {
