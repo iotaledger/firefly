@@ -22,24 +22,20 @@ import android.os.FileUtils;
 public class Mediastore {
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public String saveToDownloads(Context context, String filename, String path) throws Exception {
+    public saveToDownloads(Context context, String filename, String path) throws Exception {
         Path filePath = Paths.get(path);
         if (filename == null) {
             filename = filePath.getFileName().toString();
         }
         Long size = Files.size(filePath);
         String mimeType = Files.probeContentType(filePath);
-
         ContentResolver resolver = context.getContentResolver();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Downloads.DISPLAY_NAME, filename);
         contentValues.put(MediaStore.Downloads.MIME_TYPE, mimeType);
         contentValues.put(MediaStore.Downloads.SIZE, size);
         Uri targetUri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
-
         copyFile(resolver, path, targetUri);
-
-        return targetUri.toString();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
