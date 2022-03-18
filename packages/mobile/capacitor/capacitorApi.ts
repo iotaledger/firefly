@@ -1,14 +1,14 @@
 import { Capacitor } from '@capacitor/core'
 
+import { hookErrorLogger } from '@lib/shell/errorLogger'
+import { AppSettings } from '@lib/typings/app'
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { IPlatform } from '@lib/typings/platform'
+
 import { BarcodeManager } from './lib/barcodeManager'
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
-
-import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
-import { AppSettings } from 'shared/lib/typings/app'
-import { VersionDetails } from 'shared/lib/typings/appUpdater'
-import { IPlatform } from 'shared/lib/typings/platform'
 
 import * as WalletBindings from './walletPluginApi'
 

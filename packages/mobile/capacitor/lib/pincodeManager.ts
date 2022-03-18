@@ -1,5 +1,6 @@
-import { IPincodeManager } from 'shared/lib/typings/pincodeManager'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
+
+import { IPincodeManager } from '@lib/typings/pincodeManager'
 
 /** Mobile Pincode Manager */
 export const PincodeManager: IPincodeManager = {

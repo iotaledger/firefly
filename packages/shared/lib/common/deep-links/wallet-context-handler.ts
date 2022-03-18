@@ -1,40 +1,25 @@
 import { Unit } from '@iota/unit-converter'
-import { isValidAddressAndPrefix } from 'shared/lib/address'
-import { addError } from 'shared/lib/errors'
-import { localize } from 'shared/lib/i18n'
-import { DeepLinkingContexts } from 'shared/lib/typings/deepLinking/deepLinking'
-import {
-    SendOperationParameters,
-    SendRequestParameters,
-    WalletOperations,
-} from 'shared/lib/typings/deepLinking/walletContext'
-import { NotificationData } from 'shared/lib/typings/notification'
+
+import { isValidAddressAndPrefix } from '../../address'
+import { addError } from '../../errors'
+import { localize } from '../../i18n'
+
+import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
+import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 
 /**
- * Parse the wallet context from a deeplink
+ * Parses a deep link within the wallet context.
  *
- * @method parseSendOperation
+ * @method parseWalletDeepLinkRequest
  *
- * @param {string} addressPrefix
- * @param {URLSearchParams} searchParams
- * @param {string} expectedAddressPrefix
- * @return {object} The formatted deep link content for populating the send params
+ * @param {URL} url The URL that was opened by the user.
+ * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
+ *
+ * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
  */
-export const parseWalletRequest = (
-    url: URL,
-    expectedAddressPrefix: string
-): void | {
-    context: string
-    operation: string
-    params: void | {
-        address: string
-        amount: number
-        unit: Unit
-        message: string
-    }
-    notification: NotificationData
-} => {
-    let params
+export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: string): void | DeepLinkRequest => {
+    let parameters
+
     // Remove any leading and trailing slashes
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
 
@@ -43,8 +28,8 @@ export const parseWalletRequest = (
     }
 
     switch (pathnameParts[0]) {
-        case WalletOperations.Send:
-            params = parseSendOperation(pathnameParts[1] ?? '', url.searchParams, expectedAddressPrefix)
+        case WalletOperation.Send:
+            parameters = parseSendOperation(pathnameParts[1] ?? '', url.searchParams, expectedAddressPrefix)
             break
         default:
             return addError({
@@ -55,9 +40,9 @@ export const parseWalletRequest = (
     }
 
     return {
-        context: DeepLinkingContexts.Wallet,
+        parameters,
+        context: DeepLinkContext.Wallet,
         operation: pathnameParts[0],
-        params: params,
         notification: {
             type: 'info',
             message: localize('notifications.deepLinkingRequest.wallet.send.success'),
@@ -66,20 +51,21 @@ export const parseWalletRequest = (
 }
 
 /**
- * Parse a send operation from a deeplink
+ * Parses a deep link for the send operation.
  *
  * @method parseSendOperation
  *
- * @param {string} addressPrefix
- * @param {URLSearchParams} searchParams
- * @param {string} expectedAddressPrefix
- * @return {object} The formatted deep link content for populating the send params
+ * @param {string} address The recipient's Bech32 address.
+ * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
+ * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
+ *
+ * @return {void | SendOperationParameters} The formatted parameters for the send operation.
  */
 const parseSendOperation = (
     address: string,
     searchParams: URLSearchParams,
     expectedAddressPrefix: string
-): SendOperationParameters | void => {
+): void | SendOperationParameters => {
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
 
@@ -97,7 +83,7 @@ const parseSendOperation = (
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
-    const amountParam = searchParams.get(SendRequestParameters.Amount)
+    const amountParam = searchParams.get(SendOperationParameter.Amount)
     if (amountParam) {
         parsedAmount = Number(amountParam)
         if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
@@ -107,7 +93,7 @@ const parseSendOperation = (
         parsedAmount = 0
     }
 
-    let unitParam = searchParams.get(SendRequestParameters.Unit)
+    let unitParam = searchParams.get(SendOperationParameter.Unit)
     if (unitParam) {
         unitParam =
             unitParam.length > 1
