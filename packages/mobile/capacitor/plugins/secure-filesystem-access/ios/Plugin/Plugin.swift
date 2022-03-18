@@ -8,6 +8,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
 
     public var _call: CAPPluginCall? = nil
     public var _url: URL? = nil
+    public var fileName: String = ""
 
     @objc func showPicker(_ call: CAPPluginCall){
         call.keepAlive = true
@@ -15,6 +16,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let pickerType = call.getString("type") else {
             return call.reject("type is required")
         }
+        self.fileName = call.getString("defaultPath") ?? ""
         
         DispatchQueue.main.async { [self] in
             var documentPicker: UIDocumentPickerViewController? = nil
@@ -44,9 +46,11 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt url: [URL]) {
         self._url = url[0]
-        self._call?.resolve([
-            "selected": url[0].relativePath
-        ])
+        if (self.fileName != "") {
+            self._call?.resolve([ "selected": url[0].relativePath + "/" + fileName ])
+        } else {
+            self._call?.resolve([ "selected": url[0].relativePath ])
+        }
     }
 
     @objc func allowAccess(_ call: CAPPluginCall) {
