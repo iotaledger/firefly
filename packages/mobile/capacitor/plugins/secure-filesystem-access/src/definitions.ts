@@ -1,9 +1,10 @@
 export type PickerOptions = {
-    type: 'file' | 'folder'
+    type: 'file' | 'folder',
+    defaultPath: string
 }
 
 export interface SecureFilesystemAccessTypes {
-    showPicker(options: { type: 'file' | 'folder' }): Promise<{ selected: string }>
+    showPicker(options: PickerOptions): Promise<{ selected: string }>
     allowAccess(): Promise<void>
     revokeAccess(): Promise<void>
     finishBackup(): Promise<void>
