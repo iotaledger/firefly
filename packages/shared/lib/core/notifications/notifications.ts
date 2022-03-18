@@ -1,15 +1,12 @@
 import { get } from 'svelte/store'
 
-import { appSettings } from '@lib/appSettings'
 import { Platform } from '@core/platform/platform'
-import { generateRandomId } from '@lib/utils'
+import { generateRandomId } from '@core/utils/random'
+import { appSettings } from '@lib/appSettings'
 
-import {
-    displayNotifications,
-    NOTIFICATION_TIMEOUT_NEVER,
-    NotificationData,
-    NotificationType,
-} from '@core/notifications'
+import { NOTIFICATION_TIMEOUT_NEVER } from './constants'
+import { displayNotifications } from './stores'
+import { NotificationData, NotificationType } from './types'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 

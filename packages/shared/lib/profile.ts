@@ -3,7 +3,8 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
-import { generateRandomId, migrateObjects } from 'shared/lib/utils'
+import { generateRandomId } from '@core/utils/random'
+import { migrateObjects } from '@core/utils/helpers'
 import {
     asyncDeleteStorage,
     destroyActor,

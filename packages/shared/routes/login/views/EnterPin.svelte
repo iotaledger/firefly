@@ -6,7 +6,7 @@
     import { Platform } from '@core/platform'
     import { popupState } from '@core/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
-    import { validatePinFormat } from 'shared/lib/utils'
+    import { validatePinFormat } from '@core/utils/validation'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'

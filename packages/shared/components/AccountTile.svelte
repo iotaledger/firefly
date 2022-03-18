@@ -24,7 +24,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { capitalize } from 'shared/lib/utils'
+    import { capitalize } from '@core/utils/format'
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { isBright } from 'shared/lib/helpers'

@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@core/notifications'
     import { StakingAirdrop } from 'shared/lib/participation/types'
-    import { capitalize } from 'shared/lib/utils'
+    import { capitalize } from '@core/utils/format'
 
     export let airdrop: StakingAirdrop
 

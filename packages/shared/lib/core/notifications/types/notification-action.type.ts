@@ -1,4 +1,4 @@
-import { NotificationData } from '@core/notifications/types'
+import { NotificationData } from './notification-data.type'
 
 export type NotificationAction = {
     label: string

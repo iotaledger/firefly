@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-import { PopupState } from '@core/popup'
+import { PopupState } from '../types'
 
 export const popupState = writable<PopupState>({
     active: false,

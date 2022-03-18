@@ -1,6 +1,6 @@
 import './mocks/matchMedia'
 
-import { migrateObjects } from '../utils'
+import { migrateObjects } from '@core/utils/helpers'
 
 type Simple = {
     prop1?: string

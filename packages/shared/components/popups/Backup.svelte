@@ -4,7 +4,7 @@
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import { getDefaultStrongholdName } from 'shared/lib/utils'
+    import { getDefaultStrongholdName } from '../../lib/core/utils/crypto/crypto'
     import { api } from 'shared/lib/wallet'
     import { formatDate } from '@core/i18n'
     import { Locale } from '@core/i18n'

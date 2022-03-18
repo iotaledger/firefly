@@ -4,7 +4,7 @@
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from '@core/platform'
     import { activeProfile } from 'shared/lib/profile'
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils/os'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

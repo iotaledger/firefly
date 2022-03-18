@@ -1,5 +1,5 @@
-import { PlatformType } from '@core/platform/enums'
-import { IPlatform } from '@core/platform/interfaces'
+import { PlatformType } from './enums'
+import { IPlatform } from './interfaces'
 
 const IS_MOBILE = process.env.PLATFORM === PlatformType.Mobile
 

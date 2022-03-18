@@ -1,4 +1,4 @@
-import { LocaleOptions } from '@core/i18n'
+import { LocaleOptions } from '../types'
 
 export const LOCALE_OPTIONS: LocaleOptions = {
     fallbackLocale: 'en',

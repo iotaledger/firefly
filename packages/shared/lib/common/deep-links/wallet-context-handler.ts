@@ -4,8 +4,8 @@ import { localize } from '@core/i18n'
 import { isValidAddressAndPrefix } from '../../address'
 import { addError } from '../../errors'
 
-import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
-import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
+import { DeepLinkContext, SendOperationParameter, WalletOperation } from './enums'
+import { DeepLinkRequest, SendOperationParameters } from './types'
 
 export function parseWalletDeepLinkRequest(url: URL, expectedAddressPrefix: string): void | DeepLinkRequest {
     let parameters

@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { setClipboard } from 'shared/lib/utils'
     import { Icon } from 'shared/components'
+    import { setClipboard } from '@core/utils/os'
 
     export let itemToCopy: string
 </script>

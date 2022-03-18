@@ -3,7 +3,7 @@
     import { Platform } from '@core/platform'
     import { isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { SecuritySettings } from 'shared/lib/typings/routes'
-    import { getDefaultStrongholdName } from 'shared/lib/utils'
+    import { getDefaultStrongholdName } from '../../../../../lib/core/utils/crypto/crypto'
     import { api } from 'shared/lib/wallet'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
 

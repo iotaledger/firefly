@@ -41,11 +41,11 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
-    import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils/crypto'
 
     export let locale: Locale
     export let onSend = (..._: any[]): void => {}
@@ -333,10 +333,10 @@
 
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
             // Validate address length
-            if (address.length !== ADDRESS_LENGTH) {
+            if (address.length !== BECH32_ADDRESS_LENGTH) {
                 addressError = locale('error.send.addressLength', {
                     values: {
-                        length: ADDRESS_LENGTH,
+                        length: BECH32_ADDRESS_LENGTH,
                     },
                 })
             } else {

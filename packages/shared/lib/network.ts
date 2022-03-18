@@ -1,5 +1,5 @@
 import { Node, NodeAuth } from './typings/node'
-import { isValidHttpsUrl, isValidUrl } from './utils'
+import { isValidHttpsUrl, isValidUrl } from '@core/utils/validation'
 import { Network, NetworkConfig, NetworkId } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'

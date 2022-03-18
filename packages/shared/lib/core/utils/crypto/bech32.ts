@@ -1,6 +1,4 @@
-// Copyright 2020 IOTA Stiftung
-// SPDX-License-Identifier: Apache-2.0
-/* eslint-disable no-bitwise */
+export const BECH32_ADDRESS_LENGTH = 64
 
 /**
  * Class to help with Bech32 encoding/decoding

@@ -1,4 +1,5 @@
-import { NotificationAction, NotificationType } from '@core/notifications/types'
+import { NotificationType } from './notification.type'
+import { NotificationAction } from './notification-action.type'
 
 export type NotificationData = {
     type: NotificationType

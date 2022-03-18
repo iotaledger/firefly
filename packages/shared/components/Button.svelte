@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { bindEvents } from 'shared/lib/utils'
+    import { bindEvents } from '@core/utils/ui'
     import { onMount } from 'svelte'
 
     export let events = []

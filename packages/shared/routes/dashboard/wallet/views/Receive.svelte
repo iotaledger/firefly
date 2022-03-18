@@ -6,7 +6,7 @@
     import { Locale } from '@core/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils/os'
     import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'

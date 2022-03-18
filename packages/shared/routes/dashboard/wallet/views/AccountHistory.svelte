@@ -16,7 +16,8 @@
     } from 'shared/lib/wallet'
     import { AccountMessage } from 'shared/lib/typings/wallet'
     import { Transaction } from 'shared/lib/typings/message'
-    import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
+    import { isValueInUnitRange, unitToValue } from '@core/utils/units'
+    import { debounce } from '@core/utils/ui'
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let locale: Locale

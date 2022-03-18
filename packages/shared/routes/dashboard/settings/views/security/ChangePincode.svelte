@@ -1,11 +1,11 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Button, Pin, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from '@core/platform'
+    import { PIN_LENGTH } from '@core/utils/validation'
     import { activeProfile } from 'shared/lib/profile'
-    import { PIN_LENGTH } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
 
     let currentPincode = ''
     let newPincode = ''

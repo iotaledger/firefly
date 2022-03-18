@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { lastActiveAt, logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
-    import { debounce } from 'shared/lib/utils'
+    import { debounce } from '@core/utils/ui'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'

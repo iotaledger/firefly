@@ -7,7 +7,7 @@
     import { closePopup } from '@core/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { showAppNotification } from '@core/notifications'
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils/os'
     import { cleanNodeAuth } from 'shared/lib/network'
 
     export let locale: Locale

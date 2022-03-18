@@ -4,7 +4,7 @@
     import { Platform } from '@core/platform'
     import { showAppNotification } from '@core/notifications'
     import { updateProfile } from 'shared/lib/profile'
-    import { getDefaultStrongholdName } from 'shared/lib/utils'
+    import { getDefaultStrongholdName } from '../../../lib/core/utils/crypto/crypto'
     import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'

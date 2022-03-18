@@ -5,10 +5,10 @@
 import { get } from 'svelte/store'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 
-import { appSettings } from 'shared/lib/appSettings'
+import { appSettings } from '@lib/appSettings'
 
-import { LOCALE_OPTIONS, LANGUAGES } from '@core/i18n/constants'
-import { LanguageChoice, LocaleDateOptions, LocaleOptions } from '@core/i18n/types'
+import { LOCALE_OPTIONS, LANGUAGES } from './constants'
+import { LanguageChoice, LocaleDateOptions, LocaleOptions } from './types'
 
 const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 

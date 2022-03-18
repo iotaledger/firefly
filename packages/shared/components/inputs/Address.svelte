@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Error } from 'shared/components'
-    import { ADDRESS_LENGTH } from 'shared/lib/utils'
     import { onMount } from 'svelte'
+    import { Error } from 'shared/components'
+    import { BECH32_ADDRESS_LENGTH } from '@core/utils/crypto'
 
     export let address = undefined
     export let classes = ''
@@ -28,7 +28,7 @@
             class="w-full text-12 leading-140 border border-solid resize-none
                 {disabled
                 ? 'text-gray-400 dark:text-gray-700'
-                : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
+                : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800
                 {error
                 ? 'border-red-300 hover:border-red-500 focus:border-red-500'
                 : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'} "
@@ -36,7 +36,7 @@
             {placeholder}
             {disabled}
             spellcheck={false}
-            maxlength={ADDRESS_LENGTH}
+            maxlength={BECH32_ADDRESS_LENGTH}
         />
         {#if label}
             <floating-label class:floating-active={address && label}>{label}</floating-label>

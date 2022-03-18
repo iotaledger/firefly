@@ -20,7 +20,7 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { capitalize } from 'shared/lib/utils'
+    import { capitalize } from '@core/utils/format'
 
     export let locale: Locale
     export let accountToStake: WalletAccount

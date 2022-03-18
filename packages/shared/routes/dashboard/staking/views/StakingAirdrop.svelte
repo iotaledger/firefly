@@ -14,7 +14,7 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
-    import { capitalize } from 'shared/lib/utils'
+    import { capitalize } from '@core/utils/format'
     import { Platform } from '@core/platform'
 
     export let airdrop: StakingAirdrop

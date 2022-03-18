@@ -2,7 +2,7 @@
     import { Transition } from 'shared/components'
     import { Platform } from '@core/platform'
     import { activeProfile } from 'shared/lib/profile'
-    import { validatePinFormat } from 'shared/lib/utils'
+    import { validatePinFormat } from '@core/utils/validation'
     import {
         asyncSetStoragePassword,
         asyncVerifyMnemonic,

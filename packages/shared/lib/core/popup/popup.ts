@@ -1,10 +1,10 @@
 import { get } from 'svelte/store'
 
-import { showAppNotification } from '@core/notifications'
 import { localize } from '@core/i18n'
+import { showAppNotification } from '@core/notifications'
 
-import { PopupState } from '@core/popup/types'
-import { popupState } from '@core/popup/stores'
+import { popupState } from './stores'
+import { PopupState } from './types'
 
 export function openPopup(
     {

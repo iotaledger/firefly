@@ -3,7 +3,7 @@
     import { Address } from 'shared/lib/typings/address'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Readable } from 'svelte/store'
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils/os'
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 

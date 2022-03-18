@@ -1,7 +1,7 @@
 import { addError } from '../../errors'
 
-import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
-import type { DeepLinkRequest } from '@common/deep-links/types'
+import { DeepLinkRequest } from './types'
+import { parseWalletDeepLinkRequest } from './wallet-context-handler'
 
 export function parseDeepLinkRequest(expectedAddressPrefix: string, input: string): void | DeepLinkRequest {
     if (!input || typeof input !== 'string') {

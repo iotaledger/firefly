@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { errorLog } from 'shared/lib/errors'
     import { closePopup } from '@core/popup'
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils/os'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

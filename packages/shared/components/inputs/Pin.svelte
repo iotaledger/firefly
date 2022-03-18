@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { createEventDispatcher } from 'svelte'
-    import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Error, Icon } from 'shared/components'
+    import { validatePinFormat, PIN_LENGTH } from '@core/utils/validation'
 
     const dispatch = createEventDispatcher()
 
