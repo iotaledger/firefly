@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { selectedAccount } from 'shared/lib/wallet'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -22,12 +23,10 @@
     import { checkStronghold } from 'shared/lib/stronghold'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
 
     export let locale: Locale
-    export let accountToStake: WalletAccount
 
     let tooltipAirdrop: string
     let showTooltip = false
@@ -44,20 +43,22 @@
         }
     }
 
-    const canReachAirdropMinimum = (airdrop: StakingAirdrop) => canAccountReachMinimumAirdrop(accountToStake, airdrop)
+    const canReachAirdropMinimum = (airdrop: StakingAirdrop) => canAccountReachMinimumAirdrop($selectedAccount, airdrop)
 
     const getRewards = (airdrop: StakingAirdrop): string => {
-        if (!canReachAirdropMinimum(airdrop)) return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        if (!canReachAirdropMinimum(airdrop)) {
+            return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
         return estimateStakingAirdropReward(
             airdrop,
-            $isPartiallyStaked ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
+            $isPartiallyStaked ? getUnstakedFunds($selectedAccount) : $selectedAccount?.rawIotaBalance,
             true
         )
     }
 
-    const activeAirdrops: StakingAirdrop[] =
+    const activeAirdrops =
         $participationOverview
-            .find((apo) => apo.accountIndex === accountToStake.index)
+            .find((apo) => apo.accountIndex === $selectedAccount.index)
             ?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
 
     const airdropSelections: { [key in StakingAirdrop]: boolean } = {
@@ -94,7 +95,7 @@
     }
 
     const openStakingManager = (): void => {
-        accountToParticipate.set(accountToStake)
+        accountToParticipate.set($selectedAccount)
         participationAction.set(ParticipationAction.Stake)
 
         const selections = !$isPartiallyStaked
@@ -107,7 +108,6 @@
                 answers: [],
             })
         )
-
         openPopup(
             {
                 type: 'stakingManager',
@@ -138,7 +138,7 @@
         {locale(`popups.stakingConfirmation.subtitle${isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
+        {isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds($selectedAccount)) : $selectedAccount.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">

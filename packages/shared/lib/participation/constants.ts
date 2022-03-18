@@ -15,7 +15,7 @@ export const SHIMMER_EVENT_ID = '048d3611a5cbcef9aea9e57e86584a94cc744a94866ac8c
 /**
  * Useful array of staking event IDs.
  */
-export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
+export const STAKING_EVENT_IDS = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
 /**
  * The array of staking participations to use for the API.
