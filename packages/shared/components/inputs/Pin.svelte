@@ -8,7 +8,7 @@
 
     const dispatch = createEventDispatcher()
 
-    const isAndroid = Platform.getOS().then((os) => os === 'android')
+    const isAndroid = Platform.getOS() === 'android'
 
     export let value = undefined
     export let classes = ''
