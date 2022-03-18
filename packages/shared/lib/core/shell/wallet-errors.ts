@@ -1,5 +1,5 @@
-import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
-import { ErrorType } from '../typings/events'
+import { ErrorTypes as ValidatorErrorTypes } from '@lib/typings/validator'
+import { ErrorType } from '@lib/typings/events'
 
 const errorMessages: {
     [key in keyof typeof ErrorType]: string

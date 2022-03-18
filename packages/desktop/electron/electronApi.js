@@ -6,7 +6,7 @@ const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
 const kdbx = require('./lib/kdbx')
-const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
+const { hookErrorLogger } = require('shared/lib/core/shell/error-logger')
 
 let activeProfileId = null
 const eventListeners = {}

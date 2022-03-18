@@ -1,7 +1,7 @@
 import { Capacitor } from '@capacitor/core'
 
 import { IPlatform } from '@core/platform/interfaces'
-import { hookErrorLogger } from '@lib/shell/errorLogger'
+import { hookErrorLogger } from '@lib/core/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 

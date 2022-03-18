@@ -1,4 +1,4 @@
-import Validator from 'shared/lib/validator'
+import Validator from '@lib/validator'
 import {
     CreatedAccountResponse,
     LatestAddressResponse,
@@ -6,17 +6,18 @@ import {
     ReadAccountsResponse,
     SetStrongholdPasswordResponse,
     SyncAccountsResponse,
-} from '../typings/bridge'
-import { ResponseTypes } from '../typings/bridge'
-import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
-import { ErrorType } from '../typings/events'
-import { logError } from './errorLogger'
-import { getErrorMessage } from './walletErrors'
-import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+} from '@lib/typings/bridge'
+import { ResponseTypes } from '@lib/typings/bridge'
+import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '@lib/typings/events'
+import { ErrorType } from '@lib/typings/events'
+import { ErrorTypes as ValidatorErrorTypes } from '@lib/typings/validator'
 import { Platform } from '@core/platform/platform'
-import { NodePlugin } from '../typings/node'
-import { IWalletApi } from 'shared/lib/typings/walletApi'
-import { IWalletActor } from '../typings/walletActor'
+import { NodePlugin } from '@lib/typings/node'
+import { IWalletApi } from '@lib/typings/walletApi'
+import { IWalletActor } from '@lib/typings/walletActor'
+
+import { logError } from './error-logger'
+import { getErrorMessage } from './wallet-errors'
 
 export const WALLET: IWalletActor = window['__WALLET__']
 
