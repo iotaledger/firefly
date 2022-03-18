@@ -12,13 +12,18 @@
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
         "android:update": "cap sync android && cap open android",
-        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none"
+        "dev": "NODE_ENV=development PLATFORM=mobile webpack serve --content-base public --host 0.0.0.0 --client-log-level none",
+        "dev:device": "NODE_ENV=development PLATFORM=mobile webpack --stats && cap copy",
+        "icons:alpha": "icons/icongen.sh icons/alpha.png",
+        "icons:beta": "icons/icongen.sh icons/beta.png",
+        "icons:prod": "icons/icongen.sh icons/prod.png"
     },
     "devDependencies": {
-        "@capacitor/android": "3.4.0",
-        "@capacitor/cli": "^3.4.0",
-        "@capacitor/core": "3.4.0",
-        "@capacitor/ios": "3.4.0",
+        "@capacitor/android": "3.4.1",
+        "@capacitor/cli": "^3.4.1",
+        "@capacitor/core": "3.4.1",
+        "@capacitor/ios": "3.4.1",
+        "imagemagick": "^0.1.3",
         "mini-css-extract-plugin": "^1.6.0",
         "tsconfig-paths-webpack-plugin": "^3.5.2",
         "webpack": "^5.16.0",
@@ -28,7 +33,6 @@
     "dependencies": {
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "capacitor-secure-storage-plugin": "^0.6.2",
-        "shared": "0.0.0",
         "firefly-actor-system-capacitor-bindings": "./packages/backend/bindings/capacitor/"
     },
     "engineStrict": true,

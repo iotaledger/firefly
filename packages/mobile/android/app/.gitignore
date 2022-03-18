@@ -1,3 +1,2 @@
 /build/*
 !/build/.npmkeep
-src/main/jniLibs/x86/libwallet.so

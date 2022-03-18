@@ -4,5 +4,8 @@
  * everywhere).
  */
 
+import './mocks/platform'
+import './mocks/walletActor'
+
 beforeAll(async () => {})
 afterAll(async () => {})

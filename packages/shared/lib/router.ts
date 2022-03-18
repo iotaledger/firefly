@@ -1,17 +1,10 @@
-import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
-import { activeProfile, profiles, setProfileType } from 'shared/lib/profile'
-import {
-    AccountRoutes,
-    AppRoute,
-    LedgerRoutes,
-    SettingsRoutes,
-    SetupType,
-    Tabs,
-    WalletRoutes,
-} from 'shared/lib/typings/routes'
-import { selectedAccountId } from 'shared/lib/wallet'
 import { get, readable, writable } from 'svelte/store'
-import { deepLinkRequestActive } from './deepLinking/deepLinking'
+
+import { isDeepLinkRequestActive } from '@common/deep-links'
+import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from './app'
+import { activeProfile, profiles, setProfileType } from './profile'
+import { AccountRoutes, AppRoute, LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from './typings/routes'
+import { selectedAccountId } from './wallet'
 import { closePopup } from './popup'
 import { ProfileType } from './typings/profile'
 
@@ -305,7 +298,7 @@ export const resetRouter = (): void => {
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
-    deepLinkRequestActive.set(false)
+    isDeepLinkRequestActive.set(false)
 }
 
 export const resetWalletRoute = (): void => {
