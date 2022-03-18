@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -59,7 +59,8 @@
             disableContextMenu={true}
             spellcheck="false"
             {locale}
-            capsLockWarning={true} />
+            capsLockWarning={true}
+        />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />

@@ -6,14 +6,13 @@
 
     export let airdrop: StakingAirdrop
 
-    const isStakedForAirdrop = (overview: ParticipationOverview): boolean => overview.some(
-        (_overview) => {
+    const isStakedForAirdrop = (overview: ParticipationOverview): boolean =>
+        overview.some((_overview) => {
             if (airdrop === StakingAirdrop.Assembly) {
                 return _overview.assemblyStakedFunds > 0
             }
             return _overview.shimmerStakedFunds > 0
-        }
-    )
+        })
 
     $: isStaked = isStakedForAirdrop($participationOverview)
     $: showIndicator =
@@ -27,7 +26,8 @@
             {#if isStaked}
                 <span
                     class="pulse absolute inline-flex h-full w-full rounded-full bg-green-400
-                    opacity-75" />
+                    opacity-75"
+                />
             {/if}
             <span class="relative inline-flex rounded-full h-2 w-2 bg-{isStaked ? 'green' : 'red'}-600" />
         </span>

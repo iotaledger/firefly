@@ -3,8 +3,8 @@
     import { getInitials } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { isBright } from 'shared/lib/helpers'
-    import type { WalletAccount } from 'shared/lib/typings/wallet';
-    import { activeProfile, getColor } from 'shared/lib/profile';
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let account: WalletAccount
     export let size: 's' | 'm' = 'm'
@@ -32,9 +32,14 @@
     on:mouseleave={toggleTooltip}
     bind:this={tooltipAnchor}
     style="--account-color: {backgroundColor}"
-    class="{size === 'm' ? 'w-10 h-10 rounded-xl p-2 text-14' : 'w-8 h-8 rounded-lg p-1 text-12'} leading-100 font-bold text-center
-            {active ? `disabled-hover text-${textColor}` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} bg-no-repeat bg-right-top
-            bg-cover hover:text-{textColor} {classes}">{getInitials(account.alias, 2)}
+    class="{size === 'm'
+        ? 'w-10 h-10 rounded-xl p-2 text-14'
+        : 'w-8 h-8 rounded-lg p-1 text-12'} leading-100 font-bold text-center
+            {active
+        ? `disabled-hover text-${textColor}`
+        : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} bg-no-repeat bg-right-top
+            bg-cover hover:text-{textColor} {classes}"
+    >{getInitials(account.alias, 2)}
 </button>
 {#if enableTooltip && showTooltip}
     <Tooltip anchor={tooltipAnchor} position={tooltipPosition}>
@@ -47,8 +52,8 @@
 <style type="text/scss">
     button {
         &.disabled-hover {
-                background-color: var(--account-color);
-            }
+            background-color: var(--account-color);
+        }
         &:not(.disabled-hover):hover {
             background-color: var(--account-color);
         }

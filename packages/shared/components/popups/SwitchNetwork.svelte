@@ -21,10 +21,10 @@
     import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
-    
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Network, NetworkConfig } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Network, NetworkConfig } from 'shared/lib/typings/network'
+    import { Node } from 'shared/lib/typings/node'
 
     export let locale: Locale
 
@@ -54,7 +54,7 @@
 
         if ($isSoftwareProfile && $isStrongholdLocked) {
             await asyncSetStrongholdPassword(strongholdPassword)
-        } else if($isLedgerProfile && !isLedgerConnected()) {
+        } else if ($isLedgerProfile && !isLedgerConnected()) {
             isSwitchingNetwork = false
 
             displayNotificationForLedgerProfile('warning')
@@ -68,7 +68,7 @@
             ...oldConfig,
             network: network,
             nodes: [node],
-            includeOfficialNodes: getOfficialNodes(network.type).find((n) => n.url === node?.url) !== undefined
+            includeOfficialNodes: getOfficialNodes(network.type).find((n) => n.url === node?.url) !== undefined,
         } as NetworkConfig
 
         try {
@@ -97,7 +97,7 @@
              * context of network configuration.
              */
             let error
-            switch(err?.type) {
+            switch (err?.type) {
                 case ErrorType.AccountNotEmpty:
                     error = 'error.network.nonEmptyAccount'
                     break
@@ -107,7 +107,7 @@
             }
             showAppNotification({
                 type: 'error',
-                message: locale(error?.error || error)
+                message: locale(error?.error || error),
             })
 
             console.error(err)
@@ -135,7 +135,7 @@
     </div>
 </div>
 {#if showPasswordInput}
-<form id="stronghold-password-form" class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
+    <form id="stronghold-password-form" class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
         <Text type="p" secondary classes="mb-3">
             {locale('popups.switchNetwork.typePassword')}
             <Text highlighted classes="inline">{network.name}</Text>
@@ -149,16 +149,27 @@
             placeholder={locale('general.password')}
             autofocus
             submitHandler={handleConfirmNetworkSwitchClick}
-            disabled={isSwitchingNetwork} />
-</form>
+            disabled={isSwitchingNetwork}
+        />
+    </form>
 {/if}
 <div class="flex flex-row justify-between space-x-4 w-full px-8">
     <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isSwitchingNetwork}>
         {locale('actions.cancel')}
     </Button>
-    <Button warning type="submit" form={showPasswordInput ? 'stronghold-password-form' : ''} classes="w-1/2" onClick={handleConfirmNetworkSwitchClick}>
+    <Button
+        warning
+        type="submit"
+        form={showPasswordInput ? 'stronghold-password-form' : ''}
+        classes="w-1/2"
+        onClick={handleConfirmNetworkSwitchClick}
+    >
         {#if isSwitchingNetwork}
-            <Spinner busy={isSwitchingNetwork} message={locale('popups.switchNetwork.switchingNetwork')} classes="justify-center" />
+            <Spinner
+                busy={isSwitchingNetwork}
+                message={locale('popups.switchNetwork.switchingNetwork')}
+                classes="justify-center"
+            />
         {:else}
             {locale('actions.confirm')}
         {/if}

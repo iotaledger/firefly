@@ -2,7 +2,7 @@
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
 
@@ -35,12 +35,17 @@
         <ImportTextfield disabled={isGettingMigrationData} type={$importType} bind:value={input} {locale} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={input.length === 0 || isGettingMigrationData} onClick={() => handleContinueClick()}>
+        <Button
+            classes="flex-1"
+            disabled={input.length === 0 || isGettingMigrationData}
+            onClick={() => handleContinueClick()}
+        >
             {#if isGettingMigrationData}
                 <Spinner
                     busy={isGettingMigrationData}
                     message={locale('views.migrate.restoringWallet')}
-                    classes="justify-center" />
+                    classes="justify-center"
+                />
             {:else}{locale('actions.continue')}{/if}
         </Button>
     </div>

@@ -1,15 +1,16 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import {
-        convertToFiat,
-        currencies,
-        exchangeRates,
-        formatCurrency,
-    } from 'shared/lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Platform } from 'shared/lib/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
+    import {
+        LOG_FILE_NAME,
+        migration,
+        migrationLog,
+        resetMigrationState,
+        totalMigratedBalance,
+    } from 'shared/lib/migration'
     import {
         activeProfile,
         newProfile,
@@ -26,7 +27,7 @@
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -89,9 +90,16 @@
             }
             const _exportMigrationLog = () => {
                 getProfileDataPath($activeProfile.name)
-                    .then((source) => $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.name}-${LOG_FILE_NAME}`)
-                            : Platform.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
+                    .then((source) =>
+                        $walletSetupType === SetupType.TrinityLedger
+                            ? Platform.exportLedgerMigrationLog(
+                                  $migrationLog,
+                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                              )
+                            : Platform.exportMigrationLog(
+                                  `${source}/${LOG_FILE_NAME}`,
+                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                              )
                     )
                     .then((result) => {
                         if (result) {
@@ -139,7 +147,9 @@
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                <Text type="p" secondary classes="mb-2 text-center">{locale(`views.congratulations.${localizedBody}`)}</Text>
+                <Text type="p" secondary classes="mb-2 text-center"
+                    >{locale(`views.congratulations.${localizedBody}`)}</Text
+                >
             </div>
         {/if}
     </div>

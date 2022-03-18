@@ -8,7 +8,7 @@
     } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
 
@@ -61,7 +61,8 @@
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
                         if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
-                            newAddress = getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
+                            newAddress =
+                                getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
                             displayAddress(getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].id)
                         } else {
                             _createAccount($activeProfile.ledgerMigrationCount + 1)
@@ -147,7 +148,8 @@
                     <Spinner
                         busy={true}
                         message={locale('views.generateNewLedgerAddress.generating')}
-                        classes="justify-center" />
+                        classes="justify-center"
+                    />
                 {:else}{locale('actions.generateAddress')}{/if}
             </Button>
         {/if}
@@ -156,7 +158,8 @@
         <Animation
             width="100%"
             animation="ledger-bg-desktop"
-            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
         <Animation width="100%" {animation} />
     </div>
 </OnboardingLayout>

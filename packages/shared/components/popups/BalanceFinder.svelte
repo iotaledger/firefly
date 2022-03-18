@@ -5,7 +5,7 @@
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -79,7 +79,8 @@
                 placeholder={locale('general.password')}
                 autofocus
                 submitHandler={() => handleFindBalances()}
-                disabled={isBusy} />
+                disabled={isBusy}
+            />
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
@@ -89,7 +90,8 @@
         <Button
             classes="w-full"
             onClick={handleFindBalances}
-            disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}>
+            disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
+        >
             {#if isBusy}
                 <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}

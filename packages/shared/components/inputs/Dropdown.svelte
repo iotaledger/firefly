@@ -2,14 +2,15 @@
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
+    import { LabeledWalletAccount } from 'shared/lib/typings/wallet'
 
-    export let value = undefined
-    export let label = undefined
-    export let placeholder = undefined
+    export let value: string
+    export let label: string
+    export let placeholder: string
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items = []
+    export let items: LabeledWalletAccount[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''
@@ -23,15 +24,15 @@
 
     let dropdown = false
     let navContainer
-    let divContainer
-    let focusedItem
+    let divContainer: HTMLElement
+    let focusedItem: HTMLElement
     let search = ''
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
 
-    let navWidth
+    let navWidth: string
 
-    const handleClickOutside = () => {
+    const handleClickOutside = (): void => {
         dropdown = false
     }
 
@@ -53,12 +54,11 @@
         }
     }
 
-    const focusItem = (itemId) => {
-        const elem = document.getElementById(itemId)
-        focusedItem = elem
+    const focusItem = (itemId: string): void => {
+        focusedItem = document.getElementById(itemId)
     }
 
-    const handleKey = (e) => {
+    const handleKey = (e): void => {
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {
@@ -89,9 +89,9 @@
                 }
             } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 122)) {
                 const children = [...navContainer.children]
-                const itemsValues = items.map(item => item.label.toLowerCase())
+                const itemsValues = items.map((item) => item.label.toLowerCase())
                 search += e.key
-                const idx = itemsValues.findIndex(item => item.includes(search.toLowerCase()))
+                const idx = itemsValues.findIndex((item) => item.includes(search.toLowerCase()))
                 if (idx >= 0) {
                     children[idx].focus()
                     e.preventDefault()
@@ -101,6 +101,7 @@
             }
         }
     }
+
     onMount(() => {
         if (contentWidth) {
             navWidth = `width: ${navContainer.clientWidth + 8}px`
@@ -125,12 +126,18 @@
     class:floating-active={value && label}
     class:disabled
     class:hasBorder={showBorderWhenClosed || dropdown}
-    style={navWidth}>
+    style={navWidth}
+>
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
-    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : showBorderWhenClosed ? 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700' : ''}"
+    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown
+            ? 'border-blue-500'
+            : showBorderWhenClosed
+            ? 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'
+            : ''}"
         tabindex="0"
-        bind:this={divContainer}>
+        bind:this={divContainer}
+    >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
             <Text classes="overflow-hidden" type={valueTextType} smaller>
                 {search || value || placeholder}
@@ -140,7 +147,8 @@
             icon={small ? 'small-chevron-down' : 'chevron-down'}
             width={small ? 16 : 24}
             height={small ? 16 : 24}
-            classes="absolute text-gray-500 fill-current" />
+            classes="absolute text-gray-500 fill-current"
+        />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
@@ -152,7 +160,8 @@
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
         bg-white dark:bg-gray-800
-            border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700">
+            border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
+    >
         <div class="inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
             {#each items as item}
                 <button
@@ -164,7 +173,9 @@
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}><Text type={itemTextType} smaller>{item[valueKey]}</Text></button>
+                    class:active={item[valueKey] === value}
+                    ><Text type={itemTextType} smaller>{item[valueKey]}</Text></button
+                >
             {/each}
         </div>
     </nav>

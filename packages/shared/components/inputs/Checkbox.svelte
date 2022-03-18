@@ -18,8 +18,12 @@
         checked = !checked
 
         onClick()
-    }}>
-    <Icon icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`} classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`} />
+    }}
+>
+    <Icon
+        icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`}
+        classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`}
+    />
     {#if label}
         <Text type="p" secondary={!checked || disabled}>{label}</Text>
     {/if}

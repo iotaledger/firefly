@@ -6,7 +6,7 @@
     import { popupState } from 'shared/lib/popup'
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -65,7 +65,9 @@
                 .then((data) => {
                     busy = false
 
-                    hardwareIndexes.update((_indexes) => Object.assign({}, _indexes, { accountIndex: index, pageIndex: page }))
+                    hardwareIndexes.update((_indexes) =>
+                        Object.assign({}, _indexes, { accountIndex: index, pageIndex: page })
+                    )
                     dispatch('next', { balance: data.balance })
                 })
                 .catch((error) => {
@@ -97,7 +99,8 @@
                     onClick={() => {
                         expert = !expert
                     }}
-                    classes="cursor-pointer" />
+                    classes="cursor-pointer"
+                />
                 <Text type="p" smaller highlighted={expert}>{locale('views.selectLedgerAccountIndex.expert')}</Text>
             </div>
             <div>
@@ -107,17 +110,20 @@
                     {min}
                     {max}
                     disabled={busy}
-                    error={!isValidAccountIndex ? locale('error.account.index') : ''} />
+                    error={!isValidAccountIndex ? locale('error.account.index') : ''}
+                />
             </div>
             {#if expert}
                 <div>
-                    <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text>
+                    <Text type="p" secondary classes="mb-2">{locale('views.selectLedgerAccountIndex.accountPage')}</Text
+                    >
                     <Number
                         bind:value={page}
                         {min}
                         {max}
                         disabled={busy}
-                        error={!isValidAccountPage ? locale('error.account.page') : ''} />
+                        error={!isValidAccountPage ? locale('error.account.page') : ''}
+                    />
                 </div>
             {/if}
         </div>
@@ -128,14 +134,22 @@
                 <div class="bg-red-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="warning" classes="text-white" />
                 </div>
-                <Text type="h3" classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text>
-                <Text classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text>
+                <Text type="h3" classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.takingAWhile')}</Text
+                >
+                <Text classes="mb-4 text-center">{locale('views.selectLedgerAccountIndex.notGeneratingAddresses')}</Text
+                >
                 <Text classes="break-words text-center">
-                    {locale('views.selectLedgerAccountIndex.reinstallLegacy', { values: { legacy: LedgerAppName.IOTALegacy } })}
+                    {locale('views.selectLedgerAccountIndex.reinstallLegacy', {
+                        values: { legacy: LedgerAppName.IOTALegacy },
+                    })}
                 </Text>
             </div>
         {/if}
-        <Button classes="w-full" disabled={busy || !isValidAccountIndex || !isValidAccountPage} onClick={handleContinueClick}>
+        <Button
+            classes="w-full"
+            disabled={busy || !isValidAccountIndex || !isValidAccountPage}
+            onClick={handleContinueClick}
+        >
             {#if busy}
                 <Spinner busy={true} message={locale('views.migrate.findingBalance')} classes="justify-center" />
             {:else}{locale('actions.confirm')}{/if}

@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import type { Address } from 'shared/lib/typings/address'
+    import { Address } from 'shared/lib/typings/address'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import type { Readable } from 'svelte/store'
+    import { Readable } from 'svelte/store'
     import { setClipboard } from 'shared/lib/utils'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
 
@@ -32,13 +32,18 @@
 <div class="history scrollable-y flex flex-row flex-wrap space-y-7">
     {#each addresses as _addr}
         <div class="flex flex-row flex-wrap space-y-1">
-            <Text type="p">{_addr.internal ? locale('popups.addressHistory.internal') : locale('popups.addressHistory.external')} {_addr.keyIndex}</Text>
+            <Text type="p"
+                >{_addr.internal ? locale('popups.addressHistory.internal') : locale('popups.addressHistory.external')}
+                {_addr.keyIndex}</Text
+            >
             <button class="text-left" on:click={() => setClipboard(_addr.address.toLowerCase())}>
                 <Text type="pre">{_addr.address}</Text>
             </button>
             <div class="flex flex-row py-1 items-center">
                 <Text classes="mr-4" type="p">
-                    {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnitBestMatch(_addr.balance) } })}
+                    {locale('popups.addressHistory.currentBalance', {
+                        values: { balance: formatUnitBestMatch(_addr.balance) },
+                    })}
                 </Text>
             </div>
         </div>

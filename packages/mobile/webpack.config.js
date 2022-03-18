@@ -3,11 +3,16 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const path = require('path')
 const sveltePreprocess = require('svelte-preprocess')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
 
 // ------------------------ Resolve ------------------------
+const tsConfigOptions = {
+    configFile: './tsconfig.json',
+}
+
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -17,7 +22,9 @@ const resolve = {
     fallback: {
         path: false,
         fs: false,
+        crypto: false,
     },
+    plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
 
 // ------------------------ Output ------------------------
@@ -25,7 +32,7 @@ const output = {
     publicPath: prod ? '../' : '/',
     path: path.join(__dirname, '/public'),
     filename: '[name].js',
-    chunkFilename: '[name].[id].js',
+    chunkFilename: 'build/[name].[id].js',
 }
 
 // ------------------------ Module rules ------------------------

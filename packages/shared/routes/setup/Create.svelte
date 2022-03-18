@@ -2,7 +2,7 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { setProfileType } from 'shared/lib/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
     import { createEventDispatcher } from 'svelte'
 
@@ -29,7 +29,8 @@
             icon="settings"
             classes="w-full mb-5"
             secondary
-            onClick={() => handleContinueClick(ProfileType.Software)}>
+            onClick={() => handleContinueClick(ProfileType.Software)}
+        >
             {locale('views.create.softwareAccount.title')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>

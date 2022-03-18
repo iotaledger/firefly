@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
     import { Chart, Dropdown, Text } from 'shared/components'
@@ -181,7 +181,8 @@
                 {#each Object.values(DashboardChartType) as chart}
                     <button
                         on:click={() => handleDashboardChartTypeSelect(chart)}
-                        class:active={chart === $selectedDashboardChart}>
+                        class:active={chart === $selectedDashboardChart}
+                    >
                         <Text type="h5" secondary={chart !== $selectedDashboardChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
                 {/each}
@@ -195,7 +196,8 @@
                     onSelect={handleWalletChartTypeSelect}
                     contentWidth={true}
                     valueTextType="h5"
-                    showBorderWhenClosed={false} />
+                    showBorderWhenClosed={false}
+                />
             </div>
         {/if}
         <div class="flex justify-between items-center space-x-2">
@@ -205,7 +207,8 @@
                         small
                         value={tokenDropdownItems[0].label}
                         items={tokenDropdownItems}
-                        contentWidth={true} />
+                        contentWidth={true}
+                    />
                 </span>
             {:else}
                 <span>
@@ -214,19 +217,23 @@
                         value={$activeProfile?.settings.chartSelectors.currency}
                         items={currencyDropdownItems}
                         onSelect={handleCurrencySelect}
-                        contentWidth={true} />
+                        contentWidth={true}
+                    />
                 </span>
             {/if}
             <span>
                 <Dropdown
                     small
-                    value={$activeProfile?.settings.chartSelectors.timeframe ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`) : undefined}
+                    value={$activeProfile?.settings.chartSelectors.timeframe
+                        ? locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)
+                        : undefined}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({
                         label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`),
                         value,
                     }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
-                    contentWidth={true} />
+                    contentWidth={true}
+                />
             </span>
         </div>
     </div>
@@ -238,7 +245,8 @@
         {color}
         {xMaxTicks}
         {formatYAxis}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`}
+    />
 </div>
 
 <style type="text/scss">

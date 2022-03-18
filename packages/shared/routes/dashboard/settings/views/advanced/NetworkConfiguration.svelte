@@ -12,7 +12,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+    import { Node } from 'shared/lib/typings/node'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: NetworkConfig =
@@ -97,7 +97,9 @@
 <div>
     <Text type="h4" classes="mb-3">{localize('views.settings.networkConfiguration.title2')}</Text>
     <Text type="p" secondary classes="mb-3">
-        {localize(`views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`)}
+        {localize(
+            `views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`
+        )}
     </Text>
     {#if $activeProfile?.isDeveloperProfile}
         <div class="flex flex-row justify-between w-3/4">
@@ -111,7 +113,9 @@
                 <Text type="p" classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
                 <div>
                     <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                        {localize(`views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`)}
+                        {localize(
+                            `views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`
+                        )}
                     </p>
                 </div>
             </div>
@@ -130,11 +134,13 @@
                 value={true}
                 bind:group={networkConfig.automaticNodeSelection}
                 label={localize('views.settings.networkConfiguration.nodeConfiguration.automatic')}
-                subLabel="Connect to official nodes from the IOTA Foundation" />
+                subLabel="Connect to official nodes from the IOTA Foundation"
+            />
             <Radio
                 value={false}
                 bind:group={networkConfig.automaticNodeSelection}
-                label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')} />
+                label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
+            />
         </section>
     {/if}
     {#if !networkConfig.automaticNodeSelection}
@@ -148,22 +154,32 @@
                     disabled={!canConfigureNodes}
                     bind:checked={networkConfig.includeOfficialNodes}
                     onClick={handleIncludeOfficialNodesClick}
-                    classes="mb-5" />
+                    classes="mb-5"
+                />
             {/if}
             <div
                 class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
-                bind:this={nodesContainer}>
+                bind:this={nodesContainer}
+            >
                 {#if networkConfig.nodes.length === 0}
                     <Text classes="p-3">
-                        {localize(`views.settings.configureNodeList.${isOfficialNetwork(networkConfig.network.type) ? 'noNodesAuto' : 'noNodes'}`)}
+                        {localize(
+                            `views.settings.configureNodeList.${
+                                isOfficialNetwork(networkConfig.network.type) ? 'noNodesAuto' : 'noNodes'
+                            }`
+                        )}
                     </Text>
                 {/if}
                 {#each networkConfig.nodes as node}
                     <div
-                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+                    >
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
                             <Text
-                                classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${node.isDisabled ? 'opacity-50' : ''}`}>
+                                classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${
+                                    node.isDisabled ? 'opacity-50' : ''
+                                }`}
+                            >
                                 {node.url}
                             </Text>
                             <Text highlighted>
@@ -175,7 +191,8 @@
                                 nodeContextMenu = node
                                 contextPosition = { x: e.clientX, y: e.clientY }
                             }}
-                            class="dark:text-white">...</button>
+                            class="dark:text-white">...</button
+                        >
                     </div>
                 {/each}
                 {#if nodeContextMenu}
@@ -183,7 +200,8 @@
                         bind:nodeContextMenu
                         bind:networkConfig
                         {contextPosition}
-                        {ensureOnePrimaryNode} />
+                        {ensureOnePrimaryNode}
+                    />
                 {/if}
             </div>
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">
@@ -196,7 +214,8 @@
                     medium
                     inlineStyle="min-width: 156px;"
                     classes="w-1/2"
-                    onClick={handleRemoveAllNodesClick}>
+                    onClick={handleRemoveAllNodesClick}
+                >
                     {localize('actions.removeAllNodes')}
                 </Button>
             </div>

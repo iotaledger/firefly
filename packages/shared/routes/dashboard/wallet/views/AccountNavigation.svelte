@@ -4,7 +4,7 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -69,7 +69,8 @@
                 <WalletPill
                     account={acc}
                     active={activeAccount.id === acc.id}
-                    onClick={() => handleAccountClick(acc.id)} />
+                    onClick={() => handleAccountClick(acc.id)}
+                />
             {/each}
         </div>
     </div>

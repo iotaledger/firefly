@@ -8,7 +8,7 @@
     import { AppRoute } from 'shared/lib/typings/routes'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -89,7 +89,6 @@
                     message: locale('error.global.generic'),
                 })
             }
-
         } finally {
             isBusy = false
         }
@@ -110,12 +109,18 @@
             placeholder={locale('general.password')}
             autofocus
             submitHandler={() => handleDeleteClick()}
-            disabled={isBusy} />
+            disabled={isBusy}
+        />
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>
-    <Button disabled={(!password && $isSoftwareProfile) || isBusy} classes="w-1/2" onClick={() => handleDeleteClick()} warning>
+    <Button
+        disabled={(!password && $isSoftwareProfile) || isBusy}
+        classes="w-1/2"
+        onClick={() => handleDeleteClick()}
+        warning
+    >
         {locale('actions.yes')}
     </Button>
 </div>

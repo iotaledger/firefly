@@ -1,15 +1,29 @@
 import { Capacitor } from '@capacitor/core'
-import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
-import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
-import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
-import type { IPlatform } from 'shared/lib/typings/platform'
-import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import { hookErrorLogger } from '../../shared/lib/shell/errorLogger'
-import { BarcodeManager } from '../../mobile/capacitor/lib/barcodeManager'
+
+import { SplashScreen } from '@capacitor/splash-screen'
+import { BarcodeManager } from './lib/barcodeManager'
+import { DeepLinkManager } from './lib/deepLinkManager'
+import { NotificationManager } from './lib/notificationManager'
+import { PincodeManager } from './lib/pincodeManager'
+
+import { hookErrorLogger } from '@lib/shell/errorLogger'
+import { AppSettings } from '@lib/typings/app'
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { IPlatform } from '@lib/typings/platform'
+
+import * as WalletBindings from './walletPluginApi'
+
+window['__WALLET__'] = WalletBindings
 
 let activeProfileId = null
 
+export const nativeSplash = SplashScreen
+
 export const CapacitorApi: IPlatform = {
+    updateAppSettings(settings: Partial<AppSettings>) {
+        return new Promise((resolve) => resolve())
+    },
+
     getActiveProfile() {
         return activeProfileId
     },
@@ -112,6 +126,15 @@ export const CapacitorApi: IPlatform = {
      * @returns {Promise}
      */
     getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
+
+    /**
+     * Gets machine ID
+     *
+     * @method getMachineId
+     *
+     * @returns {Promise}
+     */
+    getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
     /**
      * Starts an update of the application
@@ -239,3 +262,5 @@ export const CapacitorApi: IPlatform = {
     hookErrorLogger,
     ledger: undefined,
 }
+
+window['__CAPACITOR__'] = CapacitorApi

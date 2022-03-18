@@ -6,7 +6,7 @@
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -83,7 +83,8 @@
                 strength={passwordStrength.score}
                 {locale}
                 autofocus
-                disabled={busy} />
+                disabled={busy}
+            />
             <Password
                 error={errorConfirm}
                 bind:value={confirmedPassword}
@@ -91,7 +92,8 @@
                 {locale}
                 placeholder={locale('general.confirmPassword')}
                 showRevealToggle
-                disabled={busy} />
+                disabled={busy}
+            />
         </form>
     </div>
     <div slot="leftpane__action">

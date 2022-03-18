@@ -61,15 +61,15 @@
         // Staking
         'staking-notice': {
             lightmode: 'staking/staking-notice.svg',
-            darkmode: 'staking/staking-notice.svg'
+            darkmode: 'staking/staking-notice.svg',
         },
         'shimmer-info-bg': {
             lightmode: 'staking/shimmer-info.png',
-            darkmode: 'staking/shimmer-info.png'
+            darkmode: 'staking/shimmer-info.png',
         },
         'assembly-info-bg': {
             lightmode: 'staking/assembly-info.png',
-            darkmode: 'staking/assembly-info.png'
+            darkmode: 'staking/assembly-info.png',
         },
     }
 </script>
@@ -81,7 +81,8 @@
         width={width || '100%'}
         height={height || '100%'}
         src={`assets/illustrations/${selected}`}
-        alt="" />
+        alt=""
+    />
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}

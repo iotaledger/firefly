@@ -4,7 +4,7 @@
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
     import { createEventDispatcher, getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -50,18 +50,21 @@
             showRevealToggle
             autofocus
             disabled={busy}
-            submitHandler={handleContinue} />
+            submitHandler={handleContinue}
+        />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
             disabled={password.length === 0 || busy || isGettingMigrationData}
-            onClick={() => handleContinue()}>
+            onClick={() => handleContinue()}
+        >
             {#if isGettingMigrationData}
                 <Spinner
                     busy={isGettingMigrationData}
                     message={locale('views.migrate.restoringWallet')}
-                    classes="justify-center" />
+                    classes="justify-center"
+                />
             {:else}{locale('actions.continue')}{/if}
         </Button>
     </div>

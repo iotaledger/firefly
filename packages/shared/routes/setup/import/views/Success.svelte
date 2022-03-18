@@ -2,7 +2,7 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
 
@@ -38,6 +38,9 @@
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation
             classes="setup-anim-aspect-ratio"
-            animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+            animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic
+                ? 'import-from-text-success-desktop'
+                : 'import-from-file-success-desktop'}
+        />
     </div>
 </OnboardingLayout>

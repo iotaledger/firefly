@@ -11,7 +11,8 @@
         getStakedFunds,
         getUnstakedFunds,
         isAccountPartiallyStaked,
-        isAccountStaked, getIotasUntilMinimumAirdropReward,
+        isAccountStaked,
+        getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
@@ -25,14 +26,19 @@
         stakedAmount,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { AccountParticipationAbility, Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        AccountParticipationAbility,
+        Participation,
+        ParticipationAction,
+        StakingAirdrop,
+    } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
     import { NodePlugin } from 'shared/lib/typings/node'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState, wallet } from 'shared/lib/wallet'
 
@@ -45,13 +51,12 @@
     let previousPendingParticipationsLength = 0
     let { accounts } = $wallet
 
-    $: accountsWithParticipationAbilities = $accounts.map(account => ({
+    $: accountsWithParticipationAbilities = $accounts.map((account) => ({
         account,
-        participationAbility: getAccountParticipationAbility(account)
+        participationAbility: getAccountParticipationAbility(account),
     }))
-    
+
     $: canStake = canParticipate($stakingEventState)
-    
 
     pendingParticipations.subscribe((participations) => {
         const currentParticipationsLength = participations.length
@@ -232,7 +237,7 @@
     const toggleTooltip = (account: WalletAccount): void => {
         showTooltip = !showTooltip
 
-        if(showTooltip) {
+        if (showTooltip) {
             tooltipAnchor = tooltipAnchors[account?.index]
             // Check for Assembly only because it has lower reward requirements
             tooltipMinBalance = <string>getIotasUntilMinimumAirdropReward(account, StakingAirdrop.Assembly, true)
@@ -248,7 +253,11 @@
 <div class="staking flex flex-col scrollable-y">
     {#each accountsWithParticipationAbilities as { account, participationAbility }}
         {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
-            <div class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}>
+            <div
+                class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid ${
+                    isAccountPartiallyStaked(account?.id) ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'
+                }`}
+            >
                 <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                     {#if isAccountStaked(account?.id)}
                         <div class="bg-green-500 rounded-2xl">
@@ -267,7 +276,10 @@
                             icon="unlock"
                             width="24"
                             height="24"
-                            classes={$accountToParticipate?.id === account?.id ? 'text-gray-400' : 'text-gray-800 dark:text-white'} />
+                            classes={$accountToParticipate?.id === account?.id
+                                ? 'text-gray-400'
+                                : 'text-gray-800 dark:text-white'}
+                        />
                     {/if}
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold" disabled={$accountToParticipate?.id === account?.id}>
@@ -278,14 +290,16 @@
                                 type="p"
                                 secondary={$accountToParticipate?.id !== account?.id}
                                 disabled={$accountToParticipate?.id === account?.id}
-                                classes="font-extrabold">
+                                classes="font-extrabold"
+                            >
                                 {formatUnitBestMatch(getStakedFunds(account))}
                                 •
                                 <Text
                                     type="p"
                                     secondary={$accountToParticipate?.id !== account?.id}
                                     disabled={$accountToParticipate?.id === account?.id}
-                                    classes="inline">
+                                    classes="inline"
+                                >
                                     {getFormattedFiatAmount(getStakedFunds(account))}
                                 </Text>
                             </Text>
@@ -294,23 +308,28 @@
                                 type="p"
                                 secondary={$accountToParticipate?.id !== account?.id}
                                 disabled={$accountToParticipate?.id === account?.id}
-                                classes="font-extrabold">
+                                classes="font-extrabold"
+                            >
                                 {account.balance}
                                 •
                                 <Text
                                     type="p"
                                     secondary={$accountToParticipate?.id !== account?.id}
                                     disabled={$accountToParticipate?.id === account?.id}
-                                    classes="inline">
+                                    classes="inline"
+                                >
                                     {account.balanceEquiv}
                                 </Text>
                             </Text>
                         {/if}
                     </div>
                     <Button
-                        disabled={$isPerformingParticipation || participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                        disabled={$isPerformingParticipation ||
+                            participationAbility === AccountParticipationAbility.HasPendingTransaction}
                         secondary={isAccountStaked(account?.id)}
-                        onClick={() => (isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account))}>
+                        onClick={() =>
+                            isAccountStaked(account?.id) ? handleUnstakeClick(account) : handleStakeClick(account)}
+                    >
                         {#if $accountToParticipate?.id !== account?.id && participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             {locale('general.syncing')}
                         {:else if $accountToParticipate && $accountToParticipate?.id === account?.id && $participationAction}
@@ -322,7 +341,8 @@
                 </div>
                 {#if isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        class="space-x-4 mx-2 mb-2 pl-4 pr-2.5 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600">
+                        class="space-x-4 mx-2 mb-2 pl-4 pr-2.5 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600"
+                    >
                         <Icon icon="exclamation" width="20" height="20" classes="fill-current text-yellow-600" />
                         <div class="flex flex-col w-3/4">
                             <Text type="p" classes="font-extrabold">{locale('general.unstakedFunds')}</Text>
@@ -336,8 +356,10 @@
                         </div>
                         <Button
                             caution={isAccountPartiallyStaked(account?.id) && $accountToParticipate?.id !== account?.id}
-                            disabled={$isPerformingParticipation || participationAbility === AccountParticipationAbility.HasPendingTransaction}
-                            onClick={() => handleStakeClick(account)}>
+                            disabled={$isPerformingParticipation ||
+                                participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                            onClick={() => handleStakeClick(account)}
+                        >
                             {locale('actions.merge')}
                         </Button>
                     </div>

@@ -5,7 +5,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -34,7 +34,9 @@
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
-        class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile && 'overflow-y-auto'} flex flex-row flex-wrap">
+        class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
+            'overflow-y-auto'} flex flex-row flex-wrap"
+    >
         {#each $profiles as profile}
             <div class="mx-4 mb-8">
                 <Profile
@@ -44,15 +46,18 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger || profile?.type === ProfileType.LedgerSimulator}
-                    classes="cursor-pointer" />
+                    isLedgerProfile={profile?.type === ProfileType.Ledger ||
+                        profile?.type === ProfileType.LedgerSimulator}
+                    classes="cursor-pointer"
+                />
             </div>
         {/each}
         <div class="mx-4 mb-8">
             <Profile
                 onClick={addProfile}
                 name={locale('general.addProfile')}
-                classes="border-solid border-2 border-gray-400 cursor-pointer">
+                classes="border-solid border-2 border-gray-400 cursor-pointer"
+            >
                 <Icon icon="plus" classes="text-blue-500" />
             </Profile>
         </div>
