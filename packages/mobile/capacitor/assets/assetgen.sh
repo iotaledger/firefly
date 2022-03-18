@@ -66,7 +66,7 @@ else
   convert "$base" $opts -resize 432x432!   $add_margin   "$dest_android/mipmap-xxxhdpi/ic_launcher_foreground.png"
   convert "$base" $opts -resize 192x192!                 "$dest_android/mipmap-xxxhdpi/ic_launcher_round.png"
 
-  ## Lauch screen
+  ## Launch screen
   ### Add margin for center logo
   add_margin="-background #ffffff -gravity center -scale 256x256 -extent 660x2420"
   
