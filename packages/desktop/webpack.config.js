@@ -168,8 +168,8 @@ const sentryPlugins = [
         project: 'firefly-desktop',
         finalize: false,
         deploy: {
-            env: process.env.SENTRY_ENVIRONMENT
-        }
+            env: process.env.SENTRY_ENVIRONMENT,
+        },
     }),
 ]
 
