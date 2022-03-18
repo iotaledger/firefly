@@ -1,5 +1,5 @@
+import { IDeepLinkManager } from '@common/deep-links'
 import { AppSettings } from './app'
-import { IDeepLinkManager } from './deepLinking/deepLinkManager'
 import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
