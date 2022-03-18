@@ -153,14 +153,11 @@
         }
     }
 
-    const handleStakeClick = (account: WalletAccount): void => {
+    const handleStakeClick = (): void => {
         const openStakingConfirmationPopup = () =>
             openPopup(
                 {
                     type: 'stakingConfirmation',
-                    props: {
-                        accountToStake: account,
-                    },
                 },
                 true
             )
@@ -171,10 +168,10 @@
         }
     }
 
-    const handleUnstakeClick = (account: WalletAccount): void => {
+    const handleUnstakeClick = (): void => {
         const _unstake = () => {
-            accountToParticipate.set(account)
-            participationAction.set(ParticipationAction.Unstake)
+            $accountToParticipate = $selectedAccount
+            $participationAction = ParticipationAction.Unstake
 
             if ($popupState.type !== 'stakingManager') {
                 openPopup({
@@ -312,10 +309,7 @@
                     disabled={$isPerformingParticipation ||
                         participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     secondary={isAccountStaked($selectedAccountId)}
-                    onClick={() =>
-                        isAccountStaked($selectedAccountId)
-                            ? handleUnstakeClick($selectedAccount)
-                            : handleStakeClick($selectedAccount)}
+                    onClick={() => (isAccountStaked($selectedAccountId) ? handleUnstakeClick() : handleStakeClick())}
                 >
                     {#if $accountToParticipate?.id !== $selectedAccountId && participationAbility === AccountParticipationAbility.HasPendingTransaction}
                         {locale('general.syncing')}
@@ -345,7 +339,7 @@
                         caution={$isPartiallyStaked}
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
-                        onClick={() => handleStakeClick($selectedAccount)}
+                        onClick={() => handleStakeClick()}
                     >
                         {locale('actions.merge')}
                     </Button>
