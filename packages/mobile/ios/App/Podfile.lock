@@ -3,6 +3,8 @@ PODS:
     - CapacitorCordova
   - CapacitorCommunityBarcodeScanner (2.0.1):
     - Capacitor
+  - CapacitorCommunityPrivacyScreen (2.1.1):
+    - Capacitor
   - CapacitorCordova (3.4.1)
   - CapacitorSecureStoragePlugin (0.6.2):
     - Capacitor
@@ -17,6 +19,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
   - "CapacitorCommunityBarcodeScanner (from `../../../../node_modules/@capacitor-community/barcode-scanner`)"
+  - "CapacitorCommunityPrivacyScreen (from `../../../../node_modules/@capacitor-community/privacy-screen`)"
   - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
   - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
   - "CapacitorSplashScreen (from `../../../../node_modules/@capacitor/splash-screen`)"
@@ -48,6 +51,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 9ff0758671daabc97247c8c57a981379bc30bb5f
   CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
+  CapacitorCommunityPrivacyScreen: e5c4100887b28805918f92c28d3948b41cb8cc37
   CapacitorCordova: 4cf19cbad01e5a9e143e2f28f66c621c362f0f79
   CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
   CapacitorSplashScreen: 466ab02fdfcfc0efdb6167631386289e82efe2c6
@@ -55,6 +59,6 @@ SPEC CHECKSUMS:
   IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 11a109c1967189493ea7d63c78f17621d2bf0fda
+PODFILE CHECKSUM: f3819d7c43d77cbbb5ec173f589301ce631c14fb
 
 COCOAPODS: 1.11.2
