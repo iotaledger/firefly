@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import android.os.FileUtils;
+
 
 public class Mediastore {
 
@@ -40,10 +42,12 @@ public class Mediastore {
         return targetUri.toString();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     private void copyFile(ContentResolver resolver, String inputPath, Uri outputUri) throws Exception {
         FileInputStream input;
+        ParcelFileDescriptor sourceFD;
         try {
-            ParcelFileDescriptor sourceFD = resolver.openFileDescriptor(Uri.fromFile(new File(inputPath)), "r", null);
+            sourceFD = resolver.openFileDescriptor(Uri.fromFile(new File(inputPath)), "r", null);
             input = new FileInputStream(sourceFD.getFileDescriptor());
         } catch (Exception e) {
             resolver.delete(outputUri, null, null);
@@ -53,13 +57,7 @@ public class Mediastore {
         try {
             ParcelFileDescriptor targetFD = resolver.openFileDescriptor(outputUri, "w", null);
             FileOutputStream output = new FileOutputStream(targetFD.getFileDescriptor());
-
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = input.read(buffer)) > 0) {
-                output.write(buffer, 0, len);
-            }
-            output.flush();
+            FileUtils.copy(sourceFD.getFileDescriptor(), targetFD.getFileDescriptor());
             input.close();
             output.close();
         } catch (Exception e) {
