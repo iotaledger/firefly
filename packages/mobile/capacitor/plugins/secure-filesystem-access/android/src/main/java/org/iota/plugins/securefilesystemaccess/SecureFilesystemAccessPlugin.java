@@ -305,34 +305,40 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             call.resolve(response);
         }
     }
-    private static File getDirectory(String name) {
-        File res;
-        if (DIRECTORY_MUSIC.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_MUSIC);
-        else if (DIRECTORY_PODCASTS.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_PODCASTS);
-        else if (DIRECTORY_RINGTONES.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_RINGTONES);
-        else if (DIRECTORY_ALARMS.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_ALARMS);
-        else if (DIRECTORY_NOTIFICATIONS.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_NOTIFICATIONS);
-        else if (DIRECTORY_PICTURES.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
-        else if (DIRECTORY_MOVIES.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_MOVIES);
-        else if (DIRECTORY_DOWNLOADS.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
-        else if (DIRECTORY_DCIM.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM);
-        else if (DIRECTORY_DOCUMENTS.equals(name))
-            res = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS);
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-                && DIRECTORY_AUDIOBOOKS.equals(name))
-                res = Environment.getExternalStoragePublicDirectory(DIRECTORY_AUDIOBOOKS);
-        // Environment.getExternalStorageDirectory() Gives us the full path the SDCard
-        else res = Environment.getExternalStorageDirectory();
-        return res;
+    
+    private String buildPath(String path) {
+        boolean isExternalStorageWritable = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+        boolean isExternalStorageReadable = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ||
+                Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED_READ_ONLY);
+        // external storage resides on a physical volume that the user might be able to remove.
+        if (!isExternalStorageReadable && !isExternalStorageWritable) {
+            return "Storage is not available";
+        }
+
+        if (path.contains(":")) {
+            String[] segments = path.split(":");
+            String finalPath = "";
+            String beginPath = "";
+            if (Build.VERSION.SDK_INT <= 28) {
+                // TODO warn the user with a popup that needs to create a folder in Downloads
+                return finalPath;
+            }
+
+            int slashIndex = segments[1].indexOf("/");
+            if (slashIndex != -1) {
+                finalPath = segments[1].substring(slashIndex);
+                beginPath = segments[1].substring(0, slashIndex);
+            }
+            File appPath;
+            if (beginPath.equals(DIRECTORY_DOCUMENTS) | beginPath.equals(DIRECTORY_DOWNLOADS)) {
+                appPath = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+            } else {
+                return "";
+            }
+            return appPath.getPath() + finalPath; 
+        }
+        // user must select again, stronghold shows error
+        return "";
     }
 
     @PermissionCallback
