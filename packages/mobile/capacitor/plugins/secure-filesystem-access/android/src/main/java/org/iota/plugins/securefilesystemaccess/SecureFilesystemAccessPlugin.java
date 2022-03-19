@@ -265,44 +265,14 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 String[] segments = data.getData().getPath().split(":");
                 String selected = segments[1];
                 response.put("selected", selected);
-            } else {
-                assert data != null;
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                    String[] segments = data.getData().getPath().split(":");
-                    String selected = segments[1];
-                    response.put("selected", selected + "/" + fileName);
-                } else {
-                    // API 29+ uses Scoped Storage, seems to exists some issues with Capacitor
-                    // see https://github.com/ionic-team/capacitor-plugins/issues/169
-                    if (data.getData().getPath().contains(":")) {
-                        String[] segments = data.getData().getPath().split(":");
-                        String selected = segments[1];
-                        String finalPath = selected;
-                        String beginPath = "";
-                        int slashIndex = selected.indexOf("/");
-                        if (slashIndex != -1) {
-                            finalPath = selected.substring(slashIndex);
-                            beginPath = selected.substring(0, slashIndex);
-                        }
-                        // Android 10+ uses new storage, momentally we define Downloads as default
-                        // appPath = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
-                        // TODO add popup on client when the selected dir could not be used and Downloads will.
-                        File appPath;
-                        if (beginPath.equals(DIRECTORY_DOCUMENTS) | beginPath.equals(DIRECTORY_DOWNLOADS)) {
-                            appPath = getDirectory(beginPath);
-                        } else {
-                            // user must select again, stronghold shows error
-                            response.put("selected", "");
-                            call.resolve(response);
-                            return;
-                        }
-
-                        response.put("selected",
-                                appPath.getPath() + File.separator + finalPath + File.separator + fileName);
-                    }
-                }
-            }
-            call.resolve(response);
+                
+            } else if (resourceType.equals("folder")) {
+            if (data == null) throw new AssertionError();
+            resolver.takePersistableUriPermission(data.getData(), takeFlagWrite);
+            final Uri treeUri = data.getData();
+            response.put("selected", buildPath(treeUri.getPath()) + File.separator + fileName);
+        }
+        call.resolve(response);
         }
     }
     
