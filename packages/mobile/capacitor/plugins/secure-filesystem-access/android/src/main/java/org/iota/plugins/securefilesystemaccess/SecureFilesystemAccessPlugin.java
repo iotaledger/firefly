@@ -212,7 +212,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 // We don't show the picker, as Stronghold can only copy on cache, then we copy
                 // on Downloads folder calling finishBackup() to give to the user an accessible location
                 JSObject response = new JSObject();
-                selectedPath = getContext().getExternalCacheDir().getPath() + File.separator + fileName;
+                selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
                 response.put("selected", selectedPath);
                 call.resolve(response);
                 return;
