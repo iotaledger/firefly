@@ -21,7 +21,9 @@ The following __must__ be installed on all platforms:
 
 ## Building
 
+
 ### Setup
+
 Install yarn dependencies:
 ```bash
 $ cd packages/mobile
@@ -34,11 +36,12 @@ Generate assets:
 packages/mobile $ yarn assets:prod
 ```
 
-Update Capacitor plugins on `android` / `ios` project folders and open Android Studio or XCode IDE:
+Update Capacitor plugins on `android` / `ios` project folders and open Android Studio / XCode IDE:
 ```bash
 packages/mobile $ yarn android:update
 packages/mobile $ yarn ios:update
 ```
+
 
 ### Development
 
@@ -59,6 +62,8 @@ packages/mobile $ yarn dev
 packages/mobile $ yarn dev:device
 # It is needed to be executed with every change
 ```
+Next run on Android Studio / XCode IDE.
+
 
 ### Production 
 
@@ -68,5 +73,5 @@ packages/mobile $ yarn build
 packages/mobile $ yarn ios
 packages/mobile $ yarn android
 ```
-Finally build / run in Android Studio or XCode IDE.
+Finally build / run in Android Studio / XCode IDE.
 
