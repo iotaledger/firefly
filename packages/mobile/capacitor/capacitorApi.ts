@@ -250,6 +250,7 @@ export const CapacitorApi: IPlatform = {
         const os: string = Capacitor.getPlatform()
         const { selected } = await SecureFilesystemAccess.showPicker({
             type: 'folder',
+            defaultPath: ''
         })
         if (os === 'ios') {
             void (await SecureFilesystemAccess.allowAccess())
