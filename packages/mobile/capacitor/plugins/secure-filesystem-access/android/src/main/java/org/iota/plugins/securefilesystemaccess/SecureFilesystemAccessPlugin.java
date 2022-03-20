@@ -3,13 +3,17 @@ package org.iota.plugins.securefilesystemaccess;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.FileUtils;
+import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
+import androidx.annotation.RequiresApi;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
@@ -28,27 +32,26 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Objects;
 
-import static android.os.Environment.DIRECTORY_DOCUMENTS;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 @CapacitorPlugin(
-    name = "SecureFilesystemAccess",
-    permissions = {
-        @Permission(
-            alias = "storage",
-            strings = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }
-        )
-    }
+        name = "SecureFilesystemAccess",
+        permissions = {
+                @Permission(
+                        alias = "storage",
+                        strings = {
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        }
+                )
+        }
 )
 
 public class SecureFilesystemAccessPlugin extends Plugin {
     private String resourceType = "";
     private String selectedPath = "";
     private String fileName = "";
-    
+
     @PluginMethod
     public void finishBackup(PluginCall call) {
         if (Build.VERSION.SDK_INT == 29) {
@@ -61,8 +64,10 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                         selectedPath
                 );
                 response.put("selected", finalPath);
+                call.setKeepAlive(false);
                 call.resolve(response);
             } catch (Exception e) {
+                call.setKeepAlive(false);
                 call.reject(e.toString());
             }
         }
@@ -84,9 +89,9 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 return;
             }
 
-            if (Build.VERSION.SDK_INT == 29) {
+            if (Build.VERSION.SDK_INT == 29 && resourceType.equals("folder")) {
                 // Temporary hotfix for Android 10, it's uses new storage later deprecated on API 30,
-                // We don't show the picker, as Stronghold can only copy on cache, then we copy
+                // We don't show the picker to export, as Stronghold can only copy on cache, then we copy
                 // on Downloads folder calling finishBackup() to give to the user an accessible location
                 // API level 29 use media collections such as MediaStore.Downloads
                 // without requesting any storage-related permissions.
@@ -98,7 +103,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             }
 
             Intent intent = new Intent(resourceType.equals("file")
-                ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
+                    ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             if (resourceType.equals("file")) {
@@ -110,7 +115,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             if (resourceType.equals("folder")) {
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 // we need dangerous write permission to let Stronghold
-                // save the backup file on a accessible public folder
+                // save the backup file on a accessible public shared folder
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 if (Build.VERSION.SDK_INT >= 26) {
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
@@ -126,20 +131,46 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         }
     }
 
+    @RequiresApi(api = 26)
     @ActivityCallback
-    private void pickResult(PluginCall call, ActivityResult result) {
+    private void pickResult(PluginCall call, ActivityResult result) throws Exception {
+        call.setKeepAlive(true);
         JSObject response = new JSObject();
         Intent data = result.getData();
         int takeFlagRead = Intent.FLAG_GRANT_READ_URI_PERMISSION;
         int takeFlagWrite = Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
         ContentResolver resolver = getContext().getContentResolver();
 
-        if (resourceType.equals("file")) { // see buildDocumentUri
+        if (resourceType.equals("file")) {
             if (data == null) throw new AssertionError();
             resolver.takePersistableUriPermission(data.getData(), takeFlagRead);
             // TODO when the path is not Downloads directory we don't need split and fails!
-            String selected = data.getData().getPath().split(":")[1];
-            response.put("selected", selected);
+            Log.e("uri.getPath", data.getData().getPath());
+            Log.e("buildPath", buildPath(data.getData().getPath()));
+            if (Build.VERSION.SDK_INT <= 28) {
+                String selected = data.getData().getPath().split(":")[1];
+                Log.e("selected", selected);
+                response.put("selected", selected);
+            } else {
+                File copiedFile = new File(getContext().getCacheDir(), "temp.stronghold");
+                FileInputStream input;
+                ParcelFileDescriptor sourceFD;
+                try {
+                    sourceFD = resolver.openFileDescriptor(data.getData(), "r", null);
+                    input = new FileInputStream(sourceFD.getFileDescriptor());
+                    ParcelFileDescriptor targetFD = resolver.openFileDescriptor(
+                            Uri.fromFile(copiedFile), "w", null);
+                    FileOutputStream output = new FileOutputStream(targetFD.getFileDescriptor());
+                    FileUtils.copy(sourceFD.getFileDescriptor(), targetFD.getFileDescriptor());
+                    input.close();
+                    output.close();
+                    // resolver.delete(Uri.fromFile(copiedFile), null, null);
+                } catch (Exception e) {
+                    throw  new Exception("Unable to write file - " + e.getMessage());
+                }
+                Log.e("selected", copiedFile.toString());
+                response.put("selected", copiedFile.toString());
+            }
 
         } else if (resourceType.equals("folder")) {
             if (data == null) throw new AssertionError();
@@ -159,27 +190,20 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         if (!isReadable && !isWritable) {
             return "Storage is not available";
         }
-        if (!":".contains(path)) {
-            return ""; // user must select again, stronghold shows error
-        }
-        String[] segments = path.split(":");
-        String finalPath = "";
-        String beginPath = "";
+        if (!path.contains(":")) return ""; // user must select again, stronghold shows error
+        String segment = path.split(":")[1];
         if (Build.VERSION.SDK_INT <= 28) {
-            return finalPath;
+            return segment;
         }
 
-        int slashIndex = segments[1].indexOf("/");
-        if (slashIndex != -1) {
-            finalPath = segments[1].substring(slashIndex);
-            beginPath = segments[1].substring(0, slashIndex);
-        }
-        File appPath;
-        if (!(beginPath.equals(DIRECTORY_DOCUMENTS) | beginPath.equals(DIRECTORY_DOWNLOADS))) {
-            return "";
-        }
-        appPath = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
-        return appPath.getPath() + finalPath;
+        int slashIndex = segment.indexOf("/");
+        if (slashIndex == -1) return "";
+        String finalPath = segment.substring(slashIndex);
+        String beginPath = segment.substring(0, slashIndex);
+
+        if (!beginPath.equals(DIRECTORY_DOWNLOADS)) return "";
+        File downloadsPath = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+        return downloadsPath.getPath() + finalPath;
     }
 
     @PermissionCallback
@@ -191,6 +215,19 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             response.put("selected", "");
             call.resolve(response);
         }
+    }
+
+    public static String getPath(ContentResolver resolver, Uri uri) {
+        if (uri.getScheme().equals("file")) {
+            return uri.getPath();
+        }
+        final Cursor cursor = resolver.query(uri, new String[]{"_data"}, null, null, null);
+        if (cursor.moveToFirst()) {
+            String path = cursor.getString(0);
+            cursor.close();
+            return path;
+        }
+        throw new RuntimeException("Can't retrieve path from uri: " + uri.toString());
     }
 
     @PluginMethod
