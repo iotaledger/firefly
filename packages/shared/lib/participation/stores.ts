@@ -202,8 +202,8 @@ export const selectedAccountStakingRewards: Readable<{ assembly: number; shimmer
         )
         if (selectedAccountOverview) {
             return {
-                assembly: selectedAccountOverview.assemblyRewards,
-                shimmer: selectedAccountOverview.shimmerRewards,
+                assembly: selectedAccountOverview.assemblyRewards + selectedAccountOverview.assemblyRewardsBelowMinimum,
+                shimmer: selectedAccountOverview.shimmerRewards + selectedAccountOverview.shimmerRewardsBelowMinimum,
             }
         }
     }
