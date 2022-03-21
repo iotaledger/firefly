@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, Drawer, HR, Radio, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import {
         ensureSinglePrimaryNode,
@@ -172,8 +173,10 @@
                 {/if}
                 {#each networkConfig.nodes as node}
                     <div
-                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                    >
+                        on:click={() => {
+                            if ($mobile) nodeContextMenu = node
+                        }}
+                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
                             <Text
                                 classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${
@@ -186,22 +189,32 @@
                                 {node.isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
                             </Text>
                         </div>
-                        <button
-                            on:click={(e) => {
-                                nodeContextMenu = node
-                                contextPosition = { x: e.clientX, y: e.clientY }
-                            }}
-                            class="dark:text-white">...</button
-                        >
+                        {#if !$mobile}
+                            <button
+                                on:click={(e) => {
+                                    nodeContextMenu = node
+                                    contextPosition = { x: e.clientX, y: e.clientY }
+                                }}
+                                class="dark:text-white">...</button>
+                        {/if}
                     </div>
                 {/each}
                 {#if nodeContextMenu}
-                    <NodeConfigOptions
-                        bind:nodeContextMenu
-                        bind:networkConfig
-                        {contextPosition}
-                        {ensureOnePrimaryNode}
-                    />
+                    {#if $mobile}
+                        <Drawer dimLength={180} on:close={() => (nodeContextMenu = undefined)}>
+                            <NodeConfigOptions
+                                bind:nodeContextMenu
+                                bind:networkConfig
+                                {contextPosition}
+                                {ensureOnePrimaryNode} />
+                        </Drawer>
+                    {:else}
+                        <NodeConfigOptions
+                            bind:nodeContextMenu
+                            bind:networkConfig
+                            {contextPosition}
+                            {ensureOnePrimaryNode} />
+                    {/if}
                 {/if}
             </div>
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">

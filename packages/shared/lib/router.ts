@@ -91,7 +91,14 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 /**
  * Settings child route
  */
-export const settingsChildRoute = writable<string>(null)
+export const settingsChildRoute = writable<
+    | GeneralSettings
+    | GeneralSettingsNoProfile
+    | SecuritySettings
+    | AdvancedSettings
+    | AdvancedSettingsNoProfile
+    | HelpAndInfo
+>(null)
 
 /**
  * Navigate to initial route
@@ -296,9 +303,9 @@ export const resetRouter = (): void => {
 
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
-    settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     isDeepLinkRequestActive.set(false)
+    resetSettingsRoute()
 }
 
 export const resetWalletRoute = (): void => {
@@ -318,4 +325,9 @@ export const openSettings = (): void => {
     previousDashboardRoute.set(get(dashboardRoute))
     dashboardRoute.set(Tabs.Settings)
     settingsRoute.set(SettingsRoutes.Init)
+}
+
+export const resetSettingsRoute = (): void => {
+    settingsRoute.set(SettingsRoutes.Init)
+    settingsChildRoute.set(null)
 }
