@@ -135,18 +135,18 @@
 <Text type="h3" classes="px-4 mb-4 text-center">{locale('popups.stakingConfirmation.title')}</Text>
 <div class="rounded-2xl	flex flex-col space-y-1 self-center text-center p-5 bg-gray-100 dark:bg-gray-800">
     <Text type="p" highlighted bigger>
-        {locale(`popups.stakingConfirmation.subtitle${isPartiallyStaked ? 'Merge' : 'Stake'}`)}
+        {locale(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds($selectedAccount)) : $selectedAccount.balance}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds($selectedAccount)) : $selectedAccount.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">
-    {locale(`popups.stakingConfirmation.body${isPartiallyStaked ? 'Merge' : 'Stake'}`, {
+    {locale(`popups.stakingConfirmation.body${$isPartiallyStaked ? 'Merge' : 'Stake'}`, {
         values: { airdrop: getAirdropParticipation() },
     })}
 </Text>
-{#if !isPartiallyStaked}
+{#if !$isPartiallyStaked}
     <div class="flex flex-row mb-6 space-x-2 flex-1">
         {#each Object.values(StakingAirdrop) as airdrop}
             <div
