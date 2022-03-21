@@ -2,13 +2,14 @@
 
 This is the directory for the mobile application of Firefly - IOTA's new official wallet.
 
-## Setup
+## Requirements
 
 The following __must__ be installed on all platforms:
 
 - [Node.js](https://nodejs.org/en/) 16+
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - [Rust](https://www.rust-lang.org/tools/install)
+- [ImageMagick](https://imagemagick.org/script/download.php)
 
 ### Linux, Windows
 
@@ -18,6 +19,7 @@ The following __must__ be installed on all platforms:
 
 - [Xcode](https://developer.apple.com/xcode/)
 - [Android Studio and SDK Tools](https://developer.android.com/studio)
+
 
 ## Building
 
@@ -63,6 +65,10 @@ packages/mobile $ yarn dev:device
 # It is needed to be executed with every change
 ```
 Next run on Android Studio / XCode IDE.
+
+Debug
+- For Android, open a Chromium browser and type `chrome://inspect` to see the attached emulator / phone, finally click on `Inspect` to get DevTools window of the emulator webview.
+- For iOS, open Safari and go to menu `Develop`, next choose the attached simulator or Iphone.
 
 
 ### Production 
