@@ -8,6 +8,7 @@
 	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
     @prop {boolean} [preventClose] - Prevent close the Drawer.
+    @prop {string} [zIndex] - Main container Tailwind z-index. Ex. "z-40".
 	
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
@@ -26,6 +27,7 @@
     export let classes = ''
     export let fullScreen = false
     export let preventClose = false
+    export let zIndex = 'z-30'
 
     const dispatch = createEventDispatcher()
 
@@ -154,7 +156,7 @@
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
-<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
+<drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <slide-zone
         class="fixed h-screen w-screen"
         use:slidable={!preventClose}
