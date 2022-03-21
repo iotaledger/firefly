@@ -54,7 +54,7 @@
 </script>
 
 {#if $mobile}
-    <Drawer fromRight dimLength={0} fullScreen classes="flex">
+    <Drawer opened fromRight dimLength={0} fullScreen classes="flex">
         <div class="flex w-full h-full relative z-0 pt-20">
             <div
                 class="fixed top-0 cursor-pointer w-full px-8 py-3 flex items-centers justify-center bg-white dark:bg-gray-800"
