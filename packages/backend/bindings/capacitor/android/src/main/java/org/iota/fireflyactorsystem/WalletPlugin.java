@@ -78,9 +78,9 @@ public class WalletPlugin extends Plugin {
             }
             String actorId = call.getString("actorId");
 
-            call.release(bridge);
-            isInitialized = false;
             Actor.iotaDestroy(actorId);
+            isInitialized = false;
+            call.release(bridge);
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
         }
