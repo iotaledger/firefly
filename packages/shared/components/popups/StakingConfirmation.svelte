@@ -31,9 +31,22 @@
     let tooltipAirdrop: string
     let showTooltip = false
     let tooltipAnchor: unknown
+
+    const activeAirdrops =
+        $participationOverview
+            .find((apo) => apo.accountIndex === $selectedAccount.index)
+            ?.participations.map((p) => getAirdropFromEventId(p.eventId))
+            // Falsy values (undefined, null, ...) are filtered out from the array
+            .filter(Boolean) || []
+
+    const airdropSelections: { [key in StakingAirdrop]: boolean } = {
+        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
+        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
+    }
+
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
 
-    const toggleTooltip = (airdrop: StakingAirdrop): void => {
+    function toggleTooltip(airdrop: StakingAirdrop): void {
         tooltipAirdrop = capitalize(airdrop)
         showTooltip = !showTooltip
         if (showTooltip) {
@@ -43,9 +56,11 @@
         }
     }
 
-    const canReachAirdropMinimum = (airdrop: StakingAirdrop) => canAccountReachMinimumAirdrop($selectedAccount, airdrop)
+    function canReachAirdropMinimum(airdrop: StakingAirdrop): boolean {
+        return canAccountReachMinimumAirdrop($selectedAccount, airdrop)
+    }
 
-    const getRewards = (airdrop: StakingAirdrop): string => {
+    function getRewards(airdrop: StakingAirdrop): string {
         if (!canReachAirdropMinimum(airdrop)) {
             return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
         }
@@ -56,21 +71,11 @@
         )
     }
 
-    const activeAirdrops =
-        $participationOverview
-            .find((apo) => apo.accountIndex === $selectedAccount.index)
-            ?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
-
-    const airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
-        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
-    }
-
-    const toggleAirdropSelection = (airdrop: StakingAirdrop): void => {
+    function toggleAirdropSelection(airdrop: StakingAirdrop): void {
         airdropSelections[airdrop] = !airdropSelections[airdrop]
     }
 
-    const handleBackClick = (): void => {
+    function handleBackClick(): void {
         openPopup(
             {
                 type: 'stakingManager',
@@ -79,7 +84,7 @@
         )
     }
 
-    const handleConfirmClick = (): void => {
+    function handleConfirmClick(): void {
         if ($isSoftwareProfile) {
             checkStronghold(openStakingManager)
         } else {
@@ -94,7 +99,7 @@
         }
     }
 
-    const openStakingManager = (): void => {
+    function openStakingManager(): void {
         accountToParticipate.set($selectedAccount)
         participationAction.set(ParticipationAction.Stake)
 
@@ -120,7 +125,7 @@
         )
     }
 
-    const getAirdropParticipation = (): string => {
+    function getAirdropParticipation(): string {
         if (activeAirdrops.length === 1) {
             return capitalize(activeAirdrops.join())
         } else {

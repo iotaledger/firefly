@@ -70,7 +70,7 @@
         }
     }
 
-    const resetAccounts = (): void => {
+    function resetAccounts(): void {
         /**
          * NOTE: This is necessary for the page
          * to be re-rendered because updating arrays
@@ -80,7 +80,7 @@
         accounts = accounts
     }
 
-    const resetView = (): void => {
+    function resetView(): void {
         if (!isSoftwareProfile) {
             transferState.set(null)
         }
@@ -92,19 +92,19 @@
         resetAccounts()
     }
 
-    const displayErrorNotification = (error): void => {
+    function displayErrorNotification(error): void {
         showAppNotification({
             type: 'error',
             message: locale(error.error),
         })
     }
 
-    const getFormattedFiatAmount = (amount: number): string => {
+    function getFormattedFiatAmount(amount: number): string {
         const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
     }
 
-    const handleParticipationAction = async (): Promise<void> => {
+    async function handleParticipationAction(): Promise<void> {
         if (!canStake) {
             return
         }
@@ -153,7 +153,7 @@
         }
     }
 
-    const handleStakeClick = (): void => {
+    function handleStakeClick(): void {
         const openStakingConfirmationPopup = () =>
             openPopup(
                 {
@@ -168,7 +168,7 @@
         }
     }
 
-    const handleUnstakeClick = (): void => {
+    function handleUnstakeClick(): void {
         const _unstake = () => {
             $accountToParticipate = $selectedAccount
             $participationAction = ParticipationAction.Unstake
@@ -221,7 +221,7 @@
     const tooltipAnchors: { [accountIndex: number]: unknown } = {}
     let tooltipMinBalance: string = ''
 
-    const toggleTooltip = (account: WalletAccount): void => {
+    function toggleTooltip(account: WalletAccount): void {
         showTooltip = !showTooltip
 
         if (showTooltip) {
