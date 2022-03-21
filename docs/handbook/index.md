@@ -1,5 +1,6 @@
 ---
 icon: home
+order: 1000
 ---
 
 # Welcome

@@ -1,6 +1,9 @@
 ---
 icon: info
+order: 997
 ---
+
+# Glossary
 
 ## 🖇️ Bitcoin Improvement Proposals (BIPs)
 
