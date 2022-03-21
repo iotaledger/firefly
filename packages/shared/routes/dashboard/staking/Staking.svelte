@@ -2,7 +2,7 @@
     import { DashboardPane } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { accountToParticipate, participationAction, stakingEventState } from 'shared/lib/participation/stores'
+    import { participationAction, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
@@ -78,16 +78,7 @@
                 // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
                 // Re-open the staking manager pop up
-                openPopup(
-                    {
-                        type: 'stakingManager',
-                        props: {
-                            accountToAction: $accountToParticipate,
-                            participationAction: $participationAction,
-                        },
-                    },
-                    true
-                )
+                openPopup({ type: 'stakingManager' }, true)
                 break
 
             case TransferProgressEventType.SigningTransaction:
