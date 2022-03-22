@@ -93,6 +93,13 @@ The following are some general rules about code naming that we follow:
     }
     ```
 
+## Files
+### TypeScript
+All TypeScript filenames are in `kebab-case`, e.g. `deep-link-handler.ts`. Some filenames may include an optional file type specifier, e.g. `deep-link.store.ts`.
+
+### Svelte 
+All Svelte component and route filenames are in `PascalCase`, e.g. `LedgerTransaction.svelte`.
+
 ## Acronyms
 When a variable name contains an acronym, the first letter __must__ be uppercase and the rest lowercase. This convention creates more readable names particularly in the circumstances where another word follows the acronym.
 
@@ -112,7 +119,9 @@ type UtxoInput {
 }
 ```
 
-## Booleans
+## Code
+
+### Booleans
 - All objects, functions, stores, i.e. code components of `boolean` type must be prefixed with being verbs (e.g. "is", "are", "has", "will", "can", "should", "must")
 
     __Bad__
@@ -142,7 +151,7 @@ type UtxoInput {
     const isEnabled = false
     ```
 
-## Constants
+### Constants
 - All constants __must__ be in `SCREAMING_SNAKE_CASE`
 
     __Bad__
@@ -157,7 +166,7 @@ type UtxoInput {
     const MAX_NUM_IOTAS = 2_779_530_283_277_761
     ```
 
-## Enumerations
+### Enumerations
 - All enum _and_ enum variant names __must__ be in `PascalCase`
 
     __Bad__
@@ -201,7 +210,7 @@ type UtxoInput {
     }
     ```
 
-## Functions
+### Functions
 - All function names __must__ be in `camelCase`
 
     __Bad__
@@ -220,7 +229,7 @@ type UtxoInput {
     }
     ```
 
-## Interfaces
+### Interfaces
 - All interface names __must__ be in `PascalCase` preceded with an `I`
 
     __Bad__
@@ -247,7 +256,7 @@ type UtxoInput {
     }
     ```
 
-## Types
+### Types
 - All type names __must__ be in `PascalCase`
 
     __Bad__

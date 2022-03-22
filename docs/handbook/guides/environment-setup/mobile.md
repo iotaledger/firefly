@@ -31,10 +31,14 @@ yarn build
 ```
 
 ## Development
-Start the development server:
+Start the development server (alternatively, build for device to copy "./ios" and "./android" project folders):
 ```bash
 # in packages/mobile
 yarn dev
+
+OR
+
+yarn dev:device
 ```
 
 In a new terminal (while the development server is running):
