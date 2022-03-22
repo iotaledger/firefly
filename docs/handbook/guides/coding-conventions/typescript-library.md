@@ -247,7 +247,7 @@ interface IStrongholdApi {
 ## Tests
 Tests are files containing one or more unit tests for functions in its corresponding source code file. The tests within a module form a test suite. It is worth noting that if the filename is `the-file.ts` then its test __should be__ named `the-file.test.ts`.
 
-See the [Testing](https://iotaledger.github.io/firefly/guides/testing) guide for more info on how to run tests.
+:information_source: Please refer to the [testing](../testing.md) guide for more info on setting up and running tests.
 
 ### Writing
 Most of the test files __should__ have a structure like this:
