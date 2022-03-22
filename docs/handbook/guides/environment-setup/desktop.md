@@ -54,7 +54,7 @@ If Sentry bug reporting needs to be enabled for a local production build, you mu
 }
 ```
 
-## Firefly Snap
+### Firefly Snap
 To run the Firefly snap properly on Linux, you may need to run the following commands:
 ```bash
 # install the snap when built locally

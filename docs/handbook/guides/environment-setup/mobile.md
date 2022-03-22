@@ -5,6 +5,18 @@ icon: device-mobile
 # Mobile
 Be sure to follow the base environment setup [here](./index.md)!
 
+## Dependencies
+In addition to that, it is also necessary to install the following:
+- [ImageMagick](https://imagemagick.org/script/download.php)
+
+### iOS
+If working on a Mac, it is necessary to install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+
+If working on the iOS build on a Linux- or Windows-based machine, it is necessary to install a [MacOS virtual machine (VM) with Xcode](https://github.com/kholia/OSX-KVM).  
+
+### Android
+If working on the Android build, it is necessary for all desktop platforms to have [Android Studio](https://developer.android.com/studio/install)) installed.
+
 ## Build
 Install yarn dependencies:
 ```bash
@@ -43,7 +55,7 @@ const config: CapacitorConfig = {
 }
 ```
 
-Run a mobile platform simulator:
+Run the mobile simulator:
 ```bash
 # iOS
 yarn ios:update
@@ -51,3 +63,28 @@ yarn ios:update
 # Android
 yarn android:update
 ```
+
+### Debugging
+#### iOS
+Open Safari, go to the "Develop" menu, and choose the attached iPhone emulator.
+
+#### Android
+Open a Chromium-based browser and navigate to `chrome://inspect` to see the attached emulator / phone. Click on "Inspect" to get the developer tools window of the emulator webview.
+
+## Production
+Build the mobile app:
+```bash
+# in packages/mobile
+yarn build
+```
+
+Package the mobile app:
+```bash
+# iOS
+yarn ios
+
+# Android
+yarn android
+```
+
+Finally, run the build in either Xcode or Android Studio.
