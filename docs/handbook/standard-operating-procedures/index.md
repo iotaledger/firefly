@@ -1,6 +1,6 @@
 ---
 icon: gear
-expanded: false
+expanded: true
 order: 998
 ---
 
