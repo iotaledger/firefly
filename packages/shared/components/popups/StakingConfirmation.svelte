@@ -11,22 +11,15 @@
         getUnstakedFunds,
     } from 'shared/lib/participation'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import {
-        accountToParticipate,
-        participationAction,
-        participationOverview,
-        isPartiallyStaked,
-    } from 'shared/lib/participation/stores'
+    import { participationAction, participationOverview, isPartiallyStaked } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-
-    export let locale: Locale
+    import { localize } from 'shared/lib/i18n'
 
     let tooltipAirdrop: string
     let showTooltip = false
@@ -91,7 +84,7 @@
             if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
                 showAppNotification({
                     type: 'warning',
-                    message: locale('error.ledger.appNotOpen'),
+                    message: localize('error.ledger.appNotOpen'),
                 })
             } else {
                 openStakingManager()
@@ -100,7 +93,6 @@
     }
 
     function openStakingManager(): void {
-        accountToParticipate.set($selectedAccount)
         participationAction.set(ParticipationAction.Stake)
 
         const selections = !$isPartiallyStaked
@@ -137,17 +129,17 @@
 <button on:click={handleBackClick} class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500">
     <Icon icon="chevron-left" />
 </button>
-<Text type="h3" classes="px-4 mb-4 text-center">{locale('popups.stakingConfirmation.title')}</Text>
+<Text type="h3" classes="px-4 mb-4 text-center">{localize('popups.stakingConfirmation.title')}</Text>
 <div class="rounded-2xl	flex flex-col space-y-1 self-center text-center p-5 bg-gray-100 dark:bg-gray-800">
     <Text type="p" highlighted bigger>
-        {locale(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
+        {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
         {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds($selectedAccount)) : $selectedAccount.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">
-    {locale(`popups.stakingConfirmation.body${$isPartiallyStaked ? 'Merge' : 'Stake'}`, {
+    {localize(`popups.stakingConfirmation.body${$isPartiallyStaked ? 'Merge' : 'Stake'}`, {
         values: { airdrop: getAirdropParticipation() },
     })}
 </Text>
@@ -170,7 +162,7 @@
                     <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
                     <Text type="p" bigger>({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
                 </div>
-                <Text type="p" secondary>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
+                <Text type="p" secondary>{localize('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
                 {#if !canReachAirdropMinimum(airdrop)}
                     <div
                         class="py-5"
@@ -210,16 +202,18 @@
     onClick={handleConfirmClick}
     disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}
 >
-    {locale('actions.confirm')}
+    {localize('actions.confirm')}
 </Button>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {locale('tooltips.stakingMinRewards.title')}
+            {localize('tooltips.stakingMinRewards.title')}
         </Text>
         <Text type="p" secondary classes="text-left"
-            >{locale('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', { values: { airdrop: tooltipAirdrop } })}</Text
+            >{localize('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', {
+                values: { airdrop: tooltipAirdrop },
+            })}</Text
         >
     </Tooltip>
 {/if}

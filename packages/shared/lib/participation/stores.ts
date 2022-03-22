@@ -22,20 +22,8 @@ import {
 export const pendingParticipations = writable<PendingParticipation[]>([])
 
 /**
- * The store for an account that is selected to participate in an event. This is
- * mostly useful for showing background participation progress, otherwise it can
- * just be shown within a designated component (i.e. popup or dashboard tile).
- *
- * If this store is empty (e.g. undefined or null), then there is NOT an account
- * currently trying to participate (or stop) in an event.
- */
-// TODO: remove this, accountToParticipate now is selectedAccount
-export const accountToParticipate = writable<WalletAccount>(null)
-
-/**
- * The store for the participation action to perform for the "accountToParticipate". Similar
- * to the "accountToParticipate", this is mostly useful for showing background participation
- * progress.
+ * The store for the participation action to perform for the selectedAccount.
+ * This is mostly useful for showing background participation progress.
  *
  * If this store is empty (e.g. undefined or null), then there is NOT an account
  * currently trying to participate (or stop) in an event.
