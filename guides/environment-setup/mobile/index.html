@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.0.701233076457" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.0.701234203301" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701233076457" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701234203301" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701233076457" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701233076457" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701234203301" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701234203301" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -234,6 +234,31 @@
     </h1>
 </doc-anchor-target>
 <p>Be sure to follow the base environment setup <a href="../">here</a>!</p>
+<doc-anchor-target id="dependencies">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependencies">#</doc-anchor-trigger>
+        <span>Dependencies</span>
+    </h2>
+</doc-anchor-target>
+<p>In addition to that, it is also necessary to install the following:</p>
+<ul>
+<li><a href="https://imagemagick.org/script/download.php">ImageMagick</a></li>
+</ul>
+<doc-anchor-target id="ios">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ios">#</doc-anchor-trigger>
+        <span>iOS</span>
+    </h3>
+</doc-anchor-target>
+<p>If working on a Mac, it is necessary to install <a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a></p>
+<p>If working on the iOS build on a Linux- or Windows-based machine, it is necessary to install a <a href="https://github.com/kholia/OSX-KVM">MacOS virtual machine (VM) with Xcode</a>.</p>
+<doc-anchor-target id="android">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#android">#</doc-anchor-trigger>
+        <span>Android</span>
+    </h3>
+</doc-anchor-target>
+<p>If working on the Android build, it is necessary for all desktop platforms to have <a href="https://developer.android.com/studio/install">Android Studio</a>) installed.</p>
 <doc-anchor-target id="build">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#build">#</doc-anchor-trigger>
@@ -277,7 +302,7 @@ cp capacitor-sample.config.ts capacitor.config.ts</code></pre>
     ...
 }</code></pre>
 </doc-codeblock></div>
-<p>Run a mobile platform simulator:</p>
+<p>Run the mobile simulator:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># iOS
 yarn ios:update
@@ -285,6 +310,46 @@ yarn ios:update
 # Android
 yarn android:update</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="debugging">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#debugging">#</doc-anchor-trigger>
+        <span>Debugging</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="ios-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ios-1">#</doc-anchor-trigger>
+        <span>iOS</span>
+    </h4>
+</doc-anchor-target>
+<p>Open Safari, go to the &quot;Develop&quot; menu, and choose the attached iPhone emulator.</p>
+<doc-anchor-target id="android-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#android-1">#</doc-anchor-trigger>
+        <span>Android</span>
+    </h4>
+</doc-anchor-target>
+<p>Open a Chromium-based browser and navigate to <code v-pre>chrome://inspect</code> to see the attached emulator / phone. Click on &quot;Inspect&quot; to get the developer tools window of the emulator webview.</p>
+<doc-anchor-target id="production">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#production">#</doc-anchor-trigger>
+        <span>Production</span>
+    </h2>
+</doc-anchor-target>
+<p>Build the mobile app:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in packages/mobile
+yarn build</code></pre>
+</doc-codeblock></div>
+<p>Package the mobile app:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># iOS
+yarn ios
+
+# Android
+yarn android</code></pre>
+</doc-codeblock></div>
+<p>Finally, run the build in either Xcode or Android Studio.</p>
 
                                 
                                 <!-- Required only on API pages -->
