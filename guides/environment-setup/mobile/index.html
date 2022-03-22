@@ -10,30 +10,31 @@
     <meta name="generator" content="Retype 2.0">
 
     <!-- Primary Meta Tags -->
-    <title>Mobile | Handbook for the Firefly team</title>
-    <meta name="title" content="Mobile | Handbook for the Firefly team">
-    <meta name="description" content="TODO" />
+    <title>Mobile | Firefly Team Handbook</title>
+    <meta name="title" content="Mobile | Firefly Team Handbook">
+    <meta name="description" content="Be sure to follow the base environment setup here!" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/mobile/">
-    <meta property="og:title" content="Mobile | Handbook for the Firefly team">
-    <meta property="og:description" content="TODO">
+    <meta property="og:title" content="Mobile | Firefly Team Handbook">
+    <meta property="og:description" content="Be sure to follow the base environment setup here!">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/mobile/">
-    <meta property="twitter:title" content="Mobile | Handbook for the Firefly team">
-    <meta property="twitter:description" content="TODO">
+    <meta property="twitter:title" content="Mobile | Firefly Team Handbook">
+    <meta property="twitter:description" content="Be sure to follow the base environment setup here!">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.0.701230539401" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.0.701233076457" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701230539401" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701233076457" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701230539401" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701233076457" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701233076457" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -232,7 +233,58 @@
         <span>Mobile</span>
     </h1>
 </doc-anchor-target>
-<p><em>TODO</em></p>
+<p>Be sure to follow the base environment setup <a href="../">here</a>!</p>
+<doc-anchor-target id="build">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#build">#</doc-anchor-trigger>
+        <span>Build</span>
+    </h2>
+</doc-anchor-target>
+<p>Install yarn dependencies:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in the root directory
+yarn</code></pre>
+</doc-codeblock></div>
+<p>Build the mobile app:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in packages/mobile
+yarn build</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="development">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#development">#</doc-anchor-trigger>
+        <span>Development</span>
+    </h2>
+</doc-anchor-target>
+<p>Start the development server:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in packages/mobile
+yarn dev</code></pre>
+</doc-codeblock></div>
+<p>In a new terminal (while the development server is running):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in packages/mobile
+cp capacitor-sample.config.ts capacitor.config.ts</code></pre>
+</doc-codeblock></div>
+<p>Modify the URL field in the newly copied file, replacing <code v-pre>XXX.XXX.XXX.XXX</code> with your local IP (will likely start with <code v-pre>192.168.1.XXX</code>):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">const config: CapacitorConfig = {
+    ...
+    server: {
+        url: 'http://XXX.XXX.XXX.XXX:8080',
+        cleartext: true,
+    },
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<p>Run a mobile platform simulator:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># iOS
+yarn ios:update
+
+# Android
+yarn android:update</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -305,6 +357,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Mobile", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Mobile", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

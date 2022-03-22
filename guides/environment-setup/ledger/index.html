@@ -10,30 +10,31 @@
     <meta name="generator" content="Retype 2.0">
 
     <!-- Primary Meta Tags -->
-    <title>Ledger | Handbook for the Firefly team</title>
-    <meta name="title" content="Ledger | Handbook for the Firefly team">
-    <meta name="description" content="TODO" />
+    <title>Ledger | Firefly Team Handbook</title>
+    <meta name="title" content="Ledger | Firefly Team Handbook">
+    <meta name="description" content="Most of the time, the Ledger hardware devices work quite smoothly when connecting them to your computer." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/ledger/">
-    <meta property="og:title" content="Ledger | Handbook for the Firefly team">
-    <meta property="og:description" content="TODO">
+    <meta property="og:title" content="Ledger | Firefly Team Handbook">
+    <meta property="og:description" content="Most of the time, the Ledger hardware devices work quite smoothly when connecting them to your computer.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/ledger/">
-    <meta property="twitter:title" content="Ledger | Handbook for the Firefly team">
-    <meta property="twitter:description" content="TODO">
+    <meta property="twitter:title" content="Ledger | Firefly Team Handbook">
+    <meta property="twitter:description" content="Most of the time, the Ledger hardware devices work quite smoothly when connecting them to your computer.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.0.701230539401" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.0.701233076457" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701230539401" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701233076457" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701230539401" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701233076457" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701233076457" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -232,7 +233,109 @@
         <span>Ledger</span>
     </h1>
 </doc-anchor-target>
-<p><em>TODO</em></p>
+<doc-anchor-target id="hardware">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#hardware">#</doc-anchor-trigger>
+        <span>Hardware</span>
+    </h2>
+</doc-anchor-target>
+<p>Most of the time, the Ledger hardware devices work quite smoothly when connecting them to your computer.</p>
+<doc-anchor-target id="setup">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#setup">#</doc-anchor-trigger>
+        <span>Setup</span>
+    </h3>
+</doc-anchor-target>
+<p>For MacOS and Windows systems, the Ledger hardware devices should work smoothly out of the box. If not refer to the <doc-anchor-trigger to="#troubleshooting">troubleshooting</doc-anchor-trigger> section just below.</p>
+<p>If you are using a Linux-based system, please be sure that the <code v-pre>udev</code> rules are setup properly:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="troubleshooting">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#troubleshooting">#</doc-anchor-trigger>
+        <span>Troubleshooting</span>
+    </h3>
+</doc-anchor-target>
+<p>If you are experiencing connection problems with the Ledger device, it is worth trying a few things:</p>
+<ul>
+<li>Run the application as administrator (Windows)</li>
+<li>Enable full disk access (MacOS)</li>
+<li>Try a different USB cable or USB port (the originally packaged cable is best)</li>
+<li>Turn off any Anti-virus software or VPNs</li>
+</ul>
+<doc-anchor-target id="simulator">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#simulator">#</doc-anchor-trigger>
+        <span>Simulator</span>
+    </h2>
+</doc-anchor-target>
+<p>The public repository for the IOTA Ledger app lives <a href="https://github.com/iotaledger/ledger-iota-app">here</a>. This can be used for...</p>
+<ul>
+<li>Running a Ledger Nano S or X hardware simulator</li>
+<li>Compiling and loading the app onto a Ledger Nano S</li>
+</ul>
+<doc-anchor-target id="installing">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installing">#</doc-anchor-trigger>
+        <span>Installing</span>
+    </h3>
+</doc-anchor-target>
+<p>It is first necessary to install Docker (please see <a href="https://docs.docker.com/get-docker/">instructions</a>). Alternatively, you can use these commands:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># MacOS
+brew install docker
+
+# Linux
+sudo apt install docker docker.io</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="cloning">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cloning">#</doc-anchor-trigger>
+        <span>Cloning</span>
+    </h3>
+</doc-anchor-target>
+<p>Next, clone the IOTA Ledger app repository:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">git clone https://github.com/iotaledger/ledger-iota-app.git</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="building">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#building">#</doc-anchor-trigger>
+        <span>Building</span>
+    </h3>
+</doc-anchor-target>
+<p>Once cloned, change directories, initialize Git submodules, and run the build script.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># initialize Git submodules
+git submodule init
+git submodule update --recursive
+
+# run build script
+sudo ./docker/build_docker.sh</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="running">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#running">#</doc-anchor-trigger>
+        <span>Running</span>
+    </h3>
+</doc-anchor-target>
+<p>After the Docker container is built, the simulator can be run with the following command:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">sudo ./run_simulator.sh [-m (nanos|nanox)]</code></pre>
+</doc-codeblock></div>
+<p>The <code v-pre>-m</code> argument is used to specify between the Ledger Nano S and Nano X (default is <code v-pre>nanos</code>).</p>
+<p>After running, the simulator listens on port 9999 and can be used without restrictions with the <code v-pre>ledger-iota.rs</code> library.</p>
+<doc-anchor-target id="loading">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#loading">#</doc-anchor-trigger>
+        <span>Loading</span>
+    </h3>
+</doc-anchor-target>
+<p>To compile and load the IOTA app on a real Ledger Nano S device, please use the following command:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">sudo ./load_nanos.sh</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -305,6 +408,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Ledger", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Ledger", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>

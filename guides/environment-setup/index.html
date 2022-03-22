@@ -10,31 +10,31 @@
     <meta name="generator" content="Retype 2.0">
 
     <!-- Primary Meta Tags -->
-    <title>Environment Setup | Handbook for the Firefly team</title>
-    <meta name="title" content="Environment Setup | Handbook for the Firefly team">
+    <title>Environment Setup | Firefly Team Handbook</title>
+    <meta name="title" content="Environment Setup | Firefly Team Handbook">
     <meta name="description" content="Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/">
-    <meta property="og:title" content="Environment Setup | Handbook for the Firefly team">
+    <meta property="og:title" content="Environment Setup | Firefly Team Handbook">
     <meta property="og:description" content="Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/">
-    <meta property="twitter:title" content="Environment Setup | Handbook for the Firefly team">
+    <meta property="twitter:title" content="Environment Setup | Firefly Team Handbook">
     <meta property="twitter:description" content="Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.0.701230539401" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.0.701233076457" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701230539401" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701233076457" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701230539401" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701230539401" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701233076457" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701233076457" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -234,18 +234,19 @@
     </h1>
 </doc-anchor-target>
 <p>Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.</p>
-<doc-anchor-target id="base-setup">
+<doc-anchor-target id="dependencies">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-setup">#</doc-anchor-trigger>
-        <span>Base Setup</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependencies">#</doc-anchor-trigger>
+        <span>Dependencies</span>
     </h2>
 </doc-anchor-target>
 <p>The following <strong>must</strong> be installed on all platforms:</p>
 <ul>
-<li><a href="https://nodejs.org/en/">Node.js</a> 12+ (NOTE: There may be issues with Node.js 15 on Windows)</li>
-<li><a href="https://classic.yarnpkg.com/en/docs/install">Yarn</a></li>
-<li><a href="https://www.rust-lang.org/tools/install">Rust</a></li>
+<li><a href="https://nodejs.org/en/">Node.js</a> (<code v-pre>14.19.0+</code>)</li>
+<li><a href="https://classic.yarnpkg.com/en/docs/install">Yarn</a> (<code v-pre>1.22.17</code>)</li>
+<li><a href="https://www.rust-lang.org/tools/install">Rust</a> (LTS)</li>
 </ul>
+<p><span class="docs-emoji">&#x26A0;&#xFE0F;</span> There may be problems with v15+ on Windows.</p>
 <doc-anchor-target id="macos">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#macos">#</doc-anchor-trigger>
@@ -255,48 +256,6 @@
 <ul>
 <li>Xcode Command Line Tools</li>
 </ul>
-<doc-anchor-target id="windows">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#windows">#</doc-anchor-trigger>
-        <span>Windows</span>
-    </h3>
-</doc-anchor-target>
-<p>It is highly recommended to use <a href="https://chocolatey.org/">Chocolatey</a> as a package manager for Windows.
-There are a few dependencies that Chocolatey handles smoothly, which otherwise are often troublesome
-to install and configure. Read installation steps <a href="https://chocolatey.org/install">here</a>.</p>
-<p>PowerShell in <strong>administrator mode</strong> is recommended for the following steps.</p>
-<ul>
-<li>Install dependencies for <a href="https://github.com/iotaledger/wallet.rs"><code v-pre>wallet.rs</code></a>:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">choco install cmake llvm openssl</code></pre>
-</doc-codeblock></div>
-<p><em>NOTE: <code v-pre>llvm</code> can also be downloaded and installed with <a href="https://llvm.org/builds/">snapshot builds</a>.</em></p>
-<ul>
-<li>Install and configure dependencies for Windows:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">choco install python visualstudio2019-workload-vctools -y
-npm config set msvs_version 2019</code></pre>
-</doc-codeblock></div>
-<p><em>NOTE: Alternatively, you can download <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Microsoft C++ Build Tools</a>.
-You must check boxes for &quot;Node.js development&quot; and &quot;Desktop development with C++&quot; within the Visual Studio Installer
-(use the 2019 version)</em>.</p>
-<ul>
-<li>Add environment variable definitions in <code v-pre>~/.bash_profile</code> or <code v-pre>~/.bashrc</code>:</li>
-</ul>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># wallet.rs sub-dependencies
-export OPENSSL_DIR=&quot;C:\Program Files\OpenSSL-Win64&quot;
-
-# ensure SODIUM_LIB_DIR points to folder with .lib file (and not .dll)
-export SODIUM_LIB_DIR=&quot;$HOME\.cargo\registry\src\github.com-1ecc6299db9ec823\libsodium-sys-0.2.7\msvc\x64\Release\v142&quot;
-## tell rustc to link library dynamically (use .dll - &quot;dynamic-link library&quot;)
-export SODIUM_SHARED=1
-
-# path to clang binaries (*.dll/*.lib files)
-export LIBCLANG_PATH=&quot;C:\Program Files\LLVM\bin&quot;</code></pre>
-</doc-codeblock></div>
 <doc-anchor-target id="linux">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#linux">#</doc-anchor-trigger>
@@ -314,117 +273,48 @@ export LIBCLANG_PATH=&quot;C:\Program Files\LLVM\bin&quot;</code></pre>
 <li><code v-pre>libudev</code> (Debian/Ubuntu: <code v-pre>libudev-dev</code>)</li>
 <li><code v-pre>gnome-keyring</code>, <code v-pre>keepassxc</code>, or another secrets manager that implements the <a href="https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/">freedesktop.org Secrets API</a></li>
 </ul>
-<doc-anchor-target id="desktop">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#desktop">#</doc-anchor-trigger>
-        <span>Desktop <span class="docs-emoji">&#x1F5A5;&#xFE0F;</span></span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="build">
+<doc-anchor-target id="windows">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#build">#</doc-anchor-trigger>
-        <span>Build</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#windows">#</doc-anchor-trigger>
+        <span>Windows</span>
     </h3>
 </doc-anchor-target>
-<p>Install yarn dependencies:</p>
+<p>It is highly recommended to use <a href="https://chocolatey.org/">Chocolatey</a> as a package manager for Windows.
+There are a few dependencies that Chocolatey handles smoothly, which otherwise are often troublesome
+to install and configure. Read installation steps <a href="https://chocolatey.org/install">here</a>.</p>
+<p>PowerShell in <strong>administrator mode</strong> is recommended for the following steps.</p>
+<ul>
+<li>Install dependencies for <a href="https://github.com/iotaledger/wallet.rs"><code v-pre>wallet.rs</code></a>:</li>
+</ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in the root directory
-yarn
+<pre class="language-bash"><code v-pre class="language-bash">choco install cmake llvm openssl</code></pre>
+</doc-codeblock></div>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> <code v-pre>llvm</code> can also be downloaded and installed with <a href="https://llvm.org/builds/">snapshot builds</a>.</p>
+<ul>
+<li>Install and configure dependencies for Windows:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">choco install python visualstudio2019-workload-vctools -y
+npm config set msvs_version 2019</code></pre>
+</doc-codeblock></div>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> Alternatively, you can download <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Microsoft C++ Build Tools</a>.
+You must check boxes for &quot;Node.js development&quot; and &quot;Desktop development with C++&quot; within the Visual Studio Installer
+(use the 2019 version).</p>
+<ul>
+<li>Add environment variable definitions in <code v-pre>~/.bash_profile</code> or <code v-pre>~/.bashrc</code>:</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># wallet.rs sub-dependencies
+export OPENSSL_DIR=&quot;C:\Program Files\OpenSSL-Win64&quot;
 
-# in packages/backend/bindings/node
-yarn</code></pre>
-</doc-codeblock></div>
-<p>Build desktop app:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/desktop
-yarn build</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="development">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#development">#</doc-anchor-trigger>
-        <span>Development</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/desktop
-yarn start</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="production">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#production">#</doc-anchor-trigger>
-        <span>Production</span>
-    </h3>
-</doc-anchor-target>
-<p>Change <code v-pre>&lt;platform&gt;</code> as necessary (<code v-pre>win</code>, <code v-pre>mac</code>, and <code v-pre>linux</code>):</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/desktop
-yarn compile:&lt;platform&gt;</code></pre>
-</doc-codeblock></div>
-<p>MacOS users <strong>must</strong> set an environment variable in order to skip notarization:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/desktop
-export MACOS_SKIP_NOTARIZATION=true &amp;&amp; yarn compile:mac</code></pre>
-</doc-codeblock></div>
-<p>If Sentry bug reporting needs to be enabled for a local production build, you must modify the <code v-pre>packages.json</code> file within <code v-pre>packages/desktop/</code>:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">{
-    ...
-    &quot;scripts&quot;: {
-        ...
-        &quot;build:prod&quot;: &quot;cross-env NODE_ENV=production SENTRY=true webpack&quot;,
-        ...                                          ^^^ add this environment variable declaration
-    },
-    ....
-}</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="firefly-snap">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#firefly-snap">#</doc-anchor-trigger>
-        <span>Firefly Snap</span>
-    </h3>
-</doc-anchor-target>
-<p>To run the Firefly snap properly on Linux, you may need to run the following commands:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># install the snap when built locally
-snap install --dangerous path/to/firefly-desktop-0.0.1.snap
+# ensure SODIUM_LIB_DIR points to folder with .lib file (and not .dll)
+export SODIUM_LIB_DIR=&quot;$HOME\.cargo\registry\src\github.com-1ecc6299db9ec823\libsodium-sys-0.2.7\msvc\x64\Release\v142&quot;
+## tell rustc to link library dynamically (use .dll - &quot;dynamic-link library&quot;)
+export SODIUM_SHARED=1
 
-# connect the password-manager-service interface
-snap connect firefly-wallet:password-manager-service</code></pre>
+# path to clang binaries (*.dll/*.lib files)
+export LIBCLANG_PATH=&quot;C:\Program Files\LLVM\bin&quot;</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="mobile">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mobile">#</doc-anchor-trigger>
-        <span>Mobile <span class="docs-emoji">&#x1F4F1;</span></span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="dev-mode">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dev-mode">#</doc-anchor-trigger>
-        <span>Dev Mode</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/mobile
-yarn
-yarn build
-yarn dev
-
-# Capacitor Live Reload setup
-# keep development server running, then in a new terminal:
-cp capacitor-sample.config.ts capacitor.config.ts 
-# modify the url field &quot;XXX.XXX.XXX.XXX&quot; with your local IP
-
-# update project files and open native IDE
-yarn android:update
-yarn ios:update</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="web-extension">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#web-extension">#</doc-anchor-trigger>
-        <span>Web Extension <span class="docs-emoji">&#x1F50C;</span></span>
-    </h2>
-</doc-anchor-target>
-<p><em>WIP</em></p>
 
                                 
                                 <!-- Required only on API pages -->
