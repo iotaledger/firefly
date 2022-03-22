@@ -3,4 +3,4 @@ icon: light-bulb
 ---
 
 # Developer Tips
-_TODO_
+Welcome to the Firefly developer tips! Here you will find all sorts of helpful information for general things across the codebase.

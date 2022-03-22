@@ -5,5 +5,4 @@ order: 999
 ---
 
 # Guides
-
-Welcome to the Firefly team's guides!
+Welcome to the Firefly handbook guides!

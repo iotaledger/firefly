@@ -3,6 +3,7 @@ icon: codespaces
 ---
 
 # Environment Setup
+Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.
 
 ## Base Setup
 The following __must__ be installed on all platforms:
