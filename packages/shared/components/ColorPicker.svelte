@@ -2,7 +2,7 @@
     import { Text, Icon, Tooltip } from 'shared/components'
     import { AccountColors } from 'shared/lib/wallet'
     import { isBright } from 'shared/lib/helpers'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils/ui'
 
     export let active
     export let locale

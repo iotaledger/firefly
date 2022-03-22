@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils/ui'
 
     export let isActive = false
     export let position: { top: string; right: string; bottom: string; left: string }

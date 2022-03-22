@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR, Text } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils/ui'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import { openPopup } from '@core/popup'

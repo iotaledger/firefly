@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils/ui'
     import { closePopup, popupState } from '@core/popup'
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
