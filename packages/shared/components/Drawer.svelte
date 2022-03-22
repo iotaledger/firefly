@@ -24,6 +24,7 @@
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
+    export let zIndex = 'z-30'
 
     const dispatch = createEventDispatcher()
 
@@ -149,7 +150,7 @@
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
-<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
+<drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <slide-zone
         class="fixed h-screen w-screen"
         use:slidable
