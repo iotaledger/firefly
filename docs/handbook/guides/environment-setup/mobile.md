@@ -47,7 +47,7 @@ In a new terminal (while the development server is running):
 cp capacitor-sample.config.ts capacitor.config.ts
 ```
 
-Modify the URL field in the newly copied file, replacing `XXX.XXX.XXX.XXX` with your local IP (will likely start with `192.168.1.XXX`):
+Modify the URL field in the newly copied file, replacing `XXX.XXX.XXX.XXX` with your local IP (will likely start with `192.168.1.XXX`, see step below for help):
 ```typescript
 const config: CapacitorConfig = {
     ...
@@ -57,6 +57,15 @@ const config: CapacitorConfig = {
     },
     ...
 }
+```
+
+To view your device's network information:
+```bash
+# MacOS / Linux
+ifconfig
+
+# Windows (via Command Prompt or PowerShell)
+ipconfig
 ```
 
 Run the mobile simulator:
