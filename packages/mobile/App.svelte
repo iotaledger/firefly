@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { nativeSplash } from 'capacitor/capacitorApi'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { mobile, stage } from 'shared/lib/app'
@@ -28,7 +29,6 @@
         Secure,
         Setup,
         Settings,
-        Splash,
         Welcome,
     } from 'shared/routes'
     import { onMount } from 'svelte'
@@ -45,14 +45,11 @@
         document.dir = $dir
     }
 
-    let splash = true
+    $: $isLocaleLoaded, nativeSplash.hide()
 
     void setupI18n()
     onMount(async () => {
-        setTimeout(() => {
-            splash = false
-            initRouter()
-        }, 2000)
+        initRouter()
 
         await fetchMarketData()
         await pollNetworkStatus()
@@ -61,81 +58,77 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-{#if !$isLocaleLoaded || splash}
-    <Splash />
-{:else}
-    <div class="scanner-hide">
-        {#if $popupState.active}
-            <Popup
-                type={$popupState.type}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                locale={$_}
-            />
-        {/if}
-        <!-- TODO: remove locale={$_} everywhere -->
-        <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.CrashReporting}>
-            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Settings}>
-            <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
-        </Route>
-        <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} {goto} />
-        </Route>
-        <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
-        </Route>
-        <ToastContainer />
-    </div>
-    <div class="scanner-ui">
-        <QRScanner />
-    </div>
-{/if}
+<div class="scanner-hide">
+    {#if $popupState.active}
+        <Popup
+            type={$popupState.type}
+            props={$popupState.props}
+            hideClose={$popupState.hideClose}
+            fullScreen={$popupState.fullScreen}
+            transition={$popupState.transition}
+            locale={$_}
+        />
+    {/if}
+    <!-- TODO: remove locale={$_} everywhere -->
+    <Route route={AppRoute.Welcome}>
+        <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Legal}>
+        <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.CrashReporting}>
+        <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Settings}>
+        <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Appearance}>
+        <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Profile}>
+        <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Setup}>
+        <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Create}>
+        <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Secure}>
+        <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Password}>
+        <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Protect} transition={false}>
+        <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Backup} transition={false}>
+        <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Import} transition={false}>
+        <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Balance}>
+        <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Migrate}>
+        <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.Congratulations}>
+        <Congratulations on:next={routerNext} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.Dashboard}>
+        <Dashboard locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.Login}>
+        <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+    </Route>
+    <ToastContainer />
+</div>
+<div class="scanner-ui">
+    <QRScanner />
+</div>
 
 <style global type="text/scss">
     @tailwind base;

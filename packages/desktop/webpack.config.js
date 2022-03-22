@@ -177,8 +177,11 @@ const sentryPlugins = [
         release: `Firefly@${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
-        project: `firefly-${process.env.SENTRY_ENVIRONMENT}-desktop`,
+        project: 'firefly-desktop',
         finalize: false,
+        deploy: {
+            env: process.env.SENTRY_ENVIRONMENT,
+        },
     }),
 ]
 
