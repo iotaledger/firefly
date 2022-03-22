@@ -2,7 +2,7 @@
 icon: alert
 ---
 
-# Security Incidents
+# Incident Response
 
 ## Purpose
 
