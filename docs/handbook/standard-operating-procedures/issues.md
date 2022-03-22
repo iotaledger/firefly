@@ -2,7 +2,7 @@
 icon: issue-opened
 ---
 
-# Issue Management
+# Issues
 
 ## Purpose
 This document details the standard operating procedure (SOP) for maintaining issues that have been raised on GitHub; allowing all team members to remain consistent when organising and maintaining the issues backlog.

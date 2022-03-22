@@ -2,7 +2,7 @@
 icon: rocket
 ---
 
-# Release Management
+# Releases
 
 ## Changelog
 
