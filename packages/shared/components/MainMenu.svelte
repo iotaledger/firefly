@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Drawer, Icon, Text } from 'shared/components'
+    import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
     import { settingsRoute, settingsChildRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
@@ -10,7 +11,7 @@
     export let locale: Locale
 
     let drawer: Drawer
-    const profileColor = 'blue' // TODO: each profile has a different color
+    const profileColor = getColor($activeProfile, $activeProfile.id)
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     
@@ -30,7 +31,8 @@
 </script>
 
 <button
-    class="menu-button z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+    class="absolute menu-button r-30 z-10 w-9 h-9 flex items-center justify-center rounded-full leading-100"
+    style="background-color: {profileColor};"
     on:click={handleClick}
 >
     <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
@@ -57,16 +59,20 @@
             </Text>
         </header>
         {#if $settingsRoute === SettingsRoutes.Init}
-            <!-- TODO: add real profile data -->
-            <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
+            <div class="grid profile-block space-x-5 px-6 w-full">
                 <div
-                    class="w-16 h-16 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                    class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
+                    style="background-color: {profileColor};"
                 >
                     <span class="text-20 text-center text-white uppercase font-semibold"
-                        >{profileInitial || 'A'}</span
+                        >{profileInitial}</span
                     >
                 </div>
-                <Text type="h4">{$activeProfile?.name || 'John Doe'}</Text>
+                <Text type="h4" classes="col-start-2 row-start-2">{$activeProfile?.name}</Text>
+                <button class="col-start-2 row-start-3 flex items-center" on:click={() => logout()}>
+                    <Icon width="16" height="16" classes="mr-1 text-gray-500" icon="refresh" />
+                    <Text type="p" secondary classes="text-center">Switch Accounts</Text>
+                </button>
             </div>
         {/if}
         <Settings {locale} />
@@ -74,10 +80,12 @@
 </Drawer>
 
 <style>
-    button {
-        position: absolute;
+    .menu-button {
         margin-top: 35px;
         top: env(safe-area-inset-top);
         right: 30px;
+    }
+    .profile-block {
+        grid-template-columns: auto 1fr;
     }
 </style>
