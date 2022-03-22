@@ -141,8 +141,8 @@
                         {formatStakingAirdropReward(
                             airdrop,
                             isAssembly()
-                                ? $selectedAccountStakingRewards.assembly
-                                : $selectedAccountStakingRewards.shimmer,
+                                ? $selectedAccountStakingRewards?.assembly
+                                : $selectedAccountStakingRewards?.shimmer,
                             6
                         ).split(' ')[0]}
                     </Text>
@@ -150,8 +150,8 @@
                         {formatStakingAirdropReward(
                             airdrop,
                             isAssembly()
-                                ? $selectedAccountStakingRewards.assembly
-                                : $selectedAccountStakingRewards.shimmer,
+                                ? $selectedAccountStakingRewards?.assembly
+                                : $selectedAccountStakingRewards?.shimmer,
                             6
                         ).split(' ')[1]}
                     </Text>
