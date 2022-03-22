@@ -21,7 +21,7 @@ export interface IPlatform {
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
-    getOS(): Promise<string>
+    getOS(): Promise<string> | string
     getMachineId(): Promise<string>
     updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     getActiveProfile(): string
