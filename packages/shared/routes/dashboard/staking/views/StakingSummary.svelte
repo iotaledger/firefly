@@ -22,7 +22,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 
-    $: showSpinner = $participationAction || $isSyncing
+    $: showSpinner = !!$participationAction || $isSyncing
 
     $: canParticipateInEvent = isStakingPossible($stakingEventState)
 
@@ -44,11 +44,11 @@
     }
 
     let tooltipAnchor
-    const toggleTooltip = (): void => {
+    function toggleTooltip(): void {
         showTooltip = !showTooltip
     }
 
-    const handleStakeFundsClick = (): void => {
+    function handleStakeFundsClick(): void {
         if (cannotStake) {
             showAppNotification({
                 type: 'warning',
@@ -66,7 +66,7 @@
         openPopup({ type })
     }
 
-    const getSpinnerMessage = (): string => {
+    function getSpinnerMessage(): string {
         if ($participationAction) {
             return $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
         } else if ($isSyncing) {
