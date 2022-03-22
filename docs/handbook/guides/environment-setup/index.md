@@ -5,15 +5,27 @@ icon: codespaces
 # Environment Setup
 Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.
 
-## Base Setup
+## Dependencies
 The following __must__ be installed on all platforms:
+- [Node.js](https://nodejs.org/en/) (`14.19.0+`)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install) (`1.22.17`)
+- [Rust](https://www.rust-lang.org/tools/install) (LTS)
 
-- [Node.js](https://nodejs.org/en/) 12+ (NOTE: There may be issues with Node.js 15 on Windows)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
-- [Rust](https://www.rust-lang.org/tools/install)
+:warning: There may be problems with v15+ on Windows.
 
 ### MacOS
 - Xcode Command Line Tools
+
+### Linux
+- [Snapcraft](https://snapcraft.io/) (`sudo snap install snapcraft --classic`)
+- [Multipass](https://multipass.run/) (`sudo snap install multipass`) or [LXD](https://linuxcontainers.org/lxd/introduction/) (`snap install lxd`) are necessary for Snap compilation (to bypass this requirement and build on the host, set `SNAP_DESTRUCTIVE_MODE="true"`)
+- `build-essential`
+- `clang` (on some older distros, you may need to [add LLVM APT repos](https://apt.llvm.org/))
+- `libsecret` (Debian/Ubuntu: `libsecret-1-dev`, Red Hat: `libsecret-devel`, Arch Linux: `libsecret`)
+- `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
+- `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
+- `libudev` (Debian/Ubuntu: `libudev-dev`)
+- `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
 
 ### Windows
 It is highly recommended to use [Chocolatey](https://chocolatey.org/) as a package manager for Windows.
@@ -27,7 +39,7 @@ PowerShell in __administrator mode__ is recommended for the following steps.
 choco install cmake llvm openssl
 ```
 
-_NOTE: `llvm` can also be downloaded and installed with [snapshot builds](https://llvm.org/builds/)._
+:information_source: `llvm` can also be downloaded and installed with [snapshot builds](https://llvm.org/builds/).
 
 - Install and configure dependencies for Windows:
 ```bash
@@ -35,9 +47,9 @@ choco install python visualstudio2019-workload-vctools -y
 npm config set msvs_version 2019
 ```
 
-_NOTE: Alternatively, you can download [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
+:information_source: Alternatively, you can download [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
 You must check boxes for "Node.js development" and "Desktop development with C++" within the Visual Studio Installer
-(use the 2019 version)_.
+(use the 2019 version).
 
 - Add environment variable definitions in `~/.bash_profile` or `~/.bashrc`:
 ```bash
@@ -52,95 +64,3 @@ export SODIUM_SHARED=1
 # path to clang binaries (*.dll/*.lib files)
 export LIBCLANG_PATH="C:\Program Files\LLVM\bin"
 ```
-
-### Linux
-- [Snapcraft](https://snapcraft.io/) (`sudo snap install snapcraft --classic`)
-- [Multipass](https://multipass.run/) (`sudo snap install multipass`) or [LXD](https://linuxcontainers.org/lxd/introduction/) (`snap install lxd`) are necessary for Snap compilation (to bypass this requirement and build on the host, set `SNAP_DESTRUCTIVE_MODE="true"`)
-- `build-essential`
-- `clang` (on some older distros, you may need to [add LLVM APT repos](https://apt.llvm.org/))
-- `libsecret` (Debian/Ubuntu: `libsecret-1-dev`, Red Hat: `libsecret-devel`, Arch Linux: `libsecret`)
-- `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
-- `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
-- `libudev` (Debian/Ubuntu: `libudev-dev`)
-- `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
-
-## Desktop 🖥️ 
-### Build
-Install yarn dependencies:
-```bash
-# in the root directory
-yarn
-
-# in packages/backend/bindings/node
-yarn
-```
-
-Build desktop app:
-```bash
-# in packages/desktop
-yarn build
-```
-
-### Development
-```bash
-# in packages/desktop
-yarn start
-```
-
-### Production 
-Change `<platform>` as necessary (`win`, `mac`, and `linux`):
-```bash
-# in packages/desktop
-yarn compile:<platform>
-```
-
-MacOS users __must__ set an environment variable in order to skip notarization:
-```bash
-# in packages/desktop
-export MACOS_SKIP_NOTARIZATION=true && yarn compile:mac
-```
-
-If Sentry bug reporting needs to be enabled for a local production build, you must modify the `packages.json` file within `packages/desktop/`:
-```
-{
-    ...
-    "scripts": {
-        ...
-        "build:prod": "cross-env NODE_ENV=production SENTRY=true webpack",
-        ...                                          ^^^ add this environment variable declaration
-    },
-    ....
-}
-```
-
-### Firefly Snap
-To run the Firefly snap properly on Linux, you may need to run the following commands:
-```bash
-# install the snap when built locally
-snap install --dangerous path/to/firefly-desktop-0.0.1.snap
-
-# connect the password-manager-service interface
-snap connect firefly-wallet:password-manager-service
-```
-
-## Mobile 📱 
-### Dev Mode
-
-```bash
-# in packages/mobile
-yarn
-yarn build
-yarn dev
-
-# Capacitor Live Reload setup
-# keep development server running, then in a new terminal:
-cp capacitor-sample.config.ts capacitor.config.ts 
-# modify the url field "XXX.XXX.XXX.XXX" with your local IP
-
-# update project files and open native IDE
-yarn android:update
-yarn ios:update
-```
-
-## Web Extension 🔌
-_WIP_

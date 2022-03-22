@@ -9,7 +9,7 @@ branding:
   logo: "static/icon_firefly.png"
 
 meta:
-  title: " | Handbook for the Firefly team"
+  title: " | Firefly Team Handbook"
 
 edit:
   repo: "https://github.com/iotaledger/firefly"
