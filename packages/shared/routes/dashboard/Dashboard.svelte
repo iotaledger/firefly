@@ -7,7 +7,7 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { DeveloperProfileIndicator, Idle, Sidebar, MainMenu } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -126,7 +126,7 @@
          * NOTE: We check for mobile because it's only necessary
          * for existing desktop installation.
          */
-        if (!mobile && !$isAwareOfCrashReporting) {
+        if (!$mobile && !$isAwareOfCrashReporting) {
             openPopup({
                 type: 'crashReporting',
             })
@@ -282,18 +282,21 @@
     }
 </script>
 
-<Idle />
-<div class="dashboard-wrapper flex flex-row w-full h-full">
-    <Sidebar {locale} />
-    <!-- Dashboard Pane -->
+{#if $mobile}
+    <MainMenu {locale} />
     <div class="flex flex-col w-full h-full">
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
         <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
-</div>
+{:else}
+    <Idle />
+    <div class="dashboard-wrapper flex flex-row w-full h-full">
+        <Sidebar {locale} />
+        <!-- Dashboard Pane -->
+        <div class="flex flex-col w-full h-full">
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+            <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+        </div>
+    </div>
+{/if}
 
-<style type="text/scss">
-    :global(:not(body.platform-win32)) .dashboard-wrapper {
-        margin-top: calc(env(safe-area-inset-top) / 2);
-    }
-</style>
