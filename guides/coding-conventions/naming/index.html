@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.0.701234203301" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.0.701234732213" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701234203301" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701234732213" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701234203301" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701234203301" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701234732213" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.0.701234732213" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -316,6 +316,26 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </doc-codeblock></div>
 </li>
 </ul>
+<doc-anchor-target id="files">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#files">#</doc-anchor-trigger>
+        <span>Files</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="typescript">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#typescript">#</doc-anchor-trigger>
+        <span>TypeScript</span>
+    </h3>
+</doc-anchor-target>
+<p>All TypeScript filenames are in <code v-pre>kebab-case</code>, e.g. <code v-pre>deep-link-handler.ts</code>. Some filenames may include an optional file type specifier, e.g. <code v-pre>deep-link.store.ts</code>.</p>
+<doc-anchor-target id="svelte">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#svelte">#</doc-anchor-trigger>
+        <span>Svelte</span>
+    </h3>
+</doc-anchor-target>
+<p>All Svelte component and route filenames are in <code v-pre>PascalCase</code>, e.g. <code v-pre>LedgerTransaction.svelte</code>.</p>
 <doc-anchor-target id="acronyms">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#acronyms">#</doc-anchor-trigger>
@@ -335,11 +355,17 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
     // ...
 }</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="booleans">
+<doc-anchor-target id="code">
     <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#code">#</doc-anchor-trigger>
+        <span>Code</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="booleans">
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#booleans">#</doc-anchor-trigger>
         <span>Booleans</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All objects, functions, stores, i.e. code components of <code v-pre>boolean</code> type must be prefixed with being verbs (e.g. &quot;is&quot;, &quot;are&quot;, &quot;has&quot;, &quot;will&quot;, &quot;can&quot;, &quot;should&quot;, &quot;must&quot;)</p>
@@ -365,10 +391,10 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </li>
 </ul>
 <doc-anchor-target id="constants">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#constants">#</doc-anchor-trigger>
         <span>Constants</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All constants <strong>must</strong> be in <code v-pre>SCREAMING_SNAKE_CASE</code></p>
@@ -383,10 +409,10 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </li>
 </ul>
 <doc-anchor-target id="enumerations">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#enumerations">#</doc-anchor-trigger>
         <span>Enumerations</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All enum <em>and</em> enum variant names <strong>must</strong> be in <code v-pre>PascalCase</code></p>
@@ -427,10 +453,10 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </li>
 </ul>
 <doc-anchor-target id="functions">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#functions">#</doc-anchor-trigger>
         <span>Functions</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All function names <strong>must</strong> be in <code v-pre>camelCase</code></p>
@@ -449,10 +475,10 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </li>
 </ul>
 <doc-anchor-target id="interfaces">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#interfaces">#</doc-anchor-trigger>
         <span>Interfaces</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All interface names <strong>must</strong> be in <code v-pre>PascalCase</code> preceded with an <code v-pre>I</code></p>
@@ -477,10 +503,10 @@ const networkHealthText = getTextForNetworkHealth(networkStatus)</code></pre>
 </li>
 </ul>
 <doc-anchor-target id="types">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#types">#</doc-anchor-trigger>
         <span>Types</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <ul>
 <li><p>All type names <strong>must</strong> be in <code v-pre>PascalCase</code></p>
