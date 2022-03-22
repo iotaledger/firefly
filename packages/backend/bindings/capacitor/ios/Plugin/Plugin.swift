@@ -39,6 +39,7 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func destroy(_ call: CAPPluginCall) {
+        guard !isInitialized else { return }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }
