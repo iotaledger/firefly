@@ -2,10 +2,9 @@
     import { Transition } from 'shared/components'
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
-    import { backupRoute, BackupRouter, BackupRoutes } from '@core/router'
+    import { backupRoute, BackupRouter, BackupRoutes, FireflyEvent } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { FireflyEvent } from '@core/router/types/event'
 
     export let locale: Locale
 

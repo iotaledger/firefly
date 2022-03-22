@@ -1,13 +1,16 @@
 import { get, writable } from 'svelte/store'
-import { appRouter, ImportRoutes } from '@core/router'
-import { ImportType } from 'shared/lib/typings/profile'
-import { getMigrationData } from 'shared/lib/migration'
-import { mnemonic } from 'shared/lib/app'
-import { Platform } from 'shared/lib/platform'
-import { asyncRestoreBackup } from 'shared/lib/wallet'
-import { newProfile } from 'shared/lib/profile'
-import { FireflyEvent } from '@core/router/types/event'
-import { Subrouter } from '@core/router/subrouters/subrouter'
+
+import { mnemonic } from '@lib/app'
+import { getMigrationData } from '@lib/migration'
+import { Platform } from '@lib/platform'
+import { newProfile } from '@lib/profile'
+import { ImportType } from '@lib/typings/profile'
+import { asyncRestoreBackup } from '@lib/wallet'
+
+import { appRouter } from '../app-router'
+import { ImportRoutes } from '../enums'
+import { Subrouter } from './subrouter'
+import { FireflyEvent } from '../types'
 
 export const importRoute = writable<ImportRoutes>(null)
 

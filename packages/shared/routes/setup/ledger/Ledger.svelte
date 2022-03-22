@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { ledgerRoute, ledgerRouter, LedgerRoutes } from '@core/router'
+    import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoutes } from '@core/router'
     import {
         AccountIndex,
         Connect,
@@ -14,7 +14,6 @@
     } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
-    import { FireflyEvent } from '@core/router/types/event'
 
     export let locale: Locale
 

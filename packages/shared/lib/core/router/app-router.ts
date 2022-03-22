@@ -1,12 +1,14 @@
 import { get, writable } from 'svelte/store'
-import { setProfileType, activeProfile, profiles } from 'shared/lib/profile'
-import { ImportType, ProfileType } from 'shared/lib/typings/profile'
-import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from 'shared/lib/app'
+
+import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
+import { setProfileType, activeProfile, profiles } from '@lib/profile'
+import { ImportType, ProfileType } from '@lib/typings/profile'
+import { SetupType } from '@lib/typings/setup'
+import { walletSetupType } from '@lib/wallet'
+
+import { AppRoute } from './enums'
 import { Router } from './router'
-import { AppRoute } from '@core/router'
-import { SetupType } from 'shared/lib/typings/setup'
-import { walletSetupType } from 'shared/lib/wallet'
-import { FireflyEvent } from '@core/router/types/event'
+import { FireflyEvent } from './types'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)

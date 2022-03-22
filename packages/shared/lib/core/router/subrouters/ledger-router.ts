@@ -1,9 +1,12 @@
 import { get, writable } from 'svelte/store'
-import { appRouter, LedgerRoutes } from '@core/router'
-import { SetupType } from 'shared/lib/typings/setup'
-import { walletSetupType } from 'shared/lib/wallet'
-import { FireflyEvent } from '@core/router/types/event'
-import { Subrouter } from '@core/router/subrouters/subrouter'
+
+import { SetupType } from '@lib/typings/setup'
+import { walletSetupType } from '@lib/wallet'
+
+import { appRouter } from '../app-router'
+import { FireflyEvent } from '../types'
+import { Subrouter } from '../subrouters'
+import { LedgerRoutes } from '../enums'
 
 export const ledgerRoute = writable<LedgerRoutes>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)

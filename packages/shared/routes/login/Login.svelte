@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { loginRoute, LoginRouter, LoginRoutes } from '@core/router'
-    import { FireflyEvent } from '@core/router/types/event'
+    import { FireflyEvent, loginRoute, LoginRouter, LoginRoutes } from '@core/router'
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'

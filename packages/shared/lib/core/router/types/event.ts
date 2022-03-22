@@ -1,5 +1,5 @@
-import { SetupType } from 'shared/lib/typings/setup'
-import { ImportType } from 'shared/lib/typings/profile'
+import { ImportType } from '@lib/typings/profile'
+import { SetupType } from '@lib/typings/setup'
 
 export type FireflyEvent = {
     file?: Buffer

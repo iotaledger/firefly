@@ -1,18 +1,21 @@
 import { get, writable } from 'svelte/store'
-import { appRouter, ProtectRoutes } from '@core/router'
-import { FireflyEvent } from '@core/router/types/event'
-import { mnemonic } from 'shared/lib/app'
-import { Platform } from 'shared/lib/platform'
-import { activeProfile } from 'shared/lib/profile'
-import { SetupType } from 'shared/lib/typings/setup'
+
+import { mnemonic } from '@lib/app'
+import { Platform } from '@lib/platform'
+import { activeProfile } from '@lib/profile'
+import { SetupType } from '@lib/typings/setup'
 import {
     asyncCreateAccount,
     asyncSetStoragePassword,
     asyncStoreMnemonic,
     asyncVerifyMnemonic,
     walletSetupType,
-} from 'shared/lib/wallet'
-import { Subrouter } from '@core/router/subrouters/subrouter'
+} from '@lib/wallet'
+
+import { ProtectRoutes } from '../enums'
+import { Subrouter } from '../subrouters'
+import { FireflyEvent } from '../types'
+import { appRouter } from '../app-router'
 
 export const protectRoute = writable<ProtectRoutes>(null)
 

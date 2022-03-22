@@ -3,8 +3,7 @@
     import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { protectRoute, ProtectRouter, ProtectRoutes } from '@core/router'
-    import { FireflyEvent } from '@core/router/types/event'
+    import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoutes } from '@core/router'
 
     export let locale: Locale
 

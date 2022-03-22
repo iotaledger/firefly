@@ -1,6 +1,7 @@
-import { appRouter } from '@core/router'
-import { Router } from '@core/router/router'
 import { get } from 'svelte/store'
+
+import { appRouter } from '../app-router'
+import { Router } from '../router'
 
 export abstract class Subrouter<Route> extends Router<Route> {
     previous(): void {

@@ -1,22 +1,16 @@
 import { get } from 'svelte/store'
-import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
+
 import { isDeepLinkRequestActive } from '@common/deep-links'
-import {
-    appRouter,
-    AppRouter,
-    accountRouter,
-    AccountRouter,
-    DashboardRoutes,
-    DashboardRouter,
-    dashboardRouter,
-    ledgerRouter,
-    LedgerRouter,
-    walletRouter,
-    WalletRouter,
-    SettingsRouter,
-    settingsRouter,
-} from '@core/router'
-import { closePopup } from 'shared/lib/popup'
+import { closePopup } from '@lib/popup'
+import { selectedAccountId, selectedMessage } from '@lib/wallet'
+
+import { appRouter, AppRouter } from './app-router'
+import { accountRouter, AccountRouter } from './account-router'
+import { DashboardRouter, dashboardRouter } from './dashboard-router'
+import { DashboardRoutes } from './enums'
+import { walletRouter, WalletRouter } from './wallet-router'
+import { SettingsRouter, settingsRouter } from './settings-router'
+import { ledgerRouter, LedgerRouter } from './subrouters'
 
 export const initRouters = (): void => {
     appRouter.set(new AppRouter())

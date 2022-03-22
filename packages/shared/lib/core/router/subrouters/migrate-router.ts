@@ -1,8 +1,11 @@
-import { appRouter, MigrateRoutes } from '@core/router'
-import { Subrouter } from '@core/router/subrouters/subrouter'
-import { FireflyEvent } from '@core/router/types/event'
-import { hasBundlesWithSpentAddresses, hasSingleBundle } from 'shared/lib/migration'
 import { get, writable } from 'svelte/store'
+
+import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
+
+import { appRouter } from '../app-router'
+import { MigrateRoutes } from '../enums'
+import { Subrouter } from '../subrouters'
+import { FireflyEvent } from '../types'
 
 export const migrateRoute = writable<MigrateRoutes>(null)
 

@@ -21,21 +21,19 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
         accountRouter,
+        AccountRoutes,
+        AdvancedSettings,
         appRouter,
         dashboardRoute,
         dashboardRouter,
+        DashboardRoutes,
         walletRoute,
         walletRouter,
         settingsRouter,
+        SettingsRoutes,
+        WalletRoutes,
     } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import {
-        AccountRoutes,
-        AdvancedSettings,
-        SettingsRoutes,
-        DashboardRoutes,
-        WalletRoutes,
-    } from '@core/router/enums/routes'
     import {
         api,
         isBackgroundSyncing,
