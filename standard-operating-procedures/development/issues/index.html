@@ -10,21 +10,21 @@
     <meta name="generator" content="Retype 2.0">
 
     <!-- Primary Meta Tags -->
-    <title>Pull Requests | Firefly Team Handbook</title>
-    <meta name="title" content="Pull Requests | Firefly Team Handbook">
-    <meta name="description" content="You can create a PR at any time for an existing issue." />
+    <title>Issues | Firefly Team Handbook</title>
+    <meta name="title" content="Issues | Firefly Team Handbook">
+    <meta name="description" content="Version" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/git/pull-requests/">
-    <meta property="og:title" content="Pull Requests | Firefly Team Handbook">
-    <meta property="og:description" content="You can create a PR at any time for an existing issue.">
+    <meta property="og:url" content="https://iotaledger.github.io/firefly/standard-operating-procedures/development/issues/">
+    <meta property="og:title" content="Issues | Firefly Team Handbook">
+    <meta property="og:description" content="Version">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/git/pull-requests/">
-    <meta property="twitter:title" content="Pull Requests | Firefly Team Handbook">
-    <meta property="twitter:description" content="You can create a PR at any time for an existing issue.">
+    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/standard-operating-procedures/development/issues/">
+    <meta property="twitter:title" content="Issues | Firefly Team Handbook">
+    <meta property="twitter:description" content="Version">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -34,6 +34,7 @@
     <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.0.701299996601" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.0" defer data-turbo-track="reload"></script>
     <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.0.701299996601" defer></script>
+    <script id="mermaid-js" type="text/javascript" src="/firefly/resources/js/mermaid.js?v=2.0" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -226,188 +227,198 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="pull-requests" class="break-words">
+<doc-anchor-target id="issues" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#pull-requests">#</doc-anchor-trigger>
-        <span>Pull Requests</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#issues">#</doc-anchor-trigger>
+        <span>Issues</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="creating-a-pull-request">
+<doc-anchor-target id="changelog">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-pull-request">#</doc-anchor-trigger>
-        <span>Creating a Pull Request</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#changelog">#</doc-anchor-trigger>
+        <span>Changelog</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="when-to-create-a-pull-request">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#when-to-create-a-pull-request">#</doc-anchor-trigger>
-        <span>When to create a Pull Request</span>
-    </h3>
-</doc-anchor-target>
-<p>You can create a PR at any time for an existing issue. If the work is not yet in a position to be reviewed then ensure that you create the PR as a draft.</p>
-<p>A PR should have exactly one concern (i.e. a feature or a bug). A PR that addresses more than one concern should ideally be split into multiple PRs.</p>
-<doc-anchor-target id="what-information-to-add-to-the-pull-request">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#what-information-to-add-to-the-pull-request">#</doc-anchor-trigger>
-        <span>What information to add to the Pull Request</span>
-    </h3>
-</doc-anchor-target>
-<p>When creating the PR, you will be presented with our current template; it is advisable to fill this template in as detailed as possible, and to the best of your ability. This will allow for a smoother review process, and high probability of your branch being merged.</p>
-<p>You should also assign the PR to yourself, add the appropriate labels, link any relevant issues to be closed and if known, request a review of a maintainer.</p>
-<doc-anchor-target id="how-to-format-a-pull-request">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#how-to-format-a-pull-request">#</doc-anchor-trigger>
-        <span>How to format a Pull Request</span>
-    </h3>
-</doc-anchor-target>
-<p>It is important to keep the formatting of PRs clean and consistent. In addition to generally following the template, we also use the following rules:</p>
-<ul>
-<li>PR titles <strong>must</strong> be in the format <code v-pre>type: the title of the PR</code>.
-<ul>
-<li>All words <strong>must</strong> be lowercase <em>except</em> proper nouns (e.g. &quot;Electron&quot;, &quot;Stronghold&quot;) and acronyms (e.g. &quot;API&quot;, &quot;iOS&quot;).</li>
-<li>All code or package names <strong>should</strong> be formatted as <code v-pre>inline code</code>. This is best for things like dependencies as specific variable names are subject to change.</li>
-</ul>
-</li>
-<li>Instructional text (like <a href="https://github.com/iotaledger/firefly/blob/develop/.github/pull_request_template.md?plain=1#L13">this</a>) in the template <strong>should</strong> be removed in PR descriptions.</li>
-</ul>
-<doc-anchor-target id="pull-request-labels">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#pull-request-labels">#</doc-anchor-trigger>
-        <span>Pull Request Labels</span>
-    </h3>
-</doc-anchor-target>
-<p>Please ensure all PRs have a <em><strong>type</strong></em> label, additional labels can be added where deemed appropriate.</p>
-<doc-anchor-target id="type-labels">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#type-labels">#</doc-anchor-trigger>
-        <span>Type Labels</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>feat</code>: Introduces a new feature</li>
-</ul>
-<ul>
-<li><code v-pre>enhancement</code>: Enhancement of an existing feature</li>
-<li><code v-pre>refactor</code>: Improvements made to existing code</li>
-<li><code v-pre>chore</code>: Modifies documentation, cleaning dependencies, or other housekeeping-like tasks</li>
-<li><code v-pre>fix</code>: Bug, error, or failure that has been fixed</li>
-</ul>
-<doc-anchor-target id="status-labels">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#status-labels">#</doc-anchor-trigger>
-        <span>Status Labels</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>do not merge</code>: Do not merge into any working branches</li>
-</ul>
-<doc-anchor-target id="reviewing-a-pull-request">
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Version</th>
+<th>Change</th>
+<th>Author</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>Intitial SOP for bug management process and support request process</td>
+<td>@Nicole</td>
+<td>25/02/2022</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="purpose">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#reviewing-a-pull-request">#</doc-anchor-trigger>
-        <span>Reviewing a Pull Request</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#purpose">#</doc-anchor-trigger>
+        <span>Purpose</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="requesting-a-review">
+<p>This document details the standard operating procedure (SOP) for maintaining issues that have been raised on GitHub; allowing all team members to remain consistent when organising and maintaining the issues backlog.</p>
+<doc-anchor-target id="scope">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scope">#</doc-anchor-trigger>
+        <span>Scope</span>
+    </h2>
+</doc-anchor-target>
+<p>This standard operating procedure is only applicable to maintainers of this repository responsible for the issues backlog; and the issues backlog is that which is found on GitHub only.</p>
+<doc-anchor-target id="responsibilities">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#responsibilities">#</doc-anchor-trigger>
+        <span>Responsibilities</span>
+    </h2>
+</doc-anchor-target>
+<p>All members of the core firefly team are responsible for managing issues. If an issue is assigned to you, then it is your responsibility. For those issues without an assignee, we aim to follow a rota to ensure that someone is always responsible for new issues created. You will find an up to date rota below.</p>
+<doc-anchor-target id="schedule">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#requesting-a-review">#</doc-anchor-trigger>
-        <span>Requesting a Review</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#schedule">#</doc-anchor-trigger>
+        <span>Schedule</span>
     </h3>
 </doc-anchor-target>
-<p>Before requesting a review please make sure:</p>
+<ul>
+<li>The bug management process is followed by 1 maintainer each week, rotating through all full time maintainers of the Firefly team (in alphabetical order), before cycling back to the begining.</li>
+</ul>
+<doc-anchor-target id="processes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#processes">#</doc-anchor-trigger>
+        <span>Processes</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><doc-anchor-trigger to="#Bug-Management-Process">Bug Management Process</doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#Support-Request-Process">Support Request Process</doc-anchor-trigger></li>
+</ul>
+<doc-anchor-target id="external-processes">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#external-processes">#</doc-anchor-trigger>
+        <span>External Processes</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><a href="https://github.com/iotaledger/firefly/wiki/SOP:-Security-Vulnerability">Security Vulnerability Process</a></li>
+</ul>
+<doc-anchor-target id="bug-management-process">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-management-process">#</doc-anchor-trigger>
+        <span>Bug Management Process</span>
+    </h1>
+</doc-anchor-target>
+<p>The bug management process is to be followed when a new issue is raised on GitHub that has the label <code v-pre>bug report</code> or an existing issue has been given the label <code v-pre>bug report</code>.</p>
+<doc-anchor-target id="high-level-overview">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#high-level-overview">#</doc-anchor-trigger>
+        <span>High Level Overview</span>
+    </h2>
+</doc-anchor-target>
+<div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
+      Start(New bug report)
+      Assess[[Assess]]
+      Triage[[Triage]]
+      Schedule[[Schedule]]
+      End(End)
+      
+      Start--&gt;Assess--&gt;Triage--&gt;Schedule--&gt;End;
+      Assess--&gt;End;
+      Triage--&gt;End;</pre></div>
+<p>The above diagram details the high level overview of the bug management processes:</p>
 <ol>
-<li>You have completed the task defined in the issue.</li>
-<li>If you&#x27;ve added code that should be tested, add tests.</li>
-<li>Ensure the test suite passes.</li>
-<li>Make sure your code lints.</li>
-<li>A PR should have exactly one concern (i.e. one feature or one bug).</li>
-<li>All code should follow the <a href="https://github.com/iotaledger/firefly/wiki/Coding-Guide">coding guide</a>.</li>
+<li><doc-anchor-trigger to="#Assessment-Process">Assess</doc-anchor-trigger> whether the issue issue is a valid.</li>
+<li><doc-anchor-trigger to="#Triage-Process">Triage</doc-anchor-trigger> the issue.</li>
+<li><doc-anchor-trigger to="#Schedule-Process">Schedule</doc-anchor-trigger> the issue to be fixed.</li>
 </ol>
-<p>Once your PR fulfils the above criteria, you are free to request a review from one of the maintainers.</p>
-<doc-anchor-target id="completing-a-review">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#completing-a-review">#</doc-anchor-trigger>
-        <span>Completing a Review</span>
-    </h3>
-</doc-anchor-target>
-<p>There are no limitations on who can review a PR, the more eyes on the code the better. All maintainers, Firefly developers and contributors are encouraged to review as many PRs as possible, as well as community members.</p>
-<p>At a minimum, it is advised to do the following during a review:</p>
-<ul>
-<li>Read the lined issues and PR description to get context for the review</li>
-<li>Pull the branch to your local machine and build the application</li>
-<li>Manually test the application, focusing on any new features or fixes that have been added</li>
-<li>Review the code that has been added or changed</li>
-<li>Add feedback in the form of comments, utilising the GitHub review process where possible</li>
-</ul>
-<p>You may also want to:</p>
-<ul>
-<li>Speak to the author, and walk through the code together</li>
-<li>Run tests and linting checks locally (although these are done in GitHub anyway)</li>
-<li>Suggest changes to be made by the author</li>
-<li>Commit your own small changes if you have the time</li>
-</ul>
-<doc-anchor-target id="merging-a-pull-request">
+<blockquote>
+<p><strong>When managing issues please make sure you assign yourself to the issue on GitHub.</strong></p>
+</blockquote>
+<doc-anchor-target id="assessment-process">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#merging-a-pull-request">#</doc-anchor-trigger>
-        <span>Merging a Pull Request</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#assessment-process">#</doc-anchor-trigger>
+        <span>Assessment Process</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="merge-conditions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#merge-conditions">#</doc-anchor-trigger>
-        <span>Merge Conditions</span>
-    </h3>
+<p>The assessment process is usually followed as soon as an issue is labeled as <code v-pre>bug report</code> or when we have an existing backlog of bug reports that we need to groom. The assessment process is to ensure that we don&#x27;t need to triage invalid issues. Please use the below flowchart as a guide to process:</p>
+<div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
+      Start(Start)
+      isSR{Is &lt;br /&gt; support &lt;br /&gt; request?}
+      isVR{Is &lt;br /&gt; valid &lt;br /&gt; report?}
+      isDR{Is &lt;br /&gt; duplicate &lt;br /&gt; report?}
+      SRP[[Support Request &lt;br /&gt; Process]]
+      IRP[add invalid status label]
+      NS(Next step)
+      DRP[add duplicate status label]
+      CI[Close issue]
+      End(End)
+      TP[[Triage Process]]
+      
+      Start--&gt;isVR
+      isVR--no--&gt;isSR
+      isVR--yes--&gt;isDR
+      isSR--no--&gt;IRP--&gt;CI
+      isSR--yes--&gt;SRP--&gt;End
+      isDR--no--&gt;NS-.-&gt;TP
+      isDR--yes--&gt;DRP--&gt;CI
+      CI--&gt;End</pre></div>
+<doc-anchor-target id="triage-process">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#triage-process">#</doc-anchor-trigger>
+        <span>Triage Process</span>
+    </h2>
 </doc-anchor-target>
-<p>Conditions for PRs to be merged are dependent on the target branch.</p>
-<doc-anchor-target id="develop-branch">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#develop-branch">#</doc-anchor-trigger>
-        <span>Develop Branch</span>
-    </h4>
+<p>Once an issue has been assessed, we can then triage the issue to decide if we should fix the issue or if we just want to acknowledge the issue because we aren&#x27;t planning to fix it. This should be done as soon as possible, by following the below process:</p>
+<div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
+      Start(Start)
+      isSV{Is &lt;br /&gt; security &lt;br /&gt; vulnerability?}
+      isBR{Is &lt;br /&gt; bug &lt;br /&gt; reproducable?}
+      shouldFix{Should &lt;br /&gt; this be &lt;br /&gt; fixed?}
+      SVP[[Security Vulnerability &lt;br /&gt; Process]]
+      IB[Investigate bug]
+      WF[add wontfix status label]
+      CI[Close issue]
+      End(End)
+      NS(Next step)
+      SP[[Schedule Process]]
+      
+      Start--&gt;isSV
+      isSV--no--&gt;isBR
+      isSV--yes--&gt;SVP--&gt;End
+      isBR--no--&gt;IB--&gt;isBR
+      isBR--yes--&gt;shouldFix
+      shouldFix--no--&gt;WF--&gt;CI
+      shouldFix--yes--&gt;NS-.-&gt;SP
+      CI--&gt;End</pre></div>
+<doc-anchor-target id="schedule-process">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#schedule-process">#</doc-anchor-trigger>
+        <span>Schedule Process</span>
+    </h2>
 </doc-anchor-target>
-<p>Before a PR can be merged into the develop branch, it must satisfy the following conditions:</p>
-<ul>
-<li>At least one approval review</li>
-<li>Zero unresolved comments</li>
-<li>No merge conflicts with the target branch</li>
-<li>Status checks:
-<ul>
-<li>Format and linting tests pass on Rust and JS/TS files</li>
-<li>Unit tests pass</li>
-<li>If introducing a dependency then Snyk tests pass*</li>
-</ul>
-</li>
-</ul>
-<p>* If your PR is based off of a forked repository, there is no way to test the Snyk continuous integration workflow as it needs an API key. Once your PR has been approved, you must create an intermediary branch <em>on the main repository</em> titled <code v-pre>snyk/your-branch-here</code> so that the checks can be performed. Once <em>that</em> passes, then your branch may finally be merged into <code v-pre>develop</code>.</p>
-<doc-anchor-target id="main-branch">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#main-branch">#</doc-anchor-trigger>
-        <span>Main Branch</span>
-    </h4>
+<p>If a bug has been triaged and it is agreed that we should fix the issue, then we need to prioritise the fix and schedule this fix. Again this should be done as soon as possible after triaging, and can be done by following the below process:</p>
+<div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
+      Start(Start)
+      PI[Prioritise issue]
+      CT[Create fix task]
+      SF[Schedule task]
+      AT[Allocate task]
+      End(End)
+      
+      Start--&gt;PI--&gt;CT--&gt;SF--&gt;AT--&gt;End   </pre></div>
+<doc-anchor-target id="support-request-process">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#support-request-process">#</doc-anchor-trigger>
+        <span>Support Request Process</span>
+    </h1>
 </doc-anchor-target>
-<p>Before a PR can be merged into the develop branch, it must satisfy the following conditions:</p>
-<ul>
-<li>At least one approval review</li>
-<li>Zero unresolved comments</li>
-<li>No merge conflicts with the target branch</li>
-<li>Status checks:
-<ul>
-<li>Format and linting tests pass on Rust and JS/TS files</li>
-<li>Unit tests pass</li>
-<li>Snyk tests pass</li>
-</ul>
-</li>
-</ul>
-<doc-anchor-target id="merge-method">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#merge-method">#</doc-anchor-trigger>
-        <span>Merge Method</span>
-    </h3>
-</doc-anchor-target>
-<p>To merge our PRs we are using the <code v-pre>Squash and merge</code> option in GitHub.</p>
-<blockquote>
-<p>When you select the Squash and merge option on a pull request on GitHub, the pull request&#x27;s commits are squashed into a single commit. Instead of seeing all of a contributor&#x27;s individual commits from a topic branch, the commits are combined into one commit and merged into the default branch. Pull requests with squashed commits are merged using the fast-forward option.</p>
-<p>To squash and merge pull requests, you must have write permissions in the repository, and the repository must allow squash merging.</p>
-</blockquote>
+<p><code v-pre>TODO: Define and document support request process</code></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -415,7 +426,7 @@
                             </div>
                             <footer class="clear-both">
                                 <div class="flex flex-wrap items-center justify-between mt-14">
-                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/handbook/guides/git/pull-requests.md" target="_blank" rel="noopener">
+                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/handbook/standard-operating-procedures/development/issues.md" target="_blank" rel="noopener">
                                         <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         <span>Edit this page</span>
                                     </a>
@@ -423,20 +434,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/firefly/guides/git/commits/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/firefly/standard-operating-procedures/development/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Commits</span>
+                                                <span class="block mt-1">Development</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/firefly/guides/developer-tips/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="/firefly/standard-operating-procedures/development/releases/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Developer Tips</span>
+                                                <span class="block mt-1">Releases</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -480,6 +491,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Pull Requests", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Issues", icon: "file", hasPrism: false, hasMermaid: true, hasMath: false }</script>
 </body>
 </html>
