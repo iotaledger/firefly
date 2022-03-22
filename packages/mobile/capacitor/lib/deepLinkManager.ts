@@ -1,7 +1,8 @@
-import { IDeepLinkManager } from 'shared/lib/typings/deepLinking/deepLinkManager'
+import { IDeepLinkManager } from '@common/deep-links'
 
-/** Deep link manager  */
-// Runs in renderer process
+/**
+ * Deep link manager for mobile platform.
+ */
 export const DeepLinkManager: IDeepLinkManager = {
     checkDeepLinkRequestExists: () => {},
     clearDeepLinkRequest: () => {},

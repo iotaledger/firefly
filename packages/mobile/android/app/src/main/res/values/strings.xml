@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">firefly-wallet</string>
-    <string name="title_activity_main">firefly-wallet</string>
+    <string name="app_name">Firefly</string>
+    <string name="title_activity_main">Firefly</string>
     <string name="package_name">org.iota.firefly.mobile</string>
     <string name="custom_url_scheme">org.iota.firefly.mobile</string>
 </resources>

@@ -5,6 +5,9 @@
         "baseUrl": ".",
         "importsNotUsedAsValues": "remove",
         "paths": {
+            "@common/*": ["../../../shared/lib/common/*"],
+            "@core/*": ["../../../shared/lib/core/*"],
+            "@lib/*": ["../../../shared/lib/*"],
             "types": ["@types"]
         }
     },
