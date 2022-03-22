@@ -5,3 +5,131 @@ icon: light-bulb
 # Developer Tips
 
 Welcome to the Firefly developer tips! Here you will find all sorts of helpful information for general things across the codebase.
+
+## Linting & Formatting
+
+We use [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) to handle the TS/JS code and [rustfmt](https://github.com/rust-lang/rustfmt#rustfmt----) for Rust. With the exception of a few files and directories, all of the code within the Firefly repository is run through a linting process to ensure cleanliness and consistency in terms of format, style, syntax, and more. This process happens both locally in a pre-commit Git hook (via [Husky](https://github.com/typicode/husky#husky)) as well as in a continuous integration workflow (see [`ci.lint.yml`](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml)).
+
+### TS/JS
+
+All of the formatting and linting commands can be run from the root directory.
+
+With formatting there are two options to either overwrite files with fixes or just simply check them for correctness:
+
+```bash
+# 1 - fix and overwrite files
+yarn format
+
+# 2 - check files 
+yarn format-check
+```
+
+For linting there are three options to either check the files, check the files in debug mode, or fix and overwrite the files:
+
+```bash
+# 1 - check files
+yarn lint
+
+# 2 - check files in debug mode
+yarn lint-debug
+
+# 3 - fix and overwrite files
+yarn lint-fix
+```
+
+_NOTE: Svelte component files (`*.svelte`) are checked in addition to regular `*.ts` source code files._
+
+### Rust
+
+The following commands are to be run from the `packages/backend` folder as this is where the Rust bindings for [wallet.rs](https://github.com/iotaledger/wallet.rs) live.
+
+We use `rustfmt` configured with the nightly toolchain to allow some features. To install:
+
+```bash
+# install the nightly toolchain
+rustup component add rustfmt --toolchain nightly
+```
+
+Then run a formatting check:
+
+```bash
+# check format in current working directory
+cargo +nightly fmt -- --check
+```
+
+## Tips and Tricks
+
+### Add a Svelte Page
+
+There are a few steps besides just creating the component file before it can work in Firefly:
+
+- Add an `export` statement to the barrel import/export file in the directory of your new component
+- Add the correct route value to the appropriate `enum` in `packages/shared/lib/typings/routes.ts`
+- Add the correct HTML (`Route` nested with `<Page>` element) in `packages/desktop/App.svelte`
+- Change logic as needed in `routerNext` in `packages/shared/lib/router.ts`
+
+### Expose an API Endpoint / Library Function
+
+`wallet.rs` has an actor interface, which makes it easy to call functions via messages. To expose a new function one needs to add it to the `MessageType` and `ResponseType` enums in `wallet.rs/src/actor/message.rs` and to the `handle` method inside of `impl WalletMessageHandler {` in `wallet.rs/src/actor/mod.rs`. An example can be seen in this [commit](https://github.com/iotaledger/wallet.rs/commit/6de213583b2811cc4379a7698bc0812201228bd1#).
+
+## Troubleshoot
+
+### Backend
+
+Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
+See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
+
+Sometimes you'll need the latest changes or a specific commit from [`wallet.rs`](https://github.com/iotaledger/wallet.rs). For that you need to update the rev for iota-wallet in `packages/backend/Cargo.toml`. After that be sure to run `cargo check` in __both__ directories __before__ running `yarn` again:
+
+```bash
+# in packages/backend
+cargo update -p iota-wallet
+
+# in packages/backend/bindings/node/native
+cargo update -p iota-wallet
+
+# in packages/backend/bindings/node
+yarn
+```
+
+If for some reason things still are not working for you and you haven't already, try removing `cargo` cache:
+
+```bash
+# install cargo-cache package
+cargo install cargo-cache
+
+# remove the build cache from cargo
+cargo cache -a
+```
+
+### Debug
+
+To debug what's going on in the backend you can add
+
+```JS
+Wallet.initLogger({
+    color_enabled: true,
+    outputs: [{
+        name: 'wallet.log',
+        level_filter: 'debug'
+    }]
+})
+```
+
+in `desktop/electron/preload.js` after `const Wallet = binding`. Debug logs will then be added to the `wallet.log` file.
+
+### Desktop
+
+There may be times when Firefly just won't seem to compile correctly or you're getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (ctrl + r) might solve your issue. Another approach is updating the yarn dependencies:
+
+```bash
+# in root dir
+yarn
+
+# in packages/backend/bindings/node
+yarn
+```
+
+#### JavaScript heap out of memory
+
+When developing on Firefly, it is possible that your heap runs out of memory. This has to do with the heap space nodeJS allocates (on Linux this is 2048MB). Setting the heap space to 4096MB fixes this issue. Add the following line to your `~/.bashrc` file: `export NODE_OPTIONS=--max_old_space_size=4096`.
