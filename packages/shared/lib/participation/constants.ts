@@ -10,7 +10,7 @@ export const ASSEMBLY_EVENT_ID = '249dfc25efde867884ff083e35f8df4e32bd0abb40862b
 /**
  * The staking event ID for Shimmer.
  */
-export const SHIMMER_EVENT_ID = '24a2e624d3416a323a542b0c5c715783dd125b0f3fd51f6cceda0707806726ae '
+export const SHIMMER_EVENT_ID = '24a2e624d3416a323a542b0c5c715783dd125b0f3fd51f6cceda0707806726ae'
 
 /**
  * Useful array of staking event IDs.
