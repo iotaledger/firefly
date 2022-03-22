@@ -1,5 +1,5 @@
 ---
-icon: shield
+icon: alert
 ---
 
 # Security Incidents

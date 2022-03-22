@@ -8,7 +8,7 @@ icon: rocket
 
 | Version | Change | Author | Date |
 | - | - | - | - |
-| 1.0 | Initial SOP for regular release, milestone release and hotfix releases | @Nicole | 21/02/2022 |
+| 1.0 | Intitial SOP for regular release, milestone release and hotfix releases | @Nicole | 21/02/2022 |
 
 ## Purpose
 
@@ -123,7 +123,7 @@ Beta testing instructions will be referenced in the announcement and these will 
 
 ### C. Fixes
 
-If fixes are needed before a release, they can be created as PRs targeting the release branch. If there are fixes that we would like to be retested, we can create a new beta release by going back to step A and incrementing the build number each time.
+If fixes are needed berfore a release, they can be created as PRs targeting the release branch. If there are fixes that we would like to be retested, we can create a new beta release by going back to step A and incrementing the build number each time.
 
 ## 5. Tag and release
 
@@ -187,13 +187,13 @@ Alpha testing instructions will be referenced in the announcement and these will
 
 ### C. Fixes
 
-If fixes are needed before a beta release, they can be created as PRs targeting the milestone branch. If there are fixes that we would like to be retested, we can create a new alpha release by going back to step A and incrementing the build number each time.
+If fixes are needed berfore a beta release, they can be created as PRs targeting the milestone branch. If there are fixes that we would like to be retested, we can create a new alpha release by going back to step A and incrementing the build number each time.
 
 ## 3. Merge milestone branch into `develop` & create release branch
 
 After sufficient internal testing and alpha testing, a PR containing the milestone branch can then can then be reviewed on GH and follow the normal PR process; except we should have a minimum of two approvers to merge the milestone into the release branch as it will contain a large amount of changes.
 
-Once the approved and merged is in the `develop` branch, we can create a release branch following the naming conventions defined in the branching strategy.
+Once the approced and merged is in the `develop` branch, we can create a release branch following the naming conventions defined in the branching strategy.
 
 ## 4. Security audit (Optional)
 
@@ -222,7 +222,7 @@ Beta testing instructions will be referenced in the announcement and these will 
 
 ### C. Fixes
 
-If fixes are needed before a release, they can be created as PRs targeting the release branch. If there are fixes that we would like to be retested, we can create a new beta release by going back to step A and incrementing the build number each time.
+If fixes are needed berfore a release, they can be created as PRs targeting the release branch. If there are fixes that we would like to be retested, we can create a new beta release by going back to step A and incrementing the build number each time.
 
 ## 6. Tag and release
 
@@ -262,7 +262,7 @@ To release a hotfix we will aim to follow the below sub processes.
 
 Once the the PR is deemed ready for a review, as a team we can all build the hotfix branch locally, and test all the core functionality of the application, as well as hotfix functionality.
 
-This will usually last between half a day and 1 full day. Any updates can be committed directly to the hotfix branch. When we are happy that the application passes our testings criteria we can move on to the next steps.
+This will usually last between half a day and 1 full day. Any updates can be commited directly to the hotfix branch. When we are happy that the application passes our testings criteria we can move on to the next steps.
 
 ## 2. PR approval & merge into release branch
 
