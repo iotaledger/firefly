@@ -1,7 +1,8 @@
 import { Capacitor } from '@capacitor/core'
+import { SplashScreen } from '@capacitor/splash-screen'
 
 import { IPlatform } from '@core/platform/interfaces'
-import { hookErrorLogger } from '@lib/core/shell/errorLogger'
+import { hookErrorLogger } from '@lib/core/shell'
 import { AppSettings } from '@lib/typings/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 
@@ -16,7 +17,9 @@ window['__WALLET__'] = WalletBindings
 
 let activeProfileId = null
 
-const CapacitorApi: IPlatform = {
+export const nativeSplash = SplashScreen
+
+export const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
         return new Promise((resolve) => resolve())
     },
