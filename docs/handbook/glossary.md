@@ -12,6 +12,7 @@ Similar to an IOTA TIP ("Tangle Improvement Proposal"), a BIP is a proposed plan
 ### BIP32 - Hierarchical deterministic (HD) wallet
 
 This proposal acts as a definition for how a wallet should derive encryption keys from any given seed. The hierarchy is described by a BIP32 path, which looks like:
+
 ```
 m / purpose' / coin_type' / account' / change / address
 ```
@@ -45,7 +46,7 @@ To help understand the technical definition, please read the above description a
 - __Wallets__, also known as "Accounts", are three levels lower than the profile / seed (past `purpose` and `coin_type`) therefore can _only be belonging to a single profile_
 - __Addresses__ are formed on chains from values `0` and `1` on the `change` level, putting them two levels lower than the `account` level, however in Firefly we typically only see the receive addresses from the chain when `change = 0`
 
-## 🌐 IOTA Networks 
+## 🌐 IOTA Networks
 
 The IOTA ecosystem contains a variety of networks each with different purposes and use-cases.
 
@@ -65,8 +66,8 @@ Similar to the `devnet`, the `testnet` is a network that until recently was the 
 
 Private tangles are networks that can be setup for use by an individual or even a smart city. The tokens do __NOT__ hold real-world value, and the data messages are broadcasted onto the configured private network.
 
-## 🔐 Stronghold 
+## 🔐 Stronghold
 
-Stronghold is an open-source software library developed and maintained by the IOTA Foundation (see [`stronghold.rs`](https://github.com/iotaledger/stronghold.rs)). It deals with the protection of important secrets like the seed of a Firefly profile or the public-private key pairs for accounts (or wallets) within a Firefly profile. 
+Stronghold is an open-source software library developed and maintained by the IOTA Foundation (see [`stronghold.rs`](https://github.com/iotaledger/stronghold.rs)). It deals with the protection of important secrets like the seed of a Firefly profile or the public-private key pairs for accounts (or wallets) within a Firefly profile.
 
-It is designed to be used within other libraries, such as [`wallet.rs`](https://github.com/iotaledger/wallet.rs), or even within the provided  peer-to-peer (p2p) communication layer for when higher security is needed. 
+It is designed to be used within other libraries, such as [`wallet.rs`](https://github.com/iotaledger/wallet.rs), or even within the provided  peer-to-peer (p2p) communication layer for when higher security is needed.

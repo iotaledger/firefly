@@ -3,10 +3,13 @@ icon: codespaces
 ---
 
 # Environment Setup
+
 Welcome to the Firefly environment setup guide! Here you will find all of the information regarding how we setup our various development environments.
 
 ## Dependencies
+
 The following __must__ be installed on all platforms:
+
 - [Node.js](https://nodejs.org/en/) (`14.19.0+`)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install) (`1.22.17`)
 - [Rust](https://www.rust-lang.org/tools/install) (LTS)
@@ -14,9 +17,11 @@ The following __must__ be installed on all platforms:
 :warning: There may be problems with v15+ on Windows.
 
 ### MacOS
+
 - Xcode Command Line Tools
 
 ### Linux
+
 - [Snapcraft](https://snapcraft.io/) (`sudo snap install snapcraft --classic`)
 - [Multipass](https://multipass.run/) (`sudo snap install multipass`) or [LXD](https://linuxcontainers.org/lxd/introduction/) (`snap install lxd`) are necessary for Snap compilation (to bypass this requirement and build on the host, set `SNAP_DESTRUCTIVE_MODE="true"`)
 - `build-essential`
@@ -28,6 +33,7 @@ The following __must__ be installed on all platforms:
 - `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
 
 ### Windows
+
 It is highly recommended to use [Chocolatey](https://chocolatey.org/) as a package manager for Windows.
 There are a few dependencies that Chocolatey handles smoothly, which otherwise are often troublesome
 to install and configure. Read installation steps [here](https://chocolatey.org/install).
@@ -35,6 +41,7 @@ to install and configure. Read installation steps [here](https://chocolatey.org/
 PowerShell in __administrator mode__ is recommended for the following steps.
 
 - Install dependencies for [`wallet.rs`](https://github.com/iotaledger/wallet.rs):
+
 ```bash
 choco install cmake llvm openssl
 ```
@@ -42,6 +49,7 @@ choco install cmake llvm openssl
 :information_source: `llvm` can also be downloaded and installed with [snapshot builds](https://llvm.org/builds/).
 
 - Install and configure dependencies for Windows:
+
 ```bash
 choco install python visualstudio2019-workload-vctools -y
 npm config set msvs_version 2019
@@ -52,6 +60,7 @@ You must check boxes for "Node.js development" and "Desktop development with C++
 (use the 2019 version).
 
 - Add environment variable definitions in `~/.bash_profile` or `~/.bashrc`:
+
 ```bash
 # wallet.rs sub-dependencies
 export OPENSSL_DIR="C:\Program Files\OpenSSL-Win64"

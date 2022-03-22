@@ -1,8 +1,8 @@
 ---
-icon: shield
+icon: stack
 ---
 
-# Security Incidents
+# Dependencies
 
 ## Purpose
 

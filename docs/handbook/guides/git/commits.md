@@ -3,7 +3,9 @@ icon: git-commit
 ---
 
 # Commits
+
 We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), so that commit messages are clean and concise. They should follow a consistent structure, being written in present-tense and using the prefixes below:
+
 - `chore`: modifies documentation, cleaning dependencies, other housekeeping-like tasks
 - `ci`: creates or changes an existing continuous integration workflow (checkout `ci.*.yml` files in [`firefly/.github/workflows/`](https://github.com/iotaledger/firefly/tree/develop/.github/workflows))
 - `feat`: introduces a new feature or enhancement of an existing feature

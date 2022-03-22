@@ -3,13 +3,17 @@ icon: typography
 ---
 
 # Naming
+
 Naming is perhaps one of the most important skills for writing clean code. Upon first read, a name __should__ indicate to developers the following things:
+
 - __Why the code exists?__
 - __What is the purpose of the code?__
 - __How is the code used?__
 
 ## General
+
 The following are some general rules about code naming that we follow:
+
 - __They must be meaningful__
 
     __Bad__
@@ -43,7 +47,7 @@ The following are some general rules about code naming that we follow:
         nodePlugins?: NodePlugin[]
     }
     ```
-    
+
     __Good__
 
     ```typescript
@@ -55,11 +59,12 @@ The following are some general rules about code naming that we follow:
         nodePlugins?: NodePlugin[]
     }
     ```
+
 - __They must NOT be mental mappings__
 
     __Bad__
 
-    ```typescript 
+    ```typescript
     const ns = getNetworkStatus()
     const nht = getTextForNetworkHealth(ns)
     ```
@@ -72,7 +77,7 @@ The following are some general rules about code naming that we follow:
     ```
 
 - __They must NOT add unneeded context__
-    
+
     __Bad__
 
     ```typescript
@@ -94,18 +99,22 @@ The following are some general rules about code naming that we follow:
     ```
 
 ## Files
+
 ### TypeScript
+
 All TypeScript filenames are in `kebab-case`, e.g. `deep-link-handler.ts`. Some filenames may include an optional file type specifier, e.g. `deep-link.store.ts`.
 
-### Svelte 
+### Svelte
+
 All Svelte component and route filenames are in `PascalCase`, e.g. `LedgerTransaction.svelte`.
 
 ## Acronyms
+
 When a variable name contains an acronym, the first letter __must__ be uppercase and the rest lowercase. This convention creates more readable names particularly in the circumstances where another word follows the acronym.
 
 __Bad__
 
-```typescript 
+```typescript
 type UTXOInput {
    // ... 
 }
@@ -122,6 +131,7 @@ type UtxoInput {
 ## Code
 
 ### Booleans
+
 - All objects, functions, stores, i.e. code components of `boolean` type must be prefixed with being verbs (e.g. "is", "are", "has", "will", "can", "should", "must")
 
     __Bad__
@@ -131,11 +141,12 @@ type UtxoInput {
     ```
 
     __Good__
+
     ```typescript
     const isEnabled = false
     ```
-    
-    :information_source: This also pertains to any functions that are of `boolean` type; `isStrongholdLocked()` is more self-documenting than `strongholdLocked()`. 
+
+    :information_source: This also pertains to any functions that are of `boolean` type; `isStrongholdLocked()` is more self-documenting than `strongholdLocked()`.
 
 - All booleans must use _positive_ names
 
@@ -152,11 +163,12 @@ type UtxoInput {
     ```
 
 ### Constants
+
 - All constants __must__ be in `SCREAMING_SNAKE_CASE`
 
     __Bad__
 
-    ```typescript 
+    ```typescript
     const maxNumIotas = 2_779_530_283_277_761
     ```
 
@@ -167,19 +179,20 @@ type UtxoInput {
     ```
 
 ### Enumerations
+
 - All enum _and_ enum variant names __must__ be in `PascalCase`
 
     __Bad__
 
-    ```typescript 
+    ```typescript
     enum profileType {
         stronghold,
         ledger,
     }
     ```
 
-
     __Good__
+
     ```typescript
     enum ProfileType {
          ^      ^
@@ -193,7 +206,8 @@ type UtxoInput {
 - All enum names __must__ be singular
 
     __Bad__
-    ```typescript 
+
+    ```typescript
     enum ProfileTypes {
         Stronghold,
         Ledger,
@@ -211,6 +225,7 @@ type UtxoInput {
     ```
 
 ### Functions
+
 - All function names __must__ be in `camelCase`
 
     __Bad__
@@ -230,6 +245,7 @@ type UtxoInput {
     ```
 
 ### Interfaces
+
 - All interface names __must__ be in `PascalCase` preceded with an `I`
 
     __Bad__
@@ -249,7 +265,7 @@ type UtxoInput {
     ```
 
     __Good__
-    
+
     ```typescript
     interface IStrongholdApi {
               ^
@@ -257,6 +273,7 @@ type UtxoInput {
     ```
 
 ### Types
+
 - All type names __must__ be in `PascalCase`
 
     __Bad__

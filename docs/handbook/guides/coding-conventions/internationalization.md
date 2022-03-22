@@ -4,13 +4,13 @@ icon: globe
 
 # Internationalization
 
-_Internationalization_ refers to designing a product in such a way that it can easily be localized (i.e. _localization_) into a target language. We currently use the [`svelte-i18n`](https://github.com/kaisermann/svelte-i18n) library to handle this functionality. 
+_Internationalization_ refers to designing a product in such a way that it can easily be localized (i.e. _localization_) into a target language. We currently use the [`svelte-i18n`](https://github.com/kaisermann/svelte-i18n) library to handle this functionality.
 
-:warning: Localization __should__ be used only when dealing with user-facing text; if the user is not intended to see a message or error, then it __does NOT__ need to be localized. 
+:warning: Localization __should__ be used only when dealing with user-facing text; if the user is not intended to see a message or error, then it __does NOT__ need to be localized.
 
 ## Usage
 
-It is quite easy to use `svelte-i18n` once it has been configured and initialized. We simply import the `localize(...)` function, which allows us to create any localization as long as there is an entry for it in a corresponding `{language}.json` file. 
+It is quite easy to use `svelte-i18n` once it has been configured and initialized. We simply import the `localize(...)` function, which allows us to create any localization as long as there is an entry for it in a corresponding `{language}.json` file.
 
 If the provided path for the locale data __does NOT__ exist, the text will default to English. In the case that the English also __does NOT__ exist, an `undefined` value will be returned.
 
@@ -45,6 +45,7 @@ As is the norm for internationalization functionality, we adhere to the widely u
     // in code
     const text = localize('general.ateDinnerWith', { values: { person: 'Wallet Jesus' }}) // "I ate dinner with Wallet Jesus."
     ```
+
 - __Create translations with dynamic amounts__
 
     ```typescript

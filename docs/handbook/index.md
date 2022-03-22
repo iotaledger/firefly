@@ -3,6 +3,6 @@ icon: home
 order: 1000
 ---
 
-# Welcome
+# Home
 
 Welcome to the Firefly handbook!

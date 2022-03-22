@@ -5,9 +5,10 @@ icon: paintbrush
 # Svelte Components
 
 ## Organization
+
 The organization of a Svelte component **must** start with the script, followed by the markup and the style.
 
-__Bad__
+**Bad**
 
 ```typescript
 <script></script>
@@ -17,7 +18,7 @@ __Bad__
 <Component></Component>
 ```
 
-__Good__
+**Good**
 
 ```typescript
 <script></script>
@@ -28,11 +29,12 @@ __Good__
 ```
 
 ## Reactivity
-At the heart of Svelte is a powerful system of reactivity for keeping the DOM in sync with the application state — for example, in response to an event. This section describes our approach to  throughout the codebase. Reactive stores (a language feature) assign a store value (app state) to a local variable, and thanks to Svelte reactivity all the markup and reactive dependencies are updated in **Svelte Components**. 
+
+At the heart of Svelte is a powerful system of reactivity for keeping the DOM in sync with the application state — for example, in response to an event. This section describes our approach to  throughout the codebase. Reactive stores (a language feature) assign a store value (app state) to a local variable, and thanks to Svelte reactivity all the markup and reactive dependencies are updated in **Svelte Components**.
 
 It's not enforced, since regular typescript handles store variables differently. However, the following approach is preferred in Svelte components. Feel free to test the code on the [Svelte Playground](https://svelte.dev/tutorial/auto-subscriptions)!
 
-__Preferred__
+**Preferred**
 
 ```typescript
 <script>
@@ -58,7 +60,7 @@ __Preferred__
 
 The same code can be written without using Svelte language features. The following code does the same, albeit being a bit more verbose. This is how store interactions are written in pure typescript. It is accepted, but for **Svelte components** preference is given to the style described above.
 
-__Alternative__
+**Alternative**
 
 ```typescript
 <script>
@@ -71,13 +73,13 @@ __Alternative__
     function increment(): void {
         count.update(n => n + 1)
     }
-	
+ 
     const unsubscribe = count.subscribe(() => {
-	double = get(count) * 2
+ double = get(count) * 2
     })
-		
+  
     onDestroy(() => {
-	unsubscribe()
+ unsubscribe()
     })
 </script>
 
@@ -89,20 +91,22 @@ __Alternative__
     Click to update count!
 </button>
 ```
- 
+
 ## Styling
 
 ### Tailwind
+
 _TODO_
 
 ### `style` Tag
+
 _TODO_
 
 ### Prettier
 
 There is a [bug](https://github.com/sveltejs/prettier-plugin-svelte/issues/70) in Prettier's Svelte Plugin that replaces nested style and script tags with base58 encoded strings of vanilla JS. Use nested strings in case nested style/script tags are required.
 
-__Bad__
+**Bad**
 
 ```svelte
 <iframe
@@ -118,7 +122,7 @@ __Bad__
 />
 ```
 
-__Good__
+**Good**
 
 ```svelte
 <iframe
