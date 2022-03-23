@@ -9,6 +9,11 @@
             "body": "Bitte lies die Datenschutzerklärung und die Nutzungsbedingungen.",
             "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und akzeptiere diese"
         },
+        "crashReporting": {
+            "title": "Fehler- und Absturzberichte",
+            "body": "Hilf den Entwicklern Firefly zu verbessern, indem Diagnosedaten automatisch versendet werden, wenn ein Fehler oder Absturz auftritt.",
+            "checkbox": "Fehler- und Absturzberichte an die IOTA Foundation senden"
+        },
         "appearance": {
             "title": "Erscheinungsbild",
             "body": "Wähle dein Erscheinungsbild."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Erscheinungsbild",
                 "description": "",
-                "advice": "Starte die Firefly-Anwendung neu, damit Änderungen am System-Erscheinungsbild wirksam werden"
+                "advice": "Du musst Firefly neu starten, damit die Änderungen wirksam werden"
             },
             "language": {
                 "title": "Sprache",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Fehlerprotokoll",
                 "description": "Fehler zum Debuggen eines Problems anzeigen"
+            },
+            "crashReporting": {
+                "title": "Fehler- und Absturzberichte",
+                "body": "Hilf den Entwicklern Firefly zu verbessern, indem Diagnosedaten automatisch versendet werden, wenn ein Fehler oder Absturz auftritt",
+                "checkbox": "Fehler- und Absturzberichte senden",
+                "advice": "Bitte führe einen Neustart von Firefly durch, um {sendCrashReports, select, true {das Teilen von Fehler- und Absturzberichten zu aktivieren} false {das Teilen von Fehler- und Absturzberichten zu deaktivieren} other {die Änderung wirksam zu machen}}"
             },
             "diagnostics": {
                 "title": "Diagnose",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Du erstellst ein Entwicklerprofil",
             "body": "Du wirst standardmäßig mit dem Chrysalis-Devnet verbunden, kannst das Netzwerk jedoch manuell wechseln. Fahre nur fort, wenn du weißt, was du tust."
+        },
+        "crashReporting": {
+            "title": "Fehler- und Absturzberichte",
+            "body": "Hilf den Entwicklern Firefly zu verbessern, indem Diagnosedaten automatisch gesendet werden, wenn ein Fehler oder ein Absturz auftritt. Nach Auswahl wird diese Option mit einem Neustart von Firefly wirksam.",
+            "checkbox": "Fehler- und Absturzberichte an die IOTA Foundation senden"
         },
         "legalUpdate": {
             "tosTitle": "Nutzungsbedingungen",
