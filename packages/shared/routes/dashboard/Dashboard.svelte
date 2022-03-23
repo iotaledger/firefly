@@ -364,8 +364,10 @@
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-col w-full h-full">
-    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
+<div class="{!$mobile && 'dashboard-wrapper'} flex flex-col w-full h-full">
+    {#if !$mobile}
+        <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
+    {/if}
     <TopNavigation {onAccountCreation} />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
