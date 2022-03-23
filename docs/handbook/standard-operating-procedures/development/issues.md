@@ -22,18 +22,18 @@ All members of the core firefly team are responsible for managing issues. If an 
 
 ## Processes
 
-* [Bug Management Process](#Bug-Management-Process)
-* [Support Request Process](#Support-Request-Process)
+* [Bug Management](#bug-management)
+* [Support Requests](#support-requests)
 
 ## External Processes
 
 * [Security Vulnerability Process](https://github.com/iotaledger/firefly/wiki/SOP:-Security-Vulnerability)
 
-# Bug Management Process
+## Bug Management
 
 The bug management process is to be followed when a new issue is raised on GitHub that has the label `bug report` or an existing issue has been given the label `bug report`.
 
-## High Level Overview
+### Overview
 
 ```mermaid
   graph LR;
@@ -50,13 +50,13 @@ The bug management process is to be followed when a new issue is raised on GitHu
 
 The above diagram details the high level overview of the bug management processes:
 
-1. [Assess](#Assessment-Process) whether the issue issue is a valid.
-2. [Triage](#Triage-Process) the issue.
-3. [Schedule](#Schedule-Process) the issue to be fixed.
+1. [Assess](#assessment) whether the issue issue is a valid.
+2. [Triage](#triaging) the issue.
+3. [Schedule](#scheduling) the issue to be fixed.
 
 > **When managing issues please make sure you assign yourself to the issue on GitHub.**
 
-## Assessment Process
+### Assessment
 
 The assessment process is usually followed as soon as an issue is labeled as `bug report` or when we have an existing backlog of bug reports that we need to groom. The assessment process is to ensure that we don't need to triage invalid issues. Please use the below flowchart as a guide to process:
 
@@ -84,7 +84,7 @@ The assessment process is usually followed as soon as an issue is labeled as `bu
       CI-->End
 ```
 
-## Triage Process
+### Triaging
 
 Once an issue has been assessed, we can then triage the issue to decide if we should fix the issue or if we just want to acknowledge the issue because we aren't planning to fix it. This should be done as soon as possible, by following the below process:
 
@@ -112,7 +112,7 @@ Once an issue has been assessed, we can then triage the issue to decide if we sh
       CI-->End
 ```
 
-## Schedule Process
+### Scheduling
 
 If a bug has been triaged and it is agreed that we should fix the issue, then we need to prioritise the fix and schedule this fix. Again this should be done as soon as possible after triaging, and can be done by following the below process:
 
@@ -128,6 +128,6 @@ If a bug has been triaged and it is agreed that we should fix the issue, then we
       Start-->PI-->CT-->SF-->AT-->End   
 ```
 
-# Support Request Process
+## Support Requests
 
-`TODO: Define and document support request process`
+_TBD_
