@@ -3,7 +3,7 @@
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { asyncGetAddressChecksum } from 'shared/lib/migration'
     import { Input, Transfer } from 'shared/lib/typings/migration'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

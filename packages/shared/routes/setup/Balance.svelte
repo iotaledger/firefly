@@ -21,7 +21,7 @@
     import { closePopup, openPopup } from '@core/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'

@@ -5,7 +5,7 @@ import { NetworkStatus } from './typings/network'
 import { NetworkStatusHealthText } from './typings/network'
 import { activeProfile } from './profile'
 import { Node, NodePlugin } from './typings/node'
-import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from './time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils/time'
 
 export const NETWORK_HEALTH_COLORS = {
     0: 'red',

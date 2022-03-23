@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { get } from 'svelte/store'
     import Text from './Text.svelte'
     import { Locale } from '@core/i18n'

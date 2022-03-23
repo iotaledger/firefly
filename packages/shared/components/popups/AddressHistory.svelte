@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { Address } from 'shared/lib/typings/address'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { Readable } from 'svelte/store'
     import { setClipboard } from '@core/utils/os'
     import { Locale } from '@core/i18n'

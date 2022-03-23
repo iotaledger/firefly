@@ -1,4 +1,4 @@
-import { MILLISECONDS_PER_SECOND } from '../time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils/time'
 
 import { Participation, StakingAirdrop } from './types'
 

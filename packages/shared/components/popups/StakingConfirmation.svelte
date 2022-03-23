@@ -19,7 +19,7 @@
     import { Locale } from '@core/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { capitalize } from '@core/utils/format'
 
     export let locale: Locale

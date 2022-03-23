@@ -3,7 +3,7 @@
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { truncateString } from '@core/utils/format'
     import { RiskLevel } from 'shared/lib/typings/migration'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'

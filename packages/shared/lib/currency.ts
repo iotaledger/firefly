@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { appSettings } from './appSettings'
 import { activeProfile } from './profile'
-import { formatUnitBestMatch } from './units'
+import { formatUnitBestMatch } from '@core/utils/units'
 import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
 
 /**

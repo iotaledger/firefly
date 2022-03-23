@@ -11,7 +11,7 @@
     import { Locale } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,

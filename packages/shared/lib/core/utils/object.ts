@@ -1,4 +1,9 @@
 /**
+ * Creates a union of all the property types of an interface T.
+ */
+export type ValuesOf<T> = T[keyof T] | T
+
+/**
  * Create a deep copy of an object
  * @param obj The object to copy
  * @returns The copied object

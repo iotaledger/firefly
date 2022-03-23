@@ -1,10 +1,10 @@
+import { Error } from '@core/error'
 import { INotificationManager } from '@core/notifications'
 
 import { IDeepLinkManager } from '@common/deep-links'
 
 import { ILedger } from '@lib/typings/ledger'
 import { AppSettings } from '@lib/typings/app'
-import { Error } from '@lib/typings/error'
 import { IPincodeManager } from '@lib/typings/pincodeManager'
 import { IBarcodeManager } from '@lib/typings/barcodeManager'
 import { VersionDetails } from '@lib/typings/appUpdater'

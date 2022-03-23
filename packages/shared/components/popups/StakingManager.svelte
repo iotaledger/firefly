@@ -39,7 +39,7 @@
     import { Locale } from '@core/i18n'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { transferState, wallet } from 'shared/lib/wallet'
 
     export let locale: Locale

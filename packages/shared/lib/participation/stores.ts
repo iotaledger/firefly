@@ -1,7 +1,7 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
-import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '@core/utils/time'
 import { wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
 

@@ -1,6 +1,6 @@
 import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
-import { formatUnitBestMatch } from 'shared/lib/units'
+import { formatUnitBestMatch } from '@core/utils/units'
 import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'

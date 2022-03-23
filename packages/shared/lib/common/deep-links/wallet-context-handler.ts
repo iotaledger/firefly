@@ -1,8 +1,8 @@
 import { Unit } from '@iota/unit-converter'
 
 import { localize } from '@core/i18n'
-import { isValidAddressAndPrefix } from '../../address'
-import { addError } from '../../errors'
+import { isValidAddressAndPrefix } from '@core/utils/crypto'
+import { addError } from '@core/error'
 
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from './enums'
 import { DeepLinkRequest, SendOperationParameters } from './types'

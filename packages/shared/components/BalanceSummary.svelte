@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
     import { Text } from 'shared/components'
-    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { formatUnitBestMatch, formatUnitPrecision } from '@core/utils/units'
 
     export let color = 'blue' // TODO: profiles will have different colors
     export let textColor = 'white'

@@ -3,7 +3,7 @@ import { IPlatform } from '@core/platform'
 import { VersionDetails } from '@lib/typings/appUpdater'
 import { EventMap } from '@lib/typings/events'
 import { AppSettings } from '@lib/typings/app'
-import { Error } from '@lib/typings/error'
+import { Error } from '@core/error'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,

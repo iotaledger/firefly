@@ -19,7 +19,7 @@ import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'
 import { NetworkConfig, NetworkType } from './typings/network'
-import { ValuesOf } from './typings/utils'
+import { ValuesOf } from '@core/utils/object'
 import { WalletAccount } from './typings/wallet'
 
 import { Profile, ProfileType, UserSettings } from './typings/profile'

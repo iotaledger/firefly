@@ -8,7 +8,7 @@
     import { Payload } from 'shared/lib/typings/message'
     import { Locale } from '@core/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,

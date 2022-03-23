@@ -3,7 +3,7 @@
     import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from '@core/notifications'
     import { closePopup, popupState } from '@core/popup'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'

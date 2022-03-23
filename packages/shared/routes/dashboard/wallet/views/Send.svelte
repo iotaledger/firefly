@@ -40,7 +40,7 @@
     import { Locale } from '@core/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision } from '@core/utils/units'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { SendParams } from 'shared/lib/typings/sendParams'

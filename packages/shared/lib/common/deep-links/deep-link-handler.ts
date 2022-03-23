@@ -1,4 +1,4 @@
-import { addError } from '../../errors'
+import { addError } from '@core/error'
 
 import { DeepLinkRequest } from './types'
 import { parseWalletDeepLinkRequest } from './wallet-context-handler'

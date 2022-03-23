@@ -11,7 +11,7 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
-    import { getBestTimeDuration } from 'shared/lib/time'
+    import { getBestTimeDuration } from '@core/utils/time'
 
     const updateAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
         const prefix = 'staking-info'

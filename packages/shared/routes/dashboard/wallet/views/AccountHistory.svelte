@@ -18,7 +18,7 @@
     import { Transaction } from 'shared/lib/typings/message'
     import { isValueInUnitRange, unitToValue } from '@core/utils/units'
     import { debounce } from '@core/utils/ui'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
 
     export let locale: Locale
 

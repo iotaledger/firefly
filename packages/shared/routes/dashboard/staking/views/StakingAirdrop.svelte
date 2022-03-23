@@ -13,7 +13,7 @@
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
-    import { getBestTimeDuration } from 'shared/lib/time'
+    import { getBestTimeDuration } from '@core/utils/time'
     import { capitalize } from '@core/utils/format'
     import { Platform } from '@core/platform'
 

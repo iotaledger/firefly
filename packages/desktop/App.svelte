@@ -3,7 +3,7 @@
     import { loggedIn } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
-    import { addError } from 'shared/lib/errors'
+    import { addError } from '@core/error'
     import { goto } from '@core/utils/dom'
     import { localeDirectionality, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'

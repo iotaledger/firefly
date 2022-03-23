@@ -22,7 +22,7 @@
     } from 'shared/lib/participation/types'
     import { openPopup, popupState } from '@core/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch } from '@core/utils/units'
     import { isSyncing, wallet } from 'shared/lib/wallet'
 
     $: $participationOverview, $stakedAccounts, $partiallyStakedAccounts

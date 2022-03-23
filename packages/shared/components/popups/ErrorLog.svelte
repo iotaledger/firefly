@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { errorLog } from 'shared/lib/errors'
+    import { errorLog } from '@core/error'
+    import { Locale } from '@core/i18n'
     import { closePopup } from '@core/popup'
     import { setClipboard } from '@core/utils/os'
-    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
