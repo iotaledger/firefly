@@ -12,7 +12,9 @@
 
     export let classes = ''
 
-    export let onMenuClick = (): void => {}
+    export let onMenuClick = (): void => {
+        accountRoute.set(AccountRoutes.Manage)
+    }
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
     $: textColor = isBright(color) ? 'gray-800' : 'white'
@@ -33,22 +35,22 @@
 
 <div
     style="--account-color: {color};"
-    class="relative account-color p-6 {$mobile ? 'pb-0 bg-transparent' : 'pb-12'} {classes}"
+    class="relative account-color p-6 {$mobile ? 'pt-6 pb-9 bg-transparent' : 'pb-12'} {classes}"
 >
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
         {#if !$mobile}
             <p class="text-11 leading-120 text-{textColor} uppercase tracking-widest">{localize('general.balance')}</p>
         {/if}
-        <div class="flex flex-col flex-wrap items-start space-y-1.5">
+        <div class="{$mobile ? 'items-center' : 'space-y-1.5'} flex flex-col flex-wrap items-start w-full">
             <div on:click={togglePreciseBalance}>
-                <Text type="h2" overrideColor classes="text-{textColor}">
+                <Text type={$mobile ? 'h1' : 'h2'} overrideColor classes="text-{textColor}">
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                 </Text>
             </div>
-            <Text type="p" overrideColor smaller classes="text-{textColor} dark:text-{textColor}">
+            <Text type={$mobile ? 'h4' : 'p'} overrideColor smaller classes="text-{textColor} dark:text-{textColor}">
                 {$selectedAccount?.balanceEquiv}
             </Text>
         </div>
@@ -57,22 +59,28 @@
         <!-- Action Send / Receive -->
         <div class="flex flex-row justify-between space-x-4 mt-7">
             <button
-                class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-{textColor}"
-                on:click={handleReceiveClick}
-            >
-                {localize('actions.receive')}
-            </button>
-            <button
-                class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-{textColor}"
+                class="{$mobile
+                    ? `text-${textColor} bg-none border border-${textColor} border-solid rounded-xl text-16 py-2 px-3`
+                    : `bg-${textColor} action text-14 p-3`}  w-full text-center rounded-lg font-semibold "
                 on:click={handleSendClick}
             >
                 {localize('actions.send')}
+            </button>
+            <button
+                class="{$mobile
+                    ? `text-${textColor} bg-none border border-${textColor} border-solid rounded-xl text-16 py-2 px-3`
+                    : `bg-${textColor} action text-14 p-3`}  w-full text-center rounded-lg font-semibold "
+                on:click={handleReceiveClick}
+            >
+                {localize('actions.receive')}
             </button>
         </div>
     {/if}
     <button
         on:click={() => onMenuClick()}
-        class="px-2 py-3 flex flex-row space-x-1 bg-opacity-10 bg-black rounded-lg text-{textColor} absolute top-4 right-4"
+        class="{$mobile
+            ? '-top-8'
+            : 'bg-opacity-10 bg-black rounded-lg top-4'} px-2 py-3 flex flex-row space-x-1 text-{textColor} absolute right-4 "
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
