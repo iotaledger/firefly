@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701324001359" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701324820645" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324001359" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324820645" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324001359" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701324001359" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324820645" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701324820645" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -51,8 +51,8 @@
                     <div class="flex items-center px-2 md:px-6">
                         <a id="docs-site-logo" href="/firefly/" class="flex items-center leading-snug text-2xl">
                             <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="/firefly/static/icon_firefly.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="/firefly/static/icon_firefly.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="/firefly/static/icon_firefly.svg">
+                                <img class="max-h-10 hidden dark:inline-block" src="/firefly/static/icon_firefly.svg">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Firefly</span>
                         </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">v1.3.3</span>
@@ -233,6 +233,12 @@
         <span>Tools</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="gitify">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gitify">#</doc-anchor-trigger>
+        <span>Gitify</span>
+    </h2>
+</doc-anchor-target>
 <doc-anchor-target id="linting--formatting">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#linting--formatting">#</doc-anchor-trigger>
@@ -266,7 +272,7 @@ yarn lint-debug
 # 3 - fix and overwrite files
 yarn lint-fix</code></pre>
 </doc-codeblock></div>
-<p><em>NOTE: Svelte component files (<code v-pre>*.svelte</code>) are checked in addition to regular <code v-pre>*.ts</code> source code files.</em></p>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> Svelte component files (<code v-pre>*.svelte</code>) are checked in addition to regular <code v-pre>*.ts</code> source code files.</p>
 <doc-anchor-target id="rust">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#rust">#</doc-anchor-trigger>
