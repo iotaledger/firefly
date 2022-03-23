@@ -1,5 +1,5 @@
 import { activeProfile } from 'shared/lib/profile'
-import Validator from 'shared/lib/validator'
+import { ValidatorService } from '@core/validators'
 import { get, writable } from 'svelte/store'
 import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'
 import { CurrencyTypes } from './typings/currency'
@@ -138,7 +138,7 @@ export async function fetchMarketData(): Promise<void> {
 }
 
 function processMarketData(marketData) {
-    const { isValid, payload } = new Validator().performValidation({
+    const { isValid, payload } = new ValidatorService().performValidation({
         type: 'MarketData',
         payload: marketData,
     })

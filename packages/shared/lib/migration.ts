@@ -20,7 +20,7 @@ import {
     Transfer,
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
-import Validator from 'shared/lib/validator'
+import { ValidatorService } from '@core/validators'
 import { api } from '@core/api'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
@@ -1206,7 +1206,7 @@ export async function checkChrysalisSnapshot(): Promise<void> {
 
         const jsonResponse: ChrysalisVariables = await response.json()
 
-        const { isValid, payload } = new Validator().performValidation({
+        const { isValid, payload } = new ValidatorService().performValidation({
             type: 'ChrysalisVariables',
             payload: jsonResponse,
         })

@@ -1,4 +1,4 @@
-import { ErrorTypes as ValidatorErrorTypes } from '@lib/typings/validator'
+import { ValidationError } from '@core/validators'
 import { ErrorType } from '@lib/typings/events'
 
 const errorMessages: {
@@ -58,7 +58,7 @@ const errorMessages: {
     DustError: 'error.send.leavingDust',
 }
 
-export function getErrorMessage(type: ErrorType | ValidatorErrorTypes): string {
+export function getErrorMessage(type: ErrorType | ValidationError): string {
     const message = errorMessages?.[type]
     return message ? message : 'error.global.generic'
 }

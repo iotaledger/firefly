@@ -1,4 +1,3 @@
-import Validator from '@lib/validator'
 import {
     CreatedAccountResponse,
     LatestAddressResponse,
@@ -10,7 +9,7 @@ import {
 import { ResponseTypes } from '@lib/typings/bridge'
 import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '@lib/typings/events'
 import { ErrorType } from '@lib/typings/events'
-import { ErrorTypes as ValidatorErrorTypes } from '@lib/typings/validator'
+import { ValidationError, ValidatorService } from '@core/validators'
 import { Platform } from '@core/platform/platform'
 import { NodePlugin } from '@lib/typings/node'
 import { IWalletApi } from '@core/api'
@@ -31,7 +30,7 @@ type CallbacksPattern = {
 }
 
 type ErrorMessage = {
-    type: ErrorType | ValidatorErrorTypes
+    type: ErrorType | ValidationError
     error: string
 }
 
@@ -169,10 +168,10 @@ WALLET.onMessage((message: MessageResponse) => {
         }
     }
 
-    const { isValid, payload } = new Validator(Object.keys(callbacksStore)).performValidation(message)
+    const { isValid, payload } = new ValidatorService(Object.keys(callbacksStore)).performValidation(message)
 
     if (!isValid) {
-        if (payload.type !== ValidatorErrorTypes.UnknownId) {
+        if (payload.type !== ValidationError.UnknownId) {
             const { id } = message
             const { onError } = callbacksStore[id]
 
@@ -230,10 +229,10 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * @param {string} error
  */
 const handleError = (
-    type: ErrorType | ValidatorErrorTypes,
+    type: ErrorType | ValidationError,
     error: string,
     action?: string
-): { type: ErrorType | ValidatorErrorTypes; error: string } => {
+): { type: ErrorType | ValidationError; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
     const hasStatusCode403 = error.includes('Response error with status code 403')
