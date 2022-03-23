@@ -29,11 +29,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701320389015" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701321073027" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701320389015" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321073027" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701320389015" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321073027" defer></script>
     <script id="mermaid-js" type="text/javascript" src="/firefly/resources/js/mermaid.js?v=2.1" defer></script>
 </head>
 <body>
@@ -270,8 +270,8 @@
     </h2>
 </doc-anchor-target>
 <ul>
-<li><doc-anchor-trigger to="#Bug-Management-Process">Bug Management Process</doc-anchor-trigger></li>
-<li><doc-anchor-trigger to="#Support-Request-Process">Support Request Process</doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#bug-management">Bug Management</doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#support-requests">Support Requests</doc-anchor-trigger></li>
 </ul>
 <doc-anchor-target id="external-processes">
     <h2>
@@ -282,18 +282,18 @@
 <ul>
 <li><a href="https://github.com/iotaledger/firefly/wiki/SOP:-Security-Vulnerability">Security Vulnerability Process</a></li>
 </ul>
-<doc-anchor-target id="bug-management-process">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-management-process">#</doc-anchor-trigger>
-        <span>Bug Management Process</span>
-    </h1>
+<doc-anchor-target id="bug-management">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#bug-management">#</doc-anchor-trigger>
+        <span>Bug Management</span>
+    </h2>
 </doc-anchor-target>
 <p>The bug management process is to be followed when a new issue is raised on GitHub that has the label <code v-pre>bug report</code> or an existing issue has been given the label <code v-pre>bug report</code>.</p>
-<doc-anchor-target id="high-level-overview">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#high-level-overview">#</doc-anchor-trigger>
-        <span>High Level Overview</span>
-    </h2>
+<doc-anchor-target id="overview">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
+        <span>Overview</span>
+    </h3>
 </doc-anchor-target>
 <div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
       Start(New bug report)
@@ -307,18 +307,18 @@
       Triage--&gt;End;</pre></div>
 <p>The above diagram details the high level overview of the bug management processes:</p>
 <ol>
-<li><doc-anchor-trigger to="#Assessment-Process">Assess</doc-anchor-trigger> whether the issue issue is a valid.</li>
-<li><doc-anchor-trigger to="#Triage-Process">Triage</doc-anchor-trigger> the issue.</li>
-<li><doc-anchor-trigger to="#Schedule-Process">Schedule</doc-anchor-trigger> the issue to be fixed.</li>
+<li><doc-anchor-trigger to="#assessment">Assess</doc-anchor-trigger> whether the issue issue is a valid.</li>
+<li><doc-anchor-trigger to="#triaging">Triage</doc-anchor-trigger> the issue.</li>
+<li><doc-anchor-trigger to="#scheduling">Schedule</doc-anchor-trigger> the issue to be fixed.</li>
 </ol>
 <blockquote>
 <p><strong>When managing issues please make sure you assign yourself to the issue on GitHub.</strong></p>
 </blockquote>
-<doc-anchor-target id="assessment-process">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#assessment-process">#</doc-anchor-trigger>
-        <span>Assessment Process</span>
-    </h2>
+<doc-anchor-target id="assessment">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#assessment">#</doc-anchor-trigger>
+        <span>Assessment</span>
+    </h3>
 </doc-anchor-target>
 <p>The assessment process is usually followed as soon as an issue is labeled as <code v-pre>bug report</code> or when we have an existing backlog of bug reports that we need to groom. The assessment process is to ensure that we don&#x27;t need to triage invalid issues. Please use the below flowchart as a guide to process:</p>
 <div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
@@ -342,11 +342,11 @@
       isDR--no--&gt;NS-.-&gt;TP
       isDR--yes--&gt;DRP--&gt;CI
       CI--&gt;End</pre></div>
-<doc-anchor-target id="triage-process">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#triage-process">#</doc-anchor-trigger>
-        <span>Triage Process</span>
-    </h2>
+<doc-anchor-target id="triaging">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#triaging">#</doc-anchor-trigger>
+        <span>Triaging</span>
+    </h3>
 </doc-anchor-target>
 <p>Once an issue has been assessed, we can then triage the issue to decide if we should fix the issue or if we just want to acknowledge the issue because we aren&#x27;t planning to fix it. This should be done as soon as possible, by following the below process:</p>
 <div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
@@ -370,11 +370,11 @@
       shouldFix--no--&gt;WF--&gt;CI
       shouldFix--yes--&gt;NS-.-&gt;SP
       CI--&gt;End</pre></div>
-<doc-anchor-target id="schedule-process">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#schedule-process">#</doc-anchor-trigger>
-        <span>Schedule Process</span>
-    </h2>
+<doc-anchor-target id="scheduling">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scheduling">#</doc-anchor-trigger>
+        <span>Scheduling</span>
+    </h3>
 </doc-anchor-target>
 <p>If a bug has been triaged and it is agreed that we should fix the issue, then we need to prioritise the fix and schedule this fix. Again this should be done as soon as possible after triaging, and can be done by following the below process:</p>
 <div class="overflow-hidden mb-6 py-4 dark:px-5 dark:bg-white rounded-md"><pre class="mermaid w-full">  graph LR;
@@ -386,13 +386,13 @@
       End(End)
       
       Start--&gt;PI--&gt;CT--&gt;SF--&gt;AT--&gt;End   </pre></div>
-<doc-anchor-target id="support-request-process">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#support-request-process">#</doc-anchor-trigger>
-        <span>Support Request Process</span>
-    </h1>
+<doc-anchor-target id="support-requests">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#support-requests">#</doc-anchor-trigger>
+        <span>Support Requests</span>
+    </h2>
 </doc-anchor-target>
-<p><code v-pre>TODO: Define and document support request process</code></p>
+<p><em>TBD</em></p>
 
                                 
                                 <!-- Required only on API pages -->
