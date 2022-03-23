@@ -118,7 +118,7 @@ const mainPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
-        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
         APP_NAME: JSON.stringify(appName),
         APP_ID: JSON.stringify(appId),
@@ -154,7 +154,7 @@ const rendererPlugins = [
         'process.env.STAGE': JSON.stringify(stage),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
-        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
     }),
 ]
@@ -164,7 +164,7 @@ const preloadPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
-        SENTRY_ENVIRONMENT: JSON.stringify(process.env.SENTRY_ENVIRONMENT || ''),
+        SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(true),
         APP_NAME: JSON.stringify(appName),
     }),
@@ -180,7 +180,7 @@ const sentryPlugins = [
         project: 'firefly-desktop',
         finalize: false,
         deploy: {
-            env: process.env.SENTRY_ENVIRONMENT,
+            env: stage,
         },
     }),
 ]
