@@ -75,6 +75,8 @@ You may also want to:
 - Suggest changes to be made by the author
 - Commit your own small changes if you have the time
 
+:warning: Sometimes dependency changes within PRs can cause painfully long build times, which then impedes the review process. It is **strongly** recommended to have a separate repository clone simply for reviewing PRs to ensure that you can continue doing your own work easily.
+
 ## Merging
 
 ### Merge Conditions

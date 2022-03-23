@@ -6,60 +6,47 @@ icon: light-bulb
 
 Welcome to the Firefly developer tips! Here you will find all sorts of helpful information for general things across the codebase.
 
-## Linting & Formatting
+## Building and Running
 
-We use [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) to handle the TS/JS code and [rustfmt](https://github.com/rust-lang/rustfmt#rustfmt----) for Rust. With the exception of a few files and directories, all of the code within the Firefly repository is run through a linting process to ensure cleanliness and consistency in terms of format, style, syntax, and more. This process happens both locally in a pre-commit Git hook (via [Husky](https://github.com/typicode/husky#husky)) as well as in a continuous integration workflow (see [`ci.lint.yml`](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml)).
+### Backend
 
-### TS/JS
+It is likely that you **will NOT** have to re-compile the backend (NodeJS *or* Capacitor) bindings, unless you have either changed or modified specific "bridge" functions (like [this one](https://github.com/iotaledger/firefly/blob/develop/packages/shared/lib/typings/account.ts#L66)).
 
-All of the formatting and linting commands can be run from the root directory.
+### Desktop
 
-With formatting there are two options to either overwrite files with fixes or just simply check them for correctness:
+#### Svelte Components
 
-```bash
-# 1 - fix and overwrite files
-yarn format
+If simply making changes to Svelte component files, it is not usually required to fully refresh the development instance (it is typically refreshed for you).
 
-# 2 - check files 
-yarn format-check
-```
+In some cases, the changes can cause unrecoverable errors unless you refresh via the developer console. This usually happens when changing imports or adding a new Svelte file. 
 
-For linting there are three options to either check the files, check the files in debug mode, or fix and overwrite the files:
+#### TypeScript Library
 
-```bash
-# 1 - check files
-yarn lint
+If making changes within the TypeScript library files, it is usually necessary to refresh the development instance via the console so load the changes.
 
-# 2 - check files in debug mode
-yarn lint-debug
+If editing files that are imported within `packages/desktop`, then it will be necessary to fully rebuild and restart the development instance. In particular, the following files require rebuilding:
+- `shared/lib/core/shell/*.ts`
+- `shared/lib/core/validation/*.ts`
 
-# 3 - fix and overwrite files
-yarn lint-fix
-```
+### Mobile
 
-_NOTE: Svelte component files (`*.svelte`) are checked in addition to regular `*.ts` source code files._
+_TBD_
 
-### Rust
+## Common Processes
 
-The following commands are to be run from the `packages/backend` folder as this is where the Rust bindings for [wallet.rs](https://github.com/iotaledger/wallet.rs) live.
+### Adding an icon
 
-We use `rustfmt` configured with the nightly toolchain to allow some features. To install:
+To add a new (SVG-based) icon for use in the application, simply create a new object entry [here](https://github.com/iotaledger/firefly/blob/develop/packages/shared/components/icon/icons.js#L1).
 
-```bash
-# install the nightly toolchain
-rustup component add rustfmt --toolchain nightly
-```
+Most entries here simply include `width`, `height`, and `path` properties, however please be sure that whatever icon you are adding contains all of the necessary SVG data to be displayed correctly (e.g. `fillRule`s, `clipRule`s, `strokeWidth`). 
 
-Then run a formatting check:
+If the icon is still not displaying properly, it is likely that it was either exported incorrectly or can be flattened in the design software **before** being exported.
 
-```bash
-# check format in current working directory
-cargo +nightly fmt -- --check
-```
+### Adding a setting
 
-## Tips and Tricks
+_TBD_
 
-### Add a Svelte Page
+### Adding a Svelte page
 
 There are a few steps besides just creating the component file before it can work in Firefly:
 
@@ -68,13 +55,15 @@ There are a few steps besides just creating the component file before it can wor
 - Add the correct HTML (`Route` nested with `<Page>` element) in `packages/desktop/App.svelte`
 - Change logic as needed in `routerNext` in `packages/shared/lib/router.ts`
 
-### Expose an API Endpoint / Library Function
+### Exposing an API endpoint
 
 `wallet.rs` has an actor interface, which makes it easy to call functions via messages. To expose a new function one needs to add it to the `MessageType` and `ResponseType` enums in `wallet.rs/src/actor/message.rs` and to the `handle` method inside of `impl WalletMessageHandler {` in `wallet.rs/src/actor/mod.rs`. An example can be seen in this [commit](https://github.com/iotaledger/wallet.rs/commit/6de213583b2811cc4379a7698bc0812201228bd1#).
 
-## Troubleshoot
+## Troubleshooting
 
-### Backend
+### Dependencies
+
+#### Backend
 
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
 See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
@@ -102,7 +91,23 @@ cargo install cargo-cache
 cargo cache -a
 ```
 
-### Debug
+#### Desktop
+
+There may be times when Firefly just won't seem to compile correctly or you're getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (MacOS: `Cmd+R`, Linux/Windows: `Ctrl+R`) might solve your issue. Another approach is updating the yarn dependencies:
+
+```bash
+# in root dir
+yarn
+
+# in packages/backend/bindings/node
+yarn
+```
+
+### Memory Usage
+
+When developing on Firefly, it is possible that your heap runs out of memory. This has to do with the heap space nodeJS allocates (on Linux this is 2048MB). Setting the heap space to 4096MB fixes this issue. Add the following line to your `~/.bashrc` file: `export NODE_OPTIONS=--max_old_space_size=4096`.
+
+### `wallet.rs`
 
 To debug what's going on in the backend you can add
 
@@ -116,20 +121,4 @@ Wallet.initLogger({
 })
 ```
 
-in `desktop/electron/preload.js` after `const Wallet = binding`. Debug logs will then be added to the `wallet.log` file.
-
-### Desktop
-
-There may be times when Firefly just won't seem to compile correctly or you're getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (ctrl + r) might solve your issue. Another approach is updating the yarn dependencies:
-
-```bash
-# in root dir
-yarn
-
-# in packages/backend/bindings/node
-yarn
-```
-
-#### JavaScript heap out of memory
-
-When developing on Firefly, it is possible that your heap runs out of memory. This has to do with the heap space nodeJS allocates (on Linux this is 2048MB). Setting the heap space to 4096MB fixes this issue. Add the following line to your `~/.bashrc` file: `export NODE_OPTIONS=--max_old_space_size=4096`.
+in `desktop/electron/preload.js` after `const Wallet = binding`. Debug logs will then be added to the `wallet.log` file in the same location where Firefly or the Electron / Capacitor development instance is installed.
