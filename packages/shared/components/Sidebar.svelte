@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { isBright, getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
@@ -13,6 +14,9 @@
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
+
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
+    $: textColor = isBright(color) ? 'gray-800' : 'white'
 
     let showNetwork = false
     let showProfile = false
@@ -88,10 +92,11 @@
 
 {#if $mobile}
     <button
-        class="menu-button z-10 w-9 h-9 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+        class="menu-button z-10 w-11 h-11 flex items-center justify-center leading-100"
         on:click={() => drawer.open()}
     >
-        <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
+        <Text type="h4" classes="uppercase text-{textColor}">{profileInitial || 'A'}</Text>
+        <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
     </button>
     <Drawer bind:this={drawer} fromRight={true} dimLength={0} opened={false} fullScreen classes="flex">
         <div class="flex flex-col flex-1">
@@ -165,13 +170,16 @@
     }
     .menu-button {
         position: absolute;
-        top: calc(env(safe-area-inset-top) * 2.2);
-        right: 30px;
+        top: calc(env(safe-area-inset-top) - 4px);
+        left: 25px;
     }
     header {
         position: sticky;
         top: 0;
         padding-top: calc(env(safe-area-inset-top) * 2.2);
         z-index: 10;
+    }
+    .account-color {
+        background-color: var(--account-color);
     }
 </style>
