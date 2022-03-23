@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701321073027" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701321489060" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321073027" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321489060" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321073027" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701321073027" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321489060" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701321489060" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -242,11 +242,10 @@
 </doc-anchor-target>
 <p>The following <strong>must</strong> be installed on all platforms:</p>
 <ul>
-<li><a href="https://nodejs.org/en/">Node.js</a> (<code v-pre>14.19.0+</code>)</li>
+<li><a href="https://nodejs.org/en/">Node.js</a> (<code v-pre>16.14.1</code>)</li>
 <li><a href="https://classic.yarnpkg.com/en/docs/install">Yarn</a> (<code v-pre>1.22.17</code>)</li>
 <li><a href="https://www.rust-lang.org/tools/install">Rust</a> (LTS)</li>
 </ul>
-<p><span class="docs-emoji">&#x26A0;&#xFE0F;</span> There may be problems with v15+ on Windows.</p>
 <doc-anchor-target id="macos">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#macos">#</doc-anchor-trigger>
