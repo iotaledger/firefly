@@ -2,7 +2,7 @@
     import { Text } from 'shared/components'
     import { debounce } from '@core/utils/ui'
     import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
-    import { english } from 'shared/lib/wordlists/english'
+    import { english } from '@common/wordlists/english'
     import { Locale } from '@core/i18n'
 
     enum Type {
