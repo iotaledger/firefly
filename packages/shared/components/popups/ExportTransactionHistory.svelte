@@ -6,7 +6,7 @@
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { Platform } from '@core/platform'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup } from '@core/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'

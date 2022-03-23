@@ -3,7 +3,7 @@
     import { mnemonic } from 'shared/lib/app'
     import { Platform } from '@core/platform'
     import { getMigrationData } from 'shared/lib/migration'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { newProfile } from 'shared/lib/profile'
     import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher, setContext } from 'svelte'

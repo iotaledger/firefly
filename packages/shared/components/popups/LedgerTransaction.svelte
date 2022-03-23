@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup, popupState } from '@core/popup'
     import { formatUnitBestMatch } from '@core/utils/units'
     import { onMount } from 'svelte'

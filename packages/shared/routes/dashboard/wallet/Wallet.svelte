@@ -4,7 +4,7 @@
     import { deepCopy } from '@core/utils/object'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup, openPopup } from '@core/popup'
     import {
         activeProfile,

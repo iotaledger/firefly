@@ -13,7 +13,7 @@
         CollapsibleBlock,
     } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { openPopup } from '@core/popup'
     import {
         cleanupInProgressProfiles,

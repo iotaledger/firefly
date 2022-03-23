@@ -5,7 +5,7 @@ import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
-import { isNewNotification, NotificationType, showAppNotification } from '@core/notifications'
+import { isNewNotification, NotificationType, showAppNotification } from '@core/notification'
 import { Event } from './typings/events'
 import {
     LedgerApp,

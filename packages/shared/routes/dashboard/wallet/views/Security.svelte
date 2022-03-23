@@ -5,7 +5,7 @@
     import { diffDates, isRecentDate } from '@core/utils/time'
     import { getBackupWarningColor } from '@core/utils/ui'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { openPopup } from '@core/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'

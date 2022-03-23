@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import {
         canAccountReachMinimumAirdrop,
         estimateStakingAirdropReward,

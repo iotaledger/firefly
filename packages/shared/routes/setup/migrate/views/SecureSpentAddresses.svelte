@@ -2,7 +2,7 @@
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup, openPopup } from '@core/popup'
     import { walletSetupType } from 'shared/lib/router'
     import { SetupType } from 'shared/lib/typings/routes'

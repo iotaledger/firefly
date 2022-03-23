@@ -12,7 +12,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, RepeatPin } from './views/'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { walletSetupType } from 'shared/lib/router'
     import { mnemonic } from 'shared/lib/app'
     import { SetupType } from 'shared/lib/typings/routes'

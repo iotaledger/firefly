@@ -4,7 +4,7 @@
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { getProfileDataPath } from 'shared/lib/wallet'
     import { Platform } from '@core/platform'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
 
     let newName = $activeProfile.name
     let error = ''

@@ -24,7 +24,7 @@
         NotificationType,
         removeDisplayNotification,
         showAppNotification,
-    } from '@core/notifications'
+    } from '@core/notification'
     import { closePopup, openPopup, popupState } from '@core/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'

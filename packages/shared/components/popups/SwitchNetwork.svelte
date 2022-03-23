@@ -19,7 +19,7 @@
     } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { logout } from 'shared/lib/app'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { ErrorType } from 'shared/lib/typings/events'
 
     import { Locale } from '@core/i18n'

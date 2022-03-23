@@ -9,7 +9,7 @@ import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
-import { showAppNotification, showSystemNotification } from '@core/notifications'
+import { showAppNotification, showSystemNotification } from '@core/notification'
 import { getParticipationOverview } from './participation/api'
 import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
 // PARTICIPATION

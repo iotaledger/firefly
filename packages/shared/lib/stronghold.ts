@@ -4,7 +4,7 @@ import { openPopup } from '@core/popup'
 import { api } from './wallet'
 import { Event } from './typings/events'
 import { StrongholdStatus } from './typings/wallet'
-import { showAppNotification } from '@core/notifications'
+import { showAppNotification } from '@core/notification'
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from './profile'
 

@@ -6,7 +6,7 @@
     import { Node, NodeInfo } from 'shared/lib/typings/node'
     import { closePopup } from '@core/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { setClipboard } from '@core/utils/os'
     import { cleanNodeAuth } from 'shared/lib/network'
 

@@ -1,4 +1,4 @@
-import type { NotificationData } from '@core/notifications'
+import type { NotificationData } from '@core/notification'
 
 import { DeepLinkContext, WalletOperation } from '../enums'
 import { SendOperationParameters } from './wallet-context.type'

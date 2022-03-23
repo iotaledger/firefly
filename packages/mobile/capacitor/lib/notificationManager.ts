@@ -1,4 +1,4 @@
-import { INotificationManager } from '@core/notifications'
+import { INotificationManager } from '@core/notification'
 
 /**
  * Create and show a native notification

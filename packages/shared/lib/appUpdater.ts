@@ -7,7 +7,7 @@ import {
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from '@core/notifications'
+} from '@core/notification'
 import { writable } from 'svelte/store'
 import { NativeProgress, VersionDetails } from './typings/appUpdater'
 

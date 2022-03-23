@@ -2,7 +2,7 @@
     import { Illustration, Link, Text } from 'shared/components'
     import { Platform } from '@core/platform'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { capitalize } from '@core/utils/format'
 

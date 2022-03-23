@@ -1,5 +1,5 @@
 import { Error } from '@core/error'
-import { INotificationManager } from '@core/notifications'
+import { INotificationManager } from '@core/notification'
 
 import { IDeepLinkManager } from '@common/deep-links'
 

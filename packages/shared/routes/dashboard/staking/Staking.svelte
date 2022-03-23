@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { accountToParticipate, participationAction, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from '@core/popup'

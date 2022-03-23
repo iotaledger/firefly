@@ -2,7 +2,7 @@
     import { Transition } from 'shared/components'
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
     import { Platform } from '@core/platform'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from '../../../lib/core/utils/crypto/crypto'
     import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from 'shared/lib/wallet'

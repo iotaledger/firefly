@@ -7,7 +7,7 @@
     import { goto } from '@core/utils/dom'
     import { localeDirectionality, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { Platform } from '@core/platform'
     import { openPopup, popupState } from '@core/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'

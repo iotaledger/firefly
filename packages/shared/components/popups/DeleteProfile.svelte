@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup } from '@core/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'

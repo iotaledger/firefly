@@ -18,7 +18,7 @@
         sendMigrationBundle,
         unselectedInputs,
     } from 'shared/lib/migration'
-    import { showAppNotification } from '@core/notifications'
+    import { showAppNotification } from '@core/notification'
     import { closePopup } from '@core/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/router'
