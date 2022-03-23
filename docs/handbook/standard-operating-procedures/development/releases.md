@@ -4,12 +4,6 @@ icon: rocket
 
 # Releases
 
-## Changelog
-
-| Version | Change | Author | Date |
-| - | - | - | - |
-| 1.0 | Intitial SOP for regular release, milestone release and hotfix releases | @Nicole | 21/02/2022 |
-
 ## Purpose
 
 This document details the standard operating procedure (SOP) for managing the releases of the Firefly Application, so that anyone one of the maintainers can correctly create a release.

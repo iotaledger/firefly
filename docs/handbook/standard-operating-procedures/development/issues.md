@@ -4,12 +4,6 @@ icon: issue-opened
 
 # Issues
 
-## Changelog
-
-| Version | Change | Author | Date |
-| - | - | - | - |
-| 1.0 | Intitial SOP for bug management process and support request process | @Nicole | 25/02/2022 |
-
 ## Purpose
 
 This document details the standard operating procedure (SOP) for maintaining issues that have been raised on GitHub; allowing all team members to remain consistent when organising and maintaining the issues backlog.
