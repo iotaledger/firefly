@@ -221,6 +221,7 @@
                 @apply cursor-pointer;
                 @apply text-center;
                 @apply text-18;
+                @apply rounded-none;
                 caret-color: transparent;
                 transition: opacity 1s, color 1s;
 
