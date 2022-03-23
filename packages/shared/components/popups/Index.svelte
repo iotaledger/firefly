@@ -12,7 +12,7 @@
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
-    import CreateAccount from './CreateAccount.svelte'
+    import AccountCreation from './AccountCreation.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -106,7 +106,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
-        createAccount: CreateAccount,
+        accountCreation: AccountCreation,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,

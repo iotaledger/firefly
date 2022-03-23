@@ -1,29 +1,50 @@
 <script lang="typescript">
-    import type { WalletAccount } from 'lib/typings/wallet'
-    import { AccountSwitcherModal, Icon, Text } from 'shared/components'
+    import type { AccountIdentifier } from 'lib/typings/account'
+    import { HR, Icon, Text } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
     import { activeProfile, getColor } from 'shared/lib/profile'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
 
     export let accounts: WalletAccount[] = []
-    export let onCreateAccount = (..._: any[]): void => {}
+    export let handleCreateAccountPress = (..._: any[]): void => {}
+    export let onAccountSelection = (..._: any[]): void => {}
 
-    let showModal = false
-
-    function toggleModal(): void {
-        showModal = !showModal
+    const handleAccountClick = (accountId: AccountIdentifier): void => {
+        setSelectedAccount(accountId)
+        selectedMessage.set(null)
+        onAccountSelection()
     }
 </script>
 
-<button on:click={toggleModal} class="flex flex-row justify-center items-center space-x-2">
-    <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
-    <Text type="h4">{$selectedAccount?.alias}</Text>
-    <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
-        <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
+<div>
+    <div class="accounts flex flex-col space-y-1 p-4 scrollable-y">
+        {#each accounts as account}
+            <button
+                on:click={() => handleAccountClick(account.id)}
+                class="{account.id === $selectedAccount?.id
+                    ? 'bg-gray-50 dark:bg-gray-800'
+                    : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
+            >
+                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                <Text secondary={account.id !== $selectedAccount?.id} type="h4">{account.alias}</Text>
+            </button>
+        {/each}
     </div>
-</button>
-<AccountSwitcherModal {onCreateAccount} {accounts} bind:isActive={showModal} />
+    <HR />
+    <button
+        class="w-full hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-2 px-7 py-4"
+        on:click={handleCreateAccountPress}
+    >
+        <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
+        <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
+    </button>
+</div>
 
 <style type="text/scss">
+    .accounts {
+        max-height: 40vh;
+    }
     button {
         .circle {
             @apply rounded-full;

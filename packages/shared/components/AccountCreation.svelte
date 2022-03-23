@@ -4,33 +4,21 @@
     import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
 
     export let error = ''
-    export let onCreate = (..._: any[]): void => {}
+    export let onAccountCreation = (..._: any[]): void => {}
+    export let onCancel = (..._: any[]): void => {}
+    export let isBusy = false
 
     const { accounts } = $wallet
 
     let accountAlias = ''
-    let isBusy = false
     let color = AccountColors.Blue
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
-
-    $: {
-        /**
-         * CAUTION: isBusy becomes true whenever the Stronghold password popup
-         * becomes active (by Wallet.svelte), so we must be sure that it gets
-         * set to false again in case the user cancels the popup. This is safe
-         * because it's within a reactive dependency.
-         */
-        if (!$popupState.active) {
-            isBusy = false
-        }
-    }
 
     const handleCreateClick = () => {
         const trimmedAccountAlias = accountAlias.trim()
@@ -53,7 +41,7 @@
 
             const _cancel = () => (isBusy = false)
             const _create = () =>
-                onCreate(trimmedAccountAlias, color, (err) => {
+                onAccountCreation(trimmedAccountAlias, color, (err) => {
                     isBusy = false
 
                     if (err) {
@@ -68,7 +56,7 @@
                             })
                         }
                     } else {
-                        closePopup()
+                        onCancel()
                     }
                 })
 
@@ -80,7 +68,7 @@
         }
     }
     const handleCancelClick = () => {
-        closePopup()
+        onCancel()
     }
 </script>
 

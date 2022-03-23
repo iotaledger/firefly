@@ -269,7 +269,7 @@
         }
     }
 
-    async function onCreateAccount(alias: string, color: string, onComplete) {
+    async function onAccountCreation(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias, color)
@@ -366,7 +366,7 @@
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
     <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
-    <TopNavigation {onCreateAccount} />
+    <TopNavigation {onAccountCreation} />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->

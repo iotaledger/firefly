@@ -24,6 +24,7 @@
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
+    export let onClose
 
     const dispatch = createEventDispatcher()
 
@@ -141,6 +142,7 @@
         )
         isOpen = false
         dispatch('close')
+        onClose()
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale

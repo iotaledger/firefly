@@ -1,16 +1,33 @@
 <script lang="typescript">
-    import { AccountSwitcher } from 'shared/components'
+    import { AccountNavigation } from 'shared/components'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { mobile } from 'shared/lib/app'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
+    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { selectedAccount } from 'shared/lib/wallet'
 
-    export let onCreateAccount = (..._: any[]): void => {}
+    export let onAccountCreation = (..._: any[]): void => {}
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
 </script>
 
 <div
-    class="bg-gray-200 dark:bg-gray-800 border-solid border-b border-gray-300 dark:border-gray-700 flex flex-row justify-center py-2 w-full"
+    style="--account-color: {color};"
+    class="{$mobile
+        ? 'account-color top-navigation h-20 items-center'
+        : 'bg-gray-200 border-solid border-b border-gray-300 py-2'} dark:bg-gray-800 dark:border-gray-700 flex flex-row justify-center w-full"
 >
-    <AccountSwitcher {onCreateAccount} accounts={$viewableAccounts} />
+    <AccountNavigation {onAccountCreation} accounts={$viewableAccounts} />
 </div>
+
+<style type="text/scss">
+    .account-color {
+        background-color: var(--account-color);
+    }
+    .top-navigation {
+        padding-top: calc(env(safe-area-inset-top));
+    }
+</style>
