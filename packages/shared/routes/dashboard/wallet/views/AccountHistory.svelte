@@ -5,6 +5,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { mobile } from 'shared/lib/app'
     import { walletSetupType } from 'shared/lib/router'
     import {
         api,
@@ -153,7 +154,7 @@
     }
 </script>
 
-<div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="{$mobile ? 'pt-4 px-6 pb-8' : 'p-8'} h-full  flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
         {#if $selectedMessage}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
@@ -162,30 +163,42 @@
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5">
-                    {localize('general.transactions')}
-                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
-                </Text>
-                {#if !$selectedMessage}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon
-                            icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
-                    </button>
+                {#if !$mobile}
+                    <Text type="h5">
+                        {localize('general.transactions')}
+                        <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
+                    </Text>
+                    {#if !$selectedMessage}
+                        <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                            <Icon
+                                icon="refresh"
+                                classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                            />
+                        </button>
+                    {/if}
                 {/if}
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
-                <ul class="flex flex-row justify-between space-x-8">
+                <ul
+                    class="{$mobile
+                        ? 'bg-gray-100 h-10 items-center rounded-xl space-x-3 p-1'
+                        : 'space-x-8'} flex flex-row justify-between "
+                >
                     {#each filters as filter, i}
                         <li on:click={() => (activeFilterIndex = i)}>
                             <Text
-                                type="p"
+                                type={$mobile ? 'h5' : 'p'}
                                 overrideColor
                                 classes="cursor-pointer
                             {activeFilterIndex === i
-                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
+                                    ? `${
+                                          $mobile
+                                              ? 'flex justify-center items-center rounded-xl bg-white h-8 w-20'
+                                              : 'border-b-2 border-blue-500 border-solid'
+                                      } text-blue-500`
+                                    : `${
+                                          $mobile ? 'flex justify-center items-center h-8 w-20' : ''
+                                      } text-gray-500 hover:text-gray-600 dark:hover:text-gray-300`}"
                             >
                                 {localize(`general.${filter}`)}
                             </Text>
@@ -193,11 +206,20 @@
                     {/each}
                 </ul>
                 <button on:click={() => (searchActive = !searchActive)}>
-                    <Icon
-                        icon="search"
-                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
-                    cursor-pointer ml-2"
-                    />
+                    <div
+                        class={$mobile &&
+                            'flex border-solid border bg-gray-100 dark:bg-gray-500 rounded-xl h-10 w-10 justify-center items-center'}
+                    >
+                        <Icon
+                            icon="search"
+                            height={$mobile ? '26' : '24'}
+                            width={$mobile ? '26' : '24'}
+                            classes="{$mobile
+                                ? 'text-blue-500'
+                                : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-100 ml-2'} dark:text-white 
+                    cursor-pointer "
+                        />
+                    </div>
                 </button>
                 <div
                     class="z-0 flex items-center absolute left-0 transition-all {searchActive
