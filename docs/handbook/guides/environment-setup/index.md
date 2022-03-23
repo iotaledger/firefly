@@ -10,11 +10,9 @@ Welcome to the Firefly environment setup guide! Here you will find all of the in
 
 The following __must__ be installed on all platforms:
 
-- [Node.js](https://nodejs.org/en/) (`14.19.0+`)
+- [Node.js](https://nodejs.org/en/) (`16.14.1`)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install) (`1.22.17`)
 - [Rust](https://www.rust-lang.org/tools/install) (LTS)
-
-:warning: There may be problems with v15+ on Windows.
 
 ### MacOS
 

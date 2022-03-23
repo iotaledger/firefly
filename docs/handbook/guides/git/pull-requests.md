@@ -4,7 +4,7 @@ icon: git-pull-request
 
 # Pull Requests
 
-## Creating a Pull Request
+## Creating
 
 ### When to create a Pull Request
 
@@ -27,7 +27,7 @@ It is important to keep the formatting of PRs clean and consistent. In addition 
   - All code or package names __should__ be formatted as `inline code`. This is best for things like dependencies as specific variable names are subject to change.
 - Instructional text (like [this](https://github.com/iotaledger/firefly/blob/develop/.github/pull_request_template.md?plain=1#L13)) in the template __should__ be removed in PR descriptions.
 
-### Pull Request Labels
+### What labels to use
 
 Please ensure all PRs have a ___type___ label, additional labels can be added where deemed appropriate.
 
@@ -43,9 +43,9 @@ Please ensure all PRs have a ___type___ label, additional labels can be added wh
 
 * `do not merge`: Do not merge into any working branches
 
-## Reviewing a Pull Request
+## Reviewing
 
-### Requesting a Review
+### Requesting a review
 
 Before requesting a review please make sure:
 
@@ -58,7 +58,7 @@ Before requesting a review please make sure:
 
 Once your PR fulfils the above criteria, you are free to request a review from one of the maintainers.
 
-### Completing a Review
+### Completing a review
 
 There are no limitations on who can review a PR, the more eyes on the code the better. All maintainers, Firefly developers and contributors are encouraged to review as many PRs as possible, as well as community members.
 
@@ -75,7 +75,7 @@ You may also want to:
 - Suggest changes to be made by the author
 - Commit your own small changes if you have the time
 
-## Merging a Pull Request
+## Merging
 
 ### Merge Conditions
 
