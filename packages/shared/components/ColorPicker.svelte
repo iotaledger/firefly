@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Text, Icon, Tooltip } from 'shared/components'
     import { AccountColors } from 'shared/lib/wallet'
-    import { isBright } from 'shared/lib/helpers'
-    import { clickOutside } from '@core/utils/ui'
+    import { clickOutside, isBright } from '@core/utils/ui'
 
     export let active
     export let locale

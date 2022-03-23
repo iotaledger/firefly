@@ -1,4 +1,5 @@
-import { persistent } from 'shared/lib/helpers'
+import { persistent } from '@core/utils/storage'
+
 import { Error } from './typings/error'
 
 export const errorLog = persistent<Error[]>('errorLog', [])

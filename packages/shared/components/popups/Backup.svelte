@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
     import { Platform } from '@core/platform'
-    import { getBackupWarningColor } from 'shared/lib/helpers'
+    import { getDefaultStrongholdName } from '@core/utils/crypto'
+    import { getBackupWarningColor } from '@core/utils/ui'
     import { closePopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import { getDefaultStrongholdName } from '../../lib/core/utils/crypto/crypto'
     import { api } from 'shared/lib/wallet'
     import { formatDate } from '@core/i18n'
     import { Locale } from '@core/i18n'

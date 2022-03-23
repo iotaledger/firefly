@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Text, Tooltip } from 'shared/components'
-    import { getInitials } from 'shared/lib/helpers'
+    import { getInitials } from '@core/utils/format'
     import { localize } from '@core/i18n'
-    import { isBright } from 'shared/lib/helpers'
+    import { isBright } from '@core/utils/ui'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
 

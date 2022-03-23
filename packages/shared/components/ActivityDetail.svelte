@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
+    import { getInitials, truncateString } from '@core/utils/format'
+    import { isBright } from '@core/utils/ui'
     import { formatDate } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from '@core/platform'

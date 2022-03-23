@@ -1,7 +1,7 @@
 <script lang="typescript">
     import Chart from 'chart.js'
     import { appSettings } from 'shared/lib/appSettings'
-    import { convertHexToRGBA } from 'shared/lib/helpers'
+    import { convertHexToRGBA } from '@core/utils/ui'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'

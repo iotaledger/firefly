@@ -1,4 +1,33 @@
 /**
+ * Create a deep copy of an object
+ * @param obj The object to copy
+ * @returns The copied object
+ */
+export function deepCopy(obj: unknown): unknown {
+    if (typeof obj !== 'object' || obj === null) {
+        return obj
+    }
+
+    if (obj instanceof Date) {
+        return new Date(obj.getTime())
+    }
+
+    if (obj instanceof Array) {
+        return obj.reduce((arr, item, i) => {
+            arr[i] = deepCopy(item)
+            return arr
+        }, [])
+    }
+
+    if (obj instanceof Object) {
+        return Object.keys(obj).reduce((newObj, key) => {
+            newObj[key] = deepCopy(obj[key])
+            return newObj
+        }, {})
+    }
+}
+
+/**
  * Returns a new object of the same type with updated data.
  */
 export function migrateObjects<T>(oldObj: T, newObj: T): T {

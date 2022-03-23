@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
+    import { Settings } from 'shared/routes'
     import { mobile } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { getInitials } from '@core/utils/format'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { Settings } from 'shared/routes'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

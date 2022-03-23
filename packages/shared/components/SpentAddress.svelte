@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { truncateString } from 'shared/lib/helpers'
+    import { truncateString } from '@core/utils/format'
     import { RiskLevel } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'

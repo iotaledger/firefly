@@ -27,7 +27,7 @@
     import { capitalize } from '@core/utils/format'
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { isBright } from 'shared/lib/helpers'
+    import { isBright } from '@core/utils/ui'
 
     export let name = ''
     export let balance = ''

@@ -2,7 +2,7 @@
     import { fade } from 'svelte/transition'
     import { Icon, Modal, Text, HR } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { getInitials } from '@core/utils/format'
     import { activeProfile } from 'shared/lib/profile'
     import { openSettings } from 'shared/lib/router'
     import { Locale } from '@core/i18n'

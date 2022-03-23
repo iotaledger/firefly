@@ -1,10 +1,12 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
+import { getTrimmedLength } from '@core/utils/format'
+import { persistent } from '@core/utils/storage'
+import { validateFilenameChars } from '@core/utils/validation'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId } from '@core/utils/random'
-import { migrateObjects } from '@core/utils/helpers'
+import { migrateObjects } from '@core/utils/object'
 import {
     asyncDeleteStorage,
     destroyActor,

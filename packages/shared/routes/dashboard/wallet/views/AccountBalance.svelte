@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BalanceSummary } from 'shared/components'
     import { Locale } from '@core/i18n'
-    import { isBright } from 'shared/lib/helpers'
+    import { isBright } from '@core/utils/ui'
 
     export let locale: Locale
 

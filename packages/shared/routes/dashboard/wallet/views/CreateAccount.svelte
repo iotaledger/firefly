@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Input, Spinner, Text, AccountTile, ColorPicker } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength } from '@core/utils/format'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors } from 'shared/lib/wallet'

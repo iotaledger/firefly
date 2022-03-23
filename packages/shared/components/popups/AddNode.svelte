@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
-    import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
+    import { stripSpaces, stripTrailingSlash } from '@core/utils/format'
     import { cleanNodeAuth, getNetworkById, checkNodeUrlValidity } from 'shared/lib/network'
     import { showAppNotification } from '@core/notifications'
     import { closePopup } from '@core/popup'

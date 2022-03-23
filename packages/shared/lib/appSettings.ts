@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { persistent } from './helpers'
+import { persistent } from '@core/utils/storage'
 import { AppSettings, AppTheme } from './typings/app'
 
 /**

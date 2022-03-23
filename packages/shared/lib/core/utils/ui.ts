@@ -1,5 +1,7 @@
 import { Event } from '@lib/typings/events'
 
+import { isRecentDate } from './time'
+
 interface IElement {
     addEventListener(event: Event<unknown> | string, unknown)
     removeEventListener(event: Event<unknown> | string, handler: unknown): void
@@ -63,6 +65,25 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
 }
 
 /**
+ * Convert HEX color to RGBA
+ * @param hexCode: hex color to convert
+ * @param opacity: [0,100], default = 100
+ */
+export const convertHexToRGBA = (hexCode: string, opacity: number = 100): string => {
+    let hex = hexCode.replace('#', '')
+
+    if (hex.length === 3) {
+        hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
+    }
+
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+
+    return `rgba(${r},${g},${b},${opacity / 100})`
+}
+
+/**
  * Returns a callback delayed by a specified duration (milliseconds).
  */
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
@@ -72,5 +93,36 @@ export function debounce(callback: () => void, wait = 500): (...args: unknown[])
         const context = this
         clearTimeout(_timeout)
         _timeout = setTimeout(() => callback.apply(context, args), wait)
+    }
+}
+
+/**
+ * Returns warning text color for last Stronghold backup
+ * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
+ */
+export const getBackupWarningColor = (lastBackupDate: Date): string => {
+    if (!(lastBackupDate instanceof Date)) {
+        return 'red'
+    }
+    const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
+
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
+}
+
+/**
+ * Returns a boolean indicating if color is bright using YIQ conversion
+ * @param color The color to be tested (can be HEX or RGB)
+ * @returns Boolean true if color is bright
+ */
+export const isBright = (color: string): boolean => {
+    if (color) {
+        const rgb =
+            color.includes('#') && color.length >= 7
+                ? color.match(/\w\w/g)?.map((x) => parseInt(x, 16))
+                : color.match(/[0-9]+/g)?.map((c) => parseInt(c, 10))
+        if (rgb) {
+            const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
+            return yiq >= 186
+        }
     }
 }

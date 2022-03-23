@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { DashboardPane, Drawer } from 'shared/components'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
-    import { deepCopy } from 'shared/lib/helpers'
+    import { deepCopy } from '@core/utils/object'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
     import { showAppNotification } from '@core/notifications'

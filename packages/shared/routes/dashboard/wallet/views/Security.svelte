@@ -2,14 +2,15 @@
     import { onDestroy, onMount } from 'svelte'
     import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { diffDates, isRecentDate } from '@core/utils/time'
+    import { getBackupWarningColor } from '@core/utils/ui'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from '@core/notifications'
     import { openPopup } from '@core/popup'
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { Locale, LocaleArgs } from '@core/i18n'
+    import { Locale, LocaleArguments } from '@core/i18n'
     import { DateDiff } from 'shared/lib/typings/wallet'
 
     export let locale: Locale
@@ -58,7 +59,7 @@
     }
 
     function checkHardwareDeviceStatus(state: LedgerDeviceState): void {
-        const values: LocaleArgs =
+        const values: LocaleArguments =
             state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 
