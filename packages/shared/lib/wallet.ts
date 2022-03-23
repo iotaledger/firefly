@@ -6,6 +6,7 @@ import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from '@core/utils/object'
 import { localize } from '@core/i18n'
+import { api } from '@core/api'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
@@ -37,7 +38,6 @@ import {
     WalletAccount,
     WalletState,
 } from './typings/wallet'
-import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
@@ -138,50 +138,6 @@ export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
-
-export const api: IWalletApi = new Proxy(
-    { ...WalletApi },
-    {
-        get: (target, propKey) => {
-            /* eslint-disable @typescript-eslint/no-explicit-any */
-            const _handleCallbackError = (err: any) => {
-                const title = `Callback Error ${propKey.toString()}`
-
-                console.error(title, err)
-                void Platform.unhandledException(title, { message: err?.message, stack: err?.stack })
-            }
-
-            /* eslint-disable @typescript-eslint/no-explicit-any */
-            const _handleCallbackResult = (args: any[], idx: number, result: 'onSuccess' | 'onError'): any[] => {
-                const originalResultFn = args[idx][result]
-
-                args[idx][result] = (payload) => {
-                    try {
-                        originalResultFn(payload)
-                    } catch (err) {
-                        _handleCallbackError(err)
-                    }
-                }
-
-                return args
-            }
-
-            const originalMethod = target[propKey]
-
-            return (...args) => {
-                for (let i = args.length - 1; i >= 0; i--) {
-                    if (args[i]?.onSuccess) {
-                        args = _handleCallbackResult(args, i, 'onSuccess')
-                    } else if (args[i]?.onError) {
-                        args = _handleCallbackResult(args, i, 'onError')
-                    }
-                }
-
-                return originalMethod.apply(target, args)
-            }
-        },
-    }
-)
 
 export const getWalletDataPath = async (): Promise<string> => {
     const appPath = await Platform.getUserDataPath()

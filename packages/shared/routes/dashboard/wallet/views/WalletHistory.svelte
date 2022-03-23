@@ -9,8 +9,8 @@
     import { Locale } from '@core/i18n'
     import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
+    import { api } from '@core/api'
     import {
-        api,
         asyncSyncAccounts,
         getSyncAccountOptions,
         isFirstManualSync,

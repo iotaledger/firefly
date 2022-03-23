@@ -5,7 +5,7 @@
     import { getBackupWarningColor } from '@core/utils/ui'
     import { closePopup } from '@core/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { formatDate } from '@core/i18n'
     import { Locale } from '@core/i18n'
 

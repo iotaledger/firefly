@@ -9,7 +9,7 @@
     import { getDefaultClientOptions } from 'shared/lib/network'
     import { activeProfile } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
-    import { api } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale

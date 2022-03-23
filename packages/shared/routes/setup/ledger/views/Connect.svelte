@@ -13,7 +13,7 @@
     import { walletSetupType } from 'shared/lib/router'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { api } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
 

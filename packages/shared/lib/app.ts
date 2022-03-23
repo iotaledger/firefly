@@ -9,7 +9,8 @@ import { resetParticipation } from './participation'
 import { closePopup } from '@core/popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { api, destroyActor, resetWallet } from './wallet'
+import { destroyActor, resetWallet } from './wallet'
+import { api } from '@core/api'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**

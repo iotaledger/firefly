@@ -5,7 +5,7 @@
     import { Platform } from '@core/platform'
     import { PIN_LENGTH } from '@core/utils/validation'
     import { activeProfile } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { api } from '@core/api'
 
     let currentPincode = ''
     let newPincode = ''

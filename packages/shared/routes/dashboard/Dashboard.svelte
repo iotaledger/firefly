@@ -25,8 +25,8 @@
     } from 'shared/lib/router'
     import { Locale } from '@core/i18n'
     import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { api } from '@core/api'
     import {
-        api,
         isBackgroundSyncing,
         selectedAccountId,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,

@@ -21,7 +21,7 @@ import {
 } from 'shared/lib/typings/migration'
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
-import { api, wallet } from 'shared/lib/wallet'
+import { api } from '@core/api'
 import { derived, get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@core/notification'

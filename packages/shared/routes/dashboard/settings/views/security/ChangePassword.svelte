@@ -2,7 +2,8 @@
     import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
-    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import zxcvbn from 'zxcvbn'
 
     export let exportStronghold: (password, callback?: (cancelled: boolean, err?) => void) => void

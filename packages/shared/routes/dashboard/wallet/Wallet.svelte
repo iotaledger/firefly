@@ -27,7 +27,6 @@
         WalletAccount,
     } from 'shared/lib/typings/wallet'
     import {
-        api,
         asyncCreateAccount,
         asyncSyncAccountOffline,
         asyncSyncAccounts,
@@ -50,6 +49,7 @@
         wallet,
         addMessagesPair,
     } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'

@@ -6,7 +6,8 @@
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { setRoute } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
+    import { asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'
 

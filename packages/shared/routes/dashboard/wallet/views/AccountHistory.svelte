@@ -6,7 +6,6 @@
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import {
-        api,
         isSyncing,
         selectedAccountId,
         selectedMessage,
@@ -14,6 +13,7 @@
         receiverAddressesFromTransactionPayload,
         getIncomingFlag,
     } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { AccountMessage } from 'shared/lib/typings/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { isValueInUnitRange, unitToValue } from '@core/utils/units'

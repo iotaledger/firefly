@@ -13,7 +13,7 @@ import { ErrorType } from '@lib/typings/events'
 import { ErrorTypes as ValidatorErrorTypes } from '@lib/typings/validator'
 import { Platform } from '@core/platform/platform'
 import { NodePlugin } from '@lib/typings/node'
-import { IWalletApi } from '@lib/typings/walletApi'
+import { IWalletApi } from '@core/api'
 import { IWalletActor } from '@lib/typings/walletActor'
 
 import { logError } from './error-logger'

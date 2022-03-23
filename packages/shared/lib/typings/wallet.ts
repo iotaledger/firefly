@@ -1,3 +1,5 @@
+import { Writable } from 'svelte/store'
+
 import { AccountIdentifier } from './account'
 import { Bridge, CommunicationIds } from './bridge'
 import { ClientOptions } from './client'
@@ -5,7 +7,6 @@ import { Transfer } from './message'
 import { MnemonicPayload } from './mnemonic'
 import { Account } from './account'
 import { Message } from './message'
-import { Writable } from 'svelte/store'
 import { HistoryDataProps } from './market'
 
 export interface LabeledWalletAccount extends WalletAccount {

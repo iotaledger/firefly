@@ -1,14 +1,4 @@
 import {
-    ParticipateResponsePayload,
-    Participation,
-    ParticipationEvent,
-    ParticipationOverviewResponse,
-} from 'shared/lib/participation/types'
-import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
-import { Address } from './address'
-import { GetMigrationAddressResponse } from './bridge'
-import { ClientOptions } from './client'
-import {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
     ErrorEventPayload,
@@ -18,12 +8,22 @@ import {
     ReattachmentEventPayload,
     TransactionEventPayload,
     TransferProgressEventPayload,
-} from './events'
-import { LedgerStatus } from './ledger'
-import { Message } from './message'
-import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
-import { NodeAuth, NodeInfo } from './node'
-import { Duration, StrongholdStatus } from './wallet'
+} from '@lib/typings/events'
+import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from '@lib/typings/account'
+import { Address } from '@lib/typings/address'
+import { Duration, StrongholdStatus } from '@lib/typings/wallet'
+import { Message } from '@lib/typings/message'
+import { ClientOptions } from '@lib/typings/client'
+import { NodeAuth, NodeInfo } from '@lib/typings/node'
+import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from '@lib/typings/migration'
+import { GetMigrationAddressResponse } from '@lib/typings/bridge'
+import { LedgerStatus } from '@lib/typings/ledger'
+import {
+    ParticipateResponsePayload,
+    Participation,
+    ParticipationEvent,
+    ParticipationOverviewResponse,
+} from '@lib/participation/types'
 
 export interface IWalletApi {
     generateMnemonic(callbacks: {

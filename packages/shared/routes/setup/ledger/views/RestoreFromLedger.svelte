@@ -2,7 +2,7 @@
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { displayNotificationForLedgerProfile, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { getDefaultClientOptions } from 'shared/lib/network'
-    import { api } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'
 

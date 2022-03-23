@@ -3,7 +3,8 @@
     import { getTrimmedLength } from '@core/utils/format'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { api } from '@core/api'
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
