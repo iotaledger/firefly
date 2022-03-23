@@ -29,11 +29,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701321489060" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701324001359" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321489060" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324001359" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321489060" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324001359" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -345,6 +345,7 @@
 <li>Suggest changes to be made by the author</li>
 <li>Commit your own small changes if you have the time</li>
 </ul>
+<p><span class="docs-emoji">&#x26A0;&#xFE0F;</span> Sometimes dependency changes within PRs can cause painfully long build times, which then impedes the review process. It is <strong>strongly</strong> recommended to have a separate repository clone simply for reviewing PRs to ensure that you can continue doing your own work easily.</p>
 <doc-anchor-target id="merging">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#merging">#</doc-anchor-trigger>

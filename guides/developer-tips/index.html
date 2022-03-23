@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701321489060" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701324001359" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321489060" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324001359" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321489060" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701321489060" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324001359" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701324001359" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -234,67 +234,78 @@
     </h1>
 </doc-anchor-target>
 <p>Welcome to the Firefly developer tips! Here you will find all sorts of helpful information for general things across the codebase.</p>
-<doc-anchor-target id="linting--formatting">
+<doc-anchor-target id="building-and-running">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#linting--formatting">#</doc-anchor-trigger>
-        <span>Linting &amp; Formatting</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#building-and-running">#</doc-anchor-trigger>
+        <span>Building and Running</span>
     </h2>
 </doc-anchor-target>
-<p>We use <a href="https://prettier.io/">Prettier</a> and <a href="https://eslint.org/">ESLint</a> to handle the TS/JS code and <a href="https://github.com/rust-lang/rustfmt#rustfmt----">rustfmt</a> for Rust. With the exception of a few files and directories, all of the code within the Firefly repository is run through a linting process to ensure cleanliness and consistency in terms of format, style, syntax, and more. This process happens both locally in a pre-commit Git hook (via <a href="https://github.com/typicode/husky#husky">Husky</a>) as well as in a continuous integration workflow (see <a href="https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml"><code v-pre>ci.lint.yml</code></a>).</p>
-<doc-anchor-target id="tsjs">
+<doc-anchor-target id="backend">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tsjs">#</doc-anchor-trigger>
-        <span>TS/JS</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#backend">#</doc-anchor-trigger>
+        <span>Backend</span>
     </h3>
 </doc-anchor-target>
-<p>All of the formatting and linting commands can be run from the root directory.</p>
-<p>With formatting there are two options to either overwrite files with fixes or just simply check them for correctness:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># 1 - fix and overwrite files
-yarn format
-
-# 2 - check files 
-yarn format-check</code></pre>
-</doc-codeblock></div>
-<p>For linting there are three options to either check the files, check the files in debug mode, or fix and overwrite the files:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># 1 - check files
-yarn lint
-
-# 2 - check files in debug mode
-yarn lint-debug
-
-# 3 - fix and overwrite files
-yarn lint-fix</code></pre>
-</doc-codeblock></div>
-<p><em>NOTE: Svelte component files (<code v-pre>*.svelte</code>) are checked in addition to regular <code v-pre>*.ts</code> source code files.</em></p>
-<doc-anchor-target id="rust">
+<p>It is likely that you <strong>will NOT</strong> have to re-compile the backend (NodeJS <em>or</em> Capacitor) bindings, unless you have either changed or modified specific &quot;bridge&quot; functions (like <a href="https://github.com/iotaledger/firefly/blob/develop/packages/shared/lib/typings/account.ts#L66">this one</a>).</p>
+<doc-anchor-target id="desktop">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#rust">#</doc-anchor-trigger>
-        <span>Rust</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#desktop">#</doc-anchor-trigger>
+        <span>Desktop</span>
     </h3>
 </doc-anchor-target>
-<p>The following commands are to be run from the <code v-pre>packages/backend</code> folder as this is where the Rust bindings for <a href="https://github.com/iotaledger/wallet.rs">wallet.rs</a> live.</p>
-<p>We use <code v-pre>rustfmt</code> configured with the nightly toolchain to allow some features. To install:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># install the nightly toolchain
-rustup component add rustfmt --toolchain nightly</code></pre>
-</doc-codeblock></div>
-<p>Then run a formatting check:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># check format in current working directory
-cargo +nightly fmt -- --check</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="tips-and-tricks">
+<doc-anchor-target id="svelte-components">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#svelte-components">#</doc-anchor-trigger>
+        <span>Svelte Components</span>
+    </h4>
+</doc-anchor-target>
+<p>If simply making changes to Svelte component files, it is not usually required to fully refresh the development instance (it is typically refreshed for you).</p>
+<p>In some cases, the changes can cause unrecoverable errors unless you refresh via the developer console. This usually happens when changing imports or adding a new Svelte file.</p>
+<doc-anchor-target id="typescript-library">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#typescript-library">#</doc-anchor-trigger>
+        <span>TypeScript Library</span>
+    </h4>
+</doc-anchor-target>
+<p>If making changes within the TypeScript library files, it is usually necessary to refresh the development instance via the console so load the changes.</p>
+<p>If editing files that are imported within <code v-pre>packages/desktop</code>, then it will be necessary to fully rebuild and restart the development instance. In particular, the following files require rebuilding:</p>
+<ul>
+<li><code v-pre>shared/lib/core/shell/*.ts</code></li>
+<li><code v-pre>shared/lib/core/validation/*.ts</code></li>
+</ul>
+<doc-anchor-target id="mobile">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mobile">#</doc-anchor-trigger>
+        <span>Mobile</span>
+    </h3>
+</doc-anchor-target>
+<p><em>TBD</em></p>
+<doc-anchor-target id="common-processes">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tips-and-tricks">#</doc-anchor-trigger>
-        <span>Tips and Tricks</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-processes">#</doc-anchor-trigger>
+        <span>Common Processes</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="add-a-svelte-page">
+<doc-anchor-target id="adding-an-icon">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#add-a-svelte-page">#</doc-anchor-trigger>
-        <span>Add a Svelte Page</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-an-icon">#</doc-anchor-trigger>
+        <span>Adding an icon</span>
+    </h3>
+</doc-anchor-target>
+<p>To add a new (SVG-based) icon for use in the application, simply create a new object entry <a href="https://github.com/iotaledger/firefly/blob/develop/packages/shared/components/icon/icons.js#L1">here</a>.</p>
+<p>Most entries here simply include <code v-pre>width</code>, <code v-pre>height</code>, and <code v-pre>path</code> properties, however please be sure that whatever icon you are adding contains all of the necessary SVG data to be displayed correctly (e.g. <code v-pre>fillRule</code>s, <code v-pre>clipRule</code>s, <code v-pre>strokeWidth</code>).</p>
+<p>If the icon is still not displaying properly, it is likely that it was either exported incorrectly or can be flattened in the design software <strong>before</strong> being exported.</p>
+<doc-anchor-target id="adding-a-setting">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-a-setting">#</doc-anchor-trigger>
+        <span>Adding a setting</span>
+    </h3>
+</doc-anchor-target>
+<p><em>TBD</em></p>
+<doc-anchor-target id="adding-a-svelte-page">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-a-svelte-page">#</doc-anchor-trigger>
+        <span>Adding a Svelte page</span>
     </h3>
 </doc-anchor-target>
 <p>There are a few steps besides just creating the component file before it can work in Firefly:</p>
@@ -304,24 +315,30 @@ cargo +nightly fmt -- --check</code></pre>
 <li>Add the correct HTML (<code v-pre>Route</code> nested with <code v-pre>&lt;Page&gt;</code> element) in <code v-pre>packages/desktop/App.svelte</code></li>
 <li>Change logic as needed in <code v-pre>routerNext</code> in <code v-pre>packages/shared/lib/router.ts</code></li>
 </ul>
-<doc-anchor-target id="expose-an-api-endpoint--library-function">
+<doc-anchor-target id="exposing-an-api-endpoint">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#expose-an-api-endpoint--library-function">#</doc-anchor-trigger>
-        <span>Expose an API Endpoint / Library Function</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#exposing-an-api-endpoint">#</doc-anchor-trigger>
+        <span>Exposing an API endpoint</span>
     </h3>
 </doc-anchor-target>
 <p><code v-pre>wallet.rs</code> has an actor interface, which makes it easy to call functions via messages. To expose a new function one needs to add it to the <code v-pre>MessageType</code> and <code v-pre>ResponseType</code> enums in <code v-pre>wallet.rs/src/actor/message.rs</code> and to the <code v-pre>handle</code> method inside of <code v-pre>impl WalletMessageHandler {</code> in <code v-pre>wallet.rs/src/actor/mod.rs</code>. An example can be seen in this <a href="https://github.com/iotaledger/wallet.rs/commit/6de213583b2811cc4379a7698bc0812201228bd1#">commit</a>.</p>
-<doc-anchor-target id="troubleshoot">
+<doc-anchor-target id="troubleshooting">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#troubleshoot">#</doc-anchor-trigger>
-        <span>Troubleshoot</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#troubleshooting">#</doc-anchor-trigger>
+        <span>Troubleshooting</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="backend">
+<doc-anchor-target id="dependencies">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#backend">#</doc-anchor-trigger>
-        <span>Backend</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dependencies">#</doc-anchor-trigger>
+        <span>Dependencies</span>
     </h3>
+</doc-anchor-target>
+<doc-anchor-target id="backend-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#backend-1">#</doc-anchor-trigger>
+        <span>Backend</span>
+    </h4>
 </doc-anchor-target>
 <p>Firefly uses <a href="https://github.com/iotaledger/wallet.rs">wallet.rs</a> in the backend to handle functionality around value-based transfers.
 See its <a href="https://github.com/iotaledger/wallet.rs#dependencies">REAMDE</a> for the required dependencies.</p>
@@ -344,10 +361,31 @@ cargo install cargo-cache
 # remove the build cache from cargo
 cargo cache -a</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="debug">
+<doc-anchor-target id="desktop-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#desktop-1">#</doc-anchor-trigger>
+        <span>Desktop</span>
+    </h4>
+</doc-anchor-target>
+<p>There may be times when Firefly just won&#x27;t seem to compile correctly or you&#x27;re getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (MacOS: <code v-pre>Cmd+R</code>, Linux/Windows: <code v-pre>Ctrl+R</code>) might solve your issue. Another approach is updating the yarn dependencies:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># in root dir
+yarn
+
+# in packages/backend/bindings/node
+yarn</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="memory-usage">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#debug">#</doc-anchor-trigger>
-        <span>Debug</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#memory-usage">#</doc-anchor-trigger>
+        <span>Memory Usage</span>
+    </h3>
+</doc-anchor-target>
+<p>When developing on Firefly, it is possible that your heap runs out of memory. This has to do with the heap space nodeJS allocates (on Linux this is 2048MB). Setting the heap space to 4096MB fixes this issue. Add the following line to your <code v-pre>~/.bashrc</code> file: <code v-pre>export NODE_OPTIONS=--max_old_space_size=4096</code>.</p>
+<doc-anchor-target id="walletrs">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#walletrs">#</doc-anchor-trigger>
+        <span><code v-pre>wallet.rs</code></span>
     </h3>
 </doc-anchor-target>
 <p>To debug what&#x27;s going on in the backend you can add</p>
@@ -360,28 +398,7 @@ cargo cache -a</code></pre>
     }]
 })</code></pre>
 </doc-codeblock></div>
-<p>in <code v-pre>desktop/electron/preload.js</code> after <code v-pre>const Wallet = binding</code>. Debug logs will then be added to the <code v-pre>wallet.log</code> file.</p>
-<doc-anchor-target id="desktop">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#desktop">#</doc-anchor-trigger>
-        <span>Desktop</span>
-    </h3>
-</doc-anchor-target>
-<p>There may be times when Firefly just won&#x27;t seem to compile correctly or you&#x27;re getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (ctrl + r) might solve your issue. Another approach is updating the yarn dependencies:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in root dir
-yarn
-
-# in packages/backend/bindings/node
-yarn</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="javascript-heap-out-of-memory">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#javascript-heap-out-of-memory">#</doc-anchor-trigger>
-        <span>JavaScript heap out of memory</span>
-    </h4>
-</doc-anchor-target>
-<p>When developing on Firefly, it is possible that your heap runs out of memory. This has to do with the heap space nodeJS allocates (on Linux this is 2048MB). Setting the heap space to 4096MB fixes this issue. Add the following line to your <code v-pre>~/.bashrc</code> file: <code v-pre>export NODE_OPTIONS=--max_old_space_size=4096</code>.</p>
+<p>in <code v-pre>desktop/electron/preload.js</code> after <code v-pre>const Wallet = binding</code>. Debug logs will then be added to the <code v-pre>wallet.log</code> file in the same location where Firefly or the Electron / Capacitor development instance is installed.</p>
 
                                 
                                 <!-- Required only on API pages -->

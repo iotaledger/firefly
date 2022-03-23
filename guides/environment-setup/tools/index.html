@@ -12,28 +12,29 @@
     <!-- Primary Meta Tags -->
     <title>Tools | Firefly Team Handbook</title>
     <meta name="title" content="Tools | Firefly Team Handbook">
-    <meta name="description" content="TODO" />
+    <meta name="description" content="We use Prettier and ESLint to handle the TS/JS code and rustfmt for Rust." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/tools/">
     <meta property="og:title" content="Tools | Firefly Team Handbook">
-    <meta property="og:description" content="TODO">
+    <meta property="og:description" content="We use Prettier and ESLint to handle the TS/JS code and rustfmt for Rust.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/environment-setup/tools/">
     <meta property="twitter:title" content="Tools | Firefly Team Handbook">
-    <meta property="twitter:description" content="TODO">
+    <meta property="twitter:description" content="We use Prettier and ESLint to handle the TS/JS code and rustfmt for Rust.">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701321489060" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.1.701324001359" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701321489060" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324001359" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701321489060" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324001359" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701324001359" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -232,7 +233,57 @@
         <span>Tools</span>
     </h1>
 </doc-anchor-target>
-<p><em>TODO</em></p>
+<doc-anchor-target id="linting--formatting">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#linting--formatting">#</doc-anchor-trigger>
+        <span>Linting &amp; Formatting</span>
+    </h2>
+</doc-anchor-target>
+<p>We use <a href="https://prettier.io/">Prettier</a> and <a href="https://eslint.org/">ESLint</a> to handle the TS/JS code and <a href="https://github.com/rust-lang/rustfmt#rustfmt----">rustfmt</a> for Rust. With the exception of a few files and directories, all of the code within the Firefly repository is run through a linting process to ensure cleanliness and consistency in terms of format, style, syntax, and more. This process happens both locally in a pre-commit Git hook (via <a href="https://github.com/typicode/husky#husky">Husky</a>) as well as in a continuous integration workflow (see <a href="https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml"><code v-pre>ci.lint.yml</code></a>).</p>
+<doc-anchor-target id="tsjs">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tsjs">#</doc-anchor-trigger>
+        <span>TS/JS</span>
+    </h3>
+</doc-anchor-target>
+<p>All of the formatting and linting commands can be run from the root directory.</p>
+<p>With formatting there are two options to either overwrite files with fixes or just simply check them for correctness:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># 1 - fix and overwrite files
+yarn format
+
+# 2 - check files 
+yarn format-check</code></pre>
+</doc-codeblock></div>
+<p>For linting there are three options to either check the files, check the files in debug mode, or fix and overwrite the files:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># 1 - check files
+yarn lint
+
+# 2 - check files in debug mode
+yarn lint-debug
+
+# 3 - fix and overwrite files
+yarn lint-fix</code></pre>
+</doc-codeblock></div>
+<p><em>NOTE: Svelte component files (<code v-pre>*.svelte</code>) are checked in addition to regular <code v-pre>*.ts</code> source code files.</em></p>
+<doc-anchor-target id="rust">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rust">#</doc-anchor-trigger>
+        <span>Rust</span>
+    </h3>
+</doc-anchor-target>
+<p>The following commands are to be run from the <code v-pre>packages/backend</code> folder as this is where the Rust bindings for <a href="https://github.com/iotaledger/wallet.rs">wallet.rs</a> live.</p>
+<p>We use <code v-pre>rustfmt</code> configured with the nightly toolchain to allow some features. To install:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># install the nightly toolchain
+rustup component add rustfmt --toolchain nightly</code></pre>
+</doc-codeblock></div>
+<p>Then run a formatting check:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash"># check format in current working directory
+cargo +nightly fmt -- --check</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -305,6 +356,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Tools", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Tools", icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
