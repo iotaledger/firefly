@@ -33,7 +33,7 @@ Please ensure all PRs have a ___type___ label, additional labels can be added wh
 
 #### Type Labels
 
-* `feat`: Introduces a new feature
+- `feat`: Introduces a new feature
 - `enhancement`: Enhancement of an existing feature
 - `refactor`: Improvements made to existing code
 - `chore`: Modifies documentation, cleaning dependencies, or other housekeeping-like tasks
@@ -41,7 +41,7 @@ Please ensure all PRs have a ___type___ label, additional labels can be added wh
 
 #### Status Labels
 
-* `do not merge`: Do not merge into any working branches
+- `do not merge`: Do not merge into any working branches
 
 ## Reviewing
 
@@ -63,6 +63,7 @@ Once your PR fulfils the above criteria, you are free to request a review from o
 There are no limitations on who can review a PR, the more eyes on the code the better. All maintainers, Firefly developers and contributors are encouraged to review as many PRs as possible, as well as community members.
 
 At a minimum, it is advised to do the following during a review:
+
 - Read the lined issues and PR description to get context for the review
 - Pull the branch to your local machine and build the application
 - Manually test the application, focusing on any new features or fixes that have been added
@@ -70,12 +71,13 @@ At a minimum, it is advised to do the following during a review:
 - Add feedback in the form of comments, utilising the GitHub review process where possible
 
 You may also want to:
+
 - Speak to the author, and walk through the code together
 - Run tests and linting checks locally (although these are done in GitHub anyway)
 - Suggest changes to be made by the author
 - Commit your own small changes if you have the time
 
-:warning: Sometimes dependency changes within PRs can cause painfully long build times, which then impedes the review process. It is **strongly** recommended to have a separate repository clone simply for reviewing PRs to ensure that you can continue doing your own work easily.
+:warning: Sometimes dependency changes within PRs can cause painfully long build times, which then impedes the review process. It is __strongly__ recommended to have a separate repository clone simply for reviewing PRs to ensure that you can continue doing your own work easily.
 
 ## Merging
 
@@ -86,6 +88,7 @@ Conditions for PRs to be merged are dependent on the target branch.
 #### Develop Branch
 
 Before a PR can be merged into the develop branch, it must satisfy the following conditions:
+
 - At least one approval review
 - Zero unresolved comments
 - No merge conflicts with the target branch
@@ -99,6 +102,7 @@ Before a PR can be merged into the develop branch, it must satisfy the following
 #### Main Branch
 
 Before a PR can be merged into the develop branch, it must satisfy the following conditions:
+
 - At least one approval review
 - Zero unresolved comments
 - No merge conflicts with the target branch

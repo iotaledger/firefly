@@ -79,6 +79,8 @@ The `-m` argument is used to specify between the Ledger Nano S and Nano X (defau
 
 After running, the simulator listens on port 9999 and can be used without restrictions with the `ledger-iota.rs` library.
 
+:information_source: When needing to change the mnemonic phrase used for the simulator, please adjust the line [here](https://github.com/iotaledger/ledger-iota-app/blob/develop/docker/run_simulator.sh#L64) after the `--seed` argument.
+
 ### Loading
 
 To compile and load the IOTA app on a real Ledger Nano S device, please use the following command:

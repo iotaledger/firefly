@@ -17,7 +17,7 @@ This proposal acts as a definition for how a wallet should derive encryption key
 m / purpose' / coin_type' / account' / change / address
 ```
 
-_NOTE: Sometimes these values are in hexadecimal format (Ledger users will see this when prompted to confirm newly generated addresses)._
+:warning: Sometimes these values are in hexadecimal format (Ledger users will see this when prompted to confirm newly generated addresses).
 
 - `m` - the binary representation of a seed (e.g. 24-word mnemonic)
 - `purpose'`* - a fixed value indicating that (usu. `44'` representing [BIP44](#bip44---Multi-account-hierarchy)) should be used as a standard

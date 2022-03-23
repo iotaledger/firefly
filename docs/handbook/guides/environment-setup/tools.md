@@ -4,6 +4,8 @@ icon: tools
 
 # Tools
 
+## Gitify
+
 ## Linting & Formatting
 
 We use [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) to handle the TS/JS code and [rustfmt](https://github.com/rust-lang/rustfmt#rustfmt----) for Rust. With the exception of a few files and directories, all of the code within the Firefly repository is run through a linting process to ensure cleanliness and consistency in terms of format, style, syntax, and more. This process happens both locally in a pre-commit Git hook (via [Husky](https://github.com/typicode/husky#husky)) as well as in a continuous integration workflow (see [`ci.lint.yml`](https://github.com/iotaledger/firefly/blob/develop/.github/workflows/ci.lint.yml)).
@@ -35,7 +37,7 @@ yarn lint-debug
 yarn lint-fix
 ```
 
-_NOTE: Svelte component files (`*.svelte`) are checked in addition to regular `*.ts` source code files._
+:information_source: Svelte component files (`*.svelte`) are checked in addition to regular `*.ts` source code files.
 
 ### Rust
 
