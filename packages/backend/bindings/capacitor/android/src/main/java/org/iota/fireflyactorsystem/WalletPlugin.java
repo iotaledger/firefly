@@ -68,7 +68,7 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void destroy(final PluginCall call) {
         if (!isInitialized) {
-            call.resolve()
+            call.resolve();
             return;
         }
         try {
