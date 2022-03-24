@@ -70,7 +70,7 @@
     <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
         <Logo width="50%" logo="logo-stronghold" />
     </div>
-    <div class="w-full text-center my-6 px-8">
+    <div class="w-full text-center my-6 md:px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
                 {locale('popups.backup.notBackedUpDescription')}
@@ -87,7 +87,7 @@
         <Text smaller secondary classes="mb-2">{locale('popups.backup.backupDescription')}</Text>
         <Text smaller secondary>{locale('popups.backup.backupWarning')}</Text>
     </div>
-    <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
+    <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
         <form
             id="password-popup-form"
             class="flex justify-center w-full flex-row flex-wrap"

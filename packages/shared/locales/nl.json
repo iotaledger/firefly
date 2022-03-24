@@ -9,6 +9,11 @@
             "body": "Lees het privacybeleid en de algemene voorwaarden.",
             "checkbox": "Ik heb het privacy beleid en de algemene voorwaarden gelezen en ga hier mee akkoord"
         },
+        "crashReporting": {
+            "title": "Crash rapportering",
+            "body": "Help de ontwikkelaars om Firefly te verbeteren door automatisch diagnostische gegevens te verzenden als er een fout of crash optreedt.",
+            "checkbox": "Stuur crashrapporten naar de IOTA Foundation"
+        },
         "appearance": {
             "title": "Weergave",
             "body": "Kies uw app thema."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Thema",
                 "description": "",
-                "advice": "Herstart de Firefly applicatie voor veranderingen aan het systeem thema effect te hebben"
+                "advice": "Je moet Firefly opnieuw opstarten om de veranderingen van het systeemthema door te voeren"
             },
             "language": {
                 "title": "Taal",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Foutenlogboek",
                 "description": "Bekijk foutmeldingen om een probleem op te lossen"
+            },
+            "crashReporting": {
+                "title": "Crashrapporten",
+                "body": "Help de ontwikkelaars om Firefly te verbeteren door automatisch diagnostische gegevens te verzenden als er een fout of crash optreedt",
+                "checkbox": "Verstuur crashrapporten",
+                "advice": "Start de Firefly applicatie opnieuw op om {sendCrashReports, select, true {te beginnen met het delen van crashrapporten} false {te stoppen met het delen van crashrapporten} other {pas deze wijziging toe}}"
             },
             "diagnostics": {
                 "title": "Foutrapportages",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Je maakt een ontwikkelaarsprofiel aan",
             "body": "Je wordt standaard verbonden met het Chrysalis Devnet en kunt handmatig van netwerk wisselen. Ga alleen verder als je weet wat je doet."
+        },
+        "crashReporting": {
+            "title": "Crashrapportage",
+            "body": "Help de ontwikkelaars om Firefly te verbeteren door automatisch diagnostische gegevens te verzenden als er een fout of crash optreedt. Als dit is geselecteerd, zal dit van kracht worden na het herstarten van Firefly.",
+            "checkbox": "Stuur crashrapporten naar de IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Gebruikersvoorwaarden",

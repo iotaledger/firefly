@@ -7,7 +7,9 @@
 	@prop {number} [dimLength] - Dim length in CSS pixels.
 	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
-
+    @prop {boolean} [preventClose] - Prevent close the Drawer.
+    @prop {string} [zIndex] - Main container Tailwind z-index. Ex. "z-40".
+	
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
@@ -24,6 +26,8 @@
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
+    export let preventClose = false
+    export let zIndex = 'z-30'
 
     const dispatch = createEventDispatcher()
 
@@ -39,13 +43,14 @@
         { duration: 350, easing: quintOut }
     )
 
-    onMount(() => {
+    onMount(async () => {
         if (opened) {
-            void open()
+            await open()
         }
     })
 
-    function slidable(node: HTMLElement): { destroy(): void } {
+    function slidable(node: HTMLElement, use: boolean = true) {
+        if (!use) return
         let x: number
         let y: number
         let init: number
@@ -63,7 +68,7 @@
             node.addEventListener('touchend', handleTouchend)
         }
 
-        function handleTouchmove(event: TouchEvent): void {
+        function handleTouchmove(event: TouchEvent) {
             if (event.targetTouches.length === 1) {
                 const sx = event.touches[0].pageX - x
                 const sy = event.touches[0].pageY - y
@@ -78,7 +83,7 @@
             }
         }
 
-        function handleTouchend(): void {
+        function handleTouchend() {
             node.dispatchEvent(new CustomEvent('slideEnd'))
 
             const elapsed = window.performance.now()
@@ -99,8 +104,8 @@
         }
     }
 
-    function handleSlideMove(event: CustomEvent): void {
-        void coords.update(
+    async function handleSlideMove(event: CustomEvent): Promise<void> {
+        await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
@@ -109,14 +114,14 @@
         )
     }
 
-    function handleSlideEnd(): void {
+    async function handleSlideEnd() {
         const thresholdUnreached = fromRight
             ? (viewportLength - dimLength) / 2 > $coords.x
             : (viewportLength - dimLength) / 1.2 > $coords.y
         if (thresholdUnreached) {
-            void open()
+            await open()
         } else {
-            void close()
+            await close()
         }
     }
 
@@ -140,7 +145,9 @@
             { duration: 350, easing: quintOut }
         )
         isOpen = false
-        dispatch('close')
+        if (!preventClose) {
+            dispatch('close')
+        }
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
@@ -149,10 +156,10 @@
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
-<drawer class="absolute top-0 z-30" class:invisible={!isOpen}>
+<drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <slide-zone
         class="fixed h-screen w-screen"
-        use:slidable
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}
