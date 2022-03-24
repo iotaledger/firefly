@@ -1,13 +1,13 @@
 import { Account, AccountIdentifier, Balance, SyncedAccount } from '@lib/typings/account'
 import { Message } from '@lib/typings/message'
 import { Address } from '@lib/typings/address'
-import { ErrorEventPayload } from '@lib/typings/events'
 import { StrongholdStatus } from '@lib/typings/wallet'
 import { MigrationAddress, MigrationBundle, MigrationData, SendMigrationBundleResponse } from '@lib/typings/migration'
 import { NodeInfo } from '@lib/typings/node'
 import { LedgerStatus } from '@lib/typings/ledger'
 import { ParticipateResponsePayload, ParticipationOverviewResponse } from '@lib/participation/types'
 
+import { BridgeError } from './bridge-error.type'
 import { BridgeResponse } from './bridge-response.type'
 import { BridgeResponseType } from '../enums'
 
@@ -29,7 +29,7 @@ export type BackupSuccessfulResponse = BridgeResponse<BridgeResponseType.BackupS
 export type BackupRestoredResponse = BridgeResponse<BridgeResponseType.BackupRestored, void>
 export type SetStrongholdPasswordResponse = BridgeResponse<BridgeResponseType.StrongholdPasswordSet, void>
 export type SentTransferResponse = BridgeResponse<BridgeResponseType.SentTransfer, Message>
-export type ErrorResponse = BridgeResponse<BridgeResponseType.Error, ErrorEventPayload>
+export type ErrorResponse = BridgeResponse<BridgeResponseType.Error, BridgeError>
 export type PanicResponse = BridgeResponse<BridgeResponseType.Panic, string>
 export type GenerateMnemonicResponse = BridgeResponse<BridgeResponseType.GeneratedMnemonic, string>
 export type StoreMnemonicResponse = BridgeResponse<BridgeResponseType.StoredMnemonic, void>

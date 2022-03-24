@@ -6,7 +6,7 @@ import { api } from '@core/api'
 import { get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { isNewNotification, NotificationType, showAppNotification } from '@core/notification'
-import { Event } from './typings/events'
+import { BridgeEvent } from '@core/actor'
 import {
     LedgerApp,
     LedgerAppName,
@@ -32,7 +32,7 @@ export function getLedgerDeviceStatus(
     onError: () => void = () => {}
 ): void {
     api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response: Event<LedgerStatus>) {
+        onSuccess(response: BridgeEvent<LedgerStatus>) {
             ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
             const state = get(ledgerDeviceState)
@@ -88,7 +88,7 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
 export function getLedgerOpenedApp(): Promise<LedgerApp> {
     return new Promise<LedgerApp>((resolve, reject) => {
         api.getLedgerDeviceStatus(ledgerSimulator, {
-            onSuccess(response: Event<LedgerStatus>) {
+            onSuccess(response: BridgeEvent<LedgerStatus>) {
                 resolve(response.payload?.app)
             },
             onError(err) {

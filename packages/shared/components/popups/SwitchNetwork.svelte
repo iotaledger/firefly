@@ -20,7 +20,7 @@
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { logout } from '@core/app'
     import { showAppNotification } from '@core/notification'
-    import { ErrorType } from 'shared/lib/typings/events'
+    import { BridgeErrorType } from 'shared/lib/typings/events'
 
     import { Locale } from '@core/i18n'
     import { Network, NetworkConfig } from 'shared/lib/typings/network'
@@ -98,7 +98,7 @@
              */
             let error
             switch (err?.type) {
-                case ErrorType.AccountNotEmpty:
+                case BridgeErrorType.AccountNotEmpty:
                     error = 'error.network.nonEmptyAccount'
                     break
                 default:

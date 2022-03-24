@@ -8,7 +8,8 @@ import { ILedger } from '@lib/typings/ledger'
 import { AppSettings } from '@core/app'
 import { IPincodeManager } from '@lib/typings/pincodeManager'
 import { IBarcodeManager } from '@lib/typings/barcodeManager'
-import { EventMap } from '@lib/typings/events'
+
+import { PlatformEventMap } from '../types'
 
 export interface IPlatform {
     ledger: ILedger
@@ -53,6 +54,6 @@ export interface IPlatform {
     importLegacySeed(buffer: unknown, password: string): Promise<string>
     validateSeedVault(buffer: unknown): Promise<boolean>
 
-    onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)
-    removeListenersForEvent<K extends keyof EventMap>(eventName: K)
+    onEvent<K extends keyof PlatformEventMap>(eventName: K, callback: (param: PlatformEventMap[K]) => void)
+    removeListenersForEvent<K extends keyof PlatformEventMap>(eventName: K)
 }

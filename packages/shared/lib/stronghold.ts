@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { openPopup } from '@core/popup'
 import { api } from '@core/api'
-import { Event } from './typings/events'
+import { BridgeEvent } from '@core/actor'
 import { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from '@core/notification'
 import { localize } from '@core/i18n'
@@ -21,7 +21,7 @@ export const checkStronghold = (callback: any): void => {
     }
 
     api.getStrongholdStatus({
-        onSuccess(response: Event<StrongholdStatus>) {
+        onSuccess(response: BridgeEvent<StrongholdStatus>) {
             const isLocked = response.payload.snapshot.status === 'Locked'
             if (isLocked) {
                 openPopup(

@@ -1,10 +1,10 @@
-import { Event } from '@lib/typings/events'
+import { BridgeEvent } from '@core/actor'
 
 import { isRecentDate } from './time'
 
 interface IElement {
-    addEventListener(event: Event<unknown> | string, unknown)
-    removeEventListener(event: Event<unknown> | string, handler: unknown): void
+    addEventListener(event: BridgeEvent<unknown> | string, unknown)
+    removeEventListener(event: BridgeEvent<unknown> | string, handler: unknown): void
 }
 
 interface IBoundElement {
@@ -14,7 +14,7 @@ interface IBoundElement {
 /**
  * Returns a bound element that listens to specified events.
  */
-export function bindEvents(element: IElement, events: Event<unknown>[]): IBoundElement {
+export function bindEvents(element: IElement, events: BridgeEvent<unknown>[]): IBoundElement {
     const listeners = Object.entries(events).map(([event, handler]) => {
         const listener = element.addEventListener(event, handler)
 

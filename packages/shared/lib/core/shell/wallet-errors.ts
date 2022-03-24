@@ -1,8 +1,8 @@
 import { ValidationError } from '@core/validators'
-import { ErrorType } from '@lib/typings/events'
+import { BridgeErrorType } from '@core/actor'
 
 const errorMessages: {
-    [key in keyof typeof ErrorType]: string
+    [key in keyof typeof BridgeErrorType]: string
 } = {
     IoError: 'error.global.generic',
     JsonError: 'error.global.generic',
@@ -58,7 +58,7 @@ const errorMessages: {
     DustError: 'error.send.leavingDust',
 }
 
-export function getErrorMessage(type: ErrorType | ValidationError): string {
+export function getErrorMessage(type: BridgeErrorType | ValidationError): string {
     const message = errorMessages?.[type]
     return message ? message : 'error.global.generic'
 }

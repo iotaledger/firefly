@@ -1,7 +1,7 @@
+import { BridgeEvent } from '@core/actor'
 import { api } from '@core/api'
 import { localize } from '@core/i18n'
 
-import { Event } from '../typings/events'
 import { showAppNotification } from '@core/notification'
 import { saveNewMessage } from '../wallet'
 
@@ -24,7 +24,7 @@ import {
 export function getParticipationOverview(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.getParticipationOverview({
-            onSuccess(overview: Event<ParticipationOverviewResponse>) {
+            onSuccess(overview: BridgeEvent<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
 
                 resolve()
@@ -48,7 +48,7 @@ export function getParticipationOverview(): Promise<void> {
 export function getParticipationEvents(): Promise<ParticipationEvent[]> {
     return new Promise<ParticipationEvent[]>((resolve, reject) => {
         api.getParticipationEvents({
-            onSuccess(response: Event<ParticipationEvent[]>) {
+            onSuccess(response: BridgeEvent<ParticipationEvent[]>) {
                 participationEvents.set(response?.payload)
 
                 resolve(response?.payload)
@@ -84,7 +84,7 @@ export function participate(accountId: string, participations: Participation[]):
 
     return new Promise<string[]>((resolve, reject) => {
         api.participate(accountId, participations, {
-            onSuccess(response: Event<ParticipateResponsePayload>) {
+            onSuccess(response: BridgeEvent<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
@@ -121,7 +121,7 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
 
     return new Promise<string[]>((resolve, reject) => {
         api.stopParticipating(accountId, eventIds, {
-            onSuccess(response: Event<ParticipateResponsePayload>) {
+            onSuccess(response: BridgeEvent<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Unstake)
@@ -150,7 +150,7 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
 export function participateWithRemainingFunds(accountId: string, participations: Participation[]): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
         api.participateWithRemainingFunds(accountId, participations, {
-            onSuccess(response: Event<ParticipateResponsePayload>) {
+            onSuccess(response: BridgeEvent<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)

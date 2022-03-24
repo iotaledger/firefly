@@ -1,8 +1,6 @@
 import { AppSettings, VersionDetails } from '@core/app'
 import { Error } from '@core/error'
-import { IPlatform } from '@core/platform'
-
-import { EventMap } from '@lib/typings/events'
+import { IPlatform, PlatformEventMap } from '@core/platform'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,
@@ -55,10 +53,10 @@ const Platform: IPlatform = {
         return Promise.resolve(false)
     },
     minimize(): void {},
-    onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void) {},
+    onEvent<K extends keyof PlatformEventMap>(eventName: K, callback: (param: PlatformEventMap[K]) => void) {},
     openUrl(url: string): void {},
     popupMenu(): void {},
-    removeListenersForEvent<K extends keyof EventMap>(eventName: K) {},
+    removeListenersForEvent<K extends keyof PlatformEventMap>(eventName: K) {},
     removeProfileFolder(profilePath: string): Promise<void> {
         return Promise.resolve(undefined)
     },

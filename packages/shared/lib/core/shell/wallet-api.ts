@@ -7,8 +7,8 @@ import {
     SyncAccountsResponse,
 } from '@core/actor'
 import { BridgeResponseType } from '@core/actor'
-import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '@lib/typings/events'
-import { ErrorType } from '@lib/typings/events'
+import { BalanceChangeEventPayload, TransactionEventPayload } from '@lib/typings/events'
+import { BridgeErrorType, BridgeEvent } from '@core/actor'
 import { ValidationError, ValidatorService } from '@core/validators'
 import { Platform } from '@core/platform/platform'
 import { NodePlugin } from '@lib/typings/node'
@@ -30,7 +30,7 @@ type CallbacksPattern = {
 }
 
 type ErrorMessage = {
-    type: ErrorType | ValidationError
+    type: BridgeErrorType | ValidationError
     error: string
 }
 
@@ -129,13 +129,13 @@ const defaultCallbacks = {
         onError: (error: ErrorMessage): void => {},
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
+        onSuccess: (response: BridgeEvent<BalanceChangeEventPayload>): void => {},
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (response: BridgeEvent<TransactionEventPayload>): void => {},
     },
     StrongholdPasswordClearIntervalSet: {
-        onSuccess: (response: Event<void>): void => {},
+        onSuccess: (response: BridgeEvent<void>): void => {},
         onError: (error: ErrorMessage): void => {},
     },
 }
@@ -156,7 +156,7 @@ WALLET.onMessage((message: BridgeResponses) => {
         if (messageData == '{}') {
             messageData = message.toString()
         }
-        const newError = { type: ErrorType.ClientError, message: messageData, time: Date.now() }
+        const newError = { type: BridgeErrorType.ClientError, message: messageData, time: Date.now() }
         logError(newError)
         return
     }
@@ -187,7 +187,7 @@ WALLET.onMessage((message: BridgeResponses) => {
         if (message.type === BridgeResponseType.Error) {
             onError(handleError(message.payload.type, message.payload.error, message.action))
         } else if (message.type === BridgeResponseType.Panic) {
-            onError(handleError(ErrorType.Panic, message.payload))
+            onError(handleError(BridgeErrorType.Panic, message.payload))
         } else {
             onSuccess(message)
         }
@@ -225,14 +225,14 @@ const storeCallbacks = (__id: string, type: BridgeResponseType, callbacks?: Call
  *
  * @method handleError
  *
- * @param {ErrorType | ValidatorErrorTypes} type
+ * @param {BridgeErrorType | ValidatorErrorTypes} type
  * @param {string} error
  */
 const handleError = (
-    type: ErrorType | ValidationError,
+    type: BridgeErrorType | ValidationError,
     error: string,
     action?: string
-): { type: ErrorType | ValidationError; error: string } => {
+): { type: BridgeErrorType | ValidationError; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
     const hasStatusCode403 = error.includes('Response error with status code 403')

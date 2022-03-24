@@ -1,4 +1,5 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { BridgeError } from '@core/actor'
+import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from '@core/utils/units'
 import { get, writable } from 'svelte/store'
@@ -1371,7 +1372,7 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
 export const getAccountMeta = (
     accountId: string,
     callback: (
-        error: ErrorEventPayload,
+        error: BridgeError,
         meta?: {
             balance: number
             incoming: number

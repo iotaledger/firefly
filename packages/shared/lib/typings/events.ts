@@ -1,90 +1,4 @@
-import { NativeProgress, VersionDetails } from '@core/app/types'
-import { BridgeResponseType } from '@core/actor/enums'
 import { Message, UTXOEventData } from './message'
-import { WalletRoutes } from './routes'
-
-export interface EventMap {
-    'menu-logout': void
-    'menu-navigate-wallet': WalletRoutes
-    'menu-navigate-settings': void
-    'menu-check-for-update': void
-    'menu-error-log': void
-    'menu-diagnostics': void
-    'log-error': void
-    'deep-link-request': void
-    'deep-link-params': string
-    'version-details': VersionDetails
-    'version-progress': NativeProgress
-    'version-complete': void
-    'version-error': Error
-    'notification-activated': unknown
-}
-
-// Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
-export enum ErrorType {
-    // Generic
-    IoError = 'IoError',
-    JsonError = 'JsonError',
-    ClientError = 'ClientError',
-    Panic = 'Panic',
-
-    // Account
-    LatestAccountIsEmpty = 'LatestAccountIsEmpty',
-    AccountNotEmpty = 'AccountNotEmpty',
-    AccountInitialiseRequiredField = 'AccountInitialiseRequiredField',
-    CannotUseIndexIdentifier = 'CannotUseIndexIdentifier',
-    AccountAliasAlreadyExists = 'AccountAliasAlreadyExists',
-    InvalidBackupFile = 'InvalidBackupFile',
-    InvalidBackupDestination = 'InvalidBackupDestination',
-    InsufficientFunds = 'InsufficientFunds',
-    MnemonicEncode = 'MnemonicEncode',
-    InvalidMnemonic = 'InvalidMnemonic',
-
-    // Address
-    InvalidAddress = 'InvalidAddress',
-    InvalidAddressLength = 'InvalidAddressLength',
-    InvalidRemainderValueAddress = 'InvalidRemainderValueAddress',
-    AddressBuildRequiredField = 'AddressBuildRequiredField',
-
-    // Message
-    MessageNotFound = 'MessageNotFound',
-    InvalidMessageIdLength = 'InvalidMessageIdLength',
-    InvalidMessageId = 'InvalidMessageId',
-    InvalidOutputKind = 'InvalidOutputKind',
-    InvalidTransactionId = 'InvalidTransactionId',
-
-    // Stronghold
-    StrongholdError = 'StrongholdError',
-
-    // Database
-    StorageDoesntExist = 'StorageDoesntExist',
-    Storage = 'Storage',
-    StorageAdapterNotDefined = 'StorageAdapterNotDefined',
-    StorageExists = 'StorageExists',
-    StorageAdapterNotSet = 'StorageAdapterNotSet',
-    StorageIsEncrypted = 'StorageIsEncrypted',
-    RecordDecrypt = 'RecordDecrypt',
-    RecordEncrypt = 'RecordEncrypt',
-    RecordNotFound = 'RecordNotFound',
-
-    // Bee (https://github.com/iotaledger/bee)
-    BeeMessage = 'BeeMessage',
-
-    // Nodes
-    UrlError = 'UrlError',
-    NodesNotSynced = 'NodesNotSynced',
-
-    // Ledger
-    LedgerMiscError = 'LedgerMiscError',
-    LedgerDongleLocked = 'LedgerDongleLocked',
-    LedgerDeniedByUser = 'LedgerDeniedByUser',
-    LedgerDeviceNotFound = 'LedgerDeviceNotFound',
-    LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
-    WrongLedgerSeedError = 'WrongLedgerSeedError',
-
-    // Dust output
-    DustError = 'DustError',
-}
 
 export enum LedgerErrorType {
     LedgerMiscError = 'LedgerMiscError',
@@ -93,20 +7,6 @@ export enum LedgerErrorType {
     LedgerDeviceNotFound = 'LedgerDeviceNotFound',
     LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
     WrongLedgerSeedError = 'WrongLedgerSeedError',
-}
-
-export type Callback<T> = (error: string, data: T) => void
-
-export interface Event<T> {
-    action: string
-    id: string
-    type: BridgeResponseType
-    payload: T
-}
-
-export interface ErrorEventPayload {
-    type: ErrorType
-    error: string
 }
 
 export interface BalanceChangeEventPayload {

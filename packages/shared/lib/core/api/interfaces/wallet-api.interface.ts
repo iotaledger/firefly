@@ -1,8 +1,7 @@
+import { BridgeError, BridgeEvent } from '@core/actor'
 import {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
-    ErrorEventPayload,
-    Event,
     LedgerAddressGenerationEventPayload,
     MigrationProgressEventPayload,
     ReattachmentEventPayload,
@@ -27,67 +26,67 @@ import {
 
 export interface IWalletApi {
     generateMnemonic(callbacks: {
-        onSuccess: (response: Event<string>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<string>) => void
+        onError: (err: BridgeError) => void
     })
     storeMnemonic(
         mnemonic: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<string>) => void; onError: (err: BridgeError) => void }
     )
     verifyMnemonic(
         mnemonic: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<string>) => void; onError: (err: BridgeError) => void }
     )
     getAccount(
         accountId: AccountIdentifier,
-        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Account>) => void; onError: (err: BridgeError) => void }
     )
     getAccounts(callbacks: {
-        onSuccess: (response: Event<Account[]>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<Account[]>) => void
+        onError: (err: BridgeError) => void
     })
     getBalance(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<Balance>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Balance>) => void; onError: (err: BridgeError) => void }
     )
     latestAddress(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Address>) => void; onError: (err: BridgeError) => void }
     )
     areLatestAddressesUnused(callbacks: {
-        onSuccess: (response: Event<boolean>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<boolean>) => void
+        onError: (err: BridgeError) => void
     })
     getUnusedAddress(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<Address>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Address>) => void; onError: (err: BridgeError) => void }
     )
     getStrongholdStatus(callbacks: {
-        onSuccess: (response: Event<StrongholdStatus>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<StrongholdStatus>) => void
+        onError: (err: BridgeError) => void
     })
     syncAccounts(
         addressIndex: number,
         gapLimit: number,
         accountDiscoveryThreshold: number,
-        callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<SyncedAccount[]>) => void; onError: (err: BridgeError) => void }
     )
     syncAccount(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     startBackgroundSync(
         pollingInterval: Duration,
         automaticOutputConsolidation: boolean,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     stopBackgroundSync(callbacks: {
-        onSuccess: (response: Event<void>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<void>) => void
+        onError: (err: BridgeError) => void
     })
     createAccount(
         account: AccountToCreate,
-        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Account>) => void; onError: (err: BridgeError) => void }
     )
     send(
         accountId: string,
@@ -99,100 +98,100 @@ export interface IWalletApi {
             }
             indexation: { index: string; data: number[] }
         },
-        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Message>) => void; onError: (err: BridgeError) => void }
     )
     internalTransfer(
         fromId: string,
         toId: string,
         amount: number,
-        callbacks: { onSuccess: (response: Event<Message>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<Message>) => void; onError: (err: BridgeError) => void }
     )
     setAlias(
         accountId: string,
         alias: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
-    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
+    lockStronghold(callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void })
     setStrongholdPassword(
         password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     changeStrongholdPassword(
         currentPassword: string,
         newPassword: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     backup(
         strongholdPath: string,
         password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     restoreBackup(
         strongholdPath: string,
         password: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     removeAccount(
         accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     setStoragePassword(
         newPinCode: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
-    deleteStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
+    deleteStorage(callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void })
     setClientOptions(
         clientOptions: ClientOptions,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     setStrongholdPasswordClearInterval(
         interval: Duration,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<void>) => void; onError: (err: BridgeError) => void }
     )
     getNodeInfo(
         accountId: string,
         url: string,
         auth: NodeAuth,
-        callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<NodeInfo>) => void; onError: (err: BridgeError) => void }
     )
 
     // Legacy seed APIs
     getLegacySeedChecksum(
         seed: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<string>) => void; onError: (err: BridgeError) => void }
     )
 
     onStrongholdStatusChange(callbacks: {
-        onSuccess: (response: Event<StrongholdStatus>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<StrongholdStatus>) => void
+        onError: (err: BridgeError) => void
     })
     onNewTransaction(callbacks: {
-        onSuccess: (response: Event<TransactionEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<TransactionEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onReattachment(callbacks: {
-        onSuccess: (response: Event<ReattachmentEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<ReattachmentEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onConfirmationStateChange(callbacks: {
-        onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<ConfirmationStateChangeEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onBalanceChange(callbacks: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<BalanceChangeEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onTransferProgress(callbacks: {
-        onSuccess: (response: Event<TransferProgressEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<TransferProgressEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onLedgerAddressGeneration(callbacks: {
-        onSuccess: (response: Event<LedgerAddressGenerationEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<LedgerAddressGenerationEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
     onMigrationProgress(callbacks: {
-        onSuccess: (response: Event<MigrationProgressEventPayload>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<MigrationProgressEventPayload>) => void
+        onError: (err: BridgeError) => void
     })
 
     // Migration
@@ -202,7 +201,7 @@ export interface IWalletApi {
         securityLevel: number,
         initialAddressIndex: number,
         permanode: string | undefined,
-        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<MigrationData>) => void; onError: (err: BridgeError) => void }
     )
     createMigrationBundle(
         seed: string,
@@ -211,23 +210,23 @@ export interface IWalletApi {
         timeoutSeconds: number,
         offset: number,
         logFilePath: string,
-        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<MigrationBundle>) => void; onError: (err: BridgeError) => void }
     )
     sendMigrationBundle(
         node: string[],
         bundleHash: string,
         mwm: number,
         callbacks: {
-            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<SendMigrationBundleResponse>) => void
+            onError: (err: BridgeError) => void
         }
     )
     getMigrationAddress(
         prompt: boolean,
         accountIdentifier: AccountIdentifier,
         callbacks: {
-            onSuccess: (response: Event<GetMigrationAddressResponse>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<GetMigrationAddressResponse>) => void
+            onError: (err: BridgeError) => void
         }
     )
     mineBundle(
@@ -237,8 +236,8 @@ export interface IWalletApi {
         timeout: number,
         offset: number,
         callbacks: {
-            onSuccess: (response: Event<{ bundle: string[]; crackability: number }>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<{ bundle: string[]; crackability: number }>) => void
+            onError: (err: BridgeError) => void
         }
     )
     getLedgerMigrationData(
@@ -246,57 +245,57 @@ export interface IWalletApi {
         nodes: string[],
         permanode: string,
         securityLevel: number,
-        callbacks: { onSuccess: (response: Event<MigrationData>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<MigrationData>) => void; onError: (err: BridgeError) => void }
     )
     sendLedgerMigrationBundle(
         node: string[],
         bundle: string[],
         mwm: number,
         callbacks: {
-            onSuccess: (response: Event<SendMigrationBundleResponse>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<SendMigrationBundleResponse>) => void
+            onError: (err: BridgeError) => void
         }
     )
     getLedgerDeviceStatus(
         ledgerSimulator: boolean,
-        callbacks: { onSuccess: (response: Event<LedgerStatus>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<LedgerStatus>) => void; onError: (err: BridgeError) => void }
     )
     getLegacyAddressChecksum(
         address: string,
-        callbacks: { onSuccess: (response: Event<string>) => void; onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: BridgeEvent<string>) => void; onError: (err: BridgeError) => void }
     )
 
     // Participation (voting / staking)
     getParticipationOverview(callbacks: {
-        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<ParticipationOverviewResponse>) => void
+        onError: (err: BridgeError) => void
     })
     getParticipationEvents(callbacks: {
-        onSuccess: (response: Event<ParticipationEvent[]>) => void
-        onError: (err: ErrorEventPayload) => void
+        onSuccess: (response: BridgeEvent<ParticipationEvent[]>) => void
+        onError: (err: BridgeError) => void
     })
     participate(
         accountId: string,
         participations: Participation[],
         callbacks: {
-            onSuccess: (response: Event<ParticipateResponsePayload>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<ParticipateResponsePayload>) => void
+            onError: (err: BridgeError) => void
         }
     )
     stopParticipating(
         accountId: string,
         eventIds: string[],
         callbacks: {
-            onSuccess: (response: Event<ParticipateResponsePayload>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<ParticipateResponsePayload>) => void
+            onError: (err: BridgeError) => void
         }
     )
     participateWithRemainingFunds(
         accountId: string,
         participations: Participation[],
         callbacks: {
-            onSuccess: (response: Event<ParticipateResponsePayload>) => void
-            onError: (err: ErrorEventPayload) => void
+            onSuccess: (response: BridgeEvent<ParticipateResponsePayload>) => void
+            onError: (err: BridgeError) => void
         }
     )
 }
