@@ -1,4 +1,5 @@
-import { BridgeResponses } from '@core/actor'
+import { BridgeResponses } from '../actor'
+
 import { Account, SyncedAccount } from '@lib/typings/account'
 import { Message } from '@lib/typings/message'
 import { Address } from '@lib/typings/address'
@@ -274,7 +275,7 @@ export class SyncedAccountValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as SyncedAccount
 
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
@@ -321,7 +322,7 @@ export class AccountValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as Account
 
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
@@ -368,7 +369,7 @@ export class MessageValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as Message
 
         // TODO: Should we validate message version?
 
@@ -419,7 +420,7 @@ export class AddressValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as Address
 
         if ('string' !== typeof payload.address) {
             return super.createResponse(false, {
@@ -488,7 +489,7 @@ export class StrongholdStatusValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as StrongholdStatus
 
         if ('Locked' !== payload.snapshot.status && 'Unlocked' !== payload.snapshot.status) {
             return super.createResponse(false, {
@@ -515,7 +516,7 @@ export class LedgerDeviceStatusValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as LedgerStatus
 
         if ('boolean' !== typeof payload.connected && 'boolean' !== typeof payload.locked) {
             return super.createResponse(false, {
@@ -542,7 +543,7 @@ export class MigrationDataValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as MigrationData
 
         if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
@@ -635,7 +636,7 @@ export class NodeInfoValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: BridgeResponses): ValidationResponse {
-        const payload = response.payload
+        const payload = response.payload as NodeInfo
 
         if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
             return super.createResponse(false, {
