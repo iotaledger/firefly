@@ -260,13 +260,11 @@
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text type="p" disabled classes="font-extrabold">
-                            {$isPartiallyStaked
-                                ? formatUnitBestMatch(getStakedFunds($selectedAccount))
-                                : $selectedAccount.balance}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
                             •
                             <Text type="p" disabled classes="inline">
                                 {$isPartiallyStaked
-                                    ? getFormattedFiatAmount(getStakedFunds($selectedAccount))
+                                    ? getFormattedFiatAmount(getStakedFunds())
                                     : $selectedAccount.balanceEquiv}
                             </Text>
                         </Text>
@@ -303,10 +301,10 @@
                     <div class="flex flex-col w-3/4">
                         <Text type="p" classes="font-extrabold">{localize('general.unstakedFunds')}</Text>
                         <Text type="p" secondary classes="font-extrabold">
-                            {formatUnitBestMatch(getUnstakedFunds($selectedAccount))}
+                            {formatUnitBestMatch(getUnstakedFunds())}
                             •
                             <Text type="p" secondary classes="inline">
-                                {getFormattedFiatAmount(getUnstakedFunds($selectedAccount))}
+                                {getFormattedFiatAmount(getUnstakedFunds())}
                             </Text>
                         </Text>
                     </div>
