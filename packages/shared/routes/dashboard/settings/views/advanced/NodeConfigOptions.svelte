@@ -80,18 +80,22 @@
 </script>
 
 <div
-    class={$mobile ? 'flex flex-col flex-wrap space-y-4 p-8' : 'fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden'}
+    class={$mobile
+        ? 'flex flex-col flex-wrap space-y-4 p-8'
+        : 'fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden'}
     use:clickOutside={{ includeScroll: true }}
     on:clickOutside={() => {
         if (!$mobile) nodeContextMenu = undefined
     }}
-    style={!$mobile && `left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}>
+    style={!$mobile && `left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
+>
     {#if !nodeContextMenu?.isDisabled}
         <Button
             medium
             unstyled={!$mobile}
             onClick={() => handleSetPrimaryNode(nodeContextMenu)}
-            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             {#if $mobile}
                 {localize('views.settings.configureNodeList.setAsPrimary')}
             {:else}
@@ -105,7 +109,8 @@
                 handleViewNodeInfoClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             {#if $mobile}
                 {localize('views.settings.configureNodeList.viewInfo')}
             {:else}
@@ -123,7 +128,8 @@
                 handleEditNodeDetailsClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             {#if $mobile}
                 {localize('views.settings.configureNodeList.editDetails')}
             {:else}
@@ -143,12 +149,21 @@
                 }))
                 nodeContextMenu = undefined
             }}
-            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             {#if $mobile}
-                {localize(nodeContextMenu.isDisabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
+                {localize(
+                    nodeContextMenu.isDisabled
+                        ? 'views.settings.configureNodeList.includeNode'
+                        : 'views.settings.configureNodeList.excludeNode'
+                )}
             {:else}
                 <Text smaller>
-                    {localize(nodeContextMenu.isDisabled ? 'views.settings.configureNodeList.includeNode' : 'views.settings.configureNodeList.excludeNode')}
+                    {localize(
+                        nodeContextMenu.isDisabled
+                            ? 'views.settings.configureNodeList.includeNode'
+                            : 'views.settings.configureNodeList.excludeNode'
+                    )}
                 </Text>
             {/if}
         </Button>
@@ -165,7 +180,8 @@
                 handleRemoveNodeClick(nodeContextMenu)
                 nodeContextMenu = undefined
             }}
-            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}>
+            classes={!$mobile && 'flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20'}
+        >
             {#if $mobile}
                 {localize('views.settings.configureNodeList.removeNode')}
             {:else}

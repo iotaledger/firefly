@@ -54,7 +54,9 @@
     </div>
 {:else}
     <div
-        class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !== SettingsRoutes.Init && 'md:pt-20'} ">
+        class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
+            SettingsRoutes.Init && 'md:pt-20'} "
+    >
         <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
             <Icon icon="close" classes="text-gray-800 dark:text-white" />
         </button>

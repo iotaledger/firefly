@@ -19,25 +19,14 @@
     }
 </script>
 
-<style type="text/scss">
-    button {
-        &.active {
-            @apply bg-blue-500;
-            @apply bg-opacity-10;
-            :global(p) {
-                @apply text-blue-500;
-            }
-        }
-    }
-</style>
-
 {#if $mobile}
     <div class="flex flex-col flex-wrap space-y-2 overflow-y-auto">
         {#each currencyList as currency}
             <button
                 class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
                 on:click={() => handleCurrencySelect(currency)}
-                class:active={currency?.label === $activeProfile?.settings.currency}>
+                class:active={currency?.label === $activeProfile?.settings.currency}
+            >
                 <Text type="p" smaller>{currency?.label}</Text>
             </button>
         {/each}
@@ -49,5 +38,18 @@
         sortItems={true}
         onSelect={handleCurrencySelect}
         value={$activeProfile?.settings.currency}
-        items={currencyList} />
+        items={currencyList}
+    />
 {/if}
+
+<style type="text/scss">
+    button {
+        &.active {
+            @apply bg-blue-500;
+            @apply bg-opacity-10;
+            :global(p) {
+                @apply text-blue-500;
+            }
+        }
+    }
+</style>

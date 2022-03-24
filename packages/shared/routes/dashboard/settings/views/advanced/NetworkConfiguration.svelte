@@ -176,7 +176,8 @@
                         on:click={() => {
                             if ($mobile) nodeContextMenu = node
                         }}
-                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20">
+                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+                    >
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
                             <Text
                                 classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${
@@ -195,7 +196,8 @@
                                     nodeContextMenu = node
                                     contextPosition = { x: e.clientX, y: e.clientY }
                                 }}
-                                class="dark:text-white">...</button>
+                                class="dark:text-white">...</button
+                            >
                         {/if}
                     </div>
                 {/each}
@@ -206,14 +208,16 @@
                                 bind:nodeContextMenu
                                 bind:networkConfig
                                 {contextPosition}
-                                {ensureOnePrimaryNode} />
+                                {ensureOnePrimaryNode}
+                            />
                         </Drawer>
                     {:else}
                         <NodeConfigOptions
                             bind:nodeContextMenu
                             bind:networkConfig
                             {contextPosition}
-                            {ensureOnePrimaryNode} />
+                            {ensureOnePrimaryNode}
+                        />
                     {/if}
                 {/if}
             </div>

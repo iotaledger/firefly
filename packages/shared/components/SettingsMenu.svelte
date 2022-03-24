@@ -17,7 +17,7 @@
 
 <div class="flex-1 {$mobile && 'w-full'}">
     {#if $mobile}
-        <div class="h-6"></div>
+        <div class="h-6" />
     {:else}
         <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
     {/if}
