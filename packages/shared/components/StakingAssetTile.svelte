@@ -14,8 +14,9 @@
     } from 'shared/lib/participation/staking'
     import {
         assemblyStakingRemainingTime,
-        partiallyStakedAccounts,
+        isPartiallyStaked,
         participationOverview,
+        selectedAccountParticipationOverview,
         shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
@@ -46,7 +47,7 @@
     $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible($stakingEventState)
-    $: isPartiallyStaked = getAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
+    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible($stakingEventState)
     $: hasStakingEnded = $stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
@@ -54,28 +55,28 @@
         if (hasAccountReachedMinimumAirdrop($selectedAccount) && !isStakingPossible($stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
-            const accountOverview = $participationOverview.find(
-                (accountParticipationOverview) => accountParticipationOverview.accountIndex === $selectedAccount?.index
-            )
-            isBelowMinimumRewards = accountOverview?.[`${asset?.name}RewardsBelowMinimum`] > 0
+            isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${asset?.name}RewardsBelowMinimum`] > 0
         }
     }
     $: canShowWarningState =
-        isPartiallyStaked ||
+        isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
         canShowTooltip = !canShowTooltip
     }
+
     function handleTileClick(): void {
         openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
     }
+
     function getAccount(accounts: WalletAccount[]): WalletAccount {
-        return accounts.find((account) => account.alias === $selectedAccount.alias)
+        return accounts?.find((account) => account.alias === $selectedAccount?.alias)
     }
+
     function getLocalizedTooltipText(): TooltipText {
-        if (isPartiallyStaked) {
+        if (isPartiallyStakedAndCanStake) {
             return {
                 title: localize('tooltips.partiallyStakedFunds.title', {
                     values: { amount: formatUnitBestMatch(getUnstakedFunds($selectedAccount)) },
