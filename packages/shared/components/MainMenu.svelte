@@ -1,14 +1,18 @@
 <script lang="typescript">
     import { Drawer, Icon, Text } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { isBright, getInitials } from 'shared/lib/helpers'
     import { activeProfile, getColor } from 'shared/lib/profile'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { settingsRoute, settingsChildRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
+
+    $: color = getColor($activeProfile, $selectedAccount?.id) as string
+    $: textColor = isBright(color) ? 'gray-800' : 'white'
 
     let drawer: Drawer
     const profileColor = getColor($activeProfile, $activeProfile.id)
@@ -31,11 +35,12 @@
 </script>
 
 <button
-    class="absolute menu-button r-30 z-10 w-9 h-9 flex items-center justify-center rounded-full leading-100"
+    class="absolute menu-button r-30 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
     style="background-color: {profileColor};"
     on:click={handleClick}
 >
-    <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
+    <Text type="h4" classes="uppercase text-{textColor}">{profileInitial || 'A'}</Text>
+    <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
 <Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
     <div class="flex flex-col flex-1">
@@ -76,9 +81,9 @@
         padding-top: env(safe-area-inset-top);
     }
     .menu-button {
-        margin-top: 35px;
+        position: absolute;
         top: env(safe-area-inset-top);
-        right: 30px;
+        left: 25px;
     }
     .profile-block {
         grid-template-columns: auto 1fr;
