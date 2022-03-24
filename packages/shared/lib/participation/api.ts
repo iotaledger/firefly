@@ -3,13 +3,14 @@ import { localize } from '@core/i18n'
 import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
-import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
+import { addNewPendingParticipation, participationEvents, participationOverview, participationHistory } from './stores'
 import {
     ParticipationAction,
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
     ParticipationOverviewResponse,
+    ParticipationHistoryItem,
 } from './types'
 
 export function getParticipationOverview(): Promise<void> {
@@ -63,6 +64,11 @@ export function participate(
         api.participate(accountId, participations, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
+                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message) => ({ messageId: message.id, accountId, action, eventId: participations[0]?.eventId }))
+                participationHistory.update((_participationHistory) => [
+                    ..._participationHistory,
+                    ...participationHistoryItems,
+                ])
 
                 addNewPendingParticipation(response.payload, accountId, action)
                 resolve(response.payload.map((message) => message.id))

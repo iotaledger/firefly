@@ -13,23 +13,33 @@
         getMilestoneMessageValue,
         isParticipationPayload,
         receiverAddressesFromTransactionPayload,
+        selectedAccount,
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
+    import { Transaction } from 'shared/lib/typings/message'
+    import { getMessageParticipationAction } from 'shared/lib/participation'
 
-    export let timestamp
-    export let confirmed
-    export let color
-    export let includeFullSender
+    export let id: string
+    export let timestamp: string
+    export let confirmed: boolean
+    export let color: string
+    export let includeFullSender: boolean
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
 
     const { accounts } = $wallet
 
+    let accountAlias = ''
+    let direction: string
+    let initialsColor: string
     let messageValue = ''
     let date = localize('error.invalidDate')
+    let txPayload: Transaction
+    let participationLocaleKey: string
+
     $: {
         try {
             date = formatDate(new Date(timestamp), {
@@ -43,27 +53,26 @@
             date = localize('error.invalidDate')
         }
     }
-
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     $: txPayload = payload?.type === 'Transaction' ? payload : undefined
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
-
-    const getMessageValue = () => {
-        if (hasCachedMigrationTx) {
-            return formatUnitBestMatch(balance, true, 3)
-        }
-        if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
-        }
-
-        return `${
-            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
-        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
-    }
-
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
+    $: participationAction = getMessageParticipationAction(id)
+    $: {
+        switch (participationAction) {
+            case ParticipationAction.Stake:
+                participationLocaleKey = 'staked'
+                break
+            case ParticipationAction.Vote:
+                participationLocaleKey = 'voted'
+                break
+            default:
+                participationLocaleKey = 'participated'
+                break
+        }
+    }
 
     // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
@@ -75,10 +84,6 @@
         getIncomingFlag(txPayload) || getInternalFlag(txPayload)
             ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
             : null
-
-    let initialsColor: string
-    let accountAlias = ''
-
     $: {
         if (txPayload) {
             const acc = txPayload.data.essence.data.incoming ? receiverAccount : senderAccount
@@ -89,7 +94,7 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                initialsColor = getColor($activeProfile, acc.id)
+                initialsColor = getColor($activeProfile, acc.id) as string
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
@@ -102,8 +107,6 @@
             }
         }
     }
-
-    let direction: string
     $: {
         if (txPayload) {
             if (includeFullSender) {
@@ -130,7 +133,18 @@
         }
     }
 
-    const getParticipationColor = (action: ParticipationAction): string => {
+    function getMessageValue(): string {
+        if (hasCachedMigrationTx) {
+            return formatUnitBestMatch(balance, true, 3)
+        }
+        if (milestonePayload) {
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
+        }
+        return `${
+            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
+        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
+    }
+    function getParticipationColor(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Vote:
@@ -141,8 +155,7 @@
                 return 'blue-500'
         }
     }
-
-    const getParticipationIcon = (action: ParticipationAction): string => {
+    function getParticipationIcon(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Unstake:
@@ -175,14 +188,14 @@
                 boxClasses="bg-gray-500 dark:bg-gray-900"
                 icon="double-chevron-right"
             />
-        {:else if isParticipationPayload(txPayload)}
+        {:else if isParticipationPayload(txPayload) && participationAction}
             <Icon
                 boxed
                 width="24"
                 height="24"
                 classes="text-white"
-                boxClasses="bg-{getParticipationColor(ParticipationAction.Stake)}"
-                icon={getParticipationIcon(ParticipationAction.Stake)}
+                boxClasses="bg-{getParticipationColor(participationAction)}"
+                icon={getParticipationIcon(participationAction)}
             />
         {:else}
             <Icon
@@ -209,8 +222,8 @@
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
                 {#if includeFullSender}
-                    {localize('general.stakedFor', { values: { account: accountAlias } })}
-                {:else}{localize('general.staked')}{/if}
+                    {localize(`general.${participationLocaleKey}For`, { values: { account: accountAlias } })}
+                {:else}{localize(`general.${participationLocaleKey}`)}{/if}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">
