@@ -7,6 +7,7 @@ import { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
 import {
+    AccountParticipationOverview,
     ParticipateResponsePayload,
     ParticipationAction,
     ParticipationEvent,
@@ -143,13 +144,10 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
     }
 )
 
-const sumStakingRewards = (
-    airdrop: StakingAirdrop,
-    overview: ParticipationOverview,
-    account: WalletAccount
-): number => {
-    const _overview = overview?.find((accountOverview) => accountOverview.accountIndex === account?.index)
-    if (!_overview || overview?.length === 0) return 0
+const sumStakingRewards = (airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number => {
+    if (!accountOverview) {
+        return 0
+    }
 
     const rewardsKey = `${airdrop}Rewards`
     const rewardsBelowMinimumKey = `${airdrop}RewardsBelowMinimum`
@@ -159,9 +157,9 @@ const sumStakingRewards = (
      * account has accumulated more than min rewards for an airdrop, but has unstaked and moved the funds
      * to another address that has NOT reach the minimum.
      */
-    return _overview[rewardsKey] <= 0
-        ? _overview[rewardsBelowMinimumKey]
-        : _overview[rewardsKey] + _overview[rewardsBelowMinimumKey]
+    return accountOverview[rewardsKey] <= 0
+        ? accountOverview[rewardsBelowMinimumKey]
+        : accountOverview[rewardsKey] + accountOverview[rewardsBelowMinimumKey]
 }
 
 /**
@@ -172,9 +170,9 @@ const sumStakingRewards = (
  * Be cautious that this value is in microASMB, so it is likely to be larger.
  */
 export const assemblyStakingRewards: Readable<number> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        sumStakingRewards(StakingAirdrop.Assembly, $participationOverview, $selectedAccount)
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        sumStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
 )
 
 /**
@@ -183,9 +181,9 @@ export const assemblyStakingRewards: Readable<number> = derived(
  * if they are currently unstaked).
  */
 export const shimmerStakingRewards: Readable<number> = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        sumStakingRewards(StakingAirdrop.Shimmer, $participationOverview, $selectedAccount)
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        sumStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
 )
 
 /**
