@@ -3,7 +3,7 @@
     import { Transition } from 'shared/components'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { FireflyEvent, importRoute, ImportRouter, ImportRoutes } from '@core/router'
+    import { FireflyEvent, importRoute, ImportRouter, ImportRoute } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale: Locale
@@ -25,7 +25,7 @@
                     error = locale('views.migrate.incorrectSeedVaultPassword')
                 } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
                     error = locale('views.migrate.noDataSeedVault')
-                } else if ($importRoute === ImportRoutes.TextImport) {
+                } else if ($importRoute === ImportRoute.TextImport) {
                     showAppNotification({
                         type: 'error',
                         message: locale('views.migrate.problemRestoringWallet'),
@@ -43,27 +43,27 @@
     }
 </script>
 
-{#if $importRoute === ImportRoutes.Init}
+{#if $importRoute === ImportRoute.Init}
     <Transition>
         <Import on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $importRoute === ImportRoutes.TextImport}
+{:else if $importRoute === ImportRoute.TextImport}
     <Transition>
         <TextImport on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $importRoute === ImportRoutes.FileImport}
+{:else if $importRoute === ImportRoute.FileImport}
     <Transition>
         <FileImport on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $importRoute === ImportRoutes.LedgerImport}
+{:else if $importRoute === ImportRoute.LedgerImport}
     <Transition>
         <Ledger on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $importRoute === ImportRoutes.BackupPassword}
+{:else if $importRoute === ImportRoute.BackupPassword}
     <Transition>
         <BackupPassword on:next={next} on:previous={previous} {error} {locale} {busy} />
     </Transition>
-{:else if $importRoute === ImportRoutes.Success}
+{:else if $importRoute === ImportRoute.Success}
     <Transition>
         <Success on:next={next} on:previous={previous} {locale} />
     </Transition>

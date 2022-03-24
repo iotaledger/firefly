@@ -6,13 +6,13 @@
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { dashboardRoute, DashboardRoutes } from '@core/router'
+    import { dashboardRoute, DashboardRoute } from '@core/router'
 
     const { accountsLoaded } = $wallet
 
     $: showingDashboard = $accountsLoaded && $popupState.type !== 'busy'
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
-    $: showingSettings = $dashboardRoute === DashboardRoutes.Settings
+    $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
     let os = ''
     let isMaximized = false

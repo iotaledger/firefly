@@ -6,14 +6,14 @@ import { walletSetupType } from '@lib/wallet'
 import { appRouter } from '../app-router'
 import { FireflyEvent } from '../types'
 import { Subrouter } from '../subrouters'
-import { LedgerRoutes } from '../enums'
+import { LedgerRoute } from '../enums'
 
-export const ledgerRoute = writable<LedgerRoutes>(null)
+export const ledgerRoute = writable<LedgerRoute>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)
 
-export class LedgerRouter extends Subrouter<LedgerRoutes> {
+export class LedgerRouter extends Subrouter<LedgerRoute> {
     constructor() {
-        super(LedgerRoutes.LegacyIntro, ledgerRoute)
+        super(LedgerRoute.LegacyIntro, ledgerRoute)
     }
 
     restartIfNotInLedgerFlow(): void {
@@ -22,44 +22,44 @@ export class LedgerRouter extends Subrouter<LedgerRoutes> {
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length !== 1) {
             if (setupType === SetupType.New || setupType === SetupType.FireflyLedger) {
-                this.setNext(LedgerRoutes.Connect)
+                this.setNext(LedgerRoute.Connect)
             } else {
-                this.setNext(LedgerRoutes.LegacyIntro)
+                this.setNext(LedgerRoute.LegacyIntro)
             }
         }
     }
 
     next(event: FireflyEvent): void {
-        let nextRoute: LedgerRoutes
+        let nextRoute: LedgerRoute
         const currentRoute = get(this.routeStore)
         const setupType = get(walletSetupType)
 
         switch (currentRoute) {
-            case LedgerRoutes.Connect:
+            case LedgerRoute.Connect:
                 if (setupType === SetupType.New) {
                     get(appRouter).next(event)
                 } else if (setupType === SetupType.FireflyLedger) {
-                    nextRoute = LedgerRoutes.RestoreFromLedger
+                    nextRoute = LedgerRoute.RestoreFromLedger
                 } else if (setupType === SetupType.TrinityLedger) {
-                    nextRoute = LedgerRoutes.GenerateAddress
+                    nextRoute = LedgerRoute.GenerateAddress
                 }
                 break
-            case LedgerRoutes.RestoreFromLedger:
+            case LedgerRoute.RestoreFromLedger:
                 get(appRouter).next(event)
                 break
-            case LedgerRoutes.LegacyIntro:
-                nextRoute = LedgerRoutes.InstallationGuide
+            case LedgerRoute.LegacyIntro:
+                nextRoute = LedgerRoute.InstallationGuide
                 break
-            case LedgerRoutes.InstallationGuide:
-                nextRoute = LedgerRoutes.Connect
+            case LedgerRoute.InstallationGuide:
+                nextRoute = LedgerRoute.Connect
                 break
-            case LedgerRoutes.GenerateAddress:
-                nextRoute = LedgerRoutes.SwitchApps
+            case LedgerRoute.GenerateAddress:
+                nextRoute = LedgerRoute.SwitchApps
                 break
-            case LedgerRoutes.SwitchApps:
-                nextRoute = LedgerRoutes.AccountIndex
+            case LedgerRoute.SwitchApps:
+                nextRoute = LedgerRoute.AccountIndex
                 break
-            case LedgerRoutes.AccountIndex:
+            case LedgerRoute.AccountIndex:
                 get(appRouter).next(event)
                 break
         }

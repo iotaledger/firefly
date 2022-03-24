@@ -9,7 +9,7 @@
         TransferFragmentedFunds,
     } from './views/'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { FireflyEvent, migrateRoute, MigrateRouter, MigrateRoutes } from '@core/router'
+    import { FireflyEvent, migrateRoute, MigrateRouter, MigrateRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -19,27 +19,27 @@
     const previous = (): void => migrateRouter.previous()
 </script>
 
-{#if $migrateRoute === MigrateRoutes.Init}
+{#if $migrateRoute === MigrateRoute.Init}
     <Transition>
         <Migrate on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $migrateRoute === MigrateRoutes.TransferFragmentedFunds}
+{:else if $migrateRoute === MigrateRoute.TransferFragmentedFunds}
     <Transition>
         <TransferFragmentedFunds on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $migrateRoute === MigrateRoutes.BundleMiningWarning}
+{:else if $migrateRoute === MigrateRoute.BundleMiningWarning}
     <Transition>
         <BundleMiningWarning on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $migrateRoute === MigrateRoutes.SecureSpentAddresses}
+{:else if $migrateRoute === MigrateRoute.SecureSpentAddresses}
     <Transition>
         <SecureSpentAddresses on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $migrateRoute === MigrateRoutes.SecuringSpentAddresses}
+{:else if $migrateRoute === MigrateRoute.SecuringSpentAddresses}
     <Transition>
         <SecuringSpentAddresses on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $migrateRoute === MigrateRoutes.SecurityCheckCompleted}
+{:else if $migrateRoute === MigrateRoute.SecurityCheckCompleted}
     <Transition>
         <SecurityCheckCompleted on:next={next} on:previous={previous} {locale} />
     </Transition>

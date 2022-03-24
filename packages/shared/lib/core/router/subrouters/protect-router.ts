@@ -12,38 +12,38 @@ import {
     walletSetupType,
 } from '@lib/wallet'
 
-import { ProtectRoutes } from '../enums'
+import { ProtectRoute } from '../enums'
 import { Subrouter } from '../subrouters'
 import { FireflyEvent } from '../types'
 import { appRouter } from '../app-router'
 
-export const protectRoute = writable<ProtectRoutes>(null)
+export const protectRoute = writable<ProtectRoute>(null)
 
-export class ProtectRouter extends Subrouter<ProtectRoutes> {
+export class ProtectRouter extends Subrouter<ProtectRoute> {
     constructor() {
-        super(ProtectRoutes.Pin, protectRoute)
+        super(ProtectRoute.Pin, protectRoute)
     }
 
     public pin: string
 
     async next(event: FireflyEvent): Promise<void> {
-        let nextRoute: ProtectRoutes
+        let nextRoute: ProtectRoute
         const { pin, protectionType } = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProtectRoutes.Init:
+            case ProtectRoute.Init:
                 if (protectionType === 'pin') {
-                    nextRoute = ProtectRoutes.Pin
+                    nextRoute = ProtectRoute.Pin
                 } else if (protectionType === 'biometric') {
-                    nextRoute = ProtectRoutes.Biometric
+                    nextRoute = ProtectRoute.Biometric
                 }
                 break
-            case ProtectRoutes.Pin:
+            case ProtectRoute.Pin:
                 this.pin = pin
-                nextRoute = ProtectRoutes.RepeatPin
+                nextRoute = ProtectRoute.RepeatPin
                 break
-            case ProtectRoutes.RepeatPin: {
+            case ProtectRoute.RepeatPin: {
                 await Platform.PincodeManager.set(get(activeProfile)?.id, this.pin)
                 await asyncSetStoragePassword(this.pin)
 

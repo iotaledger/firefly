@@ -7,35 +7,35 @@ import { updateProfile } from '@lib/profile'
 import { getDefaultStrongholdName } from '@lib/utils'
 
 import { appRouter } from '../app-router'
-import { BackupRoutes } from '../enums'
+import { BackupRoute } from '../enums'
 import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
-export const backupRoute = writable<BackupRoutes>(null)
+export const backupRoute = writable<BackupRoute>(null)
 
-export class BackupRouter extends Subrouter<BackupRoutes> {
+export class BackupRouter extends Subrouter<BackupRoute> {
     constructor() {
-        super(BackupRoutes.Init, backupRoute)
+        super(BackupRoute.Init, backupRoute)
     }
 
     async next(event: FireflyEvent): Promise<void> {
-        let nextRoute: BackupRoutes
+        let nextRoute: BackupRoute
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case BackupRoutes.Init:
+            case BackupRoute.Init:
                 await requestMnemonic()
-                nextRoute = BackupRoutes.RecoveryPhrase
+                nextRoute = BackupRoute.RecoveryPhrase
                 break
-            case BackupRoutes.RecoveryPhrase:
-                nextRoute = BackupRoutes.Verify
-                break
-
-            case BackupRoutes.Verify:
-                nextRoute = BackupRoutes.Backup
+            case BackupRoute.RecoveryPhrase:
+                nextRoute = BackupRoute.Verify
                 break
 
-            case BackupRoutes.Backup:
+            case BackupRoute.Verify:
+                nextRoute = BackupRoute.Backup
+                break
+
+            case BackupRoute.Backup:
                 if (event?.skip) {
                     await asyncStoreMnemonic(get(mnemonic).join(' '))
                     await asyncCreateAccount()

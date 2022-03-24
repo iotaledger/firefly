@@ -21,17 +21,17 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
         accountRouter,
-        AccountRoutes,
+        AccountRoute,
         AdvancedSettings,
         appRouter,
         dashboardRoute,
         dashboardRouter,
-        DashboardRoutes,
+        DashboardRoute,
         walletRoute,
         walletRouter,
         settingsRouter,
-        SettingsRoutes,
-        WalletRoutes,
+        SettingsRoute,
+        WalletRoute,
     } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
@@ -116,9 +116,9 @@
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)
-                    $dashboardRouter.goTo(DashboardRoutes.Wallet)
-                    $walletRouter.goTo(WalletRoutes.Account)
-                    $accountRouter.goTo(AccountRoutes.Init)
+                    $dashboardRouter.goTo(DashboardRoute.Wallet)
+                    $walletRouter.goTo(WalletRoute.Account)
+                    $accountRouter.goTo(AccountRoute.Init)
                 }
             }
         })
@@ -151,7 +151,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if ($walletRoute === WalletRoute.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -185,13 +185,13 @@
     }
 
     const handleDeepLinkRequest = (data: string): void => {
-        const _redirect = (tab: DashboardRoutes): void => {
+        const _redirect = (tab: DashboardRoute): void => {
             isDeepLinkRequestActive.set(true)
             $dashboardRouter.goTo(tab)
         }
         if (!$appSettings.deepLinking) {
-            _redirect(DashboardRoutes.Settings)
-            $settingsRouter.goToChildRoute(SettingsRoutes.AdvancedSettings, AdvancedSettings.DeepLinks)
+            _redirect(DashboardRoute.Settings)
+            $settingsRouter.goToChildRoute(SettingsRoute.AdvancedSettings, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
@@ -203,7 +203,7 @@
                     parsedDeepLink.operation === WalletOperation.Send &&
                     parsedDeepLink.parameters
                 ) {
-                    _redirect(DashboardRoutes.Wallet)
+                    _redirect(DashboardRoute.Wallet)
                     sendParams.set({
                         ...parsedDeepLink.parameters,
                         isInternal: false,

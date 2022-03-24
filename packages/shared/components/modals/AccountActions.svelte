@@ -4,7 +4,7 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRouter, AccountRoutes, resetWalletRoute } from '@core/router'
+    import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
     import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -24,7 +24,7 @@
         $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
-        $accountRouter.goTo(AccountRoutes.Manage)
+        $accountRouter.goTo(AccountRoute.Manage)
         isActive = false
     }
 

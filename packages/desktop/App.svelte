@@ -12,7 +12,7 @@
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { AppRoute, DashboardRoutes, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
+    import { AppRoute, DashboardRoute, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import {
         Appearance,
@@ -80,7 +80,7 @@
             pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
-            $dashboardRouter.goTo(DashboardRoutes.Wallet)
+            $dashboardRouter.goTo(DashboardRoute.Wallet)
             $walletRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {

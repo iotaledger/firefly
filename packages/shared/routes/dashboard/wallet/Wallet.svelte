@@ -15,7 +15,7 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute, walletRouter, WalletRoutes } from '@core/router'
+    import { walletRoute, walletRouter, WalletRoute } from '@core/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'
@@ -64,7 +64,7 @@
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
-            $walletRouter.goTo(WalletRoutes.Send)
+            $walletRouter.goTo(WalletRoute.Send)
             isDeepLinkRequestActive.set(false)
         }
     }
@@ -476,7 +476,7 @@
         }
     }
 
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
+    $: if (mobile && drawer && $walletRoute === WalletRoute.CreateAccount) {
         drawer.open()
     }
 
@@ -509,7 +509,7 @@
     })
 </script>
 
-{#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
+{#if $walletRoute === WalletRoute.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
 {:else if $mobile}
     <div class="wallet-wrapper w-full h-full flex flex-col flex-1 bg-gray-50 dark:bg-gray-900">
@@ -518,7 +518,7 @@
             <div class="flex flex-auto flex-col w-full">
                 <WalletBalance {locale} />
                 <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
-                {#if $walletRoute === WalletRoutes.CreateAccount}
+                {#if $walletRoute === WalletRoute.CreateAccount}
                     <Drawer dimLength={180} opened={true} bind:this={drawer} on:close={() => $walletRouter.reset()}>
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     </Drawer>
@@ -539,7 +539,7 @@
             <DashboardPane classes="h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col h-full">
-                    {#if $walletRoute === WalletRoutes.CreateAccount}
+                    {#if $walletRoute === WalletRoute.CreateAccount}
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />

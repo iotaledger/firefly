@@ -11,7 +11,7 @@
         GeneralSettingsNoProfile,
         HelpAndInfo,
         SecuritySettings,
-        SettingsRoutes,
+        SettingsRoute,
         settingsRouter,
     } from '@core/router'
 
@@ -28,7 +28,7 @@
     }
 
     function onSettingClick(
-        route: SettingsRoutes,
+        route: SettingsRoute,
         childRoute:
             | SecuritySettings
             | AdvancedSettings
@@ -54,7 +54,7 @@
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
         />
         <SettingsMenu
             icon="security"
@@ -64,7 +64,7 @@
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={localize('views.settings.security.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
         />
         <SettingsMenu
             icon="tools"
@@ -74,7 +74,7 @@
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
         />
         <SettingsMenu
             icon="info"
@@ -84,7 +84,7 @@
             activeSettings={HelpAndInfo}
             title={localize('views.settings.helpAndInfo.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
         />
     </div>
 </div>

@@ -8,41 +8,41 @@ import { ImportType } from '@lib/typings/profile'
 import { asyncRestoreBackup } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
-import { ImportRoutes } from '../enums'
+import { ImportRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 
-export const importRoute = writable<ImportRoutes>(null)
+export const importRoute = writable<ImportRoute>(null)
 
-export class ImportRouter extends Subrouter<ImportRoutes> {
+export class ImportRouter extends Subrouter<ImportRoute> {
     public isGettingMigrationData = writable(false)
     public importType = writable<ImportType>(null)
     public importFile: Buffer
     public importFilePath: string
 
     constructor() {
-        super(ImportRoutes.Init, importRoute)
+        super(ImportRoute.Init, importRoute)
     }
 
     async next(event: FireflyEvent): Promise<void> {
-        let nextRoute: ImportRoutes
+        let nextRoute: ImportRoute
         const params = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ImportRoutes.Init: {
+            case ImportRoute.Init: {
                 const { importType } = params
                 this.importType.set(importType)
                 if (importType === ImportType.Seed || importType === ImportType.Mnemonic) {
-                    nextRoute = ImportRoutes.TextImport
+                    nextRoute = ImportRoute.TextImport
                 } else if (importType === ImportType.File) {
-                    nextRoute = ImportRoutes.FileImport
+                    nextRoute = ImportRoute.FileImport
                 } else if (importType === ImportType.Ledger) {
-                    nextRoute = ImportRoutes.LedgerImport
+                    nextRoute = ImportRoute.LedgerImport
                 }
                 break
             }
-            case ImportRoutes.TextImport: {
+            case ImportRoute.TextImport: {
                 const { migrationSeed } = params
                 const importType = get(this.importType)
                 if (importType === ImportType.Seed) {
@@ -52,11 +52,11 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                     get(appRouter).next({ importType })
                 } else if (importType === ImportType.Mnemonic) {
                     mnemonic.set(migrationSeed.split(' '))
-                    nextRoute = ImportRoutes.Success
+                    nextRoute = ImportRoute.Success
                 }
                 break
             }
-            case ImportRoutes.FileImport: {
+            case ImportRoute.FileImport: {
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
                 const { file, fileName, filePath } = params
@@ -69,10 +69,10 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
 
                 this.importFile = file
                 this.importFilePath = filePath
-                nextRoute = ImportRoutes.BackupPassword
+                nextRoute = ImportRoute.BackupPassword
                 break
             }
-            case ImportRoutes.BackupPassword: {
+            case ImportRoute.BackupPassword: {
                 const { password } = params
                 try {
                     if (get(this.importType) === ImportType.SeedVault) {
@@ -90,19 +90,19 @@ export class ImportRouter extends Subrouter<ImportRoutes> {
                         get(newProfile).lastStrongholdBackupTime = new Date()
                     }
 
-                    nextRoute = ImportRoutes.Success
+                    nextRoute = ImportRoute.Success
                 } finally {
                     this.isGettingMigrationData.set(false)
                 }
                 break
             }
-            case ImportRoutes.LedgerImport: {
+            case ImportRoute.LedgerImport: {
                 const { importType } = params
                 this.importType.set(importType)
                 get(appRouter).next({ importType })
                 break
             }
-            case ImportRoutes.Success:
+            case ImportRoute.Success:
                 get(appRouter).next({ importType: get(this.importType) })
                 break
         }

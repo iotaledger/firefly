@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { FireflyEvent, loginRoute, LoginRouter, LoginRoutes } from '@core/router'
+    import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -24,11 +24,11 @@
     const previous = (): void => loginRouter.previous()
 </script>
 
-{#if $loginRoute === LoginRoutes.Init}
+{#if $loginRoute === LoginRoute.Init}
     <Transition>
         <SelectProfile on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $loginRoute === LoginRoutes.EnterPin}
+{:else if $loginRoute === LoginRoute.EnterPin}
     <Transition>
         <EnterPin on:next={next} on:previous={previous} {locale} />
     </Transition>

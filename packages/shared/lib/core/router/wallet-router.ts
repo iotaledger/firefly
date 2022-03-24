@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store'
 
-import { WalletRoutes } from './enums'
+import { WalletRoute } from './enums'
 import { Router } from './router'
 
-export const walletRoute = writable<WalletRoutes>(null)
+export const walletRoute = writable<WalletRoute>(null)
 export const walletRouter = writable<WalletRouter>(null)
 
-export class WalletRouter extends Router<WalletRoutes> {
+export class WalletRouter extends Router<WalletRoute> {
     constructor() {
-        super(WalletRoutes.Init, walletRoute)
+        super(WalletRoute.Init, walletRoute)
     }
 }

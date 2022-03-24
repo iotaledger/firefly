@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoutes } from '@core/router'
+    import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoute } from '@core/router'
     import {
         AccountIndex,
         Connect,
@@ -25,16 +25,16 @@
 
     const updateMigrationProgress = (): void => {
         switch ($ledgerRoute) {
-            case LedgerRoutes.Connect:
+            case LedgerRoute.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
-            case LedgerRoutes.GenerateAddress:
+            case LedgerRoute.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case LedgerRoutes.SwitchApps:
+            case LedgerRoute.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
-            case LedgerRoutes.AccountIndex:
+            case LedgerRoute.AccountIndex:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
             default:
@@ -47,31 +47,31 @@
     const previous = (): void => $ledgerRouter.previous()
 </script>
 
-{#if $ledgerRoute === LedgerRoutes.Connect}
+{#if $ledgerRoute === LedgerRoute.Connect}
     <Transition>
         <Connect on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.RestoreFromLedger}
+{:else if $ledgerRoute === LedgerRoute.RestoreFromLedger}
     <Transition>
         <RestoreFromLedger on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.LegacyIntro}
+{:else if $ledgerRoute === LedgerRoute.LegacyIntro}
     <Transition>
         <LegacyIntro on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.InstallationGuide}
+{:else if $ledgerRoute === LedgerRoute.InstallationGuide}
     <Transition>
         <InstallationGuide on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.GenerateAddress}
+{:else if $ledgerRoute === LedgerRoute.GenerateAddress}
     <Transition>
         <GenerateNewAddress on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.SwitchApps}
+{:else if $ledgerRoute === LedgerRoute.SwitchApps}
     <Transition>
         <SwitchApps on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.AccountIndex}
+{:else if $ledgerRoute === LedgerRoute.AccountIndex}
     <Transition>
         <AccountIndex on:next={next} on:previous={previous} {locale} />
     </Transition>

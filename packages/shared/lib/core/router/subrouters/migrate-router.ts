@@ -3,48 +3,48 @@ import { get, writable } from 'svelte/store'
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
 
 import { appRouter } from '../app-router'
-import { MigrateRoutes } from '../enums'
+import { MigrateRoute } from '../enums'
 import { Subrouter } from '../subrouters'
 import { FireflyEvent } from '../types'
 
-export const migrateRoute = writable<MigrateRoutes>(null)
+export const migrateRoute = writable<MigrateRoute>(null)
 
-export class MigrateRouter extends Subrouter<MigrateRoutes> {
+export class MigrateRouter extends Subrouter<MigrateRoute> {
     constructor() {
-        super(MigrateRoutes.Init, migrateRoute)
+        super(MigrateRoute.Init, migrateRoute)
     }
 
     next(event: FireflyEvent): void {
-        let nextRoute: MigrateRoutes
+        let nextRoute: MigrateRoute
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case MigrateRoutes.Init:
+            case MigrateRoute.Init:
                 if (get(hasBundlesWithSpentAddresses)) {
-                    nextRoute = MigrateRoutes.BundleMiningWarning
+                    nextRoute = MigrateRoute.BundleMiningWarning
                     break
                 }
                 if (get(hasSingleBundle)) {
                     get(appRouter).next()
                 } else {
-                    nextRoute = MigrateRoutes.TransferFragmentedFunds
+                    nextRoute = MigrateRoute.TransferFragmentedFunds
                 }
                 break
-            case MigrateRoutes.BundleMiningWarning:
-                nextRoute = MigrateRoutes.SecureSpentAddresses
+            case MigrateRoute.BundleMiningWarning:
+                nextRoute = MigrateRoute.SecureSpentAddresses
                 break
-            case MigrateRoutes.SecureSpentAddresses: {
+            case MigrateRoute.SecureSpentAddresses: {
                 nextRoute = event?.skippedMining
-                    ? MigrateRoutes.TransferFragmentedFunds
-                    : MigrateRoutes.SecuringSpentAddresses
+                    ? MigrateRoute.TransferFragmentedFunds
+                    : MigrateRoute.SecuringSpentAddresses
                 break
             }
-            case MigrateRoutes.SecuringSpentAddresses:
-                nextRoute = MigrateRoutes.SecurityCheckCompleted
+            case MigrateRoute.SecuringSpentAddresses:
+                nextRoute = MigrateRoute.SecurityCheckCompleted
                 break
-            case MigrateRoutes.SecurityCheckCompleted:
-                nextRoute = MigrateRoutes.TransferFragmentedFunds
+            case MigrateRoute.SecurityCheckCompleted:
+                nextRoute = MigrateRoute.TransferFragmentedFunds
                 break
-            case MigrateRoutes.TransferFragmentedFunds:
+            case MigrateRoute.TransferFragmentedFunds:
                 get(appRouter).next()
                 break
         }

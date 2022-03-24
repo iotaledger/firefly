@@ -9,11 +9,11 @@
     import {
         dashboardRoute,
         dashboardRouter,
-        DashboardRoutes,
+        DashboardRoute,
         resetWalletRoute,
         settingsRoute,
         settingsRouter,
-        SettingsRoutes,
+        SettingsRoute,
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -35,7 +35,7 @@
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== DashboardRoutes.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
@@ -51,7 +51,7 @@
     }
 
     function handleBackClick() {
-        if ($settingsRoute === SettingsRoutes.Init) {
+        if ($settingsRoute === SettingsRoute.Init) {
             drawer?.close()
         } else {
             $settingsRouter.previous()
@@ -59,7 +59,7 @@
     }
 
     function openStaking() {
-        $dashboardRouter.goTo(DashboardRoutes.Staking)
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 
@@ -79,13 +79,13 @@
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
                     {locale(
-                        $settingsRoute === SettingsRoutes.Init
+                        $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
                     )}
                 </Text>
             </header>
-            {#if $settingsRoute === SettingsRoutes.Init}
+            {#if $settingsRoute === SettingsRoute.Init}
                 <!-- TODO: add real profile data -->
                 <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
                     <div
@@ -109,13 +109,13 @@
         <nav class="flex flex-grow flex-col items-center justify-between">
             <div class="flex flex-col">
                 <button
-                    class="mb-8 {$dashboardRoute === DashboardRoutes.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                    class="mb-8 {$dashboardRoute === DashboardRoute.Wallet ? 'text-blue-500' : 'text-gray-500'}"
                     on:click={openWallet}
                 >
                     <Icon width="24" height="24" icon="wallet" />
                 </button>
                 <button
-                    class="{$dashboardRoute === DashboardRoutes.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                    class="{$dashboardRoute === DashboardRoute.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
                     on:click={openStaking}
                 >
                     <Icon width="24" height="24" icon="tokens" />

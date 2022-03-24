@@ -7,7 +7,7 @@ import { selectedAccountId, selectedMessage } from '@lib/wallet'
 import { appRouter, AppRouter } from './app-router'
 import { accountRouter, AccountRouter } from './account-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
-import { DashboardRoutes } from './enums'
+import { DashboardRoute } from './enums'
 import { walletRouter, WalletRouter } from './wallet-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
 import { ledgerRouter, LedgerRouter } from './subrouters'
@@ -41,6 +41,6 @@ export const resetWalletRoute = (): void => {
 
 export const openSettings = (): void => {
     closePopup()
-    get(dashboardRouter).goTo(DashboardRoutes.Settings)
+    get(dashboardRouter).goTo(DashboardRoute.Settings)
     get(settingsRouter).reset()
 }

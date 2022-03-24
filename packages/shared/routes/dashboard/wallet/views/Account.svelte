@@ -7,7 +7,7 @@
     import { selectedAccountId } from 'shared/lib/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
-    import { accountRoute, AccountRoutes } from '@core/router'
+    import { accountRoute, AccountRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -46,7 +46,7 @@
                         balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick}
-                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
+                        classes={$accountRoute === AccountRoute.Manage ? 'hidden' : ''}
                     />
                     <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions

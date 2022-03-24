@@ -6,7 +6,7 @@
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRouter, AccountRoutes, walletRoute, walletRouter, WalletRoutes } from '@core/router'
+    import { accountRouter, AccountRoute, walletRoute, walletRouter, WalletRoute } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
@@ -23,8 +23,8 @@
     let drawer: Drawer
 
     $: if (
-        ($mobile && drawer && $walletRoute === WalletRoutes.Receive) ||
-        (drawer && $walletRoute === WalletRoutes.Send)
+        ($mobile && drawer && $walletRoute === WalletRoute.Receive) ||
+        (drawer && $walletRoute === WalletRoute.Send)
     ) {
         drawer.open()
     }
@@ -34,16 +34,16 @@
 
     function handleAccountClick(accountId: string) {
         selectedAccountId.set(accountId)
-        $walletRouter.goTo(WalletRoutes.Account)
-        $accountRouter.goTo(AccountRoutes.Init)
+        $walletRouter.goTo(WalletRoute.Account)
+        $accountRouter.goTo(AccountRoute.Init)
     }
     function handleCreateClick() {
-        $walletRouter.goTo(WalletRoutes.CreateAccount)
+        $walletRouter.goTo(WalletRoute.CreateAccount)
     }
 </script>
 
 {#if $mobile}
-    {#if $walletRoute === WalletRoutes.Init || $walletRoute === WalletRoutes.Send || $walletRoute === WalletRoutes.Receive || $walletRoute === WalletRoutes.CreateAccount}
+    {#if $walletRoute === WalletRoute.Init || $walletRoute === WalletRoute.Send || $walletRoute === WalletRoute.Receive || $walletRoute === WalletRoute.CreateAccount}
         <div class="p-8 pt-4 flex flex-col h-full justify-between">
             <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
                 <div class="flex flex-row mb-4 justify-between items-center">
@@ -75,15 +75,15 @@
                 {/if}
             </div>
         </div>
-        <Drawer dimLength={180} opened={false} bind:this={drawer} on:close={() => walletRoute.set(WalletRoutes.Init)}>
-            {#if $walletRoute === WalletRoutes.Send}
+        <Drawer dimLength={180} opened={false} bind:this={drawer} on:close={() => walletRoute.set(WalletRoute.Init)}>
+            {#if $walletRoute === WalletRoute.Send}
                 <Send {onSend} {onInternalTransfer} {locale} />
-            {:else if $walletRoute === WalletRoutes.Receive}
+            {:else if $walletRoute === WalletRoute.Receive}
                 <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
             {/if}
         </Drawer>
     {/if}
-{:else if $walletRoute === WalletRoutes.Init}
+{:else if $walletRoute === WalletRoute.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
@@ -124,9 +124,9 @@
             {/if}
         </div>
     </div>
-{:else if $walletRoute === WalletRoutes.Send}
+{:else if $walletRoute === WalletRoute.Send}
     <Send {onSend} {onInternalTransfer} {locale} />
-{:else if $walletRoute === WalletRoutes.Receive}
+{:else if $walletRoute === WalletRoute.Receive}
     <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}
 

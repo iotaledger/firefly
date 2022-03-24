@@ -21,7 +21,7 @@ export enum AppRoute {
     Login = 'login',
 }
 
-export enum LedgerRoutes {
+export enum LedgerRoute {
     Connect = 'connect',
     RestoreFromLedger = 'restoreFromLedger',
     LegacyIntro = 'legacyIntro',
@@ -31,7 +31,7 @@ export enum LedgerRoutes {
     AccountIndex = 'accountIndex',
 }
 
-export enum WalletRoutes {
+export enum WalletRoute {
     Init = 'init',
     Account = 'account',
     Send = 'send',
@@ -39,20 +39,20 @@ export enum WalletRoutes {
     CreateAccount = 'createAccount',
 }
 
-export enum AccountRoutes {
+export enum AccountRoute {
     Init = 'init',
     Manage = 'manage',
     Send = 'send',
     Receive = 'receive',
 }
 
-export enum DashboardRoutes {
+export enum DashboardRoute {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
 }
 
-export enum SettingsRoutes {
+export enum SettingsRoute {
     Init = 'init',
     GeneralSettings = 'generalSettings',
     Security = 'security',
@@ -60,7 +60,7 @@ export enum SettingsRoutes {
     HelpAndInfo = 'helpAndInfo',
 }
 
-export enum SettingsRoutesNoProfile {
+export enum SettingsRouteNoProfile {
     Init = 'init',
     GeneralSettings = 'generalSettings',
     AdvancedSettings = 'advancedSettings',
@@ -121,19 +121,19 @@ export enum ExternalRoute {
     IssueReport = 'https://github.com/iotaledger/firefly/issues',
 }
 
-export enum LoginRoutes {
+export enum LoginRoute {
     Init = 'init',
     EnterPin = 'enterPin',
 }
 
-export enum BackupRoutes {
+export enum BackupRoute {
     Init = 'init',
     RecoveryPhrase = 'recoveryPhrase',
     Verify = 'verify',
     Backup = 'backup',
 }
 
-export enum ImportRoutes {
+export enum ImportRoute {
     Init = 'init',
     TextImport = 'textImport',
     FileImport = 'fileImport',
@@ -142,14 +142,14 @@ export enum ImportRoutes {
     Success = 'Success',
 }
 
-export enum ProtectRoutes {
+export enum ProtectRoute {
     Init = 'init',
     Biometric = 'biometric',
     Pin = 'pin',
     RepeatPin = 'repeatPin',
 }
 
-export enum MigrateRoutes {
+export enum MigrateRoute {
     Init = 'init',
     TransferFragmentedFunds = 'transferFragmentedFunds',
     BundleMiningWarning = 'bundleMiningWarning',
