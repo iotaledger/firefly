@@ -26,7 +26,6 @@
         getAccountMeta,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners,
         isFirstSessionSync,
         isTransferring,
         prepareAccountInfo,
@@ -39,6 +38,7 @@
         wallet,
         addMessagesPair,
     } from 'shared/lib/wallet'
+    import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import {
         AccountAssets,
