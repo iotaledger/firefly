@@ -246,6 +246,7 @@ function createWindow() {
         minWidth: 1280,
         minHeight: 720,
         titleBarStyle: 'hidden',
+        title: app.name,
         frame: process.platform === 'linux',
         icon:
             process.platform === 'linux'
