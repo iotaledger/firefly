@@ -4,19 +4,20 @@
  * electron/lib/aboutPreload.
  */
 
-const { readFileSync, writeFileSync } = require('fs')
+const { readFile, writeFile } = require('fs/promises')
 const path = require('path')
 
-if (!process.env.CI) {
-    console.warn('Warning: These changes should not be checked into Git!')
+/**
+ *
+ * @param {string} appName
+ * @returns void
+ */
+module.exports = async (appName) => {
+    const packageJsonPath = path.resolve(__dirname, '../package.json')
+
+    const packageJson = JSON.parse(await readFile(packageJsonPath, { encoding: 'utf-8' }))
+    packageJson.productName = appName
+
+    // Write out package.json with 4 spaces indentation and a trailing newline
+    await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 4).concat('\n'))
 }
-
-const stage = process.env.STAGE || 'alpha'
-const appName = stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
-const packageJsonPath = path.resolve(__dirname, '../package.json')
-
-const packageJson = JSON.parse(readFileSync(packageJsonPath, { encoding: 'utf-8' }))
-packageJson.productName = appName
-
-// Write out package.json with 4 spaces indentation and a trailing newline
-writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4).concat('\n'))
