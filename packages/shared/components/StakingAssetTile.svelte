@@ -131,7 +131,7 @@
 
 <button
     style="--asset-color: {asset?.color}"
-    class="flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
+    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
     class:staked={isActivelyStaking}
     class:partial-stake={showWarningState}
     class:darkmode={isDarkModeEnabled}
@@ -139,23 +139,7 @@
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-            {#if showWarningState}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                    <Icon
-                        icon="exclamation"
-                        width="16"
-                        height="16"
-                        classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
-                    />
-                </div>
-            {:else}
-                <Icon
-                    classes="text-{assetIconColor}"
-                    icon={asset?.name?.toLocaleLowerCase()}
-                    height="100%"
-                    width="100%"
-                />
-            {/if}
+            <Icon classes="text-{assetIconColor}" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
         <div class="flex flex-col flex-wrap space-y-1">
             <Text classes="font-semibold">{asset?.name}</Text>
@@ -164,10 +148,22 @@
             {/if}
         </div>
     </div>
-    <div class="flex flex-col flex-wrap space-y-1 text-right">
-        <Text classes="font-semibold">{asset?.balance}</Text>
-        {#if asset?.fiatBalance}
-            <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
+    <div class="flex flex-row space-x-2 items-center">
+        <div class="flex flex-col flex-wrap space-y-1 text-right">
+            <Text classes="font-semibold">{asset?.balance}</Text>
+            {#if asset?.fiatBalance}
+                <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
+            {/if}
+        </div>
+        {#if showWarningState}
+            <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                <Icon
+                    icon="exclamation"
+                    width="16"
+                    height="16"
+                    classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
+                />
+            </div>
         {/if}
     </div>
 </button>
