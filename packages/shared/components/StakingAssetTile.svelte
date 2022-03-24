@@ -45,8 +45,8 @@
 
     $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = _getAccount($stakedAccounts) && isStakingPossible($stakingEventState)
-    $: isPartiallyStaked = _getAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
+    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible($stakingEventState)
+    $: isPartiallyStaked = getAccount($partiallyStakedAccounts) && isStakingPossible($stakingEventState)
     $: hasStakingEnded = $stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
@@ -62,7 +62,7 @@
     }
     $: canShowWarningState =
         isPartiallyStaked ||
-        (isBelowMinimumRewards && !_getAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
+        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
@@ -71,7 +71,7 @@
     function handleTileClick(): void {
         openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
     }
-    function _getAccount(accounts: WalletAccount[]): WalletAccount {
+    function getAccount(accounts: WalletAccount[]): WalletAccount {
         return accounts.find((account) => account.alias === $selectedAccount.alias)
     }
     function getLocalizedTooltipText(): TooltipText {
@@ -97,7 +97,7 @@
                     ],
                 }
             } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible($stakingEventState)) {
-                const timeNeeded = <number>getTimeUntilMinimumAirdropReward($selectedAccount, airdrop)
+                const timeNeeded = getTimeUntilMinimumAirdropReward($selectedAccount, airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {
                         const body = localize('tooltips.stakingMinRewards.bodyBelowMin', {
@@ -135,7 +135,6 @@
     class:partial-stake={canShowWarningState}
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
-    disabled
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">

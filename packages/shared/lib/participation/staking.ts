@@ -347,24 +347,14 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  *
  * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
- * @param {boolean} format
  *
- * @returns {number | string}
+ * @returns {number}
  */
-export const getTimeUntilMinimumAirdropReward = (
-    account: WalletAccount,
-    airdrop: StakingAirdrop,
-    format: boolean = false
-): number | string => {
-    if (!account) {
-        return format ? getBestTimeDuration(0) : 0
-    }
-
+export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(account, airdrop)
     const amountStaked = account?.rawIotaBalance
     const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
-
-    return format ? getBestTimeDuration(timeRequired) : timeRequired
+    return timeRequired
 }
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {

@@ -2,12 +2,13 @@
     import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isStakingForShimmer, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         participationOverview,
         shimmerStakingRemainingTime,
-        selectedAccountStakingRewards,
+        assemblyStakingRewards,
+        shimmerStakingRewards,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
@@ -140,18 +141,14 @@
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly()
-                                ? $selectedAccountStakingRewards?.assembly
-                                : $selectedAccountStakingRewards?.shimmer,
+                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly()
-                                ? $selectedAccountStakingRewards?.assembly
-                                : $selectedAccountStakingRewards?.shimmer,
+                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[1]}
                     </Text>

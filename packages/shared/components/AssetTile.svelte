@@ -13,7 +13,7 @@
 {#if isStakingAsset}
     <StakingAssetTile {asset} />
 {:else}
-    <button
+    <div
         style="--asset-color: {asset?.color}"
         class="flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl"
     >
@@ -39,7 +39,7 @@
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}
         </div>
-    </button>
+    </div>
 {/if}
 
 <style type="text/scss">
