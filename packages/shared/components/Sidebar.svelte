@@ -16,6 +16,7 @@
     let showProfile = false
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
+    const profileColor = 'blue' // TODO: each profile has a different color
 
     const hasTitleBar = document.body.classList.contains('platform-win32')
 
