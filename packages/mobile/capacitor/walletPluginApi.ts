@@ -23,10 +23,10 @@ import {
     syncAccount as _syncAccount,
     SyncAccountOptions,
     syncAccounts as _syncAccounts,
-} from '../../shared/lib/typings/account'
-import { BridgeMessage, CommunicationIds, MessageResponse } from '../../shared/lib/typings/bridge'
-import { ClientOptions } from '../../shared/lib/typings/client'
-import { reattach as _reattach, Transfer } from '../../shared/lib/typings/message'
+} from '@lib/typings/account'
+import { BridgeMessage, CommunicationIds, MessageResponse } from '@lib/typings/bridge'
+import { ClientOptions } from '@lib/typings/client'
+import { reattach as _reattach, Transfer } from '@lib/typings/message'
 import {
     getMigrationData as _getMigrationData,
     createMigrationBundle as _createMigrationBundle,
@@ -37,8 +37,8 @@ import {
     sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
     getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput,
-} from '../../shared/lib/typings/migration'
-import { NodeAuth } from '../../shared/lib/typings/node'
+} from '@lib/typings/migration'
+import { NodeAuth } from '@lib/typings/node'
 import {
     backup as _backup,
     changeStrongholdPassword as _changeStrongholdPassword,
@@ -57,7 +57,7 @@ import {
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
-} from '../../shared/lib/typings/wallet'
+} from '@lib/typings/wallet'
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 

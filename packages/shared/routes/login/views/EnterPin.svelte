@@ -73,7 +73,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
-            const { sendCrashReports } = get(initAppSettings)
+            const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }
 
             isBusy = true
 
