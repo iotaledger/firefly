@@ -72,11 +72,12 @@ jobs:
     - name: Install dependencies
       run: yarn
 
-    - name: Rebuild backend actor system with Sentry DSN
+    - name: Rebuild backend actor system with Sentry DSN and environment
       run: yarn build:binding
       working-directory: packages/backend/bindings/node
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
+        SENTRY_ENVIRONMENT: 'prod'
 
     - name: Bundle desktop JS
       run: yarn build

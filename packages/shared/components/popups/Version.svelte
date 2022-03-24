@@ -72,7 +72,7 @@
                 <Text error classes="mt-4">{locale('popups.version.noAutoUpdate')}</Text>
             {/if}
         </div>
-        <div class="flex flex-row justify-between space-x-4 w-full px-8">
+        <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
                 {locale('actions.updateFirefly')}
