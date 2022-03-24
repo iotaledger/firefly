@@ -1,4 +1,4 @@
-import { IDeepLinkManager } from '@common/deep-links'
+import { IDeepLinkManager } from '@common/deep-link'
 
 /**
  * Deep link manager for mobile platform.

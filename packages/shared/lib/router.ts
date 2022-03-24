@@ -1,6 +1,6 @@
 import { get, readable, writable } from 'svelte/store'
 
-import { isDeepLinkRequestActive } from '@common/deep-links'
+import { isDeepLinkRequestActive } from '@common/deep-link'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@core/app'
 import { activeProfile, profiles, setProfileType } from './profile'
 import { AccountRoutes, AppRoute, LedgerRoutes, SettingsRoutes, SetupType, Tabs, WalletRoutes } from './typings/routes'

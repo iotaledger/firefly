@@ -55,7 +55,7 @@
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { isDeepLinkRequestActive } from '@common/deep-links'
+    import { isDeepLinkRequestActive } from '@common/deep-link'
 
     export let locale: Locale
 

@@ -32,7 +32,7 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-link'
 
     export let locale: Locale
 

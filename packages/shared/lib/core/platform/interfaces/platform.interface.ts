@@ -2,7 +2,7 @@ import { VersionDetails } from '@core/app'
 import { Error } from '@core/error'
 import { INotificationManager } from '@core/notification'
 
-import { IDeepLinkManager } from '@common/deep-links'
+import { IDeepLinkManager } from '@common/deep-link'
 
 import { ILedger } from '@lib/typings/ledger'
 import { AppSettings } from '@core/app'
