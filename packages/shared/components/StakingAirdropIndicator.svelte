@@ -12,9 +12,9 @@
 
     function isStakedForAirdrop(overview: AccountParticipationOverview): boolean {
         if (airdrop === StakingAirdrop.Assembly) {
-            return overview.assemblyStakedFunds > 0
+            return overview?.assemblyStakedFunds > 0
         }
-        return overview.shimmerStakedFunds > 0
+        return overview?.shimmerStakedFunds > 0
     }
 
     $: isStaked = isStakedForAirdrop($selectedAccountParticipationOverview)
