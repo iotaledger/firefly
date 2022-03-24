@@ -5,18 +5,21 @@
 </script>
 
 <div class="h-full flex flex-col justify-between">
-    <div class="flex justify-center items-center flex-col text-center">
-        <Illustration illustration="governance-info" classes="w-32 h-32 mb-8" />
-        <Text type="h3" classes="text-gray-800 mb-5" overrideColor>{localize('views.governance.info.title')}</Text>
-        <Text type="p" classes="text-gray-700 mb-5 font-normal text-14" overrideColor
+    <div class="flex justify-center items-center flex-col text-center min-h-0">
+        <Illustration illustration="governance-info" classes="w-32 h-32 mb-6" />
+        <Text type="h3" classes="text-gray-800 dark:text-white mb-3" overrideColor
+            >{localize('views.governance.info.title')}</Text
+        >
+        <Text type="p" classes="text-gray-700 dark:text-gray-500 mb-4 font-normal text-13 overflow-auto" overrideColor
             >{localize('views.governance.info.description')}</Text
         >
     </div>
     <Link
-        classes="mr-5 text-13 text-gray-800 border border-solid border-gray-300 rounded-xl py-4 pl-6 flex justify-between bg-gray-50 hover:bg-blue-100"
+        classes="mr-5 text-13 text-gray-800 dark:text-white border border-solid border-gray-300 dark:border-transparent
+        py-4 pl-6 flex justify-between bg-gray-50 hover:bg-blue-100 dark:hover:bg-gray-700 dark:bg-gray-900 rounded-xl w-full h-fit"
         onClick={() => Electron.openUrl('https://iotatreasury.org/how-voting-works.html')}
     >
-        {localize('views.governance.info.link')}
+        <Text type="p" classes="truncate">{localize('views.governance.info.link')}</Text>
         <Icon icon="chevron-right" classes="flex-shrink-0 mx-4 text-gray-700 dark:text-white" />
     </Link>
 </div>

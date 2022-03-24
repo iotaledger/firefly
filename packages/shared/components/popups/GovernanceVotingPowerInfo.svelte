@@ -6,8 +6,8 @@
 
 <div>
     <Text type="h2" classes="mb-10">{localize('views.governance.votingPower.info.title')}</Text>
-    <div class="w-full h-48 bg-lightblue-100 rounded-2xl mb-8 flex justify-center items-center">
-        <Text type="h3" classes="text-gray-800" overrideColor
+    <div class="w-full h-48 bg-lightblue-100 dark:bg-gray-800 rounded-2xl mb-8 flex justify-center items-center">
+        <Text type="h3" classes="text-gray-800 dark:text-white" overrideColor
             >{localize('views.governance.votingPower.info.equality')}</Text
         >
     </div>

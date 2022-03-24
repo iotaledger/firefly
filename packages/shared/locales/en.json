@@ -572,7 +572,15 @@
                     "holding": "Counting",
                     "ended": "Ended"
                 },
-                "button": "View proposal"
+                "button": "View proposal",
+                "treasury": {
+                    "notFound": {
+                        "title": "Couldn't load Community Treasury vote.",
+                        "subtitle": "Please connect to nodes that support this proposal",
+                        "buttonConnect": "Connect to default node",
+                        "buttonSettings": "View node settings"
+                    }
+                }
             },
             "eventDetails": {
                 "votingOpens": "Voting opens on",
@@ -580,7 +588,13 @@
                 "votesCounted": "Your total votes counted",
                 "countingStarts": "Counting starts on",
                 "countingLength": "Counting length",
-                "currentResults": "Current results"
+                "currentResults": "Current results",
+                "answerHeader": {
+                    "activeVoting": "Active voting",
+                    "selected": "Selected",
+                    "notSelected": "Not selected",
+                    "winner": "Winner"
+                }
             },
             "votes": "votes"
         }
@@ -1099,7 +1113,8 @@
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "option": "Option"
     },
     "dates": {
         "today": "Today",

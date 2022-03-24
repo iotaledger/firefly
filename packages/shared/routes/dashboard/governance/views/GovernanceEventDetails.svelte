@@ -3,7 +3,12 @@
     import { localize } from 'shared/lib/i18n'
     import { canParticipate } from 'shared/lib/participation'
     import { participationOverview } from 'shared/lib/participation/stores'
-    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
+    import {
+        ParticipationEvent,
+        ParticipationEventState,
+        VotingEventAnswer,
+        VotingEventQuestion,
+    } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { governanceRoute } from 'shared/lib/router'
     import { GovernanceRoutes } from 'shared/lib/typings/routes'
@@ -12,10 +17,10 @@
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
     import { AccountColors } from 'shared/lib/wallet'
     import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
-    import { delineateNumber } from 'shared/lib/utils'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
+    import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
@@ -72,12 +77,14 @@
     }
 
     const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
-        if (isSelected(castedAnswerValue, answerValue)) {
+        if (isWinnerAnswer(answerValue)) {
+            return localize('views.governance.eventDetails.answerHeader.winner')
+        } else if (isSelected(castedAnswerValue, answerValue)) {
             return setActiveText()
         } else if (castedAnswerValue) {
-            return 'Not Selected'
+            return localize('views.governance.eventDetails.answerHeader.notSelected')
         } else {
-            return `Option ${answerValue}`
+            return `${localize('general.option')} ${answerValue}`
         }
     }
 
@@ -90,9 +97,9 @@
 
     const setActiveText = (): string => {
         if (event?.status?.status === ParticipationEventState.Holding) {
-            return 'Active Voting'
+            return localize('views.governance.eventDetails.answerHeader.activeVoting')
         }
-        return 'Selected'
+        return localize('views.governance.eventDetails.answerHeader.selected')
     }
 
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
@@ -151,6 +158,16 @@
             handleTransferState($transferState)
         }
     }
+
+    const isWinnerAnswer = (answerValue: string): boolean => {
+        if (event?.status?.status === ParticipationEventState.Ended) {
+            const resultsAccumulated = results.map((result) => result?.accumulated)
+            const max = Math.max(...resultsAccumulated)
+            const indexOfMax = resultsAccumulated.indexOf(max)
+            return answerValue == results[indexOfMax]?.value.toString()
+        }
+        return false
+    }
 </script>
 
 <div
@@ -162,59 +179,106 @@
     <Text type="p" smaller overrideColor classes="text-gray-800">{localize('actions.back')}</Text>
 </div>
 
-<div class="w-full h-full grid grid-cols-3 grid-rows-2 gap-4 min-h-0">
+<div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
         <div class="flex flex-start items-center mb-2">
-            <Text type="p" classes="px-2 py-1 text-blue-500 bg-blue-100 rounded-lg" smaller bold overrideColor
-                >{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
+            <Text
+                type="p"
+                classes="px-2 py-1 text-blue-500 bg-blue-100 dark:bg-gray-900 rounded-lg"
+                smaller
+                bold
+                overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
             >
             <Icon icon="info-filled" classes="ml-2 text-gray-400" />
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
-        <Text type="p" classes="mb-2">{event?.information?.additionalInfo}</Text>
-        <Text type="p" classes="mb-2">{event?.information?.payload?.questions[0]?.text}</Text>
-        <Text type="p" classes="mb-6">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
+        <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
+        <div class="min-h-0 overflow-auto mb-6">
+            <Text type="p" classes="mb-1">{event?.information?.payload?.questions[0]?.text}</Text>
+            <Text type="p">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
+        </div>
         {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
                 onClick={() => handleClick(answer)}
-                secondary
+                secondary={!isWinnerAnswer(answer?.value)}
                 disabled={!canParticipate(event?.status?.status)}
-                classes="px-6 bg-{isSelected(currentVoteValue, answer?.value)
-                    ? 'blue-100'
-                    : 'gray-50'} hover:bg-gray-100 border border-solid border-gray-100 flex justify-between mb-4"
+                active={isSelected(currentVoteValue, answer?.value)}
+                classes="px-6 flex justify-between mb-4 overflow-hidden"
             >
-                <div>
-                    <div class="flex items-center mb-2">
-                        {#if isSelected(currentVoteValue, answer?.value)}
-                            <Icon width="16" height="16" icon="checkbox-round" classes="text-blue-500 mr-2" />
-                        {/if}
-                        <Text type="p" classes="uppercase text-blue-500" overrideColor smaller bold>
-                            {getAnswerHeader(currentVoteValue, answer?.value)}
+                <div class="flex justify-between w-full items-center">
+                    <div class="flex flex-col mr-32">
+                        <div class="flex items-center mb-2">
+                            {#if isSelected(currentVoteValue, answer?.value)}
+                                {#if event?.status?.status === ParticipationEventState.Holding}
+                                    <span class="relative flex justify-center items-center h-3 w-3 mr-2">
+                                        <span
+                                            class="pulse absolute inline-flex h-full w-full rounded-full bg-blue-400
+                                            opacity-75"
+                                        />
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                                    </span>
+                                {:else}
+                                    <Icon
+                                        width="16"
+                                        height="16"
+                                        icon="checkbox-round"
+                                        classes="{isWinnerAnswer(answer?.value) ? 'text-black' : 'text-blue-500'} mr-2"
+                                        inlineStyle={isWinnerAnswer(answer?.value) ? 'filter: invert(1)' : ''}
+                                    />
+                                {/if}
+                            {/if}
+                            <Text
+                                type="p"
+                                classes="uppercase text-blue-500 {currentVoteValue &&
+                                !isSelected(currentVoteValue, answer?.value)
+                                    ? 'text-gray-500'
+                                    : ''}
+                                {isWinnerAnswer(answer?.value) ? 'text-white' : ''}"
+                                overrideColor
+                                smaller
+                                bold
+                            >
+                                {getAnswerHeader(currentVoteValue, answer?.value)}
+                            </Text>
+                        </div>
+                        <Text
+                            type="h3"
+                            classes="mb-2 text-left {isWinnerAnswer(answer?.value)
+                                ? 'text-white'
+                                : 'text-gray-800 dark:text-white'}"
+                            overrideColor>{answer?.text}</Text
+                        >
+                        <Text
+                            type="p"
+                            classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
+                                ? 'text-white'
+                                : 'text-gray-800 dark:text-white'}"
+                            overrideColor
+                        >
+                            {answer?.additionalInfo}
                         </Text>
                     </div>
-                    <Text type="h3" classes="mb-2">{answer?.text}</Text>
-                    <Text type="p">{answer?.additionalInfo}</Text>
+                    {#if canParticipate(event?.status?.status)}
+                        <div>
+                            <Icon icon="chevron-right" />
+                        </div>
+                    {/if}
                 </div>
-                {#if canParticipate(event?.status?.status)}
-                    <div class="my-auto">
-                        <Icon icon="chevron-right" />
-                    </div>
-                {/if}
             </Button>
         {/each}
     </DashboardPane>
-    <div class="row-span-1">
+    <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
                 <div>
-                    <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                    <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                         >{localize('views.governance.votingPower.title')}</Text
                     >
                     <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
                 </div>
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votingOpens')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end"
@@ -224,7 +288,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.countingStarts')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end"
@@ -234,7 +298,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.countingLength')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
@@ -242,14 +306,13 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votesCounted')}</Text
                         >
-                        <Text type="h3" classes="inline-flex items-end">{delineateNumber(accountVotes.toString())}</Text
-                        >
+                        <Text type="h3" classes="inline-flex items-end">{formatUnitBestMatch(accountVotes)}</Text>
                     </div>
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700" overrideColor
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votingProgress')}</Text
                         >
                         <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
@@ -261,7 +324,7 @@
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
-            <Text type="p" smaller classes="mb-8 text-gray-700" overrideColor
+            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-white" overrideColor
                 >{localize('views.governance.eventDetails.currentResults')}</Text
             >
             <div class="w-full h-full flex justify-center space-x-16">
@@ -272,8 +335,8 @@
                             style="height: {displayedPercentages[i]
                                 ?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"
                         />
-                        <div class="flex space-x-1 mt-3">
-                            <Text type="h3"
+                        <div class="flex space-x-1 mt-3" style="max-width: 7rem">
+                            <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden"
                                 >{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}</Text
                             >
                             <Text type="h3" overrideColor classes="text-gray-500"
@@ -281,7 +344,7 @@
                             >
                         </div>
                         <Text type="p" overrideColor bigger classes="text-gray-500 m-0"
-                            >{delineateNumber(result?.accumulated.toString())}</Text
+                            >{formatUnitBestMatch(result?.accumulated)}</Text
                         >
                     </div>
                 {/each}
@@ -289,3 +352,16 @@
         </DashboardPane>
     {/if}
 </div>
+
+<style>
+    .pulse {
+        animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes -ping {
+        30%,
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>

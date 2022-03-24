@@ -80,6 +80,10 @@
             lightmode: 'governance/treasury.png',
             darkmode: 'governance/treasury.png',
         },
+        'governance-not-found': {
+            lightmode: 'governance/governance-not-found.svg',
+            darkmode: 'governance/governance-not-found.svg',
+        },
     }
 </script>
 

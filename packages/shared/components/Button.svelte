@@ -127,7 +127,7 @@
                 </div>
             {/if}
         {:else}
-            <span class="text-12 leading-140"><slot /></span>
+            <span class="text-12 leading-140 w-full"><slot /></span>
         {/if}
     </button>
 {/if}
@@ -226,6 +226,7 @@
                 @apply border-blue-200;
             }
             &:active,
+            &.active,
             &:focus {
                 @apply bg-blue-100;
                 @apply border-blue-400;

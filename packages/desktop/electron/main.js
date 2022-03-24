@@ -177,6 +177,7 @@ function isUrlAllowed(targetUrl) {
         'privacy@iota.org',
         'wiki.iota.org',
         'explorer.iota.org',
+        'iotatreasury.org',
 
         // Assembly / Shimmer
         'assembly.sc',
