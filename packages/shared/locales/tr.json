@@ -9,6 +9,11 @@
             "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyiniz.",
             "checkbox": "Gizlilik Politikası ve Kullanım Şartları'nı okudum ve kabul ediyorum"
         },
+        "crashReporting": {
+            "title": "görünümler -> kilitlenme raporlama -> başlık",
+            "body": "görünümler -> kilitlenme raporlama -> gövde",
+            "checkbox": "Görünümler -> kilitlenme Raporlama -> onay kutusu"
+        },
         "appearance": {
             "title": "Görünüm",
             "body": "Uygulama temanızı seçin."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Sistem temasındaki değişikliklerin yürürlüğe girmesi için lütfen Firefly uygulamasını yeniden başlatın"
+                "advice": "görünümler -> ayarlar -> tema -> tavsiye"
             },
             "language": {
                 "title": "Dil",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Hata Kaydı",
                 "description": "Bir sorunu gidermek için hataları görüntüleyin"
+            },
+            "crashReporting": {
+                "title": "görünümler -> ayarlar -> kilitlenme Raporlama -> başlık",
+                "body": "görünümler -> ayarlar -> kilitlenme raporlama -> gövde",
+                "checkbox": "görünümler -> ayarlar -> kilitlenme Raporlama -> onay kutusu",
+                "advice": "görünümler -> ayarlar -> kilitlenme raporlama -> tavsiye"
             },
             "diagnostics": {
                 "title": "Tanılama",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Bir geliştirici profili oluşturuyorsunuz",
             "body": "Varsayılan olarak Chrysalis Devnet'e bağlanacaksınız ve ağları manuel olarak değiştirebilirsiniz. Sadece ne yaptığınızı biliyorsanız devam edin."
+        },
+        "crashReporting": {
+            "title": "açılır pencereler -> kilitlenme raporlama -> başlık",
+            "body": "açılır pencereler -> kilitlenme raporlama -> gövde",
+            "checkbox": "açılır pencereler -> kilitlenme Raporlama -> onay kutusu"
         },
         "legalUpdate": {
             "tosTitle": "Kullanım Şartları",

@@ -53,8 +53,11 @@
     <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
 </div>
 
-<style>
+<style type="text/scss">
     .history {
-        max-height: 30vh;
+        max-height: 50vh;
+        @screen md {
+            max-height: 30vh;
+        }
     }
 </style>

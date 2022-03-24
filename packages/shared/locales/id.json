@@ -9,6 +9,11 @@
             "body": "Harap mereviu Kebijakan Privasi dan Persyaratan Layanan.",
             "checkbox": "Saya telah membaca dan saya menerima Kebijakan Privasi & Persyaratan Layanan"
         },
+        "crashReporting": {
+            "title": "Crash Reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
+        },
         "appearance": {
             "title": "Tampilan",
             "body": "Pilihlah tema aplikasi Anda."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Motif",
                 "description": "",
-                "advice": "Tolong mulai kembali aplikasi Firefly agar perubahan pada sistem dapat diterapkan"
+                "advice": "You must restart Firefly for changes to the system theme to take effect"
             },
             "language": {
                 "title": "Bahasa",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Daftar kesalahan",
                 "description": "Lihat kesalahan untuk men-debug masalah"
+            },
+            "crashReporting": {
+                "title": "Crash reports",
+                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
+                "checkbox": "Send crash reports",
+                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Anda sedang membuat akun pengembang",
             "body": "Anda akan terhubung ke Chrysalis Devnet dalam pengaturan bawaan, dan dapat berpindah jaringan secara manual. Hanya lanjutkan jika Anda tahu apa yang Anda lakukan."
+        },
+        "crashReporting": {
+            "title": "Crash reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Terms of Service",

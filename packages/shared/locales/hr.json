@@ -9,6 +9,11 @@
             "body": "Molimo Vas da proučite Politiku privatnosti i Uvjete korištenja.",
             "checkbox": "Pročitao sam i prihvaćam Politiku privatnosti i Uvjete korištenja"
         },
+        "crashReporting": {
+            "title": "Izvješća o padu programa",
+            "body": "Pomozite developerima da poboljšaju Firefly automatskim slanjem dijagnostičkih podataka kada dođe do pogreške ili pada programa.",
+            "checkbox": "Pošalji izvješća o padu programa IOTA zakladi"
+        },
         "appearance": {
             "title": "Izgled",
             "body": "Odaberite temu aplikacije."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Molimo Vas da ponovno pokrenete Firefly aplikaciju kako bi se promjene sistemske teme mogle primijeniti"
+                "advice": "Morate ponovno pokrenuti Firefly kako bi se promjene sistemske teme mogle primijeniti"
             },
             "language": {
                 "title": "Jezik",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Evidencija grešaka",
                 "description": "Pogledaj greške u svrhu debugiranja"
+            },
+            "crashReporting": {
+                "title": "Izvješća o padu programa",
+                "body": "Pomozite developerima da poboljšaju Firefly automatskim slanjem dijagnostičkih podataka kada dođe do pogreške ili pada programa",
+                "checkbox": "Pošalji izvješća o padu programa",
+                "advice": "Molimo ponovno pokrenite Firefly aplikaciju da bi {sendCrashReports, select, true {započeli s dijeljenjem izvješća o padu programa} false {prestali s dijeljenjem izvješća o padu programa} other {omogućili ovu promjenu}}"
             },
             "diagnostics": {
                 "title": "Dijagnostika",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Trenutno kreirate developerski profil",
             "body": "Prema zadanim postavkama bit ćete spojeni na Chrysalis Devnet, te možete ručno mijenjati mreže. Nastavite samo ako znate što radite."
+        },
+        "crashReporting": {
+            "title": "Izvješća o padu programa",
+            "body": "Pomozite developerima da poboljšaju Firefly automatskim slanjem dijagnostičkih podataka kada dođe do pogreške ili pada programa. Ako je ova opcija odabrana, stupiti će na snagu nakon ponovnog pokretanja Fireflya.",
+            "checkbox": "Pošalji izvješća o padu programa IOTA zakladi"
         },
         "legalUpdate": {
             "tosTitle": "Uvjeti korištenja",

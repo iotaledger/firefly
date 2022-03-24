@@ -9,6 +9,11 @@
             "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями предоставления услуг.",
             "checkbox": "Я прочитал и принимаю Политику конфиденциальности и Условия предоставления услуг"
         },
+        "crashReporting": {
+            "title": "Отчет о сбое",
+            "body": "Помогите разработчикам улучшить Firefly, автоматически отправляя диагностические данные при возникновении ошибки или сбоя.",
+            "checkbox": "Отправить отчеты об авариях в Фонд IOTA"
+        },
         "appearance": {
             "title": "Внешний вид",
             "body": "Выберите тему приложения."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Внешний Вид",
                 "description": "",
-                "advice": "Пожалуйста, перезапустите приложение Firefly, чтобы изменения в теме системы вступили в силу"
+                "advice": "Необходимо перезапустить Firefly, чтобы изменения вступили в силу"
             },
             "language": {
                 "title": "Язык",
@@ -352,9 +357,9 @@
                 "action": "Изменить PIN-код"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Изменить имя профиля",
+                "description": "Изменить имя профиля в Firefly",
+                "success": "Вы изменили имя своего профиля"
             },
             "balanceFinder": {
                 "title": "Определитель баланса",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Журнал ошибок",
                 "description": "Просмотреть ошибки для отладки проблемы"
+            },
+            "crashReporting": {
+                "title": "Отчёты о сбоях",
+                "body": "Помогите разработчикам улучшить Firefly, автоматически отправляя диагностические данные при возникновении ошибки или сбоя",
+                "checkbox": "Отправлять отчеты о сбоях",
+                "advice": "Пожалуйста, перезапустите приложение Firefly, чтобы {sendCrashReports, select, true {начать обмен сообщениями о сбоях} false {остановить обмен сообщениями о сбоях} other {применить это изменение}}"
             },
             "diagnostics": {
                 "title": "Диагностика",
@@ -764,15 +775,20 @@
             "title": "Вы создаете профиль разработчика",
             "body": "По умолчанию вы будете подключены к Chrysalis Devnet и сможете переключить сеть вручную. Продолжайте только в том случае, если вы знаете, что делаете."
         },
+        "crashReporting": {
+            "title": "Отчёты о сбоях",
+            "body": "Помогите разработчикам улучшить Firefly, автоматически отправляя диагностические данные при возникновении ошибки или сбоя. Если выбрано, это вступит в силу после перезапуска Firefly.",
+            "checkbox": "Отправить отчеты об авариях в Фонд IOTA"
+        },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "Условия предоставления услуг",
+            "privPolicyTitle": "Политика конфиденциальности",
+            "tosAndPrivPolicyBody": "Мы обновили Условия предоставления услуг и Политику конфиденциальности Firefly.",
+            "tosBody": "Мы обновили Условия предоставления услуг Firefly.",
+            "privPolicyBody": "Мы обновили Политику конфиденциальности Firefly.",
+            "tosAndPrivPolicyCheckbox": "Я прочитал и принимаю обновленные Условия предоставления услуг и Политику конфиденциальности",
+            "tosCheckbox": "Я прочитал и принимаю обновленные Условия предоставления услуг",
+            "privPolicyCheckbox": "Я прочитал и принимаю обновленную Политику конфиденциальности"
         }
     },
     "charts": {
@@ -1025,7 +1041,7 @@
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "Ваши кошельки",
         "unknown": "Неизвестно",
         "none": "Отсутствует",
         "staked": "Поставлено",
@@ -1117,7 +1133,7 @@
         "account": {
             "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символ} other {# символов}}.",
             "empty": "Вы должны использовать ваш последний кошелёк перед созданием нового.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "Имя профиля должно содержать хотя бы 1 символ.",
             "notEmpty": "Вы должны перевести баланс перед удалением этого кошелька.",
             "duplicate": "Кошелек с таким именем уже существует.",
             "tilde": "Имя профиля не может начинаться с символа '~'.",
@@ -1287,8 +1303,8 @@
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "Нам нужно разрешение на использование камеры для сканирования QR-кодов.",
+            "requestInAppSettings": "Если вы хотите предоставить разрешение на использование камеры для сканирования QR-кодов, включите его в настройках приложения."
         }
     }
 }
