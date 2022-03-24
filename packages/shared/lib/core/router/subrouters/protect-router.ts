@@ -12,10 +12,10 @@ import {
     walletSetupType,
 } from '@lib/wallet'
 
-import { ProtectRoute } from '../enums'
-import { Subrouter } from '../subrouters'
-import { FireflyEvent } from '../types'
 import { appRouter } from '../app-router'
+import { ProtectRoute } from '../enums'
+import { Subrouter } from './subrouter'
+import { FireflyEvent } from '../types'
 
 export const protectRoute = writable<ProtectRoute>(null)
 

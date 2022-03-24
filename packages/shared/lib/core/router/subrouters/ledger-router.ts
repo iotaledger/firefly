@@ -4,9 +4,9 @@ import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
-import { FireflyEvent } from '../types'
-import { Subrouter } from '../subrouters'
 import { LedgerRoute } from '../enums'
+import { Subrouter } from './subrouter'
+import { FireflyEvent } from '../types'
 
 export const ledgerRoute = writable<LedgerRoute>(null)
 export const ledgerRouter = writable<LedgerRouter>(null)

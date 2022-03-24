@@ -4,7 +4,7 @@ import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
 
 import { appRouter } from '../app-router'
 import { MigrateRoute } from '../enums'
-import { Subrouter } from '../subrouters'
+import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 
 export const migrateRoute = writable<MigrateRoute>(null)

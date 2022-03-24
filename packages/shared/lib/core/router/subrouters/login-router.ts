@@ -4,7 +4,7 @@ import { migrateProfile } from '@lib/profile'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
-import { Subrouter } from '../subrouters'
+import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 
 export const loginRoute = writable<LoginRoute>(null)
