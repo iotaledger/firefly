@@ -18,7 +18,7 @@
     let showStakingNotification = false
 
     const hasTitleBar = document.body.classList.contains('platform-win32')
-    
+
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
@@ -46,11 +46,12 @@
 </script>
 
 <aside
-        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800"
-    >
+    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800"
+>
     <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
-    <nav class="flex
-
+    <nav class="flex flex-grow flex-col items-center justify-between">
+        <div class="flex flex-col">
+            <button
                 class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
                 on:click={openWallet}
             >
@@ -79,12 +80,7 @@
         </div>
         <span class="flex flex-col items-center">
             <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                <Icon
-                    width="24"
-                    height="24"
-                    icon="network"
-                    classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500"
-                />
+                <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
             </button>
             <button
                 class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
