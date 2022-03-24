@@ -1,12 +1,12 @@
 import {
     CreatedAccountResponse,
     LatestAddressResponse,
-    MessageResponse,
+    BridgeResponses,
     ReadAccountsResponse,
     SetStrongholdPasswordResponse,
     SyncAccountsResponse,
-} from '@lib/typings/bridge'
-import { ResponseTypes } from '@lib/typings/bridge'
+} from '@core/actor'
+import { BridgeResponseType } from '@core/actor'
 import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '@lib/typings/events'
 import { ErrorType } from '@lib/typings/events'
 import { ValidationError, ValidatorService } from '@core/validators'
@@ -25,7 +25,7 @@ type CallbacksStore = {
 }
 
 type CallbacksPattern = {
-    onSuccess: (message: MessageResponse) => void
+    onSuccess: (message: BridgeResponses) => void
     onError: (message: ErrorMessage) => void
 }
 
@@ -35,67 +35,67 @@ type ErrorMessage = {
 }
 
 const eventsApiToResponseTypeMap = {
-    onError: ResponseTypes.ErrorThrown,
-    onBalanceChange: ResponseTypes.BalanceChange,
-    onNewTransaction: ResponseTypes.NewTransaction,
-    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
-    onReattachment: ResponseTypes.Reattachment,
-    onBroadcast: ResponseTypes.Broadcast,
-    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
-    onTransferProgress: ResponseTypes.TransferProgress,
-    onLedgerAddressGeneration: ResponseTypes.LedgerAddressGeneration,
-    onMigrationProgress: ResponseTypes.MigrationProgress,
+    onError: BridgeResponseType.ErrorThrown,
+    onBalanceChange: BridgeResponseType.BalanceChange,
+    onNewTransaction: BridgeResponseType.NewTransaction,
+    onConfirmationStateChange: BridgeResponseType.ConfirmationStateChange,
+    onReattachment: BridgeResponseType.Reattachment,
+    onBroadcast: BridgeResponseType.Broadcast,
+    onStrongholdStatusChange: BridgeResponseType.StrongholdStatusChange,
+    onTransferProgress: BridgeResponseType.TransferProgress,
+    onLedgerAddressGeneration: BridgeResponseType.LedgerAddressGeneration,
+    onMigrationProgress: BridgeResponseType.MigrationProgress,
 
     // Staking
-    onStakingOverview: ResponseTypes.StakingOverview,
-    onStakedAccount: ResponseTypes.StakedAccount,
-    onUnstakedAccount: ResponseTypes.UnstakedAccount,
-    onAdditionalFundsStaked: ResponseTypes.AdditionalFundsStaked,
+    onStakingOverview: BridgeResponseType.StakingOverview,
+    onStakedAccount: BridgeResponseType.StakedAccount,
+    onUnstakedAccount: BridgeResponseType.UnstakedAccount,
+    onAdditionalFundsStaked: BridgeResponseType.AdditionalFundsStaked,
 }
 
 const apiToResponseTypeMap = {
     ...eventsApiToResponseTypeMap,
 
-    removeAccount: ResponseTypes.RemovedAccount,
-    createAccount: ResponseTypes.CreatedAccount,
-    getAccount: ResponseTypes.ReadAccount,
-    getAccounts: ResponseTypes.ReadAccounts,
-    syncAccounts: ResponseTypes.SyncedAccounts,
-    startBackgroundSync: ResponseTypes.Ok,
-    stopBackgroundSync: ResponseTypes.Ok,
-    listMessages: ResponseTypes.Messages,
-    listAddresses: ResponseTypes.Addresses,
-    generateAddress: ResponseTypes.GeneratedAddress,
-    latestAddress: ResponseTypes.LatestAddress,
-    getBalance: ResponseTypes.Balance,
-    reattach: ResponseTypes.Reattached,
-    backup: ResponseTypes.BackupSuccessful,
-    restoreBackup: ResponseTypes.BackupRestored,
-    send: ResponseTypes.SentTransfer,
-    setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
-    generateMnemonic: ResponseTypes.GeneratedMnemonic,
-    storeMnemonic: ResponseTypes.StoredMnemonic,
-    verifyMnemonic: ResponseTypes.VerifiedMnemonic,
-    setStoragePassword: ResponseTypes.StoragePasswordSet,
-    getStrongholdStatus: ResponseTypes.StrongholdStatus,
-    getUnusedAddress: ResponseTypes.UnusedAddress,
-    isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
-    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
-    setAlias: ResponseTypes.UpdatedAlias,
-    deleteStorage: ResponseTypes.DeletedStorage,
-    lockStronghold: ResponseTypes.LockedStronghold,
-    changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
-    getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
-    setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
-    getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
-    getNodeInfo: ResponseTypes.NodeInfo,
-    mineBundle: ResponseTypes.MinedBundle,
-    getLegacyAddressChecksum: ResponseTypes.LegacyAddressChecksum,
+    removeAccount: BridgeResponseType.RemovedAccount,
+    createAccount: BridgeResponseType.CreatedAccount,
+    getAccount: BridgeResponseType.ReadAccount,
+    getAccounts: BridgeResponseType.ReadAccounts,
+    syncAccounts: BridgeResponseType.SyncedAccounts,
+    startBackgroundSync: BridgeResponseType.Ok,
+    stopBackgroundSync: BridgeResponseType.Ok,
+    listMessages: BridgeResponseType.Messages,
+    listAddresses: BridgeResponseType.Addresses,
+    generateAddress: BridgeResponseType.GeneratedAddress,
+    latestAddress: BridgeResponseType.LatestAddress,
+    getBalance: BridgeResponseType.Balance,
+    reattach: BridgeResponseType.Reattached,
+    backup: BridgeResponseType.BackupSuccessful,
+    restoreBackup: BridgeResponseType.BackupRestored,
+    send: BridgeResponseType.SentTransfer,
+    setStrongholdPassword: BridgeResponseType.StrongholdPasswordSet,
+    generateMnemonic: BridgeResponseType.GeneratedMnemonic,
+    storeMnemonic: BridgeResponseType.StoredMnemonic,
+    verifyMnemonic: BridgeResponseType.VerifiedMnemonic,
+    setStoragePassword: BridgeResponseType.StoragePasswordSet,
+    getStrongholdStatus: BridgeResponseType.StrongholdStatus,
+    getUnusedAddress: BridgeResponseType.UnusedAddress,
+    isLatestAddressUnused: BridgeResponseType.IsLatestAddressUnused,
+    areLatestAddressesUnused: BridgeResponseType.AreAllLatestAddressesUnused,
+    setAlias: BridgeResponseType.UpdatedAlias,
+    deleteStorage: BridgeResponseType.DeletedStorage,
+    lockStronghold: BridgeResponseType.LockedStronghold,
+    changeStrongholdPassword: BridgeResponseType.StrongholdPasswordChanged,
+    getLedgerDeviceStatus: BridgeResponseType.LedgerStatus,
+    setStrongholdPasswordClearInterval: BridgeResponseType.StrongholdPasswordClearIntervalSet,
+    getLegacySeedChecksum: BridgeResponseType.LegacySeedChecksum,
+    getNodeInfo: BridgeResponseType.NodeInfo,
+    mineBundle: BridgeResponseType.MinedBundle,
+    getLegacyAddressChecksum: BridgeResponseType.LegacyAddressChecksum,
 
     // Participation
-    getParticipationOverview: ResponseTypes.ParticipationOverview,
-    getParticipationEvents: ResponseTypes.EventsData,
-    participate: ResponseTypes.SentParticipation,
+    getParticipationOverview: BridgeResponseType.ParticipationOverview,
+    getParticipationEvents: BridgeResponseType.EventsData,
+    participate: BridgeResponseType.SentParticipation,
 }
 
 /**
@@ -147,7 +147,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 
-WALLET.onMessage((message: MessageResponse) => {
+WALLET.onMessage((message: BridgeResponses) => {
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error
@@ -184,9 +184,9 @@ WALLET.onMessage((message: MessageResponse) => {
 
         const { onSuccess, onError } = callbacksStore[id]
 
-        if (message.type === ResponseTypes.Error) {
+        if (message.type === BridgeResponseType.Error) {
             onError(handleError(message.payload.type, message.payload.error, message.action))
-        } else if (message.type === ResponseTypes.Panic) {
+        } else if (message.type === BridgeResponseType.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))
         } else {
             onSuccess(message)
@@ -212,7 +212,7 @@ WALLET.onMessage((message: MessageResponse) => {
  *
  * @returns {void}
  */
-const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: CallbacksPattern): void => {
+const storeCallbacks = (__id: string, type: BridgeResponseType, callbacks?: CallbacksPattern): void => {
     if (callbacks && typeof callbacks.onSuccess === 'function' && typeof callbacks.onError === 'function') {
         callbacksStore[__id] = callbacks
     } else {

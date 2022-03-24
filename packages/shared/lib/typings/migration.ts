@@ -1,4 +1,4 @@
-import { Bridge, CommunicationIds } from './bridge'
+import { Bridge, BridgeIds } from '@core/actor'
 import { Writable } from 'svelte/store'
 import { AccountIdentifier } from './account'
 
@@ -105,7 +105,7 @@ export enum LedgerMigrationProgress {
  * @method getMigrationData
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} seed
  * @param {string[]} nodes
  * @param {number} [securityLevel]
@@ -116,7 +116,7 @@ export enum LedgerMigrationProgress {
  */
 export function getMigrationData(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     seed: string,
     nodes: string[],
     securityLevel?: number,
@@ -143,7 +143,7 @@ export function getMigrationData(
  * @method createMigrationBundle
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} seed
  * @param {number[]} inputAddressIndexes
  * @param {boolean} mine
@@ -155,7 +155,7 @@ export function getMigrationData(
  */
 export function createMigrationBundle(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     seed: string,
     inputAddressIndexes: number[],
     mine: boolean,
@@ -184,7 +184,7 @@ export function createMigrationBundle(
  * @method createMigrationBundle
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string[]} node
  * @param {string} bundleHash
  * @param {number} mwm
@@ -193,7 +193,7 @@ export function createMigrationBundle(
  */
 export function sendMigrationBundle(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     nodes: string[],
     bundleHash: string,
     mwm: number
@@ -216,14 +216,14 @@ export function sendMigrationBundle(
  * @method getMigrationAddress
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {boolean} prompt
  *
  * @returns {Promise}
  */
 export function getMigrationAddress(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     ledgerPrompt: boolean,
     accountIdentifier: AccountIdentifier
 ): Promise<string> {
@@ -244,7 +244,7 @@ export function getMigrationAddress(
  * @method mineBundle
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string[]} preparedBundle
  * @param {string[]} spentBundleHashes
  * @param {number} timeout
@@ -254,7 +254,7 @@ export function getMigrationAddress(
  */
 export function mineBundle(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     preparedBundle: string[],
     spentBundleHashes: string[],
     securityLevel: number,
@@ -281,7 +281,7 @@ export function mineBundle(
  * @method getLedgerMigrationData
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} seed
  * @param {string[]} nodes
  * @param {number} [securityLevel]
@@ -292,7 +292,7 @@ export function mineBundle(
  */
 export function getLedgerMigrationData(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     addresses: AddressInput[],
     nodes: string[],
     permanode: string,
@@ -317,7 +317,7 @@ export function getLedgerMigrationData(
  * @method sendLedgerMigrationBundle
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string[]} node
  * @param {string[]} bundles
  * @param {number} mwm
@@ -326,7 +326,7 @@ export function getLedgerMigrationData(
  */
 export function sendLedgerMigrationBundle(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     nodes: string[],
     bundle: string[],
     mwm: number
@@ -349,12 +349,12 @@ export function sendLedgerMigrationBundle(
  * @method getLegacyAddressChecksum
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} address
  *
  * @returns {Promise}
  */
-export function getLegacyAddressChecksum(bridge: Bridge, __ids: CommunicationIds, address: string): Promise<string> {
+export function getLegacyAddressChecksum(bridge: Bridge, __ids: BridgeIds, address: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

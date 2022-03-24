@@ -1,6 +1,6 @@
 import { IWalletApi } from '@core/api'
 
-import { IActorHandler } from './bridge'
+import { IActorHandler } from '@core/actor'
 import { LoggerConfig } from './wallet'
 
 export interface IWalletActor {

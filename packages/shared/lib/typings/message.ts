@@ -1,4 +1,4 @@
-import { Bridge, CommunicationIds } from './bridge'
+import { Bridge, BridgeIds } from '@core/actor'
 import { AccountIdentifier } from './account'
 
 type MessageVersion = 1
@@ -190,7 +190,7 @@ export interface Transfer {
 
 export function reattach(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     messageId: string
 ): Promise<string> {

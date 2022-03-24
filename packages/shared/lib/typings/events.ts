@@ -1,5 +1,5 @@
 import { NativeProgress, VersionDetails } from '@core/app/types'
-import { ResponseTypes } from './bridge'
+import { BridgeResponseType } from '@core/actor/enums'
 import { Message, UTXOEventData } from './message'
 import { WalletRoutes } from './routes'
 
@@ -100,7 +100,7 @@ export type Callback<T> = (error: string, data: T) => void
 export interface Event<T> {
     action: string
     id: string
-    type: ResponseTypes
+    type: BridgeResponseType
     payload: T
 }
 

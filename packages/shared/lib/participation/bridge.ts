@@ -1,4 +1,4 @@
-import { Bridge, CommunicationIds } from '../typings/bridge'
+import { Bridge, BridgeIds } from '@core/actor'
 
 import { Participation } from './types'
 
@@ -9,11 +9,11 @@ import { Participation } from './types'
  * @method getParticipationOverview
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  *
  * @returns {Promise<string>}
  */
-export function getParticipationOverview(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function getParticipationOverview(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -27,11 +27,11 @@ export function getParticipationOverview(bridge: Bridge, __ids: CommunicationIds
  * @method getParticipationEvents
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  *
  * @returns {Promise<string>}
  */
-export function getParticipationEvents(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function getParticipationEvents(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -45,7 +45,7 @@ export function getParticipationEvents(bridge: Bridge, __ids: CommunicationIds):
  * @method getParticipationEvents
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} accountId
  * @param {Participation[]} participations
  *
@@ -53,7 +53,7 @@ export function getParticipationEvents(bridge: Bridge, __ids: CommunicationIds):
  */
 export function participate(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: string,
     participations: Participation[]
 ): Promise<string> {
@@ -74,7 +74,7 @@ export function participate(
  * @method stopParticipating
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} accountId
  * @param {string[]} eventIds
  *
@@ -82,7 +82,7 @@ export function participate(
  */
 export function stopParticipating(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: string,
     eventIds: string[]
 ): Promise<string> {
@@ -103,7 +103,7 @@ export function stopParticipating(
  * @method participateWithRemainingFunds
  *
  * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
+ * @param {BridgeIds} __ids
  * @param {string} accountId
  * @param {Participation[]} participations
  *
@@ -111,7 +111,7 @@ export function stopParticipating(
  */
 export function participateWithRemainingFunds(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: string,
     participations: Participation[]
 ): Promise<string> {

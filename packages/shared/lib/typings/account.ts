@@ -1,4 +1,4 @@
-import { Bridge, CommunicationIds } from './bridge'
+import { Bridge, BridgeIds } from '@core/actor'
 import { Message } from './message'
 import { Address } from './address'
 import { ClientOptions } from './client'
@@ -63,7 +63,7 @@ export interface SyncedAccount {
     messages: Message[]
 }
 
-export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
+export function createAccount(bridge: Bridge, __ids: BridgeIds, account: AccountToCreate): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -72,7 +72,7 @@ export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: 
     })
 }
 
-export function removeAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function removeAccount(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -81,7 +81,7 @@ export function removeAccount(bridge: Bridge, __ids: CommunicationIds, accountId
     })
 }
 
-export function getAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function getAccount(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -90,7 +90,7 @@ export function getAccount(bridge: Bridge, __ids: CommunicationIds, accountId: A
     })
 }
 
-export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function getAccounts(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -100,7 +100,7 @@ export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<st
 
 export function syncAccounts(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     addressIndex?: number,
     gapLimit?: number,
     accountDiscoveryThreshold?: number
@@ -115,7 +115,7 @@ export function syncAccounts(
 
 export function startBackgroundSync(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     pollingInterval: Duration,
     automaticOutputConsolidation: boolean
 ): Promise<string> {
@@ -127,7 +127,7 @@ export function startBackgroundSync(
     })
 }
 
-export function stopBackgroundSync(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function stopBackgroundSync(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -137,7 +137,7 @@ export function stopBackgroundSync(bridge: Bridge, __ids: CommunicationIds): Pro
 
 export function internalTransfer(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     fromAccountId: AccountIdentifier,
     toAccountId: AccountIdentifier,
     amount: number
@@ -154,7 +154,7 @@ export function internalTransfer(
     })
 }
 
-export function areLatestAddressesUnused(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function areLatestAddressesUnused(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -177,7 +177,7 @@ enum AccountMethod {
 
 function _callAccountMethod(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     methodName: AccountMethod,
     accountId: AccountIdentifier,
     data: unknown = void 0
@@ -198,39 +198,27 @@ function _callAccountMethod(
 
 export function setAlias(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     payload: string
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.SetAlias, accountId, payload)
 }
 
-export function isLatestAddressUnused(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    accountId: AccountIdentifier
-): Promise<string> {
+export function isLatestAddressUnused(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
 }
-export function generateAddress(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    accountId: AccountIdentifier
-): Promise<string> {
+export function generateAddress(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }
 
-export function getUnusedAddress(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    accountId: AccountIdentifier
-): Promise<string> {
+export function getUnusedAddress(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetUnusedAddress, accountId)
 }
 
 export function listMessages(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     filters?: ListMessagesFilter
 ): Promise<string> {
@@ -239,24 +227,24 @@ export function listMessages(
 
 export function listAddresses(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     unspent?: boolean
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.ListAddresses, accountId, { unspent })
 }
 
-export function getBalance(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function getBalance(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetBalance, accountId)
 }
 
-export function latestAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+export function latestAddress(bridge: Bridge, __ids: BridgeIds, accountId: AccountIdentifier): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetLatestAddress, accountId)
 }
 
 export function syncAccount(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     options?: SyncAccountOptions
 ): Promise<string> {
@@ -265,7 +253,7 @@ export function syncAccount(
 
 export function getNodeInfo(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     accountId: AccountIdentifier,
     url?: string,
     auth?: NodeAuth

@@ -24,7 +24,7 @@ import {
     SyncAccountOptions,
     syncAccounts as _syncAccounts,
 } from '@lib/typings/account'
-import { BridgeMessage, CommunicationIds, MessageResponse } from '@lib/typings/bridge'
+import { BridgeMessage, BridgeIds, BridgeResponses } from '@core/actor'
 import { ClientOptions } from '@lib/typings/client'
 import { reattach as _reattach, Transfer } from '@lib/typings/message'
 import {
@@ -59,7 +59,7 @@ import {
     verifyMnemonic as _verifyMnemonic,
 } from '@lib/typings/wallet'
 
-const onMessageListeners: ((payload: MessageResponse) => void)[] = []
+const onMessageListeners: ((payload: BridgeResponses) => void)[] = []
 
 async function sendMessage(message: BridgeMessage): Promise<string> {
     const { id } = message
@@ -72,7 +72,7 @@ async function sendMessage(message: BridgeMessage): Promise<string> {
     return id
 }
 
-export function onMessage(cb: (payload: MessageResponse) => void): void {
+export function onMessage(cb: (payload: BridgeResponses) => void): void {
     onMessageListeners.push(cb)
 }
 
@@ -120,7 +120,7 @@ export function init(
     }
 }
 
-type Api = { (__ids: CommunicationIds): Promise<string> }
+type Api = { (__ids: BridgeIds): Promise<string> }
 export const api = {
     setAlias:
         (accountId: AccountIdentifier, newAccountAlias: string): Api =>

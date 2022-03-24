@@ -1,7 +1,7 @@
 import { Writable } from 'svelte/store'
 
 import { AccountIdentifier } from './account'
-import { Bridge, CommunicationIds } from './bridge'
+import { Bridge, BridgeIds } from '@core/actor'
 import { ClientOptions } from './client'
 import { Transfer } from './message'
 import { MnemonicPayload } from './mnemonic'
@@ -96,12 +96,7 @@ export interface Duration {
     nanos: number
 }
 
-export function backup(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    destinationPath: string,
-    password: string
-): Promise<string> {
+export function backup(bridge: Bridge, __ids: BridgeIds, destinationPath: string, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -113,12 +108,7 @@ export function backup(
     })
 }
 
-export function restoreBackup(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    backupPath: string,
-    password: string
-): Promise<string> {
+export function restoreBackup(bridge: Bridge, __ids: BridgeIds, backupPath: string, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -130,7 +120,7 @@ export function restoreBackup(
     })
 }
 
-export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, password: string): Promise<string> {
+export function setStrongholdPassword(bridge: Bridge, __ids: BridgeIds, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -139,7 +129,7 @@ export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, p
     })
 }
 
-export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, password: string): Promise<string> {
+export function setStoragePassword(bridge: Bridge, __ids: BridgeIds, password: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -148,7 +138,7 @@ export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, pass
     })
 }
 
-export function deleteStorage(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function deleteStorage(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -158,7 +148,7 @@ export function deleteStorage(bridge: Bridge, __ids: CommunicationIds): Promise<
 
 export function send(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     fromAccountId: AccountIdentifier,
     transfer: Transfer
 ): Promise<string> {
@@ -173,7 +163,7 @@ export function send(
     })
 }
 
-export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function generateMnemonic(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -181,7 +171,7 @@ export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds): Promi
     })
 }
 
-export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: MnemonicPayload): Promise<string> {
+export function storeMnemonic(bridge: Bridge, __ids: BridgeIds, payload: MnemonicPayload): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -190,7 +180,7 @@ export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: 
     })
 }
 
-export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: string): Promise<string> {
+export function verifyMnemonic(bridge: Bridge, __ids: BridgeIds, payload: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -199,7 +189,7 @@ export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload:
     })
 }
 
-export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function getStrongholdStatus(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -207,7 +197,7 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds): Pr
     })
 }
 
-export function lockStronghold(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function lockStronghold(bridge: Bridge, __ids: BridgeIds): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -217,7 +207,7 @@ export function lockStronghold(bridge: Bridge, __ids: CommunicationIds): Promise
 
 export function changeStrongholdPassword(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     payload: StrongholdPasswordChange
 ): Promise<string> {
     return bridge({
@@ -228,7 +218,7 @@ export function changeStrongholdPassword(
     })
 }
 
-export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: ClientOptions): Promise<string> {
+export function setClientOptions(bridge: Bridge, __ids: BridgeIds, payload: ClientOptions): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -237,7 +227,7 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
-export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean): Promise<string> {
+export function getLedgerDeviceStatus(bridge: Bridge, __ids: BridgeIds, isSimulator: boolean): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
@@ -248,7 +238,7 @@ export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, i
 
 export function setStrongholdPasswordClearInterval(
     bridge: Bridge,
-    __ids: CommunicationIds,
+    __ids: BridgeIds,
     payload: Duration
 ): Promise<string> {
     return bridge({
@@ -259,7 +249,7 @@ export function setStrongholdPasswordClearInterval(
     })
 }
 
-export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string): Promise<string> {
+export function getLegacySeedChecksum(bridge: Bridge, __ids: BridgeIds, payload: string): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

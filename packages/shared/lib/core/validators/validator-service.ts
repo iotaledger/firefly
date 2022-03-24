@@ -1,4 +1,4 @@
-import { MessageResponse, ResponseTypes } from '@lib/typings/bridge'
+import { BridgeResponses, BridgeResponseType } from '@core/actor'
 import { MarketDataValidationResponse } from '@lib/typings/market'
 import { ChrysalisVariablesValidationResponse } from '@lib/migration'
 
@@ -30,81 +30,85 @@ export class ValidatorService {
         this.ids = ids
 
         this.validators = {
-            [ResponseTypes.InvalidMessage]: this.createBaseValidator()
+            [BridgeResponseType.InvalidMessage]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('object'))
                 .getFirst(),
-            [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseValidator()
+            [BridgeResponseType.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.RemovedAccount]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('string'))
                 .getFirst(),
-            [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
-            [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
-            [ResponseTypes.ReadAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
+            [BridgeResponseType.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
+            [BridgeResponseType.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
+            [BridgeResponseType.ReadAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
 
-            [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
-            [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator()
+            [BridgeResponseType.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
+            [BridgeResponseType.BackupRestored]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.BackupSuccessful]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.GeneratedMnemonic]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('string'))
                 .add(new MnemonicValidator())
                 .getFirst(),
-            [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
-            [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
-            [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
+            [BridgeResponseType.StoredMnemonic]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.SyncedAccounts]: this.createBaseValidator()
+                .add(new SyncedAccountListValidator())
+                .getFirst(),
+            [BridgeResponseType.Ok]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
+            [BridgeResponseType.StoragePasswordSet]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.StrongholdStatus]: this.createBaseValidator()
                 .add(new StrongholdStatusValidator())
                 .getFirst(),
-            [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
-            [ResponseTypes.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
+            [BridgeResponseType.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [BridgeResponseType.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [BridgeResponseType.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
+            [BridgeResponseType.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [BridgeResponseType.IsLatestAddressUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
-            [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator()
+            [BridgeResponseType.AreAllLatestAddressesUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
-            [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.LedgerStatus]: this.createBaseValidator().add(new LedgerDeviceStatusValidator()).getFirst(),
-            [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
-            [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.UpdatedAlias]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.DeletedStorage]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.LockedStronghold]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.LedgerStatus]: this.createBaseValidator()
+                .add(new LedgerDeviceStatusValidator())
+                .getFirst(),
+            [BridgeResponseType.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
+            [BridgeResponseType.Error]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.Panic]: this.createBaseValidator().getFirst(),
 
             // Legacy seed APIs
-            [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.LegacyAddressChecksum]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.LegacyAddressChecksum]: this.createBaseValidator().getFirst(),
 
             // Migration
-            [ResponseTypes.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
-            [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.MigrationAddress]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.MinedBundle]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.MineBundle]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.MigrationData]: this.createBaseValidator().add(new MigrationDataValidator()).getFirst(),
+            [BridgeResponseType.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.SentMigrationBundle]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.MigrationAddress]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.MinedBundle]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.MineBundle]: this.createBaseValidator().getFirst(),
 
             // Participation
-            [ResponseTypes.ParticipationOverview]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.EventsData]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.SentParticipation]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.ParticipationOverview]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.EventsData]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.SentParticipation]: this.createBaseEventValidator().getFirst(),
 
             // Events
-            [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.ErrorThrown]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.InvalidMessage]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.LedgerAddressGeneration]: this.createBaseEventValidator().getFirst(),
-            [ResponseTypes.MigrationProgress]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.NewTransaction]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.ErrorThrown]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.InvalidMessage]: this.createBaseValidator().getFirst(),
+            [BridgeResponseType.BalanceChange]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.TransferProgress]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.LedgerAddressGeneration]: this.createBaseEventValidator().getFirst(),
+            [BridgeResponseType.MigrationProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
             // Chrysalis github variables
@@ -142,12 +146,12 @@ export class ValidatorService {
      *
      * @method performValidation
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
     performValidation(
-        response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse
+        response: BridgeResponses | MarketDataValidationResponse | ChrysalisVariablesValidationResponse
     ): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }

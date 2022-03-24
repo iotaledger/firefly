@@ -16,7 +16,7 @@ import { Message } from '@lib/typings/message'
 import { ClientOptions } from '@lib/typings/client'
 import { NodeAuth, NodeInfo } from '@lib/typings/node'
 import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from '@lib/typings/migration'
-import { GetMigrationAddressResponse } from '@lib/typings/bridge'
+import { GetMigrationAddressResponse } from '@core/actor'
 import { LedgerStatus } from '@lib/typings/ledger'
 import {
     ParticipateResponsePayload,

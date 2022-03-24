@@ -1,4 +1,4 @@
-import { MessageResponse } from '../../typings/bridge'
+import { BridgeResponses } from '@core/actor'
 import { Account, SyncedAccount } from '@lib/typings/account'
 import { Message } from '@lib/typings/message'
 import { Address } from '@lib/typings/address'
@@ -48,11 +48,11 @@ export class Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         if (this.nextValidator != null) {
             return this.nextValidator.isValid(response)
         }
@@ -97,11 +97,11 @@ export class IdValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const id = response?.id
 
         if ('string' !== typeof id) {
@@ -131,11 +131,11 @@ export class ActionValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const { action } = response
 
         if ('string' !== typeof action) {
@@ -165,11 +165,11 @@ export class PayloadTypeValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const { payload } = response
 
         if (payload && typeof payload !== this.type) {
@@ -192,11 +192,11 @@ export class AccountListValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const payload = response.payload as Account[]
 
         if (!Array.isArray(payload)) {
@@ -230,11 +230,11 @@ export class SyncedAccountListValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const payload = response.payload as Account[]
 
         if (!Array.isArray(payload)) {
@@ -269,12 +269,12 @@ export class SyncedAccountValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as SyncedAccount
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
@@ -316,12 +316,12 @@ export class AccountValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
@@ -363,12 +363,12 @@ export class MessageValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Message
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         // TODO: Should we validate message version?
 
@@ -414,12 +414,12 @@ export class AddressValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Address
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('string' !== typeof payload.address) {
             return super.createResponse(false, {
@@ -456,11 +456,11 @@ export class MnemonicValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const payload = response.payload as string
 
         if (payload.split(' ').length !== 24) {
@@ -483,12 +483,12 @@ export class StrongholdStatusValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as StrongholdStatus
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('Locked' !== payload.snapshot.status && 'Unlocked' !== payload.snapshot.status) {
             return super.createResponse(false, {
@@ -510,12 +510,12 @@ export class LedgerDeviceStatusValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as LedgerStatus
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('boolean' !== typeof payload.connected && 'boolean' !== typeof payload.locked) {
             return super.createResponse(false, {
@@ -537,12 +537,12 @@ export class MigrationDataValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as MigrationData
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if ('number' !== typeof payload.lastCheckedAddressIndex) {
             return super.createResponse(false, {
@@ -565,11 +565,11 @@ export class TypeValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
+    isValid(response: BridgeResponses): ValidationResponse {
         const hasValidType =
             'object' === typeof response &&
             null !== response &&
@@ -630,12 +630,12 @@ export class NodeInfoValidator extends Validator {
      *
      * @method isValid
      *
-     * @param {MessageResponse} response
+     * @param {BridgeResponses} response
      *
      * @returns {ValidationResponse}
      */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as NodeInfo
+    isValid(response: BridgeResponses): ValidationResponse {
+        const payload = response.payload
 
         if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
             return super.createResponse(false, {
