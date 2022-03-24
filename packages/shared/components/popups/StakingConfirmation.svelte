@@ -11,7 +11,11 @@
         getUnstakedFunds,
     } from 'shared/lib/participation'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { participationAction, participationOverview, isPartiallyStaked } from 'shared/lib/participation/stores'
+    import {
+        participationAction,
+        isPartiallyStaked,
+        selectedAccountParticipationOverview,
+    } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
@@ -26,9 +30,8 @@
     let tooltipAnchor: unknown
 
     const activeAirdrops =
-        $participationOverview
-            .find((apo) => apo.accountIndex === $selectedAccount.index)
-            ?.participations.map((p) => getAirdropFromEventId(p.eventId))
+        $selectedAccountParticipationOverview?.participations
+            .map((p) => getAirdropFromEventId(p.eventId))
             // Falsy values (undefined, null, ...) are filtered out from the array
             .filter(Boolean) || []
 
@@ -59,7 +62,7 @@
         }
         return estimateStakingAirdropReward(
             airdrop,
-            $isPartiallyStaked ? getUnstakedFunds($selectedAccount) : $selectedAccount?.rawIotaBalance,
+            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.rawIotaBalance,
             true
         )
     }
@@ -135,7 +138,7 @@
         {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds($selectedAccount)) : $selectedAccount.balance}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">

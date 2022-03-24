@@ -6,13 +6,13 @@ import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } f
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber } from '../utils'
-import { wallet } from '../wallet'
+import { selectedAccount } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
     participationEvents,
-    participationOverview,
+    selectedAccountParticipationOverview,
     shimmerStakingRemainingTime,
     stakedAccounts,
     stakingEventState,
@@ -30,37 +30,6 @@ import { Participation, ParticipationEvent, ParticipationEventState, StakingAird
  */
 export const isAccountStaked = (accountId: string): boolean =>
     get(stakedAccounts).find((sa) => sa.id === accountId) !== undefined
-
-const getAirdropEventId = (airdrop: StakingAirdrop): string => {
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            return STAKING_EVENT_IDS[0]
-        case StakingAirdrop.Shimmer:
-            return STAKING_EVENT_IDS[1]
-        default:
-            return undefined
-    }
-}
-
-/**
- * Determines whether an accounts is staked for a particular airdrop.
- *
- * @method isAccountStakedForAirdrop
- *
- * @param {string} accountId
- * @param {StakingAirdrop} airdrop
- *
- * @returns {boolean}
- */
-export const isAccountStakedForAirdrop = (accountId: string, airdrop: StakingAirdrop): boolean => {
-    const account = get(stakedAccounts).find((sa) => sa.id === accountId)
-    if (!account) return false
-
-    const accountOverview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
-    if (!accountOverview) return false
-
-    return accountOverview.participations.find((p) => p.eventId === getAirdropEventId(airdrop)) !== undefined
-}
 
 /**
  * Determines the staking airdrop from a given participation event ID.
@@ -225,16 +194,14 @@ export const estimateStakingAirdropReward = (
 }
 
 /**
- * Calculate the staked funds for a particular account.
+ * Calculate the staked funds for the selected account.
  *
  * @method getStakedFunds
  *
- * @param {WalletAccount} account
- *
  * @returns {number}
  */
-export const getStakedFunds = (account: WalletAccount): number => {
-    const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+export const getStakedFunds = (): number => {
+    const accountParticipation = get(selectedAccountParticipationOverview)
     if (!accountParticipation) {
         return 0
     }
@@ -242,16 +209,14 @@ export const getStakedFunds = (account: WalletAccount): number => {
 }
 
 /**
- * Calculate the unstaked funds for a particular account.
+ * Calculate the unstaked funds for the selected account.
  *
  * @method getUnstakedFunds
  *
- * @param {WalletAccount} account
- *
  * @returns {number}
  */
-export const getUnstakedFunds = (account: WalletAccount): number => {
-    const accountParticipation = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+export const getUnstakedFunds = (): number => {
+    const accountParticipation = get(selectedAccountParticipationOverview)
     if (!accountParticipation) {
         return 0
     }
@@ -340,19 +305,19 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 
 /**
  * Calculates the remaining time needed to continue staking in order to
- * reach the minimum airdrop amount. If called with format = true then returns
+ * reach the minimum airdrop amount for the selected account.
+ * If called with format = true then returns
  * human-readable duration, else returns the amount of time in millis.
  *
  * @method getTimeUntilMinimumAirdropReward
  *
- * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
  */
-export const getTimeUntilMinimumAirdropReward = (account: WalletAccount, airdrop: StakingAirdrop): number => {
-    const rewards = getCurrentRewardsForAirdrop(account, airdrop)
-    const amountStaked = account?.rawIotaBalance
+export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
+    const rewards = getCurrentRewardsForAirdrop(airdrop)
+    const amountStaked = get(selectedAccount)?.rawIotaBalance
     const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
     return timeRequired
 }
@@ -406,7 +371,7 @@ export const getIotasUntilMinimumAirdropReward = (
         return format ? formatUnitBestMatch(0) : '0'
     }
 
-    const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
+    const currentRewards = getCurrentRewardsForAirdrop(airdrop)
     const iotasRequired = Math.round(calculateIotasUntilMinimumReward(currentRewards, airdrop))
 
     return format ? formatUnitBestMatch(iotasRequired) : iotasRequired.toString()
@@ -429,7 +394,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
         return false
     }
 
-    const currentRewards = getCurrentRewardsForAirdrop(account, airdrop)
+    const currentRewards = getCurrentRewardsForAirdrop(airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     const _getTimeLeft = () => {
@@ -447,17 +412,16 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
 }
 
 /**
- * Returns current rewards for a given airdrop
+ * Returns current rewards of the selected account for a given airdrop
  *
  * @method getCurrentRewardsForAirdrop
  *
- * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
  */
-export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: StakingAirdrop): number => {
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+export const getCurrentRewardsForAirdrop = (airdrop: StakingAirdrop): number => {
+    const overview = get(selectedAccountParticipationOverview)
     if (!overview) {
         return 0
     }
@@ -468,17 +432,16 @@ export const getCurrentRewardsForAirdrop = (account: WalletAccount, airdrop: Sta
 }
 
 /**
- * Returns current stake for a given airdrop
+ * Returns current stake of the selected account for a given airdrop
  *
  * @method getCurrentStakeForAirdrop
  *
- * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {number}
  */
-export const getCurrentStakeForAccount = (account: WalletAccount, airdrop: StakingAirdrop): number => {
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+export const getCurrentStakeForAccount = (airdrop: StakingAirdrop): number => {
+    const overview = get(selectedAccountParticipationOverview)
     if (!overview) {
         return 0
     }
@@ -486,35 +449,18 @@ export const getCurrentStakeForAccount = (account: WalletAccount, airdrop: Staki
 }
 
 /**
- * Determines whether a given account has reached the reward minimum
+ * Determines whether the selected account has reached the reward minimum
  * for either airdrop.
  *
  * @method hasAccountReachedMinimumAirdrop
- *
- * @param {WalletAccount} account
- *
+ * *
  * @returns {boolean}
  */
-export const hasAccountReachedMinimumAirdrop = (account: WalletAccount): boolean => {
-    if (!account) {
-        return false
-    }
-
-    const overview = get(participationOverview).find((apo) => apo.accountIndex === account?.index)
+export const hasAccountReachedMinimumAirdrop = (): boolean => {
+    const overview = get(selectedAccountParticipationOverview)
     if (!overview) {
         return false
     }
 
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
-
-/**
- * Determines whether any account has reached the reward minimum
- * for either airdrop.
- *
- * @method hasAnAccountReachedMinimumAirdrop
- *
- * @returns {boolean}
- */
-export const hasAnAccountReachedMinimumAirdrop = (): boolean =>
-    get(get(wallet).accounts).some((a) => hasAccountReachedMinimumAirdrop(a))

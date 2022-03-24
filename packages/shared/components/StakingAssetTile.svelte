@@ -98,7 +98,7 @@
                     ],
                 }
             } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible($stakingEventState)) {
-                const timeNeeded = getTimeUntilMinimumAirdropReward($selectedAccount, airdrop)
+                const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {
                         const body = localize('tooltips.stakingMinRewards.bodyBelowMin', {
