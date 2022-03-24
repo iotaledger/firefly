@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BalanceSummary, Button } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { mobile } from '@core/app'
+    import { appSettings } from '@core/app'
     import { walletRoute } from 'shared/lib/router'
     import { Locale } from '@core/i18n'
     import { WalletRoutes } from 'shared/lib/typings/routes'

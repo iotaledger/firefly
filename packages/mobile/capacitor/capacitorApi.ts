@@ -3,8 +3,7 @@ import { SplashScreen } from '@capacitor/splash-screen'
 
 import { IPlatform } from '@core/platform/interfaces'
 import { hookErrorLogger } from '@lib/core/shell'
-import { AppSettings } from '@lib/typings/app'
-import { VersionDetails } from '@lib/typings/appUpdater'
+import { AppSettings, VersionDetails } from '@core/app'
 
 import { BarcodeManager } from './lib/barcodeManager'
 import { DeepLinkManager } from './lib/deepLinkManager'

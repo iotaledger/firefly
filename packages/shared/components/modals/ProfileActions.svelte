@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
     import { Icon, Modal, Text, HR } from 'shared/components'
-    import { logout } from 'shared/lib/app'
+    import { logout } from '@core/app'
     import { getInitials } from '@core/utils/format'
     import { activeProfile } from 'shared/lib/profile'
     import { openSettings } from 'shared/lib/router'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { setProfileType } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'

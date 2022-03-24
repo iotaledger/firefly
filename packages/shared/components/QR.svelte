@@ -1,6 +1,6 @@
 <script lang="typescript">
     import QRCode from 'qr.js/lib/QRCode'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
 
     export let data
     export let size = 150

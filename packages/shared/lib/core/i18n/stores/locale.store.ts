@@ -1,7 +1,7 @@
 import { derived } from 'svelte/store'
 import { dictionary } from 'svelte-i18n'
 
-import { appSettings } from '@lib/appSettings'
+import { appSettings } from '@core/app'
 
 export const isLocaleLoaded = derived([dictionary, appSettings], ([$dictionary, $appSettings]) => {
     if (!$dictionary || !$appSettings) return false

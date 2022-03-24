@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
+    import { sendParams } from '@core/app'
     import { closePopup } from '@core/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'

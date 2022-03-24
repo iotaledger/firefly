@@ -1,4 +1,4 @@
-export type AppTheme = 'light' | 'dark' | 'system'
+import { AppTheme } from './app-theme.type'
 
 export interface AppSettings {
     deepLinking: boolean

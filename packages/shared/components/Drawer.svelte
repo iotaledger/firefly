@@ -1,18 +1,18 @@
 <!--
-	@component Drawer, slides in-out from the bottom or right and contains 
+	@component Drawer, slides in-out from the bottom or right and contains
 	the route contents handling scroll.
 	Spans the height or width of the screen, with everything behind it visible but dimmed.
 	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
-	
+
 	@prop {number} [dimLength] - Dim length in CSS pixels.
 	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
-	
+
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
@@ -163,9 +163,9 @@
         class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
-        style="--y: {fromRight ? 0 : $coords.y}px; 
-			--x: {fromRight ? $coords.x : 0}px; 
-			--opacity: {contentOpacity}; 
+        style="--y: {fromRight ? 0 : $coords.y}px;
+			--x: {fromRight ? $coords.x : 0}px;
+			--opacity: {contentOpacity};
 			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
 			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
 			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};

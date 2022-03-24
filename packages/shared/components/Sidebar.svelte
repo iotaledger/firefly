@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
     import { Settings } from 'shared/routes'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { getInitials } from '@core/utils/format'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'

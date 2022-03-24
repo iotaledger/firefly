@@ -3,7 +3,7 @@
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { clearSendParams, sendParams } from '@core/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -42,7 +42,7 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from '@core/utils/units'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
     import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils/crypto'

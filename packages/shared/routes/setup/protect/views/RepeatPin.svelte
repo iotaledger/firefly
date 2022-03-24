@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
     import { validatePinFormat } from '@core/utils/validation'
     import { createEventDispatcher } from 'svelte'

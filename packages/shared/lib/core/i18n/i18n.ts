@@ -5,7 +5,7 @@
 import { get } from 'svelte/store'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 
-import { appSettings } from '@lib/appSettings'
+import { appSettings } from '@core/app'
 
 import { LOCALE_OPTIONS, LANGUAGES } from './constants'
 import { LanguageChoice, LocaleDateOptions, LocaleOptions } from './types'

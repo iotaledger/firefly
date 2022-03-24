@@ -3,7 +3,7 @@
     import { Error, Icon } from 'shared/components'
     import { Platform } from '@core/platform'
     import { validatePinFormat, PIN_LENGTH } from '@core/utils/validation'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
 
     const dispatch = createEventDispatcher()
 

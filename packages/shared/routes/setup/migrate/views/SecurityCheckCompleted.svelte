@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from '@core/popup'
     import { walletSetupType } from 'shared/lib/router'

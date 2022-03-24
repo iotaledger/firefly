@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
 
     export let type = 'p'
     export let secondary = false

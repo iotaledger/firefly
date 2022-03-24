@@ -14,7 +14,7 @@
     import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from '@core/notification'
     import { walletSetupType } from 'shared/lib/router'
-    import { mnemonic } from 'shared/lib/app'
+    import { mnemonic } from '@core/app'
     import { SetupType } from 'shared/lib/typings/routes'
     import { Locale } from '@core/i18n'
 

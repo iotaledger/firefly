@@ -1,6 +1,6 @@
 <script lang="typescript">
     import lottie from 'lottie-web'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { onDestroy } from 'svelte'
 
     export let animation = undefined

@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { createEventDispatcher, onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { mobile } from '@core/app'
+    import { appSettings, shouldBeDarkMode } from '@core/app'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

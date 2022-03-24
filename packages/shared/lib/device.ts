@@ -1,4 +1,4 @@
-import { mobile } from 'shared/lib/app'
+import { mobile } from '@core/app'
 import { Writable } from 'svelte/store'
 import { get, writable } from 'svelte/store'
 import { Platform } from '@core/platform/platform'

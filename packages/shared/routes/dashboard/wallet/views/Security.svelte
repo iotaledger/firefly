@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { SecurityTile, Text } from 'shared/components'
-    import { versionDetails } from 'shared/lib/appUpdater'
+    import { versionDetails } from '@core/app'
     import { diffDates, isRecentDate } from '@core/utils/time'
     import { getBackupWarningColor } from '@core/utils/ui'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'

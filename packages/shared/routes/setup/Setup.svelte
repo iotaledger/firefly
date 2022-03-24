@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Platform } from '@core/platform'
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'

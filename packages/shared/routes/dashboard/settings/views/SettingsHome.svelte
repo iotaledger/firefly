@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
-    import { loggedIn, mobile } from 'shared/lib/app'
+    import { loggedIn, mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { mnemonic, strongholdPassword } from 'shared/lib/app'
+    import { mnemonic, strongholdPassword } from '@core/app'
     import { Platform } from '@core/platform'
     import { showAppNotification } from '@core/notification'
     import { updateProfile } from 'shared/lib/profile'

@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { initAppSettings } from '@core/app'
+    import { cleanupSignup, mobile } from '@core/app'
     import {
         Animation,
         Button,

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { onMount } from 'svelte'
 
     enum Position {

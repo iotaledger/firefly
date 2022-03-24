@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Drawer, Icon, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'

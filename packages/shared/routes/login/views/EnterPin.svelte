@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { initAppSettings } from 'shared/lib/appSettings'
+    import { initAppSettings } from '@core/app'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notification'
     import { Platform } from '@core/platform'

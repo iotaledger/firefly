@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { showAppNotification } from '@core/notification'
     import { openPopup } from '@core/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from '@core/platform'
     import {
         displayNotificationForLedgerProfile,

@@ -18,7 +18,7 @@
         updateProfile,
     } from 'shared/lib/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { logout } from 'shared/lib/app'
+    import { logout } from '@core/app'
     import { showAppNotification } from '@core/notification'
     import { ErrorType } from 'shared/lib/typings/events'
 

@@ -1,17 +1,21 @@
-import { Unit } from '@iota/unit-converter'
-import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
-import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { localize } from '@core/i18n'
-import { stopPollingLedgerStatus } from './ledger'
-import { showAppNotification } from '@core/notification'
-import { resetParticipation } from './participation'
-import { closePopup } from '@core/popup'
-import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouter } from './router'
-import { destroyActor, resetWallet } from './wallet'
+
+import { Unit } from '@iota/unit-converter'
+
 import { api } from '@core/api'
+import { localize } from '@core/i18n'
+import { showAppNotification } from '@core/notification'
+import { closePopup } from '@core/popup'
+
+import { isSoftwareProfile } from 'shared/lib/profile'
+import { stopPollingLedgerStatus } from '@lib/ledger'
+import { resetParticipation } from '@lib/participation'
+import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from '@lib/profile'
+import { resetRouter } from '@lib/router'
+import { destroyActor, resetWallet } from '@lib/wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
+
+import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './stores'
 
 /**
  * Mobile mode

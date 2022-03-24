@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { loggedIn } from '@core/app'
     import { GeneralSettings } from 'shared/lib/typings/routes'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
     import ChangeProfileName from './ChangeProfileName.svelte'

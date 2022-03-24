@@ -1,13 +1,13 @@
+import { VersionDetails } from '@core/app'
 import { Error } from '@core/error'
 import { INotificationManager } from '@core/notification'
 
 import { IDeepLinkManager } from '@common/deep-links'
 
 import { ILedger } from '@lib/typings/ledger'
-import { AppSettings } from '@lib/typings/app'
+import { AppSettings } from '@core/app'
 import { IPincodeManager } from '@lib/typings/pincodeManager'
 import { IBarcodeManager } from '@lib/typings/barcodeManager'
-import { VersionDetails } from '@lib/typings/appUpdater'
 import { EventMap } from '@lib/typings/events'
 
 export interface IPlatform {

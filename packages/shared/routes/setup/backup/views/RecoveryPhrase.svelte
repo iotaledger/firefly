@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { downloadRecoveryKit } from '@core/utils/os'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'

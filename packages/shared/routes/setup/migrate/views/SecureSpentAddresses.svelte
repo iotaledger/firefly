@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notification'
     import { closePopup, openPopup } from '@core/popup'

@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Radio, Text, TextHint } from 'shared/components'
-    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { appSettings, shouldBeDarkMode } from '@core/app'
     import { localize } from '@core/i18n'
-    import { AppTheme } from 'shared/lib/typings/app'
+    import { AppTheme } from '@core/app'
 
     let appTheme: AppTheme = $appSettings.theme
 

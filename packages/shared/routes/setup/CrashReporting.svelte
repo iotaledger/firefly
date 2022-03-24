@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from '@core/app'
 
     export let locale: Locale
 

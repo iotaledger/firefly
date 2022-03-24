@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Platform } from '@core/platform'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'

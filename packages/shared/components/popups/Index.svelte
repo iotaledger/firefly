@@ -42,7 +42,7 @@
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
 
     export let locale: Locale
 

@@ -3,8 +3,8 @@
     import { get } from 'svelte/store'
 
     import { Settings, Staking, Wallet } from 'shared/routes'
-    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { loggedIn, logout, mobile, sendParams } from '@core/app'
+    import { appSettings, isAwareOfCrashReporting } from '@core/app'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'

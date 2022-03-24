@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher, onMount } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@core/app'
     import { openPopup } from '@core/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'

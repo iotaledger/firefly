@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
 
     export let illustration = undefined
     export let width = undefined

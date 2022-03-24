@@ -1,4 +1,4 @@
-import { NativeProgress, VersionDetails } from './appUpdater'
+import { NativeProgress, VersionDetails } from '@core/app/types'
 import { ResponseTypes } from './bridge'
 import { Message, UTXOEventData } from './message'
 import { WalletRoutes } from './routes'

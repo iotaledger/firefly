@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Text, Link } from 'shared/components'
-    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from '@core/app'
     import { localize } from '@core/i18n'
     import { closePopup } from '@core/popup'
     import {
@@ -8,7 +8,7 @@
         needsToAcceptLatestPrivacyPolicy,
         TOS_VERSION,
         PRIVACY_POLICY_VERSION,
-    } from 'shared/lib/app'
+    } from '@core/app'
     import { Platform } from '@core/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'

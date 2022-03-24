@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { mnemonic } from 'shared/lib/app'
+    import { mnemonic } from '@core/app'
     import { Platform } from '@core/platform'
     import { getMigrationData } from 'shared/lib/migration'
     import { showAppNotification } from '@core/notification'

@@ -1,4 +1,3 @@
-import { Platform } from '@core/platform/platform'
 import { localize } from '@core/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
@@ -8,24 +7,20 @@ import {
     updateDisplayNotification,
     updateDisplayNotificationProgress,
 } from '@core/notification'
-import { writable } from 'svelte/store'
-import { NativeProgress, VersionDetails } from './typings/appUpdater'
+import { Platform } from '@core/platform'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils/time'
 
-const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
+import {
+    updateBusy,
+    updateComplete,
+    updateError,
+    updateMinutesRemaining,
+    updateProgress,
+    versionDetails,
+} from './stores'
+import { NativeProgress } from './types'
 
-export const versionDetails = writable<VersionDetails>({
-    upToDate: true,
-    currentVersion: '',
-    newVersion: '',
-    newVersionReleaseDate: new Date(),
-    changelog: '',
-})
-
-export const updateProgress = writable<number>(0)
-export const updateMinutesRemaining = writable<number>(-1)
-export const updateBusy = writable<boolean>(false)
-export const updateComplete = writable<boolean>(false)
-export const updateError = writable<boolean>(false)
+const DEFAULT_APP_UPDATER_POLL_INTERVAL = 15 * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
 
 Platform.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)

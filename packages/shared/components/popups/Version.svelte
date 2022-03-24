@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Logo, Text } from 'shared/components'
-    import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
+    import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from '@core/app'
     import { Platform } from '@core/platform'
     import { formatDate } from '@core/i18n'
     import { closePopup } from '@core/popup'
