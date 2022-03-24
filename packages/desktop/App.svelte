@@ -12,12 +12,12 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import {
+        accountRoute,
         dashboardRoute,
         initRouter,
         openSettings,
         routerNext,
         routerPrevious,
-        walletRoute,
     } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
@@ -93,7 +93,7 @@
                 dashboardRoute.set(Tabs.Wallet)
             }
             // TODO: update to single wallet
-            walletRoute.set(route)
+            accountRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
