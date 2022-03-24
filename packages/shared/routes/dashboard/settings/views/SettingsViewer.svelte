@@ -4,7 +4,7 @@
     import { localize, _ } from '@core/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { SettingsIcon } from '@core/icons'
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
@@ -86,7 +86,7 @@
             <SettingsNavigator
                 {routes}
                 onSettingClick={(id) => scrollIntoView(id)}
-                icons={SettingsIcons}
+                icons={SettingsIcon}
                 {settings}
                 bind:route={$settingsRoute}
             />

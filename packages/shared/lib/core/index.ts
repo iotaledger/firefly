@@ -1,6 +1,7 @@
 export * as api from './api'
 export * as app from './app'
 export * as error from './error'
+export * as icons from './icons'
 export * as i18n from './i18n'
 export * as notification from './notification'
 export * as platform from './platform'

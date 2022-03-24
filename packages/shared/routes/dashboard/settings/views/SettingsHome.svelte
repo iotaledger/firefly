@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { SettingsIcon } from '@core/icons'
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
@@ -50,7 +50,7 @@
         <SettingsMenu
             icon="settings"
             iconColor="bg-blue-500"
-            icons={SettingsIcons}
+            icons={SettingsIcon}
             settings={GeneralSettings}
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
@@ -60,7 +60,7 @@
         <SettingsMenu
             icon="security"
             iconColor="bg-yellow-500"
-            icons={SettingsIcons}
+            icons={SettingsIcon}
             settings={securitySettings}
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={localize('views.settings.security.title')}
@@ -70,7 +70,7 @@
         <SettingsMenu
             icon="tools"
             iconColor="bg-green-600"
-            icons={SettingsIcons}
+            icons={SettingsIcon}
             settings={advancedSettings}
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
@@ -80,7 +80,7 @@
         <SettingsMenu
             icon="info"
             iconColor="bg-purple-500"
-            icons={SettingsIcons}
+            icons={SettingsIcon}
             settings={HelpAndInfo}
             activeSettings={HelpAndInfo}
             title={localize('views.settings.helpAndInfo.title')}

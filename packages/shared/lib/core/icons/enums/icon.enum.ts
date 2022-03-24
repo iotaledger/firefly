@@ -1,4 +1,4 @@
-export enum SettingsIcons {
+export enum SettingsIcon {
     profile = 'info',
     theme = 'theme',
     language = 'language',
