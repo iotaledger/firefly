@@ -2,7 +2,7 @@
     import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isStakingForShimmer, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,

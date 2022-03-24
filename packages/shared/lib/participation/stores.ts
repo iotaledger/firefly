@@ -2,11 +2,12 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, wallet } from '../wallet'
+import { wallet, selectedAccount } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
 import {
+    AccountParticipationOverview,
     ParticipateResponsePayload,
     ParticipationAction,
     ParticipationEvent,
@@ -143,32 +144,22 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
     }
 )
 
-const sumStakingRewards = (airdrop: StakingAirdrop, overview: ParticipationOverview): number => {
-    if (!overview || overview?.length < 1) return 0
+const sumStakingRewards = (airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number => {
+    if (!accountOverview) {
+        return 0
+    }
 
     const rewardsKey = `${airdrop}Rewards`
     const rewardsBelowMinimumKey = `${airdrop}RewardsBelowMinimum`
 
-    const rewards = overview.reduce(
-        (total, accountOverview) => total + (rewardsKey in accountOverview ? accountOverview[rewardsKey] : 0),
-        0
-    )
-    const rewardsBelowMinimum = overview.reduce(
-        (total, accountOverview) =>
-            total + (rewardsBelowMinimumKey in accountOverview ? accountOverview[rewardsBelowMinimumKey] : 0),
-        0
-    )
-
-    if (rewards <= 0) {
-        return rewardsBelowMinimum
-    } else {
-        /**
-         * NOTE: We return the sum of rewards and rewardsBelowMinimum here because it is possible that an
-         * account has accumulated more than min rewards for an airdrop, but has unstaked and moved the funds
-         * to another address that has NOT reach the minimum.
-         */
-        return rewards + rewardsBelowMinimum
-    }
+    /**
+     * NOTE: We return the sum of rewards and rewardsBelowMinimum here because it is possible that an
+     * account has accumulated more than min rewards for an airdrop, but has unstaked and moved the funds
+     * to another address that has NOT reach the minimum.
+     */
+    return accountOverview[rewardsKey] <= 0
+        ? accountOverview[rewardsBelowMinimumKey]
+        : accountOverview[rewardsKey] + accountOverview[rewardsBelowMinimumKey]
 }
 
 /**
@@ -178,8 +169,10 @@ const sumStakingRewards = (airdrop: StakingAirdrop, overview: ParticipationOverv
  *
  * Be cautious that this value is in microASMB, so it is likely to be larger.
  */
-export const assemblyStakingRewards: Readable<number> = derived(participationOverview, (overview) =>
-    sumStakingRewards(StakingAirdrop.Assembly, overview)
+export const assemblyStakingRewards: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        sumStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
 )
 
 /**
@@ -187,8 +180,10 @@ export const assemblyStakingRewards: Readable<number> = derived(participationOve
  * accounts that have been staked at some point (even
  * if they are currently unstaked).
  */
-export const shimmerStakingRewards: Readable<number> = derived(participationOverview, (overview) =>
-    sumStakingRewards(StakingAirdrop.Shimmer, overview)
+export const shimmerStakingRewards: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        sumStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
 )
 
 /**

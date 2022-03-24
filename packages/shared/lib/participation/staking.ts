@@ -6,13 +6,12 @@ import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } f
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber } from '../utils'
-import { wallet } from '../wallet'
+import { selectedAccount } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
     participationEvents,
-    participationOverview,
     selectedAccountParticipationOverview,
     shimmerStakingRemainingTime,
     stakedAccounts,
@@ -306,31 +305,21 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 
 /**
  * Calculates the remaining time needed to continue staking in order to
- * reach the minimum airdrop amount. If called with format = true then returns
+ * reach the minimum airdrop amount for the selected account.
+ * If called with format = true then returns
  * human-readable duration, else returns the amount of time in millis.
  *
  * @method getTimeUntilMinimumAirdropReward
  *
- * @param {WalletAccount} account
  * @param {StakingAirdrop} airdrop
- * @param {boolean} format
  *
- * @returns {number | string}
+ * @returns {number}
  */
-export const getTimeUntilMinimumAirdropReward = (
-    account: WalletAccount,
-    airdrop: StakingAirdrop,
-    format: boolean = false
-): number | string => {
-    if (!account) {
-        return format ? getBestTimeDuration(0) : 0
-    }
-
+export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
-    const amountStaked = account?.rawIotaBalance
+    const amountStaked = get(selectedAccount)?.rawIotaBalance
     const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
-
-    return format ? getBestTimeDuration(timeRequired) : timeRequired
+    return timeRequired
 }
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
