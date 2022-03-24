@@ -43,9 +43,9 @@
         { duration: 350, easing: quintOut }
     )
 
-    onMount(() => {
+    onMount(async () => {
         if (opened) {
-            void open()
+            await open()
         }
     })
 
@@ -104,8 +104,8 @@
         }
     }
 
-    function handleSlideMove(event: CustomEvent): void {
-        void coords.update(
+    async function handleSlideMove(event: CustomEvent): Promise<void> {
+        await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
@@ -114,14 +114,14 @@
         )
     }
 
-    function handleSlideEnd() {
+    async function handleSlideEnd() {
         const thresholdUnreached = fromRight
             ? (viewportLength - dimLength) / 2 > $coords.x
             : (viewportLength - dimLength) / 1.2 > $coords.y
         if (thresholdUnreached) {
-            void open()
+            await open()
         } else {
-            void close()
+            await close()
         }
     }
 
