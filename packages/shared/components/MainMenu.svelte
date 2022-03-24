@@ -14,7 +14,7 @@
     const profileColor = getColor($activeProfile, $activeProfile.id)
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
-    
+
     function handleBackClick() {
         if ($settingsRoute === SettingsRoutes.Init) {
             drawer?.close()
@@ -37,16 +37,10 @@
 >
     <span class="text-12 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
-<Drawer 
-    bind:this={drawer}
-    fromRight
-    dimLength={0}
-    fullScreen 
-    classes="flex"
->
+<Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
     <div class="flex flex-col flex-1">
         <header
-            class="w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
+            class="header w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
             on:click={handleBackClick}
         >
             <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
@@ -64,9 +58,7 @@
                     class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
                     style="background-color: {profileColor};"
                 >
-                    <span class="text-20 text-center text-white uppercase font-semibold"
-                        >{profileInitial}</span
-                    >
+                    <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial}</span>
                 </div>
                 <Text type="h4" classes="col-start-2 row-start-2">{$activeProfile?.name}</Text>
                 <button class="col-start-2 row-start-3 flex items-center" on:click={() => logout()}>
@@ -80,6 +72,9 @@
 </Drawer>
 
 <style>
+    .header {
+        padding-top: env(safe-area-inset-top);
+    }
     .menu-button {
         margin-top: 35px;
         top: env(safe-area-inset-top);
