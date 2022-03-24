@@ -9,6 +9,11 @@
             "body": "Läs igenom sekretesspolicyn och användarvillkoren.",
             "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren"
         },
+        "crashReporting": {
+            "title": "Kraschrapportering",
+            "body": "Hjälp utvecklarna att förbättra Firefly genom att automatiskt skicka diagnostikdata när ett fel eller en krasch inträffar.",
+            "checkbox": "Skicka kraschrapporter till IOTA Foundation"
+        },
         "appearance": {
             "title": "Utseende",
             "body": "Välj ditt tema."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Teman",
                 "description": "",
-                "advice": "Starta om Firefly för att ändringarna i systemtemat skall träda i kraft"
+                "advice": "Du måste starta om Firefly för att ändringarna i systemtemat skall träda i kraft"
             },
             "language": {
                 "title": "Språk",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Felmeddelanden",
                 "description": "Visa felmeddelanden för att felsöka ett problem"
+            },
+            "crashReporting": {
+                "title": "Kraschrapporter",
+                "body": "Hjälp utvecklarna att förbättra Firefly genom att automatiskt skicka diagnostikdata när ett fel eller en krasch inträffar",
+                "checkbox": "Skicka kraschrapporter",
+                "advice": "Vänligen starta om Firefly applikationen för att {sendCrashReports, select, true {börja dela kraschrapporter} false {sluta dela kraschrapporter} other {använda denna ändring}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Du skapar en utvecklarprofil",
             "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
+        },
+        "crashReporting": {
+            "title": "Kraschrapportering",
+            "body": "Hjälp utvecklarna att förbättra Firefly genom att automatiskt skicka diagnostikdata när ett fel eller en krasch inträffar. Om detta är valt, kommer det att träda i kraft efter att Firefly startats om.",
+            "checkbox": "Skicka kraschrapporter till IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Användarvillkor",

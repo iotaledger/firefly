@@ -9,6 +9,11 @@
             "body": "Veuillez consulter la politique de confidentialité et les conditions d'utilisation.",
             "checkbox": "J'ai lu et j'accepte la politique de confidentialité et les conditions d'utilisation"
         },
+        "crashReporting": {
+            "title": "Rapport de plantage",
+            "body": "Aidez les développeurs à améliorer Firefly en envoyant automatiquement des données de diagnostic en cas d'erreur ou de plantage.",
+            "checkbox": "Envoyer les rapports de plantage à la Fondation IOTA"
+        },
         "appearance": {
             "title": "Apparence",
             "body": "Choisissez le thème de l'application."
@@ -411,6 +416,12 @@
                 "title": "Journal des erreurs",
                 "description": "Afficher les erreurs pour débuguer"
             },
+            "crashReporting": {
+                "title": "Rapports de plantage",
+                "body": "Aidez les développeurs à améliorer Firefly en envoyant automatiquement des données de diagnostic en cas d'erreur ou de plantage",
+                "checkbox": "Envoyer les rapports de plantage",
+                "advice": "Veuillez redémarrer l'application Firefly pour {sendCrashReports, select, true {commencer à partager les rapports de plantage} false {arrêter de partager les rapports de plantage} other {appliquer ce changement}}"
+            },
             "diagnostics": {
                 "title": "Diagnostics",
                 "description": "Voir les informations du système et de l'application"
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Vous êtes en train de créer un profil développeur",
             "body": "Par défaut, vous serez connecté au réseau Chrysalis Devnet et pourrez changer de réseau manuellement. Ne continuez que si vous savez ce que vous faites."
+        },
+        "crashReporting": {
+            "title": "Rapport de plantage",
+            "body": "Aidez les développeurs à améliorer Firefly en envoyant automatiquement des données de diagnostic lorsqu'une erreur ou un plantage se produit. Si sélectionné, cela prendra effet après le redémarrage de Firefly.",
+            "checkbox": "Envoyer les rapports de plantage à la Fondation IOTA"
         },
         "legalUpdate": {
             "tosTitle": "Conditions d'Utilisation",
