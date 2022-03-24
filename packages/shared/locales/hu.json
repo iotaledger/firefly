@@ -9,6 +9,11 @@
             "body": "Kérjük, figyelmesen olvassa el az Adatvédelmi irányelveket és a Felhasználási feltételeket.",
             "checkbox": "Elolvastam és elfogadom az Adatvédelmi irányelveket és a Felhasználási feltételeket"
         },
+        "crashReporting": {
+            "title": "Hbajelentés",
+            "body": "Segítse a Firefly szoftver fejlesztését azzal, hogy automatikus diagnosztikai adatokat küld hiba vagy szoftverösszeomlás esetén.",
+            "checkbox": "Hibajelentés elküldése az IOTA Foundation-nek"
+        },
         "appearance": {
             "title": "Megjelenés",
             "body": "Válassza ki az applikáció megjelenését."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Megjelenés",
                 "description": "",
-                "advice": "Az új megjelenéshez kérjük indítsa újra a Firefly-t"
+                "advice": "Az új megjelenéshez újra kell indítani a Firefly-t"
             },
             "language": {
                 "title": "Nyelv",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Hibanapló",
                 "description": "Hibák megtekintése a probléma kiderítéséhez"
+            },
+            "crashReporting": {
+                "title": "Hibajelentések",
+                "body": "Segítse a Firefly szoftver fejlesztését azzal, hogy automatikus diagnosztikai adatokat küld hiba vagy szoftverösszeomlás esetén",
+                "checkbox": "Hibajelentések küldése",
+                "advice": "Kérjük indítsa újra a Firefly-t a {sendCrashReports, select, true {hibajelentések küldésének bekapcsolásához} false {hibajelentések küldésének kikapcsolásához} other {módosítás végrehajtásához}}"
             },
             "diagnostics": {
                 "title": "Diagnosztika",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Egy fejlesztői profilt hoz létre",
             "body": "Alapértelmezetten a Chrysalis fejlesztői hálózatra csatlakozik és kézzel válthat a hálózatok között. Csak akkor folytassa, ha pontosan tudja mit csinál."
+        },
+        "crashReporting": {
+            "title": "Hibajelentés",
+            "body": "Segítse a Firefly szoftver fejlesztését azzal, hogy automatikus diagnosztikai adatokat küld hiba vagy szoftverösszeomlás esetén. A beállítás csak a Firefly újraindítása után lép életbe.",
+            "checkbox": "Hibajelentés elküldése az IOTA Foundation-nek"
         },
         "legalUpdate": {
             "tosTitle": "Szolgáltatási feltételek",
