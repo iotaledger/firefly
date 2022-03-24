@@ -39,7 +39,7 @@
     const airdrop = asset?.name === Token.Assembly ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
 
     let isBelowMinimumRewards: boolean
-    let canShowTooltip = false
+    let showTooltip = false
     let tooltipAnchor: HTMLElement
     let tooltipText: TooltipText
     let remainingTime: number
@@ -55,16 +55,16 @@
         if (hasAccountReachedMinimumAirdrop($selectedAccount) && !isStakingPossible($stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
-            isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${asset?.name}RewardsBelowMinimum`] > 0
+            isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0
         }
     }
-    $: canShowWarningState =
+    $: showWarningState =
         isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
-        canShowTooltip = !canShowTooltip
+        showTooltip = !showTooltip
     }
 
     function handleTileClick(): void {
@@ -133,13 +133,13 @@
     style="--asset-color: {asset?.color}"
     class="flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
     class:staked={isActivelyStaking}
-    class:partial-stake={canShowWarningState}
+    class:partial-stake={showWarningState}
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-            {#if canShowWarningState}
+            {#if showWarningState}
                 <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                     <Icon
                         icon="exclamation"
@@ -171,7 +171,7 @@
         {/if}
     </div>
 </button>
-{#if canShowTooltip && tooltipText?.body}
+{#if showTooltip && tooltipText?.body}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
