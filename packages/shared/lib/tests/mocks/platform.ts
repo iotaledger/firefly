@@ -1,9 +1,8 @@
+import { AppSettings, VersionDetails } from '@core/app'
+import { Error } from '@core/error'
 import { IPlatform } from '@core/platform'
 
-import { VersionDetails } from '@lib/typings/appUpdater'
 import { EventMap } from '@lib/typings/events'
-import { AppSettings } from '@core/app'
-import { Error } from '@core/error'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,
