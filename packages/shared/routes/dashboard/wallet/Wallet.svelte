@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { DashboardPane, Drawer } from 'shared/components'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
@@ -16,11 +15,11 @@
     } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Message, Transaction } from 'shared/lib/typings/message'
-    import type { MigratedTransaction } from 'shared/lib/typings/profile'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { Message, Transaction } from 'shared/lib/typings/message'
+    import { MigratedTransaction } from 'shared/lib/typings/profile'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type {
+    import {
         AccountMessage,
         AccountsBalanceHistory,
         BalanceHistory,
@@ -56,6 +55,7 @@
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { isDeepLinkRequestActive } from '@common/deep-links'
 
     export let locale: Locale
 
@@ -64,9 +64,9 @@
     const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
     $: {
-        if ($deepLinkRequestActive && $sendParams && $sendParams.address) {
+        if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
             walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
+            isDeepLinkRequestActive.set(false)
         }
     }
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>

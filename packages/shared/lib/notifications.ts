@@ -2,7 +2,7 @@ import { appSettings } from 'shared/lib/appSettings'
 import { generateRandomId } from 'shared/lib/utils'
 import { get, writable } from 'svelte/store'
 import { Platform } from './platform'
-import type { NotificationData, NotificationType } from './typings/notification'
+import { NotificationData, NotificationType } from './typings/notification'
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 export const NOTIFICATION_TIMEOUT_NEVER = -1

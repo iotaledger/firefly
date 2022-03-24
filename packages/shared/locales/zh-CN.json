@@ -9,6 +9,11 @@
             "body": "请查看隐私政策和服务条款。",
             "checkbox": "我已通读并接受隐私政策和服务条款"
         },
+        "crashReporting": {
+            "title": "崩溃报告",
+            "body": "在发生错误或崩溃时自动发送诊断数据，帮助开发人员改进Frefly。",
+            "checkbox": "发送崩溃报告给IOTA基金会"
+        },
         "appearance": {
             "title": "外观",
             "body": "选择您的应用主题"
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "请重新启动Firefly应用程序以使系统主题的变更生效。"
+                "advice": "你需要重新启动Firefly应用程序以使系统主题的变更生效。"
             },
             "language": {
                 "title": "语言",
@@ -352,9 +357,9 @@
                 "action": "更改 PIN 码"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "更改配置文件名称",
+                "description": "更改您的 Firefly 配置文件名称",
+                "success": "您更改了您的配置文件名称"
             },
             "balanceFinder": {
                 "title": "余额搜索器",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "错误日志",
                 "description": "查看错误以调试问题"
+            },
+            "crashReporting": {
+                "title": "崩溃报告",
+                "body": "在发生错误或崩溃时自动发送诊断数据，帮助开发人员改进Firefly。",
+                "checkbox": "发送崩溃报告",
+                "advice": "请重启Firefly应用程序后 {sendCrashReports, select, true {开始分享崩溃报告} false {停止分享崩溃报告} other {应用此更改}}"
             },
             "diagnostics": {
                 "title": "诊断程序",
@@ -535,8 +546,8 @@
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "取色器",
+                "hexCode": "颜色十六进制代码"
             }
         }
     },
@@ -764,15 +775,20 @@
             "title": "您正在创建一个开发者配置",
             "body": "你将被默认连接到Chrysalis Devnet，你可以手动切换网络。你需要知道自己在做什么的情况下才能继续。"
         },
+        "crashReporting": {
+            "title": "崩溃报告",
+            "body": "当发生错误或崩溃时自动发送诊断数据，帮助开发者改进Firefly。如果选中，将在重新启动 Firefly 后生效。",
+            "checkbox": "发送崩溃报告给IOTA基金会"
+        },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "服务条款",
+            "privPolicyTitle": "隐私政策",
+            "tosAndPrivPolicyBody": "我们更新了Firefly的服务条款和隐私政策。",
+            "tosBody": "我们更新了 Firefly 的服务条款。",
+            "privPolicyBody": "我们更新了 Firefly 的隐私政策。",
+            "tosAndPrivPolicyCheckbox": "我已阅读并接受更新后的服务条款和隐私政策",
+            "tosCheckbox": "我已阅读并接受更新后的服务条款。",
+            "privPolicyCheckbox": "我已阅读并接受更新后的隐私政策。"
         }
     },
     "charts": {
@@ -1025,7 +1041,7 @@
         "legacyNetwork": "旧的网络",
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "您的钱包",
         "unknown": "未知",
         "none": "无",
         "staked": "已质押",
@@ -1117,7 +1133,7 @@
         "account": {
             "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "empty": "您必须先使用您最新的钱包之后才能创建一个新钱包。",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "配置文件名称必须包含至少 1 个字符。",
             "notEmpty": "您必须在删除此帐户之前转移您的余额。",
             "duplicate": "此名称的钱包已经存在",
             "tilde": "配置名称不能以“~”字符开头。",
@@ -1287,8 +1303,8 @@
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "请授权使用相机扫描二维码。",
+            "requestInAppSettings": "如果您想授予使用相机扫描二维码的权限，请在应用程序设置中启用它。"
         }
     }
 }

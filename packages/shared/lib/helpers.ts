@@ -1,5 +1,5 @@
 import { writable, Writable } from 'svelte/store'
-import type { DateDiff } from './typings/wallet'
+import { DateDiff } from './typings/wallet'
 
 /**
  * Update application path

@@ -9,6 +9,11 @@
             "body": "Zapoznaj się z Polityką prywatności oraz Warunkami świadczenia usług.",
             "checkbox": "Przeczytałem i akceptuję Politykę prywatności oraz Warunki korzystania z usług"
         },
+        "crashReporting": {
+            "title": "Zgłaszanie awarii",
+            "body": "Pomóż programistom ulepszyć Firefly poprzez automatyczne wysyłanie danych diagnostycznych w przypadku wystąpienia błędu lub awarii.",
+            "checkbox": "Wyślij raporty o awariach do Fundacji IOTA"
+        },
         "appearance": {
             "title": "Wygląd",
             "body": "Wybierz motyw aplikacji."
@@ -411,6 +416,12 @@
                 "title": "Dziennik błędów",
                 "description": "Wyświetl błędy do debugowania problemu"
             },
+            "crashReporting": {
+                "title": "Zgłoszenia awarii",
+                "body": "Pomóż programistom ulepszyć Firefly poprzez automatyczne wysyłanie danych diagnostycznych w przypadku wystąpienia błędu lub awarii",
+                "checkbox": "Włącz raportowanie błędów",
+                "advice": "Zrestartuj Firefly, aby {sendCrashReports, select, true {włączyć raportowanie błędów} false {wyłączyć raportowanie błędów} other {zastosować tę zmianę}}"
+            },
             "diagnostics": {
                 "title": "Diagnostyka",
                 "description": "Zobacz informacje o systemie i aplikacji"
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Tworzysz profil dewelopera",
             "body": "Twoim domyślnym połączeniem będzie Chrysalis Devnet. Będziesz mógł przełączać sieci ręcznie. Kontynuuj tylko jeśli wiesz co robisz."
+        },
+        "crashReporting": {
+            "title": "Zgłaszanie awarii",
+            "body": "Pomóż programistom ulepszyć Firefly poprzez automatyczne wysyłanie danych diagnostycznych w przypadku wystąpienia błędu lub awarii. Zmiana tej opcji zacznie obowiązywać po ponownym uruchomieniu Firefly.",
+            "checkbox": "Wyślij raporty o awariach do Fundacji IOTA"
         },
         "legalUpdate": {
             "tosTitle": "Warunki korzystania z usługi",

@@ -114,7 +114,7 @@
         <Text type="p" secondary classes="mb-5">
             {locale('popups.hideAccount.errorBody2', { values: { balance: $account?.balance } })}
         </Text>
-        <div class="flex flex-row justify-between w-full space-x-4 px-8">
+        <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>
             <Button classes="w-1/2" onClick={() => handleMoveFundsClick()}>{locale('general.moveFunds')}</Button>
         </div>

@@ -1,4 +1,4 @@
-import type { Network } from './network'
+import { Network } from './network'
 
 export interface NodeAuth {
     jwt?: string

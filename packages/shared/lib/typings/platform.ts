@@ -1,12 +1,12 @@
-import type { AppSettings } from './app'
-import type { IDeepLinkManager } from './deepLinking/deepLinkManager'
-import type { ILedger } from './ledger'
-import type { INotificationManager } from './notificationManager'
-import type { IPincodeManager } from './pincodeManager'
-import type { VersionDetails } from './appUpdater'
-import type { Error } from './error'
-import type { EventMap } from './events'
-import type { IBarcodeManager } from './barcodeManager'
+import { IDeepLinkManager } from '@common/deep-links'
+import { AppSettings } from './app'
+import { ILedger } from './ledger'
+import { INotificationManager } from './notificationManager'
+import { IPincodeManager } from './pincodeManager'
+import { VersionDetails } from './appUpdater'
+import { Error } from './error'
+import { EventMap } from './events'
+import { IBarcodeManager } from './barcodeManager'
 
 export enum Platforms {
     MOBILE = 'mobile',
@@ -21,7 +21,7 @@ export interface IPlatform {
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
-    getOS(): Promise<string>
+    getOS(): Promise<string> | string
     getMachineId(): Promise<string>
     updateAppSettings(settings: Partial<AppSettings>): Promise<void>
     getActiveProfile(): string
