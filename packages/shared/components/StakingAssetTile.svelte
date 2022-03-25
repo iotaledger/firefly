@@ -108,10 +108,10 @@
                             },
                         })
                         if (timeNeeded > remainingTime) {
-                            return [...body, localize('tooltips.stakingMinRewards.bodyWillNotReachMin')]
+                            return [body, localize('tooltips.stakingMinRewards.bodyWillNotReachMin')]
                         } else {
                             return [
-                                ...body,
+                                body,
                                 localize('tooltips.stakingMinRewards.bodyWillReachMin', {
                                     values: { duration: getBestTimeDuration(remainingTime) },
                                 }),
