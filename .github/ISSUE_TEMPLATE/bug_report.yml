@@ -134,7 +134,7 @@ body:
       id: profile_type
       attributes:
           label: Profile Type
-          description: Are you using a developer profile?
+          description: Are you using a hardware wallet or software wallet?
           multiple: false
           options:
             - Software (Stronghold)
