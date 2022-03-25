@@ -2,9 +2,7 @@
     import { AccountTile, Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, setSelectedAccount, wallet } from 'shared/lib/wallet'
 
     export let error = ''
@@ -39,32 +37,21 @@
 
             isBusy = true
 
-            const _cancel = () => (isBusy = false)
             const _create = () =>
                 onAccountCreation(trimmedAccountAlias, color, (err) => {
                     isBusy = false
                     setSelectedAccount($accounts.find((a) => a.alias === trimmedAccountAlias)?.id)
                     if (err) {
                         console.error(err?.error || err)
-
-                        if ($isLedgerProfile) {
-                            displayNotificationForLedgerProfile('error', true, false, false, false, err)
-                        } else {
-                            showAppNotification({
-                                type: 'error',
-                                message: localize(err?.error || err),
-                            })
-                        }
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err?.error || err),
+                        })
                     } else {
                         onCancel()
                     }
                 })
-
-            if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, _create, _cancel)
-            } else {
-                _create()
-            }
+            _create()
         }
     }
     const handleCancelClick = () => {
