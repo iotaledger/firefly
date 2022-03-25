@@ -113,6 +113,10 @@ jobs:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
         SENTRY_ENVIRONMENT: ${{ env.STAGE }}
 
+    - name: Set productName
+      run: node scripts/fix-productName.js
+      working-directory: packages/desktop
+
     - name: Bundle desktop JS
       run: yarn build:${STAGE}
       working-directory: packages/desktop

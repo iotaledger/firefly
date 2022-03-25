@@ -1,5 +1,4 @@
 const notarize = require('./scripts/notarize.macos.js')
-const fixProductName = require('./scripts/fix-productName')
 const merge = require('lodash.merge')
 
 const baseConfig = () => ({
@@ -9,9 +8,6 @@ const baseConfig = () => ({
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/firefly-actor-system-nodejs-bindings/native/*'],
     appId: 'org.iota.firefly',
-    beforeBuild: async () => {
-        await fixProductName(getAppName(process.env.STAGE || 'alpha'))
-    },
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
@@ -20,10 +16,6 @@ const baseConfig = () => ({
             // This catch is necessary or the promise rejection is swallowed
             throw error
         }
-    },
-    afterAllArtifactBuild: async () => {
-        // Reset productName so changes to package.json aren't checked into git by accident
-        await fixProductName('Firefly')
     },
     asar: true,
     protocols: [{ name: 'IOTA URL Scheme', schemes: ['iota'] }],
