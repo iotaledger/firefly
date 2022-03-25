@@ -1,8 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const {
-    version,
-    build: { productName },
-} = require('../../package.json')
+const { version, productName } = require('../../package.json')
 
 contextBridge.exposeInMainWorld('about', {
     getData: () =>
