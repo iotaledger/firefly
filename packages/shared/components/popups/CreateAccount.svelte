@@ -7,6 +7,7 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { formatCurrency } from 'shared/lib/currency'
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
@@ -92,7 +93,7 @@
         <div class="w-full flex flex-col justify-between">
             <AccountTile
                 balance={'0 Mi'}
-                balanceEquiv={'US$ 0,00'}
+                balanceEquiv={formatCurrency(0)}
                 {color}
                 name={accountAlias || localize('general.accountName')}
                 classes="mb-4"
