@@ -9,6 +9,11 @@
             "body": "Ole hyvä ja tutustu tietosuojakäytäntöön ja käyttöehtoihin.",
             "checkbox": "Olen lukenut ja hyväksyn tietosuojakäytännön ja käyttöehdot"
         },
+        "crashReporting": {
+            "title": "Kaatumisraportointi",
+            "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa.",
+            "checkbox": "Lähetä kaatumisraportit IOTA-säätiölle"
+        },
         "appearance": {
             "title": "Ulkoasu",
             "body": "Valitse sovelluksen teema."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Teema",
                 "description": "",
-                "advice": "Käynnistä Firefly uudelleen, jotta muutokset järjestelmän teemaan tulevat voimaan"
+                "advice": "Sinun täytyy käynnistää Firefly uudelleen, jotta muutokset järjestelmän teemaan tulevat voimaan"
             },
             "language": {
                 "title": "Kieli",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Virheloki",
                 "description": "Näytä virheet ongelman selvittämiseksi"
+            },
+            "crashReporting": {
+                "title": "Kaatumisraportit",
+                "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa",
+                "checkbox": "Lähetä kaatumisraportit",
+                "advice": "Ole hyvä ja käynnistä Firefly-ohjelma uudelleen {sendCrashReports, select, true {aloittaaksesi kaatumisraporttien jakamisen} false {lopettaaksesi kaatumisraporttien jakamisen} other {tehdäksesi tämän muutoksen}}"
             },
             "diagnostics": {
                 "title": "Diagnostiikka",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Olet luomassa kehittäjäprofiilia",
             "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
+        },
+        "crashReporting": {
+            "title": "Kaatumisraportointi",
+            "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa. Jos tämä on valittuna, se tulee voimaan Fireflyn uudelleenkäynnistyksen jälkeen.",
+            "checkbox": "Lähetä kaatumisraportit IOTA-säätiölle"
         },
         "legalUpdate": {
             "tosTitle": "Käyttöehdot",

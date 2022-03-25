@@ -9,6 +9,11 @@
             "body": "Por favor, revise a Política de Privacidade e os Termos de Serviço.",
             "checkbox": "Eu li e aceito a Política de Privacidade e os Termos de Serviço"
         },
+        "crashReporting": {
+            "title": "Reportando falha",
+            "body": "Ajude os desenvolvedores a melhorar a Firefly enviando automaticamente dados de diagnóstico quando ocorrer um erro ou uma falha.",
+            "checkbox": "Enviar relatórios de falha para a Fundação IOTA"
+        },
         "appearance": {
             "title": "Aparência",
             "body": "Escolha o tema do seu aplicativo."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Por favor, reinicie o aplicativo Firefly para que as alterações no tema do sistema entrem em vigortenham efeito"
+                "advice": "Você deve reiniciar a Firefly para que as alterações no tema do sistema tenham efeito"
             },
             "language": {
                 "title": "Idioma",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Registro de erros",
                 "description": "Ver erros para depurar um problema"
+            },
+            "crashReporting": {
+                "title": "Relatórios de falhas",
+                "body": "Ajude os desenvolvedores a melhorar a Firefly enviando automaticamente dados de diagnóstico quando ocorrer um erro ou uma falha",
+                "checkbox": "Enviar relatórios de falhas",
+                "advice": "Por favor reinicie o aplicativo Firefly para {sendCrashReports, select, true {compartilhar os relatórios de falhas} false {parar de compartilhar os relatórios de falhas} other {aplique esta alteração}}"
             },
             "diagnostics": {
                 "title": "Diagnósticos",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Você está criando um perfil de desenvolvedor",
             "body": "Você estará conectado a Chrysalis Devnet por padrão e poderá alternar as redes manualmente. Somente continue se você souber o que está fazendo."
+        },
+        "crashReporting": {
+            "title": "Reportando falha",
+            "body": "Ajudar os desenvolvedores a melhorar a Firefly enviando automaticamente dados de diagnóstico quando um erro ou uma falha ocorrer. Se selecionado, isso terá efeito após reiniciar a Firefly.",
+            "checkbox": "Enviar relatórios de falha para a Fundação IOTA"
         },
         "legalUpdate": {
             "tosTitle": "Termos de Serviço",

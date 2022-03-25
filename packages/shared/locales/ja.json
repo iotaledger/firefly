@@ -9,6 +9,11 @@
             "body": "プライバシーポリシーと利用規約に同意します",
             "checkbox": "プライバシーポリシーと利用規約に同意します"
         },
+        "crashReporting": {
+            "title": "クラッシュレポート",
+            "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。",
+            "checkbox": "クラッシュレポートをIOTA財団に送信する"
+        },
         "appearance": {
             "title": "テーマ",
             "body": "アプリのテーマを選択してください。"
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "テーマ：",
                 "description": "",
-                "advice": "システムテーマの変更を有効にするには、Firefly アプリケーションを再起動してください"
+                "advice": "システムテーマの変更を有効にするにはFirefly を再起動する必要があります"
             },
             "language": {
                 "title": "言語:",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "エラーログ",
                 "description": "エラーを表示して問題をdebug する"
+            },
+            "crashReporting": {
+                "title": "クラッシュレポート",
+                "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。",
+                "checkbox": "クラッシュレポートを送信する",
+                "advice": "Fireflyアプリケーションを再起動して {sendCrashReports, select, true {クラッシュレポートの共有を開始 } false {クラッシュレポートの共有を停止する } other {この変更を適用する }}"
             },
             "diagnostics": {
                 "title": "診断",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "開発者プロフィール を作成しています",
             "body": "デフォルトではChrysalis Devnetに接続され、手動でネットワークを切り替えることができます。内容を理解されている場合のみ、続行することができます。"
+        },
+        "crashReporting": {
+            "title": "クラッシュレポート",
+            "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。選択した場合は、Fireflyを再起動した後に有効になります。",
+            "checkbox": "クラッシュレポートをIOTA財団に送信する"
         },
         "legalUpdate": {
             "tosTitle": "利用規約",

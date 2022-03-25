@@ -9,6 +9,11 @@
             "body": "Si prega di prendere visione dell'Informativa sulla privacy e i termini di servizio.",
             "checkbox": "Ho letto e accetto la Politica sulla Privacy e i Termini di Servizio"
         },
+        "crashReporting": {
+            "title": "Segnalazione di malfunzionamenti",
+            "body": "Aiuta gli sviluppatori a migliorare Firefly inviando automaticamente dati diagnostici quando si verifica un errore o un crash.",
+            "checkbox": "Invia segnalazioni di crash alla Fondazione IOTA"
+        },
         "appearance": {
             "title": "Aspetto",
             "body": "Scegli il tema della tua app."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Sei pregato di riavviare l'applicazione di Firefly perché le modifiche al tema di sistema siano effettive"
+                "advice": "È necessario riavviare Firefly affinché le modifiche al tema di sistema abbiano effetto"
             },
             "language": {
                 "title": "Lingua",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Registro degli errori",
                 "description": "Visualizza gli errori per il debug di un problema"
+            },
+            "crashReporting": {
+                "title": "Segnalazioni di crash",
+                "body": "Aiuta gli sviluppatori a migliorare Firefly inviando automaticamente dati diagnostici quando si verifica un errore o un crash",
+                "checkbox": "Invia rapporti di errore",
+                "advice": "Riavvia l'applicazione Firefly per {sendCrashReports, select, true {condividere rapporti di malfunzionamento} false {non condividere rapporti di malfunzionamento} other {applica questa modifica}}"
             },
             "diagnostics": {
                 "title": "Diagnostiche",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "Stai creando un profilo sviluppatore",
             "body": "Sarai connesso al Chrysalis Devnet di default e puoi passare manualmente tra le reti. Continua solo se sai cosa stai facendo."
+        },
+        "crashReporting": {
+            "title": "Segnalazione di malfunzionamenti",
+            "body": "Aiuta gli sviluppatori a migliorare Firefly inviando automaticamente dati diagnostici quando si verifica un errore o un crash. Se selezionato, questo avrà effetto dopo il riavvio di Firefly.",
+            "checkbox": "Invia segnalazioni di crash alla Fondazione IOTA"
         },
         "legalUpdate": {
             "tosTitle": "Termini di Servizio",

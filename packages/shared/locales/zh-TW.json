@@ -9,6 +9,11 @@
             "body": "請仔細檢閱「隱私權政策」與「服務條款」",
             "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
         },
+        "crashReporting": {
+            "title": "當機錯誤回報",
+            "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly。",
+            "checkbox": "發送當機報告給IOTA基金會"
+        },
         "appearance": {
             "title": "界面外觀",
             "body": "選擇您的佈景主題。"
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "佈景主題",
                 "description": "",
-                "advice": "請重啟 Firefly 以讓系統主題佈景變更生效。"
+                "advice": "請重啟 Firefly 使系統主題佈景變更生效"
             },
             "language": {
                 "title": "語言",
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "錯誤日誌",
                 "description": "查看錯誤以解決問題"
+            },
+            "crashReporting": {
+                "title": "當機報告",
+                "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly",
+                "checkbox": "發送當機報告",
+                "advice": "請重啟Firefly來{sendCrashReports, select, true {開始分享當機報告} false {停止分享當機報告} other {啟用此更變}}"
             },
             "diagnostics": {
                 "title": "應用診斷",
@@ -763,6 +774,11 @@
         "confirmDeveloperProfile": {
             "title": "您正在建立開發者設定檔。",
             "body": "您將連結至預設的 Chrysalis 開發網，並且可以手動切換網路。在開始前請先確定您具備相關的知識。"
+        },
+        "crashReporting": {
+            "title": "當機回報",
+            "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly，此選項會在重啟Firefly之後生效。",
+            "checkbox": "發送當機報告給IOTA基金會"
         },
         "legalUpdate": {
             "tosTitle": "服務條款",
