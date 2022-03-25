@@ -3,12 +3,10 @@
     import { localize } from 'shared/lib/i18n'
     import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
-    import { hasAnAccountReachedMinimumAirdrop } from '../lib/participation'
+    import { hasAccountReachedMinimumAirdrop } from '../lib/participation'
 
     $: indicatorIcon = getIndicatorIcon($stakingEventState, $stakedAccounts.length > 0)
-
     $: indicatorText = getLocalizedIndicatorText($stakingEventState, $stakedAccounts.length > 0)
-
     $: tooltipText = getLocalizedTooltipText($stakingEventState, $stakedAccounts.length > 0)
 
     let showTooltip = false
@@ -59,7 +57,7 @@
     }
 
     const getLocalizedTooltipText = (
-        state: ParticipationEventState,
+        _: ParticipationEventState,
         isStaked: boolean
     ): { title: string; body: string } => {
         const isHoldingPhase = $stakingEventState === ParticipationEventState.Holding
@@ -70,9 +68,7 @@
             title: localize(`tooltips.stakingIndicator.${localePath}.title`),
             body: localize(
                 `tooltips.stakingIndicator.${localePath}.body${
-                    localePath === 'ended'
-                        ? (hasAnAccountReachedMinimumAirdrop() ? 'Above' : 'Below') + 'RewardMin'
-                        : ''
+                    localePath === 'ended' ? (hasAccountReachedMinimumAirdrop() ? 'Above' : 'Below') + 'RewardMin' : ''
                 }`
             ),
         }

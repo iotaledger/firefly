@@ -38,7 +38,6 @@
         getAccountMeta,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners,
         isFirstSessionSync,
         isTransferring,
         prepareAccountInfo,
@@ -50,8 +49,8 @@
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
-    import { getContext, onMount } from 'svelte'
-    import { Readable } from 'svelte/store'
+    import { initialiseListeners } from 'shared/lib/walletApiListeners'
+    import { onMount } from 'svelte'
     import {
         AccountAssets,
         AccountBalance,

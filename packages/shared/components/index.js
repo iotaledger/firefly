@@ -62,6 +62,7 @@ export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as AccountNavigation } from './AccountNavigation.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
+export { default as StakingAssetTile } from './StakingAssetTile.svelte'
 
 export * from './modals'
 // Charts

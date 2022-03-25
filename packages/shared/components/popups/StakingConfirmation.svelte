@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { selectedAccount } from 'shared/lib/wallet'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -8,29 +9,40 @@
         getAirdropFromEventId,
         getStakingEventFromAirdrop,
         getUnstakedFunds,
-        isAccountPartiallyStaked,
     } from 'shared/lib/participation'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import { accountToParticipate, participationAction, participationOverview } from 'shared/lib/participation/stores'
+    import {
+        participationAction,
+        isPartiallyStaked,
+        selectedAccountParticipationOverview,
+    } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
+    import { localize } from 'shared/lib/i18n'
 
-    export let locale: Locale
-    export let accountToStake: WalletAccount
-
-    let tooltipAirdrop
+    let tooltipAirdrop: string
     let showTooltip = false
     let tooltipAnchor: unknown
+
+    const activeAirdrops =
+        $selectedAccountParticipationOverview?.participations
+            .map((p) => getAirdropFromEventId(p.eventId))
+            // Falsy values (undefined, null, ...) are filtered out from the array
+            .filter(Boolean) || []
+
+    const airdropSelections: { [key in StakingAirdrop]: boolean } = {
+        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
+        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
+    }
+
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
 
-    const toggleTooltip = (airdrop: string): void => {
+    function toggleTooltip(airdrop: StakingAirdrop): void {
         tooltipAirdrop = capitalize(airdrop)
         showTooltip = !showTooltip
         if (showTooltip) {
@@ -40,36 +52,26 @@
         }
     }
 
-    const isPartialStake = isAccountPartiallyStaked(accountToStake?.id)
+    function canReachAirdropMinimum(airdrop: StakingAirdrop): boolean {
+        return canAccountReachMinimumAirdrop($selectedAccount, airdrop)
+    }
 
-    const canReachAirdropMinimum = (airdrop: string) => canAccountReachMinimumAirdrop(accountToStake, airdrop)
-
-    const getRewards = (airdrop: StakingAirdrop): string => {
-        if (!canReachAirdropMinimum(airdrop)) return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
-        return <string>(
-            estimateStakingAirdropReward(
-                airdrop,
-                isPartialStake ? getUnstakedFunds(accountToStake) : accountToStake?.rawIotaBalance,
-                true
-            )
+    function getRewards(airdrop: StakingAirdrop): string {
+        if (!canReachAirdropMinimum(airdrop)) {
+            return `0 ${STAKING_AIRDROP_TOKENS[airdrop]}`
+        }
+        return estimateStakingAirdropReward(
+            airdrop,
+            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.rawIotaBalance,
+            true
         )
     }
 
-    const activeAirdrops: StakingAirdrop[] =
-        $participationOverview
-            .find((apo) => apo.accountIndex === accountToStake.index)
-            ?.participations.map((p) => getAirdropFromEventId(p.eventId)) || []
-
-    const airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
-        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
-    }
-
-    const toggleAirdropSelection = (airdrop: StakingAirdrop): void => {
+    function toggleAirdropSelection(airdrop: StakingAirdrop): void {
         airdropSelections[airdrop] = !airdropSelections[airdrop]
     }
 
-    const handleBackClick = (): void => {
+    function handleBackClick(): void {
         openPopup(
             {
                 type: 'stakingManager',
@@ -78,48 +80,47 @@
         )
     }
 
-    const handleConfirmClick = (): void => {
-        const _onConfirm = (): void => {
-            accountToParticipate.set(accountToStake)
-            participationAction.set(ParticipationAction.Stake)
-
-            const selections = !isPartialStake
-                ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
-                : activeAirdrops
-            const participations: Participation[] = selections.map(
-                (selection) =>
-                    <Participation>{
-                        eventId: getStakingEventFromAirdrop(<StakingAirdrop>selection.toLowerCase())?.eventId,
-                        answers: [],
-                    }
-            )
-            openPopup(
-                {
-                    type: 'stakingManager',
-                    props: {
-                        shouldParticipateOnMount: true,
-                        participations,
-                    },
-                },
-                true
-            )
-        }
-
+    function handleConfirmClick(): void {
         if ($isSoftwareProfile) {
-            checkStronghold(_onConfirm)
+            checkStronghold(openStakingManager)
         } else {
             if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
                 showAppNotification({
                     type: 'warning',
-                    message: locale('error.ledger.appNotOpen'),
+                    message: localize('error.ledger.appNotOpen'),
                 })
             } else {
-                _onConfirm()
+                openStakingManager()
             }
         }
     }
 
-    const getAirdropParticipation = () => {
+    function openStakingManager(): void {
+        participationAction.set(ParticipationAction.Stake)
+
+        const selections = !$isPartiallyStaked
+            ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
+            : activeAirdrops
+
+        const participations = selections.map(
+            (selection): Participation => ({
+                eventId: getStakingEventFromAirdrop(selection.toLowerCase() as StakingAirdrop)?.eventId,
+                answers: [],
+            })
+        )
+        openPopup(
+            {
+                type: 'stakingManager',
+                props: {
+                    shouldParticipateOnMount: true,
+                    participations,
+                },
+            },
+            true
+        )
+    }
+
+    function getAirdropParticipation(): string {
         if (activeAirdrops.length === 1) {
             return capitalize(activeAirdrops.join())
         } else {
@@ -131,23 +132,23 @@
 <button on:click={handleBackClick} class="absolute top-6 left-8 text-gray-800 dark:text-white focus:text-blue-500">
     <Icon icon="chevron-left" />
 </button>
-<Text type="h3" classes="px-4 mb-4 text-center">{locale('popups.stakingConfirmation.title')}</Text>
+<Text type="h3" classes="px-4 mb-4 text-center">{localize('popups.stakingConfirmation.title')}</Text>
 <div class="rounded-2xl	flex flex-col space-y-1 self-center text-center p-5 bg-gray-100 dark:bg-gray-800">
     <Text type="p" highlighted bigger>
-        {locale(`popups.stakingConfirmation.subtitle${isPartialStake ? 'Merge' : 'Stake'}`)}
+        {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {isPartialStake ? formatUnitBestMatch(getUnstakedFunds(accountToStake)) : accountToStake.balance}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance}
     </Text>
 </div>
 <Text type="p" secondary classes="text-center mt-5 mb-6">
-    {locale(`popups.stakingConfirmation.body${isPartialStake ? 'Merge' : 'Stake'}`, {
+    {localize(`popups.stakingConfirmation.body${$isPartiallyStaked ? 'Merge' : 'Stake'}`, {
         values: { airdrop: getAirdropParticipation() },
     })}
 </Text>
-{#if !isPartialStake}
+{#if !$isPartiallyStaked}
     <div class="flex flex-row mb-6 space-x-2 flex-1">
-        {#each Object.keys(StakingAirdrop).map((sa) => sa.toLowerCase()) as airdrop}
+        {#each Object.values(StakingAirdrop) as airdrop}
             <div
                 on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
                 class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
@@ -164,7 +165,7 @@
                     <Text type="p" bigger classes="font-extrabold">{capitalize(airdrop)}&nbsp;</Text>
                     <Text type="p" bigger>({STAKING_AIRDROP_TOKENS[airdrop]})</Text>
                 </div>
-                <Text type="p" secondary>{locale('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
+                <Text type="p" secondary>{localize('popups.stakingConfirmation.estimatedAirdrop')}:</Text>
                 {#if !canReachAirdropMinimum(airdrop)}
                     <div
                         class="py-5"
@@ -204,16 +205,18 @@
     onClick={handleConfirmClick}
     disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}
 >
-    {locale('actions.confirm')}
+    {localize('actions.confirm')}
 </Button>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {locale('tooltips.stakingMinRewards.title')}
+            {localize('tooltips.stakingMinRewards.title')}
         </Text>
         <Text type="p" secondary classes="text-left"
-            >{locale('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', { values: { airdrop: tooltipAirdrop } })}</Text
+            >{localize('tooltips.stakingMinRewards.bodyMinBalanceAirdrop', {
+                values: { airdrop: tooltipAirdrop },
+            })}</Text
         >
     </Tooltip>
 {/if}

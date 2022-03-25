@@ -1,11 +1,11 @@
 import { NativeProgress, VersionDetails } from './appUpdater'
 import { ResponseTypes } from './bridge'
 import { Message, UTXOEventData } from './message'
-import { WalletRoutes } from './routes'
+import { AccountRoutes } from './routes'
 
 export interface EventMap {
     'menu-logout': void
-    'menu-navigate-wallet': WalletRoutes
+    'menu-navigate-wallet': AccountRoutes
     'menu-navigate-settings': void
     'menu-check-for-update': void
     'menu-error-log': void

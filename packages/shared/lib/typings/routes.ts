@@ -44,15 +44,6 @@ export enum LedgerRoutes {
     AccountIndex = 'accountIndex',
 }
 
-// TODO: remove this
-export enum WalletRoutes {
-    Init = 'init',
-    Account = 'account',
-    Send = 'send',
-    Receive = 'receive',
-    CreateAccount = 'createAccount',
-}
-
 export enum AccountRoutes {
     Init = 'init',
     Manage = 'manage',
