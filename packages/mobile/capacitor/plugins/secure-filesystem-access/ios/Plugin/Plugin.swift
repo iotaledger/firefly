@@ -6,13 +6,13 @@ import UniformTypeIdentifiers
 @objc(SecureFilesystemAccess)
 public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
 
-    public var _call: CAPPluginCall? = nil
-    public var _url: URL? = nil
+    public var call: CAPPluginCall? = nil
+    public var url: URL? = nil
     public var fileName: String = ""
 
     @objc func showPicker(_ call: CAPPluginCall){
         call.keepAlive = true
-        self._call = call
+        self.call = call
         guard let pickerType = call.getString("type") else {
             return call.reject("type is required")
         }
@@ -22,9 +22,10 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
             var documentPicker: UIDocumentPickerViewController? = nil
             if #available(iOS 14.0, *) {
                 if (pickerType == "file") {
-                    let strongholdType: UTType = UTType("org.iota.firefly-stronghold")!
-                    documentPicker = UIDocumentPickerViewController(
-                        forOpeningContentTypes: [strongholdType], asCopy: true)
+                    if let strongholdType = UTType("org.iota.firefly-stronghold") {
+                        documentPicker = UIDocumentPickerViewController(
+                            forOpeningContentTypes: [strongholdType], asCopy: true)
+                    }
                 } else if (pickerType == "folder") {
                     documentPicker = UIDocumentPickerViewController(
                         forOpeningContentTypes: [.folder])
@@ -36,25 +37,27 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
                         : ["public.folder"],
                     in: UIDocumentPickerMode.open)
             }
-            documentPicker!.allowsMultipleSelection = false
-            documentPicker!.shouldShowFileExtensions = true
-            documentPicker!.delegate = self
-            documentPicker!.modalPresentationStyle = UIModalPresentationStyle.formSheet
-            self.bridge?.viewController?.present(documentPicker!, animated: true, completion: nil)
+            if let picker = documentPicker {
+                documentPicker.allowsMultipleSelection = false
+                documentPicker.shouldShowFileExtensions = true
+                documentPicker.delegate = self
+                documentPicker.modalPresentationStyle = UIModalPresentationStyle.formSheet
+                self.bridge?.viewController?.present(documentPicker, animated: true, completion: nil)
+            }
         }
     }
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt url: [URL]) {
-        self._url = url[0]
+        self.url = url[0]
         if (self.fileName != "") {
-            self._call?.resolve([ "selected": url[0].relativePath + "/" + fileName ])
+            self.call?.resolve([ "selected": url[0].relativePath + "/" + fileName ])
         } else {
-            self._call?.resolve([ "selected": url[0].relativePath ])
+            self.call?.resolve([ "selected": url[0].relativePath ])
         }
     }
 
     @objc func allowAccess(_ call: CAPPluginCall) {
-        guard self._url!.startAccessingSecurityScopedResource() else {
+        guard let url = self.url, url.startAccessingSecurityScopedResource() else {
             call.reject("failed to access the security-scoped resource!")
             return
         }
@@ -62,9 +65,9 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     }
 
     @objc func revokeAccess(_ call: CAPPluginCall) {
-        self._url!.stopAccessingSecurityScopedResource()
-        self._url = nil
-        self._call?.keepAlive = false
+        self.url?.stopAccessingSecurityScopedResource()
+        self.url = nil
+        self.call?.keepAlive = false
         call.resolve()
     }
 
@@ -117,8 +120,8 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let fromRelativePath = call.getString("fromRelativePath") else {
             return call.reject("fromRelativePath is required")
         }
-        let _url = (self.bridge?.config.appLocation.path)! + fromRelativePath // "/assets/docs/recovery-kit.pdf"
-        let srcUrl = Capacitor.URL(fileURLWithPath: _url, isDirectory: false)
+        let fromPath = (self.bridge?.config.appLocation.path)! + fromRelativePath // "/assets/docs/recovery-kit.pdf"
+        let srcUrl = Capacitor.URL(fileURLWithPath: fromPath, isDirectory: false)
         let dstUrl = Capacitor.URL(fileURLWithPath: selectedPath, isDirectory: true)
         try? FileManager.default.copyItem(at: srcUrl, to: dstUrl)
         call.resolve()
