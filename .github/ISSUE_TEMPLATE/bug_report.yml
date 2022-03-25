@@ -165,7 +165,7 @@ body:
           description: Did Firefly crash, hang or freeze?
           multiple: false
           options:
-            - "No"
+            - "None of the above"
             - Infinite loading symbol
             - Non-responsive
             - White screen
