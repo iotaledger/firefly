@@ -116,7 +116,7 @@ body:
           
     - type: markdown
       attributes:
-          value: '## Use of firefly'
+          value: '## Use of Firefly'
           
     - type: dropdown
       id: profile_role
