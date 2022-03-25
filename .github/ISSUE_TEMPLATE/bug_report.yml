@@ -1,22 +1,52 @@
 ---
 name: Found a bug?
 description: Fill in this form to report it, and help us improve
-title: '[Bug]: '
+title: '[Bug report]: '
 labels: 'bug report'
 
 body:
     - type: markdown
       attributes:
-          value: '## Reporting a bug'
+          value: '# Reporting a bug'
     - type: markdown
       attributes:
           value: |
               Thank you for helping us make Firefly better, by reporting a bug you have found. This issue may already be reported! Please search on the [issue tracker](https://github.com/iotaledger/firefly/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Abug) before creating one. This form is for bugs only and not for help or support using this application. Please visit the [help and support discussions forum](https://github.com/iotaledger/firefly/discussions/categories/help-support) or join our [discord](https://discord.iota.org/) for help.
 
+    - type: markdown
+      attributes:
+          value: '## Firefly application details'
+          
+    - type: dropdown
+      id: platform
+      attributes:
+          label: Platform
+          description: What platform does this issue occur on? (Select all that apply)
+          multiple: true
+          options:
+            - Desktop
+            - Mobile
+      validations:
+          required: true      
+    
+    - type: input
+      id: version
+      attributes:
+          label: Version
+          description: What version of Firefly are you using? (Select all that apply)
+          placeholder: "1.4.0"
+      validations:
+          required: true
+
+
+    - type: markdown
+      attributes:
+          value: '## Issue report'
+
     - type: textarea
       id: description
       attributes:
-          label: Issue description
+          label: Description
           description: Briefly describe the issue.
       validations:
           required: true
@@ -36,7 +66,7 @@ body:
           description: A concise description of what actually happened.
       validations:
           required: true
-
+    
     - type: dropdown
       id: can_repro
       attributes:
@@ -57,20 +87,108 @@ body:
               2.
               3.
               ...
-
+    
+    - type: markdown
+      attributes:
+          value: '## Your machine'
+          
+    - type: dropdown
+      id: os
+      attributes:
+          label: Operating System
+          description: Which OS does this issue occur on? (Select all that apply)
+          multiple: true
+          options:
+            - Linux
+            - Mac
+            - Windows
+            - iOS
+            - Android
+      validations:
+          required: true
+          
     - type: textarea
       id: diagnostics
       attributes:
           label: Diagnostics
-          description: Paste information that you see from the Diagnostics in the Firefly menu.
+          description: Paste the information from the Diagnostics popup accessible in the Firefly main menu or settings page.
           render: shell
+          
+    - type: markdown
+      attributes:
+          value: '## Use of Firefly'
+          
+    - type: dropdown
+      id: profile_role
+      attributes:
+          label: Developer Profile
+          description: Are you using a developer profile?
+          multiple: false
+          options:
+            - "No"
+            - "Yes"
+      validations:
+          required: true
+          
+    - type: dropdown
+      id: profile_type
+      attributes:
+          label: Profile Type
+          description: Are you using a hardware wallet or software wallet?
+          multiple: false
+          options:
+            - Software (Stronghold)
+            - Hardware (Ledger)
+      validations:
+          required: true
+          
+    - type: dropdown
+      id: staking_status
+      attributes:
+          label: Staking
+          description: What is the state of staking in your profile?
+          multiple: false
+          options:
+            - Actively staking
+            - Previously staked
+            - Never staked
+      validations:
+              
+    - type: markdown
+      attributes:
+          value: '## Error information'
+          
+    - type: dropdown
+      id: crash_info
+      attributes:
+          label: Crash Status
+          description: Did Firefly crash, hang or freeze?
+          multiple: false
+          options:
+            - "None of the above"
+            - Infinite loading symbol
+            - Non-responsive
+            - White screen
+            - Application closed
+      validations:
+        required: true
+          
+    - type: textarea
+      id: error_messages
+      attributes:
+          label: Error Messages
+          description: Did any error messages display on the screen? If so what was the message?
 
     - type: textarea
-      id: errors
+      id: error_logs
       attributes:
-          label: Errors
-          description: Paste any errors that you see from the Error Log in the Firefly menu.
+          label: Error Logs
+          description: Paste the latest errors from the error log, accessible in the Firefly main menu or settings page
           render: shell
+
+    - type: markdown
+      attributes:
+          value: '## Declarations'
 
     - type: checkboxes
       id: duplicate_declaration

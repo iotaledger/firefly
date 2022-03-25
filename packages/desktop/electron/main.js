@@ -29,7 +29,9 @@ if (SEND_CRASH_REPORTS) {
 /**
  * Set AppUserModelID for Windows notifications functionality
  */
-app.setAppUserModelId('org.iota.firefly')
+// APP_ID is replaced by Webpack
+// eslint-disable-next-line no-undef
+app.setAppUserModelId(APP_ID)
 
 /**
  * Terminate application if Node remote debugging detected
@@ -128,6 +130,14 @@ const paths = {
     aboutPreload: '',
     errorHtml: '',
     errorPreload: '',
+}
+
+let versionDetails = {
+    upToDate: true,
+    currentVersion: app.getVersion(),
+    newVersion: '',
+    newVersionReleaseDate: new Date(),
+    changelog: '',
 }
 
 /**
@@ -236,8 +246,12 @@ function createWindow() {
         minWidth: 1280,
         minHeight: 720,
         titleBarStyle: 'hidden',
+        title: app.name,
         frame: process.platform === 'linux',
-        icon: process.platform === 'linux' ? path.join(__dirname, '../assets/icons/linux/icon256x256.png') : undefined,
+        icon:
+            process.platform === 'linux'
+                ? path.join(__dirname, `../assets/icons/${process.env.STAGE}/icon1024x1024.png`)
+                : undefined,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -256,7 +270,9 @@ function createWindow() {
 
         windows.main.loadURL('http://localhost:8080')
     } else {
-        initAutoUpdate(windows.main)
+        if (process.env.STAGE === 'prod') {
+            initAutoUpdate()
+        }
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
@@ -284,6 +300,10 @@ function createWindow() {
 
     windows.main.on('closed', () => {
         windows.main = null
+    })
+
+    windows.main.webContents.on('did-finish-load', () => {
+        windows.main.webContents.send('version-details', versionDetails)
     })
 
     /**
@@ -387,6 +407,7 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
+ipcMain.handle('get-version-details', (_e) => versionDetails)
 
 // Diagnostics
 const getDiagnostics = () => {
@@ -717,4 +738,14 @@ function loadJsonConfig(filename) {
 function getJsonConfig(filename) {
     const userDataPath = app.getPath('userData')
     return path.join(userDataPath, filename)
+}
+
+export const updateVersionDetails = (details) => {
+    versionDetails = Object.assign({}, versionDetails, details)
+    if (process.env.STAGE !== 'prod') {
+        // Always true to avoid triggering auto-updater
+        versionDetails.upToDate = true
+    }
+
+    getOrInitWindow('main').webContents.send('version-details', versionDetails)
 }
