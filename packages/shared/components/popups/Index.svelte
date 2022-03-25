@@ -65,6 +65,7 @@
 
     $: switch (type) {
         case 'ledgerNotConnected':
+        case 'createAccount':
             size = PopupSize.Small
             break
         case 'video':

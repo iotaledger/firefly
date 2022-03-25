@@ -84,7 +84,7 @@
     }
 </script>
 
-<div class="px-8 py-6 flex flex-col h-full justify-between">
+<div class="flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{localize('general.createNewWallet')}</Text>
@@ -111,7 +111,7 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center mb-4" />
+        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
