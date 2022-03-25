@@ -970,6 +970,7 @@
         "dev": "Dev",
         "createAccount": "Create a Wallet",
         "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",

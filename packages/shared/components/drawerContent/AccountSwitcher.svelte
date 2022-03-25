@@ -17,8 +17,11 @@
     }
 </script>
 
-<div>
-    <div class="accounts flex flex-col space-y-1 p-4 scrollable-y">
+<div class="flex flex-col px-6 py-10">
+    <div class="mb-5">
+        <Text type="h4">{localize('general.switchWallet')}</Text>
+    </div>
+    <div class="accounts flex flex-col space-y-1 scrollable-y">
         {#each accounts as account}
             <button
                 on:click={() => handleAccountClick(account.id)}
@@ -33,11 +36,11 @@
     </div>
     <HR />
     <button
-        class="w-full hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-2 px-7 py-4"
+        class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 py-6"
         on:click={handleCreateAccountPress}
     >
-        <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
-        <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
+        <Icon icon="plus" height="16" width="16" classes="text-blue-500 mb-0.5" />
+        <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
     </button>
 </div>
 
