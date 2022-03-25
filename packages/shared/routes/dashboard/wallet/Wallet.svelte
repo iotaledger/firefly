@@ -279,6 +279,9 @@
                         })
 
                         setTimeout(() => {
+                            if ($mobile) {
+                                accountRoute.set(AccountRoutes.Init)
+                            }
                             clearSendParams()
                             isTransferring.set(false)
                         }, 3000)
@@ -343,6 +346,9 @@
                     })
 
                     setTimeout(() => {
+                        if ($mobile) {
+                            accountRoute.set(AccountRoutes.Init)
+                        }
                         clearSendParams(internal)
                         isTransferring.set(false)
                     }, 3000)
