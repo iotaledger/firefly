@@ -5,7 +5,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, setSelectedAccount, wallet } from 'shared/lib/wallet'
 
     export let error = ''
     export let onAccountCreation = (..._: any[]): void => {}
@@ -43,7 +43,7 @@
             const _create = () =>
                 onAccountCreation(trimmedAccountAlias, color, (err) => {
                     isBusy = false
-
+                    setSelectedAccount($accounts.find((a) => a.alias === trimmedAccountAlias)?.id)
                     if (err) {
                         console.error(err?.error || err)
 
