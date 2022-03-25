@@ -88,14 +88,14 @@
         {:else}
             <Text type="p" secondary classes="mb-5">{localize('popups.deleteAccount.errorBody1')}</Text>
         {/if}
-        <div class={'flex flex-row w-full space-x-4 px-8 justify-center'}>
-            <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
+        <div class={'flex flex-row flex-nowrap w-full space-x-4'}>
+            <Button secondary classes="w-full" onClick={() => handleCancelClick()} disabled={isBusy}>
                 {localize(hasMultipleAccounts ? 'actions.cancel' : 'actions.close')}
             </Button>
             {#if hasMultipleAccounts}
                 <Button
                     warning
-                    classes="w-1/2"
+                    classes="w-full"
                     onClick={() => handleDeleteClick()}
                     type="submit"
                     disabled={(!password && $isSoftwareProfile) || isBusy}

@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { Address } from 'shared/lib/typings/address'
+    import { mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
@@ -49,7 +50,9 @@
         {/each}
     </div>
     <div class="flex w-full justify-center pt-8">
-        <Button classes="w-1/2" onClick={() => handleCopyClick()}>{localize('actions.copy')}</Button>
+        <Button classes={$mobile ? 'w-full' : 'w-1/2'} onClick={() => handleCopyClick()}
+            >{localize('actions.copy')}</Button
+        >
     </div>
 </div>
 

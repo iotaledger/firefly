@@ -457,7 +457,7 @@
     })
 </script>
 
-<div class="w-full h-full flex flex-col justify-between p-6">
+<div class="{$mobile ? 'py-10' : 'py-6'} w-full h-full flex flex-col justify-between px-6">
     <div>
         <div class="flex flex-row w-full justify-between mb-6">
             <div class="flex flex-row space-x-6">
@@ -498,9 +498,11 @@
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
                 {/if}
-                <button on:click={handleBackClick}>
-                    <Icon icon="close" classes="text-gray-800 dark:text-white" />
-                </button>
+                {#if !$mobile}
+                    <button on:click={handleBackClick}>
+                        <Icon icon="close" classes="text-gray-800 dark:text-white" />
+                    </button>
+                {/if}
             </div>
         </div>
         <div class="w-full h-full flex flex-col justify-between">

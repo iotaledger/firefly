@@ -72,7 +72,7 @@
     }
 </script>
 
-<div class="px-8 py-6 flex flex-col h-full justify-between">
+<div class="px-6 py-10 flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{localize('general.createNewWallet')}</Text>

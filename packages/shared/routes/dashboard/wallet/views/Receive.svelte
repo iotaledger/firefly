@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, QR, Spinner, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
@@ -20,7 +21,7 @@
     }
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
+<div class="{$mobile ? 'py-10' : 'py-6'} w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 px-6">
     <div class="w-full flex flex-row justify-between items-center">
         <div class="w-full flex flex-row space-x-4 items-center">
             <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>
@@ -31,9 +32,11 @@
                 />
             </button>
         </div>
-        <button on:click={handleBackClick}>
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
-        </button>
+        {#if !$mobile}
+            <button on:click={handleBackClick}>
+                <Icon icon="close" classes="text-gray-800 dark:text-white" />
+            </button>
+        {/if}
     </div>
     {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
         <div class="flex w-full h-full items-center justify-center">
@@ -48,8 +51,8 @@
             </Button>
         </div>
     {:else}
-        <div class="flex flex-auto items-center justify-center mb-4">
-            <QR size={98} data={$selectedAccount.depositAddress} />
+        <div class="flex flex-auto justify-center items-center mb-4">
+            <QR size={$mobile ? 180 : 98} data={$selectedAccount.depositAddress} />
         </div>
         <div class="mb-6">
             <Text secondary smaller classes="mb-1">
