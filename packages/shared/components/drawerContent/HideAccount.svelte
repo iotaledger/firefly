@@ -6,7 +6,7 @@
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, resetWalletRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, selectedMessage } from 'shared/lib/wallet'
+    import { api, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
 
@@ -32,6 +32,7 @@
         // TODO: handle for single wallet view
         selectedMessage.set(null)
         resetWalletRoute()
+        setSelectedAccount($viewableAccounts?.[0]?.id ?? null)
     }
 
     function handleHideClick() {
