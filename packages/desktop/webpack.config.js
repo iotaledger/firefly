@@ -167,6 +167,7 @@ const preloadPlugins = [
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(true),
         APP_NAME: JSON.stringify(appName),
+        'process.env.STAGE': JSON.stringify(stage),
     }),
 ]
 
