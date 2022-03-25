@@ -1,6 +1,14 @@
 <script lang="typescript">
-    import { AccountActionsModal, DashboardPane, Text, Drawer } from 'shared/components'
-    import { clearSendParams, loggedIn, sendParams, mobile } from 'shared/lib/app'
+    import { isDeepLinkRequestActive } from '@common/deep-links'
+    import { AccountActionsModal, DashboardPane, Drawer, Text } from 'shared/components'
+    import {
+        AccountActions,
+        AddressHistory,
+        DeleteAccount,
+        ExportTransactionHistory,
+        HideAccount,
+    } from 'shared/components/drawerContent'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -9,18 +17,21 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
+        getColor,
         isLedgerProfile,
         isSoftwareProfile,
         isStrongholdLocked,
         setMissingProfileType,
-        getColor,
     } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
+        addMessagesPair,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -38,9 +49,9 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair,
     } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
+    import { getContext, onMount } from 'svelte'
+    import { Readable } from 'svelte/store'
     import {
         AccountAssets,
         AccountBalance,
@@ -48,12 +59,9 @@
         BarChart,
         LineChart,
         ManageAccount,
-        Send,
         Receive,
+        Send,
     } from './views/'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { isDeepLinkRequestActive } from '@common/deep-links'
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
@@ -405,6 +413,9 @@
     })
 
     const handleMenuClick = () => {
+        if ($mobile) {
+            return accountRoute.set(AccountRoutes.Actions)
+        }
         showActionsModal = !showActionsModal
     }
 </script>
@@ -418,23 +429,31 @@
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex">
-                    <AccountBalance classes="w-full" />
-                    {#if $accountRoute !== AccountRoutes.Init}
-                        <Drawer
-                            dimLength={180}
-                            opened={true}
-                            bind:this={drawer}
-                            onClose={() => accountRoute.set(AccountRoutes.Init)}
-                        >
-                            {#if $accountRoute === AccountRoutes.Manage}
-                                <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
-                            {:else if $accountRoute === AccountRoutes.Send}
-                                <Send {onSend} {onInternalTransfer} />
-                            {:else if $accountRoute === AccountRoutes.Receive}
-                                <Receive {isGeneratingAddress} {onGenerateAddress} />
-                            {/if}
-                        </Drawer>
-                    {/if}
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                    <Drawer
+                        dimLength={180}
+                        opened={$accountRoute !== AccountRoutes.Init}
+                        bind:this={drawer}
+                        onClose={() => accountRoute.set(AccountRoutes.Init)}
+                    >
+                        {#if $accountRoute === AccountRoutes.Send}
+                            <Send {onSend} {onInternalTransfer} />
+                        {:else if $accountRoute === AccountRoutes.Receive}
+                            <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoutes.Actions}
+                            <AccountActions />
+                        {:else if $accountRoute === AccountRoutes.Manage}
+                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoutes.AddressHistory}
+                            <AddressHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoutes.ExportTransactionHistory}
+                            <ExportTransactionHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoutes.HideAccount}
+                            <HideAccount account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoutes.DeleteAccount}
+                            <DeleteAccount account={$selectedAccount} />
+                        {/if}
+                    </Drawer>
                 </div>
                 <div class="flex flex-1">
                     <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">

@@ -1,6 +1,7 @@
 <script lang="typescript">
     import type { WalletAccount } from 'lib/typings/wallet'
-    import { AccountSwitcherModal, Icon, Text, Drawer, AccountSwitcher, AccountCreation } from 'shared/components'
+    import { AccountSwitcherModal, Icon, Text, Drawer } from 'shared/components'
+    import { AccountSwitcher, AccountCreation } from 'shared/components/drawerContent'
     import { mobile } from 'shared/lib/app'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'

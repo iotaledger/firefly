@@ -12,9 +12,7 @@
 
     export let classes = ''
 
-    export let onMenuClick = (): void => {
-        accountRoute.set(AccountRoutes.Manage)
-    }
+    export let onMenuClick = (): void => {}
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
     $: textColor = isBright(color) ? 'gray-800' : 'white'
