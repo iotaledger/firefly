@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { stage, loggedIn } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
@@ -46,6 +46,9 @@
     } from 'shared/routes'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { Stage } from 'shared/lib/typings/stage'
+
+    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -84,7 +87,7 @@
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
-        if (!devMode) {
+        if (!devMode && get(stage) === Stage.PROD) {
             await getVersionDetails()
             pollVersion()
         }

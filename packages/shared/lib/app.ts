@@ -9,8 +9,14 @@ import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
+import { Stage } from './typings/stage'
 import { api, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
+
+/**
+ * Beta mode
+ */
+export const stage = writable<Stage>(Stage.ALPHA)
 
 /**
  * Mobile mode

@@ -14,10 +14,18 @@
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "yarn build:prod",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
-        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop webpack",
-        "compile:linux": "electron-builder --linux --x64",
-        "compile:mac": "electron-builder --mac --x64",
-        "compile:win": "electron-builder --win --x64"
+        "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=alpha webpack",
+        "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=beta webpack",
+        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=prod webpack",
+        "compile:alpha:linux": "cross-env STAGE=alpha electron-builder --linux --x64 --config electron-builder-config.js",
+        "compile:alpha:mac": "cross-env STAGE=alpha electron-builder --mac --x64 --config electron-builder-config.js",
+        "compile:alpha:win": "cross-env STAGE=alpha electron-builder --win --x64 --config electron-builder-config.js",
+        "compile:beta:linux": "cross-env STAGE=beta electron-builder --linux --x64 --config electron-builder-config.js",
+        "compile:beta:mac": "cross-env STAGE=beta electron-builder --mac --x64 --config electron-builder-config.js",
+        "compile:beta:win": "cross-env STAGE=beta electron-builder --win --x64 --config electron-builder-config.js",
+        "compile:prod:linux": "cross-env STAGE=prod electron-builder --linux --x64 --config electron-builder-config.js",
+        "compile:prod:mac": "cross-env STAGE=prod electron-builder --mac --x64 --config electron-builder-config.js",
+        "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
@@ -43,6 +51,7 @@
         "electron": "12.2.3",
         "electron-builder": "^22.9.1",
         "electron-notarize": "^1.0.0",
+        "lodash.merge": "^4.6.2",
         "mini-css-extract-plugin": "^1.3.5",
         "node-loader": "^1.0.2",
         "npm-run-all": "^4.1.5",
@@ -52,92 +61,5 @@
         "webpack": "^5.16.0",
         "webpack-cli": "^4.4.0",
         "webpack-dev-server": "^3.11.2"
-    },
-    "build": {
-        "productName": "Firefly",
-        "artifactName": "firefly-desktop-${version}.${ext}",
-        "copyright": "IOTA Foundation",
-        "directories": {
-            "buildResources": "./public",
-            "output": "./out"
-        },
-        "files": [
-            "public/",
-            "package.json",
-            "!node_modules/firefly-actor-system-nodejs-bindings/native/*"
-        ],
-        "appId": "org.iota.firefly",
-        "afterSign": "./scripts/notarize.macos.js",
-        "asar": true,
-        "protocols": [
-            {
-                "name": "IOTA URL Scheme",
-                "schemes": [
-                    "iota"
-                ]
-            }
-        ],
-        "dmg": {
-            "iconSize": 120,
-            "title": "${productName}",
-            "background": "public/assets/background/mac/background.png",
-            "sign": false,
-            "contents": [
-                {
-                    "x": 500,
-                    "y": 250,
-                    "type": "link",
-                    "path": "/Applications"
-                },
-                {
-                    "x": 170,
-                    "y": 250,
-                    "type": "file"
-                }
-            ]
-        },
-        "nsis": {
-            "oneClick": false,
-            "deleteAppDataOnUninstall": false,
-            "allowToChangeInstallationDirectory": true
-        },
-        "win": {
-            "icon": "./public/assets/icons/win/icon.ico",
-            "publisherName": "IOTA Stiftung",
-            "target": "nsis",
-            "timeStampServer": "http://timestamp.digicert.com"
-        },
-        "linux": {
-            "target": [
-                "AppImage"
-            ],
-            "desktop": {
-                "Name": "Firefly",
-                "Comment": "Desktop wallet for IOTA",
-                "Categories": "Office;Network;Finance"
-            },
-            "icon": "./public/assets/icons/linux/icon256x256.png"
-        },
-        "mac": {
-            "icon": "./public/assets/icons/mac/icon.icns",
-            "category": "public.app-category.finance",
-            "target": [
-                "dmg",
-                "zip"
-            ],
-            "entitlements": "./entitlements.mac.plist",
-            "entitlementsInherit": "./entitlements.mac.plist",
-            "hardenedRuntime": true,
-            "gatekeeperAssess": false,
-            "asarUnpack": [
-                "**/*.node"
-            ]
-        },
-        "publish": {
-            "provider": "generic",
-            "url": "https://dl.firefly.iota.org/",
-            "publishAutoUpdate": true,
-            "channel": "latest"
-        }
     }
 }
