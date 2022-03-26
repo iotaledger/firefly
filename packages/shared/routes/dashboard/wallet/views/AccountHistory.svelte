@@ -258,10 +258,8 @@
         </div>
     {/if}
     {#if $selectedMessage && $mobile}
-        <div class="flex absolute left-0 top-0">
-            <Drawer dimLength={180} opened={true} bind:this={drawer} classes="px-6 pt-10">
-                <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
-            </Drawer>
-        </div>
+        <Drawer opened={true} bind:this={drawer}>
+            <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+        </Drawer>
     {/if}
 </div>

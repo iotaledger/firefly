@@ -37,35 +37,33 @@
     }
 </script>
 
-<button on:click={toggleAccountSwitcher} class="flex flex-row justify-center items-center space-x-2">
-    {#if !$mobile}
-        <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
-    {/if}
-    <Text type="h4" classes="text-{textColor}">{$selectedAccount?.alias}</Text>
-    <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
-        <Icon
-            height="18"
-            width="18"
-            icon="chevron-down"
-            classes={$mobile ? `text-${textColor}` : 'text-gray-800 dark:text-white'}
-        />
-    </div>
-</button>
-{#if showDrawer}
-    <div class="flex absolute left-0 top-0">
-        <Drawer dimLength={180} opened={true} bind:this={drawer} onClose={() => (showDrawer = false)}>
-            {#if drawerRoute === 'create'}
-                <AccountCreation {onAccountCreation} onCancel={() => drawer.close()} />
-            {:else if (drawerRoute = DrawerRoutes.Init)}
-                <AccountSwitcher
-                    handleCreateAccountPress={() => setDrawerRoute(DrawerRoutes.Create)}
-                    onAccountSelection={() => drawer.close()}
-                    {accounts}
-                />
-            {/if}
-        </Drawer>
-    </div>
-{/if}
+<div class="flex flex-auto flex-col">
+    <button on:click={toggleAccountSwitcher} class="flex flex-row justify-center items-center space-x-2">
+        {#if !$mobile}
+            <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
+        {/if}
+        <Text type="h4" classes="text-{textColor}">{$selectedAccount?.alias}</Text>
+        <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
+            <Icon
+                height="18"
+                width="18"
+                icon="chevron-down"
+                classes={$mobile ? `text-${textColor}` : 'text-gray-800 dark:text-white'}
+            />
+        </div>
+    </button>
+    <Drawer opened={showDrawer} bind:this={drawer} onClose={() => (showDrawer = false)}>
+        {#if drawerRoute === 'create'}
+            <AccountCreation {onAccountCreation} onCancel={() => drawer.close()} />
+        {:else if (drawerRoute = DrawerRoutes.Init)}
+            <AccountSwitcher
+                handleCreateAccountPress={() => setDrawerRoute(DrawerRoutes.Create)}
+                onAccountSelection={() => drawer.close()}
+                {accounts}
+            />
+        {/if}
+    </Drawer>
+</div>
 <AccountSwitcherModal {onAccountCreation} {accounts} bind:isActive={showModal} />
 
 <style type="text/scss">
