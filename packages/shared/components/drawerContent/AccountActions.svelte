@@ -49,11 +49,14 @@
     }
 </script>
 
-<div class="flex flex-col py-10 px-2 w-full">
+<div class="flex flex-col py-10 px-6 w-full">
+    <div class="mb-5">
+        <Text type="h4">{localize('general.walletActions')}</Text>
+    </div>
     <!-- Customize -->
     <button
         on:click={() => handleCustomiseAccountClick()}
-        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {hidden
+        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 pb-3 w-full {hidden
             ? 'opacity-50 pointer-events-none'
             : ''}"
         disabled={hidden}
@@ -64,14 +67,14 @@
     <!-- Address history -->
     <button
         on:click={() => handleViewAddressHistoryClick()}
-        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 w-full"
     >
         <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
         <Text smaller classes="group-hover:text-blue-500">{localize('actions.viewAddressHistory')}</Text>
     </button>
     <button
         on:click={handleExportTransactionHistoryClick}
-        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 w-full"
     >
         <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
         <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
@@ -81,7 +84,7 @@
     <button
         on:click={() =>
             canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick()}
-        class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full"
+        class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 w-full"
     >
         <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
         <Text smaller classes="text-red-500" overrideColor>
