@@ -10,12 +10,13 @@ public class WalletPlugin: CAPPlugin {
     @objc func initialize(_ call: CAPPluginCall) {
         do {
             guard !isInitialized else { return }
-            guard let actorId = call.getString("actorId") else {
-                return call.reject("actorId is required")
+            guard let actorId = call.getString("actorId"),
+                let storagePath = call.getString("storagePath")  else {
+                return call.reject("actorId adn storagePath is required")
             }
             let fm = FileManager.default
             let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent("__storage__", isDirectory: true).path
+            let path = documents.appendingPathComponent(storagePath, isDirectory: true).path
             if !fm.fileExists(atPath: path) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             }

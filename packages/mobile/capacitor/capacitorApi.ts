@@ -33,7 +33,12 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
+    renameProfileFolder: async (oldPath, newPath) => {
+        void (await SecureFilesystemAccess.renameProfileFolder({
+            oldName: oldPath,
+            newName: newPath,
+        }))
+    },
 
     removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
 
