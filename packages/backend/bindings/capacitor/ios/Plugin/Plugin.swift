@@ -15,9 +15,9 @@ public class WalletPlugin: CAPPlugin {
             }
             let fm = FileManager.default
             let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let path = documents.appendingPathComponent("database", isDirectory: true).path
+            let path = documents.appendingPathComponent("__storage__", isDirectory: true).path
             if !fm.fileExists(atPath: path) {
-                try fm.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
+                try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             }
             call.keepAlive = true
             // TODO: it's possible to make this better? investigate for implications
@@ -39,6 +39,7 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func destroy(_ call: CAPPluginCall) {
+        guard !isInitialized else { return }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }

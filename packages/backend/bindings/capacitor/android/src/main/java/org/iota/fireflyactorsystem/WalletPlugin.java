@@ -16,7 +16,11 @@ public class WalletPlugin extends Plugin {
 
     @Override
     public void load() {
-        NativeAPI.verifyLink();
+        try {
+            NativeAPI.verifyLink();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private boolean isInitialized = false;
     private static final Object lock = new Object();
@@ -29,17 +33,21 @@ public class WalletPlugin extends Plugin {
             return;
         }
         String actorId = call.getString("actorId");
-        String dbPath = getContext().getFilesDir() + "/database";
+        String dbPath = getContext().getFilesDir() + "/__storage__";
 
-        final ActorCallback callback = response -> {
-            JSObject walletResponse = new JSObject();
-            walletResponse.put("walletResponse", response);
-            notifyListeners("walletEvent", walletResponse);
-        };
+        try {
+            final ActorCallback callback = response -> {
+                JSObject walletResponse = new JSObject();
+                walletResponse.put("walletResponse", response);
+                notifyListeners("walletEvent", walletResponse);
+            };
 
-        call.setKeepAlive(true);
-        Actor.iotaInitialize(callback, actorId, dbPath);
-        isInitialized = true;
+            call.setKeepAlive(true);
+            Actor.iotaInitialize(callback, actorId, dbPath);
+            isInitialized = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PluginMethod()
@@ -60,7 +68,7 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void destroy(final PluginCall call) {
         if (!isInitialized) {
-            call.reject("Wallet is not initialized yet");
+            call.resolve();
             return;
         }
         try {
@@ -71,6 +79,8 @@ public class WalletPlugin extends Plugin {
             String actorId = call.getString("actorId");
 
             Actor.iotaDestroy(actorId);
+            isInitialized = false;
+            call.release(bridge);
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
         }
