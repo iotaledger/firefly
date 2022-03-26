@@ -32,6 +32,7 @@
     },
     "dependencies": {
         "@capacitor/splash-screen": "^1.2.2",
+        "capacitor-secure-filesystem-access": "./packages/mobile/capacitor/plugins/secure-filesystem-access/",
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "@capacitor-community/privacy-screen": "^2.1.1",
         "capacitor-secure-storage-plugin": "^0.6.2",
