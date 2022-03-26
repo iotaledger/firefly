@@ -40,7 +40,6 @@
             const _create = () =>
                 onAccountCreation(trimmedAccountAlias, color, (err) => {
                     isBusy = false
-                    setSelectedAccount($accounts.find((a) => a.alias === trimmedAccountAlias)?.id)
                     if (err) {
                         console.error(err?.error || err)
                         showAppNotification({
@@ -48,6 +47,7 @@
                             message: localize(err?.error || err),
                         })
                     } else {
+                        setSelectedAccount($accounts.find((a) => a.alias === trimmedAccountAlias)?.id)
                         onCancel()
                     }
                 })
