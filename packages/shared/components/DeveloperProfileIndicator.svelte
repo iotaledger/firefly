@@ -2,7 +2,6 @@
     import { activeProfile } from 'shared/lib/profile'
     import { Link, Text } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { mobile } from 'shared/lib/app'
 
     export let locale: Locale
     export let classes: string
@@ -14,7 +13,7 @@
     }
 </script>
 
-{#if $activeProfile?.isDeveloperProfile && showIndicator && !$mobile}
+{#if $activeProfile?.isDeveloperProfile && showIndicator}
     <div class="flex justify-center  w-full h-8 content-center items-center bg-yellow-700 space-x-4 p-2 {classes}">
         <Text type="p" overrideColor="text-gray-800">
             {locale('indicators.developerProfileIndicator.warningText', {

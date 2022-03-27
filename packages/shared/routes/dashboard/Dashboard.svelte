@@ -366,9 +366,12 @@
 {#if $mobile}
     <Idle />
     <MainMenu {locale} />
-    <div class="flex flex-col w-full h-full">
+    <TopNavigation {onAccountCreation} />
+    <div class="{!$mobile && 'dashboard-wrapper'} flex flex-col w-full h-full">
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <DeveloperProfileIndicator {locale} classes="absolute top-30 p-3" />
+        {#if !$mobile}
+            <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
+        {/if}
     </div>
 {:else}
     <Idle />
