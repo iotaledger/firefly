@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
-    import { formatDate } from 'shared/lib/i18n'
+    import { formatDate, localize } from 'shared/lib/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { Payload } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -19,26 +19,22 @@
         getMilestoneMessageValue,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
+        wallet,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
-
-    export let locale: Locale
 
     export let id: string
     export let timestamp: string
     export let confirmed: boolean
     export let payload: Payload
     export let balance: number // migration tx
-
     export let onBackClick = (): void => {}
+
+    const { accounts } = $wallet
 
     const cachedMigrationTx = !payload
     const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount
@@ -48,7 +44,7 @@
         if (txPayload) {
             return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
-            return locale('general.legacyNetwork')
+            return localize('general.legacyNetwork')
         }
 
         return null
@@ -124,7 +120,9 @@
 
 <div class="flex flex-col h-full min-h-0">
     <div
-        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+        class="{$mobile
+            ? 'px-6 pt-10'
+            : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
             'opacity-50'}"
     >
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
@@ -136,9 +134,9 @@
                 >
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                <Text smaller>{locale('general.you')}</Text>
+                <Text smaller>{localize('general.you')}</Text>
             {:else}
-                <Text smaller>{truncateString(senderAddress, 3, 3, 3) || locale('general.unknown')}</Text>
+                <Text smaller>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
@@ -153,22 +151,22 @@
                 >
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
-                <Text smaller>{locale('general.you')}</Text>
+                <Text smaller>{localize('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
-                    <Text smaller>{truncateString(address, 3, 3, 3) || locale('general.unknown')}</Text>
+                    <Text smaller>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
                 {/each}
             {/if}
         </div>
     </div>
-    <div class="mb-6 h-full overflow-y-auto pr-2 -mr-2 scroll-secondary">
+    <div class="mb-6 overflow-y-auto pr-2 -mr-2 flex-auto h-1 scroll-secondary">
         <div class="mb-5">
-            <Text secondary>{locale('general.status')}</Text>
-            <Text smaller>{locale(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
+            <Text secondary>{localize('general.status')}</Text>
+            <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
         </div>
         {#if timestamp}
             <div class="mb-5">
-                <Text secondary>{locale('general.date')}</Text>
+                <Text secondary>{localize('general.date')}</Text>
                 <Text smaller>
                     {formatDate(new Date(timestamp), {
                         year: 'numeric',
@@ -182,7 +180,7 @@
         {/if}
         {#if id}
             <div class="mb-5">
-                <Text secondary>{locale('general.messageId')}</Text>
+                <Text secondary>{localize('general.messageId')}</Text>
                 <div class="flex flex-row justify-between items-center">
                     <Link onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}>
                         <Text highlighted type="pre">{id}</Text>
@@ -193,19 +191,19 @@
         {/if}
         {#if senderAddress}
             <div class="mb-5">
-                <Text secondary>{locale('general.inputAddress')}</Text>
+                <Text secondary>{localize('general.inputAddress')}</Text>
                 <div class="flex flex-row justify-between items-center">
                     <Text type="pre">{senderAddress}</Text>
                     <CopyButton itemToCopy={senderAddress} />
                 </div>
-                <Text type="pre"
-                    >{#if senderAccount} ({senderAccount.alias}) {/if}</Text
-                >
+                <Text type="pre">
+                    {#if senderAccount}({senderAccount.alias}){/if}
+                </Text>
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
-                <Text secondary>{locale('general.receiveAddress')}</Text>
+                <Text secondary>{localize('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver, idx}
                     <div class="flex flex-row justify-between items-center">
                         <Text type="pre">{receiver}</Text>
@@ -219,7 +217,7 @@
         {/if}
         {#if txPayload || milestonePayload}
             <div class="mb-5">
-                <Text secondary>{locale('general.amount')}</Text>
+                <Text secondary>{localize('general.amount')}</Text>
                 <div class="flex flex-row">
                     <Text bold>{formatUnitBestMatch(value)}</Text>
                     &nbsp;
@@ -230,7 +228,7 @@
     </div>
 
     <div class="w-full flex justify-center">
-        <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hideDetails')}</Text></button>
+        <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
     </div>
 </div>
 

@@ -1,31 +1,38 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Icon, Text, Input, Drawer } from 'shared/components'
+    import { localize } from 'shared/lib/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { mobile } from 'shared/lib/app'
+    import { walletSetupType } from 'shared/lib/router'
     import {
         api,
         isSyncing,
-        selectedAccountId,
+        getIncomingFlag,
+        isFirstSessionSync,
+        selectedAccount,
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
-        getIncomingFlag,
     } from 'shared/lib/wallet'
-    import { AccountMessage } from 'shared/lib/typings/wallet'
     import { Transaction } from 'shared/lib/typings/message'
+    import { SetupType } from 'shared/lib/typings/routes'
+    import { AccountMessage } from 'shared/lib/typings/wallet'
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
-
-    export let locale: Locale
 
     export let transactions: AccountMessage[] = []
     export let color = 'blue'
 
+    let drawer: Drawer
+
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
+        if ($mobile) {
+            drawer.open()
+        }
     }
 
     function handleBackClick(): void {
@@ -36,7 +43,7 @@
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccountId, {
+                api.syncAccount($selectedAccount?.id, {
                     onSuccess() {
                         $isSyncing = false
                     },
@@ -51,7 +58,7 @@
                             } else {
                                 showAppNotification({
                                     type: 'error',
-                                    message: locale(err.error),
+                                    message: localize(err.error),
                                 })
                             }
                         }
@@ -74,7 +81,7 @@
                     onError(err) {
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: localize(err.error),
                         })
                     },
                 })
@@ -135,53 +142,89 @@
     } else {
         queryTransactions = filteredTransactions
     }
+
+    function shouldShowFirstSync(): boolean {
+        /**
+         * NOTE: The following conditions must be satisfied
+         * for the "syncing history, ..." message to show:
+         *
+         *      1. It must be the first sync of the user's session
+         *      2. The wallet setup type must exist (a null value indicates an existing profile)
+         *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
+         *      4. Account must have no transactions (the length of $transactions must be zero)
+         */
+        return (
+            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && transactions.length === 0
+        )
+    }
 </script>
 
-<div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="{$mobile ? 'pt-4 px-6 pb-8' : 'p-8'} h-full  flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
-        {#if $selectedMessage}
+        {#if $selectedMessage && !$mobile}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{locale('general.transactions')}</Text>
+                <Text type="h5">{localize('general.transactions')}</Text>
             </button>
         {:else}
             <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5"
-                    >{locale('general.transactions')}
-                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span></Text
-                >
-                {#if !$selectedMessage}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon
-                            icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
-                    </button>
+                {#if !$mobile}
+                    <Text type="h5">
+                        {localize('general.transactions')}
+                        <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
+                    </Text>
+                    {#if !$selectedMessage}
+                        <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                            <Icon
+                                icon="refresh"
+                                classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                            />
+                        </button>
+                    {/if}
                 {/if}
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
-                <ul class="flex flex-row justify-between space-x-8">
+                <ul
+                    class="{$mobile
+                        ? 'bg-gray-100 h-10 items-center rounded-xl space-x-3 p-1'
+                        : 'space-x-8'} flex flex-row justify-between "
+                >
                     {#each filters as filter, i}
                         <li on:click={() => (activeFilterIndex = i)}>
                             <Text
-                                type="p"
+                                type={$mobile ? 'h5' : 'p'}
                                 overrideColor
                                 classes="cursor-pointer
                             {activeFilterIndex === i
-                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
+                                    ? `${
+                                          $mobile
+                                              ? 'flex justify-center items-center rounded-xl bg-white h-8 w-20'
+                                              : 'border-b-2 border-blue-500 border-solid'
+                                      } text-blue-500`
+                                    : `${
+                                          $mobile ? 'flex justify-center items-center h-8 w-20' : ''
+                                      } text-gray-500 hover:text-gray-600 dark:hover:text-gray-300`}"
                             >
-                                {locale(`general.${filter}`)}
+                                {localize(`general.${filter}`)}
                             </Text>
                         </li>
                     {/each}
                 </ul>
                 <button on:click={() => (searchActive = !searchActive)}>
-                    <Icon
-                        icon="search"
-                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
-                    cursor-pointer ml-2"
-                    />
+                    <div
+                        class={$mobile &&
+                            'flex border-solid border bg-gray-100 dark:bg-gray-500 rounded-xl h-10 w-10 justify-center items-center'}
+                    >
+                        <Icon
+                            icon="search"
+                            height={$mobile ? '26' : '24'}
+                            width={$mobile ? '26' : '24'}
+                            classes="{$mobile
+                                ? 'text-blue-500'
+                                : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-100 ml-2'} dark:text-white 
+                    cursor-pointer "
+                        />
+                    </div>
                 </button>
                 <div
                     class="z-0 flex items-center absolute left-0 transition-all {searchActive
@@ -197,24 +240,26 @@
             </div>
         {/if}
     </div>
-    {#if $selectedMessage}
-        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
+    {#if $selectedMessage && !$mobile}
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-            {#if queryTransactions.length}
+            {#if $isSyncing && shouldShowFirstSync()}
+                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+            {:else if queryTransactions.length}
                 {#each queryTransactions as transaction}
-                    <ActivityRow
-                        onClick={() => handleTransactionClick(transaction)}
-                        {...transaction}
-                        {color}
-                        {locale}
-                    />
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{locale('general.noRecentHistory')}</Text>
+                    <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
         </div>
+    {/if}
+    {#if $selectedMessage && $mobile}
+        <Drawer opened={true} bind:this={drawer}>
+            <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+        </Drawer>
     {/if}
 </div>

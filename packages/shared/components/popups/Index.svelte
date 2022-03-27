@@ -12,6 +12,7 @@
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
+    import AccountCreation from './AccountCreation.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -105,6 +106,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
+        accountCreation: AccountCreation,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
@@ -170,7 +172,7 @@
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
     <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="p-8">
+        <div bind:this={popupContent} class="py-10 px-6">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

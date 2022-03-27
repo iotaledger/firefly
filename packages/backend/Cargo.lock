@@ -1574,7 +1574,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?rev=dd83f8fb2061899f982dcf0c419cece49411fa7b#dd83f8fb2061899f982dcf0c419cece49411fa7b"
+source = "git+https://github.com/iotaledger/wallet.rs?rev=02d5a75c16565c62fbd26c3a4583649b35e3d6b8#02d5a75c16565c62fbd26c3a4583649b35e3d6b8"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -3548,9 +3548,9 @@ dependencies = [
 
 [[package]]
 name = "zeroize"
-version = "1.5.3"
+version = "1.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50344758e2f40e3a1fcfc8f6f91aa57b5f8ebd8d27919fe6451f15aaaf9ee608"
+checksum = "7eb5728b8afd3f280a869ce1d4c554ffaed35f45c231fc41bfbd0381bef50317"
 dependencies = [
  "zeroize_derive",
 ]

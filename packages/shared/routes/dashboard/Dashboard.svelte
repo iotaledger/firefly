@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
@@ -19,23 +18,20 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import {
-        accountRoute,
-        dashboardRoute,
-        routerNext,
-        settingsChildRoute,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, routerNext, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
+        asyncCreateAccount,
+        asyncSyncAccountOffline,
         isBackgroundSyncing,
-        selectedAccountId,
+        setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import TopNavigation from './TopNavigation.svelte'
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
 
     export let locale: Locale
@@ -71,6 +67,54 @@
             openSnapshotPopup()
         }
     })
+
+    const viewableAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+
+            if ($activeProfile.settings.showHiddenAccounts) {
+                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+
+                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+                // This account will get re-used if someone creates a new one
+                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                    if (
+                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        lastAccount.rawIotaBalance === 0 &&
+                        lastAccount.messages.length === 0
+                    ) {
+                        sortedAccounts.pop()
+                    }
+                }
+
+                return sortedAccounts
+            }
+
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    const liveAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    // TODO: move these stores to lib when we fix the circular imports issue
+    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
     onMount(() => {
         if ($isSoftwareProfile) {
@@ -110,11 +154,10 @@
                         contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
-                    selectedAccountId.set(contextData.accountId)
+                    setSelectedAccount(contextData.accountId)
                     if (get(dashboardRoute) !== Tabs.Wallet) {
                         dashboardRoute.set(Tabs.Wallet)
                     }
-                    walletRoute.set(WalletRoutes.Account)
                     accountRoute.set(AccountRoutes.Init)
                 }
             }
@@ -148,7 +191,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if (!$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -226,6 +269,39 @@
         }
     }
 
+    async function onAccountCreation(alias: string, color: string, onComplete) {
+        const _create = async (): Promise<unknown> => {
+            try {
+                const account = await asyncCreateAccount(alias, color)
+                await asyncSyncAccountOffline(account)
+
+                // TODO: set selected account to the newly created account
+                accountRoute.set(AccountRoutes.Init)
+
+                return onComplete()
+            } catch (err) {
+                return onComplete(err)
+            }
+        }
+
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        void _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            await _create()
+        }
+    }
+
     $: if (!busy && $accountsLoaded) {
         /**
          * If the profile has dummy migration transactions,
@@ -280,13 +356,19 @@
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
+
+    $: if ($accountsLoaded) {
+        // TODO: persist last selected account
+        setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
+    }
 </script>
 
 {#if $mobile}
+    <Idle />
     <MainMenu {locale} />
     <div class="flex flex-col w-full h-full">
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+        <DeveloperProfileIndicator {locale} classes="absolute top-30 p-3" />
     </div>
 {:else}
     <Idle />

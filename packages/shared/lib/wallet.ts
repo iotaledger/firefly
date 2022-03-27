@@ -1,7 +1,7 @@
 import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { get, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
@@ -9,17 +9,12 @@ import { localize } from './i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
-import { showAppNotification, showSystemNotification } from './notifications'
-import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
-// PARTICIPATION
-import { ParticipationAction, PendingParticipation } from './participation/types'
+import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { openPopup } from './popup'
-import { activeProfile, isLedgerProfile, isStrongholdLocked, updateProfile } from './profile'
+import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, Account as BaseAccount, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -29,14 +24,7 @@ import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/routes'
-import {
-    AccountMessage,
-    AccountsBalanceHistory,
-    BalanceHistory,
-    BalanceOverview,
-    WalletAccount,
-    WalletState,
-} from './typings/wallet'
+import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
@@ -113,7 +101,7 @@ export const resetWallet = (): void => {
     accounts.set([])
     accountsLoaded.set(false)
     internalTransfersInProgress.set({})
-    selectedAccountId.set(null)
+    setSelectedAccount(null)
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)
@@ -125,7 +113,14 @@ export const resetWallet = (): void => {
     walletSetupType.set(null)
 }
 
-export const selectedAccountId = writable<string | null>(null)
+// Created to help selectedAccount reactivity.
+// Use it to detected switches on selectedAccount
+export const selectedAccountId = writable<string>(null)
+
+export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
+    $accounts.find((acc) => acc.id === $selectedAccountId)
+)
+export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
 
 export const selectedMessage = writable<Message | null>(null)
 
@@ -561,32 +556,6 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
     })
 
 /**
- * Displays participation (stake/unstake) notification
- *
- * @method displayParticipationNotification
- *
- * @param {PendingParticipation} pendingParticipation
- *
- * @return void
- */
-function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
-    if (pendingParticipation) {
-        const { accounts } = get(wallet)
-        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
-
-        showAppNotification({
-            type: 'info',
-            message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
-                }Successfully`,
-                { values: { account: account.alias } }
-            ),
-        })
-    }
-}
-
-/**
  * NOTE: This method mutates account object
  * Creates a message pair for internal messages and adds it to the account messages
  *
@@ -628,349 +597,6 @@ export function addMessagesPair(account: Account): void {
             }
         }
     }
-}
-
-/**
- * Initialises event listeners from wallet library
- *
- * @method initialiseListeners
- *
- * @returns {void}
- */
-export const initialiseListeners = (): void => {
-    /**
-     * Event listener for stronghold status change
-     */
-    api.onStrongholdStatusChange({
-        onSuccess(response) {
-            isStrongholdLocked.set(response.payload.snapshot.status === 'Locked')
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for new message event
-     */
-    api.onNewTransaction({
-        onSuccess(response) {
-            const { balanceOverview, accounts } = get(wallet)
-            const { accountId, message } = response.payload
-            const account = get(accounts).find((account) => account.id === accountId)
-            if (!account || !message) return
-
-            if (message.payload.type === 'Transaction') {
-                const { essence } = message.payload.data
-
-                if (!essence.data.internal) {
-                    const overview = get(balanceOverview)
-
-                    const incoming = essence.data.incoming
-                        ? overview.incomingRaw + essence.data.value
-                        : overview.incomingRaw
-                    const outgoing = essence.data.incoming
-                        ? overview.outgoingRaw
-                        : overview.outgoingRaw + essence.data.value
-
-                    updateBalanceOverview(overview.balanceRaw, incoming, outgoing)
-                }
-
-                // Update account with new message
-                saveNewMessage(accountId, message)
-
-                const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account?.alias)
-
-                showSystemNotification({
-                    type: 'info',
-                    message: notificationMessage,
-                    contextData: { type: 'valueTx', accountId },
-                })
-            } else if (message.payload.type === 'Milestone') {
-                // Update account with new message
-                saveNewMessage(accountId, message)
-                processMigratedTransactions(
-                    accountId,
-                    [message],
-
-                    // New transaction will only emit an event for fluid migrations
-                    []
-                )
-            }
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for transfer confirmation state change
-     */
-    api.onConfirmationStateChange({
-        async onSuccess(response) {
-            const { accounts } = get(wallet)
-            const { message } = response.payload
-
-            // Checks if this was a message sent for participating in an event
-            if (hasPendingParticipation(message.id)) {
-                // Instantly pull in latest participation overview.
-                await getParticipationOverview()
-
-                // If it is a message related to any participation event, display a notification
-                displayParticipationNotification(getPendingParticipation(message.id))
-
-                // Remove the pending participation from local store
-                removePendingParticipations([message.id])
-            }
-
-            if (message.payload.type === 'Transaction') {
-                const { confirmed } = response.payload
-                const { essence } = message.payload.data
-
-                let account1
-                let account2
-
-                const { internalTransfersInProgress } = get(wallet)
-                const transfers = get(internalTransfersInProgress)
-
-                // Are we tracking an internal transfer for this message id
-                if (transfers[message.id]) {
-                    account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
-                    account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
-                    internalTransfersInProgress.update((transfers) => {
-                        delete transfers[message.id]
-                        return transfers
-                    })
-                } else {
-                    account1 = get(accounts).find((account) => account.id === response.payload.accountId)
-                }
-
-                // If this is a confirmation of a regular transfer update the balance overview
-                if (confirmed && !essence.data.internal) {
-                    const { balanceOverview } = get(wallet)
-                    const overview = get(balanceOverview)
-
-                    const incoming = essence.data.incoming
-                        ? overview.incomingRaw + essence.data.value
-                        : overview.incomingRaw
-                    const outgoing = essence.data.incoming
-                        ? overview.outgoingRaw
-                        : overview.outgoingRaw + essence.data.value
-
-                    updateBalanceOverview(overview.balanceRaw, incoming, outgoing)
-                }
-
-                // Update the confirmation state of all messages with this id
-                const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
-
-                // If the state has changed then display a notification
-                // but only for transactions not migrations
-                if (confirmationChanged && message.payload.type === 'Transaction') {
-                    const tx = message.payload
-                    const messageKey = confirmed ? 'confirmed' : 'failed'
-
-                    const _notify = (accountTo: string | null = null) => {
-                        let notificationMessage
-
-                        if (accountTo) {
-                            notificationMessage = localize(`notifications.${messageKey}Internal`)
-                                .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
-                                .replace('{{senderAccount}}', account1.alias)
-                                .replace('{{receiverAccount}}', accountTo)
-                        } else {
-                            if (essence.data.internal && confirmed) {
-                                // If this is a confirmed internal message but we don't
-                                // have the account info it is most likely that someone logged
-                                // out before an internal transfer completed so the internalTransfersInProgress
-                                // was wiped, display the anonymous account message instead
-                                notificationMessage = localize('notifications.confirmedInternalNoAccounts').replace(
-                                    '{{value}}',
-                                    formatUnitBestMatch(tx.data.essence.data.value, true, 3)
-                                )
-                            } else {
-                                notificationMessage = localize(`notifications.${messageKey}`)
-                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
-                                    .replace('{{account}}', account1.alias)
-                            }
-                        }
-
-                        showSystemNotification({
-                            type: 'info',
-                            message: notificationMessage,
-                            contextData: { type: messageKey, accountId: account1.id },
-                        })
-                    }
-
-                    // If this event is emitted because a message failed, then this message will only exist on the sender account
-                    // Therefore, show the notification (no need to group).
-                    if (!confirmed) {
-                        _notify()
-                    } else {
-                        // If we have 2 accounts this was an internal transfer
-                        if (account1 && account2) {
-                            _notify(account2.alias)
-                        } else {
-                            _notify()
-                        }
-                    }
-                }
-            }
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for balance change event
-     */
-    api.onBalanceChange({
-        onSuccess(response) {
-            const {
-                payload: { messageId },
-            } = response
-
-            // TODO(laumair): Some parts of this logic are duplicated from when we initially fetch all accounts;
-            // Make sure this is refactored
-
-            // On balance change event, get the updated account objects from wallet-rs db
-            api.getAccounts({
-                onSuccess(response) {
-                    const { accounts } = get(wallet)
-
-                    let completeCount = 0
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
-
-                    const latestAccounts = []
-
-                    // 1. Iterate on all accounts;
-                    // 2. Get latest metadata for all accounts (to compute the latest balance overview);
-                    // 3. Only update the account for which the balance change event emitted;
-                    // 4. Update balance overview & accounts
-                    for (const _account of response.payload) {
-                        getAccountMeta(_account.id, (metaErr, meta) => {
-                            if (!metaErr) {
-                                // Compute balance overview for each account
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
-
-                                addMessagesPair(_account)
-
-                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
-
-                                // Keep the messages as is because they get updated through a different event
-                                // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
-                                latestAccounts.push(updatedAccountInfo)
-
-                                completeCount++
-
-                                if (completeCount === response.payload.length) {
-                                    accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
-
-                                    updateBalanceOverview(
-                                        totalBalance.balance,
-                                        totalBalance.incoming,
-                                        totalBalance.outgoing
-                                    )
-                                }
-                            }
-                        })
-                    }
-                },
-                onError(response) {},
-            })
-
-            // Migration
-            if (messageId === '0'.repeat(64)) {
-                updateProfile('migratedTransactions', [])
-            }
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for reattachment
-     */
-    api.onReattachment({
-        onSuccess(response) {
-            // Replace original message with reattachment
-            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message)
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for transfer progress
-     */
-    api.onTransferProgress({
-        onSuccess(response) {
-            const { event } = response.payload
-            if ('type' in event) {
-                transferState.set({
-                    type: event.type,
-                    data: { ...event },
-                })
-            }
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-
-    /**
-     * Event listener for Ledger receive address generation
-     */
-    api.onLedgerAddressGeneration({
-        onSuccess(response) {
-            const { event } = response.payload
-            openPopup({
-                type: 'ledgerAddress',
-                hideClose: true,
-                preventClose: true,
-                props: {
-                    address: event.address,
-                },
-            })
-        },
-        onError(error) {
-            console.error(error)
-        },
-    })
-}
-
-const updateAllMessagesState = (accounts, messageId, confirmation) => {
-    let confirmationHasChanged = false
-
-    accounts.update((storedAccounts) =>
-        storedAccounts.map((storedAccount) =>
-            Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>(
-                {} as WalletAccount,
-                storedAccount,
-                {
-                    messages: storedAccount.messages.map((_message: Message) => {
-                        if (_message.id === messageId) {
-                            confirmationHasChanged = _message.confirmed !== confirmation
-                            _message.confirmed = confirmation
-                        }
-                        return _message
-                    }),
-                }
-            )
-        )
-    )
-
-    return confirmationHasChanged
 }
 
 /**
@@ -1071,44 +697,6 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
         }
         return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     })
-}
-
-/**
- * Gets a slice of all transactions (on all accounts). Appends account index and sort the message list.
- *
- * @method getTransactions
- *
- * @param {WalletAccount} accounts
- * @param {number} [count]
- *
- * @returns {AccountMessage[]}
- */
-export const getTransactions = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: {
-        [key: string]: AccountMessage
-    } = {}
-
-    accounts.forEach((account) => {
-        account.messages.forEach((message) => {
-            let extraId = ''
-            if (message.payload?.type === 'Transaction') {
-                extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
-            }
-            messages[account.index + message.id + extraId] = {
-                ...message,
-                account: account.index,
-            }
-        })
-    })
-
-    return Object.values(messages)
-        .sort((a, b) => {
-            if (a.id === b.id && a.payload.type == 'Transaction') {
-                return getIncomingFlag(a.payload) ? -1 : 1
-            }
-            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        })
-        .slice(0, count)
 }
 
 /**
@@ -1302,113 +890,78 @@ export const updateAccountsBalanceEquiv = (): void => {
 /**
  * Gets balance history for each account in market data timestamps
  *
- * @method getAccountsBalanceHistory
+ * @method getAccountBalanceHistory
  *
  * @param {Account} accounts
  * @param {number} balanceRaw
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
-    const balanceHistory: AccountsBalanceHistory = {}
-    if (priceData && accounts) {
-        accounts.forEach((account) => {
-            const accountBalanceHistory: BalanceHistory = {
-                [HistoryDataProps.ONE_HOUR]: [],
-                [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-                [HistoryDataProps.SEVEN_DAYS]: [],
-                [HistoryDataProps.ONE_MONTH]: [],
-            }
-            const messages: Message[] =
-                account?.messages
-                    ?.slice()
-                    ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
-                    ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
-            // Calculate the variations for each account
-            let trackedBalance = account.rawIotaBalance
-            const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
-            messages.forEach((message) => {
-                const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
-
-                if (essence && essence.incoming) {
-                    trackedBalance -= essence.value || 0
-                } else {
-                    trackedBalance += essence.value || 0
-                }
-                accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
-            })
-            // Calculate the balance in each market data timestamp
-            let balanceHistoryInTimeframe = []
-            Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-                // sort market data from newest to last
-                const sortedData = data.slice().sort((a, b) => b[0] - a[0])
-                balanceHistoryInTimeframe = []
-                // if there are no balance variations
-                if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map((_data) => ({
-                        timestamp: _data[0],
-                        balance: trackedBalance,
-                    }))
-                } else {
-                    let i = 0
-                    sortedData.forEach((data) => {
-                        const marketTimestamp = new Date(data[0] * 1000).getTime()
-                        // find balance for each market data timepstamp
-                        for (i; i < accountBalanceVariations.length - 1; i++) {
-                            const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
-                            if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({
-                                    timestamp: data[0],
-                                    balance: accountBalanceVariations[i].balance,
-                                })
-                                return
-                            } else if (
-                                marketTimestamp <= nextBalanceTimestamp &&
-                                i === accountBalanceVariations.length - 2
-                            ) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
-                                return
-                            }
-                        }
-                    })
-                }
-                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
-            })
-            balanceHistory[account.index] = accountBalanceHistory
-        })
-    }
-    return balanceHistory
-}
-
-/**
- * Gets balance history for all accounts combined in market data timestamps
- *
- * @method getWalletBalanceHistory
- *
- * @param {Account} accounts
- * @param {PriceData} [priceData]
- *
- */
-export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceHistory): BalanceHistory => {
+export const getAccountBalanceHistory = (account: WalletAccount, priceData: PriceData): BalanceHistory => {
     const balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
         [HistoryDataProps.SEVEN_DAYS]: [],
         [HistoryDataProps.ONE_MONTH]: [],
     }
-    Object.values(accountsBalanceHistory).forEach((accBalanceHistory) => {
-        Object.entries(accBalanceHistory).forEach(([timeframe, data]) => {
-            if (!balanceHistory[timeframe].length) {
-                balanceHistory[timeframe] = data
+    if (priceData) {
+        const messages: Message[] =
+            account?.messages
+                ?.slice()
+                ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
+        // Calculate the variations for each account
+        let trackedBalance = account.rawIotaBalance
+        const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
+        messages.forEach((message) => {
+            const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
+
+            if (essence && essence.incoming) {
+                trackedBalance -= essence.value || 0
             } else {
-                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
-                    timestamp,
-                    balance: balance + data[index].balance,
-                }))
+                trackedBalance += essence.value || 0
             }
+            accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
         })
-    })
+        // Calculate the balance in each market data timestamp
+        let balanceHistoryInTimeframe = []
+        Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
+            // sort market data from newest to last
+            const sortedData = data.slice().sort((a, b) => b[0] - a[0])
+            balanceHistoryInTimeframe = []
+            // if there are no balance variations
+            if (accountBalanceVariations.length === 1) {
+                balanceHistoryInTimeframe = sortedData.map((_data) => ({
+                    timestamp: _data[0],
+                    balance: trackedBalance,
+                }))
+            } else {
+                let i = 0
+                sortedData.forEach((data) => {
+                    const marketTimestamp = new Date(data[0] * 1000).getTime()
+                    // find balance for each market data timepstamp
+                    for (i; i < accountBalanceVariations.length - 1; i++) {
+                        const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+                        const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                        if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+                            balanceHistoryInTimeframe.push({
+                                timestamp: data[0],
+                                balance: accountBalanceVariations[i].balance,
+                            })
+                            return
+                        } else if (
+                            marketTimestamp <= nextBalanceTimestamp &&
+                            i === accountBalanceVariations.length - 2
+                        ) {
+                            balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
+                            return
+                        }
+                    }
+                })
+            }
+            balanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
+        })
+    }
     return balanceHistory
 }
 
@@ -1447,7 +1000,7 @@ export const getAccountMeta = (
 }
 
 export const prepareAccountInfo = (
-    account: BaseAccount,
+    account: Account,
     meta: {
         balance: number
         incoming: number
@@ -1460,7 +1013,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,

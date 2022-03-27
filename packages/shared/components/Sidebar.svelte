@@ -1,13 +1,14 @@
 <script lang="typescript">
-    import { Drawer, Icon, Logo, NetworkIndicator, ProfileActionsModal, Text } from 'shared/components'
+    import { Logo, Icon, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { Settings } from 'shared/routes'
+    import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
+    import { Tabs } from 'shared/lib/typings/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -17,12 +18,43 @@
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
     const profileColor = 'blue' // TODO: each profile has a different color
-
+    // $: color = getColor($activeProfile, $selectedAccount?.id) as string
+    
     const hasTitleBar = document.body.classList.contains('platform-win32')
-
+    
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
+
+    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+
+    let sidebarTabs: SidebarTabType[] = [
+        {
+            icon: 'wallet',
+            label: locale('tabs.wallet'),
+            route: Tabs.Wallet,
+            onClick: openWallet,
+        },
+        {
+            icon: 'tokens',
+            label: locale('tabs.staking'),
+            route: Tabs.Staking,
+            onClick: openStaking,
+        },
+    ]
+
+    function updateSidebarNotification() {
+        sidebarTabs = sidebarTabs.map((tab) => {
+            if (Tabs.Staking === tab.route) {
+                tab.notificationType = !$activeProfile?.hasVisitedStaking
+                    ? 'warning'
+                    : showStakingNotification
+                    ? 'error'
+                    : null
+            }
+            return tab
+        })
+    }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {

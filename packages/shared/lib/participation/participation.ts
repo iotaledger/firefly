@@ -5,14 +5,13 @@ import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
 import { canAccountReachMinimumAirdrop } from './staking'
 import {
-    accountToParticipate,
     isPerformingParticipation,
     participationAction,
     participationEvents,
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { AccountParticipationAbility, Participation, ParticipationEventState, StakingAirdrop } from './types'
+import { AccountParticipationAbility, ParticipationEventState, StakingAirdrop } from './types'
 
 let participationPollInterval
 
@@ -55,7 +54,6 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
-    accountToParticipate.set(null)
     isPerformingParticipation.set(false)
     participationAction.set(null)
     participationEvents.set([])

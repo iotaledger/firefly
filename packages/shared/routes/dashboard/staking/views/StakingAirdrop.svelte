@@ -1,15 +1,13 @@
 <script lang="typescript">
-    import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
+    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isStakingForShimmer, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,
-        participationOverview,
         shimmerStakingRemainingTime,
         shimmerStakingRewards,
-        stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
@@ -32,15 +30,6 @@
     }
 
     $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime()
-
-    $: stakedAccountsInCurrentAirdrop =
-        $stakedAccounts?.filter((account) =>
-            $participationOverview?.some(
-                (partAccount) =>
-                    partAccount?.[isAssembly() ? 'assemblyStakedFunds' : 'shimmerStakedFunds'] > 0 &&
-                    partAccount.accountIndex === account.index
-            )
-        ) ?? []
 
     const video = {
         [StakingAirdrop.Assembly]: null,
@@ -110,13 +99,6 @@
     </video>
     <div class="w-full h-full px-8 pb-10 flex flex-col justify-end space-y-5 z-0">
         <div class="flex flex-col">
-            <div class="flex flex-row flex-wrap mb-2">
-                {#each stakedAccountsInCurrentAirdrop as acc}
-                    <div class="mb-2 mr-2">
-                        <WalletPill account={acc} size="s" active enableTooltip classes="cursor-default" />
-                    </div>
-                {/each}
-            </div>
             <div class="flex flex-row items-center mb-3">
                 <Text type="h3" classes="mr-4 text-white text-xl">
                     {localize(`views.staking.airdrops.${airdrop}.name`)}

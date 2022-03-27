@@ -4,7 +4,6 @@
 	Spans the height or width of the screen, with everything behind it visible but dimmed.
 	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
 	
-	@prop {number} [dimLength] - Dim length in CSS pixels.
 	@prop {boolean} [opened] - Opens drawer on load.
 	@prop {boolean} [fromRight] - Slide from right side.
     @prop {boolean} [preventClose] - Prevent close the Drawer.
@@ -21,11 +20,11 @@
 
     $: darkModeEnabled = $appSettings.darkMode
 
-    export let dimLength = 160
     export let opened = false
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
+    export let onClose
     export let preventClose = false
     export let zIndex = 'z-30'
 
@@ -115,9 +114,7 @@
     }
 
     async function handleSlideEnd() {
-        const thresholdUnreached = fromRight
-            ? (viewportLength - dimLength) / 2 > $coords.x
-            : (viewportLength - dimLength) / 1.2 > $coords.y
+        const thresholdUnreached = fromRight ? viewportLength / 2 > $coords.x : viewportLength / 1.2 > $coords.y
         if (thresholdUnreached) {
             await open()
         } else {
@@ -129,8 +126,8 @@
         isOpen = true
         await coords.set(
             {
-                x: fromRight ? dimLength : 0,
-                y: fromRight ? 0 : dimLength,
+                x: 0,
+                y: 0,
             },
             { duration: 750, easing: quintOut }
         )
@@ -147,6 +144,7 @@
         isOpen = false
         if (!preventClose) {
             dispatch('close')
+            onClose()
         }
     }
 
@@ -167,14 +165,13 @@
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
     </slide-zone>
     <main
-        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+        class="fixed bottom-0 overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
         style="--y: {fromRight ? 0 : $coords.y}px; 
 			--x: {fromRight ? $coords.x : 0}px; 
 			--opacity: {contentOpacity}; 
-			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
-			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
+			--height: {fromRight && '100vh'};
 			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
 			--display-indicator: {fromRight ? 'none' : 'block'}"
     >
@@ -188,7 +185,6 @@
         transform: translate(var(--x), var(--y));
         border-radius: var(--border-radius);
         height: var(--height);
-        width: var(--width);
         opacity: var(--opacity);
         --bg-indicator-color: #d8e3f5;
         @apply from-white;
