@@ -35,7 +35,7 @@
     import { Stage } from 'shared/lib/typings/stage'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
-    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
+    stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
