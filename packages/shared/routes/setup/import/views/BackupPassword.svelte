@@ -48,7 +48,7 @@
             bind:value={password}
             {locale}
             showRevealToggle
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             submitHandler={handleContinue}
         />
