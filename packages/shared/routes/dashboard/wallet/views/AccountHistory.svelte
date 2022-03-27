@@ -186,7 +186,7 @@
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <ul
                     class="{$mobile
-                        ? 'bg-gray-100 h-10 items-center rounded-xl space-x-3 p-1'
+                        ? 'bg-gray-50 dark:bg-gray-900 h-10 items-center rounded-xl space-x-3 p-1'
                         : 'space-x-8'} flex flex-row justify-between "
                 >
                     {#each filters as filter, i}
@@ -198,7 +198,7 @@
                             {activeFilterIndex === i
                                     ? `${
                                           $mobile
-                                              ? 'flex justify-center items-center rounded-xl bg-white h-8 w-20'
+                                              ? 'flex justify-center items-center rounded-xl bg-white dark:bg-gray-800 h-8 w-20'
                                               : 'border-b-2 border-blue-500 border-solid'
                                       } text-blue-500`
                                     : `${
@@ -213,7 +213,7 @@
                 <button on:click={() => (searchActive = !searchActive)}>
                     <div
                         class={$mobile &&
-                            'flex border-solid border bg-gray-100 dark:bg-gray-500 rounded-xl h-10 w-10 justify-center items-center'}
+                            'flex border bg-gray-100 dark:bg-gray-900 rounded-xl h-10 w-10 justify-center items-center'}
                     >
                         <Icon
                             icon="search"
@@ -257,9 +257,9 @@
             {/if}
         </div>
     {/if}
-    {#if $selectedMessage && $mobile}
-        <Drawer opened={true} bind:this={drawer}>
-            <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
-        </Drawer>
-    {/if}
 </div>
+{#if $selectedMessage && $mobile}
+    <Drawer opened={true} bind:this={drawer}>
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+    </Drawer>
+{/if}
