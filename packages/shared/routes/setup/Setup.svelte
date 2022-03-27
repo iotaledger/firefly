@@ -27,11 +27,13 @@
             <div class="absolute -top-14">
                 <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
             </div>
-            <Text type="h3" classes="mb-6 text-center">{locale('views.setup.chrysalisTitle')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.setup.chrysalisBody')}</Text>
-            <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
-                {locale('views.setup.learnMore')}
-            </Link>
+            {#if !$mobile}
+                <Text type="h3" classes="mb-6 text-center">{locale('views.setup.chrysalisTitle')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.setup.chrysalisBody')}</Text>
+                <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
+                    {locale('views.setup.learnMore')}
+                </Link>
+            {/if}
         </div>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">

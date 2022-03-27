@@ -142,6 +142,15 @@
         &.scheme-dark {
             @apply bg-gray-900;
         }
+        &.qr-scanner {
+            @apply bg-transparent;
+            .scanner-ui {
+                @apply block;
+            }
+            .scanner-hide {
+                @apply hidden;
+            }
+        }
     }
     .setup-anim-aspect-ratio {
         aspect-ratio: 19/15;
@@ -153,15 +162,21 @@
     .scanner-hide {
         @apply visible;
     }
-    body {
-        &.qr-scanner {
-            @apply bg-transparent;
-            .scanner-ui {
-                @apply block;
-            }
-            .scanner-hide {
-                @apply hidden;
-            }
-        }
+
+    
+    button, a, img, input, select, textarea {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
+
+    a, button, img, [inert], .inert {
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+    }
+
+    button:active, button:focus { 
+        outline: 0px solid transparent; 
+    }
+
 </style>

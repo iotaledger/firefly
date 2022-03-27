@@ -3,7 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
@@ -167,6 +167,10 @@
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
     })
+
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    const isReady = async () => await sleep(300) && await tick()
+
 </script>
 
 <svelte:window on:keydown={onKey} />

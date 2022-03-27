@@ -497,8 +497,7 @@
                     <button on:click={onQRClick}>
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
-                {/if}
-                {#if !$mobile}
+                {:else}
                     <button on:click={handleBackClick}>
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
@@ -528,7 +527,7 @@
                             disabled={$isTransferring}
                             placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
                             classes="mb-6"
-                            autofocus
+                            autofocus={!$mobile}
                         />
                     {/if}
                     <Amount

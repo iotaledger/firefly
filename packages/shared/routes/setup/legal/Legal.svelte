@@ -26,7 +26,7 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout onBackClick={handleBackClick} reverseContent>
     <div slot="title">
         <Text type="h2">{locale('views.legal.title')}</Text>
     </div>
