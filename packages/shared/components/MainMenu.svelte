@@ -35,8 +35,8 @@
 </script>
 
 <button
-    class="absolute menu-button r-30 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="background-color: {profileColor};"
+    class="absolute menu-button z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
+    style="background-color: {color};"
     on:click={handleClick}
 >
     <Text type="h4" classes="uppercase text-{textColor}">{profileInitial || 'A'}</Text>
@@ -61,7 +61,7 @@
             <div class="grid profile-block space-x-5 px-6 w-full">
                 <div
                     class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
-                    style="background-color: {profileColor};"
+                    style="background-color: {color};"
                 >
                     <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial}</span>
                 </div>
@@ -81,9 +81,9 @@
         padding-top: env(safe-area-inset-top);
     }
     .menu-button {
-        position: absolute;
-        top: env(safe-area-inset-top);
+        /* margin-top: env(safe-area-inset-top); */
         left: 25px;
+        top: 25px;
     }
     .profile-block {
         grid-template-columns: auto 1fr;
