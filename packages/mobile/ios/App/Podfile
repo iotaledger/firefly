@@ -10,6 +10,7 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../../../node_modules/@capacitor/ios'
   pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
+  pod 'CapacitorSecureFilesystemAccess', :path => '../../../../node_modules/capacitor-secure-filesystem-access'
   pod 'CapacitorCommunityBarcodeScanner', :path => '../../../../node_modules/@capacitor-community/barcode-scanner'
   pod 'CapacitorCommunityPrivacyScreen', :path => '../../../../node_modules/@capacitor-community/privacy-screen'
   pod 'CapacitorSecureStoragePlugin', :path => '../../../../node_modules/capacitor-secure-storage-plugin'
