@@ -93,7 +93,6 @@
                         showRevealToggle
                         {localize}
                         placeholder={localize('general.password')}
-                        autofocus
                         submitHandler={() => handleHideClick()}
                         disabled={isBusy}
                     />

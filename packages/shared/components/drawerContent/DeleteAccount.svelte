@@ -80,7 +80,6 @@
                     showRevealToggle
                     {localize}
                     placeholder={localize('general.password')}
-                    autofocus
                     submitHandler={() => handleDeleteClick()}
                     disabled={isBusy}
                 />

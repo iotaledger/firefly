@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
@@ -77,7 +78,7 @@
                 showRevealToggle
                 {locale}
                 placeholder={locale('general.password')}
-                autofocus
+                autofocus={!$mobile}
                 submitHandler={() => handleFindBalances()}
                 disabled={isBusy}
             />
