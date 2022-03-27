@@ -18,7 +18,7 @@
     style="--account-color: {color};"
     class="{$mobile
         ? 'account-color top-navigation h-20 items-center'
-        : 'bg-gray-200 border-solid border-b border-gray-300 py-2'} dark:bg-gray-800 dark:border-gray-700 flex flex-row justify-center w-full"
+        : 'bg-gray-200 border-solid border-b border-gray-300 py-2'} dark:border-gray-700 flex flex-row justify-center w-full"
 >
     <AccountNavigation {onAccountCreation} accounts={$viewableAccounts} />
 </div>

@@ -367,12 +367,8 @@
     <Idle />
     <MainMenu {locale} />
     <TopNavigation {onAccountCreation} />
-    <div class="{!$mobile && 'dashboard-wrapper'} flex flex-col w-full h-full">
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        {#if !$mobile}
-            <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
-        {/if}
-    </div>
+    <!-- Dashboard Pane -->
+    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
 {:else}
     <Idle />
     <div class="dashboard-wrapper flex flex-row w-full h-full">

@@ -35,7 +35,7 @@
 </script>
 
 <button
-    class="absolute menu-button z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
+    class="menu-button z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
     style="background-color: {color};"
     on:click={handleClick}
 >
@@ -81,9 +81,10 @@
         padding-top: env(safe-area-inset-top);
     }
     .menu-button {
-        /* margin-top: env(safe-area-inset-top); */
+        position: fixed;
+        padding-top: env(safe-area-inset-top);
+        top: 20px;
         left: 25px;
-        top: 25px;
     }
     .profile-block {
         grid-template-columns: auto 1fr;

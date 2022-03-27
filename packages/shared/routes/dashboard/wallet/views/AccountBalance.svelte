@@ -77,7 +77,7 @@
     <button
         on:click={() => onMenuClick()}
         class="{$mobile
-            ? '-top-8'
+            ? 'menu-mobile'
             : 'bg-opacity-10 bg-black rounded-lg top-4'} px-2 py-3 flex flex-row space-x-1 text-{textColor} absolute right-4 "
     >
         {#each Array(3) as _}
@@ -94,5 +94,11 @@
         button.action {
             color: var(--account-color);
         }
+    }
+    .menu-mobile {
+        position: absolute;
+        margin-top: -200px;
+        padding-top: calc(env(safe-area-inset-top) / 1.6);
+        right: 25px;
     }
 </style>

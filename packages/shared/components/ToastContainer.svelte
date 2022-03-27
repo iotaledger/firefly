@@ -14,7 +14,7 @@
     }))
 </script>
 
-<toast-container class="flex flex-col relative z-20 {$mobile ? 'mobile-container' : 'desktop-container'}">
+<toast-container class="flex flex-col relative z-60 {$mobile ? 'mobile-container' : 'desktop-container'}">
     <ul class="space-y-2">
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
