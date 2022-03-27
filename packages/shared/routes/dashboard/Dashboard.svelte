@@ -1,12 +1,10 @@
 <script lang="typescript">
-    import { onDestroy, onMount, setContext } from 'svelte'
-    import { derived, get, Readable } from 'svelte/store'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { DeveloperProfileIndicator, Idle, MainMenu, Sidebar } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { DeveloperProfileIndicator, Idle, Sidebar, MainMenu } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -31,8 +29,10 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
     import TopNavigation from './TopNavigation.svelte'
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
 
     export let locale: Locale
 
@@ -365,10 +365,12 @@
 
 {#if $mobile}
     <Idle />
-    <MainMenu {locale} />
-    <TopNavigation {onAccountCreation} />
-    <!-- Dashboard Pane -->
-    <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    <div class="flex flex-col w-full h-full">
+        <TopNavigation {onAccountCreation} />
+        <MainMenu {locale} />
+        <!-- Dashboard Pane -->
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    </div>
 {:else}
     <Idle />
     <div class="dashboard-wrapper flex flex-row w-full h-full">
@@ -380,3 +382,9 @@
         </div>
     </div>
 {/if}
+
+<style type="text/scss">
+    :global(:not(body.platform-win32)) .dashboard-wrapper {
+        margin-top: calc(env(safe-area-inset-top) / 2);
+    }
+</style>
