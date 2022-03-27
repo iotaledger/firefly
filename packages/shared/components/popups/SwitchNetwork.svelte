@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
 
+    import { mobile } from 'shared/lib/app'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import {
@@ -147,7 +148,7 @@
             showRevealToggle
             {locale}
             placeholder={locale('general.password')}
-            autofocus
+            autofocus={!$mobile}
             submitHandler={handleConfirmNetworkSwitchClick}
             disabled={isSwitchingNetwork}
         />

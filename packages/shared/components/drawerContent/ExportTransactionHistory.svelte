@@ -112,7 +112,6 @@
                     showRevealToggle
                     {localize}
                     placeholder={localize('general.password')}
-                    autofocus
                     submitHandler={() => handleExportTransactionHistory()}
                     disabled={isBusy}
                 />

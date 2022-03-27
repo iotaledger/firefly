@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { initAppSettings } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -153,7 +154,7 @@
                 classes="mt-10 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
-                autofocus
+                autofocus={!$mobile}
             />
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
