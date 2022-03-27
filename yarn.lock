@@ -1099,10 +1099,15 @@
   resolved "https://registry.yarnpkg.com/@capacitor-community/privacy-screen/-/privacy-screen-2.1.1.tgz#501b939ec832d0f03d43d196ca4b33683d995f5f"
   integrity sha512-KhUyMNOSHPXKpDF4HBU4T8mfLnbq6owMCZHt6Q2SAHn2zT7Zsl9Nkv6paFrgUD+WUD+iHERqsFJNbpmWzkdBtg==
 
-"@capacitor/android@3.4.1", "@capacitor/android@^3.4.0":
+"@capacitor/android@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.1.tgz#d4accc41c843927853d27c7f638487bd52633486"
   integrity sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag==
+
+"@capacitor/android@^3.4.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.3.tgz#1bfaa5bbe83872f7ba5c7d7bd38b54a47827124b"
+  integrity sha512-G/6+mbOde9LMWl5KvA5rB/xEQF05sKrQFMBwo8y3C8pYF+axtcrS0Dgze9rOB7nCjH4NXv/bLw58E9+q8/sQUA==
 
 "@capacitor/cli@^3.4.1":
   version "3.4.3"
@@ -1143,10 +1148,15 @@
     minimist "^1.2.5"
     typescript "^4.0.3"
 
-"@capacitor/ios@3.4.1", "@capacitor/ios@^3.4.0":
+"@capacitor/ios@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.1.tgz#0ae173056924294aa1e468b70377d603abea790e"
   integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
+
+"@capacitor/ios@^3.4.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.3.tgz#eb7918f3bdf02c71e2e22f47d82a213d2a73abcd"
+  integrity sha512-WG6LHzkclYfiF8yBty31j256SD8XmNN1FlOiJUVeu5wz9gM4vw8FpTYIkj2VJoiBnQiB/OWotfnJp2Mp1Rfbtg==
 
 "@capacitor/splash-screen@^1.2.2":
   version "1.2.2"
@@ -3225,6 +3235,11 @@ caniuse-lite@^1.0.30001248:
   version "1.0.30001251"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001251.tgz#6853a606ec50893115db660f82c094d18f096d85"
   integrity sha512-HOe1r+9VkU4TFmnU70z+r7OLmtR+/chB1rdcJUeQlAinjEeb0cKL20tlAtOagNZhbrtLnCvV19B4FmF1rgzl6A==
+
+capacitor-secure-filesystem-access@./packages/mobile/capacitor/plugins/secure-filesystem-access/:
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^3.4.0"
 
 capacitor-secure-storage-plugin@^0.6.2:
   version "0.6.2"
