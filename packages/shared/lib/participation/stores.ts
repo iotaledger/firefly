@@ -327,3 +327,15 @@ export const isParticipationPending = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
+
+/**
+ * Determines if has a pending participation
+ *
+ * @method hasPendingParticipation
+ *
+ * @param {string} id
+ *
+ * @returns {boolean}
+ */
+export const hasPendingParticipation = (id: string): boolean =>
+    get(pendingParticipations).some((participation) => participation.messageId === id)
