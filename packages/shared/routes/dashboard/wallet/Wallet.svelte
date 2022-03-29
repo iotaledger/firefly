@@ -429,7 +429,7 @@
     {#if $mobile}
         <div
             style="--account-color: {color};"
-            class="{$mobile && 'account-color'} wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900"
+            class="{$mobile && 'account-color'} wallet-wrapper w-full h-full flex flex-col bg-gray-50"
         >
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
@@ -460,7 +460,7 @@
                     </Drawer>
                 </div>
                 <div class="flex flex-1">
-                    <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
+                    <DashboardPane classes="w-full rounded-b-none rounded-tl-s rounded-tr-s">
                         <AccountHistory
                             color={$selectedAccount.color}
                             transactions={getAccountMessages($selectedAccount)}
