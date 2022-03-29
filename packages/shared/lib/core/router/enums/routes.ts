@@ -21,18 +21,7 @@ export enum AppRoute {
     Login = 'login',
 }
 
-export enum SetupType {
-    New = 'new',
-    Import = 'import',
-    Mnemonic = 'mnemonic',
-    Seed = 'seed',
-    Stronghold = 'stronghold',
-    Seedvault = 'seedvault',
-    TrinityLedger = 'trinityLedger',
-    FireflyLedger = 'fireflyLedger',
-}
-
-export enum LedgerRoutes {
+export enum LedgerRoute {
     Connect = 'connect',
     RestoreFromLedger = 'restoreFromLedger',
     LegacyIntro = 'legacyIntro',
@@ -42,7 +31,7 @@ export enum LedgerRoutes {
     AccountIndex = 'accountIndex',
 }
 
-export enum WalletRoutes {
+export enum WalletRoute {
     Init = 'init',
     Account = 'account',
     Send = 'send',
@@ -50,20 +39,20 @@ export enum WalletRoutes {
     CreateAccount = 'createAccount',
 }
 
-export enum AccountRoutes {
+export enum AccountRoute {
     Init = 'init',
     Manage = 'manage',
     Send = 'send',
     Receive = 'receive',
 }
 
-export enum Tabs {
+export enum DashboardRoute {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
 }
 
-export enum SettingsRoutes {
+export enum SettingsRoute {
     Init = 'init',
     GeneralSettings = 'generalSettings',
     Security = 'security',
@@ -71,7 +60,7 @@ export enum SettingsRoutes {
     HelpAndInfo = 'helpAndInfo',
 }
 
-export enum SettingsRoutesNoProfile {
+export enum SettingsRouteNoProfile {
     Init = 'init',
     GeneralSettings = 'generalSettings',
     AdvancedSettings = 'advancedSettings',
@@ -130,4 +119,41 @@ export enum ExternalRoute {
     Discord = 'https://discord.iota.org',
     FAQ = 'https://wiki.iota.org/learn/wallets/firefly/faq-and-troubleshooting',
     IssueReport = 'https://github.com/iotaledger/firefly/issues',
+}
+
+export enum LoginRoute {
+    Init = 'init',
+    EnterPin = 'enterPin',
+}
+
+export enum BackupRoute {
+    Init = 'init',
+    RecoveryPhrase = 'recoveryPhrase',
+    Verify = 'verify',
+    Backup = 'backup',
+}
+
+export enum ImportRoute {
+    Init = 'init',
+    TextImport = 'textImport',
+    FileImport = 'fileImport',
+    LedgerImport = 'ledgerImport',
+    BackupPassword = 'backupPassword',
+    Success = 'Success',
+}
+
+export enum ProtectRoute {
+    Init = 'init',
+    Biometric = 'biometric',
+    Pin = 'pin',
+    RepeatPin = 'repeatPin',
+}
+
+export enum MigrateRoute {
+    Init = 'init',
+    TransferFragmentedFunds = 'transferFragmentedFunds',
+    BundleMiningWarning = 'bundleMiningWarning',
+    SecureSpentAddresses = 'secureSpentAddresses',
+    SecuringSpentAddresses = 'securingSpentAddresses',
+    SecurityCheckCompleted = 'securityCheckCompleted',
 }

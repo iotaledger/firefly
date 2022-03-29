@@ -1,10 +1,8 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from 'shared/lib/migration'
-    import { ledgerRoute, ledgerRouteHistory, walletSetupType } from 'shared/lib/router'
-    import { LedgerRoutes, SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoute } from '@core/router'
     import {
         AccountIndex,
         Connect,
@@ -19,33 +17,24 @@
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
-
     $: $ledgerRoute, updateMigrationProgress()
 
     onMount(() => {
-        // reinitialize the init view only if we are not in the middle of a ledger flow
-        if (!$ledgerRouteHistory.length) {
-            if ($walletSetupType === SetupType.New || $walletSetupType === SetupType.FireflyLedger) {
-                ledgerRoute.set(LedgerRoutes.Connect)
-            } else {
-                ledgerRoute.set(LedgerRoutes.LegacyIntro)
-            }
-        }
+        $ledgerRouter.restartIfNotInLedgerFlow()
     })
 
-    const updateMigrationProgress = () => {
-        switch (get(ledgerRoute)) {
-            case LedgerRoutes.Connect:
+    const updateMigrationProgress = (): void => {
+        switch ($ledgerRoute) {
+            case LedgerRoute.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
-            case LedgerRoutes.GenerateAddress:
+            case LedgerRoute.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case LedgerRoutes.SwitchApps:
+            case LedgerRoute.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
-            case LedgerRoutes.AccountIndex:
+            case LedgerRoute.AccountIndex:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
             default:
@@ -54,78 +43,36 @@
         }
     }
 
-    const _next = (event) => {
-        let nextState
-        switch (get(ledgerRoute)) {
-            case LedgerRoutes.Connect:
-                if ($walletSetupType === SetupType.New) {
-                    dispatch('next')
-                } else if ($walletSetupType === SetupType.FireflyLedger) {
-                    nextState = LedgerRoutes.RestoreFromLedger
-                } else if ($walletSetupType === SetupType.TrinityLedger) {
-                    nextState = LedgerRoutes.GenerateAddress
-                }
-                break
-            case LedgerRoutes.RestoreFromLedger:
-                dispatch('next')
-                break
-            case LedgerRoutes.LegacyIntro:
-                nextState = LedgerRoutes.InstallationGuide
-                break
-            case LedgerRoutes.InstallationGuide:
-                nextState = LedgerRoutes.Connect
-                break
-            case LedgerRoutes.GenerateAddress:
-                nextState = LedgerRoutes.SwitchApps
-                break
-            case LedgerRoutes.SwitchApps:
-                nextState = LedgerRoutes.AccountIndex
-                break
-            case LedgerRoutes.AccountIndex:
-                dispatch('next')
-                break
-        }
-        if (nextState) {
-            $ledgerRouteHistory.push(get(ledgerRoute))
-            ledgerRoute.set(nextState)
-        }
-    }
-    const _previous = () => {
-        const prevState = $ledgerRouteHistory.pop() as LedgerRoutes
-        if (prevState) {
-            ledgerRoute.set(prevState)
-        } else {
-            dispatch('previous')
-        }
-    }
+    const next = (event: CustomEvent<FireflyEvent>): void => $ledgerRouter.next(event.detail)
+    const previous = (): void => $ledgerRouter.previous()
 </script>
 
-{#if $ledgerRoute === LedgerRoutes.Connect}
+{#if $ledgerRoute === LedgerRoute.Connect}
     <Transition>
-        <Connect on:next={_next} on:previous={_previous} {locale} />
+        <Connect on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.RestoreFromLedger}
+{:else if $ledgerRoute === LedgerRoute.RestoreFromLedger}
     <Transition>
-        <RestoreFromLedger on:next={_next} on:previous={_previous} {locale} />
+        <RestoreFromLedger on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.LegacyIntro}
+{:else if $ledgerRoute === LedgerRoute.LegacyIntro}
     <Transition>
-        <LegacyIntro on:next={_next} on:previous={_previous} {locale} />
+        <LegacyIntro on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.InstallationGuide}
+{:else if $ledgerRoute === LedgerRoute.InstallationGuide}
     <Transition>
-        <InstallationGuide on:next={_next} on:previous={_previous} {locale} />
+        <InstallationGuide on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.GenerateAddress}
+{:else if $ledgerRoute === LedgerRoute.GenerateAddress}
     <Transition>
-        <GenerateNewAddress on:next={_next} on:previous={_previous} {locale} />
+        <GenerateNewAddress on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.SwitchApps}
+{:else if $ledgerRoute === LedgerRoute.SwitchApps}
     <Transition>
-        <SwitchApps on:next={_next} on:previous={_previous} {locale} />
+        <SwitchApps on:next={next} on:previous={previous} {locale} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoutes.AccountIndex}
+{:else if $ledgerRoute === LedgerRoute.AccountIndex}
     <Transition>
-        <AccountIndex on:next={_next} on:previous={_previous} {locale} />
+        <AccountIndex on:next={next} on:previous={previous} {locale} />
     </Transition>
 {/if}

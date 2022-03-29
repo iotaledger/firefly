@@ -2,19 +2,18 @@
     import { Platform } from 'shared/lib/platform'
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Locale } from '@core/i18n'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
+    import { Locale } from 'shared/lib/typings/i18n'
+    import { SetupType } from 'shared/lib/typings/setup'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick(setupType) {
-        dispatch('next', { setupType })
+    function handleContinueClick(setupType: SetupType): void {
+        $appRouter.next({ setupType })
     }
-    function handleBackClick() {
-        dispatch('previous')
+
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 </script>
 

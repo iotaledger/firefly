@@ -1,21 +1,20 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
+    import { appRouter } from '@core/router'
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { Locale, SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
+    import { locales, setLanguage, _ } from 'shared/lib/i18n'
+    import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
+    $: languageList = Object.values(locales).map((locale) => ({ value: locale, label: locale }))
 
-    $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
-
-    function handleContinueClick() {
-        dispatch('next')
+    function handleContinueClick(): void {
+        $appRouter.next()
     }
 
-    const handleLanguage = (item) => {
+    function handleLanguage(item: { value: string }): void {
         setLanguage(item)
         locale = $_
     }

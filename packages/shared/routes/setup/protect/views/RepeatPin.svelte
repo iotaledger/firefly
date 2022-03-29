@@ -7,27 +7,27 @@
 
     export let locale: Locale
 
-    export let pinCandidate
+    export let pinCandidate = ''
     export let busy = false
 
-    let pinInput
+    let pinInput = ''
     let error = ''
 
     const dispatch = createEventDispatcher()
 
     $: pinInput, (error = '')
 
-    function onSubmit() {
+    function onSubmit(): void {
         error = ''
         if (validatePinFormat(pinInput)) {
             if (pinInput !== pinCandidate) {
                 error = locale('error.pincode.match')
             } else {
-                dispatch('next')
+                dispatch('next', { pin: pinCandidate })
             }
         }
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>
