@@ -7,8 +7,8 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(type) {
-        dispatch('next', { type })
+    function handleContinueClick(protectionType: string) {
+        dispatch('next', { protectionType })
     }
     function handleBackClick() {
         dispatch('previous')

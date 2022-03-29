@@ -1,20 +1,12 @@
-import { getOrInitWindow } from '../main'
+import { getOrInitWindow, updateVersionDetails } from '../main'
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
-const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
-const versionDetails = {
-    upToDate: true,
-    currentVersion: packageJson.version,
-    newVersion: '',
-    newVersionReleaseDate: new Date(),
-    changelog: '',
-}
 let downloadCancellation
 let ipcHandlersRegistered = false
 
-export function initAutoUpdate(mainWindow) {
+export function initAutoUpdate() {
     if (!ipcHandlersRegistered) {
         // Registering more than one handler for an event causes an error
         // This will happen if the main window is closed and reopened on macOS since the app does not quit
@@ -22,7 +14,6 @@ export function initAutoUpdate(mainWindow) {
         ipcMain.handle('update-cancel', () => updateCancel())
         ipcMain.handle('update-install', () => updateInstall())
         ipcMain.handle('update-check', () => updateCheck())
-        ipcMain.handle('update-get-version-details', () => getVersionDetails())
         ipcHandlersRegistered = true
     }
 
@@ -33,14 +24,17 @@ export function initAutoUpdate(mainWindow) {
     autoUpdater.autoDownload = false
 
     autoUpdater.on('update-available', (info) => {
-        versionDetails.upToDate = false
-        versionDetails.newVersion = info.version
-        versionDetails.newVersionReleaseDate = new Date(info.releaseDate)
         // release notes from GH are HTML so strip tags out
         let releaseNotes = info.releaseNotes || ''
         releaseNotes = releaseNotes.replace(/<[^>]*>?/gm, '')
-        versionDetails.changelog = releaseNotes
-        getOrInitWindow('main').webContents.send('version-details', versionDetails)
+        const versionDetails = {
+            upToDate: false,
+            newVersion: info.version,
+            newVersionReleaseDate: new Date(info.releaseDate),
+            changelog: releaseNotes,
+        }
+
+        updateVersionDetails(versionDetails)
     })
     autoUpdater.on('download-progress', (progressObj) => {
         getOrInitWindow('main').webContents.send('version-progress', progressObj)
@@ -53,8 +47,6 @@ export function initAutoUpdate(mainWindow) {
     autoUpdater.on('error', (err) => {
         getOrInitWindow('main').webContents.send('version-error', err)
     })
-
-    mainWindow.webContents.send('version-details', versionDetails)
 
     updateCheck()
 }
@@ -77,8 +69,4 @@ export function updateInstall() {
 
 export function updateCheck() {
     autoUpdater.checkForUpdates()
-}
-
-export function getVersionDetails() {
-    return versionDetails
 }

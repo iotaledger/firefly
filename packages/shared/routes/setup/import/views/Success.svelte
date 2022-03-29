@@ -2,19 +2,20 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
-    import { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { ImportType } from 'shared/lib/typings/profile'
+    import { ImportRouter } from '@core/router'
 
     export let locale: Locale
 
     const dispatch = createEventDispatcher()
-    const importType = getContext<Writable<ImportType>>('importType')
+    const { importType } = getContext<ImportRouter>('importRouter')
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         dispatch('next')
     }
-    function handleBackClick() {
+
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

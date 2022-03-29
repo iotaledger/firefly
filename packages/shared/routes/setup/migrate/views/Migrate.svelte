@@ -21,13 +21,13 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

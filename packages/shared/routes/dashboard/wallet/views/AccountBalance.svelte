@@ -5,8 +5,8 @@
     import { isBright } from 'shared/lib/helpers'
     import { localize } from 'shared/lib/i18n'
     import { activeProfile, getColor } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute, accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from 'shared/lib/wallet'
 
@@ -20,10 +20,10 @@
     let showPreciseBalance = false
 
     function handleSendClick() {
-        accountRoute.set(AccountRoutes.Send)
+        $accountRouter.goTo(AccountRoute.Send)
     }
     function handleReceiveClick() {
-        accountRoute.set(AccountRoutes.Receive)
+        $accountRouter.goTo(AccountRoute.Receive)
     }
 
     function togglePreciseBalance() {
@@ -53,7 +53,7 @@
             </Text>
         </div>
     </div>
-    {#if $accountRoute === AccountRoutes.Init || $mobile}
+    {#if $accountRoute === AccountRoute.Init || $mobile}
         <!-- Action Send / Receive -->
         <div class="flex flex-row justify-between space-x-4 mt-7">
             <button

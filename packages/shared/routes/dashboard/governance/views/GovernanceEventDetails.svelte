@@ -10,8 +10,8 @@
         VotingEventQuestion,
     } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { governanceRoute } from 'shared/lib/router'
-    import { GovernanceRoutes } from 'shared/lib/typings/routes'
+    import { governanceRouter } from '@core/router'
+    import { GovernanceRoute } from '@core/router/enums'
     import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
@@ -57,7 +57,7 @@
         milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
         milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
 
-    const handleBackClick = (): void => governanceRoute.set(GovernanceRoutes.Init)
+    const handleBackClick = (): void => $governanceRouter.goTo(GovernanceRoute.Init)
 
     const handleClick = (nextVote: VotingEventAnswer): void => {
         const openGovernanceCastVotePopup = () =>

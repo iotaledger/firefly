@@ -2,7 +2,7 @@
     import { HR } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { SecuritySettings } from 'shared/lib/typings/routes'
+    import { SecuritySettings } from '@core/router'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'

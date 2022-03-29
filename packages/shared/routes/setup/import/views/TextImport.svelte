@@ -2,24 +2,22 @@
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
-    import { Writable } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { ImportType } from 'shared/lib/typings/profile'
+    import { ImportRouter } from '@core/router'
 
     export let locale: Locale
 
-    const importType = getContext<Writable<ImportType>>('importType')
+    const dispatch = createEventDispatcher()
+    const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
-    export let isGettingMigrationData
     let input = ''
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick() {
-        dispatch('next', { input })
+    function handleContinueClick(): void {
+        dispatch('next', { migrationSeed: input })
     }
-    function handleBackClick() {
-        if (!isGettingMigrationData) {
+
+    function handleBackClick(): void {
+        if (!$isGettingMigrationData) {
             dispatch('previous')
         }
     }
@@ -32,17 +30,17 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
-        <ImportTextfield disabled={isGettingMigrationData} type={$importType} bind:value={input} {locale} />
+        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} {locale} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            disabled={input.length === 0 || isGettingMigrationData}
+            disabled={input.length === 0 || $isGettingMigrationData}
             onClick={() => handleContinueClick()}
         >
-            {#if isGettingMigrationData}
+            {#if $isGettingMigrationData}
                 <Spinner
-                    busy={isGettingMigrationData}
+                    busy={$isGettingMigrationData}
                     message={locale('views.migrate.restoringWallet')}
                     classes="justify-center"
                 />

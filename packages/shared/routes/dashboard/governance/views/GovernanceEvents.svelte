@@ -1,13 +1,12 @@
 <script lang="typescript">
     import { Text, Button, Illustration } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { GovernanceRoutes, SettingsRoutes } from 'shared/lib/typings/routes'
-    import { governanceRoute, settingsRoute } from 'shared/lib/router'
+    import { openSettings, governanceRouter, settingsRouter } from '@core/router/'
+    import { GovernanceRoute, SettingsRoute } from '@core/router/enums'
     import type { ParticipationEvent } from 'shared/lib/participation/types'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
     import { getOfficialNetworkConfig, updateClientOptions } from 'shared/lib/network'
-    import { openSettings } from 'shared/lib/router'
 
     export let event: ParticipationEvent
 
@@ -19,7 +18,7 @@
         updateProfile('settings.networkConfig', networkConfig)
     }
 
-    const handleViewProposalClick = () => governanceRoute.set(GovernanceRoutes.EventDetails)
+    const handleViewProposalClick = () => $governanceRouter.goTo(GovernanceRoute.EventDetails)
 
     const handleConnectDefaultNodeClick = () => {
         networkConfig.automaticNodeSelection = true
@@ -27,7 +26,7 @@
 
     const handleViewNodeSettingsClick = () => {
         openSettings()
-        settingsRoute.set(SettingsRoutes.AdvancedSettings)
+        $settingsRouter.goTo(SettingsRoute.AdvancedSettings)
     }
 </script>
 

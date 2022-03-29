@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
@@ -24,13 +25,11 @@
         segments = SWITCH_SEGMENTS
     }
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick() {
-        dispatch('next')
+    function handleContinueClick(): void {
+        $appRouter.next()
     }
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 
     onMount(() => {

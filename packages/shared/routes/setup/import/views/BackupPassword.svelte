@@ -2,28 +2,27 @@
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { ImportType } from 'shared/lib/typings/profile'
     import { createEventDispatcher, getContext } from 'svelte'
-    import { Writable } from 'svelte/store'
+    import { ImportRouter } from '@core/router'
 
     export let locale: Locale
 
     export let error = ''
     export let busy = false
 
-    export let isGettingMigrationData
-    const importType = getContext<Writable<ImportType>>('importType')
+    const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
     let password = ''
 
     const dispatch = createEventDispatcher()
 
-    function handleContinue() {
+    function handleContinue(): void {
         if (password) {
             dispatch('next', { password })
         }
     }
-    function handleBackClick() {
+
+    function handleBackClick(): void {
         if (!busy && !isGettingMigrationData) {
             dispatch('previous')
         }
@@ -56,12 +55,12 @@
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            disabled={password.length === 0 || busy || isGettingMigrationData}
+            disabled={password.length === 0 || busy || $isGettingMigrationData}
             onClick={() => handleContinue()}
         >
-            {#if isGettingMigrationData}
+            {#if $isGettingMigrationData}
                 <Spinner
-                    busy={isGettingMigrationData}
+                    busy={$isGettingMigrationData}
                     message={locale('views.migrate.restoringWallet')}
                     classes="justify-center"
                 />

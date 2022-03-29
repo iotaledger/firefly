@@ -8,9 +8,15 @@ import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouter } from './router'
+import { resetRouters } from '@core/router'
+import { Stage } from './typings/stage'
 import { api, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
+
+/**
+ * Beta mode
+ */
+export const stage = writable<Stage>(Stage.ALPHA)
 
 /**
  * Mobile mode
@@ -20,7 +26,7 @@ export const mobile = writable<boolean>(false)
 /**
  * Wallet access pin
  */
-export const walletPin = writable<number>(null)
+export const walletPin = writable<string>(null)
 
 /**
  * Stronghold password
@@ -104,7 +110,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
-            resetRouter()
+            resetRouters()
 
             resolve()
         }

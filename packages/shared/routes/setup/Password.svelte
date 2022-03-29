@@ -4,9 +4,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
@@ -17,12 +17,10 @@
     let errorConfirm = ''
     let busy = false
 
-    const dispatch = createEventDispatcher()
-
     $: passwordStrength = zxcvbn(password)
     $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
 
-    async function handleContinueClick() {
+    async function handleContinueClick(): Promise<void> {
         error = ''
         errorConfirm = ''
 
@@ -49,7 +47,7 @@
                     await asyncSetStrongholdPassword(password)
                 }
 
-                dispatch('next', { password })
+                $appRouter.next({ password })
             } catch (err) {
                 showAppNotification({
                     type: 'error',
@@ -60,8 +58,8 @@
             }
         }
     }
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 </script>
 

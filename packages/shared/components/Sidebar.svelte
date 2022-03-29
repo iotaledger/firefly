@@ -6,9 +6,16 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
-    import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import {
+        dashboardRoute,
+        dashboardRouter,
+        DashboardRoute,
+        resetWalletRoute,
+        settingsRoute,
+        settingsRouter,
+        SettingsRoute,
+        SidebarTab as SidebarTabType,
+    } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -32,20 +39,20 @@
         {
             icon: 'wallet',
             label: locale('tabs.wallet'),
-            route: Tabs.Wallet,
+            route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
             label: locale('tabs.staking'),
-            route: Tabs.Staking,
+            route: DashboardRoute.Staking,
             onClick: openStaking,
         },
     ]
 
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
-            if (Tabs.Staking === tab.route) {
+            if (DashboardRoute.Staking === tab.route) {
                 tab.notificationType = !$activeProfile?.hasVisitedStaking
                     ? 'warning'
                     : showStakingNotification
@@ -58,7 +65,7 @@
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
@@ -74,15 +81,15 @@
     }
 
     function handleBackClick() {
-        if ($settingsRoute === SettingsRoutes.Init) {
+        if ($settingsRoute === SettingsRoute.Init) {
             drawer?.close()
         } else {
-            settingsRoute.set(SettingsRoutes.Init)
+            $settingsRouter.previous()
         }
     }
 
     function openStaking() {
-        dashboardRoute.set(Tabs.Staking)
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 
     function openGovernance() {
@@ -108,13 +115,13 @@
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
                     {locale(
-                        $settingsRoute === SettingsRoutes.Init
+                        $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
                     )}
                 </Text>
             </header>
-            {#if $settingsRoute === SettingsRoutes.Init}
+            {#if $settingsRoute === SettingsRoute.Init}
                 <!-- TODO: add real profile data -->
                 <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
                     <div
@@ -164,6 +171,61 @@
     </aside>
 {/if}
 
+<aside
+    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800"
+>
+    <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
+    <nav class="flex flex-grow flex-col items-center justify-between">
+        <div class="flex flex-col">
+            <button
+                class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                on:click={openWallet}
+            >
+                <Icon width="24" height="24" icon="wallet" />
+            </button>
+            <button
+                class="mb-8 {$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                on:click={openStaking}
+            >
+                <Icon width="24" height="24" icon="tokens" />
+                {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
+                    <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full {showStakingNotification
+                                ? 'bg-yellow-400'
+                                : 'bg-red-300'} opacity-75"
+                        />
+                        <span
+                            class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification
+                                ? 'bg-yellow-600'
+                                : 'bg-red-500'}"
+                        />
+                    </span>
+                {/if}
+            </button>
+            <button
+                class={$dashboardRoute === Tabs.Governance ? 'text-blue-500' : 'text-gray-500'}
+                on:click={openGovernance}
+            >
+                <Icon width="24" height="24" icon="policy" />
+            </button>
+        </div>
+        <span class="flex flex-col items-center">
+            <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+            </button>
+            <button
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                on:click={() => (showProfile = true)}
+            >
+                <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+            </button>
+        </span>
+    </nav>
+    <NetworkIndicator bind:isActive={showNetwork} {locale} />
+    <ProfileActionsModal bind:isActive={showProfile} {locale} />
+</aside>
+
 <style type="text/scss">
     :global(body.platform-win32) aside {
         @apply -top-12;
@@ -181,46 +243,3 @@
         z-index: 10;
     }
 </style>
-
-<aside
-    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
-    <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
-    <nav class="flex flex-grow flex-col items-center justify-between">
-        <div class="flex flex-col">
-            <button
-                class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
-                on:click={openWallet}>
-                <Icon width="24" height="24" icon="wallet" />
-            </button>
-            <button
-                class="mb-8 {$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
-                on:click={openStaking}>
-                <Icon width="24" height="24" icon="tokens" />
-                {#if !$activeProfile?.hasVisitedStaking || showStakingNotification}
-                    <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full {showStakingNotification ? 'bg-yellow-400' : 'bg-red-300'} opacity-75" />
-                        <span class="relative inline-flex rounded-full h-2 w-2 {showStakingNotification ? 'bg-yellow-600' : 'bg-red-500'}" />
-                    </span>
-                {/if}
-            </button>
-            <button
-                class="{$dashboardRoute === Tabs.Governance ? 'text-blue-500' : 'text-gray-500'}"
-                on:click={openGovernance}>
-                <Icon width="24" height="24" icon="policy" />
-            </button>
-        </div>
-        <span class="flex flex-col items-center">
-            <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
-            </button>
-            <button
-                class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
-                on:click={() => (showProfile = true)}>
-                <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
-            </button>
-        </span>
-    </nav>
-    <NetworkIndicator bind:isActive={showNetwork} {locale} />
-    <ProfileActionsModal bind:isActive={showProfile} {locale} />
-</aside>

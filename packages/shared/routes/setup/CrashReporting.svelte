@@ -1,29 +1,25 @@
 <script lang="typescript">
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
     const busy = false
     let sendCrashReports = true
 
-    const dispatch = createEventDispatcher()
-
-    const handleBackClick = () => {
-        dispatch('previous')
+    const handleBackClick = (): void => {
+        $appRouter.previous()
     }
 
-    const handleContinueClick = () => {
-        appSettings.set({ ...get(appSettings), sendCrashReports })
+    const handleContinueClick = (): void => {
+        appSettings.set({ ...$appSettings, sendCrashReports })
 
         if (!$isAwareOfCrashReporting) {
             isAwareOfCrashReporting.set(true)
         }
-
-        dispatch('next')
+        $appRouter.next()
     }
 </script>
 

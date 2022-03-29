@@ -9,8 +9,8 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(impType: ImportType) {
-        dispatch('next', { impType })
+    function handleContinueClick(importType: ImportType) {
+        dispatch('next', { importType })
     }
     function handleBackClick() {
         dispatch('previous')

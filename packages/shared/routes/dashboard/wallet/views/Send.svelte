@@ -23,15 +23,10 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import {
-        TransferProgressEventData,
-        TransferProgressEventType,
-        TransferState,
-    } from 'shared/lib/typings/events'
+    import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import {
@@ -376,7 +371,8 @@
 
     const handleBackClick = (): void => {
         clearSendParams()
-        accountRoute.set(AccountRoutes.Init)
+
+        $accountRouter.previous()
     }
 
     const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
