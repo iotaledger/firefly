@@ -105,7 +105,7 @@ impl TryFrom<&str> for EventType {
 }
 
 fn init_sentry() -> Option<sentry::ClientInitGuard> {
-    let environment = option_env!("SENTRY_ENVIRONMENT").unwrap_or("prod");
+    let environment = option_env!("SENTRY_ENVIRONMENT").unwrap_or("alpha");
     option_env!("SENTRY_DSN").map(|sentry_dsn| {
         sentry::init((
             sentry_dsn,

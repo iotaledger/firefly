@@ -6,7 +6,7 @@ const Keychain = {
     /**
      * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: app.isPackaged ? 'Firefly' : 'Firefly — Dev',
+    SERVICE_NAME: app.isPackaged ? APP_NAME : 'Firefly — Dev',
     /**
      * Gets all credentials from keychain
      *

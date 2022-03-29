@@ -3,7 +3,7 @@
     import { onMount } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
-    import { mobile } from 'shared/lib/app'
+    import { mobile, stage } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
@@ -31,8 +31,10 @@
         Settings,
         Welcome,
     } from 'shared/routes'
+    import { Stage } from 'shared/lib/typings/stage'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
+    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')

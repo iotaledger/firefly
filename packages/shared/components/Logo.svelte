@@ -1,30 +1,37 @@
 <script lang="typescript">
+    import { stage } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
+    import { get } from 'svelte/store'
 
     export let logo = undefined
     export let width = undefined
     export let height = undefined
     export let classes = ''
+    export let overrideStage: undefined | 'alpha' | 'beta' | 'prod' = undefined
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
+    $: selected = logos[logo]?.[overrideStage ?? get(stage)]
 
     const logos = {
         'logo-firefly-full': {
-            lightmode: 'firefly_logo_full.svg',
-            darkmode: 'firefly_logo_full_darkmode.svg',
+            alpha: 'firefly_logo_full.svg',
+            beta: 'firefly_logo_full.svg',
+            prod: 'firefly_logo_full.svg',
         },
         'logo-firefly': {
-            lightmode: 'firefly_logo.svg',
-            darkmode: 'firefly_logo.svg',
+            alpha: 'alpha_firefly_logo.svg',
+            beta: 'beta_firefly_logo.svg',
+            prod: 'prod_firefly_logo.svg',
         },
         'logo-stronghold': {
-            lightmode: 'stronghold.svg',
-            darkmode: 'stronghold_darkmode.svg',
+            alpha: 'stronghold.svg',
+            beta: 'stronghold.svg',
+            prod: 'stronghold.svg',
         },
         'logo-chrysalis-gem': {
-            lightmode: 'chrysalis_gem.svg',
-            darkmode: 'chrysalis_gem.svg',
+            alpha: 'chrysalis_gem.svg',
+            beta: 'chrysalis_gem.svg',
+            prod: 'chrysalis_gem.svg',
         },
     }
 </script>
@@ -35,7 +42,7 @@
         class={classes}
         width={width || '100%'}
         height={height || '100%'}
-        src={`assets/logos/${selected}`}
+        src={`assets/logos/${darkModeEnabled ? 'darkmode' : 'lightmode'}/${selected}`}
         alt=""
     />
 {/if}
