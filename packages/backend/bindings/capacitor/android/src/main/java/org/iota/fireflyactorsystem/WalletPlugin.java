@@ -28,7 +28,7 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void initialize(final PluginCall call) {
         if (isInitialized) {
-            call.reject("Wallet is yet initialized!");
+            return;
         }
         if (!call.getData().has("actorId") || !call.getData().has("storagePath")) {
             call.reject("actorId & storagePath are required");
