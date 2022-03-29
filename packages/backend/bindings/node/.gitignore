@@ -1,7 +1,0 @@
-native/target
-native/artifacts.json
-index.node
-**/*~
-**/node_modules
-**/.DS_Store
-dist/
