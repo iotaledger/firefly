@@ -7,8 +7,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { localize } from '@core/i18n'
-    import { Locale } from '@core/i18n'
+    import { Locale, localize } from '@core/i18n'
     import { popupState } from 'shared/lib/popup'
 
     export let locale: Locale
