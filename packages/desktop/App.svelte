@@ -38,6 +38,7 @@
     } from 'shared/routes'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
+    import { get } from 'svelte/store'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
