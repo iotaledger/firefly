@@ -27,40 +27,37 @@ function loadJson(url: string): Promise<LocaleDictionary> {
     return fetch(url).then((response) => response.json())
 }
 
+async function loadLocaleMessages(locale: string): Promise<void> {
+    const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', locale)
+    const localeDictionary = await loadJson(messagesFileUrl)
+
+    addMessages(locale, localeDictionary)
+}
+
 const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 
 /**
  * Initializes and loads the appropriate i18n dictionary given
  * specific locale options.
  */
-export function setupI18n(options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<unknown> {
-    // If we're given an explicit locale, we use
-    // it. Otherwise, we attempt to auto-detect
-    // the user's locale.
-    const _locale = verifySupportedLocale(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
+export async function setupI18n(options: LocaleOptions = { fallbackLocale: 'en', initialLocale: null }): Promise<void> {
+    // Attempt to auto-detect user's locale if not explicitly given
+    const locale = verifySupportedLocale(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
-    init({ ...DEFAULT_LOCALE_OPTIONS, initialLocale: _locale } as LocaleOptions)
+    init({ ...DEFAULT_LOCALE_OPTIONS, initialLocale: locale } as LocaleOptions)
 
-    // Don't re-download translation files
-    if (!hasLoadedLocale(_locale)) {
-        const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', _locale)
-        // Download translation file for given locale/language
-        return loadJson(messagesFileUrl).then((messages) => {
-            addMessages(_locale, messages)
-            appSettings.set({
-                ...get(appSettings),
-                language: _locale,
-            })
+    if (!hasLoadedLocale(locale)) {
+        await loadLocaleMessages(locale)
 
-            // If we have not loaded "en" make sure we have it as a backup language
-            // in case the chosen language does not have all the translations
-            if (_locale !== 'en' && !hasLoadedLocale('en')) {
-                const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
-                void loadJson(messagesFileUrl).then((messages) => {
-                    addMessages('en', messages)
-                })
-            }
+        appSettings.set({
+            ...get(appSettings),
+            language: locale,
         })
+
+        // Load English locale dictionary as fallback for unsupported translations
+        if (locale !== 'en' && !hasLoadedLocale('en')) {
+            await loadLocaleMessages('en')
+        }
     }
 }
 

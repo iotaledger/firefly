@@ -47,6 +47,7 @@
     $: $isLocaleLoaded, nativeSplash.hide()
 
     void setupI18n()
+
     onMount(async () => {
         initRouters()
         await fetchMarketData()
