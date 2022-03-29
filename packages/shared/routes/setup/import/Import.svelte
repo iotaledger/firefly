@@ -2,7 +2,7 @@
     import { setContext } from 'svelte'
     import { Transition } from 'shared/components'
     import { BackupPassword, FileImport, Import, Ledger, Success, TextImport } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { FireflyEvent, importRoute, ImportRouter, ImportRoute } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
 

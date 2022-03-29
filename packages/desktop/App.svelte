@@ -13,7 +13,6 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
-    import { Locale } from 'shared/lib/typings/i18n'
     import {
         Appearance,
         Backup,

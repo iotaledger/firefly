@@ -3,12 +3,12 @@
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
-    $: languageList = Object.values(locales).map((locale) => ({ value: locale, label: locale }))
+    $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     function handleContinueClick(): void {
         $appRouter.next()

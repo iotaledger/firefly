@@ -6,7 +6,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
     import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 

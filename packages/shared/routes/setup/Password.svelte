@@ -5,7 +5,7 @@
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
 
     export let locale: Locale
