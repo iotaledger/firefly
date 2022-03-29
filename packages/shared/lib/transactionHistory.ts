@@ -1,7 +1,6 @@
-import { formatDate } from '@core/i18n'
+import { formatDate, localize } from '@core/i18n'
 import { WalletAccount } from './typings/wallet'
 import { formatUnitBestMatch } from './units'
-import { localize } from '@core/i18n'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
