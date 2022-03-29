@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
     bundledWebRuntime: false,
     plugins: {
         PrivacyScreen: {
-            enable: true,
+            enable: false,
         },
         SplashScreen: {
             launchAutoHide: false,
