@@ -1,13 +1,12 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable, Writable } from 'svelte/store'
     import { BalanceSummary, Button } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletRouter, WalletRoute } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
     import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
-    import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -20,16 +19,16 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     function handleSendClick() {
-        walletRoute.set(WalletRoutes.Send)
+        $walletRouter.goTo(WalletRoute.Send)
     }
     function handleReceiveClick() {
-        walletRoute.set(WalletRoutes.Receive)
+        $walletRouter.goTo(WalletRoute.Receive)
     }
 </script>
 
 <wallet-balance
     class="relative z-0 bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-xl px-8"
-    class:compressed={$walletRoute !== WalletRoutes.Init}
+    class:compressed={$walletRoute !== WalletRoute.Init}
     class:mobile={$mobile}
 >
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-5">
@@ -45,7 +44,7 @@
         src={`assets/patterns/${darkModeEnabled ? 'wallet-balance-darkmode.svg' : 'wallet-balance.svg'}`}
         alt=""
     />
-    {#if $walletRoute === WalletRoutes.Init || $mobile}
+    {#if $walletRoute === WalletRoute.Init || $mobile}
         {#if $accounts.length > 0 || $mobile}
             <!-- Action Send / Receive -->
             <div class="flex flex-row justify-between space-x-4 mt-7 mb-3">

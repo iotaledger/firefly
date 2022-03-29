@@ -1,13 +1,12 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Button, Password, Text } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { setRoute } from 'shared/lib/router'
-    import { AppRoute } from 'shared/lib/typings/routes'
+    import { appRouter } from '@core/router'
     import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
@@ -69,7 +68,7 @@
              * routed to the welcome screen.
              */
             if (get(profiles).length === 0) {
-                setRoute(AppRoute.Welcome)
+                $appRouter.reset()
             }
 
             /**

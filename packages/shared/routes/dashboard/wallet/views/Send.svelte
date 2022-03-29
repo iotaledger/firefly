@@ -22,7 +22,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRouter, walletRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -34,7 +34,6 @@
     } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState, wallet } from 'shared/lib/wallet'
@@ -420,9 +419,9 @@
     const handleBackClick = (): void => {
         clearSendParams()
 
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.previous()
         if (!$account) {
-            walletRoute.set(WalletRoutes.Init)
+            $walletRouter.previous()
         }
     }
 

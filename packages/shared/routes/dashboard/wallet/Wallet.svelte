@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount, setContext } from 'svelte'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { DashboardPane, Drawer } from 'shared/components'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
@@ -13,12 +15,11 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, walletRouter, WalletRoute } from '@core/router'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Locale } from 'shared/lib/typings/i18n'
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { MigratedTransaction } from 'shared/lib/typings/profile'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -50,8 +51,6 @@
         wallet,
         addMessagesPair,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
@@ -65,7 +64,7 @@
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
-            walletRoute.set(WalletRoutes.Send)
+            $walletRouter.goTo(WalletRoute.Send)
             isDeepLinkRequestActive.set(false)
         }
     }
@@ -319,7 +318,7 @@
                 const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
-                walletRoute.set(WalletRoutes.Init)
+                $walletRouter.reset()
 
                 return onComplete()
             } catch (err) {
@@ -477,7 +476,7 @@
         }
     }
 
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
+    $: if (mobile && drawer && $walletRoute === WalletRoute.CreateAccount) {
         drawer.open()
     }
 
@@ -510,7 +509,7 @@
     })
 </script>
 
-{#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
+{#if $walletRoute === WalletRoute.Account && $selectedAccountId}
     <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
 {:else if $mobile}
     <div class="wallet-wrapper w-full h-full flex flex-col flex-1 bg-gray-50 dark:bg-gray-900">
@@ -519,13 +518,8 @@
             <div class="flex flex-auto flex-col w-full">
                 <WalletBalance {locale} />
                 <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
-                {#if $walletRoute === WalletRoutes.CreateAccount}
-                    <Drawer
-                        dimLength={180}
-                        opened={true}
-                        bind:this={drawer}
-                        on:close={() => walletRoute.set(WalletRoutes.Init)}
-                    >
+                {#if $walletRoute === WalletRoute.CreateAccount}
+                    <Drawer dimLength={180} opened={true} bind:this={drawer} on:close={() => $walletRouter.reset()}>
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     </Drawer>
                 {/if}
@@ -545,7 +539,7 @@
             <DashboardPane classes="h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col h-full">
-                    {#if $walletRoute === WalletRoutes.CreateAccount}
+                    {#if $walletRoute === WalletRoute.CreateAccount}
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />

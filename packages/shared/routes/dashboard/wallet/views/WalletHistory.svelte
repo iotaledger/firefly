@@ -1,13 +1,14 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { get, Readable, Writable } from 'svelte/store'
     import { ActivityRow, Drawer, Icon, Text, TransactionTabs } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute, walletSetupType } from 'shared/lib/router'
+    import { accountRouter, AccountRoute, walletRouter, WalletRoute } from '@core/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, SetupType, WalletRoutes } from 'shared/lib/typings/routes'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
@@ -18,10 +19,9 @@
         isSyncing,
         selectedAccountId,
         selectedMessage,
+        walletSetupType,
     } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
-    import { get } from 'svelte/store'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 
@@ -35,13 +35,14 @@
         if (sourceAccount) {
             selectedAccountId.set(sourceAccount.id)
             selectedMessage.set(transaction)
-            walletRoute.set(WalletRoutes.Account)
-            accountRoute.set(AccountRoutes.Init)
+            $walletRouter.goTo(WalletRoute.Account)
         } else {
             console.error('Could not find source account')
         }
-        accountRoute.set(AccountRoutes.Init)
-        if ($mobile) drawer.open()
+        $accountRouter.goTo(AccountRoute.Init)
+        if ($mobile) {
+            drawer.open()
+        }
     }
 
     function handleSyncAccountOptions(): SyncAccountOptions {

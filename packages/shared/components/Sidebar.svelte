@@ -6,8 +6,15 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import {
+        dashboardRoute,
+        dashboardRouter,
+        DashboardRoute,
+        resetWalletRoute,
+        settingsRoute,
+        settingsRouter,
+        SettingsRoute,
+    } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -28,7 +35,7 @@
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
@@ -44,15 +51,15 @@
     }
 
     function handleBackClick() {
-        if ($settingsRoute === SettingsRoutes.Init) {
+        if ($settingsRoute === SettingsRoute.Init) {
             drawer?.close()
         } else {
-            settingsRoute.set(SettingsRoutes.Init)
+            $settingsRouter.previous()
         }
     }
 
     function openStaking() {
-        dashboardRoute.set(Tabs.Staking)
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 
@@ -72,13 +79,13 @@
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
                     {locale(
-                        $settingsRoute === SettingsRoutes.Init
+                        $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
                     )}
                 </Text>
             </header>
-            {#if $settingsRoute === SettingsRoutes.Init}
+            {#if $settingsRoute === SettingsRoute.Init}
                 <!-- TODO: add real profile data -->
                 <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
                     <div
@@ -102,13 +109,13 @@
         <nav class="flex flex-grow flex-col items-center justify-between">
             <div class="flex flex-col">
                 <button
-                    class="mb-8 {$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'}"
+                    class="mb-8 {$dashboardRoute === DashboardRoute.Wallet ? 'text-blue-500' : 'text-gray-500'}"
                     on:click={openWallet}
                 >
                     <Icon width="24" height="24" icon="wallet" />
                 </button>
                 <button
-                    class="{$dashboardRoute === Tabs.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
+                    class="{$dashboardRoute === DashboardRoute.Staking ? 'text-blue-500' : 'text-gray-500'} relative"
                     on:click={openStaking}
                 >
                     <Icon width="24" height="24" icon="tokens" />

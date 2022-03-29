@@ -1,12 +1,12 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
     import { RiskLevel } from 'shared/lib/typings/migration'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale

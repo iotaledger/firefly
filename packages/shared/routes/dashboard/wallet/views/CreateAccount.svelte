@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Button, Input, Spinner, Text, AccountTile, ColorPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { walletRoute } from 'shared/lib/router'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { walletRouter } from '@core/router'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet, AccountColors } from 'shared/lib/wallet'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { isLedgerProfile } from 'shared/lib/profile'
@@ -84,7 +83,7 @@
     }
     const handleCancelClick = () => {
         error = ''
-        walletRoute.set(WalletRoutes.Init)
+        $walletRouter.reset()
     }
 </script>
 

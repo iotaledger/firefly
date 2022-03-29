@@ -1,16 +1,15 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable } from 'svelte/store'
     import { AccountTile, Button, Drawer, Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRouter, AccountRoute, walletRoute, walletRouter, WalletRoute } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
 
     export let locale: Locale
@@ -19,13 +18,13 @@
     export let onInternalTransfer = (..._: any[]): void => {}
     export let onGenerateAddress = (..._: any[]): void => {}
 
-    export let isGeneratingAddress
+    export let isGeneratingAddress: boolean
 
     let drawer: Drawer
 
     $: if (
-        ($mobile && drawer && $walletRoute === WalletRoutes.Receive) ||
-        (drawer && $walletRoute === WalletRoutes.Send)
+        ($mobile && drawer && $walletRoute === WalletRoute.Receive) ||
+        (drawer && $walletRoute === WalletRoute.Send)
     ) {
         drawer.open()
     }
@@ -33,18 +32,18 @@
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    function handleAccountClick(accountId) {
+    function handleAccountClick(accountId: string) {
         selectedAccountId.set(accountId)
-        walletRoute.set(WalletRoutes.Account)
-        accountRoute.set(AccountRoutes.Init)
+        $walletRouter.goTo(WalletRoute.Account)
+        $accountRouter.goTo(AccountRoute.Init)
     }
     function handleCreateClick() {
-        walletRoute.set(WalletRoutes.CreateAccount)
+        $walletRouter.goTo(WalletRoute.CreateAccount)
     }
 </script>
 
 {#if $mobile}
-    {#if $walletRoute === WalletRoutes.Init || $walletRoute === WalletRoutes.Send || $walletRoute === WalletRoutes.Receive || $walletRoute === WalletRoutes.CreateAccount}
+    {#if $walletRoute === WalletRoute.Init || $walletRoute === WalletRoute.Send || $walletRoute === WalletRoute.Receive || $walletRoute === WalletRoute.CreateAccount}
         <div class="p-8 pt-4 flex flex-col h-full justify-between">
             <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
                 <div class="flex flex-row mb-4 justify-between items-center">
@@ -76,15 +75,15 @@
                 {/if}
             </div>
         </div>
-        <Drawer dimLength={180} opened={false} bind:this={drawer} on:close={() => walletRoute.set(WalletRoutes.Init)}>
-            {#if $walletRoute === WalletRoutes.Send}
+        <Drawer dimLength={180} opened={false} bind:this={drawer} on:close={() => walletRoute.set(WalletRoute.Init)}>
+            {#if $walletRoute === WalletRoute.Send}
                 <Send {onSend} {onInternalTransfer} {locale} />
-            {:else if $walletRoute === WalletRoutes.Receive}
+            {:else if $walletRoute === WalletRoute.Receive}
                 <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
             {/if}
         </Drawer>
     {/if}
-{:else if $walletRoute === WalletRoutes.Init}
+{:else if $walletRoute === WalletRoute.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
@@ -125,9 +124,9 @@
             {/if}
         </div>
     </div>
-{:else if $walletRoute === WalletRoutes.Send}
+{:else if $walletRoute === WalletRoute.Send}
     <Send {onSend} {onInternalTransfer} {locale} />
-{:else if $walletRoute === WalletRoutes.Receive}
+{:else if $walletRoute === WalletRoute.Receive}
     <Receive {isGeneratingAddress} {onGenerateAddress} {locale} />
 {/if}
 

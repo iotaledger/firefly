@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Button, Input, Text, AccountTile, ColorPicker } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRouter, AccountRoute } from '@core/router'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -28,7 +27,7 @@
         setProfileAccount($activeProfile, { id: $selectedAccountId, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
-            accountRoute.set(AccountRoutes.Init)
+            $accountRouter.goTo(AccountRoute.Init)
             return
         }
         if (trimmedAccountAlias) {
@@ -45,7 +44,7 @@
             }
             isBusy = true
             api.setAlias($selectedAccountId, trimmedAccountAlias, {
-                onSuccess(res) {
+                onSuccess() {
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
                             if (account.id === $selectedAccountId) {
@@ -62,7 +61,7 @@
                     )
 
                     isBusy = false
-                    accountRoute.set(AccountRoutes.Init)
+                    $accountRouter.goTo(AccountRoute.Init)
                 },
                 onError(err) {
                     isBusy = false
@@ -73,7 +72,7 @@
     }
     const handleCancelClick = () => {
         error = ''
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.previous()
     }
 
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias

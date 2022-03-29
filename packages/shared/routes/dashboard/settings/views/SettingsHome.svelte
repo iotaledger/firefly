@@ -3,7 +3,6 @@
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -12,8 +11,9 @@
         GeneralSettingsNoProfile,
         HelpAndInfo,
         SecuritySettings,
-        SettingsRoutes,
-    } from 'shared/lib/typings/routes'
+        SettingsRoute,
+        settingsRouter,
+    } from '@core/router'
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
@@ -28,7 +28,7 @@
     }
 
     function onSettingClick(
-        route: SettingsRoutes,
+        route: SettingsRoute,
         childRoute:
             | SecuritySettings
             | AdvancedSettings
@@ -37,8 +37,7 @@
             | AdvancedSettingsNoProfile
             | HelpAndInfo
     ) {
-        settingsRoute.set(route)
-        settingsChildRoute.set(childRoute)
+        $settingsRouter.goToChildRoute(route, childRoute)
     }
 </script>
 
@@ -55,7 +54,7 @@
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
         />
         <SettingsMenu
             icon="security"
@@ -65,7 +64,7 @@
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={localize('views.settings.security.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
         />
         <SettingsMenu
             icon="tools"
@@ -75,7 +74,7 @@
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
         />
         <SettingsMenu
             icon="info"
@@ -85,7 +84,7 @@
             activeSettings={HelpAndInfo}
             title={localize('views.settings.helpAndInfo.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
         />
     </div>
 </div>

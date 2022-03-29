@@ -20,15 +20,20 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRoute,
+        accountRouter,
+        AccountRoute,
+        AdvancedSettings,
+        appRouter,
         dashboardRoute,
-        routerNext,
-        settingsChildRoute,
-        settingsRoute,
+        dashboardRouter,
+        DashboardRoute,
         walletRoute,
-    } from 'shared/lib/router'
+        walletRouter,
+        settingsRouter,
+        SettingsRoute,
+        WalletRoute,
+    } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import {
         api,
         isBackgroundSyncing,
@@ -111,11 +116,9 @@
                     contextData.accountId
                 ) {
                     selectedAccountId.set(contextData.accountId)
-                    if (get(dashboardRoute) !== Tabs.Wallet) {
-                        dashboardRoute.set(Tabs.Wallet)
-                    }
-                    walletRoute.set(WalletRoutes.Account)
-                    accountRoute.set(AccountRoutes.Init)
+                    $dashboardRouter.goTo(DashboardRoute.Wallet)
+                    $walletRouter.goTo(WalletRoute.Account)
+                    $accountRouter.goTo(AccountRoute.Init)
                 }
             }
         })
@@ -148,7 +151,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if ($walletRoute === WalletRoute.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -181,20 +184,14 @@
         }
     }
 
-    /**
-     * Handles deep link request
-     */
-    const handleDeepLinkRequest = (data) => {
-        const _redirect = (tab) => {
+    const handleDeepLinkRequest = (data: string): void => {
+        const _redirect = (tab: DashboardRoute): void => {
             isDeepLinkRequestActive.set(true)
-            if (get(dashboardRoute) !== tab) {
-                dashboardRoute.set(tab)
-            }
+            $dashboardRouter.goTo(tab)
         }
         if (!$appSettings.deepLinking) {
-            _redirect(Tabs.Settings)
-            settingsRoute.set(SettingsRoutes.AdvancedSettings)
-            settingsChildRoute.set(AdvancedSettings.DeepLinks)
+            _redirect(DashboardRoute.Settings)
+            $settingsRouter.goToChildRoute(SettingsRoute.AdvancedSettings, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
@@ -206,7 +203,7 @@
                     parsedDeepLink.operation === WalletOperation.Send &&
                     parsedDeepLink.parameters
                 ) {
-                    _redirect(Tabs.Wallet)
+                    _redirect(DashboardRoute.Wallet)
                     sendParams.set({
                         ...parsedDeepLink.parameters,
                         isInternal: false,
@@ -287,7 +284,7 @@
     <Sidebar {locale} />
     <!-- Dashboard Pane -->
     <div class="flex flex-col w-full h-full">
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
         <DeveloperProfileIndicator {locale} classes="absolute top-0" />
     </div>
 </div>

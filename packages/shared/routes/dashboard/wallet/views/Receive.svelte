@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { Button, Dropdown, Icon, QR, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { accountRouter, walletRouter } from '@core/router'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'
@@ -29,8 +28,8 @@
         onGenerateAddress(selectedAccount.id)
     }
     const handleCloseClick = (): void => {
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
+        $walletRouter.previous()
+        $accountRouter.previous()
     }
 </script>
 

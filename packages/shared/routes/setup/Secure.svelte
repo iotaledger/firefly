@@ -2,23 +2,21 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { downloadRecoveryKit } from 'shared/lib/utils'
-    import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick() {
-        dispatch('next')
+    function handleContinueClick(): void {
+        $appRouter.next()
     }
 
     function handleDownloadClick() {
         downloadRecoveryKit()
     }
 
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 </script>
 

@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
@@ -24,11 +26,9 @@
     } from 'shared/lib/migration'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
-    import { walletSetupType } from 'shared/lib/router'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale

@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, WalletPill } from 'shared/components'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { resetWalletRoute } from '@core/router'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
@@ -26,10 +25,7 @@
         selectedMessage.set(null)
     }
     function handleBackClick() {
-        selectedAccountId.set(null)
-        selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
+        resetWalletRoute()
     }
 
     const calculateWidth = () => {

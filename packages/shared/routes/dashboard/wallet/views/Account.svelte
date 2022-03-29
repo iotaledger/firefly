@@ -1,14 +1,13 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { Readable } from 'svelte/store'
     import { AccountActionsModal, DashboardPane } from 'shared/components'
     import { Locale } from 'shared/lib/typings/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute, AccountRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -23,7 +22,6 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
-    let navAccounts
     $: navAccounts = $account
         ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id }))
         : []
@@ -48,7 +46,7 @@
                         balance={$account.rawIotaBalance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick}
-                        classes={$accountRoute === AccountRoutes.Manage ? 'hidden' : ''}
+                        classes={$accountRoute === AccountRoute.Manage ? 'hidden' : ''}
                     />
                     <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions
@@ -61,7 +59,7 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory {locale} color={$account.color} transactions={$accountTransactions} {account} />
+                    <AccountHistory {locale} color={$account.color} transactions={$accountTransactions} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

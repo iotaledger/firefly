@@ -4,7 +4,7 @@
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { activeProfile } from 'shared/lib/profile'
-    import { openSettings } from 'shared/lib/router'
+    import { openSettings } from '@core/router'
     import { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale

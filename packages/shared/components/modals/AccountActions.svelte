@@ -1,15 +1,13 @@
 <script lang="typescript">
+    import { getContext } from 'svelte'
+    import { get, Readable } from 'svelte/store'
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
-    import { Readable } from 'svelte/store'
+    import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
+    import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
     import { Locale } from 'shared/lib/typings/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { get } from 'svelte/store'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
     export let locale: Locale
@@ -26,7 +24,7 @@
         $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
-        accountRoute.set(AccountRoutes.Manage)
+        $accountRouter.goTo(AccountRoute.Manage)
         isActive = false
     }
 
@@ -46,15 +44,12 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                hideAccount: (id) => {
+                hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
-                    selectedAccountId.set(null)
-                    selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
                 },
             },
         })
@@ -67,17 +62,14 @@
             props: {
                 account,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
-                deleteAccount: async (id) => {
+                deleteAccount: async (id: string) => {
                     await asyncRemoveWalletAccount(get(account).id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
-                    selectedAccountId.set(null)
-                    selectedMessage.set(null)
-                    walletRoute.set(WalletRoutes.Init)
-                    accountRoute.set(AccountRoutes.Init)
+                    resetWalletRoute()
                 },
             },
         })
@@ -90,10 +82,7 @@
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)
         }
-        selectedAccountId.set(null)
-        selectedMessage.set(null)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
+        resetWalletRoute()
     }
 </script>
 

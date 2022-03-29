@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
+    import { onMount } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { mobile, stage } from 'shared/lib/app'
@@ -8,9 +9,8 @@
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
+    import { AppRoute, initRouters } from '@core/router'
     import { Platforms } from 'shared/lib/typings/platform'
-    import { AppRoute } from 'shared/lib/typings/routes'
     import {
         Appearance,
         Backup,
@@ -31,7 +31,6 @@
         Settings,
         Welcome,
     } from 'shared/routes'
-    import { onMount } from 'svelte'
     import { Stage } from 'shared/lib/typings/stage'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
@@ -49,8 +48,7 @@
 
     void setupI18n()
     onMount(async () => {
-        initRouter()
-
+        initRouters()
         await fetchMarketData()
         await pollNetworkStatus()
     })
@@ -71,58 +69,58 @@
     {/if}
     <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Welcome locale={$_} />
     </Route>
     <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Legal locale={$_} />
     </Route>
     <Route route={AppRoute.CrashReporting}>
-        <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <CrashReporting locale={$_} />
     </Route>
     <Route route={AppRoute.Settings}>
-        <Settings on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Settings locale={$_} />
     </Route>
     <Route route={AppRoute.Appearance}>
-        <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Appearance locale={$_} />
     </Route>
     <Route route={AppRoute.Profile}>
-        <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Profile locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Setup locale={$_} />
     </Route>
     <Route route={AppRoute.Create}>
-        <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Create locale={$_} />
     </Route>
     <Route route={AppRoute.Secure}>
-        <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Secure locale={$_} />
     </Route>
     <Route route={AppRoute.Password}>
-        <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Password locale={$_} />
     </Route>
     <Route route={AppRoute.Protect} transition={false}>
-        <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Protect locale={$_} />
     </Route>
     <Route route={AppRoute.Backup} transition={false}>
-        <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Backup locale={$_} />
     </Route>
     <Route route={AppRoute.Import} transition={false}>
-        <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Import locale={$_} />
     </Route>
     <Route route={AppRoute.Balance}>
-        <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+        <Balance locale={$_} />
     </Route>
     <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        <Migrate locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Congratulations}>
-        <Congratulations on:next={routerNext} locale={$_} {goto} />
+        <Congratulations locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Dashboard}>
         <Dashboard locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Login}>
-        <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+        <Login locale={$_} {goto} />
     </Route>
     <ToastContainer />
 </div>
