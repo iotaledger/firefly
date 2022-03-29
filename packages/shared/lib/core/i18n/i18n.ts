@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
+import { LocaleDictionary } from 'svelte-i18n/types/runtime/types'
 
 import { appSettings } from 'shared/lib/appSettings'
 
@@ -10,11 +11,11 @@ import { LocaleOptions } from './types'
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
  */
 
-function supported(locale) {
+function verifySupportedLocale(locale: string): string {
     return locale in SUPPORTED_LOCALES ? locale : DEFAULT_LOCALE_OPTIONS.fallbackLocale
 }
 
-function reduceLocale(locale) {
+function reduceLocale(locale: string): string {
     return locale.replace('_', '-').split('-')[0]
 }
 
@@ -22,7 +23,7 @@ function hasLoadedLocale(locale: string): boolean {
     return locale in get(dictionary)
 }
 
-function loadJson(url) {
+function loadJson(url: string): Promise<LocaleDictionary> {
     return fetch(url).then((response) => response.json())
 }
 
@@ -36,7 +37,7 @@ export function setupI18n(options: LocaleOptions = { fallbackLocale: 'en', initi
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
-    const _locale = supported(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
+    const _locale = verifySupportedLocale(options.initialLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
     init({ ...DEFAULT_LOCALE_OPTIONS, initialLocale: _locale } as LocaleOptions)
 
