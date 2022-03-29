@@ -1,10 +1,10 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

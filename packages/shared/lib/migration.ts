@@ -1,10 +1,10 @@
+import { derived, get, writable } from 'svelte/store'
 import { addEntry, finalizeBundle } from '@iota/bundle'
 import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { appRoute, walletSetupType } from 'shared/lib/router'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,
@@ -19,13 +19,13 @@ import {
     SendMigrationBundleResponse,
     Transfer,
 } from 'shared/lib/typings/migration'
-import { AppRoute, SetupType } from 'shared/lib/typings/routes'
+import { appRoute, AppRoute } from '@core/router'
 import Validator from 'shared/lib/validator'
-import { api, wallet } from 'shared/lib/wallet'
-import { derived, get, writable } from 'svelte/store'
+import { api, walletSetupType } from 'shared/lib/wallet'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+import { SetupType } from 'shared/lib/typings/setup'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 

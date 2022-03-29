@@ -273,7 +273,7 @@ const ElectronApi = {
      *
      * @returns void
      */
-    getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
+    getVersionDetails: () => ipcRenderer.invoke('get-version-details'),
     /**
      * Change menu state to determine what menu items to display
      * @param {string} Attribute - Target attribute

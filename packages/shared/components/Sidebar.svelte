@@ -6,9 +6,16 @@
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, resetWalletRoute, settingsRoute } from 'shared/lib/router'
-    import type { SidebarTab as SidebarTabType } from 'shared/lib/typings/routes'
-    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+    import {
+        dashboardRoute,
+        dashboardRouter,
+        DashboardRoute,
+        resetWalletRoute,
+        settingsRoute,
+        settingsRouter,
+        SettingsRoute,
+        SidebarTab as SidebarTabType,
+    } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from 'shared/lib/typings/i18n'
 
@@ -32,20 +39,20 @@
         {
             icon: 'wallet',
             label: locale('tabs.wallet'),
-            route: Tabs.Wallet,
+            route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
             label: locale('tabs.staking'),
-            route: Tabs.Staking,
+            route: DashboardRoute.Staking,
             onClick: openStaking,
         },
     ]
 
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
-            if (Tabs.Staking === tab.route) {
+            if (DashboardRoute.Staking === tab.route) {
                 tab.notificationType = !$activeProfile?.hasVisitedStaking
                     ? 'warning'
                     : showStakingNotification
@@ -58,7 +65,7 @@
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($stakingEventState)) {
-            if ($dashboardRoute !== Tabs.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
                 showStakingNotification = false
@@ -74,15 +81,15 @@
     }
 
     function handleBackClick() {
-        if ($settingsRoute === SettingsRoutes.Init) {
+        if ($settingsRoute === SettingsRoute.Init) {
             drawer?.close()
         } else {
-            settingsRoute.set(SettingsRoutes.Init)
+            $settingsRouter.previous()
         }
     }
 
     function openStaking() {
-        dashboardRoute.set(Tabs.Staking)
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 
@@ -102,13 +109,13 @@
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
                     {locale(
-                        $settingsRoute === SettingsRoutes.Init
+                        $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
                     )}
                 </Text>
             </header>
-            {#if $settingsRoute === SettingsRoutes.Init}
+            {#if $settingsRoute === SettingsRoute.Init}
                 <!-- TODO: add real profile data -->
                 <div class="flex flex-row items-center space-x-6 mb-7 px-6 w-full">
                     <div

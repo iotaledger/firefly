@@ -3,7 +3,6 @@
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize, _ } from 'shared/lib/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -12,14 +11,16 @@
         GeneralSettingsNoProfile,
         HelpAndInfo,
         SecuritySettings,
-        SettingsRoutes,
-        SettingsRoutesNoProfile,
-    } from 'shared/lib/typings/routes'
+        SettingsRoute,
+        SettingsRouteNoProfile,
+        settingsRouter,
+        settingsRoute,
+    } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
 
-    const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
-        (route) => route !== SettingsRoutes.Init
+    const routes = Object.values($loggedIn ? SettingsRoute : SettingsRouteNoProfile).filter(
+        (route) => route !== SettingsRoute.Init
     )
 
     let settings
@@ -63,11 +64,11 @@
     }
 
     function handleBackClick() {
-        settingsRoute.set(SettingsRoutes.Init)
+        $settingsRouter.previous()
     }
+
     onMount(() => {
-        const child = $settingsChildRoute
-        settingsChildRoute.set(null)
+        const child = $settingsRouter.getChildRouteAndReset()
         if (child) {
             scrollIntoView(child, { behavior: 'auto' })
         }
@@ -104,13 +105,13 @@
                     {#if !$mobile}
                         <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
                     {/if}
-                    {#if $settingsRoute === SettingsRoutes.GeneralSettings}
+                    {#if $settingsRoute === SettingsRoute.GeneralSettings}
                         <General />
-                    {:else if $settingsRoute === SettingsRoutes.Security}
+                    {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
-                    {:else if $settingsRoute === SettingsRoutes.AdvancedSettings}
+                    {:else if $settingsRoute === SettingsRoute.AdvancedSettings}
                         <Advanced />
-                    {:else if $settingsRoute === SettingsRoutes.HelpAndInfo}
+                    {:else if $settingsRoute === SettingsRoute.HelpAndInfo}
                         <Help />
                     {/if}
                 </div>

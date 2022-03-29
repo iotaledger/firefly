@@ -2,10 +2,10 @@
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Locale } from 'shared/lib/typings/i18n'
-    import { createEventDispatcher } from 'svelte'
     import Content from './Content.svelte'
     import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
     import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
+    import { appRouter } from '@core/router'
 
     export let locale: Locale
 
@@ -14,15 +14,13 @@
 
     $: termsAccepted = checked
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         lastAcceptedTos.set(TOS_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
-        dispatch('next')
+        $appRouter.next()
     }
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $appRouter.previous()
     }
 </script>
 

@@ -1,13 +1,13 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
     import { Locale } from 'shared/lib/typings/i18n'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 

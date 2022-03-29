@@ -8,20 +8,20 @@
     export let locale: Locale
     export let busy = false
 
-    let pinInput
+    let pinInput = ''
     let error = ''
 
     const dispatch = createEventDispatcher()
 
     $: pinInput, (error = '')
 
-    function onSubmit() {
+    function onSubmit(): void {
         error = ''
         if (validatePinFormat(pinInput)) {
-            dispatch('next', { pinCandidate: pinInput })
+            dispatch('next', { pin: pinInput })
         }
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>
