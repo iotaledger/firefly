@@ -7,7 +7,7 @@
     import { asyncRemoveWalletAccount, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { get } from 'svelte/store'
     import { SettingsIcons } from 'shared/lib/typings/icons'

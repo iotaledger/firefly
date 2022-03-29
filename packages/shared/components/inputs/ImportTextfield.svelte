@@ -3,7 +3,7 @@
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     enum Type {
         Seed = 'seed',

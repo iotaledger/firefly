@@ -4,7 +4,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Readable } from 'svelte/store'
     import { setClipboard } from 'shared/lib/utils'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

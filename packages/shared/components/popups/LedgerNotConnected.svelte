@@ -4,7 +4,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

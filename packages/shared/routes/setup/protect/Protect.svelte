@@ -16,7 +16,7 @@
     import { walletSetupType } from 'shared/lib/router'
     import { mnemonic } from 'shared/lib/app'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -112,7 +112,7 @@
 </script>
 
 <!-- TODO: Readd Protect Init page
-    
+
 #if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
         <Protect on:next={_next} on:previous={_previous} {locale} />

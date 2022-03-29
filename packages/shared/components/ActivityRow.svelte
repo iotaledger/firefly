@@ -3,9 +3,9 @@
     import { Writable } from 'svelte/store'
     import { Icon, Text } from 'shared/components'
     import { truncateString, isBright } from 'shared/lib/helpers'
-    import { formatDate } from 'shared/lib/i18n'
+    import { formatDate } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {

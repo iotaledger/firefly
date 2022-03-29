@@ -4,7 +4,7 @@
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

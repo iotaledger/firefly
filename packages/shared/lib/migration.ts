@@ -23,7 +23,7 @@ import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api, wallet } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 

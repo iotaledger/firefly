@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext } from 'svelte'

@@ -4,7 +4,7 @@ import { forceNextRoute, resetWalletRoute, walletSetupType } from 'shared/lib/ro
 import { AppRoute, SetupType } from 'shared/lib/typings/routes'
 import { api } from 'shared/lib/wallet'
 import { get, writable } from 'svelte/store'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { isNewNotification, showAppNotification } from './notifications'
 import { Event } from './typings/events'
 import {

@@ -4,7 +4,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

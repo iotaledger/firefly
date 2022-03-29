@@ -5,7 +5,7 @@
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { activeProfile, getColor, isLedgerProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccountId } from 'shared/lib/wallet'

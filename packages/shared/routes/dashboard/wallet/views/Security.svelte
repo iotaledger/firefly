@@ -10,7 +10,7 @@
     import { activeProfile, isSoftwareProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
-    import { Locale, LocaleArgs } from 'shared/lib/typings/i18n'
+    import { Locale, LocaleArguments } from '@core/i18n'
     import { DateDiff } from 'shared/lib/typings/wallet'
     import { stage } from 'shared/lib/app'
     import { Stage } from 'shared/lib/typings/stage'
@@ -61,7 +61,7 @@
     }
 
     function checkHardwareDeviceStatus(state: LedgerDeviceState): void {
-        const values: LocaleArgs =
+        const values: LocaleArguments =
             state === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = locale(`views.dashboard.security.hardwareDevice.statuses.${state}`, { values })
 

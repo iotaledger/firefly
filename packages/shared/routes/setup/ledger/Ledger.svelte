@@ -14,7 +14,7 @@
         RestoreFromLedger,
         SwitchApps,
     } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 
     export let locale: Locale

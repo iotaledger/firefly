@@ -12,7 +12,7 @@
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     type AmountUnit = Unit | AvailableExchangeRates

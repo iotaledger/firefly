@@ -6,8 +6,8 @@
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
-    import { formatDate } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { formatDate } from '@core/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

@@ -7,7 +7,7 @@
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
     import { ManageAccount, Receive, Send } from '.'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

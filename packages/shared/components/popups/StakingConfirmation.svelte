@@ -16,7 +16,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'

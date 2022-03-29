@@ -5,7 +5,7 @@
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

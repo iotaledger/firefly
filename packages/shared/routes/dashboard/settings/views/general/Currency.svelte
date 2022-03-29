@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
