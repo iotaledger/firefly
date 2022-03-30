@@ -7,7 +7,7 @@
         selectedWalletChart,
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
     import { activeProfile, getColor, updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'

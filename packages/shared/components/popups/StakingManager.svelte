@@ -39,7 +39,7 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Chart, Text } from 'shared/components'
     import { getAccountActivityData } from 'shared/lib/chart'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'
 

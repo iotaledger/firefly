@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { stakedAccounts, stakingEventState } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { hasAccountReachedMinimumAirdrop } from '../lib/participation'

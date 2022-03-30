@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { appRouter } from '@core/router'
 

@@ -5,7 +5,7 @@
     import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'

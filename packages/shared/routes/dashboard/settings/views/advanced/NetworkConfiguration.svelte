@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import {
         ensureSinglePrimaryNode,
         getNodeCandidates,

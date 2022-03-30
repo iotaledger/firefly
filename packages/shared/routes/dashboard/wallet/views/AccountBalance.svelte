@@ -3,7 +3,7 @@
     import { Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { isBright } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'

@@ -2,7 +2,7 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { isBright } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
     import {
         getFormattedMinimumRewards,

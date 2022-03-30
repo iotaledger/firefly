@@ -10,10 +10,10 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
+    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     type AmountUnit = Unit | AvailableExchangeRates
 

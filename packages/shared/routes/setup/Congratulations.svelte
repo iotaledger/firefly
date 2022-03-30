@@ -26,7 +26,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale

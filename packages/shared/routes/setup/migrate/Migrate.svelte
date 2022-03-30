@@ -8,7 +8,7 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { FireflyEvent, migrateRoute, MigrateRouter, MigrateRoute } from '@core/router'
 
     export let locale: Locale

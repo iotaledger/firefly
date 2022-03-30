@@ -2,7 +2,7 @@
     import { CopyButton, Icon, Link, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
-    import { formatDate, localize } from 'shared/lib/i18n'
+    import { formatDate, localize } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile, getColor } from 'shared/lib/profile'

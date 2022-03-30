@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR, Icon, Modal, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import type { WalletAccount } from 'shared/lib/typings/wallet'

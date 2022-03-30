@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Checkbox, Text, Link } from 'shared/components'
     import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import {
         needsToAcceptLatestTos,
