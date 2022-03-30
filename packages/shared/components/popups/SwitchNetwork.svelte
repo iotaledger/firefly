@@ -22,7 +22,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
 
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { Network, NetworkConfig } from 'shared/lib/typings/network'
     import { Node } from 'shared/lib/typings/node'
 

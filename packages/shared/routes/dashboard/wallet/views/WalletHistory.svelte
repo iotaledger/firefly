@@ -8,7 +8,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRouter, AccountRoute, walletRouter, WalletRoute } from '@core/router'
     import { SyncAccountOptions } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AccountMessage, WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,

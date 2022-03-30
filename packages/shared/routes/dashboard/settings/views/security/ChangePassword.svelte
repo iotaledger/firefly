@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'

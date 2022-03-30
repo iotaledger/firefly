@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import {
         formatStakingAirdropReward,
         getFormattedMinimumRewards,

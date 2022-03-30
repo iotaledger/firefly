@@ -3,7 +3,7 @@ import { removeAddressChecksum } from 'shared/lib/migration'
 import { closePopup, openPopup, popupState } from 'shared/lib/popup'
 import { resetWalletRoute, appRouter, AppRoute } from '@core/router'
 import { api, walletSetupType } from 'shared/lib/wallet'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { isNewNotification, showAppNotification } from './notifications'
 import { Event } from './typings/events'
 import {

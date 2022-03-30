@@ -5,7 +5,7 @@
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { walletRoute, walletRouter, WalletRoute } from '@core/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { BalanceOverview, WalletAccount } from 'shared/lib/typings/wallet'
 
     export let locale: Locale

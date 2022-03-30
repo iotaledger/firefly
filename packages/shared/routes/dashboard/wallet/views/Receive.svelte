@@ -3,7 +3,7 @@
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { accountRouter, walletRouter } from '@core/router'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing } from 'shared/lib/wallet'

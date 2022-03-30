@@ -16,7 +16,7 @@
         SettingsRoute,
     } from '@core/router'
     import { Settings } from 'shared/routes'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

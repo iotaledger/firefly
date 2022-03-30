@@ -33,7 +33,7 @@
         SettingsRoute,
         WalletRoute,
     } from '@core/router'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import {
         api,
         isBackgroundSyncing,

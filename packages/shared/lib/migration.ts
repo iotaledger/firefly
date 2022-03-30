@@ -22,7 +22,7 @@ import {
 import { appRoute, AppRoute } from '@core/router'
 import Validator from 'shared/lib/validator'
 import { api, walletSetupType } from 'shared/lib/wallet'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 import { SetupType } from 'shared/lib/typings/setup'

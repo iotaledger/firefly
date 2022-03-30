@@ -13,7 +13,7 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api, walletSetupType } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Illustration, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { capitalize } from 'shared/lib/utils'
