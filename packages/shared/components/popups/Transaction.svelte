@@ -70,7 +70,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
+    {#if mustAcknowledgeGenericParticipationWarning || (mustAcknowledgeGenericParticipationWarning && mustAcknowledgeBelowMinRewardParticipationWarning)}
         <div
             class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
         >
