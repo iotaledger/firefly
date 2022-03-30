@@ -5,14 +5,13 @@ import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions } from './network'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
-import { walletSetupType } from './router'
 import { WALLET, WalletApi } from './shell/walletApi'
 import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
@@ -23,7 +22,7 @@ import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
-import { SetupType } from './typings/routes'
+import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
@@ -115,13 +114,14 @@ export const resetWallet = (): void => {
 
 // Created to help selectedAccount reactivity.
 // Use it to detected switches on selectedAccount
-export const selectedAccountId = writable<string>(null)
+export const selectedAccountId = writable<string | null>(null)
 
 export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
     $accounts.find((acc) => acc.id === $selectedAccountId)
 )
 export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
 
+export const walletSetupType = writable<SetupType>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)

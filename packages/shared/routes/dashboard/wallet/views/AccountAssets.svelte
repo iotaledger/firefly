@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AssetTile, Text } from 'shared/components'
     import { assets } from 'shared/lib/assets'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 </script>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">

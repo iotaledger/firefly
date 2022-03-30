@@ -12,7 +12,7 @@ import {
     wallet,
 } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { getParticipationOverview } from './participation/api'
 import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'

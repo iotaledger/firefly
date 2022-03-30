@@ -14,7 +14,7 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { startQRScanner } from 'shared/lib/device'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -23,7 +23,7 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { accountRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -34,7 +34,6 @@
         TransferState,
     } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
@@ -400,7 +399,8 @@
 
     const handleBackClick = (): void => {
         clearSendParams()
-        accountRoute.set(AccountRoutes.Init)
+
+        $accountRouter.previous()
     }
 
     const addLabel = (account: WalletAccount): LabeledWalletAccount => ({

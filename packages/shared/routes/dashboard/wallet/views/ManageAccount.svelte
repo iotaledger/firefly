@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
     export let alias
@@ -25,8 +24,7 @@
         setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
-            // TODO: double check if we do want this change
-            accountRoute.set(AccountRoutes.Init)
+            $accountRouter.goTo(AccountRoute.Init)
             return
         }
         if (trimmedAccountAlias) {
@@ -43,7 +41,7 @@
             }
             isBusy = true
             api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
-                onSuccess(res) {
+                onSuccess() {
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
                             if (account.id === $selectedAccount?.id) {
@@ -60,8 +58,7 @@
                     )
 
                     isBusy = false
-                    // TODO: double check if we do want this change
-                    accountRoute.set(AccountRoutes.Init)
+                    $accountRouter.goTo(AccountRoute.Init)
                 },
                 onError(err) {
                     isBusy = false
@@ -72,7 +69,7 @@
     }
     const handleCancelClick = () => {
         error = ''
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.previous()
     }
 
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias

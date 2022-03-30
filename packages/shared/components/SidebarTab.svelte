@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import { dashboardRoute } from 'shared/lib/router'
-    import type { SidebarTab } from 'shared/lib/typings/routes'
+    import { SidebarTab, dashboardRoute } from '@core/router'
 
     export let tab: SidebarTab = undefined
 

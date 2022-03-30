@@ -3,7 +3,7 @@
     import { AccountColors } from 'shared/lib/wallet'
     import { isBright } from 'shared/lib/helpers'
     import { clickOutside } from 'shared/lib/actions'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 
     export let active
     export let title = localize('views.picker.color.title')

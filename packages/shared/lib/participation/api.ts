@@ -1,5 +1,6 @@
+import { localize } from '@core/i18n'
+
 import { Event } from '../typings/events'
-import { localize } from '../i18n'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
 import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'

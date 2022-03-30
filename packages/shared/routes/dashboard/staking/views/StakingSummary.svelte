@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'

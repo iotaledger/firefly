@@ -19,7 +19,7 @@ import { NetworkConfig, NetworkType } from './typings/network'
 import { ValuesOf } from './typings/utils'
 import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from './typings/i18n'
+import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 

@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { walletSetupType } from 'shared/lib/router'
     import {
         api,
         isSyncing,
@@ -15,9 +14,10 @@
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
+        walletSetupType,
     } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { SetupType } from 'shared/lib/typings/setup'
     import { AccountMessage } from 'shared/lib/typings/wallet'
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'

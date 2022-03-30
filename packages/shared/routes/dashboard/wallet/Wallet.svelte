@@ -1,8 +1,11 @@
 <script lang="typescript">
+    import { isDeepLinkRequestActive } from '@common/deep-links'
+    import { accountRoute, accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
     import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -14,12 +17,13 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
     import { Message, Transaction } from 'shared/lib/typings/message'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
+        addMessagesPair,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -36,7 +40,6 @@
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
@@ -47,12 +50,9 @@
         BarChart,
         LineChart,
         ManageAccount,
-        Send,
         Receive,
+        Send,
     } from './views/'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { isDeepLinkRequestActive } from '@common/deep-links'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -60,7 +60,7 @@
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
-            accountRoute.set(AccountRoutes.Send)
+            $accountRouter.goTo(AccountRoute.Send)
             isDeepLinkRequestActive.set(false)
         }
     }
@@ -363,11 +363,6 @@
         }
     }
 
-    // TODO: fix this for mobile
-    // $: if (mobile && drawer && $accountRoute === AccountRoutes.CreateAccount) {
-    //     drawer.open()
-    // }
-
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -406,7 +401,7 @@
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    {#if $accountRoute !== AccountRoutes.Manage}
+                    {#if $accountRoute !== AccountRoute.Manage}
                         <AccountBalance onMenuClick={handleMenuClick} />
                     {/if}
                     <DashboardPane classes="h-full -mt-5 z-0">
@@ -415,13 +410,13 @@
                                 <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
                             </div>
                         {/if}
-                        {#if $accountRoute === AccountRoutes.Init}
+                        {#if $accountRoute === AccountRoute.Init}
                             <AccountAssets />
-                        {:else if $accountRoute === AccountRoutes.Send}
+                        {:else if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
-                        {:else if $accountRoute === AccountRoutes.Receive}
+                        {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
-                        {:else if $accountRoute === AccountRoutes.Manage}
+                        {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
                         {/if}
                     </DashboardPane>

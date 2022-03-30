@@ -1,9 +1,8 @@
 <script lang="typescript">
+    import { accountRouter } from '@core/router'
     import { Button, Icon, QR, Spinner, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
 
@@ -14,9 +13,8 @@
     const generateNewAddress = (): void => {
         onGenerateAddress($selectedAccount.id)
     }
-
-    const handleBackClick = () => {
-        accountRoute.set(AccountRoutes.Init)
+    const handleCloseClick = (): void => {
+        $accountRouter.previous()
     }
 </script>
 
@@ -31,7 +29,7 @@
                 />
             </button>
         </div>
-        <button on:click={handleBackClick}>
+        <button on:click={handleCloseClick}>
             <Icon icon="close" classes="text-gray-800 dark:text-white" />
         </button>
     </div>

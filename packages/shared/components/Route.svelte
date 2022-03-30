@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { appRoute, AppRoute } from '@core/router'
     import { Transition } from 'shared/components'
-    import { appRoute } from 'shared/lib/router'
 
     export let transition = true
-    export let route = undefined
+    export let route: AppRoute
 </script>
 
 {#if $appRoute === route}

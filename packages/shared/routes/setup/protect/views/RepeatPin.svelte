@@ -1,33 +1,33 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
     import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale
 
-    export let pinCandidate
+    export let pinCandidate = ''
     export let busy = false
 
-    let pinInput
+    let pinInput = ''
     let error = ''
 
     const dispatch = createEventDispatcher()
 
     $: pinInput, (error = '')
 
-    function onSubmit() {
+    function onSubmit(): void {
         error = ''
         if (validatePinFormat(pinInput)) {
             if (pinInput !== pinCandidate) {
                 error = locale('error.pincode.match')
             } else {
-                dispatch('next')
+                dispatch('next', { pin: pinCandidate })
             }
         }
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

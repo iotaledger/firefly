@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { AccountTile, Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { formatCurrency } from 'shared/lib/currency'
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
@@ -84,7 +85,7 @@
     }
 </script>
 
-<div class="px-8 py-6 flex flex-col h-full justify-between">
+<div class="flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{localize('general.createNewWallet')}</Text>
@@ -92,7 +93,7 @@
         <div class="w-full flex flex-col justify-between">
             <AccountTile
                 balance={'0 Mi'}
-                balanceEquiv={'US$ 0,00'}
+                balanceEquiv={formatCurrency(0)}
                 {color}
                 name={accountAlias || localize('general.accountName')}
                 classes="mb-4"
@@ -111,7 +112,7 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center mb-4" />
+        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
