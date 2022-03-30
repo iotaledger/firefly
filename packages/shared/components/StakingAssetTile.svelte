@@ -155,7 +155,7 @@
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}
         </div>
-        {#if showWarningState}
+        {#if showWarningState && tooltipText?.body}
             <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                 <Icon
                     icon="exclamation"
