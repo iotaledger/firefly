@@ -7,11 +7,10 @@
     import {
         isPartiallyStaked,
         partiallyUnstakedAmount,
-        participationAction,
         stakedAmount,
-        stakingEventState,
         unstakedAmount,
-    } from 'shared/lib/participation/stores'
+    } from 'shared/lib/participation/account'
+    import { participationAction, stakingEventState } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
         ParticipationAction,

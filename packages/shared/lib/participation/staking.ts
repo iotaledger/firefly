@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile } from '../profile'
-import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber } from '../utils'
@@ -12,11 +12,11 @@ import {
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
     participationEvents,
-    selectedAccountParticipationOverview,
     shimmerStakingRemainingTime,
     stakedAccounts,
     stakingEventState,
 } from './stores'
+import { selectedAccountParticipationOverview } from './account'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 
 /**

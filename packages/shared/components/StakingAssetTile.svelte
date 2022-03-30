@@ -14,13 +14,12 @@
     } from 'shared/lib/participation/staking'
     import {
         assemblyStakingRemainingTime,
-        isPartiallyStaked,
         participationOverview,
-        selectedAccountParticipationOverview,
         shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
+    import { selectedAccountParticipationOverview, isPartiallyStaked } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { openPopup } from 'shared/lib/popup'
@@ -52,7 +51,7 @@
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop($selectedAccount) && !isStakingPossible($stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible($stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0
@@ -79,7 +78,7 @@
         if (isPartiallyStakedAndCanStake) {
             return {
                 title: localize('tooltips.partiallyStakedFunds.title', {
-                    values: { amount: formatUnitBestMatch(getUnstakedFunds($selectedAccount)) },
+                    values: { amount: formatUnitBestMatch(getUnstakedFunds()) },
                 }),
                 body: [localize('tooltips.partiallyStakedFunds.body')],
             }

@@ -4,7 +4,8 @@
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
-    import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
+    import { partiallyUnstakedAmount } from 'shared/lib/participation/account'
+    import { stakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile } from 'shared/lib/profile'
     import {
         dashboardRoute,
