@@ -23,8 +23,7 @@
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { isPartiallyStaked } from 'shared/lib/participation/account'
-    import { stakedAmount } from 'shared/lib/participation/account'
+    import { isPartiallyStaked, stakedAmount } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
