@@ -42,7 +42,7 @@
         {#if !$mobile}
             <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
         {/if}
-        <Text type="h4" classes="text-{textColor}">{$selectedAccount?.alias}</Text>
+        <Text type="h4" overrideColor={$mobile} classes="text-{textColor}">{$selectedAccount?.alias}</Text>
         <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
             <Icon
                 height="18"

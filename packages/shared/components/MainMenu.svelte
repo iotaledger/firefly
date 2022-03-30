@@ -39,7 +39,7 @@
     style="background-color: {color};"
     on:click={handleClick}
 >
-    <Text type="h4" classes="uppercase text-{textColor}">{profileInitial || 'A'}</Text>
+    <Text type="h4" overrideColor classes="z-10 uppercase text-{textColor}">{profileInitial || 'A'}</Text>
     <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
 <Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
