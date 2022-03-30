@@ -35,7 +35,7 @@
 </script>
 
 <button
-    class="menu-button z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
+    class="menu-button fixed top-5 left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
     style="background-color: {color};"
     on:click={handleClick}
 >
@@ -45,10 +45,10 @@
 <Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
     <div class="flex flex-col flex-1">
         <header
-            class="header w-full px-8 py-3 mb-6 flex items-centers justify-center bg-white dark:bg-gray-800"
+            class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
             on:click={handleBackClick}
         >
-            <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
+            <Icon icon="arrow-left" classes="absolute mb-5 left-8 text-gray-500 text-blue-500" />
             <Text type="h4" classes="text-center">
                 {locale(
                     $settingsRoute === SettingsRoutes.Init
@@ -58,7 +58,7 @@
             </Text>
         </header>
         {#if $settingsRoute === SettingsRoutes.Init}
-            <div class="grid profile-block space-x-5 px-6 w-full">
+            <div class="grid profile-block space-x-5 px-6 w-full mb-6">
                 <div
                     class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
                     style="background-color: {color};"
@@ -77,14 +77,11 @@
 </Drawer>
 
 <style>
-    .header {
-        padding-top: env(safe-area-inset-top);
+    header {
+        border-top: solid transparent calc(env(safe-area-inset-top) / 1.5);
     }
     .menu-button {
-        position: fixed;
         padding-top: env(safe-area-inset-top);
-        top: 20px;
-        left: 25px;
     }
     .profile-block {
         grid-template-columns: auto 1fr;

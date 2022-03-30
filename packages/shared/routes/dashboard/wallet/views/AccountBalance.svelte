@@ -74,11 +74,10 @@
             </button>
         </div>
     {/if}
+    {#if !$mobile}
     <button
         on:click={() => onMenuClick()}
-        class="{$mobile
-            ? 'menu-mobile'
-            : 'bg-opacity-10 bg-black rounded-lg top-4'} px-2 py-3 flex flex-row space-x-1 text-{textColor} absolute right-4 "
+        class="bg-opacity-10 bg-black rounded-lg top-4 px-2 py-3 flex flex-row space-x-1 text-{textColor} absolute right-4"
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
@@ -86,7 +85,20 @@
             </svg>
         {/each}
     </button>
+    {/if}
 </div>
+{#if $mobile}
+    <button
+        on:click={() => onMenuClick()}
+        class="menu-mobile absolute right-5 top-5 h-11 w-11 flex items-center justify-center space-x-1 text-{textColor}"
+    >
+        {#each Array(3) as _}
+            <svg width="4" height="4" viewBox="0 0 4 4">
+                <circle cx="2" cy="2" r="2" class="fill-current" />
+            </svg>
+        {/each}
+    </button>
+{/if}
 
 <style type="text/scss">
     .account-color {
@@ -96,9 +108,6 @@
         }
     }
     .menu-mobile {
-        position: absolute;
-        margin-top: -200px;
-        padding-top: calc(env(safe-area-inset-top) / 1.6);
-        right: 25px;
+        margin-top: calc(env(safe-area-inset-top) / 2);
     }
 </style>
