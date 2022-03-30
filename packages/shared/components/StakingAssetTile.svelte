@@ -52,7 +52,7 @@
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop($selectedAccount) && !isStakingPossible($stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible($stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0
@@ -79,7 +79,7 @@
         if (isPartiallyStakedAndCanStake) {
             return {
                 title: localize('tooltips.partiallyStakedFunds.title', {
-                    values: { amount: formatUnitBestMatch(getUnstakedFunds($selectedAccount)) },
+                    values: { amount: formatUnitBestMatch(getUnstakedFunds()) },
                 }),
                 body: [localize('tooltips.partiallyStakedFunds.body')],
             }
