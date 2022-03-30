@@ -90,7 +90,7 @@
 {#if $mobile}
     <button
         on:click={() => onMenuClick()}
-        class="menu-mobile absolute right-5 top-5 h-11 w-11 flex items-center justify-center space-x-1 text-{textColor}"
+        class="menu-mobile absolute right-5 h-11 w-11 flex items-center justify-center space-x-1 text-{textColor}"
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
@@ -109,5 +109,6 @@
     }
     .menu-mobile {
         margin-top: calc(env(safe-area-inset-top) / 2);
+        top: 18px;
     }
 </style>
