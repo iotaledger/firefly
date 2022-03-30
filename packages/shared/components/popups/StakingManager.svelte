@@ -54,17 +54,7 @@
     $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview()
 
-    $: {
-        const currentParticipationsLength = $pendingParticipations.length
-        if (currentParticipationsLength < previousPendingParticipationsLength) {
-            const latestParticipationIds = $pendingParticipations.map((participation) => participation.messageId)
-            if (latestParticipationIds.length === 0) {
-                resetView()
-            }
-            pendingParticipationIds = latestParticipationIds
-            previousPendingParticipationsLength = currentParticipationsLength
-        }
-    }
+    $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
 
     function resetAccounts(): void {
         /**
@@ -106,6 +96,11 @@
 
         isPerformingParticipation.set(true)
 
+        const _sync = (messageIds: string[]) => {
+            messageIds.forEach((id) => pendingParticipationIds.push(id))
+            previousPendingParticipationsLength = messageIds.length
+        }
+
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         if (!hasParticipationPlugin) {
             showAppNotification({
@@ -120,30 +115,30 @@
             return
         }
 
-        let messageIds: string[]
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                messageIds = await participate($selectedAccountId, participations)
+                await participate($selectedAccount?.id, participations)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             }
             case ParticipationAction.Unstake:
-                messageIds = await stopParticipating($selectedAccountId, STAKING_EVENT_IDS)
+                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             default:
                 break
-        }
-
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
-
-        try {
-            _sync(messageIds)
-        } catch (err) {
-            console.error(err)
-            displayErrorNotification(err)
-            resetView()
         }
     }
 
@@ -209,6 +204,25 @@
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
         }
+
+        const usubscribe = pendingParticipations.subscribe((participations) => {
+            const currentParticipationsLength = participations.length
+
+            if (currentParticipationsLength < previousPendingParticipationsLength) {
+                const latestParticipationIds = participations.map((participation) => participation.messageId)
+
+                if (latestParticipationIds.length === 0) {
+                    resetView()
+                }
+
+                pendingParticipationIds = latestParticipationIds
+                previousPendingParticipationsLength = currentParticipationsLength
+            }
+        })
+
+        return () => {
+            usubscribe()
+        }
     })
 
     let showTooltip = false
@@ -239,7 +253,7 @@
                 ${$isPartiallyStaked ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}
         >
             <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
-                {#if isAccountStaked($selectedAccountId)}
+                {#if isCurrentAccountStaked}
                     <div class="bg-green-500 rounded-2xl">
                         <Icon icon="success-check" width="18" height="18" classes="text-white" />
                     </div>
@@ -252,27 +266,64 @@
                         <Icon icon="exclamation" width="20" height="20" classes="text-orange-500" />
                     </div>
                 {:else}
-                    <Icon icon="unlock" width="24" height="24" classes="text-gray-400" />
+                    <Icon
+                        icon="unlock"
+                        width="24"
+                        height="24"
+                        classes={$isPerformingParticipation ||
+                        participationAbility === AccountParticipationAbility.HasPendingTransaction
+                            ? 'text-gray-400'
+                            : 'text-gray-800 dark:text-white'}
+                    />
                 {/if}
                 <div class="flex flex-col w-3/4">
-                    <Text type="p" classes="font-extrabold" disabled>
+                    <Text
+                        type="p"
+                        classes="font-extrabold"
+                        disabled={$isPerformingParticipation ||
+                            participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                    >
                         {$selectedAccount.alias}
                     </Text>
                     {#if $isPartiallyStaked}
-                        <Text type="p" disabled classes="font-extrabold">
+                        <Text
+                            type="p"
+                            secondary
+                            disabled={$isPerformingParticipation ||
+                                participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                            classes="font-extrabold"
+                        >
                             {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
                             •
-                            <Text type="p" disabled classes="inline">
+                            <Text
+                                type="p"
+                                secondary
+                                disabled={$isPerformingParticipation ||
+                                    participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                                classes="inline"
+                            >
                                 {$isPartiallyStaked
                                     ? getFormattedFiatAmount(getStakedFunds())
                                     : $selectedAccount.balanceEquiv}
                             </Text>
                         </Text>
                     {:else}
-                        <Text type="p" disabled classes="font-extrabold">
+                        <Text
+                            type="p"
+                            secondary
+                            disabled={$isPerformingParticipation ||
+                                participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                            classes="font-extrabold"
+                        >
                             {$selectedAccount.balance}
                             •
-                            <Text type="p" disabled classes="inline">
+                            <Text
+                                type="p"
+                                secondary
+                                disabled={$isPerformingParticipation ||
+                                    participationAbility === AccountParticipationAbility.HasPendingTransaction}
+                                classes="inline"
+                            >
                                 {$selectedAccount.balanceEquiv}
                             </Text>
                         </Text>
@@ -281,16 +332,14 @@
                 <Button
                     disabled={$isPerformingParticipation ||
                         participationAbility === AccountParticipationAbility.HasPendingTransaction}
-                    secondary={isAccountStaked($selectedAccountId)}
-                    onClick={() => (isAccountStaked($selectedAccountId) ? handleUnstakeClick() : handleStakeClick())}
+                    secondary={isCurrentAccountStaked}
+                    onClick={() => (isCurrentAccountStaked ? handleUnstakeClick() : handleStakeClick())}
                 >
                     {#if $participationAction}
                         <Spinner busy={$isPerformingParticipation} classes="mx-2 justify-center" />
                     {:else if participationAbility === AccountParticipationAbility.HasPendingTransaction}
                         {localize('general.syncing')}
-                    {:else}
-                        {localize(`actions.${isAccountStaked($selectedAccountId) ? 'unstake' : 'stake'}`)}
-                    {/if}
+                    {:else}{localize(`actions.${isCurrentAccountStaked ? 'unstake' : 'stake'}`)}{/if}
                 </Button>
             </div>
             {#if $isPartiallyStaked && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
@@ -335,9 +384,7 @@
         <Text type="p" classes="text-gray-900 bold mb-1 text-left">
             {localize('tooltips.stakingMinRewards.titleMinBalance', { values: { amount: tooltipMinBalance } })}
         </Text>
-        <Text type="p" secondary classes="text-left">
-            {localize('tooltips.stakingMinRewards.bodyMinBalance')}
-        </Text>
+        <Text type="p" secondary classes="text-left">{localize('tooltips.stakingMinRewards.bodyMinBalance')}</Text>
     </Tooltip>
 {/if}
 
