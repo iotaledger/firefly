@@ -50,7 +50,8 @@
         const account = _getAccount(get(accounts))
         const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
         mustAcknowledgeBelowMinRewardParticipationWarning =
-            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0) &&
+            isStakingPossible($stakingEventState)
     }
 
     function handleNextClick() {
@@ -70,7 +71,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    {#if mustAcknowledgeGenericParticipationWarning || (mustAcknowledgeGenericParticipationWarning && mustAcknowledgeBelowMinRewardParticipationWarning)}
+    {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
             class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
         >
