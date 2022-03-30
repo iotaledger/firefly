@@ -66,9 +66,9 @@
                     <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial}</span>
                 </div>
                 <Text type="h4" classes="col-start-2 row-start-2">{$activeProfile?.name}</Text>
-                <button class="col-start-2 row-start-3 flex items-center" on:click={() => logout()}>
-                    <Icon width="16" height="16" classes="mr-1 text-gray-500" icon="refresh" />
-                    <Text type="p" secondary classes="text-center">Switch Accounts</Text>
+                <button class="col-start-2 row-start-3 flex items-center w-max px-1 pr-2 rounded-xl" on:click={() => logout()}>
+                    <Icon width="16" height="16" classes="mr-1 text-gray-500 -ml-2" icon="logout" />
+                    <Text type="p" secondary classes="text-center">Logout</Text>
                 </button>
             </div>
         {/if}
