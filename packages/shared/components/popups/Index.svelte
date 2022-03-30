@@ -46,7 +46,7 @@
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import { mobile } from 'shared/lib/app'
-    import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte';
+    import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte'
 
     export let locale: Locale
 
@@ -128,7 +128,7 @@
         legalUpdate: LegalUpdate,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
         governanceCastVote: GovernanceCastVote,
-        success: Success
+        success: Success,
     }
 
     const onKey = (e) => {
