@@ -56,18 +56,6 @@
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
 
-    $: {
-        const currentParticipationsLength = $pendingParticipations.length
-        if (currentParticipationsLength < previousPendingParticipationsLength) {
-            const latestParticipationIds = $pendingParticipations.map((participation) => participation.messageId)
-            if (latestParticipationIds.length === 0) {
-                resetView()
-            }
-            pendingParticipationIds = latestParticipationIds
-            previousPendingParticipationsLength = currentParticipationsLength
-        }
-    }
-
     function resetAccounts(): void {
         /**
          * NOTE: This is necessary for the page
@@ -108,6 +96,11 @@
 
         isPerformingParticipation.set(true)
 
+        const _sync = (messageIds: string[]) => {
+            messageIds.forEach((id) => pendingParticipationIds.push(id))
+            previousPendingParticipationsLength = messageIds.length
+        }
+
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         if (!hasParticipationPlugin) {
             showAppNotification({
@@ -122,30 +115,30 @@
             return
         }
 
-        let messageIds: string[]
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                messageIds = await participate($selectedAccountId, participations)
+                await participate($selectedAccount?.id, participations)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             }
             case ParticipationAction.Unstake:
-                messageIds = await stopParticipating($selectedAccountId, STAKING_EVENT_IDS)
+                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
+                    .then((messageIds) => _sync(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             default:
                 break
-        }
-
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
-
-        try {
-            _sync(messageIds)
-        } catch (err) {
-            console.error(err)
-            displayErrorNotification(err)
-            resetView()
         }
     }
 
@@ -210,6 +203,25 @@
          */
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
+        }
+
+        const usubscribe = pendingParticipations.subscribe((participations) => {
+            const currentParticipationsLength = participations.length
+
+            if (currentParticipationsLength < previousPendingParticipationsLength) {
+                const latestParticipationIds = participations.map((participation) => participation.messageId)
+
+                if (latestParticipationIds.length === 0) {
+                    resetView()
+                }
+
+                pendingParticipationIds = latestParticipationIds
+                previousPendingParticipationsLength = currentParticipationsLength
+            }
+        })
+
+        return () => {
+            usubscribe()
         }
     })
 
