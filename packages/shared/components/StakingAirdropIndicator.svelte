@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
-    import { selectedAccountParticipationOverview, stakingEventState } from 'shared/lib/participation/stores'
+    import { stakingEventState } from 'shared/lib/participation/stores'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
     import {
         AccountParticipationOverview,
         ParticipationEventState,

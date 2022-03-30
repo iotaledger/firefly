@@ -11,11 +11,9 @@
         getUnstakedFunds,
     } from 'shared/lib/participation'
     import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
-    import {
-        participationAction,
-        isPartiallyStaked,
-        selectedAccountParticipationOverview,
-    } from 'shared/lib/participation/stores'
+    import { participationAction } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'

@@ -4,14 +4,10 @@
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
-    import {
-        isPartiallyStaked,
-        partiallyUnstakedAmount,
-        participationAction,
-        stakedAmount,
-        stakingEventState,
-        unstakedAmount,
-    } from 'shared/lib/participation/stores'
+    import { partiallyUnstakedAmount } from 'shared/lib/participation/account'
+    import { participationAction, stakingEventState } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { stakedAmount, unstakedAmount } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         ParticipationAction,

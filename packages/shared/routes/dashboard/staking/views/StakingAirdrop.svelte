@@ -2,14 +2,13 @@
     import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { localize } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingForShimmer, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
-        assemblyStakingRewards,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards,
         stakingEventState,
     } from 'shared/lib/participation/stores'
+    import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'

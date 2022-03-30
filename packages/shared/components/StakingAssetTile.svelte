@@ -14,13 +14,13 @@
     } from 'shared/lib/participation/staking'
     import {
         assemblyStakingRemainingTime,
-        isPartiallyStaked,
         participationOverview,
-        selectedAccountParticipationOverview,
         shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { openPopup } from 'shared/lib/popup'

@@ -1,7 +1,7 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { formatStakingAirdropReward } from 'shared/lib/participation/staking'
-import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
+import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/account'
 import { activeProfile } from 'shared/lib/profile'
 import { Asset, Token } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'

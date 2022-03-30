@@ -17,14 +17,14 @@
     import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
-        isPartiallyStaked,
         participationAction,
         participationOverview,
         pendingParticipations,
         stakedAccounts,
-        stakedAmount,
         stakingEventState,
     } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { stakedAmount } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
