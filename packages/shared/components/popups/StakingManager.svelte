@@ -276,6 +276,7 @@
                     {#if $isPartiallyStaked}
                         <Text
                             type="p"
+                            secondary
                             disabled={$isPerformingParticipation ||
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
@@ -284,6 +285,7 @@
                             •
                             <Text
                                 type="p"
+                                secondary
                                 disabled={$isPerformingParticipation ||
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
@@ -296,6 +298,7 @@
                     {:else}
                         <Text
                             type="p"
+                            secondary
                             disabled={$isPerformingParticipation ||
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
@@ -304,6 +307,7 @@
                             •
                             <Text
                                 type="p"
+                                secondary
                                 disabled={$isPerformingParticipation ||
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
