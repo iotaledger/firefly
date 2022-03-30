@@ -54,18 +54,6 @@
     $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview()
 
-    $: {
-        const currentParticipationsLength = $pendingParticipations.length
-        if (currentParticipationsLength < previousPendingParticipationsLength) {
-            const latestParticipationIds = $pendingParticipations.map((participation) => participation.messageId)
-            if (latestParticipationIds.length === 0) {
-                resetView()
-            }
-            pendingParticipationIds = latestParticipationIds
-            previousPendingParticipationsLength = currentParticipationsLength
-        }
-    }
-
     function resetAccounts(): void {
         /**
          * NOTE: This is necessary for the page
@@ -213,6 +201,25 @@
          */
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
+        }
+
+        const usubscribe = pendingParticipations.subscribe((participations) => {
+            const currentParticipationsLength = participations.length
+
+            if (currentParticipationsLength < previousPendingParticipationsLength) {
+                const latestParticipationIds = participations.map((participation) => participation.messageId)
+
+                if (latestParticipationIds.length === 0) {
+                    resetView()
+                }
+
+                pendingParticipationIds = latestParticipationIds
+                previousPendingParticipationsLength = currentParticipationsLength
+            }
+        })
+
+        return () => {
+            usubscribe()
         }
     })
 
