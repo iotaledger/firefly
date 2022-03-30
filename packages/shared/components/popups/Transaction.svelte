@@ -50,7 +50,8 @@
         const account = _getAccount(get(accounts))
         const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
         mustAcknowledgeBelowMinRewardParticipationWarning =
-            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0) &&
+            isStakingPossible($stakingEventState)
     }
 
     function handleNextClick() {
