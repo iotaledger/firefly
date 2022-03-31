@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { appRoute, AppRoute, SettingsRoute, settingsRoute } from '@core/router'
+    import { appRoute, AppRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
 
     export let onCreateAccount = (..._: any[]): void => {}
 
@@ -18,8 +18,12 @@
     }
 
     function handleBackClick() {
-        if ($appRoute === AppRoute.Settings) {
-            settingsRoute.set(SettingsRoute.Init)
+        switch ($appRoute) {
+            case AppRoute.Settings:
+                $settingsRouter.previous()
+                break
+            default:
+                break
         }
     }
 </script>
