@@ -4,22 +4,21 @@
     import { localize } from '@core/i18n'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { appRoute, AppRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
+    import { DashboardRoute, dashboardRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
 
     export let onCreateAccount = (..._: any[]): void => {}
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
-    $: showBackButton = isCorrectRoute($appRoute)
+    $: showBackButton = isCorrectRoute($settingsRoute)
 
-    function isCorrectRoute(route: AppRoute): boolean {
-        const showInSettings = $settingsRoute !== SettingsRoute.Init
-        return showInSettings
+    function isCorrectRoute(_: SettingsRoute): boolean {
+        return $settingsRoute !== SettingsRoute.Init
     }
 
-    function handleBackClick() {
-        switch ($appRoute) {
-            case AppRoute.Settings:
+    function handleBackClick(): void {
+        switch ($dashboardRoute) {
+            case DashboardRoute.Settings:
                 $settingsRouter.previous()
                 break
             default:
