@@ -43,10 +43,4 @@ post_install do |installer|
   # Add the framework to "Link Binary with Libraries"
   frameworks_build_phase = target.build_phases.find { |build_phase| build_phase.to_s == 'FrameworksBuildPhase' }
   frameworks_build_phase.add_file_reference(framework_file_ref)
-
-  # Create the "Embed Frameworks" build phase and add the framework
-  embed_frameworks_build_phase = target.new_copy_files_build_phase('Embed Frameworks')
-  embed_frameworks_build_phase.symbol_dst_subfolder_spec = :frameworks
-  build_file = embed_frameworks_build_phase.add_file_reference(framework_file_ref)
-  build_file.settings = { 'ATTRIBUTES' => ['CodeSignOnCopy', 'RemoveHeadersOnCopy'] }
 end
