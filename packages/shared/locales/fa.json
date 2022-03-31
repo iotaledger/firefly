@@ -318,7 +318,7 @@
             "theme": {
                 "title": "تم",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "زبان",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v {version}",
                     "upToDate": "به روزرسانی شده",
-                    "outOfDate": "قدیمی"
+                    "outOfDate": "قدیمی",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "دستگاه سخت افزاری",
@@ -566,7 +567,8 @@
             "upToDateDescription": "شما از به روزترین و امن ترین نسخه Firefly استفاده میکنید.",
             "updateAvailable": "نسخه به روز شده Firefly قابل دسترس است",
             "updateDetails": "نسخه {version} - {date}",
-            "noAutoUpdate": "بروزرسانی خودکار در این نسخه ویندوز غیرفعال است، لطفاً جهت بروزرسانی به https://firefly.iota.org مراجعه کنید."
+            "noAutoUpdate": "بروزرسانی خودکار در این نسخه ویندوز غیرفعال است، لطفاً جهت بروزرسانی به https://firefly.iota.org مراجعه کنید.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "آخرین به روز رسانی: {date}",

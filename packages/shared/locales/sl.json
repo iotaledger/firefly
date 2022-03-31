@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Jezik",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Posodobljeno",
-                    "outOfDate": "Zastarelo"
+                    "outOfDate": "Zastarelo",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Strojna naprava",
@@ -566,7 +567,8 @@
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
             "updateAvailable": "Posodobitev Firefly je na voljo",
             "updateDetails": "Različica {version} - {date}",
-            "noAutoUpdate": "Samodejno posodabljanje je v tej različici sistema Windows onemogočeno, za prenos posodobitve obiščite spletno mesto https://firefly.iota.org."
+            "noAutoUpdate": "Samodejno posodabljanje je v tej različici sistema Windows onemogočeno, za prenos posodobitve obiščite spletno mesto https://firefly.iota.org.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Zadnja varnostna kopija: {datum}",
