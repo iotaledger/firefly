@@ -9,7 +9,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
     import { get, Readable } from 'svelte/store'
     import { WalletAccount } from 'shared/lib/typings/wallet'

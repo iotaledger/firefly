@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, DashboardPane, Icon, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { canParticipate } from 'shared/lib/participation'
     import { participationOverview } from 'shared/lib/participation/stores'
     import {

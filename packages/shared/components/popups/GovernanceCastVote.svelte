@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Button, Icon, Spinner, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { selectedAccount, api, isSyncing } from 'shared/lib/wallet'

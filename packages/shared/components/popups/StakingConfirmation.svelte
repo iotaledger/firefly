@@ -20,7 +20,7 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 
     let tooltipAirdrop: string
     let showTooltip = false

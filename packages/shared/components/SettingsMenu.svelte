@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 
     export let settings
     export let activeSettings = []

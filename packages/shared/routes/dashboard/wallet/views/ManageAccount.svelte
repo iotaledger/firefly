@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'

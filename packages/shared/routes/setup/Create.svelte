@@ -4,7 +4,7 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { setProfileType } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { ProfileType } from 'shared/lib/typings/profile'
 
     export let locale: Locale

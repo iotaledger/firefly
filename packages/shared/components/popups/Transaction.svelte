@@ -7,7 +7,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
 

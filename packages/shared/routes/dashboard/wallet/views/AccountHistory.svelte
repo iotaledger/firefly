@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'

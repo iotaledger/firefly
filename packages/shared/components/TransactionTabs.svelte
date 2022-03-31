@@ -8,7 +8,7 @@
     import { flip } from 'svelte/animate'
     import * as easing from 'svelte/easing'
     import { fly } from 'svelte/transition'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let list = []
     export let selected = 0

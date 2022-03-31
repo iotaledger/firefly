@@ -2,7 +2,7 @@
     import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'

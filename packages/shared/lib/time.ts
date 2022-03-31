@@ -1,5 +1,5 @@
 // BASE
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { get } from 'svelte/store'
 import { networkStatus } from './networkStatus'
 

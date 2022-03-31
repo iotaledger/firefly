@@ -5,7 +5,8 @@ import {
     SupportedFormat,
 } from '@capacitor-community/barcode-scanner'
 
-import { localize } from '@lib/i18n'
+import { localize } from '@core/i18n'
+
 import { IBarcodeManager } from '@lib/typings/barcodeManager'
 
 const openQRBodyClass: string = 'qr-scanner'

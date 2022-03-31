@@ -2,11 +2,11 @@
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import type { AccountIdentifier } from 'shared/lib/typings/account'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { Locale } from '@core/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { api } from 'shared/lib/wallet'
-    import type { Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 

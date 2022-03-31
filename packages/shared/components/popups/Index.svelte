@@ -2,7 +2,7 @@
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -187,7 +187,7 @@
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
         class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
+                h-full overflow-hidden z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
             $mobile && 'z-40'
         }`}
     >

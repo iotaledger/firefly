@@ -4,7 +4,7 @@
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
     import { backupRoute, BackupRouter, BackupRoute, FireflyEvent } from '@core/router'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

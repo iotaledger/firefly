@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, Icon, Link, Illustration } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 </script>
 
 <div class="h-full flex flex-col justify-between">

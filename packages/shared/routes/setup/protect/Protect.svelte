@@ -2,7 +2,7 @@
     import { Transition } from 'shared/components'
     import { Pin, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoute } from '@core/router'
 
     export let locale: Locale

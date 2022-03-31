@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { truncateString, isBright } from 'shared/lib/helpers'
-    import { formatDate, localize } from 'shared/lib/i18n'
-    import { ParticipationAction } from 'shared/lib/participation/types'
+    import { formatDate, localize } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
+    import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,

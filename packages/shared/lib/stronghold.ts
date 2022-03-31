@@ -5,7 +5,7 @@ import { api } from './wallet'
 import { Event } from './typings/events'
 import { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from './notifications'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { isLedgerProfile } from './profile'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

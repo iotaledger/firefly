@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { createEventDispatcher, getContext } from 'svelte'
     import { ImportRouter } from '@core/router'
 

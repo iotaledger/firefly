@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Button, Illustration } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { openSettings, governanceRouter, settingsRouter } from '@core/router/'
     import { GovernanceRoute, SettingsRoute } from '@core/router/enums'
     import type { ParticipationEvent } from 'shared/lib/participation/types'

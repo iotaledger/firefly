@@ -6,7 +6,7 @@
     import { mobile, stage } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { AppRoute, initRouters } from '@core/router'
@@ -40,13 +40,14 @@
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
 
-    $: if (document.dir !== $dir) {
-        document.dir = $dir
+    $: if (document.dir !== $localeDirection) {
+        document.dir = $localeDirection
     }
 
     $: $isLocaleLoaded, nativeSplash.hide()
 
     void setupI18n()
+
     onMount(async () => {
         initRouters()
         await fetchMarketData()
