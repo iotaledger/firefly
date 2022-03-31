@@ -8,10 +8,10 @@
         MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
     } from 'shared/lib/migration'
-    import { walletSetupType } from 'shared/lib/router'
-    import { SetupType } from 'shared/lib/typings/routes'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { SetupType } from 'shared/lib/typings/setup'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

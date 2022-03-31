@@ -4,7 +4,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import Text from './Text.svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     enum Status {

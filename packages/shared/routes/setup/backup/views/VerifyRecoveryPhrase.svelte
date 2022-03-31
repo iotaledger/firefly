@@ -3,7 +3,7 @@
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { english } from 'shared/lib/wordlists/english'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
     export let mnemonic

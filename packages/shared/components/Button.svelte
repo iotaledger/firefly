@@ -17,6 +17,7 @@
     export let xl = false
     export let medium = false
     export let small = false
+    export let xsmall = false
     export let classes = ''
     export let type = 'button'
     export let form = ''
@@ -71,6 +72,7 @@
         class:warning
         class:medium
         class:small
+        class:xsmall
         class:outline
         class:with-icon={icon}
         class:iconReverse
@@ -408,6 +410,30 @@
             @apply p-2.5;
             @apply rounded-lg;
             min-width: 78px;
+            &.with-icon {
+                @apply p-2.5;
+                @apply text-white;
+                span {
+                    @apply ml-0;
+                    @apply mr-6;
+                }
+                &.iconReverse {
+                    span {
+                        @apply ml-6;
+                        @apply mr-0;
+                    }
+                }
+                &.secondary {
+                    :global(svg) {
+                        @apply text-gray-500;
+                    }
+                }
+            }
+        }
+        &.xsmall {
+            @apply p-1;
+            @apply rounded-lg;
+            min-width: 64px;
             &.with-icon {
                 @apply p-2.5;
                 @apply text-white;

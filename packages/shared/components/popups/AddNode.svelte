@@ -10,7 +10,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { updateNetworkStatus } from '../../lib/networkStatus'
 
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
 

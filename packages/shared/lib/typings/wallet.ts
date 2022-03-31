@@ -58,10 +58,6 @@ export type BalanceHistory = {
     [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
 }
 
-export type AccountsBalanceHistory = {
-    [accountIndex: number]: BalanceHistory
-}
-
 export interface StrongholdStatus {
     snapshot: {
         status: 'Locked' | 'Unlocked'
