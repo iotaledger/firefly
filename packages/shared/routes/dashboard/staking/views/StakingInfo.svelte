@@ -27,7 +27,7 @@
             animation = null
         } else if ($stakingEventState === ParticipationEventState.Holding) {
             const stakingParticipationIds: string[] = []
-            $selectedAccountParticipationOverview?.participations.forEach((p) => {
+            $selectedAccountParticipationOverview?.participations?.forEach((p) => {
                 if (!stakingParticipationIds.includes(p.eventId) && STAKING_EVENT_IDS.includes(p.eventId)) {
                     stakingParticipationIds.push(p.eventId)
                 }
