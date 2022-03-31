@@ -2,26 +2,27 @@
     import { getContext } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { HR, Icon, Modal, Text } from 'shared/components'
+    import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
-    import { asyncRemoveWalletAccount, selectedAccountId } from 'shared/lib/wallet'
-    import { Locale } from '@core/i18n'
+    import { accountRouter, resetWalletRoute } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
+    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
-    export let locale: Locale
-
     export let isActive
 
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
+    const { accounts } = $wallet
+
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
-    const allAccounts = getContext<Readable<WalletAccount[]>>('walletAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    const hidden = hiddenAccounts.includes($selectedAccountId)
+    const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
-        $account.index === $allAccounts.length - 1 && $account.rawIotaBalance === 0 && $account.messages.length === 0
+        $selectedAccount.index === $accounts.length - 1 &&
+        $selectedAccount.rawIotaBalance === 0 &&
+        $selectedAccount.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
         $accountRouter.goTo(AccountRoute.Manage)
@@ -29,12 +30,12 @@
     }
 
     const handleViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { account } })
+        openPopup({ type: 'addressHistory', props: { account: selectedAccount } })
         isActive = false
     }
 
     function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', props: { account }, hideClose: false })
+        openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccount }, hideClose: false })
         isActive = false
     }
 
@@ -42,7 +43,7 @@
         openPopup({
             type: 'hideAccount',
             props: {
-                account,
+                account: selectedAccount,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
@@ -60,15 +61,16 @@
         openPopup({
             type: 'deleteAccount',
             props: {
-                account,
+                account: selectedAccount,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 deleteAccount: async (id: string) => {
-                    await asyncRemoveWalletAccount(get(account).id)
+                    await asyncRemoveWalletAccount(get(selectedAccount).id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
+                    setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
                     resetWalletRoute()
                 },
             },
@@ -77,7 +79,7 @@
     }
 
     const handleShowAccountClick = () => {
-        const idx = hiddenAccounts.indexOf($selectedAccountId)
+        const idx = hiddenAccounts.indexOf($selectedAccount?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)
@@ -86,7 +88,7 @@
     }
 </script>
 
-<Modal bind:isActive position={{ top: '121px', right: 'calc((100% + 16px) * 0.6666666)' }}>
+<Modal bind:isActive position={{ top: '90px', right: 'calc((100% + 16px) * 0.6666666)' }}>
     <div class="flex flex-col">
         <!-- Customize -->
         <button
@@ -97,7 +99,7 @@
             disabled={hidden}
         >
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.customizeAcount')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.customizeAcount')}</Text>
         </button>
         <!-- Address history -->
         <button
@@ -105,14 +107,14 @@
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.viewAddressHistory')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.viewAddressHistory')}</Text>
         </button>
         <button
             on:click={handleExportTransactionHistoryClick}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
             <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale('actions.exportTransactionHistory')}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
         </button>
         <HR />
         <!-- Delete -->
@@ -123,7 +125,7 @@
         >
             <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>
-                {locale(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
+                {localize(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
             </Text>
         </button>
     </div>

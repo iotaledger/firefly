@@ -3,7 +3,6 @@ import { localize } from '@core/i18n'
 import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
-
 import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
 import {
     ParticipationAction,

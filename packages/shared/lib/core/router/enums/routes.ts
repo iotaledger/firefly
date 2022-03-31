@@ -31,14 +31,6 @@ export enum LedgerRoute {
     AccountIndex = 'accountIndex',
 }
 
-export enum WalletRoute {
-    Init = 'init',
-    Account = 'account',
-    Send = 'send',
-    Receive = 'receive',
-    CreateAccount = 'createAccount',
-}
-
 export enum AccountRoute {
     Init = 'init',
     Manage = 'manage',

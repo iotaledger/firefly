@@ -3,18 +3,20 @@
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter, AccountRoute } from '@core/router'
-    import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
+    import { api } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
-    export let account: WalletAccount
+    export let account: Writable<WalletAccount>
     export let hasMultipleAccounts
 
-    export let hideAccount = (selectedAccountId: AccountIdentifier): void => {}
+    export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
     let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
@@ -53,7 +55,7 @@
     function triggerHideAccount() {
         isBusy = false
         closePopup()
-        hideAccount($selectedAccountId)
+        hideAccount($account?.id)
     }
 </script>
 

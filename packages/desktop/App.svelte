@@ -12,7 +12,7 @@
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
-    import { AppRoute, DashboardRoute, dashboardRouter, walletRouter, initRouters, openSettings } from '@core/router'
+    import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
         Backup,
@@ -85,7 +85,7 @@
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
-            $walletRouter.goTo(route)
+            $accountRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
