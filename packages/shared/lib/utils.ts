@@ -446,3 +446,11 @@ export const isValueInUnitRange = (value: number, unit: string): boolean => {
             return false
     }
 }
+
+export function getJsonRequestOptions(): RequestInit {
+    return {
+        headers: {
+            Accept: 'application/json',
+        },
+    }
+}

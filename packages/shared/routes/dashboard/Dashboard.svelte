@@ -13,7 +13,11 @@
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import {
+        clearPollParticipationOverviewInterval,
+        pollParticipationOverview, cacheStakingPeriodResults,
+        stakingResults
+    } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -62,6 +66,7 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void getParticipationEvents()
+            void cacheStakingPeriodResults($accounts)
 
             void pollNetworkStatus()
             void pollParticipationOverview()

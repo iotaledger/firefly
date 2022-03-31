@@ -154,3 +154,15 @@ export interface PendingParticipation {
     accountId: string
     action: ParticipationAction
 }
+
+export type StakingPeriodResultRewards = {
+    [address: string]: number
+}
+
+export type StakingPeriodResult = {
+    symbol: string
+    milestoneIndex: number
+    totalRewards: number
+    checksum: string
+    rewards: StakingPeriodResultRewards
+}
