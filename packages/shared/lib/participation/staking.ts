@@ -1,4 +1,7 @@
-import { get, writable } from 'svelte/store'
+import { get } from 'svelte/store'
+
+import { Bech32 } from '@lib/bech32'
+
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile } from '../profile'
@@ -7,13 +10,24 @@ import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, toHexString } from '../utils'
 import { selectedAccount } from '../wallet'
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
+
+import {
+    ASSEMBLY_EVENT_ID,
+    ASSEMBLY_STAKING_RESULT_URLS,
+    LAST_ASSEMBLY_STAKING_PERIOD,
+    SHIMMER_EVENT_ID,
+    SHIMMER_STAKING_RESULT_URL,
+    STAKING_AIRDROP_TOKENS,
+    STAKING_EVENT_IDS,
+} from './constants'
 import {
     assemblyStakingRemainingTime,
+    assemblyStakingResults,
     calculateRemainingStakingTime,
     participationEvents,
     selectedAccountParticipationOverview,
     shimmerStakingRemainingTime,
+    shimmerStakingResult,
     stakedAccounts,
     stakingEventState,
 } from './stores'
@@ -24,9 +38,6 @@ import {
     StakingAirdrop,
     StakingPeriodResult,
 } from './types'
-import { Bech32 } from '@lib/bech32'
-import { Address } from '@lib/typings/address'
-import { persistent } from '@lib/helpers'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -474,13 +485,6 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
 
-const SHIMMER_STAKING_RESULT_URL: string =
-    'https://raw.githubusercontent.com/iotaledger/participation-events/886597c7372c406ef6a8bc4df165619da0d82af4/results/staking/shimmer.json'
-
-const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
-]
-
 function getStakingPeriodResultUrl(airdrop: StakingAirdrop): string {
     switch (airdrop) {
         case StakingAirdrop.Assembly:
@@ -517,13 +521,10 @@ async function queryStakingPeriodResult(
     return { ...stakingPeriodResult, rewards: Object.fromEntries(outputsWithRewards) }
 }
 
-// TODO: Change writable to persisted
-export const shimmerStakingResult = persistent<StakingPeriodResult>('shimmerStakingResult', null)
-
-export const assemblyStakingResults = persistent<StakingPeriodResult[]>('assemblyStakingResults', [])
-
-const LAST_ASSEMBLY_STAKING_PERIOD = 1
-
+/**
+ * Caches the staking period results for Shimmer and Assembly if not already
+ * cached.
+ */
 export async function cacheStakingPeriodResults(accounts: WalletAccount[]): Promise<void> {
     if (accounts.length === 0) return
 
