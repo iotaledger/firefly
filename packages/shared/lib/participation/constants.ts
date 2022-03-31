@@ -44,3 +44,25 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  * participation information.
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
+
+/**
+ * The number of the last completed Assembly staking period.
+ */
+export const LAST_ASSEMBLY_STAKING_PERIOD = 1
+
+/**
+ * The number of the last completed Assembly staking period.
+ * Set to 0 if no current event
+ */
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 1
+
+/**
+ * The number of the last completed Assembly staking period.
+ */
+export const LAST_SHIMMER_STAKING_PERIOD = 1
+
+/**
+ * The number of the last completed Assembly staking period.
+ * Set to 0 if no current event
+ */
+export const CURRENT_SHIMMER_STAKING_PERIOD = 1

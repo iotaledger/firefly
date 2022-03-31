@@ -37,6 +37,7 @@
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
     import StakingNotice from './StakingNotice.svelte'
+    import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
@@ -50,6 +51,7 @@
     export let type = undefined
     export let props = undefined
     export let hideClose = undefined
+    export let preventClose = undefined
     export let fullScreen = undefined
     export let transition = true
 
@@ -120,6 +122,7 @@
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
         stakingNotice: StakingNotice,
+        newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
@@ -132,11 +135,11 @@
     }
 
     const tryClosePopup = (): void => {
-        if (!hideClose) {
+        if (!preventClose) {
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup($popupState?.preventClose)
+            closePopup()
         }
     }
 

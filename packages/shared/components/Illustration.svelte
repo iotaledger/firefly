@@ -71,6 +71,10 @@
             lightmode: 'staking/assembly-info.png',
             darkmode: 'staking/assembly-info.png',
         },
+        'staking-notification': {
+            lightmode: 'staking/staking-notification.png',
+            darkmode: 'staking/staking-notification.png',
+        },
     }
 </script>
 
