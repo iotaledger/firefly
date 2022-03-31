@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { WalletAccount } from 'lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { AccountSwitcherModal, Icon, Text } from 'shared/components'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { isSyncing, isTransferring, selectedAccount } from 'shared/lib/wallet'
@@ -15,11 +15,11 @@
     function onClick(): void {
         let message: string
         if ($isSyncing) {
-            message = localize('popups.notification.syncing')
+            message = localize('notifications.syncing')
         } else if ($isTransferring) {
-            message = localize('popups.notification.transferring')
+            message = localize('notifications.transferring')
         } else if ($participationAction) {
-            message = localize('popups.notification.participating')
+            message = localize('notifications.participating')
         } else {
             toggleModal()
             return
