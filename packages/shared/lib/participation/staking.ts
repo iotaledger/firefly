@@ -1,4 +1,4 @@
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile } from '../profile'
@@ -6,7 +6,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, toHexString } from '../utils'
-import { selectedAccount, wallet } from '../wallet'
+import { selectedAccount } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
     assemblyStakingRemainingTime,
@@ -25,6 +25,8 @@ import {
     StakingPeriodResult
 } from './types'
 import { Bech32 } from '@lib/bech32'
+import { Address } from '@lib/typings/address'
+import { persistent } from '@lib/helpers'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -472,16 +474,16 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
 
-const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json'
-]
-
 const SHIMMER_STAKING_RESULT_URL: string = 'https://raw.githubusercontent.com/iotaledger/participation-events/886597c7372c406ef6a8bc4df165619da0d82af4/results/staking/shimmer.json'
+
+const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
+    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
+]
 
 function getStakingPeriodResultUrl(airdrop: StakingAirdrop): string {
     switch (airdrop) {
         case StakingAirdrop.Assembly:
-            return ASSEMBLY_STAKING_RESULT_URLS[0]
+            return ASSEMBLY_STAKING_RESULT_URLS[LAST_ASSEMBLY_STAKING_PERIOD - 1] ?? ''
         case StakingAirdrop.Shimmer:
             return SHIMMER_STAKING_RESULT_URL
         default:
@@ -489,39 +491,51 @@ function getStakingPeriodResultUrl(airdrop: StakingAirdrop): string {
     }
 }
 
-async function queryStakingPeriodResult(airdrop: StakingAirdrop, accounts: WalletAccount[]): Promise<void> {
+async function fetchStakingPeriodResult(airdrop: StakingAirdrop): Promise<StakingPeriodResult> {
     const stakingPeriodResultUrl = getStakingPeriodResultUrl(airdrop)
     const stakingPeriodResultResponse = await fetch(stakingPeriodResultUrl, getJsonRequestOptions())
-    const stakingPeriodResult: StakingPeriodResult = await stakingPeriodResultResponse.json()
-    console.log('RESULT: ', stakingPeriodResult)
-    console.log('NUM OUTPUTS: ', Object.keys(stakingPeriodResult.rewards).length)
 
-    const addresses = accounts.map((account) => account.addresses).flat()
-    console.log('ADDRESSES (Bech32): ', addresses)
-    console.log('ADDRESSES (Ed25519): ', addresses.map((address) => {
-        const decoded = Bech32.decode(address.address)
-        return toHexString(Array.from(decoded.data))
-    }))
-
-    const outputs = addresses
-        .map((bech32Address) => toHexString(Array.from(Bech32.decode(bech32Address.address).data)))
-        .filter((ed25519Address) => ed25519Address in stakingPeriodResult.rewards)
-    console.log('OUTPUTS: ', outputs)
-
-    // TESTING
-    outputs.push('a422ff4a68af57a88b28dbf27480c2a4a421613c651c554e3708fff1562d99ec')
-
-    const results = outputs
-        .filter((output) => output in stakingPeriodResult.rewards)
-        .map((output) => ({ [output]: stakingPeriodResult.rewards[output] }))
-    console.log(`RESULTS (${airdrop}):\n`)
-    console.log(results)
+    return stakingPeriodResultResponse.json()
 }
 
-export async function cacheStakingPeriodResults(accounts: WalletAccount[]): Promise<unknown> {
+function getOutputsOfAccounts(accounts: WalletAccount[]): string[] {
+    const addresses = accounts.map((account) => account.addresses).flat()
+
+    return addresses
+        .map((bech32Address) => toHexString(Array.from(Bech32.decode(bech32Address.address).data)))
+}
+
+async function queryStakingPeriodResult(airdrop: StakingAirdrop, accounts: WalletAccount[]): Promise<StakingPeriodResult> {
+    const stakingPeriodResult = await fetchStakingPeriodResult(airdrop)
+    const outputsWithRewards = getOutputsOfAccounts(accounts)
+        .filter((output) => output in stakingPeriodResult.rewards)
+        .map((output) => [output, stakingPeriodResult.rewards[output]])
+
+    return { ...stakingPeriodResult, rewards: Object.fromEntries(outputsWithRewards) }
+}
+
+// TODO: Change writable to persisted
+export const shimmerStakingResult = persistent<StakingPeriodResult>('shimmerStakingResult', null)
+
+export const assemblyStakingResults = persistent<StakingPeriodResult[]>('assemblyStakingResults', [])
+
+const LAST_ASSEMBLY_STAKING_PERIOD = 1
+
+export async function cacheStakingPeriodResults(accounts: WalletAccount[]): Promise<void> {
     if (accounts.length === 0) return
 
-    console.log('ACCOUNTS: ', accounts)
+    const mustCacheShimmerStakingResult = get(shimmerStakingResult) === null
+    if (mustCacheShimmerStakingResult) {
+        const _shimmerStakingResult = await queryStakingPeriodResult(StakingAirdrop.Shimmer, accounts)
+        shimmerStakingResult.set(_shimmerStakingResult)
+    }
 
-    await queryStakingPeriodResult(StakingAirdrop.Shimmer, accounts)
+    const mustCacheAssemblyStakingResult = LAST_ASSEMBLY_STAKING_PERIOD > get(assemblyStakingResults).length
+    if (mustCacheAssemblyStakingResult) {
+        const _assemblyStakingResult = await queryStakingPeriodResult(StakingAirdrop.Assembly, accounts)
+        assemblyStakingResults.update((_assemblyStakingResults) => {
+            _assemblyStakingResults.push(_assemblyStakingResult)
+            return _assemblyStakingResults
+        })
+    }
 }

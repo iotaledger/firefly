@@ -14,9 +14,9 @@
         showAppNotification,
     } from 'shared/lib/notifications'
     import {
+        cacheStakingPeriodResults,
         clearPollParticipationOverviewInterval,
-        pollParticipationOverview, cacheStakingPeriodResults,
-        stakingResults
+        pollParticipationOverview,
     } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
