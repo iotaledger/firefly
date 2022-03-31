@@ -22,7 +22,7 @@ import {
     ParticipationEvent,
     ParticipationEventState,
     StakingAirdrop,
-    StakingPeriodResult
+    StakingPeriodResult,
 } from './types'
 import { Bech32 } from '@lib/bech32'
 import { Address } from '@lib/typings/address'
@@ -474,7 +474,8 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
 
-const SHIMMER_STAKING_RESULT_URL: string = 'https://raw.githubusercontent.com/iotaledger/participation-events/886597c7372c406ef6a8bc4df165619da0d82af4/results/staking/shimmer.json'
+const SHIMMER_STAKING_RESULT_URL: string =
+    'https://raw.githubusercontent.com/iotaledger/participation-events/886597c7372c406ef6a8bc4df165619da0d82af4/results/staking/shimmer.json'
 
 const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
     'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
@@ -501,11 +502,13 @@ async function fetchStakingPeriodResult(airdrop: StakingAirdrop): Promise<Stakin
 function getOutputsOfAccounts(accounts: WalletAccount[]): string[] {
     const addresses = accounts.map((account) => account.addresses).flat()
 
-    return addresses
-        .map((bech32Address) => toHexString(Array.from(Bech32.decode(bech32Address.address).data)))
+    return addresses.map((bech32Address) => toHexString(Array.from(Bech32.decode(bech32Address.address).data)))
 }
 
-async function queryStakingPeriodResult(airdrop: StakingAirdrop, accounts: WalletAccount[]): Promise<StakingPeriodResult> {
+async function queryStakingPeriodResult(
+    airdrop: StakingAirdrop,
+    accounts: WalletAccount[]
+): Promise<StakingPeriodResult> {
     const stakingPeriodResult = await fetchStakingPeriodResult(airdrop)
     const outputsWithRewards = getOutputsOfAccounts(accounts)
         .filter((output) => output in stakingPeriodResult.rewards)
