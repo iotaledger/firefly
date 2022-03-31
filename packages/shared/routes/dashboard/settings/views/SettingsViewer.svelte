@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize, _ } from '@core/i18n'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
@@ -63,10 +63,6 @@
         }
     }
 
-    function handleBackClick() {
-        $settingsRouter.previous()
-    }
-
     onMount(() => {
         const child = $settingsRouter.getChildRouteAndReset()
         if (child) {
@@ -78,12 +74,6 @@
 {#key $_}
     <div class="flex flex-1 flex-row items-start">
         {#if !$mobile}
-            <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
-                <div class="flex items-center space-x-3">
-                    <Icon icon="arrow-left" classes="text-blue-500" />
-                    <Text type="h5">{localize('actions.back')}</Text>
-                </div>
-            </button>
             <SettingsNavigator
                 {routes}
                 onSettingClick={(id) => scrollIntoView(id)}
