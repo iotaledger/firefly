@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { selectedAccount } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
@@ -9,9 +8,9 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { localize } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
+    import { selectedAccountParticipationOverview, stakingEventState } from 'shared/lib/participation/stores'
 
-    export let accountId
+    export let accountId: string
     export let internal = false
     export let to = ''
     export let amount = 0
@@ -27,10 +26,10 @@
         Vote = 'vote',
     }
 
-    $: accountOverview = $participationOverview?.find((apo) => apo?.accountIndex === $selectedAccount.index)
     $: isAccountVoting =
-        Object.values(accountOverview?.trackedParticipations)?.find((tp) => tp?.find((p) => p?.endMilestoneIndex === 0))
-            ?.length > 0 ?? false
+        Object.values($selectedAccountParticipationOverview?.trackedParticipations)?.find((tp) =>
+            tp?.find((p) => p?.endMilestoneIndex === 0)
+        )?.length > 0 ?? false
 
     let activeParticipationType: ActiveParticipationType | ''
     $: {
@@ -48,8 +47,12 @@
     $: mustAcknowledgeGenericParticipationWarning =
         (isAccountStaked(accountId) && isStakingPossible($stakingEventState)) || isAccountVoting
 
-    $: mustAcknowledgeBelowMinRewardParticipationWarning =
-        accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+    let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
+    $: {
+        const accountOverview = $selectedAccountParticipationOverview
+        mustAcknowledgeBelowMinRewardParticipationWarning =
+            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+    }
 
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)

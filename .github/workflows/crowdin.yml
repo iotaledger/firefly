@@ -1,9 +1,9 @@
 name: "Crowdin"
 
 on:
-  schedule:
-    # Daily at 18:00 UTC
-    - cron: '0 18 * * *'
+  # schedule:
+  #   # Daily at 18:00 UTC
+  #   - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:

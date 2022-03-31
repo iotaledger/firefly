@@ -2,8 +2,8 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { NodePlugin } from '../typings/node'
+import { wallet, selectedAccount } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
-import { wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
 import {
     ParticipateResponsePayload,
@@ -62,6 +62,12 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
         if (!get(accounts)) return []
         else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.index))
     }
+)
+
+export const selectedAccountParticipationOverview = derived(
+    [participationOverview, selectedAccount],
+    ([$participationOverview, $selectedAccount]) =>
+        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
 )
 
 /**

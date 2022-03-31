@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text, Logo } from 'shared/components'
+    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
