@@ -17,26 +17,26 @@
 
     export let airdrop: StakingAirdrop
 
-    const isAssembly = (): boolean => airdrop === StakingAirdrop.Assembly
-
-    const parseRemainingTime = (): [string, string] => {
-        const formattedValue = getBestTimeDuration(
-            isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        )
-        const timeAmount = parseFloat(formattedValue).toString()
-        const timeUnit = formattedValue.replace(timeAmount.toString(), '')
-
-        return [timeAmount, timeUnit]
-    }
-
-    $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime()
+    let remainingTimeAmount: string
+    let remainingTimeUnit: string
 
     const video = {
         [StakingAirdrop.Assembly]: null,
         [StakingAirdrop.Shimmer]: null,
     }
 
-    const handleLearnMoreClick = (): void => {
+    $: isAssembly = airdrop === StakingAirdrop.Assembly
+    $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
+
+    function parseRemainingTime(): void {
+        const formattedValue = getBestTimeDuration(
+            isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        )
+        remainingTimeAmount = parseFloat(formattedValue).toString()
+        remainingTimeUnit = formattedValue.replace(remainingTimeAmount.toString(), '')
+    }
+
+    function handleLearnMoreClick(): void {
         const url = getLearnMoreUrl()
         if (!url) {
             showAppNotification({
@@ -50,7 +50,7 @@
         Platform.openUrl(getLearnMoreUrl())
     }
 
-    const getLearnMoreUrl = (): string => {
+    function getLearnMoreUrl(): string {
         switch (airdrop) {
             case StakingAirdrop.Assembly:
                 return 'https://assembly.sc'
@@ -61,7 +61,7 @@
         }
     }
 
-    const getLocalizedDurationText = (state: ParticipationEventState): string => {
+    function getLocalizedDurationText(state: ParticipationEventState): string {
         let stateText: string
         switch (state) {
             case ParticipationEventState.Commencing:
@@ -123,14 +123,14 @@
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[1]}
                     </Text>
