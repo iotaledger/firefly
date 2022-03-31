@@ -13,6 +13,7 @@
     const generateNewAddress = (): void => {
         onGenerateAddress($selectedAccount.id)
     }
+
     const handleCloseClick = (): void => {
         $accountRouter.previous()
     }
@@ -20,7 +21,7 @@
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
     <div class="w-full flex flex-row justify-between items-center">
-        <div class="w-full flex flex-row space-x-4 items-center">
+        <div class="w-full flex flex-row space-x-4 items-center justify-center">
             <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>
             <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                 <Icon
@@ -34,7 +35,7 @@
         </button>
     </div>
     {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
-        <div class="flex w-full justify-center items-center">
+        <div class="flex w-full h-full justify-center items-end pb-2">
             <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
                 {#if isGeneratingAddress}
                     <Spinner
