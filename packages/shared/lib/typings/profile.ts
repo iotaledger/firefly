@@ -31,6 +31,8 @@ export interface Profile {
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
     hasVisitedStaking?: boolean
+    lastShimmerPeriodVisitedStaking?: number
+    lastAssemblyPeriodVisitedStaking?: number
     accounts?: ProfileAccount[]
     lastUsedAccountId?: string
 }

@@ -19,15 +19,14 @@
     import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
-    const handleNewStakingFeature = (): void => {
-        if (!$activeProfile?.hasVisitedStaking) {
-            showAppNotification({
-                type: 'info',
-                message: localize('views.staking.welcome'),
-            })
+    const handleNewStakingEvent = (): void => {
+        openPopup({
+            type: 'newStakingPeriodNotification',
+            hideClose: true,
+            preventClose: false,
+        })
 
-            updateProfile('hasVisitedStaking', true)
-        }
+        updateProfile('hasVisitedStaking', true)
     }
 
     // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
@@ -118,7 +117,7 @@
 
     onMount(async () => {
         if (!$activeProfile?.hasVisitedStaking) {
-            handleNewStakingFeature()
+            handleNewStakingEvent()
         }
         await getParticipationEvents()
         await getParticipationOverview()
