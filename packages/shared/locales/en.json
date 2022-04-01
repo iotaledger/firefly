@@ -1101,9 +1101,9 @@
                 }
             }
         },
-        "syncing": "Wait until synchronization is finished to change account!",
-        "transferring": "Wait until all transactions are completed to change account!",
-        "participating": "Wait until all staking/voting transactions are completed to change account!"
+        "syncing": "Please wait until synchronization is finished to change accounts.",
+        "transferring": "Please wait until all transactions are completed to change accounts.",
+        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
     },
     "error": {
         "profile": {
