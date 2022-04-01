@@ -2,10 +2,8 @@
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { localize } from '@core/i18n'
-    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         assemblyStakingRemainingTime,
-        participationOverview,
         selectedAccountParticipationOverview,
         stakedAccounts,
         stakingEventState,
@@ -18,8 +16,10 @@
     let header: string
     let subHeader: string
 
-    $: $participationOverview, $stakingEventState, setHeaders()
-    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, setAnimation()
+    $: isAssemblyStaked = $selectedAccountParticipationOverview?.assemblyStakedFunds > 0
+    $: isShimmerStaked = $selectedAccountParticipationOverview?.shimmerStakedFunds > 0
+    $: $selectedAccountParticipationOverview, $stakingEventState, setHeaders()
+    $: isAssemblyStaked, isShimmerStaked, $stakingEventState, $selectedAccountId, setAnimation()
 
     enum FileNumber {
         NoStaking = 0,
@@ -37,22 +37,13 @@
         if ($stakingEventState === ParticipationEventState.Inactive) {
             animation = null
         } else if ($stakingEventState === ParticipationEventState.Holding) {
-            const stakingParticipationIds: string[] = []
-            $selectedAccountParticipationOverview?.participations?.forEach((p) => {
-                if (!stakingParticipationIds.includes(p.eventId) && STAKING_EVENT_IDS.includes(p.eventId)) {
-                    stakingParticipationIds.push(p.eventId)
-                }
-            })
-
             let fileNumber = FileNumber.NoStaking
-            if (stakingParticipationIds.length >= 2) {
+            if (isAssemblyStaked && isShimmerStaked) {
                 fileNumber = FileNumber.AssemblyAndShimmer
-            } else if (stakingParticipationIds.length === 1) {
-                if (stakingParticipationIds[0] === ASSEMBLY_EVENT_ID) {
-                    fileNumber = FileNumber.Assembly
-                } else {
-                    fileNumber = FileNumber.Shimmer
-                }
+            } else if (isAssemblyStaked) {
+                fileNumber = FileNumber.Assembly
+            } else if (isShimmerStaked) {
+                fileNumber = FileNumber.Shimmer
             }
 
             animation = `${prefix}-${$stakingEventState}-${fileNumber}`
@@ -67,11 +58,11 @@
             const isStaking = $stakedAccounts.length > 0
             const localiseHoldingHeader = isStaking ? 'Holding' : 'NotHolding'
             const localiseHoldingSubHeader = isStaking ? 'Holding' : 'NotHolding'
-            const timeDuration = isStaking
+            const duration = isStaking
                 ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
                 : {}
 
-            header = localize(`${localePath}Header${localiseHoldingHeader}`, timeDuration)
+            header = localize(`${localePath}Header${localiseHoldingHeader}`, duration)
             subHeader = localize(`${localePath}Subheader${localiseHoldingSubHeader}`)
         } else {
             header = localize(`${localePath}Header`)
