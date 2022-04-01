@@ -45,13 +45,11 @@ activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
 
-if (selectedAccountId) {
-    selectedAccountId.subscribe((accountId) => {
-        if (accountId) {
-            updateProfile('lastUsedAccountId', accountId)
-        }
-    })
-}
+selectedAccountId?.subscribe((accountId) => {
+    if (accountId) {
+        updateProfile('lastUsedAccountId', accountId)
+    }
+})
 
 export const isSoftwareProfile: Readable<boolean> = derived(
     activeProfile,
