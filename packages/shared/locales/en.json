@@ -1100,7 +1100,10 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change accounts.",
+        "transferring": "Please wait until all transactions are completed to change accounts.",
+        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
     },
     "error": {
         "profile": {
