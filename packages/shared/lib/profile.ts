@@ -45,6 +45,14 @@ activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
 
+if (selectedAccountId) {
+    selectedAccountId.subscribe((accountId) => {
+        if (accountId) {
+            updateProfile('lastUsedAccountId', accountId)
+        }
+    })
+}
+
 export const isSoftwareProfile: Readable<boolean> = derived(
     activeProfile,
     ($activeProfile) => $activeProfile?.type === ProfileType.Software
@@ -451,9 +459,3 @@ export const validateProfileName = (trimmedName: string): void => {
         throw new Error(locale('error.profile.duplicate'))
     }
 }
-
-selectedAccountId.subscribe((accountId) => {
-    if (accountId) {
-        updateProfile('lastUsedAccountId', accountId)
-    }
-})
