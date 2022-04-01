@@ -35,7 +35,7 @@
         </button>
     </div>
     {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
-        <div class="flex w-full h-full justify-center items-end pb-2">
+        <div class="flex w-full h-full justify-center items-end">
             <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
                 {#if isGeneratingAddress}
                     <Spinner
