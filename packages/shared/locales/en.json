@@ -739,13 +739,6 @@
             "profileName": "Profile name:",
             "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
-
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",

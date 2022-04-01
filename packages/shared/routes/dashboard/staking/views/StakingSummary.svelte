@@ -61,7 +61,7 @@
         const showNotice =
             $stakingEventState === ParticipationEventState.Upcoming ||
             $stakingEventState === ParticipationEventState.Commencing
-        const type = !isStakedAndCanParticipate && showNotice ? 'stakingNotice' : 'stakingManager'
+        const type = !isStakedAndCanParticipate && showNotice ? 'newStakingPeriodNotification' : 'stakingManager'
 
         openPopup({ type })
     }

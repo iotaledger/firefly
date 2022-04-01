@@ -36,7 +36,6 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
-    import StakingNotice from './StakingNotice.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
@@ -121,7 +120,6 @@
         // Participation (voting / staking)
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
-        stakingNotice: StakingNotice,
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,

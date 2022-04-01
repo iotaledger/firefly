@@ -20,14 +20,11 @@
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
     const handleNewStakingEvent = (): void => {
-        openPopup(
-            {
-                type: 'newStakingPeriodNotification',
-                hideClose: true,
-                preventClose: false,
-            },
-            false
-        )
+        openPopup({
+            type: 'newStakingPeriodNotification',
+            hideClose: true,
+            preventClose: false,
+        })
 
         updateProfile('hasVisitedStaking', true)
     }
