@@ -1,17 +1,16 @@
 import { MILLISECONDS_PER_SECOND } from '../time'
 
-import { Participation, StakingAirdrop, StakingPeriodResult } from './types'
-import { persistent } from '@lib/helpers'
+import { Participation, StakingAirdrop } from './types'
 
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '57607d9f8cefc366c3ead71f5b1d76cef1b36a07eb775158c541107951d4aecb'
+export const ASSEMBLY_EVENT_ID = '249dfc25efde867884ff083e35f8df4e32bd0abb40862b6304203a27f0e1e5d0'
 
 /**
  * The staking event ID for Shimmer.
  */
-export const SHIMMER_EVENT_ID = 'f6dbdad416e0470042d3fe429eb0e91683ba171279bce01be6d1d35a9909a981'
+export const SHIMMER_EVENT_ID = '24a2e624d3416a323a542b0c5c715783dd125b0f3fd51f6cceda0707806726ae'
 
 /**
  * Useful array of staking event IDs.
