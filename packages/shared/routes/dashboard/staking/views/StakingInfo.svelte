@@ -22,6 +22,13 @@
     $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, updateAnimation()
     $: localePath = `views.staking.info.${$stakingEventState}`
 
+    enum FileNumber {
+        NoStaking = 0,
+        Assembly = 1,
+        Shimmer = 2,
+        AssemblyAndShimmer = 3,
+    }
+
     function updateAnimation(): void {
         const prefix = 'staking-info'
         if (!$stakingEventState || !$selectedAccountParticipationOverview) {
@@ -38,14 +45,14 @@
                 }
             })
 
-            let fileNumber = 0
+            let fileNumber = FileNumber.NoStaking
             if (stakingParticipationIds.length >= 2) {
-                fileNumber = 3
+                fileNumber = FileNumber.AssemblyAndShimmer
             } else if (stakingParticipationIds.length === 1) {
                 if (stakingParticipationIds[0] === ASSEMBLY_EVENT_ID) {
-                    fileNumber = 1
+                    fileNumber = FileNumber.Assembly
                 } else {
-                    fileNumber = 2
+                    fileNumber = FileNumber.Shimmer
                 }
             }
 
