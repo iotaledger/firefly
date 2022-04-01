@@ -9,6 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
+    selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
@@ -42,6 +43,12 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
+})
+
+selectedAccountId?.subscribe((accountId) => {
+    if (accountId) {
+        updateProfile('lastUsedAccountId', accountId)
+    }
 })
 
 export const isSoftwareProfile: Readable<boolean> = derived(

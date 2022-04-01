@@ -54,9 +54,9 @@
         sidebarTabs = sidebarTabs.map((tab) => {
             if (DashboardRoute.Staking === tab.route) {
                 tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'warning'
-                    : showStakingNotification
                     ? 'error'
+                    : showStakingNotification
+                    ? 'warning'
                     : null
             }
             return tab

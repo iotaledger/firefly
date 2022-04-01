@@ -15,8 +15,9 @@ import {
     ASSEMBLY_EVENT_ID,
     ASSEMBLY_STAKING_RESULT_URLS,
     LAST_ASSEMBLY_STAKING_PERIOD,
+    LAST_SHIMMER_STAKING_PERIOD,
     SHIMMER_EVENT_ID,
-    SHIMMER_STAKING_RESULT_URL,
+    SHIMMER_STAKING_RESULT_URLS,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
 } from './constants'
@@ -490,7 +491,7 @@ function getStakingPeriodResultUrl(airdrop: StakingAirdrop): string {
         case StakingAirdrop.Assembly:
             return ASSEMBLY_STAKING_RESULT_URLS[LAST_ASSEMBLY_STAKING_PERIOD - 1] ?? ''
         case StakingAirdrop.Shimmer:
-            return SHIMMER_STAKING_RESULT_URL
+            return SHIMMER_STAKING_RESULT_URLS[LAST_SHIMMER_STAKING_PERIOD - 1] ?? ''
         default:
             return ''
     }

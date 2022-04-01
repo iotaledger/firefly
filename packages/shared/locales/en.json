@@ -739,13 +739,6 @@
             "profileName": "Profile name:",
             "accountName": "Account name:",
             "typePassword": "Type your password to allow exporting"
-
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",
@@ -761,6 +754,11 @@
             "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking round 2 from March 22nd",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round 2 from March 22nd. Stake your IOTAs and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -912,7 +910,8 @@
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "okIUnderstand": "OK, I understand"
     },
     "general": {
         "password": "Password",
@@ -1100,7 +1099,10 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change accounts.",
+        "transferring": "Please wait until all transactions are completed to change accounts.",
+        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
     },
     "error": {
         "profile": {
