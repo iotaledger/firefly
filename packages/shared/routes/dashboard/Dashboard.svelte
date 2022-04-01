@@ -359,8 +359,7 @@
     }
 
     $: if ($accountsLoaded) {
-        // TODO: persist last selected account
-        setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
+        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 </script>
 

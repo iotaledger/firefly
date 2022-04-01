@@ -32,6 +32,7 @@ export interface Profile {
     ledgerMigrationCount?: number
     hasVisitedStaking?: boolean
     accounts?: ProfileAccount[]
+    lastUsedAccountId?: string
 }
 
 /**

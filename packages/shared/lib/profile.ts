@@ -9,6 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
+    selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
@@ -450,3 +451,9 @@ export const validateProfileName = (trimmedName: string): void => {
         throw new Error(locale('error.profile.duplicate'))
     }
 }
+
+selectedAccountId.subscribe((accountId) => {
+    if (accountId) {
+        updateProfile('lastUsedAccountId', accountId)
+    }
+})
