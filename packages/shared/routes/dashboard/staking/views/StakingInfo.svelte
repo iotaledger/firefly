@@ -19,8 +19,7 @@
     let subHeader: string
 
     $: $participationOverview, $stakingEventState, setHeaders()
-    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, updateAnimation()
-    $: localePath = `views.staking.info.${$stakingEventState}`
+    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, setAnimation()
 
     enum FileNumber {
         NoStaking = 0,
@@ -29,7 +28,7 @@
         AssemblyAndShimmer = 3,
     }
 
-    function updateAnimation(): void {
+    function setAnimation(): void {
         const prefix = 'staking-info'
         if (!$stakingEventState || !$selectedAccountParticipationOverview) {
             animation = `${prefix}-upcoming`
@@ -63,23 +62,24 @@
     }
 
     function setHeaders(): void {
+        const localePath = `views.staking.info.${$stakingEventState}`
         if ($stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
-            const localiseHoldingHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
-            const localiseHoldingSubHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
+            const localiseHoldingHeader = isStaking ? 'Holding' : 'NotHolding'
+            const localiseHoldingSubHeader = isStaking ? 'Holding' : 'NotHolding'
+            const timeDuration = isStaking
+                ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
+                : {}
 
-            header = localize(
-                `${localePath}Header${localiseHoldingHeader}`,
-                isStaking ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } } : {}
-            )
+            header = localize(`${localePath}Header${localiseHoldingHeader}`, timeDuration)
             subHeader = localize(`${localePath}Subheader${localiseHoldingSubHeader}`)
         } else {
             header = localize(`${localePath}Header`)
-            subHeader = localize(`views.staking.info.${$stakingEventState}Subheader`)
+            subHeader = localize(`${localePath}Subheader`)
         }
     }
 
-    function handleLearnMoreClick(): void {
+    function onClickLearnMore(): void {
         Platform.openUrl('https://blog.iota.org/iota-staking-start/')
     }
 </script>
@@ -96,7 +96,7 @@
     <div class="w-full mt-4 flex flex-col items-center text-center">
         <Text type="p" bigger classes="mb-1">{subHeader}</Text>
         <Text type="h2" classes="mb-2">{header}</Text>
-        <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
+        <Link onClick={onClickLearnMore} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
     </div>
 </div>
 
