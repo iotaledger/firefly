@@ -7,7 +7,6 @@
         assemblyStakingRemainingTime,
         participationOverview,
         selectedAccountParticipationOverview,
-        shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
@@ -16,8 +15,14 @@
     import { selectedAccountId } from '@lib/wallet'
 
     let animation: string
+    let header: string
+    let subHeader: string
 
-    const updateAnimation = (): void => {
+    $: $participationOverview, $stakingEventState, setHeaders()
+    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, updateAnimation()
+    $: localePath = `views.staking.info.${$stakingEventState}`
+
+    function updateAnimation(): void {
         const prefix = 'staking-info'
         if (!$stakingEventState || !$selectedAccountParticipationOverview) {
             animation = `${prefix}-upcoming`
@@ -50,35 +55,24 @@
         }
     }
 
-    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, updateAnimation()
-
-    $: localePath = `views.staking.info.${$stakingEventState}`
-    $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime
-
-    const getHeaders = (): [string, string] => {
+    function setHeaders(): void {
         if ($stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
             const localiseHoldingHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
             const localiseHoldingSubHeader = $stakedAccounts.length > 0 ? 'Holding' : 'NotHolding'
 
-            return [
-                localize(
-                    `${localePath}Header${localiseHoldingHeader}`,
-                    isStaking ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } } : {}
-                ),
-                localize(`${localePath}Subheader${localiseHoldingSubHeader}`),
-            ]
+            header = localize(
+                `${localePath}Header${localiseHoldingHeader}`,
+                isStaking ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } } : {}
+            )
+            subHeader = localize(`${localePath}Subheader${localiseHoldingSubHeader}`)
         } else {
-            return [localize(`${localePath}Header`), localize(`views.staking.info.${$stakingEventState}Subheader`)]
+            header = localize(`${localePath}Header`)
+            subHeader = localize(`views.staking.info.${$stakingEventState}Subheader`)
         }
     }
 
-    let header, subHeader
-    $: $participationOverview, ([header, subHeader] = getHeaders())
-
-    stakingEventState.subscribe(() => ([header, subHeader] = getHeaders()))
-
-    const handleLearnMoreClick = (): void => {
+    function handleLearnMoreClick(): void {
         Platform.openUrl('https://blog.iota.org/iota-staking-start/')
     }
 </script>
