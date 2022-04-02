@@ -104,6 +104,7 @@ jobs:
       if: matrix.os == 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
 
     - name: Install dependencies
+      # Increase network timeout threshold to reduce build failures on Windows
       run: yarn --network-timeout 1000000
 
     - name: Rebuild backend actor system with Sentry DSN and environment
