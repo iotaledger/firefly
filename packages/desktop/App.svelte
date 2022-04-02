@@ -82,7 +82,7 @@
         }, 3000)
 
         // This is added to migrate all profile folder names from using the profile name to the id
-        if (get(hasRenamedProfileFoldersToId)) {
+        if (!get(hasRenamedProfileFoldersToId)) {
             await renameAllProfileFoldersToId()
             hasRenamedProfileFoldersToId.set(true)
         }
