@@ -318,7 +318,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "如果你改变了你的系统主题，你可能需要重新启动 Firefly 才能看到效果"
             },
             "language": {
                 "title": "语言",

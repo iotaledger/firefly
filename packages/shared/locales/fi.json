@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Teema",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Jos muutat järjestelmän teemaa, sinun on ehkä käynnistettävä Firefly uudelleen nähdäksesi vaikutukset"
             },
             "language": {
                 "title": "Kieli",

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "المظهر المفضل لك",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "إذا قمت بتغيير سمة النظام الخاص بك، قد تحتاج إلى إعادة تشغيل Firefly لرؤية التغييرات"
             },
             "language": {
                 "title": "اللغة",
@@ -420,7 +420,7 @@
                 "title": "تقارير الأعطال",
                 "body": "ساعد المطورين على تحسين Firefly بإرسال بيانات التشخيص تلقائيًا عند حدوث خطأ أو عطل",
                 "checkbox": "إرسال تقارير الأعطال",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "advice": "الرجاء إعادة تشغيل تطبيق Firefly من أجل {sendCrashReports, select, true {مشاركة سجل الخطأ} false {إيقاف مشاركة سجل الخطأ} other {تطبيق التغييرات}}"
             },
             "diagnostics": {
                 "title": "التشخيص",

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Erscheinungsbild",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Wenn du dein System-Erscheinungsbild änderst, musst du Firefly möglicherweise neu starten, um die Auswirkungen zu sehen"
             },
             "language": {
                 "title": "Sprache",
