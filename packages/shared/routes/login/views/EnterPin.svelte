@@ -81,7 +81,7 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then((machineId) =>
-                            getProfileDataPath(profile.name).then((path) => {
+                            getProfileDataPath(profile.id).then((path) => {
                                 initialise(profile.id, path, sendCrashReports, machineId)
                                 api.setStoragePassword(pinCode, {
                                     onSuccess() {

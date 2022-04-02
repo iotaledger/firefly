@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage, loggedIn } from 'shared/lib/app'
+    import { stage, loggedIn, hasRenamedProfileFoldersToId } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
@@ -10,7 +10,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameAllProfileFoldersToId } from 'shared/lib/profile'
     import {
         dashboardRoute,
         initRouter,
@@ -80,6 +80,12 @@
             splash = false
             initRouter()
         }, 3000)
+
+        // This is added to migrate all profile folder names from using the profile name to the id
+        if (get(hasRenamedProfileFoldersToId)) {
+            await renameAllProfileFoldersToId()
+            hasRenamedProfileFoldersToId.set(true)
+        }
 
         initAppSettings.set($appSettings)
 

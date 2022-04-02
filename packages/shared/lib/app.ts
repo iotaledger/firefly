@@ -44,6 +44,11 @@ export const mnemonic = writable<string[]>(null)
 export const lastActiveAt = writable<Date>(new Date())
 
 /**
+ * Has the profile folders been renamed from using profile name to the profile id?
+ */
+export const hasRenamedProfileFoldersToId = writable<boolean>(false)
+
+/**
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({
