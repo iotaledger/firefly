@@ -11,7 +11,7 @@
     $: newName, (error = '')
     $: disabled = invalidName(trimmedProfileName)
 
-    function onSubmitClick(): Promise<void> {
+    function onSubmitClick(): void {
         try {
             validateProfileName(trimmedProfileName)
             updateProfile('name', trimmedProfileName)
