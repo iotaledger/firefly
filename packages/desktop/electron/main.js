@@ -307,6 +307,17 @@ function createWindow() {
     })
 
     /**
+     * CVE-2022-21718 mitigation
+     * Remove when updating to Electron 13.6.6 or later
+     * https://github.com/advisories/GHSA-3p22-ghq8-v749
+     */
+    windows.main.webContents.on('select-bluetooth-device', (event, _devices, cb) => {
+        event.preventDefault()
+        // Cancel the request
+        cb('')
+    })
+
+    /**
      * Handle permissions requests
      */
     session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {

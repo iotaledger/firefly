@@ -318,7 +318,7 @@
             "theme": {
                 "title": "थीम",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "भाषा ",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "फायरफ्लाई v{version}",
                     "upToDate": "आधुनिक",
-                    "outOfDate": "अप्रचलित"
+                    "outOfDate": "अप्रचलित",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "हार्डवेयर उपकरण",
@@ -566,7 +567,8 @@
             "upToDateDescription": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
             "updateAvailable": "फायरफ्लाई अपडेट उपलब्ध है",
             "updateDetails": "संस्करण {version} - {date}",
-            "noAutoUpdate": "इस विंडोज संस्करण में ऑटो-अपडेट अक्षम है, कृपया अपडेट डाउनलोड करने के लिए https://firefly.iota.org पर जाएं।"
+            "noAutoUpdate": "इस विंडोज संस्करण में ऑटो-अपडेट अक्षम है, कृपया अपडेट डाउनलोड करने के लिए https://firefly.iota.org पर जाएं।",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "पिछला बैकअप: {date}",
