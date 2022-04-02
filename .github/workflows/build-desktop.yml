@@ -112,6 +112,21 @@ jobs:
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
         SENTRY_ENVIRONMENT: ${{ env.STAGE }}
+    
+    - name: Install Sentry CLI
+      # Yarn has issues putting binaries in the PATH on Windows
+      run: npm i -g @sentry/cli
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
+
+    - name: Upload backend PDB (Windows)
+      run: |
+        sentry-cli difutil check node_neon.pdb
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources node_neon.pdb 
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources node_neon.pdb
+      working-directory: packages/backend/bindings/node/native/target/x86_64-pc-windows-msvc/release
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') }}
 
     - name: Set productName
       run: node scripts/fix-productName.js
