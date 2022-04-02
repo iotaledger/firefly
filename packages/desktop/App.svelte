@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage, loggedIn, hasRenamedProfileFoldersToId } from 'shared/lib/app'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { stage, loggedIn } from 'shared/lib/app'
+    import { appSettings, hasRenamedProfileFoldersToId, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
