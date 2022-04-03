@@ -155,7 +155,7 @@ export interface PendingParticipation {
     action: ParticipationAction
 }
 
-export type StakingPeriodResultRewards = {
+export type StakingPeriodRewards = {
     [address: string]: number
 }
 
@@ -164,5 +164,22 @@ export type StakingPeriodResult = {
     milestoneIndex: number
     totalRewards: number
     checksum: string
-    rewards: StakingPeriodResultRewards
+    rewards: StakingPeriodRewards
+}
+
+export type AccountStakingRewards = {
+    accountId: string
+    [StakingAirdrop.Assembly]?: AirdropStakingRewards
+    [StakingAirdrop.Shimmer]?: AirdropStakingRewards
+}
+
+export type AirdropStakingRewards = {
+    totalAirdropRewards: number
+    periods: StakingPeriod[]
+}
+
+export type StakingPeriod = {
+    periodNumber: number
+    totalPeriodRewards: number
+    rewards: StakingPeriodRewards
 }
