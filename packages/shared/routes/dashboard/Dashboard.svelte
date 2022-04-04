@@ -14,24 +14,25 @@
         showAppNotification,
     } from 'shared/lib/notifications'
     import {
-        cacheStakingPeriodResults,
+        cacheAllStakingPeriods,
         clearPollParticipationOverviewInterval,
         pollParticipationOverview,
+        StakingAirdrop,
     } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRouter,
         AccountRoute,
+        accountRouter,
         AdvancedSettings,
         appRouter,
         dashboardRoute,
-        dashboardRouter,
         DashboardRoute,
-        settingsRouter,
+        dashboardRouter,
         SettingsRoute,
+        settingsRouter,
     } from '@core/router'
     import { Locale } from '@core/i18n'
     import {
@@ -72,7 +73,6 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void getParticipationEvents()
-            void cacheStakingPeriodResults($accounts)
 
             void pollNetworkStatus()
             void pollParticipationOverview()
@@ -137,12 +137,12 @@
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
 
     function shouldVisitStaking(): boolean {
-        // if (($activeProfile.lastAssemblyPeriodVisitedStaking ?? 0) < LAST_ASSEMBLY_STAKING_PERIOD) {
-        //     updateProfile('lastAssemblyPeriodVisitedStaking', LAST_ASSEMBLY_STAKING_PERIOD)
-        // }
-        // if (($activeProfile.lastShimmerPeriodVisitedStaking ?? 0) < LAST_SHIMMER_STAKING_PERIOD) {
-        //     updateProfile('lastShimmerPeriodVisitedStaking', LAST_SHIMMER_STAKING_PERIOD)
-        // }
+        if (($activeProfile.lastAssemblyPeriodVisitedStaking ?? 0) < LAST_ASSEMBLY_STAKING_PERIOD) {
+            updateProfile('lastAssemblyPeriodVisitedStaking', LAST_ASSEMBLY_STAKING_PERIOD)
+        }
+        if (($activeProfile.lastShimmerPeriodVisitedStaking ?? 0) < LAST_SHIMMER_STAKING_PERIOD) {
+            updateProfile('lastShimmerPeriodVisitedStaking', LAST_SHIMMER_STAKING_PERIOD)
+        }
         return (
             CURRENT_ASSEMBLY_STAKING_PERIOD > $activeProfile.lastAssemblyPeriodVisitedStaking ||
             CURRENT_SHIMMER_STAKING_PERIOD > $activeProfile.lastShimmerPeriodVisitedStaking
@@ -150,16 +150,18 @@
     }
 
     onMount(async () => {
+        updateProfile('stakingRewards', [])
+
+        await cacheAllStakingPeriods(StakingAirdrop.Assembly)
+        await cacheAllStakingPeriods(StakingAirdrop.Shimmer)
+
+        // await cacheStakingPeriod(StakingAirdrop.Assembly, 2)
+        // await cacheStakingPeriod(StakingAirdrop.Shimmer, 2)
+
         if (shouldVisitStaking()) {
-            // REMOVE AFTER DEV
-            updateProfile('stakingRewards', undefined)
-            updateProfile('lastAssemblyPeriodVisitedStaking', 1)
-
-            await cacheStakingPeriodResults($accounts)
-
-            // updateProfile('hasVisitedStaking', false)
-            // updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
-            // updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
+            updateProfile('hasVisitedStaking', false)
+            updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
+            updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
         }
 
         if ($isSoftwareProfile) {

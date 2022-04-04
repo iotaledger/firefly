@@ -9,13 +9,15 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, toHexString } from '../utils'
-import { selectedAccount } from '../wallet'
+import { selectedAccount, wallet } from '../wallet'
 
 import {
     ASSEMBLY_EVENT_ID,
-    ASSEMBLY_STAKING_RESULT_URLS, CURRENT_ASSEMBLY_STAKING_PERIOD,
+    ASSEMBLY_STAKING_RESULT_URLS,
     LAST_ASSEMBLY_STAKING_PERIOD,
+    LAST_SHIMMER_STAKING_PERIOD,
     SHIMMER_EVENT_ID,
+    SHIMMER_STAKING_RESULT_URLS,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
 } from './constants'
@@ -486,130 +488,179 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
 
+function isValidPeriodNumber(
+    airdrop: StakingAirdrop,
+    periodNumber: number
+): boolean {
+    if (!airdrop || periodNumber < 1) return false
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return periodNumber <= LAST_ASSEMBLY_STAKING_PERIOD
+        case StakingAirdrop.Shimmer:
+            return periodNumber <= LAST_SHIMMER_STAKING_PERIOD
+        default:
+            return false
+    }
+}
+
+function getStakingResultUrl(
+    airdrop: StakingAirdrop,
+    periodNumber: number,
+): string {
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return ASSEMBLY_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+        case StakingAirdrop.Shimmer:
+            return SHIMMER_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+        default:
+            return ''
+    }
+}
+
+async function fetchStakingResult(
+    airdrop: StakingAirdrop,
+    periodNumber: number,
+): Promise<StakingPeriodResult> {
+    const stakingResultUrl = getStakingResultUrl(airdrop, periodNumber)
+    const stakingResultResponse = await fetch(stakingResultUrl, getJsonRequestOptions())
+
+    return stakingResultResponse.json()
+}
+
+function getCurrentStakingRewards(): AccountStakingRewards[] {
+    const currentStakingRewards = get(activeProfile)?.stakingRewards ?? []
+    if (currentStakingRewards.length === 0) {
+        return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
+    } else {
+        return currentStakingRewards
+    }
+}
+
 function getEd25519AddressesOfAccount(account: WalletAccount): string[] {
     if (!account) return []
 
     return account.addresses.map((bech32Address) => toHexString(Array.from(Bech32.decode(bech32Address.address).data)))
 }
 
-async function queryStakingRewards(airdrop: StakingAirdrop, numPeriods: number, accounts: WalletAccount[]): Promise<AccountStakingRewards[]> {
-    console.log('NUM PERIODS TO CACHE: ', numPeriods)
+function getStakingPeriodForAccount(
+    account: WalletAccount,
+    stakingResult: StakingPeriodResult,
+    periodNumber: number,
+): StakingPeriod {
+    const ed25519Addresses = getEd25519AddressesOfAccount(account)
 
-    // GET URLS OF STAKING RESULTS (number of URLs is based on the last staking period completed and last staking period user visited)
-    let stakingResultUrls = []
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            if (numPeriods >= ASSEMBLY_STAKING_RESULT_URLS.length) {
-                console.log('INVALID NUM OF PERIODS')
-                return
-            }
-
-            stakingResultUrls = ASSEMBLY_STAKING_RESULT_URLS.slice(ASSEMBLY_STAKING_RESULT_URLS.length - numPeriods)
-            break
-        default:
-            return
+    // REMOVE AFTER DEV
+    if (account.id === 'wallet-account://991aee8ce7da90bbfdd7b277fe16ee70e69f5c9359fff830547dc14e93a8f5fb') {
+        ed25519Addresses.push(
+            periodNumber <= 1
+                ? '000f4afd9fa93e1910307c885a6108dd5bddabad10fb436788dd0bfb5d0b6ba6'
+                : '8b204cf311367f8b6458a3373a89075ac3833dd9e77e2d61b9ffb479a5719ca8'
+        )
     }
-    console.log('STAKING RESULT URLS: ', stakingResultUrls)
 
-    // QUERY STAKING RESULTS FOR ALL URLS
-    const stakingResults: StakingPeriodResult[] = await Promise.all(stakingResultUrls.map(async (url) => {
-        const stakingResultResponse = await fetch(url, getJsonRequestOptions())
-        const stakingResult: StakingPeriodResult = await stakingResultResponse.json()
-        console.log('RESULT: ', stakingResult)
+    const ed25519AddressesWithRewards = ed25519Addresses
+        .filter((address) => address in stakingResult.rewards)
+        .map((address) => [address, stakingResult.rewards[address]])
 
-        return stakingResult
-    }))
-    console.log('RESULTS: ', stakingResults)
+    const totalPeriodRewards = ed25519AddressesWithRewards.reduce((sum: number, current: [string, number]) => sum + current[1], 0)
+    const rewards: StakingPeriodRewards = Object.fromEntries(ed25519AddressesWithRewards)
 
-    // CREATE ARRAY OF ACCOUNT STAKING REWARDS
-    const accountsRewards: AccountStakingRewards[] = accounts.map((account) => {
-        // FOR EACH ACCOUNT, TRANSFORM STAKING RESULT DATA INTO SPECIFIC AIRDROP REWARDS OBJECT
+    return {
+        periodNumber,
+        totalPeriodRewards,
+        rewards,
+    }
+}
 
-        const periods: StakingPeriod[] = stakingResults.map((stakingResult, idx) => {
-            const stakingResultUrl = stakingResultUrls[idx]
-            const periodNumber = ASSEMBLY_STAKING_RESULT_URLS.indexOf(stakingResultUrl) + 1
+function getAirdropStakingRewards(
+    currentAccountStakingRewards: AccountStakingRewards,
+    airdrop: StakingAirdrop,
+    period: StakingPeriod,
+): AirdropStakingRewards {
+    const airdropStakingRewards: AirdropStakingRewards = currentAccountStakingRewards[airdrop] ?? { totalAirdropRewards: 0, periods: [], }
+    const currentPeriodIndex = airdropStakingRewards.periods.findIndex((p) => p.periodNumber === period.periodNumber)
+    if (currentPeriodIndex === -1) {
+        airdropStakingRewards.periods.push(period)
+    } else {
+        airdropStakingRewards.periods[currentPeriodIndex] = period
+    }
 
-            const ed25519Addresses = getEd25519AddressesOfAccount(account)
+    airdropStakingRewards.totalAirdropRewards = airdropStakingRewards.periods.reduce((sum: number, current: StakingPeriod) => sum + current.totalPeriodRewards, 0)
 
-            // REMOVE AFTER DEV, just adding random rewards for only one account
-            if (account.index === 0) {
-                // random outputs that have funds in the results file
-                ed25519Addresses.push('00207e7c9a7420539b418172489ea3e0c7b5fcb4059be037cac39b60be1885ce', '97943217a9d007fa5a8a9203cc25ff6d2b65f95236eacec22389cef85a217e09')
-            }
+    return airdropStakingRewards
+}
 
-            const ed25519AddressesWithRewards = ed25519Addresses
-                // a mapFilter function would be nice here, could possibly use reduce to avoid two iterations?
-                .filter((address) => address in stakingResult.rewards)
-                .map((address) => [address, stakingResult.rewards[address]])
-            const rewards: StakingPeriodRewards = Object.fromEntries(ed25519AddressesWithRewards)
+function updateStakingRewardsForAccount(
+    currentAccountStakingRewards: AccountStakingRewards,
+    stakingResult: StakingPeriodResult,
+    airdrop: StakingAirdrop,
+    periodNumber: number,
+): AccountStakingRewards {
+    const account = get(get(wallet).accounts).find((acc) => acc.id === currentAccountStakingRewards.accountId)
+    if (!account) return currentAccountStakingRewards
 
-            const totalPeriodRewards = ed25519AddressesWithRewards.reduce(
-                (sum: number, current: [string, number]) => sum + current[1],
-                0
-            )
+    const period = getStakingPeriodForAccount(account, stakingResult, periodNumber)
+    const airdropStakingRewards = getAirdropStakingRewards(currentAccountStakingRewards, airdrop, period)
 
-            return {
-                periodNumber,
-                totalPeriodRewards,
-                rewards,
-            }
-        })
-        console.log('PERIODS: ', periods)
-
-        const totalAirdropRewards = periods.reduce((sum: number, current: StakingPeriod) => sum + current.totalPeriodRewards, 0)
-        const airdropRewards = <AirdropStakingRewards>{
-            totalAirdropRewards,
-            periods,
-        }
-        console.log('AIRDROP REWARDS: ', airdropRewards)
-
-        return {
-            accountId: account.id,
-            [airdrop]: airdropRewards
-        }
-    })
-
-    return accountsRewards
+    return { ...currentAccountStakingRewards, [airdrop]: airdropStakingRewards }
 }
 
 /**
- * Caches the staking period results for Shimmer and Assembly if not already
- * cached.
+ * Caches the result of a single staking period for a given airdrop and period number.
  */
-export async function cacheStakingPeriodResults(accounts: WalletAccount[]): Promise<void> {
-    if (accounts.length === 0) return
+export async function cacheStakingPeriod(
+     airdrop: StakingAirdrop,
+     periodNumber: number,
+): Promise<void> {
+    if (!airdrop || !isValidPeriodNumber(airdrop, periodNumber)) return
 
-    const profile = get(activeProfile)
-    if (!profile) return
+    const stakingResult = await fetchStakingResult(airdrop, periodNumber)
+    const currentStakingRewards = getCurrentStakingRewards()
+    const updatedStakingRewards: AccountStakingRewards[] = currentStakingRewards
+        .map((accountStakingRewards: AccountStakingRewards) => updateStakingRewardsForAccount(
+            accountStakingRewards,
+            stakingResult,
+            airdrop,
+            periodNumber,
+        ))
+    console.log('UPDATED STAKING REWARDS: ', updatedStakingRewards)
 
-    let stakingRewards = profile?.stakingRewards ?? accounts.map((account) => ({ accountId: account?.id }))
+    updateProfile('stakingRewards', updatedStakingRewards)
+}
 
-    const muchCacheForAssembly = LAST_ASSEMBLY_STAKING_PERIOD > (profile?.lastAssemblyPeriodVisitedStaking ?? 0)
-    if (muchCacheForAssembly) {
-        const assemblyAccountsRewards = await queryStakingRewards(
-            StakingAirdrop.Assembly,
-            LAST_ASSEMBLY_STAKING_PERIOD - profile?.lastAssemblyPeriodVisitedStaking,
-            accounts
-        )
-        console.log('ACCOUNTS REWARDS: ', assemblyAccountsRewards)
-
-        assemblyAccountsRewards.forEach((assemblyAccountRewards, idx) => {
-            const currentAccountRewards = stakingRewards[idx]
-            const currentAssemblyAccountRewards: AirdropStakingRewards = currentAccountRewards[StakingAirdrop.Assembly] ?? { totalAirdropRewards: 0, periods: [] }
-
-            const combinedAssemblyAccountRewards: AirdropStakingRewards = {
-                totalAirdropRewards: currentAssemblyAccountRewards?.totalAirdropRewards + assemblyAccountRewards[StakingAirdrop.Assembly].totalAirdropRewards,
-                periods: currentAssemblyAccountRewards?.periods.concat(assemblyAccountRewards[StakingAirdrop.Assembly].periods)
-            }
-
-            currentAccountRewards[idx] = combinedAssemblyAccountRewards
-        })
+function getLastStakingPeriodNumber(airdrop: StakingAirdrop): number {
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return LAST_ASSEMBLY_STAKING_PERIOD
+        case StakingAirdrop.Shimmer:
+            return LAST_SHIMMER_STAKING_PERIOD
+        default:
+            return 0
     }
+}
 
-    console.log('PROFILE BEFORE: ', profile)
+/**
+ * Caches the results of the last staking period for a given airdrop.
+ */
+export async function cacheLastStakingPeriod(airdrop: StakingAirdrop): Promise<void> {
+    const periodNumber = getLastStakingPeriodNumber(airdrop)
+    if (periodNumber <= 0) return
 
-    updateProfile('stakingRewards', stakingRewards)
-    updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
+    await cacheStakingPeriod(airdrop, periodNumber)
+}
 
-    console.log('PROFILE AFTER: ', profile)
+/**
+ * Caches the results for some of the staking periods for a given airdrop and array of period numbers.
+ */
+export async function cacheSomeStakingPeriods(airdrop: StakingAirdrop, periodNumbers: number[]): Promise<void> {
+    await Promise.all(periodNumbers.map((periodNumber) => cacheStakingPeriod(airdrop, periodNumber)))
+}
+
+/**
+ * Caches the results of all staking periods for a given airdrop.
+ */
+export async function cacheAllStakingPeriods(airdrop: StakingAirdrop): Promise<void> {
+    const numberOfPeriods = getLastStakingPeriodNumber(airdrop)
+    await cacheSomeStakingPeriods(airdrop, [...Array(numberOfPeriods).keys()])
 }
