@@ -35,6 +35,7 @@ const baseConfig = () => ({
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
         timeStampServer: 'http://timestamp.sectigo.com',
+        rfc3161TimeStampServer: 'http://timestamp.sectigo.com',
     },
     linux: {
         target: ['AppImage'],
