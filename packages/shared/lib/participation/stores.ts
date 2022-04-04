@@ -329,15 +329,3 @@ export const hasPendingParticipation = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
-
-/**
- * The result of the completed Shimmer staking period, containing only relevant reward information
- * for a profile's accounts.
- */
-export const shimmerStakingResult = persistent<StakingPeriodResult>('shimmerStakingResult', null)
-
-/**
- * The results of the completed Assembly staking periods, containing only relevant reward information
- * for a profile's accounts.
- */
-export const assemblyStakingResults = persistent<StakingPeriodResult[]>('assemblyStakingResults', [])

@@ -488,10 +488,7 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
 }
 
-function isValidPeriodNumber(
-    airdrop: StakingAirdrop,
-    periodNumber: number
-): boolean {
+function isValidPeriodNumber(airdrop: StakingAirdrop, periodNumber: number): boolean {
     if (!airdrop || periodNumber < 1) return false
 
     switch (airdrop) {
@@ -504,10 +501,7 @@ function isValidPeriodNumber(
     }
 }
 
-function getStakingResultUrl(
-    airdrop: StakingAirdrop,
-    periodNumber: number,
-): string {
+function getStakingResultUrl(airdrop: StakingAirdrop, periodNumber: number): string {
     switch (airdrop) {
         case StakingAirdrop.Assembly:
             return ASSEMBLY_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
@@ -518,10 +512,7 @@ function getStakingResultUrl(
     }
 }
 
-async function fetchStakingResult(
-    airdrop: StakingAirdrop,
-    periodNumber: number,
-): Promise<StakingPeriodResult> {
+async function fetchStakingResult(airdrop: StakingAirdrop, periodNumber: number): Promise<StakingPeriodResult> {
     const stakingResultUrl = getStakingResultUrl(airdrop, periodNumber)
     const stakingResultResponse = await fetch(stakingResultUrl, getJsonRequestOptions())
 
@@ -546,7 +537,7 @@ function getEd25519AddressesOfAccount(account: WalletAccount): string[] {
 function getStakingPeriodForAccount(
     account: WalletAccount,
     stakingResult: StakingPeriodResult,
-    periodNumber: number,
+    periodNumber: number
 ): StakingPeriod {
     const ed25519Addresses = getEd25519AddressesOfAccount(account)
 
@@ -563,7 +554,10 @@ function getStakingPeriodForAccount(
         .filter((address) => address in stakingResult.rewards)
         .map((address) => [address, stakingResult.rewards[address]])
 
-    const totalPeriodRewards = ed25519AddressesWithRewards.reduce((sum: number, current: [string, number]) => sum + current[1], 0)
+    const totalPeriodRewards = ed25519AddressesWithRewards.reduce(
+        (sum: number, current: [string, number]) => sum + current[1],
+        0
+    )
     const rewards: StakingPeriodRewards = Object.fromEntries(ed25519AddressesWithRewards)
 
     return {
@@ -576,9 +570,12 @@ function getStakingPeriodForAccount(
 function getAirdropStakingRewards(
     currentAccountStakingRewards: AccountStakingRewards,
     airdrop: StakingAirdrop,
-    period: StakingPeriod,
+    period: StakingPeriod
 ): AirdropStakingRewards {
-    const airdropStakingRewards: AirdropStakingRewards = currentAccountStakingRewards[airdrop] ?? { totalAirdropRewards: 0, periods: [], }
+    const airdropStakingRewards: AirdropStakingRewards = currentAccountStakingRewards[airdrop] ?? {
+        totalAirdropRewards: 0,
+        periods: [],
+    }
     const currentPeriodIndex = airdropStakingRewards.periods.findIndex((p) => p.periodNumber === period.periodNumber)
     if (currentPeriodIndex === -1) {
         airdropStakingRewards.periods.push(period)
@@ -586,7 +583,10 @@ function getAirdropStakingRewards(
         airdropStakingRewards.periods[currentPeriodIndex] = period
     }
 
-    airdropStakingRewards.totalAirdropRewards = airdropStakingRewards.periods.reduce((sum: number, current: StakingPeriod) => sum + current.totalPeriodRewards, 0)
+    airdropStakingRewards.totalAirdropRewards = airdropStakingRewards.periods.reduce(
+        (sum: number, current: StakingPeriod) => sum + current.totalPeriodRewards,
+        0
+    )
 
     return airdropStakingRewards
 }
@@ -595,7 +595,7 @@ function updateStakingRewardsForAccount(
     currentAccountStakingRewards: AccountStakingRewards,
     stakingResult: StakingPeriodResult,
     airdrop: StakingAirdrop,
-    periodNumber: number,
+    periodNumber: number
 ): AccountStakingRewards {
     const account = get(get(wallet).accounts).find((acc) => acc.id === currentAccountStakingRewards.accountId)
     if (!account) return currentAccountStakingRewards
@@ -609,22 +609,15 @@ function updateStakingRewardsForAccount(
 /**
  * Caches the result of a single staking period for a given airdrop and period number.
  */
-export async function cacheStakingPeriod(
-     airdrop: StakingAirdrop,
-     periodNumber: number,
-): Promise<void> {
+export async function cacheStakingPeriod(airdrop: StakingAirdrop, periodNumber: number): Promise<void> {
     if (!airdrop || !isValidPeriodNumber(airdrop, periodNumber)) return
 
     const stakingResult = await fetchStakingResult(airdrop, periodNumber)
     const currentStakingRewards = getCurrentStakingRewards()
-    const updatedStakingRewards: AccountStakingRewards[] = currentStakingRewards
-        .map((accountStakingRewards: AccountStakingRewards) => updateStakingRewardsForAccount(
-            accountStakingRewards,
-            stakingResult,
-            airdrop,
-            periodNumber,
-        ))
-    console.log('UPDATED STAKING REWARDS: ', updatedStakingRewards)
+    const updatedStakingRewards: AccountStakingRewards[] = currentStakingRewards.map(
+        (accountStakingRewards: AccountStakingRewards) =>
+            updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
+    )
 
     updateProfile('stakingRewards', updatedStakingRewards)
 }
