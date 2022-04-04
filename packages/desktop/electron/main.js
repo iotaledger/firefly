@@ -85,15 +85,12 @@ const handleError = (errorType, error, isRenderProcessError) => {
          * the main process.
          */
         if (SEND_CRASH_REPORTS) {
-            captureException(
-                new Error(
-                    JSON.stringify({
-                        type: errorType,
-                        message: error.message || error.reason || error,
-                        stack: error.stack || undefined,
-                    })
-                )
-            )
+            const errorMessage = error.message || error.reason || error
+            const sentryError = new Error(`${errorType} - ${errorMessage}`)
+            if (error.stack) {
+                sentryError.stack = error.stack
+            }
+            captureException(sentryError)
         }
 
         openErrorWindow()
