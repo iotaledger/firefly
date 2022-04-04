@@ -21,7 +21,7 @@
     $: $selectedAccountParticipationOverview, $stakingEventState, setHeaders()
     $: isAssemblyStaked, isShimmerStaked, $stakingEventState, $selectedAccountId, setAnimation()
 
-    enum FileNumber {
+    enum AnimationFileNumber {
         NoStaking = 0,
         Assembly = 1,
         Shimmer = 2,
@@ -37,13 +37,13 @@
         if ($stakingEventState === ParticipationEventState.Inactive) {
             animation = null
         } else if ($stakingEventState === ParticipationEventState.Holding) {
-            let fileNumber = FileNumber.NoStaking
+            let fileNumber = AnimationFileNumber.NoStaking
             if (isAssemblyStaked && isShimmerStaked) {
-                fileNumber = FileNumber.AssemblyAndShimmer
+                fileNumber = AnimationFileNumber.AssemblyAndShimmer
             } else if (isAssemblyStaked) {
-                fileNumber = FileNumber.Assembly
+                fileNumber = AnimationFileNumber.Assembly
             } else if (isShimmerStaked) {
-                fileNumber = FileNumber.Shimmer
+                fileNumber = AnimationFileNumber.Shimmer
             }
 
             animation = `${prefix}-${$stakingEventState}-${fileNumber}`
