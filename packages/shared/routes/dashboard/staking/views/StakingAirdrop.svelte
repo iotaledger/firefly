@@ -1,15 +1,13 @@
 <script lang="typescript">
-    import { HR, Link, StakingAirdropIndicator, Text, WalletPill } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
+    import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
         assemblyStakingRewards,
-        participationOverview,
         shimmerStakingRemainingTime,
         shimmerStakingRewards,
-        stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
@@ -19,35 +17,26 @@
 
     export let airdrop: StakingAirdrop
 
-    const isAssembly = (): boolean => airdrop === StakingAirdrop.Assembly
-
-    const parseRemainingTime = (): [string, string] => {
-        const formattedValue = getBestTimeDuration(
-            isAssembly() ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        )
-        const timeAmount = parseFloat(formattedValue).toString()
-        const timeUnit = formattedValue.replace(timeAmount.toString(), '')
-
-        return [timeAmount, timeUnit]
-    }
-
-    $: [remainingTimeAmount, remainingTimeUnit] = parseRemainingTime()
-
-    $: stakedAccountsInCurrentAirdrop =
-        $stakedAccounts?.filter((account) =>
-            $participationOverview?.some(
-                (partAccount) =>
-                    partAccount?.[isAssembly() ? 'assemblyStakedFunds' : 'shimmerStakedFunds'] > 0 &&
-                    partAccount.accountIndex === account.index
-            )
-        ) ?? []
+    let remainingTimeAmount: string
+    let remainingTimeUnit: string
 
     const video = {
         [StakingAirdrop.Assembly]: null,
         [StakingAirdrop.Shimmer]: null,
     }
 
-    const handleLearnMoreClick = (): void => {
+    $: isAssembly = airdrop === StakingAirdrop.Assembly
+    $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
+
+    function parseRemainingTime(): void {
+        const formattedValue = getBestTimeDuration(
+            isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        )
+        remainingTimeAmount = parseFloat(formattedValue).toString()
+        remainingTimeUnit = formattedValue.replace(remainingTimeAmount.toString(), '')
+    }
+
+    function handleLearnMoreClick(): void {
         const url = getLearnMoreUrl()
         if (!url) {
             showAppNotification({
@@ -61,7 +50,7 @@
         Platform.openUrl(getLearnMoreUrl())
     }
 
-    const getLearnMoreUrl = (): string => {
+    function getLearnMoreUrl(): string {
         switch (airdrop) {
             case StakingAirdrop.Assembly:
                 return 'https://assembly.sc'
@@ -72,7 +61,7 @@
         }
     }
 
-    const getLocalizedDurationText = (state: ParticipationEventState): string => {
+    function getLocalizedDurationText(state: ParticipationEventState): string {
         let stateText: string
         switch (state) {
             case ParticipationEventState.Commencing:
@@ -110,13 +99,6 @@
     </video>
     <div class="w-full h-full px-8 pb-10 flex flex-col justify-end space-y-5 z-0">
         <div class="flex flex-col">
-            <div class="flex flex-row flex-wrap mb-2">
-                {#each stakedAccountsInCurrentAirdrop as acc}
-                    <div class="mb-2 mr-2">
-                        <WalletPill account={acc} size="s" active enableTooltip classes="cursor-default" />
-                    </div>
-                {/each}
-            </div>
             <div class="flex flex-row items-center mb-3">
                 <Text type="h3" classes="mr-4 text-white text-xl">
                     {localize(`views.staking.airdrops.${airdrop}.name`)}
@@ -141,14 +123,14 @@
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly() ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
                             6
                         ).split(' ')[1]}
                     </Text>

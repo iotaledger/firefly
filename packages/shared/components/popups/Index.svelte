@@ -2,7 +2,7 @@
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -12,6 +12,7 @@
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
+    import CreateAccount from './CreateAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -35,7 +36,7 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
-    import StakingNotice from './StakingNotice.svelte'
+    import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
@@ -49,6 +50,7 @@
     export let type = undefined
     export let props = undefined
     export let hideClose = undefined
+    export let preventClose = undefined
     export let fullScreen = undefined
     export let transition = true
 
@@ -64,6 +66,7 @@
 
     $: switch (type) {
         case 'ledgerNotConnected':
+        case 'createAccount':
             size = PopupSize.Small
             break
         case 'video':
@@ -105,6 +108,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
+        createAccount: CreateAccount,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
@@ -116,7 +120,7 @@
         // Participation (voting / staking)
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
-        stakingNotice: StakingNotice,
+        newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
@@ -129,11 +133,11 @@
     }
 
     const tryClosePopup = (): void => {
-        if (!hideClose) {
+        if (!preventClose) {
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup($popupState?.preventClose)
+            closePopup()
         }
     }
 
@@ -178,7 +182,7 @@
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
         class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
+                h-full overflow-hidden z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
             $mobile && 'z-40'
         }`}
     >

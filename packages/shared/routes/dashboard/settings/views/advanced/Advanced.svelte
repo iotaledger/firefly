@@ -2,7 +2,7 @@
     import { HR } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { AdvancedSettings } from 'shared/lib/typings/routes'
+    import { AdvancedSettings } from '@core/router'
     import {
         BalanceFinder,
         CrashReporting,

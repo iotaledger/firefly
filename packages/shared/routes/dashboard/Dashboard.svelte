@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
@@ -20,23 +19,35 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRoute,
+        accountRouter,
+        AccountRoute,
+        AdvancedSettings,
+        appRouter,
         dashboardRoute,
-        routerNext,
-        settingsChildRoute,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AccountRoutes, AdvancedSettings, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+        dashboardRouter,
+        DashboardRoute,
+        settingsRouter,
+        SettingsRoute,
+    } from '@core/router'
+    import { Locale } from '@core/i18n'
     import {
         api,
+        asyncCreateAccount,
+        asyncSyncAccountOffline,
         isBackgroundSyncing,
-        selectedAccountId,
+        setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import TopNavigation from './TopNavigation.svelte'
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import {
+        CURRENT_ASSEMBLY_STAKING_PERIOD,
+        CURRENT_SHIMMER_STAKING_PERIOD,
+        LAST_ASSEMBLY_STAKING_PERIOD,
+        LAST_SHIMMER_STAKING_PERIOD,
+    } from '@lib/participation/constants'
 
     export let locale: Locale
 
@@ -72,7 +83,74 @@
         }
     })
 
+    const viewableAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+
+            if ($activeProfile.settings.showHiddenAccounts) {
+                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+
+                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+                // This account will get re-used if someone creates a new one
+                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                    if (
+                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        lastAccount.rawIotaBalance === 0 &&
+                        lastAccount.messages.length === 0
+                    ) {
+                        sortedAccounts.pop()
+                    }
+                }
+
+                return sortedAccounts
+            }
+
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    const liveAccounts: Readable<WalletAccount[]> = derived(
+        [activeProfile, accounts],
+        ([$activeProfile, $accounts]) => {
+            if (!$activeProfile) {
+                return []
+            }
+            return $accounts
+                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .sort((a, b) => a.index - b.index)
+        }
+    )
+
+    // TODO: move these stores to lib when we fix the circular imports issue
+    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
+
+    function shouldVisitStaking(): boolean {
+        if (($activeProfile.lastAssemblyPeriodVisitedStaking ?? 0) < LAST_ASSEMBLY_STAKING_PERIOD) {
+            updateProfile('lastAssemblyPeriodVisitedStaking', LAST_ASSEMBLY_STAKING_PERIOD)
+        }
+        if (($activeProfile.lastShimmerPeriodVisitedStaking ?? 0) < LAST_SHIMMER_STAKING_PERIOD) {
+            updateProfile('lastShimmerPeriodVisitedStaking', LAST_SHIMMER_STAKING_PERIOD)
+        }
+        return (
+            CURRENT_ASSEMBLY_STAKING_PERIOD > $activeProfile.lastAssemblyPeriodVisitedStaking ||
+            CURRENT_SHIMMER_STAKING_PERIOD > $activeProfile.lastShimmerPeriodVisitedStaking
+        )
+    }
+
     onMount(() => {
+        if (shouldVisitStaking()) {
+            updateProfile('hasVisitedStaking', false)
+            updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
+            updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
+        }
+
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         }
@@ -110,12 +188,9 @@
                         contextData.type === 'valueTx') &&
                     contextData.accountId
                 ) {
-                    selectedAccountId.set(contextData.accountId)
-                    if (get(dashboardRoute) !== Tabs.Wallet) {
-                        dashboardRoute.set(Tabs.Wallet)
-                    }
-                    walletRoute.set(WalletRoutes.Account)
-                    accountRoute.set(AccountRoutes.Init)
+                    setSelectedAccount(contextData.accountId)
+                    $dashboardRouter.goTo(DashboardRoute.Wallet)
+                    $accountRouter.goTo(AccountRoute.Init)
                 }
             }
         })
@@ -148,7 +223,7 @@
         }
     })
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+    if (!$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -181,20 +256,14 @@
         }
     }
 
-    /**
-     * Handles deep link request
-     */
-    const handleDeepLinkRequest = (data) => {
-        const _redirect = (tab) => {
+    const handleDeepLinkRequest = (data: string): void => {
+        const _redirect = (tab: DashboardRoute): void => {
             isDeepLinkRequestActive.set(true)
-            if (get(dashboardRoute) !== tab) {
-                dashboardRoute.set(tab)
-            }
+            $dashboardRouter.goTo(tab)
         }
         if (!$appSettings.deepLinking) {
-            _redirect(Tabs.Settings)
-            settingsRoute.set(SettingsRoutes.AdvancedSettings)
-            settingsChildRoute.set(AdvancedSettings.DeepLinks)
+            _redirect(DashboardRoute.Settings)
+            $settingsRouter.goToChildRoute(SettingsRoute.AdvancedSettings, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
@@ -206,7 +275,7 @@
                     parsedDeepLink.operation === WalletOperation.Send &&
                     parsedDeepLink.parameters
                 ) {
-                    _redirect(Tabs.Wallet)
+                    _redirect(DashboardRoute.Wallet)
                     sendParams.set({
                         ...parsedDeepLink.parameters,
                         isInternal: false,
@@ -223,6 +292,39 @@
                 }
                 Platform.DeepLinkManager.clearDeepLinkRequest()
             }
+        }
+    }
+
+    async function onCreateAccount(alias: string, color: string, onComplete) {
+        const _create = async (): Promise<unknown> => {
+            try {
+                const account = await asyncCreateAccount(alias, color)
+                await asyncSyncAccountOffline(account)
+
+                // TODO: set selected account to the newly created account
+                $accountRouter.reset()
+
+                return onComplete()
+            } catch (err) {
+                return onComplete(err)
+            }
+        }
+
+        if ($isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        void _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            await _create()
         }
     }
 
@@ -280,15 +382,22 @@
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
+
+    $: if ($accountsLoaded) {
+        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+    }
 </script>
 
 <Idle />
-<div class="dashboard-wrapper flex flex-row w-full h-full">
-    <Sidebar {locale} />
-    <!-- Dashboard Pane -->
-    <div class="flex flex-col w-full h-full">
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <DeveloperProfileIndicator {locale} classes="absolute top-0" />
+<div class="dashboard-wrapper flex flex-col w-full h-full">
+    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
+    <TopNavigation {onCreateAccount} />
+    <div class="flex flex-row flex-auto h-1">
+        <Sidebar {locale} />
+        <!-- Dashboard Pane -->
+        <div class="flex flex-col w-full h-full">
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+        </div>
     </div>
 </div>
 

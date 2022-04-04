@@ -1,5 +1,5 @@
 import { app, ipcMain, Menu, shell } from 'electron'
-import { WalletRoutes, ExternalRoute } from 'shared/lib/typings/routes'
+import { AccountRoute, ExternalRoute } from 'shared/lib/core/router/enums'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState } from './menuState'
 
@@ -166,21 +166,12 @@ const buildTemplate = () => {
             submenu: [
                 {
                     label: state.strings.send,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Send),
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', AccountRoute.Send),
                     enabled: state.enabled,
                 },
                 {
                     label: state.strings.receive,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Receive),
-                    enabled: state.enabled,
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    label: state.strings.addAccount,
-                    click: () =>
-                        getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', AccountRoute.Receive),
                     enabled: state.enabled,
                 },
                 {

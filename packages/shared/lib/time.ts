@@ -1,5 +1,5 @@
 // BASE
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 
 export const MILLISECONDS_PER_SECOND = 1000
 export const SECONDS_PER_MINUTE = 60

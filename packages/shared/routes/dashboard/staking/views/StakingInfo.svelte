@@ -1,32 +1,36 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         assemblyStakingRemainingTime,
         participationOverview,
+        selectedAccountParticipationOverview,
         shimmerStakingRemainingTime,
         stakedAccounts,
         stakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview } from 'shared/lib/participation/types'
+    import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
+    import { selectedAccountId } from '@lib/wallet'
 
-    const updateAnimation = (state: ParticipationEventState, overview: ParticipationOverview): string => {
+    let animation: string
+
+    const updateAnimation = (): void => {
         const prefix = 'staking-info'
-        if (!state || !overview) return `${prefix}-upcoming`
+        if (!$stakingEventState || !$selectedAccountParticipationOverview) {
+            animation = `${prefix}-upcoming`
+        }
 
-        if (state === ParticipationEventState.Inactive) {
-            return null
-        } else if (state === ParticipationEventState.Holding) {
+        if ($stakingEventState === ParticipationEventState.Inactive) {
+            animation = null
+        } else if ($stakingEventState === ParticipationEventState.Holding) {
             const stakingParticipationIds: string[] = []
-            overview.forEach((apo) => {
-                apo.participations.forEach((p) => {
-                    if (!stakingParticipationIds.includes(p.eventId) && STAKING_EVENT_IDS.includes(p.eventId)) {
-                        stakingParticipationIds.push(p.eventId)
-                    }
-                })
+            $selectedAccountParticipationOverview?.participations?.forEach((p) => {
+                if (!stakingParticipationIds.includes(p.eventId) && STAKING_EVENT_IDS.includes(p.eventId)) {
+                    stakingParticipationIds.push(p.eventId)
+                }
             })
 
             let fileNumber = 0
@@ -40,13 +44,13 @@
                 }
             }
 
-            return `${prefix}-${state}-${fileNumber}`
+            animation = `${prefix}-${$stakingEventState}-${fileNumber}`
         } else {
-            return `${prefix}-${state}`
+            animation = `${prefix}-${$stakingEventState}`
         }
     }
 
-    $: animation = updateAnimation($stakingEventState, $participationOverview)
+    $: $stakingEventState, $selectedAccountParticipationOverview, $selectedAccountId, updateAnimation()
 
     $: localePath = `views.staking.info.${$stakingEventState}`
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime

@@ -3,19 +3,20 @@
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
+    import { api } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
-    export let account: WalletAccount
+    export let account: Writable<WalletAccount>
     export let hasMultipleAccounts
 
-    export let hideAccount = (selectedAccountId: AccountIdentifier): void => {}
+    export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
     let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
@@ -46,7 +47,7 @@
     function handleMoveFundsClick() {
         closePopup()
         sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance, isInternal: true }))
-        accountRoute.set(AccountRoutes.Send)
+        $accountRouter.goTo(AccountRoute.Send)
     }
     function handleCancelClick() {
         closePopup()
@@ -54,7 +55,7 @@
     function triggerHideAccount() {
         isBusy = false
         closePopup()
-        hideAccount($selectedAccountId)
+        hideAccount($account?.id)
     }
 </script>
 

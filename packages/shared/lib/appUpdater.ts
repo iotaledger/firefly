@@ -1,5 +1,5 @@
 import { Platform } from 'shared/lib/platform'
-import { localize } from 'shared/lib/i18n'
+import { localize } from '@core/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
     removeDisplayNotification,
