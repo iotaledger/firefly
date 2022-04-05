@@ -657,8 +657,8 @@ function getUncachedStakingPeriodNumbers(airdrop: StakingAirdrop): number[] {
         const stakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
 
         const uncachedStakingPeriodNumbers = []
-        stakingRewards.forEach((stakingRewards) => {
-            const airdropStakingRewards = stakingRewards[airdrop]
+        stakingRewards.forEach((stakingReward) => {
+            const airdropStakingRewards = stakingReward[airdrop]
             if (!airdropStakingRewards) {
                 return range(getLastStakingPeriodNumber(airdrop), 1)
             } else {

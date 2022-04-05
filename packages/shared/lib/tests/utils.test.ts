@@ -160,6 +160,7 @@ describe('File: utils.ts', () => {
             expect(range(1)).toEqual([0])
             expect(range(1, 1)).toEqual([1])
             expect(range(10, 10)).toEqual([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+            expect(range(10, -10)).toEqual([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
         })
         it('should create empty ranges from invalid arguments', () => {
             expect(range(-1)).toEqual([])
