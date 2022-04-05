@@ -64,13 +64,13 @@ export const SHIMMER_STAKING_RESULT_URLS: string[] = [
 /**
  * The number of the last completed Assembly staking period.
  */
-export const LAST_ASSEMBLY_STAKING_PERIOD = 3
+export const LAST_ASSEMBLY_STAKING_PERIOD = 1
 
 /**
  * The number of the last completed Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_ASSEMBLY_STAKING_PERIOD = 3
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 1
 
 /**
  * The number of the last completed Assembly staking period.

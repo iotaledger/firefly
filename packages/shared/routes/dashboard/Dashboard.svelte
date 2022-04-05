@@ -18,6 +18,7 @@
         clearPollParticipationOverviewInterval,
         pollParticipationOverview,
         StakingAirdrop,
+        updateStakingPeriodCache,
     } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
@@ -150,13 +151,7 @@
     }
 
     onMount(async () => {
-        updateProfile('stakingRewards', [])
-
-        await cacheAllStakingPeriods(StakingAirdrop.Assembly)
-        await cacheAllStakingPeriods(StakingAirdrop.Shimmer)
-
-        // await cacheStakingPeriod(StakingAirdrop.Assembly, 2)
-        // await cacheStakingPeriod(StakingAirdrop.Shimmer, 2)
+        await updateStakingPeriodCache()
 
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)

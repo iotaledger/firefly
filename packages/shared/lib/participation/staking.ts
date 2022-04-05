@@ -8,7 +8,7 @@ import { activeProfile, updateProfile } from '../profile'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
-import { clamp, delineateNumber, getJsonRequestOptions, toHexString } from '../utils'
+import { clamp, delineateNumber, getJsonRequestOptions, range, toHexString } from '../utils'
 import { selectedAccount, wallet } from '../wallet'
 
 import {
@@ -655,5 +655,48 @@ export async function cacheSomeStakingPeriods(airdrop: StakingAirdrop, periodNum
  */
 export async function cacheAllStakingPeriods(airdrop: StakingAirdrop): Promise<void> {
     const numberOfPeriods = getLastStakingPeriodNumber(airdrop)
-    await cacheSomeStakingPeriods(airdrop, [...Array(numberOfPeriods).keys()])
+    await cacheSomeStakingPeriods(airdrop, range(numberOfPeriods, 1))
+}
+
+function getUncachedStakingPeriodNumbers(airdrop: StakingAirdrop): number[] {
+    const stakingRewards = get(activeProfile)?.stakingRewards ?? []
+    if (stakingRewards.length === 0) {
+        return range(getLastStakingPeriodNumber(airdrop), 1)
+    } else {
+        const stakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
+
+        const uncachedStakingPeriodNumbers = []
+        stakingRewards.forEach((stakingRewards) => {
+            const airdropStakingRewards = stakingRewards[airdrop]
+            if (!airdropStakingRewards) {
+                return range(getLastStakingPeriodNumber(airdrop), 1)
+            } else {
+                stakingPeriodNumbers.forEach((stakingPeriodNumber) => {
+                    if (!airdropStakingRewards.periods.some((period) => period.periodNumber === stakingPeriodNumber)) {
+                        if (!uncachedStakingPeriodNumbers.includes(stakingPeriodNumber)) {
+                            uncachedStakingPeriodNumbers.push(stakingPeriodNumber)
+                        }
+                    }
+                })
+            }
+        })
+
+        return uncachedStakingPeriodNumbers
+    }
+}
+
+export async function updateStakingPeriodCache(): Promise<void> {
+    const uncachedAssemblyPeriodNumbers = getUncachedStakingPeriodNumbers(StakingAirdrop.Assembly)
+    await Promise.all(
+        uncachedAssemblyPeriodNumbers.map((uncachedAssemblyPeriodNumber) =>
+            cacheStakingPeriod(StakingAirdrop.Assembly, uncachedAssemblyPeriodNumber)
+        )
+    )
+
+    const uncachedShimmerPeriodNumbers = getUncachedStakingPeriodNumbers(StakingAirdrop.Shimmer)
+    await Promise.all(
+        uncachedShimmerPeriodNumbers.map((uncachedShimmerPeriodNumber) =>
+            cacheStakingPeriod(StakingAirdrop.Assembly, uncachedShimmerPeriodNumber)
+        )
+    )
 }

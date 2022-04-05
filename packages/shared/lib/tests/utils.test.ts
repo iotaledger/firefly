@@ -1,6 +1,6 @@
 import './mocks/matchMedia'
 
-import { migrateObjects } from '../utils'
+import { migrateObjects, range } from '../utils'
 
 type Simple = {
     prop1?: string
@@ -151,6 +151,20 @@ describe('File: utils.ts', () => {
                 id: 'Object 04',
                 data: o5.data,
             })
+        })
+    })
+
+    describe('Function: range', () => {
+        it('should create ranges from valid arguments', () => {
+            expect(range(0)).toEqual([])
+            expect(range(1)).toEqual([0])
+            expect(range(1, 1)).toEqual([1])
+            expect(range(10, 10)).toEqual([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+        })
+        it('should create empty ranges from invalid arguments', () => {
+            expect(range(-1)).toEqual([])
+            expect(range(-1, 1)).toEqual([])
+            expect(range(undefined, 1)).toEqual([])
         })
     })
 })
