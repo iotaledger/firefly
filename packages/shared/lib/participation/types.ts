@@ -166,7 +166,7 @@ export type StakingPeriodRewards = {
 /**
  * The JSON schema for the staking period result files.
  */
-export type StakingPeriodResult = {
+export type StakingPeriodJsonResponse = {
     symbol: string
     milestoneIndex: number
     totalRewards: number

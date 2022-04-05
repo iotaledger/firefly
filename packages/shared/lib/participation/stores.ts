@@ -15,9 +15,7 @@ import {
     ParticipationOverview,
     PendingParticipation,
     StakingAirdrop,
-    StakingPeriodResult,
 } from './types'
-import { persistent } from '@lib/helpers'
 
 /**
  * The store for keeping track of pending participations.

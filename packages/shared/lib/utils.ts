@@ -464,5 +464,7 @@ export function getJsonRequestOptions(): RequestInit {
 export function range(size: number, start: number = 0): number[] {
     if (!size || size <= 0) return []
 
+    if (!start || typeof start !== 'number') start = 0
+
     return Array.from(Array(size), (_, idx) => idx + start)
 }
