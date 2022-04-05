@@ -39,6 +39,8 @@
         asyncCreateAccount,
         asyncSyncAccountOffline,
         isBackgroundSyncing,
+        isFirstSessionSync,
+        isSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
@@ -86,6 +88,10 @@
             openSnapshotPopup()
         }
     })
+
+    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+        void updateStakingPeriodCache()
+    }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -148,9 +154,7 @@
         )
     }
 
-    onMount(async () => {
-        await updateStakingPeriodCache()
-
+    onMount(() => {
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
