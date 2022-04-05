@@ -447,6 +447,9 @@ export const isValueInUnitRange = (value: number, unit: string): boolean => {
     }
 }
 
+/**
+ * Creates HTTP request headers for accepting JSON data.
+ */
 export function getJsonRequestOptions(): RequestInit {
     return {
         headers: {
@@ -455,6 +458,9 @@ export function getJsonRequestOptions(): RequestInit {
     }
 }
 
+/**
+ * Creates an array of a given size at a given starting number.
+ */
 export function range(size: number, start: number = 0): number[] {
     if (!size || size <= 0) return []
 
