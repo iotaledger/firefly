@@ -541,15 +541,6 @@ function getStakingPeriodForAccount(
 ): StakingPeriod {
     const ed25519Addresses = getEd25519AddressesOfAccount(account)
 
-    // REMOVE AFTER DEV
-    if (account.id === 'wallet-account://991aee8ce7da90bbfdd7b277fe16ee70e69f5c9359fff830547dc14e93a8f5fb') {
-        ed25519Addresses.push(
-            periodNumber <= 1
-                ? '000f4afd9fa93e1910307c885a6108dd5bddabad10fb436788dd0bfb5d0b6ba6'
-                : '8b204cf311367f8b6458a3373a89075ac3833dd9e77e2d61b9ffb479a5719ca8'
-        )
-    }
-
     const ed25519AddressesWithRewards = ed25519Addresses
         .filter((address) => address in stakingResult.rewards)
         .map((address) => [address, stakingResult.rewards[address]])
@@ -685,18 +676,20 @@ function getUncachedStakingPeriodNumbers(airdrop: StakingAirdrop): number[] {
     }
 }
 
-export async function updateStakingPeriodCache(): Promise<void> {
-    const uncachedAssemblyPeriodNumbers = getUncachedStakingPeriodNumbers(StakingAirdrop.Assembly)
-    await Promise.all(
-        uncachedAssemblyPeriodNumbers.map((uncachedAssemblyPeriodNumber) =>
-            cacheStakingPeriod(StakingAirdrop.Assembly, uncachedAssemblyPeriodNumber)
-        )
-    )
+async function updateStakingPeriodCacheHelper(airdrop: StakingAirdrop): Promise<void> {
+    if (!airdrop) return
 
-    const uncachedShimmerPeriodNumbers = getUncachedStakingPeriodNumbers(StakingAirdrop.Shimmer)
+    const uncachedPeriodNumbers = getUncachedStakingPeriodNumbers(airdrop)
     await Promise.all(
-        uncachedShimmerPeriodNumbers.map((uncachedShimmerPeriodNumber) =>
-            cacheStakingPeriod(StakingAirdrop.Assembly, uncachedShimmerPeriodNumber)
-        )
+        uncachedPeriodNumbers.map((uncachedPeriodNumber) => cacheStakingPeriod(airdrop, uncachedPeriodNumber))
     )
+}
+
+/**
+ * Updates the staking period caches for both Assembly and Shimmer airdrops,
+ * first checking if they need to be updated.
+ */
+export async function updateStakingPeriodCache(): Promise<void> {
+    await updateStakingPeriodCacheHelper(StakingAirdrop.Assembly)
+    await updateStakingPeriodCacheHelper(StakingAirdrop.Shimmer)
 }

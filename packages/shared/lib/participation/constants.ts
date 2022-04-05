@@ -50,8 +50,6 @@ export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
  */
 export const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
     'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
-    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
-    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
 ]
 
 /**
