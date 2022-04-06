@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, Link, Spinner, Text, TextHint, Tooltip } from 'shared/components'
+    import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
