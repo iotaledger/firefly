@@ -70,3 +70,8 @@ export const lastAcceptedPrivacyPolicy = persistent<number>('lastAcceptedPrivacy
  * Note: The initial value must be set to 1 to support existing users and alert them
  */
 export const lastAcceptedTos = persistent<number>('lastAcceptedTos', 1)
+
+/**
+ * Have the profile folders been renamed from using profile names to the profile ids?
+ */
+export const hasRenamedProfileFoldersToId = persistent<boolean>('hasRenamedProfileFoldersToId', false)

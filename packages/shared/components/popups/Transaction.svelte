@@ -47,7 +47,8 @@
     $: {
         const accountOverview = $selectedAccountParticipationOverview
         mustAcknowledgeBelowMinRewardParticipationWarning =
-            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0) &&
+            isStakingPossible($stakingEventState)
     }
 
     function handleNextClick() {

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Thema",
                 "description": "",
-                "advice": "Je moet Firefly opnieuw opstarten om de veranderingen van het systeemthema door te voeren"
+                "advice": "Als je je systeemthema wijzigt, moet je Firefly misschien opnieuw opstarten om de effecten te zien"
             },
             "language": {
                 "title": "Taal",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Up-to-date",
-                    "outOfDate": "Verouderd"
+                    "outOfDate": "Verouderd",
+                    "updatesDisabled": "Updates uitgeschakeld"
                 },
                 "hardwareDevice": {
                     "title": "Hardware apparaat",
@@ -566,7 +567,8 @@
             "upToDateDescription": "U gebruikt de nieuwste en veiligste versie van Firefly.",
             "updateAvailable": "Firefly update beschikbaar",
             "updateDetails": "Versie {version} - {date}",
-            "noAutoUpdate": "Auto-update is uitgeschakeld in deze Windows-versie, ga naar https://firefly.iota.org om de update te downloaden."
+            "noAutoUpdate": "Auto-update is uitgeschakeld in deze Windows-versie, ga naar https://firefly.iota.org om de update te downloaden.",
+            "preReleaseDescription": "Je gebruikt een pre-release versie van Firefly. Updates zijn uitgeschakeld."
         },
         "backup": {
             "title": "Laatste back-up: {date}",

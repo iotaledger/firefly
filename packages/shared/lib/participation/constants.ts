@@ -46,6 +46,20 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
 /**
+ * The GitHub URLs containing the end Assembly staking results per period.
+ */
+export const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
+    'https://raw.githubusercontent.com/iotaledger/participation-events/b6d04e17de570aa5b633ee18b1087b2f9bd48601/results/staking/assembly_01.json',
+]
+
+/**
+ * The GitHub URLs containing the end Shimmer staking result per period.
+ */
+export const SHIMMER_STAKING_RESULT_URLS: string[] = [
+    'https://raw.githubusercontent.com/iotaledger/participation-events/886597c7372c406ef6a8bc4df165619da0d82af4/results/staking/shimmer.json',
+]
+
+/**
  * The number of the last completed Assembly staking period.
  */
 export const LAST_ASSEMBLY_STAKING_PERIOD = 1

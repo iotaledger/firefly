@@ -318,7 +318,7 @@
             "theme": {
                 "title": "テーマ：",
                 "description": "",
-                "advice": "システムテーマの変更を有効にするにはFirefly を再起動する必要があります"
+                "advice": "システムテーマを変更する場合は、Firefly を再起動して効果を確認する必要があるかもしれません"
             },
             "language": {
                 "title": "言語:",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "最新",
-                    "outOfDate": "古いバージョンです"
+                    "outOfDate": "古いバージョンです",
+                    "updatesDisabled": "アップデートは無効です"
                 },
                 "hardwareDevice": {
                     "title": "外部デバイス",
@@ -566,7 +567,8 @@
             "upToDateDescription": "あなたはFireflyの最新かつ安全なバージョンを実行しています。",
             "updateAvailable": "Firefly の更新が利用可能",
             "updateDetails": "バージョン {version} - {date}",
-            "noAutoUpdate": "この Windows バージョンでは自動更新は無効になっています。https://phofiry.iota.org にアクセスして更新をダウンロードしてください。"
+            "noAutoUpdate": "この Windows バージョンでは自動更新は無効になっています。https://phofiry.iota.org にアクセスして更新をダウンロードしてください。",
+            "preReleaseDescription": "Fireflyのプレリリースバージョンを実行しています。アップデートは無効です。"
         },
         "backup": {
             "title": "前回のバックアップ: {date}",
