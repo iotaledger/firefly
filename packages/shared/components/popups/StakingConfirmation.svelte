@@ -187,7 +187,7 @@
                     >
                         <Icon icon="exclamation" width="26" height="26" classes="text-orange-500" />
                     </div>
-                {:else}
+                {:else if activeAirdrops.length > 1}
                     <Checkbox
                         round
                         bind:checked={airdropSelections[airdrop]}
