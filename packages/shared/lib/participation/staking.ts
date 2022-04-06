@@ -1,13 +1,25 @@
 import { get } from 'svelte/store'
+
 import { getDecimalSeparator } from '../currency'
+import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { networkStatus } from '../networkStatus'
-import { activeProfile } from '../profile'
-import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { activeProfile, updateProfile } from '../profile'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
-import { clamp, delineateNumber } from '../utils'
-import { selectedAccount } from '../wallet'
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
+import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
+import { selectedAccount, wallet } from '../wallet'
+
+import {
+    ASSEMBLY_EVENT_ID,
+    ASSEMBLY_STAKING_RESULT_URLS,
+    LAST_ASSEMBLY_STAKING_PERIOD,
+    LAST_SHIMMER_STAKING_PERIOD,
+    SHIMMER_EVENT_ID,
+    SHIMMER_STAKING_RESULT_URLS,
+    STAKING_AIRDROP_TOKENS,
+    STAKING_EVENT_IDS,
+} from './constants'
 import {
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
@@ -17,7 +29,17 @@ import {
     stakedAccounts,
     stakingEventState,
 } from './stores'
-import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
+import {
+    AccountStakingRewards,
+    AirdropStakingRewards,
+    Participation,
+    ParticipationEvent,
+    ParticipationEventState,
+    StakingAirdrop,
+    StakingPeriod,
+    StakingPeriodJsonResponse,
+    StakingPeriodRewards,
+} from './types'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -463,4 +485,221 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     }
 
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
+}
+
+function isValidPeriodNumber(airdrop: StakingAirdrop, periodNumber: number): boolean {
+    if (!airdrop || periodNumber < 1) return false
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return periodNumber <= LAST_ASSEMBLY_STAKING_PERIOD
+        case StakingAirdrop.Shimmer:
+            return periodNumber <= LAST_SHIMMER_STAKING_PERIOD
+        default:
+            return false
+    }
+}
+
+function getStakingResultUrl(airdrop: StakingAirdrop, periodNumber: number): string {
+    if (!airdrop || !isValidPeriodNumber(airdrop, periodNumber)) return ''
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return ASSEMBLY_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+        case StakingAirdrop.Shimmer:
+            return SHIMMER_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+        default:
+            return ''
+    }
+}
+
+async function fetchStakingResult(
+    airdrop: StakingAirdrop,
+    periodNumber: number
+): Promise<StakingPeriodJsonResponse> | undefined {
+    const stakingResultUrl = getStakingResultUrl(airdrop, periodNumber)
+
+    try {
+        const stakingResultResponse = await fetch(stakingResultUrl, getJsonRequestOptions())
+
+        return stakingResultResponse.json()
+    } catch (err) {
+        console.error(`Unable to fetch staking results from ${stakingResultUrl}`)
+    }
+}
+
+function getAccountStakingRewards(): AccountStakingRewards[] {
+    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
+    if (cachedStakingRewards.length === 0) {
+        return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
+    } else {
+        return cachedStakingRewards
+    }
+}
+
+function getStakingPeriodForAccount(
+    account: WalletAccount,
+    stakingResult: StakingPeriodJsonResponse,
+    periodNumber: number
+): StakingPeriod {
+    const ed25519Addresses = account.addresses.map((address) => convertBech32AddressToEd25519Address(address.address))
+
+    let totalPeriodRewards = 0
+
+    const ed25519AddressesWithRewards = ed25519Addresses
+        .filter((address) => address in stakingResult.rewards)
+        .map((address) => {
+            totalPeriodRewards += stakingResult.rewards[address]
+
+            return [address, stakingResult.rewards[address]]
+        })
+    const rewards: StakingPeriodRewards = Object.fromEntries(ed25519AddressesWithRewards)
+
+    return {
+        periodNumber,
+        totalPeriodRewards,
+        rewards,
+    }
+}
+
+function getAirdropStakingRewards(
+    previousAccountStakingRewards: AccountStakingRewards,
+    airdrop: StakingAirdrop,
+    period: StakingPeriod
+): AirdropStakingRewards {
+    const airdropStakingRewards: AirdropStakingRewards = previousAccountStakingRewards[airdrop] ?? {
+        totalAirdropRewards: 0,
+        periods: [],
+    }
+    const periodIndex = airdropStakingRewards.periods.findIndex((p) => p.periodNumber === period.periodNumber)
+    if (periodIndex === -1) {
+        airdropStakingRewards.periods.push(period)
+    } else {
+        airdropStakingRewards.periods[periodIndex] = period
+    }
+
+    airdropStakingRewards.totalAirdropRewards = airdropStakingRewards.periods.reduce(
+        (sum: number, current: StakingPeriod) => sum + current.totalPeriodRewards,
+        0
+    )
+
+    return airdropStakingRewards
+}
+
+function updateStakingRewardsForAccount(
+    previousAccountStakingRewards: AccountStakingRewards,
+    stakingResult: StakingPeriodJsonResponse,
+    airdrop: StakingAirdrop,
+    periodNumber: number
+): AccountStakingRewards {
+    const account = get(get(wallet).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
+    if (!account) return previousAccountStakingRewards
+
+    const period = getStakingPeriodForAccount(account, stakingResult, periodNumber)
+    const airdropStakingRewards = getAirdropStakingRewards(previousAccountStakingRewards, airdrop, period)
+
+    return { ...previousAccountStakingRewards, [airdrop]: airdropStakingRewards }
+}
+
+/**
+ * Caches the result of a single staking period for a given airdrop and period number.
+ */
+export async function cacheStakingPeriod(airdrop: StakingAirdrop, periodNumber: number): Promise<void> {
+    if (!airdrop || !isValidPeriodNumber(airdrop, periodNumber)) return
+
+    const stakingResult = await fetchStakingResult(airdrop, periodNumber)
+    if (!stakingResult) return
+
+    const previousStakingRewards = getAccountStakingRewards()
+    const updatedStakingRewards: AccountStakingRewards[] = previousStakingRewards.map(
+        (accountStakingRewards: AccountStakingRewards) =>
+            updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
+    )
+
+    updateProfile('stakingRewards', updatedStakingRewards)
+}
+
+function getLastStakingPeriodNumber(airdrop: StakingAirdrop): number {
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return LAST_ASSEMBLY_STAKING_PERIOD
+        case StakingAirdrop.Shimmer:
+            return LAST_SHIMMER_STAKING_PERIOD
+        default:
+            return 0
+    }
+}
+
+/**
+ * Caches the results of the last staking period for a given airdrop.
+ */
+export async function cacheLastStakingPeriod(airdrop: StakingAirdrop): Promise<void> {
+    const periodNumber = getLastStakingPeriodNumber(airdrop)
+    if (periodNumber <= 0) return
+
+    await cacheStakingPeriod(airdrop, periodNumber)
+}
+
+/**
+ * Caches the results for some of the staking periods for a given airdrop and array of period numbers.
+ */
+export async function cacheSomeStakingPeriods(airdrop: StakingAirdrop, periodNumbers: number[]): Promise<void> {
+    await Promise.all(periodNumbers.map((periodNumber) => cacheStakingPeriod(airdrop, periodNumber)))
+}
+
+/**
+ * Caches the results of all staking periods for a given airdrop.
+ */
+export async function cacheAllStakingPeriods(airdrop: StakingAirdrop): Promise<void> {
+    const numberOfPeriods = getLastStakingPeriodNumber(airdrop)
+    await cacheSomeStakingPeriods(airdrop, range(numberOfPeriods, 1))
+}
+
+function getUncachedStakingPeriodNumbers(airdrop: StakingAirdrop): number[] {
+    const stakingRewards = get(activeProfile)?.stakingRewards ?? []
+    if (stakingRewards.length === 0) {
+        return range(getLastStakingPeriodNumber(airdrop), 1)
+    } else {
+        const stakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
+
+        let shouldBreak = false
+        let uncachedStakingPeriodNumbers = []
+        stakingRewards.forEach((stakingReward) => {
+            if (shouldBreak) return
+
+            const airdropStakingRewards = stakingReward[airdrop]
+            if (!airdropStakingRewards) {
+                uncachedStakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
+                shouldBreak = true
+            } else {
+                stakingPeriodNumbers.forEach((stakingPeriodNumber) => {
+                    if (!airdropStakingRewards.periods.some((period) => period.periodNumber === stakingPeriodNumber)) {
+                        if (!uncachedStakingPeriodNumbers.includes(stakingPeriodNumber)) {
+                            uncachedStakingPeriodNumbers.push(stakingPeriodNumber)
+                        }
+                    }
+                })
+            }
+        })
+
+        return uncachedStakingPeriodNumbers
+    }
+}
+
+async function updateStakingPeriodCacheForAirdrop(airdrop: StakingAirdrop): Promise<void> {
+    if (!airdrop) return
+
+    const uncachedPeriodNumbers = getUncachedStakingPeriodNumbers(airdrop)
+    await Promise.all(
+        uncachedPeriodNumbers.map((uncachedPeriodNumber) => cacheStakingPeriod(airdrop, uncachedPeriodNumber))
+    )
+}
+
+/**
+ * Updates the staking period caches for both Assembly and Shimmer airdrops,
+ * first checking if they need to be updated.
+ */
+export async function updateStakingPeriodCache(): Promise<void> {
+    await updateStakingPeriodCacheForAirdrop(StakingAirdrop.Assembly)
+    await updateStakingPeriodCacheForAirdrop(StakingAirdrop.Shimmer)
 }
