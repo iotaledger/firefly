@@ -7,5 +7,5 @@ import { toHexString } from '@lib/utils'
 export function convertBech32AddressToEd25519Address(bech32Address: string): string {
     if (!bech32Address) return ''
 
-    return toHexString(Array.from(Bech32.decode(bech32Address).data))
+    return toHexString(Array.from(Bech32.decode(bech32Address).data).slice(1))
 }
