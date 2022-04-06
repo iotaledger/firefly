@@ -2,20 +2,21 @@ import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile } from '../profile'
-import { getBestTimeDuration, MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber } from '../utils'
 import { selectedAccount } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from './constants'
 import {
+    assemblyStakingEventState,
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
     participationEvents,
     selectedAccountParticipationOverview,
+    shimmerStakingEventState,
     shimmerStakingRemainingTime,
     stakedAccounts,
-    stakingEventState,
 } from './stores'
 import { Participation, ParticipationEvent, ParticipationEventState, StakingAirdrop } from './types'
 
@@ -53,6 +54,19 @@ export const getAirdropFromEventId = (eventId: string): StakingAirdrop => {
     return eventId === ASSEMBLY_EVENT_ID ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
 }
 
+export function getStakingEventIdFromAirdrop(airdrop: StakingAirdrop): string {
+    if (!airdrop) return ''
+
+    switch (airdrop) {
+        case StakingAirdrop.Assembly:
+            return ASSEMBLY_EVENT_ID
+        case StakingAirdrop.Shimmer:
+            return SHIMMER_EVENT_ID
+        default:
+            return ''
+    }
+}
+
 /**
  * Get the corresponding staking participation event data from its airdrop enumeration.
  *
@@ -63,19 +77,15 @@ export const getAirdropFromEventId = (eventId: string): StakingAirdrop => {
  * @returns {ParticipationEvent}
  */
 export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): ParticipationEvent => {
-    let stakingEventId: string
-    switch (airdrop) {
-        case StakingAirdrop.Assembly:
-            stakingEventId = ASSEMBLY_EVENT_ID
-            break
-        case StakingAirdrop.Shimmer:
-            stakingEventId = SHIMMER_EVENT_ID
-            break
-        default:
-            break
-    }
-
+    const stakingEventId = getStakingEventIdFromAirdrop(airdrop)
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
+}
+
+export function isAirdropActive(airdrop: StakingAirdrop): boolean {
+    if (!airdrop) return false
+
+    const stakingEventId = getStakingEventIdFromAirdrop(airdrop)
+    return STAKING_EVENT_IDS.filter((id) => id).some((id) => id === stakingEventId)
 }
 
 /**
@@ -397,8 +407,11 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
     const currentRewards = getCurrentRewardsForAirdrop(airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
+    const stakingEventState = get(
+        airdrop === StakingAirdrop.Assembly ? assemblyStakingEventState : shimmerStakingEventState
+    )
     const _getTimeLeft = () => {
-        if (get(stakingEventState) === ParticipationEventState.Commencing) {
+        if (stakingEventState === ParticipationEventState.Commencing) {
             return calculateRemainingStakingTime(stakingEvent?.information?.milestoneIndexStart, stakingEvent)
         }
         return airdrop === StakingAirdrop.Assembly
@@ -463,4 +476,13 @@ export const hasAccountReachedMinimumAirdrop = (): boolean => {
     }
 
     return overview.assemblyRewards > 0 || overview.shimmerRewards > 0
+}
+
+export function isNewStakingEvent(stakingEventState: ParticipationEventState): boolean {
+    if (!stakingEventState) return false
+
+    return (
+        stakingEventState === ParticipationEventState.Upcoming ||
+        stakingEventState === ParticipationEventState.Commencing
+    )
 }

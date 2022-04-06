@@ -5,10 +5,13 @@
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
         assemblyStakingRemainingTime,
-        assemblyStakingRewards,
+        assemblyStakingEventState,
+        currentAssemblyStakingRewards,
+        currentShimmerStakingRewards,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards,
-        stakingEventState,
+        shimmerStakingEventState,
+        totalAssemblyStakingRewards,
+        totalShimmerStakingRewards,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
@@ -116,6 +119,51 @@
             </Text>
             <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
         </div>
+        {#if isStakingPossible(isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState)}
+            <div class="flex flex-row justify-between space-x-4">
+                <div class="flex flex-col">
+                    <div>
+                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
+                            {formatStakingAirdropReward(
+                                airdrop,
+                                isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards,
+                                6
+                            ).split(' ')[0]}
+                        </Text>
+                        <Text type="p" secondary classes="text-sm inline">
+                            {formatStakingAirdropReward(
+                                airdrop,
+                                isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards,
+                                6
+                            ).split(' ')[1]}
+                        </Text>
+                    </div>
+                    <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
+                        {localize('views.staking.airdrops.currentStakingPeriod')}
+                    </Text>
+                </div>
+                {#if isStakingPossible(isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState)}
+                    <div class="flex flex-col text-right">
+                        <div>
+                            <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
+                                {remainingTimeAmount}
+                            </Text>
+                            <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                        </div>
+                        <Text
+                            type="p"
+                            smaller
+                            overrideColor
+                            classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
+                        >
+                            {getLocalizedDurationText(
+                                isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+                            )}
+                        </Text>
+                    </div>
+                {/if}
+            </div>
+        {/if}
         <HR />
         <div class="flex flex-row justify-between space-x-4">
             <div class="flex flex-col">
@@ -123,40 +171,22 @@
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards,
                             6
                         ).split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
                         {formatStakingAirdropReward(
                             airdrop,
-                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
+                            isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards,
                             6
                         ).split(' ')[1]}
                     </Text>
                 </div>
                 <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
-                    {localize('views.staking.airdrops.collectedRewards')}
+                    {localize('views.staking.airdrops.totalWalletRewards')}
                 </Text>
             </div>
-            {#if isStakingPossible($stakingEventState)}
-                <div class="flex flex-col text-right">
-                    <div>
-                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
-                            {remainingTimeAmount}
-                        </Text>
-                        <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
-                    </div>
-                    <Text
-                        type="p"
-                        smaller
-                        overrideColor
-                        classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
-                    >
-                        {getLocalizedDurationText($stakingEventState)}
-                    </Text>
-                </div>
-            {/if}
         </div>
     </div>
 </div>

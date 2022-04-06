@@ -2,7 +2,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { wallet, selectedAccount } from '../wallet'
+import { selectedAccount, wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
@@ -16,6 +16,8 @@ import {
     PendingParticipation,
     StakingAirdrop,
 } from './types'
+import { NetworkStatus } from '@lib/typings/network'
+import { getStakingEventFromAirdrop } from '@lib/participation/staking'
 
 /**
  * The store for keeping track of pending participations.
@@ -163,27 +165,43 @@ const sumStakingRewards = (airdrop: StakingAirdrop, accountOverview: AccountPart
 }
 
 /**
- * The total accumulated Assembly rewards for all
+ * The current accumulated Assembly rewards for all
  * accounts that have been staked at some point (even
- * if they are currently unstaked).
+ * if they are currently unstaked) in the current staking period.
  *
  * Be cautious that this value is in microASMB, so it is likely to be larger.
  */
-export const assemblyStakingRewards: Readable<number> = derived(
+export const currentAssemblyStakingRewards: Readable<number> = derived(
     [selectedAccountParticipationOverview],
     ([$selectedAccountParticipationOverview]) =>
         sumStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
 )
 
 /**
- * The total accumulated Shimmer rewards for all
- * accounts that have been staked at some point (even
- * if they are currently unstaked).
+ * The total accumulated Assembly rewards for all accounts.
  */
-export const shimmerStakingRewards: Readable<number> = derived(
+export const totalAssemblyStakingRewards: Readable<number> = derived(
+    [currentAssemblyStakingRewards],
+    ([$currentAssemblyStakingRewards]) => 0 + $currentAssemblyStakingRewards
+)
+
+/**
+ * The current accumulated Shimmer rewards for all
+ * accounts that have been staked at some point (even
+ * if they are currently unstaked) in the current staking period.
+ */
+export const currentShimmerStakingRewards: Readable<number> = derived(
     [selectedAccountParticipationOverview],
     ([$selectedAccountParticipationOverview]) =>
         sumStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
+)
+
+/**
+ * The total accumulated Shimmer rewards for all accounts.
+ */
+export const totalShimmerStakingRewards: Readable<number> = derived(
+    [currentShimmerStakingRewards],
+    ([$currentShimmerStakingRewards]) => 0 + $currentShimmerStakingRewards
 )
 
 /**
@@ -191,29 +209,41 @@ export const shimmerStakingRewards: Readable<number> = derived(
  */
 export const participationEvents = writable<ParticipationEvent[]>([])
 
-/**
- * The status of the staking event, calculated from the milestone information.
- */
-export const stakingEventState: Readable<ParticipationEventState> = derived(
-    [networkStatus, participationEvents],
-    ([$networkStatus, $participationEvents]) => {
-        const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent || !$networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
-            return ParticipationEventState.Inactive
-        }
+function deriveParticipationEventState(
+    stakingEvent: ParticipationEvent,
+    networkStatus: NetworkStatus
+): ParticipationEventState {
+    if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+        return ParticipationEventState.Inactive
+    }
 
-        const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
-        const currentMilestone = $networkStatus?.currentMilestone
+    const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
+    const currentMilestone = networkStatus?.currentMilestone
 
-        if (currentMilestone < milestoneIndexCommence) {
-            return ParticipationEventState.Upcoming
-        } else if (currentMilestone < milestoneIndexStart) {
-            return ParticipationEventState.Commencing
-        } else if (currentMilestone < milestoneIndexEnd) {
-            return ParticipationEventState.Holding
-        } else {
-            return ParticipationEventState.Ended
-        }
+    if (currentMilestone < milestoneIndexCommence) {
+        return ParticipationEventState.Upcoming
+    } else if (currentMilestone < milestoneIndexStart) {
+        return ParticipationEventState.Commencing
+    } else if (currentMilestone < milestoneIndexEnd) {
+        return ParticipationEventState.Holding
+    } else {
+        return ParticipationEventState.Ended
+    }
+}
+
+export const assemblyStakingEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus],
+    ([$networkStatus]) => {
+        const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Assembly)
+        return deriveParticipationEventState(stakingEvent, $networkStatus)
+    }
+)
+
+export const shimmerStakingEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus],
+    ([$networkStatus]) => {
+        const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Shimmer)
+        return deriveParticipationEventState(stakingEvent, $networkStatus)
     }
 )
 

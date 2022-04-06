@@ -1,7 +1,7 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { formatStakingAirdropReward } from 'shared/lib/participation/staking'
-import { assemblyStakingRewards, shimmerStakingRewards } from 'shared/lib/participation/stores'
+import { currentAssemblyStakingRewards, currentShimmerStakingRewards } from 'shared/lib/participation/stores'
 import { activeProfile } from 'shared/lib/profile'
 import { Asset, Token } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -11,7 +11,14 @@ import { derived } from 'svelte/store'
 import { StakingAirdrop } from './participation/types'
 
 export const assets = derived(
-    [exchangeRates, currencies, activeProfile, selectedAccount, assemblyStakingRewards, shimmerStakingRewards],
+    [
+        exchangeRates,
+        currencies,
+        activeProfile,
+        selectedAccount,
+        currentAssemblyStakingRewards,
+        currentShimmerStakingRewards,
+    ],
     ([
         $exchangeRates,
         $currencies,

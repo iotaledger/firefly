@@ -3,10 +3,11 @@
     import { Platform } from 'shared/lib/platform'
     import { localize } from '@core/i18n'
     import {
+        assemblyStakingEventState,
         assemblyStakingRemainingTime,
         selectedAccountParticipationOverview,
+        shimmerStakingEventState,
         stakedAccounts,
-        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
@@ -16,10 +17,22 @@
     let header: string
     let subHeader: string
 
+    let isAssemblyStaked = false
     $: isAssemblyStaked = $selectedAccountParticipationOverview?.assemblyStakedFunds > 0
+
+    let isShimmerStaked = false
     $: isShimmerStaked = $selectedAccountParticipationOverview?.shimmerStakedFunds > 0
-    $: $selectedAccountParticipationOverview, $stakingEventState, setHeaders()
-    $: isAssemblyStaked, isShimmerStaked, $stakingEventState, $selectedAccountId, setAnimation()
+
+    $: $selectedAccountParticipationOverview, $assemblyStakingEventState, $shimmerStakingEventState, setHeaders()
+    $: isAssemblyStaked,
+        isShimmerStaked,
+        $assemblyStakingEventState,
+        $shimmerStakingEventState,
+        $selectedAccountId,
+        setAnimation()
+
+    let stakingEventState
+    $: stakingEventState = $assemblyStakingEventState
 
     enum AnimationFileNumber {
         NoStaking = 0,
@@ -30,13 +43,13 @@
 
     function setAnimation(): void {
         const prefix = 'staking-info'
-        if (!$stakingEventState || !$selectedAccountParticipationOverview) {
+        if (!stakingEventState || !$selectedAccountParticipationOverview) {
             animation = `${prefix}-upcoming`
         }
 
-        if ($stakingEventState === ParticipationEventState.Inactive) {
+        if (stakingEventState === ParticipationEventState.Inactive) {
             animation = null
-        } else if ($stakingEventState === ParticipationEventState.Holding) {
+        } else if (stakingEventState === ParticipationEventState.Holding) {
             let fileNumber = AnimationFileNumber.NoStaking
             if (isAssemblyStaked && isShimmerStaked) {
                 fileNumber = AnimationFileNumber.AssemblyAndShimmer
@@ -46,15 +59,15 @@
                 fileNumber = AnimationFileNumber.Shimmer
             }
 
-            animation = `${prefix}-${$stakingEventState}-${fileNumber}`
+            animation = `${prefix}-${stakingEventState}-${fileNumber}`
         } else {
-            animation = `${prefix}-${$stakingEventState}`
+            animation = `${prefix}-${stakingEventState}`
         }
     }
 
     function setHeaders(): void {
-        const localePath = `views.staking.info.${$stakingEventState}`
-        if ($stakingEventState === ParticipationEventState.Holding) {
+        const localePath = `views.staking.info.${stakingEventState}`
+        if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
             const localiseHoldingHeader = isStaking ? 'Holding' : 'NotHolding'
             const localiseHoldingSubHeader = isStaking ? 'Holding' : 'NotHolding'
