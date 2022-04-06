@@ -126,7 +126,7 @@
          * NOTE: We check for mobile because it's only necessary
          * for existing desktop installation.
          */
-        if (!mobile && !$isAwareOfCrashReporting) {
+        if (!$mobile && !$isAwareOfCrashReporting) {
             openPopup({
                 type: 'crashReporting',
             })
