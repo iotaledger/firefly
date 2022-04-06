@@ -242,7 +242,7 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 720,
-        titleBarStyle: 'hidden',
+        titleBarStyle: 'hiddenInset',
         title: app.name,
         frame: process.platform === 'linux',
         icon:
@@ -578,7 +578,7 @@ export const openAboutWindow = () => {
         width: 380,
         height: 230,
         useContentSize: true,
-        titleBarStyle: 'hidden',
+        titleBarStyle: 'hiddenInset',
         show: false,
         fullscreenable: false,
         resizable: false,
@@ -625,7 +625,7 @@ export const openErrorWindow = () => {
 
     windows.error = new BrowserWindow({
         useContentSize: true,
-        titleBarStyle: 'hidden',
+        titleBarStyle: 'hiddenInset',
         show: false,
         fullscreenable: false,
         resizable: true,
