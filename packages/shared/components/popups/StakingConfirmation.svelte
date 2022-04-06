@@ -10,7 +10,7 @@
         getStakingEventFromAirdrop,
         getUnstakedFunds,
     } from 'shared/lib/participation'
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         participationAction,
         isPartiallyStaked,
@@ -29,15 +29,19 @@
     let showTooltip = false
     let tooltipAnchor: unknown
 
-    const activeAirdrops =
+    const activeAirdropsParticipatedIn =
         $selectedAccountParticipationOverview?.participations
             .map((p) => getAirdropFromEventId(p.eventId))
             // Falsy values (undefined, null, ...) are filtered out from the array
             .filter(Boolean) || []
 
+    const activeAirdrops = STAKING_EVENT_IDS.filter((x) => x).map((x) => getAirdropFromEventId(x))
+
     const airdropSelections: { [key in StakingAirdrop]: boolean } = {
-        [StakingAirdrop.Assembly]: canReachAirdropMinimum(StakingAirdrop.Assembly) ? true : false,
-        [StakingAirdrop.Shimmer]: canReachAirdropMinimum(StakingAirdrop.Shimmer) ? true : false,
+        [StakingAirdrop.Assembly]:
+            activeAirdrops.includes(StakingAirdrop.Assembly) && canReachAirdropMinimum(StakingAirdrop.Assembly),
+        [StakingAirdrop.Shimmer]:
+            activeAirdrops.includes(StakingAirdrop.Shimmer) && canReachAirdropMinimum(StakingAirdrop.Shimmer),
     }
 
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
@@ -100,7 +104,7 @@
 
         const selections = !$isPartiallyStaked
             ? Object.keys(airdropSelections).filter((as) => airdropSelections[as])
-            : activeAirdrops
+            : activeAirdropsParticipatedIn
 
         const participations = selections.map(
             (selection): Participation => ({
@@ -121,11 +125,15 @@
     }
 
     function getAirdropParticipation(): string {
-        if (activeAirdrops.length === 1) {
-            return capitalize(activeAirdrops.join())
+        if (activeAirdropsParticipatedIn.length === 1) {
+            return capitalize(activeAirdropsParticipatedIn.join())
         } else {
-            return activeAirdrops.map((a) => capitalize(a)).join(' & ')
+            return activeAirdropsParticipatedIn.map((a) => capitalize(a)).join(' & ')
         }
+    }
+
+    function showInfoText() {
+        return $isPartiallyStaked || activeAirdrops.length > 1
     }
 </script>
 
@@ -141,20 +149,28 @@
         {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance}
     </Text>
 </div>
-<Text type="p" secondary classes="text-center mt-5 mb-6">
-    {localize(`popups.stakingConfirmation.body${$isPartiallyStaked ? 'Merge' : 'Stake'}`, {
-        values: { airdrop: getAirdropParticipation() },
-    })}
-</Text>
+{#if showInfoText()}
+    <Text type="p" secondary classes="text-center mt-5">
+        {$isPartiallyStaked
+            ? localize('popups.stakingConfirmation.mergeStakeWarning', {
+                  values: { airdrop: getAirdropParticipation() },
+              })
+            : localize('popups.stakingConfirmation.multiAirdropWarning')}
+    </Text>
+{/if}
 {#if !$isPartiallyStaked}
-    <div class="flex flex-row mb-6 space-x-2 flex-1">
-        {#each Object.values(StakingAirdrop) as airdrop}
+    <div class="flex flex-row mt-6 space-x-2 flex-1">
+        {#each Object.values(activeAirdrops) as airdrop}
             <div
-                on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
-                class="airdrop-container p-4 w-1/2 flex flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
+                on:click={!canReachAirdropMinimum(airdrop) || activeAirdrops.length <= 1
+                    ? () => {}
+                    : () => toggleAirdropSelection(airdrop)}
+                class="airdrop-container p-4 w-1/2 flex flex-1 flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
                     airdrop
                 )
                     ? 'cursor-default'
+                    : activeAirdrops.length <= 1
+                    ? 'cursor-default border-blue-500'
                     : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[
                     airdrop
                 ] || !canReachAirdropMinimum(airdrop)
@@ -175,7 +191,7 @@
                     >
                         <Icon icon="exclamation" width="26" height="26" classes="text-orange-500" />
                     </div>
-                {:else}
+                {:else if activeAirdrops.length > 1}
                     <Checkbox
                         round
                         bind:checked={airdropSelections[airdrop]}
@@ -201,7 +217,7 @@
     </div>
 {/if}
 <Button
-    classes="w-full"
+    classes="w-full mt-6"
     onClick={handleConfirmClick}
     disabled={!airdropSelections[StakingAirdrop.Assembly] && !airdropSelections[StakingAirdrop.Shimmer]}
 >

@@ -6,7 +6,7 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { Idle, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -68,6 +68,7 @@
     let startInit
     let busy
     let fundsSoonNotificationId
+    let developerProfileNotificationId
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
@@ -228,6 +229,9 @@
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
         }
+        if (developerProfileNotificationId) {
+            removeDisplayNotification(developerProfileNotificationId)
+        }
         if ($isLedgerProfile) {
             stopPollingLedgerStatus()
         }
@@ -357,6 +361,15 @@
                 ],
             })
         }
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+            // Show developer profile warning
+            developerProfileNotificationId = showAppNotification({
+                type: 'warning',
+                message: locale('indicators.developerProfileIndicator.warningText', {
+                    values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
+                }),
+            })
+        }
     }
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
@@ -400,7 +413,6 @@
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
     <TopNavigation {onCreateAccount} />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
