@@ -228,13 +228,13 @@
                 @apply bg-transparent;
             }
             &:hover {
-                @apply bg-gray-500;
+                @apply bg-gray-200;
             }
             &.darkmode {
                 @apply bg-gray-900;
                 @apply border-transparent;
                 &:hover {
-                    @apply bg-gray-600;
+                    @apply bg-gray-700;
                 }
             }
         }
