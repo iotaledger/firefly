@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Teman",
                 "description": "",
-                "advice": "Du måste starta om Firefly för att ändringarna i systemtemat skall träda i kraft"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Språk",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Uppdaterad",
-                    "outOfDate": "Behöver uppdateras"
+                    "outOfDate": "Behöver uppdateras",
+                    "updatesDisabled": "Uppdateringar inaktiverade"
                 },
                 "hardwareDevice": {
                     "title": "Hårdvaruenhet",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Du kör den senaste och säkraste versionen av Firefly.",
             "updateAvailable": "Firefly-uppdatering tillgänglig",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Automatisk uppdatering är inaktiverad i denna Windows-version, gå till https://firefly.iota.org för att ladda ner uppdateringen."
+            "noAutoUpdate": "Automatisk uppdatering är inaktiverad i denna Windows-version, gå till https://firefly.iota.org för att ladda ner uppdateringen.",
+            "preReleaseDescription": "Du kör en förhandsversion av Firefly. Uppdateringar är inaktiverade."
         },
         "backup": {
             "title": "Senaste säkerhetskopian: {date}",

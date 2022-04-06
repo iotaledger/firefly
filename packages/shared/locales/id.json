@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Motif",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Bahasa",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v",
                     "upToDate": "Terbaru",
-                    "outOfDate": "Ketinggalan jaman"
+                    "outOfDate": "Ketinggalan jaman",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Perangkat keras",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Anda menjalankan Firefly versi terbaru dan teraman.",
             "updateAvailable": "Pembaruan Firefly tersedia",
             "updateDetails": "Versi {version} - {date}",
-            "noAutoUpdate": "Pembaharuan otomatis telah dinon-aktifkan pada versi Windows ini. Silakan akses ke https://firefly.iota.org untuk mengunduh pembaharuan."
+            "noAutoUpdate": "Pembaharuan otomatis telah dinon-aktifkan pada versi Windows ini. Silakan akses ke https://firefly.iota.org untuk mengunduh pembaharuan.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Cadangan terakhir {date}",

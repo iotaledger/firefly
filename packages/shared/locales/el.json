@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Θεματικό",
                 "description": "",
-                "advice": "Επανεκκινήστε την εφαρμογή Firefly για να τεθούν σε ισχύ οι αλλαγές στο θεματικό του συστήματος"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Γλώσσα",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Ενημερωμένο",
-                    "outOfDate": "Απαρχαιωμένη έκδοση"
+                    "outOfDate": "Απαρχαιωμένη έκδοση",
+                    "updatesDisabled": "Ενημερώσεις απενεργοποιημένες"
                 },
                 "hardwareDevice": {
                     "title": "Συσκευή",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Τρέχετε την τελευταία και ασφαλέστερη έκδοση του Firefly.",
             "updateAvailable": "Νέα ενημέρωση Firefly είναι διαθέσιμη",
             "updateDetails": "Έκδοση {version} - {date}",
-            "noAutoUpdate": "Η αυτόματη ενημέρωση είναι απενεργοποιημένη σε αυτήν την έκδοση των Windows, παρακαλώ πηγαίνετε στο https://firefly.iota.org για να κατεβάσετε την ενημέρωση."
+            "noAutoUpdate": "Η αυτόματη ενημέρωση είναι απενεργοποιημένη σε αυτήν την έκδοση των Windows, παρακαλώ πηγαίνετε στο https://firefly.iota.org για να κατεβάσετε την ενημέρωση.",
+            "preReleaseDescription": "Εκτελείτε μια έκδοση προ-κυκλοφορίας του Firefly. Οι ενημερώσεις είναι απενεργοποιημένες."
         },
         "backup": {
             "title": "Τελευταίο αντίγραφο ασφαλείας: {date}",

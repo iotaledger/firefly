@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Morate ponovno pokrenuti Firefly kako bi se promjene sistemske teme mogle primijeniti"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Jezik",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Aktualna",
-                    "outOfDate": "Zastarjela"
+                    "outOfDate": "Zastarjela",
+                    "updatesDisabled": "Ažuriranja onemogućena"
                 },
                 "hardwareDevice": {
                     "title": "Hardverski uređaj",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Koristiš najnoviju i najsigurniju verziju Fireflya.",
             "updateAvailable": "Dostupno je Firefly ažuriranje",
             "updateDetails": "Verzija {version} - {date}",
-            "noAutoUpdate": "Automatsko ažuriranje je onemogućeno u ovoj verziji Windowsa, molimo posjetite https://firefly.iota.org kako biste skinuli novu verziju."
+            "noAutoUpdate": "Automatsko ažuriranje je onemogućeno u ovoj verziji Windowsa, molimo posjetite https://firefly.iota.org kako biste skinuli novu verziju.",
+            "preReleaseDescription": "Trenutno koristite alpha/beta verziju Fireflya. Ažuriranja su onemogućena."
         },
         "backup": {
             "title": "Posljednja pričuvna kopija: {date}",

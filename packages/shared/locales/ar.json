@@ -10,9 +10,9 @@
             "checkbox": "لقد قرأت سياسة الخصوصية وشروط الاستخدام و أوافق على ما فيها"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "الإبلاغ عن الأعطال",
+            "body": "ساعد المطورين على تحسين Firefly بإرسال بيانات التشخيص تلقائيًا عند حدوث خطأ أو عطل.",
+            "checkbox": "إرسال تقارير الأعطال إلى مؤسسة IOTA"
         },
         "appearance": {
             "title": "المظهر",
@@ -292,7 +292,7 @@
         "settings": {
             "settings": "الاعدادات",
             "generalSettings": {
-                "title": "General",
+                "title": "عامة",
                 "description": "قم بتهيئة مظهر التطبيق الخاص بك والإعدادات العامة الأخرى"
             },
             "security": {
@@ -300,7 +300,7 @@
                 "description": "تغيير كلمة المرور الخاصة بك وضبط الإعدادات المتصلة بالأمن"
             },
             "advancedSettings": {
-                "title": "Advanced",
+                "title": "متقدمة",
                 "description": "الأدوات والإعدادات اليدوية للمستخدمين التقنيين"
             },
             "helpAndInfo": {
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "المظهر المفضل لك",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "إذا قمت بتغيير سمة النظام الخاص بك، قد تحتاج إلى إعادة تشغيل Firefly لرؤية التغييرات"
             },
             "language": {
                 "title": "اللغة",
@@ -357,9 +357,9 @@
                 "action": "تغيير رمز التعريف الشخصي"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "تغيير اسم ملف تعريف",
+                "description": "تغيير اسم ملف تعريف Firefly الخاص بك",
+                "success": "قمت بتغيير اسم ملف التعريف الخاص بك"
             },
             "balanceFinder": {
                 "title": "كشف الرصيد",
@@ -417,10 +417,10 @@
                 "description": "عرض الأخطاء لتصحيح مشكلة"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "تقارير الأعطال",
+                "body": "ساعد المطورين على تحسين Firefly بإرسال بيانات التشخيص تلقائيًا عند حدوث خطأ أو عطل",
+                "checkbox": "إرسال تقارير الأعطال",
+                "advice": "الرجاء إعادة تشغيل تطبيق Firefly من أجل {sendCrashReports, select, true {مشاركة سجل الخطأ} false {إيقاف مشاركة سجل الخطأ} other {تطبيق التغييرات}}"
             },
             "diagnostics": {
                 "title": "التشخيص",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "إصدار فايَرْفلاَي رقم {version}",
                     "upToDate": "مُحدّث",
-                    "outOfDate": "غير محدّث"
+                    "outOfDate": "غير محدّث",
+                    "updatesDisabled": "التحديثات معطلة"
                 },
                 "hardwareDevice": {
                     "title": "الجهاز",
@@ -546,8 +547,8 @@
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "منتقي الألوان",
+                "hexCode": "رمز لون hex"
             }
         }
     },
@@ -566,7 +567,8 @@
             "upToDateDescription": "مبروك, نسخة محفظة فايَرْفلاَي لديك هي أحدث إصدار وأكثرها أماناً.",
             "updateAvailable": "تحديث جديد لمحفظة فايَرْفلاَي متاح حالياَ",
             "updateDetails": "الإصدار {version} - {date}",
-            "noAutoUpdate": "التحديث التلقائي معطل في هذا الإصدار من ويندوز، يرجى الانتقال إلى العنوان المدرج أدناه لتحميل التحديث\n\n https://firefly.iota.org."
+            "noAutoUpdate": "التحديث التلقائي معطل في هذا الإصدار من ويندوز، يرجى الانتقال إلى العنوان المدرج أدناه لتحميل التحديث\n\n https://firefly.iota.org.",
+            "preReleaseDescription": "أنت تشغل إصدارًا تجريبيًا من Firefly. التحديثات معطلة."
         },
         "backup": {
             "title": "آخر نسخة احتياطية: {date}",
@@ -776,19 +778,19 @@
             "body": "سوف يتم الاتصال بشبكة كرِسَالِس التجريبية بشكل تلقائي, ويمكنك الانتقال لشبكات أخرى يدويا.\nيرجى المتابعة فقط إذا كنت تعلم ما تفعل."
         },
         "crashReporting": {
-            "title": "Crash reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "الإبلاغ عن الأعطال",
+            "body": "ساعد المطورين على تحسين Firefly بإرسال بيانات التشخيص تلقائيًا عند حدوث خطأ أو عطل. إذا تم تحديده ، فسيصبح هذا ساري المفعول بعد إعادة تشغيل Firefly.",
+            "checkbox": "إرسال تقارير الأعطال إلى مؤسسة IOTA"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "شروط الخدمة",
+            "privPolicyTitle": "سياسة الخصوصية",
+            "tosAndPrivPolicyBody": "لقد قمنا بتحديث شروط الخدمة وسياسة الخصوصية الخاصة بـ Firefly.",
+            "tosBody": "لقد قمنا بتحديث شروط خدمة Firefly.",
+            "privPolicyBody": "لقد قمنا بتحديث سياسة الخصوصية الخاصة بـ Firefly.",
+            "tosAndPrivPolicyCheckbox": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية المحدثة",
+            "tosCheckbox": "لقد قرأت شروط الخدمة المحدثة وأوافق عليها",
+            "privPolicyCheckbox": "لقد قرأت وأوافق على سياسة الخصوصية المحدثة"
         }
     },
     "charts": {
@@ -960,7 +962,7 @@
         "systemTheme": "المظهر المعتمد في نظام التشغيل لديك",
         "balance": "الرصيد",
         "accountBalance": "رصيد المحفظة",
-        "all": "All",
+        "all": "الكل",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
         "totalIn": "مجموع المدخول",
@@ -1041,7 +1043,7 @@
         "legacyNetwork": "الشبكة القديمة",
         "capsLock": "Caps Lock مفعل",
         "version": "الإصدار {version}",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "محافظك",
         "unknown": "غير معروف",
         "none": "لا شَيْء",
         "staked": "مشترك بفعالية الربح من التخزين",
@@ -1051,7 +1053,7 @@
         "notStaked": "غير مشترك بفعالية الربح من التخزين",
         "stakedFunds": "الارصدة المخزنة",
         "unstakedFunds": "الارصدة غير المخزنة",
-        "accountColor": "Wallet color"
+        "accountColor": "لون المحفظة"
     },
     "dates": {
         "today": "اليوم",
@@ -1133,7 +1135,7 @@
         "account": {
             "length": "يجب أن لا يتعدى اسم محفظتك {length, plural, one {# حرف } other {# حروف}}.",
             "empty": "يجب عليك استخدام محفظتك الأخيرة قبل إنشاء محفظة جديدة.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "يجب أن يحتوي اسم ملف التعريف على حرف واحد على الأقل.",
             "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذه المحفظة.",
             "duplicate": "توجد بالفعل محفظة بهذا الاسم.",
             "tilde": "اسم الملف الشخصي لا يمكن أن يبدأ برمز '.'.",
@@ -1303,8 +1305,8 @@
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "نحتاج إلى إذنك لاستخدام الكاميرا حتى نتمكن من مسح رموز QR.",
+            "requestInAppSettings": "إذا كنت ترغب في منح الإذن لاستخدام الكاميرا لمسح رموز QR ، فالرجاء تمكينها في إعدادات التطبيق."
         }
     }
 }
