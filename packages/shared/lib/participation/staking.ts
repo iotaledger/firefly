@@ -1,14 +1,13 @@
 import { get } from 'svelte/store'
 
-import { Bech32 } from '@lib/bech32'
-
 import { getDecimalSeparator } from '../currency'
+import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { networkStatus } from '../networkStatus'
 import { activeProfile, updateProfile } from '../profile'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
-import { clamp, delineateNumber, getJsonRequestOptions, range, toHexString } from '../utils'
+import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
 import { selectedAccount, wallet } from '../wallet'
 
 import {
@@ -41,7 +40,6 @@ import {
     StakingPeriodJsonResponse,
     StakingPeriodRewards,
 } from './types'
-import { getEd25519AddressesOfAccount } from '@lib/ed25519'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -544,7 +542,7 @@ function getStakingPeriodForAccount(
     stakingResult: StakingPeriodJsonResponse,
     periodNumber: number
 ): StakingPeriod {
-    const ed25519Addresses = getEd25519AddressesOfAccount(account)
+    const ed25519Addresses = account.addresses.map((address) => convertBech32AddressToEd25519Address(address.address))
 
     let totalPeriodRewards = 0
 
