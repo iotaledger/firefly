@@ -162,11 +162,15 @@
     <div class="flex flex-row mt-6 space-x-2 flex-1">
         {#each Object.values(activeAirdrops) as airdrop}
             <div
-                on:click={!canReachAirdropMinimum(airdrop) ? () => {} : () => toggleAirdropSelection(airdrop)}
+                on:click={!canReachAirdropMinimum(airdrop) || activeAirdrops.length <= 1
+                    ? () => {}
+                    : () => toggleAirdropSelection(airdrop)}
                 class="airdrop-container p-4 w-1/2 flex flex-1 flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
                     airdrop
                 )
                     ? 'cursor-default'
+                    : activeAirdrops.length <= 1
+                    ? 'cursor-default border-blue-500'
                     : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[
                     airdrop
                 ] || !canReachAirdropMinimum(airdrop)
