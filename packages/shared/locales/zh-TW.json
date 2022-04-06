@@ -318,7 +318,7 @@
             "theme": {
                 "title": "佈景主題",
                 "description": "",
-                "advice": "請重啟 Firefly 使系統主題佈景變更生效"
+                "advice": "當您變更系統佈景主題後，需重啟Firefly才會生效"
             },
             "language": {
                 "title": "語言",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "最新",
-                    "outOfDate": "已過期"
+                    "outOfDate": "已過期",
+                    "updatesDisabled": "關閉更新"
                 },
                 "hardwareDevice": {
                     "title": "硬體裝置",
@@ -566,7 +567,8 @@
             "upToDateDescription": "您正在運行的 Firefly 是最新、最安全的版本。",
             "updateAvailable": "Firefly 有可用的更新",
             "updateDetails": "版本 {version} - {date}",
-            "noAutoUpdate": "此 Windows 版本不支援自動更新，請至 https://firefly.iota.org 下載更新檔。"
+            "noAutoUpdate": "此 Windows 版本不支援自動更新，請至 https://firefly.iota.org 下載更新檔。",
+            "preReleaseDescription": "您在運行的是Firefly的先行發布版，更新已停用。"
         },
         "backup": {
             "title": "上次備份: {date}",

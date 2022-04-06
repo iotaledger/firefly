@@ -10,9 +10,9 @@
             "checkbox": "He leído y acepto la Política de Privacidad y los Términos de Servicio"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Informes de fallos",
+            "body": "Ayude a los desarrolladores a mejorar Firefly enviando automáticamente datos de diagnóstico cuando ocurre un error o cierre inesperado.",
+            "checkbox": "Enviar informe de fallos a la Fundación IOTA"
         },
         "appearance": {
             "title": "Apariencia",
@@ -27,10 +27,10 @@
                 "nonFirst": "Por ahora, empecemos con el nombre de tu perfil."
             },
             "addMore": "Puedes añadir más perfiles después.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Opciones avanzadas",
             "developer": {
                 "label": "Perfil de desarrollador",
-                "info": "Connect to the devnet or a private network"
+                "info": "Conectar a devnet o a una red privada"
             }
         },
         "setup": {
@@ -268,7 +268,7 @@
         },
         "securingSpentAddresses": {
             "title": "Protegiendo direcciones de pago...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Este proceso tardará {minutes, plural, one {# minuto} other {# minutos}}.",
             "body2": "Tu computador procesará a plena capacidad, puede que deses hacer algo más mientras esperas a que esto se complete."
         },
         "transferFragmentedFunds": {
@@ -300,7 +300,7 @@
                 "description": "Cambie su contraseña y ajuste la configuración de seguridad"
             },
             "advancedSettings": {
-                "title": "Advanced",
+                "title": "Avanzado",
                 "description": "Herramientas y ajustes manuales para usuarios técnicos"
             },
             "helpAndInfo": {
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Idioma",
@@ -357,9 +357,9 @@
                 "action": "Cambiar PIN"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Cambiar el nombre de perfil",
+                "description": "Cambia tu nombre de perfil de Firefly",
+                "success": "Has cambiado tu nombre de perfil"
             },
             "balanceFinder": {
                 "title": "Buscador de balances",
@@ -417,10 +417,10 @@
                 "description": "Ver errores para depurar un problema"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Informe de fallos",
+                "body": "Ayude a los desarrolladores a mejorar Firefly enviando automáticamente datos de diagnóstico cuando ocurre un error o cierre inesperado",
+                "checkbox": "Enviar informe de fallos",
+                "advice": "Por favor reinicia la aplicación Firefly para {sendCrashReports, select, true {empezar a compartir informes de errores} false {dejar de compartir informes de errores} other {aplicar este cambio}}"
             },
             "diagnostics": {
                 "title": "Diagnóstico",
@@ -457,15 +457,16 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Por favor, espera {time, plural, one {# segundo} other {# segundos}}",
+            "incorrectAttempts": "{attempts, plural, one {# intento incorrecto} other {# intentos incorrectos}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly -{version}",
                     "upToDate": "Actualizado",
-                    "outOfDate": "Desactualizado"
+                    "outOfDate": "Desactualizado",
+                    "updatesDisabled": "Actualizaciones desactivadas"
                 },
                 "hardwareDevice": {
                     "title": "Dispositivo Hardware",
@@ -546,8 +547,8 @@
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "Selección de color",
+                "hexCode": "Codigo de color hexadecimal"
             }
         }
     },
@@ -566,7 +567,8 @@
             "upToDateDescription": "Estás ejecutando la última y más segura versión de Firefly.",
             "updateAvailable": "Actualización de Firefly disponible",
             "updateDetails": "Versión {version} - {date}",
-            "noAutoUpdate": "La auto-actualización está desactivada en esta versión de Windows, por favor ve a https://firefly.iota.org para descargar la actualización."
+            "noAutoUpdate": "La auto-actualización está desactivada en esta versión de Windows, por favor ve a https://firefly.iota.org para descargar la actualización.",
+            "preReleaseDescription": "Está ejecutando una versión pre-lanzamiento de Firefly. Las actualizaciones están desactivadas."
         },
         "backup": {
             "title": "Última copia de seguridad: {date}",
@@ -661,7 +663,7 @@
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera."
         },
         "balanceFinder": {
             "title": "Buscador de balances",
@@ -772,23 +774,23 @@
             "body2": "Está previsto lanzar Assembly en 2022. Tus tokens estarán disponibles para transferir cuando se lance la red."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Estás creando un perfil de desarrollador",
+            "body": "Te conectarás a Chrysalis Devnet por defecto y podrás cambiar de red manualmente. Continúa sólo si sabes lo que estas haciendo."
         },
         "crashReporting": {
-            "title": "Crash reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Informe de fallos",
+            "body": "Ayude a los desarrolladores a mejorar Firefly enviando automáticamente datos de diagnóstico cuando ocurra un error o cierre inesperado. Esto tomará efecto después de reiniciar Firefly.",
+            "checkbox": "Enviar informe de fallos a la Fundación IOTA"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "Términos de Servicio",
+            "privPolicyTitle": "Política de privacidad",
+            "tosAndPrivPolicyBody": "Hemos actualizado los Términos de Servicio y Política de Privacidad de Firefly.",
+            "tosBody": "Hemos actualizado los Términos de Servicio de Firefly.",
+            "privPolicyBody": "Hemos actualizado nuestra Política de Privacidad.",
+            "tosAndPrivPolicyCheckbox": "He leído y acepto los Términos del Servicio y Política de Privacidad",
+            "tosCheckbox": "He leído y acepto los términos de servicio actualizados",
+            "privPolicyCheckbox": "He leído y acepto la política de privacidad actualizada"
         }
     },
     "charts": {
@@ -942,7 +944,7 @@
         "from": "De",
         "to": "Para",
         "receiveFunds": "Recibir fondos",
-        "address": "Address",
+        "address": "Dirección",
         "myAddress": "Mi dirección",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
@@ -960,7 +962,7 @@
         "systemTheme": "Sistema",
         "balance": "Balance",
         "accountBalance": "Balance de Billetera",
-        "all": "All",
+        "all": "Todos",
         "incoming": "Entrante",
         "outgoing": "Saliente",
         "totalIn": "Total recibido",
@@ -1041,7 +1043,7 @@
         "legacyNetwork": "Red heredada",
         "capsLock": "Bloqueo de mayúsculas activado",
         "version": "Versión {version}",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "Tus carteras",
         "unknown": "Desconocido",
         "none": "Ninguno",
         "staked": "En Stake",
@@ -1051,7 +1053,7 @@
         "notStaked": "No en stake",
         "stakedFunds": "Fondos en staking",
         "unstakedFunds": "Fondos sin Stake",
-        "accountColor": "Wallet color"
+        "accountColor": "Color de la billetera"
     },
     "dates": {
         "today": "Hoy",
@@ -1062,13 +1064,13 @@
         "yearsAgo": "hace {time, plural, one {# año} other {# años}}"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
-        "week": "{time, plural, one {# week} other {# weeks}}",
-        "month": "{time, plural, one {# month} other {# months}}",
-        "year": "{time, plural, one {# year} other {# years}}"
+        "second": "{time, plural, one {# segundo} other {# segundos}}",
+        "minute": "{time, plural, one {# minuto} other {# minutos}}",
+        "hour": "{time, plural, one {# hora} other {# horas}}",
+        "day": "{time, plural, one {# día} other {# días}}",
+        "week": "{time, plural, one {# semana} other {# semanas}}",
+        "month": "{time, plural, one {# mes} other {# meses}}",
+        "year": "{time, plural, one {# año} other {# años}}"
     },
     "notifications": {
         "valueTx": "Recibiendo {{value}} a {{account}}",
@@ -1081,7 +1083,7 @@
         "updateError": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {# minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado al portapapeles",
         "accountsSynchronized": "Sincronización de billetera completada",
         "fundsAvailableSoon": "Tus fondos estarán disponibles en breve",
@@ -1102,7 +1104,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "Tu nombre de perfil no puede tener más de {length, plural, one {# carácter } other {# caracteres}}.",
             "duplicate": "Ya existe un perfil con este nombre.",
             "delete": {
                 "nonEmptyAccounts": "Debes transferir todos los fondos antes de poder borrar tu perfil."
@@ -1123,15 +1125,15 @@
             "similar": "Esto es similar a una contraseña común.",
             "word": "Una sola palabra es fácil de adivinar.",
             "incorrect": "Tu contraseña es incorrecta.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "Tu contraseña no puede tener más de {length, plural, one {# carácter} other {# caracteres}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "Tu PIN debe tener {length, plural, one {# dígito} other {# dígitos}} de longitud.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "El nombre de tu billetera no puede tener mas de {length, plural, one {# carácter} other {# caracteres}}.",
             "empty": "Debes utilizar tu última billetera antes de crear una nueva.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Debes transferir tu balance antes de eliminar esta billetera.",
@@ -1190,7 +1192,7 @@
             "mnemonic": "El mnemotécnico no es válido.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
+            "phraseWordCount": "Debe haber 24 palabras en tu frase de recuperación, ahora mismo tiene {length, plural, one {#} other {#}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
             "phraseCaseWord": "La palabra \"{word}\" debe estar en minúsculas"
         },
@@ -1298,7 +1300,7 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "Estás usando un perfil de desarrollador y estás conectado a {networkName}"
         }
     },
     "permissions": {

@@ -13,21 +13,25 @@
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import {
+        clearPollParticipationOverviewInterval,
+        pollParticipationOverview,
+        updateStakingPeriodCache,
+    } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRouter,
         AccountRoute,
+        accountRouter,
         AdvancedSettings,
         appRouter,
         dashboardRoute,
-        dashboardRouter,
         DashboardRoute,
-        settingsRouter,
+        dashboardRouter,
         SettingsRoute,
+        settingsRouter,
     } from '@core/router'
     import { Locale } from '@core/i18n'
     import {
@@ -35,6 +39,8 @@
         asyncCreateAccount,
         asyncSyncAccountOffline,
         isBackgroundSyncing,
+        isFirstSessionSync,
+        isSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
@@ -82,6 +88,10 @@
             openSnapshotPopup()
         }
     })
+
+    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+        void updateStakingPeriodCache()
+    }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -201,7 +211,7 @@
          * NOTE: We check for mobile because it's only necessary
          * for existing desktop installation.
          */
-        if (!mobile && !$isAwareOfCrashReporting) {
+        if (!$mobile && !$isAwareOfCrashReporting) {
             openPopup({
                 type: 'crashReporting',
             })

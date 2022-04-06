@@ -34,7 +34,8 @@ const baseConfig = () => ({
         icon: './public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
-        timeStampServer: 'http://timestamp.digicert.com',
+        timeStampServer: 'http://timestamp.sectigo.com',
+        rfc3161TimeStampServer: 'http://timestamp.sectigo.com',
     },
     linux: {
         target: ['AppImage'],

@@ -183,9 +183,9 @@ export const getWalletDataPath = async (): Promise<string> => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
 }
 
-export const getProfileDataPath = async (profileName: string): Promise<string> => {
+export const getProfileDataPath = async (id: string): Promise<string> => {
     const walletPath = await getWalletDataPath()
-    return `${walletPath}${profileName}`
+    return `${walletPath}${id}`
 }
 
 /**

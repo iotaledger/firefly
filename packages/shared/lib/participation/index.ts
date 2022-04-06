@@ -1,7 +1,7 @@
-export * as api from './api'
-export * as constants from './constants'
-export * as stores from './stores'
-export * as types from './types'
+export * from './api'
+export * from './constants'
+export * from './stores'
+export * from './types'
 
 export * from './participation'
 export * from './staking'

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Teema",
                 "description": "",
-                "advice": "Sinun täytyy käynnistää Firefly uudelleen, jotta muutokset järjestelmän teemaan tulevat voimaan"
+                "advice": "Jos muutat järjestelmän teemaa, sinun on ehkä käynnistettävä Firefly uudelleen nähdäksesi vaikutukset"
             },
             "language": {
                 "title": "Kieli",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v {version}",
                     "upToDate": "Ajan tasalla",
-                    "outOfDate": "Vanhentunut"
+                    "outOfDate": "Vanhentunut",
+                    "updatesDisabled": "Päivitykset pois käytöstä"
                 },
                 "hardwareDevice": {
                     "title": "Laite",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Käytössäsi on Fireflyn uusin ja turvallisin versio.",
             "updateAvailable": "Firefly päivitys saatavilla",
             "updateDetails": "Versio {version} - {date}",
-            "noAutoUpdate": "Automaattinen päivitys on poistettu käytöstä tässä Windows-versiossa, ole hyvä ja mene osoitteeseen https://firefly.iota.org ladataksesi päivityksen."
+            "noAutoUpdate": "Automaattinen päivitys on poistettu käytöstä tässä Windows-versiossa, ole hyvä ja mene osoitteeseen https://firefly.iota.org ladataksesi päivityksen.",
+            "preReleaseDescription": "Käytössäsi on Fireflyn esijulkaisuversio. Päivitykset on poistettu käytöstä."
         },
         "backup": {
             "title": "Viimeisin varmuuskopio: {date}",

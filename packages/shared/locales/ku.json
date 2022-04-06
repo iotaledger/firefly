@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Mijad",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Ziman",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Nutirîn",
-                    "outOfDate": "Pêdiviya nûjenkirinê heye"
+                    "outOfDate": "Pêdiviya nûjenkirinê heye",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Pergala Arasteyî",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Hûn versîyona Firefly ya herî dawî û ewle kartînîn.",
             "updateAvailable": "Nûjenîya Firefly heye",
             "updateDetails": "Versîyon {version} - {date}",
-            "noAutoUpdate": "Di vê guhertoya Windows-ê de nûvekirina xweser qedexe ye, ji kerema xwe biçin https://firefly.iota.org ku nûvekirinê dakêşin."
+            "noAutoUpdate": "Di vê guhertoya Windows-ê de nûvekirina xweser qedexe ye, ji kerema xwe biçin https://firefly.iota.org ku nûvekirinê dakêşin.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Cîhgira dawî: {date}",

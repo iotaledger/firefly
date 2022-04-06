@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "görünümler -> ayarlar -> tema -> tavsiye"
+                "advice": "Sistem temanızı değiştirirseniz, efektleri görmek için Firefly'ı yeniden başlatmanız gerekebilir"
             },
             "language": {
                 "title": "Dil",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly versiyonu {version}",
                     "upToDate": "Güncel",
-                    "outOfDate": "Güncelleme gerekli"
+                    "outOfDate": "Güncelleme gerekli",
+                    "updatesDisabled": "Güncellemeler devre dışı"
                 },
                 "hardwareDevice": {
                     "title": "Donanım Aygıtı",
@@ -566,7 +567,8 @@
             "upToDateDescription": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
             "updateAvailable": "Firefly güncellemesi mevcut",
             "updateDetails": "Sürüm {version} - {date}",
-            "noAutoUpdate": "Uygulamanın bu Windows sürümünde otomatik güncelleme devre dışıdır, lütfen güncellemeyi indirmek için https://firefly.iota.org adresine gidin."
+            "noAutoUpdate": "Uygulamanın bu Windows sürümünde otomatik güncelleme devre dışıdır, lütfen güncellemeyi indirmek için https://firefly.iota.org adresine gidin.",
+            "preReleaseDescription": "Firefly'ın yayın öncesi bir sürümünü çalıştırıyorsunuz. Güncellemeler devre dışı."
         },
         "backup": {
             "title": "Son Yedekleme: {date}",

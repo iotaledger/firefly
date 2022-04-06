@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Erscheinungsbild",
                 "description": "",
-                "advice": "Du musst Firefly neu starten, damit die Änderungen wirksam werden"
+                "advice": "Wenn du dein System-Erscheinungsbild änderst, musst du Firefly möglicherweise neu starten, um die Auswirkungen zu sehen"
             },
             "language": {
                 "title": "Sprache",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Aktuell",
-                    "outOfDate": "Veraltet"
+                    "outOfDate": "Veraltet",
+                    "updatesDisabled": "Updates deaktiviert"
                 },
                 "hardwareDevice": {
                     "title": "Geräte",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Du verwendest die neueste und sicherste Version von Firefly.",
             "updateAvailable": "Firefly Update verfügbar",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Automatische Updates sind in dieser Windows-Version deaktiviert. Bitte besuche https://firefly.iota.org, um das Update herunterzuladen."
+            "noAutoUpdate": "Automatische Updates sind in dieser Windows-Version deaktiviert. Bitte besuche https://firefly.iota.org, um das Update herunterzuladen.",
+            "preReleaseDescription": "Du verwendest eine Vorabversion von Firefly.\nUpdates sind deaktiviert."
         },
         "backup": {
             "title": "Letztes Backup: {date}",
