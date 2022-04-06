@@ -41,7 +41,7 @@
     {/if}
 </button>
 {#if showTooltip}
-    <Tooltip anchor={tooltipAnchor} position="right">
+    <Tooltip anchor={tooltipAnchor} position="right" size="small">
         <Text type="p">{tab?.label}</Text>
     </Tooltip>
 {/if}
