@@ -6,23 +6,23 @@
     import type { WalletAccount } from 'shared/lib/typings/wallet'
     import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
 
-    export let isActive = false
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
+    export let modal: Modal
 
     const handleAccountClick = (accountId: string): void => {
         setSelectedAccount(accountId)
         selectedMessage.set(null)
-        isActive = false
+        modal?.close()
     }
 
     const handleCreateAccountClick = (): void => {
-        isActive = false
+        modal?.close()
         openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
     }
 </script>
 
-<Modal bind:isActive classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
+<Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
     <div class="accounts flex flex-col space-y-1 p-4 scrollable-y">
         {#each accounts as account}
             <button
