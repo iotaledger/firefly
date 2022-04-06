@@ -51,6 +51,9 @@
                         updateProfile('hiddenAccounts', hiddenAccounts)
                     }
                     resetWalletRoute()
+                    const nextSelectedAccount =
+                        $viewableAccounts[$selectedAccount?.index] ?? $viewableAccounts[$viewableAccounts.length - 1]
+                    setSelectedAccount(nextSelectedAccount?.id)
                 },
             },
         })
