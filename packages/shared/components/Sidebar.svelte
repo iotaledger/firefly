@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text, Modal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { getInitials, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
@@ -18,6 +18,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from '@core/i18n'
+    import { versionDetails } from '@lib/appUpdater'
 
     export let locale: Locale
 
@@ -32,8 +33,10 @@
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
     $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
-
     $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
+    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+    $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
         {
@@ -153,10 +156,18 @@
                     />
                 </button>
                 <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                    class="w-8 h-8 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+                    {#if !isBackupSafe || !$versionDetails.upToDate}
+                        <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
+                            />
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                        </span>
+                    {/if}
                 </button>
             </span>
         </nav>
