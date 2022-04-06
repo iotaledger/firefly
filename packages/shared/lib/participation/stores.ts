@@ -195,7 +195,8 @@ export const currentAssemblyStakingRewards: Readable<number> = derived(
  */
 export const totalAssemblyStakingRewards: Readable<number> = derived(
     [currentAssemblyStakingRewards, selectedAccountId],
-    ([$currentAssemblyStakingRewards, $selectedAccountId]) => $currentAssemblyStakingRewards + sumCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
+    ([$currentAssemblyStakingRewards, $selectedAccountId]) =>
+        $currentAssemblyStakingRewards + sumCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
 )
 
 /**
@@ -214,7 +215,8 @@ export const currentShimmerStakingRewards: Readable<number> = derived(
  */
 export const totalShimmerStakingRewards: Readable<number> = derived(
     [currentShimmerStakingRewards, selectedAccountId],
-    ([$currentShimmerStakingRewards, $selectedAccountId]) => $currentShimmerStakingRewards + sumCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
+    ([$currentShimmerStakingRewards, $selectedAccountId]) =>
+        $currentShimmerStakingRewards + sumCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
 )
 
 /**
