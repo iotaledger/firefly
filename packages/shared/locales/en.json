@@ -749,11 +749,11 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "Confirm Participation",
             "subtitleStake": "You are about to stake",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {
