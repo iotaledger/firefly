@@ -301,7 +301,7 @@
                 const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
-                // TODO: set selected account to the newly created account
+                setSelectedAccount(account?.id)
                 $accountRouter.reset()
 
                 return onComplete()
