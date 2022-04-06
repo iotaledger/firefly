@@ -11,7 +11,7 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
-    export let isActive
+    export let modal: Modal
 
     const { accounts } = $wallet
 
@@ -26,17 +26,17 @@
 
     const handleCustomiseAccountClick = () => {
         $accountRouter.goTo(AccountRoute.Manage)
-        isActive = false
+        modal.close()
     }
 
     const handleViewAddressHistoryClick = () => {
         openPopup({ type: 'addressHistory', props: { account: selectedAccount } })
-        isActive = false
+        modal.close()
     }
 
     function handleExportTransactionHistoryClick() {
         openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccount }, hideClose: false })
-        isActive = false
+        modal.close()
     }
 
     const handleHideAccountClick = () => {
@@ -54,7 +54,7 @@
                 },
             },
         })
-        isActive = false
+        modal.close()
     }
 
     const handleDeleteAccountClick = () => {
@@ -75,7 +75,7 @@
                 },
             },
         })
-        isActive = false
+        modal.close()
     }
 
     const handleShowAccountClick = () => {
@@ -88,7 +88,7 @@
     }
 </script>
 
-<Modal bind:isActive position={{ top: '90px', right: 'calc((100% + 16px) * 0.6666666)' }}>
+<Modal bind:this={modal} position={{ top: '90px', right: 'calc((100% + 16px) * 0.6666666)' }}>
     <div class="flex flex-col">
         <!-- Customize -->
         <button
