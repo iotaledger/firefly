@@ -749,7 +749,7 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Staking Confirmation",
+            "title": "Confirm Participation",
             "subtitleStake": "You are about to stake",
             "subtitleMerge": "You are about to merge",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",

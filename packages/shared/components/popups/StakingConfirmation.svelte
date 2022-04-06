@@ -10,12 +10,7 @@
         getStakingEventFromAirdrop,
         getUnstakedFunds,
     } from 'shared/lib/participation'
-    import {
-        ASSEMBLY_EVENT_ID,
-        SHIMMER_EVENT_ID,
-        STAKING_AIRDROP_TOKENS,
-        STAKING_EVENT_IDS,
-    } from 'shared/lib/participation/constants'
+    import { STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         participationAction,
         isPartiallyStaked,
@@ -44,13 +39,9 @@
 
     const airdropSelections: { [key in StakingAirdrop]: boolean } = {
         [StakingAirdrop.Assembly]:
-            activeAirdrops.includes(StakingAirdrop.Assembly) && canReachAirdropMinimum(StakingAirdrop.Assembly)
-                ? true
-                : false,
+            activeAirdrops.includes(StakingAirdrop.Assembly) && canReachAirdropMinimum(StakingAirdrop.Assembly),
         [StakingAirdrop.Shimmer]:
-            activeAirdrops.includes(StakingAirdrop.Shimmer) && canReachAirdropMinimum(StakingAirdrop.Shimmer)
-                ? true
-                : false,
+            activeAirdrops.includes(StakingAirdrop.Shimmer) && canReachAirdropMinimum(StakingAirdrop.Shimmer),
     }
 
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
