@@ -208,17 +208,6 @@
         background: var(--bg-indicator-color);
     }
 
-    // Scroll overlay gradient mask
-    main:not(.fullScreen):after {
-        content: '';
-        position: fixed;
-        top: var(--padding-top);
-        height: 30px;
-        width: 100%;
-        border-radius: var(--border-radius);
-        background: linear-gradient(to bottom, var(--tw-gradient-stops) 100%);
-    }
-
     #dim {
         will-change: opacity;
         background-color: rgba(0, 0, 0, var(--opacity));
