@@ -35,6 +35,7 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 
 export const newProfile = writable<Profile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
+export const hasEverOpenedProfileModal = writable<boolean>(false)
 
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],

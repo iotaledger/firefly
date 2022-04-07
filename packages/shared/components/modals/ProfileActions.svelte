@@ -6,7 +6,13 @@
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import {
+        activeProfile,
+        hasEverOpenedProfileModal,
+        isLedgerProfile,
+        isSoftwareProfile,
+        isStrongholdLocked,
+    } from 'shared/lib/profile'
     import { openSettings } from '@core/router'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
@@ -109,7 +115,12 @@
     }
 </script>
 
-<Modal bind:this={modal} position={{ bottom: '16px', left: '80px' }} classes="w-80">
+<Modal
+    bind:this={modal}
+    position={{ bottom: '16px', left: '80px' }}
+    classes="w-80"
+    on:open={() => hasEverOpenedProfileModal.set(true)}
+>
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">

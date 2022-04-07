@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { clickOutside } from 'shared/lib/actions'
     import { fade } from 'svelte/transition'
+    import { createEventDispatcher } from 'svelte'
 
     enum Size {
         Small = 'small',
@@ -25,12 +26,14 @@
     }
 
     const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+    const dispatch = createEventDispatcher()
 
     function setShow(bool: boolean) {
         if (!isBlockedByTimeout) {
             show = bool
             isBlockedByTimeout = true
             setTimeout(() => (isBlockedByTimeout = false), 500)
+            show ? dispatch('open') : dispatch('close')
         }
     }
 
