@@ -121,7 +121,7 @@
 <div class="flex flex-col h-full min-h-0">
     <div
         class="{$mobile
-            ? 'px-6 pt-10'
+            ? 'px-0 py-5 w-full'
             : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
             'opacity-50'}"
     >
@@ -159,7 +159,7 @@
             {/if}
         </div>
     </div>
-    <div class="mb-6 overflow-y-auto pr-2 -mr-2 flex-auto h-1 scroll-secondary">
+    <div class="{$mobile ? 'flex flex-col px-6 h-full' : 'pr-2 -mr-2 h-1 scroll-secondary mb-6'} overflow-y-auto flex-auto">
         <div class="mb-5">
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
@@ -226,10 +226,11 @@
             </div>
         {/if}
     </div>
-
-    <div class="w-full flex justify-center">
-        <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
-    </div>
+    {#if !$mobile}
+        <div class="w-full flex justify-center">
+            <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
+        </div>
+    {/if}
 </div>
 
 <style type="text/scss">
