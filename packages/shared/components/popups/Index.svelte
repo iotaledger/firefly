@@ -43,16 +43,18 @@
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
+    import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
 
     export let locale: Locale
 
-    export let type = undefined
-    export let props = undefined
-    export let hideClose = undefined
-    export let preventClose = undefined
-    export let fullScreen = undefined
+    export let type: string
+    export let props: any
+    export let hideClose: boolean
+    export let preventClose: boolean
+    export let fullScreen: boolean
     export let transition = true
+    export let overflow = false
 
     let autofocusContent = true
 
@@ -124,6 +126,7 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
+        singleAccountGuide: SingleAccountGuide,
     }
 
     const onKey = (e) => {
@@ -181,8 +184,8 @@
 {:else}
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
+        class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
+                h-full z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
             $mobile && 'z-40'
         }`}
     >
@@ -191,9 +194,9 @@
             use:clickOutside
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${
+            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
                 fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'
-            }`}
+            } ${overflow ? 'overflow' : 'relative'}`}
         >
             {#if !hideClose}
                 <button
@@ -227,7 +230,7 @@
                 box-shadow: none;
             }
 
-            &:not(.full-screen) {
+            &:not(.full-screen):not(.overflow) {
                 @apply overflow-y-auto;
                 max-height: calc(100vh - 50px);
             }

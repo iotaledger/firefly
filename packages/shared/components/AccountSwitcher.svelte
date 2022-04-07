@@ -2,10 +2,10 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/wallet'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { isSyncing, isTransferring, selectedAccount } from 'shared/lib/wallet'
+    import { activeProfile, getColor, updateProfile } from '@lib/profile'
+    import { isSyncing, isTransferring, selectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
@@ -30,6 +30,7 @@
             message,
         })
         modal?.close()
+        updateProfile('hasFinishedSingleAccountGuide', true)
     }
 </script>
 

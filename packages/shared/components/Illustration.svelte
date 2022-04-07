@@ -16,6 +16,14 @@
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
+        'single-account-guide-desktop': {
+            lightmode: 'onboarding/single-account-guide-desktop.jpg',
+            darkmode: 'onboarding/single-account-guide-desktop.jpg',
+        },
+        'white-arrow': {
+            lightmode: 'onboarding/white-arrow.svg',
+            darkmode: 'onboarding/white-arrow.svg',
+        },
 
         // Ledger
         'ledger-install-new-app-desktop': {

@@ -21,7 +21,7 @@
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
     import {
         AccountRoute,
         accountRouter,
@@ -409,11 +409,18 @@
     $: if ($accountsLoaded) {
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
+
+    $: if (!$activeProfile.hasFinishedSingleAccountGuide) {
+        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    }
 </script>
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <TopNavigation {onCreateAccount} />
+    <TopNavigation
+        {onCreateAccount}
+        classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
+    />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->
