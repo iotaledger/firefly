@@ -7,6 +7,7 @@
         canAccountReachMinimumAirdrop,
         estimateStakingAirdropReward,
         getAirdropFromEventId,
+        getAvailableAirdrops,
         getStakingEventFromAirdrop,
         getUnstakedFunds,
     } from 'shared/lib/participation'
@@ -35,13 +36,13 @@
             // Falsy values (undefined, null, ...) are filtered out from the array
             .filter(Boolean) || []
 
-    const activeAirdrops = STAKING_EVENT_IDS.filter((x) => x).map((x) => getAirdropFromEventId(x))
+    const availableAirdrops = getAvailableAirdrops()
 
     const airdropSelections: { [key in StakingAirdrop]: boolean } = {
         [StakingAirdrop.Assembly]:
-            activeAirdrops.includes(StakingAirdrop.Assembly) && canReachAirdropMinimum(StakingAirdrop.Assembly),
+            availableAirdrops.includes(StakingAirdrop.Assembly) && canReachAirdropMinimum(StakingAirdrop.Assembly),
         [StakingAirdrop.Shimmer]:
-            activeAirdrops.includes(StakingAirdrop.Shimmer) && canReachAirdropMinimum(StakingAirdrop.Shimmer),
+            availableAirdrops.includes(StakingAirdrop.Shimmer) && canReachAirdropMinimum(StakingAirdrop.Shimmer),
     }
 
     const tooltipAnchors: { [airdrop: string]: unknown } = {}
@@ -133,7 +134,7 @@
     }
 
     function showInfoText() {
-        return $isPartiallyStaked || activeAirdrops.length > 1
+        return $isPartiallyStaked || availableAirdrops.length > 1
     }
 </script>
 
@@ -160,16 +161,16 @@
 {/if}
 {#if !$isPartiallyStaked}
     <div class="flex flex-row mt-6 space-x-2 flex-1">
-        {#each Object.values(activeAirdrops) as airdrop}
+        {#each Object.values(availableAirdrops) as airdrop}
             <div
-                on:click={!canReachAirdropMinimum(airdrop) || activeAirdrops.length <= 1
+                on:click={!canReachAirdropMinimum(airdrop) || availableAirdrops.length <= 1
                     ? () => {}
                     : () => toggleAirdropSelection(airdrop)}
                 class="airdrop-container p-4 w-1/2 flex flex-1 flex-col items-center text-center border border-solid rounded-2xl {!canReachAirdropMinimum(
                     airdrop
                 )
                     ? 'cursor-default'
-                    : activeAirdrops.length <= 1
+                    : availableAirdrops.length <= 1
                     ? 'cursor-default border-blue-500'
                     : 'cursor-pointer hover:bg-blue-50 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-50 dark:hover:bg-gray-800'} {!airdropSelections[
                     airdrop
@@ -191,7 +192,7 @@
                     >
                         <Icon icon="exclamation" width="26" height="26" classes="text-orange-500" />
                     </div>
-                {:else if activeAirdrops.length > 1}
+                {:else if availableAirdrops.length > 1}
                     <Checkbox
                         round
                         bind:checked={airdropSelections[airdrop]}

@@ -103,11 +103,13 @@ export const getStakingEventFromAirdrop = (airdrop: StakingAirdrop): Participati
     return get(participationEvents).find((pe) => pe.eventId === stakingEventId)
 }
 
-export function isAirdropActive(airdrop: StakingAirdrop): boolean {
-    if (!airdrop) return false
+export function getAvailableAirdrops(): StakingAirdrop[] {
+    return STAKING_EVENT_IDS.filter((id) => id).map((id) => getAirdropFromEventId(id))
+}
 
-    const stakingEventId = getStakingEventIdFromAirdrop(airdrop)
-    return STAKING_EVENT_IDS.filter((id) => id).some((id) => id === stakingEventId)
+export function isAirdropAvailable(airdrop: StakingAirdrop): boolean {
+    if (!airdrop) return false
+    return getAvailableAirdrops().includes(airdrop)
 }
 
 /**
@@ -350,8 +352,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
     const amountStaked = get(selectedAccount)?.rawIotaBalance
-    const timeRequired = calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
-    return timeRequired
+    return calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 }
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
@@ -429,9 +430,8 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
     const currentRewards = getCurrentRewardsForAirdrop(airdrop)
     const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
-    const stakingEventState = get(
-        airdrop === StakingAirdrop.Assembly ? assemblyStakingEventState : shimmerStakingEventState
-    )
+    const stakingEventStore = airdrop === StakingAirdrop.Assembly ? assemblyStakingEventState : shimmerStakingEventState
+    const stakingEventState = get(stakingEventStore)
     const _getTimeLeft = () => {
         if (stakingEventState === ParticipationEventState.Commencing) {
             return calculateRemainingStakingTime(stakingEvent?.information?.milestoneIndexStart, stakingEvent)

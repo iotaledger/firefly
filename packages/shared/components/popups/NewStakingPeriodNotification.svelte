@@ -9,12 +9,12 @@
     import { isStakingPossible } from '@lib/participation'
 
     function handleOk(): void {
-        const canStakeForAssembly = isStakingPossible($assemblyStakingEventState)
-        const canStakeForShimmer = isStakingPossible($shimmerStakingEventState)
+        const isStakingPossibleForAssembly = isStakingPossible($assemblyStakingEventState)
+        const isStakingPossibleForShimmer = isStakingPossible($shimmerStakingEventState)
         const cannotStake =
             getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
 
-        if ((canStakeForAssembly || canStakeForShimmer) && !cannotStake) {
+        if ((isStakingPossibleForAssembly || isStakingPossibleForShimmer) && !cannotStake) {
             openPopup({
                 type: 'stakingManager',
             })

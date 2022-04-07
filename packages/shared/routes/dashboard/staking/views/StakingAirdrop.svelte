@@ -4,12 +4,12 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
-        assemblyStakingRemainingTime,
         assemblyStakingEventState,
+        assemblyStakingRemainingTime,
         currentAssemblyStakingRewards,
         currentShimmerStakingRewards,
-        shimmerStakingRemainingTime,
         shimmerStakingEventState,
+        shimmerStakingRemainingTime,
         totalAssemblyStakingRewards,
         totalShimmerStakingRewards,
     } from 'shared/lib/participation/stores'
@@ -28,13 +28,26 @@
         [StakingAirdrop.Shimmer]: null,
     }
 
-    $: isAssembly = airdrop === StakingAirdrop.Assembly
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
 
+    const isAssembly = airdrop === StakingAirdrop.Assembly
+    let stakingEventState
+    $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
+    function getFormattedStakingAirdropRewards(forCurrentRewards: boolean): string {
+        const currentStakingRewards = isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards
+        const totalStakingRewards = isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards
+
+        return formatStakingAirdropReward(airdrop, forCurrentRewards ? currentStakingRewards : totalStakingRewards, 6)
+    }
+
+    $: currentStakingRewards = getFormattedStakingAirdropRewards(true)
+    $: totalStakingRewards = getFormattedStakingAirdropRewards(false)
+
     function parseRemainingTime(): void {
-        const formattedValue = getBestTimeDuration(
-            isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        )
+        const stakingRemainingTime = isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        const formattedValue = getBestTimeDuration(stakingRemainingTime)
+
         remainingTimeAmount = parseFloat(formattedValue).toString()
         remainingTimeUnit = formattedValue.replace(remainingTimeAmount.toString(), '')
     }
@@ -119,30 +132,22 @@
             </Text>
             <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
         </div>
-        {#if isStakingPossible(isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState)}
+        {#if isStakingPossible(stakingEventState)}
             <div class="flex flex-row justify-between space-x-4">
                 <div class="flex flex-col">
                     <div>
                         <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
-                            {formatStakingAirdropReward(
-                                airdrop,
-                                isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards,
-                                6
-                            ).split(' ')[0]}
+                            {currentStakingRewards.split(' ')[0]}
                         </Text>
                         <Text type="p" secondary classes="text-sm inline">
-                            {formatStakingAirdropReward(
-                                airdrop,
-                                isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards,
-                                6
-                            ).split(' ')[1]}
+                            {currentStakingRewards.split(' ')[1]}
                         </Text>
                     </div>
                     <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
                         {localize('views.staking.airdrops.currentStakingPeriod')}
                     </Text>
                 </div>
-                {#if isStakingPossible(isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState)}
+                {#if isStakingPossible(stakingEventState)}
                     <div class="flex flex-col text-right">
                         <div>
                             <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
@@ -156,9 +161,7 @@
                             overrideColor
                             classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
                         >
-                            {getLocalizedDurationText(
-                                isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
-                            )}
+                            {getLocalizedDurationText(stakingEventState)}
                         </Text>
                     </div>
                 {/if}
@@ -169,18 +172,10 @@
             <div class="flex flex-col">
                 <div>
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
-                        {formatStakingAirdropReward(
-                            airdrop,
-                            isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards,
-                            6
-                        ).split(' ')[0]}
+                        {totalStakingRewards.split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
-                        {formatStakingAirdropReward(
-                            airdrop,
-                            isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards,
-                            6
-                        ).split(' ')[1]}
+                        {totalStakingRewards.split(' ')[1]}
                     </Text>
                 </div>
                 <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
