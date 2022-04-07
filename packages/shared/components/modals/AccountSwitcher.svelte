@@ -23,18 +23,20 @@
 </script>
 
 <Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
-    <div class="accounts flex flex-col space-y-1 p-4 scrollable-y">
-        {#each accounts as account}
-            <button
-                on:click={() => handleAccountClick(account.id)}
-                class="{account.id === $selectedAccount?.id
-                    ? 'bg-gray-50 dark:bg-gray-800'
-                    : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
-            >
-                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                <Text secondary={account.id !== $selectedAccount?.id} type="h4">{account.alias}</Text>
-            </button>
-        {/each}
+    <div class="p-4">
+        <div class="accounts flex flex-col space-y-1 scrollable-y">
+            {#each accounts as account}
+                <button
+                    on:click={() => handleAccountClick(account.id)}
+                    class="{account.id === $selectedAccount?.id
+                        ? 'bg-gray-50 dark:bg-gray-800'
+                        : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
+                >
+                    <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                    <Text secondary={account.id !== $selectedAccount?.id} type="h5">{account.alias}</Text>
+                </button>
+            {/each}
+        </div>
     </div>
     <HR />
     <button
@@ -42,20 +44,38 @@
         on:click={handleCreateAccountClick}
     >
         <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
-        <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
+        <Text highlighted type="p" classes="text-14">{localize('general.createNewWallet')}</Text>
     </button>
 </Modal>
 
 <style type="text/scss">
     .accounts {
-        max-height: 40vh;
+        max-height: 60vh;
     }
     button {
         .circle {
+            @apply relative;
             @apply rounded-full;
             @apply w-3;
             @apply h-3;
             background-color: var(--account-color);
+            &:after {
+                @apply absolute;
+                @apply rounded-full;
+                @apply w-3;
+                @apply h-3;
+                @apply border-2;
+                @apply border-solid;
+                @apply border-gray-700;
+                @apply bg-transparent;
+                @apply opacity-10;
+                @apply top-1/2;
+                @apply left-1/2;
+                @apply transform;
+                @apply -translate-x-1/2;
+                @apply -translate-y-1/2;
+                content: '';
+            }
         }
     }
 </style>
