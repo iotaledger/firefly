@@ -31,10 +31,10 @@
     class="bg-gray-200 dark:bg-gray-800 border-solid border-b border-gray-300 dark:border-gray-700 flex flex-row justify-center py-2 w-full"
 >
     {#if showBackButton}
-        <button on:click={handleBackClick} class="absolute left-6">
-            <div class="flex items-center space-x-3">
-                <Icon icon="arrow-left" classes="text-gray-500" />
-                <Text bigger overrideColor classes="text-gray-500">{localize('actions.back')}</Text>
+        <button on:click={handleBackClick} class="absolute left-24 cursor-pointer">
+            <div class="flex items-center space-x-2 ">
+                <Icon width="18" icon="arrow-left" classes="text-gray-500" />
+                <Text overrideColor classes="text-gray-500">{localize('actions.back')}</Text>
             </div>
         </button>
     {/if}
