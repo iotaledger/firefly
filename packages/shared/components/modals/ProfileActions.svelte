@@ -115,7 +115,14 @@
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
-            <Text>{profileName}</Text>
+            <div class="flex flex-row space-x-2">
+                <Text>{profileName}</Text>
+                {#if $activeProfile?.isDeveloperProfile}
+                    <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1">
+                        <Text type="p" smaller classes="text-white">{localize('general.dev').toUpperCase()}</Text>
+                    </div>
+                {/if}
+            </div>
             {#if $isLedgerProfile}
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
