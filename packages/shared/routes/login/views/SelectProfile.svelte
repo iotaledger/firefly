@@ -5,9 +5,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
-    import { Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { localize } from '@core/i18n'
 
     const dispatch = createEventDispatcher()
 
@@ -41,7 +39,6 @@
             <div class="mx-4 mb-8">
                 <Profile
                     bgColor="blue"
-                    {locale}
                     onClick={handleContinueClick}
                     name={profile.name}
                     id={profile.id}
@@ -55,7 +52,7 @@
         <div class="mx-4 mb-8">
             <Profile
                 onClick={addProfile}
-                name={locale('general.addProfile')}
+                name={localize('general.addProfile')}
                 classes="border-solid border-2 border-gray-400 cursor-pointer"
             >
                 <Icon icon="plus" classes="text-blue-500" />

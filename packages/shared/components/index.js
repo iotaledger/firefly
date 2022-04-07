@@ -63,6 +63,7 @@ export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
 export { default as StakingAssetTile } from './StakingAssetTile.svelte'
+export { default as Chip } from './Chip.svelte'
 
 export * from './modals'
 // Charts
