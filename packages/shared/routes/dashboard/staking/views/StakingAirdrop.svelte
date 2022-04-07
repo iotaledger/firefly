@@ -34,15 +34,18 @@
     let stakingEventState
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
-    function getFormattedStakingAirdropRewards(forCurrentRewards: boolean): string {
-        const currentStakingRewards = isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards
-        const totalStakingRewards = isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards
-
-        return formatStakingAirdropReward(airdrop, forCurrentRewards ? currentStakingRewards : totalStakingRewards, 6)
+    function getFormattedStakingAirdropRewards(forCurrentRewards: boolean, stakingRewards: number): string {
+        return formatStakingAirdropReward(airdrop, stakingRewards, 6)
     }
 
-    $: currentStakingRewards = getFormattedStakingAirdropRewards(true)
-    $: totalStakingRewards = getFormattedStakingAirdropRewards(false)
+    $: currentStakingRewards = getFormattedStakingAirdropRewards(
+        true,
+        isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards
+    )
+    $: totalStakingRewards = getFormattedStakingAirdropRewards(
+        false,
+        isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards
+    )
 
     function parseRemainingTime(): void {
         const stakingRemainingTime = isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
