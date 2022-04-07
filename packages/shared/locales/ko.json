@@ -318,7 +318,7 @@
             "theme": {
                 "title": "테마",
                 "description": "",
-                "advice": "시스템 테마를 적용하려면 Firefly를 다시 시작해야 합니다"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "언어",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "최신 상태입니다.",
-                    "outOfDate": "구버전"
+                    "outOfDate": "구버전",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "하드웨어 장치",
@@ -566,7 +567,8 @@
             "upToDateDescription": "안전한 Firefly 최신 버전을 사용하고 있습니다.",
             "updateAvailable": "Firefly 업데이트 가능",
             "updateDetails": "버전 {version} - {date}",
-            "noAutoUpdate": "이 Windows 버전에서는 자동 업데이트가 비활성화되어 있습니다. https://firefly.iota.org로 이동하여 업데이트를 다운로드해주세요."
+            "noAutoUpdate": "이 Windows 버전에서는 자동 업데이트가 비활성화되어 있습니다. https://firefly.iota.org로 이동하여 업데이트를 다운로드해주세요.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "마지막 백업: {date}",

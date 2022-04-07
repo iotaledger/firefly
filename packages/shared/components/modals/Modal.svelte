@@ -8,19 +8,41 @@
         Large = 'large',
     }
 
-    export let isActive = false
     export let position: { top?: string; right?: string; bottom?: string; left?: string } = {}
     export let size: Size = Size.Medium
     export let classes: string = ''
+    export function close(): void {
+        setShow(false)
+    }
+    export function open(): void {
+        setShow(true)
+    }
+    export function toggle(): void {
+        show ? close() : open()
+    }
+    export function isOpened(): boolean {
+        return show
+    }
 
     const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+
+    function setShow(bool: boolean) {
+        if (!isBlockedByTimeout) {
+            show = bool
+            isBlockedByTimeout = true
+            setTimeout(() => (isBlockedByTimeout = false), 500)
+        }
+    }
+
+    let isBlockedByTimeout = false
+    let show = false
 </script>
 
-{#if isActive}
+{#if show}
     <modal-content
         in:fade={{ duration: 100 }}
         use:clickOutside
-        on:clickOutside={() => (isActive = false)}
+        on:clickOutside={close}
         class="{size} bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10 {classes}"
         style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
     >

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Giao diện",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Ngôn ngữ",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly phiên bản v{version}",
                     "upToDate": "Đã cập nhật",
-                    "outOfDate": "Đã cũ"
+                    "outOfDate": "Đã cũ",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Thiết bị phần cứng",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
             "updateAvailable": "Phiên bản cập nhật Firefly đang hiện hữu",
             "updateDetails": "Phiên bản {version} - {date}",
-            "noAutoUpdate": "Tự động cập nhật được vô hiệu hóa trong phiên bản Windows này, vui lòng truy cập https://firefly.iota.org để tải bản cập nhật."
+            "noAutoUpdate": "Tự động cập nhật được vô hiệu hóa trong phiên bản Windows này, vui lòng truy cập https://firefly.iota.org để tải bản cập nhật.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Bản sao lưu mới nhất: {date}",

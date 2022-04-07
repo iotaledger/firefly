@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Theme",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Language",
@@ -745,14 +745,15 @@
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "Confirm Participation",
             "subtitleStake": "You are about to stake",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {

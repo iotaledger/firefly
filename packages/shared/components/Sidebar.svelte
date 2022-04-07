@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
+    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text, Modal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
@@ -21,8 +21,8 @@
 
     export let locale: Locale
 
-    let showNetwork = false
-    let showProfile = false
+    let networkModal: Modal
+    let profileModal: Modal
     let drawer: Drawer
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
@@ -144,7 +144,7 @@
                 {/each}
             </div>
             <span class="flex flex-col items-center">
-                <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                <button class="mb-7 health-status" on:click={networkModal?.open}>
                     <Icon
                         width="24"
                         height="24"
@@ -154,14 +154,14 @@
                 </button>
                 <button
                     class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
-                    on:click={() => (showProfile = true)}
+                    on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:isActive={showNetwork} {locale} />
-        <ProfileActionsModal bind:isActive={showProfile} {locale} />
+        <NetworkIndicator bind:modal={networkModal} {locale} />
+        <ProfileActionsModal bind:modal={profileModal} {locale} />
     </aside>
 {/if}
 

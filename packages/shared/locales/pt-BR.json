@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Você deve reiniciar a Firefly para que as alterações no tema do sistema tenham efeito"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Idioma",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Atualizado",
-                    "outOfDate": "Desatualizado"
+                    "outOfDate": "Desatualizado",
+                    "updatesDisabled": "Atualizações desativadas"
                 },
                 "hardwareDevice": {
                     "title": "Dispositivo Físico",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Você está executando a versão mais recente e segura da Firefly.",
             "updateAvailable": "Atualização da Firefly disponível",
             "updateDetails": "Versão {version} - {date}",
-            "noAutoUpdate": "A atualização automática está desabilitada nesta versão do Windows. Por favor, acesse https://firefly.iota.org para baixar a atualização."
+            "noAutoUpdate": "A atualização automática está desabilitada nesta versão do Windows. Por favor, acesse https://firefly.iota.org para baixar a atualização.",
+            "preReleaseDescription": "Você está executando uma versão de pré-lançamento do Firefly. As atualizações estão desativadas."
         },
         "backup": {
             "title": "Último backup: {date}",

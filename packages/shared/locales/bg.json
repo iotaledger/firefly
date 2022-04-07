@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Тема",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Език",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Актуално",
-                    "outOfDate": "Неактуална версия"
+                    "outOfDate": "Неактуална версия",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Устройство",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Използвате последната и най-сигурната версия на Firefly.",
             "updateAvailable": "Наличен е ъпдейт за Firefly",
             "updateDetails": "Версия {version} - {date}",
-            "noAutoUpdate": "Автоматичните актуализации не са разрешени на тази версия на Windows, моля посетете https://firefly.iota.org за да изтеглите актуализация."
+            "noAutoUpdate": "Автоматичните актуализации не са разрешени на тази версия на Windows, моля посетете https://firefly.iota.org за да изтеглите актуализация.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Последно резервно копие: {date}",
