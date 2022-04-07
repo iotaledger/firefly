@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
+    import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
@@ -126,7 +126,12 @@
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
-            <Text>{profileName}</Text>
+            <div class="flex flex-row space-x-2">
+                <Text>{profileName}</Text>
+                {#if $activeProfile?.isDeveloperProfile}
+                    <Chip label={localize('general.dev')} />
+                {/if}
+            </div>
             {#if $isLedgerProfile}
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
