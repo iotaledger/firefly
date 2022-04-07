@@ -1,5 +1,5 @@
 export type PickerOptions = {
-    type: 'file' | 'folder'
+    type: 'file' | 'folder',
     defaultPath: string
 }
 
