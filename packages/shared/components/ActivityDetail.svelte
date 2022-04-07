@@ -121,7 +121,7 @@
 <div class="flex flex-col h-full min-h-0">
     <div
         class="{$mobile
-            ? 'px-0 py-5 w-full'
+            ? 'p-0 mt-8 w-11/12 self-center'
             : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
             'opacity-50'}"
     >
