@@ -459,7 +459,7 @@
 
 <div class="{$mobile ? 'py-10' : 'py-6'} w-full h-full flex flex-col justify-between px-6">
     <div>
-        <div class="flex flex-row w-full justify-between mb-6">
+        <div class="flex flex-row w-full justify-between {$mobile ? 'mb-9' : 'mb-6'}">
             <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
@@ -494,7 +494,10 @@
             </div>
             <div class="flex flex-row space-x-4">
                 {#if $mobile}
-                    <button on:click={onQRClick}>
+                    <button 
+                        on:click={onQRClick}
+                        style={selectedSendType === SEND_TYPE.INTERNAL && 'opacity: 0'}
+                    >
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
                 {:else}
@@ -525,8 +528,8 @@
                             bind:address
                             label={localize('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
-                            classes="mb-6"
+                            placeholder={`${localize('general.sendToAddress')}${$mobile ? ': ' : '\n'}${addressPrefix}...`}
+                            classes={$mobile ? 'mb-6' : 'mb-6'}
                             autofocus={!$mobile}
                         />
                     {/if}
@@ -552,6 +555,7 @@
     {/if}
     {#if $isTransferring}
         <ProgressBar
+            classes={$mobile && 'my-6'}
             preloading={!$transferState}
             secondary
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
