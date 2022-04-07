@@ -532,7 +532,8 @@
             "airdrops": {
                 "holding": "Remaining",
                 "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "

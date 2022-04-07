@@ -4,11 +4,14 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
     import {
+        assemblyStakingEventState,
         assemblyStakingRemainingTime,
-        assemblyStakingRewards,
+        currentAssemblyStakingRewards,
+        currentShimmerStakingRewards,
+        shimmerStakingEventState,
         shimmerStakingRemainingTime,
-        shimmerStakingRewards,
-        stakingEventState,
+        totalAssemblyStakingRewards,
+        totalShimmerStakingRewards,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
@@ -25,13 +28,29 @@
         [StakingAirdrop.Shimmer]: null,
     }
 
-    $: isAssembly = airdrop === StakingAirdrop.Assembly
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
 
+    const isAssembly = airdrop === StakingAirdrop.Assembly
+    let stakingEventState
+    $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
+    function getFormattedStakingAirdropRewards(forCurrentRewards: boolean, stakingRewards: number): string {
+        return formatStakingAirdropReward(airdrop, stakingRewards, 6)
+    }
+
+    $: currentStakingRewards = getFormattedStakingAirdropRewards(
+        true,
+        isAssembly ? $currentAssemblyStakingRewards : $currentShimmerStakingRewards
+    )
+    $: totalStakingRewards = getFormattedStakingAirdropRewards(
+        false,
+        isAssembly ? $totalAssemblyStakingRewards : $totalShimmerStakingRewards
+    )
+
     function parseRemainingTime(): void {
-        const formattedValue = getBestTimeDuration(
-            isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
-        )
+        const stakingRemainingTime = isAssembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+        const formattedValue = getBestTimeDuration(stakingRemainingTime)
+
         remainingTimeAmount = parseFloat(formattedValue).toString()
         remainingTimeUnit = formattedValue.replace(remainingTimeAmount.toString(), '')
     }
@@ -116,47 +135,56 @@
             </Text>
             <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
         </div>
+        {#if isStakingPossible(stakingEventState)}
+            <div class="flex flex-row justify-between space-x-4">
+                <div class="flex flex-col">
+                    <div>
+                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
+                            {currentStakingRewards.split(' ')[0]}
+                        </Text>
+                        <Text type="p" secondary classes="text-sm inline">
+                            {currentStakingRewards.split(' ')[1]}
+                        </Text>
+                    </div>
+                    <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
+                        {localize('views.staking.airdrops.currentStakingPeriod')}
+                    </Text>
+                </div>
+                {#if isStakingPossible(stakingEventState)}
+                    <div class="flex flex-col text-right">
+                        <div>
+                            <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
+                                {remainingTimeAmount}
+                            </Text>
+                            <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                        </div>
+                        <Text
+                            type="p"
+                            smaller
+                            overrideColor
+                            classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
+                        >
+                            {getLocalizedDurationText(stakingEventState)}
+                        </Text>
+                    </div>
+                {/if}
+            </div>
+        {/if}
         <HR />
         <div class="flex flex-row justify-between space-x-4">
             <div class="flex flex-col">
                 <div>
                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
-                        {formatStakingAirdropReward(
-                            airdrop,
-                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
-                            6
-                        ).split(' ')[0]}
+                        {totalStakingRewards.split(' ')[0]}
                     </Text>
                     <Text type="p" secondary classes="text-sm inline">
-                        {formatStakingAirdropReward(
-                            airdrop,
-                            isAssembly ? $assemblyStakingRewards : $shimmerStakingRewards,
-                            6
-                        ).split(' ')[1]}
+                        {totalStakingRewards.split(' ')[1]}
                     </Text>
                 </div>
                 <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
-                    {localize('views.staking.airdrops.collectedRewards')}
+                    {localize('views.staking.airdrops.totalWalletRewards')}
                 </Text>
             </div>
-            {#if isStakingPossible($stakingEventState)}
-                <div class="flex flex-col text-right">
-                    <div>
-                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
-                            {remainingTimeAmount}
-                        </Text>
-                        <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
-                    </div>
-                    <Text
-                        type="p"
-                        smaller
-                        overrideColor
-                        classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
-                    >
-                        {getLocalizedDurationText($stakingEventState)}
-                    </Text>
-                </div>
-            {/if}
         </div>
     </div>
 </div>

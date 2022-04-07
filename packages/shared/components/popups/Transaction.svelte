@@ -8,7 +8,11 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { selectedAccountParticipationOverview, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        selectedAccountParticipationOverview,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
@@ -35,14 +39,16 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    $: mustAcknowledgeGenericParticipationWarning = isAccountStaked(accountId) && isStakingPossible($stakingEventState)
+    $: mustAcknowledgeGenericParticipationWarning =
+        isAccountStaked(accountId) &&
+        (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState))
 
     let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
     $: {
         const accountOverview = $selectedAccountParticipationOverview
         mustAcknowledgeBelowMinRewardParticipationWarning =
-            (accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0) &&
-            isStakingPossible($stakingEventState)
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 && isStakingPossible($assemblyStakingEventState)) ||
+            (accountOverview?.shimmerRewardsBelowMinimum > 0 && isStakingPossible($shimmerStakingEventState))
     }
 
     function handleNextClick() {

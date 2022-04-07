@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { participationAction, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        participationAction,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
@@ -16,7 +18,7 @@
     } from 'shared/lib/typings/events'
     import { transferState } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
+    import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
     const handleNewStakingEvent = (): void => {
@@ -111,7 +113,11 @@
         closePopup(true)
     }
 
-    $: if ($popupState.type === 'stakingManager' && $stakingEventState === ParticipationEventState.Inactive) {
+    $: if (
+        $popupState.type === 'stakingManager' &&
+        $assemblyStakingEventState === ParticipationEventState.Inactive &&
+        $shimmerStakingEventState === ParticipationEventState.Inactive
+    ) {
         closePopup(true)
     }
 

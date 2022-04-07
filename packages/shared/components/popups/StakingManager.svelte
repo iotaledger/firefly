@@ -22,8 +22,8 @@
         participationOverview,
         pendingParticipations,
         stakedAccounts,
-        stakedAmount,
-        stakingEventState,
+        assemblyStakingEventState,
+        shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
@@ -49,7 +49,7 @@
     let { accounts } = $wallet
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
-    $: canStake = canParticipate($stakingEventState)
+    $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
     $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview()
