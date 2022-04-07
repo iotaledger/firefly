@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip } from 'shared/components'
+    import { Icon, Text, Tooltip, PingingBadge } from 'shared/components'
     import { SidebarTab, dashboardRoute } from '@core/router'
 
     export let tab: SidebarTab = undefined
@@ -26,18 +26,10 @@
 >
     <Icon width="24" height="24" icon={tab?.icon} />
     {#if tab?.notificationType}
-        <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
-            <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full {tab?.notificationType === 'warning'
-                    ? 'bg-yellow-400'
-                    : 'bg-red-300'} opacity-75"
-            />
-            <span
-                class="relative inline-flex rounded-full h-2 w-2 {tab?.notificationType === 'warning'
-                    ? 'bg-yellow-600'
-                    : 'bg-red-500'}"
-            />
-        </span>
+        <PingingBadge
+            innerColor={tab?.notificationType === 'warning' ? 'yellow-600' : 'red-500'}
+            outerColor={tab?.notificationType === 'warning' ? 'yellow-400' : 'red-300'}
+        />
     {/if}
 </button>
 {#if showTooltip}

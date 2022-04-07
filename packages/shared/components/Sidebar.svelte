@@ -1,5 +1,14 @@
 <script lang="typescript">
-    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text, Modal } from 'shared/components'
+    import {
+        Drawer,
+        Icon,
+        NetworkIndicator,
+        ProfileActionsModal,
+        SidebarTab,
+        Text,
+        Modal,
+        PingingBadge,
+    } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
@@ -161,12 +170,7 @@
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
                     {#if !$hasEverOpenedProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
-                        <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
-                            />
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
-                        </span>
+                        <PingingBadge innerColor="red-500" outerColor="red-500" />
                     {/if}
                 </button>
             </span>
