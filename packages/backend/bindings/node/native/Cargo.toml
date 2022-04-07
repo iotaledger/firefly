@@ -5,7 +5,7 @@ authors = ["IOTA Stiftung"]
 license = "MIT"
 build = "build.rs"
 edition = "2018"
-exclude = ["artifacts.json", "index.node"]
+exclude = ["artifacts.json", "main.node"]
 
 [lib]
 name = "node_neon"
