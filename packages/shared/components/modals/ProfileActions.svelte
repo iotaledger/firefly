@@ -1,19 +1,25 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
+    import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import {
+        activeProfile,
+        hasEverOpenedProfileModal,
+        isLedgerProfile,
+        isSoftwareProfile,
+        isStrongholdLocked,
+    } from 'shared/lib/profile'
     import { openSettings } from '@core/router'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
 
-    export let isActive: boolean
+    export let modal: Modal
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $versionDetails.upToDate
@@ -37,7 +43,7 @@
 
     const handleSettingsClick = (): void => {
         openSettings()
-        isActive = false
+        modal?.close()
     }
 
     const handleLogoutClick = async (): Promise<void> => {
@@ -109,13 +115,23 @@
     }
 </script>
 
-<Modal bind:isActive position={{ bottom: '16px', left: '80px' }} classes="w-80">
+<Modal
+    bind:this={modal}
+    position={{ bottom: '16px', left: '80px' }}
+    classes="w-80"
+    on:open={() => hasEverOpenedProfileModal.set(true)}
+>
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
-            <Text>{profileName}</Text>
+            <div class="flex flex-row space-x-2">
+                <Text>{profileName}</Text>
+                {#if $activeProfile?.isDeveloperProfile}
+                    <Chip label={localize('general.dev')} />
+                {/if}
+            </div>
             {#if $isLedgerProfile}
                 <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
             {/if}
