@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text, Modal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { getInitials, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
+    import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
     import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import {
         dashboardRoute,
         dashboardRouter,
@@ -160,7 +160,7 @@
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
-                    {#if !isBackupSafe || !$versionDetails.upToDate}
+                    {#if !$hasEverOpenedProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
                         <span class="absolute -top-2 -left-2 flex justify-center items-center h-3 w-3">
                             <span
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
