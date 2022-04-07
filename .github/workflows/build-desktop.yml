@@ -104,7 +104,8 @@ jobs:
       if: matrix.os == 'windows-2019' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
 
     - name: Install dependencies
-      run: yarn
+      # Increase network timeout threshold to reduce build failures on Windows
+      run: yarn --network-timeout 1000000
 
     - name: Rebuild backend actor system with Sentry DSN and environment
       run: yarn build:binding
@@ -112,6 +113,21 @@ jobs:
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
         SENTRY_ENVIRONMENT: ${{ env.STAGE }}
+    
+    - name: Install Sentry CLI
+      # Yarn has issues putting binaries in the PATH on Windows
+      run: npm i -g @sentry/cli
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'windows-2019' }}
+
+    - name: Upload backend PDB (Windows)
+      run: |
+        sentry-cli difutil check node_neon.pdb
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources node_neon.pdb 
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources node_neon.pdb
+      working-directory: packages/backend/bindings/node/native/target/x86_64-pc-windows-msvc/release
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'windows-2019' }}
 
     - name: Set productName
       run: node scripts/fix-productName.js

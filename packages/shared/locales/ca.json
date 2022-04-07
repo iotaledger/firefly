@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Llengua",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Actualitzat",
-                    "outOfDate": "Obsolet"
+                    "outOfDate": "Obsolet",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Dispositiu de maquinari",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Esteu executant la versió més recent i segura de Firefly.",
             "updateAvailable": "Actualització de Firefly disponible",
             "updateDetails": "Versió {version} - {date}",
-            "noAutoUpdate": "L'actualització automàtica està deshabilitada en aquesta versió de Windows. Si us plau, aneu a https://firefly.iota.org per baixar l'actualització."
+            "noAutoUpdate": "L'actualització automàtica està deshabilitada en aquesta versió de Windows. Si us plau, aneu a https://firefly.iota.org per baixar l'actualització.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Darrera còpia de seguretat: {date}",

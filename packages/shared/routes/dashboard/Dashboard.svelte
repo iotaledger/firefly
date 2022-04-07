@@ -6,28 +6,32 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { DeveloperProfileIndicator, Idle, Sidebar } from 'shared/components'
+    import { Idle, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
+    import {
+        clearPollParticipationOverviewInterval,
+        pollParticipationOverview,
+        updateStakingPeriodCache,
+    } from 'shared/lib/participation'
     import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import {
-        accountRouter,
         AccountRoute,
+        accountRouter,
         AdvancedSettings,
         appRouter,
         dashboardRoute,
-        dashboardRouter,
         DashboardRoute,
-        settingsRouter,
+        dashboardRouter,
         SettingsRoute,
+        settingsRouter,
     } from '@core/router'
     import { Locale } from '@core/i18n'
     import {
@@ -35,6 +39,8 @@
         asyncCreateAccount,
         asyncSyncAccountOffline,
         isBackgroundSyncing,
+        isFirstSessionSync,
+        isSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
@@ -62,6 +68,7 @@
     let startInit
     let busy
     let fundsSoonNotificationId
+    let developerProfileNotificationId
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
@@ -82,6 +89,10 @@
             openSnapshotPopup()
         }
     })
+
+    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+        void updateStakingPeriodCache()
+    }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -201,7 +212,7 @@
          * NOTE: We check for mobile because it's only necessary
          * for existing desktop installation.
          */
-        if (!mobile && !$isAwareOfCrashReporting) {
+        if (!$mobile && !$isAwareOfCrashReporting) {
             openPopup({
                 type: 'crashReporting',
             })
@@ -217,6 +228,9 @@
 
         if (fundsSoonNotificationId) {
             removeDisplayNotification(fundsSoonNotificationId)
+        }
+        if (developerProfileNotificationId) {
+            removeDisplayNotification(developerProfileNotificationId)
         }
         if ($isLedgerProfile) {
             stopPollingLedgerStatus()
@@ -301,7 +315,7 @@
                 const account = await asyncCreateAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
-                // TODO: set selected account to the newly created account
+                setSelectedAccount(account?.id)
                 $accountRouter.reset()
 
                 return onComplete()
@@ -347,6 +361,15 @@
                 ],
             })
         }
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+            // Show developer profile warning
+            developerProfileNotificationId = showAppNotification({
+                type: 'warning',
+                message: locale('indicators.developerProfileIndicator.warningText', {
+                    values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
+                }),
+            })
+        }
     }
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
@@ -390,7 +413,6 @@
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <DeveloperProfileIndicator {locale} classes="absolute top-0 z-10" />
     <TopNavigation {onCreateAccount} />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />

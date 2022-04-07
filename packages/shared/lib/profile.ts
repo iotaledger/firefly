@@ -153,7 +153,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     if (profile) {
         try {
             await asyncDeleteStorage()
-            await removeProfileFolder(profile.name)
+            await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)
         }
@@ -273,9 +273,9 @@ export const cleanupInProgressProfiles = (): void => {
  *
  * @returns {void}
  */
-export const removeProfileFolder = async (profileName: string): Promise<void> => {
+export const removeProfileFolder = async (id: string): Promise<void> => {
     try {
-        const profileDataPath = await getProfileDataPath(profileName)
+        const profileDataPath = await getProfileDataPath(id)
         await Platform.removeProfileFolder(profileDataPath)
     } catch (err) {
         console.error(err)
@@ -294,9 +294,9 @@ export const cleanupEmptyProfiles = async (): Promise<void> => {
         const profileDataPath = await getWalletDataPath()
         const storedProfiles = await Platform.listProfileFolders(profileDataPath)
 
-        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
+        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.id)))
 
-        const appProfiles = get(profiles).map((p) => p.name)
+        const appProfiles = get(profiles).map((p) => p.id)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
                 await removeProfileFolder(storedProfile)
@@ -456,4 +456,19 @@ export const validateProfileName = (trimmedName: string): void => {
     if (get(profiles).some((p) => p.name === trimmedName)) {
         throw new Error(locale('error.profile.duplicate'))
     }
+}
+
+async function renameProfileFolder(oldName: string, newName: string): Promise<void> {
+    const oldPath = await getProfileDataPath(oldName)
+    const newPath = await getProfileDataPath(newName)
+    await Platform.renameProfileFolder(oldPath, newPath)
+}
+
+export async function renameAllProfileFoldersToId(): Promise<void> {
+    const _profiles = get(profiles)
+    await Promise.all(
+        _profiles.map(async (profile) => {
+            await renameProfileFolder(profile.name, profile.id)
+        })
+    )
 }

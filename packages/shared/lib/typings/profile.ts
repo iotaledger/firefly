@@ -1,6 +1,7 @@
 import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
 import { NetworkConfig } from './network'
+import { AccountStakingRewards } from '@lib/participation/types'
 
 export interface MigratedTransaction {
     address: string
@@ -33,8 +34,9 @@ export interface Profile {
     hasVisitedStaking?: boolean
     lastShimmerPeriodVisitedStaking?: number
     lastAssemblyPeriodVisitedStaking?: number
-    accounts?: ProfileAccount[]
     lastUsedAccountId?: string
+    accounts?: ProfileAccount[]
+    stakingRewards?: AccountStakingRewards[]
 }
 
 /**

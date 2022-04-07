@@ -1,13 +1,13 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Пошаљите, примите и управљајте својим ИОТА-ом",
-            "body": "Фирефли је званични ИОТА софтвер за новчаник."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
-            "title": "Политика приватности и Услови коришћења услуге",
-            "body": "Молимо прегледајте Политику приватности и Услове услуге.",
-            "checkbox": "Прочитао сам и прихватам Политику приватности и Услове коришћења услуге"
+            "title": "Privacy Policy & Terms of Service",
+            "body": "Please review the Privacy Policy and Terms of Service.",
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -15,138 +15,138 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "Изглед",
-            "body": "Одаберите тему апликације."
+            "title": "Appearance",
+            "body": "Choose your app theme."
         },
         "profile": {
-            "title": "Креирајте профил",
-            "profileName": "Име профила",
-            "body1": "Можете креирати више корисничких профила да бисте организовали своје новчанике и побољшали приватност.",
+            "title": "Create a profile",
+            "profileName": "Profile name",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": {
-                "first": "За сада, почнимо са именом вашег првог профила.",
-                "nonFirst": "За сада, почнимо са именом вашег профила."
+                "first": "For now, let's start with your first profile name.",
+                "nonFirst": "For now, let's start with your profile name."
             },
-            "addMore": "Касније можете додати још профила.",
+            "addMore": "You can add more profiles later.",
             "advancedOptions": "Advanced options",
             "developer": {
-                "label": "Профил програмера",
+                "label": "Developer profile",
                 "info": "Connect to the devnet or a private network"
             }
         },
         "setup": {
-            "title": "Подесите новчаник",
-            "chrysalisTitle": "Цхрисалис мрежно ажурирање",
-            "chrysalisBody": "Од 21. априла 2021. корисници могу да мигрирају своје токене на нову Цхрисалис мрежу. Препоручујемо вам да мигрирате постојеће токене што је пре могуће.",
-            "learnMore": "Сазнајте више о миграцији"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Secure your wallet",
-            "body1": "Сачувајте и одштампајте ПДФ шаблон комплета за опоравак.",
-            "body2": "Ако попуните комплет за опоравак и безбедно га складиштите, увек ћете моћи да повратите своје новчанике."
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "create": {
-            "title": "Направите новчаник",
-            "body": "Направите нови новчаник. Можете одабрати обичан софтверски новчаник или ако имате Ледгер уређај можете подесити хардверски новчаник.",
+            "title": "Create a wallet",
+            "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "Желим софтверски новчаник",
-                "description": "Креирање фразе за опоравак од 24 речи"
+                "title": "I want a software wallet",
+                "description": "Create a 24-word Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "Желим хардверски новчаник",
-                "description": "Потребна је Ледгер Нано С или Нано Кс"
+                "title": "I want a hardware wallet",
+                "description": "Ledger Nano S or Nano X required"
             }
         },
         "setupLedger": {
-            "progress1": "Повежите своју књигу",
-            "progress2": "Генеришите адресу",
-            "progress3": "Пребаци апликацију Ледгер",
-            "progress4": "Трансферна средства",
-            "watchVideo": "Погледајте видео водич",
-            "videoGuide": "Видео водич за миграцију књиге"
+            "progress1": "Connect your Ledger",
+            "progress2": "Generate address",
+            "progress3": "Switch Ledger app",
+            "progress4": "Transfer funds",
+            "watchVideo": "Watch video guide",
+            "videoGuide": "Ledger migration video guide"
         },
         "ledgerInstallationGuide": {
-            "title": "Да ли сте инсталирали потребне Ледгер апликације?",
-            "body1": "Пре него што наставите, морате да пронађете и инсталирате и апликацију {легаци} и нову ИОТА апликацију преко Ледгер Ливе-а.",
-            "body2": "Уверите се да је ваш фирмвер за Ледгер ажуриран. Све унапред инсталиране апликације треба ажурирати на најновије верзије.",
-            "action": "Да, инсталирао сам ове апликације"
+            "title": "Have you installed the necessary Ledger apps?",
+            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
+            "action": "Yes, I've installed these apps"
         },
         "password": {
-            "title": "Направите лозинку",
-            "body1": "Потребна вам је јака лозинка да бисте заштитили своја средства. Користите комбинацију речи и избегавајте уобичајене фразе, имена или датуме.",
-            "body2": "Препоручује се да запишете своју лозинку у комплету за опоравак."
+            "title": "Create a password",
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Подесите ПИН за пријаву да бисте били сигурни да само ви можете да унесете свој профил.",
-            "body2": "Чувајте свој ПИН на сигурном!"
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Подесите ПИН код",
-            "body1": "Унесите шестоцифрени ПИН испод. Биће вам затражен ПИН да бисте приступили свом профилу.",
-            "body2": "Користите само бројеве"
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
-            "title": "Потврдите свој ПИН код",
-            "body1": "Ваш ПИН чува ваше стање и трансакције приватним.",
-            "body2": "Поново унесите ПИН код да бисте наставили."
+            "title": "Verify your PIN code",
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
-            "title": "Направите резервну копију новчаника",
-            "body1": "Сада ће вам бити приказана фраза за опоравак. Запишите то у свој комплет за опоравак.",
-            "body2": "користи се за приступ вашим токенима са било ког места.",
-            "body3": "Ако изгубите фразу за опоравак, можете изгубити средства."
+            "title": "Back up your wallet",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body3": "If you lose your recovery phrase, you may lose your funds."
         },
         "recoveryPhrase": {
-            "title": "Фраза за опоравак",
-            "body1": "У свом комплету за опоравак, запишите речи тачно приказаним редоследом.",
-            "body2": "Чувајте ово приватно и безбедно чувајте.",
-            "body3": "Важно је имати писану резервну копију. Рачунари често отказују и датотеке се могу оштетити.",
-            "revealRecoveryPhrase": "Откривање фразе за опоравак",
-            "hideRecoveryPhrase": "Сакриј фразу за опоравак"
+            "title": "Recovery phrase",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "revealRecoveryPhrase": "Reveal recovery phrase",
+            "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
-            "title": "Верификујте фразу за опоравак",
-            "body": "Хајде да проверимо да ли сте тачно написали фразу. Изаберите сваку реч у нумерисаном редоследу.",
-            "word": "реч",
-            "verified": "Фраза за опоравак је верификована",
-            "verifiedBody": "Не заборавите да буде приватно и безбедно ускладиштено."
+            "title": "Verify recovery phrase",
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
-            "title": "Направите резервну копију у датотеци Стронгхолд",
-            "body1": "Унесите лозинку да направите резервну копију новчаника у датотеци Стронгхолд-а. Ваша лозинка се користи за шифровање резервне копије.",
-            "body2": "Разлози зашто су дигиталне резервне копије важне:",
-            "reason1": "Лако вратите своје новчанике без уноса фразе за опоравак",
-            "reason2": "Увезите своје новчанике на друге уређаје",
-            "reason3": "Повратите своју пуну историју трансакција"
+            "title": "Back up to a Stronghold file",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
-            "title": "Израђена је резервна копија",
-            "body": "Направили сте резервну копију својих новчаника у Стронгхолд-у."
+            "title": "Successfully backed up",
+            "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
-            "title": "Подешавање новчаника је завршено",
-            "fundsMigrated": "Средства су мигрирала",
-            "body": "Ваш нови новчаник је спреман за употребу.",
-            "softwareMigratedBody": "Успешно сте мигрирали своја средства на нову мрежу",
-            "fireflyLedgerBody": "Ваш Ледгер налог је успешно опорављен и сада можете да наставите.",
-            "trinityLedgerBody": "Успешно сте мигрирали Ваш Ледгер на нову мрежу.",
-            "exportMigration": "Извезите дневник миграције и завршите подешавање"
+            "title": "Wallet setup completed",
+            "fundsMigrated": "Funds migrated",
+            "body": "Your new wallet is ready to use.",
+            "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+            "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+            "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Повратите или мигрирајте средства",
-            "body": "Ако имате постојећу резервну копију датотеке за почетак или новчаник, можете да је увезете овде. Ако имате старија мрежна средства, бићете спроведени кроз кораке миграције да бисте прешли на Цхрисалис мрежу.",
-            "importSeed": "Имам сеед од 81 карактера",
-            "importSeedDescription": "Унесите семе и мигрирајте средства у Цхрисалис",
-            "importMnemonic": "Имам фразу за опоравак Фирефли-а",
-            "importMnemonicDescription": "Унесите своју фразу за опоравак да бисте опоравили своје новчанике",
-            "importFile": "Имам резервну копију датотеке",
-            "importFileDescription": "Отпремите датотеку Сеедваулт или Стронгхолд",
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file",
             "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Вратите или мигрирајте профил Ледгер"
+            "importLedgerDescription": "Restore or migrate a Ledger profile"
         },
         "importFromText": {
             "seed": {
-                "title": "Унесите своје семе да бисте започели миграцију",
+                "title": "Type your seed to commence migration",
                 "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
                 "enter": "Enter your seed"
             },
@@ -190,7 +190,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Генериши нову адресу",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -214,20 +214,20 @@
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
         },
         "importBackupPassword": {
-            "body1": "Унесите резервну лозинку.",
-            "body2": "Ово је лозинка коју сте поставили приликом првог прављења резервне копије."
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
-            "title": "Успешно сте опоравили резервну копију",
+            "title": "You have successfully recovered your backup",
             "body": "You can now set up your new profile."
         },
         "migrate": {
-            "title": "Мигрирајте своја средства",
+            "title": "Migrate your funds",
             "body1": "This is an automated process to transfer your funds to your new wallet.",
-            "body2": "Може потрајати. Не искључујте уређај током миграције.",
-            "existing": "Твој стари новчаник",
-            "new": "Твој нови новчаник",
-            "learn": "Сазнајте више о миграцији",
+            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "existing": "Your old wallet",
+            "new": "Your new wallet",
+            "learn": "Learn about the migration",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -276,27 +276,27 @@
             "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
-            "rerun": "Покушај поново"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Стање",
+            "title": "Your balance",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
             "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly.",
             "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
         },
         "settings": {
-            "settings": "Подешавања",
+            "settings": "Settings",
             "generalSettings": {
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Сигурност",
+                "title": "Security",
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
@@ -316,20 +316,20 @@
                 "description": ""
             },
             "theme": {
-                "title": "Тема",
+                "title": "Theme",
                 "description": "",
                 "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
-                "title": "Jezik",
+                "title": "Language",
                 "description": ""
             },
             "currency": {
-                "title": "Валута",
+                "title": "Currency",
                 "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
-                "title": "Обавештења",
+                "title": "Notifications",
                 "description": "System notifications for transaction events"
             },
             "networkStatus": {
@@ -431,24 +431,24 @@
                 "description": "Migrate another Trinity account index"
             },
             "troubleshoot": {
-                "title": "Решавање проблема",
+                "title": "Troubleshoot",
                 "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
-                "title": "Документација",
+                "title": "Documentation",
                 "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
-                "title": "Најчешћа питања",
+                "title": "FAQ",
                 "title2": "Frequently asked questions",
                 "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
-                "title": "Дискорд",
+                "title": "Discord",
                 "description": "Get help from the IOTA community on Discord"
             },
             "about": {
-                "title": "О апликацији",
+                "title": "About",
                 "description": ""
             },
             "reportAnIssue": {
@@ -807,8 +807,8 @@
         "timeframe1Month": "1 month"
     },
     "actions": {
-        "continue": "Настави",
-        "back": "Назад",
+        "continue": "Continue",
+        "back": "Back",
         "previous": "Previous",
         "next": "Next",
         "cancel": "Cancel",
@@ -816,34 +816,34 @@
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
-        "importSeed": "Увезите постојеће семе",
+        "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Направите нови новчаник",
+        "createWallet": "Create new wallet",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
-        "savePassword": "Сачувај лозинку",
-        "useBiometric": "Користите биометријску сигурност",
-        "setupPin": "Подесите ПИН код",
-        "setPin": "Подесите ПИН код",
-        "confirmPin": "Потврдите ПИН код",
-        "enterYourPin": "Унеси свој ПИН код.",
-        "saveBackupFile": "Сачувајте датотеку сигурносне копије",
-        "iveWrittenRecoveryPhrase": "Записао сам фразу за опоравак",
-        "verifyRecoveryPhrase": "Верификујте фразу за опоравак",
-        "revealRecoveryPhrase": "Откривање фразе за опоравак",
-        "importSeedvault": "Увезите СеедВаулт",
+        "savePassword": "Save password",
+        "useBiometric": "Use biometric security",
+        "setupPin": "Set up PIN code",
+        "setPin": "Set PIN code",
+        "confirmPin": "Confirm PIN code",
+        "enterYourPin": "Enter your PIN",
+        "saveBackupFile": "Save backup file",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "importSeedvault": "Import SeedVault",
         "checkAgain": "Check Again",
-        "importFromFile": "Увези из датотеке*",
-        "send": "Пошаљи",
-        "receive": "Добити",
+        "importFromFile": "Import from a file",
+        "send": "Send",
+        "receive": "Receive",
         "create": "Create",
-        "beginTransfer": "Започни пренос",
-        "tryAgain": "Покушај поново",
-        "visitDiscord": "Посетите Дисцорд",
-        "dragDrop": "Превуци и испусти",
+        "beginTransfer": "Begin Transfer",
+        "tryAgain": "Try again",
+        "visitDiscord": "Visit Discord",
+        "dragDrop": "Drag & Drop",
         "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Изабери датотеку",
-        "dropHere": "Овде превуци фајлове",
+        "chooseFile": "Choose a File",
+        "dropHere": "Drop your file here",
         "syncAll": "Sync all",
         "export": "Export",
         "exporting": "Exporting",
@@ -902,7 +902,7 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Генеришите адресу",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -916,66 +916,66 @@
         "done": "Done"
     },
     "general": {
-        "password": "Лозинка",
-        "confirmPassword": "Потврдите лозинку",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
         "newPassword": "New password",
         "confirmNewPassword": "Confirm new password",
-        "yourSeed": "Твоје Семе",
-        "recoveryPhrase": "Фраза за опоравак",
-        "recentActivity": "Скорашња активност",
-        "sent": "Послато",
-        "received": "Примљено",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
+        "sent": "Sent",
+        "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
-        "sendFunds": "Пошаљите средства",
+        "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
-        "scanQrOrPaste": "Скенирајте КР код или налепите адресу",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
         "manageAccount": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "account": "Wallet",
-        "sendingToAddress": "Слање на адресу",
-        "amount": "Износ",
-        "addAddress": "Додај Адресу",
-        "reference": "Препорука",
-        "from": "Од",
-        "to": "За",
+        "sendingToAddress": "Sending to address",
+        "amount": "Amount",
+        "addAddress": "Add Address",
+        "reference": "Reference",
+        "from": "From",
+        "to": "To",
         "receiveFunds": "Receive Funds",
         "address": "Address",
         "myAddress": "My Address",
-        "shareAddress": "Подели Адресу",
-        "yourAddress": "Ваша адреса",
+        "shareAddress": "Share an address",
+        "yourAddress": "Your address",
         "newRemainder": "New Remainder",
         "remainder": "Remainder",
-        "generateNewAddress": "Генериши нову адресу",
+        "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
-        "import": "Увези",
-        "seedvault": "СеедВаулт",
-        "stronghold": "Стронгхолд",
-        "language": "Jezik",
-        "appearance": "Изглед",
+        "import": "Import",
+        "seedvault": "SeedVault",
+        "stronghold": "Stronghold",
+        "language": "Language",
+        "appearance": "Appearance",
         "lightTheme": "Light",
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
         "all": "All",
-        "incoming": "Долазни",
-        "outgoing": "Одлазни",
+        "incoming": "Incoming",
+        "outgoing": "Outgoing",
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Wallets",
         "myAccounts": "My Wallets",
-        "profiles": "Профили",
+        "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Сигурност",
+        "security": "Security",
         "accountAddress": "Wallet Address",
         "network": "Network",
         "nodes": "Nodes",
