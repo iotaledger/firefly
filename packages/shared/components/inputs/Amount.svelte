@@ -182,7 +182,8 @@
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={onMaxClick}
-            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
+            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}
+                ${$mobile && 'mr-1.5'}`}
             {disabled}
         >
             {localize('actions.max').toUpperCase()}
@@ -201,7 +202,7 @@
         >
             {unit}
             <nav
-                class="absolute overflow-y-auto pointer-events-none opacity-0 z-10 text-left {$mobile ? 'bottom-8 rounded-t-lg w-12' : 'w-10 top-10 rounded-b-lg'} right-0 bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
+                class="absolute overflow-y-auto pointer-events-none opacity-0 z-10 text-left {$mobile ? 'bottom-10 mb-0.5 rounded-t-lg w-12' : 'w-10 top-10 rounded-b-lg'} right-0 bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
                     ? 'dropdown'
                     : ''}"
                 bind:this={navContainer}
@@ -209,7 +210,7 @@
                 {#each units as _unit}
                     <button
                         id={_unit}
-                        class="text-center w-full {$mobile ? 'py-1.5' : 'py-2'} {unit === _unit &&
+                        class="text-center w-full {$mobile && 'py-2 max-h-7 overflow-y'} {unit === _unit &&
                             'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
