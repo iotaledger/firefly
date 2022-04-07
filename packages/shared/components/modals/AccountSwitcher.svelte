@@ -33,7 +33,7 @@
                         : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
                 >
                     <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                    <Text secondary={account.id !== $selectedAccount?.id} type="h4">{account.alias}</Text>
+                    <Text secondary={account.id !== $selectedAccount?.id} type="h5">{account.alias}</Text>
                 </button>
             {/each}
         </div>
@@ -44,7 +44,7 @@
         on:click={handleCreateAccountClick}
     >
         <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
-        <Text highlighted type="p">{localize('general.createNewWallet')}</Text>
+        <Text highlighted type="p" classes="text-14">{localize('general.createNewWallet')}</Text>
     </button>
 </Modal>
 
