@@ -3,6 +3,7 @@
     import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
+    import { LocaleArguments } from '@core/i18n/types'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { popupState, openPopup } from 'shared/lib/popup'
@@ -81,7 +82,7 @@
     }
 
     const updateLedgerConnectionText = (): void => {
-        const values: LocaleArgs =
+        const values: LocaleArguments =
             $ledgerDeviceState === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceState}`, { values })
 
