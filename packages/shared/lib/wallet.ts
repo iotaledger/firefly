@@ -1409,7 +1409,7 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
                 try {
                     balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
                         timestamp,
-                        balance: balance + data[index].balance,
+                        balance: balance + (data[index]?.balance ?? 0),
                     }))
                 } catch (err) {
                     console.error(err)
