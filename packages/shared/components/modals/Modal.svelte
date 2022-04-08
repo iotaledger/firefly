@@ -34,7 +34,7 @@
         if (!isBlockedByTimeout) {
             show = bool
             isBlockedByTimeout = true
-            setTimeout(() => (isBlockedByTimeout = false), 500)
+            setTimeout(() => (isBlockedByTimeout = false), 100)
             show ? dispatch('open') : dispatch('close')
         }
     }
