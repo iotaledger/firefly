@@ -116,6 +116,17 @@
     >
         <source src="assets/videos/airdrop-{airdrop}.mp4" type="video/mp4" />
     </video>
+    <div class="w-40 h-40 overflow-hidden absolute -top-2.5 -right-2.5">
+        <div
+            class="ribbon absolute left-0 top-11 transform rotate-45 p-1 {airdrop === StakingAirdrop.Assembly
+                ? 'bg-blue-500'
+                : 'bg-gray-700'}"
+        >
+            <Text type="h4" overrideColor classes="text-center text-white"
+                >{localize(`views.staking.banners.${airdrop === StakingAirdrop.Assembly ? 'new' : 'complete'}`)}</Text
+            >
+        </div>
+    </div>
     <div class="w-full h-full px-8 pb-10 flex flex-col justify-end space-y-5 z-0">
         <div class="flex flex-col">
             <div class="flex flex-row items-center mb-3">
@@ -188,3 +199,9 @@
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    .ribbon {
+        width: 120%;
+    }
+</style>
