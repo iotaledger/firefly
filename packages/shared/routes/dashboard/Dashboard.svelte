@@ -400,8 +400,8 @@
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: !$activeProfile.hasFinishedSingleAccountGuide &&
-        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    $: showSingleAccountguide = !$activeProfile?.hasFinishedSingleAccountGuide
+    $: showSingleAccountguide && openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
 </script>
 
 <Idle />
