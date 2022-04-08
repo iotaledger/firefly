@@ -27,11 +27,14 @@ export const resetRouters = (): void => {
     isDeepLinkRequestActive.set(false)
 }
 
-export const resetWalletRoute = (): void => {
-    get(dashboardRouter).reset()
+export const resetAccountRouter = (): void => {
     get(accountRouter).reset()
-
     selectedMessage.set(null)
+}
+
+export const resetWalletRoute = (): void => {
+    resetAccountRouter()
+    get(dashboardRouter).reset()
 }
 
 export const openSettings = (): void => {
