@@ -16,7 +16,7 @@
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountId } from '@lib/wallet'
-    import { Token } from '../../../../lib/typings/assets'
+    import { Token } from '@lib/typings/assets'
 
     let animation: string
     let header: string
@@ -28,6 +28,9 @@
     let isShimmerStaked = false
     $: isShimmerStaked = $selectedAccountParticipationOverview?.shimmerStakedFunds > 0
 
+    let stakingEventState = ParticipationEventState.Inactive
+    $: stakingEventState = $assemblyStakingEventState
+
     $: $selectedAccountParticipationOverview, $assemblyStakingEventState, $shimmerStakingEventState, setText()
     $: isAssemblyStaked,
         isShimmerStaked,
@@ -35,9 +38,6 @@
         $shimmerStakingEventState,
         $selectedAccountId,
         setAnimation()
-
-    let stakingEventState = ParticipationEventState.Inactive
-    $: stakingEventState = $assemblyStakingEventState
 
     enum AnimationFileNumber {
         NoStaking = 0,
