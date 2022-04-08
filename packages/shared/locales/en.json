@@ -1225,7 +1225,8 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE"
     },
     "warning": {
         "node": {
