@@ -3,9 +3,10 @@
     import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
+    import { LocaleArguments } from '@core/i18n/types'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { popupState, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
         hasEverOpenedProfileModal,
@@ -35,6 +36,9 @@
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
+    // used to prevent the modal from closing when interacting with the password popup
+    // to be able to see the stronghold toggle change
+    $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
 
     $: if ($isLedgerProfile && $ledgerDeviceState) {
         updateLedgerConnectionText()
@@ -78,7 +82,7 @@
     }
 
     const updateLedgerConnectionText = (): void => {
-        const values: LocaleArgs =
+        const values: LocaleArguments =
             $ledgerDeviceState === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
         const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceState}`, { values })
 
@@ -120,6 +124,7 @@
     position={{ bottom: '16px', left: '80px' }}
     classes="w-80"
     on:open={() => hasEverOpenedProfileModal.set(true)}
+    disableOnClickOutside={isPasswordPopupOpen}
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>
         <div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
