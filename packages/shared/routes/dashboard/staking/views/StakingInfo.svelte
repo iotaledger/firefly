@@ -31,13 +31,8 @@
     let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = $assemblyStakingEventState
 
-    $: $selectedAccountParticipationOverview, $assemblyStakingEventState, $shimmerStakingEventState, setText()
-    $: isAssemblyStaked,
-        isShimmerStaked,
-        $assemblyStakingEventState,
-        $shimmerStakingEventState,
-        $selectedAccountId,
-        setAnimation()
+    $: $selectedAccountParticipationOverview, stakingEventState, setText()
+    $: isAssemblyStaked, isShimmerStaked, stakingEventState, $selectedAccountId, setAnimation()
 
     enum AnimationFileNumber {
         NoStaking = 0,
