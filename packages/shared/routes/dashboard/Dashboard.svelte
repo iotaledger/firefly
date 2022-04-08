@@ -207,16 +207,6 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
-
-        /**
-         * NOTE: We check for mobile because it's only necessary
-         * for existing desktop installation.
-         */
-        if (!$mobile && !$isAwareOfCrashReporting) {
-            openPopup({
-                type: 'crashReporting',
-            })
-        }
     })
 
     onDestroy(() => {
@@ -410,13 +400,8 @@
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: if (
-        !$activeProfile.hasFinishedSingleAccountGuide &&
-        $popupState?.type !== 'crashReporting' &&
-        !$popupState?.active
-    ) {
+    $: !$activeProfile.hasFinishedSingleAccountGuide &&
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
-    }
 </script>
 
 <Idle />
