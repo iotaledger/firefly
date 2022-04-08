@@ -31,7 +31,7 @@
         $selectedAccountId,
         setAnimation()
 
-    let stakingEventState
+    let stakingEventState: ParticipationEventState
     $: stakingEventState = $assemblyStakingEventState
 
     enum AnimationFileNumber {
@@ -66,7 +66,7 @@
     }
 
     function setHeaders(): void {
-        const localePath = `views.staking.info.${stakingEventState}`
+        const localePath = `views.staking.info.${stakingEventState ?? ParticipationEventState.Inactive}`
         if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
             const localiseHoldingHeader = isStaking ? 'Holding' : 'NotHolding'
