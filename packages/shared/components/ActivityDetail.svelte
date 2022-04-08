@@ -21,7 +21,7 @@
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { Readable, Writable } from 'svelte/store'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
@@ -33,12 +33,26 @@
 
     export let onBackClick = (): void => {}
 
+    let date = locale('error.invalidDate')
+    $: {
+        try {
+            date = formatDate(new Date(timestamp), {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+            })
+        } catch {
+            date = locale('error.invalidDate')
+        }
+    }
+
     const cachedMigrationTx = !payload
     const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     const txPayload = payload?.type === 'Transaction' ? payload : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
 
     let senderAccount: WalletAccount
@@ -166,18 +180,10 @@
             <Text secondary>{locale('general.status')}</Text>
             <Text smaller>{locale(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
         </div>
-        {#if timestamp}
+        {#if date}
             <div class="mb-5">
                 <Text secondary>{locale('general.date')}</Text>
-                <Text smaller>
-                    {formatDate(new Date(timestamp), {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    })}
-                </Text>
+                <Text smaller>{date}</Text>
             </div>
         {/if}
         {#if id}

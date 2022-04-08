@@ -1400,12 +1400,20 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
     Object.values(accountsBalanceHistory).forEach((accBalanceHistory) => {
         Object.entries(accBalanceHistory).forEach(([timeframe, data]) => {
             if (!balanceHistory[timeframe].length) {
-                balanceHistory[timeframe] = data
+                try {
+                    balanceHistory[timeframe] = data
+                } catch (err) {
+                    console.error(err)
+                }
             } else {
-                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
-                    timestamp,
-                    balance: balance + data[index].balance,
-                }))
+                try {
+                    balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) => ({
+                        timestamp,
+                        balance: balance + (data[index]?.balance ?? 0),
+                    }))
+                } catch (err) {
+                    console.error(err)
+                }
             }
         })
     })
