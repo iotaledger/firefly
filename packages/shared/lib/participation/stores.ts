@@ -191,6 +191,17 @@ export const currentAssemblyStakingRewards: Readable<number> = derived(
 )
 
 /**
+ * The current accumulated Assembly rewards for the selected account
+ * that are below the minimum rewards requirement.
+ */
+export const currentAssemblyStakingRewardsBelowMinimum: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview) -
+        ($selectedAccountParticipationOverview?.assemblyRewards ?? 0)
+)
+
+/**
  * The total accumulated Assembly rewards for the selected account.
  */
 export const totalAssemblyStakingRewards: Readable<number> = derived(
@@ -208,6 +219,17 @@ export const currentShimmerStakingRewards: Readable<number> = derived(
     [selectedAccountParticipationOverview],
     ([$selectedAccountParticipationOverview]) =>
         getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
+)
+
+/**
+ * The current accumulated Shimmer rewards for the selected account
+ * that are below the minimum rewards requirement.
+ */
+export const currentShimmerStakingRewardsBelowMinimum: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview) -
+        ($selectedAccountParticipationOverview?.shimmerRewards ?? 0)
 )
 
 /**
