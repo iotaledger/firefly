@@ -191,6 +191,7 @@ function isUrlAllowed(targetUrl) {
 
         // GitHub
         'github.com/iotaledger/firefly/issues',
+        'github.com/iotaledger/firefly/issues/new/choose',
 
         // Other
         'support.ledger.com',
