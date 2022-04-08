@@ -65,6 +65,7 @@
             hideClose={$popupState.hideClose}
             fullScreen={$popupState.fullScreen}
             transition={$popupState.transition}
+            overflow={$popupState.overflow}
             locale={$_}
         />
     {/if}
