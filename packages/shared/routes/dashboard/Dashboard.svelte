@@ -410,7 +410,11 @@
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: if (!$activeProfile.hasFinishedSingleAccountGuide) {
+    $: if (
+        !$activeProfile.hasFinishedSingleAccountGuide &&
+        $popupState?.type !== 'crashReporting' &&
+        !$popupState?.active
+    ) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
     }
 </script>
