@@ -13,7 +13,11 @@
     export let isLedgerProfile = false
     export let bgColor: string
 
-    export let onClick: (id: string) => void | string
+    export let onClick: undefined | ((id: string) => void) = undefined
+
+    function handleOnClick() {
+        onClick && onClick(id)
+    }
 
     const slots = $$props.$$slots
 
@@ -31,7 +35,7 @@
 <div class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center">
         <div
-            on:click={() => onClick(id)}
+            on:click={() => handleOnClick()}
             class="h-20 w-20 {bgColor
                 ? `bg-${bgColor}-500`
                 : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
