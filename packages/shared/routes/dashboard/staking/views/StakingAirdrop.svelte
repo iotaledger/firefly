@@ -127,80 +127,105 @@
             >
         </div>
     </div>
-    <div class="w-full h-full px-8 pb-10 flex flex-col justify-end space-y-5 z-0">
-        <div class="flex flex-col">
-            <div class="flex flex-row items-center mb-3">
-                <Text type="h3" classes="mr-4 text-white text-xl">
-                    {localize(`views.staking.airdrops.${airdrop}.name`)}
-                </Text>
-                <StakingAirdropIndicator {airdrop} />
-            </div>
-            <Text
-                type="p"
-                overrideColor
-                overrideLeading
-                smaller
-                classes="font-normal text-gray-300 dark:text-gray-300 mb-3"
-            >
-                {localize(`views.staking.airdrops.${airdrop}.description`)}
-            </Text>
-            <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
-        </div>
-        {#if isStakingPossible(stakingEventState)}
-            <div class="flex flex-row justify-between space-x-4">
-                <div class="flex flex-col">
-                    <div>
-                        <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
-                            {currentStakingRewards.split(' ')[0]}
-                        </Text>
-                        <Text type="p" secondary classes="text-sm inline">
-                            {currentStakingRewards.split(' ')[1]}
-                        </Text>
-                    </div>
-                    <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
-                        {localize('views.staking.airdrops.currentStakingPeriod')}
+    <div class="w-full h-full px-8 pb-10 flex flex-col justify-end z-0">
+        <!-- We check if assembly staking is possible to have both airdrops aligned -->
+        <div
+            class="{isStakingPossible($assemblyStakingEventState)
+                ? 'apply-min-height'
+                : ''} flex flex-col flex-wrap justify-between space-y-5"
+        >
+            <div class="flex flex-col">
+                <div class="flex flex-row items-center mb-3">
+                    <Text type="h3" classes="mr-4 text-white text-xl">
+                        {localize(`views.staking.airdrops.${airdrop}.name`)}
                     </Text>
+                    <StakingAirdropIndicator {airdrop} />
                 </div>
+                <Text
+                    type="p"
+                    overrideColor
+                    overrideLeading
+                    smaller
+                    classes="font-normal text-gray-300 dark:text-gray-300 mb-3"
+                >
+                    {localize(`views.staking.airdrops.${airdrop}.description`)}
+                </Text>
+                <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
+            </div>
+            <div class="flex flex-col flex-wrap space-y-5">
                 {#if isStakingPossible(stakingEventState)}
-                    <div class="flex flex-col text-right">
-                        <div>
-                            <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
-                                {remainingTimeAmount}
+                    <div class="flex flex-row justify-between space-x-4">
+                        <div class="flex flex-col">
+                            <div>
+                                <Text
+                                    type="p"
+                                    classes="font-bold text-lg inline text-white dark:text-gray-400 break-all"
+                                >
+                                    {currentStakingRewards.split(' ')[0]}
+                                </Text>
+                                <Text type="p" secondary classes="text-sm inline">
+                                    {currentStakingRewards.split(' ')[1]}
+                                </Text>
+                            </div>
+                            <Text
+                                type="p"
+                                smaller
+                                overrideColor
+                                classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400"
+                            >
+                                {localize('views.staking.airdrops.currentStakingPeriod')}
                             </Text>
-                            <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                        </div>
+                        {#if isStakingPossible(stakingEventState)}
+                            <div class="flex flex-col text-right">
+                                <div>
+                                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
+                                        {remainingTimeAmount}
+                                    </Text>
+                                    <Text type="p" secondary classes="text-sm inline">{remainingTimeUnit}</Text>
+                                </div>
+                                <Text
+                                    type="p"
+                                    smaller
+                                    overrideColor
+                                    classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
+                                >
+                                    {getLocalizedDurationText(stakingEventState)}
+                                </Text>
+                            </div>
+                        {/if}
+                    </div>
+                {/if}
+                <HR />
+                <div class="flex flex-row justify-between space-x-4">
+                    <div class="flex flex-col">
+                        <div>
+                            <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
+                                {totalStakingRewards.split(' ')[0]}
+                            </Text>
+                            <Text type="p" secondary classes="text-sm inline">
+                                {totalStakingRewards.split(' ')[1]}
+                            </Text>
                         </div>
                         <Text
                             type="p"
                             smaller
                             overrideColor
-                            classes="font-normal text-sm mt-0.5 text-gray-400 dark:text-gray-400"
+                            classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400"
                         >
-                            {getLocalizedDurationText(stakingEventState)}
+                            {localize('views.staking.airdrops.totalWalletRewards')}
                         </Text>
                     </div>
-                {/if}
-            </div>
-        {/if}
-        <HR />
-        <div class="flex flex-row justify-between space-x-4">
-            <div class="flex flex-col">
-                <div>
-                    <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
-                        {totalStakingRewards.split(' ')[0]}
-                    </Text>
-                    <Text type="p" secondary classes="text-sm inline">
-                        {totalStakingRewards.split(' ')[1]}
-                    </Text>
                 </div>
-                <Text type="p" smaller overrideColor classes="font-normal mt-0.5 text-gray-400 dark:text-gray-400">
-                    {localize('views.staking.airdrops.totalWalletRewards')}
-                </Text>
             </div>
         </div>
     </div>
 </div>
 
 <style type="text/scss">
+    .apply-min-height {
+        min-height: 310px;
+    }
     .ribbon {
         width: 120%;
     }
