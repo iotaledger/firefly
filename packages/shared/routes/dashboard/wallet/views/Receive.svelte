@@ -48,7 +48,7 @@
         </div>
     {:else}
         <div class="flex flex-auto items-center justify-center mb-4">
-            <QR size={98} data={$selectedAccount.depositAddress} />
+            <QR size={98} data={$selectedAccount.depositAddress} classes="w-3/4 h-3/4" />
         </div>
         <div class="mb-6">
             <Text secondary smaller classes="mb-1">
