@@ -1,41 +1,18 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
     import { WalletAccount } from '@lib/typings/wallet'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { activeProfile, getColor, updateProfile } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccount } from '@lib/wallet'
+    import { activeProfile, getColor } from '@lib/profile'
+    import { selectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
 
     let modal: Modal
     let isModalOpened: boolean
-
-    function onClick(): void {
-        let message: string
-        if ($isSyncing) {
-            message = localize('notifications.syncing')
-        } else if ($isTransferring) {
-            message = localize('notifications.transferring')
-        } else if ($participationAction) {
-            message = localize('notifications.participating')
-        } else {
-            modal?.toggle()
-            return
-        }
-        showAppNotification({
-            type: 'warning',
-            message,
-        })
-        modal?.close()
-        updateProfile('hasFinishedSingleAccountGuide', true)
-    }
 </script>
 
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
-<button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
+<button on:click={modal?.toggle} class="flex flex-row justify-center items-center space-x-2">
     <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
     <Text type="h5">{$selectedAccount?.alias}</Text>
     <div class="transform transition-all {isModalOpened ? 'rotate-180' : 'rotate-0'}">
