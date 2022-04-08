@@ -22,7 +22,7 @@
     }
 
     const isAssembly = airdrop === StakingAirdrop.Assembly
-    let stakingEventState
+    let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
     $: isStaked = isStakedForAirdrop($selectedAccountParticipationOverview)

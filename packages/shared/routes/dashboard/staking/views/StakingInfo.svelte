@@ -36,7 +36,7 @@
         $selectedAccountId,
         setAnimation()
 
-    let stakingEventState
+    let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = $assemblyStakingEventState
 
     enum AnimationFileNumber {
