@@ -13,7 +13,11 @@
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
-    import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        partiallyUnstakedAmount,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import {
         dashboardRoute,
@@ -41,7 +45,12 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
-    $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
+    $: $dashboardRoute,
+        $assemblyStakingEventState,
+        $shimmerStakingEventState,
+        $partiallyUnstakedAmount,
+        manageUnstakedAmountNotification()
+
     $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
@@ -76,7 +85,7 @@
     }
 
     function manageUnstakedAmountNotification() {
-        if (isStakingPossible($stakingEventState)) {
+        if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
             if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {

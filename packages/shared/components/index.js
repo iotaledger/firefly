@@ -61,7 +61,6 @@ export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
-export { default as StakingAssetTile } from './StakingAssetTile.svelte'
 export { default as Chip } from './Chip.svelte'
 export { default as PingingBadge } from './PingingBadge.svelte'
 
@@ -74,4 +73,4 @@ export * as ChartDefaults from './charts/defaults'
 
 // Staking
 export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
-export { default as StakingIndicator } from './StakingIndicator.svelte'
+export { default as StakingAssetTile } from './StakingAssetTile.svelte'

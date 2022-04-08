@@ -12,6 +12,8 @@
     export let position: { top?: string; right?: string; bottom?: string; left?: string } = {}
     export let size: Size = Size.Medium
     export let classes: string = ''
+    export let disableOnClickOutside = false
+
     export function close(): void {
         setShow(false)
     }
@@ -37,6 +39,11 @@
         }
     }
 
+    function handleOnClickOutside(): void {
+        if (disableOnClickOutside) return
+        close()
+    }
+
     let isBlockedByTimeout = false
     let show = false
 </script>
@@ -45,7 +52,7 @@
     <modal-content
         in:fade={{ duration: 100 }}
         use:clickOutside
-        on:clickOutside={close}
+        on:clickOutside={handleOnClickOutside}
         class="{size} bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10 {classes}"
         style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
     >

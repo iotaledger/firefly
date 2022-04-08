@@ -37,6 +37,7 @@ export interface Profile {
     lastUsedAccountId?: string
     accounts?: ProfileAccount[]
     stakingRewards?: AccountStakingRewards[]
+    hasFinishedSingleAccountGuide?: boolean
 }
 
 /**

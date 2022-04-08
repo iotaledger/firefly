@@ -1,25 +1,38 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { localize } from '@core/i18n'
+    import { LocaleArguments, localize } from '@core/i18n'
     import {
+        assemblyStakingEventState,
         assemblyStakingRemainingTime,
+        currentAssemblyStakingRewards,
+        currentAssemblyStakingRewardsBelowMinimum,
+        currentShimmerStakingRewards,
+        currentShimmerStakingRewardsBelowMinimum,
         selectedAccountParticipationOverview,
+        shimmerStakingEventState,
         stakedAccounts,
-        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountId } from '@lib/wallet'
+    import { Token } from '@lib/typings/assets'
 
     let animation: string
     let header: string
-    let subHeader: string
+    let body: string
 
+    let isAssemblyStaked = false
     $: isAssemblyStaked = $selectedAccountParticipationOverview?.assemblyStakedFunds > 0
+
+    let isShimmerStaked = false
     $: isShimmerStaked = $selectedAccountParticipationOverview?.shimmerStakedFunds > 0
-    $: $selectedAccountParticipationOverview, $stakingEventState, setHeaders()
-    $: isAssemblyStaked, isShimmerStaked, $stakingEventState, $selectedAccountId, setAnimation()
+
+    let stakingEventState = ParticipationEventState.Inactive
+    $: stakingEventState = $assemblyStakingEventState
+
+    $: $selectedAccountParticipationOverview, stakingEventState, setText()
+    $: isAssemblyStaked, isShimmerStaked, stakingEventState, $selectedAccountId, setAnimation()
 
     enum AnimationFileNumber {
         NoStaking = 0,
@@ -30,13 +43,13 @@
 
     function setAnimation(): void {
         const prefix = 'staking-info'
-        if (!$stakingEventState || !$selectedAccountParticipationOverview) {
+        if (!stakingEventState || !$selectedAccountParticipationOverview) {
             animation = `${prefix}-upcoming`
         }
 
-        if ($stakingEventState === ParticipationEventState.Inactive) {
+        if (stakingEventState === ParticipationEventState.Inactive) {
             animation = null
-        } else if ($stakingEventState === ParticipationEventState.Holding) {
+        } else if (stakingEventState === ParticipationEventState.Holding) {
             let fileNumber = AnimationFileNumber.NoStaking
             if (isAssemblyStaked && isShimmerStaked) {
                 fileNumber = AnimationFileNumber.AssemblyAndShimmer
@@ -46,27 +59,50 @@
                 fileNumber = AnimationFileNumber.Shimmer
             }
 
-            animation = `${prefix}-${$stakingEventState}-${fileNumber}`
+            animation = `${prefix}-${stakingEventState}-${fileNumber}`
         } else {
-            animation = `${prefix}-${$stakingEventState}`
+            animation = `${prefix}-${stakingEventState}`
         }
     }
 
-    function setHeaders(): void {
-        const localePath = `views.staking.info.${$stakingEventState}`
-        if ($stakingEventState === ParticipationEventState.Holding) {
+    function setText(): void {
+        const baseLocalePath = 'views.staking.info'
+
+        if (
+            stakingEventState === ParticipationEventState.Upcoming ||
+            stakingEventState === ParticipationEventState.Commencing
+        ) {
+            header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
+            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, { values: { token: Token.IOTA } })
+        } else if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = $stakedAccounts.length > 0
-            const localiseHoldingHeader = isStaking ? 'Holding' : 'NotHolding'
-            const localiseHoldingSubHeader = isStaking ? 'Holding' : 'NotHolding'
-            const duration = isStaking
+            const durationArguments: LocaleArguments = isStaking
                 ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
                 : {}
+            const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: Token.IOTA } }
 
-            header = localize(`${localePath}Header${localiseHoldingHeader}`, duration)
-            subHeader = localize(`${localePath}Subheader${localiseHoldingSubHeader}`)
+            header = localize(`${baseLocalePath}.headers.${stakingEventState}`, durationArguments)
+            body = localize(
+                `${baseLocalePath}.bodies.${stakingEventState}And${isStaking ? '' : 'Not'}Staking`,
+                tokenArguments
+            )
+        } else if (stakingEventState === ParticipationEventState.Ended) {
+            const didStake = $currentAssemblyStakingRewards > 0 || $currentShimmerStakingRewards > 0
+            const isBelowMinimum =
+                ($currentAssemblyStakingRewardsBelowMinimum > 0 && $currentAssemblyStakingRewards <= 0) ||
+                ($currentShimmerStakingRewardsBelowMinimum > 0 && currentShimmerStakingRewards <= 0)
+            const subLocalePath = isBelowMinimum ? 'NotReachMinRewards' : didStake ? 'Stake' : 'NotStake'
+            const tokenArguments: LocaleArguments = isBelowMinimum
+                ? { values: { token: Token.IOTA } }
+                : didStake
+                ? { values: { token: Token.IOTA } }
+                : {}
+
+            header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
+            body = localize(`${baseLocalePath}.bodies.${stakingEventState}AndDid${subLocalePath}`, tokenArguments)
         } else {
-            header = localize(`${localePath}Header`)
-            subHeader = localize(`${localePath}Subheader`)
+            header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
+            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`)
         }
     }
 
@@ -75,7 +111,7 @@
     }
 </script>
 
-<div class="p-8 flex flex-col justify-center items-center w-full h-full bg-blue-100 dark:bg-gray-800">
+<div class="p-8 flex flex-col justify-center items-center w-full h-full bg-white-100 dark:bg-gray-800">
     {#if animation}
         <div class="animation-wrapper relative w-full">
             <Animation
@@ -85,9 +121,9 @@
         </div>
     {/if}
     <div class="w-full mt-4 flex flex-col items-center text-center">
-        <Text type="p" bigger classes="mb-1">{subHeader}</Text>
-        <Text type="h2" classes="mb-2">{header}</Text>
-        <Link onClick={onClickLearnMore} classes="text-14">{localize('actions.learnAboutStaking')}</Link>
+        <Text type="h2" classes="mb-6">{header}</Text>
+        <Text type="p">{body}</Text>
+        <Link onClick={onClickLearnMore} classes="mt-6 text-14">{localize('actions.readMore')}</Link>
     </div>
 </div>
 

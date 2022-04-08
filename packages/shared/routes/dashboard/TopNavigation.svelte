@@ -7,6 +7,7 @@
     import { DashboardRoute, dashboardRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
 
     export let onCreateAccount = (..._: any[]): void => {}
+    export let classes: string
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
@@ -28,7 +29,7 @@
 </script>
 
 <div
-    class="bg-gray-200 dark:bg-gray-800 border-solid border-b border-gray-300 dark:border-gray-700 flex flex-row justify-center py-2 w-full"
+    class="bg-gray-200 dark:bg-gray-800 border-solid border-b border-gray-300 dark:border-gray-700 flex flex-row justify-center py-2 w-full {classes}"
 >
     {#if showBackButton}
         <button on:click={handleBackClick} class="absolute left-24 cursor-pointer">
