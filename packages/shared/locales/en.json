@@ -1226,7 +1226,8 @@
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
         },
-        "invalidDate": "INVALID DATE"
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
