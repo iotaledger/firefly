@@ -31,7 +31,7 @@
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
 
     const isAssembly = airdrop === StakingAirdrop.Assembly
-    let stakingEventState
+    let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
     function getFormattedStakingAirdropRewards(forCurrentRewards: boolean, stakingRewards: number): string {

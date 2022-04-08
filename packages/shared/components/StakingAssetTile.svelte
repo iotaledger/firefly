@@ -39,7 +39,7 @@
 
     const airdrop = asset?.name === Token.Assembly ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
     const isAssembly = airdrop === StakingAirdrop.Assembly
-    let stakingEventState
+    let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
     let isBelowMinimumRewards: boolean
