@@ -1,4 +1,5 @@
 import { initAutoUpdate } from './lib/appUpdater'
+import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
@@ -74,6 +75,11 @@ let lastError = {}
  */
 const handleError = (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
+        const errorMessage = error.message || error.reason || error
+        if (!shouldReportError(errorMessage)) {
+            return
+        }
+
         lastError = {
             diagnostics: getDiagnostics(),
             error,
@@ -85,7 +91,6 @@ const handleError = (errorType, error, isRenderProcessError) => {
          * the main process.
          */
         if (SEND_CRASH_REPORTS) {
-            const errorMessage = error.message || error.reason || error
             const sentryError = new Error(`${errorType} - ${errorMessage}`)
             if (error.stack) {
                 sentryError.stack = error.stack
