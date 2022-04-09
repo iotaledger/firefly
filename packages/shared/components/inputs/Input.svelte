@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Error, Text } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -128,7 +128,7 @@
             class="w-full text-12 leading-140 border border-solid
                 {disabled
                 ? 'text-gray-400 dark:text-gray-700'
-                : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
+                : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800
                 {isFocused
                 ? 'border-blue-500'
                 : error

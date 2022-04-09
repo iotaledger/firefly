@@ -7,7 +7,6 @@ import * as client from './client'
 import * as currency from './currency'
 import * as error from './error'
 import * as events from './events'
-import * as i18n from './i18n'
 import * as ledger from './ledger'
 import * as message from './message'
 import * as migration from './migration'
@@ -26,7 +25,6 @@ export {
     currency,
     error,
     events,
-    i18n,
     ledger,
     message,
     migration,

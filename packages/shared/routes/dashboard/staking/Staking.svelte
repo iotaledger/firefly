@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { accountToParticipate, participationAction, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        participationAction,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
@@ -16,18 +18,17 @@
     } from 'shared/lib/typings/events'
     import { transferState } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
-    import { getParticipationEvents, getParticipationOverview } from '../../../lib/participation/api'
-    import { StakingAirdrop, StakingHeader, StakingInfo, StakingSummary } from './views'
+    import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
+    import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
-    const handleNewStakingFeature = (): void => {
-        if (!$activeProfile?.hasVisitedStaking) {
-            showAppNotification({
-                type: 'info',
-                message: localize('views.staking.welcome'),
-            })
+    const handleNewStakingEvent = (): void => {
+        openPopup({
+            type: 'newStakingPeriodNotification',
+            hideClose: true,
+            preventClose: false,
+        })
 
-            updateProfile('hasVisitedStaking', true)
-        }
+        updateProfile('hasVisitedStaking', true)
     }
 
     // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
@@ -78,16 +79,7 @@
                 // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
                 // Re-open the staking manager pop up
-                openPopup(
-                    {
-                        type: 'stakingManager',
-                        props: {
-                            accountToAction: $accountToParticipate,
-                            participationAction: $participationAction,
-                        },
-                    },
-                    true
-                )
+                openPopup({ type: 'stakingManager' }, true)
                 break
 
             case TransferProgressEventType.SigningTransaction:
@@ -121,13 +113,17 @@
         closePopup(true)
     }
 
-    $: if ($popupState.type === 'stakingManager' && $stakingEventState === ParticipationEventState.Inactive) {
+    $: if (
+        $popupState.type === 'stakingManager' &&
+        $assemblyStakingEventState === ParticipationEventState.Inactive &&
+        $shimmerStakingEventState === ParticipationEventState.Inactive
+    ) {
         closePopup(true)
     }
 
     onMount(async () => {
         if (!$activeProfile?.hasVisitedStaking) {
-            handleNewStakingFeature()
+            handleNewStakingEvent()
         }
         await getParticipationEvents()
         await getParticipationOverview()
@@ -145,8 +141,7 @@
     })
 </script>
 
-<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
-    <StakingHeader />
+<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3 overflow-hidden">
             <DashboardPane classes="w-full flex-shrink-0">

@@ -1,6 +1,6 @@
 import { Bech32 } from 'shared/lib/bech32'
 import { Platform } from 'shared/lib/platform'
-import { localize } from 'shared/lib/i18n'
+import { localize } from '@core/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Event } from './typings/events'
@@ -286,7 +286,7 @@ export const toUtf8String = (bytes: Uint8Array | number[]): string | undefined =
 export const toHexString = (bytes: number[]): string | undefined => {
     if (!bytes || bytes.length <= 0) return undefined
 
-    return bytes.map((byte) => (byte & 0xff).toString(16).padStart(2, '0')).join('')
+    return bytes.map((byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join('')
 }
 
 /**
@@ -445,4 +445,26 @@ export const isValueInUnitRange = (value: number, unit: string): boolean => {
         default:
             return false
     }
+}
+
+/**
+ * Creates HTTP request headers for accepting JSON data.
+ */
+export function getJsonRequestOptions(): RequestInit {
+    return {
+        headers: {
+            Accept: 'application/json',
+        },
+    }
+}
+
+/**
+ * Creates an array of a given size at a given starting number.
+ */
+export function range(size: number, start: number = 0): number[] {
+    if (!size || size <= 0) return []
+
+    if (!start || typeof start !== 'number') start = 0
+
+    return Array.from(Array(size), (_, idx) => idx + start)
 }

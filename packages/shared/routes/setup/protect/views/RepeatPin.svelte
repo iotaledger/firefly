@@ -1,33 +1,38 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale: Locale
 
-    export let pinCandidate
+    export let pinCandidate = ''
     export let busy = false
 
-    let pinInput
+    let pinInput = ''
     let error = ''
+    let pinRef: Pin
 
     const dispatch = createEventDispatcher()
 
+    onMount(() => {
+        pinRef.resetAndFocus()
+    })
+
     $: pinInput, (error = '')
 
-    function onSubmit() {
+    function onSubmit(): void {
         error = ''
         if (validatePinFormat(pinInput)) {
             if (pinInput !== pinCandidate) {
                 error = locale('error.pincode.match')
             } else {
-                dispatch('next')
+                dispatch('next', { pin: pinCandidate })
             }
         }
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>
@@ -41,6 +46,7 @@
         <Text type="p" secondary classes="mb-8">{locale('views.confirmPin.body2')}</Text>
         <Pin
             bind:value={pinInput}
+            bind:this={pinRef}
             glimpse
             classes="w-full mx-auto block"
             on:submit={onSubmit}

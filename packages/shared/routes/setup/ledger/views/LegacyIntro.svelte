@@ -6,7 +6,7 @@
     import { api, isBackgroundSyncing } from 'shared/lib/wallet'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 

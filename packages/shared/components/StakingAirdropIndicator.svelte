@@ -1,23 +1,34 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
-    import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, ParticipationOverview, StakingAirdrop } from 'shared/lib/participation/types'
+    import { localize } from '@core/i18n'
+    import {
+        assemblyStakingEventState,
+        selectedAccountParticipationOverview,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
+    import {
+        AccountParticipationOverview,
+        ParticipationEventState,
+        StakingAirdrop,
+    } from 'shared/lib/participation/types'
 
     export let airdrop: StakingAirdrop
 
-    const isStakedForAirdrop = (overview: ParticipationOverview): boolean =>
-        overview.some((_overview) => {
-            if (airdrop === StakingAirdrop.Assembly) {
-                return _overview.assemblyStakedFunds > 0
-            }
-            return _overview.shimmerStakedFunds > 0
-        })
+    function isStakedForAirdrop(overview: AccountParticipationOverview): boolean {
+        if (airdrop === StakingAirdrop.Assembly) {
+            return overview?.assemblyStakedFunds > 0
+        }
+        return overview?.shimmerStakedFunds > 0
+    }
 
-    $: isStaked = isStakedForAirdrop($participationOverview)
+    const isAssembly = airdrop === StakingAirdrop.Assembly
+    let stakingEventState = ParticipationEventState.Inactive
+    $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
+    $: isStaked = isStakedForAirdrop($selectedAccountParticipationOverview)
     $: showIndicator =
-        $stakingEventState === ParticipationEventState.Commencing ||
-        $stakingEventState === ParticipationEventState.Holding
+        stakingEventState === ParticipationEventState.Commencing ||
+        stakingEventState === ParticipationEventState.Holding
 </script>
 
 {#if showIndicator}

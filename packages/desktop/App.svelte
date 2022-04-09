@@ -1,27 +1,18 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { stage, loggedIn } from 'shared/lib/app'
     import { appSettings, hasRenamedProfileFoldersToId, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { localeDirection, isLocaleLoaded, Locale, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameAllProfileFoldersToId } from 'shared/lib/profile'
-    import {
-        dashboardRoute,
-        initRouter,
-        openSettings,
-        routerNext,
-        routerPrevious,
-        walletRoute,
-    } from 'shared/lib/router'
-    import { Locale } from 'shared/lib/typings/i18n'
-    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
-    import { onDestroy, onMount } from 'svelte'
+    import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
         Backup,
@@ -44,9 +35,9 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
+    import { get } from 'svelte/store'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -67,18 +58,19 @@
     }
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
-    $: if (document.dir !== $dir) {
-        document.dir = $dir
+    $: if (document.dir !== $localeDirection) {
+        document.dir = $localeDirection
     }
 
     let splash = true
     let settings = false
 
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
+
     onMount(async () => {
         setTimeout(() => {
             splash = false
-            initRouter()
+            initRouters()
         }, 3000)
 
         // This is added to migrate all profile folder names from using the profile name to the id
@@ -98,16 +90,12 @@
             pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
-            if (get(dashboardRoute) !== Tabs.Wallet) {
-                dashboardRoute.set(Tabs.Wallet)
-            }
-            walletRoute.set(route)
+            $dashboardRouter.goTo(DashboardRoute.Wallet)
+            $accountRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
-                if (get(dashboardRoute) !== Tabs.Settings) {
-                    openSettings()
-                }
+                openSettings()
             } else {
                 settings = true
             }
@@ -165,64 +153,65 @@
                 hideClose={$popupState.hideClose}
                 fullScreen={$popupState.fullScreen}
                 transition={$popupState.transition}
+                overflow={$popupState.overflow}
                 locale={$_}
             />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Welcome locale={$_} />
         </Route>
         <Route route={AppRoute.Legal}>
-            <Legal on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Legal locale={$_} />
         </Route>
         <Route route={AppRoute.CrashReporting}>
-            <CrashReporting on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <CrashReporting locale={$_} />
         </Route>
         <Route route={AppRoute.Appearance}>
-            <Appearance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Appearance locale={$_} />
         </Route>
         <Route route={AppRoute.Profile}>
-            <Profile on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Profile locale={$_} />
         </Route>
         <Route route={AppRoute.Setup}>
-            <Setup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Setup locale={$_} />
         </Route>
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
-            <Create on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Create locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
-            <Ledger on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Ledger locale={$_} />
         </Route>
         <!--  -->
         <Route route={AppRoute.Secure}>
-            <Secure on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Secure locale={$_} />
         </Route>
         <Route route={AppRoute.Password}>
-            <Password on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Password locale={$_} />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
-            <Protect on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Protect locale={$_} />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Backup locale={$_} />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
-            <Import on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Import locale={$_} />
         </Route>
         <Route route={AppRoute.Balance}>
-            <Balance on:next={routerNext} on:previous={routerPrevious} locale={$_} />
+            <Balance locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+            <Migrate locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
-            <Congratulations on:next={routerNext} locale={$_} {goto} />
+            <Congratulations locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Dashboard}>
             <Dashboard locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Login}>
-            <Login on:next={routerNext} on:previous={routerPrevious} locale={$_} {goto} />
+            <Login locale={$_} {goto} />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />

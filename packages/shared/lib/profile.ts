@@ -9,6 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
+    selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
@@ -19,7 +20,7 @@ import { NetworkConfig, NetworkType } from './typings/network'
 import { ValuesOf } from './typings/utils'
 import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from './typings/i18n'
+import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -34,6 +35,7 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 
 export const newProfile = writable<Profile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
+export const hasEverOpenedProfileModal = writable<boolean>(false)
 
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
@@ -42,6 +44,12 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
+})
+
+selectedAccountId?.subscribe((accountId) => {
+    if (accountId) {
+        updateProfile('lastUsedAccountId', accountId)
+    }
 })
 
 export const isSoftwareProfile: Readable<boolean> = derived(

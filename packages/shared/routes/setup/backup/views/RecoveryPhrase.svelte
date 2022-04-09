@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { downloadRecoveryKit } from 'shared/lib/utils'
     import { createEventDispatcher } from 'svelte'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
     export let mnemonic
@@ -13,8 +13,8 @@
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(options) {
-        dispatch('next', { options })
+    function handleContinueClick(skipVerify: boolean) {
+        dispatch('next', { skip: skipVerify })
     }
     function handleBackClick() {
         dispatch('previous')
@@ -46,7 +46,7 @@
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick('verify') : handleMnemonicVisibilityClick}
+            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick(false) : handleMnemonicVisibilityClick}
         >
             {locale(
                 $mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue'

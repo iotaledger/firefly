@@ -1,11 +1,8 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Writable } from 'svelte/store'
     import { Icon, Text } from 'shared/components'
     import { truncateString, isBright } from 'shared/lib/helpers'
-    import { formatDate } from 'shared/lib/i18n'
+    import { formatDate, localize } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
@@ -14,14 +11,12 @@
         getIncomingFlag,
         getInternalFlag,
         getMilestoneMessageValue,
+        isParticipationPayload,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        isParticipationPayload,
+        wallet,
     } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
-
-    export let locale: Locale
 
     export let timestamp
     export let confirmed
@@ -29,11 +24,12 @@
     export let includeFullSender
     export let payload: Payload
     export let balance // migration tx
-
     export let onClick = (): void => {}
 
+    const { accounts } = $wallet
+
     let messageValue = ''
-    let date = locale('error.invalidDate')
+    let date = localize('error.invalidDate')
     $: {
         try {
             date = formatDate(new Date(timestamp), {
@@ -44,7 +40,7 @@
                 minute: 'numeric',
             })
         } catch {
-            date = locale('error.invalidDate')
+            date = localize('error.invalidDate')
         }
     }
 
@@ -65,8 +61,6 @@
             !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
         }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
     }
-
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
@@ -212,16 +206,12 @@
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {#if hasCachedMigrationTx || milestonePayload}
-                {locale('general.fundMigration')}
+                {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
                 {#if includeFullSender}
-                    {locale('general.stakedFor', { values: { account: accountAlias } })}
-                {:else}
-                    {locale('general.staked')}
-                {/if}
-            {:else}
-                {locale(direction, { values: { account: accountAlias } })}
-            {/if}
+                    {localize('general.stakedFor', { values: { account: accountAlias } })}
+                {:else}{localize('general.staked')}{/if}
+            {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">
             {date}
