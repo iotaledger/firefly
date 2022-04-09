@@ -675,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Accounts searched",
+            "addressesSearched": "Addresses searched per account",
+            "accountsFound": "Accounts found",
             "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Account not found, or balance incorrect? Press search again until the data above is correct.",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
