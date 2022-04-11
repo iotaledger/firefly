@@ -48,6 +48,8 @@
     let tooltipText: TooltipText
     let remainingTime: number
 
+    const FIAT_PLACEHOLDER = '---'
+
     $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
@@ -145,30 +147,26 @@
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
             <Icon classes="text-{assetIconColor}" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
-        <div class="flex flex-col flex-wrap space-y-1">
+        <div class="flex flex-col flex-wrap space-y-1 text-left">
             <Text classes="font-semibold">{asset?.name}</Text>
-            {#if asset?.fiatPrice}
-                <Text secondary smaller>{asset?.fiatPrice}</Text>
-            {/if}
+            <Text secondary smaller>{asset?.fiatPrice ? asset?.fiatPrice : FIAT_PLACEHOLDER}</Text>
         </div>
     </div>
-    <div class="flex flex-row space-x-2 items-center">
-        <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{asset?.balance}</Text>
-            {#if asset?.fiatBalance}
-                <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
+    <div class="flex flex-col flex-wrap space-y-1 text-right">
+        <div class="flex flex-row">
+            {#if showWarningState && tooltipText?.body.length > 0}
+                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                    <Icon
+                        icon="exclamation"
+                        width="17"
+                        height="17"
+                        classes="mt-0.5 mr-2 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
+                    />
+                </div>
             {/if}
+            <Text classes="font-semibold">{asset?.balance}</Text>
         </div>
-        {#if showWarningState && tooltipText?.body.length > 0}
-            <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                <Icon
-                    icon="exclamation"
-                    width="16"
-                    height="16"
-                    classes="fill-current text-yellow-600 group-hover:text-{assetIconColor}"
-                />
-            </div>
-        {/if}
+        <Text secondary smaller>{asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : FIAT_PLACEHOLDER}</Text>
     </div>
 </button>
 {#if showTooltip && tooltipText?.body.length > 0}
@@ -191,7 +189,7 @@
     }
     button {
         &.airdrop {
-            @apply opacity-50;
+            @apply opacity-100;
             @apply border;
             @apply border-solid;
             @apply border-gray-200;
@@ -209,22 +207,19 @@
                 }
             }
         }
-        &.partial-stake {
-            @apply border;
-            @apply border-solid;
-            @apply border-yellow-600;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border;
-                @apply border-solid;
-                @apply border-yellow-600;
-                &:hover {
-                    @apply border-transparent;
-                }
-            }
-        }
+        //&.partial-stake {
+        //    &:hover {
+        //        @apply border-transparent;
+        //    }
+        //    &.darkmode {
+        //        @apply border;
+        //        @apply border-solid;
+        //        @apply border-yellow-600;
+        //        &:hover {
+        //            @apply border-transparent;
+        //        }
+        //    }
+        //}
         &.staked:not(.partial-stake) {
             @apply border;
             @apply border-solid;
