@@ -159,19 +159,19 @@
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}
         </div>
-        {#if showWarningState && tooltipText?.body}
+        {#if showWarningState && tooltipText?.body.length > 0}
             <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                 <Icon
                     icon="exclamation"
                     width="16"
                     height="16"
-                    classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
+                    classes="fill-current text-yellow-600 group-hover:text-{assetIconColor}"
                 />
             </div>
         {/if}
     </div>
 </button>
-{#if showTooltip && tooltipText?.body}
+{#if showTooltip && tooltipText?.body.length > 0}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
@@ -190,6 +190,25 @@
         background-color: var(--asset-color);
     }
     button {
+        &.airdrop {
+            @apply opacity-50;
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-200;
+            &:not(:hover) {
+                @apply bg-transparent;
+            }
+            &:hover {
+                @apply bg-gray-200;
+            }
+            &.darkmode {
+                @apply bg-gray-900;
+                @apply border-transparent;
+                &:hover {
+                    @apply bg-gray-700;
+                }
+            }
+        }
         &.partial-stake {
             @apply border;
             @apply border-solid;
@@ -222,25 +241,6 @@
         }
         &:not(.disabled-hover):hover {
             background-color: var(--account-color);
-        }
-        &.airdrop {
-            @apply opacity-50;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
-            &:hover {
-                @apply bg-gray-200;
-            }
-            &.darkmode {
-                @apply bg-gray-900;
-                @apply border-transparent;
-                &:hover {
-                    @apply bg-gray-700;
-                }
-            }
         }
     }
 </style>
