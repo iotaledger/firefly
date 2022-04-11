@@ -4,7 +4,7 @@ import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
 import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
-import type {
+import {
     ParticipationAction,
     ParticipateResponsePayload,
     Participation,

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { openSettings, governanceRouter, settingsRouter } from '@core/router/'
     import { GovernanceRoute, SettingsRoute } from '@core/router/enums'
-    import type { ParticipationEvent } from 'shared/lib/participation/types'
+    import { ParticipationEvent } from 'shared/lib/participation/types'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
     import { getOfficialNetworkConfig, updateClientOptions } from 'shared/lib/network'
