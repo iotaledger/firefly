@@ -680,7 +680,7 @@
             "addressesSearched": "Addresses searched per wallet",
             "accountsFound": "Wallets found",
             "totalWalletBalance": "Total balance",
-            "searchAgainHint": "Wallet not found, or balance incorrect? Press search again until the data above is correct.",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until the data above is correct.",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
