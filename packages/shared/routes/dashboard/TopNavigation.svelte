@@ -29,7 +29,7 @@
 </script>
 
 <div
-    class="bg-gray-200 dark:bg-gray-800 border-solid border-b border-gray-300 dark:border-gray-700 flex flex-row justify-center py-2 w-full {classes}"
+    class="bg-gray-200 dark:bg-gray-1000 border-solid border-b border-gray-300 dark:border-gray-1000 flex flex-row justify-center py-2 w-full {classes}"
 >
     {#if showBackButton}
         <button on:click={handleBackClick} class="absolute left-24 cursor-pointer">
