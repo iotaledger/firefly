@@ -47,6 +47,21 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
     })
 }
 
+function updateParticipationHistoryFromPayload(
+    payload: ParticipateResponsePayload,
+    accountId: string,
+    action: ParticipationAction,
+    eventIds: string[]
+) {
+    const participationHistoryItems: ParticipationHistoryItem[] = payload.map((message, index) => ({
+        messageId: message.id,
+        accountId,
+        action,
+        eventId: eventIds[index],
+    }))
+    participationHistory.update((_participationHistory) => [..._participationHistory, ...participationHistoryItems])
+}
+
 export function participate(
     accountId: string,
     participations: Participation[],
@@ -64,18 +79,12 @@ export function participate(
         api.participate(accountId, participations, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
-                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message) => ({
-                    messageId: message.id,
-                    accountId,
-                    action,
-                    eventId: participations[0]?.eventId,
-                }))
-                participationHistory.update((_participationHistory) => [
-                    ..._participationHistory,
-                    ...participationHistoryItems,
-                ])
 
                 addNewPendingParticipation(response.payload, accountId, action)
+
+                const eventIds = participations.map((participation) => participation.eventId)
+                updateParticipationHistoryFromPayload(response.payload, accountId, action, eventIds)
+
                 resolve(response.payload.map((message) => message.id))
             },
             onError(error) {
@@ -108,16 +117,7 @@ export function stopParticipating(
 
                 addNewPendingParticipation(response.payload, accountId, action)
 
-                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message, i) => ({
-                    messageId: message.id,
-                    accountId,
-                    action,
-                    eventId: eventIds[i],
-                }))
-                participationHistory.update((_participationHistory) => [
-                    ..._participationHistory,
-                    ...participationHistoryItems,
-                ])
+                updateParticipationHistoryFromPayload(response.payload, accountId, action, eventIds)
 
                 resolve(response.payload.map((message) => message.id))
             },
