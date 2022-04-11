@@ -139,7 +139,6 @@
     style="--asset-color: {asset?.color}"
     class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
     class:staked={isActivelyStaking}
-    class:partial-stake={showWarningState}
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
@@ -207,19 +206,6 @@
                 }
             }
         }
-        //&.partial-stake {
-        //    &:hover {
-        //        @apply border-transparent;
-        //    }
-        //    &.darkmode {
-        //        @apply border;
-        //        @apply border-solid;
-        //        @apply border-yellow-600;
-        //        &:hover {
-        //            @apply border-transparent;
-        //        }
-        //    }
-        //}
         &.staked:not(.partial-stake) {
             @apply border;
             @apply border-solid;
