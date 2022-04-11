@@ -1,11 +1,8 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        assemblyStakingEventState,
-        selectedAccountParticipationOverview,
-        shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
+    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
     import {
         AccountParticipationOverview,
         ParticipationEventState,

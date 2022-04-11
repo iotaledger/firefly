@@ -2,11 +2,7 @@
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { LocaleArguments, localize } from '@core/i18n'
-    import {
-        assemblyStakingEventState,
-        assemblyStakingRemainingTime,
-        stakedAccounts,
-    } from 'shared/lib/participation/stores'
+    import { assemblyStakingEventState, assemblyStakingRemainingTime } from 'shared/lib/participation/stores'
     import {
         currentAssemblyStakingRewards,
         currentAssemblyStakingRewardsBelowMinimum,

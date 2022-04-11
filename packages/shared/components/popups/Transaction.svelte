@@ -8,11 +8,8 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { localize } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import {
-        assemblyStakingEventState,
-        selectedAccountParticipationOverview,
-        shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
+    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
 
     export let accountId: string
     export let internal = false
