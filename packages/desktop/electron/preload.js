@@ -63,8 +63,8 @@ try {
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
     contextBridge.exposeInMainWorld('__WALLET__STARDUST__', {
         createAccountManager(options) {
-            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.AccountManagerForMessages.prototype)
-            const manager = new WalletStardustApi.AccountManagerForMessages(options)
+            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.AccountManager.prototype)
+            const manager = new WalletStardustApi.AccountManager(options)
 
             protoProps.forEach((key) => {
                 if (key !== 'constructor') {
