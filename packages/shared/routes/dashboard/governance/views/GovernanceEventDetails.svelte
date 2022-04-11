@@ -100,7 +100,7 @@
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
 
     const updateCurrentVoteValue = (): void => {
-        const selectedAccountOverview = $participationOverview.find(
+        const selectedAccountOverview = $participationOverview?.find(
             ({ accountIndex }) => accountIndex === $selectedAccount.index
         )
         const participation = selectedAccountOverview?.participations?.find(
