@@ -401,7 +401,9 @@
     }
 
     $: showSingleAccountguide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: showSingleAccountguide && openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    $: if (!busy && $accountsLoaded && showSingleAccountguide) {
+        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    }
 </script>
 
 <Idle />
