@@ -3,7 +3,7 @@ import { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
 import { PARTICIPATION_POLL_DURATION } from './constants'
-import { canAccountReachMinimumAirdrop } from './staking'
+import { canAccountReachMinimumAirdrop } from './account'
 import {
     isPerformingParticipation,
     participationAction,

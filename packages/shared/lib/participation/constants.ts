@@ -82,3 +82,15 @@ export const LAST_SHIMMER_STAKING_PERIOD = 1
  * Set to 0 if no current event
  */
 export const CURRENT_SHIMMER_STAKING_PERIOD = 1
+
+/**
+ * The amount of microASMB per 1 Mi received every milestone,
+ * which is currently 4 microASMB (0.000004 ASMB).
+ */
+export const ASSEMBLY_REWARD_MULTIPLIER = 4.0
+
+/**
+ * The amount of SMR per 1 Mi received every milestone,
+ * which is currently 1 SMR.
+ */
+export const SHIMMER_REWARD_MULTIPLIER = 1.0

@@ -4,14 +4,7 @@
     import { isBright } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
-    import {
-        getFormattedMinimumRewards,
-        getTimeUntilMinimumAirdropReward,
-        getUnstakedFunds,
-        hasAccountReachedMinimumAirdrop,
-        isAccountStaked,
-        isStakingPossible,
-    } from 'shared/lib/participation/staking'
+    import { getFormattedMinimumRewards, isAccountStaked } from 'shared/lib/participation/staking'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
@@ -20,7 +13,14 @@
         shimmerStakingRemainingTime,
         stakedAccounts,
     } from 'shared/lib/participation/stores'
-    import { selectedAccountParticipationOverview, isPartiallyStaked } from 'shared/lib/participation/account'
+    import {
+        selectedAccountParticipationOverview,
+        isPartiallyStaked,
+        hasAccountReachedMinimumAirdrop,
+        getTimeUntilMinimumAirdropReward,
+        getUnstakedFunds,
+        isStakingPossible,
+    } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { openPopup } from 'shared/lib/popup'
@@ -178,8 +178,9 @@
                 type="p"
                 secondary
                 classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}"
-                >{paragraph}</Text
             >
+                {paragraph}
+            </Text>
         {/each}
     </Tooltip>
 {/if}
