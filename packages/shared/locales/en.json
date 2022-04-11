@@ -1128,6 +1128,7 @@
         "voted": "Voted",
         "participated": "Participated",
         "unstaked": "Unstaked",
+        "unvoted": "Unvoted",
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",

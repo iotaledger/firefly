@@ -13,7 +13,6 @@
         getMilestoneMessageValue,
         isParticipationPayload,
         receiverAddressesFromTransactionPayload,
-        selectedAccount,
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
@@ -67,6 +66,12 @@
                 break
             case ParticipationAction.Vote:
                 participationLocaleKey = 'voted'
+                break
+            case ParticipationAction.Unstake:
+                participationLocaleKey = 'unstaked'
+                break
+            case ParticipationAction.Unvote:
+                participationLocaleKey = 'unvoted'
                 break
             default:
                 participationLocaleKey = 'participated'

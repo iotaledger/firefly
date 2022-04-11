@@ -64,7 +64,12 @@ export function participate(
         api.participate(accountId, participations, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
-                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message) => ({ messageId: message.id, accountId, action, eventId: participations[0]?.eventId }))
+                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message) => ({
+                    messageId: message.id,
+                    accountId,
+                    action,
+                    eventId: participations[0]?.eventId,
+                }))
                 participationHistory.update((_participationHistory) => [
                     ..._participationHistory,
                     ...participationHistoryItems,
@@ -102,6 +107,17 @@ export function stopParticipating(
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, action)
+
+                const participationHistoryItems: ParticipationHistoryItem[] = response.payload.map((message, i) => ({
+                    messageId: message.id,
+                    accountId,
+                    action,
+                    eventId: eventIds[i],
+                }))
+                participationHistory.update((_participationHistory) => [
+                    ..._participationHistory,
+                    ...participationHistoryItems,
+                ])
 
                 resolve(response.payload.map((message) => message.id))
             },
