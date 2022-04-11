@@ -805,8 +805,8 @@
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
         "singleAccountGuide": {
-            "title": "The way you use firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere, by using the switcher in the title bar.",
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
