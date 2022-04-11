@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { isBright } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
     import {
@@ -50,7 +49,6 @@
 
     const FIAT_PLACEHOLDER = '---'
 
-    $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
     $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
@@ -137,14 +135,13 @@
 
 <button
     style="--asset-color: {asset?.color}"
-    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
-    class:staked={isActivelyStaking}
+    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl airdrop"
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-            <Icon classes="text-{assetIconColor}" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
+            <Icon classes="text-gray-900" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-left">
             <Text classes="font-semibold">{asset?.name}</Text>
@@ -159,7 +156,7 @@
                         icon="exclamation"
                         width="17"
                         height="17"
-                        classes="mt-0.5 mr-2 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
+                        classes="mt-0.5 mr-2 fill-current text-yellow-600 group-hover:text-gray-900"
                     />
                 </div>
             {/if}
@@ -185,43 +182,5 @@
 <style type="text/scss">
     .icon {
         background-color: var(--asset-color);
-    }
-    button {
-        &.airdrop {
-            @apply opacity-100;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
-            &:hover {
-                @apply bg-gray-200;
-            }
-            &.darkmode {
-                @apply bg-gray-900;
-                @apply border-transparent;
-                &:hover {
-                    @apply bg-gray-700;
-                }
-            }
-        }
-        &.staked:not(.partial-stake) {
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border-gray-900;
-            }
-        }
-        &.disabled-hover {
-            background-color: var(--account-color);
-        }
-        &:not(.disabled-hover):hover {
-            background-color: var(--account-color);
-        }
     }
 </style>
