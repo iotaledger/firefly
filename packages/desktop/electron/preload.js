@@ -38,7 +38,7 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const WalletApi = require('firefly-actor-system-nodejs-bindings')
     // Using import syntax will allow us to remove using the .default
-    const WalletStardustApi = require('@iota/wallet').default
+    const WalletStardustApi = require('@iota/wallet')
 
     if (process.env.NODE_ENV == 'development') {
         const loggerOptions = (name = 'wallet.log') => ({
