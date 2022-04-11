@@ -490,7 +490,7 @@
                     }
                 },
                 "backup": {
-                    "title": "Save wallet backup",
+                    "title": "Backup your wallets",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
