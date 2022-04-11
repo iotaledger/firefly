@@ -1,5 +1,6 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const cloneDeep = require('lodash.clonedeep')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -37,20 +38,44 @@ window.addEventListener('unhandledrejection', (event) => {
 
 try {
     const WalletApi = require('firefly-actor-system-nodejs-bindings')
+    // Using import syntax will allow us to remove using the .default
+    const WalletStardustApi = require('@iota/wallet').default
 
     if (process.env.NODE_ENV == 'development') {
-        WalletApi.initLogger({
+        const loggerOptions = (name = 'wallet.log') => ({
             color_enabled: true,
             outputs: [
                 {
-                    name: 'wallet.log',
+                    name,
                     level_filter: 'debug',
                 },
             ],
         })
+
+        WalletApi.initLogger(loggerOptions())
+        WalletStardustApi.initLogger(loggerOptions('wallet-stardust.log'))
     }
 
     contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
+
+    // contextBridge doesn't allow passing custom properties & methods on prototype chain
+    // https://www.electronjs.org/docs/latest/api/context-bridge
+    // This workaround exposes the classes through factory methods
+    // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
+    contextBridge.exposeInMainWorld('__WALLET__STARDUST__', {
+        createAccountManager(options) {
+            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.AccountManagerForMessages.prototype)
+            const manager = new WalletStardustApi.AccountManagerForMessages(options)
+
+            protoProps.forEach((key) => {
+                if (key !== 'constructor') {
+                    manager[key] = manager[key].bind(manager)
+                }
+            })
+
+            return manager
+        },
+    })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {
     ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
