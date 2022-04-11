@@ -135,7 +135,7 @@
 
 <button
     style="--asset-color: {asset?.color}"
-    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl airdrop"
+    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl airdrop"
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
