@@ -806,8 +806,8 @@
         },
         "singleAccountGuide": {
             "title": "The way you use firefly has changed",
-            "body": "The content of each tab is now in the context of a single account. You can change the selected account from anywhere, by using the switcher in the title bar.",
-            "hint": "Can't find an account? Use the balance finder in the settings to discover previously used accounts."
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere, by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
