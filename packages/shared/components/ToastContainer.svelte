@@ -28,7 +28,7 @@
     .mobile-container {
         z-index: 100;
         position: fixed;
-        top: calc(env(safe-area-inset-top) * 1.2);
+        top: calc(env(safe-area-inset-top) + 20px);
         left: 20px;
         right: 20px;
     }
