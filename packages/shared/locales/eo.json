@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Etoso",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Lingvo",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Ĝisdata",
-                    "outOfDate": "Malmodernan"
+                    "outOfDate": "Malmodernan",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Aparataroj",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Vi funkciigas la plej novan kaj plej sekuran version de Firefly.",
             "updateAvailable": "Firefly ĝisdatigo havebla",
             "updateDetails": "Versio {version} - {date}",
-            "noAutoUpdate": "Aŭtomata ĝisdatigo estas malebligita en ĉi tiu Vindozo-versio, bonvolu iri al https://firefly.iota.org por elŝuti la ĝisdatigon."
+            "noAutoUpdate": "Aŭtomata ĝisdatigo estas malebligita en ĉi tiu Vindozo-versio, bonvolu iri al https://firefly.iota.org por elŝuti la ĝisdatigon.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Lasta sekurkopio: {date}",

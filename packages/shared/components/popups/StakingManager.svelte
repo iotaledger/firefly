@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
+    import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
@@ -21,9 +21,10 @@
         participationOverview,
         pendingParticipations,
         stakedAccounts,
-        stakingEventState,
+        assemblyStakingEventState,
+        shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
-    import { isPartiallyStaked, stakedAmount } from 'shared/lib/participation/account'
+    import { isPartiallyStaked } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
@@ -48,7 +49,7 @@
     let { accounts } = $wallet
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
-    $: canStake = canParticipate($stakingEventState)
+    $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
     $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview()
@@ -245,7 +246,7 @@
 
 <Text type="h5">{localize('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mt-6 mb-4">{localize('popups.stakingManager.description')}</Text>
-<div class="staking flex flex-col scrollable-y">
+<div class="staking flex flex-col scrollable-y mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
             class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid
@@ -370,13 +371,13 @@
     {/if}
 </div>
 
-<div class="mt-2 text-center">
-    <Text type="p" secondary classes="inline">
-        {localize('popups.stakingManager.totalFundsStaked')}:
-
-        <Text type="p" secondary bold classes="inline">{formatUnitBestMatch($stakedAmount)}</Text>
-    </Text>
-</div>
+<TextHint
+    classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
+    icon="info"
+    iconClasses="fill-current text-blue-500 dark:text-blue-500"
+    hint={localize('popups.stakingManager.singleAccountHint')}
+    hintClasses="text-gray-500 dark:text-gray-500"
+/>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

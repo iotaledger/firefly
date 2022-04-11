@@ -1,5 +1,7 @@
-import { derived, Readable } from 'svelte/store'
-import { selectedAccount } from '../wallet'
+import { isAirdropAvailable } from '@lib/participation/staking'
+import { activeProfile } from '@lib/profile'
+import { derived, get, Readable } from 'svelte/store'
+import { selectedAccount, selectedAccountId } from '../wallet'
 import { participationOverview } from './stores'
 import { AccountParticipationOverview, StakingAirdrop } from './types'
 
@@ -49,7 +51,6 @@ export const unstakedAmount: Readable<number> = derived(
     }
 )
 
-// TODO: replace its old use partiallyStakedAccounts
 export const isPartiallyStaked: Readable<boolean> = derived(
     selectedAccountParticipationOverview,
     ($selectedAccountParticipationOverview) =>
@@ -81,32 +82,8 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
     }
 )
 
-/**
- * The total accumulated Assembly rewards for all
- * accounts that have been staked at some point (even
- * if they are currently unstaked).
- *
- * Be cautious that this value is in microASMB, so it is likely to be larger.
- */
-export const assemblyStakingRewards: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        sumStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
-)
-
-/**
- * The total accumulated Shimmer rewards for all
- * accounts that have been staked at some point (even
- * if they are currently unstaked).
- */
-export const shimmerStakingRewards: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        sumStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
-)
-
-const sumStakingRewards = (airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number => {
-    if (!accountOverview) {
+function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number {
+    if (!airdrop || !isAirdropAvailable(airdrop) || !accountOverview) {
         return 0
     }
 
@@ -122,3 +99,79 @@ const sumStakingRewards = (airdrop: StakingAirdrop, accountOverview: AccountPart
         ? accountOverview[rewardsBelowMinimumKey]
         : accountOverview[rewardsKey] + accountOverview[rewardsBelowMinimumKey]
 }
+
+function getCachedStakingRewards(airdrop: StakingAirdrop, accountId: string): number {
+    if (!airdrop || !accountId) return 0
+
+    const stakingRewards = get(activeProfile)?.stakingRewards
+    if (!stakingRewards) return 0
+
+    const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
+    if (!accountStakingRewards) return 0
+
+    return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
+}
+
+/**
+ * The current accumulated Assembly rewards for the selected
+ * account that have been staked at some point (even
+ * if they are currently unstaked) in the current staking period.
+ *
+ * Be cautious that this value is in microASMB, so it is likely to be larger.
+ */
+export const currentAssemblyStakingRewards: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
+)
+
+/**
+ * The current accumulated Assembly rewards for the selected account
+ * that are below the minimum rewards requirement.
+ */
+export const currentAssemblyStakingRewardsBelowMinimum: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview) -
+        ($selectedAccountParticipationOverview?.assemblyRewards ?? 0)
+)
+
+/**
+ * The total accumulated Assembly rewards for the selected account.
+ */
+export const totalAssemblyStakingRewards: Readable<number> = derived(
+    [currentAssemblyStakingRewards, selectedAccountId],
+    ([$currentAssemblyStakingRewards, $selectedAccountId]) =>
+        $currentAssemblyStakingRewards + getCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
+)
+
+/**
+ * The current accumulated Shimmer rewards for the selected
+ * account that have been staked at some point (even
+ * if they are currently unstaked) in the current staking period.
+ */
+export const currentShimmerStakingRewards: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
+)
+
+/**
+ * The current accumulated Shimmer rewards for the selected account
+ * that are below the minimum rewards requirement.
+ */
+export const currentShimmerStakingRewardsBelowMinimum: Readable<number> = derived(
+    [selectedAccountParticipationOverview],
+    ([$selectedAccountParticipationOverview]) =>
+        getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview) -
+        ($selectedAccountParticipationOverview?.shimmerRewards ?? 0)
+)
+
+/**
+ * The total accumulated Shimmer rewards for the selected account.
+ */
+export const totalShimmerStakingRewards: Readable<number> = derived(
+    [currentShimmerStakingRewards, selectedAccountId],
+    ([$currentShimmerStakingRewards, $selectedAccountId]) =>
+        $currentShimmerStakingRewards + getCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
+)

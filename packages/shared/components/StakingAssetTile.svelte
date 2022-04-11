@@ -13,11 +13,12 @@
         isStakingPossible,
     } from 'shared/lib/participation/staking'
     import {
+        assemblyStakingEventState,
         assemblyStakingRemainingTime,
         participationOverview,
+        shimmerStakingEventState,
         shimmerStakingRemainingTime,
         stakedAccounts,
-        stakingEventState,
     } from 'shared/lib/participation/stores'
     import { selectedAccountParticipationOverview, isPartiallyStaked } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
@@ -36,6 +37,9 @@
     }
 
     const airdrop = asset?.name === Token.Assembly ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
+    const isAssembly = airdrop === StakingAirdrop.Assembly
+    let stakingEventState = ParticipationEventState.Inactive
+    $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
     let isBelowMinimumRewards: boolean
     let showTooltip = false
@@ -45,13 +49,13 @@
 
     $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible($stakingEventState)
-    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible($stakingEventState)
-    $: hasStakingEnded = $stakingEventState === ParticipationEventState.Ended
+    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
+    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
+    $: hasStakingEnded = stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible($stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0
@@ -59,7 +63,7 @@
     }
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
-        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible($stakingEventState)) ||
+        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
@@ -96,7 +100,7 @@
                         }),
                     ],
                 }
-            } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible($stakingEventState)) {
+            } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible(stakingEventState)) {
                 const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {
@@ -227,13 +231,13 @@
                 @apply bg-transparent;
             }
             &:hover {
-                @apply bg-gray-500;
+                @apply bg-gray-200;
             }
             &.darkmode {
                 @apply bg-gray-900;
                 @apply border-transparent;
                 &:hover {
-                    @apply bg-gray-600;
+                    @apply bg-gray-700;
                 }
             }
         }

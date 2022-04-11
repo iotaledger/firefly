@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Megjelenés",
                 "description": "",
-                "advice": "Az új megjelenéshez újra kell indítani a Firefly-t"
+                "advice": "Ha megváltoztatja a megjelenést, lehetséges, hogy újra kell indítania a Firefly-t"
             },
             "language": {
                 "title": "Nyelv",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Naprakész",
-                    "outOfDate": "Elavult"
+                    "outOfDate": "Elavult",
+                    "updatesDisabled": "Szoftverfrissítés letiltva"
                 },
                 "hardwareDevice": {
                     "title": "Hardvereszköz",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Ön a Firefly legújabb és legbiztonságosabb verzióját használja.",
             "updateAvailable": "Firefly frissítés elérhető",
             "updateDetails": "Verzió {version} - {date}",
-            "noAutoUpdate": "Az automatikus frissítés nincs engedélyezve a tárca ezen Windows verziójában. Kérjük látogasson el a https://firefly.iota.org címre és töltse le a frissítést."
+            "noAutoUpdate": "Az automatikus frissítés nincs engedélyezve a tárca ezen Windows verziójában. Kérjük látogasson el a https://firefly.iota.org címre és töltse le a frissítést.",
+            "preReleaseDescription": "A Firefly egy kiadás előtti verzióját használja. A szoftverfrissítés le van tiltva."
         },
         "backup": {
             "title": "Utolsó biztonsági mentés: {date}",

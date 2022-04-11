@@ -6,6 +6,8 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { Locale } from '@core/i18n'
+    import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
+    import { onDestroy } from 'svelte'
 
     export let locale: Locale
 
@@ -18,6 +20,7 @@
     let password = ''
     let error = ''
     let isBusy = false
+    let hasUsedBalanceFinder = false
 
     async function handleFindBalances() {
         try {
@@ -38,6 +41,7 @@
 
             currentGapLimit += gapLimitIncrement
             accountDiscoveryThreshold++
+            hasUsedBalanceFinder = true
         } catch (err) {
             error = locale(err.error)
 
@@ -57,6 +61,13 @@
     function handleCancelClick() {
         closePopup()
     }
+
+    onDestroy(() => {
+        if (hasUsedBalanceFinder) {
+            cacheAllStakingPeriods(StakingAirdrop.Assembly)
+            cacheAllStakingPeriods(StakingAirdrop.Shimmer)
+        }
+    })
 </script>
 
 <Text type="h4" classes="mb-6">{locale('popups.balanceFinder.title')}</Text>

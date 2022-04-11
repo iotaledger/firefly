@@ -318,7 +318,7 @@
             "theme": {
                 "title": "主题",
                 "description": "",
-                "advice": "你需要重新启动Firefly应用程序以使系统主题的变更生效。"
+                "advice": "如果你改变了你的系统主题，你可能需要重新启动 Firefly 才能看到效果"
             },
             "language": {
                 "title": "语言",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "最新版本",
-                    "outOfDate": "已过期"
+                    "outOfDate": "已过期",
+                    "updatesDisabled": "更新已禁用"
                 },
                 "hardwareDevice": {
                     "title": "硬件设备",
@@ -566,7 +567,8 @@
             "upToDateDescription": "你正在运行的Firefly是最新的，最安全的版本。",
             "updateAvailable": "Firefly有可用的更新",
             "updateDetails": "版本{version} - {date}",
-            "noAutoUpdate": "此Windows版本禁用自动更新，请访问 https://firefly.iota.org 下载更新。"
+            "noAutoUpdate": "此Windows版本禁用自动更新，请访问 https://firefly.iota.org 下载更新。",
+            "preReleaseDescription": "您正在运行一个 Firefery 的预发布版本。更新将被禁用。"
         },
         "backup": {
             "title": "上次备份: {date}",

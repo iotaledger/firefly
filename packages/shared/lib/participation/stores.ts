@@ -2,9 +2,10 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { NodePlugin } from '../typings/node'
-import { wallet, selectedAccount } from '../wallet'
+import { wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, STAKING_EVENT_IDS } from './constants'
+
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     ParticipateResponsePayload,
     ParticipationAction,
@@ -12,7 +13,10 @@ import {
     ParticipationEventState,
     ParticipationOverview,
     PendingParticipation,
+    StakingAirdrop,
 } from './types'
+import { NetworkStatus } from '@lib/typings/network'
+import { getStakingEventFromAirdrop } from '@lib/participation/staking'
 
 /**
  * The store for keeping track of pending participations.
@@ -45,7 +49,6 @@ export const isPerformingParticipation = writable<boolean>(false)
  * This is updated regularly by the polling
  * in `wallet.rs`.
  */
-// TODO: remove this
 export const stakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
@@ -64,40 +67,46 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
     }
 )
 
-export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
-)
-
 /**
  * The available participation events (staking AND voting).
  */
 export const participationEvents = writable<ParticipationEvent[]>([])
 
-/**
- * The status of the staking event, calculated from the milestone information.
- */
-export const stakingEventState: Readable<ParticipationEventState> = derived(
-    [networkStatus, participationEvents],
-    ([$networkStatus, $participationEvents]) => {
-        const stakingEvent = $participationEvents.filter((pe) => STAKING_EVENT_IDS.includes(pe.eventId))[0]
-        if (!stakingEvent || !$networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
-            return ParticipationEventState.Inactive
-        }
+function deriveParticipationEventState(
+    stakingEvent: ParticipationEvent,
+    networkStatus: NetworkStatus
+): ParticipationEventState {
+    if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+        return ParticipationEventState.Inactive
+    }
 
-        const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
-        const currentMilestone = $networkStatus?.currentMilestone
+    const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
+    const currentMilestone = networkStatus?.currentMilestone
 
-        if (currentMilestone < milestoneIndexCommence) {
-            return ParticipationEventState.Upcoming
-        } else if (currentMilestone < milestoneIndexStart) {
-            return ParticipationEventState.Commencing
-        } else if (currentMilestone < milestoneIndexEnd) {
-            return ParticipationEventState.Holding
-        } else {
-            return ParticipationEventState.Ended
-        }
+    if (currentMilestone < milestoneIndexCommence) {
+        return ParticipationEventState.Upcoming
+    } else if (currentMilestone < milestoneIndexStart) {
+        return ParticipationEventState.Commencing
+    } else if (currentMilestone < milestoneIndexEnd) {
+        return ParticipationEventState.Holding
+    } else {
+        return ParticipationEventState.Ended
+    }
+}
+
+export const assemblyStakingEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus],
+    ([$networkStatus]) => {
+        const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Assembly)
+        return deriveParticipationEventState(stakingEvent, $networkStatus)
+    }
+)
+
+export const shimmerStakingEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus],
+    ([$networkStatus]) => {
+        const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Shimmer)
+        return deriveParticipationEventState(stakingEvent, $networkStatus)
     }
 )
 

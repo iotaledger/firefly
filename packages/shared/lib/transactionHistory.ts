@@ -35,16 +35,23 @@ export const generateTransactionHistoryCsvFromAccount = (
             const formattedValueString = incoming
                 ? formatUnitBestMatch(value, true)
                 : '-' + formatUnitBestMatch(value, true)
-            const date = formatDate(new Date(timestamp), {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-            })
-            const time = formatDate(new Date(timestamp), {
-                hour: 'numeric',
-                minute: 'numeric',
-                timeZoneName: 'short',
-            })
+            let date
+            let time
+            try {
+                date = formatDate(new Date(timestamp), {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                })
+                time = formatDate(new Date(timestamp), {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    timeZoneName: 'short',
+                })
+            } catch {
+                date = localize('error.invalidDate')
+                time = localize('error.invalidTime')
+            }
 
             const csvLineParts: string[] = []
             headerParams.id && csvLineParts.push(String(id))

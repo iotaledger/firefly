@@ -85,15 +85,12 @@ const handleError = (errorType, error, isRenderProcessError) => {
          * the main process.
          */
         if (SEND_CRASH_REPORTS) {
-            captureException(
-                new Error(
-                    JSON.stringify({
-                        type: errorType,
-                        message: error.message || error.reason || error,
-                        stack: error.stack || undefined,
-                    })
-                )
-            )
+            const errorMessage = error.message || error.reason || error
+            const sentryError = new Error(`${errorType} - ${errorMessage}`)
+            if (error.stack) {
+                sentryError.stack = error.stack
+            }
+            captureException(sentryError)
         }
 
         openErrorWindow()
@@ -195,6 +192,7 @@ function isUrlAllowed(targetUrl) {
 
         // GitHub
         'github.com/iotaledger/firefly/issues',
+        'github.com/iotaledger/firefly/issues/new/choose',
 
         // Other
         'support.ledger.com',
@@ -246,7 +244,7 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 720,
-        titleBarStyle: 'hidden',
+        titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
         title: app.name,
         frame: process.platform === 'linux',
         icon:
@@ -305,6 +303,17 @@ function createWindow() {
 
     windows.main.webContents.on('did-finish-load', () => {
         windows.main.webContents.send('version-details', versionDetails)
+    })
+
+    /**
+     * CVE-2022-21718 mitigation
+     * Remove when updating to Electron 13.6.6 or later
+     * https://github.com/advisories/GHSA-3p22-ghq8-v749
+     */
+    windows.main.webContents.on('select-bluetooth-device', (event, _devices, cb) => {
+        event.preventDefault()
+        // Cancel the request
+        cb('')
     })
 
     /**
@@ -571,7 +580,7 @@ export const openAboutWindow = () => {
         width: 380,
         height: 230,
         useContentSize: true,
-        titleBarStyle: 'hidden',
+        titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
         show: false,
         fullscreenable: false,
         resizable: false,
@@ -618,7 +627,7 @@ export const openErrorWindow = () => {
 
     windows.error = new BrowserWindow({
         useContentSize: true,
-        titleBarStyle: 'hidden',
+        titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
         show: false,
         fullscreenable: false,
         resizable: true,

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Språk",
@@ -465,7 +465,8 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Siste versjon er installert",
-                    "outOfDate": "Utløpt"
+                    "outOfDate": "Utløpt",
+                    "updatesDisabled": "Updates disabled"
                 },
                 "hardwareDevice": {
                     "title": "Maskinvareenhet",
@@ -566,7 +567,8 @@
             "upToDateDescription": "Du bruker den siste og sikreste versjonen av Firefly.",
             "updateAvailable": "Firefly-oppdatering tilgjengelig",
             "updateDetails": "Versjon {version} - {date}",
-            "noAutoUpdate": "Auto-oppdatering er deaktivert i denne Windows-versjonen, gå til https://firefly.iota.org for å laste ned oppdateringen."
+            "noAutoUpdate": "Auto-oppdatering er deaktivert i denne Windows-versjonen, gå til https://firefly.iota.org for å laste ned oppdateringen.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Siste sikkerhetskopi: {date}",

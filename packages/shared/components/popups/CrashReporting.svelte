@@ -11,7 +11,7 @@
     const closePopup = () => {
         isAwareOfCrashReporting.set(true)
 
-        closePopupInternal()
+        closePopupInternal(true)
     }
 
     const handleConfirmClick = () => {

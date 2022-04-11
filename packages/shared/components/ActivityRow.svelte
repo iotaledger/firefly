@@ -29,6 +29,20 @@
     const { accounts } = $wallet
 
     let messageValue = ''
+    let date = localize('error.invalidDate')
+    $: {
+        try {
+            date = formatDate(new Date(timestamp), {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+            })
+        } catch {
+            date = localize('error.invalidDate')
+        }
+    }
 
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
@@ -200,13 +214,7 @@
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">
-            {formatDate(new Date(timestamp), {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-            })}
+            {date}
         </p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">

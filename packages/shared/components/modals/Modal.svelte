@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { clickOutside } from 'shared/lib/actions'
     import { fade } from 'svelte/transition'
+    import { createEventDispatcher } from 'svelte'
 
     enum Size {
         Small = 'small',
@@ -8,19 +9,50 @@
         Large = 'large',
     }
 
-    export let isActive = false
     export let position: { top?: string; right?: string; bottom?: string; left?: string } = {}
     export let size: Size = Size.Medium
     export let classes: string = ''
+    export let disableOnClickOutside = false
+
+    export function close(): void {
+        setShow(false)
+    }
+    export function open(): void {
+        setShow(true)
+    }
+    export function toggle(): void {
+        show ? close() : open()
+    }
+    export function isOpened(): boolean {
+        return show
+    }
 
     const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+    const dispatch = createEventDispatcher()
+
+    function setShow(bool: boolean) {
+        if (!isBlockedByTimeout) {
+            show = bool
+            isBlockedByTimeout = true
+            setTimeout(() => (isBlockedByTimeout = false), 100)
+            show ? dispatch('open') : dispatch('close')
+        }
+    }
+
+    function handleOnClickOutside(): void {
+        if (disableOnClickOutside) return
+        close()
+    }
+
+    let isBlockedByTimeout = false
+    let show = false
 </script>
 
-{#if isActive}
+{#if show}
     <modal-content
         in:fade={{ duration: 100 }}
         use:clickOutside
-        on:clickOutside={() => (isActive = false)}
+        on:clickOutside={handleOnClickOutside}
         class="{size} bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10 {classes}"
         style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
     >

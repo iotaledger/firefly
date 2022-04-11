@@ -65,6 +65,7 @@
             hideClose={$popupState.hideClose}
             fullScreen={$popupState.fullScreen}
             transition={$popupState.transition}
+            overflow={$popupState.overflow}
             locale={$_}
         />
     {/if}
@@ -77,9 +78,6 @@
     </Route>
     <Route route={AppRoute.CrashReporting}>
         <CrashReporting locale={$_} />
-    </Route>
-    <Route route={AppRoute.Settings}>
-        <Settings locale={$_} />
     </Route>
     <Route route={AppRoute.Appearance}>
         <Appearance locale={$_} />
