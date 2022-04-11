@@ -37,7 +37,7 @@
     })
 
     $: accountVotes = calculateVotesByTrackedParticipation(
-        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations[
+        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations?.[
             event?.eventId
         ]
     )
