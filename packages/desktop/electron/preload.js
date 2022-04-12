@@ -3,6 +3,8 @@ const ElectronApi = require('./electronApi')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
+let manager
+
 if (SEND_CRASH_REPORTS) {
     captureException = require('../sentry')(true).captureException
 }
@@ -64,7 +66,7 @@ try {
     contextBridge.exposeInMainWorld('__WALLET__STARDUST__', {
         createAccountManager(options) {
             const protoProps = Object.getOwnPropertyNames(WalletStardustApi.AccountManager.prototype)
-            const manager = new WalletStardustApi.AccountManager(options)
+            manager = new WalletStardustApi.AccountManager(options)
 
             protoProps.forEach((key) => {
                 if (key !== 'constructor') {
@@ -73,6 +75,18 @@ try {
             })
 
             return manager
+        },
+        async getAccount(index) {
+            const account = await manager.getAccount(index)
+            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.Account.prototype)
+
+            protoProps.forEach((key) => {
+                if (key !== 'constructor') {
+                    account[key] = account[key].bind(account)
+                }
+            })
+
+            return account
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
