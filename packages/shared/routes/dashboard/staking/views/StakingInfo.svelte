@@ -75,10 +75,10 @@
             body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, { values: { token: Token.IOTA } })
         } else if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = isAssemblyStaked || isShimmerStaked
-            const durationArguments: LocaleArguments = isStaking
-                ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
-                : {}
             const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: Token.IOTA } }
+            const durationArguments: LocaleArguments = {
+                values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) },
+            }
 
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`, durationArguments)
             body = localize(
