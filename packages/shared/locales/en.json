@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking round 2 from March 22nd",
-            "body": "Ready for the next round of staking? Participate in the 30 days staking round 2 from March 22nd. Stake your IOTAs and earn ASMB rewards!",
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {

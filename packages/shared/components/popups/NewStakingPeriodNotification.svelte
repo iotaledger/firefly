@@ -1,12 +1,21 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
+    import { formatDate, LocaleArguments, localize } from '@core/i18n'
     import { getAccountParticipationAbility } from '@lib/participation/participation'
     import { assemblyStakingEventState, shimmerStakingEventState } from '@lib/participation/stores'
     import { AccountParticipationAbility } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
     import { selectedAccount } from '@lib/wallet'
     import { Button, Illustration, Text, TextHint } from 'shared/components'
-    import { isStakingPossible } from '@lib/participation'
+    import { ASSEMBLY_EVENT_START_DATE, isStakingPossible, LAST_ASSEMBLY_STAKING_PERIOD } from '@lib/participation'
+
+    function getLocaleArguments(): LocaleArguments {
+        return {
+            values: {
+                periodNumber: LAST_ASSEMBLY_STAKING_PERIOD + 1,
+                date: formatDate(ASSEMBLY_EVENT_START_DATE, { format: 'long' }),
+            },
+        }
+    }
 
     function handleOk(): void {
         const isStakingPossibleForAssembly = isStakingPossible($assemblyStakingEventState)
@@ -25,8 +34,10 @@
 </script>
 
 <Illustration illustration="staking-notification" classes="mb-6 mt-9" />
-<Text type="h3" classes="mb-4">{localize('popups.newStakingPeriodNotification.title')}</Text>
-<Text type="p" secondary classes="mb-6">{localize('popups.newStakingPeriodNotification.body')}</Text>
+<Text type="h3" classes="mb-4">{localize('popups.newStakingPeriodNotification.title', getLocaleArguments())}</Text>
+<Text type="p" secondary classes="mb-6"
+    >{localize('popups.newStakingPeriodNotification.body', getLocaleArguments())}</Text
+>
 <TextHint
     classes="p-4 mb-6 rounded-2xl bg-blue-50 dark:bg-gray-800"
     icon="info"
