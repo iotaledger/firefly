@@ -10,6 +10,8 @@
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { Writable } from 'svelte/store'
+    import { Unit } from '@iota/unit-converter'
+    import { formatUnitPrecision } from '@lib/units'
 
     export let locale: Locale
 
@@ -46,7 +48,12 @@
     }
     function handleMoveFundsClick() {
         closePopup()
-        sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance, isInternal: true }))
+        sendParams.update((params) => ({
+            ...params,
+            amount: formatUnitPrecision($account.rawIotaBalance, Unit.Mi, false),
+            unit: Unit.Mi,
+            isInternal: true,
+        }))
         $accountRouter.goTo(AccountRoute.Send)
     }
     function handleCancelClick() {
