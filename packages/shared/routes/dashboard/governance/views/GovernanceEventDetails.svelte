@@ -1,32 +1,29 @@
 <script lang="typescript">
     import { Button, DashboardPane, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { canParticipate } from 'shared/lib/participation'
-    import { participationOverview } from 'shared/lib/participation/stores'
-    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { closePopup, openPopup } from 'shared/lib/popup'
     import { governanceRouter } from '@core/router'
     import { GovernanceRoute } from '@core/router/enums'
-    import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
-    import { AccountColors } from 'shared/lib/wallet'
-    import { calculateVotesByTrackedParticipation } from 'shared/lib/participation/governance'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { canParticipate } from '@lib/participation'
+    import { handleTransactionEventData, transferState, AccountColors } from '@lib/wallet'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { milestoneToDate, getBestTimeDuration, getDurationString } from '@lib/time'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { isSoftwareProfile } from '@lib/profile'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { selectedAccountParticipationOverview } from '@lib/participation/account'
+    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
+    import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
+    import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
 
     let transactionEventData: TransferProgressEventData = null
     let currentVoteValue: string
-    // TODO: base it on selectedAccountId when exposed in feat/single-wallet
-    $: $selectedAccount, $participationOverview, updateCurrentVoteValue()
 
+    $: $selectedAccountParticipationOverview, updateCurrentVoteValue()
     $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
-
     $: displayedPercentages = results?.map((result) => {
         const percentage = getPercentageString(result?.accumulated, totalVotes)
         const relativePercentage = getPercentageString(
@@ -35,26 +32,24 @@
         )
         return { percentage, relativePercentage }
     })
-
     $: accountVotes = calculateVotesByTrackedParticipation(
-        $participationOverview?.find((acc) => acc?.accountIndex === account?.index)?.trackedParticipations?.[
-            event?.eventId
-        ]
+        $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
     )
-
     $: results = event?.status?.questions?.[0]?.answers?.filter(
         (answer) => answer?.value !== 0 && answer?.value !== 255
     )
-
     $: totalVotes = results?.reduce((acc, val) => acc + val?.accumulated, 0)
-
     $: length =
         milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
         milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
+    $: $transferState, handleLedgerTransferState()
 
     const handleBackClick = (): void => $governanceRouter.goTo(GovernanceRoute.Init)
+    const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
+    const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
+    const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
 
-    const handleClick = (nextVote: VotingEventAnswer): void => {
+    function handleClick(nextVote: VotingEventAnswer): void {
         const openGovernanceCastVotePopup = () =>
             openPopup({
                 type: 'governanceCastVote',
@@ -71,7 +66,7 @@
         }
     }
 
-    const getAnswerHeader = (castedAnswerValue: string, answerValue: string): string => {
+    function getAnswerHeader(castedAnswerValue: string, answerValue: string): string {
         if (isWinnerAnswer(answerValue)) {
             return localize('views.governance.eventDetails.answerHeader.winner')
         } else if (isSelected(castedAnswerValue, answerValue)) {
@@ -83,33 +78,26 @@
         }
     }
 
-    const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
-
-    const getProgressByMilestone = (milestone: number) => {
+    function getProgressByMilestone(milestone: number) {
         const progress = milestoneToDate(milestone).getTime() - Date.now()
         return progress > 0 ? progress : 0
     }
 
-    const setActiveText = (): string => {
+    function setActiveText(): string {
         if (event?.status?.status === ParticipationEventState.Holding) {
             return localize('views.governance.eventDetails.answerHeader.activeVoting')
         }
         return localize('views.governance.eventDetails.answerHeader.selected')
     }
 
-    const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
-
-    const updateCurrentVoteValue = (): void => {
-        const selectedAccountOverview = $participationOverview?.find(
-            ({ accountIndex }) => accountIndex === $selectedAccount.index
-        )
-        const participation = selectedAccountOverview?.participations?.find(
+    function updateCurrentVoteValue(): void {
+        const participation = $selectedAccountParticipationOverview?.participations?.find(
             (participation) => participation.eventId === event.eventId
         )
         currentVoteValue = participation?.answers[0] ?? null
     }
 
-    const handleTransferState = (state: TransferState): void => {
+    function handleTransferState(state: TransferState): void {
         if (!state) {
             return
         }
@@ -147,14 +135,7 @@
         }
     }
 
-    $: $transferState, handleLedgerTransferState()
-    const handleLedgerTransferState = () => {
-        if (!$isSoftwareProfile) {
-            handleTransferState($transferState)
-        }
-    }
-
-    const isWinnerAnswer = (answerValue: string): boolean => {
+    function isWinnerAnswer(answerValue: string): boolean {
         if (event?.status?.status === ParticipationEventState.Ended) {
             const resultsAccumulated = results.map((result) => result?.accumulated)
             const max = Math.max(...resultsAccumulated)
