@@ -28,6 +28,20 @@
     export let balance: number // migration tx
     export let onBackClick = (): void => {}
 
+    let date = localize('error.invalidDate')
+    $: {
+        try {
+            date = formatDate(new Date(timestamp), {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+            })
+        } catch {
+            date = localize('error.invalidDate')
+        }
+    }
     const { accounts } = $wallet
 
     const cachedMigrationTx = !payload
@@ -161,18 +175,10 @@
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
         </div>
-        {#if timestamp}
+        {#if date}
             <div class="mb-5">
                 <Text secondary>{localize('general.date')}</Text>
-                <Text smaller>
-                    {formatDate(new Date(timestamp), {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    })}
-                </Text>
+                <Text smaller>{date}</Text>
             </div>
         {/if}
         {#if id}

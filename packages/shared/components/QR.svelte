@@ -4,6 +4,7 @@
 
     export let data
     export let size = 150
+    export let classes
 
     let qr
     let cells
@@ -25,7 +26,7 @@
 
 {#key data}
     {#if cells}
-        <svg width={size} height={size} viewBox={`0 0 ${cells.length} ${cells.length}`}>
+        <svg width={size} height={size} viewBox={`0 0 ${cells.length} ${cells.length}`} class={classes}>
             {#each cells as row, rowIndex}
                 {#each row as cell, cellIndex}
                     <rect

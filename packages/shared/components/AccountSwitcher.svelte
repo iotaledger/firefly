@@ -1,11 +1,8 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
     import { WalletAccount } from '@lib/typings/wallet'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
     import { activeProfile, getColor, updateProfile } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccount } from '@lib/wallet'
+    import { selectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
@@ -13,23 +10,8 @@
     let modal: Modal
     let isModalOpened: boolean
 
-    function onClick(): void {
-        let message: string
-        if ($isSyncing) {
-            message = localize('notifications.syncing')
-        } else if ($isTransferring) {
-            message = localize('notifications.transferring')
-        } else if ($participationAction) {
-            message = localize('notifications.participating')
-        } else {
-            modal?.toggle()
-            return
-        }
-        showAppNotification({
-            type: 'warning',
-            message,
-        })
-        modal?.close()
+    function onClick() {
+        modal?.toggle()
         updateProfile('hasFinishedSingleAccountGuide', true)
     }
 </script>

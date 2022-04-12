@@ -2,22 +2,39 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { selectedAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
+    import { openPopup } from '@lib/popup'
+    import { activeProfile, getColor } from '@lib/profile'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { showAppNotification } from '@lib/notifications'
+    import { selectedAccount, setSelectedAccount, isSyncing, isTransferring } from '@lib/wallet'
+    import { participationAction } from '@lib/participation/stores'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
     export let modal: Modal
 
-    const handleAccountClick = (accountId: string): void => {
-        setSelectedAccount(accountId)
-        resetAccountRouter()
-        modal?.close()
+    function handleAccountClick(accountId: string): void {
+        if ($isSyncing) {
+            showWarning(localize('notifications.syncing'))
+        } else if ($isTransferring) {
+            showWarning(localize('notifications.transferring'))
+        } else if ($participationAction) {
+            showWarning(localize('notifications.participating'))
+        } else {
+            setSelectedAccount(accountId)
+            resetAccountRouter(false)
+            modal?.close()
+        }
     }
 
-    const handleCreateAccountClick = (): void => {
+    function showWarning(message: string) {
+        showAppNotification({
+            type: 'warning',
+            message,
+        })
+    }
+
+    function handleCreateAccountClick(): void {
         modal?.close()
         openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
     }
