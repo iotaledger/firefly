@@ -33,13 +33,13 @@
     }
 </script>
 
-<Illustration illustration="staking-notification" classes="mb-6 mt-9" />
-<Text type="h3" classes="mb-4">{localize('popups.newStakingPeriodNotification.title', getLocaleArguments())}</Text>
-<Text type="p" secondary classes="mb-6"
+<Illustration illustration="staking-notification" classes="mb-4" />
+<Text type="h3" classes="mb-2">{localize('popups.newStakingPeriodNotification.title', getLocaleArguments())}</Text>
+<Text type="p" secondary classes="mb-4"
     >{localize('popups.newStakingPeriodNotification.body', getLocaleArguments())}</Text
 >
 <TextHint
-    classes="p-4 mb-6 rounded-2xl bg-blue-50 dark:bg-gray-800"
+    classes="p-4 mb-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
     icon="info"
     iconClasses="fill-current text-blue-500"
     hint={localize('popups.newStakingPeriodNotification.info')}
