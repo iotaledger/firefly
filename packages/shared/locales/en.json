@@ -805,8 +805,9 @@
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
         "singleAccountGuide": {
-            "title": "New: manage your funds more easily",
-            "body": "To start preparing for the future, Firefly has changed the way to manage your funds! You can now toggle between your individual wallets in the top menu bar."
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
