@@ -149,7 +149,7 @@
         }
     }
     pre {
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: 'Fira Mono', monospace;
         @apply font-normal;
         @apply break-all;
         @apply whitespace-pre-line;
