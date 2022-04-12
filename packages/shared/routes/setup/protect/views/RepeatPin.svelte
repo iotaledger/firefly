@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { Locale } from '@core/i18n'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale: Locale
 
@@ -12,8 +12,13 @@
 
     let pinInput = ''
     let error = ''
+    let pinRef: Pin
 
     const dispatch = createEventDispatcher()
+
+    onMount(() => {
+        pinRef.resetAndFocus()
+    })
 
     $: pinInput, (error = '')
 
@@ -41,6 +46,7 @@
         <Text type="p" secondary classes="mb-8">{locale('views.confirmPin.body2')}</Text>
         <Pin
             bind:value={pinInput}
+            bind:this={pinRef}
             glimpse
             classes="w-full mx-auto block"
             on:submit={onSubmit}

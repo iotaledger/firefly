@@ -10,7 +10,6 @@
         currentShimmerStakingRewards,
         currentShimmerStakingRewardsBelowMinimum,
         selectedAccountParticipationOverview,
-        shimmerStakingEventState,
         stakedAccounts,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
@@ -75,7 +74,7 @@
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
             body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, { values: { token: Token.IOTA } })
         } else if (stakingEventState === ParticipationEventState.Holding) {
-            const isStaking = $stakedAccounts.length > 0
+            const isStaking = isAssemblyStaked || isShimmerStaked
             const durationArguments: LocaleArguments = isStaking
                 ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
                 : {}

@@ -490,7 +490,7 @@
                     }
                 },
                 "backup": {
-                    "title": "Save wallet backup",
+                    "title": "Backup your wallets",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
@@ -547,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -671,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -743,7 +751,7 @@
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "accountName": "Account name:",
+            "accountName": "Wallet name:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingManager": {
@@ -797,8 +805,9 @@
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
         "singleAccountGuide": {
-            "title": "New: manage your funds more easily",
-            "body": "To start preparing for the future, Firefly has changed the way to manage your funds! You can now toggle between your individual wallets in the top menu bar."
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -1112,9 +1121,9 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change accounts.",
-        "transferring": "Please wait until all transactions are completed to change accounts.",
-        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1238,7 +1247,9 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
