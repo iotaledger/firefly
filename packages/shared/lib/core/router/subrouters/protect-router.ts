@@ -5,7 +5,7 @@ import { Platform } from '@lib/platform'
 import { activeProfile } from '@lib/profile'
 import { SetupType } from '@lib/typings/setup'
 import {
-    asyncCreateAccount,
+    createAccount,
     asyncSetStoragePassword,
     asyncStoreMnemonic,
     asyncVerifyMnemonic,
@@ -51,7 +51,7 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
                     const m = get(mnemonic).join(' ')
                     await asyncVerifyMnemonic(m)
                     await asyncStoreMnemonic(m)
-                    await asyncCreateAccount()
+                    await createAccount()
                     mnemonic.set(null)
                 }
 

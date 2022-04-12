@@ -32,7 +32,7 @@
     import { Locale } from '@core/i18n'
     import {
         api,
-        asyncCreateAccount,
+        createAccount,
         asyncSyncAccountOffline,
         isBackgroundSyncing,
         setSelectedAccount,
@@ -298,7 +298,7 @@
     async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias, color)
+                const account = await createAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 // TODO: set selected account to the newly created account

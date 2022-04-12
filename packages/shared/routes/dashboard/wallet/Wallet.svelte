@@ -23,6 +23,7 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
+        accountManager,
         addMessagesPair,
         api,
         asyncSyncAccounts,
@@ -79,86 +80,87 @@
         }
     }
 
-    function loadAccounts() {
-        const _onError = (error: any = null) => {
-            if ($isLedgerProfile) {
-                if (!LedgerErrorType[error.type]) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                }
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(error?.error || 'error.global.generic'),
-                })
-            }
+    async function loadAccounts() {
+        let accountsResponse
+        try {
+            accountsResponse = await $accountManager.getAccounts()
+        } catch (e) {
+            _onError()
         }
 
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = async () => {
-                    accountsLoaded.set(true)
+        if (accountsResponse) {
+            if (accountsResponse.length === 0) {
+                    void _continue()
+            } else {
+                const totalBalance = {
+                    balance: 0,
+                    incoming: 0,
+                    outgoing: 0,
+                }
 
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+                let completeCount = 0
+                const newAccounts = []
+                for (const payloadAccount of accountsResponse) {
+                    addMessagesPair(payloadAccount)
 
                     try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                        const meta = await getAccountMeta(payloadAccount.id)
+                        totalBalance.balance += meta.balance
+                        totalBalance.incoming += meta.incoming
+                        totalBalance.outgoing += meta.outgoing
 
-                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
+                        const account = prepareAccountInfo(payloadAccount, meta)
+                        newAccounts.push(account)
                     } catch (err) {
-                        _onError(err)
+                            _onError(err)
+                    }
+
+                    completeCount++
+
+                    if (completeCount === accountsResponse.length) {
+                        accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
+                        processMigratedTransactions(
+                            payloadAccount.id,
+                            payloadAccount.messages,
+                            payloadAccount.addresses
+                        )
+                        updateBalanceOverview(
+                            totalBalance.balance,
+                            totalBalance.incoming,
+                            totalBalance.outgoing
+                        )
+                        void _continue()
                     }
                 }
+            }
+        }
+    }
 
-                if (accountsResponse.payload.length === 0) {
-                    void _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
+    async function _continue() {
+        $accountsLoaded = true
+        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
-                    let completeCount = 0
-                    const newAccounts = []
-                    for (const payloadAccount of accountsResponse.payload) {
-                        addMessagesPair(payloadAccount)
+        try {
+            await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+            if ($isFirstSessionSync) {
+                $isFirstSessionSync = false
+            }
+        } catch (err) {
+            _onError(err)
+        }
+    }
 
-                        getAccountMeta(payloadAccount.id, (err, meta) => {
-                            if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
-
-                                const account = prepareAccountInfo(payloadAccount, meta)
-                                newAccounts.push(account)
-                            } else {
-                                _onError(err)
-                            }
-
-                            completeCount++
-
-                            if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(
-                                    payloadAccount.id,
-                                    payloadAccount.messages,
-                                    payloadAccount.addresses
-                                )
-                                updateBalanceOverview(
-                                    totalBalance.balance,
-                                    totalBalance.incoming,
-                                    totalBalance.outgoing
-                                )
-                                void _continue()
-                            }
-                        })
-                    }
-                }
-            },
-            onError(err) {
-                _onError(err)
-            },
-        })
+    async function _onError(error: any = null) {
+        if ($isLedgerProfile) {
+            if (!LedgerErrorType[error.type]) {
+                displayNotificationForLedgerProfile('error', true, true, false, false, error)
+            }
+        } else {
+            showAppNotification({
+                type: 'error',
+                message: localize(error?.error || 'error.global.generic'),
+            })
+        }
     }
 
     function onGenerateAddress(accountId: AccountIdentifier) {

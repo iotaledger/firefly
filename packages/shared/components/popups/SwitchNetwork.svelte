@@ -3,12 +3,7 @@
 
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import {
-        asyncCreateAccount,
-        asyncRemoveWalletAccounts,
-        asyncSetStrongholdPassword,
-        wallet,
-    } from 'shared/lib/wallet'
+    import { createAccount, asyncRemoveWalletAccounts, asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import {
         activeProfile,
@@ -76,7 +71,7 @@
             updateProfile('settings.networkConfig', newConfig)
 
             await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
-            await asyncCreateAccount(`${locale('general.account')} 1`)
+            await createAccount(`${locale('general.account')} 1`)
             await logout()
         } catch (err) {
             isSwitchingNetwork = false

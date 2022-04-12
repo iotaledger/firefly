@@ -5,7 +5,7 @@ import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
     asyncDeleteStorage,
-    destroyActor,
+    destroyManager,
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
@@ -157,7 +157,7 @@ export const disposeNewProfile = async (): Promise<void> => {
         } catch (err) {
             console.error(err)
         }
-        destroyActor(profile.id)
+        destroyManager(profile.id)
     }
 
     newProfile.set(null)
