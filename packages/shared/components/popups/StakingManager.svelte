@@ -244,12 +244,12 @@
     }
 </script>
 
-<Text type="h5">{localize('popups.stakingManager.title')}</Text>
-<Text type="p" secondary classes="mt-6 mb-4">{localize('popups.stakingManager.description')}</Text>
-<div class="staking flex flex-col scrollable-y mb-4">
+<Text type="h4" classes="mb-2">{localize('popups.stakingManager.title')}</Text>
+<Text type="p" secondary classes="mb-4">{localize('popups.stakingManager.description')}</Text>
+<div class="staking flex flex-col mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
-            class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid
+            class={`w-full flex flex-col rounded-xl border-2 border-solid
                 ${$isPartiallyStaked ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}
         >
             <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">

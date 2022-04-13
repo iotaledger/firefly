@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
@@ -480,17 +480,17 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
+                        "appNotOpen": "IOTA app not open",
                         "connected": "Connected",
-                        "legacyConnected": "Legacy App Open",
+                        "legacyConnected": "Legacy app open",
                         "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
                     }
                 },
                 "backup": {
-                    "title": "Save wallet backup",
+                    "title": "Backup your wallets",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
@@ -729,8 +729,12 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -801,7 +805,7 @@
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "accountName": "Account name:",
+            "accountName": "Wallet name:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingManager": {
@@ -821,8 +825,8 @@
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking round 2 from March 22nd",
-            "body": "Ready for the next round of staking? Participate in the 30 days staking round 2 from March 22nd. Stake your IOTAs and earn ASMB rewards!",
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "votingConfirmation": {
@@ -860,8 +864,9 @@
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
         "singleAccountGuide": {
-            "title": "New: manage your funds more easily",
-            "body": "To start preparing for the future, Firefly has changed the way to manage your funds! You can now toggle between your individual wallets in the top menu bar."
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -1186,9 +1191,9 @@
             "vote": "You voted with {account}",
             "unvote": "You unvoted with {account}"
         },
-        "syncing": "Please wait until synchronization is finished to change accounts.",
-        "transferring": "Please wait until all transactions are completed to change accounts.",
-        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {

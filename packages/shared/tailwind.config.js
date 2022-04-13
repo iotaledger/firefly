@@ -156,6 +156,7 @@ module.exports = {
                 700: '#405985',
                 800: '#25395F',
                 900: '#1B2D4B',
+                1000: '#15233B',
             },
             transparent: 'transparent',
             black: '#000',

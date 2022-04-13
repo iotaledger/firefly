@@ -3,6 +3,11 @@ import { MILLISECONDS_PER_SECOND } from '../time'
 import { Participation, StakingAirdrop } from './types'
 
 /**
+ * The starting date of the next staking period.
+ */
+export const ASSEMBLY_EVENT_START_DATE = new Date()
+
+/**
  * The staking event ID for Assembly.
  */
 export const ASSEMBLY_EVENT_ID = '54d85610d2d4077d9554c2ab30f41303cd7e8fb0afc2abf91c04a1ab451bd966'

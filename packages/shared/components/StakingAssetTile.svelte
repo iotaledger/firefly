@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { isBright } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
     import { getFormattedMinimumRewards, isAccountStaked } from 'shared/lib/participation/staking'
@@ -47,7 +46,8 @@
     let tooltipText: TooltipText
     let remainingTime: number
 
-    $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
+    const FIAT_PLACEHOLDER = '---'
+
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
     $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
@@ -134,43 +134,37 @@
 
 <button
     style="--asset-color: {asset?.color}"
-    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 p-4 rounded-2xl airdrop"
-    class:staked={isActivelyStaking}
-    class:partial-stake={showWarningState}
+    class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl airdrop"
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-            <Icon classes="text-{assetIconColor}" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
+            <Icon classes="text-gray-900" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
-        <div class="flex flex-col flex-wrap space-y-1">
+        <div class="flex flex-col flex-wrap space-y-1 text-left">
             <Text classes="font-semibold">{asset?.name}</Text>
-            {#if asset?.fiatPrice}
-                <Text secondary smaller>{asset?.fiatPrice}</Text>
-            {/if}
+            <Text secondary smaller>{asset?.fiatPrice ? asset?.fiatPrice : FIAT_PLACEHOLDER}</Text>
         </div>
     </div>
-    <div class="flex flex-row space-x-2 items-center">
-        <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{asset?.balance}</Text>
-            {#if asset?.fiatBalance}
-                <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
+    <div class="flex flex-col flex-wrap space-y-1 text-right">
+        <div class="flex flex-row">
+            {#if showWarningState && tooltipText?.body.length > 0}
+                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                    <Icon
+                        icon="exclamation"
+                        width="17"
+                        height="17"
+                        classes="mt-0.5 mr-2 fill-current text-yellow-600 group-hover:text-gray-900"
+                    />
+                </div>
             {/if}
+            <Text classes="font-semibold">{asset?.balance}</Text>
         </div>
-        {#if showWarningState && tooltipText?.body}
-            <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                <Icon
-                    icon="exclamation"
-                    width="16"
-                    height="16"
-                    classes="mt-0.5 fill-current text-yellow-600 group-hover:text-{assetIconColor}"
-                />
-            </div>
-        {/if}
+        <Text secondary smaller>{asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : FIAT_PLACEHOLDER}</Text>
     </div>
 </button>
-{#if showTooltip && tooltipText?.body}
+{#if showTooltip && tooltipText?.body.length > 0}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
@@ -188,59 +182,5 @@
 <style type="text/scss">
     .icon {
         background-color: var(--asset-color);
-    }
-    button {
-        &.partial-stake {
-            @apply border;
-            @apply border-solid;
-            @apply border-yellow-600;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border;
-                @apply border-solid;
-                @apply border-yellow-600;
-                &:hover {
-                    @apply border-transparent;
-                }
-            }
-        }
-        &.staked:not(.partial-stake) {
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:hover {
-                @apply border-transparent;
-            }
-            &.darkmode {
-                @apply border-gray-900;
-            }
-        }
-        &.disabled-hover {
-            background-color: var(--account-color);
-        }
-        &:not(.disabled-hover):hover {
-            background-color: var(--account-color);
-        }
-        &.airdrop {
-            @apply opacity-50;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-200;
-            &:not(:hover) {
-                @apply bg-transparent;
-            }
-            &:hover {
-                @apply bg-gray-200;
-            }
-            &.darkmode {
-                @apply bg-gray-900;
-                @apply border-transparent;
-                &:hover {
-                    @apply bg-gray-700;
-                }
-            }
-        }
     }
 </style>
