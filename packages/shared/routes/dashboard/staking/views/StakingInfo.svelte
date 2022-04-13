@@ -49,6 +49,7 @@
     function setAnimation(): void {
         if (!$selectedAccountParticipationOverview) {
             animation = StakingAnimation.Neither
+            return
         }
 
         switch (stakingEventState) {
@@ -57,7 +58,8 @@
                 animation = StakingAnimation.Prestaking
                 break
             case ParticipationEventState.Holding: {
-                const participatingEventIds = $selectedAccountParticipationOverview.participations.map((p) => p.eventId)
+                const participatingEventIds =
+                    $selectedAccountParticipationOverview?.participations?.map((p) => p.eventId) ?? []
 
                 const isStakingForAssembly = participatingEventIds.includes(ASSEMBLY_EVENT_ID)
                 const isStakingForShimmer = participatingEventIds.includes(SHIMMER_EVENT_ID)
