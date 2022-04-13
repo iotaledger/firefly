@@ -560,7 +560,6 @@
             }
         },
         "governance": {
-            "title": "Governance",
             "votingPower": {
                 "title": "My voting power",
                 "info": {
