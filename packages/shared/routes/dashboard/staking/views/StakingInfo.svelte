@@ -10,6 +10,8 @@
         currentShimmerStakingRewards,
         currentShimmerStakingRewardsBelowMinimum,
         selectedAccountParticipationOverview,
+        totalAssemblyStakingRewards,
+        totalShimmerStakingRewards,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
@@ -66,12 +68,12 @@
                     animation = StakingAnimation.Neither
                 } else {
                     if (isStakingForAssembly) {
-                        const hasShimmerRewards = $selectedAccountParticipationOverview.shimmerRewards > 0
+                        const hasShimmerRewards = $totalShimmerStakingRewards > 0
                         animation = hasShimmerRewards
                             ? StakingAnimation.AssemblyWithShimmerRewards
                             : StakingAnimation.AssemblyWithoutShimmerRewards
                     } else if (isStakingForShimmer) {
-                        const hasAssemblyRewards = $selectedAccountParticipationOverview.assemblyRewards > 0
+                        const hasAssemblyRewards = $totalAssemblyStakingRewards > 0
                         animation = hasAssemblyRewards
                             ? StakingAnimation.ShimmerWithAssemblyRewards
                             : StakingAnimation.ShimmerWithoutAssemblyRewards
