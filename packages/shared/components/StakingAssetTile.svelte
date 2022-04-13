@@ -144,22 +144,24 @@
             <Icon classes="text-gray-900" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-left">
-            <Text classes="font-semibold">{asset?.name}</Text>
+            <div class="flex flex-row items-center space-x-1">
+                <Text classes="font-semibold">{asset?.name}</Text>
+                {#if showWarningState && tooltipText?.body.length > 0}
+                    <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
+                        <Icon
+                            icon="exclamation"
+                            width="17"
+                            height="17"
+                            classes="fill-current text-yellow-600 group-hover:text-gray-900"
+                        />
+                    </div>
+                {/if}
+            </div>
             <Text secondary smaller>{asset?.fiatPrice ? asset?.fiatPrice : FIAT_PLACEHOLDER}</Text>
         </div>
     </div>
     <div class="flex flex-col flex-wrap space-y-1 text-right">
         <div class="flex flex-row">
-            {#if showWarningState && tooltipText?.body.length > 0}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                    <Icon
-                        icon="exclamation"
-                        width="17"
-                        height="17"
-                        classes="mt-0.5 mr-2 fill-current text-yellow-600 group-hover:text-gray-900"
-                    />
-                </div>
-            {/if}
             <Text classes="font-semibold">{asset?.balance}</Text>
         </div>
         <Text secondary smaller>{asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : FIAT_PLACEHOLDER}</Text>
