@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
@@ -480,13 +480,13 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
+                        "appNotOpen": "IOTA app not open",
                         "connected": "Connected",
-                        "legacyConnected": "Legacy App Open",
+                        "legacyConnected": "Legacy app open",
                         "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
                     }
                 },
                 "backup": {
