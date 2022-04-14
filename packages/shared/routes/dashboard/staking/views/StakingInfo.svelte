@@ -18,7 +18,6 @@
     import { selectedAccountId } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
     import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
-    import { openPopup } from '../../../../lib/popup'
 
     enum StakingAnimation {
         Prestaking = 'prestaking',
