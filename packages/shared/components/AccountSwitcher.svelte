@@ -20,7 +20,7 @@
 <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
     <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
     <Text type="h5">{$selectedAccount?.alias}</Text>
-    <div class="transform transition-all {isModalOpened ? 'rotate-180' : 'rotate-0'}">
+    <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
         <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
     </div>
 </button>
@@ -39,7 +39,7 @@
                 @apply rounded-full;
                 @apply w-3;
                 @apply h-3;
-                @apply border-2;
+                @apply border;
                 @apply border-solid;
                 @apply border-gray-700;
                 @apply bg-transparent;
