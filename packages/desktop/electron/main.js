@@ -77,6 +77,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
         const errorMessage = error.message || error.reason || error
         if (!shouldReportError(errorMessage)) {
+            console.error(error)
             return
         }
 
