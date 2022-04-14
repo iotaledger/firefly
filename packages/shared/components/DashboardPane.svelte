@@ -6,6 +6,9 @@
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 
-<div class:darkmode={darkModeEnabled} class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden box-shadow shadow-elevation-1 {classes}">
+<div
+    class:darkmode={darkModeEnabled}
+    class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-elevation-1 {classes}"
+>
     <slot />
 </div>
