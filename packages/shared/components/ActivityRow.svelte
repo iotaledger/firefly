@@ -16,11 +16,9 @@
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
-    import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let timestamp
     export let confirmed
-    export let color
     export let includeFullSender
     export let payload: Payload
     export let balance // migration tx
@@ -76,7 +74,6 @@
             ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
             : null
 
-    let initialsColor: string
     let accountAlias = ''
 
     $: {
@@ -89,7 +86,6 @@
                 if (includeFullSender) {
                     accountAlias = acc.alias
                 }
-                initialsColor = getColor($activeProfile, acc.id)
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 if (includeFullSender) {
@@ -130,28 +126,44 @@
         }
     }
 
-    const getParticipationColor = (action: ParticipationAction): string => {
-        switch (action) {
-            case ParticipationAction.Stake:
-            case ParticipationAction.Vote:
-                return 'orange-500'
-            case ParticipationAction.Unstake:
-            case ParticipationAction.Unvote:
-            default:
-                return 'blue-500'
-        }
-    }
-
-    const getParticipationIcon = (action: ParticipationAction): string => {
+    function getParticipationIcon(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Unstake:
-                return 'staking'
+                return 'tokens'
             case ParticipationAction.Vote:
             case ParticipationAction.Unvote:
                 return 'voting'
             default:
                 return ''
+        }
+    }
+
+    function getIcon(): string {
+        if (hasCachedMigrationTx || milestonePayload) {
+            return 'double-chevron-right'
+        } else if (isParticipationPayload(txPayload)) {
+            return getParticipationIcon(ParticipationAction.Stake)
+        } else if (txPayload.data.essence.data.internal) {
+            return 'transfer'
+        } else if (txPayload.data.essence.data.incoming) {
+            return 'chevron-down'
+        } else {
+            return 'chevron-up'
+        }
+    }
+
+    function getIconColor(): string {
+        if (hasCachedMigrationTx || milestonePayload) {
+            return 'gray-600'
+        } else if (isParticipationPayload(txPayload)) {
+            return 'gray-600'
+        } else if (txPayload.data.essence.data.internal) {
+            return 'gray-600'
+        } else if (txPayload.data.essence.data.incoming) {
+            return 'blue-700'
+        } else {
+            return 'blue-500'
         }
     }
 </script>
@@ -166,42 +178,7 @@
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
-        {#if hasCachedMigrationTx || milestonePayload}
-            <Icon
-                width="24"
-                height="24"
-                boxed
-                classes="text-white"
-                boxClasses="bg-gray-500 dark:bg-gray-900"
-                icon="double-chevron-right"
-            />
-        {:else if isParticipationPayload(txPayload)}
-            <Icon
-                boxed
-                width="24"
-                height="24"
-                classes="text-white"
-                boxClasses="bg-{getParticipationColor(ParticipationAction.Stake)}"
-                icon={getParticipationIcon(ParticipationAction.Stake)}
-            />
-        {:else}
-            <Icon
-                boxed
-                classes={`text-${isBright(initialsColor) ? 'gray-800' : 'white'}`}
-                boxClasses="bg-{initialsColor
-                    ? `${initialsColor}-500`
-                    : txPayload.data.essence.data.internal
-                    ? 'gray-500'
-                    : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal
-                    ? 'transfer'
-                    : txPayload.data.essence.data.incoming
-                    ? 'chevron-down'
-                    : 'chevron-up'}
-                fill={isBright(initialsColor) ? '#000000' : ''}
-                boxStyles={`background-color: ${initialsColor || (txPayload.data.essence.data.internal && 'gray')};`}
-            />
-        {/if}
+        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{getIconColor()}" icon={getIcon()} />
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
@@ -213,9 +190,7 @@
                 {:else}{localize('general.staked')}{/if}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
-        <p class="text-10 leading-120 text-gray-500">
-            {date}
-        </p>
+        <p class="text-10 leading-120 text-gray-500">{date}</p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller classes="whitespace-nowrap">{messageValue}</Text>
