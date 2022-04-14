@@ -30,9 +30,16 @@
     let showTooltip = false
     let tooltipAnchor: unknown
 
-    const activeAirdropsParticipatedIn =
+    // Removed to hardcode event ids for now, as we only have 1 event running and this doesn't work for restoring.
+    /* const activeAirdropsParticipatedIn =
         $selectedAccountParticipationOverview?.participations
             .map((p) => getAirdropFromEventId(p.eventId))
+            // Falsy values (undefined, null, ...) are filtered out from the array
+            .filter(Boolean) || [] */
+
+    // Hardcode to the current event ids for now, and this allows us to merge after restoring
+    const activeAirdropsParticipatedIn =
+        STAKING_EVENT_IDS.map((eventId) => getAirdropFromEventId(eventId))
             // Falsy values (undefined, null, ...) are filtered out from the array
             .filter(Boolean) || []
 
