@@ -105,6 +105,7 @@
     }
 
     function handleBackupClick() {
+        modal?.close()
         openPopup({
             type: 'backup',
             props: {
@@ -115,6 +116,7 @@
     }
 
     function handleVersionUpdateClick() {
+        modal?.close()
         openPopup({ type: 'version' })
     }
 </script>
@@ -156,7 +158,7 @@
                             </Text>
                         </div>
                     </div>
-                    <Button secondary xsmall onClick={handleVersionUpdateClick}>
+                    <Button secondary xsmall onClick={() => handleVersionUpdateClick()}>
                         <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
                     </Button>
                 </div>
@@ -186,7 +188,7 @@
                                 </Text>
                             </div>
                         </div>
-                        <Button secondary xsmall onClick={handleBackupClick}>
+                        <Button secondary xsmall onClick={() => handleBackupClick()}>
                             <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
                         </Button>
                     </div>
@@ -210,7 +212,11 @@
                         </Text>
                     </div>
                 </div>
-                <Toggle active={!$isStrongholdLocked} onClick={handleStrongholdToggleClick} classes="cursor-pointer" />
+                <Toggle
+                    active={!$isStrongholdLocked}
+                    onClick={() => handleStrongholdToggleClick()}
+                    classes="cursor-pointer"
+                />
             </div>
             <HR />
         {:else}
@@ -227,7 +233,7 @@
                         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
                     </div>
                 </div>
-                <button on:click={syncLedgerDeviceStatus}>
+                <button on:click={() => syncLedgerDeviceStatus()}>
                     <Icon
                         icon="refresh"
                         classes="{isCheckingLedger &&
