@@ -74,7 +74,14 @@
         }, 3000)
 
         // This is added to migrate all profile folder names from using the profile name to the id
-        if (!get(hasRenamedProfileFoldersToId)) {
+        // TEMP: Changed the below condition to always execute and attempt to rename folders in 1.5.0
+        // this is because, due to bugs in 1.4.+ people downgrade to 1.3.3 which delete all the folders,
+        // they make new ones and then when they upgrade to 1.4.+ again this will never execute, and the users
+        // folders/profiles will be wiped again
+        // if (!get(hasRenamedProfileFoldersToId)) {
+        // @ts-ignore
+        /* eslint-disable no-constant-condition */
+        if (true) {
             await renameAllProfileFoldersToId()
             hasRenamedProfileFoldersToId.set(true)
         }
