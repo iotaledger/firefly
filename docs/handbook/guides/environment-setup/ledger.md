@@ -111,7 +111,7 @@ After running, the simulator listens on port 9999 and can be used without restri
 
 :information_source: When needing to change the mnemonic phrase used for the simulator, please adjust the line [here](https://github.com/iotaledger/ledger-iota-app/blob/develop/docker/run_simulator.sh#L64) after the `--seed` argument.
 
-:information_source: Only one simulator can be run at a time
+:information_source: Only one simulator can be run at a time.
 
 ### Loading
 
