@@ -195,7 +195,7 @@
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
             class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 drop-shadow-elevation-4'
+                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
             } ${overflow ? 'overflow' : 'relative'}`}
         >
             {#if !hideClose}

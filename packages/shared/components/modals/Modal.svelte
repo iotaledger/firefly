@@ -53,7 +53,7 @@
         in:fade={{ duration: 100 }}
         use:clickOutside
         on:clickOutside={handleOnClickOutside}
-        class="{size} drop-shadow-elevation-4 bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10 {classes}"
+        class="{size} shadow-elevation-4 bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10 {classes}"
         style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
     >
         <slot />
