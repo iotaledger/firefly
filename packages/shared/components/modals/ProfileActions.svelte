@@ -144,12 +144,12 @@
         <HR />
         {#if !isUpToDate}
             <div class="items-center p-3">
-                <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded">
+                <div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded-lg">
                     <div class="flex flex-row items-center space-x-3">
                         <Icon icon="warning" boxed classes="text-blue-500" />
                         <div>
                             <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
-                            <Text type="p" overrideColor classes="text-gray-500">
+                            <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
                                 {localize('views.dashboard.profileModal.version.updateVersion', {
                                     values: { version: $versionDetails.newVersion },
                                 })}
@@ -167,13 +167,13 @@
             {#if !isBackupSafe}
                 <div class="items-center p-3">
                     <div
-                        class="flex items-center justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded"
+                        class="flex items-center justify-between bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 p-3 rounded-lg"
                     >
                         <div class="flex flex-row items-center space-x-3">
                             <Icon icon="warning" boxed classes="text-{backupWarningColor}-500" />
                             <div>
                                 <Text type="p">{localize('views.dashboard.profileModal.backup.title')}</Text>
-                                <Text type="p" overrideColor classes="text-gray-500">
+                                <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
                                     {$activeProfile?.lastStrongholdBackupTime
                                         ? localize('views.dashboard.profileModal.backup.lastBackup', {
                                               values: {
@@ -203,7 +203,7 @@
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.stronghold.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500">
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
                             {localize(
                                 `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
                             )}
@@ -224,7 +224,7 @@
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>
-                        <Text type="p" overrideColor classes="text-gray-500">{ledgerConnectionText}</Text>
+                        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
                     </div>
                 </div>
                 <button on:click={syncLedgerDeviceStatus}>
