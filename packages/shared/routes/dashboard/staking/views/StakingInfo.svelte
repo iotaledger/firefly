@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { LocaleArguments, localize } from '@core/i18n'
+    import { formatDate, LocaleArguments, localize } from '@core/i18n'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
@@ -17,7 +17,8 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountId } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
-    import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from '@lib/participation'
+    import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
+    import { openPopup } from '../../../../lib/popup'
 
     enum StakingAnimation {
         Prestaking = 'prestaking',
@@ -103,8 +104,11 @@
             stakingEventState === ParticipationEventState.Upcoming ||
             stakingEventState === ParticipationEventState.Commencing
         ) {
+            const dateArgument = formatDate(ASSEMBLY_EVENT_START_DATE, { format: 'long' })
+            const localeArguments = { values: { token: Token.IOTA, date: dateArgument } }
+
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
-            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, { values: { token: Token.IOTA } })
+            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, localeArguments)
         } else if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = isAssemblyStaked || isShimmerStaked
             const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: Token.IOTA } }
