@@ -82,13 +82,6 @@
             <Text type="h5">{localize('general.manageAccount')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
-            <AccountTile
-                balance={account.balance}
-                balanceEquiv={account.balanceEquiv}
-                {color}
-                name={accountAlias || account.alias}
-                classes="mb-4"
-            />
             <Input
                 {error}
                 bind:value={accountAlias}
