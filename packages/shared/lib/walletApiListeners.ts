@@ -22,6 +22,7 @@ import { openPopup } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
+import { ASSEMBLY_EVENT_ID } from './participation'
 
 /**
  * Initialises event listeners from wallet library
@@ -109,7 +110,7 @@ export const initialiseListeners = (): void => {
             // Checks if this was a message sent for participating in an event
             if (hasPendingParticipation(message.id)) {
                 // Instantly pull in latest participation overview.
-                await getParticipationOverview()
+                await getParticipationOverview(ASSEMBLY_EVENT_ID)
 
                 // If it is a message related to any participation event, display a notification
                 displayParticipationNotification(getPendingParticipation(message.id))
