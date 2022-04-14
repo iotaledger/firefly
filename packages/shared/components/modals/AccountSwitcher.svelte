@@ -68,7 +68,7 @@
 
 <style type="text/scss">
     .accounts {
-        max-height: 60vh;
+        max-height: 65vh;
     }
     button {
         .circle {
