@@ -524,8 +524,8 @@
                     "inactive": "No staking events detected"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
                     "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
                     "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking round {periodNumber} from {date}",
-            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
