@@ -76,7 +76,7 @@
     $: hasColorChanged = getColor($activeProfile, account.id) !== color
 </script>
 
-<div class="w-full h-full flex flex-col justify-between px-8 py-10">
+<div class="w-full h-full flex flex-col justify-between p-6">
     <div>
         <div class="flex flex-row mb-6">
             <Text type="h5">{localize('general.manageAccount')}</Text>

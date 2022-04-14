@@ -72,7 +72,7 @@
     }
 </script>
 
-<div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
+<div class="p-6 flex flex-col justify-between space-y-6 w-full h-full">
     <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
             <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">

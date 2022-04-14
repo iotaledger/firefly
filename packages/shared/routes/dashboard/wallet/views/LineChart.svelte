@@ -131,7 +131,7 @@
     }
 </script>
 
-<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
+<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-6 py-4">
     <div class="flex justify-between items-center mb-2">
         <div class="flex space-x-4 -ml-3">
             <Dropdown

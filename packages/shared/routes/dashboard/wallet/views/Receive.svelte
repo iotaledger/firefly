@@ -19,7 +19,7 @@
     }
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-8">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
     <div class="w-full flex flex-row justify-between items-center">
         <div class="w-full flex flex-row space-x-4 items-center">
             <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>

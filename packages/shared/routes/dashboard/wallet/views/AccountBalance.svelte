@@ -33,14 +33,14 @@
 
 <div
     style="--account-color: {color};"
-    class="relative account-color p-8 {$mobile ? 'pb-0 bg-transparent' : 'pb-12'} {classes}"
+    class="relative account-color p-6 {$mobile ? 'pb-0 bg-transparent' : 'pb-12'} {classes}"
 >
     <!-- Balance -->
     <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
         {#if !$mobile}
             <p class="text-11 leading-120 text-{textColor} uppercase tracking-widest">{localize('general.balance')}</p>
         {/if}
-        <div class="flex flex-col flex-wrap items-start space-y-1.5">
+        <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
             <div on:click={togglePreciseBalance}>
                 <Text type="h2" overrideColor classes="text-{textColor}">
                     {showPreciseBalance
@@ -72,7 +72,7 @@
     {/if}
     <button
         on:click={() => onMenuClick()}
-        class="px-2 py-3 m-4 flex flex-row space-x-1 bg-opacity-10 bg-black rounded-lg text-{textColor} absolute top-4 right-4"
+        class="px-2 py-3 flex flex-row space-x-1 bg-opacity-10 bg-black rounded-lg text-{textColor} absolute top-6 right-6"
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
