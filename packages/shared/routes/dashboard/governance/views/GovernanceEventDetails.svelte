@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, DashboardPane, Icon, Text } from 'shared/components'
+    import { Button, DashboardPane, Icon, Text, GovernanceInfoTooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { governanceRouter } from '@core/router'
     import { GovernanceRoute } from '@core/router/enums'
@@ -15,6 +15,7 @@
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
+    import { clickOutside } from '@lib/actions'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
@@ -48,6 +49,11 @@
     const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
     const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
+    const tooltip = {
+        statusTimeline: { anchor: null as HTMLElement, show: false },
+        votingRate: { anchor: null as HTMLElement, show: false },
+        countedVotes: { anchor: null as HTMLElement, show: false },
+    }
 
     function handleClick(nextVote: VotingEventAnswer): void {
         const openGovernanceCastVotePopup = () =>
@@ -65,7 +71,6 @@
             promptUserToConnectLedger(false, () => openGovernanceCastVotePopup(), undefined, true)
         }
     }
-
     function getAnswerHeader(castedAnswerValue: string, answerValue: string): string {
         if (isWinnerAnswer(answerValue)) {
             return localize('views.governance.eventDetails.answerHeader.winner')
@@ -77,26 +82,22 @@
             return `${localize('general.option')} ${answerValue}`
         }
     }
-
     function getProgressByMilestone(milestone: number) {
         const progress = milestoneToDate(milestone).getTime() - Date.now()
         return progress > 0 ? progress : 0
     }
-
     function setActiveText(): string {
         if (event?.status?.status === ParticipationEventState.Holding) {
             return localize('views.governance.eventDetails.answerHeader.activeVoting')
         }
         return localize('views.governance.eventDetails.answerHeader.selected')
     }
-
     function updateCurrentVoteValue(): void {
         const participation = $selectedAccountParticipationOverview?.participations?.find(
             (participation) => participation.eventId === event.eventId
         )
         currentVoteValue = participation?.answers[0] ?? null
     }
-
     function handleTransferState(state: TransferState): void {
         if (!state) {
             return
@@ -134,7 +135,6 @@
                 break
         }
     }
-
     function isWinnerAnswer(answerValue: string): boolean {
         if (event?.status?.status === ParticipationEventState.Ended) {
             const resultsAccumulated = results.map((result) => result?.accumulated)
@@ -143,6 +143,23 @@
             return answerValue == results[indexOfMax]?.value.toString()
         }
         return false
+    }
+    function toggleTooltip(types: string[]): void {
+        types.forEach((type) => {
+            switch (type) {
+                case 'statusTimeline':
+                    tooltip.statusTimeline.show = !tooltip.statusTimeline.show
+                    break
+                case 'votingRate':
+                    tooltip.votingRate.show = !tooltip.votingRate.show
+                    break
+                case 'countedVotes':
+                    tooltip.countedVotes.show = !tooltip.countedVotes.show
+                    break
+                default:
+                    break
+            }
+        })
     }
 </script>
 
@@ -165,7 +182,19 @@
                 bold
                 overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
             >
-            <Icon icon="info-filled" classes="ml-2 text-gray-400" />
+            <button on:click={() => toggleTooltip(['statusTimeline'])} bind:this={tooltip.statusTimeline.anchor}>
+                <Icon icon="info-filled" classes="ml-2 text-gray-400" />
+            </button>
+            {#if tooltip.statusTimeline.show}
+                <div use:clickOutside on:clickOutside={() => toggleTooltip(['statusTimeline'])}>
+                    <GovernanceInfoTooltip
+                        {event}
+                        type="statusTimeline"
+                        anchor={tooltip.statusTimeline.anchor}
+                        position="right"
+                    />
+                </div>
+            {/if}
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
@@ -246,7 +275,7 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                <div>
+                <div bind:this={tooltip.votingRate.anchor}>
                     <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                         >{localize('views.governance.votingPower.title')}</Text
                     >
@@ -281,7 +310,7 @@
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
-                    <div>
+                    <div bind:this={tooltip.countedVotes.anchor}>
                         <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
                             >{localize('views.governance.eventDetails.votesCounted')}</Text
                         >
@@ -295,7 +324,29 @@
                     </div>
                 {/if}
             </div>
-            <Icon icon="info-filled" classes="ml-auto mt-0 text-gray-400" />
+            <button class="ml-auto mt-0" on:click={() => toggleTooltip(['votingRate', 'countedVotes'])}>
+                <Icon icon="info-filled" classes="text-gray-400" />
+            </button>
+            {#if tooltip.votingRate.show}
+                <div use:clickOutside on:clickOutside={() => toggleTooltip(['votingRate'])}>
+                    <GovernanceInfoTooltip
+                        {event}
+                        type="votingRate"
+                        anchor={tooltip.votingRate.anchor}
+                        position="top"
+                    />
+                </div>
+            {/if}
+            {#if tooltip.countedVotes.show}
+                <div use:clickOutside on:clickOutside={() => toggleTooltip(['countedVotes'])}>
+                    <GovernanceInfoTooltip
+                        {event}
+                        type="countedVotes"
+                        anchor={tooltip.countedVotes.anchor}
+                        position="left"
+                    />
+                </div>
+            {/if}
         </DashboardPane>
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}

@@ -583,7 +583,7 @@
                     },
                     "votingRate": {
                         "title": "Voting rate",
-                        "body": "{{amount}} achieves {{votesPerMinute}} votes per minute"
+                        "body": "{amount} achieves {votesPerMinute} votes per minute"
                     },
                     "countedVotes": {
                         "title": "Counted votes",
