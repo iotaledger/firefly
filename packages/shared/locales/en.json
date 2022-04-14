@@ -573,7 +573,23 @@
             "info": {
                 "title": "Governance info",
                 "description": "The IOTA community together with the IOTA Foundation, has developed the technology that makes it possible to use your IOTA tokens in governance decisions here in the secure environment of the Firefly Wallet.",
-                "link": "Learn about voting with Firefly"
+                "link": "Learn about voting with Firefly",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "announcement": "Announcement",
+                        "votingOpen": "Voting open",
+                        "countingStarts": "Counting starts",
+                        "countingStops": "Counting stops"
+                    },
+                    "votingRate": {
+                        "title": "Voting rate",
+                        "body": "{{amount}} achieves {{votesPerMinute}} votes per minute"
+                    },
+                    "countedVotes": {
+                        "title": "Counted votes",
+                        "body": "You must keep voting for the remaining period to reach your full voting power"
+                    }
+                }
             },
             "events": {
                 "status": {
