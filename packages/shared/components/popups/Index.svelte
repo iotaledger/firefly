@@ -195,7 +195,7 @@
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
             class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'
+                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
             } ${overflow ? 'overflow' : 'relative'}`}
         >
             {#if !hideClose}
@@ -215,7 +215,6 @@
 <style type="text/scss">
     popup {
         popup-content {
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             width: 100%;
             &.small {
                 max-width: 360px;
@@ -226,10 +225,6 @@
             &.large {
                 max-width: 630px;
             }
-            &.full-screen {
-                box-shadow: none;
-            }
-
             &:not(.full-screen):not(.overflow) {
                 @apply overflow-y-auto;
                 max-height: calc(100vh - 50px);

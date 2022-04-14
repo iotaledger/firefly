@@ -252,6 +252,12 @@ module.exports = {
                 'spin-reverse': 'spinReverse 1s linear infinite;',
                 shake: 'shake .5s linear;',
             },
+            boxShadow: {
+                'elevation-1': '0px 1px 2px rgba(0, 0, 0, 0.08)',
+                'elevation-2': '0px 2px 6px rgba(0, 0, 0, 0.08)',
+                'elevation-3': '0px 4px 6px rgba(0, 0, 0, 0.08)',
+                'elevation-4': '0px 4px 12px rgba(0, 0, 0, 0.12)',
+            },
         },
     },
     variants: {
