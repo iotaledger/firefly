@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# verkeerde poging} other {# verkeerde pogings}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Tot op datum",
-                    "outOfDate": "Verouderd",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "Hardeware-toestel",
-                    "statuses": {
-                        "appNotOpen": "IOTA app nie oop nie",
-                        "connected": "Gekoppel",
-                        "legacyConnected": "{legacy} App oop",
-                        "locked": "Gesluit",
-                        "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
-                        "notDetected": "Nie opgespoor nie",
-                        "otherConnected": "App Open"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Beursie status",
-                    "locked": "Gesluit",
-                    "unlocked": "Oopgesluit"
-                },
-                "strongholdBackup": {
-                    "title": "Beursie Back-up",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weke}} ago"
-                }
-            },
             "network": {
-                "networkOperational": "Netwerk Operasioneel",
-                "networkDegraded": "Netwerk is nie optimaal nie",
-                "networkDown": "Netwerk ontkoppel",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
                 "referencedRate": "Verwysde tempo"
             },
             "profileModal": {
                 "allSettings": "Alle instellings",
-                "logout": "Log out"
+                "logout": "Log out",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Jy het laas 'n backup op {date} gemaak",
+                    "notBackedUp": "Nie gebackup",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Welkom by die staking dashboard!",
             "status": {
                 "upcoming": "Staking geleentheid het nog nie begin nie",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Staked fondse"
             },
             "info": {
-                "upcomingSubheader": "Staking geleentheid het nog nie begin nie",
-                "upcomingHeader": "Kom later terug",
-                "commencingSubheader": "Maak gereed vir Staking",
-                "commencingHeader": "Pre-Stake jou tokens vooraf!",
-                "holdingSubheaderHolding": "No besig om Staking rewards te verdien",
-                "holdingSubheaderNotHolding": "Verdien Staking rewards om IOTA te Stake",
-                "holdingHeaderHolding": "{duration} oor",
-                "holdingHeaderNotHolding": "Stake jou tokens!",
-                "endedSubheader": "Staking het geëindig",
-                "endedHeader": "Dankie!",
-                "inactiveHeader": "Probeer om node te verander",
-                "inactiveSubheader": "Staking was nie bespeur nie"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Oorblywende",
                 "commencing": "Totdat staking begin",
-                "collectedRewards": "Ingesamelde beloning",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is 'n toestemminglose, hoogs skaalbare multi-chain netwerk om saamstelbare smart-contracts te bou en te ontplooi. Assembly is die toekoms van web3. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Die aangespoorde verhoognetwerk om groot innovasies op IOTA te bevorder. Wat ook al gebeur, gebeur. Hoe Shimmer ontwikkel, is aan jou."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Balans-finder",
-            "body": "Doen 'n meer volledige soektog na adresse om ontbrekende saldo's te vind. Dit kan 'n rukkie neem.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Totale balans",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Tik jou wagwoord in om te begin soek."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Voer transaksiegeskiedenis uit",
             "body": "Voer die transaksiegeskiedenis vir die geselekteerde beursie uit. Die uitgevoerde lêer sal in .csv-formaat wees.",
             "profileName": "Profiel Naam:",
-            "accountName": "Rekening naam:",
+            "accountName": "Wallet name:",
             "typePassword": "Tik jou wagwoord om uitvoer toe te laat"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking het nog nie begin nie",
-            "commencingDate": "Staking het nog nie begin nie",
-            "body": "Deur vooraf jou fondse in te sit voor die staking begin, sal jy outomaties belonings begin ontvang wanneer die staking begin.",
-            "ok": "Ok, Ek verstaan"
         },
         "stakingManager": {
             "title": "Staking Management",
             "description": "Wanneer jy 'n beursie stake, stuur jy 'n transaksie aan jouself en merk daardie fondse as \"staked\". Jy kan die tokens enige tyd oordra, maar jy sal nie aanhou om staking belonings te ontvang nie.",
             "totalFundsStaked": "Totale fondse staked",
             "stakedSuccessfully": "Jou fondse is Staked vir {account}.",
-            "unstakedSuccessfully": "Jou fondse is un-Staked vir {account}."
+            "unstakedSuccessfully": "Jou fondse is un-Staked vir {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop-deelname",
+            "title": "Confirm Participation",
             "subtitleStake": "Jy is op die punt om te Stake",
             "subtitleMerge": "Jy is op die punt om te kombineer",
-            "bodyStake": "As jy nie aan beide airdrops wil deelneem nie, kan jy hieronder onttrek. Jy kan enige tyd unstake en stake om weer in te teken.",
-            "bodyMerge": "Jou fondse sal ge Stake word vir {airdrop}. Om te verander aan watter airdrops jy wil deelneem, un stake hierdie beursie en stake dit weer.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Geskatte belonings"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "Oor Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Bestuur stake",
         "merge": "Kombineer",
         "mergeFunds": "Kombineer fondse",
-        "done": "Klaar"
+        "done": "Klaar",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Wagwoord",
@@ -961,7 +980,6 @@
         "darkTheme": "Donker",
         "systemTheme": "Stelsel",
         "balance": "Balans",
-        "accountBalance": "Beursie Waarde",
         "all": "All",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
@@ -972,6 +990,7 @@
         "profiles": "Profiel",
         "dev": "Dev",
         "createAccount": "Skep 'n Beursie",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Beursie naam",
         "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
@@ -1053,7 +1072,8 @@
         "notStaked": "Nie staked",
         "stakedFunds": "Staked fondse",
         "unstakedFunds": "Unstaked fondse",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Vandag",
@@ -1100,7 +1120,10 @@
                     "success": "Betaalbesonderhede bygevoeg vanaf IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1247,16 @@
             "cannotFindStakingEvent": "Kan nie staking event vind nie.",
             "cannotVisitAirdropWebsite": "Kan nie die {airdrop} webwerf oopmaak nie.",
             "invalidStakingEventId": "Ongeldige staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Die gebruik van node oor HTTP laat verkeer ongeënkripteer wees en kan 'n sekuriteitsrisiko inhou."
         },
         "participation": {
-            "noAccounts": "Jy hey geen IOTA nie."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1268,10 @@
             "low": "Laag",
             "veryLow": "Baie laag"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking het nog nie begin nie",
-                "body": "Kom kyk later weer. Die staking geleentheid het nie begin nie."
-            },
-            "commencing": {
-                "title": "Pre-staking is nou oop",
-                "body": "Pre-stake tokens vooraf in, en sodra die staking begin, sal jy outomaties elke 10 sekondes belonings begin ontvang."
-            },
-            "activeHolding": {
-                "title": "Staking aan die gang",
-                "body": "Goeie werk. Jy sal elke 10 sekondes belonings ontvang."
-            },
-            "inactiveHolding": {
-                "title": "Staking het geëindig",
-                "body": "Stake jou IOTA-tokens om elke 10 sekondes belonings te ontvang."
-            },
-            "inactive": {
-                "title": "Geen staking gebeurtenisse bespeur nie",
-                "body": "Maak netwerkkonfigurasie in Gevorderde instellings oop en maak seker dat die huidige node die \"Participation\"-funksie het deur op \"Bekyk inligting\" te klik."
-            },
-            "ended": {
-                "title": "Staking het geëindig",
-                "bodyAboveRewardMin": "Assembly en Shimmer belonings sal aan jou beursies uitgedeel word wanneer elk van die onderskeie netwerke begin.",
-                "bodyBelowRewardMin": "Jy het nie genoeg IOTA ingesit om die minimum belonings te bereik nie."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Nuwe unstaked fondse:{amount}",
             "titleNoFunds": "Nuwe unstaked fondse",
-            "preBody": "Jy het tokens op 'n staked beursie ontvang.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "Jy moet hierdie nuwe fondse met weer Stake om airdrop belonings daarvoor te ontvang."
         },
         "stakingMinRewards": {
@@ -1308,5 +1306,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Beursie",
+        "staking": "Staking"
     }
 }

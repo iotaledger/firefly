@@ -318,7 +318,7 @@
             "theme": {
                 "title": "테마",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "시스템 테마를 변경하는 경우, 테마를 반영하려면 Firefly를 다시 시작해야 할 수도 있습니다"
             },
             "language": {
                 "title": "언어",
@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #회}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "최신 상태입니다.",
-                    "outOfDate": "구버전",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "하드웨어 장치",
-                    "statuses": {
-                        "appNotOpen": "IOTA 앱 열리지 않음",
-                        "connected": "연결됨",
-                        "legacyConnected": "{legacy} 앱 열림",
-                        "locked": "잠김",
-                        "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
-                        "notDetected": "인식되지 않음",
-                        "otherConnected": "앱 열림"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "지갑 상태",
-                    "locked": "잠김",
-                    "unlocked": "잠금 해제됨"
-                },
-                "strongholdBackup": {
-                    "title": "지갑 백업",
-                    "weeksAgo": "{weeks, plural, other {#주}} 전"
-                }
-            },
             "network": {
-                "networkOperational": "네트워크 정상",
-                "networkDegraded": "네트워크 성능 저하됨",
-                "networkDown": "네트워크 연결 끊김",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "상태",
                 "messagesPerSecond": "초당 메세지",
                 "referencedRate": "참조 비율"
             },
             "profileModal": {
                 "allSettings": "전체 설정",
-                "logout": "로그아웃"
+                "logout": "로그아웃",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "{date} 마지막으로 백업했습니다",
+                    "notBackedUp": "백업되지 않음",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "스테이킹",
             "welcome": "환영합니다. 스테이킹 대시보드입니다!",
             "status": {
                 "upcoming": "이벤트 실행 전",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Staking 자금"
             },
             "info": {
-                "upcomingSubheader": "이벤트가 시작되지 않았습니다.",
-                "upcomingHeader": "이후에 다시 확인해보세요.",
-                "commencingSubheader": "Staking을 준비하세요.",
-                "commencingHeader": "여러분의 토큰을 pre-stake 하세요!",
-                "holdingSubheaderHolding": "이제 staking 보상 얻기",
-                "holdingSubheaderNotHolding": "IOTA staking을 통해 보상 받기",
-                "holdingHeaderHolding": "{duration} 남음",
-                "holdingHeaderNotHolding": "여러분의 토큰을 staking 하세요!",
-                "endedSubheader": "Staking이 이제 종료되었습니다.",
-                "endedHeader": "감사합니다!",
-                "inactiveHeader": "노드를 바꿔보세요.",
-                "inactiveSubheader": "Staking 탐지되지 않음"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "잔여수량",
                 "commencing": "Staking이 시작될때까지",
-                "collectedRewards": "보상 수령",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly는 허가가 필요없는 확장성이 매우 높은 다중 체인 네트워크로 composable 스마트 컨트랙트를 빌드하고 배포할수 있습니다. Assembly는 web3의 미래입니다. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "잔고 찾기",
-            "body": "누락 된 잔액을 찾으려면보다 철저한 주소 검색을 수행하십시오. 시간이 걸릴 수 있습니다.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "총 잔고",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "검색을 허용하려면 암호를 입력해주세요."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "거래 내역 내보내기",
             "body": "선택한 지갑의 거래 기록을 내보내세요. 내보낸 파일은 .csv 파일형식으로 저장합니다.",
             "profileName": "프로필 이름:",
-            "accountName": "계정 이름:",
+            "accountName": "Wallet name:",
             "typePassword": "내보내기를 허용하려면 암호를 입력해주세요"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking이 아직 시작되지 않았습니다.",
-            "commencingDate": "Staking이 아직 시작되지 않았습니다.",
-            "body": "여러분의 자금을 staking 전에 pre-staking 하면, staking 시작 시잠에 자동으로 보상을 받기 시작할 것입니다.",
-            "ok": "네. 이해했습니다."
         },
         "stakingManager": {
             "title": "Staking 관리",
             "description": "지갑을 staking 하면 해당 자금에 staking 표시를 하여 여러분께 보내게됩니다. 자금은 언제든 이체 가능하지만 staking 보상 수령을 계속 받지는 못하게 됩니다.",
             "totalFundsStaked": "Staking 총 자금",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop 참여",
+            "title": "Confirm Participation",
             "subtitleStake": "Staking이 이제 시작됩니다.",
             "subtitleMerge": "Merge를 곧 시작합니다.",
-            "bodyStake": "만약 두 가지 airdrop에 참여하고 싶지 않다면 아래에서 선택해제할 수 있습니다. 추후에 언제든지 staking 취소 및 재시작할 수 있습니다.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "예상 보상"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "Shimmer에 대하여",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "변경된 서비스 약관 및 개인정보 보호 정책을 읽었으며 이에 동의합니다",
             "tosCheckbox": "변경된 서비스 약관을 읽었으며 이에 동의합니다",
             "privPolicyCheckbox": "변경된 개인정보 보호 정책을 읽었으며 이에 동의합니다"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Manage stake",
         "merge": "병합",
         "mergeFunds": "자금 병합",
-        "done": "완료"
+        "done": "완료",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "비밀번호",
@@ -961,7 +980,6 @@
         "darkTheme": "어둡게",
         "systemTheme": "시스템",
         "balance": "잔고",
-        "accountBalance": "지갑 잔고",
         "all": "전부",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -972,6 +990,7 @@
         "profiles": "프로필",
         "dev": "개발자",
         "createAccount": "지갑 만들기",
+        "createNewWallet": "Create a new wallet",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
@@ -1053,7 +1072,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staking 자금",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "지갑 색상"
+        "accountColor": "지갑 색상",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "오늘",
@@ -1100,7 +1120,10 @@
                     "success": "IOTA 링크에서 결제 세부 사항 추가됨"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1247,16 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1268,10 @@
             "low": "낮음",
             "veryLow": "매우 낮음"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
-            },
-            "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
-            },
-            "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
-            },
-            "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
-            },
-            "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
-            },
-            "ended": {
-                "title": "Staking이 이제 종료되었습니다.",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
@@ -1308,5 +1306,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "지갑",
+        "staking": "스테이킹"
     }
 }

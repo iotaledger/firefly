@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Последняя версия",
-                    "outOfDate": "Требует обновления",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "Устройства",
-                    "statuses": {
-                        "appNotOpen": "Приложение IOTA не открыто",
-                        "connected": "Подключено",
-                        "legacyConnected": "Приложение {legacy} открыто",
-                        "locked": "Заблокировано",
-                        "mnemonicMismatch": "Неправильный Ledger или Mnemonic",
-                        "notDetected": "Не обнаружено",
-                        "otherConnected": "Приложение открыто"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Статус кошелька",
-                    "locked": "Заблокировано",
-                    "unlocked": "Разблокировано"
-                },
-                "strongholdBackup": {
-                    "title": "Резервная копия кошелька",
-                    "weeksAgo": "{weeks, plural, one {# неделя} few {# недели} other {# недель}}"
-                }
-            },
             "network": {
-                "networkOperational": "Сеть исправна",
-                "networkDegraded": "Деградация сети",
-                "networkDown": "Сеть отключена",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Статус",
                 "messagesPerSecond": "Сообщений в секунду",
                 "referencedRate": "Базовая скорость"
             },
             "profileModal": {
                 "allSettings": "Все настройки",
-                "logout": "Выйти"
+                "logout": "Выйти",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Дата последней резервной копии: {date}",
+                    "notBackedUp": "Резервная копия не создана",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Ставки",
             "welcome": "Добро пожаловать в панель управления ставками!",
             "status": {
                 "upcoming": "Событие не началось",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Ставочные средства"
             },
             "info": {
-                "upcomingSubheader": "Событие не началось",
-                "upcomingHeader": "Проверить позже",
-                "commencingSubheader": "Приготовиться к ставке",
-                "commencingHeader": "Сделайте предварительную ставку токенов!",
-                "holdingSubheaderHolding": "Теперь зарабатываем вознаграждения за ставки",
-                "holdingSubheaderNotHolding": "Зарабатывайте вознаграждения, делая ставки IOTA",
-                "holdingHeaderHolding": "Осталось {duration}",
-                "holdingHeaderNotHolding": "Ставьте свои токены!",
-                "endedSubheader": "Ставки завершились",
-                "endedHeader": "Спасибо!",
-                "inactiveHeader": "Попытка изменить узел",
-                "inactiveSubheader": "Ставка не обнаружена"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Остаток",
                 "commencing": "До начала ставок",
-                "collectedRewards": "Собранные выплаты",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и развертывания составных смарт-контрактов. Assembly - это будущее web3. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Стимулируемая промежуточная сеть для продвижения основных инноваций на IOTA. Все, что происходит, происходит. Как будет развиваться Shimmer, зависит от вас."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Определитель баланса",
-            "body": "Проведите более тщательный поиск адресов, чтобы найти недостающие балансы. Это может занять некоторое время.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Общий баланс",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Введите ваш пароль, чтобы разрешить поиск."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Экспортировать историю транзакций",
             "body": "Экспорт истории транзакций для выбранного кошелька. Экспортируемый файл будет иметь формат .csv.",
             "profileName": "Имя профиля:",
-            "accountName": "Название счёта:",
+            "accountName": "Wallet name:",
             "typePassword": "Введите пароль для разрешения экспорта"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Ставка еще не начата",
-            "commencingDate": "Ставка еще не начата",
-            "body": "Предварительно разместив свои средства до начала ставок, вы автоматически начнете получать вознаграждение, когда начнутся ставки.",
-            "ok": "Хорошо, я понял"
         },
         "stakingManager": {
             "title": "Управление ставками",
             "description": "Когда вы перевели кошелёк в режим ставки, вы отправляете транзакцию самому себе, помечая эти средства как \"сделанные ставки\". Вы можете перевести токены в любое время, но вы не будете продолжать получать вознаграждение за ставку.",
             "totalFundsStaked": "Общая сумма поставленных средств",
             "stakedSuccessfully": "Ваши средства теперь участвуют в стейкинге на {account}.",
-            "unstakedSuccessfully": "Ваши средства были сняты со стейкинга на {account}."
+            "unstakedSuccessfully": "Ваши средства были сняты со стейкинга на {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Участие в раздаче",
+            "title": "Confirm Participation",
             "subtitleStake": "Вы собираетесь принять участие в ставках",
             "subtitleMerge": "Вы собираетесь объединить",
-            "bodyStake": "Если вы не хотите участвовать в обоих раздачах, вы можете отказаться от участия ниже. Вы можете отозвать и возобновить ставку в любое время.",
-            "bodyMerge": "Ваши средства будут поставлены на {airdrop}. Чтобы изменить, в каких раздачах вы хотите участвовать, отмените ставку этого кошелька и сделайте ее снова.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Предполагаемое вознаграждение"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "О Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "Я прочитал и принимаю обновленные Условия предоставления услуг и Политику конфиденциальности",
             "tosCheckbox": "Я прочитал и принимаю обновленные Условия предоставления услуг",
             "privPolicyCheckbox": "Я прочитал и принимаю обновленную Политику конфиденциальности"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Управление ставкой",
         "merge": "Объединить",
         "mergeFunds": "Объединить средства",
-        "done": "Выполнено"
+        "done": "Выполнено",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Пароль",
@@ -961,7 +980,6 @@
         "darkTheme": "Тёмная",
         "systemTheme": "Система",
         "balance": "Баланс",
-        "accountBalance": "Баланс кошелька",
         "all": "Все",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
@@ -972,6 +990,7 @@
         "profiles": "Профили",
         "dev": "Разработчик",
         "createAccount": "Создать кошелёк",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
@@ -1053,7 +1072,8 @@
         "notStaked": "Не поставлено",
         "stakedFunds": "Ставочные средства",
         "unstakedFunds": "Выведеноные средства",
-        "accountColor": "Цвет кошелька"
+        "accountColor": "Цвет кошелька",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Сегодня",
@@ -1100,7 +1120,10 @@
                     "success": "Платежные реквизиты добавлены из ссылки IOTA"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1247,16 @@
             "cannotFindStakingEvent": "Невозможно найти событие, связанное со ставками.",
             "cannotVisitAirdropWebsite": "Невозможно открыть веб-сайт {airdrop}.",
             "invalidStakingEventId": "Неверный ID события ставки."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
         },
         "participation": {
-            "noAccounts": "У вас нет IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1268,10 @@
             "low": "Низкий",
             "veryLow": "Очень низкий"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Ставки еще не начались",
-                "body": "Проверьте позже. Ставка еще не началась."
-            },
-            "commencing": {
-                "title": "Предварительные ставки открыты",
-                "body": "Сделайте предварительную ставку, и как только ставка начнется, вы автоматически начнете получать вознаграждение каждые 10 секунд."
-            },
-            "activeHolding": {
-                "title": "В настоящее время происходит ставка",
-                "body": "Хорошая работа. Вы будете получать вознаграждение каждые 10 секунд."
-            },
-            "inactiveHolding": {
-                "title": "Ставки открыты",
-                "body": "Ставьте свои токены IOTA, чтобы получать вознаграждение каждые 10 секунд."
-            },
-            "inactive": {
-                "title": "События, связанные со ставками, не обнаружены",
-                "body": "Откройте конфигурацию сети в разделе \"Дополнительные настройки\" и убедитесь, что текущий узел имеет функцию \"Участие\", нажав \"Просмотр информации\"."
-            },
-            "ended": {
-                "title": "Ставки завершились",
-                "bodyAboveRewardMin": "Начисления Assembly и Shimmer будут распределены по вашим кошелькам после запуска каждой из соответствующих сетей.",
-                "bodyBelowRewardMin": "Вы не сделали достаточно ставок IOTA, чтобы достичь минимального вознаграждения."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Новые выведенные средства: {amount}",
             "titleNoFunds": "Новые выведенные средства",
-            "preBody": "Вы получили токены на кошелек со ставками.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "Чтобы получить вознаграждение в виде раздач, вам нужно вручную сделать ставку на эти новые средства."
         },
         "stakingMinRewards": {
@@ -1308,5 +1306,9 @@
             "request": "Нам нужно разрешение на использование камеры для сканирования QR-кодов.",
             "requestInAppSettings": "Если вы хотите предоставить разрешение на использование камеры для сканирования QR-кодов, включите его в настройках приложения."
         }
+    },
+    "tabs": {
+        "wallet": "Кошелёк",
+        "staking": "Ставки"
     }
 }

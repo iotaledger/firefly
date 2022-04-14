@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Nutirîn",
-                    "outOfDate": "Pêdiviya nûjenkirinê heye",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "Pergala Arasteyî",
-                    "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
-                        "locked": "Kilîl kirî",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Rewşa Cuzdankê",
-                    "locked": "Kilîl kirî",
-                    "unlocked": "Kilîl vekirî"
-                },
-                "strongholdBackup": {
-                    "title": "Cîhgira Cuzdankê",
-                    "weeksAgo": "{weeks, plural, one {# hefte} other {# hefte}} berîya"
-                }
-            },
             "network": {
-                "networkOperational": "Network Çalake",
-                "networkDegraded": "Pirsgirêka Performansa Networkê",
-                "networkDown": "Girêdana Networkê Qeta",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Hal",
                 "messagesPerSecond": "Peyam di sanîyek de",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "Hemu dilkirin",
-                "logout": "Derkeve"
+                "logout": "Derkeve",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Cîhgira dawî we standî {date}",
+                    "notBackedUp": "Nehat cîhgirkirin",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Staked funds"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Remaining",
                 "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Gerdîta mayîna",
-            "body": "Lêgerînek ya navnîşana berfirehtir pêk bînin da ku hevsengiyên wenda bibînin.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Krediya tevahî",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Jibo destûra lêgerînê pêborîna xwe têkevin."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "accountName": "Account name:",
+            "accountName": "Wallet name:",
             "typePassword": "Type your password to allow exporting"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "Confirm Participation",
             "subtitleStake": "You are about to stake",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking round {periodNumber} from {date}",
+            "body": "Ready for the next round of staking? Participate in the 30 days staking round {periodNumber} from {date}. Stake your IOTAs and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Şîfre",
@@ -961,7 +980,6 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Mayîn",
-        "accountBalance": "Mayîna Cuzdankê",
         "all": "All",
         "incoming": "Yên hatî",
         "outgoing": "Yên çûyî",
@@ -972,6 +990,7 @@
         "profiles": "Profîl",
         "dev": "Pêşvebir",
         "createAccount": "Cuzdanek nû çêke",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Navê Cuzdankê",
         "latestTransactions": "Transferên Dawî",
         "transactions": "Lîsteya Transferan",
@@ -1053,7 +1072,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Evro",
@@ -1100,7 +1120,10 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1247,16 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1268,10 @@
             "low": "Lawaz",
             "veryLow": "Gelekî Nizm"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
-            },
-            "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
-            },
-            "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
-            },
-            "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
-            },
-            "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
-            },
-            "ended": {
-                "title": "Staking has now ended",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
@@ -1308,5 +1306,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Cuzdank",
+        "staking": "Staking"
     }
 }
