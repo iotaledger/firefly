@@ -418,10 +418,7 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory
-                        color={$selectedAccount.color}
-                        transactions={getAccountMessages($selectedAccount)}
-                    />
+                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">
