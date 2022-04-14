@@ -7,7 +7,7 @@
     <meta name="turbo-cache-control" content="no-cache">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 2.1">
+    <meta name="generator" content="Retype 2.2">
 
     <!-- Primary Meta Tags -->
     <title>Ledger | Firefly Team Handbook</title>
@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.1.701324820645" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.2.703238917391" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.1.701324820645" defer data-turbo-track="reload"></script>
-    <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.1" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.1.701324820645" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.1.701324820645" defer></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.2.703238917391" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.2" defer data-turbo-track="reload"></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.2.703238917391" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.2.703238917391" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -275,6 +275,7 @@
 <li>Running a Ledger Nano S or X hardware simulator</li>
 <li>Compiling and loading the app onto a Ledger Nano S</li>
 </ul>
+<p>Additionaly, there is a legacy app, which is useful to test migrations. It lives <a href="https://github.com/shufps/app-iota-legacy/tree/tmp_backport_docker">here</a>.</p>
 <doc-anchor-target id="installing">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#installing">#</doc-anchor-trigger>
@@ -299,6 +300,38 @@ sudo apt install docker docker.io</code></pre>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">git clone https://github.com/iotaledger/ledger-iota-app.git</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="legacy-app">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#legacy-app">#</doc-anchor-trigger>
+        <span>Legacy App</span>
+    </h4>
+</doc-anchor-target>
+<p>In case of the Legacy app clone the following repository and check out the correct branch:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">git clone https://github.com/shufps/app-iota-legacy.git
+git checkout tmp_backport_docker</code></pre>
+</doc-codeblock></div>
+<p>information_source: Pick a mnemonic from <a href="https://docs.google.com/spreadsheets/d/1Z4DoHByYa1b5IoFH-qJz647bie6jA_ZJ3MAI9KHS-WU/edit#gid=701925826">this spreadsheet</a> and replace in app-iota-legacy/run_simulator.sh#64 after --seed (note the account index corresponds to the ledger index).
+Write your used seeds and ledger indexes here: <a href="https://hackmd.io/5MQxPS1jT6Cymtmpe6Sq_g?view">https://hackmd.io/5MQxPS1jT6Cymtmpe6Sq_g?view</a>
+If we run out of seeds, we have to ping Thomas to restart the network (and the used seeds should be cleaned up in the hackmd)</p>
+<doc-anchor-target id="update--run-firefly">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#update--run-firefly">#</doc-anchor-trigger>
+        <span>Update &amp; Run Firefly</span>
+    </h3>
+</doc-anchor-target>
+<p>Change the following lines to use the simulator:</p>
+<ol>
+<li><a href="https://github.com/iotaledger/firefly/blob/2b2f9db7a4ce6d713a8aa9ed40b719422f4ac722/packages/desktop/electron/lib/Ledger.js#L97">Under desktop/electron/lib/Ledger.js</a> to <code v-pre>await this.iota.setActiveSeed(`44'/4218'/${508396330 + index}'/${page}'`, security || 2)</code></li>
+<li><a href="https://github.com/iotaledger/firefly/blob/2b2f9db7a4ce6d713a8aa9ed40b719422f4ac722/packages/desktop/electron/lib/Ledger.js#L5">Under desktop/electron/lib/Ledger.js</a> to <code v-pre>const USE_SIMULATOR = true</code></li>
+</ol>
+<p>For using the simulator with migrations, change the following lines as well.</p>
+<ol start="4">
+<li><a href="https://github.com/iotaledger/firefly/blob/2b2f9db7a4ce6d713a8aa9ed40b719422f4ac722/packages/shared/lib/migration.ts#L35">Under shared/lib/migration.ts</a> to <code v-pre>export const MIGRATION_NODES = ['https://api-legacy.migrator.h.potonet.if4testing.rocks']</code></li>
+<li><a href="https://github.com/iotaledger/firefly/blob/2b2f9db7a4ce6d713a8aa9ed40b719422f4ac722/packages/shared/lib/network.ts#L89">Under shared/lib/migration.ts</a> to <code v-pre>return ['https://api.migrator.h.potonet.if4testing.rocks'])</code></li>
+<li><a href="https://github.com/iotaledger/firefly/blob/2b2f9db7a4ce6d713a8aa9ed40b719422f4ac722/packages/shared/lib/ledger.ts#L25">Under shared/lib/migration.ts</a> to <code v-pre>export const ledgerSimulator = true</code></li>
+</ol>
+<p>Rebuild desktop to apply the changes <code v-pre>yarn build &amp;&amp; yarn start</code></p>
 <doc-anchor-target id="building">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#building">#</doc-anchor-trigger>
@@ -327,6 +360,7 @@ sudo ./docker/build_docker.sh</code></pre>
 <p>The <code v-pre>-m</code> argument is used to specify between the Ledger Nano S and Nano X (default is <code v-pre>nanos</code>).</p>
 <p>After running, the simulator listens on port 9999 and can be used without restrictions with the <code v-pre>ledger-iota.rs</code> library.</p>
 <p><span class="docs-emoji">&#x2139;&#xFE0F;</span> When needing to change the mnemonic phrase used for the simulator, please adjust the line <a href="https://github.com/iotaledger/ledger-iota-app/blob/develop/docker/run_simulator.sh#L64">here</a> after the <code v-pre>--seed</code> argument.</p>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> Only one simulator can be run at a time</p>
 <doc-anchor-target id="loading">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#loading">#</doc-anchor-trigger>
