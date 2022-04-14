@@ -19,6 +19,7 @@ import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
 
 export const WALLET: IWalletActor = window['__WALLET__']
+export const WALLET_STARDUST = window['__WALLET__STARDUST__']
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern

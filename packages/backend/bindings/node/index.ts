@@ -70,7 +70,7 @@ import {
 import { Participation } from '@lib/participation/types'
 
 // @ts-ignore
-import addon = require('../index.node')
+import addon = require('../main.node')
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 

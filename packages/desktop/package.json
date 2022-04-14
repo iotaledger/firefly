@@ -28,18 +28,19 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
+        "@iota/wallet": "^1.0.16",
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
         "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
         "@sentry/electron": "^2.5.4",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
+        "firefly-actor-system-nodejs-bindings": "0.1.0",
         "hw-app-iota": "0.6.5",
         "kdbxweb": "^1.14.4",
         "keytar": "^7.3.0",
         "node-machine-id": "^1.1.12",
-        "shared": "0.0.0",
-        "firefly-actor-system-nodejs-bindings": "0.1.0"
+        "shared": "0.0.0"
     },
     "devDependencies": {
         "@sentry/webpack-plugin": "^1.18.5",

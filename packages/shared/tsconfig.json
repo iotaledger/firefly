@@ -4,6 +4,7 @@
         "baseUrl": "./",
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
+        "moduleResolution": "node",
         "outDir": "out",
         "paths": {
             "@common/*": ["./lib/common/*"],
