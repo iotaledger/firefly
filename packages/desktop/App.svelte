@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { stage, loggedIn } from 'shared/lib/app'
-    import { appSettings, hasRenamedProfileFoldersToId, initAppSettings } from 'shared/lib/appSettings'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
@@ -11,7 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameAllProfileFoldersToId } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -73,18 +73,7 @@
             initRouters()
         }, 3000)
 
-        // This is added to migrate all profile folder names from using the profile name to the id
-        // TEMP: Changed the below condition to always execute and attempt to rename folders in 1.5.0
-        // this is because, due to bugs in 1.4.+ people downgrade to 1.3.3 which delete all the folders,
-        // they make new ones and then when they upgrade to 1.4.+ again this will never execute, and the users
-        // folders/profiles will be wiped again
-        // if (!get(hasRenamedProfileFoldersToId)) {
-        // @ts-ignore
-        /* eslint-disable no-constant-condition */
-        if (true) {
-            await renameAllProfileFoldersToId()
-            hasRenamedProfileFoldersToId.set(true)
-        }
+        await renameOldProfileFoldersToId()
 
         initAppSettings.set($appSettings)
 
