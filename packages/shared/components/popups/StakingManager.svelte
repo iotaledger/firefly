@@ -250,7 +250,11 @@
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
             class={`w-full flex flex-col rounded-xl border-2 border-solid
-                ${$isPartiallyStaked ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}
+                ${
+                    $isPartiallyStaked && !$isPerformingParticipation
+                        ? 'border-yellow-600'
+                        : 'border-gray-200 dark:border-gray-600'
+                }`}
         >
             <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                 {#if isCurrentAccountStaked}
@@ -342,7 +346,7 @@
                     {:else}{localize(`actions.${isCurrentAccountStaked ? 'unstake' : 'stake'}`)}{/if}
                 </Button>
             </div>
-            {#if $isPartiallyStaked && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
+            {#if $isPartiallyStaked && !$isPerformingParticipation && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
                 <div
                     class="space-x-4 mx-2 mb-2 pl-4 pr-2.5 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600"
                 >
