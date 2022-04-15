@@ -269,7 +269,7 @@ function deriveParticipationEventState(
 }
 
 export const assemblyStakingEventState: Readable<ParticipationEventState> = derived(
-    [networkStatus],
+    [networkStatus, participationEvents],
     ([$networkStatus]) => {
         const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Assembly)
         return deriveParticipationEventState(stakingEvent, $networkStatus)
