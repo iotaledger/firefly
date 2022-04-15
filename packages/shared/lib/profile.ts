@@ -468,7 +468,7 @@ async function renameProfileFolder(oldName: string, newName: string): Promise<vo
 export async function renameOldProfileFoldersToId(): Promise<void> {
     const walletPath = await getWalletDataPath()
     const profileFolders = await Platform.listProfileFolders(walletPath)
-    const oldProfiles = get(profiles).filter((profiles) => profileFolders.find((p) => p === profiles.name))
+    const oldProfiles = get(profiles).filter((profile) => profileFolders.find((p) => p === profile.name))
 
     if (oldProfiles.length > 0) {
         await Promise.all(
