@@ -48,7 +48,7 @@ const ElectronApi = {
             }
         })
     },
-    listProfileFolders(profileStoragePath, profiles) {
+    listProfileFolders(profileStoragePath) {
         return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the profile path matches the user data path
             // so that we don't try and remove things outside our scope
