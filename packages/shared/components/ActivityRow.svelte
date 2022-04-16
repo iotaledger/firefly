@@ -19,7 +19,6 @@
 
     export let timestamp
     export let confirmed
-    export let includeFullSender
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
@@ -78,23 +77,19 @@
 
     $: {
         if (txPayload) {
-            const acc = txPayload.data.essence.data.incoming ? receiverAccount : senderAccount
+            const acc = txPayload.data.essence.data.incoming ? senderAccount : receiverAccount
 
             // The address in the payload was one of our accounts so grab
             // the account alias to display
             if (acc) {
-                if (includeFullSender) {
-                    accountAlias = acc.alias
-                }
+                accountAlias = acc.alias
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
-                if (includeFullSender) {
-                    accountAlias = truncateString(
-                        txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
-                        3,
-                        3
-                    )
-                }
+                accountAlias = truncateString(
+                    txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
+                    3,
+                    3
+                )
             }
         }
     }
@@ -102,26 +97,24 @@
     let direction: string
     $: {
         if (txPayload) {
-            if (includeFullSender) {
-                if (isParticipationPayload(txPayload)) {
-                    direction = 'staking.stakedFunds'
-                } else {
-                    direction = confirmed
-                        ? txPayload.data.essence.data.incoming
-                            ? 'general.receivedTo'
-                            : 'general.sentFrom'
-                        : txPayload.data.essence.data.incoming
-                        ? 'general.receivingTo'
-                        : 'general.sendingFrom'
-                }
+            if (isParticipationPayload(txPayload)) {
+                direction = 'general.stakingTransaction'
+            } else if (txPayload.data.essence.data.internal) {
+                direction = confirmed
+                    ? txPayload.data.essence.data.incoming
+                        ? 'general.transferFrom'
+                        : 'general.transferTo'
+                    : txPayload.data.essence.data.incoming
+                    ? 'general.transferringFrom'
+                    : 'general.transferringTo'
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
-                        ? 'general.received'
-                        : 'general.sent'
+                        ? 'general.receivedFrom'
+                        : 'general.sentTo'
                     : txPayload.data.essence.data.incoming
-                    ? 'general.receiving'
-                    : 'general.sending'
+                    ? 'general.receivingFrom'
+                    : 'general.sendingTo'
             }
         }
     }
@@ -185,9 +178,7 @@
             {#if hasCachedMigrationTx || milestonePayload}
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {#if includeFullSender}
-                    {localize('general.stakedFor', { values: { account: accountAlias } })}
-                {:else}{localize('general.staked')}{/if}
+                {localize('general.stakingTransaction')}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">{date}</p>
