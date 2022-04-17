@@ -41,6 +41,7 @@
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { account } from '@lib/typings'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -249,8 +250,11 @@
     }
 
     const handleSendTypeClick = (type: SEND_TYPE): void => {
-        selectedSendType = type
-        clearErrors()
+        if (selectedSendType !== type) {
+            selectedSendType = type
+            to = undefined
+            clearErrors()
+        }
     }
 
     const handleToSelect = (item) => {
@@ -323,7 +327,7 @@
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
             const internal = selectedSendType === SEND_TYPE.INTERNAL
-            let accountAlias = internal ? to.alias : undefined
+            let accountAlias = internal ? to?.alias : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
@@ -377,7 +381,7 @@
 
     const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
         ...account,
-        label: `${account.alias} • ${account.balance}`,
+        label: `${account?.alias} • ${account.balance}`,
     })
 
     const handleMaxClick = (): void => {
@@ -390,10 +394,10 @@
 
     const updateFromSendParams = (sendParams: SendParams): void => {
         selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = sendParams.unit ?? (sendParams.amount === 0 ? Unit.Mi : Unit.i)
-        const rawAmount = changeUnits(sendParams.amount, unit, Unit.i)
-        amount = sendParams.amount === 0 ? '' : formatUnitPrecision(rawAmount, unit, false)
+        unit = sendParams.unit ?? (Number(sendParams.amount) === 0 ? Unit.Mi : Unit.i)
+        amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
+        to = sendParams?.toWalletAccount?.id !== $selectedAccount.id ? sendParams?.toWalletAccount : undefined
         if (accountsDropdownItems) {
             to =
                 $liveAccounts.length === 2
@@ -427,6 +431,20 @@
         if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
         sendSubscription()
     })
+
+    $: address,
+        unit,
+        amount,
+        selectedSendType,
+        to,
+        sendParams.update((_sendParams) => ({
+            ..._sendParams,
+            address,
+            unit,
+            amount: amount ? String(amount) : '',
+            toWalletAccount: to ? addLabel(to) : undefined,
+            isInternal: selectedSendType === SEND_TYPE.INTERNAL,
+        }))
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">

@@ -163,15 +163,6 @@
     }
 </script>
 
-<div
-    on:click={handleBackClick}
-    class="inline-flex justify-between items-center w-20 p-2 pr-4 bg-white hover:bg-gray-100 border
-    rounded-lg border-solid border-gray-300 cursor-pointer mb-5"
->
-    <Icon icon="arrow-left" classes="w-4 h-4 text-gray-500" />
-    <Text type="p" smaller overrideColor classes="text-gray-800">{localize('actions.back')}</Text>
-</div>
-
 <div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
         <div class="flex flex-start items-center mb-2">

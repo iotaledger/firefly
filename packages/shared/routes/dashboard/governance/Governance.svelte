@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { GovernanceHeader, GovernanceDashboard, GovernanceEventDetails } from './views'
+    import { GovernanceDashboard, GovernanceEventDetails } from './views'
     import { governanceRoute } from '@core/router'
     import { GovernanceRoute } from '@core/router/enums'
     import { participationEvents } from 'shared/lib/participation/stores'
@@ -9,11 +9,8 @@
     $: event = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
 </script>
 
-<div class="staking-wrapper w-full h-full flex flex-col flex-nowrap px-10 py-8 flex-1 bg-gray-50 dark:bg-gray-900">
+<div class="governance-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
     {#if $governanceRoute === GovernanceRoute.Init}
-        <div class="flex justify-between">
-            <GovernanceHeader />
-        </div>
         <GovernanceDashboard {event} account={$selectedAccount} />
     {:else if $governanceRoute === GovernanceRoute.EventDetails}
         <GovernanceEventDetails {event} account={$selectedAccount} />

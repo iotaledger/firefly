@@ -22,7 +22,7 @@
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
-            resetAccountRouter()
+            resetAccountRouter(false)
             modal?.close()
         }
     }

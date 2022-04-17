@@ -28,7 +28,7 @@
     }
 
     $: isAccountVoting =
-        Object.values($selectedAccountParticipationOverview?.trackedParticipations)?.find((tp) =>
+        Object.values($selectedAccountParticipationOverview?.trackedParticipations || {})?.find((tp) =>
             tp?.find((p) => p?.endMilestoneIndex === 0)
         )?.length > 0 ?? false
 
