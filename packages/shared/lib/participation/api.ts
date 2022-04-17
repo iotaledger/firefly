@@ -52,7 +52,7 @@ function updateParticipationHistoryFromPayload(
     accountId: string,
     action: ParticipationAction,
     eventIds: string[]
-) {
+): void {
     const participationHistoryItems: ParticipationHistoryItem[] = payload.map((message, index) => ({
         messageId: message.id,
         accountId,

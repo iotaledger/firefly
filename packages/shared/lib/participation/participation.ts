@@ -12,14 +12,7 @@ import {
     pendingParticipations,
     participationHistory,
 } from './stores'
-import {
-    AccountParticipationAbility,
-    ParticipationAction,
-    ParticipationEventState,
-    ParticipationEventType,
-    StakingAirdrop,
-    TrackedParticipationItem,
-} from './types'
+import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
 import { get } from 'svelte/store'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 
@@ -118,15 +111,14 @@ export const getMessageParticipationAction = (messageId: string): ParticipationA
     const matchedHistoryItem = get(participationHistory)?.find((item) => item.messageId === messageId)
     if (matchedHistoryItem?.action) {
         return matchedHistoryItem.action
-    } else {
-        const stakingEndMilestoneIndexes = get(participationEvents)
-            ?.filter((event) => event.eventId === ASSEMBLY_EVENT_ID || event.eventId === SHIMMER_EVENT_ID)
-            ?.map((event) => event.information?.milestoneIndexEnd)
-        const messageMilestone = 0
-        if (stakingEndMilestoneIndexes?.find((milestone) => milestone > messageMilestone)) {
-            return ParticipationAction.Stake
-        } else if (stakingEndMilestoneIndexes?.length) {
-            return ParticipationAction.Vote
-        }
+    }
+    const stakingEndMilestoneIndexes = get(participationEvents)
+        ?.filter((event) => event.eventId === ASSEMBLY_EVENT_ID || event.eventId === SHIMMER_EVENT_ID)
+        ?.map((event) => event.information?.milestoneIndexEnd)
+    const lastMilestoneBeforeTreasuryEvent = 0 // TODO: add real milestone
+    if (stakingEndMilestoneIndexes?.find((milestone) => milestone > lastMilestoneBeforeTreasuryEvent)) {
+        return ParticipationAction.Stake
+    } else if (stakingEndMilestoneIndexes?.length) {
+        return ParticipationAction.Vote
     }
 }

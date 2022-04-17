@@ -37,7 +37,6 @@
     let messageValue = ''
     let date = localize('error.invalidDate')
     let txPayload: Transaction
-    let participationLocaleKey: string
 
     $: {
         try {
@@ -59,25 +58,6 @@
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
     $: participationAction = getMessageParticipationAction(id)
-    $: {
-        switch (participationAction) {
-            case ParticipationAction.Stake:
-                participationLocaleKey = 'staked'
-                break
-            case ParticipationAction.Vote:
-                participationLocaleKey = 'voted'
-                break
-            case ParticipationAction.Unstake:
-                participationLocaleKey = 'unstaked'
-                break
-            case ParticipationAction.Unvote:
-                participationLocaleKey = 'unvoted'
-                break
-            default:
-                participationLocaleKey = 'participated'
-                break
-        }
-    }
 
     // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
@@ -172,6 +152,20 @@
                 return ''
         }
     }
+    function getParticipationActionLocaleKey(action: ParticipationAction): string {
+        switch (action) {
+            case ParticipationAction.Stake:
+                return 'staked'
+            case ParticipationAction.Vote:
+                return 'voted'
+            case ParticipationAction.Unstake:
+                return 'unstaked'
+            case ParticipationAction.Unvote:
+                return 'unvoted'
+            default:
+                return 'participated'
+        }
+    }
 </script>
 
 <button
@@ -227,8 +221,10 @@
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
                 {#if includeFullSender}
-                    {localize(`general.${participationLocaleKey}For`, { values: { account: accountAlias } })}
-                {:else}{localize(`general.${participationLocaleKey}`)}{/if}
+                    {localize(`general.${getParticipationActionLocaleKey(participationAction)}For`, {
+                        values: { account: accountAlias },
+                    })}
+                {:else}{localize(`general.${getParticipationActionLocaleKey(participationAction)}`)}{/if}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">

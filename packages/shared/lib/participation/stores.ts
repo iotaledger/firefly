@@ -234,7 +234,4 @@ export const getPendingParticipation = (id: string): PendingParticipation | unde
 export const hasPendingParticipation = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
 
-/**
- * The available participation history
- */
 export const participationHistory = writable<ParticipationHistoryItem[]>([])
