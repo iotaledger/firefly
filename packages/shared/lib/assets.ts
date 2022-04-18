@@ -45,14 +45,14 @@ export const assets = derived(
         if ($assemblyStakingRewards) {
             assets.push({
                 name: Token.Assembly,
-                balance: formatStakingAirdropReward(StakingAirdrop[Token.Assembly], Number($assemblyStakingRewards), 6),
+                balance: formatStakingAirdropReward(StakingAirdrop[Token.Assembly], Number($assemblyStakingRewards), 2),
                 color: '#DCABE1',
             })
         }
         if ($shimmerStakingRewards) {
             assets.push({
                 name: Token.Shimmer,
-                balance: formatStakingAirdropReward(StakingAirdrop[Token.Shimmer], Number($shimmerStakingRewards), 6),
+                balance: formatStakingAirdropReward(StakingAirdrop[Token.Shimmer], Number($shimmerStakingRewards), 2),
                 color: '#25DFCA',
             })
         }

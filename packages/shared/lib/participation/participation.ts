@@ -1,9 +1,8 @@
-import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
-
-import { getParticipationOverview } from './api'
-import { PARTICIPATION_POLL_DURATION } from './constants'
+import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { canAccountReachMinimumAirdrop } from './account'
+import { getParticipationOverview } from './api'
+import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
 import {
     isPerformingParticipation,
     participationAction,
@@ -25,9 +24,12 @@ let participationPollInterval
 export async function pollParticipationOverview(): Promise<void> {
     clearPollParticipationOverviewInterval()
     try {
-        await getParticipationOverview()
+        await getParticipationOverview(ASSEMBLY_EVENT_ID)
         /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
+        participationPollInterval = setInterval(
+            async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
+            PARTICIPATION_POLL_DURATION
+        )
     } catch (error) {
         if (error && error?.error.includes('pluginNotFound')) {
             clearPollParticipationOverviewInterval()

@@ -13,6 +13,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
+    import { ASSEMBLY_EVENT_ID } from '@lib/participation'
 
     const handleNewStakingEvent = (): void => {
         openPopup({
@@ -90,7 +91,7 @@
             handleNewStakingEvent()
         }
         await getParticipationEvents()
-        await getParticipationOverview()
+        await getParticipationOverview(ASSEMBLY_EVENT_ID)
     })
 
     /** Subscribe to transfer state */

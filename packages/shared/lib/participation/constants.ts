@@ -5,7 +5,7 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date()
+export const ASSEMBLY_EVENT_START_DATE = new Date('April 19, 2022')
 
 /**
  * The staking event ID for Assembly.

@@ -9,7 +9,7 @@
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, getColor, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -31,11 +31,9 @@
 
     let datasets: ChartData[]
     let labels: string[]
-    let color: string
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips, steppedLine: chartData.steppedLine ?? false }]
     $: labels = chartData.labels
-    $: color = getColor($activeProfile, $selectedAccount?.id) as string
 
     const hasTitleBar = document.body.classList.contains('platform-win32')
 
@@ -131,7 +129,7 @@
     }
 </script>
 
-<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
+<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-6 py-4">
     <div class="flex justify-between items-center mb-2">
         <div class="flex space-x-4 -ml-3">
             <Dropdown
@@ -188,7 +186,6 @@
         {datasets}
         beginAtZero={$selectedAccount || $selectedDashboardChart !== DashboardChartType.TOKEN}
         {labels}
-        {color}
         {xMaxTicks}
         {formatYAxis}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '160'}px);`}

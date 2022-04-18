@@ -1,12 +1,13 @@
 <script lang="typescript">
     import Chart from 'chart.js'
+    import { AccountColors } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
 
     export let labels = []
     export let datasets = []
-    export let color = 'blue'
+    export let color = AccountColors.Blue.toString()
     export let inlineStyle = 'height: calc(50vh - 140px);'
     export let formatYAxis = (value: unknown): number => Number(value.toString())
 
