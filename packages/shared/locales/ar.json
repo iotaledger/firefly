@@ -498,7 +498,7 @@
                 "version": {
                     "title": "New update available",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "تحديث"
                 }
             }
         },
@@ -931,7 +931,7 @@
         "merge": "دمج",
         "mergeFunds": "دمج الأرصدة",
         "done": "لقد تمت العملية بنجاح",
-        "okIUnderstand": "OK, I understand",
+        "okIUnderstand": "حسنا، فهمت",
         "readMore": "قراءة المزيد"
     },
     "general": {

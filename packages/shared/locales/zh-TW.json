@@ -524,8 +524,8 @@
                     "inactive": "未偵測到質押活動"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
+                    "commencing": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
                     "holdingAndStaking": "您將自動每10秒獲得獎勵。",
                     "holdingAndNotStaking": "質押您的 {token} 代幣來每10秒獲得獎勵。",
                     "endedAndDidStake": "{token} 獎勵將分發至您的錢包一旦主網啟動。",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "估計獎勵"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "第 {periodNumber} 輪質押活動從 {date} 開始",
+            "body": "質押IOTA取得Assembely再度來臨... 參與第 {periodNumber} 輪的90天質押。質押IOTA代幣，賺取ASMB獎勵！",
             "info": "Shimmer質押已完成，僅剩ASMB待分發。"
         },
         "shimmer-info": {
