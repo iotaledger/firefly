@@ -44,7 +44,12 @@
     $: stakingEventState = $assemblyStakingEventState
 
     $: $selectedAccountParticipationOverview, stakingEventState, setText()
-    $: isAssemblyStaked, isShimmerStaked, stakingEventState, $selectedAccountId, setAnimation()
+    $: isAssemblyStaked,
+        isShimmerStaked,
+        stakingEventState,
+        $selectedAccountParticipationOverview,
+        $selectedAccountId,
+        setAnimation()
 
     function setAnimation(): void {
         if (!$selectedAccountParticipationOverview) {
