@@ -30,7 +30,7 @@
         Ended = 'ended',
     }
 
-    let animation: StakingAnimation = StakingAnimation.Neither
+    let animation: StakingAnimation = null
     let header: string
     let body: string
 
@@ -44,43 +44,47 @@
     $: stakingEventState = $assemblyStakingEventState
 
     $: $selectedAccountParticipationOverview, stakingEventState, setText()
-    $: isAssemblyStaked, isShimmerStaked, stakingEventState, $selectedAccountId, setAnimation()
+    $: isAssemblyStaked,
+        isShimmerStaked,
+        stakingEventState,
+        $selectedAccountParticipationOverview,
+        $selectedAccountId,
+        setAnimation()
 
     function setAnimation(): void {
-        if (!$selectedAccountParticipationOverview) {
-            animation = StakingAnimation.Neither
-            return
-        }
-
         switch (stakingEventState) {
             case ParticipationEventState.Upcoming:
             case ParticipationEventState.Commencing:
                 animation = StakingAnimation.Prestaking
                 break
             case ParticipationEventState.Holding: {
-                const participatingEventIds =
-                    $selectedAccountParticipationOverview?.participations?.map((p) => p.eventId) ?? []
-
-                const isStakingForAssembly = participatingEventIds.includes(ASSEMBLY_EVENT_ID)
-                const isStakingForShimmer = participatingEventIds.includes(SHIMMER_EVENT_ID)
-
-                if (isStakingForAssembly && isStakingForShimmer) {
-                    animation = StakingAnimation.Both
-                } else if (!isStakingForAssembly && !isStakingForShimmer) {
+                if (!$selectedAccountParticipationOverview) {
                     animation = StakingAnimation.Neither
                 } else {
-                    if (isStakingForAssembly) {
-                        const hasShimmerRewards = $totalShimmerStakingRewards > 0
-                        animation = hasShimmerRewards
-                            ? StakingAnimation.AssemblyWithShimmerRewards
-                            : StakingAnimation.AssemblyWithoutShimmerRewards
-                    } else if (isStakingForShimmer) {
-                        const hasAssemblyRewards = $totalAssemblyStakingRewards > 0
-                        animation = hasAssemblyRewards
-                            ? StakingAnimation.ShimmerWithAssemblyRewards
-                            : StakingAnimation.ShimmerWithoutAssemblyRewards
-                    } else {
+                    const participatingEventIds =
+                        $selectedAccountParticipationOverview?.participations?.map((p) => p.eventId) ?? []
+
+                    const isStakingForAssembly = participatingEventIds.includes(ASSEMBLY_EVENT_ID)
+                    const isStakingForShimmer = participatingEventIds.includes(SHIMMER_EVENT_ID)
+
+                    if (isStakingForAssembly && isStakingForShimmer) {
+                        animation = StakingAnimation.Both
+                    } else if (!isStakingForAssembly && !isStakingForShimmer) {
                         animation = StakingAnimation.Neither
+                    } else {
+                        if (isStakingForAssembly) {
+                            const hasShimmerRewards = $totalShimmerStakingRewards > 0
+                            animation = hasShimmerRewards
+                                ? StakingAnimation.AssemblyWithShimmerRewards
+                                : StakingAnimation.AssemblyWithoutShimmerRewards
+                        } else if (isStakingForShimmer) {
+                            const hasAssemblyRewards = $totalAssemblyStakingRewards > 0
+                            animation = hasAssemblyRewards
+                                ? StakingAnimation.ShimmerWithAssemblyRewards
+                                : StakingAnimation.ShimmerWithoutAssemblyRewards
+                        } else {
+                            animation = StakingAnimation.Neither
+                        }
                     }
                 }
 
@@ -91,7 +95,7 @@
                 break
             case ParticipationEventState.Inactive:
             default:
-                animation = StakingAnimation.Neither
+                animation = null
                 break
         }
     }
