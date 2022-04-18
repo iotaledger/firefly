@@ -87,7 +87,7 @@
                 // We can't find the address in our accounts so just display the abbreviated address
                 accountAlias = truncateString(
                     txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
-                    3,
+                    4,
                     3
                 )
             }
