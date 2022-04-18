@@ -119,6 +119,27 @@
         }
     }
 
+    let icon: string
+    let iconColor: string
+    $: {
+        if (hasCachedMigrationTx || milestonePayload) {
+            icon = 'double-chevron-right'
+            iconColor = 'gray-600'
+        } else if (isParticipationPayload(txPayload)) {
+            icon = getParticipationIcon(ParticipationAction.Stake)
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.internal) {
+            icon = 'transfer'
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.incoming) {
+            icon = 'chevron-down'
+            iconColor = 'blue-700'
+        } else {
+            icon = 'chevron-up'
+            iconColor = 'blue-500'
+        }
+    }
+
     function getParticipationIcon(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
@@ -129,34 +150,6 @@
                 return 'voting'
             default:
                 return ''
-        }
-    }
-
-    function getIcon(): string {
-        if (hasCachedMigrationTx || milestonePayload) {
-            return 'double-chevron-right'
-        } else if (isParticipationPayload(txPayload)) {
-            return getParticipationIcon(ParticipationAction.Stake)
-        } else if (txPayload.data.essence.data.internal) {
-            return 'transfer'
-        } else if (txPayload.data.essence.data.incoming) {
-            return 'chevron-down'
-        } else {
-            return 'chevron-up'
-        }
-    }
-
-    function getIconColor(): string {
-        if (hasCachedMigrationTx || milestonePayload) {
-            return 'gray-600'
-        } else if (isParticipationPayload(txPayload)) {
-            return 'gray-600'
-        } else if (txPayload.data.essence.data.internal) {
-            return 'gray-600'
-        } else if (txPayload.data.essence.data.incoming) {
-            return 'blue-700'
-        } else {
-            return 'blue-500'
         }
     }
 </script>
@@ -171,7 +164,7 @@
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
-        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{getIconColor()}" icon={getIcon()} />
+        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
