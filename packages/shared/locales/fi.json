@@ -524,10 +524,10 @@
                     "inactive": "Staking-tapahtumia ei havaittu"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stakea {token}-tokenisi saadaksesi palkintoja automaattisesti 10 sekunnin välein, kun staking alkaa {date}.",
+                    "commencing": "Stakea {token}-tokenisi saadaksesi palkintoja automaattisesti 10 sekunnin välein, kun staking alkaa {date}.",
                     "holdingAndStaking": "Saat palkkioita automaattisesti 10 sekunnin välein.",
-                    "holdingAndNotStaking": "Stakea {token} tokenisi saadaksesi palkkioita 10 sekunnin välein.",
+                    "holdingAndNotStaking": "Stakea {token}-tokenisi saadaksesi palkkioita 10 sekunnin välein.",
                     "endedAndDidStake": "{token}-palkkiot tullaan jakamaan lompakkoosi, kun verkko käynnistetään.",
                     "endedAndDidNotStake": "Et osallistunut tähän airdropiin.",
                     "endedAndDidNotReachMinRewards": "Et stakennut tarpeeksi {token}-tokeneita saavuttaaksesi airdropin vähimmäispalkkiota.",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Arvioidut palkkiot"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "Staking-vaihe {periodNumber} {date} alkaen",
+            "body": "IOTA:n staking Assemblyn saamiseksi jatkuu... Osallistu vaiheeseen {periodNumber} 90 päivän ajan. Stakea IOTA-tokenisi ja ansaitse ASMB-palkkioita!",
             "info": "Shimmer-staking on nyt saatettu päätökseen ja vain ASMB-tokenit tullaan jakamaan."
         },
         "shimmer-info": {
