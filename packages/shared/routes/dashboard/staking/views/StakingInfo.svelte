@@ -30,7 +30,7 @@
         Ended = 'ended',
     }
 
-    let animation: StakingAnimation = StakingAnimation.Neither
+    let animation: StakingAnimation = null
     let header: string
     let body: string
 
@@ -48,7 +48,7 @@
 
     function setAnimation(): void {
         if (!$selectedAccountParticipationOverview) {
-            animation = StakingAnimation.Neither
+            animation = null
             return
         }
 
@@ -91,7 +91,7 @@
                 break
             case ParticipationEventState.Inactive:
             default:
-                animation = StakingAnimation.Neither
+                animation = null
                 break
         }
     }
