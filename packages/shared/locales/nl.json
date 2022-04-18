@@ -524,8 +524,8 @@
                     "inactive": "Geen staking gebeurtenissen gedetecteerd"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stake je {token} tokens om elke 10 seconden automatisch beloningen te ontvangen zodra het staken start op {date}.",
+                    "commencing": "Stake je {token} tokens om elke 10 seconden automatisch beloningen te ontvangen zodra het staken start op {date}.",
                     "holdingAndStaking": "Je ontvangt automatisch elke 10 seconden beloningen.",
                     "holdingAndNotStaking": "Stake je {token} tokens om elke 10 seconden beloningen te ontvangen.",
                     "endedAndDidStake": "{token} beloningen zullen worden gedistribueerd naar uw portemonnee zodra het netwerk start.",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Geschatte beloningen"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "Staking fase {periodNumber} van {date}",
+            "body": "IOTA staking voor Assembly gaat verder... Neem deel aan fase {periodNumber} voor 90 dagen. Stake je IOTA tokens en verdien ASMB beloningen!",
             "info": "Shimmer staking is nu voltooid en alleen ASMB tokens worden verdeeld."
         },
         "shimmer-info": {

@@ -15,7 +15,7 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "Appearance",
+            "title": "පෙනුම",
             "body": "Choose your app theme."
         },
         "profile": {
@@ -208,7 +208,7 @@
             "accountIndex": "Account Index",
             "accountPage": "Account Page",
             "standard": "Standard",
-            "expert": "Expert",
+            "expert": "විශේෂඥ",
             "takingAWhile": "This is taking a while...",
             "notGeneratingAddresses": "Is your Ledger generating addresses?",
             "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
