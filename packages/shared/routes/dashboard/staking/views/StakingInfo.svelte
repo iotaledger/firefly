@@ -123,7 +123,7 @@
             const didStake = $currentAssemblyStakingRewards > 0 || $currentShimmerStakingRewards > 0
             const isBelowMinimum =
                 ($currentAssemblyStakingRewardsBelowMinimum > 0 && $currentAssemblyStakingRewards <= 0) ||
-                ($currentShimmerStakingRewardsBelowMinimum > 0 && currentShimmerStakingRewards <= 0)
+                ($currentShimmerStakingRewardsBelowMinimum > 0 && $currentShimmerStakingRewards <= 0)
             const subLocalePath = isBelowMinimum ? 'NotReachMinRewards' : didStake ? 'Stake' : 'NotStake'
             const tokenArguments: LocaleArguments = isBelowMinimum
                 ? { values: { token: Token.IOTA } }

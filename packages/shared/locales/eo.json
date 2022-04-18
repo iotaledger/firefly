@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# malĝusta provo} other {# malĝusta provoj}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Ĝisdata",
-                    "outOfDate": "Malmodernan",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "Aparataroj",
-                    "statuses": {
-                        "appNotOpen": "IOTA Programo Ne Malfermita",
-                        "connected": "Konektita",
-                        "legacyConnected": "{legacy} Malferma Programo",
-                        "locked": "Ŝlosita",
-                        "mnemonicMismatch": "Malĝusta Ledger aŭ Mnemoniko",
-                        "notDetected": "Ne Detektita",
-                        "otherConnected": "Malferma Aplikaĵo"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Monujo-Stato",
-                    "locked": "Ŝlosita",
-                    "unlocked": "Malŝlosi"
-                },
-                "strongholdBackup": {
-                    "title": "Monujo Savkopio",
-                    "weeksAgo": "{weeks, plural, one {# } other {# semajnoj}} antaŭ"
-                }
-            },
             "network": {
-                "networkOperational": "Retaj administrantoj",
-                "networkDegraded": "Reto Degradita",
-                "networkDown": "Reto Malkonektita",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Stato",
                 "messagesPerSecond": "Mesaĝoj po sekundo",
                 "referencedRate": "Referencita indico"
             },
             "profileModal": {
                 "allSettings": "Ĉiuj agordoj",
-                "logout": "Elsaluti"
+                "logout": "Elsaluti",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Vi savis la lastan fojon la {date}",
+                    "notBackedUp": "Ne sekurkopiita",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Stakigante",
             "welcome": "Bonvenon al la staking panelo!",
             "status": {
                 "upcoming": "Evento ne komenciĝis",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Stakitaj bonhavojn"
             },
             "info": {
-                "upcomingSubheader": "Evento ne komenciĝis",
-                "upcomingHeader": "Kontrolu poste",
-                "commencingSubheader": "Preparu por staking",
-                "commencingHeader": "Antaŭ-staku viajn ĵetonojn!",
-                "holdingSubheaderHolding": "Nun gajnante stakajn rekompencojn",
-                "holdingSubheaderNotHolding": "Gajnu rekompencojn per staking de IOTA",
-                "holdingHeaderHolding": "{duration} restas",
-                "holdingHeaderNotHolding": "Stake viajn ĵetonojn!",
-                "endedSubheader": "Staking nun finiĝis",
-                "endedHeader": "Dankon!",
-                "inactiveHeader": "Provu ŝanĝi nodon",
-                "inactiveSubheader": "Staking ne detektita"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Restanta",
                 "commencing": "Ĝis staking komenciĝas",
-                "collectedRewards": "Kolektitaj rekompencoj",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly estas senpermesa, tre skalebla plurĉena reto por konstrui kaj disfaldi komponeblajn inteligentajn kontraktojn. Assembly estas la estonteco de web3. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "La instigita sursceniga reto por antaŭenigi gravajn novigojn pri IOTA. Kio ajn okazas, okazas. Dependas de vi evoluo de Shimmer."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Enhavo serĉilo",
-            "body": "Faru pli ĝisfundan serĉon de adresoj por trovi mankantajn bilancojn. Ĉi tio eble daŭros iom da tempo.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Entuta bilancoj",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Tajpu vian pasvorton por permesi serĉadon."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Eksporti transakciajn historion",
             "body": "Eksportu la transakcian historion por la elektita monujo. La eksportita dosiero estos en .csv-formato.",
             "profileName": "Profilnomo:",
-            "accountName": "La nomo de la konto:",
+            "accountName": "Wallet name:",
             "typePassword": "Tajpu vian pasvorton por permesi eksportadon"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking ankoraŭ ne komenciĝis",
-            "commencingDate": "Staking ankoraŭ ne komenciĝis",
-            "body": "Antaŭen staking viajn bonhavojn antaŭ ol la staking komenciĝos, vi aŭtomate komencos ricevi rekompencojn kiam la staking komenciĝos.",
-            "ok": "Bone, mi komprenas"
         },
         "stakingManager": {
             "title": "Staking Administrado",
             "description": "Kiam vi stakas monujon, vi sendas transakcion al vi mem markante tiujn fondusojn kiel \"stakitaj\". Vi povas translokigi la ĵetonojn iam ajn, sed vi daŭre ne ricevos staking rekompencojn.",
             "totalFundsStaked": "Totalaj bonhavoj stakita",
             "stakedSuccessfully": "Viaj bonhavoj estis rezervitaj por {account}.",
-            "unstakedSuccessfully": "Viaj bonhavoj estis malŝlositaj por {account}."
+            "unstakedSuccessfully": "Viaj bonhavoj estis malŝlositaj por {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Partopreno",
+            "title": "Confirm Participation",
             "subtitleStake": "Vi estas faronta la staking",
             "subtitleMerge": "Vi estas kunfandonta",
-            "bodyStake": "Se vi ne volas partopreni en ambaŭ aerĵetoj, vi povas elekti malaboni. Vi povas malfari kaj reiri por retiriĝi iam ajn.",
-            "bodyMerge": "Viaj bonhavoj estos prizorgataj por {airdrop}. Por ŝanĝi vian partoprenon en la dezirataj eventoj, retiriĝu kaj poste resendu la partoprenon el ĉi tiu monujo.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimataj rekompencoj"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "Pri Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Administri partoprenon",
         "merge": "Kunigi",
         "mergeFunds": "Kunigi bonhavojn",
-        "done": "Farita"
+        "done": "Farita",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Pasvorto",
@@ -961,7 +980,6 @@
         "darkTheme": "Malhela",
         "systemTheme": "Sistemon",
         "balance": "Saldo",
-        "accountBalance": "Bilanco de Monujo",
         "all": "All",
         "incoming": "Enirante",
         "outgoing": "Elirante",
@@ -972,6 +990,7 @@
         "profiles": "Profiloj",
         "dev": "Programisto",
         "createAccount": "Krei monujon",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Nomo de la monujo",
         "latestTransactions": "La lastaj transakcioj",
         "transactions": "Transakcioj",
@@ -1053,7 +1072,8 @@
         "notStaked": "Ne engaĝita",
         "stakedFunds": "Stakitaj bonhavojn",
         "unstakedFunds": "Bonhavoj ne investitaj",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Hodiaŭ",
@@ -1100,7 +1120,10 @@
                     "success": "Pagdetaloj aldonitaj de IOTA-ligo"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1247,16 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1268,10 @@
             "low": "Malalta",
             "veryLow": "Tre malalta"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
-            },
-            "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
-            },
-            "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
-            },
-            "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
-            },
-            "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
-            },
-            "ended": {
-                "title": "Staking nun finiĝis",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
@@ -1308,5 +1306,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Monujo",
+        "staking": "Stakigante"
     }
 }
