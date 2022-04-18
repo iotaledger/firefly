@@ -126,8 +126,8 @@
         }
     }
 
-    let icon
-    let iconColor
+    let icon: string
+    let iconColor: string
     $: {
         if (hasCachedMigrationTx || milestonePayload) {
             icon = 'double-chevron-right'
