@@ -74,8 +74,6 @@
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
-            void getParticipationEvents()
-
             void pollNetworkStatus()
             void pollParticipationOverview()
         } else {
@@ -156,6 +154,8 @@
     }
 
     onMount(() => {
+        void getParticipationEvents()
+
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)

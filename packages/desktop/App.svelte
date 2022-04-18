@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { stage, loggedIn } from 'shared/lib/app'
-    import { appSettings, hasRenamedProfileFoldersToId, initAppSettings } from 'shared/lib/appSettings'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
@@ -11,7 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameAllProfileFoldersToId } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -73,11 +73,7 @@
             initRouters()
         }, 3000)
 
-        // This is added to migrate all profile folder names from using the profile name to the id
-        if (!get(hasRenamedProfileFoldersToId)) {
-            await renameAllProfileFoldersToId()
-            hasRenamedProfileFoldersToId.set(true)
-        }
+        await renameOldProfileFoldersToId()
 
         initAppSettings.set($appSettings)
 

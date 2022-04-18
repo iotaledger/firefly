@@ -47,14 +47,21 @@ export const lastActiveAt = writable<Date>(new Date())
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({
-    amount: 0,
+    amount: undefined,
     unit: Unit.Mi,
     address: '',
     message: '',
     isInternal: false,
 })
 export const clearSendParams = (isInternal = false): void =>
-    sendParams.set({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal })
+    sendParams.set({
+        amount: undefined,
+        unit: Unit.Mi,
+        address: '',
+        message: '',
+        isInternal,
+        toWalletAccount: undefined,
+    })
 
 /**
  * Determines whether a user is logged in

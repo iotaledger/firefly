@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
+    import { showAppNotification } from '@lib/notifications'
+    import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
-    import { showAppNotification } from '@lib/notifications'
-    import { selectedAccount, setSelectedAccount, isSyncing, isTransferring } from '@lib/wallet'
-    import { participationAction } from '@lib/participation/stores'
+    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
+    import { HR, Icon, Modal, Text } from 'shared/components'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
@@ -22,7 +22,7 @@
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
-            resetAccountRouter()
+            resetAccountRouter(false)
             modal?.close()
         }
     }
@@ -46,12 +46,12 @@
             {#each accounts as account}
                 <button
                     on:click={() => handleAccountClick(account.id)}
-                    class="{account.id === $selectedAccount?.id
-                        ? 'bg-gray-50 dark:bg-gray-800'
-                        : ''} hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
+                    class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
                 >
                     <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                    <Text secondary={account.id !== $selectedAccount?.id} type="h5">{account.alias}</Text>
+                    <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
+                        {account.alias}
+                    </Text>
                 </button>
             {/each}
         </div>
@@ -68,7 +68,7 @@
 
 <style type="text/scss">
     .accounts {
-        max-height: 60vh;
+        max-height: 65vh;
     }
     button {
         .circle {
@@ -82,7 +82,7 @@
                 @apply rounded-full;
                 @apply w-3;
                 @apply h-3;
-                @apply border-2;
+                @apply border;
                 @apply border-solid;
                 @apply border-gray-700;
                 @apply bg-transparent;

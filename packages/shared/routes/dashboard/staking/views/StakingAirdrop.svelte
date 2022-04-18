@@ -127,7 +127,7 @@
             >
         </div>
     </div>
-    <div class="w-full h-full px-8 pb-10 flex flex-col justify-end z-0">
+    <div class="w-full h-full px-6 pb-10 flex flex-col justify-end z-0">
         <!-- We check if assembly staking is possible to have both airdrops aligned -->
         <div
             class="{isStakingPossible($assemblyStakingEventState)

@@ -118,7 +118,7 @@ const parseSendOperation = (
 
     return {
         address,
-        amount: Math.abs(parsedAmount),
+        amount: String(Math.abs(parsedAmount)),
         unit: parsedUnit,
         message: '',
     }
