@@ -10,9 +10,9 @@
             "checkbox": "Jeg har læst og jeg accepterer privatlivspolitiken og servicevilkårene"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Fejlrapportering",
+            "body": "Hjælp udviklerne med at forbedre Firefly ved automatisk at sende diagnostiske data, når en fejl eller nedbrud opstår.",
+            "checkbox": "Send fejlrapporter til IOTA Foundation"
         },
         "appearance": {
             "title": "Udseende",
@@ -27,10 +27,10 @@
                 "nonFirst": "For nu, lad os starte med dit profilnavn."
             },
             "addMore": "Du kan tilføje flere profiler senere.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Avancerede indstillinger",
             "developer": {
                 "label": "Udvikler profil",
-                "info": "Connect to the devnet or a private network"
+                "info": "Opret forbindelse til devnet eller et privat netværk"
             }
         },
         "setup": {
@@ -185,33 +185,33 @@
         },
         "legacyLedgerIntro": {
             "title": "Start din Ledger migrering ved hjælp af Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "body1": "Firefly vil hjælpe dig med at overføre dine tokens til det nye Chrysalis netværk.",
+            "body2": "Efter migrationen, vil du være i stand til at sende og modtage dine tokens ved hjælp af din Ledger med Firefly.",
+            "readMore": "Hvad man kan forvente af migrationsprocessen"
         },
         "generateNewLedgerAddress": {
             "title": "Generér ny adresse",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Du skal generere en ny adresse for at migrere dine tokens med Firefly. Klik på knappen nedenfor for at fortsætte.",
+            "confirmTitle": "Bekræft den nye adresse",
+            "confirmBody": "For en sikkerheds skyld, bør du venligst sammenligne den adresse, der er genereret på din Ledger, med den der vises nedenfor. Hvis de matcher, skal du trykke på begge knapper på din Ledger som den beder dig om.",
+            "confirmedTitle": "Adresse bekræftet",
+            "confirmedBody": "Du har bekræftet, at adressen i Firefly matcher den på din Ledger enhed.",
+            "generating": "Genererer adresse"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Skift Ledger app",
+            "body": "Skift til {legacy}-appen på din Ledger for at fortsætte migrationen. Tryk fortsæt, når du er klar."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
+            "title": "Vælg Ledger-konto indeks",
+            "body": "Vælg den Ledger-konto du brugte med Trinity. For de fleste brugere vil dette være standardindekset 0.",
+            "accountIndex": "Kontoindeks",
+            "accountPage": "Kontoside",
             "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "expert": "Ekspert",
+            "takingAWhile": "Det tager et stykke tid...",
+            "notGeneratingAddresses": "Genererer din Ledger adresser?",
+            "reinstallLegacy": "Hvis ikke, så afbryd forbindelsen til enheden og prøv igen. Hvis problemet fortsætter, skal du muligvis geninstallere {legacy}-appen."
         },
         "importBackupPassword": {
             "body1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
@@ -242,7 +242,7 @@
             "miningBundle": "Miner pakke",
             "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
             "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med en lav saldo til at kunne migrere. Tjek igen, hvis din samlede saldo ikke ser rigtig ud.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
             "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
@@ -268,12 +268,12 @@
         },
         "securingSpentAddresses": {
             "title": "Sikring af brugte adresser...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Denne proces tager {minutes, plural, one {# minut} other {# minutter}}.",
             "body2": "Din computer vil køre på fuld kapacitet, lav eventuelt noget andet, mens du venter på at dette er fuldendt."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly vil nu fortsætte med at migrere dine midler. Dette kan tage et stykke tid.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Sørg for at din Ledger er tilsluttet, og at {legacy}-appen holdes åben under hele migreringen.",
             "migrate": "Migrér midler",
             "transaction": "Transaktion {number}",
             "rerun": "Prøv igen"
@@ -287,12 +287,12 @@
             "body": "Sørg for at din saldo er korrekt, før du fortsætter. Du kan tjekke igen, hvis tingene ikke ser korrekt ud.",
             "error": "Det mindste migrationsbeløb er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
             "zeroBalance": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske indtastet dit seed forkert.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske valgt det forkerte kontoindeks."
         },
         "settings": {
             "settings": "Indstillinger",
             "generalSettings": {
-                "title": "General",
+                "title": "Generelt",
                 "description": "Konfigurer din app's udseende og andre generelle indstillinger"
             },
             "security": {
@@ -300,7 +300,7 @@
                 "description": "Skift din adgangskode og justér sikkerhedsrelaterede indstillinger"
             },
             "advancedSettings": {
-                "title": "Advanced",
+                "title": "Avanceret",
                 "description": "Værktøjer og manuelle indstillinger for tekniske brugere"
             },
             "helpAndInfo": {
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Hvis du ændrer dit systemtema, skal du muligvis genstarte Firefly for at se ændringerne"
             },
             "language": {
                 "title": "Sprog",
@@ -334,14 +334,14 @@
             },
             "networkStatus": {
                 "title": "Netværksstatus",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Viser status for den node du er forbundet til"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Eksporter sikkerhedskopi",
                 "description": "Eksporter til en Stronghold fil - en komplet krypteret sikkerhedskopi af dine wallets og den seneste transaktionshistorik"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatisk lås",
                 "description": "Inaktivitetstid før dine tegnebøger låses, og du bliver logget ud"
             },
             "changePassword": {
@@ -357,9 +357,9 @@
                 "action": "Skift Pinkode"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Skift profilnavn",
+                "description": "Skift dit Firefly profilnavn",
+                "success": "Du har ændret dit profilnavn"
             },
             "balanceFinder": {
                 "title": "Saldo finder",
@@ -375,22 +375,22 @@
             },
             "deepLinks": {
                 "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "Udfyld automatisk transaktionsdata i Firefly, når du klikker på et IOTA link"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Opsætning af netværk",
+                "title2": "Netværkskonfiguration",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Dine netværksindstillinger opdateres automatisk i henhold til den aktuelle node-konfiguration (skift af netværk vil resultere i nulstilling af tegnebogstilstand)",
+                    "nonDev": "Dine netværksindstillinger opdateres automatisk i henhold til den aktuelle node-konfiguration"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Netværket blev skiftet til \"{networkName}\".",
+                "resetWallet": "Din tegnebogstilstand er blevet nulstillet.",
+                "connectedTo": "Forbundet til",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "title": "Valg af node",
+                    "description": "Vælg \"Manuel\" for at konfigurere node-indstillinger og oprette forbindelse til dine egne node(s)",
+                    "automatic": "Automatisk",
                     "manual": "Manual"
                 }
             },
@@ -792,7 +792,7 @@
         "crashReporting": {
             "title": "Crash reporting",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "Send fejlrapporter til IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
