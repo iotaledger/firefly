@@ -154,7 +154,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: true,
+    devTools: !app.isPackaged,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
@@ -277,8 +277,6 @@ function createWindow() {
         if (process.env.STAGE === 'prod') {
             initAutoUpdate()
         }
-        // Enable dev tools only in developer mode
-        windows.main.webContents.openDevTools()
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }

@@ -226,7 +226,7 @@ const ElectronApi = {
      *
      * @returns {Promise}
      */
-    getOS: () => ipcRenderer.invoke('get-os'),
+    getOS: () => 'win32',
     /**
      * Gets machine ID
      *
