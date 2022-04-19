@@ -54,14 +54,14 @@ export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
  * The GitHub URLs containing the end Assembly staking results per period.
  */
 export const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/alexsporn/participation-events/master/results/staking/assembly_01.json',
+    'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/assembly_01.json',
 ]
 
 /**
  * The GitHub URLs containing the end Shimmer staking result per period.
  */
 export const SHIMMER_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/alexsporn/participation-events/master/results/staking/shimmer.json',
+    'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/shimmer.json',
 ]
 
 /**
@@ -84,4 +84,4 @@ export const LAST_SHIMMER_STAKING_PERIOD = 1
  * The number of the last completed Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_SHIMMER_STAKING_PERIOD = 1
+export const CURRENT_SHIMMER_STAKING_PERIOD = 0
