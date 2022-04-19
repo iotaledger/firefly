@@ -17,7 +17,7 @@
 </script>
 
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
-<div class="relative left-8">
+<div class="relative left-8" style="-webkit-app-region: none;">
     <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
         <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
         <Text type="h5">{$selectedAccount?.alias}</Text>

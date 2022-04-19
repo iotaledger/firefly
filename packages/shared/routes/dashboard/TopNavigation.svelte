@@ -44,7 +44,7 @@
         : ''} {classes}"
 >
     {#if showBackButton}
-        <button on:click={handleBackClick} class="absolute left-2 cursor-pointer">
+        <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
             <div class="flex items-center space-x-2 ">
                 <Icon width="18" icon="arrow-left" classes="text-gray-500" />
                 <Text overrideColor classes="text-gray-500">{localize('actions.back')}</Text>
