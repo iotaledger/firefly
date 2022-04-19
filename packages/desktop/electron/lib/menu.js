@@ -100,7 +100,7 @@ const buildTemplate = () => {
         },
     ]
 
-    if (!app.isPackaged) {
+    if (true) {
         template[0].submenu.push({
             label: 'Developer Tools',
             role: 'toggleDevTools',
