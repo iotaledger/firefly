@@ -17,14 +17,16 @@
 </script>
 
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
-<button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
-    <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
-    <Text type="h5">{$selectedAccount?.alias}</Text>
-    <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
-        <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
-    </div>
-</button>
-<AccountSwitcherModal {onCreateAccount} {accounts} bind:modal />
+<div class="relative left-8">
+    <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
+        <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
+        <Text type="h5">{$selectedAccount?.alias}</Text>
+        <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
+            <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
+        </div>
+    </button>
+    <AccountSwitcherModal {onCreateAccount} {accounts} bind:modal />
+</div>
 
 <style type="text/scss">
     button {
