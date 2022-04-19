@@ -609,7 +609,7 @@
             "title": "Historia adresów dla {name}",
             "currentBalance": "Saldo: {balance}",
             "internal": "Adres wewnętrzny",
-            "external": "Adres odbiorczy"
+            "external": "Adres odbiorcy"
         },
         "node": {
             "titleAdd": "Dodaj serwer",
@@ -740,8 +740,8 @@
             }
         },
         "ledgerAddress": {
-            "title": "Potwierdź adres odbiorczy",
-            "body": "Potwierdź, że adres odbiorczy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
+            "title": "Potwierdź adres odbiorcy",
+            "body": "Potwierdź, że adres odbiorcy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
         },
         "ledgerMigrateIndex": {
             "title": "Czy potrzebujesz migrować kolejny indeks konta z Trinity?",
@@ -760,7 +760,7 @@
             "totalFundsStaked": "Stakujesz łącznie",
             "stakedSuccessfully": "Twoje środki zostały stakowane przez {account}.",
             "unstakedSuccessfully": "Środki zostały odstakowane przez {account}.",
-            "singleAccountHint": "Szukasz swoich portfeli? Firefly się zmienił. Przełącz pomiędzy portfelami w górnym pasku wyboru."
+            "singleAccountHint": "Szukasz swoich portfeli? Firefly zmienił się. Możesz przełączać pomiędzy swoimi portfelami w górnym pasku wyboru."
         },
         "stakingConfirmation": {
             "title": "Potwierdź uczestnictwo",
@@ -773,7 +773,7 @@
         "newStakingPeriodNotification": {
             "title": "Runda {periodNumber} stakingu od dnia {date}",
             "body": "Kontynuujemy staking IOTA w zamian za tokeny Assembly... Weź udział w rundzie {periodNumber} przez okres 90 dni. Stakuj swoje tokeny IOTA i zdobądź nagrody ASMB!\n",
-            "info": "Staking Shimmer został zakonczony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
+            "info": "Staking Shimmer został zakończony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
         },
         "shimmer-info": {
             "title": "O Shimmer",
@@ -1002,8 +1002,8 @@
         "help": "Pomoc",
         "you": "Ty",
         "messageId": "ID wiadomości",
-        "inputAddress": "Adres nadawczy",
-        "receiveAddress": "Adres odbiorczy",
+        "inputAddress": "Adres nadawcy",
+        "receiveAddress": "Adres odbiorcy",
         "newAddress": "Nowy adres",
         "date": "Data",
         "status": "Status",
