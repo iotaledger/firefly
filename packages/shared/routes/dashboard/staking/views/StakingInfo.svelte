@@ -145,7 +145,7 @@
     }
 
     function onClickLearnMore(): void {
-        Platform.openUrl('https://blog.iota.org/iota-staking-start/')
+        Platform.openUrl('https://blog.iota.org/iota-staking-for-assembly-continues/')
     }
 </script>
 
