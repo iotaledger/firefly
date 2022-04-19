@@ -59,7 +59,9 @@
         if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
-            isBelowMinimumRewards = $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0
+            isBelowMinimumRewards =
+                $selectedAccountParticipationOverview?.[`${airdrop}RewardsBelowMinimum`] > 0 &&
+                $selectedAccountParticipationOverview?.[`${airdrop}Rewards`] <= 0
         }
     }
     $: showWarningState =
@@ -175,8 +177,9 @@
                 type="p"
                 secondary
                 classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}"
-                >{paragraph}</Text
             >
+                {paragraph}
+            </Text>
         {/each}
     </Tooltip>
 {/if}
