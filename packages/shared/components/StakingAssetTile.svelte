@@ -67,9 +67,11 @@
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible(stakingEventState)) ||
-        function toggleTooltip(): void {
-            showTooltip = !showTooltip
-        }
+        (isBelowMinimumRewards && hasStakingEnded)
+
+    function toggleTooltip(): void {
+        showTooltip = !showTooltip
+    }
 
     function handleTileClick(): void {
         openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
@@ -175,8 +177,9 @@
                 type="p"
                 secondary
                 classes="text-left {tooltipText?.body.indexOf(paragraph) !== tooltipText?.body.length - 1 && 'mb-2'}"
-                >{paragraph}</Text
             >
+                {paragraph}
+            </Text>
         {/each}
     </Tooltip>
 {/if}
