@@ -11,6 +11,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
+    import { ProfileType } from '../../../lib/typings/profile'
 
     export let locale: Locale
 
@@ -146,7 +147,11 @@
     </button>
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile name={$activeProfile?.name} bgColor="blue" />
+            <Profile
+                name={$activeProfile?.name}
+                network={$activeProfile?.type === ProfileType.Ledger ? 'iota' : 'shimmer'}
+                bgColor="blue"
+            />
             <Pin
                 bind:this={pinRef}
                 bind:value={pinCode}

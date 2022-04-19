@@ -9,6 +9,7 @@
 
     export let name = ''
     export let id = ''
+    export let network = ''
     export let isDeveloper = false
     export let isLedgerProfile = false
     export let bgColor: string
@@ -30,16 +31,31 @@
 
 <div class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center">
-        <div
-            on:click={() => onClick(id)}
-            class="h-20 w-20 {bgColor
-                ? `bg-${bgColor}-500`
-                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
-        >
-            {#if slots}
-                <slot />
-            {:else}
-                <Text type="h3" classes="text-white">{getInitials()}</Text>
+        <div class="relative">
+            <div
+                on:click={() => onClick(id)}
+                class="h-20 w-20 {bgColor
+                    ? `bg-${bgColor}-500`
+                    : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
+            >
+                {#if slots}
+                    <slot />
+                {:else}
+                    <Text type="h3" classes="text-white">{getInitials()}</Text>
+                {/if}
+            </div>
+            {#if network === 'iota'}
+                <div
+                    class="absolute right-0 bottom-0 grid place-items-center h-7 w-7 rounded-full ring-2 ring-white dark:ring-gray-900 bg-black"
+                >
+                    <Icon icon="iota" classes="text-white" />
+                </div>
+            {:else if network === 'shimmer'}
+                <div
+                    class="absolute right-0 bottom-0 grid place-items-center h-7 w-7 rounded-full ring-2 ring-white dark:ring-gray-900 bg-shimmer-highlight"
+                >
+                    <Icon icon="shimmer" classes="text-black" />
+                </div>
             {/if}
         </div>
         <div class="mt-5 flex flex-row items-baseline space-x-1.5">

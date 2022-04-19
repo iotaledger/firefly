@@ -46,6 +46,7 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
+                    network={profile?.type === ProfileType.Ledger ? 'iota' : 'shimmer'}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"
