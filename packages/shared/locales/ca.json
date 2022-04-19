@@ -473,90 +473,90 @@
                 "allSettings": "Tots els paràmetres",
                 "logout": "Tancar sessió",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Bloqueig de perfil",
+                    "locked": "Stronghold bloquejat",
+                    "unlocked": "Stronghold desbloquejat"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Dispositiu de Hardware",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "L'aplicació IOTA no està oberta",
+                        "connected": "Connectat",
+                        "legacyConnected": "Aplicació Legacy oberta",
+                        "locked": "Bloquejat",
+                        "mnemonicMismatch": "Mnemònic o Ledger incorrecte",
+                        "notDetected": "No detectat",
+                        "otherConnected": "Aplicació oberta"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Còpia de seguretat de les vostres carteres",
                     "lastBackup": "La teva última còpia de seguretat {date}",
                     "notBackedUp": "No s'ha fet una còpia de seguretat",
-                    "button": "Backup"
+                    "button": "Còpia de seguretat"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Nova actualització disponible",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Actualitza"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Benvingut al panell de stake!",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "L'esdeveniment no ha començat",
+                "commencing": "Pre-stake obert",
+                "holdingActive": "Stake en procés",
+                "holdingInactive": "Stake obert",
+                "inactive": "Stake no detectat",
+                "ended": "Stake finalitzat"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "Fons en stake"
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Comprova més tard",
+                    "commencing": "Pre-stake és obert",
+                    "holding": "{duration} de stake restant",
+                    "ended": "S'ha acabat l'stake",
+                    "inactive": "No s'han detectat esdeveniments de stake"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Stakeja les teves {token} per rebre recompenses automàticament cada 10 segons un cop comenci l'stake{date}.",
+                    "commencing": "Stakeja les teves {token} per rebre recompenses automàticament cada 10 segons un cop comenci l'stake{date}.",
+                    "holdingAndStaking": "Rebreu recompenses automàticament cada 10 segons.",
+                    "holdingAndNotStaking": "Stakeja les teves {token} per rebre recompenses cada 10 segons.",
+                    "endedAndDidStake": "{token} les recompenses es distribuiran a la vostra cartera un cop s'iniciïn les xarxes.",
+                    "endedAndDidNotStake": "No heu participat en aquest airdrop.",
+                    "endedAndDidNotReachMinRewards": "No heu stakejat prou {token} per assolir les recompenses mínimes de l'airdrop.",
+                    "inactive": "Obriu la configuració de xarxa a la configuració avançada i assegureu-vos que el node actual tingui la funció \"Participació\" fent clic a \"Mostra informació\"."
                 }
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "holding": "Restant",
+                "commencing": "Fins que començi l'stake",
+                "currentStakingPeriod": "Període actual de stake",
+                "totalWalletRewards": "Recompenses totals a bitlletera",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly és una xarxa multicadena altament escalable i sense permís per crear i desplegar contractes intel·ligents componibles. Assembly és el futur del web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "La xarxa de posada en escena incentivada per avançar en innovacions importants a IOTA. Passi el que passi, passa. Com evoluciona Shimmer depèn de tu."
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Nou esdeveniment",
+                "complete": "Complet"
             }
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "Selector de color",
+                "hexCode": "Codi hexadecimal de colors"
             }
         }
     },
@@ -576,7 +576,7 @@
             "updateAvailable": "Actualització de Firefly disponible",
             "updateDetails": "Versió {version} - {date}",
             "noAutoUpdate": "L'actualització automàtica està deshabilitada en aquesta versió de Windows. Si us plau, aneu a https://firefly.iota.org per baixar l'actualització.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "Esteu executant una versió prèvia al llançament de Firefly. Les actualitzacions estan desactivades."
         },
         "backup": {
             "title": "Darrera còpia de seguretat: {date}",
@@ -768,46 +768,46 @@
             "subtitleMerge": "You are about to merge",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "estimatedAirdrop": "Recompenses estimades"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Fase de stake {periodNumber} de {date}",
+            "body": "L' stake IOTA per Assemby continua... Participa a la fase {periodNumber} durant 90 dies. Stakeja els teus IOTA i guanya recompenses ASMB!",
+            "info": "L'stake de Shimmer s'ha completat i només es distribuiran fitxes ASMB."
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Sobre Shimmer",
+            "body1": "Enhorabona, heu guanyat fitxes SMR com a recompensa de l'stake. Shimmer és una xarxa de posada en escena incentivada per provar actualitzacions importants a IOTA.",
+            "body2": "El nostre objectiu és llançar Shimmer el 2022. Les vostres fitxes estaran disponibles per transferir-los un cop s'iniciï la xarxa."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "Sobre Assembly",
+            "body1": "Enhorabona, heu guanyat fitxes ASMB com a recompensa d'stake. Assembly és una xarxa multicadena per desplegar contractes intel·ligents escalables a IOTA.",
+            "body2": "El nostre objectiu és llançar Assembly el 2022. Les vostres fitxes estaran disponibles per transferir-los un cop s'iniciï la xarxa."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Esteu creant un perfil de desenvolupador",
+            "body": "Estaràs connectat a Chrysalis Devnet de manera predeterminada i podràs canviar de xarxa manualment. Només continua si saps el que estàs fent."
         },
         "crashReporting": {
-            "title": "Crash reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
+            "title": "Informe d'errors",
+            "body": "Ajudeu els desenvolupadors a millorar Firefly enviant automàticament dades de diagnòstic quan es produeix un error o un bloqueig. Si se selecciona, tindrà efecte després de reiniciar Firefly.",
             "checkbox": "Envia informes d'error a la Fundació IOTA"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "Condicions del servei",
+            "privPolicyTitle": "Política de Privacitat",
+            "tosAndPrivPolicyBody": "He llegit i accepto les Condicions del servei i la Política de privacitat.",
+            "tosBody": "Hem actualitzat les Condicions del servei de Firefly.",
+            "privPolicyBody": "Hem actualitzat les Condicions del servei de Firefly.",
+            "tosAndPrivPolicyCheckbox": "He llegit i accepto les condicions d'ús i la política de privacitat.",
+            "tosCheckbox": "He llegit i accepto les condicions d'ús i la política de privacitat.",
+            "privPolicyCheckbox": "He llegit i accepto les condicions d'ús i la política de privacitat"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "La manera d'utilitzar Firefly ha canviat",
+            "body": "El contingut de cada pestanya es troba ara en el context d'una única cartera. Podeu canviar la cartera seleccionada des de qualsevol lloc mitjançant el commutador de la barra de títol.",
+            "hint": "No trobes una cartera? Utilitzeu el cercador de saldo a la configuració per descobrir carteres utilitzades anteriorment."
         }
     },
     "charts": {
@@ -815,7 +815,7 @@
         "outgoingMi": "Sortint {value}",
         "portoflio": "Portafoli",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "En espera",
         "accountValue": "Valor del moneder",
         "accountActivity": "Activitat del moneder",
         "timeframe1Hour": "1 hora",
@@ -826,8 +826,8 @@
     "actions": {
         "continue": "Continuar",
         "back": "Tornar",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "Anterior",
+        "next": "Següent",
         "cancel": "Cancel·lar",
         "close": "Tancar",
         "dismiss": "Omet",
@@ -863,12 +863,12 @@
         "dropHere": "Arrosega els fitxers aquí",
         "syncAll": "Sincronitza-ho tot",
         "export": "Exportar",
-        "exporting": "Exporting",
+        "exporting": "Exportant",
         "exportNewStronghold": "Exporteu un nou Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Activa els enllaços IOTA",
         "enableDeveloperMode": "Activa el mode de desenvolupador",
         "enableSystemNotifications": "Activa les notificacions del sistema",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Exporta l'historial de transaccions",
         "localProofOfWork": "Prova de treball local",
         "unlock": "Desbloqueja",
         "updateFirefly": "Actualitza Firefly",
@@ -883,7 +883,7 @@
         "addNode": "Afegeix un node",
         "updateNode": "Actualitzar el node",
         "removeNode": "Elimina el node",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Elimina tots els nodes",
         "hide": "Oculta",
         "hideOthers": "Amaga els altres",
         "showAll": "Mostrar tots",
@@ -898,7 +898,7 @@
         "addAccount": "Afegeix moneder",
         "checkForUpdates": "Cerca actualitzacions",
         "reportAnIssue": "Notifica un problema",
-        "restore": "Restore",
+        "restore": "Restaura",
         "clear": "Neteja",
         "hideDetails": "Amaga els detalls",
         "yes": "Si",
@@ -913,26 +913,26 @@
         "viewStatus": "Mostra l'estat",
         "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
-        "hideNetworkStatistics": "Hide network statistics",
+        "hideNetworkStatistics": "Amaga les estadístiques de la xarxa",
         "findBalances": "Troba balanços",
         "searchBalances": "Cerca balanços",
         "searchAgain": "Cerca de nou",
         "searching": "Cercant...",
         "closeFirefly": "Tanca Firefly",
         "generateAddress": "Generar adreça",
-        "migrateAgain": "Migrate another index",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
+        "migrateAgain": "Migrar un altre índex",
+        "visitWebsite": "Visita el lloc web",
+        "howItWorks": "Com funciona",
+        "learnAboutStaking": "Obteniu informació sobre l'stake",
         "stake": "Stake",
         "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "stakeFunds": "Fons en stake",
+        "manageStake": "Gestiona l'stake",
+        "merge": "Combinar",
+        "mergeFunds": "Combinar fons",
+        "done": "Fet",
+        "okIUnderstand": "D'acord, ho entenc",
+        "readMore": "Llegir més"
     },
     "general": {
         "password": "Contrasenya",
@@ -947,7 +947,7 @@
         "received": "Rebut",
         "sendPayment": "Envia el pagament",
         "moveFunds": "Transferència interna",
-        "sendTo": "Send To",
+        "sendTo": "Envia a",
         "sendFunds": "Enviar fons",
         "sendToAddress": "Enviar a l’adreça",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
@@ -963,11 +963,11 @@
         "from": "De",
         "to": "A",
         "receiveFunds": "Rebre fons",
-        "address": "Address",
+        "address": "Adreça",
         "myAddress": "La meva adreça",
         "shareAddress": "Compartir una adreça",
         "yourAddress": "La teva adreça",
-        "newRemainder": "New Remainder",
+        "newRemainder": "Nou recordatori",
         "remainder": "Remainder",
         "generateNewAddress": "Generar una nova adreça",
         "copyAddress": "Copiar l'adreça",
@@ -1076,7 +1076,7 @@
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Fons en stake",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
         "myAssets": "My assets"
@@ -1119,24 +1119,24 @@
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "notEnabled": "Els enllaços IOTA no estan activats",
+            "invalidFormat": "L'enllaç IOTA que has seguit no és vàlid",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "S'han afegit detalls de pagament des de l'enllaç IOTA"
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Espereu fins que finalitzi la sincronització per canviar les bitlleteres.",
+        "transferring": "Espereu fins que es completin totes les transaccions per canviar les bitlleteres.",
+        "participating": "Si us plau, espereu fins que s'hagin completat totes les transaccions de stake/votació per canviar les bitlleteres."
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "El nom del vostre perfil no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
             "duplicate": "Ja existeix un perfil amb aquest nom.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "Heu de transferir tots els saldos abans de poder suprimir el vostre perfil."
             }
         },
         "password": {
@@ -1154,15 +1154,15 @@
             "similar": "Això és similar a una contrasenya comuna.",
             "word": "Una sola paraula és fàcil d’endevinar.",
             "incorrect": "La contrasenya és incorrecta.",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "La vostra contrasenya no pot superar {length, plural, one {1 caràcter} other {# caràcters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "El vostre PIN ha de tenir {length, plural, one {1 dígit} other {# dígits}}.",
             "match": "El PIN no coincideix.",
             "incorrect": "El vostre PIN actual és incorrecte."
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
             "empty": "Cal que utilitzeu el darrer moneder, abans de crear-ne un de nou.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "Cal que transferiu el saldo del moneder, abans d'eliminar-lo.",

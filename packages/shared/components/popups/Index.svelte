@@ -45,6 +45,7 @@
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
 
     export let locale: Locale
 
@@ -65,6 +66,7 @@
     }
 
     let size: PopupSize = PopupSize.Medium
+    let os = ''
 
     $: switch (type) {
         case 'ledgerNotConnected':
@@ -166,11 +168,12 @@
         e.preventDefault()
     }
 
-    onMount(() => {
+    onMount(async () => {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
+        os = await Platform.getOS()
     })
 </script>
 
@@ -184,7 +187,9 @@
 {:else}
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
+        class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
+            overflow ? '' : 'overflow-hidden'
+        }
                 h-full z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
             $mobile && 'z-40'
         }`}
