@@ -69,6 +69,7 @@
     let busy
     let fundsSoonNotificationId
     let developerProfileNotificationId
+    let showTopNav = false
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
@@ -249,6 +250,7 @@
                     closePopup()
                 }
                 Platform.DeepLinkManager.checkDeepLinkRequestExists()
+                showTopNav = true
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -408,10 +410,12 @@
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <TopNavigation
-        {onCreateAccount}
-        classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
-    />
+    {#if showTopNav}
+        <TopNavigation
+            {onCreateAccount}
+            classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
+        />
+    {/if}
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->

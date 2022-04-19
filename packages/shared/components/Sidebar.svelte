@@ -191,8 +191,8 @@
 
 <style type="text/scss">
     :global(body.platform-win32) aside {
-        @apply -top-12;
-        @apply pt-12;
+        @apply -top-0;
+        @apply pt-10;
     }
     .menu-button {
         position: absolute;

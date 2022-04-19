@@ -160,9 +160,3 @@
         </DashboardPane>
     </div>
 </div>
-
-<style type="text/scss">
-    :global(body.platform-win32) .staking-wrapper {
-        @apply pt-0;
-    }
-</style>
