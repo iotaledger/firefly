@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Badge, Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { Locale } from '@core/i18n'
 
@@ -44,18 +44,8 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if network === 'iota'}
-                <div
-                    class="absolute right-0 bottom-0 grid place-items-center h-7 w-7 rounded-full ring-2 ring-white dark:ring-gray-900 bg-black"
-                >
-                    <Icon icon="iota" classes="text-white" />
-                </div>
-            {:else if network === 'shimmer'}
-                <div
-                    class="absolute right-0 bottom-0 grid place-items-center h-7 w-7 rounded-full ring-2 ring-white dark:ring-gray-900 bg-shimmer-highlight"
-                >
-                    <Icon icon="shimmer" classes="text-black" />
-                </div>
+            {#if network}
+                <Badge {network} />
             {/if}
         </div>
         <div class="mt-5 flex flex-row items-baseline space-x-1.5">

@@ -149,7 +149,7 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                network={$activeProfile?.type === ProfileType.Ledger ? 'iota' : 'shimmer'}
+                network={$activeProfile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
                 bgColor="blue"
             />
             <Pin
