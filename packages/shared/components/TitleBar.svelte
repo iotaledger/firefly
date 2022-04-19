@@ -46,6 +46,8 @@
         style="-webkit-app-region: drag"
     >
         {#if os === 'win32'}
+            <!-- We need to add this div to allow fix the windows resize area issue due to -webkit-app-region: drag -->
+            <div class="h-1 absolute top-0 left-20" style="width: calc(100% - 14rem); -webkit-app-region: none" />
             <button
                 on:click={() => Platform.popupMenu()}
                 class="flex justify-center items-center p-3 stroke-current text-gray-500 dark:text-gray-100 w-20"
@@ -57,11 +59,10 @@
                     <rect y="12" width="16" height="1" rx="0.5" fill="currentColor" />
                 </svg>
             </button>
-            <div class="flex flex-row mr-3">
+            <div class="flex flex-row justify-end space-x-2 w-36 pr-6" style="-webkit-app-region: none">
                 <button
                     on:click={() => Platform.minimize()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16">
                         <rect x="2" y="8" width="12" height="1" rx="0.5" fill="currentColor" />
@@ -70,7 +71,6 @@
                 <button
                     on:click={async () => (isMaximized = await Platform.maximize())}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100 fill-current"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         {#if isMaximized}
@@ -104,7 +104,6 @@
                 <button
                     on:click={() => Platform.close()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16">
                         <path
