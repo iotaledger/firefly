@@ -363,7 +363,7 @@
             },
             "balanceFinder": {
                 "title": "Wyszukiwarka środków",
-                "description": "Wykonaj rozszerzone przeszukanie adresów pod kątem tokenów"
+                "description": "Wykonaj dokładne przeszukanie adresów pod kątem tokenów"
             },
             "hiddenAccounts": {
                 "title": "Ukryte portfele",
@@ -389,9 +389,9 @@
                 "connectedTo": "Połączono z",
                 "nodeConfiguration": {
                     "title": "Wybór serwera",
-                    "description": "Wybierz \"Manualne\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
-                    "automatic": "Automatyczne",
-                    "manual": "Manualne"
+                    "description": "Wybierz \"Manualny\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
+                    "automatic": "Automatyczny",
+                    "manual": "Manualny"
                 }
             },
             "configureNodeList": {
@@ -436,12 +436,12 @@
             },
             "documentation": {
                 "title": "Dokumentacja",
-                "description": "Zobacz dokumentację, aby uzyskać szczegółowe wyjaśnienia dotyczące różnych zagadnień"
+                "description": "Zapoznaj się z dokumentacją, aby uzyskać szczegółowe wyjaśnienia dotyczące wszelkich zagadnień"
             },
             "faq": {
                 "title": "FAQ",
                 "title2": "Najczęściej zadawane pytania",
-                "description": "Zobacz FAQ, aby uzyskać pomoc z powszechnym problemami lub pytaniami"
+                "description": "Zobacz FAQ, aby uzyskać pomoc w rozwiązaniu typowego problemu lub pytania"
             },
             "discord": {
                 "title": "Discord",
@@ -478,12 +478,12 @@
                     "unlocked": "Stronghold odbezpieczony"
                 },
                 "hardware": {
-                    "title": "Urządzenie sprzętowe",
+                    "title": "Portfel sprzętowy",
                     "statuses": {
                         "appNotOpen": "Aplikacja IOTA nie jest otwarta",
-                        "connected": "Połączono",
+                        "connected": "Połączony",
                         "legacyConnected": "Aplikacja IOTA Legacy otwarta",
-                        "locked": "Zablokowano",
+                        "locked": "Zablokowany",
                         "mnemonicMismatch": "Nieprawidłowy Ledger lub wyrazy ratunkowe",
                         "notDetected": "Nie wykryto",
                         "otherConnected": "Aplikacja otwarta"
@@ -524,8 +524,8 @@
                     "inactive": "Nie wykryto wydarzeń stakingu"
                 },
                 "bodies": {
-                    "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się dnia {date}.",
-                    "commencing": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się dnia {date}.",
+                    "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
+                    "commencing": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
                     "holdingAndStaking": "Automatycznie otrzymujesz nagrody co 10 sekund.",
                     "holdingAndNotStaking": "Stakuj swoje tokeny {token}, aby otrzymywać nagrody co 10 sekund.",
                     "endedAndDidStake": "Nagrody {token} zostaną przesłane na Twój portfel po uruchomieniu sieci.",
@@ -537,7 +537,7 @@
             "airdrops": {
                 "holding": "Pozostało",
                 "commencing": "Do rozpoczęcia stakingu",
-                "currentStakingPeriod": "Bieżący okres stakingu",
+                "currentStakingPeriod": "Za bieżący okres stakingu",
                 "totalWalletRewards": "Łączna ilość nagród w portfelu",
                 "assembly": {
                     "name": "Assembly",
@@ -556,7 +556,7 @@
         "picker": {
             "color": {
                 "title": "Wybór koloru",
-                "hexCode": "Kod hex koloru"
+                "hexCode": "Kod koloru HEX"
             }
         }
     },
@@ -736,7 +736,7 @@
             },
             "transaction": {
                 "title": "Potwierdzanie transakcji",
-                "info": "Potwierdź, że informacje o transakcjach wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
+                "info": "Potwierdź, że informacje o transakcji wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
             }
         },
         "ledgerAddress": {
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Szacowana nagroda"
         },
         "newStakingPeriodNotification": {
-            "title": "Runda {periodNumber} stakingu od dnia {date}",
-            "body": "Kontynuujemy staking IOTA w zamian za tokeny Assembly... Weź udział w rundzie {periodNumber} przez okres 90 dni. Stakuj swoje tokeny IOTA i zdobądź nagrody ASMB!\n",
+            "title": "Start {periodNumber} rundy stakingu - {date}",
+            "body": "Kontynuujemy staking IOTA w zamian za tokeny Assembly... Weź udział w {periodNumber} rundzie przez okres 90 dni. Stakuj swoje tokeny IOTA i zdobądź nagrody ASMB!\n",
             "info": "Staking Shimmer został zakończony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
         },
         "shimmer-info": {
@@ -1296,7 +1296,7 @@
         "transactionHistoryCsv": {
             "messageId": "ID wiadomości",
             "internal": "Transfer wewnętrzny",
-            "rawValue": "Wartość surowa",
+            "rawValue": "Wartość RAW",
             "formattedValue": "Wartość sformatowana",
             "date": "Data",
             "time": "Godzina"
