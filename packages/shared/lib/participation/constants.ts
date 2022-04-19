@@ -5,12 +5,12 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date('April 19, 2022')
+export const ASSEMBLY_EVENT_START_DATE = new Date('April 22, 2022')
 
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '54d85610d2d4077d9554c2ab30f41303cd7e8fb0afc2abf91c04a1ab451bd966'
+export const ASSEMBLY_EVENT_ID = '90ab02d8f700fcb3b31ff577416ecb105697a664738bec45b626920337a280e0'
 
 /**
  * The staking event ID for Shimmer.
@@ -73,7 +73,7 @@ export const LAST_ASSEMBLY_STAKING_PERIOD = 1
  * The number of the last completed Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_ASSEMBLY_STAKING_PERIOD = 1
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 2
 
 /**
  * The number of the last completed Assembly staking period.
