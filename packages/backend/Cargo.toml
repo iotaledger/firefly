@@ -1,6 +1,6 @@
 [package]
 name = "firefly-actor-system"
-version = "1.5.0"
+version = "0.1.0"
 authors = ["IOTA Stiftung"]
 edition = "2018"
 exclude = ["/bindings", "/api-wrapper"]
