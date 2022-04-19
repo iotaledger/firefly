@@ -172,9 +172,9 @@ export const getFormattedMinimumRewards = (airdrop: StakingAirdrop): string =>
 
 /**
  * The amount of microASMB per 1 Mi received every milestone,
- * which is currently 4 microASMB (0.000004 ASMB).
+ * which is currently 2 microASMB (0.000002 ASMB).
  */
-const ASSEMBLY_REWARD_MULTIPLIER = 4.0
+const ASSEMBLY_REWARD_MULTIPLIER = 2.0
 
 /**
  * The amount of SMR per 1 Mi received every milestone,
