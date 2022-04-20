@@ -524,8 +524,8 @@
                     "inactive": "Inga staking-event upptäckta"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Staka dina {token} tokens för att automatiskt få belöningar var tioende sekund när staking börjar den {date}.",
+                    "commencing": "Staka dina {token} tokens för att automatiskt få belöningar var tioende sekund när staking börjar den {date}.",
                     "holdingAndStaking": "Du får automatiskt belöningar var 10: e sekund.",
                     "holdingAndNotStaking": "Staka dina {token} tokens för att få belöningar var 10: e sekund.",
                     "endedAndDidStake": "{token} belöningar kommer att distribueras till din plånbok när nätverket startar.",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Beräknade belöningar"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "Staking omgång {periodNumber} från {date}",
+            "body": "IOTA staking för Assembly fortsätter.. Delta i omgång {periodNumber} under 90 dagar. Staka dina IOTA tokens och tjäna ASMB-belöningar!",
             "info": "Shimmer staking är nu avklarad och endast ASMB tokens kommer att distribueras."
         },
         "shimmer-info": {
@@ -1049,14 +1049,20 @@
         "creatingProfile": "Skapar profil, vänligen vänta...",
         "fundMigration": "Token-migration",
         "accountRemoved": "Denna plånbok är dold. Visa den igen för att utföra överföringar.",
-        "receivingTo": "Tar emot till {account}",
-        "sendingFrom": "Skickar från {account}",
-        "receivedTo": "Mottaget till {account}",
-        "sentFrom": "Skickat från {account}",
+        "receivingFrom": "Tar emot från {account}",
+        "sendingTo": "Skickar till {account}",
+        "receivedFrom": "Mottaget från {account}",
+        "sentTo": "Skickat till {account}",
+        "transferringFrom": "Överför från {account}",
+        "transferringTo": "Överför till {account}",
+        "transferFrom": "Överföring från {account}",
+        "transferTo": "Överföring till {account}",
         "stakedFor": "Stakade för {account}",
         "unstakedFor": "Ej stakade för {account}",
         "votedFor": "Röstade för {account}",
         "unvotedFor": "Ej röstade för {account}",
+        "stakingTransaction": "Staking-transaktion",
+        "unstakingTransaction": "Unstaking-transaktion",
         "receiving": "Tar emot",
         "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",

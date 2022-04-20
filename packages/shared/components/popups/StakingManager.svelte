@@ -263,7 +263,7 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccountId]}
+                        bind:this={tooltipAnchors[$selectedAccount?.index]}
                         on:mouseenter={() => toggleTooltip($selectedAccount)}
                         on:mouseleave={() => toggleTooltip($selectedAccount)}
                     >

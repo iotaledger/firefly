@@ -40,7 +40,7 @@
     }
 </script>
 
-<Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '32px', left: '50%' }}>
+<Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '24px', left: '50%' }}>
     <div class="p-4">
         <div class="accounts flex flex-col space-y-1 scrollable-y">
             {#each accounts as account}

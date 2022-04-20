@@ -524,8 +524,8 @@
                     "inactive": "Aucun événement de staking détecté"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stakez vos jetons {token} pour recevoir automatiquement des récompenses toutes les 10 secondes une fois que le staking démarre le {date}.",
+                    "commencing": "Stakez vos jetons {token} pour recevoir automatiquement des récompenses toutes les 10 secondes une fois que le staking démarre le {date}.",
                     "holdingAndStaking": "Vous recevez automatiquement des récompenses toutes les 10 secondes.",
                     "holdingAndNotStaking": "Stakez vos jetons {token} pour recevoir des récompenses toutes les 10 secondes.",
                     "endedAndDidStake": "Des récompenses {token} seront distribuées sur votre portefeuille une fois le réseau lancé.",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "Récompenses estimées"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "Phase de staking {periodNumber} du {date}",
+            "body": "Le staking IOTA pour Assembly continue... Participez à la phase {periodNumber} pendant 90 jours. Stakez vos jetons IOTA et gagnez des récompenses ASMB !",
             "info": "Le staking Shimmer est maintenant terminé et seulement les tokens ASMB seront distribués."
         },
         "shimmer-info": {
@@ -1049,14 +1049,20 @@
         "creatingProfile": "Création du profile, veuillez patienter...",
         "fundMigration": "Migration des fonds",
         "accountRemoved": "Ce portefeuille est caché. Affichez-le pour effectuer des transferts.",
-        "receivingTo": "Réception sur {account}",
-        "sendingFrom": "Envoi depuis {account}",
-        "receivedTo": "Reçu sur {account}",
-        "sentFrom": "Envoyé depuis {account}",
+        "receivingFrom": "Réception de {account}",
+        "sendingTo": "Envoi à {account}",
+        "receivedFrom": "Reçu de {account}",
+        "sentTo": "Envoyé à {account}",
+        "transferringFrom": "Transfert depuis {account}",
+        "transferringTo": "Transfert vers {account}",
+        "transferFrom": "Transfert depuis {account}",
+        "transferTo": "Transfert vers {account}",
         "stakedFor": "Engagés pour {account}",
         "unstakedFor": "Désengagés pour {account}",
         "votedFor": "A voté pour {account}",
         "unvotedFor": "Suppression du vote pour {account}",
+        "stakingTransaction": "Transaction de staking",
+        "unstakingTransaction": "Transaction d'arrêt du staking",
         "receiving": "Réception en cours",
         "sending": "Envoi en cours",
         "legacyNetwork": "Ancien Réseau",

@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "发送，接收&管理您的IOTA",
+            "title": "发送、接收和管理您的 IOTA",
             "body": "Firefly 是IOTA的官方钱包软件。"
         },
         "legal": {
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "网络运行情况",
+                "networkDegraded": "网络已降级",
+                "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
                 "referencedRate": "确认率"
@@ -480,13 +480,13 @@
                 "hardware": {
                     "title": "硬件设备",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
+                        "appNotOpen": "IOTA 应用未打开",
                         "connected": "已连接",
-                        "legacyConnected": "Legacy app open",
+                        "legacyConnected": "旧网络应用打开",
                         "locked": "已锁定",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "mnemonicMismatch": "错误的Ledger设备或助记词",
+                        "notDetected": "未检测到",
+                        "otherConnected": "应用打开"
                     }
                 },
                 "backup": {
@@ -524,8 +524,8 @@
                     "inactive": "未检测到质押活动"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "{date} 质押开始后，您质押的 {token} 代币每10秒会自动获得奖励。",
+                    "commencing": "{date} 质押开始后，您质押的 {token} 代币每10秒会自动获得奖励。",
                     "holdingAndStaking": "您每隔10秒会自动获得奖励。",
                     "holdingAndNotStaking": "质押您的 {token} 代币，每隔10秒获得奖励。",
                     "endedAndDidStake": "一旦网络启动，{token} 奖励将会分配给你的钱包。",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "估计奖励"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "第 {periodNumber} 期质押从 {date} 开始",
+            "body": "质押IOTA获取Assembly正在继续... 参与第 {periodNumber} 期90天的质押，使用您的 IOTA 令牌并获得ASMB 奖励！",
             "info": "Shimmer 质押已经完结，只会分发 ASMB 代币。"
         },
         "shimmer-info": {
@@ -1049,14 +1049,20 @@
         "creatingProfile": "正在创建帐户，请稍候...",
         "fundMigration": "资金迁移",
         "accountRemoved": "此钱包被隐藏。请取消隐藏以执行转账。",
-        "receivingTo": "正在接收到 {account}",
-        "sendingFrom": "正在从 {account} 发送",
-        "receivedTo": "已接收至 {account}",
-        "sentFrom": "已从 {account} 发送",
+        "receivingFrom": "正在从 {account} 接收",
+        "sendingTo": "正在发送至 {account}",
+        "receivedFrom": "已从 {account} 接收",
+        "sentTo": "已发送至 {account}",
+        "transferringFrom": "正从帐户 {account} 转出",
+        "transferringTo": "转入到账户 {account}",
+        "transferFrom": "从账户{account} 转入",
+        "transferTo": "转出到账户 {account}",
         "stakedFor": "已为 {account} 质押",
         "unstakedFor": "已为 {account} 解除质押",
         "votedFor": "投票给 {account}",
         "unvotedFor": "取消投票给 {account}",
+        "stakingTransaction": "质押交易",
+        "unstakingTransaction": "取消质押交易",
         "receiving": "接收",
         "sending": "发送",
         "legacyNetwork": "旧的网络",

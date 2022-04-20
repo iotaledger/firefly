@@ -524,8 +524,8 @@
                     "inactive": "Nessun evento di staking rilevato"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Metti in stake i tuoi {token} token per ricevere automaticamente ricompense ogni 10 secondi una volta che lo staking inizia il {date}.",
+                    "commencing": "Metti in stake i tuoi {token} token per ricevere automaticamente ricompense ogni 10 secondi una volta che lo staking inizia il {date}.",
                     "holdingAndStaking": "Ricevi automaticamente ricompense ogni 10 secondi.",
                     "holdingAndNotStaking": "Metti in stake i {token} token per ricevere ricompense ogni 10 secondi.",
                     "endedAndDidStake": "La ricompensa di {token} token sarà inviata al tuo portafoglio una volta che la rete verrà lanciata.",
@@ -576,7 +576,7 @@
             "updateAvailable": "Aggiornamento Firefly disponibile",
             "updateDetails": "Versione {version} - {date}",
             "noAutoUpdate": "L'aggiornamento automatico è disabilitato in questa versione di Windows, vai su https://firefly.iota.org per scaricare l'aggiornamento.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "Stai utilizzando una versione pre-rilascio di Firefly. Gli aggiornamenti sono disabilitati."
         },
         "backup": {
             "title": "Ultimo backup: {date}",
@@ -767,13 +767,13 @@
             "subtitleStake": "Stai per mettere in stake",
             "subtitleMerge": "Stai per unire",
             "multiAirdropWarning": "Se non si desidera partecipare a entrambe le airdrop, è possibile opt-out qui sotto. È possibile annullare e riavviare per optare di nuovo in qualsiasi momento.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "mergeStakeWarning": "I tuoi fondi saranno messi in stake per {airdrop}. Per modificare gli airdtop ai quali si vuole partecipare, togliere dallo stake questo wallet e rimettere in stake.",
             "estimatedAirdrop": "Ricompense stimate"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Fase di Staking {periodNumber} da {date}",
+            "body": "Lo staking di IOTA per Assembly continua... Partecipa alla fase {periodNumber} per 90 giorni. Metti in stake i tuoi token IOTA e ricevi premi ASMB!",
+            "info": "Lo stakin per Shimmer è completat, solo i token ASMB saranno distribuiti."
         },
         "shimmer-info": {
             "title": "Informazioni su Shimmer",
@@ -805,9 +805,9 @@
             "privPolicyCheckbox": "Ho letto e acconsento alla Politica sulla Privacy aggiornata"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Il modo in cui utilizzi Firefly è cambiato",
+            "body": "Il contenuto di ogni scheda è ora nel contesto di un singolo wallet. È possibile cambiare il wallet selezionato da qualsiasi luogo utilizzando lo switcher nella barra del titolo.",
+            "hint": "Impossibile trovare un portafoglio? Utilizzare il Rilevatore del sado nelle impostazioni per scoprire i wallet precedentemente utilizzati."
         }
     },
     "charts": {
@@ -931,8 +931,8 @@
         "merge": "Unisci",
         "mergeFunds": "Unisci fondi",
         "done": "Completato",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "okIUnderstand": "OK, ho capito",
+        "readMore": "Leggi di più"
     },
     "general": {
         "password": "Password",
@@ -990,7 +990,7 @@
         "profiles": "Profili",
         "dev": "Dev",
         "createAccount": "Crea un wallet",
-        "createNewWallet": "Create a new wallet",
+        "createNewWallet": "Crea un nuovo wallet",
         "accountName": "Nome wallet",
         "latestTransactions": "Ultime Transazioni",
         "transactions": "Transazioni",
@@ -1049,14 +1049,20 @@
         "creatingProfile": "Creazione profilo, attendere prego...",
         "fundMigration": "Fondi dei migrati",
         "accountRemoved": "Questo wallet è nascosto. Mostralo per eseguire dei trasferimenti.",
-        "receivingTo": "Ricezione in {account}",
-        "sendingFrom": "Invio da {account}",
-        "receivedTo": "Ricevuto in {account}",
-        "sentFrom": "Inviato da {account}",
+        "receivingFrom": "Ricezione in {account}",
+        "sendingTo": "Invio da {account}",
+        "receivedFrom": "Ricevuto da {account}",
+        "sentTo": "Inviato a {account}",
+        "transferringFrom": "Trasferimento da {account}",
+        "transferringTo": "Trasferimento a {account}",
+        "transferFrom": "Trasferimento da {account}",
+        "transferTo": "Trasferisci a {account}",
         "stakedFor": "In stake per {account}",
         "unstakedFor": "Tolto dallo stake per {account}",
         "votedFor": "Votato per {account}",
         "unvotedFor": "Tolto dal voto per {account}",
+        "stakingTransaction": "Transazione per staking",
+        "unstakingTransaction": "Transazione per rimozione staking",
         "receiving": "Ricezione",
         "sending": "Invio",
         "legacyNetwork": "Rete Legacy",
@@ -1073,7 +1079,7 @@
         "stakedFunds": "Fondi in staking",
         "unstakedFunds": "Fondi non in staking",
         "accountColor": "Colore Wallet",
-        "myAssets": "My assets"
+        "myAssets": "I miei Asset"
     },
     "dates": {
         "today": "Oggi",
@@ -1121,9 +1127,9 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Attendere che la sincronizzazione sia terminata per cambiare wallet.",
+        "transferring": "Attendere fino al completamento di tutte le transazioni per cambiare wallet.",
+        "participating": "Attendere fino al completamento di tutte le transazioni staking/voto per cambiare wallet."
     },
     "error": {
         "profile": {
@@ -1248,15 +1254,15 @@
             "cannotVisitAirdropWebsite": "Impossibile aprire il sito web {airdrop}.",
             "invalidStakingEventId": "ID evento staking non valido."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "DATA INVALIDA",
+        "invalidTime": "ORARIO INVALIDO"
     },
     "warning": {
         "node": {
             "http": "Utilizzando nodi in HTTP lascia il traffico non crittografato e potrebbe rappresentare un rischio per la sicurezza."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Non hai alcun IOTA."
         }
     },
     "tooltips": {
@@ -1271,7 +1277,7 @@
         "partiallyStakedFunds": {
             "title": "Nuovi fondi non in stake: {amount}",
             "titleNoFunds": "Nuovi fondi non in stake",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Hai ricevuto token che non sono in stake.",
             "body": "È necessario mettere manualmente in stake i nuovi fondi ricevuti per ricevere ricompense da airdrop."
         },
         "stakingMinRewards": {

@@ -524,8 +524,8 @@
                     "inactive": "未偵測到質押活動"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
+                    "commencing": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
                     "holdingAndStaking": "您將自動每10秒獲得獎勵。",
                     "holdingAndNotStaking": "質押您的 {token} 代幣來每10秒獲得獎勵。",
                     "endedAndDidStake": "{token} 獎勵將分發至您的錢包一旦主網啟動。",
@@ -771,8 +771,8 @@
             "estimatedAirdrop": "估計獎勵"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "title": "第 {periodNumber} 輪質押活動從 {date} 開始",
+            "body": "質押IOTA取得Assembely再度來臨... 參與第 {periodNumber} 輪的90天質押。質押IOTA代幣，賺取ASMB獎勵！",
             "info": "Shimmer質押已完成，僅剩ASMB待分發。"
         },
         "shimmer-info": {
@@ -1049,14 +1049,20 @@
         "creatingProfile": "正在創建設定檔，請稍候...",
         "fundMigration": "資金遷移",
         "accountRemoved": "此錢包是隱藏的。 取消隱藏即可執行傳送。",
-        "receivingTo": "接收到 {account}",
-        "sendingFrom": "從 {account} 發送中",
-        "receivedTo": "已收到 {account}",
-        "sentFrom": "發送自 {account}",
+        "receivingFrom": "正接收來自 {account}",
+        "sendingTo": "正發送至 {account}",
+        "receivedFrom": "已收到來自 {account}",
+        "sentTo": "已發送至 {account}",
+        "transferringFrom": "正從 {account} 傳送過來",
+        "transferringTo": "正在傳送至 {account}",
+        "transferFrom": "從 {account} 傳送過來",
+        "transferTo": "傳送至 {account}",
         "stakedFor": "已為 {account} 質押",
         "unstakedFor": "已為 {account} 解除質押",
         "votedFor": "已為 {account} 投票",
         "unvotedFor": "已為 {account} 取消投票",
+        "stakingTransaction": "質押交易",
+        "unstakingTransaction": "解質押交易",
         "receiving": "收款中",
         "sending": "正在發送",
         "legacyNetwork": "舊版網路",

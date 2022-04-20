@@ -462,7 +462,7 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Netzwerk funktional",
+                "networkOperational": "Netzwerk funktionsfähig",
                 "networkDegraded": "Netzwerk eingeschränkt",
                 "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
@@ -524,13 +524,13 @@
                     "inactive": "Keine Staking-Events gefunden"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stake deine {token} Token, um alle 10 Sekunden automatisch Belohnungen zu erhalten, sobald das Staking am {date} beginnt.",
+                    "commencing": "Stake deine {token} Token, um alle 10 Sekunden automatisch Belohnungen zu erhalten, sobald das Staking am {date} beginnt.",
                     "holdingAndStaking": "Du wirst nun alle 10 Sekunden Staking-Rewards erhalten.",
-                    "holdingAndNotStaking": "Stake deine {token}, um alle 10 Sekunden Rewards zu erhalten.",
+                    "holdingAndNotStaking": "Stake deine {token} Token, um alle 10 Sekunden Rewards zu erhalten.",
                     "endedAndDidStake": "{token}-Rewards werden an deine Wallet verteilt sobald das Netzwerk startet.",
                     "endedAndDidNotStake": "Du hast an diesem Airdrop nicht teilgenommen.",
-                    "endedAndDidNotReachMinRewards": "Du hast nicht ausreichend {token} gestaked, um das Minimum an Airdrop-Rewards zu erhalten.",
+                    "endedAndDidNotReachMinRewards": "Du hast nicht ausreichend {token} Token gestaked, um das Minimum an Airdrop-Rewards zu erhalten.",
                     "inactive": "Öffne die Netzwerkkonfiguration in den erweiterten Einstellungen und stelle sicher, dass die ausgewählte Node das Feature \"Participation\" enthält, indem du auf \"Info anzeigen\" klickst."
                 }
             },
@@ -771,9 +771,9 @@
             "estimatedAirdrop": "Geschätzte Rewards"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer Staking ist beendet. Lediglich ASMB Token werden verteilt."
+            "title": "Staking-Phase {periodNumber} vom {date}",
+            "body": "Das IOTA-Staking für Assembly geht weiter... Nimm an Phase {periodNumber} für 90 Tage teil. Stake deine IOTA Token und verdiene ASMB Rewards!",
+            "info": "Shimmer-Staking ist beendet. Lediglich ASMB Token werden verteilt."
         },
         "shimmer-info": {
             "title": "Über Shimmer",
@@ -1049,14 +1049,20 @@
         "creatingProfile": "Erstelle Profil, bitte warten...",
         "fundMigration": "Guthabenmigration",
         "accountRemoved": "Diese Wallet ist ausgeblendet. Blende sie wieder ein, um Überweisungen auszuführen.",
-        "receivingTo": "Empfange an {account}",
-        "sendingFrom": "Sende von {account}",
-        "receivedTo": "Empfangen an {account}",
-        "sentFrom": "Gesendet von {account}",
+        "receivingFrom": "Empfange von {account}",
+        "sendingTo": "Sende an {account}",
+        "receivedFrom": "Empfangen von {account}",
+        "sentTo": "Gesendet an {account}",
+        "transferringFrom": "Übertrage von {account}",
+        "transferringTo": "Übertrage an {account}",
+        "transferFrom": "Übertragung von {account}",
+        "transferTo": "Übertragung an {account}",
         "stakedFor": "Für {account} gestaked",
         "unstakedFor": "Staking für {account} aufgehoben",
         "votedFor": "Für {account} gestimmt",
         "unvotedFor": "Stimme für {account} zurückgenommen",
+        "stakingTransaction": "Staking Transaktion",
+        "unstakingTransaction": "Unstaking Transaktion",
         "receiving": "Empfange",
         "sending": "Sende",
         "legacyNetwork": "Altes Netzwerk",

@@ -363,7 +363,7 @@
             },
             "balanceFinder": {
                 "title": "Wyszukiwarka środków",
-                "description": "Wykonaj rozszerzone przeszukanie adresów pod kątem tokenów"
+                "description": "Wykonaj dokładne przeszukanie adresów pod kątem tokenów"
             },
             "hiddenAccounts": {
                 "title": "Ukryte portfele",
@@ -389,9 +389,9 @@
                 "connectedTo": "Połączono z",
                 "nodeConfiguration": {
                     "title": "Wybór serwera",
-                    "description": "Wybierz \"Manualne\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
-                    "automatic": "Automatyczne",
-                    "manual": "Manualne"
+                    "description": "Wybierz \"Manualny\", aby skonfigurować ustawienia serwera i połączyć się z własnymi serwerami",
+                    "automatic": "Automatyczny",
+                    "manual": "Manualny"
                 }
             },
             "configureNodeList": {
@@ -436,12 +436,12 @@
             },
             "documentation": {
                 "title": "Dokumentacja",
-                "description": "Zobacz dokumentację, aby uzyskać szczegółowe wyjaśnienia dotyczące różnych zagadnień"
+                "description": "Zapoznaj się z dokumentacją, aby uzyskać szczegółowe wyjaśnienia dotyczące wszelkich zagadnień"
             },
             "faq": {
                 "title": "FAQ",
                 "title2": "Najczęściej zadawane pytania",
-                "description": "Zobacz FAQ, aby uzyskać pomoc z powszechnym problemami lub pytaniami"
+                "description": "Zobacz FAQ, aby uzyskać pomoc w rozwiązaniu typowego problemu lub pytania"
             },
             "discord": {
                 "title": "Discord",
@@ -478,12 +478,12 @@
                     "unlocked": "Stronghold odbezpieczony"
                 },
                 "hardware": {
-                    "title": "Urządzenie sprzętowe",
+                    "title": "Portfel sprzętowy",
                     "statuses": {
                         "appNotOpen": "Aplikacja IOTA nie jest otwarta",
-                        "connected": "Połączono",
+                        "connected": "Połączony",
                         "legacyConnected": "Aplikacja IOTA Legacy otwarta",
-                        "locked": "Zablokowano",
+                        "locked": "Zablokowany",
                         "mnemonicMismatch": "Nieprawidłowy Ledger lub wyrazy ratunkowe",
                         "notDetected": "Nie wykryto",
                         "otherConnected": "Aplikacja otwarta"
@@ -524,8 +524,8 @@
                     "inactive": "Nie wykryto wydarzeń stakingu"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
+                    "commencing": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
                     "holdingAndStaking": "Automatycznie otrzymujesz nagrody co 10 sekund.",
                     "holdingAndNotStaking": "Stakuj swoje tokeny {token}, aby otrzymywać nagrody co 10 sekund.",
                     "endedAndDidStake": "Nagrody {token} zostaną przesłane na Twój portfel po uruchomieniu sieci.",
@@ -537,7 +537,7 @@
             "airdrops": {
                 "holding": "Pozostało",
                 "commencing": "Do rozpoczęcia stakingu",
-                "currentStakingPeriod": "Bieżący okres stakingu",
+                "currentStakingPeriod": "Za bieżący okres stakingu",
                 "totalWalletRewards": "Łączna ilość nagród w portfelu",
                 "assembly": {
                     "name": "Assembly",
@@ -549,14 +549,14 @@
                 }
             },
             "banners": {
-                "new": "Nowe wydarzenie",
+                "new": "Nowy event",
                 "complete": "Zakończono"
             }
         },
         "picker": {
             "color": {
                 "title": "Wybór koloru",
-                "hexCode": "Kod hex koloru"
+                "hexCode": "Kod koloru HEX"
             }
         }
     },
@@ -609,7 +609,7 @@
             "title": "Historia adresów dla {name}",
             "currentBalance": "Saldo: {balance}",
             "internal": "Adres wewnętrzny",
-            "external": "Adres odbiorczy"
+            "external": "Adres odbiorcy"
         },
         "node": {
             "titleAdd": "Dodaj serwer",
@@ -736,12 +736,12 @@
             },
             "transaction": {
                 "title": "Potwierdzanie transakcji",
-                "info": "Potwierdź, że informacje o transakcjach wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
+                "info": "Potwierdź, że informacje o transakcji wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
             }
         },
         "ledgerAddress": {
-            "title": "Potwierdź adres odbiorczy",
-            "body": "Potwierdź, że adres odbiorczy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
+            "title": "Potwierdź adres odbiorcy",
+            "body": "Potwierdź, że adres odbiorcy wyświetlany na Twoim urządzeniu Ledger pasuje do adresu wyświetlanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
         },
         "ledgerMigrateIndex": {
             "title": "Czy potrzebujesz migrować kolejny indeks konta z Trinity?",
@@ -760,7 +760,7 @@
             "totalFundsStaked": "Stakujesz łącznie",
             "stakedSuccessfully": "Twoje środki zostały stakowane przez {account}.",
             "unstakedSuccessfully": "Środki zostały odstakowane przez {account}.",
-            "singleAccountHint": "Szukasz swoich portfeli? Firefly się zmienił. Przełącz pomiędzy portfelami w górnym pasku wyboru."
+            "singleAccountHint": "Szukasz swoich portfeli? Firefly zmienił się. Możesz przełączać pomiędzy swoimi portfelami w górnym pasku wyboru."
         },
         "stakingConfirmation": {
             "title": "Potwierdź uczestnictwo",
@@ -771,9 +771,9 @@
             "estimatedAirdrop": "Szacowana nagroda"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Staking Shimmer został zakonczony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
+            "title": "Start {periodNumber} rundy stakingu - {date}",
+            "body": "Kontynuujemy staking IOTA w zamian za tokeny Assembly... Weź udział w {periodNumber} rundzie przez okres 90 dni. Stakuj swoje tokeny IOTA i zdobądź nagrody ASMB!\n",
+            "info": "Staking Shimmer został zakończony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
         },
         "shimmer-info": {
             "title": "O Shimmer",
@@ -1002,8 +1002,8 @@
         "help": "Pomoc",
         "you": "Ty",
         "messageId": "ID wiadomości",
-        "inputAddress": "Adres nadawczy",
-        "receiveAddress": "Adres odbiorczy",
+        "inputAddress": "Adres nadawcy",
+        "receiveAddress": "Adres odbiorcy",
         "newAddress": "Nowy adres",
         "date": "Data",
         "status": "Status",
@@ -1049,14 +1049,20 @@
         "creatingProfile": "Tworzenie profilu, proszę czekać...",
         "fundMigration": "Migracja środków",
         "accountRemoved": "Ten portfel jest ukryty. Odkryj go, aby wykonywać transfery.",
-        "receivingTo": "Odbieranie na {account}",
-        "sendingFrom": "Wysyłanie z {account}",
-        "receivedTo": "Odebrano na {account}",
-        "sentFrom": "Wysłano z {account}",
+        "receivingFrom": "Odbieranie od {account}",
+        "sendingTo": "Wysyłanie do {account}",
+        "receivedFrom": "Odebrano od {account}",
+        "sentTo": "Wysłano do {account}",
+        "transferringFrom": "Transfer z {account}",
+        "transferringTo": "Transferowanie do {account}",
+        "transferFrom": "Transfer z {account}",
+        "transferTo": "Transfer do {account}",
         "stakedFor": "Stakowano {account}",
         "unstakedFor": "Odstakowano {account}",
         "votedFor": "Zagłosowano przez {account}",
         "unvotedFor": "Wycofano głos przez {account}",
+        "stakingTransaction": "Transakcja stakingu",
+        "unstakingTransaction": "Transakcja unstakingu",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
         "legacyNetwork": "Poprzednia sieć",
@@ -1290,7 +1296,7 @@
         "transactionHistoryCsv": {
             "messageId": "ID wiadomości",
             "internal": "Transfer wewnętrzny",
-            "rawValue": "Wartość surowa",
+            "rawValue": "Wartość RAW",
             "formattedValue": "Wartość sformatowana",
             "date": "Data",
             "time": "Godzina"

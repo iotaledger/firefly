@@ -19,7 +19,6 @@
 
     export let timestamp
     export let confirmed
-    export let includeFullSender
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
@@ -78,23 +77,19 @@
 
     $: {
         if (txPayload) {
-            const acc = txPayload.data.essence.data.incoming ? receiverAccount : senderAccount
+            const acc = txPayload.data.essence.data.incoming ? senderAccount : receiverAccount
 
             // The address in the payload was one of our accounts so grab
             // the account alias to display
             if (acc) {
-                if (includeFullSender) {
-                    accountAlias = acc.alias
-                }
+                accountAlias = acc.alias
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
-                if (includeFullSender) {
-                    accountAlias = truncateString(
-                        txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
-                        3,
-                        3
-                    )
-                }
+                accountAlias = truncateString(
+                    txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
+                    4,
+                    3
+                )
             }
         }
     }
@@ -102,27 +97,46 @@
     let direction: string
     $: {
         if (txPayload) {
-            if (includeFullSender) {
-                if (isParticipationPayload(txPayload)) {
-                    direction = 'staking.stakedFunds'
-                } else {
-                    direction = confirmed
-                        ? txPayload.data.essence.data.incoming
-                            ? 'general.receivedTo'
-                            : 'general.sentFrom'
-                        : txPayload.data.essence.data.incoming
-                        ? 'general.receivingTo'
-                        : 'general.sendingFrom'
-                }
+            if (isParticipationPayload(txPayload)) {
+                direction = 'general.stakingTransaction'
+            } else if (txPayload.data.essence.data.internal) {
+                direction = confirmed
+                    ? txPayload.data.essence.data.incoming
+                        ? 'general.transferFrom'
+                        : 'general.transferTo'
+                    : txPayload.data.essence.data.incoming
+                    ? 'general.transferringFrom'
+                    : 'general.transferringTo'
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
-                        ? 'general.received'
-                        : 'general.sent'
+                        ? 'general.receivedFrom'
+                        : 'general.sentTo'
                     : txPayload.data.essence.data.incoming
-                    ? 'general.receiving'
-                    : 'general.sending'
+                    ? 'general.receivingFrom'
+                    : 'general.sendingTo'
             }
+        }
+    }
+
+    let icon: string
+    let iconColor: string
+    $: {
+        if (hasCachedMigrationTx || milestonePayload) {
+            icon = 'double-chevron-right'
+            iconColor = 'gray-600'
+        } else if (isParticipationPayload(txPayload)) {
+            icon = getParticipationIcon(ParticipationAction.Stake)
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.internal) {
+            icon = 'transfer'
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.incoming) {
+            icon = 'chevron-down'
+            iconColor = 'blue-700'
+        } else {
+            icon = 'chevron-up'
+            iconColor = 'blue-500'
         }
     }
 
@@ -138,34 +152,6 @@
                 return ''
         }
     }
-
-    function getIcon(): string {
-        if (hasCachedMigrationTx || milestonePayload) {
-            return 'double-chevron-right'
-        } else if (isParticipationPayload(txPayload)) {
-            return getParticipationIcon(ParticipationAction.Stake)
-        } else if (txPayload.data.essence.data.internal) {
-            return 'transfer'
-        } else if (txPayload.data.essence.data.incoming) {
-            return 'chevron-down'
-        } else {
-            return 'chevron-up'
-        }
-    }
-
-    function getIconColor(): string {
-        if (hasCachedMigrationTx || milestonePayload) {
-            return 'gray-600'
-        } else if (isParticipationPayload(txPayload)) {
-            return 'gray-600'
-        } else if (txPayload.data.essence.data.internal) {
-            return 'gray-600'
-        } else if (txPayload.data.essence.data.incoming) {
-            return 'blue-700'
-        } else {
-            return 'blue-500'
-        }
-    }
 </script>
 
 <button
@@ -178,16 +164,14 @@
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
-        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{getIconColor()}" icon={getIcon()} />
+        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {#if hasCachedMigrationTx || milestonePayload}
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {#if includeFullSender}
-                    {localize('general.stakedFor', { values: { account: accountAlias } })}
-                {:else}{localize('general.staked')}{/if}
+                {localize('general.stakingTransaction')}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">{date}</p>
