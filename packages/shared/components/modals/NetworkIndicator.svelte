@@ -26,7 +26,7 @@
     })
 </script>
 
-<Modal bind:this={modal} position={{ left: '80px', bottom: '25px' }}>
+<Modal bind:this={modal} position={{ left: '80px', top: '25px' }}>
     <network-indicator-content class="flex flex-col">
         {#if $activeProfile.isDeveloperProfile}
             <Text type="h3" classes="px-7 pt-5">{locale('general.network')}</Text>

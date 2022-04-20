@@ -32,6 +32,7 @@
     import { Settings } from 'shared/routes'
     import { Locale } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
+    import { ProfileProtocol } from '@lib/typings/profile'
 
     export let locale: Locale
 
@@ -42,6 +43,8 @@
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
+    const profileProtocol = ProfileProtocol.Iota
+    const networkIcon = profileProtocol === ProfileProtocol.Iota ? 'iota' : 'shimmer'
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
@@ -157,6 +160,9 @@
         class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-5 pt-10 border-solid border-r border-gray-100 dark:border-gray-800"
     >
         <nav class="flex flex-grow flex-col items-center justify-between">
+            <button class="mb-7 health-status" on:click={networkModal?.open}>
+                <Icon width="48" height="48" icon={networkIcon} classes="dark:text-white" />
+            </button>
             <div class="flex flex-col space-y-8">
                 {#each sidebarTabs as tab}
                     <div class="flex">
@@ -165,14 +171,6 @@
                 {/each}
             </div>
             <span class="flex flex-col items-center">
-                <button class="mb-7 health-status" on:click={networkModal?.open}>
-                    <Icon
-                        width="24"
-                        height="24"
-                        icon="network"
-                        classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500"
-                    />
-                </button>
                 <button
                     class="w-8 h-8 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                     on:click={profileModal?.open}
