@@ -16,15 +16,12 @@
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
-    import { activeProfile, getColor } from 'shared/lib/profile'
     import { Transaction } from 'shared/lib/typings/message'
     import { getMessageParticipationAction } from 'shared/lib/participation'
 
     export let id: string
     export let timestamp: string
     export let confirmed: boolean
-    export let color: string
-    export let includeFullSender: boolean
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
@@ -33,7 +30,6 @@
 
     let accountAlias = ''
     let direction: string
-    let initialsColor: string
     let messageValue = ''
     let date = localize('error.invalidDate')
     let txPayload: Transaction
@@ -71,49 +67,42 @@
             : null
     $: {
         if (txPayload) {
-            const acc = txPayload.data.essence.data.incoming ? receiverAccount : senderAccount
+            const acc = txPayload.data.essence.data.incoming ? senderAccount : receiverAccount
 
             // The address in the payload was one of our accounts so grab
             // the account alias to display
             if (acc) {
-                if (includeFullSender) {
-                    accountAlias = acc.alias
-                }
-                initialsColor = getColor($activeProfile, acc.id) as string
+                accountAlias = acc.alias
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
-                if (includeFullSender) {
-                    accountAlias = truncateString(
-                        txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
-                        3,
-                        3
-                    )
-                }
+                accountAlias = truncateString(
+                    txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
+                    4,
+                    3
+                )
             }
         }
     }
     $: {
         if (txPayload) {
-            if (includeFullSender) {
-                if (isParticipationPayload(txPayload)) {
-                    direction = 'staking.stakedFunds'
-                } else {
-                    direction = confirmed
-                        ? txPayload.data.essence.data.incoming
-                            ? 'general.receivedTo'
-                            : 'general.sentFrom'
-                        : txPayload.data.essence.data.incoming
-                        ? 'general.receivingTo'
-                        : 'general.sendingFrom'
-                }
+            if (isParticipationPayload(txPayload)) {
+                direction = 'general.stakingTransaction'
+            } else if (txPayload.data.essence.data.internal) {
+                direction = confirmed
+                    ? txPayload.data.essence.data.incoming
+                        ? 'general.transferFrom'
+                        : 'general.transferTo'
+                    : txPayload.data.essence.data.incoming
+                    ? 'general.transferringFrom'
+                    : 'general.transferringTo'
             } else {
                 direction = confirmed
                     ? txPayload.data.essence.data.incoming
-                        ? 'general.received'
-                        : 'general.sent'
+                        ? 'general.receivedFrom'
+                        : 'general.sentTo'
                     : txPayload.data.essence.data.incoming
-                    ? 'general.receiving'
-                    : 'general.sending'
+                    ? 'general.receivingFrom'
+                    : 'general.sendingTo'
             }
         }
     }
@@ -129,41 +118,52 @@
             !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
         }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
     }
-    function getParticipationColor(action: ParticipationAction): string {
-        switch (action) {
-            case ParticipationAction.Stake:
-            case ParticipationAction.Vote:
-                return 'orange-500'
-            case ParticipationAction.Unstake:
-            case ParticipationAction.Unvote:
-            default:
-                return 'blue-500'
+
+    let icon: string
+    let iconColor: string
+    $: {
+        if (hasCachedMigrationTx || milestonePayload) {
+            icon = 'double-chevron-right'
+            iconColor = 'gray-600'
+        } else if (isParticipationPayload(txPayload)) {
+            icon = getParticipationIcon(participationAction)
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.internal) {
+            icon = 'transfer'
+            iconColor = 'gray-600'
+        } else if (txPayload.data.essence.data.incoming) {
+            icon = 'chevron-down'
+            iconColor = 'blue-700'
+        } else {
+            icon = 'chevron-up'
+            iconColor = 'blue-500'
         }
     }
+
     function getParticipationIcon(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
             case ParticipationAction.Unstake:
-                return 'staking'
+                return 'tokens'
             case ParticipationAction.Vote:
             case ParticipationAction.Unvote:
                 return 'voting'
             default:
-                return ''
+                return 'participation'
         }
     }
     function getParticipationActionLocaleKey(action: ParticipationAction): string {
         switch (action) {
             case ParticipationAction.Stake:
-                return 'staked'
+                return 'stakingTransaction'
             case ParticipationAction.Vote:
-                return 'voted'
+                return 'votingTransaction'
             case ParticipationAction.Unstake:
-                return 'unstaked'
+                return 'unstakingTransaction'
             case ParticipationAction.Unvote:
-                return 'unvoted'
+                return 'unvotingTransaction'
             default:
-                return 'participated'
+                return 'participationTransaction'
         }
     }
 </script>
@@ -171,65 +171,24 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {!confirmed ||
+    class="w-full text-left flex rounded-2xl items-center bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 dark:bg-opacity-50 p-4 {!confirmed ||
     hasCachedMigrationTx
         ? 'opacity-50'
         : ''} {hasCachedMigrationTx ? 'pointer-events-none' : ''} overflow-hidden"
     disabled={hasCachedMigrationTx}
 >
     <div class="w-8 flex flex-row justify-center items-center">
-        {#if hasCachedMigrationTx || milestonePayload}
-            <Icon
-                width="24"
-                height="24"
-                boxed
-                classes="text-white"
-                boxClasses="bg-gray-500 dark:bg-gray-900"
-                icon="double-chevron-right"
-            />
-        {:else if isParticipationPayload(txPayload) && participationAction}
-            <Icon
-                boxed
-                width="24"
-                height="24"
-                classes="text-white"
-                boxClasses="bg-{getParticipationColor(participationAction)}"
-                icon={getParticipationIcon(participationAction)}
-            />
-        {:else}
-            <Icon
-                boxed
-                classes={`text-${isBright(initialsColor) ? 'gray-800' : 'white'}`}
-                boxClasses="bg-{initialsColor
-                    ? `${initialsColor}-500`
-                    : txPayload.data.essence.data.internal
-                    ? 'gray-500'
-                    : `${color}-${txPayload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
-                icon={txPayload.data.essence.data.internal
-                    ? 'transfer'
-                    : txPayload.data.essence.data.incoming
-                    ? 'chevron-down'
-                    : 'chevron-up'}
-                fill={isBright(initialsColor) ? '#000000' : ''}
-                boxStyles={`background-color: ${initialsColor || (txPayload.data.essence.data.internal && 'gray')};`}
-            />
-        {/if}
+        <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
     </div>
     <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
         <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {#if hasCachedMigrationTx || milestonePayload}
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {#if includeFullSender}
-                    {localize(`general.${getParticipationActionLocaleKey(participationAction)}For`, {
-                        values: { account: accountAlias },
-                    })}
-                {:else}{localize(`general.${getParticipationActionLocaleKey(participationAction)}`)}{/if}
+                {localize(`general.${getParticipationActionLocaleKey(participationAction)}`)}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
-        <p class="text-10 leading-120 text-gray-500">
-            {date}
-        </p>
+        <p class="text-10 leading-120 text-gray-500">{date}</p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller classes="whitespace-nowrap">{messageValue}</Text>

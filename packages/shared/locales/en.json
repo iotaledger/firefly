@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
@@ -480,17 +480,17 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
+                        "appNotOpen": "IOTA app not open",
                         "connected": "Connected",
-                        "legacyConnected": "Legacy App Open",
+                        "legacyConnected": "Legacy app open",
                         "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
                     }
                 },
                 "backup": {
-                    "title": "Save wallet backup",
+                    "title": "Backup your wallets",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
                     "button": "Backup"
@@ -524,8 +524,8 @@
                     "inactive": "No staking events detected"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on April 1st.",
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
                     "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
                     "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
@@ -560,7 +560,6 @@
             }
         },
         "governance": {
-            "title": "Governance",
             "votingPower": {
                 "title": "My voting power",
                 "info": {
@@ -729,8 +728,12 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -801,7 +804,7 @@
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profile name:",
-            "accountName": "Account name:",
+            "accountName": "Wallet name:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingManager": {
@@ -821,8 +824,8 @@
             "estimatedAirdrop": "Estimated rewards"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking round 2 from March 22nd",
-            "body": "Ready for the next round of staking? Participate in the 30 days staking round 2 from March 22nd. Stake your IOTAs and earn ASMB rewards!",
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "votingConfirmation": {
@@ -860,8 +863,9 @@
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
         "singleAccountGuide": {
-            "title": "New: manage your funds more easily",
-            "body": "To start preparing for the future, Firefly has changed the way to manage your funds! You can now toggle between your individual wallets in the top menu bar."
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -1107,15 +1111,23 @@
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
         "unvotedFor": "Unvoted for {account}",
-        "participatedFor": "Participated for {account}",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
+        "votingTransaction": "Voting Transaction",
+        "unvotingTransaction": "Unvoting Transaction",
+        "participationTransaction": "Participation Transaction",
         "receiving": "Receiving",
         "sending": "Sending",
         "legacyNetwork": "Legacy Network",
@@ -1126,7 +1138,6 @@
         "none": "None",
         "staked": "Staked",
         "voted": "Voted",
-        "participated": "Participated",
         "unstaked": "Unstaked",
         "unvoted": "Unvoted",
         "staking": "Staking",
@@ -1190,9 +1201,9 @@
             "vote": "You voted with {account}",
             "unvote": "You unvoted with {account}"
         },
-        "syncing": "Please wait until synchronization is finished to change accounts.",
-        "transferring": "Please wait until all transactions are completed to change accounts.",
-        "participating": "Please wait until all staking/voting transactions are completed to change accounts."
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {

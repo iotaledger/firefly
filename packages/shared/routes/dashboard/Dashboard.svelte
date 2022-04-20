@@ -70,13 +70,12 @@
     let busy
     let fundsSoonNotificationId
     let developerProfileNotificationId
+    let showTopNav = false
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
-            void getParticipationEvents()
-
             void pollNetworkStatus()
             void pollParticipationOverview()
         } else {
@@ -157,6 +156,8 @@
     }
 
     onMount(() => {
+        void getParticipationEvents()
+
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
@@ -250,6 +251,7 @@
                     closePopup()
                 }
                 Platform.DeepLinkManager.checkDeepLinkRequestExists()
+                showTopNav = true
             }
             if (minTimeElapsed < 0) {
                 cancelBusyState()
@@ -401,16 +403,20 @@
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: showSingleAccountguide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: showSingleAccountguide && openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
+    $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
+        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+    }
 </script>
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <TopNavigation
-        {onCreateAccount}
-        classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
-    />
+    {#if showTopNav}
+        <TopNavigation
+            {onCreateAccount}
+            classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
+        />
+    {/if}
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />
         <!-- Dashboard Pane -->

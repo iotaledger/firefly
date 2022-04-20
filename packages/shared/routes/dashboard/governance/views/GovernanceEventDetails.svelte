@@ -5,8 +5,6 @@
     import { participationOverview } from 'shared/lib/participation/stores'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from 'shared/lib/participation/types'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { governanceRouter } from '@core/router'
-    import { GovernanceRoute } from '@core/router/enums'
     import { handleTransactionEventData, selectedAccount, transferState } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { milestoneToDate, getBestTimeDuration, getDurationString } from 'shared/lib/time'
@@ -51,8 +49,6 @@
     $: length =
         milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
         milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
-
-    const handleBackClick = (): void => $governanceRouter.goTo(GovernanceRoute.Init)
 
     const handleClick = (nextVote: VotingEventAnswer): void => {
         const openGovernanceCastVotePopup = () =>
@@ -164,15 +160,6 @@
         return false
     }
 </script>
-
-<div
-    on:click={handleBackClick}
-    class="inline-flex justify-between items-center w-20 p-2 pr-4 bg-white hover:bg-gray-100 border
-    rounded-lg border-solid border-gray-300 cursor-pointer mb-5"
->
-    <Icon icon="arrow-left" classes="w-4 h-4 text-gray-500" />
-    <Text type="p" smaller overrideColor classes="text-gray-800">{localize('actions.back')}</Text>
-</div>
 
 <div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">

@@ -461,38 +461,9 @@
             "incorrectAttempts": "{attempts, plural, other {# 回間違いました }}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "最新",
-                    "outOfDate": "古いバージョンです",
-                    "updatesDisabled": "アップデートは無効です"
-                },
-                "hardwareDevice": {
-                    "title": "外部デバイス",
-                    "statuses": {
-                        "appNotOpen": "IOTAアプリが開いていません",
-                        "connected": "接続しました",
-                        "legacyConnected": "{legacy} アプリを開く",
-                        "locked": "ロック中",
-                        "mnemonicMismatch": "間違ったLedgerまたはMnemonicです",
-                        "notDetected": "見つかりませんでした",
-                        "otherConnected": "アプリを開く"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "ウォレットのステータス",
-                    "locked": "ロック中",
-                    "unlocked": "ロック解除"
-                },
-                "strongholdBackup": {
-                    "title": "ウォレットのバックアップ",
-                    "weeksAgo": "{weeks, plural, one {# 週間} other {# 週間}} 前"
-                }
-            },
             "network": {
-                "networkOperational": "ネットワークに接続されました",
-                "networkDegraded": "ネットワーク接続に問題があります",
+                "networkOperational": "Network operational",
+                "networkDegraded": "ネットワークが劣化しました",
                 "networkDown": "ネットワーク接続が切断されました",
                 "status": "ステータス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
@@ -500,11 +471,38 @@
             },
             "profileModal": {
                 "allSettings": "すべての設定",
-                "logout": "ログアウト"
+                "logout": "ログアウト",
+                "stronghold": {
+                    "title": "プロフィールロック",
+                    "locked": "Strongholdはロックされています",
+                    "unlocked": "Strongholdはアンロックされています"
+                },
+                "hardware": {
+                    "title": "ハードウェアデバイス",
+                    "statuses": {
+                        "appNotOpen": "IOTAアプリが開いていません",
+                        "connected": "接続しました",
+                        "legacyConnected": "レガシーアプリを開く",
+                        "locked": "ロック済み",
+                        "mnemonicMismatch": "間違ったLedgerまたはニーモニックです",
+                        "notDetected": "検出されませんでした",
+                        "otherConnected": "アプリを開いています"
+                    }
+                },
+                "backup": {
+                    "title": "ウォレットをバックアップ",
+                    "lastBackup": "最後に {date} をバックアップしました",
+                    "notBackedUp": "バックアップされていません",
+                    "button": "バックアップ"
+                },
+                "version": {
+                    "title": "新しいアップデートが利用可能です",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "更新"
+                }
             }
         },
         "staking": {
-            "title": "ステーキング",
             "welcome": "ステーキングダッシュボードへようこそ!",
             "status": {
                 "upcoming": "イベントは開始されていません",
@@ -518,23 +516,29 @@
                 "stakedFunds": "ステーク資金"
             },
             "info": {
-                "upcomingSubheader": "イベントは開始されていません",
-                "upcomingHeader": "後で確認する",
-                "commencingSubheader": "ステーキングの準備をする",
-                "commencingHeader": "トークンを事前にステーク！",
-                "holdingSubheaderHolding": "ステーキング報酬を獲得中",
-                "holdingSubheaderNotHolding": "IOTAステーキングで報酬を獲得",
-                "holdingHeaderHolding": "残り{duration}",
-                "holdingHeaderNotHolding": "トークンをステークします！",
-                "endedSubheader": "ステーキングは終了しました",
-                "endedHeader": "ありがとうございます!",
-                "inactiveHeader": "ノードを変更してみてください",
-                "inactiveSubheader": "ステーキングが検出されませんでした"
+                "headers": {
+                    "upcoming": "後で確認する",
+                    "commencing": "事前ステーキングは開いています",
+                    "holding": "{duration} of staking left",
+                    "ended": "ステーキングは終了しました",
+                    "inactive": "ステーキングイベントが検出されませんでした"
+                },
+                "bodies": {
+                    "upcoming": "{token} トークンをステークして、 {date}にステーキングが開始されると10秒ごとに自動的に報酬を受け取ることができます。",
+                    "commencing": "{token} トークンをステークして、 {date}にステーキングが開始されると10秒ごとに自動的に報酬を受け取ることができます。",
+                    "holdingAndStaking": "10秒ごとに自動的に報酬を受け取ります。",
+                    "holdingAndNotStaking": "{token} トークンをステークして10秒ごとに報酬を受け取ります。",
+                    "endedAndDidStake": "ネットワークが起動すると、{token} 報酬がウォレットに配布されます。",
+                    "endedAndDidNotStake": "このエアドロップに参加していません。",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "残り",
                 "commencing": "ステーキング開始まで",
-                "collectedRewards": "報酬を集めました",
+                "currentStakingPeriod": "現在のステーキング期間",
+                "totalWalletRewards": "ウォレット報酬の合計",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。 "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "IOTAの主要なイノベーションを進めるためにインセンティブを与えられたステージングネットワーク。 何が起こります。 Shimmerの進化はあなた次第です。"
                 }
+            },
+            "banners": {
+                "new": "新しいイベント",
+                "complete": "完了"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "残高を検索する",
-            "body": "不足している残高を見つけるために、アドレスをより徹底的に検索します。これには時間がかかる場合があります。",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "ウォレットが見つかりました",
             "totalWalletBalance": "合計残高",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "検索できるようにパスワードを入力してください。"
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "取引履歴を出力する",
             "body": "選択したウォレットの取引履歴をエクスポートします。エクスポートされたファイルは .csv 形式になります。",
             "profileName": "プロフィール名:",
-            "accountName": "アカウント名:",
+            "accountName": "ウォレット名:",
             "typePassword": "出力を許可するにはパスワードを入力してください"
-        },
-        "stakingNotice": {
-            "upcomingDate": "ステーキングはまだ開始されていません",
-            "commencingDate": "ステーキングはまだ開始されていません",
-            "body": "ステーキング開始前に資金を事前にステーキングすることで、ステーキング開始時に自動的に報酬を受け取ることができます。",
-            "ok": "はい。理解しました。"
         },
         "stakingManager": {
             "title": "ステーキング管理",
             "description": "ウォレットをステークすると、それらの資金を「ステークされた」として自分自身に送金します。 いつでもトークンを送金できますが、ステーキング報酬を受け取り続けることはありません。",
             "totalFundsStaked": "ステークの合計",
             "stakedSuccessfully": "あなたの資金は {account}にステークされました。",
-            "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。"
+            "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "エアドロップへの参加",
+            "title": "Confirm Participation",
             "subtitleStake": "ステークしようとしています",
             "subtitleMerge": "合算しようとしています",
-            "bodyStake": "両方のエアドロップに参加したくない場合は、以下からオプトアウト(opt-out)することができます。 ステークを解除して再起動することで、いつでもオプトイン(opt-in)できます。",
-            "bodyMerge": "資金は {airdrop}に投資されます。参加したいエアドロップを変更するには、このウォレットのステークを解除し、再度ステークしてください。",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "推定された報酬"
+        },
+        "newStakingPeriodNotification": {
+            "title": "{periodNumber} からのステーキングフェーズ {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmerステーキングが完了し、ASMBトークンのみが配布されます。"
         },
         "shimmer-info": {
             "title": "Shimmerについて",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "更新された利用規約とプライバシーポリシーに同意します",
             "tosCheckbox": "更新された利用規約に同意します",
             "privPolicyCheckbox": "更新されたプライバシーポリシーに同意します"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "ステークの管理",
         "merge": "統合",
         "mergeFunds": "資金を統合",
-        "done": "完了しました"
+        "done": "完了しました",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "もっと読む"
     },
     "general": {
         "password": "パスワード",
@@ -961,7 +980,6 @@
         "darkTheme": "ダーク",
         "systemTheme": "システム",
         "balance": "残高",
-        "accountBalance": "ウォレットの残高",
         "all": "すべて",
         "incoming": "入金",
         "outgoing": "出金",
@@ -972,6 +990,7 @@
         "profiles": "プロフィール",
         "dev": "開発者",
         "createAccount": "ウォレットを作成",
+        "createNewWallet": "新しいウォレットを作成",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
@@ -1030,14 +1049,20 @@
         "creatingProfile": "プロフィールを作成しています。お待ちください...",
         "fundMigration": "資金の移行",
         "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
-        "receivingTo": "{account} へ着金中",
-        "sendingFrom": "{account} から送金中",
-        "receivedTo": "{account} へ着金しました",
-        "sentFrom": "{account} から送金",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "{account} にステークしました",
         "unstakedFor": "{account} の解除したステーク",
         "votedFor": "{account} に投票",
         "unvotedFor": "{account} の投票を解除",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
@@ -1053,7 +1078,8 @@
         "notStaked": "ステークされていません",
         "stakedFunds": "ステーク資金",
         "unstakedFunds": "解除したステーク資金",
-        "accountColor": "ウォレットの色"
+        "accountColor": "ウォレットの色",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "今日",
@@ -1100,7 +1126,10 @@
                     "success": "IOTAリンクから追加された支払いの詳細"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1253,16 @@
             "cannotFindStakingEvent": "ステーキングイベントを見つけることができません。",
             "cannotVisitAirdropWebsite": "{airdrop} ウェブサイトを開くことができません。",
             "invalidStakingEventId": "不正なステーキングイベントIDです。"
-        }
+        },
+        "invalidDate": "無効な日付",
+        "invalidTime": "無効な時間"
     },
     "warning": {
         "node": {
             "http": "HTTP 経由のノードを使用すると、トラフィックは暗号化されず、セキュリティ上のリスクを引き起こす可能性があります。"
         },
         "participation": {
-            "noAccounts": "IOTAを持っていません。"
+            "noFunds": "IOTAを持っていません。"
         }
     },
     "tooltips": {
@@ -1243,37 +1274,10 @@
             "low": "低い",
             "veryLow": "非常に低い"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "ステーキングはまだ開始されていません",
-                "body": "後で確認してください。ステーキングイベントはまだ始まっていません。"
-            },
-            "commencing": {
-                "title": "事前ステーキングは現在開いています",
-                "body": "トークンを事前にステークし、ステーキングが開始されると、10秒ごとに自動的に報酬を受け取ります。"
-            },
-            "activeHolding": {
-                "title": "ステーキングが進行中です",
-                "body": "よくできました。10秒ごとに報酬がもらえます。"
-            },
-            "inactiveHolding": {
-                "title": "ステーキングは現在開いています",
-                "body": "IOTAトークンをステークすると、10秒ごとに報酬がもらえます。"
-            },
-            "inactive": {
-                "title": "ステーキングイベントが検出されませんでした",
-                "body": "「詳細設定」で「ネットワーク構成」を開き、「情報の表示」をクリックして、現在のノードに「参加」機能があることを確認します。"
-            },
-            "ended": {
-                "title": "ステーキングは終了しました",
-                "bodyAboveRewardMin": "各ネットワークの起動時に、Assembly とShimmer の報酬がウォレットに配布されます。",
-                "bodyBelowRewardMin": "最低限のエアドロップ報酬に到達するのに十分なIOTAをステークしていません。"
-            }
-        },
         "partiallyStakedFunds": {
             "title": "新しい解除したステーク: {amount}",
             "titleNoFunds": "新しい解除したステーク",
-            "preBody": "ステークされたウォレットにトークンを受け取りました。",
+            "preBody": "ステークされていないトークンを受け取りました。",
             "body": "エアドロップ報酬を受け取るには、これらの新しい資金を手動でステークする必要があります。"
         },
         "stakingMinRewards": {
@@ -1308,5 +1312,9 @@
             "request": "QRコードをスキャンするには、カメラを使用する許可が必要です。",
             "requestInAppSettings": "QRコードをスキャンするためにカメラを使用する許可を与えたい場合は、アプリ設定で有効にしてください。"
         }
+    },
+    "tabs": {
+        "wallet": "ウォレット",
+        "staking": "ステーキング"
     }
 }

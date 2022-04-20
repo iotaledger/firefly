@@ -267,10 +267,13 @@ export interface IWalletApi {
     )
 
     // Participation (voting / staking)
-    getParticipationOverview(callbacks: {
-        onSuccess: (response: Event<ParticipationOverviewResponse>) => void
-        onError: (err: ErrorEventPayload) => void
-    })
+    getParticipationOverview(
+        assemblyEventId: string,
+        callbacks: {
+            onSuccess: (response: Event<ParticipationOverviewResponse>) => void
+            onError: (err: ErrorEventPayload) => void
+        }
+    )
     getParticipationEvents(callbacks: {
         onSuccess: (response: Event<ParticipationEvent[]>) => void
         onError: (err: ErrorEventPayload) => void

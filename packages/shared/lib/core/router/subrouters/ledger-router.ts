@@ -18,13 +18,12 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
 
     restartIfNotInLedgerFlow(): void {
         const setupType = get(walletSetupType)
-
         // reinitialize the init view only if we are not in the middle of a ledger flow
-        if (this.history.length !== 1) {
+        if (this.history.length === 0) {
             if (setupType === SetupType.New || setupType === SetupType.FireflyLedger) {
-                this.setNext(LedgerRoute.Connect)
+                this.routeStore.set(LedgerRoute.Connect)
             } else {
-                this.setNext(LedgerRoute.LegacyIntro)
+                this.routeStore.set(LedgerRoute.LegacyIntro)
             }
         }
     }

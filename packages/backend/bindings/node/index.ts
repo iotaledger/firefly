@@ -353,8 +353,8 @@ export const api = {
     },
 
     // Participation related methods (voting / staking)
-    getParticipationOverview: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids)
+    getParticipationOverview: function (assemblyEventId: string): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids, assemblyEventId)
     },
     getParticipationEvents: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getParticipationEvents(sendMessage, __ids)

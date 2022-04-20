@@ -5,7 +5,7 @@ import type { Unit } from '@iota/unit-converter'
  */
 export type SendOperationParameters = {
     address: string
-    amount: number
+    amount: string
     unit: Unit
     message: string
 }

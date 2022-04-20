@@ -1,9 +1,9 @@
 name: "Crowdin"
 
 on:
-  # schedule:
-  #   # Daily at 18:00 UTC
-  #   - cron: '0 18 * * *'
+  schedule:
+    # Daily at 18:00 UTC
+    - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Sync translations from Crowdin
-        uses: crowdin/github-action@1.0.20
+        uses: crowdin/github-action@1.4.8
         with:
           upload_sources: true
           download_translations: true

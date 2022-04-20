@@ -396,7 +396,7 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
                         incoming: 0,
                         outgoing: 0,
                         depositAddress: response.payload.addresses[0].address,
-                    }) as WalletAccount
+                    })
                     get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
                     setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
@@ -507,7 +507,7 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
             onSuccess(response) {
                 getAccountMeta(account.id, (err, meta) => {
                     if (!err) {
-                        const _account = prepareAccountInfo(account, meta) as WalletAccount
+                        const _account = prepareAccountInfo(account, meta)
                         get(wallet)?.accounts.update((_accounts) =>
                             _accounts.map((a) => (a.id === _account.id ? _account : a))
                         )
@@ -843,6 +843,13 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                         meta
                     )
 
+                    api.setAlias(account?.id, account?.alias, {
+                        onSuccess() {},
+                        onError(err) {
+                            console.error(err)
+                        },
+                    })
+
                     _accounts.push(account)
                 } else {
                     console.error(err)
@@ -1015,7 +1022,7 @@ export const prepareAccountInfo = (
         outgoing: number
         depositAddress: string
     }
-): unknown => {
+): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 

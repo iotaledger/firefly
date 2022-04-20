@@ -400,7 +400,7 @@
                     {#if $accountRoute !== AccountRoute.Manage}
                         <AccountBalance onMenuClick={modal?.toggle} />
                     {/if}
-                    <DashboardPane classes="h-full -mt-5 z-0">
+                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
                         {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
                             <div class="px-6 my-4">
                                 <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
@@ -418,10 +418,7 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory
-                        color={$selectedAccount.color}
-                        transactions={getAccountMessages($selectedAccount)}
-                    />
+                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

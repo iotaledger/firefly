@@ -20,8 +20,8 @@ import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER } from './constan
 export const selectedAccountParticipationOverview = derived(
     [participationOverview, selectedAccount],
     ([$participationOverview, $selectedAccount]) =>
-        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
-)
+        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? {}
+) as Readable<AccountParticipationOverview>
 
 /**
  * The amount of funds that are currently staked on the selected account. This amount may differ

@@ -3,9 +3,14 @@ import { MILLISECONDS_PER_SECOND } from '../time'
 import { Participation, StakingAirdrop } from './types'
 
 /**
+ * The starting date of the next staking period.
+ */
+export const ASSEMBLY_EVENT_START_DATE = new Date('April 22, 2022')
+
+/**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '54d85610d2d4077d9554c2ab30f41303cd7e8fb0afc2abf91c04a1ab451bd966'
+export const ASSEMBLY_EVENT_ID = '90ab02d8f700fcb3b31ff577416ecb105697a664738bec45b626920337a280e0'
 
 /**
  * The staking event ID for Shimmer.
@@ -51,14 +56,14 @@ export const TREASURY_VOTE_EVENT_ID = '16d2eb8aada8bff94d98bd0cb59b33e8e8fde97b0
  * The GitHub URLs containing the end Assembly staking results per period.
  */
 export const ASSEMBLY_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/alexsporn/participation-events/master/results/staking/assembly_01.json',
+    'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/assembly_01.json',
 ]
 
 /**
  * The GitHub URLs containing the end Shimmer staking result per period.
  */
 export const SHIMMER_STAKING_RESULT_URLS: string[] = [
-    'https://raw.githubusercontent.com/alexsporn/participation-events/master/results/staking/shimmer.json',
+    'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/shimmer.json',
 ]
 
 /**
@@ -70,7 +75,7 @@ export const LAST_ASSEMBLY_STAKING_PERIOD = 1
  * The number of the last completed Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_ASSEMBLY_STAKING_PERIOD = 1
+export const CURRENT_ASSEMBLY_STAKING_PERIOD = 2
 
 /**
  * The number of the last completed Assembly staking period.
@@ -81,13 +86,13 @@ export const LAST_SHIMMER_STAKING_PERIOD = 1
  * The number of the last completed Assembly staking period.
  * Set to 0 if no current event
  */
-export const CURRENT_SHIMMER_STAKING_PERIOD = 1
+export const CURRENT_SHIMMER_STAKING_PERIOD = 0
 
 /**
  * The amount of microASMB per 1 Mi received every milestone,
- * which is currently 4 microASMB (0.000004 ASMB).
+ * which is currently 2 microASMB (0.000002 ASMB).
  */
-export const ASSEMBLY_REWARD_MULTIPLIER = 4.0
+export const ASSEMBLY_REWARD_MULTIPLIER = 2.0
 
 /**
  * The amount of SMR per 1 Mi received every milestone,

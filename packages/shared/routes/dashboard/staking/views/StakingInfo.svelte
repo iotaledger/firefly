@@ -1,21 +1,35 @@
 <script lang="typescript">
     import { Animation, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { LocaleArguments, localize } from '@core/i18n'
     import { assemblyStakingEventState, assemblyStakingRemainingTime } from 'shared/lib/participation/stores'
+    import { formatDate, LocaleArguments, localize } from '@core/i18n'
     import {
         currentAssemblyStakingRewards,
         currentAssemblyStakingRewardsBelowMinimum,
         currentShimmerStakingRewards,
         currentShimmerStakingRewardsBelowMinimum,
         selectedAccountParticipationOverview,
+        totalAssemblyStakingRewards,
+        totalShimmerStakingRewards,
     } from 'shared/lib/participation/account'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountId } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
+    import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
 
-    let animation: string
+    enum StakingAnimation {
+        Prestaking = 'prestaking',
+        Neither = 'staking-neither',
+        Both = 'staking-both',
+        AssemblyWithShimmerRewards = 'staking-assembly-with-shimmer-rewards',
+        AssemblyWithoutShimmerRewards = 'staking-assembly-without-shimmer-rewards',
+        ShimmerWithAssemblyRewards = 'staking-shimmer-with-assembly-rewards',
+        ShimmerWithoutAssemblyRewards = 'staking-shimmer-without-assembly-rewards',
+        Ended = 'ended',
+    }
+
+    let animation: StakingAnimation = null
     let header: string
     let body: string
 
@@ -29,36 +43,59 @@
     $: stakingEventState = $assemblyStakingEventState
 
     $: $selectedAccountParticipationOverview, stakingEventState, setText()
-    $: isAssemblyStaked, isShimmerStaked, stakingEventState, $selectedAccountId, setAnimation()
-
-    enum AnimationFileNumber {
-        NoStaking = 0,
-        Assembly = 1,
-        Shimmer = 2,
-        AssemblyAndShimmer = 3,
-    }
+    $: isAssemblyStaked,
+        isShimmerStaked,
+        stakingEventState,
+        $selectedAccountParticipationOverview,
+        $selectedAccountId,
+        setAnimation()
 
     function setAnimation(): void {
-        const prefix = 'staking-info'
-        if (!stakingEventState || !$selectedAccountParticipationOverview) {
-            animation = `${prefix}-upcoming`
-        }
+        switch (stakingEventState) {
+            case ParticipationEventState.Upcoming:
+            case ParticipationEventState.Commencing:
+                animation = StakingAnimation.Prestaking
+                break
+            case ParticipationEventState.Holding: {
+                if (!$selectedAccountParticipationOverview) {
+                    animation = StakingAnimation.Neither
+                } else {
+                    const participatingEventIds =
+                        $selectedAccountParticipationOverview?.participations?.map((p) => p.eventId) ?? []
 
-        if (stakingEventState === ParticipationEventState.Inactive) {
-            animation = null
-        } else if (stakingEventState === ParticipationEventState.Holding) {
-            let fileNumber = AnimationFileNumber.NoStaking
-            if (isAssemblyStaked && isShimmerStaked) {
-                fileNumber = AnimationFileNumber.AssemblyAndShimmer
-            } else if (isAssemblyStaked) {
-                fileNumber = AnimationFileNumber.Assembly
-            } else if (isShimmerStaked) {
-                fileNumber = AnimationFileNumber.Shimmer
+                    const isStakingForAssembly = participatingEventIds.includes(ASSEMBLY_EVENT_ID)
+                    const isStakingForShimmer = participatingEventIds.includes(SHIMMER_EVENT_ID)
+
+                    if (isStakingForAssembly && isStakingForShimmer) {
+                        animation = StakingAnimation.Both
+                    } else if (!isStakingForAssembly && !isStakingForShimmer) {
+                        animation = StakingAnimation.Neither
+                    } else {
+                        if (isStakingForAssembly) {
+                            const hasShimmerRewards = $totalShimmerStakingRewards > 0
+                            animation = hasShimmerRewards
+                                ? StakingAnimation.AssemblyWithShimmerRewards
+                                : StakingAnimation.AssemblyWithoutShimmerRewards
+                        } else if (isStakingForShimmer) {
+                            const hasAssemblyRewards = $totalAssemblyStakingRewards > 0
+                            animation = hasAssemblyRewards
+                                ? StakingAnimation.ShimmerWithAssemblyRewards
+                                : StakingAnimation.ShimmerWithoutAssemblyRewards
+                        } else {
+                            animation = StakingAnimation.Neither
+                        }
+                    }
+                }
+
+                break
             }
-
-            animation = `${prefix}-${stakingEventState}-${fileNumber}`
-        } else {
-            animation = `${prefix}-${stakingEventState}`
+            case ParticipationEventState.Ended:
+                animation = StakingAnimation.Ended
+                break
+            case ParticipationEventState.Inactive:
+            default:
+                animation = null
+                break
         }
     }
 
@@ -69,14 +106,17 @@
             stakingEventState === ParticipationEventState.Upcoming ||
             stakingEventState === ParticipationEventState.Commencing
         ) {
+            const dateArgument = formatDate(ASSEMBLY_EVENT_START_DATE, { format: 'long' })
+            const localeArguments = { values: { token: Token.IOTA, date: dateArgument } }
+
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
-            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, { values: { token: Token.IOTA } })
+            body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, localeArguments)
         } else if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = isAssemblyStaked || isShimmerStaked
-            const durationArguments: LocaleArguments = isStaking
-                ? { values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) } }
-                : {}
             const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: Token.IOTA } }
+            const durationArguments: LocaleArguments = {
+                values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) },
+            }
 
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`, durationArguments)
             body = localize(
@@ -87,7 +127,7 @@
             const didStake = $currentAssemblyStakingRewards > 0 || $currentShimmerStakingRewards > 0
             const isBelowMinimum =
                 ($currentAssemblyStakingRewardsBelowMinimum > 0 && $currentAssemblyStakingRewards <= 0) ||
-                ($currentShimmerStakingRewardsBelowMinimum > 0 && currentShimmerStakingRewards <= 0)
+                ($currentShimmerStakingRewardsBelowMinimum > 0 && $currentShimmerStakingRewards <= 0)
             const subLocalePath = isBelowMinimum ? 'NotReachMinRewards' : didStake ? 'Stake' : 'NotStake'
             const tokenArguments: LocaleArguments = isBelowMinimum
                 ? { values: { token: Token.IOTA } }
@@ -104,7 +144,7 @@
     }
 
     function onClickLearnMore(): void {
-        Platform.openUrl('https://blog.iota.org/iota-staking-start/')
+        Platform.openUrl('https://blog.iota.org/iota-staking-for-assembly-continues/')
     }
 </script>
 
@@ -112,7 +152,7 @@
     {#if animation}
         <div class="animation-wrapper relative w-full">
             <Animation
-                {animation}
+                animation="staking-{animation}"
                 classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             />
         </div>

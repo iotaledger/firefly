@@ -1110,7 +1110,7 @@ export const icons = {
             },
         ],
     },
-    staking: {
+    participation: {
         width: 24,
         height: 24,
         path: [
