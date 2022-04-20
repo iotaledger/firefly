@@ -29,12 +29,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/firefly/static/icon_firefly.png" rel="icon" />
-    <link href="/firefly/resources/css/retype.css?v=2.2.703238934705" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/firefly/resources/css/retype.css?v=2.2.703762258671" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.2.703238934705" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/firefly/resources/js/config.js?v=2.2.703762258671" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/firefly/resources/js/retype.js?v=2.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.2.703238934705" defer></script>
-    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.2.703238934705" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/firefly/resources/js/lunr.js?v=2.2.703762258671" defer></script>
+    <script id="prism-js" type="text/javascript" src="/firefly/resources/js/prism.js?v=2.2.703762258671" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -301,7 +301,15 @@
         <span>Adding a setting</span>
     </h3>
 </doc-anchor-target>
-<p><em>TBD</em></p>
+<p>There are a few steps to add a settings component to the Settings menu in Firefly:</p>
+<ul>
+<li>Add your component to the correct folder under <code v-pre>packages/shared/routes/dashboard/settings/views</code></li>
+<li>Add an <code v-pre>export</code> statement to the barrel import/export file in the directory of your new component</li>
+<li>Add your component to the <code v-pre>settings</code> of the file with the same name as the settings (e.g. <code v-pre>Advance.svelte</code> for the advanced setting)</li>
+<li>Add your route enum to the appropriate settings route in <code v-pre>packages/shared/lib/core/router/enums/routes.ts</code></li>
+<li>Add the correct <code v-pre>title</code> and additional texts to the <code v-pre>view</code> property in <code v-pre>packages/shared/locales/en.json</code> for the translations.</li>
+<li>Add an appropriate icon to<code v-pre>packages/shared/lib/typings/icons.ts</code></li>
+</ul>
 <doc-anchor-target id="adding-a-svelte-page">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#adding-a-svelte-page">#</doc-anchor-trigger>
