@@ -461,50 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly phiên bản v{version}",
-                    "upToDate": "Đã cập nhật",
-                    "outOfDate": "Đã cũ",
-                    "updatesDisabled": "Updates disabled"
-                },
-                "hardwareDevice": {
-                    "title": "Thiết bị phần cứng",
-                    "statuses": {
-                        "appNotOpen": "Ứng dụng IOTA không mở",
-                        "connected": "Đã kết nối",
-                        "legacyConnected": "{legacy} Mở ứng dụng",
-                        "locked": "Đã khóa",
-                        "mnemonicMismatch": "Sai Ledger hoặc Mnemonic",
-                        "notDetected": "Không phát hiện được",
-                        "otherConnected": "Ứng đụng đã mở"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Trạng thái ví",
-                    "locked": "Đã khóa",
-                    "unlocked": "Đã mở khóa"
-                },
-                "strongholdBackup": {
-                    "title": "Sao lưu ví",
-                    "weeksAgo": "{weeks, plural, one {# tuần} other {# tuần}} trước đó"
-                }
-            },
             "network": {
-                "networkOperational": "Vận hành mạng",
-                "networkDegraded": "Mạng bị xuống cấp",
-                "networkDown": "Mạng đã ngắt kết nối",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Trạng thái",
                 "messagesPerSecond": "Số tin nhắn trên giây",
                 "referencedRate": "Tỷ lệ tham chiếu"
             },
             "profileModal": {
                 "allSettings": "Tất cả tùy chọn cài đặt",
-                "logout": "Đăng xuất"
+                "logout": "Đăng xuất",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
+                    "notBackedUp": "Chưa được sao lưu",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Đặt cọc",
             "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Sự kiện chưa diễn ra",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Tài sản đã đặt cọc"
             },
             "info": {
-                "upcomingSubheader": "Sự kiện chưa diễn ra",
-                "upcomingHeader": "Kiểm tra lại sau",
-                "commencingSubheader": "Hãy sẵn sàng cho đặt cọc",
-                "commencingHeader": "Đặt cọc trước Token của bạn",
-                "holdingSubheaderHolding": "Nhận phần thưởng đặt cọc bây giờ",
-                "holdingSubheaderNotHolding": "Nhận phần thưởng bằng đặt cọc IOTA",
-                "holdingHeaderHolding": "{duration} thoát",
-                "holdingHeaderNotHolding": "Đặt cọc Token của bạn!",
-                "endedSubheader": "Đặt cọc đã kết thúc bây giờ",
-                "endedHeader": "Cảm ơn bạn!",
-                "inactiveHeader": "Thử thay đổi nút",
-                "inactiveSubheader": "Đặt cọc không được phát hiện"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Còn lại",
                 "commencing": "Đến khi đặt cọc bắt đầu",
-                "collectedRewards": "Nhận phần thưởng",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly là một mạng đa nền tảng có khả năng mở rộng cao, không cần cấp phép để xây dựng và triển khai các hợp đồng thông minh. Assembly là tương lai của Web3."
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Mạng thử nghiệm được khuyến khích để thúc đẩy cải tiến quan trọng trên IOTA. Bất cứ điều gì xảy ra, diễn ra. Cách Shimmer phát triển tùy thuộc vào bạn."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Công cụ tìm kiếm số dư",
-            "body": "Thực hiện tìm kiếm toàn diện các địa chỉ để tìm số dư còn thiếu. Việc này có thể mất một lát.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Tổng số dư",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Nhập mật khẩu của bạn để cho phép tìm kiếm"
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Xuất lịch sử giao dịch",
             "body": "Xuất lịch sử giao dịch cho ví đã chọn. Tệp được xuất sẽ có định dạng .csv.",
             "profileName": "Tên hồ sơ:",
-            "accountName": "Tên tài khoản:",
+            "accountName": "Wallet name:",
             "typePassword": "Nhập mật khẩu của bạn để cho phép xuất"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Đặt cọc vẫn chưa được bắt đầu",
-            "commencingDate": "Đặt đọc vẫn chưa bắt đầu",
-            "body": "Bằng cách đặt cọc trước tài sản của bạn trước khi đặt cọc bắt đầu, bạn sẽ tự động nhận phần thưởng khi đặt cọc bắt đầu",
-            "ok": "Được, tôi hiểu"
         },
         "stakingManager": {
             "title": "Quản lý đặt cọc",
             "description": "Khi bạn đặt cược vào ví, bạn gửi một giao dịch cho chính mình và đánh dấu các khoản tiền đó là \"đã đặt cọc\". Bạn có thể chuyển mã thông báo bất kỳ lúc nào, nhưng bạn sẽ không tiếp tục nhận được phần thưởng đặt cọc.",
             "totalFundsStaked": "Tổng tài sản đã đặt cọc",
             "stakedSuccessfully": "Tài sản của bạn đã được đặt cọc cho {account}.",
-            "unstakedSuccessfully": "Tài sản của bạn đã hủy đặt cọc cho {account}."
+            "unstakedSuccessfully": "Tài sản của bạn đã hủy đặt cọc cho {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Tham gia Airdrop",
+            "title": "Confirm Participation",
             "subtitleStake": "Bạn sắp đặt cọc",
             "subtitleMerge": "Bạn sắp hợp nhất",
-            "bodyStake": "Nếu bạn không muốn tham gia vào cả hai đợt airdrop, bạn có thể chọn không tham gia bên dưới. Bạn có thể hủy bỏ và thực hiện lại để chọn tham gia lại bất kỳ lúc nào.",
-            "bodyMerge": "Số tiền của bạn sẽ được đặt cọc cho {airdrop}. Để thay đổi airdrop bạn muốn tham gia, hãy hủy bỏ ví này và đặt cọc lại.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Phần thưởng ước tính"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "Về Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Quản lý đặt cọc",
         "merge": "Gộp lại",
         "mergeFunds": "Các tài sản gộp",
-        "done": "Hoàn thành"
+        "done": "Hoàn thành",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Mật khẩu",
@@ -961,7 +980,6 @@
         "darkTheme": "Tối",
         "systemTheme": "Hệ thống",
         "balance": "Số dư",
-        "accountBalance": "Số dư Ví",
         "all": "All",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
@@ -972,6 +990,7 @@
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
         "createAccount": "Khởi tạo ví",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -1030,14 +1049,20 @@
         "creatingProfile": "Đang tạo hồ sơ cá nhân, vui lòng đợi...",
         "fundMigration": "Tài sản chuyển",
         "accountRemoved": "Ví này bị ẩn. Hiện nó để thực hiện chuyển.",
-        "receivingTo": "Đang nhận tới {account}",
-        "sendingFrom": "Đang gửi từ {account}",
-        "receivedTo": "Đã nhận tới {account}",
-        "sentFrom": "Gửi từ {account}",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "Đặt cọc cho {account}",
         "unstakedFor": "Hủy đặt cọc cho {account}",
         "votedFor": "Bình chọn cho {account}",
         "unvotedFor": "Hủy bình chọn cho {account}",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
         "receiving": "Đang nhận",
         "sending": "Đang gửi",
         "legacyNetwork": "Mạng Legacy",
@@ -1053,7 +1078,8 @@
         "notStaked": "Không đặt cọc",
         "stakedFunds": "Tài sản đã đặt cọc",
         "unstakedFunds": "Tài sản không đặt cọc",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -1100,7 +1126,10 @@
                     "success": "Chi tiết thanh toán được thêm từ liên kết IOTA"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1224,14 +1253,16 @@
             "cannotFindStakingEvent": "Không thể tìm thấy sự kiện đặt cọc.",
             "cannotVisitAirdropWebsite": "Không thể mở {airdrop} website.",
             "invalidStakingEventId": "ID sự kiện đặt cọc không hợp lệ."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Việc sử dụng các nút qua HTTP khiến lưu lượng truy cập không được mã hóa và có thể gây ra rủi ro bảo mật."
         },
         "participation": {
-            "noAccounts": "Bạn không có bất kỳ IOTA nào."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1274,10 @@
             "low": "Thấp",
             "veryLow": "Rất thấp"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Đặt cọc vẫn chưa được bắt đầu",
-                "body": "Kiểm tra lại sau. Sự kiện đặt cọc vẫn chưa bắt đầu."
-            },
-            "commencing": {
-                "title": "Tính năng đặt cọc trước hiện đang mở",
-                "body": "Đặt cọc trước mã thông báo của bạn và sau khi bắt đầu đặt cọc, bạn sẽ tự động bắt đầu nhận phần thưởng sau mỗi 10 giây."
-            },
-            "activeHolding": {
-                "title": "Đặt cọc hiện đang tiến hành",
-                "body": "Làm tốt lắm. Bạn sẽ nhận được phần thưởng sau mỗi 10 giây."
-            },
-            "inactiveHolding": {
-                "title": "Tính năng đặt cọc hiện đang mở",
-                "body": "Đặt cọc các token IOTA của bạn để nhận phần thưởng sau mỗi 10 giây."
-            },
-            "inactive": {
-                "title": "Không có sự kiện đặt cọc nào được phát hiện",
-                "body": "Mở cấu hình mạng trong Cài đặt nâng cao và đảm bảo nút hiện tại có tính năng \"Tham gia\" bằng cách nhấp vào \"Xem thông tin\"."
-            },
-            "ended": {
-                "title": "Đặt cọc đã kết thúc bây giờ",
-                "bodyAboveRewardMin": "Phần thưởng Assembly và Shimmer sẽ được phân phối vào ví của bạn khi mỗi mạng tương ứng ra mắt.",
-                "bodyBelowRewardMin": "Bạn đã không đặt cọc đủ IOTA để đạt được phần thưởng airdrop tối thiểu."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Tài sản hủy đặt cọc mới: {amount}",
             "titleNoFunds": "Tài sản hủy đặt cọc mới",
-            "preBody": "Bạn đã nhận được các token trên một ví tiền đặt cọc.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "Bạn cần đặt cọc thủ công các khoản tiền mới này để nhận phần thưởng airdrop cho chúng."
         },
         "stakingMinRewards": {
@@ -1308,5 +1312,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Ví tiền",
+        "staking": "Đặt cọc"
     }
 }

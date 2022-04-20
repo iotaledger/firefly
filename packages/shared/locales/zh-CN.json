@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "发送，接收&管理您的IOTA",
+            "title": "发送、接收和管理您的 IOTA",
             "body": "Firefly 是IOTA的官方钱包软件。"
         },
         "legal": {
@@ -461,38 +461,9 @@
             "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "最新版本",
-                    "outOfDate": "已过期",
-                    "updatesDisabled": "更新已禁用"
-                },
-                "hardwareDevice": {
-                    "title": "硬件设备",
-                    "statuses": {
-                        "appNotOpen": "IOTA 应用未打开",
-                        "connected": "已连接",
-                        "legacyConnected": "{legacy} 应用程序已打开",
-                        "locked": "锁定",
-                        "mnemonicMismatch": "错误的Ledger设备或记助词",
-                        "notDetected": "未检测到设备",
-                        "otherConnected": "应用已打开"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "钱包状态",
-                    "locked": "锁定",
-                    "unlocked": "解锁"
-                },
-                "strongholdBackup": {
-                    "title": "钱包备份",
-                    "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
-                }
-            },
             "network": {
-                "networkOperational": "网络运行",
-                "networkDegraded": "网络降级",
+                "networkOperational": "网络运行情况",
+                "networkDegraded": "网络已降级",
                 "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
@@ -500,11 +471,38 @@
             },
             "profileModal": {
                 "allSettings": "所有设置",
-                "logout": "退出账号"
+                "logout": "退出账号",
+                "stronghold": {
+                    "title": "配置文件锁定",
+                    "locked": "Stronghold已锁定",
+                    "unlocked": "Stronghold已解锁"
+                },
+                "hardware": {
+                    "title": "硬件设备",
+                    "statuses": {
+                        "appNotOpen": "IOTA 应用未打开",
+                        "connected": "已连接",
+                        "legacyConnected": "旧网络应用打开",
+                        "locked": "已锁定",
+                        "mnemonicMismatch": "错误的Ledger设备或助记词",
+                        "notDetected": "未检测到",
+                        "otherConnected": "应用打开"
+                    }
+                },
+                "backup": {
+                    "title": "备份您的钱包",
+                    "lastBackup": "您上次的备份 {date}",
+                    "notBackedUp": "没有备份",
+                    "button": "备份"
+                },
+                "version": {
+                    "title": "有新的更新可用",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "更新"
+                }
             }
         },
         "staking": {
-            "title": "质押",
             "welcome": "欢迎来到质押仪表板!",
             "status": {
                 "upcoming": "活动尚未开始",
@@ -518,23 +516,29 @@
                 "stakedFunds": "已质押资金"
             },
             "info": {
-                "upcomingSubheader": "活动尚未开始",
-                "upcomingHeader": "稍后再试",
-                "commencingSubheader": "已准备好进行质押",
-                "commencingHeader": "预先质押您的代币",
-                "holdingSubheaderHolding": "正在赚取质押奖励",
-                "holdingSubheaderNotHolding": "通过质押IOTA获得奖励",
-                "holdingHeaderHolding": "剩余{duration}",
-                "holdingHeaderNotHolding": "质押您的代币",
-                "endedSubheader": "质押已结束",
-                "endedHeader": "谢谢!",
-                "inactiveHeader": "尝试更改节点",
-                "inactiveSubheader": "未检测到质押"
+                "headers": {
+                    "upcoming": "稍后再试",
+                    "commencing": "预先质押已开放",
+                    "holding": "质押还剩下 {duration}",
+                    "ended": "质押已结束",
+                    "inactive": "未检测到质押活动"
+                },
+                "bodies": {
+                    "upcoming": "{date} 质押开始后，您质押的 {token} 代币每10秒会自动获得奖励。",
+                    "commencing": "{date} 质押开始后，您质押的 {token} 代币每10秒会自动获得奖励。",
+                    "holdingAndStaking": "您每隔10秒会自动获得奖励。",
+                    "holdingAndNotStaking": "质押您的 {token} 代币，每隔10秒获得奖励。",
+                    "endedAndDidStake": "一旦网络启动，{token} 奖励将会分配给你的钱包。",
+                    "endedAndDidNotStake": "您没有参加这次空投。",
+                    "endedAndDidNotReachMinRewards": "您质押的 {token} 代币不足以达到空投奖励的最低门槛。",
+                    "inactive": "在高级设置中打开网络配置，并点击“查看信息”以确保当前节点具备“参与”功能。"
+                }
             },
             "airdrops": {
                 "holding": "剩余",
                 "commencing": "直到质押开始",
-                "collectedRewards": "已领取的奖励",
+                "currentStakingPeriod": "当前质押周期",
+                "totalWalletRewards": "钱包累计奖励",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。 "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "一个推进IOTA上的重大创新的激励性的阶段性网络，让我们静观其变。Shimmer如何演化取决于你。"
                 }
+            },
+            "banners": {
+                "new": "新活动",
+                "complete": "完成"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "寻找余额",
-            "body": "对地址进行更详尽的搜索以找到缺失的余额。此操作可能需要一段时间。",
+            "body": "对地址进行更详尽的搜索，以找到丢失的余额和以前的空投奖励。这可能需要一段时间。",
+            "accountsSearched": "已搜索钱包",
+            "addressesSearched": "每个钱包的被搜索地址",
+            "accountsFound": "找到钱包",
             "totalWalletBalance": "总余额",
+            "searchAgainHint": "您的余额或钱包数量是否不正确？再次按下搜索直到显示您的全部余额。",
             "typePassword": "输入您的密码以允许搜索。"
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "导出交易历史记录",
             "body": "导出所选钱包的交易历史记录。导出的文件将使用.csv格式。",
             "profileName": "配置名称:",
-            "accountName": "账户名称:",
+            "accountName": "钱包名称:",
             "typePassword": "输入您的密码以允许导出"
-        },
-        "stakingNotice": {
-            "upcomingDate": "质押尚未开始",
-            "commencingDate": "质押尚未开始",
-            "body": "通过在质押开始前预先质押，你就可以在质押开始后自动收到奖励。",
-            "ok": "是的，我了解了！"
         },
         "stakingManager": {
             "title": "质押管理",
             "description": "当你质押了一个钱包，你将会发送给你自己一笔交易，将这些资金变成“质押”状态。你可以随时转移这些代币，但是你将不能继续收到质押奖励。",
             "totalFundsStaked": "总质押资金",
             "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
-            "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。"
+            "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。",
+            "singleAccountHint": "寻找您的钱包？Firefly 已经改版。请在顶部菜单栏中切换您的钱包。"
         },
         "stakingConfirmation": {
-            "title": "空投参与度",
+            "title": "确认参与",
             "subtitleStake": "你将要质押",
             "subtitleMerge": "你将要汇总",
-            "bodyStake": "如果你不想参与者两个质押，您可以选择退出。您随时可以取消或重新质押。",
-            "bodyMerge": "您的资金将为 {airdrop} 进行质押。要更改您想要参与的空投，请取消这个钱包的质押并重新质押。",
+            "multiAirdropWarning": "如果你不想参与这两个空投，您可以选择退出。您随时可以取消或重新质押。",
+            "mergeStakeWarning": "您的资金将为 {airdrop} 进行质押。要更改您想要参与的空投，请取消这个钱包的质押并重新质押。",
             "estimatedAirdrop": "估计奖励"
+        },
+        "newStakingPeriodNotification": {
+            "title": "第 {periodNumber} 期质押从 {date} 开始",
+            "body": "质押IOTA获取Assembly正在继续... 参与第 {periodNumber} 期90天的质押，使用您的 IOTA 令牌并获得ASMB 奖励！",
+            "info": "Shimmer 质押已经完结，只会分发 ASMB 代币。"
         },
         "shimmer-info": {
             "title": "关于 Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "我已阅读并接受更新后的服务条款和隐私政策",
             "tosCheckbox": "我已阅读并接受更新后的服务条款。",
             "privPolicyCheckbox": "我已阅读并接受更新后的隐私政策。"
+        },
+        "singleAccountGuide": {
+            "title": "您使用 Firefly 的方式已经改变。",
+            "body": "每个选项卡的内容现在都在一个钱包的环境中。 您可以从任何地方，通过标题栏中使用切换器来更改选中的钱包。",
+            "hint": "找不到钱包？使用设置中的余额查找器来找回以前使用过的钱包。"
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "管理质押",
         "merge": "合并",
         "mergeFunds": "合并资金",
-        "done": "已完成"
+        "done": "已完成",
+        "okIUnderstand": "好的，我知道了。",
+        "readMore": "了解更多"
     },
     "general": {
         "password": "密码",
@@ -961,7 +980,6 @@
         "darkTheme": "暗色",
         "systemTheme": "系统",
         "balance": "余额",
-        "accountBalance": "钱包余额",
         "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
@@ -972,6 +990,7 @@
         "profiles": "用户配置",
         "dev": "开发者",
         "createAccount": "创建钱包",
+        "createNewWallet": "创建新钱包",
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
@@ -1030,14 +1049,20 @@
         "creatingProfile": "正在创建帐户，请稍候...",
         "fundMigration": "资金迁移",
         "accountRemoved": "此钱包被隐藏。请取消隐藏以执行转账。",
-        "receivingTo": "正在接收到 {account}",
-        "sendingFrom": "正在从 {account} 发送",
-        "receivedTo": "已接收至 {account}",
-        "sentFrom": "已从 {account} 发送",
+        "receivingFrom": "正在从 {account} 接收",
+        "sendingTo": "正在发送至 {account}",
+        "receivedFrom": "已从 {account} 接收",
+        "sentTo": "已发送至 {account}",
+        "transferringFrom": "正从帐户 {account} 转出",
+        "transferringTo": "转入到账户 {account}",
+        "transferFrom": "从账户{account} 转入",
+        "transferTo": "转出到账户 {account}",
         "stakedFor": "已为 {account} 质押",
         "unstakedFor": "已为 {account} 解除质押",
         "votedFor": "投票给 {account}",
         "unvotedFor": "取消投票给 {account}",
+        "stakingTransaction": "质押交易",
+        "unstakingTransaction": "取消质押交易",
         "receiving": "接收",
         "sending": "发送",
         "legacyNetwork": "旧的网络",
@@ -1053,7 +1078,8 @@
         "notStaked": "未质押",
         "stakedFunds": "已质押资金",
         "unstakedFunds": "未质押的资金",
-        "accountColor": "钱包颜色"
+        "accountColor": "钱包颜色",
+        "myAssets": "我的资产"
     },
     "dates": {
         "today": "今日",
@@ -1100,7 +1126,10 @@
                     "success": "从 IOTA 链接添加的付款详细信息"
                 }
             }
-        }
+        },
+        "syncing": "请稍候，直到同步完成后才能变更钱包。",
+        "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
+        "participating": "请稍候，直到所有质押/投票的交易完成后才能变更钱包。"
     },
     "error": {
         "profile": {
@@ -1224,14 +1253,16 @@
             "cannotFindStakingEvent": "找不到质押活动。",
             "cannotVisitAirdropWebsite": "无法打开 {airdrop} 网站。",
             "invalidStakingEventId": "无效的 质押活动 ID。"
-        }
+        },
+        "invalidDate": "无效日期",
+        "invalidTime": "无效时间"
     },
     "warning": {
         "node": {
             "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
         },
         "participation": {
-            "noAccounts": "您没有任何IOTA。"
+            "noFunds": "您没有IOTA。"
         }
     },
     "tooltips": {
@@ -1243,37 +1274,10 @@
             "low": "较低",
             "veryLow": "非常低"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "质押尚未开始",
-                "body": "稍后再检查。质押活动尚未开始。"
-            },
-            "commencing": {
-                "title": "预先质押已开放",
-                "body": "预先质押您的代币，一旦质押开始，您将每隔10秒自动开始获得奖励。"
-            },
-            "activeHolding": {
-                "title": "质押进行中",
-                "body": "干得好。你将每10秒获得奖励。"
-            },
-            "inactiveHolding": {
-                "title": "质押正在开放",
-                "body": "质押您的 IOTA代币，每隔10秒获得奖励。"
-            },
-            "inactive": {
-                "title": "未检测到质押活动",
-                "body": "在高级设置中打开网络配置，并点击“查看信息”以确保当前节点具备“参与”功能。"
-            },
-            "ended": {
-                "title": "质押已结束",
-                "bodyAboveRewardMin": "Assembly 和 Shimmer 的奖励将在各自的网络启动时分配到您的钱包。",
-                "bodyBelowRewardMin": "您质押的IOTA不足以达到空投奖励的最低门槛。"
-            }
-        },
         "partiallyStakedFunds": {
             "title": "新的未质押资金： {amount}",
             "titleNoFunds": "新的未质押资金",
-            "preBody": "您已经在一个已质押的钱包中收到了代币。",
+            "preBody": "您已经收到了未被质押的代币。",
             "body": "您需要手动质押这些新的资金才能获得空投奖励。"
         },
         "stakingMinRewards": {
@@ -1308,5 +1312,9 @@
             "request": "请授权使用相机扫描二维码。",
             "requestInAppSettings": "如果您想授予使用相机扫描二维码的权限，请在应用程序设置中启用它。"
         }
+    },
+    "tabs": {
+        "wallet": "钱包",
+        "staking": "质押"
     }
 }

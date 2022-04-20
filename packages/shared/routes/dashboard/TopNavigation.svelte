@@ -11,17 +11,26 @@
         settingsRouter,
     } from '@core/router'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
+    import { Platform } from 'shared/lib/platform'
+    import { popupState } from 'shared/lib/popup'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { getContext } from 'svelte'
+    import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
 
     export let onCreateAccount = (..._: any[]): void => {}
     export let classes: string
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+
     let showBackButton = false
+    let os = ''
 
     $: $dashboardRoute, $settingsRoute, $governanceRoute, checkToShowBackButton()
+    $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+
+    onMount(async () => {
+        os = await Platform.getOS()
+    })
 
     function checkToShowBackButton(): void {
         showBackButton =
@@ -44,15 +53,24 @@
 </script>
 
 <div
-    class="bg-gray-200 dark:bg-gray-1000 border-solid border-b border-gray-300 dark:border-gray-1000 flex flex-row justify-center items-center py-2 w-full {classes}"
+    class="fixed top-0 left-20 flex flex-row justify-center items-center py-2 w-full z-10 {os === 'win32' &&
+    showingPopup
+        ? 'opacity-50 pointer-events-none'
+        : ''} {classes}"
 >
     {#if showBackButton}
-        <button on:click={handleBackClick} class="absolute left-24 cursor-pointer">
+        <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
             <div class="flex items-center space-x-2 ">
-                <Icon width="18" icon="arrow-left" classes="text-gray-500" />
-                <Text overrideColor classes="text-gray-500">{localize('actions.back')}</Text>
+                <Icon width="18" icon="arrow-left" classes="text-gray-800 dark:text-gray-500" />
+                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
             </div>
         </button>
     {/if}
     <AccountSwitcher {onCreateAccount} accounts={$viewableAccounts} />
 </div>
+
+<style type="text/scss">
+    div {
+        width: calc(100% - 14rem);
+    }
+</style>

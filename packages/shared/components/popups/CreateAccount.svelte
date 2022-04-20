@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { AccountTile, Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -7,7 +7,6 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-    import { formatCurrency } from 'shared/lib/currency'
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
@@ -91,13 +90,6 @@
             <Text type="h5">{localize('general.createNewWallet')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
-            <AccountTile
-                balance={'0 Mi'}
-                balanceEquiv={formatCurrency(0)}
-                {color}
-                name={accountAlias || localize('general.accountName')}
-                classes="mb-4"
-            />
             <Input
                 {error}
                 bind:value={accountAlias}

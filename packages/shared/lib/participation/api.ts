@@ -12,9 +12,9 @@ import {
     ParticipationOverviewResponse,
 } from './types'
 
-export function getParticipationOverview(): Promise<void> {
-    return new Promise((resolve, reject) => {
-        api.getParticipationOverview({
+export function getParticipationOverview(assemblyEventId: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        api.getParticipationOverview(assemblyEventId, {
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
 

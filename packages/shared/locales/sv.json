@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Teman",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Om du ändrar ditt systemtema kan du behöva starta om Firefly för att se effekterna"
             },
             "language": {
                 "title": "Språk",
@@ -461,35 +461,6 @@
             "incorrectAttempts": "{attempts, plural, one {# felaktigt försök} other {# felaktiga försök}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Uppdaterad",
-                    "outOfDate": "Behöver uppdateras",
-                    "updatesDisabled": "Uppdateringar inaktiverade"
-                },
-                "hardwareDevice": {
-                    "title": "Hårdvaruenhet",
-                    "statuses": {
-                        "appNotOpen": "IOTA-appen är inte öppen",
-                        "connected": "Ansluten",
-                        "legacyConnected": "{legacy} appen öppen",
-                        "locked": "Låst",
-                        "mnemonicMismatch": "Fel Ledger eller Mnemonik",
-                        "notDetected": "Inte upptäckt",
-                        "otherConnected": "App öppen"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Firefly status",
-                    "locked": "Låst",
-                    "unlocked": "Upplåst"
-                },
-                "strongholdBackup": {
-                    "title": "Säkerhetskopia",
-                    "weeksAgo": "{weeks, plural, one {# vecka} other {# veckor}} sedan"
-                }
-            },
             "network": {
                 "networkOperational": "Nätverk i drift",
                 "networkDegraded": "Nätverk försämrat",
@@ -500,11 +471,38 @@
             },
             "profileModal": {
                 "allSettings": "Alla inställningar",
-                "logout": "Logga ut"
+                "logout": "Logga ut",
+                "stronghold": {
+                    "title": "Profillås",
+                    "locked": "Stronghold låst",
+                    "unlocked": "Stronghold upplåst"
+                },
+                "hardware": {
+                    "title": "Hårdvaruenhet",
+                    "statuses": {
+                        "appNotOpen": "IOTA-appen är inte öppen",
+                        "connected": "Ansluten",
+                        "legacyConnected": "IOTA Legacy-appen öppen",
+                        "locked": "Låst",
+                        "mnemonicMismatch": "Fel Ledger eller Mnemonik",
+                        "notDetected": "Inte upptäckt",
+                        "otherConnected": "App öppen"
+                    }
+                },
+                "backup": {
+                    "title": "Säkerhetskopiera dina plånböcker",
+                    "lastBackup": "Du säkerhetskopierade senast {date}",
+                    "notBackedUp": "Inte säkerhetskopierad",
+                    "button": "Säkerhetskopiera"
+                },
+                "version": {
+                    "title": "Ny uppdatering tillgänglig",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Uppdatera"
+                }
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Välkommen till staking-instrumentpanelen!",
             "status": {
                 "upcoming": "Event inte startat",
@@ -518,23 +516,29 @@
                 "stakedFunds": "Stakade tillgångar"
             },
             "info": {
-                "upcomingSubheader": "Eventet har inte startat",
-                "upcomingHeader": "Kom tillbaka senare",
-                "commencingSubheader": "Gör dig redo för staking",
-                "commencingHeader": "För-staka dina tokens!",
-                "holdingSubheaderHolding": "Tjänar nu staking-belöningar",
-                "holdingSubheaderNotHolding": "Tjäna belöningar genom att staka IOTA",
-                "holdingHeaderHolding": "{duration} kvar",
-                "holdingHeaderNotHolding": "Staka dina tokens!",
-                "endedSubheader": "Staking har nu avslutats",
-                "endedHeader": "Tack så mycket!",
-                "inactiveHeader": "Försök att ändra nod",
-                "inactiveSubheader": "Ingen staking upptäckt"
+                "headers": {
+                    "upcoming": "Kom tillbaka senare",
+                    "commencing": "För-staking öppen",
+                    "holding": "{duration} av staking kvar",
+                    "ended": "Staking har nu avslutats",
+                    "inactive": "Inga staking-event upptäckta"
+                },
+                "bodies": {
+                    "upcoming": "Staka dina {token} tokens för att automatiskt få belöningar var tioende sekund när staking börjar den {date}.",
+                    "commencing": "Staka dina {token} tokens för att automatiskt få belöningar var tioende sekund när staking börjar den {date}.",
+                    "holdingAndStaking": "Du får automatiskt belöningar var 10: e sekund.",
+                    "holdingAndNotStaking": "Staka dina {token} tokens för att få belöningar var 10: e sekund.",
+                    "endedAndDidStake": "{token} belöningar kommer att distribueras till din plånbok när nätverket startar.",
+                    "endedAndDidNotStake": "Du deltog inte i detta airdrop.",
+                    "endedAndDidNotReachMinRewards": "Du stakade inte tillräckligt med {token} tokens för att nå den lägsta belöningen.",
+                    "inactive": "Öppna nätverkskonfiguration i avancerade inställningar och se till att den aktuella noden har funktionen \"Participation\" genom att klicka på \"Visa info\"."
+                }
             },
             "airdrops": {
                 "holding": "Återstående",
                 "commencing": "Tills staking börjar",
-                "collectedRewards": "Samlade belöningar",
+                "currentStakingPeriod": "Nuvarande staking-period",
+                "totalWalletRewards": "Totala plånboksbelöningar",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly är ett tillståndsfritt, mycket skalbart multikedjenätverk för att bygga och distribuera sammansättningsbara smartkontrakt. Assembly är framtiden för web3. "
@@ -543,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Det belöningsmotiverade förestående nätverket för att främja stora innovationer med IOTA. Det som händer, händer. Hur Shimmer utvecklas är upp till dig."
                 }
+            },
+            "banners": {
+                "new": "Nytt event",
+                "complete": "Slutförd"
             }
         },
         "picker": {
@@ -667,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Hitta saldo",
-            "body": "Utför en mer uttömmande sökning av adresser för att hitta saknade saldon. Detta kan ta ett tag.",
+            "body": "Utför en mer uttömmande sökning av adresser för att hitta saknade saldon och tidigare airdrop-belöningar. Detta kan ta ett tag.",
+            "accountsSearched": "Plånböcker genomsökta",
+            "addressesSearched": "Adresser som sökts per plånbok",
+            "accountsFound": "Plånböcker hittade",
             "totalWalletBalance": "Totalt saldo",
+            "searchAgainHint": "Är ditt saldo eller antal plånböcker felaktiga? Tryck på sök igen tills ditt saldo visas.",
             "typePassword": "Ange ditt lösenord för att tillåta sökning."
         },
         "riskFunds": {
@@ -739,29 +751,29 @@
             "title": "Exportera transaktionshistoriken",
             "body": "Exportera transaktionshistoriken för den valda plånboken. Den exporterade filen kommer att vara i .csv-format.",
             "profileName": "Profilnamn:",
-            "accountName": "Kontonamn:",
+            "accountName": "Plånboksnamn:",
             "typePassword": "Ange ditt lösenord för att tillåta export"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking har inte påbörjats",
-            "commencingDate": "Staking har inte påbörjats",
-            "body": "Genom att förbereda staking av dina tillgångar, kommer du automatiskt att börja få belöningar när stakingen börjar.",
-            "ok": "Ok, jag förstår"
         },
         "stakingManager": {
             "title": "Staking-hantering",
             "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"stakade\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
             "totalFundsStaked": "Totala tillgångar för staking",
             "stakedSuccessfully": "Dina tillgångar har blivit stakade för {account}.",
-            "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}."
+            "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}.",
+            "singleAccountHint": "Letar du efter dina plånböcker? Firefly har ändrats. Växla mellan dina plånböcker i den övre menyraden."
         },
         "stakingConfirmation": {
-            "title": "Airdrop-deltagande",
+            "title": "Bekräfta medverkan",
             "subtitleStake": "Du är på väg att staka",
             "subtitleMerge": "Du är på väg att slå ihop",
-            "bodyStake": "Om du inte vill delta i båda airdropsen kan du välja bort dem nedan. Du kan ta bort dina stakade tillgångar och sedan välja att gå tillbaka när som helst.",
-            "bodyMerge": "Dina tillgångar kommer att stakas för {airdrop}. För att ändra vilka airdrops du vill delta i, ta bort tillgångarna för staking i denna plånbok och välj sedan att staka dem igen.",
+            "multiAirdropWarning": "Om du inte vill delta i båda airdropsen kan du välja bort dem nedan. Du kan ta bort dina stakade tillgångar och sedan välja att gå tillbaka när som helst.",
+            "mergeStakeWarning": "Dina tillgångar kommer att stakas för {airdrop}. För att ändra vilka airdrops du vill delta i, ta bort tillgångarna för staking i denna plånbok och välj sedan att staka dem igen.",
             "estimatedAirdrop": "Beräknade belöningar"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking omgång {periodNumber} från {date}",
+            "body": "IOTA staking för Assembly fortsätter.. Delta i omgång {periodNumber} under 90 dagar. Staka dina IOTA tokens och tjäna ASMB-belöningar!",
+            "info": "Shimmer staking är nu avklarad och endast ASMB tokens kommer att distribueras."
         },
         "shimmer-info": {
             "title": "Om Shimmer",
@@ -791,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "Jag har läst och jag accepterar de uppdaterade användarvillkoren och sekretesspolicyn",
             "tosCheckbox": "Jag har läst och jag godkänner de uppdaterade användarvillkoren",
             "privPolicyCheckbox": "Jag har läst och jag accepterar den uppdaterade sekretesspolicyn"
+        },
+        "singleAccountGuide": {
+            "title": "Sättet du använder Firefly på har ändrats",
+            "body": "Innehållet i varje flik är nu i samband med en enda plånbok. Du kan ändra den valda plånboken från var som helst med hjälp av växlaren i namnfältet.",
+            "hint": "Kan du inte hitta en plånbok? Använd balanssökaren i inställningarna för att upptäcka tidigare använda plånböcker."
         }
     },
     "charts": {
@@ -913,7 +930,9 @@
         "manageStake": "Hantera staking",
         "merge": "Slå ihop",
         "mergeFunds": "Slå ihop tillgångar",
-        "done": "Klar"
+        "done": "Klar",
+        "okIUnderstand": "OK, jag förstår",
+        "readMore": "Läs mer"
     },
     "general": {
         "password": "Lösenord",
@@ -961,7 +980,6 @@
         "darkTheme": "Mörkt",
         "systemTheme": "System",
         "balance": "Saldo",
-        "accountBalance": "Plånbokssaldo",
         "all": "Alla",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
@@ -972,6 +990,7 @@
         "profiles": "Profiler",
         "dev": "Utvecklare",
         "createAccount": "Skapa en plånbok",
+        "createNewWallet": "Skapa ny plånbok",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
@@ -1030,14 +1049,20 @@
         "creatingProfile": "Skapar profil, vänligen vänta...",
         "fundMigration": "Token-migration",
         "accountRemoved": "Denna plånbok är dold. Visa den igen för att utföra överföringar.",
-        "receivingTo": "Tar emot till {account}",
-        "sendingFrom": "Skickar från {account}",
-        "receivedTo": "Mottaget till {account}",
-        "sentFrom": "Skickat från {account}",
+        "receivingFrom": "Tar emot från {account}",
+        "sendingTo": "Skickar till {account}",
+        "receivedFrom": "Mottaget från {account}",
+        "sentTo": "Skickat till {account}",
+        "transferringFrom": "Överför från {account}",
+        "transferringTo": "Överför till {account}",
+        "transferFrom": "Överföring från {account}",
+        "transferTo": "Överföring till {account}",
         "stakedFor": "Stakade för {account}",
         "unstakedFor": "Ej stakade för {account}",
         "votedFor": "Röstade för {account}",
         "unvotedFor": "Ej röstade för {account}",
+        "stakingTransaction": "Staking-transaktion",
+        "unstakingTransaction": "Unstaking-transaktion",
         "receiving": "Tar emot",
         "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",
@@ -1053,7 +1078,8 @@
         "notStaked": "Ej stakad",
         "stakedFunds": "Stakade tillgångar",
         "unstakedFunds": "Ej stakade tillgångar",
-        "accountColor": "Plånboksfärg"
+        "accountColor": "Plånboksfärg",
+        "myAssets": "Mina tillgångar"
     },
     "dates": {
         "today": "Idag",
@@ -1100,7 +1126,10 @@
                     "success": "Betalningsinformation tillagd från IOTA-länk"
                 }
             }
-        }
+        },
+        "syncing": "Vänta tills synkroniseringen är klar för att ändra plånbok.",
+        "transferring": "Vänta tills alla transaktioner är slutförda för att ändra plånbok.",
+        "participating": "Vänta tills alla staking-/röstningstransaktioner har slutförts för att ändra plånbok."
     },
     "error": {
         "profile": {
@@ -1224,14 +1253,16 @@
             "cannotFindStakingEvent": "Det gick inte att hitta staking-event.",
             "cannotVisitAirdropWebsite": "Det går inte att öppna {airdrop} s webbplats.",
             "invalidStakingEventId": "Ogiltigt staking-event ID."
-        }
+        },
+        "invalidDate": "INVALID DATUM",
+        "invalidTime": "INVALID TID"
     },
     "warning": {
         "node": {
             "http": "Att använda noder över HTTP lämnar trafik okrypterad och kan utgöra en säkerhetsrisk."
         },
         "participation": {
-            "noAccounts": "Du har inga IOTA."
+            "noFunds": "Du har inga IOTA."
         }
     },
     "tooltips": {
@@ -1243,37 +1274,10 @@
             "low": "Låg",
             "veryLow": "Mycket låg"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking har inte startat ännu",
-                "body": "Kom tillbaka senare. Staking-eventet har inte börjat."
-            },
-            "commencing": {
-                "title": "För-staking är nu öppen",
-                "body": "Förbered staking av dina tokens, och när stakingen börjar, kommer du automatiskt att börja få belöningar var 10: e sekund."
-            },
-            "activeHolding": {
-                "title": "Staking pågår nu",
-                "body": "Bra jobbat. Du kommer att få belöningar var 10:e sekund."
-            },
-            "inactiveHolding": {
-                "title": "Staking har nu påbörjats",
-                "body": "Staka dina IOTA tokens för att få belöningar var 10: e sekund."
-            },
-            "inactive": {
-                "title": "Inga staking-event upptäckta",
-                "body": "Öppna nätverkskonfiguration i Avancerade inställningar och se till att den aktuella noden har funktionen \"Deltagande\" genom att klicka på \"Visa Info\"."
-            },
-            "ended": {
-                "title": "Staking har nu avslutats",
-                "bodyAboveRewardMin": "Assembly- och Shimmerbelöningar kommer att distribueras till dina plånböcker när var och en av de respektive nätverken lanseras.",
-                "bodyBelowRewardMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Nya ostakade tillgångar: {amount}",
             "titleNoFunds": "Nya ostakade tillgångar",
-            "preBody": "Du har fått tokens till en stakad plånbok.",
+            "preBody": "Du har mottagit tokens som inte är stakade.",
             "body": "Du måste manuellt staka dessa nya tillgångar för att få airdrop-belöningar för dem."
         },
         "stakingMinRewards": {
@@ -1308,5 +1312,9 @@
             "request": "Vi behöver ditt tillåtande för att kunna använda kameran och skanna QR-koder.",
             "requestInAppSettings": "Om du vill tillåta Firefly att använda din kamera för att skanna QR-koder, vänligen aktivera det i appinställningarna."
         }
+    },
+    "tabs": {
+        "wallet": "Plånbok",
+        "staking": "Staking"
     }
 }
