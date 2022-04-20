@@ -44,7 +44,14 @@ If the icon is still not displaying properly, it is likely that it was either ex
 
 ### Adding a setting
 
-_TBD_
+There are a few steps to add a settings component to the Settings menu in Firefly:
+
+- Add your component to the correct folder under `packages/shared/routes/dashboard/settings/views`
+- Add an `export` statement to the barrel import/export file in the directory of your new component
+- Add your component to the `settings` of the file with the same name as the settings (e.g. `Advance.svelte` for the advanced setting)
+- Add your route enum to the appropriate settings route in `packages/shared/lib/core/router/enums/routes.ts`
+- Add the correct `title` and additional texts to the `view` property in `packages/shared/locales/en.json` for the translations.
+- Add an appropriate icon to`packages/shared/lib/typings/icons.ts`
 
 ### Adding a Svelte page
 
