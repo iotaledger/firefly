@@ -1,9 +1,8 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     accountManager,
-    addMessagesPair,
+    // addMessagesPair,
     api,
-    getAccountMeta,
     prepareAccountInfo,
     processMigratedTransactions,
     replaceMessage,
@@ -239,6 +238,7 @@ export const initialiseListeners = (): void => {
                     balance: 0,
                     incoming: 0,
                     outgoing: 0,
+                    depositAddress: '',
                 }
 
                 const latestAccounts = []
@@ -247,16 +247,17 @@ export const initialiseListeners = (): void => {
                 // 2. Get latest metadata for all accounts (to compute the latest balance overview);
                 // 3. Only update the account for which the balance change event emitted;
                 // 4. Update balance overview & accounts
-                for (const _account of accountsResponse.payload) {
-                    const meta = await getAccountMeta(_account.id)
-                    // Compute balance overview for each account
-                    totalBalance.balance += meta.balance
-                    totalBalance.incoming += meta.incoming
-                    totalBalance.outgoing += meta.outgoing
+                for (const _account of accountsResponse) {
+                    const { address } = await _account.latestAddress()
+                    const balance = await _account.balance()
+                    totalBalance.balance += balance.total
+                    totalBalance.incoming += balance.incoming
+                    totalBalance.outgoing += balance.outgoing
+                    totalBalance.depositAddress = address
 
-                    addMessagesPair(_account)
+                    // addMessagesPair(_account)
 
-                    const updatedAccountInfo = prepareAccountInfo(_account, meta)
+                    const updatedAccountInfo = prepareAccountInfo(_account, totalBalance)
 
                     // Keep the messages as is because they get updated through a different event
                     // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
@@ -264,7 +265,7 @@ export const initialiseListeners = (): void => {
 
                     completeCount++
 
-                    if (completeCount === accountsResponse.payload.length) {
+                    if (completeCount === accountsResponse.length) {
                         accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
 
                         updateBalanceOverview(

@@ -24,7 +24,7 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         accountManager,
-        addMessagesPair,
+        // addMessagesPair,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -84,9 +84,13 @@
         let accountsResponse
         try {
             accountsResponse = await $accountManager.getAccounts()
+            console.log(1)
+            console.log(accountsResponse.payload)
+            console.log(typeof accountsResponse)
         } catch (e) {
-            _onError()
+            _onError(e)
         }
+        console.log(2)
 
         if (accountsResponse) {
             if (accountsResponse.length === 0) {
@@ -100,8 +104,9 @@
 
                 let completeCount = 0
                 const newAccounts = []
-                for (const payloadAccount of accountsResponse) {
-                    addMessagesPair(payloadAccount)
+                for (const payloadAccount of accountsResponse.payload) {
+                    console.log(payloadAccount)
+                    // addMessagesPair(payloadAccount)
 
                     try {
                         const meta = await getAccountMeta(payloadAccount.id)

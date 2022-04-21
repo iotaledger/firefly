@@ -3,7 +3,7 @@
 
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { createAccount, asyncRemoveWalletAccounts, asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
+    import { createAccount, asyncRemoveWalletAccounts, setStrongholdPassword, wallet } from 'shared/lib/wallet'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import {
         activeProfile,
@@ -30,8 +30,7 @@
 
     const error = ''
     let isSwitchingNetwork = false
-
-    let strongholdPassword
+    let strongholdPassword: string
 
     const handleCancelNetworkSwitchClick = (): void => {
         closePopup()
@@ -48,7 +47,7 @@
         isSwitchingNetwork = true
 
         if ($isSoftwareProfile && $isStrongholdLocked) {
-            await asyncSetStrongholdPassword(strongholdPassword)
+            await setStrongholdPassword(strongholdPassword)
         } else if ($isLedgerProfile && !isLedgerConnected()) {
             isSwitchingNetwork = false
 

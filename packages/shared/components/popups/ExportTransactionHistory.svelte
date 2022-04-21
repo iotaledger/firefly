@@ -10,7 +10,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
-    import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from 'shared/lib/wallet'
     import { get, Readable } from 'svelte/store'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -29,7 +29,7 @@
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPassword(password)
             } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
