@@ -92,7 +92,6 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     name: profileName,
     type: null,
     protocol: null,
-    network: null,
     lastStrongholdBackupTime: null,
     isDeveloperProfile,
     settings: {

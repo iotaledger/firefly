@@ -18,7 +18,6 @@ export interface Profile {
     name: string
     type: ProfileType
     protocol: ProfileProtocol
-    network: ProfileNetwork
     /**
      * Time for most recent stronghold back up
      */
@@ -67,15 +66,6 @@ export enum ProfileType {
 export enum ProfileProtocol {
     Iota = 'IOTA',
     Shimmer = 'Shimmer',
-}
-
-/**
- * Profile networks
- */
-export enum ProfileNetwork {
-    Mainnet = 'Mainnet',
-    Devnet = 'Devnet',
-    Custom = 'Custom Network',
 }
 
 /**
