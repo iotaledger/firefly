@@ -258,7 +258,7 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                <div class="flex flex-col flex-wrap space-y-3 relative">
+                <div class="flex flex-col flex-wrap space-y-3">
                     <div class="flex flex-row items-center space-x-2">
                         <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.votingPower.title')}
@@ -303,9 +303,9 @@
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
-                    <div>
+                    <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
-                            <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
                                 {localize('views.governance.eventDetails.votesCounted')}
                             </Text>
                             <button
