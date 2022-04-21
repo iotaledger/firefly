@@ -132,7 +132,7 @@
         }
     }
     function isWinnerAnswer(answerValue: string): boolean {
-        if (event?.status?.status === ParticipationEventState.Ended) {
+        if (event?.status?.status === ParticipationEventState.Ended && results?.length) {
             const resultsAccumulated = results.map((result) => result?.accumulated)
             const max = Math.max(...resultsAccumulated)
             const indexOfMax = resultsAccumulated.indexOf(max)
