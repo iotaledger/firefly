@@ -51,7 +51,7 @@
     }
 
     const handleLogoutClick = async (): Promise<void> => {
-        await logout()
+        await logout(true)
     }
 
     const handleStrongholdToggleClick = (): void => {
