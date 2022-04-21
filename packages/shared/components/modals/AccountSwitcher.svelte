@@ -70,7 +70,7 @@
     >
         <div class="flex flex-row items-center space-x-4">
             <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
-            <Text highlighted type="h5" classes="text-14">{localize('general.createNewWallet')}</Text>
+            <Text highlighted type="h5" classes="text-14">{localize('general.addAWallet')}</Text>
         </div>
         <Text classes="opacity-50" type="h5">
             {localize('general.total', { values: { balance: $balanceOverview.balance } })}

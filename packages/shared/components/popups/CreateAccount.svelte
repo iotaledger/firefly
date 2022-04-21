@@ -87,7 +87,7 @@
 <div class="flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.createNewWallet')}</Text>
+            <Text type="h5">{localize('general.addAWallet')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
