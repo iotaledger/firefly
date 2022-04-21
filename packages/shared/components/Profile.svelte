@@ -44,9 +44,7 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            {#if network}
-                <Badge {network} />
-            {/if}
+            <Badge {network} />
         </div>
         <div class="mt-5 flex flex-row items-baseline space-x-1.5">
             {#if isLedgerProfile}
