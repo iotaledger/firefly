@@ -3,13 +3,14 @@ import { localize } from '@core/i18n'
 import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
 import { api, saveNewMessage } from '../wallet'
-import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
+import { addNewPendingParticipation, participationEvents, participationOverview, participationHistory } from './stores'
 import {
     ParticipationAction,
     ParticipateResponsePayload,
     Participation,
     ParticipationEvent,
     ParticipationOverviewResponse,
+    ParticipationHistoryItem,
 } from './types'
 
 export function getParticipationOverview(assemblyEventId: string): Promise<void> {
@@ -46,6 +47,21 @@ export function getParticipationEvents(): Promise<ParticipationEvent[]> {
     })
 }
 
+function updateParticipationHistoryFromPayload(
+    payload: ParticipateResponsePayload,
+    accountId: string,
+    action: ParticipationAction,
+    eventIds: string[]
+): void {
+    const participationHistoryItems: ParticipationHistoryItem[] = payload.map((message, index) => ({
+        messageId: message.id,
+        accountId,
+        action,
+        eventId: eventIds[index],
+    }))
+    participationHistory.update((_participationHistory) => [..._participationHistory, ...participationHistoryItems])
+}
+
 export function participate(
     accountId: string,
     participations: Participation[],
@@ -65,6 +81,10 @@ export function participate(
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, action)
+
+                const eventIds = participations.map((participation) => participation.eventId)
+                updateParticipationHistoryFromPayload(response.payload, accountId, action, eventIds)
+
                 resolve(response.payload.map((message) => message.id))
             },
             onError(error) {
@@ -96,6 +116,8 @@ export function stopParticipating(
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, action)
+
+                updateParticipationHistoryFromPayload(response.payload, accountId, action, eventIds)
 
                 resolve(response.payload.map((message) => message.id))
             },

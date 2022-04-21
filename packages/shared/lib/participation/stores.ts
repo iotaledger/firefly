@@ -1,22 +1,23 @@
+import { getStakingEventFromAirdrop } from '@lib/participation/staking'
+import { NetworkStatus } from '@lib/typings/network'
+import { persistent } from 'shared/lib/helpers'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { NodePlugin } from '../typings/node'
-import { wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
-
+import { wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     ParticipateResponsePayload,
     ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
+    ParticipationHistoryItem,
     ParticipationOverview,
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { NetworkStatus } from '@lib/typings/network'
-import { getStakingEventFromAirdrop } from '@lib/participation/staking'
 
 /**
  * The store for keeping track of pending participations.
@@ -232,3 +233,5 @@ export const getPendingParticipation = (id: string): PendingParticipation | unde
  */
 export const hasPendingParticipation = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
+
+export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])

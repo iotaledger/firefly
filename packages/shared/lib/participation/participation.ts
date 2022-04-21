@@ -9,8 +9,11 @@ import {
     participationEvents,
     participationOverview,
     pendingParticipations,
+    participationHistory,
 } from './stores'
-import { AccountParticipationAbility, ParticipationEventState, StakingAirdrop } from './types'
+import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
+import { get } from 'svelte/store'
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 
 let participationPollInterval
 
@@ -83,7 +86,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean =>
  *
  * @param {WalletAccount} account
  *
- * @returns {boolean}
+ * @returns {AccountParticipationAbility}
  */
 export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
@@ -94,5 +97,30 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
         return AccountParticipationAbility.WillNotReachMinAirdrop
     } else {
         return AccountParticipationAbility.Ok
+    }
+}
+
+/**
+ * Returns ParticipationAction for transaction message
+ *
+ * @method getMessageParticipationAction
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {ParticipationAction}
+ */
+export const getMessageParticipationAction = (messageId: string): ParticipationAction => {
+    const matchedHistoryItem = get(participationHistory)?.find((item) => item.messageId === messageId)
+    if (matchedHistoryItem?.action) {
+        return matchedHistoryItem.action
+    }
+    const stakingEndMilestoneIndexes = get(participationEvents)
+        ?.filter((event) => event.eventId === ASSEMBLY_EVENT_ID || event.eventId === SHIMMER_EVENT_ID)
+        ?.map((event) => event.information?.milestoneIndexEnd)
+    const lastMilestoneBeforeTreasuryEvent = 0 // TODO: add real milestone
+    if (stakingEndMilestoneIndexes?.find((milestone) => milestone > lastMilestoneBeforeTreasuryEvent)) {
+        return ParticipationAction.Stake
+    } else if (stakingEndMilestoneIndexes?.length) {
+        return ParticipationAction.Vote
     }
 }

@@ -196,7 +196,7 @@ export type ParticipationOverviewResponse = {
  * Pending participations type, useful for distinguishing between participations
  * that have or have not been confirmed yet.
  */
-export interface PendingParticipation {
+export type PendingParticipation = {
     messageId: string
     accountId: string
     action: ParticipationAction
@@ -245,4 +245,11 @@ export type StakingPeriod = {
     periodNumber: number
     totalPeriodRewards: number
     rewards: StakingPeriodRewards
+}
+
+export type ParticipationHistoryItem = {
+    accountId: string
+    action: ParticipationAction
+    eventId: string
+    messageId: string
 }
