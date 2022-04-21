@@ -1,21 +1,18 @@
 <script lang="typescript">
-    import { Button, DashboardPane, Icon, Text, GovernanceInfoTooltip } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { governanceRouter } from '@core/router'
-    import { GovernanceRoute } from '@core/router/enums'
-    import { canParticipate } from '@lib/participation'
-    import { handleTransactionEventData, transferState, AccountColors } from '@lib/wallet'
-    import { WalletAccount } from '@lib/typings/wallet'
-    import { milestoneToDate, getBestTimeDuration, getDurationString } from '@lib/time'
-    import { closePopup, openPopup } from '@lib/popup'
-    import { formatUnitBestMatch } from '@lib/units'
-    import { isSoftwareProfile } from '@lib/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
+    import { canParticipate } from '@lib/participation'
     import { selectedAccountParticipationOverview } from '@lib/participation/account'
-    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
+    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { isSoftwareProfile } from '@lib/profile'
+    import { getBestTimeDuration, getDurationString, milestoneToDate } from '@lib/time'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
-    import { clickOutside } from '@lib/actions'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { AccountColors, handleTransactionEventData, transferState } from '@lib/wallet'
+    import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text } from 'shared/components'
 
     export let event: ParticipationEvent
     export let account: WalletAccount
@@ -45,7 +42,6 @@
         milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
     $: $transferState, handleLedgerTransferState()
 
-    const handleBackClick = (): void => $governanceRouter.goTo(GovernanceRoute.Init)
     const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
     const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
@@ -144,22 +140,20 @@
         }
         return false
     }
-    function toggleTooltip(types: string[]): void {
-        types.forEach((type) => {
-            switch (type) {
-                case 'statusTimeline':
-                    tooltip.statusTimeline.show = !tooltip.statusTimeline.show
-                    break
-                case 'votingRate':
-                    tooltip.votingRate.show = !tooltip.votingRate.show
-                    break
-                case 'countedVotes':
-                    tooltip.countedVotes.show = !tooltip.countedVotes.show
-                    break
-                default:
-                    break
-            }
-        })
+    function toggleTooltip(type: string, show: boolean): void {
+        switch (type) {
+            case 'statusTimeline':
+                tooltip.statusTimeline.show = show
+                break
+            case 'votingRate':
+                tooltip.votingRate.show = show
+                break
+            case 'countedVotes':
+                tooltip.countedVotes.show = show
+                break
+            default:
+                break
+        }
     }
 </script>
 
@@ -171,21 +165,17 @@
                 classes="px-2 py-1 text-blue-500 bg-blue-100 dark:bg-gray-900 rounded-lg"
                 smaller
                 bold
-                overrideColor>{localize(`views.governance.events.status.${event?.status?.status}`)}</Text
+                overrideColor
             >
-            <button on:click={() => toggleTooltip(['statusTimeline'])} bind:this={tooltip.statusTimeline.anchor}>
+                {localize(`views.governance.events.status.${event?.status?.status}`)}
+            </Text>
+            <button
+                on:mouseenter={() => toggleTooltip('statusTimeline', true)}
+                on:mouseleave={() => toggleTooltip('statusTimeline', false)}
+                bind:this={tooltip.statusTimeline.anchor}
+            >
                 <Icon icon="info-filled" classes="ml-2 text-gray-400" />
             </button>
-            {#if tooltip.statusTimeline.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['statusTimeline'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="statusTimeline"
-                        anchor={tooltip.statusTimeline.anchor}
-                        position="right"
-                    />
-                </div>
-            {/if}
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
@@ -242,8 +232,10 @@
                             classes="mb-2 text-left {isWinnerAnswer(answer?.value)
                                 ? 'text-white'
                                 : 'text-gray-800 dark:text-white'}"
-                            overrideColor>{answer?.text}</Text
+                            overrideColor
                         >
+                            {answer?.text}
+                        </Text>
                         <Text
                             type="p"
                             classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
@@ -266,85 +258,82 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                <div bind:this={tooltip.votingRate.anchor}>
-                    <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                        >{localize('views.governance.votingPower.title')}</Text
-                    >
-                    <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
+                <div class="flex flex-col flex-wrap space-y-3 relative">
+                    <div class="flex flex-row items-center space-x-2">
+                        <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.votingPower.title')}
+                        </Text>
+                        <button
+                            class="relative"
+                            on:mouseenter={() => toggleTooltip('votingRate', true)}
+                            on:mouseleave={() => toggleTooltip('votingRate', false)}
+                            bind:this={tooltip.votingRate.anchor}
+                        >
+                            <Icon icon="info-filled" classes="text-gray-400" />
+                        </button>
+                    </div>
+                    <Text type="h2">{account?.balance}</Text>
                 </div>
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                            >{localize('views.governance.eventDetails.votingOpens')}</Text
-                        >
-                        <Text type="h3" classes="inline-flex items-end"
-                            >{milestoneToDate(event?.information?.milestoneIndexCommence).toString()}</Text
-                        >
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.eventDetails.votingOpens')}
+                        </Text>
+                        <Text type="h3" classes="inline-flex items-end">
+                            {milestoneToDate(event?.information?.milestoneIndexCommence).toString()}
+                        </Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                            >{localize('views.governance.eventDetails.countingStarts')}</Text
-                        >
-                        <Text type="h3" classes="inline-flex items-end"
-                            >{milestoneToDate(event?.information?.milestoneIndexStart).toString()}</Text
-                        >
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.eventDetails.countingStarts')}
+                        </Text>
+                        <Text type="h3" classes="inline-flex items-end">
+                            {milestoneToDate(event?.information?.milestoneIndexStart).toString()}
+                        </Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                            >{localize('views.governance.eventDetails.countingLength')}</Text
-                        >
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.eventDetails.countingLength')}
+                        </Text>
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
-                    <div bind:this={tooltip.countedVotes.anchor}>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                            >{localize('views.governance.eventDetails.votesCounted')}</Text
-                        >
+                    <div>
+                        <div class="flex flex-row items-center space-x-2">
+                            <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                                {localize('views.governance.eventDetails.votesCounted')}
+                            </Text>
+                            <button
+                                class="relative"
+                                on:mouseenter={() => toggleTooltip('countedVotes', true)}
+                                on:mouseleave={() => toggleTooltip('countedVotes', false)}
+                                bind:this={tooltip.countedVotes.anchor}
+                            >
+                                <Icon icon="info-filled" classes="text-gray-400" />
+                            </button>
+                        </div>
                         <Text type="h3" classes="inline-flex items-end">{formatUnitBestMatch(accountVotes)}</Text>
                     </div>
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor
-                            >{localize('views.governance.eventDetails.votingProgress')}</Text
-                        >
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.eventDetails.votingProgress')}
+                        </Text>
                         <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
                     </div>
                 {/if}
             </div>
-            <button class="ml-auto mt-0" on:click={() => toggleTooltip(['votingRate', 'countedVotes'])}>
-                <Icon icon="info-filled" classes="text-gray-400" />
-            </button>
-            {#if tooltip.votingRate.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['votingRate'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="votingRate"
-                        anchor={tooltip.votingRate.anchor}
-                        position="top"
-                    />
-                </div>
-            {/if}
-            {#if tooltip.countedVotes.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['countedVotes'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="countedVotes"
-                        anchor={tooltip.countedVotes.anchor}
-                        position="left"
-                    />
-                </div>
-            {/if}
         </DashboardPane>
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
-            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-white" overrideColor
-                >{localize('views.governance.eventDetails.currentResults')}</Text
-            >
+            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-gray-500" overrideColor>
+                {localize('views.governance.eventDetails.currentResults')}
+            </Text>
             <div class="w-full h-full flex justify-center space-x-16">
                 {#each results || [] as result, i}
                     <div class="h-full flex flex-col justify-end items-center">
@@ -354,22 +343,32 @@
                                 ?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"
                         />
                         <div class="flex space-x-1 mt-3" style="max-width: 7rem">
-                            <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden"
-                                >{event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}</Text
-                            >
-                            <Text type="h3" overrideColor classes="text-gray-500"
-                                >{displayedPercentages[i].percentage}</Text
-                            >
+                            <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden">
+                                {event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}
+                            </Text>
+                            <Text type="h3" overrideColor classes="text-gray-500">
+                                {displayedPercentages[i].percentage}
+                            </Text>
                         </div>
-                        <Text type="p" overrideColor bigger classes="text-gray-500 m-0"
-                            >{formatUnitBestMatch(result?.accumulated)}</Text
-                        >
+                        <Text type="p" overrideColor bigger classes="text-gray-500 m-0">
+                            {formatUnitBestMatch(result?.accumulated)}
+                        </Text>
                     </div>
                 {/each}
             </div>
         </DashboardPane>
     {/if}
 </div>
+
+{#if tooltip.votingRate.show}
+    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="right" />
+{/if}
+{#if tooltip.countedVotes.show}
+    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+{/if}
+{#if tooltip.statusTimeline.show}
+    <GovernanceInfoTooltip {event} type="statusTimeline" anchor={tooltip.statusTimeline.anchor} position="right" />
+{/if}
 
 <style>
     .pulse {
