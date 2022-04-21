@@ -192,7 +192,7 @@ export const getProfileDataPath = async (profileName: string): Promise<string> =
 
 
 // TODO: Ask Matt how Sentry works with new bindings
-export const initialise = async (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): Promise<void> => {
+export function initialise (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void {
     // TODO: remove these
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
@@ -253,25 +253,12 @@ export const destroyManager = (id: string): void => {
     }
 }
 
-/**
- * Generate BIP39 Mnemonic Recovery Phrase
- */
-export const generateRecoveryPhrase = (): Promise<RecoveryPhrase> =>
-    new Promise((resolve, reject) => {
-        api.generateMnemonic({
-            onSuccess(response) {
-                resolve(response.payload.split(' '))
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
-    })
-
-export const requestMnemonic = async (): Promise<RecoveryPhrase> => {
-    const recoveryPhrase = await generateRecoveryPhrase()
-    mnemonic.set(recoveryPhrase)
-    return recoveryPhrase
+export async function requestMnemonic(): Promise<RecoveryPhrase> {
+    const manager = get(accountManager)
+    const mnemonicString = await manager.generateMnemonic()
+    const mnemnonicList = mnemonicString.split(' ')
+    mnemonic.set(mnemnonicList)
+    return mnemnonicList
 }
 
 /**
@@ -295,17 +282,12 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         })
     })
 
-export const asyncSetStrongholdPassword = (password: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.setStrongholdPassword(password, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+export async function setStrongholdPassword(password: string): Promise<void> {
+    console.log(3)
+    const manager = get(accountManager)
+    const returned = await manager.setStrongholdPassword(password)
+    console.log(3, 'remove this if function works', returned)
+}
 
 export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
@@ -319,44 +301,32 @@ export const asyncChangeStrongholdPassword = (currentPassword: string, newPasswo
         })
     })
 
-export const asyncStoreMnemonic = (mnemonic: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.storeMnemonic(mnemonic, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function storeMnemonic(mnemonic: string): Promise<void> {
+    console.log(1)
+    const manager = get(accountManager)
+    console.log(mnemonic)
+    // const returendValue = await manager.storeMnemonic(mnemonic)
+    console.log(1, 'remove this if function works')
 
-export const asyncVerifyMnemonic = (mnemonic: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.verifyMnemonic(mnemonic, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+}
 
-export const asyncBackup = (dest: string, password: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.backup(dest, password, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+export async function verifyMnemonic(mnemonic: string): Promise<void> {
+    console.log(4)
+    const manager = get(accountManager)
+    await manager.verifyMnemonic(mnemonic)
+    console.log(4, 'remove this if function works')
+}
 
-export const asyncSetStoragePassword = (password: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
+export async function backup(dest: string, password: string): Promise<void> {
+    console.log(2)
+    const manager = get(accountManager)
+    await manager.backup(dest, password)
+    console.log(2, 'remove this if function works')
+}
+
+export function setStoragePassword(password: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
                 resolve()
@@ -366,18 +336,14 @@ export const asyncSetStoragePassword = (password: string): Promise<void> =>
             },
         })
     })
+}
 
-export const asyncRestoreBackup = (importFilePath: string, password: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.restoreBackup(importFilePath, password, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+export async function restoreBackup(importFilePath: string, password: string): Promise<void> {
+    console.log(5)
+    const manager = get(accountManager)
+    await manager.importAccounts(importFilePath, password)
+    console.log(5,'remove this if function works')
+}
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
     const accounts = get(get(wallet)?.accounts)
@@ -565,39 +531,39 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  *
  * @returns {void}
  */
-export function addMessagesPair(account: Account): void {
-    // Only keep messages with a payload
-    account.messages = account.messages.filter((m) => m.payload)
+// export function addMessagesPair(account: StardustAccount): void {
+//     // Only keep messages with a payload
+//     account.messages = account.messages.filter((m) => m.payload)
 
-    // The wallet only returns one side of internal transfers
-    // to the same account, so create the other side by first finding
-    // the internal messages
-    const internalMessages = account.messages.filter((m) => getInternalFlag(m.payload))
+//     // The wallet only returns one side of internal transfers
+//     // to the same account, so create the other side by first finding
+//     // the internal messages
+//     const internalMessages = account.messages.filter((m) => getInternalFlag(m.payload))
 
-    for (const internalMessage of internalMessages) {
-        // Check if the message sends to another address in the same account
-        const isSelf = isSelfTransaction(internalMessage.payload, account)
+//     for (const internalMessage of internalMessages) {
+//         // Check if the message sends to another address in the same account
+//         const isSelf = isSelfTransaction(internalMessage.payload, account)
 
-        if (isSelf && !isParticipationPayload(internalMessage.payload)) {
-            // It's a transfer between two addresses in the same account
-            // Try and find the other side of the pair where the message id
-            // would be the same and the incoming flag the opposite
-            const internalIncoming = getIncomingFlag(internalMessage.payload)
-            let pair: Message = internalMessages.find(
-                (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
-            )
+//         if (isSelf && !isParticipationPayload(internalMessage.payload)) {
+//             // It's a transfer between two addresses in the same account
+//             // Try and find the other side of the pair where the message id
+//             // would be the same and the incoming flag the opposite
+//             const internalIncoming = getIncomingFlag(internalMessage.payload)
+//             let pair: Message = internalMessages.find(
+//                 (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
+//             )
 
-            // Can't find the other side of the pair so clone the original
-            // reverse its incoming flag and store it
-            if (!pair) {
-                pair = deepCopy(internalMessage) as Message
-                // Reverse the incoming flag for the other side of the pair
-                setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
-                account.messages.push(pair)
-            }
-        }
-    }
-}
+//             // Can't find the other side of the pair so clone the original
+//             // reverse its incoming flag and store it
+//             if (!pair) {
+//                 pair = deepCopy(internalMessage) as Message
+//                 // Reverse the incoming flag for the other side of the pair
+//                 setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
+//                 account.messages.push(pair)
+//             }
+//         }
+//     }
+// }
 
 /**
  * @method saveNewMessage
