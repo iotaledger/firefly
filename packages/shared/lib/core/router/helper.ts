@@ -27,7 +27,7 @@ export const resetRouters = (): void => {
     get(dashboardRouter).reset()
     get(accountRouter).reset()
     get(settingsRouter).reset()
-    get(settingsRouter).reset()
+    get(governanceRouter).reset()
     isDeepLinkRequestActive.set(false)
 }
 
