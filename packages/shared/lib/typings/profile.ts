@@ -17,6 +17,7 @@ export interface Profile {
     id: string
     name: string
     type: ProfileType
+    network: ProfileNetwork
     /**
      * Time for most recent stronghold back up
      */
@@ -57,6 +58,17 @@ export enum ProfileType {
     Software = 'Software',
     Ledger = 'Ledger',
     LedgerSimulator = 'LedgerSimulator',
+}
+
+/**
+ * Profile networks
+ */
+export enum ProfileNetwork {
+    IotaMainnet = 'IOTA Mainnet',
+    IotaDevnet = 'IOTA Devnet',
+    ShimmerMainnet = 'Shimmer Mainnet',
+    ShimmerDevnet = 'Shimmer Devnet',
+    CustomNetwork = 'Custom Network',
 }
 
 /**

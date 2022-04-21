@@ -91,6 +91,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     id: generateRandomId(),
     name: profileName,
     type: null,
+    network: null,
     lastStrongholdBackupTime: null,
     isDeveloperProfile,
     settings: {
