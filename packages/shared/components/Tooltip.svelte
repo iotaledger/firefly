@@ -10,6 +10,7 @@
     }
 
     export let classes = ''
+    export let overridePadding = false
     export let anchor: HTMLElement | null = null
     export let position: Position = Position.Top
     export let refresh: boolean = false // prop used to refresh the tooltip position
@@ -70,7 +71,9 @@
 </script>
 
 <tooltip
-    class="fixed text-center z-10 py-4 px-4 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {classes}"
+    class="fixed text-center z-10 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {overridePadding
+        ? ''
+        : 'py-4 px-4'} {classes}"
     class:darkmode={darkModeEnabled}
     style="top: {top}px; left:{left}px; {inlineStyle}"
     bind:this={tooltip}
