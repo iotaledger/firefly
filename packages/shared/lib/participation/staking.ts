@@ -9,16 +9,19 @@ import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
 import { selectedAccount, wallet } from '../wallet'
+import { addError } from 'shared/lib/errors'
 
 import {
     ASSEMBLY_EVENT_ID,
-    ASSEMBLY_STAKING_RESULT_URLS,
+    ASSEMBLY_STAKING_RESULT_FILES,
     LAST_ASSEMBLY_STAKING_PERIOD,
     LAST_SHIMMER_STAKING_PERIOD,
     SHIMMER_EVENT_ID,
-    SHIMMER_STAKING_RESULT_URLS,
+    SHIMMER_STAKING_RESULT_FILES,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
+    STAKING_RESULT_URL,
+    BACKUP_STAKING_RESULT_URL,
 } from './constants'
 import {
     assemblyStakingEventState,
@@ -41,6 +44,8 @@ import {
     StakingPeriodJsonResponse,
     StakingPeriodRewards,
 } from './types'
+import { showAppNotification } from '@lib/notifications'
+import { localize } from '@core/i18n'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -522,14 +527,14 @@ function isValidPeriodNumber(airdrop: StakingAirdrop, periodNumber: number): boo
     }
 }
 
-function getStakingResultUrl(airdrop: StakingAirdrop, periodNumber: number): string {
+function getStakingResultFileName(airdrop: StakingAirdrop, periodNumber: number): string {
     if (!airdrop || !isValidPeriodNumber(airdrop, periodNumber)) return ''
 
     switch (airdrop) {
         case StakingAirdrop.Assembly:
-            return ASSEMBLY_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+            return ASSEMBLY_STAKING_RESULT_FILES[periodNumber - 1] ?? ''
         case StakingAirdrop.Shimmer:
-            return SHIMMER_STAKING_RESULT_URLS[periodNumber - 1] ?? ''
+            return SHIMMER_STAKING_RESULT_FILES[periodNumber - 1] ?? ''
         default:
             return ''
     }
@@ -539,14 +544,30 @@ async function fetchStakingResult(
     airdrop: StakingAirdrop,
     periodNumber: number
 ): Promise<StakingPeriodJsonResponse> | undefined {
-    const stakingResultUrl = getStakingResultUrl(airdrop, periodNumber)
+    const stakingResultFileName = getStakingResultFileName(airdrop, periodNumber)
 
     try {
-        const stakingResultResponse = await fetch(stakingResultUrl, getJsonRequestOptions())
-
+        const stakingResultResponse = await fetch(STAKING_RESULT_URL + stakingResultFileName, getJsonRequestOptions())
         return stakingResultResponse.json()
     } catch (err) {
-        console.error(`Unable to fetch staking results from ${stakingResultUrl}`)
+        try {
+            const backupStakingResultResponse = await fetch(
+                BACKUP_STAKING_RESULT_URL + stakingResultFileName,
+                getJsonRequestOptions()
+            )
+            return backupStakingResultResponse.json()
+        } catch (_err) {
+            console.error(`Unable to fetch staking results for ${stakingResultFileName}`)
+            addError({
+                time: Date.now(),
+                type: 'Network',
+                message: `Failed to fetch staking result for '${stakingResultFileName}'`,
+            })
+            showAppNotification({
+                type: 'error',
+                message: localize('error.participation.failedToFetchPreviousRewards'),
+            })
+        }
     }
 }
 
