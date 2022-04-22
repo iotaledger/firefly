@@ -29,6 +29,7 @@
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
+        getStardustAccount,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
@@ -80,68 +81,59 @@
         }
     }
 
-    async function loadAccounts() {
-        let accountsResponse
+    // TODO: move to Dashboard.svelte
+    async function loadAccounts(): Promise<void> {
         try {
-            accountsResponse = await $accountManager.getAccounts()
-            console.log(1)
-            console.log(accountsResponse.payload)
-            console.log(typeof accountsResponse)
-        } catch (e) {
-            _onError(e)
-        }
-        console.log(2)
-
-        if (accountsResponse) {
-            if (accountsResponse.length === 0) {
+            const accountsResponse = await $accountManager.getAccounts()
+            console.log(accountsResponse)
+            if (accountsResponse) {
+                if (accountsResponse.length === 0) {
                     void _continue()
-            } else {
-                const totalBalance = {
+                    return
+                }
+
+                const meta = {
                     balance: 0,
                     incoming: 0,
                     outgoing: 0,
+                    depositAddress: '',
                 }
 
-                let completeCount = 0
-                const newAccounts = []
-                for (const payloadAccount of accountsResponse.payload) {
+                const newAccounts: WalletAccount[] = []
+                for (const payloadAccount of accountsResponse) {
                     console.log(payloadAccount)
+                    const balance = await payloadAccount.balance()
+                    // TODO: check if this is neccessary -> mainly for showing a correct graph
                     // addMessagesPair(payloadAccount)
 
-                    try {
-                        const meta = await getAccountMeta(payloadAccount.id)
-                        totalBalance.balance += meta.balance
-                        totalBalance.incoming += meta.incoming
-                        totalBalance.outgoing += meta.outgoing
+                    meta.balance += balance.available
+                    meta.incoming += balance.incoming
+                    meta.outgoing += balance.outgoing
 
-                        const account = prepareAccountInfo(payloadAccount, meta)
-                        newAccounts.push(account)
-                    } catch (err) {
-                            _onError(err)
-                    }
-
-                    completeCount++
-
-                    if (completeCount === accountsResponse.length) {
-                        accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                        processMigratedTransactions(
-                            payloadAccount.id,
-                            payloadAccount.messages,
-                            payloadAccount.addresses
-                        )
-                        updateBalanceOverview(
-                            totalBalance.balance,
-                            totalBalance.incoming,
-                            totalBalance.outgoing
-                        )
-                        void _continue()
-                    }
+                    const account = prepareAccountInfo(payloadAccount, meta)
+                    newAccounts.push(account)
                 }
+                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
+                // TODO: fix migrations
+                // processMigratedTransactions(
+                //     payloadAccount.id,
+                //     payloadAccount.messages,
+                //     payloadAccount.addresses
+                // )
+                updateBalanceOverview(
+                    meta.balance,
+                    meta.incoming,
+                    meta.outgoing
+                )
+                void _continue()
             }
+        } catch (e) {
+            console.error(e)
+            onError(e)
         }
     }
 
-    async function _continue() {
+    async function _continue(): Promise<void> {
         $accountsLoaded = true
         const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
@@ -151,16 +143,17 @@
                 $isFirstSessionSync = false
             }
         } catch (err) {
-            _onError(err)
+            onError(err)
         }
     }
 
-    async function _onError(error: any = null) {
+    async function onError(error: any = null) : Promise<void> {
         if ($isLedgerProfile) {
             if (!LedgerErrorType[error.type]) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, error)
             }
         } else {
+            console.log(10)
             showAppNotification({
                 type: 'error',
                 message: localize(error?.error || 'error.global.generic'),
@@ -211,6 +204,7 @@
                          */
                         const localePath =
                             isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
+                        console.log('c')
                         showAppNotification({
                             type: 'error',
                             message: localize(localePath),
@@ -280,6 +274,7 @@
                     },
                     onError(err) {
                         isTransferring.set(false)
+                        console.log('b')
                         showAppNotification({
                             type: 'error',
                             message: localize(err.error),
@@ -370,13 +365,13 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
-                loadAccounts()
+                await loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)
@@ -396,6 +391,7 @@
 
             void addProfileCurrencyPriceData()
         }
+        console.log(3)
     })
 
     const handleMenuClick = () => {

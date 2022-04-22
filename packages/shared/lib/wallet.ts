@@ -478,7 +478,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
                     (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
                 )
             },
-            onError(err) {
+            onError() {
                 resolve()
             },
         })
@@ -512,7 +512,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
                 isBackgroundSyncing.set(false)
                 resolve()
             },
-            onError(err) {
+            onError() {
                 showAppNotification({
                     type: 'error',
                     message: localize('error.global.generic'),
