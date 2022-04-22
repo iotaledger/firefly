@@ -28,7 +28,6 @@
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMeta,
         getStardustAccount,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
@@ -85,7 +84,6 @@
     async function loadAccounts(): Promise<void> {
         try {
             const accountsResponse = await $accountManager.getAccounts()
-            console.log(accountsResponse)
             if (accountsResponse) {
                 if (accountsResponse.length === 0) {
                     void _continue()
@@ -101,8 +99,8 @@
 
                 const newAccounts: WalletAccount[] = []
                 for (const payloadAccount of accountsResponse) {
-                    console.log(payloadAccount)
-                    const balance = await payloadAccount.balance()
+                    const stardustAccount = await getStardustAccount(payloadAccount.meta.index)
+                    const balance = await stardustAccount.balance()
                     // TODO: check if this is neccessary -> mainly for showing a correct graph
                     // addMessagesPair(payloadAccount)
 
@@ -128,7 +126,6 @@
                 void _continue()
             }
         } catch (e) {
-            console.error(e)
             onError(e)
         }
     }
@@ -153,7 +150,6 @@
                 displayNotificationForLedgerProfile('error', true, true, false, false, error)
             }
         } else {
-            console.log(10)
             showAppNotification({
                 type: 'error',
                 message: localize(error?.error || 'error.global.generic'),
@@ -204,7 +200,6 @@
                          */
                         const localePath =
                             isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
-                        console.log('c')
                         showAppNotification({
                             type: 'error',
                             message: localize(localePath),
@@ -274,7 +269,6 @@
                     },
                     onError(err) {
                         isTransferring.set(false)
-                        console.log('b')
                         showAppNotification({
                             type: 'error',
                             message: localize(err.error),
@@ -391,7 +385,6 @@
 
             void addProfileCurrencyPriceData()
         }
-        console.log(3)
     })
 
     const handleMenuClick = () => {

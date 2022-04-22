@@ -221,7 +221,7 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
     accountManager.set(accountManagerInstance)
 }
 
-export function getStardustAccount(index: string): Promise<StardustAccount> {
+export function getStardustAccount(index: number): Promise<StardustAccount> {
     return getAccount(index)
 }
 /**
