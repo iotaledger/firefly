@@ -120,6 +120,7 @@
         switch (votingAction) {
             case VotingAction.Cast:
             case VotingAction.Merge:
+                successText = localize('popups.votingConfirmation.votesSubmitted')
                 await participate(
                     $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
@@ -132,9 +133,11 @@
                     })
                 break
             case VotingAction.Change:
+                successText = localize('popups.votingConfirmation.votesSubmitted')
                 await changeVote()
                 break
             case VotingAction.Stop:
+                successText = localize('popups.votingConfirmation.votesStopped')
                 await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
                     .then((messageIds) => syncMessages(messageIds))
                     .catch((err) => {
@@ -167,7 +170,6 @@
 
     function handleStopClick(): void {
         votingAction = VotingAction.Stop
-        successText = localize('popups.votingConfirmation.votesStopped')
         handleCastClick()
     }
 
