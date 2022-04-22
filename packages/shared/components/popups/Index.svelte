@@ -18,7 +18,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import GovernanceCastVote from './GovernanceCastVote.svelte'
+    import GovernanceManager from './GovernanceManager.svelte'
     import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
@@ -132,7 +132,7 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         governanceVotingPowerInfo: GovernanceVotingPowerInfo,
-        governanceCastVote: GovernanceCastVote,
+        governanceManager: GovernanceManager,
         success: Success,
         singleAccountGuide: SingleAccountGuide,
     }

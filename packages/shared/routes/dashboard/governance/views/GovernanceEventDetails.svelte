@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { Button, DashboardPane, Icon, Text, GovernanceInfoTooltip } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { governanceRouter } from '@core/router'
-    import { GovernanceRoute } from '@core/router/enums'
     import { canParticipate } from '@lib/participation'
     import { handleTransactionEventData, transferState, AccountColors } from '@lib/wallet'
     import { WalletAccount } from '@lib/typings/wallet'
@@ -10,8 +8,7 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
     import { isSoftwareProfile } from '@lib/profile'
-    import { promptUserToConnectLedger } from '@lib/ledger'
-    import { selectedAccountParticipationOverview } from '@lib/participation/account'
+    import { selectedAccountParticipationOverview, currentAccountTreasuryVoteValue } from '@lib/participation/account'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
@@ -21,9 +18,7 @@
     export let account: WalletAccount
 
     let transactionEventData: TransferProgressEventData = null
-    let currentVoteValue: string
 
-    $: $selectedAccountParticipationOverview, updateCurrentVoteValue()
     $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
     $: displayedPercentages = results?.map((result) => {
         const percentage = getPercentageString(result?.accumulated, totalVotes)
@@ -45,7 +40,6 @@
         milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
     $: $transferState, handleLedgerTransferState()
 
-    const handleBackClick = (): void => $governanceRouter.goTo(GovernanceRoute.Init)
     const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
     const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
@@ -55,22 +49,16 @@
         countedVotes: { anchor: null as HTMLElement, show: false },
     }
 
-    function handleClick(nextVote: VotingEventAnswer): void {
-        const openGovernanceCastVotePopup = () =>
-            openPopup({
-                type: 'governanceCastVote',
-                props: {
-                    currentVoteValue,
-                    eventId: event?.eventId,
-                    nextVote,
-                },
-            })
-        if ($isSoftwareProfile) {
-            openGovernanceCastVotePopup()
-        } else {
-            promptUserToConnectLedger(false, () => openGovernanceCastVotePopup(), undefined, true)
-        }
+    function handleAnswerClick(nextVote: VotingEventAnswer): void {
+        openPopup({
+            type: 'governanceManager',
+            props: {
+                eventId: event?.eventId,
+                nextVote,
+            },
+        })
     }
+
     function getAnswerHeader(castedAnswerValue: string, answerValue: string): string {
         if (isWinnerAnswer(answerValue)) {
             return localize('views.governance.eventDetails.answerHeader.winner')
@@ -92,12 +80,6 @@
         }
         return localize('views.governance.eventDetails.answerHeader.selected')
     }
-    function updateCurrentVoteValue(): void {
-        const participation = $selectedAccountParticipationOverview?.participations?.find(
-            (participation) => participation.eventId === event.eventId
-        )
-        currentVoteValue = participation?.answers[0] ?? null
-    }
     function handleTransferState(state: TransferState): void {
         if (!state) {
             return
@@ -111,8 +93,12 @@
         const { data, type } = state
 
         switch (type) {
+            // If a user presses "Accept" on ledger, this is the next transfer progress item.
             case TransferProgressEventType.PerformingPoW:
+                // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
+                // Re-open the staking manager pop up
+                openPopup({ type: 'governanceManager' }, true)
                 break
             case TransferProgressEventType.SigningTransaction:
                 openPopup(
@@ -195,16 +181,16 @@
         </div>
         {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
-                onClick={() => handleClick(answer)}
+                onClick={() => handleAnswerClick(answer)}
                 secondary={!isWinnerAnswer(answer?.value)}
                 disabled={!canParticipate(event?.status?.status)}
-                active={isSelected(currentVoteValue, answer?.value)}
+                active={isSelected($currentAccountTreasuryVoteValue, answer?.value)}
                 classes="px-6 flex justify-between mb-4 overflow-hidden"
             >
                 <div class="flex justify-between w-full items-center">
                     <div class="flex flex-col mr-32">
                         <div class="flex items-center mb-2">
-                            {#if isSelected(currentVoteValue, answer?.value)}
+                            {#if isSelected($currentAccountTreasuryVoteValue, answer?.value)}
                                 {#if event?.status?.status === ParticipationEventState.Holding}
                                     <span class="relative flex justify-center items-center h-3 w-3 mr-2">
                                         <span
@@ -225,8 +211,8 @@
                             {/if}
                             <Text
                                 type="p"
-                                classes="uppercase text-blue-500 {currentVoteValue &&
-                                !isSelected(currentVoteValue, answer?.value)
+                                classes="uppercase text-blue-500 {$currentAccountTreasuryVoteValue &&
+                                !isSelected($currentAccountTreasuryVoteValue, answer?.value)
                                     ? 'text-gray-500'
                                     : ''}
                                 {isWinnerAnswer(answer?.value) ? 'text-white' : ''}"
@@ -234,7 +220,7 @@
                                 smaller
                                 bold
                             >
-                                {getAnswerHeader(currentVoteValue, answer?.value)}
+                                {getAnswerHeader($currentAccountTreasuryVoteValue, answer?.value)}
                             </Text>
                         </div>
                         <Text

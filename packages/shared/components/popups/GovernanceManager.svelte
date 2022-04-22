@@ -1,24 +1,27 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { Button, Icon, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { selectedAccount, api, isSyncing } from 'shared/lib/wallet'
-    import { participate, stopParticipating } from 'shared/lib/participation/api'
+    import { Button, Icon, Spinner, Text } from 'shared/components'
+    import { ledgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { currentAccountTreasuryVoteValue } from 'shared/lib/participation/account'
+    import { participate, stopParticipating } from 'shared/lib/participation/api'
     import {
         isParticipationPending,
         participationOverview,
         pendingParticipations,
     } from 'shared/lib/participation/stores'
     import { ParticipationAction, TrackedParticipationItem, VotingEventAnswer } from 'shared/lib/participation/types'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { sleep } from 'shared/lib/utils'
+    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
 
-    export let currentVoteValue: string
     export let nextVote: VotingEventAnswer
     export let eventId: string
+    export let shouldCastVoteOnMount: boolean = false
 
     enum VotingAction {
         Cast = 'castVotes',
@@ -32,18 +35,57 @@
     let successText = localize('popups.votingConfirmation.votesSubmitted')
     let spinnerText = localize('general.syncing')
 
+    let pendingParticipationIds: string[] = []
+    let previousPendingParticipationsLength = 0
+
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
     $: disabled = isVoting || $isSyncing || $pendingParticipations?.length !== 0
     $: disabled, setSpinnerMessage()
+    $: $currentAccountTreasuryVoteValue, nextVote, setVotingAction()
 
     onMount(() => {
-        setVotingAction()
+        if (shouldCastVoteOnMount) {
+            castVote()
+        }
+
+        const usubscribe = pendingParticipations.subscribe((participations) => {
+            const currentParticipationsLength = participations.length
+
+            if (currentParticipationsLength < previousPendingParticipationsLength) {
+                const latestParticipationIds = participations.map((participation) => participation.messageId)
+
+                if (latestParticipationIds.length === 0) {
+                    openPopup(
+                        {
+                            type: 'success',
+                            props: {
+                                successText,
+                            },
+                        },
+                        true
+                    )
+                }
+                pendingParticipationIds = latestParticipationIds
+                previousPendingParticipationsLength = currentParticipationsLength
+            }
+        })
+
+        return () => {
+            usubscribe()
+        }
     })
 
-    const setVotingAction = (): void => {
-        if (!currentVoteValue) {
+    function displayErrorNotification(error): void {
+        showAppNotification({
+            type: 'error',
+            message: localize(error.error),
+        })
+    }
+
+    function setVotingAction(): void {
+        if (!$currentAccountTreasuryVoteValue) {
             votingAction = VotingAction.Cast
-        } else if (currentVoteValue !== nextVote.value) {
+        } else if ($currentAccountTreasuryVoteValue !== nextVote.value) {
             votingAction = VotingAction.Change
         } else if (hasReceivedFundsSinceLastVote()) {
             votingAction = VotingAction.Merge
@@ -52,7 +94,7 @@
         }
     }
 
-    const hasReceivedFundsSinceLastVote = (): boolean => {
+    function hasReceivedFundsSinceLastVote(): boolean {
         const { trackedParticipations } =
             $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? {}
         const currentParticipation = trackedParticipations?.[eventId]?.slice(-1)?.[0] as TrackedParticipationItem
@@ -60,26 +102,19 @@
         return amount !== $selectedAccount.rawIotaBalance
     }
 
-    const castVote = async (): Promise<void> => {
+    function castVote(): void {
         isVoting = true
         try {
-            await vote()
-            openPopup({
-                type: 'success',
-                props: {
-                    successText,
-                },
-            })
+            void vote()
         } catch (err) {
             showAppNotification({
                 type: 'error',
                 message: localize(err.error),
             })
         }
-        isVoting = false
     }
 
-    const vote = async (): Promise<void> => {
+    async function vote(): Promise<void> {
         switch (votingAction) {
             case VotingAction.Cast:
             case VotingAction.Merge:
@@ -88,60 +123,86 @@
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
                 )
+                    .then((messageIds) => syncMessages(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+                        displayErrorNotification(err)
+                    })
                 break
             case VotingAction.Change:
                 await changeVote()
                 break
             case VotingAction.Stop:
                 await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
+                    .then((messageIds) => syncMessages(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+                        displayErrorNotification(err)
+                    })
                 break
             default:
                 throw new Error('Unimplemented voting action!')
         }
     }
 
-    const changeVote = async (): Promise<void> => {
+    async function changeVote(): Promise<void> {
         const [messageId] = await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
         while (isParticipationPending(messageId)) {
             await sleep(2000)
         }
         await participate($selectedAccount?.id, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
+            .then((messageIds) => syncMessages(messageIds))
+            .catch((err) => {
+                console.error(err)
+                displayErrorNotification(err)
+            })
     }
 
-    const handleStopClick = (): void => {
+    function syncMessages(messageIds: string[]): void {
+        messageIds.forEach((id) => pendingParticipationIds.push(id))
+        previousPendingParticipationsLength = messageIds.length
+    }
+
+    function handleStopClick(): void {
         votingAction = VotingAction.Stop
         successText = localize('popups.votingConfirmation.votesStopped')
         handleCastClick()
     }
 
-    const handleCastClick = (): void => {
+    function handleCastClick(): void {
+        const openGovernanceManager = (): void => {
+            openPopup(
+                {
+                    type: 'governanceManager',
+                    props: {
+                        nextVote,
+                        eventId,
+                        shouldCastVoteOnMount: true,
+                    },
+                },
+                true
+            )
+        }
+
         if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({
-                            type: 'password',
-                            props: {
-                                onSuccess: () => castVote(),
-                            },
-                        })
-                    } else {
-                        void castVote()
-                    }
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                },
-            })
+            if ($isStrongholdLocked) {
+                checkStronghold(openGovernanceManager)
+            } else {
+                castVote()
+            }
         } else {
-            void castVote()
+            if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+                showAppNotification({
+                    type: 'warning',
+                    message: localize('error.ledger.appNotOpen'),
+                })
+            } else {
+                promptUserToConnectLedger(false, () => openGovernanceManager(), undefined, true)
+            }
         }
     }
 
-    const setSpinnerMessage = (): void => {
+    function setSpinnerMessage(): void {
         if ($isSyncing || $pendingParticipations.length !== 0) {
             spinnerText = localize('general.syncing')
         } else {
@@ -164,17 +225,13 @@
         <Button onClick={handleCastClick} {disabled} classes="mb-0 w-full block text-15">
             {#if disabled}
                 <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
-            {:else}
-                {localize(`actions.${votingAction}`)}
-            {/if}
+            {:else}{localize(`actions.${votingAction}`)}{/if}
         </Button>
         {#if votingAction === `${VotingAction.Merge}`}
             <Button onClick={handleStopClick} {disabled} classes="mb-0 w-full block text-15">
                 {#if disabled}
                     <Spinner busy message={spinnerText} classes="mx-2 justify-center" />
-                {:else}
-                    {localize(`actions.${VotingAction.Stop}`)}
-                {/if}
+                {:else}{localize(`actions.${VotingAction.Stop}`)}{/if}
             </Button>
         {/if}
     </div>
