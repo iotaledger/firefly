@@ -379,16 +379,22 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
         const { accounts } = get(wallet)
+        const { action } = pendingParticipation
         const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
-
+        let localeGroup
+        let localeAction
+        if (action === ParticipationAction.Stake || action === ParticipationAction.Unstake) {
+            localeGroup = 'stakingManager'
+            localeAction = action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+        } else if (action === ParticipationAction.Vote || action === ParticipationAction.Unvote) {
+            localeGroup = 'votingConfirmation'
+            localeAction = action === ParticipationAction.Vote ? 'voted' : 'unvoted'
+        }
         showAppNotification({
             type: 'info',
-            message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
-                }Successfully`,
-                { values: { account: account.alias } }
-            ),
+            message: localize(`popups.${localeGroup}.${localeAction}Successfully`, {
+                values: { account: account.alias },
+            }),
         })
     }
 }
