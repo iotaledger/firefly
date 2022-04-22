@@ -59,7 +59,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export const accountManager = writable<AccountManager>(null)
-
+export const account = writable<StardustAccount>(null)
 // TODO: remove these
 interface ActorState {
     [id: string]: IActorHandler
@@ -200,7 +200,7 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
 
     // The new bindings
-    const accountManagerInstance = createAccountManager({
+    const accountManagerInstance: AccountManager = createAccountManager({
         storagePath,
         clientOptions: {
             nodes: [
@@ -218,10 +218,12 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
         },
         stronghold: {},
     })
-
     accountManager.set(accountManagerInstance)
 }
 
+export function getStardustAccount(index: string): Promise<StardustAccount> {
+    return getAccount(index)
+}
 /**
  * Removes event listeners for active actor
  *
@@ -351,8 +353,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
         const createdAccount = await get(accountManager).createAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
         })
-        const account = await getAccount(createdAccount.meta.index)
-        const addresses = await account.generateAddresses()
+        const addresses = await createdAccount.generateAddresses()
         const depositAddress = addresses[0].address
         const preparedAccount = prepareAccountInfo(createdAccount, {
             balance: 0,
