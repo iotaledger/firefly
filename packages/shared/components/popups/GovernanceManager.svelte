@@ -67,6 +67,7 @@
                 }
                 pendingParticipationIds = latestParticipationIds
                 previousPendingParticipationsLength = currentParticipationsLength
+                isVoting = false
             }
         })
 
@@ -111,6 +112,7 @@
                 type: 'error',
                 message: localize(err.error),
             })
+            isVoting = false
         }
     }
 
