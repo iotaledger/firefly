@@ -17,6 +17,7 @@ export interface Profile {
     id: string
     name: string
     type: ProfileType
+    protocol: ProfileProtocol
     /**
      * Time for most recent stronghold back up
      */
@@ -57,6 +58,14 @@ export enum ProfileType {
     Software = 'Software',
     Ledger = 'Ledger',
     LedgerSimulator = 'LedgerSimulator',
+}
+
+/**
+ * Profile protocols
+ */
+export enum ProfileProtocol {
+    Iota = 'IOTA',
+    Shimmer = 'Shimmer',
 }
 
 /**
