@@ -1,22 +1,25 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Button, Icon, Spinner, Text } from 'shared/components'
-    import { ledgerDeviceState, promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { hasNodePlugin } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { currentAccountTreasuryVoteValue } from 'shared/lib/participation/account'
     import { participate, stopParticipating } from 'shared/lib/participation/api'
     import {
         isParticipationPending,
+        isPerformingParticipation,
+        participationAction,
         participationOverview,
         pendingParticipations,
     } from 'shared/lib/participation/stores'
     import { ParticipationAction, TrackedParticipationItem, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { NodePlugin } from 'shared/lib/typings/node'
     import { sleep } from 'shared/lib/utils'
-    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { isSyncing, selectedAccount, transferState } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
     export let nextVote: VotingEventAnswer
@@ -32,11 +35,7 @@
 
     let votingAction = VotingAction.Cast
     let isVoting = false
-    let successText = localize('popups.votingConfirmation.votesSubmitted')
     let spinnerText = localize('general.syncing')
-
-    let pendingParticipationIds: string[] = []
-    let previousPendingParticipationsLength = 0
 
     $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
     $: disabled = isVoting || $isSyncing || $pendingParticipations?.length !== 0
@@ -44,37 +43,31 @@
     $: $currentAccountTreasuryVoteValue, nextVote, setVotingAction()
 
     onMount(() => {
-        if (shouldCastVoteOnMount) {
-            castVote()
+        if (!hasNodePlugin(NodePlugin.Participation)) {
+            showAppNotification({
+                type: 'warning',
+                message: localize('error.node.pluginNotAvailable', {
+                    values: { nodePlugin: NodePlugin.Participation },
+                }),
+            })
+
+            resetView()
+
+            return
         }
-
-        const usubscribe = pendingParticipations.subscribe((participations) => {
-            const currentParticipationsLength = participations.length
-
-            if (currentParticipationsLength < previousPendingParticipationsLength) {
-                const latestParticipationIds = participations.map((participation) => participation.messageId)
-
-                if (latestParticipationIds.length === 0) {
-                    openPopup(
-                        {
-                            type: 'success',
-                            props: {
-                                successText,
-                            },
-                        },
-                        true
-                    )
-                }
-                pendingParticipationIds = latestParticipationIds
-                previousPendingParticipationsLength = currentParticipationsLength
-                isVoting = false
-            }
-        })
-
-        return () => {
-            usubscribe()
+        if (shouldCastVoteOnMount) {
+            void castVote()
         }
     })
+
+    function resetView(): void {
+        if (!isSoftwareProfile) {
+            transferState.set(null)
+        }
+
+        isPerformingParticipation.set(false)
+        participationAction.set(undefined)
+    }
 
     function displayErrorNotification(error): void {
         showAppNotification({
@@ -103,47 +96,42 @@
         return amount !== $selectedAccount.rawIotaBalance
     }
 
-    function castVote(): void {
+    async function castVote(): Promise<void> {
         isVoting = true
         try {
-            void vote()
+            await vote()
         } catch (err) {
             showAppNotification({
                 type: 'error',
                 message: localize(err.error),
             })
-            isVoting = false
         }
+        isVoting = false
     }
 
     async function vote(): Promise<void> {
         switch (votingAction) {
             case VotingAction.Cast:
             case VotingAction.Merge:
-                successText = localize('popups.votingConfirmation.votesSubmitted')
                 await participate(
                     $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
-                )
-                    .then((messageIds) => syncMessages(messageIds))
-                    .catch((err) => {
-                        console.error(err)
-                        displayErrorNotification(err)
-                    })
+                ).catch((err) => {
+                    console.error(err)
+                    displayErrorNotification(err)
+                    resetView()
+                })
                 break
             case VotingAction.Change:
-                successText = localize('popups.votingConfirmation.votesSubmitted')
                 await changeVote()
                 break
             case VotingAction.Stop:
-                successText = localize('popups.votingConfirmation.votesStopped')
-                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
-                    .then((messageIds) => syncMessages(messageIds))
-                    .catch((err) => {
-                        console.error(err)
-                        displayErrorNotification(err)
-                    })
+                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote).catch((err) => {
+                    console.error(err)
+                    displayErrorNotification(err)
+                    resetView()
+                })
                 break
             default:
                 throw new Error('Unimplemented voting action!')
@@ -155,26 +143,25 @@
         while (isParticipationPending(messageId)) {
             await sleep(2000)
         }
-        await participate($selectedAccount?.id, [{ eventId, answers: [nextVote?.value] }], ParticipationAction.Vote)
-            .then((messageIds) => syncMessages(messageIds))
-            .catch((err) => {
-                console.error(err)
-                displayErrorNotification(err)
-            })
-    }
-
-    function syncMessages(messageIds: string[]): void {
-        messageIds.forEach((id) => pendingParticipationIds.push(id))
-        previousPendingParticipationsLength = messageIds.length
+        await participate(
+            $selectedAccount?.id,
+            [{ eventId, answers: [nextVote?.value] }],
+            ParticipationAction.Vote
+        ).catch((err) => {
+            console.error(err)
+            displayErrorNotification(err)
+        })
     }
 
     function handleStopClick(): void {
+        $participationAction = ParticipationAction.Unvote
         votingAction = VotingAction.Stop
         handleCastClick()
     }
 
     function handleCastClick(): void {
-        const openGovernanceManager = (): void => {
+        $participationAction = ParticipationAction.Vote
+        const openGovernanceManager = () => {
             openPopup(
                 {
                     type: 'governanceManager',
@@ -187,19 +174,15 @@
                 true
             )
         }
-
         if ($isSoftwareProfile) {
             if ($isStrongholdLocked) {
                 checkStronghold(openGovernanceManager)
             } else {
-                castVote()
+                void castVote()
             }
         } else {
-            if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
-                showAppNotification({
-                    type: 'warning',
-                    message: localize('error.ledger.appNotOpen'),
-                })
+            if ($popupState?.active && $popupState?.type === 'governanceManager') {
+                void castVote()
             } else {
                 promptUserToConnectLedger(false, () => openGovernanceManager(), undefined, true)
             }
