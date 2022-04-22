@@ -23,7 +23,6 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let transactions: AccountMessage[] = []
-    export let color = 'blue'
 
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
@@ -153,7 +152,7 @@
     }
 </script>
 
-<div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
         {#if $selectedMessage}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
@@ -221,7 +220,7 @@
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if queryTransactions.length}
                 {#each queryTransactions as transaction}
-                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">

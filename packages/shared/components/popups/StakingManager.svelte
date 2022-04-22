@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
+    import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
@@ -14,7 +14,7 @@
         getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
     import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
+    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
         isPartiallyStaked,
@@ -22,8 +22,8 @@
         participationOverview,
         pendingParticipations,
         stakedAccounts,
-        stakedAmount,
-        stakingEventState,
+        assemblyStakingEventState,
+        shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
@@ -49,10 +49,10 @@
     let { accounts } = $wallet
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
-    $: canStake = canParticipate($stakingEventState)
+    $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
     $: $participationOverview, resetAccounts()
-    $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview()
+    $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
 
@@ -244,13 +244,17 @@
     }
 </script>
 
-<Text type="h5">{localize('popups.stakingManager.title')}</Text>
-<Text type="p" secondary classes="mt-6 mb-4">{localize('popups.stakingManager.description')}</Text>
-<div class="staking flex flex-col scrollable-y">
+<Text type="h4" classes="mb-2">{localize('popups.stakingManager.title')}</Text>
+<Text type="p" secondary classes="mb-4">{localize('popups.stakingManager.description')}</Text>
+<div class="staking flex flex-col mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
-            class={`w-full mt-4 flex flex-col rounded-xl border-2 border-solid
-                ${$isPartiallyStaked ? 'border-yellow-600' : 'border-gray-200 dark:border-gray-600'}`}
+            class={`w-full flex flex-col rounded-xl border-2 border-solid
+                ${
+                    $isPartiallyStaked && !$isPerformingParticipation
+                        ? 'border-yellow-600'
+                        : 'border-gray-200 dark:border-gray-600'
+                }`}
         >
             <div class="w-full space-x-4 px-5 py-3 flex flex-row justify-between items-center">
                 {#if isCurrentAccountStaked}
@@ -259,7 +263,7 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccountId]}
+                        bind:this={tooltipAnchors[$selectedAccount?.index]}
                         on:mouseenter={() => toggleTooltip($selectedAccount)}
                         on:mouseleave={() => toggleTooltip($selectedAccount)}
                     >
@@ -342,7 +346,7 @@
                     {:else}{localize(`actions.${isCurrentAccountStaked ? 'unstake' : 'stake'}`)}{/if}
                 </Button>
             </div>
-            {#if $isPartiallyStaked && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
+            {#if $isPartiallyStaked && !$isPerformingParticipation && participationAbility !== AccountParticipationAbility.WillNotReachMinAirdrop}
                 <div
                     class="space-x-4 mx-2 mb-2 pl-4 pr-2.5 py-3 flex flex-row justify-between items-center rounded-lg border-2 border-solid border-gray-200 dark:border-gray-600"
                 >
@@ -371,13 +375,13 @@
     {/if}
 </div>
 
-<div class="mt-2 text-center">
-    <Text type="p" secondary classes="inline">
-        {localize('popups.stakingManager.totalFundsStaked')}:
-
-        <Text type="p" secondary bold classes="inline">{formatUnitBestMatch($stakedAmount)}</Text>
-    </Text>
-</div>
+<TextHint
+    classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
+    icon="info"
+    iconClasses="fill-current text-blue-500 dark:text-blue-500"
+    hint={localize('popups.stakingManager.singleAccountHint')}
+    hintClasses="text-gray-500 dark:text-gray-500"
+/>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

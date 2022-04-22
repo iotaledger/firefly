@@ -14,7 +14,6 @@ export { default as Checkbox } from './inputs/Checkbox.svelte'
 export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 export { default as CopyButton } from './CopyButton.svelte'
 export { default as DashboardPane } from './DashboardPane.svelte'
-export { default as DeveloperProfileIndicator } from './DeveloperProfileIndicator.svelte'
 export { default as Dropdown } from './inputs/Dropdown.svelte'
 export { default as Dropzone } from './inputs/Dropzone.svelte'
 export { default as Error } from './Error.svelte'
@@ -62,7 +61,8 @@ export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
-export { default as StakingAssetTile } from './StakingAssetTile.svelte'
+export { default as Chip } from './Chip.svelte'
+export { default as PingingBadge } from './PingingBadge.svelte'
 
 export * from './modals'
 // Charts
@@ -73,4 +73,4 @@ export * as ChartDefaults from './charts/defaults'
 
 // Staking
 export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
-export { default as StakingIndicator } from './StakingIndicator.svelte'
+export { default as StakingAssetTile } from './StakingAssetTile.svelte'

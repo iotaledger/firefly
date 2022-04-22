@@ -19,9 +19,9 @@ import {
  *
  * @returns {Promise<void>}
  */
-export function getParticipationOverview(): Promise<void> {
+export function getParticipationOverview(assemblyEventId: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        api.getParticipationOverview({
+        api.getParticipationOverview(assemblyEventId, {
             onSuccess(overview: Event<ParticipationOverviewResponse>) {
                 participationOverview.set(overview?.payload.accounts)
 

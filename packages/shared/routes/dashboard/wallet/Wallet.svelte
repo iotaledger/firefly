@@ -2,7 +2,7 @@
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { AccountActionsModal, DashboardPane, Text } from 'shared/components'
+    import { AccountActionsModal, DashboardPane, Text, Modal } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
@@ -56,7 +56,7 @@
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
-    let showActionsModal = false
+    let modal: Modal
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
@@ -390,10 +390,6 @@
             void addProfileCurrencyPriceData()
         }
     })
-
-    const handleMenuClick = () => {
-        showActionsModal = !showActionsModal
-    }
 </script>
 
 {#if $selectedAccount}
@@ -402,9 +398,9 @@
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     {#if $accountRoute !== AccountRoute.Manage}
-                        <AccountBalance onMenuClick={handleMenuClick} />
+                        <AccountBalance onMenuClick={modal?.toggle} />
                     {/if}
-                    <DashboardPane classes="h-full -mt-5 z-0">
+                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
                         {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
                             <div class="px-6 my-4">
                                 <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
@@ -422,10 +418,7 @@
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory
-                        color={$selectedAccount.color}
-                        transactions={getAccountMessages($selectedAccount)}
-                    />
+                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">
@@ -436,7 +429,7 @@
                     </DashboardPane>
                 </div>
             </div>
-            <AccountActionsModal bind:isActive={showActionsModal} />
+            <AccountActionsModal bind:modal />
         {/key}
     </div>
 {/if}

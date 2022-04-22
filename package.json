@@ -40,7 +40,7 @@
         "selfsigned": "^2.0.1"
     },
     "lint-staged": {
-        "*.{ts,js,scss,css,svelte}": "eslint --cache --fix",
+        "*.{ts,js,svelte}": "eslint --cache --fix",
         "*.{ts,js,json,scss,css,svelte}": "prettier --write"
     }
 }
