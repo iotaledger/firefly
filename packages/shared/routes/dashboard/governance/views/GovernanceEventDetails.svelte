@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { clickOutside } from '@lib/actions'
     import { canParticipate } from '@lib/participation'
     import { currentAccountTreasuryVoteValue, selectedAccountParticipationOverview } from '@lib/participation/account'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
@@ -140,7 +139,7 @@
         }
     }
     function isWinnerAnswer(answerValue: string): boolean {
-        if (event?.status?.status === ParticipationEventState.Ended) {
+        if (event?.status?.status === ParticipationEventState.Ended && results?.length) {
             const resultsAccumulated = results.map((result) => result?.accumulated)
             const max = Math.max(...resultsAccumulated)
             const indexOfMax = resultsAccumulated.indexOf(max)
@@ -148,22 +147,20 @@
         }
         return false
     }
-    function toggleTooltip(types: string[]): void {
-        types.forEach((type) => {
-            switch (type) {
-                case 'statusTimeline':
-                    tooltip.statusTimeline.show = !tooltip.statusTimeline.show
-                    break
-                case 'votingRate':
-                    tooltip.votingRate.show = !tooltip.votingRate.show
-                    break
-                case 'countedVotes':
-                    tooltip.countedVotes.show = !tooltip.countedVotes.show
-                    break
-                default:
-                    break
-            }
-        })
+    function toggleTooltip(type: string, show: boolean): void {
+        switch (type) {
+            case 'statusTimeline':
+                tooltip.statusTimeline.show = show
+                break
+            case 'votingRate':
+                tooltip.votingRate.show = show
+                break
+            case 'countedVotes':
+                tooltip.countedVotes.show = show
+                break
+            default:
+                break
+        }
     }
 </script>
 
@@ -179,19 +176,13 @@
             >
                 {localize(`views.governance.events.status.${event?.status?.status}`)}
             </Text>
-            <button on:click={() => toggleTooltip(['statusTimeline'])} bind:this={tooltip.statusTimeline.anchor}>
+            <button
+                on:mouseenter={() => toggleTooltip('statusTimeline', true)}
+                on:mouseleave={() => toggleTooltip('statusTimeline', false)}
+                bind:this={tooltip.statusTimeline.anchor}
+            >
                 <Icon icon="info-filled" classes="ml-2 text-gray-400" />
             </button>
-            {#if tooltip.statusTimeline.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['statusTimeline'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="statusTimeline"
-                        anchor={tooltip.statusTimeline.anchor}
-                        position="right"
-                    />
-                </div>
-            {/if}
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
@@ -274,15 +265,25 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                <div bind:this={tooltip.votingRate.anchor}>
-                    <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
-                        {localize('views.governance.votingPower.title')}
-                    </Text>
-                    <Text type="h2" classes="inline-flex items-end">{account?.balance}</Text>
+                <div class="flex flex-col flex-wrap space-y-3">
+                    <div class="flex flex-row items-center space-x-2">
+                        <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                            {localize('views.governance.votingPower.title')}
+                        </Text>
+                        <button
+                            class="relative"
+                            on:mouseenter={() => toggleTooltip('votingRate', true)}
+                            on:mouseleave={() => toggleTooltip('votingRate', false)}
+                            bind:this={tooltip.votingRate.anchor}
+                        >
+                            <Icon icon="info-filled" classes="text-gray-400" />
+                        </button>
+                    </div>
+                    <Text type="h2">{account?.balance}</Text>
                 </div>
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.eventDetails.votingOpens')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">
@@ -292,7 +293,7 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming || event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.eventDetails.countingStarts')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">
@@ -302,55 +303,42 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Commencing}
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.eventDetails.countingLength')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
-                    <div bind:this={tooltip.countedVotes.anchor}>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
-                            {localize('views.governance.eventDetails.votesCounted')}
-                        </Text>
+                    <div class="flex flex-col flex-wrap space-y-3">
+                        <div class="flex flex-row items-center space-x-2">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                                {localize('views.governance.eventDetails.votesCounted')}
+                            </Text>
+                            <button
+                                class="relative"
+                                on:mouseenter={() => toggleTooltip('countedVotes', true)}
+                                on:mouseleave={() => toggleTooltip('countedVotes', false)}
+                                bind:this={tooltip.countedVotes.anchor}
+                            >
+                                <Icon icon="info-filled" classes="text-gray-400" />
+                            </button>
+                        </div>
                         <Text type="h3" classes="inline-flex items-end">{formatUnitBestMatch(accountVotes)}</Text>
                     </div>
                     <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-white" overrideColor>
+                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.eventDetails.votingProgress')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">{getDurationString(progress)}</Text>
                     </div>
                 {/if}
             </div>
-            <button class="ml-auto mt-0" on:click={() => toggleTooltip(['votingRate', 'countedVotes'])}>
-                <Icon icon="info-filled" classes="text-gray-400" />
-            </button>
-            {#if tooltip.votingRate.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['votingRate'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="votingRate"
-                        anchor={tooltip.votingRate.anchor}
-                        position="top"
-                    />
-                </div>
-            {/if}
-            {#if tooltip.countedVotes.show}
-                <div use:clickOutside on:clickOutside={() => toggleTooltip(['countedVotes'])}>
-                    <GovernanceInfoTooltip
-                        {event}
-                        type="countedVotes"
-                        anchor={tooltip.countedVotes.anchor}
-                        position="left"
-                    />
-                </div>
-            {/if}
         </DashboardPane>
     </div>
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
-            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-white" overrideColor>
+            <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-gray-500" overrideColor>
                 {localize('views.governance.eventDetails.currentResults')}
             </Text>
             <div class="w-full h-full flex justify-center space-x-16">
@@ -378,6 +366,16 @@
         </DashboardPane>
     {/if}
 </div>
+
+{#if tooltip.votingRate.show}
+    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="right" />
+{/if}
+{#if tooltip.countedVotes.show}
+    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+{/if}
+{#if tooltip.statusTimeline.show}
+    <GovernanceInfoTooltip {event} type="statusTimeline" anchor={tooltip.statusTimeline.anchor} position="right" />
+{/if}
 
 <style>
     .pulse {
