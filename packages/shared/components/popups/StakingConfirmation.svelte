@@ -11,7 +11,7 @@
         getStakingEventFromAirdrop,
         getUnstakedFunds,
     } from 'shared/lib/participation'
-    import { STAKING_AIRDROP_TOKENS } from 'shared/lib/participation/constants'
+    import { STAKING_AIRDROP_TOKENS, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import { participationAction } from 'shared/lib/participation/stores'
     import { isPartiallyStaked, selectedAccountParticipationOverview } from 'shared/lib/participation/account'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
