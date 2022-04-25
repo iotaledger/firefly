@@ -16,23 +16,30 @@
 
 <div class="grid">
     {#if network === 'IOTA Mainnet' || network === 'IOTA Devnet'}
-        <div bind:this={tooltipAnchor} class="bg-black {commonClasses}">
+        <div
+            on:mouseenter={() => _showTooltip(true)}
+            on:mouseleave={() => _showTooltip(false)}
+            bind:this={tooltipAnchor}
+            class="bg-black {commonClasses}"
+        >
             <Icon icon="iota" classes="text-white" />
         </div>
-        <Tooltip anchor={tooltipAnchor} position="right">
-            <Text type="p">{network}</Text>
-        </Tooltip>
+        {#if showTooltip}
+            <Tooltip anchor={tooltipAnchor} size="small" position="right">
+                <Text type="p">{network}</Text>
+            </Tooltip>
+        {/if}
     {:else if network === 'Shimmer Mainnet' || network === 'Shimmer Devnet'}
         <div
             on:mouseenter={() => _showTooltip(true)}
-            on:mouseleave={() => _showTooltip(true)}
+            on:mouseleave={() => _showTooltip(false)}
             bind:this={tooltipAnchor}
             class="bg-shimmer-highlight {commonClasses}"
         >
             <Icon icon="shimmer" classes="text-black" />
         </div>
         {#if showTooltip}
-            <Tooltip anchor={tooltipAnchor} overridePadding classes="py-2 px-2" position="right">
+            <Tooltip anchor={tooltipAnchor} size="small" position="right">
                 <Text type="p">{network}</Text>
             </Tooltip>
         {/if}
