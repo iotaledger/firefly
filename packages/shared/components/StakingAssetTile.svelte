@@ -28,7 +28,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { selectedAccount } from 'shared/lib/wallet'
-    import { activeProfile } from '../lib/profile'
+    import { activeProfile } from 'shared/lib/profile'
 
     export let asset: Asset
 
