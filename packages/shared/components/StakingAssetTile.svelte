@@ -28,6 +28,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { selectedAccount } from 'shared/lib/wallet'
+    import { activeProfile } from '../lib/profile'
 
     export let asset: Asset
 
@@ -49,6 +50,7 @@
 
     const FIAT_PLACEHOLDER = '---'
 
+    $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
     $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
