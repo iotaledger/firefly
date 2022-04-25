@@ -43,7 +43,7 @@
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const profileProtocol = ProfileProtocol.Iota
+    const profileProtocol = ProfileProtocol.Iota // TODO: add the real value from profile object or app constants
     const networkIcon = profileProtocol === ProfileProtocol.Iota ? 'iota' : 'shimmer'
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
