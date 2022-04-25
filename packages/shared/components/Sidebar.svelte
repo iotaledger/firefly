@@ -160,9 +160,18 @@
         class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-5 pt-10 border-solid border-r border-gray-100 dark:border-gray-800"
     >
         <nav class="flex flex-grow flex-col items-center justify-between">
-            <button class="mb-7 health-status" on:click={networkModal?.open}>
-                <Icon width="48" height="48" icon={networkIcon} classes="dark:text-white" />
-            </button>
+            <div class="flex flex-col items-center relative">
+                <button class="mb-7" on:click={networkModal?.open}>
+                    <Icon width="48" height="48" icon={networkIcon} classes="dark:text-white" />
+                </button>
+                {#if healthStatus !== 2}
+                    <Icon
+                        width="18"
+                        icon="warning-filled"
+                        classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500 absolute bottom-0"
+                    />
+                {/if}
+            </div>
             <div class="flex flex-col space-y-8">
                 {#each sidebarTabs as tab}
                     <div class="flex">
