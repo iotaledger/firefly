@@ -7,6 +7,7 @@
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from 'shared/lib/wallet'
+    import { openPopup } from '@lib/popup'
 
     export let classes = ''
 
@@ -18,7 +19,9 @@
         $accountRouter.goTo(AccountRoute.Send)
     }
     function handleReceiveClick() {
-        $accountRouter.goTo(AccountRoute.Receive)
+        openPopup({
+            type: 'receive',
+        })
     }
 
     function togglePreciseBalance() {
