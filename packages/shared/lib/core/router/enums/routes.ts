@@ -7,6 +7,8 @@ export enum AppRoute {
     Setup = 'setup',
     // TODO: ledger replace create
     Create = 'create',
+    Network = 'network',
+    CustomNetwork = 'customNetwork',
     Secure = 'secure',
     Password = 'password',
     LedgerSetup = 'ledgerSetup',

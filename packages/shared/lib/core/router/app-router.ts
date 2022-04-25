@@ -1,4 +1,4 @@
-import { activeProfile, login, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import { activeProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { mobile } from '@core/app'
 import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
 import { SetupType } from '@lib/typings/setup'
@@ -7,6 +7,7 @@ import { get, writable } from 'svelte/store'
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
+import { NetworkType } from '@core/network/enums'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -86,6 +87,23 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Create: {
+                nextRoute = AppRoute.Network
+                break
+            }
+            case AppRoute.Network: {
+                const profileType = get(activeProfile)?.type
+                const profileNetworkType = get(activeProfile)?.settings?.networkConfig?.network?.type
+                // TODO: check if that is the correct field to check
+                if (profileNetworkType === NetworkType.PrivateNet) {
+                    nextRoute = AppRoute.CustomNetwork
+                } else if (profileType === ProfileType.Software) {
+                    nextRoute = AppRoute.Secure
+                } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
+                    nextRoute = AppRoute.Protect
+                }
+                break
+            }
+            case AppRoute.CustomNetwork: {
                 const profileType = get(activeProfile)?.type
                 if (profileType === ProfileType.Software) {
                     nextRoute = AppRoute.Secure
