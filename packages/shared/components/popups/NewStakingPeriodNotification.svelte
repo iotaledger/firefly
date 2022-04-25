@@ -1,20 +1,29 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
+    import { formatDate, LocaleArguments, localize } from '@core/i18n'
     import { getAccountParticipationAbility } from '@lib/participation/participation'
-    import { stakingEventState } from '@lib/participation/stores'
-    import { AccountParticipationAbility, ParticipationEventState } from '@lib/participation/types'
+    import { assemblyStakingEventState, shimmerStakingEventState } from '@lib/participation/stores'
+    import { AccountParticipationAbility } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
     import { selectedAccount } from '@lib/wallet'
-    import { Button, Icon, Illustration, Text } from 'shared/components'
+    import { Button, Illustration, Text, TextHint } from 'shared/components'
+    import { ASSEMBLY_EVENT_START_DATE, isStakingPossible, LAST_ASSEMBLY_STAKING_PERIOD } from '@lib/participation'
+
+    function getLocaleArguments(): LocaleArguments {
+        return {
+            values: {
+                periodNumber: LAST_ASSEMBLY_STAKING_PERIOD + 1,
+                date: formatDate(ASSEMBLY_EVENT_START_DATE, { format: 'long' }),
+            },
+        }
+    }
 
     function handleOk(): void {
-        const canStake =
-            $stakingEventState === ParticipationEventState.Commencing ||
-            $stakingEventState === ParticipationEventState.Holding
+        const isStakingPossibleForAssembly = isStakingPossible($assemblyStakingEventState)
+        const isStakingPossibleForShimmer = isStakingPossible($shimmerStakingEventState)
         const cannotStake =
             getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
 
-        if (canStake && !cannotStake) {
+        if ((isStakingPossibleForAssembly || isStakingPossibleForShimmer) && !cannotStake) {
             openPopup({
                 type: 'stakingManager',
             })
@@ -24,15 +33,18 @@
     }
 </script>
 
-<Illustration illustration="staking-notification" classes="mb-6 mt-3" />
-<Text type="h3" classes="mb-4">{localize('popups.newStakingPeriodNotification.title')}</Text>
-<Text type="p" secondary classes="mb-6">{localize('popups.newStakingPeriodNotification.body')}</Text>
-<div class="flex items-center justify-between bg-blue-50 dark:bg-gray-800 p-3 rounded-2xl mb-6">
-    <div class="flex flex-row items-center space-x-3">
-        <Icon icon="info" boxed classes="text-blue-500" />
-        <Text type="p" secondary>{localize('popups.newStakingPeriodNotification.info')}</Text>
-    </div>
-</div>
+<Illustration illustration="staking-notification" classes="mb-4" />
+<Text type="h3" classes="mb-2">{localize('popups.newStakingPeriodNotification.title', getLocaleArguments())}</Text>
+<Text type="p" secondary classes="mb-4"
+    >{localize('popups.newStakingPeriodNotification.body', getLocaleArguments())}</Text
+>
+<TextHint
+    classes="p-4 mb-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
+    icon="info"
+    iconClasses="fill-current text-blue-500"
+    hint={localize('popups.newStakingPeriodNotification.info')}
+    hintClasses="text-gray-500 dark:text-gray-500"
+/>
 <div class="flex flex-row space-x-2">
     <Button classes="w-full" onClick={handleOk}>
         {localize('actions.okIUnderstand')}

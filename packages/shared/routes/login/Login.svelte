@@ -26,7 +26,7 @@
 
 {#if $loginRoute === LoginRoute.Init}
     <Transition>
-        <SelectProfile on:next={next} on:previous={previous} {locale} />
+        <SelectProfile on:next={next} on:previous={previous} />
     </Transition>
 {:else if $loginRoute === LoginRoute.EnterPin}
     <Transition>

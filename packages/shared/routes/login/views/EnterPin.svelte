@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { initAppSettings } from 'shared/lib/appSettings'
+    import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
-    import { popupState } from 'shared/lib/popup'
+    import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
@@ -12,6 +12,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { ProfileType } from '../../../lib/typings/profile'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
 
     export let locale: Locale
 
@@ -28,6 +29,26 @@
     const WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS = 30
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
+
+    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTos()) {
+        openPopup({
+            type: 'legalUpdate',
+            hideClose: true,
+            preventClose: true,
+        })
+    }
+
+    /**
+     * NOTE: We check for mobile because it's only necessary
+     * for existing desktop installation.
+     */
+    $: if ($popupState?.type === null && !$popupState?.active && !$mobile && !$isAwareOfCrashReporting) {
+        openPopup({
+            type: 'crashReporting',
+            hideClose: true,
+            preventClose: true,
+        })
+    }
 
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
@@ -82,7 +103,7 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then((machineId) =>
-                            getProfileDataPath(profile.name).then((path) => {
+                            getProfileDataPath(profile.id).then((path) => {
                                 initialise(profile.id, path, sendCrashReports, machineId)
                                 api.setStoragePassword(pinCode, {
                                     onSuccess() {

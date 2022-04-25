@@ -1,6 +1,7 @@
 import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
 import { NetworkConfig } from './network'
+import { AccountStakingRewards } from '@lib/participation/types'
 
 export interface MigratedTransaction {
     address: string
@@ -17,6 +18,7 @@ export interface Profile {
     id: string
     name: string
     type: ProfileType
+    protocol: ProfileProtocol
     /**
      * Time for most recent stronghold back up
      */
@@ -33,8 +35,10 @@ export interface Profile {
     hasVisitedStaking?: boolean
     lastShimmerPeriodVisitedStaking?: number
     lastAssemblyPeriodVisitedStaking?: number
-    accounts?: ProfileAccount[]
     lastUsedAccountId?: string
+    accounts?: ProfileAccount[]
+    stakingRewards?: AccountStakingRewards[]
+    hasFinishedSingleAccountGuide?: boolean
 }
 
 /**
@@ -57,6 +61,14 @@ export enum ProfileType {
     Software = 'Software',
     Ledger = 'Ledger',
     LedgerSimulator = 'LedgerSimulator',
+}
+
+/**
+ * Profile protocols
+ */
+export enum ProfileProtocol {
+    Iota = 'IOTA',
+    Shimmer = 'Shimmer',
 }
 
 /**

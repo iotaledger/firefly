@@ -1,9 +1,7 @@
 <script lang="typescript">
-    import { Badge, Icon, Text } from 'shared/components'
+    import { Badge, Chip, Icon, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { localize } from '@core/i18n'
 
     export let classes = undefined
 
@@ -14,7 +12,11 @@
     export let isLedgerProfile = false
     export let bgColor: string
 
-    export let onClick: (id: string) => void | string
+    export let onClick: undefined | ((id: string) => void) = undefined
+
+    function handleOnClick() {
+        onClick && onClick(id)
+    }
 
     const slots = $$props.$$slots
 
@@ -30,10 +32,10 @@
 </script>
 
 <div class="flex items-center justify-center w-24">
-    <div class="flex flex-col justify-between items-center">
+    <div class="flex flex-col justify-between items-center space-y-3">
         <div class="relative">
             <div
-                on:click={() => onClick(id)}
+                on:click={() => handleOnClick()}
                 class="h-20 w-20 {bgColor
                     ? `bg-${bgColor}-500`
                     : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
@@ -46,7 +48,7 @@
             </div>
             <Badge {network} />
         </div>
-        <div class="mt-5 flex flex-row items-baseline space-x-1.5">
+        <div class="flex flex-row items-baseline space-x-1.5">
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
@@ -58,9 +60,7 @@
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
         {#if isDeveloper}
-            <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1 mt-3">
-                <Text type="p" smaller classes="text-white">{locale('general.dev').toUpperCase()}</Text>
-            </div>
+            <Chip label={localize('general.dev')} />
         {/if}
     </div>
 </div>

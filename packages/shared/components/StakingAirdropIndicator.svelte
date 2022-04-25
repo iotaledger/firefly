@@ -1,7 +1,11 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { selectedAccountParticipationOverview, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        selectedAccountParticipationOverview,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
     import {
         AccountParticipationOverview,
         ParticipationEventState,
@@ -17,10 +21,14 @@
         return overview?.shimmerStakedFunds > 0
     }
 
+    const isAssembly = airdrop === StakingAirdrop.Assembly
+    let stakingEventState = ParticipationEventState.Inactive
+    $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
     $: isStaked = isStakedForAirdrop($selectedAccountParticipationOverview)
     $: showIndicator =
-        $stakingEventState === ParticipationEventState.Commencing ||
-        $stakingEventState === ParticipationEventState.Holding
+        stakingEventState === ParticipationEventState.Commencing ||
+        stakingEventState === ParticipationEventState.Holding
 </script>
 
 {#if showIndicator}

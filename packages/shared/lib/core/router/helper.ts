@@ -10,6 +10,7 @@ import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { SettingsRouter, settingsRouter } from './settings-router'
 import { ledgerRouter, LedgerRouter } from './subrouters'
+import { clearSendParams } from '@lib/app'
 
 export const initRouters = (): void => {
     appRouter.set(new AppRouter())
@@ -27,11 +28,17 @@ export const resetRouters = (): void => {
     isDeepLinkRequestActive.set(false)
 }
 
-export const resetWalletRoute = (): void => {
-    get(dashboardRouter).reset()
-    get(accountRouter).reset()
-
+export const resetAccountRouter = (resetPanels: boolean = true): void => {
+    if (resetPanels) {
+        get(accountRouter).reset()
+        clearSendParams()
+    }
     selectedMessage.set(null)
+}
+
+export const resetWalletRoute = (): void => {
+    resetAccountRouter()
+    get(dashboardRouter).reset()
 }
 
 export const openSettings = (): void => {

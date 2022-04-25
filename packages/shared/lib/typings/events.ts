@@ -83,7 +83,7 @@ export enum ErrorType {
     WrongLedgerSeedError = 'WrongLedgerSeedError',
 
     // Dust output
-    DustError = 'DustError',
+    LeavingDustError = 'LeavingDustError',
 }
 
 export enum LedgerErrorType {
