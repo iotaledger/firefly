@@ -548,14 +548,14 @@ async function fetchStakingResult(
 
     try {
         const stakingResultResponse = await fetch(STAKING_RESULT_URL + stakingResultFileName, getJsonRequestOptions())
-        return stakingResultResponse.json()
+        return await stakingResultResponse.json()
     } catch (err) {
         try {
             const backupStakingResultResponse = await fetch(
                 BACKUP_STAKING_RESULT_URL + stakingResultFileName,
                 getJsonRequestOptions()
             )
-            return backupStakingResultResponse.json()
+            return await backupStakingResultResponse.json()
         } catch (_err) {
             console.error(`Unable to fetch staking results for ${stakingResultFileName}`)
             addError({
