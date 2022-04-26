@@ -205,7 +205,7 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
         clientOptions: {
             nodes: [
                 {
-                    url: 'http://localhost:14265/',
+                    url: 'https://api.alphanet.iotaledger.net:14265/',
                     auth: null,
                     disabled: false,
                 },
@@ -646,7 +646,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     const messages: {
         [key: string]: AccountMessage
     } = {}
-
+    console.log('Account:', account)
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload?.type === 'Transaction') {
