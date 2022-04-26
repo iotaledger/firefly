@@ -84,11 +84,11 @@
     </div>
     <div class="flex flex-col flex-wrap items-start mt-6">
         <div on:click={togglePreciseStakedAmount}>
-            <Text type="h1" classes="break-all">
+            <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
                 {showPreciseStakedAmount
                     ? formatUnitPrecision(canParticipateInEvent ? $stakedAmount : 0, Unit.Mi)
                     : formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0, true, 3)}
-            </Text>
+            </h1>
         </div>
         {#if canParticipateInEvent}
             <Text type="p">{formatUnitBestMatch($unstakedAmount)} {localize('general.unstaked')}</Text>

@@ -40,11 +40,11 @@
         {/if}
         <div class="flex flex-col flex-wrap items-start mt-6">
             <div on:click={togglePreciseBalance}>
-                <Text type="h1" classes="break-all">
+                <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
-                </Text>
+                </h1>
             </div>
             <Text type="p">
                 {$selectedAccount?.balanceEquiv}
