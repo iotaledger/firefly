@@ -35,8 +35,6 @@
 </script>
 
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
-
     export let type = TextType.p
     export let fontSize: string = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
@@ -64,6 +62,7 @@
     const DISABLED_TEXT_DARK_COLOUR = TEXT_PREFIX + 'gray-600'
     const HIGHLIGHT_TEXT_COLOUR = TEXT_PREFIX + 'blue-500'
     const SECONDARY_TEXT_COLOUR = TEXT_PREFIX + 'gray-500'
+
     interface ICustomClass {
         fontWeight: FontWeightNumber | FontWeightText
         color: string
