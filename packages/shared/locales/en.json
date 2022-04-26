@@ -848,7 +848,9 @@
         "votingConfirmation": {
             "additionalInfo": "Please be aware that changing or stopping your vote during the counting period won't impact any votes that have been counted prior to this change.",
             "votesSubmitted": "Your votes are submitted",
-            "votesStopped": "Your vote has been stopped"
+            "votesStopped": "Your vote has been stopped",
+            "votedSuccessfully": "You have started casting your vote for {account}.",
+            "unvotedSuccessfully": "You have stopped voting with {account}."
         },
         "shimmer-info": {
             "title": "About Shimmer",

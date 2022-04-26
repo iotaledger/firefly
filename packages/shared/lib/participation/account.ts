@@ -12,9 +12,10 @@ import {
     participationOverview,
     shimmerStakingEventState,
     shimmerStakingRemainingTime,
+    participationEvents,
 } from './stores'
 import { AccountParticipationOverview, ParticipationEventState, StakingAirdrop } from './types'
-import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER } from './constants'
+import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER, TREASURY_VOTE_EVENT_ID } from './constants'
 
 // TODO: This is a temporary workaround because of circular dependency
 export const selectedAccountParticipationOverview = derived(
@@ -90,6 +91,21 @@ export const partiallyUnstakedAmount: Readable<number> = derived(
                 : 0
 
         return Math.max(assemblyPartialFunds, shimmerPartialFunds)
+    }
+)
+
+export const currentAccountTreasuryVoteValue = derived(
+    [selectedAccountParticipationOverview, participationEvents],
+    ([$selectedAccountParticipationOverview, $participationEvents]) => {
+        const event = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
+        if (event) {
+            const participation = $selectedAccountParticipationOverview?.participations?.find(
+                (participation) => participation.eventId === event.eventId
+            )
+            return participation?.answers[0] ?? null
+        } else {
+            return null
+        }
     }
 )
 

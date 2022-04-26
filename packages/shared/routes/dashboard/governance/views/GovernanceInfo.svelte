@@ -17,6 +17,6 @@
         on:click={() => Electron.openUrl('https://iotatreasury.org/how-voting-works.html')}
     >
         <Text type="p">{localize('views.governance.info.link')}</Text>
-        <Icon icon="chevron-right" classes="flex-shrink-0 text-gray-700 dark:text-white" />
+        <Icon icon="chevron-right" classes="flex-shrink-0 text-gray-700 dark:text-gray-500" />
     </button>
 </div>
