@@ -65,7 +65,7 @@
             if (nameChanged || hasDeveloperProfileChanged) {
                 storeProfile(name, isDeveloperProfile)
 
-                const path = await getProfileDataPath($newProfile.name)
+                const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
                 initialise($newProfile.id, path, sendCrashReports, machineId)

@@ -3,20 +3,17 @@
     import { localize } from '@core/i18n'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getAccountParticipationAbility, isStakingPossible } from 'shared/lib/participation'
+    import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
     import {
+        assemblyStakingEventState,
         isPartiallyStaked,
         partiallyUnstakedAmount,
         participationAction,
+        shimmerStakingEventState,
         stakedAmount,
-        stakingEventState,
         unstakedAmount,
     } from 'shared/lib/participation/stores'
-    import {
-        AccountParticipationAbility,
-        ParticipationAction,
-        ParticipationEventState,
-    } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -24,7 +21,8 @@
 
     $: showSpinner = !!$participationAction || $isSyncing
 
-    $: canParticipateInEvent = isStakingPossible($stakingEventState)
+    $: canParticipateInEvent =
+        isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)
 
     $: cannotStake = getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
 
@@ -58,9 +56,8 @@
             return
         }
 
-        const showNotice =
-            $stakingEventState === ParticipationEventState.Upcoming ||
-            $stakingEventState === ParticipationEventState.Commencing
+        const showNotice = isNewStakingEvent($assemblyStakingEventState) || isNewStakingEvent($shimmerStakingEventState)
+
         const type = !isStakedAndCanParticipate && showNotice ? 'newStakingPeriodNotification' : 'stakingManager'
 
         openPopup({ type })
@@ -75,7 +72,7 @@
     }
 </script>
 
-<div class="p-5 flex flex-col justify-between space-y-6 w-full h-full">
+<div class="p-6 flex flex-col justify-between space-y-6 w-full h-full">
     <div class="flex flex-col justify-between">
         <div class="flex flex-row justify-between items-start">
             <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">

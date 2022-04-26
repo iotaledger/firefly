@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Motiv",
                 "description": "",
-                "advice": "You must restart Firefly for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Jazyk",
@@ -461,49 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v. {version}",
-                    "upToDate": "Aktuální",
-                    "outOfDate": "Zastaralá"
-                },
-                "hardwareDevice": {
-                    "title": "Hardwarové zařízení",
-                    "statuses": {
-                        "appNotOpen": "Aplikace IOTA není otevřena",
-                        "connected": "Připojeno",
-                        "legacyConnected": "Otevřená aplikace {legacy}",
-                        "locked": "Zamknuto",
-                        "mnemonicMismatch": "Špatný Ledger nebo mnemotechnika",
-                        "notDetected": "Nezjištěno",
-                        "otherConnected": "Aplikace otevřená"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Stav peněženky",
-                    "locked": "Zamknuto",
-                    "unlocked": "Odemknuto"
-                },
-                "strongholdBackup": {
-                    "title": "Záloha peněženky",
-                    "weeksAgo": "před {weeks, plural, one {# týdnem} other {# týdny}}"
-                }
-            },
             "network": {
-                "networkOperational": "Síť v provozu",
-                "networkDegraded": "Zhoršená funkčnost sítě",
-                "networkDown": "Sít odpojena",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
                 "referencedRate": "Odkazovaná míra"
             },
             "profileModal": {
                 "allSettings": "Všechna nastavení",
-                "logout": "Odhlásit se"
+                "logout": "Odhlásit se",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Naposledy jste zálohovali {date}",
+                    "notBackedUp": "Zatím nezálohováno",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Stakování",
             "welcome": "Vítejte na nástěnce stakingu!",
             "status": {
                 "upcoming": "Událost nebyla spuštěna",
@@ -517,23 +516,29 @@
                 "stakedFunds": "Stakované prostředky"
             },
             "info": {
-                "upcomingSubheader": "Událost ještě nezačala",
-                "upcomingHeader": "Zkuste později",
-                "commencingSubheader": "Připravte se na stakování",
-                "commencingHeader": "Před-stakujte své tokeny!",
-                "holdingSubheaderHolding": "Nyní získáváte odměnu za stakování",
-                "holdingSubheaderNotHolding": "Získat odměnu za stakování IOTY",
-                "holdingHeaderHolding": "{duration} zbývá",
-                "holdingHeaderNotHolding": "Stakujte své tokeny!",
-                "endedSubheader": "Stakování nyní skončilo",
-                "endedHeader": "Děkujeme!",
-                "inactiveHeader": "Zkuste změnit Node",
-                "inactiveSubheader": "Nelze detekovat stakování"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Zbývá",
                 "commencing": "Do začátku stakingu",
-                "collectedRewards": "Nashromážděné odměny",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly je permissionless, vysoce škálovatelná multi-chain síť pro vytváření a zavádění sestavitelných chytrých smluv. Assembly je budoucností web3. "
@@ -542,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Zkušební síť pro inovace IOTA. Cokoli se stane, stane se. Jak se vyvíjí Shimmer, záleží na vás."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -566,7 +575,8 @@
             "upToDateDescription": "Používáte nejnovější a nejbezpečnější verzi Firefly.",
             "updateAvailable": "Je možné aktualizovat Firefly",
             "updateDetails": "Verze {version} - {date}",
-            "noAutoUpdate": "Automatická aktualizace je v této verzi Windows zakázána, stáhněte si aktualizaci prosím https://firefly.iota.org."
+            "noAutoUpdate": "Automatická aktualizace je v této verzi Windows zakázána, stáhněte si aktualizaci prosím https://firefly.iota.org.",
+            "preReleaseDescription": "Používáte předverzi Firefly. Aktualizace jsou zakázány."
         },
         "backup": {
             "title": "Poslední záloha: {date}",
@@ -665,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Hledač zůstatku",
-            "body": "Proveďte vyčerpávající vyhledávání adres pro nalezení chybějících zůstatků. Může to chvíli trvat.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Celkový zůstatek",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Zadejte své heslo pro povolení vyhledávání."
         },
         "riskFunds": {
@@ -737,29 +751,29 @@
             "title": "Exportovat historii transakcí",
             "body": "Exportovat historii transakcí pro vybranou peněženku. Exportovaný soubor bude ve formátu .csv.",
             "profileName": "Název profilu:",
-            "accountName": "Název účtu:",
+            "accountName": "Wallet name:",
             "typePassword": "Zadejte heslo pro povolení exportu"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking zatím nezačal",
-            "commencingDate": "Staking zatím nezačal",
-            "body": "Pomocí pre-staking vašich prostředků, než stakování začne, automaticky začnete dostávat odměny, když stakování začne.",
-            "ok": "Ano, rozumím"
         },
         "stakingManager": {
             "title": "Správa stakování",
             "description": "Stakováním peněženky, pošlete transakci sami sobě a označíte vaše prostředky jako \"stakované\". Tokeny můžete kdykoliv převést, ale nebudete nadále dostávat odměny za stakování.",
             "totalFundsStaked": "Celkem stakovaných prostředků",
             "stakedSuccessfully": "Vaše finanční prostředky byly stakovány do {account}.",
-            "unstakedSuccessfully": "Vaše finanční prostředky byly odstakovány z {account}."
+            "unstakedSuccessfully": "Vaše finanční prostředky byly odstakovány z {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Spoluúčast na Airdrop",
+            "title": "Confirm Participation",
             "subtitleStake": "Chystáte se stakovat",
             "subtitleMerge": "Chystáte se sloučit",
-            "bodyStake": "Pokud se nechcete účastnit obou airdropů, můžete se rozhodnout o neúčasti níže. Můžete kdykoliv zrušit anebo započít stakování.",
-            "bodyMerge": "Vaše prostředky budou stakovány pro získání {airdrop}. Chcete-li zvolit, na kterých airdropech se chcete podílet, zvolte, které chcete dostávat a volbu uložte.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Odhadované odměny"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "O Shimmer",
@@ -789,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -911,7 +930,9 @@
         "manageStake": "Správa stakování",
         "merge": "Sloučit",
         "mergeFunds": "Sloučit prostředky",
-        "done": "Hotovo"
+        "done": "Hotovo",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Heslo",
@@ -959,7 +980,6 @@
         "darkTheme": "Tmavý",
         "systemTheme": "Systém",
         "balance": "Zůstatek",
-        "accountBalance": "Zůstatek peněženky",
         "all": "Vše",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
@@ -970,6 +990,7 @@
         "profiles": "Profily",
         "dev": "Vývojář",
         "createAccount": "Vytvořit peněženku",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Název peněženky",
         "latestTransactions": "Poslední transakce",
         "transactions": "Transakce",
@@ -1028,14 +1049,20 @@
         "creatingProfile": "Vytváření účtu, čekejte prosím...",
         "fundMigration": "Migrace prostředků",
         "accountRemoved": "Tato peněženka je skrytá. Chcete-li provádět přenos, odkryjte ji.",
-        "receivingTo": "Přijímání do {account}",
-        "sendingFrom": "Odesílání z {account}",
-        "receivedTo": "Příjmuto do {account}",
-        "sentFrom": "Odesláno z {account}",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "Stakováno na {account}",
         "unstakedFor": "Zrušeno stakování na {account}",
         "votedFor": "Zvoleno pro {account}",
         "unvotedFor": "Zrušená volba pro {account}",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
         "receiving": "Přijímání",
         "sending": "Odesílání",
         "legacyNetwork": "Zastaralá síť",
@@ -1051,7 +1078,8 @@
         "notStaked": "Nestakováno",
         "stakedFunds": "Stakované prostředky",
         "unstakedFunds": "Prostředky, které byly stakovány",
-        "accountColor": "Barva peněženky"
+        "accountColor": "Barva peněženky",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "Dnes",
@@ -1098,7 +1126,10 @@
                     "success": "Údaje o platbě přidány z odkazu IOTA"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1222,14 +1253,16 @@
             "cannotFindStakingEvent": "Nelze najít stakovací událost.",
             "cannotVisitAirdropWebsite": "Web {airdrop} nelze otevřít.",
             "invalidStakingEventId": "Neplatné ID stakování."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Použití uzlů přes HTTP ponechává provoz nešifrovaný a může představovat bezpečnostní riziko."
         },
         "participation": {
-            "noAccounts": "Nemáte žádné IOTA tokeny."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1241,37 +1274,10 @@
             "low": "Nízké",
             "veryLow": "Velmi nízké"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Stakování zatím nebylo zahájeno",
-                "body": "Vraťte se později. Stakování ještě nebylo zahájeno."
-            },
-            "commencing": {
-                "title": "Možnost stakování je nyní zahájena",
-                "body": "Začněte stakovat vaše tokeny, automaticky začnete dostávat odměny každých 10 sekund."
-            },
-            "activeHolding": {
-                "title": "Stakování je nyní aktivní",
-                "body": "Dobrá práce. Dostanete odměnu každých 10 sekund."
-            },
-            "inactiveHolding": {
-                "title": "Stakování je právě zahájeno",
-                "body": "Stakujte IOTA tokeny pro příjem odměn každých 10 vteřin."
-            },
-            "inactive": {
-                "title": "Nebyly zaznamenány žádné události stakování",
-                "body": "Otevřete nastavení sítě v Pokročilém nastavení a ujistěte se, že aktuální uzel má funkci \"účast\" kliknutím na tlačítko \"Zobrazit informace\"."
-            },
-            "ended": {
-                "title": "Stakování nyní skončilo",
-                "bodyAboveRewardMin": "Odměny Assembly a Shimmer budou distribuovány do vašich peněženek při spuštění jednotlivých sítí.",
-                "bodyBelowRewardMin": "Nestakujete dostatek IOTA tokenů, abyste dosáhli minimální odměny."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Nové nestakované prostředky: {amount}",
             "titleNoFunds": "Nové nestakované prostředky",
-            "preBody": "Obdrželi jste tokeny na stakované peněžence.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "Je potřeba tyto nové finanční prostředky začít manuálně stakovat, abyste mohli dostávat odměny."
         },
         "stakingMinRewards": {
@@ -1306,5 +1312,9 @@
             "request": "Potřebujeme Vaše oprávnění k použití fotoaparátu, abychom mohli naskenovat QR kód.",
             "requestInAppSettings": "Pokud chcete udělit oprávnění pro používání fotoaparátu k naskenování QR kódů, povolte jej v nastavení aplikace."
         }
+    },
+    "tabs": {
+        "wallet": "Peněženka",
+        "staking": "Stakování"
     }
 }

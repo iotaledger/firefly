@@ -1,17 +1,16 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
+    import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { appSettings } from 'shared/lib/appSettings'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
+    import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { dashboardRoute, DashboardRoute } from '@core/router'
 
     const { accountsLoaded } = $wallet
 
-    $: showingDashboard = $accountsLoaded && $popupState.type !== 'busy'
-    $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+    $: showingDashboard = $appRoute === AppRoute.Dashboard && $accountsLoaded && $popupState.type !== 'busy'
     $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
     let os = ''
@@ -40,20 +39,18 @@
 </script>
 
 <div class="h-full w-full">
-    {#if os === 'win32'}
-        <nav
-            class={`fixed z-10 left-0 right-0 top-0 flex flex-row h-12 justify-between ${
-                showingDashboard && !showingSettings ? 'bg-gray-50' : 'bg-white'
-            } dark:bg-gray-900`}
-        >
-            <div class="absolute left-16 top-1 right-36 h-9" style="-webkit-app-region: drag" />
+    <nav
+        class="flex flex-row justify-between fixed z-10 top-0 left-0 right-0 w-full h-9 transition-none {showingDashboard
+            ? 'bg-gray-200 dark:bg-gray-1000 border-solid border-b border-gray-300 dark:border-gray-1000'
+            : 'bg-transparent'}"
+        style="-webkit-app-region: drag"
+    >
+        {#if os === 'win32'}
+            <!-- We need to add this div to allow fix the windows resize area issue due to -webkit-app-region: drag -->
+            <div class="h-1 absolute top-0 left-20" style="width: calc(100% - 14rem); -webkit-app-region: none" />
             <button
                 on:click={() => Platform.popupMenu()}
-                class={`flex justify-center p-4 stroke-current text-gray-500 dark:text-gray-100 w-20 ${
-                    showingDashboard
-                        ? 'bg-white dark:bg-gray-800 border-solid border-r border-gray-100 dark:border-gray-800'
-                        : ''
-                }`}
+                class="flex justify-center items-center p-3 stroke-current text-gray-500 dark:text-gray-100 w-20"
                 style="-webkit-app-region: none"
             >
                 <svg width="16" height="16" viewBox="0 0 16 16">
@@ -62,11 +59,10 @@
                     <rect y="12" width="16" height="1" rx="0.5" fill="currentColor" />
                 </svg>
             </button>
-            <div class="flex flex-row mr-3">
+            <div class="flex flex-row justify-end space-x-2 w-36 pr-6" style="-webkit-app-region: none">
                 <button
                     on:click={() => Platform.minimize()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16">
                         <rect x="2" y="8" width="12" height="1" rx="0.5" fill="currentColor" />
@@ -75,7 +71,6 @@
                 <button
                     on:click={async () => (isMaximized = await Platform.maximize())}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100 fill-current"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         {#if isMaximized}
@@ -109,7 +104,6 @@
                 <button
                     on:click={() => Platform.close()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
-                    style="-webkit-app-region: none"
                 >
                     <svg width="16" height="16" viewBox="0 0 16 16">
                         <path
@@ -123,15 +117,9 @@
                     </svg>
                 </button>
             </div>
-            {#if showingPopup}
-                <div class="fixed z-10 left-0 right-0 h-12 bg-gray-800 opacity-40" />
-            {/if}
-        </nav>
-    {/if}
-    {#if os === 'darwin'}
-        <div style="-webkit-app-region: drag" class="w-full h-8 fixed left-20" />
-    {/if}
-    <div class={`fixed ${os === 'win32' ? 'top-12' : 'top-0'} left-0 right-0 bottom-0`}>
+        {/if}
+    </nav>
+    <div class="fixed {os === 'win32' || showingDashboard ? 'top-9' : 'top-0'} left-0 right-0 bottom-0 z-10">
         <slot />
     </div>
 </div>

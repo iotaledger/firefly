@@ -1,11 +1,24 @@
 <script lang="typescript">
-    import { Drawer, Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Text } from 'shared/components'
+    import {
+        Drawer,
+        Icon,
+        NetworkIndicator,
+        ProfileActionsModal,
+        SidebarTab,
+        Text,
+        Modal,
+        PingingBadge,
+    } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { getInitials } from 'shared/lib/helpers'
+    import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
-    import { partiallyUnstakedAmount, stakingEventState } from 'shared/lib/participation/stores'
-    import { activeProfile } from 'shared/lib/profile'
+    import {
+        assemblyStakingEventState,
+        partiallyUnstakedAmount,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
+    import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import {
         dashboardRoute,
         dashboardRouter,
@@ -18,11 +31,12 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { Locale } from '@core/i18n'
+    import { versionDetails } from '@lib/appUpdater'
 
     export let locale: Locale
 
-    let showNetwork = false
-    let showProfile = false
+    let networkModal: Modal
+    let profileModal: Modal
     let drawer: Drawer
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
@@ -31,9 +45,16 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
-    $: $dashboardRoute, $stakingEventState, $partiallyUnstakedAmount, manageUnstakedAmountNotification()
+    $: $dashboardRoute,
+        $assemblyStakingEventState,
+        $shimmerStakingEventState,
+        $partiallyUnstakedAmount,
+        manageUnstakedAmountNotification()
 
     $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
+    $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
+    $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
         {
@@ -64,7 +85,7 @@
     }
 
     function manageUnstakedAmountNotification() {
-        if (isStakingPossible($stakingEventState)) {
+        if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
             if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
@@ -144,7 +165,7 @@
                 {/each}
             </div>
             <span class="flex flex-col items-center">
-                <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                <button class="mb-7 health-status" on:click={networkModal?.open}>
                     <Icon
                         width="24"
                         height="24"
@@ -153,22 +174,25 @@
                     />
                 </button>
                 <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
-                    on:click={() => (showProfile = true)}
+                    class="w-8 h-8 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                    on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
+                    {#if !$hasEverOpenedProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
+                        <PingingBadge innerColor="red-500" outerColor="red-500" />
+                    {/if}
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:isActive={showNetwork} {locale} />
-        <ProfileActionsModal bind:isActive={showProfile} {locale} />
+        <NetworkIndicator bind:modal={networkModal} {locale} />
+        <ProfileActionsModal bind:modal={profileModal} {locale} />
     </aside>
 {/if}
 
 <style type="text/scss">
     :global(body.platform-win32) aside {
-        @apply -top-12;
-        @apply pt-12;
+        @apply -top-0;
+        @apply pt-10;
     }
     .menu-button {
         position: absolute;

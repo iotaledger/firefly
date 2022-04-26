@@ -84,7 +84,7 @@
                             />
                         </button>
                     {/if}
-                    <div data-label="leftpane-content" class="h-full">
+                    <div data-label="leftpane-content" class="h-full flex flex-col flex-wrap">
                         <div class="mb-5">
                             <slot name="title" />
                         </div>

@@ -87,16 +87,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.name)
+                getProfileDataPath($activeProfile.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog(
-                                  $migrationLog,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
-                              )
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
                               )
                     )
                     .then((result) => {

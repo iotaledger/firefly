@@ -15,6 +15,7 @@
     export let refresh: boolean = false // prop used to refresh the tooltip position
     export let offset: number = 10
     export let inlineStyle: string = ''
+    export let size: 'small' | 'medium' | undefined = 'medium'
 
     let tooltip: HTMLElement
     let top = 0
@@ -70,7 +71,9 @@
 </script>
 
 <tooltip
-    class="fixed text-center z-10 py-4 px-4 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {classes}"
+    class="{size} shadow-elevation-4 fixed text-center z-10 {size === 'small'
+        ? 'px-2 py-1 rounded-md'
+        : 'p-4 rounded-xl'} w-auto max-w-60 shadow-lg border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {classes}"
     class:darkmode={darkModeEnabled}
     style="top: {top}px; left:{left}px; {inlineStyle}"
     bind:this={tooltip}
@@ -84,7 +87,6 @@
 <style type="text/scss">
     tooltip {
         max-width: 300px;
-        box-shadow: 0 20px 25px 7px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         triangle,
         inner-triangle {
             @apply h-0;
@@ -171,6 +173,52 @@
                 left: unset;
                 right: -20px;
                 @apply -rotate-90;
+            }
+        }
+        &.small {
+            triangle,
+            inner-triangle {
+                @apply border-4;
+                @apply border-b-0;
+            }
+            &.top {
+                triangle {
+                    bottom: -4px;
+                }
+                inner-triangle {
+                    bottom: 5px;
+                    left: -4px;
+                }
+            }
+            &.bottom {
+                triangle {
+                    top: -4px;
+                }
+                inner-triangle {
+                    top: -5px;
+                    left: -4px;
+                }
+            }
+            &.right,
+            &.left {
+                &.darkmode {
+                    triangle {
+                        inner-triangle {
+                            bottom: 5px;
+                            right: 4px;
+                        }
+                    }
+                }
+            }
+            &.right {
+                triangle {
+                    left: -3px;
+                }
+            }
+            &.left {
+                triangle {
+                    right: -11px;
+                }
             }
         }
     }

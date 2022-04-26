@@ -185,9 +185,9 @@ export const getWalletDataPath = async (): Promise<string> => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
 }
 
-export const getProfileDataPath = async (profileName: string): Promise<string> => {
+export const getProfileDataPath = async (id: string): Promise<string> => {
     const walletPath = await getWalletDataPath()
-    return `${walletPath}${profileName}`
+    return `${walletPath}${id}`
 }
 
 
@@ -461,7 +461,6 @@ export function asyncSyncAccounts(
         })
     })
 }
-
 
 export async function asyncSyncAccountOffline(account: WalletAccount): Promise<void> {
     return new Promise((resolve) => {
@@ -793,7 +792,6 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
             } catch (e) {
                 console.error(e)
             }
-
 
             completeCount++
             if (completeCount === newAccounts.length) {
