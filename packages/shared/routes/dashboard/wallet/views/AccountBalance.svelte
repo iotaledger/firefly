@@ -38,9 +38,9 @@
                 {localize('general.balance')}
             </Text>
         {/if}
-        <div class="flex flex-col flex-wrap items-start mt-6 mr-12">
+        <div class="flex flex-col flex-wrap items-start mt-6">
             <div on:click={togglePreciseBalance}>
-                <Text type="h1">
+                <Text type="h1" classes="break-all">
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}

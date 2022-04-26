@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { Unit } from '@iota/unit-converter'
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -16,7 +17,7 @@
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 
     $: showSpinner = !!$participationAction || $isSyncing
@@ -44,6 +45,11 @@
     let tooltipAnchor
     function toggleTooltip(): void {
         showTooltip = !showTooltip
+    }
+
+    let showPreciseStakedAmount = false
+    function togglePreciseStakedAmount() {
+        showPreciseStakedAmount = !showPreciseStakedAmount
     }
 
     function handleStakeFundsClick(): void {
@@ -76,10 +82,18 @@
     <div class="flex flex-row justify-between items-start">
         <Text type="p">{localize('views.staking.summary.stakedFunds')}</Text>
     </div>
-    <Text type="h1" classes="mt-6">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
-    {#if canParticipateInEvent}
-        <Text type="p">{formatUnitBestMatch($unstakedAmount)} {localize('general.unstaked')}</Text>
-    {/if}
+    <div class="flex flex-col flex-wrap items-start mt-6">
+        <div on:click={togglePreciseStakedAmount}>
+            <Text type="h1" classes="break-all">
+                {showPreciseStakedAmount
+                    ? formatUnitPrecision(canParticipateInEvent ? $stakedAmount : 0, Unit.Mi)
+                    : formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0, true, 3)}
+            </Text>
+        </div>
+        {#if canParticipateInEvent}
+            <Text type="p">{formatUnitBestMatch($unstakedAmount)} {localize('general.unstaked')}</Text>
+        {/if}
+    </div>
     <Button
         classes="w-full text-14 mt-6"
         disabled={showSpinner || !canParticipateInEvent}
