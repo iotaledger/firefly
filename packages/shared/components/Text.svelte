@@ -6,7 +6,7 @@
         h4 = 'h4',
         h5 = 'h5',
         p = 'p',
-        pre = 'pre'
+        pre = 'pre',
     }
 
     export enum FontWeightNumber {
@@ -64,7 +64,7 @@
     const DISABLED_TEXT_DARK_COLOUR = TEXT_PREFIX + 'gray-600'
     const HIGHLIGHT_TEXT_COLOUR = TEXT_PREFIX + 'blue-500'
     const SECONDARY_TEXT_COLOUR = TEXT_PREFIX + 'gray-500'
-    
+
     interface ICustomClass {
         fontWeight: FontWeightNumber | FontWeightText
         color: string
@@ -127,7 +127,7 @@
             lineHeight: 'leading-140',
             wordBreak: 'break-all',
             whitespace: 'whitespace-pre-line',
-            fontFamily: "font-fira-mono"
+            fontFamily: 'font-fira-mono',
         },
     }
 
@@ -138,15 +138,15 @@
     darkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
 
     // Adjust font for old override classes
-    function adjustFont() { 
-        switch(type) {
+    function adjustFont() {
+        switch (type) {
             case TextType.p:
                 fontSize = bigger ? 'text-16' : smaller ? 'text-12' : fontSize
                 lineHeight = bigger ? 'leading-140' : smaller ? 'leading-120' : lineHeight
-                break;
+                break
             case TextType.pre:
                 fontSize = bigger ? 'text-13' : smaller ? 'text-11' : fontSize
-                break;
+                break
         }
 
         fontWeight = bold ? FontWeightText.bold : fontWeight
@@ -178,11 +178,11 @@
     let customClasses: ICustomClass
     $: customClasses = {
         ...DEFAULT_CLASSES_LIST[type],
-        ...(fontSize && {fontSize}),
-        ...(fontWeight && {fontWeight}),
-        ...(lineHeight && {lineHeight}),
-        ...(color && {color}),
-        ...(darkColor && {darkColor}),
+        ...(fontSize && { fontSize }),
+        ...(fontWeight && { fontWeight }),
+        ...(lineHeight && { lineHeight }),
+        ...(color && { color }),
+        ...(darkColor && { darkColor }),
     }
 
     $: customClassesString = Object.values(customClasses).join(' ')
@@ -190,6 +190,6 @@
 
 <span class="text-component">
     <svelte:element this={type} class={`${customClassesString} ${classes}`}>
-        <slot/>
+        <slot />
     </svelte:element>
 </span>
