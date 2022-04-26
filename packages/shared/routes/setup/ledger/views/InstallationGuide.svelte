@@ -38,7 +38,7 @@
                 </div>
                 <Text type="p" secondary>{LedgerAppName.IOTALegacy}</Text>
             </div>
-            <Icon icon="plus" classes="-mt-6 text-blue-400" />
+            <Icon icon="plus" height="15" width="15" classes="-mt-6 text-blue-400" />
             <div class="flex flex-col flex-wrap space-y-2">
                 <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
                     <Icon icon="ledger-app" width="32" height="32" classes="text-white" />
