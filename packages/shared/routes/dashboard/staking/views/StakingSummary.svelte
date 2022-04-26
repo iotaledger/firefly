@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
@@ -72,28 +72,16 @@
     }
 </script>
 
-<div class="p-6 flex flex-col justify-between space-y-6 w-full h-full">
-    <div class="flex flex-col justify-between">
-        <div class="flex flex-row justify-between items-start">
-            <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">
-                {localize('views.staking.summary.stakedFunds')}
-            </Text>
-            {#if isPartiallyStakedAndCanParticipate}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                    <Icon icon="exclamation" classes="fill-current text-yellow-600" />
-                </div>
-            {/if}
-        </div>
-        <Text type="h2">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
-        {#if canParticipateInEvent}
-            <Text type="p" smaller secondary classes="mt-2">
-                {formatUnitBestMatch($unstakedAmount)}
-                {localize('general.unstaked')}
-            </Text>
-        {/if}
+<div class="p-6 flex flex-col justify-between w-full h-full relative">
+    <div class="flex flex-row justify-between items-start">
+        <Text type="p">{localize('views.staking.summary.stakedFunds')}</Text>
     </div>
+    <Text type="h1" classes="mt-6">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
+    {#if canParticipateInEvent}
+        <Text type="p">{formatUnitBestMatch($unstakedAmount)} {localize('general.unstaked')}</Text>
+    {/if}
     <Button
-        classes="w-full text-14"
+        classes="w-full text-14 mt-6"
         disabled={showSpinner || !canParticipateInEvent}
         caution={isStakedAndCanParticipate && isPartiallyStakedAndCanParticipate}
         secondary={isStakedAndCanParticipate && !isPartiallyStakedAndCanParticipate}
@@ -111,6 +99,16 @@
             <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
         {:else}{localize(`actions.${isStakedAndCanParticipate ? 'manageStake' : 'stakeFunds'}`)}{/if}
     </Button>
+    {#if isPartiallyStakedAndCanParticipate}
+        <div
+            bind:this={tooltipAnchor}
+            on:mouseenter={toggleTooltip}
+            on:mouseleave={toggleTooltip}
+            class="absolute top-6 right-6"
+        >
+            <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+        </div>
+    {/if}
 </div>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

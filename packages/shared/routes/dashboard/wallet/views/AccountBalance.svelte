@@ -32,28 +32,28 @@
         : 'pb-12'} {classes}"
 >
     <!-- Balance -->
-    <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
+    <div data-label="total-balance" class="flex flex-col flex-wrap">
         {#if !$mobile}
-            <p class="text-11 leading-120 text-gray-800 dark:text-white uppercase tracking-widest">
+            <Text type="p">
                 {localize('general.balance')}
-            </p>
+            </Text>
         {/if}
-        <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
+        <div class="flex flex-col flex-wrap items-start mt-6 mr-12">
             <div on:click={togglePreciseBalance}>
-                <Text type="h2">
+                <Text type="h1">
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                 </Text>
             </div>
-            <Text type="p" smaller>
+            <Text type="p">
                 {$selectedAccount?.balanceEquiv}
             </Text>
         </div>
     </div>
     {#if $accountRoute === AccountRoute.Init || $mobile}
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7">
+        <div class="flex flex-row justify-between space-x-4 mt-6">
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}
