@@ -13,7 +13,7 @@
         "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "yarn build:alpha",
-        "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack && node scripts/create-build-dir.js",
+        "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
         "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=alpha webpack",
         "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=beta webpack",
         "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=prod webpack",
