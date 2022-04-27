@@ -154,18 +154,7 @@
     })
 </script>
 
-<div class="relative w-full h-full bg-white dark:bg-gray-900">
-    <button
-        data-label="back-button"
-        class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
-        disabled={hasReachedMaxAttempts}
-        on:click={handleBackClick}
-    >
-        <div class="flex items-center space-x-3">
-            <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h5">{locale('general.profiles')}</Text>
-        </div>
-    </button>
+<div class="w-full h-full bg-white dark:bg-gray-900">
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
@@ -173,14 +162,26 @@
                 network={$activeProfile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
                 bgColor="blue"
             />
-            <Pin
-                bind:this={pinRef}
-                bind:value={pinCode}
-                classes="mt-10 {shake && 'animate-shake'}"
-                on:submit={onSubmit}
-                disabled={hasReachedMaxAttempts || isBusy}
-                autofocus
-            />
+            <div class="flex mt-10 w-full items-center">
+                <div class="relative h-6">
+                    <button
+                        data-label="back-button"
+                        class="absolute right-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        disabled={hasReachedMaxAttempts}
+                        on:click={handleBackClick}
+                    >
+                        <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+                    </button>
+                </div>
+                <Pin
+                    bind:this={pinRef}
+                    bind:value={pinCode}
+                    classes={shake && 'animate-shake'}
+                    on:submit={onSubmit}
+                    disabled={hasReachedMaxAttempts || isBusy}
+                    autofocus
+                />
+            </div>
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
                     ? locale('views.login.incorrectAttempts', {
