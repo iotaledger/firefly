@@ -3,6 +3,8 @@ import { Node, NodePlugin } from './node'
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',
     ChrysalisDevnet = 'chrysalis-devnet',
+    ShimmerMainnet = 'shimmer-mainnet',
+    ShimmerDevnet = 'shimmer-devnet',
     PrivateNet = 'private-net',
 }
 

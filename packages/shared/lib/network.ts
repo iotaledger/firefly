@@ -9,15 +9,61 @@ import { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
 
-export const CHRYSALIS_MAINNET_ID = 'chrysalis-mainnet'
-export const CHRYSALIS_MAINNET_NAME = 'Chrysalis Mainnet'
-export const CHRYSALIS_MAINNET_BECH32_HRP = 'iota'
-export const CHRYSALIS_MAINNET_EXPLORER = 'https://explorer.iota.org/mainnet'
+const NETWORK: Readonly<{ [key in NetworkType]: Network }> = {
+    [NetworkType.ChrysalisMainnet]: {
+        id: 'chrysalis-mainnet',
+        name: 'Chrysalis Mainnet',
+        bech32Hrp: 'iota',
+        type: NetworkType.ChrysalisMainnet,
+    },
+    [NetworkType.ChrysalisDevnet]: {
+        id: 'chrysalis-devnet',
+        name: 'Chrysalis Devnet',
+        bech32Hrp: 'atoi',
+        type: NetworkType.ChrysalisDevnet,
+    },
+    [NetworkType.ShimmerMainnet]: {
+        id: 'shimmer-mainnet',
+        name: 'Shimmer Mainnet',
+        bech32Hrp: 'smr',
+        type: NetworkType.ShimmerMainnet,
+    },
+    [NetworkType.ShimmerDevnet]: {
+        id: 'shimmer-devnet',
+        name: 'Shimmer Devnet',
+        bech32Hrp: 'rms',
+        type: NetworkType.ShimmerDevnet,
+    },
+    [NetworkType.PrivateNet]: {
+        id: '',
+        name: 'Private Net',
+        bech32Hrp: '',
+        type: NetworkType.PrivateNet,
+    },
+}
 
-export const CHRYSALIS_DEVNET_ID = 'chrysalis-devnet'
-export const CHRYSALIS_DEVNET_NAME = 'Chrysalis Devnet'
-export const CHRYSALIS_DEVNET_BECH32_HRP = 'atoi'
-export const CHRYSALIS_DEVNET_EXPLORER = 'https://explorer.iota.org/devnet'
+const EXPLORER: Readonly<{ [key in NetworkType]: string }> = {
+    [NetworkType.ChrysalisMainnet]: 'https://explorer.iota.org/mainnet',
+    [NetworkType.ChrysalisDevnet]: 'https://explorer.iota.org/devnet',
+    [NetworkType.ShimmerMainnet]: 'https://explorer.shimmer.org/mainnet',
+    [NetworkType.ShimmerDevnet]: 'https://explorer.shimmer.org/devnet',
+    [NetworkType.PrivateNet]: '',
+}
+
+const NODE_URLS: Readonly<{ [key in NetworkType]: string[] }> = {
+    [NetworkType.ChrysalisMainnet]: [
+        'https://chrysalis-nodes.iota.org',
+        'https://chrysalis-nodes.iota.cafe',
+        'https://mainnet-node.tanglebay.com',
+    ],
+    [NetworkType.ChrysalisDevnet]: [
+        'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
+        'https://api.lb-1.h.chrysalis-devnet.iota.cafe',
+    ],
+    [NetworkType.ShimmerMainnet]: [],
+    [NetworkType.ShimmerDevnet]: [],
+    [NetworkType.PrivateNet]: [],
+}
 
 /**
  * Given the type of IOTA network, construct the default official network
@@ -48,28 +94,7 @@ export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
  *
  * @returns {Network}
  */
-export const getOfficialNetwork = (type: NetworkType): Network => {
-    switch (type) {
-        case NetworkType.ChrysalisDevnet:
-            return {
-                id: CHRYSALIS_DEVNET_ID,
-                name: CHRYSALIS_DEVNET_NAME,
-                type,
-                bech32Hrp: CHRYSALIS_DEVNET_BECH32_HRP,
-            }
-        case NetworkType.ChrysalisMainnet:
-            return {
-                id: CHRYSALIS_MAINNET_ID,
-                name: CHRYSALIS_MAINNET_NAME,
-                type,
-                bech32Hrp: CHRYSALIS_MAINNET_BECH32_HRP,
-            }
-        case NetworkType.PrivateNet:
-            return <Network>{ type }
-        default:
-            return <Network>{}
-    }
-}
+export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type]
 
 /**
  * Constructs a list of the official IOTA nodes for a given network.
@@ -83,20 +108,7 @@ export const getOfficialNetwork = (type: NetworkType): Network => {
 export const getOfficialNodes = (type: NetworkType): Node[] =>
     getOfficialNodeUrls(type).map((url) => getOfficialNode(type, url))
 
-const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
-    switch (networkType) {
-        case NetworkType.ChrysalisDevnet:
-            return ['https://api.lb-0.h.chrysalis-devnet.iota.cafe', 'https://api.lb-1.h.chrysalis-devnet.iota.cafe']
-        case NetworkType.ChrysalisMainnet:
-            return [
-                'https://chrysalis-nodes.iota.org',
-                'https://chrysalis-nodes.iota.cafe',
-                'https://mainnet-node.tanglebay.com',
-            ]
-        default:
-            return []
-    }
-}
+const getOfficialNodeUrls = (networkType: NetworkType): string[] => NODE_URLS[networkType]
 
 const getOfficialNode = (type: NetworkType, url: string): Node => ({
     url,
@@ -106,16 +118,7 @@ const getOfficialNode = (type: NetworkType, url: string): Node => ({
     isDisabled: false,
 })
 
-export const getOfficialExplorer = (networkId: NetworkId): string => {
-    switch (networkId) {
-        case CHRYSALIS_MAINNET_ID:
-            return CHRYSALIS_MAINNET_EXPLORER
-        case CHRYSALIS_DEVNET_ID:
-            return CHRYSALIS_DEVNET_EXPLORER
-        default:
-            return ''
-    }
-}
+export const getOfficialExplorer = (id: NetworkId): string => EXPLORER[getNetworkType(id)]
 
 /**
  * Determines whether the type of a given network is "official", meaning
@@ -127,15 +130,7 @@ export const getOfficialExplorer = (networkId: NetworkId): string => {
  *
  * @returns {boolean}
  */
-export const isOfficialNetwork = (type: NetworkType): boolean => {
-    switch (type) {
-        case NetworkType.ChrysalisMainnet:
-        case NetworkType.ChrysalisDevnet:
-            return true
-        default:
-            return false
-    }
-}
+export const isOfficialNetwork = (type: NetworkType): boolean => type !== NetworkType.PrivateNet
 
 /**
  * Find a network by its associated ID.
@@ -146,39 +141,11 @@ export const isOfficialNetwork = (type: NetworkType): boolean => {
  *
  * @returns {Network}
  */
-export const getNetworkById = (id: string): Network => {
-    const type = getNetworkType(id)
-    switch (type) {
-        case NetworkType.ChrysalisMainnet:
-            return {
-                id,
-                type,
-                name: CHRYSALIS_MAINNET_NAME,
-                bech32Hrp: CHRYSALIS_MAINNET_BECH32_HRP,
-            }
-        case NetworkType.ChrysalisDevnet:
-            return {
-                id,
-                type,
-                name: CHRYSALIS_DEVNET_NAME,
-                bech32Hrp: CHRYSALIS_DEVNET_BECH32_HRP,
-            }
-        case NetworkType.PrivateNet:
-            return <Network>{ id, type, name: 'Private Net' }
-        default:
-            return <Network>{}
-    }
-}
+export const getNetworkById = (id: NetworkId): Network => NETWORK[getNetworkType(id)] ?? <Network>{}
 
-const getNetworkType = (id: string): NetworkType => {
-    switch (id) {
-        case CHRYSALIS_MAINNET_ID:
-            return NetworkType.ChrysalisMainnet
-        case CHRYSALIS_DEVNET_ID:
-            return NetworkType.ChrysalisDevnet
-        default:
-            if (id) return NetworkType.PrivateNet
-            else return undefined
+const getNetworkType = (id: NetworkId): NetworkType => {
+    if (id) {
+        return Object.values(NETWORK).find((network) => network.id === id).type ?? NetworkType.PrivateNet
     }
 }
 
