@@ -565,8 +565,8 @@
                 "info": {
                     "title": "Your voting weight",
                     "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your Profile Balance. 0.001 Mi (1000 IOTA tokens) represent 1 vote.",
-                    "description2": "When the proposal is in the Holding phase, every 10 seconds the amount of votes that you have added in a decision will be added to the counting and accumulated. Your total amount of casted votes raise over time."
+                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must keep voting for the full duration of the Counting phase to issue your full voting weight. "
                 }
             },
             "info": {

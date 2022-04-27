@@ -15,6 +15,7 @@
         StatusTimeline = 'statusTimeline',
         VotingRate = 'votingRate',
         CountedVotes = 'countedVotes',
+        VotingWeight = 'votingWeight',
     }
 
     const dateFormat = { format: 'long' }
@@ -95,6 +96,13 @@
     {:else if type === GovernanceInfoType.CountedVotes}
         <Text type="h3" classes="text-left">{localize('views.governance.info.tooltip.countedVotes.title')}</Text>
         <Text classes="text-left">{localize('views.governance.info.tooltip.countedVotes.body')}</Text>
+    {/if}
+    {#if type === GovernanceInfoType.VotingWeight}
+        <div>
+            <Text type="h3" classes="text-left">{localize('views.governance.votingPower.info.title')}</Text>
+            <Text type="p" classes="mb-2 text-left">{localize('views.governance.votingPower.info.description1')}</Text>
+            <Text type="p" classes="text-left">{localize('views.governance.votingPower.info.description2')}</Text>
+        </div>
     {/if}
 </Tooltip>
 

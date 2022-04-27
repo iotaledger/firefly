@@ -46,7 +46,6 @@
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
-    import GovernanceVotingPowerInfo from './GovernanceVotingPowerInfo.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -131,7 +130,6 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
-        governanceVotingPowerInfo: GovernanceVotingPowerInfo,
         governanceManager: GovernanceManager,
         success: Success,
         singleAccountGuide: SingleAccountGuide,
