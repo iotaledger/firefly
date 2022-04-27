@@ -46,6 +46,7 @@
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
 
     export let locale: Locale
 
@@ -79,6 +80,7 @@
             size = PopupSize.Large
             break
         case 'stakingManager':
+        case 'transactionDetails':
             autofocusContent = false
             break
         default:
@@ -129,6 +131,7 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         singleAccountGuide: SingleAccountGuide,
+        activityDetails: ActivityDetailsPopup,
     }
 
     const onKey = (e) => {
@@ -199,7 +202,7 @@
             use:clickOutside
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
+            class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
                 fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
             } ${overflow ? 'overflow' : 'relative'}`}
         >

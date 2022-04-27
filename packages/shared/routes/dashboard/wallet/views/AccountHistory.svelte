@@ -25,7 +25,10 @@
     export let transactions: AccountMessage[] = []
 
     function handleTransactionClick(transaction: AccountMessage): void {
-        selectedMessage.set(transaction)
+        openPopup({
+            type: 'transactionDetails',
+            props: { ...transaction },
+        })
     }
 
     function handleBackClick(): void {
