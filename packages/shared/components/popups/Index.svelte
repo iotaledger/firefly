@@ -46,7 +46,8 @@
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
-    import ReceivePopup from './ReceivePopup.svelte'
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
 
     export let locale: Locale
 
@@ -57,8 +58,7 @@
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
-
-    let autofocusContent = true
+    export let autofocusContent = true
 
     enum PopupSize {
         Small = 'small',
@@ -80,6 +80,7 @@
             size = PopupSize.Large
             break
         case 'stakingManager':
+        case 'transactionDetails':
             autofocusContent = false
             break
         default:
@@ -130,7 +131,8 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         singleAccountGuide: SingleAccountGuide,
-        receive: ReceivePopup,
+        receiveAddress: ReceiveAddressPopup,
+        activityDetails: ActivityDetailsPopup,
     }
 
     const onKey = (e) => {

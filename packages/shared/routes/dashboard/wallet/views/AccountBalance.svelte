@@ -20,7 +20,7 @@
     }
     function handleReceiveClick() {
         openPopup({
-            type: 'receive',
+            type: 'receiveAddress',
         })
     }
 
