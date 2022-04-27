@@ -353,7 +353,8 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
         const createdAccount = await get(accountManager).createAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
         })
-        const addresses = await createdAccount.generateAddresses()
+        const stardustAccount = await getStardustAccount(createdAccount.meta.index)
+        const addresses = await stardustAccount.generateAddresses()
         const depositAddress = addresses[0].address
         const preparedAccount = prepareAccountInfo(createdAccount, {
             balance: 0,
