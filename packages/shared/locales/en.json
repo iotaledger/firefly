@@ -561,7 +561,7 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting power",
+                "title": "My voting weight",
                 "info": {
                     "title": "Your voting weight",
                     "equality": "1000 IOTA = 1 VOTE",
@@ -586,7 +586,7 @@
                     },
                     "countedVotes": {
                         "title": "Counted votes",
-                        "body": "You must keep voting for the remaining period to reach your full voting power"
+                        "body": "You must keep voting for the remaining period in order to issue your full voting weight"
                     }
                 }
             },
@@ -610,6 +610,7 @@
             "eventDetails": {
                 "votingOpens": "Voting opens on",
                 "votingProgress": "Voting progress",
+                "votingPower": "Your voting weight",
                 "votesCounted": "Your total votes counted",
                 "countingStarts": "Counting starts on",
                 "countingLength": "Counting length",

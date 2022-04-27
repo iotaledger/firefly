@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
+    import { formatDate, localize } from '@core/i18n'
     import { canParticipate } from '@lib/participation'
     import { currentAccountTreasuryVoteValue, selectedAccountParticipationOverview } from '@lib/participation/account'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
@@ -21,6 +21,15 @@
     let transactionEventData: TransferProgressEventData = null
     let nextVote: VotingEventAnswer = null
     let ledgerAwaitingConfirmation = false
+
+    const dateFormat = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+    } as Intl.DateTimeFormatOptions
 
     $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
     $: displayedPercentages = results?.map((result) => {
@@ -287,7 +296,7 @@
                             {localize('views.governance.eventDetails.votingOpens')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">
-                            {milestoneToDate(event?.information?.milestoneIndexCommence).toString()}
+                            {formatDate(milestoneToDate(event?.information?.milestoneIndexCommence), dateFormat)}
                         </Text>
                     </div>
                 {/if}
@@ -297,7 +306,7 @@
                             {localize('views.governance.eventDetails.countingStarts')}
                         </Text>
                         <Text type="h3" classes="inline-flex items-end">
-                            {milestoneToDate(event?.information?.milestoneIndexStart).toString()}
+                            {formatDate(milestoneToDate(event?.information?.milestoneIndexStart), dateFormat)}
                         </Text>
                     </div>
                 {/if}
