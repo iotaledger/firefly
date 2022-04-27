@@ -27,6 +27,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 await requestMnemonic()
                 nextRoute = BackupRoute.RecoveryPhrase
                 break
+
             case BackupRoute.RecoveryPhrase:
                 nextRoute = BackupRoute.Verify
                 break
@@ -35,22 +36,20 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 nextRoute = BackupRoute.Backup
                 break
 
-            case BackupRoute.Backup:
-                if (event?.skip) {
-                    await storeMnemonic(get(mnemonic).join(' '))
-                    await createAccount()
-                    get(appRouter).next(event)
-                } else {
+            case BackupRoute.Backup: {
+                await storeMnemonic(get(mnemonic).join(' '))
+                await createAccount()
+                const createBackup = !event?.skip
+                if (createBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     if (dest) {
-                        await storeMnemonic(get(mnemonic).join(' '))
-                        await createAccount()
                         await backup(dest, get(strongholdPassword))
                         updateProfile('lastStrongholdBackupTime', new Date())
-                        get(appRouter).next(event)
                     }
                 }
+                get(appRouter).next(event)
                 break
+            }
         }
         this.setNext(nextRoute)
     }
