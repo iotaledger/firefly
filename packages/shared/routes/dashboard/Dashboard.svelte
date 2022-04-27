@@ -15,10 +15,9 @@
     } from 'shared/lib/notifications'
     import {
         clearPollParticipationOverviewInterval,
-        pollParticipationOverview,
+        pollParticipation,
         updateStakingPeriodCache,
     } from 'shared/lib/participation'
-    import { getParticipationEvents } from 'shared/lib/participation/api'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
@@ -77,7 +76,7 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipationOverview()
+            void pollParticipation()
         } else {
             clearPollNetworkInterval()
             clearPollParticipationOverviewInterval()
@@ -156,8 +155,6 @@
     }
 
     onMount(() => {
-        void getParticipationEvents()
-
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)

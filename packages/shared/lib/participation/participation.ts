@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { WalletAccount } from '../typings/wallet'
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { canAccountReachMinimumAirdrop } from './account'
-import { getParticipationOverview } from './api'
+import { getParticipationOverview, getParticipationEvents } from './api'
 import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION, SHIMMER_EVENT_ID } from './constants'
 import {
     isPerformingParticipation,
@@ -17,21 +17,22 @@ import { AccountParticipationAbility, ParticipationAction, ParticipationEventSta
 let participationPollInterval
 
 /**
- * Begins polling of the participation overview.
+ * Begins polling of the participation events.
  *
- * @method pollParticipationOverview
+ * @method pollParticipation
  *
  * @returns {Promise<void>}
  */
-export async function pollParticipationOverview(): Promise<void> {
+export async function pollParticipation(): Promise<void> {
     clearPollParticipationOverviewInterval()
     try {
         await getParticipationOverview(ASSEMBLY_EVENT_ID)
+        await getParticipationEvents()
         /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(
-            async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
-            PARTICIPATION_POLL_DURATION
-        )
+        participationPollInterval = setInterval(async () => {
+            await getParticipationOverview(ASSEMBLY_EVENT_ID)
+            await getParticipationEvents()
+        }, PARTICIPATION_POLL_DURATION)
     } catch (error) {
         if (error && error?.error.includes('pluginNotFound')) {
             clearPollParticipationOverviewInterval()
