@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
@@ -6,8 +7,13 @@
     import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
-    import { isSyncing, isTransferring, selectedAccountStore, setSelectedAccount, wallet } from '@lib/wallet'
-    import { HR, Icon, Modal, Text } from 'shared/components'
+    import {
+        isTransferring,
+        selectedAccountStore,
+        setSelectedAccount,
+        updateAccountSyncingQueue,
+        wallet,
+    } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
@@ -16,14 +22,13 @@
     const { balanceOverview } = $wallet
 
     function handleAccountClick(accountId: string): void {
-        if ($isSyncing) {
-            showWarning(localize('notifications.syncing'))
-        } else if ($isTransferring) {
+        if ($isTransferring) {
             showWarning(localize('notifications.transferring'))
         } else if ($participationAction) {
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
+            updateAccountSyncingQueue($selectedAccountStore)
             resetAccountRouter(false)
             modal?.close()
         }

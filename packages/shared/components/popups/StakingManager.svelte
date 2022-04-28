@@ -38,7 +38,7 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccountStore, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccountStore, selectedAccountIdStore, transferState, wallet } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false

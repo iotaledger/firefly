@@ -24,24 +24,19 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         accountSyncingQueueStore,
-        aggregateAccountActivity,
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMetadataWithCallback,
         getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         isTransferring,
-        prepareAccountAsWalletAccount,
         processAccountSyncingQueue,
         processLoadedAccounts,
-        processMigratedTransactions,
         removeEventListeners,
         selectedAccountStore,
-        selectedAccountId,
+        selectedAccountIdStore,
         transferState,
-        updateBalanceOverview,
         wallet,
         initializeAccountSyncingQueue,
     } from 'shared/lib/wallet'
@@ -58,7 +53,7 @@
         Send,
     } from './views/'
     import { asyncGetAccounts } from '@lib/wallet'
-    import { networkStatus } from '../../../lib/networkStatus'
+    import { get } from 'svelte/store'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -74,7 +69,7 @@
     let isGeneratingAddress = false
 
     // If account changes force regeneration of Ledger receive address
-    $: if ($selectedAccountId && $isLedgerProfile) {
+    $: if ($selectedAccountIdStore && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
@@ -85,11 +80,14 @@
         }
     }
 
-    $: if ($accountSyncingQueueStore.length > 0) {
+    $: accountSyncingQueueLength = $accountSyncingQueueStore?.length || 0
+    $: if (accountSyncingQueueLength > 0) {
         void processAccountSyncingQueue()
+    } else {
+        if (get(isFirstSessionSync) && $accountSyncingQueueStore !== null) {
+            isFirstSessionSync.set(false)
+        }
     }
-
-    // $: console.log('ACCOUNT SYNCING QUEUE: ', $accountSyncingQueueStore.map((account) => account.alias))
 
     async function loadAccounts(): Promise<void> {
         const loadedAccounts = await asyncGetAccounts()

@@ -16,7 +16,7 @@
         receiverAddressesFromTransactionPayload,
         walletSetupType,
         accountSyncingQueueStore,
-        selectedAccountId,
+        selectedAccountIdStore,
     } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -35,7 +35,7 @@
     }
 
     $: isSelectedAccountSyncing =
-        $accountSyncingQueueStore.findIndex((account) => account.id === $selectedAccountId) === 0 || $isSyncing
+        $accountSyncingQueueStore?.findIndex((account) => account.id === $selectedAccountIdStore) === 0 || $isSyncing
 
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {

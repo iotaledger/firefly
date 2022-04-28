@@ -15,7 +15,7 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
-    import { selectedAccountId } from '@lib/wallet'
+    import { selectedAccountIdStore } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
     import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
 
@@ -48,7 +48,7 @@
         isShimmerStaked,
         stakingEventState,
         $selectedAccountParticipationOverview,
-        $selectedAccountId,
+        $selectedAccountIdStore,
         setAnimation()
 
     function setAnimation(): void {

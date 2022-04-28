@@ -28,6 +28,7 @@ import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
+import { sleep } from '@lib/utils'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -114,13 +115,13 @@ export const resetWallet = (): void => {
 
 // Created to help selectedAccount reactivity.
 // Use it to detected switches on selectedAccount
-export const selectedAccountId = writable<string | null>(null)
+export const selectedAccountIdStore = writable<string | null>(null)
 
 export const selectedAccountStore = derived(
-    [selectedAccountId, get(wallet).accounts],
+    [selectedAccountIdStore, get(wallet).accounts],
     ([$selectedAccountId, $accounts]) => $accounts.find((acc) => acc.id === $selectedAccountId)
 )
-export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
+export const setSelectedAccount = (id: string): void => selectedAccountIdStore.set(id)
 
 export const walletSetupType = writable<SetupType>(null)
 export const selectedMessage = writable<Message | null>(null)
@@ -135,7 +136,7 @@ export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
-export const accountSyncingQueueStore = writable<WalletAccount[]>([])
+export const accountSyncingQueueStore = writable<WalletAccount[] | null>(null)
 
 export const api: IWalletApi = new Proxy(
     { ...WalletApi },
@@ -462,28 +463,37 @@ export function initializeAccountSyncingQueue(): void {
     accountSyncingQueueStore.set([selectedAccount, ...accounts.filter((account) => account.id !== selectedAccount.id)])
 }
 
+export function updateAccountSyncingQueue(account: WalletAccount): void {
+    if (!account) return
+
+    // It can be assumed that if the account is not currently in the queue then it has already been synced.
+    const isAccountInSyncingQueue = get(accountSyncingQueueStore).some((_account) => _account.id === account.id)
+    if (!isAccountInSyncingQueue) return
+
+    // If the account is already first in the queue then no need to update the queue.
+    const accountIndexInSyncingQueue = get(accountSyncingQueueStore).findIndex((_account) => _account.id === account.id)
+    if (accountIndexInSyncingQueue === 0) return
+
+    accountSyncingQueueStore.update((accountSyncingQueue) =>
+        accountSyncingQueue.sort((a: WalletAccount, b: WalletAccount) =>
+            a.id === account.id ? -1 : b.id === account.id ? 1 : 0
+        )
+    )
+}
+
 export async function processAccountSyncingQueue(): Promise<void> {
     const accountSyncingQueue = get(accountSyncingQueueStore)
     if (!accountSyncingQueue || accountSyncingQueue.length <= 0) return
-    // console.log('PROCESSING ACCOUNT SYNCING QUEUE: ', accountSyncingQueue.map((account) => account.alias))
 
-    for (const account of accountSyncingQueue) {
-        // console.log('BEGIN SYNCING ACCOUNT IN QUEUE: ', account.alias)
-        try {
-            await asyncSyncAccount(account)
-            accountSyncingQueueStore.update((_accountSyncingQueueStore) =>
-                _accountSyncingQueueStore.filter((_account) => _account.id !== account.id)
-            )
-        } catch (err) {
-            console.error(err)
-            accountSyncingQueueStore.set([])
+    try {
+        const accountToSync = accountSyncingQueue[0]
+        await asyncSyncAccount(accountToSync)
 
-            break
-        }
-    }
-
-    if (get(isFirstSessionSync)) {
-        isFirstSessionSync.set(false)
+        accountSyncingQueueStore.update((_accountSyncingQueueStore) =>
+            _accountSyncingQueueStore.filter((_account) => _account.id !== accountToSync.id)
+        )
+    } catch (err) {
+        console.error(err)
     }
 }
 
