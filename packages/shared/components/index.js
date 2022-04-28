@@ -74,5 +74,6 @@ export * as ChartDefaults from './charts/defaults'
 export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
 export { default as StakingAssetTile } from './StakingAssetTile.svelte'
 
-// Pills
+// atomic components
 export * from './atoms'
+export * from './molecules'

@@ -38,7 +38,6 @@
     import StakingManager from './StakingManager.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
-    import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
@@ -48,6 +47,7 @@
     import { Platform } from 'shared/lib/platform'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
+    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
 
     export let locale: Locale
 
@@ -117,7 +117,6 @@
         createAccount: CreateAccount,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        transaction: Transaction,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
@@ -133,6 +132,7 @@
         singleAccountGuide: SingleAccountGuide,
         receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
+        sendConfirmation: SendConfirmationPopup,
     }
 
     const onKey = (e) => {
