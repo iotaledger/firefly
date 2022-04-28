@@ -12,8 +12,6 @@ export function getTransactionSubjectAddressOrAccount(transactionPayload: Payloa
     isSubjectAccount: boolean
     subject: string
 } {
-    let response: { isSubjectAccount: boolean; subject: string }
-
     const incoming = getIncomingFlag(transactionPayload)
     const internal = getInternalFlag(transactionPayload)
 
@@ -26,11 +24,9 @@ export function getTransactionSubjectAddressOrAccount(transactionPayload: Payloa
     const account = incoming ? senderAccount : receiverAccount
 
     if (account) {
-        response = { isSubjectAccount: true, subject: account.alias }
+        return { isSubjectAccount: true, subject: account.alias }
     } else {
         // We can't find the address in our accounts so just display the abbreviated address
-        response = { isSubjectAccount: false, subject: incoming ? receiverAddresses[0] : senderAddress }
+        return { isSubjectAccount: false, subject: incoming ? receiverAddresses[0] : senderAddress }
     }
-
-    return response
 }
