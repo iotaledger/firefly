@@ -29,6 +29,9 @@
 
     $: isPartiallyStakedAndCanParticipate = $isPartiallyStaked && canParticipateInEvent
 
+    let spinnerMessage: string
+    $: showSpinner, (spinnerMessage = getSpinnerMessage())
+
     let canParticipateWithNode = false
     $: $networkStatus, (canParticipateWithNode = hasNodePlugin(NodePlugin.Participation))
 
@@ -63,10 +66,14 @@
     }
 
     function getSpinnerMessage(): string {
-        if ($participationAction) {
-            return $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
+        if (
+            $participationAction === ParticipationAction.Stake ||
+            $participationAction === ParticipationAction.Unstake
+        ) {
+            const locale = $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
+            return localize(locale)
         } else if ($isSyncing) {
-            return 'general.syncingAccounts'
+            return localize('general.syncingAccounts')
         }
     }
 </script>
@@ -107,7 +114,7 @@
                   })}
     >
         {#if showSpinner}
-            <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
+            <Spinner busy message={spinnerMessage} classes="mx-2 justify-center" />
         {:else}{localize(`actions.${isStakedAndCanParticipate ? 'manageStake' : 'stakeFunds'}`)}{/if}
     </Button>
 </div>
