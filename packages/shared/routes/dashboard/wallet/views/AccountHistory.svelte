@@ -26,7 +26,7 @@
 
     function handleTransactionClick(transaction: AccountMessage): void {
         openPopup({
-            type: 'transactionDetails',
+            type: 'activityDetails',
             props: { ...transaction },
         })
     }

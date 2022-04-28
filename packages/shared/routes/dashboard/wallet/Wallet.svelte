@@ -43,16 +43,7 @@
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
-    import {
-        AccountAssets,
-        AccountBalance,
-        AccountHistory,
-        BarChart,
-        LineChart,
-        ManageAccount,
-        Receive,
-        Send,
-    } from './views/'
+    import { AccountAssets, AccountBalance, AccountHistory, BarChart, LineChart, ManageAccount, Send } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -410,8 +401,6 @@
                             <AccountAssets />
                         {:else if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
-                        {:else if $accountRoute === AccountRoute.Receive}
-                            <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
                         {/if}

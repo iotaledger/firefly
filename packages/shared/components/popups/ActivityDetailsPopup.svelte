@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityTypePill, Pill, KeyValueBlock } from 'shared/components/atoms'
+    import { Pill, ActivityTypePill, Box, AddressBox, KeyValueBox } from 'shared/components/atoms'
     import { Text, Button } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { formatDate, localize } from '@core/i18n'
@@ -72,13 +72,16 @@
                 {localize(`general.${confirmed ? 'confirmed' : 'pending'}`).toLowerCase()}
             </Pill>
         </transaction-status>
-        <transaction-subject-account class="flex flex-row flex-wrap justify-center items-center text-center">
-            <Text type="pre" fontSize="16">{transactionSubjectAddressOrAccount}</Text>
-        </transaction-subject-account>
+        {#if transactionSubjectAddressOrAccount.isSubjectAccount}
+            <Box col clearBackground>
+                <Text type="p" fontSize="base">{transactionSubjectAddressOrAccount.subject}</Text>
+            </Box>
+        {:else}
+            <AddressBox clearBackground address={transactionSubjectAddressOrAccount.subject} />
+        {/if}
     </main-content>
-
     <details-list class="flex flex-col space-y-2 mb-6">
-        <KeyValueBlock keyText={localize('general.date')} valueText={date} />
+        <KeyValueBox keyText={localize('general.date')} valueText={date} />
     </details-list>
     <Button
         classes="w-full"

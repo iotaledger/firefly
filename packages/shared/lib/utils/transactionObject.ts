@@ -8,9 +8,10 @@ import {
     sendAddressFromTransactionPayload,
 } from '@lib/wallet'
 
-export function getTransactionSubjectAddressOrAccount(transactionPayload: Payload): string {
-    let response = ''
-
+export function getTransactionSubjectAddressOrAccount(transactionPayload: Payload): {
+    isSubjectAccount: boolean
+    subject: string
+} {
     const incoming = getIncomingFlag(transactionPayload)
     const internal = getInternalFlag(transactionPayload)
 
@@ -23,11 +24,9 @@ export function getTransactionSubjectAddressOrAccount(transactionPayload: Payloa
     const account = incoming ? senderAccount : receiverAccount
 
     if (account) {
-        response = account.alias
+        return { isSubjectAccount: true, subject: account.alias }
     } else {
         // We can't find the address in our accounts so just display the abbreviated address
-        response = incoming ? receiverAddresses[0] : senderAddress
+        return { isSubjectAccount: false, subject: incoming ? receiverAddresses[0] : senderAddress }
     }
-
-    return response
 }

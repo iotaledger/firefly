@@ -170,11 +170,6 @@ const buildTemplate = () => {
                     enabled: state.enabled,
                 },
                 {
-                    label: state.strings.receive,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', AccountRoute.Receive),
-                    enabled: state.enabled,
-                },
-                {
                     type: 'separator',
                 },
                 {

@@ -47,6 +47,7 @@
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
 
     export let locale: Locale
 
@@ -57,8 +58,7 @@
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
-
-    let autofocusContent = true
+    export let autofocusContent = true
 
     enum PopupSize {
         Small = 'small',
@@ -131,6 +131,7 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         singleAccountGuide: SingleAccountGuide,
+        receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
     }
 
