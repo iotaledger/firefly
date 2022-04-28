@@ -40,11 +40,16 @@
 
     let isVoting = false
 
+    let pendingParticipationIds: string[] = []
+    let previousPendingParticipationsLength = 0
+
     $: loading = isVoting || $isSyncing || $pendingParticipations?.length !== 0
     $: isVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
     $: canMergeVotes = isVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
 
-    onMount(() => {
+    // Note: this async is needed here to persist the subscription to pendingParticipations and reset the view accordingly
+    /* eslint-disable @typescript-eslint/require-await */
+    onMount(async () => {
         if (!hasNodePlugin(NodePlugin.Participation)) {
             showAppNotification({
                 type: 'warning',
@@ -60,11 +65,30 @@
         if (shouldCastVoteOnMount) {
             void castVote(votingAction)
         }
+
+        const usubscribe = pendingParticipations.subscribe((participations) => {
+            const currentParticipationsLength = participations.length
+
+            if (currentParticipationsLength < previousPendingParticipationsLength) {
+                const latestParticipationIds = participations.map((participation) => participation.messageId)
+
+                if (latestParticipationIds.length === 0) {
+                    resetView()
+                }
+
+                pendingParticipationIds = latestParticipationIds
+                previousPendingParticipationsLength = currentParticipationsLength
+            }
+        })
+
+        return () => {
+            usubscribe()
+        }
     })
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     function handleActionClick(action: VotingAction): void {
         votingAction = action
-        $participationAction = action === VotingAction.Stop ? ParticipationAction.Vote : ParticipationAction.Unvote
         const openGovernanceManager = () => {
             openPopup(
                 {
@@ -127,25 +151,31 @@
         switch (_votingAction) {
             case VotingAction.Cast:
             case VotingAction.Merge:
+                $participationAction = ParticipationAction.Vote
                 await participate(
                     $selectedAccount?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
-                ).catch((err) => {
-                    console.error(err)
-                    displayErrorNotification(err)
-                    resetView()
-                })
+                )
+                    .then((messageIds) => syncParticipations(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             case VotingAction.Change:
                 await changeVote()
                 break
             case VotingAction.Stop:
-                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote).catch((err) => {
-                    console.error(err)
-                    displayErrorNotification(err)
-                    resetView()
-                })
+                $participationAction = ParticipationAction.Unvote
+                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
+                    .then((messageIds) => syncParticipations(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+                        displayErrorNotification(err)
+                        resetView()
+                    })
                 break
             default:
                 throw new Error('Unimplemented voting action!')
@@ -153,18 +183,37 @@
     }
 
     async function changeVote(): Promise<void> {
-        const [messageId] = await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
-        while (isParticipationPending(messageId)) {
-            await sleep(2000)
-        }
-        await participate(
-            $selectedAccount?.id,
-            [{ eventId, answers: [nextVote?.value] }],
-            ParticipationAction.Vote
-        ).catch((err) => {
-            console.error(err)
-            displayErrorNotification(err)
-        })
+        $participationAction = ParticipationAction.Unvote
+        await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
+            .then(async (messageIds) => {
+                syncParticipations(messageIds)
+                const [messageId] = messageIds
+                while (isParticipationPending(messageId)) {
+                    await sleep(2000)
+                }
+                $participationAction = ParticipationAction.Vote
+                await participate(
+                    $selectedAccount?.id,
+                    [{ eventId, answers: [nextVote?.value] }],
+                    ParticipationAction.Vote
+                )
+                    .then((messageIds) => syncParticipations(messageIds))
+                    .catch((err) => {
+                        console.error(err)
+                        displayErrorNotification(err)
+                        resetView()
+                    })
+            })
+            .catch((err) => {
+                console.error(err)
+                displayErrorNotification(err)
+                resetView()
+            })
+    }
+
+    function syncParticipations(messageIds: string[]): void {
+        messageIds.forEach((id) => pendingParticipationIds.push(id))
+        previousPendingParticipationsLength = messageIds.length
     }
 </script>
 
