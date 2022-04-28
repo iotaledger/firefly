@@ -54,7 +54,6 @@
         $exchangeRates[$activeProfile?.settings.currency]
     )
 
-    let transactionSubjectAddressOrAccount: { isSubjectAccount: boolean; subject: string }
     $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
 </script>
 
