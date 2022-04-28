@@ -580,7 +580,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  * NOTE: This method mutates account object
  * Creates a message pair for internal messages and adds it to the account messages
  */
-export function aggregateWalletActivity(account: Account): void {
+export function aggregateAccountActivity(account: Account): void {
     // Only keep messages with a payload
     account.messages = account.messages.filter((m) => m.payload)
 
@@ -959,6 +959,23 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
 }
 
 /**
+ * Retrieves the list of accounts belonging to a profile.
+ */
+export function asyncGetAccounts(): Promise<Account[]> {
+    return new Promise((resolve, reject) => {
+        api.getAccounts({
+            onSuccess(response: Event<Account[]>) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                console.error(err)
+                reject(err)
+            },
+        })
+    })
+}
+
+/**
  * Retrieves the metadata (i.e. balance information and deposit address) from an account.
  */
 export function asyncGetAccountMetadata(accountId: string): Promise<AccountMetadata> {
@@ -1010,6 +1027,41 @@ export const getAccountMetadataWithCallback = (
             callback(error)
         },
     })
+}
+
+// process migration transactions
+// aggregate messages pairs / transactions
+// prepare as WalletAccount
+// update specific account in the store
+// update the balance overview accordingly
+// begin account sync
+
+export async function processLoadedAccounts(accounts: Account[]): Promise<void> {
+    if (!accounts || accounts.length <= 0) return
+
+    const accountsStore = get(wallet).accounts
+    if (!accountsStore || !get(accountsStore)) return
+
+    const totalBalanceOverview = <BalanceOverview>{ balanceRaw: 0, incomingRaw: 0, outgoingRaw: 0 }
+    await Promise.all(
+        accounts.map(async (account) => {
+            aggregateAccountActivity(account)
+            processMigratedTransactions(account.id, account.messages, account.addresses)
+
+            const accountMetadata = await asyncGetAccountMetadata(account.id)
+            const preparedAccount = prepareAccountAsWalletAccount(account, accountMetadata)
+            accountsStore.update((_accounts) => _accounts.concat([preparedAccount]))
+
+            totalBalanceOverview.balanceRaw += accountMetadata.balance
+            totalBalanceOverview.incomingRaw += accountMetadata.incoming
+            totalBalanceOverview.outgoingRaw += accountMetadata.outgoing
+        })
+    )
+    updateBalanceOverview(
+        totalBalanceOverview.balanceRaw,
+        totalBalanceOverview.incomingRaw,
+        totalBalanceOverview.outgoingRaw
+    )
 }
 
 /**

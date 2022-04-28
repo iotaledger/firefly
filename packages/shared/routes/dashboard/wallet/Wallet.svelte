@@ -23,7 +23,7 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        aggregateWalletActivity,
+        aggregateAccountActivity,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -33,6 +33,7 @@
         isFirstSessionSync,
         isTransferring,
         prepareAccountAsWalletAccount,
+        processLoadedAccounts,
         processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
@@ -53,6 +54,7 @@
         Receive,
         Send,
     } from './views/'
+    import { asyncGetAccounts } from '@lib/wallet'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -88,86 +90,38 @@
     // update specific account in the store
     // update the balance overview accordingly
 
-    function loadAccounts() {
-        const _onError = (error: any = null) => {
+    async function loadAccounts(): Promise<void> {
+        const loadedAccounts = await asyncGetAccounts()
+        try {
+            if (loadedAccounts.length <= 0) {
+                accountsLoaded.set(true)
+
+                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
+                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                if ($isFirstSessionSync) isFirstSessionSync.set(false)
+            } else {
+                await processLoadedAccounts(loadedAccounts)
+
+                accountsLoaded.set(true)
+
+                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
+                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                if ($isFirstSessionSync) isFirstSessionSync.set(false)
+            }
+        } catch (err) {
             if ($isLedgerProfile) {
-                if (!LedgerErrorType[error.type]) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                if (!LedgerErrorType[err.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
                 }
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(error?.error || 'error.global.generic'),
+                    message: localize(err?.error || 'error.global.generic'),
                 })
             }
         }
-
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = async () => {
-                    accountsLoaded.set(true)
-
-                    const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
-
-                    try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
-                    } catch (err) {
-                        _onError(err)
-                    }
-                }
-
-                if (accountsResponse.payload.length === 0) {
-                    void _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
-
-                    let completeCount = 0
-                    const newAccounts = []
-                    for (const payloadAccount of accountsResponse.payload) {
-                        aggregateWalletActivity(payloadAccount)
-
-                        getAccountMetadataWithCallback(payloadAccount.id, (err, metadata) => {
-                            if (!err) {
-                                totalBalance.balance += metadata.balance
-                                totalBalance.incoming += metadata.incoming
-                                totalBalance.outgoing += metadata.outgoing
-
-                                const account = prepareAccountAsWalletAccount(payloadAccount, metadata)
-                                newAccounts.push(account)
-                            } else {
-                                _onError(err)
-                            }
-
-                            completeCount++
-
-                            if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(
-                                    payloadAccount.id,
-                                    payloadAccount.messages,
-                                    payloadAccount.addresses
-                                )
-                                updateBalanceOverview(
-                                    totalBalance.balance,
-                                    totalBalance.incoming,
-                                    totalBalance.outgoing
-                                )
-                                void _continue()
-                            }
-                        })
-                    }
-                }
-            },
-            onError(err) {
-                _onError(err)
-            },
-        })
     }
 
     function onGenerateAddress(accountId: AccountIdentifier) {
@@ -378,7 +332,7 @@
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
-                loadAccounts()
+                void loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)

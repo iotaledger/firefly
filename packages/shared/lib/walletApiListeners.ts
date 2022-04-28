@@ -1,6 +1,6 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    aggregateWalletActivity,
+    aggregateAccountActivity,
     api,
     getAccountMetadataWithCallback,
     prepareAccountAsWalletAccount,
@@ -255,7 +255,7 @@ export const initialiseListeners = (): void => {
                                 totalBalance.incoming += meta.incoming
                                 totalBalance.outgoing += meta.outgoing
 
-                                aggregateWalletActivity(_account)
+                                aggregateAccountActivity(_account)
 
                                 const updatedAccountInfo = prepareAccountAsWalletAccount(_account, meta)
 
