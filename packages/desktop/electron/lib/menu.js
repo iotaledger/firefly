@@ -93,6 +93,12 @@ const buildTemplate = () => {
                     type: 'separator',
                 },
                 {
+                    // todo: kraftjs
+                    label: state.strings.developerMode,
+                    type: 'radio',
+                    checked: state.developerMode,
+                },
+                {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },

@@ -1,4 +1,5 @@
 export const menuState = {
+    developerMode: true, // todo: kraftjs
     loggedIn: false,
     enabled: true,
     strings: {
@@ -6,6 +7,7 @@ export const menuState = {
         checkForUpdates: 'Check for Updates',
         settings: 'Settings',
         generalSettings: 'General Settings',
+        developerMode: 'Developer Mode', // todo: kraftjs
         security: 'Security',
         advancedSettings: 'Advanced Settings',
         errorLog: 'Error Log',

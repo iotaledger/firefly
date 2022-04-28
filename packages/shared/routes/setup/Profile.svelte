@@ -50,8 +50,7 @@
         try {
             busy = true
             if (nameChanged) {
-                // todo: Delete second variable once storeProfile is changed
-                storeProfile(name, true)
+                storeProfile(name) // todo: kraftjs
 
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()

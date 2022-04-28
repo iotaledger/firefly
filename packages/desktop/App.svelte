@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage, loggedIn } from 'shared/lib/app'
+    import { developerMode, stage, loggedIn } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
@@ -57,6 +57,7 @@
         })
     }
     $: Electron.updateMenu('loggedIn', $loggedIn)
+    $: Electron.updateMenu('developerMode', $developerMode) // todo: kraftjs
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
