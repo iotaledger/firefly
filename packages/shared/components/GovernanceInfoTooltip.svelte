@@ -49,15 +49,6 @@
 <Tooltip {anchor} {position}>
     {#if type === GovernanceInfoType.StatusTimeline}
         <ul class="space-y-3 text-left">
-            <li class="grid grid-rows-1 relative" class:active={eventProgress > 0}>
-                <Text
-                    type="h5"
-                    overrideColor={eventProgress <= 0}
-                    classes="self-center {eventProgress <= 0 ? 'text-gray-200' : ''}"
-                >
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.announcement')}
-                </Text>
-            </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 1}>
                 <Text overrideColor={eventProgress <= 1} classes={eventProgress <= 1 ? 'text-gray-400' : ''}>
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexCommence), dateFormat)}
