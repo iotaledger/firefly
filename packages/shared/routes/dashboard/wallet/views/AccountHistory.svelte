@@ -10,11 +10,13 @@
         isSyncing,
         getIncomingFlag,
         isFirstSessionSync,
-        selectedAccount,
+        selectedAccountStore,
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
         walletSetupType,
+        accountSyncingQueueStore,
+        selectedAccountId,
     } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -32,11 +34,14 @@
         selectedMessage.set(null)
     }
 
+    $: isSelectedAccountSyncing =
+        $accountSyncingQueueStore.findIndex((account) => account.id === $selectedAccountId) === 0 || $isSyncing
+
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccount?.id, {
+                api.syncAccount($selectedAccountStore?.id, {
                     onSuccess() {
                         $isSyncing = false
                     },
@@ -165,14 +170,12 @@
                     {localize('general.transactions')}
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
-                {#if !$selectedMessage}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon
-                            icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
-                    </button>
-                {/if}
+                <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
+                    <Icon
+                        icon="refresh"
+                        classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                    />
+                </button>
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <ul class="flex flex-row justify-between space-x-8">

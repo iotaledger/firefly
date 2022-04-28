@@ -23,6 +23,7 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
+        accountSyncingQueueStore,
         aggregateAccountActivity,
         api,
         asyncSyncAccounts,
@@ -33,14 +34,16 @@
         isFirstSessionSync,
         isTransferring,
         prepareAccountAsWalletAccount,
+        processAccountSyncingQueue,
         processLoadedAccounts,
         processMigratedTransactions,
         removeEventListeners,
-        selectedAccount,
+        selectedAccountStore,
         selectedAccountId,
         transferState,
         updateBalanceOverview,
         wallet,
+        initializeAccountSyncingQueue,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
@@ -55,6 +58,7 @@
         Send,
     } from './views/'
     import { asyncGetAccounts } from '@lib/wallet'
+    import { networkStatus } from '../../../lib/networkStatus'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -81,34 +85,27 @@
         }
     }
 
-    // get the accounts, setting initial state for the store
-    // for each account...
-    // sync the account
-    // process migration transactions
-    // aggregate messages pairs / transactions
-    // prepare as WalletAccount
-    // update specific account in the store
-    // update the balance overview accordingly
+    $: if ($accountSyncingQueueStore.length > 0) {
+        void processAccountSyncingQueue()
+    }
+
+    // $: console.log('ACCOUNT SYNCING QUEUE: ', $accountSyncingQueueStore.map((account) => account.alias))
 
     async function loadAccounts(): Promise<void> {
         const loadedAccounts = await asyncGetAccounts()
+        accountsLoaded.set(true)
+
         try {
             if (loadedAccounts.length <= 0) {
-                accountsLoaded.set(true)
-
                 const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
                 await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
 
-                if ($isFirstSessionSync) isFirstSessionSync.set(false)
+                if ($isFirstSessionSync) {
+                    isFirstSessionSync.set(false)
+                }
             } else {
                 await processLoadedAccounts(loadedAccounts)
-
-                accountsLoaded.set(true)
-
-                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
-                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                if ($isFirstSessionSync) isFirstSessionSync.set(false)
+                initializeAccountSyncingQueue()
             }
         } catch (err) {
             if ($isLedgerProfile) {
@@ -355,16 +352,16 @@
     })
 </script>
 
-{#if $selectedAccount}
+{#if $selectedAccountStore}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccount?.id}
+        {#key $selectedAccountStore?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     {#if $accountRoute !== AccountRoute.Manage}
                         <AccountBalance onMenuClick={modal?.toggle} />
                     {/if}
                     <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccountStore?.id)}
                             <div class="px-6 my-4">
                                 <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
                             </div>
@@ -376,12 +373,12 @@
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            <ManageAccount alias={$selectedAccountStore.alias} account={$selectedAccountStore} />
                         {/if}
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                    <AccountHistory transactions={getAccountMessages($selectedAccountStore)} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

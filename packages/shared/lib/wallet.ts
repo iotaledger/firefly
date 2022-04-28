@@ -116,8 +116,9 @@ export const resetWallet = (): void => {
 // Use it to detected switches on selectedAccount
 export const selectedAccountId = writable<string | null>(null)
 
-export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $selectedAccountId)
+export const selectedAccountStore = derived(
+    [selectedAccountId, get(wallet).accounts],
+    ([$selectedAccountId, $accounts]) => $accounts.find((acc) => acc.id === $selectedAccountId)
 )
 export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
 
@@ -133,6 +134,8 @@ export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
+
+export const accountSyncingQueueStore = writable<WalletAccount[]>([])
 
 export const api: IWalletApi = new Proxy(
     { ...WalletApi },
@@ -449,8 +452,43 @@ export const asyncDeleteStorage = (): Promise<void> =>
         })
     })
 
-export const asyncSyncAccount = (account: WalletAccount): Promise<void> =>
-    new Promise((resolve) => {
+export function initializeAccountSyncingQueue(): void {
+    const accounts = get(get(wallet).accounts)
+    if (!accounts || accounts.length <= 0) return
+
+    const selectedAccount = get(selectedAccountStore)
+    if (!selectedAccount) return
+
+    accountSyncingQueueStore.set([selectedAccount, ...accounts.filter((account) => account.id !== selectedAccount.id)])
+}
+
+export async function processAccountSyncingQueue(): Promise<void> {
+    const accountSyncingQueue = get(accountSyncingQueueStore)
+    if (!accountSyncingQueue || accountSyncingQueue.length <= 0) return
+    // console.log('PROCESSING ACCOUNT SYNCING QUEUE: ', accountSyncingQueue.map((account) => account.alias))
+
+    for (const account of accountSyncingQueue) {
+        // console.log('BEGIN SYNCING ACCOUNT IN QUEUE: ', account.alias)
+        try {
+            await asyncSyncAccount(account)
+            accountSyncingQueueStore.update((_accountSyncingQueueStore) =>
+                _accountSyncingQueueStore.filter((_account) => _account.id !== account.id)
+            )
+        } catch (err) {
+            console.error(err)
+            accountSyncingQueueStore.set([])
+
+            break
+        }
+    }
+
+    if (get(isFirstSessionSync)) {
+        isFirstSessionSync.set(false)
+    }
+}
+
+export function asyncSyncAccount(account: WalletAccount): Promise<void> {
+    return new Promise((resolve) => {
         api.syncAccount(account.id, {
             onSuccess(response) {
                 getAccountMetadataWithCallback(account.id, (err, metadata) => {
@@ -473,6 +511,7 @@ export const asyncSyncAccount = (account: WalletAccount): Promise<void> =>
             },
         })
     })
+}
 
 export const asyncSyncAccounts = (
     addressIndex?: number,

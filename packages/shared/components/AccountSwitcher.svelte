@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
     import { activeProfile, getColor, updateProfile } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccountStore } from '@lib/wallet'
     import { WalletAccount } from '@lib/typings/wallet'
 
     export let accounts: WalletAccount[] = []
@@ -11,7 +11,7 @@
     let isModalOpened: boolean
 
     let lastSelectedAccount: WalletAccount = null
-    $: if ($selectedAccount) lastSelectedAccount = $selectedAccount
+    $: if ($selectedAccountStore) lastSelectedAccount = $selectedAccountStore
 
     function onClick() {
         modal?.toggle()

@@ -6,7 +6,7 @@
     import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
-    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount, wallet } from '@lib/wallet'
+    import { isSyncing, isTransferring, selectedAccountStore, setSelectedAccount, wallet } from '@lib/wallet'
     import { HR, Icon, Modal, Text } from 'shared/components'
 
     export let accounts: WalletAccount[] = []
@@ -52,11 +52,11 @@
                 >
                     <div class="flex flex-row items-center space-x-4">
                         <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                        <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
+                        <Text classes={account.id !== $selectedAccountStore?.id ? 'opacity-50' : ''} type="h5">
                             {account.alias}
                         </Text>
                     </div>
-                    <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
+                    <Text classes={account.id !== $selectedAccountStore?.id ? 'opacity-50' : ''} type="h5">
                         {account.balance}
                     </Text>
                 </button>

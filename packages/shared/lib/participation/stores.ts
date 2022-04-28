@@ -2,7 +2,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId, wallet } from '../wallet'
+import { selectedAccountStore, selectedAccountId, wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
@@ -71,7 +71,7 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
 )
 
 export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
+    [participationOverview, selectedAccountStore],
     ([$participationOverview, $selectedAccount]) =>
         $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
 )
