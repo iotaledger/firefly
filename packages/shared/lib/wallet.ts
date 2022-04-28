@@ -198,25 +198,24 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
         console.error('Initialise called when another actor already initialised')
     }
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
-
     // The new bindings
     const accountManagerInstance: AccountManager = createAccountManager({
-        storagePath,
+        storagePath: './alice-database',
         clientOptions: {
             nodes: [
                 {
-                    url: 'https://api.alphanet.iotaledger.net:14265/',
+                    url: 'http://localhost:14265/',
                     auth: null,
                     disabled: false,
                 },
             ],
             localPow: true,
         },
-        signer: {
-            Mnemonic:
-                'acoustic trophy damage hint search taste love bicycle foster cradle brown govern endless depend situate athlete pudding blame question genius transfer van random vast',
+        secretManager: {
+            Stronghold: {
+                snapshotPath: './test.stronghold',
+            }
         },
-        stronghold: {},
     })
     accountManager.set(accountManagerInstance)
 }
@@ -285,10 +284,8 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
     })
 
 export async function setStrongholdPassword(password: string): Promise<void> {
-    console.log(3)
     const manager = get(accountManager)
-    const returned = await manager.setStrongholdPassword(password)
-    console.log(3, 'remove this if function works', returned)
+    await manager.setStrongholdPassword(password)
 }
 
 export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
@@ -308,7 +305,7 @@ export async function storeMnemonic(mnemonic: string): Promise<void> {
     console.log(1)
     const manager = get(accountManager)
     console.log(mnemonic)
-    // const returendValue = await manager.storeMnemonic(mnemonic)
+    await manager.storeMnemonic(mnemonic)
     console.log(1, 'remove this if function works')
 
 }

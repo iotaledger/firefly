@@ -44,8 +44,7 @@
                 if (existingPassword) {
                     await asyncChangeStrongholdPassword(existingPassword, password)
                 } else {
-                    console.log('set')
-                    // await setStrongholdPassword(password) TODO: use this once we can get rid of mnemonic based accounts
+                    await setStrongholdPassword(password)
                 }
 
                 $appRouter.next({ password })
