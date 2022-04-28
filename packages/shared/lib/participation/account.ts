@@ -115,7 +115,7 @@ export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
         const currentParticipation =
             $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
         const { amount } = currentParticipation ?? {}
-        return amount !== $selectedAccount.rawIotaBalance
+        return $selectedAccount && amount !== $selectedAccount.rawIotaBalance
     }
 )
 
