@@ -13,7 +13,7 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, AccountMetadata, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -497,9 +497,9 @@ export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =
     new Promise((resolve) => {
         api.syncAccount(account.id, {
             onSuccess(response) {
-                getAccountMeta(account.id, (err, meta) => {
+                getAccountMetadata(account.id, (err, metadata) => {
                     if (!err) {
-                        const _account = prepareAccountInfo(account, meta)
+                        const _account = prepareAccountInfo(account, metadata)
                         get(wallet)?.accounts.update((_accounts) =>
                             _accounts.map((a) => (a.id === _account.id ? _account : a))
                         )
@@ -814,11 +814,11 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         let completeCount = 0
 
         for (const newAccount of newAccounts) {
-            getAccountMeta(newAccount.id, (err, meta) => {
+            getAccountMetadata(newAccount.id, (err, metadata) => {
                 if (!err) {
-                    totalBalance.balance += meta.balance
-                    totalBalance.incoming += meta.incoming
-                    totalBalance.outgoing += meta.outgoing
+                    totalBalance.balance += metadata.balance
+                    totalBalance.incoming += metadata.incoming
+                    totalBalance.outgoing += metadata.outgoing
 
                     const account = prepareAccountInfo(
                         Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
@@ -832,7 +832,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                                 depositAddress: newAccount.depositAddress.address,
                             }
                         ),
-                        meta
+                        metadata
                     )
 
                     api.setAlias(account?.id, account?.alias, {
@@ -972,17 +972,9 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
     return balanceHistory
 }
 
-export const getAccountMeta = (
+export const getAccountMetadata = (
     accountId: string,
-    callback: (
-        error: ErrorEventPayload,
-        meta?: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ) => void
+    callback: (error: ErrorEventPayload, meta?: AccountMetadata) => void
 ): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
@@ -1006,15 +998,7 @@ export const getAccountMeta = (
     })
 }
 
-export const prepareAccountInfo = (
-    account: Account,
-    meta: {
-        balance: number
-        incoming: number
-        outgoing: number
-        depositAddress: string
-    }
-): WalletAccount => {
+export const prepareAccountInfo = (account: Account, meta: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 

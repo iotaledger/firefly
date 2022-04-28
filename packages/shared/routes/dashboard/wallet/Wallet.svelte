@@ -27,7 +27,7 @@
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMeta,
+        getAccountMetadata,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
@@ -79,6 +79,15 @@
         }
     }
 
+    // get the accounts, setting initial state for the store
+    // for each account...
+    // sync the account
+    // process migration transactions
+    // aggregate messages pairs / transactions
+    // prepare as WalletAccount
+    // update specific account in the store
+    // update the balance overview accordingly
+
     function loadAccounts() {
         const _onError = (error: any = null) => {
             if ($isLedgerProfile) {
@@ -123,13 +132,13 @@
                     for (const payloadAccount of accountsResponse.payload) {
                         addMessagesPair(payloadAccount)
 
-                        getAccountMeta(payloadAccount.id, (err, meta) => {
+                        getAccountMetadata(payloadAccount.id, (err, metadata) => {
                             if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
+                                totalBalance.balance += metadata.balance
+                                totalBalance.incoming += metadata.incoming
+                                totalBalance.outgoing += metadata.outgoing
 
-                                const account = prepareAccountInfo(payloadAccount, meta)
+                                const account = prepareAccountInfo(payloadAccount, metadata)
                                 newAccounts.push(account)
                             } else {
                                 _onError(err)

@@ -27,7 +27,7 @@ export interface SyncAccountOptions {
     skipPersistance?: boolean
 }
 
-export interface Account {
+export type Account = {
     id: string
     alias: string
     createdAt: string
@@ -38,6 +38,13 @@ export interface Account {
     storagePath: string
     messages: Message[]
     addresses: Address[]
+}
+
+export type AccountMetadata = {
+    balance: number
+    incoming: number
+    outgoing: number
+    depositAddress: string
 }
 
 export type AccountIdentifier = number | string

@@ -2,7 +2,7 @@ import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     addMessagesPair,
     api,
-    getAccountMeta,
+    getAccountMetadata,
     prepareAccountInfo,
     processMigratedTransactions,
     replaceMessage,
@@ -248,7 +248,7 @@ export const initialiseListeners = (): void => {
                     // 3. Only update the account for which the balance change event emitted;
                     // 4. Update balance overview & accounts
                     for (const _account of response.payload) {
-                        getAccountMeta(_account.id, (metaErr, meta) => {
+                        getAccountMetadata(_account.id, (metaErr, meta) => {
                             if (!metaErr) {
                                 // Compute balance overview for each account
                                 totalBalance.balance += meta.balance
