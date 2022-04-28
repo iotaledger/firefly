@@ -571,14 +571,13 @@
             },
             "info": {
                 "title": "Governance info",
-                "description": "The IOTA community together with the IOTA Foundation, has developed the technology that makes it possible to use your IOTA tokens in governance decisions here in the secure environment of the Firefly Wallet.",
-                "link": "Learn about voting with Firefly",
+                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
+                "link": "Learn about voting with IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "announcement": "Announcement",
                         "votingOpen": "Voting open",
-                        "countingStarts": "Counting starts",
-                        "countingStops": "Counting stops"
+                        "countingStarts": "Counting begins",
+                        "countingStops": "Counting ends"
                     },
                     "votingRate": {
                         "title": "Voting rate",
@@ -600,8 +599,8 @@
                 "button": "View proposal",
                 "treasury": {
                     "notFound": {
-                        "title": "Couldn't load Community Treasury vote.",
-                        "subtitle": "Please connect to nodes that support this proposal",
+                        "title": "Unable to load Community Treasury vote",
+                        "subtitle": "Please connect to a node that supports this proposal",
                         "buttonConnect": "Connect to default node",
                         "buttonSettings": "View node settings"
                     }
@@ -612,12 +611,12 @@
                 "votingProgress": "Voting progress",
                 "votingPower": "Your voting weight",
                 "votesCounted": "Your total votes counted",
-                "countingStarts": "Counting starts on",
-                "countingLength": "Counting length",
+                "countingStarts": "Counting begins on",
+                "countingLength": "Counting duration",
                 "currentResults": "Current results",
                 "answerHeader": {
                     "activeVoting": "Active voting",
-                    "selected": "Selected",
+                    "selected": "Submitted",
                     "notSelected": "Not selected",
                     "winner": "Winner"
                 }
@@ -738,9 +737,9 @@
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently being staked and voted. This may unstake and unvote your tokens. Feel free to send the transfer but you may need to restake and revote your remaining tokens afterwards.",
+                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
                 "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-                "vote": "You are sending a transfer from a wallet that is currently being voted. This may unvote your tokens. Feel free to send the transfer but you may need to revote your remaining tokens afterwards."
+                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
@@ -846,10 +845,9 @@
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "votingConfirmation": {
-            "additionalInfo": "Please be aware that changing or stopping your vote during the counting period won't impact any votes that have been counted prior to this change.",
-            "votesSubmitted": "Your votes are submitted",
-            "votesStopped": "Your vote has been stopped",
-            "votedSuccessfully": "You have started casting your vote for {account}.",
+            "additionalInfoStopping": "Please note that stopping voting during the counting period won't impact any votes that have already been counted.",
+            "additionalInfoChanging": "Please note that changing your vote during the counting period won't impact any votes that have already been counted.",
+            "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}."
         },
         "shimmer-info": {
@@ -1008,10 +1006,10 @@
         "merge": "Merge",
         "mergeFunds": "Merge funds",
         "done": "Done",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change votes",
-        "mergeVotes": "Merge votes",
-        "stopVotes": "Stop votes",
+        "castVotes": "Cast vote",
+        "changeVotes": "Change vote",
+        "mergeVotes": "Merge vote",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more"
     },
@@ -1138,10 +1136,6 @@
         "transferringTo": "Transferring to {account}",
         "transferFrom": "Transfer from {account}",
         "transferTo": "Transfer to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
         "votingTransaction": "Voting Transaction",
@@ -1214,15 +1208,9 @@
                 }
             }
         },
-        "success": {
-            "stake": "Your funds have been staked for {account}.",
-            "unstake": "Your funds have been unstaked for {account}.",
-            "vote": "You voted with {account}",
-            "unvote": "You unvoted with {account}"
-        },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "participating": "Please wait until you have completed staking/voting before changing wallets."
     },
     "error": {
         "profile": {
