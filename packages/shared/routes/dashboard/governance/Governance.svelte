@@ -1,12 +1,24 @@
 <script lang="typescript">
-    import { GovernanceDashboard, GovernanceEventDetails } from './views'
-    import { governanceRoute } from '@core/router'
+    import { governanceRoute, governanceRouter } from '@core/router'
     import { GovernanceRoute } from '@core/router/enums'
+    import { getParticipationEvents } from '@lib/participation/api'
+    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
     import { participationEvents } from 'shared/lib/participation/stores'
     import { selectedAccount } from 'shared/lib/wallet'
-    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
+    import { onMount } from 'svelte'
+    import { GovernanceDashboard, GovernanceEventDetails } from './views'
 
     $: event = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
+
+    $: {
+        if (!event) {
+            $governanceRouter.reset()
+        }
+    }
+
+    onMount(async () => {
+        await getParticipationEvents()
+    })
 </script>
 
 <div class="governance-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
