@@ -1,9 +1,9 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    addMessagesPair,
+    aggregateWalletActivity,
     api,
     getAccountMetadata,
-    prepareAccountInfo,
+    prepareAccountAsWalletAccount,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -255,9 +255,9 @@ export const initialiseListeners = (): void => {
                                 totalBalance.incoming += meta.incoming
                                 totalBalance.outgoing += meta.outgoing
 
-                                addMessagesPair(_account)
+                                aggregateWalletActivity(_account)
 
-                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
+                                const updatedAccountInfo = prepareAccountAsWalletAccount(_account, meta)
 
                                 // Keep the messages as is because they get updated through a different event
                                 // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here

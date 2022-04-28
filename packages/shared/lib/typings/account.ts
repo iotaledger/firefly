@@ -20,7 +20,7 @@ export interface ListMessagesFilter {
     from: number
 }
 
-export interface SyncAccountOptions {
+export interface AccountSyncOptions {
     addressIndex?: number
     gapLimit?: number
     accountDiscoveryThreshold?: number
@@ -265,7 +265,7 @@ export function syncAccount(
     bridge: Bridge,
     __ids: CommunicationIds,
     accountId: AccountIdentifier,
-    options?: SyncAccountOptions
+    options?: AccountSyncOptions
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }

@@ -13,7 +13,7 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, AccountMetadata, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, AccountMetadata, SignerType, AccountSyncOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -383,7 +383,7 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
             },
             {
                 onSuccess(response) {
-                    const preparedAccount = prepareAccountInfo(response.payload, {
+                    const preparedAccount = prepareAccountAsWalletAccount(response.payload, {
                         balance: 0,
                         incoming: 0,
                         outgoing: 0,
@@ -449,6 +449,31 @@ export const asyncDeleteStorage = (): Promise<void> =>
         })
     })
 
+export const asyncSyncAccount = (account: WalletAccount): Promise<void> =>
+    new Promise((resolve) => {
+        api.syncAccount(account.id, {
+            onSuccess(response) {
+                getAccountMetadata(account.id, (err, metadata) => {
+                    if (!err) {
+                        const _account = prepareAccountAsWalletAccount(account, metadata)
+                        get(wallet)?.accounts.update((_accounts) =>
+                            _accounts.map((a) => (a.id === _account.id ? _account : a))
+                        )
+                        updateProfile(
+                            'hiddenAccounts',
+                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
+                        )
+                    }
+
+                    resolve()
+                })
+            },
+            onError(err) {
+                resolve()
+            },
+        })
+    })
+
 export const asyncSyncAccounts = (
     addressIndex?: number,
     gapLimit?: number,
@@ -489,31 +514,6 @@ export const asyncSyncAccounts = (
                 } else {
                     reject(err)
                 }
-            },
-        })
-    })
-
-export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =>
-    new Promise((resolve) => {
-        api.syncAccount(account.id, {
-            onSuccess(response) {
-                getAccountMetadata(account.id, (err, metadata) => {
-                    if (!err) {
-                        const _account = prepareAccountInfo(account, metadata)
-                        get(wallet)?.accounts.update((_accounts) =>
-                            _accounts.map((a) => (a.id === _account.id ? _account : a))
-                        )
-                        updateProfile(
-                            'hiddenAccounts',
-                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
-                        )
-                    }
-
-                    resolve()
-                })
-            },
-            onError(err) {
-                resolve()
             },
         })
     })
@@ -565,7 +565,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  *
  * @returns {void}
  */
-export function addMessagesPair(account: Account): void {
+export function aggregateWalletActivity(account: Account): void {
     // Only keep messages with a payload
     account.messages = account.messages.filter((m) => m.payload)
 
@@ -820,7 +820,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                     totalBalance.incoming += metadata.incoming
                     totalBalance.outgoing += metadata.outgoing
 
-                    const account = prepareAccountInfo(
+                    const account = prepareAccountAsWalletAccount(
                         Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                             {} as WalletAccount,
                             newAccount,
@@ -998,7 +998,7 @@ export const getAccountMetadata = (
     })
 }
 
-export const prepareAccountInfo = (account: Account, meta: AccountMetadata): WalletAccount => {
+export const prepareAccountAsWalletAccount = (account: Account, meta: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
@@ -1270,12 +1270,12 @@ export const findAccountWithAnyAddress = (
 /**
  * Get the sync options for an account
  * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
- * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
+ * @returns {AccountSyncOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
-export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions =>
+export const getAccountSyncOptions = (isManualSync: boolean = false): AccountSyncOptions =>
     isInitialAccountSync()
-        ? calculateInitialSyncAccountOptions(get(walletSetupType))
-        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+        ? calculateInitialAccountSyncOptions(get(walletSetupType))
+        : calculateRegularAccountSyncOptions(get(activeProfile).type, isManualSync)
 
 /**
  * Determines if the API call for syncing accounts is the initial one
@@ -1283,7 +1283,7 @@ export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccoun
  */
 export const isInitialAccountSync = (): boolean => get(walletSetupType) !== null && get(isFirstSessionSync)
 
-const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 
@@ -1303,7 +1303,7 @@ const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOp
     return { gapLimit, accountDiscoveryThreshold }
 }
 
-const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSync: boolean): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 

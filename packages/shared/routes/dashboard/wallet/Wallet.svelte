@@ -23,16 +23,16 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        addMessagesPair,
+        aggregateWalletActivity,
         api,
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMetadata,
-        getSyncAccountOptions,
+        getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         isTransferring,
-        prepareAccountInfo,
+        prepareAccountAsWalletAccount,
         processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
@@ -107,7 +107,7 @@
                 const _continue = async () => {
                     accountsLoaded.set(true)
 
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+                    const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
 
                     try {
                         await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
@@ -130,7 +130,7 @@
                     let completeCount = 0
                     const newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
-                        addMessagesPair(payloadAccount)
+                        aggregateWalletActivity(payloadAccount)
 
                         getAccountMetadata(payloadAccount.id, (err, metadata) => {
                             if (!err) {
@@ -138,7 +138,7 @@
                                 totalBalance.incoming += metadata.incoming
                                 totalBalance.outgoing += metadata.outgoing
 
-                                const account = prepareAccountInfo(payloadAccount, metadata)
+                                const account = prepareAccountAsWalletAccount(payloadAccount, metadata)
                                 newAccounts.push(account)
                             } else {
                                 _onError(err)
