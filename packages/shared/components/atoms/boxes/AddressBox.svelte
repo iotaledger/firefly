@@ -2,9 +2,9 @@
     import Box from './Box.svelte'
     import { Text } from 'shared/components'
 
-    export let address: string = ''
-    export let clearBackground: false
-    export let classes: string = ''
+    export let address = ''
+    export let clearBackground = false
+    export let classes = ''
 </script>
 
 {#if address}
