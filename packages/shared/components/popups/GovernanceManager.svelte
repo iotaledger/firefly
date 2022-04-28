@@ -232,7 +232,13 @@
         {#if $currentAccountTreasuryVoteValue}
             <div class="flex items-center mb-6 bg-blue-100 dark:bg-gray-800 rounded-xl p-3">
                 <Icon icon="info" classes="text-gray-500 font-bold" />
-                <Text type="p" classes="px-3">{localize('popups.votingConfirmation.warning')}</Text>
+                <Text type="p" classes="px-3"
+                    >{localize(
+                        `popups.votingConfirmation.additionalInfo${
+                            $currentAccountTreasuryVoteValue !== nextVote.value ? 'Changing' : 'Stopping'
+                        }`
+                    )}</Text
+                >
             </div>
         {/if}
         {#if canMergeVotes}

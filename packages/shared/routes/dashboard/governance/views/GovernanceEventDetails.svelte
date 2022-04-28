@@ -316,7 +316,7 @@
                 <div class="flex flex-col flex-wrap space-y-3">
                     <div class="flex flex-row items-center space-x-2">
                         <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
-                            {localize('views.governance.votingPower.title')}
+                            {localize('views.governance.votingPower.info.title')}
                         </Text>
                         <button
                             class="relative"
