@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { formatDate, localize } from '@core/i18n'
     import { canParticipate } from '@lib/participation'
-    import { currentAccountTreasuryVoteValue, selectedAccountParticipationOverview } from '@lib/participation/account'
+    import {
+        currentAccountTreasuryVotePartiallyUnvotedAmount,
+        currentAccountTreasuryVoteValue,
+        hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
+        selectedAccountParticipationOverview,
+    } from '@lib/participation/account'
     import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
@@ -10,8 +15,8 @@
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
     import { formatUnitBestMatch } from '@lib/units'
-    import { AccountColors, handleTransactionEventData, transferState } from '@lib/wallet'
-    import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text } from 'shared/components'
+    import { AccountColors, handleTransactionEventData, selectedAccount, transferState } from '@lib/wallet'
+    import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
 
@@ -62,6 +67,7 @@
         statusTimeline: { anchor: null as HTMLElement, show: false },
         votingRate: { anchor: null as HTMLElement, show: false },
         countedVotes: { anchor: null as HTMLElement, show: false },
+        partiallyVoted: { anchor: null as HTMLElement, show: false },
     }
 
     function handleAnswerClick(_nextVote: VotingEventAnswer): void {
@@ -167,13 +173,20 @@
             case 'countedVotes':
                 tooltip.countedVotes.show = show
                 break
+            case 'partiallyVoted':
+                tooltip.partiallyVoted.show = show
+                break
             default:
                 break
         }
     }
 </script>
 
-<div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
+<div
+    id="governance-manager"
+    class="w-full h-full grid grid-cols-3 gap-4 min-h-0"
+    style="grid-template-rows: min-content 1fr"
+>
     <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
         <div class="flex flex-start items-center mb-2">
             <Text
@@ -205,7 +218,12 @@
                 secondary={!isWinnerAnswer(answer?.value)}
                 disabled={!canParticipate(event?.status?.status)}
                 active={isSelected($currentAccountTreasuryVoteValue, answer?.value)}
-                classes="px-6 flex justify-between mb-4 overflow-hidden"
+                classes="relative px-6 flex justify-between mb-4 overflow-hidden {isSelected(
+                    $currentAccountTreasuryVoteValue,
+                    answer?.value
+                ) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
+                    ? 'caution-border'
+                    : ''}"
             >
                 <div class="flex justify-between w-full items-center">
                     <div class="flex flex-col mr-32">
@@ -243,6 +261,21 @@
                                 {getAnswerHeader($currentAccountTreasuryVoteValue, answer?.value)}
                             </Text>
                         </div>
+                        {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
+                            <div
+                                bind:this={tooltip.partiallyVoted.anchor}
+                                on:mouseenter={() => toggleTooltip('partiallyVoted', true)}
+                                on:mouseleave={() => toggleTooltip('partiallyVoted', false)}
+                                class="absolute top-2 right-2"
+                            >
+                                <Icon
+                                    icon="exclamation"
+                                    width="17"
+                                    height="17"
+                                    classes="fill-current text-yellow-600 group-hover:text-gray-900"
+                                />
+                            </div>
+                        {/if}
                         <Text
                             type="h3"
                             classes="mb-2 text-left {isWinnerAnswer(answer?.value)
@@ -263,9 +296,15 @@
                         </Text>
                     </div>
                     {#if canParticipate(event?.status?.status)}
-                        <div>
-                            <Icon icon="chevron-right" />
-                        </div>
+                        {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
+                            <div class="px-4 py-2 border-2 border-solid border-yellow-600 rounded-lg">
+                                <Text type="p">{localize('views.governance.manageVote')}</Text>
+                            </div>
+                        {:else}
+                            <div>
+                                <Icon icon="chevron-right" />
+                            </div>
+                        {/if}
                     {/if}
                 </div>
             </Button>
@@ -385,6 +424,20 @@
 {#if tooltip.statusTimeline.show}
     <GovernanceInfoTooltip {event} type="statusTimeline" anchor={tooltip.statusTimeline.anchor} position="right" />
 {/if}
+{#if tooltip.partiallyVoted.show}
+    <Tooltip anchor={tooltip.partiallyVoted.anchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            {localize('views.governance.info.tooltip.partiallyVoted.title', {
+                values: { amount: formatUnitBestMatch($currentAccountTreasuryVotePartiallyUnvotedAmount) },
+            })}
+        </Text>
+        <Text type="p" secondary classes="text-left">
+            {localize('views.governance.info.tooltip.partiallyVoted.body', {
+                values: { account: $selectedAccount?.alias },
+            })}
+        </Text>
+    </Tooltip>
+{/if}
 
 <style>
     .pulse {
@@ -396,5 +449,10 @@
             transform: scale(1.5);
             opacity: 0;
         }
+    }
+    :global(#governance-manager button.caution-border) {
+        @apply border-2;
+        @apply border-solid;
+        @apply border-yellow-600;
     }
 </style>

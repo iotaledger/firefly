@@ -587,6 +587,10 @@
                     "countedVotes": {
                         "title": "Counted votes",
                         "body": "You must keep voting for the remaining period in order to issue your full voting weight"
+                    },
+                    "partiallyVoted": {
+                        "title": "New unvoted funds: {amount}",
+                        "body": "You have extra funds available in {account}. You can turn these funds into votes by merging them."
                     }
                 }
             },
@@ -622,7 +626,8 @@
                     "winner": "Winner"
                 }
             },
-            "votes": "votes"
+            "votes": "votes",
+            "manageVote": "Manage voting funds"
         }
     },
     "popups": {
