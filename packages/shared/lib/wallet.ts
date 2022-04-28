@@ -1,19 +1,19 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { ErrorEventPayload, Event, TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, writable } from 'svelte/store'
+import { derived, get, Writable, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
 import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
-import { buildClientOptions } from './network'
+import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, AccountMetadata, SignerType, AccountSyncOptions, SyncedAccount } from './typings/account'
+import { Account, AccountMetadata, SignerType, AccountSyncOptions, SyncedAccount, Balance } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -453,7 +453,7 @@ export const asyncSyncAccount = (account: WalletAccount): Promise<void> =>
     new Promise((resolve) => {
         api.syncAccount(account.id, {
             onSuccess(response) {
-                getAccountMetadata(account.id, (err, metadata) => {
+                getAccountMetadataWithCallback(account.id, (err, metadata) => {
                     if (!err) {
                         const _account = prepareAccountAsWalletAccount(account, metadata)
                         get(wallet)?.accounts.update((_accounts) =>
@@ -491,9 +491,14 @@ export const asyncSyncAccounts = (
                     processMigratedTransactions(account.id, account.messages, account.addresses)
                 })
 
-                updateAccounts(syncedAccounts)
-
-                isSyncing.set(false)
+                void updateAccounts(syncedAccounts)
+                    .then(() => {
+                        isSyncing.set(false)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        isSyncing.set(false)
+                    })
 
                 resolve()
             },
@@ -517,6 +522,22 @@ export const asyncSyncAccounts = (
             },
         })
     })
+
+export function asyncSetAlias(accountId: string, alias: string): Promise<void> {
+    if (!accountId || !alias) return
+
+    return new Promise((resolve, reject) => {
+        api.setAlias(accountId, alias, {
+            onSuccess(response: Event<void>) {
+                resolve()
+            },
+            onError(err: ErrorEventPayload) {
+                console.error(err)
+                reject(err)
+            },
+        })
+    })
+}
 
 export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
     if (!url || (!url && !auth)) {
@@ -558,12 +579,6 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
 /**
  * NOTE: This method mutates account object
  * Creates a message pair for internal messages and adds it to the account messages
- *
- * @method addMessagesPair
- *
- * @param {Account} account
- *
- * @returns {void}
  */
 export function aggregateWalletActivity(account: Account): void {
     // Only keep messages with a payload
@@ -700,22 +715,15 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 }
 
 /**
- * Updates balance overview
- *
- * @method updateBalanceOverview
- *
- * @param {number} balance
- * @param {number} incoming
- * @param {number} outgoing
- *
- * @returns {void}
+ * Updates the balance overview store.
  */
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
-    const { balanceOverview } = get(wallet)
+    const balanceOverviewStore = get(wallet).balanceOverview
+    if (!balanceOverviewStore) return
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    balanceOverview.update((overview) =>
+    balanceOverviewStore.update((overview) =>
         Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             incoming: formatUnitBestMatch(incoming, true, 3),
             incomingRaw: incoming,
@@ -731,11 +739,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
 }
 
 /**
- * Updates balance overview fiat value
- *
- * @method refreshBalanceOverview
- *
- * @returns {void}
+ * Refreshes the balance overview store by updating it with its current values.
  */
 export const refreshBalanceOverview = (): void => {
     const { balanceOverview } = get(wallet)
@@ -743,136 +747,125 @@ export const refreshBalanceOverview = (): void => {
     updateBalanceOverview(bo.balanceRaw, bo.incomingRaw, bo.outgoingRaw)
 }
 
-/**
- * Updates accounts information after a successful sync accounts operation
- *
- * @method updateAccounts
- *
- * @param {SyncedAccount[]} syncedAccounts
- *
- * @returns {void}
- */
-export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
-    const { accounts } = get(wallet)
+function combineAccountAddresses(oldAccountAddresses: Address[], newAccountAddresses: Address[]): Address[] {
+    const combinedAccountAddresses: Address[] = oldAccountAddresses
 
-    const existingAccountIds = get(accounts).map((account) => account.id)
+    for (const newAccountAddress of newAccountAddresses) {
+        const addressIndex = oldAccountAddresses.findIndex(
+            (oldAccountAddress) => oldAccountAddress.address === newAccountAddress.address
+        )
+        if (addressIndex < 0) {
+            combinedAccountAddresses.push(newAccountAddress)
+        } else {
+            combinedAccountAddresses[addressIndex] = newAccountAddress
+        }
+    }
 
-    const { newAccounts, existingAccounts } = syncedAccounts.reduce(
-        (acc, syncedAccount: SyncedAccount) => {
-            if (existingAccountIds.includes(syncedAccount.id)) {
-                acc.existingAccounts.push(syncedAccount)
-            } else {
-                acc.newAccounts.push(syncedAccount)
-            }
+    return combinedAccountAddresses
+}
 
-            return acc
-        },
-        { newAccounts: [], existingAccounts: [] }
+function combineAccountMessages(oldAccountMessages: Message[], newAccountMessages: Message[]): Message[] {
+    const combinedAccountMessages: Message[] = oldAccountMessages
+
+    for (const message of newAccountMessages) {
+        const messageIndex = newAccountMessages.findIndex(
+            (m) => m.id === message.id && getIncomingFlag(m.payload) === getIncomingFlag(message.payload)
+        )
+        if (messageIndex < 0) {
+            combinedAccountMessages.push(message)
+        } else {
+            combinedAccountMessages[messageIndex] = message
+        }
+    }
+
+    return combinedAccountMessages
+}
+
+function updateStoredAccount(
+    accountsStore: Writable<WalletAccount[]>,
+    storedAccount: WalletAccount,
+    syncedAccount: SyncedAccount
+): void {
+    if (!accountsStore || !get(accountsStore) || !storedAccount || !syncedAccount) return
+
+    const newAccount = <WalletAccount>{}
+
+    newAccount.depositAddress = syncedAccount.depositAddress.address
+    newAccount.addresses = combineAccountAddresses(storedAccount.addresses, syncedAccount.addresses)
+    newAccount.messages = combineAccountMessages(storedAccount.messages, syncedAccount.messages)
+
+    accountsStore.update((accounts) =>
+        accounts.map((account) => (account.id === storedAccount.id ? { ...account, ...newAccount } : account))
+    )
+}
+
+async function updateNewAccount(accountsStore: Writable<WalletAccount[]>, syncedAccount: SyncedAccount): Promise<void> {
+    const accounts = get(accountsStore)
+    if (!accountsStore || !accounts || accounts.length <= 0 || !syncedAccount) return
+
+    const accountMetadata = await asyncGetAccountMetadata(syncedAccount.id)
+    const newAccount = prepareAccountAsWalletAccount(
+        Object.assign<WalletAccount, SyncedAccount, Partial<WalletAccount>>({} as WalletAccount, syncedAccount, {
+            alias: `${localize('general.account')} ${syncedAccount.index + 1}`,
+            clientOptions: getDefaultClientOptions(),
+            createdAt: new Date().toISOString(),
+            signerType: accounts[0]?.signerType,
+            depositAddress: syncedAccount.depositAddress.address,
+        }),
+        accountMetadata
     )
 
-    const updatedStoredAccounts = get(accounts).map((storedAccount) => {
-        const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
+    await asyncSetAlias(newAccount?.id, newAccount?.alias)
 
-        // Update deposit address
-        storedAccount.depositAddress = syncedAccount.depositAddress.address
+    accountsStore.update((_accounts) => _accounts.concat([newAccount]))
+}
 
-        // If we have received a new address, simply add it;
-        // If we have received an existing address, update the properties.
-        for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
-            if (addressIndex < 0) {
-                storedAccount.addresses.push(addr)
-            } else {
-                storedAccount.addresses[addressIndex] = addr
-            }
-        }
+/**
+ * Updates the accounts store with data from a freshly synced account.
+ */
+export async function updateAccount(
+    accountsStore: Writable<WalletAccount[]>,
+    syncedAccount: SyncedAccount
+): Promise<void> {
+    if (!accountsStore || !get(accountsStore) || !syncedAccount) return
 
-        // If we have received a new message, simply add it;
-        // If we have received an existing message, update the properties.
-        for (const msg of syncedAccount.messages) {
-            const msgIndex = storedAccount.messages.findIndex(
-                (m) => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload)
-            )
-            if (msgIndex < 0) {
-                storedAccount.messages.push(msg)
-            } else {
-                storedAccount.messages[msgIndex] = msg
-            }
-        }
-
-        return storedAccount
-    })
-
-    if (newAccounts.length) {
-        const totalBalance = {
-            balance: 0,
-            incoming: 0,
-            outgoing: 0,
-        }
-
-        const _accounts = []
-        let completeCount = 0
-
-        for (const newAccount of newAccounts) {
-            getAccountMetadata(newAccount.id, (err, metadata) => {
-                if (!err) {
-                    totalBalance.balance += metadata.balance
-                    totalBalance.incoming += metadata.incoming
-                    totalBalance.outgoing += metadata.outgoing
-
-                    const account = prepareAccountAsWalletAccount(
-                        Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                            {} as WalletAccount,
-                            newAccount,
-                            {
-                                alias: `${localize('general.account')} ${newAccount.index + 1}`,
-                                clientOptions: existingAccounts[0]?.clientOptions,
-                                createdAt: new Date().toISOString(),
-                                signerType: existingAccounts[0]?.signerType,
-                                depositAddress: newAccount.depositAddress.address,
-                            }
-                        ),
-                        metadata
-                    )
-
-                    api.setAlias(account?.id, account?.alias, {
-                        onSuccess() {},
-                        onError(err) {
-                            console.error(err)
-                        },
-                    })
-
-                    _accounts.push(account)
-                } else {
-                    console.error(err)
-                }
-
-                completeCount++
-                if (completeCount === newAccounts.length) {
-                    const { balanceOverview } = get(wallet)
-                    const overview = get(balanceOverview)
-
-                    accounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
-
-                    updateBalanceOverview(
-                        overview.balanceRaw + totalBalance.balance,
-                        overview.incomingRaw + totalBalance.incoming,
-                        overview.outgoingRaw + totalBalance.outgoing
-                    )
-                }
-            })
-        }
+    const accountToUpdate = get(accountsStore).find((a) => a.id === syncedAccount.id)
+    if (accountToUpdate) {
+        updateStoredAccount(accountsStore, accountToUpdate, syncedAccount)
     } else {
-        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index))
+        await updateNewAccount(accountsStore, syncedAccount)
     }
 }
 
 /**
- * Updates balance fiat value for every account
- *
- * @method updateAccountBalanceEquiv
- *
- * @returns {void}
+ * Updates the accounts store with data from freshly synced accounts.
+ */
+export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<void[]> {
+    if (!syncedAccounts || syncedAccounts.length <= 0) return
+
+    const { accounts } = get(wallet)
+    if (!accounts) return
+
+    const totalBalanceOverview = <BalanceOverview>{ balanceRaw: 0, incomingRaw: 0, outgoingRaw: 0 }
+    await Promise.all(
+        syncedAccounts.map(async (syncedAccount) => {
+            const accountMetadata = await asyncGetAccountMetadata(syncedAccount.id)
+            totalBalanceOverview.balanceRaw += accountMetadata.balance
+            totalBalanceOverview.incomingRaw += accountMetadata.incoming
+            totalBalanceOverview.outgoingRaw += accountMetadata.outgoing
+
+            return updateAccount(accounts, syncedAccount)
+        })
+    )
+    updateBalanceOverview(
+        totalBalanceOverview.balanceRaw,
+        totalBalanceOverview.incomingRaw,
+        totalBalanceOverview.outgoingRaw
+    )
+}
+
+/**
+ * Updates an account balance with fiat conversions.
  */
 export const updateAccountsBalanceEquiv = (): void => {
     const { accounts } = get(wallet)
@@ -895,14 +888,7 @@ export const updateAccountsBalanceEquiv = (): void => {
 }
 
 /**
- * Gets balance history for each account in market data timestamps
- *
- * @method getAccountBalanceHistory
- *
- * @param {Account} accounts
- * @param {number} balanceRaw
- * @param {PriceData} [priceData]
- *
+ * Gets balance history for each account in market data timestamps.
  */
 export const getAccountBalanceHistory = (account: WalletAccount, priceData: PriceData): BalanceHistory => {
     const balanceHistory: BalanceHistory = {
@@ -972,9 +958,37 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
     return balanceHistory
 }
 
-export const getAccountMetadata = (
+/**
+ * Retrieves the metadata (i.e. balance information and deposit address) from an account.
+ */
+export function asyncGetAccountMetadata(accountId: string): Promise<AccountMetadata> {
+    return new Promise((resolve, reject) => {
+        api.getBalance(accountId, {
+            onSuccess(balanceResponse: Event<Balance>) {
+                api.latestAddress(accountId, {
+                    onSuccess(latestAddressResponse: Event<Address>) {
+                        resolve({
+                            balance: balanceResponse.payload.total,
+                            incoming: balanceResponse.payload.incoming,
+                            outgoing: balanceResponse.payload.outgoing,
+                            depositAddress: latestAddressResponse.payload.address,
+                        })
+                    },
+                    onError(err: ErrorEventPayload) {
+                        reject(err)
+                    },
+                })
+            },
+            onError(err: ErrorEventPayload) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const getAccountMetadataWithCallback = (
     accountId: string,
-    callback: (error: ErrorEventPayload, meta?: AccountMetadata) => void
+    callback: (error: ErrorEventPayload, metadata?: AccountMetadata) => void
 ): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
@@ -998,6 +1012,9 @@ export const getAccountMetadata = (
     })
 }
 
+/**
+ * Prepares a base account object with extra metadata.
+ */
 export const prepareAccountAsWalletAccount = (account: Account, meta: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta

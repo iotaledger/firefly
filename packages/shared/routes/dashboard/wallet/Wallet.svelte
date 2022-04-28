@@ -27,7 +27,7 @@
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMetadata,
+        getAccountMetadataWithCallback,
         getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
@@ -132,7 +132,7 @@
                     for (const payloadAccount of accountsResponse.payload) {
                         aggregateWalletActivity(payloadAccount)
 
-                        getAccountMetadata(payloadAccount.id, (err, metadata) => {
+                        getAccountMetadataWithCallback(payloadAccount.id, (err, metadata) => {
                             if (!err) {
                                 totalBalance.balance += metadata.balance
                                 totalBalance.incoming += metadata.incoming
