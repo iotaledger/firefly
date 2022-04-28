@@ -1,19 +1,9 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
-    import {
-        Animation,
-        Button,
-        ButtonCheckbox,
-        Input,
-        OnboardingLayout,
-        Text,
-        CollapsibleBlock,
-    } from 'shared/components'
+    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
     import {
         cleanupInProgressProfiles,
         storeProfile,
@@ -26,7 +16,6 @@
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
-    import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
 
@@ -34,12 +23,10 @@
     let busy = false
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage) !== Stage.PROD
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
     $: nameChanged = $newProfile?.name !== profileName.trim()
-    $: hasDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
     async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
@@ -54,7 +41,7 @@
 
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
-        if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
+        if (nameChanged && previousInitializedId) {
             destroyActor(previousInitializedId)
         }
     }
@@ -62,8 +49,9 @@
     async function initialiseProfile(name: string): Promise<void> {
         try {
             busy = true
-            if (nameChanged || hasDeveloperProfileChanged) {
-                storeProfile(name, isDeveloperProfile)
+            if (nameChanged) {
+                // todo: Delete second variable once storeProfile is changed
+                storeProfile(name, true)
 
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
@@ -71,17 +59,7 @@
                 initialise($newProfile.id, path, sendCrashReports, machineId)
                 initialiseMigrationListeners()
             }
-
-            if (get(stage) === Stage.PROD && isDeveloperProfile) {
-                openPopup({
-                    type: 'confirmDeveloperProfile',
-                    props: {
-                        handleContinueClick: () => $appRouter.next(),
-                    },
-                })
-            } else {
-                $appRouter.next()
-            }
+            $appRouter.next()
         } catch (err) {
             showAppNotification({
                 type: 'error',
@@ -119,19 +97,6 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        {#if get(stage) === Stage.PROD}
-            <CollapsibleBlock
-                label={locale('views.profile.advancedOptions')}
-                showBlock={get(newProfile)?.isDeveloperProfile ?? false}
-            >
-                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-                    <div class="text-left">
-                        <Text type="p">{locale('views.profile.developer.label')}</Text>
-                        <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-                    </div>
-                </ButtonCheckbox>
-            </CollapsibleBlock>
-        {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
