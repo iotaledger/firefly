@@ -1,6 +1,5 @@
 package org.iota.firefly.mobile.alpha;
 
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -12,8 +11,9 @@ public class WebViewSettingsPlugin extends Plugin {
     @Override
     public void load() {
         WebView webView = getBridge().getWebView();
-        WebSettings settings = webView.getSettings();
+        webView.clearCache(true);
 
+        WebSettings settings = webView.getSettings();
         settings.setGeolocationEnabled(false);
         settings.setAllowFileAccess(false);
         settings.setAllowContentAccess(false);
