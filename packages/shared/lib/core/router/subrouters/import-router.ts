@@ -91,9 +91,10 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     }
 
                     nextRoute = ImportRoute.Success
-                } finally {
-                    this.isGettingMigrationData.set(false)
+                } catch (err) {
+                    console.error(err)
                 }
+                this.isGettingMigrationData.set(false)
                 break
             }
             case ImportRoute.LedgerImport: {
