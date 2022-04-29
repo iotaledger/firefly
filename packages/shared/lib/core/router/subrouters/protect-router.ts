@@ -4,13 +4,7 @@ import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
 import { activeProfile } from '@lib/profile'
 import { SetupType } from '@lib/typings/setup'
-import {
-    createAccount,
-    setStoragePassword,
-    storeMnemonic,
-    verifyMnemonic,
-    walletSetupType,
-} from '@lib/wallet'
+import { createAccount, setStoragePassword, storeMnemonic, verifyMnemonic, walletSetupType } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { ProtectRoute } from '../enums'

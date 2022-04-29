@@ -24,7 +24,6 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         accountManager,
-        // addMessagesPair,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -34,7 +33,6 @@
         isFirstSessionSync,
         isTransferring,
         prepareAccountInfo,
-        processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
@@ -118,15 +116,11 @@
                 //     payloadAccount.messages,
                 //     payloadAccount.addresses
                 // )
-                updateBalanceOverview(
-                    meta.balance,
-                    meta.incoming,
-                    meta.outgoing
-                )
+                updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
                 void _continue()
             }
-        } catch (e) {
-            onError(e)
+        } catch (err) {
+            onError(err)
         }
     }
 
@@ -144,7 +138,7 @@
         }
     }
 
-    async function onError(error: any = null) : Promise<void> {
+    function onError(error?: any): void {
         if ($isLedgerProfile) {
             if (!LedgerErrorType[error.type]) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, error)
@@ -218,8 +212,8 @@
                         _generate()
                     }
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    console.error(err)
                 },
             })
         } else {
@@ -350,8 +344,8 @@
                         _internalTransfer()
                     }
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    console.error(err)
                 },
             })
         } else {
@@ -377,8 +371,8 @@
                     onSuccess(strongholdStatusResponse) {
                         isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        console.error(err)
                     },
                 })
             }

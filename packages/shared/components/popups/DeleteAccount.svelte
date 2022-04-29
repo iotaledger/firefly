@@ -18,12 +18,12 @@
     let error = ''
     let isBusy = false
 
-    function handleDeleteClick(): void {
+    async function handleDeleteClick(): Promise<void> {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
             if ($isSoftwareProfile) {
-                deleteStrongholdAccount(password)
+                await deleteStrongholdAccount(password)
             } else {
                 triggerDeleteAccount()
             }
