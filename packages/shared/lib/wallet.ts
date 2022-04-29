@@ -137,6 +137,7 @@ export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
 export const accountSyncingQueueStore = writable<WalletAccount[] | null>(null)
+export const currentSyncingAccountStore = writable<WalletAccount>(null)
 
 export const api: IWalletApi = new Proxy(
     { ...WalletApi },
@@ -486,12 +487,15 @@ export async function processAccountSyncingQueue(): Promise<void> {
     if (!accountSyncingQueue || accountSyncingQueue.length <= 0) return
 
     try {
-        const accountToSync = accountSyncingQueue[0]
+        if (get(currentSyncingAccountStore)) return
+
+        const accountToSync = accountSyncingQueue.shift()
+        currentSyncingAccountStore.set(accountToSync)
+
         await asyncSyncAccount(accountToSync)
 
-        accountSyncingQueueStore.update((_accountSyncingQueueStore) =>
-            _accountSyncingQueueStore.filter((_account) => _account.id !== accountToSync.id)
-        )
+        currentSyncingAccountStore.set(null)
+        accountSyncingQueueStore.set(accountSyncingQueue)
     } catch (err) {
         console.error(err)
     }
