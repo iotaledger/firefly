@@ -33,11 +33,11 @@
         Change = 'changeVotes',
     }
 
+    let showAdditionalInfo
     let votingAction = VotingAction.Cast
     let isVoting = false
     let spinnerText = localize('general.syncing')
 
-    $: showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
     $: disabled = isVoting || $isSyncing || $pendingParticipations?.length !== 0
     $: disabled, setSpinnerMessage()
     $: $currentAccountTreasuryVoteValue, nextVote, setVotingAction()
@@ -86,6 +86,7 @@
         } else {
             votingAction = VotingAction.Stop
         }
+        showAdditionalInfo = votingAction === VotingAction.Change || votingAction === VotingAction.Stop
     }
 
     function hasReceivedFundsSinceLastVote(): boolean {
@@ -204,7 +205,13 @@
     {#if showAdditionalInfo}
         <div class="flex items-center mb-6 bg-blue-100 dark:bg-gray-800 rounded-xl p-3">
             <Icon icon="info" classes="text-gray-500 font-bold" />
-            <Text type="p" classes="px-3">{localize('popups.votingConfirmation.additionalInfo')}</Text>
+            <Text type="p" classes="px-3"
+                >{localize(
+                    `popups.votingConfirmation.additionalInfo${
+                        votingAction === VotingAction.Stop ? 'Stopping' : 'Changing'
+                    }`
+                )}</Text
+            >
         </div>
     {/if}
     <div class="flex justify-between space-x-2">

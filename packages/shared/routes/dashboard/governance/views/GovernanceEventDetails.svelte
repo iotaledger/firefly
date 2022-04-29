@@ -303,7 +303,7 @@
                     <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
-                                {localize('views.governance.votingPower.title')}
+                                {localize('views.governance.votingPower.info.title')}
                             </Text>
                             {#if $selectedAccount?.rawIotaBalance > 0}
                                 <button
@@ -420,10 +420,10 @@
 </div>
 
 {#if tooltip.votingRate.show}
-    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="right" />
+    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="bottom" />
 {/if}
 {#if tooltip.countedVotes.show}
-    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="bottom" />
 {/if}
 {#if tooltip.maximumVotes.show}
     <GovernanceInfoTooltip {event} type="maximumVotes" anchor={tooltip.maximumVotes.anchor} position="bottom" />
