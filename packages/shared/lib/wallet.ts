@@ -29,6 +29,7 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
 import { sleep } from '@lib/utils'
+import { displayErrorEventToUser } from '@lib/errors'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -501,17 +502,6 @@ export async function processAccountSyncingQueue(): Promise<void> {
     }
 }
 
-function displayErrorToUser(error: ErrorEventPayload) {
-    if (get(isLedgerProfile)) {
-        displayNotificationForLedgerProfile('error', true, true, false, false, error)
-    } else {
-        showAppNotification({
-            type: 'error',
-            message: localize(error.error),
-        })
-    }
-}
-
 export function asyncSyncAccount(account: WalletAccount, showErrorNotification: boolean = true): Promise<void> {
     return new Promise((resolve, reject) => {
         currentSyncingAccountStore.set(account)
@@ -538,7 +528,7 @@ export function asyncSyncAccount(account: WalletAccount, showErrorNotification: 
                 currentSyncingAccountStore.set(null)
 
                 if (showErrorNotification) {
-                    displayErrorToUser(err)
+                    displayErrorEventToUser(err)
                 }
 
                 console.error(err)
@@ -582,7 +572,7 @@ export const asyncSyncAccounts = (
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    displayErrorToUser(err)
+                    displayErrorEventToUser(err)
                 }
 
                 console.error(err)
