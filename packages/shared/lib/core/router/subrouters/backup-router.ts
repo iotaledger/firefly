@@ -39,8 +39,8 @@ export class BackupRouter extends Subrouter<BackupRoute> {
             case BackupRoute.Backup: {
                 await storeMnemonic(get(mnemonic).join(' '))
                 await createAccount()
-                const createBackup = !event?.skip
-                if (createBackup) {
+                const shouldCreateBackup = !event?.skip
+                if (shouldCreateBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     if (dest) {
                         await backup(dest, get(strongholdPassword))
