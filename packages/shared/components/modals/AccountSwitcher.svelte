@@ -4,7 +4,7 @@
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
-    import { activeProfile, getColor } from '@lib/profile'
+    import { getColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount, wallet } from '@lib/wallet'
     import { HR, Icon, Modal, Text } from 'shared/components'
@@ -51,7 +51,7 @@
                     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
                 >
                     <div class="flex flex-row items-center space-x-4">
-                        <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                        <div class="circle" style="--account-color: {getColor(account.id)};" />
                         <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
                             {account.alias}
                         </Text>

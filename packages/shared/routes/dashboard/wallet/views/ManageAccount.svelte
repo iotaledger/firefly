@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
@@ -15,7 +15,7 @@
 
     let accountAlias = alias
     let isBusy = false
-    let color = getColor($activeProfile, account.id) as string
+    let color = getColor(account.id) as string
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -73,7 +73,7 @@
     }
 
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
-    $: hasColorChanged = getColor($activeProfile, account.id) !== color
+    $: hasColorChanged = getColor(account.id) !== color
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">

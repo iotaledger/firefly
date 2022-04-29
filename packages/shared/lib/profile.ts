@@ -412,19 +412,13 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
-    const { accounts } = activeProfile || {}
-
-    if (accounts?.length) {
-        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
-        if (foundAccountColor) return foundAccountColor
+export function getColor(accountId: string): string | AccountColors {
+    const _activeProfile = get(activeProfile)
+    const accounts = _activeProfile?.accounts
+    if (!accounts?.length && accountId) {
+        setProfileAccount(_activeProfile, { id: accountId, color: '' })
     }
-
-    if (accountId) {
-        const profileAccount = { id: accountId, color: '' }
-        setProfileAccount(activeProfile, profileAccount)
-        return getColor(activeProfile, accountId)
-    }
+    return accounts?.find((account) => account.id === accountId)?.color
 }
 
 /**

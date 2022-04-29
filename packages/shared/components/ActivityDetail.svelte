@@ -127,8 +127,8 @@
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings.currency]
     )
-    $: senderColor = getColor($activeProfile, senderAccount?.id) as string
-    $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
+    $: senderColor = getColor(senderAccount?.id) as string
+    $: receiverColor = getColor(receiverAccount?.id) as string
 </script>
 
 <div class="flex flex-col h-full min-h-0">
