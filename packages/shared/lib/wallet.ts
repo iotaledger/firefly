@@ -501,27 +501,48 @@ export async function processAccountSyncingQueue(): Promise<void> {
     }
 }
 
-export function asyncSyncAccount(account: WalletAccount): Promise<void> {
-    return new Promise((resolve) => {
-        api.syncAccount(account.id, {
-            onSuccess(response) {
-                getAccountMetadataWithCallback(account.id, (err, metadata) => {
-                    if (!err) {
-                        const _account = prepareAccountAsWalletAccount(account, metadata)
-                        get(wallet)?.accounts.update((_accounts) =>
-                            _accounts.map((a) => (a.id === _account.id ? _account : a))
-                        )
-                        updateProfile(
-                            'hiddenAccounts',
-                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
-                        )
-                    }
+function displayErrorToUser(error: ErrorEventPayload) {
+    if (get(isLedgerProfile)) {
+        displayNotificationForLedgerProfile('error', true, true, false, false, error)
+    } else {
+        showAppNotification({
+            type: 'error',
+            message: localize(error.error),
+        })
+    }
+}
 
-                    resolve()
-                })
-            },
-            onError(err) {
+export function asyncSyncAccount(account: WalletAccount, showErrorNotification: boolean = true): Promise<void> {
+    return new Promise((resolve, reject) => {
+        currentSyncingAccountStore.set(account)
+
+        api.syncAccount(account.id, {
+            onSuccess(response: Event<SyncedAccount>) {
+                const syncedAccount = response.payload
+                processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
+
+                void updateAccount(get(wallet).accounts, syncedAccount)
+                    .then(() => {
+                        currentSyncingAccountStore.set(null)
+                    })
+                    .catch((err) => {
+                        currentSyncingAccountStore.set(null)
+
+                        console.error(err)
+                        reject(err)
+                    })
+
                 resolve()
+            },
+            onError(err: ErrorEventPayload) {
+                currentSyncingAccountStore.set(null)
+
+                if (showErrorNotification) {
+                    displayErrorToUser(err)
+                }
+
+                console.error(err)
+                reject(err)
             },
         })
     })
@@ -537,7 +558,7 @@ export const asyncSyncAccounts = (
         isSyncing.set(true)
 
         api.syncAccounts(addressIndex, gapLimit, accountDiscoveryThreshold, {
-            onSuccess(response) {
+            onSuccess(response: Event<SyncedAccount[]>) {
                 const syncedAccounts = response.payload
 
                 syncedAccounts.forEach((account) => {
@@ -549,29 +570,23 @@ export const asyncSyncAccounts = (
                         isSyncing.set(false)
                     })
                     .catch((err) => {
-                        console.error(err)
                         isSyncing.set(false)
+
+                        console.error(err)
+                        reject(err)
                     })
 
                 resolve()
             },
-            onError(err) {
+            onError(err: ErrorEventPayload) {
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    if (get(isLedgerProfile)) {
-                        displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                    } else {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err.error),
-                        })
-                    }
-
-                    resolve()
-                } else {
-                    reject(err)
+                    displayErrorToUser(err)
                 }
+
+                console.error(err)
+                reject(err)
             },
         })
     })
