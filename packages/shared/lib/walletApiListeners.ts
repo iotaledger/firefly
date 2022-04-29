@@ -3,6 +3,7 @@ import {
     accountManager,
     // addMessagesPair,
     api,
+    getStardustAccount,
     prepareAccountInfo,
     processMigratedTransactions,
     replaceMessage,
@@ -11,7 +12,7 @@ import {
     updateBalanceOverview,
     wallet,
 } from 'shared/lib/wallet'
-import { get } from 'svelte/store'
+import { get, Writable } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { getParticipationOverview } from './participation/api'
@@ -23,6 +24,7 @@ import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
 import { ASSEMBLY_EVENT_ID } from './participation'
+import type { Account } from '@iota/wallet'
 
 /**
  * Initialises event listeners from wallet library
@@ -31,7 +33,7 @@ import { ASSEMBLY_EVENT_ID } from './participation'
  *
  * @returns {void}
  */
-export const initialiseListeners = (): void => {
+export function initialiseListeners(): void {
     /**
      * Event listener for stronghold status change
      */
@@ -231,9 +233,10 @@ export const initialiseListeners = (): void => {
 
             // On balance change event, get the updated account objects from wallet-rs db
             try {
-                const accountsResponse = await get(accountManager).getAccounts()
                 const { accounts } = get(wallet)
+                const latestAccounts = await getAccounts()
 
+                let walletAccounts: WalletAccount[]
                 let completeCount = 0
                 const totalBalance = {
                     balance: 0,
@@ -242,13 +245,11 @@ export const initialiseListeners = (): void => {
                     depositAddress: '',
                 }
 
-                const latestAccounts = []
-
                 // 1. Iterate on all accounts;
                 // 2. Get latest metadata for all accounts (to compute the latest balance overview);
                 // 3. Only update the account for which the balance change event emitted;
                 // 4. Update balance overview & accounts
-                for (const _account of accountsResponse) {
+                for (const _account of latestAccounts) {
                     const { address } = await _account.latestAddress()
                     const balance = await _account.balance()
                     totalBalance.balance += balance.total
@@ -262,21 +263,17 @@ export const initialiseListeners = (): void => {
 
                     // Keep the messages as is because they get updated through a different event
                     // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
-                    latestAccounts.push(updatedAccountInfo)
+                    walletAccounts.push(updatedAccountInfo)
 
                     completeCount++
 
-                    if (completeCount === accountsResponse.length) {
-                        accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
+                    if (completeCount === latestAccounts.length) {
+                        accounts.update((_accounts) => walletAccounts.sort((a, b) => a.index - b.index))
 
-                        updateBalanceOverview(
-                            totalBalance.balance,
-                            totalBalance.incoming,
-                            totalBalance.outgoing
-                        )
+                        updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                     }
                 }
-            } catch(e) {
+            } catch (e) {
                 console.error(e)
             }
             // Migration
@@ -341,7 +338,17 @@ export const initialiseListeners = (): void => {
     })
 }
 
-const updateAllMessagesState = (accounts, messageId, confirmation) => {
+async function getAccounts(): Promise<Account[]> {
+    const accountsResponse = await get(accountManager).getAccounts()
+    const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
+    return Promise.all(accountsPromises)
+}
+
+function updateAllMessagesState(
+    accounts: Writable<WalletAccount[]>,
+    messageId: string,
+    confirmation: boolean
+): boolean {
     let confirmationHasChanged = false
 
     accounts.update((storedAccounts) =>
