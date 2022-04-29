@@ -582,11 +582,15 @@
                     },
                     "votingRate": {
                         "title": "Voting rate",
-                        "body": "{amount} achieves {votesPerMinute} votes per minute"
+                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
                         "title": "Counted votes",
-                        "body": "You must keep voting for the remaining period in order to issue your full voting weight"
+                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximum votes",
+                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
                     }
                 }
             },
@@ -609,11 +613,11 @@
             },
             "eventDetails": {
                 "votingOpens": "Voting opens on",
-                "votingProgress": "Voting progress",
+                "votingProgress": "Time remaining",
                 "votingPower": "Your voting weight",
-                "votesCounted": "Your total votes counted",
+                "votesCounted": "Your counted votes",
+                "maximumVotes": "Your maximum votes",
                 "countingStarts": "Counting starts on",
-                "countingLength": "Counting length",
                 "currentResults": "Current results",
                 "answerHeader": {
                     "activeVoting": "Active voting",
@@ -846,7 +850,7 @@
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "votingConfirmation": {
-            "additionalInfo": "Please be aware that changing or stopping your vote during the counting period won't impact any votes that have been counted prior to this change.",
+            "additionalInfo": "Please be aware that changing or stopping your vote during the Counting period won't impact any votes that have been counted prior to this change.",
             "votesSubmitted": "Your votes are submitted",
             "votesStopped": "Your vote has been stopped",
             "votedSuccessfully": "You have started casting your vote for {account}.",

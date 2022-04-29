@@ -1,16 +1,23 @@
 <script lang="typescript">
     import { formatDate, localize } from '@core/i18n'
+    import { formatNumber } from '@lib/currency'
     import { canParticipate } from '@lib/participation'
     import { currentAccountTreasuryVoteValue, selectedAccountParticipationOverview } from '@lib/participation/account'
-    import { calculateVotesByTrackedParticipation } from '@lib/participation/governance'
+    import { calculateVotesByMilestones, calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
     import { isSoftwareProfile } from '@lib/profile'
-    import { getBestTimeDuration, getDurationString, milestoneToDate } from '@lib/time'
+    import { getDurationString, milestoneToDate } from '@lib/time'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
     import { formatUnitBestMatch } from '@lib/units'
-    import { AccountColors, handleTransactionEventData, transferState } from '@lib/wallet'
+    import {
+        AccountColors,
+        handleTransactionEventData,
+        selectedAccount,
+        setSelectedAccount,
+        transferState,
+    } from '@lib/wallet'
     import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
@@ -21,6 +28,7 @@
     let transactionEventData: TransferProgressEventData = null
     let nextVote: VotingEventAnswer = null
     let ledgerAwaitingConfirmation = false
+    let totalVotes
 
     const dateFormat = {
         year: 'numeric',
@@ -62,6 +70,7 @@
         statusTimeline: { anchor: null as HTMLElement, show: false },
         votingRate: { anchor: null as HTMLElement, show: false },
         countedVotes: { anchor: null as HTMLElement, show: false },
+        maximumVotes: { anchor: null as HTMLElement, show: false },
     }
 
     function handleAnswerClick(_nextVote: VotingEventAnswer): void {
@@ -167,10 +176,26 @@
             case 'countedVotes':
                 tooltip.countedVotes.show = show
                 break
+            case 'maximumVotes':
+                tooltip.maximumVotes.show = show
+                break
             default:
                 break
         }
     }
+
+    $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
+    $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
+    $: totalVotes = formatNumber(
+        accountVotes +
+            calculateVotesByMilestones(
+                event?.information?.milestoneIndexStart,
+                event?.information?.milestoneIndexEnd,
+                lastTrackedParticipationItem?.amount
+            ) || 0,
+        0,
+        0
+    )
 </script>
 
 <div class="w-full h-full grid grid-cols-3 gap-4 min-h-0" style="grid-template-rows: min-content 1fr">
@@ -274,22 +299,26 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                <div class="flex flex-col flex-wrap space-y-3">
-                    <div class="flex flex-row items-center space-x-2">
-                        <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
-                            {localize('views.governance.votingPower.title')}
-                        </Text>
-                        <button
-                            class="relative"
-                            on:mouseenter={() => toggleTooltip('votingRate', true)}
-                            on:mouseleave={() => toggleTooltip('votingRate', false)}
-                            bind:this={tooltip.votingRate.anchor}
-                        >
-                            <Icon icon="info-filled" classes="text-gray-400" />
-                        </button>
+                {#if accountVotes <= 0 && event?.status?.status !== ParticipationEventState.Ended}}
+                    <div class="flex flex-col flex-wrap space-y-3">
+                        <div class="flex flex-row items-center space-x-2">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                                {localize('views.governance.votingPower.title')}
+                            </Text>
+                            {#if $selectedAccount?.rawIotaBalance > 0}
+                                <button
+                                    class="relative"
+                                    on:mouseenter={() => toggleTooltip('votingRate', true)}
+                                    on:mouseleave={() => toggleTooltip('votingRate', false)}
+                                    bind:this={tooltip.votingRate.anchor}
+                                >
+                                    <Icon icon="info-filled" classes="text-gray-400" />
+                                </button>
+                            {/if}
+                        </div>
+                        <Text type="h2">{account?.balance}</Text>
                     </div>
-                    <Text type="h2">{account?.balance}</Text>
-                </div>
+                {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
@@ -310,31 +339,45 @@
                         </Text>
                     </div>
                 {/if}
-                {#if event?.status?.status === ParticipationEventState.Commencing}
-                    <div>
-                        <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
-                            {localize('views.governance.eventDetails.countingLength')}
-                        </Text>
-                        <Text type="h3" classes="inline-flex items-end">{getBestTimeDuration(length)}</Text>
-                    </div>
-                {/if}
-                {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
+                {#if (event?.status?.status === ParticipationEventState.Holding && accountVotes > 0) || event?.status?.status === ParticipationEventState.Ended}
                     <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
                                 {localize('views.governance.eventDetails.votesCounted')}
                             </Text>
+                            {#if event?.status?.status === ParticipationEventState.Holding}
+                                <button
+                                    class="relative"
+                                    on:mouseenter={() => toggleTooltip('countedVotes', true)}
+                                    on:mouseleave={() => toggleTooltip('countedVotes', false)}
+                                    bind:this={tooltip.countedVotes.anchor}
+                                >
+                                    <Icon icon="info-filled" classes="text-gray-400" />
+                                </button>
+                            {/if}
+                        </div>
+                        <Text type="h3" classes="inline-flex items-end">{formatNumber(accountVotes, 0, 0)}</Text>
+                    </div>
+                {/if}
+                {#if event?.status?.status === ParticipationEventState.Holding && accountVotes > 0}
+                    <div class="flex flex-col flex-wrap space-y-3">
+                        <div class="flex flex-row items-center space-x-2">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                                {localize('views.governance.eventDetails.maximumVotes')}
+                            </Text>
                             <button
                                 class="relative"
-                                on:mouseenter={() => toggleTooltip('countedVotes', true)}
-                                on:mouseleave={() => toggleTooltip('countedVotes', false)}
-                                bind:this={tooltip.countedVotes.anchor}
+                                on:mouseenter={() => toggleTooltip('maximumVotes', true)}
+                                on:mouseleave={() => toggleTooltip('maximumVotes', false)}
+                                bind:this={tooltip.maximumVotes.anchor}
                             >
                                 <Icon icon="info-filled" classes="text-gray-400" />
                             </button>
                         </div>
-                        <Text type="h3" classes="inline-flex items-end">{formatUnitBestMatch(accountVotes)}</Text>
+                        <Text type="h3" classes="inline-flex items-end">{totalVotes}</Text>
                     </div>
+                {/if}
+                {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
                     <div>
                         <Text type="p" smaller classes="mb-3 text-gray-700 dark:text-gray-500" overrideColor>
                             {localize('views.governance.eventDetails.votingProgress')}
@@ -381,6 +424,9 @@
 {/if}
 {#if tooltip.countedVotes.show}
     <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+{/if}
+{#if tooltip.maximumVotes.show}
+    <GovernanceInfoTooltip {event} type="maximumVotes" anchor={tooltip.maximumVotes.anchor} position="bottom" />
 {/if}
 {#if tooltip.statusTimeline.show}
     <GovernanceInfoTooltip {event} type="statusTimeline" anchor={tooltip.statusTimeline.anchor} position="right" />
