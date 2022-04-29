@@ -299,7 +299,7 @@
     <div>
         <DashboardPane classes="w-full h-full flex flex-row flex-shrink-0 overflow-hidden p-6">
             <div class="space-y-5">
-                {#if accountVotes <= 0 && event?.status?.status !== ParticipationEventState.Ended}}
+                {#if accountVotes <= 0 && event?.status?.status !== ParticipationEventState.Ended}
                     <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
