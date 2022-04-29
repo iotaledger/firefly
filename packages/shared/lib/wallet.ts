@@ -190,17 +190,16 @@ export const getProfileDataPath = async (id: string): Promise<string> => {
     return `${walletPath}${id}`
 }
 
-
 // TODO: Ask Matt how Sentry works with new bindings
-export function initialise (id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void {
+export function initialise(id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void {
     // TODO: remove these
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
     // The new bindings
-    const accountManagerInstance: AccountManager = createAccountManager({
-        storagePath: './alice-database',
+    const newAccountManager: AccountManager = createAccountManager({
+        storagePath,
         clientOptions: {
             nodes: [
                 {
@@ -213,11 +212,11 @@ export function initialise (id: string, storagePath: string, sendCrashReports: b
         },
         secretManager: {
             Stronghold: {
-                snapshotPath: './test.stronghold',
-            }
+                snapshotPath: `${storagePath}/wallet.stronghold`,
+            },
         },
     })
-    accountManager.set(accountManagerInstance)
+    accountManager.set(newAccountManager)
 }
 
 export function getStardustAccount(index: number): Promise<StardustAccount> {
@@ -302,26 +301,18 @@ export const asyncChangeStrongholdPassword = (currentPassword: string, newPasswo
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function storeMnemonic(mnemonic: string): Promise<void> {
-    console.log(1)
     const manager = get(accountManager)
-    console.log(mnemonic)
     await manager.storeMnemonic(mnemonic)
-    console.log(1, 'remove this if function works')
-
 }
 
 export async function verifyMnemonic(mnemonic: string): Promise<void> {
-    console.log(4)
     const manager = get(accountManager)
     await manager.verifyMnemonic(mnemonic)
-    console.log(4, 'remove this if function works')
 }
 
 export async function backup(dest: string, password: string): Promise<void> {
-    console.log(2)
     const manager = get(accountManager)
     await manager.backup(dest, password)
-    console.log(2, 'remove this if function works')
 }
 
 export function setStoragePassword(password: string): Promise<void> {
@@ -338,10 +329,9 @@ export function setStoragePassword(password: string): Promise<void> {
 }
 
 export async function restoreBackup(importFilePath: string, password: string): Promise<void> {
-    console.log(5)
+    // TODO: check this once Thoralf exposes this
     const manager = get(accountManager)
     await manager.importAccounts(importFilePath, password)
-    console.log(5,'remove this if function works')
 }
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
@@ -467,9 +457,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
                 const meta = await getAccountMeta(account.id)
                 const startdustAccount = await get(accountManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
-                get(wallet)?.accounts.update((_accounts) =>
-                    _accounts.map((a) => (a.id === _account.id ? _account : a))
-                )
+                get(wallet)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
                 updateProfile(
                     'hiddenAccounts',
                     (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
@@ -643,7 +631,6 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     const messages: {
         [key: string]: AccountMessage
     } = {}
-    console.log('Account:', account)
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload?.type === 'Transaction') {
@@ -915,9 +902,7 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
     return balanceHistory
 }
 
-export function getAccountMeta(
-    accountId: string,
-): Promise<{
+export function getAccountMeta(accountId: string): Promise<{
     balance: number
     incoming: number
     outgoing: number
