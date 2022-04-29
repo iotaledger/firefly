@@ -24,11 +24,6 @@ export const stage = writable<Stage>(Stage.ALPHA)
 export const mobile = writable<boolean>(false)
 
 /**
- * Developer mode
- */
-export const developerMode = writable<boolean>(true)
-
-/**
  * Wallet access pin
  */
 export const walletPin = writable<string>(null)

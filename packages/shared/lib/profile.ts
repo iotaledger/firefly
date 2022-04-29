@@ -84,16 +84,17 @@ export const saveProfile = (profile: Profile): Profile => {
  * @method buildProfile
  *
  * @param {string} profileName
+ * @param {boolean} isDeveloperProfile
  *
  * @returns {Profile}
  */
-const buildProfile = (profileName: string): Profile => ({
+const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile => ({
     id: generateRandomId(),
     name: profileName,
     type: null,
     protocol: null,
     lastStrongholdBackupTime: null,
-    isDeveloperProfile: true, // todo: (kraftjs) Change boolean to depend on Developer Mode
+    isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,
         networkConfig: getOfficialNetworkConfig(
@@ -115,12 +116,12 @@ const buildProfile = (profileName: string): Profile => ({
  * @method storeProfile
  *
  * @param {string} profileName
+ * @param {boolean} isDeveloperProfile
  *
  * @returns {Profile}
  */
-export const storeProfile = (profileName: string): void => {
-    // todo: kraftjs
-    const profile = buildProfile(profileName) // todo: kraftjs
+export const storeProfile = (profileName: string, isDeveloperProfile: boolean): void => {
+    const profile = buildProfile(profileName, isDeveloperProfile)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
@@ -137,7 +138,7 @@ export const storeProfile = (profileName: string): void => {
  */
 export const migrateProfile = (): void => {
     const oldProfile = get(activeProfile)
-    const newProfile = buildProfile(oldProfile.name) // todo: kraftjs
+    const newProfile = buildProfile(oldProfile.name, oldProfile.isDeveloperProfile)
 
     updateProfile('', migrateObjects<Profile>(oldProfile, newProfile))
 }
