@@ -581,11 +581,15 @@
                     },
                     "votingRate": {
                         "title": "Voting rate",
-                        "body": "{amount} achieves {votesPerMinute} votes per minute"
+                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
                         "title": "Counted votes",
-                        "body": "You must keep voting for the remaining period in order to issue your full voting weight"
+                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximum votes",
+                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
                     }
                 }
             },
@@ -608,11 +612,11 @@
             },
             "eventDetails": {
                 "votingOpens": "Voting opens on",
-                "votingProgress": "Voting progress",
+                "votingProgress": "Time remaining",
                 "votingPower": "Your voting weight",
-                "votesCounted": "Your total votes counted",
+                "votesCounted": "Your counted votes",
+                "maximumVotes": "Your maximum votes",
                 "countingStarts": "Counting begins on",
-                "countingLength": "Counting duration",
                 "currentResults": "Current results",
                 "answerHeader": {
                     "activeVoting": "Active voting",
