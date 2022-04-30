@@ -35,8 +35,6 @@
 </script>
 
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
-
     export let type = TextType.p
     export let fontSize: string = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''

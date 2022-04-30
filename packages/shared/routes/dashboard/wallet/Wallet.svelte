@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { accountRoute, accountRouter } from '@core/router'
+    import { accountRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { AccountActionsModal, DashboardPane, Text, Modal } from 'shared/components'
-    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
-    import { deepCopy } from 'shared/lib/helpers'
+    import { loggedIn, sendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
@@ -17,11 +16,8 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import { Message, Transaction } from 'shared/lib/typings/message'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
         addMessagesPair,
         api,
@@ -31,28 +27,17 @@
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
-        isTransferring,
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
-        transferState,
         updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
-    import {
-        AccountAssets,
-        AccountBalance,
-        AccountHistory,
-        BarChart,
-        LineChart,
-        ManageAccount,
-        Receive,
-        Send,
-    } from './views/'
+    import { AccountAssets, AccountBalance, AccountHistory, BarChart, LineChart, ManageAccount, Send } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -60,7 +45,9 @@
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
-            $accountRouter.goTo(AccountRoute.Send)
+            openPopup({
+                type: 'sendForm',
+            })
             isDeepLinkRequestActive.set(false)
         }
     }
@@ -231,138 +218,6 @@
         }
     }
 
-    function onSend(senderAccountId, receiveAddress, amount) {
-        const _send = () => {
-            isTransferring.set(true)
-            api.send(
-                senderAccountId,
-                {
-                    amount,
-                    address: receiveAddress,
-                    remainder_value_strategy: {
-                        strategy: 'ChangeAddress',
-                    },
-                    indexation: { index: 'firefly', data: [] },
-                },
-                {
-                    onSuccess(response) {
-                        accounts.update((_accounts) =>
-                            _accounts.map((_account) => {
-                                if (_account.id === senderAccountId) {
-                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                        {} as WalletAccount,
-                                        _account,
-                                        {
-                                            messages: [response.payload, ..._account.messages],
-                                        }
-                                    )
-                                }
-
-                                return _account
-                            })
-                        )
-
-                        transferState.set({
-                            type: TransferProgressEventType.Complete,
-                        })
-
-                        setTimeout(() => {
-                            clearSendParams()
-                            isTransferring.set(false)
-                        }, 3000)
-                    },
-                    onError(err) {
-                        isTransferring.set(false)
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err.error),
-                        })
-                    },
-                }
-            )
-        }
-
-        if ($isSoftwareProfile) {
-            checkStronghold(_send)
-        } else {
-            _send()
-        }
-    }
-
-    function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
-        const _internalTransfer = () => {
-            isTransferring.set(true)
-            api.internalTransfer(senderAccountId, receiverAccountId, amount, {
-                onSuccess(response) {
-                    const message = response.payload
-
-                    internalTransfersInProgress.update((transfers) => {
-                        transfers[message.id] = {
-                            from: senderAccountId,
-                            to: receiverAccountId,
-                        }
-
-                        return transfers
-                    })
-
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            if (_account.id === senderAccountId) {
-                                const m = deepCopy(message) as Message
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = false
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
-                            if (_account.id === receiverAccountId) {
-                                const m = deepCopy(message) as Message
-                                const mPayload = m.payload as Transaction
-                                mPayload.data.essence.data.incoming = true
-                                mPayload.data.essence.data.internal = true
-                                _account.messages.push(m)
-                            }
-
-                            return _account
-                        })
-                    )
-
-                    transferState.set({
-                        type: TransferProgressEventType.Complete,
-                    })
-
-                    setTimeout(() => {
-                        clearSendParams(internal)
-                        isTransferring.set(false)
-                    }, 3000)
-                },
-                onError(err) {
-                    isTransferring.set(false)
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                },
-            })
-        }
-
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
-                    } else {
-                        _internalTransfer()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            _internalTransfer()
-        }
-    }
-
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -410,8 +265,6 @@
                             <AccountAssets />
                         {:else if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
-                        {:else if $accountRoute === AccountRoute.Receive}
-                            <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
                         {/if}

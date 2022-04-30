@@ -6,7 +6,7 @@ import validUrl from 'valid-url'
 import { Event } from './typings/events'
 import { Buffer } from 'buffer'
 
-export const ADDRESS_LENGTH = 64
+export const ADDRESS_LENGTH = 60
 export const PIN_LENGTH = 6
 
 interface Element {

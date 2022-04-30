@@ -1,0 +1,26 @@
+<script lang="typescript">
+    import Box from 'shared/components/atoms/boxes/Box.svelte'
+
+    export let disabled = false
+    export let isFocused = false
+    export let error = ''
+    export let classes = ''
+    export let clearBackground = false
+</script>
+
+<Box
+    {clearBackground}
+    backgroundColor="white"
+    darkBackgrounColor="gray-800"
+    classes="w-full flex p-4
+        {!clearBackground ? 'border border-solid' : ''}
+        {classes}
+        {isFocused
+        ? 'border-blue-500'
+        : error
+        ? 'border-red-300 hover:border-red-500'
+        : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+    {...$$restProps}
+>
+    <slot />
+</Box>

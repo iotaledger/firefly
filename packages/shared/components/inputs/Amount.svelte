@@ -162,7 +162,7 @@
 </script>
 
 <svelte:window on:click={onOutsideClick} />
-<amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
+<amount-input class:disabled class={classes} on:keydown={handleKey}>
     <Input
         {error}
         label={amountForLabel || localize('general.amount')}
@@ -177,7 +177,7 @@
         style={showDropdown ? 'border-bottom-right-radius: 0' : ''}
         isFocused={showDropdown}
     />
-    <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
+    <actions class="right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={onMaxClick}
             class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
