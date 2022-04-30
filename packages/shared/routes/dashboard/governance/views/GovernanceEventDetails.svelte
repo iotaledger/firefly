@@ -8,7 +8,7 @@
         hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
         selectedAccountParticipationOverview,
     } from '@lib/participation/account'
-    import { calculateVotesByTrackedParticipation, calculateVotesByMilestones } from '@lib/participation/governance'
+    import { calculateVotesByMilestones, calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
     import { isSoftwareProfile } from '@lib/profile'
@@ -382,9 +382,9 @@
                                 </button>
                             {/if}
                         </div>
-                        <Text type="h3" classes="inline-flex items-end"
-                            >{formatNumber(accountVotes, 0, 0, 2, true)}</Text
-                        >
+                        <Text type="h3" classes="inline-flex items-end">
+                            {formatNumber(accountVotes, 0, 0, 2, true)}
+                        </Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding && accountVotes > 0}
@@ -402,9 +402,9 @@
                                 <Icon icon="info-filled" classes="text-gray-400" />
                             </button>
                         </div>
-                        <Text type="h3" classes="inline-flex items-end"
-                            >{formatNumber(maximumVotes, 0, 0, 2, true)}</Text
-                        >
+                        <Text type="h3" classes="inline-flex items-end">
+                            {formatNumber(maximumVotes, 0, 0, 2, true)}
+                        </Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
@@ -454,10 +454,10 @@
 </div>
 
 {#if tooltip.votingRate.show}
-    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="right" />
+    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="bottom" />
 {/if}
 {#if tooltip.countedVotes.show}
-    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="bottom" />
 {/if}
 {#if tooltip.maximumVotes.show}
     <GovernanceInfoTooltip {event} type="maximumVotes" anchor={tooltip.maximumVotes.anchor} position="bottom" />
