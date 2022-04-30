@@ -54,7 +54,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexCommence), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 1} classes={eventProgress <= 1 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.votingOpen')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 1 ? 'votingOpen' : 'votingOpened'
+                        }`
+                    )}
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 2}>
@@ -62,7 +66,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexStart), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 2} classes={eventProgress <= 2 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.countingStarts')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 2 ? 'countingStarts' : 'countingStarted'
+                        }`
+                    )}
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 3}>
@@ -70,7 +78,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexEnd), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 3} classes={eventProgress <= 3 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.countingStops')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 3 ? 'countingStops' : 'countingStopped'
+                        }`
+                    )}
                 </Text>
             </li>
         </ul>

@@ -577,7 +577,11 @@
                     "eventStatusTimeline": {
                         "votingOpen": "Voting open",
                         "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends"
+                        "countingStops": "Counting ends",
+                        "votingOpened": "Voting opened",
+                        "countingStarted": "Counting began",
+                        "countingStopped": "Counting ended"
+
                     },
                     "votingRate": {
                         "title": "Voting rate",
@@ -617,7 +621,8 @@
                 "votesCounted": "Your counted votes",
                 "maximumVotes": "Your maximum votes",
                 "countingStarts": "Counting begins on",
-                "currentResults": "Current results",
+                "currentResult": "Current result",
+                "finalResult": "Final result",
                 "answerHeader": {
                     "activeVoting": "Active voting",
                     "selected": "Submitted",
