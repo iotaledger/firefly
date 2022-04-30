@@ -454,10 +454,10 @@
 </div>
 
 {#if tooltip.votingRate.show}
-    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="right" />
+    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="bottom" />
 {/if}
 {#if tooltip.countedVotes.show}
-    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="left" />
+    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="bottom" />
 {/if}
 {#if tooltip.maximumVotes.show}
     <GovernanceInfoTooltip {event} type="maximumVotes" anchor={tooltip.maximumVotes.anchor} position="bottom" />
