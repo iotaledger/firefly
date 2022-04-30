@@ -10,14 +10,7 @@
     import { getDurationString, milestoneToDate } from '@lib/time'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
-    import { formatUnitBestMatch } from '@lib/units'
-    import {
-        AccountColors,
-        handleTransactionEventData,
-        selectedAccount,
-        setSelectedAccount,
-        transferState,
-    } from '@lib/wallet'
+    import { AccountColors, handleTransactionEventData, selectedAccount, transferState } from '@lib/wallet'
     import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
@@ -28,7 +21,6 @@
     let transactionEventData: TransferProgressEventData = null
     let nextVote: VotingEventAnswer = null
     let ledgerAwaitingConfirmation = false
-    let totalVotes
 
     const dateFormat = {
         year: 'numeric',
@@ -55,9 +47,7 @@
         (answer) => answer?.value !== 0 && answer?.value !== 255
     )
     $: totalVotes = results?.reduce((acc, val) => acc + val?.accumulated, 0)
-    $: length =
-        milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
-        milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
+
     $: $transferState, handleLedgerTransferState()
     $: if (!$participationAction && ledgerAwaitingConfirmation && $popupState.type === 'ledgerTransaction') {
         closePopup(true)
@@ -187,15 +177,10 @@
 
     $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
     $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
-    $: totalVotes = formatNumber(
-        accountVotes +
-            calculateVotesByMilestones(
-                event?.information?.milestoneIndexStart,
-                event?.information?.milestoneIndexEnd,
-                lastTrackedParticipationItem?.amount
-            ) || 0,
-        0,
-        0
+    $: maximumVotes = calculateVotesByMilestones(
+        event?.information?.milestoneIndexStart,
+        event?.information?.milestoneIndexEnd,
+        lastTrackedParticipationItem?.amount
     )
 </script>
 
