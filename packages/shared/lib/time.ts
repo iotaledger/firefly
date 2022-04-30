@@ -78,6 +78,10 @@ export const milestoneToDate = (milestone: number): Date => {
  * @returns {string}
  */
 export const getDurationString = (durationInMillis: number): string => {
+    if (!durationInMillis) {
+        return `${localize('times.day', { values: { time: 0 } })} ${localize('times.hour', { values: { time: 0 } })}`
+    }
+
     const durationInMinutes = durationInMillis / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
     const minutes = Math.floor(durationInMinutes % MINUTES_PER_HOUR)
     const hours = Math.floor((durationInMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY)
