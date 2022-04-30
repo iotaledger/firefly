@@ -63,7 +63,8 @@
         closePopup(true)
     }
 
-    const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
+    const getPercentageString = (dividend: number, divisor: number) =>
+        (Math.round((dividend / divisor) * 100) || 0) + '%'
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
     const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
     const tooltip = {
