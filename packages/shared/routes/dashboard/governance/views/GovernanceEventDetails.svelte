@@ -10,14 +10,7 @@
     import { getDurationString, milestoneToDate } from '@lib/time'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
-    import { formatUnitBestMatch } from '@lib/units'
-    import {
-        AccountColors,
-        handleTransactionEventData,
-        selectedAccount,
-        setSelectedAccount,
-        transferState,
-    } from '@lib/wallet'
+    import { AccountColors, handleTransactionEventData, selectedAccount, transferState } from '@lib/wallet'
     import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
@@ -28,7 +21,6 @@
     let transactionEventData: TransferProgressEventData = null
     let nextVote: VotingEventAnswer = null
     let ledgerAwaitingConfirmation = false
-    let totalVotes
 
     const dateFormat = {
         year: 'numeric',
@@ -55,15 +47,14 @@
         (answer) => answer?.value !== 0 && answer?.value !== 255
     )
     $: totalVotes = results?.reduce((acc, val) => acc + val?.accumulated, 0)
-    $: length =
-        milestoneToDate(event?.information?.milestoneIndexEnd)?.getTime() -
-        milestoneToDate(event?.information?.milestoneIndexStart)?.getTime()
+
     $: $transferState, handleLedgerTransferState()
     $: if (!$participationAction && ledgerAwaitingConfirmation && $popupState.type === 'ledgerTransaction') {
         closePopup(true)
     }
 
-    const getPercentageString = (dividend: number, divisor: number) => Math.round((dividend / divisor) * 100) + '%'
+    const getPercentageString = (dividend: number, divisor: number) =>
+        (Math.round((dividend / divisor) * 100) || 0) + '%'
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
     const handleLedgerTransferState = (): void => !$isSoftwareProfile && handleTransferState($transferState)
     const tooltip = {
@@ -186,15 +177,10 @@
 
     $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
     $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
-    $: totalVotes = formatNumber(
-        accountVotes +
-            calculateVotesByMilestones(
-                event?.information?.milestoneIndexStart,
-                event?.information?.milestoneIndexEnd,
-                lastTrackedParticipationItem?.amount
-            ) || 0,
-        0,
-        0
+    $: maximumVotes = calculateVotesByMilestones(
+        event?.information?.milestoneIndexStart,
+        event?.information?.milestoneIndexEnd,
+        lastTrackedParticipationItem?.amount
     )
 </script>
 
@@ -356,7 +342,9 @@
                                 </button>
                             {/if}
                         </div>
-                        <Text type="h3" classes="inline-flex items-end">{formatNumber(accountVotes, 0, 0)}</Text>
+                        <Text type="h3" classes="inline-flex items-end"
+                            >{formatNumber(accountVotes, 0, 0, 2, true)}</Text
+                        >
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding && accountVotes > 0}
@@ -374,7 +362,9 @@
                                 <Icon icon="info-filled" classes="text-gray-400" />
                             </button>
                         </div>
-                        <Text type="h3" classes="inline-flex items-end">{totalVotes}</Text>
+                        <Text type="h3" classes="inline-flex items-end"
+                            >{formatNumber(maximumVotes, 0, 0, 2, true)}</Text
+                        >
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
@@ -391,9 +381,13 @@
     {#if event?.status?.status === ParticipationEventState.Holding || event?.status?.status === ParticipationEventState.Ended}
         <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
             <Text type="p" smaller classes="mb-8 text-gray-700 dark:text-gray-500" overrideColor>
-                {localize('views.governance.eventDetails.currentResults')}
+                {localize(
+                    `views.governance.eventDetails.${
+                        event?.status?.status === ParticipationEventState.Ended ? 'finalResult' : 'currentResult'
+                    }`
+                )}
             </Text>
-            <div class="w-full h-full flex justify-center space-x-16">
+            <div class="w-full h-full flex justify-center space-x-8">
                 {#each results || [] as result, i}
                     <div class="h-full flex flex-col justify-end items-center">
                         <div
@@ -409,8 +403,8 @@
                                 {displayedPercentages[i].percentage}
                             </Text>
                         </div>
-                        <Text type="p" overrideColor bigger classes="text-gray-500 m-0">
-                            {formatUnitBestMatch(result?.accumulated)}
+                        <Text type="p" overrideColor bigger classes="text-gray-500 m-0 max-w-36 break-all">
+                            {formatNumber(result?.accumulated, 0, 0, 2, true)}
                         </Text>
                     </div>
                 {/each}
