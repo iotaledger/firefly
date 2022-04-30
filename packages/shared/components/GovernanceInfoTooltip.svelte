@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { Tooltip, Text } from 'shared/components'
-    import { localize, formatDate } from '@core/i18n'
-    import { SECONDS_PER_MILESTONE, SECONDS_PER_MINUTE, milestoneToDate } from '@lib/time'
-    import { formatUnitBestMatch } from '@lib/units'
+    import { formatDate, localize } from '@core/i18n'
+    import { formatNumber } from '@lib/currency'
     import { ParticipationEvent, ParticipationEventState } from '@lib/participation'
-    import { selectedAccountParticipationOverview } from '@lib/participation/account'
+    import { milestoneToDate, SECONDS_PER_MILESTONE, SECONDS_PER_MINUTE } from '@lib/time'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { selectedAccount } from '@lib/wallet'
+    import { Text, Tooltip } from 'shared/components'
 
     export let event: ParticipationEvent
     export let type: GovernanceInfoType
@@ -15,6 +16,7 @@
         StatusTimeline = 'statusTimeline',
         VotingRate = 'votingRate',
         CountedVotes = 'countedVotes',
+        MaximumVotes = 'maximumVotes',
         VotingWeight = 'votingWeight',
     }
 
@@ -41,9 +43,7 @@
             break
     }
 
-    $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
-    $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
-    $: votesPerMinute = lastTrackedParticipationItem?.amount * 0.001 * (SECONDS_PER_MINUTE / SECONDS_PER_MILESTONE) || 0
+    $: votesPerMilestone = formatNumber(($selectedAccount?.rawIotaBalance / 1000) * SECONDS_PER_MILESTONE || 0, 0, 0)
 </script>
 
 <Tooltip {anchor} {position}>
@@ -54,7 +54,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexCommence), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 1} classes={eventProgress <= 1 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.votingOpen')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 1 ? 'votingOpen' : 'votingOpened'
+                        }`
+                    )}
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 2}>
@@ -62,7 +66,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexStart), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 2} classes={eventProgress <= 2 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.countingStarts')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 2 ? 'countingStarts' : 'countingStarted'
+                        }`
+                    )}
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 3}>
@@ -70,7 +78,11 @@
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexEnd), dateFormat)}
                 </Text>
                 <Text type="h5" overrideColor={eventProgress <= 3} classes={eventProgress <= 3 ? 'text-gray-400' : ''}>
-                    {localize('views.governance.info.tooltip.eventStatusTimeline.countingStops')}
+                    {localize(
+                        `views.governance.info.tooltip.eventStatusTimeline.${
+                            eventProgress <= 3 ? 'countingStops' : 'countingStopped'
+                        }`
+                    )}
                 </Text>
             </li>
         </ul>
@@ -79,14 +91,26 @@
         <Text classes="text-left">
             {localize('views.governance.info.tooltip.votingRate.body', {
                 values: {
-                    amount: formatUnitBestMatch(lastTrackedParticipationItem?.amount),
-                    votesPerMinute,
+                    amount: formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3),
+                    votesPerMilestone,
+                    time: SECONDS_PER_MILESTONE.toString(),
                 },
             })}
         </Text>
     {:else if type === GovernanceInfoType.CountedVotes}
         <Text type="h3" classes="text-left">{localize('views.governance.info.tooltip.countedVotes.title')}</Text>
-        <Text classes="text-left">{localize('views.governance.info.tooltip.countedVotes.body')}</Text>
+        <Text classes="text-left"
+            >{localize('views.governance.info.tooltip.countedVotes.body', {
+                values: {
+                    amount: formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3),
+                    votesPerMilestone,
+                    time: SECONDS_PER_MILESTONE.toString(),
+                },
+            })}</Text
+        >
+    {:else if type === GovernanceInfoType.MaximumVotes}
+        <Text type="h3" classes="text-left">{localize('views.governance.info.tooltip.maximumVotes.title')}</Text>
+        <Text classes="text-left">{localize('views.governance.info.tooltip.maximumVotes.body')}</Text>
     {/if}
     {#if type === GovernanceInfoType.VotingWeight}
         <div>
