@@ -6,14 +6,18 @@
     export let error = ''
     export let classes = ''
     export let clearBackground = false
+    export let clearPadding = false
+    export let clearBorder = false
 </script>
 
 <Box
     {clearBackground}
+    {clearPadding}
     backgroundColor="white"
     darkBackgrounColor="gray-800"
-    classes="w-full flex p-4
-        {!clearBackground ? 'border border-solid' : ''}
+    classes="w-full flex 
+        {!clearPadding ? 'p-4' : ''}
+        {!clearBorder ? 'border border-solid' : ''}
         {classes}
         {isFocused
         ? 'border-blue-500'

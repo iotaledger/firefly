@@ -39,6 +39,7 @@
     export let fontSize: string = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
     export let lineHeight: string = ''
+    export let alignment: string = ''
     export let secondary: boolean = false
     export let disabled: boolean = false
     export let highlighted: boolean = false
@@ -187,7 +188,7 @@
 </script>
 
 <span class="text-component">
-    <svelte:element this={type} class={`${customClassesString} ${classes}`}>
+    <svelte:element this={type} class={`${customClassesString} ${classes}`} {...$$restProps}>
         <slot />
     </svelte:element>
 </span>

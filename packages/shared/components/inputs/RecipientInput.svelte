@@ -2,13 +2,14 @@
     import TextInput from './TextInput.svelte'
     import { localize } from '@core/i18n'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
+    import InputContainer from './InputContainer.svelte'
 
     export let recipient = undefined
     export let disabled = false
     export let validate = false
 
     // TODO: get ADDRESS_PREFIX from profile network info
-    const ADDRESS_PREFIX = 'iota'
+    const ADDRESS_PREFIX = 'atoi'
 
     let value
     let error
@@ -32,12 +33,16 @@
     $: hasFocus && (error = '')
 </script>
 
-<TextInput
-    bind:value
-    bind:hasFocus
-    {error}
-    {disabled}
-    label={localize('general.recipient')}
-    placeholder={localize('general.recipient')}
-    {...$$restProps}
-/>
+<InputContainer clearPadding>
+    <TextInput
+        bind:value
+        bind:hasFocus
+        clearBackground
+        clearBorder
+        {error}
+        {disabled}
+        label={localize('general.recipient')}
+        placeholder={localize('general.recipient')}
+        {...$$restProps}
+    />
+</InputContainer>

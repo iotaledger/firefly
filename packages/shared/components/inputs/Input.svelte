@@ -23,6 +23,10 @@
     export let capsLockWarning = false
     export let inputElement = undefined
     export let clearBackground = false
+    export let clearPadding = false
+    export let clearBorder = false
+    export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
+    export let textProps: any = { type: 'p', fontSize: '11', lineHeight: '140' }
 
     const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()
@@ -119,29 +123,39 @@
 
 <div class="w-full {classes}">
     <div class="w-full relative">
-        <InputContainer {disabled} {error} isFocused={hasFocus} {clearBackground} classes="relative">
-            <input
-                {type}
-                {value}
-                bind:this={inputElement}
-                {maxlength}
-                class="w-full text-12 leading-140
-                    {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}"
-                class:floating-active={value && label}
-                on:input={handleInput}
-                on:keypress={onKeyPress}
-                on:keydown={onKeyCaps}
-                on:keyup={onKeyCaps}
-                on:paste={onPaste}
-                on:contextmenu={handleContextMenu}
-                on:focus={() => (hasFocus = true)}
-                on:blur={() => (hasFocus = false)}
-                {disabled}
-                {...$$restProps}
-                {placeholder}
-                {style}
-                spellcheck={false}
-            />
+        <InputContainer
+            {disabled}
+            {error}
+            isFocused={hasFocus}
+            {clearBackground}
+            {clearPadding}
+            {clearBorder}
+            classes="relative"
+        >
+            <Text {...textProps}>
+                <input
+                    {type}
+                    {value}
+                    bind:this={inputElement}
+                    {maxlength}
+                    class="w-full text-{alignment}
+                        {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}"
+                    class:floating-active={value && label}
+                    on:input={handleInput}
+                    on:keypress={onKeyPress}
+                    on:keydown={onKeyCaps}
+                    on:keyup={onKeyCaps}
+                    on:paste={onPaste}
+                    on:contextmenu={handleContextMenu}
+                    on:focus={() => (hasFocus = true)}
+                    on:blur={() => (hasFocus = false)}
+                    {disabled}
+                    {placeholder}
+                    {style}
+                    spellcheck={false}
+                    {...$$restProps}
+                />
+            </Text>
             {#if label}
                 <floating-label class:floating-active={value && label}>{label}</floating-label>
             {/if}
@@ -161,7 +175,7 @@
         -webkit-appearance: none;
         @apply m-0;
     }
-    input {
+    Text {
         &::placeholder {
             @apply text-gray-500;
         }

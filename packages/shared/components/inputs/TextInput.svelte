@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { FontWeightText } from 'shared/components/Text.svelte'
     import Input from './Input.svelte'
 
     export let value = ''
@@ -15,6 +16,13 @@
     export let disableContextMenu = false
     export let capsLockWarning = false
     export let hasFocus
+
+    // Text Props
+    export let type = 'p'
+    export let fontSize = '11'
+    export let lineHeight = '140'
+    export let fontWeight = FontWeightText.normal
+    export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
 </script>
 
 <Input
@@ -33,5 +41,12 @@
     {submitHandler}
     {style}
     {classes}
+    textProps={{
+        type,
+        fontSize,
+        lineHeight,
+        fontWeight,
+    }}
+    {alignment}
     {...$$restProps}
 />
