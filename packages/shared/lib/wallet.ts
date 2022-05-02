@@ -253,14 +253,17 @@ export const destroyManager = (id: string): void => {
     }
 }
 
-export async function requestMnemonic(): Promise<RecoveryPhrase> {
+export async function generateMnemonic(): Promise<string> {
     const manager = get(profileManager)
-    const mnemonicString = await manager.generateMnemonic()
+    return manager.generateMnemonic()
+}
+
+export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
+    const mnemonicString = await generateMnemonic()
     const mnemnonicList = mnemonicString.split(' ')
     mnemonic.set(mnemnonicList)
     return mnemnonicList
 }
-
 /**
  * Get legacy seed checksum
  *

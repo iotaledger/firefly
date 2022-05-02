@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { mnemonic, strongholdPassword } from '@lib/app'
-import { backup, createAccount, storeMnemonic, requestMnemonic } from '@lib/wallet'
+import { backup, createAccount, storeMnemonic, generateAndStoreMnemonic } from '@lib/wallet'
 import { Platform } from '@lib/platform'
 import { updateProfile } from '@lib/profile'
 import { getDefaultStrongholdName } from '@lib/utils'
@@ -24,7 +24,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case BackupRoute.Init:
-                await requestMnemonic()
+                await generateAndStoreMnemonic()
                 nextRoute = BackupRoute.RecoveryPhrase
                 break
 
