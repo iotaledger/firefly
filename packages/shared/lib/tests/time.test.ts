@@ -1,5 +1,4 @@
 import './__mocks__/i18n'
-import './__mocks__/matchMedia'
 
 import {
     getBestTimeDuration,

@@ -1,5 +1,3 @@
-import './__mocks__/matchMedia'
-
 import { migrateObjects, range } from '../utils'
 
 type Simple = {

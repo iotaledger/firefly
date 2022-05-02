@@ -1,5 +1,3 @@
-import './__mocks__/matchMedia'
-
 import { convertFromFiat, convertToFiat, isFiatCurrency } from '../currency'
 import { AvailableExchangeRates, CurrencyTypes } from '../typings/currency'
 

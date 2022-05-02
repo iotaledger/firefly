@@ -1,5 +1,3 @@
-import './__mocks__/matchMedia'
-
 import {
     checkNodeUrlValidity,
     cleanNodeAuth,
