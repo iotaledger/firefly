@@ -19,14 +19,14 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
-import { ProfileType } from './typings/profile'
+import { ProfileManager, ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-import { AccountManager, Account as StardustAccount } from '@iota/wallet'
+import { Account as StardustAccount } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
@@ -58,7 +58,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export const accountManager = writable<AccountManager>(null)
+export const profileManager = writable<ProfileManager>(null)
 export const account = writable<StardustAccount>(null)
 // TODO: remove these
 interface ActorState {
@@ -198,7 +198,7 @@ export function initialise(id: string, storagePath: string, sendCrashReports: bo
     }
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
     // The new bindings
-    const newAccountManager: AccountManager = createAccountManager({
+    const newProfileManager: ProfileManager = createAccountManager({
         storagePath,
         clientOptions: {
             nodes: [
@@ -216,7 +216,7 @@ export function initialise(id: string, storagePath: string, sendCrashReports: bo
             },
         },
     })
-    accountManager.set(newAccountManager)
+    profileManager.set(newProfileManager)
 }
 
 export function getStardustAccount(index: number): Promise<StardustAccount> {
@@ -239,7 +239,7 @@ export const removeEventListeners = (id: string): void => {
 }
 
 export const destroyManager = (id: string): void => {
-    accountManager.set(null)
+    profileManager.set(null)
 
     // TODO: remove these
     if (actors[id]) {
@@ -254,7 +254,7 @@ export const destroyManager = (id: string): void => {
 }
 
 export async function requestMnemonic(): Promise<RecoveryPhrase> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     const mnemonicString = await manager.generateMnemonic()
     const mnemnonicList = mnemonicString.split(' ')
     mnemonic.set(mnemnonicList)
@@ -283,7 +283,7 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
     })
 
 export async function setStrongholdPassword(password: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.setStrongholdPassword(password)
 }
 
@@ -301,17 +301,17 @@ export const asyncChangeStrongholdPassword = (currentPassword: string, newPasswo
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function storeMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.storeMnemonic(mnemonic)
 }
 
 export async function verifyMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.verifyMnemonic(mnemonic)
 }
 
 export async function backup(dest: string, password: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.backup(dest, password)
 }
 
@@ -330,14 +330,14 @@ export function setStoragePassword(password: string): Promise<void> {
 
 export async function restoreBackup(importFilePath: string, password: string): Promise<void> {
     // TODO: check this once Thoralf exposes this
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.importAccounts(importFilePath, password)
 }
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
     const accounts = get(get(wallet)?.accounts)
     try {
-        const createdAccount = await get(accountManager).createAccount({
+        const createdAccount = await get(profileManager).createAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
@@ -455,7 +455,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
         api.syncAccount(account.id, {
             async onSuccess() {
                 const meta = await getAccountMeta(account.id)
-                const startdustAccount = await get(accountManager).getAccount(account.id)
+                const startdustAccount = await get(profileManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
                 get(wallet)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
                 updateProfile(
@@ -770,7 +770,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
                 totalBalance.balance += meta.balance
                 totalBalance.incoming += meta.incoming
                 totalBalance.outgoing += meta.outgoing
-                const startdustAccount = await get(accountManager).getAccount(newAccount.id)
+                const startdustAccount = await get(profileManager).getAccount(newAccount.id)
                 const account = prepareAccountInfo(startdustAccount, meta)
 
                 _accounts.push(account)

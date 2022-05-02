@@ -23,7 +23,7 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        accountManager,
+        profileManager,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -81,7 +81,7 @@
     // TODO: move to Dashboard.svelte
     async function loadAccounts(): Promise<void> {
         try {
-            const accountsResponse = await $accountManager.getAccounts()
+            const accountsResponse = await $profileManager.getAccounts()
             if (accountsResponse) {
                 if (accountsResponse.length === 0) {
                     void _continue()

@@ -1,6 +1,6 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    accountManager,
+    profileManager,
     // addMessagesPair,
     api,
     getStardustAccount,
@@ -339,7 +339,7 @@ export function initialiseListeners(): void {
 }
 
 async function getAccounts(): Promise<Account[]> {
-    const accountsResponse = await get(accountManager).getAccounts()
+    const accountsResponse = await get(profileManager).getAccounts()
     const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
     return Promise.all(accountsPromises)
 }
