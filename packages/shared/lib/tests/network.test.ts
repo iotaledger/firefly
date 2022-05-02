@@ -1,4 +1,4 @@
-import './mocks/matchMedia'
+import './__mocks__/matchMedia'
 
 import {
     checkNodeUrlValidity,

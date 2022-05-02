@@ -4,8 +4,9 @@
  * everywhere).
  */
 
-import './mocks/platform'
-import './mocks/walletActor'
+import './__mocks__/platform'
+import './__mocks__/walletActor'
+import './__mocks__/stardustApi'
 
 beforeAll(async () => {})
 afterAll(async () => {})

@@ -1,4 +1,4 @@
-import './mocks/matchMedia'
+import './__mocks__/matchMedia'
 
 import { get } from 'svelte/store'
 import { addError, errorLog } from '../errors'
