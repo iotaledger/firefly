@@ -1,17 +1,16 @@
-import { AccountManagerOptions } from '@iota/wallet'
+import { AccountId, AccountManagerOptions } from '@iota/wallet'
 import Account from './account.mock'
-import { AccountManager } from './accountManager.mock'
-jest.mock('@iota/wallet')
+import ProfileManagerMock from './profileManager.mock'
 
 interface IStardustApi {
-    createAccountManager(options: AccountManagerOptions): AccountManager
+    createAccountManager(options: AccountManagerOptions): ProfileManagerMock
     getAccount(accountId: string): Promise<Account>
 }
 const stardustApi: IStardustApi = {
-    createAccountManager(options: AccountManagerOptions): AccountManager {
-        return new AccountManager()
+    createAccountManager(_: AccountManagerOptions): ProfileManagerMock {
+        return new ProfileManagerMock()
     },
-    getAccount(index): Promise<Account> {
+    getAccount(_: AccountId): Promise<Account> {
         return new Promise((resolve) => {
             resolve(new Account())
         })
