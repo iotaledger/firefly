@@ -33,7 +33,7 @@
     $: hasFocus && (error = '')
 </script>
 
-<InputContainer clearPadding>
+<InputContainer isFocused={hasFocus} clearPadding>
     <TextInput
         bind:value
         bind:hasFocus
@@ -43,6 +43,8 @@
         {disabled}
         label={localize('general.recipient')}
         placeholder={localize('general.recipient')}
+        fontSize="sm"
+        type="pre"
         {...$$restProps}
     />
 </InputContainer>

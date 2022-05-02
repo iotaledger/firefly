@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, KeyValueBox, ExpirationTimePicker } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -9,6 +9,7 @@
     import { isLedgerProfile, isSoftwareProfile } from '@lib/profile'
     import { selectedAccount } from '@lib/wallet'
     import { promptUserToConnectLedger } from '@lib/ledger'
+    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
 
     export let internal = false
     export let to = ''
@@ -36,7 +37,8 @@
     }
 
     $: transactionDetails = {
-        type: internal ? 'transferring' : 'sending',
+        type: internal ? ActivityType.Transfer : ActivityType.Send,
+        status: ActivityStatus.InProgress,
         value: amount,
         unit,
         ...(internal && { account: to }),
@@ -48,7 +50,12 @@
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
-    <TransactionDetails {...transactionDetails} />
+    <div class="w-full flex-col space-y-2">
+        <TransactionDetails {...transactionDetails} />
+        <KeyValueBox keyText={localize('general.expirationTime')}>
+            <ExpirationTimePicker slot="value" />
+        </KeyValueBox>
+    </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onCancel}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>

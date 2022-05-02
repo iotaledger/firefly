@@ -60,6 +60,7 @@
     export let transition = true
     export let overflow = false
     export let autofocusContent = true
+    export let relative = true
 
     enum PopupSize {
         Small = 'small',
@@ -206,8 +207,8 @@
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
             class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
-            } ${overflow ? 'overflow' : 'relative'}`}
+                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-800 shadow-elevation-4'
+            } ${overflow ? 'overflow' : ''} ${relative ? 'relative' : ''}`}
         >
             {#if !hideClose}
                 <button

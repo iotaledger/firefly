@@ -17,7 +17,6 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
-    export let isFocused = false
     export let maxDecimals = undefined
     export let disableContextMenu = false
     export let capsLockWarning = false
@@ -132,13 +131,14 @@
             {clearBorder}
             classes="relative"
         >
-            <Text {...textProps}>
+            <Text {...textProps} classes="flex w-full">
                 <input
                     {type}
                     {value}
                     bind:this={inputElement}
                     {maxlength}
                     class="w-full text-{alignment}
+                        bg-white dark:bg-gray-800
                         {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}"
                     class:floating-active={value && label}
                     on:input={handleInput}
@@ -157,7 +157,8 @@
                 />
             </Text>
             {#if label}
-                <floating-label class:floating-active={value && label}>{label}</floating-label>
+                <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
+                >
             {/if}
         </InputContainer>
     </div>
@@ -175,7 +176,7 @@
         -webkit-appearance: none;
         @apply m-0;
     }
-    Text {
+    input {
         &::placeholder {
             @apply text-gray-500;
         }
@@ -224,6 +225,42 @@
         &:focus {
             + floating-label {
                 @apply text-blue-500;
+            }
+        }
+    }
+    floating-label {
+        transform: translateY(3px);
+        @apply block;
+        @apply text-gray-500;
+        @apply text-11;
+        @apply leading-120;
+        @apply overflow-hidden;
+        @apply opacity-0;
+        @apply pointer-events-none;
+        @apply absolute;
+        @apply left-3;
+        @apply select-none;
+        @apply whitespace-nowrap;
+        @apply w-full;
+        @apply transition-none;
+        top: 8px;
+
+        &.hasFocus {
+            @apply text-blue-500;
+        }
+        &:not(:disabled) {
+            &.floating-active {
+                @apply transition-all;
+                @apply ease-out;
+                @apply opacity-100;
+                transform: none;
+            }
+        }
+
+        &:disabled {
+            &.floating-active {
+                @apply pointer-events-none;
+                @apply opacity-50;
             }
         }
     }

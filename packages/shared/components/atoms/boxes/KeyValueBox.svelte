@@ -5,22 +5,22 @@
     export let keyText: string = ''
     export let valueText: string = ''
     export let textColor: string = 'gray-600'
-    export let darkTextColor: string = 'gray-600'
+    export let darkTextColor: string = 'gray-500'
     export let backgroundColor: string = 'gray-50'
-    export let darkBackgrounColor: string = 'gray-50'
+    export let darkBackgroundColor: string = 'gray-850'
     export let classes: string = ''
 </script>
 
-<Box {backgroundColor} {darkBackgrounColor} {classes}>
+<Box row {backgroundColor} {darkBackgroundColor} {classes}>
     {#if keyText}
-        <Text fontSize="sm" color={textColor} {darkTextColor}>
+        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
             {keyText}
         </Text>
     {:else}
         <slot name="key" />
     {/if}
     {#if valueText}
-        <Text fontSize="sm" color={textColor} {darkTextColor}>
+        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
             {valueText}
         </Text>
     {:else}

@@ -133,9 +133,9 @@
     style={navWidth}
 >
     <div
-        class="selection relative flex flex-row pl-1 pb-1.5 items-end w-full whitespace-nowrap cursor-pointer
+        class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap cursor-pointer
     bg-white dark:bg-gray-800 
-            {hasFocus ? 'pr-1 space-x-0' : 'space-x-1 pr-0'}
+            {hasFocus ? '-mr-1 pr-1' : 'pr-0'}
             {dropdown
             ? 'border-blue-500'
             : showBorderWhenClosed
@@ -160,10 +160,10 @@
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
-        <div class="inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
+        <div class="flex flex-col items-center inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
             {#each items as item}
                 <button
-                    class="relative flex items-center p-2 w-full whitespace-nowrap
+                    class="relative flex items-center p-2 pl-1 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"

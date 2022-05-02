@@ -12,7 +12,6 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
-    export let isFocused = false
     export let disableContextMenu = false
     export let capsLockWarning = false
     export let hasFocus
@@ -35,7 +34,6 @@
     {maxlength}
     {disabled}
     {autofocus}
-    {isFocused}
     {capsLockWarning}
     {disableContextMenu}
     {submitHandler}

@@ -1,7 +1,6 @@
 <script lang="typescript">
     import Box from 'shared/components/atoms/boxes/Box.svelte'
 
-    export let disabled = false
     export let isFocused = false
     export let error = ''
     export let classes = ''
@@ -14,7 +13,7 @@
     {clearBackground}
     {clearPadding}
     backgroundColor="white"
-    darkBackgrounColor="gray-800"
+    darkBackgroundColor="gray-800"
     classes="w-full flex 
         {!clearPadding ? 'p-4' : ''}
         {!clearBorder ? 'border border-solid' : ''}

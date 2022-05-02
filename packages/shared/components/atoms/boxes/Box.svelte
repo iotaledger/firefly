@@ -4,7 +4,7 @@
     export let clearBackground: boolean = false
     export let clearPadding = false
     export let backgroundColor: string = 'gray-50'
-    export let darkBackgrounColor: string = 'gray-50'
+    export let darkBackgroundColor: string = 'gray-850'
     export let classes: string = ''
 </script>
 
@@ -15,7 +15,7 @@
         ${row ? 'flex-row' : ''}
         ${!clearPadding ? 'px-4 py-4' : ''}
         ${!clearBackground && backgroundColor ? 'bg-' + backgroundColor : ''}  
-        ${!clearBackground && darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''}
+        ${!clearBackground && darkBackgroundColor ? 'dark:bg-' + darkBackgroundColor : ''}
         ${classes}
     `}
 >
