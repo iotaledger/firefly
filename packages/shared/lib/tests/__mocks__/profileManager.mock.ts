@@ -1,6 +1,9 @@
 import { ProfileManager } from '../../typings/profile'
 
-export default class ProfileManagerMock implements ProfileManager {
+export const MOCK_MNEMONIC =
+    'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
+
+export class ProfileManagerMock implements ProfileManager {
     getAccount(accountId) {
         return undefined
     }
@@ -13,12 +16,12 @@ export default class ProfileManagerMock implements ProfileManager {
         return undefined
     }
 
-    setStrongholdPassword(password) {
+    setStrongholdPassword(password: string): Promise<string> {
         return Promise.resolve(password)
     }
 
-    generateMnemonic() {
-        return Promise.resolve('test mnemonic string')
+    generateMnemonic(): Promise<string> {
+        return Promise.resolve(MOCK_MNEMONIC)
     }
 
     storeMnemonic(mnemonic) {

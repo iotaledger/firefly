@@ -1,6 +1,6 @@
 import { AccountId, AccountManagerOptions } from '@iota/wallet'
 import Account from './account.mock'
-import ProfileManagerMock from './profileManager.mock'
+import { ProfileManagerMock } from './profileManager.mock'
 
 interface IStardustApi {
     createAccountManager(options: AccountManagerOptions): ProfileManagerMock
