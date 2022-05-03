@@ -592,8 +592,8 @@
                         "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "partiallyVoted": {
-                        "title": "New unvoted funds: {amount}",
-                        "body": "You have extra funds available in {account}. You can turn these funds into votes by merging them."
+                        "title": "New unused funds: {amount}",
+                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
                     },
                     "maximumVotes": {
                         "title": "Maximum votes",
@@ -635,7 +635,7 @@
                 }
             },
             "votes": "votes",
-            "manageVote": "Manage voting funds"
+            "manageVote": "Manage vote"
         }
     },
     "popups": {
@@ -859,8 +859,8 @@
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "votingConfirmation": {
-            "partiallyVoted": "You have extra funds available in {account}. You can turn these funds into votes by merging them.",
-            "partiallyVotedAmount": "Unvoted funds: {amount}",
+            "partiallyVoted": "You have received additional funds to {account}. You can vote with these tokens by merging your vote.",
+            "partiallyVotedAmount": "Unused funds: {amount}",
             "additionalInfoStopping": "Please note that stopping voting during the counting period won't impact any votes that have already been counted.",
             "additionalInfoChanging": "Please note that changing your vote during the counting period won't impact any votes that have already been counted.",
             "votedSuccessfully": "You have started voting with {account}.",
