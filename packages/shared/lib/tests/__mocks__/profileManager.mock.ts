@@ -1,10 +1,12 @@
-import { ProfileManager } from '../../typings/profile'
+import type { AccountId, CreateAccountPayload } from '@iota/wallet'
+import { ProfileManager, StardustAccount } from '../../typings/profile'
+import { AccountMock } from './account.mock'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements ProfileManager {
-    getAccount(accountId) {
+    getAccount(accountId: AccountId) {
         return undefined
     }
 
@@ -12,8 +14,8 @@ export class ProfileManagerMock implements ProfileManager {
         return undefined
     }
 
-    createAccount(account) {
-        return undefined
+    createAccount(account: CreateAccountPayload): Promise<StardustAccount> {
+        return Promise.resolve(new AccountMock())
     }
 
     setStrongholdPassword(password: string): Promise<string> {
@@ -24,19 +26,19 @@ export class ProfileManagerMock implements ProfileManager {
         return Promise.resolve(MOCK_MNEMONIC)
     }
 
-    storeMnemonic(mnemonic) {
+    storeMnemonic(mnemonic: string): Promise<string> {
         return Promise.resolve(mnemonic)
     }
 
-    verifyMnemonic(mnemonic) {
+    verifyMnemonic(mnemonic: string): Promise<string> {
         return Promise.resolve(mnemonic)
     }
 
-    backup(destination, password) {
-        return Promise.resolve(destination)
+    backup(_: string, __: string): Promise<void> {
+        return Promise.resolve()
     }
 
-    importAccounts(backupPath, password) {
+    importAccounts(backupPath: string, _: string): Promise<string> {
         return Promise.resolve(backupPath)
     }
 

@@ -1,8 +1,13 @@
-export default class Account {
+import { AccountBalance, Address, NodeInfo } from '@iota/wallet'
+import { StardustAccount } from '../../typings/profile'
+import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
+import { MOCK_ADDRESS } from './address.mock'
+
+export class AccountMock implements StardustAccount {
     meta = {
         index: 0,
         coinType: 0,
-        alias: '',
+        alias: 'testAccount',
         publicAddresses: [],
         internalAddresses: [],
         addressesWithBalance: [],
@@ -17,164 +22,114 @@ export default class Account {
         },
     }
 
-    private messageHandler = ''
-
-    constructor() {
-        console.log('constructor called!')
-    }
+    constructor() {}
 
     alias(): string {
-        console.log('alias called!')
         return ''
     }
 
     collectOutputs(): Promise<void> {
-        console.log('collectOutputs called!')
-        return new Promise((resolve) => {
-            resolve()
-        })
+        return Promise.resolve()
     }
 
     getOutputsWithAdditionalUnlockConditions(outputs): Promise<string> {
-        console.log('getOutputsWithAdditionalUnlockConditions called!')
-        return new Promise((resolve) => {
-            resolve('')
-        })
+        return Promise.resolve('')
     }
 
     listAddresses(): Promise<[]> {
-        console.log('listAddresses called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     listAddressesWithBalance(): Promise<[]> {
-        console.log('listAddressesWithBalance called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     listOutputs(): Promise<[]> {
-        console.log('listOutputs called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     listUnspentOutputs(): Promise<[]> {
-        console.log('listUnspentOutputs called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     listPendingTransactions(): Promise<[]> {
-        console.log('listPendingTransactions called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     listTransactions(): Promise<[]> {
-        console.log('listTransactions called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     sync(options?): Promise<void> {
-        console.log('sync called!')
-        return new Promise((resolve) => {
-            resolve()
+        return Promise.resolve()
+    }
+
+    getNodeInfo(_: string): Promise<NodeInfo> {
+        return Promise.resolve({
+            name: 'mockNode',
+            version: 'v1.0.0',
+            isHealthy: true,
+            networkId: 'id',
+            bech32HRP: 'mock',
+            minPoWScore: 0,
+            messagesPerSecond: 10000,
+            referencedMessagesPerSecond: 10000,
+            referencedRate: 10000,
+            latestMilestoneTimestamp: 10000,
+            latestMilestoneIndex: 9999,
+            confirmedMilestoneIndex: 9999,
+            pruningIndex: 1500,
+            features: ['mock'],
         })
     }
 
-    getNodeInfo(url: string): Promise<void> {
-        console.log('getNodeInfo called!')
-        return new Promise((resolve) => {
-            resolve()
-        })
+    generateAddresses(): Promise<Address[]> {
+        return Promise.resolve([MOCK_ADDRESS])
     }
 
-    generateAddresses(): Promise<[]> {
-        console.log('generateAddresses called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+    latestAddress(): Promise<Address> {
+        return Promise.resolve(MOCK_ADDRESS)
     }
-    latestAddress(): Promise<void> {
-        console.log('latestAddress called!')
-        return new Promise((resolve) => {
-            resolve()
-        })
+
+    balance(): Promise<AccountBalance> {
+        return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
-    balance(): Promise<void> {
-        console.log('balance called!')
-        return new Promise((resolve) => {
-            resolve()
-        })
-    }
+
     mintNativeToken(nativeTokenOptions, transferOptions): Promise<[]> {
-        console.log('mintNativeToken called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     mintNfts(nftOptions, transferOptions): Promise<[]> {
-        console.log('mintNfts called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     sendAmount(addressesWithAmount, transferOptions): Promise<[]> {
-        console.log('sendAmount called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
     sendMicroTransaction(addressesWithMicroAmount, transferOptions): Promise<[]> {
-        console.log('sendMicroTransaction called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     sendNativeTokens(addressNativeTokens, transferOptions): Promise<[]> {
-        console.log('sendNativeTokens called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     sendNft(addressesAndNftIds, transferOptions): Promise<[]> {
-        console.log('sendNft called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     sendTransfer(outputs, transferOptions): Promise<[]> {
         console.log('sendTransfer called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     tryCollectOutputs(outputsToCollect): Promise<[]> {
         console.log('tryCollectOutputs called!')
-        return new Promise((resolve) => {
-            resolve([])
-        })
+        return Promise.resolve([])
     }
 
     setClientOptions(options): Promise<void> {
         console.log('setClientOptions called!')
-        return new Promise((resolve) => {
-            resolve()
-        })
+        return Promise.resolve()
     }
 }
