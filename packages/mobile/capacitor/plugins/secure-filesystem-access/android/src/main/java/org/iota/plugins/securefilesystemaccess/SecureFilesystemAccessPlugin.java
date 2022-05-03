@@ -250,12 +250,14 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         File dstUrl = new File(selectedPath);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            // copy file
-            try (
-                    FileChannel source = new FileInputStream(srcUrl).getChannel();
-                    FileChannel destination = new FileOutputStream(dstUrl).getChannel()
-            ) {
+            try {
+                FileChannel source = new FileInputStream(srcUrl).getChannel();
+                FileChannel destination = new FileOutputStream(dstUrl).getChannel();
                 destination.transferFrom(source, 0, source.size());
+                source.close();
+                destination.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             final Mediastore implementation = new Mediastore();
