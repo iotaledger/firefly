@@ -19,14 +19,14 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
-import { ProfileManager, ProfileType } from './typings/profile'
+import { ProfileManager, ProfileType, StardustAccount } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-import { Account as StardustAccount } from '@iota/wallet'
+import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
@@ -337,10 +337,15 @@ export async function restoreBackup(importFilePath: string, password: string): P
     await manager.importAccounts(importFilePath, password)
 }
 
+export async function createStardustAccount(payload: CreateAccountPayload): Promise<StardustAccount> {
+    const manager = get(profileManager)
+    return manager.createAccount(payload)
+}
+
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
     const accounts = get(get(wallet)?.accounts)
     try {
-        const createdAccount = await get(profileManager).createAccount({
+        const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
