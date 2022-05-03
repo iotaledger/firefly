@@ -2,7 +2,8 @@ import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
 import { NetworkConfig } from './network'
 import { AccountStakingRewards } from '@lib/participation/types'
-import { Account, AccountId, CreateAccountPayload, EventType } from '@iota/wallet'
+import { AccountId, CreateAccountPayload, EventType } from '@iota/wallet'
+import { StardustAccount } from '@lib/typings/account'
 
 export interface MigratedTransaction {
     address: string
@@ -71,14 +72,14 @@ export interface ProfileAccount {
 }
 
 export interface ProfileManager {
-    getAccount(accountId: AccountId): Promise<Account>
-    getAccounts(): Promise<Account[]>
-    createAccount(account: CreateAccountPayload): Promise<Account>
+    getAccount(accountId: AccountId): Promise<StardustAccount>
+    getAccounts(): Promise<StardustAccount[]>
+    createAccount(account: CreateAccountPayload): Promise<StardustAccount>
     setStrongholdPassword(password: string): Promise<string>
     generateMnemonic(): Promise<string>
     storeMnemonic(mnemonic: string): Promise<string>
     verifyMnemonic(mnemonic: string): Promise<string>
-    backup(destination: string, password: string): Promise<string>
+    backup(destination: string, password: string): Promise<void>
     importAccounts(backupPath: string, password: string): Promise<string>
     listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
 }

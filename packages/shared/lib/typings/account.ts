@@ -4,6 +4,24 @@ import { Address } from './address'
 import { ClientOptions } from './client'
 import { NodeAuth } from './node'
 import { Duration } from './wallet'
+import {
+    AccountBalance,
+    AccountMeta,
+    AccountSyncOptions,
+    Address as StardustAddress,
+    AddressNativeTokens,
+    AddressNftId,
+    AddressWithAmount,
+    AddressWithMicroAmount,
+    ClientOptions as StardustClientOptions,
+    NativeTokenOptions,
+    NftOptions,
+    NodeInfo,
+    OutputData,
+    OutputsToCollect,
+    Transaction,
+    TransferOptions,
+} from '@iota/wallet'
 
 export enum MessageType {}
 
@@ -61,6 +79,37 @@ export interface SyncedAccount {
     isEmpty: boolean
     addresses: Address[]
     messages: Message[]
+}
+
+// TODO: move to separate file
+export interface StardustAccount {
+    meta: AccountMeta
+    alias(): string
+    collectOutputs(): Promise<void>
+    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string>
+    listAddresses(): Promise<StardustAddress[]>
+    listAddressesWithBalance(): Promise<StardustAddress[]>
+    listOutputs(): Promise<OutputData[]>
+    listUnspentOutputs(): Promise<OutputData[]>
+    listPendingTransactions(): Promise<Transaction[]>
+    listTransactions(): Promise<Transaction[]>
+    sync(options?: AccountSyncOptions): Promise<void>
+    getNodeInfo(url: string): Promise<NodeInfo>
+    generateAddresses(): Promise<StardustAddress[]>
+    latestAddress(): Promise<StardustAddress>
+    balance(): Promise<AccountBalance>
+    mintNativeToken(nativeTokenOptions: NativeTokenOptions, transferOptions: TransferOptions): Promise<Transaction[]>
+    mintNfts(nftOptions: NftOptions, transferOptions: TransferOptions): Promise<Transaction[]>
+    sendAmount(addressesWithAmount: AddressWithAmount[], transferOptions: TransferOptions): Promise<[]>
+    sendMicroTransaction(
+        addressesWithMicroAmount: AddressWithMicroAmount[],
+        transferOptions: TransferOptions
+    ): Promise<[]>
+    sendNativeTokens(addressNativeTokens: AddressNativeTokens[], transferOptions: TransferOptions): Promise<[]>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions: TransferOptions): Promise<[]>
+    sendTransfer(outputs: OutputData[], transferOptions: TransferOptions): Promise<[]>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<[]>
+    setClientOptions(options: StardustClientOptions): Promise<void>
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {

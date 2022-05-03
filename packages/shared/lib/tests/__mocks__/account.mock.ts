@@ -1,5 +1,5 @@
 import { AccountBalance, Address, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '../../typings/profile'
+import { StardustAccount } from '../../typings/account'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 

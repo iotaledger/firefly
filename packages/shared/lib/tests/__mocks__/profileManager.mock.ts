@@ -1,5 +1,6 @@
 import type { AccountId, CreateAccountPayload } from '@iota/wallet'
-import { ProfileManager, StardustAccount } from '../../typings/profile'
+import { StardustAccount } from '../../typings/account'
+import { ProfileManager } from '../../typings/profile'
 import { AccountMock } from './account.mock'
 
 export const MOCK_MNEMONIC =
