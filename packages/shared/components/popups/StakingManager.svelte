@@ -19,11 +19,11 @@
         isPerformingParticipation,
         isPartiallyStaked,
         participationAction,
-        participationOverview,
         pendingParticipations,
         stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
+        resetParticipation,
     } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
@@ -38,7 +38,7 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccount } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
@@ -46,36 +46,13 @@
 
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
-    let { accounts } = $wallet
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
-    $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
-
-    function resetAccounts(): void {
-        /**
-         * NOTE: This is necessary for the page
-         * to be re-rendered because updating arrays
-         * in place will not update the UI (requires
-         * variable re-assignment).
-         */
-        accounts = accounts
-    }
-
-    function resetView(): void {
-        if (!isSoftwareProfile) {
-            transferState.set(null)
-        }
-
-        isPerformingParticipation.set(false)
-        participationAction.set(undefined)
-
-        resetAccounts()
-    }
 
     function displayErrorNotification(error): void {
         showAppNotification({
@@ -96,11 +73,6 @@
 
         isPerformingParticipation.set(true)
 
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
-
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         if (!hasParticipationPlugin) {
             showAppNotification({
@@ -110,32 +82,28 @@
                 }),
             })
 
-            resetView()
+            resetParticipation()
 
             return
         }
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccount?.id, participations)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                await participate($selectedAccount?.id, participations).catch((err) => {
+                    console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                    displayErrorNotification(err)
+                    resetParticipation()
+                })
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS).catch((err) => {
+                    console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                    displayErrorNotification(err)
+                    resetParticipation()
+                })
                 break
             default:
                 break
@@ -189,7 +157,7 @@
                 }),
             })
 
-            resetView()
+            resetParticipation()
 
             return
         }
@@ -212,7 +180,7 @@
                 const latestParticipationIds = participations.map((participation) => participation.messageId)
 
                 if (latestParticipationIds.length === 0) {
-                    resetView()
+                    resetParticipation()
                 }
 
                 pendingParticipationIds = latestParticipationIds
