@@ -12,7 +12,7 @@ public class WalletPlugin: CAPPlugin {
             guard !isInitialized else { return }
             guard let actorId = call.getString("actorId"),
                 let storagePath = call.getString("storagePath")  else {
-                return call.reject("actorId adn storagePath is required")
+                return call.reject("actorId and storagePath is required")
             }
             let fm = FileManager.default
             let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
