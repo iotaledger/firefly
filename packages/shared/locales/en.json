@@ -808,6 +808,9 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
         }
     },
     "charts": {
@@ -945,6 +948,8 @@
         "recentActivity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -962,15 +967,18 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Receive funds",
         "address": "Address",
         "myAddress": "My Address",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
         "newRemainder": "New Remainder",
         "remainder": "Remainder",
         "generateNewAddress": "Generate new address",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Copy Address",
+        "viewOnExplorer": "View on Explorer",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
