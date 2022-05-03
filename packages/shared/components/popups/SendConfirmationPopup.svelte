@@ -10,11 +10,16 @@
     import { selectedAccount } from '@lib/wallet'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { WalletAccount } from '@lib/typings/wallet'
 
     export let internal = false
-    export let to = ''
+    export let to: string = ''
+    export let toAccount: WalletAccount
     export let amount = 0
     export let unit = Unit.i
+
+    $: internal = toAccount?.depositAddress ? true : false
+    $: to = toAccount?.depositAddress ?? to
 
     function onConfirm(): void {
         closePopup()
@@ -41,7 +46,7 @@
         status: ActivityStatus.InProgress,
         value: amount,
         unit,
-        ...(internal && { account: to }),
+        ...(internal && { account: toAccount }),
         ...(!internal && { address: to }),
     }
 </script>

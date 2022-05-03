@@ -18,6 +18,7 @@
     function handleSendClick() {
         openPopup({
             type: 'sendForm',
+            overflow: true,
         })
     }
     function handleReceiveClick() {

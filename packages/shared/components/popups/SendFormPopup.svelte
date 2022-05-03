@@ -45,7 +45,8 @@
                         internal: false,
                         amount: _amount,
                         unit,
-                        to: recipient,
+                        ...(recipient?.depositAddress && { toAccount: recipient }),
+                        ...(!recipient?.depositAddress && { to: recipient }),
                     },
                     overflow: true,
                 })

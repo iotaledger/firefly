@@ -47,6 +47,7 @@
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
             openPopup({
                 type: 'sendForm',
+                overflow: true,
             })
             isDeepLinkRequestActive.set(false)
         }
