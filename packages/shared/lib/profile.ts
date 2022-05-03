@@ -418,7 +418,7 @@ export function getColor(accountId: string): string | AccountColors {
     if (!accounts?.length && accountId) {
         setProfileAccount(_activeProfile, { id: accountId, color: '' })
     }
-    return accounts?.find((account) => account.id === accountId)?.color
+    return accounts?.find((account) => account.id === accountId)?.color ?? AccountColors.Blue
 }
 
 /**
