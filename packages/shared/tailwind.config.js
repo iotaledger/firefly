@@ -26,6 +26,9 @@ module.exports = {
                 /^text-/,
                 /^hover:text-/,
                 /^dark:text-/,
+                /^font-/,
+                /^hover:font-/,
+                /^dark:font-/,
                 /^grid-cols-/,
                 // `p-${size}`
                 /^p-/,
@@ -258,6 +261,10 @@ module.exports = {
                 'elevation-3': '0px 4px 6px rgba(0, 0, 0, 0.08)',
                 'elevation-4': '0px 4px 12px rgba(0, 0, 0, 0.12)',
             },
+        },
+        fontFamily: {
+            'fira-mono': ['"Fira Mono"', 'monospace'],
+            inter: ['Inter'],
         },
     },
     variants: {
