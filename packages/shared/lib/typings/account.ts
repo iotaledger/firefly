@@ -81,7 +81,6 @@ export interface SyncedAccount {
     messages: Message[]
 }
 
-// TODO: move to separate file
 export interface StardustAccount {
     meta: AccountMeta
     alias(): string
