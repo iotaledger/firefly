@@ -24,7 +24,7 @@ import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import type { Account } from '@iota/wallet'
+import { StardustAccount } from '@lib/typings/account'
 
 /**
  * Initialises event listeners from wallet library
@@ -338,7 +338,7 @@ export function initialiseListeners(): void {
     })
 }
 
-async function getAccounts(): Promise<Account[]> {
+async function getAccounts(): Promise<StardustAccount[]> {
     const accountsResponse = await get(profileManager).getAccounts()
     const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
     return Promise.all(accountsPromises)
