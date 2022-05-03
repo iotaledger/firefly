@@ -197,9 +197,11 @@
         class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
             overflow ? '' : 'overflow-hidden'
         }
-                h-full z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
-            $mobile && 'z-40'
-        }`}
+                h-full z-20 ${
+                    fullScreen
+                        ? 'bg-white dark:bg-gray-900'
+                        : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
+                } ${$mobile && 'z-40'}`}
     >
         <div tabindex="0" on:focus={handleFocusFirst} />
         <popup-content

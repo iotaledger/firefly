@@ -39,8 +39,8 @@
     let expirationTime: string
     $: {
         try {
-            if (timestamp) {
-                transactionTime = formatDate(new Date(timestamp), {
+            if (expirationTimestamp) {
+                transactionTime = formatDate(new Date(expirationTimestamp), {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })

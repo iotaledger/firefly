@@ -1,6 +1,6 @@
 export { default as Address } from './Address.svelte'
 export { default as Amount } from './Amount.svelte'
-export { default as AmountInput } from './Amount.svelte'
+export { default as AmountInput } from './AmountInput.svelte'
 export { default as AssetAmountInput } from './AssetAmountInput.svelte'
 export { default as AssetDropdown } from './AssetDropdown.svelte'
 export { default as Checkbox } from './Checkbox.svelte'

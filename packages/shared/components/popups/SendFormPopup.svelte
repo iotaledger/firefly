@@ -10,21 +10,49 @@
     let amount
     let unit
     let recipient
-    let validateRecipient = false
 
-    const onSend = (): void => {
-        validateRecipient = true
-        const _amount = amount * UNIT_MAP[unit].val
-        openPopup({
-            type: 'sendConfirmation',
-            props: {
-                internal: false,
-                amount: _amount,
-                unit,
-                to: recipient,
-            },
-            overflow: true,
-        })
+    let assetAmountInput
+    let recipientInput
+
+    async function onSend() {
+        let valid = true
+
+        async function validate() {
+            await Promise.allSettled([
+                assetAmountInput?.validate().then(
+                    () => {},
+                    () => {
+                        valid = false
+                    }
+                ),
+                recipientInput?.validate().then(
+                    () => {},
+                    () => {
+                        valid = false
+                    }
+                ),
+            ])
+        }
+
+        try {
+            await validate()
+
+            if (valid) {
+                const _amount = amount * UNIT_MAP[unit].val
+                openPopup({
+                    type: 'sendConfirmation',
+                    props: {
+                        internal: false,
+                        amount: _amount,
+                        unit,
+                        to: recipient,
+                    },
+                    overflow: true,
+                })
+            }
+        } catch (error) {
+            console.error('error: ', error)
+        }
     }
 
     const onCancel = (): void => {
@@ -35,8 +63,8 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
-    <AssetAmountInput bind:asset bind:amount bind:unit />
-    <RecipientInput bind:recipient bind:validate={validateRecipient} />
+    <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
+    <RecipientInput bind:this={recipientInput} bind:recipient />
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onCancel}>
             {localize('actions.cancel')}

@@ -3,6 +3,7 @@
 
     let modal: Modal
     let value
+    let selected: 'none' | '1hour' | '1day' | '1week' = 'none'
 </script>
 
 <button class="flex items-center justify-center cursor-pointer" on:click={modal?.open}>
@@ -10,4 +11,4 @@
         {value}
     </Text>
 </button>
-<ExpirationTimePickerMenu bind:modal bind:value />
+<ExpirationTimePickerMenu bind:modal bind:value bind:selected />

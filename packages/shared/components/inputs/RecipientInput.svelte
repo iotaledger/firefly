@@ -6,16 +6,19 @@
 
     export let recipient = undefined
     export let disabled = false
-    export let validate = false
 
     // TODO: get ADDRESS_PREFIX from profile network info
     const ADDRESS_PREFIX = 'atoi'
 
+    let inputElement
     let value
     let error
     let hasFocus
 
-    function validateInput() {
+    $: recipient = value
+    $: hasFocus && (error = '')
+
+    export function validate(): Promise<any> {
         if (value.length !== ADDRESS_LENGTH + ADDRESS_PREFIX.length) {
             error = localize('error.send.addressLength', {
                 values: {
@@ -25,26 +28,26 @@
         } else {
             error = validateBech32Address(ADDRESS_PREFIX, value)
         }
-        validate = false
-    }
 
-    $: recipient = value
-    $: validate && validateInput()
-    $: hasFocus && (error = '')
+        if (error) {
+            return Promise.reject(error)
+        } else {
+            return Promise.resolve()
+        }
+    }
 </script>
 
-<InputContainer isFocused={hasFocus} clearPadding>
+<InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
     <TextInput
+        bind:inputElement
         bind:value
         bind:hasFocus
         clearBackground
         clearBorder
-        {error}
         {disabled}
         label={localize('general.recipient')}
         placeholder={localize('general.recipient')}
         fontSize="sm"
-        type="pre"
         {...$$restProps}
     />
 </InputContainer>

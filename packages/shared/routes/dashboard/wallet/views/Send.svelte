@@ -553,7 +553,7 @@
                         bind:unit
                         onMaxClick={handleMaxClick}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts?.length === 2}
                     />
                 </div>
             </div>

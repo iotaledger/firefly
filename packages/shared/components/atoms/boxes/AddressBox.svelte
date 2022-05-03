@@ -8,12 +8,14 @@
 </script>
 
 {#if address}
-    <Box col {clearBackground} {classes} {...$$restProps}>
-        <Text type="pre" fontSize="base">
-            {address.slice(0, address.length / 2)}
-        </Text>
-        <Text type="pre" fontSize="base">
-            {address.slice(address.length / 2)}
-        </Text>
-    </Box>
+    <button>
+        <Box col {clearBackground} {classes} {...$$restProps}>
+            <Text type="pre" fontSize="base">
+                {address.slice(0, address.length / 2)}
+            </Text>
+            <Text type="pre" fontSize="base">
+                {address.slice(address.length / 2)}
+            </Text>
+        </Box>
+    </button>
 {/if}

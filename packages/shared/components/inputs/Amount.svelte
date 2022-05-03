@@ -42,7 +42,7 @@
 
     $: amount, unit, (amountForLabel = getFormattedLabel(amount))
     $: {
-        if (amount.length > 0) {
+        if (amount?.length > 0) {
             if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
                 const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)

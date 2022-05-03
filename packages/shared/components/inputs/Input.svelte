@@ -123,6 +123,7 @@
 <div class="w-full {classes}">
     <div class="w-full relative">
         <InputContainer
+            bind:inputElement
             {disabled}
             {error}
             isFocused={hasFocus}
@@ -243,6 +244,7 @@
         @apply whitespace-nowrap;
         @apply w-full;
         @apply transition-none;
+        @apply text-left;
         top: 8px;
 
         &.hasFocus {

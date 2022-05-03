@@ -2,12 +2,14 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import Input from './Input.svelte'
 
+    export let inputElement
+
     export let value = ''
     export let classes = ''
     export let style = undefined
     export let label = undefined
     export let placeholder = undefined
-    export let error: string
+    export let error = ''
     export let maxlength = null
     export let autofocus = false
     export let submitHandler = undefined
@@ -27,6 +29,7 @@
 <Input
     bind:value
     bind:hasFocus
+    bind:inputElement
     type="text"
     {label}
     {placeholder}
