@@ -7,7 +7,8 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
-    import { ActivityStatus, ActivityType, ActivityAsyncStatus } from '@lib/typings/activity'
+    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { WalletAccount } from '@lib/typings/wallet'
 
     export let message: { id: any; timestamp?: any; confirmed?: any; payload?: any; balance?: any }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
@@ -48,7 +49,9 @@
         }
     }
 
-    let transactionSubjectAddressOrAccount: { isSubjectAccount: boolean; subject: string }
+    let transactionSubjectAddressOrAccount:
+        | { isSubjectAccount: true; subject: WalletAccount }
+        | { isSubjectAccount: false; subject: string }
     $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
 
     $: transactionDetails = {

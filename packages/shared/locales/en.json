@@ -1095,7 +1095,8 @@
         "transactionTime": "Transaction time",
         "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
-        "expirationTime": "Expiration time"
+        "expirationTime": "Expiration time",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "dates": {
         "today": "Today",

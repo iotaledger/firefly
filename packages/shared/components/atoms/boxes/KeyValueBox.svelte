@@ -11,7 +11,7 @@
     export let classes: string = ''
 </script>
 
-<Box row {backgroundColor} {darkBackgroundColor} {classes}>
+<Box row {backgroundColor} {darkBackgroundColor} classes="justify-between {classes}">
     {#if keyText}
         <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
             {keyText}

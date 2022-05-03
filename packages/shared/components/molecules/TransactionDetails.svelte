@@ -1,5 +1,12 @@
 <script lang="typescript">
-    import { ActivityStatusPill, ActivityAsyncStatusPill, Box, AddressBox, KeyValueBox } from 'shared/components/atoms'
+    import {
+        ActivityStatusPill,
+        ActivityAsyncStatusPill,
+        Box,
+        AddressBox,
+        KeyValueBox,
+        AccountLabel,
+    } from 'shared/components/atoms'
     import { Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { formatDate, localize } from '@core/i18n'
@@ -84,11 +91,11 @@
             {/if}
         </transaction-status>
         {#if account}
-            <Box col clearBackground clearPadding>
-                <Text type="p" fontSize="base">{account}</Text>
+            <Box row clearBackground clearPadding classes="justify-center">
+                <AccountLabel profile={$activeProfile} {account} />
             </Box>
         {:else if address}
-            <AddressBox clearBackground clearPadding {address} />
+            <AddressBox clearBackground clearPadding isCopyable {address} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

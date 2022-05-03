@@ -126,7 +126,7 @@ export function debounce(callback: () => void, wait = 500): (...args: unknown[])
 /**
  * Set text to clipboard
  */
-export const setClipboard = (input: string): boolean => {
+export const setClipboard = (input: string, shouldNotify: boolean = true): boolean => {
     try {
         const textArea = document.createElement('textarea')
         textArea.value = input
@@ -146,8 +146,9 @@ export const setClipboard = (input: string): boolean => {
         document.execCommand('copy')
         document.body.removeChild(textArea)
 
-        const notificationMessage = localize('notifications.copiedToClipboard')
-        showAppNotification({ type: 'info', message: notificationMessage })
+        if (shouldNotify) {
+            showAppNotification({ type: 'info', message: localize('notifications.copiedToClipboard') })
+        }
 
         return true
     } catch (err) {
