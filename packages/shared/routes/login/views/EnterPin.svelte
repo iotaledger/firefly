@@ -155,14 +155,14 @@
 </script>
 
 <div class="w-full h-full bg-white dark:bg-gray-900">
-    <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
+    <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
                 network={$activeProfile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
                 bgColor="blue"
             />
-            <div class="flex mt-10 w-full items-center">
+            <div class="flex mt-16 w-full items-center">
                 <div class="relative h-6">
                     <button
                         data-label="back-button"
