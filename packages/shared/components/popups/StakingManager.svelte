@@ -19,7 +19,6 @@
         isPerformingParticipation,
         isPartiallyStaked,
         participationAction,
-        pendingParticipations,
         stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
@@ -43,9 +42,6 @@
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
-
-    let pendingParticipationIds: string[] = []
-    let previousPendingParticipationsLength = 0
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
@@ -171,25 +167,6 @@
          */
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
-        }
-
-        const usubscribe = pendingParticipations.subscribe((participations) => {
-            const currentParticipationsLength = participations.length
-
-            if (currentParticipationsLength < previousPendingParticipationsLength) {
-                const latestParticipationIds = participations.map((participation) => participation.messageId)
-
-                if (latestParticipationIds.length === 0) {
-                    resetParticipation()
-                }
-
-                pendingParticipationIds = latestParticipationIds
-                previousPendingParticipationsLength = currentParticipationsLength
-            }
-        })
-
-        return () => {
-            usubscribe()
         }
     })
 
