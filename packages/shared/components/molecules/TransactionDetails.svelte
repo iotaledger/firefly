@@ -16,18 +16,19 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Unit } from '@iota/unit-converter/'
     import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { WalletAccount } from '@lib/typings/wallet'
 
-    export let value = undefined
-    export let unit: Unit = undefined
-    export let type: ActivityType = undefined
-    export let status: ActivityStatus = undefined
-    export let asyncStatus: ActivityAsyncStatus = undefined
-    export let address = undefined
-    export let account = undefined
-    export let timestamp = undefined
-    export let publicNote: string = undefined
+    export let value: number
+    export let unit: Unit
+    export let type: ActivityType
+    export let status: ActivityStatus
+    export let asyncStatus: ActivityAsyncStatus
+    export let address: string
+    export let account: WalletAccount
+    export let timestamp: number
+    export let publicNote: string
     export let storageDeposit = 0
-    export let expirationTimestamp = undefined
+    export let expirationTimestamp: number
 
     let transactionTime: string
     $: {
@@ -65,7 +66,6 @@
     )
     $: formattedStorageDeposit = storageDeposit || storageDeposit === 0 ? storageDeposit + ' i' : ''
 
-    let detailsList
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
         ...(publicNote && { publicNote }),

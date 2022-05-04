@@ -8,9 +8,9 @@
     import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { AccountMessage } from '@lib/typings/wallet'
 
-    export let message: { id: any; timestamp?: any; confirmed?: any; payload?: any; balance?: any }
+    export let message: AccountMessage & { balance?: number }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
     const { accounts } = $wallet
@@ -21,10 +21,13 @@
         if (payload?.type) {
             if (isParticipationPayload(payload)) {
                 type = ActivityType.Stake
-            } else if (payload.data.essence.data.internal) {
+            } else if (payload.type == 'Transaction' && payload.data.essence.data.internal) {
                 type = ActivityType.Transfer
             } else {
-                type = payload.data.essence.data.incoming ? ActivityType.Receive : ActivityType.Send
+                type =
+                    payload.type == 'Transaction' && payload.data.essence.data.incoming
+                        ? ActivityType.Receive
+                        : ActivityType.Send
             }
         } else {
             type = ActivityType.Migrate
@@ -49,9 +52,6 @@
         }
     }
 
-    let transactionSubjectAddressOrAccount:
-        | { isSubjectAccount: true; subject: WalletAccount }
-        | { isSubjectAccount: false; subject: string }
     $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
 
     $: transactionDetails = {
