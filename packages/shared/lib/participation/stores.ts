@@ -395,7 +395,7 @@ export const hasPendingParticipation = (id: string): boolean =>
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
 
-export const resetParticipation = (): void => {
+export const resetPerformingParticipation = (): void => {
     if (!get(isSoftwareProfile)) {
         transferState.set(null)
     }

@@ -22,7 +22,7 @@
         stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
-        resetParticipation,
+        resetPerformingParticipation,
     } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
@@ -78,7 +78,7 @@
                 }),
             })
 
-            resetParticipation()
+            resetPerformingParticipation()
 
             return
         }
@@ -89,7 +89,7 @@
                     console.error(err)
 
                     displayErrorNotification(err)
-                    resetParticipation()
+                    resetPerformingParticipation()
                 })
                 break
             }
@@ -98,7 +98,7 @@
                     console.error(err)
 
                     displayErrorNotification(err)
-                    resetParticipation()
+                    resetPerformingParticipation()
                 })
                 break
             default:
@@ -153,7 +153,7 @@
                 }),
             })
 
-            resetParticipation()
+            resetPerformingParticipation()
 
             return
         }
