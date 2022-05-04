@@ -109,6 +109,31 @@ export const currentAccountTreasuryVoteValue = derived(
     }
 )
 
+export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
+    [selectedAccountParticipationOverview, selectedAccount],
+    ([$selectedAccountParticipationOverview, $selectedAccount]) => {
+        const currentParticipation =
+            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
+        const { amount } = currentParticipation ?? {}
+        return $selectedAccount && amount !== $selectedAccount.rawIotaBalance
+    }
+)
+
+/**
+ * The store for the total amount of funds that are partially (un)staked for
+ * the selected account.
+ */
+export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
+    [selectedAccountParticipationOverview, selectedAccount],
+    ([$selectedAccountParticipationOverview, $selectedAccount]) => {
+        const currentParticipation =
+            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
+        const { amount } = currentParticipation ?? {}
+        const accountBalance = $selectedAccount?.rawIotaBalance ?? 0
+        return amount < accountBalance ? accountBalance - amount : 0
+    }
+)
+
 function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number {
     if (!airdrop || !isAirdropAvailable(airdrop) || !accountOverview) {
         return 0
