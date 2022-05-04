@@ -8,10 +8,10 @@ import {
     destroyActor,
     getProfileDataPath,
     getWalletDataPath,
-    AccountColors,
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
+import { AccountColor } from './typings/account'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
@@ -396,7 +396,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
     if (profileAccount.color) {
         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
     } else if (profileAccount.id) {
-        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const accountColors = Object.values(AccountColor).filter((_, i) => !(i % 2))
         const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
         updateProfile(
             'accounts',
@@ -412,13 +412,13 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
  *
  * @returns {string}
  */
-export function getColor(accountId: string): string | AccountColors {
+export function getColor(accountId: string): string | AccountColor {
     const _activeProfile = get(activeProfile)
     const accounts = _activeProfile?.accounts
     if (!accounts?.length && accountId) {
         setProfileAccount(_activeProfile, { id: accountId, color: '' })
     }
-    return accounts?.find((account) => account.id === accountId)?.color ?? AccountColors.Blue
+    return accounts?.find((account) => account.id === accountId)?.color ?? AccountColor.Blue
 }
 
 /**

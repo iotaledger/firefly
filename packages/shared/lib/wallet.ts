@@ -25,23 +25,7 @@ import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-
-const configColors = resolveConfig(tailwindConfig).theme.colors
-
-export enum AccountColors {
-    Blue = configColors['blue']['500'],
-    LightBlue = configColors['lightblue']['500'],
-    Purple = configColors['purple']['500'],
-    Turquoise = configColors['turquoise']['500'],
-    Green = configColors['green']['500'],
-    Yellow = configColors['yellow']['500'],
-    Orange = configColors['orange']['500'],
-    Red = configColors['red']['500'],
-    Pink = configColors['pink']['500'],
-}
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256

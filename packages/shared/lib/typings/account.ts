@@ -4,6 +4,10 @@ import { Address } from './address'
 import { ClientOptions } from './client'
 import { NodeAuth } from './node'
 import { Duration } from './wallet'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from 'shared/tailwind.config.js'
+
+const configColors = resolveConfig(tailwindConfig).theme.colors
 
 export enum MessageType {}
 
@@ -61,6 +65,18 @@ export interface SyncedAccount {
     isEmpty: boolean
     addresses: Address[]
     messages: Message[]
+}
+
+export enum AccountColor {
+    Blue = configColors['blue']['500'],
+    LightBlue = configColors['lightblue']['500'],
+    Purple = configColors['purple']['500'],
+    Turquoise = configColors['turquoise']['500'],
+    Green = configColors['green']['500'],
+    Yellow = configColors['yellow']['500'],
+    Orange = configColors['orange']['500'],
+    Red = configColors['red']['500'],
+    Pink = configColors['pink']['500'],
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
