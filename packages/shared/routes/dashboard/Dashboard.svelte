@@ -91,7 +91,7 @@
     })
 
     let previousPendingParticipationsLength = 0
-    const usubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
+    const unsubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
         if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
             resetParticipation()
         }
@@ -222,7 +222,7 @@
     onDestroy(() => {
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
-        usubscribePendingParticipations()
+        unsubscribePendingParticipations()
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
