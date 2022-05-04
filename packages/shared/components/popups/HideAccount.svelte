@@ -48,7 +48,6 @@
         }
     }
 
-
     function handleMoveFundsClick(): void {
         closePopup()
         sendParams.update((params) => ({
