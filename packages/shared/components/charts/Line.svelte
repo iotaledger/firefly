@@ -5,7 +5,7 @@
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { AccountColor } from '@lib/typings/account'
+    import { AccountColor } from '@lib/typings/color'
 
     export let labels = []
     export let datasets = []

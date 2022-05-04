@@ -7,7 +7,7 @@
     import { closePopup, popupState } from '@lib/popup'
     import { isLedgerProfile } from '@lib/profile'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from '@lib/wallet'
-    import { AccountColor } from '@lib/typings/account'
+    import { AccountColor } from '@lib/typings/color'
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}

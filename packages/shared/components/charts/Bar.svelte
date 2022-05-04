@@ -1,6 +1,6 @@
 <script lang="typescript">
     import Chart from 'chart.js'
-    import { AccountColor } from '@lib/typings/account'
+    import { AccountColor } from '@lib/typings/color'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'

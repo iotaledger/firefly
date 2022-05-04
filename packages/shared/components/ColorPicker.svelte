@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Icon, Tooltip } from 'shared/components'
-    import { AccountColor } from '@lib/typings/account'
+    import { AccountColor } from '@lib/typings/color'
     import { isBright } from '@lib/helpers'
     import { clickOutside } from '@lib/actions'
     import { localize } from '@core/i18n'

@@ -13,7 +13,7 @@ import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartT
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
 import { BalanceHistory, WalletAccount } from './typings/wallet'
-import { AccountColor } from './typings/account'
+import { AccountColor } from './typings/color'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 

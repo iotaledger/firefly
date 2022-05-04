@@ -11,7 +11,7 @@ import {
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { AccountColor } from './typings/account'
+import { AccountColor } from './typings/color'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
