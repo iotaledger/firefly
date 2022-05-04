@@ -368,7 +368,7 @@
             }
 
             openPopup({
-                type: 'transaction',
+                type: 'sendConfirmation',
                 props: {
                     accountId: $selectedAccount.id,
                     internal: internal || accountAlias,

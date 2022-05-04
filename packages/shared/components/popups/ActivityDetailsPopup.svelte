@@ -1,42 +1,44 @@
 <script lang="typescript">
-    import { Pill, ActivityTypePill, Box, AddressBox, KeyValueBox } from 'shared/components/atoms'
     import { Text, Button } from 'shared/components'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { formatDate, localize } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from 'shared/lib/profile'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Payload } from 'shared/lib/typings/message'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getMilestoneMessageValue, wallet } from 'shared/lib/wallet'
+    import { getMilestoneMessageValue, isParticipationPayload, wallet } from 'shared/lib/wallet'
     import { FontWeightText } from 'shared/components/Text.svelte'
+    import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
+    import { ActivityType } from '@lib/typings/activity'
 
-    export let id: string
-    export let timestamp: string
-    export let confirmed: boolean
-    export let payload: Payload
-    export let balance: number // migration tx
+    export let message: { id: any; timestamp?: any; confirmed?: any; payload?: any; balance?: any }
+    $: ({ id, payload, balance, timestamp, confirmed } = message)
 
-    let date = localize('error.invalidDate')
+    const { accounts } = $wallet
+    const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
+
+    let type: ActivityType
     $: {
-        try {
-            date = formatDate(new Date(timestamp), {
-                dateStyle: 'long',
-                timeStyle: 'medium',
-            })
-        } catch {
-            date = localize('error.invalidDate')
+        if (payload?.type) {
+            if (isParticipationPayload(payload)) {
+                type = ActivityType.StakingTransaction
+            } else if (payload.data.essence.data.internal) {
+                type = confirmed ? ActivityType.Transfer : ActivityType.Transferring
+            } else {
+                type = confirmed
+                    ? payload.data.essence.data.incoming
+                        ? ActivityType.Received
+                        : ActivityType.Sent
+                    : payload.data.essence.data.incoming
+                    ? ActivityType.Receiving
+                    : ActivityType.Sending
+            }
+        } else {
+            type = confirmed ? ActivityType.Migration : ActivityType.Migrating
         }
     }
-    const { accounts } = $wallet
 
-    const cachedMigrationTx = !payload
-    const milestonePayload = payload?.type === 'Milestone' ? payload : undefined
-    const transactionPayload = payload?.type === 'Transaction' ? payload : undefined
-
-    const explorerLink = getOfficialExplorer($accounts[0].clientOptions.network)
+    $: cachedMigrationTx = !payload
+    $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
+    $: transactionPayload = payload?.type === 'Transaction' ? payload : undefined
 
     let value = 0
     $: {
@@ -48,41 +50,29 @@
             value = transactionPayload.data.essence.data.value
         }
     }
-    $: currencyValue = convertToFiat(
-        value,
-        $currencies[CurrencyTypes.USD],
-        $exchangeRates[$activeProfile?.settings.currency]
-    )
 
+    let transactionSubjectAddressOrAccount: { isSubjectAccount: boolean; subject: string }
     $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
+
+    $: transactionDetails = {
+        ...transactionDetails,
+        type,
+        value,
+        ...(transactionSubjectAddressOrAccount.isSubjectAccount && {
+            account: transactionSubjectAddressOrAccount.subject,
+        }),
+        ...(!transactionSubjectAddressOrAccount.isSubjectAccount && {
+            address: transactionSubjectAddressOrAccount.subject,
+        }),
+        timestamp,
+    }
 </script>
 
-<transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
         >{localize('popups.transactionDetails.title')}</Text
     >
-    <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4 mb-6">
-        <transaction-amount class="flex flex-col space-y-0.5 items-center">
-            <Text type="h1" fontWeight={FontWeightText.semibold}>{formatUnitBestMatch(value, true, 2)}</Text>
-            <Text fontSize="md" color="gray-600">{formatCurrency(currencyValue)}</Text>
-        </transaction-amount>
-        <transaction-status class="flex flex-row w-full space-x-1 justify-center">
-            <ActivityTypePill activity={transactionPayload} confirmed />
-            <Pill backgroundColor={confirmed ? 'green-200' : 'gray-200'}>
-                {localize(`general.${confirmed ? 'confirmed' : 'pending'}`).toLowerCase()}
-            </Pill>
-        </transaction-status>
-        {#if transactionSubjectAddressOrAccount.isSubjectAccount}
-            <Box col clearBackground>
-                <Text type="p" fontSize="base">{transactionSubjectAddressOrAccount.subject}</Text>
-            </Box>
-        {:else}
-            <AddressBox clearBackground address={transactionSubjectAddressOrAccount.subject} />
-        {/if}
-    </main-content>
-    <details-list class="flex flex-col space-y-2 mb-6">
-        <KeyValueBox keyText={localize('general.date')} valueText={date} />
-    </details-list>
+    <TransactionDetails {...transactionDetails} />
     <Button
         classes="w-full"
         secondary
@@ -91,4 +81,4 @@
     >
         <Text bigger color="blue-500">{localize('general.viewOnExplorer')}</Text>
     </Button>
-</transaction-details>
+</activity-details-popup>

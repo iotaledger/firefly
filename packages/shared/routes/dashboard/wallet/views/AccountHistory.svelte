@@ -24,10 +24,10 @@
 
     export let transactions: AccountMessage[] = []
 
-    function handleTransactionClick(transaction: AccountMessage): void {
+    function handleTransactionClick(message: AccountMessage): void {
         openPopup({
             type: 'activityDetails',
-            props: { ...transaction },
+            props: { message },
         })
     }
 

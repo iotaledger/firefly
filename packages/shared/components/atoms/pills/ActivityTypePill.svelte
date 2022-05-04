@@ -1,39 +1,9 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { isParticipationPayload } from '@lib/wallet'
+    import { ActivityType } from '@lib/typings/activity'
     import Pill from './Pill.svelte'
 
-    export let activity
-    export let confirmed
-
-    enum ActivityType {
-        StakingTransaction = 'stakingTransaction',
-        Transfer = 'transfer',
-        Transferring = 'transferring',
-        Received = 'received',
-        Sent = 'sent',
-        Receiving = 'receiving',
-        Sending = 'sending',
-    }
-
-    let type: ActivityType
-    $: {
-        if (activity) {
-            if (isParticipationPayload(activity)) {
-                type = ActivityType.StakingTransaction
-            } else if (activity.data.essence.data.internal) {
-                type = confirmed ? ActivityType.Transfer : ActivityType.Transferring
-            } else {
-                type = confirmed
-                    ? activity.data.essence.data.incoming
-                        ? ActivityType.Received
-                        : ActivityType.Sent
-                    : activity.data.essence.data.incoming
-                    ? ActivityType.Receiving
-                    : ActivityType.Sending
-            }
-        }
-    }
+    export let type: ActivityType
 
     let backgroundColor: string = 'gray-500'
     $: {
