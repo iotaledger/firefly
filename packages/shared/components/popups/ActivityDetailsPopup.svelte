@@ -7,9 +7,10 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
-    import { ActivityType } from '@lib/typings/activity'
+    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { AccountMessage } from '@lib/typings/wallet'
 
-    export let message: { id: any; timestamp?: any; confirmed?: any; payload?: any; balance?: any }
+    export let message: AccountMessage & { balance?: number }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
     const { accounts } = $wallet
@@ -19,23 +20,23 @@
     $: {
         if (payload?.type) {
             if (isParticipationPayload(payload)) {
-                type = ActivityType.StakingTransaction
-            } else if (payload.data.essence.data.internal) {
-                type = confirmed ? ActivityType.Transfer : ActivityType.Transferring
+                type = ActivityType.Stake
+            } else if (payload.type == 'Transaction' && payload.data.essence.data.internal) {
+                type = ActivityType.Transfer
             } else {
-                type = confirmed
-                    ? payload.data.essence.data.incoming
-                        ? ActivityType.Received
-                        : ActivityType.Sent
-                    : payload.data.essence.data.incoming
-                    ? ActivityType.Receiving
-                    : ActivityType.Sending
+                type =
+                    payload.type == 'Transaction' && payload.data.essence.data.incoming
+                        ? ActivityType.Receive
+                        : ActivityType.Send
             }
         } else {
-            type = confirmed ? ActivityType.Migration : ActivityType.Migrating
+            type = ActivityType.Migrate
         }
     }
 
+    const asyncStatus = undefined
+
+    $: status = confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending
     $: cachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     $: transactionPayload = payload?.type === 'Transaction' ? payload : undefined
@@ -51,12 +52,13 @@
         }
     }
 
-    let transactionSubjectAddressOrAccount: { isSubjectAccount: boolean; subject: string }
     $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
 
     $: transactionDetails = {
         ...transactionDetails,
         type,
+        status,
+        asyncStatus,
         value,
         ...(transactionSubjectAddressOrAccount.isSubjectAccount && {
             account: transactionSubjectAddressOrAccount.subject,

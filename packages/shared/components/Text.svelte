@@ -186,8 +186,6 @@
     $: customClassesString = Object.values(customClasses).join(' ')
 </script>
 
-<span class="text-component">
-    <svelte:element this={type} class={`${customClassesString} ${classes}`}>
-        <slot />
-    </svelte:element>
-</span>
+<svelte:element this={type} class={`${customClassesString} ${classes}`} {...$$restProps}>
+    <slot />
+</svelte:element>

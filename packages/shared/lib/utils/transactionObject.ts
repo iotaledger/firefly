@@ -1,4 +1,5 @@
 import { Payload } from '@lib/typings/message'
+import { WalletAccount } from '@lib/typings/wallet'
 import {
     findAccountWithAddress,
     findAccountWithAnyAddress,
@@ -8,10 +9,9 @@ import {
     sendAddressFromTransactionPayload,
 } from '@lib/wallet'
 
-export function getTransactionSubjectAddressOrAccount(transactionPayload: Payload): {
-    isSubjectAccount: boolean
-    subject: string
-} {
+export function getTransactionSubjectAddressOrAccount(
+    transactionPayload: Payload
+): { isSubjectAccount: true; subject: WalletAccount } | { isSubjectAccount: false; subject: string } {
     const incoming = getIncomingFlag(transactionPayload)
     const internal = getInternalFlag(transactionPayload)
 
@@ -24,7 +24,7 @@ export function getTransactionSubjectAddressOrAccount(transactionPayload: Payloa
     const account = incoming ? senderAccount : receiverAccount
 
     if (account) {
-        return { isSubjectAccount: true, subject: account.alias }
+        return { isSubjectAccount: true, subject: account }
     } else {
         // We can't find the address in our accounts so just display the abbreviated address
         return { isSubjectAccount: false, subject: incoming ? receiverAddresses[0] : senderAddress }

@@ -11,6 +11,7 @@ interface PopupState {
     transition?: boolean
     props?: Record<string, unknown>
     overflow?: boolean
+    relative?: boolean
 }
 
 export const popupState = writable<PopupState>({
@@ -22,6 +23,7 @@ export const popupState = writable<PopupState>({
     transition: undefined,
     props: null,
     overflow: false,
+    relative: true,
 })
 
 export const openPopup = (
@@ -33,11 +35,12 @@ export const openPopup = (
         fullScreen = false,
         transition = undefined,
         overflow = false,
+        relative = true,
     }: Omit<PopupState, 'active'>,
     forceClose: boolean = false
 ): void =>
     modifyPopupState(
-        { active: true, type, hideClose, preventClose, fullScreen, transition, props, overflow },
+        { active: true, type, hideClose, preventClose, fullScreen, transition, props, overflow, relative },
         forceClose
     )
 
@@ -51,6 +54,7 @@ export const closePopup = (forceClose: boolean = false): void =>
             fullScreen: false,
             props: null,
             overflow: false,
+            relative: false,
         },
         forceClose
     )

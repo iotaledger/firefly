@@ -165,11 +165,6 @@ const buildTemplate = () => {
             label: state.strings.wallet,
             submenu: [
                 {
-                    label: state.strings.send,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', AccountRoute.Send),
-                    enabled: state.enabled,
-                },
-                {
                     type: 'separator',
                 },
                 {

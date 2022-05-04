@@ -30,10 +30,8 @@
         SidebarTab as SidebarTabType,
     } from '@core/router'
     import { Settings } from 'shared/routes'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
-
-    export let locale: Locale
 
     let networkModal: Modal
     let profileModal: Modal
@@ -59,13 +57,13 @@
     let sidebarTabs: SidebarTabType[] = [
         {
             icon: 'wallet',
-            label: locale('tabs.wallet'),
+            label: localize('tabs.wallet'),
             route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
-            label: locale('tabs.staking'),
+            label: localize('tabs.staking'),
             route: DashboardRoute.Staking,
             onClick: openStaking,
         },
@@ -129,7 +127,7 @@
             >
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
-                    {locale(
+                    {localize(
                         $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
@@ -149,7 +147,7 @@
                     <Text type="h4">John Doe</Text>
                 </div>
             {/if}
-            <Settings {locale} />
+            <Settings {localize} />
         </div>
     </Drawer>
 {:else}
@@ -184,8 +182,8 @@
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:modal={networkModal} {locale} />
-        <ProfileActionsModal bind:modal={profileModal} {locale} />
+        <NetworkIndicator bind:modal={networkModal} {localize} />
+        <ProfileActionsModal bind:modal={profileModal} {localize} />
     </aside>
 {/if}
 

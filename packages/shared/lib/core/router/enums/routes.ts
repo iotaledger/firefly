@@ -33,7 +33,6 @@ export enum LedgerRoute {
 export enum AccountRoute {
     Init = 'init',
     Manage = 'manage',
-    Send = 'send',
 }
 
 export enum DashboardRoute {

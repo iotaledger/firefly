@@ -16,6 +16,10 @@
     export let offset: number = 10
     export let inlineStyle: string = ''
     export let size: 'small' | 'medium' | undefined = 'medium'
+    export let backgroundColor = 'white'
+    export let darkBackgroundColor = 'gray-900'
+    export let borderColor = 'white'
+    export let darkBorderColor = 'gray-700'
 
     let tooltip: HTMLElement
     let top = 0
@@ -71,15 +75,15 @@
 </script>
 
 <tooltip
-    class="{size} shadow-elevation-4 fixed text-center z-10 {size === 'small'
-        ? 'px-2 py-1 rounded-md'
-        : 'p-4 rounded-xl'} w-auto max-w-60 shadow-lg border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {position} {classes}"
+    class="{size} shadow-elevation-4 fixed text-center z-10 
+    {size === 'small' ? 'px-2 py-1 rounded-md' : 'p-4 rounded-xl'} 
+    w-auto max-w-60 shadow-lg border border-solid bg-{backgroundColor} dark:bg-{darkBackgroundColor} border-{borderColor} dark:border-{darkBorderColor} {position} {classes}"
     class:darkmode={darkModeEnabled}
     style="top: {top}px; left:{left}px; {inlineStyle}"
     bind:this={tooltip}
 >
     <slot />
-    <triangle>
+    <triangle class="border-{borderColor} dark:border-{darkBorderColor}">
         <inner-triangle class="border-gray-700" />
     </triangle>
 </tooltip>
@@ -94,7 +98,6 @@
             @apply border-solid;
             @apply border-8;
             @apply border-b-0;
-            @apply border-white;
             @apply border-l-transparent;
             @apply border-r-transparent;
         }
