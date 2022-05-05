@@ -408,11 +408,11 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
 /**
  * Gets account color from activeProfile using account id
  *
- * @method getColor
+ * @method getAccountColor
  *
  * @returns {string}
  */
-export function getColor(accountId: string): string | AccountColor {
+export function getAccountColor(accountId: string): string | AccountColor {
     const _activeProfile = get(activeProfile)
     const accounts = _activeProfile?.accounts
     if (!accounts?.length && accountId) {
