@@ -160,9 +160,10 @@
             <Profile
                 name={$activeProfile?.name}
                 network={$activeProfile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
+                protocol={$activeProfile?.type === ProfileType.Ledger ? 'IOTA' : 'Shimmer'}
                 bgColor="blue"
             />
-            <div class="flex mt-16 w-full items-center">
+            <div class="flex mt-18 w-full items-center">
                 <div class="relative h-6">
                     <button
                         data-label="back-button"
