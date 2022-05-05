@@ -4,7 +4,7 @@
     import { assemblyStakingEventState, shimmerStakingEventState } from '@lib/participation/stores'
     import { AccountParticipationAbility } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccountStore } from '@lib/wallet'
     import { Button, Illustration, Text, TextHint } from 'shared/components'
     import { ASSEMBLY_EVENT_START_DATE, isStakingPossible, LAST_ASSEMBLY_STAKING_PERIOD } from '@lib/participation'
 
@@ -21,7 +21,7 @@
         const isStakingPossibleForAssembly = isStakingPossible($assemblyStakingEventState)
         const isStakingPossibleForShimmer = isStakingPossible($shimmerStakingEventState)
         const cannotStake =
-            getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
+            getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
         if ((isStakingPossibleForAssembly || isStakingPossibleForShimmer) && !cannotStake) {
             openPopup({

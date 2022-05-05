@@ -43,8 +43,6 @@ export function clearPollNetworkInterval(): void {
 }
 
 async function pollNetworkStatusInternal(): Promise<void> {
-    let updated = false
-
     const accs = get(get(wallet).accounts)
 
     if (accs.length > 0) {
@@ -66,22 +64,9 @@ async function pollNetworkStatusInternal(): Promise<void> {
 
         try {
             await updateNetworkStatus(account0.id, node)
-
-            updated = true
         } catch (err) {
             console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${node.url}.`) : err)
         }
-    }
-
-    if (!updated) {
-        networkStatus.set({
-            messagesPerSecond: 0,
-            referencedRate: 0,
-            health: 0,
-            healthText: NetworkStatusHealthText.Down,
-            currentMilestone: -1,
-            nodePlugins: [],
-        })
     }
 }
 

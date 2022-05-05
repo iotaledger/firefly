@@ -38,7 +38,7 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccountStore, selectedAccountIdStore, transferState, wallet } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
@@ -48,13 +48,13 @@
     let previousPendingParticipationsLength = 0
     let { accounts } = $wallet
 
-    $: participationAbility = getAccountParticipationAbility($selectedAccount)
+    $: participationAbility = getAccountParticipationAbility($selectedAccountStore)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
     $: $participationOverview, resetAccounts()
-    $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
+    $: $stakedAccounts, $selectedAccountStore, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
-    $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
+    $: isCurrentAccountStaked = isAccountStaked($selectedAccountStore?.id)
 
     function resetAccounts(): void {
         /**
@@ -117,7 +117,7 @@
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccount?.id, participations)
+                await participate($selectedAccountStore?.id, participations)
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
@@ -128,7 +128,7 @@
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
+                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS)
                     .then((messageIds) => _sync(messageIds))
                     .catch((err) => {
                         console.error(err)
@@ -263,9 +263,9 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccount?.index]}
-                        on:mouseenter={() => toggleTooltip($selectedAccount)}
-                        on:mouseleave={() => toggleTooltip($selectedAccount)}
+                        bind:this={tooltipAnchors[$selectedAccountStore?.index]}
+                        on:mouseenter={() => toggleTooltip($selectedAccountStore)}
+                        on:mouseleave={() => toggleTooltip($selectedAccountStore)}
                     >
                         <Icon icon="exclamation" width="20" height="20" classes="text-orange-500" />
                     </div>
@@ -287,7 +287,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias}
+                        {$selectedAccountStore.alias}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -297,7 +297,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccountStore.balance}
                             •
                             <Text
                                 type="p"
@@ -308,7 +308,7 @@
                             >
                                 {$isPartiallyStaked
                                     ? getFormattedFiatAmount(getStakedFunds())
-                                    : $selectedAccount.balanceEquiv}
+                                    : $selectedAccountStore.balanceEquiv}
                             </Text>
                         </Text>
                     {:else}
@@ -319,7 +319,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance}
+                            {$selectedAccountStore.balance}
                             •
                             <Text
                                 type="p"
@@ -328,7 +328,7 @@
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
                             >
-                                {$selectedAccount.balanceEquiv}
+                                {$selectedAccountStore.balanceEquiv}
                             </Text>
                         </Text>
                     {/if}
