@@ -54,7 +54,7 @@
         LAST_ASSEMBLY_STAKING_PERIOD,
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
-    import { pendingParticipations, resetParticipation } from 'shared/lib/participation/stores'
+    import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
@@ -93,7 +93,7 @@
     let previousPendingParticipationsLength = 0
     const unsubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
         if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
-            resetParticipation()
+            resetPerformingParticipation()
         }
         previousPendingParticipationsLength = participations?.length ?? 0
     })
