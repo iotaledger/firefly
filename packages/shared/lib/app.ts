@@ -10,7 +10,7 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouters } from '@core/router'
 import { Stage } from './typings/stage'
-import { api, destroyActor, resetWallet } from './wallet'
+import { api, destroyManager, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
@@ -99,7 +99,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
              * the event actor is destroyed!
              */
             if (_activeProfile) {
-                destroyActor(_activeProfile.id)
+                destroyManager(_activeProfile.id)
             }
 
             if (get(isSoftwareProfile)) {

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
+    import { asyncGetLegacySeedChecksum, verifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
     import { Locale } from '@core/i18n'
 
@@ -92,7 +92,7 @@
                     error = true
                 } else {
                     try {
-                        await asyncVerifyMnemonic(trimmedContent)
+                        await verifyMnemonic(trimmedContent)
                         statusMessage = locale('views.importFromText.phraseDetected')
                         value = trimmedContent
                     } catch (err) {

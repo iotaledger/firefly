@@ -34,7 +34,6 @@ export enum AccountRoute {
     Init = 'init',
     Manage = 'manage',
     Send = 'send',
-    Receive = 'receive',
 }
 
 export enum DashboardRoute {

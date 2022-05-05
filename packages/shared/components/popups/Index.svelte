@@ -38,7 +38,6 @@
     import StakingManager from './StakingManager.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
-    import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
@@ -46,6 +45,9 @@
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
+    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
 
     export let locale: Locale
 
@@ -56,8 +58,7 @@
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
-
-    let autofocusContent = true
+    export let autofocusContent = true
 
     enum PopupSize {
         Small = 'small',
@@ -79,6 +80,7 @@
             size = PopupSize.Large
             break
         case 'stakingManager':
+        case 'transactionDetails':
             autofocusContent = false
             break
         default:
@@ -115,7 +117,6 @@
         createAccount: CreateAccount,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        transaction: Transaction,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
@@ -129,6 +130,9 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         singleAccountGuide: SingleAccountGuide,
+        receiveAddress: ReceiveAddressPopup,
+        activityDetails: ActivityDetailsPopup,
+        sendConfirmation: SendConfirmationPopup,
     }
 
     const onKey = (e) => {
@@ -199,7 +203,7 @@
             use:clickOutside
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
+            class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
                 fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
             } ${overflow ? 'overflow' : 'relative'}`}
         >

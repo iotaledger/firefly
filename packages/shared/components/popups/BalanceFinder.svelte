@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
+    import { setStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
@@ -30,7 +30,7 @@
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPassword(password)
             } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
