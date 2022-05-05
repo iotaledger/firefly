@@ -109,12 +109,20 @@ export const currentAccountTreasuryVoteValue = derived(
     }
 )
 
+export const currentTreasuryParticipation = derived(
+    selectedAccountParticipationOverview,
+    ($selectedAccountParticipationOverview) => {
+        const latestParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[
+            TREASURY_VOTE_EVENT_ID
+        ]?.reduce((max, current) => (max.startMilestoneIndex > current.startMilestoneIndex ? max : current))
+        return latestParticipation?.endMilestoneIndex === 0 ? latestParticipation : null
+    }
+)
+
 export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
-    [selectedAccountParticipationOverview, selectedAccountStore],
-    ([$selectedAccountParticipationOverview, $selectedAccountStore]) => {
-        const currentParticipation =
-            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
-        const { amount } = currentParticipation ?? {}
+    selectedAccountStore,
+    ($selectedAccountStore) => {
+        const { amount } = get(currentTreasuryParticipation) ?? {}
         return $selectedAccountStore && amount !== $selectedAccountStore.rawIotaBalance
     }
 )
@@ -124,11 +132,9 @@ export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
  * the selected account.
  */
 export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
-    [selectedAccountParticipationOverview, selectedAccountStore],
-    ([$selectedAccountParticipationOverview, $selectedAccountStore]) => {
-        const currentParticipation =
-            $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
-        const { amount } = currentParticipation ?? {}
+    selectedAccountStore,
+    ($selectedAccountStore) => {
+        const { amount } = get(currentTreasuryParticipation) ?? {}
         const accountBalance = $selectedAccountStore?.rawIotaBalance ?? 0
         return amount < accountBalance ? accountBalance - amount : 0
     }

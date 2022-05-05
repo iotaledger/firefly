@@ -7,6 +7,7 @@
         currentAccountTreasuryVoteValue,
         hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
         selectedAccountParticipationOverview,
+        currentTreasuryParticipation,
     } from '@lib/participation/account'
     import { calculateVotesByMilestones, calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
@@ -185,13 +186,17 @@
         }
     }
 
-    $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
-    $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
-    $: maximumVotes = calculateVotesByMilestones(
-        event?.information?.milestoneIndexStart,
-        event?.information?.milestoneIndexEnd,
-        lastTrackedParticipationItem?.amount
-    )
+    $: maximumVotes =
+        calculateVotesByTrackedParticipation(
+            $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]?.filter(
+                (item) => item.messageId !== $currentTreasuryParticipation?.messageId
+            )
+        ) +
+        calculateVotesByMilestones(
+            $currentTreasuryParticipation?.startMilestoneIndex,
+            event?.information?.milestoneIndexEnd,
+            $currentTreasuryParticipation?.amount
+        )
 </script>
 
 <div
@@ -387,7 +392,7 @@
                         </Text>
                     </div>
                 {/if}
-                {#if event?.status?.status === ParticipationEventState.Holding && accountVotes > 0}
+                {#if event?.status?.status === ParticipationEventState.Holding && $currentTreasuryParticipation}
                     <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
