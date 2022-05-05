@@ -21,7 +21,7 @@
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {localize(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        {#if !$activeProfile?.settings.hideNetworkStatistics}
+        {#if !$activeProfile?.settings.hideNetworkStatistics && healthStatus !== 0}
             <HR />
             <div class="flex flex-row justify-between px-7 pt-5 pb-2">
                 <span class="text-12 text-gray-800 dark:text-white"
