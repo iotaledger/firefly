@@ -102,7 +102,10 @@ describe('File: network.ts', () => {
         it('should return the correct official network metadata given a valid network type', () => {
             expect(getOfficialNetwork(NetworkType.ChrysalisMainnet)).toEqual(MAINNET)
             expect(getOfficialNetwork(NetworkType.ChrysalisDevnet)).toEqual(DEVNET)
-            expect(getOfficialNetwork(NetworkType.PrivateNet)).toEqual(<Network>{ type: NetworkType.PrivateNet })
+            expect(getOfficialNetwork(NetworkType.PrivateNet)).toEqual(<Network>{
+                name: 'Private Net',
+                type: NetworkType.PrivateNet,
+            })
         })
         it('should return an empty network given an invalid network type', () => {
             expect(getOfficialNetwork(undefined)).toEqual(<Network>{})

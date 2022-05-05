@@ -34,10 +34,8 @@ const NETWORK: Readonly<{ [key in NetworkType]: Network }> = {
         bech32Hrp: 'rms',
         type: NetworkType.ShimmerDevnet,
     },
-    [NetworkType.PrivateNet]: {
-        id: '',
+    [NetworkType.PrivateNet]: <Network>{
         name: 'Private Net',
-        bech32Hrp: '',
         type: NetworkType.PrivateNet,
     },
 }
@@ -94,7 +92,7 @@ export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
  *
  * @returns {Network}
  */
-export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type]
+export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type] ?? <Network>{}
 
 /**
  * Constructs a list of the official IOTA nodes for a given network.
@@ -108,7 +106,7 @@ export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type]
 export const getOfficialNodes = (type: NetworkType): Node[] =>
     getOfficialNodeUrls(type).map((url) => getOfficialNode(type, url))
 
-const getOfficialNodeUrls = (networkType: NetworkType): string[] => NODE_URLS[networkType]
+const getOfficialNodeUrls = (networkType: NetworkType): string[] => NODE_URLS[networkType] ?? []
 
 const getOfficialNode = (type: NetworkType, url: string): Node => ({
     url,
@@ -118,7 +116,7 @@ const getOfficialNode = (type: NetworkType, url: string): Node => ({
     isDisabled: false,
 })
 
-export const getOfficialExplorer = (id: NetworkId): string => EXPLORER[getNetworkType(id)]
+export const getOfficialExplorer = (id: NetworkId): string => EXPLORER[getNetworkType(id)] ?? ''
 
 /**
  * Determines whether the type of a given network is "official", meaning
@@ -130,7 +128,8 @@ export const getOfficialExplorer = (id: NetworkId): string => EXPLORER[getNetwor
  *
  * @returns {boolean}
  */
-export const isOfficialNetwork = (type: NetworkType): boolean => type !== NetworkType.PrivateNet
+export const isOfficialNetwork = (type: NetworkType): boolean =>
+    type !== NetworkType.PrivateNet && Object.values(NetworkType).some((networkType) => networkType === type)
 
 /**
  * Find a network by its associated ID.
@@ -141,11 +140,19 @@ export const isOfficialNetwork = (type: NetworkType): boolean => type !== Networ
  *
  * @returns {Network}
  */
-export const getNetworkById = (id: NetworkId): Network => NETWORK[getNetworkType(id)] ?? <Network>{}
+export const getNetworkById = (id: NetworkId): Network => {
+    if (id) {
+        const networkType = getNetworkType(id)
+        return networkType === NetworkType.PrivateNet
+            ? { id, ...NETWORK[NetworkType.PrivateNet] }
+            : NETWORK[networkType]
+    }
+    return <Network>{}
+}
 
 const getNetworkType = (id: NetworkId): NetworkType => {
     if (id) {
-        return Object.values(NETWORK).find((network) => network.id === id).type ?? NetworkType.PrivateNet
+        return Object.values(NETWORK).find((network) => network.id === id)?.type ?? NetworkType.PrivateNet
     }
 }
 
