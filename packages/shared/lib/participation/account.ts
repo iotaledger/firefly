@@ -123,7 +123,7 @@ export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
     selectedAccountStore,
     ($selectedAccountStore) => {
         const { amount } = get(currentTreasuryParticipation) ?? {}
-        return $selectedAccountStore && amount !== $selectedAccountStore.rawIotaBalance
+        return $selectedAccountStore && amount && amount !== $selectedAccountStore.rawIotaBalance
     }
 )
 
