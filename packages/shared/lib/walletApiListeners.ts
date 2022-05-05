@@ -3,7 +3,7 @@ import {
     aggregateAccountActivity,
     api,
     getAccountMetadataWithCallback,
-    prepareAccountAsWalletAccount,
+    formatAccountWithMetadata,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -257,7 +257,7 @@ export const initialiseListeners = (): void => {
 
                                 aggregateAccountActivity(_account)
 
-                                const updatedAccountInfo = prepareAccountAsWalletAccount(_account, meta)
+                                const updatedAccountInfo = formatAccountWithMetadata(_account, meta)
 
                                 // Keep the messages as is because they get updated through a different event
                                 // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here

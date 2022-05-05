@@ -1,19 +1,22 @@
+import { localize } from '@core/i18n'
+import { displayErrorEventToUser } from '@lib/errors'
+import { setProfileAccount } from 'shared/lib/profile'
 import { ErrorEventPayload, Event, TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
+import tailwindConfig from 'shared/tailwind.config.js'
 import { derived, get, Writable, writable } from 'svelte/store'
+import resolveConfig from 'tailwindcss/resolveConfig'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
-import { localize } from '@core/i18n'
-import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { activeProfile, isLedgerProfile, updateProfile } from './profile'
+import { activeProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, AccountMetadata, SignerType, AccountSyncOptions, SyncedAccount, Balance } from './typings/account'
+import { Account, AccountMetadata, AccountSyncOptions, Balance, SignerType, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -25,11 +28,6 @@ import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from 'shared/tailwind.config.js'
-import { setProfileAccount } from 'shared/lib/profile'
-import { sleep } from '@lib/utils'
-import { displayErrorEventToUser } from '@lib/errors'
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -389,7 +387,7 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
             },
             {
                 onSuccess(response) {
-                    const preparedAccount = prepareAccountAsWalletAccount(response.payload, {
+                    const preparedAccount = formatAccountWithMetadata(response.payload, {
                         balance: 0,
                         incoming: 0,
                         outgoing: 0,
@@ -862,7 +860,7 @@ async function updateNewAccount(accountsStore: Writable<WalletAccount[]>, synced
     if (!accountsStore || !accounts || accounts.length <= 0 || !syncedAccount) return
 
     const accountMetadata = await asyncGetAccountMetadata(syncedAccount.id)
-    const newAccount = prepareAccountAsWalletAccount(
+    const newAccount = formatAccountWithMetadata(
         Object.assign<WalletAccount, SyncedAccount, Partial<WalletAccount>>({} as WalletAccount, syncedAccount, {
             alias: `${localize('general.account')} ${syncedAccount.index + 1}`,
             clientOptions: getDefaultClientOptions(),
@@ -1107,7 +1105,7 @@ export async function processLoadedAccounts(accounts: Account[]): Promise<void> 
             processMigratedTransactions(account.id, account.messages, account.addresses)
 
             const accountMetadata = await asyncGetAccountMetadata(account.id)
-            const preparedAccount = prepareAccountAsWalletAccount(account, accountMetadata)
+            const preparedAccount = formatAccountWithMetadata(account, accountMetadata)
             accountsStore.update((_accounts) => _accounts.concat([preparedAccount]))
 
             totalBalanceOverview.balanceRaw += accountMetadata.balance
@@ -1125,7 +1123,7 @@ export async function processLoadedAccounts(accounts: Account[]): Promise<void> 
 /**
  * Prepares a base account object with extra metadata.
  */
-export const prepareAccountAsWalletAccount = (account: Account, meta: AccountMetadata): WalletAccount => {
+export const formatAccountWithMetadata = (account: Account, meta: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
