@@ -2,23 +2,23 @@
     import {
         Drawer,
         Icon,
-        NetworkIndicator,
+        NetworkIndicatorModal,
         ProfileActionsModal,
         SidebarTab,
         Text,
         Modal,
         PingingBadge,
+        NetworkIndicator,
     } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { getInitials, isRecentDate } from 'shared/lib/helpers'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import { isStakingPossible } from 'shared/lib/participation'
+    import { mobile } from '@lib/app'
+    import { getInitials, isRecentDate } from '@lib/helpers'
+    import { isStakingPossible } from '@lib/participation'
     import {
         assemblyStakingEventState,
         partiallyUnstakedAmount,
         shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
-    import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
+    } from '@lib/participation/stores'
+    import { activeProfile, hasEverOpenedProfileModal } from '@lib/profile'
     import {
         dashboardRoute,
         dashboardRouter,
@@ -32,8 +32,6 @@
     import { Settings } from 'shared/routes'
     import { Locale } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
-    import { ProfileProtocol } from '@lib/typings/profile'
-    import { showAppNotification } from '@lib/notifications'
 
     export let locale: Locale
 
@@ -44,12 +42,8 @@
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const profileProtocol = ProfileProtocol.Iota // TODO: add the real value from profile object or app constants
-    const networkIcon = profileProtocol === ProfileProtocol.Iota ? 'iota' : 'shimmer'
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
-    $: healthStatus = $networkStatus.health ?? 0
-    $: healthStatus !== 2 && showNetworkIssuesNotification()
     $: $dashboardRoute,
         $assemblyStakingEventState,
         $shimmerStakingEventState,
@@ -117,15 +111,6 @@
     function openStaking() {
         $dashboardRouter.goTo(DashboardRoute.Staking)
     }
-
-    function showNetworkIssuesNotification() {
-        showAppNotification({
-            type: 'warning',
-            message: locale('indicators.networkIndicator.warningText', {
-                values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
-            }),
-        })
-    }
 </script>
 
 {#if $mobile}
@@ -171,18 +156,7 @@
         class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-5 pt-10 border-solid border-r border-gray-100 dark:border-gray-800"
     >
         <nav class="flex flex-grow flex-col items-center justify-between">
-            <div class="flex flex-col items-center relative">
-                <button class="mb-7" on:click={networkModal?.open}>
-                    <Icon width="48" height="48" icon={networkIcon} classes="dark:text-white" />
-                </button>
-                {#if healthStatus !== 2}
-                    <Icon
-                        width="18"
-                        icon="warning-filled"
-                        classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500 absolute bottom-0"
-                    />
-                {/if}
-            </div>
+            <NetworkIndicator modal={networkModal} />
             <div class="flex flex-col space-y-8">
                 {#each sidebarTabs as tab}
                     <div class="flex">
@@ -202,7 +176,7 @@
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:modal={networkModal} {locale} />
+        <NetworkIndicatorModal bind:modal={networkModal} {locale} />
         <ProfileActionsModal bind:modal={profileModal} {locale} />
     </aside>
 {/if}
