@@ -167,9 +167,6 @@
     {#if capsLockWarning && hasFocus && capsLockOn}
         <Text smaller overrideColor classes="mt-1 text-orange-500">{localize('general.capsLock')}</Text>
     {/if}
-    {#if error}
-        <Error {error} />
-    {/if}
 </div>
 
 <style type="text/scss">
