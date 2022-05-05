@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { mnemonic, strongholdPassword } from '@lib/app'
-import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from '@lib/wallet'
+import { backup, createAccount, storeMnemonic, requestMnemonic } from '@lib/wallet'
 import { Platform } from '@lib/platform'
 import { updateProfile } from '@lib/profile'
 import { getDefaultStrongholdName } from '@lib/utils'
@@ -27,6 +27,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 await requestMnemonic()
                 nextRoute = BackupRoute.RecoveryPhrase
                 break
+
             case BackupRoute.RecoveryPhrase:
                 nextRoute = BackupRoute.Verify
                 break
@@ -35,22 +36,20 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 nextRoute = BackupRoute.Backup
                 break
 
-            case BackupRoute.Backup:
-                if (event?.skip) {
-                    await asyncStoreMnemonic(get(mnemonic).join(' '))
-                    await asyncCreateAccount()
-                    get(appRouter).next(event)
-                } else {
+            case BackupRoute.Backup: {
+                await storeMnemonic(get(mnemonic).join(' '))
+                await createAccount()
+                const shouldCreateBackup = !event?.skip
+                if (shouldCreateBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     if (dest) {
-                        await asyncStoreMnemonic(get(mnemonic).join(' '))
-                        await asyncCreateAccount()
-                        await asyncBackup(dest, get(strongholdPassword))
+                        await backup(dest, get(strongholdPassword))
                         updateProfile('lastStrongholdBackupTime', new Date())
-                        get(appRouter).next(event)
                     }
                 }
+                get(appRouter).next(event)
                 break
+            }
         }
         this.setNext(nextRoute)
     }

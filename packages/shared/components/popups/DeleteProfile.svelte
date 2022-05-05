@@ -6,30 +6,32 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { appRouter } from '@core/router'
-    import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
+    import { setStrongholdPassword, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
     let isBusy = false
     let error = ''
-    let password
+    let password: string
 
     async function handleDeleteClick() {
         isBusy = true
         error = ''
         if ($isSoftwareProfile) {
-            api.setStrongholdPassword(password, {
-                async onSuccess() {
-                    await triggerDeleteProfile()
-                },
-                onError(err) {
-                    isBusy = false
-                    error = locale(err.error)
-                },
-            })
+            await deleteStrongholdAccount(password)
         } else {
             await triggerDeleteProfile()
+        }
+    }
+
+    async function deleteStrongholdAccount(password: string): Promise<void> {
+        try {
+            await setStrongholdPassword(password)
+            await triggerDeleteProfile()
+        } catch (e) {
+            error = locale(e.error)
+            isBusy = false
         }
     }
 

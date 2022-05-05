@@ -22,7 +22,7 @@
         newProfile,
         validateProfileName,
     } from 'shared/lib/profile'
-    import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
@@ -55,7 +55,7 @@
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
         if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
-            destroyActor(previousInitializedId)
+            destroyManager(previousInitializedId)
         }
     }
 
