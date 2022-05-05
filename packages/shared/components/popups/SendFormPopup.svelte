@@ -5,19 +5,20 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { UNIT_MAP } from '@lib/units'
+    import { WalletAccount } from '@lib/typings/wallet'
 
     let asset
-    let amount
-    let unit
-    let recipient
+    let amount: number
+    let unit: string
+    let recipient: string | WalletAccount
 
     let assetAmountInput
     let recipientInput
 
-    async function onSend() {
+    async function onSend(): Promise<void> {
         let valid = true
 
-        async function validate() {
+        async function validate(): Promise<void> {
             await Promise.allSettled([
                 assetAmountInput?.validate().then(
                     () => {},
@@ -56,7 +57,7 @@
         }
     }
 
-    const onCancel = (): void => {
+    function onCancel(): void {
         clearSendParams()
         closePopup()
     }

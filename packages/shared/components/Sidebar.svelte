@@ -182,8 +182,8 @@
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:modal={networkModal} {localize} />
-        <ProfileActionsModal bind:modal={profileModal} {localize} />
+        <NetworkIndicator bind:modal={networkModal} />
+        <ProfileActionsModal bind:modal={profileModal} />
     </aside>
 {/if}
 

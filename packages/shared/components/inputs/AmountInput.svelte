@@ -6,7 +6,7 @@
     export let inputElement
     export let disabled = false
     export let hasFocus = false
-    export let amount
+    export let amount: string
 </script>
 
 <NumberInput

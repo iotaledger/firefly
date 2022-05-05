@@ -34,11 +34,11 @@
 
     let navWidth: string
 
-    const handleClickOutside = (): void => {
+    function handleClickOutside(): void {
         dropdown = false
     }
 
-    const toggleDropDown = () => {
+    function toggleDropDown() {
         dropdown = !dropdown
         isFocused = !isFocused
         hasFocus = !hasFocus
@@ -58,11 +58,11 @@
         }
     }
 
-    const focusItem = (itemId: string): void => {
+    function focusItem(itemId: string): void {
         focusedItem = document.getElementById(itemId)
     }
 
-    const handleKey = (e): void => {
+    function handleKey(e): void {
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {

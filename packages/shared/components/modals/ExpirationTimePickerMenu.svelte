@@ -4,7 +4,7 @@
     import { fade } from 'svelte/transition'
 
     export let modal: Modal
-    export let value
+    export let value: string
     export let selected: 'none' | '1hour' | '1day' | '1week' | 'custom' = 'none'
 
     const DATE_NOW = Date.now()

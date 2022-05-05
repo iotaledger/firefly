@@ -5,14 +5,14 @@
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
-    export let value: string = ''
+    export let value = ''
     export let isCopyable = true
     export let clearPadding = false
 
     let tooltipAnchor
     let showTooltip = false
 
-    function onClick() {
+    function onClick(): void {
         if (isCopyable) {
             setClipboard(value, false)
             showTooltip = true

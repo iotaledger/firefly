@@ -2,21 +2,21 @@
     import { localize } from '@core/i18n'
     import { WalletAccount } from '@lib/typings/wallet'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
-    import { RecipientAccountSelector, TextInput, InputContainer } from 'shared/components'
+    import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
 
-    export let recipient: string | WalletAccount = undefined
+    export let recipient: string | WalletAccount
     export let disabled = false
 
     // TODO: get ADDRESS_PREFIX from profile network info
     const ADDRESS_PREFIX = 'atoi'
 
     let inputElement
-    let modal
-    let selectedAccount: WalletAccount
+    let modal: Modal
 
-    let value
-    let error
-    let hasFocus
+    let selectedAccount: WalletAccount
+    let value: string
+    let error: string
+    let hasFocus: boolean
 
     $: recipient = selectedAccount ? selectedAccount : value
     $: hasFocus && (error = '')
@@ -34,7 +34,7 @@
         }
     }
 
-    export function validate(): Promise<any> {
+    export function validate(): Promise<void> {
         if (selectedAccount) {
             return Promise.resolve()
         } else if (value.length !== ADDRESS_LENGTH + ADDRESS_PREFIX.length) {

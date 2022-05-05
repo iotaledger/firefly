@@ -2,7 +2,7 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Text, CopyableBox } from 'shared/components'
 
-    export let address: string = ''
+    export let address = ''
     export let isCopyable = false
 </script>
 

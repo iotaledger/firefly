@@ -2,7 +2,7 @@
     import { Text, ExpirationTimePickerMenu, Modal } from 'shared/components'
 
     let modal: Modal
-    let value
+    let value: string
     let selected: 'none' | '1hour' | '1day' | '1week' = 'none'
 </script>
 

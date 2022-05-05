@@ -119,7 +119,7 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        {#if true}
+        {#if get(stage) == Stage.PROD}
             <CollapsibleBlock
                 label={locale('views.profile.advancedOptions')}
                 showBlock={get(newProfile)?.isDeveloperProfile ?? false}

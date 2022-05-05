@@ -32,16 +32,35 @@
         extrabold = 'font-800',
         black = 'font-900',
     }
+
+    export type TextPropTypes = {
+        type?: TextType
+        fontSize?: string
+        fontWeight?: FontWeightNumber | FontWeightText | ''
+        lineHeight?: string
+        secondary?: boolean
+        disabled?: boolean
+        highlighted?: boolean
+        bold?: boolean
+        smaller?: boolean
+        bigger?: boolean
+        error?: boolean
+        overrideColor?: boolean
+        color?: string
+        darkColoe?: string
+        overrideLeading?: boolean
+        classes?: string
+    }
 </script>
 
 <script lang="typescript">
     export let type = TextType.p
-    export let fontSize: string = ''
+    export let fontSize = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
-    export let lineHeight: string = ''
-    export let secondary: boolean = false
-    export let disabled: boolean = false
-    export let highlighted: boolean = false
+    export let lineHeight = ''
+    export let secondary = false
+    export let disabled = false
+    export let highlighted = false
     export let bold = false
     export let smaller = false
     export let bigger = false

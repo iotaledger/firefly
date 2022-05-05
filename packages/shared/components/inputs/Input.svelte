@@ -3,6 +3,7 @@
     import { Error, Text, InputContainer } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
+    import { TextPropTypes, TextType } from 'shared/components/Text.svelte'
 
     export let value = ''
     export let classes = ''
@@ -25,7 +26,7 @@
     export let clearPadding = false
     export let clearBorder = false
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
-    export let textProps: any = { type: 'p', fontSize: '11', lineHeight: '140' }
+    export let textProps: TextPropTypes = { type: TextType.p, fontSize: '11', lineHeight: '140' }
 
     const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()

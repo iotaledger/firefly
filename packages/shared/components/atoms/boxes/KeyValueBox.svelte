@@ -2,13 +2,13 @@
     import { Text } from 'shared/components'
     import Box from './Box.svelte'
 
-    export let keyText: string = ''
-    export let valueText: string = ''
-    export let textColor: string = 'gray-600'
-    export let darkTextColor: string = 'gray-500'
-    export let backgroundColor: string = 'gray-50'
-    export let darkBackgroundColor: string = 'gray-850'
-    export let classes: string = ''
+    export let keyText = ''
+    export let valueText = ''
+    export let textColor = 'gray-600'
+    export let darkTextColor = 'gray-500'
+    export let backgroundColor = 'gray-50'
+    export let darkBackgroundColor = 'gray-850'
+    export let classes = ''
 </script>
 
 <Box row {backgroundColor} {darkBackgroundColor} classes="justify-between {classes}">

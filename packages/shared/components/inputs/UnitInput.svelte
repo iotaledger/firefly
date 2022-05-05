@@ -2,9 +2,8 @@
     import { Dropdown2 } from 'shared/components'
     import { Unit } from '@iota/unit-converter'
 
-    export let unit
-    export let asset
-    export let isFocused
+    export let unit: string
+    export let isFocused: boolean
 
     let items = []
     $: {
@@ -15,7 +14,7 @@
         }
     }
 
-    const onSelect = (selected) => {
+    function onSelect(selected) {
         unit = selected.value
     }
 </script>

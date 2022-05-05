@@ -15,7 +15,7 @@
     export let isFocused = false
 
     export let asset
-    export let amount
+    export let amount: string
     export let unit = Unit.Mi
 
     let rawAmount = 0
@@ -23,23 +23,23 @@
     let amountInputElement
     let error
 
-    $: rawAmount = amount * UNIT_MAP[unit].val
+    $: rawAmount = Number(amount) * UNIT_MAP[unit].val
     $: formattedFiatValue = formatCurrency(
         convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
     )
 
     $: isFocused && (error = '')
 
-    function onClickAvailableBalance() {
-        const balance: string = asset?.balance ?? '0 Mi'
-        const rawBalance: number = asset?.rawBalance ?? 0
+    function onClickAvailableBalance(): void {
+        const balance = asset?.balance ?? '0 Mi'
+        const rawBalance = asset?.rawBalance ?? 0
         const parts = balance?.split(' ')
         const _unit = parts[parts?.length - 1]
-        amount = rawBalance / UNIT_MAP[_unit].val
+        amount = (rawBalance / UNIT_MAP[_unit].val).toString()
         unit = Unit[_unit]
     }
 
-    export function validate(): Promise<any> {
+    export function validate(): Promise<void> {
         if (!amount) {
             error = localize('error.send.amountInvalidFormat')
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {

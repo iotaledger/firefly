@@ -13,7 +13,7 @@
     import { WalletAccount } from '@lib/typings/wallet'
 
     export let internal = false
-    export let to: string = ''
+    export let to = ''
     export let toAccount: WalletAccount
     export let amount = 0
     export let unit = Unit.i
