@@ -43,11 +43,7 @@
             break
     }
 
-    $: votesPerMilestone = formatNumber(
-        ($selectedAccountStore?.rawIotaBalance / 1000) * SECONDS_PER_MILESTONE || 0,
-        0,
-        0
-    )
+    $: votesPerMilestone = formatNumber($selectedAccountStore?.rawIotaBalance / 1000 || 0, 0, 0, 2, true)
 </script>
 
 <Tooltip {anchor} {position}>
