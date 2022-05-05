@@ -19,11 +19,10 @@
         isPerformingParticipation,
         isPartiallyStaked,
         participationAction,
-        participationOverview,
-        pendingParticipations,
         stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
+        resetPerformingParticipation,
     } from 'shared/lib/participation/stores'
     import {
         AccountParticipationAbility,
@@ -38,44 +37,18 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccountStore, selectedAccountIdStore, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
-    let pendingParticipationIds: string[] = []
-    let previousPendingParticipationsLength = 0
-    let { accounts } = $wallet
-
     $: participationAbility = getAccountParticipationAbility($selectedAccountStore)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
-    $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccountStore, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccountStore?.id)
-
-    function resetAccounts(): void {
-        /**
-         * NOTE: This is necessary for the page
-         * to be re-rendered because updating arrays
-         * in place will not update the UI (requires
-         * variable re-assignment).
-         */
-        accounts = accounts
-    }
-
-    function resetView(): void {
-        if (!isSoftwareProfile) {
-            transferState.set(null)
-        }
-
-        isPerformingParticipation.set(false)
-        participationAction.set(undefined)
-
-        resetAccounts()
-    }
 
     function displayErrorNotification(error): void {
         showAppNotification({
@@ -96,11 +69,6 @@
 
         isPerformingParticipation.set(true)
 
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
-
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         if (!hasParticipationPlugin) {
             showAppNotification({
@@ -110,32 +78,28 @@
                 }),
             })
 
-            resetView()
+            resetPerformingParticipation()
 
             return
         }
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccountStore?.id, participations)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                await participate($selectedAccountStore?.id, participations).catch((err) => {
+                    console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                    displayErrorNotification(err)
+                    resetPerformingParticipation()
+                })
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS).catch((err) => {
+                    console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                    displayErrorNotification(err)
+                    resetPerformingParticipation()
+                })
                 break
             default:
                 break
@@ -189,7 +153,7 @@
                 }),
             })
 
-            resetView()
+            resetPerformingParticipation()
 
             return
         }
@@ -203,25 +167,6 @@
          */
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
-        }
-
-        const usubscribe = pendingParticipations.subscribe((participations) => {
-            const currentParticipationsLength = participations.length
-
-            if (currentParticipationsLength < previousPendingParticipationsLength) {
-                const latestParticipationIds = participations.map((participation) => participation.messageId)
-
-                if (latestParticipationIds.length === 0) {
-                    resetView()
-                }
-
-                pendingParticipationIds = latestParticipationIds
-                previousPendingParticipationsLength = currentParticipationsLength
-            }
-        })
-
-        return () => {
-            usubscribe()
         }
     })
 
