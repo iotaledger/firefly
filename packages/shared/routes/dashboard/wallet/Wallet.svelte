@@ -19,16 +19,15 @@
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
-        addMessagesPair,
+        accountManager,
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMeta,
+        getStardustAccount,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         prepareAccountInfo,
-        processMigratedTransactions,
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
@@ -38,6 +37,7 @@
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import { AccountAssets, AccountBalance, AccountHistory, BarChart, LineChart, ManageAccount, Send } from './views/'
+    import { WalletAccount } from '@lib/typings/wallet'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -67,86 +67,77 @@
         }
     }
 
-    function loadAccounts() {
-        const _onError = (error: any = null) => {
-            if ($isLedgerProfile) {
-                if (!LedgerErrorType[error.type]) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                }
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(error?.error || 'error.global.generic'),
-                })
-            }
-        }
-
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = async () => {
-                    accountsLoaded.set(true)
-
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
-
-                    try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
-                    } catch (err) {
-                        _onError(err)
-                    }
-                }
-
-                if (accountsResponse.payload.length === 0) {
+    // TODO: move to Dashboard.svelte
+    async function loadAccounts(): Promise<void> {
+        try {
+            const accountsResponse = await $accountManager.getAccounts()
+            if (accountsResponse) {
+                if (accountsResponse.length === 0) {
                     void _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
-
-                    let completeCount = 0
-                    const newAccounts = []
-                    for (const payloadAccount of accountsResponse.payload) {
-                        addMessagesPair(payloadAccount)
-
-                        getAccountMeta(payloadAccount.id, (err, meta) => {
-                            if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
-
-                                const account = prepareAccountInfo(payloadAccount, meta)
-                                newAccounts.push(account)
-                            } else {
-                                _onError(err)
-                            }
-
-                            completeCount++
-
-                            if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(
-                                    payloadAccount.id,
-                                    payloadAccount.messages,
-                                    payloadAccount.addresses
-                                )
-                                updateBalanceOverview(
-                                    totalBalance.balance,
-                                    totalBalance.incoming,
-                                    totalBalance.outgoing
-                                )
-                                void _continue()
-                            }
-                        })
-                    }
+                    return
                 }
-            },
-            onError(err) {
-                _onError(err)
-            },
-        })
+
+                const meta = {
+                    balance: 0,
+                    incoming: 0,
+                    outgoing: 0,
+                    depositAddress: '',
+                }
+
+                const newAccounts: WalletAccount[] = []
+                for (const payloadAccount of accountsResponse) {
+                    const stardustAccount = await getStardustAccount(payloadAccount.meta.index)
+                    const balance = await stardustAccount.balance()
+                    // TODO: check if this is neccessary -> mainly for showing a correct graph
+                    // addMessagesPair(payloadAccount)
+
+                    meta.balance += balance.available
+                    meta.incoming += balance.incoming
+                    meta.outgoing += balance.outgoing
+
+                    const account = prepareAccountInfo(payloadAccount, meta)
+                    newAccounts.push(account)
+                }
+                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
+                // TODO: fix migrations
+                // processMigratedTransactions(
+                //     payloadAccount.id,
+                //     payloadAccount.messages,
+                //     payloadAccount.addresses
+                // )
+                updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
+                void _continue()
+            }
+        } catch (err) {
+            onError(err)
+        }
+    }
+
+    async function _continue(): Promise<void> {
+        $accountsLoaded = true
+        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
+
+        try {
+            await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+            if ($isFirstSessionSync) {
+                $isFirstSessionSync = false
+            }
+        } catch (err) {
+            onError(err)
+        }
+    }
+
+    function onError(error?: any): void {
+        if ($isLedgerProfile) {
+            if (!LedgerErrorType[error.type]) {
+                displayNotificationForLedgerProfile('error', true, true, false, false, error)
+            }
+        } else {
+            showAppNotification({
+                type: 'error',
+                message: localize(error?.error || 'error.global.generic'),
+            })
+        }
     }
 
     function onGenerateAddress(accountId: AccountIdentifier) {
@@ -210,8 +201,8 @@
                         _generate()
                     }
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    console.error(err)
                 },
             })
         } else {
@@ -237,8 +228,8 @@
                     onSuccess(strongholdStatusResponse) {
                         isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        console.error(err)
                     },
                 })
             }
@@ -264,8 +255,6 @@
                         {/if}
                         {#if $accountRoute === AccountRoute.Init}
                             <AccountAssets />
-                        {:else if $accountRoute === AccountRoute.Send}
-                            <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
                         {/if}

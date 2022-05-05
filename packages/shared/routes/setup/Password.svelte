@@ -3,7 +3,7 @@
     import { mobile, strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { asyncChangeStrongholdPassword, setStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
@@ -44,7 +44,7 @@
                 if (existingPassword) {
                     await asyncChangeStrongholdPassword(existingPassword, password)
                 } else {
-                    await asyncSetStrongholdPassword(password)
+                    await setStrongholdPassword(password)
                 }
 
                 $appRouter.next({ password })
@@ -58,6 +58,7 @@
             }
         }
     }
+
     function handleBackClick(): void {
         $appRouter.previous()
     }

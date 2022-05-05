@@ -5,7 +5,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { api } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -16,37 +16,39 @@
     export let locale: Locale
 
     export let account: Writable<WalletAccount>
-    export let hasMultipleAccounts
+    export let hasMultipleAccounts: boolean
 
     export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
-    let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
 
-    let password
+    let password: string
     let error = ''
     let isBusy = false
 
-    function handleHideClick() {
+    async function handleHideClick(): Promise<void> {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
             if ($isSoftwareProfile) {
-                api.setStrongholdPassword(password, {
-                    onSuccess() {
-                        triggerHideAccount()
-                    },
-                    onError(err) {
-                        isBusy = false
-                        error = locale(err.error)
-                    },
-                })
+                await hideStrongholdAccount(password)
             } else {
                 triggerHideAccount()
             }
         }
     }
-    function handleMoveFundsClick() {
+
+    async function hideStrongholdAccount(password: string): Promise<void> {
+        try {
+            await setStrongholdPassword(password)
+            triggerHideAccount()
+        } catch (e) {
+            isBusy = false
+            error = locale(e.error)
+        }
+    }
+
+    function handleMoveFundsClick(): void {
         closePopup()
         sendParams.update((params) => ({
             ...params,
@@ -56,10 +58,12 @@
         }))
         $accountRouter.goTo(AccountRoute.Send)
     }
-    function handleCancelClick() {
+
+    function handleCancelClick(): void {
         closePopup()
     }
-    function triggerHideAccount() {
+
+    function triggerHideAccount(): void {
         isBusy = false
         closePopup()
         hideAccount($account?.id)
