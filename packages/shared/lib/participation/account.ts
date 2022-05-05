@@ -4,24 +4,24 @@ import { WalletAccount } from '@lib/typings/wallet'
 import { formatUnitBestMatch } from '@lib/units'
 import { derived, get, Readable } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId } from '../wallet'
+import { selectedAccountIdStore, selectedAccountStore } from '../wallet'
+import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER, TREASURY_VOTE_EVENT_ID } from './constants'
 import {
     assemblyStakingEventState,
     assemblyStakingRemainingTime,
     calculateRemainingStakingTime,
+    participationEvents,
     participationOverview,
     shimmerStakingEventState,
     shimmerStakingRemainingTime,
-    participationEvents,
 } from './stores'
 import { AccountParticipationOverview, ParticipationEventState, StakingAirdrop } from './types'
-import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER, TREASURY_VOTE_EVENT_ID } from './constants'
 
 // TODO: This is a temporary workaround because of circular dependency
 export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? {}
+    [participationOverview, selectedAccountStore],
+    ([$participationOverview, $selectedAccountStore]) =>
+        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccountStore?.index) ?? {}
 ) as Readable<AccountParticipationOverview>
 
 /**
@@ -110,12 +110,12 @@ export const currentAccountTreasuryVoteValue = derived(
 )
 
 export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
-    [selectedAccountParticipationOverview, selectedAccount],
-    ([$selectedAccountParticipationOverview, $selectedAccount]) => {
+    [selectedAccountParticipationOverview, selectedAccountStore],
+    ([$selectedAccountParticipationOverview, $selectedAccountStore]) => {
         const currentParticipation =
             $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
         const { amount } = currentParticipation ?? {}
-        return $selectedAccount && amount !== $selectedAccount.rawIotaBalance
+        return $selectedAccountStore && amount !== $selectedAccountStore.rawIotaBalance
     }
 )
 
@@ -124,12 +124,12 @@ export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
  * the selected account.
  */
 export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
-    [selectedAccountParticipationOverview, selectedAccount],
-    ([$selectedAccountParticipationOverview, $selectedAccount]) => {
+    [selectedAccountParticipationOverview, selectedAccountStore],
+    ([$selectedAccountParticipationOverview, $selectedAccountStore]) => {
         const currentParticipation =
             $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID]?.slice(-1)?.[0]
         const { amount } = currentParticipation ?? {}
-        const accountBalance = $selectedAccount?.rawIotaBalance ?? 0
+        const accountBalance = $selectedAccountStore?.rawIotaBalance ?? 0
         return amount < accountBalance ? accountBalance - amount : 0
     }
 )
@@ -192,7 +192,7 @@ export const currentAssemblyStakingRewardsBelowMinimum: Readable<number> = deriv
  * The total accumulated Assembly rewards for the selected account.
  */
 export const totalAssemblyStakingRewards: Readable<number> = derived(
-    [currentAssemblyStakingRewards, selectedAccountId],
+    [currentAssemblyStakingRewards, selectedAccountIdStore],
     ([$currentAssemblyStakingRewards, $selectedAccountId]) =>
         $currentAssemblyStakingRewards + getCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
 )
@@ -223,7 +223,7 @@ export const currentShimmerStakingRewardsBelowMinimum: Readable<number> = derive
  * The total accumulated Shimmer rewards for the selected account.
  */
 export const totalShimmerStakingRewards: Readable<number> = derived(
-    [currentShimmerStakingRewards, selectedAccountId],
+    [currentShimmerStakingRewards, selectedAccountIdStore],
     ([$currentShimmerStakingRewards, $selectedAccountId]) =>
         $currentShimmerStakingRewards + getCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
 )
@@ -373,7 +373,7 @@ export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: S
  */
 export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
-    const amountStaked = get(selectedAccount)?.rawIotaBalance
+    const amountStaked = get(selectedAccountStore)?.rawIotaBalance
     return calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 }
 

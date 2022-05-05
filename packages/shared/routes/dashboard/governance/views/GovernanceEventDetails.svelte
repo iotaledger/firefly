@@ -16,7 +16,7 @@
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
     import { formatUnitBestMatch } from '@lib/units'
-    import { AccountColors, handleTransactionEventData, selectedAccount, transferState } from '@lib/wallet'
+    import { AccountColors, handleTransactionEventData, selectedAccountStore, transferState } from '@lib/wallet'
     import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
@@ -331,7 +331,7 @@
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
                                 {localize('views.governance.votingPower.info.title')}
                             </Text>
-                            {#if $selectedAccount?.rawIotaBalance > 0}
+                            {#if $selectedAccountStore?.rawIotaBalance > 0}
                                 <button
                                     class="relative"
                                     on:mouseenter={() => toggleTooltip('votingRate', true)}
@@ -474,7 +474,7 @@
         </Text>
         <Text type="p" secondary classes="text-left">
             {localize('views.governance.info.tooltip.partiallyVoted.body', {
-                values: { account: $selectedAccount?.alias },
+                values: { account: $selectedAccountStore?.alias },
             })}
         </Text>
     </Tooltip>

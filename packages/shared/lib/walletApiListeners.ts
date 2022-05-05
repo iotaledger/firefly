@@ -1,9 +1,9 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    addMessagesPair,
+    aggregateAccountActivity,
     api,
-    getAccountMeta,
-    prepareAccountInfo,
+    getAccountMetadataWithCallback,
+    formatAccountWithMetadata,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -248,16 +248,16 @@ export const initialiseListeners = (): void => {
                     // 3. Only update the account for which the balance change event emitted;
                     // 4. Update balance overview & accounts
                     for (const _account of response.payload) {
-                        getAccountMeta(_account.id, (metaErr, meta) => {
+                        getAccountMetadataWithCallback(_account.id, (metaErr, meta) => {
                             if (!metaErr) {
                                 // Compute balance overview for each account
                                 totalBalance.balance += meta.balance
                                 totalBalance.incoming += meta.incoming
                                 totalBalance.outgoing += meta.outgoing
 
-                                addMessagesPair(_account)
+                                aggregateAccountActivity(_account)
 
-                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
+                                const updatedAccountInfo = formatAccountWithMetadata(_account, meta)
 
                                 // Keep the messages as is because they get updated through a different event
                                 // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here

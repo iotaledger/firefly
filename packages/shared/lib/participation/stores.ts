@@ -1,4 +1,5 @@
 import { getStakingEventFromAirdrop } from '@lib/participation/staking'
+import { isSoftwareProfile } from '@lib/profile'
 import { NetworkStatus } from '@lib/typings/network'
 import { persistent } from 'shared/lib/helpers'
 import { derived, get, Readable, writable } from 'svelte/store'
@@ -6,7 +7,7 @@ import { networkStatus } from '../networkStatus'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { NodePlugin } from '../typings/node'
 import { WalletAccount } from '../typings/wallet'
-import { wallet } from '../wallet'
+import { transferState, wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     ParticipateResponsePayload,
@@ -233,5 +234,14 @@ export const getPendingParticipation = (id: string): PendingParticipation | unde
  */
 export const hasPendingParticipation = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
+
+export const resetPerformingParticipation = (): void => {
+    if (!get(isSoftwareProfile)) {
+        transferState.set(null)
+    }
+
+    isPerformingParticipation.set(false)
+    participationAction.set(undefined)
+}
 
 export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])

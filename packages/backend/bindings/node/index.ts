@@ -3,7 +3,7 @@ import {
     AccountToCreate,
     AccountIdentifier,
     ListMessagesFilter,
-    SyncAccountOptions,
+    AccountSyncOptions,
     createAccount as _createAccount,
     removeAccount as _removeAccount,
     getAccount as _getAccount,
@@ -213,7 +213,7 @@ export const api = {
     },
     syncAccount: function (
         accountId: AccountIdentifier,
-        options?: SyncAccountOptions
+        options?: AccountSyncOptions
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
     },

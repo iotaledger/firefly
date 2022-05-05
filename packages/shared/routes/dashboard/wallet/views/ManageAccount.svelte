@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -21,7 +21,7 @@
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
+        setProfileAccount($activeProfile, { id: $selectedAccountStore?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             $accountRouter.goTo(AccountRoute.Init)
@@ -40,11 +40,11 @@
                 return (error = localize('error.account.duplicate'))
             }
             isBusy = true
-            api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
+            api.setAlias($selectedAccountStore?.id, trimmedAccountAlias, {
                 onSuccess() {
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
-                            if (account.id === $selectedAccount?.id) {
+                            if (account.id === $selectedAccountStore?.id) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     account,

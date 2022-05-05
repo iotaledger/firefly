@@ -26,7 +26,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let asset: Asset
 
@@ -77,7 +77,7 @@
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {
-        return accounts?.find((account) => account.alias === $selectedAccount?.alias)
+        return accounts?.find((account) => account.alias === $selectedAccountStore?.alias)
     }
 
     function getLocalizedTooltipText(): TooltipText {
@@ -102,7 +102,7 @@
                         }),
                     ],
                 }
-            } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible(stakingEventState)) {
+            } else if (!isAccountStaked($selectedAccountStore?.id) && isStakingPossible(stakingEventState)) {
                 const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {

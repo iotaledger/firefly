@@ -4,7 +4,7 @@
     import { ParticipationEvent, ParticipationEventState } from '@lib/participation'
     import { milestoneToDate, SECONDS_PER_MILESTONE, SECONDS_PER_MINUTE } from '@lib/time'
     import { formatUnitBestMatch } from '@lib/units'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccountStore } from '@lib/wallet'
     import { Text, Tooltip } from 'shared/components'
 
     export let event: ParticipationEvent
@@ -43,7 +43,11 @@
             break
     }
 
-    $: votesPerMilestone = formatNumber(($selectedAccount?.rawIotaBalance / 1000) * SECONDS_PER_MILESTONE || 0, 0, 0)
+    $: votesPerMilestone = formatNumber(
+        ($selectedAccountStore?.rawIotaBalance / 1000) * SECONDS_PER_MILESTONE || 0,
+        0,
+        0
+    )
 </script>
 
 <Tooltip {anchor} {position}>
@@ -91,7 +95,7 @@
         <Text classes="text-left">
             {localize('views.governance.info.tooltip.votingRate.body', {
                 values: {
-                    amount: formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3),
+                    amount: formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3),
                     votesPerMilestone,
                     time: SECONDS_PER_MILESTONE.toString(),
                 },
@@ -102,7 +106,7 @@
         <Text classes="text-left"
             >{localize('views.governance.info.tooltip.countedVotes.body', {
                 values: {
-                    amount: formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3),
+                    amount: formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3),
                     votesPerMilestone,
                     time: SECONDS_PER_MILESTONE.toString(),
                 },

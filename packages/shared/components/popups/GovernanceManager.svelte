@@ -23,7 +23,7 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { sleep } from 'shared/lib/utils'
-    import { isSyncing, selectedAccount, transferState } from 'shared/lib/wallet'
+    import { isSyncing, selectedAccountStore, transferState } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
     export let nextVote: VotingEventAnswer
@@ -153,7 +153,7 @@
             case VotingAction.Merge:
                 $participationAction = ParticipationAction.Vote
                 await participate(
-                    $selectedAccount?.id,
+                    $selectedAccountStore?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
                 )
@@ -169,7 +169,7 @@
                 break
             case VotingAction.Stop:
                 $participationAction = ParticipationAction.Unvote
-                await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
+                await stopParticipating($selectedAccountStore?.id, [eventId], ParticipationAction.Unvote)
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
@@ -184,7 +184,7 @@
 
     async function changeVote(): Promise<void> {
         $participationAction = ParticipationAction.Unvote
-        await stopParticipating($selectedAccount?.id, [eventId], ParticipationAction.Unvote)
+        await stopParticipating($selectedAccountStore?.id, [eventId], ParticipationAction.Unvote)
             .then(async (messageIds) => {
                 syncParticipations(messageIds)
                 const [messageId] = messageIds
@@ -193,7 +193,7 @@
                 }
                 $participationAction = ParticipationAction.Vote
                 await participate(
-                    $selectedAccount?.id,
+                    $selectedAccountStore?.id,
                     [{ eventId, answers: [nextVote?.value] }],
                     ParticipationAction.Vote
                 )
@@ -245,7 +245,7 @@
             <div class="mb-6 flex flex-col flex-wrap space-y-3 bg-blue-100 dark:bg-gray-800 rounded-xl p-6">
                 <Text type="p">
                     {localize('popups.votingConfirmation.partiallyVoted', {
-                        values: { account: $selectedAccount?.alias },
+                        values: { account: $selectedAccountStore?.alias },
                     })}
                 </Text>
                 <Text type="p" bold>
