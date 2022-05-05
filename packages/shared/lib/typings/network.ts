@@ -1,3 +1,4 @@
+import { BaseToken } from './assets'
 import { Node, NodePlugin } from './node'
 
 export enum NetworkType {
@@ -23,6 +24,7 @@ export interface Network {
     name: string
     type: NetworkType
     bech32Hrp: string
+    baseToken: BaseToken
 }
 
 /**

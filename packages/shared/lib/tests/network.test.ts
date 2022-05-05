@@ -15,6 +15,7 @@ import {
 import { Network, NetworkConfig, NetworkType } from '../typings/network'
 import { ClientOptions } from '../typings/client'
 import { Node, NodeAuth } from '../typings/node'
+import { TickerSymbol, Token, TokenUnit } from '../typings/assets'
 
 describe('File: network.ts', () => {
     const _buildNode = (
@@ -30,11 +31,22 @@ describe('File: network.ts', () => {
         isDisabled,
     })
 
+    const BASE_TOKEN = {
+        IOTA: {
+            name: 'IOTA' as Token,
+            tickerSymbol: 'MIOTA' as TickerSymbol,
+            unit: 'i' as TokenUnit,
+            decimals: 0,
+            subunit: null,
+            useMetricPrefix: true,
+        },
+    }
     const MAINNET: Network = {
         id: 'chrysalis-mainnet',
         name: 'Chrysalis Mainnet',
         type: NetworkType.ChrysalisMainnet,
         bech32Hrp: 'iota',
+        baseToken: BASE_TOKEN.IOTA,
     }
     const MAINNET_URLS = [
         'https://chrysalis-nodes.iota.org',
@@ -55,6 +67,7 @@ describe('File: network.ts', () => {
         name: 'Chrysalis Devnet',
         type: NetworkType.ChrysalisDevnet,
         bech32Hrp: 'atoi',
+        baseToken: BASE_TOKEN.IOTA,
     }
     const DEVNET_URLS = [
         'https://api.lb-0.h.chrysalis-devnet.iota.cafe',

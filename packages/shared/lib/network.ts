@@ -8,6 +8,26 @@ import { localize } from '@core/i18n'
 import { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
+import { BaseToken, SubUnit, TickerSymbol, Token, TokenUnit } from './typings/assets'
+
+const BASE_TOKEN: Readonly<{ IOTA: BaseToken; Shimmer: BaseToken }> = {
+    IOTA: {
+        name: Token.IOTA,
+        tickerSymbol: TickerSymbol.IOTA,
+        unit: TokenUnit.IOTA,
+        decimals: 0,
+        subunit: null,
+        useMetricPrefix: true,
+    },
+    Shimmer: {
+        name: Token.Shimmer,
+        tickerSymbol: TickerSymbol.Shimmer,
+        unit: TokenUnit.Shimmer,
+        decimals: 6,
+        subunit: SubUnit.Shimmer,
+        useMetricPrefix: false,
+    },
+}
 
 const NETWORK: Readonly<{ [key in NetworkType]: Network }> = {
     [NetworkType.ChrysalisMainnet]: {
@@ -15,24 +35,28 @@ const NETWORK: Readonly<{ [key in NetworkType]: Network }> = {
         name: 'Chrysalis Mainnet',
         bech32Hrp: 'iota',
         type: NetworkType.ChrysalisMainnet,
+        baseToken: BASE_TOKEN.IOTA,
     },
     [NetworkType.ChrysalisDevnet]: {
         id: 'chrysalis-devnet',
         name: 'Chrysalis Devnet',
         bech32Hrp: 'atoi',
         type: NetworkType.ChrysalisDevnet,
+        baseToken: BASE_TOKEN.IOTA,
     },
     [NetworkType.ShimmerMainnet]: {
         id: 'shimmer-mainnet',
         name: 'Shimmer Mainnet',
         bech32Hrp: 'smr',
         type: NetworkType.ShimmerMainnet,
+        baseToken: BASE_TOKEN.Shimmer,
     },
     [NetworkType.ShimmerDevnet]: {
         id: 'shimmer-devnet',
         name: 'Shimmer Devnet',
         bech32Hrp: 'rms',
         type: NetworkType.ShimmerDevnet,
+        baseToken: BASE_TOKEN.Shimmer,
     },
     [NetworkType.PrivateNet]: <Network>{
         name: 'Private Net',
