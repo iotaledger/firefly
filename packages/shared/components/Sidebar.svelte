@@ -33,6 +33,7 @@
     import { Locale } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
     import { ProfileProtocol } from '@lib/typings/profile'
+    import { showAppNotification } from '@lib/notifications'
 
     export let locale: Locale
 
@@ -48,6 +49,7 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
+    $: healthStatus !== 2 && showNetworkIssuesNotification()
     $: $dashboardRoute,
         $assemblyStakingEventState,
         $shimmerStakingEventState,
@@ -114,6 +116,15 @@
 
     function openStaking() {
         $dashboardRouter.goTo(DashboardRoute.Staking)
+    }
+
+    function showNetworkIssuesNotification() {
+        showAppNotification({
+            type: 'warning',
+            message: locale('indicators.networkIndicator.warningText', {
+                values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
+            }),
+        })
     }
 </script>
 

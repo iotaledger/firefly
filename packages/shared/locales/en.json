@@ -1305,6 +1305,9 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        },
+        "networkIndicator": {
+            "warningText": "Your connected network {networkName} is having issues"
         }
     },
     "permissions": {
