@@ -23,7 +23,6 @@ export const menuState = {
         paste: 'Paste',
         selectAll: 'Select All',
         wallet: 'Wallet',
-        send: 'Send Funds',
         addAccount: 'Add Account',
         help: 'Help',
         troubleshoot: 'Troubleshoot',

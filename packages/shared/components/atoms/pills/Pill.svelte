@@ -2,12 +2,12 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Text } from 'shared/components'
 
-    export let data: string = ''
-    export let textColor: string = ''
-    export let darkTextColor: string = ''
-    export let backgroundColor: string = ''
-    export let darkBackgrounColor: string = ''
-    export let classes: string = ''
+    export let data = ''
+    export let textColor = 'gray-800'
+    export let darkTextColor = ''
+    export let backgroundColor = ''
+    export let darkBackgrounColor = ''
+    export let classes = ''
 </script>
 
 <Text
@@ -15,10 +15,12 @@
     fontSize="12"
     fontWeight={FontWeightText.semibold}
     color={textColor}
-    darkColor={darkTextColor}
-    classes={`px-2 py-1 rounded-md ${backgroundColor ? 'bg-' + backgroundColor : ''}  ${
-        darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''
-    } ${classes}`}
+    darkColor={darkTextColor || textColor}
+    classes="px-2 py-1 rounded-md 
+        {backgroundColor ? 'bg-' + backgroundColor : ''}
+        {darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''} 
+        {classes}
+    "
 >
     {#if data}
         {data}

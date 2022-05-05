@@ -229,3 +229,6 @@ DerivedData/
 
 # Environment variable files
 **/*.env
+
+#vs code settings
+.vscode/settings.json

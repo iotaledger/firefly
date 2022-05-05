@@ -7,6 +7,7 @@ export enum Token {
 export type Asset = {
     name: Token | string
     balance: string
+    rawBalance: number
     fiatPrice?: string
     fiatBalance?: string
     color?: string
