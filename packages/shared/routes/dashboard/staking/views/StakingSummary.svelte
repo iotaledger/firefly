@@ -18,14 +18,14 @@
     import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     $: showSpinner = !!$participationAction || $isSyncing
 
     $: canParticipateInEvent =
         isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)
 
-    $: cannotStake = getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
+    $: cannotStake = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
     $: isStakedAndCanParticipate = $stakedAmount > 0 && canParticipateInEvent
 

@@ -2,7 +2,7 @@
     import { Chart, Text } from 'shared/components'
     import { getAccountActivityData } from 'shared/lib/chart'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     let chartData = {
         incoming: {},
@@ -14,8 +14,8 @@
     $: labels = chartData.labels
 
     $: {
-        if (localize || $selectedAccount) {
-            chartData = getAccountActivityData($selectedAccount)
+        if (localize || $selectedAccountStore) {
+            chartData = getAccountActivityData($selectedAccountStore)
         }
     }
 </script>

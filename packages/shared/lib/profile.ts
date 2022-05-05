@@ -9,7 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
-    selectedAccountId,
+    selectedAccountIdStore,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
@@ -46,7 +46,7 @@ activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
 
-selectedAccountId?.subscribe((accountId) => {
+selectedAccountIdStore?.subscribe((accountId) => {
     if (accountId) {
         updateProfile('lastUsedAccountId', accountId)
     }

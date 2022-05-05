@@ -37,7 +37,7 @@
     import {
         api,
         asyncCreateAccount,
-        asyncSyncAccountOffline,
+        asyncSyncAccount,
         isBackgroundSyncing,
         isFirstSessionSync,
         isSyncing,
@@ -315,7 +315,7 @@
         const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
+                await asyncSyncAccount(account)
 
                 setSelectedAccount(account?.id)
                 $accountRouter.reset()
