@@ -2,7 +2,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
 import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId, wallet } from '../wallet'
+import { selectedAccountStore, selectedAccountIdStore, transferState, wallet } from '../wallet'
 import { WalletAccount } from '../typings/wallet'
 
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
@@ -18,7 +18,7 @@ import {
 } from './types'
 import { NetworkStatus } from '@lib/typings/network'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
-import { activeProfile } from '@lib/profile'
+import { activeProfile, isSoftwareProfile } from '@lib/profile'
 
 /**
  * The store for keeping track of pending participations.
@@ -71,7 +71,7 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
 )
 
 export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
+    [participationOverview, selectedAccountStore],
     ([$participationOverview, $selectedAccount]) =>
         $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
 )
@@ -205,7 +205,7 @@ export const currentAssemblyStakingRewardsBelowMinimum: Readable<number> = deriv
  * The total accumulated Assembly rewards for the selected account.
  */
 export const totalAssemblyStakingRewards: Readable<number> = derived(
-    [currentAssemblyStakingRewards, selectedAccountId],
+    [currentAssemblyStakingRewards, selectedAccountIdStore],
     ([$currentAssemblyStakingRewards, $selectedAccountId]) =>
         $currentAssemblyStakingRewards + getCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
 )
@@ -236,7 +236,7 @@ export const currentShimmerStakingRewardsBelowMinimum: Readable<number> = derive
  * The total accumulated Shimmer rewards for the selected account.
  */
 export const totalShimmerStakingRewards: Readable<number> = derived(
-    [currentShimmerStakingRewards, selectedAccountId],
+    [currentShimmerStakingRewards, selectedAccountIdStore],
     ([$currentShimmerStakingRewards, $selectedAccountId]) =>
         $currentShimmerStakingRewards + getCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
 )
@@ -394,3 +394,12 @@ export const hasPendingParticipation = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
+
+export const resetPerformingParticipation = (): void => {
+    if (!get(isSoftwareProfile)) {
+        transferState.set(null)
+    }
+
+    isPerformingParticipation.set(false)
+    participationAction.set(undefined)
+}

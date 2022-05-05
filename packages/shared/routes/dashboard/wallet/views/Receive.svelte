@@ -4,14 +4,14 @@
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     export let isGeneratingAddress = false
 
     export let onGenerateAddress: (id: string) => void = () => {}
 
     const generateNewAddress = (): void => {
-        onGenerateAddress($selectedAccount.id)
+        onGenerateAddress($selectedAccountStore.id)
     }
 
     const handleCloseClick = (): void => {
@@ -48,7 +48,7 @@
         </div>
     {:else}
         <div class="flex flex-auto items-center justify-center mb-4">
-            <QR size={98} data={$selectedAccount.depositAddress} classes="w-3/4 h-3/4" />
+            <QR size={98} data={$selectedAccountStore.depositAddress} classes="w-3/4 h-3/4" />
         </div>
         <div class="mb-6">
             <Text secondary smaller classes="mb-1">
@@ -56,12 +56,12 @@
                     ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                     : localize('general.myAddress')}
             </Text>
-            <Text type="pre">{$selectedAccount.depositAddress}</Text>
+            <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
         </div>
         <Button
             disabled={isGeneratingAddress}
             classes="w-full"
-            onClick={() => setClipboard($selectedAccount.depositAddress)}
+            onClick={() => setClipboard($selectedAccountStore.depositAddress)}
         >
             {localize('general.copyAddress')}
         </Button>

@@ -6,7 +6,7 @@
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let classes = ''
 
@@ -42,12 +42,12 @@
             <div on:click={togglePreciseBalance}>
                 <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
                     {showPreciseBalance
-                        ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
-                        : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
+                        ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
+                        : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
                 </h1>
             </div>
             <Text type="p">
-                {$selectedAccount?.balanceEquiv}
+                {$selectedAccountStore?.balanceEquiv}
             </Text>
         </div>
     </div>

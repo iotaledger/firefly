@@ -8,7 +8,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/wallet'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
-import { selectedAccount, wallet } from '../wallet'
+import { selectedAccountStore, wallet } from '../wallet'
 import { addError } from 'shared/lib/errors'
 
 import {
@@ -356,7 +356,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  */
 export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
-    const amountStaked = get(selectedAccount)?.rawIotaBalance
+    const amountStaked = get(selectedAccountStore)?.rawIotaBalance
     return calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 }
 
