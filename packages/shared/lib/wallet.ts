@@ -253,7 +253,7 @@ export const destroyManager = (id: string): void => {
     }
 }
 
-export async function generateMnemonic(): Promise<string> {
+export function generateMnemonic(): Promise<string> {
     const manager = get(profileManager)
     return manager.generateMnemonic()
 }
@@ -337,7 +337,7 @@ export async function restoreBackup(importFilePath: string, password: string): P
     await manager.importAccounts(importFilePath, password)
 }
 
-export async function createStardustAccount(payload: CreateAccountPayload): Promise<StardustAccount> {
+export function createStardustAccount(payload: CreateAccountPayload): Promise<StardustAccount> {
     const manager = get(profileManager)
     return manager.createAccount(payload)
 }
