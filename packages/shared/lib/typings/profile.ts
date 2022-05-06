@@ -51,8 +51,8 @@ export enum ProfileType {
 }
 
 export enum ProfileProtocol {
-    Iota = 'IOTA',
-    Shimmer = 'Shimmer',
+    Iota = 'iota',
+    Shimmer = 'shimmer',
 }
 
 export enum ImportType {

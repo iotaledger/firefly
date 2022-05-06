@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityRow, Icon, Text, Input } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -24,8 +24,11 @@
 
     export let transactions: AccountMessage[] = []
 
-    function handleTransactionClick(transaction: AccountMessage): void {
-        selectedMessage.set(transaction)
+    function handleTransactionClick(message: AccountMessage): void {
+        openPopup({
+            type: 'activityDetails',
+            props: { message },
+        })
     }
 
     function handleBackClick(): void {
@@ -212,21 +215,17 @@
             </div>
         {/if}
     </div>
-    {#if $selectedMessage}
-        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
-    {:else}
-        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-            {#if $isSyncing && shouldShowFirstSync()}
-                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-            {:else if queryTransactions.length}
-                {#each queryTransactions as transaction}
-                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
-                {/each}
-            {:else}
-                <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{localize('general.noRecentHistory')}</Text>
-                </div>
-            {/if}
-        </div>
-    {/if}
+    <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
+        {#if $isSyncing && shouldShowFirstSync()}
+            <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+        {:else if queryTransactions.length}
+            {#each queryTransactions as transaction}
+                <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
+            {/each}
+        {:else}
+            <div class="h-full flex flex-col items-center justify-center text-center">
+                <Text secondary>{localize('general.noRecentHistory')}</Text>
+            </div>
+        {/if}
+    </div>
 </div>

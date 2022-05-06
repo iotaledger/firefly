@@ -182,8 +182,8 @@ export const getAllDecimalSeparators = (): string[] => ['.', ',']
 
 export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
     // Need to escape the character in the regex in case it is . otherwise it will replace all characters
-    const v = valueString.replace(new RegExp(`\\${getGroupSeparator()}`, 'g'), '')
-    return Number.parseFloat(v.replace(getDecimalSeparator(currency), '.'))
+    const v = valueString?.replace(new RegExp(`\\${getGroupSeparator()}`, 'g'), '')
+    return Number.parseFloat(v?.replace(getDecimalSeparator(currency), '.'))
 }
 
 export const formatCurrency = (

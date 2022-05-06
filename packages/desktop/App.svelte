@@ -150,6 +150,7 @@
                 fullScreen={$popupState.fullScreen}
                 transition={$popupState.transition}
                 overflow={$popupState.overflow}
+                relative={$popupState.relative}
                 locale={$_}
             />
         {/if}

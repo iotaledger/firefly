@@ -26,6 +26,9 @@ module.exports = {
                 /^text-/,
                 /^hover:text-/,
                 /^dark:text-/,
+                /^font-/,
+                /^hover:font-/,
+                /^dark:font-/,
                 /^grid-cols-/,
                 // `p-${size}`
                 /^p-/,
@@ -155,6 +158,7 @@ module.exports = {
                 600: '#6E82A4',
                 700: '#405985',
                 800: '#25395F',
+                850: '#223457',
                 900: '#1B2D4B',
                 1000: '#15233B',
             },
@@ -185,6 +189,7 @@ module.exports = {
                 12: pxToRem(12),
                 13: pxToRem(13),
                 14: pxToRem(14),
+                15: pxToRem(15),
                 16: pxToRem(16),
                 18: pxToRem(18),
                 20: pxToRem(20),
@@ -258,6 +263,10 @@ module.exports = {
                 'elevation-3': '0px 4px 6px rgba(0, 0, 0, 0.08)',
                 'elevation-4': '0px 4px 12px rgba(0, 0, 0, 0.12)',
             },
+        },
+        fontFamily: {
+            'fira-mono': ['"Fira Mono"', 'monospace'],
+            inter: ['Inter'],
         },
     },
     variants: {
