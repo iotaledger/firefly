@@ -43,35 +43,39 @@ export function clearPollNetworkInterval(): void {
 }
 
 async function pollNetworkStatusInternal(): Promise<void> {
-    let updated = false
+    const updated = false
 
-    const accs = get(get(wallet).accounts)
+    // const accs = get(get(wallet).accounts)
 
-    if (accs.length > 0) {
-        const { networkConfig } = get(activeProfile)?.settings
-        const account0 = accs[0]
-        const { clientOptions } = account0
+    // if (accs.length > 0) {
+    //     const { networkConfig } = get(activeProfile)?.settings
+    //     const account0 = accs[0]
+    //     const { clientOptions } = account0
 
-        let node = clientOptions?.nodes.find((n) => n.isPrimary)
-        if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary)?.url) {
-            /**
-             * NOTE: If the network configuration and client options do NOT
-             * agree on which node is the primary one, it is best to go with
-             * what is stored app-side in the profile's setting's NetworkConfig.
-             */
-            node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0]
+    //     let node = clientOptions?.nodes.find((n) => n.isPrimary)
+    //     if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary)?.url) {
+    //         /**
+    //          * NOTE: If the network configuration and client options do NOT
+    //          * agree on which node is the primary one, it is best to go with
+    //          * what is stored app-side in the profile's setting's NetworkConfig.
+    //          */
+    //         node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.type)[0]
 
-            updateClientOptions(networkConfig)
-        }
+    //         updateClientOptions(networkConfig)
+    //     }
 
-        try {
-            await updateNetworkStatus(account0.id, node)
+    //     try {
+    //         await updateNetworkStatus(account0.id, node)
 
-            updated = true
-        } catch (err) {
-            console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${node.url}.`) : err)
-        }
-    }
+    //         updated = true
+    //     } catch (err) {
+    //         console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${node.url}.`) : err)
+    //     }
+    // }
+
+    await new Promise<void>((resolve, reject) => {
+        resolve()
+    })
 
     if (!updated) {
         networkStatus.set({
