@@ -2,7 +2,7 @@
     import { truncateString } from 'shared/lib/helpers'
     import { activeProfile } from '@lib/profile'
     import { selectedAccount, wallet } from '@lib/wallet'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/walletAccount'
     import { Modal, AccountLabel, Text } from 'shared/components'
     import { fade } from 'svelte/transition'
 
@@ -15,7 +15,10 @@
     $: otherAccounts = $accounts.filter((account) => account.id !== $selectedAccount.id)
     $: filteredAccounts = otherAccounts.filter(
         (account) =>
-            account.alias.toLowerCase().includes(searchValue?.toLowerCase() ?? '') ||
+            account
+                .alias()
+                .toLowerCase()
+                .includes(searchValue?.toLowerCase() ?? '') ||
             account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')
     )
     $: scrollable = filteredAccounts.length > 5

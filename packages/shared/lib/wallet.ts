@@ -12,7 +12,7 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
@@ -21,13 +21,15 @@ import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
-import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
+import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-import { AccountManager, Account as StardustAccount } from '@iota/wallet'
+import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
+import { WalletAccount } from './typings/walletAccount'
+import { ProfileManager } from './typings/profileManager'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
 
@@ -58,7 +60,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export const accountManager = writable<AccountManager>(null)
+export const profileManager = writable<ProfileManager>(null)
 export const account = writable<StardustAccount>(null)
 // TODO: remove these
 interface ActorState {
@@ -198,12 +200,12 @@ export function initialise(id: string, storagePath: string, sendCrashReports: bo
     }
     actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
     // The new bindings
-    const newAccountManager: AccountManager = createAccountManager({
+    const newProfileManager: ProfileManager = createAccountManager({
         storagePath,
         clientOptions: {
             nodes: [
                 {
-                    url: 'https://api.alphanet.iotaledger.net:14265/',
+                    url: 'https://api.alphanet.iotaledger.net',
                     auth: null,
                     disabled: false,
                 },
@@ -216,7 +218,7 @@ export function initialise(id: string, storagePath: string, sendCrashReports: bo
             },
         },
     })
-    accountManager.set(newAccountManager)
+    profileManager.set(newProfileManager)
 }
 
 export function getStardustAccount(index: number): Promise<StardustAccount> {
@@ -239,7 +241,7 @@ export const removeEventListeners = (id: string): void => {
 }
 
 export const destroyManager = (id: string): void => {
-    accountManager.set(null)
+    profileManager.set(null)
 
     // TODO: remove these
     if (actors[id]) {
@@ -253,14 +255,17 @@ export const destroyManager = (id: string): void => {
     }
 }
 
-export async function requestMnemonic(): Promise<RecoveryPhrase> {
-    const manager = get(accountManager)
-    const mnemonicString = await manager.generateMnemonic()
+export async function generateMnemonic(): Promise<string> {
+    const manager = get(profileManager)
+    return manager.generateMnemonic()
+}
+
+export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
+    const mnemonicString = await generateMnemonic()
     const mnemnonicList = mnemonicString.split(' ')
     mnemonic.set(mnemnonicList)
     return mnemnonicList
 }
-
 /**
  * Get legacy seed checksum
  *
@@ -283,7 +288,7 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
     })
 
 export async function setStrongholdPassword(password: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.setStrongholdPassword(password)
 }
 
@@ -301,17 +306,17 @@ export const asyncChangeStrongholdPassword = (currentPassword: string, newPasswo
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function storeMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.storeMnemonic(mnemonic)
 }
 
 export async function verifyMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.verifyMnemonic(mnemonic)
 }
 
 export async function backup(dest: string, password: string): Promise<void> {
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.backup(dest, password)
 }
 
@@ -330,14 +335,19 @@ export function setStoragePassword(password: string): Promise<void> {
 
 export async function restoreBackup(importFilePath: string, password: string): Promise<void> {
     // TODO: check this once Thoralf exposes this
-    const manager = get(accountManager)
+    const manager = get(profileManager)
     await manager.importAccounts(importFilePath, password)
+}
+
+export async function createStardustAccount(payload: CreateAccountPayload): Promise<StardustAccount> {
+    const manager = get(profileManager)
+    return manager.createAccount(payload)
 }
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
     const accounts = get(get(wallet)?.accounts)
     try {
-        const createdAccount = await get(accountManager).createAccount({
+        const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
@@ -351,7 +361,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
         })
         get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
-        setProfileAccount(get(activeProfile), { id: preparedAccount.index.toString(), color })
+        setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
         return preparedAccount
     } catch (e) {
         console.error(e)
@@ -455,7 +465,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
         api.syncAccount(account.id, {
             async onSuccess() {
                 const meta = await getAccountMeta(account.id)
-                const startdustAccount = await get(accountManager).getAccount(account.id)
+                const startdustAccount = await get(profileManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
                 get(wallet)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
                 updateProfile(
@@ -638,7 +648,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
         }
         messages[message.id + extraId] = {
             ...message,
-            account: account.index,
+            account: account.meta.index,
         }
     })
 
@@ -729,14 +739,15 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
 
         // If we have received a new address, simply add it;
         // If we have received an existing address, update the properties.
-        for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
-            if (addressIndex < 0) {
-                storedAccount.addresses.push(addr)
-            } else {
-                storedAccount.addresses[addressIndex] = addr
-            }
-        }
+        // TODO: Remove as we are only keeping first address
+        // for (const addr of syncedAccount.addresses) {
+        //     const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
+        //     if (addressIndex < 0) {
+        //         storedAccount.addresses.push(addr)
+        //     } else {
+        //         storedAccount.addresses[addressIndex] = addr
+        //     }
+        // }
 
         // If we have received a new message, simply add it;
         // If we have received an existing message, update the properties.
@@ -770,7 +781,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
                 totalBalance.balance += meta.balance
                 totalBalance.incoming += meta.incoming
                 totalBalance.outgoing += meta.outgoing
-                const startdustAccount = await get(accountManager).getAccount(newAccount.id)
+                const startdustAccount = await get(profileManager).getAccount(newAccount.id)
                 const account = prepareAccountInfo(startdustAccount, meta)
 
                 _accounts.push(account)
@@ -793,7 +804,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
             }
         }
     } else {
-        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index))
+        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.meta.index - b.meta.index))
     }
 }
 
@@ -811,7 +822,8 @@ export const updateAccountsBalanceEquiv = (): void => {
 
     accounts.update((storedAccounts) => {
         for (const storedAccount of storedAccounts) {
-            storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
+            // TODO: Refactor balance
+            // storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
             storedAccount.balanceEquiv = formatCurrency(
                 convertToFiat(
                     storedAccount.rawIotaBalance,
@@ -946,12 +958,8 @@ export const prepareAccountInfo = (
     // TODO: Hardcoded signer type
     return Object.assign<WalletAccount, StardustAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
         id: index.toString(),
-        index,
         depositAddress,
-        alias,
         rawIotaBalance: balance,
-        signerType: getSignerType(ProfileType.Software),
-        balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(
             convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
         ),
@@ -1039,8 +1047,8 @@ export const isParticipationPayload = (payload: Payload): boolean => getIndexati
  * @param {WalletAccount} account
  *
  */
-export const isSelfTransaction = (payload: Payload, account: Account): boolean => {
-    const accountAddresses = account?.addresses?.map((add) => add.address) ?? []
+export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+    const accountAddresses = account?.depositAddress
     if (payload && accountAddresses.length) {
         const getReceiverAddresses = () => {
             if (payload.type === 'Transaction') {
@@ -1112,9 +1120,10 @@ export const getMilestoneMessageValue = (payload: Payload, accounts: WalletAccou
 
         const addresses = []
 
-        accounts.forEach((account) => {
-            account.addresses.forEach((address) => addresses.push(address.address))
-        })
+        // TODO: refactor for single address
+        // accounts.forEach((account) => {
+        //     account.addresses.forEach((address) => addresses.push(address.address))
+        // })
 
         const totalValue = funds
             .filter((fund) => addresses.includes(fund.output.address))
@@ -1170,7 +1179,7 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
         return
     }
     const accounts = get(get(wallet).accounts)
-    return accounts.find((acc) => acc.addresses.some((add) => address === add.address))
+    return accounts.find((acc) => acc.depositAddress === address)
 }
 
 /**
@@ -1188,7 +1197,7 @@ export const findAccountWithAnyAddress = (
     }
     const accounts = get(get(wallet).accounts)
 
-    let res = accounts.filter((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
+    let res = accounts.filter((acc) => addresses.includes(acc.depositAddress))
 
     if (res.length > 0) {
         if (excludeFirst) {

@@ -47,13 +47,14 @@
     } from 'shared/lib/wallet'
     import TopNavigation from './TopNavigation.svelte'
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import {
         CURRENT_ASSEMBLY_STAKING_PERIOD,
         CURRENT_SHIMMER_STAKING_PERIOD,
         LAST_ASSEMBLY_STAKING_PERIOD,
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
+    import { loadAccounts } from '@lib/actions/profileActions'
 
     export let locale: Locale
 
@@ -89,9 +90,11 @@
         }
     })
 
-    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
-        void updateStakingPeriodCache()
-    }
+    /* $: {
+        if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+            void updateStakingPeriodCache()
+        }
+    } */
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
         [activeProfile, accounts],
@@ -101,7 +104,7 @@
             }
 
             if ($activeProfile.settings.showHiddenAccounts) {
-                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+                const sortedAccounts = $accounts.sort((a, b) => a.meta.index - b.meta.index)
 
                 // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
                 // This account will get re-used if someone creates a new one
@@ -121,7 +124,7 @@
 
             return $accounts
                 .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
+                .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
 
@@ -133,7 +136,7 @@
             }
             return $accounts
                 .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
+                .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
 
@@ -155,19 +158,16 @@
     }
 
     onMount(() => {
-        void getParticipationEvents()
-
-        if (shouldVisitStaking()) {
+        // void getParticipationEvents()
+        /* if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
             updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
-        }
-
-        if ($isSoftwareProfile) {
+        } */
+        /* if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
-        }
-
-        if (!get(isBackgroundSyncing)) {
+        } */
+        /*         if (!get(isBackgroundSyncing)) {
             api.startBackgroundSync(
                 {
                     secs: 30,
@@ -186,13 +186,11 @@
                     },
                 }
             )
-        }
-
-        Platform.onEvent('menu-logout', () => {
+        } */
+        /* Platform.onEvent('menu-logout', () => {
             void logout()
-        })
-
-        Platform.onEvent('notification-activated', (contextData) => {
+        }) */
+        /* Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
                     (contextData.type === 'confirmed' ||
@@ -205,9 +203,9 @@
                     $accountRouter.goTo(AccountRoute.Init)
                 }
             }
-        })
-
-        Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+        }) */
+        /*         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+         */
     })
 
     onDestroy(() => {
@@ -229,6 +227,7 @@
     })
 
     if (!$accountsLoaded && $loggedIn) {
+        loadAccounts()
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -262,7 +261,8 @@
         }
     }
 
-    const handleDeepLinkRequest = (data: string): void => {
+    // TODO: handle deep link requests for new send form
+    /* const handleDeepLinkRequest = (data: string): void => {
         const _redirect = (tab: DashboardRoute): void => {
             isDeepLinkRequestActive.set(true)
             $dashboardRouter.goTo(tab)
@@ -299,40 +299,7 @@
                 Platform.DeepLinkManager.clearDeepLinkRequest()
             }
         }
-    }
-
-    async function onCreateAccount(alias: string, color: string, onComplete) {
-        const _create = async (): Promise<unknown> => {
-            try {
-                const account = await createAccount(alias, color)
-                await asyncSyncAccountOffline(account)
-
-                setSelectedAccount(account?.id)
-                $accountRouter.reset()
-
-                return onComplete()
-            } catch (err) {
-                return onComplete(err)
-            }
-        }
-
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _create } })
-                    } else {
-                        void _create()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            await _create()
-        }
-    }
+    } */
 
     $: if (!busy && $accountsLoaded) {
         /**
@@ -363,6 +330,7 @@
             })
         }
     }
+
     $: if ($activeProfile) {
         const shouldDisplayMigrationPopup =
             // Only display popup once the user successfully migrates the first account index
@@ -411,10 +379,7 @@
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
     {#if showTopNav}
-        <TopNavigation
-            {onCreateAccount}
-            classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
-        />
+        <TopNavigation classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''} />
     {/if}
     <div class="flex flex-row flex-auto h-1">
         <Sidebar {locale} />

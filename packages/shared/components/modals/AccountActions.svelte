@@ -8,7 +8,7 @@
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount, wallet } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
     export let modal: Modal
@@ -20,17 +20,12 @@
 
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
-        $selectedAccount.index === $accounts.length - 1 &&
+        $selectedAccount.meta.index === $accounts.length - 1 &&
         $selectedAccount.rawIotaBalance === 0 &&
         $selectedAccount.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
         $accountRouter.goTo(AccountRoute.Manage)
-        modal.close()
-    }
-
-    const handleViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { account: selectedAccount } })
         modal.close()
     }
 
@@ -52,7 +47,8 @@
                     }
                     resetWalletRoute()
                     const nextSelectedAccount =
-                        $viewableAccounts[$selectedAccount?.index] ?? $viewableAccounts[$viewableAccounts.length - 1]
+                        $viewableAccounts[$selectedAccount?.meta.index] ??
+                        $viewableAccounts[$viewableAccounts.length - 1]
                     setSelectedAccount(nextSelectedAccount?.id)
                 },
             },
@@ -103,14 +99,6 @@
         >
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{localize('actions.customizeAcount')}</Text>
-        </button>
-        <!-- Address history -->
-        <button
-            on:click={() => handleViewAddressHistoryClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
-        >
-            <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{localize('actions.viewAddressHistory')}</Text>
         </button>
         <button
             on:click={handleExportTransactionHistoryClick}

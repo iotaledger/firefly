@@ -16,7 +16,7 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Unit } from '@iota/unit-converter/'
     import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/walletAccount'
 
     export let value: number
     export let unit: Unit

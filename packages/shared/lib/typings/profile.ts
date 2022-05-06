@@ -2,6 +2,8 @@ import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
 import { NetworkConfig } from './network'
 import { AccountStakingRewards } from '@lib/participation/types'
+import { AccountId, CreateAccountPayload, EventType, NodeInfo } from '@iota/wallet'
+import { StardustAccount } from '@lib/typings/account'
 
 export interface MigratedTransaction {
     address: string
@@ -11,21 +13,12 @@ export interface MigratedTransaction {
     tailTransactionHash: string
 }
 
-/**
- * Profile
- */
 export interface Profile {
     id: string
     name: string
     type: ProfileType
     protocol: ProfileProtocol
-    /**
-     * Time for most recent stronghold back up
-     */
     lastStrongholdBackupTime: Date | null
-    /**
-     * User settings
-     */
     settings: UserSettings
     hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
@@ -41,9 +34,6 @@ export interface Profile {
     hasFinishedSingleAccountGuide?: boolean
 }
 
-/**
- * User Settings
- */
 export interface UserSettings {
     currency: AvailableExchangeRates
     networkConfig: NetworkConfig
@@ -54,26 +44,17 @@ export interface UserSettings {
     hideNetworkStatistics?: boolean
 }
 
-/**
- * Profile types
- */
 export enum ProfileType {
     Software = 'Software',
     Ledger = 'Ledger',
     LedgerSimulator = 'LedgerSimulator',
 }
 
-/**
- * Profile protocols
- */
 export enum ProfileProtocol {
     Iota = 'iota',
     Shimmer = 'shimmer',
 }
 
-/**
- * Profile imports
- */
 export enum ImportType {
     Seed = 'seed',
     Mnemonic = 'mnemonic',
@@ -84,9 +65,7 @@ export enum ImportType {
     TrinityLedger = 'trinityLedger',
     FireflyLedger = 'fireflyLedger',
 }
-/**
- * Profile account settings
- */
+
 export interface ProfileAccount {
     id: string
     color: string
