@@ -2,7 +2,6 @@
     import {
         Drawer,
         Icon,
-        NetworkIndicatorModal,
         ProfileActionsModal,
         SidebarTab,
         Text,
@@ -35,7 +34,6 @@
 
     export let locale: Locale
 
-    let networkModal: Modal
     let profileModal: Modal
     let drawer: Drawer
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
@@ -153,20 +151,22 @@
     </Drawer>
 {:else}
     <aside
-        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pb-5 pt-10 border-solid border-r border-gray-100 dark:border-gray-800"
+        class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 relative w-20 px-5 pt-10 pb-5 border-solid border-r border-gray-100 dark:border-gray-800"
     >
         <nav class="flex flex-grow flex-col items-center justify-between">
-            <NetworkIndicator modal={networkModal} />
-            <div class="flex flex-col space-y-8">
+            <div class="flex flex-col items-center">
+                <NetworkIndicator />
+            </div>
+            <div class="flex flex-col flex-auto items-center justify-center mb-7 space-y-8">
                 {#each sidebarTabs as tab}
                     <div class="flex">
                         <SidebarTab {tab} />
                     </div>
                 {/each}
             </div>
-            <span class="flex flex-col items-center">
+            <div class="flex flex-col  items-center">
                 <button
-                    class="w-8 h-8 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
+                    class="w-10 h-10 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
@@ -174,9 +174,8 @@
                         <PingingBadge innerColor="red-500" outerColor="red-500" />
                     {/if}
                 </button>
-            </span>
+            </div>
         </nav>
-        <NetworkIndicatorModal bind:modal={networkModal} {locale} />
         <ProfileActionsModal bind:modal={profileModal} {locale} />
     </aside>
 {/if}

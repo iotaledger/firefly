@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Modal } from 'shared/components'
+    import { Icon, Modal, NetworkSummaryModal } from 'shared/components'
     import { showAppNotification } from '@lib/notifications'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
@@ -13,9 +13,7 @@
     function showNetworkIssuesNotification() {
         showAppNotification({
             type: 'warning',
-            message: localize('indicators.networkIndicator.warningText', {
-                values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
-            }),
+            message: localize('indicators.networkIndicator.warningText'),
         })
     }
 </script>
@@ -30,3 +28,4 @@
         </div>
     {/if}
 </div>
+<NetworkSummaryModal bind:modal />
