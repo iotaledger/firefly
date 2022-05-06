@@ -1,8 +1,11 @@
+import { BaseToken } from './assets'
 import { Node, NodePlugin } from './node'
 
 export enum NetworkType {
     ChrysalisMainnet = 'chrysalis-mainnet',
     ChrysalisDevnet = 'chrysalis-devnet',
+    ShimmerMainnet = 'shimmer-mainnet',
+    ShimmerDevnet = 'shimmer-devnet',
     PrivateNet = 'private-net',
 }
 
@@ -21,6 +24,7 @@ export interface Network {
     name: string
     type: NetworkType
     bech32Hrp: string
+    baseToken: BaseToken
 }
 
 /**
