@@ -43,10 +43,7 @@ export function clearPollNetworkInterval(): void {
 }
 
 async function pollNetworkStatusInternal(): Promise<void> {
-    await new Promise<void>((resolve, reject) => {
-        resolve()
-    })
-    // let updated = false
+    const updated = false
 
     // const accs = get(get(wallet).accounts)
 
@@ -76,16 +73,20 @@ async function pollNetworkStatusInternal(): Promise<void> {
     //     }
     // }
 
-    // if (!updated) {
-    //     networkStatus.set({
-    //         messagesPerSecond: 0,
-    //         referencedRate: 0,
-    //         health: 0,
-    //         healthText: NetworkStatusHealthText.Down,
-    //         currentMilestone: -1,
-    //         nodePlugins: [],
-    //     })
-    // }
+    await new Promise<void>((resolve, reject) => {
+        resolve()
+    })
+
+    if (!updated) {
+        networkStatus.set({
+            messagesPerSecond: 0,
+            referencedRate: 0,
+            health: 0,
+            healthText: NetworkStatusHealthText.Down,
+            currentMilestone: -1,
+            nodePlugins: [],
+        })
+    }
 }
 
 /**

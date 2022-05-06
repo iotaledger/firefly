@@ -10,7 +10,7 @@ import { get } from 'svelte/store'
 import { activeProfile } from './profile'
 import { BASE_TOKEN } from './typings/assets'
 
-const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: Network } }> = {
+export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: Network } }> = {
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: {
             id: 'chrysalis-mainnet',
@@ -59,18 +59,7 @@ const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: Ne
     },
 }
 
-const EXPLORER: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string } }> = {
-    [NetworkProtocol.IOTA]: {
-        [NetworkType.Mainnet]: 'https://explorer.iota.org/mainnet',
-        [NetworkType.Devnet]: 'https://explorer.iota.org/devnet',
-    },
-    [NetworkProtocol.Shimmer]: {
-        [NetworkType.Mainnet]: 'https://explorer.shimmer.org/mainnet',
-        [NetworkType.Devnet]: 'https://explorer.shimmer.org/devnet',
-    },
-}
-
-const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string[] } }> = {
+export const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string[] } }> = {
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: [
             'https://chrysalis-nodes.iota.org',
@@ -85,6 +74,17 @@ const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in Networ
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: ['https://api.alphanet.iotaledger.net'],
         [NetworkType.Devnet]: ['https://api.alphanet.iotaledger.net'],
+    },
+}
+
+export const EXPLORER: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string } }> = {
+    [NetworkProtocol.IOTA]: {
+        [NetworkType.Mainnet]: 'https://explorer.iota.org/mainnet',
+        [NetworkType.Devnet]: 'https://explorer.iota.org/devnet',
+    },
+    [NetworkProtocol.Shimmer]: {
+        [NetworkType.Mainnet]: 'https://explorer.shimmer.org/mainnet',
+        [NetworkType.Devnet]: 'https://explorer.shimmer.org/devnet',
     },
 }
 
@@ -302,8 +302,12 @@ export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
     const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
     return {
         ...config,
-        node: nodeCandidates.find((n) => n.isPrimary),
-        nodes: nodeCandidates,
+        nodes: [
+            {
+                url: 'https://api.alphanet.iotaledger.net',
+                auth: null,
+            },
+        ],
         network: config.network.id,
     }
 }

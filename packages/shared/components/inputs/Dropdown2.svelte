@@ -2,7 +2,7 @@
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
-    import { LabeledWalletAccount } from 'shared/lib/typings/wallet'
+    import { LabeledWalletAccount } from 'shared/lib/typings/walletAccount'
 
     export let value: string
     export let label: string

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Profile } from '@lib/typings/profile'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/walletAccount'
     import { getColor } from 'shared/lib/profile'
     import { Text } from 'shared/components/'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -11,7 +11,7 @@
 
 <div class="flex flex row items-center space-x-3">
     <div class="circle" style="--account-color: {getColor(profile, account?.id)};" />
-    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.alias}</Text>
+    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.alias()}</Text>
 </div>
 
 <style type="text/scss">

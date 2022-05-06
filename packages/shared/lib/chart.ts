@@ -12,7 +12,8 @@ import { Message } from './typings/message'
 import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
-import { BalanceHistory, WalletAccount } from './typings/wallet'
+import { BalanceHistory } from './typings/wallet'
+import { WalletAccount } from './typings/walletAccount'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 

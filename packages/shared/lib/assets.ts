@@ -16,8 +16,7 @@ export const assets = derived(
         const profileCurrency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
         const assets: Asset[] = [
             {
-                meta: BASE_TOKEN[NetworkProtocol.Shimmer],
-                balance: '0',
+                meta: BASE_TOKEN[$activeProfile.networkProtocol],
                 rawBalance: 0,
                 fiatPrice: `${convertToFiat(
                     UNIT_MAP[Unit.Mi].val,

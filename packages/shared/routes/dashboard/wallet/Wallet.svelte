@@ -19,7 +19,7 @@
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
-        accountManager,
+        profileManager,
         api,
         asyncSyncAccounts,
         getAccountMessages,
@@ -37,7 +37,6 @@
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import { AccountAssets, AccountBalance, AccountHistory, BarChart, LineChart, ManageAccount, Send } from './views/'
-    import { WalletAccount } from '@lib/typings/wallet'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
@@ -64,52 +63,6 @@
         // update profileType if it is missing
         if (!$activeProfile?.type) {
             setMissingProfileType($accounts)
-        }
-    }
-
-    // TODO: move to Dashboard.svelte
-    async function loadAccounts(): Promise<void> {
-        try {
-            const accountsResponse = await $accountManager.getAccounts()
-            if (accountsResponse) {
-                if (accountsResponse.length === 0) {
-                    void _continue()
-                    return
-                }
-
-                const meta = {
-                    balance: 0,
-                    incoming: 0,
-                    outgoing: 0,
-                    depositAddress: '',
-                }
-
-                const newAccounts: WalletAccount[] = []
-                for (const payloadAccount of accountsResponse) {
-                    const stardustAccount = await getStardustAccount(payloadAccount.meta.index)
-                    const balance = await stardustAccount.balance()
-                    // TODO: check if this is neccessary -> mainly for showing a correct graph
-                    // addMessagesPair(payloadAccount)
-
-                    meta.balance += balance.available
-                    meta.incoming += balance.incoming
-                    meta.outgoing += balance.outgoing
-
-                    const account = prepareAccountInfo(payloadAccount, meta)
-                    newAccounts.push(account)
-                }
-                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                // TODO: fix migrations
-                // processMigratedTransactions(
-                //     payloadAccount.id,
-                //     payloadAccount.messages,
-                //     payloadAccount.addresses
-                // )
-                updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
-                void _continue()
-            }
-        } catch (err) {
-            onError(err)
         }
     }
 
@@ -215,10 +168,6 @@
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
-            if (!$accountsLoaded) {
-                loadAccounts()
-            }
-
             removeEventListeners($activeProfile.id)
 
             initialiseListeners()
@@ -256,19 +205,19 @@
                         {#if $accountRoute === AccountRoute.Init}
                             <AccountAssets />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            <ManageAccount alias={$selectedAccount.alias()} account={$selectedAccount} />
                         {/if}
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                    <!-- <AccountHistory transactions={getAccountMessages($selectedAccount)} /> -->
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">
-                        <LineChart />
+                        <!-- <LineChart /> -->
                     </DashboardPane>
                     <DashboardPane classes="w-full h-1/2">
-                        <BarChart />
+                        <!-- <BarChart /> -->
                     </DashboardPane>
                 </div>
             </div>

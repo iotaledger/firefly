@@ -12,8 +12,10 @@ import * as message from './message'
 import * as migration from './migration'
 import * as network from './network'
 import * as notification from './notification'
+import * as profileManager from './profileManager'
 import * as utils from './utils'
 import * as wallet from './wallet'
+import * as walletAccount from './walletAccount'
 
 export {
     account,
@@ -30,6 +32,8 @@ export {
     migration,
     network,
     notification,
+    profileManager,
     utils,
     wallet,
+    walletAccount,
 }
