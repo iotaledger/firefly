@@ -36,7 +36,7 @@
     import { Locale } from '@core/i18n'
     import {
         api,
-        asyncCreateAccount,
+        createAccount,
         asyncSyncAccountOffline,
         isBackgroundSyncing,
         isFirstSessionSync,
@@ -304,7 +304,7 @@
     async function onCreateAccount(alias: string, color: string, onComplete) {
         const _create = async (): Promise<unknown> => {
             try {
-                const account = await asyncCreateAccount(alias, color)
+                const account = await createAccount(alias, color)
                 await asyncSyncAccountOffline(account)
 
                 setSelectedAccount(account?.id)
@@ -404,7 +404,7 @@
 
     $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
-        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
+        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
 </script>
 

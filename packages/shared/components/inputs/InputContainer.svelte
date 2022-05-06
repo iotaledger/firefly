@@ -1,0 +1,47 @@
+<script lang="typescript">
+    import { Box } from 'shared/components/atoms'
+    import { Error } from 'shared/components/'
+
+    export let inputElement
+
+    export let isFocused = false
+    export let error = ''
+    export let classes = ''
+    export let backgroundColor = 'white'
+    export let darkBackgroundColor = 'gray-800'
+    export let clearBackground = false
+    export let clearPadding = false
+    export let clearBorder = false
+</script>
+
+<div class="w-full flex flex-col space-y-1">
+    <button
+        class="cursor-text w-full flex flex-row"
+        on:click={() => {
+            inputElement && inputElement.focus()
+        }}
+    >
+        <Box
+            on:click
+            {clearBackground}
+            {clearPadding}
+            {backgroundColor}
+            {darkBackgroundColor}
+            classes="w-full flex 
+                {!clearPadding ? 'p-4' : ''}
+                {!clearBorder ? 'border border-solid' : ''}
+                {classes}
+                {isFocused
+                ? 'border-blue-500'
+                : error
+                ? 'border-red-300 hover:border-red-500'
+                : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+            {...$$restProps}
+        >
+            <slot />
+        </Box>
+    </button>
+    {#if error}
+        <Error {error} />
+    {/if}
+</div>

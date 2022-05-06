@@ -6,15 +6,17 @@
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
-    export let mnemonic
+    export let mnemonic: string[]
     export let busy = false
 
-    const verifyRecoveryPhrase = []
+    const dispatch = createEventDispatcher()
+    const verifyRecoveryPhrase: string[] = []
+
     let wordChoices = ['', '', '']
     let verifyIndex = 0
     let verified = false
 
-    const fillChoices = () => {
+    function fillChoices(): void {
         const currentIndex = verifyRecoveryPhrase.length
         const actualWord = mnemonic[currentIndex]
         const random1 = generateRandomWord(mnemonic)
@@ -23,7 +25,7 @@
         wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
     }
 
-    const generateRandomWord = (excludeWords: string[]) => {
+    function generateRandomWord(excludeWords: string[]): string {
         let word: string
 
         do {
@@ -36,7 +38,7 @@
         return word
     }
 
-    const handleChoice = (word) => {
+    function handleChoice(word: string): void {
         if ($mobile) {
             const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
             wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -52,12 +54,10 @@
         }
     }
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinue() {
+    function handleContinue(): void {
         dispatch('next')
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 

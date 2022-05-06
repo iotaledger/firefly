@@ -5,9 +5,11 @@
 </script>
 
 <div
+    on:click
     data-label="box"
     class={`block relative ${classes}`}
     style={`${width ? `width:${width};` : ''}${height ? `height:${height};` : ''}`}
+    {...$$restProps}
 >
     <slot />
 </div>

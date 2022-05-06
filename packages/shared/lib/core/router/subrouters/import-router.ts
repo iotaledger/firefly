@@ -5,7 +5,7 @@ import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
 import { newProfile } from '@lib/profile'
 import { ImportType } from '@lib/typings/profile'
-import { asyncRestoreBackup } from '@lib/wallet'
+import { restoreBackup } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
@@ -86,14 +86,15 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                             await getMigrationData(legacySeed)
                         }
                     } else {
-                        await asyncRestoreBackup(this.importFilePath, password)
+                        await restoreBackup(this.importFilePath, password)
                         get(newProfile).lastStrongholdBackupTime = new Date()
                     }
 
                     nextRoute = ImportRoute.Success
-                } finally {
-                    this.isGettingMigrationData.set(false)
+                } catch (err) {
+                    console.error(err)
                 }
+                this.isGettingMigrationData.set(false)
                 break
             }
             case ImportRoute.LedgerImport: {

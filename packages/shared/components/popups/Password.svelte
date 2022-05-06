@@ -1,38 +1,33 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { api } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
-    export let subtitle
+    export let subtitle: string
     export let returnPassword = false
 
     export let onSuccess = (..._: any[]): void => {}
     export let onError = (..._: any[]): void => {}
     export let onCancelled = (..._: any[]): void => {}
 
-    let password
+    let password: string
     let error = ''
 
-    function handleSubmit() {
-        api.setStrongholdPassword(password, {
-            onSuccess(response) {
-                closePopup()
-                if ('function' === typeof onSuccess) {
-                    onSuccess(returnPassword ? password : response)
-                }
-            },
-            onError(err) {
-                error = locale(err.error)
-                if ('function' === typeof onError) {
-                    onError(err)
-                }
-            },
-        })
+    async function handleSubmit(): Promise<void> {
+        try {
+            const response = await setStrongholdPassword(password)
+            closePopup()
+            onSuccess(returnPassword ? password : response)
+        } catch (err) {
+            error = locale(err.error)
+            onError(err)
+        }
     }
-    function handleCancelClick() {
+
+    function handleCancelClick(): void {
         if ('function' === typeof onCancelled) {
             onCancelled()
         }

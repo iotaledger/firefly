@@ -67,8 +67,8 @@ export enum ProfileType {
  * Profile protocols
  */
 export enum ProfileProtocol {
-    Iota = 'IOTA',
-    Shimmer = 'Shimmer',
+    Iota = 'iota',
+    Shimmer = 'shimmer',
 }
 
 /**
