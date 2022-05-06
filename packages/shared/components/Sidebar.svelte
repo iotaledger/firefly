@@ -25,7 +25,6 @@
     import { mobile } from 'shared/lib/app'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import {} from 'shared/lib/participation'
     import { isStakingPossible, partiallyUnstakedAmount } from 'shared/lib/participation/account'
     import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
