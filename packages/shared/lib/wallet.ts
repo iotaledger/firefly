@@ -1,10 +1,9 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, Readable, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { deepCopy } from './helpers'
 import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
@@ -12,7 +11,7 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
+import { SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
@@ -26,7 +25,7 @@ import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-import { CreateAccountPayload } from '@iota/wallet'
+import { CoinType, CreateAccountPayload } from '@iota/wallet/'
 import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
 import { ProfileManager } from './typings/profileManager'
@@ -349,6 +348,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
     try {
         const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
+            coinType: CoinType.Shimmer,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
         const addresses = await stardustAccount.generateAddresses()

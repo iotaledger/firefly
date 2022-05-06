@@ -5,7 +5,7 @@ export type TokenMetadata = {
     tickerSymbol?: string
     unit?: string
     decimals?: number
-    subunit?: string
+    subunit?: string | null
     useMetricPrefix?: boolean
     primaryColor?: string
     secondaryColor?: string
