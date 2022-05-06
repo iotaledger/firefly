@@ -75,7 +75,7 @@ export interface ProfileManager {
     getAccount(accountId: AccountId): Promise<StardustAccount>
     getAccounts(): Promise<StardustAccount[]>
     getNodeInfo(): Promise<NodeInfo>
-    createAccount(account: CreateAccountPayload): Promise<StardustAccount>
+    createAccount(payload: CreateAccountPayload): Promise<StardustAccount>
     setStrongholdPassword(password: string): Promise<string>
     generateMnemonic(): Promise<string>
     storeMnemonic(mnemonic: string): Promise<string>
