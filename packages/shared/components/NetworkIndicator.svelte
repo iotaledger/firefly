@@ -20,7 +20,7 @@
 
 <div class="flex flex-col items-center relative">
     <button on:click={modal?.open}>
-        <Icon width="48" height="48" icon={$activeProfile?.protocol} classes="dark:text-white" />
+        <Icon width="48" height="48" icon={$activeProfile?.networkProtocol} classes="dark:text-white" />
     </button>
     {#if healthStatus !== 2}
         <div class="absolute -bottom-7" on:mouseenter={modal?.open} on:mouseleave={modal?.close}>
