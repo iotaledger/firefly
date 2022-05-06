@@ -19,7 +19,7 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { NodeAuth, NodeInfo } from './typings/node'
-import { ProfileManager, ProfileType } from './typings/profile'
+import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
@@ -29,6 +29,7 @@ import { setProfileAccount } from 'shared/lib/profile'
 import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
+import { ProfileManager } from './typings/profileManager'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
 
