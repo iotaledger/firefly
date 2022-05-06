@@ -154,7 +154,7 @@
         {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance()}
     </Text>
 </div>
 {#if showInfoText()}
