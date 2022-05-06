@@ -811,6 +811,9 @@
         },
         "transactionDetails": {
             "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
@@ -938,6 +941,7 @@
         "readMore": "Read more"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "Password",
         "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
@@ -1087,7 +1091,12 @@
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "transactionTime": "Transaction time",
+        "publicNote": "Public note",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "dates": {
         "today": "Today",
@@ -1327,5 +1336,59 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "inProgress": "staking for",
+            "pending": "staking for",
+            "confirmed": "staked for",
+            "conflict": "failed to stake",
+            "failed": "failed to stake"
+        },
+        "transfer": {
+            "inProgress": "transferring to",
+            "pending": "transferring to",
+            "confirmed": "transferred to",
+            "conflict": "failed to transfer",
+            "failed": "failed to transfer"
+        },
+        "receive": {
+            "inProgress": "receiving from",
+            "pending": "receiving from",
+            "confirmed": "received from",
+            "conflict": "failed to receive",
+            "failed": "failed to receive"
+        },
+        "send": {
+            "inProgress": "sending to",
+            "pending": "sending to",
+            "confirmed": "sent to",
+            "conflict": "failed to send",
+            "failed": "failed to send"
+        },
+        "migrate": {
+            "inProgress": "migrating for",
+            "pending": "migrating for",
+            "confirmed": "migrated for",
+            "conflict": "failed to migrate",
+            "failed": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }

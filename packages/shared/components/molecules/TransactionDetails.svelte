@@ -1,5 +1,12 @@
 <script lang="typescript">
-    import { Pill, ActivityTypePill, Box, AddressBox, KeyValueBox } from 'shared/components/atoms'
+    import {
+        ActivityStatusPill,
+        ActivityAsyncStatusPill,
+        Box,
+        AddressBox,
+        KeyValueBox,
+        AccountLabel,
+    } from 'shared/components/atoms'
     import { Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { formatDate, localize } from '@core/i18n'
@@ -7,25 +14,49 @@
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { FontWeightText } from 'shared/components/Text.svelte'
+    import { Unit } from '@iota/unit-converter/'
+    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { WalletAccount } from '@lib/typings/wallet'
 
-    export let timestamp = undefined
-    export let type = undefined
-    export let value = undefined
-    export let address = undefined
-    export let account = undefined
-    export let unit = undefined
+    export let value: number
+    export let unit: Unit
+    export let type: ActivityType
+    export let status: ActivityStatus
+    export let asyncStatus: ActivityAsyncStatus
+    export let address: string
+    export let account: WalletAccount
+    export let timestamp: number
+    export let publicNote: string
+    export let storageDeposit = 0
+    export let expirationTimestamp: number
 
-    let date = undefined
+    let transactionTime: string
     $: {
         try {
             if (timestamp) {
-                date = formatDate(new Date(timestamp), {
+                transactionTime = formatDate(new Date(timestamp), {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
             }
         } catch {
-            date = localize('error.invalidDate')
+            transactionTime = localize('error.invalidDate')
+        }
+    }
+
+    let expirationTime: string
+    $: {
+        try {
+            if (expirationTimestamp) {
+                transactionTime = formatDate(new Date(expirationTimestamp), {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
+                })
+            } else {
+                expirationTime = undefined
+            }
+        } catch {
+            expirationTime = undefined
         }
     }
 
@@ -33,10 +64,13 @@
     $: formattedCurrencyValue = formatCurrency(
         convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
     )
+    $: formattedStorageDeposit = storageDeposit || storageDeposit === 0 ? storageDeposit + ' i' : ''
 
-    let detailsList
     $: detailsList = {
-        ...(date && { date }),
+        ...(transactionTime && { transactionTime }),
+        ...(publicNote && { publicNote }),
+        ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
+        ...(expirationTime && { expirationTime }),
     }
 </script>
 
@@ -45,20 +79,25 @@
         {#if value || value === 0}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <Text type="h1" fontWeight={FontWeightText.semibold}>{formattedValue}</Text>
-                <Text fontSize="md" color="gray-600">{formattedCurrencyValue}</Text>
+                <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedCurrencyValue}</Text>
             </transaction-value>
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
-            <ActivityTypePill {type} />
+            {#if status}
+                <ActivityStatusPill {type} {status} />
+            {/if}
+            {#if asyncStatus}
+                <ActivityAsyncStatusPill {asyncStatus} />
+            {/if}
         </transaction-status>
+        {#if account}
+            <Box row clearBackground clearPadding classes="justify-center">
+                <AccountLabel profile={$activeProfile} {account} />
+            </Box>
+        {:else if address}
+            <AddressBox clearBackground clearPadding isCopyable {address} />
+        {/if}
     </main-content>
-    {#if account}
-        <Box col clearBackground>
-            <Text type="p" fontSize="base">{account}</Text>
-        </Box>
-    {:else if address}
-        <AddressBox clearBackground {address} />
-    {/if}
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}

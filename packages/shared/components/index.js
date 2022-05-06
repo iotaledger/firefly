@@ -78,3 +78,4 @@ export { default as StakingAssetTile } from './StakingAssetTile.svelte'
 // atomic components
 export * from './atoms'
 export * from './molecules'
+export * from './inputs'

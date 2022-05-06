@@ -16,7 +16,10 @@
     let showPreciseBalance = false
 
     function handleSendClick() {
-        $accountRouter.goTo(AccountRoute.Send)
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+        })
     }
     function handleReceiveClick() {
         openPopup({
