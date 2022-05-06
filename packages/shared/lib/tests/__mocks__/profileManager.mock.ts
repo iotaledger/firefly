@@ -1,4 +1,4 @@
-import type { AccountId, CreateAccountPayload } from '@iota/wallet'
+import type { AccountId, CreateAccountPayload, NodeInfo } from '@iota/wallet'
 import { StardustAccount } from '../../typings/account'
 import { ProfileManager } from '../../typings/profile'
 import { AccountMock } from './account.mock'
@@ -13,6 +13,25 @@ export class ProfileManagerMock implements ProfileManager {
 
     getAccounts() {
         return undefined
+    }
+
+    getNodeInfo(): Promise<NodeInfo> {
+        return Promise.resolve({
+            name: 'mockNode',
+            version: 'v1.0.0',
+            isHealthy: true,
+            networkId: 'id',
+            bech32HRP: 'mock',
+            minPoWScore: 0,
+            messagesPerSecond: 10000,
+            referencedMessagesPerSecond: 10000,
+            referencedRate: 10000,
+            latestMilestoneTimestamp: 10000,
+            latestMilestoneIndex: 9999,
+            confirmedMilestoneIndex: 9999,
+            pruningIndex: 1500,
+            features: ['mock'],
+        })
     }
 
     createAccount(account: CreateAccountPayload): Promise<StardustAccount> {

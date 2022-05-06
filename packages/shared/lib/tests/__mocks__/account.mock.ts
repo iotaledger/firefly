@@ -64,25 +64,6 @@ export class AccountMock implements StardustAccount {
         return Promise.resolve()
     }
 
-    getNodeInfo(_: string): Promise<NodeInfo> {
-        return Promise.resolve({
-            name: 'mockNode',
-            version: 'v1.0.0',
-            isHealthy: true,
-            networkId: 'id',
-            bech32HRP: 'mock',
-            minPoWScore: 0,
-            messagesPerSecond: 10000,
-            referencedMessagesPerSecond: 10000,
-            referencedRate: 10000,
-            latestMilestoneTimestamp: 10000,
-            latestMilestoneIndex: 9999,
-            confirmedMilestoneIndex: 9999,
-            pruningIndex: 1500,
-            features: ['mock'],
-        })
-    }
-
     generateAddresses(): Promise<Address[]> {
         return Promise.resolve([MOCK_ADDRESS])
     }

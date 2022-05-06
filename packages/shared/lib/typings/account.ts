@@ -16,7 +16,6 @@ import {
     ClientOptions as StardustClientOptions,
     NativeTokenOptions,
     NftOptions,
-    NodeInfo,
     OutputData,
     OutputsToCollect,
     Transaction,
@@ -93,7 +92,6 @@ export interface StardustAccount {
     listPendingTransactions(): Promise<Transaction[]>
     listTransactions(): Promise<Transaction[]>
     sync(options?: AccountSyncOptions): Promise<void>
-    getNodeInfo(url: string): Promise<NodeInfo>
     generateAddresses(): Promise<StardustAddress[]>
     latestAddress(): Promise<StardustAddress>
     balance(): Promise<AccountBalance>
