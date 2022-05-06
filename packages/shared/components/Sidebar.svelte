@@ -1,13 +1,26 @@
 <script lang="typescript">
+    import { Locale } from '@core/i18n'
+    import {
+        dashboardRoute,
+        DashboardRoute,
+        dashboardRouter,
+        governanceRouter,
+        resetWalletRoute,
+        settingsRoute,
+        SettingsRoute,
+        settingsRouter,
+        SidebarTab as SidebarTabType,
+    } from '@core/router'
+    import { versionDetails } from '@lib/appUpdater'
     import {
         Drawer,
         Icon,
+        Modal,
         NetworkIndicator,
+        PingingBadge,
         ProfileActionsModal,
         SidebarTab,
         Text,
-        Modal,
-        PingingBadge,
     } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
@@ -16,19 +29,7 @@
     import { isStakingPossible, partiallyUnstakedAmount } from 'shared/lib/participation/account'
     import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
-    import {
-        dashboardRoute,
-        dashboardRouter,
-        DashboardRoute,
-        resetWalletRoute,
-        settingsRoute,
-        settingsRouter,
-        SettingsRoute,
-        SidebarTab as SidebarTabType,
-    } from '@core/router'
     import { Settings } from 'shared/routes'
-    import { Locale } from '@core/i18n'
-    import { versionDetails } from '@lib/appUpdater'
 
     export let locale: Locale
 
@@ -117,6 +118,7 @@
     }
 
     function openGovernance() {
+        $governanceRouter.reset()
         $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 </script>
