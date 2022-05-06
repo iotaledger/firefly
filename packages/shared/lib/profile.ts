@@ -16,7 +16,7 @@ import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'
-import { NetworkConfig, NetworkType } from './typings/network'
+import { NetworkConfig, NetworkProtocol, NetworkType } from './typings/network'
 import { ValuesOf } from './typings/utils'
 import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
@@ -67,7 +67,7 @@ export const isLedgerProfile: Readable<boolean> = derived(
  * Saves profile in persistent storage
  *
  * @method saveProfile
- *
+
  * @param {Profile} profile
  *
  * @returns {Profile}
@@ -88,18 +88,22 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
-const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile => ({
+const buildProfile = (
+    profileName: string,
+    isDeveloperProfile: boolean,
+    networkProtocol: NetworkProtocol,
+    networkType: NetworkType
+): Profile => ({
     id: generateRandomId(),
     name: profileName,
     type: null,
-    protocol: null,
+    networkProtocol: networkProtocol,
+    networkType: networkType,
     lastStrongholdBackupTime: null,
     isDeveloperProfile,
     settings: {
         currency: AvailableExchangeRates.USD,
-        networkConfig: getOfficialNetworkConfig(
-            isDeveloperProfile ? NetworkType.ChrysalisDevnet : NetworkType.ChrysalisMainnet
-        ),
+        networkConfig: getOfficialNetworkConfig(networkProtocol, networkType),
         lockScreenTimeout: 5,
         chartSelectors: {
             currency: AvailableExchangeRates.USD,
@@ -120,8 +124,13 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
  *
  * @returns {Profile}
  */
-export const storeProfile = (profileName: string, isDeveloperProfile: boolean): void => {
-    const profile = buildProfile(profileName, isDeveloperProfile)
+export const storeProfile = (
+    profileName: string,
+    isDeveloperProfile: boolean,
+    networkProtocol: NetworkProtocol,
+    networkType: NetworkType
+): void => {
+    const profile = buildProfile(profileName, isDeveloperProfile, networkProtocol, networkType)
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
@@ -138,7 +147,12 @@ export const storeProfile = (profileName: string, isDeveloperProfile: boolean): 
  */
 export const migrateProfile = (): void => {
     const oldProfile = get(activeProfile)
-    const newProfile = buildProfile(oldProfile.name, oldProfile.isDeveloperProfile)
+    const newProfile = buildProfile(
+        oldProfile.name,
+        oldProfile.isDeveloperProfile,
+        oldProfile.networkProtocol,
+        oldProfile.networkType
+    )
 
     updateProfile('', migrateObjects<Profile>(oldProfile, newProfile))
 }

@@ -5,6 +5,7 @@
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'
+    import { activeProfile } from '@lib/profile'
 
     export let locale: Locale
 
@@ -21,7 +22,7 @@
                     if (accountsResponse.payload.length === 0) {
                         api.createAccount(
                             {
-                                clientOptions: getDefaultClientOptions(),
+                                clientOptions: getDefaultClientOptions($activeProfile.networkProtocol),
                                 alias: `${locale('general.account')} 1`,
                                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },

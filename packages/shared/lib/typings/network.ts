@@ -1,12 +1,15 @@
-import { BaseToken } from './assets'
+import { TokenMetadata } from './assets'
 import { Node, NodePlugin } from './node'
 
 export enum NetworkType {
-    ChrysalisMainnet = 'chrysalis-mainnet',
-    ChrysalisDevnet = 'chrysalis-devnet',
-    ShimmerMainnet = 'shimmer-mainnet',
-    ShimmerDevnet = 'shimmer-devnet',
+    Mainnet = 'mainnet',
+    Devnet = 'devnet',
     PrivateNet = 'private-net',
+}
+
+export enum NetworkProtocol {
+    IOTA = 'iota',
+    Shimmer = 'shimmer',
 }
 
 /**
@@ -22,9 +25,10 @@ export type NetworkId = string
 export interface Network {
     id: NetworkId
     name: string
-    type: NetworkType
-    bech32Hrp: string
-    baseToken: BaseToken
+    protocol: NetworkProtocol
+    type?: NetworkType
+    bech32Hrp?: string
+    baseToken?: TokenMetadata
 }
 
 /**

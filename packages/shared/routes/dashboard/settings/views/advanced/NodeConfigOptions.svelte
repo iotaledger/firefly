@@ -101,7 +101,7 @@
             <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
         </button>
     {/if}
-    {#if !getOfficialNodes(networkConfig?.network.type)
+    {#if !getOfficialNodes(networkConfig?.network.protocol, networkConfig?.network.type)
         .map((n) => n.url)
         .includes(nodeContextMenu?.url)}
         <button
@@ -135,7 +135,7 @@
             </Text>
         </button>
     {/if}
-    {#if !getOfficialNodes(networkConfig?.network?.type)
+    {#if !getOfficialNodes(networkConfig?.network.protocol, networkConfig?.network?.type)
         .map((n) => n.url)
         .includes(nodeContextMenu?.url)}
         <HR />

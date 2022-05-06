@@ -16,7 +16,8 @@
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: NetworkConfig =
-        $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+        $activeProfile?.settings.networkConfig ||
+        getOfficialNetworkConfig($activeProfile.networkProtocol, $activeProfile.networkType)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()

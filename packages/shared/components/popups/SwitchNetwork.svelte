@@ -62,7 +62,8 @@
             ...oldConfig,
             network: network,
             nodes: [node],
-            includeOfficialNodes: getOfficialNodes(network.type).find((n) => n.url === node?.url) !== undefined,
+            includeOfficialNodes:
+                getOfficialNodes(network.protocol, network.type).find((n) => n.url === node?.url) !== undefined,
         } as NetworkConfig
 
         try {

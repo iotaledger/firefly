@@ -1,6 +1,6 @@
 import { Node, NodeAuth } from './typings/node'
 import { isValidHttpsUrl, isValidUrl } from './utils'
-import { Network, NetworkConfig, NetworkId } from './typings/network'
+import { Network, NetworkConfig, NetworkId, NetworkProtocol } from './typings/network'
 import { NetworkType } from './typings/network'
 import { api, wallet } from './wallet'
 import { isNewNotification, showAppNotification } from './notifications'
@@ -8,83 +8,84 @@ import { localize } from '@core/i18n'
 import { ClientOptions } from './typings/client'
 import { get } from 'svelte/store'
 import { activeProfile } from './profile'
-import { BaseToken, SubUnit, TickerSymbol, Token, TokenUnit } from './typings/assets'
+import { BASE_TOKEN } from './typings/assets'
 
-const BASE_TOKEN: Readonly<{ IOTA: BaseToken; Shimmer: BaseToken }> = {
-    IOTA: {
-        name: Token.IOTA,
-        tickerSymbol: TickerSymbol.IOTA,
-        unit: TokenUnit.IOTA,
-        decimals: 0,
-        subunit: null,
-        useMetricPrefix: true,
+const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: Network } }> = {
+    [NetworkProtocol.IOTA]: {
+        [NetworkType.Mainnet]: {
+            id: 'chrysalis-mainnet',
+            name: 'Chrysalis Mainnet',
+            protocol: NetworkProtocol.IOTA,
+            type: NetworkType.Mainnet,
+            bech32Hrp: 'iota',
+            baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+        },
+        [NetworkType.Devnet]: {
+            id: 'chrysalis-devnet',
+            name: 'Chrysalis Devnet',
+            protocol: NetworkProtocol.IOTA,
+            type: NetworkType.Devnet,
+            bech32Hrp: 'atoi',
+            baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+        },
+        [NetworkType.PrivateNet]: <Network>{
+            name: 'Private Net',
+            protocol: NetworkProtocol.IOTA,
+            type: NetworkType.Devnet,
+        },
     },
-    Shimmer: {
-        name: Token.Shimmer,
-        tickerSymbol: TickerSymbol.Shimmer,
-        unit: TokenUnit.Shimmer,
-        decimals: 6,
-        subunit: SubUnit.Shimmer,
-        useMetricPrefix: false,
+    [NetworkProtocol.Shimmer]: {
+        [NetworkType.Mainnet]: {
+            id: 'shimmer-mainnet',
+            name: 'Shimmer Mainnet',
+            protocol: NetworkProtocol.Shimmer,
+            type: NetworkType.Mainnet,
+            bech32Hrp: 'smr',
+            baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        },
+        [NetworkType.Devnet]: {
+            id: 'shimmer-devnet',
+            name: 'Shimmer Devnet',
+            protocol: NetworkProtocol.Shimmer,
+            type: NetworkType.Devnet,
+            bech32Hrp: 'rms',
+            baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+        },
+        [NetworkType.PrivateNet]: <Network>{
+            name: 'Private Net',
+            protocol: NetworkProtocol.Shimmer,
+            type: NetworkType.PrivateNet,
+        },
     },
 }
 
-const NETWORK: Readonly<{ [key in NetworkType]: Network }> = {
-    [NetworkType.ChrysalisMainnet]: {
-        id: 'chrysalis-mainnet',
-        name: 'Chrysalis Mainnet',
-        bech32Hrp: 'iota',
-        type: NetworkType.ChrysalisMainnet,
-        baseToken: BASE_TOKEN.IOTA,
+const EXPLORER: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string } }> = {
+    [NetworkProtocol.IOTA]: {
+        [NetworkType.Mainnet]: 'https://explorer.iota.org/mainnet',
+        [NetworkType.Devnet]: 'https://explorer.iota.org/devnet',
     },
-    [NetworkType.ChrysalisDevnet]: {
-        id: 'chrysalis-devnet',
-        name: 'Chrysalis Devnet',
-        bech32Hrp: 'atoi',
-        type: NetworkType.ChrysalisDevnet,
-        baseToken: BASE_TOKEN.IOTA,
-    },
-    [NetworkType.ShimmerMainnet]: {
-        id: 'shimmer-mainnet',
-        name: 'Shimmer Mainnet',
-        bech32Hrp: 'smr',
-        type: NetworkType.ShimmerMainnet,
-        baseToken: BASE_TOKEN.Shimmer,
-    },
-    [NetworkType.ShimmerDevnet]: {
-        id: 'shimmer-devnet',
-        name: 'Shimmer Devnet',
-        bech32Hrp: 'rms',
-        type: NetworkType.ShimmerDevnet,
-        baseToken: BASE_TOKEN.Shimmer,
-    },
-    [NetworkType.PrivateNet]: <Network>{
-        name: 'Private Net',
-        type: NetworkType.PrivateNet,
+    [NetworkProtocol.Shimmer]: {
+        [NetworkType.Mainnet]: 'https://explorer.shimmer.org/mainnet',
+        [NetworkType.Devnet]: 'https://explorer.shimmer.org/devnet',
     },
 }
 
-const EXPLORER: Readonly<{ [key in NetworkType]: string }> = {
-    [NetworkType.ChrysalisMainnet]: 'https://explorer.iota.org/mainnet',
-    [NetworkType.ChrysalisDevnet]: 'https://explorer.iota.org/devnet',
-    [NetworkType.ShimmerMainnet]: 'https://explorer.shimmer.org/mainnet',
-    [NetworkType.ShimmerDevnet]: 'https://explorer.shimmer.org/devnet',
-    [NetworkType.PrivateNet]: '',
-}
-
-const NODE_URLS: Readonly<{ [key in NetworkType]: string[] }> = {
-    [NetworkType.ChrysalisMainnet]: [
-        'https://chrysalis-nodes.iota.org',
-        'https://chrysalis-nodes.iota.cafe',
-        'https://mainnet-node.tanglebay.com',
-    ],
-    [NetworkType.ChrysalisDevnet]: [
-        'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
-        'https://api.lb-1.h.chrysalis-devnet.iota.cafe',
-    ],
-    [NetworkType.ShimmerMainnet]: [],
-    [NetworkType.ShimmerDevnet]: [],
-    [NetworkType.PrivateNet]: [],
+const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: string[] } }> = {
+    [NetworkProtocol.IOTA]: {
+        [NetworkType.Mainnet]: [
+            'https://chrysalis-nodes.iota.org',
+            'https://chrysalis-nodes.iota.cafe',
+            'https://mainnet-node.tanglebay.com',
+        ],
+        [NetworkType.Devnet]: [
+            'https://api.lb-0.h.chrysalis-devnet.iota.cafe',
+            'https://api.lb-1.h.chrysalis-devnet.iota.cafe',
+        ],
+    },
+    [NetworkProtocol.Shimmer]: {
+        [NetworkType.Mainnet]: ['https://api.alphanet.iotaledger.net'],
+        [NetworkType.Devnet]: ['https://api.alphanet.iotaledger.net'],
+    },
 }
 
 /**
@@ -98,9 +99,9 @@ const NODE_URLS: Readonly<{ [key in NetworkType]: string[] }> = {
  *
  * @returns {NetworkConfig}
  */
-export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
-    network: getOfficialNetwork(type),
-    nodes: setRandomPrimaryNode(getOfficialNodes(type)),
+export const getOfficialNetworkConfig = (protocol: NetworkProtocol, type: NetworkType): NetworkConfig => ({
+    network: getOfficialNetwork(protocol, type),
+    nodes: setRandomPrimaryNode(getOfficialNodes(protocol, type)),
     automaticNodeSelection: true,
     includeOfficialNodes: true,
     localPow: true,
@@ -116,7 +117,8 @@ export const getOfficialNetworkConfig = (type: NetworkType): NetworkConfig => ({
  *
  * @returns {Network}
  */
-export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type] ?? <Network>{}
+export const getOfficialNetwork = (protocol: NetworkProtocol, type: NetworkType): Network =>
+    NETWORK[protocol][type] ?? <Network>{}
 
 /**
  * Constructs a list of the official IOTA nodes for a given network.
@@ -127,20 +129,22 @@ export const getOfficialNetwork = (type: NetworkType): Network => NETWORK[type] 
  *
  * @returns {Node[]}
  */
-export const getOfficialNodes = (type: NetworkType): Node[] =>
-    getOfficialNodeUrls(type).map((url) => getOfficialNode(type, url))
+export const getOfficialNodes = (protocol: NetworkProtocol, type: NetworkType): Node[] =>
+    getOfficialNodeUrls(protocol, type).map((url) => getOfficialNode(protocol, type, url))
 
-const getOfficialNodeUrls = (networkType: NetworkType): string[] => NODE_URLS[networkType] ?? []
+const getOfficialNodeUrls = (protocol: NetworkProtocol, type: NetworkType): string[] =>
+    OFFICIAL_NODE_URLS[protocol][type] ?? []
 
-const getOfficialNode = (type: NetworkType, url: string): Node => ({
+const getOfficialNode = (protocol, type: NetworkType, url: string): Node => ({
     url,
     auth: { username: '', password: '' },
-    network: getOfficialNetwork(type),
+    network: getOfficialNetwork(protocol, type),
     isPrimary: false,
     isDisabled: false,
 })
 
-export const getOfficialExplorer = (id: NetworkId): string => EXPLORER[getNetworkType(id)] ?? ''
+export const getOfficialExplorer = (protocol: NetworkProtocol, id: NetworkId): string =>
+    EXPLORER[getNetworkType(protocol, id)] ?? ''
 
 /**
  * Determines whether the type of a given network is "official", meaning
@@ -164,19 +168,19 @@ export const isOfficialNetwork = (type: NetworkType): boolean =>
  *
  * @returns {Network}
  */
-export const getNetworkById = (id: NetworkId): Network => {
+export const getNetworkById = (protocol: NetworkProtocol, id: NetworkId): Network => {
     if (id) {
-        const networkType = getNetworkType(id)
+        const networkType = getNetworkType(protocol, id)
         return networkType === NetworkType.PrivateNet
-            ? { id, ...NETWORK[NetworkType.PrivateNet] }
-            : NETWORK[networkType]
+            ? { id, ...NETWORK[protocol][NetworkType.PrivateNet] }
+            : NETWORK[protocol][networkType]
     }
     return <Network>{}
 }
 
-const getNetworkType = (id: NetworkId): NetworkType => {
+const getNetworkType = (protocol: NetworkProtocol, id: NetworkId): NetworkType => {
     if (id) {
-        return Object.values(NETWORK).find((network) => network.id === id)?.type ?? NetworkType.PrivateNet
+        return Object.values(NETWORK[protocol]).find((network) => network.id === id)?.type ?? NetworkType.PrivateNet
     }
 }
 
@@ -304,16 +308,16 @@ export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
     }
 }
 
-export const getDefaultClientOptions = (): ClientOptions => {
+export const getDefaultClientOptions = (protocol: NetworkProtocol): ClientOptions => {
     const { id, type } =
-        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(NetworkType.ChrysalisMainnet)
+        get(activeProfile)?.settings?.networkConfig.network || getOfficialNetwork(protocol, NetworkType.Mainnet)
 
-    const node = getOfficialNodes(type)[0]
+    const node = getOfficialNodes(protocol, type)[0]
     node.isPrimary = true
 
     return {
         node,
-        nodes: getOfficialNodes(type).map((n) => ({ ...n, isPrimary: n.url === node.url })),
+        nodes: getOfficialNodes(protocol, type).map((n) => ({ ...n, isPrimary: n.url === node.url })),
         network: id,
         automaticNodeSelection: true,
         includeOfficialNodes: true,
@@ -334,22 +338,25 @@ export const getNodeCandidates = (config: NetworkConfig): Node[] => {
     if (!config) return []
 
     const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
-    const officialNodes = getOfficialNodes(config.network.type).map((n, idx) => ({ ...n, isPrimary: false }))
+    const officialNodes = getOfficialNodes(config.network.protocol, config.network.type).map((n, idx) => ({
+        ...n,
+        isPrimary: false,
+    }))
 
     let nodeCandidates
     if (useAutomaticSelection) {
         nodeCandidates = officialNodes
     } else {
         nodeCandidates = config.includeOfficialNodes
-            ? addOfficialNodes(config.network.type, config.nodes)
+            ? addOfficialNodes(config.network.protocol, config.network.type, config.nodes)
             : config.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)
 }
 
-const addOfficialNodes = (networkType: NetworkType, nodes: Node[]): Node[] => {
-    let officialNodes = getOfficialNodes(networkType)
+const addOfficialNodes = (networkProtocol: NetworkProtocol, networkType: NetworkType, nodes: Node[]): Node[] => {
+    let officialNodes = getOfficialNodes(networkProtocol, networkType)
 
     // If an official node is currently set as primary then keep it as primary
     officialNodes = officialNodes.map((n) =>

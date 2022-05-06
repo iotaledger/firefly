@@ -65,7 +65,7 @@
             addressError = locale('error.network.notReachable')
         } else if (id !== network.id) {
             if ($activeProfile.isDeveloperProfile) {
-                newNetwork = getNetworkById(id)
+                newNetwork = getNetworkById($activeProfile.networkProtocol, id)
                 isNetworkSwitch = true
             } else {
                 addressError = locale('error.network.mismatch', { values: { networkId: id } })
