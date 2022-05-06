@@ -7,16 +7,18 @@
         currentAccountTreasuryVoteValue,
         hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
         selectedAccountParticipationOverview,
+        currentTreasuryParticipation,
     } from '@lib/participation/account'
     import { calculateVotesByMilestones, calculateVotesByTrackedParticipation } from '@lib/participation/governance'
     import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
     import { isSoftwareProfile } from '@lib/profile'
     import { getDurationString, milestoneToDate } from '@lib/time'
+    import { AccountColor } from '@lib/typings/color'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from '@lib/typings/events'
     import { WalletAccount } from '@lib/typings/wallet'
     import { formatUnitBestMatch } from '@lib/units'
-    import { AccountColors, handleTransactionEventData, selectedAccountStore, transferState } from '@lib/wallet'
+    import { handleTransactionEventData, selectedAccountStore, transferState } from '@lib/wallet'
     import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
     import { popupState } from 'shared/lib/popup'
@@ -185,13 +187,17 @@
         }
     }
 
-    $: trackedParticipation = $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
-    $: lastTrackedParticipationItem = trackedParticipation?.[trackedParticipation.length - 1]
-    $: maximumVotes = calculateVotesByMilestones(
-        event?.information?.milestoneIndexStart,
-        event?.information?.milestoneIndexEnd,
-        lastTrackedParticipationItem?.amount
-    )
+    $: maximumVotes =
+        calculateVotesByTrackedParticipation(
+            $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]?.filter(
+                (item) => item.messageId !== $currentTreasuryParticipation?.messageId
+            )
+        ) +
+        calculateVotesByMilestones(
+            $currentTreasuryParticipation?.startMilestoneIndex,
+            event?.information?.milestoneIndexEnd,
+            $currentTreasuryParticipation?.amount
+        )
 </script>
 
 <div
@@ -387,7 +393,7 @@
                         </Text>
                     </div>
                 {/if}
-                {#if event?.status?.status === ParticipationEventState.Holding && accountVotes > 0}
+                {#if event?.status?.status === ParticipationEventState.Holding && $currentTreasuryParticipation}
                     <div class="flex flex-col flex-wrap space-y-3">
                         <div class="flex flex-row items-center space-x-2">
                             <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
@@ -433,7 +439,7 @@
                         <div
                             class="w-12 rounded-t-lg"
                             style="height: {displayedPercentages[i]
-                                ?.relativePercentage}; background-color: {Object.values(AccountColors)[i]};"
+                                ?.relativePercentage}; background-color: {Object.values(AccountColor)[i]};"
                         />
                         <div class="flex space-x-1 mt-3" style="max-width: 7rem">
                             <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden">
