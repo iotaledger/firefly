@@ -32,7 +32,6 @@ export const assets = derived(
         const assets: Asset[] = [
             {
                 name: Token.IOTA,
-                balance: $selectedAccount.balance,
                 rawBalance: $selectedAccount.rawIotaBalance,
                 fiatPrice: `${convertToFiat(
                     UNIT_MAP[Unit.Mi].val,

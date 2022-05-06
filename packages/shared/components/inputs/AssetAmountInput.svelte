@@ -8,6 +8,8 @@
     import { activeProfile } from '@lib/profile'
     import { UNIT_MAP } from '@lib/units'
     import { localize } from '@core/i18n'
+    import { selectedAccount } from '@lib/wallet'
+    import { AccountBalance } from '@iota/wallet/out/types'
 
     export let inputElement
 
@@ -23,6 +25,8 @@
     let amountInputElement
     let error
 
+    let accountBalance: AccountBalance
+
     $: rawAmount = Number(amount) * UNIT_MAP[unit].val
     $: formattedFiatValue = formatCurrency(
         convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
@@ -32,7 +36,7 @@
 
     function onClickAvailableBalance(): void {
         const balance = asset?.balance ?? '0 Mi'
-        const rawBalance = asset?.rawBalance ?? 0
+        const rawBalance = accountBalance.available ?? 0
         const parts = balance?.split(' ')
         const _unit = parts[parts?.length - 1]
         amount = (rawBalance / UNIT_MAP[_unit].val).toString()

@@ -40,8 +40,7 @@
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
-    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
-    import { account } from '@lib/typings'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/walletAccount'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -355,13 +354,13 @@
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
             const internal = selectedSendType === SEND_TYPE.INTERNAL
-            let accountAlias = internal ? to?.alias : undefined
+            let accountAlias = internal ? to?.alias() : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        accountAlias = acc.alias
+                        accountAlias = acc.alias()
                         break
                     }
                 }
@@ -407,9 +406,10 @@
         $accountRouter.previous()
     }
 
+    // TODO addlabel
     const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
         ...account,
-        label: `${account?.alias} • ${account.balance}`,
+        label: `${account?.alias()} • ${account.balance()}`,
     })
 
     const handleMaxClick = (): void => {

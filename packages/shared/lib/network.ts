@@ -298,8 +298,12 @@ export const buildClientOptions = (config: NetworkConfig): ClientOptions => {
     const nodeCandidates = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
     return {
         ...config,
-        node: nodeCandidates.find((n) => n.isPrimary),
-        nodes: nodeCandidates,
+        nodes: [
+            {
+                url: 'https://api.alphanet.iotaledger.net',
+                auth: null,
+            },
+        ],
         network: config.network.id,
     }
 }

@@ -1,5 +1,5 @@
 import { Unit } from '@iota/unit-converter'
-import { LabeledWalletAccount } from './wallet'
+import { LabeledWalletAccount } from './walletAccount'
 
 export interface SendParams {
     amount: string | undefined

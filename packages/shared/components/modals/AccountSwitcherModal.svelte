@@ -5,12 +5,11 @@
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/walletAccount'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
     import { HR, Icon, Modal, Text } from 'shared/components'
 
     export let accounts: WalletAccount[] = []
-    export let onCreateAccount = (..._: any[]): void => {}
     export let modal: Modal
 
     function handleAccountClick(accountId: string): void {
@@ -36,7 +35,7 @@
 
     function handleCreateAccountClick(): void {
         modal?.close()
-        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        openPopup({ type: 'createAccount' })
     }
 </script>
 
@@ -50,7 +49,7 @@
                 >
                     <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
                     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.alias}
+                        {account.alias()}
                     </Text>
                 </button>
             {/each}

@@ -22,9 +22,10 @@ import { ParticipationAction, PendingParticipation } from './participation/types
 import { openPopup } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
-import type { WalletAccount } from './typings/wallet'
+import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
 import { StardustAccount } from '@lib/typings/account'
+import { getAccounts } from './actions/profileActions'
 
 /**
  * Initialises event listeners from wallet library
@@ -77,7 +78,7 @@ export function initialiseListeners(): void {
 
                 const notificationMessage = localize('notifications.valueTx')
                     .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account?.alias)
+                    .replace('{{account}}', account?.alias())
 
                 showSystemNotification({
                     type: 'info',
@@ -268,7 +269,7 @@ export function initialiseListeners(): void {
                     completeCount++
 
                     if (completeCount === latestAccounts.length) {
-                        accounts.update((_accounts) => walletAccounts.sort((a, b) => a.index - b.index))
+                        accounts.update((_accounts) => walletAccounts.sort((a, b) => a.meta.index - b.meta.index))
 
                         updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                     }
@@ -338,12 +339,6 @@ export function initialiseListeners(): void {
     })
 }
 
-async function getAccounts(): Promise<StardustAccount[]> {
-    const accountsResponse = await get(profileManager).getAccounts()
-    const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
-    return Promise.all(accountsPromises)
-}
-
 function updateAllMessagesState(
     accounts: Writable<WalletAccount[]>,
     messageId: string,
@@ -392,7 +387,7 @@ export function displayParticipationNotification(pendingParticipation: PendingPa
                 `popups.stakingManager.${
                     pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
-                { values: { account: account.alias } }
+                { values: { account: account.alias() } }
             ),
         })
     }
