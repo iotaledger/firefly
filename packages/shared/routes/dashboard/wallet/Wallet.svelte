@@ -221,7 +221,7 @@
                     </DashboardPane>
                 </div>
             </div>
-            <AccountActionsModal bind:modal />
+            <!-- <AccountActionsModal bind:modal /> -->
         {/key}
     </div>
 {/if}

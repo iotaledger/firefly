@@ -25,7 +25,7 @@ import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
 import { setProfileAccount } from 'shared/lib/profile'
-import { CoinType, CreateAccountPayload } from '@iota/wallet/'
+import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
 import { ProfileManager } from './typings/profileManager'
@@ -348,7 +348,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
     try {
         const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
-            coinType: CoinType.Shimmer,
+            coinType: 4219,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
         const addresses = await stardustAccount.generateAddresses()
