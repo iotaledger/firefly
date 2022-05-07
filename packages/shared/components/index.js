@@ -12,7 +12,6 @@ export { default as ButtonRadio } from './ButtonRadio.svelte'
 export { default as Checkbox } from './inputs/Checkbox.svelte'
 export { default as CollapsibleBlock } from './CollapsibleBlock.svelte'
 export { default as CopyButton } from './CopyButton.svelte'
-export { default as DashboardPane } from './DashboardPane.svelte'
 export { default as Dropdown } from './inputs/Dropdown.svelte'
 export { default as Dropzone } from './inputs/Dropzone.svelte'
 export { default as Error } from './Error.svelte'
@@ -78,4 +77,9 @@ export { default as StakingAssetTile } from './StakingAssetTile.svelte'
 // atomic components
 export * from './atoms'
 export * from './molecules'
+export * from './organisms'
+
 export * from './inputs'
+
+// panels
+export * from './panes'

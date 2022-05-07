@@ -15,6 +15,7 @@
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
         walletSetupType,
+        getAccountMessages,
     } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -22,7 +23,7 @@
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
 
-    export let transactions: AccountMessage[] = []
+    const transactions = getAccountMessages($selectedAccount)
 
     function handleTransactionClick(message: AccountMessage): void {
         openPopup({

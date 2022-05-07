@@ -1,15 +1,16 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { Text } from 'shared/components'
+    import { Text, Modal, AccountActionsModal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
-    import { accountRoute, accountRouter } from '@core/router'
+    import { accountRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from 'shared/lib/wallet'
     import { openPopup } from '@lib/popup'
 
     export let classes = ''
+    export let modal: Modal
 
     export let onMenuClick = (): void => {}
 
@@ -75,7 +76,7 @@
         </div>
     {/if}
     <button
-        on:click={() => onMenuClick()}
+        on:click={modal?.toggle}
         class="px-2 py-3 flex flex-row space-x-1 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white dark:bg-opacity-50 rounded-lg absolute top-6 right-6"
     >
         {#each Array(3) as _}
@@ -85,3 +86,4 @@
         {/each}
     </button>
 </div>
+<AccountActionsModal bind:modal />
