@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
-import { asyncGetNodeInfo, wallet } from './wallet'
+import { asyncGetNodeInfo, profileManager, wallet } from './wallet'
 import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions } from './network'
-import { NetworkStatus } from './typings/network'
+import { NetworkStatus, NodeInfo } from './typings/network'
 import { NetworkStatusHealthText } from './typings/network'
 import { activeProfile } from './profile'
 import { Node, NodePlugin } from './typings/node'
@@ -43,50 +43,14 @@ export function clearPollNetworkInterval(): void {
 }
 
 async function pollNetworkStatusInternal(): Promise<void> {
-    const updated = false
-
-    // const accs = get(get(wallet).accounts)
-
-    // if (accs.length > 0) {
-    //     const { networkConfig } = get(activeProfile)?.settings
-    //     const account0 = accs[0]
-    //     const { clientOptions } = account0
-
-    //     let node = clientOptions?.nodes.find((n) => n.isPrimary)
-    //     if (node?.url !== networkConfig?.nodes.find((n) => n.isPrimary)?.url) {
-    //         /**
-    //          * NOTE: If the network configuration and client options do NOT
-    //          * agree on which node is the primary one, it is best to go with
-    //          * what is stored app-side in the profile's setting's NetworkConfig.
-    //          */
-    //         node = networkConfig.nodes.find((n) => n.isPrimary) || getOfficialNodes(networkConfig.network.protocol, networkConfig.network.type)[0]
-
-    //         updateClientOptions(networkConfig)
-    //     }
-
-    //     try {
-    //         await updateNetworkStatus(account0.meta.index.toString(), node)
-
-    //         updated = true
-    //     } catch (err) {
-    //         console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${node.url}.`) : err)
-    //     }
-    // }
-
-    await new Promise<void>((resolve, reject) => {
-        resolve()
-    })
-
-    if (!updated) {
-        networkStatus.set({
-            messagesPerSecond: 0,
-            referencedRate: 0,
-            health: 0,
-            healthText: NetworkStatusHealthText.Down,
-            currentMilestone: -1,
-            nodePlugins: [],
-        })
+    let nodeInfo: NodeInfo | null
+    try {
+        nodeInfo = <NodeInfo>(<unknown>await get(profileManager).getNodeInfo())
+    } catch (error) {
+        console.error(error)
+        nodeInfo = null
     }
+    updateNetworkStatus(nodeInfo)
 }
 
 /**
@@ -99,13 +63,10 @@ async function pollNetworkStatusInternal(): Promise<void> {
  *
  * @returns {Promise<void>}
  */
-export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
-    if (!accountId || !node) return
-
-    if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
-        const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
+export const updateNetworkStatus = (nodeInfo: NodeInfo | null): void => {
+    if (nodeInfo) {
         const timeSinceLastMsInMinutes =
-            (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
+            (Date.now() - nodeInfo.payload.nodeinfo.status.latestMilestone.timestamp * MILLISECONDS_PER_SECOND) /
             (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
         let health = 0 // bad
@@ -130,12 +91,12 @@ export const updateNetworkStatus = async (accountId: string, node: Node): Promis
         }
 
         networkStatus.set({
-            messagesPerSecond: response.nodeinfo.messagesPerSecond,
-            referencedRate: response.nodeinfo.referencedRate,
+            messagesPerSecond: nodeInfo.payload.nodeinfo.metrics.messagesPerSecond,
+            referencedRate: nodeInfo.payload.nodeinfo.metrics.referencedRate,
             health,
             healthText,
-            currentMilestone: response.nodeinfo.confirmedMilestoneIndex,
-            nodePlugins: response.nodeinfo.features,
+            currentMilestone: nodeInfo.payload.nodeinfo.status.confirmedMilestone.index,
+            nodePlugins: nodeInfo.payload.nodeinfo.plugins?.map((plugin) => NodePlugin[plugin]) ?? [],
         })
     } else {
         networkStatus.set({
