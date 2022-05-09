@@ -6,13 +6,12 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
-    import AddressHistory from './AddressHistory.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
-    import CreateAccount from './CreateAccount.svelte'
+    import CreateAccountPopup from './CreateAccountPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -100,7 +99,6 @@
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,
-        addressHistory: AddressHistory,
         ledgerNotConnected: LedgerNotConnected,
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
@@ -116,7 +114,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
-        createAccount: CreateAccount,
+        createAccount: CreateAccountPopup,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         riskFunds: RiskFunds,

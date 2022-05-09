@@ -22,7 +22,7 @@ export enum SubUnit {
 
 export type Asset = {
     name: Token | string
-    balance: string
+    // balance: string
     rawBalance: number
     fiatPrice?: string
     fiatBalance?: string

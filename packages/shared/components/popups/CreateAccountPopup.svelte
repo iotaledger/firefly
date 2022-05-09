@@ -7,9 +7,9 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { tryCreateAccount } from '@lib/actions/profileActions'
 
     export let error = ''
-    export let onCreate = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -45,7 +45,7 @@
                 }))
             }
 
-            if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
+            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
                 return (error = localize('error.account.duplicate'))
             }
 
@@ -53,7 +53,7 @@
 
             const _cancel = () => (isBusy = false)
             const _create = () =>
-                onCreate(trimmedAccountAlias, color, (err) => {
+                tryCreateAccount(trimmedAccountAlias, color.toString(), (err) => {
                     isBusy = false
 
                     if (err) {

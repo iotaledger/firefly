@@ -1,7 +1,24 @@
-import { Bridge, CommunicationIds } from './bridge'
-import { Message } from './message'
+import {
+    AccountBalance,
+    AccountMeta,
+    AccountSyncOptions,
+    Address as StardustAddress,
+    AddressNativeTokens,
+    AddressNftId,
+    AddressWithAmount,
+    AddressWithMicroAmount,
+    NativeTokenOptions,
+    NftOptions,
+    OutputData,
+    OutputsToCollect,
+    Transaction,
+    TransferOptions,
+    ClientOptions as StardustClientOptions,
+} from '@iota/wallet/out/types'
 import { Address } from './address'
+import { Bridge, CommunicationIds } from './bridge'
 import { ClientOptions } from './client'
+import { Message } from './message'
 import { NodeAuth } from './node'
 import { Duration } from './wallet'
 import {
@@ -24,6 +41,19 @@ import {
 
 export enum MessageType {}
 
+export interface Account {
+    id: string
+    alias: string
+    createdAt: string
+    clientOptions: ClientOptions
+    index: number
+    lastSyncedAt: string
+    signerType: SignerType
+    storagePath: string
+    messages: Message[]
+    addresses: Address[]
+}
+
 export interface Balance {
     total: number
     available: number
@@ -42,19 +72,6 @@ export interface SyncAccountOptions {
     gapLimit?: number
     accountDiscoveryThreshold?: number
     skipPersistance?: boolean
-}
-
-export interface Account {
-    id: string
-    alias: string
-    createdAt: string
-    clientOptions: ClientOptions
-    index: number
-    lastSyncedAt: string
-    signerType: SignerType
-    storagePath: string
-    messages: Message[]
-    addresses: Address[]
 }
 
 export type AccountIdentifier = number | string

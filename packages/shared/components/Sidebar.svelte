@@ -58,12 +58,12 @@
             route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
-        {
+        /* {
             icon: 'tokens',
             label: localize('tabs.staking'),
             route: DashboardRoute.Staking,
             onClick: openStaking,
-        },
+        }, */
     ]
 
     function updateSidebarNotification() {

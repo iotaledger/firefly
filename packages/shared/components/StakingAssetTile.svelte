@@ -22,7 +22,7 @@
         stakedAccounts,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -78,7 +78,7 @@
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {
-        return accounts?.find((account) => account.alias === $selectedAccount?.alias)
+        return accounts?.find((account) => account.alias() === $selectedAccount?.alias())
     }
 
     function getLocalizedTooltipText(): TooltipText {

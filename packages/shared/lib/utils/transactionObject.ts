@@ -1,5 +1,5 @@
 import { Payload } from '@lib/typings/message'
-import { WalletAccount } from '@lib/typings/wallet'
+import { WalletAccount } from '@lib/typings/walletAccount'
 import {
     findAccountWithAddress,
     findAccountWithAnyAddress,

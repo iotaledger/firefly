@@ -32,7 +32,6 @@ export const assets = derived(
         const assets: Asset[] = [
             {
                 name: Token.IOTA,
-                balance: $selectedAccount.balance,
                 rawBalance: $selectedAccount.rawIotaBalance,
                 fiatPrice: `${convertToFiat(
                     UNIT_MAP[Unit.Mi].val,
@@ -46,7 +45,6 @@ export const assets = derived(
         if ($assemblyStakingRewards) {
             assets.push({
                 name: Token.Assembly,
-                balance: formatStakingAirdropReward(StakingAirdrop[Token.Assembly], Number($assemblyStakingRewards), 2),
                 rawBalance: $assemblyStakingRewards,
                 color: '#DCABE1',
             })
@@ -54,7 +52,6 @@ export const assets = derived(
         if ($shimmerStakingRewards) {
             assets.push({
                 name: Token.Shimmer,
-                balance: formatStakingAirdropReward(StakingAirdrop[Token.Shimmer], Number($shimmerStakingRewards), 2),
                 rawBalance: $shimmerStakingRewards,
                 color: '#25DFCA',
             })

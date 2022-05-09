@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { WalletAccount } from '@lib/typings/wallet'
+    import { WalletAccount } from '@lib/typings/walletAccount'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
     import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
 
@@ -25,7 +25,7 @@
 
     $: {
         if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.alias
+            inputElement.value = selectedAccount?.alias()
         }
     }
     $: {

@@ -4,7 +4,7 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { setStrongholdPassword } from 'shared/lib/wallet'
     import { Writable } from 'svelte/store'
 
@@ -54,7 +54,7 @@
 <div class="mb-5">
     <Text type="h4">
         {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-            values: { name: $account?.alias },
+            values: { name: $account?.alias() },
         })}
     </Text>
 </div>
