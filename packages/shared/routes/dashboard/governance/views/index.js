@@ -1,4 +1,4 @@
-export { default as GovernanceVotingPower } from './GovernanceVotingPower.svelte'
+export { default as GovernanceVotingWeight } from './GovernanceVotingWeight.svelte'
 export { default as GovernanceInfo } from './GovernanceInfo.svelte'
 export { default as GovernanceEvents } from './GovernanceEvents.svelte'
 export { default as GovernanceDashboard } from './GovernanceDashboard.svelte'
