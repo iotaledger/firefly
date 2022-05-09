@@ -31,6 +31,7 @@
 
     const { accounts, accountsLoaded } = $wallet
 
+    // TODO: move to dashboard or lib
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
             openPopup({
@@ -41,11 +42,13 @@
         }
     }
 
+    // TODO: move to lib
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
+    // TODO: move to dashboard or lib if needed?
     $: if ($accountsLoaded) {
         // update profileType if it is missing
         if (!$activeProfile?.type) {
@@ -67,6 +70,7 @@
         }
     }
 
+    // TODO: move to error handling lib
     function onError(error?: any): void {
         if ($isLedgerProfile) {
             if (!LedgerErrorType[error.type]) {
@@ -81,6 +85,7 @@
     }
 
     onMount(() => {
+        // TODO: change so settings doesn't go back to wallet??
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
