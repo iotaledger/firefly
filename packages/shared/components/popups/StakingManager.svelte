@@ -13,12 +13,11 @@
         isAccountStaked,
         getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
-    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
+    import { participate, stopParticipating } from 'shared/lib/participation/api'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
         participationAction,
-        stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
         resetPerformingParticipation,
@@ -45,8 +44,6 @@
 
     $: participationAbility = getAccountParticipationAbility($selectedAccountStore)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
-
-    $: $stakedAccounts, $selectedAccountStore, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccountStore?.id)
 
