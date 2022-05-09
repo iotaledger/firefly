@@ -7,7 +7,7 @@ import {
 import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
 import { Address } from './address'
 import { GetMigrationAddressResponse } from './bridge'
-import { ClientOptions } from './client'
+import { IClientOptions } from '@core/network'
 import {
     BalanceChangeEventPayload,
     ConfirmationStateChangeEventPayload,
@@ -22,7 +22,7 @@ import {
 import { LedgerStatus } from './ledger'
 import { Message } from './message'
 import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
-import { NodeAuth, NodeInfo } from './node'
+import { IAuth, INodeInfo } from '@core/network'
 import { Duration, StrongholdStatus } from './wallet'
 
 export interface IWalletApi {
@@ -142,7 +142,7 @@ export interface IWalletApi {
     )
     deleteStorage(callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void })
     setClientOptions(
-        clientOptions: ClientOptions,
+        clientOptions: IClientOptions,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
     setStrongholdPasswordClearInterval(
@@ -152,8 +152,8 @@ export interface IWalletApi {
     getNodeInfo(
         accountId: string,
         url: string,
-        auth: NodeAuth,
-        callbacks: { onSuccess: (response: Event<NodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
+        auth: IAuth,
+        callbacks: { onSuccess: (response: Event<INodeInfo>) => void; onError: (err: ErrorEventPayload) => void }
     )
 
     // Legacy seed APIs

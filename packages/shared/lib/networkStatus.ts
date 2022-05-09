@@ -1,10 +1,8 @@
 import { get, writable } from 'svelte/store'
-import { asyncGetNodeInfo, profileManager, wallet } from './wallet'
-import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions } from './network'
+import { profileManager } from './wallet'
 import { NetworkStatus, NodeInfo } from './typings/network'
+import { INode, NodePlugin } from '@core/network'
 import { NetworkStatusHealthText } from './typings/network'
-import { activeProfile } from './profile'
-import { Node, NodePlugin } from './typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from './time'
 
 export const NETWORK_HEALTH_COLORS = {
@@ -57,10 +55,8 @@ async function pollNetworkStatusInternal(): Promise<void> {
  * Query the network and update the store for its status.
  *
  * @method updateNetworkStatus
- *
  * @param {string} accountId
- * @param {Node} node
- *
+ * @param {INode} node
  * @returns {Promise<void>}
  */
 export const updateNetworkStatus = (nodeInfo: NodeInfo | null): void => {

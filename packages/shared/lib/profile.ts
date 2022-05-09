@@ -14,13 +14,13 @@ import {
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
-import { AvailableExchangeRates } from './typings/currency'
-import { getOfficialNetworkConfig } from './network'
-import { NetworkConfig, NetworkProtocol, NetworkType } from './typings/network'
+import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
+import {} from './typings/network'
 import { ValuesOf } from './typings/utils'
 import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/walletAccount'
 import { Locale } from '@core/i18n'
+import { AvailableExchangeRates } from './typings/currency'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -229,7 +229,7 @@ export const removeProfile = (id: string): void => {
 // TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
 export const updateProfile = (
     path: string,
-    value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<NetworkConfig>
+    value: ValuesOf<Profile> | ValuesOf<UserSettings> | ValuesOf<INetworkConfig>
 ): void => {
     const _update = (_profile) => {
         if (path === '') {

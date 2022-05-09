@@ -98,7 +98,7 @@ describe('File: api.test.ts', () => {
     describe('Function: createStardustAccount', () => {
         it('should call createStardustAccount', async () => {
             spy = jest.spyOn(profileManagerMock, 'createAccount')
-            const payload = { alias: 'alias' }
+            const payload = { alias: 'alias', coinType: 4219 }
             const account = await createStardustAccount(payload)
             expect(account).toEqual(new AccountMock())
             expect(spy).toBeCalledTimes(1)

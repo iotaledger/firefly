@@ -367,6 +367,7 @@ function updateAllMessagesState(
     return confirmationHasChanged
 }
 
+// TODO: Remove from this file
 /**
  * Displays participation (stake/unstake) notification
  *

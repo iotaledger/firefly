@@ -56,7 +56,7 @@ import {
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum,
 } from '@lib/typings/wallet'
-import { ClientOptions } from '@lib/typings/client'
+import { ClientOptions } from '@lib/network/types'
 import { NodeAuth } from '@lib/typings/node'
 
 // Participation (staking, voting)

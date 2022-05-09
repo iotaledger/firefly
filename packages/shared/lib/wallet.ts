@@ -17,7 +17,7 @@ import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { NodeAuth, NodeInfo } from './typings/node'
+import { IAuth, INodeInfo } from '@core/network'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
@@ -480,7 +480,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: IAuth): Promise<INodeInfo> => {
     if (!url || (!url && !auth)) {
         const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
 
@@ -488,7 +488,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
         auth = node?.auth
     }
 
-    return new Promise<NodeInfo>((resolve, reject) => {
+    return new Promise<INodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)

@@ -1,9 +1,7 @@
 import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
-import { NetworkConfig, NetworkProtocol, NetworkType } from './network'
+import { INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { AccountStakingRewards } from '@lib/participation/types'
-import { AccountId, CreateAccountPayload, EventType, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '@lib/typings/account'
 
 export interface MigratedTransaction {
     address: string
@@ -40,7 +38,7 @@ export interface Profile {
 
 export interface UserSettings {
     currency: AvailableExchangeRates
-    networkConfig: NetworkConfig
+    networkConfig: INetworkConfig
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean

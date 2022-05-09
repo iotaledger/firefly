@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { Pane, AccountSummaryAndAssetsPane, AccountHistoryPane } from 'shared/components'
+    import { AccountSummaryAndAssetsPane, AccountHistoryPane, LineChartPane, BarChartPane } from 'shared/components'
     import { loggedIn, sendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
@@ -31,6 +31,7 @@
 
     const { accounts, accountsLoaded } = $wallet
 
+    // TODO: move to dashboard or lib
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
             openPopup({
@@ -41,11 +42,13 @@
         }
     }
 
+    // TODO: move to lib
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
+    // TODO: move to dashboard or lib if needed?
     $: if ($accountsLoaded) {
         // update profileType if it is missing
         if (!$activeProfile?.type) {
@@ -67,6 +70,7 @@
         }
     }
 
+    // TODO: move to error handling lib
     function onError(error?: any): void {
         if ($isLedgerProfile) {
             if (!LedgerErrorType[error.type]) {
@@ -81,6 +85,7 @@
     }
 
     onMount(() => {
+        // TODO: change so settings doesn't go back to wallet??
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
@@ -112,21 +117,10 @@
                 <AccountSummaryAndAssetsPane />
                 <AccountHistoryPane />
                 <div class=" flex flex-col space-y-4">
-                    <!-- // TODO: move these into pane components -->
-                    <Pane classes="w-full h-1/2">
-                        <!-- <LineChart /> -->
-                    </Pane>
-                    <Pane classes="w-full h-1/2">
-                        <!-- <BarChart /> -->
-                    </Pane>
+                    <LineChartPane />
+                    <BarChartPane />
                 </div>
             </div>
         {/key}
     </div>
 {/if}
-
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
