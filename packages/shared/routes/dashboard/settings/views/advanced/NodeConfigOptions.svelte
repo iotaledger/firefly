@@ -2,21 +2,19 @@
     import { HR, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
-    import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
+    import { getOfficialNodes, INetworkConfig, INode, updateClientOptions } from '@core/network'
     import { openPopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import { NetworkConfig } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
 
-    export let nodeContextMenu: Node = undefined
+    export let nodeContextMenu: INode
     export let contextPosition: {
         x: number
         y: number
     }
-    export let networkConfig: NetworkConfig
+    export let networkConfig: INetworkConfig
     export let ensureOnePrimaryNode: () => void
 
-    function handleSetPrimaryNode(node: Node) {
+    function handleSetPrimaryNode(node: INode): void {
         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: n.url === node.url }))
         nodeContextMenu = undefined
 
@@ -24,7 +22,7 @@
         updateProfile('settings.networkConfig', networkConfig)
     }
 
-    function handleViewNodeInfoClick(node: Node) {
+    function handleViewNodeInfoClick(node: INode): void {
         openPopup({
             type: 'nodeInfo',
             props: {
@@ -33,7 +31,7 @@
         })
     }
 
-    function handleEditNodeDetailsClick(node) {
+    function handleEditNodeDetailsClick(node: INode): void {
         openPopup({
             type: 'addNode',
             props: {
@@ -41,7 +39,7 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: Node, oldNodeUrl: string) => {
+                onSuccess: (_isNetworkSwitch: boolean, node: INode, oldNodeUrl: string) => {
                     const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
                     if (idx >= 0) {
                         if (node.isPrimary) {
@@ -63,7 +61,7 @@
         })
     }
 
-    function handleRemoveNodeClick(node: Node) {
+    function handleRemoveNodeClick(node: INode) {
         openPopup({
             type: 'removeNode',
             props: {
@@ -78,7 +76,7 @@
     }
 </script>
 
-<div
+<node-config-options
     class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
     use:clickOutside={{ includeScroll: true }}
     on:clickOutside={() => (nodeContextMenu = undefined)}
@@ -149,4 +147,4 @@
             <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
         </button>
     {/if}
-</div>
+</node-config-options>

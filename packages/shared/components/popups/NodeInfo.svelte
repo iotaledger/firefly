@@ -3,21 +3,21 @@
     import { get } from 'svelte/store'
     import { Button, Spinner, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
-    import { Node, NodeInfo } from 'shared/lib/typings/node'
+    import { INode, INodeInfo } from '@core/network'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { setClipboard } from 'shared/lib/utils'
-    import { cleanNodeAuth } from 'shared/lib/network'
+    import { cleanAuth } from '@core/network/utils'
 
     export let locale: Locale
-    export let node: Node = { url: '' }
+    export let node: INode = { url: '' }
 
     let nodeContent = ''
 
     onMount(() => {
         const accounts = get($wallet.accounts)
-        asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanNodeAuth(node?.auth))
+        asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanAuth(node?.auth))
             .then((nodeInfo) => {
                 nodeContent = combineNodeInfo(node?.url, nodeInfo)
             })
@@ -30,7 +30,7 @@
             })
     })
 
-    const combineNodeInfo = (nodeUrl: string, nodeInfo: NodeInfo): string => {
+    const combineNodeInfo = (nodeUrl: string, nodeInfo: INodeInfo): string => {
         const usedKeys = [
             'name',
             'networkId',

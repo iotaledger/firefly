@@ -1,13 +1,12 @@
+import { BASE_TOKEN } from '@core/network'
 import { Unit } from '@iota/unit-converter'
-
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { activeProfile } from 'shared/lib/profile'
-import { Asset, BASE_TOKEN } from 'shared/lib/typings/assets'
+import { Asset } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 import { UNIT_MAP } from 'shared/lib/units'
 import { selectedAccount } from 'shared/lib/wallet'
 import { derived } from 'svelte/store'
-import { NetworkProtocol } from './typings/network'
 
 export const assets = derived(
     [exchangeRates, currencies, activeProfile, selectedAccount],

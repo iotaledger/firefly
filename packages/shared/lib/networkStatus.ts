@@ -1,10 +1,9 @@
 import { get, writable } from 'svelte/store'
-import { asyncGetNodeInfo, wallet } from './wallet'
-import { cleanNodeAuth, getOfficialNodes, isOfficialNetwork, updateClientOptions } from './network'
+import { asyncGetNodeInfo } from './wallet'
+import { cleanAuth, INode, NodePlugin, isOfficialNetwork } from '@core/network'
 import { NetworkStatus } from './typings/network'
 import { NetworkStatusHealthText } from './typings/network'
 import { activeProfile } from './profile'
-import { Node, NodePlugin } from './typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from './time'
 
 export const NETWORK_HEALTH_COLORS = {
@@ -93,17 +92,15 @@ async function pollNetworkStatusInternal(): Promise<void> {
  * Query the network and update the store for its status.
  *
  * @method updateNetworkStatus
- *
  * @param {string} accountId
- * @param {Node} node
- *
+ * @param {INode} node
  * @returns {Promise<void>}
  */
-export const updateNetworkStatus = async (accountId: string, node: Node): Promise<void> => {
+export const updateNetworkStatus = async (accountId: string, node: INode): Promise<void> => {
     if (!accountId || !node) return
 
     if (node || isOfficialNetwork(get(activeProfile)?.settings.networkConfig.network.type)) {
-        const response = await asyncGetNodeInfo(accountId, node?.url, cleanNodeAuth(node?.auth))
+        const response = await asyncGetNodeInfo(accountId, node?.url, cleanAuth(node?.auth))
         const timeSinceLastMsInMinutes =
             (Date.now() - response.nodeinfo.latestMilestoneTimestamp * MILLISECONDS_PER_SECOND) /
             (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)

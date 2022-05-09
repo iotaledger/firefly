@@ -7,15 +7,15 @@
         getOfficialNetworkConfig,
         isOfficialNetwork,
         updateClientOptions,
-    } from 'shared/lib/network'
+    } from '@core/network'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
+    import { NetworkStatusHealthText } from 'shared/lib/typings/network'
+    import { INode, INetworkConfig, NetworkType } from '@core/network'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
-    let networkConfig: NetworkConfig =
+    let networkConfig: INetworkConfig =
         $activeProfile?.settings.networkConfig ||
         getOfficialNetworkConfig($activeProfile.networkProtocol, $activeProfile.networkType)
 
@@ -34,7 +34,7 @@
     $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
 
     let contextPosition = { x: 0, y: 0 }
-    let nodeContextMenu: Node = undefined
+    let nodeContextMenu: INode
     let nodesContainer
 
     function handleIncludeOfficialNodesClick() {
@@ -56,7 +56,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: Node, _oldNodeUrl: string) => {
+                onSuccess: (_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string) => {
                     if (node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
