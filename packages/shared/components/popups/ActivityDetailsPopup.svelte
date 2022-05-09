@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getOfficialExplorer } from '@core/network/utils'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
     import { getMilestoneMessageValue, isParticipationPayload, wallet } from 'shared/lib/wallet'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -15,7 +15,7 @@
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
     const { accounts } = $wallet
-    const explorerLink = getOfficialExplorer($activeProfile.networkProtocol, $activeProfile.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile.networkProtocol, $activeProfile.networkType)
 
     let type: ActivityType
     $: {
@@ -80,7 +80,7 @@
         classes="w-full"
         secondary
         autofocus={false}
-        onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
+        onClick={() => Platform.openUrl(`${explorerUrl}/message/${id}`)}
     >
         <Text bigger color="blue-500">{localize('general.viewOnExplorer')}</Text>
     </Button>

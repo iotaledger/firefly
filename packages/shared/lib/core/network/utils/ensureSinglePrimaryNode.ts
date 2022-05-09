@@ -9,7 +9,7 @@ import { setRandomPrimaryNode } from './setRandomPrimaryNode'
  * @returns {INode[]}
  */
 export function ensureSinglePrimaryNode(nodes: INode[]): INode[] {
-    if (!nodes || !nodes.length) return nodes
+    if (!nodes || !nodes.length) return []
 
     const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
     if (numPrimaryNodes === 0) {
