@@ -91,7 +91,6 @@
 
     async function loadAccounts(): Promise<void> {
         const loadedAccounts = await asyncGetAccounts()
-        accountsLoaded.set(true)
 
         try {
             if (loadedAccounts.length <= 0) {
@@ -103,6 +102,7 @@
                 }
             } else {
                 await processLoadedAccounts(loadedAccounts)
+                accountsLoaded.set(true)
                 initializeAccountSyncingQueue()
             }
         } catch (err) {
