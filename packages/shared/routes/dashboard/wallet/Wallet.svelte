@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { Pane, AccountSummaryAndAssetsPane, AccountHistoryPane } from 'shared/components'
+    import { AccountSummaryAndAssetsPane, AccountHistoryPane, LineChartPane, BarChartPane } from 'shared/components'
     import { loggedIn, sendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
@@ -112,21 +112,10 @@
                 <AccountSummaryAndAssetsPane />
                 <AccountHistoryPane />
                 <div class=" flex flex-col space-y-4">
-                    <!-- // TODO: move these into pane components -->
-                    <Pane classes="w-full h-1/2">
-                        <!-- <LineChart /> -->
-                    </Pane>
-                    <Pane classes="w-full h-1/2">
-                        <!-- <BarChart /> -->
-                    </Pane>
+                    <LineChartPane />
+                    <BarChartPane />
                 </div>
             </div>
         {/key}
     </div>
 {/if}
-
-<style type="text/scss">
-    :global(body.platform-win32) .wallet-wrapper {
-        @apply pt-0;
-    }
-</style>
