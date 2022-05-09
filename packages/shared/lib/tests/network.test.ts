@@ -425,7 +425,7 @@ describe('File: network.ts', () => {
         })
         it('should handle empty or invalid node arrays', () => {
             expect(ensureSinglePrimaryNode([])).toEqual([])
-            expect(ensureSinglePrimaryNode(undefined)).toBeUndefined()
+            expect(ensureSinglePrimaryNode(undefined)).toEqual([])
         })
         it('should ensure ONLY one primary node exists', () => {
             const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n) => ({ ...n, isPrimary: true }))
