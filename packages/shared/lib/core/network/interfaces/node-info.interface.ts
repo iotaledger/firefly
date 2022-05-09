@@ -1,20 +1,6 @@
-import { Network } from './network'
+import { NodePlugin } from '../enums'
 
-export interface NodeAuth {
-    jwt?: string
-    username?: string
-    password?: string
-}
-
-export interface Node {
-    url: string
-    auth?: NodeAuth
-    network?: Network
-    isPrimary?: boolean
-    isDisabled?: boolean
-}
-
-export interface NodeInfo {
+export interface INodeInfo {
     nodeinfo: {
         name: string
         version: string
@@ -32,9 +18,4 @@ export interface NodeInfo {
         referencedRate: number
     }
     url: string
-}
-
-export enum NodePlugin {
-    Participation = 'Participation',
-    ProofOfWork = 'PoW',
 }

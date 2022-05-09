@@ -1,22 +1,30 @@
 import {
     checkNodeUrlValidity,
-    cleanNodeAuth,
+    cleanAuth,
     ensureSinglePrimaryNode,
     getDefaultClientOptions,
-    getNetworkById,
+    getNetwork,
     getNodeCandidates,
     getOfficialNetwork,
     getOfficialNodes,
-    isNodeAuthValid,
+    IAuth,
+    IClientOptions,
+    INetwork,
+    INetworkConfig,
+    INode,
+    isAuthValid,
     isOfficialNetwork,
-} from '../network'
-import { Network, NetworkConfig, NetworkProtocol, NetworkType } from '../typings/network'
-import { ClientOptions } from '../typings/client'
-import { Node, NodeAuth } from '../typings/node'
-import { BASE_TOKEN } from '../typings/assets'
+    NetworkType,
+} from 'shared/lib/core/network'
+import { TokenMetadata } from 'shared/lib/typings/assets'
 
 describe('File: network.ts', () => {
-    function _buildNode(url: string, network: Network, isPrimary: boolean = false, isDisabled: boolean = false): Node {
+    function _buildNode(
+        url: string,
+        network: INetwork,
+        isPrimary: boolean = false,
+        isDisabled: boolean = false
+    ): INode {
         return {
             url,
             network,
@@ -27,13 +35,41 @@ describe('File: network.ts', () => {
     }
 
     function _buildNodes(networkProtocol: NetworkProtocol, networkType: NetworkType) {
-        return OFFICIAL_NODE_URLS[networkProtocol][networkType].map((url) =>
-            _buildNode(url, NETWORK[networkProtocol][networkType])
+        return (
+            OFFICIAL_NODE_URLS?.[networkProtocol]?.[networkType]?.map((url) =>
+                _buildNode(url, NETWORK[networkProtocol][networkType])
+            ) ?? []
         )
     }
 
-    const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: Network } }> = {
-        [NetworkProtocol.IOTA]: {
+    enum NetworkProtocol {
+        IOTA = 'iota',
+        Shimmer = 'shimmer',
+    }
+
+    const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: TokenMetadata }> = {
+        iota: {
+            name: 'IOTA',
+            tickerSymbol: 'MIOTA',
+            unit: 'i',
+            decimals: 0,
+            subunit: null,
+            useMetricPrefix: true,
+            primaryColor: '#6E82A4',
+        },
+        shimmer: {
+            name: 'Shimmer',
+            tickerSymbol: 'SMR',
+            unit: 'SMR',
+            decimals: 6,
+            subunit: 'glow',
+            useMetricPrefix: false,
+            primaryColor: '#25DFCA',
+        },
+    }
+
+    const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
+        iota: {
             [NetworkType.Mainnet]: {
                 id: 'chrysalis-mainnet',
                 name: 'Chrysalis Mainnet',
@@ -50,13 +86,13 @@ describe('File: network.ts', () => {
                 bech32Hrp: 'atoi',
                 baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
             },
-            [NetworkType.PrivateNet]: <Network>{
+            [NetworkType.PrivateNet]: <INetwork>{
                 name: 'Private Net',
                 protocol: NetworkProtocol.IOTA,
-                type: NetworkType.Devnet,
+                type: NetworkType.PrivateNet,
             },
         },
-        [NetworkProtocol.Shimmer]: {
+        shimmer: {
             [NetworkType.Mainnet]: {
                 id: 'shimmer-mainnet',
                 name: 'Shimmer Mainnet',
@@ -73,7 +109,7 @@ describe('File: network.ts', () => {
                 bech32Hrp: 'rms',
                 baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
             },
-            [NetworkType.PrivateNet]: <Network>{
+            [NetworkType.PrivateNet]: <INetwork>{
                 name: 'Private Net',
                 protocol: NetworkProtocol.Shimmer,
                 type: NetworkType.PrivateNet,
@@ -99,7 +135,7 @@ describe('File: network.ts', () => {
         },
     }
 
-    const CONFIG: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: NetworkConfig } }> = {
+    const CONFIG: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: INetworkConfig } }> = {
         [NetworkProtocol.IOTA]: {
             [NetworkType.Mainnet]: {
                 network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
@@ -115,16 +151,16 @@ describe('File: network.ts', () => {
                 automaticNodeSelection: false,
                 localPow: true,
             },
-            [NetworkType.PrivateNet]: <NetworkConfig>{},
+            [NetworkType.PrivateNet]: <INetworkConfig>{},
         },
         [NetworkProtocol.Shimmer]: {
-            [NetworkType.Mainnet]: <NetworkConfig>{},
-            [NetworkType.Devnet]: <NetworkConfig>{},
-            [NetworkType.PrivateNet]: <NetworkConfig>{},
+            [NetworkType.Mainnet]: <INetworkConfig>{},
+            [NetworkType.Devnet]: <INetworkConfig>{},
+            [NetworkType.PrivateNet]: <INetworkConfig>{},
         },
     }
 
-    const NODES: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: Node[] } }> = {
+    const NODES: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: INode[] } }> = {
         [NetworkProtocol.IOTA]: {
             [NetworkType.Mainnet]: _buildNodes(NetworkProtocol.IOTA, NetworkType.Mainnet),
             [NetworkType.Devnet]: _buildNodes(NetworkProtocol.IOTA, NetworkType.Devnet),
@@ -138,11 +174,11 @@ describe('File: network.ts', () => {
     }
 
     const EMPTY_NODE_AUTH = { username: '', password: '' }
-    const FAKE_NODE_AUTH = <NodeAuth>{
+    const FAKE_NODE_AUTH = <IAuth>{
         username: 'theUser',
         password: 'mY-rEaLlY-sEcUrE-pAsSwOrD',
     }
-    const FAKE_NODE_AUTH_JWT = <NodeAuth>{
+    const FAKE_NODE_AUTH_JWT = <IAuth>{
         jwt: 'SOME JWT',
         username: 'theUser',
         password: 'mY-rEaLlY-sEcUrE-pAsSwOrD',
@@ -151,14 +187,14 @@ describe('File: network.ts', () => {
     describe('Function: getClientOptions', () => {
         it('should return the client options of the active profile if present', () => {
             const clientOpts = getDefaultClientOptions(NetworkProtocol.IOTA)
-            expect(clientOpts).toEqual(<ClientOptions>{
+            expect(clientOpts).toEqual(<IClientOptions>{
                 network: 'chrysalis-mainnet',
                 automaticNodeSelection: true,
                 includeOfficialNodes: true,
                 localPow: true,
                 node: _buildNode(
-                    OFFICIAL_NODE_URLS[(NetworkProtocol.IOTA, NetworkType.Mainnet)][0],
-                    NETWORK[(NetworkProtocol.IOTA, NetworkType.Mainnet)],
+                    OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0],
+                    NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
                     true,
                     false
                 ),
@@ -192,20 +228,19 @@ describe('File: network.ts', () => {
                 })
             })
         })
-        it('should return an empty network given an invalid network type', () => {
-            expect(getOfficialNetwork(undefined, undefined)).toEqual(<Network>{})
-        })
     })
 
     describe('Function: getOfficialNodes', () => {
         it('should return the correct official nodes given a valid network type', () => {
             Object.values(NetworkProtocol).forEach((networkProtocol) => {
                 Object.values(NetworkType).forEach((networkType) => {
-                    expect(getOfficialNodes(networkProtocol, networkType)).toEqual(
-                        OFFICIAL_NODE_URLS[networkProtocol][networkType].map((url) =>
-                            _buildNode(url, NETWORK[networkProtocol][networkType])
+                    if (networkType !== NetworkType.PrivateNet) {
+                        expect(getOfficialNodes(networkProtocol, networkType)).toEqual(
+                            OFFICIAL_NODE_URLS[networkProtocol][networkType].map((url) =>
+                                _buildNode(url, NETWORK[networkProtocol][networkType])
+                            )
                         )
-                    )
+                    }
                 })
             })
         })
@@ -229,12 +264,12 @@ describe('File: network.ts', () => {
         })
     })
 
-    describe('Function: getNetworkById', () => {
+    describe('Function: getNetwork', () => {
         it('should return all metadata for official networks', () => {
             Object.values(NetworkProtocol).forEach((networkProtocol) => {
                 Object.values(NETWORK[networkProtocol]).forEach((network) => {
                     if (network.type !== NetworkType.PrivateNet) {
-                        expect(getNetworkById(networkProtocol, network.id)).toEqual(
+                        expect(getNetwork(networkProtocol, network.type)).toEqual(
                             NETWORK[networkProtocol][network.type]
                         )
                     }
@@ -242,39 +277,37 @@ describe('File: network.ts', () => {
             })
         })
         it('should return partial metadata for unofficial networks', () => {
-            expect(getNetworkById(NetworkProtocol.IOTA, 'another-tangle')).toEqual(<Network>{
+            expect(getNetwork(NetworkProtocol.IOTA, NetworkType.PrivateNet, 'another-tangle')).toEqual(<INetwork>{
                 id: 'another-tangle',
                 name: 'Private Net',
+                protocol: NetworkProtocol.IOTA,
                 type: NetworkType.PrivateNet,
             })
-        })
-        it('should return nothing given an invalid network ID', () => {
-            expect(getNetworkById(undefined, undefined)).toEqual(<Network>{})
         })
     })
 
     describe('Function: cleanNodeAuth', () => {
         it('should return an empty basic auth configuration given nothing', () => {
-            expect(cleanNodeAuth(<NodeAuth>{})).toEqual(EMPTY_NODE_AUTH)
-            expect(cleanNodeAuth(undefined)).toEqual(EMPTY_NODE_AUTH)
+            expect(cleanAuth(<IAuth>{})).toEqual(EMPTY_NODE_AUTH)
+            expect(cleanAuth(undefined)).toEqual(EMPTY_NODE_AUTH)
         })
         it('should return a basic auth configuration if given that', () => {
-            expect(cleanNodeAuth(FAKE_NODE_AUTH)).toEqual(FAKE_NODE_AUTH)
+            expect(cleanAuth(FAKE_NODE_AUTH)).toEqual(FAKE_NODE_AUTH)
         })
         it('should return the entire auth configuration if the JWT exists', () => {
-            expect(cleanNodeAuth(<NodeAuth>{ jwt: 'SOME JWT' })).toEqual(<NodeAuth>{ jwt: 'SOME JWT' })
-            expect(cleanNodeAuth(FAKE_NODE_AUTH_JWT)).toEqual(FAKE_NODE_AUTH_JWT)
+            expect(cleanAuth(<IAuth>{ jwt: 'SOME JWT' })).toEqual(<IAuth>{ jwt: 'SOME JWT' })
+            expect(cleanAuth(FAKE_NODE_AUTH_JWT)).toEqual(FAKE_NODE_AUTH_JWT)
         })
     })
 
-    describe('Function: isNodeAuthValid', () => {
+    describe('Function: isAuthValid', () => {
         it('should return correct result for any auth configuration', () => {
-            expect(isNodeAuthValid(<NodeAuth>{})).toBe(false)
-            expect(isNodeAuthValid(undefined)).toBe(false)
-            expect(isNodeAuthValid(EMPTY_NODE_AUTH)).toBe(false)
+            expect(isAuthValid(<IAuth>{})).toBe(false)
+            expect(isAuthValid(undefined)).toBe(false)
+            expect(isAuthValid(EMPTY_NODE_AUTH)).toBe(false)
 
-            expect(isNodeAuthValid(FAKE_NODE_AUTH)).toBe(true)
-            expect(isNodeAuthValid(FAKE_NODE_AUTH_JWT)).toBe(true)
+            expect(isAuthValid(FAKE_NODE_AUTH)).toBe(true)
+            expect(isAuthValid(FAKE_NODE_AUTH_JWT)).toBe(true)
         })
     })
 
@@ -342,7 +375,7 @@ describe('File: network.ts', () => {
             })
         })
         it('may return ONLY unofficial nodes OR both', () => {
-            const unofficialNodes: Node[] = [
+            const unofficialNodes: INode[] = [
                 { url: 'https://mainnet.tanglebay.com', network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet] },
                 {
                     url: 'https://other.mainnet.tanglebay.com',
@@ -376,7 +409,7 @@ describe('File: network.ts', () => {
     })
 
     describe('Function: ensureSinglePrimaryNode', () => {
-        const _hasOnePrimary = (nodes: Node[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
+        const _hasOnePrimary = (nodes: INode[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
 
         it('should maintain the primary node if it exists', () => {
             const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n, idx) => ({

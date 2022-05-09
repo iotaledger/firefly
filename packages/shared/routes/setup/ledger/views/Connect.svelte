@@ -8,13 +8,14 @@
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from 'shared/lib/ledger'
-    import { getDefaultClientOptions } from 'shared/lib/network'
+    import { getDefaultClientOptions } from '@core/network/utils'
     import { openPopup } from 'shared/lib/popup'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api, walletSetupType } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { activeProfile } from '@lib/profile'
 
     export let locale: Locale
 
@@ -53,7 +54,7 @@
 
         api.createAccount(
             {
-                clientOptions: getDefaultClientOptions(),
+                clientOptions: getDefaultClientOptions($activeProfile.networkProtocol),
                 alias: `${locale('general.account')} 1`,
                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
             },
