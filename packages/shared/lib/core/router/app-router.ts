@@ -7,7 +7,7 @@ import { get, writable } from 'svelte/store'
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
-import { NetworkType } from '@core/network/enums'
+import { NetworkType } from '@core/network'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
