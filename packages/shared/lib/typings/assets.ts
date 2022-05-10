@@ -1,7 +1,14 @@
-export enum Token {
-    IOTA = 'IOTA',
-    Assembly = 'Assembly',
-    Shimmer = 'Shimmer',
+import { NetworkProtocol } from '@core/network'
+
+export type TokenMetadata = {
+    name: string
+    tickerSymbol?: string
+    unit?: string
+    decimals?: number
+    subunit?: string | null
+    useMetricPrefix?: boolean
+    primaryColor?: string
+    secondaryColor?: string
 }
 
 export enum TickerSymbol {
@@ -21,19 +28,9 @@ export enum SubUnit {
 }
 
 export type Asset = {
-    name: Token | string
+    meta: TokenMetadata
     // balance: string
     rawBalance: number
     fiatPrice?: string
     fiatBalance?: string
-    color?: string
-}
-
-export type BaseToken = {
-    name: Token
-    tickerSymbol: TickerSymbol
-    unit: TokenUnit
-    decimals: number
-    subunit: SubUnit
-    useMetricPrefix: boolean
 }

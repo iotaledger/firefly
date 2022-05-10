@@ -1,9 +1,7 @@
 import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
-import { NetworkConfig } from './network'
+import { INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { AccountStakingRewards } from '@lib/participation/types'
-import { AccountId, CreateAccountPayload, EventType, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '@lib/typings/account'
 
 export interface MigratedTransaction {
     address: string
@@ -17,7 +15,11 @@ export interface Profile {
     id: string
     name: string
     type: ProfileType
-    protocol: ProfileProtocol
+    networkProtocol: NetworkProtocol
+    networkType: NetworkType
+    /**
+     * Time for most recent stronghold back up
+     */
     lastStrongholdBackupTime: Date | null
     settings: UserSettings
     hiddenAccounts?: string[]
@@ -36,7 +38,7 @@ export interface Profile {
 
 export interface UserSettings {
     currency: AvailableExchangeRates
-    networkConfig: NetworkConfig
+    networkConfig: INetworkConfig
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean
@@ -50,11 +52,9 @@ export enum ProfileType {
     LedgerSimulator = 'LedgerSimulator',
 }
 
-export enum ProfileProtocol {
-    Iota = 'iota',
-    Shimmer = 'shimmer',
-}
-
+/**
+ * Profile imports
+ */
 export enum ImportType {
     Seed = 'seed',
     Mnemonic = 'mnemonic',

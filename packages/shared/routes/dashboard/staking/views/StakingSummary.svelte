@@ -15,7 +15,7 @@
     } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
-    import { NodePlugin } from 'shared/lib/typings/node'
+    import { NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 

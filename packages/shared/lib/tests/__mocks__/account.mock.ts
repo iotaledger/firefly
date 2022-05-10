@@ -100,17 +100,14 @@ export class AccountMock implements StardustAccount {
     }
 
     sendTransfer(outputs, transferOptions): Promise<[]> {
-        console.log('sendTransfer called!')
         return Promise.resolve([])
     }
 
     tryCollectOutputs(outputsToCollect): Promise<[]> {
-        console.log('tryCollectOutputs called!')
         return Promise.resolve([])
     }
 
     setClientOptions(options): Promise<void> {
-        console.log('setClientOptions called!')
         return Promise.resolve()
     }
 }

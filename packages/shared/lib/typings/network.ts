@@ -1,46 +1,4 @@
-import { BaseToken } from './assets'
-import { Node, NodePlugin } from './node'
-
-export enum NetworkType {
-    ChrysalisMainnet = 'chrysalis-mainnet',
-    ChrysalisDevnet = 'chrysalis-devnet',
-    ShimmerMainnet = 'shimmer-mainnet',
-    ShimmerDevnet = 'shimmer-devnet',
-    PrivateNet = 'private-net',
-}
-
-/**
- * The specific ID of an IOTA network or Tangle.
- */
-export type NetworkId = string
-
-/**
- * Holds relevant data
- * necessary for interacting within the context
- * of a particular network.
- */
-export interface Network {
-    id: NetworkId
-    name: string
-    type: NetworkType
-    bech32Hrp: string
-    baseToken: BaseToken
-}
-
-/**
- * A subset of the client options offered in the
- * wallet.rs library. Each profile will hold
- * individual instances of these options.
- */
-export interface NetworkConfig {
-    nodes?: Node[]
-    network?: Network
-    automaticNodeSelection?: boolean
-    includeOfficialNodes?: boolean
-    localPow?: boolean
-    nodeSyncEnabled?: boolean
-    nodePoolUrls?: string[]
-}
+import { NodePlugin } from '@core/network'
 
 export type NetworkStatus = {
     messagesPerSecond?: number

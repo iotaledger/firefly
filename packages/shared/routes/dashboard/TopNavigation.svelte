@@ -4,7 +4,7 @@
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { WalletAccount } from '@lib/typings/walletAccount'
     import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
 

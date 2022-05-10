@@ -2,7 +2,7 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
-    import { Asset, Token } from 'shared/lib/typings/assets'
+    import { Asset } from 'shared/lib/typings/assets'
     import {
         getFormattedMinimumRewards,
         getTimeUntilMinimumAirdropReward,
@@ -18,7 +18,6 @@
         participationOverview,
         selectedAccountParticipationOverview,
         shimmerStakingEventState,
-        shimmerStakingRemainingTime,
         stakedAccounts,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
@@ -36,7 +35,7 @@
         body: string[]
     }
 
-    const airdrop = asset?.name === Token.Assembly ? StakingAirdrop.Assembly : StakingAirdrop.Shimmer
+    const airdrop = StakingAirdrop.Assembly
     const isAssembly = airdrop === StakingAirdrop.Assembly
     let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
@@ -50,11 +49,10 @@
     const FIAT_PLACEHOLDER = '---'
 
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
     $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
     $: hasStakingEnded = stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
-    $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
+    $: remainingTime = asset?.meta.name === 'Assembly' ? $assemblyStakingRemainingTime : 0
     $: {
         if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
             isBelowMinimumRewards = false
@@ -136,18 +134,18 @@
 </script>
 
 <button
-    style="--asset-color: {asset?.color}"
+    style="--asset-color: {asset?.meta.primaryColor}"
     class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl airdrop"
     class:darkmode={isDarkModeEnabled}
     on:click={handleTileClick}
 >
     <div class="flex flex-row items-center space-x-4">
         <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-            <Icon classes="text-gray-900" icon={asset?.name?.toLocaleLowerCase()} height="100%" width="100%" />
+            <Icon classes="text-gray-900" icon={asset?.meta.name?.toLocaleLowerCase()} height="100%" width="100%" />
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-left">
             <div class="flex flex-row items-center space-x-1">
-                <Text classes="font-semibold">{asset?.name}</Text>
+                <Text classes="font-semibold">{asset?.meta.name}</Text>
                 {#if showWarningState && tooltipText?.body.length > 0}
                     <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                         <Icon

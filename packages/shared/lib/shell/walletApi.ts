@@ -14,7 +14,7 @@ import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
-import { NodePlugin } from '../typings/node'
+import { NodePlugin } from '@core/network'
 import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
 
