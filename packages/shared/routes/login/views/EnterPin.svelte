@@ -105,18 +105,20 @@
                         return Platform.getMachineId().then((machineId) =>
                             getProfileDataPath(profile.id).then((path) => {
                                 initialise(profile.id, path, sendCrashReports, machineId)
-                                api.setStoragePassword(pinCode, {
-                                    onSuccess() {
-                                        dispatch('next')
-                                    },
-                                    onError(err) {
-                                        isBusy = false
-                                        showAppNotification({
-                                            type: 'error',
-                                            message: locale(err.error),
-                                        })
-                                    },
-                                })
+                                // TODO: set storage password with profile manager api
+                                // api.setStoragePassword(pinCode, {
+                                //     onSuccess() {
+                                //         dispatch('next')
+                                //     },
+                                //     onError(err) {
+                                //         isBusy = false
+                                //         showAppNotification({
+                                //             type: 'error',
+                                //             message: locale(err.error),
+                                //         })
+                                //     },
+                                // })
+                                dispatch('next')
                             })
                         )
                     } else {

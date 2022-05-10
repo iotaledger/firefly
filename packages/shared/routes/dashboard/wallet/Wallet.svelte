@@ -84,7 +84,8 @@
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
-            removeEventListeners($activeProfile.id)
+            // TODO: Remove old api
+            // removeEventListeners($activeProfile.id)
 
             initialiseListeners()
 

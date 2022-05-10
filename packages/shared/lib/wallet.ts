@@ -142,7 +142,7 @@ export function initialise(id: string, storagePath: string, sendCrashReports: bo
     if (Object.keys(actors).length > 0) {
         console.error('Initialise called when another actor already initialised')
     }
-    actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
+    // actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
     // The new bindings
     const newProfileManager: ProfileManager = createAccountManager({
         storagePath,
