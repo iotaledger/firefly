@@ -4,8 +4,7 @@
 
     export let protocol = ''
 
-    const commonClasses =
-        'absolute -right-1 -bottom-1 rounded-full flex items-center justify-center border-3 border-solid border-white dark:border-gray-900'
+    const commonClasses = 'rounded-full border-3 border-solid border-white dark:border-gray-900'
 </script>
 
 {#if protocol === ProfileProtocol.Iota}

@@ -13,7 +13,12 @@
 </script>
 
 {#if network && protocol}
-    <div on:mouseenter={() => _showTooltip(true)} on:mouseleave={() => _showTooltip(false)} bind:this={tooltipAnchor}>
+    <div
+        on:mouseenter={() => _showTooltip(true)}
+        on:mouseleave={() => _showTooltip(false)}
+        bind:this={tooltipAnchor}
+        class="absolute -right-1 -bottom-1"
+    >
         <NetworkIcon {protocol} />
     </div>
     {#if showTooltip}
