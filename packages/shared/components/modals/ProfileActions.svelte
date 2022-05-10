@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
     import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
-    import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { LocaleArguments } from '@core/i18n/types'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
@@ -13,7 +12,7 @@
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { activeProfile, isSoftwareProfile, isLedgerProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout } from '@core/profile'
 
     export let modal: Modal
 

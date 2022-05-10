@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { lastActiveAt, logout } from 'shared/lib/app'
-    import { activeProfile } from '@core/profile'
+    import { lastActiveAt } from 'shared/lib/app'
+    import { activeProfile, logout } from '@core/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'

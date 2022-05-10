@@ -1,0 +1,40 @@
+import { resetRouters } from '@core/router'
+import { clearSendParams, lastActiveAt, loggedIn } from '@lib/app'
+import { stopPollingLedgerStatus } from '@lib/ledger'
+import { closePopup } from '@lib/popup'
+import { clearActiveProfile, isStrongholdLocked } from '@lib/profile'
+import { destroyManager } from '@lib/wallet'
+import { get } from 'svelte/store'
+import { activeProfile, isLedgerProfile, isSoftwareProfile } from '../stores'
+import { resetActiveProfile } from './resetActiveProfile'
+
+/**
+ * Logout from current profile
+ */
+export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
+    new Promise<void>((resolve) => {
+        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
+            // TODO: Lock stronghold on using profile manager
+            isStrongholdLocked.set(true)
+        } else if (get(isLedgerProfile)) {
+            stopPollingLedgerStatus()
+        }
+
+        const _activeProfile = get(activeProfile)
+        if (_activeProfile) {
+            destroyManager(_activeProfile.id)
+        }
+
+        // TODO: clean up the state management
+        lastActiveAt.set(new Date())
+        clearSendParams()
+        closePopup(true)
+        loggedIn.set(false)
+        if (_clearActiveProfile) {
+            clearActiveProfile()
+        }
+        resetActiveProfile()
+        resetRouters()
+
+        resolve()
+    })

@@ -87,64 +87,6 @@ export const login = (): void => {
 }
 
 /**
-
- * Logout from current profile
- */
-export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
-    new Promise<void>((resolve) => {
-        const _activeProfile = get(activeProfile)
-
-        const _cleanup = () => {
-            /**
-             * CAUTION: Be sure to make any necessary API calls before
-             * the event actor is destroyed!
-             */
-            if (_activeProfile) {
-                destroyManager(_activeProfile.id)
-            }
-
-            if (get(isSoftwareProfile)) {
-                isStrongholdLocked.set(true)
-            }
-            if (get(isLedgerProfile)) {
-                stopPollingLedgerStatus()
-            }
-
-            lastActiveAt.set(new Date())
-
-            clearSendParams()
-            closePopup(true)
-            loggedIn.set(false)
-            if (_clearActiveProfile) clearActiveProfile()
-            resetParticipation()
-            resetActiveProfile()
-            resetRouters()
-
-            resolve()
-        }
-
-        // no need to lock strong hold if we are logging out after deleting a profile
-        // or we are not using a software profile
-        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
-            api.lockStronghold({
-                onSuccess() {
-                    _cleanup()
-                },
-                onError(err) {
-                    _cleanup()
-
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                },
-            })
-        } else {
-            _cleanup()
-        }
-    })
-
-/**
  * The privacy policy packaged with the current version of Firefly
  */
 export const PRIVACY_POLICY_VERSION = 2

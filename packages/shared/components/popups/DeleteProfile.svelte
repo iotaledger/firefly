@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { Button, Password, Text } from 'shared/components'
-    import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, logout } from '@core/profile'
     import { appRouter } from '@core/router'
     import { setStrongholdPassword, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
