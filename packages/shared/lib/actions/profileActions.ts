@@ -1,3 +1,4 @@
+import { activeProfile } from '@core/profile'
 import { accountRouter } from '@core/router'
 import { openPopup } from '@lib/popup'
 import { isSoftwareProfile } from '@lib/profile'
@@ -12,7 +13,6 @@ import {
     profileManager,
     setSelectedAccount,
     updateBalanceOverview,
-    wallet,
 } from '@lib/wallet'
 import { get } from 'svelte/store'
 
@@ -24,7 +24,7 @@ export async function getAccounts(): Promise<StardustAccount[]> {
 
 export async function loadAccounts(): Promise<void> {
     try {
-        const { accountsLoaded, accounts } = get(wallet)
+        const { accountsLoaded, accounts } = get(activeProfile)
         const accountsResponse = await getAccounts()
         if (accountsResponse) {
             if (accountsResponse.length === 0) {

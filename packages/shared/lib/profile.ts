@@ -12,7 +12,7 @@ import {
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { ProfileType, IPersistedProfile, IProfileSettings } from '@core/profile'
+import { ProfileType, IPersistedProfile, IProfileSettings, activeProfile, IProfile } from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { ValuesOf } from './typings/utils'
@@ -34,11 +34,6 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 export const newProfile = writable<IPersistedProfile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
 export const hasEverOpenedProfileModal = writable<boolean>(false)
-
-export const activeProfile: Readable<IPersistedProfile | undefined> = derived(
-    [profiles, newProfile, activeProfileId],
-    ([$profiles, $newProfile, $activeProfileId]) => $newProfile || $profiles.find((p) => p.id === $activeProfileId)
-)
 
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
@@ -108,7 +103,6 @@ const buildProfile = (
             timeframe: HistoryDataProps.SEVEN_DAYS,
         },
     },
-    accounts: [],
 })
 
 /**
@@ -379,20 +373,20 @@ export const hasNoProfiles = (): boolean => get(profiles).length === 0
  *
  * @returns {ProfileAccount[]}
  */
-const getUpdatedAccounts = (
+function getUpdatedAccounts(
     activeProfile: IPersistedProfile,
     accountId: string,
     profileAccount: ProfileAccount
-): ProfileAccount[] => {
-    const { accounts } = activeProfile
+): ProfileAccount[] {
+    // const { accounts } = activeProfile
 
-    if (accounts?.length) {
-        if (accounts?.find((account) => account.id === accountId)) {
-            return accounts.map((account) => (account.id === accountId ? profileAccount : account))
-        } else {
-            return [...accounts, profileAccount]
-        }
-    }
+    // if (accounts?.length) {
+    //     if (accounts?.find((account) => account.id === accountId)) {
+    //         return accounts.map((account) => (account.id === accountId ? profileAccount : account))
+    //     } else {
+    //         return [...accounts, profileAccount]
+    //     }
+    // }
 
     return [profileAccount]
 }
@@ -424,11 +418,12 @@ export const setProfileAccount = (activeProfile: IPersistedProfile, profileAccou
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: IPersistedProfile, accountId: string): string | AccountColors => {
+export const getColor = (activeProfile: IProfile, accountId: string): string | AccountColors => {
     const { accounts } = activeProfile || {}
+    const _accounts = get(accounts)
 
-    if (accounts?.length) {
-        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
+    if (_accounts?.length) {
+        const foundAccountColor = _accounts.find((account) => account.id === accountId)?.color
         if (foundAccountColor) return foundAccountColor
     }
 

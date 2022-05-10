@@ -15,6 +15,6 @@ export interface IPersistedProfile {
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountId?: string
-    accounts?: IAccountMetadata[]
+    accountMetadata?: IAccountMetadata[]
     hasFinishedSingleAccountGuide?: boolean
 }

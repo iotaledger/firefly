@@ -6,12 +6,13 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
     import { tryCreateAccount } from '@lib/actions/profileActions'
+    import { activeProfile } from '@core/profile'
 
     export let error = ''
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let accountAlias = ''
     let isBusy = false

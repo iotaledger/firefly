@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { truncateString } from 'shared/lib/helpers'
-    import { activeProfile } from '@lib/profile'
-    import { selectedAccount, wallet } from '@lib/wallet'
+    import { activeProfile } from '@core/profile'
+    import { selectedAccount } from '@lib/wallet'
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { Modal, AccountLabel, Text } from 'shared/components'
     import { fade } from 'svelte/transition'
@@ -10,7 +10,7 @@
     export let searchValue: string
     export let selected: WalletAccount
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     $: otherAccounts = $accounts.filter((account) => account.id !== $selectedAccount.id)
     $: filteredAccounts = otherAccounts.filter(

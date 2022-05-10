@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
-import { activeProfile } from '@lib/profile'
+import { activeProfile } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { createAccount, setStoragePassword, storeMnemonic, verifyMnemonic, walletSetupType } from '@lib/wallet'
 

@@ -4,7 +4,7 @@ import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { activeProfile } from '@core/profile'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,

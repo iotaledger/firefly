@@ -2,16 +2,17 @@
     import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { getColor, setProfileAccount } from 'shared/lib/profile'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { activeProfile } from '@core/profile'
 
     export let alias
     export let account
     export let error = ''
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let accountAlias = alias
     let isBusy = false

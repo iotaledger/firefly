@@ -3,12 +3,12 @@ import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { networkStatus } from '@core/network'
-import { activeProfile, updateProfile } from '../profile'
+import { activeProfile } from '@core/profile'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/walletAccount'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
-import { selectedAccount, wallet } from '../wallet'
+import { selectedAccount } from '../wallet'
 
 import {
     ASSEMBLY_EVENT_ID,
@@ -553,7 +553,7 @@ async function fetchStakingResult(
 // function getAccountStakingRewards(): AccountStakingRewards[] {
 //     const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
 //     if (cachedStakingRewards.length === 0) {
-//         return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
+//         return get(get(activeProfile).accounts).map((account) => ({ accountId: account.id }))
 //     } else {
 //         return cachedStakingRewards
 //     }
@@ -614,7 +614,7 @@ function updateStakingRewardsForAccount(
     airdrop: StakingAirdrop,
     periodNumber: number
 ): AccountStakingRewards {
-    const account = get(get(wallet).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
+    const account = get(get(activeProfile).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
     if (!account) return previousAccountStakingRewards
 
     const period = getStakingPeriodForAccount(account, stakingResult, periodNumber)

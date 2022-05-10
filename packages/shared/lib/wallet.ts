@@ -9,7 +9,7 @@ import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { activeProfile, isLedgerProfile, updateProfile } from './profile'
+import { isLedgerProfile, updateProfile } from './profile'
 import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
 import { SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
 import { Address } from './typings/address'
@@ -18,9 +18,9 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { IAuth, INodeInfo } from '@core/network'
-import { ProfileType } from '@core/profile'
+import { IBalanceOverview, ProfileType } from '@core/profile'
 import { SetupType } from './typings/setup'
-import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
+import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
@@ -29,6 +29,7 @@ import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
 import { ProfileManager } from './typings/profileManager'
+import { activeProfile } from '@core/profile'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
 
@@ -69,28 +70,8 @@ interface ActorState {
 /** Active actors state */
 const actors: ActorState = {}
 
-export const wallet = writable<WalletState>({
-    balanceOverview: writable<BalanceOverview>({
-        incoming: '0 Mi',
-        incomingRaw: 0,
-        outgoing: '0 Mi',
-        outgoingRaw: 0,
-        balance: '0 Mi',
-        balanceRaw: 0,
-        balanceFiat: '$ 0.00',
-    }),
-    accounts: writable<WalletAccount[]>([]),
-    accountsLoaded: writable<boolean>(false),
-    internalTransfersInProgress: writable<{
-        [key: string]: {
-            from: string
-            to: string
-        }
-    }>({}),
-})
-
 export const resetWallet = (): void => {
-    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
+    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(activeProfile)
     balanceOverview.set({
         incoming: '0 Mi',
         incomingRaw: 0,
@@ -119,7 +100,7 @@ export const resetWallet = (): void => {
 // Use it to detected switches on selectedAccount
 export const selectedAccountId = writable<string | null>(null)
 
-export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
+export const selectedAccount = derived([selectedAccountId, get(activeProfile).accounts], ([$selectedAccountId, $accounts]) =>
     $accounts.find((acc) => acc.id === $selectedAccountId)
 )
 export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
@@ -344,7 +325,7 @@ export async function createStardustAccount(payload: CreateAccountPayload): Prom
 }
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
-    const accounts = get(get(wallet)?.accounts)
+    const accounts = get(get(activeProfile)?.accounts)
     try {
         const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
@@ -359,7 +340,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
             outgoing: 0,
             depositAddress,
         })
-        get(wallet)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+        get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
         setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
         return preparedAccount
@@ -390,7 +371,7 @@ export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
                  * removed in the Firefly store. This is "inefficient" (esp. for batch deletes) but it
                  * at least ensures data integrity / consistency between Firefly and the backend.
                  */
-                get(wallet).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
+                get(activeProfile).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
 
                 resolve()
             },
@@ -467,7 +448,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
                 const meta = await getAccountMeta(account.id)
                 const startdustAccount = await get(profileManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
-                get(wallet)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
+                get(activeProfile)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
                 updateProfile(
                     'hiddenAccounts',
                     (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
@@ -570,7 +551,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  * @returns {void}
  */
 export const saveNewMessage = (accountId: string, message: Message): void => {
-    const { accounts } = get(wallet)
+    const { accounts } = get(activeProfile)
 
     const messageIncoming = getIncomingFlag(message.payload)
 
@@ -601,7 +582,7 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {void}
  */
 export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
-    const { accounts } = get(wallet)
+    const { accounts } = get(activeProfile)
 
     const messageIncoming = getIncomingFlag(newMessage.payload)
 
@@ -672,12 +653,12 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
  * @returns {void}
  */
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
-    const { balanceOverview } = get(wallet)
+    const { balanceOverview } = get(activeProfile)
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
     balanceOverview.update((overview) =>
-        Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
+        Object.assign<IBalanceOverview, IBalanceOverview, Partial<IBalanceOverview>>({} as IBalanceOverview, overview, {
             incoming: formatUnitBestMatch(incoming, true, 3),
             incomingRaw: incoming,
             outgoing: formatUnitBestMatch(outgoing, true, 3),
@@ -699,7 +680,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
  * @returns {void}
  */
 export const refreshBalanceOverview = (): void => {
-    const { balanceOverview } = get(wallet)
+    const { balanceOverview } = get(activeProfile)
     const bo = get(balanceOverview)
     updateBalanceOverview(bo.balanceRaw, bo.incomingRaw, bo.outgoingRaw)
 }
@@ -714,7 +695,7 @@ export const refreshBalanceOverview = (): void => {
  * @returns {void}
  */
 export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<void> {
-    const { accounts } = get(wallet)
+    const { accounts } = get(activeProfile)
 
     const existingAccountIds = get(accounts).map((account) => account.id)
 
@@ -791,7 +772,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
 
             completeCount++
             if (completeCount === newAccounts.length) {
-                const { balanceOverview } = get(wallet)
+                const { balanceOverview } = get(activeProfile)
                 const overview = get(balanceOverview)
 
                 accounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
@@ -816,7 +797,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
  * @returns {void}
  */
 export const updateAccountsBalanceEquiv = (): void => {
-    const { accounts } = get(wallet)
+    const { accounts } = get(activeProfile)
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
@@ -967,7 +948,7 @@ export const prepareAccountInfo = (
 }
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
-    // const { accounts } = get(wallet)
+    // const { accounts } = get(activeProfile)
     // messages.forEach((message: Message) => {
     //     if (message.payload?.type === 'Milestone') {
     //         const account = get(accounts).find((account) => account.id === accountId)
@@ -1169,7 +1150,7 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
     if (!address) {
         return
     }
-    const accounts = get(get(wallet).accounts)
+    const accounts = get(get(activeProfile).accounts)
     return accounts.find((acc) => acc.depositAddress === address)
 }
 
@@ -1186,7 +1167,7 @@ export const findAccountWithAnyAddress = (
     if (!addresses || addresses.length === 0) {
         return
     }
-    const accounts = get(get(wallet).accounts)
+    const accounts = get(get(activeProfile).accounts)
 
     let res = accounts.filter((acc) => addresses.includes(acc.depositAddress))
 

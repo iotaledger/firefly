@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
+    import { activeProfile } from '@core/profile'
     import { appSettings } from 'shared/lib/appSettings'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
 
-    const { accountsLoaded } = $wallet
+    const { accountsLoaded } = $activeProfile
 
     $: showingDashboard = $appRoute === AppRoute.Dashboard && $accountsLoaded && $popupState.type !== 'busy'
     $: showingSettings = $dashboardRoute === DashboardRoute.Settings

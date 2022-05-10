@@ -1,9 +1,8 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import { NodePlugin } from '@core/network'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId, wallet } from '../wallet'
+import { selectedAccount, selectedAccountId } from '../wallet'
 import { WalletAccount } from '../typings/walletAccount'
-
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     AccountParticipationOverview,
@@ -17,7 +16,7 @@ import {
 } from './types'
 import { INetworkStatus, networkStatus } from '@core/network'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
-import { activeProfile } from '@lib/profile'
+import { activeProfile } from '@core/profile'
 
 /**
  * The store for keeping track of pending participations.
@@ -63,7 +62,7 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
          * be derived, but doing so results in a "cannot
          * access _ before initialization" error.
          */
-        const accounts = get(wallet).accounts
+        const accounts = get(activeProfile).accounts
         if (!get(accounts)) return []
         else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.meta.index))
     }

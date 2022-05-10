@@ -11,17 +11,20 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from '@lib/profile'
+    import { isLedgerProfile, updateProfile } from '@lib/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Locale } from '@core/i18n'
-    import { setSelectedAccount, wallet } from 'shared/lib/wallet'
+    import { setSelectedAccount } from 'shared/lib/wallet'
     import TopNavigation from './TopNavigation.svelte'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { loadAccounts } from '@lib/actions/profileActions'
+    import { activeProfile, loadPersistedProfileIntoActiveProfile, persistedProfile } from '@core/profile'
 
     export let locale: Locale
 
-    const { accountsLoaded, accounts } = $wallet
+    $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
+
+    const { accountsLoaded, accounts } = $activeProfile
 
     const tabs = {
         wallet: Wallet,

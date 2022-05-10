@@ -4,16 +4,17 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { activeProfile } from '@core/profile'
 
     export let modal: Modal
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []

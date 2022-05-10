@@ -31,22 +31,23 @@
         StakingAirdrop,
     } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { doesNodeHavePlugin, NodePlugin } from '@core/network'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccount, transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
+    import { activeProfile } from '@core/profile'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
-    let { accounts } = $wallet
+    let { accounts } = $activeProfile
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)

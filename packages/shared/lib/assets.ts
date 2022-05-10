@@ -1,7 +1,7 @@
 import { BASE_TOKEN } from '@core/network'
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
-import { activeProfile } from 'shared/lib/profile'
+import { activeProfile } from '@core/profile'
 import { Asset } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 import { UNIT_MAP } from 'shared/lib/units'

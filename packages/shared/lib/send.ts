@@ -1,4 +1,4 @@
-import { api, isTransferring, transferState, wallet } from './wallet'
+import { api, isTransferring, transferState } from './wallet'
 import { checkStronghold } from '@lib/stronghold'
 import { deepCopy } from '@lib/helpers'
 import { Message, Transaction } from 'shared/lib/typings/message'
@@ -10,9 +10,10 @@ import { localize } from '@core/i18n'
 import { openPopup } from './popup'
 import { get } from 'svelte/store'
 import { isSoftwareProfile } from './profile'
+import { activeProfile } from '@core/profile'
 
 export function sendExternalTransaction(senderAccountId: string, receiveAddress: string, amount: number): void {
-    const { accounts } = get(wallet)
+    const { accounts } = get(activeProfile)
 
     const _send = () => {
         isTransferring.set(true)
@@ -77,7 +78,7 @@ export function sendInternalTransaction(
     amount: number,
     internal: boolean
 ): void {
-    const { accounts, internalTransfersInProgress } = get(wallet)
+    const { accounts, internalTransfersInProgress } = get(activeProfile)
 
     const _internalTransfer = () => {
         isTransferring.set(true)

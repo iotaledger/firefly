@@ -1,9 +1,9 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from '@core/i18n'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
+import { isSelfTransaction, AccountColors } from 'shared/lib/wallet'
 import { formatDate } from '@core/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
@@ -14,6 +14,7 @@ import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
 import { BalanceHistory } from './typings/wallet'
 import { WalletAccount } from './typings/walletAccount'
+import { activeProfile } from '@core/profile'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 

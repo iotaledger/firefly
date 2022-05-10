@@ -7,11 +7,12 @@ import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
+import { clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
 import { resetRouters } from '@core/router'
 import { Stage } from './typings/stage'
 import { api, destroyManager, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
+import { activeProfile } from '@core/profile'
 
 /**
  * Beta mode

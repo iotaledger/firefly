@@ -7,8 +7,8 @@
     import { getNetwork, checkNodeUrlValidity, cleanAuth, updateNetworkStatusFromNodeInfo } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-    import { activeProfile } from 'shared/lib/profile'
+    import { asyncGetNodeInfo } from 'shared/lib/wallet'
+    import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
 
     export let node: INode = { url: '', isPrimary: false }
@@ -18,7 +18,7 @@
 
     export let onSuccess = (..._: any[]): void => {}
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let nodeUrl = node?.url || ''
     const oldNodeUrl = nodeUrl
@@ -99,7 +99,7 @@
         if (!addressError) {
             if (!isNetworkSwitch) {
                 // TODO refactor
-                // await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
+                // await updateNetworkStatus(get($activeProfile.accounts)[0]?.id, {
                 //     url: nodeUrl,
                 //     auth: optNodeAuth,
                 //     isPrimary: node?.isPrimary,

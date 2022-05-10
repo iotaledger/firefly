@@ -1,4 +1,4 @@
-import { activeProfile } from 'shared/lib/profile'
+import { activeProfile } from '@core/profile'
 import Validator from 'shared/lib/validator'
 import { get, writable } from 'svelte/store'
 import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'

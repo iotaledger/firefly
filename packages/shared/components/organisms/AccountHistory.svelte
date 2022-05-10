@@ -151,7 +151,10 @@
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
         return (
-            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && transactions.length === 0
+            $isFirstSessionSync &&
+            $activeProfileSetupType &&
+            $activeProfileSetupType !== SetupType.New &&
+            transactions.length === 0
         )
     }
 </script>
