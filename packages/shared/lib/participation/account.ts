@@ -432,7 +432,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
     const event = getStakingEventFromAirdrop(airdrop)
-    if (!event || !isStakingPossible(event?.status?.status)) return 0
+    if (!event || !isParticipationPossible(event?.status?.status)) return 0
 
     // Remaining time is in milliseconds
     const timeLeft =
@@ -451,16 +451,16 @@ const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
 }
 
 /**
- * Determines whether staking is currently in the pre-stake or holding period
+ * Determines whether is possible to participate in an event
  *
- * @method isStakingPossible
+ * @method isParticipationPossible
  *
  * @param {ParticipationEventState} stakingEventState
  *
  * @returns {boolean}
  */
-export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
-    stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
+export const isParticipationPossible = (eventState: ParticipationEventState): boolean =>
+    eventState === ParticipationEventState.Commencing || eventState === ParticipationEventState.Holding
 
 export function isNewStakingEvent(stakingEventState: ParticipationEventState): boolean {
     if (!stakingEventState) return false

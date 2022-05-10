@@ -13,8 +13,16 @@
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import {} from 'shared/lib/participation'
-    import { isStakingPossible, partiallyUnstakedAmount } from 'shared/lib/participation/account'
-    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
+    import {
+        currentAccountTreasuryVotePartiallyUnvotedAmount,
+        isParticipationPossible,
+        partiallyUnstakedAmount,
+    } from 'shared/lib/participation/account'
+    import {
+        assemblyStakingEventState,
+        shimmerStakingEventState,
+        treasuryEventState,
+    } from 'shared/lib/participation/stores'
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import {
         dashboardRoute,
@@ -37,6 +45,8 @@
     let drawer: Drawer
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
+    let prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
+    let showGovernanceNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
 
@@ -47,8 +57,15 @@
         $shimmerStakingEventState,
         $partiallyUnstakedAmount,
         manageUnstakedAmountNotification()
+    $: $dashboardRoute,
+        $treasuryEventState,
+        $currentAccountTreasuryVotePartiallyUnvotedAmount,
+        managePartialVoteNotification()
 
-    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    $: $activeProfile?.hasVisitedStaking,
+        showStakingNotification,
+        showGovernanceNotification,
+        updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
@@ -76,19 +93,24 @@
 
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
-            if (DashboardRoute.Staking === tab.route) {
-                tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'error'
-                    : showStakingNotification
-                    ? 'warning'
-                    : null
+            switch (tab.route) {
+                case DashboardRoute.Staking:
+                    tab.notificationType = !$activeProfile?.hasVisitedStaking
+                        ? 'error'
+                        : showStakingNotification
+                        ? 'warning'
+                        : null
+                    break
+                case DashboardRoute.Governance:
+                    tab.notificationType = showGovernanceNotification ? 'warning' : null
+                    break
             }
             return tab
         })
     }
 
     function manageUnstakedAmountNotification() {
-        if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
+        if (isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)) {
             if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
                 showStakingNotification = true
             } else {
@@ -97,6 +119,22 @@
             prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
         } else {
             showStakingNotification = false
+        }
+    }
+
+    function managePartialVoteNotification() {
+        if (isParticipationPossible($treasuryEventState)) {
+            if (
+                $dashboardRoute !== DashboardRoute.Governance &&
+                $currentAccountTreasuryVotePartiallyUnvotedAmount > prevCurrentAccountTreasuryVotePartiallyUnvotedAmount
+            ) {
+                showGovernanceNotification = true
+            } else {
+                showGovernanceNotification = false
+            }
+            prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = $currentAccountTreasuryVotePartiallyUnvotedAmount
+        } else {
+            showGovernanceNotification = false
         }
     }
 

@@ -8,7 +8,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { NodePlugin } from '../typings/node'
 import { WalletAccount } from '../typings/wallet'
 import { transferState, wallet } from '../wallet'
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, TREASURY_VOTE_EVENT_ID } from './constants'
 import {
     ParticipateResponsePayload,
     ParticipationAction,
@@ -109,6 +109,14 @@ export const shimmerStakingEventState: Readable<ParticipationEventState> = deriv
     ([$networkStatus]) => {
         const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Shimmer)
         return deriveParticipationEventState(stakingEvent, $networkStatus)
+    }
+)
+
+export const treasuryEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus, participationEvents],
+    ([$networkStatus, $participationEvents]) => {
+        const treasuryEvent = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
+        return deriveParticipationEventState(treasuryEvent, $networkStatus)
     }
 )
 
