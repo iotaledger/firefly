@@ -48,6 +48,7 @@
         Setup,
         Splash,
         Welcome,
+        Network,
     } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -196,6 +197,9 @@
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
             <Create locale={$_} />
+        </Route>
+        <Route route={AppRoute.Network}>
+            <Network locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
             <Ledger locale={$_} />
