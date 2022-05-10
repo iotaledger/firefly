@@ -18,7 +18,6 @@ export const getLocalisedMenuItems = (locale: Locale): unknown => ({
     advancedSettings: locale('views.settings.advancedSettings.title'),
     errorLog: locale('views.settings.errorLog.title'),
     createDeveloperProfile: locale('views.settings.createDeveloperProfile.title'),
-    createMainnetProfile: locale('views.settings.createMainnetProfile.title'),
     diagnostics: locale('views.settings.diagnostics.title'),
     logout: locale('views.dashboard.profileModal.logout'),
     hide: locale('actions.hide'),

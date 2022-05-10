@@ -93,6 +93,11 @@ const buildTemplate = () => {
                     type: 'separator',
                 },
                 {
+                    label: state.strings.createDeveloperProfile,
+                    click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
+                    enabled: state.loggedIn === false && process.env.STAGE === 'prod',
+                },
+                {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },
@@ -105,20 +110,6 @@ const buildTemplate = () => {
             label: 'Developer Tools',
             role: 'toggleDevTools',
         })
-    }
-
-    if (state.loggedIn === false) {
-        if (process.env.STAGE.toUpperCase() === 'PROD') {
-            template[0].submenu.push({
-                label: state.strings.createDeveloperProfile,
-                click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
-            })
-        } else {
-            template[0].submenu.push({
-                label: state.strings.createMainnetProfile,
-                click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
-            })
-        }
     }
 
     template[0].submenu = template[0].submenu.concat([
