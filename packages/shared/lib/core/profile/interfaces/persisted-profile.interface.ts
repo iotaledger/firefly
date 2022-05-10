@@ -3,7 +3,7 @@ import { NetworkProtocol, NetworkType } from '@core/network'
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
-export interface IProfile {
+export interface IPersistedProfile {
     id: string
     name: string
     type: ProfileType

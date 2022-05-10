@@ -12,7 +12,7 @@ import {
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { ProfileType, IProfile, IProfileSettings } from '@core/profile'
+import { ProfileType, IPersistedProfile, IProfileSettings } from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { ValuesOf } from './typings/utils'
@@ -28,14 +28,14 @@ export interface ProfileAccount {
 }
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
-export const profiles = persistent<IProfile[]>('profiles', [])
+export const profiles = persistent<IPersistedProfile[]>('profiles', [])
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
-export const newProfile = writable<IProfile | null>(null)
+export const newProfile = writable<IPersistedProfile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
 export const hasEverOpenedProfileModal = writable<boolean>(false)
 
-export const activeProfile: Readable<IProfile | undefined> = derived(
+export const activeProfile: Readable<IPersistedProfile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
     ([$profiles, $newProfile, $activeProfileId]) => $newProfile || $profiles.find((p) => p.id === $activeProfileId)
 )
@@ -70,7 +70,7 @@ export const isLedgerProfile: Readable<boolean> = derived(
  *
  * @returns {Profile}
  */
-export const saveProfile = (profile: IProfile): IProfile => {
+export const saveProfile = (profile: IPersistedProfile): IPersistedProfile => {
     profiles.update((_profiles) => [..._profiles, profile])
 
     return profile
@@ -91,7 +91,7 @@ const buildProfile = (
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType
-): IProfile => ({
+): IPersistedProfile => ({
     id: generateRandomId(),
     name: profileName,
     type: null,
@@ -151,7 +151,7 @@ export const migrateProfile = (): void => {
         oldProfile.networkType
     )
 
-    updateProfile('', migrateObjects<IProfile>(oldProfile, newProfile))
+    updateProfile('', migrateObjects<IPersistedProfile>(oldProfile, newProfile))
 }
 
 /**
@@ -226,7 +226,7 @@ export const removeProfile = (id: string): void => {
 // TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
 export const updateProfile = (
     path: string,
-    value: ValuesOf<IProfile> | ValuesOf<IProfileSettings> | ValuesOf<INetworkConfig>
+    value: ValuesOf<IPersistedProfile> | ValuesOf<IProfileSettings> | ValuesOf<INetworkConfig>
 ): void => {
     const _update = (_profile) => {
         if (path === '') {
@@ -239,7 +239,7 @@ export const updateProfile = (
 
         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof IProfile | keyof IProfileSettings, level: number) => {
+        pathList.reduce((a, b: keyof IPersistedProfile | keyof IProfileSettings, level: number) => {
             if (level === pathList.length - 1) {
                 a[b] = value
                 return value
@@ -380,7 +380,7 @@ export const hasNoProfiles = (): boolean => get(profiles).length === 0
  * @returns {ProfileAccount[]}
  */
 const getUpdatedAccounts = (
-    activeProfile: IProfile,
+    activeProfile: IPersistedProfile,
     accountId: string,
     profileAccount: ProfileAccount
 ): ProfileAccount[] => {
@@ -404,7 +404,7 @@ const getUpdatedAccounts = (
  *
  * @returns {void}
  */
-export const setProfileAccount = (activeProfile: IProfile, profileAccount: ProfileAccount): void => {
+export const setProfileAccount = (activeProfile: IPersistedProfile, profileAccount: ProfileAccount): void => {
     if (profileAccount.color) {
         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
     } else if (profileAccount.id) {
@@ -424,7 +424,7 @@ export const setProfileAccount = (activeProfile: IProfile, profileAccount: Profi
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: IProfile, accountId: string): string | AccountColors => {
+export const getColor = (activeProfile: IPersistedProfile, accountId: string): string | AccountColors => {
     const { accounts } = activeProfile || {}
 
     if (accounts?.length) {
