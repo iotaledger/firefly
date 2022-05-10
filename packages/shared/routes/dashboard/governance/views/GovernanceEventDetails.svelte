@@ -232,10 +232,16 @@
             {/if}
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
-        <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
+        <Text type="p" overrideColor classes="mb-2 text-gray-700 dark:text-gray-500" bold
+            >{event?.information?.additionalInfo}</Text
+        >
         <div class="min-h-0 overflow-auto mb-6">
-            <Text type="p" classes="mb-1">{event?.information?.payload?.questions[0]?.text}</Text>
-            <Text type="p">{event?.information?.payload?.questions[0]?.additionalInfo}</Text>
+            <Text type="p" overrideColor classes="mb-1 text-gray-700 dark:text-gray-500"
+                >{event?.information?.payload?.questions[0]?.text}</Text
+            >
+            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500"
+                >{event?.information?.payload?.questions[0]?.additionalInfo}</Text
+            >
         </div>
         {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
             <Button
@@ -331,8 +337,8 @@
                         <Text
                             type="p"
                             classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
-                                ? 'text-white'
-                                : 'text-gray-800 dark:text-white'}"
+                                ? 'text-white dark:text-white'
+                                : 'text-gray-700 dark:text-gray-500'}"
                             overrideColor
                         >
                             {answer?.additionalInfo}
@@ -523,5 +529,8 @@
         @apply border-2;
         @apply border-solid;
         @apply border-yellow-600;
+    }
+    :global(#governance-manager button.caution-border:not(:hover):not(:active)) {
+        @apply bg-transparent;
     }
 </style>
