@@ -1,16 +1,20 @@
-import { writable } from 'svelte/store'
-import { NetworkStatusDescription } from '../enums'
-import { INetworkStatus, IStardustNodeInfo } from '../interfaces'
+import { derived } from 'svelte/store'
+import { NetworkStatusDescription } from '../constants'
+import { NetworkHealth } from '../enums/network-health.enum'
+import { getNetworkStatusFromNodeInfo } from '../helpers'
+import { nodeInfo } from './node-info.store'
 
-export const networkStatus = writable<INetworkStatus>({
-    messagesPerSecond: 0,
-    referencedRate: 0,
-    health: 2,
-    description: NetworkStatusDescription.Operational,
-    currentMilestone: -1,
-    nodePlugins: [],
+export const networkStatus = derived([nodeInfo], ([$nodeInfo]) => {
+    if ($nodeInfo) {
+        return getNetworkStatusFromNodeInfo($nodeInfo)
+    } else {
+        return {
+            messagesPerSecond: 0,
+            referencedRate: 0,
+            health: NetworkHealth.Disconnected,
+            description: NetworkStatusDescription[NetworkHealth.Disconnected],
+            currentMilestone: -1,
+            nodePlugins: [],
+        }
+    }
 })
-
-export function updateNetworkStatus(values: Partial<INetworkStatus>): void {
-    return networkStatus.update((state) => ({ ...state, ...values }))
-}

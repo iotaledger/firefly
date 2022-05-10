@@ -1,5 +1,4 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import { NodePlugin } from '@core/network'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { selectedAccount, selectedAccountId } from '@core/account'
 import { WalletAccount } from '../typings/walletAccount'
@@ -14,7 +13,7 @@ import {
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { INetworkStatus, networkStatus } from '@core/network'
+import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
 import { activeProfile } from '@core/profile'
 
