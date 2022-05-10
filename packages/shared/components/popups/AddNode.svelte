@@ -4,12 +4,11 @@
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import { IAuth, INode, INodeInfo, INetwork } from '@core/network'
-    import { getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network/utils'
+    import { getNetwork, checkNodeUrlValidity, cleanAuth, updateNetworkStatusFromNodeInfo } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { activeProfile } from 'shared/lib/profile'
-    import { updateNetworkStatus } from '../../lib/networkStatus'
     import { localize } from '@core/i18n'
 
     export let node: INode = { url: '', isPrimary: false }
@@ -99,34 +98,34 @@
 
         if (!addressError) {
             if (!isNetworkSwitch) {
-                await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
-                    url: nodeUrl,
-                    auth: optNodeAuth,
-                    isPrimary: node?.isPrimary,
-                })
-                    .then(() => {
-                        isBusy = false
-
-                        onSuccess(
-                            false,
-                            {
-                                url: cleanNodeUrl(nodeUrl),
-                                auth: optNodeAuth,
-                                network: getNetwork(
-                                    $activeProfile.networkProtocol,
-                                    $activeProfile.networkType,
-                                    nodeInfo?.nodeinfo.networkId
-                                ),
-                                isPrimary: node?.isPrimary || false,
-                            },
-                            oldNodeUrl
-                        )
-                        closePopup()
-                    })
-                    .catch((err) => {
-                        isBusy = false
-                        return
-                    })
+                // TODO refactor
+                // await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
+                //     url: nodeUrl,
+                //     auth: optNodeAuth,
+                //     isPrimary: node?.isPrimary,
+                // })
+                //     .then(() => {
+                //         isBusy = false
+                //         onSuccess(
+                //             false,
+                //             {
+                //                 url: cleanNodeUrl(nodeUrl),
+                //                 auth: optNodeAuth,
+                //                 network: getNetwork(
+                //                     $activeProfile.networkProtocol,
+                //                     $activeProfile.networkType,
+                //                     nodeInfo?.nodeinfo.networkId
+                //                 ),
+                //                 isPrimary: node?.isPrimary || false,
+                //             },
+                //             oldNodeUrl
+                //         )
+                //         closePopup()
+                //     })
+                //     .catch((err) => {
+                //         isBusy = false
+                //         return
+                //     })
             }
         }
 

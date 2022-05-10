@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
     import {
@@ -15,7 +14,7 @@
     } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
-    import { NodePlugin } from '@core/network'
+    import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing, selectedAccount } from 'shared/lib/wallet'
 
@@ -31,7 +30,7 @@
     $: isPartiallyStakedAndCanParticipate = $isPartiallyStaked && canParticipateInEvent
 
     let canParticipateWithNode = false
-    $: $networkStatus, (canParticipateWithNode = hasNodePlugin(NodePlugin.Participation))
+    $: $networkStatus, (canParticipateWithNode = doesNodeHavePlugin(NodePlugin.Participation))
 
     let showTooltip = false
     // hide tooltip if tooltipAnchor destroys

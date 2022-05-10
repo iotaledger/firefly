@@ -1,1 +1,5 @@
+export * from './getAndUpdateNetworkStatus'
 export * from './updateClientOptions'
+export * from './network-polling'
+export * from './showNetworkIssueNotification'
+export * from './updateNetworkStatusFromNodeInfo'

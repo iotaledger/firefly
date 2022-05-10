@@ -8,11 +8,15 @@
         isOfficialNetwork,
         updateClientOptions,
     } from '@core/network'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { NetworkStatusHealthText } from 'shared/lib/typings/network'
-    import { INode, INetworkConfig, NetworkType } from '@core/network'
+    import {
+        INode,
+        INetworkConfig,
+        NETWORK_HEALTH_COLORS,
+        NetworkStatusDescription,
+        networkStatus,
+    } from '@core/network'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: INetworkConfig =
@@ -115,7 +119,9 @@
                 <div>
                     <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
                         {localize(
-                            `views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`
+                            `views.dashboard.network.${
+                                $networkStatus.description || NetworkStatusDescription.Disconnected
+                            }`
                         )}
                     </p>
                 </div>
