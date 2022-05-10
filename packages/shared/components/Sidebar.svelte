@@ -1,13 +1,25 @@
 <script lang="typescript">
+    import { Locale } from '@core/i18n'
+    import {
+        dashboardRoute,
+        DashboardRoute,
+        dashboardRouter,
+        resetWalletRoute,
+        settingsRoute,
+        SettingsRoute,
+        settingsRouter,
+        SidebarTab as SidebarTabType,
+    } from '@core/router'
+    import { versionDetails } from '@lib/appUpdater'
     import {
         Drawer,
         Icon,
+        Modal,
         NetworkIndicator,
+        PingingBadge,
         ProfileActionsModal,
         SidebarTab,
         Text,
-        Modal,
-        PingingBadge,
     } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
@@ -24,19 +36,8 @@
         treasuryEventState,
     } from 'shared/lib/participation/stores'
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
-    import {
-        dashboardRoute,
-        dashboardRouter,
-        DashboardRoute,
-        resetWalletRoute,
-        settingsRoute,
-        settingsRouter,
-        SettingsRoute,
-        SidebarTab as SidebarTabType,
-    } from '@core/router'
+    import { selectedAccountIdStore } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
-    import { Locale } from '@core/i18n'
-    import { versionDetails } from '@lib/appUpdater'
 
     export let locale: Locale
 
@@ -52,6 +53,16 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
+
+    // reset previously tracked amounts on wallet change
+    $: if ($selectedAccountIdStore) {
+        prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = 0
+        prevPartiallyUnstakedAmount = 0
+        showStakingNotification = false
+        showGovernanceNotification = false
+        manageUnstakedAmountNotification()
+        managePartialVoteNotification()
+    }
     $: $dashboardRoute,
         $assemblyStakingEventState,
         $shimmerStakingEventState,
@@ -111,10 +122,10 @@
 
     function manageUnstakedAmountNotification() {
         if (isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)) {
-            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
-                showStakingNotification = true
-            } else {
+            if ($dashboardRoute === DashboardRoute.Staking || !$partiallyUnstakedAmount) {
                 showStakingNotification = false
+            } else if ($partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+                showStakingNotification = true
             }
             prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
         } else {
@@ -124,13 +135,12 @@
 
     function managePartialVoteNotification() {
         if (isParticipationPossible($treasuryEventState)) {
-            if (
-                $dashboardRoute !== DashboardRoute.Governance &&
+            if ($dashboardRoute === DashboardRoute.Governance || !$currentAccountTreasuryVotePartiallyUnvotedAmount) {
+                showGovernanceNotification = false
+            } else if (
                 $currentAccountTreasuryVotePartiallyUnvotedAmount > prevCurrentAccountTreasuryVotePartiallyUnvotedAmount
             ) {
                 showGovernanceNotification = true
-            } else {
-                showGovernanceNotification = false
             }
             prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = $currentAccountTreasuryVotePartiallyUnvotedAmount
         } else {
