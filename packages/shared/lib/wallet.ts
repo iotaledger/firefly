@@ -18,7 +18,7 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { IAuth, INodeInfo } from '@core/network'
-import { ProfileType } from './typings/profile'
+import { ProfileType } from '@core/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
@@ -967,46 +967,37 @@ export const prepareAccountInfo = (
 }
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
-    const { accounts } = get(wallet)
-
-    messages.forEach((message: Message) => {
-        if (message.payload?.type === 'Milestone') {
-            const account = get(accounts).find((account) => account.id === accountId)
-
-            if (account) {
-                const _activeProfile = get(activeProfile)
-
-                if (
-                    _activeProfile &&
-                    _activeProfile.migratedTransactions &&
-                    _activeProfile.migratedTransactions.length
-                ) {
-                    const { funds } = message.payload.data.essence.receipt.data
-
-                    const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
-
-                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
-                        (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
-                    )
-
-                    updateProfile('migratedTransactions', updatedMigratedTransactions)
-                }
-            }
-        }
-    })
-
-    const _activeProfile = get(activeProfile)
-
-    if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
-        // For pre-snapshot migrations, there will be no messages
-        addresses.forEach((address) => {
-            const { outputs } = address
-
-            if (Object.values(outputs).some((output) => output.messageId === '0'.repeat(64))) {
-                updateProfile('migratedTransactions', [])
-            }
-        })
-    }
+    // const { accounts } = get(wallet)
+    // messages.forEach((message: Message) => {
+    //     if (message.payload?.type === 'Milestone') {
+    //         const account = get(accounts).find((account) => account.id === accountId)
+    //         if (account) {
+    //             const _activeProfile = get(activeProfile)
+    //             if (
+    //                 _activeProfile &&
+    //                 _activeProfile.migratedTransactions &&
+    //                 _activeProfile.migratedTransactions.length
+    //             ) {
+    //                 const { funds } = message.payload.data.essence.receipt.data
+    //                 const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
+    //                 const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
+    //                     (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
+    //                 )
+    //                 updateProfile('migratedTransactions', updatedMigratedTransactions)
+    //             }
+    //         }
+    //     }
+    // })
+    // const _activeProfile = get(activeProfile)
+    // if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+    //     // For pre-snapshot migrations, there will be no messages
+    //     addresses.forEach((address) => {
+    //         const { outputs } = address
+    //         if (Object.values(outputs).some((output) => output.messageId === '0'.repeat(64))) {
+    //             updateProfile('migratedTransactions', [])
+    //         }
+    //     })
+    // }
 }
 
 /**

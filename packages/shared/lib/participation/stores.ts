@@ -165,15 +165,16 @@ function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: Acco
 }
 
 function getCachedStakingRewards(airdrop: StakingAirdrop, accountId: string): number {
-    if (!airdrop || !accountId) return 0
+    // if (!airdrop || !accountId) return 0
 
-    const stakingRewards = get(activeProfile)?.stakingRewards
-    if (!stakingRewards) return 0
+    // // const stakingRewards = get(activeProfile)?.stakingRewards
+    // // if (!stakingRewards) return 0
 
-    const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
-    if (!accountStakingRewards) return 0
+    // // const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
+    // // if (!accountStakingRewards) return 0
 
-    return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
+    // return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
+    return 0
 }
 
 /**

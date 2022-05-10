@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
 import { setProfileType, activeProfile, profiles } from '@lib/profile'
-import { ImportType, ProfileType } from '@lib/typings/profile'
+import { ProfileImportType, ProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
@@ -134,13 +134,17 @@ export class AppRouter extends Router<AppRoute> {
                 const { importType } = params
                 walletSetupType.set(importType as unknown as SetupType)
                 nextRoute = AppRoute.Congratulations
-                if (importType === ImportType.Mnemonic) {
+                if (importType === ProfileImportType.Mnemonic) {
                     nextRoute = AppRoute.Secure
                 } else if (
-                    [ImportType.Stronghold, ImportType.TrinityLedger, ImportType.FireflyLedger].includes(importType)
+                    [
+                        ProfileImportType.Stronghold,
+                        ProfileImportType.TrinityLedger,
+                        ProfileImportType.FireflyLedger,
+                    ].includes(importType)
                 ) {
                     nextRoute = AppRoute.Protect
-                } else if (importType === ImportType.Seed || importType === ImportType.SeedVault) {
+                } else if (importType === ProfileImportType.Seed || importType === ProfileImportType.SeedVault) {
                     nextRoute = AppRoute.Balance
                 }
                 break

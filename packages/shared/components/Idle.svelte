@@ -20,7 +20,8 @@
 
             const ap = get(activeProfile)
             if (ap) {
-                const timeoutDuration = MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeout
+                const timeoutDuration =
+                    MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeoutInMinutes
 
                 if (!isIdleTimeValid(new Date(), timeoutDuration)) lock()
 

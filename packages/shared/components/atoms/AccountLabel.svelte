@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { Profile } from '@lib/typings/profile'
+    import { IProfile } from '@core/profile'
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { getColor } from 'shared/lib/profile'
     import { Text } from 'shared/components/'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
-    export let profile: Profile
+    export let profile: IProfile
     export let account: WalletAccount
 </script>
 

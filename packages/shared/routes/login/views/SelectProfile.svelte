@@ -4,7 +4,7 @@
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import { ProfileType } from 'shared/lib/typings/profile'
+    import { ProfileType } from '@core/profile'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
 
