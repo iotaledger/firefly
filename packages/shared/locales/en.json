@@ -56,6 +56,20 @@
                 "description": "Ledger Nano S or Nano X required"
             }
         },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": "Default IOTA network",
+                "devnet": "IOTA network for tests and development",
+                "private-net": "IOTA protocol private net"
+            },
+            "shimmer": {
+                "mainnet": "Experimental IOTA staging network",
+                "devnet": "Experimental IOTA staging network for tests and development",
+                "private-net": "Experimental IOTA private staging network"
+            }
+        },
         "setupLedger": {
             "progress1": "Connect your Ledger",
             "progress2": "Generate address",
