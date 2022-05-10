@@ -1,9 +1,6 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    profileManager,
-    // addMessagesPair,
     api,
-    getStardustAccount,
     prepareAccountInfo,
     processMigratedTransactions,
     replaceMessage,
@@ -23,9 +20,7 @@ import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { StardustAccount } from '@lib/typings/account'
-import { getAccounts } from './actions/profileActions'
-import { activeProfile } from '@core/profile'
+import { activeProfile, getAccounts } from '@core/profile'
 
 /**
  * Initialises event listeners from wallet library

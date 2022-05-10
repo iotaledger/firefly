@@ -11,16 +11,14 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, updateProfile } from '@lib/profile'
+    import { isLedgerProfile } from '@lib/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { setSelectedAccount } from 'shared/lib/wallet'
     import TopNavigation from './TopNavigation.svelte'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { loadAccounts } from '@lib/actions/profileActions'
+    import { loadAccounts } from '@core/profile/actions/profile-actions'
     import { activeProfile, loadPersistedProfileIntoActiveProfile, persistedProfile } from '@core/profile'
-
-    export let locale: Locale
 
     $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
 
@@ -277,7 +275,7 @@
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
-                message: locale('indicators.developerProfileIndicator.warningText', {
+                message: localize('indicators.developerProfileIndicator.warningText', {
                     values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
                 }),
             })
@@ -335,10 +333,10 @@
         <TopNavigation classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''} />
     {/if}
     <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
+        <Sidebar locale={localize} />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+            <svelte:component this={tabs[$dashboardRoute]} locale={localize} on:next={$appRouter.next} />
         </div>
     </div>
 </div>

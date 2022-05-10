@@ -7,8 +7,7 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
-    import { tryCreateAccount } from '@lib/actions/profileActions'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, tryCreateAccount } from '@core/profile'
 
     export let error = ''
 
