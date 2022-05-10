@@ -120,21 +120,21 @@ export const currentTreasuryParticipation = derived(
 )
 
 export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
-    selectedAccountStore,
-    ($selectedAccountStore) => {
-        const { amount } = get(currentTreasuryParticipation) ?? {}
+    [selectedAccountStore, currentTreasuryParticipation],
+    ([$selectedAccountStore, $currentTreasuryParticipation]) => {
+        const { amount } = $currentTreasuryParticipation ?? {}
         return $selectedAccountStore && amount && amount !== $selectedAccountStore.rawIotaBalance
     }
 )
 
 /**
- * The store for the total amount of funds that are partially (un)staked for
+ * The store for the total amount of funds that are partially not voted for
  * the selected account.
  */
 export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
-    selectedAccountStore,
-    ($selectedAccountStore) => {
-        const { amount } = get(currentTreasuryParticipation) ?? {}
+    [selectedAccountStore, currentTreasuryParticipation],
+    ([$selectedAccountStore, $currentTreasuryParticipation]) => {
+        const { amount } = $currentTreasuryParticipation ?? {}
         const accountBalance = $selectedAccountStore?.rawIotaBalance ?? 0
         return amount < accountBalance ? accountBalance - amount : 0
     }
