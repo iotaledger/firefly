@@ -1,7 +1,6 @@
 import { NETWORK } from '../constants'
 import { NetworkProtocol, NetworkType } from '../enums'
 import { INetwork } from '../interfaces'
-import { getNetworkType } from './getNetworkType'
 
 /**
  * Find a network by its associated ID.

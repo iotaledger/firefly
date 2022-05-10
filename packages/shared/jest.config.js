@@ -12,7 +12,7 @@ const config = {
     },
     setupFilesAfterEnv: ['./lib/tests/setup.ts'],
     testEnvironment: 'jsdom',
-    // testMatch: ['**/tests/**/*.+(test).+(ts|js)'],
+    testMatch: ['**/tests/**/*.+(test).+(ts|js)'],
     testPathIgnorePatterns: ['./node_modules/'],
     transform: {
         '^.+\\.ts$': 'ts-jest',

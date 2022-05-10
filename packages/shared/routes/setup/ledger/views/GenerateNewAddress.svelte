@@ -34,7 +34,7 @@
         const _createAccount = (idx) => {
             api.createAccount(
                 {
-                    clientOptions: getDefaultClientOptions($activeProfile.networkProtocol),
+                    clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,

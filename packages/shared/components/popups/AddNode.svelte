@@ -14,15 +14,15 @@
     export let node: INode = { url: '', isPrimary: false }
     export let nodes: INode[] = []
     export let network: INetwork
-    export let isAddingNode: boolean = true
+    export let isAddingNode = true
 
     export let onSuccess = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
-    let nodeUrl: string = node?.url || ''
-    const oldNodeUrl: string = nodeUrl
-    const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
+    let nodeUrl = node?.url || ''
+    const oldNodeUrl = nodeUrl
+    const optNodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
     let addressWarn = ''
@@ -60,7 +60,7 @@
             addressError = localize('error.network.notReachable')
         } else if (id !== network.id) {
             if ($activeProfile.isDeveloperProfile) {
-                newNetwork = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType, id)
+                newNetwork = getNetwork($activeProfile?.networkProtocol, $activeProfile?.networkType, id)
                 isNetworkSwitch = true
             } else {
                 addressError = localize('error.network.mismatch', { values: { networkId: id } })
@@ -112,8 +112,8 @@
                 //                 url: cleanNodeUrl(nodeUrl),
                 //                 auth: optNodeAuth,
                 //                 network: getNetwork(
-                //                     $activeProfile.networkProtocol,
-                //                     $activeProfile.networkType,
+                //                     $activeProfile?.networkProtocol,
+                //                     $activeProfile?.networkType,
                 //                     nodeInfo?.nodeinfo.networkId
                 //                 ),
                 //                 isPrimary: node?.isPrimary || false,

@@ -1,6 +1,5 @@
 export * from './checkNodeUrlValidity'
 export * from './cleanAuth'
-export * from './cleanNodeAuth'
 export * from './doesNodeHavePlugin'
 export * from './ensureSinglePrimaryNode'
 export * from './getDefaultClientOptions'

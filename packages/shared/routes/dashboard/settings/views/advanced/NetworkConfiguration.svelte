@@ -21,7 +21,7 @@
 
     let networkConfig: INetworkConfig =
         $activeProfile?.settings.networkConfig ||
-        getOfficialNetworkConfig($activeProfile.networkProtocol, $activeProfile.networkType)
+        getOfficialNetworkConfig($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
