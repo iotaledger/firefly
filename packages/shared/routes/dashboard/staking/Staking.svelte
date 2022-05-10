@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { DashboardPane } from 'shared/components'
+    import { Pane } from 'shared/components'
     import {
         assemblyStakingEventState,
         participationAction,
@@ -145,18 +145,18 @@
 <div class="staking-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
         <div class="h-full flex flex-col space-y-3 overflow-hidden">
-            <DashboardPane classes="w-full flex-shrink-0">
+            <Pane classes="w-full flex-shrink-0">
                 <StakingSummary />
-            </DashboardPane>
-            <DashboardPane classes="w-full flex-grow">
+            </Pane>
+            <Pane classes="w-full flex-grow">
                 <StakingInfo />
-            </DashboardPane>
+            </Pane>
         </div>
-        <DashboardPane classes="h-full">
+        <Pane classes="h-full">
             <StakingAirdrop airdrop={_StakingAirdrop.Assembly} />
-        </DashboardPane>
-        <DashboardPane classes="h-full">
+        </Pane>
+        <Pane classes="h-full">
             <StakingAirdrop airdrop={_StakingAirdrop.Shimmer} />
-        </DashboardPane>
+        </Pane>
     </div>
 </div>

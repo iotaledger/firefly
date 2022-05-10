@@ -1,11 +1,40 @@
-import { Bridge, CommunicationIds } from './bridge'
-import { Message } from './message'
+import {
+    AccountBalance,
+    AccountMeta,
+    AccountSyncOptions,
+    Address as StardustAddress,
+    AddressNativeTokens,
+    AddressNftId,
+    AddressWithAmount,
+    AddressWithMicroAmount,
+    NativeTokenOptions,
+    NftOptions,
+    OutputData,
+    OutputsToCollect,
+    Transaction,
+    TransferOptions,
+    ClientOptions as StardustClientOptions,
+} from '@iota/wallet/out/types'
 import { Address } from './address'
-import { ClientOptions } from './client'
-import { NodeAuth } from './node'
+import { Bridge, CommunicationIds } from './bridge'
+import { IClientOptions, IAuth } from '@core/network'
+import { Message } from './message'
 import { Duration } from './wallet'
 
 export enum MessageType {}
+
+export interface Account {
+    id: string
+    alias: string
+    createdAt: string
+    clientOptions: IClientOptions
+    index: number
+    lastSyncedAt: string
+    signerType: SignerType
+    storagePath: string
+    messages: Message[]
+    addresses: Address[]
+}
 
 export interface Balance {
     total: number
@@ -27,19 +56,6 @@ export interface SyncAccountOptions {
     skipPersistance?: boolean
 }
 
-export interface Account {
-    id: string
-    alias: string
-    createdAt: string
-    clientOptions: ClientOptions
-    index: number
-    lastSyncedAt: string
-    signerType: SignerType
-    storagePath: string
-    messages: Message[]
-    addresses: Address[]
-}
-
 export type AccountIdentifier = number | string
 
 export interface SignerType {
@@ -47,7 +63,7 @@ export interface SignerType {
 }
 
 export interface AccountToCreate {
-    clientOptions: ClientOptions
+    clientOptions: IClientOptions
     signerType: SignerType
     alias?: string
     createdAt?: string
@@ -61,6 +77,35 @@ export interface SyncedAccount {
     isEmpty: boolean
     addresses: Address[]
     messages: Message[]
+}
+
+export interface StardustAccount {
+    meta: AccountMeta
+    alias(): string
+    collectOutputs(): Promise<void>
+    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string>
+    listAddresses(): Promise<StardustAddress[]>
+    listAddressesWithBalance(): Promise<StardustAddress[]>
+    listOutputs(): Promise<OutputData[]>
+    listUnspentOutputs(): Promise<OutputData[]>
+    listPendingTransactions(): Promise<Transaction[]>
+    listTransactions(): Promise<Transaction[]>
+    sync(options?: AccountSyncOptions): Promise<void>
+    generateAddresses(): Promise<StardustAddress[]>
+    latestAddress(): Promise<StardustAddress>
+    balance(): Promise<AccountBalance>
+    mintNativeToken(nativeTokenOptions: NativeTokenOptions, transferOptions: TransferOptions): Promise<Transaction[]>
+    mintNfts(nftOptions: NftOptions, transferOptions: TransferOptions): Promise<Transaction[]>
+    sendAmount(addressesWithAmount: AddressWithAmount[], transferOptions: TransferOptions): Promise<[]>
+    sendMicroTransaction(
+        addressesWithMicroAmount: AddressWithMicroAmount[],
+        transferOptions: TransferOptions
+    ): Promise<[]>
+    sendNativeTokens(addressNativeTokens: AddressNativeTokens[], transferOptions: TransferOptions): Promise<[]>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions: TransferOptions): Promise<[]>
+    sendTransfer(outputs: OutputData[], transferOptions: TransferOptions): Promise<[]>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<[]>
+    setClientOptions(options: StardustClientOptions): Promise<void>
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
@@ -268,7 +313,7 @@ export function getNodeInfo(
     __ids: CommunicationIds,
     accountId: AccountIdentifier,
     url?: string,
-    auth?: NodeAuth
+    auth?: IAuth
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [
         url,

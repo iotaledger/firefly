@@ -1,6 +1,6 @@
 import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
-import { NetworkConfig } from './network'
+import { INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { AccountStakingRewards } from '@lib/participation/types'
 
 export interface MigratedTransaction {
@@ -11,21 +11,16 @@ export interface MigratedTransaction {
     tailTransactionHash: string
 }
 
-/**
- * Profile
- */
 export interface Profile {
     id: string
     name: string
     type: ProfileType
-    protocol: ProfileProtocol
+    networkProtocol: NetworkProtocol
+    networkType: NetworkType
     /**
      * Time for most recent stronghold back up
      */
     lastStrongholdBackupTime: Date | null
-    /**
-     * User settings
-     */
     settings: UserSettings
     hiddenAccounts?: string[]
     migratedTransactions?: MigratedTransaction[]
@@ -41,12 +36,9 @@ export interface Profile {
     hasFinishedSingleAccountGuide?: boolean
 }
 
-/**
- * User Settings
- */
 export interface UserSettings {
     currency: AvailableExchangeRates
-    networkConfig: NetworkConfig
+    networkConfig: INetworkConfig
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean
@@ -54,21 +46,10 @@ export interface UserSettings {
     hideNetworkStatistics?: boolean
 }
 
-/**
- * Profile types
- */
 export enum ProfileType {
     Software = 'Software',
     Ledger = 'Ledger',
     LedgerSimulator = 'LedgerSimulator',
-}
-
-/**
- * Profile protocols
- */
-export enum ProfileProtocol {
-    Iota = 'IOTA',
-    Shimmer = 'Shimmer',
 }
 
 /**
@@ -84,9 +65,7 @@ export enum ImportType {
     TrinityLedger = 'trinityLedger',
     FireflyLedger = 'fireflyLedger',
 }
-/**
- * Profile account settings
- */
+
 export interface ProfileAccount {
     id: string
     color: string

@@ -35,10 +35,10 @@
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { NodePlugin } from 'shared/lib/typings/node'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { NodePlugin } from '@core/network'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccount, transferState, wallet } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
@@ -234,7 +234,7 @@
         showTooltip = !showTooltip
 
         if (showTooltip) {
-            tooltipAnchor = tooltipAnchors[account?.index]
+            tooltipAnchor = tooltipAnchors[account?.meta.index]
             // Check for Assembly only because it has lower reward requirements
             tooltipMinBalance = getIotasUntilMinimumAirdropReward(account, StakingAirdrop.Assembly, true)
         } else {
@@ -263,7 +263,7 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccount?.index]}
+                        bind:this={tooltipAnchors[$selectedAccount?.meta.index]}
                         on:mouseenter={() => toggleTooltip($selectedAccount)}
                         on:mouseleave={() => toggleTooltip($selectedAccount)}
                     >
@@ -287,7 +287,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias}
+                        {$selectedAccount.alias()}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -297,7 +297,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance()}
                             •
                             <Text
                                 type="p"
@@ -319,7 +319,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance}
+                            {$selectedAccount.balance()}
                             •
                             <Text
                                 type="p"

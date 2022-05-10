@@ -28,7 +28,6 @@
         Protect,
         Secure,
         Setup,
-        Settings,
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'

@@ -5,7 +5,7 @@
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
 
     export let alias
     export let account
@@ -36,7 +36,7 @@
                     },
                 }))
             }
-            if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
+            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
                 return (error = localize('error.account.duplicate'))
             }
             isBusy = true

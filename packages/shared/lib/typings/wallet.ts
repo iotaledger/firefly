@@ -1,24 +1,15 @@
 import { AccountIdentifier } from './account'
+import { AccountManager, Account as StardustAccount } from '@iota/wallet'
+
 import { Bridge, CommunicationIds } from './bridge'
-import { ClientOptions } from './client'
+import { IClientOptions } from '@core/network'
 import { Transfer } from './message'
 import { MnemonicPayload } from './mnemonic'
 import { Account } from './account'
 import { Message } from './message'
 import { Writable } from 'svelte/store'
 import { HistoryDataProps } from './market'
-
-export interface LabeledWalletAccount extends WalletAccount {
-    label: string
-}
-
-export interface WalletAccount extends Account {
-    depositAddress: string
-    rawIotaBalance: number
-    balance: string
-    balanceEquiv: string
-    color: string
-}
+import { WalletAccount } from './walletAccount'
 
 export interface AccountMessage extends Message {
     account: number
@@ -223,7 +214,7 @@ export function changeStrongholdPassword(
     })
 }
 
-export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: ClientOptions): Promise<string> {
+export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: IClientOptions): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,

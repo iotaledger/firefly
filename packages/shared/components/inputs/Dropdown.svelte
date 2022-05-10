@@ -2,7 +2,7 @@
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
-    import { LabeledWalletAccount } from 'shared/lib/typings/wallet'
+    import { LabeledWalletAccount } from 'shared/lib/typings/walletAccount'
 
     export let value: string
     export let label: string
@@ -19,6 +19,7 @@
     export let valueTextType = 'p'
     export let itemTextType = 'p'
     export let showBorderWhenClosed = true
+    export let isFocused = false
 
     export let onSelect = (..._: any[]): void => {}
 
@@ -38,6 +39,7 @@
 
     const toggleDropDown = () => {
         dropdown = !dropdown
+        isFocused = !isFocused
         if (dropdown) {
             let elem = document.getElementById(value)
             if (!elem) {

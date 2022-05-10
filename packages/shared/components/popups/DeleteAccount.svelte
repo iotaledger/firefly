@@ -4,44 +4,47 @@
     import { isSoftwareProfile } from 'shared/lib/profile'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { api } from 'shared/lib/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { setStrongholdPassword } from 'shared/lib/wallet'
     import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
     export let account: Writable<WalletAccount>
     export let deleteAccount: (id: AccountIdentifier) => void = () => {}
-    export let hasMultipleAccounts
+    export let hasMultipleAccounts: boolean
 
-    let password
+    let password: string
     let error = ''
     let isBusy = false
 
-    function handleDeleteClick() {
+    async function handleDeleteClick(): Promise<void> {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
             if ($isSoftwareProfile) {
-                api.setStrongholdPassword(password, {
-                    onSuccess() {
-                        triggerDeleteAccount()
-                    },
-                    onError(err) {
-                        isBusy = false
-                        error = locale(err.error)
-                    },
-                })
+                await deleteStrongholdAccount(password)
             } else {
                 triggerDeleteAccount()
             }
         }
     }
-    function handleCancelClick() {
+
+    async function deleteStrongholdAccount(password: string): Promise<void> {
+        try {
+            await setStrongholdPassword(password)
+            triggerDeleteAccount()
+        } catch (e) {
+            error = locale(e.error)
+            isBusy = false
+        }
+    }
+
+    function handleCancelClick(): void {
         closePopup()
     }
 
-    function triggerDeleteAccount() {
+    function triggerDeleteAccount(): void {
         isBusy = false
         closePopup()
         deleteAccount($account?.id)
@@ -51,7 +54,7 @@
 <div class="mb-5">
     <Text type="h4">
         {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-            values: { name: $account?.alias },
+            values: { name: $account?.alias() },
         })}
     </Text>
 </div>

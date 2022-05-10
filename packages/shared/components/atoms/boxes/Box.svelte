@@ -1,20 +1,21 @@
 <script lang="typescript">
-    export let col: boolean = false
-    export let row: boolean = false
-    export let clearBackground: boolean = false
-    export let backgroundColor: string = 'gray-50'
-    export let darkBackgrounColor: string = 'gray-50'
-    export let classes: string = ''
+    export let col = false
+    export let row = false
+    export let clearBackground = false
+    export let clearPadding = false
+    export let backgroundColor = 'gray-50'
+    export let darkBackgroundColor = 'gray-850'
+    export let classes = ''
 </script>
 
 <box
     class={`
-        w-full flex justify-between items-center rounded-lg
+        w-full flex items-center rounded-lg
         ${col ? 'flex-col' : ''}
         ${row ? 'flex-row' : ''}
-        ${!clearBackground ? 'px-4 py-4' : ''}
-        ${!clearBackground && backgroundColor ? 'bg-' + backgroundColor : ''}  
-        ${!clearBackground && darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''}
+        ${clearPadding ? '' : 'px-4 py-4'}
+        ${backgroundColor && !clearBackground ? 'bg-' + backgroundColor : ''}  
+        ${darkBackgroundColor && !clearBackground ? 'dark:bg-' + darkBackgroundColor : ''}
         ${classes}
     `}
 >

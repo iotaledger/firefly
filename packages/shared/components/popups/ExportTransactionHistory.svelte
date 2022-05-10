@@ -10,9 +10,9 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
-    import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from 'shared/lib/wallet'
     import { get, Readable } from 'svelte/store'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
 
     export let locale: Locale
     export let account: Readable<WalletAccount>
@@ -29,7 +29,7 @@
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPassword(password)
             } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
@@ -38,7 +38,7 @@
                 return
             }
 
-            const fileName = generateTransactionHistoryFileName(profileName, $account.alias)
+            const fileName = generateTransactionHistoryFileName(profileName, $account.alias())
             const contents = generateTransactionHistoryCsvFromAccount($account, {
                 id: true,
                 internal: true,
@@ -54,7 +54,7 @@
                     showAppNotification({
                         type: 'info',
                         message: locale('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $account.alias, filePath: filePath },
+                            values: { accountAlias: $account.alias(), filePath: filePath },
                         }),
                     })
                 }
@@ -62,7 +62,7 @@
                 showAppNotification({
                     type: 'error',
                     message: locale('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $account.alias },
+                        value: { accountAlias: $account.alias() },
                     }),
                 })
             }
@@ -98,7 +98,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{locale('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$account.alias}</Text>
+        <Text type="p" highlighted>{$account.alias()}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}

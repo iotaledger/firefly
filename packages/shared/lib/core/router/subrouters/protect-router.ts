@@ -4,13 +4,7 @@ import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
 import { activeProfile } from '@lib/profile'
 import { SetupType } from '@lib/typings/setup'
-import {
-    asyncCreateAccount,
-    asyncSetStoragePassword,
-    asyncStoreMnemonic,
-    asyncVerifyMnemonic,
-    walletSetupType,
-} from '@lib/wallet'
+import { createAccount, setStoragePassword, storeMnemonic, verifyMnemonic, walletSetupType } from '@lib/wallet'
 
 import { appRouter } from '../app-router'
 import { ProtectRoute } from '../enums'
@@ -45,13 +39,13 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
                 break
             case ProtectRoute.RepeatPin: {
                 await Platform.PincodeManager.set(get(activeProfile)?.id, this.pin)
-                await asyncSetStoragePassword(this.pin)
+                await setStoragePassword(this.pin)
 
                 if (get(walletSetupType) === SetupType.Mnemonic) {
                     const m = get(mnemonic).join(' ')
-                    await asyncVerifyMnemonic(m)
-                    await asyncStoreMnemonic(m)
-                    await asyncCreateAccount()
+                    await verifyMnemonic(m)
+                    await storeMnemonic(m)
+                    await createAccount()
                     mnemonic.set(null)
                 }
 
