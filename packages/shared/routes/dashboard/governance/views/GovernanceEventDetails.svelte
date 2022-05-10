@@ -530,7 +530,4 @@
         @apply border-solid;
         @apply border-yellow-600;
     }
-    :global(#governance-manager button.caution-border:not(:hover):not(:active)) {
-        @apply bg-transparent;
-    }
 </style>
