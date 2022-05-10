@@ -11,44 +11,71 @@ import {
     participationHistory,
     participationOverview,
     pendingParticipations,
+    isFetchingParticipationInfo,
 } from './stores'
 import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
 
-let participationPollInterval
+let shouldPollParticipation = true
+let participationPollTimeout
 
 /**
- * Begins polling of the participation events.
+ * Get participation overview data and latest events.
+ *
+ * @method fetchParticipationInfo
+ *
+ * @returns {Promise<void>}
+ */
+export async function fetchParticipationInfo(): Promise<void> {
+    isFetchingParticipationInfo.set(true)
+    await Promise.all([getParticipationOverview(ASSEMBLY_EVENT_ID), getParticipationEvents()])
+    isFetchingParticipationInfo.set(false)
+}
+
+/**
+ * Polls participation events 10s after the last poll completes.
  *
  * @method pollParticipation
  *
  * @returns {Promise<void>}
  */
 export async function pollParticipation(): Promise<void> {
-    clearPollParticipationOverviewInterval()
     try {
-        await getParticipationOverview(ASSEMBLY_EVENT_ID)
-        await getParticipationEvents()
+        if (get(isFetchingParticipationInfo) || !shouldPollParticipation) return
+        await fetchParticipationInfo()
         /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(async () => {
-            await getParticipationOverview(ASSEMBLY_EVENT_ID)
-            await getParticipationEvents()
+        participationPollTimeout = setTimeout(async () => {
+            await pollParticipation()
         }, PARTICIPATION_POLL_DURATION)
     } catch (error) {
+        isFetchingParticipationInfo.set(false)
         if (error && error?.error.includes('pluginNotFound')) {
-            clearPollParticipationOverviewInterval()
+            stopParticipationPoll()
         }
     }
 }
 
 /**
- * Clears the polling interval for the participation overview.
+ * Begins polling of the participation events.
  *
- * @method clearPollParticipationOverviewInterval
+ * @method startParticipationPoll
  *
  * @returns {void}
  */
-export function clearPollParticipationOverviewInterval(): void {
-    clearInterval(participationPollInterval)
+export function startParticipationPoll(): void {
+    shouldPollParticipation = true
+    pollParticipation()
+}
+
+/**
+ * Clears the polling interval for the participation overview.
+ *
+ * @method clearPollParticipationTimeout
+ *
+ * @returns {void}
+ */
+export function stopParticipationPoll(): void {
+    shouldPollParticipation = false
+    clearTimeout(participationPollTimeout)
 }
 
 /**
@@ -59,6 +86,7 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
+    isFetchingParticipationInfo.set(false)
     isPerformingParticipation.set(false)
     participationAction.set(null)
     participationEvents.set([])
