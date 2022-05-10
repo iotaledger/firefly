@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking is open",
                     "holding": "{duration} of staking left",
                     "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "inactive": "No staking events detected",
+                    "fetching": "Fetching staking event info..."
                 },
                 "bodies": {
                     "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
@@ -614,7 +615,8 @@
                         "title": "Unable to load Community Treasury vote",
                         "subtitle": "Please connect to a node that supports this proposal",
                         "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings"
+                        "buttonSettings": "View node settings",
+                        "fetching": "Fetching governance event info..."
                     }
                 }
             },

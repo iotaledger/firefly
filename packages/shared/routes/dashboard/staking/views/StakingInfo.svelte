@@ -1,7 +1,11 @@
 <script lang="typescript">
-    import { Animation, Link, Text } from 'shared/components'
+    import { Animation, Link, Text, Illustration, Spinner } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { assemblyStakingEventState, assemblyStakingRemainingTime } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        assemblyStakingRemainingTime,
+        isFetchingParticipationInfo,
+    } from 'shared/lib/participation/stores'
     import { formatDate, LocaleArguments, localize } from '@core/i18n'
     import {
         currentAssemblyStakingRewards,
@@ -17,6 +21,8 @@
     import { selectedAccountIdStore } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
     import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
+    import { getStakingEventFromAirdrop } from '@lib/participation/staking'
+    import { StakingAirdrop } from '@lib/participation/types'
 
     enum StakingAnimation {
         Prestaking = 'prestaking',
@@ -149,19 +155,28 @@
 </script>
 
 <div class="p-8 flex flex-col justify-center items-center w-full h-full bg-white-100 dark:bg-gray-800">
-    {#if animation}
-        <div class="animation-wrapper relative w-full">
-            <Animation
-                animation="staking-{animation}"
-                classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            />
+    {#if $isFetchingParticipationInfo && !getStakingEventFromAirdrop(StakingAirdrop.Assembly)}
+        <Illustration illustration="governance-not-found" classes="w-36 h-36 mb-6" />
+        <Spinner
+            busy={$isFetchingParticipationInfo}
+            message={localize('views.staking.info.headers.fetching')}
+            classes="justify-center"
+        />
+    {:else}
+        {#if animation}
+            <div class="animation-wrapper relative w-full">
+                <Animation
+                    animation="staking-{animation}"
+                    classes="h-full absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                />
+            </div>
+        {/if}
+        <div class="w-full mt-4 flex flex-col items-center text-center">
+            <Text type="h2" classes="mb-6">{header}</Text>
+            <Text type="p">{body}</Text>
+            <Link onClick={onClickLearnMore} classes="mt-6 text-14">{localize('actions.readMore')}</Link>
         </div>
     {/if}
-    <div class="w-full mt-4 flex flex-col items-center text-center">
-        <Text type="h2" classes="mb-6">{header}</Text>
-        <Text type="p">{body}</Text>
-        <Link onClick={onClickLearnMore} classes="mt-6 text-14">{localize('actions.readMore')}</Link>
-    </div>
 </div>
 
 <style type="text/scss">
