@@ -83,7 +83,7 @@ export const isValidHttpsUrl = (url: string): boolean => {
  * @param addr The address to validate.
  * @returns The error string to use if it does not validate.
  */
-export const validateBech32Address = (prefix: string, addr: string): undefined | string => {
+export const validateBech32Address = (prefix: string, addr: string): string => {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {
