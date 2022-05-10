@@ -1,10 +1,8 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { IAuth, INode, INodeInfo, INetwork } from '@core/network'
-    import { getNetwork, checkNodeUrlValidity, cleanAuth, updateNetworkStatusFromNodeInfo } from '@core/network'
+    import { INode, INodeInfo, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'

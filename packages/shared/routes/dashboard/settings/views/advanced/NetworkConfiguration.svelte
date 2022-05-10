@@ -7,16 +7,14 @@
         getOfficialNetworkConfig,
         isOfficialNetwork,
         updateClientOptions,
-    } from '@core/network'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import {
         INode,
         INetworkConfig,
         NETWORK_HEALTH_COLORS,
         NetworkStatusDescription,
         networkStatus,
     } from '@core/network'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: INetworkConfig =

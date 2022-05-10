@@ -34,12 +34,11 @@
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { doesNodeHavePlugin, NodePlugin } from '@core/network'
+    import { doesNodeHavePlugin, NodePlugin, networkStatus } from '@core/network'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { selectedAccount, transferState, wallet } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
-    import { networkStatus } from '@core/network'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
