@@ -11,7 +11,6 @@ export interface EventMap {
     'menu-error-log': void
     'menu-diagnostics': void
     'menu-create-developer-profile': void
-    'menu-create-mainnet-profile': void
     'log-error': void
     'deep-link-request': void
     'deep-link-params': string
