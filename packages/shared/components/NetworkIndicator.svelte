@@ -1,14 +1,12 @@
 <script lang="typescript">
     import { Icon, Modal, NetworkSummaryModal } from 'shared/components'
-    import { showAppNotification } from '@lib/notifications'
     import {
-        getAndUpdateNetworkStatus,
+        getAndUpdateNodeInfo,
         networkStatus,
         NETWORK_HEALTH_COLORS,
         showNetworkIssuesNotification,
     } from '@core/network'
     import { activeProfile } from 'shared/lib/profile'
-    import { localize } from '@core/i18n'
 
     export let modal: Modal
 
@@ -17,7 +15,7 @@
 
     function onClick() {
         modal?.open()
-        getAndUpdateNetworkStatus()
+        getAndUpdateNodeInfo()
     }
 </script>
 

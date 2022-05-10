@@ -1,5 +1,8 @@
+import { NetworkHealth } from '../enums/network-health.enum'
+
 export const NETWORK_HEALTH_COLORS = {
-    0: 'red',
-    1: 'yellow',
-    2: 'green',
+    [NetworkHealth.Down]: 'red',
+    [NetworkHealth.Degraded]: 'yellow',
+    [NetworkHealth.Operational]: 'green',
+    [NetworkHealth.Disconnected]: 'red',
 }
