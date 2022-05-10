@@ -1,5 +1,5 @@
 import { Unit } from '@iota/unit-converter'
-import { isSoftwareProfile } from 'shared/lib/profile'
+import { isLedgerProfile, isSoftwareProfile, resetActiveProfile } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
 import { localize } from '@core/i18n'
@@ -7,10 +7,10 @@ import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
 import { closePopup } from './popup'
-import { clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
+import { clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouters } from '@core/router'
 import { Stage } from './typings/stage'
-import { api, destroyManager, resetWallet } from './wallet'
+import { api, destroyManager } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
 import { activeProfile } from '@core/profile'
 
@@ -117,7 +117,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
             loggedIn.set(false)
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
-            resetWallet()
+            resetActiveProfile()
             resetRouters()
 
             resolve()

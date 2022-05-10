@@ -4,7 +4,7 @@
     import { assemblyStakingEventState, shimmerStakingEventState } from '@lib/participation/stores'
     import { AccountParticipationAbility } from '@lib/participation/types'
     import { closePopup, openPopup } from '@lib/popup'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { Button, Illustration, Text, TextHint } from 'shared/components'
     import { ASSEMBLY_EVENT_START_DATE, isStakingPossible, LAST_ASSEMBLY_STAKING_PERIOD } from '@lib/participation'
 

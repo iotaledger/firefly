@@ -15,7 +15,7 @@
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { activeProfile } from '@lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let locale: Locale
 

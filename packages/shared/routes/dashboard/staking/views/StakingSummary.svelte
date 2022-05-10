@@ -16,7 +16,8 @@
     import { openPopup } from 'shared/lib/popup'
     import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { isSyncing } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
 
     $: showSpinner = !!$participationAction || $isSyncing
 

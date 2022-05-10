@@ -40,7 +40,6 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
             case ProtectRoute.RepeatPin: {
                 await Platform.PincodeManager.set(get(activeProfile)?.id, this.pin)
                 await setStoragePassword(this.pin)
-
                 if (get(walletSetupType) === SetupType.Mnemonic) {
                     const m = get(mnemonic).join(' ')
                     await verifyMnemonic(m)

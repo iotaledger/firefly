@@ -34,7 +34,7 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
         }
         //
         return (
-            $priceData?.[$activeProfile?.settings.chartSelectors.currency.toLocaleLowerCase()]?.[
+            $priceData?.[$activeProfile?.settings?.chartSelectors?.currency.toLocaleLowerCase()]?.[
                 $activeProfile?.settings.chartSelectors.timeframe
             ]
                 ?.slice()

@@ -3,8 +3,9 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { activeProfile } from '@core/profile'
 
     $: currencyList = Object.keys($exchangeRates)
         .map((currency) => ({ value: currency, label: currency }))

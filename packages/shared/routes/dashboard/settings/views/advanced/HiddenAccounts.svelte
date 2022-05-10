@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { get } from 'svelte/store'
+    import { activeProfile } from '@core/profile'
 
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)

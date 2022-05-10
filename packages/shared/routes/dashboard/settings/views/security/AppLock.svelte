@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
 
     function updateLockTimeout(option): void {
         updateProfile('settings.lockScreenTimeoutInMinutes', option.value)

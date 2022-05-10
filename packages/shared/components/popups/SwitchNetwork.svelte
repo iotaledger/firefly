@@ -5,13 +5,13 @@
     import { createAccount, asyncRemoveWalletAccounts, setStrongholdPassword } from 'shared/lib/wallet'
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
-    import { activeProfile } from '@core/profile'
+    import { isStrongholdLocked } from '@lib/profile'
 
     export let network: INetwork
     export let node: INode

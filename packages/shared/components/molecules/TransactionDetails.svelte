@@ -10,7 +10,7 @@
     import { Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { formatDate, localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -62,7 +62,7 @@
 
     $: formattedValue = unit ? formatUnitPrecision(value, unit) : formatUnitBestMatch(value, true, 2)
     $: formattedCurrencyValue = formatCurrency(
-        convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+        convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
     )
     $: formattedStorageDeposit = storageDeposit || storageDeposit === 0 ? storageDeposit + ' i' : ''
 

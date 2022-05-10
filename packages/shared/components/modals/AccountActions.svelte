@@ -7,10 +7,11 @@
     import { updateProfile } from 'shared/lib/profile'
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { activeProfile } from '@core/profile'
+    import { selectedAccount, setSelectedAccount } from '@core/account'
 
     export let modal: Modal
 
@@ -21,9 +22,9 @@
 
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
-        $selectedAccount.meta.index === $accounts.length - 1 &&
+        $selectedAccount.meta.index === $accounts?.length - 1 &&
         $selectedAccount.rawIotaBalance === 0 &&
-        $selectedAccount.messages.length === 0
+        $selectedAccount.messages?.length === 0
 
     const handleCustomiseAccountClick = () => {
         $accountRouter.goTo(AccountRoute.Manage)
@@ -40,7 +41,7 @@
             type: 'hideAccount',
             props: {
                 account: selectedAccount,
-                hasMultipleAccounts: $viewableAccounts.length > 1,
+                hasMultipleAccounts: $viewableAccounts?.length > 1,
                 hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
@@ -49,7 +50,7 @@
                     resetWalletRoute()
                     const nextSelectedAccount =
                         $viewableAccounts[$selectedAccount?.meta.index] ??
-                        $viewableAccounts[$viewableAccounts.length - 1]
+                        $viewableAccounts[$viewableAccounts?.length - 1]
                     setSelectedAccount(nextSelectedAccount?.id)
                 },
             },
@@ -62,7 +63,7 @@
             type: 'deleteAccount',
             props: {
                 account: selectedAccount,
-                hasMultipleAccounts: $viewableAccounts.length > 1,
+                hasMultipleAccounts: $viewableAccounts?.length > 1,
                 deleteAccount: async (id: string) => {
                     await asyncRemoveWalletAccount(get(selectedAccount).id)
 

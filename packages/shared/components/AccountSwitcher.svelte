@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { activeProfile, getColor, updateProfile } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { updateProfile } from '@lib/profile'
+    import { selectedAccount } from '@core/account'
 
     export let accounts: WalletAccount[] = []
 
@@ -18,7 +18,7 @@
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
 <div class="relative left-8" style="-webkit-app-region: none;">
     <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
-        <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
+        <div class="circle" style="--account-color: {$selectedAccount?.color}" />
         <Text type="h5">{$selectedAccount?.alias()}</Text>
         <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />

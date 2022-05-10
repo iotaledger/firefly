@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
+    import { updateProfile, validateProfileName } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { activeProfile } from '@core/profile'
 
     let newName = $activeProfile.name
     let error = ''

@@ -9,8 +9,7 @@ import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
 import { openPopup } from './popup'
 import { get } from 'svelte/store'
-import { isSoftwareProfile } from './profile'
-import { activeProfile } from '@core/profile'
+import { activeProfile, isSoftwareProfile } from '@core/profile'
 
 export function sendExternalTransaction(senderAccountId: string, receiveAddress: string, amount: number): void {
     const { accounts } = get(activeProfile)

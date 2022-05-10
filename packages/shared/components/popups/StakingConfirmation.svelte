@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -19,7 +19,7 @@
     } from 'shared/lib/participation/stores'
     import { Participation, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
+    import { isSoftwareProfile } from '@core/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { activeProfile } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { activeProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
     import { Pane, Text, AccountAssetsList } from 'shared/components'
 </script>
 

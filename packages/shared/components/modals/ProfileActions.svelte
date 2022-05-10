@@ -7,18 +7,13 @@
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { popupState, openPopup } from 'shared/lib/popup'
-    import {
-        activeProfile,
-        hasEverOpenedProfileModal,
-        isLedgerProfile,
-        isSoftwareProfile,
-        isStrongholdLocked,
-    } from 'shared/lib/profile'
+    import { hasEverOpenedProfileModal, isStrongholdLocked } from 'shared/lib/profile'
     import { openSettings } from '@core/router'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile } from '@core/profile'
 
     export let modal: Modal
 

@@ -17,7 +17,8 @@
         partiallyUnstakedAmount,
         shimmerStakingEventState,
     } from '@lib/participation/stores'
-    import { activeProfile, hasEverOpenedProfileModal } from '@lib/profile'
+    import { hasEverOpenedProfileModal } from '@lib/profile'
+    import { activeProfile } from '@core/profile'
     import {
         dashboardRoute,
         dashboardRouter,

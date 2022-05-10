@@ -5,7 +5,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile } from 'shared/lib/profile'
+    import { isLedgerProfile } from '@core/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
     import { activeProfile, tryCreateAccount } from '@core/profile'
 

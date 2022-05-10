@@ -6,8 +6,8 @@
         ledgerSimulator,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getDefaultClientOptions } from '@core/network/utils'
-    import { activeProfile } from 'shared/lib/profile'
+    import { getDefaultClientOptions } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { Locale } from '@core/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'

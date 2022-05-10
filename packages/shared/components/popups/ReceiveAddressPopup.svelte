@@ -1,10 +1,8 @@
 <script lang="typescript">
-    import { Button, QR, Text } from 'shared/components'
+    import { QR, Text } from 'shared/components'
     import { AddressBox } from 'shared/components/atoms'
     import { localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
-    import { setClipboard } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     $: recieveAddress = $selectedAccount.meta.publicAddresses[0].address

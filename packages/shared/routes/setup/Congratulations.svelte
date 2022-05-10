@@ -13,14 +13,7 @@
         resetMigrationState,
         totalMigratedBalance,
     } from 'shared/lib/migration'
-    import {
-        activeProfile,
-        newProfile,
-        profileInProgress,
-        saveProfile,
-        setActiveProfile,
-        updateProfile,
-    } from 'shared/lib/profile'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile, updateProfile } from 'shared/lib/profile'
     import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -28,6 +21,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { activeProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -56,7 +50,7 @@
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
 
-                updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
+                // updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
             } else {
                 localizedBody = 'softwareMigratedBody'
             }

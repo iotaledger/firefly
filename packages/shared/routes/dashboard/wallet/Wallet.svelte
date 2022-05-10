@@ -7,7 +7,7 @@
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked, setMissingProfileType } from 'shared/lib/profile'
+    import { isStrongholdLocked, setMissingProfileType } from 'shared/lib/profile'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
         api,
@@ -16,12 +16,12 @@
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         removeEventListeners,
-        selectedAccount,
-        selectedAccountId,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import { activeProfile } from '@core/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { selectedAccount, selectedAccountId } from '@core/account'
 
     const { accounts, accountsLoaded } = $activeProfile
 

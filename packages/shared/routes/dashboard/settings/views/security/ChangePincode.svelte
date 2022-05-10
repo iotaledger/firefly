@@ -2,7 +2,7 @@
     import { Button, Pin, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'

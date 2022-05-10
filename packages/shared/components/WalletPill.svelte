@@ -4,7 +4,8 @@
     import { localize } from '@core/i18n'
     import { isBright } from 'shared/lib/helpers'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { getColor } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let account: WalletAccount
     export let size: 's' | 'm' = 'm'

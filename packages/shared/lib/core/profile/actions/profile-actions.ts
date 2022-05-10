@@ -1,7 +1,7 @@
-import { activeProfile } from '@core/profile'
+import { setSelectedAccount } from '@core/account'
+import { activeProfile, isSoftwareProfile } from '@core/profile'
 import { accountRouter } from '@core/router'
 import { openPopup } from '@lib/popup'
-import { isSoftwareProfile } from '@lib/profile'
 import { StardustAccount } from '@lib/typings/account'
 import { WalletAccount } from '@lib/typings/walletAccount'
 import {
@@ -11,7 +11,6 @@ import {
     getStardustAccount,
     prepareAccountInfo,
     profileManager,
-    setSelectedAccount,
     updateBalanceOverview,
 } from '@lib/wallet'
 import { get } from 'svelte/store'

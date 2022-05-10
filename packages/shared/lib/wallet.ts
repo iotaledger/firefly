@@ -1,7 +1,7 @@
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { localize } from '@core/i18n'
@@ -9,7 +9,7 @@ import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { isLedgerProfile, updateProfile } from './profile'
+import { updateProfile } from './profile'
 import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
 import { SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
 import { Address } from './typings/address'
@@ -18,13 +18,12 @@ import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { IAuth, INodeInfo } from '@core/network'
-import { IBalanceOverview, ProfileType } from '@core/profile'
+import { IBalanceOverview, isLedgerProfile, ProfileType } from '@core/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'shared/tailwind.config.js'
-import { setProfileAccount } from 'shared/lib/profile'
 import { CreateAccountPayload } from '@iota/wallet'
 import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
@@ -61,7 +60,7 @@ export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export const profileManager = writable<ProfileManager>(null)
-export const account = writable<StardustAccount>(null)
+
 // TODO: remove these
 interface ActorState {
     [id: string]: IActorHandler
@@ -69,41 +68,6 @@ interface ActorState {
 
 /** Active actors state */
 const actors: ActorState = {}
-
-export const resetWallet = (): void => {
-    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(activeProfile)
-    balanceOverview.set({
-        incoming: '0 Mi',
-        incomingRaw: 0,
-        outgoing: '0 Mi',
-        outgoingRaw: 0,
-        balance: '0 Mi',
-        balanceRaw: 0,
-        balanceFiat: '$ 0.00',
-    })
-    accounts.set([])
-    accountsLoaded.set(false)
-    internalTransfersInProgress.set({})
-    setSelectedAccount(null)
-    selectedMessage.set(null)
-    isTransferring.set(false)
-    transferState.set(null)
-    hasGeneratedALedgerReceiveAddress.set(false)
-    isSyncing.set(null)
-    isFirstSessionSync.set(true)
-    isFirstManualSync.set(true)
-    isBackgroundSyncing.set(false)
-    walletSetupType.set(null)
-}
-
-// Created to help selectedAccount reactivity.
-// Use it to detected switches on selectedAccount
-export const selectedAccountId = writable<string | null>(null)
-
-export const selectedAccount = derived([selectedAccountId, get(activeProfile).accounts], ([$selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $selectedAccountId)
-)
-export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
 
 export const walletSetupType = writable<SetupType>(null)
 export const selectedMessage = writable<Message | null>(null)
@@ -342,7 +306,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
         })
         get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
 
-        setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
+        // setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
         return preparedAccount
     } catch (e) {
         console.error(e)
@@ -448,7 +412,9 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
                 const meta = await getAccountMeta(account.id)
                 const startdustAccount = await get(profileManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
-                get(activeProfile)?.accounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
+                get(activeProfile)?.accounts.update((_accounts) =>
+                    _accounts.map((a) => (a.id === _account.id ? _account : a))
+                )
                 updateProfile(
                     'hiddenAccounts',
                     (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
@@ -655,7 +621,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
     const { balanceOverview } = get(activeProfile)
 
-    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
 
     balanceOverview.update((overview) =>
         Object.assign<IBalanceOverview, IBalanceOverview, Partial<IBalanceOverview>>({} as IBalanceOverview, overview, {
@@ -799,7 +765,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
 export const updateAccountsBalanceEquiv = (): void => {
     const { accounts } = get(activeProfile)
 
-    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
 
     accounts.update((storedAccounts) => {
         for (const storedAccount of storedAccounts) {
@@ -935,7 +901,7 @@ export const prepareAccountInfo = (
     const { index, alias } = account.meta
     const { balance, depositAddress } = meta
 
-    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
     // TODO: Hardcoded signer type
     return Object.assign<WalletAccount, StardustAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
         id: index.toString(),

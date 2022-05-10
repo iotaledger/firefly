@@ -8,7 +8,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/walletAccount'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
-import { selectedAccount } from '../wallet'
+import { selectedAccount } from '@core/account'
 
 import {
     ASSEMBLY_EVENT_ID,

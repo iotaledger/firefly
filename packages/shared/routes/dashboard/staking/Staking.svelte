@@ -7,7 +7,7 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import {
         GeneratingRemainderDepositAddressEvent,
         PreparedTransactionEvent,
@@ -21,6 +21,7 @@
     import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
     import { ASSEMBLY_EVENT_ID } from '@lib/participation'
+    import { activeProfile, isSoftwareProfile } from '@core/profile'
 
     const handleNewStakingEvent = (): void => {
         openPopup({
@@ -123,9 +124,9 @@
     }
 
     onMount(async () => {
-        if (!$activeProfile?.hasVisitedStaking) {
-            handleNewStakingEvent()
-        }
+        // if (!$activeProfile?.hasVisitedStaking) {
+        //     handleNewStakingEvent()
+        // }
         await getParticipationEvents()
         await getParticipationOverview(ASSEMBLY_EVENT_ID)
     })

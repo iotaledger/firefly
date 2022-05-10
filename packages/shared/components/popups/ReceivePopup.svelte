@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Button, QR, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
 
     $: receiveAddress = $selectedAccount.depositAddress
 </script>

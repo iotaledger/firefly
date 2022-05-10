@@ -1,4 +1,4 @@
-import { derived, get, Readable, writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { _ } from 'svelte-i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
@@ -9,7 +9,6 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
-    selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType, IPersistedProfile, IProfileSettings, activeProfile, IProfile } from '@core/profile'
@@ -22,11 +21,6 @@ import { AvailableExchangeRates } from './typings/currency'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
-export interface ProfileAccount {
-    id: string
-    color: string
-}
-
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export const profiles = persistent<IPersistedProfile[]>('profiles', [])
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
@@ -35,26 +29,10 @@ export const newProfile = writable<IPersistedProfile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
 export const hasEverOpenedProfileModal = writable<boolean>(false)
 
+// TODO move this somewhere else?
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
-
-selectedAccountId?.subscribe((accountId) => {
-    if (accountId) {
-        updateProfile('lastUsedAccountId', accountId)
-    }
-})
-
-export const isSoftwareProfile: Readable<boolean> = derived(
-    activeProfile,
-    ($activeProfile) => $activeProfile?.type === ProfileType.Software
-)
-
-export const isLedgerProfile: Readable<boolean> = derived(
-    activeProfile,
-    ($activeProfile) =>
-        $activeProfile?.type === ProfileType.Ledger || $activeProfile?.type === ProfileType.LedgerSimulator
-)
 
 /**
  * Saves profile in persistent storage
@@ -373,43 +351,43 @@ export const hasNoProfiles = (): boolean => get(profiles).length === 0
  *
  * @returns {ProfileAccount[]}
  */
-function getUpdatedAccounts(
-    activeProfile: IPersistedProfile,
-    accountId: string,
-    profileAccount: ProfileAccount
-): ProfileAccount[] {
-    // const { accounts } = activeProfile
+// function getUpdatedAccounts(
+//     activeProfile: IPersistedProfile,
+//     accountId: string,
+//     profileAccount: ProfileAccount
+// ): ProfileAccount[] {
+//     // const { accounts } = activeProfile
 
-    // if (accounts?.length) {
-    //     if (accounts?.find((account) => account.id === accountId)) {
-    //         return accounts.map((account) => (account.id === accountId ? profileAccount : account))
-    //     } else {
-    //         return [...accounts, profileAccount]
-    //     }
-    // }
+//     // if (accounts?.length) {
+//     //     if (accounts?.find((account) => account.id === accountId)) {
+//     //         return accounts.map((account) => (account.id === accountId ? profileAccount : account))
+//     //     } else {
+//     //         return [...accounts, profileAccount]
+//     //     }
+//     // }
 
-    return [profileAccount]
-}
+//     return [profileAccount]
+// }
 
-/**
- * Sets profile account object color found by id inside profiles object
- *
- * @method setProfileAccount
- *
- * @returns {void}
- */
-export const setProfileAccount = (activeProfile: IPersistedProfile, profileAccount: ProfileAccount): void => {
-    if (profileAccount.color) {
-        updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
-    } else if (profileAccount.id) {
-        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
-        const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
-        updateProfile(
-            'accounts',
-            getUpdatedAccounts(activeProfile, profileAccount.id, { ...profileAccount, color: randomColor })
-        )
-    }
-}
+// /**
+//  * Sets profile account object color found by id inside profiles object
+//  *
+//  * @method setProfileAccount
+//  *
+//  * @returns {void}
+//  */
+// export const setProfileAccount = (activeProfile: IPersistedProfile, profileAccount: ProfileAccount): void => {
+//     if (profileAccount.color) {
+//         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
+//     } else if (profileAccount.id) {
+//         const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+//         const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
+//         updateProfile(
+//             'accounts',
+//             getUpdatedAccounts(activeProfile, profileAccount.id, { ...profileAccount, color: randomColor })
+//         )
+//     }
+// }
 
 /**
  * Gets account color from activeProfile using account id
@@ -425,12 +403,6 @@ export const getColor = (activeProfile: IProfile, accountId: string): string | A
     if (_accounts?.length) {
         const foundAccountColor = _accounts.find((account) => account.id === accountId)?.color
         if (foundAccountColor) return foundAccountColor
-    }
-
-    if (accountId) {
-        const profileAccount = { id: accountId, color: '' }
-        setProfileAccount(activeProfile, profileAccount)
-        return getColor(activeProfile, accountId)
     }
 }
 

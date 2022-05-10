@@ -176,7 +176,7 @@ export function addProfileCurrencyPriceData(): void {
     const profile = get(activeProfile)
     if (profile) {
         // get selected profile currency and add its estimated history
-        const profileCurrency: string = profile.settings.currency.toLowerCase()
+        const profileCurrency: string = profile?.settings?.currency.toLowerCase()
         if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]

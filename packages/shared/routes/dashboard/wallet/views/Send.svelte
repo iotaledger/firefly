@@ -22,7 +22,7 @@
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { accountRouter } from '@core/router'
     import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
@@ -37,11 +37,12 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, transferState } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { selectedAccount } from '@core/account'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}

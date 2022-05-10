@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Chart, Dropdown } from 'shared/components'
     import {
         getChartDataForTokenValue,
@@ -9,13 +10,14 @@
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
-    import { getAccountBalanceHistory, selectedAccount } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
+    import { getAccountBalanceHistory } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
+    import { activeProfile } from '@core/profile'
 
     let balanceHistory: BalanceHistory
     $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
@@ -80,7 +82,7 @@
     }
 
     onMount(() => {
-        const profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+        const profileCurrency: AvailableExchangeRates = $activeProfile?.settings?.currency ?? AvailableExchangeRates.USD
         Object.values(CurrencyTypes).forEach((currency) => {
             if (currency !== CurrencyTypes.IOTA) {
                 currencyDropdownItems.push({
@@ -94,7 +96,7 @@
             currencyDropdownItems.push({ value: profileCurrency, label: profileCurrency })
         }
         // change to USD if previously selected currency is not in the list anymore
-        if (!currencyDropdownItems.some(({ value }) => value === $activeProfile?.settings.chartSelectors.currency)) {
+        if (!currencyDropdownItems.some(({ value }) => value === $activeProfile?.settings?.chartSelectors.currency)) {
             updateProfile('settings.chartSelectors.currency', AvailableExchangeRates.USD)
         }
 
@@ -119,8 +121,8 @@
             value,
             $selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS
                 ? CurrencyTypes.IOTA
-                : $activeProfile?.settings.chartSelectors.currency
-                ? $activeProfile?.settings.chartSelectors.currency
+                : $activeProfile?.settings?.chartSelectors?.currency
+                ? $activeProfile?.settings?.chartSelectors?.currency
                 : '',
             undefined,
             undefined,
@@ -156,7 +158,7 @@
                 <span>
                     <Dropdown
                         small
-                        value={$activeProfile?.settings.chartSelectors.currency}
+                        value={$activeProfile?.settings?.chartSelectors?.currency}
                         items={currencyDropdownItems}
                         onSelect={handleCurrencySelect}
                         contentWidth={true}
@@ -166,9 +168,9 @@
             <span>
                 <Dropdown
                     small
-                    value={$activeProfile?.settings.chartSelectors.timeframe
+                    value={$activeProfile?.settings?.chartSelectors?.timeframe
                         ? localize(
-                              `charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`
+                              `charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings?.chartSelectors?.timeframe]}`
                           )
                         : undefined}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({

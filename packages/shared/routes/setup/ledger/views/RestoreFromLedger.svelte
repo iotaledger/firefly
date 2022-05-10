@@ -5,7 +5,7 @@
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'
-    import { activeProfile } from '@lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let locale: Locale
 

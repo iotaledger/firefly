@@ -3,7 +3,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { Locale } from '@core/i18n'
 

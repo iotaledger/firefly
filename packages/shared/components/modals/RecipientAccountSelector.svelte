@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { truncateString } from 'shared/lib/helpers'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { Modal, AccountLabel, Text } from 'shared/components'
     import { fade } from 'svelte/transition'
