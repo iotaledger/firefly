@@ -24,7 +24,6 @@
     import { popupState } from 'shared/lib/popup'
 
     export let event: ParticipationEvent
-    export let account: WalletAccount
 
     let transactionEventData: TransferProgressEventData = null
     let nextVote: VotingEventAnswer = null
@@ -223,6 +222,14 @@
             >
                 <Icon icon="info-filled" classes="ml-2 text-gray-400" />
             </button>
+            {#if tooltip.statusTimeline.show}
+                <GovernanceInfoTooltip
+                    {event}
+                    type="statusTimeline"
+                    anchor={tooltip.statusTimeline.anchor}
+                    position="right"
+                />
+            {/if}
         </div>
         <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
         <Text type="p" classes="mb-2" bold>{event?.information?.additionalInfo}</Text>
@@ -293,6 +300,24 @@
                                     classes="fill-current text-yellow-600 group-hover:text-gray-900"
                                 />
                             </div>
+                            {#if tooltip.partiallyVoted.show}
+                                <Tooltip anchor={tooltip.partiallyVoted.anchor} position="right">
+                                    <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+                                        {localize('views.governance.info.tooltip.partiallyVoted.title', {
+                                            values: {
+                                                amount: formatUnitBestMatch(
+                                                    $currentAccountTreasuryVotePartiallyUnvotedAmount
+                                                ),
+                                            },
+                                        })}
+                                    </Text>
+                                    <Text type="p" secondary classes="text-left">
+                                        {localize('views.governance.info.tooltip.partiallyVoted.body', {
+                                            values: { account: $selectedAccountStore?.alias },
+                                        })}
+                                    </Text>
+                                </Tooltip>
+                            {/if}
                         {/if}
                         <Text
                             type="h3"
@@ -333,8 +358,8 @@
             <div class="space-y-5">
                 {#if accountVotes <= 0 && event?.status?.status !== ParticipationEventState.Ended}
                     <div class="flex flex-col flex-wrap space-y-3">
-                        <div class="flex flex-row items-center space-x-2">
-                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                        <div class="flex flex-row items-center">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500 mr-2" overrideColor>
                                 {localize('views.governance.votingPower.info.title')}
                             </Text>
                             {#if $selectedAccountStore?.rawIotaBalance > 0}
@@ -346,9 +371,17 @@
                                 >
                                     <Icon icon="info-filled" classes="text-gray-400" />
                                 </button>
+                                {#if tooltip.votingRate.show}
+                                    <GovernanceInfoTooltip
+                                        {event}
+                                        type="votingRate"
+                                        anchor={tooltip.votingRate.anchor}
+                                        position="bottom"
+                                    />
+                                {/if}
                             {/if}
                         </div>
-                        <Text type="h2">{account?.balance}</Text>
+                        <Text type="h2">{$selectedAccountStore?.balance}</Text>
                     </div>
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Upcoming}
@@ -373,8 +406,8 @@
                 {/if}
                 {#if (event?.status?.status === ParticipationEventState.Holding && accountVotes > 0) || event?.status?.status === ParticipationEventState.Ended}
                     <div class="flex flex-col flex-wrap space-y-3">
-                        <div class="flex flex-row items-center space-x-2">
-                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                        <div class="flex flex-row items-center">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500 mr-2" overrideColor>
                                 {localize('views.governance.eventDetails.votesCounted')}
                             </Text>
                             {#if event?.status?.status === ParticipationEventState.Holding}
@@ -386,6 +419,14 @@
                                 >
                                     <Icon icon="info-filled" classes="text-gray-400" />
                                 </button>
+                                {#if tooltip.countedVotes.show}
+                                    <GovernanceInfoTooltip
+                                        {event}
+                                        type="countedVotes"
+                                        anchor={tooltip.countedVotes.anchor}
+                                        position="bottom"
+                                    />
+                                {/if}
                             {/if}
                         </div>
                         <Text type="h3" classes="inline-flex items-end">
@@ -395,8 +436,8 @@
                 {/if}
                 {#if event?.status?.status === ParticipationEventState.Holding && $currentTreasuryParticipation}
                     <div class="flex flex-col flex-wrap space-y-3">
-                        <div class="flex flex-row items-center space-x-2">
-                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500" overrideColor>
+                        <div class="flex flex-row items-center">
+                            <Text type="p" smaller classes="text-gray-700 dark:text-gray-500 mr-2" overrideColor>
                                 {localize('views.governance.eventDetails.maximumVotes')}
                             </Text>
                             <button
@@ -407,6 +448,14 @@
                             >
                                 <Icon icon="info-filled" classes="text-gray-400" />
                             </button>
+                            {#if tooltip.maximumVotes.show}
+                                <GovernanceInfoTooltip
+                                    {event}
+                                    type="maximumVotes"
+                                    anchor={tooltip.maximumVotes.anchor}
+                                    position="bottom"
+                                />
+                            {/if}
                         </div>
                         <Text type="h3" classes="inline-flex items-end">
                             {formatNumber(maximumVotes, 0, 0, 2, true)}
@@ -458,33 +507,6 @@
         </DashboardPane>
     {/if}
 </div>
-
-{#if tooltip.votingRate.show}
-    <GovernanceInfoTooltip {event} type="votingRate" anchor={tooltip.votingRate.anchor} position="bottom" />
-{/if}
-{#if tooltip.countedVotes.show}
-    <GovernanceInfoTooltip {event} type="countedVotes" anchor={tooltip.countedVotes.anchor} position="bottom" />
-{/if}
-{#if tooltip.maximumVotes.show}
-    <GovernanceInfoTooltip {event} type="maximumVotes" anchor={tooltip.maximumVotes.anchor} position="bottom" />
-{/if}
-{#if tooltip.statusTimeline.show}
-    <GovernanceInfoTooltip {event} type="statusTimeline" anchor={tooltip.statusTimeline.anchor} position="right" />
-{/if}
-{#if tooltip.partiallyVoted.show}
-    <Tooltip anchor={tooltip.partiallyVoted.anchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-            {localize('views.governance.info.tooltip.partiallyVoted.title', {
-                values: { amount: formatUnitBestMatch($currentAccountTreasuryVotePartiallyUnvotedAmount) },
-            })}
-        </Text>
-        <Text type="p" secondary classes="text-left">
-            {localize('views.governance.info.tooltip.partiallyVoted.body', {
-                values: { account: $selectedAccountStore?.alias },
-            })}
-        </Text>
-    </Tooltip>
-{/if}
 
 <style>
     .pulse {

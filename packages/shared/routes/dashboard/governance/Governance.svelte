@@ -4,7 +4,6 @@
     import { getParticipationEvents } from '@lib/participation/api'
     import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
     import { participationEvents } from 'shared/lib/participation/stores'
-    import { selectedAccountStore } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
     import { GovernanceDashboard, GovernanceEventDetails } from './views'
 
@@ -25,6 +24,6 @@
     {#if $governanceRoute === GovernanceRoute.Init}
         <GovernanceDashboard {event} />
     {:else if $governanceRoute === GovernanceRoute.EventDetails}
-        <GovernanceEventDetails {event} account={$selectedAccountStore} />
+        <GovernanceEventDetails {event} />
     {/if}
 </div>
