@@ -12,6 +12,7 @@
         NETWORK_HEALTH_COLORS,
         NetworkStatusDescription,
         networkStatus,
+        NetworkHealth,
     } from '@core/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
@@ -118,7 +119,7 @@
                     <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
                         {localize(
                             `views.dashboard.network.${
-                                $networkStatus.description || NetworkStatusDescription.Disconnected
+                                $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
                             }`
                         )}
                     </p>
