@@ -38,7 +38,7 @@ export async function pollNetworkStatus(): Promise<void> {
     pollInterval = setInterval(async () => pollNetworkStatusInternal(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
-export function clearPollNetworkInterval(): void {
+export function stopNetworkPoll(): void {
     clearInterval(pollInterval)
 }
 
