@@ -16,10 +16,12 @@ import { getOfficialNodes } from './getOfficialNodes'
  * @returns {NetworkConfig}
  */
 
-export const getOfficialNetworkConfig = (protocol: NetworkProtocol, type: NetworkType): INetworkConfig => ({
-    network: getOfficialNetwork(protocol, type),
-    nodes: setRandomPrimaryNode(getOfficialNodes(protocol, type)),
-    automaticNodeSelection: true,
-    includeOfficialNodes: true,
-    localPow: true,
-})
+export function getOfficialNetworkConfig(protocol: NetworkProtocol, type: NetworkType): INetworkConfig {
+    return {
+        network: getOfficialNetwork(protocol, type),
+        nodes: setRandomPrimaryNode(getOfficialNodes(protocol, type)),
+        automaticNodeSelection: true,
+        includeOfficialNodes: true,
+        localPow: true,
+    }
+}
