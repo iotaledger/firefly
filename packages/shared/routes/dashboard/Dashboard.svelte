@@ -24,17 +24,13 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { stopNetworkPoll, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import {
-        clearPollParticipationOverviewInterval,
-        pollParticipation,
-        updateStakingPeriodCache,
-    } from 'shared/lib/participation'
+    import { stopParticipationPoll, startParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -77,10 +73,7 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipation()
-        } else {
-            clearPollNetworkInterval()
-            clearPollParticipationOverviewInterval()
+            void startParticipationPoll()
         }
     })
 
@@ -221,6 +214,8 @@
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
         unsubscribePendingParticipations()
+        stopNetworkPoll()
+        stopParticipationPoll()
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
