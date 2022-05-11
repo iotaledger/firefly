@@ -390,35 +390,3 @@ export const getColor = (activeProfile: IProfile, accountId: string): string | A
         if (foundAccountColor) return foundAccountColor
     }
 }
-
-/**
- * Validates the trimmed profile name
- *
- * @method validateProfileName
- *
- * @param {string} trimmedName
- *
- * @returns {void}
- */
-export const validateProfileName = (trimmedName: string): void => {
-    const locale = get(_) as Locale
-    const validateError = validateFilenameChars(trimmedName)
-
-    if (validateError) {
-        throw new Error(locale(`error.account.${validateError}`))
-    }
-
-    if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
-        throw new Error(
-            locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH,
-                },
-            })
-        )
-    }
-
-    if (get(profiles).some((p) => p.name === trimmedName)) {
-        throw new Error(locale('error.profile.duplicate'))
-    }
-}

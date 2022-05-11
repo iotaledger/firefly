@@ -11,17 +11,16 @@
         Text,
         CollapsibleBlock,
     } from 'shared/components'
-    import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { storeProfile, disposeNewProfile, hasNoProfiles, validateProfileName } from 'shared/lib/profile'
+    import { storeProfile, disposeNewProfile, hasNoProfiles } from 'shared/lib/profile'
     import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { newProfile } from '@core/profile'
+    import { newProfile, validateProfileName } from '@core/profile'
 
     export let locale: Locale
 

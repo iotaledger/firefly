@@ -13,8 +13,8 @@ const { isStrongholdLocked } = get(activeProfile)
 /**
  * Logout from current profile
  */
-export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
-    new Promise<void>((resolve) => {
+export function logout(_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
+    return new Promise<void>((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             // TODO: Lock stronghold on using profile manager
             isStrongholdLocked.set(true)
@@ -24,7 +24,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
-            destroyManager(_activeProfile.id)
+            destroyManager()
         }
 
         // TODO: clean up the state management
@@ -40,3 +40,4 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
 
         resolve()
     })
+}
