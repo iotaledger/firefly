@@ -11,7 +11,9 @@
     export let modal: Modal
 
     $: healthStatus = $networkStatus.health ?? 0
-    $: healthStatus !== 2 && showNetworkIssuesNotification()
+
+    // TODO: Move this to dashboard or onload logic
+    // $: healthStatus !== 2 && showNetworkIssuesNotification()
 
     function onClick() {
         modal?.open()
