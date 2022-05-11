@@ -3,11 +3,11 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
-    let tooltipAnchor
-    let showTooltip = false
-
     export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
+
+    let tooltipAnchor
+    let showTooltip = false
 
     const _showTooltip = (show: boolean): void => {
         showTooltip = show
