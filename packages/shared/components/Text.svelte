@@ -169,6 +169,9 @@
         } else if (secondary) {
             color = SECONDARY_TEXT_COLOUR
             darkColor = SECONDARY_TEXT_COLOUR
+        } else {
+            color = TEXT_PREFIX + 'gray-800'
+            darkColor = DARKMODE_PREFIX + TEXT_PREFIX + 'white'
         }
     }
     $: error, disabled, highlighted, secondary, adjustColor()
