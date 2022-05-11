@@ -11,7 +11,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -44,6 +43,7 @@
         loadPersistedProfileIntoActiveProfile,
         persistedProfile,
         saveActiveProfile,
+        cleanupEmptyProfiles,
     } from '@core/profile'
     import { Platform } from '@lib/platform'
 

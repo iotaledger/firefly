@@ -21,6 +21,7 @@ import {
     activeProfileId,
     MAX_PROFILE_NAME_LENGTH,
     newProfile,
+    removeProfileFolder,
 } from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
@@ -48,19 +49,6 @@ export const migrateProfile = (): void => {
     )
 
     updateProfile('', migrateObjects<IPersistedProfile>(oldProfile, newProfile))
-}
-
-/**
- * Removes profile from storage
- *
- * @method removeProfile
- *
- * @param {string} id
- *
- * @returns {void}
- */
-export const removeProfile = (id: string): void => {
-    profiles.update((_profiles) => _profiles.filter((_profile) => _profile.id !== id))
 }
 
 /**
@@ -112,61 +100,6 @@ export const updateProfile = (
             })
         )
     }
-}
-
-/**
- * Remove the profile folder from storage
- *
- * @method removeProfileFolder
- *
- * @returns {void}
- */
-export const removeProfileFolder = async (id: string): Promise<void> => {
-    try {
-        const profileDataPath = await getProfileDataPath(id)
-        await Platform.removeProfileFolder(profileDataPath)
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-/**
- * Cleanup profile listed that have nothing stored and stored profiles not in app.
- *
- * @method cleanupEmptyProfiles
- *
- * @returns {void}
- */
-export const cleanupEmptyProfiles = async (): Promise<void> => {
-    try {
-        const profileDataPath = await getWalletDataPath()
-        const storedProfiles = await Platform.listProfileFolders(profileDataPath)
-
-        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.id)))
-
-        const appProfiles = get(profiles).map((p) => p.id)
-        for (const storedProfile of storedProfiles) {
-            if (!appProfiles.includes(storedProfile)) {
-                await removeProfileFolder(storedProfile)
-            }
-        }
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-/**
- * Set profile type if missing (for back compatibility purposes)
- *
- * @method setProfileType
- *
- * @param {ProfileType} type
- *
- * @returns {void}
- */
-export const setProfileType = (type: ProfileType): void => {
-    const isLedgerSimulator = ledgerSimulator && type === ProfileType.Ledger
-    updateProfile('type', isLedgerSimulator ? ProfileType.LedgerSimulator : type)
 }
 
 /**

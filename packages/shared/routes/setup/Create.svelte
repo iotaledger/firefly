@@ -2,12 +2,11 @@
     import { appRouter } from '@core/router'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { setProfileType } from 'shared/lib/profile'
     import { localize } from '@core/i18n'
-    import { ProfileType } from '@core/profile'
+    import { ProfileType, setNewProfileType } from '@core/profile'
 
     function handleContinueClick(profileType: ProfileType): void {
-        setProfileType(profileType)
+        setNewProfileType(profileType)
         $appRouter.next()
     }
 

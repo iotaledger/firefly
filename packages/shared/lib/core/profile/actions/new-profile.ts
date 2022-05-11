@@ -1,9 +1,11 @@
 import { NetworkProtocol, NetworkType } from '@core/network'
-import { removeProfileFolder } from '@lib/profile'
+import { ledgerSimulator } from '@lib/ledger'
 import { destroyManager } from '@lib/wallet'
 import { get } from 'svelte/store'
+import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
-import { activeProfileId, newProfile } from '../stores'
+import { activeProfileId, newProfile, updateNewProfile } from '../stores'
+import { removeProfileFolder } from '../utils'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
@@ -47,4 +49,15 @@ export const deleteNewProfile = async (): Promise<void> => {
     }
     newProfile.set(null)
     activeProfileId.set(null)
+}
+
+/**
+ * Set profile type if missing (for back compatibility purposes)
+ * @method setNewProfileType
+ * @param {ProfileType} type
+ * @returns {void}
+ */
+export const setNewProfileType = (type: ProfileType): void => {
+    type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
+    updateNewProfile({ type })
 }

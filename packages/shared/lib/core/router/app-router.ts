@@ -1,13 +1,12 @@
 import { get, writable } from 'svelte/store'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
-import { setProfileType } from '@lib/profile'
 import { ProfileImportType, ProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
-import { activeProfile, profiles } from '@core/profile'
+import { activeProfile, profiles, setNewProfileType } from '@core/profile'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -76,7 +75,7 @@ export class AppRouter extends Router<AppRoute> {
                     walletSetupType.set(setupType)
                     if (setupType === SetupType.New) {
                         if (get(mobile)) {
-                            setProfileType(ProfileType.Software)
+                            setNewProfileType(ProfileType.Software)
                             nextRoute = AppRoute.Secure
                         } else {
                             nextRoute = AppRoute.Create

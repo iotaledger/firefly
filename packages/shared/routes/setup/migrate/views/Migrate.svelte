@@ -27,7 +27,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { newProfile, saveProfile, setActiveProfile } from '@core/profile'
+    import { addProfile, newProfile, setActiveProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -88,7 +88,7 @@
                         .then((data) => {
                             if ($newProfile) {
                                 // Save profile
-                                saveProfile($newProfile)
+                                addProfile($newProfile)
                                 setActiveProfile($newProfile.id)
 
                                 newProfile.set(null)
@@ -115,7 +115,7 @@
                         singleMigrationBundleHash = data.bundleHash
                         return sendMigrationBundle(data.bundleHash).then(() => {
                             // Save profile
-                            saveProfile($newProfile)
+                            addProfile($newProfile)
                             setActiveProfile($newProfile.id)
 
                             newProfile.set(null)
