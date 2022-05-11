@@ -2,7 +2,7 @@
     import { Unit } from '@iota/unit-converter'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
-    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
+    import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -47,7 +47,8 @@
 
     $: mustAcknowledgeGenericParticipationWarning =
         (isAccountStaked(accountId) &&
-            (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState))) ||
+            (isParticipationPossible($assemblyStakingEventState) ||
+                isParticipationPossible($shimmerStakingEventState))) ||
         isAccountVoting
 
     let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
@@ -56,10 +57,10 @@
         mustAcknowledgeBelowMinRewardParticipationWarning =
             (accountOverview?.assemblyRewardsBelowMinimum > 0 &&
                 accountOverview?.assemblyRewards <= 0 &&
-                isStakingPossible($assemblyStakingEventState)) ||
+                isParticipationPossible($assemblyStakingEventState)) ||
             (accountOverview?.shimmerRewardsBelowMinimum > 0 &&
                 accountOverview?.shimmerRewards <= 0 &&
-                isStakingPossible($shimmerStakingEventState))
+                isParticipationPossible($shimmerStakingEventState))
     }
 
     function getFormattedAmount() {

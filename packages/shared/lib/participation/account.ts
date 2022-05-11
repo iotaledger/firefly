@@ -120,21 +120,21 @@ export const currentTreasuryParticipation = derived(
 )
 
 export const hasCurrentAccountReceivedFundsSinceLastTreasuryVote = derived(
-    selectedAccountStore,
-    ($selectedAccountStore) => {
-        const { amount } = get(currentTreasuryParticipation) ?? {}
+    [selectedAccountStore, currentTreasuryParticipation],
+    ([$selectedAccountStore, $currentTreasuryParticipation]) => {
+        const { amount } = $currentTreasuryParticipation ?? {}
         return $selectedAccountStore && amount && amount !== $selectedAccountStore.rawIotaBalance
     }
 )
 
 /**
- * The store for the total amount of funds that are partially (un)staked for
+ * The store for the total amount of funds that are partially not voted for
  * the selected account.
  */
 export const currentAccountTreasuryVotePartiallyUnvotedAmount = derived(
-    selectedAccountStore,
-    ($selectedAccountStore) => {
-        const { amount } = get(currentTreasuryParticipation) ?? {}
+    [selectedAccountStore, currentTreasuryParticipation],
+    ([$selectedAccountStore, $currentTreasuryParticipation]) => {
+        const { amount } = $currentTreasuryParticipation ?? {}
         const accountBalance = $selectedAccountStore?.rawIotaBalance ?? 0
         return amount < accountBalance ? accountBalance - amount : 0
     }
@@ -432,7 +432,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
 
 const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
     const event = getStakingEventFromAirdrop(airdrop)
-    if (!event || !isStakingPossible(event?.status?.status)) return 0
+    if (!event || !isParticipationPossible(event?.status?.status)) return 0
 
     // Remaining time is in milliseconds
     const timeLeft =
@@ -451,16 +451,16 @@ const getNumRemainingMilestones = (airdrop: StakingAirdrop): number => {
 }
 
 /**
- * Determines whether staking is currently in the pre-stake or holding period
+ * Determines whether is possible to participate in an event
  *
- * @method isStakingPossible
+ * @method isParticipationPossible
  *
  * @param {ParticipationEventState} stakingEventState
  *
  * @returns {boolean}
  */
-export const isStakingPossible = (stakingEventState: ParticipationEventState): boolean =>
-    stakingEventState === ParticipationEventState.Commencing || stakingEventState === ParticipationEventState.Holding
+export const isParticipationPossible = (eventState: ParticipationEventState): boolean =>
+    eventState === ParticipationEventState.Commencing || eventState === ParticipationEventState.Holding
 
 export function isNewStakingEvent(stakingEventState: ParticipationEventState): boolean {
     if (!stakingEventState) return false

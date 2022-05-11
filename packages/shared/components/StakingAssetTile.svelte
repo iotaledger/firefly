@@ -18,7 +18,7 @@
         hasAccountReachedMinimumAirdrop,
         getTimeUntilMinimumAirdropReward,
         getUnstakedFunds,
-        isStakingPossible,
+        isParticipationPossible,
     } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -49,13 +49,13 @@
     const FIAT_PLACEHOLDER = '---'
 
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
-    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
+    $: isActivelyStaking = getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)
+    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isParticipationPossible(stakingEventState)
     $: hasStakingEnded = stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isParticipationPossible(stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards =
@@ -65,7 +65,7 @@
     }
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
-        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible(stakingEventState)) ||
+        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
@@ -102,7 +102,7 @@
                         }),
                     ],
                 }
-            } else if (!isAccountStaked($selectedAccountStore?.id) && isStakingPossible(stakingEventState)) {
+            } else if (!isAccountStaked($selectedAccountStore?.id) && isParticipationPossible(stakingEventState)) {
                 const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {
