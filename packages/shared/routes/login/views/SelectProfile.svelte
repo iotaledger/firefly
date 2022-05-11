@@ -7,6 +7,7 @@
     import { ProfileType } from 'shared/lib/typings/profile'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     const dispatch = createEventDispatcher()
 
@@ -54,8 +55,8 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
-                    networkType={profile?.networkType || 'devnet'}
-                    networkProtocol={profile?.networkProtocol || 'shimmer'}
+                    networkType={profile?.networkType ?? NetworkType.Devnet}
+                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.Shimmer}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"

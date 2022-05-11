@@ -12,6 +12,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let locale: Locale
 
@@ -158,8 +159,8 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                networkType={$activeProfile?.networkType || 'devnet'}
-                networkProtocol={$activeProfile?.networkProtocol || 'shimmer'}
+                networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
+                networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
                 bgColor="blue"
             />
             <div class="flex mt-18 w-full items-center">
