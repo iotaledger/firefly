@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Chip, Icon, Modal, Text, HR, Toggle, Button } from 'shared/components'
+    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { LocaleArguments } from '@core/i18n/types'
@@ -136,7 +136,7 @@
             <div class="flex flex-row space-x-2">
                 <Text>{profileName}</Text>
                 {#if $activeProfile?.isDeveloperProfile}
-                    <Chip label={localize('general.dev')} />
+                    <DeveloperIndicatorPill label={localize('general.dev')} />
                 {/if}
             </div>
             {#if $isLedgerProfile}

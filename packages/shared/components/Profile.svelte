@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Chip, Icon, NetworkIconBadge, Text } from 'shared/components'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -62,7 +62,7 @@
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
         {#if isDeveloper}
-            <Chip label={localize('general.dev')} />
+            <DeveloperIndicatorPill label={localize('general.dev')} />
         {/if}
     </div>
 </div>
