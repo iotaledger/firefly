@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
     import { Transition } from 'shared/components'
-    import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
+    import { activeProfileId, clearActiveProfile } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
+    import { profiles } from '@core/profile'
 
     export let locale: Locale
 
