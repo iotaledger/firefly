@@ -1,6 +1,6 @@
 import './mocks/matchMedia'
 
-import { migrateObjects, range } from '../utils'
+import { getNumberOfDecimalPlaces, migrateObjects, range } from '../utils'
 
 type Simple = {
     prop1?: string
@@ -171,6 +171,24 @@ describe('File: utils.ts', () => {
             expect(range(-1)).toEqual([])
             expect(range(-1, 1)).toEqual([])
             expect(range(undefined, 1)).toEqual([])
+        })
+    })
+
+    describe('Function: getNumberOfDecimalPlaces', () => {
+        it('should handle integers (large and small)', () => {
+            expect(getNumberOfDecimalPlaces(0)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1000)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1_000_000_000)).toEqual(0)
+        })
+        it('should handle floats (large and small)', () => {
+            expect(getNumberOfDecimalPlaces(1.0)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1.01)).toEqual(2)
+            expect(getNumberOfDecimalPlaces(1.000000001)).toEqual(9)
+            expect(getNumberOfDecimalPlaces(1_000_000_000.01)).toEqual(2)
+        })
+        it('should handle invalid arguments', () => {
+            expect(getNumberOfDecimalPlaces(null)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(undefined)).toEqual(0)
         })
     })
 })
