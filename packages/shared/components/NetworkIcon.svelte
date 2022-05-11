@@ -15,7 +15,6 @@
                 iconColor = 'white'
                 break
             case NetworkProtocol.Shimmer:
-                ''
                 backgroundColor = 'shimmer-highlight'
                 iconColor = 'black'
                 break
