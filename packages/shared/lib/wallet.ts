@@ -17,7 +17,7 @@ import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { IAuth, INodeInfo } from '@core/network'
+import { IAuth, INodeInfo, IStardustNodeInfo } from '@core/network'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
@@ -480,24 +480,13 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: IAuth): Promise<INodeInfo> => {
+export const asyncGetNodeInfo = (url?: string, auth?: IAuth): Promise<IStardustNodeInfo> => {
     if (!url || (!url && !auth)) {
-        const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
-
-        url = node?.url
-        auth = node?.auth
+        return new Promise((resolve) => resolve(<IStardustNodeInfo>{}))
     }
 
-    return new Promise<INodeInfo>((resolve, reject) => {
-        api.getNodeInfo(accountId, url, auth, {
-            onSuccess(response) {
-                resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+    const manager = get(profileManager)
+    return manager.getNodeInfo(url, auth)
 }
 
 export const asyncStopBackgroundSync = (): Promise<void> =>
