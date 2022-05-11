@@ -18,7 +18,7 @@ import { getParticipationOverview } from './participation/api'
 import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
-import { openPopup } from './popup'
+import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
@@ -112,8 +112,11 @@ export const initialiseListeners = (): void => {
                 // Instantly pull in latest participation overview.
                 await getParticipationOverview(ASSEMBLY_EVENT_ID)
 
-                // If it is a message related to any participation event, display a notification
+                // If it is a message related to any participation event, display a notification and close any open participation popup
                 displayParticipationNotification(getPendingParticipation(message.id))
+                if (get(popupState).type === 'governanceManager' || get(popupState).type === 'stakingManager') {
+                    closePopup()
+                }
 
                 // Remove the pending participation from local store
                 removePendingParticipations([message.id])

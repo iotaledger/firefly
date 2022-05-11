@@ -45,6 +45,11 @@ export const participationOverview = writable<ParticipationOverview>([])
 export const isPerformingParticipation = writable<boolean>(false)
 
 /**
+ * Whether participation overview and events are being fetched
+ */
+export const isFetchingParticipationInfo = writable<boolean>(false)
+
+/**
  * The store for accounts that are currently staked. This is NOT to hold accounts
  * that have been selected for staking / unstaking or have staked in the past.
  *

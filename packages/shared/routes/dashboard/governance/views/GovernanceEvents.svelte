@@ -2,9 +2,10 @@
     import { localize } from '@core/i18n'
     import { governanceRouter, openSettings, settingsRouter } from '@core/router/'
     import { GovernanceRoute, SettingsRoute } from '@core/router/enums'
-    import { Button, Illustration, Link, Text } from 'shared/components'
+    import { Button, Illustration, Link, Text, Spinner } from 'shared/components'
     import { getOfficialNetworkConfig, updateClientOptions } from 'shared/lib/network'
     import { ParticipationEvent } from 'shared/lib/participation/types'
+    import { isFetchingParticipationInfo } from 'shared/lib/participation/stores'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
 
@@ -59,18 +60,26 @@
 {:else}
     <div class="h-full w-full flex flex-col justify-center items-center">
         <Illustration illustration="governance-not-found" classes="w-36 h-36 mb-6" />
-        <div class="mb-8 text-center">
-            <Text type="p" secondary bold>{localize('views.governance.events.treasury.notFound.title')}</Text>
-            <Text type="p" secondary>{localize('views.governance.events.treasury.notFound.subtitle')}</Text>
-        </div>
-        {#if !networkConfig.automaticNodeSelection}
-            <Button onClick={handleConnectDefaultNodeClick} classes="mb-4">
-                {localize('views.governance.events.treasury.notFound.buttonConnect')}
-            </Button>
+        {#if $isFetchingParticipationInfo}
+            <Spinner
+                busy={$isFetchingParticipationInfo}
+                message={localize('views.governance.events.treasury.notFound.fetching')}
+                classes="justify-center"
+            />
+        {:else}
+            <div class="mb-8 text-center">
+                <Text type="p" secondary bold>{localize('views.governance.events.treasury.notFound.title')}</Text>
+                <Text type="p" secondary>{localize('views.governance.events.treasury.notFound.subtitle')}</Text>
+            </div>
+            {#if !networkConfig.automaticNodeSelection}
+                <Button onClick={handleConnectDefaultNodeClick} classes="mb-4">
+                    {localize('views.governance.events.treasury.notFound.buttonConnect')}
+                </Button>
+            {/if}
+            <Link onClick={handleViewNodeSettingsClick}>
+                {localize('views.governance.events.treasury.notFound.buttonSettings')}
+            </Link>
         {/if}
-        <Link onClick={handleViewNodeSettingsClick}>
-            {localize('views.governance.events.treasury.notFound.buttonSettings')}
-        </Link>
     </div>
 {/if}
 
