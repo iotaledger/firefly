@@ -6,7 +6,7 @@ import { clearActiveProfile } from '@lib/profile'
 import { destroyManager } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { activeProfile, isLedgerProfile, isSoftwareProfile } from '../stores'
-import { resetActiveProfile } from './resetActiveProfile'
+import { resetActiveProfile } from './active-profile'
 
 const { isStrongholdLocked } = get(activeProfile)
 

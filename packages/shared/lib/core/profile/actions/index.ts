@@ -1,5 +1,2 @@
-export * from './createNewProfile'
-export * from './logout'
-export * from './profile-actions'
-export * from './resetActiveProfile'
-export * from './saveActiveProfile'
+export * from './active-profile'
+export * from './new-profile'
