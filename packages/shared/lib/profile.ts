@@ -28,67 +28,12 @@ import { ValuesOf } from './typings/utils'
 import { WalletAccount } from './typings/walletAccount'
 import { Locale } from '@core/i18n'
 import { AvailableExchangeRates } from './typings/currency'
+import { buildNewProfile } from '@core/profile/helpers'
 
 // TODO move this somewhere else?
 // activeProfileId?.subscribe((profileId) => {
 //     Platform.updateActiveProfile(profileId)
 // })
-
-/**
- * Build a default profile object given a name and developer status.
- *
- * @method buildProfile
- *
- * @param {string} profileName
- * @param {boolean} isDeveloperProfile
- *
- * @returns {Profile}
- */
-const buildProfile = (
-    profileName: string,
-    isDeveloperProfile: boolean,
-    networkProtocol: NetworkProtocol,
-    networkType: NetworkType
-): IPersistedProfile => ({
-    id: generateRandomId(),
-    name: profileName,
-    type: null,
-    networkProtocol: networkProtocol,
-    networkType: networkType,
-    lastStrongholdBackupTime: null,
-    isDeveloperProfile,
-    settings: {
-        currency: AvailableExchangeRates.USD,
-        networkConfig: getOfficialNetworkConfig(networkProtocol, networkType),
-        lockScreenTimeoutInMinutes: 5,
-        chartSelectors: {
-            currency: AvailableExchangeRates.USD,
-            timeframe: HistoryDataProps.SEVEN_DAYS,
-        },
-    },
-})
-
-/**
- * Builds a new profile and sets Svelte store variables accordingly.
- *
- * @method storeProfile
- *
- * @param {string} profileName
- * @param {boolean} isDeveloperProfile
- *
- * @returns {Profile}
- */
-export const storeProfile = (
-    profileName: string,
-    isDeveloperProfile: boolean,
-    networkProtocol: NetworkProtocol,
-    networkType: NetworkType
-): void => {
-    const profile = buildProfile(profileName, isDeveloperProfile, networkProtocol, networkType)
-
-    newProfile.set(profile)
-    activeProfileId.set(profile.id)
-}
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -100,7 +45,7 @@ export const storeProfile = (
  */
 export const migrateProfile = (): void => {
     const oldProfile = get(activeProfile)
-    const newProfile = buildProfile(
+    const newProfile = buildNewProfile(
         oldProfile.name,
         oldProfile.isDeveloperProfile,
         oldProfile.networkProtocol,

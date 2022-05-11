@@ -13,14 +13,14 @@
     } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { storeProfile, disposeNewProfile } from 'shared/lib/profile'
+    import { disposeNewProfile } from 'shared/lib/profile'
     import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { newProfile, profiles, validateProfileName } from '@core/profile'
+    import { newProfile, profiles, validateProfileName, createNewProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -57,7 +57,7 @@
         try {
             busy = true
             if (nameChanged || hasDeveloperProfileChanged) {
-                storeProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
+                createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
