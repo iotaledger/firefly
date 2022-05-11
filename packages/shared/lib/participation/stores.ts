@@ -1,10 +1,7 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import { networkStatus } from '../networkStatus'
-import { NodePlugin } from '@core/network'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { selectedAccount, selectedAccountId, wallet } from '../wallet'
 import { WalletAccount } from '../typings/walletAccount'
-
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     AccountParticipationOverview,
@@ -16,7 +13,7 @@ import {
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { NetworkStatus } from '@lib/typings/network'
+import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
 import { activeProfile } from '@lib/profile'
 
@@ -248,7 +245,7 @@ export const participationEvents = writable<ParticipationEvent[]>([])
 
 function deriveParticipationEventState(
     stakingEvent: ParticipationEvent,
-    networkStatus: NetworkStatus
+    networkStatus: INetworkStatus
 ): ParticipationEventState {
     if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
         return ParticipationEventState.Inactive

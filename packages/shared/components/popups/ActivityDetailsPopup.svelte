@@ -15,7 +15,7 @@
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
     const { accounts } = $wallet
-    const explorerUrl = getOfficialExplorerUrl($activeProfile.networkProtocol, $activeProfile.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let type: ActivityType
     $: {

@@ -27,7 +27,7 @@
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
-    import { NetworkProtocol, NetworkType } from '@lib/typings/network'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let locale: Locale
 

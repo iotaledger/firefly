@@ -286,7 +286,7 @@ describe('File: network.ts', () => {
         })
     })
 
-    describe('Function: cleanNodeAuth', () => {
+    describe('Function: cleanAuth', () => {
         it('should return an empty basic auth configuration given nothing', () => {
             expect(cleanAuth(<IAuth>{})).toEqual(EMPTY_NODE_AUTH)
             expect(cleanAuth(undefined)).toEqual(EMPTY_NODE_AUTH)

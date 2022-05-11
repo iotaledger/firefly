@@ -2,51 +2,24 @@
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
-    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { loggedIn } from 'shared/lib/app'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Idle, Sidebar } from 'shared/components'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import {
-        clearPollParticipationOverviewInterval,
-        pollParticipationOverview,
-        updateStakingPeriodCache,
-    } from 'shared/lib/participation'
-    import { getParticipationEvents } from 'shared/lib/participation/api'
+    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
-    import {
-        AccountRoute,
-        accountRouter,
-        AdvancedSettings,
-        appRouter,
-        dashboardRoute,
-        DashboardRoute,
-        dashboardRouter,
-        SettingsRoute,
-        settingsRouter,
-    } from '@core/router'
+    import { activeProfile, isLedgerProfile, updateProfile } from '@lib/profile'
+    import { appRouter, dashboardRoute } from '@core/router'
     import { Locale } from '@core/i18n'
-    import {
-        api,
-        createAccount,
-        asyncSyncAccountOffline,
-        isBackgroundSyncing,
-        isFirstSessionSync,
-        isSyncing,
-        setSelectedAccount,
-        STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
-        wallet,
-    } from 'shared/lib/wallet'
+    import { setSelectedAccount, wallet } from 'shared/lib/wallet'
     import TopNavigation from './TopNavigation.svelte'
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import {
         CURRENT_ASSEMBLY_STAKING_PERIOD,

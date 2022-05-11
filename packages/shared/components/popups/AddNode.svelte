@@ -1,29 +1,26 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { IAuth, INode, INodeInfo, INetwork } from '@core/network'
-    import { getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network/utils'
+    import { INode, INodeInfo, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { activeProfile } from 'shared/lib/profile'
-    import { updateNetworkStatus } from '../../lib/networkStatus'
     import { localize } from '@core/i18n'
 
     export let node: INode = { url: '', isPrimary: false }
     export let nodes: INode[] = []
     export let network: INetwork
-    export let isAddingNode: boolean = true
+    export let isAddingNode = true
 
     export let onSuccess = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
-    let nodeUrl: string = node?.url || ''
-    const oldNodeUrl: string = nodeUrl
-    const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
+    let nodeUrl = node?.url || ''
+    const oldNodeUrl = nodeUrl
+    const optNodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
     let addressWarn = ''
@@ -61,7 +58,7 @@
             addressError = localize('error.network.notReachable')
         } else if (id !== network.id) {
             if ($activeProfile.isDeveloperProfile) {
-                newNetwork = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType, id)
+                newNetwork = getNetwork($activeProfile?.networkProtocol, $activeProfile?.networkType, id)
                 isNetworkSwitch = true
             } else {
                 addressError = localize('error.network.mismatch', { values: { networkId: id } })
@@ -99,34 +96,34 @@
 
         if (!addressError) {
             if (!isNetworkSwitch) {
-                await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
-                    url: nodeUrl,
-                    auth: optNodeAuth,
-                    isPrimary: node?.isPrimary,
-                })
-                    .then(() => {
-                        isBusy = false
-
-                        onSuccess(
-                            false,
-                            {
-                                url: cleanNodeUrl(nodeUrl),
-                                auth: optNodeAuth,
-                                network: getNetwork(
-                                    $activeProfile.networkProtocol,
-                                    $activeProfile.networkType,
-                                    nodeInfo?.nodeinfo.networkId
-                                ),
-                                isPrimary: node?.isPrimary || false,
-                            },
-                            oldNodeUrl
-                        )
-                        closePopup()
-                    })
-                    .catch((err) => {
-                        isBusy = false
-                        return
-                    })
+                // TODO refactor
+                // await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
+                //     url: nodeUrl,
+                //     auth: optNodeAuth,
+                //     isPrimary: node?.isPrimary,
+                // })
+                //     .then(() => {
+                //         isBusy = false
+                //         onSuccess(
+                //             false,
+                //             {
+                //                 url: cleanNodeUrl(nodeUrl),
+                //                 auth: optNodeAuth,
+                //                 network: getNetwork(
+                //                     $activeProfile?.networkProtocol,
+                //                     $activeProfile?.networkType,
+                //                     nodeInfo?.nodeinfo.networkId
+                //                 ),
+                //                 isPrimary: node?.isPrimary || false,
+                //             },
+                //             oldNodeUrl
+                //         )
+                //         closePopup()
+                //     })
+                //     .catch((err) => {
+                //         isBusy = false
+                //         return
+                //     })
             }
         }
 

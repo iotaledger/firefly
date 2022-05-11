@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { getDecimalSeparator } from '../currency'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
-import { networkStatus } from '../networkStatus'
+import { networkStatus } from '@core/network'
 import { activeProfile, updateProfile } from '../profile'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/walletAccount'
