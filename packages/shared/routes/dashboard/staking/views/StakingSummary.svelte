@@ -4,7 +4,11 @@
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
+    import {
+        getAccountParticipationAbility,
+        isNewStakingEvent,
+        isParticipationPossible,
+    } from 'shared/lib/participation'
     import {
         isPartiallyStaked,
         partiallyUnstakedAmount,
@@ -22,7 +26,7 @@
     $: showSpinner = !!$participationAction || $isSyncing
 
     $: canParticipateInEvent =
-        isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)
+        isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)
 
     $: cannotStake = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
