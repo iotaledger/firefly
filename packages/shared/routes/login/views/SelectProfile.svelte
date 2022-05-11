@@ -54,8 +54,8 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
-                    networkType={profile?.networkType ?? 'devnet'}
-                    networkProtocol={profile?.networkProtocol ?? 'shimmer'}
+                    networkType={profile?.networkType || 'devnet'}
+                    networkProtocol={profile?.networkProtocol || 'shimmer'}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"

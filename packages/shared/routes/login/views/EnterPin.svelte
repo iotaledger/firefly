@@ -158,8 +158,8 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                networkType={$activeProfile?.networkType ?? 'devnet'}
-                networkProtocol={$activeProfile?.networkProtocol ?? 'shimmer'}
+                networkType={$activeProfile?.networkType || 'devnet'}
+                networkProtocol={$activeProfile?.networkProtocol || 'shimmer'}
                 bgColor="blue"
             />
             <div class="flex mt-18 w-full items-center">
