@@ -408,10 +408,6 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded) {
-        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
-    }
-
     $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
