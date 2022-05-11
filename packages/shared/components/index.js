@@ -61,7 +61,6 @@ export { default as WalletPill } from './WalletPill.svelte'
 export { default as ColorPicker } from './ColorPicker.svelte'
 export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
-export { default as Chip } from './Chip.svelte'
 export { default as PingingBadge } from './PingingBadge.svelte'
 export { default as NetworkIndicator } from './NetworkIndicator.svelte'
 

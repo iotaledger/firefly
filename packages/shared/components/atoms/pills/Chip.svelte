@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { FontWeightText } from './Text.svelte'
+    import { FontWeightText } from '../../Text.svelte'
 
     export let label: string = ''
 </script>
