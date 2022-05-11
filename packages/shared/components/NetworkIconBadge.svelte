@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { NetworkIcon, Text, Tooltip } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { NETWORK, NetworkProtocol, NetworkType } from '@core/network'
 
     export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
 
     let tooltipAnchor
     let showTooltip = false
+
+    $: tooltipText = NETWORK[networkProtocol]?.[networkType]?.name
 
     const _showTooltip = (show: boolean): void => {
         showTooltip = show
@@ -25,7 +26,7 @@
     </div>
     {#if showTooltip}
         <Tooltip anchor={tooltipAnchor} size="small" position="right">
-            <Text type="p">{localize(`network.${networkProtocol}.${networkType}`)}</Text>
+            <Text type="p">{tooltipText}</Text>
         </Tooltip>
     {/if}
 {/if}
