@@ -422,23 +422,3 @@ export const validateProfileName = (trimmedName: string): void => {
         throw new Error(locale('error.profile.duplicate'))
     }
 }
-
-async function renameProfileFolder(oldName: string, newName: string): Promise<void> {
-    const oldPath = await getProfileDataPath(oldName)
-    const newPath = await getProfileDataPath(newName)
-    await Platform.renameProfileFolder(oldPath, newPath)
-}
-
-export async function renameOldProfileFoldersToId(): Promise<void> {
-    const walletPath = await getWalletDataPath()
-    const profileFolders = await Platform.listProfileFolders(walletPath)
-    const oldProfiles = get(profiles).filter((profile) => profileFolders.find((p) => p === profile.name))
-
-    if (oldProfiles.length > 0) {
-        await Promise.all(
-            oldProfiles.map(async (profile) => {
-                await renameProfileFolder(profile.name, profile.id)
-            })
-        )
-    }
-}

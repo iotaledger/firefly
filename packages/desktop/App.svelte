@@ -11,7 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -75,8 +75,6 @@
             splash = false
             initRouters()
         }, 3000)
-
-        await renameOldProfileFoldersToId()
 
         initAppSettings.set($appSettings)
 
