@@ -1336,6 +1336,18 @@
         "wallet": "Wallet",
         "staking": "Staking"
     },
+    "network": {
+        "iota": {
+            "mainnet": "IOTA Mainnet",
+            "devnet": "IOTA Devnet",
+            "private-net": "IOTA Private-net"
+        },
+        "shimmer": {
+            "mainnet": "Shimmer Mainnet",
+            "devnet": "Shimmer Devnet",
+            "private-net": "Shimmer Private-net"
+        }
+    },
     "pills": {
         "stake": {
             "inProgress": "staking for",

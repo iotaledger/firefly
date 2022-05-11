@@ -1,18 +1,31 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { ProfileProtocol } from '../lib/typings/profile'
+    import { NetworkProtocol } from '@core/network'
 
-    export let protocol = ''
+    export let networkProtocol: NetworkProtocol
+    export let height = 24
+    export let width = 24
 
-    const commonClasses = 'rounded-full border-3 border-solid border-white dark:border-gray-900'
+    let backgroundColor
+    let iconColor
+    $: {
+        switch (networkProtocol) {
+            case NetworkProtocol.IOTA:
+                backgroundColor = 'black'
+                iconColor = 'white'
+                break
+            case NetworkProtocol.Shimmer:
+                ''
+                backgroundColor = 'shimmer-highlight'
+                iconColor = 'black'
+                break
+            default:
+                backgroundColor = ''
+                iconColor = ''
+        }
+    }
 </script>
 
-{#if protocol === ProfileProtocol.Iota}
-    <div class="bg-black {commonClasses}">
-        <Icon height="24" width="24" icon="iota" classes="text-white" />
-    </div>
-{:else if protocol === ProfileProtocol.Shimmer}
-    <div class="bg-shimmer-highlight {commonClasses}">
-        <Icon height="24" width="24" icon="shimmer" classes="text-black" />
-    </div>
-{/if}
+<div class="rounded-full border-3 border-solid border-white dark:border-gray-900 bg-{backgroundColor}">
+    <Icon {height} {width} icon={networkProtocol} classes="text-{iconColor}" />
+</div>

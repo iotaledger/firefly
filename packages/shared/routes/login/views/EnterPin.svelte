@@ -11,7 +11,6 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { ProfileType } from '../../../lib/typings/profile'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
 
     export let locale: Locale
@@ -159,8 +158,8 @@
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
             <Profile
                 name={$activeProfile?.name}
-                network={$activeProfile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
-                protocol={$activeProfile?.type === ProfileType.Ledger ? 'IOTA' : 'Shimmer'}
+                networkType={$activeProfile?.networkType ?? 'devnet'}
+                networkProtocol={$activeProfile?.networkProtocol ?? 'shimmer'}
                 bgColor="blue"
             />
             <div class="flex mt-18 w-full items-center">

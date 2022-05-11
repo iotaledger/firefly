@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -54,8 +54,8 @@
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
-                    network={profile?.type === ProfileType.Ledger ? 'IOTA Mainnet' : 'Shimmer Devnet'}
-                    protocol={profile?.type === ProfileType.Ledger ? 'IOTA' : 'Shimmer'}
+                    networkType={profile?.networkType ?? 'devnet'}
+                    networkProtocol={profile?.networkProtocol ?? 'shimmer'}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"

@@ -2,13 +2,14 @@
     import { Chip, Icon, NetworkIconBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let classes = undefined
 
     export let name = ''
     export let id = ''
-    export let network = ''
-    export let protocol = ''
+    export let networkType: NetworkType
+    export let networkProtocol: NetworkProtocol
     export let isDeveloper = false
     export let isLedgerProfile = false
     export let bgColor: string
@@ -47,7 +48,7 @@
                     <Text type="h3" classes="text-white">{getInitials()}</Text>
                 {/if}
             </div>
-            <NetworkIconBadge {network} {protocol} />
+            <NetworkIconBadge {networkType} {networkProtocol} />
         </div>
         <div class="flex flex-row items-baseline space-x-1.5 mb-2">
             {#if isLedgerProfile}
