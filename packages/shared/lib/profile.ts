@@ -35,21 +35,6 @@ import { AvailableExchangeRates } from './typings/currency'
 // })
 
 /**
- * Saves profile in persistent storage
- *
- * @method saveProfile
-
- * @param {Profile} profile
- *
- * @returns {Profile}
- */
-export const saveProfile = (profile: IPersistedProfile): IPersistedProfile => {
-    profiles.update((_profiles) => [..._profiles, profile])
-
-    return profile
-}
-
-/**
  * Build a default profile object given a name and developer status.
  *
  * @method buildProfile

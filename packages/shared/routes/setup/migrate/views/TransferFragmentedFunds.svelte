@@ -25,12 +25,12 @@
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { Locale } from '@core/i18n'
-    import { newProfile } from '@core/profile'
+    import { newProfile, saveProfile } from '@core/profile'
 
     export let locale: Locale
 

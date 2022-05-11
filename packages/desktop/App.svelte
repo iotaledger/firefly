@@ -38,7 +38,13 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
     import { get } from 'svelte/store'
-    import { loadPersistedProfileIntoActiveProfile, persistedProfile } from '@core/profile'
+    import {
+        activeProfile,
+        loadPersistedProfileIntoActiveProfile,
+        persistedProfile,
+        profiles,
+        saveActiveProfile,
+    } from '@core/profile'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -64,6 +70,7 @@
     }
 
     $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
+    $: $activeProfile, saveActiveProfile()
 
     let splash = true
     let settings = false
