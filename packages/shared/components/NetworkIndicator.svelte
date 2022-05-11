@@ -10,8 +10,10 @@
 
     export let modal: Modal
 
-    $: health = $networkStatus.health ?? 0
-    $: health !== 2 && showNetworkIssuesNotification()
+    $: healthStatus = $networkStatus.health ?? 0
+
+    // TODO: Move this to dashboard or onload logic
+    // $: healthStatus !== 2 && showNetworkIssuesNotification()
 
     function onClick() {
         modal?.open()
@@ -23,9 +25,9 @@
     <button on:click={onClick}>
         <Icon width="48" height="48" icon={$activeProfile?.networkProtocol} classes="dark:text-white" />
     </button>
-    {#if health !== 2}
+    {#if healthStatus !== 2}
         <div class="absolute -bottom-7" on:mouseenter={onClick} on:mouseleave={modal?.close}>
-            <Icon width="18" icon="warning-filled" classes="text-{NETWORK_HEALTH_COLORS[health]}-500" />
+            <Icon width="18" icon="warning-filled" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
         </div>
     {/if}
 </div>

@@ -1,18 +1,13 @@
 <script lang="typescript">
     import { HR, Modal, Text } from 'shared/components'
-    import {
-        NETWORK_HEALTH_COLORS,
-        networkStatus,
-        NetworkStatusDescription,
-        getAndUpdateNetworkStatus,
-    } from '@core/network'
+    import { NETWORK_HEALTH_COLORS, networkStatus, NetworkStatusDescription, NetworkHealth } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
 
     export let modal: Modal
 
     $: health = $networkStatus.health ?? 0
-    $: description = $networkStatus.description ?? NetworkStatusDescription.Disconnected
+    $: description = $networkStatus.description ?? NetworkStatusDescription[NetworkHealth.Disconnected]
     $: messagesPerSecond = $networkStatus.messagesPerSecond ?? 0
     $: referencedRate = $networkStatus.referencedRate ?? 0
 </script>
