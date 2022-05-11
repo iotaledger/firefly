@@ -13,14 +13,14 @@
     } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { storeProfile, disposeNewProfile, hasNoProfiles } from 'shared/lib/profile'
+    import { storeProfile, disposeNewProfile } from 'shared/lib/profile'
     import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { newProfile, validateProfileName } from '@core/profile'
+    import { newProfile, profiles, validateProfileName } from '@core/profile'
 
     export let locale: Locale
 
@@ -102,7 +102,7 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
-            {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
+            {locale(`views.profile.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`)}
             {locale('views.profile.addMore')}
         </Text>
         <Input

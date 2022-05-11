@@ -320,15 +320,6 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
     }
 }
 
-/**
- * Determines if the user has no existing profiles
- *
- * @method hasNoProfiles
- *
- * @returns {boolean}
- */
-export const hasNoProfiles = (): boolean => get(profiles).length === 0
-
 /*
  * Maps accounts key values creating or updating existing objects with param profileAccount searching by account id
  *
