@@ -17,7 +17,7 @@
     import { setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { loadAccounts } from '@core/profile/actions/profile-actions'
+    import { loadAccounts } from '@core/profile/actions/active-profile'
 
     const { hasLoadedAccounts, accounts } = $activeProfile
 

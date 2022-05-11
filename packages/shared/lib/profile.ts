@@ -56,29 +56,6 @@ export const migrateProfile = (): void => {
 }
 
 /**
- * Disposes a new profile
- *
- * @method disposeNewProfile
- *
- * @returns {void}
- */
-export const disposeNewProfile = async (): Promise<void> => {
-    const profile = get(newProfile)
-    if (profile) {
-        try {
-            // TODO: delete storage with new api when implemented
-            // await asyncDeleteStorage()
-            await removeProfileFolder(profile.id)
-        } catch (err) {
-            console.error(err)
-        }
-        destroyManager()
-    }
-    newProfile.set(null)
-    activeProfileId.set(null)
-}
-
-/**
  * Sets profile with provided id as active
  *
  * @method setActiveProfile
