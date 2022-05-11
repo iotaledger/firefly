@@ -89,16 +89,17 @@
 
             // initialiseListeners()
 
-            if ($isSoftwareProfile) {
-                api.getStrongholdStatus({
-                    onSuccess(strongholdStatusResponse) {
-                        isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                    },
-                    onError(err) {
-                        console.error(err)
-                    },
-                })
-            }
+            // TODO: Replace with new api when developed and move out of this file
+            // if ($isSoftwareProfile) {
+            //     api.getStrongholdStatus({
+            //         onSuccess(strongholdStatusResponse) {
+            //             isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+            //         },
+            //         onError(err) {
+            //             console.error(err)
+            //         },
+            //     })
+            // }
 
             void addProfileCurrencyPriceData()
         }

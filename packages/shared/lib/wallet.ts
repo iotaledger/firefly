@@ -185,18 +185,8 @@ export const removeEventListeners = (id: string): void => {
 }
 
 export const destroyManager = (id: string): void => {
+    // TODO destroy manager properly with api call?
     profileManager.set(null)
-
-    // TODO: remove these
-    if (actors[id]) {
-        try {
-            actors[id].destroy()
-        } catch (err) {
-            console.error(err)
-        } finally {
-            delete actors[id]
-        }
-    }
 }
 
 export async function generateMnemonic(): Promise<string> {
