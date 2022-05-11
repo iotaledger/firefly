@@ -92,7 +92,7 @@ export class AppRouter extends Router<AppRoute> {
             }
             case AppRoute.Network: {
                 const profileType = get(activeProfile)?.type
-                const profileNetworkType = get(activeProfile)?.settings?.networkConfig?.network?.type
+                const profileNetworkType = get(activeProfile)?.networkType
                 // TODO: check if that is the correct field to check
                 if (profileNetworkType === NetworkType.PrivateNet) {
                     nextRoute = AppRoute.CustomNetwork

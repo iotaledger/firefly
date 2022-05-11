@@ -2,21 +2,36 @@
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { activeProfile, updateProfile } from '@lib/profile'
+    import { newProfile, updateActiveProfile } from '@core/profile'
     import { mobile } from '@lib/app'
     import { INetwork, NETWORK, NetworkProtocol, NetworkType } from '@core/network'
+    import { TextType } from 'shared/components/Text.svelte'
+
+    const isPrivateNet = (network: INetwork) => network.type === NetworkType.PrivateNet
 
     const networks: INetwork[] = Object.values(NETWORK).flatMap(Object.values)
-    const filteredNetworks = $activeProfile?.isDeveloperProfile
-        ? networks
+    const filteredNetworks = $newProfile?.isDeveloperProfile
+        ? [...networks.filter((network) => !isPrivateNet(network)), networks.find(isPrivateNet)] // gets only one private net in array
         : networks.filter((network) => network.type === NetworkType.Mainnet)
 
-    function getNetworkColor(networkProtocol: NetworkProtocol) {
-        return networkProtocol === NetworkProtocol.Shimmer ? 'shimmer-highlight' : 'black'
+    function getNetworkColor(network: INetwork) {
+        if (isPrivateNet(network)) {
+            return 'gray-500'
+        }
+        return network.protocol === NetworkProtocol.Shimmer ? 'shimmer-highlight' : 'black'
+    }
+    function getNetworkIcon(network: INetwork) {
+        return isPrivateNet(network) ? 'settings' : network.protocol
+    }
+    function getNetworkText(network: INetwork) {
+        if (isPrivateNet(network)) {
+            return localize('views.network.privatenet')
+        }
+        return localize(`views.network.${network.protocol}.${network.type}`)
     }
     function onClick(network: INetwork): void {
-        updateProfile('networkProtocol', network.protocol)
-        updateProfile('networkType', network.type)
+        updateActiveProfile({ networkProtocol: isPrivateNet(network) ? network.protocol : undefined })
+        updateActiveProfile({ networkType: network.type })
         $appRouter.next()
     }
     function onBackClick(): void {
@@ -26,25 +41,23 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.network.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.network.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{localize('views.network.body')}</Text>
-        <ul class="max-h-96 overflow-y-scroll">
+        <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
+        <ul>
             {#each filteredNetworks as network}
                 <li>
                     <Button
-                        icon={network.protocol}
-                        iconColor={getNetworkColor(network.protocol)}
+                        icon={getNetworkIcon(network)}
+                        iconColor={getNetworkColor(network)}
                         classes="w-full mb-5"
                         secondary
                         onClick={() => onClick(network)}
                     >
                         {network.name}
                         {#if !$mobile}
-                            <Text type="p" secondary smaller
-                                >{localize(`views.network.${network.protocol}.${network.type}`)}</Text
-                            >
+                            <Text secondary smaller>{getNetworkText(network)}</Text>
                         {/if}
                     </Button>
                 </li>

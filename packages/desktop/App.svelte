@@ -49,6 +49,7 @@
         Splash,
         Welcome,
         Network,
+        CustomNetwork,
     } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -200,6 +201,9 @@
         </Route>
         <Route route={AppRoute.Network}>
             <Network locale={$_} />
+        </Route>
+        <Route route={AppRoute.CustomNetwork}>
+            <CustomNetwork locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
             <Ledger locale={$_} />

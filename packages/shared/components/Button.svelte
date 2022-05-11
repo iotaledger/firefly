@@ -14,7 +14,7 @@
     export let outline = false
     export let icon = undefined
     export let iconReverse = false
-    export let iconColor: string
+    export let iconColor = ''
     export let xl = false
     export let medium = false
     export let small = false
@@ -29,7 +29,7 @@
     export let iconHeight: string
     export let iconWidth: string
 
-    export let onClick = (): void | string => ''
+    export let onClick = (): Promise<void> | void | string => ''
 
     let buttonElement
     let darkModeEnabled
