@@ -1,18 +1,8 @@
 import { Unit } from '@iota/unit-converter'
-import { isLedgerProfile, isSoftwareProfile, resetActiveProfile } from '@core/profile'
+import { SendParams } from 'shared/lib/typings/sendParams'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { localize } from '@core/i18n'
-import { stopPollingLedgerStatus } from './ledger'
-import { showAppNotification } from './notifications'
-import { resetParticipation } from './participation'
-import { closePopup } from './popup'
-import { clearActiveProfile } from './profile'
-import { resetRouters } from '@core/router'
 import { Stage } from './typings/stage'
-import { api, destroyManager } from './wallet'
-import { SendParams } from 'shared/lib/typings/sendParams'
-import { activeProfile } from '@core/profile'
 
 /**
  * Beta mode

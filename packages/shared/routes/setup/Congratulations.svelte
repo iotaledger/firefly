@@ -13,7 +13,6 @@
         resetMigrationState,
         totalMigratedBalance,
     } from 'shared/lib/migration'
-    import { setActiveProfile } from 'shared/lib/profile'
     import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -21,7 +20,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { activeProfile, newProfile, saveProfile } from '@core/profile'
+    import { activeProfile, newProfile, saveProfile, setActiveProfile } from '@core/profile'
 
     export let locale: Locale
 

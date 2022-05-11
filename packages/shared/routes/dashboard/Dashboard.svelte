@@ -11,13 +11,12 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, logout, activeProfile } from '@core/profile'
+    import { isLedgerProfile, logout, activeProfile, loadAccounts } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { localize } from '@core/i18n'
     import { setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { loadAccounts } from '@core/profile/actions/active-profile'
 
     const { hasLoadedAccounts, accounts } = $activeProfile
 

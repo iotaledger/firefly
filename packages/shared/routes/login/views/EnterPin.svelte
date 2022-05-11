@@ -2,17 +2,15 @@
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, clearActiveProfile } from '@core/profile'
 
     export let locale: Locale
 

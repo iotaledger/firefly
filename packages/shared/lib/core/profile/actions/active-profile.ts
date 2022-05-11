@@ -24,7 +24,7 @@ import {
 } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { IPersistedProfile } from '../interfaces'
-import { saveProfile } from '../stores'
+import { activeProfileId, saveProfile } from '../stores'
 
 // Move to profile manager module
 export async function getAccounts(): Promise<StardustAccount[]> {
@@ -111,6 +111,25 @@ export async function tryCreateAccount(alias: string, color: string, onComplete:
     } else {
         await _create()
     }
+}
+
+/**
+ * Sets profile with provided id as active
+ * @method setActiveProfile
+ * @param {string} id
+ * @returns {void}
+ */
+export function setActiveProfile(id: string): void {
+    activeProfileId.set(id)
+}
+
+/**
+ * Clears the active profile
+ * @method clearActiveProfile
+ * @returns {void}
+ */
+export function clearActiveProfile(): void {
+    activeProfileId.set(null)
 }
 
 export function resetActiveProfile(): void {

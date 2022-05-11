@@ -40,11 +40,12 @@
     import { get } from 'svelte/store'
     import {
         activeProfile,
+        activeProfileId,
         loadPersistedProfileIntoActiveProfile,
         persistedProfile,
-        profiles,
         saveActiveProfile,
     } from '@core/profile'
+    import { Platform } from '@lib/platform'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -69,6 +70,7 @@
         document.dir = $localeDirection
     }
 
+    $: $activeProfileId, Platform.updateActiveProfile($activeProfileId)
     $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
     $: $activeProfile, saveActiveProfile()
 

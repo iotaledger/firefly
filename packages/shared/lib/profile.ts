@@ -30,11 +30,6 @@ import { Locale } from '@core/i18n'
 import { AvailableExchangeRates } from './typings/currency'
 import { buildNewProfile } from '@core/profile/helpers'
 
-// TODO move this somewhere else?
-// activeProfileId?.subscribe((profileId) => {
-//     Platform.updateActiveProfile(profileId)
-// })
-
 /**
  * Migrates profile data in need of being modified to accommodate changes
  * in a newer Firefly version.
@@ -53,30 +48,6 @@ export const migrateProfile = (): void => {
     )
 
     updateProfile('', migrateObjects<IPersistedProfile>(oldProfile, newProfile))
-}
-
-/**
- * Sets profile with provided id as active
- *
- * @method setActiveProfile
- *
- * @param {string} id
- *
- * @returns {void}
- */
-export const setActiveProfile = (id: string): void => {
-    activeProfileId.set(id)
-}
-
-/**
- * Clears the active profile
- *
- * @method clearActiveProfile
- *
- * @returns {void}
- */
-export const clearActiveProfile = (): void => {
-    activeProfileId.set(null)
 }
 
 /**
