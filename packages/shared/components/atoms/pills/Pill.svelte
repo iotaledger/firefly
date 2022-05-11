@@ -6,21 +6,32 @@
     export let textColor = 'gray-800'
     export let darkTextColor = ''
     export let backgroundColor = ''
-    export let darkBackgrounColor = ''
+    export let darkBackgroundColor = ''
+    export let smaller = false
     export let classes = ''
+
+    $: conditionalProps = smaller
+        ? {
+              smaller: true,
+              fontSize: '',
+          }
+        : {
+              smaller: false,
+              fontSize: '12',
+          }
 </script>
 
 <Text
     type="p"
-    fontSize="12"
     fontWeight={FontWeightText.semibold}
     color={textColor}
     darkColor={darkTextColor || textColor}
-    classes="px-2 py-1 rounded-md 
+    classes="px-2 py-1 rounded-md
         {backgroundColor ? 'bg-' + backgroundColor : ''}
-        {darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''} 
+        {darkBackgroundColor ? 'dark:bg-' + darkBackgroundColor : ''}
         {classes}
     "
+    {...conditionalProps}
 >
     {#if data}
         {data}
