@@ -1,4 +1,4 @@
-import { DEFAULT_NETWORK_STATUS_POLL_INTERVAL } from '../constants'
+import { NETWORK_STATUS_POLL_INTERVAL } from '../constants'
 import { getAndUpdateNodeInfo } from './getAndUpdateNodeInfo'
 
 let pollInterval
@@ -8,8 +8,7 @@ let pollInterval
  */
 export async function pollNetworkStatus(): Promise<void> {
     await getAndUpdateNodeInfo()
-    /* eslint-disable @typescript-eslint/no-misused-promises */
-    pollInterval = setInterval(async () => getAndUpdateNodeInfo(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
+    pollInterval = setInterval(() => void getAndUpdateNodeInfo(), NETWORK_STATUS_POLL_INTERVAL)
 }
 
 export function clearPollNetworkInterval(): void {

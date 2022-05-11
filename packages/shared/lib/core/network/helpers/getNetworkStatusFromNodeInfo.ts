@@ -10,16 +10,16 @@ import { IStardustNodeInfo, INetworkStatus } from '../interfaces'
  * @param {IStardustNodeInfo} NodeInfo
  * @returns {INetworkStatus}
  */
-export function getNetworkStatusFromNodeInfo(nodeInfo: IStardustNodeInfo | null): INetworkStatus {
+export function getNetworkStatusFromNodeInfo(nodeInfo: IStardustNodeInfo): INetworkStatus {
     const timeSinceLastMsInMinutes =
         (Date.now() - nodeInfo.status.latestMilestone.timestamp * MILLISECONDS_PER_SECOND) /
         (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
 
-    let health = NetworkHealth.Down // bad
+    let health = NetworkHealth.Down
     if (timeSinceLastMsInMinutes < 2) {
-        health = NetworkHealth.Operational // good
+        health = NetworkHealth.Operational
     } else if (timeSinceLastMsInMinutes < 5) {
-        health = NetworkHealth.Operational // degraded
+        health = NetworkHealth.Degraded
     }
 
     const description = NetworkStatusDescription?.[health]
