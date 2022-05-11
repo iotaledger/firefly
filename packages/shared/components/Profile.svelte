@@ -37,7 +37,7 @@
     <div class="flex flex-col justify-between items-center">
         <div class="relative mb-3">
             <div
-                on:click={() => handleOnClick()}
+                on:click={handleOnClick}
                 class="h-18 w-18 {bgColor
                     ? `bg-${bgColor}-500`
                     : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
