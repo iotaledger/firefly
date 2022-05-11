@@ -13,11 +13,11 @@
     import { setStrongholdPassword } from 'shared/lib/wallet'
     import { get, Readable } from 'svelte/store'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { isStrongholdLocked } from '@lib/profile'
 
     export let account: Readable<WalletAccount>
 
-    const profileName = get(activeProfile)?.name
+    const profileName = $activeProfile?.name
+    const { isStrongholdLocked } = $activeProfile
 
     let password = ''
     let error = ''

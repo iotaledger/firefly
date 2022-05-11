@@ -2,15 +2,14 @@
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { setStrongholdPassword, asyncSyncAccounts } from 'shared/lib/wallet'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { localize } from '@core/i18n'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
     import { onDestroy } from 'svelte'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
 
-    const { balanceOverview, accounts } = $activeProfile
+    const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
 
     const startAddressIndex = 0
     const gapLimitIncrement = $isLedgerProfile ? 10 : 25

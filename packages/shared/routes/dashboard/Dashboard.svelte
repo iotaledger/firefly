@@ -19,7 +19,7 @@
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { loadAccounts } from '@core/profile/actions/profile-actions'
 
-    const { accountsLoaded, accounts } = $activeProfile
+    const { hasLoadedAccounts, accounts } = $activeProfile
 
     const tabs = {
         wallet: Wallet,
@@ -35,7 +35,7 @@
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
-    const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
+    const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
             void pollParticipationOverview()
@@ -52,7 +52,7 @@
     })
 
     /* $: {
-        if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+        if (!$isSyncing && $isFirstSessionSync && $hasLoadedAccounts) {
             void updateStakingPeriodCache()
         }
     } */
@@ -172,7 +172,7 @@
         }
     })
 
-    if (!$accountsLoaded && $loggedIn) {
+    if (!$hasLoadedAccounts && $loggedIn) {
         loadAccounts()
         startInit = Date.now()
         busy = true
@@ -187,7 +187,7 @@
     }
 
     $: {
-        if ($accountsLoaded) {
+        if ($hasLoadedAccounts) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
             const cancelBusyState = () => {
                 busy = false
@@ -247,7 +247,7 @@
         }
     } */
 
-    $: if (!busy && $accountsLoaded) {
+    $: if (!busy && $hasLoadedAccounts) {
         /**
          * If the profile has dummy migration transactions,
          * then we open a "funds available soon" notification
@@ -312,12 +312,12 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded) {
+    $: if ($hasLoadedAccounts) {
         setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
     $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
+    $: if (!busy && $hasLoadedAccounts && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
 </script>

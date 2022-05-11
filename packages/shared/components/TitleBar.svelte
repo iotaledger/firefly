@@ -8,9 +8,9 @@
     import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
 
-    const { accountsLoaded } = $activeProfile
+    const { hasLoadedAccounts } = $activeProfile
 
-    $: showingDashboard = $appRoute === AppRoute.Dashboard && $accountsLoaded && $popupState.type !== 'busy'
+    $: showingDashboard = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.type !== 'busy'
     $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
     let os = ''

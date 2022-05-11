@@ -1,6 +1,6 @@
-import { get, writable } from 'svelte/store'
+import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
-import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
+import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
 import {
@@ -19,6 +19,8 @@ import {
     IProfile,
     profiles,
     activeProfileId,
+    MAX_PROFILE_NAME_LENGTH,
+    newProfile,
 } from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
@@ -26,14 +28,6 @@ import { ValuesOf } from './typings/utils'
 import { WalletAccount } from './typings/walletAccount'
 import { Locale } from '@core/i18n'
 import { AvailableExchangeRates } from './typings/currency'
-
-const MAX_PROFILE_NAME_LENGTH = 20
-
-export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
-
-export const newProfile = writable<IPersistedProfile | null>(null)
-export const isStrongholdLocked = writable<boolean>(true)
-export const hasEverOpenedProfileModal = writable<boolean>(false)
 
 // TODO move this somewhere else?
 // activeProfileId?.subscribe((profileId) => {
@@ -109,7 +103,6 @@ export const storeProfile = (
 
     newProfile.set(profile)
     activeProfileId.set(profile.id)
-    profileInProgress.set(profileName)
 }
 
 /**
@@ -143,14 +136,14 @@ export const disposeNewProfile = async (): Promise<void> => {
     const profile = get(newProfile)
     if (profile) {
         try {
-            await asyncDeleteStorage()
+            // TODO: delete storage with new api when implemented
+            // await asyncDeleteStorage()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)
         }
-        destroyManager(profile.id)
+        destroyManager()
     }
-
     newProfile.set(null)
     activeProfileId.set(null)
 }
@@ -240,20 +233,6 @@ export const updateProfile = (
                 return _profile
             })
         )
-    }
-}
-
-/**
- * Cleanup any in progress profiles
- *
- * @method cleanupInProgressProfiles
- *
- * @returns {void}
- */
-export const cleanupInProgressProfiles = (): void => {
-    const inProgressProfile = get(profileInProgress)
-    if (inProgressProfile) {
-        profileInProgress.update(() => undefined)
     }
 }
 

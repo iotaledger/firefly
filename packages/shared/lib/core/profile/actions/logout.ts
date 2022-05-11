@@ -2,11 +2,13 @@ import { resetRouters } from '@core/router'
 import { clearSendParams, lastActiveAt, loggedIn } from '@lib/app'
 import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
-import { clearActiveProfile, isStrongholdLocked } from '@lib/profile'
+import { clearActiveProfile } from '@lib/profile'
 import { destroyManager } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { activeProfile, isLedgerProfile, isSoftwareProfile } from '../stores'
 import { resetActiveProfile } from './resetActiveProfile'
+
+const { isStrongholdLocked } = get(activeProfile)
 
 /**
  * Logout from current profile

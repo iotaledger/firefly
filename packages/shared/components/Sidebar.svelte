@@ -17,7 +17,6 @@
         partiallyUnstakedAmount,
         shimmerStakingEventState,
     } from '@lib/participation/stores'
-    import { hasEverOpenedProfileModal } from '@lib/profile'
     import { activeProfile } from '@core/profile'
     import {
         dashboardRoute,
@@ -32,6 +31,7 @@
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
+    import { get } from 'svelte/store'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -39,6 +39,8 @@
     let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
+
+    const { shouldOpenProfileModal } = $activeProfile
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: $dashboardRoute,
@@ -169,7 +171,7 @@
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
-                    {#if !$hasEverOpenedProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
+                    {#if !$shouldOpenProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
                         <PingingBadge innerColor="red-500" outerColor="red-500" />
                     {/if}
                 </button>

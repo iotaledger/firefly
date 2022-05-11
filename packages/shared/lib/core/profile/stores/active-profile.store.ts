@@ -14,7 +14,9 @@ export const activeProfile = writable<IProfile>({
         balanceFiat: '$ 0.00',
     }),
     accounts: writable<WalletAccount[]>([]),
-    accountsLoaded: writable<boolean>(false),
+    hasLoadedAccounts: writable<boolean>(false),
+    isStrongholdLocked: writable<boolean>(true),
+    shouldOpenProfileModal: writable<boolean>(false),
     internalTransfersInProgress: writable<{
         [key: string]: {
             from: string

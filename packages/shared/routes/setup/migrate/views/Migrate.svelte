@@ -20,7 +20,7 @@
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -28,6 +28,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { newProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -91,7 +92,6 @@
                                 saveProfile($newProfile)
                                 setActiveProfile($newProfile.id)
 
-                                profileInProgress.set(undefined)
                                 newProfile.set(null)
                             }
                         })
@@ -119,7 +119,6 @@
                             saveProfile($newProfile)
                             setActiveProfile($newProfile.id)
 
-                            profileInProgress.set(undefined)
                             newProfile.set(null)
                         })
                     })

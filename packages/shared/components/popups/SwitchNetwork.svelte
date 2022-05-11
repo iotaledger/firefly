@@ -10,14 +10,15 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
-    import { isStrongholdLocked, updateProfile } from '@lib/profile'
+    import { updateProfile } from '@lib/profile'
 
     export let network: INetwork
     export let node: INode
 
+    const { isStrongholdLocked } = $activeProfile
     const showPasswordInput = $isSoftwareProfile && $isStrongholdLocked
-
     const error = ''
+
     let isSwitchingNetwork = false
     let strongholdPassword: string
 

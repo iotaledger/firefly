@@ -14,20 +14,14 @@
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import {
-        cleanupInProgressProfiles,
-        storeProfile,
-        disposeNewProfile,
-        hasNoProfiles,
-        newProfile,
-        validateProfileName,
-    } from 'shared/lib/profile'
+    import { storeProfile, disposeNewProfile, hasNoProfiles, validateProfileName } from 'shared/lib/profile'
     import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { newProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -56,7 +50,7 @@
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
         if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
-            destroyManager(previousInitializedId)
+            destroyManager()
         }
     }
 
@@ -70,7 +64,7 @@
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
                 initialise($newProfile.id, path, sendCrashReports, machineId)
-                initialiseMigrationListeners()
+                // initialiseMigrationListeners()
             }
 
             if (get(stage) === Stage.PROD && isDeveloperProfile) {
@@ -95,8 +89,9 @@
 
     async function handleBackClick(): Promise<void> {
         cleanupSignup()
-        cleanupInProgressProfiles()
+
         await disposeNewProfile()
+
         $appRouter.previous()
     }
 </script>

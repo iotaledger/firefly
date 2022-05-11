@@ -23,11 +23,11 @@ export async function getAccounts(): Promise<StardustAccount[]> {
 
 export async function loadAccounts(): Promise<void> {
     try {
-        const { accountsLoaded, accounts } = get(activeProfile)
+        const { hasLoadedAccounts, accounts } = get(activeProfile)
         const accountsResponse = await getAccounts()
         if (accountsResponse) {
             if (accountsResponse.length === 0) {
-                accountsLoaded.set(true)
+                hasLoadedAccounts.set(true)
                 return
             }
 
@@ -60,7 +60,7 @@ export async function loadAccounts(): Promise<void> {
             //     payloadAccount.addresses
             // )
             updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
-            accountsLoaded.set(true)
+            hasLoadedAccounts.set(true)
         }
     } catch (err) {
         console.error(err)

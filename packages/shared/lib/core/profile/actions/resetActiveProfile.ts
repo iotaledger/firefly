@@ -14,7 +14,7 @@ import { get } from 'svelte/store'
 import { activeProfile } from '../stores'
 
 export function resetActiveProfile(): void {
-    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(activeProfile)
+    const { balanceOverview, accounts, hasLoadedAccounts, internalTransfersInProgress } = get(activeProfile)
     balanceOverview.set({
         incoming: '0 Mi',
         incomingRaw: 0,
@@ -25,7 +25,7 @@ export function resetActiveProfile(): void {
         balanceFiat: '$ 0.00',
     })
     accounts.set([])
-    accountsLoaded.set(false)
+    hasLoadedAccounts.set(false)
     internalTransfersInProgress.set({})
     setSelectedAccount(null)
     selectedMessage.set(null)

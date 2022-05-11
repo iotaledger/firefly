@@ -7,7 +7,7 @@
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isStrongholdLocked, setMissingProfileType } from 'shared/lib/profile'
+    import { setMissingProfileType } from 'shared/lib/profile'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
         api,
@@ -23,7 +23,7 @@
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, selectedAccountId } from '@core/account'
 
-    const { accounts, accountsLoaded } = $activeProfile
+    const { accounts, hasLoadedAccounts, isStrongholdLocked } = $activeProfile
 
     // TODO: move to dashboard or lib
     $: {
@@ -43,7 +43,7 @@
     }
 
     // TODO: move to dashboard or lib if needed?
-    $: if ($accountsLoaded) {
+    $: if ($hasLoadedAccounts) {
         // update profileType if it is missing
         if (!$activeProfile?.type) {
             setMissingProfileType($accounts)
@@ -51,7 +51,7 @@
     }
 
     async function _continue(): Promise<void> {
-        $accountsLoaded = true
+        $hasLoadedAccounts = true
         const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
         try {

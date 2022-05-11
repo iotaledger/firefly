@@ -11,7 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -116,8 +116,6 @@
         Electron.hookErrorLogger((err) => {
             addError(err)
         })
-
-        cleanupInProgressProfiles()
 
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 

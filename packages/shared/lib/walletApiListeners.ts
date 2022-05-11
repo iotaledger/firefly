@@ -16,12 +16,13 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { openPopup } from './popup'
-import { isStrongholdLocked, updateProfile } from './profile'
+import { updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
 import { activeProfile, getAccounts } from '@core/profile'
 
+const { isStrongholdLocked } = get(activeProfile)
 /**
  * Initialises event listeners from wallet library
  *

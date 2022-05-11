@@ -29,7 +29,7 @@ describe('File: api.test.ts', () => {
     })
 
     it('should destroy the profile manager correctly', () => {
-        destroyManager('id')
+        destroyManager()
         expect(get(profileManager)).toBeNull()
     })
 

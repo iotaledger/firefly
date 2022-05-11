@@ -184,7 +184,7 @@ export const removeEventListeners = (id: string): void => {
     // get(accountManager).removeEventListeners()
 }
 
-export const destroyManager = (id: string): void => {
+export const destroyManager = (): void => {
     // TODO destroy manager properly with api call?
     profileManager.set(null)
 }
