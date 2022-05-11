@@ -133,7 +133,7 @@
             <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
                 <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
             </div>
-            <div class="flex flex-row space-x-2">
+            <div class="flex flex-row items-center space-x-2">
                 <Text>{profileName}</Text>
                 {#if $activeProfile?.isDeveloperProfile}
                     <DeveloperIndicatorPill label={localize('general.dev')} />
