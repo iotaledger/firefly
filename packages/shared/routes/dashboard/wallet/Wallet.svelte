@@ -87,7 +87,7 @@
             // TODO: Remove old api
             // removeEventListeners($activeProfile.id)
 
-            initialiseListeners()
+            // initialiseListeners()
 
             if ($isSoftwareProfile) {
                 api.getStrongholdStatus({

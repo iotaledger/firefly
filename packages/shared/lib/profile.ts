@@ -11,7 +11,15 @@ import {
     AccountColors,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { ProfileType, IPersistedProfile, IProfileSettings, activeProfile, IProfile, profiles } from '@core/profile'
+import {
+    ProfileType,
+    IPersistedProfile,
+    IProfileSettings,
+    activeProfile,
+    IProfile,
+    profiles,
+    activeProfileId,
+} from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
 import { ValuesOf } from './typings/utils'
@@ -21,7 +29,6 @@ import { AvailableExchangeRates } from './typings/currency'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
-export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
 export const newProfile = writable<IPersistedProfile | null>(null)
@@ -29,9 +36,9 @@ export const isStrongholdLocked = writable<boolean>(true)
 export const hasEverOpenedProfileModal = writable<boolean>(false)
 
 // TODO move this somewhere else?
-activeProfileId.subscribe((profileId) => {
-    Platform.updateActiveProfile(profileId)
-})
+// activeProfileId?.subscribe((profileId) => {
+//     Platform.updateActiveProfile(profileId)
+// })
 
 /**
  * Saves profile in persistent storage

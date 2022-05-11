@@ -1,6 +1,7 @@
-import { activeProfileId, newProfile } from '@lib/profile'
+import { newProfile } from '@lib/profile'
 import { derived, Readable } from 'svelte/store'
 import { IPersistedProfile } from '../interfaces'
+import { activeProfileId } from './active-profile-id.store'
 import { profiles } from './profiles.store'
 
 export const persistedProfile: Readable<IPersistedProfile> = derived(

@@ -1,3 +1,4 @@
+export * from './active-profile-id.store'
 export * from './active-profile.store'
 export * from './is-software-profile.store'
 export * from './is-ledger-profile.store'
