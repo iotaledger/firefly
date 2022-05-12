@@ -1,60 +1,7 @@
-import { activeProfile, IPersistedProfile, IProfile, ProfileType, updateActiveProfile } from '@core/profile'
-import { buildNewProfile } from '@core/profile/helpers'
-import { migrateObjects } from 'shared/lib/utils'
+import { IProfile, ProfileType, updateActiveProfile } from '@core/profile'
 import { AccountColors } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
 import { WalletAccount } from './typings/walletAccount'
-
-/**
- * Updates a profile property
- *
- * @method UpdateProfile
- *
- * @param {string} id
- *
- * @returns {void}
- */
-// TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
-// export const updateProfile = (
-//     path: string,
-//     value: ValuesOf<IPersistedProfile> | ValuesOf<IProfileSettings> | ValuesOf<INetworkConfig>
-// ): void => {
-//     const _update = (_profile) => {
-//         if (path === '') {
-//             const isValidData =
-//                 /* eslint-disable no-prototype-builtins */
-//                 typeof value === 'object' && Object.keys(value).filter((k) => !_profile.hasOwnProperty(k)).length === 0
-//             /* eslint-disable @typescript-eslint/ban-types */
-//             return isValidData ? { ..._profile, ...(value as object) } : _profile
-//         }
-
-//         const pathList = path.split('.')
-
-//         pathList.reduce((a, b: keyof IPersistedProfile | keyof IProfileSettings, level: number) => {
-//             if (level === pathList.length - 1) {
-//                 a[b] = value
-//                 return value
-//             }
-//             return a[b]
-//         }, _profile)
-
-//         return _profile
-//     }
-
-//     if (get(newProfile)) {
-//         newProfile.update((_profile) => _update(_profile))
-//     } else {
-//         profiles.update((_profiles) =>
-//             _profiles.map((_profile) => {
-//                 if (_profile.id === get(activeProfile)?.id) {
-//                     return _update(_profile)
-//                 }
-
-//                 return _profile
-//             })
-//         )
-//     }
-// }
 
 /**
  * Set profile type for back compatibility purposes
