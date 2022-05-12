@@ -423,7 +423,7 @@
         />
     {/if}
     <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
+        <Sidebar />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
             <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />

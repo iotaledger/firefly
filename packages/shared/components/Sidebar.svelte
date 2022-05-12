@@ -2,7 +2,7 @@
     import {
         Drawer,
         Icon,
-        NetworkIndicator,
+        NetworkIndicatorModal,
         ProfileActionsModal,
         SidebarTab,
         Text,
@@ -30,10 +30,9 @@
         SidebarTab as SidebarTabType,
     } from '@core/router'
     import { Settings } from 'shared/routes'
-    import { Locale } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
-
-    export let locale: Locale
+    import { localize } from '../lib/core/i18n'
+    import { _, locale } from 'svelte-i18n'
 
     let networkModal: Modal
     let profileModal: Modal
@@ -59,13 +58,13 @@
     let sidebarTabs: SidebarTabType[] = [
         {
             icon: 'wallet',
-            label: locale('tabs.wallet'),
+            label: 'wallet',
             route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
-            label: locale('tabs.staking'),
+            label: 'staking',
             route: DashboardRoute.Staking,
             onClick: openStaking,
         },
@@ -129,7 +128,7 @@
             >
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
-                    {locale(
+                    {localize(
                         $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
@@ -149,7 +148,7 @@
                     <Text type="h4">John Doe</Text>
                 </div>
             {/if}
-            <Settings {locale} />
+            <Settings />
         </div>
     </Drawer>
 {:else}
@@ -184,8 +183,8 @@
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:modal={networkModal} {locale} />
-        <ProfileActionsModal bind:modal={profileModal} {locale} />
+        <NetworkIndicatorModal bind:modal={networkModal} />
+        <ProfileActionsModal bind:modal={profileModal} />
     </aside>
 {/if}
 
