@@ -24,7 +24,6 @@ import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { StardustAccount } from '@lib/typings/account'
 import { getAccounts } from './actions/profileActions'
 
 /**
