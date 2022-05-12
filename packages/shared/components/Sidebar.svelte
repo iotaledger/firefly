@@ -32,7 +32,6 @@
     import { Settings } from 'shared/routes'
     import { versionDetails } from '@lib/appUpdater'
     import { localize } from '../lib/core/i18n'
-    import { _, locale } from 'svelte-i18n'
 
     let networkModal: Modal
     let profileModal: Modal
