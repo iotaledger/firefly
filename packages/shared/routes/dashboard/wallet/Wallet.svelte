@@ -7,13 +7,6 @@
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import {
-        activeProfile,
-        isLedgerProfile,
-        isSoftwareProfile,
-        isStrongholdLocked,
-        setMissingProfileType,
-    } from 'shared/lib/profile'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
         api,
@@ -22,14 +15,14 @@
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
         removeEventListeners,
-        selectedAccount,
-        selectedAccountId,
-        wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
+    import { activeProfile } from '@core/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { selectedAccount, selectedAccountId } from '@core/account'
 
-    const { accounts, accountsLoaded } = $wallet
+    const { accounts, hasLoadedAccounts, isStrongholdLocked } = $activeProfile
 
     // TODO: move to dashboard or lib
     $: {
@@ -48,16 +41,8 @@
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
-    // TODO: move to dashboard or lib if needed?
-    $: if ($accountsLoaded) {
-        // update profileType if it is missing
-        if (!$activeProfile?.type) {
-            setMissingProfileType($accounts)
-        }
-    }
-
     async function _continue(): Promise<void> {
-        $accountsLoaded = true
+        $hasLoadedAccounts = true
         const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
 
         try {
@@ -90,20 +75,22 @@
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
-            removeEventListeners($activeProfile.id)
+            // TODO: Remove old api
+            // removeEventListeners($activeProfile?.id)
 
-            initialiseListeners()
+            // initialiseListeners()
 
-            if ($isSoftwareProfile) {
-                api.getStrongholdStatus({
-                    onSuccess(strongholdStatusResponse) {
-                        isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                    },
-                    onError(err) {
-                        console.error(err)
-                    },
-                })
-            }
+            // TODO: Replace with new api when developed and move out of this file
+            // if ($isSoftwareProfile) {
+            //     api.getStrongholdStatus({
+            //         onSuccess(strongholdStatusResponse) {
+            //             isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+            //         },
+            //         onError(err) {
+            //             console.error(err)
+            //         },
+            //     })
+            // }
 
             void addProfileCurrencyPriceData()
         }

@@ -14,8 +14,8 @@
         isParticipationPayload,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        wallet,
     } from 'shared/lib/wallet'
+    import { activeProfile } from '@core/profile'
 
     export let timestamp
     export let confirmed
@@ -23,7 +23,7 @@
     export let balance // migration tx
     export let onClick = (): void => {}
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let messageValue = ''
     let date = localize('error.invalidDate')

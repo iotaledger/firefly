@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AccountRoute, accountRoute } from '@core/router'
     import { ManageAccount } from 'shared/routes/dashboard/wallet/views'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { Pane, AccountSummary, AssetsPane } from 'shared/components'
 </script>
 

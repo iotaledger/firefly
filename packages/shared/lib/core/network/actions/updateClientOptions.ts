@@ -2,7 +2,8 @@ import { get } from 'svelte/store'
 import { getNodeCandidates, INetworkConfig, IClientOptions } from '@core/network'
 import { localize } from '@core/i18n'
 import { isNewNotification, showAppNotification } from '@lib/notifications'
-import { api, wallet } from '@lib/wallet'
+import { api } from '@lib/wallet'
+import { activeProfile } from '@core/profile'
 
 /**
  * Update the client options for a profile.
@@ -30,15 +31,16 @@ export function updateClientOptions(config: INetworkConfig): void {
         return
     }
 
-    api.setClientOptions(clientOptions, {
-        onSuccess() {
-            const { accounts } = get(wallet)
-            accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
-        },
-        onError(err) {
-            console.error(err)
-        },
-    })
+    // TODO: Replace with profileManager api
+    // api.setClientOptions(clientOptions, {
+    //     onSuccess() {
+    //         const { accounts } = get(activeProfile)
+    //         accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
+    //     },
+    //     onError(err) {
+    //         console.error(err)
+    //     },
+    // })
 }
 
 function buildClientOptions(config: INetworkConfig): IClientOptions {

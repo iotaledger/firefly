@@ -1,29 +1,24 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
-    import { logout } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { LocaleArguments } from '@core/i18n/types'
     import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { popupState, openPopup } from 'shared/lib/popup'
-    import {
-        activeProfile,
-        hasEverOpenedProfileModal,
-        isLedgerProfile,
-        isSoftwareProfile,
-        isStrongholdLocked,
-    } from 'shared/lib/profile'
     import { openSettings } from '@core/router'
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout } from '@core/profile'
 
     export let modal: Modal
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $versionDetails.upToDate
+
+    const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
 
     let isLedgerConnected = false
     let isCheckingLedger = false
@@ -39,7 +34,6 @@
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
-
     $: if ($isLedgerProfile && $ledgerDeviceState) {
         updateLedgerConnectionText()
         isLedgerConnected = $ledgerDeviceState === LedgerDeviceState.Connected
@@ -125,7 +119,7 @@
     bind:this={modal}
     position={{ bottom: '16px', left: '80px' }}
     classes="w-80"
-    on:open={() => hasEverOpenedProfileModal.set(true)}
+    on:open={() => shouldOpenProfileModal.set(true)}
     disableOnClickOutside={isPasswordPopupOpen}
 >
     <profile-modal-content class="flex flex-col" in:fade={{ duration: 100 }}>

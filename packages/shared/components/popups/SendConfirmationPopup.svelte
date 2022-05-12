@@ -6,8 +6,8 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import { sendExternalTransaction, sendInternalTransaction } from '@lib/send'
-    import { isLedgerProfile, isSoftwareProfile } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
     import { WalletAccount } from '@lib/typings/walletAccount'
@@ -58,7 +58,7 @@
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" />
+            <ExpirationTimePicker value="value" />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

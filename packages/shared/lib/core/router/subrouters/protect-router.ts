@@ -1,15 +1,14 @@
-import { get, writable } from 'svelte/store'
-
+import { newProfile } from '@core/profile'
+import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
 import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
-import { activeProfile } from '@lib/profile'
 import { SetupType } from '@lib/typings/setup'
-import { createAccount, setStoragePassword, storeMnemonic, verifyMnemonic, walletSetupType } from '@lib/wallet'
-
+import { createAccount, walletSetupType } from '@lib/wallet'
+import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ProtectRoute } from '../enums'
-import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { Subrouter } from './subrouter'
 
 export const protectRoute = writable<ProtectRoute>(null)
 
@@ -38,9 +37,9 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
                 nextRoute = ProtectRoute.RepeatPin
                 break
             case ProtectRoute.RepeatPin: {
-                await Platform.PincodeManager.set(get(activeProfile)?.id, this.pin)
-                await setStoragePassword(this.pin)
-
+                await Platform.PincodeManager.set(get(newProfile)?.id, this.pin)
+                // TODO: replace with new api when it is implemented
+                // await setStoragePassword(this.pin)
                 if (get(walletSetupType) === SetupType.Mnemonic) {
                     const m = get(mnemonic).join(' ')
                     await verifyMnemonic(m)

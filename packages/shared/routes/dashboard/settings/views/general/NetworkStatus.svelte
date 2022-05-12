@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
-    $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
+    $: updateActiveProfileSettings({ hideNetworkStatistics })
 </script>
 
 <Text type="h4" classes="mb-3">{localize('views.settings.networkStatus.title')}</Text>

@@ -1395,6 +1395,14 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
+"@iota/wallet@npm:wallet-stardust-alpha@^1.0.5":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-1.0.6.tgz#5d5f056f81b499da4ee7ba8280cbb161f64be52e"
+  integrity sha512-fzgD4Ik6QeaHuvESPtFMCAsA2nHUjkSQ6C5Ou5AnkAgjkPL0hXC0ZqVwRuB9Lq8DZk2bJjVIQomK+dUTkSJFhw==
+  dependencies:
+    cargo-cp-artifact "^0.1.5"
+    prebuild-install "^5.3.3"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -7639,9 +7647,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-abi@^2.7.0, node-abi@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.8.0.tgz#679957dc8e7aa47b0a02589dbfde4f77b29ccb32"
-  integrity sha512-tzua9qWWi7iW4I42vUPKM+SfaF0vQSLAm4yO5J83mSwB7GeoWrDKC/K+8YCnYNwqP5duwazbw2X9l4m8SC2cUw==
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.15.0.tgz#cd9ac8c58328129b49998cc6fa16aa5506152716"
+  integrity sha512-Ic6z/j6I9RLm4ov7npo1I48UQr2BEyFCqh6p7S1dhEx9jPO0GPGq/e2Rb7x7DroQrmiVMz/Bw1vJm9sPAl2nxA==
   dependencies:
     semver "^7.3.5"
 

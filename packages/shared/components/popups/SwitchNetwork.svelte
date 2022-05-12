@@ -2,28 +2,29 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { createAccount, asyncRemoveWalletAccounts, setStrongholdPassword, wallet } from 'shared/lib/wallet'
+    import { createAccount, asyncRemoveWalletAccounts } from 'shared/lib/wallet'
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
     import {
         activeProfile,
         isLedgerProfile,
         isSoftwareProfile,
-        isStrongholdLocked,
-        updateProfile,
-    } from 'shared/lib/profile'
+        logout,
+        updateActiveProfileSettings,
+    } from '@core/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let network: INetwork
     export let node: INode
 
+    const { isStrongholdLocked } = $activeProfile
     const showPasswordInput = $isSoftwareProfile && $isStrongholdLocked
-
     const error = ''
+
     let isSwitchingNetwork = false
     let strongholdPassword: string
 
@@ -51,7 +52,7 @@
             return
         }
 
-        const oldAccounts = get($wallet.accounts)
+        const oldAccounts = get($activeProfile?.accounts)
         const oldConfig = $activeProfile?.settings?.networkConfig
         const newConfig = {
             ...oldConfig,
@@ -63,9 +64,9 @@
 
         try {
             updateClientOptions(newConfig)
-            updateProfile('settings.networkConfig', newConfig)
+            updateActiveProfileSettings({ networkConfig: newConfig })
 
-            await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
+            await asyncRemoveWalletAccounts(get($activeProfile?.accounts).map((a) => a.id))
             await createAccount(`${localize('general.account')} 1`)
             await logout()
         } catch (err) {
@@ -77,9 +78,9 @@
              * (namely client options, network config, account data,
              * etc.)
              */
-            $wallet.accounts.set(oldAccounts)
+            $activeProfile?.accounts.set(oldAccounts)
             updateClientOptions(oldConfig)
-            updateProfile('settings.networkConfig', oldConfig)
+            updateActiveProfileSettings({ networkConfig: oldConfig })
 
             /**
              * NOTE: It is necessary to override the default locale paths

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { setStrongholdPassword } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from '@core/profile-manager'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale

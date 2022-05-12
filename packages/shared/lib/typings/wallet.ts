@@ -15,28 +15,6 @@ export interface AccountMessage extends Message {
     account: number
 }
 
-export type BalanceOverview = {
-    incoming: string
-    incomingRaw: number
-    outgoing: string
-    outgoingRaw: number
-    balance: string
-    balanceRaw: number
-    balanceFiat: string
-}
-
-export type WalletState = {
-    balanceOverview: Writable<BalanceOverview>
-    accounts: Writable<WalletAccount[]>
-    accountsLoaded: Writable<boolean>
-    internalTransfersInProgress: Writable<{
-        [key: string]: {
-            from: string
-            to: string
-        }
-    }>
-}
-
 type BalanceTimestamp = {
     timestamp: number
     balance: number

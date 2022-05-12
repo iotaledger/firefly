@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Button, QR, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
 
     $: receiveAddress = $selectedAccount.depositAddress
 </script>
@@ -16,7 +16,7 @@
     <div class="mb-6 flex flex-col items-center">
         <Text secondary classes="mb-6 text-xs">
             {localize('general.myNetworkAddress', {
-                values: { networkName: $activeProfile.settings.networkConfig.network.name },
+                values: { networkName: $activeProfile?.settings.networkConfig.network.name },
             })}
         </Text>
         <div class="w-full flex flex-col p-4 items-center rounded-lg bg-gray-50">

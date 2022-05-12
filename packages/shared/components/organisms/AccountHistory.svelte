@@ -4,13 +4,12 @@
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         api,
         isSyncing,
         getIncomingFlag,
         isFirstSessionSync,
-        selectedAccount,
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
@@ -22,6 +21,7 @@
     import { AccountMessage } from 'shared/lib/typings/wallet'
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { selectedAccount } from '@core/account'
 
     const transactions = getAccountMessages($selectedAccount)
 

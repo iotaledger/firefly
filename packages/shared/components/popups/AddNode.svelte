@@ -5,8 +5,8 @@
     import { INode, INodeInfo, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
-    import { activeProfile } from 'shared/lib/profile'
+    import { asyncGetNodeInfo } from 'shared/lib/wallet'
+    import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
 
     export let node: INode = { url: '', isPrimary: false }
@@ -16,7 +16,7 @@
 
     export let onSuccess = (..._: any[]): void => {}
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let nodeUrl = node?.url || ''
     const oldNodeUrl = nodeUrl
@@ -47,7 +47,7 @@
 
     const cleanNodeFormData = (): void => {
         const _nodes = constructNodes()
-        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
+        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile?.isDeveloperProfile)
         if (validErr) {
             addressError = localize(validErr)
         }
@@ -57,7 +57,7 @@
         if (!id) {
             addressError = localize('error.network.notReachable')
         } else if (id !== network.id) {
-            if ($activeProfile.isDeveloperProfile) {
+            if ($activeProfile?.isDeveloperProfile) {
                 newNetwork = getNetwork($activeProfile?.networkProtocol, $activeProfile?.networkType, id)
                 isNetworkSwitch = true
             } else {
@@ -97,7 +97,7 @@
         if (!addressError) {
             if (!isNetworkSwitch) {
                 // TODO refactor
-                // await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
+                // await updateNetworkStatus(get($activeProfile?.accounts)[0]?.id, {
                 //     url: nodeUrl,
                 //     auth: optNodeAuth,
                 //     isPrimary: node?.isPrimary,

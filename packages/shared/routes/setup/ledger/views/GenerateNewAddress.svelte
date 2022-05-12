@@ -6,8 +6,8 @@
         ledgerSimulator,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getDefaultClientOptions } from '@core/network/utils'
-    import { activeProfile } from 'shared/lib/profile'
+    import { getDefaultClientOptions } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { Locale } from '@core/i18n'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -60,12 +60,12 @@
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
-                        if (getAccountsResponse.payload[$activeProfile.ledgerMigrationCount]) {
+                        if (getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount]) {
                             newAddress =
-                                getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].addresses[0].address
-                            displayAddress(getAccountsResponse.payload[$activeProfile.ledgerMigrationCount].id)
+                                getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].addresses[0].address
+                            displayAddress(getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].id)
                         } else {
-                            _createAccount($activeProfile.ledgerMigrationCount + 1)
+                            _createAccount($activeProfile?.ledgerMigrationCount + 1)
                         }
                     } else {
                         _createAccount(1)

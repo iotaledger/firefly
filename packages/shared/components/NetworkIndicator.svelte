@@ -6,7 +6,7 @@
         NETWORK_HEALTH_COLORS,
         showNetworkIssuesNotification,
     } from '@core/network'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let modal: Modal
 

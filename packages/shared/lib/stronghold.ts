@@ -6,7 +6,7 @@ import { Event } from './typings/events'
 import { StrongholdStatus } from './typings/wallet'
 import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
-import { isLedgerProfile } from './profile'
+import { isLedgerProfile } from '@core/profile'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */

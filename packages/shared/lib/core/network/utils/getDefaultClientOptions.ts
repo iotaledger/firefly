@@ -1,4 +1,4 @@
-import { activeProfile } from '@lib/profile'
+import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { NetworkProtocol, NetworkType } from '../enums'
 import { IClientOptions } from '../interfaces'
