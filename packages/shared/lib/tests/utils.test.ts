@@ -1,4 +1,6 @@
-import { migrateObjects, range } from '../utils'
+import './__mocks__/i18n'
+
+import { migrateObjects, range, validateBech32Address } from '../utils'
 
 type Simple = {
     prop1?: string
@@ -169,6 +171,29 @@ describe('File: utils.ts', () => {
             expect(range(-1)).toEqual([])
             expect(range(-1, 1)).toEqual([])
             expect(range(undefined, 1)).toEqual([])
+        })
+    })
+
+    describe('Function: validateBech32Address', () => {
+        it('should return error string if address is empty', () => {
+            expect(
+                validateBech32Address('atoi', 'iota1qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
+            ).toEqual('Addresses start with the prefix atoi.')
+        })
+        it('should return error string if address is in wrong format', () => {
+            expect(
+                validateBech32Address('iota', 'iota2qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
+            ).toEqual('The address is not correctly formatted.')
+        })
+        it('should return error string if address cannot be decoded', () => {
+            expect(
+                validateBech32Address('iota', 'iota1qqf446qvry56772nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
+            ).toEqual('The address is not valid.')
+        })
+        it('should return undefined if address is valid', () => {
+            expect(
+                validateBech32Address('iota', 'iota1qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
+            ).toEqual(undefined)
         })
     })
 })
