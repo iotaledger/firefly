@@ -3,8 +3,7 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { profiles, setActiveProfile } from 'shared/lib/profile'
-    import { ProfileType } from 'shared/lib/typings/profile'
+    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -12,7 +11,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick(id: string) {
-        setActiveProfile(id)
+        loadPersistedProfileIntoActiveProfile(id)
         dispatch('next')
     }
 

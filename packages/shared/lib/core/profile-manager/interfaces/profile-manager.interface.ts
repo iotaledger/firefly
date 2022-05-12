@@ -1,8 +1,8 @@
-import { AccountId, CreateAccountPayload, EventType } from '@iota/wallet'
-import { StardustAccount } from './account'
 import { IAuth, INodeInfoResponse } from '@core/network'
+import { AccountId, CreateAccountPayload, EventType } from '@iota/wallet'
+import { StardustAccount } from '@lib/typings/account'
 
-export interface ProfileManager {
+export interface IProfileManager {
     getAccount(accountId: AccountId): Promise<StardustAccount>
     getAccounts(): Promise<StardustAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse>

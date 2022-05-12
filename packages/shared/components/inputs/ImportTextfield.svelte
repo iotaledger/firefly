@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { asyncGetLegacySeedChecksum, verifyMnemonic } from 'shared/lib/wallet'
+    import { asyncGetLegacySeedChecksum } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
     import { Locale } from '@core/i18n'
+    import { verifyMnemonic } from '@core/profile-manager'
 
     enum Type {
         Seed = 'seed',
@@ -71,10 +72,10 @@
 
         content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
 
-        const trimmedContent = content.trim()
+        const trimmedContent = content?.trim()
 
         if (trimmedContent.length >= 3) {
-            const words = trimmedContent.split(' ')
+            const words = trimmedContent?.split(' ')
             if (type === Type.Seed) {
                 const seedValidations = isSeed(trimmedContent)
                 if (seedValidations) {

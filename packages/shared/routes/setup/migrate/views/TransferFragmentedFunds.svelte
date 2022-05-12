@@ -25,11 +25,11 @@
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { Locale } from '@core/i18n'
+    import { addNewProfile, loadPersistedProfileIntoActiveProfile, newProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -281,10 +281,9 @@
 
         // When the first migration bundle is broadcast, then persist profile
 
-        saveProfile($newProfile)
-        setActiveProfile($newProfile.id)
+        addNewProfile($newProfile)
+        loadPersistedProfileIntoActiveProfile($newProfile.id)
 
-        profileInProgress.set(undefined)
         newProfile.set(null)
     }
 

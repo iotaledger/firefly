@@ -2,16 +2,18 @@
     import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { getColor } from 'shared/lib/profile'
+    import { api, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { activeProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let alias
     export let account
     export let error = ''
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let accountAlias = alias
     let isBusy = false
@@ -21,7 +23,7 @@
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
+        // setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             $accountRouter.goTo(AccountRoute.Init)

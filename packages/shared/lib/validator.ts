@@ -465,7 +465,7 @@ class MnemonicValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as string
 
-        if (payload.split(' ').length !== 24) {
+        if (payload?.split(' ').length !== 24) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid mnemonic length received.',

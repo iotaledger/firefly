@@ -5,10 +5,10 @@
     import UnitInput from './UnitInput.svelte'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { CurrencyTypes } from '@lib/typings/currency'
-    import { activeProfile } from '@lib/profile'
+    import { activeProfile } from '@core/profile'
     import { UNIT_MAP } from '@lib/units'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { AccountBalance } from '@iota/wallet/out/types'
 
     export let inputElement
@@ -29,7 +29,7 @@
 
     $: rawAmount = Number(amount) * UNIT_MAP[unit].val
     $: formattedFiatValue = formatCurrency(
-        convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+        convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
     )
 
     $: isFocused && (error = '')

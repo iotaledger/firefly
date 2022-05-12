@@ -1,16 +1,12 @@
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    profileManager,
-    // addMessagesPair,
     api,
-    getStardustAccount,
     prepareAccountInfo,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
     transferState,
     updateBalanceOverview,
-    wallet,
 } from 'shared/lib/wallet'
 import { get, Writable } from 'svelte/store'
 import { localize } from '@core/i18n'
@@ -20,12 +16,13 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { openPopup } from './popup'
-import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { getAccounts } from './actions/profileActions'
+import { activeProfile } from '@core/profile'
+import { getAccounts } from '@core/profile-manager'
 
+const { isStrongholdLocked } = get(activeProfile)
 /**
  * Initialises event listeners from wallet library
  *
@@ -51,7 +48,7 @@ export function initialiseListeners(): void {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            const { balanceOverview, accounts } = get(wallet)
+            const { balanceOverview, accounts } = get(activeProfile)
             const { accountId, message } = response.payload
             const account = get(accounts).find((account) => account.id === accountId)
             if (!account || !message) return
@@ -106,7 +103,7 @@ export function initialiseListeners(): void {
      */
     api.onConfirmationStateChange({
         async onSuccess(response) {
-            const { accounts } = get(wallet)
+            const { accounts } = get(activeProfile)
             const { message } = response.payload
 
             // Checks if this was a message sent for participating in an event
@@ -128,7 +125,7 @@ export function initialiseListeners(): void {
                 let account1
                 let account2
 
-                const { internalTransfersInProgress } = get(wallet)
+                const { internalTransfersInProgress } = get(activeProfile)
                 const transfers = get(internalTransfersInProgress)
 
                 // Are we tracking an internal transfer for this message id
@@ -145,7 +142,7 @@ export function initialiseListeners(): void {
 
                 // If this is a confirmation of a regular transfer update the balance overview
                 if (confirmed && !essence.data.internal) {
-                    const { balanceOverview } = get(wallet)
+                    const { balanceOverview } = get(activeProfile)
                     const overview = get(balanceOverview)
 
                     const incoming = essence.data.incoming
@@ -233,7 +230,7 @@ export function initialiseListeners(): void {
 
             // On balance change event, get the updated account objects from wallet-rs db
             try {
-                const { accounts } = get(wallet)
+                const { accounts } = get(activeProfile)
                 const latestAccounts = await getAccounts()
 
                 let walletAccounts: WalletAccount[]
@@ -278,7 +275,7 @@ export function initialiseListeners(): void {
             }
             // Migration
             if (messageId === '0'.repeat(64)) {
-                updateProfile('migratedTransactions', [])
+                // updateActiveProfile({'migratedTransactions': []})
             }
         },
         onError(error) {
@@ -378,7 +375,7 @@ function updateAllMessagesState(
  */
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
-        const { accounts } = get(wallet)
+        const { accounts } = get(activeProfile)
         const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
 
         showAppNotification({

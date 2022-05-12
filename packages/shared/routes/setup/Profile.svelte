@@ -11,23 +11,16 @@
         Text,
         CollapsibleBlock,
     } from 'shared/components'
-    import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import {
-        cleanupInProgressProfiles,
-        storeProfile,
-        disposeNewProfile,
-        hasNoProfiles,
-        newProfile,
-        validateProfileName,
-    } from 'shared/lib/profile'
-    import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
+    import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -56,7 +49,7 @@
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
         if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
-            destroyManager(previousInitializedId)
+            destroyProfileManager()
         }
     }
 
@@ -64,13 +57,13 @@
         try {
             busy = true
             if (nameChanged || hasDeveloperProfileChanged) {
-                storeProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
+                createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialise($newProfile.id, path, sendCrashReports, machineId)
-                initialiseMigrationListeners()
+                initialiseProfileManager(path)
+                // initialiseMigrationListeners()
             }
 
             if (get(stage) === Stage.PROD && isDeveloperProfile) {
@@ -95,8 +88,9 @@
 
     async function handleBackClick(): Promise<void> {
         cleanupSignup()
-        cleanupInProgressProfiles()
-        await disposeNewProfile()
+
+        await deleteNewProfile()
+
         $appRouter.previous()
     }
 </script>
@@ -108,7 +102,7 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
-            {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
+            {locale(`views.profile.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`)}
             {locale('views.profile.addMore')}
         </Text>
         <Input

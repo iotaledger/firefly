@@ -47,7 +47,7 @@ export const nodeInfo = writable<IStardustNodeInfo>({
     plugins: [],
 })
 
-export function updateNodeInfo(payload: IStardustNodeInfo): void {
+export function updateNodeInfo(payload: Partial<IStardustNodeInfo>): void {
     return nodeInfo.update((state) => {
         if (nodeInfo) {
             return { ...state, ...payload }

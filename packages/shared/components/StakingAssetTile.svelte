@@ -26,7 +26,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
 
     export let asset: Asset
 

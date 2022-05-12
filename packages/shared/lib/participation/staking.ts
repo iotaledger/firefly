@@ -3,12 +3,12 @@ import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { networkStatus } from '@core/network'
-import { activeProfile, updateProfile } from '../profile'
+import { activeProfile } from '@core/profile'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { WalletAccount } from '../typings/walletAccount'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
-import { selectedAccount, wallet } from '../wallet'
+import { selectedAccount } from '@core/account'
 
 import {
     ASSEMBLY_EVENT_ID,
@@ -550,14 +550,14 @@ async function fetchStakingResult(
     }
 }
 
-function getAccountStakingRewards(): AccountStakingRewards[] {
-    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
-    if (cachedStakingRewards.length === 0) {
-        return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
-    } else {
-        return cachedStakingRewards
-    }
-}
+// function getAccountStakingRewards(): AccountStakingRewards[] {
+//     const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
+//     if (cachedStakingRewards.length === 0) {
+//         return get(get(activeProfile).accounts).map((account) => ({ accountId: account.id }))
+//     } else {
+//         return cachedStakingRewards
+//     }
+// }
 
 function getStakingPeriodForAccount(
     account: WalletAccount,
@@ -614,7 +614,7 @@ function updateStakingRewardsForAccount(
     airdrop: StakingAirdrop,
     periodNumber: number
 ): AccountStakingRewards {
-    const account = get(get(wallet).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
+    const account = get(get(activeProfile).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
     if (!account) return previousAccountStakingRewards
 
     const period = getStakingPeriodForAccount(account, stakingResult, periodNumber)
@@ -632,13 +632,13 @@ export async function cacheStakingPeriod(airdrop: StakingAirdrop, periodNumber: 
     const stakingResult = await fetchStakingResult(airdrop, periodNumber)
     if (!stakingResult) return
 
-    const previousStakingRewards = getAccountStakingRewards()
-    const updatedStakingRewards: AccountStakingRewards[] = previousStakingRewards.map(
-        (accountStakingRewards: AccountStakingRewards) =>
-            updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
-    )
+    // const previousStakingRewards = getAccountStakingRewards()
+    // const updatedStakingRewards: AccountStakingRewards[] = previousStakingRewards.map(
+    //     (accountStakingRewards: AccountStakingRewards) =>
+    //         updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
+    // )
 
-    updateProfile('stakingRewards', updatedStakingRewards)
+    // updateProfile('stakingRewards', updatedStakingRewards)
 }
 
 function getLastStakingPeriodNumber(airdrop: StakingAirdrop): number {
@@ -678,34 +678,35 @@ export async function cacheAllStakingPeriods(airdrop: StakingAirdrop): Promise<v
 }
 
 function getUncachedStakingPeriodNumbers(airdrop: StakingAirdrop): number[] {
-    const stakingRewards = get(activeProfile)?.stakingRewards ?? []
-    if (stakingRewards.length === 0) {
-        return range(getLastStakingPeriodNumber(airdrop), 1)
-    } else {
-        const stakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
+    // const stakingRewards = get(activeProfile)?.stakingRewards ?? []
+    // if (stakingRewards.length === 0) {
+    //     return range(getLastStakingPeriodNumber(airdrop), 1)
+    // } else {
+    //     const stakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
 
-        let shouldBreak = false
-        let uncachedStakingPeriodNumbers = []
-        stakingRewards.forEach((stakingReward) => {
-            if (shouldBreak) return
+    //     let shouldBreak = false
+    //     let uncachedStakingPeriodNumbers = []
+    //     stakingRewards.forEach((stakingReward) => {
+    //         if (shouldBreak) return
 
-            const airdropStakingRewards = stakingReward[airdrop]
-            if (!airdropStakingRewards) {
-                uncachedStakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
-                shouldBreak = true
-            } else {
-                stakingPeriodNumbers.forEach((stakingPeriodNumber) => {
-                    if (!airdropStakingRewards.periods.some((period) => period.periodNumber === stakingPeriodNumber)) {
-                        if (!uncachedStakingPeriodNumbers.includes(stakingPeriodNumber)) {
-                            uncachedStakingPeriodNumbers.push(stakingPeriodNumber)
-                        }
-                    }
-                })
-            }
-        })
+    //         const airdropStakingRewards = stakingReward[airdrop]
+    //         if (!airdropStakingRewards) {
+    //             uncachedStakingPeriodNumbers = range(getLastStakingPeriodNumber(airdrop), 1)
+    //             shouldBreak = true
+    //         } else {
+    //             stakingPeriodNumbers.forEach((stakingPeriodNumber) => {
+    //                 if (!airdropStakingRewards.periods.some((period) => period.periodNumber === stakingPeriodNumber)) {
+    //                     if (!uncachedStakingPeriodNumbers.includes(stakingPeriodNumber)) {
+    //                         uncachedStakingPeriodNumbers.push(stakingPeriodNumber)
+    //                     }
+    //                 }
+    //             })
+    //         }
+    //     })
 
-        return uncachedStakingPeriodNumbers
-    }
+    //     return uncachedStakingPeriodNumbers
+    // }
+    return [1, 2, 3, 4, 5, 6, 7]
 }
 
 async function updateStakingPeriodCacheForAirdrop(airdrop: StakingAirdrop): Promise<void> {

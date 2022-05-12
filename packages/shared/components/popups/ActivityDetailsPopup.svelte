@@ -3,18 +3,18 @@
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { getMilestoneMessageValue, isParticipationPayload, wallet } from 'shared/lib/wallet'
+    import { getMilestoneMessageValue, isParticipationPayload } from 'shared/lib/wallet'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
     import { AccountMessage } from '@lib/typings/wallet'
-    import { activeProfile } from '@lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let message: AccountMessage & { balance?: number }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let type: ActivityType

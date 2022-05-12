@@ -1,11 +1,9 @@
+import { migrateActiveProfile } from '@core/profile'
 import { get, writable } from 'svelte/store'
-
-import { migrateProfile } from '@lib/profile'
-
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
-import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { Subrouter } from './subrouter'
 
 export const loginRoute = writable<LoginRoute>(null)
 
@@ -27,7 +25,8 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                migrateProfile()
+                // TODO: we shouldn't migrate every login..
+                migrateActiveProfile()
                 get(appRouter).next(event)
                 break
         }

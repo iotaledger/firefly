@@ -7,31 +7,29 @@
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Idle, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
-    import {
-        NOTIFICATION_TIMEOUT_NEVER,
-        removeDisplayNotification,
-        showAppNotification,
-    } from 'shared/lib/notifications'
+    import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, updateProfile } from '@lib/profile'
+    import {
+        isLedgerProfile,
+        logout,
+        activeProfile,
+        loadAccounts,
+        saveActiveProfile,
+        updateActiveProfile,
+    } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Locale } from '@core/i18n'
-    import { setSelectedAccount, wallet } from 'shared/lib/wallet'
+    import { localize } from '@core/i18n'
+    import { selectedAccountId, setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import {
-        CURRENT_ASSEMBLY_STAKING_PERIOD,
-        CURRENT_SHIMMER_STAKING_PERIOD,
-        LAST_ASSEMBLY_STAKING_PERIOD,
-        LAST_SHIMMER_STAKING_PERIOD,
-    } from '@lib/participation/constants'
-    import { loadAccounts } from '@lib/actions/profileActions'
 
-    export let locale: Locale
+    const { hasLoadedAccounts, accounts } = $activeProfile
 
-    const { accountsLoaded, accounts } = $wallet
+    $: $activeProfile, saveActiveProfile()
+    // TODO: Set this in switch account action
+    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     const tabs = {
         wallet: Wallet,
@@ -47,7 +45,7 @@
 
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
-    const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
+    const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
             void pollParticipationOverview()
@@ -64,7 +62,7 @@
     })
 
     /* $: {
-        if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+        if (!$isSyncing && $isFirstSessionSync && $hasLoadedAccounts) {
             void updateStakingPeriodCache()
         }
     } */
@@ -76,27 +74,25 @@
                 return []
             }
 
-            if ($activeProfile.settings.showHiddenAccounts) {
+            if ($activeProfile?.settings?.showHiddenAccounts) {
                 const sortedAccounts = $accounts.sort((a, b) => a.meta.index - b.meta.index)
 
                 // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
                 // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                if (sortedAccounts.length > 1 && $activeProfile?.hiddenAccounts) {
                     const lastAccount = sortedAccounts[sortedAccounts.length - 1]
                     if (
-                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        $activeProfile?.hiddenAccounts.includes(lastAccount.id) &&
                         lastAccount.rawIotaBalance === 0 &&
                         lastAccount.messages.length === 0
                     ) {
                         sortedAccounts.pop()
                     }
                 }
-
                 return sortedAccounts
             }
-
             return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
                 .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
@@ -108,7 +104,7 @@
                 return []
             }
             return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
                 .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
@@ -116,19 +112,6 @@
     // TODO: move these stores to lib when we fix the circular imports issue
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-
-    function shouldVisitStaking(): boolean {
-        if (($activeProfile.lastAssemblyPeriodVisitedStaking ?? 0) < LAST_ASSEMBLY_STAKING_PERIOD) {
-            updateProfile('lastAssemblyPeriodVisitedStaking', LAST_ASSEMBLY_STAKING_PERIOD)
-        }
-        if (($activeProfile.lastShimmerPeriodVisitedStaking ?? 0) < LAST_SHIMMER_STAKING_PERIOD) {
-            updateProfile('lastShimmerPeriodVisitedStaking', LAST_SHIMMER_STAKING_PERIOD)
-        }
-        return (
-            CURRENT_ASSEMBLY_STAKING_PERIOD > $activeProfile.lastAssemblyPeriodVisitedStaking ||
-            CURRENT_SHIMMER_STAKING_PERIOD > $activeProfile.lastShimmerPeriodVisitedStaking
-        )
-    }
 
     onMount(() => {
         // void getParticipationEvents()
@@ -160,9 +143,9 @@
                 }
             )
         } */
-        /* Platform.onEvent('menu-logout', () => {
+        Platform.onEvent('menu-logout', () => {
             void logout()
-        }) */
+        })
         /* Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
@@ -199,7 +182,7 @@
         }
     })
 
-    if (!$accountsLoaded && $loggedIn) {
+    if (!$hasLoadedAccounts && $loggedIn) {
         loadAccounts()
         startInit = Date.now()
         busy = true
@@ -214,7 +197,7 @@
     }
 
     $: {
-        if ($accountsLoaded) {
+        if ($hasLoadedAccounts) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
             const cancelBusyState = () => {
                 busy = false
@@ -274,62 +257,62 @@
         }
     } */
 
-    $: if (!busy && $accountsLoaded) {
+    $: if (!busy && $hasLoadedAccounts) {
         /**
          * If the profile has dummy migration transactions,
          * then we open a "funds available soon" notification
          */
-        if (get(activeProfile)?.migratedTransactions?.length && !fundsSoonNotificationId) {
-            fundsSoonNotificationId = showAppNotification({
-                type: 'warning',
-                message: locale('notifications.fundsAvailableSoon'),
-                progress: undefined,
-                timeout: NOTIFICATION_TIMEOUT_NEVER,
-                actions: [
-                    {
-                        label: locale('actions.dismiss'),
-                        callback: () => removeDisplayNotification(fundsSoonNotificationId),
-                    },
-                ],
-            })
-        }
+        // if (get(activeProfile)?.migratedTransactions?.length && !fundsSoonNotificationId) {
+        //     fundsSoonNotificationId = showAppNotification({
+        //         type: 'warning',
+        //         message: locale('notifications.fundsAvailableSoon'),
+        //         progress: undefined,
+        //         timeout: NOTIFICATION_TIMEOUT_NEVER,
+        //         actions: [
+        //             {
+        //                 label: locale('actions.dismiss'),
+        //                 callback: () => removeDisplayNotification(fundsSoonNotificationId),
+        //             },
+        //         ],
+        //     })
+        // }
         if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
-                message: locale('indicators.developerProfileIndicator.warningText', {
+                message: localize('indicators.developerProfileIndicator.warningText', {
                     values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
                 }),
             })
         }
     }
 
-    $: if ($activeProfile) {
-        const shouldDisplayMigrationPopup =
-            // Only display popup once the user successfully migrates the first account index
-            $isLedgerProfile &&
-            $activeProfile.ledgerMigrationCount > 0 &&
-            !$activeProfile.hasVisitedDashboard &&
-            !$popupState.active
-        if (shouldDisplayMigrationPopup) {
-            updateProfile('hasVisitedDashboard', true)
+    // $: if ($activeProfile) {
+    //     const shouldDisplayMigrationPopup =
+    //         // Only display popup once the user successfully migrates the first account index
+    //         $isLedgerProfile &&
+    //         $activeProfile?.ledgerMigrationCount > 0 &&
+    //         !$activeProfile?.hasVisitedDashboard &&
+    //         !$popupState.active
+    //     if (shouldDisplayMigrationPopup) {
+    //         updateProfile('hasVisitedDashboard', true)
 
-            openPopup({
-                type: 'ledgerMigrateIndex',
-                preventClose: true,
-            })
-        }
-    }
+    //         openPopup({
+    //             type: 'ledgerMigrateIndex',
+    //             preventClose: true,
+    //         })
+    //     }
+    // }
 
     /**
      * If the user doesnt have any dummy migration transaction
      * but there is an active "funds available soon" notification,
      * then we close it
      */
-    $: if ($activeProfile && !$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
-        removeDisplayNotification(fundsSoonNotificationId)
-        fundsSoonNotificationId = null
-    }
+    // $: if ($activeProfile && !$activeProfile?.migratedTransactions?.length && fundsSoonNotificationId) {
+    //     removeDisplayNotification(fundsSoonNotificationId)
+    //     fundsSoonNotificationId = null
+    // }
 
     /**
      * Reactive statement to resume ledger poll if it was interrupted
@@ -339,12 +322,12 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded) {
-        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+    $: if ($hasLoadedAccounts) {
+        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
+    $: showSingleAccountGuide = !busy && $loggedIn && !$activeProfile?.hasFinishedSingleAccountGuide
+    $: if (showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
 </script>
@@ -355,10 +338,10 @@
         <TopNavigation classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''} />
     {/if}
     <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
+        <Sidebar locale={localize} />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+            <svelte:component this={tabs[$dashboardRoute]} locale={localize} on:next={$appRouter.next} />
         </div>
     </div>
 </div>

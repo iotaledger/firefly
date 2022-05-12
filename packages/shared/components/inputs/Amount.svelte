@@ -11,7 +11,7 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
@@ -27,7 +27,7 @@
 
     export let onMaxClick = (): void => {}
 
-    const currency = $activeProfile?.settings.currency ?? (AvailableExchangeRates.USD as AmountUnit)
+    const currency = $activeProfile?.settings?.currency ?? (AvailableExchangeRates.USD as AmountUnit)
     const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
 
     let showDropdown = false

@@ -13,14 +13,6 @@
         resetMigrationState,
         totalMigratedBalance,
     } from 'shared/lib/migration'
-    import {
-        activeProfile,
-        newProfile,
-        profileInProgress,
-        saveProfile,
-        setActiveProfile,
-        updateProfile,
-    } from 'shared/lib/profile'
     import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -28,6 +20,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { activeProfile, addNewProfile, loadPersistedProfileIntoActiveProfile, newProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -46,17 +39,16 @@
             }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
-            saveProfile($newProfile)
-            setActiveProfile($newProfile.id)
+            addNewProfile($newProfile)
+            loadPersistedProfileIntoActiveProfile($newProfile.id)
 
-            profileInProgress.set(undefined)
             newProfile.set(null)
         } else {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
 
-                updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
+                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
             } else {
                 localizedBody = 'softwareMigratedBody'
             }
@@ -87,13 +79,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.id)
+                getProfileDataPath($activeProfile?.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile?.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  `${$activeProfile?.id}-${LOG_FILE_NAME}`
                               )
                     )
                     .then((result) => {

@@ -3,15 +3,15 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     $: currencyList = Object.keys($exchangeRates)
         .map((currency) => ({ value: currency, label: currency }))
         .sort()
 
     const handleCurrencySelect = (item) => {
-        updateProfile('settings.currency', item.value)
+        updateActiveProfileSettings({ currency: item.value })
         void addProfileCurrencyPriceData()
         refreshBalanceOverview()
         updateAccountsBalanceEquiv()

@@ -3,10 +3,9 @@
     import { Text, Modal, AccountActionsModal } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
-    import { accountRoute } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
+    import { accountRoute, AccountRoute } from '@core/router'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccount } from '@core/account'
     import { openPopup } from '@lib/popup'
 
     export let classes = ''
