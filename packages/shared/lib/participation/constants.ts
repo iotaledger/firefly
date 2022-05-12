@@ -10,7 +10,7 @@ export const ASSEMBLY_EVENT_START_DATE = new Date('April 22, 2022')
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '4c3ffca36f03864da86ed4ebc4c2fe4aadc838f6ab2cb4c7ac6d70965ee878f8'
+export const ASSEMBLY_EVENT_ID = '2db71bcf8aad398b49e72d224ca10ee2c811017a5a05d0af0a5b8a4fd7035fd9'
 
 /**
  * The staking event ID for Shimmer.
