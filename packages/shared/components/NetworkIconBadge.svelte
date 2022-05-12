@@ -8,7 +8,7 @@
     let tooltipAnchor
     let showTooltip = false
 
-    $: tooltipText = NETWORK[networkProtocol]?.[networkType]?.name
+    $: tooltipText = NETWORK?.[networkProtocol]?.[networkType]?.name
 
     const _showTooltip = (show: boolean): void => {
         showTooltip = show
