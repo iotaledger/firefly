@@ -1094,10 +1094,15 @@
   resolved "https://registry.yarnpkg.com/@capacitor-community/barcode-scanner/-/barcode-scanner-2.0.1.tgz#49ae48b111804388cc20d37d7bc04a36dbb2bac8"
   integrity sha512-x5CWW57SgnKCuXj0re+7Q+5VrjnuaXAu0vEWOKwj2q154+R0KawEcf42HfEUcgLvbolp9A9+2Cl/5U7vRApI9w==
 
-"@capacitor/android@3.4.1", "@capacitor/android@^3.4.0":
+"@capacitor/android@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.1.tgz#d4accc41c843927853d27c7f638487bd52633486"
   integrity sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag==
+
+"@capacitor/android@^3.4.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.5.1.tgz#d81ec82f84ab7f0abeadb4cc100e6a3820197d65"
+  integrity sha512-rjehS0+BQBlwoN8hUyrMuzexn/9QJsONb1kmN5uXcL8JuTEbv35fa7z0tSD4x1LKwUFd+3Zeuwt60QRuwijlmw==
 
 "@capacitor/cli@^3.4.1":
   version "3.4.3"
@@ -1138,10 +1143,15 @@
     minimist "^1.2.5"
     typescript "^4.0.3"
 
-"@capacitor/ios@3.4.1", "@capacitor/ios@^3.4.0":
+"@capacitor/ios@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.4.1.tgz#0ae173056924294aa1e468b70377d603abea790e"
   integrity sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w==
+
+"@capacitor/ios@^3.4.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.5.1.tgz#976de8909487c0ca35b8f1616ce8837bb19ff8c6"
+  integrity sha512-295L9dHe/QaejUpGI8Pxwb1i2yVgick1ExIDK26xk+tk1km3B1HVjsIS8qkf2SOp7tuwP9+W5T5p7rLMNN4v5g==
 
 "@develar/schema-utils@~2.6.5":
   version "2.6.5"
