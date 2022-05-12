@@ -1,7 +1,7 @@
 import { localize } from '@core/i18n'
 import { IAuth, INodeInfo } from '@core/network'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
-import { createStardustAccount, generateMnemonic, profileManager } from '@core/profile-manager'
+import { createStardustAccount, generateMnemonic, getAccount, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
@@ -15,7 +15,7 @@ import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { WalletApi, WALLET_STARDUST } from './shell/walletApi'
+import { WalletApi } from './shell/walletApi'
 import { SignerType, StardustAccount, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
@@ -26,8 +26,6 @@ import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { WalletAccount } from './typings/walletAccount'
 import { IWalletApi } from './typings/walletApi'
-
-const { getAccount } = WALLET_STARDUST
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -131,9 +129,6 @@ export const getProfileDataPath = async (id: string): Promise<string> => {
     return `${walletPath}${id}`
 }
 
-export function getStardustAccount(index: number): Promise<StardustAccount> {
-    return getAccount(index)
-}
 /**
  * Removes event listeners for active actor
  *
@@ -209,7 +204,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
             coinType: 4219,
         })
-        const stardustAccount = await getStardustAccount(createdAccount.meta.index)
+        const stardustAccount = await getAccount(createdAccount.meta.index)
         const addresses = await stardustAccount.generateAddresses()
         const depositAddress = addresses[0].address
         const preparedAccount = prepareAccountInfo(createdAccount, {

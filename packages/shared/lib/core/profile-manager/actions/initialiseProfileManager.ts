@@ -1,12 +1,9 @@
-import { WALLET_STARDUST } from '@lib/shell/walletApi'
-import { ProfileManager } from '@lib/typings/profileManager'
+import { api } from '../api'
 import { profileManager } from '../store'
-
-const { createAccountManager } = WALLET_STARDUST
 
 export function initialiseProfileManager(storagePath: string): void {
     // TODO: Set nodes based on client options?
-    const newProfileManager: ProfileManager = createAccountManager({
+    const newProfileManager = api.createAccountManager({
         storagePath,
         clientOptions: {
             nodes: [
@@ -20,6 +17,7 @@ export function initialiseProfileManager(storagePath: string): void {
         },
         secretManager: {
             Stronghold: {
+                password: '',
                 snapshotPath: `${storagePath}/wallet.stronghold`,
             },
         },

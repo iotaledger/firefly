@@ -1,12 +1,12 @@
 import type { AccountId, CreateAccountPayload, NodeInfo } from '@iota/wallet'
 import { StardustAccount } from '../../typings/account'
-import { ProfileManager } from '../../typings/profileManager'
 import { AccountMock } from './account.mock'
+import { IProfileManager } from '../../core/profile-manager'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
-export class ProfileManagerMock implements ProfileManager {
+export class ProfileManagerMock implements IProfileManager {
     getAccount(accountId: AccountId) {
         return undefined
     }

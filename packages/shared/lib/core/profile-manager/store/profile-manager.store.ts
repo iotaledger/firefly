@@ -1,4 +1,4 @@
-import { ProfileManager } from '@lib/typings/profileManager'
 import { writable } from 'svelte/store'
+import { IProfileManager } from '../interfaces'
 
-export const profileManager = writable<ProfileManager>(null)
+export const profileManager = writable<IProfileManager>(null)
