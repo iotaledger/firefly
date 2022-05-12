@@ -36,7 +36,11 @@ export const CapacitorApi: IPlatform = {
 
     renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
 
-    removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
+    removeProfileFolder: async (profilePath) => {
+        void (await SecureFilesystemAccess.removeProfileFolder({
+            folder: profilePath,
+        }))
+    },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
@@ -54,7 +58,7 @@ export const CapacitorApi: IPlatform = {
         const type = defaultPath === null ? 'file' : 'folder'
         const { selected } = await SecureFilesystemAccess.showPicker({
             type,
-            defaultPath
+            defaultPath,
         })
         return `${selected}`
     },
@@ -134,10 +138,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: () =>
-        new Promise<string>((resolve, reject) => {
-            resolve('DATA')
-        }),
+    getUserDataPath: () => new Promise<string>((resolve, reject) => resolve('')),
 
     /**
      * Gets diagnostics information for the system
@@ -283,7 +284,24 @@ export const CapacitorApi: IPlatform = {
      * Save the recovery kit
      * @returns
      */
-    saveRecoveryKit: (recoverKitData) => new Promise<void>((resolve, reject) => {}),
+    saveRecoveryKit: async (recoverKitData) => {
+        const os: string = Capacitor.getPlatform()
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type: 'folder',
+            defaultPath: '',
+        })
+        if (os === 'ios') {
+            void (await SecureFilesystemAccess.allowAccess())
+        }
+        void (await SecureFilesystemAccess.saveRecoveryKit({
+            selectedPath: `${selected}/recovery-kit.pdf`,
+            fromRelativePath: '/assets/docs/recovery-kit.pdf',
+        }))
+        if (os === 'ios') {
+            void SecureFilesystemAccess.revokeAccess()
+        }
+        return
+    },
 
     /**
      * Hook the logger
