@@ -3,13 +3,14 @@
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
     import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
-    import { activeProfile } from '@lib/profile'
-    import { getNetwork } from '@core/network'
+    import { activeProfile } from '@core/profile'
+    import { getNetwork, NetworkType, nodeInfo } from '@core/network'
 
     export let recipient: string | WalletAccount
     export let disabled = false
 
-    const addressPrefix = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)?.bech32Hrp
+    const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
+    const addressPrefix = network?.type === NetworkType.PrivateNet ? $nodeInfo?.protocol?.bech32HRP : network?.bech32Hrp
 
     let inputElement
     let modal: Modal
