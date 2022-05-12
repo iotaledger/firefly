@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { IAuth, INodeInfo } from '@core/network'
+import { IAuth } from '@core/network'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
 import { createStardustAccount, generateMnemonic, getAccount, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
@@ -338,24 +338,9 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: IAuth): Promise<INodeInfo> => {
-    if (!url || (!url && !auth)) {
-        const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
-
-        url = node?.url
-        auth = node?.auth
-    }
-
-    return new Promise<INodeInfo>((resolve, reject) => {
-        api.getNodeInfo(accountId, url, auth, {
-            onSuccess(response) {
-                resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+export function asyncGetNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
+    const manager = get(profileManager)
+    return manager.getNodeInfo(url, auth)
 }
 
 export const asyncStopBackgroundSync = (): Promise<void> =>

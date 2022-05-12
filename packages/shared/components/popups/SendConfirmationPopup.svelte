@@ -58,7 +58,7 @@
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" />
+            <ExpirationTimePicker value="value" />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
