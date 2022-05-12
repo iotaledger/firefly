@@ -17,7 +17,7 @@ import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { IAuth, INodeInfo, IStardustNodeInfo } from '@core/network'
+import { IAuth, INodeInfoResponse } from '@core/network'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
@@ -480,11 +480,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export const asyncGetNodeInfo = (url?: string, auth?: IAuth): Promise<IStardustNodeInfo> => {
-    if (!url || (!url && !auth)) {
-        return new Promise((resolve) => resolve(<IStardustNodeInfo>{}))
-    }
-
+export function asyncGetNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
     const manager = get(profileManager)
     return manager.getNodeInfo(url, auth)
 }
