@@ -1,12 +1,10 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Pill } from 'shared/components'
-
-    export let label: string = ''
 </script>
 
 <Pill
-    data={label}
-    smaller
+    data={localize('general.dev')}
     textColor="gray-600"
     darkTextColor="white"
     backgroundColor="gray-100"

@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let classes = undefined
@@ -62,7 +61,7 @@
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
         {#if isDeveloper}
-            <DeveloperIndicatorPill label={localize('general.dev')} />
+            <DeveloperIndicatorPill />
         {/if}
     </div>
 </div>

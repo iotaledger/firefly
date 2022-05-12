@@ -28,7 +28,7 @@
 </script>
 
 {#if asyncStatus}
-    <Pill {backgroundColor} {textColor}>
+    <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
         {localize('pills.asyncStatus.' + asyncStatus).toLowerCase()}
     </Pill>
 {/if}

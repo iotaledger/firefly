@@ -7,22 +7,12 @@
     export let darkTextColor = ''
     export let backgroundColor = ''
     export let darkBackgroundColor = ''
-    export let smaller = false
     export let classes = ''
-
-    $: conditionalProps = smaller
-        ? {
-              smaller: true,
-              fontSize: '',
-          }
-        : {
-              smaller: false,
-              fontSize: '12',
-          }
 </script>
 
 <Text
     type="p"
+    smaller
     fontWeight={FontWeightText.semibold}
     color={textColor}
     darkColor={darkTextColor || textColor}
@@ -31,7 +21,6 @@
         {darkBackgroundColor ? 'dark:bg-' + darkBackgroundColor : ''}
         {classes}
     "
-    {...conditionalProps}
 >
     {#if data}
         {data}

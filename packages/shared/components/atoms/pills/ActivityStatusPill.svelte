@@ -31,7 +31,7 @@
 </script>
 
 {#if type && status}
-    <Pill {backgroundColor} {textColor}>
+    <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
         {localize('pills.' + type + '.' + status).toLowerCase()}
     </Pill>
 {/if}
