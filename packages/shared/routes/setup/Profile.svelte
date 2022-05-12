@@ -13,13 +13,14 @@
     } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { destroyManager, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
+    import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -48,7 +49,7 @@
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
         if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
-            destroyManager()
+            destroyProfileManager()
         }
     }
 
@@ -61,7 +62,7 @@
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()
                 const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialise($newProfile.id, path, sendCrashReports, machineId)
+                initialiseProfileManager(path)
                 // initialiseMigrationListeners()
             }
 

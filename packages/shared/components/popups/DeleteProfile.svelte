@@ -3,11 +3,18 @@
     import { Button, Password, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { removeProfileFolder } from 'shared/lib/profile'
-    import { activeProfile, isSoftwareProfile, logout, profiles, removeProfile } from '@core/profile'
+    import {
+        activeProfile,
+        isSoftwareProfile,
+        logout,
+        profiles,
+        removeProfile,
+        removeProfileFolder,
+    } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { setStrongholdPassword, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
+    import { asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -35,6 +42,7 @@
         }
     }
 
+    // TODO: move logic to action inn profile module
     async function triggerDeleteProfile() {
         try {
             const _activeProfile = get(activeProfile)

@@ -5,12 +5,13 @@
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
     import { activeProfile, clearActiveProfile } from '@core/profile'
+    import { initialiseProfileManager } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -102,7 +103,7 @@
                     if (verified === true) {
                         return Platform.getMachineId().then((machineId) =>
                             getProfileDataPath(profile.id).then((path) => {
-                                initialise(profile.id, path, sendCrashReports, machineId)
+                                initialiseProfileManager(path)
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
                                 //     onSuccess() {

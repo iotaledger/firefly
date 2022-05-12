@@ -1,6 +1,6 @@
 import { NetworkProtocol, NetworkType } from '@core/network'
+import { destroyProfileManager } from '@core/profile-manager'
 import { ledgerSimulator } from '@lib/ledger'
-import { destroyManager } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
@@ -45,7 +45,7 @@ export const deleteNewProfile = async (): Promise<void> => {
         } catch (err) {
             console.error(err)
         }
-        destroyManager()
+        destroyProfileManager()
     }
     newProfile.set(null)
     activeProfileId.set(null)

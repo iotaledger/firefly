@@ -10,9 +10,9 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { setStrongholdPassword } from 'shared/lib/wallet'
-    import { get, Readable } from 'svelte/store'
+    import { Readable } from 'svelte/store'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let account: Readable<WalletAccount>
 

@@ -3,10 +3,11 @@
     import { mobile, strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { asyncChangeStrongholdPassword, setStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 

@@ -31,15 +31,16 @@ export function updateClientOptions(config: INetworkConfig): void {
         return
     }
 
-    api.setClientOptions(clientOptions, {
-        onSuccess() {
-            const { accounts } = get(activeProfile)
-            accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
-        },
-        onError(err) {
-            console.error(err)
-        },
-    })
+    // TODO: Replace with profileManager api
+    // api.setClientOptions(clientOptions, {
+    //     onSuccess() {
+    //         const { accounts } = get(activeProfile)
+    //         accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
+    //     },
+    //     onError(err) {
+    //         console.error(err)
+    //     },
+    // })
 }
 
 function buildClientOptions(config: INetworkConfig): IClientOptions {

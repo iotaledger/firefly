@@ -1,6 +1,6 @@
 import { MOCK_MNEMONIC, ProfileManagerMock } from './__mocks__/profileManager.mock'
 import {
-    destroyManager,
+    destroyProfileManager,
     profileManager,
     generateMnemonic,
     setStrongholdPassword,
@@ -9,7 +9,7 @@ import {
     backup,
     restoreBackup,
     createStardustAccount,
-} from '../wallet'
+} from '../core/profile-manager'
 import { get } from 'svelte/store'
 import { AccountMock } from './__mocks__/account.mock'
 
@@ -29,7 +29,7 @@ describe('File: api.test.ts', () => {
     })
 
     it('should destroy the profile manager correctly', () => {
-        destroyManager()
+        destroyProfileManager()
         expect(get(profileManager)).toBeNull()
     })
 

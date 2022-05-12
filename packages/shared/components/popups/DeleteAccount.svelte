@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { setStrongholdPassword } from 'shared/lib/wallet'
+    import { setStrongholdPassword } from '@core/profile-manager'
     import { Writable } from 'svelte/store'
+    import { isSoftwareProfile } from '@core/profile'
 
     export let locale: Locale
 

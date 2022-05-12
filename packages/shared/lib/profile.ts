@@ -1,36 +1,9 @@
-import { get } from 'svelte/store'
-import { _ } from 'svelte-i18n'
-import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
-import { ledgerSimulator } from 'shared/lib/ledger'
-import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import {
-    asyncDeleteStorage,
-    destroyManager,
-    getProfileDataPath,
-    getWalletDataPath,
-    AccountColors,
-} from 'shared/lib/wallet'
-import { Platform } from './platform'
-import {
-    ProfileType,
-    IPersistedProfile,
-    IProfileSettings,
-    activeProfile,
-    IProfile,
-    profiles,
-    activeProfileId,
-    MAX_PROFILE_NAME_LENGTH,
-    newProfile,
-    removeProfileFolder,
-    updateActiveProfile,
-} from '@core/profile'
-import { HistoryDataProps } from './typings/market'
-import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
-import { ValuesOf } from './typings/utils'
-import { WalletAccount } from './typings/walletAccount'
-import { Locale } from '@core/i18n'
-import { AvailableExchangeRates } from './typings/currency'
+import { activeProfile, IPersistedProfile, IProfile, ProfileType, updateActiveProfile } from '@core/profile'
 import { buildNewProfile } from '@core/profile/helpers'
+import { migrateObjects } from 'shared/lib/utils'
+import { AccountColors } from 'shared/lib/wallet'
+import { get } from 'svelte/store'
+import { WalletAccount } from './typings/walletAccount'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes

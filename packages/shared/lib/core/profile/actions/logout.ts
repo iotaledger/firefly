@@ -2,10 +2,10 @@ import { resetRouters } from '@core/router'
 import { clearSendParams, lastActiveAt, loggedIn } from '@lib/app'
 import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
-import { destroyManager } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { activeProfile, isLedgerProfile, isSoftwareProfile } from '../stores'
 import { resetActiveProfile, clearActiveProfile } from '@core/profile'
+import { destroyProfileManager } from '@core/profile-manager'
 
 const { isStrongholdLocked } = get(activeProfile)
 
@@ -23,7 +23,7 @@ export function logout(_clearActiveProfile: boolean = false, _lockStronghold: bo
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
-            destroyManager()
+            destroyProfileManager()
         }
 
         // TODO: clean up the state management

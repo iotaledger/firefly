@@ -19,7 +19,8 @@ import { openPopup } from './popup'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { activeProfile, getAccounts, updateActiveProfile } from '@core/profile'
+import { activeProfile } from '@core/profile'
+import { getAccounts } from '@core/profile-manager'
 
 const { isStrongholdLocked } = get(activeProfile)
 /**

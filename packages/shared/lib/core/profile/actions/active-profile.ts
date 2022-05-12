@@ -1,14 +1,13 @@
 import { setSelectedAccount } from '@core/account'
 import { activeProfile, isSoftwareProfile } from '@core/profile'
+import { getAccounts } from '@core/profile-manager'
 import { accountRouter } from '@core/router'
 import { openPopup } from '@lib/popup'
-import { StardustAccount } from '@lib/typings/account'
 import { WalletAccount } from '@lib/typings/walletAccount'
 import {
     api,
     asyncSyncAccountOffline,
     createAccount,
-    getStardustAccount,
     hasGeneratedALedgerReceiveAddress,
     isBackgroundSyncing,
     isFirstManualSync,
@@ -16,7 +15,6 @@ import {
     isSyncing,
     isTransferring,
     prepareAccountInfo,
-    profileManager,
     selectedMessage,
     transferState,
     updateBalanceOverview,
@@ -25,13 +23,6 @@ import {
 import { get } from 'svelte/store'
 import { IPersistedProfile } from '../interfaces'
 import { activeProfileId, saveProfile } from '../stores'
-
-// Move to profile manager module
-export async function getAccounts(): Promise<StardustAccount[]> {
-    const accountsResponse = await get(profileManager).getAccounts()
-    const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
-    return Promise.all(accountsPromises)
-}
 
 export async function loadAccounts(): Promise<void> {
     try {

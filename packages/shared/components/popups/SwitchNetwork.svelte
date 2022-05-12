@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { createAccount, asyncRemoveWalletAccounts, setStrongholdPassword } from 'shared/lib/wallet'
+    import { createAccount, asyncRemoveWalletAccounts } from 'shared/lib/wallet'
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
     import {
@@ -10,13 +10,13 @@
         isLedgerProfile,
         isSoftwareProfile,
         logout,
-        updateActiveProfile,
         updateActiveProfileSettings,
     } from '@core/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let network: INetwork
     export let node: INode

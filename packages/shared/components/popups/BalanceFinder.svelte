@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { setStrongholdPassword, asyncSyncAccounts } from 'shared/lib/wallet'
+    import { asyncSyncAccounts } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { localize } from '@core/i18n'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
     import { onDestroy } from 'svelte'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
 

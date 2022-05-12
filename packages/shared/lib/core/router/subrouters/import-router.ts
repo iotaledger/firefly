@@ -1,15 +1,13 @@
-import { get, writable } from 'svelte/store'
-
+import { newProfile, ProfileImportType } from '@core/profile'
+import { restoreBackup } from '@core/profile-manager'
 import { mnemonic } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
-import { newProfile, ProfileImportType } from '@core/profile'
-import { restoreBackup } from '@lib/wallet'
-
+import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
-import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { Subrouter } from './subrouter'
 
 export const importRoute = writable<ImportRoute>(null)
 
@@ -50,7 +48,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                     this.isGettingMigrationData.set(false)
                     get(appRouter).next({ importType })
                 } else if (importType === ProfileImportType.Mnemonic) {
-                    mnemonic.set(migrationSeed.split(' '))
+                    mnemonic.set(migrationSeed?.split(' '))
                     nextRoute = ImportRoute.Success
                 }
                 break

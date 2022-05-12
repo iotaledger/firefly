@@ -1,7 +1,7 @@
 import { localize } from '@core/i18n'
 import { IAuth, INodeInfo } from '@core/network'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
-import { CreateAccountPayload } from '@iota/wallet'
+import { createStardustAccount, generateMnemonic, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
@@ -22,13 +22,12 @@ import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { ProfileManager } from './typings/profileManager'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { WalletAccount } from './typings/walletAccount'
 import { IWalletApi } from './typings/walletApi'
 
-const { createAccountManager, getAccount } = WALLET_STARDUST
+const { getAccount } = WALLET_STARDUST
 
 const configColors = resolveConfig(tailwindConfig).theme.colors
 
@@ -56,8 +55,6 @@ export const DUST_THRESHOLD: number = 1_000_000
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
-
-export const profileManager = writable<ProfileManager>(null)
 
 // TODO: remove these
 interface ActorState {
@@ -134,35 +131,6 @@ export const getProfileDataPath = async (id: string): Promise<string> => {
     return `${walletPath}${id}`
 }
 
-// TODO: Ask Matt how Sentry works with new bindings
-export function initialise(id: string, storagePath: string, sendCrashReports: boolean, machineId: string): void {
-    // TODO: remove these
-    if (Object.keys(actors).length > 0) {
-        console.error('Initialise called when another actor already initialised')
-    }
-    // actors[id] = WALLET.init(id, storagePath, sendCrashReports, machineId)
-    // The new bindings
-    const newProfileManager: ProfileManager = createAccountManager({
-        storagePath,
-        clientOptions: {
-            nodes: [
-                {
-                    url: 'https://api.alphanet.iotaledger.net',
-                    auth: null,
-                    disabled: false,
-                },
-            ],
-            localPow: true,
-        },
-        secretManager: {
-            Stronghold: {
-                snapshotPath: `${storagePath}/wallet.stronghold`,
-            },
-        },
-    })
-    profileManager.set(newProfileManager)
-}
-
 export function getStardustAccount(index: number): Promise<StardustAccount> {
     return getAccount(index)
 }
@@ -182,19 +150,9 @@ export const removeEventListeners = (id: string): void => {
     // get(accountManager).removeEventListeners()
 }
 
-export const destroyManager = (): void => {
-    // TODO destroy manager properly with api call?
-    profileManager.set(null)
-}
-
-export async function generateMnemonic(): Promise<string> {
-    const manager = get(profileManager)
-    return manager.generateMnemonic()
-}
-
 export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
     const mnemonicString = await generateMnemonic()
-    const mnemnonicList = mnemonicString.split(' ')
+    const mnemnonicList = mnemonicString?.split(' ')
     mnemonic.set(mnemnonicList)
     return mnemnonicList
 }
@@ -219,11 +177,6 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         })
     })
 
-export async function setStrongholdPassword(password: string): Promise<void> {
-    const manager = get(profileManager)
-    await manager.setStrongholdPassword(password)
-}
-
 export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.changeStrongholdPassword(currentPassword, newPassword, {
@@ -236,22 +189,6 @@ export const asyncChangeStrongholdPassword = (currentPassword: string, newPasswo
         })
     })
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export async function storeMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(profileManager)
-    await manager.storeMnemonic(mnemonic)
-}
-
-export async function verifyMnemonic(mnemonic: string): Promise<void> {
-    const manager = get(profileManager)
-    await manager.verifyMnemonic(mnemonic)
-}
-
-export async function backup(dest: string, password: string): Promise<void> {
-    const manager = get(profileManager)
-    await manager.backup(dest, password)
-}
-
 export function setStoragePassword(password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
@@ -263,17 +200,6 @@ export function setStoragePassword(password: string): Promise<void> {
             },
         })
     })
-}
-
-export async function restoreBackup(importFilePath: string, password: string): Promise<void> {
-    // TODO: check this once Thoralf exposes this
-    const manager = get(profileManager)
-    await manager.importAccounts(importFilePath, password)
-}
-
-export async function createStardustAccount(payload: CreateAccountPayload): Promise<StardustAccount> {
-    const manager = get(profileManager)
-    return manager.createAccount(payload)
 }
 
 export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
