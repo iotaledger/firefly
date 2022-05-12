@@ -117,9 +117,22 @@ jobs:
     - name: Install Sentry CLI
       # Yarn has issues putting binaries in the PATH on Windows
       run: npm i -g @sentry/cli
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'windows-2019' }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-10.15' }}
 
-    - name: Upload backend PDB (Windows)
+    - name: Strip backend debug info and upload to Sentry (Linux)
+      run: |
+        cp index.node index.node.dbg
+        strip -S index.node
+        objcopy --add-gnu-debuglink=index.node.dbg index.node
+        sentry-cli difutil check index.node.dbg
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources index.node.dbg
+        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources index.node.dbg
+      working-directory: packages/backend/bindings/node
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'ubuntu-18.04' }}
+
+    - name: Upload backend debug info to Sentry (Windows)
       run: |
         sentry-cli difutil check node_neon.pdb
         sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources node_neon.pdb 
