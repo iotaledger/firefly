@@ -6,19 +6,19 @@
     export let textColor = 'gray-800'
     export let darkTextColor = ''
     export let backgroundColor = ''
-    export let darkBackgrounColor = ''
+    export let darkBackgroundColor = ''
     export let classes = ''
 </script>
 
 <Text
     type="p"
-    fontSize="12"
+    smaller
     fontWeight={FontWeightText.semibold}
     color={textColor}
     darkColor={darkTextColor || textColor}
-    classes="px-2 py-1 rounded-md 
+    classes="px-2 py-1 rounded-md
         {backgroundColor ? 'bg-' + backgroundColor : ''}
-        {darkBackgrounColor ? 'dark:bg-' + darkBackgrounColor : ''} 
+        {darkBackgroundColor ? 'dark:bg-' + darkBackgroundColor : ''}
         {classes}
     "
 >
