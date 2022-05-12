@@ -22,6 +22,7 @@ const resolve = {
     fallback: {
         path: false,
         fs: false,
+        crypto: false,
     },
     plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
@@ -31,7 +32,7 @@ const output = {
     publicPath: prod ? '../' : '/',
     path: path.join(__dirname, '/public'),
     filename: '[name].js',
-    chunkFilename: '[name].[id].js',
+    chunkFilename: 'build/[name].[id].js',
 }
 
 // ------------------------ Module rules ------------------------
@@ -108,6 +109,7 @@ const rendererPlugins = [
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
+        'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),
 ]
 

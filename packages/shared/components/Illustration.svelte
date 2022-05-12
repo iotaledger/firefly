@@ -16,6 +16,14 @@
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
+        'single-account-guide-desktop': {
+            lightmode: 'onboarding/single-account-guide-desktop.svg',
+            darkmode: 'onboarding/single-account-guide-desktop.svg',
+        },
+        'white-arrow': {
+            lightmode: 'onboarding/white-arrow.svg',
+            darkmode: 'onboarding/white-arrow.svg',
+        },
 
         // Ledger
         'ledger-install-new-app-desktop': {
@@ -59,10 +67,6 @@
             darkmode: 'onboarding/ledger-support.svg',
         },
         // Staking
-        'staking-notice': {
-            lightmode: 'staking/staking-notice.svg',
-            darkmode: 'staking/staking-notice.svg',
-        },
         'shimmer-info-bg': {
             lightmode: 'staking/shimmer-info.png',
             darkmode: 'staking/shimmer-info.png',
@@ -70,6 +74,10 @@
         'assembly-info-bg': {
             lightmode: 'staking/assembly-info.png',
             darkmode: 'staking/assembly-info.png',
+        },
+        'staking-notification': {
+            lightmode: 'staking/staking-notification.svg',
+            darkmode: 'staking/staking-notification.svg',
         },
     }
 </script>

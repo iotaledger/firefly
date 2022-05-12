@@ -1,6 +1,6 @@
-import type { Bridge, CommunicationIds } from '../typings/bridge'
+import { Bridge, CommunicationIds } from '../typings/bridge'
 
-import type { Participation } from './types'
+import { Participation } from './types'
 
 /**
  * Gets an overview of participation for accounts.
@@ -10,14 +10,20 @@ import type { Participation } from './types'
  *
  * @param {Bridge} bridge
  * @param {CommunicationIds} __ids
+ * @apram {string} assemblyEventId
  *
  * @returns {Promise<string>}
  */
-export function getParticipationOverview(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function getParticipationOverview(
+    bridge: Bridge,
+    __ids: CommunicationIds,
+    assemblyEventId: string
+): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'GetParticipationOverview',
+        payload: { assemblyEventId },
     })
 }
 

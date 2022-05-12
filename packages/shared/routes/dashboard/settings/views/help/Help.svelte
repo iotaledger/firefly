@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { ExternalRoute, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { ExternalRoute, HelpAndInfo } from '@core/router'
     import HelpSection from './HelpSection.svelte'
 
     const settings: {

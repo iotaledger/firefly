@@ -14,7 +14,7 @@
     export let formatYAxis = (value: unknown): number => Number(value.toString())
     export let color = AccountColors.Blue.toString()
     export let beginAtZero = false
-    export let inlineStyle = 'height: calc(50vh - 130px);'
+    export let inlineStyle = 'height: calc(50vh - 140px);'
 
     let canvas
     let chart

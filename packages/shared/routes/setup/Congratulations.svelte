@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
+    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
@@ -19,15 +21,13 @@
         setActiveProfile,
         updateProfile,
     } from 'shared/lib/profile'
-    import { resetLedgerRoute, walletSetupType } from 'shared/lib/router'
+    import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { SetupType } from 'shared/lib/typings/routes'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getProfileDataPath } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
+    import { SetupType } from 'shared/lib/typings/setup'
 
     export let locale: Locale
 
@@ -63,8 +63,6 @@
         }
     })
 
-    const dispatch = createEventDispatcher()
-
     const fiatbalance = formatCurrency(
         convertToFiat(
             // Only show actually migrated balance to user
@@ -75,7 +73,7 @@
         AvailableExchangeRates.USD
     )
 
-    const handleContinueClick = () => {
+    const handleContinueClick = (): void => {
         if (wasMigrated) {
             const _continue = () => {
                 if ($walletSetupType === SetupType.TrinityLedger) {
@@ -83,22 +81,19 @@
                      * We check for the new Ledger IOTA app to be connected after migration
                      * because the last app the user had open was the legacy one
                      */
-                    promptUserToConnectLedger(false, () => dispatch('next'))
+                    promptUserToConnectLedger(false, () => $appRouter.next())
                 } else {
-                    dispatch('next')
+                    $appRouter.next()
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.name)
+                getProfileDataPath($activeProfile.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog(
-                                  $migrationLog,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
-                              )
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.name}-${LOG_FILE_NAME}`
+                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
                               )
                     )
                     .then((result) => {
@@ -115,7 +110,7 @@
                 _exportMigrationLog()
             }
         } else {
-            dispatch('next')
+            $appRouter.next()
         }
     }
 
@@ -123,7 +118,7 @@
         if (wasMigrated) {
             resetMigrationState()
         }
-        resetLedgerRoute()
+        $ledgerRouter.reset()
     })
 </script>
 

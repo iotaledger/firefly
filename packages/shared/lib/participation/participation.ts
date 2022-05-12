@@ -1,18 +1,17 @@
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
-import type { WalletAccount } from '../typings/wallet'
+import { WalletAccount } from '../typings/wallet'
 
 import { getParticipationOverview } from './api'
-import { PARTICIPATION_POLL_DURATION } from './constants'
+import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
 import { canAccountReachMinimumAirdrop } from './staking'
 import {
-    accountToParticipate,
     isPerformingParticipation,
     participationAction,
     participationEvents,
     participationOverview,
     pendingParticipations,
 } from './stores'
-import { AccountParticipationAbility, Participation, ParticipationEventState, StakingAirdrop } from './types'
+import { AccountParticipationAbility, ParticipationEventState, StakingAirdrop } from './types'
 
 let participationPollInterval
 
@@ -26,9 +25,12 @@ let participationPollInterval
 export async function pollParticipationOverview(): Promise<void> {
     clearPollParticipationOverviewInterval()
     try {
-        await getParticipationOverview()
+        await getParticipationOverview(ASSEMBLY_EVENT_ID)
         /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(async () => getParticipationOverview(), PARTICIPATION_POLL_DURATION)
+        participationPollInterval = setInterval(
+            async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
+            PARTICIPATION_POLL_DURATION
+        )
     } catch (error) {
         if (error && error?.error.includes('pluginNotFound')) {
             clearPollParticipationOverviewInterval()
@@ -55,7 +57,6 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
-    accountToParticipate.set(null)
     isPerformingParticipation.set(false)
     participationAction.set(null)
     participationEvents.set([])

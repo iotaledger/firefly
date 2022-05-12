@@ -1,6 +1,7 @@
-import type { AvailableExchangeRates } from './currency'
-import type { ChartSelectors } from './chart'
-import type { NetworkConfig } from './network'
+import { AvailableExchangeRates } from './currency'
+import { ChartSelectors } from './chart'
+import { NetworkConfig } from './network'
+import { AccountStakingRewards } from '@lib/participation/types'
 
 export interface MigratedTransaction {
     address: string
@@ -31,7 +32,12 @@ export interface Profile {
     hasVisitedDashboard?: boolean
     ledgerMigrationCount?: number
     hasVisitedStaking?: boolean
+    lastShimmerPeriodVisitedStaking?: number
+    lastAssemblyPeriodVisitedStaking?: number
+    lastUsedAccountId?: string
     accounts?: ProfileAccount[]
+    stakingRewards?: AccountStakingRewards[]
+    hasFinishedSingleAccountGuide?: boolean
 }
 
 /**
@@ -57,7 +63,7 @@ export enum ProfileType {
 }
 
 /**
- * Profile import types
+ * Profile imports
  */
 export enum ImportType {
     Seed = 'seed',

@@ -1,10 +1,13 @@
 <script lang="typescript">
-    import { DashboardPane, Drawer } from 'shared/components'
-    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking/deepLinking'
+    import { isDeepLinkRequestActive } from '@common/deep-links'
+    import { accountRoute, accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
+    import { AccountActionsModal, DashboardPane, Text, Modal } from 'shared/components'
+    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
+    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/market'
+    import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
@@ -14,144 +17,59 @@
         isStrongholdLocked,
         setMissingProfileType,
     } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { checkStronghold } from 'shared/lib/stronghold'
+    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { LedgerErrorType, TransferProgressEventType } from 'shared/lib/typings/events'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Message, Transaction } from 'shared/lib/typings/message'
-    import type { MigratedTransaction } from 'shared/lib/typings/profile'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
-    import type {
-        AccountMessage,
-        AccountsBalanceHistory,
-        BalanceHistory,
-        BalanceOverview,
-        WalletAccount,
-    } from 'shared/lib/typings/wallet'
+    import { Message, Transaction } from 'shared/lib/typings/message'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
+        addMessagesPair,
         api,
-        asyncCreateAccount,
-        asyncSyncAccountOffline,
         asyncSyncAccounts,
         getAccountMessages,
         getAccountMeta,
-        getAccountsBalanceHistory,
         getSyncAccountOptions,
-        getTransactions,
-        getWalletBalanceHistory,
         hasGeneratedALedgerReceiveAddress,
-        initialiseListeners,
         isFirstSessionSync,
         isTransferring,
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
+        selectedAccount,
         selectedAccountId,
         transferState,
         updateBalanceOverview,
         wallet,
-        addMessagesPair,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
-    import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { checkStronghold } from 'shared/lib/stronghold'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { initialiseListeners } from 'shared/lib/walletApiListeners'
+    import { onMount } from 'svelte'
+    import {
+        AccountAssets,
+        AccountBalance,
+        AccountHistory,
+        BarChart,
+        LineChart,
+        ManageAccount,
+        Receive,
+        Send,
+    } from './views/'
 
-    export let locale: Locale
+    const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
-    let drawer: Drawer
-
-    const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
+    let modal: Modal
 
     $: {
-        if ($deepLinkRequestActive && $sendParams && $sendParams.address) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
+        if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
+            $accountRouter.goTo(AccountRoute.Send)
+            isDeepLinkRequestActive.set(false)
         }
     }
-    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
-        getAccountsBalanceHistory($accounts, $priceData)
-    )
-    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
-        getWalletBalanceHistory($accountsBalanceHistory)
-    )
-    const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
-        $accounts.find((acc) => acc.id === $selectedAccountId)
-    )
-    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) =>
-        $selectedAccount ? getAccountMessages($selectedAccount) : []
-    )
-
-    const viewableAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-
-            if ($activeProfile.settings.showHiddenAccounts) {
-                const sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
-
-                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
-                // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
-                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
-                    if (
-                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
-                        lastAccount.rawIotaBalance === 0 &&
-                        lastAccount.messages.length === 0
-                    ) {
-                        sortedAccounts.pop()
-                    }
-                }
-
-                return sortedAccounts
-            }
-
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    const liveAccounts: Readable<WalletAccount[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-            return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.index - b.index)
-        }
-    )
-
-    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
-        const _migratedTransactions = $activeProfile?.migratedTransactions || []
-
-        return [..._migratedTransactions, ...getTransactions($viewableAccounts)]
-    })
-
-    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
-    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
-    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
-    setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<(AccountMessage | MigratedTransaction)[]>>('walletTransactions', transactions)
-    setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
-    setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
-    setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
-    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
-    // If wallet route or account changes force regeneration of Ledger receive address
-    $: {
-        $walletRoute
-        $selectedAccountId
-        if ($isLedgerProfile) {
-            hasGeneratedALedgerReceiveAddress.set(false)
-        }
+    // If account changes force regeneration of Ledger receive address
+    $: if ($selectedAccountId && $isLedgerProfile) {
+        hasGeneratedALedgerReceiveAddress.set(false)
     }
 
     $: if ($accountsLoaded) {
@@ -170,7 +88,7 @@
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(error?.error || 'error.global.generic'),
+                    message: localize(error?.error || 'error.global.generic'),
                 })
             }
         }
@@ -288,7 +206,7 @@
                             isClientError && $isLedgerProfile ? 'error.ledger.generateAddress' : err.error
                         showAppNotification({
                             type: 'error',
-                            message: locale(localePath),
+                            message: localize(localePath),
                         })
                     }
                 },
@@ -310,38 +228,6 @@
             })
         } else {
             promptUserToConnectLedger(false, () => _generate(), undefined)
-        }
-    }
-
-    async function onCreateAccount(alias: string, color: string, onComplete) {
-        const _create = async (): Promise<unknown> => {
-            try {
-                const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
-
-                walletRoute.set(WalletRoutes.Init)
-
-                return onComplete()
-            } catch (err) {
-                return onComplete(err)
-            }
-        }
-
-        if ($isSoftwareProfile) {
-            api.getStrongholdStatus({
-                onSuccess(strongholdStatusResponse) {
-                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                        openPopup({ type: 'password', props: { onSuccess: _create } })
-                    } else {
-                        void _create()
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            await _create()
         }
     }
 
@@ -389,7 +275,7 @@
                         isTransferring.set(false)
                         showAppNotification({
                             type: 'error',
-                            message: locale(err.error),
+                            message: localize(err.error),
                         })
                     },
                 }
@@ -453,7 +339,7 @@
                     isTransferring.set(false)
                     showAppNotification({
                         type: 'error',
-                        message: locale(err.error),
+                        message: localize(err.error),
                     })
                 },
             })
@@ -475,10 +361,6 @@
         } else {
             _internalTransfer()
         }
-    }
-
-    $: if (mobile && drawer && $walletRoute === WalletRoutes.CreateAccount) {
-        drawer.open()
     }
 
     onMount(() => {
@@ -510,71 +392,45 @@
     })
 </script>
 
-{#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
-    <Account {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
-{:else if $mobile}
-    <div class="wallet-wrapper w-full h-full flex flex-col flex-1 bg-gray-50 dark:bg-gray-900">
-        <div class="w-full h-full grid grid-cols-1 min-h-0">
-            <!-- Total Balance, Accounts list & Send/Receive -->
-            <div class="flex flex-auto flex-col w-full">
-                <WalletBalance {locale} />
-                <WalletActions {isGeneratingAddress} {onSend} {onInternalTransfer} {onGenerateAddress} {locale} />
-                {#if $walletRoute === WalletRoutes.CreateAccount}
-                    <Drawer
-                        dimLength={180}
-                        opened={true}
-                        bind:this={drawer}
-                        on:close={() => walletRoute.set(WalletRoutes.Init)}
-                    >
-                        <CreateAccount onCreate={onCreateAccount} {locale} />
-                    </Drawer>
-                {/if}
-            </div>
-            <div class="flex flex-col col-span-2 h-full space-y-4">
-                <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
-                    <DashboardPane classes="w-full rounded-br-none rounded-bl-none">
-                        <WalletHistory {locale} />
-                    </DashboardPane>
-                </div>
-            </div>
-        </div>
-    </div>
-{:else}
-    <div class="wallet-wrapper relative w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900 z-0">
-        <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-            <DashboardPane classes="h-full">
-                <!-- Total Balance, Accounts list & Send/Receive -->
-                <div class="flex flex-auto flex-col h-full">
-                    {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount onCreate={onCreateAccount} {locale} />
-                    {:else}
-                        <WalletBalance {locale} />
-                        <DashboardPane classes="-mt-5 h-full z-10">
-                            <WalletActions
-                                {isGeneratingAddress}
-                                {onSend}
-                                {onInternalTransfer}
-                                {onGenerateAddress}
-                                {locale}
-                            />
-                        </DashboardPane>
+{#if $selectedAccount}
+    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
+        {#key $selectedAccount?.id}
+            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+                <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
+                    {#if $accountRoute !== AccountRoute.Manage}
+                        <AccountBalance onMenuClick={modal?.toggle} />
                     {/if}
-                </div>
-            </DashboardPane>
-            <div class="flex flex-col col-span-2 h-full space-y-4">
-                <DashboardPane classes="w-full h-1/2">
-                    <LineChart {locale} />
-                </DashboardPane>
-                <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
-                    <DashboardPane classes="w-1/2">
-                        <WalletHistory {locale} />
+                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
+                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                            <div class="px-6 my-4">
+                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                            </div>
+                        {/if}
+                        {#if $accountRoute === AccountRoute.Init}
+                            <AccountAssets />
+                        {:else if $accountRoute === AccountRoute.Send}
+                            <Send {onSend} {onInternalTransfer} />
+                        {:else if $accountRoute === AccountRoute.Receive}
+                            <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoute.Manage}
+                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                        {/if}
                     </DashboardPane>
-                    <DashboardPane classes="w-1/2">
-                        <Security {locale} />
+                </DashboardPane>
+                <DashboardPane>
+                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                </DashboardPane>
+                <div class=" flex flex-col space-y-4">
+                    <DashboardPane classes="w-full h-1/2">
+                        <LineChart />
+                    </DashboardPane>
+                    <DashboardPane classes="w-full h-1/2">
+                        <BarChart />
                     </DashboardPane>
                 </div>
             </div>
-        </div>
+            <AccountActionsModal bind:modal />
+        {/key}
     </div>
 {/if}
 

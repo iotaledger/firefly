@@ -1,22 +1,20 @@
 <script lang="typescript">
+    import { appRouter } from '@core/router'
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { locales, setLanguage, _ } from 'shared/lib/i18n'
-    import type { Locale } from 'shared/lib/typings/i18n'
-    import { createEventDispatcher } from 'svelte'
+    import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
-    const dispatch = createEventDispatcher()
+    $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
-    $: languageList = Object.values(locales).map((locale) => ({ value: locale, label: locale }))
-
-    function handleContinueClick() {
-        dispatch('next')
+    function handleContinueClick(): void {
+        $appRouter.next()
     }
 
-    const handleLanguage = (item) => {
+    function handleLanguage(item: { value: string }): void {
         setLanguage(item)
         locale = $_
     }
@@ -37,7 +35,7 @@
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
                         on:click={() => handleLanguage(language)}
-                        class:active={language?.label === locales[$appSettings.language]}
+                        class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
                     >
                         <Text type="p" smaller>{language?.label}</Text>
                     </button>
@@ -47,7 +45,7 @@
             <Dropdown
                 sortItems={true}
                 onSelect={handleLanguage}
-                value={locales[$appSettings.language]}
+                value={SUPPORTED_LOCALES[$appSettings.language]}
                 items={languageList}
             />
         {/if}

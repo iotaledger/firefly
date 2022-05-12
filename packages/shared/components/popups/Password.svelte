@@ -2,7 +2,7 @@
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -58,7 +58,7 @@
         placeholder={locale('general.password')}
         autofocus
     />
-    <div class="flex flex-row justify-between w-full space-x-4 px-8">
+    <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
         <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
             {locale('actions.unlock')}

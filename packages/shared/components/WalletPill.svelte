@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Text, Tooltip } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { isBright } from 'shared/lib/helpers'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import { activeProfile, getColor } from 'shared/lib/profile'
 
     export let account: WalletAccount

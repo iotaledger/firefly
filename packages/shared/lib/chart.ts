@@ -1,18 +1,18 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
-import { localize } from 'shared/lib/i18n'
+import { localize } from '@core/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
 import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
-import { formatDate } from 'shared/lib/i18n'
+import { formatDate } from '@core/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
-import type { Message } from './typings/message'
+import { Message } from './typings/message'
 import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
-import type { BalanceHistory, WalletAccount } from './typings/wallet'
+import { BalanceHistory, WalletAccount } from './typings/wallet'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
@@ -39,11 +39,6 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
                 .sort((a, b) => a[0] - b[0]) ?? []
         )
     }
-})
-
-const walletBalance = derived(wallet, ($wallet) => {
-    const { balanceOverview } = $wallet
-    return get(balanceOverview)?.balanceRaw
 })
 
 export function getChartDataFromBalanceHistory({

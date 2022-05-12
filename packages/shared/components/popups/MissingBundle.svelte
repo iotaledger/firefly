@@ -2,7 +2,7 @@
     import { Button, Text, Link } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { closePopup } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -22,7 +22,7 @@
         >{locale('popups.missingBundle.learnMore')}</Link
     >
 </div>
-<div class="flex flex-row justify-between w-full space-x-4 px-8">
+<div class="flex flex-row justify-between w-full space-x-4 md:px-8">
     <Button secondary classes="w-full" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
     <Button classes="w-full" onClick={onProceed}>{locale('popups.missingBundle.proceed')}</Button>
 </div>

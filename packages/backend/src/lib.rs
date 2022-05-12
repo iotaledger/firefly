@@ -28,6 +28,7 @@ use tokio::{
 };
 
 use std::{
+    borrow::Cow,
     collections::HashMap,
     convert::TryFrom,
     path::{Path, PathBuf},
@@ -104,6 +105,7 @@ impl TryFrom<&str> for EventType {
 }
 
 fn init_sentry() -> Option<sentry::ClientInitGuard> {
+    let environment = option_env!("SENTRY_ENVIRONMENT").unwrap_or("alpha");
     option_env!("SENTRY_DSN").map(|sentry_dsn| {
         sentry::init((
             sentry_dsn,
@@ -115,6 +117,7 @@ fn init_sentry() -> Option<sentry::ClientInitGuard> {
                     event.server_name = None;
                     Some(event)
                 })),
+                environment: Some(Cow::from(environment)),
                 ..Default::default()
             },
         ))

@@ -4,7 +4,7 @@ contact_links:
       url: https://github.com/iotaledger/firefly/discussions/categories/help-support
       about: Ask the community for help or support
     - name: Request a feature
-      url: https://github.com/iotaledger/firefly/discussions/categories/feature-and-enhancements
+      url: https://github.com/iotaledger/firefly/discussions/categories/features-enhancements
       about: Propose a feature or enhancement in GitHub discussions
     - name: General feedback
       url: https://github.com/iotaledger/firefly/discussions/categories/feedback

@@ -1,21 +1,22 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import type { WalletAccount } from 'shared/lib/typings/wallet'
-    import { wallet } from 'shared/lib/wallet'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import type { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { get } from 'svelte/store'
-    import { participationOverview, stakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        selectedAccountParticipationOverview,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
-    export let accountId
+    export let accountId: string
     export let internal = false
     export let to = ''
     export let amount = 0
@@ -24,9 +25,6 @@
     export let onConfirm = (..._: any[]): void => {}
 
     const displayAmount = getFormattedAmount()
-
-    const _getAccount = (accounts: WalletAccount[]): WalletAccount =>
-        accounts.find((account) => account.id === accountId)
 
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)
@@ -41,16 +39,20 @@
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
     }
 
-    let mustAcknowledgeGenericParticipationWarning
-    $: mustAcknowledgeGenericParticipationWarning = isAccountStaked(accountId) && isStakingPossible($stakingEventState)
+    $: mustAcknowledgeGenericParticipationWarning =
+        isAccountStaked(accountId) &&
+        (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState))
 
-    let mustAcknowledgeBelowMinRewardParticipationWarning
+    let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
     $: {
-        const { accounts } = get(wallet)
-        const account = _getAccount(get(accounts))
-        const accountOverview = $participationOverview.find((apo) => apo.accountIndex === account?.index)
+        const accountOverview = $selectedAccountParticipationOverview
         mustAcknowledgeBelowMinRewardParticipationWarning =
-            accountOverview?.assemblyRewardsBelowMinimum > 0 || accountOverview?.shimmerRewardsBelowMinimum > 0
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 &&
+                accountOverview?.assemblyRewards <= 0 &&
+                isStakingPossible($assemblyStakingEventState)) ||
+            (accountOverview?.shimmerRewardsBelowMinimum > 0 &&
+                accountOverview?.shimmerRewards <= 0 &&
+                isStakingPossible($shimmerStakingEventState))
     }
 
     function handleNextClick() {
