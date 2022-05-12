@@ -6,26 +6,6 @@ import { get } from 'svelte/store'
 import { WalletAccount } from './typings/walletAccount'
 
 /**
- * Migrates profile data in need of being modified to accommodate changes
- * in a newer Firefly version.
- *
- * @method migrateProfile
- *
- * @returns {void}
- */
-export const migrateProfile = (): void => {
-    const oldProfile = get(activeProfile)
-    const newProfile = buildNewProfile(
-        oldProfile.name,
-        oldProfile.isDeveloperProfile,
-        oldProfile.networkProtocol,
-        oldProfile.networkType
-    )
-
-    updateActiveProfile(migrateObjects<IPersistedProfile>(oldProfile, newProfile))
-}
-
-/**
  * Updates a profile property
  *
  * @method UpdateProfile

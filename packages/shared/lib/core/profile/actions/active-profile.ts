@@ -4,6 +4,7 @@ import { getAccounts } from '@core/profile-manager'
 import { accountRouter } from '@core/router'
 import { openPopup } from '@lib/popup'
 import { WalletAccount } from '@lib/typings/walletAccount'
+import { migrateObjects } from '@lib/utils'
 import {
     api,
     asyncSyncAccountOffline,
@@ -21,8 +22,9 @@ import {
     walletSetupType,
 } from '@lib/wallet'
 import { get } from 'svelte/store'
+import { buildNewProfile } from '../helpers'
 import { IPersistedProfile } from '../interfaces'
-import { activeProfileId, saveProfile } from '../stores'
+import { activeProfileId, saveProfile, updateActiveProfile } from '../stores'
 
 export async function loadAccounts(): Promise<void> {
     try {
@@ -171,4 +173,22 @@ export function saveActiveProfile(): void {
         }
         saveProfile(profileToPersist)
     }
+}
+
+/**
+ * Migrates profile data in need of being modified to accommodate changes
+ * in a newer Firefly version.
+ * @method migrateActiveProfile
+ * @returns {void}
+ */
+export function migrateActiveProfile(): void {
+    const _activeProfile = get(activeProfile)
+    const newProfileDefaults = buildNewProfile(
+        _activeProfile.name,
+        _activeProfile.isDeveloperProfile,
+        _activeProfile.networkProtocol,
+        _activeProfile.networkType
+    )
+
+    updateActiveProfile(migrateObjects<IPersistedProfile>(_activeProfile, newProfileDefaults))
 }
