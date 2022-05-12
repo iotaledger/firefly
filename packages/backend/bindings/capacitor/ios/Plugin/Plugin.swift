@@ -11,7 +11,7 @@ public class WalletPlugin: CAPPlugin {
         do {
             guard !isInitialized else { return }
             guard let actorId = call.getString("actorId"),
-                let storagePath = call.getString("storagePath")  else {
+                let storagePath = call.getString("storagePath") else {
                 return call.reject("actorId and storagePath is required")
             }
             let fm = FileManager.default
