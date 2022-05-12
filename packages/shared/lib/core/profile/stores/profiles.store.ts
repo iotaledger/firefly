@@ -5,11 +5,11 @@ export const profiles = persistent<IPersistedProfile[]>('profiles', [])
 
 /**
  * Adds a new profile to persistent storage
- * @method addProfile
+ * @method addNewProfile
  * @param {IPersistedProfile} newProfile
  * @returns {void}
  */
-export function addProfile(newProfile: IPersistedProfile): void {
+export function addNewProfile(newProfile: IPersistedProfile): void {
     profiles.update((state) => [...state, newProfile])
 }
 

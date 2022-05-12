@@ -3,17 +3,17 @@ import { clearSendParams, lastActiveAt, loggedIn } from '@lib/app'
 import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
-import { activeProfile, isLedgerProfile, isSoftwareProfile } from '../stores'
-import { clearActiveProfile, resetDashboardState } from '@core/profile'
 import { destroyProfileManager } from '@core/profile-manager'
+import { activeProfile, isLedgerProfile, isSoftwareProfile, resetActiveProfile } from '../stores'
+import { resetDashboardState } from './active-profile'
 
 const { isStrongholdLocked } = get(activeProfile)
 
 /**
  * Logout from current profile
  */
-export function logout(_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    return new Promise<void>((resolve) => {
+export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
+    return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             // TODO: Lock stronghold on using profile manager
             isStrongholdLocked.set(true)
@@ -31,8 +31,8 @@ export function logout(_clearActiveProfile: boolean = false, _lockStronghold: bo
         clearSendParams()
         closePopup(true)
         loggedIn.set(false)
-        if (_clearActiveProfile) {
-            clearActiveProfile()
+        if (clearActiveProfile) {
+            resetActiveProfile()
         }
         resetDashboardState()
         resetRouters()

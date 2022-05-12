@@ -1,7 +1,7 @@
 import { WalletAccount } from '@lib/typings/walletAccount'
 import { get, writable } from 'svelte/store'
-import { IBalanceOverview, IProfile, IProfileSettings } from '../interfaces'
-import { persistedProfile } from './persisted-profile.store'
+import { IBalanceOverview, IPersistedProfile, IProfile, IProfileSettings } from '../interfaces'
+import { profiles } from './profiles.store'
 
 const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
     balanceOverview: writable<IBalanceOverview>({
@@ -38,14 +38,10 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
     }))
 }
 
-// TODOL this should take a persisted profile as a parameter and be called on switching activeid
-export function loadPersistedProfileIntoActiveProfile(): void {
-    activeProfile?.update((_) => {
-        const _persistedProfile = get(persistedProfile)
-        if (_persistedProfile) {
-            return <IProfile>{ ...INITIAL_ACTIVE_PROFILE, ..._persistedProfile }
-        } else {
-            return <IProfile>INITIAL_ACTIVE_PROFILE
-        }
-    })
+export function setActiveProfile(persistedProfile: IPersistedProfile): void {
+    activeProfile?.set(<IProfile>{ ...INITIAL_ACTIVE_PROFILE, ...persistedProfile })
+}
+
+export function resetActiveProfile(): void {
+    activeProfile.set(null)
 }

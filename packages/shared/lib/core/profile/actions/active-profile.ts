@@ -24,7 +24,15 @@ import {
 import { get } from 'svelte/store'
 import { buildNewProfile } from '../helpers'
 import { IPersistedProfile } from '../interfaces'
-import { activeProfileId, saveProfile, updateActiveProfile } from '../stores'
+import { profiles, saveProfile, setActiveProfile, setActiveProfileId, updateActiveProfile } from '../stores'
+
+export function loadPersistedProfileIntoActiveProfile(profileId: string): void {
+    const persistedProfile = get(profiles).find((_persistedProfile) => _persistedProfile.id === profileId)
+    if (persistedProfile) {
+        setActiveProfileId(profileId)
+        setActiveProfile(persistedProfile)
+    }
+}
 
 export async function loadAccounts(): Promise<void> {
     try {
@@ -104,29 +112,6 @@ export async function tryCreateAccount(alias: string, color: string, onComplete:
     } else {
         await _create()
     }
-}
-
-/**
- * Sets profile with provided id as active
- * @method setActiveProfile
- * @param {string} id
- * @returns {void}
- */
-export function setActiveProfile(id: string): void {
-    // We have a reactive store which will pull in the persisted profile
-    // data when the activeProfileId is set. When the data has been loaded
-    // we load the persisted properties into the activeProfile store
-    // with default values for the additional properties
-    activeProfileId.set(id)
-}
-
-/**
- * Clears the active profile
- * @method clearActiveProfile
- * @returns {void}
- */
-export function clearActiveProfile(): void {
-    activeProfileId.set(null)
 }
 
 // TODO: move this out of profile module

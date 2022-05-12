@@ -40,8 +40,6 @@
     import {
         activeProfile,
         activeProfileId,
-        loadPersistedProfileIntoActiveProfile,
-        persistedProfile,
         saveActiveProfile,
         cleanupEmptyProfiles,
         updateActiveProfile,
@@ -71,12 +69,6 @@
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
     }
-
-    // When the activeProfileId changes persistedProfile store will
-    // be derived from the matching profile in the persisted profiles store
-    // once this has been derived we can load the persisted properties into
-    // the activeProfile store
-    $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
 
     // When the activeProfile changes we should call the saveActiveProfile action
     // to save any of the persisted properties in the matching profile from

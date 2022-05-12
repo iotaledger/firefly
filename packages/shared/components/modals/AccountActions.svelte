@@ -44,7 +44,7 @@
                 hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
-                        updateActiveProfile({ hiddenAccounts: hiddenAccounts })
+                        updateActiveProfile({ hiddenAccounts })
                     }
                     resetWalletRoute()
                     const nextSelectedAccount =
