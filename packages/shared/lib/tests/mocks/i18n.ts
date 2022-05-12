@@ -29,7 +29,7 @@ const getLocaleData = (value?: number) => {
     return locales
 }
 
-jest.mock('../../i18n', () => ({
+jest.mock('../../core/i18n', () => ({
     __esModule: true,
     locale: (key: string, optional?: { values: { time: number } }): string =>
         getLocaleData(optional.values.time)[key] || '',

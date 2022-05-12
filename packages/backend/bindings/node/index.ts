@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '../../../shared/lib/typings/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '@lib/typings/bridge'
 import {
     AccountToCreate,
     AccountIdentifier,
@@ -23,8 +23,8 @@ import {
     getNodeInfo as _getNodeInfo,
     startBackgroundSync as _startBackgroundSync,
     stopBackgroundSync as _stopBackgroundSync,
-} from '../../../shared/lib/typings/account'
-import { Transfer, reattach as _reattach } from '../../../shared/lib/typings/message'
+} from '@lib/typings/account'
+import { Transfer, reattach as _reattach } from '@lib/typings/message'
 import {
     getMigrationData as _getMigrationData,
     createMigrationBundle as _createMigrationBundle,
@@ -35,7 +35,7 @@ import {
     sendLedgerMigrationBundle as _sendLedgerMigrationBundle,
     getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput,
-} from '../../../shared/lib/typings/migration'
+} from '@lib/typings/migration'
 import {
     LoggerConfig,
     Duration,
@@ -55,9 +55,9 @@ import {
     getLedgerDeviceStatus as _getLedgerDeviceStatus,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum,
-} from '../../../shared/lib/typings/wallet'
-import { ClientOptions } from '../../../shared/lib/typings/client'
-import { NodeAuth } from '../../../shared/lib/typings/node'
+} from '@lib/typings/wallet'
+import { ClientOptions } from '@lib/typings/client'
+import { NodeAuth } from '@lib/typings/node'
 
 // Participation (staking, voting)
 import {
@@ -66,8 +66,8 @@ import {
     participate as _participate,
     participateWithRemainingFunds as _participateWithRemainingFunds,
     stopParticipating as _stopParticipating,
-} from '../../../shared/lib/participation/bridge'
-import { Participation } from '../../../shared/lib/participation/types'
+} from '@lib/participation/bridge'
+import { Participation } from '@lib/participation/types'
 
 // @ts-ignore
 import addon = require('../index.node')
@@ -354,8 +354,8 @@ export const api = {
     },
 
     // Participation related methods (voting / staking)
-    getParticipationOverview: function (): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids)
+    getParticipationOverview: function (assemblyEventId: string): (__ids: CommunicationIds) => Promise<string> {
+        return (__ids: CommunicationIds) => _getParticipationOverview(sendMessage, __ids, assemblyEventId)
     },
     getParticipationEvents: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getParticipationEvents(sendMessage, __ids)

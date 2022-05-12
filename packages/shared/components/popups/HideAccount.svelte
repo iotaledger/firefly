@@ -3,19 +3,22 @@
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRoute } from 'shared/lib/router'
-    import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { accountRouter } from '@core/router'
+    import { AccountRoute } from '@core/router/enums'
+    import { api } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { Writable } from 'svelte/store'
+    import { Unit } from '@iota/unit-converter'
+    import { formatUnitPrecision } from '@lib/units'
 
     export let locale: Locale
 
-    export let account: WalletAccount
+    export let account: Writable<WalletAccount>
     export let hasMultipleAccounts
 
-    export let hideAccount = (selectedAccountId: AccountIdentifier): void => {}
+    export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
     let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
@@ -45,8 +48,13 @@
     }
     function handleMoveFundsClick() {
         closePopup()
-        sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance, isInternal: true }))
-        accountRoute.set(AccountRoutes.Send)
+        sendParams.update((params) => ({
+            ...params,
+            amount: formatUnitPrecision($account.rawIotaBalance, Unit.Mi, false),
+            unit: Unit.Mi,
+            isInternal: true,
+        }))
+        $accountRouter.goTo(AccountRoute.Send)
     }
     function handleCancelClick() {
         closePopup()
@@ -54,7 +62,7 @@
     function triggerHideAccount() {
         isBusy = false
         closePopup()
-        hideAccount($selectedAccountId)
+        hideAccount($account?.id)
     }
 </script>
 
@@ -114,7 +122,7 @@
         <Text type="p" secondary classes="mb-5">
             {locale('popups.hideAccount.errorBody2', { values: { balance: $account?.balance } })}
         </Text>
-        <div class="flex flex-row justify-between w-full space-x-4 px-8">
+        <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>
             <Button classes="w-1/2" onClick={() => handleMoveFundsClick()}>{locale('general.moveFunds')}</Button>
         </div>

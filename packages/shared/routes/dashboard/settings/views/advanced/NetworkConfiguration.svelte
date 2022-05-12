@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import {
         ensureSinglePrimaryNode,
         getNodeCandidates,
@@ -12,7 +12,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+    import { Node } from 'shared/lib/typings/node'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
 
     let networkConfig: NetworkConfig =

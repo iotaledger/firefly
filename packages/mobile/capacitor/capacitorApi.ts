@@ -1,17 +1,25 @@
 import type { IPlatform } from 'shared/lib/typings/platform'
 import { Capacitor } from '@capacitor/core'
 
+import { SplashScreen } from '@capacitor/splash-screen'
 import { BarcodeManager } from './lib/barcodeManager'
 import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
-import { hookErrorLogger } from 'shared/lib/shell/errorLogger'
-import type { VersionDetails } from 'shared/lib/typings/appUpdater'
-import type { AppSettings } from 'shared/lib/typings/app'
+import { hookErrorLogger } from '@lib/shell/errorLogger'
+import { AppSettings } from '@lib/typings/app'
+import { VersionDetails } from '@lib/typings/appUpdater'
+import { IPlatform } from '@lib/typings/platform'
+
+import * as WalletBindings from './walletPluginApi'
+
+window['__WALLET__'] = WalletBindings
 
 let activeProfileId = null
+
+export const nativeSplash = SplashScreen
 
 export const CapacitorApi: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>) {
@@ -284,3 +292,5 @@ export const CapacitorApi: IPlatform = {
     hookErrorLogger,
     ledger: undefined,
 }
+
+window['__CAPACITOR__'] = CapacitorApi

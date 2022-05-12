@@ -7,6 +7,7 @@ const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
 const kdbx = require('./lib/kdbx')
 const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
+const ledger = require('./lib/Ledger').default
 
 let activeProfileId = null
 const eventListeners = {}
@@ -47,7 +48,7 @@ const ElectronApi = {
             }
         })
     },
-    listProfileFolders(profileStoragePath, profiles) {
+    listProfileFolders(profileStoragePath) {
         return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the profile path matches the user data path
             // so that we don't try and remove things outside our scope
@@ -273,7 +274,7 @@ const ElectronApi = {
      *
      * @returns void
      */
-    getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
+    getVersionDetails: () => ipcRenderer.invoke('get-version-details'),
     /**
      * Change menu state to determine what menu items to display
      * @param {string} Attribute - Target attribute
@@ -389,6 +390,7 @@ const ElectronApi = {
      * @returns
      */
     hookErrorLogger,
+    ledger,
 }
 
 module.exports = ElectronApi

@@ -1,9 +1,7 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
-    import { getProfileDataPath } from 'shared/lib/wallet'
-    import { Platform } from 'shared/lib/platform'
     import { showAppNotification } from 'shared/lib/notifications'
 
     let newName = $activeProfile.name
@@ -13,10 +11,9 @@
     $: newName, (error = '')
     $: disabled = invalidName(trimmedProfileName)
 
-    async function onSubmitClick(): Promise<void> {
+    function onSubmitClick(): void {
         try {
             validateProfileName(trimmedProfileName)
-            await renameProfileFolder(trimmedProfileName)
             updateProfile('name', trimmedProfileName)
             showAppNotification({
                 type: 'info',
@@ -25,12 +22,6 @@
         } catch (err) {
             return (error = err.message)
         }
-    }
-
-    async function renameProfileFolder(newName: string): Promise<void> {
-        const oldPath = await getProfileDataPath($activeProfile.name)
-        const newPath = await getProfileDataPath(newName)
-        await Platform.renameProfileFolder(oldPath, newPath)
     }
 
     function invalidName(name: string): boolean {

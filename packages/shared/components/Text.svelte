@@ -1,157 +1,193 @@
-<script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
+<script lang="typescript" context="module">
+    export enum TextType {
+        h1 = 'h1',
+        h2 = 'h2',
+        h3 = 'h3',
+        h4 = 'h4',
+        h5 = 'h5',
+        p = 'p',
+        pre = 'pre',
+    }
 
-    export let type = 'p'
-    export let secondary = false
-    export let disabled = false
-    export let highlighted = false
+    export enum FontWeightNumber {
+        _100 = 'font-100',
+        _200 = 'font-200',
+        _300 = 'font-300',
+        _400 = 'font-400',
+        _500 = 'font-500',
+        _600 = 'font-600',
+        _700 = 'font-700',
+        _800 = 'font-800',
+        _900 = 'font-900',
+    }
+
+    export enum FontWeightText {
+        thin = 'font-100',
+        extralight = 'font-200',
+        light = 'font-300',
+        normal = 'font-400',
+        medium = 'font-500',
+        semibold = 'font-600',
+        bold = 'font-700',
+        extrabold = 'font-800',
+        black = 'font-900',
+    }
+</script>
+
+<script lang="typescript">
+    export let type = TextType.p
+    export let fontSize: string = ''
+    export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
+    export let lineHeight: string = ''
+    export let secondary: boolean = false
+    export let disabled: boolean = false
+    export let highlighted: boolean = false
     export let bold = false
     export let smaller = false
     export let bigger = false
     export let error = false
     export let overrideColor = false
+    export let color = ''
+    export let darkColor = ''
     export let overrideLeading = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 
-    $: darkModeEnabled = $appSettings.darkMode
+    const DARKMODE_PREFIX = 'dark:'
+    const TEXT_PREFIX = 'text-'
+    const LEADING_PREFIX = 'leading-'
+    const DEFAULT_TEXT_COLOUR = TEXT_PREFIX + 'gray-800'
+    const DEFAULT_TEXT_DARK_COLOUR = DARKMODE_PREFIX + TEXT_PREFIX + 'white'
+    const ERROR_TEXT_COLOUR = TEXT_PREFIX + 'red-500'
+    const DISABLED_TEXT_COLOUR = TEXT_PREFIX + 'gray-400'
+    const DISABLED_TEXT_DARK_COLOUR = TEXT_PREFIX + 'gray-600'
+    const HIGHLIGHT_TEXT_COLOUR = TEXT_PREFIX + 'blue-500'
+    const SECONDARY_TEXT_COLOUR = TEXT_PREFIX + 'gray-500'
+
+    interface ICustomClass {
+        fontWeight: FontWeightNumber | FontWeightText
+        color: string
+        darkColor: string
+        fontSize: string
+        lineHeight: string
+        wordBreak?: string
+        whitespace?: string
+        fontFamily?: string
+    }
+
+    const DEFAULT_CLASSES_LIST: { [key in TextType]: ICustomClass } = {
+        [TextType.h1]: {
+            fontWeight: FontWeightText.bold,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-32',
+            lineHeight: 'leading-120',
+        },
+        [TextType.h2]: {
+            fontWeight: FontWeightText.bold,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-24',
+            lineHeight: 'leading-120',
+        },
+        [TextType.h3]: {
+            fontWeight: FontWeightText.bold,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-18',
+            lineHeight: 'leading-140',
+        },
+        [TextType.h4]: {
+            fontWeight: FontWeightText.bold,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-16',
+            lineHeight: 'leading-140',
+        },
+        [TextType.h5]: {
+            fontWeight: FontWeightText.bold,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-14',
+            lineHeight: 'leading-140',
+        },
+        [TextType.p]: {
+            fontWeight: FontWeightText.normal,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-13',
+            lineHeight: 'leading-160',
+        },
+        [TextType.pre]: {
+            fontWeight: FontWeightText.normal,
+            color: DEFAULT_TEXT_COLOUR,
+            darkColor: DEFAULT_TEXT_DARK_COLOUR,
+            fontSize: 'text-12',
+            lineHeight: 'leading-140',
+            wordBreak: 'break-all',
+            whitespace: 'whitespace-pre-line',
+            fontFamily: 'font-fira-mono',
+        },
+    }
+
+    // Format custom inputs
+    fontSize = fontSize ? TEXT_PREFIX + fontSize : ''
+    lineHeight = lineHeight ? LEADING_PREFIX + lineHeight : ''
+    color = color ? TEXT_PREFIX + color : ''
+    darkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
+
+    // Adjust font for old override classes
+    function adjustFont() {
+        switch (type) {
+            case TextType.p:
+                fontSize = bigger ? 'text-16' : smaller ? 'text-12' : fontSize
+                lineHeight = bigger ? 'leading-140' : smaller ? 'leading-120' : lineHeight
+                break
+            case TextType.pre:
+                fontSize = bigger ? 'text-13' : smaller ? 'text-11' : fontSize
+                break
+        }
+
+        fontWeight = bold ? FontWeightText.bold : fontWeight
+        lineHeight = overrideLeading ? '' : lineHeight
+    }
+    $: smaller, bigger, adjustFont()
+
+    // Adjust colours for old override classes
+    function adjustColor() {
+        color = overrideColor ? '' : color
+        darkColor = overrideColor ? '' : darkColor
+
+        if (error) {
+            color = ERROR_TEXT_COLOUR
+            darkColor = ERROR_TEXT_COLOUR
+        } else if (disabled) {
+            color = DISABLED_TEXT_COLOUR
+            darkColor = DISABLED_TEXT_DARK_COLOUR
+        } else if (highlighted) {
+            color = HIGHLIGHT_TEXT_COLOUR
+            darkColor = HIGHLIGHT_TEXT_COLOUR
+        } else if (secondary) {
+            color = SECONDARY_TEXT_COLOUR
+            darkColor = SECONDARY_TEXT_COLOUR
+        }
+    }
+    $: error, disabled, highlighted, secondary, adjustColor()
+
+    let customClasses: ICustomClass
+    $: customClasses = {
+        ...DEFAULT_CLASSES_LIST[type],
+        ...(fontSize && { fontSize }),
+        ...(fontWeight && { fontWeight }),
+        ...(lineHeight && { lineHeight }),
+        ...((color || overrideColor) && { color }),
+        ...((darkColor || overrideColor) && { darkColor }),
+    }
+
+    $: customClassesString = Object.values(customClasses).join(' ')
 </script>
 
-{#if type === 'h1'}
-    <h1
-        class={`font-bold text-32 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:darkmode={darkModeEnabled}
-    >
+<span class="text-component">
+    <svelte:element this={type} class={`${customClassesString} ${classes}`}>
         <slot />
-    </h1>
-{:else if type === 'h2'}
-    <h2
-        class={`font-bold text-24 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:darkmode={darkModeEnabled}
-    >
-        <slot />
-    </h2>
-{:else if type === 'h3'}
-    <h3
-        class={`font-bold text-18 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:darkmode={darkModeEnabled}
-    >
-        <slot />
-    </h3>
-{:else if type === 'h4'}
-    <h4
-        class={`font-bold text-16 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:darkmode={darkModeEnabled}
-    >
-        <slot />
-    </h4>
-{:else if type === 'h5'}
-    <h5
-        class={`font-bold text-14 leading-140  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:darkmode={darkModeEnabled}
-    >
-        <slot />
-    </h5>
-{:else if type === 'p'}
-    <p
-        class={`text-13 ${overrideLeading ? '' : 'leading-160'}  ${
-            overrideColor ? '' : 'text-gray-800 dark:text-white'
-        } ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:smaller
-        class:overrideLeading
-        class:bigger
-        class:font-bold={bold}
-        class:darkmode={darkModeEnabled}
-    >
-        <slot />
-    </p>
-{:else if type === 'pre'}
-    <pre
-        class={`text-12 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
-        class:secondary
-        class:disabled
-        class:highlighted
-        class:error
-        class:smaller
-        class:bigger
-        class:font-bold={bold}
-        class:darkmode={darkModeEnabled}>
-        <slot />
-    </pre>
-{/if}
-
-<style type="text/scss">
-    p {
-        &.smaller {
-            @apply text-12;
-            &:not(.overrideLeading) {
-                @apply leading-120;
-            }
-        }
-        &.bigger {
-            @apply text-16;
-            @apply leading-140;
-        }
-    }
-    pre {
-        &.smaller {
-            @apply text-11;
-        }
-        &.bigger {
-            @apply text-13;
-        }
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    p,
-    pre {
-        // TODO: tailwindify
-        &.secondary {
-            @apply text-gray-500;
-        }
-        &.disabled {
-            @apply text-gray-400;
-            &.darkmode {
-                @apply text-gray-600;
-            }
-        }
-        &.highlighted {
-            @apply text-blue-500;
-        }
-        &.error {
-            @apply text-red-500;
-        }
-    }
-    pre {
-        font-family: 'IBM Plex Mono', monospace;
-        @apply font-normal;
-        @apply break-all;
-        @apply whitespace-pre-line;
-    }
-</style>
+    </svelte:element>
+</span>

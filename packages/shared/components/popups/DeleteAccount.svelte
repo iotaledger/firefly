@@ -2,14 +2,16 @@
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from 'shared/lib/profile'
-    import { api, selectedAccountId } from 'shared/lib/wallet'
     import { AccountIdentifier } from 'shared/lib/typings/account'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { api } from 'shared/lib/wallet'
+    import { Writable } from 'svelte/store'
 
     export let locale: Locale
 
-    export let account
-    export let deleteAccount = (selectedAccountId: AccountIdentifier): void => {}
+    export let account: Writable<WalletAccount>
+    export let deleteAccount: (id: AccountIdentifier) => void = () => {}
     export let hasMultipleAccounts
 
     let password
@@ -42,7 +44,7 @@
     function triggerDeleteAccount() {
         isBusy = false
         closePopup()
-        deleteAccount($selectedAccountId)
+        deleteAccount($account?.id)
     }
 </script>
 

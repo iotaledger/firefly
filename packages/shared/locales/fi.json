@@ -9,6 +9,11 @@
             "body": "Ole hyvä ja tutustu tietosuojakäytäntöön ja käyttöehtoihin.",
             "checkbox": "Olen lukenut ja hyväksyn tietosuojakäytännön ja käyttöehdot"
         },
+        "crashReporting": {
+            "title": "Kaatumisraportointi",
+            "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa.",
+            "checkbox": "Lähetä kaatumisraportit IOTA-säätiölle"
+        },
         "appearance": {
             "title": "Ulkoasu",
             "body": "Valitse sovelluksen teema."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Teema",
                 "description": "",
-                "advice": "Käynnistä Firefly uudelleen, jotta muutokset järjestelmän teemaan tulevat voimaan"
+                "advice": "Jos muutat järjestelmän teemaa, sinun on ehkä käynnistettävä Firefly uudelleen nähdäksesi vaikutukset"
             },
             "language": {
                 "title": "Kieli",
@@ -411,6 +416,12 @@
                 "title": "Virheloki",
                 "description": "Näytä virheet ongelman selvittämiseksi"
             },
+            "crashReporting": {
+                "title": "Kaatumisraportit",
+                "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa",
+                "checkbox": "Lähetä kaatumisraportit",
+                "advice": "Ole hyvä ja käynnistä Firefly-ohjelma uudelleen {sendCrashReports, select, true {aloittaaksesi kaatumisraporttien jakamisen} false {lopettaaksesi kaatumisraporttien jakamisen} other {tehdäksesi tämän muutoksen}}"
+            },
             "diagnostics": {
                 "title": "Diagnostiikka",
                 "description": "Näytä järjestelmän ja sovelluksen tiedot"
@@ -450,49 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# virheellinen yritys} other {# virheellistä yritystä}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v {version}",
-                    "upToDate": "Ajan tasalla",
-                    "outOfDate": "Vanhentunut"
-                },
-                "hardwareDevice": {
-                    "title": "Laite",
-                    "statuses": {
-                        "appNotOpen": "IOTA-sovellus ei ole auki",
-                        "connected": "Yhdistetty",
-                        "legacyConnected": "{legacy} -sovellus auki",
-                        "locked": "Lukittu",
-                        "mnemonicMismatch": "Väärä Ledger tai Mnemonic-fraasi",
-                        "notDetected": "Ei havaittu",
-                        "otherConnected": "Sovellus auki"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Lompakon tila",
-                    "locked": "Lukittu",
-                    "unlocked": "Avattu"
-                },
-                "strongholdBackup": {
-                    "title": "Lompakon varmuuuskopiointi",
-                    "weeksAgo": "{weeks, plural, one {# viikko} other {# viikkoa}} sitten"
-                }
-            },
             "network": {
                 "networkOperational": "Verkko toiminnassa",
-                "networkDegraded": "Verkko heikentynyt",
-                "networkDown": "Verkkoyhteys katkaistu",
+                "networkDegraded": "Verkko vajaatoiminnassa",
+                "networkDown": "Verkko katkaistu",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
                 "referencedRate": "Viittausaste"
             },
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
-                "logout": "Kirjaudu ulos"
+                "logout": "Kirjaudu ulos",
+                "stronghold": {
+                    "title": "Profiilin lukitus",
+                    "locked": "Stronghold lukittu",
+                    "unlocked": "Stronghold avattu"
+                },
+                "hardware": {
+                    "title": "Laite",
+                    "statuses": {
+                        "appNotOpen": "IOTA-sovellus ei ole auki",
+                        "connected": "Yhdistetty",
+                        "legacyConnected": "Vanha sovellus auki",
+                        "locked": "Lukittu",
+                        "mnemonicMismatch": "Väärä Ledger tai mnemonic-fraasi",
+                        "notDetected": "Ei havaittu",
+                        "otherConnected": "Sovellus auki"
+                    }
+                },
+                "backup": {
+                    "title": "Varmuuskopioi lompakkosi",
+                    "lastBackup": "Olet viimeksi varmuuskopioinut {date}",
+                    "notBackedUp": "Ei varmuuskopioitu",
+                    "button": "Varmuuskopioi"
+                },
+                "version": {
+                    "title": "Uusi päivitys saavatilla",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Päivitä"
+                }
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Tervetuloa staking-käyttöliittymään!",
             "status": {
                 "upcoming": "Tapahtuma ei ole alkanut",
@@ -506,23 +516,29 @@
                 "stakedFunds": "Staketut varat"
             },
             "info": {
-                "upcomingSubheader": "Tapahtuma ei ole alkanut",
-                "upcomingHeader": "Katso myöhemmin uudelleen",
-                "commencingSubheader": "Valmistaudu stakingiin",
-                "commencingHeader": "Pre-stakea tokenisi!",
-                "holdingSubheaderHolding": "Ansaitaan staking-palkkioita",
-                "holdingSubheaderNotHolding": "Ansaitse palkkioita stakeamalla IOTA:a",
-                "holdingHeaderHolding": "{duration} jäljellä",
-                "holdingHeaderNotHolding": "Stakea tokenisi!",
-                "endedSubheader": "Staking on nyt päättynyt",
-                "endedHeader": "Kiitos!",
-                "inactiveHeader": "Yritä vaihtaa solmua",
-                "inactiveSubheader": "Stakingia ei havaittu"
+                "headers": {
+                    "upcoming": "Tarkista myöhemmin uudelleen",
+                    "commencing": "Pre-staking on avoinna",
+                    "holding": "{duration} stakingia jäljellä",
+                    "ended": "Staking on nyt päättynyt",
+                    "inactive": "Staking-tapahtumia ei havaittu"
+                },
+                "bodies": {
+                    "upcoming": "Stakea {token}-tokenisi saadaksesi palkintoja automaattisesti 10 sekunnin välein, kun staking alkaa {date}.",
+                    "commencing": "Stakea {token}-tokenisi saadaksesi palkintoja automaattisesti 10 sekunnin välein, kun staking alkaa {date}.",
+                    "holdingAndStaking": "Saat palkkioita automaattisesti 10 sekunnin välein.",
+                    "holdingAndNotStaking": "Stakea {token}-tokenisi saadaksesi palkkioita 10 sekunnin välein.",
+                    "endedAndDidStake": "{token}-palkkiot tullaan jakamaan lompakkoosi, kun verkko käynnistetään.",
+                    "endedAndDidNotStake": "Et osallistunut tähän airdropiin.",
+                    "endedAndDidNotReachMinRewards": "Et stakennut tarpeeksi {token}-tokeneita saavuttaaksesi airdropin vähimmäispalkkiota.",
+                    "inactive": "Avaa verkkoasetukset lisäasetuksissa ja varmista, että nykyisellä solmulla on ominaisuus \"Participation\" klikkaamalla \"Näytä tiedot\"."
+                }
             },
             "airdrops": {
                 "holding": "Jäljellä",
                 "commencing": "Stakingin alkamiseen",
-                "collectedRewards": "Kerätyt palkkiot",
+                "currentStakingPeriod": "Nykyinen staking-jakso",
+                "totalWalletRewards": "Lompakon kokonaispalkkiot",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly on vapaasti käytettävä ja liityttävä, erittäin skaalautuva moniketjuverkko yhdistettyjen älysopimusten luomiseen ja käyttöönottamiseen. Assembly on web3:n tulevaisuus. "
@@ -531,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "Kannustettu valmisteluverkko IOTA:n merkittävien innovaatioiden edistämiseen. Mitä tahansa tapahtuu, tapahtuu. Miten Shimmer kehittyy, riippuu sinusta."
                 }
+            },
+            "banners": {
+                "new": "Uusi tapahtuma",
+                "complete": "Valmis"
             }
         },
         "picker": {
@@ -555,7 +575,8 @@
             "upToDateDescription": "Käytössäsi on Fireflyn uusin ja turvallisin versio.",
             "updateAvailable": "Firefly päivitys saatavilla",
             "updateDetails": "Versio {version} - {date}",
-            "noAutoUpdate": "Automaattinen päivitys on poistettu käytöstä tässä Windows-versiossa, ole hyvä ja mene osoitteeseen https://firefly.iota.org ladataksesi päivityksen."
+            "noAutoUpdate": "Automaattinen päivitys on poistettu käytöstä tässä Windows-versiossa, ole hyvä ja mene osoitteeseen https://firefly.iota.org ladataksesi päivityksen.",
+            "preReleaseDescription": "Käytössäsi on Fireflyn esijulkaisuversio. Päivitykset on poistettu käytöstä."
         },
         "backup": {
             "title": "Viimeisin varmuuskopio: {date}",
@@ -654,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
-            "body": "Suorita kattavampi haku osoitteistasi löytämään puuttuvia saldoja. Tämä voi kestää jonkin aikaa.",
+            "body": "Suorita kattavampi haku osoitteistasi löytämään puuttuvia saldoja ja aikaisempia airdrop-palkkioita. Tämä voi kestää jonkin aikaa.",
+            "accountsSearched": "Etsityt lompakot",
+            "addressesSearched": "Haetut osoitteet lompakkoa kohden",
+            "accountsFound": "Löydetyt lompakot",
             "totalWalletBalance": "Kokonaissaldo",
+            "searchAgainHint": "Onko saldosi tai lompakkojesi lukumäärä väärin? Paina hakua uudelleen, kunnes koko saldosi näkyy.",
             "typePassword": "Kirjoita salasanasi salliaksesi haun."
         },
         "riskFunds": {
@@ -726,29 +751,29 @@
             "title": "Vie transaktiohistoria",
             "body": "Vie transaktiohistoria valitulle lompakolle. Viety tiedosto on .csv-muotoinen.",
             "profileName": "Profiilin nimi:",
-            "accountName": "Tilin nimi:",
+            "accountName": "Lompakon nimi:",
             "typePassword": "Syötä salasanasi salliaksesi viennin"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking ei ole vielä alkanut",
-            "commencingDate": "Staking ei ole vielä alkanut",
-            "body": "Pre-stakeamalla varasi ennen kuin staking alkaa, alat automaattisesti saada palkkioita, kun staking alkaa.",
-            "ok": "Ok, ymmärrän"
         },
         "stakingManager": {
             "title": "Staking-hallinta",
             "description": "Kun stakeat lompakon, lähetät itsellesi transaktion, joka merkitsee nämä varat \"staketuiksi\". Voit siirtää tokenit milloin tahansa, mutta et jatka staking-palkkioiden saamista.",
             "totalFundsStaked": "Staketut varat yhteensä",
             "stakedSuccessfully": "Sinun varasi ovat stakettu tilille {account}.",
-            "unstakedSuccessfully": "Sinun varasi eivät ole enää stakettu tilille {account}."
+            "unstakedSuccessfully": "Sinun varasi eivät ole enää stakettu tilille {account}.",
+            "singleAccountHint": "Etsitkö lompakoitasi? Firefly on muuttunut. Vaihda lompakkojesi välillä ylävalikkopalkissa."
         },
         "stakingConfirmation": {
-            "title": "Airdrop-osallistuminen",
+            "title": "Vahvista osallistuminen",
             "subtitleStake": "Olet stakeamassa",
             "subtitleMerge": "Olet yhdistämässä",
-            "bodyStake": "Jos et halua osallistua molempiin airdropeihin, voit jättäytyä pois alla. Voit lopettaa staken ja aloittaa staken uudelleen liittyäksesi takaisin mukaan milloin tahansa.",
-            "bodyMerge": "Sinun varasi tulevat olemaan stakettuna airdropia {airdrop} varten. Vaihtaaksesi mihin airdropeihin haluat osallistua, lopeta stake tästä lompakosta ja stakea uudelleen.",
+            "multiAirdropWarning": "Jos et halua osallistua molempiin airdropeihin, voit jättäytyä pois alla. Voit lopettaa staken ja aloittaa staken uudelleen liittyäksesi takaisin mukaan milloin tahansa.",
+            "mergeStakeWarning": "Sinun varasi tulevat olemaan stakettuna airdropia {airdrop} varten. Vaihtaaksesi mihin airdropeihin haluat osallistua, lopeta stake tästä lompakosta ja stakea uudelleen.",
             "estimatedAirdrop": "Arvioidut palkkiot"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking-vaihe {periodNumber} {date} alkaen",
+            "body": "IOTA:n staking Assemblyn saamiseksi jatkuu... Osallistu vaiheeseen {periodNumber} 90 päivän ajan. Stakea IOTA-tokenisi ja ansaitse ASMB-palkkioita!",
+            "info": "Shimmer-staking on nyt saatettu päätökseen ja vain ASMB-tokenit tullaan jakamaan."
         },
         "shimmer-info": {
             "title": "Tietoja Shimmeristä",
@@ -764,6 +789,11 @@
             "title": "Olet luomassa kehittäjäprofiilia",
             "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
         },
+        "crashReporting": {
+            "title": "Kaatumisraportointi",
+            "body": "Auta kehittäjiä parantamaan Fireflytä lähettämällä automaattisesti diagnostiikkatietoja virheen tai kaatumisen tapahtuessa. Jos tämä on valittuna, se tulee voimaan Fireflyn uudelleenkäynnistyksen jälkeen.",
+            "checkbox": "Lähetä kaatumisraportit IOTA-säätiölle"
+        },
         "legalUpdate": {
             "tosTitle": "Käyttöehdot",
             "privPolicyTitle": "Tietosuojakäytäntö",
@@ -773,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "Olen lukenut ja hyväksyn päivitetyt käyttöehdot ja tietosuojakäytännön",
             "tosCheckbox": "Olen lukenut ja hyväksyn päivitetyt käyttöehdot",
             "privPolicyCheckbox": "Olen lukenut ja hyväksyn päivitetyn tietosuojakäytännön"
+        },
+        "singleAccountGuide": {
+            "title": "Tapa, jolla käytät Fireflyä, on muuttunut",
+            "body": "Kunkin välilehden sisältö on nyt yhden lompakon kontekstissa. Voit vaihtaa valittua lompakkoa mistä tahansa käyttämällä otsikkopalkin valitsinta.",
+            "hint": "Etkö löydä lompakkoa? Käytä saldon etsijää asetuksista löytääksesi aiemmin käytetyt lompakot."
         }
     },
     "charts": {
@@ -895,7 +930,9 @@
         "manageStake": "Hallinnoi stakea",
         "merge": "Yhdistä",
         "mergeFunds": "Yhdistä varoja",
-        "done": "Valmis"
+        "done": "Valmis",
+        "okIUnderstand": "OK, ymmärrän",
+        "readMore": "Lue lisää"
     },
     "general": {
         "password": "Salasana",
@@ -943,7 +980,6 @@
         "darkTheme": "Tumma",
         "systemTheme": "Järjestelmä",
         "balance": "Saldo",
-        "accountBalance": "Lompakon saldo",
         "all": "Kaikki",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
@@ -954,6 +990,7 @@
         "profiles": "Profiilit",
         "dev": "Kehitys",
         "createAccount": "Luo lompakko",
+        "createNewWallet": "Luo uusi lompakko",
         "accountName": "Lompakon nimi",
         "latestTransactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
@@ -1012,14 +1049,20 @@
         "creatingProfile": "Luodaan profiilia, odota hetki...",
         "fundMigration": "Varojen migraatio",
         "accountRemoved": "Tämä lompakko on piilotettu. Näytä se tehdäksesi siirtoja.",
-        "receivingTo": "Vastaanotetaan lompakkoon {account}",
-        "sendingFrom": "Lähetetään lompakosta {account}",
-        "receivedTo": "Vastaanotettu lompakkoon {account}",
-        "sentFrom": "Lähetetty lompakosta {account}",
+        "receivingFrom": "Vastaanotetaan {account}",
+        "sendingTo": "Lähetetään {account}",
+        "receivedFrom": "Vastaanotettu {account}",
+        "sentTo": "Lähetetty {account}",
+        "transferringFrom": "Siirretään kohteesta {account}",
+        "transferringTo": "Siirretään kohteeseen {account}",
+        "transferFrom": "Siirrä tililtä {account}",
+        "transferTo": "Siirrä tilille {account}",
         "stakedFor": "Stakettu tilille {account}",
         "unstakedFor": "Ei staketut tilille {account}",
         "votedFor": "Äänestetty tilille {account}",
         "unvotedFor": "Äänestys lopetettu tilille {account}",
+        "stakingTransaction": "Staking Transaktio",
+        "unstakingTransaction": "Lopeta Staking",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
         "legacyNetwork": "Vanha verkko",
@@ -1035,7 +1078,8 @@
         "notStaked": "Ei stakettu",
         "stakedFunds": "Staketut varat",
         "unstakedFunds": "Varat ilman stakea",
-        "accountColor": "Lompakon väri"
+        "accountColor": "Lompakon väri",
+        "myAssets": "Minun varani"
     },
     "dates": {
         "today": "Tänään",
@@ -1082,7 +1126,10 @@
                     "success": "Maksutiedot lisätty IOTA-linkistä"
                 }
             }
-        }
+        },
+        "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
+        "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
+        "participating": "Ole hyvä ja odota, kunnes kaikki staking- ja äänestystransaktiot ovat valmistuneet vaihtaaksesi lompakkoa."
     },
     "error": {
         "profile": {
@@ -1206,14 +1253,16 @@
             "cannotFindStakingEvent": "Ei voida löytää staking-tapahtumaa.",
             "cannotVisitAirdropWebsite": "Ei voida avata {airdrop} verkkosivua.",
             "invalidStakingEventId": "Virheellinen staking-tapahtumatunnus."
-        }
+        },
+        "invalidDate": "VIRHEELLINEN PÄIVÄMÄÄRÄ",
+        "invalidTime": "VIRHEELLINEN AIKA"
     },
     "warning": {
         "node": {
             "http": "Solmujen käyttäminen HTTP:n yli jättää liikenteen salaamattomaksi ja voi aiheuttaa turvallisuusriskin."
         },
         "participation": {
-            "noAccounts": "Sinulla ei ole yhtään IOTA tokenia."
+            "noFunds": "Sinulla ei ole yhtään IOTA-tokenia."
         }
     },
     "tooltips": {
@@ -1225,37 +1274,10 @@
             "low": "Matala",
             "veryLow": "Erittäin matala"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking ei ole vielä alkanut",
-                "body": "Tarkista myöhemmin uudelleen. Staking-tapahtuma ei ole alkanut."
-            },
-            "commencing": {
-                "title": "Pre-staking on nyt avoinna",
-                "body": "Pre-stakea tokenisi, ja kun staking alkaa, alat automaattisesti saada palkkioita 10 sekunnin välein."
-            },
-            "activeHolding": {
-                "title": "Staking on nyt käynnissä",
-                "body": "Hyvää työtä. Saat palkkioita 10 sekunnin välein."
-            },
-            "inactiveHolding": {
-                "title": "Staking on nyt avoinna",
-                "body": "Stakea IOTA-tokenisi saadaksesi palkkioita 10 sekunnin välein."
-            },
-            "inactive": {
-                "title": "Staking-tapahtumia ei havaittu",
-                "body": "Avaa verkkoasetukset lisäasetuksissa ja varmista, että nykyisellä solmulla on ominaisuus \"Participation\" klikkaamalla \"Näytä tiedot\"."
-            },
-            "ended": {
-                "title": "Staking on nyt päättynyt",
-                "bodyAboveRewardMin": "Assembly- ja Shimmer-palkkiot jaetaan lompakkoihisi, kun verkot käynnistyvät.",
-                "bodyBelowRewardMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi airdropin vähimmäispalkkiota."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Uudet varat ilman stakea: {amount}",
             "titleNoFunds": "Uudet varat ilman stakea",
-            "preBody": "Olet vastaanottanut tokeneita stakettuun lompakkoon.",
+            "preBody": "Olet vastanottanut tokeneita, jotka eivät ole stakettuja.",
             "body": "Sinun täytyy manuaalisesti staketa nämä uudet varat saadaksesi niistä airdrop-palkkioita."
         },
         "stakingMinRewards": {
@@ -1290,5 +1312,9 @@
             "request": "Tarvitsemme luvan käyttää kameraasi QR-koodien skannaamiseen.",
             "requestInAppSettings": "Jos haluat antaa luvan käyttää kameraasi QR-koodien skannaukseen, ota se käyttöön sovelluksen asetuksista."
         }
+    },
+    "tabs": {
+        "wallet": "Lompakko",
+        "staking": "Staking"
     }
 }

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale = undefined
     export let onDrop = (event?: Event): void => {}

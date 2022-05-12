@@ -2,14 +2,15 @@
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
+    import { LabeledWalletAccount } from 'shared/lib/typings/wallet'
 
-    export let value = undefined
-    export let label = undefined
-    export let placeholder = undefined
+    export let value: string
+    export let label: string
+    export let placeholder: string
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items = []
+    export let items: LabeledWalletAccount[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''
@@ -23,15 +24,15 @@
 
     let dropdown = false
     let navContainer
-    let divContainer
-    let focusedItem
+    let divContainer: HTMLElement
+    let focusedItem: HTMLElement
     let search = ''
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
 
-    let navWidth
+    let navWidth: string
 
-    const handleClickOutside = () => {
+    const handleClickOutside = (): void => {
         dropdown = false
     }
 
@@ -53,12 +54,11 @@
         }
     }
 
-    const focusItem = (itemId) => {
-        const elem = document.getElementById(itemId)
-        focusedItem = elem
+    const focusItem = (itemId: string): void => {
+        focusedItem = document.getElementById(itemId)
     }
 
-    const handleKey = (e) => {
+    const handleKey = (e): void => {
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {
@@ -101,6 +101,7 @@
             }
         }
     }
+
     onMount(() => {
         if (contentWidth) {
             navWidth = `width: ${navContainer.clientWidth + 8}px`
@@ -129,11 +130,11 @@
 >
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
-    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown
+    bg-white dark:bg-gray-800 {dropdown
             ? 'border-blue-500'
             : showBorderWhenClosed
-            ? 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'
-            : ''}"
+            ? 'focus:border-blue-500 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'
+            : 'border-transparent'}"
         tabindex="0"
         bind:this={divContainer}
     >
@@ -187,6 +188,7 @@
             min-height: 50px;
             border-radius: 0.625rem; // TODO: add to tailwind
             @apply border-solid;
+            @apply border;
             @apply py-4;
             @apply pl-3;
             @apply pr-10;
@@ -206,11 +208,6 @@
         &.disabled {
             @apply pointer-events-none;
             @apply opacity-50;
-        }
-        &.hasBorder {
-            .selection {
-                @apply border;
-            }
         }
         nav {
             .inner {

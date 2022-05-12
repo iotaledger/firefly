@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { HR, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import type { NetworkConfig } from 'shared/lib/typings/network'
-    import type { Node } from 'shared/lib/typings/node'
+    import { NetworkConfig } from 'shared/lib/typings/network'
+    import { Node } from 'shared/lib/typings/node'
 
     export let nodeContextMenu: Node = undefined
     export let contextPosition: {

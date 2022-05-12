@@ -1,4 +1,4 @@
-import type { Message } from '../typings/message'
+import { Message } from '../typings/message'
 
 export enum AccountParticipationAbility {
     Ok = 'ok',
@@ -153,4 +153,49 @@ export interface PendingParticipation {
     messageId: string
     accountId: string
     action: ParticipationAction
+}
+
+/**
+ * The key-value type for Ed25519 addresses and their corresponding
+ * airdrop reward amount.
+ */
+export type StakingPeriodRewards = {
+    [address: string]: number
+}
+
+/**
+ * The JSON schema for the staking period result files.
+ */
+export type StakingPeriodJsonResponse = {
+    symbol: string
+    milestoneIndex: number
+    totalRewards: number
+    checksum: string
+    rewards: StakingPeriodRewards
+}
+
+/**
+ * The staking airdrop rewards for completed events for each account.
+ */
+export type AccountStakingRewards = {
+    accountId: string
+    [StakingAirdrop.Assembly]?: AirdropStakingRewards
+    [StakingAirdrop.Shimmer]?: AirdropStakingRewards
+}
+
+/**
+ * The staking rewards for a particular airdrop.
+ */
+export type AirdropStakingRewards = {
+    totalAirdropRewards: number
+    periods: StakingPeriod[]
+}
+
+/**
+ * The staking rewards information for a specific staking period.
+ */
+export type StakingPeriod = {
+    periodNumber: number
+    totalPeriodRewards: number
+    rewards: StakingPeriodRewards
 }

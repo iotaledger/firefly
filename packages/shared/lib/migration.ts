@@ -1,12 +1,12 @@
+import { derived, get, writable } from 'svelte/store'
 import { addEntry, finalizeBundle } from '@iota/bundle'
 import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { appRoute, walletSetupType } from 'shared/lib/router'
-import type { Address } from 'shared/lib/typings/address'
-import type {
+import { Address } from 'shared/lib/typings/address'
+import {
     AddressInput,
     Bundle,
     HardwareIndexes,
@@ -19,13 +19,14 @@ import type {
     SendMigrationBundleResponse,
     Transfer,
 } from 'shared/lib/typings/migration'
-import { AppRoute, SetupType } from 'shared/lib/typings/routes'
+import { appRoute, AppRoute } from '@core/router'
 import Validator from 'shared/lib/validator'
-import { api, wallet } from 'shared/lib/wallet'
-import { derived, get, writable } from 'svelte/store'
-import { localize } from './i18n'
+import { api, walletSetupType } from 'shared/lib/wallet'
+import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+import { SetupType } from 'shared/lib/typings/setup'
+import { getJsonRequestOptions } from '@lib/utils'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -1184,11 +1185,7 @@ export type ChrysalisVariablesValidationResponse = {
  * @returns {Promise<void>}
  */
 export async function checkChrysalisSnapshot(): Promise<void> {
-    const requestOptions: RequestInit = {
-        headers: {
-            Accept: 'application/json',
-        },
-    }
+    const requestOptions = getJsonRequestOptions()
     const endpoint = CHRYSALIS_VARIABLES_ENDPOINT
     try {
         const abortController = new AbortController()

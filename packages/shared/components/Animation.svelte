@@ -140,33 +140,37 @@
             darkmode: 'ledger-app-closed-desktop.json',
         },
         // Staking
-        'staking-info-commencing': {
-            lightmode: 'staking/info-commencing.json',
-            darkmode: 'staking/info-commencing.json',
+        'staking-prestaking': {
+            lightmode: 'staking/prestaking.json',
+            darkmode: 'staking/prestaking.json',
         },
-        'staking-info-ended': {
-            lightmode: 'staking/info-ended.json',
-            darkmode: 'staking/info-ended.json',
+        'staking-staking-neither': {
+            lightmode: 'staking/staking-neither.json',
+            darkmode: 'staking/staking-neither.json',
         },
-        'staking-info-holding-0': {
-            lightmode: 'staking/info-holding-0.json',
-            darkmode: 'staking/info-holding-0.json',
+        'staking-staking-both': {
+            lightmode: 'staking/staking-both.json',
+            darkmode: 'staking/staking-both.json',
         },
-        'staking-info-holding-1': {
-            lightmode: 'staking/info-holding-1.json',
-            darkmode: 'staking/info-holding-1.json',
+        'staking-staking-assembly-with-shimmer-rewards': {
+            lightmode: 'staking/staking-assembly-with-shimmer-rewards.json',
+            darkmode: 'staking/staking-assembly-with-shimmer-rewards.json',
         },
-        'staking-info-holding-2': {
-            lightmode: 'staking/info-holding-2.json',
-            darkmode: 'staking/info-holding-2.json',
+        'staking-staking-assembly-without-shimmer-rewards': {
+            lightmode: 'staking/staking-assembly-without-shimmer-rewards.json',
+            darkmode: 'staking/staking-assembly-without-shimmer-rewards.json',
         },
-        'staking-info-holding-3': {
-            lightmode: 'staking/info-holding-3.json',
-            darkmode: 'staking/info-holding-3.json',
+        'staking-staking-shimmer-with-assembly-rewards': {
+            lightmode: 'staking/staking-shimmer-with-assembly-rewards.json',
+            darkmode: 'staking/staking-shimmer-with-assembly-rewards.json',
         },
-        'staking-info-upcoming': {
-            lightmode: 'staking/info-upcoming.json',
-            darkmode: 'staking/info-upcoming.json',
+        'staking-staking-shimmer-without-assembly-rewards': {
+            lightmode: 'staking/staking-shimmer-without-assembly-rewards.json',
+            darkmode: 'staking/staking-shimmer-without-assembly-rewards.json',
+        },
+        'staking-ended': {
+            lightmode: 'staking/ended.json',
+            darkmode: 'staking/ended.json',
         },
     }
 

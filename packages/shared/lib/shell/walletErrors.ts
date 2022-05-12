@@ -1,5 +1,5 @@
-import type { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
-import type { ErrorType } from '../typings/events'
+import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
+import { ErrorType } from '../typings/events'
 
 const errorMessages: {
     [key in keyof typeof ErrorType]: string
@@ -55,7 +55,7 @@ const errorMessages: {
     LedgerDeviceNotFound: 'error.ledger.notFound',
     LedgerEssenceTooLarge: 'error.global.generic',
     // Dust output
-    DustError: 'error.send.leavingDust',
+    LeavingDustError: 'error.send.leavingDust',
 }
 
 export const getErrorMessage = (type: ErrorType | ValidatorErrorTypes): string => {
