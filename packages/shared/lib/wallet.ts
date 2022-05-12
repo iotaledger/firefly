@@ -338,11 +338,6 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export function asyncGetNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
-    const manager = get(profileManager)
-    return manager.getNodeInfo(url, auth)
-}
-
 export const asyncStopBackgroundSync = (): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.stopBackgroundSync({
