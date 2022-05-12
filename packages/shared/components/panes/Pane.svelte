@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
+
     export let classes
 
     let darkModeEnabled

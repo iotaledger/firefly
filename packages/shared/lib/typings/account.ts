@@ -1,9 +1,3 @@
-import { Address } from './address'
-import { Bridge, CommunicationIds } from './bridge'
-import { ClientOptions } from './client'
-import { Message } from './message'
-import { NodeAuth } from './node'
-import { Duration } from './wallet'
 import {
     AccountBalance,
     AccountMeta,
@@ -13,14 +7,19 @@ import {
     AddressNftId,
     AddressWithAmount,
     AddressWithMicroAmount,
-    ClientOptions as StardustClientOptions,
     NativeTokenOptions,
     NftOptions,
     OutputData,
     OutputsToCollect,
     Transaction,
     TransferOptions,
-} from '@iota/wallet'
+    ClientOptions as StardustClientOptions,
+} from '@iota/wallet/out/types'
+import { Address } from './address'
+import { Bridge, CommunicationIds } from './bridge'
+import { IClientOptions, IAuth } from '@core/network'
+import { Message } from './message'
+import { Duration } from './wallet'
 
 export enum MessageType {}
 
@@ -28,7 +27,7 @@ export interface Account {
     id: string
     alias: string
     createdAt: string
-    clientOptions: ClientOptions
+    clientOptions: IClientOptions
     index: number
     lastSyncedAt: string
     signerType: SignerType
@@ -64,7 +63,7 @@ export interface SignerType {
 }
 
 export interface AccountToCreate {
-    clientOptions: ClientOptions
+    clientOptions: IClientOptions
     signerType: SignerType
     alias?: string
     createdAt?: string
@@ -314,7 +313,7 @@ export function getNodeInfo(
     __ids: CommunicationIds,
     accountId: AccountIdentifier,
     url?: string,
-    auth?: NodeAuth
+    auth?: IAuth
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, [
         url,

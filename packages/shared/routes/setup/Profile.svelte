@@ -27,6 +27,7 @@
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let locale: Locale
 
@@ -63,7 +64,7 @@
         try {
             busy = true
             if (nameChanged || hasDeveloperProfileChanged) {
-                storeProfile(name, isDeveloperProfile)
+                storeProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
                 const path = await getProfileDataPath($newProfile.id)
                 const machineId = await Platform.getMachineId()

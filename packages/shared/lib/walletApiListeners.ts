@@ -24,7 +24,7 @@ import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { StardustAccount } from '@lib/typings/account'
+import { getAccounts } from './actions/profileActions'
 
 /**
  * Initialises event listeners from wallet library
@@ -338,12 +338,6 @@ export function initialiseListeners(): void {
     })
 }
 
-async function getAccounts(): Promise<StardustAccount[]> {
-    const accountsResponse = await get(profileManager).getAccounts()
-    const accountsPromises = accountsResponse.map((acc) => getStardustAccount(acc.meta.index))
-    return Promise.all(accountsPromises)
-}
-
 function updateAllMessagesState(
     accounts: Writable<WalletAccount[]>,
     messageId: string,
@@ -372,6 +366,7 @@ function updateAllMessagesState(
     return confirmationHasChanged
 }
 
+// TODO: Remove from this file
 /**
  * Displays participation (stake/unstake) notification
  *

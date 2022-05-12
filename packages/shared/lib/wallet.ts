@@ -1,10 +1,9 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, Readable, writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { deepCopy } from './helpers'
 import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
@@ -12,13 +11,13 @@ import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { activeProfile, isLedgerProfile, updateProfile } from './profile'
 import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
+import { SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { NodeAuth, NodeInfo } from './typings/node'
+import { IAuth, INodeInfo } from '@core/network'
 import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletState } from './typings/wallet'
@@ -349,6 +348,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
     try {
         const createdAccount = await createStardustAccount({
             alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
+            coinType: 4219,
         })
         const stardustAccount = await getStardustAccount(createdAccount.meta.index)
         const addresses = await stardustAccount.generateAddresses()
@@ -480,7 +480,7 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
     })
 }
 
-export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
+export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: IAuth): Promise<INodeInfo> => {
     if (!url || (!url && !auth)) {
         const node = get(activeProfile)?.settings?.networkConfig?.nodes.find((n) => n.isPrimary)
 
@@ -488,7 +488,7 @@ export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAut
         auth = node?.auth
     }
 
-    return new Promise<NodeInfo>((resolve, reject) => {
+    return new Promise<INodeInfo>((resolve, reject) => {
         api.getNodeInfo(accountId, url, auth, {
             onSuccess(response) {
                 resolve(response.payload)

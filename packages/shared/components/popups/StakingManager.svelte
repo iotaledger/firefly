@@ -3,7 +3,6 @@
     import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         canParticipate,
@@ -35,10 +34,10 @@
     import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { NodePlugin } from 'shared/lib/typings/node'
+    import { doesNodeHavePlugin, NodePlugin, networkStatus } from '@core/network'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccount, transferState, wallet } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
@@ -181,7 +180,7 @@
     }
 
     onMount(async () => {
-        if (!hasNodePlugin(NodePlugin.Participation)) {
+        if (!doesNodeHavePlugin(NodePlugin.Participation)) {
             showAppNotification({
                 type: 'warning',
                 message: localize('error.node.pluginNotAvailable', {

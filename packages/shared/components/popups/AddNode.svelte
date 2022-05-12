@@ -1,33 +1,26 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { cleanNodeAuth, getNetworkById, checkNodeUrlValidity } from 'shared/lib/network'
+    import { INode, INodeInfo, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
     import { activeProfile } from 'shared/lib/profile'
-    import { updateNetworkStatus } from '../../lib/networkStatus'
+    import { localize } from '@core/i18n'
 
-    import { Locale } from '@core/i18n'
-    import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
-    import { Network } from 'shared/lib/typings/network'
-
-    export let locale: Locale
-
-    export let node: Node = { url: '', isPrimary: false }
-    export let nodes: Node[] = []
-    export let network: Network
-    export let isAddingNode: boolean = true
+    export let node: INode = { url: '', isPrimary: false }
+    export let nodes: INode[] = []
+    export let network: INetwork
+    export let isAddingNode = true
 
     export let onSuccess = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
-    let nodeUrl: string = node?.url || ''
-    const oldNodeUrl: string = nodeUrl
-    const optNodeAuth: NodeAuth = node?.auth || { username: '', password: '', jwt: '' }
+    let nodeUrl = node?.url || ''
+    const oldNodeUrl = nodeUrl
+    const optNodeAuth = node?.auth || { username: '', password: '', jwt: '' }
 
     let addressError = ''
     let addressWarn = ''
@@ -36,39 +29,39 @@
     let isBusy = false
     let isSuccess = true
     let isNetworkSwitch = false
-    let newNetwork: Network
+    let newNetwork: INetwork
 
     $: nodeUrl, (addressError = '')
     $: {
         addressWarn = ''
         node.url = stripSpaces(node.url)
         if (!$activeProfile?.isDeveloperProfile && /^http:\/\//.exec(node.url)) {
-            addressWarn = locale('warning.node.http')
+            addressWarn = localize('warning.node.http')
         }
     }
 
     const cleanNodeUrl = (_url: string): string => stripTrailingSlash(stripSpaces(_url))
 
-    const constructNodes = (): Node[] =>
+    const constructNodes = (): INode[] =>
         node ? nodes.filter((n) => cleanNodeUrl(node.url) !== cleanNodeUrl(n.url)) : nodes
 
     const cleanNodeFormData = (): void => {
         const _nodes = constructNodes()
         const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
         if (validErr) {
-            addressError = locale(validErr)
+            addressError = localize(validErr)
         }
     }
 
     const checkNetworkId = (id: string): void => {
         if (!id) {
-            addressError = locale('error.network.notReachable')
+            addressError = localize('error.network.notReachable')
         } else if (id !== network.id) {
             if ($activeProfile.isDeveloperProfile) {
-                newNetwork = getNetworkById(id)
+                newNetwork = getNetwork($activeProfile?.networkProtocol, $activeProfile?.networkType, id)
                 isNetworkSwitch = true
             } else {
-                addressError = locale('error.network.mismatch', { values: { networkId: id } })
+                addressError = localize('error.network.mismatch', { values: { networkId: id } })
             }
         }
     }
@@ -77,18 +70,14 @@
         isBusy = true
         addressError = ''
 
-        let nodeInfo: NodeInfo
+        let nodeInfo: INodeInfo
 
         try {
             if (node) {
                 cleanNodeFormData()
 
                 if (!addressError) {
-                    nodeInfo = await asyncGetNodeInfo(
-                        $accounts[0].id,
-                        cleanNodeUrl(nodeUrl),
-                        cleanNodeAuth(optNodeAuth)
-                    )
+                    nodeInfo = await asyncGetNodeInfo($accounts[0].id, cleanNodeUrl(nodeUrl), cleanAuth(optNodeAuth))
 
                     checkNetworkId(nodeInfo?.nodeinfo?.networkId)
                 }
@@ -99,7 +88,7 @@
 
             showAppNotification({
                 type: 'error',
-                message: locale(err?.error),
+                message: localize(err?.error),
             })
 
             return
@@ -107,30 +96,34 @@
 
         if (!addressError) {
             if (!isNetworkSwitch) {
-                await updateNetworkStatus(get($wallet.accounts)[0]?.id, <Node>{
-                    url: nodeUrl,
-                    auth: optNodeAuth,
-                    isPrimary: node?.isPrimary,
-                })
-                    .then(() => {
-                        isBusy = false
-
-                        onSuccess(
-                            false,
-                            {
-                                url: cleanNodeUrl(nodeUrl),
-                                auth: optNodeAuth,
-                                network: getNetworkById(nodeInfo?.nodeinfo.networkId),
-                                isPrimary: node?.isPrimary || false,
-                            },
-                            oldNodeUrl
-                        )
-                        closePopup()
-                    })
-                    .catch((err) => {
-                        isBusy = false
-                        return
-                    })
+                // TODO refactor
+                // await updateNetworkStatus(get($wallet.accounts)[0]?.id, {
+                //     url: nodeUrl,
+                //     auth: optNodeAuth,
+                //     isPrimary: node?.isPrimary,
+                // })
+                //     .then(() => {
+                //         isBusy = false
+                //         onSuccess(
+                //             false,
+                //             {
+                //                 url: cleanNodeUrl(nodeUrl),
+                //                 auth: optNodeAuth,
+                //                 network: getNetwork(
+                //                     $activeProfile?.networkProtocol,
+                //                     $activeProfile?.networkType,
+                //                     nodeInfo?.nodeinfo.networkId
+                //                 ),
+                //                 isPrimary: node?.isPrimary || false,
+                //             },
+                //             oldNodeUrl
+                //         )
+                //         closePopup()
+                //     })
+                //     .catch((err) => {
+                //         isBusy = false
+                //         return
+                //     })
             }
         }
 
@@ -139,17 +132,13 @@
 </script>
 
 {#if isNetworkSwitch}
-    <SwitchNetwork
-        {locale}
-        network={newNetwork}
-        node={{ url: cleanNodeUrl(nodeUrl), auth: optNodeAuth, isPrimary: true }}
-    />
+    <SwitchNetwork network={newNetwork} node={{ url: cleanNodeUrl(nodeUrl), auth: optNodeAuth, isPrimary: true }} />
 {:else}
-    <Text type="h4" classes="mb-6">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
+    <Text type="h4" classes="mb-6">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
     <form id="node-config-form" class="w-full h-full">
         <Input
             bind:value={nodeUrl}
-            placeholder={locale('popups.node.nodeAddress')}
+            placeholder={localize('popups.node.nodeAddress')}
             error={addressError}
             disabled={isBusy}
             autofocus
@@ -160,24 +149,24 @@
         <Input
             classes="mt-3"
             bind:value={optNodeAuth.username}
-            placeholder={locale('popups.node.optionalUsername')}
+            placeholder={localize('popups.node.optionalUsername')}
             error={authError}
             disabled={isBusy}
         />
         <Password
             classes="mt-3"
             bind:value={optNodeAuth.password}
-            placeholder={locale('popups.node.optionalPassword')}
+            placeholder={localize('popups.node.optionalPassword')}
             disabled={isBusy}
         />
         <Password
             classes="mt-3"
             bind:value={optNodeAuth.jwt}
-            placeholder={locale('popups.node.optionalJwt')}
+            placeholder={localize('popups.node.optionalJwt')}
             disabled={isBusy}
         />
         <Checkbox
-            label={locale('popups.node.setAsPrimaryNode')}
+            label={localize('popups.node.setAsPrimaryNode')}
             bind:checked={node.isPrimary}
             disabled={isBusy}
             classes="mt-4 mb-8"
@@ -185,7 +174,7 @@
     </form>
     <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
-            {locale('actions.cancel')}
+            {localize('actions.cancel')}
         </Button>
         <Button
             disabled={!nodeUrl || isBusy}
@@ -197,11 +186,11 @@
             {#if isBusy}
                 <Spinner
                     busy={isBusy}
-                    message={locale(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
+                    message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
                     classes="justify-center"
                 />
             {:else}
-                {locale(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
+                {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
             {/if}
         </Button>
     </div>

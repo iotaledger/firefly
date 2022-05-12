@@ -3,7 +3,7 @@ import { Address } from './address'
 import { ErrorEventPayload } from './events'
 import { LedgerStatus } from './ledger'
 import { Message } from './message'
-import { NodeInfo } from './node'
+import { INodeInfo } from '@core/network'
 import { MigrationBundle, MigrationData, SendMigrationBundleResponse, MigrationAddress } from './migration'
 import { StrongholdStatus } from './wallet'
 import { ParticipateResponsePayload, ParticipationOverviewResponse } from '../participation/types'
@@ -139,7 +139,7 @@ export type LegacySeedChecksum = Response<ResponseTypes.LegacySeedChecksum, stri
 export type MigrationDataResponse = Response<ResponseTypes.MigrationData, MigrationData>
 export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
 export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, SendMigrationBundleResponse>
-export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
+export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, INodeInfo>
 export type GetMigrationAddressResponse = Response<ResponseTypes.MigrationAddress, MigrationAddress>
 export type MinedBundleResponse = Response<ResponseTypes.MinedBundle, string[]>
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatus>

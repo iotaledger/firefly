@@ -6,7 +6,7 @@
         ledgerSimulator,
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
-    import { getDefaultClientOptions } from 'shared/lib/network'
+    import { getDefaultClientOptions } from '@core/network/utils'
     import { activeProfile } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
     import { api } from 'shared/lib/wallet'
@@ -34,7 +34,7 @@
         const _createAccount = (idx) => {
             api.createAccount(
                 {
-                    clientOptions: getDefaultClientOptions(),
+                    clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
                     alias: `${locale('general.account')} ${idx}`,
                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                     allowCreateMultipleEmptyAccounts: true,

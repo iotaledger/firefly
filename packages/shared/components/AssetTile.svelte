@@ -1,25 +1,21 @@
 <script lang="typescript">
-    import { accountRouter } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
     import { Icon, StakingAssetTile, Text } from 'shared/components'
     import { isBright } from 'shared/lib/helpers'
-    import { Asset, Token } from 'shared/lib/typings/assets'
+    import { Asset } from 'shared/lib/typings/assets'
     export let asset: Asset
 
-    const isStakingAsset = asset?.name === Token.Assembly || asset?.name === Token.Shimmer
+    const isStakingAsset = asset?.meta.name === 'Assembly'
 
-    $: assetIconColor = isBright(asset?.color) ? 'gray-800' : 'white'
+    $: assetIconColor = isBright(asset?.meta?.primaryColor) ? 'gray-800' : 'white'
 
-    function handleTileClick(): void {
-        $accountRouter.goTo(AccountRoute.Send)
-    }
+    function handleTileClick(): void {}
 </script>
 
 {#if isStakingAsset}
     <StakingAssetTile {asset} />
 {:else}
     <button
-        style="--asset-color: {asset?.color}"
+        style="--asset-color: {asset?.meta?.primaryColor}"
         class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl"
         on:click={handleTileClick}
     >
@@ -27,13 +23,13 @@
             <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
                 <Icon
                     classes="text-{assetIconColor}"
-                    icon={asset?.name?.toLocaleLowerCase()}
+                    icon={asset?.meta.name?.toLocaleLowerCase()}
                     height="100%"
                     width="100%"
                 />
             </div>
             <div class="flex flex-col flex-wrap space-y-1">
-                <Text classes="font-semibold">{asset?.name}</Text>
+                <Text classes="font-semibold">{asset?.meta.name}</Text>
                 {#if asset?.fiatPrice}
                     <Text secondary smaller>{asset?.fiatPrice}</Text>
                 {/if}

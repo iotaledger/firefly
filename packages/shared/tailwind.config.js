@@ -263,6 +263,12 @@ module.exports = {
                 'elevation-3': '0px 4px 6px rgba(0, 0, 0, 0.08)',
                 'elevation-4': '0px 4px 12px rgba(0, 0, 0, 0.12)',
             },
+            borderWidth: {
+                3: '3px',
+            },
+            spacing: {
+                18: pxToRem('72'),
+            },
         },
         fontFamily: {
             'fira-mono': ['"Fira Mono"', 'monospace'],
