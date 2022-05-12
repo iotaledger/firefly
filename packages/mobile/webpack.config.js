@@ -22,6 +22,7 @@ const resolve = {
     fallback: {
         path: false,
         fs: false,
+        crypto: false,
     },
     plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
@@ -108,6 +109,7 @@ const rendererPlugins = [
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
+        'process.env.STAGE': JSON.stringify(process.env.STAGE),
     }),
 ]
 

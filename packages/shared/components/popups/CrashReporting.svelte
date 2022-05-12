@@ -2,7 +2,7 @@
     import { onDestroy } from 'svelte'
     import { Button, Checkbox, Text, TextHint } from 'shared/components'
     import { appSettings, initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import { closePopup as closePopupInternal } from 'shared/lib/popup'
     import { AppSettings } from 'shared/lib/typings/app'
 
@@ -11,7 +11,7 @@
     const closePopup = () => {
         isAwareOfCrashReporting.set(true)
 
-        closePopupInternal()
+        closePopupInternal(true)
     }
 
     const handleConfirmClick = () => {

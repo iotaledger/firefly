@@ -3,8 +3,12 @@
     import { createEventDispatcher } from 'svelte'
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()
+
+    const isAndroid = Platform.getOS() === 'android'
 
     export let value = undefined
     export let classes = ''
@@ -82,6 +86,19 @@
         e.preventDefault()
     }
 
+    /**
+     * for android mobile we need both onkeydown and oninput
+     * event listeners to the input and handle the old and the new value.
+     * the auto-suggest feature or other event might follow
+     * the keydown event and invalidate it.
+     */
+    const changeHandlerHelper = (e, i: number) => {
+        if (!/^[0-9]$/.test(e.data)) {
+            inputs[i] = ''
+        } else {
+            inputElements[i + 1].focus()
+        }
+    }
     const selectFirstEmpty = () => {
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
@@ -128,18 +145,34 @@
         <div class="flex flex-row inputs-wrapper">
             <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
                 {#each inputs as item, i}
-                    <input
-                        bind:value={inputs[i]}
-                        maxLength="1"
-                        id={`input-${i}`}
-                        type="text"
-                        bind:this={inputElements[i]}
-                        class:active={!inputs[i] || inputs[i].length === 0}
-                        class:glimpse
-                        {disabled}
-                        on:keydown={(event) => changeHandler(event, i)}
-                        on:contextmenu|preventDefault
-                    />
+                    {#if $mobile}
+                        <input
+                            bind:value={inputs[i]}
+                            maxLength="1"
+                            id={`input-${i}`}
+                            type="tel"
+                            bind:this={inputElements[i]}
+                            class:active={!inputs[i] || inputs[i].length === 0}
+                            class:glimpse
+                            {disabled}
+                            on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
+                            on:keydown={(event) => changeHandler(event, i)}
+                            on:contextmenu|preventDefault
+                        />
+                    {:else}
+                        <input
+                            bind:value={inputs[i]}
+                            maxLength="1"
+                            id={`input-${i}`}
+                            type="text"
+                            bind:this={inputElements[i]}
+                            class:active={!inputs[i] || inputs[i].length === 0}
+                            class:glimpse
+                            {disabled}
+                            on:keydown={(event) => changeHandler(event, i)}
+                            on:contextmenu|preventDefault
+                        />
+                    {/if}
                 {/each}
             </div>
             <div

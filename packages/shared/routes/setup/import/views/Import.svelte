@@ -2,7 +2,7 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { setProfileType } from 'shared/lib/profile'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { ImportType, ProfileType } from 'shared/lib/typings/profile'
     import { createEventDispatcher } from 'svelte'
 
@@ -10,10 +10,10 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(type: ImportType) {
-        const profileType = type === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
+    function handleContinueClick(importType: ImportType) {
+        const profileType = importType === ImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setProfileType(profileType)
-        dispatch('next', { type })
+        dispatch('next', { importType })
     }
     function handleBackClick() {
         dispatch('previous')

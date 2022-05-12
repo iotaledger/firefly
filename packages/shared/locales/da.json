@@ -9,6 +9,11 @@
             "body": "Gennemgå venligst privatlivspolitikken samt vilkår og betingelser.",
             "checkbox": "Jeg har læst og jeg accepterer privatlivspolitiken og servicevilkårene"
         },
+        "crashReporting": {
+            "title": "Fejlrapportering",
+            "body": "Hjælp udviklerne med at forbedre Firefly ved automatisk at sende diagnostiske data, når en fejl eller nedbrud opstår.",
+            "checkbox": "Send fejlrapporter til IOTA Foundation"
+        },
         "appearance": {
             "title": "Udseende",
             "body": "Vælg dit app-tema."
@@ -22,10 +27,10 @@
                 "nonFirst": "For nu, lad os starte med dit profilnavn."
             },
             "addMore": "Du kan tilføje flere profiler senere.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Avancerede indstillinger",
             "developer": {
                 "label": "Udvikler profil",
-                "info": "Connect to the devnet or a private network"
+                "info": "Opret forbindelse til devnet eller et privat netværk"
             }
         },
         "setup": {
@@ -180,33 +185,33 @@
         },
         "legacyLedgerIntro": {
             "title": "Start din Ledger migrering ved hjælp af Firefly",
-            "body1": "Firefly will help you to transfer your tokens to the new Chrysalis network.",
-            "body2": "After the migration, you will be able to send and receive your tokens using your Ledger with Firefly.",
-            "readMore": "What to expect from the migration process"
+            "body1": "Firefly vil hjælpe dig med at overføre dine tokens til det nye Chrysalis netværk.",
+            "body2": "Efter migrationen, vil du være i stand til at sende og modtage dine tokens ved hjælp af din Ledger med Firefly.",
+            "readMore": "Hvad man kan forvente af migrationsprocessen"
         },
         "generateNewLedgerAddress": {
             "title": "Generér ny adresse",
-            "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
-            "confirmTitle": "Confirm the new address",
-            "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
-            "confirmedTitle": "Address confirmed",
-            "confirmedBody": "You have confirmed that the address in Firefly matches the one on your Ledger device.",
-            "generating": "Generating address"
+            "body": "Du skal generere en ny adresse for at migrere dine tokens med Firefly. Klik på knappen nedenfor for at fortsætte.",
+            "confirmTitle": "Bekræft den nye adresse",
+            "confirmBody": "For en sikkerheds skyld, bør du venligst sammenligne den adresse, der er genereret på din Ledger, med den der vises nedenfor. Hvis de matcher, skal du trykke på begge knapper på din Ledger som den beder dig om.",
+            "confirmedTitle": "Adresse bekræftet",
+            "confirmedBody": "Du har bekræftet, at adressen i Firefly matcher den på din Ledger enhed.",
+            "generating": "Genererer adresse"
         },
         "switchLedgerApps": {
-            "title": "Switch Ledger apps",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "title": "Skift Ledger app",
+            "body": "Skift til {legacy}-appen på din Ledger for at fortsætte migrationen. Tryk fortsæt, når du er klar."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
+            "title": "Vælg Ledger-konto indeks",
+            "body": "Vælg den Ledger-konto du brugte med Trinity. For de fleste brugere vil dette være standardindekset 0.",
+            "accountIndex": "Kontoindeks",
+            "accountPage": "Kontoside",
             "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "expert": "Ekspert",
+            "takingAWhile": "Det tager et stykke tid...",
+            "notGeneratingAddresses": "Genererer din Ledger adresser?",
+            "reinstallLegacy": "Hvis ikke, så afbryd forbindelsen til enheden og prøv igen. Hvis problemet fortsætter, skal du muligvis geninstallere {legacy}-appen."
         },
         "importBackupPassword": {
             "body1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
@@ -237,7 +242,7 @@
             "miningBundle": "Miner pakke",
             "problemRestoringWallet": "Der opstod en netværksfejl under gendannelse af din wallet. Prøv igen.",
             "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med en lav saldo til at kunne migrere. Tjek igen, hvis din samlede saldo ikke ser rigtig ud.",
             "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
             "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
@@ -263,12 +268,12 @@
         },
         "securingSpentAddresses": {
             "title": "Sikring af brugte adresser...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Denne proces tager {minutes, plural, one {# minut} other {# minutter}}.",
             "body2": "Din computer vil køre på fuld kapacitet, lav eventuelt noget andet, mens du venter på at dette er fuldendt."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly vil nu fortsætte med at migrere dine midler. Dette kan tage et stykke tid.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "Sørg for at din Ledger er tilsluttet, og at {legacy}-appen holdes åben under hele migreringen.",
             "migrate": "Migrér midler",
             "transaction": "Transaktion {number}",
             "rerun": "Prøv igen"
@@ -282,12 +287,12 @@
             "body": "Sørg for at din saldo er korrekt, før du fortsætter. Du kan tjekke igen, hvis tingene ikke ser korrekt ud.",
             "error": "Det mindste migrationsbeløb er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
             "zeroBalance": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske indtastet dit seed forkert.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "Prøv at tjekke igen. Hvis du stadig ikke kan finde din saldo, har du måske valgt det forkerte kontoindeks."
         },
         "settings": {
             "settings": "Indstillinger",
             "generalSettings": {
-                "title": "General",
+                "title": "Generelt",
                 "description": "Konfigurer din app's udseende og andre generelle indstillinger"
             },
             "security": {
@@ -295,7 +300,7 @@
                 "description": "Skift din adgangskode og justér sikkerhedsrelaterede indstillinger"
             },
             "advancedSettings": {
-                "title": "Advanced",
+                "title": "Avanceret",
                 "description": "Værktøjer og manuelle indstillinger for tekniske brugere"
             },
             "helpAndInfo": {
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
+                "advice": "Hvis du ændrer dit systemtema, skal du muligvis genstarte Firefly for at se ændringerne"
             },
             "language": {
                 "title": "Sprog",
@@ -329,14 +334,14 @@
             },
             "networkStatus": {
                 "title": "Netværksstatus",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "Viser status for den node du er forbundet til"
             },
             "exportStronghold": {
-                "title": "Export backup",
+                "title": "Eksporter sikkerhedskopi",
                 "description": "Eksporter til en Stronghold fil - en komplet krypteret sikkerhedskopi af dine wallets og den seneste transaktionshistorik"
             },
             "appLock": {
-                "title": "Automatic lock",
+                "title": "Automatisk lås",
                 "description": "Inaktivitetstid før dine tegnebøger låses, og du bliver logget ud"
             },
             "changePassword": {
@@ -352,9 +357,9 @@
                 "action": "Skift Pinkode"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Skift profilnavn",
+                "description": "Skift dit Firefly profilnavn",
+                "success": "Du har ændret dit profilnavn"
             },
             "balanceFinder": {
                 "title": "Saldo finder",
@@ -370,22 +375,22 @@
             },
             "deepLinks": {
                 "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "Udfyld automatisk transaktionsdata i Firefly, når du klikker på et IOTA link"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "Opsætning af netværk",
+                "title2": "Netværkskonfiguration",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "Dine netværksindstillinger opdateres automatisk i henhold til den aktuelle node-konfiguration (skift af netværk vil resultere i nulstilling af tegnebogstilstand)",
+                    "nonDev": "Dine netværksindstillinger opdateres automatisk i henhold til den aktuelle node-konfiguration"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "Netværket blev skiftet til \"{networkName}\".",
+                "resetWallet": "Din tegnebogstilstand er blevet nulstillet.",
+                "connectedTo": "Forbundet til",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
+                    "title": "Valg af node",
+                    "description": "Vælg \"Manuel\" for at konfigurere node-indstillinger og oprette forbindelse til dine egne node(s)",
+                    "automatic": "Automatisk",
                     "manual": "Manual"
                 }
             },
@@ -410,6 +415,12 @@
             "errorLog": {
                 "title": "Fejllog",
                 "description": "Vis fejl for at fejlfinde et problem"
+            },
+            "crashReporting": {
+                "title": "Crash reports",
+                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
+                "checkbox": "Send crash reports",
+                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
@@ -450,49 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Ajourført",
-                    "outOfDate": "Forældet"
-                },
-                "hardwareDevice": {
-                    "title": "Hardware-enhed",
-                    "statuses": {
-                        "appNotOpen": "IOTA App Not Open",
-                        "connected": "Connected",
-                        "legacyConnected": "{legacy} App Open",
-                        "locked": "Låst",
-                        "mnemonicMismatch": "Wrong Ledger or Mnemonic",
-                        "notDetected": "Not Detected",
-                        "otherConnected": "App Open"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Låst",
-                    "unlocked": "Oplåst"
-                },
-                "strongholdBackup": {
-                    "title": "Wallet sikkerhedskopi",
-                    "weeksAgo": "{weeks, plural, one {# uge} other {# uger}} siden"
-                }
-            },
             "network": {
-                "networkOperational": "Netværket er operationelt",
-                "networkDegraded": "Netværk er forringet",
-                "networkDown": "Netværket er frakoblet",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Beskeder pr. sekund",
                 "referencedRate": "Refereret sats"
             },
             "profileModal": {
                 "allSettings": "Alle indstillinger",
-                "logout": "Log ud"
+                "logout": "Log ud",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Du har sidst sikkerhedskopieret {date}",
+                    "notBackedUp": "Ikke sikkerhedskopieret",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Staking",
             "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Event not started",
@@ -506,23 +516,29 @@
                 "stakedFunds": "Staked funds"
             },
             "info": {
-                "upcomingSubheader": "Event has not started",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Get ready for staking",
-                "commencingHeader": "Pre-stake your tokens!",
-                "holdingSubheaderHolding": "Now earning staking rewards",
-                "holdingSubheaderNotHolding": "Earn rewards by staking IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stake your tokens!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Thank you!",
-                "inactiveHeader": "Try changing node",
-                "inactiveSubheader": "Staking not detected"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Remaining",
                 "commencing": "Until staking begins",
-                "collectedRewards": "Collected rewards",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -531,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -555,7 +575,8 @@
             "upToDateDescription": "Du kører den nyeste og sikreste version af Firefly.",
             "updateAvailable": "Firefly opdatering tilgængelig",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen."
+            "noAutoUpdate": "Auto-opdatering er deaktiveret i denne Windows-version, gå til https://firefly.iota.org for at downloade opdateringen.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Seneste sikkerhedskopi: {date}",
@@ -654,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Saldo finder",
-            "body": "Udfør en mere grundig søgning af adresser for at finde manglende saldo. Dette kan tage et stykke tid.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Samlet saldo",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Indtast din adgangskode for at tillade søgning."
         },
         "riskFunds": {
@@ -726,29 +751,29 @@
             "title": "Eksportér transaktionshistorik",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Profilnavn:",
-            "accountName": "Account name:",
+            "accountName": "Wallet name:",
             "typePassword": "Indtast din adgangskode for at tillade eksportering"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Staking has not started yet",
-            "commencingDate": "Staking has not started yet",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}."
+            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "Confirm Participation",
             "subtitleStake": "You are about to stake",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "bodyMerge": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -764,6 +789,11 @@
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "crashReporting": {
+            "title": "Crash reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
+            "checkbox": "Send fejlrapporter til IOTA Foundation"
+        },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
             "privPolicyTitle": "Privacy Policy",
@@ -773,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -895,7 +930,9 @@
         "manageStake": "Manage stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Adgangskode",
@@ -943,7 +980,6 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Saldo",
-        "accountBalance": "Wallet Saldo",
         "all": "All",
         "incoming": "Indgående",
         "outgoing": "Udgående",
@@ -954,6 +990,7 @@
         "profiles": "Profiler",
         "dev": "Udvikler",
         "createAccount": "Opret ny Wallet",
+        "createNewWallet": "Create a new wallet",
         "accountName": "Wallet navn",
         "latestTransactions": "Seneste transaktioner",
         "transactions": "Transaktioner",
@@ -1012,14 +1049,20 @@
         "creatingProfile": "Opretter profil. Vent venligst...",
         "fundMigration": "Migration af midler",
         "accountRemoved": "Denne wallet er skjult. Vis den for at udføre overførsler.",
-        "receivingTo": "Modtager til {account}",
-        "sendingFrom": "Sender fra {account}",
-        "receivedTo": "Modtaget til {account}",
-        "sentFrom": "Sendt fra {account}",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
         "unvotedFor": "Unvoted for {account}",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
         "receiving": "Modtager",
         "sending": "Sender",
         "legacyNetwork": "Legacy Netværk",
@@ -1035,7 +1078,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets"
     },
     "dates": {
         "today": "I dag",
@@ -1082,7 +1126,10 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1206,14 +1253,16 @@
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
             "invalidStakingEventId": "Invalid staking event ID."
-        }
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1225,37 +1274,10 @@
             "low": "Lav",
             "veryLow": "Meget lav"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Staking has not started yet",
-                "body": "Check back later. The staking event has not begun."
-            },
-            "commencing": {
-                "title": "Pre-staking is now open",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
-            },
-            "activeHolding": {
-                "title": "Staking is now in progress",
-                "body": "Good job. You will receive rewards every 10 seconds."
-            },
-            "inactiveHolding": {
-                "title": "Staking is now open",
-                "body": "Stake your IOTA tokens to receive rewards every 10 seconds."
-            },
-            "inactive": {
-                "title": "No staking events detected",
-                "body": "Open network configuration in Advanced Settings and make sure the current node has the \"Participation\" feature by clicking \"View Info\"."
-            },
-            "ended": {
-                "title": "Staking has now ended",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens on a staked wallet.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
         "stakingMinRewards": {
@@ -1290,5 +1312,9 @@
             "request": "Vi har brug for tilladelse til dit kamera, for at kunne scanne QR-koder.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Wallet",
+        "staking": "Staking"
     }
 }

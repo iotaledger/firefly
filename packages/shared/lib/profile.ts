@@ -9,6 +9,7 @@ import {
     getProfileDataPath,
     getWalletDataPath,
     AccountColors,
+    selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
 import { ProfileType } from './typings/profile'
@@ -19,7 +20,7 @@ import { NetworkConfig, NetworkType } from './typings/network'
 import { ValuesOf } from './typings/utils'
 import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from './typings/i18n'
+import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -34,6 +35,7 @@ export const profileInProgress = persistent<string | undefined>('profileInProgre
 
 export const newProfile = writable<Profile | null>(null)
 export const isStrongholdLocked = writable<boolean>(true)
+export const hasEverOpenedProfileModal = writable<boolean>(false)
 
 export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile, activeProfileId],
@@ -42,6 +44,12 @@ export const activeProfile: Readable<Profile | undefined> = derived(
 
 activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
+})
+
+selectedAccountId?.subscribe((accountId) => {
+    if (accountId) {
+        updateProfile('lastUsedAccountId', accountId)
+    }
 })
 
 export const isSoftwareProfile: Readable<boolean> = derived(
@@ -146,7 +154,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     if (profile) {
         try {
             await asyncDeleteStorage()
-            await removeProfileFolder(profile.name)
+            await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)
         }
@@ -266,9 +274,9 @@ export const cleanupInProgressProfiles = (): void => {
  *
  * @returns {void}
  */
-export const removeProfileFolder = async (profileName: string): Promise<void> => {
+export const removeProfileFolder = async (id: string): Promise<void> => {
     try {
-        const profileDataPath = await getProfileDataPath(profileName)
+        const profileDataPath = await getProfileDataPath(id)
         await Platform.removeProfileFolder(profileDataPath)
     } catch (err) {
         console.error(err)
@@ -287,9 +295,9 @@ export const cleanupEmptyProfiles = async (): Promise<void> => {
         const profileDataPath = await getWalletDataPath()
         const storedProfiles = await Platform.listProfileFolders(profileDataPath)
 
-        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
+        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.id)))
 
-        const appProfiles = get(profiles).map((p) => p.name)
+        const appProfiles = get(profiles).map((p) => p.id)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
                 await removeProfileFolder(storedProfile)
@@ -448,5 +456,25 @@ export const validateProfileName = (trimmedName: string): void => {
 
     if (get(profiles).some((p) => p.name === trimmedName)) {
         throw new Error(locale('error.profile.duplicate'))
+    }
+}
+
+async function renameProfileFolder(oldName: string, newName: string): Promise<void> {
+    const oldPath = await getProfileDataPath(oldName)
+    const newPath = await getProfileDataPath(newName)
+    await Platform.renameProfileFolder(oldPath, newPath)
+}
+
+export async function renameOldProfileFoldersToId(): Promise<void> {
+    const walletPath = await getWalletDataPath()
+    const profileFolders = await Platform.listProfileFolders(walletPath)
+    const oldProfiles = get(profiles).filter((profile) => profileFolders.find((p) => p === profile.name))
+
+    if (oldProfiles.length > 0) {
+        await Promise.all(
+            oldProfiles.map(async (profile) => {
+                await renameProfileFolder(profile.name, profile.id)
+            })
+        )
     }
 }
