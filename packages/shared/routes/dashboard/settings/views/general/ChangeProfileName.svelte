@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { updateProfile } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile, validateProfileName } from '@core/profile'
+    import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
 
     let newName = $activeProfile.name
     let error = ''
@@ -15,7 +14,7 @@
     function onSubmitClick(): void {
         try {
             validateProfileName(trimmedProfileName)
-            updateProfile('name', trimmedProfileName)
+            updateActiveProfile({ name: trimmedProfileName })
             showAppNotification({
                 type: 'info',
                 message: localize('views.settings.changeProfileName.success'),

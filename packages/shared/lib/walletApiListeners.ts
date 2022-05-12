@@ -16,11 +16,10 @@ import { getPendingParticipation, hasPendingParticipation, removePendingParticip
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { openPopup } from './popup'
-import { updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/walletAccount'
 import { ASSEMBLY_EVENT_ID } from './participation'
-import { activeProfile, getAccounts } from '@core/profile'
+import { activeProfile, getAccounts, updateActiveProfile } from '@core/profile'
 
 const { isStrongholdLocked } = get(activeProfile)
 /**
@@ -275,7 +274,7 @@ export function initialiseListeners(): void {
             }
             // Migration
             if (messageId === '0'.repeat(64)) {
-                updateProfile('migratedTransactions', [])
+                // updateActiveProfile({'migratedTransactions': []})
             }
         },
         onError(error) {

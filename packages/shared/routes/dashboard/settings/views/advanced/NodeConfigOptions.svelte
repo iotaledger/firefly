@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INetworkConfig, INode, updateClientOptions } from '@core/network'
     import { openPopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
+    import { updateActiveProfileSettings } from '@core/profile'
 
     export let nodeContextMenu: INode
     export let contextPosition: {
@@ -19,7 +19,7 @@
         nodeContextMenu = undefined
 
         updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
+        updateActiveProfileSettings({ networkConfig })
     }
 
     function handleViewNodeInfoClick(node: INode): void {
@@ -54,7 +54,7 @@
                         networkConfig.nodes[idx] = node
 
                         updateClientOptions(networkConfig)
-                        updateProfile('settings.networkConfig', networkConfig)
+                        updateActiveProfileSettings({ networkConfig })
                     }
                 },
             },

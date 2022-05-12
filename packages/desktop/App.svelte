@@ -44,8 +44,10 @@
         persistedProfile,
         saveActiveProfile,
         cleanupEmptyProfiles,
+        updateActiveProfile,
     } from '@core/profile'
     import { Platform } from '@lib/platform'
+    import { selectedAccountId } from '@core/account'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -73,6 +75,8 @@
     $: $activeProfileId, Platform.updateActiveProfile($activeProfileId)
     $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
     $: $activeProfile, saveActiveProfile()
+    // TODO: Set this in switch account action
+    $: $selectedAccountId, updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     let splash = true
     let settings = false

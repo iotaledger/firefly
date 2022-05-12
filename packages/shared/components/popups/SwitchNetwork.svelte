@@ -5,12 +5,18 @@
     import { createAccount, asyncRemoveWalletAccounts, setStrongholdPassword } from 'shared/lib/wallet'
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, logout } from '@core/profile'
+    import {
+        activeProfile,
+        isLedgerProfile,
+        isSoftwareProfile,
+        logout,
+        updateActiveProfile,
+        updateActiveProfileSettings,
+    } from '@core/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
-    import { updateProfile } from '@lib/profile'
 
     export let network: INetwork
     export let node: INode
@@ -58,7 +64,7 @@
 
         try {
             updateClientOptions(newConfig)
-            updateProfile('settings.networkConfig', newConfig)
+            updateActiveProfileSettings({ networkConfig: newConfig })
 
             await asyncRemoveWalletAccounts(get($activeProfile.accounts).map((a) => a.id))
             await createAccount(`${localize('general.account')} 1`)
@@ -74,7 +80,7 @@
              */
             $activeProfile.accounts.set(oldAccounts)
             updateClientOptions(oldConfig)
-            updateProfile('settings.networkConfig', oldConfig)
+            updateActiveProfileSettings({ networkConfig: oldConfig })
 
             /**
              * NOTE: It is necessary to override the default locale paths

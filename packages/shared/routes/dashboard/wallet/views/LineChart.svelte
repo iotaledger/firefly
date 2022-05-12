@@ -10,14 +10,13 @@
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
-    import { updateProfile } from 'shared/lib/profile'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
     import { getAccountBalanceHistory } from 'shared/lib/wallet'
     import { selectedAccount } from '@core/account'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     let balanceHistory: BalanceHistory
     $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
@@ -97,7 +96,12 @@
         }
         // change to USD if previously selected currency is not in the list anymore
         if (!currencyDropdownItems.some(({ value }) => value === $activeProfile?.settings?.chartSelectors.currency)) {
-            updateProfile('settings.chartSelectors.currency', AvailableExchangeRates.USD)
+            updateActiveProfileSettings({
+                chartSelectors: {
+                    currency: AvailableExchangeRates.USD,
+                    timeframe: $activeProfile?.settings?.chartSelectors?.timeframe,
+                },
+            })
         }
 
         Object.values(WalletChartType).forEach((chartType) => {
@@ -113,7 +117,12 @@
     }
 
     function handleCurrencySelect({ value: currency }) {
-        updateProfile('settings.chartSelectors.currency', currency)
+        updateActiveProfileSettings({
+            chartSelectors: {
+                currency,
+                timeframe: $activeProfile?.settings?.chartSelectors?.timeframe,
+            },
+        })
     }
 
     function formatYAxis(value) {
@@ -177,7 +186,13 @@
                         label: localize(`charts.timeframe${TIMEFRAME_MAP[value]}`),
                         value,
                     }))}
-                    onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
+                    onSelect={(newTimeframe) =>
+                        updateActiveProfileSettings({
+                            chartSelectors: {
+                                currency: $activeProfile?.settings?.chartSelectors?.currency,
+                                timeframe: newTimeframe.value,
+                            },
+                        })}
                     contentWidth={true}
                 />
             </span>

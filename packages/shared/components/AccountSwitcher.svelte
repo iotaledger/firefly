@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { updateProfile } from '@lib/profile'
     import { selectedAccount } from '@core/account'
+    import { updateActiveProfile } from '@core/profile'
 
     export let accounts: WalletAccount[] = []
 
@@ -11,7 +11,7 @@
 
     function onClick() {
         modal?.toggle()
-        updateProfile('hasFinishedSingleAccountGuide', true)
+        updateActiveProfile({ hasFinishedSingleAccountGuide: true })
     }
 </script>
 

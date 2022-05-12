@@ -1,34 +1,32 @@
+import { localize } from '@core/i18n'
+import { IAuth, INodeInfo } from '@core/network'
+import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
+import { CreateAccountPayload } from '@iota/wallet'
+import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
+import tailwindConfig from 'shared/tailwind.config.js'
 import { get, writable } from 'svelte/store'
+import resolveConfig from 'tailwindcss/resolveConfig'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
-import { localize } from '@core/i18n'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { updateProfile } from './profile'
-import { WALLET_STARDUST, WalletApi, WALLET } from './shell/walletApi'
-import { SignerType, SyncAccountOptions, SyncedAccount, StardustAccount } from './typings/account'
+import { WalletApi, WALLET_STARDUST } from './shell/walletApi'
+import { SignerType, StardustAccount, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { IAuth, INodeInfo } from '@core/network'
-import { IBalanceOverview, isLedgerProfile, ProfileType } from '@core/profile'
+import { ProfileManager } from './typings/profileManager'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
-import { IWalletApi } from './typings/walletApi'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from 'shared/tailwind.config.js'
-import { CreateAccountPayload } from '@iota/wallet'
-import { IActorHandler } from '@lib/typings/bridge'
 import { WalletAccount } from './typings/walletAccount'
-import { ProfileManager } from './typings/profileManager'
-import { activeProfile } from '@core/profile'
+import { IWalletApi } from './typings/walletApi'
 
 const { createAccountManager, getAccount } = WALLET_STARDUST
 
@@ -405,10 +403,9 @@ export async function asyncSyncAccountOffline(account: WalletAccount): Promise<v
                 get(activeProfile)?.accounts.update((_accounts) =>
                     _accounts.map((a) => (a.id === _account.id ? _account : a))
                 )
-                updateProfile(
-                    'hiddenAccounts',
-                    (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
-                )
+                updateActiveProfile({
+                    hiddenAccounts: (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id),
+                })
             },
             onError() {
                 resolve()

@@ -15,9 +15,8 @@
         NetworkHealth,
     } from '@core/network'
     import { openPopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     let networkConfig: INetworkConfig =
         $activeProfile?.settings.networkConfig ||
@@ -31,7 +30,7 @@
 
     $: {
         updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
+        updateActiveProfileSettings({ networkConfig })
     }
 
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
@@ -71,7 +70,7 @@
                     if (networkConfig.nodes.length === 0) networkConfig.nodes = [node]
 
                     updateClientOptions(networkConfig)
-                    updateProfile('settings.networkConfig', networkConfig)
+                    updateActiveProfileSettings({ networkConfig })
 
                     setTimeout(() => {
                         /**

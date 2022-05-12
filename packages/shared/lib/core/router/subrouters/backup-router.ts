@@ -1,11 +1,9 @@
-import { get, writable } from 'svelte/store'
-
+import { updateNewProfile } from '@core/profile'
 import { mnemonic, strongholdPassword } from '@lib/app'
-import { backup, createAccount, storeMnemonic, generateAndStoreMnemonic } from '@lib/wallet'
 import { Platform } from '@lib/platform'
-import { updateProfile } from '@lib/profile'
 import { getDefaultStrongholdName } from '@lib/utils'
-
+import { backup, createAccount, generateAndStoreMnemonic, storeMnemonic } from '@lib/wallet'
+import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { BackupRoute } from '../enums'
 import { FireflyEvent } from '../types'
@@ -44,7 +42,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     if (dest) {
                         await backup(dest, get(strongholdPassword))
-                        updateProfile('lastStrongholdBackupTime', new Date())
+                        updateNewProfile({ lastStrongholdBackupTime: new Date() })
                     }
                 }
                 get(appRouter).next(event)

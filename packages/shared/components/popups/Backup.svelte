@@ -3,10 +3,10 @@
     import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { backup, setStrongholdPassword } from 'shared/lib/wallet'
     import { formatDate, Locale } from '@core/i18n'
+    import { updateActiveProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -31,7 +31,7 @@
             if (destination) {
                 busy = true
                 await backup(destination, password)
-                updateProfile('lastStrongholdBackupTime', new Date())
+                updateActiveProfile({ lastStrongholdBackupTime: new Date() })
                 closePopup()
             }
         } catch (e) {

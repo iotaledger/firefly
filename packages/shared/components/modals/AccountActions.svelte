@@ -4,13 +4,12 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, updateActiveProfile } from '@core/profile'
     import { selectedAccount, setSelectedAccount } from '@core/account'
 
     export let modal: Modal
@@ -45,7 +44,7 @@
                 hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
-                        updateProfile('hiddenAccounts', hiddenAccounts)
+                        updateActiveProfile({ hiddenAccounts: hiddenAccounts })
                     }
                     resetWalletRoute()
                     const nextSelectedAccount =
@@ -69,7 +68,7 @@
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
-                        updateProfile('hiddenAccounts', hiddenAccounts)
+                        updateActiveProfile({ hiddenAccounts: hiddenAccounts })
                     }
                     setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
                     resetWalletRoute()
@@ -83,7 +82,7 @@
         const idx = hiddenAccounts.indexOf($selectedAccount?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
-            updateProfile('hiddenAccounts', hiddenAccounts)
+            updateActiveProfile({ hiddenAccounts: hiddenAccounts })
         }
         resetWalletRoute()
     }

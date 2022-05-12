@@ -1,6 +1,6 @@
 import { WalletAccount } from '@lib/typings/walletAccount'
 import { get, writable } from 'svelte/store'
-import { IBalanceOverview, IProfile } from '../interfaces'
+import { IBalanceOverview, IProfile, IProfileSettings } from '../interfaces'
 import { persistedProfile } from './persisted-profile.store'
 
 export const activeProfile = writable<IProfile>({
@@ -26,6 +26,17 @@ export const activeProfile = writable<IProfile>({
     ...get(persistedProfile),
 })
 
+export function updateActiveProfile(payload: Partial<IProfile>): void {
+    activeProfile.update((state) => ({ ...state, ...payload }))
+}
+
+export function updateActiveProfileSettings(payload: Partial<IProfileSettings>): void {
+    activeProfile.update((state) => ({
+        ...state,
+        settings: { ...state?.settings, ...payload },
+    }))
+}
+
 export function loadPersistedProfileIntoActiveProfile(): void {
-    return activeProfile.update((state) => ({ ...state, ...get(persistedProfile) }))
+    activeProfile.update((state) => ({ ...state, ...get(persistedProfile) }))
 }

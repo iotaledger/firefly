@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { updateProfile } from 'shared/lib/profile'
     import { SecuritySettings } from '@core/router'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
-    import { isSoftwareProfile } from '@core/profile'
+    import { isSoftwareProfile, updateActiveProfile } from '@core/profile'
 
     const settings: {
         component: unknown
@@ -31,7 +30,7 @@
                 if (result) {
                     api.backup(result, password, {
                         onSuccess() {
-                            updateProfile('lastStrongholdBackupTime', new Date())
+                            updateActiveProfile({ lastStrongholdBackupTime: new Date() })
                             callback(false)
                         },
                         onError(err) {

@@ -7,11 +7,4 @@ export const selectedAccount = derived([selectedAccountId], ([$selectedAccountId
     get(get(activeProfile)?.accounts)?.find((acc) => acc.id === $selectedAccountId)
 )
 
-// TODO: Refactor out?
-// selectedAccountId?.subscribe((accountId) => {
-//     if (accountId) {
-//         updateProfile('lastUsedAccountId', accountId)
-//     }
-// })
-
 export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)

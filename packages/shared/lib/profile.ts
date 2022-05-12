@@ -22,6 +22,7 @@ import {
     MAX_PROFILE_NAME_LENGTH,
     newProfile,
     removeProfileFolder,
+    updateActiveProfile,
 } from '@core/profile'
 import { HistoryDataProps } from './typings/market'
 import { getOfficialNetworkConfig, INetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
@@ -48,7 +49,7 @@ export const migrateProfile = (): void => {
         oldProfile.networkType
     )
 
-    updateProfile('', migrateObjects<IPersistedProfile>(oldProfile, newProfile))
+    updateActiveProfile(migrateObjects<IPersistedProfile>(oldProfile, newProfile))
 }
 
 /**
@@ -61,46 +62,46 @@ export const migrateProfile = (): void => {
  * @returns {void}
  */
 // TODO: refactor this: https://codewithstyle.info/Deep-property-access-in-TypeScript/
-export const updateProfile = (
-    path: string,
-    value: ValuesOf<IPersistedProfile> | ValuesOf<IProfileSettings> | ValuesOf<INetworkConfig>
-): void => {
-    const _update = (_profile) => {
-        if (path === '') {
-            const isValidData =
-                /* eslint-disable no-prototype-builtins */
-                typeof value === 'object' && Object.keys(value).filter((k) => !_profile.hasOwnProperty(k)).length === 0
-            /* eslint-disable @typescript-eslint/ban-types */
-            return isValidData ? { ..._profile, ...(value as object) } : _profile
-        }
+// export const updateProfile = (
+//     path: string,
+//     value: ValuesOf<IPersistedProfile> | ValuesOf<IProfileSettings> | ValuesOf<INetworkConfig>
+// ): void => {
+//     const _update = (_profile) => {
+//         if (path === '') {
+//             const isValidData =
+//                 /* eslint-disable no-prototype-builtins */
+//                 typeof value === 'object' && Object.keys(value).filter((k) => !_profile.hasOwnProperty(k)).length === 0
+//             /* eslint-disable @typescript-eslint/ban-types */
+//             return isValidData ? { ..._profile, ...(value as object) } : _profile
+//         }
 
-        const pathList = path.split('.')
+//         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof IPersistedProfile | keyof IProfileSettings, level: number) => {
-            if (level === pathList.length - 1) {
-                a[b] = value
-                return value
-            }
-            return a[b]
-        }, _profile)
+//         pathList.reduce((a, b: keyof IPersistedProfile | keyof IProfileSettings, level: number) => {
+//             if (level === pathList.length - 1) {
+//                 a[b] = value
+//                 return value
+//             }
+//             return a[b]
+//         }, _profile)
 
-        return _profile
-    }
+//         return _profile
+//     }
 
-    if (get(newProfile)) {
-        newProfile.update((_profile) => _update(_profile))
-    } else {
-        profiles.update((_profiles) =>
-            _profiles.map((_profile) => {
-                if (_profile.id === get(activeProfile)?.id) {
-                    return _update(_profile)
-                }
+//     if (get(newProfile)) {
+//         newProfile.update((_profile) => _update(_profile))
+//     } else {
+//         profiles.update((_profiles) =>
+//             _profiles.map((_profile) => {
+//                 if (_profile.id === get(activeProfile)?.id) {
+//                     return _update(_profile)
+//                 }
 
-                return _profile
-            })
-        )
-    }
-}
+//                 return _profile
+//             })
+//         )
+//     }
+// }
 
 /**
  * Set profile type for back compatibility purposes
@@ -112,7 +113,7 @@ export const updateProfile = (
  * @returns {void}
  */
 export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
-    let accountType = null
+    let accountType: ProfileType
     if (accounts.length) {
         switch (accounts[0]?.signerType?.type) {
             case 'Stronghold':
@@ -127,7 +128,7 @@ export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
         }
     }
     if (accountType) {
-        updateProfile('type', accountType)
+        updateActiveProfile({ type: accountType })
     }
 }
 
