@@ -63,15 +63,15 @@
                 return []
             }
 
-            if ($activeProfile.settings.showHiddenAccounts) {
+            if ($activeProfile?.settings?.showHiddenAccounts) {
                 const sortedAccounts = $accounts.sort((a, b) => a.meta.index - b.meta.index)
 
                 // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
                 // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                if (sortedAccounts.length > 1 && $activeProfile?.hiddenAccounts) {
                     const lastAccount = sortedAccounts[sortedAccounts.length - 1]
                     if (
-                        $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                        $activeProfile?.hiddenAccounts.includes(lastAccount.id) &&
                         lastAccount.rawIotaBalance === 0 &&
                         lastAccount.messages.length === 0
                     ) {
@@ -81,7 +81,7 @@
                 return sortedAccounts
             }
             return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
                 .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
@@ -93,7 +93,7 @@
                 return []
             }
             return $accounts
-                .filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id))
+                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
                 .sort((a, b) => a.meta.index - b.meta.index)
         }
     )
@@ -280,8 +280,8 @@
     //     const shouldDisplayMigrationPopup =
     //         // Only display popup once the user successfully migrates the first account index
     //         $isLedgerProfile &&
-    //         $activeProfile.ledgerMigrationCount > 0 &&
-    //         !$activeProfile.hasVisitedDashboard &&
+    //         $activeProfile?.ledgerMigrationCount > 0 &&
+    //         !$activeProfile?.hasVisitedDashboard &&
     //         !$popupState.active
     //     if (shouldDisplayMigrationPopup) {
     //         updateProfile('hasVisitedDashboard', true)
@@ -312,11 +312,11 @@
     }
 
     $: if ($hasLoadedAccounts) {
-        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
     }
 
-    $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
-    $: if (!busy && $hasLoadedAccounts && showSingleAccountGuide) {
+    $: showSingleAccountGuide = !busy && $loggedIn && !$activeProfile?.hasFinishedSingleAccountGuide
+    $: if (showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
 </script>

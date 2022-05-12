@@ -9,7 +9,7 @@ export interface IPersistedProfile {
     type: ProfileType
     networkProtocol: NetworkProtocol
     networkType: NetworkType
-    lastStrongholdBackupTime: Date | null
+    lastStrongholdBackupTime: Date
     settings: IProfileSettings
     hiddenAccounts?: string[]
     isDeveloperProfile: boolean

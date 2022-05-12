@@ -830,12 +830,12 @@ export const processMigratedTransactions = (accountId: string, messages: Message
     //             const _activeProfile = get(activeProfile)
     //             if (
     //                 _activeProfile &&
-    //                 _activeProfile.migratedTransactions &&
-    //                 _activeProfile.migratedTransactions.length
+    //                 _activeProfile?.migratedTransactions &&
+    //                 _activeProfile?.migratedTransactions.length
     //             ) {
     //                 const { funds } = message.payload.data.essence.receipt.data
     //                 const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
-    //                 const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
+    //                 const updatedMigratedTransactions = _activeProfile?.migratedTransactions.filter(
     //                     (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
     //                 )
     //                 updateProfile('migratedTransactions', updatedMigratedTransactions)
@@ -844,7 +844,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
     //     }
     // })
     // const _activeProfile = get(activeProfile)
-    // if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+    // if (_activeProfile?.migratedTransactions && _activeProfile?.migratedTransactions.length) {
     //     // For pre-snapshot migrations, there will be no messages
     //     addresses.forEach((address) => {
     //         const { outputs } = address

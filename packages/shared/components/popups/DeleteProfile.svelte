@@ -71,7 +71,7 @@
              * CAUTION: The profile must be removed from the
              * app's list of profiles that lives as a Svelte store.
              */
-            removeProfile(_activeProfile.id)
+            removeProfile(_activeProfile?.id)
 
             /**
              * NOTE: If there are no more profiles then the user should be
@@ -85,7 +85,7 @@
              * CAUTION: This removes the actual directory for the profile,
              * so it should occur last.
              */
-            await removeProfileFolder(_activeProfile.id)
+            await removeProfileFolder(_activeProfile?.id)
         } catch (err) {
             if (err && err?.type && err?.type == 'AccountNotEmpty') {
                 showAppNotification({

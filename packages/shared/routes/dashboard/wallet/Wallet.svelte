@@ -76,7 +76,7 @@
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
             // TODO: Remove old api
-            // removeEventListeners($activeProfile.id)
+            // removeEventListeners($activeProfile?.id)
 
             // initialiseListeners()
 

@@ -47,7 +47,7 @@
 
     const cleanNodeFormData = (): void => {
         const _nodes = constructNodes()
-        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
+        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile?.isDeveloperProfile)
         if (validErr) {
             addressError = localize(validErr)
         }
@@ -57,7 +57,7 @@
         if (!id) {
             addressError = localize('error.network.notReachable')
         } else if (id !== network.id) {
-            if ($activeProfile.isDeveloperProfile) {
+            if ($activeProfile?.isDeveloperProfile) {
                 newNetwork = getNetwork($activeProfile?.networkProtocol, $activeProfile?.networkType, id)
                 isNetworkSwitch = true
             } else {
@@ -97,7 +97,7 @@
         if (!addressError) {
             if (!isNetworkSwitch) {
                 // TODO refactor
-                // await updateNetworkStatus(get($activeProfile.accounts)[0]?.id, {
+                // await updateNetworkStatus(get($activeProfile?.accounts)[0]?.id, {
                 //     url: nodeUrl,
                 //     auth: optNodeAuth,
                 //     isPrimary: node?.isPrimary,

@@ -52,7 +52,7 @@
             return
         }
 
-        const oldAccounts = get($activeProfile.accounts)
+        const oldAccounts = get($activeProfile?.accounts)
         const oldConfig = $activeProfile?.settings?.networkConfig
         const newConfig = {
             ...oldConfig,
@@ -66,7 +66,7 @@
             updateClientOptions(newConfig)
             updateActiveProfileSettings({ networkConfig: newConfig })
 
-            await asyncRemoveWalletAccounts(get($activeProfile.accounts).map((a) => a.id))
+            await asyncRemoveWalletAccounts(get($activeProfile?.accounts).map((a) => a.id))
             await createAccount(`${localize('general.account')} 1`)
             await logout()
         } catch (err) {
@@ -78,7 +78,7 @@
              * (namely client options, network config, account data,
              * etc.)
              */
-            $activeProfile.accounts.set(oldAccounts)
+            $activeProfile?.accounts.set(oldAccounts)
             updateClientOptions(oldConfig)
             updateActiveProfileSettings({ networkConfig: oldConfig })
 

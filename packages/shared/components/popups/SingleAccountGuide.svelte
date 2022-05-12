@@ -7,7 +7,7 @@
 
     let video = null
 
-    function onClick() {
+    function onClick(): void {
         closePopup()
         updateActiveProfile({ hasFinishedSingleAccountGuide: true })
     }

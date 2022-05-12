@@ -16,7 +16,7 @@
     <div class="mb-6 flex flex-col items-center">
         <Text secondary classes="mb-6 text-xs">
             {localize('general.myNetworkAddress', {
-                values: { networkName: $activeProfile.settings.networkConfig.network.name },
+                values: { networkName: $activeProfile?.settings.networkConfig.network.name },
             })}
         </Text>
         <div class="w-full flex flex-col p-4 items-center rounded-lg bg-gray-50">

@@ -20,13 +20,9 @@ export function addProfile(newProfile: IPersistedProfile): void {
  * @returns {void}
  */
 export function saveProfile(profileToPersist: IPersistedProfile): void {
-    profiles.update((state) => {
-        const updatedState = state.map((profile) => (profile.id === profileToPersist.id ? profileToPersist : profile))
-        if (!updatedState.includes(profileToPersist)) {
-            updatedState.push(profileToPersist)
-        }
-        return updatedState
-    })
+    profiles.update((state) =>
+        state.map((profile) => (profile.id === profileToPersist.id ? profileToPersist : profile))
+    )
 }
 
 /**

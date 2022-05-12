@@ -72,11 +72,21 @@
         document.dir = $localeDirection
     }
 
-    $: $activeProfileId, Platform.updateActiveProfile($activeProfileId)
+    // When the activeProfileId changes persistedProfile store will
+    // be derived from the matching profile in the persisted profiles store
+    // once this has been derived we can load the persisted properties into
+    // the activeProfile store
     $: $persistedProfile, loadPersistedProfileIntoActiveProfile()
+
+    // When the activeProfile changes we should call the saveActiveProfile action
+    // to save any of the persisted properties in the matching profile from
+    // the persisted profiles store
     $: $activeProfile, saveActiveProfile()
+
+    // TODO: Set this in login action
+    $: Platform.updateActiveProfile($activeProfileId)
     // TODO: Set this in switch account action
-    $: $selectedAccountId, updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
+    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     let splash = true
     let settings = false

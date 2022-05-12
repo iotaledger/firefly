@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
-    import { profiles, activeProfileId, clearActiveProfile } from '@core/profile'
+    import { profiles, activeProfileId } from '@core/profile'
 
     export let locale: Locale
 
@@ -15,8 +15,6 @@
         loginRouter = new LoginRouter()
         if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
             loginRouter.next()
-        } else {
-            clearActiveProfile()
         }
     })
 

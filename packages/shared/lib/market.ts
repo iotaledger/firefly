@@ -1,4 +1,4 @@
-import { activeProfile } from '@core/profile'
+import { activeProfile, persistedProfile } from '@core/profile'
 import Validator from 'shared/lib/validator'
 import { get, writable } from 'svelte/store'
 import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'
@@ -174,9 +174,9 @@ function processMarketData(marketData) {
 
 export function addProfileCurrencyPriceData(): void {
     const profile = get(activeProfile)
-    if (profile) {
+    if (profile?.settings?.currency) {
         // get selected profile currency and add its estimated history
-        const profileCurrency: string = profile?.settings?.currency.toLowerCase()
+        const profileCurrency = profile.settings.currency.toLowerCase()
         if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]

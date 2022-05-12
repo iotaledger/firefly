@@ -9,7 +9,7 @@
     let modal: Modal
     let isModalOpened: boolean
 
-    function onClick() {
+    function onClick(): void {
         modal?.toggle()
         updateActiveProfile({ hasFinishedSingleAccountGuide: true })
     }

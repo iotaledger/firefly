@@ -72,7 +72,7 @@ export async function loadAccounts(): Promise<void> {
     }
 }
 
-// move to account module
+// TODO: move to account module
 export async function tryCreateAccount(alias: string, color: string, onComplete: (err?) => unknown): Promise<void> {
     const _create = async (): Promise<unknown> => {
         try {
@@ -113,6 +113,10 @@ export async function tryCreateAccount(alias: string, color: string, onComplete:
  * @returns {void}
  */
 export function setActiveProfile(id: string): void {
+    // We have a reactive store which will pull in the persisted profile
+    // data when the activeProfileId is set. When the data has been loaded
+    // we load the persisted properties into the activeProfile store
+    // with default values for the additional properties
     activeProfileId.set(id)
 }
 
@@ -125,20 +129,8 @@ export function clearActiveProfile(): void {
     activeProfileId.set(null)
 }
 
-export function resetActiveProfile(): void {
-    const { balanceOverview, accounts, hasLoadedAccounts, internalTransfersInProgress } = get(activeProfile)
-    balanceOverview.set({
-        incoming: '0 Mi',
-        incomingRaw: 0,
-        outgoing: '0 Mi',
-        outgoingRaw: 0,
-        balance: '0 Mi',
-        balanceRaw: 0,
-        balanceFiat: '$ 0.00',
-    })
-    accounts.set([])
-    hasLoadedAccounts.set(false)
-    internalTransfersInProgress.set({})
+// TODO: move this out of profile module
+export function resetDashboardState(): void {
     setSelectedAccount(null)
     selectedMessage.set(null)
     isTransferring.set(false)
@@ -153,22 +145,24 @@ export function resetActiveProfile(): void {
 
 export function saveActiveProfile(): void {
     const _activeProfile = get(activeProfile)
-    if (_activeProfile?.id) {
+    if (_activeProfile) {
+        // activeProfile contains more properties that IPersistedProfile
+        // so we need to destructure only the properties that we want to persist
         const profileToPersist: IPersistedProfile = {
-            id: _activeProfile.id,
-            name: _activeProfile.name,
-            type: _activeProfile.type,
-            networkProtocol: _activeProfile.networkProtocol,
-            networkType: _activeProfile.networkType,
-            lastStrongholdBackupTime: _activeProfile.lastStrongholdBackupTime,
-            settings: _activeProfile.settings,
-            isDeveloperProfile: _activeProfile.isDeveloperProfile,
-            ...(_activeProfile.hiddenAccounts && { hiddenAccounts: _activeProfile.hiddenAccounts }),
-            ...(_activeProfile.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile.hasVisitedDashboard }),
-            ...(_activeProfile.lastUsedAccountId && { lastUsedAccountId: _activeProfile.lastUsedAccountId }),
-            ...(_activeProfile.accountMetadata && { accountMetadata: _activeProfile.accountMetadata }),
-            ...(_activeProfile.hasFinishedSingleAccountGuide && {
-                hasFinishedSingleAccountGuide: _activeProfile.hasFinishedSingleAccountGuide,
+            id: _activeProfile?.id,
+            name: _activeProfile?.name,
+            type: _activeProfile?.type,
+            networkProtocol: _activeProfile?.networkProtocol,
+            networkType: _activeProfile?.networkType,
+            lastStrongholdBackupTime: _activeProfile?.lastStrongholdBackupTime,
+            settings: _activeProfile?.settings,
+            isDeveloperProfile: _activeProfile?.isDeveloperProfile,
+            ...(_activeProfile?.hiddenAccounts && { hiddenAccounts: _activeProfile?.hiddenAccounts }),
+            ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
+            ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
+            ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
+            ...(_activeProfile?.hasFinishedSingleAccountGuide && {
+                hasFinishedSingleAccountGuide: _activeProfile?.hasFinishedSingleAccountGuide,
             }),
         }
         saveProfile(profileToPersist)
@@ -184,10 +178,10 @@ export function saveActiveProfile(): void {
 export function migrateActiveProfile(): void {
     const _activeProfile = get(activeProfile)
     const newProfileDefaults = buildNewProfile(
-        _activeProfile.name,
-        _activeProfile.isDeveloperProfile,
-        _activeProfile.networkProtocol,
-        _activeProfile.networkType
+        _activeProfile?.name,
+        _activeProfile?.isDeveloperProfile,
+        _activeProfile?.networkProtocol,
+        _activeProfile?.networkType
     )
 
     updateActiveProfile(migrateObjects<IPersistedProfile>(_activeProfile, newProfileDefaults))

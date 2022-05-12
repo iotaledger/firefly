@@ -31,13 +31,13 @@
         })
         appVars.push({
             label: 'views.settings.currency.title',
-            value: $activeProfile.settings.currency,
+            value: $activeProfile?.settings.currency,
         })
         appVars.push({
             label: 'views.settings.networkConfiguration.nodeConfiguration.title',
             value: locale(
                 `views.settings.networkConfiguration.nodeConfiguration.${
-                    $activeProfile.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+                    $activeProfile?.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
                 }`
             ),
         })

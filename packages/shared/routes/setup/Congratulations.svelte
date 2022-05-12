@@ -48,7 +48,7 @@
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
 
-                // updateProfile('ledgerMigrationCount', $activeProfile.ledgerMigrationCount + 1)
+                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
             } else {
                 localizedBody = 'softwareMigratedBody'
             }
@@ -79,13 +79,13 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.id)
+                getProfileDataPath($activeProfile?.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
+                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile?.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  `${$activeProfile?.id}-${LOG_FILE_NAME}`
                               )
                     )
                     .then((result) => {

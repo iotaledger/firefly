@@ -9,7 +9,6 @@ import { removeProfileFolder } from '../utils'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
- *
  * @method createNewProfile
  * @param {string} profileName
  * @param {boolean} isDeveloperProfile
@@ -24,18 +23,14 @@ export function createNewProfile(
 ): void {
     const profile = buildNewProfile(profileName, isDeveloperProfile, networkProtocol, networkType)
     newProfile.set(profile)
-    // not sure if we need to do this when creating a new profile
-    // activeProfileId.set(profile.id)
 }
 
 /**
  * Deletes a new profile
- *
  * @method deleteNewProfile
- *
  * @returns {void}
  */
-export const deleteNewProfile = async (): Promise<void> => {
+export async function deleteNewProfile(): Promise<void> {
     const profile = get(newProfile)
     if (profile) {
         try {
@@ -48,7 +43,6 @@ export const deleteNewProfile = async (): Promise<void> => {
         destroyProfileManager()
     }
     newProfile.set(null)
-    activeProfileId.set(null)
 }
 
 /**
@@ -57,7 +51,7 @@ export const deleteNewProfile = async (): Promise<void> => {
  * @param {ProfileType} type
  * @returns {void}
  */
-export const setNewProfileType = (type: ProfileType): void => {
+export function setNewProfileType(type: ProfileType): void {
     type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
     updateNewProfile({ type })
 }

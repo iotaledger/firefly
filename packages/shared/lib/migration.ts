@@ -647,8 +647,8 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
 
     // updateProfile(
     //     'migratedTransactions',
-    //     _activeProfile.migratedTransactions
-    //         ? [..._activeProfile.migratedTransactions, migratedTransaction]
+    //     _activeProfile?.migratedTransactions
+    //         ? [..._activeProfile?.migratedTransactions, migratedTransaction]
     //         : [migratedTransaction]
     // )
 }

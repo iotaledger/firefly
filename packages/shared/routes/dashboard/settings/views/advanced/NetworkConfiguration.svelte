@@ -102,7 +102,7 @@
     <Text type="h4" classes="mb-3">{localize('views.settings.networkConfiguration.title2')}</Text>
     <Text type="p" secondary classes="mb-3">
         {localize(
-            `views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`
+            `views.settings.networkConfiguration.description.${$activeProfile?.isDeveloperProfile ? 'dev' : 'nonDev'}`
         )}
     </Text>
     {#if $activeProfile?.isDeveloperProfile}
