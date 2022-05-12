@@ -5,7 +5,7 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
-    import { profiles, activeProfileId } from '@core/profile'
+    import { profiles, activeProfileId, loadPersistedProfileIntoActiveProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -13,7 +13,8 @@
 
     onMount(() => {
         loginRouter = new LoginRouter()
-        if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
+        if ($activeProfileId && $profiles?.find((p) => p.id === $activeProfileId)) {
+            loadPersistedProfileIntoActiveProfile($activeProfileId)
             loginRouter.next()
         }
     })

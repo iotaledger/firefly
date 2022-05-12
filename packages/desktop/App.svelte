@@ -37,15 +37,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
     import { get } from 'svelte/store'
-    import {
-        activeProfile,
-        activeProfileId,
-        saveActiveProfile,
-        cleanupEmptyProfiles,
-        updateActiveProfile,
-    } from '@core/profile'
-    import { Platform } from '@lib/platform'
-    import { selectedAccountId } from '@core/account'
+    import { cleanupEmptyProfiles } from '@core/profile'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -69,16 +61,6 @@
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
     }
-
-    // When the activeProfile changes we should call the saveActiveProfile action
-    // to save any of the persisted properties in the matching profile from
-    // the persisted profiles store
-    $: $activeProfile, saveActiveProfile()
-
-    // TODO: Set this in login action
-    $: Platform.updateActiveProfile($activeProfileId)
-    // TODO: Set this in switch account action
-    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     let splash = true
     let settings = false

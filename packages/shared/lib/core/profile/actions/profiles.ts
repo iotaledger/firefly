@@ -14,9 +14,9 @@ export async function cleanupEmptyProfiles(): Promise<void> {
         const profileDataPath = await getWalletDataPath()
         const storedProfiles = await Platform.listProfileFolders(profileDataPath)
 
-        profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.id)))
+        profiles.update((_profiles) => _profiles.filter((_profile) => storedProfiles.includes(_profile.id)))
 
-        const appProfiles = get(profiles).map((p) => p.id)
+        const appProfiles = get(profiles).map((_profile) => _profile.id)
         for (const storedProfile of storedProfiles) {
             if (!appProfiles.includes(storedProfile)) {
                 await removeProfileFolder(storedProfile)

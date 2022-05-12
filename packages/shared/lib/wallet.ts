@@ -201,7 +201,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
     const accounts = get(get(activeProfile)?.accounts)
     try {
         const createdAccount = await createStardustAccount({
-            alias: alias || `${localize('general.account')} ${accounts.length + 1}`,
+            alias: alias || `${localize('general.account')} ${(accounts?.length ?? 0) + 1}`,
             coinType: 4219,
         })
         const stardustAccount = await getAccount(createdAccount.meta.index)
@@ -213,7 +213,10 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
             outgoing: 0,
             depositAddress,
         })
-        get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+
+        if (get(activeProfile)?.id) {
+            get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
+        }
 
         // setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
         return preparedAccount
@@ -222,7 +225,7 @@ export async function createAccount(alias?: string, color?: string): Promise<Wal
     }
 }
 
-const getSignerType = (profileType: ProfileType): SignerType | undefined => {
+const getSignerType = (profileType: ProfileType): SignerType => {
     if (!profileType) return undefined
 
     switch (profileType) {

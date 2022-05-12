@@ -2,6 +2,7 @@ import { setSelectedAccount } from '@core/account'
 import { activeProfile, isSoftwareProfile } from '@core/profile'
 import { getAccounts } from '@core/profile-manager'
 import { accountRouter } from '@core/router'
+import { Platform } from '@lib/platform'
 import { openPopup } from '@lib/popup'
 import { WalletAccount } from '@lib/typings/walletAccount'
 import { migrateObjects } from '@lib/utils'
@@ -31,6 +32,7 @@ export function loadPersistedProfileIntoActiveProfile(profileId: string): void {
     if (persistedProfile) {
         setActiveProfileId(profileId)
         setActiveProfile(persistedProfile)
+        Platform.updateActiveProfile(profileId)
     }
 }
 
@@ -130,7 +132,7 @@ export function resetDashboardState(): void {
 
 export function saveActiveProfile(): void {
     const _activeProfile = get(activeProfile)
-    if (_activeProfile) {
+    if (_activeProfile?.id) {
         // activeProfile contains more properties that IPersistedProfile
         // so we need to destructure only the properties that we want to persist
         const profileToPersist: IPersistedProfile = {
