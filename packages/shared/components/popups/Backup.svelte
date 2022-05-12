@@ -30,8 +30,10 @@
                     .then((result) => {
                         if (result) {
                             busy = true
+                            Platform.saveStrongholdBackup({ allowAccess: true })
                             api.backup(result, password, {
                                 onSuccess() {
+                                    Platform.saveStrongholdBackup({ allowAccess: false })
                                     updateProfile('lastStrongholdBackupTime', new Date())
                                     busy = false
                                     closePopup()

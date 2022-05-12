@@ -31,6 +31,7 @@
         "webpack-dev-server": "^3.11.3"
     },
     "dependencies": {
+        "capacitor-secure-filesystem-access": "./packages/mobile/capacitor/plugins/secure-filesystem-access/",
         "@capacitor/splash-screen": "^1.2.2",
         "@capacitor-community/barcode-scanner": "^2.0.1",
         "@capacitor-community/privacy-screen": "^2.1.1",
