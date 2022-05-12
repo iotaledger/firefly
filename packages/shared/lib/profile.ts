@@ -1,36 +1,6 @@
-import { IProfile, ProfileType, updateActiveProfile } from '@core/profile'
+import { IProfile } from '@core/profile'
 import { AccountColors } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
-import { WalletAccount } from './typings/walletAccount'
-
-/**
- * Set profile type for back compatibility purposes
- *
- * @method setMissingProfileType
- *
- * @param {WalletAccount[]} accounts
- *
- * @returns {void}
- */
-export const setMissingProfileType = (accounts: WalletAccount[] = []): void => {
-    let accountType: ProfileType
-    if (accounts.length) {
-        switch (accounts[0]?.signerType?.type) {
-            case 'Stronghold':
-                accountType = ProfileType.Software
-                break
-            case 'LedgerNano':
-                accountType = ProfileType.Ledger
-                break
-            case 'LedgerNanoSimulator':
-                accountType = ProfileType.LedgerSimulator
-                break
-        }
-    }
-    if (accountType) {
-        updateActiveProfile({ type: accountType })
-    }
-}
 
 /*
  * Maps accounts key values creating or updating existing objects with param profileAccount searching by account id

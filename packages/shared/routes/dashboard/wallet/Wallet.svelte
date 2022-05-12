@@ -7,7 +7,6 @@
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { setMissingProfileType } from 'shared/lib/profile'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
         api,
@@ -40,14 +39,6 @@
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
-    }
-
-    // TODO: move to dashboard or lib if needed?
-    $: if ($hasLoadedAccounts) {
-        // update profileType if it is missing
-        if (!$activeProfile?.type) {
-            setMissingProfileType($accounts)
-        }
     }
 
     async function _continue(): Promise<void> {
