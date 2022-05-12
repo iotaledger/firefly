@@ -1,29 +1,49 @@
 /**
  * NOTE: This mocks the localize function in i18n.ts. Any locale data
- * that is used in a test must also be initialized here in this flat
- * format.
+ * that has a parameter must have its own logic.
  */
 
-// TODO: Write a function later to flatten all of the object
-//  property paths in locales/en.json.
-const getLocaleData = (value?: number) => {
-    const locales = {
-        'times.day': 'day',
-        'times.hour': 'hour',
-        'times.minute': 'minute',
-        'times.second': 'second',
+// TODO: create a better logic for locales with parameters
+
+import json from 'shared/locales/en.json'
+
+function flattenObject(object: object, parent?: string, result = {}) {
+    for (const key of Object.keys(object)) {
+        const propName = parent ? parent + '.' + key : key
+        if (typeof object[key] === 'object') {
+            flattenObject(object[key], propName, result)
+        } else {
+            result[propName] = object[key]
+        }
+    }
+    return result
+}
+
+function getLocaleData(values?: any) {
+    const locales = flattenObject(json)
+
+    if (values?.time != undefined) {
+        const timeLocales = {
+            'times.day': 'day',
+            'times.hour': 'hour',
+            'times.minute': 'minute',
+            'times.second': 'second',
+        }
+
+        Object.keys(timeLocales).forEach((key) => {
+            if (values.time > 1 || values.time === 0) {
+                locales[key] = `${values.time} ${timeLocales[key]}s`
+            } else {
+                locales[key] = `${values.time} ${timeLocales[key]}`
+            }
+        })
     }
 
-    if (value !== undefined) {
-        return Object.keys(locales).reduce((acc, key) => {
-            if (value > 1 || value === 0) {
-                acc[key] = `${value} ${locales[key]}s`
-            } else {
-                acc[key] = `${value} ${locales[key]}`
-            }
-
-            return acc
-        }, {})
+    if (values?.prefix != undefined) {
+        locales['error.send.wrongAddressPrefix'] = locales['error.send.wrongAddressPrefix'].replace(
+            '{prefix}',
+            values.prefix
+        )
     }
 
     return locales
@@ -31,8 +51,8 @@ const getLocaleData = (value?: number) => {
 
 jest.mock('../../core/i18n', () => ({
     __esModule: true,
-    locale: (key: string, optional?: { values: { time: number } }): string =>
-        getLocaleData(optional.values.time)[key] || '',
-    localize: (key: string, optional?: { values: { time: number } }): string =>
-        getLocaleData(optional.values.time)[key] || '',
+    locale: (key: string, optional?: { values: { [key in any]: number | string } }): string =>
+        getLocaleData(optional?.values)[key] || '',
+    localize: (key: string, optional?: { values: { [key in any]: number | string } }): string =>
+        getLocaleData(optional?.values)[key] || '',
 }))
