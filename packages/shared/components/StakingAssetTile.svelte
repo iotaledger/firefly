@@ -26,6 +26,7 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
+    import { activeProfile } from 'shared/lib/profile'
     import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let asset: Asset
@@ -48,6 +49,7 @@
 
     const FIAT_PLACEHOLDER = '---'
 
+    $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
     $: isActivelyStaking = getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)
     $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isParticipationPossible(stakingEventState)
