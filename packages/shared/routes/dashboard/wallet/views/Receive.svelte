@@ -13,7 +13,7 @@
     let wrapperWidth = 0
 
     // calculate the size of the QR code based on the available space and the max size
-    $: qrSize = Math.max(Math.min(wrapperWidth - 250, wrapperHeight - 250, 200), 0)
+    $: qrSize = Math.max(Math.min(wrapperWidth - 225, wrapperHeight - 225, 200), 0)
 
     const generateNewAddress = (): void => {
         onGenerateAddress($selectedAccount.id)
