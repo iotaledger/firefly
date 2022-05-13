@@ -10,9 +10,9 @@
             "checkbox": "Я прочитав і приймаю Політику конфіденційності та Умови надання послуг"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Звіти про помилки",
+            "body": "Допоможіть розробникам покращити Firefly, автоматично відправляючи діагностичні дані під час помилки або аварійне завершення роботи.",
+            "checkbox": "Надсилайте звіти про аварійне завершення роботи до IOTA Foundation"
         },
         "appearance": {
             "title": "Зовнішній вигляд",
@@ -27,10 +27,10 @@
                 "nonFirst": "Почніть з назви вашого профілю."
             },
             "addMore": "Ви можете додати більше профілів пізніше.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Розширені опції",
             "developer": {
                 "label": "Профіль розробника",
-                "info": "Connect to the devnet or a private network"
+                "info": "Приєднатися до devnet або приватної мережі"
             }
         },
         "setup": {
@@ -792,7 +792,7 @@
         "crashReporting": {
             "title": "Crash reporting",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "Надсилайте звіти про аварійне завершення роботи до IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Умови Використання",
@@ -990,7 +990,7 @@
         "profiles": "Профілі",
         "dev": "Розробник",
         "createAccount": "Створити гаманець",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Додати гаманець",
         "accountName": "Назва гаманця",
         "latestTransactions": "Останні транзакції",
         "transactions": "Транзакції",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Непроставлені кошти",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
-        "total": "Total: {balance}"
+        "total": "Загальний: {balance}"
     },
     "dates": {
         "today": "Сьогодні",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "Не вдалося знайти ставки.",
             "cannotVisitAirdropWebsite": "Не вдається відкрити веб-сайт {airdrop}.",
             "invalidStakingEventId": "Недійсний ідентифікатор події стекінгу.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Не вдалося отримати попередні нагороди, будь ласка, перевірте налаштування брандмауера."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"
