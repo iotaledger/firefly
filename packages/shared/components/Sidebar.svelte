@@ -16,8 +16,8 @@
         Drawer,
         Icon,
         Modal,
-        NetworkIndicator,
         PingingBadge,
+        NetworkIndicatorModal,
         ProfileActionsModal,
         SidebarTab,
         Text,
@@ -38,8 +38,7 @@
     import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import { Settings } from 'shared/routes'
     import { selectedAccountIdStore } from 'shared/lib/wallet'
-
-    export let locale: Locale
+    import { localize } from '@core/i18n'
 
     let networkModal: Modal
     let profileModal: Modal
@@ -84,19 +83,19 @@
     let sidebarTabs: SidebarTabType[] = [
         {
             icon: 'wallet',
-            label: locale('tabs.wallet'),
+            label: 'wallet',
             route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
-            label: locale('tabs.staking'),
+            label: 'staking',
             route: DashboardRoute.Staking,
             onClick: openStaking,
         },
         {
             icon: 'policy',
-            label: locale('tabs.governance'),
+            label: localize('tabs.governance'),
             route: DashboardRoute.Governance,
             onClick: openGovernance,
         },
@@ -185,7 +184,7 @@
             >
                 <Icon icon="arrow-left" classes="absolute left-6 text-gray-500 text-blue-500" />
                 <Text type="h4" classes="text-center">
-                    {locale(
+                    {localize(
                         $settingsRoute === SettingsRoute.Init
                             ? 'general.yourWallets'
                             : `views.settings.${$settingsRoute}.title`
@@ -205,7 +204,7 @@
                     <Text type="h4">John Doe</Text>
                 </div>
             {/if}
-            <Settings {locale} />
+            <Settings />
         </div>
     </Drawer>
 {:else}
@@ -240,8 +239,8 @@
                 </button>
             </span>
         </nav>
-        <NetworkIndicator bind:modal={networkModal} {locale} />
-        <ProfileActionsModal bind:modal={profileModal} {locale} />
+        <NetworkIndicatorModal bind:modal={networkModal} />
+        <ProfileActionsModal bind:modal={profileModal} />
     </aside>
 {/if}
 
