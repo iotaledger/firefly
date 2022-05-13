@@ -16,6 +16,7 @@
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
+    import { appSettings } from '@lib/appSettings'
 
     export let onCreateAccount = (..._: any[]): void => {}
     export let classes: string
@@ -27,6 +28,14 @@
 
     $: $dashboardRoute, $settingsRoute, $governanceRoute, checkToShowBackButton()
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+
+    let backButtonText = localize('actions.back')
+
+    function updateBackButtonText(): void {
+        backButtonText = localize('actions.back')
+    }
+
+    $: $appSettings, updateBackButtonText()
 
     onMount(async () => {
         os = await Platform.getOS()
@@ -62,7 +71,7 @@
         <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
             <div class="flex items-center space-x-2 ">
                 <Icon width="18" icon="arrow-left" classes="text-gray-800 dark:text-gray-500" />
-                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{localize('actions.back')}</Text>
+                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{backButtonText}</Text>
             </div>
         </button>
     {/if}
