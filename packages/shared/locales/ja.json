@@ -462,7 +462,7 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
+                "networkOperational": "ネットワークは正常に機能しています",
                 "networkDegraded": "ネットワークが劣化しました",
                 "networkDown": "ネットワーク接続が切断されました",
                 "status": "ステータス",
@@ -519,7 +519,7 @@
                 "headers": {
                     "upcoming": "後で確認する",
                     "commencing": "事前ステーキングは開いています",
-                    "holding": "{duration} of staking left",
+                    "holding": "ステーキング残り{duration}",
                     "ended": "ステーキングは終了しました",
                     "inactive": "ステーキングイベントが検出されませんでした"
                 },
@@ -530,8 +530,8 @@
                     "holdingAndNotStaking": "{token} トークンをステークして10秒ごとに報酬を受け取ります。",
                     "endedAndDidStake": "ネットワークが起動すると、{token} 報酬がウォレットに配布されます。",
                     "endedAndDidNotStake": "このエアドロップに参加していません。",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "endedAndDidNotReachMinRewards": "エアドロップの最小報酬に到達するのに十分な{token}トークンをステークしていませんでした。",
+                    "inactive": "高度な設定でネットワーク構成を開き、「情報を表示」をクリックして現在のノードに「参加」機能があることを確認します。"
                 }
             },
             "airdrops": {
@@ -675,12 +675,12 @@
         },
         "balanceFinder": {
             "title": "残高を検索する",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
+            "body": "アドレスのより徹底的な検索を実行して、不足している残高と以前のエアドロップ報酬を見つけます。 これは時間がかかる場合があります。",
+            "accountsSearched": "検索されたウォレット",
+            "addressesSearched": "ウォレットごとに検索されたアドレス",
             "accountsFound": "ウォレットが見つかりました",
             "totalWalletBalance": "合計残高",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "残高やウォレットの数が間違っていませんか？完全な残高が表示されるまで再度検索を押してください。",
             "typePassword": "検索できるようにパスワードを入力してください。"
         },
         "riskFunds": {
@@ -760,19 +760,19 @@
             "totalFundsStaked": "ステークの合計",
             "stakedSuccessfully": "あなたの資金は {account}にステークされました。",
             "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "ウォレットをお探しですか？Firefly が変更されました。トップメニューバーのウォレット間を切り替えます。"
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "参加します",
             "subtitleStake": "ステークしようとしています",
             "subtitleMerge": "合算しようとしています",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "両方のエアドロップに参加したくない場合は、以下からオプトアウトすることができます。 ステークを解除し、再度 ステークすることで、いつでもオプトインできます。",
+            "mergeStakeWarning": "資金は {airdrop}に投資されます。参加したいエアドロップを変更するには、このウォレットのステークを解除し、再度ステークします。",
             "estimatedAirdrop": "推定された報酬"
         },
         "newStakingPeriodNotification": {
             "title": "{periodNumber} からのステーキングフェーズ {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "body": "Assembly のIOTAステーキングは続行されます...フェーズ{periodNumber}に90日間参加します。 IOTAトークンをステークして、ASMB報酬を獲得しましょう！",
             "info": "Shimmerステーキングが完了し、ASMBトークンのみが配布されます。"
         },
         "shimmer-info": {
@@ -805,9 +805,9 @@
             "privPolicyCheckbox": "更新されたプライバシーポリシーに同意します"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Firefly の使い方が変わりました",
+            "body": "各タブのコンテンツは、単一のウォレットのコンテクストになりました。 タイトルバーのスイッチャーを使用して、選択したウォレットをどこからでも変更できます。",
+            "hint": "ウォレットが見つかりませんか？設定のバランスファインダーを使用して、以前に使用したウォレットを見つけてください。"
         }
     },
     "charts": {
@@ -931,7 +931,7 @@
         "merge": "統合",
         "mergeFunds": "資金を統合",
         "done": "完了しました",
-        "okIUnderstand": "OK, I understand",
+        "okIUnderstand": "はい。分かりました",
         "readMore": "もっと読む"
     },
     "general": {
@@ -990,7 +990,7 @@
         "profiles": "プロフィール",
         "dev": "開発者",
         "createAccount": "ウォレットを作成",
-        "createNewWallet": "新しいウォレットを作成",
+        "addAWallet": "Add a wallet",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
@@ -1049,20 +1049,20 @@
         "creatingProfile": "プロフィールを作成しています。お待ちください...",
         "fundMigration": "資金の移行",
         "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "receivingFrom": "{account} から着金中",
+        "sendingTo": "{account} に送金中",
+        "receivedFrom": "{account} から着金しました",
+        "sentTo": "{account} に送金しました",
+        "transferringFrom": "{account} から転送中",
+        "transferringTo": "{account} に転送中",
+        "transferFrom": "{account}からの転送",
+        "transferTo": "{account}に転送",
         "stakedFor": "{account} にステークしました",
         "unstakedFor": "{account} の解除したステーク",
         "votedFor": "{account} に投票",
         "unvotedFor": "{account} の投票を解除",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "stakingTransaction": "ステーキング取引",
+        "unstakingTransaction": "アンステーキング取引",
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "ステーク資金",
         "unstakedFunds": "解除したステーク資金",
         "accountColor": "ウォレットの色",
-        "myAssets": "My assets"
+        "myAssets": "My Assets(マイアセット)",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "今日",
@@ -1127,9 +1128,9 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "ウォレットを変更するには、同期が完了するまでお待ちください。",
+        "transferring": "ウォレットを変更するには、すべての取引が完了するまでお待ちください。",
+        "participating": "ウォレットを変更するには、すべてのステーク/投票取引が完了するまでお待ちください。"
     },
     "error": {
         "profile": {
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "指定されたアカウントを使用できません。",
             "cannotFindStakingEvent": "ステーキングイベントを見つけることができません。",
             "cannotVisitAirdropWebsite": "{airdrop} ウェブサイトを開くことができません。",
-            "invalidStakingEventId": "不正なステーキングイベントIDです。"
+            "invalidStakingEventId": "不正なステーキングイベントIDです。",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "無効な日付",
         "invalidTime": "無効な時間"

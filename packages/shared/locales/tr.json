@@ -990,7 +990,7 @@
         "profiles": "Profiller",
         "dev": "Geliştirici",
         "createAccount": "Cüzdan Oluştur",
-        "createNewWallet": "Yeni bir cüzdan oluştur",
+        "addAWallet": "Add a wallet",
         "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",
         "transactions": "Transferler",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Stake edilen fonlar",
         "unstakedFunds": "Tahsis edilmemiş fonlar",
         "accountColor": "Genel -> hesap rengi",
-        "myAssets": "Varlıklarım"
+        "myAssets": "Varlıklarım",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Bugün",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Belirtilen hesap kullanılamıyor.",
             "cannotFindStakingEvent": "Stake etkinliği bulunamadı.",
             "cannotVisitAirdropWebsite": "{airdrop} web sitesi açılamıyor.",
-            "invalidStakingEventId": "Geçersiz staking kimliği."
+            "invalidStakingEventId": "Geçersiz staking kimliği.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "GEÇERSİZ TARİH",
         "invalidTime": "GEÇERSİZ ZAMAN"

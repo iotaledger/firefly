@@ -10,9 +10,9 @@
             "checkbox": "Ek het die privaatheidsbeleid en diensvoorwaardes gelees en aanvaar"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Fout verslag",
+            "body": "Help die ontwikkelaars om Firefly te verbeter deur outomaties diagnostiese data te stuur wanneer 'n fout of ongeluk plaasvind.",
+            "checkbox": "Stuur fout verslag aan die IOTA Foundation"
         },
         "appearance": {
             "title": "Voorkoms",
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "As jy jou stelseltema verander, moet jy dalk Firefly herbegin om die effekte te sien"
             },
             "language": {
                 "title": "Taal",
@@ -417,10 +417,10 @@
                 "description": "Kyk na foute om 'n probleem op te spoor"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Fout verslag",
+                "body": "Help die ontwikkelaars om Firefly te verbeter deur outomaties diagnostiese data te stuur wanneer 'n fout of ongeluk plaasvind",
+                "checkbox": "Stuur fout verslag",
+                "advice": "Herbegin asseblief die Firefly-toepassing na {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
                 "title": "Diagnostiek",
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Netwerk Operasioneel",
+                "networkDegraded": "Netwerk is nie optimaal nie",
+                "networkDown": "Netwerk ontkoppel",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
                 "referencedRate": "Verwysde tempo"
@@ -473,32 +473,32 @@
                 "allSettings": "Alle instellings",
                 "logout": "Log out",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Profiel sluit",
+                    "locked": "Stronghold gesluit",
+                    "unlocked": "Stronghold oopgesluit"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardeware-toestel",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "IOTA app nie oop nie",
+                        "connected": "Gekoppel",
+                        "legacyConnected": "Legacy App oop",
+                        "locked": "Gesluit",
+                        "mnemonicMismatch": "Verkeerde Ledger of Mnemonic",
+                        "notDetected": "Nie opgespoor nie",
+                        "otherConnected": "App oop"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Back-up you beursies",
                     "lastBackup": "Jy het laas 'n backup op {date} gemaak",
                     "notBackedUp": "Nie gebackup",
                     "button": "Backup"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Nuwe opgradering is beskikbaar",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Opdateer"
                 }
             }
         },
@@ -517,28 +517,28 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Kom later terug",
+                    "commencing": "Pre-Staking is oop",
+                    "holding": "{duration} of staking oor",
+                    "ended": "Staking het geëindig",
+                    "inactive": "Geen staking gebeurtenisse bespeur nie"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "upcoming": "Sit jou {token} tokens in om outomaties elke 10 sekondes belonings te ontvang sodra die inzet op {date} begin.",
+                    "commencing": "Sit jou {token} tokens in om outomaties elke 10 sekondes belonings te ontvang sodra die inzet op {date} begin.",
+                    "holdingAndStaking": "Jy ontvang outomaties belonings elke 10 sekondes.",
+                    "holdingAndNotStaking": "Stake jou {token} tokens in om elke 10 sekondes belonings te ontvang.",
+                    "endedAndDidStake": "{token} belonings sal na jou beursie versprei word sodra die netwerk begin.",
                     "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "endedAndDidNotReachMinRewards": "Jy het nie genoeg {token} tokens om die minimum belonings te bereik nie.",
+                    "inactive": "Maak netwerkkonfigurasie in gevorderde instellings oop en maak seker dat die huidige node die \"Participation\"-funksie het deur op \"Bekyk inligting\" te klik."
                 }
             },
             "airdrops": {
                 "holding": "Oorblywende",
                 "commencing": "Totdat staking begin",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Huidige stakingstydperk",
+                "totalWalletRewards": "Totale beursie-belonings",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is 'n toestemminglose, hoogs skaalbare multi-chain netwerk om saamstelbare smart-contracts te bou en te ontplooi. Assembly is die toekoms van web3. "
@@ -549,14 +549,14 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Nuwe Geleentheid",
+                "complete": "Voltooid"
             }
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "Kleurkieser",
+                "hexCode": "Kleur hekskode"
             }
         }
     },
@@ -576,7 +576,7 @@
             "updateAvailable": "Firefly update beskikbaar",
             "updateDetails": "Weergawe {version} - {date}",
             "noAutoUpdate": "Outo-opdatering is in hierdie Windows-weergawe gedeaktiveer. Gaan na https://firefly.iota.org om die opdatering af te laai.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "Jy gebruik 'n voorvrystelling weergawe van Firefly. Opdaterings is gedeaktiveer."
         },
         "backup": {
             "title": "Laaste backup: {date}",
@@ -675,9 +675,9 @@
         },
         "balanceFinder": {
             "title": "Balans-finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
+            "body": "Voer 'n meer omvattende soektog na adresse uit om ontbrekende saldo's en vorige airdrop-belonings te vind. Dit kan 'n rukkie neem.",
+            "accountsSearched": "Beursies gesoek",
+            "addressesSearched": "Beursies gesoek",
             "accountsFound": "Wallets found",
             "totalWalletBalance": "Totale balans",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
@@ -792,7 +792,7 @@
         "crashReporting": {
             "title": "Crash reporting",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "Stuur fout verslag aan die IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
@@ -990,7 +990,7 @@
         "profiles": "Profiel",
         "dev": "Dev",
         "createAccount": "Skep 'n Beursie",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Beursie naam",
         "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Staked fondse",
         "unstakedFunds": "Unstaked fondse",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Vandag",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Kan nie die gespesifiseerde rekening gebruik nie.",
             "cannotFindStakingEvent": "Kan nie staking event vind nie.",
             "cannotVisitAirdropWebsite": "Kan nie die {airdrop} webwerf oopmaak nie.",
-            "invalidStakingEventId": "Ongeldige staking event ID."
+            "invalidStakingEventId": "Ongeldige staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

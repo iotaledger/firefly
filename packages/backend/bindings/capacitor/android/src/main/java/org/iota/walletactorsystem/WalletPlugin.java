@@ -23,13 +23,16 @@ public class WalletPlugin extends Plugin {
 
     @PluginMethod()
     public void initialize(final PluginCall call) {
-        if (isInitialized) return;
-        if (!call.getData().has("actorId")) {
-            call.reject("actorId is required");
-            return;
+        if (isInitialized) {
+            call.reject("Wallet is already initialized!");
+        }
+        if (!call.getData().has("actorId") || !call.getData().has("storagePath")) {
+            call.reject("actorId & storagePath are required");
         }
         String actorId = call.getString("actorId");
-        String dbPath = getContext().getFilesDir() + "/database";
+        String storagePath = call.getString("storagePath");
+        assert actorId != null && storagePath != null;
+        String dbPath = getContext().getFilesDir() + storagePath;
 
         final ActorCallback callback = response -> {
             JSObject walletResponse = new JSObject();
@@ -47,7 +50,6 @@ public class WalletPlugin extends Plugin {
         try {
             if (!call.getData().has("message")) {
                 call.reject("message is required");
-                return;
             }
 
             Actor.iotaSendMessage(call.getObject("message").toString());
@@ -61,14 +63,13 @@ public class WalletPlugin extends Plugin {
     public void destroy(final PluginCall call) {
         if (!isInitialized) {
             call.reject("Wallet is not initialized yet");
-            return;
         }
         try {
             if (!call.getData().has("actorId")) {
                 call.reject("actorId is required");
-                return;
             }
             String actorId = call.getString("actorId");
+            assert actorId != null;
 
             Actor.iotaDestroy(actorId);
         } catch (Exception ex) {
@@ -80,21 +81,16 @@ public class WalletPlugin extends Plugin {
     public void listen(final PluginCall call) {
         if (!isInitialized) {
             call.reject("Wallet is not initialized yet");
-            return;
         }
         if (!call.getData().has("actorId")
                 || !call.getData().has("id")
                 || !call.getData().has("event")) {
             call.reject("actorId, id and event are required");
-            return;
         }
         String actorId = call.getString("actorId");
         String id = call.getString("id");
         String event = call.getString("event");
-        if (event == null) {
-            call.reject("event is null");
-            return;
-        }
+        assert actorId != null && id != null && event != null;
         String snakedEvent = event.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase();
 
         synchronized (lock) {

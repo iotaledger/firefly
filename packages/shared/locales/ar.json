@@ -990,7 +990,7 @@
         "profiles": "الملفات الشخصية",
         "dev": "المطور",
         "createAccount": "إنشاء محفظة",
-        "createNewWallet": "إنشاء محفظة جديدة",
+        "addAWallet": "Add a wallet",
         "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "الارصدة المخزنة",
         "unstakedFunds": "الارصدة غير المخزنة",
         "accountColor": "لون المحفظة",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "اليوم",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "غير قادر على استخدام الحساب المحدد.",
             "cannotFindStakingEvent": "غير قادر على إيجاد فعالية الربح من التخزين.",
             "cannotVisitAirdropWebsite": "غير قادر على فتح الموقع الالكتروني لفعالية الربح {airdrop}.",
-            "invalidStakingEventId": "رقم التصريح لفعالية الربح من التخزين خاطئ."
+            "invalidStakingEventId": "رقم التصريح لفعالية الربح من التخزين خاطئ.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "تاريخ غير صالح",
         "invalidTime": "وقت غير صالح"

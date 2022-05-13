@@ -990,7 +990,7 @@
         "profiles": "Profile",
         "dev": "Entwickler",
         "createAccount": "Wallet erstellen",
-        "createNewWallet": "Neue Wallet erstellen",
+        "addAWallet": "Wallet hinzufügen",
         "accountName": "Wallet-Name",
         "latestTransactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Gestaktes Guthaben",
         "unstakedFunds": "Ungestaktes Guthaben",
         "accountColor": "Wallet-Farbe",
-        "myAssets": "Meine Assets"
+        "myAssets": "Meine Assets",
+        "total": "Gesamt: {balance}"
     },
     "dates": {
         "today": "Heute",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Das angegebene Konto kann nicht verwendet werden.",
             "cannotFindStakingEvent": "Staking-Event konnte nicht gefunden werden.",
             "cannotVisitAirdropWebsite": "Die {airdrop}-Website konnte nicht geöffnet werden.",
-            "invalidStakingEventId": "Ungültige Staking-Event ID."
+            "invalidStakingEventId": "Ungültige Staking-Event ID.",
+            "failedToFetchPreviousRewards": "Fehler beim Abrufen früherer Rewards, bitte überprüfe deine Firewall-Einstellungen."
         },
         "invalidDate": "UNGÜLTIGES DATUM",
         "invalidTime": "UNGÜLTIGE ZEIT"

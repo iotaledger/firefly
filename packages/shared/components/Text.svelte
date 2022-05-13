@@ -35,8 +35,6 @@
 </script>
 
 <script lang="typescript">
-    import { appSettings } from 'shared/lib/appSettings'
-
     export let type = TextType.p
     export let fontSize: string = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
@@ -181,8 +179,8 @@
         ...(fontSize && { fontSize }),
         ...(fontWeight && { fontWeight }),
         ...(lineHeight && { lineHeight }),
-        ...(color && { color }),
-        ...(darkColor && { darkColor }),
+        ...((color || overrideColor) && { color }),
+        ...((darkColor || overrideColor) && { darkColor }),
     }
 
     $: customClassesString = Object.values(customClasses).join(' ')
