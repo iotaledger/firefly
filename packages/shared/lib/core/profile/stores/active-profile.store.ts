@@ -1,7 +1,6 @@
-import { WalletAccount } from '@lib/typings/walletAccount'
-import { get, writable } from 'svelte/store'
+import { IAccountState } from '@core/account'
+import { writable } from 'svelte/store'
 import { IBalanceOverview, IPersistedProfile, IProfile, IProfileSettings } from '../interfaces'
-import { profiles } from './profiles.store'
 
 const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
     balanceOverview: writable<IBalanceOverview>({
@@ -13,7 +12,7 @@ const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
         balanceRaw: 0,
         balanceFiat: '$ 0.00',
     }),
-    accounts: writable<WalletAccount[]>([]),
+    accounts: writable<IAccountState[]>([]),
     hasLoadedAccounts: writable<boolean>(false),
     isStrongholdLocked: writable<boolean>(true),
     shouldOpenProfileModal: writable<boolean>(false),

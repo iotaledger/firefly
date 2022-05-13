@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { WalletAccount } from '@lib/typings/walletAccount'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
     import { updateActiveProfile } from '@core/profile'
 
-    export let accounts: WalletAccount[] = []
+    export let accounts: IAccountState[] = []
 
     let modal: Modal
     let isModalOpened: boolean

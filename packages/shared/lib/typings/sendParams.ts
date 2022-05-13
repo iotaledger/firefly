@@ -1,5 +1,5 @@
+import { IAccountState } from '@core/account'
 import { Unit } from '@iota/unit-converter'
-import { LabeledWalletAccount } from './walletAccount'
 
 export interface SendParams {
     amount: string | undefined
@@ -7,5 +7,5 @@ export interface SendParams {
     address: string
     message: string
     isInternal: boolean
-    toWalletAccount?: LabeledWalletAccount
+    toWalletAccount?: IAccountState
 }

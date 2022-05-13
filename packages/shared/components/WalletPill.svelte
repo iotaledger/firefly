@@ -3,11 +3,10 @@
     import { getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { isBright } from 'shared/lib/helpers'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { getColor } from 'shared/lib/profile'
     import { activeProfile } from '@core/profile'
-
-    export let account: WalletAccount
+    import { IAccountState } from '@core/account'
+    export let account: IAccountState
     export let size: 's' | 'm' = 'm'
     export let active: boolean = false
     export let onClick: () => void = () => {}

@@ -5,9 +5,8 @@
     import { getColor } from 'shared/lib/profile'
     import { api, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
 
     export let alias
     export let account
@@ -47,8 +46,8 @@
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
                             if (account.id === $selectedAccount?.id) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
+                                return Object.assign<IAccountState, IAccountState, Partial<IAccountState>>(
+                                    {} as IAccountState,
                                     account,
                                     {
                                         alias: trimmedAccountAlias,

@@ -1,14 +1,13 @@
 <script lang="typescript">
     import { truncateString } from 'shared/lib/helpers'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
-    import { WalletAccount } from '@lib/typings/walletAccount'
+    import { IAccountState, selectedAccount } from '@core/account'
     import { Modal, AccountLabel, Text } from 'shared/components'
     import { fade } from 'svelte/transition'
 
     export let modal: Modal
     export let searchValue: string
-    export let selected: WalletAccount
+    export let selected: IAccountState
 
     const { accounts } = $activeProfile
 
@@ -23,7 +22,7 @@
     )
     $: scrollable = filteredAccounts.length > 5
 
-    function onClick(_selected: WalletAccount): void {
+    function onClick(_selected: IAccountState): void {
         modal?.close()
         selected = _selected
     }

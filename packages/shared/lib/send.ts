@@ -1,15 +1,15 @@
-import { api, isTransferring, transferState } from './wallet'
-import { checkStronghold } from '@lib/stronghold'
+import { IAccountState } from '@core/account'
+import { localize } from '@core/i18n'
+import { activeProfile, isSoftwareProfile } from '@core/profile'
 import { deepCopy } from '@lib/helpers'
+import { checkStronghold } from '@lib/stronghold'
 import { Message, Transaction } from 'shared/lib/typings/message'
-import { WalletAccount } from './typings/walletAccount'
-import { TransferProgressEventType } from './typings/events'
+import { get } from 'svelte/store'
 import { clearSendParams } from './app'
 import { showAppNotification } from './notifications'
-import { localize } from '@core/i18n'
 import { openPopup } from './popup'
-import { get } from 'svelte/store'
-import { activeProfile, isSoftwareProfile } from '@core/profile'
+import { TransferProgressEventType } from './typings/events'
+import { api, isTransferring, transferState } from './wallet'
 
 export function sendExternalTransaction(senderAccountId: string, receiveAddress: string, amount: number): void {
     const { accounts } = get(activeProfile)
@@ -31,8 +31,8 @@ export function sendExternalTransaction(senderAccountId: string, receiveAddress:
                     accounts.update((_accounts) =>
                         _accounts?.map((_account) => {
                             if (_account.id === senderAccountId) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
+                                return Object.assign<IAccountState, IAccountState, Partial<IAccountState>>(
+                                    {} as IAccountState,
                                     _account,
                                     {
                                         messages: [response.payload, ..._account.messages],

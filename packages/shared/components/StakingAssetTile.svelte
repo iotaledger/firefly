@@ -21,12 +21,11 @@
         stakedAccounts,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
 
     export let asset: Asset
 
@@ -75,7 +74,7 @@
         openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
     }
 
-    function getAccount(accounts: WalletAccount[]): WalletAccount {
+    function getAccount(accounts: IAccountState[]): IAccountState {
         return accounts?.find((account) => account.alias() === $selectedAccount?.alias())
     }
 

@@ -6,14 +6,13 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { Writable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { formatUnitPrecision } from '@lib/units'
-
+    import { IAccountState } from '@core/account'
     export let locale: Locale
 
-    export let account: Writable<WalletAccount>
+    export let account: Writable<IAccountState>
     export let hasMultipleAccounts: boolean
 
     export let hideAccount: (id: AccountIdentifier) => void = () => {}

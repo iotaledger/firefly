@@ -1,10 +1,9 @@
-import { setSelectedAccount } from '@core/account'
+import { IAccountState, setSelectedAccount } from '@core/account'
 import { activeProfile, isSoftwareProfile } from '@core/profile'
 import { getAccounts } from '@core/profile-manager'
 import { accountRouter } from '@core/router'
 import { Platform } from '@lib/platform'
 import { openPopup } from '@lib/popup'
-import { WalletAccount } from '@lib/typings/walletAccount'
 import { migrateObjects } from '@lib/utils'
 import {
     api,
@@ -53,7 +52,7 @@ export async function loadAccounts(): Promise<void> {
                 depositAddress: '',
             }
 
-            const newAccounts: WalletAccount[] = []
+            const newAccounts: IAccountState[] = []
             for (const payloadAccount of accountsResponse) {
                 const balance = await payloadAccount.balance()
                 // TODO: check if this is neccessary -> mainly for showing a correct graph

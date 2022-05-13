@@ -23,7 +23,7 @@
     import { localize } from '@core/i18n'
     import { selectedAccountId, setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { IAccountState } from '@core/account'
 
     const { hasLoadedAccounts, accounts } = $activeProfile
 
@@ -67,7 +67,7 @@
         }
     } */
 
-    const viewableAccounts: Readable<WalletAccount[]> = derived(
+    const viewableAccounts: Readable<IAccountState[]> = derived(
         [activeProfile, accounts],
         ([$activeProfile, $accounts]) => {
             if (!$activeProfile) {
@@ -97,7 +97,7 @@
         }
     )
 
-    const liveAccounts: Readable<WalletAccount[]> = derived(
+    const liveAccounts: Readable<IAccountState[]> = derived(
         [activeProfile, accounts],
         ([$activeProfile, $accounts]) => {
             if (!$activeProfile) {
@@ -110,8 +110,8 @@
     )
 
     // TODO: move these stores to lib when we fix the circular imports issue
-    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
+    setContext<Readable<IAccountState[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<IAccountState[]>>('liveAccounts', liveAccounts)
 
     onMount(() => {
         // void getParticipationEvents()
