@@ -14,7 +14,7 @@ public class WalletPlugin: CAPPlugin {
                 return call.reject("actorId is required")
             }
             let fm = FileManager.default
-            let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let documents = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
             let path = documents.appendingPathComponent("__storage__", isDirectory: true).path
             if !fm.fileExists(atPath: path) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
