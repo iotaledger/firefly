@@ -6,6 +6,7 @@ import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { activeProfile, isLedgerProfile, isSoftwareProfile, resetActiveProfile, resetActiveProfileId } from '../stores'
 import { resetDashboardState } from './active-profile'
+import { clearPollNetworkInterval } from '@core/network'
 
 const { isStrongholdLocked } = get(activeProfile)
 
@@ -21,6 +22,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
             stopPollingLedgerStatus()
         }
 
+        clearPollNetworkInterval()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             destroyProfileManager()

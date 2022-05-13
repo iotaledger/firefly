@@ -3,12 +3,14 @@
     import { WalletAccount } from '@lib/typings/walletAccount'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
     import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
+    import { activeProfile } from '@core/profile'
+    import { getNetwork, NetworkType, nodeInfo } from '@core/network'
 
     export let recipient: string | WalletAccount
     export let disabled = false
 
-    // TODO: get ADDRESS_PREFIX from profile network info
-    const ADDRESS_PREFIX = 'atoi'
+    const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
+    const addressPrefix = network?.type === NetworkType.PrivateNet ? $nodeInfo?.protocol?.bech32HRP : network?.bech32Hrp
 
     let inputElement
     let modal: Modal
@@ -37,14 +39,14 @@
     export function validate(): Promise<void> {
         if (selectedAccount) {
             return Promise.resolve()
-        } else if (value.length !== ADDRESS_LENGTH + ADDRESS_PREFIX.length) {
+        } else if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
-                    length: ADDRESS_LENGTH + ADDRESS_PREFIX.length,
+                    length: ADDRESS_LENGTH + addressPrefix.length,
                 },
             })
         } else {
-            error = validateBech32Address(ADDRESS_PREFIX, value)
+            error = validateBech32Address(addressPrefix, value)
         }
 
         if (error) {

@@ -11,7 +11,8 @@
             "@lib/*": ["./lib/*"],
             "@mocks/*": ["./lib/tests/mocks/*"]
         },
-        "types": ["jest"]
+        "types": ["jest"],
+        "resolveJsonModule": true
     },
     "include": ["./lib"],
     "exclude": ["**/node_modules"]
