@@ -1,3 +1,4 @@
+import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { IAuth } from '@core/network'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
@@ -16,7 +17,7 @@ import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { WalletApi } from './shell/walletApi'
-import { SignerType, StardustAccount, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
@@ -365,7 +366,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  *
  * @returns {void}
  */
-// export function addMessagesPair(account: StardustAccount): void {
+// export function addMessagesPair(account: IAccount): void {
 //     // Only keep messages with a payload
 //     account.messages = account.messages.filter((m) => m.payload)
 
@@ -781,7 +782,7 @@ export function getAccountMeta(accountId: string): Promise<{
 }
 
 export const prepareAccountInfo = (
-    account: StardustAccount,
+    account: IAccount,
     meta: {
         balance: number
         incoming: number
@@ -794,7 +795,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
     // TODO: Hardcoded signer type
-    return Object.assign<WalletAccount, StardustAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, IAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
         id: index.toString(),
         depositAddress,
         rawIotaBalance: balance,

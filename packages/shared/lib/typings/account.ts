@@ -79,35 +79,6 @@ export interface SyncedAccount {
     messages: Message[]
 }
 
-export interface StardustAccount {
-    meta: AccountMeta
-    alias(): string
-    collectOutputs(): Promise<void>
-    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string>
-    listAddresses(): Promise<StardustAddress[]>
-    listAddressesWithBalance(): Promise<StardustAddress[]>
-    listOutputs(): Promise<OutputData[]>
-    listUnspentOutputs(): Promise<OutputData[]>
-    listPendingTransactions(): Promise<Transaction[]>
-    listTransactions(): Promise<Transaction[]>
-    sync(options?: AccountSyncOptions): Promise<void>
-    generateAddresses(): Promise<StardustAddress[]>
-    latestAddress(): Promise<StardustAddress>
-    balance(): Promise<AccountBalance>
-    mintNativeToken(nativeTokenOptions: NativeTokenOptions, transferOptions: TransferOptions): Promise<Transaction[]>
-    mintNfts(nftOptions: NftOptions, transferOptions: TransferOptions): Promise<Transaction[]>
-    sendAmount(addressesWithAmount: AddressWithAmount[], transferOptions: TransferOptions): Promise<[]>
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions: TransferOptions
-    ): Promise<[]>
-    sendNativeTokens(addressNativeTokens: AddressNativeTokens[], transferOptions: TransferOptions): Promise<[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions: TransferOptions): Promise<[]>
-    sendTransfer(outputs: OutputData[], transferOptions: TransferOptions): Promise<[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<[]>
-    setClientOptions(options: StardustClientOptions): Promise<void>
-}
-
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
     return bridge({
         actorId: __ids.actorId,

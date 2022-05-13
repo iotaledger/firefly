@@ -1,5 +1,5 @@
-import type { AccountId, CreateAccountPayload, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '../../typings/account'
+import type { AccountId, CreateAccountPayload } from '@iota/wallet'
+import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
 import { IAuth, INodeInfoResponse } from '../../core/network'
@@ -67,7 +67,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    createAccount(account: CreateAccountPayload): Promise<StardustAccount> {
+    createAccount(account: CreateAccountPayload): Promise<IAccount> {
         return Promise.resolve(new AccountMock())
     }
 

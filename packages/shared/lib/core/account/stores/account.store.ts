@@ -1,4 +1,4 @@
-import { StardustAccount } from '@lib/typings/account'
 import { writable } from 'svelte/store'
+import { IAccount } from '../interfaces'
 
-export const account = writable<StardustAccount>(null)
+export const account = writable<IAccount>(null)

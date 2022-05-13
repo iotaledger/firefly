@@ -1,9 +1,9 @@
-import { AccountBalance, Address, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '../../typings/account'
+import { AccountBalance, Address } from '@iota/wallet'
+import { IAccount } from '../../core/account'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
-export class AccountMock implements StardustAccount {
+export class AccountMock implements IAccount {
     meta = {
         index: 0,
         coinType: 0,
