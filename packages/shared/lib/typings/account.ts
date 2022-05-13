@@ -1,20 +1,3 @@
-import {
-    AccountBalance,
-    AccountMeta,
-    AccountSyncOptions,
-    Address as StardustAddress,
-    AddressNativeTokens,
-    AddressNftId,
-    AddressWithAmount,
-    AddressWithMicroAmount,
-    NativeTokenOptions,
-    NftOptions,
-    OutputData,
-    OutputsToCollect,
-    Transaction,
-    TransferOptions,
-    ClientOptions as StardustClientOptions,
-} from '@iota/wallet/out/types'
 import { Address } from './address'
 import { Bridge, CommunicationIds } from './bridge'
 import { IClientOptions, IAuth } from '@core/network'

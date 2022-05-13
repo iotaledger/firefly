@@ -1,13 +1,16 @@
-import { SignerType } from '@lib/typings/account'
 import { Address } from '@lib/typings/address'
 import { Message } from '@lib/typings/message'
+import { SignerType } from '../enums'
+import { IAccountBalances } from './account-balances.interface'
 import { IAccount } from './account.interface'
 
 export interface IAccountState extends IAccount {
     id: string
+    name: string
     depositAddress: string
+    balances: IAccountBalances
     color?: string
-    // TODO remove or refactor below
+    // TODO: refactor or remove these below
     rawIotaBalance?: number
     balanceEquiv?: string
     signerType: SignerType

@@ -1,4 +1,5 @@
 import { IAccountState, setSelectedAccount } from '@core/account'
+import { buildAccountState } from '@core/account/helpers'
 import { activeProfile, isSoftwareProfile } from '@core/profile'
 import { getAccounts } from '@core/profile-manager'
 import { accountRouter } from '@core/router'
@@ -15,16 +16,19 @@ import {
     isFirstSessionSync,
     isSyncing,
     isTransferring,
-    prepareAccountInfo,
     selectedMessage,
     transferState,
-    updateBalanceOverview,
     walletSetupType,
 } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { buildNewProfile } from '../helpers'
 import { IPersistedProfile } from '../interfaces'
 import { profiles, saveProfile, setActiveProfile, setActiveProfileId, updateActiveProfile } from '../stores'
+
+export function login(profileId: string): void {
+    loadPersistedProfileIntoActiveProfile(profileId)
+    // void loadAccounts()
+}
 
 export function loadPersistedProfileIntoActiveProfile(profileId: string): void {
     const persistedProfile = get(profiles).find((_persistedProfile) => _persistedProfile.id === profileId)
@@ -39,41 +43,20 @@ export async function loadAccounts(): Promise<void> {
     try {
         const { hasLoadedAccounts, accounts } = get(activeProfile)
         const accountsResponse = await getAccounts()
+        if (accountsResponse.length === 0) {
+            hasLoadedAccounts.set(true)
+            return
+        }
+
         if (accountsResponse) {
-            if (accountsResponse.length === 0) {
-                hasLoadedAccounts.set(true)
-                return
-            }
-
-            const meta = {
-                balance: 0,
-                incoming: 0,
-                outgoing: 0,
-                depositAddress: '',
-            }
-
             const newAccounts: IAccountState[] = []
-            for (const payloadAccount of accountsResponse) {
-                const balance = await payloadAccount.balance()
-                // TODO: check if this is neccessary -> mainly for showing a correct graph
-                // addMessagesPair(payloadAccount)
-
-                meta.balance += balance.available
-                meta.incoming += balance.incoming
-                meta.outgoing += balance.outgoing
-                meta.depositAddress = payloadAccount.meta.publicAddresses[0].toString()
-
-                const account = prepareAccountInfo(payloadAccount, meta)
-                newAccounts.push(account)
+            for (const account of accountsResponse) {
+                await account.sync()
+                const newAccount = await buildAccountState(account)
+                newAccounts.push(newAccount)
             }
             accounts.update((_accounts) => newAccounts.sort((a, b) => a.meta.index - b.meta.index))
-            // TODO: fix migrations
-            // processMigratedTransactions(
-            //     payloadAccount.id,
-            //     payloadAccount.messages,
-            //     payloadAccount.addresses
-            // )
-            updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
+            // updateBalanceOverview(meta.balance, meta.incoming, meta.outgoing)
             hasLoadedAccounts.set(true)
         }
     } catch (err) {
@@ -146,7 +129,7 @@ export function saveActiveProfile(): void {
             ...(_activeProfile?.hiddenAccounts && { hiddenAccounts: _activeProfile?.hiddenAccounts }),
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
-            ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
+            ...(_activeProfile?.accountMetadatas && { accountMetadatas: _activeProfile?.accountMetadatas }),
             ...(_activeProfile?.hasFinishedSingleAccountGuide && {
                 hasFinishedSingleAccountGuide: _activeProfile?.hasFinishedSingleAccountGuide,
             }),

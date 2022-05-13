@@ -3,7 +3,7 @@
     import { Icon, Logo, Profile } from 'shared/components'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { ProfileType, profiles, login, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
     import { NetworkProtocol, NetworkType } from '@core/network'

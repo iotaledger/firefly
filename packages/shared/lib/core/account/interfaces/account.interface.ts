@@ -1,5 +1,4 @@
 import {
-    AccountBalance,
     AccountMeta,
     AccountSyncOptions,
     Address,
@@ -15,6 +14,7 @@ import {
     Transaction,
     TransferOptions,
 } from '@iota/wallet/out/types'
+import { IAccountBalances } from './account-balances.interface'
 
 export interface IAccount {
     meta: AccountMeta
@@ -30,7 +30,7 @@ export interface IAccount {
     sync(options?: AccountSyncOptions): Promise<void>
     generateAddresses(): Promise<Address[]>
     latestAddress(): Promise<Address>
-    balance(): Promise<AccountBalance>
+    balance(): Promise<IAccountBalances>
     mintNativeToken(nativeTokenOptions: NativeTokenOptions, transferOptions: TransferOptions): Promise<Transaction[]>
     mintNfts(nftOptions: NftOptions, transferOptions: TransferOptions): Promise<Transaction[]>
     sendAmount(addressesWithAmount: AddressWithAmount[], transferOptions: TransferOptions): Promise<[]>

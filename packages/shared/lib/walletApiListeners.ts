@@ -250,8 +250,8 @@ export function initialiseListeners(): void {
                     const { address } = await _account.latestAddress()
                     const balance = await _account.balance()
                     totalBalance.balance += balance.total
-                    totalBalance.incoming += balance.incoming
-                    totalBalance.outgoing += balance.outgoing
+                    // totalBalance.incoming += balance.incoming
+                    // totalBalance.outgoing += balance.outgoing
                     totalBalance.depositAddress = address
 
                     // addMessagesPair(_account)
