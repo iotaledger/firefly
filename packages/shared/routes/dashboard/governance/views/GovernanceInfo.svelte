@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
 </script>
 
-<div class="h-full flex flex-col justify-between">
+<div class="p-8 h-full flex flex-col justify-between">
     <div class="flex justify-center items-center flex-col text-center flex-1">
         <Illustration illustration="governance-info" classes="w-32 h-32 mb-6" />
         <Text type="h3" classes="mb-3">{localize('views.governance.info.title')}</Text>
