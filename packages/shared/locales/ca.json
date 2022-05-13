@@ -607,45 +607,45 @@
         },
         "addressHistory": {
             "title": "Historial d'adreces de {name}",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Saldo {balance}",
+            "internal": "Adreça interna",
+            "external": "Adreça de dipòsit"
         },
         "node": {
             "titleAdd": "Afegeix un node",
             "titleUpdate": "Actualitzar el node",
             "titleRemove": "Traieu un node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Elimina tots els nodes",
             "titleDetails": "Detalls del node",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Informació del node",
+            "addingNode": "Afegint node",
+            "updatingNode": "Actualitzant el node",
+            "loadingNodeInfo": "Carregant informació del node",
             "nodeAddress": "Adreça del node",
             "optionalUsername": "Nom d'usuari (opcional)",
             "optionalPassword": "Contrasenya (opcional)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (opcional)\n",
             "setAsPrimaryNode": "Estableix com a node principal",
             "removeConfirmation": "Esteu segur que voleu eliminar aquest node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Segur que vols eliminar tots els nodes?",
             "info": {
                 "url": "URL",
                 "software": "Software",
-                "networkId": "Network ID",
+                "networkId": "ID de xarxa",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "features": "Característiques",
+                "confirmedMilestoneIndex": "Índex de fita confirmat",
+                "pruningIndex": "Índex de poda",
                 "messagesPerSecond": "Missatges per segon",
                 "referencedRate": "Taxa referenciada"
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Canvia de xarxa",
+            "newNetwork": "Nova xarxa",
+            "resetWarning": "Si canvieu de xarxes, tanqueu la sessió i es restablirà tots els comptes, els saldos i l'historial de transaccions d'aquest perfil.",
+            "switchingNetwork": "Canviant xarxa",
+            "typePassword": "Escriviu la vostra contrasenya per canviar a:"
         },
         "errorLog": {
             "title": "Registre d'errors",
@@ -670,17 +670,17 @@
         "transaction": {
             "title": "Confirmar la transacció",
             "body": "Estàs a punt d'enviar {amount} a",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccount": "Esteu enviant una transferència des d'una cartera que s'està stakejant actualment. Això pot desfer l'stake. Es lliure d'enviar la transferència, però és possible que hàgiu de tornar a refer l'stake amb els tokens restants després.",
+            "sendingFromStakedAccountBelowMinReward": "Esteu enviant una transferència des d'una bitlletera que encara no ha arribat a les recompenses mínimes de staking. Això pot desfer l'stake i podeu perdre les vostres recompenses d'stake en aquesta cartera."
         },
         "balanceFinder": {
             "title": "Cercador de balanços",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "body": "Realitzeu una cerca més exhaustiva d'adreces per trobar saldos que falten i recompenses d'airdrops anteriors. Pot trigar una estona.",
+            "accountsSearched": "Bitlleteres buscades",
+            "addressesSearched": "Adreces cercades per bitlletera",
+            "accountsFound": "Bitlleteres trobades",
             "totalWalletBalance": "Balanç total",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "El vostre saldo o nombre de carteres és incorrecte? Premeu cerca de nou fins que es mostri el vostre saldo complet.",
             "typePassword": "Escriviu la vostra contrasenya per pemetre la cerca."
         },
         "riskFunds": {
@@ -736,38 +736,38 @@
             },
             "transaction": {
                 "title": "Confirmar la transacció",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Confirmeu que la informació de la transacció que es mostra al vostre dispositiu Ledger coincideix amb la que es mostra a continuació. Si coincideixen, premeu els dos botons del vostre Ledger tal com se us demani."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Confirmeu l'adreça de recepció",
+            "body": "Confirmeu que l'adreça de recepció que es mostra al vostre Ledger coincideix amb la que es mostra a continuació. Si coincideixen, premeu els dos botons del vostre Ledger tal com se us demani."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Necessites migrar un altre índex de compte de Trinity?",
+            "body": "També podeu migrar més tard a la configuració avançada."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Wallet name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Exporta l'historial de transaccions",
+            "body": "Exporteu l'historial de transaccions de la bitlletera seleccionada. El fitxer exportat estarà en format .csv.",
+            "profileName": "Nom del perfil:",
+            "accountName": "Nom de la bitlletera:",
+            "typePassword": "Escriviu la vostra contrasenya per permetre l'exportació"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "title": "Gestió de staking",
+            "description": "Quan feu stake a una bitlletera, us envieu una transacció marcant aquests fons com a \"stakejats\". Podeu transferir els tokens en qualsevol moment, però no continuareu rebent recompenses d'stake.",
+            "totalFundsStaked": "Total de fons amb stake",
+            "stakedSuccessfully": "Els vostres fons han estat stakejats {account}.",
+            "unstakedSuccessfully": "S'ha desfet l'stake dels vostres fons {account}.",
+            "singleAccountHint": "Busques les teves bitlleteres? Firefly ha canviat. Canvia entre les teves bitlleteres a la barra de menú superior."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "title": "Confirmeu la participació",
+            "subtitleStake": "Estàs a punt de fer stake",
+            "subtitleMerge": "Estàs a punt de combinar",
+            "multiAirdropWarning": "Si no voleu participar en els dos airdrops, podeu desactivar-lo a continuació. Podeu desactivar i tornar a activar-lo en qualsevol moment.",
+            "mergeStakeWarning": "Els vostres fons es posaran a stake per {airdrop}. Per canviar en quins airdrops vols participar, desfeu l'stake d'aquesta bitlletera i torneu-la a apostar.",
             "estimatedAirdrop": "Recompenses estimades"
         },
         "newStakingPeriodNotification": {
@@ -990,7 +990,7 @@
         "profiles": "Perfils",
         "dev": "Dev",
         "createAccount": "Crea un moneder",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Fons en stake",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Avui",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "invalidStakingEventId": "Invalid staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

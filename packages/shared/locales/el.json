@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Θεματικό",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Αν αλλάξετε το θέμα του συστήματός σας, μπορεί να χρειαστεί να κάνετε επανεκκίνηση του Firefly για να δείτε τα εφέ"
             },
             "language": {
                 "title": "Γλώσσα",
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Δίκτυο σε λειτουργία",
+                "networkDegraded": "Δίκτυο Υποβαθμισμένο",
+                "networkDown": "Το δίκτυο αποσυνδέθηκε",
                 "status": "Κατάσταση",
                 "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
                 "referencedRate": "Αναφερόμενη τιμή"
@@ -473,32 +473,32 @@
                 "allSettings": "Όλες οι ρυθμίσεις",
                 "logout": "Αποσύνδεση",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Κλείδωμα προφίλ",
+                    "locked": "Stronghold κλειδωμένο",
+                    "unlocked": "Stronghold ξεκλείδωτο"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Συσκευή",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Η Εφαρμογή IOTA δεν είναι ανοιχτή",
+                        "connected": "Σύνδεση",
+                        "legacyConnected": "Η εφαρμογή παλαιού τύπου είναι ανοιχτή",
+                        "locked": "Κλειδωμένο",
+                        "mnemonicMismatch": "Λάθος Ledger ή μνημονικό",
+                        "notDetected": "Δεν ανιχνεύθηκε",
+                        "otherConnected": "Η εφαρμογή άνοιξε"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Αντίγραφο ασφαλείας των πορτοφολιών σας",
                     "lastBackup": "Τελευταία δημιουργία αντιγράφων ασφαλείας {date}",
                     "notBackedUp": "Δεν έγιναν ακόμα τα αντίγραφα ασφαλείας",
-                    "button": "Backup"
+                    "button": "Αντίγραφα Ασφαλείας"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Νέα ενημέρωση είναι διαθέσιμη",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Αναβάθμιση"
                 }
             }
         },
@@ -517,28 +517,28 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Επιστρέψτε αργότερα",
+                    "commencing": "Άνοιξε το Pre-staking",
+                    "holding": "Απομένουν {duration} για staking",
+                    "ended": "Το staking τελείωσε τώρα",
+                    "inactive": "Δεν ανιχνεύθηκαν συμβάντα για staking"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Κάνε τα {token} tokens σου για να λαμβάνεις αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα μόλις ξεκινήσεις να κάνεις staking την {date}.",
+                    "commencing": "Κάνε τα {token} tokens σου για να λαμβάνεις αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα μόλις ξεκινήσεις να κάνεις staking την {date}.",
+                    "holdingAndStaking": "Λαμβάνετε αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα.",
+                    "holdingAndNotStaking": "Κάνετε stake τα {token} tokens σας για να λαμβάνετε ανταμοιβές κάθε 10 δευτερόλεπτα.",
+                    "endedAndDidStake": "{token} ανταμοιβές θα διανεμηθούν στο πορτοφόλι σας μόλις ξεκινήσει το δίκτυο.",
+                    "endedAndDidNotStake": "Δεν συμμετείχες σε αυτό το airdrop.",
+                    "endedAndDidNotReachMinRewards": "Δεν έχετε κάνει stake αρκετά IOTA για να φτάσετε τις ελάχιστες ανταμοιβές για airdrop.",
+                    "inactive": "Ανοίξτε τις ρυθμίσεις δικτύου στις Ρυθμίσεις για προχωρημένους και βεβαιωθείτε ότι ο τρέχων κόμβος έχει τη δυνατότητα \"Συμμετοχή\" κάνοντας κλικ στο \"Πληροφορίες Προβολής\"."
                 }
             },
             "airdrops": {
                 "holding": "Απομένουν",
                 "commencing": "Μέχρι να αρχίσει το staking",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Τρέχουσα περίοδος staking",
+                "totalWalletRewards": "Σύνολο ανταμοιβών πορτοφολιού",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Το Assembly είναι ένα αυτόνομο, εξαιρετικά επεκτάσιμο multi-chain δίκτυο για την κατασκευή και ανάπτυξη έξυπνων συμβολαίων. Το Assembly είναι το μέλλον του web3. "
@@ -549,8 +549,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Νέο συμβάν",
+                "complete": "Ολοκληρώθηκε"
             }
         },
         "picker": {
@@ -675,12 +675,12 @@
         },
         "balanceFinder": {
             "title": "Εύρεση υπολοίπου",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "body": "Εκτελέστε μια πιο εξαντλητική αναζήτηση διευθύνσεων για να βρείτε τα υπόλοιπα που λείπουν. Αυτό μπορεί να διαρκέσει λίγο.",
+            "accountsSearched": "Πορτοφόλια που ζητήθηκαν",
+            "addressesSearched": "Διευθύνσεις που αναζητήθηκαν ανά πορτοφόλι",
+            "accountsFound": "Βρέθηκαν πορτοφόλια",
             "totalWalletBalance": "Συνολικό υπόλοιπο",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "Είναι το υπόλοιπό σας ή ο αριθμός των πορτοφολιών λανθασμένα? Πατήστε ξανά την αναζήτηση μέχρι να εμφανιστεί το πλήρες υπόλοιπό σας.",
             "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης για να επιτρέψετε την αναζήτηση."
         },
         "riskFunds": {
@@ -751,7 +751,7 @@
             "title": "Εξαγωγή ιστορικού συναλλαγών",
             "body": "Εξαγωγή του ιστορικού συναλλαγών για το επιλεγμένο πορτοφόλι. Το εξαγόμενο αρχείο θα είναι σε μορφή .csv.",
             "profileName": "Όνομα Προφίλ:",
-            "accountName": "Wallet name:",
+            "accountName": "Όνομα πορτοφολιού:",
             "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης για να επιτρέψετε την εξαγωγή"
         },
         "stakingManager": {
@@ -760,20 +760,20 @@
             "totalFundsStaked": "Συνολικό κεφάλαιο που είναι staked",
             "stakedSuccessfully": "Το κεφάλαιο σας που είναι staked για {account}.",
             "unstakedSuccessfully": "Το κεφάλαιο σας που έχει γίνει unstaked για {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "Ψάχνετε για τα πορτοφόλια σας? Το Firefly έχει αλλάξει. Εναλλαγή μεταξύ των πορτοφολιών σας στο επάνω μενού."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Επιβεβαίωση Συμμετοχής",
             "subtitleStake": "Πρόκειται να κάνετε staking",
             "subtitleMerge": "Πρόκειται να συγχωνεύσετε",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "Αν δεν θέλετε να συμμετάσχετε και στα δύο airdrops, μπορείτε να εξαιρεθείτε παρακάτω. Μπορείτε να αναιρέσετε και να επανακτήσετε το staking σας ανά πάσα στιγμή.",
+            "mergeStakeWarning": "Τα κεφάλαιά σας θα γίνουν stake για το {airdrop}. Για να αλλάξετε σε ποια airdrops θέλετε να συμμετάσχετε, αποδεσμεύστε αυτό το πορτοφόλι και κάνετε stake ξανά.",
             "estimatedAirdrop": "Εκτιμώμενες ανταμοιβές"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Φάση staking {periodNumber} από {date}",
+            "body": "Το IOTA staking για Assembly συνεχίζεται... Συμμετέχετε στη φάση {periodNumber} για 90 ημέρες. Κάνετε stake τα IOTA σας και κερδίστε ανταμοιβές ASMB!",
+            "info": "Το Shimmer staking είναι πλέον πλήρες και μόνο ASMB tokens θα διανεμηθεί."
         },
         "shimmer-info": {
             "title": "Σχετικά Με Shimmer",
@@ -805,9 +805,9 @@
             "privPolicyCheckbox": "Έχω διαβάσει και αποδέχομαι την ενημερωμένη Πολιτική Απορρήτου"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Ο τρόπος που χρησιμοποιείτε το Firefly έχει αλλάξει",
+            "body": "Το περιεχόμενο κάθε καρτέλας είναι τώρα στο πλαίσιο ενός μόνο πορτοφολιού. Μπορείτε να αλλάξετε το επιλεγμένο πορτοφόλι από οπουδήποτε χρησιμοποιώντας την εναλλαγή στη γραμμή τίτλου.",
+            "hint": "Αδυναμία εύρεσης πορτοφολιού? Χρησιμοποιήστε τον ανιχνευτή υπολοίπου στις ρυθμίσεις για να ανακαλύψετε τα προηγούμενα πορτοφόλια."
         }
     },
     "charts": {
@@ -931,8 +931,8 @@
         "merge": "Συγχώνευση",
         "mergeFunds": "Συγχώνευση κεφαλαίων",
         "done": "Ολοκληρώθηκε",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "okIUnderstand": "Εντάξει, καταλαβαίνω",
+        "readMore": "Διαβάστε περισσότερα"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
@@ -990,7 +990,7 @@
         "profiles": "Προφίλ",
         "dev": "Προγραμματιστής",
         "createAccount": "Δημιουργία πορτοφολιού",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Όνομα πορτοφολιού",
         "latestTransactions": "Τελευταίες Συναλλαγές",
         "transactions": "Συναλλαγές",
@@ -1049,20 +1049,20 @@
         "creatingProfile": "Δημιουργία λογαριασμού, παρακαλώ περιμένετε...",
         "fundMigration": "Μετεγκατάσταση κεφαλαίων",
         "accountRemoved": "Αυτό το πορτοφόλι είναι κρυμμένο. Αποκρύψτε το για να εκτελέσετε μεταφορές.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "receivingFrom": "Λήψη από {account}",
+        "sendingTo": "Αποστολή στό {account}",
+        "receivedFrom": "Λήψη από {account}",
+        "sentTo": "Στάλθηκε στο {account}",
+        "transferringFrom": "Μεταφορά από {account}",
+        "transferringTo": "Μεταφορά στο {account}",
+        "transferFrom": "Μεταφορά από {account}",
+        "transferTo": "Μεταφορά στο {account}",
         "stakedFor": "Staked για {account}",
         "unstakedFor": "Unstaked για {account}",
         "votedFor": "Επιλέχθηκε για {account}",
         "unvotedFor": "Δεν επιλέχθηκε για {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "stakingTransaction": "Συναλλαγή για Staking",
+        "unstakingTransaction": "Αποτροπή Συναλλαγής Staking",
         "receiving": "Λήψη",
         "sending": "Αποστολή σε εξέλιξη",
         "legacyNetwork": "Παλαιό Δίκτυο",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Κεφάλαιο σε staking",
         "unstakedFunds": "Unstaked kεφάλαιο",
         "accountColor": "Χρώμα πορτοφολιού",
-        "myAssets": "My assets"
+        "myAssets": "Τα περιουσιακά μου",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Σήμερα",
@@ -1127,9 +1128,9 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθεί ο συγχρονισμός για να αλλάξετε τα πορτοφόλια.",
+        "transferring": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθούν όλες οι συναλλαγές για να αλλάξετε πορτοφόλια.",
+        "participating": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθούν όλες οι συναλλαγές staking/ψηφοφορίας για να αλλάξετε τα πορτοφόλια."
     },
     "error": {
         "profile": {
@@ -1252,17 +1253,18 @@
             "cannotUseAccount": "Δεν είναι δυνατή η χρήση του καθορισμένου λογαριασμού.",
             "cannotFindStakingEvent": "Δεν είναι δυνατή η εύρεση του staking συμβάντος.",
             "cannotVisitAirdropWebsite": "Δεν είναι δυνατό να ανοίξει η ιστοσελίδα {airdrop}.",
-            "invalidStakingEventId": "Μη έγκυρη staking event ID."
+            "invalidStakingEventId": "Μη έγκυρη staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "ΑΚΥΡΗ ΗΜΕΡΟΜΗΝΙΑ",
+        "invalidTime": "ΑΚΥΡΟΣ ΧΡΟΝΟΣ"
     },
     "warning": {
         "node": {
             "http": "Η χρήση κόμβων μέσω HTTP αφήνει την κυκλοφορία μη κρυπτογραφημένη και θα μπορούσε να θέσει σε κίνδυνο την ασφάλεια."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Δεν έχετε κανένα IOTA."
         }
     },
     "tooltips": {
@@ -1277,7 +1279,7 @@
         "partiallyStakedFunds": {
             "title": "Νέα unstaked κεφάλαια: {amount}",
             "titleNoFunds": "Νέα unstaked κεφάλαια",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Έχετε λάβει tokens που δεν έχουν γίνει staked.",
             "body": "Θα πρέπει να κάνετε χειροκίνητο staking για αυτά τα νέα κεφάλαια για να μπορέσετε τα \nλαμβάνετε airdrop ανταμοιβές για αυτά."
         },
         "stakingMinRewards": {

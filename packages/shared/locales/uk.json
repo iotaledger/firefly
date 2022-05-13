@@ -990,7 +990,7 @@
         "profiles": "Профілі",
         "dev": "Розробник",
         "createAccount": "Створити гаманець",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Назва гаманця",
         "latestTransactions": "Останні транзакції",
         "transactions": "Транзакції",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Поставленні кошти",
         "unstakedFunds": "Непроставлені кошти",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Сьогодні",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Неможливо використовувати вказаний обліковий запис.",
             "cannotFindStakingEvent": "Не вдалося знайти ставки.",
             "cannotVisitAirdropWebsite": "Не вдається відкрити веб-сайт {airdrop}.",
-            "invalidStakingEventId": "Недійсний ідентифікатор події стекінгу."
+            "invalidStakingEventId": "Недійсний ідентифікатор події стекінгу.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"
