@@ -8,10 +8,10 @@ import {
     destroyActor,
     getProfileDataPath,
     getWalletDataPath,
-    AccountColors,
-    selectedAccountId,
+    selectedAccountIdStore,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
+import { AccountColor } from './typings/color'
 import { ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
@@ -46,7 +46,7 @@ activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
 
-selectedAccountId?.subscribe((accountId) => {
+selectedAccountIdStore?.subscribe((accountId) => {
     if (accountId) {
         updateProfile('lastUsedAccountId', accountId)
     }
@@ -396,7 +396,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
     if (profileAccount.color) {
         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
     } else if (profileAccount.id) {
-        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const accountColors = Object.values(AccountColor).filter((_, i) => !(i % 2))
         const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
         updateProfile(
             'accounts',
@@ -408,23 +408,17 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
 /**
  * Gets account color from activeProfile using account id
  *
- * @method getColor
+ * @method getAccountColor
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
-    const { accounts } = activeProfile || {}
-
-    if (accounts?.length) {
-        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
-        if (foundAccountColor) return foundAccountColor
+export function getAccountColor(accountId: string): string | AccountColor {
+    const _activeProfile = get(activeProfile)
+    const accounts = _activeProfile?.accounts
+    if (!accounts?.length && accountId) {
+        setProfileAccount(_activeProfile, { id: accountId, color: '' })
     }
-
-    if (accountId) {
-        const profileAccount = { id: accountId, color: '' }
-        setProfileAccount(activeProfile, profileAccount)
-        return getColor(activeProfile, accountId)
-    }
+    return accounts?.find((account) => account.id === accountId)?.color ?? AccountColor.Blue
 }
 
 /**

@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
+    import { localize } from '@core/i18n'
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { AccountActionsModal, DashboardPane, Text, Modal } from 'shared/components'
+    import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
+    import { AccountActionsModal, DashboardPane, Modal, Text } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -23,26 +24,26 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        addMessagesPair,
+        accountSyncingQueueStore,
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMeta,
-        getSyncAccountOptions,
+        getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
+        initializeAccountSyncingQueue,
         isFirstSessionSync,
         isTransferring,
-        prepareAccountInfo,
-        processMigratedTransactions,
+        processAccountSyncingQueue,
+        processLoadedAccounts,
         removeEventListeners,
-        selectedAccount,
-        selectedAccountId,
+        selectedAccountIdStore,
+        selectedAccountStore,
         transferState,
-        updateBalanceOverview,
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { onMount } from 'svelte'
+    import { getContext, onMount } from 'svelte'
+    import { get, Readable } from 'svelte/store'
     import {
         AccountAssets,
         AccountBalance,
@@ -56,6 +57,8 @@
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
 
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+
     let modal: Modal
 
     $: {
@@ -68,7 +71,7 @@
     let isGeneratingAddress = false
 
     // If account changes force regeneration of Ledger receive address
-    $: if ($selectedAccountId && $isLedgerProfile) {
+    $: if ($selectedAccountIdStore && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
@@ -79,86 +82,44 @@
         }
     }
 
-    function loadAccounts() {
-        const _onError = (error: any = null) => {
+    $: accountSyncingQueueLength = $accountSyncingQueueStore?.length || 0
+    $: if (accountSyncingQueueLength > 0) {
+        void processAccountSyncingQueue()
+    } else {
+        if (get(isFirstSessionSync) && $accountSyncingQueueStore !== null) {
+            isFirstSessionSync.set(false)
+        }
+    }
+
+    async function loadAccounts(): Promise<void> {
+        const loadedAccounts = await asyncGetAccounts()
+
+        try {
+            if (loadedAccounts.length <= 0) {
+                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
+                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+
+                if ($isFirstSessionSync) {
+                    isFirstSessionSync.set(false)
+                }
+            } else {
+                await processLoadedAccounts(loadedAccounts)
+                setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+                accountsLoaded.set(true)
+                initializeAccountSyncingQueue()
+            }
+        } catch (err) {
             if ($isLedgerProfile) {
-                if (!LedgerErrorType[error.type]) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                if (!LedgerErrorType[err.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
                 }
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(error?.error || 'error.global.generic'),
+                    message: localize(err?.error || 'error.global.generic'),
                 })
             }
         }
-
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = async () => {
-                    accountsLoaded.set(true)
-
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
-
-                    try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
-                    } catch (err) {
-                        _onError(err)
-                    }
-                }
-
-                if (accountsResponse.payload.length === 0) {
-                    void _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
-
-                    let completeCount = 0
-                    const newAccounts = []
-                    for (const payloadAccount of accountsResponse.payload) {
-                        addMessagesPair(payloadAccount)
-
-                        getAccountMeta(payloadAccount.id, (err, meta) => {
-                            if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
-
-                                const account = prepareAccountInfo(payloadAccount, meta)
-                                newAccounts.push(account)
-                            } else {
-                                _onError(err)
-                            }
-
-                            completeCount++
-
-                            if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(
-                                    payloadAccount.id,
-                                    payloadAccount.messages,
-                                    payloadAccount.addresses
-                                )
-                                updateBalanceOverview(
-                                    totalBalance.balance,
-                                    totalBalance.incoming,
-                                    totalBalance.outgoing
-                                )
-                                void _continue()
-                            }
-                        })
-                    }
-                }
-            },
-            onError(err) {
-                _onError(err)
-            },
-        })
     }
 
     function onGenerateAddress(accountId: AccountIdentifier) {
@@ -369,7 +330,7 @@
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
-                loadAccounts()
+                void loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)
@@ -392,16 +353,16 @@
     })
 </script>
 
-{#if $selectedAccount}
+{#if $selectedAccountStore}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccount?.id}
+        {#key $selectedAccountStore?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     {#if $accountRoute !== AccountRoute.Manage}
                         <AccountBalance onMenuClick={modal?.toggle} />
                     {/if}
                     <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccountStore?.id)}
                             <div class="px-6 my-4">
                                 <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
                             </div>
@@ -413,12 +374,12 @@
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            <ManageAccount alias={$selectedAccountStore.alias} account={$selectedAccountStore} />
                         {/if}
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                    <AccountHistory transactions={getAccountMessages($selectedAccountStore)} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <DashboardPane classes="w-full h-1/2">

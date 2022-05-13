@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { Unit } from '@iota/unit-converter'
+    import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
@@ -16,15 +17,15 @@
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     $: showSpinner = !!$participationAction || $isSyncing
 
     $: canParticipateInEvent =
         isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)
 
-    $: cannotStake = getAccountParticipationAbility($selectedAccount) === AccountParticipationAbility.HasDustAmount
+    $: cannotStake = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
     $: isStakedAndCanParticipate = $stakedAmount > 0 && canParticipateInEvent
 
@@ -44,6 +45,11 @@
     let tooltipAnchor
     function toggleTooltip(): void {
         showTooltip = !showTooltip
+    }
+
+    let showPreciseStakedAmount = false
+    function togglePreciseStakedAmount() {
+        showPreciseStakedAmount = !showPreciseStakedAmount
     }
 
     function handleStakeFundsClick(): void {
@@ -72,28 +78,24 @@
     }
 </script>
 
-<div class="p-6 flex flex-col justify-between space-y-6 w-full h-full">
-    <div class="flex flex-col justify-between">
-        <div class="flex flex-row justify-between items-start">
-            <Text type="p" smaller overrideColor classes="mb-3 text-gray-700 dark:text-gray-500">
-                {localize('views.staking.summary.stakedFunds')}
-            </Text>
-            {#if isPartiallyStakedAndCanParticipate}
-                <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
-                    <Icon icon="exclamation" classes="fill-current text-yellow-600" />
-                </div>
-            {/if}
+<div class="p-6 flex flex-col justify-between w-full h-full relative">
+    <div class="flex flex-row justify-between items-start">
+        <Text type="p">{localize('views.staking.summary.stakedFunds')}</Text>
+    </div>
+    <div class="flex flex-col flex-wrap items-start mt-6">
+        <div on:click={togglePreciseStakedAmount}>
+            <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
+                {showPreciseStakedAmount
+                    ? formatUnitPrecision(canParticipateInEvent ? $stakedAmount : 0, Unit.Mi)
+                    : formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0, true, 3)}
+            </h1>
         </div>
-        <Text type="h2">{formatUnitBestMatch(canParticipateInEvent ? $stakedAmount : 0)}</Text>
         {#if canParticipateInEvent}
-            <Text type="p" smaller secondary classes="mt-2">
-                {formatUnitBestMatch($unstakedAmount)}
-                {localize('general.unstaked')}
-            </Text>
+            <Text type="p">{formatUnitBestMatch($unstakedAmount)} {localize('general.unstaked')}</Text>
         {/if}
     </div>
     <Button
-        classes="w-full text-14"
+        classes="w-full text-14 mt-6"
         disabled={showSpinner || !canParticipateInEvent}
         caution={isStakedAndCanParticipate && isPartiallyStakedAndCanParticipate}
         secondary={isStakedAndCanParticipate && !isPartiallyStakedAndCanParticipate}
@@ -111,6 +113,16 @@
             <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
         {:else}{localize(`actions.${isStakedAndCanParticipate ? 'manageStake' : 'stakeFunds'}`)}{/if}
     </Button>
+    {#if isPartiallyStakedAndCanParticipate}
+        <div
+            bind:this={tooltipAnchor}
+            on:mouseenter={toggleTooltip}
+            on:mouseleave={toggleTooltip}
+            class="absolute top-6 right-6"
+        >
+            <Icon icon="exclamation" classes="fill-current text-yellow-600" />
+        </div>
+    {/if}
 </div>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

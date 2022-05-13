@@ -37,7 +37,7 @@
     import {
         api,
         asyncCreateAccount,
-        asyncSyncAccountOffline,
+        asyncSyncAccount,
         isBackgroundSyncing,
         isFirstSessionSync,
         isSyncing,
@@ -54,6 +54,7 @@
         LAST_ASSEMBLY_STAKING_PERIOD,
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
+    import { pendingParticipations, resetParticipation } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
@@ -87,6 +88,14 @@
         if (os) {
             openSnapshotPopup()
         }
+    })
+
+    let previousPendingParticipationsLength = 0
+    const unsubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
+        if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
+            resetParticipation()
+        }
+        previousPendingParticipationsLength = participations?.length ?? 0
     })
 
     $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
@@ -213,6 +222,7 @@
     onDestroy(() => {
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
+        unsubscribePendingParticipations()
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
@@ -305,7 +315,7 @@
         const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
+                await asyncSyncAccount(account)
 
                 setSelectedAccount(account?.id)
                 $accountRouter.reset()
@@ -398,10 +408,6 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded) {
-        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
-    }
-
     $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
@@ -417,7 +423,7 @@
         />
     {/if}
     <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
+        <Sidebar />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
             <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />

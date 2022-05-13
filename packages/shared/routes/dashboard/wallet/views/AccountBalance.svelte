@@ -6,7 +6,7 @@
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let classes = ''
 
@@ -32,28 +32,28 @@
         : 'pb-12'} {classes}"
 >
     <!-- Balance -->
-    <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
+    <div data-label="total-balance" class="flex flex-col flex-wrap">
         {#if !$mobile}
-            <p class="text-11 leading-120 text-gray-800 dark:text-white uppercase tracking-widest">
+            <Text type="p">
                 {localize('general.balance')}
-            </p>
+            </Text>
         {/if}
-        <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
+        <div class="flex flex-col flex-wrap items-start mt-6">
             <div on:click={togglePreciseBalance}>
-                <Text type="h2">
+                <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
                     {showPreciseBalance
-                        ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
-                        : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
-                </Text>
+                        ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
+                        : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
+                </h1>
             </div>
-            <Text type="p" smaller>
-                {$selectedAccount?.balanceEquiv}
+            <Text type="p">
+                {$selectedAccountStore?.balanceEquiv}
             </Text>
         </div>
     </div>
     {#if $accountRoute === AccountRoute.Init || $mobile}
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7">
+        <div class="flex flex-row justify-between space-x-4 mt-6">
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}

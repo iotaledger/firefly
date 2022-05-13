@@ -1,21 +1,22 @@
 import { Unit } from '@iota/unit-converter'
-import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
+import { convertToFiat, currencies, exchangeRates, formatNumber } from 'shared/lib/currency'
 import { formatStakingAirdropReward } from 'shared/lib/participation/staking'
 import { totalAssemblyStakingRewards, totalShimmerStakingRewards } from 'shared/lib/participation/stores'
 import { activeProfile } from 'shared/lib/profile'
 import { Asset, Token } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 import { UNIT_MAP } from 'shared/lib/units'
-import { selectedAccount } from 'shared/lib/wallet'
+import { selectedAccountStore } from 'shared/lib/wallet'
 import { derived } from 'svelte/store'
 import { StakingAirdrop } from 'shared/lib/participation/types'
+import { getNumberOfDecimalPlaces } from '@lib/utils'
 
 export const assets = derived(
     [
         exchangeRates,
         currencies,
         activeProfile,
-        selectedAccount,
+        selectedAccountStore,
         totalAssemblyStakingRewards,
         totalShimmerStakingRewards,
     ],
@@ -29,15 +30,20 @@ export const assets = derived(
     ]) => {
         if (!$activeProfile || !$selectedAccount) return []
         const profileCurrency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+
+        const rawFiatPrice = convertToFiat(
+            UNIT_MAP[Unit.Mi].val,
+            $currencies[CurrencyTypes.USD],
+            $exchangeRates[profileCurrency]
+        )
+        const numDecimalPlaces = getNumberOfDecimalPlaces(rawFiatPrice)
+        const formattedFiatPrice = formatNumber(rawFiatPrice, numDecimalPlaces, numDecimalPlaces)
+
         const assets: Asset[] = [
             {
                 name: Token.IOTA,
                 balance: $selectedAccount.balance,
-                fiatPrice: `${convertToFiat(
-                    UNIT_MAP[Unit.Mi].val,
-                    $currencies[CurrencyTypes.USD],
-                    $exchangeRates[profileCurrency]
-                )} ${profileCurrency}`,
+                fiatPrice: `${formattedFiatPrice} ${profileCurrency}`,
                 fiatBalance: $selectedAccount.balanceEquiv,
                 color: '#6E82A4',
             },

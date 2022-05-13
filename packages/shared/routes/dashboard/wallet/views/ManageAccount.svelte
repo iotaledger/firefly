@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { activeProfile, getAccountColor, setProfileAccount } from 'shared/lib/profile'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
@@ -15,13 +15,13 @@
 
     let accountAlias = alias
     let isBusy = false
-    let color = getColor($activeProfile, account.id) as string
+    let color = getAccountColor(account.id) as string
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
+        setProfileAccount($activeProfile, { id: $selectedAccountStore?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias === alias) {
             $accountRouter.goTo(AccountRoute.Init)
@@ -40,11 +40,11 @@
                 return (error = localize('error.account.duplicate'))
             }
             isBusy = true
-            api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
+            api.setAlias($selectedAccountStore?.id, trimmedAccountAlias, {
                 onSuccess() {
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
-                            if (account.id === $selectedAccount?.id) {
+                            if (account.id === $selectedAccountStore?.id) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     account,
@@ -73,7 +73,7 @@
     }
 
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
-    $: hasColorChanged = getColor($activeProfile, account.id) !== color
+    $: hasColorChanged = getAccountColor(account.id) !== color
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">

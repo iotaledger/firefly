@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength } from '@lib/helpers'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
+    import { showAppNotification } from '@lib/notifications'
+    import { closePopup, popupState } from '@lib/popup'
+    import { isLedgerProfile } from '@lib/profile'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from '@lib/wallet'
+    import { AccountColor } from '@lib/typings/color'
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
@@ -15,7 +16,7 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = AccountColors.Blue
+    let color = AccountColor.Blue
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
@@ -87,7 +88,7 @@
 <div class="flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.createNewWallet')}</Text>
+            <Text type="h5">{localize('general.addAWallet')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
