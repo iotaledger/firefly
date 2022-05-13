@@ -11,8 +11,6 @@ export interface IAccountState extends IAccount {
     balances: IAccountBalances
     color?: string
     // TODO: refactor or remove these below
-    rawIotaBalance?: number
-    balanceEquiv?: string
     signerType: SignerType
     messages: Message[]
     addresses: Address[]

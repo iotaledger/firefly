@@ -11,8 +11,6 @@
     export let classes = ''
     export let modal: Modal
 
-    export let onMenuClick = (): void => {}
-
     let showPreciseBalance = false
 
     function handleSendClick() {
@@ -48,12 +46,12 @@
             <div on:click={togglePreciseBalance}>
                 <Text type="h2">
                     {showPreciseBalance
-                        ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
-                        : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
+                        ? formatUnitPrecision($selectedAccount?.balances.available, Unit.i)
+                        : formatUnitBestMatch($selectedAccount?.balances.available, true, 3)}
                 </Text>
             </div>
             <Text type="p" smaller>
-                {$selectedAccount?.balanceEquiv}
+                {formatUnitPrecision($selectedAccount?.balances.available, Unit.Mi)}
             </Text>
         </div>
     </div>

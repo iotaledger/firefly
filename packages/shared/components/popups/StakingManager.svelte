@@ -307,7 +307,7 @@
                             >
                                 {$isPartiallyStaked
                                     ? getFormattedFiatAmount(getStakedFunds())
-                                    : $selectedAccount.balanceEquiv}
+                                    : $selectedAccount?.balances.total}
                             </Text>
                         </Text>
                     {:else}
@@ -318,7 +318,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance()}
+                            {$selectedAccount?.balances.total}
                             •
                             <Text
                                 type="p"
@@ -327,7 +327,7 @@
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
                             >
-                                {$selectedAccount.balanceEquiv}
+                                {$selectedAccount?.balances.total}
                             </Text>
                         </Text>
                     {/if}

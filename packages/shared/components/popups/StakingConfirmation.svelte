@@ -74,7 +74,7 @@
         }
         return estimateStakingAirdropReward(
             airdrop,
-            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.rawIotaBalance,
+            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.balances.available,
             true
         )
     }

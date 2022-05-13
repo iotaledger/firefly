@@ -323,7 +323,7 @@
     }
 
     $: if ($hasLoadedAccounts) {
-        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $accounts?.[0]?.id ?? null)
     }
 
     $: showSingleAccountGuide = !busy && $loggedIn && !$activeProfile?.hasFinishedSingleAccountGuide

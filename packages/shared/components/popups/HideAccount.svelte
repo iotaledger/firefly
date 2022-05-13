@@ -17,7 +17,7 @@
 
     export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
-    $: canDelete = $account ? $account.rawIotaBalance === 0 : false
+    $: canDelete = $account ? $account?.balances?.total === 0 : false
 
     let password: string
     let error = ''
@@ -49,7 +49,7 @@
         closePopup()
         sendParams.update((params) => ({
             ...params,
-            amount: formatUnitPrecision($account.rawIotaBalance, Unit.Mi, false),
+            amount: formatUnitPrecision($account?.balances.total, Unit.Mi, false),
             unit: Unit.Mi,
             isInternal: true,
         }))

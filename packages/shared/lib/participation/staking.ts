@@ -348,7 +348,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  */
 export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
-    const amountStaked = get(selectedAccount)?.rawIotaBalance
+    const amountStaked = get(selectedAccount)?.balances.available
     return calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 }
 
@@ -425,7 +425,7 @@ export const canAccountReachMinimumAirdrop = (account: IAccountState, airdrop: S
     }
 
     const currentRewards = getCurrentRewardsForAirdrop(airdrop)
-    const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
+    const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.balances.available)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     const stakingEventStore = airdrop === StakingAirdrop.Assembly ? assemblyStakingEventState : shimmerStakingEventState
     const stakingEventState = get(stakingEventStore)

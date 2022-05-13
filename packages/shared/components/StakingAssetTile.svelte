@@ -161,7 +161,7 @@
     </div>
     <div class="flex flex-col flex-wrap space-y-1 text-right">
         <div class="flex flex-row">
-            <Text classes="font-semibold">{asset?.balance}</Text>
+            <Text classes="font-semibold">{asset?.balance.total}</Text>
         </div>
         <Text secondary smaller>{asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : FIAT_PLACEHOLDER}</Text>
     </div>

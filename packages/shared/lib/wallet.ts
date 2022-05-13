@@ -1,4 +1,5 @@
 import { IAccount, IAccountState } from '@core/account'
+import { IAccountBalances } from '@core/account/interfaces/account-balances.interface'
 import { localize } from '@core/i18n'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
 import { createStardustAccount, generateMnemonic, getAccount, profileManager } from '@core/profile-manager'
@@ -646,34 +647,6 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
 }
 
 /**
- * Updates balance fiat value for every account
- *
- * @method updateAccountBalanceEquiv
- *
- * @returns {void}
- */
-export const updateAccountsBalanceEquiv = (): void => {
-    const { accounts } = get(activeProfile)
-
-    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
-
-    accounts.update((storedAccounts) => {
-        for (const storedAccount of storedAccounts) {
-            // TODO: Refactor balance
-            // storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
-            storedAccount.balanceEquiv = formatCurrency(
-                convertToFiat(
-                    storedAccount.rawIotaBalance,
-                    get(currencies)[CurrencyTypes.USD],
-                    get(exchangeRates)[activeCurrency]
-                )
-            )
-        }
-        return storedAccounts
-    })
-}
-
-/**
  * Gets balance history for each account in market data timestamps
  *
  * @method getAccountBalanceHistory
@@ -697,7 +670,7 @@ export const getAccountBalanceHistory = (account: IAccountState, priceData: Pric
                 ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
                 ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
         // Calculate the variations for each account
-        let trackedBalance = account.rawIotaBalance
+        let trackedBalance = account.balances.total
         const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
         messages.forEach((message) => {
             const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
@@ -796,10 +769,7 @@ export const prepareAccountInfo = (
     return Object.assign<IAccountState, IAccount, Partial<IAccountState>>({} as IAccountState, account, {
         id: index.toString(),
         depositAddress,
-        rawIotaBalance: balance,
-        balanceEquiv: formatCurrency(
-            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
-        ),
+        balances: <IAccountBalances>{},
     })
 }
 

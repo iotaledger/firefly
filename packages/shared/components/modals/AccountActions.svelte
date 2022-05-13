@@ -21,7 +21,7 @@
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
         $selectedAccount.meta.index === $accounts?.length - 1 &&
-        $selectedAccount.rawIotaBalance === 0 &&
+        $selectedAccount?.balances.total === 0 &&
         $selectedAccount.messages?.length === 0
 
     const handleCustomiseAccountClick = () => {
