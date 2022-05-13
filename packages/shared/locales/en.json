@@ -61,11 +61,11 @@
             "body": "Set the network for your profile",
             "iota": {
                 "mainnet": "Default IOTA network",
-                "devnet": "IOTA network for tests and development",
+                "devnet": "IOTA network for tests and development"
             },
             "shimmer": {
                 "mainnet": "Experimental IOTA staging network",
-                "devnet": "Experimental IOTA staging network for tests and development",
+                "devnet": "Experimental IOTA staging network for tests and development"
             },
             "privatenet": "Private network"
         },

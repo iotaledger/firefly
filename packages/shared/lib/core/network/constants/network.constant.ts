@@ -5,8 +5,8 @@ import { INetwork } from '../interfaces'
 export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkType]?: INetwork } }> = {
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: {
-            id: 'chrysalis-mainnet',
-            name: 'Chrysalis Mainnet',
+            id: 'iota-mainnet',
+            name: 'IOTA Mainnet',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.Mainnet,
             bech32Hrp: 'iota',
@@ -18,8 +18,8 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.Devnet]: {
-            id: 'chrysalis-devnet',
-            name: 'Chrysalis Devnet',
+            id: 'iota-devnet',
+            name: 'IOTA Devnet',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.Devnet,
             bech32Hrp: 'atoi',
@@ -38,7 +38,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
     },
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: {
-            id: 'shimmer-mainnet',
+            id: 'shimmer',
             name: 'Shimmer Mainnet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Mainnet,
@@ -51,8 +51,8 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.Devnet]: {
-            id: 'shimmer-devnet',
-            name: 'Shimmer Devnet',
+            id: 'alphanet-5',
+            name: 'Shimmer Alphanet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Devnet,
             bech32Hrp: 'rms',
@@ -64,7 +64,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Net',
+            name: 'Private Network',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.PrivateNet,
         },

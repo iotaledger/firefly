@@ -124,11 +124,11 @@
                     <div class="col-span-10 h-full flex items-center">
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
-                    <div class="col-span-1 h-full flex items-center">
-                        {#if !disabled}
-                            <Icon icon="chevron-right" classes="right text-{iconColor}" />
-                        {/if}
-                    </div>
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
+                            <Icon icon="chevron-right" classes="right" />
+                        </div>
+                    {/if}
                 </div>
             {/if}
         {:else}
