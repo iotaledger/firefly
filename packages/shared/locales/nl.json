@@ -990,7 +990,7 @@
         "profiles": "Profielen",
         "dev": "Ontwikkelaar",
         "createAccount": "Maak een portemonnee aan",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Portemonnee toevoegen",
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Niet ingezet saldo",
         "accountColor": "Kleur portemonnee",
         "myAssets": "Mijn bezittingen",
-        "total": "Total: {balance}"
+        "total": "Totaal: {balance}"
     },
     "dates": {
         "today": "Vandaag",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "Kan staking event niet vinden.",
             "cannotVisitAirdropWebsite": "Kan de {airdrop} website niet openen.",
             "invalidStakingEventId": "Ongeldig staking event ID.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Het ophalen van vorige beloningen is mislukt, controleer alstublieft uw firewall instellingen."
         },
         "invalidDate": "ONGELDIGE DATUM",
         "invalidTime": "ONGELDIGE TIJD"
