@@ -990,7 +990,7 @@
         "profiles": "Профили",
         "dev": "За разработчици",
         "createAccount": "Създаване на портфейл",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Име на портфейла",
         "latestTransactions": "Последни трансакции",
         "transactions": "Транзакции",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Стейкнати средства",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Днес",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "invalidStakingEventId": "Invalid staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

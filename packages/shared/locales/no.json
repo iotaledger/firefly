@@ -990,7 +990,7 @@
         "profiles": "Profiler",
         "dev": "Utvikling",
         "createAccount": "Opprette lommebok",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Navn på lommebok",
         "latestTransactions": "Siste transaksjoner",
         "transactions": "Transaksjoner",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Stakede midler",
         "unstakedFunds": "Ikke-stakede midler",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "I dag",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Klarte ikke å bruke den valgte kontoen.",
             "cannotFindStakingEvent": "Klarer ikke å finne staking-hendelsen.",
             "cannotVisitAirdropWebsite": "Klarte ikke å åpne {airdrop}-nettsiden.",
-            "invalidStakingEventId": "Ugyldig staking-ID."
+            "invalidStakingEventId": "Ugyldig staking-ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

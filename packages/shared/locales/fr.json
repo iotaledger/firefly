@@ -990,7 +990,7 @@
         "profiles": "Profils",
         "dev": "Dév",
         "createAccount": "Créer un Portefeuille",
-        "createNewWallet": "Créer un nouveau portefeuille",
+        "addAWallet": "Add a wallet",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
         "transactions": "Transactions",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Fonds placés",
         "unstakedFunds": "Fonds non placés",
         "accountColor": "Couleur du portefeuille",
-        "myAssets": "Mes actifs"
+        "myAssets": "Mes actifs",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Impossible d'utiliser le compte spécifié.",
             "cannotFindStakingEvent": "Impossible de trouver l'événement de Staking.",
             "cannotVisitAirdropWebsite": "Impossible d'ouvrir le site web de {airdrop}.",
-            "invalidStakingEventId": "ID d'événement de staking invalide."
+            "invalidStakingEventId": "ID d'événement de staking invalide.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "DATE NON VALIDE",
         "invalidTime": "HEURE NON VALIDE"
