@@ -1,14 +1,19 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { Button, Icon, QR, Spinner, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     export let isGeneratingAddress = false
-
     export let onGenerateAddress: (id: string) => void = () => {}
+
+    let wrapperHeight = 0
+    let wrapperWidth = 0
+
+    // calculate the size of the QR code based on the available space and the max size
+    $: qrSize = Math.max(Math.min(wrapperWidth - 225, wrapperHeight - 225, 200), 0)
 
     const generateNewAddress = (): void => {
         onGenerateAddress($selectedAccountStore.id)
@@ -19,7 +24,11 @@
     }
 </script>
 
-<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
+<div
+    class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6"
+    bind:clientHeight={wrapperHeight}
+    bind:clientWidth={wrapperWidth}
+>
     <div class="w-full flex flex-row justify-between items-center">
         <div class="w-full flex flex-row space-x-4 items-center">
             <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>
@@ -48,7 +57,7 @@
         </div>
     {:else}
         <div class="flex flex-auto items-center justify-center mb-4">
-            <QR size={98} data={$selectedAccountStore.depositAddress} classes="w-3/4 h-3/4" />
+            <QR size={qrSize} data={$selectedAccountStore.depositAddress} />
         </div>
         <div class="mb-6">
             <Text secondary smaller classes="mb-1">
