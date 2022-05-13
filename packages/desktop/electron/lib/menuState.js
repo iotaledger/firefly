@@ -24,8 +24,6 @@ export const menuState = {
         paste: 'Paste',
         selectAll: 'Select All',
         wallet: 'Wallet',
-        send: 'Send Funds',
-        receive: 'Receive Funds',
         addAccount: 'Add Account',
         help: 'Help',
         troubleshoot: 'Troubleshoot',

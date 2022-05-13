@@ -1,12 +1,14 @@
 <script lang="typescript">
-    import { Chip, Icon, Text } from 'shared/components'
+    import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let classes = undefined
 
     export let name = ''
     export let id = ''
+    export let networkType: NetworkType
+    export let networkProtocol: NetworkProtocol
     export let isDeveloper = false
     export let isLedgerProfile = false
     export let bgColor: string
@@ -31,20 +33,23 @@
 </script>
 
 <div class="flex items-center justify-center w-24">
-    <div class="flex flex-col justify-between items-center space-y-3">
-        <div
-            on:click={() => handleOnClick()}
-            class="h-20 w-20 {bgColor
-                ? `bg-${bgColor}-500`
-                : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
-        >
-            {#if slots}
-                <slot />
-            {:else}
-                <Text type="h3" classes="text-white">{getInitials()}</Text>
-            {/if}
+    <div class="flex flex-col justify-between items-center">
+        <div class="relative mb-3">
+            <div
+                on:click={handleOnClick}
+                class="h-18 w-18 {bgColor
+                    ? `bg-${bgColor}-500`
+                    : ''} rounded-full font-bold text-center flex items-center justify-center {classes}"
+            >
+                {#if slots}
+                    <slot />
+                {:else}
+                    <Text type="h3" classes="text-white">{getInitials()}</Text>
+                {/if}
+            </div>
+            <NetworkIconBadge {networkType} {networkProtocol} />
         </div>
-        <div class="flex flex-row items-baseline space-x-1.5">
+        <div class="flex flex-row items-baseline space-x-1.5 mb-2">
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
@@ -56,7 +61,7 @@
             <Text type="h5" classes="text-center">{name}</Text>
         </div>
         {#if isDeveloper}
-            <Chip label={localize('general.dev')} />
+            <DeveloperIndicatorPill />
         {/if}
     </div>
 </div>

@@ -8,16 +8,16 @@
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { Locale } from '@core/i18n'
-    import { asyncSetStrongholdPassword, wallet } from 'shared/lib/wallet'
-    import { get, Readable } from 'svelte/store'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { localize } from '@core/i18n'
+    import { Readable } from 'svelte/store'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
-    export let locale: Locale
     export let account: Readable<WalletAccount>
 
-    const profileName = get(activeProfile)?.name
+    const profileName = $activeProfile?.name
+    const { isStrongholdLocked } = $activeProfile
 
     let password = ''
     let error = ''
@@ -29,7 +29,7 @@
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPassword(password)
             } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
@@ -38,7 +38,7 @@
                 return
             }
 
-            const fileName = generateTransactionHistoryFileName(profileName, $account.alias)
+            const fileName = generateTransactionHistoryFileName(profileName, $account.alias())
             const contents = generateTransactionHistoryCsvFromAccount($account, {
                 id: true,
                 internal: true,
@@ -53,30 +53,30 @@
                     closePopup()
                     showAppNotification({
                         type: 'info',
-                        message: locale('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $account.alias, filePath: filePath },
+                        message: localize('notifications.exportTransactionHistory.success', {
+                            values: { accountAlias: $account.alias(), filePath: filePath },
                         }),
                     })
                 }
             } catch {
                 showAppNotification({
                     type: 'error',
-                    message: locale('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $account.alias },
+                    message: localize('notifications.exportTransactionHistory.error', {
+                        value: { accountAlias: $account.alias() },
                     }),
                 })
             }
 
             isBusy = false
         } catch (err) {
-            error = locale(err.error)
+            error = localize(err.error)
 
             if ($isLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error),
+                    message: localize(err.error),
                 })
             }
         } finally {
@@ -89,27 +89,27 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6">{locale('popups.exportTransactionHistory.title')}</Text>
-<Text type="p" secondary classes="mb-5">{locale('popups.exportTransactionHistory.body')}</Text>
+<Text type="h4" classes="mb-6">{localize('popups.exportTransactionHistory.title')}</Text>
+<Text type="p" secondary classes="mb-5">{localize('popups.exportTransactionHistory.body')}</Text>
 <div class="flex w-full flex-row flex-wrap">
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.exportTransactionHistory.profileName')}</Text>
+        <Text type="p">{localize('popups.exportTransactionHistory.profileName')}</Text>
         <Text type="p" highlighted>{profileName}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$account.alias}</Text>
+        <Text type="p">{localize('popups.exportTransactionHistory.accountName')}</Text>
+        <Text type="p" highlighted>{$account.alias()}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
-            <Text type="p" secondary classes="mb-3">{locale('popups.exportTransactionHistory.typePassword')}</Text>
+            <Text type="p" secondary classes="mb-3">{localize('popups.exportTransactionHistory.typePassword')}</Text>
             <Password
                 {error}
                 classes="w-full mb-2"
                 bind:value={password}
                 showRevealToggle
-                {locale}
-                placeholder={locale('general.password')}
+                locale={localize}
+                placeholder={localize('general.password')}
                 autofocus
                 submitHandler={() => handleExportTransactionHistory()}
                 disabled={isBusy}
@@ -118,7 +118,7 @@
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}
-            >{locale('actions.cancel')}</Button
+            >{localize('actions.cancel')}</Button
         >
         <Button
             classes="w-full"
@@ -126,8 +126,8 @@
             disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
         >
             {#if isBusy}
-                <Spinner busy={true} message={locale('actions.exporting')} classes="justify-center" />
-            {:else}{locale('actions.export')}{/if}
+                <Spinner busy={true} message={localize('actions.exporting')} classes="justify-center" />
+            {:else}{localize('actions.export')}{/if}
         </Button>
     </div>
 </div>

@@ -17,9 +17,10 @@
         try {
             await backupRouter.next(event.detail)
         } catch (err) {
+            console.error(err)
             showAppNotification({
                 type: 'error',
-                message: locale(err.error),
+                message: locale(err.error ?? 'error.global.generic'),
             })
         } finally {
             busy = false

@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { lastActiveAt, logout } from 'shared/lib/app'
-    import { activeProfile } from 'shared/lib/profile'
+    import { lastActiveAt } from 'shared/lib/app'
+    import { activeProfile, logout } from '@core/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -20,7 +20,8 @@
 
             const ap = get(activeProfile)
             if (ap) {
-                const timeoutDuration = MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeout
+                const timeoutDuration =
+                    MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * ap.settings.lockScreenTimeoutInMinutes
 
                 if (!isIdleTimeValid(new Date(), timeoutDuration)) lock()
 

@@ -1,10 +1,8 @@
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
-import { localize } from '@core/i18n'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { localize, formatDate } from '@core/i18n'
 import { formatUnitPrecision } from 'shared/lib/units'
-import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
-import { formatDate } from '@core/i18n'
+import { isSelfTransaction, AccountColors } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
@@ -12,7 +10,9 @@ import { Message } from './typings/message'
 import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
-import { BalanceHistory, WalletAccount } from './typings/wallet'
+import { BalanceHistory } from './typings/wallet'
+import { WalletAccount } from './typings/walletAccount'
+import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
@@ -28,11 +28,11 @@ const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activ
                 currency: AvailableExchangeRates.USD,
                 timeframe: HistoryDataProps.SEVEN_DAYS,
             }
-            updateProfile('settings.chartSelectors', chartSelectors)
+            updateActiveProfileSettings({ chartSelectors: chartSelectors })
         }
         //
         return (
-            $priceData?.[$activeProfile?.settings.chartSelectors.currency.toLocaleLowerCase()]?.[
+            $priceData?.[$activeProfile?.settings?.chartSelectors?.currency.toLocaleLowerCase()]?.[
                 $activeProfile?.settings.chartSelectors.timeframe
             ]
                 ?.slice()

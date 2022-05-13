@@ -6,7 +6,7 @@ import { ResponseTypes } from './typings/bridge'
 import { LedgerStatus } from './typings/ledger'
 import { Message } from './typings/message'
 import { MigrationData } from './typings/migration'
-import { NodeInfo } from './typings/node'
+import { INodeInfo } from '@core/network'
 import { StrongholdStatus } from './typings/wallet'
 import { ErrorObject, ValidationResponse } from './typings/validator'
 import { ErrorTypes } from './typings/validator'
@@ -465,7 +465,7 @@ class MnemonicValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as string
 
-        if (payload.split(' ').length !== 24) {
+        if (payload?.split(' ').length !== 24) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid mnemonic length received.',
@@ -637,7 +637,7 @@ class NodeInfoValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as NodeInfo
+        const payload = response.payload as INodeInfo
 
         if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
             return super.createResponse(false, {

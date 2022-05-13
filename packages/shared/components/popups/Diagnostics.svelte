@@ -3,7 +3,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { Locale } from '@core/i18n'
 
@@ -31,13 +31,13 @@
         })
         appVars.push({
             label: 'views.settings.currency.title',
-            value: $activeProfile.settings.currency,
+            value: $activeProfile?.settings.currency,
         })
         appVars.push({
             label: 'views.settings.networkConfiguration.nodeConfiguration.title',
             value: locale(
                 `views.settings.networkConfiguration.nodeConfiguration.${
-                    $activeProfile.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+                    $activeProfile?.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
                 }`
             ),
         })

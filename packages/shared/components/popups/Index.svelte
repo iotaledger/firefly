@@ -6,13 +6,12 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
-    import AddressHistory from './AddressHistory.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
-    import CreateAccount from './CreateAccount.svelte'
+    import CreateAccountPopup from './CreateAccountPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -38,7 +37,6 @@
     import StakingManager from './StakingManager.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
-    import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
@@ -46,6 +44,10 @@
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
+    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
+    import SendFormPopup from './SendFormPopup.svelte'
 
     export let locale: Locale
 
@@ -56,8 +58,8 @@
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
-
-    let autofocusContent = true
+    export let autofocusContent = true
+    export let relative = true
 
     enum PopupSize {
         Small = 'small',
@@ -79,6 +81,7 @@
             size = PopupSize.Large
             break
         case 'stakingManager':
+        case 'transactionDetails':
             autofocusContent = false
             break
         default:
@@ -96,7 +99,6 @@
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,
-        addressHistory: AddressHistory,
         ledgerNotConnected: LedgerNotConnected,
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
@@ -112,10 +114,9 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
-        createAccount: CreateAccount,
+        createAccount: CreateAccountPopup,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        transaction: Transaction,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
@@ -129,6 +130,10 @@
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         singleAccountGuide: SingleAccountGuide,
+        receiveAddress: ReceiveAddressPopup,
+        activityDetails: ActivityDetailsPopup,
+        sendConfirmation: SendConfirmationPopup,
+        sendForm: SendFormPopup,
     }
 
     const onKey = (e) => {
@@ -190,18 +195,20 @@
         class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
             overflow ? '' : 'overflow-hidden'
         }
-                h-full z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
-            $mobile && 'z-40'
-        }`}
+                h-full z-20 ${
+                    fullScreen
+                        ? 'bg-white dark:bg-gray-900'
+                        : 'bg-gray-800 bg-opacity-70 dark:bg-black dark:bg-opacity-50'
+                } ${$mobile && 'z-40'}`}
     >
         <div tabindex="0" on:focus={handleFocusFirst} />
         <popup-content
             use:clickOutside
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
-            } ${overflow ? 'overflow' : 'relative'}`}
+            class={`${size} bg-white rounded-xl pt-6 px-6 pb-6 ${
+                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-800 shadow-elevation-4'
+            } ${overflow ? 'overflow' : ''} ${relative ? 'relative' : ''}`}
         >
             {#if !hideClose}
                 <button

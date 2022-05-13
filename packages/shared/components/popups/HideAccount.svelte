@@ -2,13 +2,11 @@
     import { Button, Password, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
-    import { isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
-    import { api } from 'shared/lib/wallet'
+    import { isSoftwareProfile } from '@core/profile'
+    import { setStrongholdPassword } from '@core/profile-manager'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { Writable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { formatUnitPrecision } from '@lib/units'
@@ -16,37 +14,39 @@
     export let locale: Locale
 
     export let account: Writable<WalletAccount>
-    export let hasMultipleAccounts
+    export let hasMultipleAccounts: boolean
 
     export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
-    let canDelete
     $: canDelete = $account ? $account.rawIotaBalance === 0 : false
 
-    let password
+    let password: string
     let error = ''
     let isBusy = false
 
-    function handleHideClick() {
+    async function handleHideClick(): Promise<void> {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
             if ($isSoftwareProfile) {
-                api.setStrongholdPassword(password, {
-                    onSuccess() {
-                        triggerHideAccount()
-                    },
-                    onError(err) {
-                        isBusy = false
-                        error = locale(err.error)
-                    },
-                })
+                await hideStrongholdAccount(password)
             } else {
                 triggerHideAccount()
             }
         }
     }
-    function handleMoveFundsClick() {
+
+    async function hideStrongholdAccount(password: string): Promise<void> {
+        try {
+            await setStrongholdPassword(password)
+            triggerHideAccount()
+        } catch (e) {
+            isBusy = false
+            error = locale(e.error)
+        }
+    }
+
+    function handleMoveFundsClick(): void {
         closePopup()
         sendParams.update((params) => ({
             ...params,
@@ -54,12 +54,14 @@
             unit: Unit.Mi,
             isInternal: true,
         }))
-        $accountRouter.goTo(AccountRoute.Send)
+        // TODO: open send form
     }
-    function handleCancelClick() {
+
+    function handleCancelClick(): void {
         closePopup()
     }
-    function triggerHideAccount() {
+
+    function triggerHideAccount(): void {
         isBusy = false
         closePopup()
         hideAccount($account?.id)
@@ -70,7 +72,7 @@
     <div class="mb-5">
         <Text type="h4">
             {locale(`popups.hideAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-                values: { name: $account?.alias },
+                values: { name: $account?.alias() },
             })}
         </Text>
     </div>
@@ -115,12 +117,12 @@
     </div>
 {:else}
     <div class="mb-5">
-        <Text type="h4">{locale('popups.hideAccount.errorTitle', { values: { name: $account?.alias } })}</Text>
+        <Text type="h4">{locale('popups.hideAccount.errorTitle', { values: { name: $account?.alias() } })}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap">
         <Text type="p" secondary classes="mb-3">{locale('popups.hideAccount.errorBody1')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {locale('popups.hideAccount.errorBody2', { values: { balance: $account?.balance } })}
+            {locale('popups.hideAccount.errorBody2', { values: { balance: $account?.balance() } })}
         </Text>
         <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>

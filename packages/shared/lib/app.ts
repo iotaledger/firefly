@@ -1,17 +1,8 @@
 import { Unit } from '@iota/unit-converter'
-import { isSoftwareProfile } from 'shared/lib/profile'
+import { SendParams } from 'shared/lib/typings/sendParams'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { localize } from '@core/i18n'
-import { stopPollingLedgerStatus } from './ledger'
-import { showAppNotification } from './notifications'
-import { resetParticipation } from './participation'
-import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouters } from '@core/router'
 import { Stage } from './typings/stage'
-import { api, destroyActor, resetWallet } from './wallet'
-import { SendParams } from 'shared/lib/typings/sendParams'
 
 /**
  * Beta mode
@@ -84,64 +75,6 @@ export const login = (): void => {
     loggedIn.set(true)
     lastActiveAt.set(new Date())
 }
-
-/**
-
- * Logout from current profile
- */
-export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> =>
-    new Promise<void>((resolve) => {
-        const _activeProfile = get(activeProfile)
-
-        const _cleanup = () => {
-            /**
-             * CAUTION: Be sure to make any necessary API calls before
-             * the event actor is destroyed!
-             */
-            if (_activeProfile) {
-                destroyActor(_activeProfile.id)
-            }
-
-            if (get(isSoftwareProfile)) {
-                isStrongholdLocked.set(true)
-            }
-            if (get(isLedgerProfile)) {
-                stopPollingLedgerStatus()
-            }
-
-            lastActiveAt.set(new Date())
-
-            clearSendParams()
-            closePopup(true)
-            loggedIn.set(false)
-            if (_clearActiveProfile) clearActiveProfile()
-            resetParticipation()
-            resetWallet()
-            resetRouters()
-
-            resolve()
-        }
-
-        // no need to lock strong hold if we are logging out after deleting a profile
-        // or we are not using a software profile
-        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
-            api.lockStronghold({
-                onSuccess() {
-                    _cleanup()
-                },
-                onError(err) {
-                    _cleanup()
-
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                },
-            })
-        } else {
-            _cleanup()
-        }
-    })
 
 /**
  * The privacy policy packaged with the current version of Firefly

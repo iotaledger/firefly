@@ -2,7 +2,7 @@
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,

@@ -2,16 +2,17 @@
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, clearActiveProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getProfileDataPath, initialise } from 'shared/lib/wallet'
+    import { getProfileDataPath } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import { activeProfile, resetActiveProfile, resetActiveProfileId } from '@core/profile'
+    import { initialiseProfileManager } from '@core/profile-manager'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let locale: Locale
 
@@ -103,19 +104,21 @@
                     if (verified === true) {
                         return Platform.getMachineId().then((machineId) =>
                             getProfileDataPath(profile.id).then((path) => {
-                                initialise(profile.id, path, sendCrashReports, machineId)
-                                api.setStoragePassword(pinCode, {
-                                    onSuccess() {
-                                        dispatch('next')
-                                    },
-                                    onError(err) {
-                                        isBusy = false
-                                        showAppNotification({
-                                            type: 'error',
-                                            message: locale(err.error),
-                                        })
-                                    },
-                                })
+                                initialiseProfileManager(path)
+                                // TODO: set storage password with profile manager api
+                                // api.setStoragePassword(pinCode, {
+                                //     onSuccess() {
+                                //         dispatch('next')
+                                //     },
+                                //     onError(err) {
+                                //         isBusy = false
+                                //         showAppNotification({
+                                //             type: 'error',
+                                //             message: locale(err.error),
+                                //         })
+                                //     },
+                                // })
+                                dispatch('next')
                             })
                         )
                     } else {
@@ -142,7 +145,8 @@
 
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
-            clearActiveProfile()
+            resetActiveProfile()
+            resetActiveProfileId()
             dispatch('previous')
         }
     }
@@ -153,29 +157,35 @@
     })
 </script>
 
-<div class="relative w-full h-full bg-white dark:bg-gray-900">
-    <button
-        data-label="back-button"
-        class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
-        disabled={hasReachedMaxAttempts}
-        on:click={handleBackClick}
-    >
-        <div class="flex items-center space-x-3">
-            <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h5">{locale('general.profiles')}</Text>
-        </div>
-    </button>
-    <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
+<div class="w-full h-full bg-white dark:bg-gray-900">
+    <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
-            <Profile name={$activeProfile?.name} bgColor="blue" />
-            <Pin
-                bind:this={pinRef}
-                bind:value={pinCode}
-                classes="mt-10 {shake && 'animate-shake'}"
-                on:submit={onSubmit}
-                disabled={hasReachedMaxAttempts || isBusy}
-                autofocus
+            <Profile
+                name={$activeProfile?.name}
+                networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
+                networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                bgColor="blue"
             />
+            <div class="flex mt-18 w-full items-center">
+                <div class="relative h-6">
+                    <button
+                        data-label="back-button"
+                        class="absolute right-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        disabled={hasReachedMaxAttempts}
+                        on:click={handleBackClick}
+                    >
+                        <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
+                    </button>
+                </div>
+                <Pin
+                    bind:this={pinRef}
+                    bind:value={pinCode}
+                    classes={shake && 'animate-shake'}
+                    on:submit={onSubmit}
+                    disabled={hasReachedMaxAttempts || isBusy}
+                    autofocus
+                />
+            </div>
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
                     ? locale('views.login.incorrectAttempts', {

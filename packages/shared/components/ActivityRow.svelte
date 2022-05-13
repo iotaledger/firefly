@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { truncateString, isBright } from 'shared/lib/helpers'
+    import { truncateString } from 'shared/lib/helpers'
     import { formatDate, localize } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
     import { ParticipationAction } from 'shared/lib/participation/types'
@@ -14,8 +14,8 @@
         isParticipationPayload,
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
-        wallet,
     } from 'shared/lib/wallet'
+    import { activeProfile } from '@core/profile'
 
     export let timestamp
     export let confirmed
@@ -23,7 +23,7 @@
     export let balance // migration tx
     export let onClick = (): void => {}
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     let messageValue = ''
     let date = localize('error.invalidDate')
@@ -82,7 +82,7 @@
             // The address in the payload was one of our accounts so grab
             // the account alias to display
             if (acc) {
-                accountAlias = acc.alias
+                accountAlias = acc.alias()
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 accountAlias = truncateString(

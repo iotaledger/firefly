@@ -1,10 +1,7 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import { networkStatus } from '../networkStatus'
-import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId, wallet } from '../wallet'
-import { WalletAccount } from '../typings/wallet'
-
+import { selectedAccount, selectedAccountId } from '@core/account'
+import { WalletAccount } from '../typings/walletAccount'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     AccountParticipationOverview,
@@ -16,9 +13,9 @@ import {
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { NetworkStatus } from '@lib/typings/network'
+import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
-import { activeProfile } from '@lib/profile'
+import { activeProfile } from '@core/profile'
 
 /**
  * The store for keeping track of pending participations.
@@ -64,16 +61,16 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
          * be derived, but doing so results in a "cannot
          * access _ before initialization" error.
          */
-        const accounts = get(wallet).accounts
+        const accounts = get(activeProfile).accounts
         if (!get(accounts)) return []
-        else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.index))
+        else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.meta.index))
     }
 )
 
 export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
+    [participationOverview /* selectedAccount */],
+    ([$participationOverview /* $selectedAccount */]) =>
+        $participationOverview?.find(({ accountIndex }) => /* accountIndex === $selectedAccount?.meta.index) ?? */ null)
 )
 
 /**
@@ -166,15 +163,16 @@ function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: Acco
 }
 
 function getCachedStakingRewards(airdrop: StakingAirdrop, accountId: string): number {
-    if (!airdrop || !accountId) return 0
+    // if (!airdrop || !accountId) return 0
 
-    const stakingRewards = get(activeProfile)?.stakingRewards
-    if (!stakingRewards) return 0
+    // // const stakingRewards = get(activeProfile)?.stakingRewards
+    // // if (!stakingRewards) return 0
 
-    const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
-    if (!accountStakingRewards) return 0
+    // // const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
+    // // if (!accountStakingRewards) return 0
 
-    return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
+    // return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
+    return 0
 }
 
 /**
@@ -248,7 +246,7 @@ export const participationEvents = writable<ParticipationEvent[]>([])
 
 function deriveParticipationEventState(
     stakingEvent: ParticipationEvent,
-    networkStatus: NetworkStatus
+    networkStatus: INetworkStatus
 ): ParticipationEventState {
     if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
         return ParticipationEventState.Inactive

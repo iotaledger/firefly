@@ -11,7 +11,7 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
@@ -27,7 +27,7 @@
 
     export let onMaxClick = (): void => {}
 
-    const currency = $activeProfile?.settings.currency ?? (AvailableExchangeRates.USD as AmountUnit)
+    const currency = $activeProfile?.settings?.currency ?? (AvailableExchangeRates.USD as AmountUnit)
     const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
 
     let showDropdown = false
@@ -42,7 +42,7 @@
 
     $: amount, unit, (amountForLabel = getFormattedLabel(amount))
     $: {
-        if (amount.length > 0) {
+        if (amount?.length > 0) {
             if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
                 const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)
@@ -162,7 +162,7 @@
 </script>
 
 <svelte:window on:click={onOutsideClick} />
-<amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
+<amount-input class:disabled class={classes} on:keydown={handleKey}>
     <Input
         {error}
         label={amountForLabel || localize('general.amount')}
@@ -177,7 +177,7 @@
         style={showDropdown ? 'border-bottom-right-radius: 0' : ''}
         isFocused={showDropdown}
     />
-    <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
+    <actions class="right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={onMaxClick}
             class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}

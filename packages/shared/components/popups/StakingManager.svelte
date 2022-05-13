@@ -3,7 +3,6 @@
     import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         canParticipate,
@@ -32,21 +31,22 @@
         StakingAirdrop,
     } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { NodePlugin } from 'shared/lib/typings/node'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
+    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
-    let { accounts } = $wallet
+    let { accounts } = $activeProfile
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
@@ -85,7 +85,7 @@
     }
 
     function getFormattedFiatAmount(amount: number): string {
-        const currency = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+        const currency = $activeProfile?.settings?.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
     }
 
@@ -181,7 +181,7 @@
     }
 
     onMount(async () => {
-        if (!hasNodePlugin(NodePlugin.Participation)) {
+        if (!doesNodeHavePlugin(NodePlugin.Participation)) {
             showAppNotification({
                 type: 'warning',
                 message: localize('error.node.pluginNotAvailable', {
@@ -234,7 +234,7 @@
         showTooltip = !showTooltip
 
         if (showTooltip) {
-            tooltipAnchor = tooltipAnchors[account?.index]
+            tooltipAnchor = tooltipAnchors[account?.meta.index]
             // Check for Assembly only because it has lower reward requirements
             tooltipMinBalance = getIotasUntilMinimumAirdropReward(account, StakingAirdrop.Assembly, true)
         } else {
@@ -263,7 +263,7 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccount?.index]}
+                        bind:this={tooltipAnchors[$selectedAccount?.meta.index]}
                         on:mouseenter={() => toggleTooltip($selectedAccount)}
                         on:mouseleave={() => toggleTooltip($selectedAccount)}
                     >
@@ -287,7 +287,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias}
+                        {$selectedAccount.alias()}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -297,7 +297,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance()}
                             •
                             <Text
                                 type="p"
@@ -319,7 +319,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance}
+                            {$selectedAccount.balance()}
                             •
                             <Text
                                 type="p"

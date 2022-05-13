@@ -20,7 +20,6 @@
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -28,6 +27,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { addNewProfile, newProfile, loadPersistedProfileIntoActiveProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -88,10 +88,9 @@
                         .then((data) => {
                             if ($newProfile) {
                                 // Save profile
-                                saveProfile($newProfile)
-                                setActiveProfile($newProfile.id)
+                                addNewProfile($newProfile)
+                                loadPersistedProfileIntoActiveProfile($newProfile.id)
 
-                                profileInProgress.set(undefined)
                                 newProfile.set(null)
                             }
                         })
@@ -116,10 +115,9 @@
                         singleMigrationBundleHash = data.bundleHash
                         return sendMigrationBundle(data.bundleHash).then(() => {
                             // Save profile
-                            saveProfile($newProfile)
-                            setActiveProfile($newProfile.id)
+                            addNewProfile($newProfile)
+                            loadPersistedProfileIntoActiveProfile($newProfile.id)
 
-                            profileInProgress.set(undefined)
                             newProfile.set(null)
                         })
                     })

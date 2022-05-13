@@ -4,7 +4,7 @@ import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { activeProfile } from '@core/profile'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,
@@ -361,25 +361,25 @@ export const findMigrationBundle = (bundleIndex: number): Bundle => {
  */
 export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<void> =>
     new Promise((resolve, reject) => {
-        api.getAccounts({
-            onSuccess(getAccountsResponse) {
-                api.getMigrationAddress(
-                    false,
-                    getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
-                    {
-                        onSuccess(response) {
-                            resolve(response.payload)
-                        },
-                        onError(error) {
-                            reject(error)
-                        },
-                    }
-                )
-            },
-            onError(getAccountsError) {
-                reject(getAccountsError)
-            },
-        })
+        // api.getAccounts({
+        //     onSuccess(getAccountsResponse) {
+        //         api.getMigrationAddress(
+        //             false,
+        //             getAccountsResponse.payload[get(activeProfile)?.ledgerMigrationCount]?.id,
+        //             {
+        //                 onSuccess(response) {
+        //                     resolve(response.payload)
+        //                 },
+        //                 onError(error) {
+        //                     reject(error)
+        //                 },
+        //             }
+        //         )
+        //     },
+        //     onError(getAccountsError) {
+        //         reject(getAccountsError)
+        //     },
+        // })
     }).then((address: MigrationAddress) => {
         const bundle = findMigrationBundle(bundleIndex)
         const spentBundleHashes = []
@@ -494,25 +494,25 @@ export const createLedgerMigrationBundle = (
     callback: () => void
 ): Promise<MigrationBundle> =>
     new Promise((resolve, reject) => {
-        api.getAccounts({
-            onSuccess(getAccountsResponse) {
-                api.getMigrationAddress(
-                    false,
-                    getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
-                    {
-                        onSuccess(response) {
-                            resolve(response.payload)
-                        },
-                        onError(error) {
-                            reject(error)
-                        },
-                    }
-                )
-            },
-            onError(getAccountsError) {
-                reject(getAccountsError)
-            },
-        })
+        // api.getAccounts({
+        //     onSuccess(getAccountsResponse) {
+        //         api.getMigrationAddress(
+        //             false,
+        //             getAccountsResponse.payload[get(activeProfile).ledgerMigrationCount].id,
+        //             {
+        //                 onSuccess(response) {
+        //                     resolve(response.payload)
+        //                 },
+        //                 onError(error) {
+        //                     reject(error)
+        //                 },
+        //             }
+        //         )
+        //     },
+        //     onError(getAccountsError) {
+        //         reject(getAccountsError)
+        //     },
+        // })
     }).then((address: MigrationAddress) => {
         const bundle = findMigrationBundle(bundleIndex)
         const transfer = {
@@ -645,12 +645,12 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
         account: 0,
     }
 
-    updateProfile(
-        'migratedTransactions',
-        _activeProfile.migratedTransactions
-            ? [..._activeProfile.migratedTransactions, migratedTransaction]
-            : [migratedTransaction]
-    )
+    // updateProfile(
+    //     'migratedTransactions',
+    //     _activeProfile?.migratedTransactions
+    //         ? [..._activeProfile?.migratedTransactions, migratedTransaction]
+    //         : [migratedTransaction]
+    // )
 }
 
 /**

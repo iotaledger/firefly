@@ -1,11 +1,10 @@
-import { get, writable } from 'svelte/store'
-
+import { updateNewProfile } from '@core/profile'
+import { backup, storeMnemonic } from '@core/profile-manager'
 import { mnemonic, strongholdPassword } from '@lib/app'
-import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from '@lib/wallet'
 import { Platform } from '@lib/platform'
-import { updateProfile } from '@lib/profile'
 import { getDefaultStrongholdName } from '@lib/utils'
-
+import { createAccount, generateAndStoreMnemonic } from '@lib/wallet'
+import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { BackupRoute } from '../enums'
 import { FireflyEvent } from '../types'
@@ -24,9 +23,10 @@ export class BackupRouter extends Subrouter<BackupRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case BackupRoute.Init:
-                await requestMnemonic()
+                await generateAndStoreMnemonic()
                 nextRoute = BackupRoute.RecoveryPhrase
                 break
+
             case BackupRoute.RecoveryPhrase:
                 nextRoute = BackupRoute.Verify
                 break
@@ -35,22 +35,20 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 nextRoute = BackupRoute.Backup
                 break
 
-            case BackupRoute.Backup:
-                if (event?.skip) {
-                    await asyncStoreMnemonic(get(mnemonic).join(' '))
-                    await asyncCreateAccount()
-                    get(appRouter).next(event)
-                } else {
+            case BackupRoute.Backup: {
+                await storeMnemonic(get(mnemonic).join(' '))
+                await createAccount()
+                const shouldCreateBackup = !event?.skip
+                if (shouldCreateBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
                     if (dest) {
-                        await asyncStoreMnemonic(get(mnemonic).join(' '))
-                        await asyncCreateAccount()
-                        await asyncBackup(dest, get(strongholdPassword))
-                        updateProfile('lastStrongholdBackupTime', new Date())
-                        get(appRouter).next(event)
+                        await backup(dest, get(strongholdPassword))
+                        updateNewProfile({ lastStrongholdBackupTime: new Date() })
                     }
                 }
+                get(appRouter).next(event)
                 break
+            }
         }
         this.setNext(nextRoute)
     }

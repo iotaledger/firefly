@@ -1,8 +1,4 @@
-export { default as AccountAssets } from './AccountAssets.svelte'
-export { default as AccountBalance } from './AccountBalance.svelte'
-export { default as AccountHistory } from './AccountHistory.svelte'
 export { default as BarChart } from './BarChart.svelte'
 export { default as LineChart } from './LineChart.svelte'
 export { default as ManageAccount } from './ManageAccount.svelte'
-export { default as Receive } from './Receive.svelte'
 export { default as Send } from './Send.svelte'

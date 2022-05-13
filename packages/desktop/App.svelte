@@ -11,7 +11,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupEmptyProfiles, cleanupInProgressProfiles, renameOldProfileFoldersToId } from 'shared/lib/profile'
     import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
     import {
         Appearance,
@@ -38,6 +37,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
     import { get } from 'svelte/store'
+    import { cleanupEmptyProfiles } from '@core/profile'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -72,8 +72,6 @@
             splash = false
             initRouters()
         }, 3000)
-
-        await renameOldProfileFoldersToId()
 
         initAppSettings.set($appSettings)
 
@@ -114,8 +112,6 @@
             addError(err)
         })
 
-        cleanupInProgressProfiles()
-
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
@@ -150,6 +146,7 @@
                 fullScreen={$popupState.fullScreen}
                 transition={$popupState.transition}
                 overflow={$popupState.overflow}
+                relative={$popupState.relative}
                 locale={$_}
             />
         {/if}

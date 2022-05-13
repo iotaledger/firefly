@@ -1,38 +1,48 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { Button, Password, Text } from 'shared/components'
-    import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
+    import {
+        activeProfile,
+        isSoftwareProfile,
+        logout,
+        profiles,
+        removeProfile,
+        removeProfileFolder,
+    } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { api, asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
+    import { asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 
     let isBusy = false
     let error = ''
-    let password
+    let password: string
 
     async function handleDeleteClick() {
         isBusy = true
         error = ''
         if ($isSoftwareProfile) {
-            api.setStrongholdPassword(password, {
-                async onSuccess() {
-                    await triggerDeleteProfile()
-                },
-                onError(err) {
-                    isBusy = false
-                    error = locale(err.error)
-                },
-            })
+            await deleteStrongholdAccount(password)
         } else {
             await triggerDeleteProfile()
         }
     }
 
+    async function deleteStrongholdAccount(password: string): Promise<void> {
+        try {
+            await setStrongholdPassword(password)
+            await triggerDeleteProfile()
+        } catch (e) {
+            error = locale(e.error)
+            isBusy = false
+        }
+    }
+
+    // TODO: move logic to action inn profile module
     async function triggerDeleteProfile() {
         try {
             const _activeProfile = get(activeProfile)
@@ -61,7 +71,7 @@
              * CAUTION: The profile must be removed from the
              * app's list of profiles that lives as a Svelte store.
              */
-            removeProfile(_activeProfile.id)
+            removeProfile(_activeProfile?.id)
 
             /**
              * NOTE: If there are no more profiles then the user should be
@@ -75,7 +85,7 @@
              * CAUTION: This removes the actual directory for the profile,
              * so it should occur last.
              */
-            await removeProfileFolder(_activeProfile.id)
+            await removeProfileFolder(_activeProfile?.id)
         } catch (err) {
             if (err && err?.type && err?.type == 'AccountNotEmpty') {
                 showAppNotification({

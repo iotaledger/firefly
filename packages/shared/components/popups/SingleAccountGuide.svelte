@@ -2,14 +2,14 @@
     import { Button, Text, Illustration, TextHint } from 'shared/components'
     import { closePopup } from '@lib/popup'
     import { localize } from '@core/i18n'
-    import { updateProfile } from '@lib/profile'
     import { onMount } from 'svelte'
+    import { updateActiveProfile } from '@core/profile'
 
     let video = null
 
-    function onClick() {
+    function onClick(): void {
         closePopup()
-        updateProfile('hasFinishedSingleAccountGuide', true)
+        updateActiveProfile({ hasFinishedSingleAccountGuide: true })
     }
 
     onMount(() => {

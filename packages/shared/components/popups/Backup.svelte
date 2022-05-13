@@ -3,10 +3,10 @@
     import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
     import { formatDate, Locale } from '@core/i18n'
+    import { updateActiveProfile } from '@core/profile'
+    import { backup, setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -18,43 +18,28 @@
     let busy = false
     let error = ''
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 
-    function handleBackupClick() {
+    async function handleBackupClick(): Promise<void> {
         error = ''
-        api.setStrongholdPassword(password, {
-            onSuccess() {
-                Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
-                    .then((result) => {
-                        if (result) {
-                            busy = true
-                            api.backup(result, password, {
-                                onSuccess() {
-                                    updateProfile('lastStrongholdBackupTime', new Date())
-                                    busy = false
-                                    closePopup()
-                                },
-                                onError(err) {
-                                    busy = false
-                                    error = locale(err.error)
-                                },
-                            })
-                        } else {
-                            busy = false
-                        }
-                    })
-                    .catch((error) => {
-                        busy = false
-                        console.error(error)
-                    })
-            },
-            onError(err) {
-                busy = false
-                error = locale(err.error)
-            },
-        })
+        try {
+            await setStrongholdPassword(password)
+            const destination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
+
+            if (destination) {
+                busy = true
+                await backup(destination, password)
+                updateActiveProfile({ lastStrongholdBackupTime: new Date() })
+                closePopup()
+            }
+        } catch (e) {
+            error = locale(e.error)
+            console.error(error)
+        } finally {
+            busy = false
+        }
     }
 </script>
 

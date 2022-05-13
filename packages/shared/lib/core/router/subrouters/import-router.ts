@@ -1,22 +1,19 @@
-import { get, writable } from 'svelte/store'
-
+import { newProfile, ProfileImportType } from '@core/profile'
+import { restoreBackup } from '@core/profile-manager'
 import { mnemonic } from '@lib/app'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
-import { newProfile } from '@lib/profile'
-import { ImportType } from '@lib/typings/profile'
-import { asyncRestoreBackup } from '@lib/wallet'
-
+import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
-import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { Subrouter } from './subrouter'
 
 export const importRoute = writable<ImportRoute>(null)
 
 export class ImportRouter extends Subrouter<ImportRoute> {
     public isGettingMigrationData = writable(false)
-    public importType = writable<ImportType>(null)
+    public importType = writable<ProfileImportType>(null)
     public importFile: Buffer
     public importFilePath: string
 
@@ -33,11 +30,11 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             case ImportRoute.Init: {
                 const { importType } = params
                 this.importType.set(importType)
-                if (importType === ImportType.Seed || importType === ImportType.Mnemonic) {
+                if (importType === ProfileImportType.Seed || importType === ProfileImportType.Mnemonic) {
                     nextRoute = ImportRoute.TextImport
-                } else if (importType === ImportType.File) {
+                } else if (importType === ProfileImportType.File) {
                     nextRoute = ImportRoute.FileImport
-                } else if (importType === ImportType.Ledger) {
+                } else if (importType === ProfileImportType.Ledger) {
                     nextRoute = ImportRoute.LedgerImport
                 }
                 break
@@ -45,13 +42,13 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             case ImportRoute.TextImport: {
                 const { migrationSeed } = params
                 const importType = get(this.importType)
-                if (importType === ImportType.Seed) {
+                if (importType === ProfileImportType.Seed) {
                     this.isGettingMigrationData.set(true)
                     await getMigrationData(migrationSeed)
                     this.isGettingMigrationData.set(false)
                     get(appRouter).next({ importType })
-                } else if (importType === ImportType.Mnemonic) {
-                    mnemonic.set(migrationSeed.split(' '))
+                } else if (importType === ProfileImportType.Mnemonic) {
+                    mnemonic.set(migrationSeed?.split(' '))
                     nextRoute = ImportRoute.Success
                 }
                 break
@@ -62,9 +59,9 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 const { file, fileName, filePath } = params
 
                 if (seedvaultRegex.test(fileName)) {
-                    this.importType.set(ImportType.SeedVault)
+                    this.importType.set(ProfileImportType.SeedVault)
                 } else if (strongholdRegex.test(fileName)) {
-                    this.importType.set(ImportType.Stronghold)
+                    this.importType.set(ProfileImportType.Stronghold)
                 }
 
                 this.importFile = file
@@ -75,7 +72,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             case ImportRoute.BackupPassword: {
                 const { password } = params
                 try {
-                    if (get(this.importType) === ImportType.SeedVault) {
+                    if (get(this.importType) === ProfileImportType.SeedVault) {
                         // Instead of using "busy", we are deliberately using "isGettingMigrationData"
                         // We do not want to display the spinner in FileImport if stronghold is being imported.
                         this.isGettingMigrationData.set(true)
@@ -86,14 +83,15 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                             await getMigrationData(legacySeed)
                         }
                     } else {
-                        await asyncRestoreBackup(this.importFilePath, password)
+                        await restoreBackup(this.importFilePath, password)
                         get(newProfile).lastStrongholdBackupTime = new Date()
                     }
 
                     nextRoute = ImportRoute.Success
-                } finally {
-                    this.isGettingMigrationData.set(false)
+                } catch (err) {
+                    console.error(err)
                 }
+                this.isGettingMigrationData.set(false)
                 break
             }
             case ImportRoute.LedgerImport: {

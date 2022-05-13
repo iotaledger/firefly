@@ -8,7 +8,7 @@
     import { goto } from 'shared/lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { fetchMarketData } from 'shared/lib/market'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { pollNetworkStatus } from '@core/network'
     import { AppRoute, initRouters } from '@core/router'
     import { Platforms } from 'shared/lib/typings/platform'
     import {
@@ -28,7 +28,6 @@
         Protect,
         Secure,
         Setup,
-        Settings,
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'

@@ -22,8 +22,9 @@
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { accountRouter } from '@core/router'
+    import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -36,17 +37,17 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, transferState } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
-    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
-    import { account } from '@lib/typings'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { selectedAccount } from '@core/account'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
 
-    const { accounts } = $wallet
+    const { accounts } = $activeProfile
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
@@ -355,20 +356,20 @@
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
             const internal = selectedSendType === SEND_TYPE.INTERNAL
-            let accountAlias = internal ? to?.alias : undefined
+            let accountAlias = internal ? to?.alias() : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        accountAlias = acc.alias
+                        accountAlias = acc.alias()
                         break
                     }
                 }
             }
 
             openPopup({
-                type: 'transaction',
+                type: 'sendConfirmation',
                 props: {
                     accountId: $selectedAccount.id,
                     internal: internal || accountAlias,
@@ -407,9 +408,10 @@
         $accountRouter.previous()
     }
 
+    // TODO addlabel
     const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
         ...account,
-        label: `${account?.alias} • ${account.balance}`,
+        label: `${account?.alias()} • ${account.balance()}`,
     })
 
     const handleMaxClick = (): void => {
@@ -553,7 +555,7 @@
                         bind:unit
                         onMaxClick={handleMaxClick}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts?.length === 2}
                     />
                 </div>
             </div>

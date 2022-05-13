@@ -1,17 +1,16 @@
 <script lang="typescript">
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { asyncSyncAccounts } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { Locale, localize } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
     import { onDestroy } from 'svelte'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
-    export let locale: Locale
-
-    const { balanceOverview, accounts } = $wallet
+    const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
 
     const startAddressIndex = 0
     const gapLimitIncrement = $isLedgerProfile ? 10 : 25
@@ -30,7 +29,7 @@
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPassword(password)
             } else if ($isLedgerProfile && !isLedgerConnected()) {
                 isBusy = false
 
@@ -46,14 +45,14 @@
             previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
             hasUsedBalanceFinder = true
         } catch (err) {
-            error = locale(err.error)
+            error = localize(err.error)
 
             if ($isLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error),
+                    message: localize(err.error),
                 })
             }
         } finally {
@@ -73,24 +72,24 @@
     })
 </script>
 
-<Text type="h4" classes="mb-2">{locale('popups.balanceFinder.title')}</Text>
-<Text type="p" secondary classes="mb-4">{locale('popups.balanceFinder.body')}</Text>
+<Text type="h4" classes="mb-2">{localize('popups.balanceFinder.title')}</Text>
+<Text type="p" secondary classes="mb-4">{localize('popups.balanceFinder.body')}</Text>
 
 <div class="flex w-full flex-row flex-wrap mb-4">
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.balanceFinder.accountsSearched')}</Text>
+        <Text type="p">{localize('popups.balanceFinder.accountsSearched')}</Text>
         <Text type="p" highlighted>{previousAccountDiscoveryThreshold}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.balanceFinder.addressesSearched')}</Text>
+        <Text type="p">{localize('popups.balanceFinder.addressesSearched')}</Text>
         <Text type="p" highlighted>{previousGapLimit}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.balanceFinder.accountsFound')}</Text>
+        <Text type="p">{localize('popups.balanceFinder.accountsFound')}</Text>
         <Text type="p" highlighted>{$accounts.length}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
-        <Text type="p">{locale('popups.balanceFinder.totalWalletBalance')}</Text>
+        <Text type="p">{localize('popups.balanceFinder.totalWalletBalance')}</Text>
         <Text type="p" secondary>{$balanceOverview.balanceFiat}</Text>
         <Text type="p" highlighted>{$balanceOverview.balance}</Text>
     </div>
@@ -98,14 +97,13 @@
 
 {#if $isSoftwareProfile && $isStrongholdLocked}
     <div class="flex w-full flex-row flex-wrap mb-4 justify-between">
-        <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
+        <Text type="p" secondary classes="mb-3">{localize('popups.balanceFinder.typePassword')}</Text>
         <Password
             {error}
             classes="w-full mb-2"
             bind:value={password}
             showRevealToggle
-            {locale}
-            placeholder={locale('general.password')}
+            placeholder={localize('general.password')}
             autofocus
             submitHandler={() => handleFindBalances()}
             disabled={isBusy}
@@ -118,14 +116,14 @@
         classes="p-4 w-full rounded-2xl bg-blue-50 dark:bg-gray-800 mb-4"
         icon="info"
         iconClasses="fill-current text-blue-500 dark:text-blue-500"
-        hint={locale('popups.balanceFinder.searchAgainHint')}
+        hint={localize('popups.balanceFinder.searchAgainHint')}
         hintClasses="text-gray-500 dark:text-gray-500"
     />
 {/if}
 
 <div class="flex flex-row flex-nowrap w-full space-x-4">
     <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
-        {locale('actions.done')}
+        {localize('actions.done')}
     </Button>
     <Button
         classes="w-full"
@@ -133,7 +131,7 @@
         disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
     >
         {#if isBusy}
-            <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
-        {:else}{locale(`actions.${hasUsedBalanceFinder ? 'searchAgain' : 'searchBalances'}`)}{/if}
+            <Spinner busy={true} message={localize('actions.searching')} classes="justify-center" />
+        {:else}{localize(`actions.${hasUsedBalanceFinder ? 'searchAgain' : 'searchBalances'}`)}{/if}
     </Button>
 </div>

@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateProfile, validateProfileName } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
 
-    let newName = $activeProfile.name
+    let newName = $activeProfile?.name
     let error = ''
 
     $: trimmedProfileName = newName.trim()
@@ -14,7 +14,7 @@
     function onSubmitClick(): void {
         try {
             validateProfileName(trimmedProfileName)
-            updateProfile('name', trimmedProfileName)
+            updateActiveProfile({ name: trimmedProfileName })
             showAppNotification({
                 type: 'info',
                 message: localize('views.settings.changeProfileName.success'),
@@ -25,7 +25,7 @@
     }
 
     function invalidName(name: string): boolean {
-        const isSameName = name === $activeProfile.name
+        const isSameName = name === $activeProfile?.name
         const isTooShort = name?.length < 1
         return isSameName || isTooShort
     }
@@ -38,7 +38,7 @@
     <Text type="p" secondary classes="mb-5">
         {localize('views.settings.changeProfileName.description')}
     </Text>
-    <Input {error} placeholder={$activeProfile.name} bind:value={newName} classes="mb-5" />
+    <Input {error} placeholder={$activeProfile?.name} bind:value={newName} classes="mb-5" />
     <Button medium form="form-change-profile-name" type="submit" {disabled}>
         {localize('views.settings.changeProfileName.title')}
     </Button>

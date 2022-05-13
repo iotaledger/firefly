@@ -1,42 +1,32 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
-
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import {
-        asyncCreateAccount,
-        asyncRemoveWalletAccounts,
-        asyncSetStrongholdPassword,
-        wallet,
-    } from 'shared/lib/wallet'
-    import { getOfficialNodes, updateClientOptions } from 'shared/lib/network'
+    import { createAccount, asyncRemoveWalletAccounts } from 'shared/lib/wallet'
+    import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
+    import { getOfficialNodes } from '@core/network/utils'
     import {
         activeProfile,
         isLedgerProfile,
         isSoftwareProfile,
-        isStrongholdLocked,
-        updateProfile,
-    } from 'shared/lib/profile'
+        logout,
+        updateActiveProfileSettings,
+    } from '@core/profile'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { logout } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
+    import { localize } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
-    import { Locale } from '@core/i18n'
-    import { Network, NetworkConfig } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
+    export let network: INetwork
+    export let node: INode
 
-    export let locale: Locale
-
-    export let network: Network
-    export let node: Node
-
+    const { isStrongholdLocked } = $activeProfile
     const showPasswordInput = $isSoftwareProfile && $isStrongholdLocked
-
     const error = ''
-    let isSwitchingNetwork = false
 
-    let strongholdPassword
+    let isSwitchingNetwork = false
+    let strongholdPassword: string
 
     const handleCancelNetworkSwitchClick = (): void => {
         closePopup()
@@ -53,7 +43,7 @@
         isSwitchingNetwork = true
 
         if ($isSoftwareProfile && $isStrongholdLocked) {
-            await asyncSetStrongholdPassword(strongholdPassword)
+            await setStrongholdPassword(strongholdPassword)
         } else if ($isLedgerProfile && !isLedgerConnected()) {
             isSwitchingNetwork = false
 
@@ -62,21 +52,22 @@
             return
         }
 
-        const oldAccounts = get($wallet.accounts)
+        const oldAccounts = get($activeProfile?.accounts)
         const oldConfig = $activeProfile?.settings?.networkConfig
         const newConfig = {
             ...oldConfig,
             network: network,
             nodes: [node],
-            includeOfficialNodes: getOfficialNodes(network.type).find((n) => n.url === node?.url) !== undefined,
-        } as NetworkConfig
+            includeOfficialNodes:
+                getOfficialNodes(network.protocol, network.type).find((n) => n.url === node?.url) !== undefined,
+        } as INetworkConfig
 
         try {
             updateClientOptions(newConfig)
-            updateProfile('settings.networkConfig', newConfig)
+            updateActiveProfileSettings({ networkConfig: newConfig })
 
-            await asyncRemoveWalletAccounts(get($wallet.accounts).map((a) => a.id))
-            await asyncCreateAccount(`${locale('general.account')} 1`)
+            await asyncRemoveWalletAccounts(get($activeProfile?.accounts).map((a) => a.id))
+            await createAccount(`${localize('general.account')} 1`)
             await logout()
         } catch (err) {
             isSwitchingNetwork = false
@@ -87,9 +78,9 @@
              * (namely client options, network config, account data,
              * etc.)
              */
-            $wallet.accounts.set(oldAccounts)
+            $activeProfile?.accounts.set(oldAccounts)
             updateClientOptions(oldConfig)
-            updateProfile('settings.networkConfig', oldConfig)
+            updateActiveProfileSettings({ networkConfig: oldConfig })
 
             /**
              * NOTE: It is necessary to override the default locale paths
@@ -107,7 +98,7 @@
             }
             showAppNotification({
                 type: 'error',
-                message: locale(error?.error || error),
+                message: localize(error?.error || error),
             })
 
             console.error(err)
@@ -115,13 +106,13 @@
     }
 </script>
 
-<Text type="h4" classes="mb-9">{locale('popups.switchNetwork.title')}</Text>
+<Text type="h4" classes="mb-9">{localize('popups.switchNetwork.title')}</Text>
 <div class="w-full h-full {showPasswordInput ? '' : 'mb-2'}">
     <div class="flex flex-row justify-between">
         <div class="relative flex flex-col items-center bg-gray-50 dark:bg-gray-800 rounded-2xl mb-6 p-3">
             {#if !showPasswordInput}
                 <Text type="p" secondary classes="self-start ml-4 mt-6">
-                    {locale('popups.switchNetwork.newNetwork')}:
+                    {localize('popups.switchNetwork.newNetwork')}:
                     <Text highlighted classes="inline">{network.name}</Text>
                 </Text>
             {/if}
@@ -129,7 +120,7 @@
                 <Icon icon="warning" classes="text-white" />
             </div>
             <Text type="p" classes="dark:text-white ml-4 mb-4 {showPasswordInput ? 'mt-6' : 'mt-3'}">
-                {locale('popups.switchNetwork.resetWarning')}
+                {localize('popups.switchNetwork.resetWarning')}
             </Text>
         </div>
     </div>
@@ -137,7 +128,7 @@
 {#if showPasswordInput}
     <form id="stronghold-password-form" class="flex w-full flex-row flex-wrap mt-2 mb-9 justify-between">
         <Text type="p" secondary classes="mb-3">
-            {locale('popups.switchNetwork.typePassword')}
+            {localize('popups.switchNetwork.typePassword')}
             <Text highlighted classes="inline">{network.name}</Text>
         </Text>
         <Password
@@ -145,8 +136,8 @@
             classes="w-full mb-2"
             bind:value={strongholdPassword}
             showRevealToggle
-            {locale}
-            placeholder={locale('general.password')}
+            locale={localize}
+            placeholder={localize('general.password')}
             autofocus
             submitHandler={handleConfirmNetworkSwitchClick}
             disabled={isSwitchingNetwork}
@@ -155,7 +146,7 @@
 {/if}
 <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
     <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isSwitchingNetwork}>
-        {locale('actions.cancel')}
+        {localize('actions.cancel')}
     </Button>
     <Button
         warning
@@ -167,11 +158,11 @@
         {#if isSwitchingNetwork}
             <Spinner
                 busy={isSwitchingNetwork}
-                message={locale('popups.switchNetwork.switchingNetwork')}
+                message={localize('popups.switchNetwork.switchingNetwork')}
                 classes="justify-center"
             />
         {:else}
-            {locale('actions.confirm')}
+            {localize('actions.confirm')}
         {/if}
     </Button>
 </div>

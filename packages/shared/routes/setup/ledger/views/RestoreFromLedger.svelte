@@ -1,10 +1,11 @@
 <script type="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { displayNotificationForLedgerProfile, ledgerSimulator, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { getDefaultClientOptions } from 'shared/lib/network'
+    import { getDefaultClientOptions } from '@core/network/utils'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'
+    import { activeProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -21,7 +22,7 @@
                     if (accountsResponse.payload.length === 0) {
                         api.createAccount(
                             {
-                                clientOptions: getDefaultClientOptions(),
+                                clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
                                 alias: `${locale('general.account')} 1`,
                                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },

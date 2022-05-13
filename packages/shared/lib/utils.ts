@@ -6,7 +6,7 @@ import validUrl from 'valid-url'
 import { Event } from './typings/events'
 import { Buffer } from 'buffer'
 
-export const ADDRESS_LENGTH = 64
+export const ADDRESS_LENGTH = 60
 export const PIN_LENGTH = 6
 
 interface Element {
@@ -83,7 +83,7 @@ export const isValidHttpsUrl = (url: string): boolean => {
  * @param addr The address to validate.
  * @returns The error string to use if it does not validate.
  */
-export const validateBech32Address = (prefix: string, addr: string): undefined | string => {
+export const validateBech32Address = (prefix: string, addr: string): string => {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {
@@ -126,7 +126,7 @@ export function debounce(callback: () => void, wait = 500): (...args: unknown[])
 /**
  * Set text to clipboard
  */
-export const setClipboard = (input: string): boolean => {
+export const setClipboard = (input: string, shouldNotify: boolean = true): boolean => {
     try {
         const textArea = document.createElement('textarea')
         textArea.value = input
@@ -146,8 +146,9 @@ export const setClipboard = (input: string): boolean => {
         document.execCommand('copy')
         document.body.removeChild(textArea)
 
-        const notificationMessage = localize('notifications.copiedToClipboard')
-        showAppNotification({ type: 'info', message: notificationMessage })
+        if (shouldNotify) {
+            showAppNotification({ type: 'info', message: localize('notifications.copiedToClipboard') })
+        }
 
         return true
     } catch (err) {

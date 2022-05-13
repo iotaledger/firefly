@@ -3,8 +3,9 @@
     import { getInitials } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { isBright } from 'shared/lib/helpers'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { getColor } from 'shared/lib/profile'
+    import { activeProfile } from '@core/profile'
 
     export let account: WalletAccount
     export let size: 's' | 'm' = 'm'
@@ -39,12 +40,12 @@
         ? `disabled-hover text-${textColor}`
         : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} bg-no-repeat bg-right-top
             bg-cover hover:text-{textColor} {classes}"
-    >{getInitials(account.alias, 2)}
+    >{getInitials(account.alias(), 2)}
 </button>
 {#if enableTooltip && showTooltip}
     <Tooltip anchor={tooltipAnchor} position={tooltipPosition}>
         <Text type="p" classes="text-gray-900 bold text-center">
-            {localize('general.staking')}: {account.alias}
+            {localize('general.staking')}: {account.alias()}
         </Text>
     </Tooltip>
 {/if}

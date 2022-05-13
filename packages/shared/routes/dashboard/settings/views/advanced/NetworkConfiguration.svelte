@@ -7,16 +7,20 @@
         getOfficialNetworkConfig,
         isOfficialNetwork,
         updateClientOptions,
-    } from 'shared/lib/network'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+        INode,
+        INetworkConfig,
+        NETWORK_HEALTH_COLORS,
+        NetworkStatusDescription,
+        networkStatus,
+        NetworkHealth,
+    } from '@core/network'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { NetworkConfig, NetworkStatusHealthText, NetworkType } from 'shared/lib/typings/network'
-    import { Node } from 'shared/lib/typings/node'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
-    let networkConfig: NetworkConfig =
-        $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+    let networkConfig: INetworkConfig =
+        $activeProfile?.settings.networkConfig ||
+        getOfficialNetworkConfig($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -26,14 +30,14 @@
 
     $: {
         updateClientOptions(networkConfig)
-        updateProfile('settings.networkConfig', networkConfig)
+        updateActiveProfileSettings({ networkConfig })
     }
 
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
     $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
 
     let contextPosition = { x: 0, y: 0 }
-    let nodeContextMenu: Node = undefined
+    let nodeContextMenu: INode
     let nodesContainer
 
     function handleIncludeOfficialNodesClick() {
@@ -55,7 +59,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: Node, _oldNodeUrl: string) => {
+                onSuccess: (_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string) => {
                     if (node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
@@ -66,7 +70,7 @@
                     if (networkConfig.nodes.length === 0) networkConfig.nodes = [node]
 
                     updateClientOptions(networkConfig)
-                    updateProfile('settings.networkConfig', networkConfig)
+                    updateActiveProfileSettings({ networkConfig })
 
                     setTimeout(() => {
                         /**
@@ -98,7 +102,7 @@
     <Text type="h4" classes="mb-3">{localize('views.settings.networkConfiguration.title2')}</Text>
     <Text type="p" secondary classes="mb-3">
         {localize(
-            `views.settings.networkConfiguration.description.${$activeProfile.isDeveloperProfile ? 'dev' : 'nonDev'}`
+            `views.settings.networkConfiguration.description.${$activeProfile?.isDeveloperProfile ? 'dev' : 'nonDev'}`
         )}
     </Text>
     {#if $activeProfile?.isDeveloperProfile}
@@ -114,7 +118,9 @@
                 <div>
                     <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
                         {localize(
-                            `views.dashboard.network.${$networkStatus.healthText || NetworkStatusHealthText.Down}`
+                            `views.dashboard.network.${
+                                $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
+                            }`
                         )}
                     </p>
                 </div>
