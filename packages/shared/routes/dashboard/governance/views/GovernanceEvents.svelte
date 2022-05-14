@@ -2,10 +2,10 @@
     import { localize } from '@core/i18n'
     import { governanceRouter, openSettings, settingsRouter } from '@core/router/'
     import { GovernanceRoute, SettingsRoute } from '@core/router/enums'
-    import { Button, Illustration, Link, Text, Spinner } from 'shared/components'
+    import { Button, Illustration, Link, Spinner, Text } from 'shared/components'
     import { getOfficialNetworkConfig, updateClientOptions } from 'shared/lib/network'
-    import { ParticipationEvent } from 'shared/lib/participation/types'
     import { isFetchingParticipationInfo } from 'shared/lib/participation/stores'
+    import { ParticipationEvent } from 'shared/lib/participation/types'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { NetworkConfig, NetworkType } from 'shared/lib/typings/network'
 
@@ -13,6 +13,8 @@
 
     const networkConfig: NetworkConfig =
         $activeProfile?.settings.networkConfig || getOfficialNetworkConfig(NetworkType.ChrysalisMainnet)
+
+    let illustrationHeight = 0
 
     $: {
         updateClientOptions(networkConfig)
@@ -32,9 +34,14 @@
 </script>
 
 {#if event}
-    <div class="p-6">
-        <div class="relative w-full h-full">
-            <Illustration illustration="treasury-bg" classes="w-full bg-lightblue-200 rounded-2xl" />
+    <div class="p-6 h-full">
+        <div bind:clientHeight={illustrationHeight} class="relative illustration-wrapper max-w-full h-full max-h-3/5">
+            <Illustration
+                height={illustrationHeight}
+                background
+                illustration="treasury-bg"
+                classes="bg-cover bg-center w-full h-full rounded-2xl"
+            />
             <Text
                 type="p"
                 classes="bg-white dark:bg-gray-800 px-4 py-2 rounded-2xl uppercase absolute transform left-1/2 -bottom-4 -translate-x-1/2"
@@ -92,5 +99,8 @@
 <style type="text/scss">
     .min-w-40 {
         min-width: 10rem;
+    }
+    .max-h-3\/5 {
+        max-height: 60%;
     }
 </style>
