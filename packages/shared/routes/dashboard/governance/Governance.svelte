@@ -14,7 +14,7 @@
     }
 </script>
 
-<div class="governance-wrapper w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
+<div class="w-full h-full flex flex-col flex-nowrap p-10 flex-1 bg-gray-50 dark:bg-gray-900">
     {#if $governanceRoute === GovernanceRoute.Init}
         <GovernanceDashboard {event} />
     {:else if $governanceRoute === GovernanceRoute.EventDetails}
