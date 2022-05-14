@@ -756,7 +756,7 @@
         },
         "stakingManager": {
             "title": "Upravljanje stakingom",
-            "description": "Kada pokrećete stake novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stakeana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stakea.",
+            "description": "Kada pokrećete staking novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stakeana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stakinga.",
             "totalFundsStaked": "Ukupna sredstva na stakingu",
             "stakedSuccessfully": "Vaša sredstva su stakeana za {account}.",
             "unstakedSuccessfully": "Vaša sredstva više nisu na stakeu za {account}.",
@@ -773,7 +773,7 @@
         "newStakingPeriodNotification": {
             "title": "{periodNumber} faza stakinga od {date}",
             "body": "Staking IOTA tokena za Assembly se nastavlja... Sudjelujte u {periodNumber} fazi koja traje 90 dana. Stakeajte svoje IOTA tokene i zaradite ASMB nagrade!",
-            "info": "Shimmer staking je sada završen i samo će ASMB tokeni biti dstribuirani."
+            "info": "Shimmer staking je sada završen i samo će ASMB tokeni biti distribuirani."
         },
         "shimmer-info": {
             "title": "O Shimmeru",
@@ -981,8 +981,8 @@
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "all": "Sve",
-        "incoming": "Dolazni",
-        "outgoing": "Odlazni",
+        "incoming": "Dolazne",
+        "outgoing": "Odlazne",
         "totalIn": "Ukupno unutra",
         "totalOut": "Ukupno van",
         "accounts": "Novčanici",
@@ -990,7 +990,7 @@
         "profiles": "Profili",
         "dev": "Programer",
         "createAccount": "Stvori novčanik",
-        "createNewWallet": "Stvorite novi novčanik",
+        "addAWallet": "Add a wallet",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Sredstva na stakeu",
         "unstakedFunds": "Sredstva koja nisu na stakeu",
         "accountColor": "Boja novčanika",
-        "myAssets": "Moja imovina"
+        "myAssets": "Moja imovina",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Danas",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Nije moguće koristiti odabrani račun.",
             "cannotFindStakingEvent": "Nije moguće pronaći staking događaj.",
             "cannotVisitAirdropWebsite": "Nije moguće otvoriti {airdrop} web stranicu.",
-            "invalidStakingEventId": "Nevažeći ID staking događaja."
+            "invalidStakingEventId": "Nevažeći ID staking događaja.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "NEVAŽEĆI DATUM",
         "invalidTime": "NEVAŽEĆE VRIJEME"

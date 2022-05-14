@@ -490,10 +490,10 @@
                     }
                 },
                 "backup": {
-                    "title": "Utwórz kopię zapasową portfeli",
-                    "lastBackup": "Ostatnia kopia została wykonana {date}",
+                    "title": "Utwórz backup portfeli",
+                    "lastBackup": "Ostatnią kopię wykonano {date}",
                     "notBackedUp": "Nie wykonano",
-                    "button": "Kopia zapasowa"
+                    "button": "Utwórz kopię"
                 },
                 "version": {
                     "title": "Dostępna jest nowa aktualizacja",
@@ -580,7 +580,7 @@
         },
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
-            "lastBackup": "Ostatnia kopia została wykonana {date}",
+            "lastBackup": "Ostatnią kopię wykonano {date}",
             "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano",
@@ -990,7 +990,7 @@
         "profiles": "Profile",
         "dev": "Deweloper",
         "createAccount": "Utwórz portfel",
-        "createNewWallet": "Utwórz nowy portfel",
+        "addAWallet": "Add a wallet",
         "accountName": "Nazwa portfela",
         "latestTransactions": "Ostatnie transakcje",
         "transactions": "Transakcje",
@@ -1032,7 +1032,7 @@
         "passwordUpdating": "Aktualizacja hasła...",
         "passwordSuccess": "Hasło zaktualizowane pomyślnie",
         "passwordFailed": "Aktualizacja hasła nie powiodła się",
-        "syncing": "Synchronizowanie",
+        "syncing": "Synchron...",
         "syncingAccounts": "Synchronizacja portfeli...",
         "exportingStronghold": "Eksportowanie Stronghold...",
         "exportingStrongholdSuccess": "Stronghold eksportowany pomyślnie",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Stakowane środki",
         "unstakedFunds": "Niestakowane środki",
         "accountColor": "Kolor portfela",
-        "myAssets": "Moje środki"
+        "myAssets": "Moje środki",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Nie można użyć określonego konta.",
             "cannotFindStakingEvent": "Nie można znaleźć wydarzenia stakingu.",
             "cannotVisitAirdropWebsite": "Nie można otworzyć strony {airdrop}.",
-            "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu."
+            "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "NIEPRAWIDŁOWA DATA",
         "invalidTime": "NIEPRAWIDŁOWY CZAS"

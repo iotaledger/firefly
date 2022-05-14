@@ -990,7 +990,7 @@
         "profiles": "Profily",
         "dev": "Vývojár",
         "createAccount": "Vytvoriť peňaženku",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Názov peňaženky",
         "latestTransactions": "Posledné transakcie",
         "transactions": "Transakcie",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Stakované prostriedky",
         "unstakedFunds": "Odstakované prostriedky",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Dnes",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Nie je možné nájsť staking udalosť.",
             "cannotVisitAirdropWebsite": "Nie je možné otvoriť {airdrop} stránku.",
-            "invalidStakingEventId": "Nesprávne staking event ID."
+            "invalidStakingEventId": "Nesprávne staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

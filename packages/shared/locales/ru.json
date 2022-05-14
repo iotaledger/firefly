@@ -990,7 +990,7 @@
         "profiles": "Профили",
         "dev": "Разработчик",
         "createAccount": "Создать кошелёк",
-        "createNewWallet": "Создать новый кошелек",
+        "addAWallet": "Add a wallet",
         "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Ставочные средства",
         "unstakedFunds": "Выведеноные средства",
         "accountColor": "Цвет кошелька",
-        "myAssets": "Мои активы"
+        "myAssets": "Мои активы",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Сегодня",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Не удается использовать указанный аккаунт.",
             "cannotFindStakingEvent": "Невозможно найти событие, связанное со ставками.",
             "cannotVisitAirdropWebsite": "Невозможно открыть веб-сайт {airdrop}.",
-            "invalidStakingEventId": "Неверный ID события ставки."
+            "invalidStakingEventId": "Неверный ID события ставки.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "НЕДЕЙСТВИТЕЛЬНАЯ ДАТА",
         "invalidTime": "НЕДЕЙСТВИТЕЛЬНОЕ ВРЕМЯ"

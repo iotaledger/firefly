@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Hálózat elérhető",
+                "networkDegraded": "Hálózati problémák",
+                "networkDown": "A hálózat nem elérhető",
                 "status": "Állapot",
                 "messagesPerSecond": "Üzenet / másodperc",
                 "referencedRate": "Hivatkozási arány"
@@ -473,32 +473,32 @@
                 "allSettings": "Beállítások",
                 "logout": "Kijelentkezés",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Profilzár",
+                    "locked": "Stronghold lezárva",
+                    "unlocked": "Stronghold kinyitva"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardvereszköz",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "IOTA alkalmazás nincs megnyitva",
+                        "connected": "Csatlakozva",
+                        "legacyConnected": "Régi alkalmazás megnyitva",
+                        "locked": "Lezárva",
+                        "mnemonicMismatch": "Rossz Ledger eszköz vagy emlékeztető mondat",
+                        "notDetected": "Nem található",
+                        "otherConnected": "Alkalmazás megnyitva"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Tárcák biztonsági mentése",
                     "lastBackup": "Utolsó biztonsági mentés ideje: {date}",
                     "notBackedUp": "Nincs biztonsági mentés",
-                    "button": "Backup"
+                    "button": "Biztonsági mentés"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Új frissítés elérhető",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Frissítés"
                 }
             }
         },
@@ -517,28 +517,28 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Próbálkozzon később",
+                    "commencing": "Előzetes letétbe helyezés elérhető",
+                    "holding": "{duration} maradt hátra a staking eseményből",
+                    "ended": "A staking véget ért",
+                    "inactive": "Nincs staking esemény"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Helyezze letétbe {token} tokenjeit, hogy 10 másodpercenként jutalmat kapjon, amint a staking elkezdődik ({date}).",
+                    "commencing": "Helyezze letétbe {token} tokenjeit, hogy 10 másodpercenként jutalmat kapjon, amint a staking elkezdődik ({date}).",
+                    "holdingAndStaking": "10 másodpercenként jutalmat fog kapni.",
+                    "holdingAndNotStaking": "Helyezze letétbe {token} tokenjeit, hogy 10 másodpercenként jutalmat kapjon.",
+                    "endedAndDidStake": "{token} jutalmát a tárcájába fogjuk küldeni a hálózat indulásakor.",
+                    "endedAndDidNotStake": "Nem vett részt ezen a staking eseményen.",
+                    "endedAndDidNotReachMinRewards": "Nem helyezett letétbe elegendő {token} tokent, hogy a minimálisan jóváírható jutalmat megkapja.",
+                    "inactive": "Nyissa meg a Hálózati beállítást a Haladó beállításokban és győződjön meg róla, hogy a “részvétel” funkciót támogatja a csomópont az “Információk megjelenítésére” kattintva."
                 }
             },
             "airdrops": {
                 "holding": "Fennmaradó idő",
                 "commencing": "Amíg a staking elkezdődik",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Jelenlegi staking időszak",
+                "totalWalletRewards": "Összes jutalom",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Az Assembly egy jogosultságok nélkül használható nagymértékben skálázható többláncú hálózat, mely okos szerződések létrehozásához és életbe léptetésére használható. Az Assembly a web3 jövője."
@@ -549,8 +549,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Új esemény",
+                "complete": "Véget ért"
             }
         },
         "picker": {
@@ -675,12 +675,12 @@
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "body": "Alaposan átnézi és összegyűjti címeiről a hiányzó tokenjeit és korábbi jutalmait. Ez eltarthat egy ideig.",
+            "accountsSearched": "Átkutatott tárcák",
+            "addressesSearched": "Átkutatott címek tárcánként",
+            "accountsFound": "Talált tárcák",
             "totalWalletBalance": "Összesített egyenleg",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "Helytelen az egyenlege vagy tárcáinak száma? Használja addig a keresést, amíg a helyes egyenleget nem látja.",
             "typePassword": "Adja meg jelszavát a keresés engedélyezéséhez."
         },
         "riskFunds": {
@@ -751,7 +751,7 @@
             "title": "Korábbi tranzakciók exportálása",
             "body": "Exportálja a kiválasztott tárcához tartozó korábbi tranzakciókat. Az exportált fájl formátuma .csv.",
             "profileName": "Profil neve:",
-            "accountName": "Wallet name:",
+            "accountName": "Tárca neve:",
             "typePassword": "Adja meg jelszavát az exportálás engedélyezéséhez"
         },
         "stakingManager": {
@@ -760,20 +760,20 @@
             "totalFundsStaked": "Teljes letétbe helyezett összeg",
             "stakedSuccessfully": "A(z) {account} számlán lévő tokenjei letétbe lettek helyezve.",
             "unstakedSuccessfully": "A(z) {account} számlán lévő tokenjei ki lettek véve a letétből.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "A tárcáit keresi? A Firefly megváltozott. A tárcák közötti váltáshoz használja a felső menüsort."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Részvétel megerősítése",
             "subtitleStake": "Letétbe helyezés megerősítése",
             "subtitleMerge": "Összevonást kezdeményezett",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "Ha nem kíván mindkét jutalomban részesülni, alább kiszállhat. Később bármikor kiveheti a letétből, majd újra visszahelyezheti.",
+            "mergeStakeWarning": "A tokenjei részt vesznek a(z) {airdrop} jutalommal járó staking eseményen. Ha szeretné később megváltoztatni, hogy melyik jutalomban részesüljön, akkor vegye ki a letétből tárcáját, majd újra helyezze letétbe.",
             "estimatedAirdrop": "Becsült jutalmak"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "{periodNumber}. staking fázis ({date})",
+            "body": "Az IOTA staking ASMB token jutalomért folytatódik. Vegyen részt a {periodNumber}. fázisban 90 napig.",
+            "info": "A Shimmer staking véget ért. Csak ASMB tokeneket fog jutalmul kapni."
         },
         "shimmer-info": {
             "title": "Shimmerről",
@@ -805,9 +805,9 @@
             "privPolicyCheckbox": "Elolvastam és elfogadom az Adatvédelmi irányelveket"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "A Firefly használata megváltozott",
+            "body": "Az egyes tabok tartalma mostantól egyetlen tárcára vonatkozik. A tárcák között bármikor válthat a felső menüsorban.",
+            "hint": "Nem találja tárcáját? Használja az Egyenlegkeresőt a beállítások között a korábban használt tárcák megtalálásához."
         }
     },
     "charts": {
@@ -931,8 +931,8 @@
         "merge": "Összevonás",
         "mergeFunds": "Egyenlegek összevonása",
         "done": "Kész",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "okIUnderstand": "Rendben, értem",
+        "readMore": "Bővebben"
     },
     "general": {
         "password": "Jelszó",
@@ -990,7 +990,7 @@
         "profiles": "Profilok",
         "dev": "Fejlesztő",
         "createAccount": "Tárca létrehozása",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
@@ -1049,20 +1049,20 @@
         "creatingProfile": "Profil létrehozása folyamatban, kérjük várjon...",
         "fundMigration": "Egyenleg migrálása",
         "accountRemoved": "Rejtett tárcából nem tud küldeni. Állítsa be előbb a rejtett tárcák megjelenítését.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "receivingFrom": "{account} számláról érkezik",
+        "sendingTo": "{account} számlára küldés folyamatban",
+        "receivedFrom": "{account} számláról érkezett",
+        "sentTo": "{account} számlára elküldve",
+        "transferringFrom": "Egyenlegátvezetés folyamatban {account} számláról",
+        "transferringTo": "Egyenlegátvezetés folyamatban {account} számlára",
+        "transferFrom": "Egyenlegátvezetés {account} számláról",
+        "transferTo": "Egyenlegátvezetés {account} számlára",
         "stakedFor": "{account} letétbe helyezve",
         "unstakedFor": "{account} letétből kivéve",
         "votedFor": "{account} szavazott",
         "unvotedFor": "{account} szavazat visszavonva",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "stakingTransaction": "Staking tranzakció",
+        "unstakingTransaction": "Staking visszavonás tranzakció",
         "receiving": "Fogadás...",
         "sending": "Küldés...",
         "legacyNetwork": "Régi hálózat",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Letétbe helyezett összeg",
         "unstakedFunds": "Letétben nem lévő összeg",
         "accountColor": "Tárcaszín",
-        "myAssets": "My assets"
+        "myAssets": "Pénzügyi eszközeim",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Ma",
@@ -1127,9 +1128,9 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Kérjük várja meg a szinkronizáció befejeződését a tárcák közti váltás előtt.",
+        "transferring": "Kérjük várja meg az összes tranzakció befejeződését a tárcák közti váltás előtt.",
+        "participating": "Kérjük várja meg az összes staking/szavazás tranzakció befejeződését a tárcák közti váltás előtt."
     },
     "error": {
         "profile": {
@@ -1252,17 +1253,18 @@
             "cannotUseAccount": "A megadott számlát nem lehet használni.",
             "cannotFindStakingEvent": "A staking esemény nem található.",
             "cannotVisitAirdropWebsite": "A(z) {airdrop} weboldal nem elérhető.",
-            "invalidStakingEventId": "Hibás staking esemény azonosító."
+            "invalidStakingEventId": "Hibás staking esemény azonosító.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "Helytelen dátum",
+        "invalidTime": "Helytelen idő"
     },
     "warning": {
         "node": {
             "http": "A csomópontok HTTP kapcsolaton történő elérése a titkosítatlan adatforgalom miatt biztonsági kockázattal jár."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Nincs egyetlen IOTA tokenje sem."
         }
     },
     "tooltips": {
@@ -1277,7 +1279,7 @@
         "partiallyStakedFunds": {
             "title": "Új letétbe nem helyezett összeg: {amount}",
             "titleNoFunds": "Új letétbe nem helyezett összeg",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Letétbe nem helyezett tokenjei vannak.",
             "body": "Az újonnan érkezett tokeneket kézzel letétbe kell helyeznie, hogy jutalmat kapjon értük."
         },
         "stakingMinRewards": {

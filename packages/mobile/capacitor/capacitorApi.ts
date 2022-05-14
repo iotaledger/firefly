@@ -1,10 +1,12 @@
+import type { IPlatform } from 'shared/lib/typings/platform'
 import { Capacitor } from '@capacitor/core'
 
 import { SplashScreen } from '@capacitor/splash-screen'
 import { BarcodeManager } from './lib/barcodeManager'
-import { DeepLinkManager } from './lib/deepLinkManager'
-import { NotificationManager } from './lib/notificationManager'
-import { PincodeManager } from './lib/pincodeManager'
+import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
+import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
+import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
+import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
@@ -32,9 +34,18 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
+    renameProfileFolder: async (oldPath, newPath) => {
+        void (await SecureFilesystemAccess.renameProfileFolder({
+            oldName: oldPath,
+            newName: newPath,
+        }))
+    },
 
-    removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
+    removeProfileFolder: async (profilePath) => {
+        void (await SecureFilesystemAccess.removeProfileFolder({
+            folder: profilePath,
+        }))
+    },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
@@ -46,7 +57,35 @@ export const CapacitorApi: IPlatform = {
 
     BarcodeManager: BarcodeManager,
 
-    getStrongholdBackupDestination: (defaultPath) => new Promise<string>((resolve, reject) => {}),
+    getStrongholdBackupDestination: async (defaultPath) => {
+        // only with folder param the picker needs filename to save,
+        // we pass explicity null on mobile to pick files
+        const type = defaultPath === null ? 'file' : 'folder'
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type,
+            defaultPath,
+        })
+        return `${selected}`
+    },
+
+    saveStrongholdBackup: async ({ allowAccess }) => {
+        const os: string = Capacitor.getPlatform()
+        switch (os) {
+            case 'ios':
+                if (allowAccess) {
+                    await SecureFilesystemAccess.allowAccess()
+                } else {
+                    await SecureFilesystemAccess.revokeAccess()
+                }
+                break
+            case 'android':
+                if (!allowAccess) {
+                    await SecureFilesystemAccess.finishBackup()
+                }
+                break
+        }
+        return
+    },
 
     exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
 
@@ -104,10 +143,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: () =>
-        new Promise<string>((resolve, reject) => {
-            resolve('DATA')
-        }),
+    getUserDataPath: () => new Promise<string>((resolve, reject) => resolve('')),
 
     /**
      * Gets diagnostics information for the system
@@ -253,7 +289,24 @@ export const CapacitorApi: IPlatform = {
      * Save the recovery kit
      * @returns
      */
-    saveRecoveryKit: (recoverKitData) => new Promise<void>((resolve, reject) => {}),
+    saveRecoveryKit: async (recoverKitData) => {
+        const os: string = Capacitor.getPlatform()
+        const { selected } = await SecureFilesystemAccess.showPicker({
+            type: 'folder',
+            defaultPath: '',
+        })
+        if (os === 'ios') {
+            void (await SecureFilesystemAccess.allowAccess())
+        }
+        void (await SecureFilesystemAccess.saveRecoveryKit({
+            selectedPath: `${selected}/recovery-kit.pdf`,
+            fromRelativePath: '/assets/docs/recovery-kit.pdf',
+        }))
+        if (os === 'ios') {
+            void SecureFilesystemAccess.revokeAccess()
+        }
+        return
+    },
 
     /**
      * Hook the logger
