@@ -95,7 +95,7 @@
         },
         {
             icon: 'policy',
-            label: localize('tabs.governance'),
+            label: 'governance',
             route: DashboardRoute.Governance,
             onClick: openGovernance,
         },
