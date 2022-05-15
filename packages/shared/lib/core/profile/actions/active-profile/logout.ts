@@ -1,5 +1,5 @@
 import { resetRouters } from '@core/router'
-import { clearSendParams, lastActiveAt, loggedIn } from '@lib/app'
+import { clearSendParams } from '@lib/app'
 import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
@@ -18,7 +18,7 @@ import { clearPollNetworkInterval } from '@core/network'
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { isStrongholdLocked } = get(activeProfile)
+    const { isStrongholdLocked, lastActiveAt, loggedIn } = get(activeProfile)
 
     return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {

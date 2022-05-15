@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { lastActiveAt } from 'shared/lib/app'
     import { activeProfile, logout } from '@core/profile'
     import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
@@ -8,6 +7,8 @@
 
     let timeout
     let isDestroyed = false
+
+    const { lastActiveAt } = $activeProfile
 
     function updateIdleTime(): void {
         /**

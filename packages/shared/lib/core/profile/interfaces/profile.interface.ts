@@ -15,4 +15,6 @@ export interface IProfile extends IPersistedProfile {
             to: string
         }
     }>
+    loggedIn: Writable<boolean>
+    lastActiveAt: Writable<Date>
 }

@@ -1,4 +1,4 @@
-import { IAccount, IAccountState } from '@core/account'
+import { IAccount, IAccountState, SignerType } from '@core/account'
 import { IAccountBalances } from '@core/account/interfaces/account-balances.interface'
 import { localize } from '@core/i18n'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
@@ -15,7 +15,7 @@ import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { WalletApi } from './shell/walletApi'
-import { SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
@@ -178,19 +178,6 @@ export function setStoragePassword(password: string): Promise<void> {
             },
         })
     })
-}
-
-const getSignerType = (profileType: ProfileType): SignerType => {
-    if (!profileType) return undefined
-
-    switch (profileType) {
-        case ProfileType.Software:
-            return { type: 'Stronghold' }
-        case ProfileType.Ledger:
-            return { type: 'LedgerNano' }
-        case ProfileType.LedgerSimulator:
-            return { type: 'LedgerNanoSimulator' }
-    }
 }
 
 export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>

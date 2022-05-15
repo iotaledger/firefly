@@ -2,7 +2,6 @@
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
-    import { loggedIn } from 'shared/lib/app'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Idle, Sidebar } from 'shared/components'
@@ -14,11 +13,11 @@
     import { isLedgerProfile, logout, activeProfile, saveActiveProfile, updateActiveProfile } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { localize } from '@core/i18n'
-    import { selectedAccount, selectedAccountId, setSelectedAccount } from '@core/account'
+    import { selectedAccountId, setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { IAccountState } from '@core/account'
 
-    const { hasLoadedAccounts, accounts } = $activeProfile
+    const { hasLoadedAccounts, accounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
     // TODO: Set this in switch account action

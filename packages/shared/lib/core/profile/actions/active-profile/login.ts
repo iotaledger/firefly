@@ -1,11 +1,11 @@
 import { activeProfile } from '../../stores'
 import { LoginRouter } from '@core/router'
 import { get } from 'svelte/store'
-import { lastActiveAt, loggedIn } from '@lib/app'
 import { loadAccounts } from './loadAccounts'
 
 export function login(): void {
     const loginRouter = new LoginRouter()
+    const { loggedIn, lastActiveAt } = get(activeProfile)
     if (get(activeProfile).id) {
         void loadAccounts()
         loggedIn.set(true)

@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import { cleanupEmptyProfiles } from '@core/profile'
+    import { activeProfile, cleanupEmptyProfiles } from '@core/profile'
     import { accountRouter, AppRoute, DashboardRoute, dashboardRouter, initRouters, openSettings } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { loggedIn, stage } from 'shared/lib/app'
+    import { stage } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
     import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
@@ -40,6 +40,8 @@
     import { getLocalisedMenuItems } from './lib/helpers'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
+
+    const { loggedIn } = $activeProfile
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
