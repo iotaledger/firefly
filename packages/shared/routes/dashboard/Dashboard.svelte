@@ -11,17 +11,10 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import {
-        isLedgerProfile,
-        logout,
-        activeProfile,
-        loadAccounts,
-        saveActiveProfile,
-        updateActiveProfile,
-    } from '@core/profile'
+    import { isLedgerProfile, logout, activeProfile, saveActiveProfile, updateActiveProfile } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { localize } from '@core/i18n'
-    import { selectedAccountId, setSelectedAccount } from '@core/account'
+    import { selectedAccount, selectedAccountId, setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { IAccountState } from '@core/account'
 
@@ -183,7 +176,6 @@
     })
 
     if (!$hasLoadedAccounts && $loggedIn) {
-        loadAccounts()
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {

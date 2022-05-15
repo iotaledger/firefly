@@ -1,10 +1,8 @@
 import { BridgeMessage, MessageResponse, CommunicationIds, IActorHandler } from '@lib/typings/bridge'
 import {
-    AccountToCreate,
     AccountIdentifier,
     ListMessagesFilter,
     SyncAccountOptions,
-    createAccount as _createAccount,
     removeAccount as _removeAccount,
     getAccount as _getAccount,
     getAccounts as _getAccounts,
@@ -56,8 +54,6 @@ import {
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum,
 } from '@lib/typings/wallet'
-import { ClientOptions } from '@lib/network/types'
-import { NodeAuth } from '@lib/typings/node'
 
 // Participation (staking, voting)
 import {
@@ -154,9 +150,6 @@ export const api = {
     },
     verifyMnemonic: function (mnemonic: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _verifyMnemonic(sendMessage, __ids, mnemonic)
-    },
-    createAccount: function (account: AccountToCreate): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _createAccount(sendMessage, __ids, account)
     },
     removeAccount: function (accountId: AccountIdentifier): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _removeAccount(sendMessage, __ids, accountId)
@@ -262,9 +255,6 @@ export const api = {
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
     },
-    setClientOptions: function (options: ClientOptions): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
-    },
     setStrongholdPasswordClearInterval: function (interval: Duration): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
     },
@@ -341,13 +331,6 @@ export const api = {
         mwm: number
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm)
-    },
-    getNodeInfo: function (
-        accountId: AccountIdentifier,
-        url?: string,
-        auth?: NodeAuth
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url, auth)
     },
     getLegacyAddressChecksum: function (address: string): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _getLegacyAddressChecksum(sendMessage, __ids, address)

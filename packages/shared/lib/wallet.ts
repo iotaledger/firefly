@@ -2,14 +2,12 @@ import { IAccount, IAccountState } from '@core/account'
 import { IAccountBalances } from '@core/account/interfaces/account-balances.interface'
 import { localize } from '@core/i18n'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
-import { createStardustAccount, generateMnemonic, getAccount, profileManager } from '@core/profile-manager'
+import { generateMnemonic, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import tailwindConfig from 'shared/tailwind.config.js'
 import { get, writable } from 'svelte/store'
-import resolveConfig from 'tailwindcss/resolveConfig'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { displayNotificationForLedgerProfile } from './ledger'
@@ -27,21 +25,6 @@ import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 
-const configColors = resolveConfig(tailwindConfig).theme.colors
-
-export enum AccountColors {
-    Blue = configColors['blue']['500'],
-    LightBlue = configColors['lightblue']['500'],
-    Purple = configColors['purple']['500'],
-    Turquoise = configColors['turquoise']['500'],
-    Green = configColors['green']['500'],
-    Yellow = configColors['yellow']['500'],
-    Orange = configColors['orange']['500'],
-    Red = configColors['red']['500'],
-    Pink = configColors['pink']['500'],
-}
-
-export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256
 
 /**
@@ -195,34 +178,6 @@ export function setStoragePassword(password: string): Promise<void> {
             },
         })
     })
-}
-
-export async function createAccount(alias?: string, color?: string): Promise<IAccountState> {
-    const accounts = get(get(activeProfile)?.accounts)
-    try {
-        const createdAccount = await createStardustAccount({
-            alias: alias || `${localize('general.account')} ${(accounts?.length ?? 0) + 1}`,
-            coinType: 4219,
-        })
-        const stardustAccount = await getAccount(createdAccount.meta.index)
-        const addresses = await stardustAccount.generateAddresses()
-        const depositAddress = addresses[0].address
-        const preparedAccount = prepareAccountInfo(createdAccount, {
-            balance: 0,
-            incoming: 0,
-            outgoing: 0,
-            depositAddress,
-        })
-
-        if (get(activeProfile)?.id) {
-            get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-        }
-
-        // setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
-        return preparedAccount
-    } catch (e) {
-        console.error(e)
-    }
 }
 
 const getSignerType = (profileType: ProfileType): SignerType => {

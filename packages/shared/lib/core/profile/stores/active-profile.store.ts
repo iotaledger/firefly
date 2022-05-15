@@ -1,5 +1,5 @@
-import { IAccountState } from '@core/account'
-import { writable } from 'svelte/store'
+import { IAccountMetadata, IAccountState } from '@core/account'
+import { get, writable } from 'svelte/store'
 import { IBalanceOverview, IPersistedProfile, IProfile, IProfileSettings } from '../interfaces'
 
 const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
@@ -43,4 +43,21 @@ export function setActiveProfile(persistedProfile: IPersistedProfile): void {
 
 export function resetActiveProfile(): void {
     activeProfile.set(null)
+}
+
+export function addAccountToActiveProfile(account: IAccountState): void {
+    const { accounts } = get(activeProfile)
+    accounts?.update((state) => [...state, account])
+}
+
+export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): void {
+    activeProfile?.update((state) => ({
+        ...state,
+        accountMetadatas: [...state?.accountMetadatas, metadata],
+    }))
+}
+
+export function getAccountMetadatById(id: string): IAccountMetadata {
+    const { accountMetadatas } = get(activeProfile)
+    return accountMetadatas.find((metadata) => metadata.id === id)
 }

@@ -52,6 +52,7 @@
     function createAccount() {
         creatingAccount = true
 
+        // TODO: refactor this for new bindingsx
         api.createAccount(
             {
                 clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),

@@ -4,16 +4,22 @@ import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
-import { activeProfile, isLedgerProfile, isSoftwareProfile, resetActiveProfile, resetActiveProfileId } from '../stores'
-import { resetDashboardState } from './active-profile'
+import {
+    activeProfile,
+    isLedgerProfile,
+    isSoftwareProfile,
+    resetActiveProfile,
+    resetActiveProfileId,
+} from '../../stores'
+import { resetDashboardState } from '../unknown'
 import { clearPollNetworkInterval } from '@core/network'
 
-const { isStrongholdLocked } = get(activeProfile)
-
 /**
- * Logout from current profile
+ * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
+    const { isStrongholdLocked } = get(activeProfile)
+
     return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
             // TODO: Lock stronghold on using profile manager

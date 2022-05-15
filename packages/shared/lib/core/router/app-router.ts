@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
-import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
-import { ProfileImportType, ProfileType } from '@core/profile'
+import { cleanupSignup, mobile, strongholdPassword, walletPin } from '@lib/app'
+import { login, ProfileImportType, ProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 import { AppRoute } from './enums'
@@ -166,7 +166,6 @@ export class AppRouter extends Router<AppRoute> {
                 break
             case AppRoute.Congratulations:
                 cleanupSignup()
-                login()
                 nextRoute = AppRoute.Dashboard
                 break
         }

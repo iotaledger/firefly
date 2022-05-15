@@ -3,7 +3,6 @@
     import { Transition } from 'shared/components'
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
     import { profiles, activeProfileId, login } from '@core/profile'
 
@@ -13,10 +12,6 @@
 
     onMount(() => {
         loginRouter = new LoginRouter()
-        if ($activeProfileId && $profiles?.find((p) => p.id === $activeProfileId)) {
-            login($activeProfileId)
-            loginRouter.next()
-        }
     })
 
     const next = (event: CustomEvent<FireflyEvent>): void => loginRouter.next(event.detail)

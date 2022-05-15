@@ -45,14 +45,6 @@ export interface SignerType {
     type: 'Stronghold' | 'LedgerNano' | 'LedgerNanoSimulator'
 }
 
-export interface AccountToCreate {
-    clientOptions: IClientOptions
-    signerType: SignerType
-    alias?: string
-    createdAt?: string
-    allowCreateMultipleEmptyAccounts?: boolean
-}
-
 export interface SyncedAccount {
     index: number
     id: string
@@ -60,15 +52,6 @@ export interface SyncedAccount {
     isEmpty: boolean
     addresses: Address[]
     messages: Message[]
-}
-
-export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'CreateAccount',
-        payload: account,
-    })
 }
 
 export function removeAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {

@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Text, Icon, Tooltip } from 'shared/components'
-    import { AccountColors } from 'shared/lib/wallet'
     import { isBright } from 'shared/lib/helpers'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
+    import { AccountColors } from '@core/account'
 
     export let active
     export let title = localize('views.picker.color.title')

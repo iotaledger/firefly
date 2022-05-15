@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { getColor } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount, IAccountState } from '@core/account'
+    import { selectedAccount, IAccountState, MAX_ACCOUNT_NAME_LENGTH } from '@core/account'
 
     export let alias
     export let account
