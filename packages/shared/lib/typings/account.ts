@@ -3,6 +3,7 @@ import { Bridge, CommunicationIds } from './bridge'
 import { IClientOptions, IAuth } from '@core/network'
 import { Message } from './message'
 import { Duration } from './wallet'
+import { SignerType } from '@core/account'
 
 export enum MessageType {}
 
@@ -40,10 +41,6 @@ export interface SyncAccountOptions {
 }
 
 export type AccountIdentifier = number | string
-
-export interface SignerType {
-    type: 'Stronghold' | 'LedgerNano' | 'LedgerNanoSimulator'
-}
 
 export interface SyncedAccount {
     index: number
