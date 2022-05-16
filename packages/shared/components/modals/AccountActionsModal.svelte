@@ -25,7 +25,9 @@
         $selectedAccount.messages?.length === 0
 
     const handleCustomiseAccountClick = () => {
-        $accountRouter.goTo(AccountRoute.Manage)
+        openPopup({
+            type: 'manageAccount',
+        })
         modal.close()
     }
 
