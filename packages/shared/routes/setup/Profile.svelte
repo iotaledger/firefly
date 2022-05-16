@@ -5,7 +5,7 @@
     import { getProfileDataPath } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
     import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
@@ -43,12 +43,14 @@
         try {
             busy = true
             if (nameChanged) {
+                // TODO: set network based on user selection
                 createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
                 const path = await getProfileDataPath($newProfile.id)
+                const clientOptions = getDefaultClientOptions(NetworkProtocol.Shimmer, NetworkType.Devnet)
                 // const machineId = await Platform.getMachineId()
                 // const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialiseProfileManager(path)
+                initialiseProfileManager(path, clientOptions)
                 // initialiseMigrationListeners()
             }
             $appRouter.next()

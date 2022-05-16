@@ -11,6 +11,11 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             type: NetworkType.Mainnet,
             bech32Hrp: 'iota',
             baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+            rentStructure: {
+                vByteCost: 500,
+                vByteFactorData: 10,
+                vByteFactorKey: 1,
+            },
         },
         [NetworkType.Devnet]: {
             id: 'chrysalis-devnet',
@@ -19,6 +24,11 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             type: NetworkType.Devnet,
             bech32Hrp: 'atoi',
             baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+            rentStructure: {
+                vByteCost: 500,
+                vByteFactorData: 10,
+                vByteFactorKey: 1,
+            },
         },
         [NetworkType.PrivateNet]: <INetwork>{
             name: 'Private Net',
@@ -34,6 +44,11 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             type: NetworkType.Mainnet,
             bech32Hrp: 'smr',
             baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+            rentStructure: {
+                vByteCost: 500,
+                vByteFactorData: 10,
+                vByteFactorKey: 1,
+            },
         },
         [NetworkType.Devnet]: {
             id: 'shimmer-devnet',
@@ -42,6 +57,11 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             type: NetworkType.Devnet,
             bech32Hrp: 'rms',
             baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+            rentStructure: {
+                vByteCost: 500,
+                vByteFactorData: 10,
+                vByteFactorKey: 1,
+            },
         },
         [NetworkType.PrivateNet]: <INetwork>{
             name: 'Private Net',

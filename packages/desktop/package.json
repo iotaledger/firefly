@@ -28,7 +28,7 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
-        "@iota/wallet": "npm:wallet-stardust-alpha@^1.0.6",
+        "@iota/wallet": "npm:wallet-stardust-alpha@^1.0.8",
         "@ledgerhq/hw-transport-node-hid": "^5.13.0",
         "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
         "@sentry/electron": "^2.5.4",

@@ -13,13 +13,15 @@ export function ensureSinglePrimaryNode(nodes: INode[]): INode[] {
         return []
     }
 
-    const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
-    if (numPrimaryNodes === 0) {
-        return setRandomPrimaryNode(nodes)
-    } else if (numPrimaryNodes === 1) {
-        return nodes
-    } else if (numPrimaryNodes > 1) {
-        const activeNode = nodes.find((n) => n.isPrimary)
-        return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
-    }
+    return nodes
+
+    // const numPrimaryNodes = nodes.filter((n) => n.isPrimary).length
+    // if (numPrimaryNodes === 0) {
+    //     return setRandomPrimaryNode(nodes)
+    // } else if (numPrimaryNodes === 1) {
+    //     return nodes
+    // } else if (numPrimaryNodes > 1) {
+    //     const activeNode = nodes.find((n) => n.isPrimary)
+    //     return nodes.map((n, idx) => ({ ...n, isPrimary: n.url === activeNode.url }))
+    // }
 }
