@@ -1,24 +1,11 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
-    import {
-        Animation,
-        Button,
-        ButtonCheckbox,
-        Input,
-        OnboardingLayout,
-        Text,
-        CollapsibleBlock,
-    } from 'shared/components'
+    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
     import { getProfileDataPath } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
-    import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
-    import { Stage } from 'shared/lib/typings/stage'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
     import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
@@ -28,12 +15,11 @@
     let busy = false
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage) !== Stage.PROD
+    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
     $: nameChanged = $newProfile?.name !== profileName.trim()
-    $: hasDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
     async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
@@ -48,7 +34,7 @@
 
     function cleanUpIfPreviouslyInitialized(): void {
         const previousInitializedId = $newProfile?.id
-        if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
+        if (nameChanged && previousInitializedId) {
             destroyProfileManager()
         }
     }
@@ -56,26 +42,18 @@
     async function initialiseProfile(name: string): Promise<void> {
         try {
             busy = true
-            if (nameChanged || hasDeveloperProfileChanged) {
+            if (nameChanged) {
+                // TODO: set network based on user selection
                 createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
                 const path = await getProfileDataPath($newProfile.id)
-                const machineId = await Platform.getMachineId()
-                const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialiseProfileManager(path)
+                const clientOptions = getDefaultClientOptions(NetworkProtocol.Shimmer, NetworkType.Devnet)
+                // const machineId = await Platform.getMachineId()
+                // const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
+                initialiseProfileManager(path, clientOptions)
                 // initialiseMigrationListeners()
             }
-
-            if (get(stage) === Stage.PROD && isDeveloperProfile) {
-                openPopup({
-                    type: 'confirmDeveloperProfile',
-                    props: {
-                        handleContinueClick: () => $appRouter.next(),
-                    },
-                })
-            } else {
-                $appRouter.next()
-            }
+            $appRouter.next()
         } catch (err) {
             showAppNotification({
                 type: 'error',
@@ -114,19 +92,6 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        {#if get(stage) == Stage.PROD}
-            <CollapsibleBlock
-                label={locale('views.profile.advancedOptions')}
-                showBlock={get(newProfile)?.isDeveloperProfile ?? false}
-            >
-                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-                    <div class="text-left">
-                        <Text type="p">{locale('views.profile.developer.label')}</Text>
-                        <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-                    </div>
-                </ButtonCheckbox>
-            </CollapsibleBlock>
-        {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>

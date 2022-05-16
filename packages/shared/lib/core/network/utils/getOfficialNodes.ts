@@ -10,19 +10,17 @@ import { getOfficialNetwork } from './getOfficialNetwork'
  * @returns {Node[]}
  */
 export function getOfficialNodes(protocol: NetworkProtocol, type: NetworkType): INode[] {
-    return getOfficialNodeUrls(protocol, type).map((url) => getOfficialNode(protocol, type, url))
+    return getOfficialNodeUrls(protocol, type).map((url) => buildOfficialNode(url))
 }
 
 function getOfficialNodeUrls(protocol: NetworkProtocol, type: NetworkType): string[] {
     return OFFICIAL_NODE_URLS?.[protocol]?.[type] ?? []
 }
 
-function getOfficialNode(protocol: NetworkProtocol, type: NetworkType, url: string): INode {
+function buildOfficialNode(url: string): INode {
     return {
         url,
         auth: { username: '', password: '' },
-        network: getOfficialNetwork(protocol, type),
-        isPrimary: false,
-        isDisabled: false,
+        disabled: false,
     }
 }

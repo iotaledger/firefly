@@ -1,17 +1,22 @@
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
-import { AccountId, CreateAccountPayload, EventType } from '@iota/wallet'
+import { AccountId, AccountSyncOptions, ClientOptions, CreateAccountPayload, EventType } from '@iota/wallet'
 
 export interface IProfileManager {
     getAccount(accountId: AccountId): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse>
     createAccount(account: CreateAccountPayload): Promise<IAccount>
-    setStrongholdPassword(password: string): Promise<string>
+    deleteStorage(): Promise<void>
+    setStrongholdPassword(password: string): Promise<void>
     generateMnemonic(): Promise<string>
-    storeMnemonic(mnemonic: string): Promise<string>
-    verifyMnemonic(mnemonic: string): Promise<string>
+    storeMnemonic(mnemonic: string): Promise<void>
+    verifyMnemonic(mnemonic: string): Promise<void>
     backup(destination: string, password: string): Promise<void>
-    importAccounts(backupPath: string, password: string): Promise<string>
+    restoreBackup(source: string, password: string): Promise<void>
     listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
+    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]>
+    setClientOptions(options: ClientOptions): Promise<void>
+    startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void>
+    stopBackgroundSync(): Promise<void>
 }

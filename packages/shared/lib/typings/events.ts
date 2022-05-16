@@ -10,6 +10,8 @@ export interface EventMap {
     'menu-check-for-update': void
     'menu-error-log': void
     'menu-diagnostics': void
+    'menu-create-developer-profile': void
+    'menu-create-normal-profile': void
     'log-error': void
     'deep-link-request': void
     'deep-link-params': string

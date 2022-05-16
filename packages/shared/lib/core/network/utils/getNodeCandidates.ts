@@ -37,7 +37,7 @@ function addOfficialNodes(networkProtocol: NetworkProtocol, networkType: Network
     officialNodes = officialNodes.map((n) =>
         Object.assign(
             n,
-            nodes.find((p) => p.isPrimary && n.url === p.url)
+            nodes.find((p) => n.url === p.url)
         )
     )
 

@@ -1,7 +1,15 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles } from '@core/profile'
-    import { accountRouter, AppRoute, DashboardRoute, dashboardRouter, initRouters, openSettings } from '@core/router'
+    import { activeProfile, cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
+    import {
+        accountRouter,
+        AppRoute,
+        DashboardRoute,
+        dashboardRouter,
+        initRouters,
+        openSettings,
+        appRouter,
+    } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { stage } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
@@ -109,6 +117,14 @@
         })
         Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
+        })
+        Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: true })
+        })
+        Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: false })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

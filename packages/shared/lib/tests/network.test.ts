@@ -1,7 +1,6 @@
 import {
     checkNodeUrlValidity,
     cleanAuth,
-    ensureSinglePrimaryNode,
     getDefaultClientOptions,
     getNetwork,
     getNodeCandidates,
@@ -19,27 +18,16 @@ import {
 import { ITokenMetadata } from 'shared/lib/core/assets'
 
 describe('File: network.ts', () => {
-    function _buildNode(
-        url: string,
-        network: INetwork,
-        isPrimary: boolean = false,
-        isDisabled: boolean = false
-    ): INode {
+    function _buildNode(url: string): INode {
         return {
             url,
-            network,
             auth: { username: '', password: '' },
-            isPrimary,
-            isDisabled,
+            disabled: false,
         }
     }
 
     function _buildNodes(networkProtocol: NetworkProtocol, networkType: NetworkType) {
-        return (
-            OFFICIAL_NODE_URLS?.[networkProtocol]?.[networkType]?.map((url) =>
-                _buildNode(url, NETWORK[networkProtocol][networkType])
-            ) ?? []
-        )
+        return OFFICIAL_NODE_URLS?.[networkProtocol]?.[networkType]?.map((url) => _buildNode(url)) ?? []
     }
 
     enum NetworkProtocol {
@@ -77,6 +65,11 @@ describe('File: network.ts', () => {
                 type: NetworkType.Mainnet,
                 bech32Hrp: 'iota',
                 baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+                rentStructure: {
+                    vByteCost: 500,
+                    vByteFactorData: 10,
+                    vByteFactorKey: 1,
+                },
             },
             [NetworkType.Devnet]: {
                 id: 'chrysalis-devnet',
@@ -85,6 +78,11 @@ describe('File: network.ts', () => {
                 type: NetworkType.Devnet,
                 bech32Hrp: 'atoi',
                 baseToken: BASE_TOKEN[NetworkProtocol.IOTA],
+                rentStructure: {
+                    vByteCost: 500,
+                    vByteFactorData: 10,
+                    vByteFactorKey: 1,
+                },
             },
             [NetworkType.PrivateNet]: <INetwork>{
                 name: 'Private Net',
@@ -100,6 +98,11 @@ describe('File: network.ts', () => {
                 type: NetworkType.Mainnet,
                 bech32Hrp: 'smr',
                 baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+                rentStructure: {
+                    vByteCost: 500,
+                    vByteFactorData: 10,
+                    vByteFactorKey: 1,
+                },
             },
             [NetworkType.Devnet]: {
                 id: 'shimmer-devnet',
@@ -108,6 +111,11 @@ describe('File: network.ts', () => {
                 type: NetworkType.Devnet,
                 bech32Hrp: 'rms',
                 baseToken: BASE_TOKEN[NetworkProtocol.Shimmer],
+                rentStructure: {
+                    vByteCost: 500,
+                    vByteFactorData: 10,
+                    vByteFactorKey: 1,
+                },
             },
             [NetworkType.PrivateNet]: <INetwork>{
                 name: 'Private Net',
@@ -186,33 +194,12 @@ describe('File: network.ts', () => {
 
     describe('Function: getClientOptions', () => {
         it('should return the client options of the active profile if present', () => {
-            const clientOpts = getDefaultClientOptions(NetworkProtocol.IOTA)
+            const clientOpts = getDefaultClientOptions(NetworkProtocol.IOTA, NetworkType.Mainnet)
             expect(clientOpts).toEqual(<IClientOptions>{
-                network: 'chrysalis-mainnet',
-                automaticNodeSelection: true,
-                includeOfficialNodes: true,
-                localPow: true,
-                node: _buildNode(
-                    OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0],
-                    NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
-                    true,
-                    false
-                ),
                 nodes: [
-                    _buildNode(
-                        OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0],
-                        NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
-                        true,
-                        false
-                    ),
-                    _buildNode(
-                        OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][1],
-                        NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet]
-                    ),
-                    _buildNode(
-                        OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][2],
-                        NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet]
-                    ),
+                    _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][0]),
+                    _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][1]),
+                    _buildNode(OFFICIAL_NODE_URLS[NetworkProtocol.IOTA][NetworkType.Mainnet][2]),
                 ],
             })
         })
@@ -236,9 +223,7 @@ describe('File: network.ts', () => {
                 Object.values(NetworkType).forEach((networkType) => {
                     if (networkType !== NetworkType.PrivateNet) {
                         expect(getOfficialNodes(networkProtocol, networkType)).toEqual(
-                            OFFICIAL_NODE_URLS[networkProtocol][networkType].map((url) =>
-                                _buildNode(url, NETWORK[networkProtocol][networkType])
-                            )
+                            OFFICIAL_NODE_URLS[networkProtocol][networkType].map((url) => _buildNode(url))
                         )
                     }
                 })
@@ -349,37 +334,28 @@ describe('File: network.ts', () => {
         it('should return nothing if passed invalid configuration', () => {
             expect(getNodeCandidates(undefined)).toEqual([])
         })
-        it('should ensure that at least one node candidate is primary', () => {
-            expect(
-                getNodeCandidates(CONFIG[NetworkProtocol.IOTA][NetworkType.Mainnet]).find((n) => n.isPrimary)
-            ).toBeDefined()
-        })
         it('should use official nodes if no nodes exist', () => {
             let nodes = getNodeCandidates({ ...CONFIG[NetworkProtocol.IOTA][NetworkType.Mainnet], nodes: [] })
-            expect(nodes.find((n) => n.isPrimary)).toBeDefined()
             nodes.forEach((n) => {
                 expect(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((_n) => _n.url).includes(n.url)).toBe(true)
             })
 
             nodes = getNodeCandidates({ ...CONFIG[NetworkProtocol.IOTA][NetworkType.Devnet], nodes: [] })
-            expect(nodes.find((n) => n.isPrimary)).toBeDefined()
             nodes.forEach((n) => {
                 expect(NODES[NetworkProtocol.IOTA][NetworkType.Devnet].map((_n) => _n.url).includes(n.url)).toBe(true)
             })
         })
         it('should return official nodes if using automatic selection', () => {
             let nodes = getNodeCandidates(CONFIG[NetworkProtocol.IOTA][NetworkType.Mainnet])
-            expect(nodes.find((n) => n.isPrimary)).toBeDefined()
             nodes.forEach((n) => {
                 expect(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((_n) => _n.url).includes(n.url)).toBe(true)
             })
         })
         it('may return ONLY unofficial nodes OR both', () => {
             const unofficialNodes: INode[] = [
-                { url: 'https://mainnet.tanglebay.com', network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet] },
+                { url: 'https://mainnet.tanglebay.com' },
                 {
                     url: 'https://other.mainnet.tanglebay.com',
-                    network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
                 },
             ]
 
@@ -408,29 +384,30 @@ describe('File: network.ts', () => {
         })
     })
 
-    describe('Function: ensureSinglePrimaryNode', () => {
-        const _hasOnePrimary = (nodes: INode[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
+    // Commenting out until we add primary nodes back into the app
+    // describe('Function: ensureSinglePrimaryNode', () => {
+    //     const _hasOnePrimary = (nodes: INode[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
 
-        it('should maintain the primary node if it exists', () => {
-            const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n, idx) => ({
-                ...n,
-                isPrimary: idx === 0,
-            }))
-            expect(ensureSinglePrimaryNode(nodes)).toEqual(nodes)
-            expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
-        })
-        it('should randomly select a primary node if one does not exist', () => {
-            expect(_hasOnePrimary(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet])).toBe(false)
-            expect(_hasOnePrimary(ensureSinglePrimaryNode(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet]))).toBe(true)
-        })
-        it('should handle empty or invalid node arrays', () => {
-            expect(ensureSinglePrimaryNode([])).toEqual([])
-            expect(ensureSinglePrimaryNode(undefined)).toEqual([])
-        })
-        it('should ensure ONLY one primary node exists', () => {
-            const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n) => ({ ...n, isPrimary: true }))
-            expect(ensureSinglePrimaryNode(nodes) === nodes).toBe(false)
-            expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
-        })
-    })
+    //     it('should maintain the primary node if it exists', () => {
+    //         const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n, idx) => ({
+    //             ...n,
+    //             isPrimary: idx === 0,
+    //         }))
+    //         expect(ensureSinglePrimaryNode(nodes)).toEqual(nodes)
+    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
+    //     })
+    //     it('should randomly select a primary node if one does not exist', () => {
+    //         expect(_hasOnePrimary(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet])).toBe(false)
+    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet]))).toBe(true)
+    //     })
+    //     it('should handle empty or invalid node arrays', () => {
+    //         expect(ensureSinglePrimaryNode([])).toEqual([])
+    //         expect(ensureSinglePrimaryNode(undefined)).toEqual([])
+    //     })
+    //     it('should ensure ONLY one primary node exists', () => {
+    //         const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n) => ({ ...n, isPrimary: true }))
+    //         expect(ensureSinglePrimaryNode(nodes) === nodes).toBe(false)
+    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
+    //     })
+    // })
 })
