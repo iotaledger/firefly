@@ -10,10 +10,8 @@
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { Readable } from 'svelte/store'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { IAccountState } from '@core/account'
-    export let account: Readable<IAccountState>
+    import { selectedAccount } from '@core/account'
 
     const profileName = $activeProfile?.name
     const { isStrongholdLocked } = $activeProfile
@@ -37,8 +35,8 @@
                 return
             }
 
-            const fileName = generateTransactionHistoryFileName(profileName, $account.alias())
-            const contents = generateTransactionHistoryCsvFromAccount($account, {
+            const fileName = generateTransactionHistoryFileName(profileName, $selectedAccount.alias())
+            const contents = generateTransactionHistoryCsvFromAccount($selectedAccount, {
                 id: true,
                 internal: true,
                 value: true,
@@ -53,7 +51,7 @@
                     showAppNotification({
                         type: 'info',
                         message: localize('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $account.alias(), filePath: filePath },
+                            values: { accountAlias: $selectedAccount.alias(), filePath: filePath },
                         }),
                     })
                 }
@@ -61,7 +59,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $account.alias() },
+                        value: { accountAlias: $selectedAccount.alias() },
                     }),
                 })
             }
@@ -97,7 +95,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$account.alias()}</Text>
+        <Text type="p" highlighted>{$selectedAccount.alias()}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
