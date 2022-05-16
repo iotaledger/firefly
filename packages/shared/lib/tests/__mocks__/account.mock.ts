@@ -1,5 +1,6 @@
 import { AccountBalance, Address } from '@iota/wallet'
 import { IAccount } from '../../core/account'
+import { IAccountBalances } from '../../core/account/interfaces/account-balances.interface'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
@@ -72,7 +73,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve(MOCK_ADDRESS)
     }
 
-    balance(): Promise<AccountBalance> {
+    balance(): Promise<IAccountBalances> {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
