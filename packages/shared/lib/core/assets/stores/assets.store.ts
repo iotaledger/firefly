@@ -25,7 +25,11 @@ export const assets = derived(
                     $currencies[CurrencyTypes.USD],
                     $exchangeRates[profileCurrency]
                 )} ${profileCurrency}`,
-                fiatBalance: '0 USD',
+                fiatBalance: `${convertToFiat(
+                    $selectedAccount?.balances.available,
+                    $currencies[CurrencyTypes.USD],
+                    $exchangeRates[profileCurrency]
+                )} ${profileCurrency}`,
             },
         ]
         return assets

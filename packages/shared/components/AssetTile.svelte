@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { IAsset } from '@core/assets'
+    import { formatBestMatchTokenAmount } from '@core/assets/utils'
     import { Icon, StakingAssetTile, Text } from 'shared/components'
     import { isBright } from 'shared/lib/helpers'
 
@@ -37,7 +38,7 @@
             </div>
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{asset?.balance.total}</Text>
+            <Text classes="font-semibold">{formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}</Text>
             {#if asset?.fiatBalance}
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}
