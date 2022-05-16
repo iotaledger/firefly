@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
     import { isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { SecuritySettings } from '@core/router'
@@ -51,12 +52,12 @@
 
 <div>
     {#each settings as { component, childRoute, requireSoftware }, index}
-        {#if !requireSoftware || (requireSoftware && $isSoftwareProfile)}
+        {#if (!requireSoftware || (requireSoftware && $isSoftwareProfile)) && !$mobile}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} {...props[childRoute]} />
             </section>
             {#if index < settings.length - 1}
-                <HR classes="pb-5 mt-5 justify-center" />
+                <HR classes="pb-5 mt-5 justify-center hidden md:block" />
             {/if}
         {/if}
     {/each}
