@@ -1395,7 +1395,7 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@npm:wallet-stardust-alpha@^1.0.5":
+"@iota/wallet@npm:wallet-stardust-alpha@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-1.0.6.tgz#5d5f056f81b499da4ee7ba8280cbb161f64be52e"
   integrity sha512-fzgD4Ik6QeaHuvESPtFMCAsA2nHUjkSQ6C5Ou5AnkAgjkPL0hXC0ZqVwRuB9Lq8DZk2bJjVIQomK+dUTkSJFhw==
@@ -3240,6 +3240,11 @@ capacitor-secure-storage-plugin@^0.6.2:
   integrity sha512-f05BLb98TG5qqxN8FvTOLPNvtoebdZyrWAueoyw25Xip7nJBkFqrGxZtcFDMONi4DZRz/z9DMz1Bw8F/8fPAJA==
   dependencies:
     "@capacitor/core" "^3.0.0"
+
+cargo-cp-artifact@^0.1.5:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/cargo-cp-artifact/-/cargo-cp-artifact-0.1.6.tgz#df1bc9dad036ae0f4230639a869182e1d5850f89"
+  integrity sha512-CQw0doK/aaF7j041666XzuilHxqMxaKkn+I5vmBsd8SAwS0cO5CqVEVp0xJwOKstyqWZ6WK4Ww3O6p26x/Goyg==
 
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"

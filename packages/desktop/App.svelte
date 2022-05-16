@@ -11,7 +11,15 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
+    import {
+        AppRoute,
+        DashboardRoute,
+        dashboardRouter,
+        accountRouter,
+        initRouters,
+        openSettings,
+        appRouter,
+    } from '@core/router'
     import {
         Appearance,
         Backup,
@@ -37,7 +45,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Stage } from 'shared/lib/typings/stage'
     import { get } from 'svelte/store'
-    import { cleanupEmptyProfiles } from '@core/profile'
+    import { cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
@@ -107,6 +115,14 @@
         })
         Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
+        })
+        Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: true })
+        })
+        Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: false })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
