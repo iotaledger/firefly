@@ -1,12 +1,11 @@
 import { get, writable } from 'svelte/store'
 import { cleanupSignup, login, mobile, strongholdPassword, walletPin } from '@lib/app'
-import { ProfileImportType, ProfileType } from '@core/profile'
+import { activeProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
-import { activeProfile, profiles, setNewProfileType } from '@core/profile'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -67,7 +66,8 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.Profile
                 break
             case AppRoute.Profile:
-                nextRoute = AppRoute.Setup
+                nextRoute = AppRoute.ClaimRewards
+                // nextRoute = AppRoute.Setup
                 break
             case AppRoute.Setup: {
                 const { setupType } = params
@@ -112,6 +112,7 @@ export class AppRouter extends Router<AppRoute> {
                     walletPin.set(pin)
                     const profileType = get(activeProfile)?.type
                     if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
+                        // nextRoute = AppRoute.ClaimRewards
                         nextRoute = AppRoute.Congratulations
                     } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
                         nextRoute = AppRoute.LedgerSetup

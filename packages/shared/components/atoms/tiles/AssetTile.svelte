@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Icon, StakingAssetTile, Text } from 'shared/components'
-    import { isBright } from 'shared/lib/helpers'
-    import { Asset } from 'shared/lib/typings/assets'
+    import { isBright } from '@lib/helpers'
+    import { Asset } from '@lib/typings/assets'
+
     export let asset: Asset
 
     const isStakingAsset = asset?.meta.name === 'Assembly'
