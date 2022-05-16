@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import { ITokenMetadata, formatBestMatchTokenAmount, formatPreciseTokenAmount } from '@core/assets'
+    import { ITokenMetadata, formatBestMatchTokenAmount, formatPreciseTokenAmount } from '@core/wallet'
 
     export let amount = 0
     export let tokenMetadata: ITokenMetadata

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Icon, Text } from 'shared/components'
-    import { assets } from '@core/assets'
+    import { assets } from '@core/wallet'
 
     export let asset = $assets?.[0]
 </script>

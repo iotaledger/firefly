@@ -1,4 +1,4 @@
-import { ITokenMetadata } from '@core/assets'
+import { ITokenMetadata } from '@core/wallet'
 import { NetworkProtocol } from '../enums'
 
 export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {

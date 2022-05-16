@@ -6,7 +6,7 @@ import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/curren
 import { UNIT_MAP } from 'shared/lib/units'
 import { selectedAccount } from '@core/account'
 import { derived } from 'svelte/store'
-import { IAsset } from '@core/assets'
+import { IAsset } from '@core/wallet'
 
 export const assets = derived(
     [exchangeRates, currencies, activeProfile, selectedAccount],

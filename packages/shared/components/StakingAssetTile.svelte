@@ -25,7 +25,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { selectedAccount, IAccountState } from '@core/account'
-    import { IAsset } from '@core/assets'
+    import { IAsset } from '@core/wallet'
 
     export let asset: IAsset
 

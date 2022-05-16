@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { IAsset } from '@core/assets'
-    import { formatBestMatchTokenAmount } from '@core/assets/utils'
+    import { IAsset } from '@core/wallet'
+    import { formatBestMatchTokenAmount } from '@core/wallet/utils'
     import { Icon, StakingAssetTile, Text } from 'shared/components'
     import { isBright } from 'shared/lib/helpers'
 

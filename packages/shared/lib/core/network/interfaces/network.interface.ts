@@ -1,4 +1,4 @@
-import { ITokenMetadata } from '@core/assets'
+import { ITokenMetadata } from '@core/wallet'
 import { NetworkProtocol } from '../enums/network-protocol.enum'
 import { NetworkType } from '../enums/network-type.enum'
 
