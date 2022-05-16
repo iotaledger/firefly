@@ -65,6 +65,7 @@ export async function loadAccounts(): Promise<void> {
                 meta.depositAddress = payloadAccount.meta.publicAddresses[0].toString()
 
                 const account = prepareAccountInfo(payloadAccount, meta)
+                account.sync()
                 newAccounts.push(account)
             }
             accounts.update((_accounts) => newAccounts.sort((a, b) => a.meta.index - b.meta.index))
