@@ -10,6 +10,7 @@ export const menuState = {
         advancedSettings: 'Advanced Settings',
         errorLog: 'Error Log',
         createDeveloperProfile: 'Create Developer Profile',
+        createNormalProfile: 'Create Normal Profile',
         diagnostics: 'Diagnostics',
         logout: 'Log Out',
         hide: 'Hide',

@@ -95,7 +95,12 @@ const buildTemplate = () => {
                 {
                     label: state.strings.createDeveloperProfile,
                     click: () => getOrInitWindow('main').webContents.send('menu-create-developer-profile'),
-                    enabled: state.loggedIn === false && process.env.STAGE === 'prod',
+                    visible: state.loggedIn === false && process.env.STAGE === 'prod',
+                },
+                {
+                    label: state.strings.createNormalProfile,
+                    click: () => getOrInitWindow('main').webContents.send('menu-create-normal-profile'),
+                    visible: state.loggedIn === false && process.env.STAGE !== 'prod',
                 },
                 {
                     label: state.strings.diagnostics,
