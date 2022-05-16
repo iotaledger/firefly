@@ -87,7 +87,7 @@
     }
 </script>
 
-<Modal bind:this={modal} position={{ top: '100px', right: 'calc((100% + 24px) * 0.6666666)' }}>
+<Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
         <!-- Customize -->
         <button
