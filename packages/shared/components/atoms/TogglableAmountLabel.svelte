@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import { Unit } from '@iota/unit-converter'
-    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { ITokenMetadata, formatBestMatchTokenAmount, formatPreciseTokenAmount } from '@core/assets'
 
-    export let value = 0
+    export let amount = 0
+    export let tokenMetadata: ITokenMetadata
 
     let showPreciseValue = false
     function togglePreciseValue() {
@@ -12,10 +12,12 @@
     }
 </script>
 
-{#if value}
+{#if amount}
     <button on:click={togglePreciseValue}>
         <Text type={TextType.h2}>
-            {showPreciseValue ? formatUnitPrecision(value, Unit.i) : formatUnitBestMatch(value, true, 3)}
+            {showPreciseValue
+                ? formatPreciseTokenAmount(amount, tokenMetadata)
+                : formatBestMatchTokenAmount(amount, tokenMetadata)}
         </Text>
     </button>
 {/if}

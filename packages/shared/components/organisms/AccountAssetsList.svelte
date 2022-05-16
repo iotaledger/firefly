@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { assets } from 'shared/lib/assets'
+    import { assets } from '@core/assets'
     import { AssetList } from 'shared/components'
 </script>
 

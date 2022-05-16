@@ -1,7 +1,7 @@
-import { TokenMetadata } from '@lib/typings/assets'
+import { ITokenMetadata } from '@core/assets'
 import { NetworkProtocol } from '../enums'
 
-export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: TokenMetadata }> = {
+export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
     [NetworkProtocol.IOTA]: {
         name: 'IOTA',
         tickerSymbol: 'MIOTA',

@@ -5,6 +5,9 @@
     import { localize } from '@core/i18n'
     import { formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from '@core/account'
+    import { BASE_TOKEN } from '@core/network'
+    import { activeProfile } from '@core/profile'
+    import { currency } from '@lib/typings'
 
     export let classes = ''
 </script>
@@ -23,10 +26,10 @@
         </div>
     {/if}
     <div class="flex flex-col flex-wrap items-start space-y-1.5">
-        <TogglableAmountLabel value={$selectedAccount?.balances.available} />
-        <Text smaller>
-            {formatUnitPrecision($selectedAccount?.balances.available, Unit.Mi)}
-        </Text>
+        <TogglableAmountLabel
+            amount={$selectedAccount?.balances.available}
+            tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
+        />
     </div>
     <div class="flex flex-row space-x-4">
         <ReceiveButton />

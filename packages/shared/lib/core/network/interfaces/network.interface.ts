@@ -1,4 +1,4 @@
-import { TokenMetadata } from '@lib/typings/assets'
+import { ITokenMetadata } from '@core/assets'
 import { NetworkProtocol } from '../enums/network-protocol.enum'
 import { NetworkType } from '../enums/network-type.enum'
 
@@ -13,5 +13,5 @@ export interface INetwork {
     protocol: NetworkProtocol
     type: NetworkType
     bech32Hrp?: string
-    baseToken?: TokenMetadata
+    baseToken?: ITokenMetadata
 }
