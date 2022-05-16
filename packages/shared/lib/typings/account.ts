@@ -105,7 +105,6 @@ export interface StardustAccount {
     sendNft(addressesAndNftIds: AddressNftId[], transferOptions: TransferOptions): Promise<[]>
     sendTransfer(outputs: OutputData[], transferOptions: TransferOptions): Promise<[]>
     tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<[]>
-    setClientOptions(options: StardustClientOptions): Promise<void>
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
