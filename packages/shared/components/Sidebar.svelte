@@ -1,12 +1,5 @@
 <script lang="typescript">
-    import {
-        Icon,
-        NetworkIndicator,
-        ProfileActionsModal,
-        SidebarTab,
-        Modal,
-        PingingBadge,
-    } from 'shared/components'
+    import { Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Modal, PingingBadge } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
@@ -33,7 +26,7 @@
     let profileModal: Modal
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
-    
+
     const profileColor = 'blue' // TODO: each profile has a different color
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
@@ -112,12 +105,7 @@
         </div>
         <span class="flex flex-col items-center">
             <button class="mb-7 health-status" on:click={networkModal?.open}>
-                <Icon
-                    width="24"
-                    height="24"
-                    icon="network"
-                    classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500"
-                />
+                <Icon width="24" height="24" icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
             </button>
             <button
                 class="w-8 h-8 relative flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
