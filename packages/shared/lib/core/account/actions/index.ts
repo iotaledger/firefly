@@ -1,4 +1,6 @@
 export * from './buildAccountState'
 export * from './buildAccountStateAndMetadata'
 export * from './createNewAccount'
+export * from './getAccountOrSelectedAccount'
 export * from './tryCreateAdditionalAccount'
+export * from './tryEditSelectedAccountMetadata'

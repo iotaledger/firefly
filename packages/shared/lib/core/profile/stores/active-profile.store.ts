@@ -63,3 +63,12 @@ export function getAccountMetadatById(id: string): IAccountMetadata {
     const { accountMetadatas } = get(activeProfile)
     return accountMetadatas.find((metadata) => metadata.id === id)
 }
+
+export function updateAccountMetadataOnActiveProfile(metadata: IAccountMetadata): void {
+    activeProfile?.update((state) => ({
+        ...state,
+        accountMetadatas: state?.accountMetadatas.map((existingValue) =>
+            existingValue.id === metadata.id ? metadata : existingValue
+        ),
+    }))
+}

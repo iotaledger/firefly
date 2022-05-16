@@ -3,76 +3,69 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { getColor } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
-    import { accountRouter, AccountRoute } from '@core/router'
-    import { activeProfile } from '@core/profile'
-    import { selectedAccount, IAccountState, MAX_ACCOUNT_NAME_LENGTH } from '@core/account'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { closePopup, openPopup } from '@lib/popup'
 
     export let error = ''
 
-    const { accounts } = $activeProfile
+    const { isStrongholdLocked } = $activeProfile
 
-    let accountAlias = $selectedAccount.name
     let isBusy = false
+    let accountAlias = $selectedAccount.name
     let color = $selectedAccount.color
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
-
-    const handleSaveClick = () => {
-        // setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
-        const trimmedAccountAlias = accountAlias.trim()
-        if (trimmedAccountAlias === $selectedAccount.name) {
-            $accountRouter.goTo(AccountRoute.Init)
-            return
-        }
-        if (trimmedAccountAlias) {
-            error = ''
-            if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
-                return (error = localize('error.account.length', {
-                    values: {
-                        length: MAX_ACCOUNT_NAME_LENGTH,
-                    },
-                }))
-            }
-            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
-                return (error = localize('error.account.duplicate'))
-            }
-            isBusy = true
-            api.setAlias($selectedAccount?.id, trimmedAccountAlias, {
-                onSuccess() {
-                    accounts.update((_accounts) =>
-                        _accounts.map((account) => {
-                            if (account.id === $selectedAccount?.id) {
-                                return Object.assign<IAccountState, IAccountState, Partial<IAccountState>>(
-                                    {} as IAccountState,
-                                    account,
-                                    {
-                                        name: trimmedAccountAlias,
-                                    }
-                                )
-                            }
-                            return account
-                        })
-                    )
-
-                    isBusy = false
-                    $accountRouter.goTo(AccountRoute.Init)
-                },
-                onError(err) {
-                    isBusy = false
-                    error = localize(err.error)
-                },
-            })
-        }
-    }
-    const handleCancelClick = () => {
-        error = ''
-        $accountRouter.previous()
-    }
-
+    $: trimmedAccountAlias = accountAlias.trim()
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
     $: hasColorChanged = getColor($activeProfile, $selectedAccount.id) !== color
+
+    function _save() {
+        if (trimmedAccountAlias || color) {
+            tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
+                .then(() => {
+                    closePopup()
+                })
+                .catch()
+                .finally(() => {
+                    isBusy = false
+                })
+        } else {
+            isBusy = false
+        }
+    }
+
+    function _cancel() {
+        isBusy = false
+    }
+
+    async function handleSaveClick() {
+        if (trimmedAccountAlias) {
+            error = ''
+            try {
+                await validateAccountName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedAccount.name)
+            } catch (reason) {
+                error = reason
+                return
+            }
+
+            isBusy = true
+
+            if ($isLedgerProfile) {
+                promptUserToConnectLedger(false, _save, _cancel)
+            } else if ($isSoftwareProfile && $isStrongholdLocked) {
+                openPopup({ type: 'password', props: { onSuccess: _save } })
+            } else {
+                _save()
+            }
+        }
+    }
+
+    const handleCancelClick = () => {
+        closePopup()
+    }
 </script>
 
 <div class="flex flex-col h-full justify-between">

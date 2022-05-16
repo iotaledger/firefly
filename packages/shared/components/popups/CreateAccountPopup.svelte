@@ -2,20 +2,17 @@
     import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile } from '@core/profile'
-    import { activeProfile } from '@core/profile'
-    import { getRandomAccountColor, MAX_ACCOUNT_NAME_LENGTH } from '@core/account'
-    import { tryCreateAdditionalAccount } from '@core/account'
+    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
 
     export let error = ''
 
-    const { accounts } = $activeProfile
+    const { isStrongholdLocked } = $activeProfile
 
-    let accountAlias = ''
     let isBusy = false
+    let accountAlias = ''
     let color = getRandomAccountColor()
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
@@ -34,57 +31,43 @@
         }
     }
 
-    function create() {
+    function _create() {
         tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-            .then(() => closePopup)
-            .catch((error) => {
+            .then(() => {
+                closePopup()
+            })
+            .catch()
+            .finally(() => {
                 isBusy = false
-                if (error) {
-                    console.error(error?.error || error)
-                    if ($isLedgerProfile) {
-                        displayNotificationForLedgerProfile('error', true, false, false, false, error)
-                    } else {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(error?.error || error),
-                        })
-                    }
-                } else {
-                    closePopup()
-                }
             })
     }
 
-    function cancel() {
-        () => (isBusy = false)
+    function _cancel() {
+        isBusy = false
     }
 
-    const handleCreateClick = () => {
-        const trimmedAccountAlias = accountAlias.trim()
+    const handleCreateClick = async () => {
         if (trimmedAccountAlias) {
             error = ''
-
-            if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
-                return (error = localize('error.account.length', {
-                    values: {
-                        length: MAX_ACCOUNT_NAME_LENGTH,
-                    },
-                }))
-            }
-
-            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
-                return (error = localize('error.account.duplicate'))
+            try {
+                await validateAccountName(trimmedAccountAlias)
+            } catch (reason) {
+                error = reason
+                return
             }
 
             isBusy = true
 
             if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, create, cancel)
+                promptUserToConnectLedger(false, _create, _cancel)
+            } else if ($isSoftwareProfile && $isStrongholdLocked) {
+                openPopup({ type: 'password', props: { onSuccess: _create } })
             } else {
-                create()
+                _create()
             }
         }
     }
+
     const handleCancelClick = () => {
         closePopup()
     }
@@ -108,7 +91,6 @@
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
-    <!-- Action -->
     {#if isBusy && !error}
         <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
     {/if}

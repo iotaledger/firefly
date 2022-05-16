@@ -3,14 +3,11 @@ import { isLedgerProfile } from '@core/profile'
 import { displayNotificationForLedgerProfile } from '@lib/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
-import { setSelectedAccount } from '../stores'
-import { createNewAccount } from './createNewAccount'
+import { IAccountMetadata } from '../interfaces'
 
-export async function tryCreateAdditionalAccount(alias: string, color: string): Promise<void> {
+export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountMetadata>): Promise<void> {
     try {
-        const account = await createNewAccount(alias, color)
-        setSelectedAccount(account?.id)
-        return Promise.resolve()
+        return Promise.reject('Not implemented')
     } catch (reason) {
         if (reason) {
             console.error(reason?.error || reason)

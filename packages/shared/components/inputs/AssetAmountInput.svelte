@@ -36,7 +36,7 @@
         unit = Unit.i
     }
 
-    export function validate(): Promise<void> {
+    export function validate(): Promise<void | string> {
         if (!amount) {
             error = localize('error.send.amountInvalidFormat')
         } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
