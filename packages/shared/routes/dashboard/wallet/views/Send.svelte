@@ -355,13 +355,13 @@
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
             const internal = selectedSendType === SEND_TYPE.INTERNAL
-            let accountAlias = internal ? to?.alias() : undefined
+            let accountAlias = internal ? to?.getAlias() : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        accountAlias = acc.alias()
+                        accountAlias = acc.getAlias()
                         break
                     }
                 }
@@ -410,7 +410,7 @@
     // TODO addlabel
     const addLabel = (account: IAccountState) => ({
         ...account,
-        label: `${account?.alias()} • ${account.balance()}`,
+        label: `${account?.getAlias()} • ${account.getBalance()}`,
     })
 
     const handleMaxClick = (): void => {

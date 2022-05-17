@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { AccountColors } from '@core/account'
-
     import Chart from 'chart.js'
     import { appSettings } from 'shared/lib/appSettings'
     import { convertHexToRGBA } from 'shared/lib/helpers'

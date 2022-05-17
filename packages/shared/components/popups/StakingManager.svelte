@@ -286,7 +286,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias()}
+                        {$selectedAccount.getAlias()}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -296,7 +296,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance()}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.getBalance()}
                             •
                             <Text
                                 type="p"

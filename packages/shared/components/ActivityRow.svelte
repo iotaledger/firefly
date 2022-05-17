@@ -82,7 +82,7 @@
             // The address in the payload was one of our accounts so grab
             // the account alias to display
             if (acc) {
-                accountAlias = acc.alias()
+                accountAlias = acc.getAlias()
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
                 accountAlias = truncateString(

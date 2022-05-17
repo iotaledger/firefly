@@ -37,7 +37,7 @@
                     },
                 }))
             }
-            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
+            if ($accounts.find((a) => a.getAlias() === trimmedAccountAlias)) {
                 return (error = localize('error.account.duplicate'))
             }
             isBusy = true

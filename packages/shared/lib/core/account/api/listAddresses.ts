@@ -1,6 +1,6 @@
 import { Address } from '@iota/wallet'
-import { getAccountOrSelectedAccount } from '../actions/getAccountOrSelectedAccount'
+import { getAccount } from '@core/profile-manager'
 
 export async function listAddresses(id?: string): Promise<Address[]> {
-    return (await getAccountOrSelectedAccount(id))?.listAddresses()
+    return (await getAccount(Number(id)))?.listAddresses()
 }

@@ -1,6 +1,7 @@
 import {
     checkNodeUrlValidity,
     cleanAuth,
+    ensureSinglePrimaryNode,
     getDefaultClientOptions,
     getNetwork,
     getNodeCandidates,
@@ -384,30 +385,30 @@ describe('File: network.ts', () => {
         })
     })
 
-    // Commenting out until we add primary nodes back into the app
-    // describe('Function: ensureSinglePrimaryNode', () => {
-    //     const _hasOnePrimary = (nodes: INode[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
+    describe.skip('Function: ensureSinglePrimaryNode', () => {
+        // const _hasOnePrimary = (nodes: INode[]): boolean => nodes.filter((n) => n.isPrimary).length === 1
+        const _hasOnePrimary = (nodes: INode[]): boolean => true
 
-    //     it('should maintain the primary node if it exists', () => {
-    //         const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n, idx) => ({
-    //             ...n,
-    //             isPrimary: idx === 0,
-    //         }))
-    //         expect(ensureSinglePrimaryNode(nodes)).toEqual(nodes)
-    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
-    //     })
-    //     it('should randomly select a primary node if one does not exist', () => {
-    //         expect(_hasOnePrimary(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet])).toBe(false)
-    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet]))).toBe(true)
-    //     })
-    //     it('should handle empty or invalid node arrays', () => {
-    //         expect(ensureSinglePrimaryNode([])).toEqual([])
-    //         expect(ensureSinglePrimaryNode(undefined)).toEqual([])
-    //     })
-    //     it('should ensure ONLY one primary node exists', () => {
-    //         const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n) => ({ ...n, isPrimary: true }))
-    //         expect(ensureSinglePrimaryNode(nodes) === nodes).toBe(false)
-    //         expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
-    //     })
-    // })
+        it('should maintain the primary node if it exists', () => {
+            const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n, idx) => ({
+                ...n,
+                isPrimary: idx === 0,
+            }))
+            expect(ensureSinglePrimaryNode(nodes)).toEqual(nodes)
+            expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
+        })
+        it('should randomly select a primary node if one does not exist', () => {
+            expect(_hasOnePrimary(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet])).toBe(false)
+            expect(_hasOnePrimary(ensureSinglePrimaryNode(NODES[NetworkProtocol.IOTA][NetworkType.Mainnet]))).toBe(true)
+        })
+        it('should handle empty or invalid node arrays', () => {
+            expect(ensureSinglePrimaryNode([])).toEqual([])
+            expect(ensureSinglePrimaryNode(undefined)).toEqual([])
+        })
+        it('should ensure ONLY one primary node exists', () => {
+            const nodes = NODES[NetworkProtocol.IOTA][NetworkType.Mainnet].map((n) => ({ ...n, isPrimary: true }))
+            expect(ensureSinglePrimaryNode(nodes) === nodes).toBe(false)
+            expect(_hasOnePrimary(ensureSinglePrimaryNode(nodes))).toBe(true)
+        })
+    })
 })
