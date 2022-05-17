@@ -2,7 +2,7 @@
     import { HR } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { isLedgerProfile } from 'shared/lib/profile'
-    import { AdvancedSettings } from '@core/router'
+    import { AdvancedSettings, settingsChildRoute } from '@core/router'
     import {
         BalanceFinder,
         CrashReporting,
@@ -33,7 +33,7 @@
 
 <div>
     {#each settings as { component, childRoute, requireLogin, requireLedger }, index}
-        {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile)) && !$mobile}
+        {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile)) && ($mobile && $settingsChildRoute === childRoute)}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} id={childRoute} />
             </section>

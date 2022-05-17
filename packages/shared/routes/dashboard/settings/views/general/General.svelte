@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { GeneralSettings } from '@core/router'
+    import { GeneralSettings, settingsChildRoute } from '@core/router'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
     import ChangeProfileName from './ChangeProfileName.svelte'
 
@@ -21,7 +21,7 @@
 
 <div>
     {#each settings as { component, childRoute, requireLogin }, index}
-        {#if (!requireLogin || (requireLogin && $loggedIn)) && !$mobile}
+        {#if (!requireLogin || (requireLogin && $loggedIn)) && ($mobile && $settingsChildRoute === childRoute)}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} />
             </section>
