@@ -1,10 +1,5 @@
-import { derived, get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
 import { activeProfile } from '@core/profile'
+import { IAccountState } from '../interfaces'
 
-export const selectedAccountId = writable<string>(null)
-
-export const selectedAccount = derived([selectedAccountId], ([$selectedAccountId]) =>
-    get(get(activeProfile)?.accounts)?.find((acc) => acc.id === $selectedAccountId)
-)
-
-export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
+export const selectedAccount = writable<IAccountState>(null)

@@ -1,9 +1,10 @@
-import { newProfile } from '@core/profile'
+import { createNewAccount } from '@core/account'
+import { newProfile, setActiveProfile } from '@core/profile'
 import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
 import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
 import { SetupType } from '@lib/typings/setup'
-import { createAccount, walletSetupType } from '@lib/wallet'
+import { walletSetupType } from '@lib/wallet'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ProtectRoute } from '../enums'
@@ -44,8 +45,10 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
                     const m = get(mnemonic).join(' ')
                     await verifyMnemonic(m)
                     await storeMnemonic(m)
-                    await createAccount()
                     mnemonic.set(null)
+                    setActiveProfile(get(newProfile))
+                    // TODO: move to after or on login function
+                    await createNewAccount()
                 }
 
                 get(appRouter).next(event)

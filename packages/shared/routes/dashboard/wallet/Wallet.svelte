@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { AccountSummaryAndAssetsPane, AccountHistoryPane, LineChartPane, BarChartPane } from 'shared/components'
-    import { loggedIn, sendParams } from 'shared/lib/app'
+    import { sendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
@@ -9,20 +9,17 @@
     import { openPopup } from 'shared/lib/popup'
     import { LedgerErrorType } from 'shared/lib/typings/events'
     import {
-        api,
         asyncSyncAccounts,
         getSyncAccountOptions,
         hasGeneratedALedgerReceiveAddress,
         isFirstSessionSync,
-        removeEventListeners,
     } from 'shared/lib/wallet'
-    import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
     import { activeProfile } from '@core/profile'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { isLedgerProfile } from '@core/profile'
     import { selectedAccount, selectedAccountId } from '@core/account'
 
-    const { accounts, hasLoadedAccounts, isStrongholdLocked } = $activeProfile
+    const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     // TODO: move to dashboard or lib
     $: {

@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{asset?.balance}</Text>
+            <Text classes="font-semibold">{asset?.balance.total}</Text>
             {#if asset?.fiatBalance}
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}

@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { getColor } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
     import { accountRouter, AccountRoute } from '@core/router'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState, MAX_ACCOUNT_NAME_LENGTH } from '@core/account'
 
     export let alias
     export let account
@@ -38,7 +37,7 @@
                     },
                 }))
             }
-            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
+            if ($accounts.find((a) => a.getAlias() === trimmedAccountAlias)) {
                 return (error = localize('error.account.duplicate'))
             }
             isBusy = true
@@ -47,8 +46,8 @@
                     accounts.update((_accounts) =>
                         _accounts.map((account) => {
                             if (account.id === $selectedAccount?.id) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
+                                return Object.assign<IAccountState, IAccountState, Partial<IAccountState>>(
+                                    {} as IAccountState,
                                     account,
                                     {
                                         alias: trimmedAccountAlias,

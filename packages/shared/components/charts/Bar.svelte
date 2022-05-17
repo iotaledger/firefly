@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { AccountColors } from '@core/account'
+
     import Chart from 'chart.js'
-    import { AccountColors } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'

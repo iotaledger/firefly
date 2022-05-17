@@ -30,11 +30,6 @@ export const strongholdPassword = writable<string>(null)
 export const mnemonic = writable<string[]>(null)
 
 /**
- * The last timestamp that the app user was active
- */
-export const lastActiveAt = writable<Date>(new Date())
-
-/**
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({
@@ -55,25 +50,12 @@ export const clearSendParams = (isInternal = false): void =>
     })
 
 /**
- * Determines whether a user is logged in
- */
-export const loggedIn = writable<boolean>(false)
-
-/**
  * Cleanup the signup vars
  */
 export const cleanupSignup = (): void => {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
-}
-
-/**
- * Log in to the current profile
- */
-export const login = (): void => {
-    loggedIn.set(true)
-    lastActiveAt.set(new Date())
 }
 
 /**

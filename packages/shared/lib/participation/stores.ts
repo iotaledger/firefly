@@ -1,7 +1,9 @@
+import { IAccountState, selectedAccountId } from '@core/account'
+import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
+import { activeProfile } from '@core/profile'
+import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId } from '@core/account'
-import { WalletAccount } from '../typings/walletAccount'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
 import {
     AccountParticipationOverview,
@@ -13,9 +15,6 @@ import {
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
-import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
-import { activeProfile } from '@core/profile'
 
 /**
  * The store for keeping track of pending participations.
@@ -49,7 +48,7 @@ export const isPerformingParticipation = writable<boolean>(false)
  * in `wallet.rs`.
  */
 // TODO: remove this
-export const stakedAccounts: Readable<WalletAccount[]> = derived(
+export const stakedAccounts: Readable<IAccountState[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
         const activeAccountIndices = $participationOverview

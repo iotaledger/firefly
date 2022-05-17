@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { WalletAccount } from '@lib/typings/walletAccount'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
     import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { getNetwork, NetworkType, nodeInfo } from '@core/network'
+    import { IAccountState } from '@core/account'
 
-    export let recipient: string | WalletAccount
+    export let recipient: string | IAccountState
     export let disabled = false
 
     const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
@@ -15,7 +15,7 @@
     let inputElement
     let modal: Modal
 
-    let selectedAccount: WalletAccount
+    let selectedAccount: IAccountState
     let value: string
     let error: string
     let hasFocus: boolean
@@ -27,7 +27,7 @@
 
     $: {
         if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.alias()
+            inputElement.value = selectedAccount?.getAlias()
         }
     }
     $: {

@@ -1,3 +1,7 @@
+import { IAccountState } from '@core/account'
+import { localize } from '@core/i18n'
+import { activeProfile } from '@core/profile'
+import { getAccounts } from '@core/profile-manager'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     api,
@@ -9,18 +13,14 @@ import {
     updateBalanceOverview,
 } from 'shared/lib/wallet'
 import { get, Writable } from 'svelte/store'
-import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { ASSEMBLY_EVENT_ID } from './participation'
 import { getParticipationOverview } from './participation/api'
 import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { openPopup } from './popup'
 import type { Message } from './typings/message'
-import type { WalletAccount } from './typings/walletAccount'
-import { ASSEMBLY_EVENT_ID } from './participation'
-import { activeProfile } from '@core/profile'
-import { getAccounts } from '@core/profile-manager'
 
 const { isStrongholdLocked } = get(activeProfile)
 /**
@@ -74,7 +74,7 @@ export function initialiseListeners(): void {
 
                 const notificationMessage = localize('notifications.valueTx')
                     .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account?.alias())
+                    .replace('{{account}}', account?.getAlias())
 
                 showSystemNotification({
                     type: 'info',
@@ -233,7 +233,7 @@ export function initialiseListeners(): void {
                 const { accounts } = get(activeProfile)
                 const latestAccounts = await getAccounts()
 
-                let walletAccounts: WalletAccount[]
+                let walletAccounts: IAccountState[]
                 let completeCount = 0
                 const totalBalance = {
                     balance: 0,
@@ -247,12 +247,12 @@ export function initialiseListeners(): void {
                 // 3. Only update the account for which the balance change event emitted;
                 // 4. Update balance overview & accounts
                 for (const _account of latestAccounts) {
-                    const { address } = await _account.latestAddress()
-                    const balance = await _account.balance()
-                    totalBalance.balance += balance.total
-                    totalBalance.incoming += balance.incoming
-                    totalBalance.outgoing += balance.outgoing
-                    totalBalance.depositAddress = address
+                    // const { address } = await _account.latestAddress()
+                    // const balance = await _account.getBalance()
+                    // totalBalance.balance += balance.total
+                    // totalBalance.incoming += balance.incoming
+                    // totalBalance.outgoing += balance.outgoing
+                    // totalBalance.depositAddress = address
 
                     // addMessagesPair(_account)
 
@@ -336,7 +336,7 @@ export function initialiseListeners(): void {
 }
 
 function updateAllMessagesState(
-    accounts: Writable<WalletAccount[]>,
+    accounts: Writable<IAccountState[]>,
     messageId: string,
     confirmation: boolean
 ): boolean {
@@ -344,8 +344,8 @@ function updateAllMessagesState(
 
     accounts.update((storedAccounts) =>
         storedAccounts.map((storedAccount) =>
-            Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>(
-                {} as WalletAccount,
+            Object.assign<IAccountState, Partial<IAccountState>, Partial<IAccountState>>(
+                {} as IAccountState,
                 storedAccount,
                 {
                     messages: storedAccount.messages.map((_message: Message) => {
@@ -384,7 +384,7 @@ export function displayParticipationNotification(pendingParticipation: PendingPa
                 `popups.stakingManager.${
                     pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
-                { values: { account: account.alias() } }
+                { values: { account: account.getAlias() } }
             ),
         })
     }

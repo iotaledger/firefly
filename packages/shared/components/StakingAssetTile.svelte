@@ -21,12 +21,11 @@
         stakedAccounts,
     } from 'shared/lib/participation/stores'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
 
     export let asset: Asset
 
@@ -75,8 +74,8 @@
         openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
     }
 
-    function getAccount(accounts: WalletAccount[]): WalletAccount {
-        return accounts?.find((account) => account.alias() === $selectedAccount?.alias())
+    function getAccount(accounts: IAccountState[]): IAccountState {
+        return accounts?.find((account) => account.getAlias() === $selectedAccount?.getAlias())
     }
 
     function getLocalizedTooltipText(): TooltipText {
@@ -162,7 +161,7 @@
     </div>
     <div class="flex flex-col flex-wrap space-y-1 text-right">
         <div class="flex flex-row">
-            <Text classes="font-semibold">{asset?.balance}</Text>
+            <Text classes="font-semibold">{asset?.balance.total}</Text>
         </div>
         <Text secondary smaller>{asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : FIAT_PLACEHOLDER}</Text>
     </div>

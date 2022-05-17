@@ -1,5 +1,5 @@
-import type { AccountId, AccountSyncOptions, CreateAccountPayload, NodeInfo, ClientOptions } from '@iota/wallet'
-import { StardustAccount } from '../../typings/account'
+import type { AccountId, CreateAccountPayload, AccountSyncOptions, ClientOptions } from '@iota/wallet'
+import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
 import { IAuth, INodeInfoResponse } from '../../core/network'
@@ -67,7 +67,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    createAccount(account: CreateAccountPayload): Promise<StardustAccount> {
+    createAccount(account: CreateAccountPayload): Promise<IAccount> {
         return Promise.resolve(new AccountMock())
     }
 
@@ -115,7 +115,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<StardustAccount[]> {
+    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
         return Promise.resolve([])
     }
 }

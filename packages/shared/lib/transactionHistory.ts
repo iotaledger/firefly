@@ -1,5 +1,5 @@
+import { IAccountState } from '@core/account'
 import { formatDate, localize } from '@core/i18n'
-import { WalletAccount } from './typings/walletAccount'
 import { formatUnitBestMatch } from './units'
 
 interface ITransactionHistoryHeaderParameters {
@@ -14,7 +14,7 @@ interface ITransactionHistoryHeaderParameters {
 const NEW_LINE = '\r\n'
 
 export const generateTransactionHistoryCsvFromAccount = (
-    WalletAccount: WalletAccount,
+    IAccountState: IAccountState,
     headerParams: ITransactionHistoryHeaderParameters
 ): string => {
     const headerParts = []
@@ -27,7 +27,7 @@ export const generateTransactionHistoryCsvFromAccount = (
 
     let csv = headerParts.join(',') + NEW_LINE
 
-    WalletAccount.messages.forEach((message) => {
+    IAccountState.messages.forEach((message) => {
         const { id, timestamp } = message
         if (message.payload.type === 'Transaction') {
             const { internal, incoming, value } = message.payload.data.essence.data

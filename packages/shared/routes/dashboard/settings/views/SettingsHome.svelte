@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
-    import { loggedIn, mobile } from 'shared/lib/app'
+    import { mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -14,6 +14,8 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
+
+    const { loggedIn } = $activeProfile
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)

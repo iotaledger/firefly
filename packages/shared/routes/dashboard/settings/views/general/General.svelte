@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
     import { GeneralSettings } from '@core/router'
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
     import ChangeProfileName from './ChangeProfileName.svelte'
+    import { activeProfile } from '@core/profile'
 
     const settings: {
         component: unknown
@@ -17,6 +17,8 @@
         { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
         { component: ChangeProfileName, childRoute: GeneralSettings.ChangeProfileName, requireLogin: true },
     ]
+
+    const { loggedIn } = $activeProfile
 </script>
 
 <div>

@@ -1,5 +1,6 @@
 export * from './official-node-urls.constant'
 export * from './base-token.constant'
+export * from './coin-type.constant'
 export * from './explorer-urls.constant'
 export * from './network-health-colours.constant'
 export * from './network-status-description.enum'

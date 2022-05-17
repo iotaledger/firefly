@@ -4,13 +4,13 @@
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { WalletAccount } from '@lib/typings/walletAccount'
+    import { IAccountState } from '@core/account'
     import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
 
     export let classes: string
 
-    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+    const viewableAccounts = getContext<Readable<IAccountState[]>>('viewableAccounts')
 
     let os = ''
 

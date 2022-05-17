@@ -2,7 +2,7 @@
     import { get } from 'svelte/store'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { createAccount, asyncRemoveWalletAccounts } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccounts } from 'shared/lib/wallet'
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
     import {
@@ -17,6 +17,7 @@
     import { ErrorType } from 'shared/lib/typings/events'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
+    import { createNewAccount } from '@core/account'
 
     export let network: INetwork
     export let node: INode
@@ -67,7 +68,7 @@
             updateActiveProfileSettings({ networkConfig: newConfig })
 
             await asyncRemoveWalletAccounts(get($activeProfile?.accounts).map((a) => a.id))
-            await createAccount(`${localize('general.account')} 1`)
+            await createNewAccount(`${localize('general.account')} 1`)
             await logout()
         } catch (err) {
             isSwitchingNetwork = false

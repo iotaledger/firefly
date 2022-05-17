@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
-    import { isLedgerProfile } from '@core/profile'
+    import { activeProfile, isLedgerProfile } from '@core/profile'
     import { AdvancedSettings } from '@core/router'
     import {
         BalanceFinder,
@@ -29,6 +28,8 @@
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
     ]
+
+    const { loggedIn } = $activeProfile
 </script>
 
 <div>
