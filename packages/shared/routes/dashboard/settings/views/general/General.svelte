@@ -21,7 +21,7 @@
 
 <div>
     {#each settings as { component, childRoute, requireLogin }, index}
-        {#if (!requireLogin || (requireLogin && $loggedIn)) && ($mobile && $settingsChildRoute === childRoute)}
+        {#if (!requireLogin || (requireLogin && $loggedIn)) && $mobile && $settingsChildRoute === childRoute}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} />
             </section>
