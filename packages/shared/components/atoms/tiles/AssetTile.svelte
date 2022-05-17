@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
     import { Icon, StakingAssetTile, Text } from 'shared/components'
-    import { isBright } from 'shared/lib/helpers'
+    import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
+    import { isBright } from '@lib/helpers'
 
     export let asset: IAsset
 

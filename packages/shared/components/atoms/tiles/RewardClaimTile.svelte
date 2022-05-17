@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { StardustAccount } from '@lib/typings/account'
+    import { IAccount } from '@core/account'
 
-    export let wallet: StardustAccount
+    export let wallet: IAccount
 
     const alias = wallet?.meta?.alias ?? ''
     const unclaimedBalance = wallet?.meta?.index === 0 || wallet?.meta?.index === 2 ? '12,345.678 SMR' : ''
