@@ -4,8 +4,8 @@
     import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { getNetwork, NetworkType, nodeInfo } from '@core/network'
-
     import { IAccountState } from '@core/account'
+
     export let recipient: string | IAccountState
     export let disabled = false
 
