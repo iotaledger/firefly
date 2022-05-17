@@ -2,7 +2,7 @@
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -12,6 +12,7 @@
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
+    import CreateAccount from './CreateAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -35,22 +36,26 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
-    import StakingNotice from './StakingNotice.svelte'
+    import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
+    import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
 
     export let locale: Locale
 
-    export let type = undefined
-    export let props = undefined
-    export let hideClose = undefined
-    export let fullScreen = undefined
+    export let type: string
+    export let props: any
+    export let hideClose: boolean
+    export let preventClose: boolean
+    export let fullScreen: boolean
     export let transition = true
+    export let overflow = false
 
     let autofocusContent = true
 
@@ -61,9 +66,11 @@
     }
 
     let size: PopupSize = PopupSize.Medium
+    let os = ''
 
     $: switch (type) {
         case 'ledgerNotConnected':
+        case 'createAccount':
             size = PopupSize.Small
             break
         case 'video':
@@ -105,6 +112,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
+        createAccount: CreateAccount,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
@@ -116,10 +124,11 @@
         // Participation (voting / staking)
         stakingConfirmation: StakingConfirmation,
         stakingManager: StakingManager,
-        stakingNotice: StakingNotice,
+        newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
+        singleAccountGuide: SingleAccountGuide,
     }
 
     const onKey = (e) => {
@@ -129,11 +138,11 @@
     }
 
     const tryClosePopup = (): void => {
-        if (!hideClose) {
+        if (!preventClose) {
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup($popupState?.preventClose)
+            closePopup()
         }
     }
 
@@ -159,11 +168,12 @@
         e.preventDefault()
     }
 
-    onMount(() => {
+    onMount(async () => {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
+        os = await Platform.getOS()
     })
 </script>
 
@@ -177,8 +187,10 @@
 {:else}
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-full overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
+        class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
+            overflow ? '' : 'overflow-hidden'
+        }
+            h-full z-20 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'} ${
             $mobile && 'z-40'
         }`}
     >
@@ -187,9 +199,9 @@
             use:clickOutside
             on:clickOutside={tryClosePopup}
             bind:this={popupContent}
-            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 relative ${
-                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'
-            }`}
+            class={`${size} bg-white rounded-xl pt-6 px-8 pb-8 ${
+                fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900 shadow-elevation-4'
+            } ${overflow ? 'overflow' : 'relative'}`}
         >
             {#if !hideClose}
                 <button
@@ -208,7 +220,6 @@
 <style type="text/scss">
     popup {
         popup-content {
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             width: 100%;
             &.small {
                 max-width: 360px;
@@ -219,11 +230,7 @@
             &.large {
                 max-width: 630px;
             }
-            &.full-screen {
-                box-shadow: none;
-            }
-
-            &:not(.full-screen) {
+            &:not(.full-screen):not(.overflow) {
                 @apply overflow-y-auto;
                 max-height: calc(100vh - 50px);
             }

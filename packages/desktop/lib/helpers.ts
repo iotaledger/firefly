@@ -1,4 +1,4 @@
-import { Locale } from 'shared/lib/typings/i18n'
+import { Locale } from '@core/i18n'
 
 /**
  * Returns localised Electron menu items

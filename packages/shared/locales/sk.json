@@ -9,6 +9,11 @@
             "body": "Prosím preštudujte si Zásady ochrany osobných údajov a zmluvné podmienky.",
             "checkbox": "Prečítal som a súhlasím so Zásadami ochrany osobných údajov a Podmienkami služby"
         },
+        "crashReporting": {
+            "title": "Crash Reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
+        },
         "appearance": {
             "title": "Vzhľad",
             "body": "Zvoľte motív aplikácie."
@@ -313,7 +318,7 @@
             "theme": {
                 "title": "Motív",
                 "description": "",
-                "advice": "Please restart the Firefly application for changes to the system theme to take effect"
+                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
                 "title": "Jazyk",
@@ -411,6 +416,12 @@
                 "title": "Záznam chýb",
                 "description": "Zobraziť chyby pre debugovanie problému"
             },
+            "crashReporting": {
+                "title": "Crash reports",
+                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
+                "checkbox": "Send crash reports",
+                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+            },
             "diagnostics": {
                 "title": "Diagnostika",
                 "description": "Zobraziť systémové a aplikačné informácie"
@@ -450,49 +461,48 @@
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security": {
-                "version": {
-                    "title": "Firefly v{version}",
-                    "upToDate": "Aktuálne",
-                    "outOfDate": "Neaktuálne"
-                },
-                "hardwareDevice": {
-                    "title": "Hardvérové zariadenie",
-                    "statuses": {
-                        "appNotOpen": "IOTA Aplikácia nie je otvorená",
-                        "connected": "Pripojené",
-                        "legacyConnected": "Aplikácia {legacy} je otvorená",
-                        "locked": "Uzamknuté",
-                        "mnemonicMismatch": "Nesprávny Ledger alebo mnemotechnická pomôcka",
-                        "notDetected": "Nedetegované",
-                        "otherConnected": "Aplikácia otvorená"
-                    }
-                },
-                "strongholdStatus": {
-                    "title": "Stav peňaženky",
-                    "locked": "Uzamknuté",
-                    "unlocked": "Odomknutý"
-                },
-                "strongholdBackup": {
-                    "title": "Záloha peňaženky",
-                    "weeksAgo": "pred {weeks, plural,\n  one {1 týždňom}\n  other {# týždňami}\n}"
-                }
-            },
             "network": {
-                "networkOperational": "Sieť v prevádzke",
-                "networkDegraded": "Zhoršená funkčnosť siete",
-                "networkDown": "Sieť odpojená",
+                "networkOperational": "Network operational",
+                "networkDegraded": "Network degraded",
+                "networkDown": "Network disconnected",
                 "status": "Stav",
                 "messagesPerSecond": "Správy za sekundu",
                 "referencedRate": "Referencovaná miera"
             },
             "profileModal": {
                 "allSettings": "Všetky nastavenia",
-                "logout": "Odhlásiť sa"
+                "logout": "Odhlásiť sa",
+                "stronghold": {
+                    "title": "Profile lock",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
+                },
+                "hardware": {
+                    "title": "Hardware Device",
+                    "statuses": {
+                        "appNotOpen": "IOTA app not open",
+                        "connected": "Connected",
+                        "legacyConnected": "Legacy app open",
+                        "locked": "Locked",
+                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "notDetected": "Not detected",
+                        "otherConnected": "App open"
+                    }
+                },
+                "backup": {
+                    "title": "Backup your wallets",
+                    "lastBackup": "Naposledy ste zálohovali {date}",
+                    "notBackedUp": "Nezálohované",
+                    "button": "Backup"
+                },
+                "version": {
+                    "title": "New update available",
+                    "updateVersion": "Firefly v{version}",
+                    "button": "Update"
+                }
             }
         },
         "staking": {
-            "title": "Stakovanie",
             "welcome": "Welcome to the staking dashboard!",
             "status": {
                 "upcoming": "Udalosť ešte nezačala",
@@ -506,23 +516,29 @@
                 "stakedFunds": "Stakované prostriedky"
             },
             "info": {
-                "upcomingSubheader": "Udalosť ešte nezačala",
-                "upcomingHeader": "Check back later",
-                "commencingSubheader": "Pripravte sa na staking",
-                "commencingHeader": "Pred-stakuj svoje tokeny!",
-                "holdingSubheaderHolding": "Teraz získavate odmeny za staking",
-                "holdingSubheaderNotHolding": "Získajte odmeny stakeing-om IOTA",
-                "holdingHeaderHolding": "{duration} left",
-                "holdingHeaderNotHolding": "Stakuj svoje tokeny!",
-                "endedSubheader": "Staking has now ended",
-                "endedHeader": "Ďakujeme!",
-                "inactiveHeader": "Pokúste sa zmeniť sieťový uzol",
-                "inactiveSubheader": "Stakovanie nezaznamenané"
+                "headers": {
+                    "upcoming": "Check back later",
+                    "commencing": "Pre-staking is open",
+                    "holding": "{duration} of staking left",
+                    "ended": "Staking has now ended",
+                    "inactive": "No staking events detected"
+                },
+                "bodies": {
+                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
+                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                }
             },
             "airdrops": {
                 "holding": "Zostáva",
                 "commencing": "Pokiaľ začne staking",
-                "collectedRewards": "Collected rewards",
+                "currentStakingPeriod": "Current staking period",
+                "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
@@ -531,6 +547,10 @@
                     "name": "Shimmer",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
+            },
+            "banners": {
+                "new": "New Event",
+                "complete": "Complete"
             }
         },
         "picker": {
@@ -555,7 +575,8 @@
             "upToDateDescription": "Používate najnovšiu a najbezpečnejšiu verziu Firefly.",
             "updateAvailable": "Je dostupná aktualizácia Firefly",
             "updateDetails": "Verzia {version} - {date}",
-            "noAutoUpdate": "Automatické aktualizácie sú deaktivovaný pre túto Windows verziu, prosím stiahnite si aktualizáciu z portálu https://firefly.iota.org."
+            "noAutoUpdate": "Automatické aktualizácie sú deaktivovaný pre túto Windows verziu, prosím stiahnite si aktualizáciu z portálu https://firefly.iota.org.",
+            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backup": {
             "title": "Posledná záloha: {date}",
@@ -654,8 +675,12 @@
         },
         "balanceFinder": {
             "title": "Vyhľadávač zostatkov",
-            "body": "Vykonajte náročnejšie vyhľadávanie adries pre nájdenie chybujúcich zostatkov. Môže to chvíľu trvať.",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "accountsSearched": "Wallets searched",
+            "addressesSearched": "Addresses searched per wallet",
+            "accountsFound": "Wallets found",
             "totalWalletBalance": "Celkový zostatok",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Zadajte svoje heslo pre povolenie vyhľadávania."
         },
         "riskFunds": {
@@ -726,29 +751,29 @@
             "title": "Export transaction history",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Názov profilu:",
-            "accountName": "Názov účtu:",
+            "accountName": "Wallet name:",
             "typePassword": "Type your password to allow exporting"
-        },
-        "stakingNotice": {
-            "upcomingDate": "Stakovanie ešte nezačalo",
-            "commencingDate": "Stakovanie ešte nezačalo",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
-            "ok": "Ok, I understand"
         },
         "stakingManager": {
             "title": "Staking Management",
             "description": "Keď stakuješ peňaženku, pošleš transakciu sebe samému, čím tieto prostriedky označíš ako staknuté. Svoje tokeny môžeš kedykoľvek presunúť, avšak staking odmeny už nebudeš naďalej dostávať.",
             "totalFundsStaked": "Suma stakovaných prostriedkov",
             "stakedSuccessfully": "Tvoje prostriedky boli stakované pre {account}.",
-            "unstakedSuccessfully": "Tvoje prostriedky boli odstakované pre {account}."
+            "unstakedSuccessfully": "Tvoje prostriedky boli odstakované pre {account}.",
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Airdrop Participation",
+            "title": "Confirm Participation",
             "subtitleStake": "Chystáte sa stakovať",
             "subtitleMerge": "You are about to merge",
-            "bodyStake": "Ak sa nechceš zúčastniť oboch airdropov, odhlásiť sa môžeš nižšie. Odstakovať a znovu stakovať môžeš kedykoľvek.",
-            "bodyMerge": "Tvoje prostriedky budú stakované pre {airdrop}. Pre zmenu airdropov na ktorých sa chceš podielať, odstakuj túto peňaženku a stakuj ju znovu.",
+            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
+            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Estimated rewards"
+        },
+        "newStakingPeriodNotification": {
+            "title": "Staking phase {periodNumber} from {date}",
+            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "About Shimmer",
@@ -764,6 +789,11 @@
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "crashReporting": {
+            "title": "Crash reporting",
+            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
+            "checkbox": "Send crash reports to the IOTA Foundation"
+        },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
             "privPolicyTitle": "Privacy Policy",
@@ -773,6 +803,11 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+        },
+        "singleAccountGuide": {
+            "title": "The way you use Firefly has changed",
+            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
+            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
@@ -895,7 +930,9 @@
         "manageStake": "Upraviť stake",
         "merge": "Merge",
         "mergeFunds": "Merge funds",
-        "done": "Done"
+        "done": "Done",
+        "okIUnderstand": "OK, I understand",
+        "readMore": "Read more"
     },
     "general": {
         "password": "Heslo",
@@ -943,7 +980,6 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Zostatok",
-        "accountBalance": "Zostatok peňaženky",
         "all": "All",
         "incoming": "Prichádzajúce",
         "outgoing": "Odchádzajúce",
@@ -954,6 +990,7 @@
         "profiles": "Profily",
         "dev": "Vývojár",
         "createAccount": "Vytvoriť peňaženku",
+        "addAWallet": "Add a wallet",
         "accountName": "Názov peňaženky",
         "latestTransactions": "Posledné transakcie",
         "transactions": "Transakcie",
@@ -1012,14 +1049,20 @@
         "creatingProfile": "Vytváranie profilu, prosím počkajte...",
         "fundMigration": "Presun prostriedkov",
         "accountRemoved": "Táto peňaženka je skrytá. Pre vykonávanie prevodov ju najprv zobrazte.",
-        "receivingTo": "Prijímam na {account}",
-        "sendingFrom": "Odosielam z {account}",
-        "receivedTo": "Prijaté na {account}",
-        "sentFrom": "Odoslané z {account}",
+        "receivingFrom": "Receiving from {account}",
+        "sendingTo": "Sending to {account}",
+        "receivedFrom": "Received from {account}",
+        "sentTo": "Sent to {account}",
+        "transferringFrom": "Transferring from {account}",
+        "transferringTo": "Transferring to {account}",
+        "transferFrom": "Transfer from {account}",
+        "transferTo": "Transfer to {account}",
         "stakedFor": "Stakované za {account}",
         "unstakedFor": "Odstakované za {account}",
         "votedFor": "Hlasované za {account}",
         "unvotedFor": "Hlasované za {account}",
+        "stakingTransaction": "Staking Transaction",
+        "unstakingTransaction": "Unstaking Transaction",
         "receiving": "Prijímané",
         "sending": "Odosielané",
         "legacyNetwork": "Zastaralá sieť",
@@ -1035,7 +1078,9 @@
         "notStaked": "Nestakované",
         "stakedFunds": "Stakované prostriedky",
         "unstakedFunds": "Odstakované prostriedky",
-        "accountColor": "Wallet color"
+        "accountColor": "Wallet color",
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Dnes",
@@ -1082,7 +1127,10 @@
                     "success": "Payment details added from IOTA link"
                 }
             }
-        }
+        },
+        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {
         "profile": {
@@ -1205,15 +1253,18 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Nie je možné nájsť staking udalosť.",
             "cannotVisitAirdropWebsite": "Nie je možné otvoriť {airdrop} stránku.",
-            "invalidStakingEventId": "Nesprávne staking event ID."
-        }
+            "invalidStakingEventId": "Nesprávne staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+        },
+        "invalidDate": "INVALID DATE",
+        "invalidTime": "INVALID TIME"
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noAccounts": "You do not have any IOTA."
+            "noFunds": "You do not have any IOTA."
         }
     },
     "tooltips": {
@@ -1225,37 +1276,10 @@
             "low": "Nízke",
             "veryLow": "Veľmi nízke"
         },
-        "stakingIndicator": {
-            "upcoming": {
-                "title": "Stakovanie ešte nezačalo",
-                "body": "Check back later. The staking event has not begun."
-            },
-            "commencing": {
-                "title": "Pred-stakovanie je otvorené",
-                "body": "Pred-stakni svoje tokeny a akonáhle staking začne, automaticky začneš každých 10 sekúnd dostávať odmeny."
-            },
-            "activeHolding": {
-                "title": "Prebieha stakovanie",
-                "body": "Dobrá práca. Odmeny budeš dostávať každých 10 sekúnd."
-            },
-            "inactiveHolding": {
-                "title": "Stakovanie je otvorené",
-                "body": "Stakni svoje IOTA tokeny a dostávaj odmeny každých 10 sekúnd."
-            },
-            "inactive": {
-                "title": "Nebola zistená žiadna staking udalosť",
-                "body": "Otvor nastavenie siete v pokročilých nastaveniach a kliknutím na \"Zobraziť Informácie\" sa uisti, že aktuálny uzol má hodnotu \"Ùčasť\"."
-            },
-            "ended": {
-                "title": "Stakovanie teraz skončilo",
-                "bodyAboveRewardMin": "Assembly and Shimmer rewards will be distributed to your wallets when each of the respective networks launch.",
-                "bodyBelowRewardMin": "You did not stake enough IOTA to reach the minimum airdrop rewards."
-            }
-        },
         "partiallyStakedFunds": {
             "title": "Nové odstakované prostriedky: {amount}",
             "titleNoFunds": "Nové odstakované prostriedky",
-            "preBody": "Dostal si tokeny na stakovanej peňaženke.",
+            "preBody": "You have received tokens that are not staked.",
             "body": "Tieto nové prostriedky musíš manuálne staknúť aby si pre ne mohol dostať airdrop odmeny."
         },
         "stakingMinRewards": {
@@ -1290,5 +1314,9 @@
             "request": "We need your permission to use your camera to be able to scan QR codes.",
             "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
         }
+    },
+    "tabs": {
+        "wallet": "Peňaženka",
+        "staking": "Stakovanie"
     }
 }

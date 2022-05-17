@@ -52,7 +52,7 @@
             .iconBackgroundColor} rounded-lg text-{TOAST_STYLE[type].iconColor}"
     >
         {#if TOAST_STYLE[type].logo}
-            <Logo logo={TOAST_STYLE[type].logo} />
+            <Logo logo={TOAST_STYLE[type].logo} overrideStage="prod" />
         {:else}
             <Icon icon={TOAST_STYLE[type].icon} />
         {/if}

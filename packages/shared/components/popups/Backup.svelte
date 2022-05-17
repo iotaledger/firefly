@@ -6,8 +6,7 @@
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
-    import { formatDate } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { formatDate, Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -31,8 +30,10 @@
                     .then((result) => {
                         if (result) {
                             busy = true
+                            Platform.saveStrongholdBackup({ allowAccess: true })
                             api.backup(result, password, {
                                 onSuccess() {
+                                    Platform.saveStrongholdBackup({ allowAccess: false })
                                     updateProfile('lastStrongholdBackupTime', new Date())
                                     busy = false
                                     closePopup()

@@ -2,15 +2,21 @@ import { Unit } from '@iota/unit-converter'
 import { isSoftwareProfile } from 'shared/lib/profile'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { localize } from './i18n'
+import { localize } from '@core/i18n'
 import { stopPollingLedgerStatus } from './ledger'
 import { showAppNotification } from './notifications'
 import { resetParticipation } from './participation'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isLedgerProfile, isStrongholdLocked } from './profile'
-import { resetRouter } from './router'
+import { resetRouters } from '@core/router'
+import { Stage } from './typings/stage'
 import { api, destroyActor, resetWallet } from './wallet'
 import { SendParams } from 'shared/lib/typings/sendParams'
+
+/**
+ * Beta mode
+ */
+export const stage = writable<Stage>(Stage.ALPHA)
 
 /**
  * Mobile mode
@@ -20,7 +26,7 @@ export const mobile = writable<boolean>(false)
 /**
  * Wallet access pin
  */
-export const walletPin = writable<number>(null)
+export const walletPin = writable<string>(null)
 
 /**
  * Stronghold password
@@ -41,14 +47,21 @@ export const lastActiveAt = writable<Date>(new Date())
  * Input parameters for sending transactions
  */
 export const sendParams = writable<SendParams>({
-    amount: 0,
+    amount: undefined,
     unit: Unit.Mi,
     address: '',
     message: '',
     isInternal: false,
 })
 export const clearSendParams = (isInternal = false): void =>
-    sendParams.set({ amount: 0, unit: Unit.Mi, address: '', message: '', isInternal })
+    sendParams.set({
+        amount: undefined,
+        unit: Unit.Mi,
+        address: '',
+        message: '',
+        isInternal,
+        toWalletAccount: undefined,
+    })
 
 /**
  * Determines whether a user is logged in
@@ -104,7 +117,7 @@ export const logout = (_clearActiveProfile: boolean = false, _lockStronghold: bo
             if (_clearActiveProfile) clearActiveProfile()
             resetParticipation()
             resetWallet()
-            resetRouter()
+            resetRouters()
 
             resolve()
         }

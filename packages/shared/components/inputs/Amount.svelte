@@ -10,14 +10,12 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
+    import { localize } from '@core/i18n'
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
-    import { Locale } from 'shared/lib/typings/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     type AmountUnit = Unit | AvailableExchangeRates
-
-    export let locale: Locale
 
     export let amount = undefined
     export let unit: AmountUnit = Unit.Mi
@@ -167,8 +165,8 @@
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={amountForLabel || locale('general.amount')}
-        placeholder={placeholder || locale('general.amount')}
+        label={amountForLabel || localize('general.amount')}
+        placeholder={placeholder || localize('general.amount')}
         bind:value={amount}
         maxlength={17}
         {disabled}
@@ -185,7 +183,7 @@
             class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
             {disabled}
         >
-            {locale('actions.max').toUpperCase()}
+            {localize('actions.max').toUpperCase()}
         </button>
         <button
             on:click={(e) => {
