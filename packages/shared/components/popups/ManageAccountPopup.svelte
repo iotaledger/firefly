@@ -22,26 +22,22 @@
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
     $: hasColorChanged = getColor($activeProfile, $selectedAccount.id) !== color
 
-    function _save() {
-        if (trimmedAccountAlias || color) {
-            tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
-                .then(() => {
-                    closePopup()
-                })
-                .catch()
-                .finally(() => {
-                    isBusy = false
-                })
-        } else {
+    async function _save(): Promise<void> {
+        try {
+            if (trimmedAccountAlias || color) {
+                await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
+                closePopup()
+            }
+        } finally {
             isBusy = false
         }
     }
 
-    function _cancel() {
+    function _cancel(): void {
         isBusy = false
     }
 
-    async function handleSaveClick() {
+    async function handleSaveClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
@@ -58,12 +54,12 @@
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 openPopup({ type: 'password', props: { onSuccess: _save } })
             } else {
-                _save()
+                void _save()
             }
         }
     }
 
-    const handleCancelClick = () => {
+    function handleCancelClick() {
         closePopup()
     }
 </script>

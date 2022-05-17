@@ -31,22 +31,22 @@
         }
     }
 
-    function _create() {
-        tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-            .then(() => {
+    async function _create(): Promise<void> {
+        try {
+            if (trimmedAccountAlias || color) {
+                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
                 closePopup()
-            })
-            .catch()
-            .finally(() => {
-                isBusy = false
-            })
+            }
+        } finally {
+            isBusy = false
+        }
     }
 
     function _cancel() {
         isBusy = false
     }
 
-    const handleCreateClick = async () => {
+    async function handleCreateClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
@@ -59,16 +59,16 @@
             isBusy = true
 
             if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, _create, _cancel)
+                void promptUserToConnectLedger(false, _create, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 openPopup({ type: 'password', props: { onSuccess: _create } })
             } else {
-                _create()
+                void _create()
             }
         }
     }
 
-    const handleCancelClick = () => {
+    function handleCancelClick() {
         closePopup()
     }
 </script>
