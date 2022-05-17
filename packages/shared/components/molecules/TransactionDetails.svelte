@@ -91,7 +91,7 @@
         </transaction-status>
         {#if account}
             <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel profile={$activeProfile} {account} />
+                <AccountLabel {account} />
             </Box>
         {:else if address}
             <AddressBox clearBackground clearPadding isCopyable {address} />

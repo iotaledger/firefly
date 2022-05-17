@@ -54,7 +54,7 @@
 </script>
 
 <script lang="typescript">
-    export let type = TextType.p
+    export let type: TextType = TextType.p
     export let fontSize = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
     export let lineHeight = ''

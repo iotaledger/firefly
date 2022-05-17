@@ -16,7 +16,6 @@
     import { ParticipationEventState } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountId } from '@core/account'
-    import { Token } from '@lib/typings/assets'
     import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
 
     enum StakingAnimation {
@@ -108,13 +107,13 @@
             stakingEventState === ParticipationEventState.Commencing
         ) {
             const dateArgument = formatDate(ASSEMBLY_EVENT_START_DATE, { format: 'long' })
-            const localeArguments = { values: { token: Token.IOTA, date: dateArgument } }
+            const localeArguments = { values: { token: 'iota', date: dateArgument } }
 
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
             body = localize(`${baseLocalePath}.bodies.${stakingEventState}`, localeArguments)
         } else if (stakingEventState === ParticipationEventState.Holding) {
             const isStaking = isAssemblyStaked || isShimmerStaked
-            const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: Token.IOTA } }
+            const tokenArguments: LocaleArguments = isStaking ? {} : { values: { token: 'iota' } }
             const durationArguments: LocaleArguments = {
                 values: { duration: getBestTimeDuration($assemblyStakingRemainingTime) },
             }
@@ -131,9 +130,9 @@
                 ($currentShimmerStakingRewardsBelowMinimum > 0 && $currentShimmerStakingRewards <= 0)
             const subLocalePath = isBelowMinimum ? 'NotReachMinRewards' : didStake ? 'Stake' : 'NotStake'
             const tokenArguments: LocaleArguments = isBelowMinimum
-                ? { values: { token: Token.IOTA } }
+                ? { values: { token: 'iota' } }
                 : didStake
-                ? { values: { token: Token.IOTA } }
+                ? { values: { token: 'iota' } }
                 : {}
 
             header = localize(`${baseLocalePath}.headers.${stakingEventState}`)
