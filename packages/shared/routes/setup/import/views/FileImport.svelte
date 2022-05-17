@@ -94,7 +94,7 @@
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        {#if !$mobile}
+        {#if $mobile}
             <input
                 class="absolute opacity-0 w-full h-full"
                 type="file"
