@@ -12,7 +12,6 @@ import * as migration from './migration'
 import * as notification from './notification'
 import * as utils from './utils'
 import * as wallet from './wallet'
-import * as walletAccount from './walletAccount'
 
 export {
     account,
@@ -29,5 +28,4 @@ export {
     notification,
     utils,
     wallet,
-    walletAccount,
 }

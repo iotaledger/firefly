@@ -1,6 +1,6 @@
 import { HistoryDataProps } from './market'
 import { AvailableExchangeRates } from './currency'
-import { AccountColors } from '../wallet'
+import { AccountColors } from '@core/account'
 
 export interface Tooltip {
     title: string

@@ -1,5 +1,5 @@
+import { IAccountState } from '@core/account'
 import { Payload } from '@lib/typings/message'
-import { WalletAccount } from '@lib/typings/walletAccount'
 import {
     findAccountWithAddress,
     findAccountWithAnyAddress,
@@ -11,7 +11,7 @@ import {
 
 export function getTransactionSubjectAddressOrAccount(
     transactionPayload: Payload
-): { isSubjectAccount: true; subject: WalletAccount } | { isSubjectAccount: false; subject: string } {
+): { isSubjectAccount: true; subject: IAccountState } | { isSubjectAccount: false; subject: string } {
     const incoming = getIncomingFlag(transactionPayload)
     const internal = getInternalFlag(transactionPayload)
 

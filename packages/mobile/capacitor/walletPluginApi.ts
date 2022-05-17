@@ -1,9 +1,7 @@
 import { WalletPlugin } from 'firefly-actor-system-capacitor-bindings'
 import {
     AccountIdentifier,
-    AccountToCreate,
     areLatestAddressesUnused as _areLatestAddressesUnused,
-    createAccount as _createAccount,
     generateAddress as _generateAddress,
     getAccount as _getAccount,
     getAccounts as _getAccounts,
@@ -25,7 +23,6 @@ import {
     syncAccounts as _syncAccounts,
 } from '@lib/typings/account'
 import { BridgeMessage, CommunicationIds, MessageResponse } from '@lib/typings/bridge'
-import { ClientOptions } from '@lib/typings/client'
 import { reattach as _reattach, Transfer } from '@lib/typings/message'
 import {
     getMigrationData as _getMigrationData,
@@ -38,7 +35,6 @@ import {
     getLegacyAddressChecksum as _getLegacyAddressChecksum,
     AddressInput,
 } from '@lib/typings/migration'
-import { NodeAuth } from '@lib/typings/node'
 import {
     backup as _backup,
     changeStrongholdPassword as _changeStrongholdPassword,
@@ -140,10 +136,6 @@ export const api = {
         (mnemonic: string): Api =>
         (__ids) =>
             _verifyMnemonic(sendMessage, __ids, mnemonic),
-    createAccount:
-        (account: AccountToCreate): Api =>
-        (__ids) =>
-            _createAccount(sendMessage, __ids, account),
     removeAccount:
         (accountId: AccountIdentifier): Api =>
         (__ids) =>
@@ -231,10 +223,6 @@ export const api = {
         (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Api =>
         (__ids) =>
             _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount),
-    setClientOptions:
-        (options: ClientOptions): Api =>
-        (__ids) =>
-            _setClientOptions(sendMessage, __ids, options),
     setStrongholdPasswordClearInterval:
         (interval: Duration): Api =>
         (__ids) =>
@@ -295,10 +283,6 @@ export const api = {
         (nodes: string[], bundle: string[], mwm: number): Api =>
         (__ids) =>
             _sendLedgerMigrationBundle(sendMessage, __ids, nodes, bundle, mwm),
-    getNodeInfo:
-        (accountId: AccountIdentifier, url?: string, auth?: NodeAuth): Api =>
-        (__ids) =>
-            _getNodeInfo(sendMessage, __ids, accountId, url, auth),
     getLegacyAddressChecksum:
         (address: string): Api =>
         (__ids) =>

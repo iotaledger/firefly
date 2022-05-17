@@ -1,14 +1,13 @@
+import { IAccount, IAccountState, SignerType } from '@core/account'
+import { IAccountBalances } from '@core/account/interfaces/account-balances.interface'
 import { localize } from '@core/i18n'
-import { IAuth } from '@core/network'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
-import { createStardustAccount, generateMnemonic, getAccount, profileManager } from '@core/profile-manager'
+import { generateMnemonic, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import tailwindConfig from 'shared/tailwind.config.js'
 import { get, writable } from 'svelte/store'
-import resolveConfig from 'tailwindcss/resolveConfig'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { displayNotificationForLedgerProfile } from './ledger'
@@ -16,7 +15,7 @@ import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
 import { WalletApi } from './shell/walletApi'
-import { SignerType, StardustAccount, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
@@ -24,24 +23,8 @@ import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
-import { WalletAccount } from './typings/walletAccount'
 import { IWalletApi } from './typings/walletApi'
 
-const configColors = resolveConfig(tailwindConfig).theme.colors
-
-export enum AccountColors {
-    Blue = configColors['blue']['500'],
-    LightBlue = configColors['lightblue']['500'],
-    Purple = configColors['purple']['500'],
-    Turquoise = configColors['turquoise']['500'],
-    Green = configColors['green']['500'],
-    Yellow = configColors['yellow']['500'],
-    Orange = configColors['orange']['500'],
-    Red = configColors['red']['500'],
-    Pink = configColors['pink']['500'],
-}
-
-export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256
 
 /**
@@ -197,47 +180,6 @@ export function setStoragePassword(password: string): Promise<void> {
     })
 }
 
-export async function createAccount(alias?: string, color?: string): Promise<WalletAccount> {
-    const accounts = get(get(activeProfile)?.accounts)
-    try {
-        const createdAccount = await createStardustAccount({
-            alias: alias || `${localize('general.account')} ${(accounts?.length ?? 0) + 1}`,
-            coinType: 4219,
-        })
-        const stardustAccount = await getAccount(createdAccount.meta.index)
-        const addresses = await stardustAccount.generateAddresses()
-        const depositAddress = addresses[0].address
-        const preparedAccount = prepareAccountInfo(createdAccount, {
-            balance: 0,
-            incoming: 0,
-            outgoing: 0,
-            depositAddress,
-        })
-
-        if (get(activeProfile)?.id) {
-            get(activeProfile)?.accounts.update((_accounts) => [..._accounts, preparedAccount])
-        }
-
-        // setProfileAccount(get(activeProfile), { id: preparedAccount.id, color })
-        return preparedAccount
-    } catch (e) {
-        console.error(e)
-    }
-}
-
-const getSignerType = (profileType: ProfileType): SignerType => {
-    if (!profileType) return undefined
-
-    switch (profileType) {
-        case ProfileType.Software:
-            return { type: 'Stronghold' }
-        case ProfileType.Ledger:
-            return { type: 'LedgerNano' }
-        case ProfileType.LedgerSimulator:
-            return { type: 'LedgerNanoSimulator' }
-    }
-}
-
 export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
         api.removeAccount(accountId, {
@@ -317,7 +259,7 @@ export function asyncSyncAccounts(
     })
 }
 
-export async function asyncSyncAccountOffline(account: WalletAccount): Promise<void> {
+export async function asyncSyncAccountOffline(account: IAccountState): Promise<void> {
     return new Promise((resolve) => {
         api.syncAccount(account.id, {
             async onSuccess() {
@@ -365,7 +307,7 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  *
  * @returns {void}
  */
-// export function addMessagesPair(account: StardustAccount): void {
+// export function addMessagesPair(account: IAccount): void {
 //     // Only keep messages with a payload
 //     account.messages = account.messages.filter((m) => m.payload)
 
@@ -413,7 +355,7 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     const messageIncoming = getIncomingFlag(message.payload)
 
     accounts.update((storedAccounts) =>
-        storedAccounts.map((storedAccount: WalletAccount) => {
+        storedAccounts.map((storedAccount: IAccountState) => {
             if (storedAccount.id === accountId) {
                 const hasMessage = storedAccount.messages.some(
                     (m) => m.id === message.id && getIncomingFlag(m.payload) === messageIncoming
@@ -444,10 +386,10 @@ export const replaceMessage = (accountId: string, messageId: string, newMessage:
     const messageIncoming = getIncomingFlag(newMessage.payload)
 
     accounts.update((storedAccounts) =>
-        storedAccounts.map((storedAccount: WalletAccount) => {
+        storedAccounts.map((storedAccount: IAccountState) => {
             if (storedAccount.id === accountId) {
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>(
-                    {} as WalletAccount,
+                return Object.assign<IAccountState, Partial<IAccountState>, Partial<IAccountState>>(
+                    {} as IAccountState,
                     storedAccount,
                     {
                         messages: storedAccount.messages.map((_message) => {
@@ -471,11 +413,11 @@ export const replaceMessage = (accountId: string, messageId: string, newMessage:
  *
  * @method getAccountMessages
  *
- * @param {WalletAccount} accounts
+ * @param {IAccountState} accounts
  *
  * @returns {AccountMessage[]}
  */
-export const getAccountMessages = (account: WalletAccount): AccountMessage[] => {
+export const getAccountMessages = (account: IAccountState): AccountMessage[] => {
     const messages: {
         [key: string]: AccountMessage
     } = {}
@@ -647,34 +589,6 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
 }
 
 /**
- * Updates balance fiat value for every account
- *
- * @method updateAccountBalanceEquiv
- *
- * @returns {void}
- */
-export const updateAccountsBalanceEquiv = (): void => {
-    const { accounts } = get(activeProfile)
-
-    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
-
-    accounts.update((storedAccounts) => {
-        for (const storedAccount of storedAccounts) {
-            // TODO: Refactor balance
-            // storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
-            storedAccount.balanceEquiv = formatCurrency(
-                convertToFiat(
-                    storedAccount.rawIotaBalance,
-                    get(currencies)[CurrencyTypes.USD],
-                    get(exchangeRates)[activeCurrency]
-                )
-            )
-        }
-        return storedAccounts
-    })
-}
-
-/**
  * Gets balance history for each account in market data timestamps
  *
  * @method getAccountBalanceHistory
@@ -684,7 +598,7 @@ export const updateAccountsBalanceEquiv = (): void => {
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountBalanceHistory = (account: WalletAccount, priceData: PriceData): BalanceHistory => {
+export const getAccountBalanceHistory = (account: IAccountState, priceData: PriceData): BalanceHistory => {
     const balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
@@ -698,7 +612,7 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
                 ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
                 ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
         // Calculate the variations for each account
-        let trackedBalance = account.rawIotaBalance
+        let trackedBalance = account.balances.total
         const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
         messages.forEach((message) => {
             const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
@@ -781,26 +695,23 @@ export function getAccountMeta(accountId: string): Promise<{
 }
 
 export const prepareAccountInfo = (
-    account: StardustAccount,
+    account: IAccount,
     meta: {
         balance: number
         incoming: number
         outgoing: number
         depositAddress: string
     }
-): WalletAccount => {
+): IAccountState => {
     const { index, alias } = account.meta
     const { balance, depositAddress } = meta
 
     const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
     // TODO: Hardcoded signer type
-    return Object.assign<WalletAccount, StardustAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<IAccountState, IAccount, Partial<IAccountState>>({} as IAccountState, account, {
         id: index.toString(),
         depositAddress,
-        rawIotaBalance: balance,
-        balanceEquiv: formatCurrency(
-            convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
-        ),
+        balances: <IAccountBalances>{},
     })
 }
 
@@ -873,10 +784,10 @@ export const isParticipationPayload = (payload: Payload): boolean => getIndexati
  * @method getWalletBalanceHistory
  *
  * @param {Payload} payload
- * @param {WalletAccount} account
+ * @param {IAccountState} account
  *
  */
-export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+export const isSelfTransaction = (payload: Payload, account: IAccountState): boolean => {
     const accountAddresses = account?.depositAddress
     if (payload && accountAddresses.length) {
         const getReceiverAddresses = () => {
@@ -943,7 +854,7 @@ export const receiverAddressesFromMilestonePayload = (payload: Payload): string[
  * Get the value of a milestone message
  * @returns
  */
-export const getMilestoneMessageValue = (payload: Payload, accounts: WalletAccount[]): number => {
+export const getMilestoneMessageValue = (payload: Payload, accounts: IAccountState[]): number => {
     if (payload?.type === 'Milestone') {
         const { funds } = payload.data.essence.receipt.data
 
@@ -1003,7 +914,7 @@ export const getInternalFlag = (payload: Payload): boolean | undefined => {
  * @param address The address to find
  * @returns The wallet account matching the address or undefined if not found
  */
-export const findAccountWithAddress = (address: string): WalletAccount | undefined => {
+export const findAccountWithAddress = (address: string): IAccountState | undefined => {
     if (!address) {
         return
     }
@@ -1019,8 +930,8 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
  */
 export const findAccountWithAnyAddress = (
     addresses: string[],
-    excludeFirst?: WalletAccount
-): WalletAccount | undefined => {
+    excludeFirst?: IAccountState
+): IAccountState | undefined => {
     if (!addresses || addresses.length === 0) {
         return
     }
@@ -1108,11 +1019,11 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
  *
  * @method hasPendingTransactions
  *
- * @param {WalletAccount} account
+ * @param {IAccountState} account
  *
  * @returns {boolean}
  */
-export const hasPendingTransactions = (account: WalletAccount): boolean => {
+export const hasPendingTransactions = (account: IAccountState): boolean => {
     if (!account) return false
 
     return account?.messages.some((m) => !m.confirmed)
@@ -1123,11 +1034,11 @@ export const hasPendingTransactions = (account: WalletAccount): boolean => {
  *
  * @method hasValidPendingTransactions
  *
- * @param {WalletAccount} account
+ * @param {IAccountState} account
  *
  * @returns {boolean}
  */
-export const hasValidPendingTransactions = (account: WalletAccount): boolean => {
+export const hasValidPendingTransactions = (account: IAccountState): boolean => {
     if (!account) return false
     const pendingMessages = account?.messages.filter((m) => !m.confirmed)
     const pendingInputs = pendingMessages.flatMap((msg) => {

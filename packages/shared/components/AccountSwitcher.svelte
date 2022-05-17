@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { WalletAccount } from '@lib/typings/walletAccount'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
     import { updateActiveProfile } from '@core/profile'
 
-    export let accounts: WalletAccount[] = []
+    export let accounts: IAccountState[] = []
 
     let modal: Modal
     let isModalOpened: boolean
@@ -19,7 +18,7 @@
 <div class="relative left-8" style="-webkit-app-region: none;">
     <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
         <div class="circle" style="--account-color: {$selectedAccount?.color}" />
-        <Text type="h5">{$selectedAccount?.alias()}</Text>
+        <Text type="h5">{$selectedAccount?.getAlias()}</Text>
         <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
         </div>

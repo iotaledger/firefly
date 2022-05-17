@@ -34,12 +34,11 @@
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
@@ -230,7 +229,7 @@
     const tooltipAnchors: { [accountIndex: number]: unknown } = {}
     let tooltipMinBalance: string = ''
 
-    function toggleTooltip(account: WalletAccount): void {
+    function toggleTooltip(account: IAccountState): void {
         showTooltip = !showTooltip
 
         if (showTooltip) {
@@ -287,7 +286,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias()}
+                        {$selectedAccount.getAlias()}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -297,7 +296,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance()}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.getBalance()}
                             •
                             <Text
                                 type="p"
@@ -308,7 +307,7 @@
                             >
                                 {$isPartiallyStaked
                                     ? getFormattedFiatAmount(getStakedFunds())
-                                    : $selectedAccount.balanceEquiv}
+                                    : $selectedAccount?.balances.total}
                             </Text>
                         </Text>
                     {:else}
@@ -319,7 +318,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance()}
+                            {$selectedAccount?.balances.total}
                             •
                             <Text
                                 type="p"
@@ -328,7 +327,7 @@
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
                             >
-                                {$selectedAccount.balanceEquiv}
+                                {$selectedAccount?.balances.total}
                             </Text>
                         </Text>
                     {/if}

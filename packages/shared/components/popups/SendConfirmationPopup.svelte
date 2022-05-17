@@ -7,14 +7,13 @@
     import { TransactionDetails } from 'shared/components/molecules'
     import { sendExternalTransaction, sendInternalTransaction } from '@lib/send'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
+    import { IAccountState, selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { WalletAccount } from '@lib/typings/walletAccount'
 
     export let internal = false
     export let to = ''
-    export let toAccount: WalletAccount
+    export let toAccount: IAccountState
     export let amount = 0
     export let unit = Unit.i
 

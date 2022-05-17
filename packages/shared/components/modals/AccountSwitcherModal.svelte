@@ -5,13 +5,12 @@
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
     import { getColor } from '@lib/profile'
-    import { WalletAccount } from '@lib/typings/walletAccount'
     import { isSyncing, isTransferring } from '@lib/wallet'
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount, setSelectedAccount } from '@core/account'
+    import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
 
-    export let accounts: WalletAccount[] = []
+    export let accounts: IAccountState[] = []
     export let modal: Modal
 
     function handleAccountClick(accountId: string): void {
@@ -51,7 +50,7 @@
                 >
                     <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
                     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.alias()}
+                        {account.getAlias()}
                     </Text>
                 </button>
             {/each}

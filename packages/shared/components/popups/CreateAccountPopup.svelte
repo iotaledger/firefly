@@ -6,8 +6,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from '@core/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
-    import { activeProfile, tryCreateAccount } from '@core/profile'
+    import { activeProfile } from '@core/profile'
+    import { getRandomAccountColor, MAX_ACCOUNT_NAME_LENGTH } from '@core/account'
+    import { tryCreateAdditionalAccount } from '@core/account'
 
     export let error = ''
 
@@ -15,10 +16,11 @@
 
     let accountAlias = ''
     let isBusy = false
-    let color = AccountColors.Blue
+    let color = getRandomAccountColor()
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
+    $: trimmedAccountAlias = accountAlias.trim()
 
     $: {
         /**
@@ -30,6 +32,31 @@
         if (!$popupState.active) {
             isBusy = false
         }
+    }
+
+    function create() {
+        tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+            .then(() => closePopup)
+            .catch((error) => {
+                isBusy = false
+                if (error) {
+                    console.error(error?.error || error)
+                    if ($isLedgerProfile) {
+                        displayNotificationForLedgerProfile('error', true, false, false, false, error)
+                    } else {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(error?.error || error),
+                        })
+                    }
+                } else {
+                    closePopup()
+                }
+            })
+    }
+
+    function cancel() {
+        () => (isBusy = false)
     }
 
     const handleCreateClick = () => {
@@ -45,37 +72,16 @@
                 }))
             }
 
-            if ($accounts.find((a) => a.alias() === trimmedAccountAlias)) {
+            if ($accounts.find((a) => a.getAlias() === trimmedAccountAlias)) {
                 return (error = localize('error.account.duplicate'))
             }
 
             isBusy = true
 
-            const _cancel = () => (isBusy = false)
-            const _create = () =>
-                tryCreateAccount(trimmedAccountAlias, color.toString(), (err) => {
-                    isBusy = false
-
-                    if (err) {
-                        console.error(err?.error || err)
-
-                        if ($isLedgerProfile) {
-                            displayNotificationForLedgerProfile('error', true, false, false, false, err)
-                        } else {
-                            showAppNotification({
-                                type: 'error',
-                                message: localize(err?.error || err),
-                            })
-                        }
-                    } else {
-                        closePopup()
-                    }
-                })
-
             if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, _create, _cancel)
+                promptUserToConnectLedger(false, create, cancel)
             } else {
-                _create()
+                create()
             }
         }
     }

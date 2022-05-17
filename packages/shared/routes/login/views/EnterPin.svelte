@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -9,8 +8,14 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@lib/app'
-    import { activeProfile, resetActiveProfile, resetActiveProfileId } from '@core/profile'
+    import {
+        initAppSettings,
+        isAwareOfCrashReporting,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
+    } from '@core/app'
+    import { activeProfile, resetActiveProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
@@ -146,7 +151,6 @@
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
             resetActiveProfile()
-            resetActiveProfileId()
             dispatch('previous')
         }
     }

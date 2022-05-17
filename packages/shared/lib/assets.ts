@@ -16,7 +16,10 @@ export const assets = derived(
         const assets: Asset[] = [
             {
                 meta: BASE_TOKEN[$activeProfile?.networkProtocol],
-                rawBalance: 0,
+                balance: {
+                    total: $selectedAccount?.balances.total,
+                    available: $selectedAccount?.balances.available,
+                },
                 fiatPrice: `${convertToFiat(
                     UNIT_MAP[Unit.Mi].val,
                     $currencies[CurrencyTypes.USD],

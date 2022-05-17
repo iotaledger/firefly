@@ -3,14 +3,11 @@
     import { closePopup } from 'shared/lib/popup'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { Writable } from 'svelte/store'
     import { isSoftwareProfile } from '@core/profile'
-
+    import { selectedAccount } from '@core/account'
     export let locale: Locale
 
-    export let account: Writable<WalletAccount>
     export let deleteAccount: (id: AccountIdentifier) => void = () => {}
     export let hasMultipleAccounts: boolean
 
@@ -47,14 +44,14 @@
     function triggerDeleteAccount(): void {
         isBusy = false
         closePopup()
-        deleteAccount($account?.id)
+        deleteAccount($selectedAccount?.id)
     }
 </script>
 
 <div class="mb-5">
     <Text type="h4">
         {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-            values: { name: $account?.alias() },
+            values: { name: $selectedAccount?.getAlias() },
         })}
     </Text>
 </div>

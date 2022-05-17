@@ -11,6 +11,6 @@
         <AssetsPane />
     {:else if $accountRoute === AccountRoute.Manage}
         <!-- // TODO: turn this into a modal -->
-        <ManageAccount alias={$selectedAccount.alias()} account={$selectedAccount} />
+        <ManageAccount alias={$selectedAccount.getAlias()} account={$selectedAccount} />
     {/if}
 </Pane>

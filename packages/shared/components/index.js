@@ -1,4 +1,3 @@
-export { default as AccountTile } from './AccountTile.svelte'
 export { default as ActivityRow } from './ActivityRow.svelte'
 export { default as Address } from './inputs/Address.svelte'
 export { default as Amount } from './inputs/Amount.svelte'

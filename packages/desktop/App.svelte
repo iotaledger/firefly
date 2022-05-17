@@ -1,17 +1,24 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
+    import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
+    import { activeProfile, cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
+    import {
+        accountRouter,
+        AppRoute,
+        DashboardRoute,
+        dashboardRouter,
+        initRouters,
+        openSettings,
+        appRouter,
+    } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
-    import { getAppVersionDetails, pollCheckForAppUpdate, appVersionDetails } from 'shared/lib/appUpdater'
+    import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { localeDirection, isLocaleLoaded, Locale, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { Electron } from 'shared/lib/electron'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { AppRoute, DashboardRoute, dashboardRouter, accountRouter, initRouters, openSettings } from '@core/router'
+    import { getAppVersionDetails, pollCheckForAppUpdate } from 'shared/lib/appUpdater'
+    import { AppStage, appStage, appSettings, initAppSettings, appVersionDetails } from '@core/app'
     import {
         Appearance,
         Backup,
@@ -34,12 +41,13 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { getLocalisedMenuItems } from './lib/helpers'
-    import { AppStage, appStage } from '@core/app'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { cleanupEmptyProfiles } from '@core/profile'
+    import { getLocalisedMenuItems } from './lib/helpers'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
+
+    const { loggedIn } = $activeProfile
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -108,6 +116,14 @@
         Electron.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
+        Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: true })
+        })
+        Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).next({ shouldAddProfile: true })
+            updateNewProfile({ isDeveloperProfile: false })
+        })
         Electron.hookErrorLogger((err) => {
             addError(err)
         })
@@ -115,6 +131,7 @@
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
+        // loadPersistedProfileIntoActiveProfile($activeProfileId)
     })
 
     onDestroy(() => {

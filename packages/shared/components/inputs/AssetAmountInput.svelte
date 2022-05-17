@@ -8,8 +8,6 @@
     import { activeProfile } from '@core/profile'
     import { UNIT_MAP } from '@lib/units'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
-    import { AccountBalance } from '@iota/wallet/out/types'
 
     export let inputElement
 
@@ -25,8 +23,6 @@
     let amountInputElement
     let error
 
-    let accountBalance: AccountBalance
-
     $: rawAmount = Number(amount) * UNIT_MAP[unit].val
     $: formattedFiatValue = formatCurrency(
         convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
@@ -35,12 +31,9 @@
     $: isFocused && (error = '')
 
     function onClickAvailableBalance(): void {
-        const balance = asset?.balance ?? '0 Mi'
-        const rawBalance = accountBalance.available ?? 0
-        const parts = balance?.split(' ')
-        const _unit = parts[parts?.length - 1]
-        amount = (rawBalance / UNIT_MAP[_unit].val).toString()
-        unit = Unit[_unit]
+        const balance = asset?.balance?.available ?? asset?.balance.total ?? 0
+        amount = balance.toString()
+        unit = Unit.i
     }
 
     export function validate(): Promise<void> {
@@ -96,7 +89,7 @@
     <div class="flex flex-row w-full items-end justify-between">
         <button on:click={onClickAvailableBalance}>
             <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                Available balance: {asset?.balance}
+                Available balance: {asset?.balance?.available ?? asset?.balance.total}
             </Text>
         </button>
         <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formattedFiatValue}</Text>

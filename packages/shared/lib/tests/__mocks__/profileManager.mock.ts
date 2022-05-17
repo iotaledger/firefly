@@ -1,5 +1,5 @@
-import type { AccountId, CreateAccountPayload, NodeInfo } from '@iota/wallet'
-import { StardustAccount } from '../../typings/account'
+import type { AccountId, CreateAccountPayload, AccountSyncOptions, ClientOptions } from '@iota/wallet'
+import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
 import { IAuth, INodeInfoResponse } from '../../core/network'
@@ -67,35 +67,55 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    createAccount(account: CreateAccountPayload): Promise<StardustAccount> {
+    createAccount(account: CreateAccountPayload): Promise<IAccount> {
         return Promise.resolve(new AccountMock())
     }
 
-    setStrongholdPassword(password: string): Promise<string> {
-        return Promise.resolve(password)
+    deleteStorage(): Promise<void> {
+        return Promise.resolve()
+    }
+
+    setStrongholdPassword(password: string): Promise<void> {
+        return Promise.resolve()
     }
 
     generateMnemonic(): Promise<string> {
         return Promise.resolve(MOCK_MNEMONIC)
     }
 
-    storeMnemonic(mnemonic: string): Promise<string> {
-        return Promise.resolve(mnemonic)
+    storeMnemonic(mnemonic: string): Promise<void> {
+        return Promise.resolve()
     }
 
-    verifyMnemonic(mnemonic: string): Promise<string> {
-        return Promise.resolve(mnemonic)
+    verifyMnemonic(mnemonic: string): Promise<void> {
+        return Promise.resolve()
     }
 
     backup(_: string, __: string): Promise<void> {
         return Promise.resolve()
     }
 
-    importAccounts(backupPath: string, _: string): Promise<string> {
-        return Promise.resolve(backupPath)
+    restoreBackup(source: string, password: string): Promise<void> {
+        return Promise.resolve()
     }
 
     listen(eventTypes, callback) {
         return
+    }
+
+    setClientOptions(options: ClientOptions): Promise<void> {
+        return Promise.resolve()
+    }
+
+    startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void> {
+        return Promise.resolve()
+    }
+
+    stopBackgroundSync(): Promise<void> {
+        return Promise.resolve()
+    }
+
+    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+        return Promise.resolve([])
     }
 }

@@ -1,5 +1,5 @@
+import { AccountColors } from '@core/account'
 import { IProfile } from '@core/profile'
-import { AccountColors } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
 
 /*
