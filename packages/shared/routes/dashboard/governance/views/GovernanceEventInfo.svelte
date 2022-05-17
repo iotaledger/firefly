@@ -10,7 +10,7 @@
     import { openPopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
     import { selectedAccountStore } from '@lib/wallet'
-    import { Button, DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
+    import { DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
@@ -103,136 +103,163 @@
             />
         {/if}
     </div>
-    <Text type="h2" classes="mb-4">{event?.information?.name}</Text>
-    <Text type="p" overrideColor classes="mb-2 text-gray-700 dark:text-gray-500" bold
-        >{event?.information?.additionalInfo}</Text
-    >
-    <div class="min-h-0 overflow-auto mb-6">
-        <Text type="p" overrideColor classes="mb-1 text-gray-700 dark:text-gray-500"
-            >{event?.information?.payload?.questions[0]?.text}</Text
-        >
-        <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500"
-            >{event?.information?.payload?.questions[0]?.additionalInfo}</Text
-        >
+    <div class="flex flex-col space-y-4 mb-9">
+        <Text type="h2">{event?.information?.name}</Text>
+        {#if event?.information?.additionalInfo}
+            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
+                {event?.information?.additionalInfo}
+            </Text>
+        {/if}
+        {#if event?.information?.payload?.questions[0]?.text}
+            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
+                {event?.information?.payload?.questions[0]?.text}
+            </Text>
+        {/if}
+        {#if event?.information?.payload?.questions[0]?.additionalInfo}
+            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
+                {event?.information?.payload?.questions[0]?.additionalInfo}
+            </Text>
+        {/if}
     </div>
-    {#each event?.information?.payload?.questions[0]?.answers || [] as answer}
-        <Button
-            onClick={() => handleAnswerClick(answer)}
-            secondary={!isWinnerAnswer(answer?.value)}
-            disabled={!canParticipate(event?.status?.status)}
-            active={isSelected($currentAccountTreasuryVoteValue, answer?.value)}
-            classes="relative px-6 flex justify-between mb-4 overflow-hidden {isSelected(
-                $currentAccountTreasuryVoteValue,
-                answer?.value
-            ) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
-                ? 'caution-border'
-                : ''}"
-        >
-            <div class="flex justify-between w-full items-center">
-                <div class="flex flex-col mr-32">
-                    <div class="flex items-center mb-2">
-                        {#if isSelected($currentAccountTreasuryVoteValue, answer?.value)}
-                            {#if event?.status?.status === ParticipationEventState.Holding}
-                                <span class="relative flex justify-center items-center h-3 w-3 mr-2">
-                                    <span
-                                        class="pulse absolute inline-flex h-full w-full rounded-full bg-blue-400
+    <div class="flex flex-col w-full space-y-16 overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
+        {#each event?.information?.payload?.questions[0]?.answers ?? [] as answer}
+            <button
+                on:click={() => handleAnswerClick(answer)}
+                class:winner={isWinnerAnswer(answer?.value)}
+                class:active={isSelected($currentAccountTreasuryVoteValue, answer?.value)}
+                class:partial={isSelected($currentAccountTreasuryVoteValue, answer?.value) &&
+                    $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
+                disabled={!canParticipate(event?.status?.status)}
+                class="relative py-5 px-6 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:bg-opaciity-100 rounded-xl border border-solid border-gray-200 dark:border-transparent"
+            >
+                <div class="flex justify-between w-full items-center">
+                    <div class="flex flex-col mr-32">
+                        <div class="flex items-center mb-2">
+                            {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) || isWinnerAnswer(answer?.value)}
+                                {#if event?.status?.status === ParticipationEventState.Holding}
+                                    <span class="relative flex justify-center items-center h-3 w-3 mr-2">
+                                        <span
+                                            class="pulse absolute inline-flex h-full w-full rounded-full bg-blue-400
                                         opacity-75"
+                                        />
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                                    </span>
+                                {:else}
+                                    <Icon
+                                        width="16"
+                                        height="16"
+                                        icon="status-success"
+                                        classes="{isWinnerAnswer(answer?.value)
+                                            ? 'text-blue-500 bg-white'
+                                            : 'bg-blue-500 text-white'} rounded-full mr-2"
                                     />
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
-                                </span>
-                            {:else}
-                                <Icon
-                                    width="16"
-                                    height="16"
-                                    icon="checkbox-round"
-                                    classes="{isWinnerAnswer(answer?.value) ? 'text-black' : 'text-blue-500'} mr-2"
-                                    inlineStyle={isWinnerAnswer(answer?.value) ? 'filter: invert(1)' : ''}
-                                />
+                                {/if}
                             {/if}
-                        {/if}
+                            <Text
+                                type="p"
+                                classes="uppercase text-blue-500 {$currentAccountTreasuryVoteValue &&
+                                !isSelected($currentAccountTreasuryVoteValue, answer?.value)
+                                    ? 'text-gray-500'
+                                    : ''}
+                            {isWinnerAnswer(answer?.value) ? 'text-white' : ''}"
+                                overrideColor
+                                smaller
+                                bold
+                            >
+                                {getAnswerHeader($currentAccountTreasuryVoteValue, answer?.value)}
+                            </Text>
+                        </div>
+                        <Text
+                            type="h3"
+                            classes="mb-2 text-left {isWinnerAnswer(answer?.value)
+                                ? 'text-white'
+                                : 'text-gray-800 dark:text-white'}"
+                            overrideColor
+                        >
+                            {answer?.text}
+                        </Text>
                         <Text
                             type="p"
-                            classes="uppercase text-blue-500 {$currentAccountTreasuryVoteValue &&
-                            !isSelected($currentAccountTreasuryVoteValue, answer?.value)
-                                ? 'text-gray-500'
-                                : ''}
-                            {isWinnerAnswer(answer?.value) ? 'text-white' : ''}"
+                            classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
+                                ? 'text-white dark:text-white'
+                                : 'text-gray-700 dark:text-gray-500'}"
                             overrideColor
-                            smaller
-                            bold
                         >
-                            {getAnswerHeader($currentAccountTreasuryVoteValue, answer?.value)}
+                            {answer?.additionalInfo}
                         </Text>
                     </div>
-                    {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
-                        <div
-                            bind:this={tooltip.partiallyVoted.anchor}
-                            on:mouseenter={() => toggleTooltip('partiallyVoted', true)}
-                            on:mouseleave={() => toggleTooltip('partiallyVoted', false)}
-                            class="absolute top-2 right-2"
-                        >
-                            <Icon
-                                icon="exclamation"
-                                width="17"
-                                height="17"
-                                classes="fill-current text-yellow-600 group-hover:text-gray-900"
-                            />
-                        </div>
-                        {#if tooltip.partiallyVoted.show}
-                            <Tooltip anchor={tooltip.partiallyVoted.anchor} position="right">
-                                <Text type="p" classes="text-gray-900 bold mb-1 text-left">
-                                    {localize('views.governance.info.tooltip.partiallyVoted.title', {
-                                        values: {
-                                            amount: formatUnitBestMatch(
-                                                $currentAccountTreasuryVotePartiallyUnvotedAmount
-                                            ),
-                                        },
-                                    })}
-                                </Text>
-                                <Text type="p" secondary classes="text-left">
-                                    {localize('views.governance.info.tooltip.partiallyVoted.body', {
-                                        values: { account: $selectedAccountStore?.alias },
-                                    })}
-                                </Text>
-                            </Tooltip>
+                    {#if canParticipate(event?.status?.status)}
+                        {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
+                            <div class="flex flex-row space-x-2 items-center">
+                                <Text type="p" overrideColor classes="text-yellow-600"
+                                    >{localize('views.governance.manageVote')}</Text
+                                >
+                                <div
+                                    bind:this={tooltip.partiallyVoted.anchor}
+                                    on:mouseenter={() => toggleTooltip('partiallyVoted', true)}
+                                    on:mouseleave={() => toggleTooltip('partiallyVoted', false)}
+                                    class=""
+                                >
+                                    <Icon width="18" height="18" icon="exclamation" classes="text-yellow-600" />
+                                </div>
+                            </div>
+                            {#if tooltip.partiallyVoted.show}
+                                <Tooltip anchor={tooltip.partiallyVoted.anchor} position="right">
+                                    <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+                                        {localize('views.governance.info.tooltip.partiallyVoted.title', {
+                                            values: {
+                                                amount: formatUnitBestMatch(
+                                                    $currentAccountTreasuryVotePartiallyUnvotedAmount
+                                                ),
+                                            },
+                                        })}
+                                    </Text>
+                                    <Text type="p" secondary classes="text-left">
+                                        {localize('views.governance.info.tooltip.partiallyVoted.body', {
+                                            values: { account: $selectedAccountStore?.alias },
+                                        })}
+                                    </Text>
+                                </Tooltip>
+                            {/if}
+                        {:else}
+                            <div class="flex flex-row space-x-2 items-center">
+                                <Text type="p" highlighted>{localize('actions.castVotes')}</Text>
+                                <Icon icon="chevron-right" classes="text-blue-500" />
+                            </div>
                         {/if}
                     {/if}
-                    <Text
-                        type="h3"
-                        classes="mb-2 text-left {isWinnerAnswer(answer?.value)
-                            ? 'text-white'
-                            : 'text-gray-800 dark:text-white'}"
-                        overrideColor
-                    >
-                        {answer?.text}
-                    </Text>
-                    <Text
-                        type="p"
-                        classes="text-left max-h-32 overflow-auto {isWinnerAnswer(answer?.value)
-                            ? 'text-white dark:text-white'
-                            : 'text-gray-700 dark:text-gray-500'}"
-                        overrideColor
-                    >
-                        {answer?.additionalInfo}
-                    </Text>
                 </div>
-                {#if canParticipate(event?.status?.status)}
-                    {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
-                        <div class="px-4 py-2 border-2 border-solid border-yellow-600 rounded-lg">
-                            <Text type="p">{localize('views.governance.manageVote')}</Text>
-                        </div>
-                    {:else}
-                        <div>
-                            <Icon icon="chevron-right" />
-                        </div>
-                    {/if}
-                {/if}
-            </div>
-        </Button>
-    {/each}
+            </button>
+        {/each}
+    </div>
 </DashboardPane>
 
 <style type="text/scss">
+    button {
+        &.active:not(.partial) {
+            @apply border-blue-500;
+            @apply bg-blue-500;
+            @apply bg-opacity-10;
+            &:hover {
+                @apply border-blue-500;
+                @apply bg-blue-500;
+                @apply bg-opacity-20;
+            }
+        }
+        &:disabled {
+            @apply pointer-events-none;
+            &:not(.winner) {
+                @apply opacity-50;
+            }
+        }
+        &.partial {
+            @apply border-yellow-600;
+        }
+        &.winner {
+            @apply bg-blue-500;
+            @apply border-blue-500;
+        }
+    }
     .pulse {
         animation: -ping 2500ms cubic-bezier(0, 0, 0.2, 1) infinite;
     }
