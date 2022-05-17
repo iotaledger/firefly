@@ -1,4 +1,3 @@
-import type { IPlatform } from 'shared/lib/typings/platform'
 import { Capacitor } from '@capacitor/core'
 
 import { SplashScreen } from '@capacitor/splash-screen'
