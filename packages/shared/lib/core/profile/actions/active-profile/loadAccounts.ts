@@ -14,8 +14,7 @@ export async function loadAccounts(): Promise<void> {
         if (accountsResponse) {
             const laodedAccounts: IAccountState[] = []
             for (const account of accountsResponse) {
-                // TODO: fix this as it is multiplying the accounts
-                // await account.sync()
+                await account.sync()
                 const metadata = getAccountMetadatById(account?.meta?.index.toString())
                 const accountState = await buildAccountState(account, metadata)
                 laodedAccounts.push(accountState)

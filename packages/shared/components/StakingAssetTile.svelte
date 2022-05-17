@@ -75,7 +75,7 @@
     }
 
     function getAccount(accounts: IAccountState[]): IAccountState {
-        return accounts?.find((account) => account.alias() === $selectedAccount?.alias())
+        return accounts?.find((account) => account.getAlias() === $selectedAccount?.getAlias())
     }
 
     function getLocalizedTooltipText(): TooltipText {

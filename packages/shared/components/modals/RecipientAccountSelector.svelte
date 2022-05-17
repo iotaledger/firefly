@@ -15,7 +15,7 @@
     $: filteredAccounts = otherAccounts.filter(
         (account) =>
             account
-                .alias()
+                .getAlias()
                 .toLowerCase()
                 .includes(searchValue?.toLowerCase() ?? '') ||
             account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')

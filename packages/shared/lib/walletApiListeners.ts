@@ -74,7 +74,7 @@ export function initialiseListeners(): void {
 
                 const notificationMessage = localize('notifications.valueTx')
                     .replace('{{value}}', formatUnitBestMatch(message?.payload.data.essence.data.value, true, 3))
-                    .replace('{{account}}', account?.alias())
+                    .replace('{{account}}', account?.getAlias())
 
                 showSystemNotification({
                     type: 'info',
@@ -247,12 +247,12 @@ export function initialiseListeners(): void {
                 // 3. Only update the account for which the balance change event emitted;
                 // 4. Update balance overview & accounts
                 for (const _account of latestAccounts) {
-                    const { address } = await _account.latestAddress()
-                    const balance = await _account.balance()
-                    totalBalance.balance += balance.total
+                    // const { address } = await _account.latestAddress()
+                    // const balance = await _account.getBalance()
+                    // totalBalance.balance += balance.total
                     // totalBalance.incoming += balance.incoming
                     // totalBalance.outgoing += balance.outgoing
-                    totalBalance.depositAddress = address
+                    // totalBalance.depositAddress = address
 
                     // addMessagesPair(_account)
 
@@ -384,7 +384,7 @@ export function displayParticipationNotification(pendingParticipation: PendingPa
                 `popups.stakingManager.${
                     pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
                 }Successfully`,
-                { values: { account: account.alias() } }
+                { values: { account: account.getAlias() } }
             ),
         })
     }

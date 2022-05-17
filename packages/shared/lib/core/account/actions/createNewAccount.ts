@@ -13,7 +13,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
             coinType: 4219,
         })
         const account = await getAccount(createdAccount.meta.index)
-        // account.sync()
+        account.sync()
         const [newAccount, metadata] = await buildAccountStateAndMetadata(account, color)
         if (accounts) {
             addAccountToActiveProfile(newAccount)

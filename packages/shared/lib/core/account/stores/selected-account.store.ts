@@ -5,8 +5,9 @@ import { IAccountState } from '../interfaces'
 export const selectedAccountId = writable<string>(null)
 
 export const selectedAccount = derived(
-    [selectedAccountId],
-    ([$selectedAccountId]) => get(get(activeProfile)?.accounts)?.find((acc) => acc.id == $selectedAccountId),
+    [selectedAccountId, activeProfile],
+    ([$selectedAccountId, $activeProfile]) =>
+        get($activeProfile?.accounts)?.find((acc) => acc.id == $selectedAccountId),
     <IAccountState>{}
 )
 

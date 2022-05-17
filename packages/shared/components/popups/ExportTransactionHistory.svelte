@@ -35,7 +35,7 @@
                 return
             }
 
-            const fileName = generateTransactionHistoryFileName(profileName, $selectedAccount.alias())
+            const fileName = generateTransactionHistoryFileName(profileName, $selectedAccount.getAlias())
             const contents = generateTransactionHistoryCsvFromAccount($selectedAccount, {
                 id: true,
                 internal: true,
@@ -51,7 +51,7 @@
                     showAppNotification({
                         type: 'info',
                         message: localize('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $selectedAccount.alias(), filePath: filePath },
+                            values: { accountAlias: $selectedAccount.getAlias(), filePath: filePath },
                         }),
                     })
                 }
@@ -59,7 +59,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $selectedAccount.alias() },
+                        value: { accountAlias: $selectedAccount.getAlias() },
                     }),
                 })
             }
@@ -95,7 +95,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$selectedAccount.alias()}</Text>
+        <Text type="p" highlighted>{$selectedAccount.getAlias()}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
