@@ -43,7 +43,7 @@
                     on:click={() => onClick(account)}
                     class="w-full flex flex-row flex-1 justify-between p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
-                    <AccountLabel profile={$activeProfile} {account} />
+                    <AccountLabel {account} />
                     <Text type="pre" fontSize="sm" color="gray-600"
                         >{truncateString(account?.depositAddress, 10, 10)}</Text
                     >

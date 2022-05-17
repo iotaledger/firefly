@@ -1,13 +1,13 @@
 <script lang="typescript">
+    import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
     import { Icon, StakingAssetTile, Text } from 'shared/components'
-    import { isBright } from '@lib/helpers'
-    import { Asset } from '@lib/typings/assets'
+    import { isBright } from 'shared/lib/helpers'
 
-    export let asset: Asset
+    export let asset: IAsset
 
-    const isStakingAsset = asset?.meta.name === 'Assembly'
+    const isStakingAsset = asset?.metadata.name === 'Assembly'
 
-    $: assetIconColor = isBright(asset?.meta?.primaryColor) ? 'gray-800' : 'white'
+    $: assetIconColor = isBright(asset?.metadata?.primaryColor) ? 'gray-800' : 'white'
 
     function handleTileClick(): void {}
 </script>
@@ -16,7 +16,7 @@
     <StakingAssetTile {asset} />
 {:else}
     <button
-        style="--asset-color: {asset?.meta?.primaryColor}"
+        style="--asset-color: {asset?.metadata?.primaryColor}"
         class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl"
         on:click={handleTileClick}
     >
@@ -24,20 +24,20 @@
             <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
                 <Icon
                     classes="text-{assetIconColor}"
-                    icon={asset?.meta.name?.toLocaleLowerCase()}
+                    icon={asset?.metadata.name?.toLocaleLowerCase()}
                     height="100%"
                     width="100%"
                 />
             </div>
             <div class="flex flex-col flex-wrap space-y-1">
-                <Text classes="font-semibold">{asset?.meta.name}</Text>
+                <Text classes="font-semibold">{asset?.metadata.name}</Text>
                 {#if asset?.fiatPrice}
                     <Text secondary smaller>{asset?.fiatPrice}</Text>
                 {/if}
             </div>
         </div>
         <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{asset?.balance.total}</Text>
+            <Text classes="font-semibold">{formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}</Text>
             {#if asset?.fiatBalance}
                 <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}

@@ -16,7 +16,7 @@ import {
     isOfficialNetwork,
     NetworkType,
 } from 'shared/lib/core/network'
-import { TokenMetadata } from 'shared/lib/typings/assets'
+import { ITokenMetadata } from 'shared/lib/core/wallet'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string): INode {
@@ -36,7 +36,7 @@ describe('File: network.ts', () => {
         Shimmer = 'shimmer',
     }
 
-    const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: TokenMetadata }> = {
+    const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
         iota: {
             name: 'IOTA',
             tickerSymbol: 'MIOTA',

@@ -9,7 +9,7 @@
         Large = 'large',
     }
 
-    export let position: { top?: string; right?: string; bottom?: string; left?: string } = {}
+    export let position: { top?: string; right?: string; bottom?: string; left?: string; absolute?: boolean } = {}
     export let size: Size = Size.Medium
     export let classes: string = ''
     export let disableOnClickOutside = false
@@ -27,7 +27,7 @@
         return show
     }
 
-    const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+    const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit', absolute = 'true' } = position
     const dispatch = createEventDispatcher()
 
     function setShow(bool: boolean) {
@@ -54,7 +54,9 @@
         use:clickOutside
         on:clickOutside={handleOnClickOutside}
         class="{size} shadow-elevation-4 bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden z-10 {classes}"
-        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};"
+        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left}; --modal-position: {absolute
+            ? 'absolute'
+            : 'relative'};"
     >
         <slot />
     </modal-content>
@@ -62,7 +64,7 @@
 
 <style type="text/scss">
     modal-content {
-        position: absolute;
+        position: var(--modal-position);
         min-width: 230px;
         top: var(--modal-position-top);
         right: var(--modal-position-right);
