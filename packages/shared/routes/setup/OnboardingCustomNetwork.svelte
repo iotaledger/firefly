@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { getOfficialNetworkConfig, INode, updateClientOptions } from '@core/network'
-    import { updateActiveProfileSettings } from '@core/profile'
+    import { INode, updateNewProfileNetworkConfig } from '@core/network'
     import { appRouter } from '@core/router'
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
 
@@ -13,10 +12,7 @@
         $appRouter.previous()
     }
     function onSuccess(_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string): void {
-        const networkConfig = getOfficialNetworkConfig(node?.network?.protocol, node?.network?.type)
-        networkConfig.nodes = [{ ...node, isPrimary: true }]
-        updateClientOptions(networkConfig)
-        updateActiveProfileSettings({ networkConfig })
+        updateNewProfileNetworkConfig(node)
         $appRouter.next()
     }
 </script>

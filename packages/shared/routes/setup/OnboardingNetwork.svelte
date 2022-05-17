@@ -2,9 +2,9 @@
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { newProfile, updateNewProfile } from '@core/profile'
+    import { newProfile } from '@core/profile'
     import { mobile } from '@lib/app'
-    import { INetwork, NETWORK, NetworkProtocol, NetworkType } from '@core/network'
+    import { INetwork, NETWORK, NetworkProtocol, NetworkType, updateNewProfileNetwork } from '@core/network'
     import { TextType } from 'shared/components/Text.svelte'
 
     const isPrivateNet = (network: INetwork) => network.type === NetworkType.PrivateNet
@@ -30,8 +30,7 @@
         return localize(`views.network.${network.protocol}.${network.type}`)
     }
     function onClick(network: INetwork): void {
-        updateNewProfile({ networkProtocol: isPrivateNet(network) ? network.protocol : undefined })
-        updateNewProfile({ networkType: network.type })
+        updateNewProfileNetwork(network.protocol, network.type)
         $appRouter.next()
     }
     function onBackClick(): void {
