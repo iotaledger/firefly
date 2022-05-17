@@ -80,7 +80,7 @@
 </script>
 
 {#if wallets && wallets.length > 0}
-    <div class="w-full space-y-2.5 scroll-secondary scrollable-y">
+    <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
         {#each wallets as wallet}
             <WalletTile {wallet} />
         {/each}

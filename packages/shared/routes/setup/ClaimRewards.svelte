@@ -19,7 +19,7 @@
     <div slot="title">
         <Text type="h2">Your Shimmer staking rewards</Text>
     </div>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class="h-full flex flex-col">
         <Text type="p" secondary classes="mb-5">
             Please check that your Shimmer staking rewards are correct. If not, please use the balance finder.
         </Text>

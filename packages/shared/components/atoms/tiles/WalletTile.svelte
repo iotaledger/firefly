@@ -13,7 +13,9 @@
 
 {#if wallet}
     <div
-        class="w-full h-full p-4 flex flex-row justify-between items-center rounded-xl border border-solid border-gray-300 dark:border-gray-700"
+        class="w-full h-{claimedBalance && unclaimedBalance
+            ? '18'
+            : '14'} p-4 flex flex-row justify-between items-center rounded-xl border border-solid border-gray-300 dark:border-gray-700"
     >
         <div class="flex flex-row items-center">
             <Icon width="24" height="24" icon="wallet" classes="mr-4 text-blue-500" />
