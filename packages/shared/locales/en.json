@@ -1010,7 +1010,7 @@
         "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -1104,7 +1104,8 @@
         "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Today",
@@ -1277,7 +1278,8 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "invalidStakingEventId": "Invalid staking event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

@@ -198,8 +198,8 @@
         ...(fontSize && { fontSize }),
         ...(fontWeight && { fontWeight }),
         ...(lineHeight && { lineHeight }),
-        ...(color && { color }),
-        ...(darkColor && { darkColor }),
+        ...((color || overrideColor) && { color }),
+        ...((darkColor || overrideColor) && { darkColor }),
     }
 
     $: customClassesString = Object.values(customClasses).join(' ')

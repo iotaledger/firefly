@@ -32,6 +32,9 @@ const Platform: IPlatform = {
     getOS(): Promise<string> {
         return Promise.resolve('')
     },
+    saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void> {
+        return Promise.resolve(undefined)
+    },
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null> {
         return Promise.resolve(undefined)
     },

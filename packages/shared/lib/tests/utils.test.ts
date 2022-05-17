@@ -1,6 +1,5 @@
+import { getNumberOfDecimalPlaces, migrateObjects, range, validateBech32Address } from '../utils'
 import './__mocks__/i18n'
-
-import { migrateObjects, range, validateBech32Address } from '../utils'
 
 type Simple = {
     prop1?: string
@@ -194,6 +193,24 @@ describe('File: utils.ts', () => {
             expect(
                 validateBech32Address('iota', 'iota1qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
             ).toEqual(undefined)
+        })
+    })
+
+    describe('Function: getNumberOfDecimalPlaces', () => {
+        it('should handle integers (large and small)', () => {
+            expect(getNumberOfDecimalPlaces(0)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1000)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1_000_000_000)).toEqual(0)
+        })
+        it('should handle floats (large and small)', () => {
+            expect(getNumberOfDecimalPlaces(1.0)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(1.01)).toEqual(2)
+            expect(getNumberOfDecimalPlaces(1.000000001)).toEqual(9)
+            expect(getNumberOfDecimalPlaces(1_000_000_000.01)).toEqual(2)
+        })
+        it('should handle invalid arguments', () => {
+            expect(getNumberOfDecimalPlaces(null)).toEqual(0)
+            expect(getNumberOfDecimalPlaces(undefined)).toEqual(0)
         })
     })
 })

@@ -990,7 +990,7 @@
         "profiles": "Profiler",
         "dev": "Utvecklare",
         "createAccount": "Skapa en plånbok",
-        "createNewWallet": "Skapa ny plånbok",
+        "addAWallet": "Add a wallet",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Stakade tillgångar",
         "unstakedFunds": "Ej stakade tillgångar",
         "accountColor": "Plånboksfärg",
-        "myAssets": "Mina tillgångar"
+        "myAssets": "Mina tillgångar",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Idag",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Det går inte att använda det angivna kontot.",
             "cannotFindStakingEvent": "Det gick inte att hitta staking-event.",
             "cannotVisitAirdropWebsite": "Det går inte att öppna {airdrop} s webbplats.",
-            "invalidStakingEventId": "Ogiltigt staking-event ID."
+            "invalidStakingEventId": "Ogiltigt staking-event ID.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATUM",
         "invalidTime": "INVALID TID"

@@ -990,7 +990,7 @@
         "profiles": "設定檔",
         "dev": "開發者",
         "createAccount": "建立一個錢包",
-        "createNewWallet": "建立新錢包",
+        "addAWallet": "Add a wallet",
         "accountName": "錢包名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "已質押的資金",
         "unstakedFunds": "未質押的資金",
         "accountColor": "錢包顏色",
-        "myAssets": "我的資產"
+        "myAssets": "我的資產",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "今天",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "無法使用該指定帳戶。",
             "cannotFindStakingEvent": "未能找到質押活動。",
             "cannotVisitAirdropWebsite": "無法開啟 {airdrop} 網站。",
-            "invalidStakingEventId": "無效的質押活動ID。"
+            "invalidStakingEventId": "無效的質押活動ID。",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "日期無效",
         "invalidTime": "時間無效"

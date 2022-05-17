@@ -7,6 +7,8 @@ import { addError } from '../../errors'
 
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
 import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
+import { formatNumber } from '@lib/currency'
+import { getNumberOfDecimalPlaces } from '@lib/utils'
 
 /**
  * Parses a deep link within the wallet context.
@@ -67,6 +69,7 @@ const parseSendOperation = (
     searchParams: URLSearchParams,
     expectedAddressPrefix: string
 ): void | SendOperationParameters => {
+    let numDecimalPlaces = 0
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
 
@@ -87,6 +90,7 @@ const parseSendOperation = (
     const amountParam = searchParams.get(SendOperationParameter.Amount)
     if (amountParam) {
         parsedAmount = Number(amountParam)
+        numDecimalPlaces = getNumberOfDecimalPlaces(parsedAmount)
         if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
             return addError({ time: Date.now(), type: 'deepLink', message: `Amount is not a number '${amountParam}'` })
         }
@@ -118,7 +122,7 @@ const parseSendOperation = (
 
     return {
         address,
-        amount: String(Math.abs(parsedAmount)),
+        amount: formatNumber(Math.abs(parsedAmount), numDecimalPlaces, numDecimalPlaces),
         unit: parsedUnit,
         message: '',
     }

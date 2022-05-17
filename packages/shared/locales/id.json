@@ -990,7 +990,7 @@
         "profiles": "Profil",
         "dev": "Pengembang",
         "createAccount": "Buat dompet",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Dana yang di-stake",
         "unstakedFunds": "Dana yang tidak di-stake",
         "accountColor": "Warna dompet",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Hari ini",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Tidak dapat menggunakan akun tersebut.",
             "cannotFindStakingEvent": "Tidak dapat menemukan event staking.",
             "cannotVisitAirdropWebsite": "Tidak dapat membuka halaman web {airdrop}.",
-            "invalidStakingEventId": "ID staking event tidak sesuai."
+            "invalidStakingEventId": "ID staking event tidak sesuai.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

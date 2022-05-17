@@ -469,3 +469,13 @@ export function range(size: number, start: number = 0): number[] {
 
     return Array.from(Array(size), (_, idx) => idx + start)
 }
+
+/**
+ * Returns the number of decimal places within a number. Only works with numbers
+ * using "." as a decimal separator.
+ */
+export function getNumberOfDecimalPlaces(x: number): number {
+    if (!x || Math.floor(x) === x) return 0
+
+    return x.toString().split('.')[1].length || 0
+}
