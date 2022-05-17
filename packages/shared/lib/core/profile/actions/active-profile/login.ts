@@ -5,8 +5,8 @@ import { loadAccounts } from './loadAccounts'
 
 export function login(): void {
     const loginRouter = new LoginRouter()
-    const { loggedIn, lastActiveAt } = get(activeProfile)
-    if (get(activeProfile).id) {
+    const { loggedIn, lastActiveAt, id } = get(activeProfile)
+    if (id) {
         void loadAccounts()
         loggedIn.set(true)
         lastActiveAt.set(new Date())
