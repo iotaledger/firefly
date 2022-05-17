@@ -990,7 +990,7 @@
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
         "createAccount": "Khởi tạo ví",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Tài sản đã đặt cọc",
         "unstakedFunds": "Tài sản không đặt cọc",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Không thể sử dụng tài khoản đã chỉ định.",
             "cannotFindStakingEvent": "Không thể tìm thấy sự kiện đặt cọc.",
             "cannotVisitAirdropWebsite": "Không thể mở {airdrop} website.",
-            "invalidStakingEventId": "ID sự kiện đặt cọc không hợp lệ."
+            "invalidStakingEventId": "ID sự kiện đặt cọc không hợp lệ.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

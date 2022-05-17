@@ -97,7 +97,7 @@ export function init(
         onMessageListeners.forEach((listener) => listener(parsedResponse))
     })
     void WalletPlugin.initialize({
-        // storagePath: 'data/data/com.iota.wallet/cache/database',
+        storagePath,
         actorId: id,
     })
     // for testing purposes, send undefined id to catch all errors responses
