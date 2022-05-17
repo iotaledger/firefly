@@ -4,15 +4,9 @@ import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
-import {
-    activeProfile,
-    isLedgerProfile,
-    isSoftwareProfile,
-    resetActiveProfile,
-    resetActiveProfileId,
-} from '../../stores'
 import { resetDashboardState } from '../unknown'
 import { clearPollNetworkInterval } from '@core/network'
+import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
 
 /**
  * Logout from active profile
@@ -41,7 +35,6 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         loggedIn.set(false)
         if (clearActiveProfile) {
             resetActiveProfile()
-            resetActiveProfileId()
         }
         resetDashboardState()
         resetRouters()

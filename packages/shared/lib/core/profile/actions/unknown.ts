@@ -1,4 +1,3 @@
-import { setSelectedAccount } from '@core/account'
 import {
     hasGeneratedALedgerReceiveAddress,
     isBackgroundSyncing,
@@ -13,7 +12,6 @@ import {
 
 // TODO: move this out of profile module
 export function resetDashboardState(): void {
-    setSelectedAccount(null)
     selectedMessage.set(null)
     isTransferring.set(false)
     transferState.set(null)

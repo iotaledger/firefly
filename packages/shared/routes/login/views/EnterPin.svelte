@@ -10,7 +10,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
-    import { activeProfile, resetActiveProfile, resetActiveProfileId } from '@core/profile'
+    import { activeProfile, resetActiveProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
@@ -146,7 +146,6 @@
     function handleBackClick() {
         if (!hasReachedMaxAttempts) {
             resetActiveProfile()
-            resetActiveProfileId()
             dispatch('previous')
         }
     }
