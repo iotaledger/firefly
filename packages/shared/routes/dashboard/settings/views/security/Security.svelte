@@ -52,7 +52,7 @@
 
 <div>
     {#each settings as { component, childRoute, requireSoftware }, index}
-        {#if (!requireSoftware || (requireSoftware && $isSoftwareProfile)) && ($mobile && $settingsChildRoute === childRoute)}
+        {#if (!requireSoftware || (requireSoftware && $isSoftwareProfile)) && $mobile && $settingsChildRoute === childRoute}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} {...props[childRoute]} />
             </section>
