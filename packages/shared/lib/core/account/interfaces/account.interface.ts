@@ -8,7 +8,6 @@ import {
     AddressWithAmount,
     AddressWithMicroAmount,
     AddressWithUnspentOutputs,
-    ClientOptions,
     NativeTokenOptions,
     NftOptions,
     OutputData,

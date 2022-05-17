@@ -1,5 +1,4 @@
 import { profiles, setActiveProfile } from '@core/profile'
-import { Platform } from '@lib/platform'
 import { get } from 'svelte/store'
 
 export function loadPersistedProfileIntoActiveProfile(profileId: string): void {
