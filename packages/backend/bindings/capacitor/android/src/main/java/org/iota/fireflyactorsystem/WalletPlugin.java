@@ -16,7 +16,11 @@ public class WalletPlugin extends Plugin {
 
     @Override
     public void load() {
-        NativeAPI.verifyLink();
+        try {
+            NativeAPI.verifyLink();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private boolean isInitialized = false;
     private static final Object lock = new Object();
@@ -34,15 +38,19 @@ public class WalletPlugin extends Plugin {
         assert actorId != null && storagePath != null;
         String dbPath = getContext().getFilesDir() + storagePath;
 
-        final ActorCallback callback = response -> {
-            JSObject walletResponse = new JSObject();
-            walletResponse.put("walletResponse", response);
-            notifyListeners("walletEvent", walletResponse);
-        };
+        try {
+            final ActorCallback callback = response -> {
+                JSObject walletResponse = new JSObject();
+                walletResponse.put("walletResponse", response);
+                notifyListeners("walletEvent", walletResponse);
+            };
 
-        call.setKeepAlive(true);
-        Actor.iotaInitialize(callback, actorId, dbPath);
-        isInitialized = true;
+            call.setKeepAlive(true);
+            Actor.iotaInitialize(callback, actorId, dbPath);
+            isInitialized = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PluginMethod()
@@ -72,6 +80,8 @@ public class WalletPlugin extends Plugin {
             assert actorId != null;
 
             Actor.iotaDestroy(actorId);
+            isInitialized = false;
+            call.release(bridge);
         } catch (Exception ex) {
             call.reject(ex.getMessage() + Arrays.toString(ex.getStackTrace()));
         }
