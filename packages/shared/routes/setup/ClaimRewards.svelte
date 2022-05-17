@@ -2,17 +2,11 @@
     import { Animation, Button, Icon, OnboardingLayout, Text, WalletList } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    function handleBackClick(): void {
-        // console.log('BACK TO PREVIOUS PAGE!')
-    }
+    function handleBackClick(): void {}
 
-    function handleUseBalanceFinderClick(): void {
-        // console.log('FINDING BALANCES!')
-    }
+    function handleUseBalanceFinderClick(): void {}
 
-    function handleClaimRewardsClick(): void {
-        // console.log('CLAIMING REWARDS!')
-    }
+    function handleClaimRewardsClick(): void {}
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

@@ -212,7 +212,7 @@
             <Balance locale={$_} />
         </Route>
         <Route route={AppRoute.ClaimRewards}>
-            <ClaimRewards locale={$_} />
+            <ClaimRewards />
         </Route>
         <Route route={AppRoute.Migrate}>
             <Migrate locale={$_} {goto} />

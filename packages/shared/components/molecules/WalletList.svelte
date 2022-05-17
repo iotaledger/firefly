@@ -68,12 +68,10 @@
         getAccounts()
             .then((_wallets) => {
                 if (_wallets?.length > 0) {
-                    // console.log('GOT WALLETS: ', _wallets)
                     wallets = _wallets
                 }
             })
             .catch((err) => {
-                // console.log('COULDN\'T FETCH WALLETS!')
                 console.error(err)
             })
     })

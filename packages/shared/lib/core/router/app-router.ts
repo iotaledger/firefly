@@ -66,8 +66,7 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.Profile
                 break
             case AppRoute.Profile:
-                nextRoute = AppRoute.ClaimRewards
-                // nextRoute = AppRoute.Setup
+                nextRoute = AppRoute.Setup
                 break
             case AppRoute.Setup: {
                 const { setupType } = params
@@ -112,7 +111,6 @@ export class AppRouter extends Router<AppRoute> {
                     walletPin.set(pin)
                     const profileType = get(activeProfile)?.type
                     if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
-                        // nextRoute = AppRoute.ClaimRewards
                         nextRoute = AppRoute.Congratulations
                     } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
                         nextRoute = AppRoute.LedgerSetup
