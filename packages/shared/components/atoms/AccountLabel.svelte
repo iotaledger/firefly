@@ -10,7 +10,7 @@
 
 <div class="flex flex row items-center space-x-3">
     <div class="circle" style="--account-color: {getColor(profile, account?.id)};" />
-    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.alias()}</Text>
+    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.getAlias()}</Text>
 </div>
 
 <style type="text/scss">

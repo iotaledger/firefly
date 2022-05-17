@@ -69,7 +69,7 @@
     <div class="mb-5">
         <Text type="h4">
             {locale(`popups.hideAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-                values: { name: $selectedAccount?.alias() },
+                values: { name: $selectedAccount?.getAlias() },
             })}
         </Text>
     </div>
@@ -114,13 +114,14 @@
     </div>
 {:else}
     <div class="mb-5">
-        <Text type="h4">{locale('popups.hideAccount.errorTitle', { values: { name: $selectedAccount?.alias() } })}</Text
+        <Text type="h4"
+            >{locale('popups.hideAccount.errorTitle', { values: { name: $selectedAccount?.getAlias() } })}</Text
         >
     </div>
     <div class="flex w-full flex-row flex-wrap">
         <Text type="p" secondary classes="mb-3">{locale('popups.hideAccount.errorBody1')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {locale('popups.hideAccount.errorBody2', { values: { balance: $selectedAccount?.balance() } })}
+            {locale('popups.hideAccount.errorBody2', { values: { balance: $selectedAccount?.getBalance() } })}
         </Text>
         <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>

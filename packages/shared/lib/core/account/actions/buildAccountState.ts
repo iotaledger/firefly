@@ -2,7 +2,7 @@ import { SignerType } from '../enums'
 import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
 
 export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
-    const balance = await account.balance()
+    const balance = await account.getBalance()
     return {
         ...account,
         ...metadata,

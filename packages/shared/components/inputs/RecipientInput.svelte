@@ -26,7 +26,7 @@
 
     $: {
         if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.alias()
+            inputElement.value = selectedAccount?.getAlias()
         }
     }
     $: {

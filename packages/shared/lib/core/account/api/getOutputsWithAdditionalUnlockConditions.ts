@@ -1,5 +1,9 @@
-import { getAccountOrSelectedAccount } from '../actions/getAccountOrSelectedAccount'
+import { OutputsToCollect } from '@iota/wallet'
+import { getAccount } from '@core/profile-manager'
 
-export async function getOutputsWithAdditionalUnlockConditions(outputs: unknown, id?: string): Promise<string> {
-    return (await getAccountOrSelectedAccount(id))?.getOutputsWithAdditionalUnlockConditions(outputs)
+export async function getOutputsWithAdditionalUnlockConditions(
+    outputs: OutputsToCollect,
+    id?: string
+): Promise<string> {
+    return (await getAccount(Number(id)))?.getOutputsWithAdditionalUnlockConditions(outputs)
 }

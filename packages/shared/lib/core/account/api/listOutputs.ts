@@ -1,6 +1,6 @@
 import { OutputData } from '@iota/wallet'
-import { getAccountOrSelectedAccount } from '../actions/getAccountOrSelectedAccount'
+import { getAccount } from '@core/profile-manager'
 
 export async function listOutputs(id?: string): Promise<OutputData[]> {
-    return (await getAccountOrSelectedAccount(id))?.listOutputs()
+    return (await getAccount(Number(id)))?.listOutputs()
 }

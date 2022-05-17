@@ -50,7 +50,7 @@
                 >
                     <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
                     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.alias()}
+                        {account.getAlias()}
                     </Text>
                 </button>
             {/each}

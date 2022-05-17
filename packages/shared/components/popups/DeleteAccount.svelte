@@ -51,7 +51,7 @@
 <div class="mb-5">
     <Text type="h4">
         {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
-            values: { name: $selectedAccount?.alias() },
+            values: { name: $selectedAccount?.getAlias() },
         })}
     </Text>
 </div>
