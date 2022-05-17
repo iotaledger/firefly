@@ -20,7 +20,13 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { Locale } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { activeProfile, addNewProfile, login, newProfile } from '@core/profile'
+    import {
+        activeProfile,
+        addNewProfile,
+        loadPersistedProfileIntoActiveProfile,
+        login,
+        newProfile,
+    } from '@core/profile'
 
     export let locale: Locale
 
@@ -40,7 +46,8 @@
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
             addNewProfile($newProfile)
-            login($newProfile.id)
+            loadPersistedProfileIntoActiveProfile($newProfile.id)
+            login()
 
             newProfile.set(null)
         } else {

@@ -2,6 +2,7 @@ import { activeProfile } from '../../stores'
 import { LoginRouter } from '@core/router'
 import { get } from 'svelte/store'
 import { loadAccounts } from './loadAccounts'
+import { setSelectedAccount } from '@core/account'
 
 export function login(): void {
     const loginRouter = new LoginRouter()

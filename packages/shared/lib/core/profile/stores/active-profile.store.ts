@@ -33,11 +33,13 @@ export function getAccountMetadatById(id: string): IAccountMetadata {
     return accountMetadatas.find((metadata) => metadata.id === id)
 }
 
-export function updateAccountMetadataOnActiveProfile(metadata: IAccountMetadata): void {
+export function updateAccountMetadataOnActiveProfile(id: string, metadata: Partial<IAccountMetadata>): void {
     activeProfile?.update((state) => ({
         ...state,
         accountMetadatas: state?.accountMetadatas.map((existingValue) =>
-            existingValue.id === metadata.id ? metadata : existingValue
+            existingValue.id === id ? { ...existingValue, ...metadata } : existingValue
         ),
     }))
+    const { accounts } = get(activeProfile)
+    accounts.update((state) => [...state.map((account) => (account.id === id ? { ...account, ...metadata } : account))])
 }
