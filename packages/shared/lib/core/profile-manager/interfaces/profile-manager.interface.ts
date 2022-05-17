@@ -1,12 +1,12 @@
+import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { AccountId, AccountSyncOptions, ClientOptions, CreateAccountPayload, EventType } from '@iota/wallet'
-import { StardustAccount } from '@lib/typings/account'
 
 export interface IProfileManager {
-    getAccount(accountId: AccountId): Promise<StardustAccount>
-    getAccounts(): Promise<StardustAccount[]>
+    getAccount(accountId: AccountId): Promise<IAccount>
+    getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse>
-    createAccount(account: CreateAccountPayload): Promise<StardustAccount>
+    createAccount(account: CreateAccountPayload): Promise<IAccount>
     deleteStorage(): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     generateMnemonic(): Promise<string>
@@ -15,7 +15,7 @@ export interface IProfileManager {
     backup(destination: string, password: string): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<StardustAccount[]>
+    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]>
     setClientOptions(options: ClientOptions): Promise<void>
     startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void>
     stopBackgroundSync(): Promise<void>

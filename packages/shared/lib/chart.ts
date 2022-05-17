@@ -1,18 +1,18 @@
+import { AccountColors, IAccountState } from '@core/account'
+import { formatDate, localize } from '@core/i18n'
+import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 import { Unit } from '@iota/unit-converter'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
-import { localize, formatDate } from '@core/i18n'
 import { formatUnitPrecision } from 'shared/lib/units'
-import { isSelfTransaction, AccountColors } from 'shared/lib/wallet'
+import { isSelfTransaction } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
-import { Message } from './typings/message'
 import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartType } from './typings/chart'
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
+import { Message } from './typings/message'
 import { BalanceHistory } from './typings/wallet'
-import { WalletAccount } from './typings/walletAccount'
-import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
@@ -105,7 +105,7 @@ export function getChartDataForTokenValue(): ChartData {
 }
 
 export const getAccountActivityData = (
-    account: WalletAccount
+    account: IAccountState
 ): { incoming: ChartData; outgoing: ChartData; labels: string[] } => {
     const now = new Date()
     const activityTimeframes: ActivityTimeframe[] = []

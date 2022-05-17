@@ -1,9 +1,10 @@
+import { createNewAccount } from '@core/account'
 import { updateNewProfile } from '@core/profile'
 import { backup, storeMnemonic } from '@core/profile-manager'
 import { mnemonic, strongholdPassword } from '@lib/app'
 import { Platform } from '@lib/platform'
 import { getDefaultStrongholdName } from '@lib/utils'
-import { createAccount, generateAndStoreMnemonic } from '@lib/wallet'
+import { generateAndStoreMnemonic } from '@lib/wallet'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { BackupRoute } from '../enums'
@@ -37,7 +38,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
 
             case BackupRoute.Backup: {
                 await storeMnemonic(get(mnemonic).join(' '))
-                await createAccount()
+                await createNewAccount()
                 const shouldCreateBackup = !event?.skip
                 if (shouldCreateBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())

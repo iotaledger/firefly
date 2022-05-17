@@ -5,12 +5,11 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { UNIT_MAP } from '@lib/units'
-    import { WalletAccount } from '@lib/typings/walletAccount'
-
+    import { IAccountState } from '@core/account'
     let asset
     let amount: number
     let unit: string
-    let recipient: string | WalletAccount
+    let recipient: string | IAccountState
 
     let assetAmountInput
     let recipientInput

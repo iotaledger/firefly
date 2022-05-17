@@ -16,15 +16,14 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Unit } from '@iota/unit-converter/'
     import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { WalletAccount } from '@lib/typings/walletAccount'
-
+    import { IAccountState } from '@core/account'
     export let value: number
     export let unit: Unit
     export let type: ActivityType
     export let status: ActivityStatus
     export let asyncStatus: ActivityAsyncStatus
     export let address: string
-    export let account: WalletAccount
+    export let account: IAccountState
     export let timestamp: number
     export let publicNote: string
     export let storageDeposit = 0

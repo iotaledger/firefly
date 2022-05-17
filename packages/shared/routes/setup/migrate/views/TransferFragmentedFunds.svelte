@@ -29,7 +29,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { Locale } from '@core/i18n'
-    import { addNewProfile, loadPersistedProfileIntoActiveProfile, newProfile } from '@core/profile'
+    import { addNewProfile, login, newProfile } from '@core/profile'
 
     export let locale: Locale
 
@@ -282,7 +282,7 @@
         // When the first migration bundle is broadcast, then persist profile
 
         addNewProfile($newProfile)
-        loadPersistedProfileIntoActiveProfile($newProfile.id)
+        login($newProfile.id)
 
         newProfile.set(null)
     }

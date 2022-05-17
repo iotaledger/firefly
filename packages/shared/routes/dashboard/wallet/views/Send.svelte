@@ -41,15 +41,14 @@
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
-    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/walletAccount'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, IAccountState } from '@core/account'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
 
     const { accounts } = $activeProfile
 
-    const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
+    const liveAccounts = getContext<Readable<IAccountState[]>>('liveAccounts')
     const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
 
     enum SEND_TYPE {
@@ -64,7 +63,7 @@
     let amountError = ''
     let addressError = ''
     let toError = ''
-    let to: LabeledWalletAccount
+    let to: IAccountState
     let amountRaw: number
 
     let ledgerAwaitingConfirmation = false
@@ -117,7 +116,7 @@
         },
     }
 
-    let accountsDropdownItems: LabeledWalletAccount[]
+    let accountsDropdownItems: IAccountState[]
     $: {
         accountsDropdownItems = $liveAccounts.map((acc) => addLabel(acc))
         if (to) {
@@ -356,13 +355,13 @@
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
             const internal = selectedSendType === SEND_TYPE.INTERNAL
-            let accountAlias = internal ? to?.alias() : undefined
+            let accountAlias = internal ? to?.getAlias() : undefined
 
             if (!internal) {
                 for (const acc of $accounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
-                        accountAlias = acc.alias()
+                        accountAlias = acc.getAlias()
                         break
                     }
                 }
@@ -409,9 +408,9 @@
     }
 
     // TODO addlabel
-    const addLabel = (account: WalletAccount): LabeledWalletAccount => ({
+    const addLabel = (account: IAccountState) => ({
         ...account,
-        label: `${account?.alias()} • ${account.balance()}`,
+        label: `${account?.getAlias()} • ${account.getBalance()}`,
     })
 
     const handleMaxClick = (): void => {
@@ -528,7 +527,7 @@
                 <div class="w-full block">
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
-                            value={to?.label || null}
+                            value={to.alias || null}
                             label={localize('general.to')}
                             placeholder={localize('general.to')}
                             items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}

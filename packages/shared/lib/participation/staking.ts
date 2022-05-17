@@ -1,15 +1,12 @@
-import { get } from 'svelte/store'
-
-import { getDecimalSeparator } from '../currency'
-import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
+import { IAccountState, selectedAccount } from '@core/account'
 import { networkStatus } from '@core/network'
 import { activeProfile } from '@core/profile'
+import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
+import { get } from 'svelte/store'
+import { getDecimalSeparator } from '../currency'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { WalletAccount } from '../typings/walletAccount'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
-import { selectedAccount } from '@core/account'
-
 import {
     ASSEMBLY_EVENT_ID,
     ASSEMBLY_STAKING_RESULT_URLS,
@@ -351,7 +348,7 @@ const calculateTimeUntilMinimumReward = (rewards: number, airdrop: StakingAirdro
  */
 export const getTimeUntilMinimumAirdropReward = (airdrop: StakingAirdrop): number => {
     const rewards = getCurrentRewardsForAirdrop(airdrop)
-    const amountStaked = get(selectedAccount)?.rawIotaBalance
+    const amountStaked = get(selectedAccount)?.balances.available
     return calculateTimeUntilMinimumReward(rewards, airdrop, amountStaked)
 }
 
@@ -389,14 +386,14 @@ const calculateIotasUntilMinimumReward = (rewards: number, airdrop: StakingAirdr
  *
  * @method getIotasUntilMinimumAirdropReward
  *
- * @param {WalletAccount} account
+ * @param {IAccountState} account
  * @param {StakingAirdrop} airdrop
  * @param {boolean} format
  *
  * @returns {string}
  */
 export const getIotasUntilMinimumAirdropReward = (
-    account: WalletAccount,
+    account: IAccountState,
     airdrop: StakingAirdrop,
     format: boolean = false
 ): string => {
@@ -417,18 +414,18 @@ export const getIotasUntilMinimumAirdropReward = (
  *
  * @method canAccountReachMinimumAirdrop
  *
- * @param {WalletAccount} account
+ * @param {IAccountState} account
  * @param {StakingAirdrop} airdrop
  *
  * @returns {boolean}
  */
-export const canAccountReachMinimumAirdrop = (account: WalletAccount, airdrop: StakingAirdrop): boolean => {
+export const canAccountReachMinimumAirdrop = (account: IAccountState, airdrop: StakingAirdrop): boolean => {
     if (!account) {
         return false
     }
 
     const currentRewards = getCurrentRewardsForAirdrop(airdrop)
-    const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.rawIotaBalance)
+    const timeRequired = calculateTimeUntilMinimumReward(currentRewards, airdrop, account.balances.available)
     const stakingEvent = getStakingEventFromAirdrop(airdrop)
     const stakingEventStore = airdrop === StakingAirdrop.Assembly ? assemblyStakingEventState : shimmerStakingEventState
     const stakingEventState = get(stakingEventStore)
@@ -560,7 +557,7 @@ async function fetchStakingResult(
 // }
 
 function getStakingPeriodForAccount(
-    account: WalletAccount,
+    account: IAccountState,
     stakingResult: StakingPeriodJsonResponse,
     periodNumber: number
 ): StakingPeriod {

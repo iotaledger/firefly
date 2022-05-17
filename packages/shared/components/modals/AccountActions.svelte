@@ -7,22 +7,21 @@
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { activeProfile, updateActiveProfile } from '@core/profile'
-    import { selectedAccount, setSelectedAccount } from '@core/account'
+    import { selectedAccount, setSelectedAccount, IAccountState } from '@core/account'
 
     export let modal: Modal
 
     const { accounts } = $activeProfile
 
-    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+    const viewableAccounts = getContext<Readable<IAccountState[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
         $selectedAccount.meta.index === $accounts?.length - 1 &&
-        $selectedAccount.rawIotaBalance === 0 &&
+        $selectedAccount?.balances.total === 0 &&
         $selectedAccount.messages?.length === 0
 
     const handleCustomiseAccountClick = () => {

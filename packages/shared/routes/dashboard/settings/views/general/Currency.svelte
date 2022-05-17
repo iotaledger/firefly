@@ -3,7 +3,7 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
+    import { refreshBalanceOverview } from 'shared/lib/wallet'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     $: currencyList = Object.keys($exchangeRates)
@@ -14,7 +14,6 @@
         updateActiveProfileSettings({ currency: item.value })
         void addProfileCurrencyPriceData()
         refreshBalanceOverview()
-        updateAccountsBalanceEquiv()
     }
 </script>
 

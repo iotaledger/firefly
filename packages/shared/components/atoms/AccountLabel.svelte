@@ -1,17 +1,16 @@
 <script lang="typescript">
     import { IPersistedProfile } from '@core/profile'
-    import { WalletAccount } from '@lib/typings/walletAccount'
     import { getColor } from 'shared/lib/profile'
     import { Text } from 'shared/components/'
     import { FontWeightText } from 'shared/components/Text.svelte'
-
+    import { IAccountState } from '@core/account'
     export let profile: IPersistedProfile
-    export let account: WalletAccount
+    export let account: IAccountState
 </script>
 
 <div class="flex flex row items-center space-x-3">
     <div class="circle" style="--account-color: {getColor(profile, account?.id)};" />
-    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.alias()}</Text>
+    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.getAlias()}</Text>
 </div>
 
 <style type="text/scss">

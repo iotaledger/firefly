@@ -4,7 +4,7 @@ import {
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from 'shared/lib/participation/types'
-import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
+import { Account, AccountIdentifier, Balance, SyncedAccount } from './account'
 import { Address } from './address'
 import { GetMigrationAddressResponse } from './bridge'
 import { IClientOptions } from '@core/network'
@@ -85,10 +85,6 @@ export interface IWalletApi {
         onSuccess: (response: Event<void>) => void
         onError: (err: ErrorEventPayload) => void
     })
-    createAccount(
-        account: AccountToCreate,
-        callbacks: { onSuccess: (response: Event<Account>) => void; onError: (err: ErrorEventPayload) => void }
-    )
     send(
         accountId: string,
         transfer: {

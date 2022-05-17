@@ -2,7 +2,6 @@
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
-    import { loggedIn } from 'shared/lib/app'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Idle, Sidebar } from 'shared/components'
@@ -11,21 +10,14 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import {
-        isLedgerProfile,
-        logout,
-        activeProfile,
-        loadAccounts,
-        saveActiveProfile,
-        updateActiveProfile,
-    } from '@core/profile'
+    import { isLedgerProfile, logout, activeProfile, saveActiveProfile, updateActiveProfile } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { localize } from '@core/i18n'
     import { selectedAccountId, setSelectedAccount } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
-    import { WalletAccount } from 'shared/lib/typings/walletAccount'
+    import { IAccountState } from '@core/account'
 
-    const { hasLoadedAccounts, accounts } = $activeProfile
+    const { hasLoadedAccounts, accounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
     // TODO: Set this in switch account action
@@ -67,7 +59,7 @@
         }
     } */
 
-    const viewableAccounts: Readable<WalletAccount[]> = derived(
+    const viewableAccounts: Readable<IAccountState[]> = derived(
         [activeProfile, accounts],
         ([$activeProfile, $accounts]) => {
             if (!$activeProfile) {
@@ -97,7 +89,7 @@
         }
     )
 
-    const liveAccounts: Readable<WalletAccount[]> = derived(
+    const liveAccounts: Readable<IAccountState[]> = derived(
         [activeProfile, accounts],
         ([$activeProfile, $accounts]) => {
             if (!$activeProfile) {
@@ -110,8 +102,8 @@
     )
 
     // TODO: move these stores to lib when we fix the circular imports issue
-    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
+    setContext<Readable<IAccountState[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<IAccountState[]>>('liveAccounts', liveAccounts)
 
     onMount(() => {
         // void getParticipationEvents()
@@ -183,7 +175,6 @@
     })
 
     if (!$hasLoadedAccounts && $loggedIn) {
-        loadAccounts()
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -323,7 +314,7 @@
     }
 
     $: if ($hasLoadedAccounts) {
-        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+        setSelectedAccount($activeProfile?.lastUsedAccountId ?? $accounts?.[0]?.id ?? null)
     }
 
     $: showSingleAccountGuide = !busy && $loggedIn && !$activeProfile?.hasFinishedSingleAccountGuide

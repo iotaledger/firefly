@@ -11,7 +11,7 @@
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
-    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
 
     export let modal: Modal
 
@@ -57,15 +57,7 @@
                 },
             })
         } else {
-            api.lockStronghold({
-                onSuccess() {},
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                },
-            })
+            lockStronghold()
         }
     }
 

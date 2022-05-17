@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { Locale } from '@core/i18n'
+    import { unlockStronghold } from '@core/profile'
 
     export let locale: Locale
 
@@ -18,7 +18,7 @@
 
     async function handleSubmit(): Promise<void> {
         try {
-            const response = await setStrongholdPassword(password)
+            const response = await unlockStronghold(password)
             closePopup()
             onSuccess(returnPassword ? password : response)
         } catch (err) {
@@ -39,11 +39,7 @@
     <Text type="h4">{locale('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? locale('popups.password.subtitle')}</Text>
 </div>
-<form
-    id="password-popup-form"
-    class="flex justify-center w-full flex-row flex-wrap"
-    on:submit|preventDefault={handleSubmit}
->
+<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap">
     <Password
         {error}
         classes="w-full mb-5"
@@ -55,7 +51,7 @@
     />
     <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
+        <Button classes="w-1/2" type="submit" onClick={handleSubmit} disabled={!password || password.length === 0}>
             {locale('actions.unlock')}
         </Button>
     </div>

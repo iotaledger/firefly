@@ -3,9 +3,8 @@
     import { Transition } from 'shared/components'
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
-    import { profiles, activeProfileId, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { profiles, activeProfileId, login } from '@core/profile'
 
     export let locale: Locale
 
@@ -13,10 +12,6 @@
 
     onMount(() => {
         loginRouter = new LoginRouter()
-        if ($activeProfileId && $profiles?.find((p) => p.id === $activeProfileId)) {
-            loadPersistedProfileIntoActiveProfile($activeProfileId)
-            loginRouter.next()
-        }
     })
 
     const next = (event: CustomEvent<FireflyEvent>): void => loginRouter.next(event.detail)

@@ -11,10 +11,10 @@ export interface IPersistedProfile {
     networkType: NetworkType
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
+    accountMetadatas: IAccountMetadata[]
     hiddenAccounts?: string[]
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountId?: string
-    accountMetadata?: IAccountMetadata[]
     hasFinishedSingleAccountGuide?: boolean
 }

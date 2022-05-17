@@ -1,25 +1,26 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
-    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage, loggedIn } from 'shared/lib/app'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
-    import { addError } from 'shared/lib/errors'
-    import { goto } from 'shared/lib/helpers'
-    import { localeDirection, isLocaleLoaded, Locale, setupI18n, _ } from '@core/i18n'
-    import { pollMarketData } from 'shared/lib/market'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { Electron } from 'shared/lib/electron'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
+    import { activeProfile, cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
     import {
+        accountRouter,
         AppRoute,
         DashboardRoute,
         dashboardRouter,
-        accountRouter,
         initRouters,
         openSettings,
         appRouter,
     } from '@core/router'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { stage } from 'shared/lib/app'
+    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import { Electron } from 'shared/lib/electron'
+    import { addError } from 'shared/lib/errors'
+    import { goto } from 'shared/lib/helpers'
+    import { pollMarketData } from 'shared/lib/market'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup, popupState } from 'shared/lib/popup'
+    import { Stage } from 'shared/lib/typings/stage'
     import {
         Appearance,
         Backup,
@@ -42,12 +43,13 @@
         Splash,
         Welcome,
     } from 'shared/routes'
-    import { getLocalisedMenuItems } from './lib/helpers'
-    import { Stage } from 'shared/lib/typings/stage'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
+    import { getLocalisedMenuItems } from './lib/helpers'
 
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
+
+    const { loggedIn } = $activeProfile
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -131,6 +133,7 @@
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
 
         await cleanupEmptyProfiles()
+        // loadPersistedProfileIntoActiveProfile($activeProfileId)
     })
 
     onDestroy(() => {

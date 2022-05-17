@@ -1,25 +1,9 @@
-import {
-    AccountBalance,
-    AccountMeta,
-    AccountSyncOptions,
-    Address as StardustAddress,
-    AddressNativeTokens,
-    AddressNftId,
-    AddressWithAmount,
-    AddressWithMicroAmount,
-    NativeTokenOptions,
-    NftOptions,
-    OutputData,
-    OutputsToCollect,
-    Transaction,
-    TransferOptions,
-    ClientOptions as StardustClientOptions,
-} from '@iota/wallet/out/types'
 import { Address } from './address'
 import { Bridge, CommunicationIds } from './bridge'
 import { IClientOptions, IAuth } from '@core/network'
 import { Message } from './message'
 import { Duration } from './wallet'
+import { SignerType } from '@core/account'
 
 export enum MessageType {}
 
@@ -58,18 +42,6 @@ export interface SyncAccountOptions {
 
 export type AccountIdentifier = number | string
 
-export interface SignerType {
-    type: 'Stronghold' | 'LedgerNano' | 'LedgerNanoSimulator'
-}
-
-export interface AccountToCreate {
-    clientOptions: IClientOptions
-    signerType: SignerType
-    alias?: string
-    createdAt?: string
-    allowCreateMultipleEmptyAccounts?: boolean
-}
-
 export interface SyncedAccount {
     index: number
     id: string
@@ -77,43 +49,6 @@ export interface SyncedAccount {
     isEmpty: boolean
     addresses: Address[]
     messages: Message[]
-}
-
-export interface StardustAccount {
-    meta: AccountMeta
-    alias(): string
-    collectOutputs(): Promise<void>
-    getOutputsWithAdditionalUnlockConditions(outputs): Promise<string>
-    listAddresses(): Promise<StardustAddress[]>
-    listAddressesWithBalance(): Promise<StardustAddress[]>
-    listOutputs(): Promise<OutputData[]>
-    listUnspentOutputs(): Promise<OutputData[]>
-    listPendingTransactions(): Promise<Transaction[]>
-    listTransactions(): Promise<Transaction[]>
-    sync(options?: AccountSyncOptions): Promise<void>
-    generateAddresses(): Promise<StardustAddress[]>
-    latestAddress(): Promise<StardustAddress>
-    balance(): Promise<AccountBalance>
-    mintNativeToken(nativeTokenOptions: NativeTokenOptions, transferOptions: TransferOptions): Promise<Transaction[]>
-    mintNfts(nftOptions: NftOptions, transferOptions: TransferOptions): Promise<Transaction[]>
-    sendAmount(addressesWithAmount: AddressWithAmount[], transferOptions: TransferOptions): Promise<[]>
-    sendMicroTransaction(
-        addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions: TransferOptions
-    ): Promise<[]>
-    sendNativeTokens(addressNativeTokens: AddressNativeTokens[], transferOptions: TransferOptions): Promise<[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions: TransferOptions): Promise<[]>
-    sendTransfer(outputs: OutputData[], transferOptions: TransferOptions): Promise<[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<[]>
-}
-
-export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'CreateAccount',
-        payload: account,
-    })
 }
 
 export function removeAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {

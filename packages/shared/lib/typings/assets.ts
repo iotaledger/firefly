@@ -1,5 +1,3 @@
-import { NetworkProtocol } from '@core/network'
-
 export type TokenMetadata = {
     name: string
     tickerSymbol?: string
@@ -30,7 +28,12 @@ export enum SubUnit {
 export type Asset = {
     meta: TokenMetadata
     // balance: string
-    rawBalance: number
+    balance: IAssetBalance
     fiatPrice?: string
     fiatBalance?: string
+}
+
+export interface IAssetBalance {
+    total: number
+    available?: number
 }
