@@ -1,3 +1,3 @@
-export * from './asset-balance'
+export * from './asset-balance.interface'
 export * from './asset.interface'
-export * from './token-metadata.interfaces'
+export * from './token-metadata.interface'

@@ -1,9 +1,11 @@
+import { formatNumber } from '@lib/currency'
 import { ITokenMetadata } from '../interfaces'
 
 export function formatPreciseTokenAmount(amount: number, tokenMetadata: ITokenMetadata): string {
+    const formattedAmount = formatNumber(amount, 0, 0, 0, true)
     if (tokenMetadata.useMetricPrefix) {
-        return amount + ' ' + tokenMetadata.unit
+        return formattedAmount + ' ' + tokenMetadata.unit
     } else {
-        return amount + ' ' + tokenMetadata.subunit
+        return formattedAmount + ' ' + tokenMetadata.subunit
     }
 }

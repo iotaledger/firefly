@@ -1,13 +1,10 @@
 <script lang="typescript">
-    import { Text, AccountActionsButton, ReceiveButton, SendButton, TogglableAmountLabel } from 'shared/components'
-    import { Unit } from '@iota/unit-converter'
+    import { AccountActionsButton, ReceiveButton, SendButton, TogglableAmountLabel } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
-    import { formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { currency } from '@lib/typings'
 
     export let classes = ''
 </script>

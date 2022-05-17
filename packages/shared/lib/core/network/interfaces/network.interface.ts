@@ -1,6 +1,5 @@
 import { ITokenMetadata } from '@core/wallet'
-import { NetworkProtocol } from '../enums/network-protocol.enum'
-import { NetworkType } from '../enums/network-type.enum'
+import { NetworkProtocol, NetworkType } from '../enums'
 import { IRentStructure } from './rent-structure'
 
 /**
