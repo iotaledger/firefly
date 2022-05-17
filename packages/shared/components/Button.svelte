@@ -29,7 +29,7 @@
     export let iconHeight: string
     export let iconWidth: string
 
-    export let onClick = (): Promise<void> | void | string => ''
+    export let onClick: () => unknown
 
     let buttonElement
     let darkModeEnabled

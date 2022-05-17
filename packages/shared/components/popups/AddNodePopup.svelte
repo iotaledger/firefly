@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, NodeConfigurationForm } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
     import { INode, INetwork, IAuth } from '@core/network'
     import { localize } from '@core/i18n'
-    import { NodeConfigurationForm } from 'shared/components/molecules'
 
     export let node: INode = { url: '' }
     export let nodes: INode[] = []

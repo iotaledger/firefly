@@ -3,8 +3,7 @@
     import { getOfficialNetworkConfig, INode, updateClientOptions } from '@core/network'
     import { updateActiveProfileSettings } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { OnboardingLayout, Text, Button, Spinner } from 'shared/components'
-    import { NodeConfigurationForm } from 'shared/components/molecules'
+    import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let nodeUrl: string

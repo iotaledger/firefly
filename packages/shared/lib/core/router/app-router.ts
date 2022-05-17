@@ -67,7 +67,7 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.Profile
                 break
             case AppRoute.Profile:
-                nextRoute = AppRoute.Setup
+                nextRoute = AppRoute.Network
                 break
             case AppRoute.Setup: {
                 const { setupType } = params
@@ -87,29 +87,25 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Create: {
-                nextRoute = AppRoute.Network
-                break
-            }
-            case AppRoute.Network: {
-                const profileType = get(activeProfile)?.type
-                const profileNetworkType = get(activeProfile)?.networkType
-                // TODO: check if that is the correct field to check
-                if (profileNetworkType === NetworkType.PrivateNet) {
-                    nextRoute = AppRoute.CustomNetwork
-                } else if (profileType === ProfileType.Software) {
-                    nextRoute = AppRoute.Secure
-                } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
-                    nextRoute = AppRoute.Protect
-                }
-                break
-            }
-            case AppRoute.CustomNetwork: {
-                const profileType = get(activeProfile)?.type
+                const profileType = get(newProfile)?.type
                 if (profileType === ProfileType.Software) {
                     nextRoute = AppRoute.Secure
                 } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
                     nextRoute = AppRoute.Protect
                 }
+                break
+            }
+            case AppRoute.Network: {
+                const profileNetworkType = get(newProfile)?.networkType
+                if (profileNetworkType === NetworkType.PrivateNet) {
+                    nextRoute = AppRoute.CustomNetwork
+                } else {
+                    nextRoute = AppRoute.Setup
+                }
+                break
+            }
+            case AppRoute.CustomNetwork: {
+                nextRoute = AppRoute.Setup
                 break
             }
             case AppRoute.Secure:

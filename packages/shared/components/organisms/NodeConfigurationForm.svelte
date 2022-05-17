@@ -27,7 +27,6 @@
     let addressError = ''
     let addressWarn = ''
 
-    let isSuccess = true
     let isNetworkSwitch = false
     let newNetwork: INetwork
 
@@ -79,12 +78,11 @@
 
                 if (!addressError) {
                     nodeInfo = await getNodeInfo(cleanNodeUrl(nodeUrl), cleanAuth(optNodeAuth))
-                    checkNetworkId(nodeInfo?.payload?.nodeinfo?.protocol?.networkName)
+                    checkNetworkId(nodeInfo?.nodeinfo?.protocol?.networkName)
                 }
             }
         } catch (err) {
             isBusy = false
-            isSuccess = false
 
             showAppNotification({
                 type: 'error',
@@ -96,8 +94,8 @@
 
         if (!addressError) {
             if (!isNetworkSwitch) {
-                const networkStatus = getNetworkStatusFromNodeInfo(nodeInfo?.payload?.nodeinfo)
-                const baseToken = nodeInfo?.payload?.nodeinfo?.baseToken
+                const networkStatus = getNetworkStatusFromNodeInfo(nodeInfo?.nodeinfo)
+                const baseToken = nodeInfo?.nodeinfo?.baseToken
                 const protocol = Object.keys(BASE_TOKEN).find(
                     (key) => BASE_TOKEN[key]?.name === baseToken?.name
                 ) as NetworkProtocol
@@ -112,7 +110,7 @@
                             network: getNetwork(
                                 protocol ?? $activeProfile.networkProtocol,
                                 $activeProfile.networkType,
-                                nodeInfo?.payload?.nodeinfo?.protocol?.networkName
+                                nodeInfo?.nodeinfo?.protocol?.networkName
                             ),
                             isPrimary: node?.isPrimary || false,
                         },
