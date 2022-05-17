@@ -4,7 +4,7 @@
     import { appSettings, initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
     import { closePopup as closePopupInternal } from 'shared/lib/popup'
-    import { AppSettings } from 'shared/lib/typings/app'
+    import { IAppSettings } from 'shared/lib/typings/app'
 
     let sendCrashReports = true
 
@@ -15,7 +15,7 @@
     }
 
     const handleConfirmClick = () => {
-        appSettings.set(<AppSettings>{ ...$appSettings, sendCrashReports })
+        appSettings.set({ ...$appSettings, sendCrashReports })
 
         closePopup()
     }

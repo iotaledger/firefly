@@ -7,8 +7,8 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { AppSettings } from '@lib/typings/app'
-import { VersionDetails } from '@lib/typings/appUpdater'
+import { IAppSettings } from '@lib/typings/app'
+import { IAppVersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 
 import * as WalletBindings from './walletPluginApi'
@@ -20,7 +20,7 @@ let activeProfileId = null
 export const nativeSplash = SplashScreen
 
 export const CapacitorApi: IPlatform = {
-    updateAppSettings(settings: Partial<AppSettings>) {
+    updateAppSettings(settings: Partial<IAppSettings>) {
         return new Promise((resolve) => resolve())
     },
 
@@ -143,7 +143,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateDownload: () => new Promise<void>((resolve, reject) => {}),
+    downloadAppUpdate: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Cancels an update of the application
@@ -152,7 +152,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateCancel: () => new Promise<void>((resolve, reject) => {}),
+    cancelAppUpdate: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Install an update of the application
@@ -161,7 +161,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateInstall: () => new Promise<void>((resolve, reject) => {}),
+    installAppUpdate: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Check for an update of the application
@@ -170,7 +170,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    updateCheck: () => new Promise<void>((resolve, reject) => {}),
+    checkForAppUpdate: () => new Promise<void>((resolve, reject) => {}),
 
     /**
      * Get version details
@@ -179,7 +179,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getVersionDetails: () => new Promise<VersionDetails>((resolve, reject) => {}),
+    getAppVersionDetails: () => new Promise<IAppVersionDetails>((resolve, reject) => {}),
 
     /**
      * Change menu state to determine what menu items to display

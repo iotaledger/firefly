@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from 'shared/lib/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from 'shared/lib/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
@@ -19,7 +19,7 @@
         dispatch('next', { shouldAddProfile: true })
     }
 
-    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTos()) {
+    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
             type: 'legalUpdate',
             hideClose: true,

@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage, loggedIn } from 'shared/lib/app'
+    import { loggedIn } from 'shared/lib/app'
     import { appSettings, initAppSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import { getAppVersionDetails, pollCheckForAppUpdate, appVersionDetails } from 'shared/lib/appUpdater'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { localeDirection, isLocaleLoaded, Locale, setupI18n, _ } from '@core/i18n'
@@ -35,11 +35,11 @@
         Welcome,
     } from 'shared/routes'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { Stage } from 'shared/lib/typings/stage'
+    import { AppStage, appStage } from '@core/app'
     import { get } from 'svelte/store'
     import { cleanupEmptyProfiles } from '@core/profile'
 
-    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
+    appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -79,9 +79,9 @@
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
-        if (!devMode && get(stage) === Stage.PROD) {
-            await getVersionDetails()
-            pollVersion()
+        if (!devMode && get(appStage) === AppStage.PROD) {
+            await getAppVersionDetails()
+            pollCheckForAppUpdate()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
@@ -98,7 +98,7 @@
             openPopup({
                 type: 'version',
                 props: {
-                    currentVersion: $versionDetails.currentVersion,
+                    currentVersion: $appVersionDetails.currentVersion,
                 },
             })
         })

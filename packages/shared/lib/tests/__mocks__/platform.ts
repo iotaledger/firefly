@@ -1,7 +1,7 @@
 import { IPlatform } from '../../typings/platform'
-import { VersionDetails } from '../../typings/appUpdater'
+import { IAppVersionDetails } from '../../typings/appUpdater'
 import { EventMap } from '../../typings/events'
-import { AppSettings } from '../../typings/app'
+import { IAppSettings } from '../../typings/app'
 import { Error } from '../../typings/error'
 
 const Platform: IPlatform = {
@@ -38,7 +38,7 @@ const Platform: IPlatform = {
     getUserDataPath(): Promise<string> {
         return Promise.resolve('')
     },
-    getVersionDetails(): Promise<VersionDetails> {
+    getAppVersionDetails(): Promise<IAppVersionDetails> {
         return Promise.resolve(undefined)
     },
     hookErrorLogger(logger: (error: Error) => void): void {},
@@ -72,19 +72,19 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     updateActiveProfile(id: string): void {},
-    updateAppSettings(settings: Partial<AppSettings>): Promise<void> {
+    updateAppSettings(settings: Partial<IAppSettings>): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateCancel(): Promise<void> {
+    cancelAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateCheck(): Promise<void> {
+    checkForAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateDownload(): Promise<void> {
+    downloadAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateInstall(): Promise<void> {
+    installAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
     updateMenu(attribute: string, value: unknown): void {},

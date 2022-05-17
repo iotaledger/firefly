@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
+    import { cleanupSignup, mobile } from 'shared/lib/app'
     import {
         Animation,
         Button,
@@ -17,7 +17,7 @@
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { appRouter } from '@core/router'
-    import { Stage } from 'shared/lib/typings/stage'
+    import { AppStage, appStage } from '@core/app'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
     import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
@@ -28,7 +28,7 @@
     let busy = false
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage) !== Stage.PROD
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(appStage) !== AppStage.PROD
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
@@ -66,7 +66,7 @@
                 // initialiseMigrationListeners()
             }
 
-            if (get(stage) === Stage.PROD && isDeveloperProfile) {
+            if (get(appStage) === AppStage.PROD && isDeveloperProfile) {
                 openPopup({
                     type: 'confirmDeveloperProfile',
                     props: {
@@ -114,7 +114,7 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        {#if get(stage) == Stage.PROD}
+        {#if get(appStage) == AppStage.PROD}
             <CollapsibleBlock
                 label={locale('views.profile.advancedOptions')}
                 showBlock={get(newProfile)?.isDeveloperProfile ?? false}

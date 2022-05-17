@@ -6,58 +6,71 @@ import {
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from 'shared/lib/notifications'
-import { NotificationData } from 'shared/lib/typings/notification'
-import { writable } from 'svelte/store'
-import { NativeProgress, VersionDetails } from './typings/appUpdater'
+} from '@lib/notifications'
+import { NotificationData } from '@lib/typings/notification'
 
-const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
+import {
+    appUpdateBusy,
+    appUpdateComplete,
+    appUpdateError,
+    appUpdateMinutesRemaining,
+    appUpdateProgress,
+    appVersionDetails,
+    DEFAULT_APP_UPDATER_POLL_INTERVAL,
+    IAppUpdateProgress,
+    IAppVersionDetails,
+} from '@core/app'
 
-export const versionDetails = writable<VersionDetails>({
-    upToDate: true,
-    currentVersion: '',
-    newVersion: '',
-    newVersionReleaseDate: new Date(),
-    changelog: '',
+Platform.onEvent('get-app-version-details', (_appVersionDetails: IAppVersionDetails) => {
+    appVersionDetails.set(_appVersionDetails)
 })
 
-export const updateProgress = writable<number>(0)
-export const updateMinutesRemaining = writable<number>(-1)
-export const updateBusy = writable<boolean>(false)
-export const updateComplete = writable<boolean>(false)
-export const updateError = writable<boolean>(false)
-
-Platform.onEvent('version-details', (nativeVersionDetails) => {
-    versionDetails.set(nativeVersionDetails)
-})
-
-Platform.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
-    updateProgress.set(nativeVersionProgress.percent)
+Platform.onEvent('app-update-download-progress', (nativeVersionProgress: IAppUpdateProgress) => {
+    appUpdateProgress.set(nativeVersionProgress.percent)
 
     const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total
     if (nativeVersionProgress.bytesPerSecond > 0) {
-        updateMinutesRemaining.set(bytesRemaining / nativeVersionProgress.bytesPerSecond / 60)
+        appUpdateMinutesRemaining.set(bytesRemaining / nativeVersionProgress.bytesPerSecond / 60)
     }
 })
 
-Platform.onEvent('version-complete', () => {
-    updateBusy.set(false)
-    updateError.set(false)
-    updateComplete.set(true)
-    updateMinutesRemaining.set(0)
+Platform.onEvent('app-update-download-complete', () => {
+    appUpdateBusy.set(false)
+    appUpdateError.set(false)
+    appUpdateComplete.set(true)
+    appUpdateMinutesRemaining.set(0)
 })
 
-Platform.onEvent('version-error', (nativeVersionError) => {
+Platform.onEvent('app-update-error', (nativeVersionError) => {
     console.error(nativeVersionError)
-    updateError.set(true)
+    appUpdateError.set(true)
 })
 
-export function updateDownload(): void {
-    updateProgress.set(0)
-    updateMinutesRemaining.set(-1)
-    updateBusy.set(true)
-    updateComplete.set(false)
-    updateError.set(false)
+export async function getAppVersionDetails(): Promise<void> {
+    const verDetails = await Platform.getAppVersionDetails()
+    appVersionDetails.set(verDetails)
+}
+
+/**
+ * Checks for updated Firefly versions at a specific time interval.
+ */
+export function pollCheckForAppUpdate(): void {
+    setInterval(() => checkForAppUpdate(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+}
+
+/**
+ *
+ */
+export function checkForAppUpdate(): void {
+    void Platform.checkForAppUpdate()
+}
+
+export function downloadAppUpdate(): void {
+    appUpdateProgress.set(0)
+    appUpdateMinutesRemaining.set(-1)
+    appUpdateBusy.set(true)
+    appUpdateComplete.set(false)
+    appUpdateError.set(false)
 
     let progressSubscription = null
     let minutesRemainingSubscription = null
@@ -81,7 +94,7 @@ export function updateDownload(): void {
             {
                 label: localize('actions.cancel'),
                 callback: () => {
-                    updateCancel()
+                    cancelAppUpdate()
                     cleanup()
                 },
             },
@@ -91,11 +104,11 @@ export function updateDownload(): void {
 
     const notificationId = showAppNotification(downloadingNotification)
 
-    progressSubscription = updateProgress.subscribe((progress) => {
+    progressSubscription = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
 
-    minutesRemainingSubscription = updateMinutesRemaining.subscribe((minutesRemaining) => {
+    minutesRemainingSubscription = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -112,7 +125,7 @@ export function updateDownload(): void {
         }
     })
 
-    completeSubscription = updateComplete.subscribe((isComplete) => {
+    completeSubscription = appUpdateComplete.subscribe((isComplete) => {
         if (isComplete) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -124,7 +137,7 @@ export function updateDownload(): void {
                         label: localize('actions.restartNow'),
                         callback: () => {
                             cleanup()
-                            updateInstall()
+                            installAppUpdate()
                         },
                         isPrimary: true,
                     },
@@ -137,7 +150,7 @@ export function updateDownload(): void {
         }
     })
 
-    errorSubscription = updateError.subscribe((isError) => {
+    errorSubscription = appUpdateError.subscribe((isError) => {
         if (isError) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -155,32 +168,19 @@ export function updateDownload(): void {
         }
     })
 
-    void Platform.updateDownload()
+    void Platform.downloadAppUpdate()
 }
 
-export function updateCancel(): void {
-    void Platform.updateCancel()
-
-    updateProgress.set(0)
-    updateBusy.set(false)
-    updateComplete.set(false)
-    updateError.set(false)
-    updateMinutesRemaining.set(-1)
+export function installAppUpdate(): void {
+    void Platform.installAppUpdate()
 }
 
-export function updateInstall(): void {
-    void Platform.updateInstall()
-}
+export function cancelAppUpdate(): void {
+    void Platform.cancelAppUpdate()
 
-export function updateCheck(): void {
-    void Platform.updateCheck()
-}
-
-export async function getVersionDetails(): Promise<void> {
-    const verDetails = await Platform.getVersionDetails()
-    versionDetails.set(verDetails)
-}
-
-export function pollVersion(): void {
-    setInterval(() => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+    appUpdateProgress.set(0)
+    appUpdateBusy.set(false)
+    appUpdateComplete.set(false)
+    appUpdateError.set(false)
+    appUpdateMinutesRemaining.set(-1)
 }

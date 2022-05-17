@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { stage } from 'shared/lib/app'
+    import { appStage } from '@core/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { get } from 'svelte/store'
 
@@ -10,7 +10,7 @@
     export let overrideStage: undefined | 'alpha' | 'beta' | 'prod' = undefined
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selected = logos[logo]?.[overrideStage ?? get(stage)]
+    $: selected = logos[logo]?.[overrideStage ?? get(appStage)]
 
     const logos = {
         'logo-firefly-full': {

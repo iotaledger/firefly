@@ -1,6 +1,9 @@
-export type AppTheme = 'light' | 'dark' | 'system'
+import { AppTheme } from '../types'
 
-export interface AppSettings {
+/**
+ * The application settings for Firefly.
+ */
+export interface IAppSettings {
     deepLinking: boolean
     language: string
     theme: AppTheme

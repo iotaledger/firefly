@@ -135,7 +135,7 @@ const paths = {
     errorPreload: '',
 }
 
-let versionDetails = {
+let appVersionDetails = {
     upToDate: true,
     currentVersion: app.getVersion(),
     newVersion: '',
@@ -307,7 +307,7 @@ function createWindow() {
     })
 
     windows.main.webContents.on('did-finish-load', () => {
-        windows.main.webContents.send('version-details', versionDetails)
+        windows.main.webContents.send('get-app-version-details', appVersionDetails)
     })
 
     /**
@@ -422,7 +422,7 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
-ipcMain.handle('get-version-details', (_e) => versionDetails)
+ipcMain.handle('get-app-version-details', (_e) => appVersionDetails)
 
 // Diagnostics
 const getDiagnostics = () => {
@@ -755,12 +755,12 @@ function getJsonConfig(filename) {
     return path.join(userDataPath, filename)
 }
 
-export const updateVersionDetails = (details) => {
-    versionDetails = Object.assign({}, versionDetails, details)
+export const updateAppVersionDetails = (details) => {
+    appVersionDetails = Object.assign({}, appVersionDetails, details)
     if (process.env.STAGE !== 'prod') {
         // Always true to avoid triggering auto-updater
-        versionDetails.upToDate = true
+        appVersionDetails.upToDate = true
     }
 
-    getOrInitWindow('main').webContents.send('version-details', versionDetails)
+    getOrInitWindow('main').webContents.send('get-app-version-details', appVersionDetails)
 }

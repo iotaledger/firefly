@@ -13,9 +13,6 @@ let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
-    updateAppSettings(settings) {
-        return ipcRenderer.invoke('update-app-settings', settings)
-    },
     getActiveProfile() {
         return activeProfileId
     },
@@ -236,45 +233,32 @@ const ElectronApi = {
      */
     getMachineId: () => ipcRenderer.invoke('get-machine-id'),
     /**
+     * Check for an update to the application.
+     */
+    checkForAppUpdate: () => ipcRenderer.invoke('check-for-app-update'),
+    /**
+     * TODO: Ensure logic of each function checks out
      * Starts an update of the application
-     *
-     * @method updateDownload
-     *
-     * @returns void
      */
-    updateDownload: () => ipcRenderer.invoke('update-download'),
+    downloadAppUpdate: () => ipcRenderer.invoke('download-app-update'),
     /**
-     * Cancels an update of the application
-     *
-     * @method updateCancel
-     *
-     * @returns void
+     * Installs an application update.
      */
-    updateCancel: () => ipcRenderer.invoke('update-cancel'),
+    installAppUpdate: () => ipcRenderer.invoke('install-app-update'),
     /**
-     * Install an update of the application
-     *
-     * @method updateInstall
-     *
-     * @returns void
+     * Cancels an application update.
      */
-    updateInstall: () => ipcRenderer.invoke('update-install'),
+    cancelAppUpdate: () => ipcRenderer.invoke('cancel-app-update'),
     /**
-     * Check for an update of the application
-     *
-     * @method updateCheck
-     *
-     * @returns void
+     * Gets the application version details.
      */
-    updateCheck: () => ipcRenderer.invoke('update-check'),
+    getAppVersionDetails: () => ipcRenderer.invoke('get-app-version-details'),
     /**
-     * Get version details
-     *
-     * @method getVersionDetails
-     *
-     * @returns void
+     * Updates the application settings.
      */
-    getVersionDetails: () => ipcRenderer.invoke('get-version-details'),
+    updateAppSettings(settings) {
+        return ipcRenderer.invoke('update-app-settings', settings)
+    },
     /**
      * Change menu state to determine what menu items to display
      * @param {string} Attribute - Target attribute

@@ -1,10 +1,14 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
     import { Locale } from '@core/i18n'
     import Content from './Content.svelte'
-    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
-    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
+    import {
+        lastAcceptedPrivacyPolicyVersion,
+        lastAcceptedTermsOfServiceVersion,
+        mobile,
+        TERMS_OF_SERVICE_VERSION,
+        PRIVACY_POLICY_VERSION,
+    } from '@core/app'
     import { appRouter } from '@core/router'
 
     export let locale: Locale
@@ -15,8 +19,8 @@
     $: termsAccepted = checked
 
     function handleContinueClick(): void {
-        lastAcceptedTos.set(TOS_VERSION)
-        lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
+        lastAcceptedTermsOfServiceVersion.set(TERMS_OF_SERVICE_VERSION)
+        lastAcceptedPrivacyPolicyVersion.set(PRIVACY_POLICY_VERSION)
         $appRouter.next()
     }
     function handleBackClick(): void {

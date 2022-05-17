@@ -30,7 +30,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
-    import { versionDetails } from '@lib/appUpdater'
+    import { appVersionDetails } from '@lib/appUpdater'
     import { get } from 'svelte/store'
 
     let profileModal: Modal
@@ -171,7 +171,7 @@
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
-                    {#if !$shouldOpenProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
+                    {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
                         <PingingBadge innerColor="red-500" outerColor="red-500" />
                     {/if}
                 </button>

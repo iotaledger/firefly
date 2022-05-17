@@ -1,19 +1,19 @@
-import { getOrInitWindow, updateVersionDetails } from '../main'
+import { getOrInitWindow, updateAppVersionDetails } from '../main'
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
 const electronLog = require('electron-log')
 
-let downloadCancellation
+let downloadCancellationToken
 let ipcHandlersRegistered = false
 
 export function initAutoUpdate() {
     if (!ipcHandlersRegistered) {
         // Registering more than one handler for an event causes an error
         // This will happen if the main window is closed and reopened on macOS since the app does not quit
-        ipcMain.handle('update-download', () => updateDownload())
-        ipcMain.handle('update-cancel', () => updateCancel())
-        ipcMain.handle('update-install', () => updateInstall())
-        ipcMain.handle('update-check', () => updateCheck())
+        ipcMain.handle('check-for-app-update', () => checkForAppUpdate())
+        ipcMain.handle('download-app-update', () => downloadAppUpdate())
+        ipcMain.handle('install-app-update', () => installAppUpdate())
+        ipcMain.handle('cancel-app-update', () => cancelAppUpdate())
         ipcHandlersRegistered = true
     }
 
@@ -34,39 +34,39 @@ export function initAutoUpdate() {
             changelog: releaseNotes,
         }
 
-        updateVersionDetails(versionDetails)
+        updateAppVersionDetails(versionDetails)
     })
     autoUpdater.on('download-progress', (progressObj) => {
-        getOrInitWindow('main').webContents.send('version-progress', progressObj)
+        getOrInitWindow('main').webContents.send('app-update-download-progress', progressObj)
     })
 
     autoUpdater.on('update-downloaded', (info) => {
-        getOrInitWindow('main').webContents.send('version-complete', info)
+        getOrInitWindow('main').webContents.send('app-update-download-complete', info)
     })
 
     autoUpdater.on('error', (err) => {
-        getOrInitWindow('main').webContents.send('version-error', err)
+        getOrInitWindow('main').webContents.send('app-update-error', err)
     })
 
-    updateCheck()
+    checkForAppUpdate()
 }
 
-export function updateDownload() {
-    downloadCancellation = new CancellationToken()
-    autoUpdater.downloadUpdate(downloadCancellation)
+function checkForAppUpdate() {
+    autoUpdater.checkForUpdates()
 }
 
-export function updateCancel() {
-    if (downloadCancellation) {
-        downloadCancellation.cancel()
-        downloadCancellation = undefined
-    }
+function downloadAppUpdate() {
+    downloadCancellationToken = new CancellationToken()
+    autoUpdater.downloadUpdate(downloadCancellationToken)
 }
 
-export function updateInstall() {
+function installAppUpdate() {
     autoUpdater.quitAndInstall()
 }
 
-export function updateCheck() {
-    autoUpdater.checkForUpdates()
+function cancelAppUpdate() {
+    if (downloadCancellationToken) {
+        downloadCancellationToken.cancel()
+        downloadCancellationToken = undefined
+    }
 }
