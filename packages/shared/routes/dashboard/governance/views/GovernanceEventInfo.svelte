@@ -223,7 +223,9 @@
                             {/if}
                         {:else}
                             <div class="flex flex-row space-x-2 items-center">
-                                <Text type="p" highlighted>{localize('actions.castVotes')}</Text>
+                                {#if !$currentAccountTreasuryVoteValue}
+                                    <Text type="p" highlighted>{localize('actions.castVotes')}</Text>
+                                {/if}
                                 <Icon icon="chevron-right" classes="text-blue-500" />
                             </div>
                         {/if}
