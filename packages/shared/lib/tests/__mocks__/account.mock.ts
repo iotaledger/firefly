@@ -1,6 +1,5 @@
 import { AccountBalance, Address, OutputData, TransactionReceipt } from '@iota/wallet'
 import { IAccount } from '../../core/account'
-import { IAccountBalances } from '../../core/account/interfaces/account-balances.interface'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
@@ -29,16 +28,16 @@ export class AccountMock implements IAccount {
         return ''
     }
 
-    getBalance(): Promise<IAccountBalances> {
+    getBalance(): Promise<AccountBalance> {
         return Promise.resolve({
             aliases: [],
-            available: 12,
+            available: '12',
             foundries: [],
-            nativeToken: {},
+            nativeTokens: {},
             nfts: [],
-            potentiallLockedOutputs: [],
-            requiredStorageDeposit: 100,
-            total: 200,
+            potentiallyLockedOutputs: {},
+            requiredStorageDeposit: '100',
+            total: '200',
         })
     }
 

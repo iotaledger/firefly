@@ -1,41 +1,32 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { getColor } from 'shared/lib/profile'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
+    import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { closePopup, openPopup } from '@lib/popup'
 
     export let error = ''
 
     const { isStrongholdLocked } = $activeProfile
 
     let isBusy = false
-    let accountAlias = ''
-    let color = getRandomAccountColor()
+    let accountAlias = $selectedAccount.name
+    let color = $selectedAccount.color
 
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
     $: trimmedAccountAlias = accountAlias.trim()
+    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
+    $: hasColorChanged = $selectedAccount.color !== color
 
-    $: {
-        /**
-         * CAUTION: isBusy becomes true whenever the Stronghold password popup
-         * becomes active (by Wallet.svelte), so we must be sure that it gets
-         * set to false again in case the user cancels the popup. This is safe
-         * because it's within a reactive dependency.
-         */
-        if (!$popupState.active) {
-            isBusy = false
-        }
-    }
-
-    async function handleCreateClick(): Promise<void> {
+    async function handleSaveClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
-                await validateAccountName(trimmedAccountAlias)
+                await validateAccountName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedAccount.name)
             } catch ({ message }) {
                 error = message
                 return
@@ -44,11 +35,11 @@
             isBusy = true
 
             if ($isLedgerProfile) {
-                void promptUserToConnectLedger(false, _create, _cancel)
+                promptUserToConnectLedger(false, _save, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
-                openPopup({ type: 'password', props: { onSuccess: _create } })
+                openPopup({ type: 'password', props: { onSuccess: _save } })
             } else {
-                void _create()
+                void _save()
             }
         }
     }
@@ -57,10 +48,10 @@
         closePopup()
     }
 
-    async function _create(): Promise<void> {
+    async function _save(): Promise<void> {
         try {
             if (trimmedAccountAlias || color) {
-                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
                 closePopup()
             }
         } finally {
@@ -76,7 +67,7 @@
 <div class="flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.createNewWallet')}</Text>
+            <Text type="h5">{localize('general.manageAccount')}</Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
@@ -84,27 +75,28 @@
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus
-                submitHandler={handleCreateClick}
+                submitHandler={handleSaveClick}
                 disabled={isBusy}
                 classes="mb-4"
             />
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
+    <!-- Action -->
     {#if isBusy && !error}
-        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
+        <Text secondary classes="mb-3 text-center">{localize('general.updatingAccount')}</Text>
     {/if}
     {#if !isBusy}
-        <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
+        <div class="flex flex-row justify-between mt-2 px-2">
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {localize('actions.cancel')}
             </Button>
             <Button
-                disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}
+                onClick={() => handleSaveClick()}
+                disabled={invalidAliasUpdate && !hasColorChanged}
             >
-                {localize('actions.create')}
+                {localize('actions.save')}
             </Button>
         </div>
     {/if}

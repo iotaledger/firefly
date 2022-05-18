@@ -1,5 +1,4 @@
-import { createNewAccount } from '@core/account'
-import { newProfile, setActiveProfile } from '@core/profile'
+import { newProfile } from '@core/profile'
 import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
 import { mnemonic } from '@lib/app'
 import { Platform } from '@lib/platform'
@@ -46,9 +45,6 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
                     await verifyMnemonic(m)
                     await storeMnemonic(m)
                     mnemonic.set(null)
-                    setActiveProfile(get(newProfile))
-                    // TODO: move to after or on login function
-                    await createNewAccount()
                 }
 
                 get(appRouter).next(event)

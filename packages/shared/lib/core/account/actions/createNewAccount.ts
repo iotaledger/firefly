@@ -16,10 +16,8 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         const account = await getAccount(createdAccount.meta.index)
         account.sync()
         const [newAccount, metadata] = await buildAccountStateAndMetadata(account, color)
-        if (accounts) {
-            addAccountToActiveProfile(newAccount)
-            addAccountMetadataToActiveProfile(metadata)
-        }
+        addAccountToActiveProfile(newAccount)
+        addAccountMetadataToActiveProfile(metadata)
         return newAccount
     } catch (err) {
         console.error(err)

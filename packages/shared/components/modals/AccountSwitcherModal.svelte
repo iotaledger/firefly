@@ -1,14 +1,12 @@
 <script lang="typescript">
+    import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
-    import { getColor } from '@lib/profile'
     import { isSyncing, isTransferring } from '@lib/wallet'
     import { HR, Icon, Modal, Text } from 'shared/components'
-    import { activeProfile } from '@core/profile'
-    import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
 
     export let accounts: IAccountState[] = []
     export let modal: Modal
@@ -48,9 +46,9 @@
                     on:click={() => handleAccountClick(account.id)}
                     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
                 >
-                    <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                    <div class="circle" style="--account-color: {account.color};" />
                     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.getAlias()}
+                        {account.name}
                     </Text>
                 </button>
             {/each}

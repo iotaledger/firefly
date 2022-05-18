@@ -1,5 +1,4 @@
-import { IAccount, IAccountState, SignerType } from '@core/account'
-import { IAccountBalances } from '@core/account/interfaces/account-balances.interface'
+import { IAccount, IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
 import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
 import { generateMnemonic, profileManager } from '@core/profile-manager'
@@ -24,6 +23,7 @@ import { RecoveryPhrase } from './typings/mnemonic'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
+import { AccountBalance } from '@iota/wallet'
 
 export const MAX_PASSWORD_LENGTH = 256
 
@@ -612,7 +612,7 @@ export const getAccountBalanceHistory = (account: IAccountState, priceData: Pric
                 ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
                 ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
         // Calculate the variations for each account
-        let trackedBalance = account.balances.total
+        let trackedBalance = Number(account.balances.total)
         const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
         messages.forEach((message) => {
             const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
@@ -711,7 +711,7 @@ export const prepareAccountInfo = (
     return Object.assign<IAccountState, IAccount, Partial<IAccountState>>({} as IAccountState, account, {
         id: index.toString(),
         depositAddress,
-        balances: <IAccountBalances>{},
+        balances: <AccountBalance>{},
     })
 }
 

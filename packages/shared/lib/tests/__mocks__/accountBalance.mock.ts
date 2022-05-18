@@ -1,12 +1,12 @@
-import { IAccountBalances } from '../../core/account/interfaces/account-balances.interface'
+import { AccountBalance } from '@iota/wallet'
 
-export const MOCK_ACCOUNT_BALANCE: IAccountBalances = {
-    total: 10000,
-    available: 9000,
+export const MOCK_ACCOUNT_BALANCE: AccountBalance = {
+    total: '10000',
+    available: '9000',
     aliases: [],
     foundries: [],
-    nativeToken: {},
+    nativeTokens: {},
     nfts: [],
-    potentiallLockedOutputs: [],
-    requiredStorageDeposit: 0,
+    potentiallyLockedOutputs: {},
+    requiredStorageDeposit: '0',
 }
