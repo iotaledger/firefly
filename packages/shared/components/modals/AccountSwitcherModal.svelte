@@ -6,6 +6,7 @@
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
     import { isSyncing, isTransferring } from '@lib/wallet'
+    import { AccountLabel } from 'shared/components/atoms/'
     import { HR, Icon, Modal, Text } from 'shared/components'
 
     export let accounts: IAccountState[] = []
@@ -46,10 +47,7 @@
                     on:click={() => handleAccountClick(account.id)}
                     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
                 >
-                    <div class="circle" style="--account-color: {account.color};" />
-                    <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.name}
-                    </Text>
+                    <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
                 </button>
             {/each}
         </div>
@@ -63,35 +61,3 @@
         <Text highlighted type="p" classes="text-14">{localize('general.createNewWallet')}</Text>
     </button>
 </Modal>
-
-<style type="text/scss">
-    .accounts {
-        max-height: 65vh;
-    }
-    button {
-        .circle {
-            @apply relative;
-            @apply rounded-full;
-            @apply w-3;
-            @apply h-3;
-            background-color: var(--account-color);
-            &:after {
-                @apply absolute;
-                @apply rounded-full;
-                @apply w-3;
-                @apply h-3;
-                @apply border;
-                @apply border-solid;
-                @apply border-gray-700;
-                @apply bg-transparent;
-                @apply opacity-10;
-                @apply top-1/2;
-                @apply left-1/2;
-                @apply transform;
-                @apply -translate-x-1/2;
-                @apply -translate-y-1/2;
-                content: '';
-            }
-        }
-    }
-</style>
