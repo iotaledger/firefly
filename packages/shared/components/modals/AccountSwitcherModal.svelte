@@ -1,16 +1,12 @@
 <script lang="typescript">
-    import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
+    import { IAccountState } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { resetAccountRouter } from '@core/router'
     import { formatBestMatchTokenAmount } from '@core/wallet'
-    import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
-    import { isSyncing, isTransferring } from '@lib/wallet'
+    import { AccountSwitcherMenuItem } from 'shared/components/molecules'
     import { HR, Icon, Modal, Text } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms/'
 
     export let accounts: IAccountState[] = []
     export let modal: Modal
@@ -19,27 +15,6 @@
 
     function calculateTotalBalanceForViewableAccounts(accounts: IAccountState[]): number {
         return accounts.reduce((acc, account) => (acc += Number(account.balances.total)), 0)
-    }
-
-    function handleAccountClick(accountId: string): void {
-        if ($isSyncing) {
-            showWarning(localize('notifications.syncing'))
-        } else if ($isTransferring) {
-            showWarning(localize('notifications.transferring'))
-        } else if ($participationAction) {
-            showWarning(localize('notifications.participating'))
-        } else {
-            setSelectedAccount(accountId)
-            resetAccountRouter(false)
-            modal?.close()
-        }
-    }
-
-    function showWarning(message: string) {
-        showAppNotification({
-            type: 'warning',
-            message,
-        })
     }
 
     function handleCreateAccountClick(): void {
@@ -52,20 +27,7 @@
     <div class="p-4">
         <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each accounts as account}
-                <button
-                    on:click={() => handleAccountClick(account.id)}
-                    class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
-                >
-                    <div class="flex flex-row items-center space-x-4">
-                        <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
-                    </div>
-                    <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {formatBestMatchTokenAmount(
-                            Number(account.balances.total),
-                            BASE_TOKEN[$activeProfile.networkProtocol]
-                        )}
-                    </Text>
-                </button>
+                <AccountSwitcherMenuItem {account} onSuccess={() => modal?.close()} />
             {/each}
         </div>
     </div>
