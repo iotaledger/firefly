@@ -18,7 +18,7 @@ export function saveActiveProfile(): void {
             ...(_activeProfile?.hiddenAccounts && { hiddenAccounts: _activeProfile?.hiddenAccounts }),
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
-            ...(_activeProfile?.accountMetadatas && { accountMetadatas: _activeProfile?.accountMetadatas }),
+            ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
             ...(_activeProfile?.hasFinishedSingleAccountGuide && {
                 hasFinishedSingleAccountGuide: _activeProfile?.hasFinishedSingleAccountGuide,
             }),

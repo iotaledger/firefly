@@ -24,19 +24,19 @@ export function addAccountToActiveProfile(account: IAccountState): void {
 export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): void {
     activeProfile?.update((state) => ({
         ...state,
-        accountMetadatas: [...state?.accountMetadatas, metadata],
+        accountMetadata: [...state?.accountMetadata, metadata],
     }))
 }
 
-export function getAccountMetadatById(id: string): IAccountMetadata {
-    const { accountMetadatas } = get(activeProfile)
-    return accountMetadatas.find((metadata) => metadata.id === id)
+export function getAccountMetadataById(id: string): IAccountMetadata {
+    const { accountMetadata } = get(activeProfile)
+    return accountMetadata.find((metadata) => metadata.id === id)
 }
 
 export function updateAccountMetadataOnActiveProfile(id: string, metadata: Partial<IAccountMetadata>): void {
     activeProfile?.update((state) => ({
         ...state,
-        accountMetadatas: state?.accountMetadatas.map((existingValue) =>
+        accountMetadata: state?.accountMetadata.map((existingValue) =>
             existingValue.id === id ? { ...existingValue, ...metadata } : existingValue
         ),
     }))

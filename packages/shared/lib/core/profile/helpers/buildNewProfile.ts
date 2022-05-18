@@ -37,6 +37,6 @@ export function buildNewProfile(
                 timeframe: HistoryDataProps.SEVEN_DAYS,
             },
         },
-        accountMetadatas: [],
+        accountMetadata: [],
     }
 }
