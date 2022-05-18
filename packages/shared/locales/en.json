@@ -860,11 +860,21 @@
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
-        "votingConfirmation": {
-            "partiallyVoted": "You have received additional funds to {account}. You can vote with these tokens by merging your vote.",
-            "partiallyVotedAmount": "Unused funds: {amount}",
-            "additionalInfoStopping": "Please note that stopping voting during the counting period won't impact any votes that have already been counted.",
-            "additionalInfoChanging": "Please note that changing your vote during the counting period won't impact any votes that have already been counted.",
+        "governanceManager": {
+            "castYourVote": "Cast your vote",
+            "castYourVoteInfo": "You're about to vote for Option {voteValue} – {voteText} with {amount}",
+            "castingVotes": "Casting votes",
+            "stopVoting": "Stop voting",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} – {voteText}?",
+            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
+            "stoppingVoting": "Stopping voting",
+            "changeVote": "Change vote",
+            "changeVoteInfo": "Are you sure you want to change your vote and cast your votes for Option {voteValue} – {voteText}?",
+            "changingVote": "Changing vote",
+            "manageVotes": "Manage votes",
+            "partialVoteInfo": "You have received additional {amount} to {account}. You can vote with these funds by merging the vote.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}."
         },

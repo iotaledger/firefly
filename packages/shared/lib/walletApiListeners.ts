@@ -390,7 +390,7 @@ export function displayParticipationNotification(pendingParticipation: PendingPa
             localeGroup = 'stakingManager'
             localeAction = action === ParticipationAction.Stake ? 'staked' : 'unstaked'
         } else if (action === ParticipationAction.Vote || action === ParticipationAction.Unvote) {
-            localeGroup = 'votingConfirmation'
+            localeGroup = 'governanceManager'
             localeAction = action === ParticipationAction.Vote ? 'voted' : 'unvoted'
         }
         showAppNotification({

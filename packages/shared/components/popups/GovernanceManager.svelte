@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Button, Icon, Spinner, Text } from 'shared/components'
+    import { Button, Icon, Illustration, Spinner, Text } from 'shared/components'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { hasNodePlugin } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -16,8 +16,8 @@
         participationAction,
         pendingParticipations,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, VotingEventAnswer } from 'shared/lib/participation/types'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { ParticipationAction, VotingAction, VotingEventAnswer } from 'shared/lib/participation/types'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { NodePlugin } from 'shared/lib/typings/node'
@@ -26,30 +26,26 @@
     import { isSyncing, selectedAccountStore, transferState } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
+    // nextVote is the vote that the user has selected to vote for.
     export let nextVote: VotingEventAnswer
     export let eventId: string
     export let shouldCastVoteOnMount: boolean = false
     export let votingAction: VotingAction
 
-    enum VotingAction {
-        Cast = 'castVotes',
-        Merge = 'mergeVotes',
-        Stop = 'stopVotes',
-        Change = 'changeVotes',
-    }
-
     let isVoting = false
 
+    let activeFlow: VotingAction
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
+    let title = ''
 
     $: loading = isVoting || $isSyncing || $pendingParticipations?.length !== 0
-    $: isVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
-    $: canMergeVotes = isVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
+    $: isAlreadyVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
+    $: canMergeVotes = isAlreadyVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
+    $: activeFlow, (title = getTitleText())
 
-    // Note: this async is needed here to persist the subscription to pendingParticipations and reset the view accordingly
-    /* eslint-disable @typescript-eslint/require-await */
-    onMount(async () => {
+    onMount(() => {
+        activeFlow = getActiveFlow()
         if (!hasNodePlugin(NodePlugin.Participation)) {
             showAppNotification({
                 type: 'warning',
@@ -85,7 +81,6 @@
             unsubscribe()
         }
     })
-    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     function handleActionClick(action: VotingAction): void {
         votingAction = action
@@ -215,75 +210,160 @@
         messageIds.forEach((id) => pendingParticipationIds.push(id))
         previousPendingParticipationsLength = messageIds.length
     }
+
+    function getTitleText(): string {
+        switch (activeFlow) {
+            case VotingAction.Cast:
+                return localize('popups.governanceManager.castYourVote')
+            case VotingAction.Stop:
+                return localize('popups.governanceManager.stopVoting')
+            case VotingAction.Change:
+                return localize('popups.governanceManager.changeVote')
+            case VotingAction.Merge:
+                return localize('popups.governanceManager.manageVotes')
+        }
+    }
+
+    function getActiveFlow(): VotingAction {
+        let _activeFlow: VotingAction
+        if (!$currentAccountTreasuryVoteValue || votingAction === VotingAction.Cast) {
+            _activeFlow = VotingAction.Cast
+        } else if (isAlreadyVotingNextVote) {
+            if (canMergeVotes || votingAction === VotingAction.Merge) {
+                _activeFlow = VotingAction.Merge
+            } else if (!canMergeVotes || votingAction === VotingAction.Stop) {
+                _activeFlow = VotingAction.Stop
+            }
+        } else {
+            _activeFlow = VotingAction.Change
+        }
+        return _activeFlow
+    }
 </script>
 
 <div>
-    <Text type="h3" classes="mb-6">{nextVote?.text}</Text>
-    <Text type="p" classes="mb-6">{nextVote?.additionalInfo}</Text>
-    {#if loading}
-        <Button disabled classes="mb-0 w-full block text-15">
-            <Spinner
-                busy
-                message={$isSyncing ? localize('general.syncing') : undefined}
-                classes="mx-2 justify-center"
-            />
-        </Button>
-    {:else}
-        {#if $currentAccountTreasuryVoteValue}
-            <div class="flex items-center mb-6 bg-blue-100 dark:bg-gray-800 rounded-xl p-3">
-                <Icon icon="info" classes="text-gray-500 font-bold" />
-                <Text type="p" classes="px-3"
-                    >{localize(
-                        `popups.votingConfirmation.additionalInfo${
-                            $currentAccountTreasuryVoteValue !== nextVote.value ? 'Changing' : 'Stopping'
-                        }`
-                    )}</Text
-                >
-            </div>
-        {/if}
-        {#if canMergeVotes}
-            <div class="mb-6 flex flex-col flex-wrap space-y-3 bg-blue-100 dark:bg-gray-800 rounded-xl p-6">
-                <Text type="p">
-                    {localize('popups.votingConfirmation.partiallyVoted', {
-                        values: { account: $selectedAccountStore?.alias },
-                    })}
-                </Text>
-                <Text type="p" bold>
-                    {localize('popups.votingConfirmation.partiallyVotedAmount', {
-                        values: { amount: formatUnitBestMatch($currentAccountTreasuryVotePartiallyUnvotedAmount) },
-                    })}
-                </Text>
-            </div>
-        {/if}
-        <div class="flex justify-between space-x-4">
-            {#if !$currentAccountTreasuryVoteValue}
-                <Button onClick={() => handleActionClick(VotingAction.Cast)} classes="mb-0 w-full block text-15">
+    <Text type="h3" classes="mb-6">{title}</Text>
+    {#if activeFlow === VotingAction.Cast}
+        <div class="flex flex-col items-center text-center">
+            <Illustration illustration="governance-info" classes="w-28 h-28 mb-6" />
+            <Text type="p" classes="mb-8"
+                >{localize('popups.governanceManager.castYourVoteInfo', {
+                    values: {
+                        amount: formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3),
+                        voteText: nextVote?.text,
+                        voteValue: nextVote?.value,
+                    },
+                })}
+            </Text>
+            <Button disabled={loading} onClick={() => handleActionClick(VotingAction.Cast)} classes="w-full">
+                {#if loading}
+                    <Spinner
+                        busy
+                        message={$isSyncing
+                            ? localize('general.syncing')
+                            : localize('popups.governanceManager.castingVotes')}
+                        classes="mx-2 justify-center"
+                    />
+                {:else}
                     {localize(`actions.${VotingAction.Cast}`)}
+                {/if}
+            </Button>
+        </div>
+    {:else if activeFlow === VotingAction.Stop || activeFlow === VotingAction.Change}
+        <div class="flex flex-col">
+            <Text type="p" classes="mb-4"
+                >{localize(
+                    `popups.governanceManager.${
+                        activeFlow === VotingAction.Stop ? 'stopVotingInfo' : 'changeVoteInfo'
+                    }`,
+                    {
+                        values: {
+                            voteText: nextVote?.text,
+                            voteValue: nextVote?.value,
+                        },
+                    }
+                )}
+            </Text>
+            <div class="flex items-center mb-6 bg-blue-50 dark:bg-gray-800 rounded-xl p-4">
+                <Icon icon="exclamation" classes="text-gray-500" />
+                <Text type="p" classes="px-3">
+                    {localize('popups.governanceManager.stopVotingDisclaimer')}
+                </Text>
+            </div>
+            <div class="flex flex-row justify-between space-x-4 w-full">
+                <Button disabled={loading} secondary classes="w-1/2" onClick={() => closePopup()}>
+                    {localize('actions.cancel')}
                 </Button>
-            {:else}
-                {#if isVotingNextVote}
-                    <Button
-                        secondary
-                        onClick={() => handleActionClick(VotingAction.Stop)}
-                        classes="mb-0 w-full block text-15"
+                <Button
+                    warning
+                    disabled={loading}
+                    onClick={() =>
+                        handleActionClick(activeFlow === VotingAction.Stop ? VotingAction.Stop : VotingAction.Change)}
+                    classes="w-1/2"
+                >
+                    {#if loading}
+                        <Spinner
+                            busy
+                            message={$isSyncing
+                                ? localize('general.syncing')
+                                : localize(
+                                      `popups.governanceManager.${
+                                          activeFlow === VotingAction.Stop ? 'stoppingVoting' : 'changingVote'
+                                      }`
+                                  )}
+                            classes="mx-2 justify-center"
+                        />
+                    {:else}
+                        {localize(
+                            `actions.${activeFlow === VotingAction.Stop ? VotingAction.Stop : VotingAction.Change}`
+                        )}
+                    {/if}
+                </Button>
+            </div>
+        </div>
+    {:else if activeFlow === VotingAction.Merge}
+        <div class="flex flex-col">
+            <Text type="p" classes="mb-4"
+                >{localize('popups.governanceManager.partialVoteInfo', {
+                    values: {
+                        amount: formatUnitBestMatch($currentAccountTreasuryVotePartiallyUnvotedAmount),
+                        account: $selectedAccountStore?.alias,
+                    },
+                })}
+            </Text>
+            <div class="flex items-center mb-6 bg-blue-50 dark:bg-gray-800 rounded-xl p-4">
+                <Icon icon="exclamation" classes="text-gray-500" />
+                <Text type="p" classes="px-3">
+                    {localize('popups.governanceManager.mergeVoteDisclaimer')}
+                </Text>
+            </div>
+            <div class="flex flex-row justify-between space-x-4 w-full">
+                <Button
+                    disabled={loading}
+                    secondary
+                    classes="w-1/2"
+                    onClick={() => {
+                        activeFlow = VotingAction.Stop
+                    }}
+                >
+                    <Text overrideColor classes="text-red-500 {loading ? 'opacity-50' : ''}"
+                        >{localize(`actions.${VotingAction.Stop}`)}</Text
                     >
-                        {localize(`actions.${VotingAction.Stop}`)}
-                    </Button>
-                {/if}
-                {#if canMergeVotes}
-                    <Button
-                        caution
-                        onClick={() => handleActionClick(VotingAction.Merge)}
-                        classes="mb-0 w-full block text-15"
-                    >
+                </Button>
+                <Button disabled={loading} onClick={() => handleActionClick(VotingAction.Merge)} classes="w-1/2">
+                    {#if loading}
+                        <Spinner
+                            busy
+                            message={$isSyncing
+                                ? localize('general.syncing')
+                                : localize('popups.governanceManager.mergingVotes')}
+                            classes="mx-2 justify-center"
+                        />
+                    {:else}
                         {localize(`actions.${VotingAction.Merge}`)}
-                    </Button>
-                {:else if $currentAccountTreasuryVoteValue !== nextVote.value}
-                    <Button onClick={() => handleActionClick(VotingAction.Change)} classes="mb-0 w-full block text-15">
-                        {localize(`actions.${VotingAction.Change}`)}
-                    </Button>
-                {/if}
-            {/if}
+                    {/if}
+                </Button>
+            </div>
         </div>
     {/if}
 </div>
