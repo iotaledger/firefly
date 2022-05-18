@@ -11,6 +11,7 @@
     } from 'shared/lib/participation/account'
     import { participate, stopParticipating } from 'shared/lib/participation/api'
     import {
+        isChangingParticipation,
         isParticipationPending,
         isPerformingParticipation,
         participationAction,
@@ -179,6 +180,7 @@
 
     async function changeVote(): Promise<void> {
         $participationAction = ParticipationAction.Unvote
+        isChangingParticipation.set(true)
         await stopParticipating($selectedAccountStore?.id, [eventId], ParticipationAction.Unvote)
             .then(async (messageIds) => {
                 syncParticipations(messageIds)
