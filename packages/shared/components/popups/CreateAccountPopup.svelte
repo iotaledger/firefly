@@ -31,28 +31,13 @@
         }
     }
 
-    async function _create(): Promise<void> {
-        try {
-            if (trimmedAccountAlias || color) {
-                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-                closePopup()
-            }
-        } finally {
-            isBusy = false
-        }
-    }
-
-    function _cancel() {
-        isBusy = false
-    }
-
     async function handleCreateClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
                 await validateAccountName(trimmedAccountAlias)
-            } catch (reason) {
-                error = reason
+            } catch ({ message }) {
+                error = message
                 return
             }
 
@@ -68,8 +53,23 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
+    }
+
+    async function _create(): Promise<void> {
+        try {
+            if (trimmedAccountAlias || color) {
+                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                closePopup()
+            }
+        } finally {
+            isBusy = false
+        }
+    }
+
+    function _cancel(): void {
+        isBusy = false
     }
 </script>
 

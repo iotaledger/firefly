@@ -11,15 +11,15 @@ export async function tryCreateAdditionalAccount(alias: string, color: string): 
         const account = await createNewAccount(alias, color)
         setSelectedAccount(account?.id)
         return Promise.resolve()
-    } catch (reason) {
-        if (reason) {
-            console.error(reason?.error || reason)
+    } catch (err) {
+        if (err) {
+            console.error(err?.error || err)
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, false, false, false, reason)
+                displayNotificationForLedgerProfile('error', true, false, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(reason?.error || reason),
+                    message: localize(err?.error || err),
                 })
             }
         }

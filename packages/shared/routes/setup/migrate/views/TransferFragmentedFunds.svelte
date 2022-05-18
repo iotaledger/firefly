@@ -28,10 +28,8 @@
     import { walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { addNewProfile, loadPersistedProfileIntoActiveProfile, login, newProfile } from '@core/profile'
-
-    export let locale: Locale
 
     let busy = false
     let migrated = false
@@ -49,7 +47,7 @@
 
     let transactions = get(unmigratedBundles).map((_bundle, index) => ({
         ..._bundle,
-        name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
+        name: localize('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
         balance: _bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
         status: 0,
         errorText: null,
@@ -72,7 +70,7 @@
             migrated = _hasMigratedAndConfirmedAllSelectedBundles
 
             if (_hasMigratedAndConfirmedAllSelectedBundles) {
-                migratingFundsMessage = locale('actions.continue')
+                migratingFundsMessage = localize('actions.continue')
                 busy = false
             }
         }
@@ -144,7 +142,7 @@
 
             return item
         })
-        migratingFundsMessage = locale('views.migrate.migrating')
+        migratingFundsMessage = localize('views.migrate.migrating')
 
         _unmigratedBundles.reduce(
             (promise, transaction, idx) =>
@@ -251,7 +249,7 @@
                                 return {
                                     ..._transaction,
                                     status: -1,
-                                    errorText: locale('views.migrate.migrationFailed'),
+                                    errorText: localize('views.migrate.migrationFailed'),
                                 }
                             }
 
@@ -299,7 +297,7 @@
     }
 
     function migrateFunds() {
-        migratingFundsMessage = locale('views.migrate.migrating')
+        migratingFundsMessage = localize('views.migrate.migrating')
 
         transactions.reduce(
             (promise, transaction, idx) =>
@@ -452,25 +450,24 @@
 
 <OnboardingLayout
     allowBack={!$hasMigratedAnyBundle && !busy}
-    {locale}
     onBackClick={handleBackClick}
     class=""
     showLedgerProgress={legacyLedger}
     showLedgerVideoButton={legacyLedger}
 >
     <div slot="title">
-        <Text type="h2">{locale('views.migrate.title')}</Text>
+        <Text type="h2">{localize('views.migrate.title')}</Text>
     </div>
     <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
-        <Text type="p" secondary classes="mb-4">{locale('views.transferFragmentedFunds.body1')}</Text>
+        <Text type="p" secondary classes="mb-4">{localize('views.transferFragmentedFunds.body1')}</Text>
         {#if legacyLedger}
             <Text type="p" secondary classes="mb-4">
-                {locale('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
+                {localize('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
             </Text>
         {/if}
         <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
             {#each transactions as transaction}
-                <TransactionItem {...transaction} {locale} />
+                <TransactionItem {...transaction} {localize} />
             {/each}
         </div>
     </div>
@@ -482,18 +479,18 @@
                 onClick={() => handleMigrateClick()}
             >
                 {#if !busy}
-                    {locale('views.transferFragmentedFunds.migrate')}
+                    {localize('views.transferFragmentedFunds.migrate')}
                 {:else}
                     <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
                 {/if}
             </Button>
         {:else if fullSuccess}
             <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}
-                >{locale('actions.continue')}</Button
+                >{localize('actions.continue')}</Button
             >
         {:else}
             <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
-                {locale('views.transferFragmentedFunds.rerun')}
+                {localize('views.transferFragmentedFunds.rerun')}
             </Button>
         {/if}
     </div>

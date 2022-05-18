@@ -18,7 +18,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
     import {
         activeProfile,
@@ -28,8 +28,6 @@
         newProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
-
-    export let locale: Locale
 
     const { didComplete } = $migration
 
@@ -129,9 +127,9 @@
                 <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                <Text type="h2" classes="mb-6 text-center">{localize('views.congratulations.fundsMigrated')}</Text>
                 <Text type="p" secondary classes="mb-6 text-center">
-                    {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
+                    {localize(`views.congratulations.${localizedBody}`, { values: localizedValues })}
                 </Text>
                 <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
@@ -141,16 +139,18 @@
                 <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                <Text type="h2" classes="mb-5 text-center">{localize('views.congratulations.title')}</Text>
                 <Text type="p" secondary classes="mb-2 text-center"
-                    >{locale(`views.congratulations.${localizedBody}`)}</Text
+                    >{localize(`views.congratulations.${localizedBody}`)}</Text
                 >
             </div>
         {/if}
     </div>
     <div slot="leftpane__action">
         <Button classes="w-full" onClick={() => handleContinueClick()}>
-            {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
+            {localize(
+                `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`
+            )}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">

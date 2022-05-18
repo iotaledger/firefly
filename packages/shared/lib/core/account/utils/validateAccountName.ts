@@ -6,21 +6,23 @@ import { MAX_ACCOUNT_NAME_LENGTH } from '../constants'
 
 export function validateAccountName(
     name: string,
-    validateLength: boolean = true,
-    validateDuplicate: boolean = true
+    validateLength = true,
+    validateDuplicate = true
 ): Promise<void | string> {
     const { accounts } = get(activeProfile)
     if (validateLength && getTrimmedLength(name) > MAX_ACCOUNT_NAME_LENGTH) {
         return Promise.reject(
-            localize('error.account.length', {
-                values: {
-                    length: MAX_ACCOUNT_NAME_LENGTH,
-                },
-            })
+            new Error(
+                localize('error.account.length', {
+                    values: {
+                        length: MAX_ACCOUNT_NAME_LENGTH,
+                    },
+                })
+            )
         )
     }
-    if (validateDuplicate && get(accounts)?.find((existingccount) => existingccount.name === name)) {
-        return Promise.reject(localize('error.account.duplicate'))
+    if (validateDuplicate && get(accounts)?.find((existingAccount) => existingAccount.name === name)) {
+        return Promise.reject(new Error(localize('error.account.duplicate')))
     }
     return Promise.resolve()
 }

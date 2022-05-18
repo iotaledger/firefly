@@ -17,8 +17,8 @@ export const assets = derived(
             {
                 metadata: BASE_TOKEN[$activeProfile?.networkProtocol],
                 balance: {
-                    total: $selectedAccount?.balances.total,
-                    available: $selectedAccount?.balances.available,
+                    total: Number($selectedAccount?.balances.total),
+                    available: Number($selectedAccount?.balances.available),
                 },
                 fiatPrice: `${convertToFiat(
                     UNIT_MAP[Unit.Mi].val,
@@ -26,7 +26,7 @@ export const assets = derived(
                     $exchangeRates[profileCurrency]
                 )} ${profileCurrency}`,
                 fiatBalance: `${convertToFiat(
-                    $selectedAccount?.balances.available,
+                    Number($selectedAccount?.balances.available),
                     $currencies[CurrencyTypes.USD],
                     $exchangeRates[profileCurrency]
                 )} ${profileCurrency}`,

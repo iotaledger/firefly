@@ -20,30 +20,15 @@
     $: accountAlias, (error = '')
     $: trimmedAccountAlias = accountAlias.trim()
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
-    $: hasColorChanged = getColor($activeProfile, $selectedAccount.id) !== color
-
-    async function _save(): Promise<void> {
-        try {
-            if (trimmedAccountAlias || color) {
-                await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
-                closePopup()
-            }
-        } finally {
-            isBusy = false
-        }
-    }
-
-    function _cancel(): void {
-        isBusy = false
-    }
+    $: hasColorChanged = $selectedAccount.color !== color
 
     async function handleSaveClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
                 await validateAccountName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedAccount.name)
-            } catch (reason) {
-                error = reason
+            } catch ({ message }) {
+                error = message
                 return
             }
 
@@ -59,8 +44,23 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
+    }
+
+    async function _save(): Promise<void> {
+        try {
+            if (trimmedAccountAlias || color) {
+                await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
+                closePopup()
+            }
+        } finally {
+            isBusy = false
+        }
+    }
+
+    function _cancel(): void {
+        isBusy = false
     }
 </script>
 
