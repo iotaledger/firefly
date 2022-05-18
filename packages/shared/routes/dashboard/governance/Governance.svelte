@@ -3,7 +3,7 @@
     import { GovernanceRoute } from '@core/router/enums'
     import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
     import { participationEvents } from 'shared/lib/participation/stores'
-    import { GovernanceDashboard, GovernanceEventDetails } from './views'
+    import { GovernanceDashboard, GovernanceEvent } from './views'
 
     $: event = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
 
@@ -18,6 +18,6 @@
     {#if $governanceRoute === GovernanceRoute.Init}
         <GovernanceDashboard {event} />
     {:else if $governanceRoute === GovernanceRoute.EventDetails}
-        <GovernanceEventDetails {event} />
+        <GovernanceEvent {event} />
     {/if}
 </div>
