@@ -1,7 +1,10 @@
 <script lang="typescript">
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { BASE_TOKEN } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { resetAccountRouter } from '@core/router'
+    import { formatBestMatchTokenAmount } from '@core/wallet'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
@@ -11,6 +14,12 @@
 
     export let accounts: IAccountState[] = []
     export let modal: Modal
+
+    $: totalBalance = calculateTotalBalanceForViewableAccounts(accounts)
+
+    function calculateTotalBalanceForViewableAccounts(accounts: IAccountState[]): number {
+        return accounts.reduce((acc, account) => (acc += Number(account.balances.total)), 0)
+    }
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
@@ -41,7 +50,7 @@
 
 <Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '30px', left: '50%' }}>
     <div class="p-4">
-        <div class="accounts flex flex-col space-y-1 scrollable-y">
+        <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each accounts as account}
                 <button
                     on:click={() => handleAccountClick(account.id)}
@@ -51,7 +60,10 @@
                         <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
                     </div>
                     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                        {account.balances.total}
+                        {formatBestMatchTokenAmount(
+                            Number(account.balances.total),
+                            BASE_TOKEN[$activeProfile.networkProtocol]
+                        )}
                     </Text>
                 </button>
             {/each}
@@ -67,7 +79,11 @@
             <Text highlighted type="h5" classes="text-14">{localize('general.addAWallet')}</Text>
         </div>
         <Text classes="opacity-50" type="h5">
-            {localize('general.total', { values: { balance: '000.000' } })}
+            {localize('general.total', {
+                values: {
+                    balance: formatBestMatchTokenAmount(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol]),
+                },
+            })}
         </Text>
     </button>
 </Modal>
