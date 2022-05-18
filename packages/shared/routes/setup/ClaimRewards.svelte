@@ -5,7 +5,7 @@
     import { getAccounts } from '@core/profile-manager'
     import { AccountMeta } from '@iota/wallet/out/types'
 
-    let wallets: IAccount[] = [
+    let accounts: IAccount[] = [
         <IAccount>{
             meta: <AccountMeta>{
                 index: 0,
@@ -74,7 +74,7 @@
         getAccounts()
             .then((_wallets) => {
                 if (_wallets?.length > 0) {
-                    wallets = _wallets
+                    accounts = _wallets
                 }
             })
             .catch((err) => {
@@ -91,7 +91,7 @@
         <Text type="p" secondary classes="mb-5">
             Please check that your Shimmer staking rewards are correct. If not, please use the balance finder.
         </Text>
-        <RewardClaimList {wallets} />
+        <RewardClaimList {accounts} />
     </div>
     <div slot="leftpane__action">
         <Button classes="w-full mb-5" secondary onClick={handleUseBalanceFinderClick}>Use balance finder</Button>
