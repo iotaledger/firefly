@@ -70,6 +70,39 @@
                 const latestParticipationIds = participations.map((participation) => participation.messageId)
 
                 if (latestParticipationIds.length === 0) {
+                    // Display confirmation popup on governance action success
+                    if (
+                        $participationAction === ParticipationAction.Vote ||
+                        $participationAction === ParticipationAction.Unvote
+                    ) {
+                        if (
+                            !$isChangingParticipation ||
+                            ($isChangingParticipation && $participationAction === ParticipationAction.Vote)
+                        ) {
+                            openPopup({
+                                type: 'success',
+                                props: {
+                                    title: localize(`popups.governanceManager.successPopup.${activeFlow}Title`),
+                                    body: localize(
+                                        `popups.governanceManager.successPopup.${
+                                            activeFlow === VotingAction.Stop ? 'stop' : 'cast'
+                                        }Body`,
+                                        {
+                                            values: {
+                                                amount: formatUnitBestMatch(
+                                                    $selectedAccountStore?.rawIotaBalance,
+                                                    true,
+                                                    3
+                                                ),
+                                                voteText: nextVote?.text,
+                                                voteValue: nextVote?.value,
+                                            },
+                                        }
+                                    ),
+                                },
+                            })
+                        }
+                    }
                     resetView()
                 }
 

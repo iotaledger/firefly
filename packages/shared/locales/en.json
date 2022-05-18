@@ -876,7 +876,15 @@
             "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}."
+            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "successPopup": {
+                "castVotesTitle": "Votes successfully casted",
+                "stopVotesTitle": "Voting stopped",
+                "mergeVotesTitle": "Vote successfully merged",
+                "changeVotesTitle": "Vote successfully changed",
+                "castBody": "You’re now voting for Option {voteValue} – {voteText} with {amount} voting power.",
+                "stopBody": "Currently you are not voting for any option. This does not impact any votes that have already been counted"
+            }
         },
         "shimmer-info": {
             "title": "About Shimmer",

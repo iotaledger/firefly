@@ -126,7 +126,7 @@ export const initialiseListeners = (): void => {
                 ) {
                     displayParticipationNotification(getPendingParticipation(message.id))
                 }
-                if (get(popupState).type === 'governanceManager' || get(popupState).type === 'stakingManager') {
+                if (get(popupState).type === 'stakingManager') {
                     closePopup()
                 }
 
