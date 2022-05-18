@@ -11,7 +11,7 @@
     function onBackClick(): void {
         $appRouter.previous()
     }
-    function onSuccess(_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string): void {
+    function onSuccess(node: INode, _oldNodeUrl: string): void {
         updateNewProfileNetworkConfig(node)
         $appRouter.next()
     }

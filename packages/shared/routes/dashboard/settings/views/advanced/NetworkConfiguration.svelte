@@ -59,7 +59,7 @@
             props: {
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string) => {
+                onSuccess: (node: INode, _oldNodeUrl: string) => {
                     if (node.isPrimary) {
                         networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
                     } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {

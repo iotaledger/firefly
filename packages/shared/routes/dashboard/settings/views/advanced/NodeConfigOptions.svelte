@@ -39,7 +39,7 @@
                 node,
                 nodes: networkConfig.nodes,
                 network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: INode, oldNodeUrl: string) => {
+                onSuccess: (node: INode, oldNodeUrl: string) => {
                     const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
                     if (idx >= 0) {
                         if (node.isPrimary) {

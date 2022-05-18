@@ -26,8 +26,6 @@
 
     let addressError = ''
     let addressWarn = ''
-
-    let isNetworkSwitch = false
     let newNetwork: INetwork
 
     $: nodeUrl, (addressError = '')
@@ -59,7 +57,6 @@
         } else if (id !== network?.id) {
             if ($activeProfile?.isDeveloperProfile || $newProfile?.isDeveloperProfile) {
                 newNetwork = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType, id)
-                isNetworkSwitch = !$newProfile
             } else {
                 addressError = localize('error.network.mismatch', { values: { networkId: id } })
             }
@@ -93,31 +90,29 @@
         }
 
         if (!addressError) {
-            if (!isNetworkSwitch) {
-                const networkStatus = getNetworkStatusFromNodeInfo(nodeInfo?.nodeinfo)
-                const baseToken = nodeInfo?.nodeinfo?.baseToken
-                const protocol = Object.keys(BASE_TOKEN).find(
-                    (key) => BASE_TOKEN[key]?.name === baseToken?.name
-                ) as NetworkProtocol
+            const networkStatus = getNetworkStatusFromNodeInfo(nodeInfo?.nodeinfo)
+            const baseToken = nodeInfo?.nodeinfo?.baseToken
+            const protocol = Object.keys(BASE_TOKEN).find(
+                (key) => BASE_TOKEN[key]?.name === baseToken?.name
+            ) as NetworkProtocol
 
-                if (networkStatus) {
-                    isBusy = false
-                    onSuccess(
-                        false,
-                        {
-                            url: cleanNodeUrl(nodeUrl),
-                            auth: optNodeAuth,
-                            network: getNetwork(
-                                protocol ?? $activeProfile.networkProtocol,
-                                $activeProfile.networkType,
-                                nodeInfo?.nodeinfo?.protocol?.networkName
-                            ),
-                            isPrimary: node?.isPrimary || false,
-                        },
-                        oldNodeUrl
-                    )
-                    closePopup()
-                }
+            if (networkStatus) {
+                isBusy = false
+                onSuccess(
+                    false,
+                    {
+                        url: cleanNodeUrl(nodeUrl),
+                        auth: optNodeAuth,
+                        network: getNetwork(
+                            protocol ?? $activeProfile.networkProtocol,
+                            $activeProfile.networkType,
+                            nodeInfo?.nodeinfo?.protocol?.networkName
+                        ),
+                        isPrimary: node?.isPrimary || false,
+                    },
+                    oldNodeUrl
+                )
+                closePopup()
             }
         }
 
