@@ -94,7 +94,7 @@
             onClick: openStaking,
         },
         {
-            icon: 'policy',
+            icon: 'voting',
             label: 'governance',
             route: DashboardRoute.Governance,
             onClick: openGovernance,

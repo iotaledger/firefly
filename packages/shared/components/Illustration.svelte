@@ -4,6 +4,9 @@
     export let illustration = undefined
     export let width = undefined
     export let height = undefined
+    // when set "background" to true, the illustration will be displayed as a background image of a div
+    // and a numeric height must be defined
+    export let background = false
     export let classes = ''
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -96,14 +99,27 @@
 </script>
 
 {#if selected}
-    <img
-        data-label="illustration"
-        class={classes}
-        width={width || '100%'}
-        height={height || '100%'}
-        src={`assets/illustrations/${selected}`}
-        alt=""
-    />
+    {#if background}
+        <div
+            class={classes}
+            style="--height: {height}px; background-image: url({`assets/illustrations/${selected}`})"
+        />
+    {:else}
+        <img
+            data-label="illustration"
+            class={classes}
+            width={width || '100%'}
+            height={height || '100%'}
+            src={`assets/illustrations/${selected}`}
+            alt=""
+        />
+    {/if}
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}
+
+<style type="text/scss">
+    div {
+        height: var(--height);
+    }
+</style>
