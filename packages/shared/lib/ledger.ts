@@ -101,7 +101,7 @@ export function getLedgerOpenedApp(): Promise<LedgerApp> {
 
 export function promptUserToConnectLedger(
     legacy: boolean = false,
-    onConnected: () => void = () => {},
+    onConnected: () => void | Promise<void> = () => {},
     onCancel: () => void = () => {},
     overridePopup: boolean = false
 ): void {
@@ -109,7 +109,7 @@ export function promptUserToConnectLedger(
         onCancel()
     }
     const _onConnected = () => {
-        onConnected()
+        void onConnected()
     }
     const _onDisconnected = () => {
         if (!get(popupState).active || overridePopup) {

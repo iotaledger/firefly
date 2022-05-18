@@ -48,6 +48,7 @@
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import SendConfirmationPopup from './SendConfirmationPopup.svelte'
     import SendFormPopup from './SendFormPopup.svelte'
+    import ManageAccountPopup from './ManageAccountPopup.svelte'
 
     export let locale: Locale
 
@@ -73,6 +74,7 @@
     $: switch (type) {
         case 'ledgerNotConnected':
         case 'createAccount':
+        case 'manageAccount':
             size = PopupSize.Small
             break
         case 'video':
@@ -134,6 +136,7 @@
         activityDetails: ActivityDetailsPopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
+        manageAccount: ManageAccountPopup,
     }
 
     const onKey = (e) => {

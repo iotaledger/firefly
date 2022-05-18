@@ -42,7 +42,6 @@ export class AppRouter extends Router<AppRoute> {
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Profile
                 } else {
-                    login()
                     nextRoute = AppRoute.Dashboard
                 }
                 break

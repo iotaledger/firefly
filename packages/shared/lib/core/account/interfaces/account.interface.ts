@@ -1,4 +1,5 @@
 import {
+    AccountBalance,
     AccountMeta,
     AccountSyncOptions,
     Address,
@@ -16,13 +17,12 @@ import {
     TransactionReceipt,
     TransferOptions,
 } from '@iota/wallet/out/types'
-import { IAccountBalances } from './account-balances.interface'
 
 export interface IAccount {
     meta: AccountMeta
     collectOutputs(outputIds: string[]): Promise<TransactionReceipt[]>
     getAlias(): string
-    getBalance(): Promise<IAccountBalances>
+    getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string>
     listAddresses(): Promise<Address[]>

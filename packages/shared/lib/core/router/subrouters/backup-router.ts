@@ -1,4 +1,3 @@
-import { createNewAccount } from '@core/account'
 import { updateNewProfile } from '@core/profile'
 import { backup, storeMnemonic } from '@core/profile-manager'
 import { mnemonic, strongholdPassword } from '@lib/app'
@@ -38,7 +37,6 @@ export class BackupRouter extends Subrouter<BackupRoute> {
 
             case BackupRoute.Backup: {
                 await storeMnemonic(get(mnemonic).join(' '))
-                await createNewAccount()
                 const shouldCreateBackup = !event?.skip
                 if (shouldCreateBackup) {
                     const dest = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())

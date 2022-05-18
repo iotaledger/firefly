@@ -10,7 +10,7 @@
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
-    import { activeProfile, resetActiveProfile } from '@core/profile'
+    import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
@@ -118,6 +118,7 @@
                                 //         })
                                 //     },
                                 // })
+                                login()
                                 dispatch('next')
                             })
                         )
