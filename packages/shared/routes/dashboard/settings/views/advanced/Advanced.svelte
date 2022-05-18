@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
+    import { loggedIn, mobile } from 'shared/lib/app'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AdvancedSettings } from '@core/router'
     import {
@@ -33,12 +33,12 @@
 
 <div>
     {#each settings as { component, childRoute, requireLogin, requireLedger }, index}
-        {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile))}
+        {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile)) && !$mobile}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} id={childRoute} />
             </section>
             {#if index < settings.length - 1}
-                <HR classes="pb-5 mt-5 justify-center" />
+                <HR classes="pb-5 mt-5 justify-center hidden md:block" />
             {/if}
         {/if}
     {/each}

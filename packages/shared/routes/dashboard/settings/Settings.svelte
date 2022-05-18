@@ -12,7 +12,7 @@
         $dashboardRouter.previous()
     }
 
-    onDestroy((): void => {
+    onDestroy(() => {
         // When a new locale is loaded the pages are reloaded
         // so don't reset the router in this case
         if ($isLocaleLoaded) {
