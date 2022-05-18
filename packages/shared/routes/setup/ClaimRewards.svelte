@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, RewardClaimList, Text } from 'shared/components'
     import { IAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { getAccounts } from '@core/profile-manager'
     import { AccountMeta } from '@iota/wallet/out/types'
 
@@ -85,17 +86,21 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">Your Shimmer staking rewards</Text>
+        <Text type="h2">
+            {localize('views.claimRewards.title')}
+        </Text>
     </div>
     <div slot="leftpane__content" class="h-full flex flex-col">
         <Text type="p" secondary classes="mb-5">
-            Please check that your Shimmer staking rewards are correct. If not, please use the balance finder.
+            {localize('views.claimRewards.body')}
         </Text>
         <RewardClaimList {accounts} />
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full mb-5" secondary onClick={handleUseBalanceFinderClick}>Use balance finder</Button>
-        <Button classes="w-full" onClick={handleClaimRewardsClick}>Claim rewards</Button>
+        <Button classes="w-full mb-5" secondary onClick={handleUseBalanceFinderClick}
+            >{localize('actions.useBalanceFinder')}</Button
+        >
+        <Button classes="w-full" onClick={handleClaimRewardsClick}>{localize('actions.claimRewards')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />

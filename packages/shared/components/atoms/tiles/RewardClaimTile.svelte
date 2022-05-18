@@ -2,13 +2,15 @@
     import { Icon, Text } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAccount } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+    import { formatBestMatchTokenAmount } from '@core/wallet'
 
     export let account: IAccount
 
     const alias = account?.meta?.alias ?? ''
-    const unclaimedBalance = account?.meta?.index === 0 || account?.meta?.index === 2 ? '12,345.678 SMR' : ''
-    const claimedBalance =
-        account?.meta?.index === 1 || account?.meta?.index === 2 || account?.meta?.index === 3 ? '1,234.567 SMR' : ''
+    const unclaimedBalance = 123456000.789
+    const claimedBalance = 1234000.5678
 </script>
 
 {#if account}
@@ -22,8 +24,9 @@
         <div class="flex flex-col justify-between">
             {#if unclaimedBalance}
                 <div class="flex flex-row justify-end items-center">
-                    <Text type="p" fontWeight={FontWeightText.bold}>{unclaimedBalance.split(' ')[0] ?? ''}</Text>
-                    <Text type="p" fontWeight={FontWeightText.bold}>&nbsp;{unclaimedBalance.split(' ')[1] ?? ''}</Text>
+                    <Text type="p" fontWeight={FontWeightText.bold}
+                        >{formatBestMatchTokenAmount(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text
+                    >
                 </div>
             {/if}
             {#if claimedBalance}
@@ -34,12 +37,13 @@
                         icon="success-check"
                         classes="mr-2 text-white bg-green-500 rounded-full"
                     />
-                    <Text type="p" secondary fontWeight={FontWeightText.bold}>{claimedBalance.split(' ')[0] ?? ''}</Text
-                    >
                     <Text type="p" secondary fontWeight={FontWeightText.bold}
-                        >&nbsp;{claimedBalance.split(' ')[1] ?? ''}</Text
+                        >{localize('general.amountClaimed', {
+                            values: {
+                                amount: formatBestMatchTokenAmount(claimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer]),
+                            },
+                        })}</Text
                     >
-                    <Text type="p" secondary fontWeight={FontWeightText.bold}>&nbsp;claimed</Text>
                 </div>
             {/if}
         </div>
