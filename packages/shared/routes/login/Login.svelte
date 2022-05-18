@@ -4,7 +4,6 @@
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { EnterPin, SelectProfile } from './views/'
-    import { profiles, activeProfileId, login } from '@core/profile'
 
     export let locale: Locale
 

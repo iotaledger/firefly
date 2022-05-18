@@ -27,6 +27,7 @@
         login,
         newProfile,
     } from '@core/profile'
+    import { createNewAccount } from '@core/account'
 
     export let locale: Locale
 
@@ -38,7 +39,7 @@
     let localizedValues = {}
     let logExported = false
 
-    onMount(() => {
+    onMount(async () => {
         if (!wasMigrated) {
             if ($walletSetupType === SetupType.FireflyLedger) {
                 localizedBody = 'fireflyLedgerBody'
@@ -47,9 +48,9 @@
             // When this component mounts, ensure that the profile is persisted in the local storage.
             addNewProfile($newProfile)
             loadPersistedProfileIntoActiveProfile($newProfile.id)
-            login()
-
             newProfile.set(null)
+            await createNewAccount()
+            login()
         } else {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
