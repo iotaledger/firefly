@@ -173,6 +173,10 @@ module.exports = {
                 pink: '#FFF3F8',
                 purple: '#EFF0FE',
             },
+            iota: {
+                bg: '#FFFFFF',
+                highlight: '#000000',
+            },
             shimmer: {
                 bg: '#020F26',
                 highlight: '#17E1D5',

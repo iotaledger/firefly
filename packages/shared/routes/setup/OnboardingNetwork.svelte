@@ -18,7 +18,7 @@
         if (isPrivateNet(network)) {
             return 'gray-500'
         }
-        return network.protocol === NetworkProtocol.Shimmer ? 'shimmer-highlight' : 'black'
+        return `${network.protocol}-highlight`
     }
     function getNetworkIcon(network: INetwork) {
         return isPrivateNet(network) ? 'settings' : network.protocol
