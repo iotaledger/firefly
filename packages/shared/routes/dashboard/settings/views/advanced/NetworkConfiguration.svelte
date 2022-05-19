@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, Drawer, HR, Radio, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { mobile } from 'shared/lib/app'
     import {
