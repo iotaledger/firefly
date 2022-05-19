@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
     import tailwindConfig from 'shared/tailwind.config.js'

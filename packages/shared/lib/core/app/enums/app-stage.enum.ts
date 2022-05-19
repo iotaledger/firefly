@@ -1,4 +1,4 @@
-export enum Stage {
+export enum AppStage {
     ALPHA = 'alpha',
     BETA = 'beta',
     PROD = 'prod',

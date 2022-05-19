@@ -6,8 +6,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { stage } from 'shared/lib/app'
-    import { Stage } from 'shared/lib/typings/stage'
+    import { AppStage, appStage } from '@core/app'
 
     export let locale: Locale
 
@@ -30,7 +29,7 @@
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await getVersionDetails()
-            if (get(stage) === Stage.PROD) {
+            if (get(appStage) === AppStage.PROD) {
                 isPreRelease = false
                 updateCheck()
             }
@@ -52,7 +51,7 @@
             <Text type="h5" highlighted classes="mb-2">
                 {#if isPreRelease}
                     <!-- Capitalize first letter of stage name -->
-                    {`Firefly ${$stage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
+                    {`Firefly ${$appStage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
                 {:else}
                     {locale('popups.version.upToDateTitle')}
                 {/if}

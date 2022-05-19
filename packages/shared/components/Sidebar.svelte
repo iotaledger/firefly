@@ -9,7 +9,7 @@
         PingingBadge,
         NetworkIndicator,
     } from 'shared/components'
-    import { mobile } from '@lib/app'
+    import { mobile } from '@core/app'
     import { getInitials, isRecentDate } from '@lib/helpers'
     import { isStakingPossible } from '@lib/participation'
     import {

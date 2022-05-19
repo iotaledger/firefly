@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { appRouter } from '@core/router'
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { mobile } from '@core/app'
+    import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
     import { Locale } from '@core/i18n'
 

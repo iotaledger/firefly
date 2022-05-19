@@ -7,7 +7,7 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { AppSettings } from '@lib/typings/app'
+import { AppSettings } from '@core/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 

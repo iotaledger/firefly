@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()

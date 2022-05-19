@@ -1,4 +1,4 @@
-export type AppTheme = 'light' | 'dark' | 'system'
+import { AppTheme } from '../enums'
 
 export interface AppSettings {
     deepLinking: boolean

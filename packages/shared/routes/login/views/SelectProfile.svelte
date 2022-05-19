@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos, stage } from 'shared/lib/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { AppStage, appStage } from '@core/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile, updateNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { isAwareOfCrashReporting } from '@lib/appSettings'
+    import { isAwareOfCrashReporting } from '@core/app'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { Stage } from '@lib/typings/stage'
 
     const dispatch = createEventDispatcher()
 
@@ -18,10 +18,10 @@
 
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
-        updateNewProfile({ isDeveloperProfile: $stage !== Stage.PROD })
+        updateNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
     }
 
-    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTos()) {
+    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
             type: 'legalUpdate',
             hideClose: true,

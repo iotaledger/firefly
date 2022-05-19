@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from '@core/profile'

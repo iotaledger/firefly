@@ -1,21 +1,21 @@
 <script lang="typescript">
     import { Button, Checkbox, Text, Link } from 'shared/components'
-    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { lastAcceptedTermsOfService, lastAcceptedPrivacyPolicy } from '@core/app'
     import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import {
-        needsToAcceptLatestTos,
+        needsToAcceptLatestTermsOfService,
         needsToAcceptLatestPrivacyPolicy,
-        TOS_VERSION,
+        TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
-    } from 'shared/lib/app'
+    } from '@core/app'
     import { Platform } from 'shared/lib/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
 
     let checked = false
-    const tos = needsToAcceptLatestTos()
+    const tos = needsToAcceptLatestTermsOfService()
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
     const handleViewTosClick = () => {
@@ -28,7 +28,7 @@
 
     const handleConfirmClick = () => {
         if (tos) {
-            lastAcceptedTos.set(TOS_VERSION)
+            lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         }
         if (privacyPolicy) {
             lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
