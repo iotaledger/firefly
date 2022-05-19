@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Icon, NetworkIndicator, ProfileActionsModal, SidebarTab, Modal, PingingBadge } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { Icon, Modal, NetworkIndicator, ProfileActionsModal, PingingBadge, SidebarTab } from 'shared/components'
     import { getInitials, isRecentDate } from 'shared/lib/helpers'
     import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
     import { isStakingPossible } from 'shared/lib/participation'
