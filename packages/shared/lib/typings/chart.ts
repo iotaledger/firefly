@@ -36,6 +36,7 @@ export enum DashboardChartType {
 export enum WalletChartType {
     HOLDINGS = 'holdings',
     PORTFOLIO = 'portoflio',
+    TOKEN = 'token',
 }
 
 export enum AccountChartType {

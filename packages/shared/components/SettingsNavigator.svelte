@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
 
     export let settings
     export let routes

@@ -3,7 +3,7 @@
     import { mobile } from 'shared/lib/app'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
@@ -84,7 +84,7 @@
                             />
                         </button>
                     {/if}
-                    <div data-label="leftpane-content" class="h-full">
+                    <div data-label="leftpane-content" class="h-full flex flex-col flex-wrap">
                         <div class="mb-5">
                             <slot name="title" />
                         </div>

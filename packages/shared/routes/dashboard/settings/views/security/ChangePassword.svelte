@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
@@ -104,6 +104,7 @@
     }
 </script>
 
+<!-- TODO: improve UX for mobile, 3 step screen -->
 <form id="form-change-password" on:submit={changePassword}>
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>

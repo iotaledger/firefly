@@ -1,19 +1,21 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
-    import { localize } from 'shared/lib/i18n'
+    import { localize } from '@core/i18n'
+    import { Platform } from 'shared/lib/platform'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
+        ExternalRoute,
         GeneralSettings,
         GeneralSettingsNoProfile,
         HelpAndInfo,
         SecuritySettings,
-        SettingsRoutes,
-    } from 'shared/lib/typings/routes'
+        SettingsRoute,
+        settingsRouter,
+    } from '@core/router'
 
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
@@ -28,7 +30,7 @@
     }
 
     function onSettingClick(
-        route: SettingsRoutes,
+        route: SettingsRoute,
         childRoute:
             | SecuritySettings
             | AdvancedSettings
@@ -37,12 +39,28 @@
             | AdvancedSettingsNoProfile
             | HelpAndInfo
     ) {
-        settingsRoute.set(route)
-        settingsChildRoute.set(childRoute)
+        if (route === $settingsRouter.HelpAndInfo && $mobile) {
+            switch (childRoute) {
+                case HelpAndInfo.Documentation:
+                    Platform.openUrl(ExternalRoute.Documentation)
+                    break
+                case HelpAndInfo.Discord:
+                    Platform.openUrl(ExternalRoute.Discord)
+                    break
+                case HelpAndInfo.FAQ:
+                    Platform.openUrl(ExternalRoute.FAQ)
+                    break
+                case HelpAndInfo.ReportAnIssue:
+                    Platform.openUrl(ExternalRoute.FAQ)
+                    break
+            }
+        } else {
+            $settingsRouter.goToChildRoute(route, childRoute)
+        }
     }
 </script>
 
-<div class="h-full w-full flex flex-col">
+<div class="flex flex-col flex-1 md:flex-initial pb-10 md:pb-0 md:h-full md:w-full">
     {#if !$mobile}
         <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
     {/if}
@@ -55,7 +73,7 @@
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.GeneralSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
         />
         <SettingsMenu
             icon="security"
@@ -65,7 +83,7 @@
             activeSettings={$loggedIn ? SecuritySettings : undefined}
             title={localize('views.settings.security.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.Security, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
         />
         <SettingsMenu
             icon="tools"
@@ -75,7 +93,7 @@
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.AdvancedSettings, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
         />
         <SettingsMenu
             icon="info"
@@ -85,7 +103,7 @@
             activeSettings={HelpAndInfo}
             title={localize('views.settings.helpAndInfo.title')}
             description=""
-            onClick={(setting) => onSettingClick(SettingsRoutes.HelpAndInfo, setting)}
+            onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
         />
     </div>
 </div>

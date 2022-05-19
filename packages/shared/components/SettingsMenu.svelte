@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { localize } from 'shared/lib/i18n'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { localize } from '@core/i18n'
 
     export let settings
     export let activeSettings = []
@@ -16,7 +15,11 @@
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">
-    <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    {#if $mobile}
+        <div class="h-6" />
+    {:else}
+        <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    {/if}
     <Text type="h4" classes="mb-2">{title}</Text>
     <Text type="p" classes="mb-4" secondary>{description}</Text>
     {#each Object.values(settings) as setting}

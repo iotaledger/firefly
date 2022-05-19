@@ -8,6 +8,7 @@
         "paths": {
             "@common/*": ["./lib/common/*"],
             "@core/*": ["./lib/core/*"],
+            "@lib/*": ["./lib/*"],
             "@mocks/*": ["./lib/tests/mocks/*"]
         },
         "types": ["jest"]

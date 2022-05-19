@@ -1,11 +1,11 @@
 import { NativeProgress, VersionDetails } from './appUpdater'
 import { ResponseTypes } from './bridge'
 import { Message, UTXOEventData } from './message'
-import { WalletRoutes } from './routes'
+import { AccountRoute } from '@core/router/enums'
 
 export interface EventMap {
     'menu-logout': void
-    'menu-navigate-wallet': WalletRoutes
+    'menu-navigate-wallet': AccountRoute
     'menu-navigate-settings': void
     'menu-check-for-update': void
     'menu-error-log': void
@@ -83,7 +83,7 @@ export enum ErrorType {
     WrongLedgerSeedError = 'WrongLedgerSeedError',
 
     // Dust output
-    DustError = 'DustError',
+    LeavingDustError = 'LeavingDustError',
 }
 
 export enum LedgerErrorType {

@@ -22,7 +22,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { ErrorType } from 'shared/lib/typings/events'
 
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { Network, NetworkConfig } from 'shared/lib/typings/network'
     import { Node } from 'shared/lib/typings/node'
 
@@ -153,7 +153,7 @@
         />
     </form>
 {/if}
-<div class="flex flex-row justify-between space-x-4 w-full px-8">
+<div class="flex flex-row justify-between space-x-4 w-full md:px-8">
     <Button secondary classes="w-1/2" onClick={handleCancelNetworkSwitchClick} disabled={isSwitchingNetwork}>
         {locale('actions.cancel')}
     </Button>

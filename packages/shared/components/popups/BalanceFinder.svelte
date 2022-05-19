@@ -1,23 +1,28 @@
 <script lang="typescript">
-    import { Button, Password, Spinner, Text } from 'shared/components'
+    import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale, localize } from '@core/i18n'
+    import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
+    import { onDestroy } from 'svelte'
 
     export let locale: Locale
 
-    const { balanceOverview } = $wallet
+    const { balanceOverview, accounts } = $wallet
 
-    const addressIndex = 0
+    const startAddressIndex = 0
     const gapLimitIncrement = $isLedgerProfile ? 10 : 25
+    let previousGapLimit = 0
     let currentGapLimit = gapLimitIncrement
+    let previousAccountDiscoveryThreshold = 0
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
     let isBusy = false
+    let hasUsedBalanceFinder = false
 
     async function handleFindBalances() {
         try {
@@ -34,10 +39,12 @@
                 return
             }
 
-            await asyncSyncAccounts(addressIndex, currentGapLimit, accountDiscoveryThreshold, false)
+            await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
 
+            previousGapLimit = currentGapLimit
             currentGapLimit += gapLimitIncrement
-            accountDiscoveryThreshold++
+            previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
+            hasUsedBalanceFinder = true
         } catch (err) {
             error = locale(err.error)
 
@@ -57,44 +64,76 @@
     function handleCancelClick() {
         closePopup()
     }
+
+    onDestroy(() => {
+        if (hasUsedBalanceFinder) {
+            cacheAllStakingPeriods(StakingAirdrop.Assembly)
+            cacheAllStakingPeriods(StakingAirdrop.Shimmer)
+        }
+    })
 </script>
 
-<Text type="h4" classes="mb-6">{locale('popups.balanceFinder.title')}</Text>
-<Text type="p" secondary classes="mb-5">{locale('popups.balanceFinder.body')}</Text>
-<div class="flex w-full flex-row flex-wrap">
+<Text type="h4" classes="mb-2">{locale('popups.balanceFinder.title')}</Text>
+<Text type="p" secondary classes="mb-4">{locale('popups.balanceFinder.body')}</Text>
+
+<div class="flex w-full flex-row flex-wrap mb-4">
+    <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
+        <Text type="p">{locale('popups.balanceFinder.accountsSearched')}</Text>
+        <Text type="p" highlighted>{previousAccountDiscoveryThreshold}</Text>
+    </div>
+    <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
+        <Text type="p">{locale('popups.balanceFinder.addressesSearched')}</Text>
+        <Text type="p" highlighted>{previousGapLimit}</Text>
+    </div>
+    <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
+        <Text type="p">{locale('popups.balanceFinder.accountsFound')}</Text>
+        <Text type="p" highlighted>{$accounts.length}</Text>
+    </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{locale('popups.balanceFinder.totalWalletBalance')}</Text>
-        <Text type="p" highlighted>{$balanceOverview.balance}</Text>
         <Text type="p" secondary>{$balanceOverview.balanceFiat}</Text>
+        <Text type="p" highlighted>{$balanceOverview.balance}</Text>
     </div>
-    <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
-        {#if $isSoftwareProfile && $isStrongholdLocked}
-            <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
-            <Password
-                {error}
-                classes="w-full mb-2"
-                bind:value={password}
-                showRevealToggle
-                {locale}
-                placeholder={locale('general.password')}
-                autofocus
-                submitHandler={() => handleFindBalances()}
-                disabled={isBusy}
-            />
-        {/if}
+</div>
+
+{#if $isSoftwareProfile && $isStrongholdLocked}
+    <div class="flex w-full flex-row flex-wrap mb-4 justify-between">
+        <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
+        <Password
+            {error}
+            classes="w-full mb-2"
+            bind:value={password}
+            showRevealToggle
+            {locale}
+            placeholder={locale('general.password')}
+            autofocus
+            submitHandler={() => handleFindBalances()}
+            disabled={isBusy}
+        />
     </div>
-    <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
-            {locale('actions.done')}
-        </Button>
-        <Button
-            classes="w-full"
-            onClick={handleFindBalances}
-            disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
-        >
-            {#if isBusy}
-                <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
-            {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}
-        </Button>
-    </div>
+{/if}
+
+{#if hasUsedBalanceFinder}
+    <TextHint
+        classes="p-4 w-full rounded-2xl bg-blue-50 dark:bg-gray-800 mb-4"
+        icon="info"
+        iconClasses="fill-current text-blue-500 dark:text-blue-500"
+        hint={locale('popups.balanceFinder.searchAgainHint')}
+        hintClasses="text-gray-500 dark:text-gray-500"
+    />
+{/if}
+
+<div class="flex flex-row flex-nowrap w-full space-x-4">
+    <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
+        {locale('actions.done')}
+    </Button>
+    <Button
+        classes="w-full"
+        onClick={handleFindBalances}
+        disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
+    >
+        {#if isBusy}
+            <Spinner busy={true} message={locale('actions.searching')} classes="justify-center" />
+        {:else}{locale(`actions.${hasUsedBalanceFinder ? 'searchAgain' : 'searchBalances'}`)}{/if}
+    </Button>
 </div>

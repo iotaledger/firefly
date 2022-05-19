@@ -1628,7 +1628,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/wallet.rs?rev=dd83f8fb2061899f982dcf0c419cece49411fa7b#dd83f8fb2061899f982dcf0c419cece49411fa7b"
+source = "git+https://github.com/iotaledger/wallet.rs?rev=a084002da15c072f0f7256c74403b05dad3c7d8b#a084002da15c072f0f7256c74403b05dad3c7d8b"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1829,7 +1829,7 @@ dependencies = [
 [[package]]
 name = "librocksdb-sys"
 version = "6.20.3"
-source = "git+https://github.com/rust-rocksdb/rust-rocksdb?rev=86d983987e7cafce90ad8a147b0b325e6007eba6#86d983987e7cafce90ad8a147b0b325e6007eba6"
+source = "git+https://github.com/iotaledger/rust-rocksdb?rev=89eeb926c50288666b85e4f491df912040fcdbaf#89eeb926c50288666b85e4f491df912040fcdbaf"
 dependencies = [
  "bindgen",
  "bzip2-sys",
@@ -2636,7 +2636,7 @@ dependencies = [
 [[package]]
 name = "rocksdb"
 version = "0.17.0"
-source = "git+https://github.com/rust-rocksdb/rust-rocksdb?rev=86d983987e7cafce90ad8a147b0b325e6007eba6#86d983987e7cafce90ad8a147b0b325e6007eba6"
+source = "git+https://github.com/iotaledger/rust-rocksdb?rev=89eeb926c50288666b85e4f491df912040fcdbaf#89eeb926c50288666b85e4f491df912040fcdbaf"
 dependencies = [
  "libc",
  "librocksdb-sys",

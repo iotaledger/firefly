@@ -3,10 +3,10 @@
     import { AccountColors } from 'shared/lib/wallet'
     import { isBright } from 'shared/lib/helpers'
     import { clickOutside } from 'shared/lib/actions'
+    import { localize } from '@core/i18n'
 
     export let active
-    export let locale
-    export let title = locale('views.picker.color.title')
+    export let title = localize('views.picker.color.title')
     export let classes = ''
 
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
@@ -92,7 +92,7 @@
     {#if showTooltip}
         <div use:clickOutside on:clickOutside={toggleTooltip}>
             <Tooltip anchor={tooltipAnchor} position="top">
-                <Text type="p">{locale('views.picker.color.hexCode')}</Text>
+                <Text type="p">{localize('views.picker.color.hexCode')}</Text>
                 <input
                     type="text"
                     placeholder="#"

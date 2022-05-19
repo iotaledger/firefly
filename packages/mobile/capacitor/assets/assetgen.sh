@@ -69,18 +69,25 @@ else
   ## Launch screen
   ### Add margin for center logo
   add_margin="-background #ffffff -gravity center -scale 256x256 -extent 660x2420"
-  
+
+  ### Add Android options to create a 9.png
+  border_color="black"
+  topside_left="line 1,0 101,0"
+  topside_right="line 500,0 600,0"
+  leftside_top="line 0,1 0,501"
+  leftside_bottom="line 0,1100 0,1600"
+  android_opt="-gravity center -extent 600x1600 -matte -bordercolor none -border 1 -fill $border_color"
+
   ## iOS
   convert "$base" $opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732.png"
   convert "$base" $opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-1.png"
   convert "$base" $opts -resize 2732x2732!   $add_margin  "$dest_ios_splash/splash-2732x2732-2.png"
   
   ## Android
-  convert "$base" $opts -resize 480x320!   $add_margin  "$dest_android/drawable/splash.png"
-  convert "$base" $opts -resize 320x480!   $add_margin  "$dest_android/drawable-port-mdpi/splash.png"
-  convert "$base" $opts -resize 480x800!   $add_margin  "$dest_android/drawable-port-hdpi/splash.png"
-  convert "$base" $opts -resize 720x1200!  $add_margin  "$dest_android/drawable-port-xhdpi/splash.png"
-  convert "$base" $opts -resize 720x1280!  $add_margin  "$dest_android/drawable-port-xxhdpi/splash.png"
-  convert "$base" $opts -resize 720x1600!  $add_margin  "$dest_android/drawable-port-xxhdpi/splash.png"
-  convert "$base" $opts -resize 1280x1920! $add_margin  "$dest_android/drawable-port-xxxhdpi/splash.png"
+  convert "$base" -resize 96x96! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable/splash.9.png"
+  convert "$base" -resize 96x96! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-mdpi/splash.9.png"
+  convert "$base" -resize 256x256! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-hdpi/splash.9.png"
+  convert "$base" -resize 256x256! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xhdpi/splash.9.png"
+  convert "$base" -resize 256x256! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxhdpi/splash.9.png"
+  convert "$base" -resize 512x512! $android_opt -draw "$leftside_top" -draw "$leftside_bottom" -draw "$topside_left" -draw "$topside_right" "$dest_android/drawable-port-xxxhdpi/splash.9.png"
 fi

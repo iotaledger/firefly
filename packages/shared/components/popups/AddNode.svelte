@@ -10,7 +10,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { updateNetworkStatus } from '../../lib/networkStatus'
 
-    import { Locale } from 'shared/lib/typings/i18n'
+    import { Locale } from '@core/i18n'
     import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
 
@@ -183,7 +183,7 @@
             classes="mt-4 mb-8"
         />
     </form>
-    <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
+    <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}
         </Button>
