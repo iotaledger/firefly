@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Icon, StakingAssetTile, Text } from 'shared/components'
+    import { ButtonTile, Icon, StakingAssetTile, Text } from 'shared/components'
+    import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
     import { isBright } from '@lib/helpers'
 
@@ -15,6 +16,18 @@
 {#if isStakingAsset}
     <StakingAssetTile {asset} />
 {:else}
+    <ButtonTile
+        icon={asset?.metadata.name?.toLocaleLowerCase()}
+        iconColor={assetIconColor}
+        iconBackgroundColor={asset?.metadata?.primaryColor}
+        iconLabel={asset?.metadata.name}
+        iconLabelFontWeight={FontWeightText.semibold}
+        iconSubLabel={asset?.fiatPrice}
+        tileText={formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}
+        tileSubText={`≈ ${asset?.fiatBalance}`}
+        onClick={handleTileClick}
+    />
+
     <button
         style="--asset-color: {asset?.metadata?.primaryColor}"
         class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl"
