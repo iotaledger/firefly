@@ -8,6 +8,7 @@ export interface IProfileManager {
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse>
     createAccount(account: CreateAccountPayload): Promise<IAccount>
     deleteStorage(): Promise<void>
+    destroy(): void
     setStrongholdPassword(password: string): Promise<void>
     generateMnemonic(): Promise<string>
     storeMnemonic(mnemonic: string): Promise<void>

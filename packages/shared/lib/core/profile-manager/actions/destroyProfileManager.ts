@@ -1,6 +1,8 @@
+import { get } from 'svelte/store'
 import { profileManager } from '../store'
 
 export const destroyProfileManager = (): void => {
-    // TODO: destroy manager properly with api call?
+    const manager = get(profileManager)
+    manager.destroy()
     profileManager.set(null)
 }
