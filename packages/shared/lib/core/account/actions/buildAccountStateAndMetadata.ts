@@ -10,6 +10,7 @@ export async function buildAccountStateAndMetadata(
         id: account.meta.index.toString(),
         name: account.meta.alias,
         color: color || getRandomAccountColor(),
+        hidden: false,
     }
     const accountState = await buildAccountState(account, metadata)
     return [accountState, metadata]

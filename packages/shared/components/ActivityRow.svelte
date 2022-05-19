@@ -15,7 +15,7 @@
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
 
     export let timestamp
     export let confirmed
@@ -51,7 +51,7 @@
             return formatUnitBestMatch(balance, true, 3)
         }
         if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $activeAccounts), true, 3)
         }
 
         return `${

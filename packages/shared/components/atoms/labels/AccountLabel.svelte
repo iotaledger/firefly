@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex flex row items-center space-x-3">
-    <div class="circle" style="--account-color: {account.color};" />
+    <div class="circle" style="--account-color: {account?.color};" />
     <Text type="h5" fontSize="base" classes={selected ? '' : 'opacity-50'} fontWeight={FontWeightText.medium}
         >{account?.name}</Text
     >

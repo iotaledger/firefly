@@ -1,27 +1,27 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { get, Readable } from 'svelte/store'
-    import { HR, Icon, Modal, Text } from 'shared/components'
+    import { selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import {
+        activeProfile,
+        activeAccounts,
+        updateActiveAccountMetadata,
+        updateActiveProfile,
+        visibleActiveAccounts,
+    } from '@core/profile'
+    import { resetWalletRoute } from '@core/router'
+    import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
-    import { accountRouter, resetWalletRoute } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
-    import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { activeProfile, updateActiveProfile } from '@core/profile'
-    import { selectedAccount, setSelectedAccount, IAccountState } from '@core/account'
+    import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
 
     export let modal: Modal
 
-    const { accounts } = $activeProfile
-
-    const viewableAccounts = getContext<Readable<IAccountState[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     const hidden = hiddenAccounts.includes($selectedAccount?.id)
     const canDelete =
-        $selectedAccount.meta.index === $accounts?.length - 1 &&
-        $selectedAccount?.balances.total === 0 &&
+        $selectedAccount.meta.index === $activeAccounts?.length - 1 &&
+        Number($selectedAccount?.balances.total) === 0 &&
         $selectedAccount.messages?.length === 0
 
     const handleCustomiseAccountClick = () => {
@@ -41,16 +41,13 @@
             type: 'hideAccount',
             props: {
                 account: selectedAccount,
-                hasMultipleAccounts: $viewableAccounts?.length > 1,
+                hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
                 hideAccount: (id: string) => {
-                    if (!hiddenAccounts.includes(id)) {
-                        hiddenAccounts.push(id)
-                        updateActiveProfile({ hiddenAccounts })
-                    }
+                    updateActiveAccountMetadata(id, { hidden: true })
                     resetWalletRoute()
                     const nextSelectedAccount =
-                        $viewableAccounts[$selectedAccount?.meta.index] ??
-                        $viewableAccounts[$viewableAccounts?.length - 1]
+                        $visibleActiveAccounts[$selectedAccount?.meta.index] ??
+                        $visibleActiveAccounts[$visibleActiveAccounts?.length - 1]
                     setSelectedAccount(nextSelectedAccount?.id)
                 },
             },
@@ -63,15 +60,15 @@
             type: 'deleteAccount',
             props: {
                 account: selectedAccount,
-                hasMultipleAccounts: $viewableAccounts?.length > 1,
+                hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
                 deleteAccount: async (id: string) => {
-                    await asyncRemoveWalletAccount(get(selectedAccount).id)
+                    await asyncRemoveWalletAccount($selectedAccount?.id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
                         updateActiveProfile({ hiddenAccounts: hiddenAccounts })
                     }
-                    setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
+                    setSelectedAccount($visibleActiveAccounts?.[0]?.id ?? null)
                     resetWalletRoute()
                 },
             },
@@ -80,11 +77,7 @@
     }
 
     const handleShowAccountClick = () => {
-        const idx = hiddenAccounts.indexOf($selectedAccount?.id)
-        if (idx >= 0) {
-            hiddenAccounts.splice(idx, 1)
-            updateActiveProfile({ hiddenAccounts: hiddenAccounts })
-        }
+        updateActiveAccountMetadata($selectedAccount.id, { hidden: false })
         resetWalletRoute()
     }
 </script>

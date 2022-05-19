@@ -9,7 +9,7 @@
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
     import { AccountMessage } from '@lib/typings/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
 
     export let message: AccountMessage & { balance?: number }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
@@ -47,7 +47,7 @@
         if (cachedMigrationTx) {
             value = balance
         } else if (milestonePayload) {
-            value = getMilestoneMessageValue(milestonePayload, $accounts)
+            value = getMilestoneMessageValue(milestonePayload, $activeAccounts)
         } else if (transactionPayload) {
             value = transactionPayload.data.essence.data.value
         }

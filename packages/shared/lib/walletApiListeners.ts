@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { activeProfile } from '@core/profile'
+import { activeAccounts, activeProfile } from '@core/profile'
 import { getAccounts } from '@core/profile-manager'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
@@ -50,7 +50,7 @@ export function initialiseListeners(): void {
         onSuccess(response) {
             const { balanceOverview, accounts } = get(activeProfile)
             const { accountId, message } = response.payload
-            const account = get(accounts).find((account) => account.id === accountId)
+            const account = get(activeAccounts).find((account) => account.id === accountId)
             if (!account || !message) return
 
             if (message.payload.type === 'Transaction') {
@@ -130,14 +130,14 @@ export function initialiseListeners(): void {
 
                 // Are we tracking an internal transfer for this message id
                 if (transfers[message.id]) {
-                    account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
-                    account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
+                    account1 = get(activeAccounts).find((account) => account.id === transfers[message.id].from)
+                    account2 = get(activeAccounts).find((account) => account.id === transfers[message.id].to)
                     internalTransfersInProgress.update((transfers) => {
                         delete transfers[message.id]
                         return transfers
                     })
                 } else {
-                    account1 = get(accounts).find((account) => account.id === response.payload.accountId)
+                    account1 = get(activeAccounts).find((account) => account.id === response.payload.accountId)
                 }
 
                 // If this is a confirmation of a regular transfer update the balance overview
@@ -376,7 +376,7 @@ function updateAllMessagesState(
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
         const { accounts } = get(activeProfile)
-        const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
+        const account = get(activeAccounts).find((_account) => _account.id === pendingParticipation.accountId)
 
         showAppNotification({
             type: 'info',

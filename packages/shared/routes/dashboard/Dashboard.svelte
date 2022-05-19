@@ -10,10 +10,17 @@
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, logout, activeProfile, saveActiveProfile, updateActiveProfile } from '@core/profile'
+    import {
+        isLedgerProfile,
+        logout,
+        activeProfile,
+        saveActiveProfile,
+        updateActiveProfile,
+        activeAccounts,
+    } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { localize } from '@core/i18n'
-    import { selectedAccountId, setSelectedAccount } from '@core/account'
+    import { selectedAccountId } from '@core/account'
     import TopNavigation from './TopNavigation.svelte'
     import { IAccountState } from '@core/account'
 
@@ -60,14 +67,14 @@
     } */
 
     const viewableAccounts: Readable<IAccountState[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
+        [activeProfile, activeAccounts],
+        ([$activeProfile, $activeAccounts]) => {
             if (!$activeProfile) {
                 return []
             }
 
             if ($activeProfile?.settings?.showHiddenAccounts) {
-                const sortedAccounts = $accounts.sort((a, b) => a.meta.index - b.meta.index)
+                const sortedAccounts = $activeAccounts.sort((a, b) => a.meta.index - b.meta.index)
 
                 // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
                 // This account will get re-used if someone creates a new one
@@ -83,21 +90,21 @@
                 }
                 return sortedAccounts
             }
-            return $accounts
-                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.meta.index - b.meta.index)
+            return $activeAccounts
+                ?.filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
+                ?.sort((a, b) => a.meta.index - b.meta.index)
         }
     )
 
     const liveAccounts: Readable<IAccountState[]> = derived(
         [activeProfile, accounts],
-        ([$activeProfile, $accounts]) => {
+        ([$activeProfile, $activeAccounts]) => {
             if (!$activeProfile) {
                 return []
             }
-            return $accounts
-                .filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
-                .sort((a, b) => a.meta.index - b.meta.index)
+            return $activeAccounts
+                ?.filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
+                ?.sort((a, b) => a.meta.index - b.meta.index)
         }
     )
 

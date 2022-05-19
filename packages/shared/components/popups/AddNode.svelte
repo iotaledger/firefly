@@ -6,7 +6,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo } from 'shared/lib/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
 
     export let node: INode = { url: '', isPrimary: false }
@@ -77,7 +77,11 @@
                 cleanNodeFormData()
 
                 if (!addressError) {
-                    nodeInfo = await asyncGetNodeInfo($accounts[0].id, cleanNodeUrl(nodeUrl), cleanAuth(optNodeAuth))
+                    nodeInfo = await asyncGetNodeInfo(
+                        $activeAccounts[0].id,
+                        cleanNodeUrl(nodeUrl),
+                        cleanAuth(optNodeAuth)
+                    )
 
                     checkNetworkId(nodeInfo?.nodeinfo?.networkId)
                 }

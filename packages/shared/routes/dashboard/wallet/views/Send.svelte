@@ -22,7 +22,7 @@
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeAccounts, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { accountRouter } from '@core/router'
     import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
@@ -358,7 +358,7 @@
             let accountAlias = internal ? to?.getAlias() : undefined
 
             if (!internal) {
-                for (const acc of $accounts) {
+                for (const acc of $activeAccounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
                         accountAlias = acc.getAlias()

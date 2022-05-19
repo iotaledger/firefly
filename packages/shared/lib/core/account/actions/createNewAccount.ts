@@ -1,6 +1,11 @@
 import { localize } from '@core/i18n'
 import { COIN_TYPE } from '@core/network'
-import { activeProfile, addAccountMetadataToActiveProfile, addAccountToActiveProfile } from '@core/profile'
+import {
+    activeAccounts,
+    activeProfile,
+    addAccountMetadataToActiveProfile,
+    addAccountToActiveProfile,
+} from '@core/profile'
 import { createStardustAccount, getAccount } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { IAccountState } from '../interfaces'
@@ -10,7 +15,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
     const { accounts, networkProtocol } = get(activeProfile)
     try {
         const createdAccount = await createStardustAccount({
-            alias: name || `${localize('general.account')} ${(get(accounts)?.length ?? 0) + 1}`,
+            alias: name || `${localize('general.account')} ${(get(activeAccounts)?.length ?? 0) + 1}`,
             coinType: COIN_TYPE[networkProtocol],
         })
         const account = await getAccount(createdAccount.meta.index)

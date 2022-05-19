@@ -6,7 +6,8 @@ import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { resetDashboardState } from '../unknown'
 import { clearPollNetworkInterval } from '@core/network'
-import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile, activeAccounts } from '@core/profile'
+import { resetSelectedAccount } from '@core/account'
 
 /**
  * Logout from active profile
@@ -33,6 +34,8 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         clearSendParams()
         closePopup(true)
         loggedIn.set(false)
+        resetSelectedAccount()
+        activeAccounts.set(null)
         if (clearActiveProfile) {
             resetActiveProfile()
         }

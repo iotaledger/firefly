@@ -1,17 +1,16 @@
 <script lang="typescript">
-    import { IAccountState } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, visibleActiveAccounts } from '@core/profile'
+    import { IAccountState } from '@core/account'
     import { formatBestMatchTokenAmount } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AccountSwitcherMenuItem } from 'shared/components/molecules'
     import { HR, Icon, Modal, Text } from 'shared/components'
 
-    export let accounts: IAccountState[] = []
     export let modal: Modal
 
-    $: totalBalance = calculateTotalBalanceForViewableAccounts(accounts)
+    $: totalBalance = calculateTotalBalanceForViewableAccounts($visibleActiveAccounts)
 
     function calculateTotalBalanceForViewableAccounts(accounts: IAccountState[]): number {
         return accounts.reduce((acc, account) => (acc += Number(account.balances.total)), 0)
@@ -26,8 +25,8 @@
 <Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '30px', left: '50%' }}>
     <div class="p-4">
         <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
-            {#each accounts as account}
-                <AccountSwitcherMenuItem {account} onSuccess={() => modal?.close()} />
+            {#each $visibleActiveAccounts as account}
+                <AccountSwitcherMenuItem {account} onClick={() => modal?.close()} />
             {/each}
         </div>
     </div>

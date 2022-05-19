@@ -1,6 +1,13 @@
 import { IAccount, IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { activeProfile, IBalanceOverview, isLedgerProfile, ProfileType, updateActiveProfile } from '@core/profile'
+import {
+    activeAccounts,
+    activeProfile,
+    IBalanceOverview,
+    isLedgerProfile,
+    ProfileType,
+    updateActiveProfile,
+} from '@core/profile'
 import { generateMnemonic, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
@@ -496,7 +503,7 @@ export const refreshBalanceOverview = (): void => {
 export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<void> {
     const { accounts } = get(activeProfile)
 
-    const existingAccountIds = get(accounts).map((account) => account.id)
+    const existingAccountIds = get(activeAccounts).map((account) => account.id)
 
     const { newAccounts, existingAccounts } = syncedAccounts.reduce(
         (acc, syncedAccount: SyncedAccount) => {
@@ -511,7 +518,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
         { newAccounts: [], existingAccounts: [] }
     )
 
-    const updatedStoredAccounts = get(accounts).map((storedAccount) => {
+    const updatedStoredAccounts = get(activeAccounts).map((storedAccount) => {
         const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
 
         // Update deposit address

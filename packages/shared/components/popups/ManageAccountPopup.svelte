@@ -2,7 +2,6 @@
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { getColor } from 'shared/lib/profile'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'

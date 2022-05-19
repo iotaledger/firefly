@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { activeProfile } from '@core/profile'
+import { activeAccounts, activeProfile } from '@core/profile'
 import { getTrimmedLength } from '@lib/helpers'
 import { get } from 'svelte/store'
 import { MAX_ACCOUNT_NAME_LENGTH } from '../constants'
@@ -21,7 +21,7 @@ export function validateAccountName(
             )
         )
     }
-    if (validateDuplicate && get(accounts)?.find((existingAccount) => existingAccount.name === name)) {
+    if (validateDuplicate && get(activeAccounts)?.find((existingAccount) => existingAccount.name === name)) {
         return Promise.reject(new Error(localize('error.account.duplicate')))
     }
     return Promise.resolve()

@@ -12,7 +12,7 @@
     import { AccountLabel } from 'shared/components/atoms/'
 
     export let account: IAccountState
-    export let onSuccess: () => unknown
+    export let onClick: () => unknown
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
@@ -24,7 +24,7 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
-            onSuccess()
+            onClick && onClick()
         }
     }
 
