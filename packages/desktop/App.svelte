@@ -13,7 +13,7 @@
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { AppStage, appStage } from '@core/app'
     import { appSettings, initAppSettings } from '@core/app'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import { setAppVersionDetails, pollCheckForAppUpdate, versionDetails } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
@@ -90,8 +90,8 @@
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
         if (!devMode && get(appStage) === AppStage.PROD) {
-            await getVersionDetails()
-            pollVersion()
+            await setAppVersionDetails()
+            pollCheckForAppUpdate()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)

@@ -1,4 +1,3 @@
-import { Platform } from 'shared/lib/platform'
 import { localize } from '@core/i18n'
 import {
     NOTIFICATION_TIMEOUT_NEVER,
@@ -6,53 +5,16 @@ import {
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from 'shared/lib/notifications'
-import { NotificationData } from 'shared/lib/typings/notification'
-import { writable } from 'svelte/store'
-import { NativeProgress, VersionDetails } from './typings/appUpdater'
+} from '@lib/notifications'
+import { NotificationData } from '@lib/typings/notification'
+import { Platform } from '@lib/platform'
 
-const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
+import { installAppUpdate } from '../../utils'
+import { updateBusy, updateComplete, updateError, updateMinutesRemaining, updateProgress } from '../../stores'
+import { cancelAppUpdateDownload } from './cancelAppUpdateDownload'
 
-export const versionDetails = writable<VersionDetails>({
-    upToDate: true,
-    currentVersion: '',
-    newVersion: '',
-    newVersionReleaseDate: new Date(),
-    changelog: '',
-})
-
-export const updateProgress = writable<number>(0)
-export const updateMinutesRemaining = writable<number>(-1)
-export const updateBusy = writable<boolean>(false)
-export const updateComplete = writable<boolean>(false)
-export const updateError = writable<boolean>(false)
-
-Platform.onEvent('version-details', (nativeVersionDetails) => {
-    versionDetails.set(nativeVersionDetails)
-})
-
-Platform.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
-    updateProgress.set(nativeVersionProgress.percent)
-
-    const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total
-    if (nativeVersionProgress.bytesPerSecond > 0) {
-        updateMinutesRemaining.set(bytesRemaining / nativeVersionProgress.bytesPerSecond / 60)
-    }
-})
-
-Platform.onEvent('version-complete', () => {
-    updateBusy.set(false)
-    updateError.set(false)
-    updateComplete.set(true)
-    updateMinutesRemaining.set(0)
-})
-
-Platform.onEvent('version-error', (nativeVersionError) => {
-    console.error(nativeVersionError)
-    updateError.set(true)
-})
-
-export function updateDownload(): void {
+// TODO: Look for `appUpdateDownload` throughout the project
+export function downloadAppUpdate(): void {
     updateProgress.set(0)
     updateMinutesRemaining.set(-1)
     updateBusy.set(true)
@@ -81,7 +43,7 @@ export function updateDownload(): void {
             {
                 label: localize('actions.cancel'),
                 callback: () => {
-                    updateCancel()
+                    cancelAppUpdateDownload()
                     cleanup()
                 },
             },
@@ -124,7 +86,7 @@ export function updateDownload(): void {
                         label: localize('actions.restartNow'),
                         callback: () => {
                             cleanup()
-                            updateInstall()
+                            installAppUpdate()
                         },
                         isPrimary: true,
                     },
@@ -155,32 +117,5 @@ export function updateDownload(): void {
         }
     })
 
-    void Platform.updateDownload()
-}
-
-export function updateCancel(): void {
-    void Platform.updateCancel()
-
-    updateProgress.set(0)
-    updateBusy.set(false)
-    updateComplete.set(false)
-    updateError.set(false)
-    updateMinutesRemaining.set(-1)
-}
-
-export function updateInstall(): void {
-    void Platform.updateInstall()
-}
-
-export function updateCheck(): void {
-    void Platform.updateCheck()
-}
-
-export async function getVersionDetails(): Promise<void> {
-    const verDetails = await Platform.getVersionDetails()
-    versionDetails.set(verDetails)
-}
-
-export function pollVersion(): void {
-    setInterval(() => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
+    void Platform.downloadAppUpdate()
 }

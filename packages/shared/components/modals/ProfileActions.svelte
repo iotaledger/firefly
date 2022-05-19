@@ -10,7 +10,7 @@
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
-    import { versionDetails } from 'shared/lib/appUpdater'
+    import { versionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
 
     export let modal: Modal

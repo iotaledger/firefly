@@ -1,7 +1,7 @@
+import { AppSettings, AppVersionDetails } from '@core/app'
+
 import { IPlatform } from '../../typings/platform'
-import { VersionDetails } from '../../typings/appUpdater'
 import { EventMap } from '../../typings/events'
-import { AppSettings } from '../../typings/app'
 import { Error } from '../../typings/error'
 
 const Platform: IPlatform = {
@@ -38,7 +38,7 @@ const Platform: IPlatform = {
     getUserDataPath(): Promise<string> {
         return Promise.resolve('')
     },
-    getVersionDetails(): Promise<VersionDetails> {
+    getAppVersionDetails(): Promise<AppVersionDetails> {
         return Promise.resolve(undefined)
     },
     hookErrorLogger(logger: (error: Error) => void): void {},
@@ -75,16 +75,16 @@ const Platform: IPlatform = {
     updateAppSettings(settings: Partial<AppSettings>): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateCancel(): Promise<void> {
+    cancelAppUpdateDownload(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateCheck(): Promise<void> {
+    checkForAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateDownload(): Promise<void> {
+    downloadAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateInstall(): Promise<void> {
+    installAppUpdate(): Promise<void> {
         return Promise.resolve(undefined)
     },
     updateMenu(attribute: string, value: unknown): void {},

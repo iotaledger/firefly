@@ -1,5 +1,7 @@
 export * from './app-stage.store'
 export * from './app-settings.store'
+export * from './app-update.store'
+export * from './app-version-details.store'
 export * from './crash-reporting.store'
 export * from './mobile.store'
 export * from './privacy-policy.store'

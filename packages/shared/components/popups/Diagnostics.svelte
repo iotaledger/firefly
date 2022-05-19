@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { appSettings } from '@core/app'
-    import { versionDetails } from 'shared/lib/appUpdater'
+    import { versionDetails } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Logo, Text } from 'shared/components'
-    import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
+    import { setAppVersionDetails, updateBusy, checkForAppUpdate, downloadAppUpdate, versionDetails } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { formatDate, Locale } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
@@ -15,7 +15,7 @@
 
     function handleDownload() {
         if (hasAutoUpdate) {
-            updateDownload()
+            downloadAppUpdate()
         } else {
             Platform.openUrl('https://firefly.iota.org')
         }
@@ -28,10 +28,10 @@
     onMount(async () => {
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
-            await getVersionDetails()
+            await setAppVersionDetails()
             if (get(appStage) === AppStage.PROD) {
                 isPreRelease = false
-                updateCheck()
+                checkForAppUpdate()
             }
         }
         const os = await Platform.getOS()

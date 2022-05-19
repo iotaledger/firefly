@@ -30,7 +30,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
-    import { versionDetails } from '@lib/appUpdater'
+    import { versionDetails } from '@core/app'
     import { get } from 'svelte/store'
 
     let profileModal: Modal

@@ -1,4 +1,4 @@
-import { getOrInitWindow, updateVersionDetails } from '../main'
+import { getOrInitWindow, updateAppVersionDetails } from '../main'
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
 const electronLog = require('electron-log')
@@ -34,7 +34,7 @@ export function initAutoUpdate() {
             changelog: releaseNotes,
         }
 
-        updateVersionDetails(versionDetails)
+        updateAppVersionDetails(versionDetails)
     })
     autoUpdater.on('download-progress', (progressObj) => {
         getOrInitWindow('main').webContents.send('version-progress', progressObj)
