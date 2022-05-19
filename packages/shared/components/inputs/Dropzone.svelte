@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
     import { Locale } from '@core/i18n'
+    import { mobile } from 'shared/lib/app'
 
     export let locale: Locale = undefined
     export let onDrop = (event?: Event): void => {}
@@ -48,12 +49,14 @@
                     10.0296C36.4827 4.15025 30.726 0 24 0C15.1634 0 8 7.16344 8 16L8.00009 16.0549C3.5001 16.5523 0 20.3674 0 25Z"
                 />
             </svg>
-            <input
-                class="absolute opacity-0 w-full h-full"
-                type="file"
-                on:change={onDrop}
-                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
-            />
+            {#if !$mobile}
+                <input
+                    class="absolute opacity-0 w-full h-full"
+                    type="file"
+                    on:change={onDrop}
+                    accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
+                />
+            {/if}
             <Text type="h4">{locale('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
             <Button secondary onClick={onDrop}>{locale('actions.chooseFile')}</Button>
