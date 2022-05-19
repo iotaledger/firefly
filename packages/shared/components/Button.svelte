@@ -25,6 +25,7 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
     export let iconOnly = false
+    export let unstyled = false
 
     export let onClick = (): void | string => ''
 
@@ -133,7 +134,7 @@
 {/if}
 
 <style type="text/scss">
-    button {
+    button:not(.unstyled) {
         @apply bg-blue-500;
         min-width: 100px;
         span {
