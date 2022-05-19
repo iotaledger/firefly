@@ -82,7 +82,7 @@
             {allowedExtensions}
             onDrop={$mobile ? handleFileSelectMobile : handleFileSelect}
             bind:dropping
-            extentionsLabel={locale('actions.importExtentions')}
+            extensionsLabel={locale('actions.importExtentions')}
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">

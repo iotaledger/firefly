@@ -5,7 +5,7 @@
 
     export let locale: Locale = undefined
     export let onDrop = (event?: Event): void => {}
-    export let extentionsLabel = ''
+    export let extensionsLabel = ''
     export let allowedExtensions
     export let dropping
     export let fileName
@@ -58,7 +58,7 @@
                 />
             {/if}
             <Text type="h4">{locale('actions.dragDrop')}</Text>
-            <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
+            <Text classes="mb-12" type="p" secondary smaller>{extensionsLabel}</Text>
             <Button secondary onClick={onDrop}>{locale('actions.chooseFile')}</Button>
         {/if}
     </content>
