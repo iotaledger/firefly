@@ -3,4 +3,4 @@ export * from './buttons'
 export * from './labels'
 export * from './pills'
 
-export { default as MenuButton } from './MenuButton.svelte'
+export { default as MenuItem } from './MenuItem.svelte'

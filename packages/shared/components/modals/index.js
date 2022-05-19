@@ -1,4 +1,4 @@
-export { default as AccountActionsModal } from './AccountActionsModal.svelte'
+export { default as AccountActionsMenu } from './AccountActionsMenu.svelte'
 export { default as AccountSwitcherModal } from './AccountSwitcherModal.svelte'
 export { default as Modal } from './Modal.svelte'
 export { default as NetworkSummaryModal } from './NetworkSummaryModal.svelte'

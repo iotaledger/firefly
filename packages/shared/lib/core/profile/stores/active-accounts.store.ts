@@ -14,6 +14,14 @@ export function updateActiveAccount(id: string, partialAccount: Partial<IAccount
     ])
 }
 
+export const nonHiddenActiveAccounts: Readable<IAccountState[]> = derived([activeAccounts], ([$activeAccounts]) => {
+    if (!$activeAccounts) {
+        return []
+    }
+    const unsortedNonHiddenAccounts = $activeAccounts?.filter((account) => !account?.hidden)
+    return unsortedNonHiddenAccounts.sort((a, b) => a.meta.index - b.meta.index)
+})
+
 export const visibleActiveAccounts: Readable<IAccountState[]> = derived(
     [activeAccounts, activeProfile],
     ([$activeAccounts, $activeProfile]) => {
@@ -23,7 +31,7 @@ export const visibleActiveAccounts: Readable<IAccountState[]> = derived(
         const unsortedVisibleAccounts =
             $activeProfile?.settings.showHiddenAccounts ?? false
                 ? $activeAccounts
-                : $activeAccounts?.filter((account) => !(account?.hidden ?? false))
+                : $activeAccounts?.filter((account) => !account?.hidden)
         return unsortedVisibleAccounts.sort((a, b) => a.meta.index - b.meta.index)
     }
 )

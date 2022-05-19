@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { formatDate, localize } from '@core/i18n'
-    import { HR, Modal, MenuButton } from 'shared/components'
+    import { HR, Modal, MenuItem } from 'shared/components'
     import { fade } from 'svelte/transition'
 
     export let modal: Modal
@@ -57,7 +57,7 @@
 
 <Modal bind:this={modal} position={{ bottom: '120px', left: '400px' }} classes="w-64">
     <expiration-time-picker-modal class="flex flex-col space-y-0" in:fade={{ duration: 100 }}>
-        <MenuButton
+        <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.none')}
             onClick={() => onClick('none')}
@@ -66,7 +66,7 @@
             selected={selected === 'none'}
         />
         <HR />
-        <MenuButton
+        <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.1hour')}
             subtitle={formatDate(dateIn1Hour, {
@@ -77,7 +77,7 @@
             first
             selected={selected === '1hour'}
         />
-        <MenuButton
+        <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.1day')}
             subtitle={formatDate(dateIn1Day, {
@@ -87,7 +87,7 @@
             onClick={() => onClick('1day')}
             selected={selected === '1day'}
         />
-        <MenuButton
+        <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.1week')}
             subtitle={formatDate(dateIn1Week, {
@@ -99,7 +99,7 @@
             selected={selected === '1week'}
         />
         <HR />
-        <MenuButton
+        <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.customDate.title')}
             subtitle={localize('menus.expirationTimePicker.customDate.subtitle')}
