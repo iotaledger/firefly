@@ -1,4 +1,4 @@
-import { activeProfile, IPersistedProfile, saveProfile } from '@core/profile'
+import { activeProfile, IPersistedProfile, loadPersistedProfileIntoActiveProfile, saveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
 export function saveActiveProfile(): void {

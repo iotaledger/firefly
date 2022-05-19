@@ -6,7 +6,7 @@ export interface IProfileSettings {
     currency: AvailableExchangeRates
     networkConfig: INetworkConfig
     lockScreenTimeoutInMinutes: number
-    showHiddenAccounts?: boolean
+    showHiddenAccounts: boolean
     chartSelectors: ChartSelectors
-    hideNetworkStatistics?: boolean
+    hideNetworkStatistics: boolean
 }

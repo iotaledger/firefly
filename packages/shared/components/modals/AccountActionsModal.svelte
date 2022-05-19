@@ -84,7 +84,13 @@
 
 <Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
-        <!-- Customize -->
+        <button
+            on:click={handleExportTransactionHistoryClick}
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
+        >
+            <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
+            <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
+        </button>
         <button
             on:click={() => handleCustomiseAccountClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {hidden
@@ -96,22 +102,23 @@
             <Text smaller classes="group-hover:text-blue-500">{localize('actions.customizeAcount')}</Text>
         </button>
         <button
-            on:click={handleExportTransactionHistoryClick}
+            on:click={() => (hidden ? handleShowAccountClick() : handleHideAccountClick())}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
         >
-            <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
+            <Icon icon={hidden ? 'view' : 'hide'} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
+            <Text smaller classes="group-hover:text-blue-500"
+                >{localize(hidden ? 'actions.showAccount' : 'actions.hideAccount')}</Text
+            >
         </button>
         <HR />
-        <!-- Delete -->
         <button
-            on:click={() =>
-                canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick()}
+            on:click={handleDeleteAccountClick}
+            disabled
             class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full"
         >
-            <Icon icon={canDelete ? 'delete' : hidden ? 'view' : 'hide'} classes="text-red-500 ml-1 mr-3" />
+            <Icon icon={'delete'} classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>
-                {localize(canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount')}
+                {localize('actions.deleteAccount')}
             </Text>
         </button>
     </div>

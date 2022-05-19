@@ -4,7 +4,7 @@ import {
     activeAccounts,
     activeProfile,
     addAccountMetadataToActiveProfile,
-    addAccountToActiveProfile,
+    addAccountToActiveAccounts,
 } from '@core/profile'
 import { createStardustAccount, getAccount } from '@core/profile-manager'
 import { get } from 'svelte/store'
@@ -21,7 +21,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         const account = await getAccount(createdAccount.meta.index)
         account.sync()
         const [newAccount, metadata] = await buildAccountStateAndMetadata(account, color)
-        addAccountToActiveProfile(newAccount)
+        addAccountToActiveAccounts(newAccount)
         addAccountMetadataToActiveProfile(metadata)
         return newAccount
     } catch (err) {
