@@ -16,7 +16,7 @@ jobs:
 
       - uses: retypeapp/action-build@v2
         with:
-          config: docs/handbook
+          config: docs
 
       - uses: retypeapp/action-github-pages@v2
         with:
