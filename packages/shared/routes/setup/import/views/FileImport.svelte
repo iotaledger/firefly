@@ -8,14 +8,14 @@
     export let locale: Locale
 
     let file
-    let fileName
+    let fileName: string | null
     let filePath: string
     let dropping: boolean
 
     const handleFileSelectMobile = async () => {
         filePath = await Platform.getStrongholdBackupDestination(null)
-        const [_fileName] = /\w+.stronghold$/.exec(filePath)
-        dispatch('next', { file, fileName: _fileName, filePath })
+        fileName = filePath.split('/').pop()
+        dispatch('next', { file, fileName, filePath })
     }
 
     const allowedExtensions = $mobile ? ['stronghold'] : ['kdbx', 'stronghold', 'txt']
