@@ -1,12 +1,9 @@
 name: Handbook
 
 on:
-  pull_request:
   push:
     branches:
-      - 'chore/**'
       - 'develop'
-      - 'docs/**'
 
 jobs:
   publish:

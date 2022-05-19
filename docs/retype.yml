@@ -13,7 +13,7 @@ meta:
 
 edit:
   repo: "https://github.com/iotaledger/firefly"
-  base: /docs/handbook
+  base: /docs
   branch: chore/create-firefly-handbook
 
 links:
