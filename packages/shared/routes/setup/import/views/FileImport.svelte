@@ -15,7 +15,6 @@
     const handleFileSelectMobile = async () => {
         filePath = await Platform.getStrongholdBackupDestination(null)
         fileName = filePath.split('/').pop()
-        dispatch('next', { file, fileName, filePath })
     }
 
     const allowedExtensions = $mobile ? ['stronghold'] : ['kdbx', 'stronghold', 'txt']
