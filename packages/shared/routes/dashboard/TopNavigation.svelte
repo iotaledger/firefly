@@ -4,13 +4,9 @@
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { IAccountState } from '@core/account'
-    import { getContext, onMount } from 'svelte'
-    import { Readable } from 'svelte/store'
+    import { onMount } from 'svelte'
 
     export let classes: string
-
-    const viewableAccounts = getContext<Readable<IAccountState[]>>('viewableAccounts')
 
     let os = ''
 
@@ -50,7 +46,7 @@
             </div>
         </button>
     {/if}
-    <AccountSwitcher accounts={$viewableAccounts} />
+    <AccountSwitcher />
 </div>
 
 <style type="text/scss">

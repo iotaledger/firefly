@@ -1,28 +1,20 @@
 <script lang="typescript">
-    import { onDestroy, onMount, setContext } from 'svelte'
-    import { derived, get, Readable } from 'svelte/store'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { selectedAccountId } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
+    import { activeProfile, isLedgerProfile, logout, saveActiveProfile, updateActiveProfile } from '@core/profile'
+    import { appRouter, dashboardRoute } from '@core/router'
+    import { Idle, Sidebar } from 'shared/components'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { Idle, Sidebar } from 'shared/components'
-    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import {
-        isLedgerProfile,
-        logout,
-        activeProfile,
-        saveActiveProfile,
-        updateActiveProfile,
-        activeAccounts,
-    } from '@core/profile'
-    import { appRouter, dashboardRoute } from '@core/router'
-    import { localize } from '@core/i18n'
-    import { selectedAccountId } from '@core/account'
+    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import TopNavigation from './TopNavigation.svelte'
-    import { IAccountState } from '@core/account'
 
     const { hasLoadedAccounts, accounts, loggedIn } = $activeProfile
 
@@ -65,52 +57,6 @@
             void updateStakingPeriodCache()
         }
     } */
-
-    const viewableAccounts: Readable<IAccountState[]> = derived(
-        [activeProfile, activeAccounts],
-        ([$activeProfile, $activeAccounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-
-            if ($activeProfile?.settings?.showHiddenAccounts) {
-                const sortedAccounts = $activeAccounts.sort((a, b) => a.meta.index - b.meta.index)
-
-                // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
-                // This account will get re-used if someone creates a new one
-                if (sortedAccounts.length > 1 && $activeProfile?.hiddenAccounts) {
-                    const lastAccount = sortedAccounts[sortedAccounts.length - 1]
-                    if (
-                        $activeProfile?.hiddenAccounts.includes(lastAccount.id) &&
-                        lastAccount.rawIotaBalance === 0 &&
-                        lastAccount.messages.length === 0
-                    ) {
-                        sortedAccounts.pop()
-                    }
-                }
-                return sortedAccounts
-            }
-            return $activeAccounts
-                ?.filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
-                ?.sort((a, b) => a.meta.index - b.meta.index)
-        }
-    )
-
-    const liveAccounts: Readable<IAccountState[]> = derived(
-        [activeProfile, accounts],
-        ([$activeProfile, $activeAccounts]) => {
-            if (!$activeProfile) {
-                return []
-            }
-            return $activeAccounts
-                ?.filter((a) => !$activeProfile?.hiddenAccounts?.includes(a.id))
-                ?.sort((a, b) => a.meta.index - b.meta.index)
-        }
-    )
-
-    // TODO: move these stores to lib when we fix the circular imports issue
-    setContext<Readable<IAccountState[]>>('viewableAccounts', viewableAccounts)
-    setContext<Readable<IAccountState[]>>('liveAccounts', liveAccounts)
 
     onMount(() => {
         // void getParticipationEvents()

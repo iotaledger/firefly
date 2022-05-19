@@ -10,9 +10,9 @@
 
     export let modal: Modal
 
-    $: totalBalance = calculateTotalBalanceForViewableAccounts($visibleActiveAccounts)
+    $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    function calculateTotalBalanceForViewableAccounts(accounts: IAccountState[]): number {
+    function sumBalanceForAccounts(accounts: IAccountState[]): number {
         return accounts.reduce((acc, account) => (acc += Number(account.balances.total)), 0)
     }
 

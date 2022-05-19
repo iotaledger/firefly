@@ -1,10 +1,8 @@
 <script lang="typescript">
-    import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { selectedAccount, IAccountState } from '@core/account'
+    import { AccountSwitcherModal, Icon, Modal } from 'shared/components'
+    import { selectedAccount } from '@core/account'
     import { updateActiveProfile } from '@core/profile'
     import { AccountLabel } from 'shared/components/atoms/'
-
-    export let accounts: IAccountState[] = []
 
     let modal: Modal
     let isModalOpened: boolean
@@ -23,5 +21,5 @@
             <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
-    <AccountSwitcherModal {accounts} bind:modal />
+    <AccountSwitcherModal bind:modal />
 </div>
