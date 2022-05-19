@@ -44,6 +44,8 @@
             case 'custom':
                 value = 'Custom Date'
                 break
+            default:
+                value = 'None'
         }
     }
 
