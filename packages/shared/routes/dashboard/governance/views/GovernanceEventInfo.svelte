@@ -133,7 +133,7 @@
                 class="relative py-5 px-6 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:bg-opaciity-100 rounded-xl border border-solid border-gray-200 dark:border-transparent"
             >
                 <div class="flex justify-between w-full items-center">
-                    <div class="flex flex-col mr-32">
+                    <div class="flex flex-col mr-16">
                         <div class="flex items-center mb-2">
                             {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) || isWinnerAnswer(answer?.value)}
                                 {#if event?.status?.status === ParticipationEventState.Holding}
@@ -222,7 +222,7 @@
                                 </Tooltip>
                             {/if}
                         {:else}
-                            <div class="flex flex-row space-x-2 items-center">
+                            <div class="flex flex-row space-x-2 items-center flex-shrink-0">
                                 {#if !$currentAccountTreasuryVoteValue}
                                     <Text type="p" highlighted>{localize('actions.castVotes')}</Text>
                                 {/if}
