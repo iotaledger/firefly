@@ -60,15 +60,10 @@
             }
         }
 
-        fileName = file.name
-
         const reader = new FileReader()
 
         reader.onload = (e) => {
             setFile(e.target.result, file.name, file.path)
-            if ($mobile) {
-                handleContinueClick()
-            }
         }
 
         reader.readAsArrayBuffer(file)
@@ -91,7 +86,7 @@
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!file} onClick={handleContinueClick}>
+        <Button classes="flex-1" disabled={!fileName} onClick={handleContinueClick}>
             {locale('actions.continue')}
         </Button>
     </div>
