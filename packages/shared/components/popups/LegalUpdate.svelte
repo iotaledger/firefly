@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { Button, Checkbox, Text, Link } from 'shared/components'
-    import { lastAcceptedTermsOfService, lastAcceptedPrivacyPolicy } from '@core/app'
     import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import {
+        lastAcceptedTermsOfService,
+        lastAcceptedPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
         needsToAcceptLatestPrivacyPolicy,
         TERMS_OF_SERVICE_VERSION,

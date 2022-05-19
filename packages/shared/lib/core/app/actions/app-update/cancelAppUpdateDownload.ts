@@ -1,13 +1,19 @@
 import { Platform } from '@lib/platform'
 
-import { updateBusy, updateComplete, updateError, updateMinutesRemaining, updateProgress } from '../../stores'
+import {
+    appUpdateBusy,
+    appUpdateComplete,
+    appUpdateError,
+    appUpdateMinutesRemaining,
+    appUpdateProgress,
+} from '../../stores'
 
 export function cancelAppUpdateDownload(): void {
     void Platform.cancelAppUpdateDownload()
 
-    updateProgress.set(0)
-    updateBusy.set(false)
-    updateComplete.set(false)
-    updateError.set(false)
-    updateMinutesRemaining.set(-1)
+    appUpdateProgress.set(0)
+    appUpdateBusy.set(false)
+    appUpdateComplete.set(false)
+    appUpdateError.set(false)
+    appUpdateMinutesRemaining.set(-1)
 }

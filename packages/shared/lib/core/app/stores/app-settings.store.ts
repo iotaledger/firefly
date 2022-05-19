@@ -3,9 +3,9 @@ import { writable } from 'svelte/store'
 import { persistent } from '@lib/helpers'
 
 import { AppTheme } from '../enums'
-import { AppSettings } from '../interfaces'
+import { IAppSettings } from '../interfaces'
 
-const DEFAULT_APP_SETTINGS: AppSettings = {
+const DEFAULT_APP_SETTINGS: IAppSettings = {
     deepLinking: false,
     language: 'en',
     theme: AppTheme.Light,
@@ -18,7 +18,7 @@ const DEFAULT_APP_SETTINGS: AppSettings = {
  * The application settings used throughout the application code, useful for
  * global settings beyond individual profile settings.
  */
-export const appSettings = persistent<AppSettings>('settings', DEFAULT_APP_SETTINGS)
+export const appSettings = persistent<IAppSettings>('settings', DEFAULT_APP_SETTINGS)
 
 /**
  * The initial application settings, useful for things that require
@@ -33,4 +33,4 @@ export const appSettings = persistent<AppSettings>('settings', DEFAULT_APP_SETTI
  *
  * CAUTION: This variable is READ-ONLY - you write at your own risk.
  */
-export const initAppSettings = writable<Readonly<Partial<AppSettings>>>(DEFAULT_APP_SETTINGS)
+export const initAppSettings = writable<Readonly<Partial<IAppSettings>>>(DEFAULT_APP_SETTINGS)

@@ -1,10 +1,14 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from '@core/app'
+    import {
+        mobile,
+        lastAcceptedTermsOfService,
+        lastAcceptedPrivacyPolicy,
+        TERMS_OF_SERVICE_VERSION,
+        PRIVACY_POLICY_VERSION,
+    } from '@core/app'
     import { Locale } from '@core/i18n'
     import Content from './Content.svelte'
-    import { lastAcceptedTermsOfService, lastAcceptedPrivacyPolicy } from '@core/app'
-    import { TERMS_OF_SERVICE_VERSION, PRIVACY_POLICY_VERSION } from '@core/app'
     import { appRouter } from '@core/router'
 
     export let locale: Locale

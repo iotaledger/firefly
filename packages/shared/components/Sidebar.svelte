@@ -9,7 +9,7 @@
         PingingBadge,
         NetworkIndicator,
     } from 'shared/components'
-    import { mobile } from '@core/app'
+    import { appVersionDetails, mobile } from '@core/app'
     import { getInitials, isRecentDate } from '@lib/helpers'
     import { isStakingPossible } from '@lib/participation'
     import {
@@ -30,8 +30,6 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
-    import { versionDetails } from '@core/app'
-    import { get } from 'svelte/store'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -171,7 +169,7 @@
                     on:click={profileModal?.open}
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
-                    {#if !$shouldOpenProfileModal && (!isBackupSafe || !$versionDetails.upToDate)}
+                    {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
                         <PingingBadge innerColor="red-500" outerColor="red-500" />
                     {/if}
                 </button>

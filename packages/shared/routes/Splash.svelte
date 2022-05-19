@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Animation } from 'shared/components'
-    import { mobile } from '@core/app'
-    import { appSettings, shouldBeDarkMode } from '@core/app'
+    import { appSettings, shouldBeDarkMode, mobile } from '@core/app'
     import { pollChrysalisSnapshot } from 'shared/lib/migration'
     import { onMount } from 'svelte'
 

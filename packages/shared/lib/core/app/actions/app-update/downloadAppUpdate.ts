@@ -10,16 +10,22 @@ import { NotificationData } from '@lib/typings/notification'
 import { Platform } from '@lib/platform'
 
 import { installAppUpdate } from '../../utils'
-import { updateBusy, updateComplete, updateError, updateMinutesRemaining, updateProgress } from '../../stores'
+import {
+    appUpdateBusy,
+    appUpdateComplete,
+    appUpdateError,
+    appUpdateMinutesRemaining,
+    appUpdateProgress,
+} from '../../stores'
 import { cancelAppUpdateDownload } from './cancelAppUpdateDownload'
 
 // TODO: Look for `appUpdateDownload` throughout the project
 export function downloadAppUpdate(): void {
-    updateProgress.set(0)
-    updateMinutesRemaining.set(-1)
-    updateBusy.set(true)
-    updateComplete.set(false)
-    updateError.set(false)
+    appUpdateProgress.set(0)
+    appUpdateMinutesRemaining.set(-1)
+    appUpdateBusy.set(true)
+    appUpdateComplete.set(false)
+    appUpdateError.set(false)
 
     let progressSubscription = null
     let minutesRemainingSubscription = null
@@ -53,11 +59,11 @@ export function downloadAppUpdate(): void {
 
     const notificationId = showAppNotification(downloadingNotification)
 
-    progressSubscription = updateProgress.subscribe((progress) => {
+    progressSubscription = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
 
-    minutesRemainingSubscription = updateMinutesRemaining.subscribe((minutesRemaining) => {
+    minutesRemainingSubscription = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -74,7 +80,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    completeSubscription = updateComplete.subscribe((isComplete) => {
+    completeSubscription = appUpdateComplete.subscribe((isComplete) => {
         if (isComplete) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -99,7 +105,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    errorSubscription = updateError.subscribe((isError) => {
+    errorSubscription = appUpdateError.subscribe((isError) => {
         if (isError) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,

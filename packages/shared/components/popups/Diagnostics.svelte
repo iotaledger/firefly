@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { appSettings } from '@core/app'
-    import { versionDetails } from '@core/app'
+    import { appSettings, appVersionDetails } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { activeProfile } from '@core/profile'
     import { setClipboard } from 'shared/lib/utils'
@@ -19,7 +18,7 @@
         {
             label: '',
             value: locale('views.dashboard.security.version.title', {
-                values: { version: $versionDetails.currentVersion },
+                values: { version: $appVersionDetails.currentVersion },
             }),
         },
     ]

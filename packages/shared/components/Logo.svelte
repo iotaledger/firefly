@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { appStage } from '@core/app'
-    import { appSettings } from '@core/app'
+    import { appSettings, appStage } from '@core/app'
     import { get } from 'svelte/store'
 
     export let logo = undefined

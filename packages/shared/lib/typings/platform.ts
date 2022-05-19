@@ -1,9 +1,8 @@
+import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IDeepLinkManager } from '@common/deep-links'
-import { AppSettings } from '@core/app'
 import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
-import { AppVersionDetails } from '@core/app'
 import { Error } from './error'
 import { EventMap } from './events'
 import { IBarcodeManager } from './barcodeManager'
@@ -23,7 +22,7 @@ export interface IPlatform {
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string> | string
     getMachineId(): Promise<string>
-    updateAppSettings(settings: Partial<AppSettings>): Promise<void>
+    updateAppSettings(settings: Partial<IAppSettings>): Promise<void>
     getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
@@ -44,7 +43,7 @@ export interface IPlatform {
     PincodeManager: IPincodeManager | undefined
     BarcodeManager: IBarcodeManager | undefined
 
-    getAppVersionDetails(): Promise<AppVersionDetails>
+    getAppVersionDetails(): Promise<IAppVersionDetails>
 
     checkForAppUpdate(): Promise<void>
     installAppUpdate(): Promise<void>

@@ -11,9 +11,15 @@
         appRouter,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { AppStage, appStage } from '@core/app'
-    import { appSettings, initAppSettings } from '@core/app'
-    import { setAppVersionDetails, pollCheckForAppUpdate, versionDetails } from '@core/app'
+    import {
+        setAppVersionDetails,
+        pollCheckForAppUpdate,
+        appVersionDetails,
+        appSettings,
+        initAppSettings,
+        AppStage,
+        appStage,
+    } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
@@ -108,7 +114,7 @@
             openPopup({
                 type: 'version',
                 props: {
-                    currentVersion: $versionDetails.currentVersion,
+                    currentVersion: $appVersionDetails.currentVersion,
                 },
             })
         })

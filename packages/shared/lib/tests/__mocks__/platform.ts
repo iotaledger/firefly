@@ -1,4 +1,4 @@
-import { AppSettings, AppVersionDetails } from '@core/app'
+import { IAppSettings, IAppVersionDetails } from '@core/app'
 
 import { IPlatform } from '../../typings/platform'
 import { EventMap } from '../../typings/events'
@@ -38,7 +38,7 @@ const Platform: IPlatform = {
     getUserDataPath(): Promise<string> {
         return Promise.resolve('')
     },
-    getAppVersionDetails(): Promise<AppVersionDetails> {
+    getAppVersionDetails(): Promise<IAppVersionDetails> {
         return Promise.resolve(undefined)
     },
     hookErrorLogger(logger: (error: Error) => void): void {},
@@ -72,7 +72,7 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     updateActiveProfile(id: string): void {},
-    updateAppSettings(settings: Partial<AppSettings>): Promise<void> {
+    updateAppSettings(settings: Partial<IAppSettings>): Promise<void> {
         return Promise.resolve(undefined)
     },
     cancelAppUpdateDownload(): Promise<void> {

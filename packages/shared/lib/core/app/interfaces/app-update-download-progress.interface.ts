@@ -1,4 +1,4 @@
-export type AppUpdateDownloadProgress = {
+export type IAppUpdateDownloadProgress = {
     total: number
     delta: number
     transferred: number

@@ -1,12 +1,17 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
-    import { AppStage, appStage } from '@core/app'
+    import {
+        AppStage,
+        appStage,
+        isAwareOfCrashReporting,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
+    } from '@core/app'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile, updateNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { isAwareOfCrashReporting } from '@core/app'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     const dispatch = createEventDispatcher()

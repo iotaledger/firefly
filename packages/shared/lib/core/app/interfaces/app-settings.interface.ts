@@ -1,6 +1,6 @@
 import { AppTheme } from '../enums'
 
-export interface AppSettings {
+export interface IAppSettings {
     deepLinking: boolean
     language: string
     theme: AppTheme

@@ -1,4 +1,4 @@
-export type AppVersionDetails = {
+export type IAppVersionDetails = {
     upToDate: boolean
     currentVersion: string
     newVersion: string

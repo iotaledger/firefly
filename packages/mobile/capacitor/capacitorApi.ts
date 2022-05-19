@@ -7,7 +7,7 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { AppSettings, AppVersionDetails } from '@core/app'
+import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IPlatform } from '@lib/typings/platform'
 
 import * as WalletBindings from './walletPluginApi'
@@ -19,7 +19,7 @@ let activeProfileId = null
 export const nativeSplash = SplashScreen
 
 export const CapacitorApi: IPlatform = {
-    updateAppSettings(settings: Partial<AppSettings>) {
+    updateAppSettings(settings: Partial<IAppSettings>) {
         return new Promise((resolve) => resolve())
     },
 
@@ -178,7 +178,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getAppVersionDetails: () => new Promise<AppVersionDetails>((resolve, reject) => {}),
+    getAppVersionDetails: () => new Promise<IAppVersionDetails>((resolve, reject) => {}),
 
     /**
      * Change menu state to determine what menu items to display

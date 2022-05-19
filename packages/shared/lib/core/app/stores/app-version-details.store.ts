@@ -2,9 +2,9 @@ import { writable } from 'svelte/store'
 
 import { Platform } from '@lib/platform'
 
-import { AppVersionDetails } from '../interfaces'
+import { IAppVersionDetails } from '../interfaces'
 
-const DEFAULT_APP_VERSION_DETAILS: AppVersionDetails = {
+const DEFAULT_APP_VERSION_DETAILS: IAppVersionDetails = {
     upToDate: true,
     currentVersion: '',
     newVersion: '',
@@ -12,9 +12,9 @@ const DEFAULT_APP_VERSION_DETAILS: AppVersionDetails = {
     changelog: '',
 }
 
-export const versionDetails = writable<AppVersionDetails>(DEFAULT_APP_VERSION_DETAILS)
+export const appVersionDetails = writable<IAppVersionDetails>(DEFAULT_APP_VERSION_DETAILS)
 
 export async function setAppVersionDetails(): Promise<void> {
-    const verDetails = await Platform.getAppVersionDetails()
-    versionDetails.set(verDetails)
+    const _appVersionDetails = await Platform.getAppVersionDetails()
+    appVersionDetails.set(_appVersionDetails)
 }
