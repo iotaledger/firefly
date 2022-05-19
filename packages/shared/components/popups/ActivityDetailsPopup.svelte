@@ -14,7 +14,6 @@
     export let message: AccountMessage & { balance?: number }
     $: ({ id, payload, balance, timestamp, confirmed } = message)
 
-    const { accounts } = $activeProfile
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let type: ActivityType

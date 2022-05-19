@@ -23,8 +23,6 @@
     export let balance // migration tx
     export let onClick = (): void => {}
 
-    const { accounts } = $activeProfile
-
     let messageValue = ''
     let date = localize('error.invalidDate')
     $: {

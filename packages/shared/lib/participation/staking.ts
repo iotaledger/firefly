@@ -1,6 +1,6 @@
 import { IAccountState, selectedAccount } from '@core/account'
 import { networkStatus } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { activeAccounts, activeProfile } from '@core/profile'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
@@ -611,7 +611,7 @@ function updateStakingRewardsForAccount(
     airdrop: StakingAirdrop,
     periodNumber: number
 ): AccountStakingRewards {
-    const account = get(get(activeProfile).accounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
+    const account = get(activeAccounts).find((acc) => acc.id === previousAccountStakingRewards.accountId)
     if (!account) return previousAccountStakingRewards
 
     const period = getStakingPeriodForAccount(account, stakingResult, periodNumber)

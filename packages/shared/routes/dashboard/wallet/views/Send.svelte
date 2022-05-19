@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get, Readable } from 'svelte/store'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -24,7 +24,6 @@
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeAccounts, isLedgerProfile, isSoftwareProfile, visibleActiveAccounts } from '@core/profile'
     import { accountRouter } from '@core/router'
-    import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,

@@ -16,7 +16,7 @@
     import { get } from 'svelte/store'
     import TopNavigation from './TopNavigation.svelte'
 
-    const { hasLoadedAccounts, accounts, loggedIn } = $activeProfile
+    const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
     // TODO: Set this in switch account action

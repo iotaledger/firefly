@@ -48,7 +48,7 @@ export function initialiseListeners(): void {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            const { balanceOverview, accounts } = get(activeProfile)
+            const { balanceOverview } = get(activeProfile)
             const { accountId, message } = response.payload
             const account = get(activeAccounts).find((account) => account.id === accountId)
             if (!account || !message) return
@@ -103,7 +103,6 @@ export function initialiseListeners(): void {
      */
     api.onConfirmationStateChange({
         async onSuccess(response) {
-            const { accounts } = get(activeProfile)
             const { message } = response.payload
 
             // Checks if this was a message sent for participating in an event
@@ -156,7 +155,11 @@ export function initialiseListeners(): void {
                 }
 
                 // Update the confirmation state of all messages with this id
-                const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
+                const confirmationChanged = updateAllMessagesState(
+                    activeAccounts,
+                    message.id,
+                    response.payload.confirmed
+                )
 
                 // If the state has changed then display a notification
                 // but only for transactions not migrations
@@ -230,7 +233,6 @@ export function initialiseListeners(): void {
 
             // On balance change event, get the updated account objects from wallet-rs db
             try {
-                const { accounts } = get(activeProfile)
                 const latestAccounts = await getAccounts()
 
                 let walletAccounts: IAccountState[]
@@ -265,7 +267,7 @@ export function initialiseListeners(): void {
                     completeCount++
 
                     if (completeCount === latestAccounts.length) {
-                        accounts.update((_accounts) => walletAccounts.sort((a, b) => a.meta.index - b.meta.index))
+                        activeAccounts.update((_accounts) => walletAccounts.sort((a, b) => a.meta.index - b.meta.index))
 
                         updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                     }
@@ -375,7 +377,6 @@ function updateAllMessagesState(
  */
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
-        const { accounts } = get(activeProfile)
         const account = get(activeAccounts).find((_account) => _account.id === pendingParticipation.accountId)
 
         showAppNotification({

@@ -18,7 +18,6 @@
         isPerformingParticipation,
         isPartiallyStaked,
         participationAction,
-        participationOverview,
         pendingParticipations,
         stakedAccounts,
         assemblyStakingEventState,
@@ -45,25 +44,13 @@
 
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
-    let { accounts } = $activeProfile
 
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
-    $: $participationOverview, resetAccounts()
     $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
-
-    function resetAccounts(): void {
-        /**
-         * NOTE: This is necessary for the page
-         * to be re-rendered because updating arrays
-         * in place will not update the UI (requires
-         * variable re-assignment).
-         */
-        accounts = accounts
-    }
 
     function resetView(): void {
         if (!isSoftwareProfile) {
@@ -72,8 +59,6 @@
 
         isPerformingParticipation.set(false)
         participationAction.set(undefined)
-
-        resetAccounts()
     }
 
     function displayErrorNotification(error): void {

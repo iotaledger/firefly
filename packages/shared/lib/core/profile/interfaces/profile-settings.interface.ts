@@ -1,6 +1,6 @@
 import { INetworkConfig } from '@core/network'
-import { AvailableExchangeRates } from '@lib/typings/currency'
 import { ChartSelectors } from '@lib/typings/chart'
+import { AvailableExchangeRates } from '@lib/typings/currency'
 
 export interface IProfileSettings {
     currency: AvailableExchangeRates

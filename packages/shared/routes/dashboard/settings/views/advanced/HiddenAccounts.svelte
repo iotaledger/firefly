@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { activeProfile, updateActiveProfileSettings, setNextSelectedAccount } from '@core/profile'
+    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import { setNextSelectedAccount } from '@core/account'
 
     let showHiddenAccounts = $activeProfile?.settings.showHiddenAccounts
     $: updateActiveProfileSettings({ showHiddenAccounts: showHiddenAccounts })

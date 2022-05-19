@@ -16,8 +16,6 @@
 
     export let onSuccess = (..._: any[]): void => {}
 
-    const { accounts } = $activeProfile
-
     let nodeUrl = node?.url || ''
     const oldNodeUrl = nodeUrl
     const optNodeAuth = node?.auth || { username: '', password: '', jwt: '' }

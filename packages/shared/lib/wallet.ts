@@ -196,7 +196,7 @@ export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
                  * removed in the Firefly store. This is "inefficient" (esp. for batch deletes) but it
                  * at least ensures data integrity / consistency between Firefly and the backend.
                  */
-                get(activeProfile).accounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
+                activeAccounts.update((_accounts) => _accounts.filter((wa) => wa.id !== accountId))
 
                 resolve()
             },
@@ -273,12 +273,10 @@ export async function asyncSyncAccountOffline(account: IAccountState): Promise<v
                 const meta = await getAccountMeta(account.id)
                 const startdustAccount = await get(profileManager).getAccount(account.id)
                 const _account = prepareAccountInfo(startdustAccount, meta)
-                get(activeProfile)?.accounts.update((_accounts) =>
-                    _accounts.map((a) => (a.id === _account.id ? _account : a))
-                )
-                updateActiveProfile({
-                    hiddenAccounts: (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id),
-                })
+                activeAccounts.update((_accounts) => _accounts.map((a) => (a.id === _account.id ? _account : a)))
+                // updateActiveProfile({
+                //     hiddenAccounts: (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id),
+                // })
             },
             onError() {
                 resolve()
@@ -357,11 +355,9 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
  * @returns {void}
  */
 export const saveNewMessage = (accountId: string, message: Message): void => {
-    const { accounts } = get(activeProfile)
-
     const messageIncoming = getIncomingFlag(message.payload)
 
-    accounts.update((storedAccounts) =>
+    activeAccounts.update((storedAccounts) =>
         storedAccounts.map((storedAccount: IAccountState) => {
             if (storedAccount.id === accountId) {
                 const hasMessage = storedAccount.messages.some(
@@ -388,11 +384,9 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {void}
  */
 export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
-    const { accounts } = get(activeProfile)
-
     const messageIncoming = getIncomingFlag(newMessage.payload)
 
-    accounts.update((storedAccounts) =>
+    activeAccounts.update((storedAccounts) =>
         storedAccounts.map((storedAccount: IAccountState) => {
             if (storedAccount.id === accountId) {
                 return Object.assign<IAccountState, Partial<IAccountState>, Partial<IAccountState>>(
@@ -501,8 +495,6 @@ export const refreshBalanceOverview = (): void => {
  * @returns {void}
  */
 export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<void> {
-    const { accounts } = get(activeProfile)
-
     const existingAccountIds = get(activeAccounts).map((account) => account.id)
 
     const { newAccounts, existingAccounts } = syncedAccounts.reduce(
@@ -581,7 +573,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
                 const { balanceOverview } = get(activeProfile)
                 const overview = get(balanceOverview)
 
-                accounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
+                activeAccounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
 
                 updateBalanceOverview(
                     overview.balanceRaw + totalBalance.balance,
@@ -591,7 +583,7 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
             }
         }
     } else {
-        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.meta.index - b.meta.index))
+        activeAccounts.update(() => updatedStoredAccounts.sort((a, b) => a.meta.index - b.meta.index))
     }
 }
 
@@ -925,7 +917,7 @@ export const findAccountWithAddress = (address: string): IAccountState | undefin
     if (!address) {
         return
     }
-    const accounts = get(get(activeProfile).accounts)
+    const accounts = get(activeAccounts)
     return accounts.find((acc) => acc.depositAddress === address)
 }
 
@@ -942,7 +934,7 @@ export const findAccountWithAnyAddress = (
     if (!addresses || addresses.length === 0) {
         return
     }
-    const accounts = get(get(activeProfile).accounts)
+    const accounts = get(activeAccounts)
 
     let res = accounts.filter((acc) => addresses.includes(acc.depositAddress))
 

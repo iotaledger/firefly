@@ -9,7 +9,6 @@ export function validateAccountName(
     validateLength = true,
     validateDuplicate = true
 ): Promise<void | string> {
-    const { accounts } = get(activeProfile)
     if (validateLength && getTrimmedLength(name) > MAX_ACCOUNT_NAME_LENGTH) {
         return Promise.reject(
             new Error(

@@ -1,6 +1,6 @@
-import { IAccountMetadata, IAccountState } from '@core/account'
+import { IAccountState } from '@core/account'
 import { derived, Readable, writable } from 'svelte/store'
-import { activeProfile, updateAccountMetadataOnActiveProfile } from './active-profile.store'
+import { activeProfile } from './active-profile.store'
 
 export const activeAccounts = writable<IAccountState[]>([])
 
