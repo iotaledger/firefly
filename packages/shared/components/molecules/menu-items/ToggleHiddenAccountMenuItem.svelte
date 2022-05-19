@@ -14,7 +14,7 @@
     function handleHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
             updateActiveAccountMetadata($selectedAccount.id, { hidden: true })
-            if (!$activeProfile.settings.showHiddenAccounts) {
+            if (!$activeProfile.showHiddenAccounts) {
                 setNextSelectedAccount()
             }
             onClick && onClick()

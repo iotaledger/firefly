@@ -29,7 +29,7 @@ export const visibleActiveAccounts: Readable<IAccountState[]> = derived(
             return []
         }
         const unsortedVisibleAccounts =
-            $activeProfile?.settings.showHiddenAccounts ?? false
+            $activeProfile?.showHiddenAccounts ?? false
                 ? $activeAccounts
                 : $activeAccounts?.filter((account) => !account?.hidden)
         return unsortedVisibleAccounts.sort((a, b) => a.meta.index - b.meta.index)

@@ -36,7 +36,6 @@ export function buildNewProfile(
                 currency: AvailableExchangeRates.USD,
                 timeframe: HistoryDataProps.SEVEN_DAYS,
             },
-            showHiddenAccounts: false,
             hideNetworkStatistics: !isDeveloperProfile,
         },
         accountMetadata: [],

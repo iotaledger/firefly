@@ -15,4 +15,5 @@ export interface IProfile extends IPersistedProfile {
     }>
     loggedIn: Writable<boolean>
     lastActiveAt: Writable<Date>
+    showHiddenAccounts: boolean
 }

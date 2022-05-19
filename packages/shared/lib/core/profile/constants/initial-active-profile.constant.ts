@@ -22,4 +22,5 @@ export const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
             to: string
         }
     }>({}),
+    showHiddenAccounts: false,
 }
