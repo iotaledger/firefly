@@ -15,6 +15,7 @@ export { default as Protect } from 'shared/routes/setup/protect/Protect.svelte'
 export { default as Backup } from 'shared/routes/setup/backup/Backup.svelte'
 export { default as Import } from 'shared/routes/setup/import/Import.svelte'
 export { default as Balance } from 'shared/routes/setup/Balance.svelte'
+export { default as ClaimRewards } from 'shared/routes/setup/ClaimRewards.svelte'
 export { default as Migrate } from 'shared/routes/setup/migrate/Migrate.svelte'
 export { default as Congratulations } from 'shared/routes/setup/Congratulations.svelte'
 
