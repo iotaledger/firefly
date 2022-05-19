@@ -6,7 +6,7 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { Idle, Sidebar, MainMenu } from 'shared/components'
+    import { Idle, MainMenu, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
