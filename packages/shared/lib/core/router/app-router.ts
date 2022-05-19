@@ -66,7 +66,6 @@ export class AppRouter extends Router<AppRoute> {
                 break
             case AppRoute.Profile:
                 nextRoute = AppRoute.Setup
-                nextRoute = AppRoute.ClaimRewards
                 break
             case AppRoute.Setup: {
                 const { setupType } = params
