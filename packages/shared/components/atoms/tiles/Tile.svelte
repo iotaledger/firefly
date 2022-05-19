@@ -26,7 +26,7 @@
         {#if icon}
             {#if iconBackgroundColor}
                 <div
-                    class="icon-bg text-{iconBackgroundColor} w-8 h-8 p-1 rounded-full flex justify-center items-center {iconLabel
+                    class="icon-bg bg-{iconBackgroundColor} w-8 h-8 p-1 rounded-full flex justify-center items-center {iconLabel
                         ? 'mr-4'
                         : ''}"
                     style="--icon-bg-color: {iconBackgroundColor}"
