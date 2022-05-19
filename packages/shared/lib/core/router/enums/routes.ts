@@ -15,6 +15,7 @@ export enum AppRoute {
     Import = 'import',
     Migrate = 'migrate',
     Balance = 'balance',
+    ClaimRewards = 'claimRewards',
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
     Login = 'login',

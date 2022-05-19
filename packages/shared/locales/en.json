@@ -123,6 +123,10 @@
             "title": "Successfully backed up",
             "body": "You have backed up your wallets to a Stronghold."
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "Wallet setup completed",
             "fundsMigrated": "Funds migrated",
@@ -929,6 +933,7 @@
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
+        "useBalanceFinder": "Use balance finder",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
         "searching": "Searching...",
@@ -946,7 +951,10 @@
         "mergeFunds": "Merge funds",
         "done": "Done",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup"
     },
     "general": {
         "recipient": "Recipient",
@@ -1104,7 +1112,8 @@
         "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copied to clipboard",
+        "amountClaimed": "{amount} claimed"
     },
     "dates": {
         "today": "Today",

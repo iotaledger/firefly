@@ -25,6 +25,7 @@
         Appearance,
         Backup,
         Balance,
+        ClaimRewards,
         Congratulations,
         CrashReporting,
         Create,
@@ -212,6 +213,9 @@
         </Route>
         <Route route={AppRoute.Balance}>
             <Balance locale={$_} />
+        </Route>
+        <Route route={AppRoute.ClaimRewards}>
+            <ClaimRewards />
         </Route>
         <Route route={AppRoute.Migrate}>
             <Migrate locale={$_} {goto} />
