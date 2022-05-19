@@ -49,7 +49,7 @@
             <Text type="h4" classes="text-center">
                 {locale(
                     $settingsRoute === SettingsRoute.Init
-                        ? 'general.yourWallets'
+                        ? 'views.settings.settings'
                         : `views.settings.${$settingsRoute}.title`
                 )}
             </Text>
