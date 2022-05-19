@@ -6,7 +6,7 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { Idle, Sidebar } from 'shared/components'
+    import { Idle, MainMenu, Sidebar } from 'shared/components'
     import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
@@ -408,25 +408,29 @@
     }
 </script>
 
-<Idle />
-<div class="dashboard-wrapper flex flex-col w-full h-full">
-    {#if showTopNav}
-        <TopNavigation
-            {onCreateAccount}
-            classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
-        />
-    {/if}
-    <div class="flex flex-row flex-auto h-1">
-        <Sidebar {locale} />
+{#if $mobile}
+    <Idle />
+    <div class="flex flex-col w-full h-full">
+        <TopNavigation {onCreateAccount} />
+        <MainMenu {locale} />
         <!-- Dashboard Pane -->
-        <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+    </div>
+{:else}
+    <Idle />
+    <div class="dashboard-wrapper flex flex-col w-full h-full">
+        {#if showTopNav}
+            <TopNavigation
+                {onCreateAccount}
+                classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
+            />
+        {/if}
+        <div class="flex flex-row flex-auto h-1">
+            <Sidebar {locale} />
+            <!-- Dashboard Pane -->
+            <div class="flex flex-col w-full h-full">
+                <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+            </div>
         </div>
     </div>
-</div>
-
-<style type="text/scss">
-    :global(:not(body.platform-win32)) .dashboard-wrapper {
-        margin-top: calc(env(safe-area-inset-top) / 2);
-    }
-</style>
+{/if}
