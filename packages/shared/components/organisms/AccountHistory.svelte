@@ -16,29 +16,7 @@
     import { selectedAccount } from '@core/account'
     import { searchTransactions } from '@core/wallet'
 
-    // const transactions = getAccountMessages($selectedAccount)
-    const transactions = [
-        {
-            id: '1',
-            version: 1,
-            parents: [''],
-            payloadLength: 123,
-            timestamp: 'string',
-            nonce: 123123,
-            account: 1,
-            broadcasted: true,
-        } as AccountMessage,
-        {
-            id: '2',
-            version: 1,
-            parents: [''],
-            payloadLength: 123,
-            timestamp: 'string',
-            nonce: 123123,
-            account: 1,
-            broadcasted: true,
-        } as AccountMessage,
-    ]
+    const transactions = getAccountMessages($selectedAccount)
 
     function handleTransactionClick(message: AccountMessage): void {
         openPopup({
