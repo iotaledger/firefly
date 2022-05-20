@@ -990,7 +990,7 @@
         "profiles": "Profilok",
         "dev": "Fejlesztő",
         "createAccount": "Tárca létrehozása",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Tárca hozzáadása",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Letétben nem lévő összeg",
         "accountColor": "Tárcaszín",
         "myAssets": "Pénzügyi eszközeim",
-        "total": "Total: {balance}"
+        "total": "Összes egyenleg: {balance}"
     },
     "dates": {
         "today": "Ma",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "A staking esemény nem található.",
             "cannotVisitAirdropWebsite": "A(z) {airdrop} weboldal nem elérhető.",
             "invalidStakingEventId": "Hibás staking esemény azonosító.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Nem sikerült a korábbi jutalmak lekérdezése. Kérjük ellenőrizze tűzfala beállításait."
         },
         "invalidDate": "Helytelen dátum",
         "invalidTime": "Helytelen idő"
