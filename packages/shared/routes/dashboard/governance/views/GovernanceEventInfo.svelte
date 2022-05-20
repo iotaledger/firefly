@@ -103,21 +103,16 @@
             />
         {/if}
     </div>
-    <div class="flex flex-col space-y-4 mb-9">
+    <div class="flex flex-col space-y-4 mb-6">
         <Text type="h2">{event?.information?.name}</Text>
-        {#if event?.information?.additionalInfo}
+        {#if event?.information?.payload?.questions[0]?.text}
             <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
                 {event?.information?.additionalInfo}
             </Text>
         {/if}
-        {#if event?.information?.payload?.questions[0]?.text}
-            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
+        {#if event?.information?.additionalInfo}
+            <Text type="h3" overrideColor classes="text-gray-900 dark:text-white">
                 {event?.information?.payload?.questions[0]?.text}
-            </Text>
-        {/if}
-        {#if event?.information?.payload?.questions[0]?.additionalInfo}
-            <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
-                {event?.information?.payload?.questions[0]?.additionalInfo}
             </Text>
         {/if}
     </div>
@@ -133,7 +128,7 @@
                 class="relative py-5 px-6 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:bg-opaciity-100 rounded-xl border border-solid border-gray-200 dark:border-transparent"
             >
                 <div class="flex justify-between w-full items-center">
-                    <div class="flex flex-col mr-16">
+                    <div class="flex flex-col mr-12">
                         <div class="flex items-center mb-2">
                             {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) || isWinnerAnswer(answer?.value)}
                                 {#if event?.status?.status === ParticipationEventState.Holding}
