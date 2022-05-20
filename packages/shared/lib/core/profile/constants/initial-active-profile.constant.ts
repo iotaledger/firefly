@@ -1,6 +1,5 @@
-import { IAccountState } from '@core/account'
 import { writable } from 'svelte/store'
-import { IProfile, IBalanceOverview } from '../interfaces'
+import { IBalanceOverview, IProfile } from '../interfaces'
 
 export const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
     balanceOverview: writable<IBalanceOverview>({
@@ -12,7 +11,6 @@ export const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
         balanceRaw: 0,
         balanceFiat: '$ 0.00',
     }),
-    accounts: writable<IAccountState[]>([]),
     hasLoadedAccounts: writable<boolean>(false),
     isStrongholdLocked: writable<boolean>(true),
     shouldOpenProfileModal: writable<boolean>(false),
@@ -24,4 +22,5 @@ export const INITIAL_ACTIVE_PROFILE: Partial<IProfile> = {
             to: string
         }
     }>({}),
+    showHiddenAccounts: false,
 }

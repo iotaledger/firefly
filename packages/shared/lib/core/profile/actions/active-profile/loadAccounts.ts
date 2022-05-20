@@ -1,11 +1,11 @@
+import { activeAccounts, activeProfile, getAccountMetadataById } from '@core/profile'
 import { buildAccountState, IAccountState, setSelectedAccount } from '@core/account'
-import { activeProfile, getAccountMetadataById } from '@core/profile'
 import { getAccounts } from '@core/profile-manager'
 import { get } from 'svelte/store'
 
 export async function loadAccounts(): Promise<void> {
     try {
-        const { hasLoadedAccounts, accounts, lastUsedAccountId } = get(activeProfile)
+        const { hasLoadedAccounts, lastUsedAccountId } = get(activeProfile)
         const accountsResponse = await getAccounts()
         if (accountsResponse.length === 0) {
             hasLoadedAccounts.set(true)
@@ -19,8 +19,8 @@ export async function loadAccounts(): Promise<void> {
                 const accountState = await buildAccountState(account, metadata)
                 loadedAccounts.push(accountState)
             }
-            accounts.update((_accounts) => loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
-            setSelectedAccount(lastUsedAccountId ?? get(accounts)?.[0]?.id ?? null)
+            activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
+            setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
             hasLoadedAccounts.set(true)
         }
     } catch (err) {

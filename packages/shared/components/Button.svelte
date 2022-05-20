@@ -25,6 +25,8 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
     export let iconOnly = false
+    export let iconHeight: string
+    export let iconWidth: string
 
     export let onClick = (): void | string => ''
 
@@ -55,7 +57,7 @@
         {disabled}
         bind:this={buttonElement}
     >
-        <Icon classes="mb-1" {icon} />
+        <Icon classes="mb-1" {icon} height={iconHeight} width={iconWidth} />
         <span class="text-12 leading-140">
             <slot />
         </span>
@@ -89,7 +91,7 @@
                     <div class="relative flex flex-row justify-between">
                         <div class="relative flex items-center flex-1">
                             <div class="absolute left-0 flex items-center">
-                                <Icon width="16" height="16" classes="mr-4" {icon} />
+                                <Icon width={iconWidth ?? '16'} height={iconHeight ?? '16'} classes="mr-4" {icon} />
                             </div>
                             <span class="font-bold text-12 leading-140"><slot /></span>
                         </div>
@@ -100,8 +102,8 @@
                             <span class="font-bold text-12 leading-140"><slot /></span>
                             <div class="absolute right-0 flex items-center">
                                 <Icon
-                                    width={showHoverText ? 20 : 16}
-                                    height={showHoverText ? 20 : 16}
+                                    width={showHoverText ? 20 : iconWidth ?? 16}
+                                    height={showHoverText ? 20 : iconHeight ?? 16}
                                     classes="ml-4 showHoverText"
                                     {icon}
                                 />
@@ -110,20 +112,20 @@
                     </div>
                 {/if}
             {:else if iconOnly}
-                <Icon width="24" height="24" {icon} />
+                <Icon width={iconWidth ?? 24} height={iconHeight ?? 24} {icon} />
             {:else}
-                <div class="relative flex flex-row justify-between">
-                    <div class="relative flex items-center flex-1">
-                        <div class="absolute left-0 flex items-center">
-                            <Icon classes="mr-4" {icon} />
-                        </div>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+                        <Icon height={iconHeight} width={iconWidth} {icon} />
+                    </div>
+                    <div class="col-span-10 h-full flex items-center">
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
-                    {#if !disabled}
-                        <div class="absolute right-0 flex items-center h-full">
+                    <div class="col-span-1 h-full flex items-center">
+                        {#if !disabled}
                             <Icon icon="chevron-right" classes="right" />
-                        </div>
-                    {/if}
+                        {/if}
+                    </div>
                 </div>
             {/if}
         {:else}
@@ -350,8 +352,6 @@
             }
             span {
                 @apply text-gray-800;
-                @apply ml-10;
-                @apply mr-6;
             }
             :global(svg) {
                 @apply text-blue-500;

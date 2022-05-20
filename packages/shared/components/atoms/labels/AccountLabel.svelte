@@ -4,11 +4,14 @@
     import { IAccountState } from '@core/account'
 
     export let account: IAccountState
+    export let selected = true
 </script>
 
 <div class="flex flex row items-center space-x-3">
-    <div class="circle" style="--account-color: {account.color};" />
-    <Text type="p" fontSize="base" fontWeight={FontWeightText.medium}>{account?.getAlias()}</Text>
+    <div class="circle" style="--account-color: {account?.color};" />
+    <Text type="h5" fontSize="base" classes={selected ? '' : 'opacity-50'} fontWeight={FontWeightText.medium}
+        >{account?.name}</Text
+    >
 </div>
 
 <style type="text/scss">

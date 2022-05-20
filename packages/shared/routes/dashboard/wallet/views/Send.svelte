@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get, Readable } from 'svelte/store'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -22,9 +22,8 @@
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeAccounts, isLedgerProfile, isSoftwareProfile, visibleActiveAccounts } from '@core/profile'
     import { accountRouter } from '@core/router'
-    import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import {
         GeneratingRemainderDepositAddressEvent,
@@ -46,10 +45,7 @@
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
 
-    const { accounts } = $activeProfile
-
-    const liveAccounts = getContext<Readable<IAccountState[]>>('liveAccounts')
-    const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
+    const addressPrefix = ($selectedAccount ?? $visibleActiveAccounts[0])?.depositAddress?.split('1')?.[0]
 
     enum SEND_TYPE {
         EXTERNAL = 'sendPayment',
@@ -118,7 +114,7 @@
 
     let accountsDropdownItems: IAccountState[]
     $: {
-        accountsDropdownItems = $liveAccounts.map((acc) => addLabel(acc))
+        accountsDropdownItems = $visibleActiveAccounts.map((acc) => addLabel(acc))
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
         }
@@ -358,7 +354,7 @@
             let accountAlias = internal ? to?.getAlias() : undefined
 
             if (!internal) {
-                for (const acc of $accounts) {
+                for (const acc of $activeAccounts) {
                     const internalAddress = acc.addresses.find((a) => a.address === address)
                     if (internalAddress) {
                         accountAlias = acc.getAlias()
@@ -422,15 +418,16 @@
     }
 
     const updateFromSendParams = (sendParams: SendParams): void => {
-        selectedSendType = sendParams.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        selectedSendType =
+            sendParams.isInternal && $visibleActiveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         unit = sendParams.unit ?? (Number(sendParams.amount) === 0 ? Unit.Mi : Unit.i)
         amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
         to = sendParams?.toWalletAccount?.id !== $selectedAccount.id ? sendParams?.toWalletAccount : undefined
         if (accountsDropdownItems) {
             to =
-                $liveAccounts.length === 2
-                    ? accountsDropdownItems[$selectedAccount.id === $liveAccounts[0].id ? 1 : 0]
+                $visibleActiveAccounts.length === 2
+                    ? accountsDropdownItems[$selectedAccount.id === $visibleActiveAccounts[0].id ? 1 : 0]
                     : to
         }
     }
@@ -494,7 +491,7 @@
                         {localize(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
-                {#if $liveAccounts.length > 1}
+                {#if $visibleActiveAccounts.length > 1}
                     <button
                         on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                         disabled={$isTransferring}
@@ -532,10 +529,10 @@
                             placeholder={localize('general.to')}
                             items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2}
+                            disabled={$isTransferring || $visibleActiveAccounts.length === 2}
                             error={toError}
                             classes="mb-6"
-                            autofocus={$liveAccounts.length > 2}
+                            autofocus={$visibleActiveAccounts.length > 2}
                         />
                     {:else}
                         <Address
@@ -554,7 +551,7 @@
                         bind:unit
                         onMaxClick={handleMaxClick}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts?.length === 2}
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $visibleActiveAccounts?.length === 2}
                     />
                 </div>
             </div>

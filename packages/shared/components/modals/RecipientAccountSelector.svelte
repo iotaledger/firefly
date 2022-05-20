@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { truncateString } from 'shared/lib/helpers'
-    import { activeProfile } from '@core/profile'
+    import { visibleActiveAccounts } from '@core/profile'
     import { IAccountState, selectedAccount } from '@core/account'
     import { Modal, AccountLabel, Text } from 'shared/components'
     import { fade } from 'svelte/transition'
@@ -9,15 +9,10 @@
     export let searchValue: string
     export let selected: IAccountState
 
-    const { accounts } = $activeProfile
-
-    $: otherAccounts = $accounts.filter((account) => account.id !== $selectedAccount.id)
-    $: filteredAccounts = otherAccounts.filter(
+    $: otherAccounts = $visibleActiveAccounts?.filter((account) => account.id !== $selectedAccount.id)
+    $: filteredAccounts = otherAccounts?.filter(
         (account) =>
-            account
-                .getAlias()
-                .toLowerCase()
-                .includes(searchValue?.toLowerCase() ?? '') ||
+            account.name.toLowerCase().includes(searchValue?.toLowerCase() ?? '') ||
             account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')
     )
     $: scrollable = filteredAccounts.length > 5

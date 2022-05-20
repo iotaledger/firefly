@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Modal, AccountActionsModal } from 'shared/components'
+    import { Modal, AccountActionsMenu } from 'shared/components'
 
     export let classes = ''
 
@@ -16,4 +16,4 @@
         </svg>
     {/each}
 </button>
-<AccountActionsModal bind:modal />
+<AccountActionsMenu bind:modal />

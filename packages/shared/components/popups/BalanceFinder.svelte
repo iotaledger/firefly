@@ -7,7 +7,7 @@
     import { localize } from '@core/i18n'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
     import { onDestroy } from 'svelte'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeAccounts, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
 
     const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
@@ -86,7 +86,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.balanceFinder.accountsFound')}</Text>
-        <Text type="p" highlighted>{$accounts.length}</Text>
+        <Text type="p" highlighted>{$activeAccounts.length}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.balanceFinder.totalWalletBalance')}</Text>

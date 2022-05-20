@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { isLedgerProfile, updateAccountMetadataOnActiveProfile } from '@core/profile'
+import { isLedgerProfile, updateActiveAccountMetadata } from '@core/profile'
 import { displayNotificationForLedgerProfile } from '@lib/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
@@ -10,7 +10,7 @@ export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountM
     try {
         // TODO: Replace Promise.resolve() with update metadata in wallet.rs when api is exposed
         await Promise.resolve()
-        updateAccountMetadataOnActiveProfile(get(selectedAccount)?.id, metadata)
+        updateActiveAccountMetadata(get(selectedAccount)?.id, metadata)
         updateSelectedAccount(metadata)
     } catch (error) {
         if (error) {

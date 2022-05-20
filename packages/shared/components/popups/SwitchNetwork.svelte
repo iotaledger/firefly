@@ -6,6 +6,7 @@
     import { updateClientOptions, INetwork, INetworkConfig, INode } from '@core/network'
     import { getOfficialNodes } from '@core/network/utils'
     import {
+        activeAccounts,
         activeProfile,
         isLedgerProfile,
         isSoftwareProfile,
@@ -53,7 +54,7 @@
             return
         }
 
-        const oldAccounts = get($activeProfile?.accounts)
+        const oldAccounts = $activeAccounts
         const oldConfig = $activeProfile?.settings?.networkConfig
         const newConfig = {
             ...oldConfig,
@@ -67,7 +68,7 @@
             updateClientOptions(newConfig)
             updateActiveProfileSettings({ networkConfig: newConfig })
 
-            await asyncRemoveWalletAccounts(get($activeProfile?.accounts).map((a) => a.id))
+            await asyncRemoveWalletAccounts($activeAccounts.map((a) => a.id))
             await createNewAccount(`${localize('general.account')} 1`)
             await logout()
         } catch (err) {
@@ -79,7 +80,7 @@
              * (namely client options, network config, account data,
              * etc.)
              */
-            $activeProfile?.accounts.set(oldAccounts)
+            activeAccounts.set(oldAccounts)
             updateClientOptions(oldConfig)
             updateActiveProfileSettings({ networkConfig: oldConfig })
 

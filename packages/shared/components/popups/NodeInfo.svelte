@@ -16,7 +16,6 @@
     let nodeContent = ''
 
     onMount(() => {
-        const { accounts } = $activeProfile
         asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanAuth(node?.auth))
             .then((nodeInfo) => {
                 nodeContent = combineNodeInfo(node?.url, nodeInfo)

@@ -34,7 +34,14 @@
         </div>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button icon="plus" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.New)}>
+        <Button
+            icon="plus"
+            iconHeight="15"
+            iconWidth="15"
+            classes="w-full"
+            secondary
+            onClick={() => handleContinueClick(SetupType.New)}
+        >
             {locale('actions.createWallet')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('actions.createWalletDescription')}</Text>

@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Text, ExpirationTimePickerMenu, Modal } from 'shared/components'
-
+    export let value: string
     let modal: Modal
-    let value: string
     let selected: 'none' | '1hour' | '1day' | '1week' = 'none'
 </script>
 

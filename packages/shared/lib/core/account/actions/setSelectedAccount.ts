@@ -1,10 +1,9 @@
-import { activeProfile } from '@core/profile'
+import { activeAccounts } from '@core/profile'
 import { get } from 'svelte/store'
 import { selectedAccount, selectedAccountId } from '../stores'
 
 export function setSelectedAccount(id: string): void {
-    const { accounts } = get(activeProfile)
-    const account = get(accounts)?.find((_account) => _account.id === id)
+    const account = get(activeAccounts)?.find((_account) => _account.id === id)
     if (account) {
         selectedAccountId.set(id)
         selectedAccount.set(account)

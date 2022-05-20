@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import { ITokenMetadata, formatBestMatchTokenAmount, formatPreciseTokenAmount } from '@core/wallet'
 
     export let amount = 0
@@ -14,7 +14,7 @@
 
 {#if amount}
     <button on:click={togglePreciseValue}>
-        <Text type={TextType.h2}>
+        <Text type={TextType.h1} fontWeight={FontWeightText.semibold}>
             {showPreciseValue
                 ? formatPreciseTokenAmount(amount, tokenMetadata)
                 : formatBestMatchTokenAmount(amount, tokenMetadata)}
