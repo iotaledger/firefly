@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { activeAccounts, activeProfile } from '@core/profile'
+import { activeAccounts } from '@core/profile'
 import { getTrimmedLength } from '@lib/helpers'
 import { get } from 'svelte/store'
 import { MAX_ACCOUNT_NAME_LENGTH } from '../constants'

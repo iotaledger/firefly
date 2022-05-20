@@ -25,8 +25,8 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
     export let iconOnly = false
-    export let iconHeight: string | undefined = undefined
-    export let iconWidth: string | undefined = undefined
+    export let iconHeight: string
+    export let iconWidth: string
 
     export let onClick = (): void | string => ''
 

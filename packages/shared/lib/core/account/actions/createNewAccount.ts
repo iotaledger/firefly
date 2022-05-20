@@ -12,7 +12,7 @@ import { IAccountState } from '../interfaces'
 import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
 
 export async function createNewAccount(name?: string, color?: string): Promise<IAccountState> {
-    const { accounts, networkProtocol } = get(activeProfile)
+    const { networkProtocol } = get(activeProfile)
     try {
         const createdAccount = await createStardustAccount({
             alias: name || `${localize('general.account')} ${(get(activeAccounts)?.length ?? 0) + 1}`,
