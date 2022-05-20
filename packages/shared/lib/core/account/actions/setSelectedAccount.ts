@@ -1,4 +1,4 @@
-import { activeAccounts, activeProfile } from '@core/profile'
+import { activeAccounts } from '@core/profile'
 import { get } from 'svelte/store'
 import { selectedAccount, selectedAccountId } from '../stores'
 
