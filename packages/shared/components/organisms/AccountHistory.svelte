@@ -16,31 +16,8 @@
     import { selectedAccount } from '@core/account'
     import { searchTransactions } from '@core/wallet'
 
-    const transactions = getAccountMessages($selectedAccount)
-
-    function handleTransactionClick(message: AccountMessage): void {
-        openPopup({
-            type: 'activityDetails',
-            props: { message },
-        })
-    }
-
-    function handleBackClick(): void {
-        selectedMessage.set(null)
-    }
-
-    const filters = ['all', 'incoming', 'outgoing']
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
-
-    let searchActive = false
-    let inputElement: HTMLInputElement
-    let searchValue: string
-    $: if (searchActive && inputElement) inputElement.focus()
-    $: searchValue = searchActive ? searchValue.toLowerCase() : ''
-
-    // let filteredTransactions = transactions
-
-    let filteredTransactions = [
+    // const transactions = getAccountMessages($selectedAccount)
+    const transactions = [
         {
             id: '1',
             version: 1,
@@ -63,6 +40,28 @@
         } as AccountMessage,
     ]
 
+    function handleTransactionClick(message: AccountMessage): void {
+        openPopup({
+            type: 'activityDetails',
+            props: { message },
+        })
+    }
+
+    function handleBackClick(): void {
+        selectedMessage.set(null)
+    }
+
+    const filters = ['all', 'incoming', 'outgoing']
+    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
+
+    let searchActive = false
+    let inputElement: HTMLInputElement
+    let searchValue: string
+    $: if (searchActive && inputElement) inputElement.focus()
+    $: searchValue = searchActive ? searchValue.toLowerCase() : ''
+
+    let filteredTransactions = transactions
+
     $: switch (activeFilterIndex) {
         case 0:
             filteredTransactions = transactions
@@ -82,13 +81,14 @@
     function search() {
         if (searchValue) {
             queryTransactions = searchTransactions(filteredTransactions, searchValue)
+        } else {
+            queryTransactions = filteredTransactions
         }
     }
 
     $: if (searchActive && searchValue) {
         debounce(search)()
-    } else if (!searchActive) {
-        searchValue = ''
+    } else {
         queryTransactions = filteredTransactions
     }
 
