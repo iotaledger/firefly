@@ -1,9 +1,10 @@
+import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     aggregateAccountActivity,
     api,
-    getAccountMetadataWithCallback,
     formatAccountWithMetadata,
+    getAccountMetadataWithCallback,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -12,17 +13,21 @@ import {
     wallet,
 } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
-import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { ASSEMBLY_EVENT_ID } from './participation'
 import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+import {
+    getPendingParticipation,
+    hasPendingParticipation,
+    isChangingParticipation,
+    removePendingParticipations,
+} from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
 import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
-import { ASSEMBLY_EVENT_ID } from './participation'
 
 /**
  * Initialises event listeners from wallet library
@@ -113,8 +118,15 @@ export const initialiseListeners = (): void => {
                 await getParticipationOverview(ASSEMBLY_EVENT_ID)
 
                 // If it is a message related to any participation event, display a notification and close any open participation popup
-                displayParticipationNotification(getPendingParticipation(message.id))
-                if (get(popupState).type === 'governanceManager' || get(popupState).type === 'stakingManager') {
+                // except for unvote for when the user is changing the vote (automatic unvote & vote)
+                if (
+                    !get(isChangingParticipation) ||
+                    (get(isChangingParticipation) &&
+                        getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote)
+                ) {
+                    displayParticipationNotification(getPendingParticipation(message.id))
+                }
+                if (get(popupState).type === 'stakingManager') {
                     closePopup()
                 }
 
@@ -390,7 +402,7 @@ export function displayParticipationNotification(pendingParticipation: PendingPa
             localeGroup = 'stakingManager'
             localeAction = action === ParticipationAction.Stake ? 'staked' : 'unstaked'
         } else if (action === ParticipationAction.Vote || action === ParticipationAction.Unvote) {
-            localeGroup = 'votingConfirmation'
+            localeGroup = 'governanceManager'
             localeAction = action === ParticipationAction.Vote ? 'voted' : 'unvoted'
         }
         showAppNotification({

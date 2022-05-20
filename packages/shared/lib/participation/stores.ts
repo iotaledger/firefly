@@ -35,6 +35,11 @@ export const pendingParticipations = writable<PendingParticipation[]>([])
 export const participationAction = writable<ParticipationAction>(null)
 
 /**
+ * Store used to keep track when the user has excplicitly requested to change a participation (eg, governance vote).
+ */
+export const isChangingParticipation = writable<boolean>(false)
+
+/**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
  */
 export const participationOverview = writable<ParticipationOverview>([])
@@ -252,9 +257,9 @@ export const resetPerformingParticipation = (): void => {
     if (!get(isSoftwareProfile)) {
         transferState.set(null)
     }
-
     isPerformingParticipation.set(false)
     participationAction.set(undefined)
+    isChangingParticipation.set(false)
 }
 
 export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])

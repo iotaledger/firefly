@@ -8,7 +8,7 @@
 
 <div class="w-full h-full flex flex-col flex-nowrap flex-1 bg-gray-50 dark:bg-gray-900">
     <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-        <div class="h-full flex flex-col space-y-3">
+        <div class="h-full flex flex-col space-y-3 min-h-0">
             <DashboardPane classes="w-full flex-shrink-0">
                 <GovernanceVotingWeight />
             </DashboardPane>

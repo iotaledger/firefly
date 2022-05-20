@@ -45,6 +45,13 @@ export enum ParticipationEventType {
     Staking = 1,
 }
 
+export enum VotingAction {
+    Cast = 'castVotes',
+    Merge = 'mergeVotes',
+    Stop = 'stopVotes',
+    Change = 'changeVotes',
+}
+
 /**
  * The status of a participation event.
  */

@@ -5,6 +5,7 @@ import { canAccountReachMinimumAirdrop } from './account'
 import { getParticipationOverview, getParticipationEvents } from './api'
 import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION, SHIMMER_EVENT_ID } from './constants'
 import {
+    isChangingParticipation,
     isPerformingParticipation,
     participationAction,
     participationEvents,
@@ -89,6 +90,7 @@ export const resetParticipation = (): void => {
     isFetchingParticipationInfo.set(false)
     isPerformingParticipation.set(false)
     participationAction.set(null)
+    isChangingParticipation.set(false)
     participationEvents.set([])
     participationOverview.set([])
     pendingParticipations.set([])
