@@ -1,27 +1,20 @@
 <script lang="typescript">
-    import { ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityRow, Icon, Text, SearchBar } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
-        api,
         isSyncing,
         getIncomingFlag,
         isFirstSessionSync,
         selectedMessage,
-        sendAddressFromTransactionPayload,
-        receiverAddressesFromTransactionPayload,
         walletSetupType,
         getAccountMessages,
     } from 'shared/lib/wallet'
-    import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
     import { AccountMessage } from 'shared/lib/typings/wallet'
-    import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
-    import { formatUnitBestMatch } from 'shared/lib/units'
+    import { debounce } from 'shared/lib/utils'
     import { selectedAccount } from '@core/account'
+    import { searchTransactions } from '@core/wallet'
 
     const transactions = getAccountMessages($selectedAccount)
 
@@ -34,58 +27,6 @@
 
     function handleBackClick(): void {
         selectedMessage.set(null)
-    }
-
-    const handleSyncAccountClick = () => {
-        if (!$isSyncing) {
-            const _syncAccount = () => {
-                $isSyncing = true
-                api.syncAccount($selectedAccount?.id, {
-                    onSuccess() {
-                        $isSyncing = false
-                    },
-                    onError(err) {
-                        $isSyncing = false
-
-                        const shouldHideErrorNotification =
-                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                        if (!shouldHideErrorNotification) {
-                            if ($isLedgerProfile) {
-                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                            } else {
-                                showAppNotification({
-                                    type: 'error',
-                                    message: localize(err.error),
-                                })
-                            }
-                        }
-                    },
-                })
-            }
-
-            if ($isSoftwareProfile) {
-                api.getStrongholdStatus({
-                    onSuccess(strongholdStatusResponse) {
-                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                            openPopup({
-                                type: 'password',
-                                props: { onSuccess: () => _syncAccount() },
-                            })
-                        } else {
-                            void _syncAccount()
-                        }
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err.error),
-                        })
-                    },
-                })
-            } else {
-                void _syncAccount()
-            }
-        }
     }
 
     const filters = ['all', 'incoming', 'outgoing']
@@ -116,21 +57,7 @@
 
     function search() {
         if (searchValue) {
-            queryTransactions = filteredTransactions.filter((transaction) => {
-                const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
-                return (
-                    sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
-                    receiverAddressesFromTransactionPayload(transaction?.payload).find(
-                        (addr) => addr === searchValue
-                    ) ||
-                    transaction?.id.toLowerCase() === searchValue ||
-                    (searchValue[0] === '>' && unitToValue(searchValue.substring(1)) < transactionValue) ||
-                    (searchValue[0] === '<' && unitToValue(searchValue.substring(1)) > transactionValue) ||
-                    (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue)) ||
-                    transactionValue === unitToValue(searchValue) ||
-                    formatUnitBestMatch(transactionValue).toString().toLowerCase()?.includes(searchValue)
-                )
-            })
+            queryTransactions = searchTransactions(filteredTransactions, searchValue)
         }
     }
 
@@ -164,22 +91,20 @@
                 <Text type="h5">{localize('general.transactions')}</Text>
             </button>
         {:else}
-            <div class="flex flex-1 flex-row justify-between">
-                <Text type="h5">
-                    {localize('general.transactions')}
-                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
-                </Text>
-                {#if !$selectedMessage}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                        <Icon
-                            icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                        />
-                    </button>
-                {/if}
+            <div class="relative flex flex-1 flex-row justify-between">
+                <Text type="h5">{localize('general.transactions')}</Text>
+                <button on:click={() => (searchActive = !searchActive)}>
+                    <Icon
+                        icon="search"
+                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+                    cursor-pointer ml-2"
+                    />
+                </button>
+                <SearchBar bind:inputElement bind:searchValue bind:searchActive />
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
-                <ul class="flex flex-row justify-between space-x-8">
+                <!-- TODO: Wait for screen design for these -->
+                <!-- <ul class="flex flex-row justify-between space-x-8">
                     {#each filters as filter, i}
                         <li on:click={() => (activeFilterIndex = i)}>
                             <Text
@@ -194,25 +119,7 @@
                             </Text>
                         </li>
                     {/each}
-                </ul>
-                <button on:click={() => (searchActive = !searchActive)}>
-                    <Icon
-                        icon="search"
-                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
-                    cursor-pointer ml-2"
-                    />
-                </button>
-                <div
-                    class="z-0 flex items-center absolute left-0 transition-all {searchActive
-                        ? 'w-full'
-                        : 'w-0'} overflow-hidden"
-                >
-                    <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
-                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" bind:inputElement />
-                    <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
-                        <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
-                    </button>
-                </div>
+                </ul> -->
             </div>
         {/if}
     </div>
