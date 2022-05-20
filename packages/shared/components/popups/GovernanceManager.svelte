@@ -89,11 +89,6 @@
                                         }Body`,
                                         {
                                             values: {
-                                                amount: formatUnitBestMatch(
-                                                    $selectedAccountStore?.rawIotaBalance,
-                                                    true,
-                                                    3
-                                                ),
                                                 voteText: nextVote?.text,
                                                 voteValue: nextVote?.value,
                                             },
@@ -322,7 +317,11 @@
             <div class="flex items-center mb-6 bg-blue-50 dark:bg-gray-800 rounded-xl p-4">
                 <Icon icon="exclamation" classes="text-gray-500" />
                 <Text type="p" classes="px-3">
-                    {localize('popups.governanceManager.stopVotingDisclaimer')}
+                    {localize(
+                        `popups.governanceManager.${
+                            activeFlow === VotingAction.Stop ? 'stopVotingDisclaimer' : 'changeVoteDisclaimer'
+                        }`
+                    )}
                 </Text>
             </div>
             <div class="flex flex-row justify-between space-x-4 w-full">
