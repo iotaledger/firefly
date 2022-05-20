@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityRow, Icon, Text, SearchBar } from 'shared/components'
+    import { ActivityRow, Icon, TogglableButton, Text, SearchBar } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import {
@@ -38,7 +38,31 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
-    let filteredTransactions = transactions
+    // let filteredTransactions = transactions
+
+    let filteredTransactions = [
+        {
+            id: '1',
+            version: 1,
+            parents: [''],
+            payloadLength: 123,
+            timestamp: 'string',
+            nonce: 123123,
+            account: 1,
+            broadcasted: true,
+        } as AccountMessage,
+        {
+            id: '2',
+            version: 1,
+            parents: [''],
+            payloadLength: 123,
+            timestamp: 'string',
+            nonce: 123123,
+            account: 1,
+            broadcasted: true,
+        } as AccountMessage,
+    ]
+
     $: switch (activeFilterIndex) {
         case 0:
             filteredTransactions = transactions
@@ -63,7 +87,8 @@
 
     $: if (searchActive && searchValue) {
         debounce(search)()
-    } else {
+    } else if (!searchActive) {
+        searchValue = ''
         queryTransactions = filteredTransactions
     }
 
@@ -93,16 +118,12 @@
         {:else}
             <div class="relative flex flex-1 flex-row justify-between">
                 <Text type="h5">{localize('general.transactions')}</Text>
-                <button on:click={() => (searchActive = !searchActive)}>
-                    <Icon
-                        icon="search"
-                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
-                    cursor-pointer ml-2"
-                    />
-                </button>
-                <SearchBar bind:inputElement bind:searchValue bind:searchActive />
+                <TogglableButton icon="search" bind:active={searchActive} />
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
+                {#if searchActive}
+                    <SearchBar bind:inputElement bind:searchValue bind:searchActive />
+                {/if}
                 <!-- TODO: Wait for screen design for these -->
                 <!-- <ul class="flex flex-row justify-between space-x-8">
                     {#each filters as filter, i}
