@@ -20,7 +20,6 @@
     import { activeProfile } from '@core/profile'
     import {
         dashboardRoute,
-        dashboardRouter,
         DashboardRoute,
         resetWalletRoute,
         settingsRoute,
@@ -48,7 +47,7 @@
         $partiallyUnstakedAmount,
         manageUnstakedAmountNotification()
 
-    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    // $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
@@ -75,6 +74,10 @@
               ]
             : []),
     ]
+
+    // function openStaking() {
+    //     $dashboardRouter.goTo(DashboardRoute.Staking)
+    // }
 
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
@@ -112,10 +115,6 @@
         } else {
             $settingsRouter.previous()
         }
-    }
-
-    function openStaking() {
-        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 

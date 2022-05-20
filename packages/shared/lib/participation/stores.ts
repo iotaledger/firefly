@@ -68,6 +68,7 @@ export const stakedAccounts: Readable<IAccountState[]> = derived(
 export const selectedAccountParticipationOverview = derived(
     [participationOverview /* selectedAccount */],
     ([$participationOverview /* $selectedAccount */]) =>
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         $participationOverview?.find(({ accountIndex }) => /* accountIndex === $selectedAccount?.meta.index) ?? */ null)
 )
 
@@ -160,6 +161,7 @@ function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: Acco
         : accountOverview[rewardsKey] + accountOverview[rewardsBelowMinimumKey]
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCachedStakingRewards(airdrop: StakingAirdrop, accountId: string): number {
     // if (!airdrop || !accountId) return 0
 

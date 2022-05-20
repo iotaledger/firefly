@@ -12,7 +12,7 @@
     export let iconColor = undefined
     export let title
     export let description
-    export let onClick = (..._: any[]): void => {}
+    export let onClick: (..._: any[]) => void
 
     $: Object.keys(features?.settings?.[group])?.forEach((setting) => {
         if (!features?.settings?.[group]?.[setting]?.enabled) {
@@ -20,6 +20,7 @@
             delete settings?.[settingName]
         }
     })
+
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">

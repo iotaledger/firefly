@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import {
-        initAppSettings,
         isAwareOfCrashReporting,
         mobile,
         needsToAcceptLatestPrivacyPolicy,
@@ -13,7 +12,6 @@
     import { validatePinFormat } from 'shared/lib/utils'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
-    import { get } from 'svelte/store'
     import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -99,15 +97,13 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
-            const { sendCrashReports } = get(initAppSettings) ?? { sendCrashReports: false }
-
             isBusy = true
 
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return Platform.getMachineId().then((machineId) =>
-                            getStorageDirectoryOfProfile(profile.id).then((path) => {
+                        return Platform.getMachineId().then(() =>
+                        getStorageDirectoryOfProfile(profile.id).then((path) => {
                                 initialiseProfileManager(path)
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {

@@ -32,7 +32,7 @@
                 onSuccess() {
                     isBackgroundSyncing.set(false)
                 },
-                onError(err) {
+                onError() {
                     showAppNotification({
                         type: 'error',
                         message: locale('error.account.syncing'),

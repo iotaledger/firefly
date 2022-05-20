@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Error, Text, InputContainer } from 'shared/components'
+    import { Text, InputContainer } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { TextPropTypes, TextType } from 'shared/components/Text.svelte'

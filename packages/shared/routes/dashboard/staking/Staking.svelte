@@ -20,17 +20,17 @@
     import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
     import { ASSEMBLY_EVENT_ID } from '@lib/participation'
-    import { isSoftwareProfile, updateActiveProfileSettings } from '@core/profile'
+    import { isSoftwareProfile } from '@core/profile'
 
-    const handleNewStakingEvent = (): void => {
-        openPopup({
-            type: 'newStakingPeriodNotification',
-            hideClose: true,
-            preventClose: false,
-        })
+    // const handleNewStakingEvent = (): void => {
+    //     openPopup({
+    //         type: 'newStakingPeriodNotification',
+    //         hideClose: true,
+    //         preventClose: false,
+    //     })
 
-        // updateActiveProfileSettings({'hasVisitedStaking': true})
-    }
+    //     updateActiveProfileSettings({'hasVisitedStaking': true})
+    // }
 
     // TODO: This is an exact copy of a method defined in Wallet.svelte. Need to move it to shared.
     const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {

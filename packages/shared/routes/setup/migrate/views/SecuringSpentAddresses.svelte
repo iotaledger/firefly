@@ -31,7 +31,7 @@
     onMount(() => {
         $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
-                promise.then((acc) => {
+                promise.then(() => {
                     const _updateOnSuccess = () => {
                         timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                         updateProgress()
@@ -65,7 +65,7 @@
                             })
                     }
                     return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
-                        .then((data) => {
+                        .then(() => {
                             _updateOnSuccess()
                         })
                         .catch((error) => {

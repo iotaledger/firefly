@@ -49,7 +49,7 @@ export function getLedgerDeviceStatus(
                 onDisconnected()
             }
         },
-        onError(err) {
+        onError() {
             onError()
         },
     })

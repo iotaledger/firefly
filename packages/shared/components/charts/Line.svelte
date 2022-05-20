@@ -123,7 +123,7 @@
                                 maxTicksLimit: yMaxTicks,
                                 beginAtZero,
                                 padding: 7,
-                                callback: function (value, index, values) {
+                                callback: function (value) {
                                     return formatYAxis(value)
                                 },
                             },

@@ -8,7 +8,6 @@
     export let hasFocus = false
     export let value
     export let integer
-    let error
 </script>
 
 <TextInput

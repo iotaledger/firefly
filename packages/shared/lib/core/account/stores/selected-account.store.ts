@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store'
-import { activeProfile, updateActiveAccount } from '@core/profile'
+import { updateActiveAccount } from '@core/profile'
 import { IAccountState } from '../interfaces'
 
 export const selectedAccount = writable<IAccountState>(null)

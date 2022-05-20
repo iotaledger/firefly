@@ -121,7 +121,7 @@
      * the auto-suggest feature or other event might follow
      * the keydown event and invalidate it.
      */
-    function changeHandlerHelper(event, index: number): void {
+    function changeHandlerHelper(event: InputEventInit, index: number): void {
         if (!/^[0-9]$/.test(event.data)) {
             inputs[index] = ''
         } else {

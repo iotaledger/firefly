@@ -15,7 +15,7 @@
     export let toAddress = ''
     export let toAmount = null
 
-    export let onCancel = (..._: any[]): void => {}
+    export let onCancel: (..._: any[]) => void
 
     const shouldDisplayRemainderAddress = remainderAddress?.length > 0
     const shouldDisplayRemainderAmount = remainderAmount !== null
