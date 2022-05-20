@@ -990,7 +990,7 @@
         "profiles": "用户配置",
         "dev": "开发者",
         "createAccount": "创建钱包",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "添加新钱包",
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "未质押的资金",
         "accountColor": "钱包颜色",
         "myAssets": "我的资产",
-        "total": "Total: {balance}"
+        "total": "总计: {balance}"
     },
     "dates": {
         "today": "今日",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "找不到质押活动。",
             "cannotVisitAirdropWebsite": "无法打开 {airdrop} 网站。",
             "invalidStakingEventId": "无效的 质押活动 ID。",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "无法获取前一个奖励，请检查您的防火墙设置。"
         },
         "invalidDate": "无效日期",
         "invalidTime": "无效时间"

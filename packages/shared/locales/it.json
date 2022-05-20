@@ -990,7 +990,7 @@
         "profiles": "Profili",
         "dev": "Dev",
         "createAccount": "Crea un wallet",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Aggiungi un portfolio",
         "accountName": "Nome wallet",
         "latestTransactions": "Ultime Transazioni",
         "transactions": "Transazioni",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Fondi non in staking",
         "accountColor": "Colore Wallet",
         "myAssets": "I miei Asset",
-        "total": "Total: {balance}"
+        "total": "Saldo totale"
     },
     "dates": {
         "today": "Oggi",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "Impossibile trovare l'evento di staking.",
             "cannotVisitAirdropWebsite": "Impossibile aprire il sito web {airdrop}.",
             "invalidStakingEventId": "ID evento staking non valido.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Impossibile recuperare i premi precedenti, si prega di controllare le impostazioni del firewall."
         },
         "invalidDate": "DATA INVALIDA",
         "invalidTime": "ORARIO INVALIDO"
