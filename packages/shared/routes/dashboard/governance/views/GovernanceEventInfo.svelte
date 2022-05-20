@@ -1,19 +1,27 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { canParticipate } from '@lib/participation'
+    import { canParticipate, getAccountParticipationAbility } from '@lib/participation'
     import {
         currentAccountTreasuryVotePartiallyUnvotedAmount,
         currentAccountTreasuryVoteValue,
         hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
     } from '@lib/participation/account'
-    import { ParticipationEvent, ParticipationEventState, VotingEventAnswer } from '@lib/participation/types'
+    import {
+        AccountParticipationAbility,
+        ParticipationEvent,
+        ParticipationEventState,
+        VotingEventAnswer,
+    } from '@lib/participation/types'
     import { openPopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
     import { selectedAccountStore } from '@lib/wallet'
     import { DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
+
+    $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
     const tooltip = {
         statusTimeline: { anchor: null as HTMLElement, show: false },
@@ -27,6 +35,14 @@
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
 
     function handleAnswerClick(_nextVote: VotingEventAnswer): void {
+        if (cannotVote) {
+            showAppNotification({
+                type: 'warning',
+                message: localize('warning.participation.noFunds'),
+            })
+
+            return
+        }
         nextVote = _nextVote
         openPopup({
             type: 'governanceManager',
