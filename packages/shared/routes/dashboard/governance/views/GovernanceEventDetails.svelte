@@ -80,7 +80,7 @@
         <DashboardPane classes="w-full h-full col-span-2">
             <GovernanceEventInfo {event} bind:nextVote />
         </DashboardPane>
-        <div class="h-full flex flex-col space-y-3">
+        <div class="h-full flex flex-col space-y-3 min-h-0">
             <DashboardPane classes="w-full flex-shrink-0">
                 <GovernanceEventStats {event} />
             </DashboardPane>
