@@ -7,6 +7,7 @@ const eslintRules = {
     'arrow-body-style': 'warn', // WARN b/c blocks style allows for readability and ensure scope
     'arrow-spacing': 'error',
     'eol-last': 'error',
+    'eqeqeq': 'error',
     'func-call-spacing': 'error',
     'indent': 'off', // OFF b/c causes problems between Prettier and ESLint
     'linebreak-style': 'off', // OFF b/c Windows (Git) puts CRLF line endings
