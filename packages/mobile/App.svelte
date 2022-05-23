@@ -32,7 +32,7 @@
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
 
-    mobile.set(process.env.PLATFORM == Platforms.MOBILE)
+    mobile.set(process.env.PLATFORM === Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
 
     $: $appSettings.darkMode

@@ -434,7 +434,7 @@ export const getAccountMessages = (account: IAccountState): AccountMessage[] => 
     })
 
     return Object.values(messages).sort((a, b) => {
-        if (a.id === b.id && a.payload?.type == 'Transaction') {
+        if (a.id === b.id && a.payload?.type === 'Transaction') {
             return getIncomingFlag(a.payload) ? -1 : 1
         }
         return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()

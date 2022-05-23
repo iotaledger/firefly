@@ -87,7 +87,7 @@
              */
             await removeProfileFolder(_activeProfile?.id)
         } catch (err) {
-            if (err && err?.type && err?.type == 'AccountNotEmpty') {
+            if (err && err?.type && err?.type === 'AccountNotEmpty') {
                 showAppNotification({
                     type: 'error',
                     message: locale('error.profile.delete.nonEmptyAccounts'),

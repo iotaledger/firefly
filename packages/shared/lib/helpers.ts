@@ -174,7 +174,7 @@ export const isRecentDate = (date: Date): { lessThanAMonth; lessThanThreeMonths 
     const months = Math.floor(weeks / 4.33)
     const threeMonths = Math.floor(months / 3)
 
-    return { lessThanAMonth: months == 0, lessThanThreeMonths: threeMonths == 0 }
+    return { lessThanAMonth: months === 0, lessThanThreeMonths: threeMonths === 0 }
 }
 
 /**

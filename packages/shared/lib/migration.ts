@@ -135,7 +135,7 @@ export const createUnsignedBundle = (
         for (let i = 0; i < securityLevel; i++) {
             bundle = addEntry(bundle, {
                 address: trytesToTrits(inputAddress),
-                value: valueToTrits(i == 0 ? -value : 0),
+                value: valueToTrits(i === 0 ? -value : 0),
                 issuanceTimestamp,
             })
         }
