@@ -15,7 +15,11 @@
         stakedAmount,
         unstakedAmount,
     } from 'shared/lib/participation/account'
-    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
+    import {
+        assemblyStakingEventState,
+        isChangingParticipation,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
     import { participationAction } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
@@ -23,7 +27,7 @@
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
-    $: showSpinner = !!$participationAction || $isSyncing
+    $: showSpinner = !!$participationAction || $isSyncing || $isChangingParticipation
 
     $: canParticipateInEvent =
         isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)
@@ -76,14 +80,19 @@
     }
 
     function getSpinnerMessage(): string {
-        if (
-            $participationAction === ParticipationAction.Stake ||
-            $participationAction === ParticipationAction.Unstake
-        ) {
-            const locale = $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
-            return localize(locale)
-        } else if ($isSyncing) {
-            return localize('general.syncingAccounts')
+        if ($isSyncing) {
+            return localize('general.syncing')
+        } else {
+            switch ($participationAction) {
+                case ParticipationAction.Stake:
+                    return localize('general.staking')
+                case ParticipationAction.Unstake:
+                    return localize('general.unstaking')
+                case ParticipationAction.Vote:
+                    return localize('general.voting')
+                case ParticipationAction.Unvote:
+                    return localize('general.unvoting')
+            }
         }
     }
 </script>
