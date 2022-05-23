@@ -1,16 +1,14 @@
 import { getNodeInfo } from '@core/profile-manager'
-import { get } from 'svelte/store'
-import { INodeInfoResponse } from '../interfaces'
+import { INodeInfoResponse } from '../interfaces/node-info-response.interface'
 import { updateNodeInfo } from '../stores/node-info.store'
 
 export async function getAndUpdateNodeInfo(): Promise<void> {
     let nodeInfoResponse: INodeInfoResponse
     try {
-        // TODO: adjust type of node info in bindings
         nodeInfoResponse = await getNodeInfo()
     } catch (error) {
         console.error(error)
         nodeInfoResponse = null
     }
-    updateNodeInfo(nodeInfoResponse?.nodeinfo)
+    updateNodeInfo(nodeInfoResponse?.node_info)
 }
