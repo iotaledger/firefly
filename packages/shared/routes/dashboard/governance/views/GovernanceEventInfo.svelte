@@ -122,7 +122,7 @@
                     disableVotingMessages.push({
                         show: true,
                         busy: true,
-                        message: localize('general.syncingAccounts'),
+                        message: localize('general.syncing'),
                     })
                 } else if (
                     $participationAction === ParticipationAction.Stake ||
