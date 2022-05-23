@@ -35,6 +35,7 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
+    import StorageDepositBreakdown from './StorageDepositBreakdown.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Version from './Version.svelte'
@@ -112,6 +113,7 @@
         nodeInfo: NodeInfo,
         addNode: AddNode,
         removeNode: RemoveNode,
+        storageDepositBreakdown: StorageDepositBreakdown,
         switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
