@@ -2,9 +2,7 @@
     import { appRouter } from '@core/router'
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { appSettings, mobile } from '@core/app'
-    import { SUPPORTED_LOCALES, setLanguage, _, Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { SUPPORTED_LOCALES, setLanguage, localize } from '@core/i18n'
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
@@ -14,7 +12,6 @@
 
     function handleLanguage(item: { value: string }): void {
         setLanguage(item)
-        locale = $_
     }
 </script>
 
@@ -24,8 +21,8 @@
             {#if !$mobile}
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             {/if}
-            <Text type={$mobile ? 'h3' : 'h1'}>{locale('views.onboarding1.title')}</Text>
-            <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
+            <Text type={$mobile ? 'h3' : 'h1'}>{localize('views.onboarding1.title')}</Text>
+            <Text type="p" secondary>{localize('views.onboarding1.body')}</Text>
         </div>
         {#if $mobile}
             <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
@@ -49,7 +46,7 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
+        <Button onClick={() => handleContinueClick()} classes="w-full">{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />

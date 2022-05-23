@@ -1,6 +1,6 @@
 import { Platform } from '@lib/platform'
 
-import { IAppUpdateDownloadProgress } from '../../interfaces'
+import { IAppUpdateDownloadProgress } from '../interfaces'
 import {
     appUpdateBusy,
     appUpdateComplete,
@@ -8,8 +8,11 @@ import {
     appUpdateMinutesRemaining,
     appUpdateProgress,
     appVersionDetails,
-} from '../../stores'
+} from '../stores'
 
+/**
+ * Registers all event handlers for application updates.
+ */
 export function registerAppUpdateEvents(): void {
     Platform.onEvent('version-details', (nativeVersionDetails) => {
         appVersionDetails.set(nativeVersionDetails)

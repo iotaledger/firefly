@@ -19,15 +19,15 @@
     const tos = needsToAcceptLatestTermsOfService()
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
-    const handleViewTosClick = () => {
+    function handleViewTosClick(): void {
         Platform.openUrl(TOS_LINK)
     }
 
-    const handleViewPrivPolicyClick = () => {
+    function handleViewPrivPolicyClick(): void {
         Platform.openUrl(PRIVACY_POLICY_LINK)
     }
 
-    const handleConfirmClick = () => {
+    function handleConfirmClick(): void {
         if (tos) {
             lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         }
@@ -38,7 +38,7 @@
         closePopup(true)
     }
 
-    const getTitleText = () => {
+    function getTitleText(): string {
         if (tos && privacyPolicy) {
             return 'views.legal.title'
         } else if (tos) {
@@ -48,7 +48,7 @@
         }
     }
 
-    const getBodyText = () => {
+    function getBodyText(): string {
         if (tos && privacyPolicy) {
             return 'popups.legalUpdate.tosAndPrivPolicyBody'
         } else if (tos) {
@@ -58,7 +58,7 @@
         }
     }
 
-    const getCheckboxText = () => {
+    function getCheckboxText(): string {
         if (tos && privacyPolicy) {
             return 'popups.legalUpdate.tosAndPrivPolicyCheckbox'
         } else if (tos) {

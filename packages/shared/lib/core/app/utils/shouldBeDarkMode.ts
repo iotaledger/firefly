@@ -11,12 +11,8 @@ import { AppTheme } from '@core/app'
 const IS_SYSTEM_IN_DARK_MODE = window.matchMedia('(prefers-color-scheme: dark)').matches
 
 /**
- * Determines if the theme is dark or not based on the current
- * application settings
- *
- * @param {AppTheme} theme The theme to check against
- *
- * @returns {boolean} True if the app should be in dark mode according to the theme
+ * Returns true if the application should be in dark mode based off of
+ * a given theme.
  */
 export const shouldBeDarkMode = (theme: AppTheme): boolean => {
     switch (theme) {

@@ -15,21 +15,13 @@ const DEFAULT_APP_SETTINGS: IAppSettings = {
 }
 
 /**
- * The application settings used throughout the application code, useful for
- * global settings beyond individual profile settings.
+ * The store containing the application settings used throughout the entire app.
  */
 export const appSettings = persistent<IAppSettings>('settings', DEFAULT_APP_SETTINGS)
 
 /**
- * The initial application settings, useful for things that require
- * Firefly to restart\*:
- * - Sentry diagnostic reporting for errors and crashes - the Electron
- *    app and Rust bindings both need to know if sendCrashReports is true
- *    when creating the actor system.
- *
- * \* The reason is that whenever the normal appSettings changes against this
- * object, we can determine if the user has restarted the application or not and
- * more importantly notify them if they need to do so.
+ * The store containing the initial application settings from the beginning of the current
+ * session.
  *
  * CAUTION: This variable is READ-ONLY - you write at your own risk.
  */

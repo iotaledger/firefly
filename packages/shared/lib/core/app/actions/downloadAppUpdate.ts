@@ -9,61 +9,36 @@ import {
 import { NotificationData } from '@lib/typings/notification'
 import { Platform } from '@lib/platform'
 
-import { installAppUpdate } from '../../utils'
+import { installAppUpdate } from '../utils'
 import {
     appUpdateBusy,
     appUpdateComplete,
     appUpdateError,
     appUpdateMinutesRemaining,
     appUpdateProgress,
-} from '../../stores'
+} from '../stores'
 import { cancelAppUpdateDownload } from './cancelAppUpdateDownload'
+import { Unsubscriber } from 'svelte/store'
 
-// TODO: Look for `appUpdateDownload` throughout the project
-export function downloadAppUpdate(): void {
+function resetAppUpdateStores(): void {
     appUpdateProgress.set(0)
     appUpdateMinutesRemaining.set(-1)
     appUpdateBusy.set(true)
     appUpdateComplete.set(false)
     appUpdateError.set(false)
+}
 
-    let progressSubscription = null
-    let minutesRemainingSubscription = null
-    let completeSubscription = null
-    let errorSubscription = null
+/**
+ * Initializes the download for an application update.
+ */
+export function downloadAppUpdate(): void {
+    resetAppUpdateStores()
 
-    const cleanup = () => {
-        removeDisplayNotification(notificationId)
-        progressSubscription()
-        completeSubscription()
-        errorSubscription()
-        minutesRemainingSubscription()
-    }
-
-    const downloadingNotification: NotificationData = {
-        type: 'info',
-        message: localize('notifications.downloadingUpdate'),
-        progress: 0,
-        subMessage: localize('notifications.calcMinutesRemaining'),
-        actions: [
-            {
-                label: localize('actions.cancel'),
-                callback: () => {
-                    cancelAppUpdateDownload()
-                    cleanup()
-                },
-            },
-        ],
-        timeout: NOTIFICATION_TIMEOUT_NEVER,
-    }
-
-    const notificationId = showAppNotification(downloadingNotification)
-
-    progressSubscription = appUpdateProgress.subscribe((progress) => {
+    const progressSubscription: Unsubscriber = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
 
-    minutesRemainingSubscription = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
+    const minutesRemainingSubscription: Unsubscriber = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -80,7 +55,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    completeSubscription = appUpdateComplete.subscribe((isComplete) => {
+    const completeSubscription: Unsubscriber = appUpdateComplete.subscribe((isComplete) => {
         if (isComplete) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -105,7 +80,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    errorSubscription = appUpdateError.subscribe((isError) => {
+    const errorSubscription: Unsubscriber = appUpdateError.subscribe((isError) => {
         if (isError) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -122,6 +97,34 @@ export function downloadAppUpdate(): void {
             })
         }
     })
+
+    const cleanup = () => {
+        removeDisplayNotification(notificationId)
+
+        progressSubscription()
+        completeSubscription()
+        errorSubscription()
+        minutesRemainingSubscription()
+    }
+
+    const downloadingNotification: NotificationData = {
+        type: 'info',
+        message: localize('notifications.downloadingUpdate'),
+        progress: 0,
+        subMessage: localize('notifications.calcMinutesRemaining'),
+        actions: [
+            {
+                label: localize('actions.cancel'),
+                callback: () => {
+                    cancelAppUpdateDownload()
+                    cleanup()
+                },
+            },
+        ],
+        timeout: NOTIFICATION_TIMEOUT_NEVER,
+    }
+
+    const notificationId = showAppNotification(downloadingNotification)
 
     void Platform.downloadAppUpdate()
 }

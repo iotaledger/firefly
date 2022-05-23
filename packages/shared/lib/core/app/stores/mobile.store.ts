@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
 /**
- * Mobile mode
+ * The store containing a boolean flag for if the application is targeting mobile platforms.
  */
 export const mobile = writable<boolean>(false)

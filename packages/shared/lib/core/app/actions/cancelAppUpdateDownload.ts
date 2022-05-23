@@ -6,8 +6,11 @@ import {
     appUpdateError,
     appUpdateMinutesRemaining,
     appUpdateProgress,
-} from '../../stores'
+} from '../stores'
 
+/**
+ * Cancels the download of the application update.
+ */
 export function cancelAppUpdateDownload(): void {
     void Platform.cancelAppUpdateDownload()
 

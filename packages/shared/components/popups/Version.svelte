@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Button, Logo, Text } from 'shared/components'
     import {
         setAppVersionDetails,
@@ -10,17 +12,13 @@
         appStage,
     } from '@core/app'
     import { Platform } from 'shared/lib/platform'
-    import { formatDate, Locale } from '@core/i18n'
+    import { formatDate, localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
-
-    export let locale: Locale
 
     let hasAutoUpdate = true
     let isPreRelease = true
 
-    function handleDownload() {
+    function handleDownload(): void {
         if (hasAutoUpdate) {
             downloadAppUpdate()
         } else {
@@ -28,7 +26,7 @@
         }
         closePopup()
     }
-    function handleCloseClick() {
+    function handleCloseClick(): void {
         closePopup()
     }
 
@@ -47,7 +45,7 @@
 </script>
 
 <Text type="h4" classes="mb-5"
-    >{locale('popups.version.title', { values: { version: $appVersionDetails.currentVersion } })}</Text
+    >{localize('popups.version.title', { values: { version: $appVersionDetails.currentVersion } })}</Text
 >
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
@@ -60,29 +58,29 @@
                     <!-- Capitalize first letter of stage name -->
                     {`Firefly ${$appStage.toString().replace(/^\w/, (c) => c.toUpperCase())}`}
                 {:else}
-                    {locale('popups.version.upToDateTitle')}
+                    {localize('popups.version.upToDateTitle')}
                 {/if}
             </Text>
             <Text smaller secondary>
                 {#if isPreRelease}
-                    {locale('popups.version.preReleaseDescription')}
+                    {localize('popups.version.preReleaseDescription')}
                 {:else}
-                    {locale('popups.version.upToDateDescription', {
+                    {localize('popups.version.upToDateDescription', {
                         values: { version: $appVersionDetails.currentVersion },
                     })}
                 {/if}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCloseClick()}>{locale('actions.close')}</Button>
+            <Button secondary onClick={() => handleCloseClick()}>{localize('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
             <Text smaller highlighted classes="mb-2">
-                {locale('popups.version.updateAvailable', { values: { version: $appVersionDetails.currentVersion } })}
+                {localize('popups.version.updateAvailable', { values: { version: $appVersionDetails.currentVersion } })}
             </Text>
             <Text type="h5" classes="mb-2">
-                {locale('popups.version.updateDetails', {
+                {localize('popups.version.updateDetails', {
                     values: {
                         version: $appVersionDetails.newVersion,
                         date: formatDate($appVersionDetails.newVersionReleaseDate, { format: 'long' }),
@@ -93,13 +91,13 @@
                 <Text secondary classes="whitespace-pre-wrap">{$appVersionDetails.changelog}</Text>
             </div>
             {#if !hasAutoUpdate}
-                <Text error classes="mt-4">{locale('popups.version.noAutoUpdate')}</Text>
+                <Text error classes="mt-4">{localize('popups.version.noAutoUpdate')}</Text>
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{locale('actions.cancel')}</Button>
+            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{localize('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$appUpdateBusy}>
-                {locale('actions.updateFirefly')}
+                {localize('actions.updateFirefly')}
             </Button>
         </div>
     {/if}

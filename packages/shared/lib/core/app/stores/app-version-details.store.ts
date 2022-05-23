@@ -12,6 +12,9 @@ const DEFAULT_APP_VERSION_DETAILS: IAppVersionDetails = {
     changelog: '',
 }
 
+/**
+ * The store containig the application's version details.
+ */
 export const appVersionDetails = writable<IAppVersionDetails>(DEFAULT_APP_VERSION_DETAILS)
 
 export async function setAppVersionDetails(): Promise<void> {
