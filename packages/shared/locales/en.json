@@ -567,7 +567,7 @@
                     "title": "Your voting weight",
                     "equality": "1000 IOTA = 1 VOTE",
                     "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must keep voting for the full duration of the Counting phase to issue your full voting weight."
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
                 }
             },
             "info": {
@@ -613,7 +613,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "Unable to load Community Treasury vote",
-                        "subtitle": "Please connect to a node that supports this proposal",
+                        "subtitle": "Please connect to a node that has added this vote",
                         "buttonConnect": "Connect to default node",
                         "buttonSettings": "View node settings",
                         "fetching": "Fetching governance event info..."
@@ -752,6 +752,7 @@
             "body": "You’re about to send {amount} to",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
                 "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
