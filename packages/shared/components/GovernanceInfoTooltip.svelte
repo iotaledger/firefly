@@ -20,7 +20,14 @@
         VotingWeight = 'votingWeight',
     }
 
-    const dateFormat = { format: 'long' }
+    const dateFormat = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+    } as Intl.DateTimeFormatOptions
 
     let eventProgress: number
     switch (event?.status?.status) {
