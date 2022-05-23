@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { INode, updateNewProfileNetworkConfig } from '@core/network'
+    import { updateNewProfileNetworkConfig } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { appRouter } from '@core/router'
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
 
@@ -11,8 +12,7 @@
     function onBackClick(): void {
         $appRouter.previous()
     }
-    function onSuccess(node: INode, _oldNodeUrl: string): void {
-        updateNewProfileNetworkConfig(node)
+    function onSuccess(): void {
         $appRouter.next()
     }
 </script>
@@ -38,7 +38,7 @@
             type="submit"
             form="node-config-form"
             classes="w-full"
-            onClick={nodeConfigurationForm?.handleAddNodeClick}
+            onClick={nodeConfigurationForm?.handleAddNode}
         >
             {#if isBusy}
                 <Spinner busy={isBusy} message={localize('popups.node.addingNode')} classes="justify-center" />

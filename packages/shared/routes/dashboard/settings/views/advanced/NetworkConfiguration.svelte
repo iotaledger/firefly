@@ -14,7 +14,7 @@
         networkStatus,
         NetworkHealth,
     } from '@core/network'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
@@ -57,21 +57,8 @@
         openPopup({
             type: 'addNode',
             props: {
-                nodes: networkConfig.nodes,
-                network: networkConfig.network,
-                onSuccess: (node: INode, _oldNodeUrl: string) => {
-                    if (node.isPrimary) {
-                        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
-                    } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
-                        node.isPrimary = true
-                    }
-
-                    networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
-                    if (networkConfig.nodes.length === 0) networkConfig.nodes = [node]
-
-                    updateClientOptions(networkConfig)
-                    updateActiveProfileSettings({ networkConfig })
-
+                onSuccess: () => {
+                    closePopup()
                     setTimeout(() => {
                         /**
                          * NOTE: This automatically scrolls the user to the bottom of the

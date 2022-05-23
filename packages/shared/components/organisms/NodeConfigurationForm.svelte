@@ -1,157 +1,84 @@
 <script lang="typescript">
-    import { Checkbox, Input, Password, Text, Button, Spinner } from 'shared/components'
-    import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { IAuth, INode, INetwork, INodeInfoResponse, NETWORK, BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network/utils'
+    import { Checkbox, Input, Password, Text } from 'shared/components'
+    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup } from 'shared/lib/popup'
-    import { getNodeInfo } from '@core/profile-manager'
-    import { activeProfile, newProfile } from '@core/profile'
-    import { getNetworkStatusFromNodeInfo } from '@core/network/helpers'
+    import { activeProfile, newProfile, addNode } from '@core/profile'
     import { localize } from '@core/i18n'
+    import { appRoute, AppRoute } from '@core/router'
 
-    export let hideButtons = false
-    export let hideCheckbox = false
-    export let isAddingNode = true
-    export let node: INode = { url: '', isPrimary: false }
-    export let nodes: INode[] = []
-    export let network: INetwork
-    export let onSuccess = (..._: any[]): void => {}
-    export let nodeUrl: string = node?.url || ''
+    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' }, isPrimary: false }
     export let isBusy = false
+    export let onSuccess = (..._: any[]): void => {}
 
-    const oldNodeUrl: string = nodeUrl
-    const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
-    const authError = ''
+    const profile = $newProfile ? newProfile : activeProfile
+    const networkConfig = $profile.settings?.networkConfig
 
-    let addressError = ''
-    let addressWarn = ''
-    let newNetwork: INetwork
+    let formError = { address: '', addressWarn: '' }
 
-    $: nodeUrl, (addressError = '')
-    $: {
-        addressWarn = ''
-        node.url = stripSpaces(node.url)
-        if (!$activeProfile?.isDeveloperProfile && /^http:\/\//.exec(node.url)) {
-            addressWarn = localize('warning.node.http')
+    $: node.url, (formError = { address: '', addressWarn: '' })
+
+    function checkForErrors(): void {
+        const errorNetworkId = checkNetworkId(
+            $nodeInfo?.protocol?.networkName,
+            networkConfig.network,
+            $profile.isDeveloperProfile
+        )
+        const errorUrlValidity = checkNodeUrlValidity(networkConfig?.nodes, node.url, $profile.isDeveloperProfile)
+        formError = {
+            address: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '',
+            addressWarn: localize(errorUrlValidity) ?? '',
         }
     }
 
-    const cleanNodeUrl = (_url: string): string => stripTrailingSlash(stripSpaces(_url))
-
-    function constructNodes(): INode[] {
-        return node ? nodes.filter((n) => cleanNodeUrl(node.url) !== cleanNodeUrl(n.url)) : nodes
-    }
-
-    function cleanNodeFormData(): void {
-        const _nodes = constructNodes()
-        const validErr = checkNodeUrlValidity(_nodes, cleanNodeUrl(nodeUrl), $activeProfile.isDeveloperProfile)
-        if (validErr) {
-            addressError = localize(validErr)
-        }
-    }
-
-    function checkNetworkId(id: string): void {
-        if (!id) {
-            addressError = localize('error.network.notReachable')
-        } else if (id !== network?.id) {
-            if ($activeProfile?.isDeveloperProfile || $newProfile?.isDeveloperProfile) {
-                newNetwork = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType, id)
-            } else {
-                addressError = localize('error.network.mismatch', { values: { networkId: id } })
-            }
-        }
-    }
-
-    export async function handleAddNodeClick(): Promise<void> {
+    export async function handleAddNode(): Promise<void> {
         isBusy = true
-        addressError = ''
-
-        let nodeInfo: INodeInfoResponse
-
-        try {
-            if (node) {
-                cleanNodeFormData()
-
-                if (!addressError) {
-                    nodeInfo = await getNodeInfo(cleanNodeUrl(nodeUrl), cleanAuth(optNodeAuth))
-                    checkNetworkId(nodeInfo?.nodeinfo?.protocol?.networkName)
-                }
-            }
-        } catch (err) {
-            isBusy = false
-
-            showAppNotification({
-                type: 'error',
-                message: localize(err?.error),
-            })
-
-            return
-        }
-
-        if (!addressError) {
-            const networkStatus = getNetworkStatusFromNodeInfo(nodeInfo?.nodeinfo)
-            const baseToken = nodeInfo?.nodeinfo?.baseToken
-            const protocol = Object.keys(BASE_TOKEN).find(
-                (key) => BASE_TOKEN[key]?.name === baseToken?.name
-            ) as NetworkProtocol
-
-            if (networkStatus) {
+        checkForErrors()
+        if (!formError.address) {
+            try {
+                await addNode(node, profile)
                 isBusy = false
-                onSuccess(
-                    false,
-                    {
-                        url: cleanNodeUrl(nodeUrl),
-                        auth: optNodeAuth,
-                        network: getNetwork(
-                            protocol ?? $activeProfile.networkProtocol,
-                            $activeProfile.networkType,
-                            nodeInfo?.nodeinfo?.protocol?.networkName
-                        ),
-                        isPrimary: node?.isPrimary || false,
-                    },
-                    oldNodeUrl
-                )
-                closePopup()
+                onSuccess()
+            } catch (err) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err),
+                })
             }
         }
-
         isBusy = false
-        return
     }
 </script>
 
 <form id="node-config-form" class="w-full h-full">
     <Input
-        bind:value={nodeUrl}
+        bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={addressError}
+        error={formError.address}
         disabled={isBusy}
         autofocus
     />
-    {#if addressWarn}
-        <Text overrideColor classes="text-orange-500 mt-2">{addressWarn}</Text>
+    {#if formError.addressWarn}
+        <Text overrideColor classes="text-orange-500 mt-2">{formError.addressWarn}</Text>
     {/if}
     <Input
         classes="mt-3"
-        bind:value={optNodeAuth.username}
+        bind:value={node.auth.username}
         placeholder={localize('popups.node.optionalUsername')}
-        error={authError}
         disabled={isBusy}
     />
     <Password
         classes="mt-3"
-        bind:value={optNodeAuth.password}
+        bind:value={node.auth.password}
         placeholder={localize('popups.node.optionalPassword')}
         disabled={isBusy}
     />
     <Password
         classes="mt-3"
-        bind:value={optNodeAuth.jwt}
+        bind:value={node.auth.jwt}
         placeholder={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-    {#if !hideCheckbox}
+    {#if $appRoute !== AppRoute.CustomNetwork}
         <Checkbox
             label={localize('popups.node.setAsPrimaryNode')}
             bind:checked={node.isPrimary}
@@ -160,27 +87,3 @@
         />
     {/if}
 </form>
-{#if !hideButtons}
-    <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
-            {localize('actions.cancel')}
-        </Button>
-        <Button
-            disabled={!nodeUrl || isBusy}
-            type="submit"
-            form="node-config-form"
-            classes="w-1/2"
-            onClick={handleAddNodeClick}
-        >
-            {#if isBusy}
-                <Spinner
-                    busy={isBusy}
-                    message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
-                    classes="justify-center"
-                />
-            {:else}
-                {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
-            {/if}
-        </Button>
-    </div>
-{/if}
