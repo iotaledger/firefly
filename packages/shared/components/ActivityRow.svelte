@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
-    import { formatDate, localize } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { Payload } from 'shared/lib/typings/message'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -15,34 +15,22 @@
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
-    import { activeAccounts, activeProfile } from '@core/profile'
+    import { activeAccounts } from '@core/profile'
+    import { FontWeightText } from './Text.svelte'
 
-    export let timestamp
     export let confirmed
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
 
     let messageValue = ''
-    let date = localize('error.invalidDate')
-    $: {
-        try {
-            date = formatDate(new Date(timestamp), {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-            })
-        } catch {
-            date = localize('error.invalidDate')
-        }
-    }
+    let fiatValue = ''
 
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     $: txPayload = payload?.type === 'Transaction' ? payload : undefined
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
+    $: fiatValue = getFiat(messageValue)
 
     const getMessageValue = () => {
         if (hasCachedMigrationTx) {
@@ -92,28 +80,30 @@
         }
     }
 
+    let activity: string
+    $: {
+        if (txPayload) {
+            const data = txPayload.data.essence.data
+            if (isParticipationPayload(txPayload)) {
+                activity = 'general.stakingTransaction'
+            } else if (data.internal) {
+                activity = confirmed ? 'general.transfer' : 'general.transferring'
+            } else {
+                activity = confirmed
+                    ? data.incoming
+                        ? 'general.received'
+                        : 'general.sent'
+                    : data.incoming
+                    ? 'general.receiving'
+                    : 'general.sending'
+            }
+        }
+    }
+
     let direction: string
     $: {
         if (txPayload) {
-            if (isParticipationPayload(txPayload)) {
-                direction = 'general.stakingTransaction'
-            } else if (txPayload.data.essence.data.internal) {
-                direction = confirmed
-                    ? txPayload.data.essence.data.incoming
-                        ? 'general.transferFrom'
-                        : 'general.transferTo'
-                    : txPayload.data.essence.data.incoming
-                    ? 'general.transferringFrom'
-                    : 'general.transferringTo'
-            } else {
-                direction = confirmed
-                    ? txPayload.data.essence.data.incoming
-                        ? 'general.receivedFrom'
-                        : 'general.sentTo'
-                    : txPayload.data.essence.data.incoming
-                    ? 'general.receivingFrom'
-                    : 'general.sendingTo'
-            }
+            direction = txPayload.data.essence.data.incoming ? 'general.fromAddress' : 'general.toAddress'
         }
     }
 
@@ -150,6 +140,11 @@
                 return ''
         }
     }
+
+    function getFiat(messageValue: string) {
+        // TODO: Calculate real fiat value
+        return '---'
+    }
 </script>
 
 <button
@@ -170,11 +165,24 @@
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
                 {localize('general.stakingTransaction')}
-            {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
+            {:else}
+                {localize(activity)}
+            {/if}
         </Text>
-        <p class="text-10 leading-120 text-gray-500">{date}</p>
+        {#if txPayload}
+            <p class="text-10 leading-120 text-gray-500">
+                {localize(direction, { values: { account: accountAlias } })}
+            </p>
+        {/if}
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" smaller classes="whitespace-nowrap">{messageValue}</Text>
+        <Text
+            type="p"
+            font-weight={FontWeightText.bold}
+            color={txPayload?.data?.essence?.data?.incoming ? 'blue-700' : ''}
+            smaller
+            classes="whitespace-nowrap font-bold">{messageValue}</Text
+        >
+        <Text type="p" smaller classes="whitespace-nowrap">{fiatValue}</Text>
     </div>
 </button>
