@@ -2,7 +2,7 @@
     import { Animation } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
-    import { pollChrysalisSnapshot } from 'shared/lib/migration'
+    // import { pollChrysalisSnapshot } from 'shared/lib/migration'
     import { onMount } from 'svelte'
 
     /**
@@ -13,7 +13,7 @@
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     onMount(() => {
-        void pollChrysalisSnapshot()
+        // void pollChrysalisSnapshot()
     })
 </script>
 

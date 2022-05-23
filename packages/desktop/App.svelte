@@ -86,7 +86,7 @@
 
         initAppSettings.set($appSettings)
 
-        await pollMarketData()
+        // await pollMarketData()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
