@@ -22,7 +22,7 @@
         participationAction,
         pendingParticipations,
     } from 'shared/lib/participation/stores'
-    import { ParticipationAction, PendingParticipation } from 'shared/lib/participation/types'
+    import { ParticipationAction } from 'shared/lib/participation/types'
     import { isSyncing } from 'shared/lib/wallet'
 
     export let event: ParticipationEvent
@@ -33,12 +33,25 @@
         partiallyVoted: { anchor: null as HTMLElement, show: false },
     }
 
+    $: eventAnswers = event?.information?.payload?.questions[0]?.answers ?? []
     $: results = event?.status?.questions?.[0]?.answers?.filter(
         (answer) => answer?.value !== 0 && answer?.value !== 255
     )
     $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
     $: disableVoting =
         $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
+
+    let disableVotingMessages: {
+        show?: boolean
+        busy?: boolean
+        message?: string
+    }[]
+    $: disableVoting,
+        eventAnswers,
+        $isSyncing,
+        $currentAccountTreasuryVoteValue,
+        $pendingParticipations,
+        updateDisableVotingMessages()
 
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
 
@@ -98,36 +111,68 @@
                 break
         }
     }
-    function getSpinnerMessage(
-        isSyncing: boolean,
-        currentTeasuryVote: string,
-        pendingParticipation: PendingParticipation,
-        answerValue: string
-    ): string {
-        if (isSyncing) {
-            return localize('general.syncingAccounts')
-        } else if (
-            pendingParticipation?.action === ParticipationAction.Stake ||
-            pendingParticipation?.action === ParticipationAction.Unstake
-        ) {
-            const locale =
-                pendingParticipation?.action === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
-            return localize(locale)
-        } else if (
-            pendingParticipation?.action === ParticipationAction.Vote ||
-            pendingParticipation?.action === ParticipationAction.Unvote
-        ) {
-            const pendingParticipationAnswers =
-                pendingParticipation?.participations?.map((participations) => participations?.answers) ?? []
-            if (pendingParticipation?.action === ParticipationAction.Vote) {
-                if (pendingParticipationAnswers.some((participation) => participation.includes(answerValue))) {
-                    return localize('general.voting')
+
+    function updateDisableVotingMessages(): void {
+        if (!disableVoting) return
+        else {
+            disableVotingMessages = []
+            const pendingParticipation = $pendingParticipations?.[0]
+            eventAnswers.forEach((eventAnswer) => {
+                if ($isSyncing) {
+                    disableVotingMessages.push({
+                        show: true,
+                        busy: true,
+                        message: localize('general.syncingAccounts'),
+                    })
+                } else if (
+                    $participationAction === ParticipationAction.Stake ||
+                    $participationAction === ParticipationAction.Unstake
+                ) {
+                    const locale =
+                        $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
+                    disableVotingMessages.push({
+                        show: true,
+                        busy: true,
+                        message: localize(locale),
+                    })
+                } else if (
+                    pendingParticipation?.action === ParticipationAction.Vote ||
+                    pendingParticipation?.action === ParticipationAction.Unvote
+                ) {
+                    const pendingParticipationAnswers =
+                        pendingParticipation?.participations?.map((participations) => participations?.answers) ?? []
+                    if (pendingParticipation?.action === ParticipationAction.Vote) {
+                        if (
+                            pendingParticipationAnswers.some((participation) =>
+                                participation.includes(eventAnswer?.value)
+                            )
+                        ) {
+                            disableVotingMessages.push({
+                                show: true,
+                                busy: true,
+                                message: localize('general.voting'),
+                            })
+                        } else {
+                            disableVotingMessages.push({
+                                show: false,
+                            })
+                        }
+                    } else {
+                        if (isSelected($currentAccountTreasuryVoteValue, eventAnswer?.value)) {
+                            disableVotingMessages.push({
+                                show: true,
+                                busy: true,
+                                message: localize('general.unvoting'),
+                            })
+                        } else {
+                            disableVotingMessages.push({
+                                show: false,
+                            })
+                        }
+                    }
                 }
-            } else {
-                if (isSelected(currentTeasuryVote, answerValue)) {
-                    return localize('general.unvoting')
-                }
-            }
+            })
+            disableVotingMessages = disableVotingMessages
         }
     }
 </script>
@@ -173,7 +218,7 @@
         {/if}
     </div>
     <div class="flex flex-col w-full space-y-16 overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-        {#each event?.information?.payload?.questions[0]?.answers ?? [] as answer}
+        {#each event?.information?.payload?.questions[0]?.answers ?? [] as answer, answerIndex}
             <button
                 on:click={() => handleAnswerClick(answer)}
                 class:winner={isWinnerAnswer(answer?.value)}
@@ -241,16 +286,11 @@
                     </div>
                     {#if canParticipate(event?.status?.status)}
                         {#if disableVoting}
-                            {#if getSpinnerMessage($isSyncing, $currentAccountTreasuryVoteValue, $pendingParticipations?.[0], answer?.value)}
-                                <div class="p-2 bg-gray-300 rounded-lg flex-shrink-0">
+                            {#if disableVotingMessages?.[answerIndex]?.show}
+                                <div class="p-2 bg-gray-300 dark:bg-gray-700 rounded-lg flex-shrink-0">
                                     <Spinner
-                                        busy
-                                        message={getSpinnerMessage(
-                                            $isSyncing,
-                                            $currentAccountTreasuryVoteValue,
-                                            $pendingParticipations?.[0],
-                                            answer?.value
-                                        )}
+                                        busy={disableVotingMessages?.[answerIndex]?.busy}
+                                        message={disableVotingMessages?.[answerIndex]?.message}
                                         classes="mx-2 justify-center"
                                     />
                                 </div>
