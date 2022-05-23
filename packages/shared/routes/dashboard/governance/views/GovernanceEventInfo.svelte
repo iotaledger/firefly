@@ -99,19 +99,20 @@
         }
     }
     function getSpinnerMessage(
+        isSyncing: boolean,
         currentTeasuryVote: string,
         pendingParticipation: PendingParticipation,
         answerValue: string
     ): string {
-        if (
+        if (isSyncing) {
+            return localize('general.syncingAccounts')
+        } else if (
             pendingParticipation?.action === ParticipationAction.Stake ||
             pendingParticipation?.action === ParticipationAction.Unstake
         ) {
             const locale =
                 pendingParticipation?.action === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
             return localize(locale)
-        } else if ($isSyncing) {
-            return localize('general.syncingAccounts')
         } else if (
             pendingParticipation?.action === ParticipationAction.Vote ||
             pendingParticipation?.action === ParticipationAction.Unvote
@@ -121,14 +122,10 @@
             if (pendingParticipation?.action === ParticipationAction.Vote) {
                 if (pendingParticipationAnswers.some((participation) => participation.includes(answerValue))) {
                     return localize('general.voting')
-                } else {
-                    return
                 }
             } else {
                 if (isSelected(currentTeasuryVote, answerValue)) {
                     return localize('general.unvoting')
-                } else {
-                    return
                 }
             }
         }
@@ -244,11 +241,12 @@
                     </div>
                     {#if canParticipate(event?.status?.status)}
                         {#if disableVoting}
-                            {#if getSpinnerMessage($currentAccountTreasuryVoteValue, $pendingParticipations?.[0], answer?.value)}
+                            {#if getSpinnerMessage($isSyncing, $currentAccountTreasuryVoteValue, $pendingParticipations?.[0], answer?.value)}
                                 <div class="p-2 bg-gray-300 rounded-lg">
                                     <Spinner
                                         busy
                                         message={getSpinnerMessage(
+                                            $isSyncing,
                                             $currentAccountTreasuryVoteValue,
                                             $pendingParticipations?.[0],
                                             answer?.value
