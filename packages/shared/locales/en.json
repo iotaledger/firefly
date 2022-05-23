@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Verify your PIN code",
             "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body2": "Re-enter your PIN code to proceed."
         },
         "backup": {
             "title": "Back up your wallet",
@@ -542,7 +542,7 @@
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -567,7 +567,7 @@
                     "title": "Your voting weight",
                     "equality": "1000 IOTA = 1 VOTE",
                     "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must keep voting for the full duration of the Counting phase to issue your full voting weight. "
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must keep voting for the full duration of the Counting phase to issue your full voting weight."
                 }
             },
             "info": {
@@ -865,7 +865,7 @@
             "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
             "castingVotes": "Casting votes",
             "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} – {voteText}?",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
             "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
             "stoppingVoting": "Stopping voting",
             "changeVote": "Change vote",
@@ -1195,6 +1195,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
+        "voting": "Voting",
+        "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
