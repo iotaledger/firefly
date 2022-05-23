@@ -1195,6 +1195,8 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
+        "voting": "Voting",
+        "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
