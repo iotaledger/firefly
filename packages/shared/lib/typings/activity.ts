@@ -30,6 +30,7 @@ export enum ActivityDirection {
 export interface IActivity {
     id: string
     type: string
+    timestamp: string
     activityType: ActivityType
     direction: ActivityDirection
     confirmed: boolean

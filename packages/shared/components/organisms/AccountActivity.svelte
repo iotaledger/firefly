@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { ActivityRow, TogglableButton, Text, IconTextInput } from 'shared/components'
-    import { localize } from '@core/i18n'
+    import { localize, formatDate } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
-    import { activities, filterActivities, searchActivities } from '@core/wallet'
+    import { activities, filterActivities, searchActivities, groupActivities } from '@core/wallet'
 
-    function handleTransactionClick(message: any): void {
+    function handleTransactionClick(message: AccountMessage): void {
         openPopup({
             type: 'activityDetails',
             props: { message },
@@ -31,6 +31,11 @@
         debounce(() => (queryActivities = searchActivities(filteredActivities, searchValue)))()
     } else {
         queryActivities = filteredActivities
+    }
+
+    let groupedActivities
+    $: {
+        groupedActivities = groupActivities(queryActivities)
     }
 
     function shouldShowFirstSync(): boolean {
@@ -79,9 +84,12 @@
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if queryActivities.length}
-            {#each queryActivities as activity}
-                <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
+        {:else if groupedActivities.length}
+            {#each groupedActivities as group}
+                <Text type="p" bold smaller color="gray-600">{group.date} • {group.activities.length}</Text>
+                {#each group.activities as activity}
+                    <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
+                {/each}
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">

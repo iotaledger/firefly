@@ -7,6 +7,7 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { Transaction } from '@lib/typings/message'
 import { AccountMessage } from '@lib/typings/wallet'
+import { formatDate } from '@core/i18n'
 
 export const activities: Readable<IActivity[]> = derived([selectedAccount], ([$selectedAccount]) =>
     parseTransactionsToActivities(getAccountMessages($selectedAccount))
@@ -38,4 +39,17 @@ export function searchActivities(activities: IActivity[], searchTerm: string): I
             formatUnitBestMatch(amount).toString().toLowerCase()?.includes(searchTerm)
         )
     })
+}
+
+export function groupActivities(activities: IActivity[]): IActivity[] {
+    const groupedActivities = []
+    for (const activity of activities) {
+        const activityDate = formatDate(new Date(Number(activity.timestamp)), { year: 'numeric', month: 'short' })
+        if (!groupedActivities.some((group) => group.date === activityDate)) {
+            groupedActivities.push({ date: activityDate, activities: [] })
+        }
+        const index = groupedActivities.findIndex((group) => group.date === activityDate)
+        groupedActivities[index].activities.push(activity)
+    }
+    return groupedActivities
 }

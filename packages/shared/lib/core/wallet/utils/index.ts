@@ -1,5 +1,4 @@
 export * from './formatBestMatchTokenAmount'
 export * from './formatDefaultTokenAmount'
 export * from './formatPreciseTokenAmount'
-export * from './searchTransactions'
 export * from './parseTransactionsToActivities'

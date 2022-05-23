@@ -15,6 +15,7 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
     return transactions.map((transaction) => ({
         id: transaction.id,
         type: 'Transaction',
+        timestamp: transaction.timestamp,
         activityType: getActivityType(transaction.payload),
         internal: getInternalFlag(transaction.payload),
         direction: getIncomingFlag(transaction.payload) ? ActivityDirection.In : ActivityDirection.Out,
