@@ -11,6 +11,7 @@ import { transferState, wallet } from '../wallet'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, TREASURY_VOTE_EVENT_ID } from './constants'
 import {
     ParticipateResponsePayload,
+    Participation,
     ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
@@ -189,15 +190,17 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
 export const addNewPendingParticipation = (
     payload: ParticipateResponsePayload,
     accountId: string,
-    action: ParticipationAction
+    action: ParticipationAction,
+    participations?: Participation[]
 ): void => {
     const _pendingParticipation = {
         accountId,
         action,
+        participations,
     }
 
-    pendingParticipations.update((participations) => [
-        ...participations,
+    pendingParticipations.update((_participations) => [
+        ..._participations,
         ...payload.map((tx) => Object.assign({}, _pendingParticipation, { messageId: tx.id })),
     ])
 }
