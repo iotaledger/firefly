@@ -103,7 +103,11 @@
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
                 {localize(
                     mustAcknowledgeBelowMinRewardParticipationWarning
-                        ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
+                        ? `popups.transaction.${
+                              activeParticipationType === ActiveParticipationType.Stake
+                                  ? 'sendingFromStakedAccountBelowMinReward'
+                                  : 'sendingFromStakedAccountBelowMinRewardVote'
+                          }`
                         : `popups.transaction.sendingFromActiveParticipationAccount.${activeParticipationType}`
                 )}
             </Text>
