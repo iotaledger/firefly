@@ -3,5 +3,5 @@
 </script>
 
 <Pane>
-    <!-- <AccountHistory /> -->
+    <AccountHistory />
 </Pane>

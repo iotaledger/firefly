@@ -171,7 +171,7 @@
         </Text>
         {#if txPayload}
             <p class="text-10 leading-120 text-gray-500">
-                {localize(direction, { values: { account: accountAlias } })}
+                {localize(direction, { values: { account: truncateString(accountAlias, 5, 5) } })}
             </p>
         {/if}
     </div>
