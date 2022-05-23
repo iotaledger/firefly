@@ -5,8 +5,6 @@ import { parseTransactionsToActivities } from '../utils'
 import { ActivityDirection, IActivity } from '@lib/typings/activity'
 import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { Transaction } from '@lib/typings/message'
-import { AccountMessage } from '@lib/typings/wallet'
 import { formatDate } from '@core/i18n'
 
 export const activities: Readable<IActivity[]> = derived([selectedAccount], ([$selectedAccount]) =>

@@ -7,7 +7,7 @@
     import { debounce } from 'shared/lib/utils'
     import { activities, filterActivities, searchActivities, groupActivities } from '@core/wallet'
 
-    function handleTransactionClick(message: AccountMessage): void {
+    function handleTransactionClick(message: any): void {
         openPopup({
             type: 'activityDetails',
             props: { message },
@@ -33,10 +33,8 @@
         queryActivities = filteredActivities
     }
 
-    let groupedActivities
-    $: {
-        groupedActivities = groupActivities(queryActivities)
-    }
+    let groupedActivities = []
+    $: groupedActivities = groupActivities(queryActivities)
 
     function shouldShowFirstSync(): boolean {
         /**
