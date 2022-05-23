@@ -242,7 +242,7 @@
                     {#if canParticipate(event?.status?.status)}
                         {#if disableVoting}
                             {#if getSpinnerMessage($isSyncing, $currentAccountTreasuryVoteValue, $pendingParticipations?.[0], answer?.value)}
-                                <div class="p-2 bg-gray-300 rounded-lg">
+                                <div class="p-2 bg-gray-300 rounded-lg flex-shrink-0">
                                     <Spinner
                                         busy
                                         message={getSpinnerMessage(
