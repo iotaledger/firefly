@@ -45,9 +45,9 @@
     <button
         {type}
         {form}
-        class="{!unstyled
-            ? 'xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center'
-            : ''} {classes}"
+        class="{unstyled
+            ? ''
+            : 'xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
@@ -68,7 +68,7 @@
     <button
         {type}
         {form}
-        class="{!unstyled ? 'cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5' : ''} {classes}"
+        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
