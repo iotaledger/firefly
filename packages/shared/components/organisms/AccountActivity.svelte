@@ -13,11 +13,13 @@
     import { AccountMessage } from 'shared/lib/typings/wallet'
     import { debounce } from 'shared/lib/utils'
     import { selectedAccount } from '@core/account'
-    import { searchTransactions } from '@core/wallet'
+    import { parseTransactionsToActivities, searchTransactions } from '@core/wallet'
+    import { Transaction } from '@lib/typings/message'
+    import { IActivity } from '@lib/typings/activity'
 
     const transactions = getAccountMessages($selectedAccount)
 
-    function handleTransactionClick(message: AccountMessage): void {
+    function handleTransactionClick(message: any): void {
         openPopup({
             type: 'activityDetails',
             props: { message },
@@ -64,6 +66,9 @@
     } else {
         queryTransactions = filteredTransactions
     }
+
+    let activities: IActivity[]
+    $: activities = parseTransactionsToActivities(queryTransactions)
 
     function shouldShowFirstSync(): boolean {
         /**
@@ -113,9 +118,9 @@
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if queryTransactions.length}
-            {#each queryTransactions as transaction}
-                <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
+        {:else if activities.length}
+            {#each activities as activity}
+                <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">

@@ -1,3 +1,5 @@
+import { ITokenMetadata } from '@core/wallet'
+
 export enum ActivityType {
     Stake = 'stake',
     Transfer = 'transfer',
@@ -18,4 +20,23 @@ export enum ActivityAsyncStatus {
     Unclaimed = 'unclaimed',
     Claimed = 'claimed',
     Expired = 'expired',
+}
+
+export enum ActivityDirection {
+    In = 'in',
+    Out = 'out',
+}
+
+export interface IActivity {
+    id: string
+    type: string
+    activityType: ActivityType
+    direction: ActivityDirection
+    confirmed: boolean
+    internal: boolean
+    amount: string
+    subject: string
+    token: ITokenMetadata
+    conversion?: number
+    fiatAmount?: number
 }

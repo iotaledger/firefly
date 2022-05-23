@@ -1,4 +1,5 @@
 import * as account from './account'
+import * as activity from './activity'
 import * as address from './address'
 import * as app from './app'
 import * as bridge from './bridge'
