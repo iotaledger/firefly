@@ -1,12 +1,11 @@
 <script lang="typescript">
-    import { ActivityRow, Icon, TogglableButton, Text, SearchBar } from 'shared/components'
+    import { ActivityRow, TogglableButton, Text, IconTextInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import {
         isSyncing,
         getIncomingFlag,
         isFirstSessionSync,
-        selectedMessage,
         walletSetupType,
         getAccountMessages,
     } from 'shared/lib/wallet'
@@ -23,10 +22,6 @@
             type: 'activityDetails',
             props: { message },
         })
-    }
-
-    function handleBackClick(): void {
-        selectedMessage.set(null)
     }
 
     const filters = ['all', 'incoming', 'outgoing']
@@ -88,39 +83,32 @@
 
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
-        {#if $selectedMessage}
-            <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
-                <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{localize('general.transactions')}</Text>
-            </button>
-        {:else}
-            <div class="relative flex flex-1 flex-row justify-between">
-                <Text type="h5">{localize('general.transactions')}</Text>
-                <TogglableButton icon="search" bind:active={searchActive} />
-            </div>
-            <div class="relative flex flex-row items-center justify-between text-white mt-4">
-                {#if searchActive}
-                    <SearchBar bind:inputElement bind:searchValue bind:searchActive />
-                {/if}
-                <!-- TODO: Wait for screen design for these -->
-                <!-- <ul class="flex flex-row justify-between space-x-8">
-                    {#each filters as filter, i}
-                        <li on:click={() => (activeFilterIndex = i)}>
-                            <Text
-                                type="p"
-                                overrideColor
-                                classes="cursor-pointer
-                            {activeFilterIndex === i
-                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
-                            >
-                                {localize(`general.${filter}`)}
-                            </Text>
-                        </li>
-                    {/each}
-                </ul> -->
-            </div>
-        {/if}
+        <div class="relative flex flex-1 flex-row justify-between">
+            <Text type="h5">{localize('general.transactions')}</Text>
+            <TogglableButton icon="search" bind:active={searchActive} />
+        </div>
+        <div class="relative flex flex-row items-center justify-between text-white mt-4">
+            {#if searchActive}
+                <IconTextInput bind:inputElement bind:searchValue icon="search" />
+            {/if}
+            <!-- TODO: Wait for screen design for these -->
+            <!-- <ul class="flex flex-row justify-between space-x-8">
+                {#each filters as filter, i}
+                    <li on:click={() => (activeFilterIndex = i)}>
+                        <Text
+                            type="p"
+                            overrideColor
+                            classes="cursor-pointer
+                        {activeFilterIndex === i
+                                ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
+                                : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
+                        >
+                            {localize(`general.${filter}`)}
+                        </Text>
+                    </li>
+                {/each}
+            </ul> -->
+        </div>
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}

@@ -8,7 +8,7 @@
 <button on:click={() => (active = !active)}>
     <Icon
         {icon}
-        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+        classes="text-gray-500 rounded hover:text-gray-600 dark:text-white dark:hover:text-gray-100
     cursor-pointer ml-2 {active ? 'bg-gray-50' : ''}"
     />
 </button>
