@@ -990,7 +990,7 @@
         "profiles": "프로필",
         "dev": "개발자",
         "createAccount": "지갑 만들기",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "지갑 추가",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Staking 자금",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "지갑 색상",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "총액: {balance}"
     },
     "dates": {
         "today": "오늘",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Unable to use the specified account.",
             "cannotFindStakingEvent": "Unable to find staking event.",
             "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "invalidStakingEventId": "Invalid staking event ID.",
+            "failedToFetchPreviousRewards": "이전 보상을 가져올 수 없습니다. 방화벽 설정을 확인하세요."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

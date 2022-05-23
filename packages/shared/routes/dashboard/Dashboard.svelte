@@ -19,8 +19,8 @@
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
-    import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
+    import { Idle, Sidebar, MainMenu } from 'shared/components'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
@@ -407,25 +407,29 @@
     }
 </script>
 
-<Idle />
-<div class="dashboard-wrapper flex flex-col w-full h-full">
-    {#if showTopNav}
-        <TopNavigation
-            {onCreateAccount}
-            classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
-        />
-    {/if}
-    <div class="flex flex-row flex-auto h-1">
-        <Sidebar />
+{#if $mobile}
+    <Idle />
+    <div class="flex flex-col w-full h-full">
+        <TopNavigation {onCreateAccount} />
+        <MainMenu {locale} />
         <!-- Dashboard Pane -->
-        <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+    </div>
+{:else}
+    <Idle />
+    <div class="dashboard-wrapper flex flex-col w-full h-full">
+        {#if showTopNav}
+            <TopNavigation
+                {onCreateAccount}
+                classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''}
+            />
+        {/if}
+        <div class="flex flex-row flex-auto h-1">
+            <Sidebar />
+            <!-- Dashboard Pane -->
+            <div class="flex flex-col w-full h-full">
+                <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+            </div>
         </div>
     </div>
-</div>
-
-<style type="text/scss">
-    :global(:not(body.platform-win32)) .dashboard-wrapper {
-        margin-top: calc(env(safe-area-inset-top) / 2);
-    }
-</style>
+{/if}

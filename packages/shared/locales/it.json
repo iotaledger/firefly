@@ -773,7 +773,7 @@
         "newStakingPeriodNotification": {
             "title": "Fase di Staking {periodNumber} da {date}",
             "body": "Lo staking di IOTA per Assembly continua... Partecipa alla fase {periodNumber} per 90 giorni. Metti in stake i tuoi token IOTA e ricevi premi ASMB!",
-            "info": "Lo stakin per Shimmer è completat, solo i token ASMB saranno distribuiti."
+            "info": "Lo staking per Shimmer è completato, solo i token ASMB saranno distribuiti."
         },
         "shimmer-info": {
             "title": "Informazioni su Shimmer",
@@ -990,7 +990,7 @@
         "profiles": "Profili",
         "dev": "Dev",
         "createAccount": "Crea un wallet",
-        "createNewWallet": "Crea un nuovo wallet",
+        "addAWallet": "Aggiungi un portfolio",
         "accountName": "Nome wallet",
         "latestTransactions": "Ultime Transazioni",
         "transactions": "Transazioni",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Fondi in staking",
         "unstakedFunds": "Fondi non in staking",
         "accountColor": "Colore Wallet",
-        "myAssets": "I miei Asset"
+        "myAssets": "I miei Asset",
+        "total": "Saldo totale"
     },
     "dates": {
         "today": "Oggi",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "Impossibile utilizzare l'account specificato.",
             "cannotFindStakingEvent": "Impossibile trovare l'evento di staking.",
             "cannotVisitAirdropWebsite": "Impossibile aprire il sito web {airdrop}.",
-            "invalidStakingEventId": "ID evento staking non valido."
+            "invalidStakingEventId": "ID evento staking non valido.",
+            "failedToFetchPreviousRewards": "Impossibile recuperare i premi precedenti, si prega di controllare le impostazioni del firewall."
         },
         "invalidDate": "DATA INVALIDA",
         "invalidTime": "ORARIO INVALIDO"

@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Si cambia el tema del sistema, puede que necesite reiniciar Firefly para ver los efectos"
             },
             "language": {
                 "title": "Idioma",
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Red operativa",
+                "networkDegraded": "Red degradada",
+                "networkDown": "Red desconectada",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
                 "referencedRate": "Tasa referenciada"
@@ -473,32 +473,32 @@
                 "allSettings": "Todos los ajustes",
                 "logout": "Cerrar sesión",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Perfil bloqueado",
+                    "locked": "Stronghold bloqueado",
+                    "unlocked": "Stronghold desbloqueado"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Dispositivo Hardware",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Aplicación IOTA no abierta",
+                        "connected": "Conectado",
+                        "legacyConnected": "Aplicación Legacy abierta",
+                        "locked": "Bloqueado",
+                        "mnemonicMismatch": "Palabras de seguridad o Ledger incorrecto",
+                        "notDetected": "No detectado",
+                        "otherConnected": "App abierta"
                     }
                 },
                 "backup": {
                     "title": "Backup your wallets",
                     "lastBackup": "Tu última copia de seguridad {date}",
                     "notBackedUp": "No está respaldado",
-                    "button": "Backup"
+                    "button": "Respaldo"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Nueva actualización disponible",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Actualizar"
                 }
             }
         },
@@ -517,27 +517,27 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Vuelve a intentarlo más tarde",
+                    "commencing": "Pre-staking está abierto",
+                    "holding": "{duration} para finalizar el staking",
+                    "ended": "El Staking ha finalizado",
+                    "inactive": "No se han detectado eventos de Staking"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Pon en stake tus {token} tokens para recibir automáticamente recompensas cada 10 segundos una vez que el periodo de staking comience el {date}.",
+                    "commencing": "Pon en stake tus {token} tokens para recibir automáticamente recompensas cada 10 segundos una vez que el periodo de staking comience el {date}.",
+                    "holdingAndStaking": "Recibirás recompensas automáticamente cada 10 segundos.",
+                    "holdingAndNotStaking": "Pon en stake tus {token} tokens para recibir recompensas cada 10 segundos.",
+                    "endedAndDidStake": "Las recompensas de {token} se distribuirán en tu cartera una vez que se lance la red.",
+                    "endedAndDidNotStake": "No participaste en este airdrop.",
+                    "endedAndDidNotReachMinRewards": "No has hecho Stake con los suficientes {token} tokens para alcanzar las recompensas mínimas.",
+                    "inactive": "Abra la configuración de red en la configuración avanzada y asegúrese de que el nodo actual tiene la función \"Participación\" haciendo clic en \"Ver información\"."
                 }
             },
             "airdrops": {
                 "holding": "Quedan",
                 "commencing": "Hasta que comience el staking",
-                "currentStakingPeriod": "Current staking period",
+                "currentStakingPeriod": "Actual periodo de staking",
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -549,8 +549,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Nuevo evento",
+                "complete": "Completada"
             }
         },
         "picker": {
@@ -675,7 +675,7 @@
         },
         "balanceFinder": {
             "title": "Buscador de balances",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+            "body": "Realiza una búsqueda más exhaustiva de direcciones para encontrar saldos faltantes y recompensas previas de airdrop. Esto puede tardar un tiempo.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
             "accountsFound": "Wallets found",
@@ -763,17 +763,17 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Confirmar participación",
             "subtitleStake": "Estás a punto de iniciar el Staking",
             "subtitleMerge": "Estás a punto de unirte",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "Si no deseas participar en ambos Airdrop, puedes escoger no hacerlo debajo. Puedes dejar el staking y retomarlo en cualquier momento.",
+            "mergeStakeWarning": "Tus fondos serán puestos en staking para el {airdrop}. Para cambiar los airdrops en los que quieres participar, saca esta cartera del staking y vuelve a ponerla en staking de nuevo.",
             "estimatedAirdrop": "Recompensa estimada"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Fase del staking {periodNumber} de {date}",
+            "body": "El staking de IOTA por Assembly continua... Participa en la fase {periodNumber} durante 90 días. ¡Pon en stake tus tokens IOTA y gana recompensas ASMB!",
+            "info": "El staking de Shimmer se ha completado y sólo se distribuirán token ASMB."
         },
         "shimmer-info": {
             "title": "Sobre Shimmer",
@@ -990,7 +990,7 @@
         "profiles": "Perfiles",
         "dev": "Dev",
         "createAccount": "Crear una Billetera",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
@@ -1079,7 +1079,8 @@
         "stakedFunds": "Fondos en staking",
         "unstakedFunds": "Fondos sin Stake",
         "accountColor": "Color de la billetera",
-        "myAssets": "My assets"
+        "myAssets": "My assets",
+        "total": "Total: {balance}"
     },
     "dates": {
         "today": "Hoy",
@@ -1252,7 +1253,8 @@
             "cannotUseAccount": "No se puede utilizar la cuenta especificada.",
             "cannotFindStakingEvent": "No se puede encontrar el evento de Staking.",
             "cannotVisitAirdropWebsite": "No se puede abrir el sitio web de {airdrop}.",
-            "invalidStakingEventId": "ID del evento de Staking es inválido."
+            "invalidStakingEventId": "ID del evento de Staking es inválido.",
+            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME"

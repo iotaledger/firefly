@@ -27,6 +27,7 @@
     export let iconOnly = false
     export let iconHeight: string | undefined = undefined
     export let iconWidth: string | undefined = undefined
+    export let unstyled = false
 
     export let onClick = (): void | string => ''
 
@@ -135,7 +136,7 @@
 {/if}
 
 <style type="text/scss">
-    button {
+    button:not(.unstyled) {
         @apply bg-blue-500;
         min-width: 100px;
         span {
