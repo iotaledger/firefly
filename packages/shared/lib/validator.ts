@@ -55,7 +55,7 @@ class Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        if (this.nextValidator != null) {
+        if (this.nextValidator !== null) {
             return this.nextValidator.isValid(response)
         }
 
