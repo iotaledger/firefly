@@ -1,7 +1,7 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
-import { updateNewProfile } from '@core/profile'
+import { INode, NetworkProtocol, NetworkType, updateNewProfileNetworkClientOptions } from '@core/network'
+import { updateNewProfile, updateNewProfileSettings } from '@core/profile'
 
-export function updateNewProfileNetwork(protocol: NetworkProtocol, type: NetworkType): void {
-    const isPrivateNet = type === NetworkType.PrivateNet
-    updateNewProfile({ networkProtocol: isPrivateNet ? protocol : undefined, networkType: type })
+export function updateNewProfileNetwork(networkProtocol: NetworkProtocol, networkType: NetworkType, node: INode): void {
+    updateNewProfile({ networkProtocol: networkProtocol, networkType })
+    updateNewProfileNetworkClientOptions(networkProtocol, networkType, node)
 }

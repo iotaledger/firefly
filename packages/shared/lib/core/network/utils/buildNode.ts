@@ -12,11 +12,5 @@ export function buildNode(node: INode, nodeInfo: INodeInfoResponse, profile: IPe
     return {
         url: nodeInfo?.url,
         auth,
-        network: getNetwork(
-            protocol ?? profile.networkProtocol,
-            profile.networkType,
-            nodeInfo?.nodeinfo?.protocol?.networkName
-        ),
-        isPrimary: !!node?.isPrimary || !nodes.some((n) => n.isPrimary),
     }
 }

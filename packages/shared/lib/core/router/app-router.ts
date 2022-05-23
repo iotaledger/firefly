@@ -1,4 +1,4 @@
-import { activeProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { mobile } from '@core/app'
 import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
 import { SetupType } from '@lib/typings/setup'
@@ -42,7 +42,7 @@ export class AppRouter extends Router<AppRoute> {
         switch (currentRoute) {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
-                    nextRoute = AppRoute.Profile
+                    nextRoute = AppRoute.Network
                 } else {
                     nextRoute = AppRoute.Dashboard
                 }
@@ -67,7 +67,7 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.Profile
                 break
             case AppRoute.Profile:
-                nextRoute = AppRoute.Network
+                nextRoute = AppRoute.Setup
                 break
             case AppRoute.Setup: {
                 const { setupType } = params
@@ -100,12 +100,12 @@ export class AppRouter extends Router<AppRoute> {
                 if (profileNetworkType === NetworkType.PrivateNet) {
                     nextRoute = AppRoute.CustomNetwork
                 } else {
-                    nextRoute = AppRoute.Setup
+                    nextRoute = AppRoute.Profile
                 }
                 break
             }
             case AppRoute.CustomNetwork: {
-                nextRoute = AppRoute.Setup
+                nextRoute = AppRoute.Profile
                 break
             }
             case AppRoute.Secure:

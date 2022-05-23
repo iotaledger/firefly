@@ -1,9 +1,14 @@
 import { getOfficialNetworkConfig, INode, updateClientOptions } from '@core/network'
 import { updateNewProfileSettings } from '@core/profile'
+import { NetworkProtocol, NetworkType } from '../enums'
+import { buildClientOptions } from '../helpers'
+import { getNetwork } from '../utils'
 
-export function updateNewProfileNetworkConfig(node: INode): void {
-    const networkConfig = getOfficialNetworkConfig(node?.network?.protocol, node?.network?.type)
-    networkConfig.nodes = [{ ...node, isPrimary: true }]
-    updateClientOptions(networkConfig)
-    updateNewProfileSettings({ networkConfig })
+export function updateNewProfileNetworkClientOptions(
+    networkProtocol: NetworkProtocol,
+    networkType: NetworkType,
+    node: INode
+): void {
+    const clientOptions = buildClientOptions(getNetwork(networkProtocol, networkType), [node])
+    updateNewProfileSettings({ clientOptions })
 }

@@ -5,8 +5,9 @@
     import { activeProfile, newProfile, addNode } from '@core/profile'
     import { localize } from '@core/i18n'
     import { appRoute, AppRoute } from '@core/router'
+    import { addCustomNodeToNewProfile } from '@core/profile/actions/addCustomNodeToNewProfile'
 
-    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' }, isPrimary: false }
+    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
     export let onSuccess = (..._: any[]): void => {}
 
@@ -35,7 +36,11 @@
         checkForErrors()
         if (!formError.address) {
             try {
-                await addNode(node, profile)
+                if ($newProfile) {
+                    await addCustomNodeToNewProfile(node)
+                } else {
+                    await addNode(node, profile)
+                }
                 isBusy = false
                 onSuccess()
             } catch (err) {
@@ -79,11 +84,6 @@
         disabled={isBusy}
     />
     {#if $appRoute !== AppRoute.CustomNetwork}
-        <Checkbox
-            label={localize('popups.node.setAsPrimaryNode')}
-            bind:checked={node.isPrimary}
-            disabled={isBusy}
-            classes="mt-4 mb-8"
-        />
+        <Checkbox label={localize('popups.node.setAsPrimaryNode')} disabled={isBusy} classes="mt-4 mb-8" />
     {/if}
 </form>

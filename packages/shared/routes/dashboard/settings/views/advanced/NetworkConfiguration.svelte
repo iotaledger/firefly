@@ -18,6 +18,8 @@
     import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
+    const isPrimary = false
+
     let networkConfig: INetworkConfig =
         $activeProfile?.settings.networkConfig ||
         getOfficialNetworkConfig($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -168,15 +170,11 @@
                         class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     >
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                            <Text
-                                classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${
-                                    node.isDisabled ? 'opacity-50' : ''
-                                }`}
-                            >
+                            <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
                                 {node.url}
                             </Text>
                             <Text highlighted>
-                                {node.isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
+                                {isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
                             </Text>
                         </div>
                         <button

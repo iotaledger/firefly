@@ -1,7 +1,5 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { updateNewProfileNetworkConfig } from '@core/network'
-    import { activeProfile } from '@core/profile'
     import { appRouter } from '@core/router'
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
 

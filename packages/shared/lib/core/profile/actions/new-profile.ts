@@ -1,4 +1,5 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
+import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+import { buildClientOptions } from '@core/network/helpers'
 import { destroyProfileManager } from '@core/profile-manager'
 import { ledgerSimulator } from '@lib/ledger'
 import { get } from 'svelte/store'
@@ -16,12 +17,13 @@ import { removeProfileFolder } from '../utils'
  * @param {NetworkType} networkType
  */
 export function createNewProfile(
-    profileName: string,
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType
 ): void {
-    const profile = buildNewProfile(profileName, isDeveloperProfile, networkProtocol, networkType)
+    // TODO: build custom client options for custom network
+    const clientOptions = getDefaultClientOptions(networkProtocol, networkType)
+    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions)
     newProfile.set(profile)
 }
 

@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { INetwork, NETWORK, NetworkType } from '@core/network'
+    import { createNewProfile, newProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
-    import { newProfile } from '@core/profile'
     import { mobile } from '@lib/app'
-    import { INetwork, NETWORK, NetworkProtocol, NetworkType, updateNewProfileNetwork } from '@core/network'
+    import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
     const isPrivateNet = (network: INetwork) => network.type === NetworkType.PrivateNet
+    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
     const networks: INetwork[] = Object.values(NETWORK).flatMap(Object.values)
     const filteredNetworks = $newProfile?.isDeveloperProfile
@@ -30,7 +31,7 @@
         return localize(`views.network.${network.protocol}.${network.type}`)
     }
     function onClick(network: INetwork): void {
-        updateNewProfileNetwork(network.protocol, network.type)
+        createNewProfile(isDeveloperProfile, network.protocol, network.type)
         $appRouter.next()
     }
     function onBackClick(): void {

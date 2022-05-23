@@ -7,7 +7,6 @@ export function validateCleanNodeData(data: INode): INode {
     const cleanData = {
         url: stripTrailingSlash(stripSpaces(data?.url)),
         auth: cleanAuth(data?.auth),
-        isPrimary: !!data?.isPrimary,
     }
     const error = checkNodeUrlValidity([], data?.url, false)
     if (!error) {

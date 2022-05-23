@@ -7,7 +7,7 @@
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
+    import { newProfile, profiles, validateProfileName, deleteNewProfile, updateNewProfile } from '@core/profile'
     import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
     export let locale: Locale
@@ -16,7 +16,6 @@
     let busy = false
 
     let profileName = $newProfile?.name ?? ''
-    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
@@ -34,9 +33,13 @@
     }
 
     function cleanUpIfPreviouslyInitialized(): void {
-        const previousInitializedId = $newProfile?.id
+        const previousInitializedId = $newProfile?.name
         if (nameChanged && previousInitializedId) {
-            destroyProfileManager()
+            try {
+                destroyProfileManager()
+            } catch (error) {
+                console.error(error)
+            }
         }
     }
 
@@ -44,9 +47,7 @@
         try {
             busy = true
             if (nameChanged) {
-                // TODO: set network based on user selection
-                createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
-
+                updateNewProfile({ name })
                 const path = await getProfileDataPath($newProfile.id)
                 const clientOptions = getDefaultClientOptions(NetworkProtocol.Shimmer, NetworkType.Devnet)
                 // const machineId = await Platform.getMachineId()
