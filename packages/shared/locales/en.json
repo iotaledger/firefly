@@ -613,7 +613,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "Unable to load Community Treasury vote",
-                        "subtitle": "Please connect to a node that supports this proposal",
+                        "subtitle": "Please connect to a node that has added this vote",
                         "buttonConnect": "Connect to default node",
                         "buttonSettings": "View node settings",
                         "fetching": "Fetching governance event info..."
