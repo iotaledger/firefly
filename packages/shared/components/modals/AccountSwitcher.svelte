@@ -42,8 +42,14 @@
     }
 
     function handleCreateAccountClick(): void {
-        modal?.close()
-        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        if ($isTransferring) {
+            showWarning(localize('notifications.transferringCreate'))
+        } else if ($participationAction) {
+            showWarning(localize('notifications.participatingCreate'))
+        } else {
+            modal?.close()
+            openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        }
     }
 </script>
 

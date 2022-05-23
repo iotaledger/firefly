@@ -1250,7 +1250,9 @@
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets."
+        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
