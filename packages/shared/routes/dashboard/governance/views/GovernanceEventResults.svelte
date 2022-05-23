@@ -3,9 +3,15 @@
     import { formatNumber } from '@lib/currency'
     import { ParticipationEvent, ParticipationEventState } from '@lib/participation/types'
     import { AccountColor } from '@lib/typings/color'
-    import { DashboardPane, Text } from 'shared/components'
+    import { DashboardPane, Text, Tooltip } from 'shared/components'
 
     export let event: ParticipationEvent
+
+    const GRAPH_COLORS = [AccountColor.Purple, AccountColor.Turquoise]
+    const tooltip = {
+        build: { anchor: null as HTMLElement, show: false },
+        burn: { anchor: null as HTMLElement, show: false },
+    }
 
     $: displayedPercentages = results?.map((result) => {
         const percentage = getPercentageString(result?.accumulated, totalVotes)
@@ -22,6 +28,19 @@
 
     const getPercentageString = (dividend: number, divisor: number): string =>
         (Math.round((dividend / divisor) * 100) || 0) + '%'
+
+    function toggleTooltip(type: string, show: boolean): void {
+        switch (type) {
+            case 'build':
+                tooltip.build.show = show
+                break
+            case 'burn':
+                tooltip.burn.show = show
+                break
+            default:
+                break
+        }
+    }
 </script>
 
 <DashboardPane classes="w-full h-full flex flex-col flex-shrink-0 overflow-hidden p-6">
@@ -33,25 +52,34 @@
         )}
     </Text>
     <div class="w-full h-full flex justify-center space-x-8">
-        {#each results || [] as result, i}
-            <div class="h-full flex flex-col justify-end items-center">
+        {#each results || [] as result, index}
+            <!-- Note: the tooltip logic is very ugly because the dynamic anchor allocation wasnt working as expected -->
+            <div
+                class="h-full flex flex-col justify-end items-center w-1/2 flex-shrink-0`
+                    : ''}"
+                on:mouseenter={() => toggleTooltip(index === 0 ? 'build' : 'burn', true)}
+                on:mouseleave={() => toggleTooltip(index === 0 ? 'build' : 'burn', false)}
+            >
                 <div
-                    class="w-12 rounded-t-lg"
-                    style="height: {displayedPercentages[i]?.relativePercentage}; background-color: {Object.values(
-                        AccountColor
-                    )[i]};"
+                    class="relative w-12 rounded-t-lg"
+                    style="height: {displayedPercentages[index]?.relativePercentage}; background-color: {GRAPH_COLORS[
+                        index
+                    ]};"
+                    bind:this={tooltip[index === 0 ? 'build' : 'burn'].anchor}
                 />
+                {#if tooltip?.[index === 0 ? 'build' : 'burn']?.show}
+                    <Tooltip anchor={tooltip?.[index === 0 ? 'build' : 'burn']?.anchor} position="left" size="small">
+                        <Text type="p">{formatNumber(result?.accumulated, 0, 0, 2, true)}</Text>
+                    </Tooltip>
+                {/if}
                 <div class="flex space-x-1 mt-3" style="max-width: 7rem">
                     <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden">
-                        {event?.information?.payload?.questions[0]?.answers[i]?.text?.split(' ')[0]}
+                        {event?.information?.payload?.questions[0]?.answers[index]?.text?.split(' ')[0]}
                     </Text>
                     <Text type="h3" overrideColor classes="text-gray-500">
-                        {displayedPercentages[i].percentage}
+                        {displayedPercentages[index].percentage}
                     </Text>
                 </div>
-                <Text type="p" overrideColor bigger classes="text-gray-500 m-0 max-w-36 break-all">
-                    {formatNumber(result?.accumulated, 0, 0, 2, true)}
-                </Text>
             </div>
         {/each}
     </div>
