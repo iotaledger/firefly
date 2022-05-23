@@ -39,7 +39,6 @@
     $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
     $: disableVoting =
         $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
-    $: latestPendingParticipation = $pendingParticipations?.[0]
 
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
 
@@ -99,7 +98,11 @@
                 break
         }
     }
-    function getSpinnerMessage(pendingParticipation: PendingParticipation, answerValue: string): string {
+    function getSpinnerMessage(
+        currentTeasuryVote: string,
+        pendingParticipation: PendingParticipation,
+        answerValue: string
+    ): string {
         if (
             pendingParticipation?.action === ParticipationAction.Stake ||
             pendingParticipation?.action === ParticipationAction.Unstake
@@ -122,7 +125,7 @@
                     return
                 }
             } else {
-                if (isSelected($currentAccountTreasuryVoteValue, answerValue)) {
+                if (isSelected(currentTeasuryVote, answerValue)) {
                     return localize('general.unvoting')
                 } else {
                     return
@@ -241,11 +244,15 @@
                     </div>
                     {#if canParticipate(event?.status?.status)}
                         {#if disableVoting}
-                            {#if getSpinnerMessage(latestPendingParticipation, answer?.value)}
+                            {#if getSpinnerMessage($currentAccountTreasuryVoteValue, $pendingParticipations?.[0], answer?.value)}
                                 <div class="p-2 bg-gray-300 rounded-lg">
                                     <Spinner
                                         busy
-                                        message={getSpinnerMessage(latestPendingParticipation, answer?.value)}
+                                        message={getSpinnerMessage(
+                                            $currentAccountTreasuryVoteValue,
+                                            $pendingParticipations?.[0],
+                                            answer?.value
+                                        )}
                                         classes="mx-2 justify-center"
                                     />
                                 </div>
