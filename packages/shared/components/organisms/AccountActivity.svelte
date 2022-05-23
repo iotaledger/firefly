@@ -2,22 +2,10 @@
     import { ActivityRow, TogglableButton, Text, IconTextInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import {
-        isSyncing,
-        getIncomingFlag,
-        isFirstSessionSync,
-        walletSetupType,
-        getAccountMessages,
-    } from 'shared/lib/wallet'
+    import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { AccountMessage } from 'shared/lib/typings/wallet'
     import { debounce } from 'shared/lib/utils'
-    import { selectedAccount } from '@core/account'
-    import { parseTransactionsToActivities, searchTransactions } from '@core/wallet'
-    import { Transaction } from '@lib/typings/message'
-    import { IActivity } from '@lib/typings/activity'
-
-    const transactions = getAccountMessages($selectedAccount)
+    import { activities, filterActivities, searchActivities } from '@core/wallet'
 
     function handleTransactionClick(message: any): void {
         openPopup({
@@ -35,40 +23,15 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
-    let filteredTransactions = transactions
+    let filteredActivities = $activities
+    $: filteredActivities = filterActivities($activities, activeFilterIndex)
 
-    $: switch (activeFilterIndex) {
-        case 0:
-            filteredTransactions = transactions
-            break
-        case 1:
-            filteredTransactions = transactions.filter((transaction) => getIncomingFlag(transaction?.payload))
-            break
-        case 2:
-            filteredTransactions = transactions.filter((transaction) => !getIncomingFlag(transaction?.payload))
-            break
-        default:
-            filteredTransactions = transactions
-    }
-
-    let queryTransactions = filteredTransactions
-
-    function search() {
-        if (searchValue) {
-            queryTransactions = searchTransactions(filteredTransactions, searchValue)
-        } else {
-            queryTransactions = filteredTransactions
-        }
-    }
-
+    let queryActivities = filteredActivities
     $: if (searchActive && searchValue) {
-        debounce(search)()
+        debounce(() => (queryActivities = searchActivities(filteredActivities, searchValue)))()
     } else {
-        queryTransactions = filteredTransactions
+        queryActivities = filteredActivities
     }
-
-    let activities: IActivity[]
-    $: activities = parseTransactionsToActivities(queryTransactions)
 
     function shouldShowFirstSync(): boolean {
         /**
@@ -80,9 +43,7 @@
          *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
-        return (
-            $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && transactions.length === 0
-        )
+        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $activities.length === 0
     }
 </script>
 
@@ -94,7 +55,7 @@
         </div>
         <div class="relative flex flex-row items-center justify-between text-white mt-4">
             {#if searchActive}
-                <IconTextInput bind:inputElement bind:searchValue icon="search" />
+                <IconTextInput bind:inputElement bind:value={searchValue} icon="search" />
             {/if}
             <!-- TODO: Wait for screen design for these -->
             <!-- <ul class="flex flex-row justify-between space-x-8">
@@ -118,8 +79,8 @@
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if activities.length}
-            {#each activities as activity}
+        {:else if queryActivities.length}
+            {#each queryActivities as activity}
                 <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
             {/each}
         {:else}
