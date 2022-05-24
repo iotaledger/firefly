@@ -3,8 +3,7 @@
     import UnitInput from './UnitInput.svelte'
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { getUnit, UNIT_MAP } from '@lib/units'
+    import { formatTokenAmountBestMatch, generateRawAmount, IAsset, parseRawAmount } from '@core/wallet'
 
     export let inputElement
     export let disabled = false
@@ -19,27 +18,10 @@
 
     $: isFocused && (error = '')
 
-    $: if (!asset?.metadata.useMetricPrefix) {
-        if (unit === asset?.metadata.unit) {
-            rawAmount = Number(amount) * 10 ** asset?.metadata.decimals
-        } else if (unit === asset?.metadata.subunit) {
-            rawAmount = Number(amount)
-        }
-    } else if (asset?.metadata.useMetricPrefix) {
-        rawAmount = Number(amount) * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
-    }
+    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
 
     function onClickAvailableBalance(): void {
-        if (!asset?.metadata.useMetricPrefix) {
-            const balance = (asset?.balance?.available ?? 0) / 10 ** asset?.metadata.decimals
-            amount = balance.toString()
-            unit = asset.metadata.unit
-        } else if (asset?.metadata.useMetricPrefix) {
-            const metricUnit = getUnit(asset?.balance?.available ?? 0)
-            const balance = (asset?.balance?.available ?? 0) / UNIT_MAP[metricUnit].val
-            amount = balance.toString()
-            unit = metricUnit + asset.metadata.unit
-        }
+        ({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
     }
 
     export function validate(): Promise<void> {
