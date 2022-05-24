@@ -14,8 +14,7 @@
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { IAccountState } from '@core/account'
-    import { formatTokenAmountPrecise } from '@core/wallet'
+    import { formatTokenAmountPrecise, Recipient } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let amount: string
@@ -24,7 +23,7 @@
     export let type: ActivityType
     export let status: ActivityStatus
     export let asyncStatus: ActivityAsyncStatus
-    export let recipient: { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
+    export let recipient: Recipient
     export let timestamp: number
     export let publicNote: string
     export let storageDeposit = 0

@@ -4,8 +4,7 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAccountState } from '@core/account'
-    import { IAsset } from '@core/wallet'
+    import { IAsset, Recipient } from '@core/wallet'
 
     let assetAmountInput
     let recipientInput
@@ -14,7 +13,7 @@
     let amount: string
     let rawAmount: number
     let unit: string
-    let recipient: { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
+    let recipient: Recipient
 
     async function onSend(): Promise<void> {
         let valid = true

@@ -5,8 +5,9 @@
     import { activeProfile } from '@core/profile'
     import { getNetwork, NetworkType, nodeInfo } from '@core/network'
     import { IAccountState } from '@core/account'
+    import { Recipient } from '@core/wallet'
 
-    export let recipient: { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
+    export let recipient: Recipient
     export let disabled = false
 
     const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
