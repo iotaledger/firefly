@@ -42,8 +42,8 @@
                 closePopup(true)
                 // Re-open the governance manager pop up if you are in the voting tab
                 if (
-                    $participationAction === ParticipationAction.Stake ||
-                    $participationAction === ParticipationAction.Unstake
+                    $participationAction === ParticipationAction.Vote ||
+                    $participationAction === ParticipationAction.Unvote
                 ) {
                     openPopup(
                         {
