@@ -10,9 +10,7 @@
 
     export let classes = ''
 
-    export let onMenuClick = (): void => {
-        accountRoute.set(AccountRoutes.Manage)
-    }
+    export let onMenuClick = (): void => {}
 
     let showPreciseBalance = false
 
@@ -40,7 +38,7 @@
                 {localize('general.balance')}
             </p>
         {/if}
-        <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
+        <div class="flex flex-col flex-wrap {$mobile ? 'items-center' : 'items-start space-y-1.5 mr-12'}">
             <div on:click={togglePreciseBalance}>
                 <Text type={$mobile ? 'h1' : 'h2'}>
                     {showPreciseBalance
@@ -48,7 +46,12 @@
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                 </Text>
             </div>
-            <Text type={$mobile ? 'h4' : 'p'} smaller>
+            <Text 
+                type={$mobile ? 'h4' : 'p'} 
+                smaller 
+                overrideColor={$mobile} 
+                classes={mobile && 'text-gray-500'}
+            >
                 {$selectedAccount?.balanceEquiv}
             </Text>
         </div>
@@ -72,7 +75,9 @@
     {/if}
     <button
         on:click={() => onMenuClick()}
-        class="px-2 py-3 flex flex-row space-x-1 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white dark:bg-opacity-50 rounded-lg absolute top-6 right-6"
+        class="{$mobile
+            ? '-top-0'
+            : 'bg-opacity-10 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg'} px-2 py-3 flex flex-row space-x-1 text-gray-900 dark:text-white absolute top-6 right-6"
     >
         {#each Array(3) as _}
             <svg width="4" height="4" viewBox="0 0 4 4">
