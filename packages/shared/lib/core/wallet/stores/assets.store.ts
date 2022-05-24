@@ -1,4 +1,4 @@
-import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+import { BASE_TOKEN } from '@core/network'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { activeProfile } from '@core/profile'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'

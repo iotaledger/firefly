@@ -1114,6 +1114,7 @@
         "expirationTime": "Expiration time",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
+        "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed"
     },
     "dates": {
