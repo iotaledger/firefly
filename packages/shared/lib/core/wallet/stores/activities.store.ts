@@ -5,7 +5,7 @@ import { parseTransactionsToActivities } from '../utils'
 import { ActivityDirection, IActivity } from '@lib/typings/activity'
 import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { formatDate } from '@core/i18n'
+import { formatDate, localize } from '@core/i18n'
 
 export const activities: Readable<IActivity[]> = derived([selectedAccount], ([$selectedAccount]) =>
     parseTransactionsToActivities(getAccountMessages($selectedAccount))
@@ -28,7 +28,8 @@ export function searchActivities(activities: IActivity[], searchTerm: string): I
     return activities.filter((activity) => {
         const amount = unitToValue(activity.amount)
         return (
-            activity.subject === searchTerm ||
+            activity.subjectAccountName === searchTerm ||
+            activity.subjectAddress === searchTerm ||
             activity?.id.toLowerCase() === searchTerm ||
             (searchTerm[0] === '>' && unitToValue(searchTerm.substring(1)) < amount) ||
             (searchTerm[0] === '<' && unitToValue(searchTerm.substring(1)) > amount) ||
@@ -42,7 +43,7 @@ export function searchActivities(activities: IActivity[], searchTerm: string): I
 export function groupActivities(activities: IActivity[]): IActivity[] {
     const groupedActivities = []
     for (const activity of activities) {
-        const activityDate = formatDate(new Date(Number(activity.timestamp)), { year: 'numeric', month: 'short' })
+        const activityDate = getDateString(activity.timestamp)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
         }
@@ -50,4 +51,13 @@ export function groupActivities(activities: IActivity[]): IActivity[] {
         groupedActivities[index].activities.push(activity)
     }
     return groupedActivities
+}
+
+function getDateString(timestamp): string {
+    const dateString = getMonthYear(new Date(Number(timestamp)))
+    return dateString === getMonthYear(new Date()) ? localize('thisMonth') : dateString
+}
+
+function getMonthYear(date): string {
+    return formatDate(date, { year: 'numeric', month: 'short' })
 }

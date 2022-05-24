@@ -20,11 +20,13 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         internal: getInternalFlag(transaction.payload),
         direction: getIncomingFlag(transaction.payload) ? ActivityDirection.In : ActivityDirection.Out,
         confirmed: transaction.confirmed,
-        subject: getSubject(transaction.payload),
+        subjectAccountName: getSubjectName(transaction.payload),
+        subjectAddress: getSubjectAddress(transaction.payload),
         amount: getMessageValue(transaction.payload),
         fiatAmount: 0,
         token: {
             name: 'Iota',
+            useMetricPrefix: true,
         },
     }))
 }
@@ -43,14 +45,14 @@ function getActivityType(payload) {
     }
 }
 
-function getSubject(payload) {
+function getSubjectName(payload) {
     const senderAddress = sendAddressFromTransactionPayload(payload)
 
     // There can only be one sender address
     const senderAccount = findAccountWithAddress(senderAddress)
 
     if (getIncomingFlag(payload)) {
-        return senderAccount ? senderAccount.name : truncateString(senderAddress, 4, 3)
+        return senderAccount?.name
     } else {
         const receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
@@ -60,7 +62,12 @@ function getSubject(payload) {
         const receiverAccount = getInternalFlag(payload)
             ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
             : null
-
-        return receiverAccount ? receiverAccount.name : truncateString(receiverAddresses[0], 4, 3)
+        return receiverAccount?.name
     }
+}
+
+function getSubjectAddress(payload) {
+    return getIncomingFlag(payload)
+        ? sendAddressFromTransactionPayload(payload)
+        : receiverAddressesFromTransactionPayload(payload)[0]
 }

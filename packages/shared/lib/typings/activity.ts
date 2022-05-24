@@ -36,7 +36,8 @@ export interface IActivity {
     confirmed: boolean
     internal: boolean
     amount: string
-    subject: string
+    subjectAccountName: string
+    subjectAddress: string
     token: ITokenMetadata
     conversion?: number
     fiatAmount?: number
