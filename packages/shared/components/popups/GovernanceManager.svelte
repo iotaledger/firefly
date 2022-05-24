@@ -40,7 +40,12 @@
     let previousPendingParticipationsLength = 0
     let title = ''
 
-    $: loading = isVoting || $isSyncing || $pendingParticipations?.length !== 0 || !!$participationAction
+    $: loading =
+        isVoting ||
+        $isSyncing ||
+        $pendingParticipations?.length !== 0 ||
+        !!$participationAction ||
+        $isChangingParticipation
     $: isAlreadyVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
     $: canMergeVotes = isAlreadyVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
     $: activeFlow, (title = getTitleText())
@@ -152,7 +157,6 @@
             transferState.set(null)
         }
         activeFlow = getActiveFlow()
-        isChangingParticipation.set(false)
         isPerformingParticipation.set(false)
         participationAction.set(undefined)
     }
@@ -177,6 +181,7 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
@@ -190,6 +195,7 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
@@ -218,12 +224,14 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
             })
             .catch((err) => {
                 console.error(err)
+                isChangingParticipation.set(false)
                 displayErrorNotification(err)
                 resetView()
             })
