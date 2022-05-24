@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "PIN-Code bestätigen",
             "body1": "Deine PIN hält dein Guthaben und deine Transaktionen privat.",
-            "body2": "Gib deinen PIN-Code erneut ein, um fortzufahren. "
+            "body2": "Gib deinen PIN-Code erneut ein, um fortzufahren."
         },
         "backup": {
             "title": "Erstelle ein Backup deiner Wallet",
@@ -521,7 +521,8 @@
                     "commencing": "Pre-Staking ist möglich",
                     "holding": "{duration} Staking verbleibend",
                     "ended": "Staking ist nun beendet",
-                    "inactive": "Keine Staking-Events gefunden"
+                    "inactive": "Keine Staking-Events gefunden",
+                    "fetching": "Informationen zum aktuellen Staking-Event werden abgerufen..."
                 },
                 "bodies": {
                     "upcoming": "Stake deine {token} Token, um alle 10 Sekunden automatisch Belohnungen zu erhalten, sobald das Staking am {date} beginnt.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Gesamte Rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly ist ein offenes, hoch skalierbares Multi-Chain Netzwerk, welches es ermöglicht, interoperable Smart-Contracts zu entwickeln und bereitzustellen. Assembly ist die Zukunft des Web3. "
+                    "description": "Assembly ist ein offenes, hoch skalierbares Multi-Chain Netzwerk, welches es ermöglicht, zusammenstellbare Smart-Contracts zu entwickeln und bereitzustellen. Assembly ist die Zukunft des Web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Farbauswahl",
                 "hexCode": "Hex-Farbcode"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Mein Stimmgewicht",
+                "info": {
+                    "title": "Dein Stimmgewicht",
+                    "equality": "1000 IOTA = 1 Stimme",
+                    "description1": "Dein Stimmgewicht entspricht deinem Wallet-Guthaben. Wenn sich ein Abstimmungsvorschlag in der Zählungsphase befindet, werden aktive Stimmen gezählt und alle 10 Sekunden angesammelt.",
+                    "description2": "1 Ki Stimmgewicht (1000 IOTA-Token) ermöglicht alle 10 Sekunden eine Stimme. Das bedeutet, dass du deine Wahl über den gesamten Zählzeitraum beibehalten musst, um dein volles Stimmgewicht zu nutzen."
+                }
+            },
+            "info": {
+                "title": "Governance-Info",
+                "description": "Mit Hilfe der IOTA Foundation hat die IOTA Community ein Abstimmprotokoll entwickelt, mit dessen Hilfe du an den Governance-Entscheidungen teilnehmen kannst, indem du mit deinen IOTA-Token in Firefly abstimmst.",
+                "link": "Erfahre mehr über Abstimmungen mit IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Abstimmung verfügbar",
+                        "countingStarts": "Auszählung beginnt",
+                        "countingStops": "Auszählung endet",
+                        "votingOpened": "Abstimmung verfügbar",
+                        "countingStarted": "Auszählung hat begonnen",
+                        "countingStopped": "Auszählung beendet"
+                    },
+                    "votingRate": {
+                        "title": "Abstimmungsrate",
+                        "body": "{amount} generiert alle {time, plural, one {# Sekunde} other {# Sekunden}} {votesPerMilestone} Stimmen."
+                    },
+                    "countedVotes": {
+                        "title": "Gezählte Stimmen",
+                        "body": "Stimmen werden während des Zählzeitraums in {time, plural, one {#-Sekunde} other {#-Sekunden}}-Intervallen abgezählt. {amount} generieren alle {time, plural, one {# Sekunde} other {# Sekunden}} {votesPerMilestone} Stimmen."
+                    },
+                    "partiallyVoted": {
+                        "title": "Neues nicht genutztes Guthaben: {amount}",
+                        "body": "Du hast zusätzliches Guthaben in {account} erhalten. Du kannst mit diesen Token abstimmen, indem du deine Stimmen zusammenführst."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximale Stimmen",
+                        "body": "Du musst für den verbleibenden Zählzeitraum abstimmen, um die maximale Anzahl deiner Stimmen abzugeben."
+                    },
+                    "chart": {
+                        "totalVotes": "Stimmen: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Ankündigung",
+                    "commencing": "Abstimmung verfügbar",
+                    "holding": "Abzählen",
+                    "ended": "Beendet"
+                },
+                "button": "Vorschlag anzeigen",
+                "treasury": {
+                    "notFound": {
+                        "title": "Community-Treasury-Abstimmung konnte nicht geladen werden",
+                        "subtitle": "Bitte verbinde dich mit einer Node, die diese Abstimmung hinzugefügt hat",
+                        "buttonConnect": "Mit Standardnode verbinden",
+                        "buttonSettings": "Node-Einstellungen anzeigen",
+                        "fetching": "Informationen zum aktuellen Abstimmungs-Event werden abgerufen..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Abstimmung beginnt am",
+                "votingProgress": "Verbleibende Zeit",
+                "votingPower": "Dein Stimmgewicht",
+                "votesCounted": "Deine gezählten Stimmen",
+                "maximumVotes": "Deine maximalen Stimmen",
+                "countingStarts": "Auszählung beginnt am",
+                "currentResult": "Aktuelle Ergebnisse",
+                "finalResult": "Endergebnis",
+                "answerHeader": {
+                    "activeVoting": "Aktive Abstimmung",
+                    "selected": "Abgegeben",
+                    "notSelected": "Nicht ausgewählt",
+                    "winner": "Gewinner"
+                }
+            },
+            "votes": "Stimmen",
+            "manageVote": "Abstimmung verwalten"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Transaktion bestätigen",
             "body": "Du sendest {amount} an",
             "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
-            "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen."
+            "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen. Gegebenfalls musst du auch erneut Abstimmen.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked oder zur Abstimmung verwendet werden. Dies kann zur Aufhebung des Stakings und zur Beendung des Abstimmens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken und an Abstimmungen erneut teilnehmen musst.",
+                "stake": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
+                "vote": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakings führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst."
+            }
         },
         "balanceFinder": {
             "title": "Guthabensuche",
@@ -774,6 +862,33 @@
             "title": "Staking-Phase {periodNumber} vom {date}",
             "body": "Das IOTA-Staking für Assembly geht weiter... Nimm an Phase {periodNumber} für 90 Tage teil. Stake deine IOTA Token und verdiene ASMB Rewards!",
             "info": "Shimmer-Staking ist beendet. Lediglich ASMB Token werden verteilt."
+        },
+        "governanceManager": {
+            "castYourVote": "Gib deine Stimme ab",
+            "castYourVoteInfo": "Du bist dabei, mit {amount} für Option {voteValue} ({voteText}) zu stimmen",
+            "castingVotes": "Stimmen abgeben",
+            "stopVoting": "Abstimmen beenden",
+            "stopVotingInfo": "Bist du sicher, dass du nicht mehr für Option {voteValue} ({voteText}) abstimmen möchtest?",
+            "stopVotingDisclaimer": "Bitte beachte, dass das Ändern deiner Stimme während des Zählzeitraums keine bereits gezählten Stimmen beeinflussen wird",
+            "stoppingVoting": "Abstimmen beenden",
+            "changeVote": "Abstimmung ändern",
+            "changeVoteDisclaimer": "Bitte beachte, dass das Ändern deiner Stimme während des Zählzeitraums keine bereits gezählten Stimmen beeinflussen wird",
+            "changeVoteInfo": "Bist du sicher, dass du deine Stimme in Option {voteValue} ({voteText}) ändern möchtest?",
+            "changingVote": "Stimme ändern",
+            "manageVotes": "Stimmen verwalten",
+            "partialVoteInfo": "Du hast {amount} in {account} erhalten. Du kannst mit diesem Guthaben abstimmen, indem du es mit deiner aktuellen Stimme zusammenführst.",
+            "mergeVoteDisclaimer": "Bitte beachte, dass das Zusammenführen von Stimmen keine Auswirkungen auf bereits gezählte Stimmen hat",
+            "mergingVotes": "Abstimmungen zusammenführen",
+            "votedSuccessfully": "Du hast die Abstimmung mit {account} begonnen.",
+            "unvotedSuccessfully": "Du hast die Abstimmung mit {account} beendet.",
+            "successPopup": {
+                "castVotesTitle": "Erfolgreich abgestimmt",
+                "stopVotesTitle": "Abstimmung gestoppt",
+                "mergeVotesTitle": "Abstimmung zusammengeführt",
+                "changeVotesTitle": "Abstimmung geändert",
+                "castBody": "Du stimmst nun für Option {voteValue} ({voteText}).",
+                "stopBody": "Du hast aufgehört, abzustimmen. Dies wirkt sich nicht auf bereits gezählte Stimmen aus."
+            }
         },
         "shimmer-info": {
             "title": "Über Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Staken",
         "mergeFunds": "Guthaben zusammenführen",
         "done": "Fertig",
+        "castVotes": "Stimme abgeben",
+        "changeVotes": "Stimme ändern",
+        "mergeVotes": "Abstimmung zusammenführen",
+        "stopVotes": "Abstimmung beenden",
         "okIUnderstand": "OK, ich verstehe",
         "readMore": "Weiterlesen"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Übertrage an {account}",
         "transferFrom": "Übertragung von {account}",
         "transferTo": "Übertragung an {account}",
-        "stakedFor": "Für {account} gestaked",
-        "unstakedFor": "Staking für {account} aufgehoben",
-        "votedFor": "Für {account} gestimmt",
-        "unvotedFor": "Stimme für {account} zurückgenommen",
         "stakingTransaction": "Staking Transaktion",
         "unstakingTransaction": "Unstaking Transaktion",
+        "votingTransaction": "Abstimmungs-Transaktion",
+        "unvotingTransaction": "Stimmenrücknahme-Transaktion",
+        "participationTransaction": "Teilnahme-Transaktion",
         "receiving": "Empfange",
         "sending": "Sende",
         "legacyNetwork": "Altes Netzwerk",
@@ -1072,14 +1190,19 @@
         "unknown": "Unbekannt",
         "none": "Keine",
         "staked": "Gestaked",
+        "voted": "Abgestimmt",
         "unstaked": "nicht gestaked",
+        "unvoted": "Nicht abgestimmt",
         "staking": "Staking",
         "unstaking": "Staking aufheben",
         "notStaked": "Nicht gestaked",
         "stakedFunds": "Gestaktes Guthaben",
         "unstakedFunds": "Ungestaktes Guthaben",
+        "voting": "Abstimmung",
+        "unvoting": "Stimme zurücknehmen",
         "accountColor": "Wallet-Farbe",
         "myAssets": "Meine Assets",
+        "option": "Option",
         "total": "Gesamt: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
         "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind, um die Wallets zu ändern.",
-        "participating": "Bitte warte, bis alle Staking/Voting Transaktionen abgeschlossen sind, um die Wallets zu ändern."
+        "participating": "Bitte warte mit dem Wechsel der Wallet, bis du das Staking/die Abstimmung abgeschlossen hast.",
+        "transferringCreate": "Bitte warte, bis alle Transaktionen abgeschlossen sind, bevor du eine neue Wallet hinzufügst.",
+        "participatingCreate": "Bitte warte mit dem Wechsel der Wallet, bis du das Staking/die Abstimmung abgeschlossen hast."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Governance"
     }
 }

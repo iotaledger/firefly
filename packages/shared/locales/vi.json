@@ -11,8 +11,8 @@
         },
         "crashReporting": {
             "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "body": "Giúp những nhà phát triển cải thiên Firefly bằng cách tự động gửi dữ liệu chẩn đoán khi một lỗi hoặc sự cố xảy ra.",
+            "checkbox": "Gửi các báo cáo sự cố đến IOTA Foundation"
         },
         "appearance": {
             "title": "Giao diện",
@@ -27,10 +27,10 @@
                 "nonFirst": "Bây giờ, hãy bắt đầu với tên hồ sơ của bạn"
             },
             "addMore": "Bạn có thể thêm nhiều hồ sơ sau này.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Tùy chọn nâng cao",
             "developer": {
                 "label": "Hồ sơ nhà phát triển",
-                "info": "Connect to the devnet or a private network"
+                "info": "Kết nối đến devnet hoặc một mạng riêng tư"
             }
         },
         "setup": {
@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Xác thực mã PIN của bạn",
             "body1": "Mã PIN của bạn giúp giữ số dư và các giao dịch trong tài khoản của bạn một cách riêng tư.",
-            "body2": "Nhập lại mã PIN của bạn để tiếp tục. "
+            "body2": "Nhập lại mã PIN của bạn để tiếp tục."
         },
         "backup": {
             "title": "Sao lưu ví của bạn",
@@ -268,7 +268,7 @@
         },
         "securingSpentAddresses": {
             "title": "Bảo mật các địa chỉ ví đã chi tiêu...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Quy trình này sẽ mất {minutes, plural, one {1 phút} other {# phút}}.",
             "body2": "Máy tính của bạn sẽ chạy hết công suất, bạn có thể làm việc khác trong khi bạn đợi quá trình này hoàn tất."
         },
         "transferFragmentedFunds": {
@@ -292,7 +292,7 @@
         "settings": {
             "settings": "Cấu hình",
             "generalSettings": {
-                "title": "General",
+                "title": "Tổng quát",
                 "description": "Thiết lập giao diện ứng dụng của bạn và các cặt đặt chung khác"
             },
             "security": {
@@ -300,7 +300,7 @@
                 "description": "Thay đổi mật khẩu của bạn và chỉnh các cài đặt liên quan bảo mật"
             },
             "advancedSettings": {
-                "title": "Advanced",
+                "title": "Nâng cao",
                 "description": "Những công cụ và cài đặt thủ công cho người dùng kỹ thuật"
             },
             "helpAndInfo": {
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Giao diện",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Nếu bản thay đổi chủ đề hệ thống, bạn sẽ phải khởi động lại Firefly để thể thấy các hiệu ứng"
             },
             "language": {
                 "title": "Ngôn ngữ",
@@ -357,9 +357,9 @@
                 "action": "Thay đổi mã PIN"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Thay đổi tên hồ sơ",
+                "description": "Thay đổi tên hồ sơ Firefly của bạn",
+                "success": "Bạn đã thay đổi tên hồ sơ của mình"
             },
             "balanceFinder": {
                 "title": "Công cụ tìm số dư",
@@ -417,10 +417,10 @@
                 "description": "Xem các lỗi để gỡ lỗi sự cố"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Báo cáo sự cố",
+                "body": "Giúp những nhà phát triển cải thiên Firefly bằng cách tự động gửi dữ liệu chẩn đoán khi một lỗi hoặc sự cố xảy ra",
+                "checkbox": "Gửi báo cáo sự cố",
+                "advice": "Vui lòng khởi động lại ứng dụng Firefly để {sendCrashReports, select, true {bắt đầu chia sẻ các báo cáo sự cố} false {dừng chia sẻ các báo cáo sự cố} other {áp dụng thay đổi này}}"
             },
             "diagnostics": {
                 "title": "Chuẩn đoán",
@@ -457,14 +457,14 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Vui lòng đợi {time, plural, one {# giây} other {# giây}}",
+            "incorrectAttempts": "{attempts, plural, one {# lần thử sai} other {# lần thử sai}}"
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Mạng lưới hoạt động",
+                "networkDegraded": "Mạng yếu",
+                "networkDown": "Mạng đã ngắt kết nối",
                 "status": "Trạng thái",
                 "messagesPerSecond": "Số tin nhắn trên giây",
                 "referencedRate": "Tỷ lệ tham chiếu"
@@ -473,37 +473,37 @@
                 "allSettings": "Tất cả tùy chọn cài đặt",
                 "logout": "Đăng xuất",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Khóa hồ sơ",
+                    "locked": "Stronghold đã khóa",
+                    "unlocked": "Stronghold đã mở khóa"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Thiết bị phần cứng",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Ứng dụng IOTA không mở",
+                        "connected": "Đã kết nối",
+                        "legacyConnected": "Ứng dụng phiên bản cũ đang mở",
+                        "locked": "Đã khóa",
+                        "mnemonicMismatch": "Sai Ledger hoặc Mnemonic",
+                        "notDetected": "Không phát hiện được",
+                        "otherConnected": "Ứng đụng đã mở"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Sao lưu ví của bạn",
                     "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
                     "notBackedUp": "Chưa được sao lưu",
-                    "button": "Backup"
+                    "button": "Sao lưu"
                 },
                 "version": {
-                    "title": "New update available",
-                    "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "title": "Bản cập nhật mới sẵn sàng",
+                    "updateVersion": "Firefly phiên bản v{version}",
+                    "button": "Cập nhật"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Chào mừng tới trang tổng quát đặt cọc!",
             "status": {
                 "upcoming": "Sự kiện chưa diễn ra",
                 "commencing": "Mở đặt cọc trước",
@@ -517,31 +517,32 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Kiểm tra lại sau",
+                    "commencing": "Đặt cọc trước hiện đang mở",
+                    "holding": "Còn lại {duration} đặt cọc",
+                    "ended": "Đặt cọc đã kết thúc",
+                    "inactive": "Không tìm thấy sự kiện đặt cọc nào",
+                    "fetching": "Đang nạp dữ liệu sự kiện đặt cọc..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Đặt cọc {token} token của bạn để tự động nhận phần thưởng mỗi 10 giây khi đặt cọc bắt đầu vào ngày {date}.",
+                    "commencing": "Đặt cọc {token} token của bạn để tự động nhận phần thưởng mỗi 10 giây khi đặt cọc bắt đầu vào ngày {date}.",
+                    "holdingAndStaking": "Bạn sẽ tự động nhận được phần thưởng sau mỗi 10 giây.",
+                    "holdingAndNotStaking": "Đặt cọc các {token} token của bạn để nhận phần thưởng sau mỗi 10 giây.",
+                    "endedAndDidStake": "{token} phần thưởng sẽ được phân phối vào ví của bạn khi mạng lưới ra mắt.",
+                    "endedAndDidNotStake": "Bạn không tham gia vào airdrop này.",
+                    "endedAndDidNotReachMinRewards": "Bạn đã không đặt cọc đủ {token} token để đạt được phần thưởng airdrop tối thiểu.",
+                    "inactive": "Mở cấu hình mạng trong Cài đặt nâng cao và đảm bảo nút mạng hiện tại có tính năng \"Tham gia\" bằng cách nhấp vào \"Xem thông tin\"."
                 }
             },
             "airdrops": {
                 "holding": "Còn lại",
                 "commencing": "Đến khi đặt cọc bắt đầu",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Giai đoạn đặt cọc hiện tại",
+                "totalWalletRewards": "Tổng số phần thường trong ví",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly là một mạng đa nền tảng có khả năng mở rộng cao, không cần cấp phép để xây dựng và triển khai các hợp đồng thông minh. Assembly là tương lai của Web3."
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -549,15 +550,96 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Sự kiện mới",
+                "complete": "Hoàn tất"
             }
         },
         "picker": {
             "color": {
-                "title": "Color picker",
-                "hexCode": "Color hex code"
+                "title": "Chọn màu",
+                "hexCode": "Mã màu hex"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Cân nặng phiếu bầu",
+                "info": {
+                    "title": "Cân nặng phiếu bầu của bạn",
+                    "equality": "1000 IOTA = 1 phiếu bầu",
+                    "description1": "Cân nặng phiếu bầu của bạn được chuyển qua từ số dư ví. Khi một đề nghị biểu quyết trong giai đoạn đếm, các phiếu bầu hoạt động được đếm và tích lũy mỗi 10 giây.",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                }
+            },
+            "info": {
+                "title": "Thông tin quản trị",
+                "description": "Với sự giúp đỡ của IOTA Foundation, cộng động IOTA đã phát triển một giao thức bầu chọn IOTA, cho phép bạn tham gia các quyết định quản trị bằng cách bầu chọn với token IOTA trong Firefly.",
+                "link": "Tìm hiểu về bầu chọn với IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Đang Mở Bầu Chọn",
+                        "countingStarts": "Bắt đầu đếm",
+                        "countingStops": "Counting ends",
+                        "votingOpened": "Voting opened",
+                        "countingStarted": "Counting began",
+                        "countingStopped": "Counting ended"
+                    },
+                    "votingRate": {
+                        "title": "Voting rate",
+                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "countedVotes": {
+                        "title": "Counted votes",
+                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "New unused funds: {amount}",
+                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximum votes",
+                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                    },
+                    "chart": {
+                        "totalVotes": "Votes: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Announcement",
+                    "commencing": "Đang Mở Bầu Chọn",
+                    "holding": "Counting",
+                    "ended": "Ended"
+                },
+                "button": "View proposal",
+                "treasury": {
+                    "notFound": {
+                        "title": "Unable to load Community Treasury vote",
+                        "subtitle": "Please connect to a node that has added this vote",
+                        "buttonConnect": "Connect to default node",
+                        "buttonSettings": "View node settings",
+                        "fetching": "Fetching governance event info..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Voting opens on",
+                "votingProgress": "Time remaining",
+                "votingPower": "Cân nặng phiếu bầu của bạn",
+                "votesCounted": "Your counted votes",
+                "maximumVotes": "Your maximum votes",
+                "countingStarts": "Counting begins on",
+                "currentResult": "Current result",
+                "finalResult": "Final result",
+                "answerHeader": {
+                    "activeVoting": "Active voting",
+                    "selected": "Submitted",
+                    "notSelected": "Not selected",
+                    "winner": "Winner"
+                }
+            },
+            "votes": "votes",
+            "manageVote": "Manage vote"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Xác nhận giao dịch",
             "body": "Bạn sắp gửi {amount} tới",
             "sendingFromStakedAccount": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stake": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó.",
+                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+            }
         },
         "balanceFinder": {
             "title": "Công cụ tìm kiếm số dư",
@@ -775,6 +863,33 @@
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
+        "governanceManager": {
+            "castYourVote": "Cast your vote",
+            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
+            "castingVotes": "Casting votes",
+            "stopVoting": "Stop voting",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
+            "stoppingVoting": "Stopping voting",
+            "changeVote": "Change vote",
+            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
+            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
+            "changingVote": "Changing vote",
+            "manageVotes": "Manage votes",
+            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergingVotes": "Merging votes",
+            "votedSuccessfully": "You have started voting with {account}.",
+            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "successPopup": {
+                "castVotesTitle": "Voted successfully",
+                "stopVotesTitle": "Voting stopped",
+                "mergeVotesTitle": "Vote merged",
+                "changeVotesTitle": "Vote changed",
+                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
+                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+            }
+        },
         "shimmer-info": {
             "title": "Về Shimmer",
             "body1": "Xin chúc mừng, bạn đã kiếm được mã thông báo SMR làm phần thưởng đặt cọc. Shimmer là một mạng thử nghiệm để thử nghiệm các nâng cấp lớn trên IOTA.",
@@ -792,7 +907,7 @@
         "crashReporting": {
             "title": "Crash reporting",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "Gửi các báo cáo sự cố đến IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
@@ -931,6 +1046,10 @@
         "merge": "Gộp lại",
         "mergeFunds": "Các tài sản gộp",
         "done": "Hoàn thành",
+        "castVotes": "Cast votes",
+        "changeVotes": "Change vote",
+        "mergeVotes": "Merge vote",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Transferring to {account}",
         "transferFrom": "Transfer from {account}",
         "transferTo": "Transfer to {account}",
-        "stakedFor": "Đặt cọc cho {account}",
-        "unstakedFor": "Hủy đặt cọc cho {account}",
-        "votedFor": "Bình chọn cho {account}",
-        "unvotedFor": "Hủy bình chọn cho {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
+        "votingTransaction": "Voting Transaction",
+        "unvotingTransaction": "Unvoting Transaction",
+        "participationTransaction": "Participation Transaction",
         "receiving": "Đang nhận",
         "sending": "Đang gửi",
         "legacyNetwork": "Mạng Legacy",
@@ -1072,14 +1190,19 @@
         "unknown": "Không biết",
         "none": "Trống",
         "staked": "Đã đặt cọc",
+        "voted": "Voted",
         "unstaked": "Hủy đặt cọc",
+        "unvoted": "Unvoted",
         "staking": "Đặt cọc",
         "unstaking": "Đang hủy đặt cọc",
         "notStaked": "Không đặt cọc",
         "stakedFunds": "Tài sản đã đặt cọc",
         "unstakedFunds": "Tài sản không đặt cọc",
+        "voting": "Voting",
+        "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
+        "option": "Option",
         "total": "Total: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Ví tiền",
-        "staking": "Đặt cọc"
+        "staking": "Đặt cọc",
+        "governance": "Governance"
     }
 }

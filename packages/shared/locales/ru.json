@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Подтвердите PIN-код",
             "body1": "Твой PIN-код будет держать твой баланс и транзакции секретными.",
-            "body2": "Повторно введи PIN-код для продолжения. "
+            "body2": "Повторно введите PIN-код для продолжения."
         },
         "backup": {
             "title": "Сделайте резервную копию вашего кошелька",
@@ -521,7 +521,8 @@
                     "commencing": "Предварительная ставка открыта",
                     "holding": "{duration} продолжительность ставки",
                     "ended": "Ставки завершились",
-                    "inactive": "События, связанные со ставками, не обнаружены"
+                    "inactive": "События, связанные со ставками, не обнаружены",
+                    "fetching": "Получение информации о ставке..."
                 },
                 "bodies": {
                     "upcoming": "Разместите свои токены {token}, чтобы автоматически получать вознаграждение каждые 10 секунд после начала размещения ставок в {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Общее вознаграждение кошелька",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и развертывания составных смарт-контрактов. Assembly - это будущее web3. "
+                    "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и размещения композитных смарт-контрактов. Assembly - это будущее web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Выбор цвета",
                 "hexCode": "Шестнадцатеричный код цвета"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Вес моего голоса",
+                "info": {
+                    "title": "Вес вашего голоса",
+                    "equality": "1000 IOTA = 1 ГОЛОС",
+                    "description1": "Вес вашего голоса зависит от баланса вашего кошелька. Когда голосование находится в фазе подсчета, активные голоса подсчитываются и накапливаются каждые 10 секунд.",
+                    "description2": "1 Ki веса голоса (1000 токенов IOTA) дает 1 голос каждые 10 секунд. Это означает, что вы должны продолжать голосовать в течение всей фазы подсчета голосов, чтобы получить свой полный вес голоса."
+                }
+            },
+            "info": {
+                "title": "Информация об управлении",
+                "description": "С помощью Фонда IOTA сообщество IOTA разработало протокол голосования IOTA, позволяющий вам участвовать в принятии решения о управлении, голосуя своими токенами IOTA в Firefly.",
+                "link": "Узнайте о голосовании с помощью IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Голосование открыто",
+                        "countingStarts": "Подсчет начинается",
+                        "countingStops": "Подсчет заканчивается",
+                        "votingOpened": "Голосование открыто",
+                        "countingStarted": "Подсчет начался",
+                        "countingStopped": "Подсчет закончился"
+                    },
+                    "votingRate": {
+                        "title": "Интенсивность голосования",
+                        "body": "{amount} будет генерировать {votesPerMilestone} голосов каждые {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "countedVotes": {
+                        "title": "Подсчитанные голоса",
+                        "body": "Голоса подсчитываются с интервалом {time, plural, one {# second} other {# seconds}} в течение всего периода подсчета. {amount} генерирует {votesPerMilestone} голосов каждые {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Новые неиспользуемые средства: {amount}",
+                        "body": "Вы получили дополнительные средства на {account}. Вы можете проголосовать этими токенами, объединив свои голоса."
+                    },
+                    "maximumVotes": {
+                        "title": "Максимум голосов",
+                        "body": "Вы должны продолжать голосовать в течение оставшегося периода подсчета голосов, чтобы достичь максимального количества голосов."
+                    },
+                    "chart": {
+                        "totalVotes": "Голоса: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Объявление",
+                    "commencing": "Голосование открыто",
+                    "holding": "Подсчёт",
+                    "ended": "Завершено"
+                },
+                "button": "Просмотреть предложение",
+                "treasury": {
+                    "notFound": {
+                        "title": "Невозможно загрузить голосование по казне сообщества",
+                        "subtitle": "Пожалуйста, подключитесь к узлу, который добавил этот голос",
+                        "buttonConnect": "Подключиться к узлу по умолчанию",
+                        "buttonSettings": "Просмотр настроек узла",
+                        "fetching": "Получение информации об управлении..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Голосование откроется",
+                "votingProgress": "Оставшееся время",
+                "votingPower": "Вес вашего голоса",
+                "votesCounted": "Ваши подсчитанные голоса",
+                "maximumVotes": "Ваше максимальное количество голосов",
+                "countingStarts": "Подсчет начинается",
+                "currentResult": "Текущий результат",
+                "finalResult": "Окончательный результат",
+                "answerHeader": {
+                    "activeVoting": "Активное голосование",
+                    "selected": "Отправлено",
+                    "notSelected": "Не выбрано",
+                    "winner": "Победитель"
+                }
+            },
+            "votes": "голоса",
+            "manageVote": "Manage vote"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Подтвердить транзакцию",
             "body": "Вы собираетесь отправить {amount}",
             "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
-            "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке."
+            "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке.",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stake": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
+                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+            }
         },
         "balanceFinder": {
             "title": "Определитель баланса",
@@ -774,6 +862,33 @@
             "title": "Стадия ставки {periodNumber} с {date}",
             "body": "Ставка на Assembly для IOTA продолжается... Участвуйте в периоде {periodNumber} в течение 90 дней. Ставьте свои токены IOTA и получайте вознаграждения ASMB!",
             "info": "Ставка на Shimmer завершена, и теперь будут распределяться только токены ASMB."
+        },
+        "governanceManager": {
+            "castYourVote": "Cast your vote",
+            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
+            "castingVotes": "Casting votes",
+            "stopVoting": "Stop voting",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
+            "stoppingVoting": "Stopping voting",
+            "changeVote": "Change vote",
+            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
+            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
+            "changingVote": "Changing vote",
+            "manageVotes": "Manage votes",
+            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergingVotes": "Merging votes",
+            "votedSuccessfully": "You have started voting with {account}.",
+            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "successPopup": {
+                "castVotesTitle": "Voted successfully",
+                "stopVotesTitle": "Voting stopped",
+                "mergeVotesTitle": "Vote merged",
+                "changeVotesTitle": "Vote changed",
+                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
+                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+            }
         },
         "shimmer-info": {
             "title": "О Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Объединить",
         "mergeFunds": "Объединить средства",
         "done": "Выполнено",
+        "castVotes": "Cast votes",
+        "changeVotes": "Change vote",
+        "mergeVotes": "Merge vote",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "Хорошо, я понял",
         "readMore": "Прочитать больше"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Transferring to {account}",
         "transferFrom": "Transfer from {account}",
         "transferTo": "Transfer to {account}",
-        "stakedFor": "Поставлено на {account}",
-        "unstakedFor": "Выведено из {account}",
-        "votedFor": "Проголосовано за {account}",
-        "unvotedFor": "За {account} голос отменён",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
+        "votingTransaction": "Voting Transaction",
+        "unvotingTransaction": "Unvoting Transaction",
+        "participationTransaction": "Participation Transaction",
         "receiving": "Поступление",
         "sending": "Отправление",
         "legacyNetwork": "Устаревшая сеть",
@@ -1072,14 +1190,19 @@
         "unknown": "Неизвестно",
         "none": "Отсутствует",
         "staked": "Поставлено",
+        "voted": "Voted",
         "unstaked": "Выведено",
+        "unvoted": "Unvoted",
         "staking": "Ставки",
         "unstaking": "Выведение",
         "notStaked": "Не поставлено",
         "stakedFunds": "Ставочные средства",
         "unstakedFunds": "Выведеноные средства",
+        "voting": "Voting",
+        "unvoting": "Unvoting",
         "accountColor": "Цвет кошелька",
         "myAssets": "Мои активы",
+        "option": "Option",
         "total": "Total: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Пожалуйста, дождитесь окончания синхронизации, чтобы сменить кошельки.",
         "transferring": "Пожалуйста, дождитесь завершения всех транзакций, чтобы сменить кошельки.",
-        "participating": "Пожалуйста, дождитесь завершения всех операций по ставке/голосованию, чтобы сменить кошельки."
+        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Кошелёк",
-        "staking": "Ставки"
+        "staking": "Ставки",
+        "governance": "Governance"
     }
 }
