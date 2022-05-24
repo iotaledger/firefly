@@ -34,11 +34,11 @@ function resetAppUpdateStores(): void {
 export function downloadAppUpdate(): void {
     resetAppUpdateStores()
 
-    const progressSubscription: Unsubscriber = appUpdateProgress.subscribe((progress) => {
+    const progressSubscription = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
 
-    const minutesRemainingSubscription: Unsubscriber = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
+    const minutesRemainingSubscription = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -55,7 +55,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const completeSubscription: Unsubscriber = appUpdateComplete.subscribe((isComplete) => {
+    const completeSubscription = appUpdateComplete.subscribe((isComplete) => {
         if (isComplete) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -80,7 +80,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const errorSubscription: Unsubscriber = appUpdateError.subscribe((isError) => {
+    const errorSubscription = appUpdateError.subscribe((isError) => {
         if (isError) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
