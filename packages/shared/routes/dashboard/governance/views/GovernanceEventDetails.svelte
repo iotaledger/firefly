@@ -6,6 +6,7 @@
     import { handleTransactionEventData, transferState } from '@lib/wallet'
     import { DashboardPane } from 'shared/components'
     import { participationAction } from 'shared/lib/participation/stores'
+    import { ParticipationAction } from 'shared/lib/participation/types'
     import { popupState } from 'shared/lib/popup'
     import { GovernanceEventInfo, GovernanceEventResults, GovernanceEventStats } from './'
 
@@ -39,17 +40,23 @@
             case TransferProgressEventType.PerformingPoW:
                 // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
-                // Re-open the staking manager pop up
-                openPopup(
-                    {
-                        type: 'governanceManager',
-                        props: {
-                            eventId: event?.eventId,
-                            nextVote,
+                // Re-open the governance manager pop up if you are in the voting tab
+                if (
+                    $participationAction === ParticipationAction.Vote ||
+                    $participationAction === ParticipationAction.Unvote
+                ) {
+                    openPopup(
+                        {
+                            type: 'governanceManager',
+                            props: {
+                                eventId: event?.eventId,
+                                nextVote,
+                            },
                         },
-                    },
-                    true
-                )
+                        true
+                    )
+                }
+
                 break
             case TransferProgressEventType.SigningTransaction:
                 ledgerAwaitingConfirmation = true

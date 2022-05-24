@@ -5,11 +5,15 @@
         participationAction,
         shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
+    import {
+        ParticipationAction,
+        ParticipationEventState,
+        StakingAirdrop as _StakingAirdrop,
+    } from 'shared/lib/participation/types'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
-    import { transferState, handleTransactionEventData } from 'shared/lib/wallet'
+    import { handleTransactionEventData, transferState } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
 
@@ -41,8 +45,13 @@
             case TransferProgressEventType.PerformingPoW:
                 // Close the current pop up i.e., the one with ledger transaction details
                 closePopup(true)
-                // Re-open the staking manager pop up
-                openPopup({ type: 'stakingManager' }, true)
+                // Re-open the staking manager pop up if you are in the staking tab
+                if (
+                    $participationAction === ParticipationAction.Stake ||
+                    $participationAction === ParticipationAction.Unstake
+                ) {
+                    openPopup({ type: 'stakingManager' }, true)
+                }
                 break
 
             case TransferProgressEventType.SigningTransaction:

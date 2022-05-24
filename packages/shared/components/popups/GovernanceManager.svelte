@@ -36,11 +36,16 @@
     let isVoting = false
 
     let activeFlow: VotingAction
-    let pendingParticipationIds: string[] = []
+    const pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
     let title = ''
 
-    $: loading = isVoting || $isSyncing || $pendingParticipations?.length !== 0
+    $: loading =
+        isVoting ||
+        $isSyncing ||
+        $pendingParticipations?.length !== 0 ||
+        !!$participationAction ||
+        $isChangingParticipation
     $: isAlreadyVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
     $: canMergeVotes = isAlreadyVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
     $: activeFlow, (title = getTitleText())
@@ -64,46 +69,38 @@
         }
 
         const unsubscribe = pendingParticipations.subscribe((participations) => {
-            const currentParticipationsLength = participations.length
-
-            if (currentParticipationsLength < previousPendingParticipationsLength) {
-                const latestParticipationIds = participations.map((participation) => participation.messageId)
-
-                if (latestParticipationIds.length === 0) {
-                    // Display confirmation popup on governance action success
+            if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
+                // Display confirmation popup on governance action success
+                if (
+                    $participationAction === ParticipationAction.Vote ||
+                    $participationAction === ParticipationAction.Unvote
+                ) {
                     if (
-                        $participationAction === ParticipationAction.Vote ||
-                        $participationAction === ParticipationAction.Unvote
+                        !$isChangingParticipation ||
+                        ($isChangingParticipation && $participationAction === ParticipationAction.Vote)
                     ) {
-                        if (
-                            !$isChangingParticipation ||
-                            ($isChangingParticipation && $participationAction === ParticipationAction.Vote)
-                        ) {
-                            openPopup({
-                                type: 'success',
-                                props: {
-                                    title: localize(`popups.governanceManager.successPopup.${activeFlow}Title`),
-                                    body: localize(
-                                        `popups.governanceManager.successPopup.${
-                                            activeFlow === VotingAction.Stop ? 'stop' : 'cast'
-                                        }Body`,
-                                        {
-                                            values: {
-                                                voteText: nextVote?.text,
-                                                voteValue: nextVote?.value,
-                                            },
-                                        }
-                                    ),
-                                },
-                            })
-                        }
+                        openPopup({
+                            type: 'success',
+                            props: {
+                                title: localize(`popups.governanceManager.successPopup.${activeFlow}Title`),
+                                body: localize(
+                                    `popups.governanceManager.successPopup.${
+                                        activeFlow === VotingAction.Stop ? 'stop' : 'cast'
+                                    }Body`,
+                                    {
+                                        values: {
+                                            voteText: nextVote?.text,
+                                            voteValue: nextVote?.value,
+                                        },
+                                    }
+                                ),
+                            },
+                        })
                     }
-                    resetView()
                 }
-
-                pendingParticipationIds = latestParticipationIds
-                previousPendingParticipationsLength = currentParticipationsLength
+                resetView()
             }
+            previousPendingParticipationsLength = participations?.length ?? 0
         })
 
         return () => {
@@ -184,6 +181,7 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
@@ -197,6 +195,7 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
@@ -225,12 +224,14 @@
                     .then((messageIds) => syncParticipations(messageIds))
                     .catch((err) => {
                         console.error(err)
+                        isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
                     })
             })
             .catch((err) => {
                 console.error(err)
+                isChangingParticipation.set(false)
                 displayErrorNotification(err)
                 resetView()
             })
@@ -256,16 +257,20 @@
 
     function getActiveFlow(): VotingAction {
         let _activeFlow: VotingAction
-        if (!$currentAccountTreasuryVoteValue || votingAction === VotingAction.Cast) {
-            _activeFlow = VotingAction.Cast
-        } else if (isAlreadyVotingNextVote) {
-            if (canMergeVotes || votingAction === VotingAction.Merge) {
-                _activeFlow = VotingAction.Merge
-            } else if (!canMergeVotes || votingAction === VotingAction.Stop) {
-                _activeFlow = VotingAction.Stop
-            }
-        } else {
+        if ($isChangingParticipation) {
             _activeFlow = VotingAction.Change
+        } else {
+            if (!$currentAccountTreasuryVoteValue || votingAction === VotingAction.Cast) {
+                _activeFlow = VotingAction.Cast
+            } else if (isAlreadyVotingNextVote) {
+                if (canMergeVotes || votingAction === VotingAction.Merge) {
+                    _activeFlow = VotingAction.Merge
+                } else if (!canMergeVotes || votingAction === VotingAction.Stop) {
+                    _activeFlow = VotingAction.Stop
+                }
+            } else {
+                _activeFlow = VotingAction.Change
+            }
         }
         return _activeFlow
     }
