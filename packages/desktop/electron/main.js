@@ -755,7 +755,7 @@ function getJsonConfig(filename) {
     return path.join(userDataPath, filename)
 }
 
-export const updateVersionDetails = (details) => {
+export const updateAppVersionDetails = (details) => {
     versionDetails = Object.assign({}, versionDetails, details)
     if (process.env.STAGE !== 'prod') {
         // Always true to avoid triggering auto-updater

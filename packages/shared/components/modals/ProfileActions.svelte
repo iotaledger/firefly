@@ -10,13 +10,13 @@
     import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
-    import { versionDetails } from 'shared/lib/appUpdater'
+    import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
 
     export let modal: Modal
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const isUpToDate = $versionDetails.upToDate
+    const isUpToDate = $appVersionDetails.upToDate
 
     const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
 
@@ -139,7 +139,7 @@
                             <Text type="p">{localize('views.dashboard.profileModal.version.title')}</Text>
                             <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
                                 {localize('views.dashboard.profileModal.version.updateVersion', {
-                                    values: { version: $versionDetails.newVersion },
+                                    values: { version: $appVersionDetails.newVersion },
                                 })}
                             </Text>
                         </div>

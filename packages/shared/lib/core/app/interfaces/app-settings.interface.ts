@@ -1,6 +1,9 @@
-export type AppTheme = 'light' | 'dark' | 'system'
+import { AppTheme } from '../enums'
 
-export interface AppSettings {
+/**
+ * The application settings, used across multiple profiles.
+ */
+export interface IAppSettings {
     deepLinking: boolean
     language: string
     theme: AppTheme

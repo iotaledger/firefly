@@ -1,6 +1,12 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
-    import { initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import {
+        initAppSettings,
+        isAwareOfCrashReporting,
+        mobile,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
+    } from '@core/app'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { Platform } from 'shared/lib/platform'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -9,7 +15,6 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -30,7 +35,7 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTos()) {
+    $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
             type: 'legalUpdate',
             hideClose: true,

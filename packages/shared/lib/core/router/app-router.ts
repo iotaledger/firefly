@@ -1,5 +1,6 @@
 import { activeProfile, login, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
-import { cleanupSignup, mobile, strongholdPassword, walletPin } from '@lib/app'
+import { mobile } from '@core/app'
+import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 import { get, writable } from 'svelte/store'

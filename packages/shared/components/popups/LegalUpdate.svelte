@@ -1,34 +1,35 @@
 <script lang="typescript">
     import { Button, Checkbox, Text, Link } from 'shared/components'
-    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import {
-        needsToAcceptLatestTos,
+        lastAcceptedTermsOfService,
+        lastAcceptedPrivacyPolicy,
+        needsToAcceptLatestTermsOfService,
         needsToAcceptLatestPrivacyPolicy,
-        TOS_VERSION,
+        TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
-    } from 'shared/lib/app'
+    } from '@core/app'
     import { Platform } from 'shared/lib/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'
 
     let checked = false
-    const tos = needsToAcceptLatestTos()
+    const tos = needsToAcceptLatestTermsOfService()
     const privacyPolicy = needsToAcceptLatestPrivacyPolicy()
 
-    const handleViewTosClick = () => {
+    function handleViewTosClick(): void {
         Platform.openUrl(TOS_LINK)
     }
 
-    const handleViewPrivPolicyClick = () => {
+    function handleViewPrivPolicyClick(): void {
         Platform.openUrl(PRIVACY_POLICY_LINK)
     }
 
-    const handleConfirmClick = () => {
+    function handleConfirmClick(): void {
         if (tos) {
-            lastAcceptedTos.set(TOS_VERSION)
+            lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         }
         if (privacyPolicy) {
             lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
@@ -37,7 +38,7 @@
         closePopup(true)
     }
 
-    const getTitleText = () => {
+    function getTitleText(): string {
         if (tos && privacyPolicy) {
             return 'views.legal.title'
         } else if (tos) {
@@ -47,7 +48,7 @@
         }
     }
 
-    const getBodyText = () => {
+    function getBodyText(): string {
         if (tos && privacyPolicy) {
             return 'popups.legalUpdate.tosAndPrivPolicyBody'
         } else if (tos) {
@@ -57,7 +58,7 @@
         }
     }
 
-    const getCheckboxText = () => {
+    function getCheckboxText(): string {
         if (tos && privacyPolicy) {
             return 'popups.legalUpdate.tosAndPrivPolicyCheckbox'
         } else if (tos) {

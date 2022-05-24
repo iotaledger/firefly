@@ -36,7 +36,7 @@
     import { changeUnits, formatUnitPrecision, Unit } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState } from 'shared/lib/wallet'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { selectedAccount, IAccountState } from '@core/account'
