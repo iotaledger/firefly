@@ -1,15 +1,17 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
+    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
+    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { localize } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
-    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
+    import { TrackedParticipationItem } from 'shared/lib/participation/types'
 
     export let accountId: string
     export let internal = false
@@ -28,9 +30,11 @@
     }
 
     $: isAccountVoting =
-        Object.values($selectedAccountParticipationOverview?.trackedParticipations || {})?.find((tp) =>
-            tp?.find((p) => p?.endMilestoneIndex === 0)
-        )?.length > 0 ?? false
+        !!(
+            Object.values(
+                $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID] || {}
+            )
+        )?.find((trackedParticipation) => trackedParticipation?.endMilestoneIndex === 0) ?? false
 
     let activeParticipationType: ActiveParticipationType | ''
     $: {
