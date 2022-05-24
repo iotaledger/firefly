@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Drawer, Icon, Text, Input } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { mobile } from 'shared/lib/app'
     import {
         api,
         isSyncing,
@@ -24,8 +25,13 @@
 
     export let transactions: AccountMessage[] = []
 
+    let drawer: Drawer
+
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
+        if ($mobile) {
+            drawer.open()
+        }
     }
 
     function handleBackClick(): void {
@@ -154,7 +160,7 @@
 
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
-        {#if $selectedMessage}
+        {#if $selectedMessage && !$mobile}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
                 <Text type="h5">{localize('general.transactions')}</Text>
@@ -212,7 +218,7 @@
             </div>
         {/if}
     </div>
-    {#if $selectedMessage}
+    {#if $selectedMessage && !$mobile}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
@@ -227,6 +233,13 @@
                     <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
+        </div>
+    {/if}
+    {#if $selectedMessage && $mobile}
+        <div class="flex absolute left-0 top-0">
+            <Drawer dimLength={180} opened={true} bind:this={drawer} classes="px-6 pt-10">
+                <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+            </Drawer>
         </div>
     {/if}
 </div>
