@@ -21,6 +21,8 @@
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
 
     function onClickAvailableBalance(): void {
+        /* eslint-disable no-extra-semi */
+        /* eslint-disable @typescript-eslint/no-extra-semi */
         ;({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
     }
 
