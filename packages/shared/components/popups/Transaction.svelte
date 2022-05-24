@@ -29,12 +29,13 @@
         Vote = 'vote',
     }
 
+    let treasuryVoteParticipations: TrackedParticipationItem[]
+    $: treasuryVoteParticipations =
+        Object.values($selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID] || {}) ??
+        []
     $: isAccountVoting =
-        !!(
-            Object.values(
-                $selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID] || {}
-            )
-        )?.find((trackedParticipation) => trackedParticipation?.endMilestoneIndex === 0) ?? false
+        !!treasuryVoteParticipations?.find((trackedParticipation) => trackedParticipation?.endMilestoneIndex === 0) ??
+        false
 
     let activeParticipationType: ActiveParticipationType | ''
     $: {
