@@ -133,7 +133,6 @@
         margin-top: env(safe-area-inset-top);
         :global(h2) {
             @apply text-center;
-            @apply font-sans;
             @apply text-16;
             @apply leading-140;
         }
