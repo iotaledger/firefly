@@ -4,10 +4,13 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, setSelectedAccount, wallet } from 'shared/lib/wallet'
+
     
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
+    export let onCancel = (..._: any[]): void => {}
+    
 
     const { accounts } = $wallet
 
@@ -52,7 +55,6 @@
             const _create = () =>
                 onCreate(trimmedAccountAlias, color, (err) => {
                     isBusy = false
-
                     if (err) {
                         console.error(err?.error || err)
                         showAppNotification({
@@ -60,7 +62,8 @@
                             message: localize(err?.error || err),
                         })
                     } else {
-                        closePopup()
+                        setSelectedAccount($accounts.find((a) => a.alias === trimmedAccountAlias)?.id)
+                        onCancel()
                     }
                 })
             _create()
