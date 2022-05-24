@@ -574,6 +574,14 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "Password required",
             "subtitle": "Please enter your password to unlock your wallets",
@@ -929,6 +937,7 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
