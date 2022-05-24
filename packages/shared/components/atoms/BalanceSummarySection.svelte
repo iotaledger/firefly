@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Text } from 'shared/components'
-    import { formatPreciseTokenAmount } from '@core/wallet'
+    import { formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
 
@@ -10,7 +10,7 @@
     export let subtitle: string
     export let amount: number
 
-    $: formattedAmount = formatPreciseTokenAmount(amount, BASE_TOKEN[$activeProfile.networkProtocol])
+    $: formattedAmount = formatTokenAmountPrecise(amount, BASE_TOKEN[$activeProfile.networkProtocol])
     $: convertedAmount = '-'
 
     const PRIMARY_COLOR = 'gray-800'
