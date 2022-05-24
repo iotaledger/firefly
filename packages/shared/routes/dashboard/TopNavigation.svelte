@@ -3,6 +3,7 @@
     import { DashboardRoute, dashboardRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
+    import { mobile } from 'shared/lib/app'
     import { popupState } from 'shared/lib/popup'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext, onMount } from 'svelte'
@@ -38,10 +39,12 @@
 </script>
 
 <div
-    class="fixed top-0 left-20 flex flex-row justify-center items-center py-2 w-full z-10 {os === 'win32' &&
+    class="flex flex-row justify-center items-center w-full z-10 {os === 'win32' &&
     showingPopup
         ? 'opacity-50 pointer-events-none'
-        : ''} {classes}"
+        : ''} {classes} {$mobile
+        ? 'top-navigation my-6'
+        : 'fixed top-0 left-20 bg-gray-200 py-2'} "
 >
     {#if showBackButton}
         <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
@@ -57,5 +60,8 @@
 <style type="text/scss">
     div {
         width: calc(100% - 14rem);
+    }
+    .top-navigation {
+        padding-top: env(safe-area-inset-top);
     }
 </style>

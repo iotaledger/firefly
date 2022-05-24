@@ -28,6 +28,7 @@
     export let fullScreen = false
     export let preventClose = false
     export let zIndex = 'z-30'
+    export let onClose
 
     const dispatch = createEventDispatcher()
 
@@ -148,6 +149,8 @@
         if (!preventClose) {
             dispatch('close')
         }
+        dispatch('close')
+        onClose()
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
