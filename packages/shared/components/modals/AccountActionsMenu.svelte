@@ -53,15 +53,15 @@
 <Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
         <MenuItem
-            icon={SettingsIcons.transactionHistory}
-            title={localize('actions.exportTransactionHistory')}
-            onClick={handleExportTransactionHistoryClick}
+            icon={SettingsIcons.storageDepositBreakdown}
+            title="View storage deposit"
+            onClick={handleStorageDepositBreakdownClick}
             first
         />
         <MenuItem
-            icon={SettingsIcons.storageDepositBreakdown}
-            title="Storage deposit breakdown"
-            onClick={handleStorageDepositBreakdownClick}
+            icon={SettingsIcons.transactionHistory}
+            title={localize('actions.exportTransactionHistory')}
+            onClick={handleExportTransactionHistoryClick}
         />
         <MenuItem icon="customize" title={localize('actions.customizeAcount')} onClick={handleCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
