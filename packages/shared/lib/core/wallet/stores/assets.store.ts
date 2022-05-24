@@ -30,23 +30,6 @@ export const assets = derived(
                     $exchangeRates[profileCurrency]
                 )} ${profileCurrency}`,
             },
-            {
-                metadata: BASE_TOKEN[NetworkProtocol.IOTA],
-                balance: {
-                    total: Number($selectedAccount?.balances.total),
-                    available: Number($selectedAccount?.balances.available),
-                },
-                fiatPrice: `${convertToFiat(
-                    UNIT_MAP[Unit.M].val,
-                    $currencies[CurrencyTypes.USD],
-                    $exchangeRates[profileCurrency]
-                )} ${profileCurrency}`,
-                fiatBalance: `${convertToFiat(
-                    Number($selectedAccount?.balances.available),
-                    $currencies[CurrencyTypes.USD],
-                    $exchangeRates[profileCurrency]
-                )} ${profileCurrency}`,
-            },
         ]
         return assets
     }
