@@ -30,7 +30,7 @@
         Welcome,
     } from 'shared/routes'
 
-    mobile.set(process.env.PLATFORM == Platforms.MOBILE)
+    mobile.set(process.env.PLATFORM === Platforms.MOBILE)
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     $: $appSettings.darkMode
