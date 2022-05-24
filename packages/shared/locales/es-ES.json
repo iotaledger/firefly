@@ -990,7 +990,7 @@
         "profiles": "Perfiles",
         "dev": "Desarrollador",
         "createAccount": "Crear una Cartera",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Añadir una cartera",
         "accountName": "Nombre de cartera",
         "latestTransactions": "Últimas Transacciones",
         "transactions": "Transacciones",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "No se puede encontrar el evento de Staking.",
             "cannotVisitAirdropWebsite": "No se puede abrir el sitio web de {airdrop}.",
             "invalidStakingEventId": "ID del evento de Staking es inválido.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "No se pudieron obtener las recompensas anteriores, verifique la configuración de su firewall."
         },
         "invalidDate": "FECHA INVALIDA",
         "invalidTime": "HORA NO VÁLIDA"

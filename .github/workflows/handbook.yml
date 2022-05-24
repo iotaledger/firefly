@@ -1,0 +1,21 @@
+name: Handbook
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: retypeapp/action-build@v2
+        with:
+          config: docs
+
+      - uses: retypeapp/action-github-pages@v2
+        with:
+          branch: retype
+          update-branch: true

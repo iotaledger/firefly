@@ -15,7 +15,11 @@
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">
-    <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    {#if $mobile}
+        <div class="h-6" />
+    {:else}
+        <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    {/if}
     <Text type="h4" classes="mb-2">{title}</Text>
     <Text type="p" classes="mb-4" secondary>{description}</Text>
     {#each Object.values(settings) as setting}

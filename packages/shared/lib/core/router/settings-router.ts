@@ -6,7 +6,7 @@ import { Router } from './router'
 export const settingsRouter = writable<SettingsRouter>(null)
 export const settingsRoute = writable<SettingsRoute>(null)
 
-const settingsChildRoute = writable<string>(null)
+export const settingsChildRoute = writable<string>(null)
 
 export class SettingsRouter extends Router<SettingsRoute> {
     constructor() {

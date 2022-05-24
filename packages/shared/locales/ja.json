@@ -990,7 +990,7 @@
         "profiles": "プロフィール",
         "dev": "開発者",
         "createAccount": "ウォレットを作成",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "ウォレットを追加",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "解除したステーク資金",
         "accountColor": "ウォレットの色",
         "myAssets": "My Assets(マイアセット)",
-        "total": "Total: {balance}"
+        "total": "合計: {balance}"
     },
     "dates": {
         "today": "今日",

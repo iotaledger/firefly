@@ -107,6 +107,7 @@ const buildProfile = (profileName: string, isDeveloperProfile: boolean): Profile
     },
     ledgerMigrationCount: 0,
     accounts: [],
+    hasFinishedSingleAccountGuide: true,
 })
 
 /**

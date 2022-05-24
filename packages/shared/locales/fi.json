@@ -990,7 +990,7 @@
         "profiles": "Profiilit",
         "dev": "Kehitys",
         "createAccount": "Luo lompakko",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Lisää lompakko",
         "accountName": "Lompakon nimi",
         "latestTransactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Varat ilman stakea",
         "accountColor": "Lompakon väri",
         "myAssets": "Minun varani",
-        "total": "Total: {balance}"
+        "total": "Yhteensä: {balance}"
     },
     "dates": {
         "today": "Tänään",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "Ei voida löytää staking-tapahtumaa.",
             "cannotVisitAirdropWebsite": "Ei voida avata {airdrop} verkkosivua.",
             "invalidStakingEventId": "Virheellinen staking-tapahtumatunnus.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Edellisten palkkioiden hakeminen epäonnistui, tarkista palomuurin asetukset."
         },
         "invalidDate": "VIRHEELLINEN PÄIVÄMÄÄRÄ",
         "invalidTime": "VIRHEELLINEN AIKA"

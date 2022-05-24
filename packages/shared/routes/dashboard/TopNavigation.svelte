@@ -9,7 +9,7 @@
     import { Readable } from 'svelte/store'
 
     export let onCreateAccount = (..._: any[]): void => {}
-    export let classes: string
+    export let classes: string = ''
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 

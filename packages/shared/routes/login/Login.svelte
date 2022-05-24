@@ -3,6 +3,7 @@
     import { Transition } from 'shared/components'
     import { activeProfileId, clearActiveProfile, profiles } from 'shared/lib/profile'
     import { Locale } from '@core/i18n'
+    import { mobile } from 'shared/lib/app'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { EnterPin, SelectProfile } from './views/'
@@ -13,7 +14,7 @@
 
     onMount(() => {
         loginRouter = new LoginRouter()
-        if (get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
+        if (!$mobile && get(activeProfileId) && get(profiles)?.find((p) => p.id === get(activeProfileId))) {
             loginRouter.next()
         } else {
             clearActiveProfile()

@@ -990,7 +990,7 @@
         "profiles": "Profili",
         "dev": "Programer",
         "createAccount": "Stvori novčanik",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Dodaj novčanik",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
@@ -1080,7 +1080,7 @@
         "unstakedFunds": "Sredstva koja nisu na stakeu",
         "accountColor": "Boja novčanika",
         "myAssets": "Moja imovina",
-        "total": "Total: {balance}"
+        "total": "Ukupno: {balance}"
     },
     "dates": {
         "today": "Danas",
@@ -1254,7 +1254,7 @@
             "cannotFindStakingEvent": "Nije moguće pronaći staking događaj.",
             "cannotVisitAirdropWebsite": "Nije moguće otvoriti {airdrop} web stranicu.",
             "invalidStakingEventId": "Nevažeći ID staking događaja.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Dohvaćanje prethodnih nagrada nije uspjelo, molimo provjerite postavke svog vatrozida."
         },
         "invalidDate": "NEVAŽEĆI DATUM",
         "invalidTime": "NEVAŽEĆE VRIJEME"

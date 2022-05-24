@@ -8,17 +8,16 @@
     export let locale: Locale
 
     let file
-    let fileName
-    let filePath
-    let dropping
+    let fileName: string | null
+    let filePath: string
+    let dropping: boolean
 
     const handleFileSelectMobile = async () => {
         filePath = await Platform.getStrongholdBackupDestination(null)
-        const [_fileName] = filePath.match(/\w+.stronghold$/)
-        dispatch('next', { file, fileName: _fileName, filePath })
+        fileName = filePath.split('/').pop()
     }
 
-    const allowedExtensions = ['kdbx', 'stronghold', 'txt']
+    const allowedExtensions = $mobile ? ['stronghold'] : ['kdbx', 'stronghold', 'txt']
 
     const dispatch = createEventDispatcher()
 
@@ -61,15 +60,10 @@
             }
         }
 
-        fileName = file.name
-
         const reader = new FileReader()
 
         reader.onload = (e) => {
             setFile(e.target.result, file.name, file.path)
-            if ($mobile) {
-                handleContinueClick()
-            }
         }
 
         reader.readAsArrayBuffer(file)
@@ -82,32 +76,18 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{locale('views.importFromFile.body')}</Text>
-        {#if !$mobile}
-            <Dropzone
-                {locale}
-                {fileName}
-                {allowedExtensions}
-                onDrop={handleFileSelect}
-                bind:dropping
-                extentionsLabel={locale('actions.importExtentions')}
-            />
-        {/if}
+        <Dropzone
+            {locale}
+            {fileName}
+            {allowedExtensions}
+            onDrop={$mobile ? handleFileSelectMobile : handleFileSelect}
+            bind:dropping
+            extensionsLabel={locale('actions.importExtentions')}
+        />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        {#if !$mobile}
-            <input
-                class="absolute opacity-0 w-full h-full"
-                type="file"
-                on:change={handleFileSelect}
-                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
-            />
-        {/if}
-        <Button
-            classes="flex-1"
-            disabled={!$mobile && !file}
-            onClick={$mobile ? handleFileSelectMobile : handleContinueClick}
-        >
-            {locale(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}
+        <Button classes="flex-1" disabled={!fileName} onClick={handleContinueClick}>
+            {locale('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
