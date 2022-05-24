@@ -5,9 +5,9 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
 
+    export let totalRow = false
     export let title: string
     export let subtitle: string
-    export let totalRow = false
     export let amount: number
 
     $: formattedAmount = formatPreciseTokenAmount(amount, BASE_TOKEN[$activeProfile.networkProtocol])

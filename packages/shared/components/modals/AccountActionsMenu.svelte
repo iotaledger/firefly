@@ -26,7 +26,7 @@
         modal.close()
     }
 
-    function handleStorageDepositBreakdownClick() {
+    function handleViewStorageDepositClick() {
         openPopup({ type: 'storageDepositBreakdown' })
         modal.close()
     }
@@ -54,8 +54,8 @@
     <div class="flex flex-col">
         <MenuItem
             icon={SettingsIcons.storageDepositBreakdown}
-            title="View storage deposit"
-            onClick={handleStorageDepositBreakdownClick}
+            title={localize('actions.viewStorageDeposit')}
+            onClick={handleViewStorageDepositClick}
             first
         />
         <MenuItem
