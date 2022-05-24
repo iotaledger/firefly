@@ -217,7 +217,6 @@
                     await sleep(2000)
                 }
                 $participationAction = ParticipationAction.Vote
-                nextVote = nextVote
                 await participate(
                     $selectedAccountStore?.id,
                     [{ eventId, answers: [nextVote?.value] }],
