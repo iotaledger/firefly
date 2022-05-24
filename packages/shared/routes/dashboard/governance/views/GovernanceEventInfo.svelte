@@ -15,22 +15,43 @@
     import { openPopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
     import { selectedAccountStore } from '@lib/wallet'
-    import { DashboardPane, GovernanceInfoTooltip, Icon, Text, Tooltip } from 'shared/components'
+    import { DashboardPane, GovernanceInfoTooltip, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
+    import {
+        isChangingParticipation,
+        participationAction,
+        pendingParticipations,
+    } from 'shared/lib/participation/stores'
+    import { ParticipationAction } from 'shared/lib/participation/types'
+    import { isSyncing } from 'shared/lib/wallet'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
-
-    $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
     const tooltip = {
         statusTimeline: { anchor: null as HTMLElement, show: false },
         partiallyVoted: { anchor: null as HTMLElement, show: false },
     }
 
+    $: eventAnswers = event?.information?.payload?.questions[0]?.answers ?? []
     $: results = event?.status?.questions?.[0]?.answers?.filter(
         (answer) => answer?.value !== 0 && answer?.value !== 255
     )
+    $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
+    $: disableVoting =
+        $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
+
+    let disableVotingMessages: {
+        show?: boolean
+        busy?: boolean
+        message?: string
+    }[]
+    $: disableVoting,
+        eventAnswers,
+        $isSyncing,
+        $currentAccountTreasuryVoteValue,
+        $pendingParticipations,
+        updateDisableVotingMessages()
 
     const isSelected = (castedAnswerValue: string, answerValue: string): boolean => castedAnswerValue === answerValue
 
@@ -90,6 +111,70 @@
                 break
         }
     }
+
+    function updateDisableVotingMessages(): void {
+        if (!disableVoting) return
+        else {
+            disableVotingMessages = []
+            const pendingParticipation = $pendingParticipations?.[0]
+            eventAnswers.forEach((eventAnswer) => {
+                if ($isSyncing) {
+                    disableVotingMessages.push({
+                        show: true,
+                        busy: true,
+                        message: localize('general.syncing'),
+                    })
+                } else if (
+                    $participationAction === ParticipationAction.Stake ||
+                    $participationAction === ParticipationAction.Unstake
+                ) {
+                    const locale =
+                        $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
+                    disableVotingMessages.push({
+                        show: true,
+                        busy: true,
+                        message: localize(locale),
+                    })
+                } else if (
+                    pendingParticipation?.action === ParticipationAction.Vote ||
+                    pendingParticipation?.action === ParticipationAction.Unvote
+                ) {
+                    const pendingParticipationAnswers =
+                        pendingParticipation?.participations?.map((participations) => participations?.answers) ?? []
+                    if (pendingParticipation?.action === ParticipationAction.Vote) {
+                        if (
+                            pendingParticipationAnswers.some((participation) =>
+                                participation.includes(eventAnswer?.value)
+                            )
+                        ) {
+                            disableVotingMessages.push({
+                                show: true,
+                                busy: true,
+                                message: localize('general.voting'),
+                            })
+                        } else {
+                            disableVotingMessages.push({
+                                show: false,
+                            })
+                        }
+                    } else {
+                        if (isSelected($currentAccountTreasuryVoteValue, eventAnswer?.value)) {
+                            disableVotingMessages.push({
+                                show: true,
+                                busy: true,
+                                message: localize('general.unvoting'),
+                            })
+                        } else {
+                            disableVotingMessages.push({
+                                show: false,
+                            })
+                        }
+                    }
+                }
+            })
+            disableVotingMessages = disableVotingMessages
+        }
+    }
 </script>
 
 <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
@@ -133,14 +218,14 @@
         {/if}
     </div>
     <div class="flex flex-col w-full space-y-16 overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-        {#each event?.information?.payload?.questions[0]?.answers ?? [] as answer}
+        {#each event?.information?.payload?.questions[0]?.answers ?? [] as answer, answerIndex}
             <button
                 on:click={() => handleAnswerClick(answer)}
                 class:winner={isWinnerAnswer(answer?.value)}
                 class:active={isSelected($currentAccountTreasuryVoteValue, answer?.value)}
                 class:partial={isSelected($currentAccountTreasuryVoteValue, answer?.value) &&
                     $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
-                disabled={!canParticipate(event?.status?.status)}
+                disabled={disableVoting || !canParticipate(event?.status?.status)}
                 class="relative py-5 px-6 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:bg-opaciity-100 rounded-xl border border-solid border-gray-200 dark:border-transparent"
             >
                 <div class="flex justify-between w-full items-center">
@@ -200,8 +285,18 @@
                         </Text>
                     </div>
                     {#if canParticipate(event?.status?.status)}
-                        {#if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
-                            <div class="flex flex-row space-x-2 items-center">
+                        {#if disableVoting}
+                            {#if disableVotingMessages?.[answerIndex]?.show}
+                                <div class="p-2 bg-gray-300 dark:bg-gray-700 rounded-lg flex-shrink-0">
+                                    <Spinner
+                                        busy={disableVotingMessages?.[answerIndex]?.busy}
+                                        message={disableVotingMessages?.[answerIndex]?.message}
+                                        classes="mx-2 justify-center"
+                                    />
+                                </div>
+                            {/if}
+                        {:else if isSelected($currentAccountTreasuryVoteValue, answer?.value) && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote}
+                            <div class="flex flex-row space-x-2 items-center flex-shrink-0">
                                 <Text type="p" overrideColor classes="text-yellow-600"
                                     >{localize('views.governance.manageVote')}</Text
                                 >

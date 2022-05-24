@@ -124,6 +124,7 @@ export const initialiseListeners = (): void => {
                     (get(isChangingParticipation) &&
                         getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote)
                 ) {
+                    isChangingParticipation.set(false)
                     displayParticipationNotification(getPendingParticipation(message.id))
                 }
                 if (get(popupState).type === 'stakingManager') {

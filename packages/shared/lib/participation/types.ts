@@ -207,6 +207,7 @@ export type PendingParticipation = {
     messageId: string
     accountId: string
     action: ParticipationAction
+    participations?: Participation[]
 }
 
 /**
