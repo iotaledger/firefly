@@ -344,7 +344,7 @@
 
 <style type="text/scss">
     button {
-        &.active:not(.partial) {
+        &.active:not(.partial):not(.winner) {
             @apply border-blue-500;
             @apply bg-blue-500;
             @apply bg-opacity-10;
