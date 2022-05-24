@@ -35,6 +35,12 @@ export enum AccountRoute {
     Manage = 'manage',
     Send = 'send',
     Receive = 'receive',
+    Delete = 'delete',
+    Actions = 'actions',
+    AddressHistory = 'addressHistory',
+    ExportTransactionHistory = 'exportTransactionHistory',
+    HideAccount = 'hideAccount',
+    DeleteAccount = 'deleteAccount',
 }
 
 export enum DashboardRoute {

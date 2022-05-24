@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { DashboardRoute, dashboardRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
-    import { AccountSwitcher, Icon, Text } from 'shared/components'
+    import { AccountNavigation, AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { mobile } from 'shared/lib/app'
     import { popupState } from 'shared/lib/popup'
@@ -43,7 +43,7 @@
     showingPopup
         ? 'opacity-50 pointer-events-none'
         : ''} {classes} {$mobile
-        ? 'top-navigation my-6'
+        ? 'top-navigation'
         : 'fixed top-0 left-20 bg-gray-200 py-2'} "
 >
     {#if showBackButton}
@@ -54,7 +54,11 @@
             </div>
         </button>
     {/if}
-    <AccountSwitcher {onCreateAccount} accounts={$viewableAccounts} />
+    {#if $mobile}
+        <AccountNavigation {onCreateAccount} accounts={$viewableAccounts} />
+    {:else}
+        <AccountSwitcher {onCreateAccount} accounts={$viewableAccounts} />
+    {/if}
 </div>
 
 <style type="text/scss">

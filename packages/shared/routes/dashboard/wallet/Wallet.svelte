@@ -3,6 +3,13 @@
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { AccountActionsModal, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+    import {
+        AccountActions,
+        AddressHistory,
+        DeleteAccount,
+        ExportTransactionHistory,
+        HideAccount,
+    } from 'shared/components/drawerContent'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
@@ -400,6 +407,9 @@
             void addProfileCurrencyPriceData()
         }
     })
+
+    const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+
 </script>
 
 {#if $selectedAccount}
@@ -410,23 +420,31 @@
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex">
-                    <AccountBalance classes="w-full" />
-                    {#if $accountRoute !== AccountRoute.Init}
-                        <Drawer
-                            dimLength={180}
-                            opened={true}
-                            bind:this={drawer}
-                            onClose={() => accountRoute.set(AccountRoute.Init)}
-                        >
-                            {#if $accountRoute === AccountRoute.Manage}
-                                <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
-                            {:else if $accountRoute === AccountRoute.Send}
-                                <Send {onSend} {onInternalTransfer} />
-                            {:else if $accountRoute === AccountRoute.Receive}
-                                <Receive {isGeneratingAddress} {onGenerateAddress} />
-                            {/if}
-                        </Drawer>
-                    {/if}
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                    <Drawer
+                        dimLength={180}
+                        opened={$accountRoute !== AccountRoute.Init}
+                        bind:this={drawer}
+                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                    >
+                        {#if $accountRoute === AccountRoute.Send}
+                            <Send {onSend} {onInternalTransfer} />
+                        {:else if $accountRoute === AccountRoute.Receive}
+                            <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoute.Actions}
+                            <AccountActions />
+                        {:else if $accountRoute === AccountRoute.Manage}
+                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.AddressHistory}
+                            <AddressHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
+                            <ExportTransactionHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.HideAccount}
+                            <HideAccount account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.DeleteAccount}
+                            <DeleteAccount account={$selectedAccount} />
+                        {/if}
+                    </Drawer>
                 </div>
                 <div class="flex flex-1">
                     <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
