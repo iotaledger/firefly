@@ -26,7 +26,8 @@
 
 <style type="text/scss">
     .mobile-container {
-        position: absolute;
+        z-index: 100;
+        position: fixed;
         top: calc(env(safe-area-inset-top) * 1.2);
         left: 20px;
         right: 20px;
