@@ -10,7 +10,9 @@
 
     export let classes = ''
 
-    export let onMenuClick = (): void => {}
+    export let onMenuClick = (): void => {
+        accountRoute.set(AccountRoutes.Manage)
+    }
 
     let showPreciseBalance = false
 
@@ -40,13 +42,13 @@
         {/if}
         <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
             <div on:click={togglePreciseBalance}>
-                <Text type="h2">
+                <Text type={$mobile ? 'h1' : 'h2'}>
                     {showPreciseBalance
                         ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                 </Text>
             </div>
-            <Text type="p" smaller>
+            <Text type={$mobile ? 'h4' : 'p'} smaller>
                 {$selectedAccount?.balanceEquiv}
             </Text>
         </div>
