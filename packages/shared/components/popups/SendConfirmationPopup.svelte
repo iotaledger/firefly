@@ -4,12 +4,10 @@
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { sendExternalTransaction, sendInternalTransaction } from '@lib/send'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { Recipient } from '@core/wallet'
+    import { Recipient, trySendAmount } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient
@@ -24,8 +22,8 @@
 
         function _send(): void {
             return recipient.type === 'account'
-                ? sendInternalTransaction($selectedAccount.id, recipient.account.depositAddress, rawAmount, internal)
-                : sendExternalTransaction($selectedAccount.id, recipient.address, rawAmount)
+                ? void trySendAmount(recipient.account.depositAddress, rawAmount)
+                : void trySendAmount(recipient.address, rawAmount)
         }
 
         if ($isSoftwareProfile) {
