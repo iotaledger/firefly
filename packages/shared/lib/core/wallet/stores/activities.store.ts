@@ -1,5 +1,5 @@
 import { selectedAccount } from '@core/account'
-import { derived, Readable } from 'svelte/store'
+import { derived, get, Readable, writable, Writable } from 'svelte/store'
 import { getAccountMessages } from '@lib/wallet'
 import { parseTransactionsToActivities } from '../utils'
 import { ActivityDirection, IActivity } from '@lib/typings/activity'
@@ -11,38 +11,16 @@ export const activities: Readable<IActivity[]> = derived([selectedAccount], ([$s
     parseTransactionsToActivities(getAccountMessages($selectedAccount))
 )
 
-export function filterActivities(activities: IActivity[], filter: number): IActivity[] {
-    switch (filter) {
-        case 0:
-            return activities
-        case 1:
-            return activities.filter((activity) => activity.direction === ActivityDirection.In)
-        case 2:
-            return activities.filter((activity) => activity.direction === ActivityDirection.Out)
-        default:
-            return activities
-    }
+export const queriedActivities: Writable<IActivity[]> = writable([])
+
+interface GroupedActivity {
+    date: string
+    activities: IActivity[]
 }
 
-export function searchActivities(activities: IActivity[], searchTerm: string): IActivity[] {
-    return activities.filter((activity) => {
-        const amount = unitToValue(activity.amount)
-        return (
-            activity.subjectAccountName === searchTerm ||
-            activity.subjectAddress === searchTerm ||
-            activity?.id.toLowerCase() === searchTerm ||
-            (searchTerm[0] === '>' && unitToValue(searchTerm.substring(1)) < amount) ||
-            (searchTerm[0] === '<' && unitToValue(searchTerm.substring(1)) > amount) ||
-            (searchTerm[1] === 'i' && isValueInUnitRange(amount, searchTerm)) ||
-            amount === unitToValue(searchTerm) ||
-            formatUnitBestMatch(amount).toString().toLowerCase()?.includes(searchTerm)
-        )
-    })
-}
-
-export function groupActivities(activities: IActivity[]): IActivity[] {
-    const groupedActivities = []
-    for (const activity of activities) {
+export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
+    const groupedActivities: GroupedActivity[] = []
+    for (const activity of $queriedActivities) {
         const activityDate = getDateString(activity.timestamp)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
@@ -51,6 +29,35 @@ export function groupActivities(activities: IActivity[]): IActivity[] {
         groupedActivities[index].activities.push(activity)
     }
     return groupedActivities
+})
+
+export function searchQueriedActivities(searchTerm: string): void {
+    queriedActivities.set(
+        get(activities).filter((activity) => {
+            const amount = unitToValue(activity.amount)
+            return (
+                activity.subjectAccountName === searchTerm ||
+                activity.subjectAddress === searchTerm ||
+                activity?.id.toLowerCase() === searchTerm ||
+                (searchTerm[0] === '>' && unitToValue(searchTerm.substring(1)) < amount) ||
+                (searchTerm[0] === '<' && unitToValue(searchTerm.substring(1)) > amount) ||
+                (searchTerm[1] === 'i' && isValueInUnitRange(amount, searchTerm)) ||
+                amount === unitToValue(searchTerm) ||
+                formatUnitBestMatch(amount).toString().toLowerCase()?.includes(searchTerm)
+            )
+        })
+    )
+}
+
+export function filterQueriedActivities(filter: number): void {
+    let activityList = get(activities)
+
+    if (filter === 1) {
+        activityList = activityList.filter((activity) => activity.direction === ActivityDirection.In)
+    } else if (filter === 2) {
+        activityList = activityList.filter((activity) => activity.direction === ActivityDirection.Out)
+    }
+    queriedActivities.set(activityList)
 }
 
 function getDateString(timestamp): string {

@@ -5,7 +5,7 @@
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
-    import { activities, filterActivities, searchActivities, groupActivities } from '@core/wallet'
+    import { activities, groupedActivities, filterQueriedActivities, searchQueriedActivities } from '@core/wallet'
 
     function handleTransactionClick(message: any): void {
         openPopup({
@@ -23,18 +23,13 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
-    let filteredActivities = $activities
-    $: filteredActivities = filterActivities($activities, activeFilterIndex)
-
-    let queryActivities = filteredActivities
     $: if (searchActive && searchValue) {
-        debounce(() => (queryActivities = searchActivities(filteredActivities, searchValue)))()
+        debounce(() => {
+            searchQueriedActivities(searchValue)
+        })()
     } else {
-        queryActivities = filteredActivities
+        filterQueriedActivities(activeFilterIndex)
     }
-
-    let groupedActivities = []
-    $: groupedActivities = groupActivities(queryActivities)
 
     function shouldShowFirstSync(): boolean {
         /**
@@ -88,9 +83,9 @@
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if groupedActivities.length}
-            {#each groupedActivities as group}
-                <Text type="p" bold smaller color="gray-600">{group.date} • {group.activities.length}</Text>
+        {:else if $groupedActivities.length}
+            {#each $groupedActivities as group}
+                <Text bold smaller color="gray-600">{group.date} • {group.activities.length}</Text>
                 {#each group.activities as activity}
                     <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
                 {/each}
