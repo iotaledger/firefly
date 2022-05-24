@@ -1,4 +1,4 @@
-import { activeProfile, IPersistedProfile, saveProfile } from '@core/profile'
+import { activeProfile, IPersistedProfile, loadPersistedProfileIntoActiveProfile, saveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
 export function saveActiveProfile(): void {
@@ -15,7 +15,6 @@ export function saveActiveProfile(): void {
             lastStrongholdBackupTime: _activeProfile?.lastStrongholdBackupTime,
             settings: _activeProfile?.settings,
             isDeveloperProfile: _activeProfile?.isDeveloperProfile,
-            ...(_activeProfile?.hiddenAccounts && { hiddenAccounts: _activeProfile?.hiddenAccounts }),
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),

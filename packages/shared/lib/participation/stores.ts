@@ -1,6 +1,6 @@
 import { IAccountState, selectedAccountId } from '@core/account'
 import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { activeAccounts, activeProfile } from '@core/profile'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
@@ -60,9 +60,8 @@ export const stakedAccounts: Readable<IAccountState[]> = derived(
          * be derived, but doing so results in a "cannot
          * access _ before initialization" error.
          */
-        const accounts = get(activeProfile).accounts
-        if (!get(accounts)) return []
-        else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.meta.index))
+        if (!get(activeAccounts)) return []
+        else return get(activeAccounts).filter((wa) => activeAccountIndices.includes(wa.meta.index))
     }
 )
 

@@ -46,20 +46,3 @@ import { get } from 'svelte/store'
 //         )
 //     }
 // }
-
-/**
- * Gets account color from activeProfile using account id
- *
- * @method getColor
- *
- * @returns {string}
- */
-export const getColor = (activeProfile: IProfile, accountId: string): string | AccountColors => {
-    const { accounts } = activeProfile || {}
-    const _accounts = get(accounts)
-
-    if (_accounts?.length) {
-        const foundAccountColor = _accounts.find((account) => account.id === accountId)?.color
-        if (foundAccountColor) return foundAccountColor
-    }
-}

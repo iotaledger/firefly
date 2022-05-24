@@ -1,11 +1,15 @@
 <script lang="typescript">
     import { Checkbox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { get } from 'svelte/store'
-    import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import { activeProfile, updateActiveProfile } from '@core/profile'
+    import { setNextSelectedAccount } from '@core/account'
 
-    let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
-    $: updateActiveProfileSettings({ showHiddenAccounts: showHiddenAccounts })
+    let showHiddenAccounts = $activeProfile?.showHiddenAccounts
+    $: updateActiveProfile({ showHiddenAccounts: showHiddenAccounts })
+
+    $: if (!showHiddenAccounts) {
+        setNextSelectedAccount()
+    }
 </script>
 
 <Text type="h4" classes="mb-3">{localize('views.settings.hiddenAccounts.title')}</Text>

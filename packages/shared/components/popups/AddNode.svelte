@@ -2,12 +2,13 @@
     import { Button, Checkbox, Input, Password, Spinner, Text } from 'shared/components'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { INode, INodeInfo, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
+    import { INode, INetwork, getNetwork, checkNodeUrlValidity, cleanAuth } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { asyncGetNodeInfo } from 'shared/lib/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
+    import type { INodeInfo } from '@iota/types'
 
     export let node: INode = { url: '', isPrimary: false }
     export let nodes: INode[] = []
@@ -15,8 +16,6 @@
     export let isAddingNode = true
 
     export let onSuccess = (..._: any[]): void => {}
-
-    const { accounts } = $activeProfile
 
     let nodeUrl = node?.url || ''
     const oldNodeUrl = nodeUrl
@@ -77,9 +76,13 @@
                 cleanNodeFormData()
 
                 if (!addressError) {
-                    nodeInfo = await asyncGetNodeInfo($accounts[0].id, cleanNodeUrl(nodeUrl), cleanAuth(optNodeAuth))
+                    nodeInfo = await asyncGetNodeInfo(
+                        $activeAccounts[0].id,
+                        cleanNodeUrl(nodeUrl),
+                        cleanAuth(optNodeAuth)
+                    )
 
-                    checkNetworkId(nodeInfo?.nodeinfo?.networkId)
+                    checkNetworkId(nodeInfo?.protocol.networkName)
                 }
             }
         } catch (err) {

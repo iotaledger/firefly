@@ -12,7 +12,6 @@ export interface IPersistedProfile {
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
     accountMetadata: IAccountMetadata[]
-    hiddenAccounts?: string[]
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountId?: string

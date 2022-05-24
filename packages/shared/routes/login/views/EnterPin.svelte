@@ -83,7 +83,7 @@
             return
         }
 
-        if (timeRemainingBeforeNextAttempt == -1) {
+        if (timeRemainingBeforeNextAttempt === -1) {
             clearInterval(maxAttemptsTimer)
             attempts = 0
             timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS

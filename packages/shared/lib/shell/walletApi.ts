@@ -153,7 +153,7 @@ WALLET.onMessage((message: MessageResponse) => {
         // Something lower level has thrown an error
         // We should stop processing at this point
         let messageData = JSON.stringify(message)
-        if (messageData == '{}') {
+        if (messageData === '{}') {
             messageData = message.toString()
         }
         const newError = { type: ErrorType.ClientError, message: messageData, time: Date.now() }

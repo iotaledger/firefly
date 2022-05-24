@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { AccountSummaryAndAssetsPane, AccountHistoryPane, LineChartPane, BarChartPane } from 'shared/components'
+    import { AccountSummaryAndAssetsPane, AccountActivityPane, LineChartPane, BarChartPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
@@ -99,7 +99,7 @@
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <AccountSummaryAndAssetsPane />
-                <AccountHistoryPane />
+                <AccountActivityPane />
                 <div class=" flex flex-col space-y-4">
                     <LineChartPane />
                     <BarChartPane />

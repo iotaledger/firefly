@@ -44,8 +44,8 @@
         modal?.close()
     }
 
-    const handleLogoutClick = async (): Promise<void> => {
-        await logout(true)
+    const handleLogoutClick = (): void => {
+        void logout(true)
     }
 
     const handleStrongholdToggleClick = (): void => {

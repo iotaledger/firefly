@@ -6,13 +6,14 @@ import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { resetDashboardState } from '../unknown'
 import { clearPollNetworkInterval } from '@core/network'
-import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile, activeAccounts } from '@core/profile'
+import { resetSelectedAccount } from '@core/account'
 
 /**
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { isStrongholdLocked, lastActiveAt, loggedIn } = get(activeProfile)
+    const { isStrongholdLocked, lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
     return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
@@ -33,6 +34,9 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         clearSendParams()
         closePopup(true)
         loggedIn.set(false)
+        hasLoadedAccounts.set(false)
+        resetSelectedAccount()
+        activeAccounts.set(null)
         if (clearActiveProfile) {
             resetActiveProfile()
         }

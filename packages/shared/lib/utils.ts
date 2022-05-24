@@ -262,7 +262,7 @@ export const toUtf8String = (bytes: Uint8Array | number[]): string | undefined =
             char = char & (0x3f >> extraChar)
             for (; extraChar > 0; extraChar--) {
                 const _char = bytes[idx++]
-                if ((_char & 0xc0) != 0x80) return null
+                if ((_char & 0xc0) !== 0x80) return null
 
                 char = (char << 6) | (_char & 0x3f)
             }

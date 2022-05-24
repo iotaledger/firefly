@@ -15,15 +15,13 @@
         receiverAddressesFromTransactionPayload,
         sendAddressFromTransactionPayload,
     } from 'shared/lib/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeAccounts, activeProfile } from '@core/profile'
 
     export let timestamp
     export let confirmed
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
-
-    const { accounts } = $activeProfile
 
     let messageValue = ''
     let date = localize('error.invalidDate')
@@ -51,7 +49,7 @@
             return formatUnitBestMatch(balance, true, 3)
         }
         if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $activeAccounts), true, 3)
         }
 
         return `${

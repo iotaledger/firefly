@@ -1018,7 +1018,7 @@
         "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -1113,6 +1113,7 @@
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
         "copiedToClipboard": "Copied to clipboard",
+        "total": "Total: {balance}",
         "amountClaimed": "{amount} claimed"
     },
     "dates": {

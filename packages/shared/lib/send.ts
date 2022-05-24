@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { activeProfile, isSoftwareProfile } from '@core/profile'
+import { activeAccounts, activeProfile, isSoftwareProfile } from '@core/profile'
 import { deepCopy } from '@lib/helpers'
 import { checkStronghold } from '@lib/stronghold'
 import { Message, Transaction } from 'shared/lib/typings/message'
@@ -12,8 +12,6 @@ import { TransferProgressEventType } from './typings/events'
 import { api, isTransferring, transferState } from './wallet'
 
 export function sendExternalTransaction(senderAccountId: string, receiveAddress: string, amount: number): void {
-    const { accounts } = get(activeProfile)
-
     const _send = () => {
         isTransferring.set(true)
         api.send(
@@ -28,7 +26,7 @@ export function sendExternalTransaction(senderAccountId: string, receiveAddress:
             },
             {
                 onSuccess(response) {
-                    accounts.update((_accounts) =>
+                    activeAccounts.update((_accounts) =>
                         _accounts?.map((_account) => {
                             if (_account.id === senderAccountId) {
                                 return Object.assign<IAccountState, IAccountState, Partial<IAccountState>>(
@@ -77,7 +75,7 @@ export function sendInternalTransaction(
     amount: number,
     internal: boolean
 ): void {
-    const { accounts, internalTransfersInProgress } = get(activeProfile)
+    const { internalTransfersInProgress } = get(activeProfile)
 
     const _internalTransfer = () => {
         isTransferring.set(true)
@@ -91,7 +89,7 @@ export function sendInternalTransaction(
                     }
                     return transfers
                 })
-                accounts.update((_accounts) =>
+                activeAccounts.update((_accounts) =>
                     _accounts.map((_account) => {
                         if (_account.id === senderAccountId) {
                             const m = deepCopy(message) as Message

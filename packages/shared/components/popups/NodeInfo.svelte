@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { Button, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
@@ -9,14 +8,12 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { setClipboard } from 'shared/lib/utils'
     import { cleanAuth } from '@core/network/utils'
-    import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '' }
 
     let nodeContent = ''
 
     onMount(() => {
-        const { accounts } = $activeProfile
         asyncGetNodeInfo(accounts[0]?.id, node?.url, cleanAuth(node?.auth))
             .then((nodeInfo) => {
                 nodeContent = combineNodeInfo(node?.url, nodeInfo)
