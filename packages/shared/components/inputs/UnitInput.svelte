@@ -1,17 +1,29 @@
 <script lang="typescript">
     import { Dropdown2 } from 'shared/components'
-    import { Unit } from '@iota/unit-converter'
+    import { ITokenMetadata } from '@core/wallet'
+    import { Unit } from '@lib/units'
 
     export let unit: string
     export let isFocused: boolean
+    export let tokenMetadata: ITokenMetadata
+
+    $: unit = tokenMetadata?.unit
 
     let items = []
-    $: {
-        items = []
-        const values = Object.values(Unit)
-        for (let i = 0; i < values.length - 2; i++) {
-            items.push({ value: values[i], label: values[i] })
-        }
+    $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
+        items = [
+            { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
+            { label: tokenMetadata?.subunit, value: tokenMetadata?.subunit },
+        ]
+    } else if (tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
+        items = [
+            { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
+            { label: Unit.K + tokenMetadata?.unit, value: Unit.K + tokenMetadata?.unit },
+            { label: Unit.M + tokenMetadata?.unit, value: Unit.M + tokenMetadata?.unit },
+            { label: Unit.G + tokenMetadata?.unit, value: Unit.G + tokenMetadata?.unit },
+            { label: Unit.T + tokenMetadata?.unit, value: Unit.T + tokenMetadata?.unit },
+            { label: Unit.P + tokenMetadata?.unit, value: Unit.P + tokenMetadata?.unit },
+        ]
     }
 
     function onSelect(selected) {

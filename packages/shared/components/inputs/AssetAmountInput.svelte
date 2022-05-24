@@ -1,53 +1,61 @@
 <script lang="typescript">
     import { Text, AssetDropdown, InputContainer, AmountInput } from 'shared/components'
-
-    import { Unit } from '@iota/unit-converter'
     import UnitInput from './UnitInput.svelte'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
-    import { CurrencyTypes } from '@lib/typings/currency'
-    import { activeProfile } from '@core/profile'
-    import { UNIT_MAP } from '@lib/units'
+    import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
+    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
+    import { getUnit, UNIT_MAP } from '@lib/units'
 
     export let inputElement
-
     export let disabled = false
     export let isFocused = false
-
-    export let asset
+    export let asset: IAsset
+    export let rawAmount: number
     export let amount: string
-    export let unit = Unit.Mi
-
-    let rawAmount = 0
+    export let unit: string
 
     let amountInputElement
     let error
 
-    $: rawAmount = Number(amount) * UNIT_MAP[unit].val
-    $: formattedFiatValue = formatCurrency(
-        convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-    )
-
     $: isFocused && (error = '')
 
+    $: if (!asset?.metadata.useMetricPrefix) {
+        if (unit === asset?.metadata.unit) {
+            rawAmount = Number(amount) * 10 ** asset?.metadata.decimals
+        } else if (unit === asset?.metadata.subunit) {
+            rawAmount = Number(amount)
+        }
+    } else if (asset?.metadata.useMetricPrefix) {
+        rawAmount = Number(amount) * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+    }
+
     function onClickAvailableBalance(): void {
-        const balance = asset?.balance?.available ?? asset?.balance.total ?? 0
-        amount = balance.toString()
-        unit = Unit.i
+        if (!asset?.metadata.useMetricPrefix) {
+            const balance = (asset?.balance?.available ?? 0) / 10 ** asset?.metadata.decimals
+            amount = balance.toString()
+            unit = asset.metadata.unit
+        } else if (asset?.metadata.useMetricPrefix) {
+            const metricUnit = getUnit(asset?.balance?.available ?? 0)
+            const balance = (asset?.balance?.available ?? 0) / UNIT_MAP[metricUnit].val
+            amount = balance.toString()
+            unit = metricUnit + asset.metadata.unit
+        }
     }
 
     export function validate(): Promise<void> {
         if (!amount) {
             error = localize('error.send.amountInvalidFormat')
-        } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
+        } else if (
+            (unit === asset?.metadata.subunit || (unit === asset?.metadata.unit && asset?.metadata.decimals === 0)) &&
+            Number.parseInt(amount, 10).toString() !== amount
+        ) {
             error = localize('error.send.amountNoFloat')
         } else {
             const amountAsFloat = parseCurrency(amount)
-
             if (Number.isNaN(amountAsFloat)) {
                 error = localize('error.send.amountInvalidFormat')
             } else {
-                if (rawAmount > asset?.rawBalance) {
+                if (rawAmount > asset?.balance.available) {
                     error = localize('error.send.amountTooHigh')
                 } else if (rawAmount <= 0) {
                     error = localize('error.send.amountZero')
@@ -82,16 +90,17 @@
             clearPadding
             clearBorder
             {disabled}
-            {...$$restProps}
         />
-        <UnitInput bind:unit bind:isFocused {asset} />
+        <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
     </div>
     <div class="flex flex-row w-full items-end justify-between">
-        <button on:click={onClickAvailableBalance}>
-            <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                Available balance: {asset?.balance?.available ?? asset?.balance.total}
-            </Text>
-        </button>
-        <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formattedFiatValue}</Text>
+        {#if asset}
+            <button on:click={onClickAvailableBalance}>
+                <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
+                    Available balance: {formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata)}
+                </Text>
+            </button>
+        {/if}
+        <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
     </div>
 </InputContainer>

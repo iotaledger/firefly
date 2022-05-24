@@ -105,10 +105,10 @@ const parseSendOperation = (
             return addError({ time: Date.now(), type: 'deepLink', message: `Unit is not recognised '${unitParam}'` })
         }
     } else {
-        unitParam = Unit.i
+        unitParam = Unit._
     }
 
-    if (parsedUnit === Unit.i && parsedAmount && !Number.isInteger(parsedAmount)) {
+    if (parsedUnit === Unit._ && parsedAmount && !Number.isInteger(parsedAmount)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',

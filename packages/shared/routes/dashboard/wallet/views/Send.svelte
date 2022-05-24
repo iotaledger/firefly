@@ -53,7 +53,7 @@
     }
 
     let selectedSendType = SEND_TYPE.EXTERNAL
-    let unit = Unit.Mi
+    let unit = Unit.M
     let amount = ''
     let address = ''
     let amountError = ''
@@ -290,14 +290,14 @@
         const isFiat = isFiatCurrency(unit)
         const amountAsIota = isFiat
             ? convertFromFiat(amountAsFloat, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
-            : changeUnits(amountAsFloat, unit, Unit.i)
+            : changeUnits(amountAsFloat, unit, Unit._)
         /**
          * NOTE: Sometimes max values from fiat calculations
          * aren't precise enough, therefore we round the
          * amounts to 1 MI to compare them.
          */
-        const amountAsMi = changeUnits(amountAsIota, Unit.i, Unit.Mi)
-        const balanceAsMi = changeUnits($selectedAccount.rawIotaBalance, Unit.i, Unit.Mi)
+        const amountAsMi = changeUnits(amountAsIota, Unit._, Unit.M)
+        const balanceAsMi = changeUnits($selectedAccount.rawIotaBalance, Unit._, Unit.M)
         const isMaxAmount = Math.round(amountAsMi) === Math.round(balanceAsMi)
 
         const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
@@ -326,7 +326,7 @@
 
         if (amount.length === 0) {
             amountError = localize('error.send.amountInvalidFormat')
-        } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
+        } else if (unit === Unit._ && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = localize('error.send.amountNoFloat')
         } else {
             const amountAsFloat = parseCurrency(amount)
@@ -420,7 +420,7 @@
     const updateFromSendParams = (sendParams: SendParams): void => {
         selectedSendType =
             sendParams.isInternal && $visibleActiveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = sendParams.unit ?? (Number(sendParams.amount) === 0 ? Unit.Mi : Unit.i)
+        unit = sendParams.unit ?? (Number(sendParams.amount) === 0 ? Unit.M : Unit._)
         amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
         to = sendParams?.toWalletAccount?.id !== $selectedAccount.id ? sendParams?.toWalletAccount : undefined

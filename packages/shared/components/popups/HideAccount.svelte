@@ -47,8 +47,8 @@
         closePopup()
         sendParams.update((params) => ({
             ...params,
-            amount: formatUnitPrecision(Number($selectedAccount?.balances.total), Unit.Mi, false),
-            unit: Unit.Mi,
+            amount: formatUnitPrecision(Number($selectedAccount?.balances.total), Unit.M, false),
+            unit: Unit.M,
             isInternal: true,
         }))
         // TODO: open send form

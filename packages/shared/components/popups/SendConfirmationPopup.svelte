@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { Unit } from '@iota/unit-converter'
     import { Button, Text, KeyValueBox, ExpirationTimePicker } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
@@ -12,21 +11,20 @@
     import { ActivityStatus, ActivityType } from '@lib/typings/activity'
 
     export let internal = false
-    export let to = ''
-    export let toAccount: IAccountState
-    export let amount = 0
-    export let unit = Unit.i
+    export let recipient: { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
+    export let rawAmount: number
+    export let amount: '0'
+    export let unit: string
 
-    $: internal = toAccount?.depositAddress ? true : false
-    $: to = toAccount?.depositAddress ?? to
+    $: internal = recipient.type === 'account'
 
     function onConfirm(): void {
         closePopup()
 
         function _send(): void {
-            return internal
-                ? sendInternalTransaction($selectedAccount.id, to, amount, internal)
-                : sendExternalTransaction($selectedAccount.id, to, amount)
+            return recipient.type === 'account'
+                ? sendInternalTransaction($selectedAccount.id, recipient.account.depositAddress, rawAmount, internal)
+                : sendExternalTransaction($selectedAccount.id, recipient.address, rawAmount)
         }
 
         if ($isSoftwareProfile) {
@@ -43,10 +41,10 @@
     $: transactionDetails = {
         type: internal ? ActivityType.Transfer : ActivityType.Send,
         status: ActivityStatus.InProgress,
-        value: amount,
+        amount,
         unit,
-        ...(internal && { account: toAccount }),
-        ...(!internal && { address: to }),
+        rawAmount,
+        recipient,
     }
 </script>
 

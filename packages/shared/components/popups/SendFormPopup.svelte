@@ -4,15 +4,17 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { UNIT_MAP } from '@lib/units'
     import { IAccountState } from '@core/account'
-    let asset
-    let amount: number
-    let unit: string
-    let recipient: string | IAccountState
+    import { IAsset } from '@core/wallet'
 
     let assetAmountInput
     let recipientInput
+
+    let asset: IAsset
+    let amount: string
+    let rawAmount: number
+    let unit: string
+    let recipient: { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
 
     async function onSend(): Promise<void> {
         let valid = true
@@ -38,15 +40,14 @@
             await validate()
 
             if (valid) {
-                const _amount = amount * UNIT_MAP[unit].val
                 openPopup({
                     type: 'sendConfirmation',
                     props: {
                         internal: false,
-                        amount: _amount,
+                        rawAmount,
+                        amount,
                         unit,
-                        ...(recipient?.depositAddress && { toAccount: recipient }),
-                        ...(!recipient?.depositAddress && { to: recipient }),
+                        recipient,
                     },
                     overflow: true,
                 })
@@ -64,7 +65,7 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
-    <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
+    <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:amount bind:unit />
     <RecipientInput bind:this={recipientInput} bind:recipient />
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onCancel}>

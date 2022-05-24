@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { ButtonTile, Icon, StakingAssetTile, Text } from 'shared/components'
+    import { ButtonTile, StakingAssetTile } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
+    import { IAsset, formatTokenAmountBestMatch } from '@core/wallet'
     import { isBright } from '@lib/helpers'
 
     export let asset: IAsset
@@ -23,7 +23,7 @@
         iconLabel={asset?.metadata.name}
         iconLabelFontWeight={FontWeightText.semibold}
         iconSubLabel={asset?.fiatPrice}
-        tileText={formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}
+        tileText={formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
         tileSubText={`≈ ${asset?.fiatBalance}`}
         onClick={handleTileClick}
     />

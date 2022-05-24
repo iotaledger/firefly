@@ -34,7 +34,7 @@ export const mnemonic = writable<string[]>(null)
  */
 export const sendParams = writable<SendParams>({
     amount: undefined,
-    unit: Unit.Mi,
+    unit: Unit.M,
     address: '',
     message: '',
     isInternal: false,
@@ -42,7 +42,7 @@ export const sendParams = writable<SendParams>({
 export const clearSendParams = (isInternal = false): void =>
     sendParams.set({
         amount: undefined,
-        unit: Unit.Mi,
+        unit: Unit.M,
         address: '',
         message: '',
         isInternal,

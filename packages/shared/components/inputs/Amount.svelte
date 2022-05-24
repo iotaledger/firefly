@@ -18,7 +18,7 @@
     type AmountUnit = Unit | AvailableExchangeRates
 
     export let amount = undefined
-    export let unit: AmountUnit = Unit.Mi
+    export let unit: AmountUnit = Unit.M
     export let placeholder = undefined
     export let classes = ''
     export let error = ''
@@ -28,7 +28,7 @@
     export let onMaxClick = (): void => {}
 
     const currency = $activeProfile?.settings?.currency ?? (AvailableExchangeRates.USD as AmountUnit)
-    const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
+    const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'P'))
 
     let showDropdown = false
 
@@ -45,7 +45,7 @@
         if (amount?.length > 0) {
             if (!isFiatCurrency(unit)) {
                 const amountAsFloat = parseCurrency(amount)
-                const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit.i)
+                const rawAmount = changeUnits(Number.isNaN(amountAsFloat) ? 0 : amountAsFloat, unit as Unit, Unit._)
                 if (rawAmount > MAX_NUM_IOTAS) {
                     amount = formatUnitPrecision(MAX_NUM_IOTAS, unit as Unit, false)
                 }
@@ -66,7 +66,7 @@
         if (isFiatCurrency(unit)) return _amount
 
         const _convert = (amountAsFloat) => {
-            const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit.i)
+            const rawAmount = changeUnits(amountAsFloat, unit as Unit, Unit._)
             const fiatAmount = convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[currency])
 
             return fiatAmount === 0
@@ -172,8 +172,8 @@
         {disabled}
         {autofocus}
         maxDecimals={getMaxDecimals(unit)}
-        integer={unit === Unit.i}
-        float={unit !== Unit.i}
+        integer={unit === Unit._}
+        float={unit !== Unit._}
         style={showDropdown ? 'border-bottom-right-radius: 0' : ''}
         isFocused={showDropdown}
     />
