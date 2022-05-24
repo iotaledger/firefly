@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityRow, TogglableButton, Text, TextInput } from 'shared/components'
+    import { ActivityTile, TogglableButton, Text, TextInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
@@ -87,7 +87,7 @@
             {#each $groupedActivities as group}
                 <Text bold smaller color="gray-600">{group.date} • {group.activities.length}</Text>
                 {#each group.activities as activity}
-                    <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
+                    <ActivityTile onClick={() => handleTransactionClick(activity)} {activity} />
                 {/each}
             {/each}
         {:else}

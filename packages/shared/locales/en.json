@@ -850,6 +850,8 @@
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
+        "claim": "Claim",
+        "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",

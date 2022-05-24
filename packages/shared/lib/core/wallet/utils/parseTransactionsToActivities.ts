@@ -1,5 +1,4 @@
-import { truncateString } from '@lib/helpers'
-import { ActivityDirection, ActivityType, IActivity } from '@lib/typings/activity'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, IActivity } from '@lib/typings/activity'
 import { AccountMessage } from '@lib/typings/wallet'
 import { formatUnitBestMatch } from '@lib/units'
 import {
@@ -24,6 +23,10 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         subjectAddress: getSubjectAddress(transaction.payload),
         amount: getMessageValue(transaction.payload),
         fiatAmount: 0,
+        isAsync: true,
+        expireDate: new Date(),
+        hidden: false,
+        asyncStatus: ActivityAsyncStatus.Unclaimed,
         token: {
             name: 'Iota',
             useMetricPrefix: true,

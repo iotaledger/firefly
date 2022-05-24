@@ -41,4 +41,8 @@ export interface IActivity {
     token: ITokenMetadata
     conversion?: number
     fiatAmount?: number
+    isAsync: boolean
+    expireDate?: Date
+    hidden?: boolean
+    asyncStatus?: ActivityAsyncStatus
 }
