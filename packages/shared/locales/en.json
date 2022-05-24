@@ -599,6 +599,9 @@
                     "maximumVotes": {
                         "title": "Maximum votes",
                         "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                    },
+                    "chart": {
+                        "totalVotes": "Votes: {amount}"
                     }
                 }
             },

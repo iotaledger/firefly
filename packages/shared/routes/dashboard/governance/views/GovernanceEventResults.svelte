@@ -69,7 +69,13 @@
                 />
                 {#if tooltip?.[index === 0 ? 'build' : 'burn']?.show}
                     <Tooltip anchor={tooltip?.[index === 0 ? 'build' : 'burn']?.anchor} position="left" size="small">
-                        <Text type="p">{formatNumber(result?.accumulated, 0, 0, 2, true)}</Text>
+                        <Text type="p"
+                            >{localize('views.governance.info.tooltip.chart.totalVotes', {
+                                values: {
+                                    amount: formatNumber(result?.accumulated, 0, 0, 2, true),
+                                },
+                            })}
+                        </Text>
                     </Tooltip>
                 {/if}
                 <div class="flex space-x-1 mt-3" style="max-width: 7rem">
