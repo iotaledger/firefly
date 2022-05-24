@@ -91,7 +91,6 @@
                         showRevealToggle
                         {localize}
                         placeholder={localize('general.password')}
-                        autofocus
                         submitHandler={() => handleHideClick()}
                         disabled={isBusy}
                     />
@@ -100,8 +99,8 @@
                 <Text type="p" secondary classes="mb-5">{localize('popups.hideAccount.errorBody3')}</Text>
             {/if}
             <div
-                class={`flex flex-row flex-nowrap w-full ${
-                    hasMultipleAccounts ? 'justify-between space-x-4' : 'justify-center'
+                class={`flex flex-row w-full space-x-4 px-8 ${
+                    hasMultipleAccounts ? 'justify-between' : 'justify-center'
                 }`}
             >
                 <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>

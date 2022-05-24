@@ -83,7 +83,7 @@
     }
 
     function handleCancelClick() {
-        accountRoute.set(AccountRoutes.Init)
+        $accountRouter.goTo(AccountRoute.Init)
     }
 </script>
 
@@ -111,7 +111,6 @@
                     showRevealToggle
                     {localize}
                     placeholder={localize('general.password')}
-                    autofocus
                     submitHandler={() => handleExportTransactionHistory()}
                     disabled={isBusy}
                 />

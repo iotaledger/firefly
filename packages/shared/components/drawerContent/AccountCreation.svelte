@@ -84,7 +84,6 @@
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
-                autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy}
                 classes="mb-4"

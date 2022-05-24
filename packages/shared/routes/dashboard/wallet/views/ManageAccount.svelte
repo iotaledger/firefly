@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, ColorPicker, Input, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { activeProfile, getColor, setProfileAccount } from 'shared/lib/profile'
@@ -86,7 +87,7 @@
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
-                autofocus
+                autofocus={!$mobile}
                 submitHandler={handleSaveClick}
                 disabled={isBusy}
                 classes="mb-4"
