@@ -262,7 +262,6 @@ export const resetPerformingParticipation = (): void => {
     }
     isPerformingParticipation.set(false)
     participationAction.set(undefined)
-    isChangingParticipation.set(false)
 }
 
 export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])
