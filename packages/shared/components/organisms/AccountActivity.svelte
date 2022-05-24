@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { ActivityRow, TogglableButton, Text, IconTextInput } from 'shared/components'
-    import { localize, formatDate } from '@core/i18n'
+    import { ActivityRow, TogglableButton, Text, TextInput } from 'shared/components'
+    import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -58,7 +58,13 @@
         </div>
         <div class="relative flex flex-row items-center justify-between text-white mt-4">
             {#if searchActive}
-                <IconTextInput bind:inputElement bind:value={searchValue} icon="search" />
+                <TextInput
+                    bind:inputElement
+                    bind:value={searchValue}
+                    hasFocus={true}
+                    placeholder={localize('general.search')}
+                    fontSize="15"
+                />
             {/if}
             <!-- TODO: Wait for screen design for these -->
             <!-- <ul class="flex flex-row justify-between space-x-8">

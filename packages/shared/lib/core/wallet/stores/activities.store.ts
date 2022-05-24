@@ -55,7 +55,7 @@ export function groupActivities(activities: IActivity[]): IActivity[] {
 
 function getDateString(timestamp): string {
     const dateString = getMonthYear(new Date(Number(timestamp)))
-    return dateString === getMonthYear(new Date()) ? localize('thisMonth') : dateString
+    return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
 }
 
 function getMonthYear(date): string {
