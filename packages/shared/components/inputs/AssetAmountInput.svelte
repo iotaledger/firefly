@@ -21,7 +21,7 @@
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
 
     function onClickAvailableBalance(): void {
-        ({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
+        ;({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
     }
 
     export function validate(): Promise<void> {
