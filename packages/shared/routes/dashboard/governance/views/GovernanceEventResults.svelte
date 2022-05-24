@@ -51,7 +51,7 @@
             }`
         )}
     </Text>
-    <div class="w-full h-full flex justify-center space-x-8">
+    <div class="w-full h-full flex justify-center">
         {#each results || [] as result, index}
             <!-- Note: the tooltip logic is very ugly because the dynamic anchor allocation wasnt working as expected -->
             <div
@@ -78,9 +78,9 @@
                         </Text>
                     </Tooltip>
                 {/if}
-                <div class="flex space-x-1 mt-3" style="max-width: 7rem">
-                    <Text type="h3" classes="w-full whitespace-nowrap overflow-hidden">
-                        {event?.information?.payload?.questions[0]?.answers[index]?.text?.split(' ')[0]}
+                <div class="flex flex-col mt-3 items-center">
+                    <Text type="h3" classes="text-center">
+                        {event?.information?.payload?.questions[0]?.answers[index]?.text}
                     </Text>
                     <Text type="h3" overrideColor classes="text-gray-500">
                         {displayedPercentages[index].percentage}
