@@ -30,8 +30,8 @@
             setSelectedAccount(accountId)
             updateAccountSyncingQueue($selectedAccountStore)
             resetAccountRouter(false)
-            modal?.close()
         }
+        modal?.close()
     }
 
     function showWarning(message: string) {
@@ -42,8 +42,14 @@
     }
 
     function handleCreateAccountClick(): void {
+        if ($isTransferring) {
+            showWarning(localize('notifications.transferringCreate'))
+        } else if ($participationAction) {
+            showWarning(localize('notifications.participatingCreate'))
+        } else {
+            openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        }
         modal?.close()
-        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
     }
 </script>
 
