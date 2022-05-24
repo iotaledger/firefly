@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "请验证您的 PIN",
             "body1": "您的 PIN 码将保障您的余额和交易的隐私。",
-            "body2": "请重新输入您的 PIN 码以继续操作。"
+            "body2": "请重新输入您的 PIN 码来继续后面的操作。"
         },
         "backup": {
             "title": "备份您的钱包",
@@ -521,7 +521,8 @@
                     "commencing": "预先质押已开放",
                     "holding": "质押还剩下 {duration}",
                     "ended": "质押已结束",
-                    "inactive": "未检测到质押活动"
+                    "inactive": "未检测到质押活动",
+                    "fetching": "正在获取事件信息..."
                 },
                 "bodies": {
                     "upcoming": "{date} 质押开始后，您质押的 {token} 代币每10秒会自动获得奖励。",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "钱包累计奖励",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。 "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "取色器",
                 "hexCode": "颜色十六进制代码"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "我的投票权重",
+                "info": {
+                    "title": "您的投票权重",
+                    "equality": "1000 IOTA = 1 张选票",
+                    "description1": "你的投票权重来自于你的钱包余额。当投票提案处于计票阶段时，每隔10秒就会对有效票数进行统计和累积。",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                }
+            },
+            "info": {
+                "title": "治理信息",
+                "description": "在IOTA基金会的帮助下，IOTA社区已经开发了一个IOTA投票协议，允许你通过在Firefly中用IOTA代币投票来参与治理决策。",
+                "link": "了解用如何用IOTA投票",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "投票开放",
+                        "countingStarts": "计数开始",
+                        "countingStops": "计数结束",
+                        "votingOpened": "投票已开放",
+                        "countingStarted": "计数开始",
+                        "countingStopped": "计数结束"
+                    },
+                    "votingRate": {
+                        "title": "投票率",
+                        "body": "{amount} 将在每 {time, plural, one {# 秒} other {# 秒}} 产生 {votesPerMilestone} 票。"
+                    },
+                    "countedVotes": {
+                        "title": "计数投票",
+                        "body": "在整个计票期间，投票以 {time, plural, one {# 秒} other {# 秒}} 的间隔进行计算。{amount} 每隔 {time, plural, one {# 秒} other {# 秒}} 产生{votesPerMilestone} 票。"
+                    },
+                    "partiallyVoted": {
+                        "title": "新的未质押资金： {amount}",
+                        "body": "您已经收到了 {account} 的额外资金。您可以通过合并您的投票来使用这些代币投票。"
+                    },
+                    "maximumVotes": {
+                        "title": "最大投票数",
+                        "body": "你必须在剩余的计票期保持投票，以达到你的最高票数。"
+                    },
+                    "chart": {
+                        "totalVotes": "Votes: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "公告",
+                    "commencing": "投票开放",
+                    "holding": "计数中",
+                    "ended": "已结束"
+                },
+                "button": "查看提案",
+                "treasury": {
+                    "notFound": {
+                        "title": "无法加载社区金库投票",
+                        "subtitle": "Please connect to a node that has added this vote",
+                        "buttonConnect": "连接到默认节点",
+                        "buttonSettings": "查看节点设置",
+                        "fetching": "正在获取治理事件信息..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "投票开始于",
+                "votingProgress": "剩余时间：",
+                "votingPower": "您的投票权重",
+                "votesCounted": "您的计票数",
+                "maximumVotes": "您的最大票数",
+                "countingStarts": "计数开始于",
+                "currentResult": "当前结果",
+                "finalResult": "最终结果",
+                "answerHeader": {
+                    "activeVoting": "活跃的投票",
+                    "selected": "已提交",
+                    "notSelected": "未选中",
+                    "winner": "获胜方"
+                }
+            },
+            "votes": "票数",
+            "manageVote": "管理投票"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
-            "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
+            "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "你正在从一个正在质押和投票的钱包发送转账。这可能会解除你的代币的质押状态，并停止你的投票。您可以自由发送转账，但之后你可能需要将你剩余的代币重新质押和投票。",
+                "stake": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
+                "vote": "你正在从一个正在投票的钱包发送转账。这可能会停止你的投票。您可以自由发送转账，但之后你可能需要用你剩余的代币再次投票。"
+            }
         },
         "balanceFinder": {
             "title": "寻找余额",
@@ -774,6 +862,33 @@
             "title": "第 {periodNumber} 期质押从 {date} 开始",
             "body": "质押IOTA获取Assembly正在继续... 参与第 {periodNumber} 期90天的质押，使用您的 IOTA 令牌并获得ASMB 奖励！",
             "info": "Shimmer 质押已经完结，只会分发 ASMB 代币。"
+        },
+        "governanceManager": {
+            "castYourVote": "投下您的投票",
+            "castYourVoteInfo": "您将为选项 {voteValue} ({voteText}) 投票，投票金额为{amount}。",
+            "castingVotes": "投票中",
+            "stopVoting": "停止投票",
+            "stopVotingInfo": "您确定要停止对选项 {voteValue} ({voteText}) 的投票吗？",
+            "stopVotingDisclaimer": "请注意，在计票期间停止投票不会影响任何已经计算过的票数。",
+            "stoppingVoting": "停止投票",
+            "changeVote": "更改投票",
+            "changeVoteDisclaimer": "请注意，在计票期间改变你的投票不会影响任何已经计算过的投票。",
+            "changeVoteInfo": "您确定要将您的投票更改为选项 {voteValue} ({voteText})？",
+            "changingVote": "投票变更中...",
+            "manageVotes": "管理投票",
+            "partialVoteInfo": "您已经收到 {amount} 到 {account}。您可以通过合并这些资金与您当前的投票进行投票。",
+            "mergeVoteDisclaimer": "请注意，合并投票不会影响任何已经计算过的投票。",
+            "mergingVotes": "合并投票",
+            "votedSuccessfully": "您已经开始用 {account} 进行投票。",
+            "unvotedSuccessfully": "您已停止用 {account} 投票。",
+            "successPopup": {
+                "castVotesTitle": "投票成功",
+                "stopVotesTitle": "投票已停止",
+                "mergeVotesTitle": "投票已合并",
+                "changeVotesTitle": "投票已更改",
+                "castBody": "您现在正在投票支持选项 {voteValue} ({voteText})。",
+                "stopBody": "您已停止投票。这不会影响已被计数的选票。"
+            }
         },
         "shimmer-info": {
             "title": "关于 Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "合并",
         "mergeFunds": "合并资金",
         "done": "已完成",
+        "castVotes": "投票中",
+        "changeVotes": "更改投票",
+        "mergeVotes": "合并投票",
+        "stopVotes": "停止投票",
         "okIUnderstand": "好的，我知道了。",
         "readMore": "了解更多"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "转入到账户 {account}",
         "transferFrom": "从账户{account} 转入",
         "transferTo": "转出到账户 {account}",
-        "stakedFor": "已为 {account} 质押",
-        "unstakedFor": "已为 {account} 解除质押",
-        "votedFor": "投票给 {account}",
-        "unvotedFor": "取消投票给 {account}",
         "stakingTransaction": "质押交易",
         "unstakingTransaction": "取消质押交易",
+        "votingTransaction": "投票交易",
+        "unvotingTransaction": "取消投票交易",
+        "participationTransaction": "参与交易",
         "receiving": "接收",
         "sending": "发送",
         "legacyNetwork": "旧的网络",
@@ -1072,14 +1190,19 @@
         "unknown": "未知",
         "none": "无",
         "staked": "已质押",
+        "voted": "已投票",
         "unstaked": "解除质押",
+        "unvoted": "已取消投票",
         "staking": "质押",
         "unstaking": "正在解除质押",
         "notStaked": "未质押",
         "stakedFunds": "已质押资金",
         "unstakedFunds": "未质押的资金",
+        "voting": "投票中",
+        "unvoting": "取消投票中...",
         "accountColor": "钱包颜色",
         "myAssets": "我的资产",
+        "option": "选项",
         "total": "总计: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
         "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
-        "participating": "请稍候，直到所有质押/投票的交易完成后才能变更钱包。"
+        "participating": "请您等待完成质押/投票后再更换钱包。",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "钱包",
-        "staking": "质押"
+        "staking": "质押",
+        "governance": "治理"
     }
 }

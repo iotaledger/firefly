@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Envía, recibe y gestiona tus tokens IOTA",
-            "body": "Firefly es el software oficial de billetera de IOTA."
+            "body": "Firefly es la billetera oficial de IOTA."
         },
         "legal": {
             "title": "Política de privacidad y términos de servicio",
@@ -11,15 +11,15 @@
         },
         "crashReporting": {
             "title": "Informes de fallos",
-            "body": "Ayude a los desarrolladores a mejorar Firefly enviando automáticamente datos de diagnóstico cuando ocurre un error o cierre inesperado.",
+            "body": "Ayude a los desarrolladores a mejorar Firefly enviando automáticamente datos de diagnóstico cuando ocurre un error o fallo inesperado.",
             "checkbox": "Enviar informe de fallos a la Fundación IOTA"
         },
         "appearance": {
             "title": "Apariencia",
-            "body": "Elije el tema de tu app."
+            "body": "Elije el tema de tu aplicación."
         },
         "profile": {
-            "title": "Crear un perfil",
+            "title": "Crear perfil",
             "profileName": "Nombre de perfil",
             "body1": "Puedes crear varios perfiles de usuario para organizar tus billeteras y mejorar la privacidad.",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "Configurar una billetera",
+            "title": "Configurar billetera",
             "chrysalisTitle": "Actualización de red Chrysalis",
             "chrysalisBody": "Desde el 21 de abril de 2021 los usuarios pueden migrar sus tokens a la nueva red Chrysalis. Le recomendamos que migre sus tokens existentes lo antes posible.",
             "learnMore": "Aprende acerca de la migración"
@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Verifica tu código PIN",
             "body1": "Su PIN mantiene su saldo y sus transacciones en privado.",
-            "body2": "Vuelva a introducir su código PIN para continuar. "
+            "body2": "Vuelve a introducir tu código PIN para continuar."
         },
         "backup": {
             "title": "Respalda tu billetera",
@@ -490,7 +490,7 @@
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Respalda tus billeteras",
                     "lastBackup": "Tu última copia de seguridad {date}",
                     "notBackedUp": "No está respaldado",
                     "button": "Respaldo"
@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking está abierto",
                     "holding": "{duration} para finalizar el staking",
                     "ended": "El Staking ha finalizado",
-                    "inactive": "No se han detectado eventos de Staking"
+                    "inactive": "No se han detectado eventos de Staking",
+                    "fetching": "Obteniendo información del evento Staking..."
                 },
                 "bodies": {
                     "upcoming": "Pon en stake tus {token} tokens para recibir automáticamente recompensas cada 10 segundos una vez que el periodo de staking comience el {date}.",
@@ -538,10 +539,10 @@
                 "holding": "Quedan",
                 "commencing": "Hasta que comience el staking",
                 "currentStakingPeriod": "Actual periodo de staking",
-                "totalWalletRewards": "Total wallet rewards",
+                "totalWalletRewards": "Recompensas totales de la bileltera",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly es una red multicadena altamente escalable que no requiere de permiso para construir y desplegar contratos inteligentes. Assembly es el futuro de la web3. "
+                    "description": "Assembly es una red multicadena altamente escalable que no requiere de permiso para construir y desplegar contratos inteligentes. Assembly es el futuro de la web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Selección de color",
                 "hexCode": "Codigo de color hexadecimal"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "El peso de mi voto",
+                "info": {
+                    "title": "El peso de tu voto",
+                    "equality": "1000 IOTA = 1 VOTO",
+                    "description1": "El peso de su voto se deriva del saldo de su billetera. Cuando una propuesta de votación se encuentra en la fase de contabilidad, los votos activos se contabilizan y acumulan cada 10 segundos.",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                }
+            },
+            "info": {
+                "title": "Información de gobernanza",
+                "description": "Con la ayuda de la Fundación IOTA, la comunidad IOTA ha desarrollado un protocolo de votación de IOTA, permitiéndote participar en las decisiones de gobierno votando con sus tokens IOTA en Firefly.",
+                "link": "Aprende sobre cómo votar con IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Votación abierta",
+                        "countingStarts": "Comienza el recuento",
+                        "countingStops": "Finaliza el recuento",
+                        "votingOpened": "Votación abierta",
+                        "countingStarted": "Comenzó el recuento",
+                        "countingStopped": "Recuento finalizado"
+                    },
+                    "votingRate": {
+                        "title": "Tasa de votación",
+                        "body": "{amount} generará {votesPerMilestone} votos cada {time, plural, one {# segundo} other {# segundos}}."
+                    },
+                    "countedVotes": {
+                        "title": "Votos contabilizados",
+                        "body": "Los votos se cuentan en intervalos de {time, plural, one {# segundo} other {# segundos}} a lo largo del periodo de recuento. {amount} genera {votesPerMilestone} votos cada {time, plural, one {# segundo} other {# segundos}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Nuevos fondos no utilizados: {amount}",
+                        "body": "Has recibido fondos adicionales para {account}. Puedes votar con estos tokens combinando tu voto."
+                    },
+                    "maximumVotes": {
+                        "title": "Máximo de votos",
+                        "body": "Usted debe seguir votando por el período restante de recontéo para alcanzar su máximo de votos."
+                    },
+                    "chart": {
+                        "totalVotes": "Votes: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Anuncio",
+                    "commencing": "Votación abierta",
+                    "holding": "Contando",
+                    "ended": "Finalizado"
+                },
+                "button": "Ver propuesta",
+                "treasury": {
+                    "notFound": {
+                        "title": "No se puede cargar el voto en la tesorería de la comunidad",
+                        "subtitle": "Please connect to a node that has added this vote",
+                        "buttonConnect": "Conectar a nodo predeterminado",
+                        "buttonSettings": "Ver configuracion de nodo",
+                        "fetching": "Obteniendo información del evento de gobernanza..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "La votación comienza en",
+                "votingProgress": "Tiempo restante",
+                "votingPower": "El peso de tu voto",
+                "votesCounted": "Tus votos contados",
+                "maximumVotes": "Tus votos máximos",
+                "countingStarts": "El recuento comienza en",
+                "currentResult": "Resultado actual",
+                "finalResult": "Resultado final",
+                "answerHeader": {
+                    "activeVoting": "Votación activa",
+                    "selected": "Enviado",
+                    "notSelected": "No seleccionado",
+                    "winner": "Ganador"
+                }
+            },
+            "votes": "votos",
+            "manageVote": "Gestionar voto"
         }
     },
     "popups": {
@@ -671,16 +753,22 @@
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
-            "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera."
+            "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera.",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Estás enviando una transferencia desde una billetera que está haciendo Staking y votando al mismo tiempo. Esto puede quitar el Staking de tus tokens y detener tu voto. Siéntete libre de enviar la transferencia, pero puede que necesites hacer Staking nuevamente y votar de nuevo con tus tokens restantes.",
+                "stake": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
+                "vote": "Estás enviando una transferencia desde una bileltera que está votando actualmente. Esto puede detener tu voto. Siéntete libre de enviar la transferencia, pero puede que tengas que votar de nuevo con tus tockens restantes."
+            }
         },
         "balanceFinder": {
             "title": "Buscador de balances",
             "body": "Realiza una búsqueda más exhaustiva de direcciones para encontrar saldos faltantes y recompensas previas de airdrop. Esto puede tardar un tiempo.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "accountsSearched": "Billeteras buscadas",
+            "addressesSearched": "Direcciones buscadas por billetera",
+            "accountsFound": "Billeteras encontradas",
             "totalWalletBalance": "Balance total",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Presione buscar de nuevo hasta que se muestre su saldo completo.",
             "typePassword": "Escribe tu contraseña para permitir la búsqueda."
         },
         "riskFunds": {
@@ -751,7 +839,7 @@
             "title": "Exportar el historial de transacciones",
             "body": "Exporta el historial de transacciones de la cartera seleccionada. El archivo exportado estará en formato .csv.",
             "profileName": "Nombre del perfil:",
-            "accountName": "Wallet name:",
+            "accountName": "Nombre de bileltera:",
             "typePassword": "Escribe tu contraseña para permitir la exportación"
         },
         "stakingManager": {
@@ -760,7 +848,7 @@
             "totalFundsStaked": "Total de fondos en Staking",
             "stakedSuccessfully": "Tus fondos se han Stakeado para {account}.",
             "unstakedSuccessfully": "Tus fondos han sido quitados de Staking para {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "¿Buscas tus bilelteras? Firefly ha cambiado. Conmute entre las billeteras desde la barra de menú superior."
         },
         "stakingConfirmation": {
             "title": "Confirmar participación",
@@ -774,6 +862,33 @@
             "title": "Fase del staking {periodNumber} de {date}",
             "body": "El staking de IOTA por Assembly continua... Participa en la fase {periodNumber} durante 90 días. ¡Pon en stake tus tokens IOTA y gana recompensas ASMB!",
             "info": "El staking de Shimmer se ha completado y sólo se distribuirán token ASMB."
+        },
+        "governanceManager": {
+            "castYourVote": "Emite tu voto",
+            "castYourVoteInfo": "Estás a punto de votar a favor de la opción {voteValue} ({voteText}) con {amount}",
+            "castingVotes": "Emitiendo votos",
+            "stopVoting": "Dejar de votar",
+            "stopVotingInfo": "¿Estás seguro de que querés dejar de votar a favor de la opción {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Tenga en cuenta que dejar de votar durante el período de recuento no afectará a ningún voto que ya se haya contado",
+            "stoppingVoting": "Dejando de votar",
+            "changeVote": "Cambiar voto",
+            "changeVoteDisclaimer": "Tenga en cuenta que cambiar su voto durante el período de recuento no afectará a ningún voto que ya haya sido contado",
+            "changeVoteInfo": "¿Estás seguro de que quieres cambiar tu voto a Opción {voteValue} ({voteText})?",
+            "changingVote": "Cambiando voto",
+            "manageVotes": "Gestionar votos",
+            "partialVoteInfo": "Has recibido {amount} a {account}. Puedes votar con estos fondos combinándolos con tu voto actual.",
+            "mergeVoteDisclaimer": "Tenga en cuenta que los votos combinados no afectarán a ningún voto que ya haya sido contado",
+            "mergingVotes": "Combinando votos",
+            "votedSuccessfully": "Has comenzado a votar con {account}.",
+            "unvotedSuccessfully": "Has dejado de votar con {account}.",
+            "successPopup": {
+                "castVotesTitle": "Votado con éxito",
+                "stopVotesTitle": "Votación detenida",
+                "mergeVotesTitle": "Voto combinado",
+                "changeVotesTitle": "Voto cambiado",
+                "castBody": "Ahora vas a vota a favor de la opción {voteValue} ({voteText}).",
+                "stopBody": "Has dejado de votar. Esto no afecta a los votos que ya se han contado."
+            }
         },
         "shimmer-info": {
             "title": "Sobre Shimmer",
@@ -805,9 +920,9 @@
             "privPolicyCheckbox": "He leído y acepto la política de privacidad actualizada"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "La forma en que usas Firefly ha cambiado",
+            "body": "El contenido de cada pestaña se encuentra ahora en el contexto de una única billetera. Puede cambiar la billetera seleccionada desde cualquier lugar usando el menú en la barra de título.",
+            "hint": "¿No encuentras una billetera? Usa el buscador de saldo en la configuración para descubrir las carteras usadas anteriormente."
         }
     },
     "charts": {
@@ -931,8 +1046,12 @@
         "merge": "Combinar",
         "mergeFunds": "Mover fondos",
         "done": "Hecho",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "castVotes": "Voto emitido",
+        "changeVotes": "Cambiar voto",
+        "mergeVotes": "Combinar voto",
+        "stopVotes": "Dejar de votar",
+        "okIUnderstand": "Ok, lo entiendo",
+        "readMore": "Leer más"
     },
     "general": {
         "password": "Contraseña",
@@ -990,7 +1109,7 @@
         "profiles": "Perfiles",
         "dev": "Dev",
         "createAccount": "Crear una Billetera",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Añadir una bileltera",
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
@@ -1049,20 +1168,19 @@
         "creatingProfile": "Creando perfil, por favor espere...",
         "fundMigration": "Migración de fondos",
         "accountRemoved": "Esta billetera está oculta. Descúbrela para realizar transferencias.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakedFor": "Stakeado para {account}",
-        "unstakedFor": "Quitado Staking para {account}",
-        "votedFor": "Votado para {account}",
-        "unvotedFor": "Voto quitado para {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "receivingFrom": "Recibiendo desde {account}",
+        "sendingTo": "Enviando a {account}",
+        "receivedFrom": "Recibido de {account}",
+        "sentTo": "Enviado a {account}",
+        "transferringFrom": "Transfiriendo desde {account}",
+        "transferringTo": "Transfiriendo a {account}",
+        "transferFrom": "Transferir desde {account}",
+        "transferTo": "Transferir a {account}",
+        "stakingTransaction": "Transacción de Staking",
+        "unstakingTransaction": "Quitar transacción del Staking",
+        "votingTransaction": "Transacción de votación",
+        "unvotingTransaction": "Transacción sin voto",
+        "participationTransaction": "Transacción de Participación",
         "receiving": "Recibiendo",
         "sending": "Enviando",
         "legacyNetwork": "Red heredada",
@@ -1072,14 +1190,19 @@
         "unknown": "Desconocido",
         "none": "Ninguno",
         "staked": "En Stake",
+        "voted": "Votado",
         "unstaked": "No Stakeado",
+        "unvoted": "Sin votar",
         "staking": "Staking",
         "unstaking": "Quitando Staking",
         "notStaked": "No en stake",
         "stakedFunds": "Fondos en staking",
         "unstakedFunds": "Fondos sin Stake",
+        "voting": "Votando",
+        "unvoting": "Sin votar",
         "accountColor": "Color de la billetera",
-        "myAssets": "My assets",
+        "myAssets": "Mis activos",
+        "option": "Opción",
         "total": "Total: {balance}"
     },
     "dates": {
@@ -1128,9 +1251,11 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Por favor, espere hasta que la sincronización termine para cambiar entre billeteras.",
+        "transferring": "Por favor, espere hasta que todas las transacciones se completen para cambiar entre billeteras.",
+        "participating": "Por favor, espere hasta que haya completado el Staking/votación antes de cambiar entre billeteras.",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1165,7 +1290,7 @@
         "account": {
             "length": "El nombre de tu billetera no puede tener mas de {length, plural, one {# carácter} other {# caracteres}}.",
             "empty": "Debes utilizar tu última billetera antes de crear una nueva.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "El nombre del perfil debe contener al menos 1 carácter.",
             "notEmpty": "Debes transferir tu balance antes de eliminar esta billetera.",
             "duplicate": "Ya existe una billetera con este nombre.",
             "tilde": "El nombre de perfil no puede empezar con el carácter '~'.",
@@ -1177,7 +1302,7 @@
             "syncing": "Hubo un error al sincronizar sus billeteras."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "Las direcciones deben tener {length, plural, one {# carácter} other {# caracteres}} de largo.",
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
             "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
@@ -1220,7 +1345,7 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemotécnico no es válido.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {# carácter} other {# caracteres}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
             "phraseWordCount": "Debe haber 24 palabras en tu frase de recuperación, ahora mismo tiene {length, plural, one {#} other {#}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
@@ -1254,17 +1379,17 @@
             "cannotFindStakingEvent": "No se puede encontrar el evento de Staking.",
             "cannotVisitAirdropWebsite": "No se puede abrir el sitio web de {airdrop}.",
             "invalidStakingEventId": "ID del evento de Staking es inválido.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Falló la búsqueda de las recompensas anteriores, verifique la configuración de su firewall."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "FECHA INCORRECTA",
+        "invalidTime": "HORA INCORRECTA"
     },
     "warning": {
         "node": {
             "http": "El uso de nodos sobre HTTP deja el tráfico sin cifrar y podría plantear un riesgo de seguridad."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "No tienes ningún IOTA."
         }
     },
     "tooltips": {
@@ -1279,7 +1404,7 @@
         "partiallyStakedFunds": {
             "title": "Nuevos fondos sin Stake: {amount}",
             "titleNoFunds": "Nuevos fondos sin Stake",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Has recibido tokens que no están en staking.",
             "body": "Tienes que activar manualmente el staking para estos nuevos fondos para recibir las recompensas de airdrop."
         },
         "stakingMinRewards": {
@@ -1311,12 +1436,13 @@
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "Es necesario que concedas permisos sobre la cámara para poder escaner códigos QR.",
+            "requestInAppSettings": "Si desea conceder permisos de cámara para escanear códigos QR, por favor habilítelo en la configuración de la aplicación."
         }
     },
     "tabs": {
         "wallet": "Billetera",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Gobernanza"
     }
 }
