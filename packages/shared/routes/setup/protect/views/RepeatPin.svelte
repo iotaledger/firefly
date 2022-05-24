@@ -50,7 +50,7 @@
             glimpse
             classes="w-full mx-auto block"
             on:submit={onSubmit}
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             {error}
         />
