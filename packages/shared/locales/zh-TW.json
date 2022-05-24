@@ -485,7 +485,7 @@
                         "legacyConnected": "舊版應用程式已開啟",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
-                        "notDetected": "未檢測到",
+                        "notDetected": "未偵測到",
                         "otherConnected": "App 已開啟"
                     }
                 },
@@ -521,14 +521,15 @@
                     "commencing": "預先質押已開放",
                     "holding": "質押期限剩餘{duration}",
                     "ended": "質押現已結束",
-                    "inactive": "未偵測到質押活動"
+                    "inactive": "未偵測到質押活動",
+                    "fetching": "正在獲取質押的活動資訊..."
                 },
                 "bodies": {
                     "upcoming": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
                     "commencing": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
                     "holdingAndStaking": "您將自動每10秒獲得獎勵。",
-                    "holdingAndNotStaking": "質押您的 {token} 代幣來每10秒獲得獎勵。",
-                    "endedAndDidStake": "{token} 獎勵將分發至您的錢包一旦主網啟動。",
+                    "holdingAndNotStaking": "質押您的 {token} 代幣以獲得每10秒一次的獎勵。",
+                    "endedAndDidStake": "一旦主網啟動，{token} 獎勵將分發至您的錢包。",
                     "endedAndDidNotStake": "你並沒有參與這項空投。",
                     "endedAndDidNotReachMinRewards": "您沒有質押足夠的 {token} 代幣來達到空投獎勵的最低門檻。",
                     "inactive": "在進階設定中開啟網路設定，按下「檢視資訊」並確認現在的節點擁有「參加」功能。"
@@ -555,9 +556,90 @@
         },
         "picker": {
             "color": {
-                "title": "色彩選擇器",
+                "title": "選色工具",
                 "hexCode": "Hex 色碼"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "我的投票權重",
+                "info": {
+                    "title": "你的投票權重",
+                    "equality": "1000 IOTA = 1票",
+                    "description1": "你的投票權重來自你錢包的餘額。當一個投票提案處於計票（Counting）階段時，會每 10 秒對活躍投票進行一次統計和累積。",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                }
+            },
+            "info": {
+                "title": "治理資訊",
+                "description": "在 IOTA 基金會的幫助下，IOTA 社群開發了 IOTA 投票協議，得以讓IOTA代幣持有者藉由 Firefly 錢包進行投票來參與治理決策。",
+                "link": "了解如何使用 IOTA 投票",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "開放投票",
+                        "countingStarts": "開始計算",
+                        "countingStops": "結束計算",
+                        "votingOpened": "已開放投票",
+                        "countingStarted": "已開始計算",
+                        "countingStopped": "已結束計算"
+                    },
+                    "votingRate": {
+                        "title": "投票率",
+                        "body": "每 {time, plural, one {# second} other {# seconds}}，{amount} 將產生 {votesPerMilestone} 張選票。"
+                    },
+                    "countedVotes": {
+                        "title": "已計票",
+                        "body": "在整個計票期間，票數以 {time, plural, one {# second} other {# seconds}} 間隔計票。每 {time, plural, one {# second} other {# seconds}}，{amount} 產生 {votesPerMilestone} 票。"
+                    },
+                    "partiallyVoted": {
+                        "title": "新的未使用資金：{amount}",
+                        "body": "你收到了 {account} 的額外資金。你可以通過合併你的投票，來使用這些代幣進行投票。"
+                    },
+                    "maximumVotes": {
+                        "title": "最大投票數",
+                        "body": "您必須在計票期間內持續投票，才能達到最大投票數。"
+                    },
+                    "chart": {
+                        "totalVotes": "Votes: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "公告",
+                    "commencing": "開放投票",
+                    "holding": "計算中",
+                    "ended": "已結束"
+                },
+                "button": "檢視提案",
+                "treasury": {
+                    "notFound": {
+                        "title": "無法載入社群公庫表決",
+                        "subtitle": "Please connect to a node that has added this vote",
+                        "buttonConnect": "連線到預設節點",
+                        "buttonSettings": "檢視節點設定",
+                        "fetching": "正在取得治理事件資訊..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "表決開放",
+                "votingProgress": "剩餘時間",
+                "votingPower": "你的投票權重",
+                "votesCounted": "您被記錄的票數",
+                "maximumVotes": "您的最高票數",
+                "countingStarts": "計算開始於",
+                "currentResult": "當前成績",
+                "finalResult": "最終成績",
+                "answerHeader": {
+                    "activeVoting": "進行中的表決",
+                    "selected": "已提交",
+                    "notSelected": "未選取",
+                    "winner": "獲勝者"
+                }
+            },
+            "votes": "選票",
+            "manageVote": "管理選票"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "確認交易",
             "body": "您即將發送 {amount} 到",
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
-            "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
+            "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "您正從質押與投票中的錢包，發送交易。這將解除您的代幣質押與停止投票。交易可繼續進行。完成交易後，您需為剩餘的代幣重新質押和投票。",
+                "stake": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
+                "vote": "您正在從投票中的錢包發送交易。這將停止您的投票。交易可繼續進行，但交易後您將需要重新以剩餘的代幣投票。"
+            }
         },
         "balanceFinder": {
             "title": "餘額查詢",
@@ -774,6 +862,33 @@
             "title": "第 {periodNumber} 輪質押活動從 {date} 開始",
             "body": "質押IOTA取得Assembely再度來臨... 參與第 {periodNumber} 輪的90天質押。質押IOTA代幣，賺取ASMB獎勵！",
             "info": "Shimmer質押已完成，僅剩ASMB待分發。"
+        },
+        "governanceManager": {
+            "castYourVote": "投下你的選票",
+            "castYourVoteInfo": "你將以 {amount} 為選項 {voteValue} ({voteText}) 投票",
+            "castingVotes": "投票中",
+            "stopVoting": "停止投票",
+            "stopVotingInfo": "您確定要停止投票給選項 {voteValue} ({voteText}) 嗎？",
+            "stopVotingDisclaimer": "請注意，在計票期間停止投票不會影響任何已計票的選票",
+            "stoppingVoting": "停止投票中",
+            "changeVote": "更改投票",
+            "changeVoteDisclaimer": "請注意，在計票期間更改你的選票，不會影響任何已計票的選票。",
+            "changeVoteInfo": "你確定要將你的投票更改為選項 {voteValue} ({voteText}) 嗎？",
+            "changingVote": "正在更改投票",
+            "manageVotes": "管理投票",
+            "partialVoteInfo": "您已收到 {amount} 至 {account}。您可以將這些資金合併來參與您當前的投票。",
+            "mergeVoteDisclaimer": "請注意，合併選票不會影響任何已計票的選票",
+            "mergingVotes": "合併投票",
+            "votedSuccessfully": "你已開始使用 {account} 進行投票。",
+            "unvotedSuccessfully": "你已停止使用 {account} 投票。",
+            "successPopup": {
+                "castVotesTitle": "投票成功",
+                "stopVotesTitle": "投票已停止",
+                "mergeVotesTitle": "已合併選票",
+                "changeVotesTitle": "投票已變更",
+                "castBody": "你現在正在為選項 {voteValue} ({voteText}) 投票。",
+                "stopBody": "你已停止投票。這不會影響已計票的選票。"
+            }
         },
         "shimmer-info": {
             "title": "關於 Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "合併",
         "mergeFunds": "合併資金",
         "done": "完成",
+        "castVotes": "投票",
+        "changeVotes": "更改投票",
+        "mergeVotes": "合併選票",
+        "stopVotes": "停止投票",
         "okIUnderstand": "好的，我明白",
         "readMore": "更多"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "正在傳送至 {account}",
         "transferFrom": "從 {account} 傳送過來",
         "transferTo": "傳送至 {account}",
-        "stakedFor": "已為 {account} 質押",
-        "unstakedFor": "已為 {account} 解除質押",
-        "votedFor": "已為 {account} 投票",
-        "unvotedFor": "已為 {account} 取消投票",
         "stakingTransaction": "質押交易",
         "unstakingTransaction": "解質押交易",
+        "votingTransaction": "投票的交易",
+        "unvotingTransaction": "取消投票的交易",
+        "participationTransaction": "參與交易",
         "receiving": "收款中",
         "sending": "正在發送",
         "legacyNetwork": "舊版網路",
@@ -1072,14 +1190,19 @@
         "unknown": "未知",
         "none": "無",
         "staked": "已質押",
+        "voted": "已投票",
         "unstaked": "已解除質押",
+        "unvoted": "已取消投票",
         "staking": "質押",
         "unstaking": "正在解除質押",
         "notStaked": "未質押",
         "stakedFunds": "已質押的資金",
         "unstakedFunds": "未質押的資金",
+        "voting": "投票中",
+        "unvoting": "投票取消中",
         "accountColor": "錢包顏色",
         "myAssets": "我的資產",
+        "option": "選項",
         "total": "總額： {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "請等待同步完成才更換錢包。",
         "transferring": "請等待所有交易完成才更換錢包。",
-        "participating": "請等待所有質押/投票交易完成才更換錢包。"
+        "participating": "請等到完成質押/投票後，再更換錢包。",
+        "transferringCreate": "請等待所有交易完成後才增添新錢包。",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "錢包",
-        "staking": "質押"
+        "staking": "質押",
+        "governance": "治理"
     }
 }
