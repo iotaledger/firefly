@@ -55,7 +55,7 @@ export const STAKING_RESULT_URL: string =
 
 export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfront.net/results/staking/'
 
-export const TREASURY_VOTE_EVENT_ID = 'db89a260c03ac2fbd4a62d949dcd591a5fa5ba748ba33e6111046933f9683b44'
+export const TREASURY_VOTE_EVENT_ID = 'f4941891aa2228fab8b81e6590ddc86201cb000f3ad13490dcfa7c292bbd3c36'
 
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
