@@ -1,8 +1,8 @@
-import { Unit } from '@iota/unit-converter'
 import { SendParams } from 'shared/lib/typings/sendParams'
 import { get, writable } from 'svelte/store'
 import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
 import { Stage } from './typings/stage'
+import { Unit } from './units'
 
 /**
  * Beta mode

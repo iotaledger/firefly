@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
     import {
         convertFromFiat,
@@ -12,7 +11,14 @@
     } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
+    import {
+        changeUnits,
+        formatUnitBestMatch,
+        formatUnitPrecision,
+        MAX_NUM_IOTAS,
+        Unit,
+        UNIT_MAP,
+    } from 'shared/lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 
     type AmountUnit = Unit | AvailableExchangeRates

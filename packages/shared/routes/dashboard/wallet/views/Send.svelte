@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import {
@@ -34,7 +33,7 @@
         TransferState,
     } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision, Unit } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { DUST_THRESHOLD, isTransferring, transferState } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
