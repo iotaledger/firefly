@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-    appId: 'org.iota.firefly.mobile',
+    appId: 'org.iota.firefly.mobile.alpha',
     appName: 'Firefly',
     webDir: 'public',
     bundledWebRuntime: false,
