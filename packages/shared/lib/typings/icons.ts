@@ -20,7 +20,7 @@ export enum SettingsIcons {
     crashReporting = 'doc',
     diagnostics = 'tools',
     migrateLedgerIndex = 'ledger',
-    storageDepositBreakdown = 'parchment',
+    storageDepositBreakdown = 'doc',
     transactionHistory = 'export',
     troubleshoot = 'tools',
     documentation = 'doc',
