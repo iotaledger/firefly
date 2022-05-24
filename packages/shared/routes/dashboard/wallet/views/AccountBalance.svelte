@@ -76,7 +76,7 @@
     <button
         on:click={() => onMenuClick()}
         class="{$mobile
-            ? '-top-0'
+            ? 'menu-mobile'
             : 'bg-opacity-10 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg'} px-2 py-3 flex flex-row space-x-1 text-gray-900 dark:text-white absolute top-6 right-6"
     >
         {#each Array(3) as _}
@@ -86,3 +86,12 @@
         {/each}
     </button>
 </div>
+
+<style type="text/scss">
+    .menu-mobile {
+        position: absolute;
+        margin-top: 0px;
+        padding-top: calc(env(safe-area-inset-top) / 1.6);
+        right: 25px;
+    }
+</style>
