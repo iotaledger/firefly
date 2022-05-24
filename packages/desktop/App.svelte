@@ -1,6 +1,12 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
+    import {
+        activeProfile,
+        cleanupEmptyProfiles,
+        isActiveProfileOutdated,
+        migrateActiveProfile,
+        updateNewProfile,
+    } from '@core/profile'
     import {
         accountRouter,
         AppRoute,
@@ -56,6 +62,12 @@
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn } = $activeProfile
+
+    $: if ($loggedIn) {
+        if (isActiveProfileOutdated($activeProfile?.version)) {
+            migrateActiveProfile()
+        }
+    }
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })

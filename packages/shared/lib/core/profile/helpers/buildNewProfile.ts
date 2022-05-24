@@ -1,7 +1,9 @@
 import { getOfficialNetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
+import { PROFILE_VERSION } from '@core/profile'
 import { AvailableExchangeRates } from '@lib/typings/currency'
 import { HistoryDataProps } from '@lib/typings/market'
 import { generateRandomId } from '@lib/utils'
+
 import { IPersistedProfile } from '../interfaces'
 
 /**
@@ -24,6 +26,7 @@ export function buildNewProfile(
         id: generateRandomId(),
         name,
         type: null,
+        version: PROFILE_VERSION,
         networkProtocol,
         networkType,
         lastStrongholdBackupTime: null,

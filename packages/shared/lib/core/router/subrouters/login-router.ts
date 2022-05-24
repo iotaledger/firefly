@@ -15,6 +15,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
     next(event?: FireflyEvent): void {
         let nextRoute: LoginRoute
         const currentRoute = get(this.routeStore)
+
         switch (currentRoute) {
             case LoginRoute.Init: {
                 if (event?.shouldAddProfile) {
@@ -25,11 +26,10 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
-                // TODO: we shouldn't migrate every login..
-                migrateActiveProfile()
                 get(appRouter).next(event)
                 break
         }
+
         this.setNext(nextRoute)
     }
 }
