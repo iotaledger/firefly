@@ -84,6 +84,7 @@ const ElectronApi = {
                 return result.filePath
             }),
 
+    saveStrongholdBackup: ({ allowAccess }) => null,
     exportTransactionHistory: async (defaultPath, contents) =>
         ipcRenderer
             .invoke('show-save-dialog', {

@@ -1,15 +1,17 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
+    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
+    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { localize } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
-    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
+    import { TrackedParticipationItem } from 'shared/lib/participation/types'
 
     export let accountId: string
     export let internal = false
@@ -27,10 +29,13 @@
         Vote = 'vote',
     }
 
+    let treasuryVoteParticipations: TrackedParticipationItem[]
+    $: treasuryVoteParticipations =
+        Object.values($selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID] || {}) ??
+        []
     $: isAccountVoting =
-        Object.values($selectedAccountParticipationOverview?.trackedParticipations || {})?.find((tp) =>
-            tp?.find((p) => p?.endMilestoneIndex === 0)
-        )?.length > 0 ?? false
+        !!treasuryVoteParticipations?.find((trackedParticipation) => trackedParticipation?.endMilestoneIndex === 0) ??
+        false
 
     let activeParticipationType: ActiveParticipationType | ''
     $: {
@@ -103,7 +108,11 @@
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
                 {localize(
                     mustAcknowledgeBelowMinRewardParticipationWarning
-                        ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
+                        ? `popups.transaction.${
+                              activeParticipationType === ActiveParticipationType.Stake
+                                  ? 'sendingFromStakedAccountBelowMinReward'
+                                  : 'sendingFromStakedAccountBelowMinRewardVote'
+                          }`
                         : `popups.transaction.sendingFromActiveParticipationAccount.${activeParticipationType}`
                 )}
             </Text>

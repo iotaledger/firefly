@@ -159,7 +159,7 @@
         if (!isSoftwareProfile) {
             transferState.set(null)
         }
-
+        activeFlow = getActiveFlow()
         isPerformingParticipation.set(false)
         participationAction.set(undefined)
     }

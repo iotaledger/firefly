@@ -80,7 +80,7 @@ export function participate(
             onSuccess(response: Event<ParticipateResponsePayload>) {
                 response.payload.forEach((message) => saveNewMessage(accountId, message))
 
-                addNewPendingParticipation(response.payload, accountId, action)
+                addNewPendingParticipation(response.payload, accountId, action, participations)
 
                 const eventIds = participations.map((participation) => participation.eventId)
                 updateParticipationHistoryFromPayload(response.payload, accountId, action, eventIds)
