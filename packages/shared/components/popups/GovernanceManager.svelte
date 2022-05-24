@@ -46,7 +46,7 @@
         $pendingParticipations?.length !== 0 ||
         !!$participationAction ||
         $isChangingParticipation
-    $: isAlreadyVotingNextVote = $currentAccountTreasuryVoteValue === nextVote.value
+    $: isAlreadyVotingNextVote = $currentAccountTreasuryVoteValue === nextVote?.value
     $: canMergeVotes = isAlreadyVotingNextVote && $hasCurrentAccountReceivedFundsSinceLastTreasuryVote
     $: activeFlow, (title = getTitleText())
 
