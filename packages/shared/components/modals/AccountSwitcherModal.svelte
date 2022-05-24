@@ -3,7 +3,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { IAccountState } from '@core/account'
-    import { formatBestMatchTokenAmount } from '@core/wallet'
+    import { formatTokenAmountBestMatch } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AccountSwitcherMenuItem } from 'shared/components/molecules'
     import { HR, Icon, Modal, Text } from 'shared/components'
@@ -42,7 +42,7 @@
         <Text classes="opacity-50" type="h5">
             {localize('general.total', {
                 values: {
-                    balance: formatBestMatchTokenAmount(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol]),
+                    balance: formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol]),
                 },
             })}
         </Text>

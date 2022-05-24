@@ -5,8 +5,9 @@
     import { activeProfile } from '@core/profile'
     import { getNetwork, NetworkType, nodeInfo } from '@core/network'
     import { IAccountState } from '@core/account'
+    import { Recipient } from '@core/wallet'
 
-    export let recipient: string | IAccountState
+    export let recipient: Recipient
     export let disabled = false
 
     const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
@@ -20,7 +21,11 @@
     let error: string
     let hasFocus: boolean
 
-    $: recipient = selectedAccount ? selectedAccount : value
+    $: recipient = {
+        type: selectedAccount ? 'account' : 'address',
+        ...(selectedAccount && { account: selectedAccount }),
+        ...(!selectedAccount && { address: value }),
+    }
     $: hasFocus && (error = '')
     $: hasFocus && modal?.open()
     $: value && modal?.open()
