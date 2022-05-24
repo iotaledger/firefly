@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
     import { formatDate, localize } from '@core/i18n'
@@ -133,7 +134,9 @@
 
 <div class="flex flex-col h-full min-h-0">
     <div
-        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+        class="{$mobile
+            ? 'px-6 pt-10'
+            : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
             'opacity-50'}"
     >
         <div class="flex flex-col flex-wrap justify-center items-center text-center">

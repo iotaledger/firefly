@@ -48,7 +48,7 @@
     }
 </script>
 
-<div class="flex flex-col py-10 px-2">
+<div class="flex flex-col py-10 px-2 w-full">
     <!-- Customize -->
     <button
         on:click={() => handleCustomiseAccountClick()}

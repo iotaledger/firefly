@@ -41,7 +41,7 @@
     
 </script>
 
-<div class="flex flex-col px-6 py-10">
+<div class="flex flex-col px-6 py-10 w-full">
     <div class="mb-5">
         <Text type="h4">{localize('general.switchWallet')}</Text>
     </div>

@@ -422,7 +422,6 @@
                 <div class="flex">
                     <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
                     <Drawer
-                        dimLength={180}
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         onClose={() => accountRoute.set(AccountRoute.Init)}

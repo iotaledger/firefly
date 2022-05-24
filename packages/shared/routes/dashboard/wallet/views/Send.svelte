@@ -561,7 +561,7 @@
         </div>
     </div>
     {#if !$isTransferring}
-        <div class="flex flex-row justify-between px-2">
+        <div class="{$mobile && 'mt-12'} flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                 {localize('actions.cancel')}
             </Button>
