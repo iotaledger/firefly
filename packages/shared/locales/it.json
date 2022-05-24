@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Verifica il tuo codice PIN",
             "body1": "Il PIN mantiene privato il tuo saldo e le tue transazioni.",
-            "body2": "Reinserisci il codice PIN per procedere. "
+            "body2": "Reinserisci il tuo codice PIN per procedere."
         },
         "backup": {
             "title": "Esegui il backup del tuo portafoglio",
@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking iniziato",
                     "holding": "{duration} di staking rimanente",
                     "ended": "Lo staking è terminato",
-                    "inactive": "Nessun evento di staking rilevato"
+                    "inactive": "Nessun evento di staking rilevato",
+                    "fetching": "Recupero informazioni evento staking..."
                 },
                 "bodies": {
                     "upcoming": "Metti in stake i tuoi {token} token per ricevere automaticamente ricompense ogni 10 secondi una volta che lo staking inizia il {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Ricompense totali del portafoglio",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assemblaggio è una rete permissionless, multi-chain altamente scalabile per costruire e distribuire smart contract componibili. Assembly è il futuro del web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Selezione Colore",
                 "hexCode": "Codice colore"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Il peso del mio voto",
+                "info": {
+                    "title": "Il peso del tuo voto",
+                    "equality": "1000 IOTA = 1 VOTO",
+                    "description1": "Il peso del tuo voto deriva dal tuo saldo del portafoglio. Quando una proposta di voto è in fase di Conteggio, i voti attivi sono contati e accumulati ogni 10s.",
+                    "description2": "1 Ki di peso di voto (1000 gettoni IOTA) restituisce 1 voto ogni 10s. Questo significa che è necessario mantenere il voto per tutta la durata della fase di Conteggio per emettere il vostro peso di voto completo."
+                }
+            },
+            "info": {
+                "title": "Informazioni sulla governance",
+                "description": "Con l'aiuto della Fondazione IOTA, la comunità IOTA ha sviluppato un protocollo di voto IOTA, ti permette di partecipare alle decisioni di governance votando con i tuoi gettoni IOTA con Firefly.",
+                "link": "Impara a votare con IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Votazione aperta",
+                        "countingStarts": "Conteggio iniziato",
+                        "countingStops": "Conteggio terminato",
+                        "votingOpened": "Votazione aperta",
+                        "countingStarted": "Conteggio iniziato",
+                        "countingStopped": "Conteggio terminato"
+                    },
+                    "votingRate": {
+                        "title": "Tasso di voto",
+                        "body": "{amount} genererà {votesPerMilestone} voti ogni {time, plural, one {# secondo} other {# secondi}}."
+                    },
+                    "countedVotes": {
+                        "title": "Voti contati",
+                        "body": "I voti sono contati a intervalli di {time, plural, one {# secondo} other {# secondi}} per tutto il periodo di conteggio. {amount} genera {votesPerMilestone} voti ogni {time, plural, one {# secondo} other {# secondi}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Nuovi fondi inutilizzati: {amount}",
+                        "body": "Hai ricevuto fondi aggiuntivi a {account}. Puoi votare con questi token unendoli al tuo voto."
+                    },
+                    "maximumVotes": {
+                        "title": "Numero massimo di voti",
+                        "body": "Devi continuare a votare per il restante periodo di Conteggio per raggiungere il massimo dei voti."
+                    },
+                    "chart": {
+                        "totalVotes": "Voti: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Comunicazione",
+                    "commencing": "Votazione aperta",
+                    "holding": "Conteggio",
+                    "ended": "Terminato"
+                },
+                "button": "Visualizza la proposta",
+                "treasury": {
+                    "notFound": {
+                        "title": "Impossibile caricare il Community Treasury vote",
+                        "subtitle": "Si prega di connettersi a un nodo configurato per gestire questo voto",
+                        "buttonConnect": "Connetti al nodo predefinito",
+                        "buttonSettings": "Visualizza impostazioni del nodo",
+                        "fetching": "Recupero informazioni sull'evento di governance..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Le votazioni iniziano il",
+                "votingProgress": "Tempo residuo",
+                "votingPower": "Il peso del tuo voto",
+                "votesCounted": "Contateggio dei tuoi voti",
+                "maximumVotes": "I tuoi voti massimi",
+                "countingStarts": "Il conteggio inizia il",
+                "currentResult": "Risultato attuale",
+                "finalResult": "Risultato finale",
+                "answerHeader": {
+                    "activeVoting": "Votazioni attive",
+                    "selected": "Inviato",
+                    "notSelected": "Non selezionato",
+                    "winner": "Vincitore"
+                }
+            },
+            "votes": "voti",
+            "manageVote": "Gestisci il voto"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Conferma la transazione",
             "body": "Stai per inviare {amount} a",
             "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
-            "sendingFromStakedAccountBelowMinReward": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio."
+            "sendingFromStakedAccountBelowMinReward": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
+                "stake": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
+                "vote": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti."
+            }
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
@@ -774,6 +862,33 @@
             "title": "Fase di Staking {periodNumber} da {date}",
             "body": "Lo staking di IOTA per Assembly continua... Partecipa alla fase {periodNumber} per 90 giorni. Metti in stake i tuoi token IOTA e ricevi premi ASMB!",
             "info": "Lo staking per Shimmer è completato, solo i token ASMB saranno distribuiti."
+        },
+        "governanceManager": {
+            "castYourVote": "Esprimi il tuo voto",
+            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
+            "castingVotes": "Casting votes",
+            "stopVoting": "Stop voting",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
+            "stoppingVoting": "Stopping voting",
+            "changeVote": "Change vote",
+            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
+            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
+            "changingVote": "Changing vote",
+            "manageVotes": "Manage votes",
+            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergingVotes": "Merging votes",
+            "votedSuccessfully": "You have started voting with {account}.",
+            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "successPopup": {
+                "castVotesTitle": "Voted successfully",
+                "stopVotesTitle": "Voting stopped",
+                "mergeVotesTitle": "Vote merged",
+                "changeVotesTitle": "Vote changed",
+                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
+                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+            }
         },
         "shimmer-info": {
             "title": "Informazioni su Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Unisci",
         "mergeFunds": "Unisci fondi",
         "done": "Completato",
+        "castVotes": "Cast votes",
+        "changeVotes": "Change vote",
+        "mergeVotes": "Merge vote",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "OK, ho capito",
         "readMore": "Leggi di più"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Trasferimento a {account}",
         "transferFrom": "Trasferimento da {account}",
         "transferTo": "Trasferisci a {account}",
-        "stakedFor": "In stake per {account}",
-        "unstakedFor": "Tolto dallo stake per {account}",
-        "votedFor": "Votato per {account}",
-        "unvotedFor": "Tolto dal voto per {account}",
         "stakingTransaction": "Transazione per staking",
         "unstakingTransaction": "Transazione per rimozione staking",
+        "votingTransaction": "Voting Transaction",
+        "unvotingTransaction": "Unvoting Transaction",
+        "participationTransaction": "Participation Transaction",
         "receiving": "Ricezione",
         "sending": "Invio",
         "legacyNetwork": "Rete Legacy",
@@ -1072,14 +1190,19 @@
         "unknown": "Sconosciuto",
         "none": "Nessuno",
         "staked": "In staking",
+        "voted": "Voted",
         "unstaked": "Tolto dallo staking",
+        "unvoted": "Unvoted",
         "staking": "Staking",
         "unstaking": "Togliere dallo staking",
         "notStaked": "Non in stake",
         "stakedFunds": "Fondi in staking",
         "unstakedFunds": "Fondi non in staking",
+        "voting": "Voting",
+        "unvoting": "Unvoting",
         "accountColor": "Colore Wallet",
         "myAssets": "I miei Asset",
+        "option": "Option",
         "total": "Saldo totale"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Attendere che la sincronizzazione sia terminata per cambiare wallet.",
         "transferring": "Attendere fino al completamento di tutte le transazioni per cambiare wallet.",
-        "participating": "Attendere fino al completamento di tutte le transazioni staking/voto per cambiare wallet."
+        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "transferringCreate": "Attendere fino al completamento di tutte le transazioni per cambiare wallet.",
+        "participatingCreate": "Si prega di attendere fino a quando hai completato lo stacking/votazione prima di aggiungere un nuovo portafoglio."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Portafoglio",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Governance"
     }
 }
