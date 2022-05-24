@@ -172,17 +172,17 @@
             </div>
         {/if}
         <div class="w-full mt-4 flex flex-col items-center text-center">
-            <Text type="h2" classes="mb-6">{header}</Text>
+            <Text type="h2" classes="mb-4">{header}</Text>
             <Text type="p">{body}</Text>
-            <Link onClick={onClickLearnMore} classes="mt-6 text-14">{localize('actions.readMore')}</Link>
+            <Link onClick={onClickLearnMore} classes="mt-4 text-14">{localize('actions.readMore')}</Link>
         </div>
     {/if}
 </div>
 
 <style type="text/scss">
     .animation-wrapper {
-        max-height: calc(100% - 80px);
+        max-height: calc(100% - 120px);
         max-width: 700px;
-        padding-bottom: 66.56%;
+        padding-bottom: 58%;
     }
 </style>

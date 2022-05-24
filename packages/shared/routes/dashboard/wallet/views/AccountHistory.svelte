@@ -1,29 +1,31 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { ActivityDetail, ActivityRow, Icon, Input, Text } from 'shared/components'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { getMessageParticipationAction } from 'shared/lib/participation'
+    import { ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import {
-        api,
-        isSyncing,
-        getIncomingFlag,
-        isFirstSessionSync,
-        selectedAccountStore,
-        selectedMessage,
-        sendAddressFromTransactionPayload,
-        receiverAddressesFromTransactionPayload,
-        walletSetupType,
-        accountSyncingQueueStore,
-        selectedAccountIdStore,
-        currentSyncingAccountStore,
-    } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
     import { AccountMessage } from 'shared/lib/typings/wallet'
-    import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { debounce, isValueInUnitRange, unitToValue } from 'shared/lib/utils'
+    import {
+        api,
+        currentSyncingAccountStore,
+        getIncomingFlag,
+        isFirstSessionSync,
+        isParticipationPayload,
+        isSyncing,
+        receiverAddressesFromTransactionPayload,
+        selectedAccountIdStore,
+        selectedAccountStore,
+        selectedMessage,
+        sendAddressFromTransactionPayload,
+        walletSetupType,
+    } from 'shared/lib/wallet'
 
     export let transactions: AccountMessage[] = []
 
@@ -119,6 +121,7 @@
         if (searchValue) {
             queryTransactions = filteredTransactions.filter((transaction) => {
                 const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
+                const participationAction = getMessageParticipationAction(transaction.id)
                 return (
                     sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
                     receiverAddressesFromTransactionPayload(transaction?.payload).find(
@@ -129,7 +132,11 @@
                     (searchValue[0] === '<' && unitToValue(searchValue.substring(1)) > transactionValue) ||
                     (searchValue[1] === 'i' && isValueInUnitRange(transactionValue, searchValue)) ||
                     transactionValue === unitToValue(searchValue) ||
-                    formatUnitBestMatch(transactionValue).toString().toLowerCase()?.includes(searchValue)
+                    formatUnitBestMatch(transactionValue).toString().toLowerCase()?.includes(searchValue) ||
+                    // literal string match with participation actions
+                    (transaction?.payload?.type === 'Transaction' &&
+                        isParticipationPayload(transaction?.payload) &&
+                        getParticipationActionLocale(participationAction)?.toLowerCase()?.includes(searchValue))
                 )
             })
         }
@@ -154,6 +161,21 @@
         return (
             $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && transactions.length === 0
         )
+    }
+
+    function getParticipationActionLocale(action: ParticipationAction): string {
+        switch (action) {
+            case ParticipationAction.Stake:
+                return localize('general.stakingTransaction')
+            case ParticipationAction.Vote:
+                return localize('general.votingTransaction')
+            case ParticipationAction.Unstake:
+                return localize('general.unstakingTransaction')
+            case ParticipationAction.Unvote:
+                return localize('general.unvotingTransaction')
+            default:
+                return localize('general.participationTransaction')
+        }
     }
 </script>
 
