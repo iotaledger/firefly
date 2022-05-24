@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Icon, ProgressFlow, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
 

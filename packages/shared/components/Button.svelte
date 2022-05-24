@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
 

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import { Locale } from '@core/i18n'
     import { ImportRouter } from '@core/router'

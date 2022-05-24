@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from '@core/app'
     import { appRouter } from '@core/router'
 
     export let locale: Locale

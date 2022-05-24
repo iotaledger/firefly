@@ -1,9 +1,8 @@
+import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IDeepLinkManager } from '@common/deep-links'
-import { AppSettings } from './app'
 import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
-import { VersionDetails } from './appUpdater'
 import { Error } from './error'
 import { EventMap } from './events'
 import { IBarcodeManager } from './barcodeManager'
@@ -23,7 +22,7 @@ export interface IPlatform {
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string> | string
     getMachineId(): Promise<string>
-    updateAppSettings(settings: Partial<AppSettings>): Promise<void>
+    updateAppSettings(settings: Partial<IAppSettings>): Promise<void>
     getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
@@ -44,11 +43,12 @@ export interface IPlatform {
     PincodeManager: IPincodeManager | undefined
     BarcodeManager: IBarcodeManager | undefined
 
-    getVersionDetails(): Promise<VersionDetails>
-    updateCheck(): Promise<void>
-    updateInstall(): Promise<void>
-    updateCancel(): Promise<void>
-    updateDownload(): Promise<void>
+    getAppVersionDetails(): Promise<IAppVersionDetails>
+
+    checkForAppUpdate(): Promise<void>
+    installAppUpdate(): Promise<void>
+    cancelAppUpdateDownload(): Promise<void>
+    downloadAppUpdate(): Promise<void>
 
     unhandledException(title: string, err: Error | unknown): Promise<void>
 

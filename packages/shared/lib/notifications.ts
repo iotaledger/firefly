@@ -1,4 +1,4 @@
-import { appSettings } from 'shared/lib/appSettings'
+import { appSettings } from '@core/app'
 import { generateRandomId } from 'shared/lib/utils'
 import { get, writable } from 'svelte/store'
 import { Platform } from './platform'

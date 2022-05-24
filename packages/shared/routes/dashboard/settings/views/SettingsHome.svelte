@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { SettingsMenu, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'

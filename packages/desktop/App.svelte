@@ -11,16 +11,21 @@
         appRouter,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
-    import { stage } from 'shared/lib/app'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
+    import {
+        setAppVersionDetails,
+        pollCheckForAppUpdate,
+        appVersionDetails,
+        appSettings,
+        initAppSettings,
+        AppStage,
+        appStage,
+    } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { Stage } from 'shared/lib/typings/stage'
     import {
         Appearance,
         Backup,
@@ -48,7 +53,7 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    stage.set(Stage[process.env.STAGE.toUpperCase()] ?? Stage.ALPHA)
+    appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn } = $activeProfile
 
@@ -90,9 +95,9 @@
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
-        if (!devMode && get(stage) === Stage.PROD) {
-            await getVersionDetails()
-            pollVersion()
+        if (!devMode && get(appStage) === AppStage.PROD) {
+            await setAppVersionDetails()
+            pollCheckForAppUpdate()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
@@ -109,7 +114,7 @@
             openPopup({
                 type: 'version',
                 props: {
-                    currentVersion: $versionDetails.currentVersion,
+                    currentVersion: $appVersionDetails.currentVersion,
                 },
             })
         })

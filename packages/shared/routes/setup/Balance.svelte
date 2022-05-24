@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'

@@ -43,7 +43,7 @@
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
