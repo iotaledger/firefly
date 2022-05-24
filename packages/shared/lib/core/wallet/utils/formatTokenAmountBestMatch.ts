@@ -1,7 +1,7 @@
 import { formatNumber } from '@lib/currency'
+import { getUnit, UNIT_MAP } from '@lib/units'
 import { ITokenMetadata } from '../interfaces'
 import { formatTokenAmountDefault } from './formatTokenAmountDefault'
-import { getUnit, UNIT_MAP } from '@lib/units'
 
 export function formatTokenAmountBestMatch(
     amount: number,
