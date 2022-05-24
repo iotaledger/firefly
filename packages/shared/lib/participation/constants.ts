@@ -10,7 +10,7 @@ export const ASSEMBLY_EVENT_START_DATE = new Date('April 22, 2022')
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '2db71bcf8aad398b49e72d224ca10ee2c811017a5a05d0af0a5b8a4fd7035fd9'
+export const ASSEMBLY_EVENT_ID = '0886dd3625c19fc42d992346836881516221b6d7ed4b58093acbfc7efc015639'
 
 /**
  * The staking event ID for Shimmer.
@@ -55,7 +55,7 @@ export const STAKING_RESULT_URL: string =
 
 export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfront.net/results/staking/'
 
-export const TREASURY_VOTE_EVENT_ID = 'c23c19451d3f5f9ce1fe2a8573b44979a6e06658d8303991af7431e2e586c49b'
+export const TREASURY_VOTE_EVENT_ID = '14cfeedfdcbb9235d593c60ca93560945213e3f1e88f4d3aa33b82b43fff499a'
 
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
