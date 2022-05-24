@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Checkbox, Text, TextHint } from 'shared/components'
-    import { appSettings, initAppSettings } from 'shared/lib/appSettings'
+    import { appSettings, initAppSettings } from '@core/app'
     import { localize } from '@core/i18n'
 </script>
 

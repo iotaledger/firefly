@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { AccountColors } from '@core/account'
     import Chart from 'chart.js'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
     import { convertHexToRGBA } from 'shared/lib/helpers'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'

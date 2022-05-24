@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import { localize } from '@core/i18n'
     import { ProfileImportType } from '@core/profile'

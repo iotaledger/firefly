@@ -1,13 +1,15 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { Locale } from '@core/i18n'
+    import {
+        mobile,
+        lastAcceptedTermsOfService,
+        lastAcceptedPrivacyPolicy,
+        TERMS_OF_SERVICE_VERSION,
+        PRIVACY_POLICY_VERSION,
+    } from '@core/app'
+    import { localize } from '@core/i18n'
     import Content from './Content.svelte'
-    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
-    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
     import { appRouter } from '@core/router'
-
-    export let locale: Locale
 
     let checked = false
     let termsAccepted = false
@@ -15,7 +17,7 @@
     $: termsAccepted = checked
 
     function handleContinueClick(): void {
-        lastAcceptedTos.set(TOS_VERSION)
+        lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         $appRouter.next()
     }
@@ -26,17 +28,17 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{locale('views.legal.title')}</Text>
+        <Text type="h2">{localize('views.legal.title')}</Text>
     </div>
     <div slot="leftpane__content">
         {#if !$mobile}
-            <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
+            <Text type="p" secondary classes="mb-8">{localize('views.legal.body')}</Text>
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col {$mobile ? 'space-y-4' : 'space-y-8'}">
-        <Checkbox label={locale('views.legal.checkbox')} bind:checked />
+        <Checkbox label={localize('views.legal.checkbox')} bind:checked />
         <Button classes="w-full" disabled={!termsAccepted} onClick={() => handleContinueClick()}>
-            {locale('actions.continue')}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class={!$mobile && 'w-full h-full flex items-center px-40 py-20'}>

@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
     import { Button, Checkbox, Text, TextHint } from 'shared/components'
-    import { appSettings, initAppSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
+    import { appSettings, IAppSettings, initAppSettings, isAwareOfCrashReporting } from '@core/app'
     import { localize } from '@core/i18n'
     import { closePopup as closePopupInternal } from 'shared/lib/popup'
-    import { AppSettings } from 'shared/lib/typings/app'
 
     let sendCrashReports = true
 
@@ -15,7 +14,7 @@
     }
 
     const handleConfirmClick = () => {
-        appSettings.set(<AppSettings>{ ...$appSettings, sendCrashReports })
+        appSettings.set({ ...$appSettings, sendCrashReports })
 
         closePopup()
     }
