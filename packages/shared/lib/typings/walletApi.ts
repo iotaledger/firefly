@@ -22,8 +22,9 @@ import {
 import { LedgerStatus } from './ledger'
 import { Message } from './message'
 import { AddressInput, MigrationBundle, MigrationData, SendMigrationBundleResponse } from './migration'
-import { IAuth, INodeInfo } from '@core/network'
+import { IAuth } from '@core/network'
 import { Duration, StrongholdStatus } from './wallet'
+import type { INodeInfo } from '@iota/types'
 
 export interface IWalletApi {
     generateMnemonic(callbacks: {

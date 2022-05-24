@@ -1,5 +1,6 @@
 import { IAccount } from '@core/account'
-import { IAuth, INodeInfoResponse } from '@core/network'
+import { IAuth } from '@core/network'
+import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
 import { AccountId, AccountSyncOptions, ClientOptions, CreateAccountPayload, EventType } from '@iota/wallet'
 
 export interface IProfileManager {

@@ -1,7 +1,8 @@
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@lib/time'
 import { NetworkStatusDescription } from '../constants'
 import { NetworkHealth, NodePlugin } from '../enums'
-import { IStardustNodeInfo, INetworkStatus } from '../interfaces'
+import { INetworkStatus } from '../interfaces'
+import { INodeInfo } from '@iota/types'
 
 /**
  * Update the network status store from the NodeInfo.
@@ -10,7 +11,7 @@ import { IStardustNodeInfo, INetworkStatus } from '../interfaces'
  * @param {IStardustNodeInfo} NodeInfo
  * @returns {INetworkStatus}
  */
-export function getNetworkStatusFromNodeInfo(nodeInfo: IStardustNodeInfo): INetworkStatus {
+export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatus {
     const timeSinceLastMsInMinutes =
         (Date.now() - nodeInfo.status.latestMilestone.timestamp * MILLISECONDS_PER_SECOND) /
         (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
@@ -25,7 +26,7 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: IStardustNodeInfo): INetw
     const description = NetworkStatusDescription?.[health]
 
     return {
-        messagesPerSecond: nodeInfo.metrics.messagesPerSecond,
+        messagesPerSecond: nodeInfo.metrics.blocksPerSecond,
         referencedRate: nodeInfo.metrics.referencedRate,
         health,
         description,
