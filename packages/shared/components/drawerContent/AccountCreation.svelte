@@ -31,7 +31,7 @@
         }
     }
 
-    const handleCreateClick = () => {
+    function handleCreateClick() {
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias) {
             error = ''
