@@ -77,6 +77,9 @@
 </Drawer>
 
 <style>
+    header {
+        border-top: solid transparent calc(env(safe-area-inset-top) / 1.5);
+    }
     .menu-button {
         background-color: var(--background-color);
         margin-top: calc(env(safe-area-inset-top) + 10px);
