@@ -26,7 +26,7 @@
     export let fullScreen = false
     export let preventClose = false
     export let zIndex = 'z-30'
-    export let onClose
+    export let onClose = (): void => {}
 
     const dispatch = createEventDispatcher()
 
