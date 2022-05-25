@@ -444,7 +444,7 @@
                 </div>
                 <div class="flex flex-1">
                     <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
-                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />/>
+                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                     </DashboardPane>
                 </div>
             </div>
