@@ -71,7 +71,7 @@
         <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
             <div class="flex items-center space-x-2 ">
                 <Icon width="18" icon="arrow-left" classes="text-gray-800 dark:text-gray-500" />
-                <Text overrideColor classes="text-gray-800 dark:text-gray-500">{backButtonText}</Text>
+                <Text overrideColor classes="back-button-text text-gray-800 dark:text-gray-500">{backButtonText}</Text>
             </div>
         </button>
     {/if}
@@ -81,5 +81,8 @@
 <style type="text/scss">
     div {
         width: calc(100% - 14rem);
+        :global(.back-button-text) {
+            word-break: keep-all;
+        }
     }
 </style>
