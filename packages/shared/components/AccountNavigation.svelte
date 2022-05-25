@@ -38,7 +38,10 @@
 </script>
 
 <div class="flex flex-auto flex-col">
-    <button on:click={toggleAccountSwitcher} class="flex flex-row justify-center items-center space-x-2">
+    <button 
+        on:click={toggleAccountSwitcher} 
+        class=" {$mobile && 'ml-5 mt-3 p-2 fixed left-1/3 rounded-xl'} flex flex-row justify-center items-center space-x-2"
+    >
         {#if !$mobile}
             <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
         {/if}
@@ -48,7 +51,7 @@
                 height="18"
                 width="18"
                 icon="chevron-down"
-                classes={$mobile ? `text-${textColor}` : 'text-gray-800 dark:text-white'}
+                classes="text-gray-800 dark:text-white"
             />
         </div>
     </button>

@@ -32,8 +32,8 @@
 </script>
 
 <button
-    class="menu-button fixed top-5 left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="background-color: {color};"
+    class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
+    style="--background-color: {color};"
     on:click={handleClick}
 >
     <Text type="h4" classes="z-10 uppercase text-{textColor}">{profileInitial || 'A'}</Text>
@@ -77,11 +77,9 @@
 </Drawer>
 
 <style>
-    header {
-        border-top: solid transparent calc(env(safe-area-inset-top) / 1.5);
-    }
     .menu-button {
-        padding-top: env(safe-area-inset-top);
+        background-color: var(--background-color);
+        margin-top: calc(env(safe-area-inset-top) + 10px);
     }
     .profile-block {
         grid-template-columns: auto 1fr;

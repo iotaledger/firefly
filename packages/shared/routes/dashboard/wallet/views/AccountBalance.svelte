@@ -28,7 +28,7 @@
 
 <div
     class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 {$mobile
-        ? 'pb-0 bg-transparent'
+        ? 'pb-0 pt-20 bg-transparent'
         : 'pb-12'} {classes}"
 >
     <!-- Balance -->
@@ -58,7 +58,7 @@
     </div>
     {#if $accountRoute === AccountRoute.Init || $mobile}
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7">
+        <div class="flex flex-row justify-between space-x-4 mt-7 {$mobile && 'mb-10'}">
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}
@@ -90,8 +90,7 @@
 <style type="text/scss">
     .menu-mobile {
         position: absolute;
-        margin-top: 0px;
-        padding-top: calc(env(safe-area-inset-top) / 1.6);
+        margin-top: -8px;
         right: 25px;
     }
 </style>
