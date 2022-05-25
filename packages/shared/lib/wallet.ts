@@ -1099,7 +1099,7 @@ export async function processLoadedAccounts(accounts: Account[]): Promise<void> 
 
             const accountMetadata = await asyncGetAccountMetadata(account.id)
             const preparedAccount = formatAccountWithMetadata(account, accountMetadata)
-            // we first need to check if we wallet is already populated with this account
+            // we first need to check if the store is already populated with this account
             const indexExistingAccountInStore = get(accountsStore).findIndex(
                 (_account) => _account.id === preparedAccount.id
             )
