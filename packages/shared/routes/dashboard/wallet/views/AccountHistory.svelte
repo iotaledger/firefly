@@ -235,9 +235,9 @@
             {/if}
         </div>
     {/if}
-    {#if $selectedMessage && $mobile}
-        <Drawer opened={true} bind:this={drawer}>
-            <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
-        </Drawer>
-    {/if}
 </div>
+{#if $selectedMessage && $mobile}
+    <Drawer opened={true} bind:this={drawer}>
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+    </Drawer>
+{/if}
