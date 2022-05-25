@@ -2,12 +2,12 @@
     import { TextInput } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    export let inputElement
+    export let inputElement: HTMLInputElement
 
     export let disabled = false
     export let hasFocus = false
-    export let value
-    export let integer
+    export let value: string
+    export let isInteger: boolean
 </script>
 
 <TextInput
@@ -16,7 +16,7 @@
     bind:hasFocus
     {disabled}
     placeholder={localize('general.amount')}
-    float={!integer}
-    {integer}
+    float={!isInteger}
+    integer={isInteger}
     {...$$restProps}
 />

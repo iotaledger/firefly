@@ -2,7 +2,7 @@
     import { FontWeight, FontWeightText, TextType } from 'shared/components/Text.svelte'
     import Input from './Input.svelte'
 
-    export let inputElement
+    export let inputElement: HTMLInputElement
 
     export let value: string
     export let hasFocus: boolean
