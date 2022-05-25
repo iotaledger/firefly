@@ -237,7 +237,9 @@
     {/if}
 </div>
 {#if $selectedMessage && $mobile}
-    <Drawer opened={true} bind:this={drawer}>
-        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+    <Drawer opened={true} bind:this={drawer} classes="" onClose={() => (handleBackClick())}>
+        <div class="overflow-y-auto h-2/3 space-y-2.5">
+            <ActivityDetail {...$selectedMessage} />
+        </div>
     </Drawer>
 {/if}
