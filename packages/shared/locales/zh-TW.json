@@ -567,7 +567,7 @@
                     "title": "你的投票權重",
                     "equality": "1000 IOTA = 1票",
                     "description1": "你的投票權重來自你錢包的餘額。當一個投票提案處於計票（Counting）階段時，會每 10 秒對活躍投票進行一次統計和累積。",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki的投票權重(1000 IOTA代幣)，每10秒可產生1票。這意味您必須在計票期間持續投票，才能達成完成投票權重。"
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "您必須在計票期間內持續投票，才能達到最大投票數。"
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "投票數: {amount}"
                     }
                 }
             },
@@ -615,10 +615,10 @@
                 "treasury": {
                     "notFound": {
                         "title": "無法載入社群公庫表決",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "請連至已添加此投票的節點",
                         "buttonConnect": "連線到預設節點",
                         "buttonSettings": "檢視節點設定",
-                        "fetching": "正在取得治理事件資訊..."
+                        "fetching": "正在取得治理活動資訊..."
                     }
                 }
             },
@@ -754,7 +754,7 @@
             "body": "您即將發送 {amount} 到",
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
             "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "您正從未達質押門檻的錢包發送交易。這將解除錢包內的代幣質押，並錯失質押獎勵。您也必須重新投票。",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "您正從質押與投票中的錢包，發送交易。這將解除您的代幣質押與停止投票。交易可繼續進行。完成交易後，您需為剩餘的代幣重新質押和投票。",
                 "stake": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
@@ -906,7 +906,7 @@
         },
         "crashReporting": {
             "title": "當機回報",
-            "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly，此選項會在重啟Firefly之後生效。",
+            "body": "自動回報錯誤診斷資訊，以協助開發者改善Firefly。若選取，將於重啟Firefly後生效。",
             "checkbox": "發送當機報告給IOTA基金會"
         },
         "legalUpdate": {
@@ -1168,9 +1168,9 @@
         "creatingProfile": "正在創建設定檔，請稍候...",
         "fundMigration": "資金遷移",
         "accountRemoved": "此錢包是隱藏的。 取消隱藏即可執行傳送。",
-        "receivingFrom": "正接收來自 {account}",
+        "receivingFrom": "正接收自 {account}",
         "sendingTo": "正發送至 {account}",
-        "receivedFrom": "已收到來自 {account}",
+        "receivedFrom": "接收自 {account}",
         "sentTo": "已發送至 {account}",
         "transferringFrom": "正從 {account} 傳送過來",
         "transferringTo": "正在傳送至 {account}",
@@ -1178,7 +1178,7 @@
         "transferTo": "傳送至 {account}",
         "stakingTransaction": "質押交易",
         "unstakingTransaction": "解質押交易",
-        "votingTransaction": "投票的交易",
+        "votingTransaction": "投票交易",
         "unvotingTransaction": "取消投票的交易",
         "participationTransaction": "參與交易",
         "receiving": "收款中",
@@ -1199,7 +1199,7 @@
         "stakedFunds": "已質押的資金",
         "unstakedFunds": "未質押的資金",
         "voting": "投票中",
-        "unvoting": "投票取消中",
+        "unvoting": "取消投票中",
         "accountColor": "錢包顏色",
         "myAssets": "我的資產",
         "option": "選項",
@@ -1255,7 +1255,7 @@
         "transferring": "請等待所有交易完成才更換錢包。",
         "participating": "請等到完成質押/投票後，再更換錢包。",
         "transferringCreate": "請等待所有交易完成後才增添新錢包。",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "participatingCreate": "請等到完成質押/投票後，再新增錢包。"
     },
     "error": {
         "profile": {

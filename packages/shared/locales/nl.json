@@ -567,7 +567,7 @@
                     "title": "Jouw stemgewicht",
                     "equality": "1000 IOTA = 1 STEM",
                     "description1": "Je stemgewicht is afgeleid van je portemonnee balans. Wanneer een stemvoorstel zich in de Tel fase bevindt, worden de actieve stemmen geteld en om de tien seconden verzameld.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki van stemgewicht (1000 IOTA tokens) geeft 1 stem per 10s. Dit betekent dat u moet blijven stemmen voor de volledige duur van de tellingsfase om uw volledige stemgewicht te bereiken."
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "Je moet blijven stemmen voor de resterende stem periode om jouw maximum aantal stemmen te laten tellen."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Stemmen: {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "Niet in staat om Community Treasury stem te laden",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "Verbind met een node die deze stem heeft toegevoegd",
                         "buttonConnect": "Verbinden met standaard node",
                         "buttonSettings": "Bekijk node instellingen",
                         "fetching": "Ophalen bestuursevent info..."
@@ -754,7 +754,7 @@
             "body": "U staat op het punt {amount} te sturen naar",
             "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
             "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest. Je zal misschien ook opnieuw moeten stemmen.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "U wilt een transactie versturen vanuit een portomonee die op dit moment ook gebruikt wordt om te staken en/of te stemmen. Dit zou uw staking en uw stemming kunnen stoppen. U kunt de transactie versturen, maar daarna zult u uw overgebleven tokens zelf weer opnieuw moeten activeren voor het staken en/of het stemmen.",
                 "stake": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
@@ -1254,8 +1254,8 @@
         "syncing": "Wacht tot de synchronisatie is voltooid om portemonnees te wijzigen.",
         "transferring": "Wacht tot alle transacties zijn voltooid om portemonnees te veranderen.",
         "participating": "Wacht tot u klaar bent met staken/stemmen voordat u van portemonnee wisselt.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "transferringCreate": "Wacht tot alle transacties zijn voltooid voordat u een nieuwe portemonnee toevoegt.",
+        "participatingCreate": "Wacht tot u klaar bent met staken/stemmen voordat u een nieuwe portemonnee toevoegt."
     },
     "error": {
         "profile": {
