@@ -2,7 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, IActivity } from '@lib/typings/activity'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, IActivity } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
@@ -38,7 +38,7 @@
 
     let time = new Date()
     onMount(() => {
-        if (activity.isAsync && activity.asyncStatus !== ActivityAsyncStatus.Claimed) {
+        if (activity.isAsync && asyncStatus !== ActivityAsyncStatus.Claimed) {
             const interval = setInterval(() => {
                 time = new Date()
             }, 1000)
@@ -49,13 +49,38 @@
         }
     })
 
-    const timeDiff = ''
+    let asyncStatus: ActivityAsyncStatus
+    $: {
+        if (activity.isAsync) {
+            if (activity.isClaimed) {
+                asyncStatus = ActivityAsyncStatus.Claimed
+            } else {
+                if (time > activity.expireDate) {
+                    asyncStatus = ActivityAsyncStatus.Expired
+                } else {
+                    asyncStatus = ActivityAsyncStatus.Unclaimed
+                }
+            }
+        }
+    }
 
-    // these automatically update when `time`
-    // changes, because of the `$:` prefix
-    $: hours = time.getHours()
-    $: minutes = time.getMinutes()
-    $: seconds = time.getSeconds()
+    let timeDiff: string
+    $: {
+        if (!activity.isClaimed) {
+            const elapsedTime = activity.expireDate.getTime() - time.getTime()
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
+            const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
+            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
+
+            if (days > 0 || hours > 0) {
+                timeDiff = `${days}d ${hours}h`
+            } else if (minutes > 0) {
+                timeDiff = `${minutes}min`
+            } else {
+                timeDiff = '-'
+            }
+        }
+    }
 
     // TODO
     function handleReject() {}
@@ -106,18 +131,21 @@
             </div>
         </div>
     </button>
-    {#if activity.isAsync && activity.asyncStatus !== ActivityAsyncStatus.Claimed}
-        <Hr classes="w-full px-4" />
+    {#if activity.isAsync && !activity.isClaimed}
+        <div class="px-4">
+            <Hr />
+        </div>
         <div class="flex w-full justify-between p-4">
             <div class="flex flex-row justify-center items-center">
-                {#if activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
+                {#if !activity.isClaimed}
                     <Icon width="16" height="16" icon="timer" classes="mr-1 text-gray-600" />
-                    <Text secundary fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}>1d 2h</Text>
+                    <Text secundary fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}>{timeDiff}</Text
+                    >
                 {/if}
             </div>
             <div class="flex justify-end flex-row w-2/4 ml-4">
                 {#if activity.direction === ActivityDirection.In}
-                    {#if activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
+                    {#if asyncStatus === ActivityAsyncStatus.Unclaimed}
                         <button
                             class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
                             on:click={handleReject}
@@ -131,10 +159,10 @@
                             {localize('actions.claim')}
                         </button>
                     {:else}
-                        <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
+                        <ActivityAsyncStatusPill {asyncStatus} />
                     {/if}
                 {:else}
-                    <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
+                    <ActivityAsyncStatusPill {asyncStatus} />
                 {/if}
             </div>
         </div>

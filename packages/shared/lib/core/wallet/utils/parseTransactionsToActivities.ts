@@ -24,9 +24,9 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         amount: getMessageValue(transaction.payload),
         fiatAmount: 0,
         isAsync: true,
-        expireDate: new Date(),
+        expireDate: new Date(2022, 5, 25, 12),
         hidden: false,
-        asyncStatus: ActivityAsyncStatus.Unclaimed,
+        isClaimed: false,
         token: {
             name: 'Iota',
             useMetricPrefix: true,

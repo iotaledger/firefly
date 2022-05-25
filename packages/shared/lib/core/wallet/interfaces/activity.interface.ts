@@ -44,5 +44,5 @@ export interface IActivity {
     isAsync: boolean
     expireDate?: Date
     hidden?: boolean
-    asyncStatus?: ActivityAsyncStatus
+    isClaimed?: boolean
 }
