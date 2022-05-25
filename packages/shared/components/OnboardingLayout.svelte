@@ -4,8 +4,6 @@
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
-    import { tick } from 'svelte'
-    import { fade } from 'svelte/transition'
 
     export let locale: Locale
 
@@ -17,10 +15,8 @@
 
     export let onBackClick = (): void => {}
 
-    async function onBackClickWapper() {
-        await tick()
-        onBackClick()
-    }
+    let mobileTopContentHeight,
+        leftpaneContentHeight = 0
 
     function handleWatchVideoClick() {
         openPopup({
@@ -36,29 +32,33 @@
 {/if}
 <!--  -->
 {#if $mobile}
-    <div class="grid ff h-screen px-5">
-        <header class="row-start-1 grid justify-center items-start py-3">
+    <div data-label="mobile-onboarding-layout" class="relative h-full px-5 flex flex-col justify-between">
+        <header class="relative w-full flex justify-center px-8 py-3">
+            <Text type="h4" classes="text-center">
+                <slot name="title" />
+            </Text>
             {#if allowBack}
-                <button on:click={onBackClickWapper} class="" disabled={busy}>
+                <button on:click={onBackClick} class="absolute top-3 left-0" disabled={busy}>
                     <Icon
                         icon="arrow-left"
                         classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
                     />
                 </button>
             {/if}
-            <slot name="title" />
         </header>
-        <!-- use this on NO input select android, only needed to scroll legals -->
-        <section
-            class="top py-3 {reverseContent ? 'overflow-y-auto row-span-3' : ''}"
-            style="grid-row: {reverseContent ? 'span 3' : ''}"
-            in:fade={{ duration: reverseContent ? 0 : 600 }}
+        <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
+        <div
+            bind:clientHeight={mobileTopContentHeight}
+            data-label="mobile-top-content"
+            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5"
         >
-            <slot name="rightpane" />
-        </section>
-        <section class="bottom">
-            <slot name="leftpane__content" />
-        </section>
+            <div style={$mobile && `max-height: ${mobileTopContentHeight - leftpaneContentHeight - 20}px;`}>
+                <slot name="rightpane" />
+            </div>
+            <div bind:clientHeight={leftpaneContentHeight}>
+                <slot name="leftpane__content" />
+            </div>
+        </div>
         <footer class="py-3">
             <slot name="leftpane__action" />
         </footer>
@@ -117,28 +117,19 @@
 {/if}
 
 <style type="text/scss">
-    .ff {
-        grid-template-rows: auto auto 1fr 1fr;
-        overflow-y: auto;
-    }
-
-    .top {
-        grid-row: span 2;
-    }
-    .bottom {
-        grid-row: span 1;
-    }
     header {
-        grid-template-columns: auto 1fr;
         margin-top: env(safe-area-inset-top);
-        :global(h2) {
-            @apply text-center;
+        :global(h1),
+        :global(h2),
+        :global(h3),
+        :global(h4),
+        :global(h5) {
+            @apply font-bold;
             @apply text-16;
             @apply leading-140;
         }
     }
     footer {
-        // grid-row: span 3;
         margin-bottom: env(safe-area-inset-bottom);
     }
 </style>
