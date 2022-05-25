@@ -146,7 +146,6 @@
     }
 
     function openGovernance() {
-        $governanceRouter.reset()
         $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 </script>
