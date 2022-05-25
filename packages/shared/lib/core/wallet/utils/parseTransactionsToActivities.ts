@@ -23,7 +23,7 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         subjectAccountName: getSubjectName(transaction.payload),
         subjectAddress: getSubjectAddress(transaction.payload),
         amount: getMessageValue(transaction.payload),
-        fiatAmount: 0,
+        fiatAmount: '-',
         token: {
             name: 'Iota',
             useMetricPrefix: true,

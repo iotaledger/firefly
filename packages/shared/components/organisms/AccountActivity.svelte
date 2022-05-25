@@ -4,6 +4,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { FontWeightText } from '../Text.svelte'
     import { debounce } from 'shared/lib/utils'
     import { activities, groupedActivities } from '@core/wallet'
     import { searchQueriedActivities, filterQueriedActivities } from '@core/wallet/actions'
@@ -47,49 +48,55 @@
 </script>
 
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
-    <div class="mb-5">
+    <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <Text type="h5">{localize('general.transactions')}</Text>
+            <Text type="h5">{localize('general.activity')}</Text>
             <TogglableButton icon="search" bind:active={searchActive} />
         </div>
-        <div class="relative flex flex-row items-center justify-between text-white mt-4">
-            {#if searchActive}
+        {#if searchActive}
+            <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <TextInput
                     bind:inputElement
                     bind:value={searchValue}
                     hasFocus={true}
                     placeholder={localize('general.search')}
                     fontSize="15"
+                    fontWeight={FontWeightText.medium}
+                    color="gray-500"
                 />
-            {/if}
-            <!-- TODO: Wait for screen design for these -->
-            <!-- <ul class="flex flex-row justify-between space-x-8">
-                {#each filters as filter, i}
-                    <li on:click={() => (activeFilterIndex = i)}>
-                        <Text
-                            type="p"
-                            overrideColor
-                            classes="cursor-pointer
-                        {activeFilterIndex === i
-                                ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
-                        >
-                            {localize(`general.${filter}`)}
-                        </Text>
-                    </li>
-                {/each}
-            </ul> -->
-        </div>
+                <!-- TODO: Wait for screen design for these -->
+                <!-- <ul class="flex flex-row justify-between space-x-8">
+                    {#each filters as filter, i}
+                        <li on:click={() => (activeFilterIndex = i)}>
+                            <Text
+                                type="p"
+                                overrideColor
+                                classes="cursor-pointer
+                            {activeFilterIndex === i
+                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
+                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
+                            >
+                                {localize(`general.${filter}`)}
+                            </Text>
+                        </li>
+                    {/each}
+                </ul> -->
+            </div>
+        {/if}
     </div>
-    <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
+    <div class="overflow-y-auto flex-auto h-1 space-y-4 -mr-2 pr-2 scroll-secondary">
         {#if $isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
         {:else if $groupedActivities.length}
             {#each $groupedActivities as group}
-                <Text bold smaller color="gray-600">{group.date} • {group.activities.length}</Text>
-                {#each group.activities as activity}
-                    <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
-                {/each}
+                <div class="space-y-2">
+                    <Text fontWeight={FontWeightText.semibold} color="gray-600"
+                        >{group.date} • {group.activities.length}</Text
+                    >
+                    {#each group.activities as activity}
+                        <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
+                    {/each}
+                </div>
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">

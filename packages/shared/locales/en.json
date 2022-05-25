@@ -1031,6 +1031,7 @@
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
+        "activity": "Activity",
         "security": "Security",
         "accountAddress": "Wallet Address",
         "network": "Network",

@@ -14,5 +14,5 @@ export interface IActivity {
     subjectAddress: string
     token: ITokenMetadata
     conversion?: number
-    fiatAmount?: number
+    fiatAmount?: string
 }

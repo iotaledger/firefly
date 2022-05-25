@@ -43,21 +43,27 @@
     <div class="w-8 flex flex-row justify-center items-center">
         <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
     </div>
-    <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
-        <Text bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
+    <div class="flex flex-col ml-3.5 overflow-hidden">
+        <Text
+            fontWeight={FontWeightText.semibold}
+            lineHeight="140"
+            classes="overflow-hidden overflow-ellipsis multiwrap-line2"
+        >
             {localize(title)}
         </Text>
-        <Text secondary smaller class="text-10 leading-120 text-gray-500">
+        <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
             {localize(direction, { values: { account: subject } })}
         </Text>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text
-            font-weight={FontWeightText.bold}
+            fontWeight={FontWeightText.semibold}
+            lineHeight="140"
             color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
-            smaller
-            classes="whitespace-nowrap font-bold">{activity.amount}</Text
+            classes="whitespace-nowrap">{activity.amount}</Text
         >
-        <Text smaller classes="whitespace-nowrap">{activity.fiatAmount}</Text>
+        <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap"
+            >{activity.fiatAmount}</Text
+        >
     </div>
 </button>
