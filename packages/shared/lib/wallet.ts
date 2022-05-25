@@ -1099,8 +1099,15 @@ export async function processLoadedAccounts(accounts: Account[]): Promise<void> 
 
             const accountMetadata = await asyncGetAccountMetadata(account.id)
             const preparedAccount = formatAccountWithMetadata(account, accountMetadata)
-            accountsStore.update((_accounts) => _accounts.concat([preparedAccount]))
-
+            // we first need to check if we wallet is already populated with this account
+            const indexExistingAccountInStore = get(accountsStore).findIndex(
+                (_account) => _account.id === preparedAccount.id
+            )
+            if (indexExistingAccountInStore !== -1) {
+                accountsStore.update((_accounts) => _accounts.splice(indexExistingAccountInStore, 1, preparedAccount))
+            } else {
+                accountsStore.update((_accounts) => _accounts.concat([preparedAccount]))
+            }
             totalBalanceOverview.balanceRaw += accountMetadata.balance
             totalBalanceOverview.incomingRaw += accountMetadata.incoming
             totalBalanceOverview.outgoingRaw += accountMetadata.outgoing
