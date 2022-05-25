@@ -567,7 +567,7 @@
                     "title": "Szavazatának súlya",
                     "equality": "1000 IOTA = 1 SZAVAZAT",
                     "description1": "A szavazatának súlyát a tárcájának egyenlege határozza meg. Amikor egy szavazatra bocsátott javaslat szavazatszámlálási fázisban van, akkor az aktív szavazatokat összeszámoljuk és 10 másodpercenként összegezzük.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki (1000 IOTA token) 1 szavazatot tesz lehetővé 10 másodpercenként. Ha a teljes szavazati potenciálját szeretné kihasználni, akkor a szavazatszámlálás teljes ideje alatt hagyja szavazatát aktívan."
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "A hátralévő szavazatszámlálási ideig aktívan szavaznia kell, hogy a lehető legnagyobb súllyal szavazhasson."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Szavazatok: {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "A Közösségi Kincstár szavazást nem sikerült betölteni",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "Kérjük csatlakozzon egy olyan csomóponthoz, amely részt vesz ezen szavazás lebonyolításában",
                         "buttonConnect": "Csatlakozás alapértelmezett csomóponthoz",
                         "buttonSettings": "Csomóponti beállítások megtekintése",
                         "fetching": "Kormányzati esemény információ lekérése..."
@@ -754,7 +754,7 @@
             "body": "{amount} küldése",
             "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
             "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat. Lehetséges, hogy újból kell szavaznia is.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve és szavazásban vesz részt. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve és nem vesznek részt szavazásban. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie és újra szavaznia kell majd.",
                 "stake": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
@@ -1251,11 +1251,11 @@
                 }
             }
         },
-        "syncing": "Kérjük várja meg a szinkronizáció befejeződését a tárcák közti váltás előtt.",
-        "transferring": "Kérjük várja meg az összes tranzakció befejeződését a tárcák közti váltás előtt.",
-        "participating": "Kérjük várja meg, amíg befejezi a letétbe helyezést / szavazást, mielőtt másik tárcára vált.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "syncing": "Kérjük várja meg a szinkronizáció befejeződését mielőtt másik tárcára vált.",
+        "transferring": "Kérjük várja meg az összes tranzakció befejeződését mielőtt másik tárcára vált.",
+        "participating": "Kérjük várja meg amíg befejezi a letétbe helyezést / szavazást mielőtt másik tárcára vált.",
+        "transferringCreate": "Kérjük várja meg az összes tranzakció befejeződését mielőtt új tárcát hoz létre.",
+        "participatingCreate": "Kérjük várja meg amíg befejezi a letétbe helyezést / szavazást mielőtt új tárcát hoz létre."
     },
     "error": {
         "profile": {

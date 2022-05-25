@@ -522,7 +522,7 @@
                     "holding": "Preostali period stakinga: {duration}",
                     "ended": "Staking je završio",
                     "inactive": "Nisu detektirani staking događaji",
-                    "fetching": "Fetching staking event info..."
+                    "fetching": "Dohvaćanje podataka o staking događaju..."
                 },
                 "bodies": {
                     "upcoming": "Stakeajte svoje {token} tokene kako bi automatski primali nagrade svakih 10 sekundi nakon što staking započne {date}.",
@@ -542,7 +542,7 @@
                 "totalWalletRewards": "Ukupne nagrade novčanika",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "Assembly je visoko skalabilna, multi-chain mreža namijenjena izgradnji te implementaciji pametnih ugovora. Assembly predstavlja budućnost za web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -562,84 +562,84 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "Moja glasačka težina",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "title": "Tvoja glasačka težina",
+                    "equality": "1000 IOTA = 1 GLAS",
+                    "description1": "Vaša glasačka težina proizlazi iz stanja vašeg novčanika. Kada je prijedlog za glasanje u fazi prebrojavanja, aktivni glasovi se broje i akumuliraju svakih 10 sekundi.",
+                    "description2": "1 Ki glasačke težine (1000 IOTA tokena) daje 1 glas svakih 10 sekundi. To znači da morate nastaviti glasati tijekom cijelog trajanja faze prebrojavanja kako biste postigli punu glasačku težinu."
                 }
             },
             "info": {
-                "title": "Governance info",
-                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "title": "Informacije o upravljanju",
+                "description": "Uz pomoć IOTA zaklade, zajednica je razvila protokol glasanja koji vam omogućuje sudjelovanje u donošenju upravljačkih odluka. Glasanje se vrši IOTA tokenima u Firefly novčaniku.",
+                "link": "Saznajte više o glasanju s IOTA tokenima",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "Glasanje otvoreno",
+                        "countingStarts": "Brojanje počinje",
+                        "countingStops": "Brojanje završava",
+                        "votingOpened": "Glasanje je otvoreno",
+                        "countingStarted": "Brojanje je počelo",
+                        "countingStopped": "Brojanje je završilo"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
-                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "Stopa glasanja",
+                        "body": "{amount} će generirati {votesPerMilestone} glasova svakih {time, plural, one {# sekunde} few {# sekunde} other {# sekundi}}."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
-                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "Prebrojani glasovi",
+                        "body": "Glasovi se broje u intervalima od {time, plural, one {# sekunde} few {# sekunde} other {# sekundi}} tijekom cijelog perioda glasanja. {amount} generira {votesPerMilestone} glasova svakih {time, plural, one {# sekunde} few {# sekunde} other {# sekundi}}."
                     },
                     "partiallyVoted": {
-                        "title": "New unused funds: {amount}",
-                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                        "title": "Nova neiskorištena sredstva: {amount}",
+                        "body": "Primili ste dodatna sredstva na {account}. Možete glasati s ovim tokenima tako da ih spojite s vašim prethodnim glasovima."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
-                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                        "title": "Maksimalno glasova",
+                        "body": "Morate nastaviti glasati do kraja razdoblja brojanja kako biste dosegli svoj maksimalni broj glasova."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Glasova: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "Obavijest",
+                    "commencing": "Glasanje otvoreno",
+                    "holding": "Brojanje u tijeku",
+                    "ended": "Završeno"
                 },
-                "button": "View proposal",
+                "button": "Vidi prijedlog",
                 "treasury": {
                     "notFound": {
-                        "title": "Unable to load Community Treasury vote",
-                        "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "title": "Nije moguće učitati glasanje za Community Treasury",
+                        "subtitle": "Molimo povežite se s nodeom koji je dodao mogućnost za ovo glasanje",
+                        "buttonConnect": "Poveži se sa zadanim nodeom",
+                        "buttonSettings": "Prikaži postavke nodea",
+                        "fetching": "Dohvaćanje podataka o upravljačkom događaju..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "Glasanje se otvara",
+                "votingProgress": "Preostalo vrijeme",
+                "votingPower": "Tvoja glasačka težina",
+                "votesCounted": "Vaši prebrojani glasovi",
+                "maximumVotes": "Vaši maksimalni glasovi",
+                "countingStarts": "Brojanje počinje",
+                "currentResult": "Trenutni rezultat",
+                "finalResult": "Konačni rezultat",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "Aktivno glasanje",
+                    "selected": "Poslano",
+                    "notSelected": "Nije odabrano",
+                    "winner": "Pobjednik"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "glasova",
+            "manageVote": "Upravljaj glasanjem"
         }
     },
     "popups": {
@@ -754,11 +754,11 @@
             "body": "Ovim ćete poslati {amount} na račun",
             "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
             "sendingFromStakedAccountBelowMinReward": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku. Također ćete možda trebati ponovno glasati.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stakeVote": "Šaljete transfer s novčanika koji trenutno stakea i glasa. Ovo može prekinuti staking vaših tokena i zaustaviti vaše glasanje. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena, te ponovno glasati.",
                 "stake": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
-                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+                "vote": "Šaljete transfer s novčanika koji trenutno glasa. Ovo može prekinuti glasanje vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno glasati s vašim preostalim tokenima."
             }
         },
         "balanceFinder": {
@@ -864,30 +864,30 @@
             "info": "Shimmer staking je sada završen i samo će ASMB tokeni biti distribuirani."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
-            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "castYourVote": "Glasajte",
+            "castYourVoteInfo": "Upravo ćete glasati za Opciju {voteValue} ({voteText}) s {amount}",
+            "castingVotes": "Glasanje",
+            "stopVoting": "Prestani glasati",
+            "stopVotingInfo": "Jeste li sigurni da želite prestati glasati za Opciju {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Molimo imajte na umu da zaustavljanje glasanja tijekom perioda brojanja neće imati utjecaj na već prebrojane glasove",
+            "stoppingVoting": "Zaustavljanje glasanja u tijeku",
+            "changeVote": "Promijeni glas",
+            "changeVoteDisclaimer": "Molimo imajte na umu da promjena vašeg glasa tijekom perioda brojanja neće imati utjecaj na već prebrojane glasove",
+            "changeVoteInfo": "Jeste li sigurni da želite promijeniti svoj glas, te glasati za Opciju {voteValue} ({voteText})?",
+            "changingVote": "Promjena glasa u tijeku",
+            "manageVotes": "Upravljaj glasanjem",
+            "partialVoteInfo": "Primili ste {amount} na {account}. Možete glasati s tim sredstvima tako da ih spojite sa svojim trenutnim glasom.",
+            "mergeVoteDisclaimer": "Molimo imajte na umu da spajanje glasova neće imati utjecaj na glasove koji su već prebrojani",
+            "mergingVotes": "Spajanje glasova",
+            "votedSuccessfully": "Počeli ste glasati s {account}.",
+            "unvotedSuccessfully": "Prestali ste glasati s {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "Glasanje uspješno izvršeno",
+                "stopVotesTitle": "Glasanje zaustavljeno",
+                "mergeVotesTitle": "Glas spojen",
+                "changeVotesTitle": "Glas promijenjen",
+                "castBody": "Trenutno glasate za Opciju {voteValue} ({voteText}).",
+                "stopBody": "Prestali ste glasati. Ovo ne utječe na prethodno prebrojane glasove."
             }
         },
         "shimmer-info": {
@@ -1046,10 +1046,10 @@
         "merge": "Spoji",
         "mergeFunds": "Spoji sredstva",
         "done": "Izvršeno",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
-        "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "castVotes": "Glasaj",
+        "changeVotes": "Promijeni glas",
+        "mergeVotes": "Spoji glas",
+        "stopVotes": "Prestani glasati",
         "okIUnderstand": "U redu, razumijem",
         "readMore": "Pročitajte više"
     },
@@ -1178,9 +1178,9 @@
         "transferTo": "Prijenos na {account}",
         "stakingTransaction": "Staking transakcija",
         "unstakingTransaction": "Transakcija prekida stakinga",
-        "votingTransaction": "Voting Transaction",
-        "unvotingTransaction": "Unvoting Transaction",
-        "participationTransaction": "Participation Transaction",
+        "votingTransaction": "Glasačka transakcija",
+        "unvotingTransaction": "Transakcija prekida glasanja",
+        "participationTransaction": "Transakcija sudjelovanja u stakingu/glasanju",
         "receiving": "Primanje u tijeku",
         "sending": "Slanje u tijeku",
         "legacyNetwork": "Stara mreža",
@@ -1190,19 +1190,19 @@
         "unknown": "Nepoznato",
         "none": "Nijedan",
         "staked": "Staking pokrenut",
-        "voted": "Voted",
+        "voted": "Glasano",
         "unstaked": "Nije na stakeu",
-        "unvoted": "Unvoted",
+        "unvoted": "Glasanje prekinuto",
         "staking": "Staking",
         "unstaking": "Prekid stakinga",
         "notStaked": "Staking nije pokrenut",
         "stakedFunds": "Sredstva na stakeu",
         "unstakedFunds": "Sredstva koja nisu na stakeu",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
+        "voting": "Glasanje",
+        "unvoting": "Prekid glasanja",
         "accountColor": "Boja novčanika",
         "myAssets": "Moja imovina",
-        "option": "Option",
+        "option": "Opcija",
         "total": "Ukupno: {balance}"
     },
     "dates": {
@@ -1253,9 +1253,9 @@
         },
         "syncing": "Molimo pričekajte da sinkronizacija završi prije nego promijenite novčanik.",
         "transferring": "Molimo pričekajte da sve transakcije završe prije nego promijenite novčanik.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "participating": "Molimo pričekajte završetak transakcije stakinga/glasanja prije promjene novčanika.",
+        "transferringCreate": "Molimo pričekajte završetak svih transakcija prije dodavanja novog novčanika.",
+        "participatingCreate": "Molimo pričekajte završetak transakcije stakinga/glasanja prije dodavanja novog novčanika."
     },
     "error": {
         "profile": {
@@ -1443,6 +1443,6 @@
     "tabs": {
         "wallet": "Novčanik",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Upravljanje"
     }
 }

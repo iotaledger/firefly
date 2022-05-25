@@ -567,7 +567,7 @@
                     "title": "El peso de tu voto",
                     "equality": "1000 IOTA = 1 VOTO",
                     "description1": "El peso de su voto se deriva del saldo de su billetera. Cuando una propuesta de votación se encuentra en la fase de contabilidad, los votos activos se contabilizan y acumulan cada 10 segundos.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki (1000 tokens IOTA) produce 1 voto cada 10s. Esto significa que usted debe seguir votando durante toda la duración de la fase de recuento para alcanzar su máximo aporte en la votación."
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "Usted debe seguir votando por el período restante de recontéo para alcanzar su máximo de votos."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Votos: {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "No se puede cargar el voto en la tesorería de la comunidad",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "Por favor, conéctate a un nodo que haya añadido esta votación",
                         "buttonConnect": "Conectar a nodo predeterminado",
                         "buttonSettings": "Ver configuracion de nodo",
                         "fetching": "Obteniendo información del evento de gobernanza..."
@@ -754,7 +754,7 @@
             "body": "Estás a punto de enviar {amount} a",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
             "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Estás realizando una transferencia desde una billetera que no ha alcanzado la recompensa mínima de staking. Esto podría finalizar el stake de sus tokens y podrías perder las recompensas en esta billetera. Podrías necesitar votar de nuevo.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Estás enviando una transferencia desde una billetera que está haciendo Staking y votando al mismo tiempo. Esto puede quitar el Staking de tus tokens y detener tu voto. Siéntete libre de enviar la transferencia, pero puede que necesites hacer Staking nuevamente y votar de nuevo con tus tokens restantes.",
                 "stake": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
@@ -1254,8 +1254,8 @@
         "syncing": "Por favor, espere hasta que la sincronización termine para cambiar entre billeteras.",
         "transferring": "Por favor, espere hasta que todas las transacciones se completen para cambiar entre billeteras.",
         "participating": "Por favor, espere hasta que haya completado el Staking/votación antes de cambiar entre billeteras.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "transferringCreate": "Por favor, espere hasta que todas las transacciones se completen antes de añadir una nueva billetera.",
+        "participatingCreate": "Por favor espere hasta que haya completado el staking/votación antes de añadir una nueva bileltera."
     },
     "error": {
         "profile": {
