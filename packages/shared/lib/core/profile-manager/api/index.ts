@@ -1,5 +1,6 @@
 export * from './api'
 export * from './backup'
+export * from './clearStrongholdPassword'
 export * from './createStardustAccount'
 export * from './generateMnemonic'
 export * from './getAccount'
