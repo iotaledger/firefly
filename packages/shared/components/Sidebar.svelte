@@ -146,6 +146,10 @@
     }
 
     function openGovernance() {
+        // reset router only if you are already on governance, act like a home button
+        if ($dashboardRoute === DashboardRoute.Governance) {
+            $governanceRouter.reset()
+        }
         $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 </script>
