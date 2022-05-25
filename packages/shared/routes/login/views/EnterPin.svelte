@@ -156,7 +156,7 @@
 <div class="relative w-full h-full bg-white dark:bg-gray-900">
     <button
         data-label="back-button"
-        class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+        class="absolute {$mobile ? 'safe-area' : 'top-12'} left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
         disabled={hasReachedMaxAttempts}
         on:click={handleBackClick}
     >
@@ -189,3 +189,9 @@
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    .safe-area {
+        top: calc(env(safe-area-inset-top) + 20px);
+    }
+</style>
