@@ -17,11 +17,11 @@
         $selectedAccount.rawIotaBalance === 0 &&
         $selectedAccount.messages.length === 0
 
-    const handleCustomiseAccountClick = () => {
+    function handleCustomiseAccountClick() {
         $accountRouter.goTo(AccountRoute.Manage)
     }
 
-    const handleViewAddressHistoryClick = () => {
+    function handleViewAddressHistoryClick() {
         $accountRouter.goTo(AccountRoute.AddressHistory)
     }
 
@@ -29,15 +29,15 @@
         $accountRouter.goTo(AccountRoute.ExportTransactionHistory)
     }
 
-    const handleHideAccountClick = () => {
+    function handleHideAccountClick() {
         $accountRouter.goTo(AccountRoute.HideAccount)
     }
 
-    const handleDeleteAccountClick = () => {
+    function handleDeleteAccountClick() {
         $accountRouter.goTo(AccountRoute.DeleteAccount)
     }
 
-    const handleShowAccountClick = () => {
+    function handleShowAccountClick() {
         const idx = hiddenAccounts.indexOf($selectedAccount?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
