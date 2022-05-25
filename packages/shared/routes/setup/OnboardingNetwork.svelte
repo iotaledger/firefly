@@ -1,37 +1,15 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { INetwork, NETWORK, NetworkType } from '@core/network'
-    import { createNewProfile, newProfile } from '@core/profile'
+    import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { mobile } from '@lib/app'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
-    const isPrivateNet = (network: INetwork) => network.type === NetworkType.PrivateNet
-    const isDeveloperProfile = $newProfile?.isDeveloperProfile
+    const networkTypes = Object.keys(NetworkType).filter(networkType => NetworkType[networkType] !== NetworkType.PrivateNet) // TODO: add support for custom networks
 
-    const networks: INetwork[] = Object.values(NETWORK).flatMap(Object.values)
-    const filteredNetworks = $newProfile?.isDeveloperProfile
-        ? [...networks.filter((network) => !isPrivateNet(network)), networks.find(isPrivateNet)] // gets only one private net in array
-        : networks.filter((network) => network.type === NetworkType.Mainnet)
-
-    function getNetworkColor(network: INetwork) {
-        if (isPrivateNet(network)) {
-            return 'gray-500'
-        }
-        return `${network.protocol}-highlight`
-    }
-    function getNetworkIcon(network: INetwork) {
-        return isPrivateNet(network) ? 'settings' : network.protocol
-    }
-    function getNetworkText(network: INetwork) {
-        if (isPrivateNet(network)) {
-            return localize('views.network.privatenet')
-        }
-        return localize(`views.network.${network.protocol}.${network.type}`)
-    }
-    function onClick(network: INetwork): void {
-        createNewProfile(isDeveloperProfile, network.protocol, network.type)
+    function onClick(networkType: NetworkType): void {
+        updateNewProfileNetworkType(networkType)
         $appRouter.next()
     }
     function onBackClick(): void {
@@ -46,18 +24,17 @@
     <div slot="leftpane__content">
         <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
         <ul>
-            {#each filteredNetworks as network}
+            {#each networkTypes as networkType}
                 <li>
                     <Button
-                        icon={getNetworkIcon(network)}
-                        iconColor={getNetworkColor(network)}
+                        icon="settings"
                         classes="w-full mb-5"
                         secondary
-                        onClick={() => onClick(network)}
+                        onClick={() => onClick(NetworkType[networkType])}
                     >
-                        {network.name}
+                        {localize(`views.network.${NetworkType[networkType]}.title`)}
                         {#if !$mobile}
-                            <Text secondary smaller>{getNetworkText(network)}</Text>
+                            <Text secondary smaller>{localize(`views.network.${NetworkType[networkType]}.body`)}</Text>
                         {/if}
                     </Button>
                 </li>

@@ -1,3 +1,4 @@
+import { NetworkProtocol, NetworkType } from '@core/network'
 import { ProfileImportType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 
@@ -15,4 +16,6 @@ export type FireflyEvent = {
     shouldAddProfile?: boolean
     skip?: boolean
     skippedMining?: boolean
+    networkProtocol?: NetworkProtocol
+    networkType?: NetworkType
 }

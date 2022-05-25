@@ -42,7 +42,7 @@ export class AppRouter extends Router<AppRoute> {
         switch (currentRoute) {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
-                    nextRoute = AppRoute.Network
+                    nextRoute = AppRoute.Protocol
                 } else {
                     nextRoute = AppRoute.Dashboard
                 }
@@ -92,6 +92,15 @@ export class AppRouter extends Router<AppRoute> {
                     nextRoute = AppRoute.Secure
                 } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
                     nextRoute = AppRoute.Protect
+                }
+                break
+            }
+            case AppRoute.Protocol: {
+                const isDeveloperProfile = get(newProfile)?.isDeveloperProfile
+                if (isDeveloperProfile) {
+                    nextRoute = AppRoute.Network
+                } else {
+                    nextRoute = AppRoute.Profile
                 }
                 break
             }

@@ -56,18 +56,27 @@
                 "description": "Ledger Nano S or Nano X required"
             }
         },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA default protocol",
+            "shimmer": "Experimental IOTA staging protocol"
+        },
         "network": {
             "title": "Choose network",
             "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": "Default IOTA network",
-                "devnet": "IOTA network for tests and development"
+            "mainnet": {
+                "title": "Mainnet",
+                "body": "Official network"
             },
-            "shimmer": {
-                "mainnet": "Experimental IOTA staging network",
-                "devnet": "Experimental IOTA staging network for tests and development"
+            "devnet": {
+                "title": "Devnet",
+                "body": "Network for testing and development"
             },
-            "privatenet": "Private network"
+            "private-net": {
+                "title": "Private net",
+                "body": "Private network"
+            }
         },
         "customNetwork": {
             "title": "Connect to a custom network",

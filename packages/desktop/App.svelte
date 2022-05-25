@@ -48,6 +48,7 @@
         Setup,
         Splash,
         Welcome,
+        OnboardingProtocol,
         OnboardingNetwork,
         OnboardingCustomNetwork,
     } from 'shared/routes'
@@ -198,6 +199,9 @@
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
             <Create locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protocol}>
+            <OnboardingProtocol locale={$_} />
         </Route>
         <Route route={AppRoute.Network}>
             <OnboardingNetwork locale={$_} />
