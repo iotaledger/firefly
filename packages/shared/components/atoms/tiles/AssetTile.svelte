@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { ButtonTile, Icon, StakingAssetTile, Text } from 'shared/components'
+    import { ButtonTile, StakingAssetTile } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAsset, formatBestMatchTokenAmount } from '@core/wallet'
+    import { IAsset, formatTokenAmountBestMatch } from '@core/wallet'
     import { isBright } from '@lib/helpers'
 
     export let asset: IAsset
@@ -23,39 +23,10 @@
         iconLabel={asset?.metadata.name}
         iconLabelFontWeight={FontWeightText.semibold}
         iconSubLabel={asset?.fiatPrice}
-        tileText={formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}
+        tileText={formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
         tileSubText={`≈ ${asset?.fiatBalance}`}
         onClick={handleTileClick}
     />
-
-    <button
-        style="--asset-color: {asset?.metadata?.primaryColor}"
-        class="w-full flex flex-row justify-between items-center space-x-2 bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 p-4 rounded-2xl"
-        on:click={handleTileClick}
-    >
-        <div class="flex flex-row items-center space-x-4 text-left">
-            <div class="icon h-8 w-8 rounded-full flex items-center justify-center p-1">
-                <Icon
-                    classes="text-{assetIconColor}"
-                    icon={asset?.metadata.name?.toLocaleLowerCase()}
-                    height="100%"
-                    width="100%"
-                />
-            </div>
-            <div class="flex flex-col flex-wrap space-y-1">
-                <Text classes="font-semibold">{asset?.metadata.name}</Text>
-                {#if asset?.fiatPrice}
-                    <Text secondary smaller>{asset?.fiatPrice}</Text>
-                {/if}
-            </div>
-        </div>
-        <div class="flex flex-col flex-wrap space-y-1 text-right">
-            <Text classes="font-semibold">{formatBestMatchTokenAmount(asset?.balance.total, asset?.metadata)}</Text>
-            {#if asset?.fiatBalance}
-                <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
-            {/if}
-        </div>
-    </button>
 {/if}
 
 <style type="text/scss">

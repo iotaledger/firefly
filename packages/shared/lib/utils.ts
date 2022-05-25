@@ -4,7 +4,6 @@ import { formatDate, localize } from '@core/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Event } from './typings/events'
-import { Buffer } from 'buffer'
 
 export const ADDRESS_LENGTH = 60
 export const PIN_LENGTH = 6
@@ -263,7 +262,7 @@ export const toUtf8String = (bytes: Uint8Array | number[]): string | undefined =
             char = char & (0x3f >> extraChar)
             for (; extraChar > 0; extraChar--) {
                 const _char = bytes[idx++]
-                if ((_char & 0xc0) != 0x80) return null
+                if ((_char & 0xc0) !== 0x80) return null
 
                 char = (char << 6) | (_char & 0x3f)
             }

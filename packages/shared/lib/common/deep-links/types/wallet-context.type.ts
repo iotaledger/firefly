@@ -1,4 +1,4 @@
-import type { Unit } from '@iota/unit-converter'
+import { Unit } from '@lib/units'
 
 /**
  * The parameters of a send operation.

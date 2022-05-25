@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()
@@ -56,13 +56,13 @@
     const changeHandler = function (e, i) {
         const regex = new RegExp(/^\d+$/)
 
-        if (e.keyCode == KEYBOARD.BACKSPACE) {
+        if (e.keyCode === KEYBOARD.BACKSPACE) {
             handleBackspace()
-        } else if (e.keyCode == KEYBOARD.ENTER) {
+        } else if (e.keyCode === KEYBOARD.ENTER) {
             if (validatePinFormat(inputs.join(''))) {
                 dispatch('submit')
             }
-        } else if (e.keyCode == KEYBOARD.TAB) {
+        } else if (e.keyCode === KEYBOARD.TAB) {
             // Do default tab handling by focusing the root
             // container and allow default processing to happen
             root.focus()

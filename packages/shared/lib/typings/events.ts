@@ -1,4 +1,4 @@
-import { NativeProgress, VersionDetails } from './appUpdater'
+import { IAppUpdateDownloadProgress, IAppVersionDetails } from '@core/app/interfaces'
 import { ResponseTypes } from './bridge'
 import { Message, UTXOEventData } from './message'
 import { AccountRoute } from '@core/router/enums'
@@ -15,8 +15,8 @@ export interface EventMap {
     'log-error': void
     'deep-link-request': void
     'deep-link-params': string
-    'version-details': VersionDetails
-    'version-progress': NativeProgress
+    'version-details': IAppVersionDetails
+    'version-progress': IAppUpdateDownloadProgress
     'version-complete': void
     'version-error': Error
     'notification-activated': unknown

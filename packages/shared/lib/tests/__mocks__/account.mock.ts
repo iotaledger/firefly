@@ -12,10 +12,10 @@ export class AccountMock implements IAccount {
         internalAddresses: [],
         addressesWithBalance: [],
         outputs: {},
-        lockedOutputs: {},
+        lockedOutputs: new Set<string>(),
         unspentOutputs: {},
         transactions: {},
-        pendingTransactions: {},
+        pendingTransactions: new Set<string>(),
         accountOptions: {
             outputConsolidationThreshold: 0,
             automaticOutputConsolidation: false,

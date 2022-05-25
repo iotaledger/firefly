@@ -1,12 +1,9 @@
-import { Unit } from '@iota/unit-converter'
-
 import { localize } from '@core/i18n'
-
 import { isValidAddressAndPrefix } from '../../address'
 import { addError } from '../../errors'
-
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
 import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
+import { Unit } from '@lib/units'
 
 /**
  * Parses a deep link within the wallet context.
@@ -105,10 +102,10 @@ const parseSendOperation = (
             return addError({ time: Date.now(), type: 'deepLink', message: `Unit is not recognised '${unitParam}'` })
         }
     } else {
-        unitParam = Unit.i
+        unitParam = Unit._
     }
 
-    if (parsedUnit === Unit.i && parsedAmount && !Number.isInteger(parsedAmount)) {
+    if (parsedUnit === Unit._ && parsedAmount && !Number.isInteger(parsedAmount)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',

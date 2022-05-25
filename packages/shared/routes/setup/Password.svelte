@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
-    import { mobile, strongholdPassword } from 'shared/lib/app'
+    import { mobile } from '@core/app'
+    import { strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'

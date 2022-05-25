@@ -14,7 +14,7 @@ export async function loadAccounts(): Promise<void> {
         if (accountsResponse) {
             const loadedAccounts: IAccountState[] = []
             for (const account of accountsResponse) {
-                // await account.sync()
+                await account.sync()
                 const metadata = getAccountMetadataById(account?.meta?.index.toString())
                 const accountState = await buildAccountState(account, metadata)
                 loadedAccounts.push(accountState)

@@ -2,7 +2,8 @@ import type { AccountId, CreateAccountPayload, AccountSyncOptions, ClientOptions
 import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
-import { IAuth, INodeInfoResponse } from '../../core/network'
+import { IAuth } from '../../core/network'
+import { INodeInfoResponse } from '../../core/network/interfaces/node-info-response.interface'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
@@ -18,7 +19,7 @@ export class ProfileManagerMock implements IProfileManager {
 
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
         return Promise.resolve({
-            nodeinfo: {
+            node_info: {
                 name: 'HORNET',
                 version: '2.0.0-alpha10',
                 status: {
@@ -36,7 +37,7 @@ export class ProfileManagerMock implements IProfileManager {
                     pruningIndex: 34629,
                 },
                 protocol: {
-                    version: 2,
+                    protocolVersion: 2,
                     networkName: 'alphanet-5',
                     bech32HRP: 'rms',
                     minPoWScore: 1000,
@@ -45,7 +46,7 @@ export class ProfileManagerMock implements IProfileManager {
                         vByteFactorKey: 10,
                         vByteFactorData: 1,
                     },
-                    tokenSupply: 2779530283277761,
+                    tokenSupply: '2779530283277761',
                 },
                 baseToken: {
                     name: 'Shimmer',
@@ -56,8 +57,8 @@ export class ProfileManagerMock implements IProfileManager {
                     useMetricPrefix: false,
                 },
                 metrics: {
-                    messagesPerSecond: 1.3,
-                    referencedMessagesPerSecond: 1.3,
+                    blocksPerSecond: 1.3,
+                    referencedBlocksPerSecond: 1.3,
                     referencedRate: 100,
                 },
                 features: [],

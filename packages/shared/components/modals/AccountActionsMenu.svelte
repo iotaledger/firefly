@@ -26,6 +26,11 @@
         modal.close()
     }
 
+    function handleViewStorageDepositClick() {
+        openPopup({ type: 'storageDepositBreakdown' })
+        modal.close()
+    }
+
     const handleDeleteAccountClick = () => {
         openPopup({
             type: 'deleteAccount',
@@ -48,10 +53,15 @@
 <Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
         <MenuItem
+            icon={SettingsIcons.storageDepositBreakdown}
+            title={localize('actions.viewStorageDeposit')}
+            onClick={handleViewStorageDepositClick}
+            first
+        />
+        <MenuItem
             icon={SettingsIcons.transactionHistory}
             title={localize('actions.exportTransactionHistory')}
             onClick={handleExportTransactionHistoryClick}
-            first
         />
         <MenuItem icon="customize" title={localize('actions.customizeAcount')} onClick={handleCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />

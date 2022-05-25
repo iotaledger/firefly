@@ -1,6 +1,6 @@
-import { IStardustNodeInfo } from './node-info.interface'
+import { INodeInfo } from '@iota/types'
 
 export interface INodeInfoResponse {
-    nodeinfo: IStardustNodeInfo
+    node_info: INodeInfo
     url: string
 }

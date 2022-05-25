@@ -6,13 +6,11 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
-    import { Unit } from '@iota/unit-converter'
-    import { formatUnitPrecision } from '@lib/units'
+    import { formatUnitPrecision, Unit } from '@lib/units'
     import { selectedAccount } from '@core/account'
+
     export let locale: Locale
-
     export let hasMultipleAccounts: boolean
-
     export let hideAccount: (id: AccountIdentifier) => void = () => {}
 
     $: canDelete = $selectedAccount ? Number($selectedAccount?.balances?.total) === 0 : false
@@ -47,8 +45,8 @@
         closePopup()
         sendParams.update((params) => ({
             ...params,
-            amount: formatUnitPrecision(Number($selectedAccount?.balances.total), Unit.Mi, false),
-            unit: Unit.Mi,
+            amount: formatUnitPrecision(Number($selectedAccount?.balances.total), Unit.M, false),
+            unit: Unit.M,
             isInternal: true,
         }))
         // TODO: open send form

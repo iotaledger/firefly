@@ -12,18 +12,24 @@
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { Unit } from '@iota/unit-converter/'
-    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@core/wallet'
-    import { IAccountState } from '@core/account'
-    export let value: number
-    export let unit: Unit
+    import {
+        formatTokenAmountPrecise,
+        Recipient,
+        ActivityAsyncStatus,
+        ActivityStatus,
+        ActivityType,
+    } from '@core/wallet'
+
+    import { BASE_TOKEN } from '@core/network'
+
+    export let amount: string
+    export let unit: string
+    export let rawAmount: number
     export let type: ActivityType
     export let status: ActivityStatus
     export let asyncStatus: ActivityAsyncStatus
-    export let address: string
-    export let account: IAccountState
+    export let recipient: Recipient
     export let timestamp: number
     export let publicNote: string
     export let storageDeposit = 0
@@ -59,11 +65,13 @@
         }
     }
 
-    $: formattedValue = unit ? formatUnitPrecision(value, unit) : formatUnitBestMatch(value, true, 2)
     $: formattedCurrencyValue = formatCurrency(
-        convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
+        convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
     )
-    $: formattedStorageDeposit = storageDeposit || storageDeposit === 0 ? storageDeposit + ' i' : ''
+    $: formattedStorageDeposit = formatTokenAmountPrecise(
+        storageDeposit ?? 0,
+        BASE_TOKEN[$activeProfile?.networkProtocol]
+    )
 
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
@@ -75,9 +83,9 @@
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
-        {#if value || value === 0}
+        {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <Text type="h1" fontWeight={FontWeightText.semibold}>{formattedValue}</Text>
+                <Text type="h1" fontWeight={FontWeightText.semibold}>{(amount ?? 0) + ' ' + unit}</Text>
                 <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedCurrencyValue}</Text>
             </transaction-value>
         {/if}
@@ -89,12 +97,12 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if account}
+        {#if recipient.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel {account} />
+                <AccountLabel account={recipient.account} />
             </Box>
-        {:else if address}
-            <AddressBox clearBackground clearPadding isCopyable {address} />
+        {:else if recipient.type === 'address'}
+            <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

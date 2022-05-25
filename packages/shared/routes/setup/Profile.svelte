@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { cleanupSignup, mobile } from 'shared/lib/app'
+    import { cleanupSignup } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getProfileDataPath } from 'shared/lib/wallet'

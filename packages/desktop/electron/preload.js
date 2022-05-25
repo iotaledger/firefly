@@ -41,7 +41,7 @@ try {
     const WalletApi = require('firefly-actor-system-nodejs-bindings')
     const WalletStardustApi = require('@iota/wallet')
 
-    if (process.env.NODE_ENV == 'development') {
+    if (process.env.NODE_ENV === 'development') {
         const loggerOptions = (name = 'wallet.log') => ({
             color_enabled: true,
             outputs: [

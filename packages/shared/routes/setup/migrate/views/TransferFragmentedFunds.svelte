@@ -2,7 +2,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import {
         displayNotificationForLedgerProfile,

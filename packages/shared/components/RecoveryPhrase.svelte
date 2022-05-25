@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
 
     export let recoveryPhrase = []
     export let verifyRecoveryPhrase = undefined
