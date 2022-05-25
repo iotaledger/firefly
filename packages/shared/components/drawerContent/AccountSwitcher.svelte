@@ -41,20 +41,18 @@
     
 </script>
 
-<div class="flex flex-col px-6 py-10 w-full">
-    <div class="mb-5">
+<div class="flex flex-col px-6 w-full {$mobile ? 'safe-area pt-7 pb-1' : 'py-10'}">
+    <div class="{$mobile ? 'mb-4' : 'mb-5'}">
         <Text type="h4">{localize('general.switchWallet')}</Text>
     </div>
-    <div class="accounts flex flex-col space-y-1 scrollable-y">
+    <div class="accounts flex flex-col space-y-1 {$mobile ? 'overflow-auto mb-5' : 'scrollable-y'}">
         {#each accounts as account}
             <button
                 on:click={() => handleAccountClick(account.id)}
                 class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
             >
                 <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-                    {account.alias}
-                </Text>
+                <Text secondary={account.id !== $selectedAccount?.id} type="{$mobile ? 'h5' : 'h4'}">{account.alias}</Text>
             </button>
         {/each}
     </div>
@@ -94,5 +92,8 @@
                 content: '';
             }
         }
+    }
+    .safe-area {
+        margin-bottom: calc(env(safe-area-inset-top) / 2);
     }
 </style>
