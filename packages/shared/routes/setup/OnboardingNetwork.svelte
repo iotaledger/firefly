@@ -5,12 +5,15 @@
     import { mobile } from '@lib/app'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
+    import { createNewProfile } from '../../lib/core/profile'
 
-    const networkTypes = Object.keys(NetworkType).filter(networkType => NetworkType[networkType] !== NetworkType.PrivateNet) // TODO: add support for custom networks
+    const networkTypes = Object.keys(NetworkType).filter(
+        (networkType) => NetworkType[networkType] !== NetworkType.PrivateNet
+    ) // TODO: add support for custom networks
 
     function onClick(networkType: NetworkType): void {
         updateNewProfileNetworkType(networkType)
-        $appRouter.next()
+        $appRouter.next({ networkType })
     }
     function onBackClick(): void {
         $appRouter.previous()
