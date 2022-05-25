@@ -46,7 +46,7 @@
         {#if !$mobile}
             <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
         {/if}
-        <Text type="h4" classes="text-{textColor}">{$selectedAccount?.alias}</Text>
+        <Text type="h4">{$selectedAccount?.alias}</Text>
         <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
             <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
         </div>
