@@ -5,7 +5,8 @@
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
-    import { activities, groupedActivities, filterQueriedActivities, searchQueriedActivities } from '@core/wallet'
+    import { activities, groupedActivities } from '@core/wallet'
+    import { searchQueriedActivities, filterQueriedActivities } from '@core/wallet/actions'
 
     function handleTransactionClick(message: any): void {
         openPopup({

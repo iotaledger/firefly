@@ -15,7 +15,7 @@
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { Unit } from '@iota/unit-converter/'
-    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@core/wallet'
     import { IAccountState } from '@core/account'
     export let value: number
     export let unit: Unit

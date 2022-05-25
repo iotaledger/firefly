@@ -1,4 +1,4 @@
-import { ITokenMetadata } from '@core/wallet'
+import { ITokenMetadata } from './token-metadata.interface'
 
 export enum ActivityType {
     Stake = 'stake',

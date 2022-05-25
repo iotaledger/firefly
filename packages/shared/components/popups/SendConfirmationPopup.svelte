@@ -9,7 +9,7 @@
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { IAccountState, selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { ActivityStatus, ActivityType } from '@core/wallet'
 
     export let internal = false
     export let to = ''
