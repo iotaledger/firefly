@@ -58,6 +58,7 @@
             {submitHandler}
             disableContextMenu={true}
             spellcheck="false"
+            autocomplete="false"
             {locale}
             capsLockWarning={true}
         />
