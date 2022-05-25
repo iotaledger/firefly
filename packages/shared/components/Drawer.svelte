@@ -200,7 +200,7 @@
     main:before {
         display: var(--display-indicator);
         content: '';
-        position: absolute;
+        position: sticky;
         width: 48px;
         height: 4px;
         left: calc(50% - 48px / 2 - 0.5px);
