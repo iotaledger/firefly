@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
     import { ADDRESS_LENGTH } from 'shared/lib/utils'
+    import { mobile } from 'shared/lib/app'
     import { onMount } from 'svelte'
 
     export let address = undefined
@@ -25,7 +26,7 @@
         <textarea
             bind:this={textAreaElement}
             bind:value={address}
-            class="w-full text-12 leading-140 border border-solid resize-none
+            class="w-full text-12 border border-solid resize-none {!$mobile && 'leading-140'}
                 {disabled
                 ? 'text-gray-400 dark:text-gray-700'
                 : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
@@ -37,6 +38,8 @@
             {disabled}
             spellcheck={false}
             maxlength={ADDRESS_LENGTH}
+            rows={$mobile ? 1 : 2}
+            class:mobile={$mobile}
         />
         {#if label}
             <floating-label class:floating-active={address && label}>{label}</floating-label>
@@ -54,6 +57,11 @@
         @apply pl-3;
         border-radius: 0.625rem; // TODO: add to tailwind
 
+        &.mobile {
+            @apply leading-9;
+            @apply py-1.5;
+        }
+
         &::placeholder {
             @apply text-gray-500;
         }
@@ -69,6 +77,10 @@
         &.floating-active {
             @apply pt-6;
             @apply pb-2;
+            &.mobile {
+                @apply pt-3;
+                @apply pb-0;
+            }
         }
 
         + floating-label {
