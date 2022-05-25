@@ -22,7 +22,7 @@ interface GroupedActivity {
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
     for (const activity of $queriedActivities) {
-        const activityDate = getDateString(activity.timestamp)
+        const activityDate = getActivityGroupTitleForTimestamp(activity.timestamp)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
         }
@@ -32,7 +32,7 @@ export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedAc
     return groupedActivities
 })
 
-function getDateString(timestamp): string {
+function getActivityGroupTitleForTimestamp(timestamp): string {
     const dateString = getMonthYear(new Date(Number(timestamp)))
     return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
 }
