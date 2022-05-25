@@ -13,6 +13,7 @@ The following __must__ be installed on all platforms:
 ### MacOS
 
 - Xcode Command Line Tools
+- [Python 2.7](https://www.python.org/downloads/release/python-2718/) for DMG creation (no longer pre-installed on macOS 12.3+ or available through Homebrew)
 
 ### Windows
 
