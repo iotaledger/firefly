@@ -8,7 +8,7 @@
     import { isBright } from 'shared/lib/helpers'
 
     export let accounts: WalletAccount[] = []
-    export let onAccountCreation = (..._: any[]): void => {}
+    export let onCreateAccount = (..._: any[]): void => {}
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
     $: textColor = isBright(color) ? 'gray-800' : 'white'
@@ -53,9 +53,10 @@
     </button>
     <Drawer opened={showDrawer} bind:this={drawer} onClose={() => (showDrawer = false)}>
         {#if drawerRoute === 'create'}
-            <AccountCreation {onAccountCreation} onCancel={() => drawer.close()} />
+            <AccountCreation {onCreateAccount} onCancel={() => drawer.close()} />
         {:else if (drawerRoute = DrawerRoutes.Init)}
             <AccountSwitcher
+                {onCreateAccount}
                 handleCreateAccountPress={() => setDrawerRoute(DrawerRoutes.Create)}
                 onAccountSelection={() => drawer.close()}
                 {accounts}
@@ -63,7 +64,7 @@
         {/if}
     </Drawer>
 </div>
-<AccountSwitcherModal {onAccountCreation} {accounts} bind:isActive={showModal} />
+<AccountSwitcherModal {onCreateAccount} {accounts} bind:isActive={showModal} />
 
 <style type="text/scss">
     button {
