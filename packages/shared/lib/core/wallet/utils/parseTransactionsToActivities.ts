@@ -1,5 +1,5 @@
 import { truncateString } from '@lib/helpers'
-import { ActivityDirection, ActivityType, IActivity } from '@lib/typings/activity'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, IActivity } from '@core/wallet'
 import { AccountMessage } from '@lib/typings/wallet'
 import { formatUnitBestMatch } from '@lib/units'
 import {

@@ -7,7 +7,7 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { ActivityStatus, ActivityType } from '@core/wallet'
     import { AccountMessage } from '@lib/typings/wallet'
     import { activeAccounts, activeProfile } from '@core/profile'
 

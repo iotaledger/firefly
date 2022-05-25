@@ -2,7 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityDirection, ActivityType, IActivity } from '@lib/typings/activity'
+    import { ActivityDirection, ActivityType, IActivity } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
 
     export let activity: IActivity
