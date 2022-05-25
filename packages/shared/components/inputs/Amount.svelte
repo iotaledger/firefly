@@ -14,6 +14,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { mobile } from 'shared/lib/app'
 
     type AmountUnit = Unit | AvailableExchangeRates
 
@@ -164,6 +165,7 @@
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
+        type={$mobile ? 'tel' : 'text'}
         {error}
         label={amountForLabel || localize('general.amount')}
         placeholder={placeholder || localize('general.amount')}
@@ -174,7 +176,7 @@
         maxDecimals={getMaxDecimals(unit)}
         integer={unit === Unit.i}
         float={unit !== Unit.i}
-        style={showDropdown ? 'border-bottom-right-radius: 0' : ''}
+        style={showDropdown ? $mobile ? 'border-top-right-radius: 0' : 'border-bottom-right-radius: 0' : ''}
         isFocused={showDropdown}
     />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
@@ -192,14 +194,14 @@
                 toggleDropDown()
             }}
             bind:this={unitsButton}
-            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${
+            class="{$mobile ? 'w-12' : 'w-10'} h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 {
                 disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'
-            }`}
+            }"
             {disabled}
         >
             {unit}
             <nav
-                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
+                class="absolute overflow-y-auto pointer-events-none opacity-0 z-10 text-left {$mobile ? 'bottom-8 rounded-t-lg w-12' : 'w-10 top-10 rounded-b-lg'} right-0 bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
                     ? 'dropdown'
                     : ''}"
                 bind:this={navContainer}
@@ -207,7 +209,7 @@
                 {#each units as _unit}
                     <button
                         id={_unit}
-                        class="text-center w-full py-2 {unit === _unit &&
+                        class="text-center w-full {$mobile ? 'py-1.5' : 'py-2'} {unit === _unit &&
                             'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
