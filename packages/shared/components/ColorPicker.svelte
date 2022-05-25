@@ -41,7 +41,7 @@
     }
 
     let tooltipAnchor
-    let showTooltip = $mobile
+    let showTooltip = false
     const toggleTooltip = (): void => {
         showTooltip = !showTooltip
     }
