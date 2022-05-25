@@ -56,9 +56,9 @@
     <!-- Customize -->
     <button
         on:click={() => handleCustomiseAccountClick()}
-        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 {$mobile ? 'py-3' : 'pb-3'} w-full {hidden
-            ? 'opacity-50 pointer-events-none'
-            : ''}"
+        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 {$mobile
+            ? 'py-3'
+            : 'pb-3'} w-full {hidden ? 'opacity-50 pointer-events-none' : ''}"
         disabled={hidden}
     >
         <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
@@ -79,7 +79,7 @@
         <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
         <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
     </button>
-    <HR classes="{$mobile && 'mt-2'}" />
+    <HR classes={$mobile && 'mt-2'} />
     <!-- Delete -->
     <button
         on:click={() =>
@@ -97,5 +97,4 @@
     .safe-area {
         margin-bottom: calc(env(safe-area-inset-top) / 2);
     }
-
 </style>

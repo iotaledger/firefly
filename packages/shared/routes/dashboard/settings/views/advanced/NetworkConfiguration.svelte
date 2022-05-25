@@ -186,10 +186,15 @@
                             >
                                 {node.url}
                             </Text>
-                            <Text 
-                                highlighted 
-                                classes="{$mobile && node.isPrimary && 'absolute right-5 p-1 -mt-1 rounded-lg bg-pastel-green'}">
-                                {node.isPrimary && !$mobile ? localize('views.settings.configureNodeList.primaryNode') : ''}
+                            <Text
+                                highlighted
+                                classes={$mobile &&
+                                    node.isPrimary &&
+                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-pastel-green'}
+                            >
+                                {node.isPrimary && !$mobile
+                                    ? localize('views.settings.configureNodeList.primaryNode')
+                                    : ''}
                             </Text>
                         </div>
                         {#if !$mobile}

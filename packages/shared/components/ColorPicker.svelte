@@ -92,7 +92,7 @@
     </ul>
     {#if showTooltip}
         {#if $mobile}
-            <GradientPicker on:input={ev => (inputValue = ev.detail)} />
+            <GradientPicker on:input={(ev) => (inputValue = ev.detail)} />
         {:else}
             <div use:clickOutside on:clickOutside={toggleTooltip}>
                 <Tooltip anchor={tooltipAnchor} position="top">

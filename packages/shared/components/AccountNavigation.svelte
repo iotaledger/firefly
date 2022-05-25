@@ -38,21 +38,17 @@
 </script>
 
 <div class="flex flex-auto flex-col">
-    <button 
-        on:click={toggleAccountSwitcher} 
-        class=" {$mobile && 'ml-5 mt-3 p-2 fixed left-1/3 rounded-xl'} flex flex-row justify-center items-center space-x-2"
+    <button
+        on:click={toggleAccountSwitcher}
+        class=" {$mobile &&
+            'ml-5 mt-3 p-2 fixed left-1/3 rounded-xl'} flex flex-row justify-center items-center space-x-2"
     >
         {#if !$mobile}
             <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
         {/if}
         <Text type="h4" classes="text-{textColor}">{$selectedAccount?.alias}</Text>
         <div class="transform transition-all {showModal ? 'rotate-180' : 'rotate-0'}">
-            <Icon
-                height="18"
-                width="18"
-                icon="chevron-down"
-                classes="text-gray-800 dark:text-white"
-            />
+            <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
     <Drawer opened={showDrawer} bind:this={drawer} onClose={() => (showDrawer = false)}>

@@ -176,7 +176,7 @@
         maxDecimals={getMaxDecimals(unit)}
         integer={unit === Unit.i}
         float={unit !== Unit.i}
-        style={showDropdown ? $mobile ? 'border-top-right-radius: 0' : 'border-bottom-right-radius: 0' : ''}
+        style={showDropdown ? ($mobile ? 'border-top-right-radius: 0' : 'border-bottom-right-radius: 0') : ''}
         isFocused={showDropdown}
     />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
@@ -195,14 +195,18 @@
                 toggleDropDown()
             }}
             bind:this={unitsButton}
-            class="{$mobile ? 'w-12' : 'w-10'} h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 {
-                disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'
-            }"
+            class="{$mobile
+                ? 'w-12'
+                : 'w-10'} h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 {disabled
+                ? 'cursor-auto'
+                : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}"
             {disabled}
         >
             {unit}
             <nav
-                class="absolute overflow-y-auto pointer-events-none opacity-0 z-10 text-left {$mobile ? 'bottom-10 mb-0.5 rounded-t-lg w-12' : 'w-10 top-10 rounded-b-lg'} right-0 bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
+                class="absolute overflow-y-auto pointer-events-none opacity-0 z-10 text-left {$mobile
+                    ? 'bottom-10 mb-0.5 rounded-t-lg w-12'
+                    : 'w-10 top-10 rounded-b-lg'} right-0 bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
                     ? 'dropdown'
                     : ''}"
                 bind:this={navContainer}

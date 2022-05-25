@@ -409,14 +409,11 @@
     })
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
-
 </script>
 
 {#if $selectedAccount}
     {#if $mobile}
-        <div
-            class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900"
-        >
+        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900">
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex">
@@ -447,53 +444,51 @@
                 </div>
                 <div class="flex flex-1">
                     <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
-                        <AccountHistory
-                            transactions={getAccountMessages($selectedAccount)}
-                        />/>
+                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />/>
                     </DashboardPane>
                 </div>
             </div>
         </div>
     {:else}
-    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccount?.id}
-            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-                <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    {#if $accountRoute !== AccountRoute.Manage}
-                        <AccountBalance onMenuClick={modal?.toggle} />
-                    {/if}
-                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
-                            <div class="px-6 my-4">
-                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
-                            </div>
+        <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
+            {#key $selectedAccount?.id}
+                <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+                    <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
+                        {#if $accountRoute !== AccountRoute.Manage}
+                            <AccountBalance onMenuClick={modal?.toggle} />
                         {/if}
-                        {#if $accountRoute === AccountRoute.Init}
-                            <AccountAssets />
-                        {:else if $accountRoute === AccountRoute.Send}
-                            <Send {onSend} {onInternalTransfer} />
-                        {:else if $accountRoute === AccountRoute.Receive}
-                            <Receive {isGeneratingAddress} {onGenerateAddress} />
-                        {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
-                        {/if}
+                        <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
+                            {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                                <div class="px-6 my-4">
+                                    <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                                </div>
+                            {/if}
+                            {#if $accountRoute === AccountRoute.Init}
+                                <AccountAssets />
+                            {:else if $accountRoute === AccountRoute.Send}
+                                <Send {onSend} {onInternalTransfer} />
+                            {:else if $accountRoute === AccountRoute.Receive}
+                                <Receive {isGeneratingAddress} {onGenerateAddress} />
+                            {:else if $accountRoute === AccountRoute.Manage}
+                                <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            {/if}
+                        </DashboardPane>
                     </DashboardPane>
-                </DashboardPane>
-                <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
-                </DashboardPane>
-                <div class=" flex flex-col space-y-4">
-                    <DashboardPane classes="w-full h-1/2">
-                        <LineChart />
+                    <DashboardPane>
+                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                     </DashboardPane>
-                    <DashboardPane classes="w-full h-1/2">
-                        <BarChart />
-                    </DashboardPane>
+                    <div class=" flex flex-col space-y-4">
+                        <DashboardPane classes="w-full h-1/2">
+                            <LineChart />
+                        </DashboardPane>
+                        <DashboardPane classes="w-full h-1/2">
+                            <BarChart />
+                        </DashboardPane>
+                    </div>
                 </div>
-            </div>
-            <AccountActionsModal bind:modal />
-        {/key}
-    </div>
+                <AccountActionsModal bind:modal />
+            {/key}
+        </div>
     {/if}
 {/if}
 

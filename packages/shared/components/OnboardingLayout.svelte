@@ -4,8 +4,8 @@
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
-    import { tick } from 'svelte';
-    import { fade } from 'svelte/transition';
+    import { tick } from 'svelte'
+    import { fade } from 'svelte/transition'
 
     export let locale: Locale
 
@@ -49,11 +49,11 @@
             <slot name="title" />
         </header>
         <!-- use this on NO input select android, only needed to scroll legals -->
-        <section 
+        <section
             class="top py-3 {reverseContent ? 'overflow-y-auto row-span-3' : ''}"
             style="grid-row: {reverseContent ? 'span 3' : ''}"
-            in:fade={{ duration: reverseContent ? 0 : 600}}
-        > 
+            in:fade={{ duration: reverseContent ? 0 : 600 }}
+        >
             <slot name="rightpane" />
         </section>
         <section class="bottom">

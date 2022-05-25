@@ -512,10 +512,7 @@
             </div>
             <div class="flex flex-row space-x-4">
                 {#if $mobile}
-                    <button 
-                        on:click={onQRClick}
-                        style={selectedSendType === SEND_TYPE.INTERNAL && 'opacity: 0'}
-                    >
+                    <button on:click={onQRClick} style={selectedSendType === SEND_TYPE.INTERNAL && 'opacity: 0'}>
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
                 {:else}
@@ -546,7 +543,9 @@
                             bind:address
                             label={localize('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}${$mobile ? ': ' : '\n'}${addressPrefix}...`}
+                            placeholder={`${localize('general.sendToAddress')}${
+                                $mobile ? ': ' : '\n'
+                            }${addressPrefix}...`}
                             classes={$mobile ? 'mb-6' : 'mb-6'}
                             autofocus={!$mobile}
                         />

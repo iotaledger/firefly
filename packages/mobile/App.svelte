@@ -160,20 +160,28 @@
         @apply visible;
     }
 
-    
-    button, a, img, input, select, textarea {
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    button,
+    a,
+    img,
+    input,
+    select,
+    textarea {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 
-    a, button, img, [inert], .inert {
+    a,
+    button,
+    img,
+    [inert],
+    .inert {
         user-select: none;
         -webkit-user-select: none;
         -webkit-user-drag: none;
         -webkit-touch-callout: none;
     }
 
-    button:active, button:focus { 
-        outline: 0px solid transparent; 
+    button:active,
+    button:focus {
+        outline: 0px solid transparent;
     }
-
 </style>

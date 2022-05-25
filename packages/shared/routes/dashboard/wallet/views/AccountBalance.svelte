@@ -46,12 +46,7 @@
                         : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                 </Text>
             </div>
-            <Text 
-                type={$mobile ? 'h4' : 'p'} 
-                smaller 
-                overrideColor={$mobile} 
-                classes={mobile && 'text-gray-500'}
-            >
+            <Text type={$mobile ? 'h4' : 'p'} smaller overrideColor={$mobile} classes={mobile && 'text-gray-500'}>
                 {$selectedAccount?.balanceEquiv}
             </Text>
         </div>

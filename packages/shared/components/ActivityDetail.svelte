@@ -173,7 +173,11 @@
             {/if}
         </div>
     </div>
-    <div class="{$mobile ? 'flex flex-col px-6 h-full' : 'pr-2 -mr-2 h-1 scroll-secondary mb-6'} overflow-y-auto flex-auto">
+    <div
+        class="{$mobile
+            ? 'flex flex-col px-6 h-full'
+            : 'pr-2 -mr-2 h-1 scroll-secondary mb-6'} overflow-y-auto flex-auto"
+    >
         <div class="mb-5">
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>

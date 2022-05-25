@@ -156,7 +156,9 @@
 <div class="relative w-full h-full bg-white dark:bg-gray-900">
     <button
         data-label="back-button"
-        class="absolute {$mobile ? 'safe-area' : 'top-12'} left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+        class="absolute {$mobile
+            ? 'safe-area'
+            : 'top-12'} left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
         disabled={hasReachedMaxAttempts}
         on:click={handleBackClick}
     >

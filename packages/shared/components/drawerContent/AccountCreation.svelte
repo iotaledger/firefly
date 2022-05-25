@@ -6,11 +6,9 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, setSelectedAccount, wallet } from 'shared/lib/wallet'
 
-    
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
     export let onCancel = (..._: any[]): void => {}
-    
 
     const { accounts } = $wallet
 

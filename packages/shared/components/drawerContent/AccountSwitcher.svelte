@@ -13,7 +13,7 @@
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
-    
+
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
             showWarning(localize('notifications.syncing'))
@@ -38,11 +38,10 @@
         openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
         onCreateAccount()
     }
-    
 </script>
 
 <div class="flex flex-col px-6 w-full {$mobile ? 'safe-area pt-7 pb-1' : 'py-10'}">
-    <div class="{$mobile ? 'mb-4' : 'mb-5'}">
+    <div class={$mobile ? 'mb-4' : 'mb-5'}>
         <Text type="h4">{localize('general.switchWallet')}</Text>
     </div>
     <div class="accounts flex flex-col space-y-1 {$mobile ? 'overflow-auto mb-5' : 'scrollable-y'}">
@@ -52,7 +51,8 @@
                 class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
             >
                 <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                <Text secondary={account.id !== $selectedAccount?.id} type="{$mobile ? 'h5' : 'h4'}">{account.alias}</Text>
+                <Text secondary={account.id !== $selectedAccount?.id} type={$mobile ? 'h5' : 'h4'}>{account.alias}</Text
+                >
             </button>
         {/each}
     </div>
