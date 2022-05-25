@@ -20,6 +20,7 @@
     import { activeProfile } from '@core/profile'
     import {
         dashboardRoute,
+        dashboardRouter,
         DashboardRoute,
         resetWalletRoute,
         settingsRoute,
@@ -75,22 +76,22 @@
             : []),
     ]
 
-    // function openStaking() {
-    //     $dashboardRouter.goTo(DashboardRoute.Staking)
-    // }
-
-    function updateSidebarNotification() {
-        sidebarTabs = sidebarTabs.map((tab) => {
-            if (DashboardRoute.Staking === tab.route) {
-                tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'error'
-                    : showStakingNotification
-                    ? 'warning'
-                    : null
-            }
-            return tab
-        })
+    function openStaking() {
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
+
+    // function updateSidebarNotification() {
+    //     sidebarTabs = sidebarTabs.map((tab) => {
+    //         if (DashboardRoute.Staking === tab.route) {
+    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
+    //                 ? 'error'
+    //                 : showStakingNotification
+    //                 ? 'warning'
+    //                 : null
+    //         }
+    //         return tab
+    //     })
+    // }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
