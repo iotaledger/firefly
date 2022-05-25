@@ -4,6 +4,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { mobile } from 'shared/lib/app'
     import { selectedAccount, selectedMessage, wallet } from 'shared/lib/wallet'
 
     const { accounts } = $wallet
@@ -48,14 +49,14 @@
     }
 </script>
 
-<div class="flex flex-col py-10 px-6 w-full">
+<div class="flex flex-col px-6 w-full {$mobile ? 'safe-area pt-8 pb-1' : 'py-10'}">
     <div class="mb-5">
         <Text type="h4">{localize('general.walletActions')}</Text>
     </div>
     <!-- Customize -->
     <button
         on:click={() => handleCustomiseAccountClick()}
-        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 pb-3 w-full {hidden
+        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 {$mobile ? 'py-3' : 'pb-3'} w-full {hidden
             ? 'opacity-50 pointer-events-none'
             : ''}"
         disabled={hidden}
@@ -78,7 +79,7 @@
         <Icon icon={SettingsIcons.transactionHistory} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
         <Text smaller classes="group-hover:text-blue-500">{localize('actions.exportTransactionHistory')}</Text>
     </button>
-    <HR />
+    <HR classes="{$mobile && 'mt-2'}" />
     <!-- Delete -->
     <button
         on:click={() =>
@@ -91,3 +92,10 @@
         </Text>
     </button>
 </div>
+
+<style type="text/scss">
+    .safe-area {
+        margin-bottom: calc(env(safe-area-inset-top) / 2);
+    }
+
+</style>
