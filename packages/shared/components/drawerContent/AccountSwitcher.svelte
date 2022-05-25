@@ -13,6 +13,8 @@
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
+    // export let handleCreateAccountPress = (..._: any[]): void => {}
+    export let onAccountSelection = (..._: any[]): void => {}
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
@@ -24,10 +26,11 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
+            onAccountSelection()
         }
     }
 
-    function showWarning(message: string) {
+    function showWarning(message: string): void {
         showAppNotification({
             type: 'warning',
             message,
@@ -36,7 +39,8 @@
 
     function handleCreateAccountClick(): void {
         openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
-        onCreateAccount()
+        // handleCreateAccountPress()
+        onAccountSelection()
     }
 </script>
 
