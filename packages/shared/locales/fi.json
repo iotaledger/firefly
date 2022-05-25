@@ -567,7 +567,7 @@
                     "title": "Äänesi painoarvo",
                     "equality": "1000 IOTA = 1 ÄÄNI",
                     "description1": "Äänesi painoarvo johdetaan lompakkosi saldosta. Kun äänestysehdotus on laskentavaiheessa, aktiiviset äänet lasketaan ja niitä kertyy 10 sekunnin välein.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki verran painoarvoa (1000 IOTA-tokenia) tuottaa 1 äänen 10 sekunnin välein. Tämä tarkoittaa, että sinun on äänestettävä koko laskentavaiheen ajan saavuttaaksesi täyden painoarvosi."
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "Sinun on jatkettava äänestämistä koko jäljellä olevan laskentavaiheen ajan saavuttaakseksi enimmäisäänimääräsi."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Ääniä: {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "Yhteisörahaston äänestystä ei voitu ladata",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "Ole hyvä ja yhdistä solmuun, joka on lisännyt tämän äänestyksen",
                         "buttonConnect": "Yhdistä oletussolmuun",
                         "buttonSettings": "Näytä solmun asetukset",
                         "fetching": "Haetaan hallintotapahtuman tietoja..."
@@ -754,7 +754,7 @@
             "body": "Olet lähettämässä {amount} osoitteeseen",
             "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
             "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta. Saatat joutua myös äänestämään uudestaan.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin ja äänestykseen. Tämä saattaa lopettaa stakingin tokeneiltasi ja äänestyksen. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking ja äänestys uudestaan jäljelle jääville tokeneille siirron jälkeen.",
                 "stake": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
@@ -1254,8 +1254,8 @@
         "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
         "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
         "participating": "Ole hyvä ja odota, kunnes olet saattanut stakingin tai äänestyksen loppuun ennen lompakkojen vaihtamista.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "transferringCreate": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet ennen uuden lompakon lisäämistä.",
+        "participatingCreate": "Ole hyvä ja odota, kunnes olet saattanut stakingin tai äänestyksen loppuun ennen uuden lompakon lisäämistä."
     },
     "error": {
         "profile": {

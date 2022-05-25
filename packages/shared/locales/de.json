@@ -173,7 +173,7 @@
         },
         "connectLedger": {
             "title": "Verbinde deinen Ledger mit Firefly",
-            "body": "Damit dein Ledger von Firefly gefunden wird, stelle bitte sicher, dass die offizielle Ledger Live-Anwendung geschlossen ist.",
+            "body": "Stelle bitte sicher, dass die offizielle Ledger Live-Anwendung geschlossen ist, damit dein Ledger von Firefly gefunden wird.",
             "trafficLight1": "Verbinde und entsperre deinen Ledger mit deiner PIN",
             "trafficLight2": "Öffne die neue IOTA App auf deinem Ledger",
             "tips": "Tipps, wenn sich dein Ledger nicht verbindet"
@@ -567,7 +567,7 @@
                     "title": "Dein Stimmgewicht",
                     "equality": "1000 IOTA = 1 Stimme",
                     "description1": "Dein Stimmgewicht entspricht deinem Wallet-Guthaben. Wenn sich ein Abstimmungsvorschlag in der Zählungsphase befindet, werden aktive Stimmen gezählt und alle 10 Sekunden angesammelt.",
-                    "description2": "1 Ki Stimmgewicht (1000 IOTA-Token) ermöglicht alle 10 Sekunden eine Stimme. Das bedeutet, dass du deine Wahl über den gesamten Zählzeitraum beibehalten musst, um dein volles Stimmgewicht zu nutzen."
+                    "description2": "1 Ki Stimmgewicht (1000 IOTA-Token) ermöglichen alle 10 Sekunden eine Stimme. Das bedeutet, dass du deine Wahl über den gesamten Zählzeitraum beibehalten musst, um dein volles Stimmgewicht zu nutzen."
                 }
             },
             "info": {
@@ -754,11 +754,11 @@
             "body": "Du sendest {amount} an",
             "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
             "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen.",
-            "sendingFromStakedAccountBelowMinRewardVote": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen. Gegebenfalls musst du auch erneut Abstimmen.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und evtl. verfallen. Gegebenfalls musst du auch erneut Abstimmen.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked oder zur Abstimmung verwendet werden. Dies kann zur Aufhebung des Stakings und zur Beendung des Abstimmens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken und an Abstimmungen erneut teilnehmen musst.",
                 "stake": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
-                "vote": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakings führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst."
+                "vote": "Du versendest Token von einer Wallet, welche an einer Abstimmung teilnimmt. Dies kann zur Beendigung des Abstimmens führen. Du kannst diese Token versenden aber es kann sein, dass du mit dem verbleibenden Guthaben erneut abstimmen musst."
             }
         },
         "balanceFinder": {
@@ -866,21 +866,21 @@
         "governanceManager": {
             "castYourVote": "Gib deine Stimme ab",
             "castYourVoteInfo": "Du bist dabei, mit {amount} für Option {voteValue} ({voteText}) zu stimmen",
-            "castingVotes": "Stimmen abgeben",
-            "stopVoting": "Abstimmen beenden",
+            "castingVotes": "Stimme abgeben",
+            "stopVoting": "Abstimmung stoppen",
             "stopVotingInfo": "Bist du sicher, dass du nicht mehr für Option {voteValue} ({voteText}) abstimmen möchtest?",
-            "stopVotingDisclaimer": "Bitte beachte, dass das Ändern deiner Stimme während des Zählzeitraums keine bereits gezählten Stimmen beeinflussen wird",
-            "stoppingVoting": "Abstimmen beenden",
+            "stopVotingDisclaimer": "Bitte beachte, dass das Stoppen der Abstimmung während des Zählzeitraums keine bereits gezählten Stimmen beeinflusst",
+            "stoppingVoting": "Abstimmung stoppen",
             "changeVote": "Abstimmung ändern",
-            "changeVoteDisclaimer": "Bitte beachte, dass das Ändern deiner Stimme während des Zählzeitraums keine bereits gezählten Stimmen beeinflussen wird",
+            "changeVoteDisclaimer": "Bitte beachte, dass das Ändern deiner Stimme während des Zählzeitraums keine bereits gezählten Stimmen beeinflusst",
             "changeVoteInfo": "Bist du sicher, dass du deine Stimme in Option {voteValue} ({voteText}) ändern möchtest?",
             "changingVote": "Stimme ändern",
             "manageVotes": "Stimmen verwalten",
             "partialVoteInfo": "Du hast {amount} in {account} erhalten. Du kannst mit diesem Guthaben abstimmen, indem du es mit deiner aktuellen Stimme zusammenführst.",
             "mergeVoteDisclaimer": "Bitte beachte, dass das Zusammenführen von Stimmen keine Auswirkungen auf bereits gezählte Stimmen hat",
-            "mergingVotes": "Abstimmungen zusammenführen",
+            "mergingVotes": "Stimmen zusammenführen",
             "votedSuccessfully": "Du hast die Abstimmung mit {account} begonnen.",
-            "unvotedSuccessfully": "Du hast die Abstimmung mit {account} beendet.",
+            "unvotedSuccessfully": "Du hast die Abstimmung mit {account} gestoppt.",
             "successPopup": {
                 "castVotesTitle": "Erfolgreich abgestimmt",
                 "stopVotesTitle": "Abstimmung gestoppt",
@@ -1048,8 +1048,8 @@
         "done": "Fertig",
         "castVotes": "Stimme abgeben",
         "changeVotes": "Stimme ändern",
-        "mergeVotes": "Abstimmung zusammenführen",
-        "stopVotes": "Abstimmung beenden",
+        "mergeVotes": "Stimmen zusammenführen",
+        "stopVotes": "Abstimmung stoppen",
         "okIUnderstand": "OK, ich verstehe",
         "readMore": "Weiterlesen"
     },
@@ -1253,9 +1253,9 @@
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
         "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind, um die Wallets zu ändern.",
-        "participating": "Bitte warte mit dem Wechsel der Wallet, bis du das Staking/die Abstimmung abgeschlossen hast.",
-        "transferringCreate": "Bitte warte, bis alle Transaktionen abgeschlossen sind, bevor du eine neue Wallet hinzufügst.",
-        "participatingCreate": "Bitte warte mit dem Wechsel der Wallet, bis du das Staking/die Abstimmung abgeschlossen hast."
+        "participating": "Bitte warte mit dem Wechsel der Wallet, bis du das Staking/die Stimmabgabe abgeschlossen hast.",
+        "transferringCreate": "Bitte warte mit dem Hinzufügen einer neuen Wallet, bis alle Transaktionen abgeschlossen sind.",
+        "participatingCreate": "Bitte warte, bis du das Staking/die Stimmabgabe abgeschlossen hast, bevor du die Wallet wechselst."
     },
     "error": {
         "profile": {
@@ -1389,7 +1389,7 @@
             "http": "Die Verwendung von Nodes über HTTP lässt den Datenverkehr unverschlüsselt und kann ein Sicherheitsrisiko darstellen."
         },
         "participation": {
-            "noFunds": "Du hast keine IOTA."
+            "noFunds": "Du besitzt momentan keine IOTA-Token."
         }
     },
     "tooltips": {

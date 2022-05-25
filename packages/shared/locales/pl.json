@@ -491,7 +491,7 @@
                 },
                 "backup": {
                     "title": "Utwórz backup portfeli",
-                    "lastBackup": "Ostatnią kopię wykonano {date}",
+                    "lastBackup": "Ostatnia kopia została wykonana {date}",
                     "notBackedUp": "Nie wykonano",
                     "button": "Utwórz kopię"
                 },
@@ -522,7 +522,7 @@
                     "holding": "{duration} do końca stakingu",
                     "ended": "Staking został zakończony",
                     "inactive": "Nie wykryto wydarzeń stakingu",
-                    "fetching": "Pobieranie informacji o wydarzeniu stakingu..."
+                    "fetching": "Ładowanie informacji o wydarzeniu stakingu..."
                 },
                 "bodies": {
                     "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
@@ -562,11 +562,11 @@
         },
         "governance": {
             "votingPower": {
-                "title": "Moja waga głosowania",
+                "title": "Waga mojego głosu",
                 "info": {
                     "title": "Waga Twojego głosu",
                     "equality": "1000 IOTA = 1 GŁOS",
-                    "description1": "Waga głosu zależy od stanu Twojego portfela. Gdy wydarzenie znajduje się w fazie liczenia głosów, aktywne głosy są zliczane i kumulowane co 10 sekund.",
+                    "description1": "Waga głosu zależy od stanu Twojego portfela. Gdy wydarzenie znajduje się w fazie zliczania głosów, aktywne głosy są zliczane i kumulowane co 10 sekund.",
                     "description2": "1 Ki wagi głosu (1000 tokenów IOTA) daje 1 głos co 10 sekund. Oznacza to, że musisz głosować przez cały okres zliczania, aby oddać pełną wagę swojego głosu."
                 }
             },
@@ -576,20 +576,20 @@
                 "link": "Więcej o głosowaniu przy użyciu IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Otwarcie głosowania",
-                        "countingStarts": "Rozpoczęcie liczenia",
-                        "countingStops": "Zakończenie liczenia",
+                        "votingOpen": "Głosowanie otwarte",
+                        "countingStarts": "Rozpoczęcie zliczania",
+                        "countingStops": "Zakończenie zliczania",
                         "votingOpened": "Otwarto głosowanie",
-                        "countingStarted": "Rozpoczęto liczenie",
-                        "countingStopped": "Zakończono liczenie"
+                        "countingStarted": "Rozpoczęto zliczanie",
+                        "countingStopped": "Zakończono zliczanie"
                     },
                     "votingRate": {
-                        "title": "Prędkość głosowania",
+                        "title": "Tempo głosowania",
                         "body": "{amount} wygeneruje {votesPerMilestone} głosów co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}."
                     },
                     "countedVotes": {
                         "title": "Zliczone głosy",
-                        "body": "Głosy są zliczane co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}} przez cały okres liczenia. {amount} generuje {votesPerMilestone} głosów co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}."
+                        "body": "Głosy są zliczane co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}} przez cały okres zliczania. {amount} generuje {votesPerMilestone} głosów co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}."
                     },
                     "partiallyVoted": {
                         "title": "Nowe nieużyte środki: {amount}",
@@ -597,7 +597,7 @@
                     },
                     "maximumVotes": {
                         "title": "Maksymalna liczba głosów",
-                        "body": "Musisz nadal głosować przez pozostały okres liczenia, aby osiągnąć maksymalną liczbę głosów."
+                        "body": "Aby oddać maksymalną liczbę głosów, musisz kontynuować głosowanie przez cały pozostały okres zliczania."
                     },
                     "chart": {
                         "totalVotes": "Głosy: {amount}"
@@ -606,10 +606,10 @@
             },
             "events": {
                 "status": {
-                    "upcoming": "Zapowiedź",
-                    "commencing": "Otwarcie głosowania",
-                    "holding": "Liczenie",
-                    "ended": "Zakończono"
+                    "upcoming": "Nadchodzące głosowanie",
+                    "commencing": "Głosowanie otwarte",
+                    "holding": "Zliczanie głosów",
+                    "ended": "Głosowanie zakończone"
                 },
                 "button": "Wyświetl propozycję",
                 "treasury": {
@@ -618,22 +618,22 @@
                         "subtitle": "Połącz się z serwerem, który dodał ten głos",
                         "buttonConnect": "Połącz z domyślnym serwerem",
                         "buttonSettings": "Wyświetl ustawienia serwera",
-                        "fetching": "Pobieranie informacji o evencie zarządzania..."
+                        "fetching": "Ładowanie informacji o wydarzeniu zarządzania..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Głosowanie rozpocznie się",
+                "votingOpens": "Rozpoczęcie głosowania",
                 "votingProgress": "Pozostały czas",
                 "votingPower": "Waga Twojego głosu",
                 "votesCounted": "Twoje zliczone głosy",
                 "maximumVotes": "Maksymalna liczba Twoich głosów",
-                "countingStarts": "Liczenie rozpoczyna się",
+                "countingStarts": "Rozpoczęcie zliczania",
                 "currentResult": "Aktualny wynik",
                 "finalResult": "Wynik końcowy",
                 "answerHeader": {
-                    "activeVoting": "Aktywne głosowanie",
-                    "selected": "Przesłano",
+                    "activeVoting": "Aktywnie głosujesz na ten wybór",
+                    "selected": "Wybrano",
                     "notSelected": "Nie wybrano",
                     "winner": "Zwycięzca"
                 }
@@ -662,7 +662,7 @@
         },
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
-            "lastBackup": "Ostatnią kopię wykonano {date}",
+            "lastBackup": "Ostatnia kopia została wykonana {date}",
             "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano",
@@ -754,7 +754,7 @@
             "body": "Zamierzasz wysłać {amount} do",
             "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
             "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu.",
-            "sendingFromStakedAccountBelowMinRewardVote": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu. Konieczne może być także ponowne zagłosowanie.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny, zatrzymać głosowanie, a także spowodować utratę nagrody za staking na tym portfelu.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Wysyłasz przelew z portfela, który obecnie stakuje i głosuje. Może to spowodować wycofanie Twoich tokenów z głosowania i stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego oddania głosu oraz stakingu przy użyciu pozostałych środków.",
                 "stake": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
@@ -865,28 +865,28 @@
         },
         "governanceManager": {
             "castYourVote": "Oddaj swój głos",
-            "castYourVoteInfo": "Zamierzasz zagłosować na Opcję {voteValue} ({voteText}) portfelem {amount}",
-            "castingVotes": "Przesyłanie głosów",
+            "castYourVoteInfo": "Zamierzasz zagłosować na Wybór {voteValue} ({voteText}) wagą głosu {amount}",
+            "castingVotes": "Głosowanie",
             "stopVoting": "Zatrzymaj głosowanie",
-            "stopVotingInfo": "Czy na pewno chcesz przestać głosować na Opcję {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Pamiętaj, że przerwanie głosowania w okresie liczenia głosów nie będzie miało wpływu na głosy, które zostały już policzone",
-            "stoppingVoting": "Zatrzymanie głosowania",
+            "stopVotingInfo": "Czy na pewno chcesz przestać głosować na Wybór {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Pamiętaj, że przerwanie głosowania w okresie zliczania głosów nie będzie miało wpływu na głosy, które zostały już policzone",
+            "stoppingVoting": "Zatrzymywanie głosowania",
             "changeVote": "Zmień głos",
-            "changeVoteDisclaimer": "Pamiętaj, że zmiana głosu w trakcie liczenia głosów nie będzie miała wpływu na głosy, które zostały już policzone",
-            "changeVoteInfo": "Czy na pewno chcesz zmienić swój głos na Opcję {voteValue} ({voteText})?",
-            "changingVote": "Zmiana głosu",
+            "changeVoteDisclaimer": "Pamiętaj, że zmiana głosu w trakcie zliczania głosów nie będzie miała wpływu na głosy, które zostały już policzone",
+            "changeVoteInfo": "Czy na pewno chcesz zmienić swój głos na Wybór {voteValue} ({voteText})?",
+            "changingVote": "Zmienianie wyboru",
             "manageVotes": "Zarządzaj głosami",
             "partialVoteInfo": "Otrzymałeś {amount} na {account}. Możesz zagłosować tymi środkami poprzez dołączenie ich do aktualnego głosu.",
             "mergeVoteDisclaimer": "Pamiętaj, że dołączenie głosów nie będzie miało wpływu na głosy, które zostały już policzone",
             "mergingVotes": "Dołączanie głosów",
             "votedSuccessfully": "Zacząłeś głosować ({account}).",
-            "unvotedSuccessfully": "Przestałeś głosować ({account}).",
+            "unvotedSuccessfully": "Przestałeś głosować z użyciem {account}.",
             "successPopup": {
                 "castVotesTitle": "Zagłosowano pomyślnie",
                 "stopVotesTitle": "Głosowanie zatrzymane",
                 "mergeVotesTitle": "Głos dołączony",
                 "changeVotesTitle": "Głos zmieniony",
-                "castBody": "Teraz głosujesz za opcją {voteValue} ({voteText}).",
+                "castBody": "Głosujesz teraz za Wyborem {voteValue} ({voteText}).",
                 "stopBody": "Przestałeś głosować. To nie ma wpływu na głosy, które zostały już policzone."
             }
         },
@@ -1046,7 +1046,7 @@
         "merge": "Dołącz",
         "mergeFunds": "Dołącz środki",
         "done": "Gotowe",
-        "castVotes": "Oddaj głosy",
+        "castVotes": "Głosuj",
         "changeVotes": "Zmień głos",
         "mergeVotes": "Dołącz głos",
         "stopVotes": "Zatrzymaj głosowanie",
@@ -1179,7 +1179,7 @@
         "stakingTransaction": "Transakcja stakingu",
         "unstakingTransaction": "Transakcja unstakingu",
         "votingTransaction": "Transakcja głosowania",
-        "unvotingTransaction": "Zaprzestanie głosowania",
+        "unvotingTransaction": "Zatrzymanie głosowania",
         "participationTransaction": "Transakcja uczestnictwa",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
@@ -1194,7 +1194,7 @@
         "unstaked": "Niestakowane",
         "unvoted": "Zatrzymano głos",
         "staking": "Staking",
-        "unstaking": "Wycofywanie środków",
+        "unstaking": "Unstaking środków",
         "notStaked": "Nie stakujesz",
         "stakedFunds": "Stakowane środki",
         "unstakedFunds": "Niestakowane środki",
@@ -1202,7 +1202,7 @@
         "unvoting": "Wycofywanie głosu",
         "accountColor": "Kolor portfela",
         "myAssets": "Moje środki",
-        "option": "Opcja",
+        "option": "Wybór",
         "total": "Suma: {balance}"
     },
     "dates": {
@@ -1253,7 +1253,7 @@
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
         "transferring": "Poczekaj, aż wszystkie transakcje zostaną zakończone, aby zmienić portfele.",
-        "participating": "Przed zmianą portfela należy poczekać aż transakcja stakingu/głosowania zostanie sfinalizowana.",
+        "participating": "Przed zmianą portfela należy poczekać aż transakcje stakingu/głosowania zostaną sfinalizowane.",
         "transferringCreate": "Przed dodaniem nowego portfela należy poczekać, aż wszystkie transakcje zostaną sfinalizowane.",
         "participatingCreate": "Przed dodaniem nowego portfela należy poczekać aż transakcje stakingu/głosowania zostaną sfinalizowane."
     },
@@ -1379,7 +1379,7 @@
             "cannotFindStakingEvent": "Nie można znaleźć wydarzenia stakingu.",
             "cannotVisitAirdropWebsite": "Nie można otworzyć strony {airdrop}.",
             "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu.",
-            "failedToFetchPreviousRewards": "Nie udało się pobrać informacji o poprzednich nagrodach, sprawdź ustawienia zapory."
+            "failedToFetchPreviousRewards": "Nie udało się załadować informacji o poprzednich nagrodach, sprawdź ustawienia zapory."
         },
         "invalidDate": "NIEPRAWIDŁOWA DATA",
         "invalidTime": "NIEPRAWIDŁOWY CZAS"

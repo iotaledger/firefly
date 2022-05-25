@@ -1190,20 +1190,20 @@
         "unknown": "Bilinmeyen",
         "none": "Hiçbiri",
         "staked": "Stake edildi",
-        "voted": "Voted",
+        "voted": "Oylandı",
         "unstaked": "Stake edilmemiş",
-        "unvoted": "Unvoted",
+        "unvoted": "Oy geri alındı",
         "staking": "Staking",
         "unstaking": "Stake geri alınıyor",
         "notStaked": "Stake edilmemiş",
         "stakedFunds": "Stake edilen fonlar",
         "unstakedFunds": "Tahsis edilmemiş fonlar",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
+        "voting": "Oylama",
+        "unvoting": "Oylama iptali",
         "accountColor": "Genel -> hesap rengi",
         "myAssets": "Varlıklarım",
-        "option": "Option",
-        "total": "Total: {balance}"
+        "option": "Seçenek",
+        "total": "Toplam: {balance}"
     },
     "dates": {
         "today": "Bugün",
@@ -1253,9 +1253,9 @@
         },
         "syncing": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
         "transferring": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "participating": "Cüzdanları değiştirmeden önce lütfen stake etme/oylama işlemini tamamlayana kadar bekleyin.",
+        "transferringCreate": "Yeni bir cüzdan eklemeden önce lütfen tüm işlemlerin tamamlanmasını bekleyin.",
+        "participatingCreate": "Yeni bir cüzdan eklemeden önce lütfen stake etme/oylama işlemini tamamlayana kadar bekleyin."
     },
     "error": {
         "profile": {
@@ -1379,7 +1379,7 @@
             "cannotFindStakingEvent": "Stake etkinliği bulunamadı.",
             "cannotVisitAirdropWebsite": "{airdrop} web sitesi açılamıyor.",
             "invalidStakingEventId": "Geçersiz staking kimliği.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Önceki ödüller alınamadı, lütfen güvenlik duvarı ayarlarınızı kontrol edin."
         },
         "invalidDate": "GEÇERSİZ TARİH",
         "invalidTime": "GEÇERSİZ ZAMAN"
@@ -1443,6 +1443,6 @@
     "tabs": {
         "wallet": "Cüzdan",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Yönetim"
     }
 }

@@ -10,9 +10,9 @@
             "checkbox": "Saya telah membaca dan saya menerima Kebijakan Privasi & Persyaratan Layanan"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Laporan Kerusakan",
+            "body": "Bantu pengembang meningkatkan Firefly dengan mengirimkan data diagnostik secara otomatis saat terjadi kesalahan atau crash.",
+            "checkbox": "Kirim laporan kerusakan ke IOTA Foundation"
         },
         "appearance": {
             "title": "Tampilan",
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Motif",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Jika Anda mengubah tema sistem, Anda mungkin perlu memulai ulang Firefly untuk melihat efeknya"
             },
             "language": {
                 "title": "Bahasa",
@@ -357,9 +357,9 @@
                 "action": "Ganti pin"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Ubah nama profil",
+                "description": "Ubah nama profil Firefly Anda",
+                "success": "Anda mengubah nama profil Anda"
             },
             "balanceFinder": {
                 "title": "Pencari saldo",
@@ -417,10 +417,10 @@
                 "description": "Lihat kesalahan untuk men-debug masalah"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Laporan crash",
+                "body": "Bantu pengembang meningkatkan Firefly dengan mengirimkan data diagnostik secara otomatis saat terjadi kesalahan atau crash",
+                "checkbox": "Kirim laporan kerusakan",
+                "advice": "Silakan restart aplikasi Firefly untuk{sendCrashReports, select, true {mulai berbagi laporan kerusakan} false {berhenti berbagi laporan kerusakan} other {terapkan perubahan ini}}"
             },
             "diagnostics": {
                 "title": "Diagnostik",
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Operasional jaringan",
+                "networkDegraded": "Jaringan terdegradasi",
+                "networkDown": "Jaringan terputus",
                 "status": "Status",
                 "messagesPerSecond": "Pesan per detik",
                 "referencedRate": "Konten yang Direferensikan"
@@ -473,32 +473,32 @@
                 "allSettings": "Semua pengaturan",
                 "logout": "Keluar",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Kunci profil",
+                    "locked": "Stronghold terkunci",
+                    "unlocked": "Stronghold tidak terkunci"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Perangkat keras",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Aplikasi IOTA Tidak Terbuka",
+                        "connected": "Terhubung",
+                        "legacyConnected": "Aplikasi lawas terbuka",
+                        "locked": "Terkunci",
+                        "mnemonicMismatch": "Ledger salah atau Mnemonik",
+                        "notDetected": "Tidak terdeteksi",
+                        "otherConnected": "Aplikasi terbuka"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Cadangkan dompet Anda",
                     "lastBackup": "Anda melakukan backup terakhir {date}",
                     "notBackedUp": "Tidak dicadangkan",
-                    "button": "Backup"
+                    "button": "Cadangan"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Pembaruan baru tersedia",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Memperbarui"
                 }
             }
         },
@@ -517,32 +517,32 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "upcoming": "Kembali lagi nanti",
+                    "commencing": "Pre-staking terbuka",
+                    "holding": "{duration} mempertaruhkan kiri",
+                    "ended": "Staking sekarang telah berakhir",
+                    "inactive": "Tidak ada staking event yang terdeteksi",
+                    "fetching": "Mengambil info acara staking..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Taruhan {token} token Anda untuk secara otomatis menerima hadiah setiap 10 detik setelah taruhan dimulai pada {date}.",
+                    "commencing": "Taruhan {token} token Anda untuk secara otomatis menerima hadiah setiap 10 detik setelah taruhan dimulai pada {date}.",
+                    "holdingAndStaking": "Anda secara otomatis menerima hadiah setiap 10 detik.",
+                    "holdingAndNotStaking": "Taruh token {token} Anda untuk menerima hadiah setiap 10 detik.",
+                    "endedAndDidStake": "Hadiah {token} akan didistribusikan ke dompet Anda setelah jaringan diluncurkan.",
+                    "endedAndDidNotStake": "Anda tidak berpartisipasi dalam airdrop ini.",
+                    "endedAndDidNotReachMinRewards": "Anda tidak mempertaruhkan cukup {token} token untuk mencapai hadiah airdrop minimum.",
+                    "inactive": "Buka konfigurasi jaringan di pengaturan lanjutan dan pastikan node saat ini memiliki fitur \"Partisipasi\" dengan mengklik \"Lihat info\"."
                 }
             },
             "airdrops": {
                 "holding": "Tersisa",
                 "commencing": "Sampai staking dimulai",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Periode taruhan saat ini",
+                "totalWalletRewards": "Total hadiah dompet",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "Assembly adalah jaringan multi-rantai yang sangat skalabel dan tanpa izin untuk membangun dan menerapkan kontrak pintar yang dapat disusun. Perakitan adalah masa depan web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -550,8 +550,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Acara Baru",
+                "complete": "Selesai"
             }
         },
         "picker": {
@@ -562,7 +562,7 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "Kekuatan suara saya",
                 "info": {
                     "title": "Your voting weight",
                     "equality": "1000 IOTA = 1 VOTE",
@@ -763,12 +763,12 @@
         },
         "balanceFinder": {
             "title": "Pencari saldo",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "body": "Lakukan pencarian alamat yang lebih lengkap untuk menemukan saldo yang hilang dan hadiah airdrop sebelumnya. Ini mungkin memakan waktu cukup lama.",
+            "accountsSearched": "Dompet sudah dicari",
+            "addressesSearched": "Alamat dicari per dompet",
+            "accountsFound": "Dompet ditemukan",
             "totalWalletBalance": "Total Saldo",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "Apakah saldo atau jumlah dompet Anda salah? Tekan cari lagi sampai saldo penuh Anda ditampilkan.",
             "typePassword": "Masukkan kata sandi Anda untuk menyetujui pencarian."
         },
         "riskFunds": {
@@ -839,7 +839,7 @@
             "title": "Ekspor Riwayat Transaksi",
             "body": "Ekspor riwayat transaksi pada dompet/akun yang dipilih. File yang diekspor akan berbentuk format .csv.",
             "profileName": "Nama profil:",
-            "accountName": "Wallet name:",
+            "accountName": "Nama Dompet:",
             "typePassword": "Masukkan kata sandi Anda untuk menyetujui pengeskporan"
         },
         "stakingManager": {
@@ -848,46 +848,46 @@
             "totalFundsStaked": "Total dana yang di-stake",
             "stakedSuccessfully": "Dana Anda telah di-stake untuk {account}.",
             "unstakedSuccessfully": "Dana Anda telah di-unstake untuk {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "Mencari dompet Anda? Kunang-kunang telah berubah. Beralih di antara dompet Anda di bilah menu atas."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Konfirmasi Partisipasi",
             "subtitleStake": "Anda akan meng-stake",
             "subtitleMerge": "Anda akan menggabungkan",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "Jika Anda tidak ingin berpartisipasi dalam kedua airdrop, Anda dapat memilih keluar di bawah. Anda dapat membatalkan taruhan dan memasang kembali untuk memilih kembali kapan saja.",
+            "mergeStakeWarning": "Dana Anda akan dipertaruhkan untuk {airdrop}. Untuk mengubah airdrop mana yang ingin Anda ikuti, lepaskan dompet ini dan pasang kembali.",
             "estimatedAirdrop": "Estimasi hadiah"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Fase staking {periodNumber} dari {date}",
+            "body": "Taruhan IOTA untuk Majelis berlanjut... Berpartisipasi dalam fase {periodNumber} selama 90 hari. Taruhan token IOTA Anda dan dapatkan hadiah ASMB!",
+            "info": "Staking Shimmer sekarang selesai dan hanya token ASMB yang akan didistribusikan."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
-            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "castYourVote": "Berikan suara Anda",
+            "castYourVoteInfo": "Anda akan memberikan suara untuk Opsi {voteValue} ({voteText}) dengan {amount}",
+            "castingVotes": "Memberikan suara",
+            "stopVoting": "Selesai \npemungutan suara",
+            "stopVotingInfo": "Anda yakin ingin berhenti memberikan suara untuk Opsi {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Harap dicatat bahwa menghentikan pemungutan suara selama periode penghitungan tidak akan memengaruhi suara apa pun yang telah dihitung",
+            "stoppingVoting": "Selesai \npemungutan suara",
+            "changeVote": "Ubah pemungutan suara",
+            "changeVoteDisclaimer": "Harap dicatat bahwa mengubah suara Anda selama periode penghitungan tidak akan memengaruhi suara apa pun yang telah dihitung",
+            "changeVoteInfo": "Yakin ingin mengubah suara Anda ke Opsi {voteValue} ({voteText})?",
+            "changingVote": "Ubah pemungutan suara",
+            "manageVotes": "Kelola suara",
+            "partialVoteInfo": "Anda telah menerima {amount} ke {account}. Anda dapat memilih dengan dana ini dengan menggabungkannya dengan suara Anda saat ini.",
+            "mergeVoteDisclaimer": "Harap perhatikan bahwa menggabungkan suara tidak akan memengaruhi suara apa pun yang telah dihitung",
+            "mergingVotes": "Menggabungkan suara",
+            "votedSuccessfully": "Anda telah mulai memberikan suara dengan {account}.",
+            "unvotedSuccessfully": "Anda telah berhenti memberikan suara dengan {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "Dipilih dengan sukses",
+                "stopVotesTitle": "Pemungutan suara telah berhenti",
+                "mergeVotesTitle": "Suara digabungkan",
+                "changeVotesTitle": "Suara berubah",
+                "castBody": "Anda sekarang memberikan suara untuk Opsi {voteValue} ({voteText}).",
+                "stopBody": "Anda telah berhenti memberikan suara. Ini tidak mempengaruhi suara yang sudah dihitung."
             }
         },
         "shimmer-info": {
@@ -905,24 +905,24 @@
             "body": "Anda akan terhubung ke Chrysalis Devnet dalam pengaturan bawaan, dan dapat berpindah jaringan secara manual. Hanya lanjutkan jika Anda tahu apa yang Anda lakukan."
         },
         "crashReporting": {
-            "title": "Crash reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Pelaporan kerusakan",
+            "body": "Bantu pengembang meningkatkan Firefly dengan mengirimkan data diagnostik secara otomatis saat terjadi kesalahan atau crash. Jika dipilih, ini akan berlaku setelah memulai ulang Firefly.",
+            "checkbox": "Kirim laporan kerusakan ke IOTA Foundation"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
-            "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosTitle": "Persyaratan Layanan",
+            "privPolicyTitle": "Kebijakan Privasi",
+            "tosAndPrivPolicyBody": "Kami telah memperbarui Ketentuan Layanan dan Kebijakan Privasi Firefly.",
+            "tosBody": "Kami telah memperbarui Persyaratan Layanan Firefly.",
+            "privPolicyBody": "Kami telah memperbarui Kebijakan Privasi Firefly.",
+            "tosAndPrivPolicyCheckbox": "Saya telah membaca dan saya menerima Persyaratan Layanan dan Kebijakan Privasi yang diperbarui",
+            "tosCheckbox": "Saya telah membaca dan saya menerima Persyaratan Layanan yang diperbarui",
+            "privPolicyCheckbox": "Saya telah membaca dan saya menerima Kebijakan Privasi yang diperbarui"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Cara Anda menggunakan Firefly telah berubah",
+            "body": "Konten setiap tab sekarang dalam konteks dompet tunggal. Anda dapat mengubah dompet yang dipilih dari mana saja dengan menggunakan pengalih di bilah judul.",
+            "hint": "Tidak dapat menemukan dompet? Gunakan pencari saldo di pengaturan untuk menemukan dompet yang digunakan sebelumnya."
         }
     },
     "charts": {
@@ -1046,10 +1046,10 @@
         "merge": "Menggabungkan",
         "mergeFunds": "Menggabungkan dana",
         "done": "Selesai",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
+        "castVotes": "Melaksanakan pemungutan suara",
+        "changeVotes": "Ubah pemungutan suara",
         "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "stopVotes": "Selesai \npemungutan suara",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more"
     },

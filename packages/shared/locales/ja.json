@@ -522,7 +522,7 @@
                     "holding": "ステーキング残り{duration}",
                     "ended": "ステーキングは終了しました",
                     "inactive": "ステーキングイベントが検出されませんでした",
-                    "fetching": "Fetching staking event info..."
+                    "fetching": "ステーキングイベント情報を取得しています..."
                 },
                 "bodies": {
                     "upcoming": "{token} トークンをステークして、 {date}にステーキングが開始されると10秒ごとに自動的に報酬を受け取ることができます。",
@@ -542,7 +542,7 @@
                 "totalWalletRewards": "ウォレット報酬の合計",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。"
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -565,30 +565,30 @@
                 "title": "My voting weight",
                 "info": {
                     "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
+                    "equality": "1000 IOTA = 1 投票",
                     "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
                     "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
                 }
             },
             "info": {
-                "title": "Governance info",
+                "title": "ガバナンス情報",
                 "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "link": "IOTAでの投票について学ぶ",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "投票を受付中",
+                        "countingStarts": "カウント開始",
+                        "countingStops": "カウント終了",
+                        "votingOpened": "投票が開始されました",
+                        "countingStarted": "カウントを開始しました",
+                        "countingStopped": "カウントが終了しました"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
+                        "title": "投票率",
                         "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
+                        "title": "カウントされた投票",
                         "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "partiallyVoted": {
@@ -600,46 +600,46 @@
                         "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "投票: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "お知らせ",
+                    "commencing": "投票を受付中",
+                    "holding": "カウント",
+                    "ended": "終了"
                 },
-                "button": "View proposal",
+                "button": "提案を表示",
                 "treasury": {
                     "notFound": {
-                        "title": "Unable to load Community Treasury vote",
+                        "title": "コミュニティ\"Treasury\"の投票を読み込むことができません",
                         "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "buttonConnect": "デフォルトノードに接続",
+                        "buttonSettings": "ノードの設定を表示",
+                        "fetching": "ガバナンスイベント情報を取得しています..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
+                "votingOpens": "投票が始まります",
+                "votingProgress": "残り時間",
                 "votingPower": "Your voting weight",
                 "votesCounted": "Your counted votes",
                 "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "countingStarts": "カウントが始まります",
+                "currentResult": "現在の結果",
+                "finalResult": "最終結果",
                 "answerHeader": {
                     "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
+                    "selected": "送信済み",
+                    "notSelected": "未選択",
                     "winner": "Winner"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "投票",
+            "manageVote": "投票の管理"
         }
     },
     "popups": {
@@ -864,28 +864,28 @@
             "info": "Shimmerステーキングが完了し、ASMBトークンのみが配布されます。"
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
+            "castYourVote": "投票してください",
             "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
             "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
+            "stopVoting": "投票を停止",
             "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
             "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
+            "stoppingVoting": "投票を停止中",
+            "changeVote": "投票の変更",
             "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
             "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
+            "changingVote": "投票の変更中",
+            "manageVotes": "投票の管理",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
             "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
+            "mergingVotes": "投票を管理中",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
             "successPopup": {
                 "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
+                "stopVotesTitle": "投票が停止されました",
+                "mergeVotesTitle": "投票が統合されました",
+                "changeVotesTitle": "投票が変更されました",
                 "castBody": "You are now voting for Option {voteValue} ({voteText}).",
                 "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
             }
@@ -1046,10 +1046,10 @@
         "merge": "統合",
         "mergeFunds": "資金を統合",
         "done": "完了しました",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
-        "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "castVotes": "投票する",
+        "changeVotes": "投票の変更",
+        "mergeVotes": "投票を統合",
+        "stopVotes": "投票を停止",
         "okIUnderstand": "はい。分かりました",
         "readMore": "もっと読む"
     },
@@ -1190,19 +1190,19 @@
         "unknown": "不明",
         "none": "なし",
         "staked": "ステーク済み",
-        "voted": "Voted",
+        "voted": "投票しました",
         "unstaked": "解除したステーク",
-        "unvoted": "Unvoted",
+        "unvoted": "未投票",
         "staking": "ステーキング",
         "unstaking": "アンステーキング",
         "notStaked": "ステークされていません",
         "stakedFunds": "ステーク資金",
         "unstakedFunds": "解除したステーク資金",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
+        "voting": "投票",
+        "unvoting": "投票を解除",
         "accountColor": "ウォレットの色",
         "myAssets": "My Assets(マイアセット)",
-        "option": "Option",
+        "option": "オプション",
         "total": "合計: {balance}"
     },
     "dates": {
@@ -1443,6 +1443,6 @@
     "tabs": {
         "wallet": "ウォレット",
         "staking": "ステーキング",
-        "governance": "Governance"
+        "governance": "ガバナンス"
     }
 }

@@ -519,16 +519,16 @@
                 "headers": {
                     "upcoming": "Проверете по-късно",
                     "commencing": "Предстейкването е отворено",
-                    "holding": "{duration} of staking left",
+                    "holding": "{duration} от стейкването остава",
                     "ended": "Залагането приключи",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "inactive": "Не са открити събития за стейкване",
+                    "fetching": "Търсене на инфо за събития за стейкване..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "upcoming": "Стейквайтв своите {token} токъни, за да получавате награди всеки 10 секунди щом стейкването започне на {date}.",
+                    "commencing": "Стейквайте своите {token} токъни, за да получавате награди всеки 10 секунди щом стейкването започне на {date}.",
                     "holdingAndStaking": "Автоматично ще получавате награди всеки 10 секунди.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
+                    "holdingAndNotStaking": "Стейквайте своите {token} токъни за да получавате награди всеки 10 секунди.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
                     "endedAndDidNotStake": "You did not participate in this airdrop.",
                     "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
@@ -538,7 +538,7 @@
             "airdrops": {
                 "holding": "Остава",
                 "commencing": "Докато залагането започне",
-                "currentStakingPeriod": "Current staking period",
+                "currentStakingPeriod": "Текущ период за стейкване",
                 "totalWalletRewards": "Всички награди за портфейл",
                 "assembly": {
                     "name": "Assembly",
@@ -576,9 +576,9 @@
                 "link": "Научете повече за гласуването чрез IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
+                        "votingOpen": "Гласуването отворено",
+                        "countingStarts": "Отброяването започва",
+                        "countingStops": "Отброяването свършва",
                         "votingOpened": "Voting opened",
                         "countingStarted": "Counting began",
                         "countingStopped": "Counting ended"
@@ -607,7 +607,7 @@
             "events": {
                 "status": {
                     "upcoming": "Announcement",
-                    "commencing": "Voting open",
+                    "commencing": "Гласуването отворено",
                     "holding": "Counting",
                     "ended": "Ended"
                 },
@@ -635,11 +635,11 @@
                     "activeVoting": "Active voting",
                     "selected": "Изпратено",
                     "notSelected": "Не е избрано",
-                    "winner": "Winner"
+                    "winner": "Печеливш избор"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "гласове",
+            "manageVote": "Управление не гласуването"
         }
     },
     "popups": {
@@ -697,19 +697,19 @@
             "titleAdd": "Добави Node сървър",
             "titleUpdate": "Обнови Node сървър",
             "titleRemove": "Премахни Node сървър",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Премахни всички node сървъри",
             "titleDetails": "Детайли за Node сървър",
             "titleInfo": "Инфо за Node сървър",
             "addingNode": "Добави Node",
             "updatingNode": "Обнови Node",
-            "loadingNodeInfo": "Loading node info",
+            "loadingNodeInfo": "Зареждане на инфо за node сървър",
             "nodeAddress": "Адрес Node сървър",
             "optionalUsername": "Потребителско име (незадължително)",
             "optionalPassword": "Парола (незадължителна)",
             "optionalJwt": "JSON уеб токен (незадължителен)",
             "setAsPrimaryNode": "Задай основен Node сървър",
             "removeConfirmation": "Сигурни ли сте, че искате да премахнете този Node сървър?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Сигурни ли сте, че искате да премахнете всички node сървъри?",
             "info": {
                 "url": "URL",
                 "software": "Софтуер",
@@ -725,7 +725,7 @@
         "switchNetwork": {
             "title": "Смяна на мрежата",
             "newNetwork": "Нова мрежа",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "resetWarning": "Смяната на мрежата ще излезете и рестартирате всички акаунти, салдо и история на трансакциите за този профил.",
             "switchingNetwork": "Смяна на мрежата",
             "typePassword": "Въведете своята парола за превключване:"
         },
@@ -764,11 +764,11 @@
         "balanceFinder": {
             "title": "Търсене на средствата",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "accountsSearched": "Намерени портфейли",
+            "addressesSearched": "Адреси намерени за портфейл",
+            "accountsFound": "Намерени портфейли",
             "totalWalletBalance": "Общо салдо",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "Грешен ли е баланса и броя на портфейлите? Натиснете търси отново докато пълният баланс е изписан.",
             "typePassword": "Въведете парола, за да разрешите търсене."
         },
         "riskFunds": {
@@ -839,21 +839,21 @@
             "title": "Изнасяне историята на транзакциите",
             "body": "Експортиране на история на транзакциите от избран портфейл. Експортът ще бъде създаден в .csv формат.",
             "profileName": "Име на профила:",
-            "accountName": "Wallet name:",
+            "accountName": "Име на портфейла:",
             "typePassword": "Въведете паролата си, за да разрешите експортиране"
         },
         "stakingManager": {
             "title": "Управление на залагането",
             "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
             "totalFundsStaked": "Всички заложени средства",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "stakedSuccessfully": "Твоите средства са заложени за {account}.",
+            "unstakedSuccessfully": "Твоите средства вече не са заложени за {account}.",
+            "singleAccountHint": "Търсите своите портфейли? Firefly е променен. Превключете между портфейлите в менюто най-горе."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Потвърдете участието",
             "subtitleStake": "Ще заложите",
-            "subtitleMerge": "You are about to merge",
+            "subtitleMerge": "Ще слеете",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
             "estimatedAirdrop": "Прогнозна печалба"
@@ -861,29 +861,29 @@
         "newStakingPeriodNotification": {
             "title": "Staking phase {periodNumber} from {date}",
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "info": "Shimmer залагането (staking) е вече приключено и само ASMB токъни ще бъдат разпределяни."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
+            "castYourVote": "Изпратете своя вот",
             "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
+            "castingVotes": "Излъчване на вот",
+            "stopVoting": "Спиране на гласуване",
             "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
             "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
+            "stoppingVoting": "Спиране на гласуване",
+            "changeVote": "Промяна на вот",
             "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
             "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
+            "changingVote": "Промяна на вот",
+            "manageVotes": "Управление на вот",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
             "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
+            "mergingVotes": "Сливане на вот",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
+                "castVotesTitle": "Успешно гласуване",
+                "stopVotesTitle": "Гласуването спряно",
                 "mergeVotesTitle": "Vote merged",
                 "changeVotesTitle": "Vote changed",
                 "castBody": "You are now voting for Option {voteValue} ({voteText}).",
@@ -998,7 +998,7 @@
         "addNode": "Добави Node сървър",
         "updateNode": "Обнови Node сървър",
         "removeNode": "Премахни Node сървър",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "Премахни всички node сървъри",
         "hide": "Скриване",
         "hideOthers": "Скриване на другите",
         "showAll": "Показване на всички",
@@ -1047,9 +1047,9 @@
         "mergeFunds": "Обедини средства",
         "done": "Готово",
         "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
+        "changeVotes": "Промяна на вот",
         "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "stopVotes": "Спиране на гласуване",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more"
     },
@@ -1189,21 +1189,21 @@
         "yourWallets": "Вашите портфейли",
         "unknown": "Неизвестен",
         "none": "None",
-        "staked": "Staked",
-        "voted": "Voted",
-        "unstaked": "Unstaked",
+        "staked": "Заложени",
+        "voted": "Гласуван",
+        "unstaked": "Прекратен е залога",
         "unvoted": "Unvoted",
         "staking": "Залагане",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
         "stakedFunds": "Стейкнати средства",
         "unstakedFunds": "Unstaked funds",
-        "voting": "Voting",
+        "voting": "Гласуване",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
-        "myAssets": "My assets",
-        "option": "Option",
-        "total": "Total: {balance}"
+        "myAssets": "Моите активи",
+        "option": "Опция",
+        "total": "Общо: {balance}"
     },
     "dates": {
         "today": "Днес",
@@ -1290,7 +1290,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Трябва да използвате последния портфейл, за да създадете нов.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "Името на профила трябва да съдържа поне 1 символ.",
             "notEmpty": "Трябва да прехвърлите наличността преди да изтриете този портфейл.",
             "duplicate": "Портфейл с това име вече съществува.",
             "tilde": "Името на профила не може да започва със символа '~'.",
@@ -1320,8 +1320,8 @@
         "node": {
             "invalid": "Моля, въведете валиден URL адрес.",
             "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
+            "timedOut": "Времето за свързване изтече.",
+            "refused": "Свързването е отказано.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
@@ -1403,7 +1403,7 @@
         },
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
+            "titleNoFunds": "Нови не заложени средства",
             "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
         },
