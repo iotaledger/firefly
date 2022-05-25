@@ -3,7 +3,12 @@ import { WalletAccount } from '../typings/wallet'
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { canAccountReachMinimumAirdrop } from './account'
 import { getParticipationOverview, getParticipationEvents } from './api'
-import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION, SHIMMER_EVENT_ID } from './constants'
+import {
+    ASSEMBLY_EVENT_ID,
+    LAST_MILESTONE_BEFORE_TREASURY_EVENT,
+    PARTICIPATION_POLL_DURATION,
+    SHIMMER_EVENT_ID,
+} from './constants'
 import {
     isChangingParticipation,
     isPerformingParticipation,
@@ -147,8 +152,7 @@ export const getMessageParticipationAction = (messageId: string): ParticipationA
     const stakingEndMilestoneIndexes = get(participationEvents)
         ?.filter((event) => event.eventId === ASSEMBLY_EVENT_ID || event.eventId === SHIMMER_EVENT_ID)
         ?.map((event) => event.information?.milestoneIndexEnd)
-    const lastMilestoneBeforeTreasuryEvent = 0 // TODO: add real milestone
-    if (stakingEndMilestoneIndexes?.find((milestone) => milestone > lastMilestoneBeforeTreasuryEvent)) {
+    if (stakingEndMilestoneIndexes?.find((milestone) => milestone > LAST_MILESTONE_BEFORE_TREASURY_EVENT)) {
         return ParticipationAction.Stake
     } else if (stakingEndMilestoneIndexes?.length) {
         return ParticipationAction.Vote

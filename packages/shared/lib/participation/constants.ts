@@ -57,6 +57,8 @@ export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfr
 
 export const TREASURY_VOTE_EVENT_ID = 'c8529ff64ea191b437cd625af8b02fd0173bc94aae380ea4cc3367a651536cba'
 
+export const LAST_MILESTONE_BEFORE_TREASURY_EVENT = 3395663
+
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
  */
