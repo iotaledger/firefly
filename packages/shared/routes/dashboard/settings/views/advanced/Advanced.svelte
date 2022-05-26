@@ -3,7 +3,6 @@
     import { activeProfile, isLedgerProfile } from '@core/profile'
     import { AdvancedSettings } from '@core/router'
     import {
-        BalanceFinder,
         CrashReporting,
         DeepLinks,
         Diagnostics,
@@ -11,6 +10,7 @@
         HiddenAccounts,
         MigrateLedgerIndex,
         NetworkConfiguration,
+        WalletFinder,
     } from './'
 
     const settings: {
@@ -21,7 +21,7 @@
     }[] = [
         { component: NetworkConfiguration, childRoute: AdvancedSettings.NetworkConfiguration, requireLogin: true },
         { component: DeepLinks, childRoute: AdvancedSettings.DeepLinks },
-        { component: BalanceFinder, childRoute: AdvancedSettings.WalletFinder, requireLogin: true },
+        { component: WalletFinder, childRoute: AdvancedSettings.WalletFinder, requireLogin: true },
         { component: HiddenAccounts, childRoute: AdvancedSettings.HiddenAccounts, requireLogin: true },
         { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
         { component: CrashReporting, childRoute: AdvancedSettings.CrashReporting },
