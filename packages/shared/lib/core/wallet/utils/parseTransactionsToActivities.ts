@@ -10,6 +10,7 @@ import {
     receiverAddressesFromTransactionPayload,
     sendAddressFromTransactionPayload,
 } from '@lib/wallet'
+import { formatTokenAmountBestMatch } from './formatTokenAmountBestMatch'
 
 export function parseTransactionsToActivities(transactions: AccountMessage[]): IActivity[] {
     return transactions.map((transaction) => ({
@@ -26,13 +27,23 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         fiatAmount: '-',
         token: {
             name: 'Iota',
+            unit: 'i',
             useMetricPrefix: true,
         },
     }))
 }
 
 function getMessageValue(payload) {
-    return `${!getIncomingFlag(payload) ? '-' : ''}${formatUnitBestMatch(payload.data.essence.data.value, true, 2)}`
+    const token = {
+        name: 'Iota',
+        unit: 'i',
+        useMetricPrefix: true,
+    }
+    return `${!getIncomingFlag(payload) ? '-' : ''}${formatTokenAmountBestMatch(
+        payload.data.essence.data.value,
+        token,
+        2
+    )}`
 }
 
 function getActivityType(payload) {
