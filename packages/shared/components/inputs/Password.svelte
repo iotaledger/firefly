@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
-    import { Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { localize } from '@core/i18n'
 
     export let value = ''
     export let classes = ''
@@ -33,9 +31,9 @@
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-between items-center mb-2">
             <div class="flex flex-row">
-                <Text smaller secondary>{locale('general.passwordStrength')}:</Text>
+                <Text smaller secondary>{localize('general.passwordStrength')}:</Text>
                 <Text smaller overrideColor classes={`text-${STRENGTH_COLORS[strength]} uppercase ml-2`}>
-                    {locale(`general.passwordStrength${strength}`)}
+                    {localize(`general.passwordStrength${strength}`)}
                 </Text>
             </div>
             <div class="flex flex-row justify-end">
@@ -54,11 +52,11 @@
             {integer}
             {autofocus}
             {disabled}
-            placeholder={placeholder || locale('general.password')}
+            placeholder={placeholder || localize('general.password')}
             {submitHandler}
             disableContextMenu={true}
             spellcheck="false"
-            {locale}
+            {localize}
             capsLockWarning={true}
         />
         {#if showRevealToggle === true && !disabled}

@@ -4,7 +4,7 @@ import { ledgerSimulator } from '@lib/ledger'
 import { get } from 'svelte/store'
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
-import { activeProfileId, newProfile, updateNewProfile } from '../stores'
+import { newProfile, updateNewProfile } from '../stores'
 import { removeProfileFolder } from '../utils'
 
 /**
