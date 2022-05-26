@@ -365,9 +365,9 @@
                 "description": "Change your Firefly profile name",
                 "success": "You changed your profile name"
             },
-            "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
