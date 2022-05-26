@@ -93,28 +93,25 @@
                 <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
             </div>
             <div class="flex flex-col ml-3.5">
-                <Text bold fontSize="13" classes="overflow-hidden overflow-ellipsis multiwrap-line2">
+                <Text
+                    fontWeight={FontWeightText.semibold}
+                    lineHeight="140"
+                    classes="overflow-hidden overflow-ellipsis multiwrap-line2"
+                >
                     {localize(title)}
                 </Text>
-                <Text
-                    secondary
-                    fontSize="13"
-                    fontWeight={FontWeightText.medium}
-                    class="text-10 leading-120 text-gray-500"
-                >
+                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
                     {localize(direction, { values: { account: subject } })}
                 </Text>
             </div>
             <div class="flex-1 items-end flex flex-col ml-4">
                 <Text
-                    fontWeight={FontWeightText.bold}
+                    fontWeight={FontWeightText.semibold}
+                    lineHeight="140"
                     color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
-                    fontSize="13"
-                    classes="whitespace-nowrap"
+                    classes="whitespace-nowrap">{activity.amount}</Text
                 >
-                    {activity.amount}
-                </Text>
-                <Text fontSize="13" color="gray-600" fontWeight={FontWeightText.medium} classes="whitespace-nowrap"
+                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap"
                     >{activity.fiatAmount}</Text
                 >
             </div>
