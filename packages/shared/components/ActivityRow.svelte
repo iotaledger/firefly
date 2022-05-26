@@ -52,8 +52,6 @@
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
-
-    let participationAction: ParticipationAction
     $: participationAction = getMessageParticipationAction(id, timestamp)
 
     // There can only be one sender address
