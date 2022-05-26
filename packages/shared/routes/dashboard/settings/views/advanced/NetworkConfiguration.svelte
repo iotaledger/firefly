@@ -14,9 +14,11 @@
         networkStatus,
         NetworkHealth,
     } from '@core/network'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+
+    const isPrimary = false
 
     let networkConfig: INetworkConfig =
         $activeProfile?.settings.networkConfig ||
@@ -57,21 +59,8 @@
         openPopup({
             type: 'addNode',
             props: {
-                nodes: networkConfig.nodes,
-                network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: INode, _oldNodeUrl: string) => {
-                    if (node.isPrimary) {
-                        networkConfig.nodes = networkConfig.nodes.map((n) => ({ ...n, isPrimary: false }))
-                    } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
-                        node.isPrimary = true
-                    }
-
-                    networkConfig.nodes = [...networkConfig.nodes.filter((n) => n.url !== node.url), node]
-                    if (networkConfig.nodes.length === 0) networkConfig.nodes = [node]
-
-                    updateClientOptions(networkConfig)
-                    updateActiveProfileSettings({ networkConfig })
-
+                onSuccess: () => {
+                    closePopup()
                     setTimeout(() => {
                         /**
                          * NOTE: This automatically scrolls the user to the bottom of the
@@ -181,15 +170,11 @@
                         class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     >
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                            <Text
-                                classes={`self-start overflow-hidden whitespace-nowrap overflow-ellipsis ${
-                                    node.isDisabled ? 'opacity-50' : ''
-                                }`}
-                            >
+                            <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
                                 {node.url}
                             </Text>
                             <Text highlighted>
-                                {node.isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
+                                {isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
                             </Text>
                         </div>
                         <button
