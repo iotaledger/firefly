@@ -567,7 +567,7 @@
                     "title": "Votre poids de vote",
                     "equality": "1000 IOTA = 1 VOTE",
                     "description1": "Votre poids de vote est dérivé du solde de votre portefeuille. Lorsqu'une proposition de vote est en phase de Comptage, les votes actifs sont comptabilisés et accumulés tous les 10 secondes.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki de poids de vote (1000 jetons IOTA) génère 1 vote toutes les 10s. Cela veut dire que vous devez continuer à voter pendant toute la durée de la phase de Comptage pour atteindre votre poids de vote complet."
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "Vous devez continuer à voter pour la période de Comptage restante afin d'atteindre votre maximum de votes."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Votes : {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "Impossible de charger le vote du Trésor de la Communauté",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "Veuillez vous connecter à un noeud qui a ajouté ce vote",
                         "buttonConnect": "Se connecter au noeud par défaut",
                         "buttonSettings": "Afficher les paramètres du nœud",
                         "fetching": "Récupération des infos de gouvernance..."
@@ -754,7 +754,7 @@
             "body": "Vous êtes sur le point d'envoyer {amount} à",
             "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez recommencer l'opération de Staking sur les jetons restant dans votre portefeuille.",
             "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Vous effectuez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut déstaker vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille. Vous pourriez également avoir besoin de voter à nouveau.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Vous effectuez un transfert depuis un portefeuille en cours de staking et de vote. Cela peut entrainer l'arrêt du staking et de votre vote. Vous pouvez effectuer le transfert mais il est possible que vous deviez redémarrer le staking et le vote sur les jetons restant dans votre portefeuille.",
                 "stake": "Vous effectuez un transfert depuis un portefeuille en cours de staking. Cela peut entrainer l'arrêt du staking sur vos jetons. Vous pouvez effectuer le transfert mais il est possible que vous deviez redemarrer le staking sur les jetons restant dans votre portefeuille.",
@@ -1254,8 +1254,8 @@
         "syncing": "Veuillez patienter jusqu'à ce que la synchronisation soit terminée pour changer de portefeuille.",
         "transferring": "Veuillez patienter jusqu'à ce que toutes les transactions soient terminées pour changer de portefeuille.",
         "participating": "Veuillez patienter jusqu'à ce que vous ayez terminé votre staking/vote avant de changer de portefeuille.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "transferringCreate": "Veuillez attendre que toutes les transactions soient terminées avant d'ajouter un nouveau portefeuille.",
+        "participatingCreate": "Veuillez patienter jusqu'à ce que vous ayez terminé votre staking/vote avant d'ajouter un nouveau portefeuille."
     },
     "error": {
         "profile": {
