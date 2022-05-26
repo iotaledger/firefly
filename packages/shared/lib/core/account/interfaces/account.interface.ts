@@ -25,6 +25,7 @@ export interface IAccount {
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string>
+    getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     listOutputs(): Promise<OutputData[]>

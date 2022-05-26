@@ -23,7 +23,8 @@
     import { BASE_TOKEN } from '@core/network'
     import { truncateString } from '@lib/helpers'
 
-    export let rawAmount: number
+    export let amount: string
+    export let unit: string
     export let type: ActivityType
     export let status: ActivityStatus
     export let asyncStatus: ActivityAsyncStatus
@@ -72,13 +73,6 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    const amount = { value: undefined, unit: undefined }
-    $: {
-        const tmp = formatTokenAmountBestMatch(rawAmount, token, 2).split(' ')
-        amount.value = tmp[0]
-        amount.unit = tmp[1]
-    }
-
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
         ...(publicNote && { publicNote }),
@@ -89,11 +83,11 @@
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
-        {#if rawAmount}
+        {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <div class="flex flex-row">
-                    <Text type="h1" fontWeight={FontWeightText.semibold}>{amount.value}</Text>
-                    <Text type="h2" fontWeight={FontWeightText.semibold}>{amount.unit}</Text>
+                    <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
+                    <Text type="h2" fontWeight={FontWeightText.medium}>{unit}</Text>
                 </div>
                 <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
             </transaction-value>

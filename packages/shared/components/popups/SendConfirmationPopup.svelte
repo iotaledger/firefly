@@ -38,8 +38,8 @@
     $: transactionDetails = {
         type: internal ? ActivityType.Transfer : ActivityType.Send,
         status: ActivityStatus.InProgress,
-        amount: `${amount} ${unit}`,
-        rawAmount,
+        amount,
+        unit,
         recipient,
     }
 </script>

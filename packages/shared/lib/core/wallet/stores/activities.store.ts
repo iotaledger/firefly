@@ -1,11 +1,10 @@
 import { selectedAccount } from '@core/account'
 import { derived, Readable, writable, Writable } from 'svelte/store'
-import { getAccountMessages } from '@lib/wallet'
 import { getMonthYear } from '@lib/utils'
 import { Transaction } from '@lib/typings/message'
 import { AccountMessage } from '@lib/typings/wallet'
 import { localize } from '@core/i18n'
-import { Activity } from '../interfaces/activity.interface'
+import { Activity } from '../'
 
 export const activities: Readable<Activity[]> = derived(
     [selectedAccount],

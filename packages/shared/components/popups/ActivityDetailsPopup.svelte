@@ -5,20 +5,26 @@
     import { Platform } from 'shared/lib/platform'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { activities, ActivityAsyncStatus, ActivityDirection, ActivityStatus, Activity } from '@core/wallet'
+    import {
+        activities,
+        Activity,
+        ActivityAsyncStatus,
+        ActivityDirection,
+        ActivityStatus,
+        parseRawAmount,
+    } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { onMount } from 'svelte'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
 
-    export let id: string
+    export let activity: Activity
 
-    // TODO: Maybe we need a fresh fetch ofthe specified activity
-    $: activity = $activities.find((a) => a.id === id)
+    let time = new Date()
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let time = new Date()
+    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
 
     $: asyncStatus = activity.getAsyncStatus(time)
 
@@ -33,7 +39,8 @@
         status: activity.confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending,
         asyncStatus,
         formattedFiatValue,
-        rawAmount: activity.rawAmount,
+        amount,
+        unit,
         token: activity.token,
         recipient: activity.recipient,
         time: activity.time,
