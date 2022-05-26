@@ -20,7 +20,7 @@ export class Activity {
     direction: ActivityDirection
     confirmed: boolean
     internal: boolean
-    amount: string
+    rawAmount: number
     recipient: Recipient
     token: ITokenMetadata
     conversion?: number
@@ -28,7 +28,6 @@ export class Activity {
     expireDate?: Date
     hidden?: boolean
     isClaimed?: boolean
-    fiatAmount?: string
 
     constructor(message: AccountMessage) {
         this.id = message.id
@@ -38,12 +37,11 @@ export class Activity {
         this.direction = getIncomingFlag(message.payload) ? ActivityDirection.In : ActivityDirection.Out
         this.confirmed = message.confirmed
         this.recipient = getRecipient(message.payload)
-        this.amount = getMessageValue(message.payload)
+        this.rawAmount = Number(message.payload.data.essence.data.value)
         this.isAsync = true
         this.expireDate = new Date(2022, 5, 25, 12)
         this.hidden = false
         this.isClaimed = false
-        this.fiatAmount = '-'
         this.token = {
             name: 'Iota',
             unit: 'i',
@@ -65,19 +63,18 @@ export class Activity {
         }
         return undefined
     }
-}
 
-function getMessageValue(payload) {
-    const token = {
-        name: 'Iota',
-        unit: 'i',
-        useMetricPrefix: true,
+    getFormattedAmount(): string {
+        return `${!(this.activityType === ActivityType.Receive) ? '-' : ''}${formatTokenAmountBestMatch(
+            this.rawAmount,
+            this.token,
+            2
+        )}`
     }
-    return `${!getIncomingFlag(payload) ? '-' : ''}${formatTokenAmountBestMatch(
-        payload.data.essence.data.value,
-        token,
-        2
-    )}`
+
+    getFiatAmount(): string {
+        return '-'
+    }
 }
 
 function getActivityType(payload) {

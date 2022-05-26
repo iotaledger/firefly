@@ -109,10 +109,10 @@
                     fontWeight={FontWeightText.semibold}
                     lineHeight="140"
                     color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
-                    classes="whitespace-nowrap">{activity.amount}</Text
+                    classes="whitespace-nowrap">{activity.getFormattedAmount()}</Text
                 >
                 <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap"
-                    >{activity.fiatAmount}</Text
+                    >{activity.getFiatAmount()}</Text
                 >
             </div>
         </div>
