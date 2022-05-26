@@ -51,7 +51,9 @@
                 const clientOptions = getDefaultClientOptions(NetworkProtocol.Shimmer, NetworkType.Devnet)
                 // const machineId = await Platform.getMachineId()
                 // const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }
-                initialiseProfileManager(path, clientOptions)
+                initialiseProfileManager(path, clientOptions, {
+                    Stronghold: { password: '', snapshotPath: `${path}/wallet.stronghold` },
+                })
                 // initialiseMigrationListeners()
             }
             $appRouter.next()

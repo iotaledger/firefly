@@ -9,6 +9,30 @@ export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements IProfileManager {
+    backup(_: string, __: string): Promise<void> {
+        return Promise.resolve()
+    }
+
+    clearStrongholdPassword(): Promise<void> {
+        return Promise.resolve()
+    }
+
+    createAccount(account: CreateAccountPayload): Promise<IAccount> {
+        return Promise.resolve(new AccountMock())
+    }
+
+    deleteStorage(): Promise<void> {
+        return Promise.resolve()
+    }
+
+    destroy(): Promise<void> {
+        return Promise.resolve()
+    }
+
+    generateMnemonic(): Promise<string> {
+        return Promise.resolve(MOCK_MNEMONIC)
+    }
+
     getAccount(accountId: AccountId) {
         return undefined
     }
@@ -68,43 +92,27 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    createAccount(account: CreateAccountPayload): Promise<IAccount> {
-        return Promise.resolve(new AccountMock())
-    }
-
-    deleteStorage(): Promise<void> {
-        return Promise.resolve()
-    }
-
-    setStrongholdPassword(password: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    generateMnemonic(): Promise<string> {
-        return Promise.resolve(MOCK_MNEMONIC)
-    }
-
-    storeMnemonic(mnemonic: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    verifyMnemonic(mnemonic: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    backup(_: string, __: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    restoreBackup(source: string, password: string): Promise<void> {
-        return Promise.resolve()
+    isStrongholdPasswordAvailable(): Promise<boolean> {
+        return Promise.resolve(true)
     }
 
     listen(eventTypes, callback) {
         return
     }
 
+    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+        return Promise.resolve([])
+    }
+
+    restoreBackup(source: string, password: string): Promise<void> {
+        return Promise.resolve()
+    }
+
     setClientOptions(options: ClientOptions): Promise<void> {
+        return Promise.resolve()
+    }
+
+    setStrongholdPassword(password: string): Promise<void> {
         return Promise.resolve()
     }
 
@@ -116,11 +124,11 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
-        return Promise.resolve([])
+    storeMnemonic(mnemonic: string): Promise<void> {
+        return Promise.resolve()
     }
 
-    destroy(): Promise<void> {
+    verifyMnemonic(mnemonic: string): Promise<void> {
         return Promise.resolve()
     }
 }

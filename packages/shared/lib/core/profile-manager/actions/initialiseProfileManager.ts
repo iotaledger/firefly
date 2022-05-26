@@ -1,19 +1,16 @@
-import { getOfficialNodes, NetworkProtocol, NetworkType } from '@core/network'
-import { buildClientOptions } from '@core/network/helpers'
-import { ClientOptions } from '@iota/wallet'
+import { ClientOptions, SecretManager } from '@iota/wallet'
 import { api } from '../api'
 import { profileManager } from '../store'
 
-export function initialiseProfileManager(storagePath: string, clientOptions?: ClientOptions): void {
+export function initialiseProfileManager(
+    storagePath: string,
+    clientOptions?: ClientOptions,
+    secretManager?: SecretManager
+): void {
     const newProfileManager = api.createAccountManager({
         storagePath,
         clientOptions,
-        secretManager: {
-            Stronghold: {
-                password: '',
-                snapshotPath: `${storagePath}/wallet.stronghold`,
-            },
-        },
+        secretManager,
     })
     profileManager.set(newProfileManager)
 }
