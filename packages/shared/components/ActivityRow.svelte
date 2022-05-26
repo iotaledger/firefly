@@ -3,7 +3,6 @@
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     import { getMessageParticipationAction } from 'shared/lib/participation'
-    import { participationEvents } from 'shared/lib/participation/stores'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
@@ -55,7 +54,7 @@
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
     let participationAction: ParticipationAction
-    $: ($participationEvents, id), (participationAction = getMessageParticipationAction(id))
+    $: participationAction = getMessageParticipationAction(id, timestamp)
 
     // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
