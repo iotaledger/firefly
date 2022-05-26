@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { ActivityStatus, ActivityType } from '@core/wallet'
     import Pill from './Pill.svelte'
 
     export let type: ActivityType

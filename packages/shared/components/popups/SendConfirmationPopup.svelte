@@ -8,8 +8,7 @@
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { Recipient } from '@core/wallet'
+    import { Recipient, ActivityStatus, ActivityType } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
+    import { ActivityAsyncStatus } from '@core/wallet'
     import Pill from './Pill.svelte'
 
     export let asyncStatus: ActivityAsyncStatus
