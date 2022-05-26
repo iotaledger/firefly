@@ -27,7 +27,7 @@ export interface IProfileManager {
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
     startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void>
-    storeMnemonic(mnemonic: string): Promise<void>
     stopBackgroundSync(): Promise<void>
+    storeMnemonic(mnemonic: string): Promise<void>
     verifyMnemonic(mnemonic: string): Promise<void>
 }
