@@ -1,9 +1,11 @@
 <script lang="typescript">
+    import { formatDate, localize } from '@core/i18n'
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
-    import { formatDate, localize } from '@core/i18n'
-    import { Payload } from 'shared/lib/typings/message'
+    import { getMessageParticipationAction } from 'shared/lib/participation'
+    import { participationEvents } from 'shared/lib/participation/stores'
     import { ParticipationAction } from 'shared/lib/participation/types'
+    import { Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -16,8 +18,6 @@
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
-    import { Transaction } from 'shared/lib/typings/message'
-    import { getMessageParticipationAction } from 'shared/lib/participation'
 
     export let id: string
     export let timestamp: string
@@ -53,7 +53,9 @@
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
-    $: participationAction = getMessageParticipationAction(id)
+
+    let participationAction: ParticipationAction
+    $: ($participationEvents, id), (participationAction = getMessageParticipationAction(id))
 
     // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
