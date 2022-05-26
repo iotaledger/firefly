@@ -8,8 +8,8 @@ export function searchQueriedActivities(searchTerm: string): void {
         get(activities).filter((activity) => {
             const amount = unitToValue(activity.amount)
             return (
-                activity.subjectAccountName === searchTerm ||
-                activity.subjectAddress === searchTerm ||
+                (activity.recipient.type === 'account' && activity.recipient?.account?.name === searchTerm) ||
+                (activity.recipient.type === 'address' && activity.recipient?.address === searchTerm) ||
                 activity?.id.toLowerCase() === searchTerm ||
                 (searchTerm[0] === '>' && unitToValue(searchTerm.substring(1)) < amount) ||
                 (searchTerm[0] === '<' && unitToValue(searchTerm.substring(1)) > amount) ||

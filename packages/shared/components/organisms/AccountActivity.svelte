@@ -11,13 +11,13 @@
         groupedActivities,
         searchQueriedActivities,
         filterQueriedActivities,
-        IActivity,
+        Activity,
     } from '@core/wallet'
 
-    function handleTransactionClick(message: IActivity): void {
+    function handleTransactionClick(activity: Activity): void {
         openPopup({
             type: 'activityDetails',
-            props: { message },
+            props: { id: activity.id },
         })
     }
 

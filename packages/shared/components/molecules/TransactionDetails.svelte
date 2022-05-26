@@ -15,31 +15,33 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import {
         formatTokenAmountPrecise,
-        Recipient,
         ActivityAsyncStatus,
         ActivityStatus,
         ActivityType,
+        Recipient,
     } from '@core/wallet'
-
     import { BASE_TOKEN } from '@core/network'
+    import { truncateString } from '@lib/helpers'
 
     export let amount: string
-    export let unit: string
     export let rawAmount: number
+
     export let type: ActivityType
     export let status: ActivityStatus
     export let asyncStatus: ActivityAsyncStatus
-    export let recipient: Recipient
-    export let timestamp: number
+    export let account: string
+    export let address: string
+    export let time: Date
     export let publicNote: string
     export let storageDeposit = 0
-    export let expirationTimestamp: number
+    export let expireDate: Date
+    export let recipient: Recipient
 
     let transactionTime: string
     $: {
         try {
-            if (timestamp) {
-                transactionTime = formatDate(new Date(timestamp), {
+            if (time) {
+                transactionTime = formatDate(time, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
@@ -52,8 +54,8 @@
     let expirationTime: string
     $: {
         try {
-            if (expirationTimestamp) {
-                transactionTime = formatDate(new Date(expirationTimestamp), {
+            if (expireDate) {
+                transactionTime = formatDate(expireDate, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
@@ -85,7 +87,7 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
         {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <Text type="h1" fontWeight={FontWeightText.semibold}>{(amount ?? 0) + ' ' + unit}</Text>
+                <Text type="h1" fontWeight={FontWeightText.semibold}>{amount ?? 0}</Text>
                 <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedCurrencyValue}</Text>
             </transaction-value>
         {/if}
@@ -97,12 +99,20 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
+        {#if account}
+            <Box row clearBackground clearPadding classes="justify-center">
+                <AccountLabel {account} />
+            </Box>
+        {:else if address}
+            <AddressBox clearBackground clearPadding isCopyable address={truncateString(address, 6, 6)} />
+        {/if}
+
         {#if recipient.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
                 <AccountLabel account={recipient.account} />
             </Box>
         {:else if recipient.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
+            <AddressBox clearBackground clearPadding isCopyable address={truncateString(recipient.address, 6, 6)} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

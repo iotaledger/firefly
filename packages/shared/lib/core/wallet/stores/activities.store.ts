@@ -1,16 +1,15 @@
 import { selectedAccount } from '@core/account'
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { getAccountMessages } from '@lib/wallet'
-import { parseTransactionsToActivities } from '../utils'
 import { getMonthYear } from '@lib/utils'
 import { Transaction } from '@lib/typings/message'
 import { AccountMessage } from '@lib/typings/wallet'
 import { localize } from '@core/i18n'
-import { IActivity } from '../interfaces/activity.interface'
+import { Activity } from '../interfaces/activity.interface'
 
-export const activities: Readable<IActivity[]> = derived(
+export const activities: Readable<Activity[]> = derived(
     [selectedAccount],
-    // ([$selectedAccount]) => parseTransactionsToActivities(getAccountMessages($selectedAccount))
+    // ([$selectedAccount]) => getAccountMessages($selectedAccount).map((transaction) => new Activity(transaction))
     ([$selectedAccount]) => {
         const transactions = [
             {
@@ -158,21 +157,21 @@ export const activities: Readable<IActivity[]> = derived(
                 broadcasted: true,
             } as AccountMessage,
         ]
-        return parseTransactionsToActivities(transactions)
+        return transactions.map((transaction) => new Activity(transaction))
     }
 )
 
-export const queriedActivities: Writable<IActivity[]> = writable([])
+export const queriedActivities: Writable<Activity[]> = writable([])
 
 interface GroupedActivity {
     date: string
-    activities: IActivity[]
+    activities: Activity[]
 }
 
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
     for (const activity of $queriedActivities) {
-        const activityDate = getActivityGroupTitleForTimestamp(activity.timestamp)
+        const activityDate = getActivityGroupTitleForTimestamp(activity.time)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
         }
@@ -182,7 +181,7 @@ export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedAc
     return groupedActivities
 })
 
-function getActivityGroupTitleForTimestamp(timestamp): string {
-    const dateString = getMonthYear(new Date(Number(timestamp)))
+function getActivityGroupTitleForTimestamp(time: Date): string {
+    const dateString = getMonthYear(time)
     return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
 }

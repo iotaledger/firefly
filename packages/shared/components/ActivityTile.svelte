@@ -2,13 +2,13 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, IActivity } from '@core/wallet'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, Activity } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
     import { onMount } from 'svelte'
 
-    export let activity: IActivity
+    export let activity: Activity
     export let onClick = (): void => {}
 
     let title = ''
@@ -31,14 +31,15 @@
             title = activity.confirmed ? 'general.sent' : 'general.sending'
         }
         direction = activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress'
-        subject = activity.subjectAccountName
-            ? truncateString(activity.subjectAccountName, 13, 0)
-            : truncateString(activity.subjectAddress, 6, 8)
+        subject =
+            activity.recipient.type === 'account'
+                ? truncateString(activity.recipient.account?.name, 13, 0)
+                : truncateString(activity.recipient.address, 6, 8)
     }
 
     let time = new Date()
     onMount(() => {
-        if (activity.isAsync && asyncStatus !== ActivityAsyncStatus.Claimed) {
+        if (activity.isAsync && activity.isClaimed) {
             const interval = setInterval(() => {
                 time = new Date()
             }, 1000)
@@ -50,19 +51,7 @@
     })
 
     let asyncStatus: ActivityAsyncStatus
-    $: {
-        if (activity.isAsync) {
-            if (activity.isClaimed) {
-                asyncStatus = ActivityAsyncStatus.Claimed
-            } else {
-                if (time > activity.expireDate) {
-                    asyncStatus = ActivityAsyncStatus.Expired
-                } else {
-                    asyncStatus = ActivityAsyncStatus.Unclaimed
-                }
-            }
-        }
-    }
+    $: asyncStatus = activity.getAsyncStatus(time)
 
     let timeDiff: string
     $: {

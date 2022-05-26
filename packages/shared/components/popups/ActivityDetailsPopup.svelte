@@ -1,72 +1,47 @@
 <script lang="typescript">
-    import { Text, Button } from 'shared/components'
+    import { Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { getMilestoneMessageValue, isParticipationPayload } from 'shared/lib/wallet'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { getTransactionSubjectAddressOrAccount } from '@lib/utils/transactionObject'
-    import { ActivityStatus, ActivityType } from '@core/wallet'
-    import { AccountMessage } from '@lib/typings/wallet'
-    import { activeAccounts, activeProfile } from '@core/profile'
+    import { activities, ActivityAsyncStatus, ActivityDirection, ActivityStatus, Activity } from '@core/wallet'
+    import { activeProfile } from '@core/profile'
+    import { onMount } from 'svelte'
 
-    export let message: AccountMessage & { balance?: number }
-    $: ({ id, payload, balance, timestamp, confirmed } = message)
+    export let id: string
+
+    let activity: Activity
+    // TODO: Maybe we need a fresh fetch ofthe specified activity
+    $: activity = $activities.find((a) => a.id === id)
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let type: ActivityType
-    $: {
-        if (payload?.type) {
-            if (isParticipationPayload(payload)) {
-                type = ActivityType.Stake
-            } else if (payload.type === 'Transaction' && payload.data.essence.data.internal) {
-                type = ActivityType.Transfer
-            } else {
-                type =
-                    payload.type === 'Transaction' && payload.data.essence.data.incoming
-                        ? ActivityType.Receive
-                        : ActivityType.Send
+    let time = new Date()
+    onMount(() => {
+        if (activity.isAsync && !activity.isClaimed) {
+            const interval = setInterval(() => {
+                time = new Date()
+            }, 1000)
+
+            return () => {
+                clearInterval(interval)
             }
-        } else {
-            type = ActivityType.Migrate
         }
-    }
+    })
 
-    const asyncStatus = undefined
-
-    $: status = confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending
-    $: cachedMigrationTx = !payload
-    $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
-    $: transactionPayload = payload?.type === 'Transaction' ? payload : undefined
-
-    let value = 0
-    $: {
-        if (cachedMigrationTx) {
-            value = balance
-        } else if (milestonePayload) {
-            value = getMilestoneMessageValue(milestonePayload, $activeAccounts)
-        } else if (transactionPayload) {
-            value = transactionPayload.data.essence.data.value
-        }
-    }
-
-    $: transactionSubjectAddressOrAccount = getTransactionSubjectAddressOrAccount(transactionPayload)
+    let asyncStatus: ActivityAsyncStatus
+    $: asyncStatus = activity.getAsyncStatus(time)
 
     $: transactionDetails = {
         ...transactionDetails,
-        type,
-        status,
+        type: activity.activityType,
+        status: activity.confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending,
         asyncStatus,
-        value,
-        ...(transactionSubjectAddressOrAccount.isSubjectAccount && {
-            account: transactionSubjectAddressOrAccount.subject,
-        }),
-        ...(!transactionSubjectAddressOrAccount.isSubjectAccount && {
-            address: transactionSubjectAddressOrAccount.subject,
-        }),
-        timestamp,
+        amount: activity.amount,
+        recipient: activity.recipient,
+        time: activity.time,
+        expireDate: activity.expireDate,
     }
 </script>
 

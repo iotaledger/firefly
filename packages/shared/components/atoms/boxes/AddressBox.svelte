@@ -9,10 +9,7 @@
 {#if address}
     <CopyableBox col {isCopyable} value={address} {...$$restProps}>
         <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
-            {address.slice(0, address.length / 2)}
-        </Text>
-        <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
-            {address.slice(address.length / 2)}
+            {address}
         </Text>
     </CopyableBox>
 {/if}
