@@ -1,4 +1,4 @@
-import { getOfficialNetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
+import { getOfficialNetworkConfig, IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import { AvailableExchangeRates } from '@lib/typings/currency'
 import { HistoryDataProps } from '@lib/typings/market'
 import { generateRandomId } from '@lib/utils'

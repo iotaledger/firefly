@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { profileManager } from '../store'
+import { profileManager } from '../stores'
 
 export const destroyProfileManager = (): void => {
     const manager = get(profileManager)

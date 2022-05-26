@@ -3,11 +3,17 @@
     import { mobile } from '@core/app'
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getProfileDataPath } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { newProfile, profiles, validateProfileName, createNewProfile, deleteNewProfile } from '@core/profile'
+    import {
+        newProfile,
+        profiles,
+        validateProfileName,
+        createNewProfile,
+        deleteNewProfile,
+        getStorageDirectoryOfProfile,
+    } from '@core/profile'
     import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
 
     export let locale: Locale
@@ -47,7 +53,7 @@
                 // TODO: set network based on user selection
                 createNewProfile(name, isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
 
-                const path = await getProfileDataPath($newProfile.id)
+                const path = await getStorageDirectoryOfProfile($newProfile.id)
                 const clientOptions = getDefaultClientOptions(NetworkProtocol.Shimmer, NetworkType.Devnet)
                 // const machineId = await Platform.getMachineId()
                 // const { sendCrashReports } = $initAppSettings ?? { sendCrashReports: false }

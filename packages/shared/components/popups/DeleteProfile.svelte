@@ -12,9 +12,8 @@
         removeProfileFolder,
     } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { asyncDeleteStorage, asyncStopBackgroundSync } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
-    import { setStrongholdPassword } from '@core/profile-manager'
+    import { deleteStorage, setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -51,14 +50,14 @@
             /**
              * CAUTION: We need to stop the background sync before we delete the profile.
              */
-            await asyncStopBackgroundSync()
+            // await asyncStopBackgroundSync()
 
             /**
              * CAUTION: The storage for wallet.rs must also be deleted in order
              * to free the locks on the files within the profile folder (removed
              * later).
              */
-            await asyncDeleteStorage()
+            await deleteStorage()
 
             /**
              * CAUTION: Logout must occur before the profile is removed
