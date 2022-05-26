@@ -5,13 +5,13 @@ import {
     checkNodeUrlValidity,
     INode,
     updateNodeInfo,
-    validateCleanNodeData,
+    validateAndCleanNodeData,
     buildNode,
     updateNewProfileNetworkClientOptions,
 } from '@core/network'
 
 export async function addNode(node: INode, profile: Writable<IPersistedProfile>): Promise<void> {
-    const cleanData = validateCleanNodeData(node)
+    const cleanData = validateAndCleanNodeData(node)
     const nodeInfoResponse = await getNodeInfo(cleanData.url, cleanData.auth)
     updateNodeInfo(nodeInfoResponse?.nodeinfo)
     const builtNode = buildNode(cleanData, nodeInfoResponse, get(profile))

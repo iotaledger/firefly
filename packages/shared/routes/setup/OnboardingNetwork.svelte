@@ -1,11 +1,10 @@
 <script lang="typescript">
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import { mobile } from '@lib/app'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import { createNewProfile } from '../../lib/core/profile'
 
     const networkTypes = Object.keys(NetworkType).filter(
         (networkType) => NetworkType[networkType] !== NetworkType.PrivateNet
