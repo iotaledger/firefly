@@ -5,7 +5,11 @@ import { get } from 'svelte/store'
 export async function unlockStronghold(password: string): Promise<void> {
     const { isStrongholdLocked } = get(activeProfile)
     if (get(isStrongholdLocked)) {
-        await setStrongholdPassword(password)
-        isStrongholdLocked.set(false)
+        try {
+            await setStrongholdPassword(password)
+            isStrongholdLocked.set(false)
+        } catch (err) {
+            throw new Error('error.password.incorrect')
+        }
     }
 }

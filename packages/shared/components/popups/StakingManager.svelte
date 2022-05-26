@@ -158,7 +158,7 @@
         }
 
         if ($isSoftwareProfile) {
-            checkStronghold(_unstake)
+            void checkStronghold(_unstake)
         } else {
             promptUserToConnectLedger(false, () => _unstake(), undefined, true)
         }

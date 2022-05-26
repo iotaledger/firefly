@@ -63,7 +63,7 @@ export function sendExternalTransaction(senderAccountId: string, receiveAddress:
     }
 
     if (get(isSoftwareProfile)) {
-        checkStronghold(_send)
+        void checkStronghold(_send)
     } else {
         _send()
     }

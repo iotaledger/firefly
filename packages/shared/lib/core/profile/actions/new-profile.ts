@@ -27,7 +27,9 @@ export async function createNewProfile(
     const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions)
     newProfile.set(profile)
     const path = await getProfileDataPath(get(newProfile).id)
-    initialiseProfileManager(path, clientOptions)
+    initialiseProfileManager(path, clientOptions, {
+        Stronghold: { password: '', snapshotPath: `${path}/wallet.stronghold` },
+    })
 }
 
 /**

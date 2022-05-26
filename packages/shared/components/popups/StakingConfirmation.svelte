@@ -94,7 +94,7 @@
 
     function handleConfirmClick(): void {
         if ($isSoftwareProfile) {
-            checkStronghold(openStakingManager)
+            void checkStronghold(openStakingManager)
         } else {
             if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
                 showAppNotification({
