@@ -1,15 +1,20 @@
 <script lang="typescript">
     import { ActivityRow, TogglableButton, Text, TextInput } from 'shared/components'
+    import { FontWeightText } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
-    import { FontWeightText } from '../Text.svelte'
     import { debounce } from 'shared/lib/utils'
-    import { activities, groupedActivities } from '@core/wallet'
-    import { searchQueriedActivities, filterQueriedActivities } from '@core/wallet/actions'
+    import {
+        activities,
+        groupedActivities,
+        searchQueriedActivities,
+        filterQueriedActivities,
+        IActivity,
+    } from '@core/wallet'
 
-    function handleTransactionClick(message: any): void {
+    function handleTransactionClick(message: IActivity): void {
         openPopup({
             type: 'activityDetails',
             props: { message },
