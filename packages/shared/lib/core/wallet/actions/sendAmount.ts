@@ -7,12 +7,7 @@ export function sendAmount(receipientAddress: string, amount: number): Promise<T
     const addressWithAmount: AddressWithAmount = { address: receipientAddress, amount: amount.toString() }
     const transferOptions: TransferOptions = {
         remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
-        skipSync: true,
-        taggedDataPayload: {
-            type: 5,
-            tag: 'Sender',
-            data: 'Nicole waz here 2K22',
-        },
+        skipSync: false,
     }
     return account.sendAmount([addressWithAmount], transferOptions)
 }

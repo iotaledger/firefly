@@ -11,6 +11,7 @@ export async function trySendAmount(receipientAddress: string, amount: number): 
         isTransferring.set(true)
         try {
             const transactionReceipts = await sendAmount(receipientAddress, amount)
+            isTransferring.set(false)
         } catch (err) {
             console.error(err)
             isTransferring.set(false)
