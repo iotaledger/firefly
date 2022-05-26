@@ -8,6 +8,8 @@
     import { activities, ActivityAsyncStatus, ActivityDirection, ActivityStatus, Activity } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { onMount } from 'svelte'
+    import { currencies, exchangeRates } from '@lib/currency'
+    import { CurrencyTypes } from 'shared/lib/typings/currency'
 
     export let id: string
 
@@ -33,12 +35,20 @@
     let asyncStatus: ActivityAsyncStatus
     $: asyncStatus = activity.getAsyncStatus(time)
 
+    currencies
+    $: formattedFiatValue = activity.getFiatAmount(
+        $currencies[CurrencyTypes.USD],
+        $exchangeRates[$activeProfile?.settings?.currency]
+    )
+
     $: transactionDetails = {
         ...transactionDetails,
         type: activity.activityType,
         status: activity.confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending,
         asyncStatus,
-        amount: activity.amount,
+        formattedFiatValue,
+        rawAmount: activity.rawAmount,
+        token: activity.token,
         recipient: activity.recipient,
         time: activity.time,
         expireDate: activity.expireDate,

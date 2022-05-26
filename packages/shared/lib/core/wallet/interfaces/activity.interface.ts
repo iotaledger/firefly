@@ -11,6 +11,7 @@ import {
 import { AccountMessage } from '@lib/typings/wallet'
 import { formatTokenAmountBestMatch } from '../utils'
 import { Recipient } from '../types'
+import { convertToFiat, formatCurrency } from '@lib/currency'
 
 export class Activity {
     id: string
@@ -64,16 +65,17 @@ export class Activity {
         return undefined
     }
 
-    getFormattedAmount(): string {
-        return `${!(this.activityType === ActivityType.Receive) ? '-' : ''}${formatTokenAmountBestMatch(
+    getFormattedAmount(signum: boolean): string {
+        return `${this.activityType !== ActivityType.Receive && signum ? '-' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
             this.token,
             2
         )}`
     }
 
-    getFiatAmount(): string {
-        return '-'
+    getFiatAmount(fiatPrice: number, exchangeRate: number): string {
+        const fiatValue = formatCurrency(convertToFiat(this.rawAmount, fiatPrice, exchangeRate))
+        return fiatValue ? fiatValue : '-'
     }
 }
 
