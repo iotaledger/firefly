@@ -1,20 +1,35 @@
-import { Unit } from '@iota/unit-converter'
 import Big from 'big.js'
+import BigNumber from 'bignumber.js'
 import { getCurrencyPosition, formatNumber } from 'shared/lib/currency'
 
 // Set this to avoid small numbers switching to exponential format
 Big.NE = -20
 
+export enum Unit {
+    _ = '_',
+    K = 'k',
+    M = 'M',
+    G = 'G',
+    T = 'T',
+    P = 'P',
+}
+export interface UnitMap {
+    readonly [unit: string]: {
+        readonly val: BigNumber
+        readonly dp: number
+    }
+}
+
 /**
  * IOTA Units Map
  */
 export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
-    i: { val: 1, dp: 0 },
-    Ki: { val: 1000, dp: 3 },
-    Mi: { val: 1000000, dp: 6 },
-    Gi: { val: 1000000000, dp: 9 },
-    Ti: { val: 1000000000000, dp: 12 },
-    Pi: { val: 1000000000000000, dp: 15 },
+    [Unit._]: { val: 1, dp: 0 },
+    [Unit.K]: { val: 1000, dp: 3 },
+    [Unit.M]: { val: 1000000, dp: 6 },
+    [Unit.G]: { val: 1000000000, dp: 9 },
+    [Unit.T]: { val: 1000000000000, dp: 12 },
+    [Unit.P]: { val: 1000000000000000, dp: 15 },
 }
 
 /**
@@ -63,13 +78,13 @@ export function formatUnitPrecision(
         return includeUnits ? (currencyPosition === 'left' ? `0 ${unit}` : `0 ${unit}`) : '0'
     }
 
-    const converted = changeUnits(valueRaw, Unit.i, unit)
+    const converted = changeUnits(valueRaw, Unit._, unit)
 
     const formatted = formatNumber(
         converted,
         overrideDecimalPlaces ?? UNIT_MAP[unit].dp,
         overrideDecimalPlaces ?? UNIT_MAP[unit].dp,
-        unit === Unit.i ? 0 : 2,
+        unit === Unit._ ? 0 : 2,
         grouped
     )
 
@@ -89,25 +104,25 @@ export function formatUnitPrecision(
  *
  * @returns {Unit}
  */
-const getUnit = (value: number): Unit => {
-    let bestUnits: Unit = Unit.i
+export const getUnit = (value: number): Unit => {
+    let bestUnits: Unit = Unit._
 
     if (!value || value === 0) {
-        return Unit.Mi
+        return Unit.M
     }
 
     const checkLength = Math.abs(value).toString().length
 
-    if (checkLength > UNIT_MAP.Pi.dp) {
-        bestUnits = Unit.Pi
-    } else if (checkLength > UNIT_MAP.Ti.dp) {
-        bestUnits = Unit.Ti
-    } else if (checkLength > UNIT_MAP.Gi.dp) {
-        bestUnits = Unit.Gi
-    } else if (checkLength > UNIT_MAP.Mi.dp) {
-        bestUnits = Unit.Mi
-    } else if (checkLength > UNIT_MAP.Ki.dp) {
-        bestUnits = Unit.Ki
+    if (checkLength > UNIT_MAP.P.dp) {
+        bestUnits = Unit.P
+    } else if (checkLength > UNIT_MAP.T.dp) {
+        bestUnits = Unit.T
+    } else if (checkLength > UNIT_MAP.G.dp) {
+        bestUnits = Unit.G
+    } else if (checkLength > UNIT_MAP.M.dp) {
+        bestUnits = Unit.M
+    } else if (checkLength > UNIT_MAP.k.dp) {
+        bestUnits = Unit.K
     }
 
     return bestUnits
@@ -131,5 +146,5 @@ export const changeUnits = (value: number, fromUnit: Unit, toUnit: Unit): number
 
     const scaledValue = Number(new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val))
 
-    return toUnit === Unit.i ? Math.round(scaledValue) : scaledValue
+    return toUnit === Unit._ ? Math.round(scaledValue) : scaledValue
 }

@@ -22,11 +22,11 @@ export function parseTransactionsToActivities(transactions: AccountMessage[]): I
         subjectAccountName: getSubjectName(transaction.payload),
         subjectAddress: getSubjectAddress(transaction.payload),
         amount: getMessageValue(transaction.payload),
-        fiatAmount: 0,
         isAsync: true,
         expireDate: new Date(2022, 5, 25, 12),
         hidden: false,
         isClaimed: false,
+        fiatAmount: '-',
         token: {
             name: 'Iota',
             useMetricPrefix: true,

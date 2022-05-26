@@ -1,5 +1,5 @@
 import { IAccountState } from '@core/account'
-import { Unit } from '@iota/unit-converter'
+import { Unit } from '@lib/units'
 
 export interface SendParams {
     amount: string | undefined

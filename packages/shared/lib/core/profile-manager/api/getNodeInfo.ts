@@ -1,4 +1,5 @@
-import { IAuth, INodeInfoResponse } from '@core/network'
+import { IAuth } from '@core/network'
+import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
 import { get } from 'svelte/store'
 import { profileManager } from '../store'
 

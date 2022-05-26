@@ -1,7 +1,7 @@
+import type { INodeInfo } from '@iota/types'
 import { writable } from 'svelte/store'
-import { IStardustNodeInfo } from '../interfaces'
 
-export const nodeInfo = writable<IStardustNodeInfo>({
+export const nodeInfo = writable<INodeInfo>({
     name: undefined,
     version: undefined,
     status: {
@@ -19,7 +19,7 @@ export const nodeInfo = writable<IStardustNodeInfo>({
         pruningIndex: undefined,
     },
     protocol: {
-        version: undefined,
+        protocolVersion: undefined,
         networkName: undefined,
         bech32HRP: undefined,
         minPoWScore: undefined,
@@ -39,15 +39,15 @@ export const nodeInfo = writable<IStardustNodeInfo>({
         useMetricPrefix: undefined,
     },
     metrics: {
-        messagesPerSecond: undefined,
-        referencedMessagesPerSecond: undefined,
+        blocksPerSecond: undefined,
+        referencedBlocksPerSecond: undefined,
         referencedRate: undefined,
     },
     features: [],
     plugins: [],
 })
 
-export function updateNodeInfo(payload: Partial<IStardustNodeInfo>): void {
+export function updateNodeInfo(payload: Partial<INodeInfo>): void {
     return nodeInfo.update((state) => {
         if (nodeInfo) {
             return { ...state, ...payload }

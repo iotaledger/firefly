@@ -21,11 +21,11 @@
         if (payload?.type) {
             if (isParticipationPayload(payload)) {
                 type = ActivityType.Stake
-            } else if (payload.type == 'Transaction' && payload.data.essence.data.internal) {
+            } else if (payload.type === 'Transaction' && payload.data.essence.data.internal) {
                 type = ActivityType.Transfer
             } else {
                 type =
-                    payload.type == 'Transaction' && payload.data.essence.data.incoming
+                    payload.type === 'Transaction' && payload.data.essence.data.incoming
                         ? ActivityType.Receive
                         : ActivityType.Send
             }

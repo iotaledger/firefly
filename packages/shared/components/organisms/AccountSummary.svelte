@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountActionsButton, ReceiveButton, SendButton, TogglableAmountLabel } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'

@@ -3,7 +3,7 @@
     import { IAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-    import { formatBestMatchTokenAmount } from '@core/wallet'
+    import { formatTokenAmountBestMatch } from '@core/wallet'
 
     export let account: IAccount
 
@@ -17,10 +17,10 @@
         applyBorder
         icon="wallet"
         iconLabel={alias}
-        tileText={formatBestMatchTokenAmount(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}
+        tileText={formatTokenAmountBestMatch(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}
         tileSubText={localize('general.amountClaimed', {
             values: {
-                amount: formatBestMatchTokenAmount(claimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer]),
+                amount: formatTokenAmountBestMatch(claimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer]),
             },
         })}
     >

@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
-    import { appSettings, shouldBeDarkMode } from 'shared/lib/appSettings'
+    import { mobile, appSettings, shouldBeDarkMode } from '@core/app'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
 

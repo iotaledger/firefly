@@ -8,7 +8,7 @@
 
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings } from '@core/app'
 
     export let progress: ProgressStep[] = []
     export let classes = ''

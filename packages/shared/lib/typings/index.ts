@@ -1,6 +1,5 @@
 import * as account from './account'
 import * as address from './address'
-import * as app from './app'
 import * as bridge from './bridge'
 import * as chart from './chart'
 import * as currency from './currency'
@@ -16,7 +15,6 @@ import * as wallet from './wallet'
 export {
     account,
     address,
-    app,
     bridge,
     chart,
     currency,

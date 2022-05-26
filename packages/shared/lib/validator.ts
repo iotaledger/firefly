@@ -6,11 +6,12 @@ import { ResponseTypes } from './typings/bridge'
 import { LedgerStatus } from './typings/ledger'
 import { Message } from './typings/message'
 import { MigrationData } from './typings/migration'
-import { INodeInfo } from '@core/network'
+import { INodeInfo } from '@iota/types'
 import { StrongholdStatus } from './typings/wallet'
 import { ErrorObject, ValidationResponse } from './typings/validator'
 import { ErrorTypes } from './typings/validator'
 import { MarketDataValidationResponse } from './typings/market'
+import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
 
 type Validators =
     | IdValidator
@@ -55,7 +56,7 @@ class Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        if (this.nextValidator != null) {
+        if (this.nextValidator !== null) {
             return this.nextValidator.isValid(response)
         }
 
@@ -637,9 +638,9 @@ class NodeInfoValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as INodeInfo
+        const payload = response.payload as unknown as INodeInfoResponse
 
-        if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
+        if (!payload.node_info || 'object' !== typeof payload.node_info) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'No node info.',
@@ -649,67 +650,67 @@ class NodeInfoValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'No node url.',
             })
-        } else if ('string' !== typeof payload.nodeinfo.version) {
+        } else if ('string' !== typeof payload.node_info.version) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info version.',
             })
-        } else if ('string' !== typeof payload.nodeinfo.networkId) {
+        } else if ('string' !== typeof payload.node_info.protocol.networkName) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info network id.',
             })
-        } else if ('boolean' !== typeof payload.nodeinfo.isHealthy) {
+        } else if ('boolean' !== typeof payload.node_info.status.isHealthy) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info is healthy.',
             })
-        } else if ('string' !== typeof payload.nodeinfo.bech32HRP) {
+        } else if ('string' !== typeof payload.node_info.protocol.bech32HRP) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info bech 32 hrp.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.minPoWScore) {
+        } else if ('number' !== typeof payload.node_info.protocol.minPoWScore) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info min pow score.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.latestMilestoneIndex) {
+        } else if ('number' !== typeof payload.node_info.status.latestMilestone.index) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest milestone index.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.latestMilestoneTimestamp) {
+        } else if ('number' !== typeof payload.node_info.status.latestMilestone.timestamp) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest milestone timestamp.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.confirmedMilestoneIndex) {
+        } else if ('number' !== typeof payload.node_info.status.confirmedMilestone) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info confirmed milestone index.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.pruningIndex) {
+        } else if ('number' !== typeof payload.node_info.status.pruningIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest pruning index.',
             })
-        } else if (!Array.isArray(payload.nodeinfo.features)) {
+        } else if (!Array.isArray(payload.node_info.features)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info features.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.messagesPerSecond) {
+        } else if ('number' !== typeof payload.node_info.metrics.blocksPerSecond) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info messages per second.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.referencedMessagesPerSecond) {
+        } else if ('number' !== typeof payload.node_info.metrics.referencedBlocksPerSecond) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info referenced messages per second.',
             })
-        } else if ('number' !== typeof payload.nodeinfo.referencedRate) {
+        } else if ('number' !== typeof payload.node_info.metrics.referencedRate) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info referenced rate.',

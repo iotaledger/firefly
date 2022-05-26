@@ -1,18 +1,6 @@
-import { Unit } from '@iota/unit-converter'
+import { writable } from 'svelte/store'
 import { SendParams } from 'shared/lib/typings/sendParams'
-import { get, writable } from 'svelte/store'
-import { lastAcceptedPrivacyPolicy, lastAcceptedTos } from './appSettings'
-import { Stage } from './typings/stage'
-
-/**
- * Beta mode
- */
-export const stage = writable<Stage>(Stage.ALPHA)
-
-/**
- * Mobile mode
- */
-export const mobile = writable<boolean>(false)
+import { Unit } from './units'
 
 /**
  * Wallet access pin
@@ -34,7 +22,7 @@ export const mnemonic = writable<string[]>(null)
  */
 export const sendParams = writable<SendParams>({
     amount: undefined,
-    unit: Unit.Mi,
+    unit: Unit.M,
     address: '',
     message: '',
     isInternal: false,
@@ -42,7 +30,7 @@ export const sendParams = writable<SendParams>({
 export const clearSendParams = (isInternal = false): void =>
     sendParams.set({
         amount: undefined,
-        unit: Unit.Mi,
+        unit: Unit.M,
         address: '',
         message: '',
         isInternal,
@@ -57,16 +45,3 @@ export const cleanupSignup = (): void => {
     strongholdPassword.set(null)
     walletPin.set(null)
 }
-
-/**
- * The privacy policy packaged with the current version of Firefly
- */
-export const PRIVACY_POLICY_VERSION = 2
-
-/**
- * The Terms of Service packaged with the current version of Firefly
- */
-export const TOS_VERSION = 2
-
-export const needsToAcceptLatestPrivacyPolicy = (): boolean => get(lastAcceptedPrivacyPolicy) < PRIVACY_POLICY_VERSION
-export const needsToAcceptLatestTos = (): boolean => get(lastAcceptedTos) < TOS_VERSION
