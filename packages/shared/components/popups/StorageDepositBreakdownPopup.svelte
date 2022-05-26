@@ -19,6 +19,6 @@
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
         amount={$selectedAccount.balances.requiredStorageDeposit}
-        totalRow
+        bold
     />
 </div>

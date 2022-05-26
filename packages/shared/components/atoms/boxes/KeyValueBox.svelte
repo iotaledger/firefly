@@ -13,14 +13,14 @@
 
 <Box row {backgroundColor} {darkBackgroundColor} classes="justify-between {classes}">
     {#if keyText}
-        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
+        <Text type="medium" color={textColor} darkColor={darkTextColor}>
             {keyText}
         </Text>
     {:else}
         <slot name="key" />
     {/if}
     {#if valueText}
-        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
+        <Text type="medium" color={textColor} darkColor={darkTextColor}>
             {valueText}
         </Text>
     {:else}

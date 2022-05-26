@@ -7,6 +7,10 @@
         h5 = 'h5',
         p = 'p',
         pre = 'pre',
+        extraSmall = 'extraSmall',
+        small = 'small',
+        medium = 'medium',
+        large = 'large',
     }
 
     export enum FontWeightNumber {
@@ -47,7 +51,7 @@
         error?: boolean
         overrideColor?: boolean
         color?: string
-        darkColoe?: string
+        darkColor?: string
         overrideLeading?: boolean
         classes?: string
     }
@@ -146,6 +150,34 @@
             whitespace: 'whitespace-pre-line',
             fontFamily: 'font-fira-mono',
         },
+        [TextType.extraSmall]: {
+            fontWeight: FontWeightText.normal,
+            color: 'text-gray-600',
+            darkColor: 'text-gray-400',
+            fontSize: 'text-12',
+            lineHeight: 'leading-3.5',
+        },
+        [TextType.small]: {
+            fontWeight: FontWeightText.medium,
+            color: 'text-gray-600',
+            darkColor: 'text-gray-400',
+            fontSize: 'text-13',
+            lineHeight: 'leading-4',
+        },
+        [TextType.medium]: {
+            fontWeight: FontWeightText.normal,
+            color: 'text-gray-600',
+            darkColor: 'text-gray-400',
+            fontSize: 'text-14',
+            lineHeight: 'leading-5',
+        },
+        [TextType.large]: {
+            fontWeight: FontWeightText.normal,
+            color: 'text-gray-600',
+            darkColor: 'text-gray-400',
+            fontSize: 'text-15',
+            lineHeight: 'leading-5',
+        },
     }
 
     // Format custom inputs
@@ -153,6 +185,22 @@
     lineHeight = lineHeight ? LEADING_PREFIX + lineHeight : ''
     color = color ? TEXT_PREFIX + color : ''
     darkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
+
+    function adjustFontWeight() {
+        switch (type) {
+            case TextType.extraSmall:
+            case TextType.small:
+            case TextType.medium:
+            case TextType.large:
+                fontWeight = bold ? FontWeightText.semibold : fontWeight
+                color = bold ? DEFAULT_TEXT_COLOUR : color
+                darkColor = bold ? DEFAULT_TEXT_DARK_COLOUR : darkColor
+                break
+            default:
+                fontWeight = bold ? FontWeightText.bold : fontWeight
+        }
+    }
+    $: bold, adjustFontWeight()
 
     // Adjust font for old override classes
     function adjustFont() {
@@ -166,7 +214,6 @@
                 break
         }
 
-        fontWeight = bold ? FontWeightText.bold : fontWeight
         lineHeight = overrideLeading ? '' : lineHeight
     }
     $: smaller, bigger, adjustFont()
