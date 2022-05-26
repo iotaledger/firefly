@@ -411,8 +411,8 @@
 {#if $mobile}
     <Idle />
     <div class="flex flex-col w-full h-full">
-        <TopNavigation {onCreateAccount} />
         <MainMenu {locale} />
+        <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
     </div>
