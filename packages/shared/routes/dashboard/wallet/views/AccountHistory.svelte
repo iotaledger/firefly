@@ -171,7 +171,7 @@
                     {localize('general.transactions')}
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
-                {#if !$selectedMessage}
+                {#if !$selectedMessage || $mobile}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
                             icon="refresh"
