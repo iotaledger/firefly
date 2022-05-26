@@ -13,29 +13,15 @@
 
     export let id: string
 
-    let activity: Activity
     // TODO: Maybe we need a fresh fetch ofthe specified activity
     $: activity = $activities.find((a) => a.id === id)
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let time = new Date()
-    onMount(() => {
-        if (activity.isAsync && !activity.isClaimed) {
-            const interval = setInterval(() => {
-                time = new Date()
-            }, 1000)
 
-            return () => {
-                clearInterval(interval)
-            }
-        }
-    })
-
-    let asyncStatus: ActivityAsyncStatus
     $: asyncStatus = activity.getAsyncStatus(time)
 
-    currencies
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings?.currency]
@@ -54,11 +40,27 @@
         expireDate: activity.expireDate,
     }
 
+    onMount(() => {
+        if (activity.isAsync && !activity.isClaimed) {
+            const interval = setInterval(() => {
+                time = new Date()
+            }, 1000)
+
+            return () => {
+                clearInterval(interval)
+            }
+        }
+    })
+
     // TODO
     function handleReject() {}
 
     // TODO
     function handleClaim() {}
+
+    function handleExplorerClick() {
+        Platform.openUrl(`${explorerUrl}/message/${id}`)
+    }
 </script>
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -68,7 +70,7 @@
         </Text>
         <button
             class="action p-1 mr-1 w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-            on:click={() => Platform.openUrl(`${explorerUrl}/message/${id}`)}
+            on:click={handleExplorerClick}
         >
             {localize('general.viewOnExplorer')}
         </button>
