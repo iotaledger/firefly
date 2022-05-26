@@ -91,7 +91,7 @@ const getOfficialNodeUrls = (networkType: NetworkType): string[] => {
             return [
                 'https://chrysalis-nodes.iota.org',
                 'https://chrysalis-nodes.iota.cafe',
-                'https://mainnet-node.tanglebay.com',
+                'https://iota-node.tanglebay.com',
             ]
         default:
             return []
