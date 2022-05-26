@@ -941,7 +941,7 @@
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
+        "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

@@ -83,7 +83,7 @@ export enum SecuritySettings {
 export enum AdvancedSettings {
     NetworkConfiguration = 'networkConfiguration',
     DeepLinks = 'deepLinks',
-    WalanceFinder = 'walletFinder',
+    WalletFinder = 'walletFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     CrashReporting = 'crashReporting',

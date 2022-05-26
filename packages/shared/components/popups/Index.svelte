@@ -123,7 +123,7 @@
         diagnostics: Diagnostics,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
-        balanceFinder: BalanceFinder,
+        walletFinder: BalanceFinder,
         snapshot: Snapshot,
         video: Video,
         // Participation (voting / staking)
