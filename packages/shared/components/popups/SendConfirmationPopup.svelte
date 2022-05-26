@@ -6,7 +6,7 @@
     import { TransactionDetails } from 'shared/components/molecules'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { Recipient, trySendAmount, ActivityStatus, ActivityType } from '@core/wallet'
+    import { Recipient, trySend, ActivityStatus, ActivityType } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient
@@ -19,10 +19,9 @@
     function onConfirm(): void {
         closePopup()
 
-        function _send(): void {
-            return recipient.type === 'account'
-                ? void trySendAmount(recipient.account.depositAddress, rawAmount)
-                : void trySendAmount(recipient.address, rawAmount)
+        function _send(): Promise<void> {
+            const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+            return trySend(recipientAddress, rawAmount)
         }
 
         if ($isSoftwareProfile) {

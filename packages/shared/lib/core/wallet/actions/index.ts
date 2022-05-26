@@ -1,4 +1,3 @@
-export * from './sendAmount'
-export * from './trySendAmount'
+export * from './trySend'
 export * from './filterQueriedActivities'
 export * from './searchQueriedActivities'
