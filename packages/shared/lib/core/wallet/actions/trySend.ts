@@ -1,7 +1,7 @@
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { isSoftwareProfile } from '@core/profile'
-import { AddressWithAmount, Transaction, TransactionReceipt, TransferOptions } from '@iota/wallet'
+import { AddressWithAmount, Transaction, TransferOptions } from '@iota/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { isTransferring } from '@lib/wallet'

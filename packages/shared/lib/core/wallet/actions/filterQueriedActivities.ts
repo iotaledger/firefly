@@ -1,9 +1,9 @@
 import { ActivityDirection } from '@core/wallet'
 import { get } from 'svelte/store'
-import { activities, queriedActivities } from '../stores'
+import { selectedAccountActivities, queriedActivities } from '../stores'
 
 export function filterQueriedActivities(filter: number): void {
-    let activityList = get(activities)
+    let activityList = get(selectedAccountActivities)
 
     if (filter === 1) {
         activityList = activityList.filter((activity) => activity.direction === ActivityDirection.In)

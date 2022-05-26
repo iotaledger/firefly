@@ -7,7 +7,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import {
-        activities,
+        selectedActivities,
         groupedActivities,
         searchQueriedActivities,
         filterQueriedActivities,
@@ -48,7 +48,12 @@
          *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
-        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $activities.length === 0
+        return (
+            $isFirstSessionSync &&
+            $walletSetupType &&
+            $walletSetupType !== SetupType.New &&
+            $selectedActivities.length === 0
+        )
     }
 </script>
 

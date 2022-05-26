@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
-import { activities, queriedActivities } from '../stores'
+import { selectedAccountActivities, queriedActivities } from '../stores'
 import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { formatUnitBestMatch } from 'shared/lib/units'
 
 export function searchQueriedActivities(searchTerm: string): void {
     queriedActivities.set(
-        get(activities).filter(
+        get(selectedAccountActivities).filter(
             (activity) =>
                 (activity.recipient.type === 'account' && activity.recipient?.account?.name === searchTerm) ||
                 (activity.recipient.type === 'address' && activity.recipient?.address === searchTerm) ||
