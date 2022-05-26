@@ -43,19 +43,41 @@
         time: activity.time,
         expireDate: activity.expireDate,
     }
+
+    // TODO
+    function handleReject() {}
+
+    // TODO
+    function handleClaim() {}
 </script>
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
-        >{localize('popups.transactionDetails.title')}</Text
-    >
+    <div class="flex flex-col">
+        <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
+            {localize('popups.transactionDetails.title')}
+        </Text>
+        <button
+            class="action p-1 mr-1 w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+            on:click={() => Platform.openUrl(`${explorerUrl}/message/${id}`)}
+        >
+            {localize('general.viewOnExplorer')}
+        </button>
+    </div>
     <TransactionDetails {...transactionDetails} />
-    <Button
-        classes="w-full"
-        secondary
-        autofocus={false}
-        onClick={() => Platform.openUrl(`${explorerUrl}/message/${id}`)}
-    >
-        <Text bigger color="blue-500">{localize('general.viewOnExplorer')}</Text>
-    </Button>
+    {#if activity.isAsync && activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed}
+        <div class="flex w-full justify-between space-x-4">
+            <button
+                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
+                on:click={handleReject}
+            >
+                {localize('actions.reject')}
+            </button>
+            <button
+                class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
+                on:click={handleClaim}
+            >
+                {localize('actions.claim')}
+            </button>
+        </div>
+    {/if}
 </activity-details-popup>
