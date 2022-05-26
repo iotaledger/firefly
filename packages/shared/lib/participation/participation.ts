@@ -20,6 +20,7 @@ import {
     isFetchingParticipationInfo,
 } from './stores'
 import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
+import { getDurationString, milestoneToDate } from '@lib/time'
 
 let shouldPollParticipation = true
 let participationPollTimeout
@@ -144,17 +145,16 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
  *
  * @returns {ParticipationAction}
  */
-export const getMessageParticipationAction = (messageId: string): ParticipationAction => {
+export const getMessageParticipationAction = (messageId: string, timestamp: string): ParticipationAction => {
     const matchedHistoryItem = get(participationHistory)?.find((item) => item.messageId === messageId)
     if (matchedHistoryItem?.action) {
         return matchedHistoryItem.action
     }
-    const stakingEndMilestoneIndexes = get(participationEvents)
-        ?.filter((event) => event.eventId === ASSEMBLY_EVENT_ID || event.eventId === SHIMMER_EVENT_ID)
-        ?.map((event) => event.information?.milestoneIndexEnd)
-    if (stakingEndMilestoneIndexes?.find((milestone) => milestone > LAST_MILESTONE_BEFORE_TREASURY_EVENT)) {
-        return ParticipationAction.Stake
-    } else if (stakingEndMilestoneIndexes?.length) {
-        return ParticipationAction.Vote
+    if (timestamp) {
+        const lastDateBeforeTreasuryEvent = milestoneToDate(LAST_MILESTONE_BEFORE_TREASURY_EVENT)
+        const messageDate = new Date(timestamp)
+        if (messageDate <= lastDateBeforeTreasuryEvent) {
+            return ParticipationAction.Stake
+        }
     }
 }

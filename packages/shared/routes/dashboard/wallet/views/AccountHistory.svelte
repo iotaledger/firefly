@@ -121,7 +121,7 @@
         if (searchValue) {
             queryTransactions = filteredTransactions.filter((transaction) => {
                 const transactionValue = (transaction?.payload as Transaction)?.data?.essence?.data?.value
-                const participationAction = getMessageParticipationAction(transaction.id)
+                const participationAction = getMessageParticipationAction(transaction.id, transaction.timestamp)
                 return (
                     sendAddressFromTransactionPayload(transaction?.payload) === searchValue ||
                     receiverAddressesFromTransactionPayload(transaction?.payload).find(
