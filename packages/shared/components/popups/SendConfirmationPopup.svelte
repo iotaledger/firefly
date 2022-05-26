@@ -6,8 +6,7 @@
     import { TransactionDetails } from 'shared/components/molecules'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { Recipient, trySendAmount } from '@core/wallet'
+    import { Recipient, trySendAmount, ActivityStatus, ActivityType } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient
