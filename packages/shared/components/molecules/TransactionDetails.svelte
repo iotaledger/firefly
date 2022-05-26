@@ -13,8 +13,14 @@
     import { activeProfile } from '@core/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { ActivityAsyncStatus, ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { formatTokenAmountPrecise, Recipient } from '@core/wallet'
+    import {
+        formatTokenAmountPrecise,
+        Recipient,
+        ActivityAsyncStatus,
+        ActivityStatus,
+        ActivityType,
+    } from '@core/wallet'
+
     import { BASE_TOKEN } from '@core/network'
 
     export let amount: string
