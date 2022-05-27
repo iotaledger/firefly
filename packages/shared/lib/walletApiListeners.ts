@@ -20,10 +20,12 @@ import {
     getPendingParticipation,
     hasPendingParticipation,
     isChangingParticipation,
+    isStakingWhenVoting,
     removePendingParticipations,
 } from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
+import { stakedAmount } from './participation/account'
 import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
@@ -126,6 +128,19 @@ export const initialiseListeners = (): void => {
                 ) {
                     isChangingParticipation.set(false)
                     displayParticipationNotification(getPendingParticipation(message.id))
+                    // Patch: if voting unstakes your funds, show a notification to inform the user
+                    if (
+                        (getPendingParticipation(message.id)?.action !== ParticipationAction.Vote ||
+                            getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote) &&
+                        get(isStakingWhenVoting) &&
+                        get(stakedAmount) <= 0
+                    ) {
+                        showAppNotification({
+                            type: 'warning',
+                            message: localize('notifications.voteUnstake'),
+                        })
+                    }
+                    isStakingWhenVoting.set(false)
                 }
                 if (get(popupState).type === 'stakingManager') {
                     closePopup()

@@ -8,12 +8,14 @@
         currentAccountTreasuryVotePartiallyUnvotedAmount,
         currentAccountTreasuryVoteValue,
         hasCurrentAccountReceivedFundsSinceLastTreasuryVote,
+        stakedAmount,
     } from 'shared/lib/participation/account'
     import { participate, stopParticipating } from 'shared/lib/participation/api'
     import {
         isChangingParticipation,
         isParticipationPending,
         isPerformingParticipation,
+        isStakingWhenVoting,
         participationAction,
         pendingParticipations,
     } from 'shared/lib/participation/stores'
@@ -140,6 +142,9 @@
     }
 
     async function castVote(votingAction: VotingAction): Promise<void> {
+        // Patch: store previous staking state to check if voting modifies the staking state
+        isStakingWhenVoting.set($stakedAmount > 0)
+
         isVoting = true
         try {
             await vote(votingAction)

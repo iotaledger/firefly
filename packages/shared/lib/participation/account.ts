@@ -2,7 +2,7 @@ import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participati
 import { activeProfile } from '@lib/profile'
 import { WalletAccount } from '@lib/typings/wallet'
 import { formatUnitBestMatch } from '@lib/units'
-import { derived, get, Readable } from 'svelte/store'
+import { derived, get, Readable, writable, Writable } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { selectedAccountIdStore, selectedAccountStore } from '../wallet'
 import { ASSEMBLY_REWARD_MULTIPLIER, SHIMMER_REWARD_MULTIPLIER, TREASURY_VOTE_EVENT_ID } from './constants'

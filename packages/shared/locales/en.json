@@ -1256,7 +1256,8 @@
         "transferring": "Please wait until all transactions are completed to change wallets.",
         "participating": "Please wait until you have completed staking/voting before changing wallets.",
         "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet.",
+        "voteUnstake": "There was an issue with your staked funds. Please visit the staking tab to stake your funds again."
     },
     "error": {
         "profile": {

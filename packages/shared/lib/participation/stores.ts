@@ -265,3 +265,6 @@ export const resetPerformingParticipation = (): void => {
 }
 
 export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])
+
+// Patch: temporary fix for the issue where voting might modify your staking state
+export const isStakingWhenVoting = writable(false)
