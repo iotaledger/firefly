@@ -1,19 +1,18 @@
 <script lang="typescript">
-    import { AccountIdentifier } from '@lib/typings/account'
     import { resetAccountRouter } from '@core/router'
     import { WalletAccount } from '@lib/typings/wallet'
     import { HR, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { openPopup } from '@lib/popup'
+    // import { openPopup } from '@lib/popup'
     import { mobile } from 'shared/lib/app'
-    import { activeProfile, getColor, updateProfile } from '@lib/profile'
+    import { activeProfile, getColor } from '@lib/profile'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
-    export let onCreateAccount = (..._: any[]): void => {}
-    // export let handleCreateAccountPress = (..._: any[]): void => {}
+    // export let onCreateAccount = (..._: any[]): void => {}
+    export let handleCreateAccountPress = (..._: any[]): void => {}
     export let onAccountSelection = (..._: any[]): void => {}
 
     function handleAccountClick(accountId: string): void {
@@ -38,37 +37,35 @@
     }
 
     function handleCreateAccountClick(): void {
-        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
-        // handleCreateAccountPress()
-        onAccountSelection()
+        // Intentionally hidden to remember that we could use a popup too.
+        // openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        // onAccountSelection()
+        handleCreateAccountPress()
     }
 </script>
 
-<div class="flex flex-col px-6 w-full {$mobile ? 'safe-area pt-7 pb-1' : 'py-10'}">
-    <div class={$mobile ? 'mb-4' : 'mb-5'}>
-        <Text type="h4">{localize('general.switchWallet')}</Text>
-    </div>
-    <div class="accounts flex flex-col space-y-1 {$mobile ? 'overflow-auto mb-5' : 'scrollable-y'}">
-        {#each accounts as account}
-            <button
-                on:click={() => handleAccountClick(account.id)}
-                class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
-            >
-                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-                <Text secondary={account.id !== $selectedAccount?.id} type={$mobile ? 'h5' : 'h4'}>{account.alias}</Text
-                >
-            </button>
-        {/each}
-    </div>
-    <HR />
-    <button
-        class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 py-6"
-        on:click={handleCreateAccountClick}
-    >
-        <Icon icon="plus" height="16" width="16" classes="text-blue-500 mb-0.5" />
-        <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
-    </button>
+<div class="mb-4">
+    <Text type="h4">{localize('general.switchWallet')}</Text>
 </div>
+<div class="accounts flex flex-col space-y-1 {$mobile ? 'overflow-auto mb-5' : 'scrollable-y'}">
+    {#each accounts as account}
+        <button
+            on:click={() => handleAccountClick(account.id)}
+            class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
+        >
+            <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+            <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">{account.alias}</Text>
+        </button>
+    {/each}
+</div>
+<HR />
+<button
+    class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 py-6"
+    on:click={handleCreateAccountClick}
+>
+    <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
+    <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
+</button>
 
 <style type="text/scss">
     button {
@@ -96,8 +93,5 @@
                 content: '';
             }
         }
-    }
-    .safe-area {
-        margin-bottom: calc(env(safe-area-inset-top) / 2);
     }
 </style>
