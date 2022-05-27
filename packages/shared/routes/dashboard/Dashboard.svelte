@@ -353,7 +353,7 @@
                 ],
             })
         }
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && !$mobile) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
