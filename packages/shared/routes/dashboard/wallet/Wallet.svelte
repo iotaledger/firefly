@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { accountRoute, accountRouter } from '@core/router'
+    import { walletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { AccountActionsModal, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+    import { WalletRoute } from '@core/router/enums'
+    import { AccountActionsModal, BottomNavigation, DashboardPane, Drawer, Text, Modal } from 'shared/components'
     import {
         AccountActions,
         AddressHistory,
@@ -50,6 +52,7 @@
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
+    import { fade } from 'svelte/transition'
     import {
         AccountAssets,
         AccountBalance,
@@ -444,9 +447,18 @@
                 </div>
                 <div class="flex flex-1">
                     <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
-                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                        {#if $walletRoute === WalletRoute.Assets}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountAssets />
+                            </div>
+                        {:else if $walletRoute === WalletRoute.AccountHistory}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                            </div>
+                        {/if}
                     </DashboardPane>
                 </div>
+                <BottomNavigation locale={localize} />
             </div>
         </div>
     {:else}
