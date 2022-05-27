@@ -16,7 +16,6 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'
-    import { HtmlTag, tick } from 'svelte/internal'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -25,15 +24,14 @@
     export let fromRight = false
     export let classes = ''
     export let fullScreen = false
-    export let onClose = (): void => {}
     export let preventClose = false
     export let zIndex = 'z-30'
+    export let onClose = (): void => {}
 
     const dispatch = createEventDispatcher()
 
     const viewportLength = fromRight ? window.innerWidth : window.innerHeight
 
-    let content = undefined
     let isOpen = false
 
     const coords = tweened(
@@ -44,36 +42,6 @@
         { duration: 350, easing: quintOut }
     )
 
-    let preventScroll = true
-    let hasScrollableParent = false
-    const scrollHandler = (event) => {
-        console.error(event.currentTarget.scrollTop)
-        preventScroll = event.currentTarget.scrollTop === 0
-    }
-
-    function getScrollParent(node: Node & Element) {
-        if (node === null) {
-            return false
-        }
-        if (node.scrollHeight > node.clientHeight) {
-            return true
-        }
-        const has = false
-        if (node.hasChildNodes) {
-            // console.error('yas!')
-            node.childNodes.forEach((node) => {
-                // console.error(node.scrollHeight)
-                if (node.scrollHeight) return getScrollParent(node)
-                else return false
-                // if (node.scrollHeight > node.clientHeight) {
-                //     has = true
-                //     console.error(node.scrollHeight)
-                // }
-            })
-            // return has
-        }
-    }
-
     onMount(async () => {
         if (opened) {
             await open()
@@ -81,22 +49,13 @@
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) {
-            return
-        }
+        if (!use) return
         let x: number
         let y: number
         let init: number
 
         function handleTouchstart(event: TouchEvent): void {
-            if (node.scrollTop !== 0) {
-                return
-            }
-            if (preventScroll) {
-                // event.preventDefault()
-                event.stopImmediatePropagation()
-                event.stopPropagation()
-            }
+            event.preventDefault()
 
             if (event.targetTouches.length === 1) {
                 init = window.performance.now()
@@ -145,12 +104,7 @@
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
-        if ($coords.y < 0) {
-            preventScroll = false
-            // // prepare for next scroll event if there will be one
-            // content.scrollTop += 10
-            return
-        }
+        if ($coords.y < 0) return
         await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
@@ -161,8 +115,7 @@
     }
 
     async function handleSlideEnd() {
-        const contentHeight = parseInt(getComputedStyle(content).height)
-        const thresholdUnreached = fromRight ? viewportLength / 2 > $coords.x : contentHeight / 2 > $coords.y
+        const thresholdUnreached = fromRight ? viewportLength / 2 > $coords.x : viewportLength / 1.2 > $coords.y
         if (thresholdUnreached) {
             await open()
         } else {
@@ -171,8 +124,6 @@
     }
 
     export async function open(): Promise<void> {
-        hasScrollableParent = getScrollParent(content)
-        console.error(hasScrollableParent)
         isOpen = true
         await coords.set(
             {
@@ -189,23 +140,24 @@
                 x: fromRight ? viewportLength : 0,
                 y: fromRight ? 0 : viewportLength,
             },
-            { duration: 550, easing: quintOut }
+            { duration: 350, easing: quintOut }
         )
         isOpen = false
         if (!preventClose) {
             dispatch('close')
-            onClose()
         }
+        dispatch('close')
+        onClose()
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromRight ? $coords.x : $coords.y, 1400)
+    $: dimOpacity = getScale(fromRight ? $coords.x : $coords.y, 1000)
     $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
-    <dim-zone
+    <slide-zone
         class="fixed h-screen w-screen"
         use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
@@ -213,15 +165,9 @@
         on:tap={close}
     >
         <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
-    </dim-zone>
-    <content
-        bind:this={content}
-        use:slidable={!fromRight}
-        on:slideMove={handleSlideMove}
-        on:slideEnd={handleSlideEnd}
-        on:scroll={scrollHandler}
-        on:tap={() => (preventScroll = false)}
-        class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+    </slide-zone>
+    <main
+        class="fixed bottom-0 overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
         style="--y: {fromRight ? 0 : $coords.y}px; 
@@ -229,32 +175,29 @@
 			--opacity: {contentOpacity}; 
 			--height: {fromRight && '100vh'};
 			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromRight ? 'none' : 'block'}"
+			--display-indicator: {fromRight || preventClose ? 'none' : 'block'}"
     >
         <slot />
-    </content>
+    </main>
 </drawer>
 
 <style type="text/scss">
-    content {
-        // scroll-padding-top: 10rem;
+    main {
         will-change: transform;
         transform: translate(var(--x), var(--y));
         border-radius: var(--border-radius);
         height: var(--height);
         opacity: var(--opacity);
         --bg-indicator-color: #d8e3f5;
-        --bg-top-shaddow: white;
         @apply from-white;
         &.darkmode {
             @apply from-gray-800;
             --bg-indicator-color: #405985;
-            --bg-top-shaddow: rgb(37, 57, 95);
         }
     }
 
     // Rounded rectangle slide indicator
-    content:before {
+    main:before {
         display: var(--display-indicator);
         content: '';
         position: sticky;
@@ -263,9 +206,7 @@
         left: calc(50% - 48px / 2 - 0.5px);
         top: 8px;
         border-radius: 8px;
-        z-index: 100;
         background: var(--bg-indicator-color);
-        box-shadow: var(--bg-top-shaddow) 0 -199ch 20px 200ch;
     }
 
     #dim {
