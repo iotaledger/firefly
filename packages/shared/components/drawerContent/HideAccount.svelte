@@ -9,21 +9,20 @@
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
 
-    export let account
+    export let account: WalletAccount
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hasMultipleAccounts = $viewableAccounts.length > 1
 
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    let canDelete
     $: canDelete = account ? account.rawIotaBalance === 0 : false
 
-    let password
+    let password = ''
     let error = ''
     let isBusy = false
 
-    function hideAccount(id) {
+    function hideAccount(id: string): void {
         if (!hiddenAccounts.includes(id)) {
             hiddenAccounts.push(id)
             updateProfile('hiddenAccounts', hiddenAccounts)
@@ -33,7 +32,7 @@
         resetWalletRoute()
     }
 
-    function handleHideClick() {
+    function handleHideClick(): void {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
@@ -53,17 +52,17 @@
         }
     }
 
-    function handleMoveFundsClick() {
+    function handleMoveFundsClick(): void {
         $accountRouter.goTo(AccountRoute.Init)
-        sendParams.update((params) => ({ ...params, amount: account.rawIotaBalance, isInternal: true }))
+        sendParams.update((params) => ({ ...params, amount: account.rawIotaBalance.toString(), isInternal: true }))
         $accountRouter.goTo(AccountRoute.Send)
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         $accountRouter.goTo(AccountRoute.Init)
     }
 
-    function triggerHideAccount() {
+    function triggerHideAccount(): void {
         isBusy = false
         $accountRouter.goTo(AccountRoute.Init)
         hideAccount(account?.id)
