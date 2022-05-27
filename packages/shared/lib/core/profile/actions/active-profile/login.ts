@@ -12,6 +12,5 @@ export async function login(): Promise<void> {
         lastActiveAt.set(new Date())
         const response = await isStrongholdUnlocked()
         isStrongholdLocked.set(!response)
-        loadAllAccountActivities()
     }
 }

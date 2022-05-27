@@ -55,7 +55,7 @@
 
     let timeDiff: string
     $: {
-        if (!activity.isClaimed) {
+        if (activity.isAsync && !activity.isClaimed && activity?.expireDate) {
             const elapsedTime = activity.expireDate.getTime() - time.getTime()
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
             const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
@@ -109,11 +109,13 @@
                     fontWeight={FontWeightText.semibold}
                     lineHeight="140"
                     color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
-                    classes="whitespace-nowrap">{activity.getFormattedAmount()}</Text
+                    classes="whitespace-nowrap"
                 >
-                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap"
-                    >{activity.getFiatAmount()}</Text
-                >
+                    {activity.getFormattedAmount(true)}
+                </Text>
+                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap">
+                    {activity.getFiatAmount()}
+                </Text>
             </div>
         </div>
     </button>

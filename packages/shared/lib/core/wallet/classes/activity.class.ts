@@ -1,9 +1,12 @@
+import { BASE_TOKEN } from '@core/network'
+import { activeProfile } from '@core/profile'
 import { ITransactionPayload } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { address } from '@lib/typings'
 import { AccountMessage } from '@lib/typings/wallet'
 import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
+import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
@@ -33,16 +36,18 @@ export class Activity implements IActivity {
 
     constructor() {}
 
-    setFromTransaction(transaction: Transaction): Activity {
-        this.id = transaction.blockId
+    setFromTransaction(transactionId: string, transaction: Transaction): Activity {
+        this.id = transactionId
         this.type = 'Transaction'
         this.time = new Date(Number(transaction.timestamp))
-        this.internal = false
+        this.activityType = ActivityType.Send
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = transaction.inclusionState
-        this.recipient = { type: 'address', address: 'Address unknown' }
-        this.isAsync = false
+        this.internal = false
         this.rawAmount = 0
+        this.recipient = { type: 'address', address: 'Address unknown' }
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.isAsync = false
         this.hidden = false
         return this
     }
@@ -62,17 +67,21 @@ export class Activity implements IActivity {
         return undefined
     }
 
-    getFormattedAmount(signum: boolean): string {
-        return `${this.activityType !== ActivityType.Receive && signum ? '-' : ''}${formatTokenAmountBestMatch(
+    getFormattedAmount(signed: boolean): string {
+        return `${this.activityType !== ActivityType.Receive && signed ? '-' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
             this.token,
             2
         )}`
     }
 
-    getFiatAmount(fiatPrice: number, exchangeRate: number): string {
-        const fiatValue = formatCurrency(convertToFiat(this.rawAmount, fiatPrice, exchangeRate))
-        return fiatValue ? fiatValue : '-'
+    getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
+        if (fiatPrice && exchangeRate) {
+            const fiatValue = formatCurrency(convertToFiat(this.rawAmount, fiatPrice, exchangeRate))
+            return fiatValue ? fiatValue : '-'
+        } else {
+            return '-'
+        }
     }
 }
 

@@ -9,10 +9,10 @@ import {
 export function loadAllAccountActivities(): void {
     for (const account of get(activeAccounts)) {
         addEmptyAccountActivitiesToAllAccountActivities(account.id)
-        account.meta.transactions.forEach((transaction) => {
+        Object.keys(account.meta.transactions).forEach((transactionId) => {
             addActivityToAccountActivitiesInAllAccountActivities(
                 account.id,
-                new Activity().setFromTransaction(transaction)
+                new Activity().setFromTransaction(transactionId, account.meta.transactions?.[transactionId])
             )
         })
     }

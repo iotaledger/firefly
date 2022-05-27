@@ -5,12 +5,7 @@
     import { Platform } from 'shared/lib/platform'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import {
-        Activity,
-        ActivityAsyncStatus,
-        ActivityDirection,
-        parseRawAmount,
-    } from '@core/wallet'
+    import { Activity, ActivityAsyncStatus, ActivityDirection, parseRawAmount } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { onMount } from 'svelte'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -63,7 +58,7 @@
     function handleClaim() {}
 
     function handleExplorerClick() {
-        Platform.openUrl(`${explorerUrl}/message/${id}`)
+        Platform.openUrl(`${explorerUrl}/block/${activity.id}`)
     }
 </script>
 

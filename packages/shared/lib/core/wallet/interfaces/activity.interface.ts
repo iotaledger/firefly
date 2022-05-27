@@ -1,5 +1,4 @@
 import { Transaction } from '@iota/wallet'
-import { AccountMessage } from '@lib/typings/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Recipient } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
@@ -21,7 +20,7 @@ export interface IActivity {
     hidden?: boolean
     isClaimed?: boolean
 
-    setFromTransaction(transaction: Transaction): void
+    setFromTransaction(transactionId: string, transaction: Transaction): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string
