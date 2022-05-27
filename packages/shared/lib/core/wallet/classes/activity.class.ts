@@ -3,8 +3,6 @@ import { activeProfile } from '@core/profile'
 import { ITransactionPayload } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
-import { address } from '@lib/typings'
-import { AccountMessage } from '@lib/typings/wallet'
 import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
@@ -19,9 +17,8 @@ import {
 
 export class Activity implements IActivity {
     id: string
-    type: string
     time: Date
-    activityType: ActivityType
+    type: ActivityType
     direction: ActivityDirection
     inclusionState: InclusionState
     internal: boolean
@@ -38,9 +35,8 @@ export class Activity implements IActivity {
 
     setFromTransaction(transactionId: string, transaction: Transaction): Activity {
         this.id = transactionId
-        this.type = 'Transaction'
         this.time = new Date(Number(transaction.timestamp))
-        this.activityType = ActivityType.Send
+        this.type = ActivityType.Send
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = transaction.inclusionState
         this.internal = false
@@ -68,7 +64,7 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
-        return `${this.activityType !== ActivityType.Receive && signed ? '-' : ''}${formatTokenAmountBestMatch(
+        return `${this.type !== ActivityType.Receive && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
             this.token,
             2

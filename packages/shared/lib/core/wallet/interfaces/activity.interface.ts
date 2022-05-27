@@ -5,9 +5,8 @@ import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
     id: string
-    type: string
+    type: ActivityType
     time: Date
-    activityType: ActivityType
     direction: ActivityDirection
     inclusionState: InclusionState
     internal: boolean

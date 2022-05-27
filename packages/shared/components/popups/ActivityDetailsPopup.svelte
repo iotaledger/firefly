@@ -26,19 +26,6 @@
         $exchangeRates[$activeProfile?.settings?.currency]
     )
 
-    $: transactionDetails = {
-        ...transactionDetails,
-        type: activity.activityType,
-        asyncStatus,
-        formattedFiatValue,
-        amount,
-        unit,
-        token: activity.token,
-        recipient: activity.recipient,
-        time: activity.time,
-        expireDate: activity.expireDate,
-    }
-
     onMount(() => {
         if (activity.isAsync && !activity.isClaimed) {
             const interval = setInterval(() => {
@@ -74,7 +61,7 @@
             {localize('general.viewOnExplorer')}
         </button>
     </div>
-    <TransactionDetails {...transactionDetails} />
+    <TransactionDetails {asyncStatus} {formattedFiatValue} {amount} {unit} {...activity} />
     {#if activity.isAsync && activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button

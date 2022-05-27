@@ -84,7 +84,7 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
         {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <div class="flex flex-row items-baseline">
+                <div class="flex flex-row items-baseline space-x-0.5">
                     <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
                     <Text type="h2" fontWeight={FontWeightText.medium}>{unit}</Text>
                 </div>

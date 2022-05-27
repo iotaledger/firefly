@@ -17,15 +17,15 @@
     let iconColor = ''
     let subject = ''
     $: {
-        if (activity.activityType === ActivityType.Transfer) {
+        if (activity.type === ActivityType.Transfer) {
             icon = 'transfer'
             iconColor = 'gray-600'
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-        } else if (activity.activityType === ActivityType.Receive) {
+        } else if (activity.type === ActivityType.Receive) {
             icon = 'chevron-down'
             iconColor = 'blue-700'
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-        } else if (activity.activityType === ActivityType.Send) {
+        } else if (activity.type === ActivityType.Send) {
             icon = 'chevron-up'
             iconColor = 'blue-500'
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
