@@ -8,13 +8,12 @@
     import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
 
-    export let alias
     export let account
     export let error = ''
 
     const { accounts } = $wallet
 
-    let accountAlias = alias
+    let accountAlias = account.alias
     let isBusy = false
     let color = getColor($activeProfile, account.id) as string
 
@@ -24,7 +23,7 @@
     const handleSaveClick = () => {
         setProfileAccount($activeProfile, { id: $selectedAccount?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
-        if (trimmedAccountAlias === alias) {
+        if (trimmedAccountAlias === account?.alias) {
             $accountRouter.goTo(AccountRoute.Init)
             return
         }
@@ -73,7 +72,7 @@
         $accountRouter.previous()
     }
 
-    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
+    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === account?.alias
     $: hasColorChanged = getColor($activeProfile, account.id) !== color
 </script>
 

@@ -430,7 +430,7 @@
                         {:else if $accountRoute === AccountRoute.Actions}
                             <AccountActions />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            <ManageAccount account={$selectedAccount} />
                         {:else if $accountRoute === AccountRoute.AddressHistory}
                             <AddressHistory account={$selectedAccount} />
                         {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
@@ -470,7 +470,7 @@
                             {:else if $accountRoute === AccountRoute.Receive}
                                 <Receive {isGeneratingAddress} {onGenerateAddress} />
                             {:else if $accountRoute === AccountRoute.Manage}
-                                <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                                <ManageAccount account={$selectedAccount} />
                             {/if}
                         </DashboardPane>
                     </DashboardPane>
