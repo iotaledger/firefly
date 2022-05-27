@@ -43,16 +43,16 @@ export interface IAccount {
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+    ): Promise<TransactionReceipt>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+    ): Promise<TransactionReceipt>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionReceipt[]>
+    ): Promise<TransactionReceipt>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionReceipt>
+    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionReceipt>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionReceipt>
 }

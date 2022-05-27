@@ -6,7 +6,7 @@
     import { TransactionDetails } from 'shared/components/molecules'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { Recipient, trySend, ActivityStatus, ActivityType } from '@core/wallet'
+    import { Recipient, trySend, ActivityStatus, ActivityType, InclusionState } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient
@@ -37,7 +37,7 @@
 
     $: transactionDetails = {
         type: internal ? ActivityType.Transfer : ActivityType.Send,
-        status: ActivityStatus.InProgress,
+        inclusiontState: InclusionState.Pending,
         amount,
         unit,
         recipient,

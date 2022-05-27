@@ -1,5 +1,6 @@
+import { Transaction } from '@iota/wallet'
 import { AccountMessage } from '@lib/typings/wallet'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../enums'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Recipient } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
 
@@ -9,7 +10,7 @@ export interface IActivity {
     time: Date
     activityType: ActivityType
     direction: ActivityDirection
-    confirmed: boolean
+    inclusionState: InclusionState
     internal: boolean
     rawAmount: number
     recipient: Recipient
@@ -20,6 +21,7 @@ export interface IActivity {
     hidden?: boolean
     isClaimed?: boolean
 
+    setFromTransaction(transaction: Transaction): void
     setFromAccountMessage(message: AccountMessage): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string

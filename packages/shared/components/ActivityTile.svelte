@@ -2,7 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, Activity } from '@core/wallet'
+    import { ActivityAsyncStatus, ActivityDirection, ActivityType, Activity, InclusionState } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
@@ -20,15 +20,15 @@
         if (activity.activityType === ActivityType.Transfer) {
             icon = 'transfer'
             iconColor = 'gray-600'
-            title = activity.confirmed ? 'general.transfer' : 'general.transferring'
+            title = activity.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else if (activity.activityType === ActivityType.Receive) {
             icon = 'chevron-down'
             iconColor = 'blue-700'
-            title = activity.confirmed ? 'general.received' : 'general.receiving'
+            title = activity.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
         } else if (activity.activityType === ActivityType.Send) {
             icon = 'chevron-up'
             iconColor = 'blue-500'
-            title = activity.confirmed ? 'general.sent' : 'general.sending'
+            title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
         }
         direction = activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress'
         subject =
@@ -80,13 +80,13 @@
 
 <div
     class="w-full text-left flex flex-col rounded-2xl bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50"
-    class:opacity-50={!activity.confirmed}
+    class:opacity-50={activity.inclusionState !== InclusionState.Confirmed}
 >
     <button
         on:click={onClick}
         data-label="transaction-row"
         class="w-full text-left flex flex-col rounded-2xl hover:bg-gray-200 dark:hover:bg-gray-700 dark:bg-opacity-50 p-4"
-        class:opacity-50={!activity.confirmed}
+        class:opacity-50={activity.inclusionState !== InclusionState.Confirmed}
     >
         <div class="flex items-center w-full">
             <div class="w-8 flex flex-row justify-center items-center">

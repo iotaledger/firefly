@@ -14,11 +14,10 @@
     import {
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
-        ActivityStatus,
         ActivityType,
         Recipient,
         ITokenMetadata,
-        formatTokenAmountBestMatch,
+        InclusionState,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { truncateString } from '@lib/helpers'
@@ -26,7 +25,7 @@
     export let amount: string
     export let unit: string
     export let type: ActivityType
-    export let status: ActivityStatus
+    export let inclusionState: InclusionState
     export let asyncStatus: ActivityAsyncStatus
     export let account: string
     export let address: string
@@ -93,8 +92,8 @@
             </transaction-value>
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
-            {#if status}
-                <ActivityStatusPill {type} {status} />
+            {#if inclusionState}
+                <ActivityStatusPill {type} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />

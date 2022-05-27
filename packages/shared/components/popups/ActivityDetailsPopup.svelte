@@ -6,11 +6,9 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
-        activities,
         Activity,
         ActivityAsyncStatus,
         ActivityDirection,
-        ActivityStatus,
         parseRawAmount,
     } from '@core/wallet'
     import { activeProfile } from '@core/profile'
@@ -36,7 +34,6 @@
     $: transactionDetails = {
         ...transactionDetails,
         type: activity.activityType,
-        status: activity.confirmed ? ActivityStatus.Confirmed : ActivityStatus.Pending,
         asyncStatus,
         formattedFiatValue,
         amount,

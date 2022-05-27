@@ -6,7 +6,7 @@ import {
     getIncomingFlag,
     getInternalFlag,
     receiverAddressesFromTransactionPayload,
-    sendAddressFromTransactionPayload,
+    sendAddressFromTransactionPayload
 } from '@lib/wallet'
 
 export function getTransactionSubjectAddressOrAccount(
