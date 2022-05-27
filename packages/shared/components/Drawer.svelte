@@ -49,7 +49,9 @@
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) return
+        if (!use) {
+            return
+        }
         let x: number
         let y: number
         let init: number
@@ -104,7 +106,9 @@
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
-        if ($coords.y < 0) return
+        if ($coords.y < 0) {
+            return
+        }
         await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
