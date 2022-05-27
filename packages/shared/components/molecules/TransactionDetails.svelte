@@ -86,7 +86,7 @@
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <div class="flex flex-row items-baseline space-x-0.5">
                     <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
-                    <Text type="h2" fontWeight={FontWeightText.medium}>{unit}</Text>
+                    <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
                 </div>
                 <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
             </transaction-value>
@@ -104,7 +104,7 @@
                 <AccountLabel {account} />
             </Box>
         {:else if address}
-            <AddressBox clearBackground clearPadding isCopyable address={truncateString(address, 6, 6)} />
+            <AddressBox clearBackground clearPadding isCopyable {address} />
         {/if}
 
         {#if recipient.type === 'account'}
@@ -112,7 +112,7 @@
                 <AccountLabel account={recipient.account} />
             </Box>
         {:else if recipient.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={truncateString(recipient.address, 6, 6)} />
+            <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

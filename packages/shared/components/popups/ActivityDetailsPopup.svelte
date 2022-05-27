@@ -55,7 +55,7 @@
             {localize('popups.transactionDetails.title')}
         </Text>
         <button
-            class="action p-1 mr-1 w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+            class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
             on:click={handleExplorerClick}
         >
             {localize('general.viewOnExplorer')}
