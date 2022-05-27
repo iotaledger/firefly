@@ -1,18 +1,18 @@
 import { ITransactionPayload } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
+import { address } from '@lib/typings'
 import { AccountMessage } from '@lib/typings/wallet'
-import {
-    findAccountWithAddress,
-    findAccountWithAnyAddress,
-    getIncomingFlag,
-    getInternalFlag,
-} from '@lib/wallet'
+import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
-import { formatTokenAmountBestMatch, receiverAddressesFromTransactionPayload, sendAddressFromTransactionPayload } from '../utils'
+import {
+    formatTokenAmountBestMatch,
+    receiverAddressesFromTransactionPayload,
+    sendAddressFromTransactionPayload,
+} from '../utils'
 
 export class Activity implements IActivity {
     id: string
@@ -33,28 +33,6 @@ export class Activity implements IActivity {
 
     constructor() {}
 
-    setFromAccountMessage(message: AccountMessage): Activity {
-        this.id = message.id
-        this.type = 'Transaction'
-        this.time = new Date(Number(message.timestamp))
-        this.activityType = getActivityType(message.payload)
-        this.internal = getInternalFlag(message.payload)
-        this.direction = getIncomingFlag(message.payload) ? ActivityDirection.In : ActivityDirection.Out
-        this.inclusionState = message.confirmed ? InclusionState.Confirmed : InclusionState.Pending
-        this.recipient = getRecipient(message.payload)
-        this.rawAmount = message.payload.type === 'Transaction' ? Number(message.payload.data.essence.data.value) : 0
-        this.isAsync = true
-        this.expireDate = new Date(2022, 5, 25, 12)
-        this.hidden = false
-        this.isClaimed = false
-        this.token = {
-            name: 'Iota',
-            unit: 'i',
-            useMetricPrefix: true,
-        }
-        return this
-    }
-
     setFromTransaction(transaction: Transaction): Activity {
         this.id = transaction.blockId
         this.type = 'Transaction'
@@ -62,8 +40,10 @@ export class Activity implements IActivity {
         this.internal = false
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = transaction.inclusionState
-        this.recipient = getRecipient(transaction.payload, transaction.incoming, false)
-
+        this.recipient = { type: 'address', address: 'Address unknown' }
+        this.isAsync = false
+        this.rawAmount = 0
+        this.hidden = false
         return this
     }
 
@@ -122,9 +102,7 @@ function getRecipient(payload: ITransactionPayload, incoming: boolean, internal:
         // For an incoming transaction there might be multiple receiver addresses
         // especially if there was a remainder, so if any account addresses match
         // we need to find the account details for our address match
-        const receiverAccount = internal
-            ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
-            : null
+        const receiverAccount = internal ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
 
         return receiverAccount
             ? { type: 'account', account: receiverAccount }

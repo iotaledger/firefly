@@ -22,7 +22,6 @@ export interface IActivity {
     isClaimed?: boolean
 
     setFromTransaction(transaction: Transaction): void
-    setFromAccountMessage(message: AccountMessage): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string
