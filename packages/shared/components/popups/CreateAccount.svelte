@@ -10,6 +10,7 @@
 
     export let error = ''
     export let onCreate = (..._: any[]): void => {}
+    export let onCancel = (..._: any[]): void => {}
 
     const { accounts } = $wallet
 
@@ -69,6 +70,7 @@
                         }
                     } else {
                         closePopup()
+                        onCancel()
                     }
                 })
 
@@ -81,6 +83,7 @@
     }
     const handleCancelClick = () => {
         closePopup()
+        onCancel()
     }
 </script>
 
