@@ -13,8 +13,8 @@ import {
 export async function addNode(node: INode, profile: Writable<IPersistedProfile>): Promise<void> {
     const cleanData = validateAndCleanNodeData(node)
     const nodeInfoResponse = await getNodeInfo(cleanData.url, cleanData.auth)
-    updateNodeInfo(nodeInfoResponse?.nodeinfo)
-    const builtNode = buildNode(cleanData, nodeInfoResponse, get(profile))
+    updateNodeInfo(nodeInfoResponse?.node_info)
+    const builtNode = buildNode(nodeInfoResponse, cleanData.auth)
     if (!get(profile)?.settings?.networkConfig) {
         updateNewProfileNetworkClientOptions(get(profile)?.networkProtocol, get(profile)?.networkType, [builtNode])
     }
