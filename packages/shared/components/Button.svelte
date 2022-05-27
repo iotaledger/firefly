@@ -14,6 +14,7 @@
     export let outline = false
     export let icon = undefined
     export let iconReverse = false
+    export let iconColor = ''
     export let xl = false
     export let medium = false
     export let small = false
@@ -28,7 +29,7 @@
     export let iconHeight: string
     export let iconWidth: string
 
-    export let onClick = (): void | string => ''
+    export let onClick: () => unknown
 
     let buttonElement
     let darkModeEnabled
@@ -52,12 +53,13 @@
         class:secondary
         class:active
         class:with-icon={icon}
+        class:custom-icon-color={iconColor}
         class:darkmode={darkModeEnabled}
         style={inlineStyle}
         {disabled}
         bind:this={buttonElement}
     >
-        <Icon classes="mb-1" {icon} height={iconHeight} width={iconWidth} />
+        <Icon classes="mb-1 text-{iconColor}" {icon} height={iconHeight} width={iconWidth} />
         <span class="text-12 leading-140">
             <slot />
         </span>
@@ -77,6 +79,7 @@
         class:xsmall
         class:outline
         class:with-icon={icon}
+        class:custom-icon-color={iconColor}
         class:iconReverse
         class:active
         class:darkmode={darkModeEnabled}
@@ -91,7 +94,12 @@
                     <div class="relative flex flex-row justify-between">
                         <div class="relative flex items-center flex-1">
                             <div class="absolute left-0 flex items-center">
-                                <Icon width={iconWidth ?? '16'} height={iconHeight ?? '16'} classes="mr-4" {icon} />
+                                <Icon
+                                    width={iconWidth ?? '16'}
+                                    height={iconHeight ?? '16'}
+                                    classes="mr-4 text-{iconColor}"
+                                    {icon}
+                                />
                             </div>
                             <span class="font-bold text-12 leading-140"><slot /></span>
                         </div>
@@ -104,7 +112,7 @@
                                 <Icon
                                     width={showHoverText ? 20 : iconWidth ?? 16}
                                     height={showHoverText ? 20 : iconHeight ?? 16}
-                                    classes="ml-4 showHoverText"
+                                    classes="ml-4 showHoverText text-{iconColor}"
                                     {icon}
                                 />
                             </div>
@@ -116,16 +124,16 @@
             {:else}
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                        <Icon height={iconHeight} width={iconWidth} {icon} />
+                        <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
                     </div>
                     <div class="col-span-10 h-full flex items-center">
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
-                    <div class="col-span-1 h-full flex items-center">
-                        {#if !disabled}
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
                             <Icon icon="chevron-right" classes="right" />
-                        {/if}
-                    </div>
+                        </div>
+                    {/if}
                 </div>
             {/if}
         {:else}
@@ -298,6 +306,9 @@
                 }
             }
         }
+        &.with-icon:not(.custom-icon-color) :global(svg) {
+            @apply text-blue-500;
+        }
         &.with-icon {
             min-width: 200px;
             @apply border;
@@ -352,9 +363,6 @@
             }
             span {
                 @apply text-gray-800;
-            }
-            :global(svg) {
-                @apply text-blue-500;
             }
             :global(svg.right) {
                 @apply text-gray-500;
