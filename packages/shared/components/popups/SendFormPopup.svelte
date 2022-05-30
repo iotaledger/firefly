@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Text, RecipientInput, AssetAmountInput } from 'shared/components'
+    import { Button, Text, RecipientInput, AssetAmountInput, PublicNoteInput } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -14,6 +14,7 @@
     let rawAmount: number
     let unit: string
     let recipient: Recipient
+    let publicNote: string
 
     async function onSend(): Promise<void> {
         let valid = true
@@ -66,6 +67,7 @@
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
     <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:amount bind:unit />
     <RecipientInput bind:this={recipientInput} bind:recipient />
+    <PublicNoteInput bind:value={publicNote} />
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onCancel}>
             {localize('actions.cancel')}
