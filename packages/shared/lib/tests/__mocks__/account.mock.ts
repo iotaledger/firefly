@@ -127,26 +127,26 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    sendAmount(addressesWithAmount, transferOptions): Promise<[]> {
-        return Promise.resolve([])
+    sendAmount(addressesWithAmount, transferOptions): Promise<TransactionResult> {
+        return Promise.resolve(null)
     }
-    sendMicroTransaction(addressesWithMicroAmount, transferOptions): Promise<[]> {
-        return Promise.resolve([])
-    }
-
-    sendNativeTokens(addressNativeTokens, transferOptions): Promise<[]> {
-        return Promise.resolve([])
+    sendMicroTransaction(addressesWithMicroAmount, transferOptions): Promise<TransactionResult> {
+        return Promise.resolve(null)
     }
 
-    sendNft(addressesAndNftIds, transferOptions): Promise<[]> {
-        return Promise.resolve([])
+    sendNativeTokens(addressNativeTokens, transferOptions): Promise<TransactionResult> {
+        return Promise.resolve(null)
     }
 
-    sendTransfer(outputs, transferOptions): Promise<[]> {
-        return Promise.resolve([])
+    sendNft(addressesAndNftIds, transferOptions): Promise<TransactionResult> {
+        return Promise.resolve(null)
     }
 
-    tryCollectOutputs(outputsToCollect): Promise<[]> {
-        return Promise.resolve([])
+    sendTransfer(outputs, transferOptions): Promise<TransactionResult> {
+        return Promise.resolve(null)
+    }
+
+    tryCollectOutputs(outputsToCollect): Promise<TransactionResult> {
+        return Promise.resolve(null)
     }
 }
