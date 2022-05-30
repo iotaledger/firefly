@@ -1,21 +1,18 @@
 <script lang="typescript">
-    import { HR, Icon, Text } from 'shared/components'
-
-    import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
-
-    import { mobile } from '@lib/app'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { HR, Icon, Text } from 'shared/components'
+    import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     // import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
-    import { WalletAccount } from '@lib/typings/wallet'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     // export let onCreateAccount = (..._: any[]): void => {}
-    export let handleCreateAccountPress: (..._: any[]) => void
-    export let onAccountSelection: (..._: any[]) => void
+    export let handleCreateAccountPress = (..._: any[]): void => {}
+    export let onAccountSelection = (..._: any[]): void => {}
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
@@ -49,7 +46,7 @@
 <div class="mb-4">
     <Text type="h4">{localize('general.switchWallet')}</Text>
 </div>
-<div class="accounts flex flex-col space-y-1 {$mobile ? 'overflow-auto mb-5' : 'scrollable-y'}">
+<div class="accounts flex flex-col space-y-1 overflow-auto mb-5">
     {#each accounts as account}
         <button
             on:click={() => handleAccountClick(account.id)}
@@ -62,7 +59,7 @@
 </div>
 <HR />
 <button
-    class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 py-6"
+    class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 pt-6"
     on:click={handleCreateAccountClick}
 >
     <Icon icon="plus" height="16" width="16" classes="text-blue-500" />

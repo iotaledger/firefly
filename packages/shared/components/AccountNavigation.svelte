@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import type { WalletAccount } from 'lib/typings/wallet'
+    import { AccountSwitcher } from 'shared/components/drawerContent'
+    import { activeProfile, getColor } from '@lib/profile'
+    import { selectedAccount } from '@lib/wallet'
+    import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
     import { Drawer, Icon, Text } from 'shared/components'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
-    import { AccountSwitcher } from 'shared/components/drawerContent'
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { selectedAccount } from 'shared/lib/wallet'
-
+    
     export let accounts: WalletAccount[] = []
-    export let onCreateAccount = (..._: any[]): void => {}
+    export let onCreateAccount: createAccountCallback
 
     enum DrawerRoutes {
         Init = 'init',
@@ -43,7 +43,7 @@
         </div>
     </button>
     <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
-        <div class="flex flex-col px-6 w-full safe-area pt-7 pb-1 safe-area">
+        <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
             {#if drawerRoute === 'create'}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
             {:else if (drawerRoute = DrawerRoutes.Init)}

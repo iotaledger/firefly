@@ -1,16 +1,17 @@
 <script lang="typescript">
     import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength } from '@lib/helpers'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
-    import { isLedgerProfile } from 'shared/lib/profile'
-    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
+    import { showAppNotification } from '@lib/notifications'
+    import { closePopup, popupState } from '@lib/popup'
+    import { isLedgerProfile } from '@lib/profile'
+    import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from '@lib/wallet'
+    import { createAccountCallback } from '@lib/typings/wallet'
     import { mobile } from '@lib/app'
 
     export let error = ''
-    export let onCreate = (alias: string, color: AccountColors, callback: (err: ErrorEvent) => void): void => {}
+    export let onCreate: createAccountCallback
     export let onCancel = (): void => {}
 
     const { accounts } = $wallet

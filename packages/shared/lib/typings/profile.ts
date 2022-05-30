@@ -2,6 +2,7 @@ import { AvailableExchangeRates } from './currency'
 import { ChartSelectors } from './chart'
 import { NetworkConfig } from './network'
 import { AccountStakingRewards } from '@lib/participation/types'
+import { AccountColors } from '@lib/wallet'
 
 export interface MigratedTransaction {
     address: string
@@ -80,5 +81,5 @@ export enum ImportType {
  */
 export interface ProfileAccount {
     id: string
-    color: string
+    color: string | AccountColors
 }

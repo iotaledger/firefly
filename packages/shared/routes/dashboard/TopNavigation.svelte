@@ -5,11 +5,11 @@
     import { Platform } from 'shared/lib/platform'
     import { mobile } from 'shared/lib/app'
     import { popupState } from 'shared/lib/popup'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { createAccountCallback, WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
 
-    export let onCreateAccount = (..._: any[]): void => {}
+    export let onCreateAccount: createAccountCallback
     export let classes: string = ''
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')

@@ -12,7 +12,7 @@ import {
     selectedAccountId,
 } from 'shared/lib/wallet'
 import { Platform } from './platform'
-import { ProfileType } from './typings/profile'
+import { ProfileAccount, ProfileType } from './typings/profile'
 import { HistoryDataProps } from './typings/market'
 import { AvailableExchangeRates } from './typings/currency'
 import { getOfficialNetworkConfig } from './network'
@@ -23,11 +23,6 @@ import { WalletAccount } from './typings/wallet'
 import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
-
-export interface ProfileAccount {
-    id: string
-    color: string
-}
 
 export const activeProfileId = persistent<string | null>('activeProfileId', null)
 export const profiles = persistent<Profile[]>('profiles', [])
@@ -421,7 +416,7 @@ export const getColor = (activeProfile: Profile, accountId: string): string | Ac
     }
 
     if (accountId) {
-        const profileAccount = { id: accountId, color: '' }
+        const profileAccount: ProfileAccount = { id: accountId, color: '' }
         setProfileAccount(activeProfile, profileAccount)
         return getColor(activeProfile, accountId)
     }
