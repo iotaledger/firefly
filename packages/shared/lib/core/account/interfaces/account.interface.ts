@@ -14,13 +14,13 @@ import {
     OutputData,
     OutputsToCollect,
     Transaction,
-    TransactionReceipt,
+    TransactionResult,
     TransferOptions,
 } from '@iota/wallet/out/types'
 
 export interface IAccount {
     meta: AccountMeta
-    collectOutputs(outputIds: string[]): Promise<TransactionReceipt[]>
+    collectOutputs(outputIds: string[]): Promise<TransactionResult[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
@@ -37,21 +37,21 @@ export interface IAccount {
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
-    mintNfts(nftOptions: NftOptions[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
+    ): Promise<TransactionResult[]>
+    mintNfts(nftOptions: NftOptions[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+    ): Promise<TransactionResult[]>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+    ): Promise<TransactionResult[]>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionReceipt[]>
+    ): Promise<TransactionResult[]>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
+    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult[]>
 }

@@ -1,6 +1,6 @@
 import { getAccount } from '@core/profile-manager'
-import { TransactionReceipt } from '@iota/wallet'
+import { TransactionResult } from '@iota/wallet'
 
-export async function collectOutputs(id: string, outputIds: string[]): Promise<TransactionReceipt[]> {
+export async function collectOutputs(id: string, outputIds: string[]): Promise<TransactionResult[]> {
     return (await getAccount(Number(id)))?.collectOutputs(outputIds)
 }
