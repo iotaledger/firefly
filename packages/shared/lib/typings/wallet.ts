@@ -37,7 +37,7 @@ export type BalanceOverview = {
 export type createAccountCallback = (
     alias: string,
     color: string | AccountColors,
-    callback: (err: ErrorEvent) => void,
+    callback: (err: ErrorEvent) => void
 ) => void
 
 export type WalletState = {
