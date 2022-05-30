@@ -16,7 +16,12 @@
     on:click={handleClick}
 >
     <Icon width="24" height="24" icon={tab?.icon} />
-    <Text type="p" fontWeight="semibold" color={$walletRoute === tab?.route ? 'text-blue-500' : 'text-gray-500'}>
+    <Text
+        type="p"
+        fontWeight="semibold"
+        overrideColor
+        color={$walletRoute === tab?.route ? 'text-blue-500' : 'text-gray-500'}
+    >
         {tab?.label}
     </Text>
 </button>

@@ -13,7 +13,7 @@
             onClick: openAssets,
         },
         {
-            icon: 'currency',
+            icon: 'activity',
             label: locale('tabs.activity'),
             route: WalletRoute.AccountHistory,
             onClick: openAccountHistory,
@@ -29,9 +29,15 @@
 </script>
 
 <div class="absolute w-full bottom-0">
-    <div class="flex flex-row justify-center pb-4 pt-4 space-x-24 bg-white shadow-elevation-4">
+    <div class="nav-wrapper flex flex-row justify-center pt-4 space-x-24 bg-white dark:bg-gray-900 shadow-elevation-4">
         {#each tabs as tab}
             <BottomNavigationTab {tab} />
         {/each}
     </div>
 </div>
+
+<style>
+    .nav-wrapper {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 15px);
+    }
+</style>
