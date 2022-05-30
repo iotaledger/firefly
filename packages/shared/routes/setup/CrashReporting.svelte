@@ -36,7 +36,7 @@
             {locale('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-white dark:bg-gray-900">
         <Animation animation="secure-desktop" />
     </div>
 </OnboardingLayout>

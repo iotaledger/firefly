@@ -2,8 +2,15 @@
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { AccountActionsModal, DashboardPane, Text, Modal } from 'shared/components'
-    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
+    import { AccountActionsModal, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+    import {
+        AccountActions,
+        AddressHistory,
+        DeleteAccount,
+        ExportTransactionHistory,
+        HideAccount,
+    } from 'shared/components/drawerContent'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -66,6 +73,8 @@
     }
 
     let isGeneratingAddress = false
+
+    let drawer: Drawer
 
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
@@ -363,6 +372,14 @@
         }
     }
 
+    $: if (mobile && drawer && $accountRoute !== AccountRoute.Init) {
+        drawer.open()
+    }
+
+    $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
+        drawer.close()
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -390,48 +407,89 @@
             void addProfileCurrencyPriceData()
         }
     })
+
+    const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
 </script>
 
 {#if $selectedAccount}
-    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccount?.id}
-            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-                <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    {#if $accountRoute !== AccountRoute.Manage}
-                        <AccountBalance onMenuClick={modal?.toggle} />
-                    {/if}
-                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
-                            <div class="px-6 my-4">
-                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
-                            </div>
-                        {/if}
-                        {#if $accountRoute === AccountRoute.Init}
-                            <AccountAssets />
-                        {:else if $accountRoute === AccountRoute.Send}
+    {#if $mobile}
+        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+            <div class="flex flex-auto flex-col">
+                <!-- Total Balance, Accounts list & Send/Receive -->
+                <div class="flex">
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                    <Drawer
+                        opened={$accountRoute !== AccountRoute.Init}
+                        bind:this={drawer}
+                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                    >
+                        {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoute.Actions}
+                            <AccountActions />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccount.alias} account={$selectedAccount} />
+                            <ManageAccount account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.AddressHistory}
+                            <AddressHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
+                            <ExportTransactionHistory account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.HideAccount}
+                            <HideAccount account={$selectedAccount} />
+                        {:else if $accountRoute === AccountRoute.DeleteAccount}
+                            <DeleteAccount account={$selectedAccount} />
                         {/if}
-                    </DashboardPane>
-                </DashboardPane>
-                <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccount)} />
-                </DashboardPane>
-                <div class=" flex flex-col space-y-4">
-                    <DashboardPane classes="w-full h-1/2">
-                        <LineChart />
-                    </DashboardPane>
-                    <DashboardPane classes="w-full h-1/2">
-                        <BarChart />
+                    </Drawer>
+                </div>
+                <div class="flex flex-1">
+                    <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
+                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                     </DashboardPane>
                 </div>
             </div>
-            <AccountActionsModal bind:modal />
-        {/key}
-    </div>
+        </div>
+    {:else}
+        <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
+            {#key $selectedAccount?.id}
+                <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+                    <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
+                        {#if $accountRoute !== AccountRoute.Manage}
+                            <AccountBalance onMenuClick={modal?.toggle} />
+                        {/if}
+                        <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
+                            {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                                <div class="px-6 my-4">
+                                    <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                                </div>
+                            {/if}
+                            {#if $accountRoute === AccountRoute.Init}
+                                <AccountAssets />
+                            {:else if $accountRoute === AccountRoute.Send}
+                                <Send {onSend} {onInternalTransfer} />
+                            {:else if $accountRoute === AccountRoute.Receive}
+                                <Receive {isGeneratingAddress} {onGenerateAddress} />
+                            {:else if $accountRoute === AccountRoute.Manage}
+                                <ManageAccount account={$selectedAccount} />
+                            {/if}
+                        </DashboardPane>
+                    </DashboardPane>
+                    <DashboardPane>
+                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                    </DashboardPane>
+                    <div class=" flex flex-col space-y-4">
+                        <DashboardPane classes="w-full h-1/2">
+                            <LineChart />
+                        </DashboardPane>
+                        <DashboardPane classes="w-full h-1/2">
+                            <BarChart />
+                        </DashboardPane>
+                    </div>
+                </div>
+                <AccountActionsModal bind:modal />
+            {/key}
+        </div>
+    {/if}
 {/if}
 
 <style type="text/scss">

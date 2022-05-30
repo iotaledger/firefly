@@ -258,8 +258,11 @@ export const CapacitorApi: IPlatform = {
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
      * @returns {undefined}
+     * @todo Check against acceptlist
      */
-    openUrl: (url) => new Promise<void>((resolve, reject) => {}),
+    openUrl: (url) => {
+        window.open(url, '_blank')
+    },
 
     /**
      * Log unhandled exception

@@ -172,7 +172,7 @@ export const api: IWalletApi = new Proxy(
                     }
                 }
 
-                return originalMethod.apply(target, args)
+                return originalMethod?.apply(target, args)
             }
         },
     }

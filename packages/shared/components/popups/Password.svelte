@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
@@ -56,7 +57,7 @@
         showRevealToggle
         {locale}
         placeholder={locale('general.password')}
-        autofocus
+        autofocus={!$mobile}
     />
     <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

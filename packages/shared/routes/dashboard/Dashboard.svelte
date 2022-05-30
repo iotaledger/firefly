@@ -353,7 +353,7 @@
                 ],
             })
         }
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && !$mobile) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
@@ -411,8 +411,8 @@
 {#if $mobile}
     <Idle />
     <div class="flex flex-col w-full h-full">
-        <TopNavigation {onCreateAccount} />
         <MainMenu {locale} />
+        <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
     </div>

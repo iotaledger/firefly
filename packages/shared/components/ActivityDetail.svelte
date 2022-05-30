@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { CopyButton, Icon, Link, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, isBright, truncateString } from 'shared/lib/helpers'
     import { formatDate, localize } from '@core/i18n'
@@ -133,7 +134,9 @@
 
 <div class="flex flex-col h-full min-h-0">
     <div
-        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+        class="{$mobile
+            ? 'p-0 mt-8 w-11/12 self-center'
+            : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
             'opacity-50'}"
     >
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
@@ -170,7 +173,11 @@
             {/if}
         </div>
     </div>
-    <div class="mb-6 overflow-y-auto pr-2 -mr-2 flex-auto h-1 scroll-secondary">
+    <div
+        class="{$mobile
+            ? 'flex flex-col px-6 h-full'
+            : 'pr-2 -mr-2 h-1 scroll-secondary mb-6'} overflow-y-auto flex-auto"
+    >
         <div class="mb-5">
             <Text secondary>{localize('general.status')}</Text>
             <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
@@ -229,10 +236,11 @@
             </div>
         {/if}
     </div>
-
-    <div class="w-full flex justify-center">
-        <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
-    </div>
+    {#if !$mobile}
+        <div class="w-full flex justify-center">
+            <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
+        </div>
+    {/if}
 </div>
 
 <style type="text/scss">

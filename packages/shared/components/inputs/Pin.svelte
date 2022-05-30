@@ -133,9 +133,10 @@
 <div class="w-full {classes}">
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
-        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
+        class="{$mobile ? 'h-20 w-80' : 'w-full'}
+            flex items-center justify-between relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
-            ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
+            {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'h-20 pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
         class:disabled
         bind:this={root}
         on:click={selectFirstEmptyRoot}
@@ -221,6 +222,7 @@
                 @apply cursor-pointer;
                 @apply text-center;
                 @apply text-18;
+                @apply rounded-none;
                 caret-color: transparent;
                 transition: opacity 1s, color 1s;
 
