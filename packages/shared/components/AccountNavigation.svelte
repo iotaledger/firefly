@@ -5,7 +5,7 @@
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
     import { Drawer, Icon, Text } from 'shared/components'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
-    
+
     export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
 
