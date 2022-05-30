@@ -39,12 +39,12 @@
     })
 
     // TODO
-    function handleReject() {}
+    function handleReject(): void {}
 
     // TODO
-    function handleClaim() {}
+    function handleClaim(): void {}
 
-    function handleExplorerClick() {
+    function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.id}`)
     }
 </script>

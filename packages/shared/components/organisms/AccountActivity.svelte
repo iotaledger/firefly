@@ -7,7 +7,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import {
-        selectedActivities,
+        selectedAccountActivities,
         groupedActivities,
         searchQueriedActivities,
         filterQueriedActivities,
@@ -52,7 +52,7 @@
             $isFirstSessionSync &&
             $walletSetupType &&
             $walletSetupType !== SetupType.New &&
-            $selectedActivities.length === 0
+            $selectedAccountActivities.length === 0
         )
     }
 </script>
@@ -100,9 +100,9 @@
         {:else if $groupedActivities.length}
             {#each $groupedActivities as group}
                 <div class="space-y-2">
-                    <Text fontWeight={FontWeightText.semibold} color="gray-600"
-                        >{group.date} • {group.activities.length}</Text
-                    >
+                    <Text fontWeight={FontWeightText.semibold} color="gray-600">
+                        {group.date} • {group.activities.length}
+                    </Text>
                     {#each group.activities as activity}
                         <ActivityTile onClick={() => handleTransactionClick(activity)} {activity} />
                     {/each}

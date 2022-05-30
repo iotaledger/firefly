@@ -9,7 +9,7 @@
     import { onMount } from 'svelte'
 
     export let activity: Activity
-    export let onClick = (): void => {}
+    export let onClick: () => void
 
     let title = ''
     let direction = ''
@@ -50,8 +50,9 @@
         }
     })
 
-    let asyncStatus: ActivityAsyncStatus
     $: asyncStatus = activity.getAsyncStatus(time)
+    $: isIncomingActivityUnclaimed =
+        activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let timeDiff: string
     $: {
@@ -72,10 +73,10 @@
     }
 
     // TODO
-    function handleReject() {}
+    function handleReject(): void {}
 
     // TODO
-    function handleClaim() {}
+    function handleClaim(): void {}
 </script>
 
 <div
@@ -132,23 +133,19 @@
                 {/if}
             </div>
             <div class="flex justify-end flex-row w-2/4 ml-4">
-                {#if activity.direction === ActivityDirection.In}
-                    {#if asyncStatus === ActivityAsyncStatus.Unclaimed}
-                        <button
-                            class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
-                            on:click={handleReject}
-                        >
-                            {localize('actions.reject')}
-                        </button>
-                        <button
-                            class="action p-1 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
-                            on:click={handleClaim}
-                        >
-                            {localize('actions.claim')}
-                        </button>
-                    {:else}
-                        <ActivityAsyncStatusPill {asyncStatus} />
-                    {/if}
+                {#if isIncomingActivityUnclaimed}
+                    <button
+                        class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
+                        on:click={handleReject}
+                    >
+                        {localize('actions.reject')}
+                    </button>
+                    <button
+                        class="action p-1 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
+                        on:click={handleClaim}
+                    >
+                        {localize('actions.claim')}
+                    </button>
                 {:else}
                     <ActivityAsyncStatusPill {asyncStatus} />
                 {/if}

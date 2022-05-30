@@ -9,14 +9,13 @@ export interface IActivity {
     time: Date
     direction: ActivityDirection
     inclusionState: InclusionState
-    internal: boolean
+    isInternal: boolean
     rawAmount: number
     recipient: Recipient
     token: ITokenMetadata
-    conversion?: number
     isAsync: boolean
     expireDate?: Date
-    hidden?: boolean
+    isHidden?: boolean
     isClaimed?: boolean
 
     setFromTransaction(transactionId: string, transaction: Transaction): void
