@@ -15,7 +15,7 @@ import {
     OutputsToCollect,
     Transaction,
     TransactionResult,
-    TransferOptions,
+    TransactionOptions,
 } from '@iota/wallet/out/types'
 
 export interface IAccount {
@@ -36,22 +36,22 @@ export interface IAccount {
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
-        transferOptions?: TransferOptions
+        transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
-    mintNfts(nftOptions: NftOptions[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
+    mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
-        transferOptions?: TransferOptions
+        transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions?: TransferOptions
+        transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
-        transferOptions?: TransferOptions
+        transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionResult[]>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
+    sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
     tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult[]>
 }

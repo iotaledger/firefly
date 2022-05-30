@@ -1,7 +1,7 @@
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { isSoftwareProfile } from '@core/profile'
-import { AddressWithAmount, TransactionResult, TransferOptions } from '@iota/wallet'
+import { AddressWithAmount, TransactionResult, TransactionOptions } from '@iota/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { isTransferring } from '@lib/wallet'
@@ -33,7 +33,7 @@ export async function trySend(recipientAddress: string, amount: number): Promise
 function sendAmount(recipientAddress: string, amount: number): Promise<TransactionResult[]> {
     const account = get(selectedAccount)
     const addressWithAmount: AddressWithAmount = { address: recipientAddress, amount: amount.toString() }
-    const transferOptions: TransferOptions = {
+    const transferOptions: TransactionOptions = {
         remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         skipSync: false,
     }
