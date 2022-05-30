@@ -11,8 +11,8 @@
 
     export let accounts: WalletAccount[] = []
     // export let onCreateAccount = (..._: any[]): void => {}
-    export let handleCreateAccountPress = (..._: any[]): void => {}
-    export let onAccountSelection = (..._: any[]): void => {}
+    export let handleCreateAccountPress = (): void => {}
+    export let onAccountSelection = (): void => {}
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
