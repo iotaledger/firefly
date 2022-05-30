@@ -1,6 +1,5 @@
-import { AccountBalance, Address, OutputData, TransactionReceipt } from '@iota/wallet'
+import { AccountBalance, Address, OutputData, TransactionResult } from '@iota/wallet'
 import { IAccount } from '../../core/account'
-import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
@@ -10,7 +9,7 @@ export class AccountMock implements IAccount {
         alias: 'testAccount',
         publicAddresses: [],
         internalAddresses: [],
-        addressesWithBalance: [],
+        addressesWithUnspentOutputs: [],
         outputs: {},
         lockedOutputs: new Set<string>(),
         unspentOutputs: {},
@@ -41,7 +40,7 @@ export class AccountMock implements IAccount {
         })
     }
 
-    collectOutputs(): Promise<TransactionReceipt[]> {
+    collectOutputs(): Promise<TransactionResult[]> {
         return Promise.resolve([])
     }
 
