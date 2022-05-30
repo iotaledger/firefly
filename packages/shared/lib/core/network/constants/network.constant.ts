@@ -38,7 +38,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
     },
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: {
-            id: 'shimmer',
+            id: 'shimmer-mainnet',
             name: 'Shimmer Mainnet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Mainnet,
@@ -51,7 +51,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.Devnet]: {
-            id: 'alphanet-5',
+            id: 'shimmer-alphanet-5',
             name: 'Shimmer Alphanet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Devnet,
@@ -64,7 +64,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
             },
         },
         [NetworkType.PrivateNet]: <INetwork>{
-            name: 'Private Network',
+            name: 'Private Net',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.PrivateNet,
         },
