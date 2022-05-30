@@ -11,8 +11,7 @@ export async function trySend(recipientAddress: string, amount: number): Promise
     const _send = async () => {
         isTransferring.set(true)
         try {
-            const transaction = await sendAmount(recipientAddress, amount)
-            console.log(transaction)
+            await sendAmount(recipientAddress, amount)
             isTransferring.set(false)
         } catch (err) {
             console.error(err)
@@ -39,6 +38,5 @@ async function sendAmount(recipientAddress: string, amount: number): Promise<Tra
         skipSync: false,
     }
     const transactionReceipt = await account.sendAmount([addressWithAmount], transferOptions)
-    console.log(transactionReceipt)
     return account.getTransaction(transactionReceipt?.transactionId)
 }

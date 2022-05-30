@@ -16,20 +16,15 @@
         ActivityAsyncStatus,
         ActivityType,
         Recipient,
-        ITokenMetadata,
         InclusionState,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
-    import { truncateString } from '@lib/helpers'
 
     export let amount: string
     export let unit: string
     export let type: ActivityType
     export let inclusionState: InclusionState
     export let asyncStatus: ActivityAsyncStatus
-    export let account: string
-    export let address: string
-    export let token: ITokenMetadata
     export let formattedFiatValue: string
     export let time: Date
     export let publicNote: string
@@ -99,14 +94,6 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if account}
-            <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel {account} />
-            </Box>
-        {:else if address}
-            <AddressBox clearBackground clearPadding isCopyable {address} />
-        {/if}
-
         {#if recipient.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
                 <AccountLabel account={recipient.account} />
