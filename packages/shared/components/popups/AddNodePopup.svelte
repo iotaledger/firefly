@@ -9,7 +9,7 @@
     export let nodes: INode[] = []
     export let network: INetwork
     export let isAddingNode: boolean = true
-    export let onSuccess = (..._: any[]): void => {}
+    export let onSuccess: (..._: any[]) => void
 
     const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
     const isNetworkSwitch = false
