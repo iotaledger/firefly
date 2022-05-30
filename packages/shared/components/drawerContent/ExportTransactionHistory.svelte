@@ -1,19 +1,23 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
+
     import { Button, Password, Spinner, Text } from 'shared/components'
+
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { Platform } from 'shared/lib/platform'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { accountRouter, AccountRoute } from '@core/router'
+
+    import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
+    import { showAppNotification } from '@lib/notifications'
+    import { Platform } from '@lib/platform'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
     import {
         generateTransactionHistoryCsvFromAccount,
         generateTransactionHistoryFileName,
-    } from 'shared/lib/transactionHistory'
-    import { asyncSetStrongholdPassword } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
+    } from '@lib/transactionHistory'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { asyncSetStrongholdPassword } from '@lib/wallet'
 
-    export let account
+    export let account: WalletAccount
 
     const profileName = get(activeProfile)?.name
 
@@ -21,7 +25,7 @@
     let error = ''
     let isBusy = false
 
-    async function handleExportTransactionHistory() {
+    async function handleExportTransactionHistory(): Promise<void> {
         try {
             error = ''
             isBusy = true
@@ -82,7 +86,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         $accountRouter.goTo(AccountRoute.Init)
     }
 </script>

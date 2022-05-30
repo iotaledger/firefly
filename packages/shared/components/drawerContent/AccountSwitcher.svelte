@@ -1,19 +1,21 @@
 <script lang="typescript">
-    import { resetAccountRouter } from '@core/router'
-    import { WalletAccount } from '@lib/typings/wallet'
     import { HR, Icon, Text } from 'shared/components'
+
     import { localize } from '@core/i18n'
+    import { resetAccountRouter } from '@core/router'
+
+    import { mobile } from '@lib/app'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     // import { openPopup } from '@lib/popup'
-    import { mobile } from 'shared/lib/app'
     import { activeProfile, getColor } from '@lib/profile'
+    import { WalletAccount } from '@lib/typings/wallet'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     // export let onCreateAccount = (..._: any[]): void => {}
-    export let handleCreateAccountPress = (..._: any[]): void => {}
-    export let onAccountSelection = (..._: any[]): void => {}
+    export let handleCreateAccountPress: (..._: any[]) => void
+    export let onAccountSelection: (..._: any[]) => void
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {

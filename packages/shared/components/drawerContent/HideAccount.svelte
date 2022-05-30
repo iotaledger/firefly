@@ -1,13 +1,16 @@
 <script lang="typescript">
-    import { WalletAccount } from '@lib/typings/wallet'
-    import { Button, Password, Text } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
-    import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
-    import { api, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
+
+    import { Button, Password, Text } from 'shared/components'
+
+    import { localize } from '@core/i18n'
+    import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
+
+    import { sendParams } from '@lib/app'
+    import { activeProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { api, selectedMessage } from '@lib/wallet'
 
     export let account: WalletAccount
 

@@ -1,12 +1,15 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { Address } from 'shared/lib/typings/address'
-    import { localize } from '@core/i18n'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
-    import { mobile } from 'shared/lib/app'
 
-    export let account
+    import { localize } from '@core/i18n'
+
+    import { mobile } from '@lib/app'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { setClipboard } from '@lib/utils'
+    import { Address } from '@lib/typings/address'
+    import { WalletAccount } from '@lib/typings/wallet'
+
+    export let account: WalletAccount
 
     let addresses: Address[]
     $: addresses =

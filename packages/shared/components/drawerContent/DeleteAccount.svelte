@@ -1,18 +1,22 @@
 <script lang="typescript">
-    import { WalletAccount } from '@lib/typings/wallet'
-    import { Button, Password, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, updateProfile } from 'shared/lib/profile'
-    import { AccountRoute, accountRouter, resetWalletRoute } from '@core/router'
-    import { api, asyncRemoveWalletAccount, selectedMessage, setSelectedAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { Readable } from 'svelte/store'
 
-    export let account
+    import { Button, Password, Text } from 'shared/components'
+
+    import { localize } from '@core/i18n'
+    import { AccountRoute, accountRouter, resetWalletRoute } from '@core/router'
+
+    import { activeProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { api, asyncRemoveWalletAccount, selectedMessage, setSelectedAccount } from '@lib/wallet'
+
+    export let account: WalletAccount
+
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    async function deleteAccount(id) {
+    async function deleteAccount(id): Promise<void> {
         await asyncRemoveWalletAccount(account.id)
         if (!hiddenAccounts.includes(id)) {
             hiddenAccounts.push(id)
@@ -25,11 +29,11 @@
     }
     const hasMultipleAccounts = $viewableAccounts.length > 1
 
-    let password
+    let password: string
     let error = ''
     let isBusy = false
 
-    async function handleDeleteClick() {
+    async function handleDeleteClick(): Promise<void> {
         if (hasMultipleAccounts) {
             isBusy = true
             error = ''
@@ -48,11 +52,11 @@
             }
         }
     }
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         $accountRouter.goTo(AccountRoute.Init)
     }
 
-    async function triggerDeleteAccount() {
+    async function triggerDeleteAccount(): Promise<void> {
         isBusy = false
         $accountRouter.goTo(AccountRoute.Init)
         await deleteAccount(account?.id)
