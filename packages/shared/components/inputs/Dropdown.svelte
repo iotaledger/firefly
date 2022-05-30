@@ -32,11 +32,11 @@
 
     let navWidth: string
 
-    const handleClickOutside = (): void => {
+    function handleClickOutside(): void {
         dropdown = false
     }
 
-    const toggleDropDown = () => {
+    function toggleDropDown(): void {
         dropdown = !dropdown
         isFocused = !isFocused
         if (dropdown) {
@@ -55,52 +55,60 @@
         }
     }
 
-    const focusItem = (itemId: string): void => {
+    function focusItem(itemId: string): void {
         focusedItem = document.getElementById(itemId)
     }
 
-    const handleKey = (e): void => {
+    function handleKey(event: KeyboardEvent): void {
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
-            if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'ArrowDown' || event.code === 'Space') {
                 toggleDropDown()
-                e.preventDefault()
+                event.preventDefault()
             }
         } else {
-            if (e.key === 'Escape') {
+            if (event.key === 'Escape') {
                 toggleDropDown()
-                e.preventDefault()
-            } else if (e.key === 'ArrowDown') {
+                event.preventDefault()
+            } else if (event.key === 'ArrowDown') {
                 if (focusedItem) {
                     const children = [...navContainer.children]
                     const idx = children.indexOf(focusedItem)
                     if (idx < children.length - 1) {
                         children[idx + 1].focus()
-                        e.preventDefault()
+                        event.preventDefault()
                     }
                 }
-            } else if (e.key === 'ArrowUp') {
+            } else if (event.key === 'ArrowUp') {
                 if (focusedItem) {
                     const children = [...navContainer.children]
                     const idx = children.indexOf(focusedItem)
                     if (idx > 0) {
                         children[idx - 1].focus()
-                        e.preventDefault()
+                        event.preventDefault()
                     }
                 }
-            } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 122)) {
+            } else if (isNumberLetterOrPunctuation(event.key)) {
                 const children = [...navContainer.children]
                 const itemsValues = items.map((item) => item.label.toLowerCase())
-                search += e.key
+                search += event.key
                 const idx = itemsValues.findIndex((item) => item.includes(search.toLowerCase()))
                 if (idx >= 0) {
                     children[idx].focus()
-                    e.preventDefault()
+                    event.preventDefault()
                 }
-            } else if (e.key === 'Backspace') {
+            } else if (event.key === 'Backspace') {
                 search = search.slice(0, -1)
             }
         }
+    }
+
+    function isNumberLetterOrPunctuation(key: string): boolean {
+        if (key.length !== 1) {
+            return false
+        }
+        const code = key.charCodeAt(0)
+        return (code >= 48 && code <= 57) || (code >= 65 && code <= 122)
     }
 
     onMount(() => {
