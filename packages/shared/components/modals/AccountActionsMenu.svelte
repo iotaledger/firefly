@@ -32,17 +32,7 @@
             props: {
                 account: selectedAccount,
                 hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
-<<<<<<< HEAD
                 deleteAccount,
-=======
-                deleteAccount: () => {
-                    // TODO: Replace with new api when it is implemented
-                    // await asyncRemoveWalletAccount($selectedAccount?.id)
-                    // TODO: remove account from activeAccounts
-                    setSelectedAccount($visibleActiveAccounts?.[0]?.id ?? null)
-                    resetWalletRoute()
-                },
->>>>>>> fix: linter errors
             },
         })
         modal.close()
