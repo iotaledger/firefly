@@ -7,7 +7,7 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
-    import { mobile } from '@lib/app';
+    import { mobile } from '@lib/app'
 
     export let error = ''
     export let onCreate = (alias: string, color: AccountColors, callback: (err: ErrorEvent) => void): void => {}
