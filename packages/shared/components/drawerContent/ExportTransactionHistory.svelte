@@ -49,25 +49,8 @@
                 date: true,
                 time: true,
             })
-            try {
-                const filePath = await Platform.exportTransactionHistory(fileName, contents)
-                if (filePath) {
-                    $accountRouter.goTo(AccountRoute.Init)
-                    showAppNotification({
-                        type: 'info',
-                        message: localize('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: account.alias, filePath: filePath },
-                        }),
-                    })
-                }
-            } catch {
-                showAppNotification({
-                    type: 'error',
-                    message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: account.alias },
-                    }),
-                })
-            }
+
+            await saveTransactionHistoryExport(fileName, contents)
 
             isBusy = false
         } catch (err) {
@@ -83,6 +66,28 @@
             }
         } finally {
             isBusy = false
+        }
+    }
+
+    async function saveTransactionHistoryExport(fileName: string, contents: string): Promise<void> {
+        try {
+            const filePath = await Platform.exportTransactionHistory(fileName, contents)
+            if (filePath) {
+                $accountRouter.goTo(AccountRoute.Init)
+                showAppNotification({
+                    type: 'info',
+                    message: localize('notifications.exportTransactionHistory.success', {
+                        values: { accountAlias: account.alias, filePath: filePath },
+                    }),
+                })
+            }
+        } catch {
+            showAppNotification({
+                type: 'error',
+                message: localize('notifications.exportTransactionHistory.error', {
+                    value: { accountAlias: account.alias },
+                }),
+            })
         }
     }
 
