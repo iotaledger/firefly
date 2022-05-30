@@ -7,10 +7,11 @@
     import { closePopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile } from 'shared/lib/profile'
     import { AccountColors, MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
+    import { mobile } from '@lib/app';
 
     export let error = ''
-    export let onCreate = (..._: any[]): void => {}
-    export let onCancel = (..._: any[]): void => {}
+    export let onCreate = (alias: string, color: AccountColors, callback: (err: ErrorEvent) => void): void => {}
+    export let onCancel = (): void => {}
 
     const { accounts } = $wallet
 
@@ -97,7 +98,7 @@
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
-                autofocus
+                autofocus={!$mobile}
                 submitHandler={handleCreateClick}
                 disabled={isBusy}
                 classes="mb-4"
