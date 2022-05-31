@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BottomNavigationTab } from 'shared/components'
-    import { WalletRoute, walletRouter, BottomNavigationTab as BottomNavigationType } from '@core/router'
     import { Locale } from '@core/i18n'
+    import { BottomNavigationTab as BottomNavigationType, WalletRoute, walletRouter } from '@core/router'
 
     export let locale: Locale
 
