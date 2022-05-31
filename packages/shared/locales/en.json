@@ -884,6 +884,8 @@
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
+        "claim": "Claim",
+        "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1390,39 +1392,29 @@
     },
     "pills": {
         "stake": {
-            "inProgress": "staking for",
-            "pending": "staking for",
-            "confirmed": "staked for",
-            "conflict": "failed to stake",
-            "failed": "failed to stake"
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
         },
         "transfer": {
-            "inProgress": "transferring to",
-            "pending": "transferring to",
-            "confirmed": "transferred to",
-            "conflict": "failed to transfer",
-            "failed": "failed to transfer"
+            "Pending": "transferring to",
+            "Confirmed": "transferred to",
+            "Conflicting": "failed to transfer"
         },
         "receive": {
-            "inProgress": "receiving from",
-            "pending": "receiving from",
-            "confirmed": "received from",
-            "conflict": "failed to receive",
-            "failed": "failed to receive"
+            "Pending": "receiving from",
+            "Confirmed": "received from",
+            "Conflicting": "failed to receive"
         },
         "send": {
-            "inProgress": "sending to",
-            "pending": "sending to",
-            "confirmed": "sent to",
-            "conflict": "failed to send",
-            "failed": "failed to send"
+            "Pending": "sending to",
+            "Confirmed": "sent to",
+            "Conflicting": "failed to send"
         },
         "migrate": {
-            "inProgress": "migrating for",
-            "pending": "migrating for",
-            "confirmed": "migrated for",
-            "conflict": "failed to migrate",
-            "failed": "failed to migrate"
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
         },
         "asyncStatus": {
             "unclaimed": "unclaimed",

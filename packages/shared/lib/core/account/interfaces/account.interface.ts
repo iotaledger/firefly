@@ -25,6 +25,7 @@ export interface IAccount {
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string>
+    getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     listOutputs(): Promise<OutputData[]>
@@ -42,16 +43,16 @@ export interface IAccount {
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transferOptions?: TransactionOptions
-    ): Promise<TransactionResult[]>
+    ): Promise<TransactionResult>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
         transferOptions?: TransactionOptions
-    ): Promise<TransactionResult[]>
+    ): Promise<TransactionResult>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transferOptions?: TransactionOptions
-    ): Promise<TransactionResult[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult[]>
+    ): Promise<TransactionResult>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult>
 }
