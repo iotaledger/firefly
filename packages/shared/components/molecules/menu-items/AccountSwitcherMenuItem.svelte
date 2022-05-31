@@ -4,7 +4,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { resetAccountRouter } from '@core/router'
-    import { formatBestMatchTokenAmount } from '@core/wallet'
+    import { formatTokenAmountBestMatch } from '@core/wallet'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { isSyncing, isTransferring } from '@lib/wallet'
@@ -44,6 +44,6 @@
         <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
     </div>
     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-        {formatBestMatchTokenAmount(Number(account.balances.total), BASE_TOKEN[$activeProfile.networkProtocol])}
+        {formatTokenAmountBestMatch(Number(account.balances.total), BASE_TOKEN[$activeProfile.networkProtocol])}
     </Text>
 </button>

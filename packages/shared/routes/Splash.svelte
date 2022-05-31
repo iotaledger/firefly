@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Animation } from 'shared/components'
     import { appSettings, shouldBeDarkMode, mobile } from '@core/app'
-    import { pollChrysalisSnapshot } from 'shared/lib/migration'
     import { onMount } from 'svelte'
 
     /**
@@ -12,7 +11,7 @@
     $: $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
 
     onMount(() => {
-        void pollChrysalisSnapshot()
+        // void pollChrysalisSnapshot()
     })
 </script>
 

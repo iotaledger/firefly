@@ -48,7 +48,7 @@
             loadPersistedProfileIntoActiveProfile($newProfile.id)
             newProfile.set(null)
             await createNewAccount()
-            login()
+            void login()
         } else {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'

@@ -90,7 +90,7 @@
                                 // Save profile
                                 addNewProfile($newProfile)
                                 loadPersistedProfileIntoActiveProfile($newProfile.id)
-                                login()
+                                void login()
                                 newProfile.set(null)
                             }
                         })
@@ -117,7 +117,7 @@
                             // Save profile
                             addNewProfile($newProfile)
                             loadPersistedProfileIntoActiveProfile($newProfile.id)
-                            login()
+                            void login()
                             newProfile.set(null)
                         })
                     })

@@ -123,7 +123,7 @@
                                 //         })
                                 //     },
                                 // })
-                                login()
+                                void login()
                                 dispatch('next')
                             })
                         )

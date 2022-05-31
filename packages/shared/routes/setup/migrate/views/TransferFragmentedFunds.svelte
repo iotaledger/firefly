@@ -281,7 +281,7 @@
 
         addNewProfile($newProfile)
         loadPersistedProfileIntoActiveProfile($newProfile.id)
-        login()
+        void login()
         newProfile.set(null)
     }
 

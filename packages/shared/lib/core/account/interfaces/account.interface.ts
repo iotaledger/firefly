@@ -14,17 +14,18 @@ import {
     OutputData,
     OutputsToCollect,
     Transaction,
-    TransactionReceipt,
-    TransferOptions,
+    TransactionResult,
+    TransactionOptions,
 } from '@iota/wallet/out/types'
 
 export interface IAccount {
     meta: AccountMeta
-    collectOutputs(outputIds: string[]): Promise<TransactionReceipt[]>
+    collectOutputs(outputIds: string[]): Promise<TransactionResult[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string>
+    getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     listOutputs(): Promise<OutputData[]>
@@ -36,22 +37,22 @@ export interface IAccount {
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
-        transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
-    mintNfts(nftOptions: NftOptions[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
+        transferOptions?: TransactionOptions
+    ): Promise<TransactionResult[]>
+    mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
-        transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+        transferOptions?: TransactionOptions
+    ): Promise<TransactionResult>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
+        transferOptions?: TransactionOptions
+    ): Promise<TransactionResult>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
-        transferOptions?: TransferOptions
-    ): Promise<TransactionReceipt[]>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransferOptions): Promise<TransactionReceipt[]>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionReceipt[]>
+        transferOptions?: TransactionOptions
+    ): Promise<TransactionResult>
+    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult>
 }

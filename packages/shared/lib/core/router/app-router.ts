@@ -1,12 +1,13 @@
-import { activeProfile, login, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { mobile } from '@core/app'
 import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
 import { SetupType } from '@lib/typings/setup'
-import { walletSetupType } from '@lib/wallet'
 import { get, writable } from 'svelte/store'
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
+import { NetworkType } from '@core/network'
+import { walletSetupType } from '@lib/wallet'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -41,7 +42,7 @@ export class AppRouter extends Router<AppRoute> {
         switch (currentRoute) {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
-                    nextRoute = AppRoute.Profile
+                    nextRoute = AppRoute.Protocol
                 } else {
                     nextRoute = AppRoute.Dashboard
                 }
@@ -63,8 +64,30 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.Appearance
                 break
             case AppRoute.Appearance:
+                nextRoute = AppRoute.Protocol
+                break
+            case AppRoute.Protocol: {
+                const isDeveloperProfile = get(newProfile)?.isDeveloperProfile
+                if (isDeveloperProfile) {
+                    nextRoute = AppRoute.Network
+                } else {
+                    nextRoute = AppRoute.Profile
+                }
+                break
+            }
+            case AppRoute.Network: {
+                const networkType = event?.networkType ?? NetworkType.Devnet
+                if (networkType === NetworkType.PrivateNet) {
+                    nextRoute = AppRoute.CustomNetwork
+                } else {
+                    nextRoute = AppRoute.Profile
+                }
+                break
+            }
+            case AppRoute.CustomNetwork: {
                 nextRoute = AppRoute.Profile
                 break
+            }
             case AppRoute.Profile:
                 nextRoute = AppRoute.Setup
                 break
@@ -86,7 +109,7 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Create: {
-                const profileType = get(activeProfile)?.type
+                const profileType = get(newProfile)?.type
                 if (profileType === ProfileType.Software) {
                     nextRoute = AppRoute.Secure
                 } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {

@@ -54,6 +54,9 @@
         Setup,
         Splash,
         Welcome,
+        OnboardingProtocol,
+        OnboardingNetwork,
+        OnboardingCustomNetwork,
     } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -103,7 +106,7 @@
 
         initAppSettings.set($appSettings)
 
-        await pollMarketData()
+        // await pollMarketData()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
@@ -208,6 +211,15 @@
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
             <Create locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protocol}>
+            <OnboardingProtocol locale={$_} />
+        </Route>
+        <Route route={AppRoute.Network}>
+            <OnboardingNetwork locale={$_} />
+        </Route>
+        <Route route={AppRoute.CustomNetwork}>
+            <OnboardingCustomNetwork locale={$_} />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
             <Ledger locale={$_} />

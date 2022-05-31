@@ -5,7 +5,7 @@
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import AddNode from './AddNode.svelte'
+    import AddNodePopup from './AddNodePopup.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
@@ -35,6 +35,7 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
+    import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Version from './Version.svelte'
@@ -110,8 +111,9 @@
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
         nodeInfo: NodeInfo,
-        addNode: AddNode,
+        addNode: AddNodePopup,
         removeNode: RemoveNode,
+        storageDepositBreakdown: StorageDepositBreakdownPopup,
         switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,

@@ -1,6 +1,6 @@
 import { Bech32 } from 'shared/lib/bech32'
 import { Platform } from 'shared/lib/platform'
-import { localize } from '@core/i18n'
+import { formatDate, localize } from '@core/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 import { Event } from './typings/events'
@@ -467,4 +467,12 @@ export function range(size: number, start: number = 0): number[] {
     if (!start || typeof start !== 'number') start = 0
 
     return Array.from(Array(size), (_, idx) => idx + start)
+}
+
+/**
+ * Transforms a date into a string of format "May 2022"
+ */
+
+export function getMonthYear(date: Date): string {
+    return formatDate(date, { year: 'numeric', month: 'short' })
 }
