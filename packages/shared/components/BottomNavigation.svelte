@@ -38,6 +38,6 @@
 
 <style>
     .nav-wrapper {
-        padding-bottom: calc(env(safe-area-inset-bottom) + 15px);
+        padding-bottom: calc(env(safe-area-inset-bottom) / 2 + 15px);
     }
 </style>
