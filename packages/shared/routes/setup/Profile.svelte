@@ -3,8 +3,8 @@
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
-    import { newProfile, profiles } from '@core/profile'
-    import { cleanupOnboarding, initializeProfile } from '@contexts/onboarding'
+    import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
     const busy = false
@@ -12,9 +12,9 @@
     let profileName = $newProfile?.name ?? ''
     const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
+    $: nameChanged = $newProfile?.name !== profileName.trim()
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
-    $: nameChanged = $newProfile?.name !== profileName.trim()
 
     async function handleBackClick(): Promise<void> {
         await cleanupOnboarding()
@@ -22,8 +22,9 @@
         $appRouter.previous()
     }
 
-    async function handleContinueClick(): Promise<void> {
-        await initializeProfile(profileName)
+    function handleContinueClick(): Promise<void> {
+        validateProfileName(profileName)
+        updateNewProfile({ name: profileName })
 
         $appRouter.next()
     }

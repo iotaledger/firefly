@@ -13,9 +13,11 @@ import { IPersistedProfile } from '../interfaces'
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
+ * @param {ClientOptions} clientOptions
  * @returns {IPersistedProfile}
  */
 export function buildNewProfile(
+    name: string = '',
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
@@ -23,7 +25,7 @@ export function buildNewProfile(
 ): IPersistedProfile {
     return {
         id: generateRandomId(),
-        name: '',
+        name: name.trim(),
         type: null,
         networkProtocol,
         networkType,
