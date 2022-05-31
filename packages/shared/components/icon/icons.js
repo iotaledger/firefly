@@ -1219,6 +1219,19 @@ export const icons = {
             },
         ],
     },
+    activity: {
+        width: 24,
+        height: 24,
+        path: [
+            {
+                d: 'M1 9H5L8 17L12 1L15 9H19',
+                fillRule: 'evenodd',
+                clipRule: 'evenodd',
+                strokeWidth: '2',
+                fill: 'none',
+            },
+        ],
+    },
     iota: {
         width: 24,
         height: 24,

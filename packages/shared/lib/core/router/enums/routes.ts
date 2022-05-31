@@ -154,3 +154,8 @@ export enum MigrateRoute {
     SecuringSpentAddresses = 'securingSpentAddresses',
     SecurityCheckCompleted = 'securityCheckCompleted',
 }
+
+export enum WalletRoute {
+    Assets = 'assets',
+    AccountHistory = 'accountHistory',
+}

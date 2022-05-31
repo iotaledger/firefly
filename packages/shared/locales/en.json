@@ -1446,6 +1446,8 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }
