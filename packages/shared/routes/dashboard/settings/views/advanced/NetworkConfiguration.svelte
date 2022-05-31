@@ -2,9 +2,7 @@
     import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
-        ensureSinglePrimaryNode,
         getNodeCandidates,
-        getOfficialNetworkConfig,
         isOfficialNetwork,
         updateClientOptions,
         INode,
@@ -18,28 +16,22 @@
     import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
-    const isPrimary = false
-
-    let networkConfig =
-        $activeProfile?.settings.clientOptions ||
-        getOfficialNetworkConfig($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    let clientOptions: IClientOptions = $activeProfile?.settings.clientOptions
 
     /* eslint-disable no-console */
-    console.log('NETWORK CONFIG: ', networkConfig)
+    console.log('CLIENT OPTIONS: ', clientOptions)
 
-    if (networkConfig.nodes.length !== 0) {
-        ensureOnePrimaryNode()
-
-        networkConfig.nodes = getNodeCandidates(networkConfig)
+    if (clientOptions.nodes.length !== 0) {
+        clientOptions.nodes = getNodeCandidates(clientOptions)
     }
 
     $: {
-        updateClientOptions(networkConfig)
-        updateActiveProfileSettings(<IClientOptions>{ networkConfig })
+        updateClientOptions(clientOptions)
+        updateActiveProfileSettings({ clientOptions })
     }
 
-    $: canRemoveAllNodes = networkConfig.nodes.length !== 0
-    $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
+    $: canRemoveAllNodes = clientOptions.nodes.length !== 0
+    $: canConfigureNodes = isOfficialNetwork($activeProfile?.networkType)
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
@@ -47,15 +39,10 @@
 
     function handleIncludeOfficialNodesClick() {
         ensureValidNodeSelection()
-        ensureOnePrimaryNode()
     }
 
     function ensureValidNodeSelection(): void {
-        networkConfig.nodes = getNodeCandidates(networkConfig)
-    }
-
-    function ensureOnePrimaryNode(): void {
-        networkConfig.nodes = ensureSinglePrimaryNode(networkConfig.nodes)
+        clientOptions.nodes = getNodeCandidates(clientOptions)
     }
 
     function handleAddNodeClick() {
@@ -82,8 +69,8 @@
             props: {
                 removeAll: true,
                 onSuccess: () => {
-                    networkConfig.includeOfficialNodes = false
-                    networkConfig.nodes = []
+                    clientOptions.includeOfficialNodes = false
+                    clientOptions.nodes = []
                 },
             },
         })
@@ -103,7 +90,7 @@
                 <Text type="p" classes="inline" secondary>
                     {localize('views.settings.networkConfiguration.connectedTo')}:
                 </Text>
-                <Text type="p" highlighted>{networkConfig.network.name}</Text>
+                <Text type="p" highlighted>{clientOptions.network}</Text>
             </div>
             <div>
                 <Text type="p" classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
@@ -130,27 +117,27 @@
             </Text>
             <Radio
                 value={true}
-                bind:group={networkConfig.automaticNodeSelection}
+                bind:group={clientOptions.automaticNodeSelection}
                 label={localize('views.settings.networkConfiguration.nodeConfiguration.automatic')}
                 subLabel="Connect to official nodes from the IOTA Foundation"
             />
             <Radio
                 value={false}
-                bind:group={networkConfig.automaticNodeSelection}
+                bind:group={clientOptions.automaticNodeSelection}
                 label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
             />
         </section>
     {/if}
-    {#if !networkConfig.automaticNodeSelection}
+    {#if !clientOptions.automaticNodeSelection}
         <HR classes="pb-5 mt-5 justify-center" />
         <section id="configureNodeList">
             <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
             <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
-            {#if isOfficialNetwork(networkConfig.network.type)}
+            {#if isOfficialNetwork($activeProfile?.networkType)}
                 <Checkbox
                     label={localize('views.settings.configureNodeList.includeOfficialNodeList')}
                     disabled={!canConfigureNodes}
-                    bind:checked={networkConfig.includeOfficialNodes}
+                    bind:checked={clientOptions.includeOfficialNodes}
                     onClick={handleIncludeOfficialNodesClick}
                     classes="mb-5"
                 />
@@ -159,25 +146,22 @@
                 class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
                 bind:this={nodesContainer}
             >
-                {#if networkConfig.nodes.length === 0}
+                {#if clientOptions.nodes.length === 0}
                     <Text classes="p-3">
                         {localize(
                             `views.settings.configureNodeList.${
-                                isOfficialNetwork(networkConfig.network.type) ? 'noNodesAuto' : 'noNodes'
+                                isOfficialNetwork($activeProfile.networkType) ? 'noNodesAuto' : 'noNodes'
                             }`
                         )}
                     </Text>
                 {/if}
-                {#each networkConfig.nodes as node}
+                {#each clientOptions.nodes as node}
                     <div
                         class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     >
                         <div class="flex flex-row items-center space-x-4 overflow-hidden">
                             <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
                                 {node.url}
-                            </Text>
-                            <Text highlighted>
-                                {isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
                             </Text>
                         </div>
                         <button
@@ -190,12 +174,7 @@
                     </div>
                 {/each}
                 {#if nodeContextMenu}
-                    <NodeConfigOptions
-                        bind:nodeContextMenu
-                        bind:networkConfig
-                        {contextPosition}
-                        {ensureOnePrimaryNode}
-                    />
+                    <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
                 {/if}
             </div>
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">
@@ -219,7 +198,7 @@
     <section id="proofOfWork">
         <Text type="h5" classes="mb-3">{localize('views.settings.proofOfWork.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.settings.proofOfWork.description')}</Text>
-        <Checkbox label={localize('actions.localProofOfWork')} bind:checked={networkConfig.localPow} />
+        <Checkbox label={localize('actions.localProofOfWork')} bind:checked={clientOptions.localPow} />
     </section>
 </div>
 

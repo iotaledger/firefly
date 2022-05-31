@@ -225,7 +225,7 @@
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
+                    values: { networkName: $activeProfile?.settings?.clientOptions.network },
                 }),
             })
         }
