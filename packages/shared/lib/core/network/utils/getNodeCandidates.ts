@@ -1,19 +1,23 @@
-import { INetworkConfig, INode } from '../interfaces'
+import { IClientOptions, INode } from '../interfaces'
 import { NetworkProtocol, NetworkType } from '../enums'
 import { ensureSinglePrimaryNode } from './ensureSinglePrimaryNode'
 import { getOfficialNodes } from './getOfficialNodes'
+import { activeProfile } from '@core/profile'
+import { get } from 'svelte/store'
 
 /**
  * Determine the appropriate node candidates from a given network configuration.
- * @method getNodeCandiates
+ * @method getNodeCandidates
  * @param {INetworkConfig} config
  * @returns {INode[]}
  */
-export function getNodeCandidates(config: INetworkConfig): INode[] {
+export function getNodeCandidates(config: IClientOptions): INode[] {
     if (!config) return []
 
+    const { networkProtocol, networkType } = get(activeProfile)
+
     const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
-    const officialNodes = getOfficialNodes(config.network.protocol, config.network.type).map((n, idx) => ({
+    const officialNodes = getOfficialNodes(networkProtocol, networkType).map((n) => ({
         ...n,
         isPrimary: false,
     }))
@@ -23,7 +27,7 @@ export function getNodeCandidates(config: INetworkConfig): INode[] {
         nodeCandidates = officialNodes
     } else {
         nodeCandidates = config.includeOfficialNodes
-            ? addOfficialNodes(config.network.protocol, config.network.type, config.nodes)
+            ? addOfficialNodes(networkProtocol, networkType, config.nodes)
             : config.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
     }
 

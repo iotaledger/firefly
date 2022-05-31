@@ -1,5 +1,4 @@
 import { NetworkProtocol, NetworkType } from '../enums'
-import { INetworkConfig } from '../interfaces'
 import { setRandomPrimaryNode } from './setRandomPrimaryNode'
 import { getOfficialNetwork } from './getOfficialNetwork'
 import { getOfficialNodes } from './getOfficialNodes'
@@ -16,7 +15,7 @@ import { getOfficialNodes } from './getOfficialNodes'
  * @returns {NetworkConfig}
  */
 
-export function getOfficialNetworkConfig(protocol: NetworkProtocol, type: NetworkType): INetworkConfig {
+export function getOfficialNetworkConfig(protocol: NetworkProtocol, type: NetworkType): unknown {
     return {
         network: getOfficialNetwork(protocol, type),
         nodes: setRandomPrimaryNode(getOfficialNodes(protocol, type)),

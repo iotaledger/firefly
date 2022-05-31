@@ -8,11 +8,11 @@
         isOfficialNetwork,
         updateClientOptions,
         INode,
-        INetworkConfig,
         NETWORK_HEALTH_COLORS,
         NetworkStatusDescription,
         networkStatus,
         NetworkHealth,
+        IClientOptions,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import NodeConfigOptions from './NodeConfigOptions.svelte'
@@ -20,9 +20,12 @@
 
     const isPrimary = false
 
-    let networkConfig: INetworkConfig =
-        $activeProfile?.settings.networkConfig ||
+    let networkConfig =
+        $activeProfile?.settings.clientOptions ||
         getOfficialNetworkConfig($activeProfile?.networkProtocol, $activeProfile?.networkType)
+
+    /* eslint-disable no-console */
+    console.log('NETWORK CONFIG: ', networkConfig)
 
     if (networkConfig.nodes.length !== 0) {
         ensureOnePrimaryNode()
@@ -32,7 +35,7 @@
 
     $: {
         updateClientOptions(networkConfig)
-        updateActiveProfileSettings({ networkConfig })
+        updateActiveProfileSettings(<IClientOptions>{ networkConfig })
     }
 
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
