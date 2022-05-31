@@ -36,7 +36,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         loggedIn.set(false)
         hasLoadedAccounts.set(false)
         resetSelectedAccount()
-        activeAccounts.set(null)
+        activeAccounts.set([])
         if (clearActiveProfile) {
             resetActiveProfile()
         }

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityRow, TogglableButton, Text, TextInput } from 'shared/components'
+    import { ActivityTile, TogglableButton, Text, TextInput } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
@@ -7,17 +7,17 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import {
-        activities,
+        selectedAccountActivities,
         groupedActivities,
         searchQueriedActivities,
         filterQueriedActivities,
-        IActivity,
+        Activity,
     } from '@core/wallet'
 
-    function handleTransactionClick(message: IActivity): void {
+    function handleTransactionClick(activity: Activity): void {
         openPopup({
             type: 'activityDetails',
-            props: { message },
+            props: { activity },
         })
     }
 
@@ -48,7 +48,12 @@
          *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
          *      4. Account must have no transactions (the length of $transactions must be zero)
          */
-        return $isFirstSessionSync && $walletSetupType && $walletSetupType !== SetupType.New && $activities.length === 0
+        return (
+            $isFirstSessionSync &&
+            $walletSetupType &&
+            $walletSetupType !== SetupType.New &&
+            $selectedAccountActivities.length === 0
+        )
     }
 </script>
 
@@ -95,11 +100,11 @@
         {:else if $groupedActivities.length}
             {#each $groupedActivities as group}
                 <div class="space-y-2">
-                    <Text fontWeight={FontWeightText.semibold} color="gray-600"
-                        >{group.date} • {group.activities.length}</Text
-                    >
+                    <Text fontWeight={FontWeightText.semibold} color="gray-600">
+                        {group.date} • {group.activities.length}
+                    </Text>
                     {#each group.activities as activity}
-                        <ActivityRow onClick={() => handleTransactionClick(activity)} {activity} />
+                        <ActivityTile onClick={() => handleTransactionClick(activity)} {activity} />
                     {/each}
                 </div>
             {/each}

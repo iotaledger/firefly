@@ -16,7 +16,7 @@ export async function initializeProfile(name: string): Promise<void> {
         if (_newProfile.id) destroyProfileManager()
 
         // TODO: set network based on user selection
-        createNewProfile(name, _newProfile.isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
+        await createNewProfile(_newProfile.isDeveloperProfile, NetworkProtocol.Shimmer, NetworkType.Devnet)
         _newProfile = get(newProfile)
 
         const path = await getStorageDirectoryOfProfile(_newProfile.id)

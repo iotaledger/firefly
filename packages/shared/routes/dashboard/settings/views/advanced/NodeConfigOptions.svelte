@@ -3,7 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
     import { getOfficialNodes, INetworkConfig, INode, updateClientOptions } from '@core/network'
-    import { openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { updateActiveProfileSettings } from '@core/profile'
 
     export let nodeContextMenu: INode
@@ -35,27 +35,9 @@
         openPopup({
             type: 'addNode',
             props: {
-                isAddingNode: false,
                 node,
-                nodes: networkConfig.nodes,
-                network: networkConfig.network,
-                onSuccess: (_isNetworkSwitch: boolean, node: INode, oldNodeUrl: string) => {
-                    const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
-                    if (idx >= 0) {
-                        if (node.isPrimary) {
-                            networkConfig.nodes = networkConfig.nodes.map((n) => ({
-                                ...n,
-                                isPrimary: n.url === oldNodeUrl,
-                            }))
-                        } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
-                            node.isPrimary = true
-                        }
-
-                        networkConfig.nodes[idx] = node
-
-                        updateClientOptions(networkConfig)
-                        updateActiveProfileSettings({ networkConfig })
-                    }
+                onSuccess: () => {
+                    closePopup()
                 },
             },
         })

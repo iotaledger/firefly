@@ -29,7 +29,7 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
         <Text type="h2">{localize('views.profile.title')}</Text>
     </div>
@@ -45,12 +45,11 @@
             placeholder={localize('views.profile.profileName')}
             classes="w-full mb-6"
             autofocus
-            disabled={busy}
             submitHandler={handleContinueClick}
         />
     </div>
     <div slot="leftpane__action" class="flex flex-col">
-        <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
+        <Button classes="w-full" disabled={!isProfileNameValid} onClick={handleContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

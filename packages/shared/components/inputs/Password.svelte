@@ -56,7 +56,6 @@
             {submitHandler}
             disableContextMenu={true}
             spellcheck="false"
-            {localize}
             capsLockWarning={true}
         />
         {#if showRevealToggle === true && !disabled}

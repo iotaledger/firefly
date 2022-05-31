@@ -1,18 +1,25 @@
-import { ActivityType, ActivityDirection } from '../enums'
+import { Transaction } from '@iota/wallet'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import { Recipient } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
     id: string
-    type: string
-    timestamp: string
-    activityType: ActivityType
+    type: ActivityType
+    time: Date
     direction: ActivityDirection
-    confirmed: boolean
-    internal: boolean
-    amount: string
-    subjectAccountName: string
-    subjectAddress: string
+    inclusionState: InclusionState
+    isInternal: boolean
+    rawAmount: number
+    recipient: Recipient
     token: ITokenMetadata
-    conversion?: number
-    fiatAmount?: string
+    isAsync: boolean
+    expireDate?: Date
+    isHidden?: boolean
+    isClaimed?: boolean
+
+    setFromTransaction(transactionId: string, transaction: Transaction): void
+    getAsyncStatus(time: Date): ActivityAsyncStatus
+    getFormattedAmount(signum: boolean): string
+    getFiatAmount(fiatPrice: number, exchangeRate: number): string
 }
