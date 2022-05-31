@@ -82,7 +82,7 @@
         }
 
         // Patch: store previous voting state to check if staking modifies the voting state
-        isVotingWhenStaking.set(!!$currentAccountTreasuryVoteValue)
+        isVotingWhenStaking.set($currentAccountTreasuryVoteValue !== null)
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {

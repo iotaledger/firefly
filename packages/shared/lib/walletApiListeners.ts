@@ -159,7 +159,7 @@ export const initialiseListeners = (): void => {
                         (getPendingParticipation(message.id)?.action !== ParticipationAction.Stake ||
                             getPendingParticipation(message.id)?.action !== ParticipationAction.Unstake) &&
                         get(isVotingWhenStaking) &&
-                        !!get(currentAccountTreasuryVoteValue)
+                        get(currentAccountTreasuryVoteValue) === null
                     ) {
                         showAppNotification({
                             type: 'warning',
