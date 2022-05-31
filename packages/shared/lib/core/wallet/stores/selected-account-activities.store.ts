@@ -8,7 +8,7 @@ import { allAccountActivities } from './all-account-activities.store'
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) =>
-        $allAccountActivities.find((accountActivity) => $selectedAccount.id === accountActivity.accountId)
+        $allAccountActivities.find((accountActivity) => $selectedAccount?.id === accountActivity.accountId)
             ?.activities ?? []
 )
 
