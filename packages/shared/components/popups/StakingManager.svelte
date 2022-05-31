@@ -22,7 +22,7 @@
         shimmerStakingEventState,
         resetPerformingParticipation,
     } from 'shared/lib/participation/stores'
-    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { isPartiallyStaked, currentAccountTreasuryVoteValue } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
@@ -190,6 +190,17 @@
 
 <Text type="h4" classes="mb-2">{localize('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mb-4">{localize('popups.stakingManager.description')}</Text>
+
+{#if $currentAccountTreasuryVoteValue}
+    <TextHint
+        classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800 mb-6"
+        icon="info"
+        iconClasses="fill-current text-blue-500 dark:text-blue-500"
+        hint={localize('popups.stakingManager.mergeStakeDisclaimerVoting')}
+        hintClasses="text-gray-500 dark:text-gray-500"
+    />
+{/if}
+
 <div class="staking flex flex-col mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
@@ -318,14 +329,6 @@
         </div>
     {/if}
 </div>
-
-<TextHint
-    classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
-    icon="info"
-    iconClasses="fill-current text-blue-500 dark:text-blue-500"
-    hint={localize('popups.stakingManager.singleAccountHint')}
-    hintClasses="text-gray-500 dark:text-gray-500"
-/>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
