@@ -13,8 +13,9 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountId: 
         (accountActivities) => accountActivities?.accountId === accountId
     )
 
-    const { activities } = accountActivities
-    activities ?? activities.push(activity)
+    if (accountActivities.activities) {
+        accountActivities.activities.push(activity)
+    }
 
     replaceAccountActivitiesInAllAccountActivities(accountActivities)
 }
