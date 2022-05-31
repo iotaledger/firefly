@@ -189,6 +189,7 @@
                         isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
+                        isStakingWhenVoting.set(false)
                     })
                 break
             case VotingAction.Change:
@@ -203,6 +204,7 @@
                         isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
+                        isStakingWhenVoting.set(false)
                     })
                 break
             default:
@@ -232,6 +234,7 @@
                         isChangingParticipation.set(false)
                         displayErrorNotification(err)
                         resetView()
+                        isStakingWhenVoting.set(false)
                     })
             })
             .catch((err) => {
@@ -239,6 +242,7 @@
                 isChangingParticipation.set(false)
                 displayErrorNotification(err)
                 resetView()
+                isStakingWhenVoting.set(false)
             })
     }
 

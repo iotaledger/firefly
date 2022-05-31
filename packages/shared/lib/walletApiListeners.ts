@@ -1,4 +1,11 @@
 import { localize } from '@core/i18n'
+import { canParticipate } from 'shared/lib/participation'
+import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
+import {
+    assemblyStakingEventState,
+    participationEvents,
+    shimmerStakingEventState,
+} from 'shared/lib/participation/stores'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     aggregateAccountActivity,
@@ -15,17 +22,18 @@ import {
 import { get } from 'svelte/store'
 import { showAppNotification, showSystemNotification } from './notifications'
 import { ASSEMBLY_EVENT_ID } from './participation'
+import { currentAccountTreasuryVoteValue, stakedAmount } from './participation/account'
 import { getParticipationOverview } from './participation/api'
 import {
     getPendingParticipation,
     hasPendingParticipation,
     isChangingParticipation,
     isStakingWhenVoting,
+    isVotingWhenStaking,
     removePendingParticipations,
 } from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
-import { stakedAmount } from './participation/account'
 import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
@@ -128,8 +136,11 @@ export const initialiseListeners = (): void => {
                 ) {
                     isChangingParticipation.set(false)
                     displayParticipationNotification(getPendingParticipation(message.id))
+
                     // Patch: if voting unstakes your funds, show a notification to inform the user
                     if (
+                        (canParticipate(get(assemblyStakingEventState)) ||
+                            canParticipate(get(shimmerStakingEventState))) &&
                         (getPendingParticipation(message.id)?.action !== ParticipationAction.Vote ||
                             getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote) &&
                         get(isStakingWhenVoting) &&
@@ -140,7 +151,23 @@ export const initialiseListeners = (): void => {
                             message: localize('notifications.voteUnstake'),
                         })
                     }
+                    // Patch: if staking unvotes your funds, show a notification to inform the user
+                    if (
+                        canParticipate(
+                            get(participationEvents)?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)?.status?.status
+                        ) &&
+                        (getPendingParticipation(message.id)?.action !== ParticipationAction.Stake ||
+                            getPendingParticipation(message.id)?.action !== ParticipationAction.Unstake) &&
+                        get(isVotingWhenStaking) &&
+                        !!get(currentAccountTreasuryVoteValue)
+                    ) {
+                        showAppNotification({
+                            type: 'warning',
+                            message: localize('notifications.stakeUnvote'),
+                        })
+                    }
                     isStakingWhenVoting.set(false)
+                    isVotingWhenStaking.set(false)
                 }
                 if (get(popupState).type === 'stakingManager') {
                     closePopup()

@@ -21,8 +21,9 @@
         assemblyStakingEventState,
         shimmerStakingEventState,
         resetPerformingParticipation,
+        isVotingWhenStaking,
     } from 'shared/lib/participation/stores'
-    import { isPartiallyStaked } from 'shared/lib/participation/account'
+    import { currentAccountTreasuryVoteValue, isPartiallyStaked } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
@@ -80,6 +81,9 @@
             return
         }
 
+        // Patch: store previous voting state to check if staking modifies the voting state
+        isVotingWhenStaking.set(!!$currentAccountTreasuryVoteValue)
+
         switch ($participationAction) {
             case ParticipationAction.Stake: {
                 await participate($selectedAccountStore?.id, participations, $participationAction).catch((err) => {
@@ -87,6 +91,7 @@
 
                     displayErrorNotification(err)
                     resetPerformingParticipation()
+                    isVotingWhenStaking.set(false)
                 })
                 break
             }
@@ -97,6 +102,7 @@
 
                         displayErrorNotification(err)
                         resetPerformingParticipation()
+                        isVotingWhenStaking.set(false)
                     }
                 )
                 break

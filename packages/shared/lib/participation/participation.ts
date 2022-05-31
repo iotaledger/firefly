@@ -19,6 +19,7 @@ import {
     pendingParticipations,
     isFetchingParticipationInfo,
     isStakingWhenVoting,
+    isVotingWhenStaking,
 } from './stores'
 import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
 import { milestoneToDate } from '@lib/time'
@@ -99,6 +100,7 @@ export const resetParticipation = (): void => {
     participationAction.set(null)
     isChangingParticipation.set(false)
     isStakingWhenVoting.set(false)
+    isVotingWhenStaking.set(false)
     participationEvents.set([])
     participationOverview.set([])
     pendingParticipations.set([])
