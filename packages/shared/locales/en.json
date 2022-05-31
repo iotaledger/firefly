@@ -1257,8 +1257,8 @@
         "participating": "Please wait until you have completed staking/voting before changing wallets.",
         "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
         "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet.",
-        "voteUnstake": "There was an issue with your staked funds. Please visit the staking tab to stake your funds again.",
-        "stakeUnvote": "There was an issue with your vote. Please visit the governance tab to vote again."
+        "voteUnstake": "Due to missing transaction history, voting has stopped your staking. Please visit the governance tab to stake again.",
+        "stakeUnvote": "Due to missing transaction history, staking has stopped your vote. Please visit the governance tab to vote again."
     },
     "error": {
         "profile": {
