@@ -16,89 +16,41 @@ import {
 } from '../utils'
 
 export class Activity implements IActivity {
-    private _id: string
-    private _time: Date
-    private _type: ActivityType
-    private _direction: ActivityDirection
-    private _inclusionState: InclusionState
-    private _isInternal: boolean
-    private _rawAmount: number
-    private _recipient: Recipient
-    private _token: ITokenMetadata
-    private _isAsync: boolean
-    private _expireDate?: Date
-    private _isHidden?: boolean
-    private _isClaimed?: boolean
-
-    get id(): string {
-        return this._id
-    }
-
-    get time(): Date {
-        return this._time
-    }
-
-    get inclusionState(): InclusionState {
-        return this._inclusionState
-    }
-
-    get isAsync(): boolean {
-        return this._isAsync
-    }
-
-    get isInternal(): boolean {
-        return this._isInternal
-    }
-
-    get rawAmount(): number {
-        return this._rawAmount
-    }
-
-    get isClaimed(): boolean {
-        return this._isClaimed
-    }
-
-    get recipient(): Recipient {
-        return this._recipient
-    }
-
-    get expireDate(): Date {
-        return this._expireDate
-    }
-
-    get token(): ITokenMetadata {
-        return this._token
-    }
-
-    get type(): ActivityType {
-        return this._type
-    }
-
-    get direction(): ActivityDirection {
-        return this._direction
-    }
+    id: string
+    time: Date
+    type: ActivityType
+    direction: ActivityDirection
+    inclusionState: InclusionState
+    isInternal: boolean
+    rawAmount: number
+    recipient: Recipient
+    token: ITokenMetadata
+    isAsync: boolean
+    expireDate?: Date
+    isHidden?: boolean
+    isClaimed?: boolean
 
     setFromTransaction(transactionId: string, transaction: Transaction): Activity {
-        this._id = transactionId
-        this._time = new Date(Number(transaction.timestamp))
-        this._type = ActivityType.Send
-        this._direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
-        this._inclusionState = transaction.inclusionState
-        this._isInternal = false
-        this._rawAmount = 0
-        this._recipient = { type: 'address', address: 'Address unknown' }
-        this._token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this._isAsync = false
-        this._isHidden = false
+        this.id = transactionId
+        this.time = new Date(Number(transaction.timestamp))
+        this.type = ActivityType.Send
+        this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+        this.inclusionState = transaction.inclusionState
+        this.isInternal = false
+        this.rawAmount = 0
+        this.recipient = { type: 'address', address: 'Address unknown' }
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.isAsync = false
+        this.isHidden = false
         return this
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
-        if (this._isAsync) {
-            if (this._isClaimed) {
+        if (this.isAsync) {
+            if (this.isClaimed) {
                 return ActivityAsyncStatus.Claimed
             } else {
-                if (time > this._expireDate) {
+                if (time > this.expireDate) {
                     return ActivityAsyncStatus.Expired
                 } else {
                     return ActivityAsyncStatus.Unclaimed
@@ -109,16 +61,16 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
-        return `${this._type !== ActivityType.Receive && signed ? '- ' : ''}${formatTokenAmountBestMatch(
-            this._rawAmount,
-            this._token,
+        return `${this.type !== ActivityType.Receive && signed ? '- ' : ''}${formatTokenAmountBestMatch(
+            this.rawAmount,
+            this.token,
             2
         )}`
     }
 
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
         if (fiatPrice && exchangeRate) {
-            const fiatValue = formatCurrency(convertToFiat(this._rawAmount, fiatPrice, exchangeRate))
+            const fiatValue = formatCurrency(convertToFiat(this.rawAmount, fiatPrice, exchangeRate))
             return fiatValue ? fiatValue : '-'
         } else {
             return '-'
