@@ -1040,13 +1040,13 @@ export const hasPendingTransactions = (account: IAccountState): boolean => {
 export const hasValidPendingTransactions = (account: IAccountState): boolean => {
     if (!account) return false
     const pendingMessages = account?.messages.filter((m) => !m.confirmed)
-    const pendingInputs = pendingMessages.flatMap((msg) => {
-        if (msg.payload?.type === 'Transaction') {
-            return msg.payload?.data?.essence?.data?.inputs
-        }
-        return []
-    })
-    const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
-
-    return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
+    // const pendingInputs = pendingMessages.flatMap((msg) => {
+    //     if (msg.payload?.type === 'Transaction') {
+    //         return msg.payload?.data?.essence?.data?.inputs
+    //     }
+    //     return []
+    // })
+    // const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
+    return true
+    // return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
 }

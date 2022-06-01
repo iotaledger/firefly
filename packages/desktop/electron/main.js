@@ -270,9 +270,11 @@ function createWindow() {
 
     if (!app.isPackaged) {
         // Enable dev tools only in developer mode
-        windows.main.webContents.openDevTools()
+        const devtools = new BrowserWindow()
 
         windows.main.loadURL('http://localhost:8080')
+        windows.main.webContents.setDevToolsWebContents(devtools.webContents)
+        windows.main.webContents.openDevTools({ mode: 'detach' })
     } else {
         if (process.env.STAGE === 'prod') {
             initAutoUpdate()
