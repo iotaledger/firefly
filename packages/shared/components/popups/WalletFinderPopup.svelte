@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Button, KeyValueBox, Password, Spinner, Text, TextHint } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { asyncSyncAccounts } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
@@ -11,6 +11,8 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { FontWeightText } from '../Text.svelte'
 
+    export let useBalanceFinder = false
+
     const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
 
     const startAddressIndex = 0
@@ -19,45 +21,62 @@
     let currentGapLimit = gapLimitIncrement
     let previousAccountDiscoveryThreshold = 0
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
-    let password = ''
+    const password = ''
     let error = ''
     let isBusy = false
     let hasUsedBalanceFinder = false
 
+    // $: console.log('useBalanceFinder:', useBalanceFinder)
+    $: useBalanceFinder && handleFindBalances()
+
     async function handleFindBalances() {
-        try {
-            error = ''
-            isBusy = true
+        if ($isSoftwareProfile && $isStrongholdLocked) {
+            openPopup({
+                type: 'password',
+                props: {
+                    onSuccess: () => {
+                        openPopup({
+                            type: 'walletFinder',
+                            props: { useBalanceFinder: true },
+                        })
+                    },
+                },
+            })
+        } else {
+            try {
+                error = ''
+                isBusy = true
 
-            if ($isSoftwareProfile && $isStrongholdLocked) {
-                await setStrongholdPassword(password)
-            } else if ($isLedgerProfile && !isLedgerConnected()) {
+                if ($isSoftwareProfile && $isStrongholdLocked) {
+                    await setStrongholdPassword(password)
+                } else if ($isLedgerProfile && !isLedgerConnected()) {
+                    isBusy = false
+
+                    displayNotificationForLedgerProfile('warning')
+
+                    return
+                }
+
+                await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
+
+                previousGapLimit = currentGapLimit
+                currentGapLimit += gapLimitIncrement
+                previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
+                hasUsedBalanceFinder = true
+            } catch (err) {
+                error = localize(err.error)
+
+                if ($isLedgerProfile) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                } else {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
+                }
+            } finally {
                 isBusy = false
-
-                displayNotificationForLedgerProfile('warning')
-
-                return
             }
-
-            await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
-
-            previousGapLimit = currentGapLimit
-            currentGapLimit += gapLimitIncrement
-            previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
-            hasUsedBalanceFinder = true
-        } catch (err) {
-            error = localize(err.error)
-
-            if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
-            }
-        } finally {
-            isBusy = false
         }
     }
 
@@ -97,23 +116,6 @@
         />
     </div>
 
-    {#if false}
-        <!-- TODO: (Jason) Use popups/Password.svelte to unlock -->
-        <div class="flex w-full flex-row flex-wrap justify-between">
-            <Text type="p" secondary classes="mb-3">{localize('popups.walletFinder.typePassword')}</Text>
-            <Password
-                {error}
-                classes="w-full mb-2"
-                bind:value={password}
-                showRevealToggle
-                placeholder={localize('general.password')}
-                autofocus
-                submitHandler={() => handleFindBalances()}
-                disabled={isBusy}
-            />
-        </div>
-    {/if}
-
     {#if hasUsedBalanceFinder}
         <TextHint
             classes="w-full rounded-2xl bg-gray-50 dark:bg-gray-850 py-4 pl-4 pr-8"
@@ -130,13 +132,9 @@
     <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
         {localize('actions.cancel')}
     </Button>
-    <Button
-        classes="w-full"
-        onClick={handleFindBalances}
-        disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
-    >
+    <Button classes="w-full" onClick={handleFindBalances} disabled={isBusy}>
         {#if isBusy}
             <Spinner busy={true} message={localize('actions.searching')} classes="justify-center" />
-        {:else}{localize(`actions.${hasUsedBalanceFinder ? 'searchAgain' : 'searchBalances'}`)}{/if}
+        {:else}{localize('actions.searchBalances')}{/if}
     </Button>
 </div>

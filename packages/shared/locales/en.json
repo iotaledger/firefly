@@ -971,7 +971,7 @@
         "useBalanceFinder": "Use balance finder",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
-        "searching": "Searching...",
+        "searching": "Searching",
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
