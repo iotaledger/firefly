@@ -37,7 +37,6 @@
     import StakingManager from './StakingManager.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
-    import SwitchNetwork from './SwitchNetwork.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
@@ -114,7 +113,6 @@
         addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
-        switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,

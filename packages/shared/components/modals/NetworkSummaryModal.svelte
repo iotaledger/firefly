@@ -15,7 +15,7 @@
 <Modal bind:this={modal} position={{ left: '80px', top: '25px' }}>
     <network-indicator-content class="flex flex-col">
         {#if $activeProfile?.isDeveloperProfile}
-            <Text type="h3" classes="px-7 pt-5">{$activeProfile?.settings.networkConfig.network.name}</Text>
+            <Text type="h3" classes="px-7 pt-5">{$activeProfile?.settings.clientOptions.network}</Text>
         {/if}
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[health]}-500">
             {localize(`views.dashboard.network.${description}`)}

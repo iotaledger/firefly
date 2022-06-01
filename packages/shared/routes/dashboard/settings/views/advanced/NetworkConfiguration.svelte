@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, Radio, Text, NodeConfigOptions } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
         getNodeCandidates,
@@ -13,7 +13,6 @@
         IClientOptions,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     let clientOptions: IClientOptions = $activeProfile?.settings.clientOptions

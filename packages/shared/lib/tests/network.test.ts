@@ -10,7 +10,6 @@ import {
     IAuth,
     IClientOptions,
     INetwork,
-    INetworkConfig,
     INode,
     isAuthValid,
     isOfficialNetwork,
@@ -144,28 +143,28 @@ describe('File: network.ts', () => {
         },
     }
 
-    const CONFIG: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: INetworkConfig } }> = {
+    const CONFIG: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: IClientOptions } }> = {
         [NetworkProtocol.IOTA]: {
             [NetworkType.Mainnet]: {
-                network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet],
+                network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet].id,
                 nodes: _buildNodes(NetworkProtocol.IOTA, NetworkType.Mainnet),
                 includeOfficialNodes: false,
                 automaticNodeSelection: true,
                 localPow: true,
             },
             [NetworkType.Devnet]: {
-                network: NETWORK[NetworkProtocol.IOTA][NetworkType.Devnet],
+                network: NETWORK[NetworkProtocol.IOTA][NetworkType.Devnet].id,
                 nodes: _buildNodes(NetworkProtocol.IOTA, NetworkType.Devnet),
                 includeOfficialNodes: true,
                 automaticNodeSelection: false,
                 localPow: true,
             },
-            [NetworkType.PrivateNet]: <INetworkConfig>{},
+            [NetworkType.PrivateNet]: <IClientOptions>{},
         },
         [NetworkProtocol.Shimmer]: {
-            [NetworkType.Mainnet]: <INetworkConfig>{},
-            [NetworkType.Devnet]: <INetworkConfig>{},
-            [NetworkType.PrivateNet]: <INetworkConfig>{},
+            [NetworkType.Mainnet]: <IClientOptions>{},
+            [NetworkType.Devnet]: <IClientOptions>{},
+            [NetworkType.PrivateNet]: <IClientOptions>{},
         },
     }
 

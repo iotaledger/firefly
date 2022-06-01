@@ -12,7 +12,7 @@
     export let onSuccess = (..._: any[]): void => {}
 
     const profile = $newProfile ? newProfile : activeProfile
-    const networkConfig = $profile.settings?.networkConfig
+    const clientOptions = $profile.settings?.clientOptions
 
     let formError = { address: '', addressWarn: '' }
 
@@ -21,10 +21,10 @@
     function checkForErrors(): void {
         const errorNetworkId = checkNetworkId(
             $nodeInfo?.protocol?.networkName,
-            networkConfig.network,
+            clientOptions.network,
             $profile.isDeveloperProfile
         )
-        const errorUrlValidity = checkNodeUrlValidity(networkConfig?.nodes, node.url, $profile.isDeveloperProfile)
+        const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
         formError = {
             address: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '',
             addressWarn: localize(errorUrlValidity) ?? '',
