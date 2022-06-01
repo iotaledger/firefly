@@ -379,12 +379,24 @@
                     },
                 })}
             </Text>
-            <div class="flex items-center mb-6 bg-blue-50 dark:bg-gray-800 rounded-xl p-4">
+            <div
+                class="flex items-center {$stakedAmount > 0
+                    ? 'mb-4'
+                    : 'mb-6'} bg-blue-50 dark:bg-gray-800 rounded-xl p-4"
+            >
                 <Icon icon="exclamation" classes="text-gray-500" />
                 <Text type="p" classes="px-3">
                     {localize('popups.governanceManager.mergeVoteDisclaimer')}
                 </Text>
             </div>
+            {#if $stakedAmount > 0}
+                <div class="flex items-center mb-6 bg-blue-50 dark:bg-gray-800 rounded-xl p-4">
+                    <Icon icon="exclamation" classes="text-gray-500" />
+                    <Text type="p" classes="px-3">
+                        {localize('popups.governanceManager.mergeVoteDisclaimerStaking')}
+                    </Text>
+                </div>
+            {/if}
             <div class="flex flex-row justify-between space-x-4 w-full">
                 <Button
                     disabled={loading}
