@@ -9,6 +9,7 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../../../node_modules/@capacitor/ios'
+  pod 'CapacitorSecureFilesystemAccess', :path => '../../../../node_modules/capacitor-secure-filesystem-access'
   pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
   pod 'CapacitorCommunityBarcodeScanner', :path => '../../../../node_modules/@capacitor-community/barcode-scanner'
   pod 'CapacitorCommunityPrivacyScreen', :path => '../../../../node_modules/@capacitor-community/privacy-screen'
@@ -19,7 +20,7 @@ end
 target 'App' do
   capacitor_pods
   # Add your Pods here
-  pod 'IotaWalletInternal', :podspec => 'https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec'
+  pod 'IotaWalletInternal', :podspec => 'https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec'
 
 end
 
