@@ -446,7 +446,7 @@
                     </Drawer>
                 </div>
                 <div class="flex flex-1">
-                    <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
+                    <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
                                 <AccountAssets classes="pb-0" />
