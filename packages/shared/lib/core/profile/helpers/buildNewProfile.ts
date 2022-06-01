@@ -9,19 +9,19 @@ import { IPersistedProfile } from '../interfaces'
  * Build a default profile object given a name and developer status.
  *
  * @method buildNewProfile
- * @param {string} name
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
  * @param {ClientOptions} clientOptions
+ * @param {string} name
  * @returns {IPersistedProfile}
  */
 export function buildNewProfile(
-    name: string = '',
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
-    clientOptions: ClientOptions
+    clientOptions: ClientOptions,
+    name: string = ''
 ): IPersistedProfile {
     return {
         id: generateRandomId(),

@@ -9,7 +9,7 @@
     let error = ''
     let password: string
 
-    async function handleDeleteClick() {
+    async function handleDeleteClick(): Promise<void> {
         isBusy = true
         error = ''
 
@@ -41,7 +41,7 @@
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-    <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{localize('actions.no')}</Button>
+    <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>{localize('actions.no')}</Button>
     <Button disabled={(!password && $isSoftwareProfile) || isBusy} classes="w-1/2" onClick={handleDeleteClick} warning>
         {localize('actions.yes')}
     </Button>

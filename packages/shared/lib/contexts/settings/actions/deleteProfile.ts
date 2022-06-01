@@ -20,7 +20,9 @@ import { appRouter } from '@core/router'
 export async function deleteProfile(): Promise<void> {
     try {
         const _activeProfile = get(activeProfile)
-        if (!_activeProfile) return
+        if (!_activeProfile) {
+            return
+        }
 
         const _isStrongholdUnlocked = await isStrongholdUnlocked()
         if (get(isSoftwareProfile) && _isStrongholdUnlocked) {
@@ -66,7 +68,7 @@ export async function deleteProfile(): Promise<void> {
             get(appRouter).reset()
         }
     } catch (err) {
-        const isAccountNotEmptyError = err && err?.type && err?.type === 'AccountNotEmpty'
+        const isAccountNotEmptyError = err?.type === 'AccountNotEmpty'
         showAppNotification({
             type: 'error',
             message: localize(`error.${isAccountNotEmptyError ? 'profile.delete.nonEmptyAccounts' : 'global.generic'}`),

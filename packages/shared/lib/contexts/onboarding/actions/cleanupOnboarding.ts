@@ -3,6 +3,5 @@ import { deleteNewProfile } from '@core/profile'
 
 export async function cleanupOnboarding(): Promise<void> {
     cleanupSignup()
-
     await deleteNewProfile()
 }

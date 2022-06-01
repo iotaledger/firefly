@@ -12,16 +12,16 @@ import { getStorageDirectoryOfProfile, removeProfileFolder } from '../utils'
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
  * @method createNewProfile
- * @param {string} name
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
+ * @param {string} name
  */
 export async function createNewProfile(
-    name: string = '',
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
-    networkType: NetworkType
+    networkType: NetworkType,
+    name: string = ''
 ): Promise<void> {
     if (get(profileManager)) {
         console.error('Profile is already created')
@@ -30,7 +30,7 @@ export async function createNewProfile(
 
     // TODO: build custom client options for custom network
     const clientOptions = await getDefaultClientOptions(networkProtocol, networkType)
-    const profile = buildNewProfile(name, isDeveloperProfile, networkProtocol, networkType, clientOptions)
+    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions, name)
     newProfile.set(profile)
     const path = await getStorageDirectoryOfProfile(get(newProfile).id)
 
