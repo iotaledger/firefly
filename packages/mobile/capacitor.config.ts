@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli'
 
 const prod = process.env.NODE_ENV === 'production'
-const ip = process.env.IP || 'localhost'
+const ip = process.env.CAP_IP || 'localhost'
 
 const serverConfig = {
     url: `http://${ip}:8080`,

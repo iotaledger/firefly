@@ -48,14 +48,18 @@ packages/mobile $ yarn ios:update
 ### Development
 
 Capacitor Live Reload setup:
-```bash
-packages/mobile $ cp capacitor-sample.config.ts capacitor.config.ts 
-# modify the url field "XXX.XXX.XXX.XXX" with your local IP
 
-# or hide "Server" block to build directly on device in next step
+To run Firefly in development mode on a physical device, set an environment variable with your computer's local IP (`CAP_IP=<your local ip>`). Otherwise, `localhost` will be used by default for simulators and emulators.
+```bash
+packages/mobile $ export CAP_IP=192.168.X.X
+```
+Then, copy the Capacitor config to platform you're targeting:
+```bash
+packages/mobile $ yarn cap copy ios
+packages/mobile $ yarn cap copy android
 ```
 
-Run development server, or instead build for device:
+Run a development server, or instead build for device:
 ```bash
 # Run development server with HMR to test on simulators, emulators and phones
 packages/mobile $ yarn dev
@@ -76,8 +80,8 @@ Debug
 Optimized production ready build:
 ```bash
 packages/mobile $ yarn build
+packages/mobile $ NODE_ENV=production yarn cap copy
 packages/mobile $ yarn ios
 packages/mobile $ yarn android
 ```
 Finally build / run in Android Studio / XCode IDE.
-
