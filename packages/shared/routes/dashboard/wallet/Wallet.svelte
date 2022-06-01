@@ -446,14 +446,14 @@
                     </Drawer>
                 </div>
                 <div class="flex flex-1">
-                    <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
+                    <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountAssets />
+                                <AccountAssets classes="pb-0" />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                                <AccountHistory classes="pb-0" transactions={getAccountMessages($selectedAccount)} />
                             </div>
                         {/if}
                     </DashboardPane>
