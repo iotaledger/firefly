@@ -57,10 +57,17 @@
     {#if type === GovernanceInfoType.StatusTimeline}
         <ul class="space-y-3 text-left">
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 1}>
-                <Text overrideColor={eventProgress <= 1} classes={eventProgress <= 1 ? 'text-gray-400' : ''}>
+                <Text
+                    overrideColor={eventProgress <= 1}
+                    classes={eventProgress <= 1 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexCommence), dateFormat)}
                 </Text>
-                <Text type="h5" overrideColor={eventProgress <= 1} classes={eventProgress <= 1 ? 'text-gray-400' : ''}>
+                <Text
+                    type="h5"
+                    overrideColor={eventProgress <= 1}
+                    classes={eventProgress <= 1 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {localize(
                         `views.governance.info.tooltip.eventStatusTimeline.${
                             eventProgress <= 1 ? 'votingOpen' : 'votingOpened'
@@ -69,10 +76,17 @@
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 2}>
-                <Text overrideColor={eventProgress <= 2} classes={eventProgress <= 2 ? 'text-gray-400' : ''}>
+                <Text
+                    overrideColor={eventProgress <= 2}
+                    classes={eventProgress <= 2 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexStart), dateFormat)}
                 </Text>
-                <Text type="h5" overrideColor={eventProgress <= 2} classes={eventProgress <= 2 ? 'text-gray-400' : ''}>
+                <Text
+                    type="h5"
+                    overrideColor={eventProgress <= 2}
+                    classes={eventProgress <= 2 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {localize(
                         `views.governance.info.tooltip.eventStatusTimeline.${
                             eventProgress <= 2 ? 'countingStarts' : 'countingStarted'
@@ -81,10 +95,17 @@
                 </Text>
             </li>
             <li class="grid grid-rows-2 relative" class:active={eventProgress > 3}>
-                <Text overrideColor={eventProgress <= 3} classes={eventProgress <= 3 ? 'text-gray-400' : ''}>
+                <Text
+                    overrideColor={eventProgress <= 3}
+                    classes={eventProgress <= 3 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {formatDate(milestoneToDate(event?.information?.milestoneIndexEnd), dateFormat)}
                 </Text>
-                <Text type="h5" overrideColor={eventProgress <= 3} classes={eventProgress <= 3 ? 'text-gray-400' : ''}>
+                <Text
+                    type="h5"
+                    overrideColor={eventProgress <= 3}
+                    classes={eventProgress <= 3 ? 'text-gray-400 dark:text-gray-700' : ''}
+                >
                     {localize(
                         `views.governance.info.tooltip.eventStatusTimeline.${
                             eventProgress <= 3 ? 'countingStops' : 'countingStopped'
