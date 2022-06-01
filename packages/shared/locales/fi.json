@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Vahvista PIN-koodisi",
             "body1": "PIN-koodisi pitää saldosi ja transaktiosi yksityisinä.",
-            "body2": "Syötä PIN-koodisi uudelleen jatkaaksesi. "
+            "body2": "Syötä PIN-koodisi uudelleen jatkaaksesi."
         },
         "backup": {
             "title": "Varmuuskopioi lompakko",
@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking on avoinna",
                     "holding": "{duration} stakingia jäljellä",
                     "ended": "Staking on nyt päättynyt",
-                    "inactive": "Staking-tapahtumia ei havaittu"
+                    "inactive": "Staking-tapahtumia ei havaittu",
+                    "fetching": "Haetaan staking-tapahtumatietoja..."
                 },
                 "bodies": {
                     "upcoming": "Stakea {token}-tokenisi saadaksesi palkintoja automaattisesti 10 sekunnin välein, kun staking alkaa {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Lompakon kokonaispalkkiot",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly on vapaasti käytettävä ja liityttävä, erittäin skaalautuva moniketjuverkko yhdistettyjen älysopimusten luomiseen ja käyttöönottamiseen. Assembly on web3:n tulevaisuus. "
+                    "description": "Assembly on vapaasti käytettävä, erittäin skaalautuva moniketjuverkko yhdistettyjen älysopimusten luomiseen ja käyttöönottamiseen. Assembly on web3:n tulevaisuus."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Värin valinta",
                 "hexCode": "Värin heksakoodi"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Ääneni painoarvo",
+                "info": {
+                    "title": "Äänesi painoarvo",
+                    "equality": "1000 IOTA = 1 ÄÄNI",
+                    "description1": "Äänesi painoarvo johdetaan lompakkosi saldosta. Kun äänestysehdotus on laskentavaiheessa, aktiiviset äänet lasketaan ja niitä kertyy 10 sekunnin välein.",
+                    "description2": "1 Ki verran painoarvoa (1000 IOTA-tokenia) tuottaa 1 äänen 10 sekunnin välein. Tämä tarkoittaa, että sinun on äänestettävä koko laskentavaiheen ajan saavuttaaksesi täyden painoarvosi."
+                }
+            },
+            "info": {
+                "title": "Hallinnoinnin tiedot",
+                "description": "IOTA-yhteisö on kehittänyt IOTA-säätiön avulla IOTA:n äänestysprotokollan, joka mahdollistaa osallistumisesi hallinnallisiin päätöksiin äänestämällä IOTA-tokeneillasi Fireflyssä.",
+                "link": "Lue lisää äänestämisestä IOTA:lla",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Äänestys avoinna",
+                        "countingStarts": "Laskenta alkaa",
+                        "countingStops": "Laskenta päättyy",
+                        "votingOpened": "Äänestys avattu",
+                        "countingStarted": "Laskenta alkoi",
+                        "countingStopped": "Laskenta päättyi"
+                    },
+                    "votingRate": {
+                        "title": "Äänestysmäärä",
+                        "body": "{amount} tuottaa {votesPerMilestone} ääntä joka {time, plural, one {#:s sekunti} other {#:s sekunti}}."
+                    },
+                    "countedVotes": {
+                        "title": "Lasketut äänet",
+                        "body": "Äänet lasketaan {time, plural, one {# sekunnin} other {# sekunnin}} välein laskentavaiheen ajan. {amount} tuottaa {votesPerMilestone} ääntä joka {time, plural, one {#:s sekunti} other {#:s sekunti}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Uudet käyttämättömät varat: {amount}",
+                        "body": "Olet vastaanottanut ylimääräisiä varoja tilille {account}. Voit äänestää näillä tokeneilla yhdistämällä äänesi."
+                    },
+                    "maximumVotes": {
+                        "title": "Enimmäisäänimäärä",
+                        "body": "Sinun on jatkettava äänestämistä koko jäljellä olevan laskentavaiheen ajan saavuttaakseksi enimmäisäänimääräsi."
+                    },
+                    "chart": {
+                        "totalVotes": "Ääniä: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Tiedote",
+                    "commencing": "Äänestys avoinna",
+                    "holding": "Lasketaan",
+                    "ended": "Päättynyt"
+                },
+                "button": "Näytä ehdotus",
+                "treasury": {
+                    "notFound": {
+                        "title": "Yhteisörahaston äänestystä ei voitu ladata",
+                        "subtitle": "Ole hyvä ja yhdistä solmuun, joka on lisännyt tämän äänestyksen",
+                        "buttonConnect": "Yhdistä oletussolmuun",
+                        "buttonSettings": "Näytä solmun asetukset",
+                        "fetching": "Haetaan hallintotapahtuman tietoja..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Äänestys aukeaa",
+                "votingProgress": "Aikaa jäljellä",
+                "votingPower": "Äänesi painoarvo",
+                "votesCounted": "Lasketut äänesi",
+                "maximumVotes": "Enimmäisäänimääräsi",
+                "countingStarts": "Laskenta alkaa",
+                "currentResult": "Tämänhetkinen tulos",
+                "finalResult": "Lopullinen tulos",
+                "answerHeader": {
+                    "activeVoting": "Aktiivinen äänestys",
+                    "selected": "Lähetetty",
+                    "notSelected": "Ei valittu",
+                    "winner": "Voittaja"
+                }
+            },
+            "votes": "ääntä",
+            "manageVote": "Hallinnoi ääntä"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Vahvista transaktio",
             "body": "Olet lähettämässä {amount} osoitteeseen",
             "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
-            "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
+            "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta. Saatat joutua myös äänestämään uudestaan.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin ja äänestykseen. Tämä saattaa lopettaa stakingin tokeneiltasi ja äänestyksen. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking ja äänestys uudestaan jäljelle jääville tokeneille siirron jälkeen.",
+                "stake": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
+                "vote": "Olet lähettämässä siirtoa lompakosta, joka äänestää parhaillaan. Tämä saattaa lopettaa äänestyksen. Voit lähettää siirron vapaasti, mutta sinun on ehkä äänestettävä uudelleen jäljelle jäävillä tokeneillasi siirron jälkeen."
+            }
         },
         "balanceFinder": {
             "title": "Saldon etsijä",
@@ -774,6 +862,33 @@
             "title": "Staking-vaihe {periodNumber} {date} alkaen",
             "body": "IOTA:n staking Assemblyn saamiseksi jatkuu... Osallistu vaiheeseen {periodNumber} 90 päivän ajan. Stakea IOTA-tokenisi ja ansaitse ASMB-palkkioita!",
             "info": "Shimmer-staking on nyt saatettu päätökseen ja vain ASMB-tokenit tullaan jakamaan."
+        },
+        "governanceManager": {
+            "castYourVote": "Anan äänesi",
+            "castYourVoteInfo": "Olet äänestämässä vaihtoehtoa {voteValue} ({voteText}) määrällä {amount}",
+            "castingVotes": "Annetaan ääniä",
+            "stopVoting": "Lopeta äänestys",
+            "stopVotingInfo": "Oletko varma, että haluat lopettaa äänestämisen vaihtoehdolle {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Huomioithan, että äänestyksen lopettaminen laskentavaiheen aikana ei vaikuta ääniin, jotka on jo laskettu",
+            "stoppingVoting": "Lopetetaan äänestystä",
+            "changeVote": "Vaihda ääntä",
+            "changeVoteDisclaimer": "Huomioithan, että äänen vaihtaminen laskentavaiheen aikana ei vaikuta ääniin, jotka on jo laskettu",
+            "changeVoteInfo": "Oletko varma, että haluat vaihtaa äänesi vaihtoehdolle {voteValue} ({voteText})?",
+            "changingVote": "Vaihdetaan ääntä",
+            "manageVotes": "Hallitse ääniä",
+            "partialVoteInfo": "Olet vastaanottanut {amount} tilille {account}. Voit äänestää näillä varoilla yhdistämällä ne nykyiseen ääneesi.",
+            "mergeVoteDisclaimer": "Huomioithan, että äänten yhdistäminen ei vaikuta ääniin, jotka on jo laskettu",
+            "mergingVotes": "Yhdistetään ääniä",
+            "votedSuccessfully": "Olet aloittanut äänestyksen tilillä {account}.",
+            "unvotedSuccessfully": "Olet lopettanut äänestyksen tilillä {account}.",
+            "successPopup": {
+                "castVotesTitle": "Äänestäminen onnistui",
+                "stopVotesTitle": "Äänestys lopetettu",
+                "mergeVotesTitle": "Äänet yhdistetty",
+                "changeVotesTitle": "Ääni vaihdettu",
+                "castBody": "Äänestät nyt vaihtoehtoa {voteValue} ({voteText}).",
+                "stopBody": "Olet lopettanut äänestyksen. Tämä ei vaikuta ääniin, jotka on jo laskettu."
+            }
         },
         "shimmer-info": {
             "title": "Tietoja Shimmeristä",
@@ -931,6 +1046,10 @@
         "merge": "Yhdistä",
         "mergeFunds": "Yhdistä varoja",
         "done": "Valmis",
+        "castVotes": "Anna ääniä",
+        "changeVotes": "Vaihda ääntä",
+        "mergeVotes": "Yhdistä ääni",
+        "stopVotes": "Lopeta äänestys",
         "okIUnderstand": "OK, ymmärrän",
         "readMore": "Lue lisää"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Siirretään kohteeseen {account}",
         "transferFrom": "Siirrä tililtä {account}",
         "transferTo": "Siirrä tilille {account}",
-        "stakedFor": "Stakettu tilille {account}",
-        "unstakedFor": "Ei staketut tilille {account}",
-        "votedFor": "Äänestetty tilille {account}",
-        "unvotedFor": "Äänestys lopetettu tilille {account}",
         "stakingTransaction": "Staking Transaktio",
         "unstakingTransaction": "Lopeta Staking",
+        "votingTransaction": "Äänestystransaktio",
+        "unvotingTransaction": "Äänestyksen lopettamisen transaktio",
+        "participationTransaction": "Osallistumistransaktio",
         "receiving": "Vastaanotetaan",
         "sending": "Lähetetään",
         "legacyNetwork": "Vanha verkko",
@@ -1072,14 +1190,19 @@
         "unknown": "Tuntematon",
         "none": "Ei mikään",
         "staked": "Stakettu",
+        "voted": "Äänestetty",
         "unstaked": "Ei stakettu",
+        "unvoted": "Äänestys poistettu",
         "staking": "Staking",
         "unstaking": "Lopetetaan staking",
         "notStaked": "Ei stakettu",
         "stakedFunds": "Staketut varat",
         "unstakedFunds": "Varat ilman stakea",
+        "voting": "Äänestys",
+        "unvoting": "Äänestyksen poistaminen",
         "accountColor": "Lompakon väri",
         "myAssets": "Minun varani",
+        "option": "Vaihtoehto",
         "total": "Yhteensä: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
         "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
-        "participating": "Ole hyvä ja odota, kunnes kaikki staking- ja äänestystransaktiot ovat valmistuneet vaihtaaksesi lompakkoa."
+        "participating": "Ole hyvä ja odota, kunnes olet saattanut stakingin tai äänestyksen loppuun ennen lompakkojen vaihtamista.",
+        "transferringCreate": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet ennen uuden lompakon lisäämistä.",
+        "participatingCreate": "Ole hyvä ja odota, kunnes olet saattanut stakingin tai äänestyksen loppuun ennen uuden lompakon lisäämistä."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Lompakko",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Hallinnointi"
     }
 }

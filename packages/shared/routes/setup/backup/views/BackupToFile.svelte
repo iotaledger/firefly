@@ -37,7 +37,14 @@
     <div slot="leftpane__content">
         <form on:submit|preventDefault={onSubmit} id="backup-form">
             <Text type="p" secondary classes="mb-8">{locale('views.backupWallet.body1')}</Text>
-            <Password bind:value={confirmPassword} {locale} autofocus disabled={busy} showRevealToggle classes="mb-8" />
+            <Password
+                bind:value={confirmPassword}
+                {locale}
+                autofocus={!$mobile}
+                disabled={busy}
+                showRevealToggle
+                classes="mb-8"
+            />
             <Text type="p" secondary classes="mb-4">{locale('views.backupWallet.body2')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason1')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason2')}</Text>

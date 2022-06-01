@@ -115,7 +115,7 @@
             bind:value={profileName}
             placeholder={locale('views.profile.profileName')}
             classes="w-full mb-6"
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             submitHandler={handleContinueClick}
         />

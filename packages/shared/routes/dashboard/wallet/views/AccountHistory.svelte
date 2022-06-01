@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Drawer, Icon, Text, Input } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
+    import { mobile } from 'shared/lib/app'
     import {
         api,
         isSyncing,
@@ -22,10 +23,16 @@
     import { debounce, unitToValue, isValueInUnitRange } from 'shared/lib/utils'
     import { formatUnitBestMatch } from 'shared/lib/units'
 
+    export let classes = ''
     export let transactions: AccountMessage[] = []
+
+    let drawer: Drawer
 
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
+        if ($mobile) {
+            drawer.open()
+        }
     }
 
     function handleBackClick(): void {
@@ -152,9 +159,9 @@
     }
 </script>
 
-<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0 {classes}">
     <div class="mb-5">
-        {#if $selectedMessage}
+        {#if $selectedMessage && !$mobile}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
                 <Text type="h5">{localize('general.transactions')}</Text>
@@ -165,7 +172,7 @@
                     {localize('general.transactions')}
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
-                {#if !$selectedMessage}
+                {#if !$selectedMessage || $mobile}
                     <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                         <Icon
                             icon="refresh"
@@ -212,7 +219,7 @@
             </div>
         {/if}
     </div>
-    {#if $selectedMessage}
+    {#if $selectedMessage && !$mobile}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
@@ -230,3 +237,10 @@
         </div>
     {/if}
 </div>
+{#if $selectedMessage && $mobile}
+    <Drawer opened={true} bind:this={drawer} classes="" onClose={() => handleBackClick()}>
+        <div class="overflow-y-auto h-2/3 space-y-2.5">
+            <ActivityDetail {...$selectedMessage} />
+        </div>
+    </Drawer>
+{/if}

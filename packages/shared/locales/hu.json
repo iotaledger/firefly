@@ -521,7 +521,8 @@
                     "commencing": "Előzetes letétbe helyezés elérhető",
                     "holding": "{duration} maradt hátra a staking eseményből",
                     "ended": "A staking véget ért",
-                    "inactive": "Nincs staking esemény"
+                    "inactive": "Nincs staking esemény",
+                    "fetching": "Staking esemény információk lekérése..."
                 },
                 "bodies": {
                     "upcoming": "Helyezze letétbe {token} tokenjeit, hogy 10 másodpercenként jutalmat kapjon, amint a staking elkezdődik ({date}).",
@@ -558,6 +559,87 @@
                 "title": "Színválasztó",
                 "hexCode": "Színkód"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Szavazatom súlya",
+                "info": {
+                    "title": "Szavazatának súlya",
+                    "equality": "1000 IOTA = 1 SZAVAZAT",
+                    "description1": "A szavazatának súlyát a tárcájának egyenlege határozza meg. Amikor egy szavazatra bocsátott javaslat szavazatszámlálási fázisban van, akkor az aktív szavazatokat összeszámoljuk és 10 másodpercenként összegezzük.",
+                    "description2": "1 Ki (1000 IOTA token) 1 szavazatot tesz lehetővé 10 másodpercenként. Ha a teljes szavazati potenciálját szeretné kihasználni, akkor a szavazatszámlálás teljes ideje alatt hagyja szavazatát aktívan."
+                }
+            },
+            "info": {
+                "title": "Kormányzati információk",
+                "description": "Az IOTA Foundation segítségével az IOTA közösség kifejlesztett egy IOTA szavazati protokollt, amelynek révén részt vehet kormányzati döntésekben a Firefly tárcájában levő IOTA tokenjeivel.",
+                "link": "Tudjon meg többet az IOTA-val való szavazásról",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Szavazás kezdete",
+                        "countingStarts": "Szavazatok számlálásának kezdete",
+                        "countingStops": "Szavazatok számlálásának vége",
+                        "votingOpened": "Szavazás kezdete",
+                        "countingStarted": "Szavazatok számlálásának kezdete",
+                        "countingStopped": "Szavazatok számlálásának vége"
+                    },
+                    "votingRate": {
+                        "title": "Szavazati arány",
+                        "body": "{amount} lehetővé tesz {votesPerMilestone} szavazatot minden {time, plural, one {másodpercben} other {#. másodpercben}}."
+                    },
+                    "countedVotes": {
+                        "title": "Összesített szavazatok",
+                        "body": "A szavazatokat minden {time, plural, one {másodpercben} other {#. másodpercben}} összegezzük a szavazatszámlálás ideje alatt. {amount} lehetővé tesz {votesPerMilestone} szavazatot minden {time, plural, one {másodpercben} other {#. másodpercben}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Új nem használt egyenleg: {amount}",
+                        "body": "Újabb összeg érkezett a(z) {account} számlára. A tokenekkel úgy tud szavazni, ha a meglévő szavazatához hozzáadja őket."
+                    },
+                    "maximumVotes": {
+                        "title": "Szavazatok maximális száma",
+                        "body": "A hátralévő szavazatszámlálási ideig aktívan szavaznia kell, hogy a lehető legnagyobb súllyal szavazhasson."
+                    },
+                    "chart": {
+                        "totalVotes": "Szavazatok: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Közlemények",
+                    "commencing": "Szavazás kezdete",
+                    "holding": "Szavazatszámlálás",
+                    "ended": "Vége"
+                },
+                "button": "Javaslat megtekintése",
+                "treasury": {
+                    "notFound": {
+                        "title": "A Közösségi Kincstár szavazást nem sikerült betölteni",
+                        "subtitle": "Kérjük csatlakozzon egy olyan csomóponthoz, amely részt vesz ezen szavazás lebonyolításában",
+                        "buttonConnect": "Csatlakozás alapértelmezett csomóponthoz",
+                        "buttonSettings": "Csomóponti beállítások megtekintése",
+                        "fetching": "Kormányzati esemény információ lekérése..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Szavazás kezdete",
+                "votingProgress": "Hátralévő idő",
+                "votingPower": "Szavazatának súlya",
+                "votesCounted": "Eddig megszámolt szavazatainak száma",
+                "maximumVotes": "Szavazatainak maximimális száma",
+                "countingStarts": "Szavazatok számlálásának kezdete",
+                "currentResult": "Jelenlegi eredmények",
+                "finalResult": "Végeredmény",
+                "answerHeader": {
+                    "activeVoting": "Aktív szavazás",
+                    "selected": "Benyújtott",
+                    "notSelected": "Nincs kiválasztva",
+                    "winner": "Győztes"
+                }
+            },
+            "votes": "szavazatok",
+            "manageVote": "Szavazatok kezelése"
         }
     },
     "popups": {
@@ -670,8 +752,14 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése",
-            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
-            "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat."
+            "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
+            "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat. Lehetséges, hogy újból kell szavaznia is.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve és szavazásban vesz részt. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve és nem vesznek részt szavazásban. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie és újra szavaznia kell majd.",
+                "stake": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
+                "vote": "Olyan tárcából kíván küldeni, amely jelenleg szavazásban vesz részt. Ez azzal járhat, hogy a továbbiakban tokenjei nem vesznek részt szavazásban. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeggel valószínűleg újra szavaznia kell majd."
+            }
         },
         "balanceFinder": {
             "title": "Egyenlegkereső",
@@ -774,6 +862,33 @@
             "title": "{periodNumber}. staking fázis ({date})",
             "body": "Az IOTA staking ASMB token jutalomért folytatódik. Vegyen részt a {periodNumber}. fázisban 90 napig.",
             "info": "A Shimmer staking véget ért. Csak ASMB tokeneket fog jutalmul kapni."
+        },
+        "governanceManager": {
+            "castYourVote": "Szavazzon",
+            "castYourVoteInfo": "A(z) {voteValue} ({voteText}) lehetőségre készül szavazni {amount} összeggel",
+            "castingVotes": "Szavazás",
+            "stopVoting": "Szavazat felfüggesztése",
+            "stopVotingInfo": "Biztosan felfüggeszti a {voteValue} ({voteText}) lehetőségre leadott szavazatát?",
+            "stopVotingDisclaimer": "Kérjük vegye figyelembe, hogy a szavazatszámlálás ideje alatt felfüggesztett szavazás a már összeszámolt szavazatokat nem fogja érinteni",
+            "stoppingVoting": "Szavazat felfüggesztése folyamatban",
+            "changeVote": "Szavazás megváltoztatása",
+            "changeVoteDisclaimer": "Kérjük vegye figyelembe, hogy a szavazatszámlálás ideje alatt megváltoztatott szavazás a már összeszámolt szavazatokat nem fogja érinteni",
+            "changeVoteInfo": "Biztosan megváltoztatja szavazatát a {voteValue} ({voteText}) lehetőségre?",
+            "changingVote": "Szavazás megváltoztatása",
+            "manageVotes": "Szavazatok kezelése",
+            "partialVoteInfo": "{amount} összeg érkezett a(z) {account} számlájára. Az új összeggel úgy tud szavazni, hogy azt hozzáadja jelenlegi szavazatához.",
+            "mergeVoteDisclaimer": "Kérjük vegye figyelembe, hogy az újonnan hozzáadott összeg a korábban már összeszámolt szavazatokat nem fogja érinteni",
+            "mergingVotes": "Szavazatok összevonása",
+            "votedSuccessfully": "A szavazást sikeresen megkezdte a(z) {account} számláján.",
+            "unvotedSuccessfully": "A szavazást befejezte a(z) {account} számláján.",
+            "successPopup": {
+                "castVotesTitle": "Sikeresen szavazott",
+                "stopVotesTitle": "Szavazás felfüggesztve",
+                "mergeVotesTitle": "Szavazatok összevonva",
+                "changeVotesTitle": "Szavazat megváltoztatva",
+                "castBody": "Jelenleg a {voteValue} ({voteText}) lehetőségre szavaz.",
+                "stopBody": "A szavazást felfüggesztette. Ez nem nem érinti a már korábban összeszámolt szavazatokat."
+            }
         },
         "shimmer-info": {
             "title": "Shimmerről",
@@ -931,6 +1046,10 @@
         "merge": "Összevonás",
         "mergeFunds": "Egyenlegek összevonása",
         "done": "Kész",
+        "castVotes": "Szavazás",
+        "changeVotes": "Szavazás megváltoztatása",
+        "mergeVotes": "Szavazatok összevonása",
+        "stopVotes": "Szavazat felfüggesztése",
         "okIUnderstand": "Rendben, értem",
         "readMore": "Bővebben"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Egyenlegátvezetés folyamatban {account} számlára",
         "transferFrom": "Egyenlegátvezetés {account} számláról",
         "transferTo": "Egyenlegátvezetés {account} számlára",
-        "stakedFor": "{account} letétbe helyezve",
-        "unstakedFor": "{account} letétből kivéve",
-        "votedFor": "{account} szavazott",
-        "unvotedFor": "{account} szavazat visszavonva",
         "stakingTransaction": "Staking tranzakció",
         "unstakingTransaction": "Staking visszavonás tranzakció",
+        "votingTransaction": "Szavazás tranzakció",
+        "unvotingTransaction": "Szavazás felfüggesztés tranzakció",
+        "participationTransaction": "Részvétel tranzakció",
         "receiving": "Fogadás...",
         "sending": "Küldés...",
         "legacyNetwork": "Régi hálózat",
@@ -1072,14 +1190,19 @@
         "unknown": "Ismeretlen",
         "none": "Nincs",
         "staked": "Letétbe helyezve",
+        "voted": "Szavazott",
         "unstaked": "Letétből kivéve",
+        "unvoted": "Nem szavazott",
         "staking": "Staking",
         "unstaking": "Letétből kivétel folyamatban",
         "notStaked": "Nincs letétben",
         "stakedFunds": "Letétbe helyezett összeg",
         "unstakedFunds": "Letétben nem lévő összeg",
+        "voting": "Szavazás",
+        "unvoting": "Szavazás felfüggesztés",
         "accountColor": "Tárcaszín",
         "myAssets": "Pénzügyi eszközeim",
+        "option": "Lehetőségek",
         "total": "Összes egyenleg: {balance}"
     },
     "dates": {
@@ -1128,9 +1251,11 @@
                 }
             }
         },
-        "syncing": "Kérjük várja meg a szinkronizáció befejeződését a tárcák közti váltás előtt.",
-        "transferring": "Kérjük várja meg az összes tranzakció befejeződését a tárcák közti váltás előtt.",
-        "participating": "Kérjük várja meg az összes staking/szavazás tranzakció befejeződését a tárcák közti váltás előtt."
+        "syncing": "Kérjük várja meg a szinkronizáció befejeződését mielőtt másik tárcára vált.",
+        "transferring": "Kérjük várja meg az összes tranzakció befejeződését mielőtt másik tárcára vált.",
+        "participating": "Kérjük várja meg amíg befejezi a letétbe helyezést / szavazást mielőtt másik tárcára vált.",
+        "transferringCreate": "Kérjük várja meg az összes tranzakció befejeződését mielőtt új tárcát hoz létre.",
+        "participatingCreate": "Kérjük várja meg amíg befejezi a letétbe helyezést / szavazást mielőtt új tárcát hoz létre."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Tárca",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Kormányzás"
     }
 }

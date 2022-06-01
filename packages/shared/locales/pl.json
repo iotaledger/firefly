@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Zweryfikuj swój kod PIN",
             "body1": "Twój PIN zabezpiecza Twoje środki oraz transakcje.",
-            "body2": "Wprowadź kod PIN ponownie, aby kontynuować. "
+            "body2": "Wprowadź kod PIN ponownie, aby kontynuować."
         },
         "backup": {
             "title": "Utwórz kopię zapasową portfela",
@@ -491,7 +491,7 @@
                 },
                 "backup": {
                     "title": "Utwórz backup portfeli",
-                    "lastBackup": "Ostatnią kopię wykonano {date}",
+                    "lastBackup": "Ostatnia kopia została wykonana {date}",
                     "notBackedUp": "Nie wykonano",
                     "button": "Utwórz kopię"
                 },
@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking dostępny",
                     "holding": "{duration} do końca stakingu",
                     "ended": "Staking został zakończony",
-                    "inactive": "Nie wykryto wydarzeń stakingu"
+                    "inactive": "Nie wykryto wydarzeń stakingu",
+                    "fetching": "Ładowanie informacji o wydarzeniu stakingu..."
                 },
                 "bodies": {
                     "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Łączna ilość nagród w portfelu",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly jest wysoce skalowalną, wielołańcuchową siecią typu permissionless. Służy do budowania i wdrażania złożonych smart kontraktów. Assembly jest przyszłością web3. "
+                    "description": "Assembly jest wysoce skalowalną, wielołańcuchową siecią typu permissionless. Służy do budowania i wdrażania złożonych smart kontraktów. Assembly jest przyszłością web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Wybór koloru",
                 "hexCode": "Kod koloru HEX"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Waga mojego głosu",
+                "info": {
+                    "title": "Waga Twojego głosu",
+                    "equality": "1000 IOTA = 1 GŁOS",
+                    "description1": "Waga głosu zależy od stanu Twojego portfela. Gdy wydarzenie znajduje się w fazie zliczania głosów, aktywne głosy są zliczane i kumulowane co 10 sekund.",
+                    "description2": "1 Ki wagi głosu (1000 tokenów IOTA) daje 1 głos co 10 sekund. Oznacza to, że musisz głosować przez cały okres zliczania, aby oddać pełną wagę swojego głosu."
+                }
+            },
+            "info": {
+                "title": "Informacje o zarządzaniu",
+                "description": "Z pomocą Fundacji IOTA, społeczność opracowała protokół głosowania, umożliwiający udział w podejmowaniu decyzji dotyczących zarządzania. Głosowanie odbywa się przy pomocy tokenów IOTA w portfelu Firefly.",
+                "link": "Więcej o głosowaniu przy użyciu IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Głosowanie otwarte",
+                        "countingStarts": "Rozpoczęcie zliczania",
+                        "countingStops": "Zakończenie zliczania",
+                        "votingOpened": "Otwarto głosowanie",
+                        "countingStarted": "Rozpoczęto zliczanie",
+                        "countingStopped": "Zakończono zliczanie"
+                    },
+                    "votingRate": {
+                        "title": "Tempo głosowania",
+                        "body": "{amount} wygeneruje {votesPerMilestone} głosów co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}."
+                    },
+                    "countedVotes": {
+                        "title": "Zliczone głosy",
+                        "body": "Głosy są zliczane co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}} przez cały okres zliczania. {amount} generuje {votesPerMilestone} głosów co {time, plural, one {# sekundę} few {# sekundy} many {# sekund} other {# sekund}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Nowe nieużyte środki: {amount}",
+                        "body": "Otrzymałeś dodatkowe środki na {account}. Możesz głosować za pomocą tych tokenów poprzez dołączenie swojego głosu."
+                    },
+                    "maximumVotes": {
+                        "title": "Maksymalna liczba głosów",
+                        "body": "Aby oddać maksymalną liczbę głosów, musisz kontynuować głosowanie przez cały pozostały okres zliczania."
+                    },
+                    "chart": {
+                        "totalVotes": "Głosy: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Nadchodzące głosowanie",
+                    "commencing": "Głosowanie otwarte",
+                    "holding": "Zliczanie głosów",
+                    "ended": "Głosowanie zakończone"
+                },
+                "button": "Wyświetl propozycję",
+                "treasury": {
+                    "notFound": {
+                        "title": "Nie można załadować głosu Community Treasury",
+                        "subtitle": "Połącz się z serwerem, który dodał ten głos",
+                        "buttonConnect": "Połącz z domyślnym serwerem",
+                        "buttonSettings": "Wyświetl ustawienia serwera",
+                        "fetching": "Ładowanie informacji o wydarzeniu zarządzania..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Rozpoczęcie głosowania",
+                "votingProgress": "Pozostały czas",
+                "votingPower": "Waga Twojego głosu",
+                "votesCounted": "Twoje zliczone głosy",
+                "maximumVotes": "Maksymalna liczba Twoich głosów",
+                "countingStarts": "Rozpoczęcie zliczania",
+                "currentResult": "Aktualny wynik",
+                "finalResult": "Wynik końcowy",
+                "answerHeader": {
+                    "activeVoting": "Aktywnie głosujesz na ten wybór",
+                    "selected": "Wybrano",
+                    "notSelected": "Nie wybrano",
+                    "winner": "Zwycięzca"
+                }
+            },
+            "votes": "głosów",
+            "manageVote": "Zarządzaj głosem"
         }
     },
     "popups": {
@@ -580,7 +662,7 @@
         },
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
-            "lastBackup": "Ostatnią kopię wykonano {date}",
+            "lastBackup": "Ostatnia kopia została wykonana {date}",
             "backupDescription": "Regularne wykonywanie kopii zapasowej jest bardzo ważne. Mamy wtedy pewność co do bezpieczeństwa swoich portfeli oraz historii transakcji.",
             "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano",
@@ -671,7 +753,13 @@
             "title": "Potwierdzanie transakcji",
             "body": "Zamierzasz wysłać {amount} do",
             "sendingFromStakedAccount": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
-            "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu."
+            "sendingFromStakedAccountBelowMinReward": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny i możesz stracić nagrody za staking na tym portfelu.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Wysyłasz przelew z portfela, który nie osiągnął jeszcze minimalnej wysokości nagrody za stakowanie. Ta operacja może odstakować Twoje tokeny, zatrzymać głosowanie, a także spowodować utratę nagrody za staking na tym portfelu.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Wysyłasz przelew z portfela, który obecnie stakuje i głosuje. Może to spowodować wycofanie Twoich tokenów z głosowania i stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego oddania głosu oraz stakingu przy użyciu pozostałych środków.",
+                "stake": "Wysyłasz przelew z portfela, który jest obecnie stakowany. Może to spowodować wycofanie Twoich tokenów ze stakingu. Możesz dokonać transferu, ale może zajść potrzeba ponownego stakingu pozostałych środków.",
+                "vote": "Wysyłasz przelew z portfela, który obecnie głosuje. Może to spowodować wycofanie Twoich tokenów z głosowania. Możesz dokonać transferu, ale może zajść potrzeba ponownego oddania głosu przy użyciu pozostałych środków."
+            }
         },
         "balanceFinder": {
             "title": "Wyszukiwarka środków",
@@ -774,6 +862,33 @@
             "title": "Start {periodNumber} rundy stakingu - {date}",
             "body": "Kontynuujemy staking IOTA w zamian za tokeny Assembly... Weź udział w {periodNumber} rundzie przez okres 90 dni. Stakuj swoje tokeny IOTA i zdobądź nagrody ASMB!\n",
             "info": "Staking Shimmer został zakończony. Od teraz będziesz otrzymywać jedynie tokeny ASMB."
+        },
+        "governanceManager": {
+            "castYourVote": "Oddaj swój głos",
+            "castYourVoteInfo": "Zamierzasz zagłosować na Wybór {voteValue} ({voteText}) wagą głosu {amount}",
+            "castingVotes": "Głosowanie",
+            "stopVoting": "Zatrzymaj głosowanie",
+            "stopVotingInfo": "Czy na pewno chcesz przestać głosować na Wybór {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Pamiętaj, że przerwanie głosowania w okresie zliczania głosów nie będzie miało wpływu na głosy, które zostały już policzone",
+            "stoppingVoting": "Zatrzymywanie głosowania",
+            "changeVote": "Zmień głos",
+            "changeVoteDisclaimer": "Pamiętaj, że zmiana głosu w trakcie zliczania głosów nie będzie miała wpływu na głosy, które zostały już policzone",
+            "changeVoteInfo": "Czy na pewno chcesz zmienić swój głos na Wybór {voteValue} ({voteText})?",
+            "changingVote": "Zmienianie wyboru",
+            "manageVotes": "Zarządzaj głosami",
+            "partialVoteInfo": "Otrzymałeś {amount} na {account}. Możesz zagłosować tymi środkami poprzez dołączenie ich do aktualnego głosu.",
+            "mergeVoteDisclaimer": "Pamiętaj, że dołączenie głosów nie będzie miało wpływu na głosy, które zostały już policzone",
+            "mergingVotes": "Dołączanie głosów",
+            "votedSuccessfully": "Zacząłeś głosować ({account}).",
+            "unvotedSuccessfully": "Przestałeś głosować z użyciem {account}.",
+            "successPopup": {
+                "castVotesTitle": "Zagłosowano pomyślnie",
+                "stopVotesTitle": "Głosowanie zatrzymane",
+                "mergeVotesTitle": "Głos dołączony",
+                "changeVotesTitle": "Głos zmieniony",
+                "castBody": "Głosujesz teraz za Wyborem {voteValue} ({voteText}).",
+                "stopBody": "Przestałeś głosować. To nie ma wpływu na głosy, które zostały już policzone."
+            }
         },
         "shimmer-info": {
             "title": "O Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Dołącz",
         "mergeFunds": "Dołącz środki",
         "done": "Gotowe",
+        "castVotes": "Głosuj",
+        "changeVotes": "Zmień głos",
+        "mergeVotes": "Dołącz głos",
+        "stopVotes": "Zatrzymaj głosowanie",
         "okIUnderstand": "OK, rozumiem",
         "readMore": "Czytaj więcej"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Transferowanie do {account}",
         "transferFrom": "Transfer z {account}",
         "transferTo": "Transfer do {account}",
-        "stakedFor": "Stakowano {account}",
-        "unstakedFor": "Odstakowano {account}",
-        "votedFor": "Zagłosowano przez {account}",
-        "unvotedFor": "Wycofano głos przez {account}",
         "stakingTransaction": "Transakcja stakingu",
         "unstakingTransaction": "Transakcja unstakingu",
+        "votingTransaction": "Transakcja głosowania",
+        "unvotingTransaction": "Zatrzymanie głosowania",
+        "participationTransaction": "Transakcja uczestnictwa",
         "receiving": "Odbieranie",
         "sending": "Wysyłanie",
         "legacyNetwork": "Poprzednia sieć",
@@ -1072,14 +1190,19 @@
         "unknown": "Brak informacji",
         "none": "Brak",
         "staked": "Stakowano",
+        "voted": "Zagłosowano",
         "unstaked": "Niestakowane",
+        "unvoted": "Zatrzymano głos",
         "staking": "Staking",
-        "unstaking": "Wycofywanie środków",
+        "unstaking": "Unstaking środków",
         "notStaked": "Nie stakujesz",
         "stakedFunds": "Stakowane środki",
         "unstakedFunds": "Niestakowane środki",
+        "voting": "Głosowanie",
+        "unvoting": "Wycofywanie głosu",
         "accountColor": "Kolor portfela",
         "myAssets": "Moje środki",
+        "option": "Wybór",
         "total": "Suma: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
         "transferring": "Poczekaj, aż wszystkie transakcje zostaną zakończone, aby zmienić portfele.",
-        "participating": "Poczekaj, aż wszystkie transakcje stakingu/głosowania zostaną zakończone, aby zmienić portfele."
+        "participating": "Przed zmianą portfela należy poczekać aż transakcje stakingu/głosowania zostaną sfinalizowane.",
+        "transferringCreate": "Przed dodaniem nowego portfela należy poczekać, aż wszystkie transakcje zostaną sfinalizowane.",
+        "participatingCreate": "Przed dodaniem nowego portfela należy poczekać aż transakcje stakingu/głosowania zostaną sfinalizowane."
     },
     "error": {
         "profile": {
@@ -1254,7 +1379,7 @@
             "cannotFindStakingEvent": "Nie można znaleźć wydarzenia stakingu.",
             "cannotVisitAirdropWebsite": "Nie można otworzyć strony {airdrop}.",
             "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu.",
-            "failedToFetchPreviousRewards": "Nie udało się pobrać informacji o poprzednich nagrodach, sprawdź ustawienia zapory."
+            "failedToFetchPreviousRewards": "Nie udało się załadować informacji o poprzednich nagrodach, sprawdź ustawienia zapory."
         },
         "invalidDate": "NIEPRAWIDŁOWA DATA",
         "invalidTime": "NIEPRAWIDŁOWY CZAS"
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Portfel",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Zarządzanie"
     }
 }

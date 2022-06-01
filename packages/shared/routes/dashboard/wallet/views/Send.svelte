@@ -477,7 +477,7 @@
 
 <div class="w-full h-full flex flex-col justify-between p-6">
     <div>
-        <div class="flex flex-row w-full justify-between mb-6">
+        <div class="flex flex-row w-full justify-between {$mobile ? 'mb-9' : 'mb-6'}">
             <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
@@ -512,13 +512,14 @@
             </div>
             <div class="flex flex-row space-x-4">
                 {#if $mobile}
-                    <button on:click={onQRClick}>
+                    <button on:click={onQRClick} style={selectedSendType === SEND_TYPE.INTERNAL && 'opacity: 0'}>
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
+                {:else}
+                    <button on:click={handleBackClick}>
+                        <Icon icon="close" classes="text-gray-800 dark:text-white" />
+                    </button>
                 {/if}
-                <button on:click={handleBackClick}>
-                    <Icon icon="close" classes="text-gray-800 dark:text-white" />
-                </button>
             </div>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
@@ -542,9 +543,11 @@
                             bind:address
                             label={localize('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
-                            classes="mb-6"
-                            autofocus
+                            placeholder={`${localize('general.sendToAddress')}${
+                                $mobile ? ': ' : '\n'
+                            }${addressPrefix}...`}
+                            classes={$mobile ? 'mb-6' : 'mb-6'}
+                            autofocus={!$mobile}
                         />
                     {/if}
                     <Amount
@@ -553,14 +556,14 @@
                         bind:unit
                         onMaxClick={handleMaxClick}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2 && !$mobile}
                     />
                 </div>
             </div>
         </div>
     </div>
     {#if !$isTransferring}
-        <div class="flex flex-row justify-between px-2">
+        <div class="{$mobile && 'mt-8'} flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                 {localize('actions.cancel')}
             </Button>
@@ -569,6 +572,7 @@
     {/if}
     {#if $isTransferring}
         <ProgressBar
+            classes={$mobile && 'my-6'}
             preloading={!$transferState}
             secondary
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}

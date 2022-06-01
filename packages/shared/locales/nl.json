@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Verifieer je PIN-code",
             "body1": "Uw pincode houdt uw saldo en transacties privé.",
-            "body2": "Voer uw PIN-code opnieuw in om door te gaan. "
+            "body2": "Voer je PIN code opnieuw in."
         },
         "backup": {
             "title": "Maak een back-up van je wallet",
@@ -521,7 +521,8 @@
                     "commencing": "Pre-staking is open",
                     "holding": "{duration} van staking resterend",
                     "ended": "Staking is nu beëindigd",
-                    "inactive": "Geen staking gebeurtenissen gedetecteerd"
+                    "inactive": "Geen staking gebeurtenissen gedetecteerd",
+                    "fetching": "Ophalen staking event info..."
                 },
                 "bodies": {
                     "upcoming": "Stake je {token} tokens om elke 10 seconden automatisch beloningen te ontvangen zodra het staken start op {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Totale portemonnee beloningen",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is een vrij toegankelijk, schaalbaar multi-chain netwerk voor het bouwen en uitrollen van configureerbare smart contracts. Assembly is de toekomst van web3. "
+                    "description": "Assembly is een vrij toegankelijk, schaalbaar multi-chain netwerk voor het bouwen en uitrollen van configureerbare smart contracts. Assembly is de toekomst van web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Kleur kiezer",
                 "hexCode": "Kleur hex code"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Mijn stemgewicht",
+                "info": {
+                    "title": "Jouw stemgewicht",
+                    "equality": "1000 IOTA = 1 STEM",
+                    "description1": "Je stemgewicht is afgeleid van je portemonnee balans. Wanneer een stemvoorstel zich in de Tel fase bevindt, worden de actieve stemmen geteld en om de tien seconden verzameld.",
+                    "description2": "1 Ki van stemgewicht (1000 IOTA tokens) geeft 1 stem per 10s. Dit betekent dat u moet blijven stemmen voor de volledige duur van de tellingsfase om uw volledige stemgewicht te bereiken."
+                }
+            },
+            "info": {
+                "title": "Bestuur informatie",
+                "description": "Met behulp van de IOTA Foundation, heeft de IOTA community een IOTA protocol om te stemmen ontwikkeld. Die laat je toe om deel te nemen aan beleidsbeslissingen door te stemmen met je IOTA tokens in Firefly.",
+                "link": "Leer meer over stemmen met IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Stemmen open",
+                        "countingStarts": "Begin telling",
+                        "countingStops": "Tellen eindigt",
+                        "votingOpened": "Stemmen geopend",
+                        "countingStarted": "Tellen begonnen",
+                        "countingStopped": "Tellen geeindigd"
+                    },
+                    "votingRate": {
+                        "title": "Stem snelheid",
+                        "body": "{amount} zal {votesPerMilestone} stemmen per {time, plural, one {# second} other {# seconds}} genereren."
+                    },
+                    "countedVotes": {
+                        "title": "Getelde stemmen",
+                        "body": "Stemmen worden geteld op {time, plural, one {# seconde} other {# seconden}} intervallen gedurende de Tel periode. {amount} genereert {votesPerMilestone} stemmen elke {time, plural, one {# seconde} other {# seconden}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Nieuw ongebruikt saldo: {amount}",
+                        "body": "U heeft extra Iota-tokens ontvangen op {account}. U kunt deze samenvoegen met uw huidige tokens, om ze mee te laten tellen in de stemronde."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximaal aantal stemmen",
+                        "body": "Je moet blijven stemmen voor de resterende stem periode om jouw maximum aantal stemmen te laten tellen."
+                    },
+                    "chart": {
+                        "totalVotes": "Stemmen: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Aankondiging",
+                    "commencing": "Stemmen open",
+                    "holding": "Telling",
+                    "ended": "Afgelopen"
+                },
+                "button": "Bekijk voorstel",
+                "treasury": {
+                    "notFound": {
+                        "title": "Niet in staat om Community Treasury stem te laden",
+                        "subtitle": "Verbind met een node die deze stem heeft toegevoegd",
+                        "buttonConnect": "Verbinden met standaard node",
+                        "buttonSettings": "Bekijk node instellingen",
+                        "fetching": "Ophalen bestuursevent info..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Stemmen opent op",
+                "votingProgress": "Resterende tijd",
+                "votingPower": "Jouw stemgewicht",
+                "votesCounted": "Je getelde stemmen",
+                "maximumVotes": "Je maximum aantal stemmen",
+                "countingStarts": "Telling begint op",
+                "currentResult": "Huidig stemresultaat",
+                "finalResult": "Eindtelling",
+                "answerHeader": {
+                    "activeVoting": "Stemmen actief",
+                    "selected": "Verzonden",
+                    "notSelected": "Niet geselecteerd",
+                    "winner": "Winnaar"
+                }
+            },
+            "votes": "stemmen",
+            "manageVote": "Verander je stem"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Bevestig transactie",
             "body": "U staat op het punt {amount} te sturen naar",
             "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
-            "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest."
+            "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest. Je zal misschien ook opnieuw moeten stemmen.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "U wilt een transactie versturen vanuit een portomonee die op dit moment ook gebruikt wordt om te staken en/of te stemmen. Dit zou uw staking en uw stemming kunnen stoppen. U kunt de transactie versturen, maar daarna zult u uw overgebleven tokens zelf weer opnieuw moeten activeren voor het staken en/of het stemmen.",
+                "stake": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
+                "vote": "Je verstuurt een overschrijving vanuit een portemonnee die momenteel aan het stemmen is. Dit kan je stem stoppen. Voel je vrij om de transfer te verzenden, maar je moet misschien later opnieuw stemmen met je resterende tokens achteraf."
+            }
         },
         "balanceFinder": {
             "title": "Saldo zoeker",
@@ -774,6 +862,33 @@
             "title": "Staking fase {periodNumber} van {date}",
             "body": "IOTA staking voor Assembly gaat verder... Neem deel aan fase {periodNumber} voor 90 dagen. Stake je IOTA tokens en verdien ASMB beloningen!",
             "info": "Shimmer staking is nu voltooid en alleen ASMB tokens worden verdeeld."
+        },
+        "governanceManager": {
+            "castYourVote": "Breng je stem uit",
+            "castYourVoteInfo": "U staat op het punt te stemmen voor Optie {voteValue} ({voteText}) met {amount}",
+            "castingVotes": "Aan het stemmen",
+            "stopVoting": "Stoppen met stemmen",
+            "stopVotingInfo": "Weet u zeker dat u wilt stoppen met stemmen voor Optie {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Houd er rekening mee dat het stoppen met stemmen tijdens de tel periode geen invloed heeft op de stemmen die al geteld zijn",
+            "stoppingVoting": "Stoppen met stemmen",
+            "changeVote": "Verander je stem",
+            "changeVoteDisclaimer": "Houd er rekening mee dat het wijzigen van je stem tijdens de tel periode geen invloed heeft op de stemmen die al geteld zijn",
+            "changeVoteInfo": "Weet u zeker dat u uw stem wilt wijzigen in {voteValue} ({voteText})?",
+            "changingVote": "Veranderen van stem",
+            "manageVotes": "Beheer stemmen",
+            "partialVoteInfo": "Je hebt {amount} in {account} ontvangen. Je kunt met deze fondsen stemmen door ze samen te voegen met je huidige stem.",
+            "mergeVoteDisclaimer": "Let op dat het samenvoegen van stemmen geen invloed heeft op de stemmen die al geteld zijn",
+            "mergingVotes": "Stemmen samenvoegen",
+            "votedSuccessfully": "Je bent begonnen te stemmen met {account}.",
+            "unvotedSuccessfully": "Je bent gestopt met stemmen met {account}.",
+            "successPopup": {
+                "castVotesTitle": "Succesvol gestemd",
+                "stopVotesTitle": "Stemmen gestopt",
+                "mergeVotesTitle": "Stem samengevoegd",
+                "changeVotesTitle": "Stem gewijzigd",
+                "castBody": "U stemt nu voor Optie {voteValue} ({voteText}).",
+                "stopBody": "U bent gestopt met stemmen. Dit heeft geen invloed op stemmen die al geteld zijn."
+            }
         },
         "shimmer-info": {
             "title": "Over Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Samenvoegen",
         "mergeFunds": "Samenvoegen saldo",
         "done": "Voltooid",
+        "castVotes": "Uitbrengen stemmen",
+        "changeVotes": "Verander je stem",
+        "mergeVotes": "Stem samenvoegen",
+        "stopVotes": "Stoppen met stemmen",
         "okIUnderstand": "OK, ik begrijp het",
         "readMore": "Lees meer"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Bezig met overboeken naar {account}",
         "transferFrom": "Overboeking van {account}",
         "transferTo": "Overboeking naar {account}",
-        "stakedFor": "Staked voor {account}",
-        "unstakedFor": "Niet gestaket voor {account}",
-        "votedFor": "Gestemd op {account}",
-        "unvotedFor": "Niet gestemd voor {account}",
         "stakingTransaction": "Staking transactie",
         "unstakingTransaction": "Unstaking transactie",
+        "votingTransaction": "Stem Transactie",
+        "unvotingTransaction": "Stop Stem Transactie",
+        "participationTransaction": "Deelname Transactie",
         "receiving": "Ontvangen",
         "sending": "Verzenden",
         "legacyNetwork": "Verouderd netwerk",
@@ -1072,14 +1190,19 @@
         "unknown": "Onbekend",
         "none": "Geen",
         "staked": "Gestaket",
+        "voted": "Gestemd",
         "unstaked": "Niet gestaket",
+        "unvoted": "Niet gestemd",
         "staking": "Staken",
         "unstaking": "Stoppen met staken",
         "notStaked": "Niet gestaked",
         "stakedFunds": "Gestaketet saldo",
         "unstakedFunds": "Niet ingezet saldo",
+        "voting": "Stemmen",
+        "unvoting": "Niet stemmen",
         "accountColor": "Kleur portemonnee",
         "myAssets": "Mijn bezittingen",
+        "option": "Optie",
         "total": "Totaal: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Wacht tot de synchronisatie is voltooid om portemonnees te wijzigen.",
         "transferring": "Wacht tot alle transacties zijn voltooid om portemonnees te veranderen.",
-        "participating": "Wacht tot alle staking/stem transacties zijn voltooid om de portemonnee te veranderen."
+        "participating": "Wacht tot u klaar bent met staken/stemmen voordat u van portemonnee wisselt.",
+        "transferringCreate": "Wacht tot alle transacties zijn voltooid voordat u een nieuwe portemonnee toevoegt.",
+        "participatingCreate": "Wacht tot u klaar bent met staken/stemmen voordat u een nieuwe portemonnee toevoegt."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Portemonnee",
-        "staking": "Staken"
+        "staking": "Staken",
+        "governance": "Bestuur"
     }
 }

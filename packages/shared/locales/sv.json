@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "Verifiera din PIN-kod",
             "body1": "Din PIN-kod håller ditt saldo och dina transaktioner privata.",
-            "body2": "Ange din PIN-kod igen för att fortsätta. "
+            "body2": "Ange din PIN-kod igen för att fortsätta."
         },
         "backup": {
             "title": "Säkerhetskopiera din plånbok",
@@ -521,7 +521,8 @@
                     "commencing": "För-staking öppen",
                     "holding": "{duration} av staking kvar",
                     "ended": "Staking har nu avslutats",
-                    "inactive": "Inga staking-event upptäckta"
+                    "inactive": "Inga staking-event upptäckta",
+                    "fetching": "Hämtar information om staking-event..."
                 },
                 "bodies": {
                     "upcoming": "Staka dina {token} tokens för att automatiskt få belöningar var tioende sekund när staking börjar den {date}.",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "Totala plånboksbelöningar",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly är ett tillståndsfritt, mycket skalbart multikedjenätverk för att bygga och distribuera sammansättningsbara smartkontrakt. Assembly är framtiden för web3. "
+                    "description": "Assembly är ett tillståndsfritt, mycket skalbart multikedjenätverk för att bygga och distribuera sammansättningsbara smartkontrakt. Assembly är framtiden för web3."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "Färgväljare",
                 "hexCode": "Färg hex-kod"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "Min röstningsvikt",
+                "info": {
+                    "title": "Din röstningsvikt",
+                    "equality": "1000 IOTA = 1 RÖST",
+                    "description1": "Din röstningsvikt kommer från ditt plånboksaldo. När ett röstningsförslag är i Räkningsfasen räknas och ackumuleras aktiva röster var 10: e sekund.",
+                    "description2": "1 Ki av röstningsvikt (1000 IOTA tokens) ger 1 röst var 10: e sekund. Detta innebär att du måste fortsätta att rösta under hela Räkningsfasen för att uppnå din fulla röstningsvikt."
+                }
+            },
+            "info": {
+                "title": "Styrningsinfo",
+                "description": "Med hjälp av IOTA Foundation har IOTA-communityn utvecklat ett IOTA-röstningsprotokoll, som låter dig delta i styrningsbeslut genom att rösta med dina IOTA tokens i Firefly.",
+                "link": "Lär dig om att rösta med IOTA",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "Röstning öppen",
+                        "countingStarts": "Räkningen börjar",
+                        "countingStops": "Räkningen slutar",
+                        "votingOpened": "Röstning öppnad",
+                        "countingStarted": "Räkningen började",
+                        "countingStopped": "Räkningen slutade"
+                    },
+                    "votingRate": {
+                        "title": "Röstningsfrekvens",
+                        "body": "{amount} kommer att generera {votesPerMilestone} röster var {time, plural, one {#:e sekund} other {#:e sekund}}."
+                    },
+                    "countedVotes": {
+                        "title": "Räknade röster",
+                        "body": "Röster räknas på {time, plural, one {# sekund} other {# sekunders}} intervaller under hela räkningsperioden. {amount} genererar {votesPerMilestone} röster var {time, plural, one {#:e sekund} other {#:e sekund}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "Nya oanvända tillgångar: {amount}",
+                        "body": "Du har mottagit ytterligare tillgångar till {account}. Du kan rösta med dessa tokens genom att slå ihop dessa med din nuvarande röstning."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximalt antal röster",
+                        "body": "Du måste fortsätta att rösta under den återstående räkningsperioden för att nå dina maximala röster."
+                    },
+                    "chart": {
+                        "totalVotes": "Röster: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "Meddelande",
+                    "commencing": "Röstning öppen",
+                    "holding": "Räknar",
+                    "ended": "Avslutad"
+                },
+                "button": "Visa förslag",
+                "treasury": {
+                    "notFound": {
+                        "title": "Det går inte att ladda röstningen gällande communityns kassa",
+                        "subtitle": "Vänligen anslut till en nod som har lagt till denna röstning",
+                        "buttonConnect": "Anslut till standardnod",
+                        "buttonSettings": "Visa nodinställningar",
+                        "fetching": "Hämtar information om styrnings-event..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "Röstning öppnar på",
+                "votingProgress": "Återstående tid",
+                "votingPower": "Din röstningsvikt",
+                "votesCounted": "Dina räknade röster",
+                "maximumVotes": "Dina maximala röster",
+                "countingStarts": "Räkningen börjar på",
+                "currentResult": "Nuvarande resultat",
+                "finalResult": "Slutgiltigt resultat",
+                "answerHeader": {
+                    "activeVoting": "Aktiv röstning",
+                    "selected": "Inskickad",
+                    "notSelected": "Ej vald",
+                    "winner": "Vinnare"
+                }
+            },
+            "votes": "röster",
+            "manageVote": "Hantera röst"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till",
             "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
-            "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
+            "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok. Du kan också behöva rösta igen.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "Du skickar en överföring från en plånbok som för närvarande används för staking och röstning. Detta kan innebära att dina tokens slutar stakas och att du stoppar din röstning. Fortsätt att skicka överföringen om du vill, men du kan behöva staka och rösta med dina återstående tokens på nytt.",
+                "stake": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
+                "vote": "Du skickar en överföring från en plånbok som för närvarande röstar. Detta kan stoppa din röstning. Fortsätt att skicka överföringen om du vill, men du kan behöva rösta igen med dina återstående tokens efteråt."
+            }
         },
         "balanceFinder": {
             "title": "Hitta saldo",
@@ -774,6 +862,33 @@
             "title": "Staking omgång {periodNumber} från {date}",
             "body": "IOTA staking för Assembly fortsätter.. Delta i omgång {periodNumber} under 90 dagar. Staka dina IOTA tokens och tjäna ASMB-belöningar!",
             "info": "Shimmer staking är nu avklarad och endast ASMB tokens kommer att distribueras."
+        },
+        "governanceManager": {
+            "castYourVote": "Lägg din röst",
+            "castYourVoteInfo": "Du är på väg att rösta på Alternativ {voteValue} ({voteText}) med {amount}",
+            "castingVotes": "Lägger röster",
+            "stopVoting": "Sluta rösta",
+            "stopVotingInfo": "Är du säker på att du vill sluta rösta på Alternativ {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Observera att stopp av röstning under räkningsperioden inte påverkar några röster som redan har räknats",
+            "stoppingVoting": "Stoppar röstning",
+            "changeVote": "Ändra röst",
+            "changeVoteDisclaimer": "Observera att ändring av din röst under räkningsperioden inte påverkar några röster som redan har räknats",
+            "changeVoteInfo": "Är du säker på att du vill ändra din röst till Alternativ {voteValue} ({voteText})?",
+            "changingVote": "Ändrar röst",
+            "manageVotes": "Hantera röster",
+            "partialVoteInfo": "Du har fått {amount} till {account}. Du kan rösta med dessa tillgångar genom att slå ihop dem med din nuvarande röst.",
+            "mergeVoteDisclaimer": "Observera att sammanslagning av röster inte påverkar röster som redan har räknats",
+            "mergingVotes": "Slår samman röster",
+            "votedSuccessfully": "Du har börjat rösta med {account}.",
+            "unvotedSuccessfully": "Du har slutat rösta med {account}.",
+            "successPopup": {
+                "castVotesTitle": "Röstade framgångsrikt",
+                "stopVotesTitle": "Röstning stoppad",
+                "mergeVotesTitle": "Röstning sammanfogad",
+                "changeVotesTitle": "Röstning ändrad",
+                "castBody": "Du röstar nu på Alternativ {voteValue} ({voteText}).",
+                "stopBody": "Du har slutat rösta. Detta påverkar inte röster som redan har räknats."
+            }
         },
         "shimmer-info": {
             "title": "Om Shimmer",
@@ -931,6 +1046,10 @@
         "merge": "Slå ihop",
         "mergeFunds": "Slå ihop tillgångar",
         "done": "Klar",
+        "castVotes": "Lägg röster",
+        "changeVotes": "Ändra röst",
+        "mergeVotes": "Sammanfoga röst",
+        "stopVotes": "Sluta rösta",
         "okIUnderstand": "OK, jag förstår",
         "readMore": "Läs mer"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "Överför till {account}",
         "transferFrom": "Överföring från {account}",
         "transferTo": "Överföring till {account}",
-        "stakedFor": "Stakade för {account}",
-        "unstakedFor": "Ej stakade för {account}",
-        "votedFor": "Röstade för {account}",
-        "unvotedFor": "Ej röstade för {account}",
         "stakingTransaction": "Staking-transaktion",
         "unstakingTransaction": "Unstaking-transaktion",
+        "votingTransaction": "Röstnings-transaktion",
+        "unvotingTransaction": "Avröstnings-transaktion",
+        "participationTransaction": "Deltagande-transaktion",
         "receiving": "Tar emot",
         "sending": "Skickar",
         "legacyNetwork": "Ursprungliga nätverket",
@@ -1072,14 +1190,19 @@
         "unknown": "Okänd",
         "none": "Ingen",
         "staked": "Stakad",
+        "voted": "Röstat",
         "unstaked": "Ej stakad",
+        "unvoted": "Tog bort röst",
         "staking": "Staking",
         "unstaking": "Tar bort staking",
         "notStaked": "Ej stakad",
         "stakedFunds": "Stakade tillgångar",
         "unstakedFunds": "Ej stakade tillgångar",
+        "voting": "Röstning",
+        "unvoting": "Avröstar",
         "accountColor": "Plånboksfärg",
         "myAssets": "Mina tillgångar",
+        "option": "Alternativ",
         "total": "Totalt: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "Vänta tills synkroniseringen är klar för att ändra plånbok.",
         "transferring": "Vänta tills alla transaktioner är slutförda för att ändra plånbok.",
-        "participating": "Vänta tills alla staking-/röstningstransaktioner har slutförts för att ändra plånbok."
+        "participating": "Vänta tills du har slutfört staking/röstningen innan du byter plånbok.",
+        "transferringCreate": "Vänligen vänta tills alla transaktioner är klara innan du lägger till en ny plånbok.",
+        "participatingCreate": "Vänligen vänta tills du har slutfört stakingen/röstningen innan du lägger till en ny plånbok."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "Plånbok",
-        "staking": "Staking"
+        "staking": "Staking",
+        "governance": "Styrning"
     }
 }

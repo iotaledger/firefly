@@ -88,7 +88,7 @@
         "confirmPin": {
             "title": "PINコードを選択します",
             "body1": "PINは残高と取引を非公開に保ちます。",
-            "body2": "続行するにはPINコードを再入力してください。 "
+            "body2": "続行するにはPINコードを入力してください"
         },
         "backup": {
             "title": "シードをバックアップしてください。",
@@ -521,7 +521,8 @@
                     "commencing": "事前ステーキングは開いています",
                     "holding": "ステーキング残り{duration}",
                     "ended": "ステーキングは終了しました",
-                    "inactive": "ステーキングイベントが検出されませんでした"
+                    "inactive": "ステーキングイベントが検出されませんでした",
+                    "fetching": "ステーキングイベント情報を取得しています..."
                 },
                 "bodies": {
                     "upcoming": "{token} トークンをステークして、 {date}にステーキングが開始されると10秒ごとに自動的に報酬を受け取ることができます。",
@@ -541,7 +542,7 @@
                 "totalWalletRewards": "ウォレット報酬の合計",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。 "
+                    "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。"
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -558,6 +559,87 @@
                 "title": "カラーピッカー",
                 "hexCode": "16進数カラーコード"
             }
+        },
+        "governance": {
+            "votingPower": {
+                "title": "My voting weight",
+                "info": {
+                    "title": "Your voting weight",
+                    "equality": "1000 IOTA = 1 投票",
+                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
+                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                }
+            },
+            "info": {
+                "title": "ガバナンス情報",
+                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
+                "link": "IOTAでの投票について学ぶ",
+                "tooltip": {
+                    "eventStatusTimeline": {
+                        "votingOpen": "投票を受付中",
+                        "countingStarts": "カウント開始",
+                        "countingStops": "カウント終了",
+                        "votingOpened": "投票が開始されました",
+                        "countingStarted": "カウントを開始しました",
+                        "countingStopped": "カウントが終了しました"
+                    },
+                    "votingRate": {
+                        "title": "投票率",
+                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "countedVotes": {
+                        "title": "カウントされた投票",
+                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                    },
+                    "partiallyVoted": {
+                        "title": "New unused funds: {amount}",
+                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                    },
+                    "maximumVotes": {
+                        "title": "Maximum votes",
+                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                    },
+                    "chart": {
+                        "totalVotes": "投票: {amount}"
+                    }
+                }
+            },
+            "events": {
+                "status": {
+                    "upcoming": "お知らせ",
+                    "commencing": "投票を受付中",
+                    "holding": "カウント",
+                    "ended": "終了"
+                },
+                "button": "提案を表示",
+                "treasury": {
+                    "notFound": {
+                        "title": "コミュニティ\"Treasury\"の投票を読み込むことができません",
+                        "subtitle": "Please connect to a node that has added this vote",
+                        "buttonConnect": "デフォルトノードに接続",
+                        "buttonSettings": "ノードの設定を表示",
+                        "fetching": "ガバナンスイベント情報を取得しています..."
+                    }
+                }
+            },
+            "eventDetails": {
+                "votingOpens": "投票が始まります",
+                "votingProgress": "残り時間",
+                "votingPower": "Your voting weight",
+                "votesCounted": "Your counted votes",
+                "maximumVotes": "Your maximum votes",
+                "countingStarts": "カウントが始まります",
+                "currentResult": "現在の結果",
+                "finalResult": "最終結果",
+                "answerHeader": {
+                    "activeVoting": "Active voting",
+                    "selected": "送信済み",
+                    "notSelected": "未選択",
+                    "winner": "Winner"
+                }
+            },
+            "votes": "投票",
+            "manageVote": "投票の管理"
         }
     },
     "popups": {
@@ -671,7 +753,13 @@
             "title": "取引を承認する",
             "body": "{amount} を送金しようとしています",
             "sendingFromStakedAccount": "現在ステークされているウォレットから送金を行っていますが、これはトークンのステークを解除する可能性があります。 送金は自由ですが、後で残りのトークンを再度 ステークする必要があるかもしれません。",
-            "sendingFromStakedAccountBelowMinReward": "ステーキング報酬の最小額に達していないウォレットから送金を行っています。 これにより、トークンがステーク解除され、このウォレットにステーキング報酬が失われる可能性があります。"
+            "sendingFromStakedAccountBelowMinReward": "ステーキング報酬の最小額に達していないウォレットから送金を行っています。 これにより、トークンがステーク解除され、このウォレットにステーキング報酬が失われる可能性があります。",
+            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromActiveParticipationAccount": {
+                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stake": "現在ステークされているウォレットから送金を行っていますが、これはトークンのステークを解除する可能性があります。 送金は自由ですが、後で残りのトークンを再度 ステークする必要があるかもしれません。",
+                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+            }
         },
         "balanceFinder": {
             "title": "残高を検索する",
@@ -774,6 +862,33 @@
             "title": "{periodNumber} からのステーキングフェーズ {date}",
             "body": "Assembly のIOTAステーキングは続行されます...フェーズ{periodNumber}に90日間参加します。 IOTAトークンをステークして、ASMB報酬を獲得しましょう！",
             "info": "Shimmerステーキングが完了し、ASMBトークンのみが配布されます。"
+        },
+        "governanceManager": {
+            "castYourVote": "投票してください",
+            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
+            "castingVotes": "Casting votes",
+            "stopVoting": "投票を停止",
+            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
+            "stoppingVoting": "投票を停止中",
+            "changeVote": "投票の変更",
+            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
+            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
+            "changingVote": "投票の変更中",
+            "manageVotes": "投票の管理",
+            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergingVotes": "投票を管理中",
+            "votedSuccessfully": "You have started voting with {account}.",
+            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "successPopup": {
+                "castVotesTitle": "Voted successfully",
+                "stopVotesTitle": "投票が停止されました",
+                "mergeVotesTitle": "投票が統合されました",
+                "changeVotesTitle": "投票が変更されました",
+                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
+                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+            }
         },
         "shimmer-info": {
             "title": "Shimmerについて",
@@ -931,6 +1046,10 @@
         "merge": "統合",
         "mergeFunds": "資金を統合",
         "done": "完了しました",
+        "castVotes": "投票する",
+        "changeVotes": "投票の変更",
+        "mergeVotes": "投票を統合",
+        "stopVotes": "投票を停止",
         "okIUnderstand": "はい。分かりました",
         "readMore": "もっと読む"
     },
@@ -1057,12 +1176,11 @@
         "transferringTo": "{account} に転送中",
         "transferFrom": "{account}からの転送",
         "transferTo": "{account}に転送",
-        "stakedFor": "{account} にステークしました",
-        "unstakedFor": "{account} の解除したステーク",
-        "votedFor": "{account} に投票",
-        "unvotedFor": "{account} の投票を解除",
         "stakingTransaction": "ステーキング取引",
         "unstakingTransaction": "アンステーキング取引",
+        "votingTransaction": "Voting Transaction",
+        "unvotingTransaction": "Unvoting Transaction",
+        "participationTransaction": "Participation Transaction",
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
@@ -1072,14 +1190,19 @@
         "unknown": "不明",
         "none": "なし",
         "staked": "ステーク済み",
+        "voted": "投票しました",
         "unstaked": "解除したステーク",
+        "unvoted": "未投票",
         "staking": "ステーキング",
         "unstaking": "アンステーキング",
         "notStaked": "ステークされていません",
         "stakedFunds": "ステーク資金",
         "unstakedFunds": "解除したステーク資金",
+        "voting": "投票",
+        "unvoting": "投票を解除",
         "accountColor": "ウォレットの色",
         "myAssets": "My Assets(マイアセット)",
+        "option": "オプション",
         "total": "合計: {balance}"
     },
     "dates": {
@@ -1130,7 +1253,9 @@
         },
         "syncing": "ウォレットを変更するには、同期が完了するまでお待ちください。",
         "transferring": "ウォレットを変更するには、すべての取引が完了するまでお待ちください。",
-        "participating": "ウォレットを変更するには、すべてのステーク/投票取引が完了するまでお待ちください。"
+        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
+        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
     "error": {
         "profile": {
@@ -1317,6 +1442,7 @@
     },
     "tabs": {
         "wallet": "ウォレット",
-        "staking": "ステーキング"
+        "staking": "ステーキング",
+        "governance": "ガバナンス"
     }
 }

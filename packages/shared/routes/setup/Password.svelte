@@ -80,7 +80,7 @@
                 showStrengthLevel
                 strength={passwordStrength.score}
                 {locale}
-                autofocus
+                autofocus={!$mobile}
                 disabled={busy}
             />
             <Password

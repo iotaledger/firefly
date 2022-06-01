@@ -1,4 +1,4 @@
-package org.iota.firefly.mobile;
+package org.iota.firefly.mobile.alpha;
 
 import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
