@@ -8,19 +8,20 @@
     export let darkTextColor = 'gray-500'
     export let backgroundColor = 'gray-50'
     export let darkBackgroundColor = 'gray-850'
+    export let padding = 'px-4 py-3.5'
     export let classes = ''
 </script>
 
-<Box row {backgroundColor} {darkBackgroundColor} classes="justify-between {classes}">
+<Box row clearPadding {backgroundColor} {darkBackgroundColor} classes="justify-between {padding} {classes}">
     {#if keyText}
-        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
+        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor}>
             {keyText}
         </Text>
     {:else}
         <slot name="key" />
     {/if}
     {#if valueText}
-        <Text fontSize="sm" color={textColor} darkColor={darkTextColor}>
+        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor}>
             {valueText}
         </Text>
     {:else}

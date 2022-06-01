@@ -4,7 +4,7 @@
     import { openPopup } from 'shared/lib/popup'
 
     function handleWalletFinderClick() {
-        openPopup({ type: 'walletFinder', hideClose: true })
+        openPopup({ type: 'walletFinder' })
     }
 </script>
 

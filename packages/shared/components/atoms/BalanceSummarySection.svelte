@@ -17,13 +17,13 @@
     const PRIMARY_DARK_COLOR = 'white'
     const PRIMARY_FONT_SIZE = '15'
     const PRIMARY_FONT_WEIGHT = FontWeightText.normal
-    const PRIMARY_LINE_HEIGHT = '20'
+    const PRIMARY_LINE_HEIGHT = '5'
 
     const SECONDARY_COLOR = 'gray-600'
     const SECONDARY_DARK_COLOR = 'gray-400'
     const SECONDARY_FONT_SIZE = '13'
     const SECONDARY_FONT_WEIGHT = FontWeightText.medium
-    const SECONDARY_LINE_HEIGHT = '16'
+    const SECONDARY_LINE_HEIGHT = '4'
 </script>
 
 <div class="flex justify-between">
