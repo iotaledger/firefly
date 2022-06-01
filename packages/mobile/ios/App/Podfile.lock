@@ -24,7 +24,7 @@ DEPENDENCIES:
   - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
   - "CapacitorSplashScreen (from `../../../../node_modules/@capacitor/splash-screen`)"
   - FireflyActorSystemCapacitorBindings (from `../../node_modules/firefly-actor-system-capacitor-bindings`)
-  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec`)
+  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec`)
 
 SPEC REPOS:
   trunk:
@@ -46,7 +46,7 @@ EXTERNAL SOURCES:
   FireflyActorSystemCapacitorBindings:
     :path: "../../node_modules/firefly-actor-system-capacitor-bindings"
   IotaWalletInternal:
-    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/main/IotaWalletInternal.podspec
+    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec
 
 SPEC CHECKSUMS:
   Capacitor: 9ff0758671daabc97247c8c57a981379bc30bb5f
@@ -59,6 +59,6 @@ SPEC CHECKSUMS:
   IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 1d4d8bbb149f7bac7a5cb1b8022b43e7575d47c2
+PODFILE CHECKSUM: 5985c4d1cbab18ad6b9b2494ae5a6148f42e0f25
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
