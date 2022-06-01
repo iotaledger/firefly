@@ -56,6 +56,32 @@
                 "description": "Ledger Nano S or Nano X required"
             }
         },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA default protocol",
+            "shimmer": "Experimental IOTA staging protocol"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "mainnet": {
+                "title": "Mainnet",
+                "body": "Official network"
+            },
+            "devnet": {
+                "title": "Devnet",
+                "body": "Network for testing and development"
+            },
+            "private-net": {
+                "title": "Private net",
+                "body": "Private network"
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
+        },
         "setupLedger": {
             "progress1": "Connect your Ledger",
             "progress2": "Generate address",
@@ -856,6 +882,8 @@
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
+        "claim": "Claim",
+        "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1029,6 +1057,7 @@
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
+        "activity": "Activity",
         "security": "Security",
         "accountAddress": "Wallet Address",
         "network": "Network",
@@ -1048,6 +1077,8 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Syncing history, this may take a while...",
         "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Selecting inputs",
@@ -1084,14 +1115,8 @@
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "fromAddress": "From {account}",
+        "toAddress": "To {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
@@ -1365,39 +1390,29 @@
     },
     "pills": {
         "stake": {
-            "inProgress": "staking for",
-            "pending": "staking for",
-            "confirmed": "staked for",
-            "conflict": "failed to stake",
-            "failed": "failed to stake"
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
         },
         "transfer": {
-            "inProgress": "transferring to",
-            "pending": "transferring to",
-            "confirmed": "transferred to",
-            "conflict": "failed to transfer",
-            "failed": "failed to transfer"
+            "Pending": "transferring to",
+            "Confirmed": "transferred to",
+            "Conflicting": "failed to transfer"
         },
         "receive": {
-            "inProgress": "receiving from",
-            "pending": "receiving from",
-            "confirmed": "received from",
-            "conflict": "failed to receive",
-            "failed": "failed to receive"
+            "Pending": "receiving from",
+            "Confirmed": "received from",
+            "Conflicting": "failed to receive"
         },
         "send": {
-            "inProgress": "sending to",
-            "pending": "sending to",
-            "confirmed": "sent to",
-            "conflict": "failed to send",
-            "failed": "failed to send"
+            "Pending": "sending to",
+            "Confirmed": "sent to",
+            "Conflicting": "failed to send"
         },
         "migrate": {
-            "inProgress": "migrating for",
-            "pending": "migrating for",
-            "confirmed": "migrated for",
-            "conflict": "failed to migrate",
-            "failed": "failed to migrate"
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
         },
         "asyncStatus": {
             "unclaimed": "unclaimed",

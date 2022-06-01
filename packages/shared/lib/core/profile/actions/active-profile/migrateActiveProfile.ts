@@ -15,10 +15,10 @@ import { get } from 'svelte/store'
 export function migrateActiveProfile(): void {
     const _activeProfile = get(activeProfile)
     const newProfileDefaults = buildNewProfile(
-        _activeProfile?.name,
         _activeProfile?.isDeveloperProfile,
         _activeProfile?.networkProtocol,
-        _activeProfile?.networkType
+        _activeProfile?.networkType,
+        _activeProfile?.settings.clientOptions
     )
     updateActiveProfile(migrateObjects<IPersistedProfile>(_activeProfile, newProfileDefaults))
 }

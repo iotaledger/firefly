@@ -1,16 +1,11 @@
-import { get } from 'svelte/store'
-
-import { openPopup } from './popup'
-import { api } from './wallet'
-import { Event } from './typings/events'
-import { StrongholdStatus } from './typings/wallet'
-import { showAppNotification } from './notifications'
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from '@core/profile'
+import { isStrongholdUnlocked } from '@core/profile-manager'
+import { get } from 'svelte/store'
+import { showAppNotification } from './notifications'
+import { openPopup } from './popup'
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-export const checkStronghold = (callback: any): void => {
+export async function checkStronghold(callback: () => unknown): Promise<void> {
     if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
@@ -20,28 +15,26 @@ export const checkStronghold = (callback: any): void => {
         return
     }
 
-    api.getStrongholdStatus({
-        onSuccess(response: Event<StrongholdStatus>) {
-            const isLocked = response.payload.snapshot.status === 'Locked'
-            if (isLocked) {
-                openPopup(
-                    {
-                        type: 'password',
-                        props: {
-                            onSuccess: callback,
-                        },
+    try {
+        const response = await isStrongholdUnlocked()
+        if (!response) {
+            openPopup(
+                {
+                    type: 'password',
+                    props: {
+                        onSuccess: callback,
                     },
-                    true
-                )
-            } else {
-                callback()
-            }
-        },
-        onError(err) {
-            showAppNotification({
-                type: 'error',
-                message: localize(err?.error),
-            })
-        },
-    })
+                },
+                true
+            )
+        } else {
+            callback()
+        }
+    } catch (err) {
+        console.error(err)
+        showAppNotification({
+            type: 'error',
+            message: localize(err?.error),
+        })
+    }
 }

@@ -4,12 +4,9 @@
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { sendExternalTransaction, sendInternalTransaction } from '@lib/send'
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { ActivityStatus, ActivityType } from '@lib/typings/activity'
-    import { Recipient } from '@core/wallet'
+    import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
 
     export let internal = false
     export let recipient: Recipient
@@ -22,29 +19,27 @@
     function onConfirm(): void {
         closePopup()
 
-        function _send(): void {
-            return recipient.type === 'account'
-                ? sendInternalTransaction($selectedAccount.id, recipient.account.depositAddress, rawAmount, internal)
-                : sendExternalTransaction($selectedAccount.id, recipient.address, rawAmount)
-        }
-
         if ($isSoftwareProfile) {
-            _send()
+            void send()
         } else if ($isLedgerProfile) {
-            promptUserToConnectLedger(false, () => _send(), undefined)
+            promptUserToConnectLedger(false, () => send(), undefined)
         }
     }
 
-    function onCancel() {
+    function send(): Promise<void> {
+        const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+        return trySend(recipientAddress, rawAmount)
+    }
+
+    function onCancel(): void {
         closePopup()
     }
 
     $: transactionDetails = {
         type: internal ? ActivityType.Transfer : ActivityType.Send,
-        status: ActivityStatus.InProgress,
+        inclusiontState: InclusionState.Pending,
         amount,
         unit,
-        rawAmount,
         recipient,
     }
 </script>

@@ -5,7 +5,7 @@
     import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import AddNode from './AddNode.svelte'
+    import AddNodePopup from './AddNodePopup.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
     import Busy from './Busy.svelte'
@@ -111,7 +111,7 @@
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
         nodeInfo: NodeInfo,
-        addNode: AddNode,
+        addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         switchNetwork: SwitchNetwork,
