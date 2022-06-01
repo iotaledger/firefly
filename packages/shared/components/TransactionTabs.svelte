@@ -76,7 +76,7 @@
         height={icon.height}
         viewBox="0 0 {icon.width} {icon.height}"
         class="icon col-start-2 row-start-1 z-10 text-blue-500 dark:text-white"
-        style="margin-left: {isSearching ? '-76vw' : '8px'}; transform: rotate({!isSearching ? 0 : 90}deg);"
+        style="margin-left: {isSearching ? '-72vw' : '8px'}; transform: rotate({!isSearching ? 0 : 90}deg);"
     >
         <path
             d={icon.path[0].d}
