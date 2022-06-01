@@ -38,7 +38,7 @@
             bind:value
             bind:inputElement
             bind:hasFocus
-            autofocus={true}
+            autofocus
             clearBackground
             clearBorder
             label={localize('general.optionalPublicNote')}
