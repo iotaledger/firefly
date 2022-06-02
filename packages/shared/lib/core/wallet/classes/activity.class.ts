@@ -1,8 +1,10 @@
+import { selectedAccount } from '@core/account'
 import { BASE_TOKEN } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { activeAccounts, activeProfile } from '@core/profile'
 import { ITransactionPayload } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
+import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
@@ -45,19 +47,21 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutput(outputId: string, output: OutputData): Activity {
+    setFromOutput(outputId: string, output: OutputData, accountAddress: string): Activity {
+        const address = output.address.type === 0 ? output.address.pubKeyHash.substring(2) : 'Address unknown'
+        const isIncoming = address === accountAddress
+        const isInternal = !!get(activeAccounts).find(
+            (acc) => convertBech32AddressToEd25519Address(acc.meta.publicAddresses[0].address) === address
+        )
         this.id = outputId
         this.time = new Date()
-        this.type = ActivityType.Receive
-        this.direction = ActivityDirection.In
+        this.type = getActivityType(isIncoming, isInternal)
+        this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = InclusionState.Confirmed
-        this.isInternal = false
+        this.isInternal = isInternal
         this.rawAmount = Number(output.amount)
-        this.recipient = {
-            type: 'address',
-            address: output.address.type === 0 ? output.address.pubKeyHash : 'Address unknown',
-        }
-        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        ;(this.recipient = getRecipient2(address, isIncoming)),
+            (this.token = BASE_TOKEN[get(activeProfile).networkProtocol])
         this.isAsync = true
         this.expireDate = new Date(2023, 1, 1)
         this.isHidden = false
@@ -81,7 +85,7 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
-        return `${this.type !== ActivityType.Receive && signed ? '- ' : ''}${formatTokenAmountBestMatch(
+        return `${this.direction !== ActivityDirection.In && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
             this.token,
             2
@@ -133,3 +137,23 @@ export class Activity implements IActivity {
 //             : { type: 'address', address: receiverAddressesFromTransactionPayload(payload)[0] }
 //     }
 // }
+
+function getActivityType(incoming: boolean, internal: boolean): ActivityType {
+    if (internal) {
+        return ActivityType.Transfer
+    } else if (incoming) {
+        return ActivityType.Receive
+    } else {
+        return ActivityType.Send
+    }
+}
+
+function getRecipient2(address: string, isIncoming: boolean): Recipient {
+    // TODO: change this code when we have the output addresses as bech32
+    // const account = findAccountWithAddress(address)
+    const account = get(activeAccounts).find(
+        (acc) => convertBech32AddressToEd25519Address(acc.meta.publicAddresses[0].address) === address
+    )
+
+    return account ? { type: 'account', account: account } : { type: 'address', address: address }
+}

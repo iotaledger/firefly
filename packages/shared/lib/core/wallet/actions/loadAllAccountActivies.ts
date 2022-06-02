@@ -1,4 +1,5 @@
 import { activeAccounts } from '@core/profile'
+import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import {
@@ -9,6 +10,9 @@ import {
 export function loadAllAccountActivities(): void {
     for (const account of get(activeAccounts)) {
         addEmptyAccountActivitiesToAllAccountActivities(account.id)
+
+        // TODO: Dont transfrom account address to ED25519, instead transform output addresses to bech
+        const address = convertBech32AddressToEd25519Address(account.meta.publicAddresses[0].address)
         Object.keys(account.meta.transactions).forEach((transactionId) => {
             addActivityToAccountActivitiesInAllAccountActivities(
                 account.id,
@@ -20,7 +24,7 @@ export function loadAllAccountActivities(): void {
             if (!output.remainder) {
                 addActivityToAccountActivitiesInAllAccountActivities(
                     account.id,
-                    new Activity().setFromOutput(outputId, output)
+                    new Activity().setFromOutput(outputId, output, address)
                 )
             }
         })
