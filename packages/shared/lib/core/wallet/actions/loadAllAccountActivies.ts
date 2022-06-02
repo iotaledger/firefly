@@ -15,5 +15,14 @@ export function loadAllAccountActivities(): void {
                 new Activity().setFromTransaction(transactionId, account.meta.transactions?.[transactionId])
             )
         })
+        Object.keys(account.meta.outputs).forEach((outputId) => {
+            const output = account.meta.outputs?.[outputId]
+            if (!output.remainder) {
+                addActivityToAccountActivitiesInAllAccountActivities(
+                    account.id,
+                    new Activity().setFromOutput(outputId, output)
+                )
+            }
+        })
     }
 }

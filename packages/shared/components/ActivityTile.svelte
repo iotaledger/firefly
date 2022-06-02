@@ -2,7 +2,15 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, Activity, InclusionState } from '@core/wallet'
+    import {
+        ActivityAsyncStatus,
+        ActivityDirection,
+        ActivityType,
+        Activity,
+        InclusionState,
+        hideActivity,
+        claimActivity,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
@@ -71,12 +79,6 @@
             }
         }
     }
-
-    // TODO
-    function handleReject(): void {}
-
-    // TODO
-    function handleClaim(): void {}
 </script>
 
 <div
@@ -136,13 +138,13 @@
                 {#if isIncomingActivityUnclaimed}
                     <button
                         class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
-                        on:click={handleReject}
+                        on:click={() => claimActivity(activity.id)}
                     >
                         {localize('actions.reject')}
                     </button>
                     <button
                         class="action p-1 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
-                        on:click={handleClaim}
+                        on:click={() => hideActivity(activity.id)}
                     >
                         {localize('actions.claim')}
                     </button>

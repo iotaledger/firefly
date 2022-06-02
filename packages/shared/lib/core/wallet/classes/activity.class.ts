@@ -1,7 +1,7 @@
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { ITransactionPayload } from '@iota/types'
-import { Transaction } from '@iota/wallet'
+import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
 import { get } from 'svelte/store'
@@ -42,6 +42,26 @@ export class Activity implements IActivity {
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
         this.isAsync = false
         this.isHidden = false
+        return this
+    }
+
+    setFromOutput(outputId: string, output: OutputData): Activity {
+        this.id = outputId
+        this.time = new Date()
+        this.type = ActivityType.Send
+        this.direction = ActivityDirection.In
+        this.inclusionState = InclusionState.Confirmed
+        this.isInternal = false
+        this.rawAmount = Number(output.amount)
+        this.recipient = {
+            type: 'address',
+            address: output.address.type.type === 0 ? output.address.type.pubKeyHash : 'Address unknown',
+        }
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.isAsync = true
+        this.expireDate = new Date(2023, 1, 1)
+        this.isHidden = false
+        this.isClaimed = false
         return this
     }
 
