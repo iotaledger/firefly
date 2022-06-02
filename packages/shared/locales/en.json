@@ -677,14 +677,21 @@
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
                 "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
-                "bech32HRP": "Bech32 HRP",
+                "name": "Name",
+                "version": "Version",
+                "status": {
+                    "latestMilestone": "Latest milestone"
+                },
+                "protocol": {
+                    "networkName": "Network",
+                    "bech32HRP": "Bech32 HRP"
+                },
+                "metrics": {
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedRate": "Reference rate"
+                },
                 "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "plugins": "Plugins"
             }
         },
         "switchNetwork": {
