@@ -1,5 +1,13 @@
 import { CapacitorConfig } from '@capacitor/cli'
 
+const prod = process.env.NODE_ENV === 'production'
+const ip = process.env.CAP_IP || 'localhost'
+
+const serverConfig = {
+    url: `http://${ip}:8080`,
+    cleartext: true,
+}
+
 const config: CapacitorConfig = {
     appId: 'org.iota.firefly.mobile.alpha',
     appName: 'Firefly',
@@ -14,10 +22,7 @@ const config: CapacitorConfig = {
             backgroundColor: '#ffffffff',
         },
     },
-    server: {
-        url: 'http://XXX.XXX.XXX.XXX:8080',
-        cleartext: true,
-    },
+    server: prod ? undefined : serverConfig,
     cordova: {
         preferences: {
             DisableDeploy: 'true',
