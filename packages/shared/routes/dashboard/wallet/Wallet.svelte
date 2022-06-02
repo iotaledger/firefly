@@ -1,8 +1,11 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { accountRoute, accountRouter } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
-    import { AccountActionsModal, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+
+    import { localize } from '@core/i18n'
+    import { accountRoute, accountRouter, walletRoute } from '@core/router'
+    import { AccountRoute, WalletRoute } from '@core/router/enums'
+
+    import { AccountActionsModal, BottomNavigation, DashboardPane, Drawer, Text, Modal } from 'shared/components'
     import {
         AccountActions,
         AddressHistory,
@@ -12,7 +15,6 @@
     } from 'shared/components/drawerContent'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -50,6 +52,7 @@
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
+    import { fade } from 'svelte/transition'
     import {
         AccountAssets,
         AccountBalance,
@@ -443,10 +446,19 @@
                     </Drawer>
                 </div>
                 <div class="flex flex-1">
-                    <DashboardPane classes="w-full rounded-tl-s rounded-tr-s">
-                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                    <DashboardPane classes="w-full">
+                        {#if $walletRoute === WalletRoute.Assets}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountAssets classes="pb-0" />
+                            </div>
+                        {:else if $walletRoute === WalletRoute.AccountHistory}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountHistory classes="pb-0" transactions={getAccountMessages($selectedAccount)} />
+                            </div>
+                        {/if}
                     </DashboardPane>
                 </div>
+                <BottomNavigation locale={localize} />
             </div>
         </div>
     {:else}
