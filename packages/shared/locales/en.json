@@ -676,22 +676,41 @@
             "removeConfirmation": "Are you sure you want to remove this node?",
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
-                "url": "URL",
-                "name": "Name",
-                "version": "Version",
-                "status": {
-                    "latestMilestone": "Latest milestone"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index"
                 },
                 "protocol": {
-                    "networkName": "Network",
-                    "bech32HRP": "Bech32 HRP"
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
                 },
                 "metrics": {
+                    "tab": "Metrics",
                     "blocksPerSecond": "Blocks per second",
-                    "referencedRate": "Reference rate"
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate"
                 },
-                "features": "Features",
-                "plugins": "Plugins"
+                "features": {
+                    "tab": "Features"
+                }
             }
         },
         "switchNetwork": {
