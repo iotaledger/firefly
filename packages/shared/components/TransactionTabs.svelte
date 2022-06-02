@@ -2,53 +2,113 @@
     @component TransactionTabs, handle transactions filtered by tabs.
 	@param {Array} list - array of objects to filter / show.
     @param {number} selected - Default 0, selected tab array index.
+    @param {Array} tabs - Default ['all', 'incoming', 'outgoing'], tabs or filter array.
 -->
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
     import { flip } from 'svelte/animate'
     import * as easing from 'svelte/easing'
-    import { fly } from 'svelte/transition'
-    import { Locale } from '@core/i18n'
+    import { fly, fade } from 'svelte/transition'
+    import { localize } from '@core/i18n'
+    import { icons } from 'shared/components/icon/icons'
 
+    const dispatch = createEventDispatcher()
+    const icon = icons['search']
     export let list = []
     export let selected = 0
-    export let locale: Locale
+    export let tabs = ['all', 'incoming', 'outgoing']
 
-    const tabs = ['All', 'Incoming', 'Outgoing']
     let current = tabs[selected]
 
-    const filterBy = (item) => item.payload?.data?.essence?.data?.incoming
+    const filterBy = (item) => item?.payload?.data?.essence?.data?.incoming
 
     $: filtered = list.filter(
         (item) =>
-            current === 'All' ||
-            (current === 'Incoming' && filterBy(item)) ||
-            (current === 'Outgoing' && !filterBy(item))
+            current === 'all' ||
+            (current === 'incoming' && filterBy(item)) ||
+            (current === 'outgoing' && !filterBy(item))
     )
+
+    let isSearching = false
 </script>
 
-<nav class="w-full flex flex-row justify-between items-center mb-5">
-    <ul class="relative flex rounded-lg items-center p-0 bg-gray-50 dark:bg-gray-900">
+<nav class="grid justify-around gap-4 items-center mb-4 mt-7 mx-6">
+    <ul class="relative flex items-center p-0" style="border-radius: 11px;">
         {#each tabs as tab, i}
             <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
                 <button on:click={() => (current = tab)}>
-                    <Text bold={current === tab} highlighted={current === tab} secondary={current !== tab}
-                        >{locale(tab)}</Text
+                    <Text
+                        classes="text-13"
+                        bold={current === tab}
+                        highlighted={current === tab}
+                        secondary={current !== tab}
+                    >
+                        {localize(`general.${tab}`)}</Text
                     >
                 </button>
             </li>
         {/each}
-        <span id="check-square" class="absolute z-0 rounded-md bg-white dark:bg-gray-800" />
+        <span id="check-square" class="absolute z-0 text-blue-500 border-b-2 border-blue-500 border-solid shadow-sm" />
     </ul>
-    <button id="search" class="rounded-xl bg-white dark:bg-gray-900">
-        <Icon icon="search" classes="text-blue-500 dark:text-white" width="22" height="22" />
-    </button>
+    <span
+        id="search"
+        on:click={() => (isSearching = !isSearching)}
+        class="col-start-2 row-start-1 z-10 pr-4 rounded-xl bg-gray-100 dark:bg-gray-900"
+    />
+    <div
+        role="searchbox"
+        class="z-10 absolute right-0 h-10 mr-8 rounded-xl bg-gray-100 dark:bg-gray-900"
+        style="width: {!isSearching ? '0' : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1.15) {!isSearching
+            ? '0.4s'
+            : '0.1s'};"
+    >
+        <input
+            type="search"
+            spellcheck="false"
+            autocomplete="false"
+            on:input={(e) => dispatch('search', e.data ?? 'BACKSPACE')}
+            class="h-10 w-11/12 pl-10 text-blue-500 dark:text-white"
+            style="-webkit-appearance: none; appearance: none; background: rgba(0,0,0,0); display: {!isSearching
+                ? 'none'
+                : 'block'}"
+        />
+    </div>
+    <svg
+        width={icon.width}
+        height={icon.height}
+        viewBox="0 0 {icon.width} {icon.height}"
+        class="icon col-start-2 row-start-1 z-10 text-blue-500 dark:text-white"
+        style="margin-left: {isSearching ? '-72vw' : '8px'}; transform: rotate({!isSearching ? 0 : 90}deg);"
+    >
+        <path
+            d={icon.path[0].d}
+            fill-rule={icon.path[0].fillRule}
+            clip-rule={icon.path[0].clipRule}
+            class:fill-current={true}
+        />
+    </svg>
+    {#if isSearching}
+        <span
+            class="col-start-2 row-start-1 z-10"
+            in:fade={{ duration: 357, delay: 500, easing: easing.quadOut }}
+            out:fade={{ duration: 150, easing: easing.quadIn }}
+        >
+            <Icon icon="close" classes="z-10 ml-2 text-blue-500 dark:text-white" width="22" height="22" />
+        </span>
+    {/if}
+    <button id="search" on:click={() => (isSearching = !isSearching)} class="col-start-2 row-start-1 z-10" />
 </nav>
-<main class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
+<main class="flex flex-col overflow-y-auto space-y-2 px-6">
     {#if filtered.length > 0}
-        {#each filtered as item (item.id)}
-            <div in:fly={{ y: 40, duration: 357, easing: easing.quadIn }} animate:flip={{ duration: 757 }}>
-                <slot {item} />
+        {#each filtered as transaction (transaction.timestamp)}
+            <div
+                class="block"
+                in:fly={{ y: 30, duration: 400, easing: easing.sineIn }}
+                out:fly={{ y: 15, duration: 200, easing: easing.sineIn }}
+                animate:flip={{ duration: 700 }}
+            >
+                <slot name="transaction" {transaction} />
             </div>
         {/each}
     {:else}
@@ -57,11 +117,27 @@
 </main>
 
 <style type="text/scss">
+    main {
+        height: calc(100vh - 35ch);
+    }
+    /* clears the 'X' from Chrome */
+    input[type='search']::-webkit-search-decoration,
+    input[type='search']::-webkit-search-cancel-button,
+    input[type='search']::-webkit-search-results-button,
+    input[type='search']::-webkit-search-results-decoration {
+        display: none;
+    }
+
+    .icon {
+        transition: margin-left 0.5s cubic-bezier(0, 0.5, 0, 1.08) 0.2s,
+            transform 0.5s cubic-bezier(0, 0.5, 0, 1.15) 0.2s;
+    }
     ul {
         --offset: 1px;
         --button-count: 3;
-        --button-width: max(23vw, calc(65vw / var(--button-count)));
-        --button-height: 30px;
+        // TODO check for small screens, value could be 23vw
+        --button-width: min(24vw, calc(60vw / var(--button-count)));
+        --button-height: 34px;
         border-width: calc(var(--offset) * var(--button-count));
         border-color: rgba(0, 0, 0, 0);
         border-style: solid;
@@ -80,7 +156,7 @@
     #check-square {
         width: var(--button-width);
         height: var(--button-height);
-        transition: left 0.5s cubic-bezier(0, 0.5, 0, 1.15);
+        transition: left 0.5s cubic-bezier(0, 0.5, 0, 1.1);
         will-change: left;
     }
     button {
@@ -90,10 +166,13 @@
         user-select: none;
         -webkit-user-select: none;
     }
+    button:active {
+        color: blue;
+    }
 
     #search {
-        padding: 10px;
-        width: 36px;
-        height: 36px;
+        padding: 9px;
+        width: 40px;
+        height: 40px;
     }
 </style>
