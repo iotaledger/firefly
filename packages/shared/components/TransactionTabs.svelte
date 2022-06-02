@@ -6,12 +6,14 @@
 -->
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
     import { flip } from 'svelte/animate'
     import * as easing from 'svelte/easing'
     import { fly, fade } from 'svelte/transition'
     import { localize } from '@core/i18n'
     import { icons } from 'shared/components/icon/icons'
 
+    const dispatch = createEventDispatcher()
     const icon = icons['search']
     export let list = []
     export let selected = 0
@@ -65,6 +67,7 @@
             type="search"
             spellcheck="false"
             autocomplete="false"
+            on:input={(e) => dispatch('search', e.data ?? 'BACKSPACE')}
             class="h-10 w-11/12 pl-10 text-blue-500 dark:text-white"
             style="-webkit-appearance: none; appearance: none; background: rgba(0,0,0,0); display: {!isSearching
                 ? 'none'
