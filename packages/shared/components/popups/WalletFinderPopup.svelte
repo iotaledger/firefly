@@ -11,7 +11,7 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { FontWeightText } from '../Text.svelte'
 
-    export let useBalanceFinder = false
+    export let searchForBalancesOnLoad = false
 
     const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
 
@@ -24,20 +24,24 @@
     const password = ''
     let error = ''
     let isBusy = false
-    let hasUsedBalanceFinder = false
+    let hasUsedWalletFinder = false
 
-    // $: console.log('useBalanceFinder:', useBalanceFinder)
-    $: useBalanceFinder && handleFindBalances()
+    $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
 
     async function handleFindBalances() {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 type: 'password',
                 props: {
-                    onSuccess: () => {
+                    onSuccess: function () {
                         openPopup({
                             type: 'walletFinder',
-                            props: { useBalanceFinder: true },
+                            props: { searchForBalancesOnLoad: true },
+                        })
+                    },
+                    onCancelled: function () {
+                        openPopup({
+                            type: 'walletFinder',
                         })
                     },
                 },
@@ -62,7 +66,7 @@
                 previousGapLimit = currentGapLimit
                 currentGapLimit += gapLimitIncrement
                 previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
-                hasUsedBalanceFinder = true
+                hasUsedWalletFinder = true
             } catch (err) {
                 error = localize(err.error)
 
@@ -86,7 +90,7 @@
 
     onDestroy(() => {
         // todo: (Jason) Remove this
-        if (hasUsedBalanceFinder) {
+        if (hasUsedWalletFinder) {
             cacheAllStakingPeriods(StakingAirdrop.Assembly)
             cacheAllStakingPeriods(StakingAirdrop.Shimmer)
         }
@@ -116,7 +120,7 @@
         />
     </div>
 
-    {#if hasUsedBalanceFinder}
+    {#if hasUsedWalletFinder}
         <TextHint
             classes="w-full rounded-2xl bg-gray-50 dark:bg-gray-850 py-4 pl-4 pr-8"
             icon="exclamation"
