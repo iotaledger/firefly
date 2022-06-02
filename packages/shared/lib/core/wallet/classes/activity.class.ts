@@ -48,14 +48,14 @@ export class Activity implements IActivity {
     setFromOutput(outputId: string, output: OutputData): Activity {
         this.id = outputId
         this.time = new Date()
-        this.type = ActivityType.Send
+        this.type = ActivityType.Receive
         this.direction = ActivityDirection.In
         this.inclusionState = InclusionState.Confirmed
         this.isInternal = false
         this.rawAmount = Number(output.amount)
         this.recipient = {
             type: 'address',
-            address: output.address.type.type === 0 ? output.address.type.pubKeyHash : 'Address unknown',
+            address: output.address.type === 0 ? output.address.pubKeyHash : 'Address unknown',
         }
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
         this.isAsync = true
