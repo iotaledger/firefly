@@ -27,16 +27,20 @@
 
     $: progress = getProgressByMilestone(event?.information?.milestoneIndexEnd)
     $: accountVotes = calculateVotesByTrackedParticipation(
-        $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]
+        $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId],
+        event?.information?.milestoneIndexStart,
+        event?.information?.milestoneIndexEnd
     )
     $: maximumVotes =
         calculateVotesByTrackedParticipation(
             $selectedAccountParticipationOverview?.trackedParticipations?.[event?.eventId]?.filter(
                 (item) => item.messageId !== $currentTreasuryParticipation?.messageId
-            )
+            ),
+            event?.information?.milestoneIndexStart,
+            event?.information?.milestoneIndexEnd
         ) +
         calculateVotesByMilestones(
-            $currentTreasuryParticipation?.startMilestoneIndex,
+            Math.max(event?.information?.milestoneIndexStart, $currentTreasuryParticipation?.startMilestoneIndex),
             event?.information?.milestoneIndexEnd,
             $currentTreasuryParticipation?.amount
         )
