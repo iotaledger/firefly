@@ -664,7 +664,7 @@
             "titleRemove": "Remove a node",
             "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node details",
-            "titleInfo": "Node info",
+            "titleInfo": "Node information",
             "addingNode": "Adding node",
             "updatingNode": "Updating node",
             "loadingNodeInfo": "Loading node info",
@@ -709,7 +709,9 @@
                     "referencedRate": "Referenced rate"
                 },
                 "features": {
-                    "tab": "Features"
+                    "tab": "Features",
+                    "features": "Features",
+                    "plugins": "Plugins"
                 }
             }
         },
@@ -973,6 +975,7 @@
         "redo": "Redo",
         "cut": "Cut",
         "copy": "Copy",
+        "copyAllInformation": "Copy all information",
         "paste": "Paste",
         "selectAll": "Select All",
         "addAccount": "Add Wallet",

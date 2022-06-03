@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Checkbox, CopyableBox, KeyValueBox, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from 'shared/lib/popup'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { setClipboard, resolveObjectPath } from 'shared/lib/utils'
+    import { resolveObjectPath, setClipboard } from 'shared/lib/utils'
     import { getNodeInfo } from '@core/profile-manager'
 
     enum NodeInfoTab {
@@ -19,8 +19,7 @@
     export let node: INode = { url: '' }
     export let nodeInfoTab: NodeInfoTab = NodeInfoTab.General
 
-    $: nodeInfoTab
-
+    const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
     const NODE_INFO_TAB_MAP: Readonly<
         { [key in NodeInfoTab]: { [key: string]: { localeKey: string; nodeInfoPath: string } } }
     > = {
@@ -39,11 +38,11 @@
             network: { localeKey: 'protocol.network', nodeInfoPath: 'protocol.networkName' },
             bech32HRP: { localeKey: 'protocol.bech32HRP', nodeInfoPath: 'protocol.bech32HRP' },
             tokenSupply: { localeKey: 'protocol.tokenSupply', nodeInfoPath: 'protocol.tokenSupply' },
-            protocolVersion: { localeKey: 'protocol.protocolVersion', nodeInfoPath: 'protocol.protocolVersion' },
+            protocolVersion: { localeKey: 'protocol.protocolVersion', nodeInfoPath: 'protocol.version' },
             minPoWScore: { localeKey: 'protocol.minPoWScore', nodeInfoPath: 'protocol.minPoWScore' },
         },
         [NodeInfoTab.BaseToken]: {
-            token: { localeKey: 'baseToken.token', nodeInfoPath: 'baseToken.token' },
+            token: { localeKey: 'baseToken.token', nodeInfoPath: 'baseToken.name' },
             tickerSymbol: { localeKey: 'baseToken.tickerSymbol', nodeInfoPath: 'baseToken.tickerSymbol' },
             unit: { localeKey: 'baseToken.unit', nodeInfoPath: 'baseToken.unit' },
             subUnit: { localeKey: 'baseToken.subunit', nodeInfoPath: 'baseToken.subunit' },
@@ -59,32 +58,30 @@
             referencedRate: { localeKey: 'metrics.referencedRate', nodeInfoPath: 'metrics.referencedRate' },
         },
         [NodeInfoTab.Features]: {
-            features: { localeKey: 'features', nodeInfoPath: 'features' },
-            plugins: { localeKey: 'plugins', nodeInfoPath: 'plugins' },
+            features: { localeKey: 'features.features', nodeInfoPath: 'features' },
+            plugins: { localeKey: 'features.plugins', nodeInfoPath: 'plugins' },
         },
     }
 
-    const NODE_INFO_LOCALE_BASE_PATH = 'popups.node.info'
-
     let nodeInfo: INodeInfo
-    const nodeContent = ''
-
-    function getNodeInfoValueFromPath(path: string): unknown {
-        return resolveObjectPath(nodeInfo, path, null) ?? node?.url
-    }
 
     function processNodeInfoMapTab(
-        _nodeInfoTab: string,
-        mapKey: string
+        _nodeInfoTab: NodeInfoTab,
+        key: string
     ): { localeKey: string; nodeInfoValue: unknown } {
-        const nodeInfoTab = NODE_INFO_TAB_MAP[_nodeInfoTab]
+        const nodeInfoTabObject = NODE_INFO_TAB_MAP[_nodeInfoTab]
+        const localeKey = nodeInfoTabObject[key].localeKey
+        const nodeInfoValue =
+            key !== 'url' ? resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null) : node?.url
+
         return {
-            localeKey: nodeInfoTab[mapKey].localeKey,
-            nodeInfoValue: getNodeInfoValueFromPath(nodeInfoTab[mapKey]?.nodeInfoPath),
+            localeKey,
+            nodeInfoValue,
         }
     }
 
     function handleNodeInfoTabClick(tab: NodeInfoTab): void {
+        if (!tab) return
         nodeInfoTab = tab
     }
 
@@ -94,15 +91,14 @@
     }
 
     function handleCopyAllInformationClick(): void {
-        if (!nodeContent) return
-        setClipboard(nodeContent)
+        if (!nodeInfo) return
+        setClipboard(JSON.stringify(nodeInfo, null, '\t'))
     }
 
     onMount(() => {
         getNodeInfo(node?.url, node?.auth)
             .then((nodeInfoResponse) => {
                 nodeInfo = nodeInfoResponse.node_info
-                // nodeContent = formatNodeInfo(nodeInfoResponse.url, nodeInfoResponse.node_info)
             })
             .catch((err) => {
                 closePopup()
@@ -133,44 +129,38 @@
             {/each}
         {/key}
     </div>
-    {#each Object.keys(NODE_INFO_TAB_MAP[nodeInfoTab]) as nodeInfoTabKey}
-        <button
-            class="w-full mb-2.5 flex flex-col"
-            on:click={() =>
-                handleKeyValueBoxClick(
-                    String(getNodeInfoValueFromPath(NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].nodeInfoPath))
-                )}
-        >
-            {#if typeof getNodeInfoValueFromPath(NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].nodeInfoPath) === 'boolean'}
-                <KeyValueBox
-                    keyText={localize(
-                        `${NODE_INFO_LOCALE_BASE_PATH}.${NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].localeKey}`
-                    )}
+    {#each Object.keys(NODE_INFO_TAB_MAP[nodeInfoTab]).map( (nodeInfoTabKey) => processNodeInfoMapTab(nodeInfoTab, nodeInfoTabKey) ) as { localeKey, nodeInfoValue }}
+        <CopyableBox value={nodeInfoValue} classes="mb-2.5">
+            <div class="w-full h-full flex flex-row justify-between items-center">
+                <Text type="p" fontSize="sm" fontWeight="font-600" secondary
+                    >{localize(`${NODE_INFO_LOCALE_BASE_PATH}.${localeKey}`)}</Text
                 >
-                    <Checkbox
-                        slot="value"
-                        disabled
-                        checked={getNodeInfoValueFromPath(NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].nodeInfoPath)}
-                    />
-                </KeyValueBox>
-            {:else}
-                <KeyValueBox
-                    keyText={localize(
-                        `${NODE_INFO_LOCALE_BASE_PATH}.${NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].localeKey}`
-                    )}
-                    valueText={getNodeInfoValueFromPath(NODE_INFO_TAB_MAP[nodeInfoTab][nodeInfoTabKey].nodeInfoPath)}
-                />
-            {/if}
-        </button>
+                {#if typeof nodeInfoValue === 'boolean'}
+                    <Checkbox disabled checked={nodeInfoValue} />
+                {:else if Array.isArray(nodeInfoValue)}
+                    <div class="flex flex-col text-right">
+                        {#if nodeInfoValue.length}
+                            {#each nodeInfoValue as item}
+                                <Text type="p" fontSize="sm" secondary>{item}</Text>
+                            {/each}
+                        {:else}
+                            <Text type="p" fontSize="sm" secondary>{localize('general.none')}</Text>
+                        {/if}
+                    </div>
+                {:else}
+                    <Text type="p" fontSize="sm" secondary>{nodeInfoValue}</Text>
+                {/if}
+            </div>
+        </CopyableBox>
     {/each}
+    <div class="flex w-full justify-center pt-8">
+        <Button classes="w-full" secondary onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
+            {localize('actions.copyAllInformation')}
+        </Button>
+    </div>
 {:else}
-    <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="justify-center" />
+    <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
 {/if}
-<div class="flex w-full justify-center pt-8">
-    <Button classes="w-1/2" onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
-        {localize('actions.copy')}
-    </Button>
-</div>
 
 <style type="text/scss">
     .info {

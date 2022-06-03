@@ -4,10 +4,12 @@
     import { Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
+    import { onDestroy } from 'svelte'
 
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
+    export let classes = ''
 
     let tooltipAnchor
     let showTooltip = false
@@ -22,13 +24,17 @@
             showTooltip = false
         }, 1500)
     }
+
+    onDestroy(() => {
+        showTooltip = false
+    })
 </script>
 
 {#if value}
     <button
         bind:this={tooltipAnchor}
         on:click={onClick}
-        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
+        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'} {classes}"
     >
         <Box {clearPadding} {...$$restProps}>
             <slot />
