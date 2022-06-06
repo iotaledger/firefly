@@ -27,7 +27,7 @@ export const sendParams = writable<SendParams>({
     message: '',
     isInternal: false,
 })
-export const clearSendParams = (isInternal = false): void =>
+export function clearSendParams(isInternal = false): void {
     sendParams.set({
         amount: undefined,
         unit: Unit.M,
@@ -36,11 +36,12 @@ export const clearSendParams = (isInternal = false): void =>
         isInternal,
         toWalletAccount: undefined,
     })
+}
 
 /**
  * Cleanup the signup vars
  */
-export const cleanupSignup = (): void => {
+export function cleanupSignup(): void {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
