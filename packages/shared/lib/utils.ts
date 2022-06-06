@@ -480,8 +480,10 @@ export function getMonthYear(date: Date): string {
 /*
  * Gets an object value from an object string path
  */
-export function resolveObjectPath(object: unknown, path: string, defaultValue: unknown): unknown {
-    if (!path) return
+export function resolveObjectPath(object: Record<string, unknown>, path: string, defaultValue: unknown = ''): unknown {
+    if (!object || !path) {
+        return defaultValue
+    }
 
-    return path.split('.').reduce((o, p) => (o ? o[p] : defaultValue), object)
+    return path.split('.').reduce((o, p) => o && o[p], object) ?? defaultValue
 }
