@@ -22,6 +22,7 @@
         "prettier-plugin-svelte": "^2.7.0"
     },
     "scripts": {
+        "docs:start": "cd docs/ && retype watch",
         "format": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
         "format-check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
         "lint": "eslint . --cache",
