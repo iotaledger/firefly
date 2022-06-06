@@ -8,12 +8,11 @@
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
     import { onDestroy } from 'svelte'
     import { activeAccounts, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { FontWeightText } from '../Text.svelte'
 
     export let searchForBalancesOnLoad = false
 
-    const { balanceOverview, accounts, isStrongholdLocked } = $activeProfile
+    const { balanceOverview, isStrongholdLocked } = $activeProfile
 
     const startAddressIndex = 0
     const gapLimitIncrement = $isLedgerProfile ? 10 : 25
@@ -21,7 +20,6 @@
     let currentGapLimit = gapLimitIncrement
     let previousAccountDiscoveryThreshold = 0
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
-    const password = ''
     let error = ''
     let isBusy = false
     let hasUsedWalletFinder = false
@@ -51,9 +49,7 @@
                 error = ''
                 isBusy = true
 
-                if ($isSoftwareProfile && $isStrongholdLocked) {
-                    await setStrongholdPassword(password)
-                } else if ($isLedgerProfile && !isLedgerConnected()) {
+                if ($isLedgerProfile && !isLedgerConnected()) {
                     isBusy = false
 
                     displayNotificationForLedgerProfile('warning')
@@ -109,7 +105,6 @@
             keyText={localize('popups.walletFinder.accountsSearched')}
             valueText={previousAccountDiscoveryThreshold || '-'}
         />
-        <!-- <KeyValueBox keyText={localize('popups.balanceFinder.a')} valueText={previousGapLimit} />  TODO: (Jason) Remove this -->
         <KeyValueBox
             keyText={localize('popups.walletFinder.accountsFound')}
             valueText={$activeAccounts.length || '0'}
