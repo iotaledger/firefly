@@ -1,7 +1,8 @@
 import { get } from 'svelte/store'
+
 import { profileManager } from '../stores'
 
-export async function backup(dest: string, password: string): Promise<void> {
+export async function deleteStorage(): Promise<void> {
     const manager = get(profileManager)
-    await manager.backup(dest, password)
+    await manager.deleteStorage()
 }
