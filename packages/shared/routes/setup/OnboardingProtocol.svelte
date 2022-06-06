@@ -9,7 +9,7 @@
     const isDeveloperProfile = true // TODO: use real value
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        await createNewProfile('', isDeveloperProfile, networkProtocol, NetworkType.Devnet)
+        await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Devnet)
         $appRouter.next()
     }
     async function onBackClick(): Promise<void> {
