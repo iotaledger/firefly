@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Icon, TextInput, InputContainer } from 'shared/components'
+    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { Icon, TextInput, InputContainer, Text } from 'shared/components'
 
     export let value = ''
 
@@ -55,9 +56,12 @@
 {:else}
     <button
         bind:this={buttonElement}
-        class="text-12 p-2 w-max bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 focus:dark:bg-gray-600 text-gray-600 dark:text-gray-500 rounded-md"
+        class="py-2 px-3 w-max bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 focus:dark:bg-gray-600 text-gray-600 dark:text-gray-500 rounded-md"
         on:click={handleAddClick}
     >
-        <span class="mr-1">+</span>{localize('actions.addPublicNote')}
+        <div class="flex flex-row items-center space-x-2">
+            <Icon icon="plus" height="10" width="10" classes="text-gray-600" />
+            <Text type="p" fontSize="15" color="gray-600">{localize('actions.addPublicNote')}</Text>
+        </div>
     </button>
 {/if}
