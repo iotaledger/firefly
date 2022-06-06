@@ -232,3 +232,6 @@ DerivedData/
 
 #vs code settings
 .vscode/settings.json
+
+# Static site generations from Retype
+**/.retype
