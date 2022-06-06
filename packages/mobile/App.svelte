@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { mobile, stage } from 'shared/lib/app'
@@ -44,7 +44,14 @@
         document.dir = $localeDirection
     }
 
-    $: $isLocaleLoaded, nativeSplash.hide()
+    $: if ($isLocaleLoaded) {
+        hideSplashScreen()
+    }
+
+    async function hideSplashScreen() {
+        await tick()
+        nativeSplash.hide()
+    }
 
     void setupI18n()
 
@@ -69,7 +76,6 @@
             locale={$_}
         />
     {/if}
-    <!-- TODO: remove locale={$_} everywhere -->
     <Route route={AppRoute.Welcome}>
         <Welcome locale={$_} />
     </Route>
