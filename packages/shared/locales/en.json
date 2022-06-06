@@ -1020,7 +1020,8 @@
         "readMore": "Read more",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup"
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note"
     },
     "general": {
         "recipient": "Recipient",
@@ -1178,7 +1179,8 @@
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
-        "amountClaimed": "{amount} claimed"
+        "amountClaimed": "{amount} claimed",
+        "optionalPublicNote": "Optional public note"
     },
     "dates": {
         "today": "Today",
