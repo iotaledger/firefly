@@ -36,6 +36,7 @@
         "postcss-cli": "^8.0.0",
         "prettier": "^2.2.1",
         "prettier-plugin-svelte": "^2.7.0",
+        "qrcode-generator": "https://github.com/amadeu2/qrcode-generator",
         "sass": "^1.32.6",
         "svelte-check": "^1.1.16",
         "svelte-loader": "^3.0.0",
