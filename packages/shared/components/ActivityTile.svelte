@@ -138,13 +138,13 @@
                 {#if isIncomingActivityUnclaimed}
                     <button
                         class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
-                        on:click={() => claimActivity(activity.id)}
+                        on:click={() => hideActivity(activity.id)}
                     >
                         {localize('actions.reject')}
                     </button>
                     <button
                         class="action p-1 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
-                        on:click={() => hideActivity(activity.id)}
+                        on:click={() => claimActivity(activity.id)}
                     >
                         {localize('actions.claim')}
                     </button>

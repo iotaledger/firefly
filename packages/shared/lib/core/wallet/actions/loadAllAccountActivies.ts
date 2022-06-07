@@ -19,12 +19,14 @@ export function loadAllAccountActivities(): void {
                 new Activity().setFromTransaction(transactionId, account.meta.transactions?.[transactionId])
             )
         })
+        const hiddenActivities = JSON.parse(localStorage.getItem('hiddenActivities')) || []
         Object.keys(account.meta.outputs).forEach((outputId) => {
             const output = account.meta.outputs?.[outputId]
             if (!output.remainder) {
+                const hidden = hiddenActivities.includes(outputId)
                 addActivityToAccountActivitiesInAllAccountActivities(
                     account.id,
-                    new Activity().setFromOutput(outputId, output, address)
+                    new Activity().setFromOutput(outputId, output, address, hidden)
                 )
             }
         })

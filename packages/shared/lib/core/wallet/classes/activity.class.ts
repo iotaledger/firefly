@@ -47,7 +47,7 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutput(outputId: string, output: OutputData, accountAddress: string): Activity {
+    setFromOutput(outputId: string, output: OutputData, accountAddress: string, hidden: boolean): Activity {
         const address = output.address.type === 0 ? output.address.pubKeyHash.substring(2) : 'Address unknown'
         const isIncoming = address === accountAddress
         const isInternal = !!get(activeAccounts).find(
@@ -60,11 +60,11 @@ export class Activity implements IActivity {
         this.inclusionState = InclusionState.Confirmed
         this.isInternal = isInternal
         this.rawAmount = Number(output.amount)
-        ;(this.recipient = getRecipient2(address, isIncoming)),
-            (this.token = BASE_TOKEN[get(activeProfile).networkProtocol])
+        this.recipient = getRecipient2(address, isIncoming)
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
         this.isAsync = true
         this.expireDate = new Date(2023, 1, 1)
-        this.isHidden = false
+        this.isHidden = hidden
         this.isClaimed = false
         return this
     }
