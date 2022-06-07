@@ -10,15 +10,17 @@
     import { appSettings } from 'shared/lib/appSettings'
 
     export let data = ''
-    export let size = 5
+    export let size = 6
 
-    let qr
-    let QRTag
-    let background
-    let foreground
+    let qr: QRCode
+    let QRTag = ''
+    let background = ''
+    let foreground = ''
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: data, create()
+    $: if (data) {
+        create()
+    }
 
     const typeNumber = 0
     const errorCorrectionLevel = 'M'
@@ -28,8 +30,9 @@
             qr = qrcode(typeNumber, errorCorrectionLevel)
             qr.addData(data)
             qr.make()
-            background = '' // darkModeEnabled ? '25395f' : ''
-            foreground = '' // darkModeEnabled ? 'ffffff' : ''
+            // Intentionally hidden as we'll need it in the future
+            // background = darkModeEnabled ? '25395f' : ''
+            // foreground = darkModeEnabled ? 'ffffff' : ''
             QRTag = qr.createDataURL(size, 0, background, foreground)
         } catch (e) {
             console.error(e)
