@@ -1,5 +1,5 @@
 import { Platform } from '@lib/platform'
-import { getProfileDataPath } from '@lib/wallet'
+import { getStorageDirectoryOfProfile } from '@core/profile'
 
 /**
  * Remove the profile folder from storage
@@ -9,7 +9,7 @@ import { getProfileDataPath } from '@lib/wallet'
  */
 export const removeProfileFolder = async (id: string): Promise<void> => {
     try {
-        const profileDataPath = await getProfileDataPath(id)
+        const profileDataPath = await getStorageDirectoryOfProfile(id)
         await Platform.removeProfileFolder(profileDataPath)
     } catch (err) {
         // TODO: improve error handling here

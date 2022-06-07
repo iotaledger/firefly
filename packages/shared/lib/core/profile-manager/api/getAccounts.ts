@@ -1,6 +1,6 @@
 import { IAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { profileManager } from '../store'
+import { profileManager } from '../stores'
 import { getAccount } from './getAccount'
 
 export async function getAccounts(): Promise<IAccount[]> {

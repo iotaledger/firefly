@@ -1,13 +1,6 @@
 import { IAccount, IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import {
-    activeAccounts,
-    activeProfile,
-    IBalanceOverview,
-    isLedgerProfile,
-    ProfileType,
-    updateActiveProfile,
-} from '@core/profile'
+import { activeAccounts, activeProfile, IBalanceOverview, isLedgerProfile, ProfileType } from '@core/profile'
 import { generateMnemonic, profileManager } from '@core/profile-manager'
 import { IActorHandler } from '@lib/typings/bridge'
 import { TransferState } from 'shared/lib/typings/events'
@@ -41,8 +34,6 @@ export const DUST_THRESHOLD: number = 1_000_000
 
 // Setting to 0 removes auto lock. We must lock Stronghold manually.
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
-
-export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 // TODO: remove these
 interface ActorState {
@@ -108,16 +99,6 @@ export const api: IWalletApi = new Proxy(
         },
     }
 )
-
-export const getWalletDataPath = async (): Promise<string> => {
-    const appPath = await Platform.getUserDataPath()
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
-}
-
-export const getProfileDataPath = async (id: string): Promise<string> => {
-    const walletPath = await getWalletDataPath()
-    return `${walletPath}${id}`
-}
 
 /**
  * Removes event listeners for active actor
@@ -208,18 +189,6 @@ export const asyncRemoveWalletAccount = (accountId: string): Promise<void> =>
 
 export const asyncRemoveWalletAccounts = (accountIds: string[]): Promise<void[]> =>
     Promise.all(accountIds.map((id) => asyncRemoveWalletAccount(id)))
-
-export const asyncDeleteStorage = (): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.deleteStorage({
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
 
 export function asyncSyncAccounts(
     addressIndex?: number,

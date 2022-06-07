@@ -1,3 +1,5 @@
+import { get } from 'svelte/store'
+
 import { localize } from '@core/i18n'
 import { COIN_TYPE } from '@core/network'
 import {
@@ -7,7 +9,7 @@ import {
     addAccountToActiveAccounts,
 } from '@core/profile'
 import { createStardustAccount, getAccount } from '@core/profile-manager'
-import { get } from 'svelte/store'
+
 import { IAccountState } from '../interfaces'
 import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
 
