@@ -1,30 +1,39 @@
 <script lang="typescript">
     import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { asyncSyncAccounts } from 'shared/lib/wallet'
     import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { localize } from '@core/i18n'
-    import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
-    import { onDestroy } from 'svelte'
-    import { activeAccounts, activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import {
+        activeAccounts,
+        activeProfile,
+        isLedgerProfile,
+        isSoftwareProfile,
+        recoverAndloadAllAccounts,
+        visibleActiveAccounts,
+    } from '@core/profile'
+    import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { BASE_TOKEN } from '@core/network'
+    import { sumBalanceForAccounts } from '@core/account'
     import { FontWeightText } from '../Text.svelte'
 
     export let searchForBalancesOnLoad = false
 
-    const { balanceOverview, isStrongholdLocked } = $activeProfile
+    const { isStrongholdLocked } = $activeProfile
 
     const startAddressIndex = 0
-    const gapLimitIncrement = $isLedgerProfile ? 10 : 25
-    let previousGapLimit = 0
-    let currentGapLimit = gapLimitIncrement
-    let previousAccountDiscoveryThreshold = 0
-    let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
+    const accountGapLimitIncrement = $isLedgerProfile ? 3 : 10
+    const addressGapLimitIncrement = 0
+    let previousAccountGapLimit = 0
+    let previousAddressGapLimit = 0
+    let currentAccountGapLimit = accountGapLimitIncrement
+    let currentAddressGapLimit = addressGapLimitIncrement
     let error = ''
     let isBusy = false
     let hasUsedWalletFinder = false
 
     $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
+    $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
     async function handleFindBalances() {
         if ($isSoftwareProfile && $isStrongholdLocked) {
@@ -57,11 +66,12 @@
                     return
                 }
 
-                await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
+                await recoverAndloadAllAccounts(currentAccountGapLimit, currentAddressGapLimit)
 
-                previousGapLimit = currentGapLimit
-                currentGapLimit += gapLimitIncrement
-                previousAccountDiscoveryThreshold = accountDiscoveryThreshold++
+                previousAccountGapLimit = currentAccountGapLimit
+                previousAddressGapLimit = currentAddressGapLimit
+                currentAccountGapLimit += accountGapLimitIncrement
+                currentAddressGapLimit += addressGapLimitIncrement
                 hasUsedWalletFinder = true
             } catch (err) {
                 error = localize(err.error)
@@ -83,14 +93,6 @@
     function handleCancelClick() {
         closePopup()
     }
-
-    onDestroy(() => {
-        // todo: (Jason) Remove this
-        if (hasUsedWalletFinder) {
-            cacheAllStakingPeriods(StakingAirdrop.Assembly)
-            cacheAllStakingPeriods(StakingAirdrop.Shimmer)
-        }
-    })
 </script>
 
 <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold} classes="mb-6"
@@ -103,7 +105,7 @@
     <div class="w-full flex-col space-y-2">
         <KeyValueBox
             keyText={localize('popups.walletFinder.accountsSearched')}
-            valueText={previousAccountDiscoveryThreshold || '-'}
+            valueText={previousAccountGapLimit || '-'}
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.accountsFound')}
@@ -111,7 +113,7 @@
         />
         <KeyValueBox
             keyText={localize('popups.walletFinder.totalWalletBalance')}
-            valueText={$balanceOverview.balance}
+            valueText={formatTokenAmountBestMatch(totalBalance, BASE_TOKEN[$activeProfile.networkProtocol])}
         />
     </div>
 
