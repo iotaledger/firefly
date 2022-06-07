@@ -28,8 +28,8 @@
             qr = qrcode(typeNumber, errorCorrectionLevel)
             qr.addData(data)
             qr.make()
-            background = darkModeEnabled ? '25395f' : ''
-            foreground = darkModeEnabled ? 'ffffff' : ''
+            background = '' // darkModeEnabled ? '25395f' : ''
+            foreground = '' // darkModeEnabled ? 'ffffff' : ''
             QRTag = qr.createDataURL(size, 0, background, foreground)
         } catch (e) {
             console.error(e)
