@@ -6,6 +6,7 @@
     export let modal: Modal
     export let value: string
     export let selected: 'none' | '1hour' | '1day' | '1week' | 'custom' = 'none'
+    export let expireDate: Date
 
     const DATE_NOW = Date.now()
 
@@ -32,24 +33,28 @@
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
+                expireDate = dateIn1Hour
                 break
             case '1day':
                 value = formatDate(dateIn1Day, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
+                expireDate = dateIn1Day
                 break
             case '1week':
                 value = formatDate(dateIn1Week, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
+                expireDate = dateIn1Week
                 break
             case 'custom':
                 value = formatDate(customDate, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
+                expireDate = customDate
                 break
             default:
                 value = 'None'

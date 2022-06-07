@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Text, ExpirationTimePickerMenu, Modal } from 'shared/components'
     export let value: string
+    export let expireDate: Date
     let modal: Modal
     let selected: 'none' | '1hour' | '1day' | '1week' = 'none'
 </script>
@@ -10,4 +11,4 @@
         {value}
     </Text>
 </button>
-<ExpirationTimePickerMenu bind:modal bind:value bind:selected />
+<ExpirationTimePickerMenu bind:modal bind:value bind:selected bind:expireDate />
