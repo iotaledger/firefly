@@ -19,7 +19,7 @@ export function subscribe(): void {
             }
 
             // do we need to handle the parsing?
-            const { accountIndex, event } = JSON.parse(result)
+            const { event } = JSON.parse(result)
 
             const eventNames = Object.keys(event)
 
