@@ -1,5 +1,5 @@
 <!--
-	@component QRImage, generates a QR code base65 gif data URI string
+	@component QRImage, generates a QR code base64 gif data URI string
     and use it as background css url.
 	
 	@prop {string} [data] - Data to be converted.
