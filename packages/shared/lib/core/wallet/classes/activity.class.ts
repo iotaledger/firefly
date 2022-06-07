@@ -47,7 +47,13 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutput(outputId: string, output: OutputData, accountAddress: string, hidden: boolean): Activity {
+    setFromOutput(
+        outputId: string,
+        output: OutputData,
+        accountAddress: string,
+        hidden: boolean,
+        claimed: boolean
+    ): Activity {
         const address = output.address.type === 0 ? output.address.pubKeyHash.substring(2) : 'Address unknown'
         const isIncoming = address === accountAddress
         const isInternal = !!get(activeAccounts).find(
@@ -62,10 +68,16 @@ export class Activity implements IActivity {
         this.rawAmount = Number(output.amount)
         this.recipient = getRecipient2(address, isIncoming)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this.isAsync = true
-        this.expireDate = new Date(2023, 1, 1)
-        this.isHidden = hidden
-        this.isClaimed = false
+
+        // StorageDepositReturn or ExpirationTime
+        const asyncUnlockConditionTypes = [1, 3]
+        if (asyncUnlockConditionTypes.includes(output.output.unlockConditions[0].type)) {
+            this.isAsync = true
+            this.isHidden = hidden
+            // this.expireDate = (output.output.unlockConditions[0].type === 3) ? new Date(output.output.unlockConditions[0].unixTime) : null
+            this.expireDate = new Date(2023, 1, 1)
+            this.isClaimed = claimed
+        }
         return this
     }
 
