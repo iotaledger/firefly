@@ -9,7 +9,7 @@
 
     let collapsed = false
 
-    function handleClick() {
+    function handleDropdownClick() {
         if (hasMultipleAssets) {
             collapsed = !collapsed
         }
@@ -21,7 +21,7 @@
 </script>
 
 {#if asset}
-    <div on:click={handleClick} class="flex flex-col relative">
+    <div on:click={handleDropdownClick} class="flex flex-col relative">
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={hasMultipleAssets}
@@ -43,7 +43,10 @@
         </div>
     </div>
     {#if collapsed && hasMultipleAssets}
-        <ul class="bg-gray-50 absolute top-12 asset-list-sizing border border-solid border-gray-300 rounded-2xl z-10" on:click={handleClick}>
+        <ul
+            class="bg-gray-50 absolute top-12 asset-list-sizing border border-solid border-gray-300 rounded-2xl z-10"
+            on:click={handleDropdownClick}
+        >
             {#each $assets as _asset}
                 <li on:click={() => handleAssetClick(_asset)}>
                     <AssetTile asset={_asset} />
