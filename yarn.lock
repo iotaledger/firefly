@@ -8677,9 +8677,9 @@ qr.js@0.0.0:
   resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
   integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
 
-"qrcode-generator@https://github.com/amadeu2/qrcode-generator":
-  version "0.0.0"
-  resolved "https://github.com/amadeu2/qrcode-generator#3fadd80ec6d9831df6a81f169ab7604581edcc91"
+"qrcode-generator@git+https://github.com/amadeu2/qrcode-generator.git#329f2b724b04f8a4908bb46e15e109b07a62f9ef":
+  version "1.4.4"
+  resolved "git+https://github.com/amadeu2/qrcode-generator.git#329f2b724b04f8a4908bb46e15e109b07a62f9ef"
 
 qs@6.7.0:
   version "6.7.0"
