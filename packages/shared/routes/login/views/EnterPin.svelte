@@ -103,7 +103,7 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
-                        getStorageDirectoryOfProfile(profile.id).then((path) => {
+                            getStorageDirectoryOfProfile(profile.id).then((path) => {
                                 initialiseProfileManager(path)
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
