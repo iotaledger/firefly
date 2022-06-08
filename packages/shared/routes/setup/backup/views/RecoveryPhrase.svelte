@@ -1,9 +1,10 @@
 <script lang="typescript">
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { downloadRecoveryKit } from 'shared/lib/utils'
-    import { createEventDispatcher } from 'svelte'
     import { Locale } from '@core/i18n'
+    import { generateAndStoreMnemonic } from '@lib/wallet'
+    import { downloadRecoveryKit } from '@lib/utils'
 
     export let locale: Locale
     export let mnemonic
@@ -16,16 +17,23 @@
     function handleContinueClick(skipVerify: boolean) {
         dispatch('next', { skip: skipVerify })
     }
+
     function handleBackClick() {
         dispatch('previous')
     }
+
     function handleMnemonicVisibilityClick() {
         hide = !hide
         hasRevealedRecoveryPhrase = true
     }
+
     function handleDownloadClick() {
         downloadRecoveryKit()
     }
+
+    onMount(() => {
+        generateAndStoreMnemonic()
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile}>

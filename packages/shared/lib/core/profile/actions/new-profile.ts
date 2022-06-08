@@ -1,6 +1,6 @@
 import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-import { destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
-import { cleanupSignup } from '@lib/app'
+import { backup, destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
+import { cleanupSignup, strongholdPassword } from '@lib/app'
 import { ledgerSimulator } from '@lib/ledger'
 import { getProfileDataPath } from '@lib/wallet'
 import { get } from 'svelte/store'
@@ -8,6 +8,8 @@ import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
 import { newProfile, updateNewProfile } from '../stores'
 import { removeProfileFolder } from '../utils'
+import { Platform } from '@lib/platform'
+import { getDefaultStrongholdName } from '@lib/utils'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
@@ -62,4 +64,15 @@ export async function deleteNewProfile(): Promise<void> {
 export function setNewProfileType(type: ProfileType): void {
     type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
     updateNewProfile({ type })
+}
+
+/**
+ * Creates an initial backup for a profile's Stronghold.
+ */
+export async function backupInitialStronghold(): Promise<void> {
+    const strongholdBackupDestination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
+    if (strongholdBackupDestination) {
+        await backup(strongholdBackupDestination, get(strongholdPassword))
+        updateNewProfile({ lastStrongholdBackupTime: new Date() })
+    }
 }
