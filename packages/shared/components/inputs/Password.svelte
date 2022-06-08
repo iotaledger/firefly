@@ -32,7 +32,7 @@
         <strength-meter class="flex flex-row justify-between items-center mb-2">
             <div class="flex flex-row">
                 <Text smaller secondary>{localize('general.passwordStrength')}:</Text>
-                <Text smaller overrideColor classes={`text-${STRENGTH_COLORS[strength]} uppercase ml-2`}>
+                <Text smaller color={`text-${STRENGTH_COLORS[strength]}`} classes="uppercase ml-2">
                     {localize(`general.passwordStrength${strength}`)}
                 </Text>
             </div>
