@@ -1,41 +1,32 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
-    import { newProfile, profiles, validateProfileName, updateNewProfile } from '@core/profile'
+    import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
+    const busy = false
+
     let profileName = $newProfile?.name ?? ''
+    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
-    $: trimmedProfileName = profileName.trim()
-    $: isProfileNameValid = profileName && trimmedProfileName
-    $: hasNameChanged = $newProfile?.name !== trimmedProfileName
-    $: profileName, (error = '')
-    $: {
-        if (error) {
-            showAppNotification({
-                type: 'error',
-                message: localize(error ? error : 'error.global.generic'),
-            })
-        }
-    }
+    $: nameChanged = $newProfile?.name !== profileName.trim()
+    $: isProfileNameValid = profileName && profileName.trim()
+    $: profileName, (error = '') // Error clears when profileName changes
 
-    function handleContinueClick(): void {
-        try {
-            if (hasNameChanged) {
-                validateProfileName(trimmedProfileName)
-                hasNameChanged && updateNewProfile({ name: trimmedProfileName })
-            }
-            $appRouter.next()
-        } catch (err) {
-            return (error = err.message)
-        }
-    }
+    async function handleBackClick(): Promise<void> {
+        await cleanupOnboarding()
 
-    function handleBackClick(): void {
         $appRouter.previous()
+    }
+
+    function handleContinueClick(): Promise<void> {
+        validateProfileName(profileName)
+        updateNewProfile({ name: profileName })
+
+        $appRouter.next()
     }
 </script>
 

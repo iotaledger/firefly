@@ -25,10 +25,10 @@
     }
 
     function handleCancelClick(): void {
+        closePopup()
         if ('function' === typeof onCancelled) {
             onCancelled()
         }
-        closePopup()
     }
 </script>
 

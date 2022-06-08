@@ -8,7 +8,6 @@
     import AddNodePopup from './AddNodePopup.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import Backup from './Backup.svelte'
-    import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
@@ -39,6 +38,7 @@
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
+    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
@@ -121,7 +121,7 @@
         diagnostics: Diagnostics,
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
-        balanceFinder: BalanceFinder,
+        walletFinder: WalletFinderPopup,
         snapshot: Snapshot,
         video: Video,
         // Participation (voting / staking)
