@@ -1,5 +1,5 @@
-import { activeAccounts, activeProfile, getAccountMetadataById } from '@core/profile'
-import { buildAccountState, IAccountState, setSelectedAccount } from '@core/account'
+import { activeAccounts, activeProfile, addAccountMetadataToActiveProfile, getAccountMetadataById } from '@core/profile'
+import { buildAccountState, buildAccountStateAndMetadata, IAccountState, setSelectedAccount } from '@core/account'
 import { getAccounts } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { loadAllAccountActivities } from '@core/wallet'
@@ -17,7 +17,14 @@ export async function loadAccounts(): Promise<void> {
             for (const account of accountsResponse) {
                 await account.sync()
                 const metadata = getAccountMetadataById(account?.meta?.index.toString())
-                const accountState = await buildAccountState(account, metadata)
+                let accountState
+                if (metadata) {
+                    accountState = await buildAccountState(account, metadata)
+                } else {
+                    const [newAccountState, metadata] = await buildAccountStateAndMetadata(account)
+                    addAccountMetadataToActiveProfile(metadata)
+                    accountState = newAccountState
+                }
                 loadedAccounts.push(accountState)
             }
             activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))

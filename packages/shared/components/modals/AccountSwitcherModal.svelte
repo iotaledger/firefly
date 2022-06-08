@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
-    import { IAccountState } from '@core/account'
+    import { sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AccountSwitcherMenuItem } from 'shared/components/molecules'
@@ -11,10 +11,6 @@
     export let modal: Modal
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
-
-    function sumBalanceForAccounts(accounts: IAccountState[]): number {
-        return accounts.reduce((acc, account) => (acc += Number(account.balances.total)), 0)
-    }
 
     function handleCreateAccountClick(): void {
         modal?.close()
