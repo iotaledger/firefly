@@ -69,7 +69,7 @@
         error = getError(_data.balance)
     })
 
-    const unsubscribe = data.subscribe((updatedData) => {
+    const unsubscribeData = data.subscribe((updatedData) => {
         _data = updatedData
 
         fiatBalance = getFiatBalance(_data.balance)
@@ -196,7 +196,7 @@
     onDestroy(() => {
         unsubscribeUnselectedInputs()
         unsubscribeBundles()
-        unsubscribe()
+        unsubscribeData()
     })
 </script>
 

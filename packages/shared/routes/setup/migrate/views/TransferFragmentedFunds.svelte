@@ -63,7 +63,7 @@
         busy = false
     }
 
-    const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
+    const unsubscribeSelectedBundles = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
         (_hasMigratedAndConfirmedAllSelectedBundles) => {
             fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
 
@@ -286,7 +286,7 @@
 
     onDestroy(() => {
         unsubscribeConfirmedBundles()
-        unsubscribe()
+        unsubscribeSelectedBundles()
     })
 
     function handleMigrateClick() {
