@@ -7,6 +7,7 @@
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@common/*": ["./lib/common/*"],
+            "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
             "@lib/*": ["./lib/*"],
             "@mocks/*": ["./lib/tests/mocks/*"]

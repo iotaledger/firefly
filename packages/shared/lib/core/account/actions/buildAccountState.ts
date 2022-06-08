@@ -18,6 +18,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     } catch (error) {
         console.error(error)
     }
+
     return {
         ...account,
         ...metadata,

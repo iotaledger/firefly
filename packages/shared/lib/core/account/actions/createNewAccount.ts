@@ -1,3 +1,5 @@
+import { get } from 'svelte/store'
+
 import { localize } from '@core/i18n'
 import { COIN_TYPE } from '@core/network'
 import {
@@ -7,7 +9,7 @@ import {
     addAccountToActiveAccounts,
 } from '@core/profile'
 import { createStardustAccount, getAccount } from '@core/profile-manager'
-import { get } from 'svelte/store'
+
 import { IAccountState } from '../interfaces'
 import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
 
@@ -20,7 +22,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         })
         const account = await getAccount(createdAccount.meta.index)
         account.sync()
-        const [newAccount, metadata] = await buildAccountStateAndMetadata(account, color)
+        const [newAccount, metadata] = await buildAccountStateAndMetadata(account, name, color)
         addAccountToActiveAccounts(newAccount)
         addAccountMetadataToActiveProfile(metadata)
         return newAccount
