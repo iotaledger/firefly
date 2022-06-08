@@ -1,9 +1,10 @@
 <script lang="typescript">
+    import { createEventDispatcher, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
-    import { validatePinFormat } from 'shared/lib/utils'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { cleanupProtectionOnboarding } from '@core/profile'
+    import { validatePinFormat } from '@lib/utils'
 
     export let locale: Locale
 
@@ -22,13 +23,14 @@
 
     $: pinInput, (error = '')
 
-    function onSubmit(): void {
+    async function handleSubmitClick(): Promise<void> {
         error = ''
         if (validatePinFormat(pinInput)) {
             if (pinInput !== pinCandidate) {
                 error = locale('error.pincode.match')
             } else {
-                dispatch('next', { pin: pinCandidate })
+                await cleanupProtectionOnboarding(pinCandidate)
+                dispatch('next')
             }
         }
     }
@@ -49,14 +51,14 @@
             bind:this={pinRef}
             glimpse
             classes="w-full mx-auto block"
-            on:submit={onSubmit}
+            on:submit={handleSubmitClick}
             autofocus
             disabled={busy}
             {error}
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!validatePinFormat(pinInput) || busy} onClick={() => onSubmit()}>
+        <Button classes="flex-1" disabled={!validatePinFormat(pinInput) || busy} onClick={handleSubmitClick}>
             {locale('actions.confirmPin')}
         </Button>
     </div>

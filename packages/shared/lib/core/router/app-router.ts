@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 
 import { mobile } from '@core/app'
-import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
 import { NetworkType } from '@core/network'
 import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
@@ -129,17 +128,13 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Protect: {
-                const { pin } = params
-                if (pin) {
-                    walletPin.set(pin)
-                    const profileType = get(activeProfile)?.type
-                    if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
-                        nextRoute = AppRoute.Congratulations
-                    } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
-                        nextRoute = AppRoute.LedgerSetup
-                    } else {
-                        nextRoute = AppRoute.Backup
-                    }
+                const profileType = get(activeProfile)?.type
+                if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
+                    nextRoute = AppRoute.Congratulations
+                } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
+                    nextRoute = AppRoute.LedgerSetup
+                } else {
+                    nextRoute = AppRoute.Backup
                 }
                 break
             }

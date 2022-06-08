@@ -1,9 +1,10 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { validatePinFormat } from 'shared/lib/utils'
-    import { createEventDispatcher } from 'svelte'
+    import { walletPin } from '@lib/app'
     import { Locale } from '@core/i18n'
+    import { validatePinFormat } from '@lib/utils'
 
     export let locale: Locale
     export let busy = false
@@ -18,7 +19,8 @@
     function onSubmit(): void {
         error = ''
         if (validatePinFormat(pinInput)) {
-            dispatch('next', { pin: pinInput })
+            $walletPin = pinInput
+            dispatch('next')
         }
     }
     function handleBackClick(): void {
