@@ -12,6 +12,7 @@
         NetworkHealth,
         IClientOptions,
         INodeInfo,
+        getOfficialNodes,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
@@ -76,6 +77,10 @@
             },
         })
     }
+
+    function handleManualNodeSelection() {
+        clientOptions.includeOfficialNodes = true
+    }
 </script>
 
 <div>
@@ -126,37 +131,33 @@
                 value={false}
                 bind:group={clientOptions.automaticNodeSelection}
                 label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
+                on:change={handleManualNodeSelection}
             />
         </section>
     {/if}
-    {#if !clientOptions.automaticNodeSelection}
-        <HR classes="pb-5 mt-5 justify-center" />
-        <section id="configureNodeList">
-            <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
-            {#if isOfficialNetwork($activeProfile?.networkType)}
-                <Checkbox
-                    label={localize('views.settings.configureNodeList.includeOfficialNodeList')}
-                    disabled={!canConfigureNodes}
-                    bind:checked={clientOptions.includeOfficialNodes}
-                    onClick={handleIncludeOfficialNodesClick}
-                    classes="mb-5"
-                />
-            {/if}
-            <div
-                class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
-                bind:this={nodesContainer}
-            >
-                {#if clientOptions.nodes.length === 0}
-                    <Text classes="p-3">
-                        {localize(
-                            `views.settings.configureNodeList.${
-                                isOfficialNetwork($activeProfile.networkType) ? 'noNodesAuto' : 'noNodes'
-                            }`
-                        )}
-                    </Text>
-                {/if}
-                {#each clientOptions.nodes as node}
+    <HR classes="pb-5 mt-5 justify-center" />
+    <section id="configureNodeList">
+        <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
+        {#if isOfficialNetwork($activeProfile?.networkType) && !clientOptions.automaticNodeSelection}
+            <Checkbox
+                label={localize('views.settings.configureNodeList.includeOfficialNodeList')}
+                disabled={!canConfigureNodes}
+                bind:checked={clientOptions.includeOfficialNodes}
+                onClick={handleIncludeOfficialNodesClick}
+                classes="mb-5"
+            />
+        {/if}
+        <div
+            class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
+            bind:this={nodesContainer}
+        >
+            {#if clientOptions.nodes.length === 0 && !isOfficialNetwork($activeProfile.networkType)}
+                <Text classes="p-3">
+                    {localize('views.settings.configureNodeList.noNodes')}
+                </Text>
+            {:else}
+                {#each clientOptions.nodes.length === 0 ? getOfficialNodes($activeProfile.networkProtocol, $activeProfile.networkType) : clientOptions.nodes as node}
                     <div
                         class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     >
@@ -174,10 +175,12 @@
                         >
                     </div>
                 {/each}
-                {#if nodeContextMenu}
-                    <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
-                {/if}
-            </div>
+            {/if}
+            {#if nodeContextMenu}
+                <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
+            {/if}
+        </div>
+        {#if !clientOptions.automaticNodeSelection}
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">
                 <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
                     {localize('actions.addNode')}
@@ -193,8 +196,8 @@
                     {localize('actions.removeAllNodes')}
                 </Button>
             </div>
-        </section>
-    {/if}
+        {/if}
+    </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="proofOfWork">
         <Text type="h5" classes="mb-3">{localize('views.settings.proofOfWork.title')}</Text>
