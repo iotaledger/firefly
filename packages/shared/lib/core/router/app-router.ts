@@ -1,13 +1,15 @@
-import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import { get, writable } from 'svelte/store'
+
 import { mobile } from '@core/app'
 import { cleanupSignup, strongholdPassword, walletPin } from '@lib/app'
+import { NetworkType } from '@core/network'
+import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
-import { get, writable } from 'svelte/store'
+import { walletSetupType } from '@lib/wallet'
+
 import { AppRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
-import { NetworkType } from '@core/network'
-import { walletSetupType } from '@lib/wallet'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -34,7 +36,6 @@ export class AppRouter extends Router<AppRoute> {
     }
 
     public next(event?: FireflyEvent): void {
-        // TODO: only handle route changes, not app variables
         const params = event || {}
         const currentRoute = get(this.routeStore)
         let nextRoute: AppRoute
@@ -123,7 +124,6 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Password: {
                 const { password } = params
                 if (password) {
-                    strongholdPassword.set(password)
                     nextRoute = AppRoute.Protect
                 }
                 break
@@ -187,7 +187,6 @@ export class AppRouter extends Router<AppRoute> {
                 }
                 break
             case AppRoute.Congratulations:
-                cleanupSignup()
                 nextRoute = AppRoute.Dashboard
                 break
         }

@@ -28,6 +28,7 @@
         newProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
+    import { cleanupSignup } from '../../lib/app'
 
     const { didComplete } = $migration
 
@@ -36,30 +37,6 @@
     let localizedBody = 'body'
     let localizedValues = {}
     let logExported = false
-
-    onMount(async () => {
-        if (!wasMigrated) {
-            if ($walletSetupType === SetupType.FireflyLedger) {
-                localizedBody = 'fireflyLedgerBody'
-            }
-            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
-            // When this component mounts, ensure that the profile is persisted in the local storage.
-            addNewProfile($newProfile)
-            loadPersistedProfileIntoActiveProfile($newProfile.id)
-            newProfile.set(null)
-            await createNewAccount()
-            void login()
-        } else {
-            if ($walletSetupType === SetupType.TrinityLedger) {
-                localizedBody = 'trinityLedgerBody'
-                localizedValues = { legacy: LedgerAppName.IOTALegacy }
-
-                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
-            } else {
-                localizedBody = 'softwareMigratedBody'
-            }
-        }
-    })
 
     const fiatbalance = formatCurrency(
         convertToFiat(
@@ -71,17 +48,22 @@
         AvailableExchangeRates.USD
     )
 
-    const handleContinueClick = (): void => {
+    function advanceView(): void {
+        cleanupSignup()
+        $appRouter.next()
+    }
+
+    function handleContinueClick(): void {
         if (wasMigrated) {
             const _continue = () => {
+                /**
+                 * We check for the new Ledger IOTA app to be connected after migration
+                 * because the last app the user had open was the legacy one
+                 */
                 if ($walletSetupType === SetupType.TrinityLedger) {
-                    /**
-                     * We check for the new Ledger IOTA app to be connected after migration
-                     * because the last app the user had open was the legacy one
-                     */
-                    promptUserToConnectLedger(false, () => $appRouter.next())
+                    promptUserToConnectLedger(false, advanceView)
                 } else {
-                    $appRouter.next()
+                    advanceView()
                 }
             }
             const _exportMigrationLog = () => {
@@ -108,9 +90,33 @@
                 _exportMigrationLog()
             }
         } else {
-            $appRouter.next()
+            advanceView()
         }
     }
+
+    onMount(async () => {
+        if (!wasMigrated) {
+            if ($walletSetupType === SetupType.FireflyLedger) {
+                localizedBody = 'fireflyLedgerBody'
+            }
+            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
+            // When this component mounts, ensure that the profile is persisted in the local storage.
+            addNewProfile($newProfile)
+            loadPersistedProfileIntoActiveProfile($newProfile.id)
+            newProfile.set(null)
+            await createNewAccount()
+            void login()
+        } else {
+            if ($walletSetupType === SetupType.TrinityLedger) {
+                localizedBody = 'trinityLedgerBody'
+                localizedValues = { legacy: LedgerAppName.IOTALegacy }
+
+                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
+            } else {
+                localizedBody = 'softwareMigratedBody'
+            }
+        }
+    })
 
     onDestroy(() => {
         if (wasMigrated) {

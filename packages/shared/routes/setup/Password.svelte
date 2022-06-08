@@ -49,6 +49,7 @@
                     await setStrongholdPassword(password)
                 }
 
+                $strongholdPassword = password
                 $appRouter.next({ password })
             } catch (err) {
                 showAppNotification({
