@@ -1,19 +1,8 @@
 import { get } from 'svelte/store'
 import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-import {
-    backup,
-    destroyProfileManager,
-    initialiseProfileManager,
-    profileManager,
-    storeMnemonic,
-    verifyMnemonic,
-} from '@core/profile-manager'
-import { cleanupSignup, mnemonic, strongholdPassword, walletPin } from '@lib/app'
+import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
+import { cleanupSignup } from '@lib/app'
 import { ledgerSimulator } from '@lib/ledger'
-import { walletSetupType } from '@lib/wallet'
-import { Platform } from '@lib/platform'
-import { getDefaultStrongholdName } from '@lib/utils'
-import { SetupType } from '@lib/typings/setup'
 
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
@@ -80,41 +69,4 @@ export async function deleteNewProfile(): Promise<void> {
 export function setNewProfileType(type: ProfileType): void {
     type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
     updateNewProfile({ type })
-}
-
-/**
- * Creates an initial backup for a profile's Stronghold.
- */
-export async function backupInitialStronghold(): Promise<void> {
-    const strongholdBackupDestination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
-    if (strongholdBackupDestination) {
-        await backup(strongholdBackupDestination, get(strongholdPassword))
-        updateNewProfile({ lastStrongholdBackupTime: new Date() })
-    }
-}
-
-/**
- * Handles the cleanup process for the protection segment of the onboarding flow.
- */
-export async function cleanupProtectionOnboarding(pinInput: string): Promise<void> {
-    await Platform.PincodeManager.set(get(newProfile)?.id, pinInput)
-    // TODO: replace with new api when it is implemented
-    // await setStoragePassword(pinInput)
-    if (get(walletSetupType) === SetupType.Mnemonic) {
-        await storeAndCleanMnemonic()
-    }
-
-    walletPin.set(null)
-}
-
-/**
- * Verifies, stores, then clears the mnemonic used in the onboarding flow.
- */
-export async function storeAndCleanMnemonic(): Promise<void> {
-    const _mnemonic = get(mnemonic).join(' ')
-
-    await verifyMnemonic(_mnemonic)
-    await storeMnemonic(_mnemonic)
-
-    mnemonic.set(null)
 }

@@ -3,7 +3,7 @@
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
-    import { cleanupProtectionOnboarding } from '@core/profile'
+    import { cleanupProtectionOnboarding } from '@contexts/onboarding'
     import { validatePinFormat } from '@lib/utils'
 
     export let locale: Locale

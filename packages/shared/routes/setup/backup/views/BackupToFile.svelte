@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { mnemonic } from '@lib/app'
     import { Locale } from '@core/i18n'
-    import { backupInitialStronghold } from '@core/profile'
+    import { backupInitialStronghold } from '@contexts/onboarding'
     import { storeMnemonic } from '@core/profile-manager'
 
     export let locale: Locale
