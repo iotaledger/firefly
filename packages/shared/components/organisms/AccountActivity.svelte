@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { ActivityTile, TogglableButton, Text, TextInput } from 'shared/components'
+    import { ActivityTile, TogglableButton, Icon, Text, TextInput } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
+    import { api, isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import {
@@ -13,12 +13,68 @@
         filterQueriedActivities,
         Activity,
     } from '@core/wallet'
+    import { selectedAccount } from '@core/account'
+    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
             type: 'activityDetails',
             props: { activity },
         })
+    }
+
+    const handleSyncAccountClick = () => {
+        if (!$isSyncing) {
+            const _syncAccount = () => {
+                $isSyncing = true
+                api.syncAccount($selectedAccount?.id, {
+                    onSuccess() {
+                        $isSyncing = false
+                    },
+                    onError(err) {
+                        $isSyncing = false
+
+                        const shouldHideErrorNotification =
+                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                        if (!shouldHideErrorNotification) {
+                            if ($isLedgerProfile) {
+                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                            } else {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: localize(err.error),
+                                })
+                            }
+                        }
+                    },
+                })
+            }
+
+            if ($isSoftwareProfile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                            openPopup({
+                                type: 'password',
+                                props: { onSuccess: () => _syncAccount() },
+                            })
+                        } else {
+                            void _syncAccount()
+                        }
+                    },
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: localize(err.error),
+                        })
+                    },
+                })
+            } else {
+                void _syncAccount()
+            }
+        }
     }
 
     const filters = ['all', 'incoming', 'outgoing']
@@ -60,7 +116,15 @@
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <Text type="h5">{localize('general.activity')}</Text>
+            <div class="flex flex-row">
+                <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
+                <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                    <Icon
+                        icon="refresh"
+                        classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                    />
+                </button>
+            </div>
             <TogglableButton icon="search" bind:active={searchActive} />
         </div>
         {#if searchActive}
