@@ -44,12 +44,17 @@
     </div>
     {#if collapsed && hasMultipleAssets}
         <ul
-            class="bg-gray-50 absolute top-12 asset-list-sizing border border-solid border-gray-300 rounded-2xl z-10"
+            class="bg-white dark:bg-gray-800 absolute top-12 asset-list-sizing border border-solid border-gray-300 dark:border-gray-700
+            hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl z-10 p-4"
             on:click={handleDropdownClick}
         >
             {#each $assets as _asset}
                 <li on:click={() => handleAssetClick(_asset)}>
-                    <AssetTile asset={_asset} />
+                    <AssetTile
+                        asset={_asset}
+                        overrideColor
+                        classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    />
                 </li>
             {/each}
         </ul>

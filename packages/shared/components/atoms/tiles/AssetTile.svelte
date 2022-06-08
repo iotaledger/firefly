@@ -26,6 +26,7 @@
         tileText={formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
         tileSubText={`≈ ${asset?.fiatBalance}`}
         onClick={handleTileClick}
+        {...$$restProps}
     />
 {/if}
 

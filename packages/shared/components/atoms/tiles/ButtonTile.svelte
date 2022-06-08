@@ -13,11 +13,15 @@
     export let tileTextFontWeight = FontWeightText.semibold
     export let tileSubText = ''
     export let tileSubTextFontWeight = FontWeightText.normal
+    export let classes = ''
+    export let overrideColor = false
     export let onClick: () => void
 </script>
 
 <button
-    class="w-full rounded-2xl flex flex-row justify-between items-center bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700"
+    class="{classes} w-full rounded-2xl flex flex-row justify-between items-center {overrideColor
+        ? ''
+        : 'bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700'}"
     on:click={onClick}
 >
     <Tile {...$$props} />
