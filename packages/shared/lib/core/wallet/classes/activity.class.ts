@@ -13,12 +13,15 @@ import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
 import {
     formatTokenAmountBestMatch,
+    isAsyncUnlockCondition,
     receiverAddressesFromTransactionPayload,
     sendAddressFromTransactionPayload,
 } from '../utils'
 
 export class Activity implements IActivity {
     id: string
+    outputId?: string
+    transactionId?: string
     time: Date
     type: ActivityType
     direction: ActivityDirection
@@ -34,6 +37,7 @@ export class Activity implements IActivity {
 
     setFromTransaction(transactionId: string, transaction: Transaction): Activity {
         this.id = transactionId
+        this.transactionId = transactionId
         this.time = new Date(Number(transaction.timestamp))
         this.type = ActivityType.Send
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
@@ -60,23 +64,24 @@ export class Activity implements IActivity {
             (acc) => convertBech32AddressToEd25519Address(acc.meta.publicAddresses[0].address) === address
         )
         this.id = outputId
-        this.time = new Date()
+        this.outputId = outputId
+        this.time = new Date(output.metadata.milestoneTimestampBooked)
         this.type = getActivityType(isIncoming, isInternal)
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = InclusionState.Confirmed
         this.isInternal = isInternal
         this.rawAmount = Number(output.amount)
-        this.recipient = getRecipient2(address, isIncoming)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        // StorageDepositReturn or ExpirationTime
-        const asyncUnlockConditionTypes = [1, 3]
-        if (asyncUnlockConditionTypes.includes(output.output.unlockConditions[0].type)) {
-            this.isAsync = true
-            this.isHidden = hidden
-            // this.expireDate = (output.output.unlockConditions[0].type === 3) ? new Date(output.output.unlockConditions[0].unixTime) : null
-            this.expireDate = new Date(2023, 1, 1)
-            this.isClaimed = claimed
+        for (const unlockCondition of output.output.unlockConditions) {
+            if (isAsyncUnlockCondition(unlockCondition)) {
+                this.isAsync = true
+                this.isHidden = hidden
+                this.expireDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
+                // this.expireDate = new Date(2023, 1, 1)
+                this.isClaimed = claimed
+                break
+            }
         }
         return this
     }
@@ -93,7 +98,7 @@ export class Activity implements IActivity {
                 }
             }
         }
-        return
+        return null
     }
 
     getFormattedAmount(signed: boolean): string {
@@ -158,14 +163,4 @@ function getActivityType(incoming: boolean, internal: boolean): ActivityType {
     } else {
         return ActivityType.Send
     }
-}
-
-function getRecipient2(address: string, isIncoming: boolean): Recipient {
-    // TODO: change this code when we have the output addresses as bech32
-    // const account = findAccountWithAddress(address)
-    const account = get(activeAccounts).find(
-        (acc) => convertBech32AddressToEd25519Address(acc.meta.publicAddresses[0].address) === address
-    )
-
-    return account ? { type: 'account', account: account } : { type: 'address', address: address }
 }

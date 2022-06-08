@@ -1,12 +1,16 @@
+import { selectedAccount } from '@core/account'
+import { get } from 'svelte/store'
 import { queriedActivities } from '../stores'
+import { hiddenActivities } from '../stores/hidden-activities.store'
 
-// TODO: We need to save all of the hidden activities in local storage
-// TBD: 2 options for hidding:
-// _- in the selected-account-activities we always filter out all of the activities that are saved in the localstorage
-//  - we initialize the activities with a "isHidden" flag -> better performance, but more redundant code
 export function hideActivity(id: string): void {
-    const hiddenActivities = JSON.parse(localStorage.getItem('hiddenActivities')) || []
-    localStorage.setItem('hiddenActivities', JSON.stringify([...hiddenActivities, id]))
+    hiddenActivities.update((state) => {
+        if (!state[get(selectedAccount).id]) {
+            state[get(selectedAccount).id] = []
+        }
+        state[get(selectedAccount).id].push(id)
+        return state
+    })
 
     queriedActivities.update((state) => {
         const activity = state.find((activity) => activity.id === id)

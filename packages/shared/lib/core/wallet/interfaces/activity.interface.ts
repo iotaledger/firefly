@@ -5,6 +5,8 @@ import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
     id: string
+    outputId?: string
+    transactionId?: string
     type: ActivityType
     time: Date
     direction: ActivityDirection
