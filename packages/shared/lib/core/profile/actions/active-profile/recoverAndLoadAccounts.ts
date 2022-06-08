@@ -1,7 +1,7 @@
 import { loadAccounts } from '@core/profile'
 import { recoverAccounts } from '@core/profile-manager'
 
-export async function recoverAndloadAllAccounts(accountGapLimit: number, addressGapLimit: number): Promise<void> {
+export async function recoverAndLoadAccounts(accountGapLimit: number, addressGapLimit: number): Promise<void> {
     try {
         await recoverAccounts(accountGapLimit, addressGapLimit)
         await loadAccounts()

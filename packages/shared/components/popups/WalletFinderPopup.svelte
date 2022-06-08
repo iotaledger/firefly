@@ -7,9 +7,11 @@
     import {
         activeAccounts,
         activeProfile,
+        INITIAL_ACCOUNT_GAP_LIMIT,
+        INITIAL_ADDRESS_GAP_LIMIT,
         isLedgerProfile,
         isSoftwareProfile,
-        recoverAndloadAllAccounts,
+        recoverAndLoadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
@@ -19,11 +21,10 @@
 
     export let searchForBalancesOnLoad = false
 
-    const { isStrongholdLocked } = $activeProfile
+    const { isStrongholdLocked, type } = $activeProfile
 
-    const startAddressIndex = 0
-    const accountGapLimitIncrement = $isLedgerProfile ? 3 : 10
-    const addressGapLimitIncrement = 0
+    const accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[type]
+    const addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[type]
     let previousAccountGapLimit = 0
     let previousAddressGapLimit = 0
     let currentAccountGapLimit = accountGapLimitIncrement
@@ -66,7 +67,7 @@
                     return
                 }
 
-                await recoverAndloadAllAccounts(currentAccountGapLimit, currentAddressGapLimit)
+                await recoverAndLoadAccounts(currentAccountGapLimit, currentAddressGapLimit)
 
                 previousAccountGapLimit = currentAccountGapLimit
                 previousAddressGapLimit = currentAddressGapLimit
