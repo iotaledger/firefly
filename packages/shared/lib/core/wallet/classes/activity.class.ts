@@ -80,7 +80,6 @@ export class Activity implements IActivity {
                 this.isAsync = true
                 this.isHidden = hidden
                 this.expireDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
-                // this.expireDate = new Date(2023, 1, 1)
                 this.isClaimed = claimed
                 break
             }
