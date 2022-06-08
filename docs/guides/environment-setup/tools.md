@@ -56,3 +56,11 @@ Then run a formatting check:
 # check format in current working directory
 cargo +nightly fmt -- --check
 ```
+
+## Retype Documentation
+
+Retype makes it incredibly easy to manage documentation. Simply use the following command from the root directory:
+```bash
+# generates locally hosted instance of the handbook
+yarn docs:start
+```
