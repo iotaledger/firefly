@@ -1,41 +1,50 @@
+import { get } from 'svelte/store'
 import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import {
     backup,
     destroyProfileManager,
     initialiseProfileManager,
+    profileManager,
     storeMnemonic,
     verifyMnemonic,
 } from '@core/profile-manager'
 import { cleanupSignup, mnemonic, strongholdPassword, walletPin } from '@lib/app'
 import { ledgerSimulator } from '@lib/ledger'
-import { getProfileDataPath, walletSetupType } from '@lib/wallet'
-import { get } from 'svelte/store'
-import { ProfileType } from '../enums'
-import { buildNewProfile } from '../helpers'
-import { newProfile, updateNewProfile } from '../stores'
-import { removeProfileFolder } from '../utils'
+import { walletSetupType } from '@lib/wallet'
 import { Platform } from '@lib/platform'
 import { getDefaultStrongholdName } from '@lib/utils'
 import { SetupType } from '@lib/typings/setup'
 
+import { ProfileType } from '../enums'
+import { buildNewProfile } from '../helpers'
+import { newProfile, updateNewProfile } from '../stores'
+import { getStorageDirectoryOfProfile, removeProfileFolder } from '../utils'
+
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
  * @method createNewProfile
- * @param {string} profileName
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
+ * @param {string} name
  */
 export async function createNewProfile(
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
-    networkType: NetworkType
+    networkType: NetworkType,
+    name: string = ''
 ): Promise<void> {
+    if (get(profileManager)) {
+        console.error('Profile is already created')
+        return
+    }
+
     // TODO: build custom client options for custom network
     const clientOptions = await getDefaultClientOptions(networkProtocol, networkType)
-    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions)
+    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions, name)
     newProfile.set(profile)
-    const path = await getProfileDataPath(get(newProfile).id)
+    const path = await getStorageDirectoryOfProfile(get(newProfile).id)
+
     initialiseProfileManager(path, clientOptions, {
         Stronghold: { password: '', snapshotPath: `${path}/wallet.stronghold` },
     })

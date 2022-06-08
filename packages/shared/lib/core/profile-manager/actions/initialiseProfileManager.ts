@@ -1,6 +1,6 @@
 import { ClientOptions, SecretManager } from '@iota/wallet'
 import { api } from '../api'
-import { profileManager } from '../store'
+import { profileManager } from '../stores'
 
 export function initialiseProfileManager(
     storagePath: string,

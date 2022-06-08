@@ -12,7 +12,7 @@ export enum SettingsIcons {
     changeProfileName = 'profile',
     balanceFinder = 'sync',
     hiddenAccounts = 'view',
-    deleteProfile = 'reset',
+    deleteProfile = 'delete',
     deepLinks = 'link',
     developerMode = 'dev',
     networkConfiguration = 'wifi',

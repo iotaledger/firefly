@@ -16,7 +16,7 @@
     import { appRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { getProfileDataPath, walletSetupType } from 'shared/lib/wallet'
+    import { walletSetupType } from 'shared/lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { localize } from '@core/i18n'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -26,6 +26,7 @@
         loadPersistedProfileIntoActiveProfile,
         login,
         newProfile,
+        getStorageDirectoryOfProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
     import { cleanupSignup } from '../../lib/app'
@@ -67,7 +68,7 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile?.id)
+                getStorageDirectoryOfProfile($activeProfile?.id)
                     .then((source) =>
                         $walletSetupType === SetupType.TrinityLedger
                             ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile?.id}-${LOG_FILE_NAME}`)
