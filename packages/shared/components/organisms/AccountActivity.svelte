@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ActivityTile, TogglableButton, Text, TextInput } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
@@ -13,6 +13,7 @@
         filterQueriedActivities,
         Activity,
     } from '@core/wallet'
+    import featureFlags from 'shared/featureFlags.config'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -61,9 +62,11 @@
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
             <Text type="h5">{localize('general.activity')}</Text>
-            <TogglableButton icon="search" bind:active={searchActive} />
+            {#if featureFlags?.wallet?.activityHistory?.search?.enabled}
+                <TogglableButton icon="search" bind:active={searchActive} />
+            {/if}
         </div>
-        {#if searchActive}
+        {#if featureFlags?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <TextInput
                     bind:inputElement
@@ -75,11 +78,12 @@
                     color="gray-500"
                 />
                 <!-- TODO: Wait for screen design for these -->
-                <!-- <ul class="flex flex-row justify-between space-x-8">
+                <!--
+                <ul class="flex flex-row justify-between space-x-8">
                     {#each filters as filter, i}
                         <li on:click={() => (activeFilterIndex = i)}>
                             <Text
-                                type="p"
+                                type={TextType.p}
                                 overrideColor
                                 classes="cursor-pointer
                             {activeFilterIndex === i
@@ -90,7 +94,8 @@
                             </Text>
                         </li>
                     {/each}
-                </ul> -->
+                </ul>
+                -->
             </div>
         {/if}
     </div>
