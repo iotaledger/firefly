@@ -69,11 +69,9 @@
         : document.body.classList.remove('scheme-dark')
 
     $: {
-        isLocaleLoaded.subscribe((loaded) => {
-            if (loaded) {
-                Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
-            }
-        })
+        if ($isLocaleLoaded) {
+            Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
+        }
     }
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
