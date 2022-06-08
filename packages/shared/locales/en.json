@@ -1178,7 +1178,8 @@
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
-        "optionalPublicNote": "Optional public note"
+        "optionalPublicNote": "Optional public note",
+        "nodeList": "Node list"
     },
     "dates": {
         "today": "Today",

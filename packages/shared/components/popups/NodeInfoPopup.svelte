@@ -129,30 +129,32 @@
             {/each}
         {/key}
     </div>
-    {#each Object.keys(NODE_INFO_TAB_MAP[nodeInfoTab]).map( (nodeInfoTabKey) => processNodeInfoMapTab(nodeInfoTab, nodeInfoTabKey) ) as { localeKey, nodeInfoValue }}
-        <CopyableBox value={nodeInfoValue} classes="mb-2.5">
-            <div class="w-full h-full flex flex-row justify-between items-center">
-                <Text type="p" fontSize="sm" fontWeight="font-600" secondary
-                    >{localize(`${NODE_INFO_LOCALE_BASE_PATH}.${localeKey}`)}</Text
-                >
-                {#if typeof nodeInfoValue === 'boolean'}
-                    <Checkbox disabled checked={nodeInfoValue} />
-                {:else if Array.isArray(nodeInfoValue)}
-                    <div class="flex flex-col text-right">
-                        {#if nodeInfoValue.length}
-                            {#each nodeInfoValue as item}
-                                <Text type="p" fontSize="sm" secondary>{item}</Text>
-                            {/each}
-                        {:else}
-                            <Text type="p" fontSize="sm" secondary>{localize('general.none')}</Text>
-                        {/if}
-                    </div>
-                {:else}
-                    <Text type="p" fontSize="sm" secondary>{nodeInfoValue}</Text>
-                {/if}
-            </div>
-        </CopyableBox>
-    {/each}
+    <div class="flex flex-col space-y-2.5">
+        {#each Object.keys(NODE_INFO_TAB_MAP[nodeInfoTab]).map( (nodeInfoTabKey) => processNodeInfoMapTab(nodeInfoTab, nodeInfoTabKey) ) as { localeKey, nodeInfoValue }}
+            <CopyableBox value={nodeInfoValue}>
+                <div class="w-full h-full flex flex-row justify-between items-center">
+                    <Text type="p" fontSize="sm" fontWeight="font-600" secondary
+                        >{localize(`${NODE_INFO_LOCALE_BASE_PATH}.${localeKey}`)}</Text
+                    >
+                    {#if typeof nodeInfoValue === 'boolean'}
+                        <Checkbox disabled checked={nodeInfoValue} />
+                    {:else if Array.isArray(nodeInfoValue)}
+                        <div class="flex flex-col text-right">
+                            {#if nodeInfoValue.length}
+                                {#each nodeInfoValue as item}
+                                    <Text type="p" fontSize="sm" secondary>{item}</Text>
+                                {/each}
+                            {:else}
+                                <Text type="p" fontSize="sm" secondary>{localize('general.none')}</Text>
+                            {/if}
+                        </div>
+                    {:else}
+                        <Text type="p" fontSize="sm" secondary>{nodeInfoValue}</Text>
+                    {/if}
+                </div>
+            </CopyableBox>
+        {/each}
+    </div>
     <div class="flex w-full justify-center pt-8">
         <Button classes="w-full" secondary onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
             {localize('actions.copyAllInformation')}

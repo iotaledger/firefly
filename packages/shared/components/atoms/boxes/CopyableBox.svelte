@@ -30,7 +30,7 @@
     })
 </script>
 
-{#if value}
+{#if value !== null && value !== undefined}
     <button
         bind:this={tooltipAnchor}
         on:click={onClick}

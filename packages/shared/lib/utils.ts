@@ -480,7 +480,7 @@ export function getMonthYear(date: Date): string {
 /*
  * Gets an object value from an object string path
  */
-export function resolveObjectPath(object: Record<string, unknown>, path: string, defaultValue: unknown = ''): unknown {
+export function resolveObjectPath(object: Record<string, any>, path: string, defaultValue: unknown = ''): unknown {
     if (!object || !path) {
         return defaultValue
     }

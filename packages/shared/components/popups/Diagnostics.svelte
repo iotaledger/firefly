@@ -40,6 +40,10 @@
                 }`
             ),
         })
+        appVars.push({
+            label: 'general.nodeList',
+            value: $activeProfile?.settings.clientOptions.nodes.map((node) => node?.url).toString(),
+        })
     }
 
     contentApp = combineValues(appVars)
