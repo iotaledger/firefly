@@ -39,10 +39,13 @@
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
         }
         direction = activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress'
-        subject =
-            activity.recipient.type === 'account'
-                ? truncateString(activity.recipient.account?.name, 13, 0)
-                : truncateString(activity.recipient.address, 6, 8)
+        if (activity?.recipient?.type === 'account') {
+            subject = truncateString(activity.recipient.account?.name, 13, 0)
+        } else if (activity?.recipient?.type === 'address') {
+            subject = truncateString(activity.recipient.address, 6, 8)
+        } else {
+            subject = 'Unknown Address'
+        }
     }
 
     let time = new Date()

@@ -1,10 +1,9 @@
 import { selectedAccount } from '@core/account'
 import { BASE_TOKEN } from '@core/network'
-import { activeAccounts, activeProfile } from '@core/profile'
+import { activeProfile } from '@core/profile'
 import { ITransactionPayload } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
-import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
@@ -17,6 +16,8 @@ import {
     receiverAddressesFromTransactionPayload,
     sendAddressFromTransactionPayload,
 } from '../utils'
+import { Bech32Helper } from '@lib/bech32Helper'
+import { Converter } from '@lib/converter'
 
 export class Activity implements IActivity {
     id: string
@@ -58,11 +59,12 @@ export class Activity implements IActivity {
         hidden: boolean,
         claimed: boolean
     ): Activity {
-        const address = output.address.type === 0 ? output.address.pubKeyHash.substring(2) : 'Address unknown'
+        const address =
+            output?.address?.type === 0
+                ? Bech32Helper.toBech32(0, Converter.hexToBytes(output.address.pubKeyHash.substring(2)), 'rms')
+                : ''
         const isIncoming = address === accountAddress
-        const isInternal = !!get(activeAccounts).find(
-            (acc) => convertBech32AddressToEd25519Address(acc.meta.publicAddresses[0].address) === address
-        )
+        const isInternal = !!findAccountWithAddress(address)
         this.id = outputId
         this.outputId = outputId
         this.time = new Date(output.metadata.milestoneTimestampBooked)
