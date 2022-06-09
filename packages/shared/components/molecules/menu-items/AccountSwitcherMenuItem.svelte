@@ -7,7 +7,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { isSyncing, isTransferring } from '@lib/wallet'
+    import { isTransferring } from '@lib/wallet'
     import { Text } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms/'
 
@@ -15,7 +15,7 @@
     export let onClick: () => unknown
 
     function handleAccountClick(accountId: string): void {
-        if ($isSyncing) {
+        if (account.isSyncing) {
             showWarning(localize('notifications.syncing'))
         } else if ($isTransferring) {
             showWarning(localize('notifications.transferring'))
