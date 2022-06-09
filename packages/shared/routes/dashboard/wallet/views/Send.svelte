@@ -3,18 +3,7 @@
     import { get, Readable } from 'svelte/store'
     import { ActionSheet, ActionSheetButtonStyle } from '@capacitor/action-sheet'
     import { Unit } from '@iota/unit-converter'
-    import {
-        Address,
-        Amount,
-        Animation,
-        Button,
-        Dropdown,
-        Icon,
-        Input,
-        ProgressBar,
-        ResponsiveAddress,
-        Text,
-    } from 'shared/components'
+    import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
@@ -72,7 +61,6 @@
     let unit = Unit.Mi
     let amount = ''
     let address = ''
-    let responsiveAddress = ''
     let amountError = ''
     let addressError = ''
     let toError = ''
@@ -508,18 +496,6 @@
         sendSubscription()
     })
 
-    $: {
-        address = responsiveAddress[responsiveAddress.length - 1]
-        const length = 24
-        if (responsiveAddress.length > length + 3) {
-            const [addressStart, addressEnd] = [
-                responsiveAddress.slice(0, length * 0.5),
-                responsiveAddress.slice(responsiveAddress.length - length * 0.5, responsiveAddress.length),
-            ]
-            responsiveAddress = `${addressStart}...${addressEnd}`
-        }
-    }
-
     $: address,
         unit,
         amount,
@@ -565,17 +541,6 @@
                             <div class="mb-6 w-full" on:click={selectInternal}>
                                 <Input style="text-align: left;" type="button" value={to?.label || null} />
                             </div>
-                            <!-- <Dropdown
-                                value={to?.label || null}
-                                label={localize('general.to')}
-                                placeholder={localize('general.to')}
-                                items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
-                                onSelect={handleToSelect}
-                                disabled={$isTransferring || $liveAccounts.length === 2}
-                                error={toError}
-                                classes="mb-6"
-                                autofocus={$liveAccounts.length > 2}
-                            /> -->
                         {:else}
                             {#if accountsDropdownItems.length > 1}
                                 <button
@@ -586,8 +551,8 @@
                                 </button>
                             {/if}
                             <Address
-                                bind:responsiveAddress
                                 error={addressError}
+                                bind:address
                                 label={localize('general.sendToAddress')}
                                 disabled={$isTransferring}
                                 placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
