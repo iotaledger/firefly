@@ -83,7 +83,9 @@
                     <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
                     <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
                 </div>
-                <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
+                {#if formattedFiatValue}
+                    <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
+                {/if}
             </transaction-value>
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
