@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
-    import { Button, Icon, QR, Spinner, Text } from 'shared/components'
+    import { mobile } from '@lib/app'
+    import { Button, Icon, QR, QRImage, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
     import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
@@ -57,7 +58,11 @@
         </div>
     {:else}
         <div class="flex flex-auto items-center justify-center mb-4">
-            <QR size={qrSize} data={$selectedAccount.depositAddress} />
+            {#if $mobile}
+                <QRImage size={5} data={$selectedAccount.depositAddress} />
+            {:else}
+                <QR size={qrSize} data={$selectedAccount.depositAddress} />
+            {/if}
         </div>
         <div class="mb-6">
             <Text secondary smaller classes="mb-1">
