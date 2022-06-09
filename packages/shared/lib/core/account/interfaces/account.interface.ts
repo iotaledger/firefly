@@ -32,7 +32,7 @@ export interface IAccount {
     listUnspentOutputs(): Promise<OutputData[]>
     listPendingTransactions(): Promise<Transaction[]>
     listTransactions(): Promise<Transaction[]>
-    sync(options?: AccountSyncOptions): Promise<AccountBalance>
+    sync(options?: AccountSyncOptions): Promise<void>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     mintNativeToken(
