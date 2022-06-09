@@ -17,6 +17,8 @@
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { get } from 'svelte/store'
+    import { profileManager } from '@core/profile-manager'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -25,52 +27,49 @@
         })
     }
 
-    const handleSyncAccountClick = () => {
-        if (!$isSyncing) {
-            const _syncAccount = () => {
-                $isSyncing = true
-                api.syncAccount($selectedAccount?.id, {
-                    onSuccess() {
-                        $isSyncing = false
-                    },
-                    onError(err) {
-                        $isSyncing = false
+    async function _syncAccount() {
+        $isSyncing = true
+        try {
+            await get(selectedAccount).sync()
+            $isSyncing = false
+        } catch (err) {
+            $isSyncing = false
 
-                        const shouldHideErrorNotification =
-                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                        if (!shouldHideErrorNotification) {
-                            if ($isLedgerProfile) {
-                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                            } else {
-                                showAppNotification({
-                                    type: 'error',
-                                    message: localize(err.error),
-                                })
-                            }
-                        }
-                    },
-                })
+            const shouldHideErrorNotification =
+                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+            if (!shouldHideErrorNotification) {
+                if ($isLedgerProfile) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                } else {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
+                }
             }
+        }
+    }
 
+    async function handleSyncAccountClick() {
+        if (!$isSyncing) {
             if ($isSoftwareProfile) {
-                api.getStrongholdStatus({
-                    onSuccess(strongholdStatusResponse) {
-                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                            openPopup({
-                                type: 'password',
-                                props: { onSuccess: () => _syncAccount() },
-                            })
-                        } else {
-                            void _syncAccount()
-                        }
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err.error),
+                try {
+                    const strongholdStatusResponse = await get(profileManager).isStrongholdPasswordAvailable()
+
+                    if (strongholdStatusResponse) {
+                        openPopup({
+                            type: 'password',
+                            props: { onSuccess: () => _syncAccount() },
                         })
-                    },
-                })
+                    } else {
+                        void _syncAccount()
+                    }
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
+                }
             } else {
                 void _syncAccount()
             }
