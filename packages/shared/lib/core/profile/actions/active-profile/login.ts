@@ -1,15 +1,20 @@
-import { activeProfile } from '../../stores'
 import { get } from 'svelte/store'
+import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
+import { activeProfile } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
-import { loadAllAccountActivities } from '@core/wallet'
+import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 
-export async function login(): Promise<void> {
-    const { loggedIn, lastActiveAt, id, isStrongholdLocked } = get(activeProfile)
+export async function login(firstTime: boolean = false): Promise<void> {
+    const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
-        void loadAccounts()
+        if (firstTime) {
+            void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
+        } else {
+            void loadAccounts()
+        }
         loggedIn.set(true)
         lastActiveAt.set(new Date())
         const response = await isStrongholdUnlocked()

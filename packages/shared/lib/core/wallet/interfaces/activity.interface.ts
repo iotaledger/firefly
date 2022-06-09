@@ -5,6 +5,8 @@ import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
     id: string
+    outputId?: string
+    transactionId?: string
     type: ActivityType
     time: Date
     direction: ActivityDirection
@@ -14,7 +16,7 @@ export interface IActivity {
     recipient: Recipient
     token: ITokenMetadata
     isAsync: boolean
-    expireDate?: Date
+    expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
 

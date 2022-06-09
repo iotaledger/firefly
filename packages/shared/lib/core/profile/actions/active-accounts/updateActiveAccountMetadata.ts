@@ -6,6 +6,5 @@ export function updateActiveAccountMetadata(id: string, partialAccountMetadata: 
     if (get(selectedAccountId) === id) {
         updateSelectedAccount(partialAccountMetadata)
     }
-    updateActiveAccount(id, partialAccountMetadata)
     updateAccountMetadataOnActiveProfile(id, partialAccountMetadata)
 }

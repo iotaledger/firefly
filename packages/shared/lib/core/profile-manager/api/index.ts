@@ -14,3 +14,4 @@ export * from './storeMnmonic'
 export * from './verifyMnemonic'
 
 export * from './events/subscribe'
+export * from './recoverAccounts'
