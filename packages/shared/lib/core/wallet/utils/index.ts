@@ -1,6 +1,7 @@
 export * from './formatTokenAmountBestMatch'
 export * from './formatTokenAmountDefault'
 export * from './formatTokenAmountPrecise'
+export * from './isAsyncActivity'
 export * from './generateRawAmount'
 export * from './parseRawAmount'
 export * from './receiverAddressesFromTransactionPayload'

@@ -28,7 +28,7 @@ interface GroupedActivity {
 
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities) {
+    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
         const activityDate = getActivityGroupTitleForTimestamp(activity.time)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
