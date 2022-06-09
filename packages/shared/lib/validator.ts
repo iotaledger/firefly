@@ -640,7 +640,7 @@ class NodeInfoValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as unknown as INodeInfoResponse
 
-        if (!payload.node_info || 'object' !== typeof payload.node_info) {
+        if (!payload.nodeInfo || 'object' !== typeof payload.nodeInfo) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'No node info.',
@@ -650,67 +650,67 @@ class NodeInfoValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'No node url.',
             })
-        } else if ('string' !== typeof payload.node_info.version) {
+        } else if ('string' !== typeof payload.nodeInfo.version) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info version.',
             })
-        } else if ('string' !== typeof payload.node_info.protocol.networkName) {
+        } else if ('string' !== typeof payload.nodeInfo.protocol.networkName) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info network id.',
             })
-        } else if ('boolean' !== typeof payload.node_info.status.isHealthy) {
+        } else if ('boolean' !== typeof payload.nodeInfo.status.isHealthy) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info is healthy.',
             })
-        } else if ('string' !== typeof payload.node_info.protocol.bech32HRP) {
+        } else if ('string' !== typeof payload.nodeInfo.protocol.bech32HRP) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info bech 32 hrp.',
             })
-        } else if ('number' !== typeof payload.node_info.protocol.minPoWScore) {
+        } else if ('number' !== typeof payload.nodeInfo.protocol.minPoWScore) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info min pow score.',
             })
-        } else if ('number' !== typeof payload.node_info.status.latestMilestone.index) {
+        } else if ('number' !== typeof payload.nodeInfo.status.latestMilestone.index) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest milestone index.',
             })
-        } else if ('number' !== typeof payload.node_info.status.latestMilestone.timestamp) {
+        } else if ('number' !== typeof payload.nodeInfo.status.latestMilestone.timestamp) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest milestone timestamp.',
             })
-        } else if ('number' !== typeof payload.node_info.status.confirmedMilestone) {
+        } else if ('number' !== typeof payload.nodeInfo.status.confirmedMilestone) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info confirmed milestone index.',
             })
-        } else if ('number' !== typeof payload.node_info.status.pruningIndex) {
+        } else if ('number' !== typeof payload.nodeInfo.status.pruningIndex) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info latest pruning index.',
             })
-        } else if (!Array.isArray(payload.node_info.features)) {
+        } else if (!Array.isArray(payload.nodeInfo.features)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info features.',
             })
-        } else if ('number' !== typeof payload.node_info.metrics.blocksPerSecond) {
+        } else if ('number' !== typeof payload.nodeInfo.metrics.blocksPerSecond) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info messages per second.',
             })
-        } else if ('number' !== typeof payload.node_info.metrics.referencedBlocksPerSecond) {
+        } else if ('number' !== typeof payload.nodeInfo.metrics.referencedBlocksPerSecond) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info referenced messages per second.',
             })
-        } else if ('number' !== typeof payload.node_info.metrics.referencedRate) {
+        } else if ('number' !== typeof payload.nodeInfo.metrics.referencedRate) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of node info referenced rate.',

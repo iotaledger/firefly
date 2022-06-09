@@ -1,23 +1,16 @@
-import { selectedAccount } from '@core/account'
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { ITransactionPayload } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
+import { Bech32Helper } from '@lib/bech32Helper'
+import { Converter } from '@lib/converter'
 import { convertToFiat, formatCurrency } from '@lib/currency'
-import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
+import { findAccountWithAddress } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
-import {
-    formatTokenAmountBestMatch,
-    isAsyncUnlockCondition,
-    receiverAddressesFromTransactionPayload,
-    sendAddressFromTransactionPayload,
-} from '../utils'
-import { Bech32Helper } from '@lib/bech32Helper'
-import { Converter } from '@lib/converter'
+import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
 
 export class Activity implements IActivity {
     id: string
@@ -75,13 +68,15 @@ export class Activity implements IActivity {
         this.rawAmount = Number(output.amount)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        for (const unlockCondition of output.output.unlockConditions) {
-            if (isAsyncUnlockCondition(unlockCondition)) {
-                this.isAsync = true
-                this.isHidden = hidden
-                this.expirationDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
-                this.isClaimed = claimed
-                break
+        if (output.output.type !== 2) {
+            for (const unlockCondition of output.output.unlockConditions) {
+                if (isAsyncUnlockCondition(unlockCondition)) {
+                    this.isAsync = true
+                    this.isHidden = hidden
+                    this.expirationDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
+                    this.isClaimed = claimed
+                    break
+                }
             }
         }
         return this
