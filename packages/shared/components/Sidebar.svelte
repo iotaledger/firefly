@@ -6,8 +6,8 @@
         SidebarTab,
         Text,
         Modal,
-        PingingBadge,
         NetworkIndicator,
+        NotificationBadge,
     } from 'shared/components'
     import { appVersionDetails, mobile } from '@core/app'
     import { getInitials, isRecentDate } from '@lib/helpers'
@@ -170,7 +170,7 @@
                 >
                     <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
                     {#if !$shouldOpenProfileModal && (!isBackupSafe || !$appVersionDetails.upToDate)}
-                        <PingingBadge innerColor="red-500" outerColor="red-500" />
+                        <NotificationBadge />
                     {/if}
                 </button>
             </div>
