@@ -45,7 +45,7 @@
     }
 
     $: if ($isLocaleLoaded) {
-        hideSplashScreen()
+        void hideSplashScreen()
     }
 
     async function hideSplashScreen() {
