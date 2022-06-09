@@ -10,6 +10,10 @@ export function updateNewProfileNetworkClientOptions(
     networkType: NetworkType,
     nodes: INode[]
 ): void {
-    const clientOptions: IClientOptions = buildClientOptions(getNetwork(networkProtocol, networkType), nodes)
+    const clientOptions: IClientOptions = buildClientOptions(
+        getNetwork(networkProtocol, networkType),
+        nodes,
+        networkType === NetworkType.Mainnet
+    )
     updateNewProfileSettings({ clientOptions })
 }

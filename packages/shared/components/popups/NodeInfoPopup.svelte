@@ -5,15 +5,14 @@
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from 'shared/lib/popup'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { resolveObjectPath, setClipboard } from 'shared/lib/utils'
+    import { getJsonRequestOptions, resolveObjectPath, setClipboard } from 'shared/lib/utils'
     import { getNodeInfo } from '@core/profile-manager'
 
     enum NodeInfoTab {
         General = 'general',
+        Metrics = 'metrics',
         Protocol = 'protocol',
         BaseToken = 'baseToken',
-        Metrics = 'metrics',
-        Features = 'features',
     }
 
     export let node: INode = { url: '' }
@@ -27,12 +26,22 @@
             url: { localeKey: 'general.url', nodeInfoPath: undefined },
             name: { localeKey: 'general.name', nodeInfoPath: 'name' },
             version: { localeKey: 'general.version', nodeInfoPath: 'version' },
-            latestMilestone: { localeKey: 'general.latestMilestone', nodeInfoPath: 'status.latestMilestone.index' },
+            pruningIndex: { localeKey: 'general.pruningIndex', nodeInfoPath: 'status.pruningIndex' },
+            features: { localeKey: 'general.features', nodeInfoPath: 'features' },
+            plugins: { localeKey: 'general.plugins', nodeInfoPath: 'plugins' },
+        },
+        [NodeInfoTab.Metrics]: {
+            blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
+            referencedBlocksPerSecond: {
+                localeKey: 'metrics.referencedBlocksPerSecond',
+                nodeInfoPath: 'metrics.referencedBlocksPerSecond',
+            },
+            referencedRate: { localeKey: 'metrics.referencedRate', nodeInfoPath: 'metrics.referencedRate' },
+            latestMilestone: { localeKey: 'metrics.latestMilestone', nodeInfoPath: 'status.latestMilestone.index' },
             confirmedMilestone: {
-                localeKey: 'general.confirmedMilestone',
+                localeKey: 'metrics.confirmedMilestone',
                 nodeInfoPath: 'status.confirmedMilestone.index',
             },
-            pruningIndex: { localeKey: 'general.pruningIndex', nodeInfoPath: 'status.pruningIndex' },
         },
         [NodeInfoTab.Protocol]: {
             network: { localeKey: 'protocol.network', nodeInfoPath: 'protocol.networkName' },
@@ -48,18 +57,6 @@
             subUnit: { localeKey: 'baseToken.subunit', nodeInfoPath: 'baseToken.subunit' },
             decimals: { localeKey: 'baseToken.decimals', nodeInfoPath: 'baseToken.decimals' },
             useMetricPrefix: { localeKey: 'baseToken.useMetricPrefix', nodeInfoPath: 'baseToken.useMetricPrefix' },
-        },
-        [NodeInfoTab.Metrics]: {
-            blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
-            referencedBlocksPerSecond: {
-                localeKey: 'metrics.referencedBlocksPerSecond',
-                nodeInfoPath: 'metrics.referencedBlocksPerSecond',
-            },
-            referencedRate: { localeKey: 'metrics.referencedRate', nodeInfoPath: 'metrics.referencedRate' },
-        },
-        [NodeInfoTab.Features]: {
-            features: { localeKey: 'features.features', nodeInfoPath: 'features' },
-            plugins: { localeKey: 'features.plugins', nodeInfoPath: 'plugins' },
         },
     }
 
@@ -129,7 +126,7 @@
             {/each}
         {/key}
     </div>
-    <div class="flex flex-col space-y-2.5">
+    <div class="flex flex-col space-y-2">
         {#each Object.keys(NODE_INFO_TAB_MAP[nodeInfoTab]).map( (nodeInfoTabKey) => processNodeInfoMapTab(nodeInfoTab, nodeInfoTabKey) ) as { localeKey, nodeInfoValue }}
             <CopyableBox value={nodeInfoValue}>
                 <div class="w-full h-full flex flex-row justify-between items-center">
@@ -139,11 +136,11 @@
                     {#if typeof nodeInfoValue === 'boolean'}
                         <Checkbox disabled checked={nodeInfoValue} />
                     {:else if Array.isArray(nodeInfoValue)}
-                        <div class="flex flex-col text-right">
+                        <div class="text-right w-5/6">
                             {#if nodeInfoValue.length}
-                                {#each nodeInfoValue as item}
-                                    <Text type="p" fontSize="sm" secondary>{item}</Text>
-                                {/each}
+                                <Text type="p" fontSize="sm" classes="w-full break-words" secondary
+                                    >{nodeInfoValue.join(', ')}</Text
+                                >
                             {:else}
                                 <Text type="p" fontSize="sm" secondary>{localize('general.none')}</Text>
                             {/if}
@@ -155,7 +152,7 @@
             </CopyableBox>
         {/each}
     </div>
-    <div class="flex w-full justify-center pt-8">
+    <div class="flex w-full justify-center pt-6">
         <Button classes="w-full" secondary onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
             {localize('actions.copyAllInformation')}
         </Button>

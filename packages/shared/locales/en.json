@@ -683,7 +683,17 @@
                     "version": "Version",
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
-                    "pruningIndex": "Pruning index"
+                    "pruningIndex": "Pruning index",
+                    "features": "Features",
+                    "plugins": "Plugins"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
                 },
                 "protocol": {
                     "tab": "Protocol",
@@ -701,17 +711,6 @@
                     "subunit": "Sub-unit",
                     "decimals": "Decimals",
                     "useMetricPrefix": "Use metric prefix"
-                },
-                "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate"
-                },
-                "features": {
-                    "tab": "Features",
-                    "features": "Features",
-                    "plugins": "Plugins"
                 }
             }
         },
