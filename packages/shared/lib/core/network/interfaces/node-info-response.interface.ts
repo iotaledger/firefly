@@ -1,6 +1,6 @@
 import { INodeInfo } from '@iota/types'
 
 export interface INodeInfoResponse {
-    node_info: INodeInfo
+    nodeInfo: INodeInfo
     url: string
 }
