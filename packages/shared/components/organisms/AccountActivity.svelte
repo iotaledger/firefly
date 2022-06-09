@@ -18,7 +18,7 @@
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { get } from 'svelte/store'
-    import { profileManager } from '@core/profile-manager'
+    import { checkStronghold } from '@lib/stronghold'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -50,26 +50,10 @@
         }
     }
 
-    async function handleSyncAccountClick() {
+    function handleSyncAccountClick() {
         if (!$isSyncing) {
             if ($isSoftwareProfile) {
-                try {
-                    const strongholdStatusResponse = await get(profileManager).isStrongholdPasswordAvailable()
-
-                    if (strongholdStatusResponse) {
-                        openPopup({
-                            type: 'password',
-                            props: { onSuccess: () => _syncAccount() },
-                        })
-                    } else {
-                        void _syncAccount()
-                    }
-                } catch (err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                }
+                void checkStronghold(_syncAccount)
             } else {
                 void _syncAccount()
             }
@@ -167,7 +151,7 @@
                         {group.date} • {group.activities.length}
                     </Text>
                     {#each group.activities as activity}
-                        <ActivityTile onClick={() => handleTransactionClick(activity)} {activity} />
+                        <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
                     {/each}
                 </div>
             {/each}
