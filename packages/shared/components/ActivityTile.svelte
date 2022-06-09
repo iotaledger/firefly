@@ -67,8 +67,8 @@
 
     let timeDiff: string
     $: {
-        if (activity.isAsync && !activity.isClaimed && activity?.expireDate) {
-            const elapsedTime = activity.expireDate.getTime() - time.getTime()
+        if (activity.isAsync && !activity.isClaimed && activity?.expirationDate) {
+            const elapsedTime = activity.expirationDate.getTime() - time.getTime()
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
             const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
             const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)

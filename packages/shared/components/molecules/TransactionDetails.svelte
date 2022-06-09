@@ -29,7 +29,7 @@
     export let time: Date
     export let publicNote: string
     export let storageDeposit = 0
-    export let expireDate: Date
+    export let expirationDate: Date
     export let recipient: Recipient
 
     let transactionTime: string
@@ -49,8 +49,8 @@
     let expirationTime: string
     $: {
         try {
-            if (expireDate) {
-                transactionTime = formatDate(expireDate, {
+            if (expirationDate) {
+                transactionTime = formatDate(expirationDate, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })

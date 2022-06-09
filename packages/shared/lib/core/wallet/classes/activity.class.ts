@@ -32,7 +32,7 @@ export class Activity implements IActivity {
     recipient: Recipient
     token: ITokenMetadata
     isAsync: boolean
-    expireDate?: Date
+    expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
 
@@ -79,7 +79,7 @@ export class Activity implements IActivity {
             if (isAsyncUnlockCondition(unlockCondition)) {
                 this.isAsync = true
                 this.isHidden = hidden
-                this.expireDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
+                this.expirationDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
                 this.isClaimed = claimed
                 break
             }
@@ -92,7 +92,7 @@ export class Activity implements IActivity {
             if (this.isClaimed) {
                 return ActivityAsyncStatus.Claimed
             } else {
-                if (time > this.expireDate) {
+                if (time > this.expirationDate) {
                     return ActivityAsyncStatus.Expired
                 } else {
                     return ActivityAsyncStatus.Unclaimed

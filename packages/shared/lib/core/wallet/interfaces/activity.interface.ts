@@ -16,7 +16,7 @@ export interface IActivity {
     recipient: Recipient
     token: ITokenMetadata
     isAsync: boolean
-    expireDate?: Date
+    expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
 
