@@ -1,63 +1,26 @@
 <script lang="typescript">
-    import { ActivityTile, TogglableButton, Icon, Text, TextInput } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { openPopup } from 'shared/lib/popup'
-    import { api, isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
-    import { SetupType } from 'shared/lib/typings/setup'
-    import { debounce } from 'shared/lib/utils'
     import {
-        selectedAccountActivities,
+        Activity,
+        filterQueriedActivities,
         groupedActivities,
         searchQueriedActivities,
-        filterQueriedActivities,
-        Activity,
+        selectedAccountActivities,
     } from '@core/wallet'
-    import { selectedAccount } from '@core/account'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { get } from 'svelte/store'
-    import { checkStronghold } from '@lib/stronghold'
+    import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
+    import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
+    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { openPopup } from 'shared/lib/popup'
+    import { SetupType } from 'shared/lib/typings/setup'
+    import { debounce } from 'shared/lib/utils'
+    import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
             type: 'activityDetails',
             props: { activity },
         })
-    }
-
-    async function _syncAccount() {
-        $isSyncing = true
-        try {
-            await get(selectedAccount).sync()
-            $isSyncing = false
-        } catch (err) {
-            $isSyncing = false
-
-            const shouldHideErrorNotification =
-                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-            if (!shouldHideErrorNotification) {
-                if ($isLedgerProfile) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                } else {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                }
-            }
-        }
-    }
-
-    function handleSyncAccountClick() {
-        if (!$isSyncing) {
-            if ($isSoftwareProfile) {
-                void checkStronghold(_syncAccount)
-            } else {
-                void _syncAccount()
-            }
-        }
     }
 
     const filters = ['all', 'incoming', 'outgoing']
@@ -101,12 +64,7 @@
         <div class="relative flex flex-1 flex-row justify-between">
             <div class="flex flex-row">
                 <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
-                <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                    <Icon
-                        icon="refresh"
-                        classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                    />
-                </button>
+                <SyncSelectedAccountIconButton />
             </div>
             <TogglableButton icon="search" bind:active={searchActive} />
         </div>
@@ -142,7 +100,7 @@
         {/if}
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-4 -mr-2 pr-2 scroll-secondary">
-        {#if $isSyncing && shouldShowFirstSync()}
+        {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
         {:else if $groupedActivities.length}
             {#each $groupedActivities as group}
