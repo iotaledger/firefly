@@ -189,7 +189,7 @@
             await handleParticipationAction()
         }
 
-        const usubscribe = pendingParticipations.subscribe((participations) => {
+        const unsubscribe = pendingParticipations.subscribe((participations) => {
             const currentParticipationsLength = participations.length
 
             if (currentParticipationsLength < previousPendingParticipationsLength) {
@@ -205,7 +205,7 @@
         })
 
         return () => {
-            usubscribe()
+            unsubscribe()
         }
     })
 
@@ -364,7 +364,8 @@
     icon="info"
     iconClasses="fill-current text-blue-500 dark:text-blue-500"
     hint={localize('popups.stakingManager.singleAccountHint')}
-    hintClasses="text-gray-500 dark:text-gray-500"
+    hintColor="gray-500"
+    hintDarkColor="gray-500"
 />
 
 {#if showTooltip}

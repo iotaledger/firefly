@@ -12,4 +12,5 @@ export interface IAccountState extends IAccount, IAccountMetadata {
     signerType: SignerType
     messages: Message[]
     addresses: Address[]
+    isSyncing: boolean
 }

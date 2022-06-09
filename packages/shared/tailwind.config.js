@@ -271,6 +271,7 @@ module.exports = {
                 3: '3px',
             },
             spacing: {
+                4.5: pxToRem('18'),
                 18: pxToRem('72'),
             },
         },

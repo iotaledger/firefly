@@ -43,7 +43,8 @@
     icon="info"
     iconClasses="fill-current text-blue-500"
     hint={localize('popups.newStakingPeriodNotification.info')}
-    hintClasses="text-gray-500 dark:text-gray-500"
+    hintColor="gray-500"
+    hintDarkColor="gray-500"
 />
 <div class="flex flex-row space-x-2">
     <Button classes="w-full" onClick={handleOk}>

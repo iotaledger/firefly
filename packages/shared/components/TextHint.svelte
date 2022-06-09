@@ -5,6 +5,8 @@
     export let icon: 'info' | 'exclamation' | 'none' = 'none'
     export let iconClasses: string = ''
     export let hint: string = ''
+    export let hintColor = 'black'
+    export let hintDarkColor = 'white'
     export let hintClasses: string = ''
 </script>
 
@@ -13,6 +15,8 @@
         {#if icon !== 'none'}
             <Icon {icon} classes="mr-3 fill-current {iconClasses ? iconClasses : 'text-black dark:text-white'}" />
         {/if}
-        <Text type="p" overrideColor classes={hintClasses ? hintClasses : 'text-black dark:text-white'}>{hint}</Text>
+        <Text fontSize="14" lineHeight="5" color={hintColor} darkColor={hintDarkColor} classes={hintClasses}
+            >{hint}</Text
+        >
     </div>
 {/if}
