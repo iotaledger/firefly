@@ -458,7 +458,7 @@
         const node = evt.target as HTMLElement
         const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccount.id)
         const result = await ActionSheet.showActions({
-            title: 'Internal Transfer',
+            title: localize('general.moveFunds'),
             options: [
                 ...accountItems.map((item) => ({ title: item.alias })),
                 { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
@@ -477,7 +477,7 @@
 
     const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
         const result = await ActionSheet.showActions({
-            title: 'Units',
+            title: localize('general.units'),
             options: [
                 ...units.map((unit) => ({ title: unit })),
                 { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
@@ -515,7 +515,7 @@
     <div class="w-full h-full flex flex-col justify-between p-6">
         <div>
             <div class="w-full mb-9 text-center">
-                <Text bold bigger>Send Funds</Text>
+                <Text bold bigger>{localize('general.sendFunds')}</Text>
                 <div class="absolute right-10 top-6">
                     <button on:click={onQRClick}>
                         <Icon icon="qr" classes="text-blue-500" />
@@ -547,7 +547,7 @@
                                     class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
                                     on:click={selectInternal}
                                 >
-                                    Internal
+                                    {localize('general.moveFundsButton')}
                                 </button>
                             {/if}
                             <Address
