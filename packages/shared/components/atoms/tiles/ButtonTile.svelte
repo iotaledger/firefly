@@ -19,7 +19,7 @@
 </script>
 
 <button
-    class="{classes} w-full rounded-2xl flex flex-row justify-between items-center {overrideColor
+    class="{classes} w-full rounded-10 flex flex-row justify-between items-center {overrideColor
         ? ''
         : 'bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700'}"
     on:click={onClick}

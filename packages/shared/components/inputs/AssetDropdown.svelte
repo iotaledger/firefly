@@ -1,30 +1,37 @@
 <script lang="typescript">
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { Icon, Text, AssetTile } from 'shared/components'
     import { assets } from '@core/wallet'
+    import { AssetTile, Icon, Text } from 'shared/components'
+    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $assets?.[0]
 
     const hasMultipleAssets = $assets.length > 1
 
-    let collapsed = false
+    let isAssetDropdownOpen = false
 
     function handleDropdownClick() {
         if (hasMultipleAssets) {
-            collapsed = !collapsed
+            isAssetDropdownOpen = !isAssetDropdownOpen
         }
     }
 
     function handleAssetClick(_asset) {
         asset = _asset
+        isAssetDropdownOpen = false
+    }
+
+    function handleOnClickOutside(): void {
+        isAssetDropdownOpen = false
     }
 </script>
 
 {#if asset}
-    <div on:click={handleDropdownClick} class="flex flex-col relative">
+    <div class="flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={hasMultipleAssets}
+            on:click={handleDropdownClick}
         >
             <div
                 class="icon icon-bg h-6 w-6 rounded-full flex items-center justify-center p-0.5"
@@ -41,33 +48,33 @@
                 </div>
             {/if}
         </div>
+        {#if isAssetDropdownOpen && hasMultipleAssets}
+            <div
+                class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
+            >
+                <ul class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
+                    {#each $assets as _asset}
+                        <li on:click={() => handleAssetClick(_asset)}>
+                            <AssetTile
+                                asset={_asset}
+                                overrideColor
+                                classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
+                            />
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+        {/if}
     </div>
-    {#if collapsed && hasMultipleAssets}
-        <ul
-            class="bg-white dark:bg-gray-800 absolute top-12 asset-list-sizing border border-solid border-gray-300 dark:border-gray-700
-            hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl z-10 p-4"
-            on:click={handleDropdownClick}
-        >
-            {#each $assets as _asset}
-                <li on:click={() => handleAssetClick(_asset)}>
-                    <AssetTile
-                        asset={_asset}
-                        overrideColor
-                        classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    />
-                </li>
-            {/each}
-        </ul>
-    {/if}
 {/if}
 
 <style>
     .icon-bg {
         background-color: var(--icon-bg-color);
     }
-
-    .asset-list-sizing {
-        left: -1.25rem;
-        right: -1.125rem;
+    /* odd margin needed to match the size of the upper parent box */
+    .dropdown {
+        margin: 0 3px;
+        max-height: 224px;
     }
 </style>
