@@ -8,21 +8,21 @@
 
     const hasMultipleAssets = $assets.length > 1
 
-    let isAssetDropdownOpen = false
+    let isDropdownOpen = false
 
     function handleDropdownClick() {
         if (hasMultipleAssets) {
-            isAssetDropdownOpen = !isAssetDropdownOpen
+            isDropdownOpen = !isDropdownOpen
         }
     }
 
     function handleAssetClick(_asset) {
         asset = _asset
-        isAssetDropdownOpen = false
+        isDropdownOpen = false
     }
 
     function handleOnClickOutside(): void {
-        isAssetDropdownOpen = false
+        isDropdownOpen = false
     }
 </script>
 
@@ -48,7 +48,7 @@
                 </div>
             {/if}
         </div>
-        {#if isAssetDropdownOpen && hasMultipleAssets}
+        {#if isDropdownOpen && hasMultipleAssets}
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
             >
