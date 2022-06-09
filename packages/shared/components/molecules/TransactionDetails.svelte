@@ -23,8 +23,8 @@
     export let amount: string
     export let unit: string
     export let type: ActivityType
-    export let inclusionState: InclusionState
-    export let asyncStatus: ActivityAsyncStatus
+    export let inclusionState: InclusionState = InclusionState.Pending
+    export let asyncStatus: ActivityAsyncStatus = undefined
     export let formattedFiatValue: string
     export let time: Date
     export let publicNote: string

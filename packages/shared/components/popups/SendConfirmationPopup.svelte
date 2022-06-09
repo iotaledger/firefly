@@ -7,6 +7,8 @@
     import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
+    import { buildBasicOutput, prepareTransaction, selectedAccount } from '@core/account'
+    import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 
     export let internal = false
     export let recipient: Recipient
@@ -14,7 +16,32 @@
     export let amount: '0'
     export let unit: string
 
+    let output
+    let preparedTransaction
+
     $: internal = recipient.type === 'account'
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+
+    async function buildOutput() {
+        output = await buildBasicOutput($selectedAccount.id, {
+            unlockConditions: [
+                {
+                    type: 0,
+                    address: {
+                        type: 0,
+                        pubKeyHash: '0x' + convertBech32AddressToEd25519Address(recipientAddress),
+                    },
+                },
+            ],
+        })
+    }
+
+    async function prepare() {
+        preparedTransaction = await prepareTransaction($selectedAccount.id, [output])
+    }
+
+    $: rawAmount, recipientAddress, buildOutput()
+    $: output && prepare()
 
     function onConfirm(): void {
         closePopup()
@@ -27,7 +54,6 @@
     }
 
     function send(): Promise<void> {
-        const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
         return trySend(recipientAddress, rawAmount)
     }
 
