@@ -5,7 +5,14 @@
     import { Platform } from 'shared/lib/platform'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { Activity, ActivityAsyncStatus, ActivityDirection, parseRawAmount } from '@core/wallet'
+    import {
+        Activity,
+        ActivityAsyncStatus,
+        ActivityDirection,
+        claimActivity,
+        hideActivity,
+        parseRawAmount,
+    } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { onMount } from 'svelte'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -38,12 +45,6 @@
         }
     })
 
-    // TODO
-    function handleReject(): void {}
-
-    // TODO
-    function handleClaim(): void {}
-
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.id}`)
     }
@@ -66,13 +67,13 @@
         <div class="flex w-full justify-between space-x-4">
             <button
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
-                on:click={handleReject}
+                on:click={() => hideActivity(activity.id)}
             >
                 {localize('actions.reject')}
             </button>
             <button
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={handleClaim}
+                on:click={() => claimActivity(activity.id)}
             >
                 {localize('actions.claim')}
             </button>

@@ -60,6 +60,7 @@ export { default as AccountSwitcher } from './AccountSwitcher.svelte'
 export { default as SidebarTab } from './SidebarTab.svelte'
 export { default as PingingBadge } from './PingingBadge.svelte'
 export { default as NetworkIndicator } from './NetworkIndicator.svelte'
+export { default as NotificationBadge } from './NotificationBadge.svelte'
 
 export * from './modals'
 // Charts

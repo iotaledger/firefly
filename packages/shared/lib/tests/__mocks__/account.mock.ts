@@ -10,10 +10,10 @@ export class AccountMock implements IAccount {
         publicAddresses: [],
         internalAddresses: [],
         addressesWithUnspentOutputs: [],
-        outputs: {},
+        outputs: new Map<string, OutputData>(),
         lockedOutputs: new Set<string>(),
-        unspentOutputs: {},
-        transactions: {},
+        unspentOutputs: new Map<string, OutputData>(),
+        transactions: new Map<string, Transaction>(),
         pendingTransactions: new Set<string>(),
         accountOptions: {
             outputConsolidationThreshold: 0,
