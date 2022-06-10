@@ -46,7 +46,7 @@
     <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
     <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
-<Drawer bind:this={drawer} fromRight fullScreen classes="flex">
+<Drawer bind:this={drawer} fromLeft fullScreen classes="flex">
     <div class="flex flex-col flex-1">
         <header
             class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
