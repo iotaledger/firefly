@@ -1109,7 +1109,8 @@
         "profiles": "Profilok",
         "dev": "Fejlesztő",
         "createAccount": "Tárca létrehozása",
-        "addAWallet": "Tárca hozzáadása",
+        "createNewWallet": "Új tárca létrehozása",
+        "switchWallet": "Tárcaváltás",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
@@ -1187,6 +1188,7 @@
         "capsLock": "A nagybetűzár be van kapcsolva",
         "version": "{version} verzió",
         "yourWallets": "Tárcák",
+        "walletActions": "Tárca előzmények",
         "unknown": "Ismeretlen",
         "none": "Nincs",
         "staked": "Letétbe helyezve",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Tárca",
         "staking": "Staking",
-        "governance": "Kormányzás"
+        "governance": "Kormányzás",
+        "tokens": "Tokenek",
+        "activity": "Előzmények"
     }
 }

@@ -1109,7 +1109,8 @@
         "profiles": "Profiloj",
         "dev": "Programisto",
         "createAccount": "Krei monujon",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Nomo de la monujo",
         "latestTransactions": "La lastaj transakcioj",
         "transactions": "Transakcioj",
@@ -1187,6 +1188,7 @@
         "capsLock": "Majuskla aktivigita",
         "version": "Versio {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Nekonata",
         "none": "Neniu",
         "staked": "Metita",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Monujo",
         "staking": "Stakigante",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

@@ -10,7 +10,7 @@
             "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a Smluvními podmínkami"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
+            "title": "Hlášení o chybě",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "Motiv",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Pokud změníte svůj motiv, budete možná muset restartovat Firefly pro zobrazení efektů"
             },
             "language": {
                 "title": "Jazyk",
@@ -357,9 +357,9 @@
                 "action": "Změnit PIN"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Změnit jméno profilu",
+                "description": "Změnit jméno Firefly profilu",
+                "success": "Změnili jste jméno profilu"
             },
             "balanceFinder": {
                 "title": "Hledač zůstatku",
@@ -417,9 +417,9 @@
                 "description": "Zobrazit chyby pro debug"
             },
             "crashReporting": {
-                "title": "Crash reports",
+                "title": "Hlášení o chybách",
                 "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
+                "checkbox": "Odeslat hlášení o selhání",
                 "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
@@ -462,9 +462,9 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "Síť v provozu",
+                "networkDegraded": "Zhoršená funkčnost sítě",
+                "networkDown": "Síť odpojena",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
                 "referencedRate": "Odkazovaná míra"
@@ -473,32 +473,32 @@
                 "allSettings": "Všechna nastavení",
                 "logout": "Odhlásit se",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Zámek profilu",
+                    "locked": "Stronghold uzamčen",
+                    "unlocked": "Stronghold odemčen"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardwarové zařízení",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
+                        "appNotOpen": "IOTA aplikace není otevřena",
+                        "connected": "Připojeno",
                         "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "locked": "Uzamčeno",
+                        "mnemonicMismatch": "Špatný Ledger nebo mnemotechnika",
+                        "notDetected": "Nezjištěno",
+                        "otherConnected": "Aplikace otevřena"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Zálohujte peněženku",
                     "lastBackup": "Naposledy jste zálohovali {date}",
                     "notBackedUp": "Zatím nezálohováno",
-                    "button": "Backup"
+                    "button": "Záloha"
                 },
                 "version": {
-                    "title": "New update available",
-                    "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "title": "Dostupná nová aktualizace",
+                    "updateVersion": "Firefly v. {version}",
+                    "button": "Aktualizovat"
                 }
             }
         },
@@ -517,12 +517,12 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
+                    "upcoming": "Zkuste později",
+                    "commencing": "Pre-staking zahájen",
                     "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "ended": "Staking nyní skončil",
+                    "inactive": "Nezaznamenán žádný staking",
+                    "fetching": "Načítání informací o stakingu..."
                 },
                 "bodies": {
                     "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
@@ -530,7 +530,7 @@
                     "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
                     "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotStake": "Nezúčastnili jste se tohoto airdropu.",
                     "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
                     "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
                 }
@@ -538,7 +538,7 @@
             "airdrops": {
                 "holding": "Zbývá",
                 "commencing": "Do začátku stakingu",
-                "currentStakingPeriod": "Current staking period",
+                "currentStakingPeriod": "Aktuální doba stakingu",
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
@@ -550,8 +550,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Nová událost",
+                "complete": "Dokončeno"
             }
         },
         "picker": {
@@ -562,84 +562,84 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "Moje hlasovací váha",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "title": "Vaše hlasovací váha",
+                    "equality": "1000 IOTA = 1 HLAS",
+                    "description1": "Váha vašeho hlasu je odvozena ze zůstatku peněženky. Jakmile je návrh o hlasování v počítácí fázi, aktivní hlasy jsou spočteny a kumulovány každých 10 sekund.",
+                    "description2": "1 Ki hlasovací váhy (1000 kusů IOTA) přináší 1 hlas každých 10 let. To znamená, že musíte pokračovat v hlasování po celou dobu fáze počítání, abyste dosáhli plné váhy."
                 }
             },
             "info": {
-                "title": "Governance info",
-                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "title": "Informace o správě",
+                "description": "S pomocí nadace vytvořila IOTA komunita hlasovácí protokol ve Firefly, který umožňuje účast při rozhodování o správě protokolu prostřednictvím vašich IOTA tokenů.",
+                "link": "Přečtěte si o hlasování s IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "Hlasování je otevřené",
+                        "countingStarts": "Začíná počítání",
+                        "countingStops": "Přepočet ukončen",
+                        "votingOpened": "Hlasování je zahájeno",
+                        "countingStarted": "Přepočet zahájen",
+                        "countingStopped": "Přepočet ukončen"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
-                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "Hlasovácí míra",
+                        "body": "{amount} vygeneruje {votesPerMilestone} hlasy každých {time, plural, one {# sekundu} few {# sekund} many {# sekund} other {# sekund}}."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
+                        "title": "Spočítané hlasy",
                         "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "partiallyVoted": {
-                        "title": "New unused funds: {amount}",
-                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                        "title": "Nové nepoužité prostředky: {amount}",
+                        "body": "Obdrželi jste další prostředky na {account}. S těmito tokeny můžete hlasovat spojením hlasů."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
-                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                        "title": "Maximální počet hlasů",
+                        "body": "Musíte pokračovat v hlasování ve zbývající době, abyste dosáhli maximálního počtu hlasů."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Hlasy: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "Oznámení",
+                    "commencing": "Hlasování je otevřené",
+                    "holding": "Počítání",
+                    "ended": "Ukončeno"
                 },
-                "button": "View proposal",
+                "button": "Zobrazit návrh",
                 "treasury": {
                     "notFound": {
-                        "title": "Unable to load Community Treasury vote",
+                        "title": "Nelze načíst hlas o Community Treasury",
                         "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "buttonConnect": "Připojit se k výchozí node",
+                        "buttonSettings": "Nastavení node",
+                        "fetching": "Načítání informací o governance události..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "Hlasování začíná",
+                "votingProgress": "Zbývající čas",
+                "votingPower": "Vaše hlasovací váha",
+                "votesCounted": "Vaše započtené hlasy",
+                "maximumVotes": "Maximální počet Vašich hlasů",
+                "countingStarts": "Přepočet začíná dnem",
+                "currentResult": "Aktuální výsledek",
+                "finalResult": "Konečný výsledek",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "Aktivní hlasování",
+                    "selected": "Odesláno",
+                    "notSelected": "Nevybráno",
+                    "winner": "Vítěz"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "hlasy",
+            "manageVote": "Spravovat hlas"
         }
     },
     "popups": {
@@ -766,7 +766,7 @@
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "accountsFound": "Nalezeny peněženky",
             "totalWalletBalance": "Celkový zůstatek",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Zadejte své heslo pro povolení vyhledávání."
@@ -839,7 +839,7 @@
             "title": "Exportovat historii transakcí",
             "body": "Exportovat historii transakcí pro vybranou peněženku. Exportovaný soubor bude ve formátu .csv.",
             "profileName": "Název profilu:",
-            "accountName": "Wallet name:",
+            "accountName": "Název peněženky:",
             "typePassword": "Zadejte heslo pro povolení exportu"
         },
         "stakingManager": {
@@ -851,43 +851,43 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Potvrdit účast",
             "subtitleStake": "Chystáte se stakovat",
             "subtitleMerge": "Chystáte se sloučit",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "mergeStakeWarning": "Vaše prostředky budou stakovány pro získání {airdrop}. Chcete-li zvolit, na kterých airdropech se chcete podílet, provedte unstake a stake penezenky.",
             "estimatedAirdrop": "Odhadované odměny"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
+            "title": "Staking fáze {periodNumber} od {date}",
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
+            "castYourVote": "Udělte svůj hlas",
             "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
+            "castingVotes": "Hlasování",
+            "stopVoting": "Zastavit hlasování",
             "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "stopVotingDisclaimer": "Vezměte prosím na vědomí, že změna hlasování nebude mít vliv na hlasy, které již byly započítány",
+            "stoppingVoting": "Zastavování hlasování",
+            "changeVote": "Změnit hlas",
+            "changeVoteDisclaimer": "Vezměte prosím na vědomí, že změna vašeho hlasování během období počítání nebude mít vliv na hlasy, které již byly započítány",
+            "changeVoteInfo": "Jste si jisti, že chcete změnit svůj hlas na možnost {voteValue} ({voteText})?",
+            "changingVote": "Změna hlasu",
+            "manageVotes": "Spravovat hlas",
+            "partialVoteInfo": "Obdrželi jste {amount} na {account}. S těmito prostředky můžete hlasovat sloučením s aktuálním hlasem.",
+            "mergeVoteDisclaimer": "Vezměte prosím na vědomí, že sloučení hlasů nebude mít vliv na žádné hlasy, které již byly započteny",
+            "mergingVotes": "Spojení hlasů",
+            "votedSuccessfully": "Začali jste hlasovat s {account}.",
+            "unvotedSuccessfully": "Přestali jste hlasovat s {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "Úspěšně hlasováno",
+                "stopVotesTitle": "Hlasování ukončeno",
+                "mergeVotesTitle": "Hlas sloučen",
+                "changeVotesTitle": "Hlas změněn",
+                "castBody": "Nyní hlasujete pro možnost {voteValue} ({voteText}).",
+                "stopBody": "Přestali jste hlasovat. Toto nemá vliv na hlasy, které již byly započteny."
             }
         },
         "shimmer-info": {
@@ -901,21 +901,21 @@
             "body2": "Naším cílem je spustit Assembly v roce 2022. Vaše tokeny si budete moci přenést po spuštění sítě."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
+            "title": "Vytváříte nový developerský profil",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
         "crashReporting": {
-            "title": "Crash reporting",
+            "title": "Zprávy o selhání",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
+            "tosTitle": "Podmínky služby",
+            "privPolicyTitle": "Zásady ochrany osobních údajů",
             "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
             "tosBody": "We have updated Firefly's Terms of Service.",
             "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
+            "tosAndPrivPolicyCheckbox": "Přečetl(a) jsem a souhlasím s podmínky služby a zásady ochrany osobních údajů",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
         },
@@ -1046,12 +1046,12 @@
         "merge": "Sloučit",
         "mergeFunds": "Sloučit prostředky",
         "done": "Hotovo",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
-        "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "castVotes": "Hlasovat",
+        "changeVotes": "Změnit hlas",
+        "mergeVotes": "Sloučit hlas",
+        "stopVotes": "Zastavit hlasování",
+        "okIUnderstand": "Ano, rozumím",
+        "readMore": "Zobrazit více"
     },
     "general": {
         "password": "Heslo",
@@ -1082,7 +1082,7 @@
         "from": "Odkud",
         "to": "Komu",
         "receiveFunds": "Přijmout tokeny",
-        "address": "Address",
+        "address": "Adresa",
         "myAddress": "Moje adresa",
         "shareAddress": "Sdílet adresu",
         "yourAddress": "Vaše adresa",
@@ -1109,7 +1109,8 @@
         "profiles": "Profily",
         "dev": "Vývojář",
         "createAccount": "Vytvořit peněženku",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Vytvořit novou peněženku",
+        "switchWallet": "Přepnout peněženku",
         "accountName": "Název peněženky",
         "latestTransactions": "Poslední transakce",
         "transactions": "Transakce",
@@ -1168,42 +1169,43 @@
         "creatingProfile": "Vytváření účtu, čekejte prosím...",
         "fundMigration": "Migrace prostředků",
         "accountRemoved": "Tato peněženka je skrytá. Chcete-li provádět přenos, odkryjte ji.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
-        "votingTransaction": "Voting Transaction",
-        "unvotingTransaction": "Unvoting Transaction",
-        "participationTransaction": "Participation Transaction",
+        "receivingFrom": "Přijímání do {account}",
+        "sendingTo": "Odesílání na {account}",
+        "receivedFrom": "Příjmuto od {account}",
+        "sentTo": "Odesláno do {account}",
+        "transferringFrom": "Odesílání z {account}",
+        "transferringTo": "Odesílání do {account}",
+        "transferFrom": "Převod z {account}",
+        "transferTo": "Převod na {account}",
+        "stakingTransaction": "Staking transakce",
+        "unstakingTransaction": "Unstaking transakce",
+        "votingTransaction": "Hlasovácí transakce",
+        "unvotingTransaction": "Odhlasovácí transakce",
+        "participationTransaction": "Transakce o účasti",
         "receiving": "Přijímání",
         "sending": "Odesílání",
         "legacyNetwork": "Zastaralá síť",
         "capsLock": "Caps Lock je zapnutý",
         "version": "Verze {version}",
         "yourWallets": "Vaše peněženky",
+        "walletActions": "Aktivita peněženky",
         "unknown": "Neznámý",
         "none": "Žádný",
         "staked": "Stakováno",
-        "voted": "Voted",
+        "voted": "Odhlasováno",
         "unstaked": "Zrušeno stakování",
-        "unvoted": "Unvoted",
+        "unvoted": "Nehlasováno",
         "staking": "Stakování",
         "unstaking": "Zrušení stakování",
         "notStaked": "Nestakováno",
         "stakedFunds": "Stakované prostředky",
         "unstakedFunds": "Prostředky, které byly stakovány",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
+        "voting": "Hlasování",
+        "unvoting": "Odebrat hlas",
         "accountColor": "Barva peněženky",
-        "myAssets": "My assets",
-        "option": "Option",
-        "total": "Total: {balance}"
+        "myAssets": "Má aktiva",
+        "option": "Možnost",
+        "total": "Celkový zůstatek: {balance}"
     },
     "dates": {
         "today": "Dnes",
@@ -1253,7 +1255,7 @@
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets.",
+        "participating": "Počkejte prosím než dokončíte staking/hlasování před změnou peněženky.",
         "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
         "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
     },
@@ -1290,7 +1292,7 @@
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Před vytvořením nové peněženky musíte použít poslední peněženku.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "Název profilu musí obsahovat alespoň 1 znak.",
             "notEmpty": "Před smazáním tohoto účtu musíte převést svůj zůstatek.",
             "duplicate": "Peněženka s tímto názvem již existuje.",
             "tilde": "Název profilu nemůže začínat znakem '~'.",
@@ -1345,7 +1347,7 @@
             "invalid": "Záložní soubor nebyl rozpoznán.",
             "destination": "Záložní destinace není platná.",
             "mnemonic": "Mnemonika není platná.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedTooShort": "Seed by měl být 81 znaků dlouhý, {length, plural, one {je 1} other {je #}}",
             "seedCharacters": "Seed by měl obsahovat pouze znaky A-Z nebo 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Nerozpoznané slovo \"{word} v obnovovací frázi",
@@ -1389,7 +1391,7 @@
             "http": "Použití uzlů přes HTTP ponechává provoz nešifrovaný a může představovat bezpečnostní riziko."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Nemáte žádné IOTA tokeny."
         }
     },
     "tooltips": {
@@ -1431,7 +1433,7 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "Aktuálně používáte profil vývojáře a jste připojeni k {networkName}"
         }
     },
     "permissions": {
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Peněženka",
         "staking": "Stakování",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokeny",
+        "activity": "Aktivita"
     }
 }

@@ -1109,7 +1109,8 @@
         "profiles": "Profiler",
         "dev": "Utvecklare",
         "createAccount": "Skapa en plånbok",
-        "addAWallet": "Lägg till en plånbok",
+        "createNewWallet": "Skapa en ny plånbok",
+        "switchWallet": "Växla plånbok",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock är på",
         "version": "Version {version}",
         "yourWallets": "Dina plånböcker",
+        "walletActions": "Plånboksåtgärder",
         "unknown": "Okänd",
         "none": "Ingen",
         "staked": "Stakad",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Plånbok",
         "staking": "Staking",
-        "governance": "Styrning"
+        "governance": "Styrning",
+        "tokens": "Tokens",
+        "activity": "Aktivitet"
     }
 }

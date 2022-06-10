@@ -1109,7 +1109,8 @@
         "profiles": "प्रोफाइल्स",
         "dev": "देव",
         "createAccount": "वॉलेट बनाएं",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "वॉलेट का नाम",
         "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
@@ -1187,6 +1188,7 @@
         "capsLock": "कैप्स लॉक ऑन है",
         "version": "संस्करण {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "वॉलेट",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

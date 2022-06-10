@@ -1109,7 +1109,8 @@
         "profiles": "Profil",
         "dev": "Pengembang",
         "createAccount": "Buat dompet",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock menyala",
         "version": "Versi {version}",
         "yourWallets": "Dompet Anda",
+        "walletActions": "Wallet Actions",
         "unknown": "Tak diketahui",
         "none": "Tidak ada",
         "staked": "Jumlah Staking",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Dompet",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

@@ -1109,7 +1109,8 @@
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
         "createAccount": "Khởi tạo ví",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -1187,6 +1188,7 @@
         "capsLock": "Phím CapsLock đang bật",
         "version": "Phiên bản {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Không biết",
         "none": "Trống",
         "staked": "Đã đặt cọc",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Ví tiền",
         "staking": "Đặt cọc",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }
