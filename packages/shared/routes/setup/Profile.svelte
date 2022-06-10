@@ -4,7 +4,6 @@
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
-    import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
     const busy = false
@@ -16,13 +15,11 @@
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 
-    async function handleBackClick(): Promise<void> {
-        await cleanupOnboarding()
-
+    function handleBackClick(): void {
         $appRouter.previous()
     }
 
-    function handleContinueClick(): Promise<void> {
+    function handleContinueClick(): void {
         validateProfileName(profileName)
         updateNewProfile({ name: profileName })
 

@@ -1,14 +1,23 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { newProfile } from '@core/profile'
     import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
+    import featureFlags from 'shared/featureFlags.config'
 
     const networkTypes = Object.keys(NetworkType).filter(
         (networkType) => NetworkType[networkType] !== NetworkType.PrivateNet
     ) // TODO: add support for custom networks
+
+    const networkEnabledMapping: Map<NetworkType, boolean> = new Map(
+        Object.values(NetworkType).map((network) => [
+            network,
+            featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[network]?.enabled,
+        ])
+    )
 
     function onClick(networkType: NetworkType): void {
         updateNewProfileNetworkType(networkType)
@@ -32,6 +41,7 @@
                         icon="settings"
                         classes="w-full mb-5"
                         secondary
+                        disabled={!networkEnabledMapping.get(NetworkType[networkType])}
                         onClick={() => onClick(NetworkType[networkType])}
                     >
                         {localize(`views.network.${NetworkType[networkType]}.title`)}
