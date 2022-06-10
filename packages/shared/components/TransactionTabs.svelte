@@ -33,7 +33,7 @@
     let isSearching = false
 </script>
 
-<nav class="grid justify-around gap-4 items-center mb-4 mt-7 mx-6">
+<nav class="grid justify-around gap-4 items-center mb-4 mt-7 mx-0">
     <ul class="relative flex items-center p-0" style="border-radius: 11px;">
         {#each tabs as tab, i}
             <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
@@ -54,11 +54,11 @@
     <span
         id="search"
         on:click={() => (isSearching = !isSearching)}
-        class="col-start-2 row-start-1 z-10 pr-4 rounded-xl bg-gray-100 dark:bg-gray-900"
+        class="col-start-2 row-start-1 z-10 pr-4 rounded-xl"
     />
     <div
         role="searchbox"
-        class="z-10 absolute right-0 h-10 mr-8 rounded-xl bg-gray-100 dark:bg-gray-900"
+        class="z-10 absolute right-0 h-10 mr-7 rounded-xl bg-gray-100 dark:bg-gray-900"
         style="width: {!isSearching ? '0' : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1.15) {!isSearching
             ? '0.4s'
             : '0.1s'};"
@@ -118,7 +118,7 @@
 
 <style type="text/scss">
     main {
-        height: calc(100vh - 35ch);
+        height: calc(100vh - 45ch);
     }
     /* clears the 'X' from Chrome */
     input[type='search']::-webkit-search-decoration,
