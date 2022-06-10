@@ -47,7 +47,6 @@ export enum DashboardRoute {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
-    ProfileActions = 'profileActions',
 }
 
 export enum SettingsRoute {
@@ -159,4 +158,9 @@ export enum MigrateRoute {
 export enum WalletRoute {
     Assets = 'assets',
     AccountHistory = 'accountHistory',
+}
+
+export enum ProfileRoute {
+    ProfileActions = 'profileActions',
+    Settings = 'settings',
 }

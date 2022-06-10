@@ -26,9 +26,7 @@
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanAMonth
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
     
-    const handleSettingsClick = (): void => {
-        openSettings()
-    }
+    export let handleSettingsClick = (): void => {}
 
     const handleLogoutClick = async (): Promise<void> => {
         // @todo on desktop uses true as param, on mobile we get errors

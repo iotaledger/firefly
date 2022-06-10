@@ -5,9 +5,9 @@
     import { selectedAccount } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
     import { 
-        dashboardRoute, 
-        dashboardRouter, 
-        DashboardRoute, 
+        profileRoute, 
+        profileRouter, 
+        ProfileRoute, 
         settingsRoute, 
         settingsRouter, 
         SettingsRoute 
@@ -20,20 +20,23 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
-    function handleBackClick() {
-        if ($dashboardRoute === DashboardRoute.ProfileActions) {
-            $dashboardRouter.previous()
+    async function handleBackClick() {
+        if ($profileRoute === ProfileRoute.ProfileActions) {
             drawer.close()
         } else if ($settingsRoute === SettingsRoute.Init) {
-            $dashboardRouter.previous()
+            $profileRouter.previous()
         } else {
             $settingsRouter.goTo(SettingsRoute.Init)
         }
     }
 
     function handleClick() {
-        $dashboardRouter.goTo(DashboardRoute.ProfileActions)
+        $profileRouter.goTo(ProfileRoute.ProfileActions)
         drawer.open()
+    }
+
+    function handleSettingsClick() {
+        $profileRouter.goTo(ProfileRoute.Settings)
     }
 </script>
 
@@ -54,7 +57,7 @@
             <Icon icon="arrow-left" classes="absolute mb-5 left-8 text-gray-500 text-blue-500" />
             <Text type="h4" classes="text-center">
                 {localize(
-                    $dashboardRoute === DashboardRoute.ProfileActions
+                    $profileRoute === ProfileRoute.ProfileActions
                         ? 'views.settings.profile.title'
                         : $settingsRoute === SettingsRoute.Init
                         ? 'views.settings.settings'
@@ -62,9 +65,11 @@
                 )}
             </Text>
         </header>
-        {#if $dashboardRoute === DashboardRoute.ProfileActions}
-            <ProfileActions {profileColor} {profileInitial} />
-        {:else}
+        {#if $profileRoute === ProfileRoute.ProfileActions}
+            <ProfileActions 
+                {profileColor} {profileInitial} 
+                {handleSettingsClick} />
+        {:else if $profileRoute === ProfileRoute.Settings}
             <Settings />
         {/if}
         
