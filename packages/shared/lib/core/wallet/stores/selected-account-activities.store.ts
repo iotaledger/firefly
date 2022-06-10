@@ -36,6 +36,11 @@ export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedAc
         const index = groupedActivities.findIndex((group) => group.date === activityDate)
         groupedActivities[index].activities.push(activity)
     }
+    for (const groupedActivitiesPerDate of groupedActivities) {
+        groupedActivitiesPerDate.activities = groupedActivitiesPerDate.activities.sort(
+            (activity1, activity2) => activity2.time.getTime() - activity1.time.getTime()
+        )
+    }
     return groupedActivities
 })
 
