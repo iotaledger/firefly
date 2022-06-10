@@ -5,28 +5,23 @@
         networkStatus,
         NetworkStatusDescription,
         NetworkHealth,
-        INodeInfo,
+        nodeInfo,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { getNodeInfo } from '@core/profile-manager'
 
     export let modal: Modal
-
-    let nodeInfo: INodeInfo
 
     $: health = $networkStatus.health ?? 0
     $: description = $networkStatus.description ?? NetworkStatusDescription[NetworkHealth.Disconnected]
     $: messagesPerSecond = $networkStatus.messagesPerSecond ?? 0
     $: referencedRate = $networkStatus.referencedRate ?? 0
-    $: node = $activeProfile?.settings.clientOptions.node
-    $: getNodeInfo(node?.url, node?.auth).then((nodeInfoResponse) => (nodeInfo = nodeInfoResponse?.node_info))
 </script>
 
 <Modal bind:this={modal} position={{ left: '80px', top: '25px' }}>
     <network-indicator-content class="flex flex-col">
         {#if $activeProfile?.isDeveloperProfile}
-            <Text type="h3" classes="px-7 pt-5">{nodeInfo?.protocol?.networkName}</Text>
+            <Text type="h3" classes="px-7 pt-5">{$nodeInfo?.protocol?.networkName}</Text>
         {/if}
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[health]}-500">
             {localize(`views.dashboard.network.${description}`)}

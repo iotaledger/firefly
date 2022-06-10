@@ -33,7 +33,10 @@ export function buildNewProfile(
         isDeveloperProfile,
         settings: {
             currency: AvailableExchangeRates.USD,
-            clientOptions,
+            clientOptions: {
+                ...clientOptions,
+                automaticNodeSelection: true,
+            },
             lockScreenTimeoutInMinutes: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,

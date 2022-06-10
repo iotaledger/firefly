@@ -11,18 +11,16 @@
         networkStatus,
         NetworkHealth,
         IClientOptions,
-        INodeInfo,
         getOfficialNodes,
+        nodeInfo,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
-    import { getNodeInfo } from '@core/profile-manager'
 
     let clientOptions: IClientOptions = $activeProfile?.settings.clientOptions
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
     let nodesContainer
-    let nodeInfo: INodeInfo
 
     if (clientOptions.nodes.length !== 0) {
         clientOptions.nodes = getNodeCandidates(clientOptions)
@@ -35,9 +33,6 @@
 
     $: canRemoveAllNodes = clientOptions.nodes.length !== 0
     $: canConfigureNodes = isOfficialNetwork($activeProfile?.networkType)
-    $: getNodeInfo(clientOptions.node?.url, clientOptions.node?.auth).then(
-        (nodeInfoResponse) => (nodeInfo = nodeInfoResponse?.node_info)
-    )
 
     function handleIncludeOfficialNodesClick() {
         ensureValidNodeSelection()
@@ -96,7 +91,7 @@
                 <Text type="p" classes="inline" secondary>
                     {localize('views.settings.networkConfiguration.connectedTo')}:
                 </Text>
-                <Text type="p" highlighted>{nodeInfo?.protocol?.networkName}</Text>
+                <Text type="p" highlighted>{$nodeInfo?.protocol?.networkName}</Text>
             </div>
             <div>
                 <Text type="p" classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>

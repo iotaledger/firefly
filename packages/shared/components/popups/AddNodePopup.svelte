@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
 
-    export let node: INode = { url: '' }
+    export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let nodes: INode[] = []
     export let network: INetwork
     export let isAddingNode: boolean = true
