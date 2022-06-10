@@ -1,3 +1,3 @@
-import { Output } from '@iota/wallet'
+import { OutputData } from '@iota/wallet'
 
-export function handleNewOutputEvent(payload: Output): void {}
+export function handleNewOutputEvent(payload: OutputData): void {}
