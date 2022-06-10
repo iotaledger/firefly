@@ -2,8 +2,9 @@
     // this is a wrapper component for svelty-picker
 
     import SveltyPicker from 'svelty-picker'
-    import { Tooltip, Icon } from 'shared/components'
+    import { Tooltip, Button } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { localize } from '@core/i18n'
 
     export let value: Date
 
@@ -13,26 +14,31 @@
 
     let rawValue: string = startDate
 
-    function clickClose() {
-        dispatch('close')
+    function handleCancelClick() {
+        dispatch('cancel')
     }
 
-    $: value = new Date(rawValue).getTime() >= DATE_NOW.getTime() ? new Date(rawValue) : DATE_NOW
+    function handleConfirmClick() {
+        dispatch('confirm')
+        value = new Date(rawValue).getTime() >= DATE_NOW.getTime() ? new Date(rawValue) : DATE_NOW
+    }
 </script>
 
-<Tooltip inlineStyle="padding: 0 0.5rem 0.5rem 0.5rem;" {...$$restProps}>
-    <button on:click={clickClose} class="block ml-auto mr-2 mt-2">
-        <Icon icon="close" classes="text-gray-600 dark:text-white" />
-    </button>
+<Tooltip {...$$restProps}>
     <SveltyPicker
         pickerOnly
         autoclose
         clearBtn={false}
+        todayBtn={false}
         {startDate}
         format="yyyy-mm-dd hh:ii"
         theme="datetime-picker-colors"
         bind:value={rawValue}
     />
+    <div class="flex flex-row justify-center items-center space-x-4">
+        <Button small secondary onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+        <Button small onClick={handleConfirmClick}>{localize('actions.confirm')}</Button>
+    </div>
 </Tooltip>
 
 <style type="text/scss">

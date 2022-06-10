@@ -62,16 +62,21 @@
     }
 
     function onClick(_selected): void {
-        if (_selected !== 'custom') {
-            modal?.close()
+        if (_selected === 'custom') {
+            canShowDateTimePicker = !canShowDateTimePicker
         } else {
-            canShowDateTimePicker = true
+            modal?.close()
         }
         selected = _selected
     }
 </script>
 
-<Modal bind:this={modal} position={{ bottom: '120px', left: '400px' }} classes="w-64">
+<Modal
+    bind:this={modal}
+    position={{ bottom: '120px', left: '400px' }}
+    classes="w-64"
+    on:close={() => (canShowDateTimePicker = false)}
+>
     <expiration-time-picker-modal class="flex flex-col space-y-0" in:fade={{ duration: 100 }}>
         <MenuItem
             icon="calendar"
@@ -128,12 +133,13 @@
                 selected={selected === 'custom'}
             />
         </div>
-        {#if selected === 'custom' && canShowDateTimePicker}
+        {#if canShowDateTimePicker}
             <DateTimePicker
                 position="top"
                 anchor={dateTimeAnchor}
                 bind:value={customDate}
-                on:close={() => (canShowDateTimePicker = false)}
+                on:cancel={() => (canShowDateTimePicker = false)}
+                on:confirm={modal?.close}
             />
         {/if}
     </expiration-time-picker-modal>

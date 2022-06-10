@@ -50,7 +50,7 @@
     $: {
         try {
             if (expirationDate) {
-                transactionTime = formatDate(expirationDate, {
+                expirationTime = formatDate(expirationDate, {
                     dateStyle: 'long',
                     timeStyle: 'medium',
                 })
