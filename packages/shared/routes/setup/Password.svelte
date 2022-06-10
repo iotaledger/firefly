@@ -51,6 +51,7 @@
 
                 $appRouter.next({ password })
             } catch (err) {
+                console.error(err)
                 showAppNotification({
                     type: 'error',
                     message: locale(err.error),
