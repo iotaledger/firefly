@@ -42,7 +42,6 @@
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
-    import { account } from '@lib/typings'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -458,7 +457,7 @@
         const node = evt.target as HTMLElement
         const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccount.id)
         const result = await ActionSheet.showActions({
-            title: localize('general.moveFunds'),
+            title: localize(`general.${SEND_TYPE.INTERNAL}`),
             options: [
                 ...accountItems.map((item) => ({ title: item.alias })),
                 { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
