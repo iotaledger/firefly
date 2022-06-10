@@ -79,7 +79,7 @@ export class Activity implements IActivity {
         const isInternal = !!findAccountWithAddress(address)
         this.id = outputId
         this.outputId = outputId
-        this.time = new Date(output.metadata.milestoneTimestampBooked)
+        this.time = new Date(output.metadata.milestoneTimestampBooked * 1000)
         this.type = getActivityType(isIncoming, isInternal)
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = InclusionState.Confirmed
