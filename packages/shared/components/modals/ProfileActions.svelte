@@ -94,10 +94,6 @@
         modal?.close()
         openPopup({
             type: 'backupStronghold',
-            props: {
-                lastBackupDate,
-                lastBackupDateFormatted,
-            },
         })
     }
 
