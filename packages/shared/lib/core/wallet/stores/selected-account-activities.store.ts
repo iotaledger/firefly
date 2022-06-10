@@ -7,9 +7,16 @@ import { allAccountActivities } from './all-account-activities.store'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
-    ([$selectedAccount, $allAccountActivities]) =>
-        $allAccountActivities.find((accountActivity) => $selectedAccount?.id === accountActivity.accountId)
-            ?.activities ?? []
+    ([$selectedAccount, $allAccountActivities]) => {
+        if (selectedAccount) {
+            return (
+                $allAccountActivities.find((accountActivity) => $selectedAccount?.id === accountActivity.accountId)
+                    ?.activities ?? []
+            )
+        } else {
+            return []
+        }
+    }
 )
 
 export const queriedActivities: Writable<Activity[]> = writable([])
@@ -21,7 +28,7 @@ interface GroupedActivity {
 
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities) {
+    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
         const activityDate = getActivityGroupTitleForTimestamp(activity.time)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
