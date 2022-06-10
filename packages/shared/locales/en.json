@@ -470,7 +470,10 @@
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Log out",
                 "stronghold": {
                     "title": "Profile lock",

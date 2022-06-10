@@ -249,7 +249,7 @@
         >
             <Icon icon="settings" classes="text-gray-500 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">
-                {localize('views.dashboard.profileModal.allSettings')}
+                {localize('views.dashboard.profileModal.allSettings.title')}
             </Text>
         </button>
         <button
