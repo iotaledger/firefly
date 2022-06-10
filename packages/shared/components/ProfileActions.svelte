@@ -11,15 +11,15 @@
     } from 'shared/lib/profile'
     import { openSettings } from '@core/router'
     import { api } from 'shared/lib/wallet'
-    import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
+    import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { onMount } from 'svelte'
 
-    const profileColor = 'blue' // TODO: each profile has a different color
+    export let profileColor = 'blue'
+    export let profileInitial = ''
+    
     const isUpToDate = $versionDetails.upToDate
 
-    $: profileName = $activeProfile?.name
-    $: profileInitial = getInitials(profileName, 1)
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
@@ -74,31 +74,93 @@
     })
 </script>
 
-<div class="flex flex-row flex-nowrap items-center space-x-3 p-3">
-    <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-{profileColor}-500">
-        <span class="text-12 leading-100 text-center text-white uppercase">{profileInitial}</span>
-    </div>
-    <div class="flex flex-row space-x-2">
-        <Text>{profileName}</Text>
+<div class="flex flex-col flex-1 mx-4 overflow-auto">
+    <div class="grid justify-items-center w-full">
+        <div
+            class="w-16 h-16 flex items-center justify-center rounded-full leading-100"
+            style="background-color: {profileColor};"
+        >
+            <span class="text-20 text-center text-white uppercase font-semibold">
+                {profileInitial}
+            </span>
+        </div>
+        <Text type="h4" unwrapped classes="mt-4">{$activeProfile?.name}</Text>
         {#if $activeProfile?.isDeveloperProfile}
             <Chip label={localize('general.dev')} />
         {/if}
+        <button
+            class="rounded-xl"
+            on:click={handleLogoutClick}
+        >
+            <Icon width="16" height="16" classes="text-gray-500 -ml-2 -mt-5" icon="logout" />
+            <Text type="p" classes="ml-1 -mt-5">
+                {localize('views.dashboard.profileModal.logout')}
+            </Text>
+        </button>
     </div>
-</div>
-
-{#if !isUpToDate}
+    {#if isUpToDate}
+        <button 
+            on:click={handleVersionUpdateClick}
+            class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        >
+            <Icon icon="warning" classes="row-span-3 text-blue-500" />
+            <Text type="p" unwrapped classes="col-span-6">
+                {localize('views.dashboard.profileModal.version.title')}
+            </Text>
+            <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+                {localize('views.dashboard.profileModal.version.updateVersion', {
+                    values: { version: $versionDetails.newVersion },
+                })}
+            </Text>
+            <Icon 
+                width={18} 
+                height={18} 
+                icon="chevron-right" 
+                classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+            />
+        </button>
+    {/if}
+    {#if isBackupSafe}
+        <button 
+            on:click={handleBackupClick}
+            class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        >
+            <Icon icon="warning" classes="row-span-3 text-{backupWarningColor}-500" />
+            <Text type="p" unwrapped classes="col-span-3">
+                {localize('views.dashboard.profileModal.backup.title')}
+            </Text>
+            <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+                {$activeProfile?.lastStrongholdBackupTime
+                    ? localize('views.dashboard.profileModal.backup.lastBackup', {
+                            values: {
+                                date: localize(`dates.${lastBackupDateFormatted.unit}`, {
+                                    values: { time: lastBackupDateFormatted.value },
+                                }),
+                            },
+                        })
+                    : localize('views.dashboard.profileModal.backup.notBackedUp')}
+            </Text>
+            <Icon 
+                width={18} 
+                height={18} 
+                icon="chevron-right" 
+                classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
+            />
+        </button>
+    {/if}
     <button 
-        on:click={handleVersionUpdateClick}
+        on:click={handleStrongholdToggleClick}
         class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
-        <Icon icon="warning" classes="row-span-3 text-blue-500" />
+        <Icon  
+            icon="network"
+            classes="row-span-3 text-blue-500"
+        />
         <Text type="p" unwrapped classes="col-span-6">
-            {localize('views.dashboard.profileModal.version.title')}
+            {localize('views.dashboard.network.status')}
         </Text>
         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-            {localize('views.dashboard.profileModal.version.updateVersion', {
-                values: { version: $versionDetails.newVersion },
-            })}
+            {localize('views.dashboard.network.networkOperational')}
         </Text>
         <Icon 
             width={18} 
@@ -107,26 +169,37 @@
             classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
         />
     </button>
-{/if}
-{#if !isBackupSafe}
     <button 
-        on:click={handleBackupClick}
+        on:click={handleStrongholdToggleClick}
         class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
-        <Icon icon="warning" classes="row-span-3 text-{backupWarningColor}-500" />
-        <Text type="p" unwrapped classes="col-span-3">
-            {localize('views.dashboard.profileModal.backup.title')}
+        <Icon  
+            icon={$isStrongholdLocked ? 'lock' : 'unlock'}
+            classes="row-span-3 text-blue-500"
+        />
+        <Text type="p" unwrapped classes="col-span-6">
+            {localize('views.dashboard.profileModal.stronghold.title')}
         </Text>
         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-            {$activeProfile?.lastStrongholdBackupTime
-                ? localize('views.dashboard.profileModal.backup.lastBackup', {
-                        values: {
-                            date: localize(`dates.${lastBackupDateFormatted.unit}`, {
-                                values: { time: lastBackupDateFormatted.value },
-                            }),
-                        },
-                    })
-                : localize('views.dashboard.profileModal.backup.notBackedUp')}
+            {localize(
+                `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
+            )}
+        </Text>
+        <Toggle
+            active={!$isStrongholdLocked}
+            classes="row-span-3 justify-self-end"
+        />
+    </button>
+    <button
+        on:click={handleSettingsClick}
+        class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+    >
+        <Icon icon="settings" classes="row-span-3 text-blue-500" />
+        <Text type="p" unwrapped classes="col-span-4">
+            {localize('views.dashboard.profileModal.allSettings.title')}
+        </Text>
+        <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
+            {localize('views.dashboard.profileModal.allSettings.description')}
         </Text>
         <Icon 
             width={18} 
@@ -135,84 +208,20 @@
             classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
         />
     </button>
-{/if}
-<button 
-    on:click={handleStrongholdToggleClick}
-    class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
->
-    <Icon  
-        icon="network"
-        classes="row-span-3 text-blue-500"
-    />
-    <Text type="p" unwrapped classes="col-span-6">
-        {localize('views.dashboard.network.status')}
-    </Text>
-    <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-        {localize('views.dashboard.network.networkOperational')}
-    </Text>
-    <Icon 
-        width={18} 
-        height={18} 
-        icon="chevron-right" 
-        classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
-    />
-</button>
-<button 
-    on:click={handleStrongholdToggleClick}
-    class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
->
-    <Icon  
-        icon={$isStrongholdLocked ? 'lock' : 'unlock'}
-        classes="row-span-3 text-blue-500"
-    />
-    <Text type="p" unwrapped classes="col-span-6">
-        {localize('views.dashboard.profileModal.stronghold.title')}
-    </Text>
-    <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-        {localize(
-            `views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`
-        )}
-    </Text>
-    <Toggle
-        active={!$isStrongholdLocked}
-        classes="row-span-3 justify-self-end"
-    />
-</button>
-<button
-    on:click={handleSettingsClick}
-    class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
->
-    <Icon icon="settings" classes="row-span-3 text-blue-500" />
-    <Text type="p" unwrapped classes="col-span-4">
-        {localize('views.dashboard.profileModal.allSettings.title')}
-    </Text>
-    <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-        {localize('views.dashboard.profileModal.allSettings.description')}
-    </Text>
-    <Icon 
-        width={18} 
-        height={18} 
-        icon="chevron-right" 
-        classes="row-span-3 justify-self-end text-gray-500 dark:text-white"
-    />
-</button>
-<button
-    on:click={() => handleLogoutClick()}
-    class="group flex flex-row space-x-3 justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full"
->
-    <Icon icon="logout" classes="text-blue-500" />
-    <Text smaller classes="group-hover:text-blue-500">{localize('views.dashboard.profileModal.logout')}</Text>
-</button>
+</div>
 
 <style lang="scss">
     button {
         display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
         grid-auto-flow: column;
         justify-items: start;
         align-items: center;
         place-content: space-between;
         padding: 1rem 1.25rem;
-        margin: 0.40rem 0.75rem;
+        margin: 0.40rem 0;
     }
-
+    .profile-block {
+        grid-template-columns: 1fr;
+    }
 </style>
