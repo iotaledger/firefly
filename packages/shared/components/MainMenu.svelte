@@ -1,32 +1,39 @@
 <script lang="typescript">
-    import { Drawer, Icon, Text } from 'shared/components'
+	import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { isBright, getInitials } from 'shared/lib/helpers'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
-    import { settingsRoute, settingsRouter, SettingsRoute } from '@core/router'
-    import { Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { 
+        dashboardRoute, 
+        dashboardRouter, 
+        DashboardRoute, 
+        settingsRoute, 
+        settingsRouter, 
+        SettingsRoute 
+    } from '@core/router'
+    import { localize } from '@core/i18n'
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
-    $: textColor = isBright(color) ? 'gray-800' : 'white'
 
     let drawer: Drawer
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
     function handleBackClick() {
-        if ($settingsRoute === SettingsRoute.Init) {
-            drawer?.close()
+        if ($dashboardRoute === DashboardRoute.ProfileActions) {
+            $dashboardRouter.previous()
+            drawer.close()
+        } else if ($settingsRoute === SettingsRoute.Init) {
+            $dashboardRouter.previous()
         } else {
             $settingsRouter.goTo(SettingsRoute.Init)
         }
     }
 
     function handleClick() {
-        $settingsRouter.goTo(SettingsRoute.Init)
+        $dashboardRouter.goTo(DashboardRoute.ProfileActions)
         drawer.open()
     }
 </script>
@@ -39,7 +46,7 @@
     <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
     <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
-<Drawer bind:this={drawer} fromRight dimLength={0} fullScreen classes="flex">
+<Drawer bind:this={drawer} fromRight fullScreen classes="flex">
     <div class="flex flex-col flex-1">
         <header
             class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
@@ -47,20 +54,22 @@
         >
             <Icon icon="arrow-left" classes="absolute mb-5 left-8 text-gray-500 text-blue-500" />
             <Text type="h4" classes="text-center">
-                {locale(
+                {localize(
                     $settingsRoute === SettingsRoute.Init
                         ? 'views.settings.settings'
                         : `views.settings.${$settingsRoute}.title`
                 )}
             </Text>
         </header>
-        {#if $settingsRoute === SettingsRoute.Init}
+        {#if $dashboardRoute === DashboardRoute.ProfileActions}
             <div class="grid profile-block space-x-5 px-6 w-full mb-6">
                 <div
                     class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
                     style="background-color: {color};"
                 >
-                    <span class="text-20 text-center text-white uppercase font-semibold">{profileInitial}</span>
+                    <span class="text-20 text-center text-white uppercase font-semibold">
+                        {profileInitial}
+                    </span>
                 </div>
                 <Text type="h4" classes="col-start-2 row-start-2">{$activeProfile?.name}</Text>
                 <button
@@ -68,11 +77,16 @@
                     on:click={() => logout()}
                 >
                     <Icon width="16" height="16" classes="mr-1 text-gray-500 -ml-2" icon="logout" />
-                    <Text type="p" secondary classes="text-center">Logout</Text>
+                    <Text type="p" secondary classes="text-center">
+                        {localize('views.dashboard.profileModal.logout')}
+                    </Text>
                 </button>
             </div>
+            <ProfileActions />
+        {:else}
+            <Settings />
         {/if}
-        <Settings {locale} />
+        
     </div>
 </Drawer>
 
