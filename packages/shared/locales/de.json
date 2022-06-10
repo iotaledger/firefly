@@ -567,12 +567,12 @@
                     "title": "Dein Stimmgewicht",
                     "equality": "1000 IOTA = 1 Stimme",
                     "description1": "Dein Stimmgewicht entspricht deinem Wallet-Guthaben. Wenn sich ein Abstimmungsvorschlag in der Zählungsphase befindet, werden aktive Stimmen gezählt und alle 10 Sekunden angesammelt.",
-                    "description2": "1 Ki Stimmgewicht (1000 IOTA-Token) ermöglichen alle 10 Sekunden eine Stimme. Das bedeutet, dass du deine Wahl über den gesamten Zählzeitraum beibehalten musst, um dein volles Stimmgewicht zu nutzen."
+                    "description2": "1 Ki Stimmgewicht (1000 IOTA Token) ermöglichen alle 10 Sekunden eine Stimme. Das bedeutet, dass du deine Wahl über den gesamten Zählzeitraum beibehalten musst, um dein volles Stimmgewicht zu nutzen."
                 }
             },
             "info": {
                 "title": "Governance-Info",
-                "description": "Mit Hilfe der IOTA Foundation hat die IOTA Community ein Abstimmprotokoll entwickelt, mit dessen Hilfe du an den Governance-Entscheidungen teilnehmen kannst, indem du mit deinen IOTA-Token in Firefly abstimmst.",
+                "description": "Mit Hilfe der IOTA Foundation hat die IOTA Community ein Abstimmprotokoll entwickelt, mit dessen Hilfe du an den Governance-Entscheidungen teilnehmen kannst, indem du mit deinen IOTA Token in Firefly abstimmst.",
                 "link": "Erfahre mehr über Abstimmungen mit IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
@@ -1109,7 +1109,8 @@
         "profiles": "Profile",
         "dev": "Entwickler",
         "createAccount": "Wallet erstellen",
-        "addAWallet": "Wallet hinzufügen",
+        "createNewWallet": "Neue Wallet erstellen",
+        "switchWallet": "Wallet wechseln",
         "accountName": "Wallet-Name",
         "latestTransactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
@@ -1187,6 +1188,7 @@
         "capsLock": "Feststelltaste ist aktiviert",
         "version": "Version {version}",
         "yourWallets": "Deine Wallets",
+        "walletActions": "Wallet-Aktionen",
         "unknown": "Unbekannt",
         "none": "Keine",
         "staked": "Gestaked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Token",
+        "activity": "Aktivität"
     }
 }

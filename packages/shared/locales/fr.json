@@ -1109,7 +1109,8 @@
         "profiles": "Profils",
         "dev": "Dév",
         "createAccount": "Créer un Portefeuille",
-        "addAWallet": "Ajouter un Portefeuille",
+        "createNewWallet": "Créer un nouveau portefeuille",
+        "switchWallet": "Changer de portefeuille",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
         "transactions": "Transactions",
@@ -1187,6 +1188,7 @@
         "capsLock": "Majuscules activées",
         "version": "Version {version}",
         "yourWallets": "Vos Portefeuilles",
+        "walletActions": "Actions du portefeuille",
         "unknown": "Inconnu",
         "none": "Aucun",
         "staked": "Placé",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Portefeuille",
         "staking": "Staking",
-        "governance": "Gouvernance"
+        "governance": "Gouvernance",
+        "tokens": "Jetons",
+        "activity": "Activité"
     }
 }

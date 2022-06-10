@@ -1109,7 +1109,8 @@
         "profiles": "Perfiles",
         "dev": "Dev",
         "createAccount": "Crear una Billetera",
-        "addAWallet": "Añadir una bileltera",
+        "createNewWallet": "Crear una nueva billetera",
+        "switchWallet": "Cambiar a otra billetera",
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
@@ -1187,6 +1188,7 @@
         "capsLock": "Bloqueo de mayúsculas activado",
         "version": "Versión {version}",
         "yourWallets": "Tus carteras",
+        "walletActions": "Acciones de billetera",
         "unknown": "Desconocido",
         "none": "Ninguno",
         "staked": "En Stake",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Billetera",
         "staking": "Staking",
-        "governance": "Gobernanza"
+        "governance": "Gobernanza",
+        "tokens": "Tokens",
+        "activity": "Actividad"
     }
 }

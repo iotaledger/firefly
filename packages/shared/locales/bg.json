@@ -507,10 +507,10 @@
             "status": {
                 "upcoming": "Събитието не е започнало",
                 "commencing": "Предстейкването е отворено",
-                "holdingActive": "Залагане в прогрес",
+                "holdingActive": "Стейкването е в прогрес",
                 "holdingInactive": "Стейкването е отворено",
                 "inactive": "Стейкването не е намерено",
-                "ended": "Залагането приключи"
+                "ended": "Стейкването приключи"
             },
             "summary": {
                 "stakedFunds": "Стейкнати средства"
@@ -520,7 +520,7 @@
                     "upcoming": "Проверете по-късно",
                     "commencing": "Предстейкването е отворено",
                     "holding": "{duration} от стейкването остава",
-                    "ended": "Залагането приключи",
+                    "ended": "Стейкването приключи",
                     "inactive": "Не са открити събития за стейкване",
                     "fetching": "Търсене на инфо за събития за стейкване..."
                 },
@@ -530,7 +530,7 @@
                     "holdingAndStaking": "Автоматично ще получавате награди всеки 10 секунди.",
                     "holdingAndNotStaking": "Стейквайте своите {token} токъни за да получавате награди всеки 10 секунди.",
                     "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
+                    "endedAndDidNotStake": "Вие не участвате в това разпределяне на токъни (airdrop).",
                     "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
                     "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
                 }
@@ -579,16 +579,16 @@
                         "votingOpen": "Гласуването отворено",
                         "countingStarts": "Отброяването започва",
                         "countingStops": "Отброяването свършва",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpened": "Гласуването отворено",
+                        "countingStarted": "Отброяването започна",
+                        "countingStopped": "Отброяването завърши"
                     },
                     "votingRate": {
                         "title": "Voting rate",
                         "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
+                        "title": "Брой гласове",
                         "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "partiallyVoted": {
@@ -596,11 +596,11 @@
                         "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
+                        "title": "Максимален вот",
                         "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Гласове: {amount}"
                     }
                 }
             },
@@ -608,10 +608,10 @@
                 "status": {
                     "upcoming": "Announcement",
                     "commencing": "Гласуването отворено",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "holding": "Преброяване",
+                    "ended": "Приключено"
                 },
-                "button": "View proposal",
+                "button": "Преглед на предложението",
                 "treasury": {
                     "notFound": {
                         "title": "Unable to load Community Treasury vote",
@@ -623,16 +623,16 @@
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
+                "votingOpens": "Гласуването започва на",
+                "votingProgress": "Оставащо време",
                 "votingPower": "Твоята тежест на вота",
                 "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "maximumVotes": "Твоите максимални гласове",
+                "countingStarts": "Отброяването започва на",
+                "currentResult": "Текущ резултат",
+                "finalResult": "Краен резултат",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
+                    "activeVoting": "Активно гласуване",
                     "selected": "Изпратено",
                     "notSelected": "Не е избрано",
                     "winner": "Печеливш избор"
@@ -861,7 +861,7 @@
         "newStakingPeriodNotification": {
             "title": "Staking phase {periodNumber} from {date}",
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer залагането (staking) е вече приключено и само ASMB токъни ще бъдат разпределяни."
+            "info": "Shimmer стейкването е вече приключено и само ASMB токъни ще бъдат разпределяни."
         },
         "governanceManager": {
             "castYourVote": "Изпратете своя вот",
@@ -920,7 +920,7 @@
             "privPolicyCheckbox": "Прочетох и приемам новата политика за поверителност"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
+            "title": "Начинът, по който използвате Firefly е променен",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
@@ -1046,12 +1046,12 @@
         "merge": "Обединяване",
         "mergeFunds": "Обедини средства",
         "done": "Готово",
-        "castVotes": "Cast votes",
+        "castVotes": "Гласувай",
         "changeVotes": "Промяна на вот",
-        "mergeVotes": "Merge vote",
+        "mergeVotes": "Сливане на вот",
         "stopVotes": "Спиране на гласуване",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "okIUnderstand": "ОК, разбирам",
+        "readMore": "Прочетете повече"
     },
     "general": {
         "password": "Парола",
@@ -1082,7 +1082,7 @@
         "from": "От",
         "to": "До",
         "receiveFunds": "Получаване на пари",
-        "address": "Address",
+        "address": "Адрес",
         "myAddress": "Моят адрес",
         "shareAddress": "Сподели адрес",
         "yourAddress": "Вашият адрес",
@@ -1109,7 +1109,8 @@
         "profiles": "Профили",
         "dev": "За разработчици",
         "createAccount": "Създаване на портфейл",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Име на портфейла",
         "latestTransactions": "Последни трансакции",
         "transactions": "Транзакции",
@@ -1142,7 +1143,7 @@
         "transferBroadcasting": "Излъчване на транзакция",
         "transferComplete": "Прехвърлянето е завършено",
         "generatingReceiveAddress": "Генериране на адрес за получаване",
-        "broadcasting": "Broadcasting",
+        "broadcasting": "Излъчване",
         "confirming": "Потвърждаване",
         "creatingAccount": "Създаване на портфейл, моля изчакайте...",
         "updatingAccount": "Актуализиране на портфейла, моля изчакайте...",
@@ -1168,18 +1169,18 @@
         "creatingProfile": "Създаване на профил, моля изчакайте...",
         "fundMigration": "Миграция на средства",
         "accountRemoved": "Този портфейл е скрит. Разкрийте го, за да направите трансфер.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
-        "votingTransaction": "Voting Transaction",
-        "unvotingTransaction": "Unvoting Transaction",
+        "receivingFrom": "Получаване от {account}",
+        "sendingTo": "Изпращане към {account}",
+        "receivedFrom": "Получени от {account}",
+        "sentTo": "Изпратени към {account}",
+        "transferringFrom": "Трансфериране от {account}",
+        "transferringTo": "Трансфериране към {account}",
+        "transferFrom": "Трансфер от {account}",
+        "transferTo": "Трансфер към {account}",
+        "stakingTransaction": "Транзакция за стейкване",
+        "unstakingTransaction": "Транзакция за отмяна на стейване",
+        "votingTransaction": "Транзакция за гласуване",
+        "unvotingTransaction": "Транзакция за спиране на гласуване",
         "participationTransaction": "Participation Transaction",
         "receiving": "Получаване",
         "sending": "Изпращане",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock е включен",
         "version": "Версия {version}",
         "yourWallets": "Вашите портфейли",
+        "walletActions": "Wallet Actions",
         "unknown": "Неизвестен",
         "none": "None",
         "staked": "Заложени",
@@ -1194,10 +1196,10 @@
         "unstaked": "Прекратен е залога",
         "unvoted": "Unvoted",
         "staking": "Залагане",
-        "unstaking": "Unstaking",
+        "unstaking": "Спиране на стейкване",
         "notStaked": "Not staked",
         "stakedFunds": "Стейкнати средства",
-        "unstakedFunds": "Unstaked funds",
+        "unstakedFunds": "Не стейкнати средства",
         "voting": "Гласуване",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
@@ -1243,7 +1245,7 @@
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
+            "notEnabled": "IOTA links не са разрешени",
             "invalidFormat": "The IOTA link you followed is invalid",
             "wallet": {
                 "send": {
@@ -1251,11 +1253,11 @@
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "syncing": "Моля изчакайте докато синхронизацията е завършена, за да превключите портфейлите.",
+        "transferring": "Моля изчакайте докато всички транзакции са завършени, за да превключите портфейлите.",
+        "participating": "Моля изчакайте да завърши стейкването/гласуването преди да смените портфейлите.",
+        "transferringCreate": "Моля изчакайте докато всички транзакции са завършени, за да създадете нов портфейл.",
+        "participatingCreate": "Моля изчакайте да завърши стейкването/гласуването преди да създадете нов портфейл."
     },
     "error": {
         "profile": {
@@ -1283,7 +1285,7 @@
             "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "Твоят PIN трябва да бъде с дължина {length, plural, one {# цифра} other {# цифри}}.",
             "match": "ПИН кодовете не съвпадат.",
             "incorrect": "Текущият ПИН е неправилен."
         },
@@ -1323,7 +1325,7 @@
             "timedOut": "Времето за свързване изтече.",
             "refused": "Свързването е отказано.",
             "handshake": "Could not complete handshake with node.",
-            "invalidCertificate": "Could not connect with invalid certificate.",
+            "invalidCertificate": "Не възможност за свързване поради невалиден сертификат.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Този Node сървър вече е добавен.",
             "unsynced": "Node сървърът не в синхронизиран.",
@@ -1389,7 +1391,7 @@
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Вие нямате никакви средства IOTA."
         }
     },
     "tooltips": {
@@ -1402,7 +1404,7 @@
             "veryLow": "Много нисък"
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
+            "title": "Нови не стейкнати средства: {amount}",
             "titleNoFunds": "Нови не заложени средства",
             "preBody": "You have received tokens that are not staked.",
             "body": "You need to manually stake these new funds to receive airdrop rewards for them."
@@ -1431,7 +1433,7 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "В момента използвате профил за разработчик и сте свързани към {networkName}"
         }
     },
     "permissions": {
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Портфейл",
         "staking": "Залагане",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

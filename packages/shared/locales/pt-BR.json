@@ -1109,7 +1109,8 @@
         "profiles": "Perfis",
         "dev": "Dev",
         "createAccount": "Criar uma Carteira",
-        "addAWallet": "Adicionar uma carteira",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Nome da carteira",
         "latestTransactions": "Últimas transações",
         "transactions": "Transações",
@@ -1187,6 +1188,7 @@
         "capsLock": "O Caps Lock está ativado",
         "version": "Versão {version}",
         "yourWallets": "Suas Carteiras",
+        "walletActions": "Wallet Actions",
         "unknown": "Desconhecido",
         "none": "Nenhum",
         "staked": "Em staking",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Carteira",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

@@ -1109,7 +1109,8 @@
         "profiles": "الملفات الشخصية",
         "dev": "المطور",
         "createAccount": "إنشاء محفظة",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock مفعل",
         "version": "الإصدار {version}",
         "yourWallets": "محافظك",
+        "walletActions": "Wallet Actions",
         "unknown": "غير معروف",
         "none": "لا شَيْء",
         "staked": "مشترك بفعالية الربح من التخزين",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "المحفظة",
         "staking": "فعالية الربح من التخزين",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

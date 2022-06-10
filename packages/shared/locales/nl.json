@@ -1109,7 +1109,8 @@
         "profiles": "Profielen",
         "dev": "Ontwikkelaar",
         "createAccount": "Maak een portemonnee aan",
-        "addAWallet": "Portemonnee toevoegen",
+        "createNewWallet": "Maak een nieuwe portemonnee aan",
+        "switchWallet": "Wissel portemonnee",
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock staat aan",
         "version": "Versie {version}",
         "yourWallets": "Jouw wallets",
+        "walletActions": "Portemonnee acties",
         "unknown": "Onbekend",
         "none": "Geen",
         "staked": "Gestaket",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Portemonnee",
         "staking": "Staken",
-        "governance": "Bestuur"
+        "governance": "Bestuur",
+        "tokens": "Tokens",
+        "activity": "Activiteit"
     }
 }

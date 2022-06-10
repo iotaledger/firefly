@@ -1109,7 +1109,8 @@
         "profiles": "پروفائلز",
         "dev": "ڈیو",
         "createAccount": "ایک نیا والیٹ بنائیں",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "والیٹ کا نام",
         "latestTransactions": "تازہ ترین ٹرانزیکشن",
         "transactions": "ٹرانزیکشنز",
@@ -1187,6 +1188,7 @@
         "capsLock": "کیپس لاک آن ہے",
         "version": "ورژن {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "اجنبی",
         "none": "None",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "والیٹ",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

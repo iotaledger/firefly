@@ -542,7 +542,7 @@
                 "totalWalletRewards": "钱包累计奖励",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "Assembly是一个无需许可的、高度可扩展的多链网络，用于构建和部署可组合的智能合约。Assembly是web3的未来。"
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -567,7 +567,7 @@
                     "title": "您的投票权重",
                     "equality": "1000 IOTA = 1 张选票",
                     "description1": "你的投票权重来自于你的钱包余额。当投票提案处于计票阶段时，每隔10秒就会对有效票数进行统计和累积。",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1Ki（1000 IOTA代币）的投票权重每10秒产生1票。这意味着你必须在计票阶段的整个过程中持续投票，以获得你的全部投票权重。"
                 }
             },
             "info": {
@@ -600,7 +600,7 @@
                         "body": "你必须在剩余的计票期保持投票，以达到你的最高票数。"
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "票数： {amount}"
                     }
                 }
             },
@@ -615,7 +615,7 @@
                 "treasury": {
                     "notFound": {
                         "title": "无法加载社区金库投票",
-                        "subtitle": "Please connect to a node that has added this vote",
+                        "subtitle": "请连接到已添加此次投票的节点",
                         "buttonConnect": "连接到默认节点",
                         "buttonSettings": "查看节点设置",
                         "fetching": "正在获取治理事件信息..."
@@ -754,7 +754,7 @@
             "body": "您将要发送 {amount} 到",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
             "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。你可能还需要再次投票。",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "你正在从一个正在质押和投票的钱包发送转账。这可能会解除你的代币的质押状态，并停止你的投票。您可以自由发送转账，但之后你可能需要将你剩余的代币重新质押和投票。",
                 "stake": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
@@ -1109,7 +1109,8 @@
         "profiles": "用户配置",
         "dev": "开发者",
         "createAccount": "创建钱包",
-        "addAWallet": "添加新钱包",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
@@ -1187,6 +1188,7 @@
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
         "yourWallets": "您的钱包",
+        "walletActions": "Wallet Actions",
         "unknown": "未知",
         "none": "无",
         "staked": "已质押",
@@ -1254,8 +1256,8 @@
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
         "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
         "participating": "请您等待完成质押/投票后再更换钱包。",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "transferringCreate": "请等待所有交易完成后再添加新的钱包。",
+        "participatingCreate": "请您等待完成质押/投票后再新增新的钱包。"
     },
     "error": {
         "profile": {
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "钱包",
         "staking": "质押",
-        "governance": "治理"
+        "governance": "治理",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

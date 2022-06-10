@@ -1109,7 +1109,8 @@
         "profiles": "프로필",
         "dev": "개발자",
         "createAccount": "지갑 만들기",
-        "addAWallet": "지갑 추가",
+        "createNewWallet": "새로운 지갑 만들기",
+        "switchWallet": "지갑 전환",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
         "yourWallets": "Your Wallets",
+        "walletActions": "지갑 동작",
         "unknown": "알 수 없음",
         "none": "없음",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "지갑",
         "staking": "스테이킹",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "토큰",
+        "activity": "활동"
     }
 }

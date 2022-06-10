@@ -1109,7 +1109,8 @@
         "profiles": "Профили",
         "dev": "Девелопер",
         "createAccount": "Креирај паричник",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Име на паричник",
         "latestTransactions": "Последни трансакции",
         "transactions": "Трансакции",
@@ -1187,6 +1188,7 @@
         "capsLock": "Вклучен ви е Caps Lock",
         "version": "Верзија {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Паричник",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }
