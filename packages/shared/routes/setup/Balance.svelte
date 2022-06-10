@@ -60,18 +60,16 @@
     let error = getError(balance)
     let formattedBalance = formatUnitBestMatch(balance, true, 3)
 
-    // TODO: add missing unsubscribe to onDestroy
-    bundles.subscribe((updatedBundles) => {
+    const unsubscribeBundles = bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
         error = getError(_data.balance)
     })
 
-    // TODO: add missing unsubscribe to onDestroy
-    unselectedInputs.subscribe(() => {
+    const unsubscribeUnselectedInputs = unselectedInputs.subscribe(() => {
         error = getError(_data.balance)
     })
 
-    const unsubscribe = data.subscribe((updatedData) => {
+    const unsubscribeData = data.subscribe((updatedData) => {
         _data = updatedData
 
         fiatBalance = getFiatBalance(_data.balance)
@@ -195,7 +193,11 @@
         }
     }
 
-    onDestroy(unsubscribe)
+    onDestroy(() => {
+        unsubscribeUnselectedInputs()
+        unsubscribeBundles()
+        unsubscribeData()
+    })
 </script>
 
 <OnboardingLayout

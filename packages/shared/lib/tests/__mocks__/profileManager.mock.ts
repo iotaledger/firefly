@@ -43,7 +43,7 @@ export class ProfileManagerMock implements IProfileManager {
 
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
         return Promise.resolve({
-            node_info: {
+            nodeInfo: {
                 name: 'HORNET',
                 version: '2.0.0-alpha10',
                 status: {

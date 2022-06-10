@@ -2,7 +2,15 @@
     import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { FontWeightText } from './Text.svelte'
-    import { ActivityAsyncStatus, ActivityDirection, ActivityType, Activity, InclusionState } from '@core/wallet'
+    import {
+        ActivityAsyncStatus,
+        ActivityDirection,
+        ActivityType,
+        Activity,
+        InclusionState,
+        hideActivity,
+        claimActivity,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
@@ -31,10 +39,13 @@
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
         }
         direction = activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress'
-        subject =
-            activity.recipient.type === 'account'
-                ? truncateString(activity.recipient.account?.name, 13, 0)
-                : truncateString(activity.recipient.address, 6, 8)
+        if (activity?.recipient?.type === 'account') {
+            subject = truncateString(activity.recipient.account?.name, 13, 0)
+        } else if (activity?.recipient?.type === 'address') {
+            subject = truncateString(activity.recipient.address, 6, 8)
+        } else {
+            subject = 'Unknown Address'
+        }
     }
 
     let time = new Date()
@@ -56,8 +67,8 @@
 
     let timeDiff: string
     $: {
-        if (activity.isAsync && !activity.isClaimed && activity?.expireDate) {
-            const elapsedTime = activity.expireDate.getTime() - time.getTime()
+        if (activity.isAsync && !activity.isClaimed && activity?.expirationDate) {
+            const elapsedTime = activity.expirationDate.getTime() - time.getTime()
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
             const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
             const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
@@ -71,12 +82,6 @@
             }
         }
     }
-
-    // TODO
-    function handleReject(): void {}
-
-    // TODO
-    function handleClaim(): void {}
 </script>
 
 <div
@@ -136,13 +141,13 @@
                 {#if isIncomingActivityUnclaimed}
                     <button
                         class="action p-1 mr-1 w-full text-center font-medium text-14 text-blue-500"
-                        on:click={handleReject}
+                        on:click={() => hideActivity(activity.id)}
                     >
                         {localize('actions.reject')}
                     </button>
                     <button
                         class="action p-1 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
-                        on:click={handleClaim}
+                        on:click={() => claimActivity(activity.id)}
                     >
                         {localize('actions.claim')}
                     </button>

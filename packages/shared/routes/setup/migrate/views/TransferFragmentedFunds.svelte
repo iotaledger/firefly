@@ -63,7 +63,7 @@
         busy = false
     }
 
-    const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
+    const unsubscribeSelectedBundles = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
         (_hasMigratedAndConfirmedAllSelectedBundles) => {
             fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
 
@@ -78,8 +78,7 @@
 
     let migratedAndUnconfirmedBundles = []
 
-    // TODO: add missing unsubscribe to onDestroy
-    confirmedBundles.subscribe((newConfirmedBundles) => {
+    const unsubscribeConfirmedBundles = confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {
                 migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
@@ -285,7 +284,10 @@
         newProfile.set(null)
     }
 
-    onDestroy(unsubscribe)
+    onDestroy(() => {
+        unsubscribeConfirmedBundles()
+        unsubscribeSelectedBundles()
+    })
 
     function handleMigrateClick() {
         if (legacyLedger) {

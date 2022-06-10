@@ -431,7 +431,7 @@
         }
     }
 
-    const sendSubscription = sendParams.subscribe((s): void => {
+    const unsubscribeSendParams = sendParams.subscribe((s): void => {
         updateFromSendParams(s)
     })
 
@@ -454,7 +454,7 @@
 
     onDestroy((): void => {
         if (transactionTimeoutId) clearTimeout(transactionTimeoutId)
-        sendSubscription()
+        unsubscribeSendParams()
     })
 
     $: address,
