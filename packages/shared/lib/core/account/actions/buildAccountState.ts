@@ -29,5 +29,6 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         // TODO: refactor or remove these below
         messages: [],
         addresses: [],
+        isSyncing: false,
     }
 }

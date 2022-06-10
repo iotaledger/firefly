@@ -33,10 +33,12 @@
         black = 'font-900',
     }
 
+    export type FontWeight = FontWeightNumber | FontWeightText
+
     export type TextPropTypes = {
         type?: TextType
         fontSize?: string
-        fontWeight?: FontWeightNumber | FontWeightText | ''
+        fontWeight?: FontWeight | ''
         lineHeight?: string
         secondary?: boolean
         disabled?: boolean

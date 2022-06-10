@@ -189,7 +189,7 @@
             await handleParticipationAction()
         }
 
-        const usubscribe = pendingParticipations.subscribe((participations) => {
+        const unsubscribe = pendingParticipations.subscribe((participations) => {
             const currentParticipationsLength = participations.length
 
             if (currentParticipationsLength < previousPendingParticipationsLength) {
@@ -205,7 +205,7 @@
         })
 
         return () => {
-            usubscribe()
+            unsubscribe()
         }
     })
 

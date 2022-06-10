@@ -18,7 +18,6 @@ import {
     appUpdateProgress,
 } from '../stores'
 import { cancelAppUpdateDownload } from './cancelAppUpdateDownload'
-import { Unsubscriber } from 'svelte/store'
 
 function resetAppUpdateStores(): void {
     appUpdateProgress.set(0)
@@ -34,11 +33,11 @@ function resetAppUpdateStores(): void {
 export function downloadAppUpdate(): void {
     resetAppUpdateStores()
 
-    const progressSubscription = appUpdateProgress.subscribe((progress) => {
+    const unsubscribeProgress = appUpdateProgress.subscribe((progress) => {
         updateDisplayNotificationProgress(notificationId, progress)
     })
 
-    const minutesRemainingSubscription = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
+    const unsubscribeMinutesRemaining = appUpdateMinutesRemaining.subscribe((minutesRemaining) => {
         if (minutesRemaining > 0) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -55,7 +54,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const completeSubscription = appUpdateComplete.subscribe((isComplete) => {
+    const unsubscribeUpdateComplete = appUpdateComplete.subscribe((isComplete) => {
         if (isComplete) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -80,7 +79,7 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const errorSubscription = appUpdateError.subscribe((isError) => {
+    const unsubscribeErrors = appUpdateError.subscribe((isError) => {
         if (isError) {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
@@ -101,10 +100,10 @@ export function downloadAppUpdate(): void {
     const cleanup = () => {
         removeDisplayNotification(notificationId)
 
-        progressSubscription()
-        completeSubscription()
-        errorSubscription()
-        minutesRemainingSubscription()
+        unsubscribeProgress()
+        unsubscribeUpdateComplete()
+        unsubscribeErrors()
+        unsubscribeMinutesRemaining()
     }
 
     const downloadingNotification: NotificationData = {
