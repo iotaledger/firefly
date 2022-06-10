@@ -31,7 +31,8 @@
     }
 
     const handleLogoutClick = async (): Promise<void> => {
-        await logout(true)
+        // @todo on desktop uses true as param, on mobile we get errors
+        await logout()
     }
 
     const handleStrongholdToggleClick = (): void => {
