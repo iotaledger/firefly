@@ -39,7 +39,7 @@
             | AdvancedSettingsNoProfile
             | HelpAndInfo
     ) {
-        if (route === $settingsRouter.HelpAndInfo && $mobile) {
+        if (route === SettingsRoute.HelpAndInfo && $mobile) {
             switch (childRoute) {
                 case HelpAndInfo.Documentation:
                     Platform.openUrl(ExternalRoute.Documentation)
