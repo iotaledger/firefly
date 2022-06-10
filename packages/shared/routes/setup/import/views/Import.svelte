@@ -2,7 +2,8 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
+    import { newProfile, ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
+    import { NetworkProtocol } from '@core/network'
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
@@ -25,7 +26,13 @@
         <Text type="p" secondary classes="mb-8">{localize('views.import.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button icon="seed" classes="w-full" secondary onClick={() => handleContinueClick(ProfileImportType.Seed)}>
+        <Button
+            icon="seed"
+            classes="w-full"
+            secondary
+            hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
+            onClick={() => handleContinueClick(ProfileImportType.Seed)}
+        >
             {localize('views.import.importSeed')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.import.importSeedDescription')}</Text>
