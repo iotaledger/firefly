@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 import { profileManager } from '../../stores'
 import { handleNewOutputEvent } from './newOutput'
+import { handleTransactionInclusionEvent } from './newTransactionInclusionEvent'
 
 export function subscribe(): void {
     const manager = get(profileManager)
@@ -11,6 +12,7 @@ export function subscribe(): void {
         } else {
             const events = {
                 NewOutput: handleNewOutputEvent,
+                TransactionInclusion: handleTransactionInclusionEvent,
                 // ...
             }
 
@@ -20,7 +22,7 @@ export function subscribe(): void {
             const eventNames = Object.keys(event)
 
             eventNames.forEach((name) => {
-                events[name](event)
+                events[name](event[name])
             })
         }
     })
