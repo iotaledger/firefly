@@ -28,6 +28,15 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         clearPollNetworkInterval()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
+            const manager = get(profileManager)
+
+            // stop background sync
+            // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
+            manager.stopBackgroundSync()
+
+            // Unsubscribe to listeners
+            // https://github.com/iotaledger/wallet.rs/issues/1133
+
             destroyProfileManager()
         }
 
@@ -45,13 +54,6 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         resetDashboardState()
         resetRouters()
 
-        const manager = get(profileManager)
-
-        // start background sync
-        manager.startBackgroundSync()
-
-        // Unsubscribe to listeners
-        // https://github.com/iotaledger/wallet.rs/issues/1133
         resolve()
     })
 }
