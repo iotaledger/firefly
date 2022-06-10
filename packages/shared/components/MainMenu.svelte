@@ -1,7 +1,6 @@
 <script lang="typescript">
 	import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
-    import { logout } from 'shared/lib/app'
-    import { isBright, getInitials } from 'shared/lib/helpers'
+    import { getInitials } from 'shared/lib/helpers'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
@@ -15,7 +14,7 @@
     } from '@core/router'
     import { localize } from '@core/i18n'
 
-    $: color = getColor($activeProfile, $selectedAccount?.id) as string
+    $: profileColor = getColor($activeProfile, $selectedAccount?.id) as string
 
     let drawer: Drawer
 
@@ -40,7 +39,7 @@
 
 <button
     class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="--background-color: {color};"
+    style="--background-color: {profileColor};"
     on:click={handleClick}
 >
     <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
@@ -62,27 +61,7 @@
             </Text>
         </header>
         {#if $dashboardRoute === DashboardRoute.ProfileActions}
-            <div class="grid profile-block space-x-5 px-6 w-full mb-6">
-                <div
-                    class="row-span-4 w-16 h-16 flex items-center justify-center rounded-full leading-100"
-                    style="background-color: {color};"
-                >
-                    <span class="text-20 text-center text-white uppercase font-semibold">
-                        {profileInitial}
-                    </span>
-                </div>
-                <Text type="h4" classes="col-start-2 row-start-2">{$activeProfile?.name}</Text>
-                <button
-                    class="col-start-2 row-start-3 flex items-center w-max px-1 pr-2 rounded-xl"
-                    on:click={() => logout()}
-                >
-                    <Icon width="16" height="16" classes="mr-1 text-gray-500 -ml-2" icon="logout" />
-                    <Text type="p" secondary classes="text-center">
-                        {localize('views.dashboard.profileModal.logout')}
-                    </Text>
-                </button>
-            </div>
-            <ProfileActions />
+            <ProfileActions {profileColor} {profileInitial} />
         {:else}
             <Settings />
         {/if}
@@ -97,8 +76,5 @@
     .menu-button {
         background-color: var(--background-color);
         margin-top: calc(env(safe-area-inset-top) + 10px);
-    }
-    .profile-block {
-        grid-template-columns: auto 1fr;
     }
 </style>
