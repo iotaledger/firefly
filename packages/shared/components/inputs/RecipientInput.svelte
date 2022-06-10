@@ -13,7 +13,7 @@
     const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
     const addressPrefix = network?.type === NetworkType.PrivateNet ? $nodeInfo?.protocol?.bech32HRP : network?.bech32Hrp
 
-    let inputElement
+    let inputElement: HTMLInputElement
     let modal: Modal
 
     let selectedAccount: IAccountState
@@ -32,7 +32,7 @@
 
     $: {
         if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.getAlias()
+            inputElement.value = selectedAccount?.name
         }
     }
     $: {
@@ -44,7 +44,9 @@
     export function validate(): Promise<void> {
         if (selectedAccount) {
             return Promise.resolve()
-        } else if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
+        }
+
+        if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
                     length: ADDRESS_LENGTH + addressPrefix.length,
@@ -56,9 +58,8 @@
 
         if (error) {
             return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
+        return Promise.resolve()
     }
 </script>
 
