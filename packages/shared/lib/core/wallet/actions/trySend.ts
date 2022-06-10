@@ -6,6 +6,8 @@ import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
+import { Activity } from '../classes'
+import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
 export async function trySend(recipientAddress: string, amount: number): Promise<void> {
     const _send = async () => {
@@ -37,6 +39,10 @@ async function sendAmount(recipientAddress: string, amount: number): Promise<str
         skipSync: false,
     }
     const { transactionId } = await account.sendAmount([addressWithAmount], transferOptions)
+    addActivityToAccountActivitiesInAllAccountActivities(
+        account.id,
+        new Activity().setNewTransaction(transactionId, amount, recipientAddress)
+    )
     // TODO: fetch transaction
     return transactionId
 }
