@@ -8,6 +8,7 @@
     export let isBusy = false
     export let message = ''
     export let showNotification = false
+    export let overrideTitle = ''
 
     function handleExportClick() {
         reset()
@@ -60,5 +61,5 @@
 </script>
 
 <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={isBusy} {...$$restProps}>
-    {localize('actions.export')}
+    {overrideTitle || localize('actions.export')}
 </Button>
