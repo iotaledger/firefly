@@ -46,7 +46,7 @@
     <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
 </button>
 <Drawer bind:this={drawer} fromLeft fullScreen classes="flex">
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col flex-1 mx-4">
         <header
             class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
             on:click={handleBackClick}
@@ -54,7 +54,9 @@
             <Icon icon="arrow-left" classes="absolute mb-5 left-8 text-gray-500 text-blue-500" />
             <Text type="h4" classes="text-center">
                 {localize(
-                    $settingsRoute === SettingsRoute.Init
+                    $dashboardRoute === DashboardRoute.ProfileActions
+                        ? 'views.settings.profile.title'
+                        : $settingsRoute === SettingsRoute.Init
                         ? 'views.settings.settings'
                         : `views.settings.${$settingsRoute}.title`
                 )}

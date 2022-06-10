@@ -15,7 +15,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintOut } from 'svelte/easing'
+    import { quintIn, quintInOut, quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -144,7 +144,7 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 350, easing: quintOut }
+            { duration: 350, easing: quintInOut }
         )
         isOpen = false
         if (!preventClose) {

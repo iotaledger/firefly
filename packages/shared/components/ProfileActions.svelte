@@ -74,7 +74,7 @@
     })
 </script>
 
-<div class="flex flex-col flex-1 mx-4 overflow-auto">
+<div class="flex flex-col flex-1 overflow-auto">
     <div class="grid justify-items-center w-full">
         <div
             class="w-16 h-16 flex items-center justify-center rounded-full leading-100"
@@ -98,7 +98,7 @@
             </Text>
         </button>
     </div>
-    {#if isUpToDate}
+    {#if !isUpToDate}
         <button 
             on:click={handleVersionUpdateClick}
             class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
@@ -120,7 +120,7 @@
             />
         </button>
     {/if}
-    {#if isBackupSafe}
+    {#if !isBackupSafe}
         <button 
             on:click={handleBackupClick}
             class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
