@@ -6,9 +6,9 @@
 
     export let asset = $assets?.[0]
 
-    const hasMultipleAssets = $assets.length > 1
-
     let isDropdownOpen = false
+
+    $: hasMultipleAssets = $assets?.length > 1
 
     function handleDropdownClick() {
         if (hasMultipleAssets) {
