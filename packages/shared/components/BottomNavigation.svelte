@@ -28,7 +28,7 @@
     }
 </script>
 
-<div class="w-full bottom-0">
+<div class="w-full bottom-0 z-10">
     <div class="nav-wrapper flex flex-row justify-center pt-4 space-x-24 bg-white dark:bg-gray-900 shadow-elevation-4">
         {#each tabs as tab}
             <BottomNavigationTab {tab} />

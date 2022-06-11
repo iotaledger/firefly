@@ -22,43 +22,51 @@
         $accountRouter.goTo(AccountRoute.Receive)
     }
 
-    function scaleWrapper(node) {
-        const paddingTop = 3.75
+    function getScaleStyle(factor: number): string {
+        return `scale(${factor}, ${factor})`
+    }
+
+    function getTranslateStyle(x: number, y: number, unit: string) {
+        return `translate(${x}${unit}, ${y}${unit})`
+    }
+
+    function animateMobileBalance(node: HTMLElement): void {
         scale.subscribe((curr) => {
-            const scaleUp = curr * curr
-            node.style.paddingTop = `${paddingTop * scaleUp + 0.75}rem`
+            const scaleQuad = 0.4 * curr * curr + 0.6
+            const transQuad = 1 - curr * curr
+            const posX = node.getBoundingClientRect().left
+            const scale = getScaleStyle(scaleQuad)
+            const translate = getTranslateStyle(posX * 0.75 * transQuad, -110 * transQuad, 'px')
+
+            node.style.transform = `${scale} ${translate}`
         })
     }
 
-    function scaleBalance(node) {
-        scale.subscribe((curr) => {
-            const scaleUp = curr * curr
-            node.style.transform = `scale(${0.4 * scaleUp + 0.6}, ${0.4 * scaleUp + 0.6}) translateX(${
-                380 * (1 - scaleUp)
-            }%)`
-        })
-    }
-
-    function scaleDollar(node) {
+    function animateMobileCurrency(node: HTMLElement): void {
         const opacity = 1
         scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
+            const scale = getScaleStyle(curr)
+            const translate = getTranslateStyle(0, -7 * (1 - curr), 'vh')
+
+            node.style.transform = `${translate} ${scale}`
             node.style.opacity = `${opacity * speedUp}`
         })
     }
 
-    function scaleButtons(node) {
+    function animateMobileButtons(node: HTMLElement): void {
         const opacity = 1
-        const marginTop = 1.75
         scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
-            node.style.marginTop = `${marginTop * speedUp}rem`
-            node.style.transform = `scale(${curr}, ${curr})`
+            const scale = getScaleStyle(curr)
+            const translate = getTranslateStyle(0, -15 * (1 - curr), 'vh')
+
+            node.style.transform = `${translate} ${scale}`
             node.style.opacity = `${opacity * speedUp}`
         })
     }
 
-    function scaleMobileMenu(node) {
+    function animateMobileWalletMenu(node: HTMLElement): void {
         const opacity = 1
         scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
@@ -74,19 +82,18 @@
 {#if $mobile}
     <div
         class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 pb-0 pt-20 bg-transparent {classes}"
-        use:scaleWrapper
     >
         <!-- Balance -->
         <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
             <div class="flex flex-col flex-wrap items-center">
-                <div on:click={togglePreciseBalance} use:scaleBalance>
+                <div on:click={togglePreciseBalance} use:animateMobileBalance>
                     <Text type="h1">
                         {showPreciseBalance
                             ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
                             : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
                     </Text>
                 </div>
-                <div use:scaleDollar>
+                <div use:animateMobileCurrency>
                     <Text type="h4" smaller overrideColor="true" classes={mobile && 'text-gray-500'}>
                         {$selectedAccount?.balanceEquiv}
                     </Text>
@@ -94,7 +101,7 @@
             </div>
         </div>
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7 {$mobile && 'mb-10'}" use:scaleButtons>
+        <div class="flex flex-row justify-between space-x-4 mt-7 {$mobile && 'mb-10'}" use:animateMobileButtons>
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}
@@ -110,7 +117,7 @@
         </div>
         <button
             on:click={() => onMenuClick()}
-            use:scaleMobileMenu
+            use:animateMobileWalletMenu
             class="menu-mobile px-2 py-3 flex flex-row space-x-1 text-gray-900 dark:text-white absolute top-6 right-6"
         >
             {#each Array(3) as _}

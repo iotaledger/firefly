@@ -13,6 +13,7 @@
         ExportTransactionHistory,
         HideAccount,
     } from 'shared/components/drawerContent'
+    import { touchInterpolation } from 'shared/lib/actions'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -52,6 +53,7 @@
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
     import { onMount } from 'svelte'
+    import { spring } from 'svelte/motion'
     import { fade } from 'svelte/transition'
     import {
         AccountAssets,
@@ -65,6 +67,15 @@
     } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
+    const headerScale = spring(1)
+    const headerScaleOptions = {
+        spring: headerScale,
+        start: 1,
+        end: 0,
+        intensityScale: 2,
+        upDownThreshold: 0.5,
+        active: true,
+    }
 
     let modal: Modal
 
@@ -78,6 +89,9 @@
     let isGeneratingAddress = false
 
     let drawer: Drawer
+
+    let headerHeight = 0
+    let scroll = false
 
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
@@ -412,6 +426,36 @@
     })
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+
+    function setHeaderHeight(node: HTMLElement): void {
+        headerHeight = node.clientHeight
+    }
+
+    function liftDashboard(node: HTMLElement): void {
+        node.style.zIndex = '0'
+        headerScale.subscribe((curr) => {
+            node.style.transform = `translate(0, ${headerHeight * 0.75 * curr + headerHeight * 0.25}px)`
+        })
+    }
+
+    function scrollDetection(node: Element): void {
+        headerScale.subscribe((curr) => {
+            if (curr <= 0 && node.scrollTop <= 0) {
+                scroll = true
+                return
+            }
+            scroll = false
+        })
+        node.addEventListener('touchmove', (env) => {
+            if (node.scrollTop > 0) {
+                headerScaleOptions.active = false
+                return
+            }
+            if (node.scrollTop <= 0) {
+                headerScaleOptions.active = true
+            }
+        })
+    }
 </script>
 
 {#if $selectedAccount}
@@ -419,8 +463,8 @@
         <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900">
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
-                <div class="flex">
-                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                <div class="absolute flex w-full" use:setHeaderHeight>
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} scale={headerScale} />
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
@@ -445,11 +489,16 @@
                         {/if}
                     </Drawer>
                 </div>
-                <div class="flex flex-1">
+                <div
+                    class="flex flex-1"
+                    style="will-change: transform"
+                    use:touchInterpolation={headerScaleOptions}
+                    use:liftDashboard
+                >
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountAssets classes="pb-0" />
+                                <AccountAssets classes="pb-0" {scroll} {scrollDetection} />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
