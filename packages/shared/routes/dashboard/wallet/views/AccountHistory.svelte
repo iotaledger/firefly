@@ -24,6 +24,7 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let transactions: AccountMessage[] = []
+    export let classes = ''
 
     let drawer: Drawer
 
@@ -168,7 +169,7 @@
 </script>
 
 {#if $mobile}
-    <div class="flex flex-row justify-items-start px-9 pt-6 -mb-6">
+    <div class="flex flex-row justify-items-start px-9 pt-6 -mb-6 {classes}">
         <Text type="h5">
             {localize('general.transactions')}
             <span class="text-gray-500 font-bold align-text-top">• {queryTransactions.length}</span>
