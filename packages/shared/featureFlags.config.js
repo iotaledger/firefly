@@ -42,9 +42,6 @@ const featureFlags = {
             search: {
                 enabled: true,
             },
-            filter: {
-                enabled: false,
-            },
         },
         portfolioChart: {
             enabled: false,

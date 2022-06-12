@@ -84,25 +84,6 @@
                     fontWeight={FontWeightText.medium}
                     color="gray-500"
                 />
-                <!-- TODO: Wait for screen design for these -->
-                <!--
-                <ul class="flex flex-row justify-between space-x-8">
-                    {#each filters as filter, i}
-                        <li on:click={() => (activeFilterIndex = i)}>
-                            <Text
-                                type={TextType.p}
-                                overrideColor
-                                classes="cursor-pointer
-                            {activeFilterIndex === i
-                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
-                            >
-                                {localize(`general.${filter}`)}
-                            </Text>
-                        </li>
-                    {/each}
-                </ul>
-                -->
             </div>
         {/if}
     </div>
