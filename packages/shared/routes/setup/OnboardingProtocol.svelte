@@ -1,10 +1,12 @@
 <script lang="typescript">
     import { appRouter } from '@core/router'
-    import { createNewProfile, deleteNewProfile } from '@core/profile'
+    import { createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { mobile } from '@lib/app'
+    import { mobile } from '@core/app'
+    import { cleanupOnboarding } from '@contexts/onboarding'
     import { Button, OnboardingLayout, Text } from 'shared/components'
+    import featureFlags from 'shared/featureFlags.config'
 
     const isDeveloperProfile = true // TODO: use real value
 
@@ -13,7 +15,7 @@
         $appRouter.next()
     }
     async function onBackClick(): Promise<void> {
-        await deleteNewProfile()
+        await cleanupOnboarding()
         $appRouter.previous()
     }
 </script>
@@ -32,6 +34,7 @@
                         iconColor={`${NetworkProtocol[protocol]}-highlight`}
                         classes="w-full mb-5"
                         secondary
+                        disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
                         onClick={() => onClick(NetworkProtocol[protocol])}
                     >
                         {protocol}
