@@ -8,17 +8,6 @@
     import { TextType } from 'shared/components/Text.svelte'
     import featureFlags from 'shared/featureFlags.config'
 
-    const networkTypes = Object.keys(NetworkType).filter(
-        (networkType) => NetworkType[networkType] !== NetworkType.PrivateNet
-    ) // TODO: add support for custom networks
-
-    const networkEnabledMapping: Map<NetworkType, boolean> = new Map(
-        Object.values(NetworkType).map((network) => [
-            network,
-            featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[network]?.enabled,
-        ])
-    )
-
     function onClick(networkType: NetworkType): void {
         updateNewProfileNetworkType(networkType)
         $appRouter.next({ networkType })
@@ -35,13 +24,14 @@
     <div slot="leftpane__content">
         <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
         <ul>
-            {#each networkTypes as networkType}
+            {#each Object.keys(NetworkType) as networkType}
                 <li>
                     <Button
                         icon="settings"
                         classes="w-full mb-5"
                         secondary
-                        disabled={!networkEnabledMapping.get(NetworkType[networkType])}
+                        disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
+                            ?.enabled}
                         onClick={() => onClick(NetworkType[networkType])}
                     >
                         {localize(`views.network.${NetworkType[networkType]}.title`)}

@@ -9,9 +9,6 @@
     import featureFlags from 'shared/featureFlags.config'
 
     const isDeveloperProfile = true // TODO: use real value
-    const protocolEnabledMapping: Map<NetworkProtocol, boolean> = new Map(
-        Object.values(NetworkProtocol).map((protocol) => [protocol, featureFlags?.onboarding?.[protocol]?.enabled])
-    )
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
         await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Devnet)
@@ -37,7 +34,7 @@
                         iconColor={`${NetworkProtocol[protocol]}-highlight`}
                         classes="w-full mb-5"
                         secondary
-                        disabled={!protocolEnabledMapping.get(NetworkProtocol[protocol])}
+                        disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
                         onClick={() => onClick(NetworkProtocol[protocol])}
                     >
                         {protocol}
