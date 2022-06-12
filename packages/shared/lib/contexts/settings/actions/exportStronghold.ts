@@ -5,7 +5,7 @@ import { getDefaultStrongholdName } from '@lib/utils'
 
 export async function exportStronghold(
     password: string,
-    callback?: (cancelled: boolean, err?: string) => void
+    callback?: (cancelled: boolean, error?: string) => void
 ): Promise<void> {
     try {
         const destination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())

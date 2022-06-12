@@ -10,35 +10,36 @@
     export let showNotification = false
     export let overrideTitle = ''
 
-    function handleExportClick() {
-        reset()
-
-        const _callback = (cancelled, err) => {
-            setTimeout(
-                () => {
-                    message = ''
-                },
-                cancelled ? 0 : 5000
-            )
-            isBusy = false
-            if (!cancelled) {
-                if (err) {
-                    message = localize('general.exportingStrongholdFailed')
-                    showNotification &&
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err),
-                        })
-                } else {
-                    message = localize('general.exportingStrongholdSuccess')
-                    showNotification &&
-                        showAppNotification({
-                            type: 'info',
-                            message: localize('general.exportingStrongholdSuccess'),
-                        })
-                }
+    function handleExportStrongholdResponse(cancelled, error): void {
+        setTimeout(
+            () => {
+                message = ''
+            },
+            cancelled ? 0 : 5000
+        )
+        isBusy = false
+        if (!cancelled) {
+            if (error) {
+                message = localize('general.exportingStrongholdFailed')
+                showNotification &&
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(error),
+                    })
+            } else {
+                message = localize('general.exportingStrongholdSuccess')
+                showNotification &&
+                    showAppNotification({
+                        type: 'info',
+                        message: localize('general.exportingStrongholdSuccess'),
+                    })
             }
         }
+    }
+
+    function handleExportClick(): void {
+        isBusy = false
+        message = ''
 
         openPopup({
             type: 'password',
@@ -46,17 +47,12 @@
                 onSuccess: (password) => {
                     isBusy = true
                     message = localize('general.exportingStronghold')
-                    exportStronghold(password, _callback)
+                    exportStronghold(password, handleExportStrongholdResponse)
                 },
                 returnPassword: true,
                 subtitle: localize('popups.password.backup'),
             },
         })
-    }
-
-    function reset() {
-        isBusy = false
-        message = ''
     }
 </script>
 
