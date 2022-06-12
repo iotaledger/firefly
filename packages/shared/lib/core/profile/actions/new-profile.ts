@@ -35,7 +35,7 @@ export async function createNewProfile(
     const path = await getStorageDirectoryOfProfile(get(newProfile).id)
 
     initialiseProfileManager(path, clientOptions, {
-        Stronghold: { password: '', snapshotPath: `${path}/wallet.stronghold` },
+        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
     })
 }
 
