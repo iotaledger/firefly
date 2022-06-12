@@ -45,6 +45,25 @@ export class Activity implements IActivity {
         return this
     }
 
+    setNewTransaction(transactionId: string, amount: number, address: string): Activity {
+        const account = findAccountWithAddress(address)
+        const isInternal = !!account
+
+        this.id = transactionId
+        this.transactionId = transactionId
+        this.time = new Date()
+        this.type = getActivityType(false, isInternal)
+        this.direction = ActivityDirection.Out
+        this.inclusionState = InclusionState.Pending
+        this.isInternal = isInternal
+        this.rawAmount = amount
+        this.recipient = isInternal ? { type: 'account', account: account } : { type: 'address', address: address }
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.isAsync = false
+        this.isHidden = false
+        return this
+    }
+
     setFromOutput(
         outputId: string,
         output: OutputData,

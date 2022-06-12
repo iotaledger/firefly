@@ -32,7 +32,7 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
-    $: if (searchActive && searchValue) {
+    $: if (searchActive && searchValue && $selectedAccountActivities) {
         debounce(() => {
             searchQueriedActivities(searchValue)
         })()
