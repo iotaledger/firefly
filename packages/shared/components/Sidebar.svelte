@@ -54,7 +54,7 @@
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
-        ...(featureFlags.wallet.enabled
+        ...(featureFlags?.wallet?.enabled
             ? [
                   {
                       icon: 'wallet',
@@ -64,7 +64,7 @@
                   },
               ]
             : []),
-        ...(featureFlags.staking.enabled
+        ...(featureFlags?.staking?.enabled
             ? [
                   {
                       icon: 'tokens',
