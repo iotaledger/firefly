@@ -30,6 +30,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
+    import featureFlags from 'shared/featureFlags.config'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -53,18 +54,26 @@
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
-        {
-            icon: 'wallet',
-            label: localize('tabs.wallet'),
-            route: DashboardRoute.Wallet,
-            onClick: openWallet,
-        },
-        /* {
-            icon: 'tokens',
-            label: localize('tabs.staking'),
-            route: DashboardRoute.Staking,
-            onClick: openStaking,
-        }, */
+        ...(featureFlags?.wallet?.enabled
+            ? [
+                  {
+                      icon: 'wallet',
+                      label: localize('tabs.wallet'),
+                      route: DashboardRoute.Wallet,
+                      onClick: openWallet,
+                  },
+              ]
+            : []),
+        ...(featureFlags?.staking?.enabled
+            ? [
+                  {
+                      icon: 'tokens',
+                      label: localize('tabs.staking'),
+                      route: DashboardRoute.Staking,
+                      onClick: openStaking,
+                  },
+              ]
+            : []),
     ]
 
     function updateSidebarNotification() {
