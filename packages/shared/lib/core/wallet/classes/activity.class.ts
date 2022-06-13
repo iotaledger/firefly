@@ -1,6 +1,7 @@
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { OutputData, Transaction } from '@iota/wallet'
+import { OutputTypes } from '@iota/types'
+import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 import { convertToFiat, formatCurrency } from '@lib/currency'
@@ -45,8 +46,8 @@ export class Activity implements IActivity {
         return this
     }
 
-    setNewTransaction(transactionId: string, amount: number, address: string): Activity {
-        const account = findAccountWithAddress(address)
+    setNewTransaction(transactionId: string, outputOptions: OutputOptions): Activity {
+        const account = findAccountWithAddress(outputOptions.recipientAddress)
         const isInternal = !!account
 
         this.id = transactionId
@@ -56,10 +57,14 @@ export class Activity implements IActivity {
         this.direction = ActivityDirection.Out
         this.inclusionState = InclusionState.Pending
         this.isInternal = isInternal
-        this.rawAmount = amount
-        this.recipient = isInternal ? { type: 'account', account: account } : { type: 'address', address: address }
+        this.rawAmount = Number(outputOptions.amount)
+        this.recipient = isInternal
+            ? { type: 'account', account: account }
+            : { type: 'address', address: outputOptions.recipientAddress }
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this.isAsync = false
+        this.isAsync =
+            outputOptions?.storageDeposit > 0 ||
+            !!(outputOptions?.unlocks?.expiration?.milestoneIndex || outputOptions?.unlocks?.expiration?.unixTime)
         this.isHidden = false
         return this
     }

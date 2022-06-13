@@ -4,7 +4,7 @@
     import { fade } from 'svelte/transition'
 
     export let modal: Modal
-    export let value: string
+    export let value: Date
     export let selected: 'none' | '1hour' | '1day' | '1week' | 'custom' = 'none'
 
     const DATE_NOW = Date.now()
@@ -21,31 +21,22 @@
     $: {
         switch (selected) {
             case 'none':
-                value = 'None'
+                value = null
                 break
             case '1hour':
-                value = formatDate(dateIn1Hour, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
+                value = dateIn1Hour
                 break
             case '1day':
-                value = formatDate(dateIn1Day, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
+                value = dateIn1Day
                 break
             case '1week':
-                value = formatDate(dateIn1Week, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
+                value = dateIn1Week
                 break
             case 'custom':
-                value = 'Custom Date'
+                value = null
                 break
             default:
-                value = 'None'
+                value = null
         }
     }
 

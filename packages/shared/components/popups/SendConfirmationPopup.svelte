@@ -1,49 +1,84 @@
 <script lang="typescript">
-    import { Button, Text, KeyValueBox, ExpirationTimePicker } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { TransactionDetails } from 'shared/components/molecules'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { promptUserToConnectLedger } from '@lib/ledger'
-    import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
-    import { buildBasicOutput, prepareTransaction, selectedAccount } from '@core/account'
-    import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
+    import { ActivityType, InclusionState, Recipient, trySendOutput } from '@core/wallet'
+    import type { OutputTypes } from '@iota/types'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { MILLISECONDS_PER_SECOND } from '@lib/time'
     import { CurrencyTypes } from '@lib/typings/currency'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
+    import { TransactionDetails } from 'shared/components/molecules'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { closePopup } from 'shared/lib/popup'
 
     export let internal = false
     export let recipient: Recipient
     export let rawAmount: number
     export let amount: '0'
     export let unit: string
+    export let publicNote: string
+
+    let expirationDate: Date
+    let storageDeposit = 0
 
     let output
-    let preparedTransaction
+    let preparedOutput: OutputTypes
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
 
-    async function buildOutput() {
-        output = await buildBasicOutput($selectedAccount.id, {
-            unlockConditions: [
-                {
-                    type: 0,
-                    address: {
-                        type: 0,
-                        pubKeyHash: '0x' + convertBech32AddressToEd25519Address(recipientAddress),
-                    },
+    let outputOptions
+
+    async function _prepareOutput() {
+        const unixTime = expirationDate ? Math.round(expirationDate.getTime() / MILLISECONDS_PER_SECOND) : undefined
+        outputOptions = {
+            recipientAddress,
+            amount: String(rawAmount),
+            features: {
+                ...(publicNote && { metadata: publicNote }),
+            },
+            unlocks: {
+                ...(unixTime && { expiration: { unixTime } }),
+            },
+        }
+        preparedOutput = await prepareOutput(
+            $selectedAccount.id,
+            {
+                recipientAddress,
+                amount: String(rawAmount),
+                features: {
+                    ...(publicNote && { metadata: publicNote }),
                 },
-            ],
-        })
+                unlocks: {
+                    ...(unixTime && { expiration: { unixTime } }),
+                },
+            },
+            {
+                remainderValueStrategy: {
+                    strategy: 'ReuseAddress',
+                    value: null,
+                },
+            }
+        )
+        calculateStorageDepositFromOutput(preparedOutput)
     }
 
-    async function prepare() {
-        preparedTransaction = await prepareTransaction($selectedAccount.id, [output])
+    function calculateStorageDepositFromOutput(output: OutputTypes) {
+        if (output.type !== 2) {
+            const storageDepositUnlockCondition = output?.unlockConditions?.find(
+                (unlockCondition) => unlockCondition?.type === 1
+            )
+            if (storageDepositUnlockCondition?.type === 1) {
+                storageDeposit = Number(storageDepositUnlockCondition.amount)
+            } else {
+                storageDeposit = Number(output.amount) - rawAmount
+            }
+        }
     }
 
-    $: rawAmount, recipientAddress, buildOutput()
-    $: output && prepare()
+    $: rawAmount, recipientAddress, publicNote, expirationDate, _prepareOutput()
 
     function onConfirm(): void {
         closePopup()
@@ -56,7 +91,7 @@
     }
 
     function send(): Promise<void> {
-        return trySend(recipientAddress, rawAmount)
+        return trySendOutput(outputOptions, preparedOutput)
     }
 
     function onCancel(): void {
@@ -74,17 +109,20 @@
         amount,
         unit,
         recipient,
+        publicNote,
+        expirationDate,
+        storageDeposit: storageDeposit,
     }
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
+    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" />
+            <ExpirationTimePicker slot="value" bind:value={expirationDate} />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

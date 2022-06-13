@@ -1,7 +1,8 @@
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { isSoftwareProfile } from '@core/profile'
-import { AddressWithAmount, TransactionOptions } from '@iota/wallet'
+import { OutputTypes } from '@iota/types'
+import { AddressWithAmount, OutputOptions, TransactionOptions } from '@iota/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { isTransferring } from '@lib/wallet'
@@ -9,11 +10,11 @@ import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
-export async function trySend(recipientAddress: string, amount: number): Promise<void> {
+export async function trySendOutput(outputOptions: OutputOptions, output: OutputTypes): Promise<void> {
     const _send = async () => {
         isTransferring.set(true)
         try {
-            await sendAmount(recipientAddress, amount)
+            await sendOutput(outputOptions, output)
         } catch (err) {
             console.error(err)
             showAppNotification({
@@ -31,17 +32,16 @@ export async function trySend(recipientAddress: string, amount: number): Promise
     }
 }
 
-async function sendAmount(recipientAddress: string, amount: number): Promise<string> {
+async function sendOutput(outputOptions: OutputOptions, output: OutputTypes): Promise<string> {
     const account = get(selectedAccount)
-    const addressWithAmount: AddressWithAmount = { address: recipientAddress, amount: amount.toString() }
     const transferOptions: TransactionOptions = {
         remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         skipSync: false,
     }
-    const { transactionId } = await account.sendAmount([addressWithAmount], transferOptions)
+    const { transactionId } = await account.sendOutputs([output], transferOptions)
     addActivityToAccountActivitiesInAllAccountActivities(
         account.id,
-        new Activity().setNewTransaction(transactionId, amount, recipientAddress)
+        new Activity().setNewTransaction(transactionId, outputOptions)
     )
     // TODO: fetch transaction
     return transactionId

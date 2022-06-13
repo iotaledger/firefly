@@ -53,7 +53,7 @@ export interface IAccount {
         transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
-    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData>
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     prepareSendAmount(
         addressWithAmount: AddressWithAmount[],
         options?: TransactionOptions
