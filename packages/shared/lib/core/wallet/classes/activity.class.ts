@@ -30,6 +30,7 @@ export class Activity implements IActivity {
     expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
+    publicNote?: string
 
     setFromTransaction(transactionId: string, transaction: Transaction): Activity {
         this.id = transactionId
