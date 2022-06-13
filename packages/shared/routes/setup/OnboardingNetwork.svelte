@@ -1,14 +1,12 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { newProfile } from '@core/profile'
     import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-
-    const networkTypes = Object.keys(NetworkType).filter(
-        (networkType) => NetworkType[networkType] !== NetworkType.PrivateNet
-    ) // TODO: add support for custom networks
+    import featureFlags from 'shared/featureFlags.config'
 
     function onClick(networkType: NetworkType): void {
         updateNewProfileNetworkType(networkType)
@@ -26,12 +24,14 @@
     <div slot="leftpane__content">
         <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
         <ul>
-            {#each networkTypes as networkType}
+            {#each Object.keys(NetworkType) as networkType}
                 <li>
                     <Button
                         icon="settings"
                         classes="w-full mb-5"
                         secondary
+                        disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
+                            ?.enabled}
                         onClick={() => onClick(NetworkType[networkType])}
                     >
                         {localize(`views.network.${NetworkType[networkType]}.title`)}

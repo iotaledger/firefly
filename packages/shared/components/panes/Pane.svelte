@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
 
-    export let classes
+    export let classes = ''
 
     let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
