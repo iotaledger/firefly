@@ -20,7 +20,7 @@
         "patch-package": "^6.2.2",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
-        "retype": "^0.2.0"
+        "retypeapp": "^2.3.0"
     },
     "scripts": {
         "docs:start": "cd docs/ && retype watch",
