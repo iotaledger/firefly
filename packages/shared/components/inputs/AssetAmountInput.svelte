@@ -64,7 +64,7 @@
     {error}
     classes="space-y-2"
 >
-    <div class="flex flex-row w-full items-center space-x-0.5">
+    <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset />
         <AmountInput
             bind:inputElement={amountInputElement}

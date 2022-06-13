@@ -1,5 +1,14 @@
-import { AccountBalance, Address, OutputData, Transaction, TransactionResult } from '@iota/wallet'
+import {
+    AccountBalance,
+    Address,
+    OutputData,
+    OutputOptions,
+    Transaction,
+    TransactionOptions,
+    TransactionResult,
+} from '@iota/wallet'
 import { IAccount } from '../../core/account'
+import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
@@ -10,10 +19,10 @@ export class AccountMock implements IAccount {
         publicAddresses: [],
         internalAddresses: [],
         addressesWithUnspentOutputs: [],
-        outputs: new Map<string, OutputData>(),
+        outputs: {},
         lockedOutputs: new Set<string>(),
-        unspentOutputs: new Map<string, OutputData>(),
-        transactions: new Map<string, Transaction>(),
+        unspentOutputs: {},
+        transactions: {},
         pendingTransactions: new Set<string>(),
         accountOptions: {
             outputConsolidationThreshold: 0,
@@ -28,16 +37,7 @@ export class AccountMock implements IAccount {
     }
 
     getBalance(): Promise<AccountBalance> {
-        return Promise.resolve({
-            aliases: [],
-            available: '12',
-            foundries: [],
-            nativeTokens: {},
-            nfts: [],
-            potentiallyLockedOutputs: {},
-            requiredStorageDeposit: '100',
-            total: '200',
-        })
+        return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
     collectOutputs(): Promise<TransactionResult[]> {
@@ -125,6 +125,10 @@ export class AccountMock implements IAccount {
 
     mintNfts(nftOptions, transferOptions): Promise<[]> {
         return Promise.resolve([])
+    }
+
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData> {
+        throw new Error('Method not implemented.')
     }
 
     getTransaction(transactionId: string): Promise<Transaction> {
