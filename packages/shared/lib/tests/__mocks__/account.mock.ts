@@ -1,4 +1,12 @@
-import { AccountBalance, Address, OutputData, Transaction, TransactionResult } from '@iota/wallet'
+import {
+    AccountBalance,
+    Address,
+    OutputData,
+    OutputOptions,
+    Transaction,
+    TransactionOptions,
+    TransactionResult,
+} from '@iota/wallet'
 import { IAccount } from '../../core/account'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
@@ -117,6 +125,10 @@ export class AccountMock implements IAccount {
 
     mintNfts(nftOptions, transferOptions): Promise<[]> {
         return Promise.resolve([])
+    }
+
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData> {
+        throw new Error('Method not implemented.')
     }
 
     getTransaction(transactionId: string): Promise<Transaction> {

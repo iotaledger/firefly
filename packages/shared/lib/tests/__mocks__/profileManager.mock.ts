@@ -116,6 +116,10 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
+    setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
     startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void> {
         return Promise.resolve()
     }
