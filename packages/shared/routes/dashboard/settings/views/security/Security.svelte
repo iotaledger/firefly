@@ -1,11 +1,9 @@
 <script lang="typescript">
-    import { HR } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { exportStronghold } from '@contexts/settings'
+    import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettings } from '@core/router'
-    import { getDefaultStrongholdName } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { HR } from 'shared/components'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
-    import { isSoftwareProfile, updateActiveProfile } from '@core/profile'
 
     const settings: {
         component: unknown
@@ -20,30 +18,7 @@
     ]
 
     const props = {
-        [SecuritySettings.ExportStronghold]: { exportStronghold },
         [SecuritySettings.ChangePassword]: { exportStronghold },
-    }
-
-    function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
-        Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
-            .then((result) => {
-                if (result) {
-                    api.backup(result, password, {
-                        onSuccess() {
-                            updateActiveProfile({ lastStrongholdBackupTime: new Date() })
-                            callback(false)
-                        },
-                        onError(err) {
-                            callback(false, err.error)
-                        },
-                    })
-                } else {
-                    callback(true)
-                }
-            })
-            .catch((err) => {
-                callback(false, err.error)
-            })
     }
 </script>
 

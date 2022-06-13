@@ -98,6 +98,7 @@
                         value = trimmedContent
                     } catch (err) {
                         error = true
+                        console.error(err)
                         statusMessage = locale(err.error)
                     }
                 }

@@ -1,4 +1,6 @@
+export * from './claimActivity'
 export * from './trySend'
 export * from './filterQueriedActivities'
+export * from './hideActivity'
 export * from './searchQueriedActivities'
 export * from './loadAccountActivies'

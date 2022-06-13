@@ -1,22 +1,21 @@
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { ITransactionPayload } from '@iota/types'
-import { Transaction } from '@iota/wallet'
+import { OutputData, Transaction } from '@iota/wallet'
+import { Bech32Helper } from '@lib/bech32Helper'
+import { Converter } from '@lib/converter'
 import { convertToFiat, formatCurrency } from '@lib/currency'
-import { findAccountWithAddress, findAccountWithAnyAddress, getIncomingFlag, getInternalFlag } from '@lib/wallet'
+import { findAccountWithAddress } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
-import {
-    formatTokenAmountBestMatch,
-    receiverAddressesFromTransactionPayload,
-    sendAddressFromTransactionPayload,
-} from '../utils'
+import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
 
 export class Activity implements IActivity {
     id: string
+    outputId?: string
+    transactionId?: string
     time: Date
     type: ActivityType
     direction: ActivityDirection
@@ -26,12 +25,13 @@ export class Activity implements IActivity {
     recipient: Recipient
     token: ITokenMetadata
     isAsync: boolean
-    expireDate?: Date
+    expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
 
     setFromTransaction(transactionId: string, transaction: Transaction): Activity {
         this.id = transactionId
+        this.transactionId = transactionId
         this.time = new Date(Number(transaction.timestamp))
         this.type = ActivityType.Send
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
@@ -45,23 +45,79 @@ export class Activity implements IActivity {
         return this
     }
 
+    setNewTransaction(transactionId: string, amount: number, address: string): Activity {
+        const account = findAccountWithAddress(address)
+        const isInternal = !!account
+
+        this.id = transactionId
+        this.transactionId = transactionId
+        this.time = new Date()
+        this.type = getActivityType(false, isInternal)
+        this.direction = ActivityDirection.Out
+        this.inclusionState = InclusionState.Pending
+        this.isInternal = isInternal
+        this.rawAmount = amount
+        this.recipient = isInternal ? { type: 'account', account: account } : { type: 'address', address: address }
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.isAsync = false
+        this.isHidden = false
+        return this
+    }
+
+    setFromOutput(
+        outputId: string,
+        output: OutputData,
+        accountAddress: string,
+        hidden: boolean,
+        claimed: boolean
+    ): Activity {
+        const address =
+            output?.address?.type === 0
+                ? Bech32Helper.toBech32(0, Converter.hexToBytes(output.address.pubKeyHash.substring(2)), 'rms')
+                : ''
+        const isIncoming = address === accountAddress
+        const isInternal = !!findAccountWithAddress(address)
+        this.id = outputId
+        this.outputId = outputId
+        this.time = new Date(output.metadata.milestoneTimestampBooked)
+        this.type = getActivityType(isIncoming, isInternal)
+        this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
+        this.inclusionState = InclusionState.Confirmed
+        this.isInternal = isInternal
+        this.rawAmount = Number(output.amount)
+        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+
+        if (output.output.type !== 2) {
+            for (const unlockCondition of output.output.unlockConditions) {
+                if (isAsyncUnlockCondition(unlockCondition)) {
+                    this.isAsync = true
+                    this.isHidden = hidden
+                    this.expirationDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
+                    this.isClaimed = claimed
+                    break
+                }
+            }
+        }
+        return this
+    }
+
     getAsyncStatus(time: Date): ActivityAsyncStatus {
         if (this.isAsync) {
             if (this.isClaimed) {
                 return ActivityAsyncStatus.Claimed
             } else {
-                if (time > this.expireDate) {
+                if (time > this.expirationDate) {
                     return ActivityAsyncStatus.Expired
                 } else {
                     return ActivityAsyncStatus.Unclaimed
                 }
             }
         }
-        return
+        return null
     }
 
     getFormattedAmount(signed: boolean): string {
-        return `${this.type !== ActivityType.Receive && signed ? '- ' : ''}${formatTokenAmountBestMatch(
+        return `${this.direction !== ActivityDirection.In && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
             this.token,
             2
@@ -113,3 +169,13 @@ export class Activity implements IActivity {
 //             : { type: 'address', address: receiverAddressesFromTransactionPayload(payload)[0] }
 //     }
 // }
+
+function getActivityType(incoming: boolean, internal: boolean): ActivityType {
+    if (internal) {
+        return ActivityType.Transfer
+    } else if (incoming) {
+        return ActivityType.Receive
+    } else {
+        return ActivityType.Send
+    }
+}

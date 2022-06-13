@@ -4,11 +4,13 @@
     import { localize } from '@core/i18n'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
     import { buildBasicOutput, prepareTransaction, selectedAccount } from '@core/account'
     import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { CurrencyTypes } from '@lib/typings/currency'
 
     export let internal = false
     export let recipient: Recipient
@@ -61,9 +63,14 @@
         closePopup()
     }
 
+    $: formattedFiatValue =
+        formatCurrency(
+            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
+        ) || '-'
+
     $: transactionDetails = {
         type: internal ? ActivityType.Transfer : ActivityType.Send,
-        inclusiontState: InclusionState.Pending,
+        inclusionState: InclusionState.Pending,
         amount,
         unit,
         recipient,
@@ -75,7 +82,7 @@
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
-        <TransactionDetails {...transactionDetails} />
+        <TransactionDetails {...transactionDetails} {formattedFiatValue} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
             <ExpirationTimePicker slot="value" />
         </KeyValueBox>

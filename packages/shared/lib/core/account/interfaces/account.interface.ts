@@ -18,6 +18,7 @@ import {
     TransactionResult,
     TransactionOptions,
     PreparedTransactionData,
+    OutputOptions,
 } from '@iota/wallet/out/types'
 import {
     BuildAliasOutputData,
@@ -52,35 +53,26 @@ export interface IAccount {
         transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
-    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
-    prepareMintNfts(nftOptions: NftOptions[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData>
     prepareSendAmount(
         addressWithAmount: AddressWithAmount[],
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
-    prepareSendMicroTransaction(
-        addressWithMicroAmounts: AddressWithMicroAmount[],
-        options?: TransactionOptions
-    ): Promise<PreparedTransactionData>
-    prepareSendNativeToken(
-        addressNativeTokens: AddressNativeTokens[],
-        options?: TransactionOptions
-    ): Promise<PreparedTransactionData>
-    prepareSendNft(addressNftIds: AddressNftId[], options?: TransactionOptions): Promise<PreparedTransactionData>
+    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult>
-    sendTransaction(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
     setAlias(alias: string): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult>

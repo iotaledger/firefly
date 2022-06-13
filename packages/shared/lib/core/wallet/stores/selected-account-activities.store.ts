@@ -28,13 +28,18 @@ interface GroupedActivity {
 
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities) {
+    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
         const activityDate = getActivityGroupTitleForTimestamp(activity.time)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
         }
         const index = groupedActivities.findIndex((group) => group.date === activityDate)
         groupedActivities[index].activities.push(activity)
+    }
+    for (const groupedActivitiesPerDate of groupedActivities) {
+        groupedActivitiesPerDate.activities = groupedActivitiesPerDate.activities.sort(
+            (activity1, activity2) => activity2.time.getTime() - activity1.time.getTime()
+        )
     }
     return groupedActivities
 })
