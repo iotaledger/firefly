@@ -14,6 +14,7 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
+    import featureFlags from 'shared/featureFlags.config'
 
     const { loggedIn } = $activeProfile
 
@@ -48,45 +49,57 @@
         <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
     {/if}
     <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
-        <SettingsMenu
-            icon="settings"
-            iconColor="bg-blue-500"
-            icons={SettingsIcons}
-            settings={GeneralSettings}
-            activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
-            title={localize('views.settings.generalSettings.title')}
-            description=""
-            onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
-        />
-        <SettingsMenu
-            icon="security"
-            iconColor="bg-yellow-500"
-            icons={SettingsIcons}
-            settings={securitySettings}
-            activeSettings={$loggedIn ? SecuritySettings : undefined}
-            title={localize('views.settings.security.title')}
-            description=""
-            onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
-        />
-        <SettingsMenu
-            icon="tools"
-            iconColor="bg-green-600"
-            icons={SettingsIcons}
-            settings={advancedSettings}
-            activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
-            title={localize('views.settings.advancedSettings.title')}
-            description=""
-            onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
-        />
-        <SettingsMenu
-            icon="info"
-            iconColor="bg-purple-500"
-            icons={SettingsIcons}
-            settings={HelpAndInfo}
-            activeSettings={HelpAndInfo}
-            title={localize('views.settings.helpAndInfo.title')}
-            description=""
-            onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
-        />
+        {#if featureFlags?.settings?.general?.enabled}
+            <SettingsMenu
+                icon="settings"
+                iconColor="bg-blue-500"
+                icons={SettingsIcons}
+                group="general"
+                settings={GeneralSettings}
+                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
+                title={localize('views.settings.generalSettings.title')}
+                description=""
+                onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
+            />
+        {/if}
+        {#if featureFlags?.settings?.security?.enabled}
+            <SettingsMenu
+                icon="security"
+                iconColor="bg-yellow-500"
+                icons={SettingsIcons}
+                group="security"
+                settings={securitySettings}
+                activeSettings={$loggedIn ? SecuritySettings : undefined}
+                title={localize('views.settings.security.title')}
+                description=""
+                onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
+            />
+        {/if}
+        {#if featureFlags?.settings?.advanced?.enabled}
+            <SettingsMenu
+                icon="tools"
+                iconColor="bg-green-600"
+                icons={SettingsIcons}
+                group="advanced"
+                settings={advancedSettings}
+                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
+                title={localize('views.settings.advancedSettings.title')}
+                description=""
+                onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
+            />
+        {/if}
+        {#if featureFlags?.settings?.helpAndInfo?.enabled}
+            <SettingsMenu
+                icon="info"
+                iconColor="bg-purple-500"
+                icons={SettingsIcons}
+                group="helpAndInfo"
+                settings={HelpAndInfo}
+                activeSettings={HelpAndInfo}
+                title={localize('views.settings.helpAndInfo.title')}
+                description=""
+                onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
+            />
+        {/if}
     </div>
 </div>
