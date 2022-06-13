@@ -3,16 +3,24 @@
     import { HR, Modal, MenuItem, DateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
 
-    export let modal: Modal
     export let value: string
     export let selected: 'none' | '1hour' | '1day' | '1week' | 'custom' = 'none'
     export let expireDate: Date
     export let anchor: HTMLElement
 
+    export function tryOpen(): void {
+        if (!canShowDateTimePicker) {
+            modal?.open()
+        } else {
+            canShowDateTimePicker = !canShowDateTimePicker
+        }
+    }
+
     const DATE_NOW = Date.now()
 
     let customDate: Date
     let canShowDateTimePicker = false
+    let modal: Modal
 
     const dateIn1Hour = new Date(DATE_NOW)
     dateIn1Hour.setTime(dateIn1Hour.getTime() + 1 * 60 * 60 * 1000)
