@@ -51,10 +51,10 @@
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
-            'overflow-y-auto'} flex flex-row flex-wrap space-x-20"
+            'overflow-y-auto'} flex flex-row flex-wrap"
     >
         {#each $profiles as profile}
-            <div class="mb-8">
+            <div class="mx-7 mb-8">
                 <Profile
                     bgColor="blue"
                     onClick={handleContinueClick}
@@ -62,14 +62,14 @@
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
                     networkType={profile?.networkType ?? NetworkType.Devnet}
-                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                    networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
                     isLedgerProfile={profile?.type === ProfileType.Ledger ||
                         profile?.type === ProfileType.LedgerSimulator}
                     classes="cursor-pointer"
                 />
             </div>
         {/each}
-        <div class="mx-4 mb-8">
+        <div class="mx-7 mb-8">
             <Profile
                 onClick={addProfile}
                 name={localize('general.addProfile')}
