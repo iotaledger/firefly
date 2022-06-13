@@ -26,24 +26,22 @@
     </div>
     <div slot="leftpane__content">
         <Text secondary classes="mb-8">{localize('views.protocol.body')}</Text>
-        <ul>
-            {#each Object.keys(NetworkProtocol) as protocol}
-                <li>
-                    <Button
-                        icon={NetworkProtocol[protocol]}
-                        iconColor={`${NetworkProtocol[protocol]}-highlight`}
-                        classes="w-full mb-5"
-                        secondary
-                        disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
-                        onClick={() => onClick(NetworkProtocol[protocol])}
-                    >
-                        {protocol}
-                        {#if !$mobile}
-                            <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
-                        {/if}
-                    </Button>
-                </li>
-            {/each}
-        </ul>
+    </div>
+    <div slot="leftpane__action" class="flex flex-col space-y-4">
+        {#each Object.keys(NetworkProtocol) as protocol}
+            <Button
+                icon={NetworkProtocol[protocol]}
+                iconColor={`${NetworkProtocol[protocol]}-highlight`}
+                classes="w-full"
+                secondary
+                disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
+                onClick={() => onClick(NetworkProtocol[protocol])}
+            >
+                {protocol}
+                {#if !$mobile}
+                    <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
+                {/if}
+            </Button>
+        {/each}
     </div>
 </OnboardingLayout>
