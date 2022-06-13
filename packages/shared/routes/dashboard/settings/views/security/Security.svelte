@@ -4,6 +4,7 @@
     import { SecuritySettings } from '@core/router'
     import { HR } from 'shared/components'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
+    import featureFlags from 'shared/featureFlags.config'
 
     const settings: {
         component: unknown
@@ -16,6 +17,7 @@
         { component: ChangePincode, childRoute: SecuritySettings.ChangePincode },
         { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
     ]
+    const visibleSettings = settings.filter((setting) => featureFlags?.settings.security?.[setting.childRoute]?.enabled)
 
     const props = {
         [SecuritySettings.ChangePassword]: { exportStronghold },
@@ -23,7 +25,7 @@
 </script>
 
 <div>
-    {#each settings as { component, childRoute, requireSoftware }, index}
+    {#each visibleSettings as { component, childRoute, requireSoftware }, index}
         {#if !requireSoftware || (requireSoftware && $isSoftwareProfile)}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} {...props[childRoute]} />

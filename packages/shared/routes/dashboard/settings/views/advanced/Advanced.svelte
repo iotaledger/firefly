@@ -12,6 +12,7 @@
         NetworkConfiguration,
         WalletFinder,
     } from './'
+    import featureFlags from 'shared/featureFlags.config'
 
     const settings: {
         component: unknown
@@ -28,17 +29,18 @@
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
     ]
+    const visibleSettings = settings.filter((setting) => featureFlags?.settings.advanced?.[setting.childRoute]?.enabled)
 
     const { loggedIn } = $activeProfile
 </script>
 
 <div>
-    {#each settings as { component, childRoute, requireLogin, requireLedger }, index}
+    {#each visibleSettings as { component, childRoute, requireLogin, requireLedger }, index}
         {#if (!requireLogin || (requireLogin && $loggedIn)) && (!requireLedger || (requireLedger && $isLedgerProfile))}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} id={childRoute} />
             </section>
-            {#if index < settings.length - 1}
+            {#if index < visibleSettings.length - 1}
                 <HR classes="pb-5 mt-5 justify-center" />
             {/if}
         {/if}
