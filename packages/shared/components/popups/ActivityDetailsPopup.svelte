@@ -46,7 +46,7 @@
     })
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/block/${activity.id}`)
+        Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
     }
 </script>
 
