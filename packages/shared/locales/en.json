@@ -1138,14 +1138,14 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "transactionTime": "Transaction time",
-        "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
-        "optionalPublicNote": "Optional public note"
+        "metadata": "Metadata",
+        "tag": "Tag"
     },
     "dates": {
         "today": "Today",

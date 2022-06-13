@@ -27,7 +27,8 @@
     export let asyncStatus: ActivityAsyncStatus = undefined
     export let formattedFiatValue: string
     export let time: Date
-    export let publicNote: string
+    export let metadata: string
+    export let tag: string
     export let storageDeposit = 0
     export let expirationDate: Date
     export let recipient: Recipient
@@ -69,7 +70,8 @@
 
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
-        ...(publicNote && { publicNote }),
+        ...(metadata && { metadata }),
+        ...(tag && { tag }),
         ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
     }

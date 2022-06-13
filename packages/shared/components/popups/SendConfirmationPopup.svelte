@@ -18,7 +18,8 @@
     export let rawAmount: number
     export let amount: '0'
     export let unit: string
-    export let publicNote: string
+    export let metadata: string
+    export let tag: string
 
     let expirationDate: Date
     let storageDeposit = 0
@@ -37,31 +38,19 @@
             recipientAddress,
             amount: String(rawAmount),
             features: {
-                ...(publicNote && { metadata: publicNote }),
+                ...(metadata && { metadata }),
+                ...(tag && { tag }),
             },
             unlocks: {
                 ...(unixTime && { expiration: { unixTime } }),
             },
         }
-        preparedOutput = await prepareOutput(
-            $selectedAccount.id,
-            {
-                recipientAddress,
-                amount: String(rawAmount),
-                features: {
-                    ...(publicNote && { metadata: publicNote }),
-                },
-                unlocks: {
-                    ...(unixTime && { expiration: { unixTime } }),
-                },
+        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
+            remainderValueStrategy: {
+                strategy: 'ReuseAddress',
+                value: null,
             },
-            {
-                remainderValueStrategy: {
-                    strategy: 'ReuseAddress',
-                    value: null,
-                },
-            }
-        )
+        })
         calculateStorageDepositFromOutput(preparedOutput)
     }
 
@@ -78,7 +67,7 @@
         }
     }
 
-    $: rawAmount, recipientAddress, publicNote, expirationDate, _prepareOutput()
+    $: $$props, expirationDate, _prepareOutput()
 
     function onConfirm(): void {
         closePopup()
@@ -109,7 +98,8 @@
         amount,
         unit,
         recipient,
-        publicNote,
+        metadata,
+        tag,
         expirationDate,
         storageDeposit: storageDeposit,
     }
