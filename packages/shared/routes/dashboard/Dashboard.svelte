@@ -9,7 +9,6 @@
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
-        timeSinceStrongholdUnlocked,
         updateActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
@@ -277,7 +276,7 @@
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
 
-    $: hasStrongholdLocked($timeSinceStrongholdUnlocked) && reflectLockedStronghold()
+    $: $hasStrongholdLocked && reflectLockedStronghold()
 </script>
 
 <Idle />
