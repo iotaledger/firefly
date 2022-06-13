@@ -5,6 +5,6 @@ export function formatTokenAmountDefault(amount: number, tokenMetadata: ITokenMe
     return (
         formatNumber(amount / 10 ** tokenMetadata?.decimals, 0, tokenMetadata?.decimals, 0, true) +
         ' ' +
-        tokenMetadata.unit
+        (tokenMetadata.unit ?? '')
     )
 }

@@ -22,7 +22,7 @@
         ? 'border border-solid border-gray-300 dark:border-gray-700'
         : ''}"
 >
-    <div class="flex flex-row items-center">
+    <div class="flex flex-row items-center text-left">
         {#if icon}
             {#if iconBackgroundColor}
                 <div
@@ -51,7 +51,7 @@
             <div class="flex flex-col">
                 <Text type="p" fontWeight={iconLabelFontWeight}>{iconLabel}</Text>
                 {#if iconSubLabel}
-                    <div class="flex flex-row justify-between items-center">
+                    <div class="flex flex-row justify-between items-center text-left">
                         <Text type="p" secondary fontWeight={iconSubLabelFontWeight} smaller>{iconSubLabel}</Text>
                         <slot name="subLabel" />
                     </div>
@@ -63,9 +63,11 @@
         <div class="flex flex-col text-right">
             <Text type="p" fontWeight={tileTextFontWeight}>{tileText}</Text>
             {#if tileSubText}
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row justify-between items-center text-right">
                     <slot name="subText" />
-                    <Text type="p" secondary fontWeight={tileSubTextFontWeight} smaller>{tileSubText}</Text>
+                    <Text type="p" secondary fontWeight={tileSubTextFontWeight} smaller classes="flex-grow"
+                        >{tileSubText}</Text
+                    >
                 </div>
             {/if}
         </div>
