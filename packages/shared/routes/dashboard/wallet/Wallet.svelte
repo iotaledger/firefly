@@ -453,7 +453,7 @@
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountHistory classes="pb-0" transactions={getAccountMessages($selectedAccount)} />
+                                <AccountHistory transactions={getAccountMessages($selectedAccount)} />
                             </div>
                         {/if}
                     </DashboardPane>
