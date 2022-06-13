@@ -4,8 +4,7 @@
     import passwordInfo from 'shared/lib/password'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
-
-    export let exportStronghold: (password, callback?: (cancelled: boolean, err?) => void) => void
+    import { exportStronghold } from '@contexts/settings'
 
     let exportStrongholdChecked
     let currentPassword = ''

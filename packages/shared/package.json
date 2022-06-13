@@ -9,7 +9,7 @@
         "@iota/transaction": "^1.0.0-beta.30",
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
-        "@iota/wallet": "npm:wallet-stardust-alpha@1.0.21",
+        "@iota/wallet": "npm:wallet-stardust-alpha@1.0.23",
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
         "iota.lib.js": "^0.5.3",

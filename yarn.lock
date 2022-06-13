@@ -1400,10 +1400,10 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@npm:wallet-stardust-alpha@1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-1.0.21.tgz#f1869dc9eb023d12a46af05c4c6cca73422e0671"
-  integrity sha512-qT/0nMgCGnDjGOGhgI70m9fMCISO8onGNvbiHeIlbeWhx3qrOjcPq+u3Ls9sTyfNTl/rNmGUXitB2aSMf33Plg==
+"@iota/wallet@npm:wallet-stardust-alpha@1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-1.0.23.tgz#bf2ae729ce685c37d0de989c2df3ad8c83323a24"
+  integrity sha512-xYZs1RsDnTwPoW5IW7bED1mYqHGlddlw/f+/GjpqPVpECn3vJzsrHv7f6eXGeNvNGKrFwTqFsMYmA4FSYpsThA==
   dependencies:
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^5.3.3"

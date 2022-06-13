@@ -93,11 +93,7 @@
     function handleBackupClick() {
         modal?.close()
         openPopup({
-            type: 'backup',
-            props: {
-                lastBackupDate,
-                lastBackupDateFormatted,
-            },
+            type: 'backupStronghold',
         })
     }
 

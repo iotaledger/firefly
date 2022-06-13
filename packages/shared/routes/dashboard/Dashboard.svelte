@@ -2,7 +2,15 @@
     import { selectedAccountId } from '@core/account'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
-    import { activeProfile, isLedgerProfile, logout, saveActiveProfile, updateActiveProfile } from '@core/profile'
+    import {
+        activeProfile,
+        hasStrongholdLocked,
+        isLedgerProfile,
+        logout,
+        reflectLockedStronghold,
+        saveActiveProfile,
+        updateActiveProfile,
+    } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
@@ -64,9 +72,6 @@
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
             updateProfile('lastShimmerPeriodVisitedStaking', CURRENT_SHIMMER_STAKING_PERIOD)
-        } */
-        /* if ($isSoftwareProfile) {
-            api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         } */
         /*         if (!get(isBackgroundSyncing)) {
             api.startBackgroundSync(
@@ -270,6 +275,8 @@
     $: if (showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
     }
+
+    $: $hasStrongholdLocked && reflectLockedStronghold()
 </script>
 
 <Idle />
