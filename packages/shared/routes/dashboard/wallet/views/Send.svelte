@@ -405,7 +405,7 @@
     // TODO addlabel
     const addLabel = (account: IAccountState) => ({
         ...account,
-        label: `${account?.name} • ${account.balances}`,
+        label: `${account?.getAlias()} • ${account.getBalance()}`,
     })
 
     const handleMaxClick = (): void => {

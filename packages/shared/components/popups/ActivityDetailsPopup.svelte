@@ -55,12 +55,14 @@
         <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
-        <button
-            class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-            on:click={handleExplorerClick}
-        >
-            {localize('general.viewOnExplorer')}
-        </button>
+        {#if activity.transactionId}
+            <button
+                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                on:click={handleExplorerClick}
+            >
+                {localize('general.viewOnExplorer')}
+            </button>
+        {/if}
     </div>
     <TransactionDetails {asyncStatus} {formattedFiatValue} {amount} {unit} {...activity} />
     {#if activity.isAsync && activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed}

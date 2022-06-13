@@ -11,6 +11,7 @@ import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
 import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
+import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 
 export class Activity implements IActivity {
     id: string
@@ -76,10 +77,11 @@ export class Activity implements IActivity {
                 ? Bech32Helper.toBech32(0, Converter.hexToBytes(output.address.pubKeyHash.substring(2)), 'rms')
                 : ''
         const isIncoming = address === accountAddress
-        const isInternal = !!findAccountWithAddress(address)
+        // const isInternal = !!findAccountWithAddress(address)
+        const isInternal = false
         this.id = outputId
         this.outputId = outputId
-        this.time = new Date(output.metadata.milestoneTimestampBooked * 1000)
+        this.time = new Date(output.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
         this.type = getActivityType(isIncoming, isInternal)
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
         this.inclusionState = InclusionState.Confirmed
