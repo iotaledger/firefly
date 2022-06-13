@@ -7,18 +7,18 @@ import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
 import { NewOutputEvent } from '../types/newOutputEvent'
 
-export function handleNewOutputEvent(event: NewOutputEvent): void {
-    for (const account of get(activeAccounts)) {
-        const address =
-            event.output.address?.type === 0
-                ? Bech32Helper.toBech32(0, Converter.hexToBytes(event.output.address.pubKeyHash.substring(2)), 'rms')
-                : ''
-        if (event.output.address.type === 0 && account.depositAddress === address && !event.output.remainder) {
-            syncBalance(account.id)
-            addActivityToAccountActivitiesInAllAccountActivities(
-                account.id,
-                new Activity().setFromOutput(event.output.outputId, event.output, account.depositAddress, false, false)
-            )
-        }
+export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
+    const account = get(activeAccounts).find((account) => account.id === accountId)
+
+    const address =
+        event.output.address?.type === 0
+            ? Bech32Helper.toBech32(0, Converter.hexToBytes(event.output.address.pubKeyHash.substring(2)), 'rms')
+            : ''
+    if (event.output.address.type === 0 && account.depositAddress === address && !event.output.remainder) {
+        syncBalance(account.id)
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.id,
+            new Activity().setFromOutput(event.output.outputId, event.output, account.depositAddress, false, false)
+        )
     }
 }

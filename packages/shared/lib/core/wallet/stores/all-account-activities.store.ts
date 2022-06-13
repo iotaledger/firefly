@@ -55,3 +55,18 @@ export function updateActivityInclusionStateByTransactionId(
         })
     )
 }
+
+export function updateActivityClaimStateByTransactionId(transactionId: string, isClaimed: boolean = true): void {
+    allAccountActivities.update((state) =>
+        state.map((_accountActivities) => {
+            const activity = _accountActivities.activities.find(
+                (_activity) => _activity.transactionId === transactionId
+            )
+
+            if (activity && activity.isAsync) {
+                activity.isClaimed = isClaimed
+            }
+            return _accountActivities
+        })
+    )
+}
