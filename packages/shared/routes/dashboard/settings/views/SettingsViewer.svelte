@@ -18,6 +18,7 @@
     } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
+    import featureFlags from 'shared/featureFlags.config'
 
     const { loggedIn } = $activeProfile
 
@@ -41,18 +42,31 @@
 
     if ($loggedIn) {
         settings = {
-            generalSettings: GeneralSettings,
+            general: GeneralSettings,
             security: securitySettings,
-            advancedSettings: advancedSettings,
+            advanced: advancedSettings,
             helpAndInfo: HelpAndInfo,
         }
     } else {
         settings = {
-            generalSettings: GeneralSettingsNoProfile,
-            advancedSettings: AdvancedSettingsNoProfile,
+            general: GeneralSettingsNoProfile,
+            advanced: AdvancedSettingsNoProfile,
             helpAndInfo: HelpAndInfo,
         }
     }
+
+    $: Object.keys(featureFlags?.settings)?.forEach((group) => {
+        if (featureFlags?.settings?.[group]?.enabled) {
+            Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
+                if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
+                    const settingName = setting[0].toUpperCase() + setting.slice(1)
+                    delete settings?.[group]?.[settingName]
+                }
+            })
+        } else {
+            delete settings?.[group]
+        }
+    })
 
     function scrollIntoView(id: string, options = null) {
         if (id) {

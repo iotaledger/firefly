@@ -9025,6 +9025,11 @@ retry@^0.12.0:
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
   integrity sha1-G0KmJmoh8HQh0bC1S33BZ7AcATs=
 
+retypeapp@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/retypeapp/-/retypeapp-2.3.0.tgz#8a76e6a7e311703146dafa0e50058a621e3b6ff1"
+  integrity sha512-K88zGACI5UCyQw52VF1xOEi1DQ8o4pT5/+DKPKdQEVLQR5FkQDSPeMpER/s1wXg1m7yPt18rGlHKoJF9+XaAHw==
+
 reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"

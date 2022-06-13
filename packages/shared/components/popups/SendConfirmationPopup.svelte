@@ -16,6 +16,7 @@
     export let amount: '0'
     export let unit: string
     export let expireDate: Date
+    export let publicNote: string
 
     $: internal = recipient.type === 'account'
 
@@ -50,6 +51,7 @@
         unit,
         recipient,
         expireDate,
+        publicNote,
     }
 </script>
 
