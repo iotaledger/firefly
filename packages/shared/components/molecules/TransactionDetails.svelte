@@ -96,11 +96,11 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if recipient.type === 'account'}
+        {#if recipient?.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
                 <AccountLabel account={recipient.account} />
             </Box>
-        {:else if recipient.type === 'address'}
+        {:else if recipient?.type === 'address'}
             <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
         {/if}
     </main-content>
