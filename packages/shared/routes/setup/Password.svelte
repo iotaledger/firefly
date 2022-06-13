@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { strongholdPassword } from 'shared/lib/app'
+    import { strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -52,6 +52,7 @@
                 $strongholdPassword = password
                 $appRouter.next({ password })
             } catch (err) {
+                console.error(err)
                 showAppNotification({
                     type: 'error',
                     message: locale(err.error),

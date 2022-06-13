@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { strongholdPassword } from '@lib/app'
+import { strongholdPassword } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
 import { updateNewProfile } from '@core/profile'
 import { backup } from '@core/profile-manager'

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { Pin, RepeatPin } from './views'
-    import { walletPin } from '@lib/app'
+    import { walletPin } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoute } from '@core/router'

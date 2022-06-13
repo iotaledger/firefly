@@ -1,11 +1,6 @@
 <script lang="typescript">
     import { Icon, Modal, NetworkSummaryModal } from 'shared/components'
-    import {
-        getAndUpdateNodeInfo,
-        networkStatus,
-        NETWORK_HEALTH_COLORS,
-        showNetworkIssuesNotification,
-    } from '@core/network'
+    import { getAndUpdateNodeInfo, networkStatus, NETWORK_HEALTH_COLORS } from '@core/network'
     import { activeProfile } from '@core/profile'
 
     export let modal: Modal

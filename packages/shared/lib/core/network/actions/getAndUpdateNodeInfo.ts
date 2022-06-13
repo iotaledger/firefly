@@ -10,5 +10,5 @@ export async function getAndUpdateNodeInfo(): Promise<void> {
         console.error(error)
         nodeInfoResponse = null
     }
-    updateNodeInfo(nodeInfoResponse?.node_info)
+    updateNodeInfo(nodeInfoResponse?.nodeInfo)
 }

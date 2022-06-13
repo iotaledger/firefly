@@ -3,23 +3,17 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Platform } from 'shared/lib/platform'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import {
-        LOG_FILE_NAME,
-        migration,
-        migrationLog,
-        resetMigrationState,
-        totalMigratedBalance,
-    } from 'shared/lib/migration'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { Platform } from '@lib/platform'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from '@lib/migration'
     import { appRouter, ledgerRouter } from '@core/router'
-    import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { walletSetupType } from 'shared/lib/wallet'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { LedgerAppName } from '@lib/typings/ledger'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { walletSetupType } from '@lib/wallet'
+    import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { localize } from '@core/i18n'
-    import { SetupType } from 'shared/lib/typings/setup'
+    import { SetupType } from '@lib/typings/setup'
     import {
         activeProfile,
         addNewProfile,
@@ -29,7 +23,7 @@
         getStorageDirectoryOfProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
-    import { cleanupSignup } from '../../lib/app'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     const { didComplete } = $migration
 
@@ -50,7 +44,7 @@
     )
 
     function advanceView(): void {
-        cleanupSignup()
+        cleanupOnboarding()
         $appRouter.next()
     }
 

@@ -6,8 +6,8 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAsset, Recipient } from '@core/wallet'
 
-    let assetAmountInput
-    let recipientInput
+    let assetAmountInput: AssetAmountInput
+    let recipientInput: RecipientInput
 
     let asset: IAsset
     let amount: string

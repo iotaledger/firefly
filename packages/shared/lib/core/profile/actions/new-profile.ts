@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
 import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
-import { cleanupSignup } from '@lib/app'
 import { ledgerSimulator } from '@lib/ledger'
 
 import { ProfileType } from '../enums'
@@ -29,13 +28,13 @@ export async function createNewProfile(
     }
 
     // TODO: build custom client options for custom network
-    const clientOptions = await getDefaultClientOptions(networkProtocol, networkType)
+    const clientOptions = getDefaultClientOptions(networkProtocol, networkType)
     const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions, name)
     newProfile.set(profile)
     const path = await getStorageDirectoryOfProfile(get(newProfile).id)
 
     initialiseProfileManager(path, clientOptions, {
-        Stronghold: { password: '', snapshotPath: `${path}/wallet.stronghold` },
+        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
     })
 }
 
@@ -50,7 +49,6 @@ export async function deleteNewProfile(): Promise<void> {
         try {
             // TODO: delete storage with new api when implemented
             // await asyncDeleteStorage()
-            cleanupSignup()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)

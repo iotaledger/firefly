@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Pin, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { walletPin } from '@lib/app'
+    import { walletPin } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
     import { validatePinFormat } from '@lib/utils'
 

@@ -14,20 +14,20 @@
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(skipVerify: boolean) {
+    function handleContinueClick(skipVerify: boolean): void {
         dispatch('next', { skip: skipVerify })
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 
-    function handleMnemonicVisibilityClick() {
+    function handleMnemonicVisibilityClick(): void {
         hide = !hide
         hasRevealedRecoveryPhrase = true
     }
 
-    function handleDownloadClick() {
+    function handleDownloadClick(): void {
         downloadRecoveryKit()
     }
 

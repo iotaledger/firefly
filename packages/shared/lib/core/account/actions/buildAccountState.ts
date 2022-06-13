@@ -7,7 +7,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         total: '0',
         available: '0',
         requiredStorageDeposit: '0',
-        nativeTokens: {},
+        nativeTokens: [],
         nfts: [],
         foundries: [],
         potentiallyLockedOutputs: {},
@@ -18,6 +18,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     } catch (error) {
         console.error(error)
     }
+
     return {
         ...account,
         ...metadata,
@@ -28,5 +29,6 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         // TODO: refactor or remove these below
         messages: [],
         addresses: [],
+        isSyncing: false,
     }
 }

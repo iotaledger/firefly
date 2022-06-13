@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { mnemonic } from '@lib/app'
+import { mnemonic } from '@contexts/onboarding'
 import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
 
 /**

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { walletPin } from '@lib/app'
+import { walletPin } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
 import { newProfile } from '@core/profile'
 import { SetupType } from '@lib/typings/setup'

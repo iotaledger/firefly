@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { mnemonic, strongholdPassword } from 'shared/lib/app'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
-    import { backupRoute, BackupRouter, BackupRoute, FireflyEvent } from '@core/router'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { Locale } from '@core/i18n'
+    import { showAppNotification } from '@lib/notifications'
+    import { backupRoute, BackupRouter, BackupRoute, FireflyEvent } from '@core/router'
+    import { mnemonic, strongholdPassword } from '@contexts/onboarding'
 
     export let locale: Locale
 

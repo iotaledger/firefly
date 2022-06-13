@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { mnemonic } from '@lib/app'
+    import { mnemonic } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
     import { backupInitialStronghold } from '@contexts/onboarding'
     import { storeMnemonic } from '@core/profile-manager'
@@ -22,20 +22,25 @@
         dispatch('previous')
     }
 
-    async function handleSkipBackup() {
-        await storeMnemonic($mnemonic.join(' '))
+    async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
+        skipBackup = _skipBackup
 
-        skipBackup = true
-        dispatch('next', { skip: true })
+        await storeMnemonic($mnemonic.join(' '))
+        if (!_skipBackup) {
+            await backupInitialStronghold()
+            dispatch('next')
+        } else {
+            dispatch('next', { skip: true })
+        }
     }
 
-    async function handleSubmitClick() {
-        if (isStrongholdPasswordValid) {
-            await storeMnemonic($mnemonic.join(' '))
-            await backupInitialStronghold()
+    async function handleSkipBackupClick(): Promise<void> {
+        await onboardingBackupFileFunction(true)
+    }
 
-            skipBackup = false
-            dispatch('next')
+    async function handleSubmitClick(): Promise<void> {
+        if (isStrongholdPasswordValid) {
+            await onboardingBackupFileFunction()
         }
     }
 </script>
@@ -55,7 +60,7 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackup}>
+        <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackupClick}>
             {#if skipBackup && busy}
                 <Spinner busy={true} message={locale('general.creatingProfile')} classes="justify-center" />
             {:else}{locale('actions.skipBackup')}{/if}

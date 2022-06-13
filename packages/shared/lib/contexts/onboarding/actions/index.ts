@@ -1,4 +1,5 @@
 export * from './backupInitialStronghold'
 export * from './cleanupOnboarding'
+export * from './cleanupOnboardingStores'
 export * from './cleanupProtectionOnboarding'
 export * from './storeAndCleanMnemonic'

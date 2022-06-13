@@ -1,6 +1,6 @@
 import { newProfile, ProfileImportType } from '@core/profile'
 import { restoreBackup } from '@core/profile-manager'
-import { mnemonic } from '@lib/app'
+import { mnemonic } from '@contexts/onboarding'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
 import { get, writable } from 'svelte/store'

@@ -271,7 +271,18 @@ module.exports = {
                 3: '3px',
             },
             spacing: {
+                4.5: pxToRem('18'),
                 18: pxToRem('72'),
+            },
+            borderRadius: {
+                2: pxToRem(2),
+                4: pxToRem(4),
+                6: pxToRem(6),
+                8: pxToRem(8),
+                10: pxToRem(10),
+                12: pxToRem(12),
+                16: pxToRem(16),
+                24: pxToRem(24),
             },
         },
         fontFamily: {

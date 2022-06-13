@@ -7,7 +7,7 @@ import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic } from './app'
+import { mnemonic } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
@@ -31,9 +31,6 @@ export const MAX_PASSWORD_LENGTH = 256
  * A number representing the threshold for what is considered dust, which is 1Mi or 1,000,000i.
  */
 export const DUST_THRESHOLD: number = 1_000_000
-
-// Setting to 0 removes auto lock. We must lock Stronghold manually.
-export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 // TODO: remove these
 interface ActorState {

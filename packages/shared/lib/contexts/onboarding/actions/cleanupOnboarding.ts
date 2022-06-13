@@ -1,7 +1,10 @@
-import { cleanupSignup } from '@lib/app'
-import { deleteNewProfile } from '@core/profile'
+import { deleteNewProfile } from '@core/profile/actions/new-profile'
 
-export async function cleanupOnboarding(): Promise<void> {
-    cleanupSignup()
-    await deleteNewProfile()
+import { cleanupOnboardingStores } from './cleanupOnboardingStores'
+
+export async function cleanupOnboarding(deleteProfile: boolean = false): Promise<void> {
+    cleanupOnboardingStores()
+    if (deleteProfile) {
+        await deleteNewProfile()
+    }
 }
