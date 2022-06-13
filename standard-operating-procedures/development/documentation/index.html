@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.708467107391">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.708468164809">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,11 +32,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.3.0.708467107391" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.3.0.708468164809" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.3.0.708467107391" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.3.0.708468164809" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.3.0.708467107391" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.3.0.708468164809" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -309,21 +309,30 @@
         <span>Handbook</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="creating-a-task">
+<doc-anchor-target id="releasing-a-new-firefly-version">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-task">#</doc-anchor-trigger>
-        <span>Creating a Task</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#releasing-a-new-firefly-version">#</doc-anchor-trigger>
+        <span>Releasing a New Firefly Version</span>
     </h3>
 </doc-anchor-target>
-<p>To make changes to the documentation within this handbook, begin the process by creating a GitHub task specifically for your desired changes. Please use the &quot;Continuously improve documentation&quot; milestone when creating the task.</p>
-<p>If the suggested changes are akin to simple typo fixes, then please go ahead and create a pull request with the corresponding fixes. Contrarily, if the changes are more substantial (i.e. an additional page or considerable modification of an existing page like adding or changing a section), please bring it to the attention of any relevant people, and it will then be discussed to ensure the best outcome possible.</p>
-<doc-anchor-target id="opening-a-pull-request">
+<p>Simply change the value for <code v-pre>label</code> under <code v-pre>branding</code> in <a href="https://github.com/iotaledger/firefly/blob/develop/docs/retype.yml#L8">Retype config file</a> to the appropriate version.</p>
+<doc-anchor-target id="updating-the-handbook">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#opening-a-pull-request">#</doc-anchor-trigger>
-        <span>Opening a Pull Request</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#updating-the-handbook">#</doc-anchor-trigger>
+        <span>Updating the Handbook</span>
     </h3>
 </doc-anchor-target>
-<p>Once a pull request is finished and ready, it will go through the normal review process and will eventually be merged into the <code v-pre>develop</code> branch.</p>
+<p>To make changes to the documentation within this handbook, begin the process by creating a GitHub task specifically for your desired changes. Please use the <a href="https://github.com/iotaledger/firefly/milestone/6">&quot;Continuously improve documentation&quot;</a> milestone when creating the task.</p>
+<doc-anchor-target id="updating-the-code">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#updating-the-code">#</doc-anchor-trigger>
+        <span>Updating the Code</span>
+    </h3>
+</doc-anchor-target>
+<p>When making changes to the code, be sure to check whether the comments if the functions, variables, etc. that you&#x27;re dealing with are up-to-date and accurate.
+If writing new code that is exported and intended to be used elsewhere, make sure that it is appropriately commented (see the <a href="../../../guides/coding-conventions/comments/">coding conventions on comments</a>).</p>
+<p>Every new folder and page page must have an <code v-pre>icon: &lt;icon&gt;</code> entry in the top of the its corresponding file (see <a href="https://primer.style/octicons/">Octicons</a>).
+Lastly, every new folder must have some sort of text describing what its purpose is and what you&#x27;ll find when looking in it.</p>
 <doc-anchor-target id="github-wiki">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#github-wiki">#</doc-anchor-trigger>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.708467107391">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.708468164809">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.3.0.708467107391" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.3.0.708468164809" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.3.0.708467107391" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.3.0.708468164809" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.3.0.708467107391" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.3.0.708467107391" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.3.0.708468164809" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.3.0.708468164809" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -273,6 +273,12 @@
         <span>Comments</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="regular-comments">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#regular-comments">#</doc-anchor-trigger>
+        <span>Regular Comments</span>
+    </h2>
+</doc-anchor-target>
 <blockquote>
 <p>Every time you express yourself in code, you should pat yourself on the back. Every time you write a comment, you should grimace and feel the failure of your ability of expression.</p>
 </blockquote>
@@ -285,11 +291,11 @@ if (get(isStrongholdLocked)) {
     // ...
 }
 
-/** The app settings. */
-type AppSettings {
-    language: string
-    isInDarkMode: boolean
-    areDeepLinksEnabled: boolean
+function add(a: number, b: number): number {
+    // throw error if a or b are not of type &quot;number&quot;
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw new Error('Invalid arguments')
+    }
 }</code></pre>
 </doc-codeblock></div>
 </li>
@@ -299,7 +305,7 @@ type AppSettings {
 </doc-codeblock></div>
 <p><span class="docs-emoji">&#x2139;&#xFE0F;</span> If you find yourself writing <code v-pre>TODO</code> comments, instead <a href="https://github.com/iotaledger/firefly/issues/new?assignees=&amp;labels=&amp;template=create-task.yml&amp;title=%5BTask%5D%3A+">create a new task</a> on GitHub or add to your existing task&#x27;s requirements list.</p>
 </li>
-<li><p><strong>Do NOT write embedded comments</strong></p>
+<li><p><strong>Do NOT write inline or embedded comments</strong></p>
 <p><strong>Bad</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-typescript"><code v-pre class="language-typescript">function someFunction(): void { // this function does something
@@ -329,6 +335,187 @@ const anotherArray = [&quot;another string&quot;]</code></pre>
 </doc-codeblock></div>
 </li>
 </ul>
+<doc-anchor-target id="tsdoc-comments">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tsdoc-comments">#</doc-anchor-trigger>
+        <span>TSDoc Comments</span>
+    </h2>
+</doc-anchor-target>
+<p>Because our library is of a considerable size, it is helpful to create and maintain library specifications and documentation so that developers can easily see what is inside a particular module.</p>
+<p>As such, it is important that <strong>when writing code that is intended to be used elsewhere</strong> (e.g. in a component, elsewhere in the library), it is annotated with a TSDoc comment.
+It is also important to write these comments consistently and in a way that makes it easier to actually read the generated markdown specification pages.</p>
+<p>Helpers functions within a module file <strong>should NOT</strong> be annotated.</p>
+<doc-anchor-target id="constants">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#constants">#</doc-anchor-trigger>
+        <span>Constants</span>
+    </h3>
+</doc-anchor-target>
+<p>When writing constants, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * The [constant name], used for [...].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * The default locale options, used for when a specific
+ * translation is not supported.
+ */
+export const DEFAULT_LOCALE_OPTIONS: LocaleOptions = {
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="enums">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enums">#</doc-anchor-trigger>
+        <span>Enums</span>
+    </h3>
+</doc-anchor-target>
+<p>When writing enums, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * The various [descriptor (e.g. &quot;types&quot;, &quot;levels&quot;)] of [enum name], used for [...].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * The various statuses of network health.
+ */
+export enum NetworkHealth {
+  ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#functions">#</doc-anchor-trigger>
+        <span>Functions</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="void--promisevoid">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#void--promisevoid">#</doc-anchor-trigger>
+        <span><code v-pre>void</code> / <code v-pre>Promise&lt;void&gt;</code></span>
+    </h4>
+</doc-anchor-target>
+<p>When writing functions that returns <code v-pre>void</code> or <code v-pre>Promise&lt;void&gt;</code>, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * [Action verb (present tense) followed by descriptive phrase].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Updates the network and client options of a new profile.
+ */
+export function updateNewProfileNetwork(networkProtocol: NetworkProtocol, networkType: NetworkType, node: INode): void {
+  ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="boolean">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#boolean">#</doc-anchor-trigger>
+        <span><code v-pre>boolean</code></span>
+    </h4>
+</doc-anchor-target>
+<p>When writing functions that return a <code v-pre>boolean</code>, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Returns true if given [argument] [is/can/should] [condition].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Returns true if the given URL is a valid HTTPS URL string.
+ */
+export const isValidHttpsUrl = (url: string): boolean =&gt; {
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="non-voidpromisevoid-and-non-boolean">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#non-voidpromisevoid-and-non-boolean">#</doc-anchor-trigger>
+        <span>Non-<code v-pre>void</code>/<code v-pre>Promise&lt;void&gt;</code> and non-<code v-pre>boolean</code></span>
+    </h4>
+</doc-anchor-target>
+<p>When writing functions that return neither <code v-pre>void</code> nor <code v-pre>Promise&lt;void&gt;</code> nor <code v-pre>boolean</code>s, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Returns [a/the] [returned object].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Returns the converted amount in fiat from IOTAs.
+ */
+export function convertToFiat(amount: number, usdPrice: number, conversionRate: number): number {
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="interfaces">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#interfaces">#</doc-anchor-trigger>
+        <span>Interfaces</span>
+    </h3>
+</doc-anchor-target>
+<p>When writing interfaces, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Describes [a/the] [interface name], used for [...].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Describes the general application settings, used across multiple profiles.
+ */
+export interface IAppSettings {
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="types">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#types">#</doc-anchor-trigger>
+        <span>Types</span>
+    </h3>
+</doc-anchor-target>
+<p>When writing types, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Describes [a/the] [type name], used for [...].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Describes a deep link URL, used for parsing and building deep links.
+ */
+export type DeepLinkUrl = string</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="stores">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#stores">#</doc-anchor-trigger>
+        <span>Stores</span>
+    </h3>
+</doc-anchor-target>
+<p>When writing stores, use the following template:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Holds data about [description].
+ */</code></pre>
+</doc-codeblock></div>
+<p><strong>Example</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">/**
+ * Holds data about the current status of the network. 
+ */
+export const networkStatus = writable&lt;INetworkStatus&gt;(DEFAULT_NETWORK_STATUS)</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
