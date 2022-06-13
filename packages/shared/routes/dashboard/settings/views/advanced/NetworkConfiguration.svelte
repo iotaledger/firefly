@@ -31,8 +31,6 @@
         updateActiveProfileSettings({ clientOptions })
     }
 
-    $: canRemoveAllNodes = clientOptions.nodes.length !== 0
-
     function handleIncludeOfficialNodesClick() {
         ensureValidNodeSelection()
     }
@@ -174,11 +172,17 @@
             </div>
             {#if !clientOptions.automaticNodeSelection}
                 <div class="flex flex-row justify-between space-x-3 w-full mt-4">
-                    <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
+                    <Button
+                        disabled
+                        medium
+                        inlineStyle="min-width: 156px;"
+                        classes="w-1/2"
+                        onClick={handleAddNodeClick}
+                    >
                         {localize('actions.addNode')}
                     </Button>
                     <Button
-                        disabled={!canRemoveAllNodes}
+                        disabled
                         warning
                         medium
                         inlineStyle="min-width: 156px;"
