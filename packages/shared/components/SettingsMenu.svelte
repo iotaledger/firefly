@@ -14,7 +14,7 @@
     export let description
     export let onClick = (..._: any[]): void => {}
 
-    $: Object.keys(featureFlags.settings?.[group])?.forEach((setting) => {
+    $: Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
         if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
             const settingName = setting[0].toUpperCase() + setting.slice(1)
             delete settings?.[settingName]
