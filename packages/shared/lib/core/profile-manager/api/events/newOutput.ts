@@ -1,3 +1,4 @@
+import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
 import { Activity } from '@core/wallet/classes/activity.class'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores/all-account-activities.store'
@@ -13,6 +14,7 @@ export function handleNewOutputEvent(event: NewOutputEvent): void {
                 ? Bech32Helper.toBech32(0, Converter.hexToBytes(event.output.address.pubKeyHash.substring(2)), 'rms')
                 : ''
         if (event.output.address.type === 0 && account.depositAddress === address && !event.output.remainder) {
+            syncBalance(account.id)
             addActivityToAccountActivitiesInAllAccountActivities(
                 account.id,
                 new Activity().setFromOutput(event.output.outputId, event.output, account.depositAddress, false, false)
