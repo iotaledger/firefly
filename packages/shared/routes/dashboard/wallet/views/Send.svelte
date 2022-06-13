@@ -541,7 +541,7 @@
                                 <Input style="text-align: left;" type="button" value={to?.label || null} />
                             </div>
                         {:else}
-                            {#if accountsDropdownItems.length > 1}
+                            {#if accountsDropdownItems.length > 1 && address.length === 0}
                                 <button
                                     class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
                                     on:click={selectInternal}
