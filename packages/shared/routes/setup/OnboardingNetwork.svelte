@@ -8,6 +8,12 @@
     import { TextType } from 'shared/components/Text.svelte'
     import featureFlags from 'shared/featureFlags.config'
 
+    const networkIcon = {
+        [NetworkType.Mainnet]: $newProfile?.networkProtocol,
+        [NetworkType.Devnet]: 'settings',
+        [NetworkType.PrivateNet]: 'settings',
+    }
+
     function onClick(networkType: NetworkType): void {
         updateNewProfileNetworkType(networkType)
         $appRouter.next({ networkType })
@@ -27,7 +33,7 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkType) as networkType}
             <Button
-                icon="settings"
+                icon={networkIcon[NetworkType[networkType]]}
                 classes="w-full"
                 secondary
                 disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
