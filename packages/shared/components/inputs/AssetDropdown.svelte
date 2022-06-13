@@ -52,7 +52,7 @@
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
             >
-                <ul class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
+                <ul class="overflow-y-auto h-full -mr-2 pr-2 scroll-secondary">
                     {#each $assets as _asset}
                         <li on:click={() => handleAssetClick(_asset)}>
                             <AssetTile
@@ -75,6 +75,6 @@
     /* odd margin needed to match the size of the upper parent box */
     .dropdown {
         margin: 0 3px;
-        max-height: 224px;
+        max-height: 233px;
     }
 </style>
