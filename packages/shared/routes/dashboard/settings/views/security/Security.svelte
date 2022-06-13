@@ -17,7 +17,9 @@
         { component: ChangePincode, childRoute: SecuritySettings.ChangePincode },
         { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
     ]
-    const visibleSettings = settings.filter((setting) => featureFlags?.settings.security?.[setting.childRoute]?.enabled)
+    const visibleSettings = settings.filter(
+        (setting) => featureFlags?.settings?.security?.[setting.childRoute]?.enabled
+    )
 
     const props = {
         [SecuritySettings.ChangePassword]: { exportStronghold },

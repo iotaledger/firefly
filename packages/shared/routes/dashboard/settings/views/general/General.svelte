@@ -18,7 +18,7 @@
         { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
         { component: ChangeProfileName, childRoute: GeneralSettings.ChangeProfileName, requireLogin: true },
     ]
-    const visibleSettings = settings.filter((setting) => featureFlags?.settings.general?.[setting.childRoute]?.enabled)
+    const visibleSettings = settings.filter((setting) => featureFlags?.settings?.general?.[setting.childRoute]?.enabled)
 
     const { loggedIn } = $activeProfile
 </script>

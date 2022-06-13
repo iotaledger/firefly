@@ -29,7 +29,9 @@
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
     ]
-    const visibleSettings = settings.filter((setting) => featureFlags?.settings.advanced?.[setting.childRoute]?.enabled)
+    const visibleSettings = settings.filter(
+        (setting) => featureFlags?.settings?.advanced?.[setting.childRoute]?.enabled
+    )
 
     const { loggedIn } = $activeProfile
 </script>

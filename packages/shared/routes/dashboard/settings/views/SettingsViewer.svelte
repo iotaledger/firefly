@@ -55,10 +55,10 @@
         }
     }
 
-    $: Object.keys(featureFlags.settings).forEach((group) => {
-        if (featureFlags.settings?.[group]?.enabled) {
-            Object.keys(featureFlags.settings?.[group]).forEach((setting) => {
-                if (!featureFlags.settings?.[group]?.[setting]?.enabled) {
+    $: Object.keys(featureFlags?.settings)?.forEach((group) => {
+        if (featureFlags?.settings?.[group]?.enabled) {
+            Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
+                if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
                     const settingName = setting[0].toUpperCase() + setting.slice(1)
                     delete settings?.[group]?.[settingName]
                 }

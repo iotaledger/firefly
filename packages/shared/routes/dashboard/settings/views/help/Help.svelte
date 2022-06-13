@@ -18,7 +18,7 @@
         },
         {
             component: HelpSection,
-            childRoute: HelpAndInfo.FAQ,
+            childRoute: HelpAndInfo.Faq,
             url: ExternalRoute.FAQ,
             actionLocale: 'visitFaq',
         },
@@ -37,7 +37,7 @@
     ]
 
     const visibleSettings = settings.filter(
-        (setting) => featureFlags?.settings.helpAndInfo?.[setting.childRoute]?.enabled
+        (setting) => featureFlags?.settings?.helpAndInfo?.[setting.childRoute]?.enabled
     )
 </script>
 
