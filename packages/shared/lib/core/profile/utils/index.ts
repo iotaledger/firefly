@@ -1,5 +1,6 @@
 export * from './getStorageDirectoryOfProfile'
 export * from './getStorageDirectoryOfProfiles'
+export * from './hasStrongholdLocked'
 export * from './removeProfileFolder'
 export * from './removeProfileFolder'
 export * from './validateProfileName'

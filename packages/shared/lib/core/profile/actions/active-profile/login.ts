@@ -1,10 +1,14 @@
 import { get } from 'svelte/store'
-import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
+import {
+    INITIAL_ACCOUNT_GAP_LIMIT,
+    INITIAL_ADDRESS_GAP_LIMIT,
+    STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
+} from '../../constants'
 import { activeProfile } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
-import { subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
+import { setStrongholdPasswordClearInterval, subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
 import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 
 export async function login(firstTime: boolean = false): Promise<void> {
@@ -19,6 +23,7 @@ export async function login(firstTime: boolean = false): Promise<void> {
         lastActiveAt.set(new Date())
         const response = await isStrongholdUnlocked()
         isStrongholdLocked.set(!response)
+        setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
 
         const manager = get(profileManager)
 

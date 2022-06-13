@@ -1,0 +1,3 @@
+import { SECONDS_PER_MINUTE } from '@lib/time'
+
+export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL = 1 * SECONDS_PER_MINUTE
