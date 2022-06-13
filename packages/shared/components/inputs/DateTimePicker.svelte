@@ -13,6 +13,7 @@
     const startDate = DATE_NOW.toLocaleString('sv')
 
     let rawValue: string = startDate
+    let tooltip: Tooltip
 
     function handleCancelClick() {
         dispatch('cancel')
@@ -24,7 +25,7 @@
     }
 </script>
 
-<Tooltip {...$$restProps}>
+<Tooltip {...$$restProps} classes="flex justify-center items-center flex-col" bind:this={tooltip}>
     <SveltyPicker
         pickerOnly
         autoclose
@@ -34,10 +35,11 @@
         format="yyyy-mm-dd hh:ii"
         theme="datetime-picker-colors"
         bind:value={rawValue}
+        on:change={tooltip?.refreshPosition}
     />
-    <div class="flex flex-row justify-center items-center space-x-4">
-        <Button small secondary onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-        <Button small onClick={handleConfirmClick}>{localize('actions.confirm')}</Button>
+    <div class="flex flex-row justify-center items-center space-x-4 w-full">
+        <Button small secondary onClick={handleCancelClick} classes="w-full">{localize('actions.cancel')}</Button>
+        <Button small onClick={handleConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
     </div>
 </Tooltip>
 

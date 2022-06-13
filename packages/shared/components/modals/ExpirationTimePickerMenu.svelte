@@ -7,11 +7,11 @@
     export let value: string
     export let selected: 'none' | '1hour' | '1day' | '1week' | 'custom' = 'none'
     export let expireDate: Date
+    export let anchor: HTMLElement
 
     const DATE_NOW = Date.now()
 
     let customDate: Date
-    let dateTimeAnchor: HTMLElement
     let canShowDateTimePicker = false
 
     const dateIn1Hour = new Date(DATE_NOW)
@@ -64,19 +64,13 @@
     function onClick(_selected): void {
         if (_selected === 'custom') {
             canShowDateTimePicker = !canShowDateTimePicker
-        } else {
-            modal?.close()
         }
+        modal?.close()
         selected = _selected
     }
 </script>
 
-<Modal
-    bind:this={modal}
-    position={{ bottom: '120px', left: '400px' }}
-    classes="w-64"
-    on:close={() => (canShowDateTimePicker = false)}
->
+<Modal bind:this={modal} position={{ bottom: '120px', left: '400px' }} classes="w-64">
     <expiration-time-picker-modal class="flex flex-col space-y-0" in:fade={{ duration: 100 }}>
         <MenuItem
             icon="calendar"
@@ -120,27 +114,25 @@
             selected={selected === '1week'}
         />
         <HR />
-        <div bind:this={dateTimeAnchor}>
-            <MenuItem
-                icon="calendar"
-                title={localize('menus.expirationTimePicker.customDate.title')}
-                subtitle={customDate
-                    ? formatDate(customDate, { dateStyle: 'long', timeStyle: 'medium' })
-                    : localize('menus.expirationTimePicker.customDate.subtitle')}
-                onClick={() => onClick('custom')}
-                first
-                last
-                selected={selected === 'custom'}
-            />
-        </div>
-        {#if canShowDateTimePicker}
-            <DateTimePicker
-                position="top"
-                anchor={dateTimeAnchor}
-                bind:value={customDate}
-                on:cancel={() => (canShowDateTimePicker = false)}
-                on:confirm={modal?.close}
-            />
-        {/if}
+        <MenuItem
+            icon="calendar"
+            title={localize('menus.expirationTimePicker.customDate.title')}
+            subtitle={customDate
+                ? formatDate(customDate, { dateStyle: 'long', timeStyle: 'medium' })
+                : localize('menus.expirationTimePicker.customDate.subtitle')}
+            onClick={() => onClick('custom')}
+            first
+            last
+            selected={selected === 'custom'}
+        />
     </expiration-time-picker-modal>
 </Modal>
+{#if canShowDateTimePicker}
+    <DateTimePicker
+        position="top"
+        {anchor}
+        bind:value={customDate}
+        on:cancel={() => (canShowDateTimePicker = false)}
+        on:confirm={() => (canShowDateTimePicker = false)}
+    />
+{/if}
