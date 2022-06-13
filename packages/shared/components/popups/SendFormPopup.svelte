@@ -48,6 +48,7 @@
                         amount,
                         unit,
                         recipient,
+                        publicNote,
                     },
                     overflow: true,
                 })

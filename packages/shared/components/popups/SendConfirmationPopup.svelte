@@ -15,6 +15,7 @@
     export let rawAmount: number
     export let amount: '0'
     export let unit: string
+    export let publicNote: string
 
     $: internal = recipient.type === 'account'
 
@@ -48,6 +49,7 @@
         amount,
         unit,
         recipient,
+        publicNote,
     }
 </script>
 
