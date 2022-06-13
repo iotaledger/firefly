@@ -1,18 +1,20 @@
 <script lang="typescript">
-    import { ActivityTile, TogglableButton, Text, TextInput } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { openPopup } from 'shared/lib/popup'
-    import { isSyncing, isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
-    import { SetupType } from 'shared/lib/typings/setup'
-    import { debounce } from 'shared/lib/utils'
     import {
-        selectedAccountActivities,
+        Activity,
+        filterQueriedActivities,
         groupedActivities,
         searchQueriedActivities,
-        filterQueriedActivities,
-        Activity,
+        selectedAccountActivities,
     } from '@core/wallet'
+    import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
+    import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
+    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { openPopup } from 'shared/lib/popup'
+    import { SetupType } from 'shared/lib/typings/setup'
+    import { debounce } from 'shared/lib/utils'
+    import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -30,7 +32,7 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
 
-    $: if (searchActive && searchValue) {
+    $: if (searchActive && searchValue && $selectedAccountActivities) {
         debounce(() => {
             searchQueriedActivities(searchValue)
         })()
@@ -60,7 +62,10 @@
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <Text type="h5">{localize('general.activity')}</Text>
+            <div class="flex flex-row">
+                <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
+                <SyncSelectedAccountIconButton />
+            </div>
             <TogglableButton icon="search" bind:active={searchActive} />
         </div>
         {#if searchActive}
@@ -95,7 +100,7 @@
         {/if}
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-4 -mr-2 pr-2 scroll-secondary">
-        {#if $isSyncing && shouldShowFirstSync()}
+        {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
         {:else if $groupedActivities.length}
             {#each $groupedActivities as group}
@@ -104,7 +109,7 @@
                         {group.date} • {group.activities.length}
                     </Text>
                     {#each group.activities as activity}
-                        <ActivityTile onClick={() => handleTransactionClick(activity)} {activity} />
+                        <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
                     {/each}
                 </div>
             {/each}

@@ -12,3 +12,6 @@ export * from './restoreBackup'
 export * from './setStrongholdPassword'
 export * from './storeMnmonic'
 export * from './verifyMnemonic'
+
+export * from './events/subscribe'
+export * from './recoverAccounts'

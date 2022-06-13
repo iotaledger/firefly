@@ -22,9 +22,9 @@
         iconBackgroundColor={asset?.metadata?.primaryColor}
         iconLabel={asset?.metadata.name}
         iconLabelFontWeight={FontWeightText.semibold}
-        iconSubLabel={asset?.fiatPrice}
+        iconSubLabel={asset?.fiatPrice ?? '-'}
         tileText={formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
-        tileSubText={`≈ ${asset?.fiatBalance}`}
+        tileSubText={asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : '-'}
         onClick={handleTileClick}
         {...$$restProps}
     />
