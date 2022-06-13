@@ -59,4 +59,5 @@ export interface IPlatform {
 
     onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)
     removeListenersForEvent<K extends keyof EventMap>(eventName: K)
+    share(text?: string): Promise<void>
 }
