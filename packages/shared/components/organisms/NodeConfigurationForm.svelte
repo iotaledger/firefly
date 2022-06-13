@@ -14,42 +14,50 @@
     const profile = $newProfile ? newProfile : activeProfile
     const clientOptions = $profile.settings?.clientOptions
 
-    let formError = { address: '', addressWarn: '' }
+    let formError = { error: '' }
 
-    $: node.url, (formError = { address: '', addressWarn: '' })
+    $: node.url, (formError = { error: '' })
 
-    function checkForErrors(): void {
+    function validateNodeParameters(): void {
+        const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
+        if (errorUrlValidity) {
+            formError = { error: localize(errorUrlValidity) ?? '' }
+        }
+
         const errorNetworkId = checkNetworkId(
             $nodeInfo?.protocol?.networkName,
             clientOptions.network,
             $profile.isDeveloperProfile
         )
-        const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
-        formError = {
-            address: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '',
-            addressWarn: localize(errorUrlValidity) ?? '',
+        if (errorNetworkId) {
+            formError = { error: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '' }
         }
     }
 
     export async function handleAddNode(): Promise<void> {
         isBusy = true
-        checkForErrors()
-        if (!formError.address) {
+
+        validateNodeParameters()
+
+        if (!formError.error) {
             try {
                 if ($newProfile) {
                     await addCustomNodeToNewProfile(node)
                 } else {
                     await addNode(node, profile)
                 }
+
                 isBusy = false
+
                 onSuccess()
             } catch (err) {
                 showAppNotification({
                     type: 'error',
-                    message: localize(err),
+                    message: localize(err?.error ?? 'error.global.generic'),
                 })
             }
         }
+
         isBusy = false
     }
 </script>
@@ -62,8 +70,8 @@
         disabled={isBusy}
         autofocus
     />
-    {#if formError.addressWarn}
-        <Text overrideColor classes="text-orange-500 mt-2">{formError.addressWarn}</Text>
+    {#if formError.error}
+        <Text overrideColor classes="text-orange-500 mt-2">{formError.error}</Text>
     {/if}
     <Input
         classes="mt-3"

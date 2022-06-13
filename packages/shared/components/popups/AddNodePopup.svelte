@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Text, NodeConfigurationForm, Button, Spinner } from 'shared/components'
-    import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { INode, INetwork, IAuth } from '@core/network'
     import { localize } from '@core/i18n'
+    import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
+    import { INode, INetwork, IAuth } from '@core/network'
     import { closePopup } from '@lib/popup'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
@@ -11,7 +11,6 @@
     export let isAddingNode: boolean = true
     export let onSuccess = (..._: any[]): void => {}
 
-    const nodeUrl: string = node?.url || ''
     const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
     const isNetworkSwitch = false
 
@@ -19,21 +18,18 @@
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 
-    $: {
-        node.url = stripSpaces(node.url)
-    }
-
     const cleanNodeUrl = (_url: string): string => stripTrailingSlash(stripSpaces(_url))
+    $: node.url = cleanNodeUrl(node?.url)
 </script>
 
 <Text type="h4" classes="mb-6">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
-<NodeConfigurationForm bind:this={nodeConfigurationForm} bind:isBusy {node} {nodes} {network} {onSuccess} />
+<NodeConfigurationForm bind:this={nodeConfigurationForm} bind:isBusy bind:node {nodes} {network} {onSuccess} />
 <div class="flex flex-row justify-between space-x-4 w-full">
     <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
         {localize('actions.cancel')}
     </Button>
     <Button
-        disabled={!nodeUrl || isBusy}
+        disabled={!node.url || isBusy}
         type="submit"
         form="node-config-form"
         classes="w-1/2"
