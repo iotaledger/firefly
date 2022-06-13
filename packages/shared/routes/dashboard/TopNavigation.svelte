@@ -6,7 +6,7 @@
     import { popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
 
-    export let classes: string
+    export let classes = ''
 
     let os = ''
 
