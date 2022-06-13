@@ -63,7 +63,7 @@
     }
 </script>
 
-<recipient-input class="w-full">
+<recipient-input class="w-full relative">
     <InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
         <TextInput
             bind:inputElement
