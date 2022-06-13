@@ -7,7 +7,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         total: '0',
         available: '0',
         requiredStorageDeposit: '0',
-        nativeTokens: {},
+        nativeTokens: [],
         nfts: [],
         foundries: [],
         potentiallyLockedOutputs: {},
