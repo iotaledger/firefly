@@ -10,7 +10,8 @@
             "@common/*": ["../shared/lib/common/*"],
             "@core/*": ["../shared/lib/core/*"],
             "@lib/*": ["../shared/lib/*"]
-        }
+        },
+        "allowSyntheticDefaultImports": true
     },
     "include": ["./capacitor"]
 }

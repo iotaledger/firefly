@@ -95,6 +95,9 @@ const Platform: IPlatform = {
     validateSeedVault(buffer: unknown): Promise<boolean> {
         return Promise.resolve(false)
     },
+    share(text: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
     showActionSheet(options: ActionSheetOptions): Promise<number> {
         return Promise.resolve(0)
     },

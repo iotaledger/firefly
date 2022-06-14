@@ -27,7 +27,6 @@
     export let autofocus = false
 
     export let onMaxClick = (): void => {}
-    export let customUnitPresentation: (units: AmountUnit[], callback: (toUnit: AmountUnit) => void) => void
 
     const currency = $activeProfile?.settings.currency ?? (AvailableExchangeRates.USD as AmountUnit)
     const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
@@ -193,10 +192,6 @@
             on:click={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                if (customUnitPresentation) {
-                    customUnitPresentation(units, onUnitClick)
-                    return
-                }
                 toggleDropDown()
             }}
             bind:this={unitsButton}

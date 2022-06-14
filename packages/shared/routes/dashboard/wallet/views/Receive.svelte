@@ -2,6 +2,7 @@
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { mobile } from '@lib/app'
+    import { Platform } from '@lib/platform'
     import { Button, Icon, QR, QRImage, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
@@ -22,6 +23,10 @@
 
     const handleCloseClick = (): void => {
         $accountRouter.previous()
+    }
+
+    const handleShareClick = (depositAddress: string) => {
+        void Platform.share(depositAddress)
     }
 </script>
 
