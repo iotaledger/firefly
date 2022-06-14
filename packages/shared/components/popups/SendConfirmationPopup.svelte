@@ -2,8 +2,17 @@
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { ActivityType, InclusionState, Recipient, trySendOutput } from '@core/wallet'
+    import {
+        ActivityDirection,
+        ActivityType,
+        calculateStorageDepositFromOutput,
+        getOutputOptions,
+        InclusionState,
+        Recipient,
+        trySendOutput,
+    } from '@core/wallet'
     import type { OutputTypes } from '@iota/types'
+    import { OutputOptions } from '@iota/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { MILLISECONDS_PER_SECOND } from '@lib/time'
@@ -25,45 +34,20 @@
     let storageDeposit = 0
 
     let preparedOutput: OutputTypes
+    let outputOptions: OutputOptions
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
 
-    let outputOptions
-
     async function _prepareOutput() {
-        const unixTime = expirationDate ? Math.round(expirationDate.getTime() / MILLISECONDS_PER_SECOND) : undefined
-        outputOptions = {
-            recipientAddress,
-            amount: String(rawAmount),
-            features: {
-                ...(metadata && { metadata }),
-                ...(tag && { tag }),
-            },
-            unlocks: {
-                ...(unixTime && { expiration: { unixTime } }),
-            },
-        }
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
                 strategy: 'ReuseAddress',
                 value: null,
             },
         })
-        calculateStorageDepositFromOutput(preparedOutput)
-    }
-
-    function calculateStorageDepositFromOutput(output: OutputTypes) {
-        if (output.type !== 2) {
-            const storageDepositUnlockCondition = output?.unlockConditions?.find(
-                (unlockCondition) => unlockCondition?.type === 1
-            )
-            if (storageDepositUnlockCondition?.type === 1) {
-                storageDeposit = Number(storageDepositUnlockCondition.amount)
-            } else {
-                storageDeposit = Number(output.amount) - rawAmount
-            }
-        }
+        storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
     $: $$props, expirationDate, _prepareOutput()
@@ -94,6 +78,7 @@
     $: transactionDetails = {
         type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
+        direction: ActivityDirection.Out,
         amount,
         unit,
         subject: recipient,
