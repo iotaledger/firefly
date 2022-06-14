@@ -21,18 +21,15 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.create.body')}</Text>
-        <Button
-            icon="settings"
-            classes="w-full mb-5"
-            secondary
-            onClick={() => handleContinueClick(ProfileType.Software)}
-        >
+    </div>
+    <div slot="leftpane__action" class="flex flex-col space-y-4">
+        <Button icon="file" classes="w-full" secondary onClick={() => handleContinueClick(ProfileType.Software)}>
             {localize('views.create.softwareAccount.title')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.create.softwareAccount.description')}</Text>
             {/if}
         </Button>
-        <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ProfileType.Ledger)}>
+        <Button icon="chip" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ProfileType.Ledger)}>
             {localize('views.create.ledgerAccount.title')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.create.ledgerAccount.description')}</Text>

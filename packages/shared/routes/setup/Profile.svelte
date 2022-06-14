@@ -20,10 +20,13 @@
     }
 
     function handleContinueClick(): void {
-        validateProfileName(profileName)
-        updateNewProfile({ name: profileName })
-
-        $appRouter.next()
+        try {
+            validateProfileName(profileName)
+            updateNewProfile({ name: profileName })
+            $appRouter.next()
+        } catch (err) {
+            error = err.message
+        }
     }
 </script>
 

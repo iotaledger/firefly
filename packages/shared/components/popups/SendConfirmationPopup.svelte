@@ -15,6 +15,8 @@
     export let rawAmount: number
     export let amount: '0'
     export let unit: string
+    export let expireDate: Date
+    export let publicNote: string
 
     $: internal = recipient.type === 'account'
 
@@ -48,6 +50,8 @@
         amount,
         unit,
         recipient,
+        expireDate,
+        publicNote,
     }
 </script>
 
@@ -58,7 +62,7 @@
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" />
+            <ExpirationTimePicker bind:expireDate slot="value" />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

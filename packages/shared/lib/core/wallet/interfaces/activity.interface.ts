@@ -19,6 +19,7 @@ export interface IActivity {
     expirationDate?: Date
     isHidden?: boolean
     isClaimed?: boolean
+    publicNote?: string
 
     setFromTransaction(transactionId: string, transaction: Transaction): void
     getAsyncStatus(time: Date): ActivityAsyncStatus

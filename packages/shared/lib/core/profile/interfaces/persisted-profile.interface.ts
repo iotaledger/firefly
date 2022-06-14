@@ -16,5 +16,4 @@ export interface IPersistedProfile {
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountId?: string
-    hasFinishedSingleAccountGuide?: boolean
 }
