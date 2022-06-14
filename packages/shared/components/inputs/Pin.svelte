@@ -40,6 +40,36 @@
         }
     })
 
+    export function focus(): void {
+        if (!disabled) {
+            selectFirstEmpty()
+        }
+    }
+
+    export function resetAndFocus(): void {
+        if (!disabled) {
+            inputs = new Array(PIN_LENGTH)
+            selectFirstEmpty()
+        } else {
+            setTimeout(() => resetAndFocus(), 100)
+        }
+    }
+
+    function selectFirstEmpty(): void {
+        for (let j = 0; j < PIN_LENGTH; j++) {
+            if (!inputs[j] || j === PIN_LENGTH - 1) {
+                inputElements[j].focus()
+                return
+            }
+        }
+    }
+
+    function selectFirstEmptyRoot(event: KeyboardEvent): void {
+        if (event.target === root) {
+            selectFirstEmpty()
+        }
+    }
+
     function handleBackspace(): void {
         // Search for the last child with a value
         // and remove it
@@ -96,36 +126,6 @@
             inputs[index] = ''
         } else {
             inputElements[index + 1].focus()
-        }
-    }
-
-    function selectFirstEmpty(): void {
-        for (let j = 0; j < PIN_LENGTH; j++) {
-            if (!inputs[j] || j === PIN_LENGTH - 1) {
-                inputElements[j].focus()
-                return
-            }
-        }
-    }
-
-    function selectFirstEmptyRoot(event: KeyboardEvent): void {
-        if (event.target === root) {
-            selectFirstEmpty()
-        }
-    }
-
-    export function focus(): void {
-        if (!disabled) {
-            selectFirstEmpty()
-        }
-    }
-
-    export function resetAndFocus(): void {
-        if (!disabled) {
-            inputs = new Array(PIN_LENGTH)
-            selectFirstEmpty()
-        } else {
-            setTimeout(() => resetAndFocus(), 100)
         }
     }
 </script>
