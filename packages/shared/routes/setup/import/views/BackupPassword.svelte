@@ -23,7 +23,7 @@
     }
 
     function handleBackClick(): void {
-        if (!busy && !isGettingMigrationData) {
+        if (!busy && !$isGettingMigrationData) {
             dispatch('previous')
         }
     }
