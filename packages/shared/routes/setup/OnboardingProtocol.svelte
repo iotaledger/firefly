@@ -5,7 +5,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import featureFlags from 'shared/featureFlags.config'
 
     const isDeveloperProfile = true // TODO: use real value
@@ -43,5 +43,8 @@
                 {/if}
             </Button>
         {/each}
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+        <Animation animation="onboarding-protocol-desktop" />
     </div>
 </OnboardingLayout>

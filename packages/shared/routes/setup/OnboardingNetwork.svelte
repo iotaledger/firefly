@@ -4,7 +4,7 @@
     import { newProfile } from '@core/profile'
     import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import featureFlags from 'shared/featureFlags.config'
 
@@ -51,5 +51,8 @@
                 {/if}
             </Button>
         {/each}
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+        <Animation animation="onboarding-network-desktop" />
     </div>
 </OnboardingLayout>

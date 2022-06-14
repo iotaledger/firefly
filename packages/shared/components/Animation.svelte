@@ -19,6 +19,14 @@
             lightmode: 'appearance-desktop.json',
             darkmode: 'appearance-desktop-darkmode.json',
         },
+        'onboarding-protocol-desktop': {
+            lightmode: 'import-from-text-success-desktop.json',
+            darkmode: 'import-from-text-success-desktop-darkmode.json',
+        },
+        'onboarding-network-desktop': {
+            lightmode: 'secure-desktop.json',
+            darkmode: 'secure-desktop-darkmode.json',
+        },
         'profile-desktop': {
             lightmode: 'profile-desktop.json',
             darkmode: 'profile-desktop-darkmode.json',
