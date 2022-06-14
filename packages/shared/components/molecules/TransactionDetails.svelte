@@ -17,12 +17,15 @@
         ActivityType,
         Recipient,
         InclusionState,
+        Sender,
+        ActivityDirection,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let amount: string
     export let unit: string
     export let type: ActivityType
+    export let direction: ActivityDirection
     export let inclusionState: InclusionState = InclusionState.Pending
     export let asyncStatus: ActivityAsyncStatus = undefined
     export let formattedFiatValue: string
@@ -31,7 +34,7 @@
     export let tag: string
     export let storageDeposit = 0
     export let expirationDate: Date
-    export let recipient: Recipient
+    export let subject: Recipient | Sender
 
     let transactionTime: string
     $: {
@@ -92,18 +95,24 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState}
-                <ActivityStatusPill {type} {inclusionState} />
+                <ActivityStatusPill {type} {direction} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if recipient?.type === 'account'}
+        {#if subject?.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={recipient.account} />
+                <AccountLabel account={subject.account} />
             </Box>
-        {:else if recipient?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
+        {:else if subject?.type === 'address'}
+            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+        {:else}
+            <Box col clearBackground clearPadding>
+                <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
+                    {localize('general.unknownAddress')}
+                </Text>
+            </Box>
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

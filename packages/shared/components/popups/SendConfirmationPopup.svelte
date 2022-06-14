@@ -92,11 +92,11 @@
         ) || '-'
 
     $: transactionDetails = {
-        type: internal ? ActivityType.Transfer : ActivityType.Send,
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
         amount,
         unit,
-        recipient,
+        subject: recipient,
         metadata,
         tag,
         storageDeposit: storageDeposit,

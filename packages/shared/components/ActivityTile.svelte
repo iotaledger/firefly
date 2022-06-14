@@ -20,31 +20,32 @@
     export let onClick: () => void
 
     let title = ''
-    let direction = ''
     let icon = ''
     let iconColor = ''
     let subject = ''
     $: {
-        if (activity.type === ActivityType.Transfer) {
+        if (activity.type === ActivityType.InternalTransaction) {
             icon = 'transfer'
             iconColor = 'gray-600'
             title = activity.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-        } else if (activity.type === ActivityType.Receive) {
-            icon = 'chevron-down'
-            iconColor = 'blue-700'
-            title = activity.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-        } else if (activity.type === ActivityType.Send) {
-            icon = 'chevron-up'
-            iconColor = 'blue-500'
-            title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+        } else if (activity.type === ActivityType.ExternalTransaction) {
+            if (activity.direction === ActivityDirection.In) {
+                icon = 'chevron-down'
+                iconColor = 'blue-700'
+                title = activity.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (activity.direction === ActivityDirection.Out) {
+                icon = 'chevron-up'
+                iconColor = 'blue-500'
+                title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
         }
-        direction = activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress'
-        if (activity?.recipient?.type === 'account') {
-            subject = truncateString(activity.recipient.account?.name, 13, 0)
-        } else if (activity?.recipient?.type === 'address') {
-            subject = truncateString(activity.recipient.address, 6, 8)
+
+        if (activity?.subject?.type === 'account') {
+            subject = truncateString(activity?.subject?.account?.name, 13, 0)
+        } else if (activity?.subject?.type === 'address') {
+            subject = truncateString(activity?.subject?.address, 6, 8)
         } else {
-            subject = 'Unknown Address'
+            subject = localize('general.unknownAddress')
         }
     }
 
@@ -107,7 +108,10 @@
                     {localize(title)}
                 </Text>
                 <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
-                    {localize(direction, { values: { account: subject } })}
+                    {localize(
+                        activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
+                        { values: { account: subject } }
+                    )}
                 </Text>
             </div>
             <div class="flex-1 items-end flex flex-col ml-4">

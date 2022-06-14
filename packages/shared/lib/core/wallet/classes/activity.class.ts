@@ -35,6 +35,7 @@ export class Activity implements IActivity {
 
     sender: Sender
     recipient: Recipient
+    subject: Sender | Recipient
     isInternal: boolean
     direction: ActivityDirection
 
@@ -58,7 +59,7 @@ export class Activity implements IActivity {
         const account = findAccountWithAddress(outputOptions.recipientAddress)
         const isInternal = !!account
 
-        this.type = getActivityType(false, isInternal)
+        this.type = getActivityType(isInternal)
         this.id = transactionId
         this.isHidden = false
 
@@ -70,6 +71,7 @@ export class Activity implements IActivity {
         this.recipient = isInternal
             ? { type: 'account', account: account }
             : { type: 'address', address: outputOptions.recipientAddress }
+        this.subject = this.recipient
         this.isInternal = isInternal
         this.direction = ActivityDirection.Out
 
@@ -92,7 +94,7 @@ export class Activity implements IActivity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, accountAddress)
         const recipient = getRecipientFromOutput(output)
 
-        this.type = getActivityType(transaction.incoming, false)
+        this.type = getActivityType(isRecipientInternal(recipient))
         this.id = ''
         this.isHidden = false // TODO
 
@@ -102,6 +104,7 @@ export class Activity implements IActivity {
 
         this.sender = getSenderFromTransaction(transaction, accountAddress)
         this.recipient = recipient
+        this.subject = transaction.incoming ? this.sender : this.recipient
         this.isInternal = isRecipientInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -133,7 +136,7 @@ export class Activity implements IActivity {
         // const isInternal = !!findAccountWithAddress(address)
         const isInternal = isRecipientInternal(recipient)
 
-        this.type = getActivityType(isIncoming, isInternal)
+        this.type = getActivityType(isInternal)
         this.id = outputData.outputId
         this.isHidden = hidden // TODO
 
@@ -143,6 +146,7 @@ export class Activity implements IActivity {
 
         this.sender = getSenderFromOutput(outputData.output)
         this.recipient = recipient
+        this.subject = isIncoming ? this.sender : this.recipient
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -187,13 +191,11 @@ export class Activity implements IActivity {
     }
 }
 
-function getActivityType(incoming: boolean, internal: boolean): ActivityType {
+function getActivityType(internal: boolean): ActivityType {
     if (internal) {
-        return ActivityType.Transfer
-    } else if (incoming) {
-        return ActivityType.Receive
+        return ActivityType.InternalTransaction
     } else {
-        return ActivityType.Send
+        return ActivityType.ExternalTransaction
     }
 }
 

@@ -1127,6 +1127,7 @@
         "version": "Version {version}",
         "yourWallets": "Your Wallets",
         "unknown": "Unknown",
+        "unknownAddress": "Unknown address",
         "none": "None",
         "staked": "Staked",
         "unstaked": "Unstaked",
@@ -1388,24 +1389,33 @@
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+                "Pending": "staking for",
+                "Confirmed": "staked for",
+                "Conflicting": "failed to stake"
         },
-        "transfer": {
-            "Pending": "transferring to",
-            "Confirmed": "transferred to",
-            "Conflicting": "failed to transfer"
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
         },
-        "receive": {
-            "Pending": "receiving from",
-            "Confirmed": "received from",
-            "Conflicting": "failed to receive"
-        },
-        "send": {
-            "Pending": "sending to",
-            "Confirmed": "sent to",
-            "Conflicting": "failed to send"
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
         },
         "migrate": {
             "Pending": "migrating for",
