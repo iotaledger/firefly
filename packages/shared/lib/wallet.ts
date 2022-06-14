@@ -32,9 +32,6 @@ export const MAX_PASSWORD_LENGTH = 256
  */
 export const DUST_THRESHOLD: number = 1_000_000
 
-// Setting to 0 removes auto lock. We must lock Stronghold manually.
-export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
-
 // TODO: remove these
 interface ActorState {
     [id: string]: IActorHandler

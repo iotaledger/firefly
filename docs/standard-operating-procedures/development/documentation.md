@@ -23,15 +23,21 @@ All members of the Firefly team are responsible for mainintaing documentation, s
 
 ## Handbook
 
-### Creating a Task
+### Releasing a New Firefly Version
 
-To make changes to the documentation within this handbook, begin the process by creating a GitHub task specifically for your desired changes. Please use the "Continuously improve documentation" milestone when creating the task.
+Simply change the value for `label` under `branding` in [Retype config file](https://github.com/iotaledger/firefly/blob/develop/docs/retype.yml#L8) to the appropriate version.
 
-If the suggested changes are akin to simple typo fixes, then please go ahead and create a pull request with the corresponding fixes. Contrarily, if the changes are more substantial (i.e. an additional page or considerable modification of an existing page like adding or changing a section), please bring it to the attention of any relevant people, and it will then be discussed to ensure the best outcome possible.
+### Updating the Handbook
 
-### Opening a Pull Request
+To make changes to the documentation within this handbook, begin the process by creating a GitHub task specifically for your desired changes. Please use the ["Continuously improve documentation"](https://github.com/iotaledger/firefly/milestone/6) milestone when creating the task.
 
-Once a pull request is finished and ready, it will go through the normal review process and will eventually be merged into the `develop` branch.
+### Updating the Code
+
+When making changes to the code, be sure to check whether the comments if the functions, variables, etc. that you're dealing with are up-to-date and accurate.
+If writing new code that is exported and intended to be used elsewhere, make sure that it is appropriately commented (see the [coding conventions on comments](../../guides/coding-conventions/comments.md)).
+
+Every new folder and page page must have an `icon: <icon>` entry in the top of the its corresponding file (see [Octicons](https://primer.style/octicons/)).
+Lastly, every new folder must have some sort of text describing what its purpose is and what you'll find when looking in it.
 
 ## GitHub Wiki
 

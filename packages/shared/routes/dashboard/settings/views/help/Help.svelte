@@ -2,6 +2,7 @@
     import { HR } from 'shared/components'
     import { ExternalRoute, HelpAndInfo } from '@core/router'
     import HelpSection from './HelpSection.svelte'
+    import featureFlags from 'shared/featureFlags.config'
 
     const settings: {
         component: unknown
@@ -15,7 +16,12 @@
             url: ExternalRoute.Documentation,
             actionLocale: 'readDocumentation',
         },
-        { component: HelpSection, childRoute: HelpAndInfo.FAQ, url: ExternalRoute.FAQ, actionLocale: 'visitFaq' },
+        {
+            component: HelpSection,
+            childRoute: HelpAndInfo.Faq,
+            url: ExternalRoute.FAQ,
+            actionLocale: 'visitFaq',
+        },
         {
             component: HelpSection,
             childRoute: HelpAndInfo.Discord,
@@ -29,10 +35,14 @@
             actionLocale: 'reportAnIssue',
         },
     ]
+
+    const visibleSettings = settings.filter(
+        (setting) => featureFlags?.settings?.helpAndInfo?.[setting.childRoute]?.enabled
+    )
 </script>
 
 <div>
-    {#each settings as { component, childRoute, actionLocale, url }, index}
+    {#each visibleSettings as { component, childRoute, actionLocale, url }, index}
         <section id={childRoute} class="w-full sm:w-3/4">
             <svelte:component this={component} route={childRoute} {url} {actionLocale} />
         </section>
