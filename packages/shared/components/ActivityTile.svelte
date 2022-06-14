@@ -134,10 +134,11 @@
             <Hr />
         </div>
         <div class="flex w-full justify-between p-4">
-            <div class="flex flex-row justify-center items-center">
+            <div class="flex flex-row justify-center items-center space-x-2">
                 {#if !activity.isClaimed}
-                    <Icon width="16" height="16" icon="timer" classes="mr-1 text-gray-600" />
-                    <Text secundary fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}>{timeDiff}</Text
+                    <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
+                    <Text secundary fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}
+                        >{timeDiff ?? localize('general.none')}</Text
                     >
                 {/if}
             </div>

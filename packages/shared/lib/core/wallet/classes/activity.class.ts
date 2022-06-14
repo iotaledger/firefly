@@ -15,6 +15,7 @@ import {
 } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
+    ASYNC_UNLOCK_CONDITION_TYPES,
     FEATURE_TYPE_METADATA,
     FEATURE_TYPE_TAG,
     OUTPUT_TYPE_TREASURY,
@@ -109,14 +110,14 @@ export class Activity implements IActivity {
         this.isInternal = isRecipientInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
-        this.rawAmount = getAmountFromOutput(output)
+        this.storageDeposit = getStorageDepositForOutput(output)
+        this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
         this.metadata = getMetadataFromOutput(output)
         this.tag = getTagFromOutput(output)
 
-        this.storageDeposit = 0
         this.expirationDate = getExpirationDateFromOutput(output)
-        this.isAsync = false
+        this.isAsync = isOutputAsync(output)
         this.isClaimed = false
 
         return this
@@ -144,10 +145,12 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.rawAmount = getAmountFromOutput(outputData.output)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
+        this.storageDeposit = getStorageDepositForOutput(outputData.output)
+        this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
+        this.isAsync = isOutputAsync(outputData.output)
 
         setAsyncDataForOutput(this, outputData.output, isIncoming)
         return this
@@ -303,4 +306,26 @@ function getExpirationDateFromOutput(output: OutputTypes): Date {
         }
     }
     return undefined
+}
+
+function isOutputAsync(output: OutputTypes): boolean {
+    if (output.type !== OUTPUT_TYPE_TREASURY) {
+        for (const unlockCondition of output.unlockConditions) {
+            if (ASYNC_UNLOCK_CONDITION_TYPES.some((type) => type === unlockCondition.type)) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+function getStorageDepositForOutput(output: OutputTypes): number {
+    if (output.type !== OUTPUT_TYPE_TREASURY) {
+        for (const unlockCondition of output.unlockConditions) {
+            if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
+                return Number(unlockCondition.amount)
+            }
+        }
+    }
+    return 0
 }
