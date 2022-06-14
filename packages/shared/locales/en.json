@@ -62,23 +62,39 @@
         "protocol": {
             "title": "Choose protocol",
             "body": "Set the protocol for your profile",
-            "iota": "IOTA default protocol",
-            "shimmer": "Experimental IOTA staging protocol"
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
         },
         "network": {
             "title": "Choose network",
             "body": "Set the network for your profile",
-            "mainnet": {
-                "title": "Mainnet",
-                "body": "Official network"
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
             },
-            "devnet": {
-                "title": "Devnet",
-                "body": "Network for testing and development"
-            },
-            "private-net": {
-                "title": "Private net",
-                "body": "Private network"
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Public Testnet",
+                    "body": "Beta network for IOTA Mainnet"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
             }
         },
         "customNetwork": {

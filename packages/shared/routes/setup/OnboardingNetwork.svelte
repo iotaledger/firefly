@@ -40,9 +40,13 @@
                     ?.enabled}
                 onClick={() => onClick(NetworkType[networkType])}
             >
-                {localize(`views.network.${NetworkType[networkType]}.title`)}
+                {localize(`views.network.${$newProfile?.networkProtocol}.${NetworkType[networkType]}.title`)}
                 {#if !$mobile}
-                    <Text secondary smaller>{localize(`views.network.${NetworkType[networkType]}.body`)}</Text>
+                    <Text secondary smaller
+                        >{localize(
+                            `views.network.${$newProfile?.networkProtocol}.${NetworkType[networkType]}.body`
+                        )}</Text
+                    >
                 {/if}
             </Button>
         {/each}
