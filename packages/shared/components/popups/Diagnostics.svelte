@@ -12,9 +12,6 @@
     let contentApp = ''
     let contentSystem = ''
 
-    const combineValues = (values): string =>
-        values.map((c) => (c.label ? `${localize(c.label)}: ${c.value}` : c.value)).join('\r\n')
-
     onMount(() => {
         const appVars = [
             {
@@ -23,12 +20,12 @@
                     values: { version: $appVersionDetails?.currentVersion },
                 }),
             },
-        ]
-        if ($activeProfile && $loggedIn) {
-            appVars.push({
+            {
                 label: 'views.settings.language.title',
                 value: $appSettings?.language,
-            })
+            },
+        ]
+        if ($activeProfile && $loggedIn) {
             appVars.push({
                 label: 'views.settings.currency.title',
                 value: $activeProfile?.settings?.currency,
@@ -46,12 +43,16 @@
                 value: $activeProfile?.settings?.clientOptions?.nodes?.map((node) => node?.url)?.toString(),
             })
         }
-        contentApp = combineValues(appVars)
-        void Platform.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
+        contentApp = concatenateInfo(appVars)
+        void Platform.getDiagnostics().then((values) => (contentSystem = concatenateInfo(values)))
     })
 
     function handleCopyClick(): void {
         setClipboard(contentApp + '\r\n' + contentSystem)
+    }
+
+    function concatenateInfo(infoList: { label?: string; value: string }[]): string {
+        return infoList.map((info) => (info.label ? `${localize(info.label)}: ${info.value}` : info.value)).join('\r\n')
     }
 </script>
 
