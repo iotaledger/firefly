@@ -20,7 +20,7 @@
     let value: string
     let error: string
     let hasFocus: boolean
-    let keepRecipientAccountSelectorOpen: boolean = true
+    let keepRecipientAccountSelectorOpen: boolean
 
     $: recipient = {
         type: selectedAccount ? 'account' : 'address',
