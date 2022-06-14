@@ -271,21 +271,16 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: showSingleAccountGuide = !busy && $loggedIn && !$activeProfile?.hasFinishedSingleAccountGuide
-    $: if (showSingleAccountGuide) {
-        openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true, relative: false })
-    }
-
     $: $hasStrongholdLocked && reflectLockedStronghold()
 </script>
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
     {#if showTopNav}
-        <TopNavigation classes={$popupState?.type === 'singleAccountGuide' && $popupState?.active ? 'z-50' : ''} />
+        <TopNavigation />
     {/if}
     <div class="flex flex-row flex-auto h-1">
-        <Sidebar locale={localize} />
+        <Sidebar />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
             <svelte:component this={tabs[$dashboardRoute]} locale={localize} on:next={$appRouter.next} />

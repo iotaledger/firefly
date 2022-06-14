@@ -16,10 +16,6 @@
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
-        'single-account-guide-desktop': {
-            lightmode: 'onboarding/single-account-guide-desktop.svg',
-            darkmode: 'onboarding/single-account-guide-desktop.svg',
-        },
         'white-arrow': {
             lightmode: 'onboarding/white-arrow.svg',
             darkmode: 'onboarding/white-arrow.svg',
