@@ -22,7 +22,10 @@
             "body": "Choose your app theme."
         },
         "profile": {
-            "title": "Create a profile",
+            "title": {
+                "iota": "Create your IOTA profile",
+                "shimmer": "Create your Shimmer profile"
+            },
             "profileName": "Profile name",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": {

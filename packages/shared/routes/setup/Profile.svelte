@@ -32,7 +32,7 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.profile.title')}</Text>
+        <Text type="h2">{localize(`views.profile.title.${$newProfile?.networkProtocol}`)}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{localize('views.profile.body1')}</Text>
