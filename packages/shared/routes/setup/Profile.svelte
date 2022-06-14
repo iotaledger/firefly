@@ -25,7 +25,7 @@
     import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
-    import { appRouter } from '@core/router'
+    import { appRouter, AppRoute } from '@core/router'
     import { Stage } from 'shared/lib/typings/stage'
 
     export let locale: Locale
@@ -80,7 +80,11 @@
                     },
                 })
             } else {
-                $appRouter.next()
+                if ($mobile) {
+                    $appRouter.goTo(AppRoute.Password)
+                } else {
+                    $appRouter.next()
+                }
             }
         } catch (err) {
             showAppNotification({
@@ -139,6 +143,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation animation="profile-desktop" />
+        <Animation animation={$mobile ? 'password-desktop' : 'profile-desktop'} />
     </div>
 </OnboardingLayout>
