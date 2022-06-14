@@ -7,7 +7,7 @@
     export let selected = true
 </script>
 
-<div class="flex row items-center space-x-3">
+<div class="flex flex-row items-center space-x-3">
     <div class="circle" style="--account-color: {account?.color};" />
     <Text fontSize="14" fontWeight={FontWeightText.semibold} classes={selected ? '' : 'opacity-50'}>
         {account?.name}
