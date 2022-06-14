@@ -1,7 +1,3 @@
-/**
- * Used to determine, if an output is claimable or not
- * 1: IStorageDepositReturnUnlockCondition
- * 3: IExpirationUnlockCondition
- */
+import { StorageDepositReturnUnlockCondition, ExpirationUnlockCondition } from './types'
 
-export const ASYNC_UNLOCK_CONDITION_TYPES = [1, 3]
+export const ASYNC_UNLOCK_CONDITION_TYPES = [StorageDepositReturnUnlockCondition, ExpirationUnlockCondition]

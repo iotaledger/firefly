@@ -19,10 +19,13 @@ export function loadAccountActivities(account: IAccountState): void {
         const claimed = !!account.meta.lockedOutputs[outputId]
         if (!output.remainder) {
             const hidden = isActivityHiddenForAccountId(account.id, outputId)
-            addActivityToAccountActivitiesInAllAccountActivities(
-                account.id,
-                new Activity().setFromOutput(outputId, output, account.depositAddress, hidden, claimed)
-            )
+            const activity = {
+                output: output,
+                accountAddress: account.depositAddress,
+                hidden: hidden,
+                claimed: claimed,
+            }
+            addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutput(activity))
         }
     })
 }
