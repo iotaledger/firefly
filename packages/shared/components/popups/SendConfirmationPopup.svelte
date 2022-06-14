@@ -99,7 +99,6 @@
         recipient,
         metadata,
         tag,
-        expirationDate,
         storageDeposit: storageDeposit,
     }
 </script>

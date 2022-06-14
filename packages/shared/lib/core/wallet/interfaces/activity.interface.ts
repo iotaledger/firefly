@@ -21,7 +21,7 @@ export interface IActivity {
     isClaimed?: boolean
     publicNote?: string
 
-    setFromTransaction(transactionId: string, transaction: Transaction): void
+    setFromTransaction(transactionId: string, transaction: Transaction, accountAddress: string): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

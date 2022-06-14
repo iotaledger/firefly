@@ -22,11 +22,10 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
     ) {
         syncBalance(account.id)
         const activity = {
-            output: event.output,
+            outputData: event.output,
             accountAddress: account.depositAddress,
             hidden: false,
-            claimed: false,
         }
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutput(activity))
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutputData(activity))
     }
 }

@@ -41,7 +41,7 @@ async function sendOutput(outputOptions: OutputOptions, output: OutputTypes): Pr
     const { transactionId } = await account.sendOutputs([output], transferOptions)
     addActivityToAccountActivitiesInAllAccountActivities(
         account.id,
-        new Activity().setNewTransaction(transactionId, outputOptions)
+        new Activity().setNewTransaction(transactionId, outputOptions, output)
     )
     // TODO: fetch transaction
     return transactionId

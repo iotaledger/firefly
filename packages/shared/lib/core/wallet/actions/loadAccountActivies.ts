@@ -11,21 +11,23 @@ export function loadAccountActivities(account: IAccountState): void {
     Object.keys(account.meta.transactions).forEach((transactionId) => {
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(transactionId, account.meta.transactions?.[transactionId])
+            new Activity().setFromTransaction(
+                transactionId,
+                account.meta.transactions?.[transactionId],
+                account.depositAddress
+            )
         )
     })
     Object.keys(account.meta.outputs).forEach((outputId) => {
         const output = account.meta.outputs?.[outputId]
-        const claimed = !!account.meta.lockedOutputs[outputId]
         if (!output.remainder) {
             const hidden = isActivityHiddenForAccountId(account.id, outputId)
             const activity = {
-                output: output,
+                outputData: output,
                 accountAddress: account.depositAddress,
                 hidden: hidden,
-                claimed: claimed,
             }
-            addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutput(activity))
+            addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutputData(activity))
         }
     })
 }
