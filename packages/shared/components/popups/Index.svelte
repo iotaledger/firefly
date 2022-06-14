@@ -26,7 +26,7 @@
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
-    import NodeInfo from './NodeInfo.svelte'
+    import NodeInfoPopup from './NodeInfoPopup.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -36,7 +36,6 @@
     import StakingManager from './StakingManager.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
-    import SwitchNetwork from './SwitchNetwork.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
@@ -109,11 +108,10 @@
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
-        nodeInfo: NodeInfo,
+        nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
-        switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
