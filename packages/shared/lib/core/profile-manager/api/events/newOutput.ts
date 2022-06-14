@@ -21,11 +21,9 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
         !event.output.remainder
     ) {
         syncBalance(account.id)
-        const activity = {
-            outputData: event.output,
-            accountAddress: account.depositAddress,
-            hidden: false,
-        }
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity().setFromOutputData(activity))
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.id,
+            new Activity().setFromOutputData(event.output, account)
+        )
     }
 }
