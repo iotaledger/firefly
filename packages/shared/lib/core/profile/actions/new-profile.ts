@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
-import { ledgerSimulator } from '@lib/ledger'
 import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
-import { cleanupSignup } from '@lib/app'
+import { ledgerSimulator } from '@lib/ledger'
 
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
@@ -50,7 +49,6 @@ export async function deleteNewProfile(): Promise<void> {
         try {
             // TODO: delete storage with new api when implemented
             // await asyncDeleteStorage()
-            cleanupSignup()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)
