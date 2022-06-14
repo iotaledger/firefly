@@ -26,7 +26,7 @@
         <NetworkIcon {networkProtocol} />
     </div>
     {#if showTooltip}
-        <Tooltip anchor={tooltipAnchor} size="small" position="right">
+        <Tooltip anchor={tooltipAnchor} size="small" position="right" offset={6}>
             <Text type="p" fontWeight={FontWeightText.semibold} color="gray-600" darkColor="gray-400" smaller>
                 {tooltipText}
             </Text>

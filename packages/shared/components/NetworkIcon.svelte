@@ -26,7 +26,7 @@
 </script>
 
 <div
-    class="p-0.5 flex items-center justify-center rounded-full border-2 border-solid border-white dark:border-gray-900 bg-{backgroundColor}"
+    class="p-0.5 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-gray-900 bg-{backgroundColor}"
 >
     <Icon {height} {width} icon={networkProtocol} classes="text-{iconColor}" />
 </div>
