@@ -57,11 +57,11 @@
             "title": "Create a wallet",
             "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
+                "title": "Create a hardware wallet",
                 "description": "Ledger Nano S or Nano X required"
             }
         },
