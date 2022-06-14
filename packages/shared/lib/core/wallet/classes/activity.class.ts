@@ -21,7 +21,7 @@ import {
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
-import { IMetadataFeature, ITagFeature, OutputTypes, send } from '@iota/types'
+import { IMetadataFeature, ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
 import { IAccountState } from '@core/account'
 
 export class Activity implements IActivity {
@@ -89,11 +89,7 @@ export class Activity implements IActivity {
     }
 
     setFromTransaction(transactionId: string, transaction: Transaction, accountAddress: string): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(
-            transaction,
-            accountAddress,
-            transaction.incoming
-        )
+        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, accountAddress)
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(transaction.incoming, false)
@@ -104,6 +100,7 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
 
+        this.sender = getSenderFromTransaction(transaction, accountAddress)
         this.recipient = recipient
         this.isInternal = isRecipientInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
@@ -144,6 +141,7 @@ export class Activity implements IActivity {
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked)
 
+        this.sender = getSenderFromOutput(outputData.output)
         this.recipient = recipient
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
@@ -199,16 +197,12 @@ function getActivityType(incoming: boolean, internal: boolean): ActivityType {
     }
 }
 
-function getNonRemainderOutputFromTransaction(
-    transaction: Transaction,
-    accountAddress: string,
-    isIncoming: boolean
-): OutputTypes {
+function getNonRemainderOutputFromTransaction(transaction: Transaction, accountAddress: string): OutputTypes {
     const outputs = transaction.payload.essence.outputs
     const nonRemainerOutputs = outputs.filter((output) => {
         const recipientAddress = getRecipientAddressFromOutput(output)
 
-        if (isIncoming) {
+        if (transaction.incoming) {
             return accountAddress === recipientAddress
         } else {
             return accountAddress !== recipientAddress
@@ -267,14 +261,38 @@ function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncomi
                 activity.isAsync = true
                 activity.isClaimed = false // TODO
                 activity.storageDeposit = Number(unlockCondition.amount)
-                if (isIncoming) {
-                    const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
-                    activity.sender = {
-                        type: 'address',
-                        ...(senderAddress && { address: senderAddress }),
-                    }
+            }
+        }
+    }
+}
+
+function getSenderFromTransaction(transaction: Transaction, accountAddress): Sender {
+    if (!transaction?.incoming) {
+        return { type: 'address', address: accountAddress }
+    } else if (transaction?.incoming) {
+        getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
+            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress))
+    } else {
+        return undefined
+    }
+}
+
+function getSenderFromTransactionInputs(inputs: IUTXOInput[]): Sender {
+    // TODO: Implement this when wallet.rs updates the transaction response
+    return undefined
+}
+
+function getSenderFromOutput(output: OutputTypes): Sender {
+    if (output.type !== OUTPUT_TYPE_TREASURY) {
+        for (const unlockCondition of output.unlockConditions) {
+            const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
+            if (senderAddress) {
+                return {
+                    type: 'address',
+                    address: senderAddress,
                 }
             }
         }
     }
+    return undefined
 }
