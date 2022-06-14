@@ -40,7 +40,10 @@
             }
         },
         "setup": {
-            "title": "Set up a wallet",
+            "title": {
+                "iota": "Set up an IOTA profile",
+                "shimmer": "Set up a Shimmer profile"
+            },
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
@@ -931,10 +934,22 @@
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": {
+            "iota": "Create new wallet",
+            "shimmer": "Create a new Shimmer profile"
+        },
+        "createWalletDescription": {
+            "iota": "Create a fresh wallet running on Chrysalis",
+            "shimmer": "Create a fresh wallet running on Shimmer"
+        },
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Set up PIN code",
