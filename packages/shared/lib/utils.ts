@@ -476,3 +476,14 @@ export function range(size: number, start: number = 0): number[] {
 export function getMonthYear(date: Date): string {
     return formatDate(date, { year: 'numeric', month: 'short' })
 }
+
+/*
+ * Gets an object value from an object string path
+ */
+export function resolveObjectPath(object: Record<string, any>, path: string, defaultValue: unknown = ''): unknown {
+    if (!object || !path) {
+        return defaultValue
+    }
+
+    return path.split('.').reduce((o, p) => o && o[p], object) ?? defaultValue
+}

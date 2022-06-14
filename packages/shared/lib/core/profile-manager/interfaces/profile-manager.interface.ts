@@ -26,6 +26,7 @@ export interface IProfileManager {
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>
     setStrongholdPassword(password: string): Promise<void>
+    setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
     startBackgroundSync(options?: AccountSyncOptions, interval?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>

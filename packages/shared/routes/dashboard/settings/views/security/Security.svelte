@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import { HR } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { exportStronghold } from '@contexts/settings'
+    import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettings } from '@core/router'
-    import { getDefaultStrongholdName } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { HR } from 'shared/components'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
-    import { isSoftwareProfile, updateActiveProfile } from '@core/profile'
+    import featureFlags from 'shared/featureFlags.config'
 
     const settings: {
         component: unknown
@@ -18,37 +17,17 @@
         { component: ChangePincode, childRoute: SecuritySettings.ChangePincode },
         { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
     ]
+    const visibleSettings = settings.filter(
+        (setting) => featureFlags?.settings?.security?.[setting.childRoute]?.enabled
+    )
 
     const props = {
-        [SecuritySettings.ExportStronghold]: { exportStronghold },
         [SecuritySettings.ChangePassword]: { exportStronghold },
-    }
-
-    function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
-        Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
-            .then((result) => {
-                if (result) {
-                    api.backup(result, password, {
-                        onSuccess() {
-                            updateActiveProfile({ lastStrongholdBackupTime: new Date() })
-                            callback(false)
-                        },
-                        onError(err) {
-                            callback(false, err.error)
-                        },
-                    })
-                } else {
-                    callback(true)
-                }
-            })
-            .catch((err) => {
-                callback(false, err.error)
-            })
     }
 </script>
 
 <div>
-    {#each settings as { component, childRoute, requireSoftware }, index}
+    {#each visibleSettings as { component, childRoute, requireSoftware }, index}
         {#if !requireSoftware || (requireSoftware && $isSoftwareProfile)}
             <section id={childRoute} class="w-full sm:w-3/4">
                 <svelte:component this={component} {...props[childRoute]} />

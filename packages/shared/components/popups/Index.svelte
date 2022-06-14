@@ -7,7 +7,7 @@
     import { fade } from 'svelte/transition'
     import AddNodePopup from './AddNodePopup.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
-    import Backup from './Backup.svelte'
+    import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
@@ -26,7 +26,7 @@
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
-    import NodeInfo from './NodeInfo.svelte'
+    import NodeInfoPopup from './NodeInfoPopup.svelte'
     import Password from './Password.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -36,13 +36,11 @@
     import StakingManager from './StakingManager.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
-    import SwitchNetwork from './SwitchNetwork.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
-    import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
@@ -98,7 +96,7 @@
         qr: QR,
         password: Password,
         version: Version,
-        backup: Backup,
+        backupStronghold: BackupStrongholdPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,
@@ -110,11 +108,10 @@
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
-        nodeInfo: NodeInfo,
+        nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
-        switchNetwork: SwitchNetwork,
         busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
@@ -133,7 +130,6 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
-        singleAccountGuide: SingleAccountGuide,
         receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
         sendConfirmation: SendConfirmationPopup,

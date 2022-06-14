@@ -7,7 +7,14 @@ import { destroyProfileManager } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { resetDashboardState } from '../unknown'
 import { clearPollNetworkInterval } from '@core/network'
-import { resetActiveProfile, activeProfile, isLedgerProfile, isSoftwareProfile, activeAccounts } from '@core/profile'
+import {
+    resetActiveProfile,
+    activeProfile,
+    isLedgerProfile,
+    isSoftwareProfile,
+    activeAccounts,
+    lockStronghold,
+} from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
 
 /**
@@ -18,9 +25,8 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
-        if (_lockStronghold && get(isSoftwareProfile) && !get(isStrongholdLocked)) {
-            // TODO: Lock stronghold on using profile manager
-            isStrongholdLocked.set(true)
+        if (_lockStronghold && get(isSoftwareProfile)) {
+            lockStronghold()
         } else if (get(isLedgerProfile)) {
             stopPollingLedgerStatus()
         }

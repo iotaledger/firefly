@@ -36,9 +36,13 @@
             label: 'views.settings.networkConfiguration.nodeConfiguration.title',
             value: locale(
                 `views.settings.networkConfiguration.nodeConfiguration.${
-                    $activeProfile?.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+                    $activeProfile?.settings.clientOptions.automaticNodeSelection ? 'automatic' : 'manual'
                 }`
             ),
+        })
+        appVars.push({
+            label: 'general.nodeList',
+            value: $activeProfile?.settings.clientOptions.nodes.map((node) => node?.url).toString(),
         })
     }
 

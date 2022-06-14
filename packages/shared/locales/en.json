@@ -321,7 +321,7 @@
         },
         "settings": {
             "settings": "Settings",
-            "generalSettings": {
+            "general": {
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
@@ -329,7 +329,7 @@
                 "title": "Security",
                 "description": "Change your password and adjust security-related settings"
             },
-            "advancedSettings": {
+            "advanced": {
                 "title": "Advanced",
                 "description": "Tools and manual settings for technical users"
             },
@@ -625,14 +625,9 @@
             "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update.",
             "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
-        "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your wallets",
-            "saving": "Saving..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "Delete {name}?",
@@ -664,7 +659,7 @@
             "titleRemove": "Remove a node",
             "titleRemoveAll": "Remove all nodes",
             "titleDetails": "Node details",
-            "titleInfo": "Node info",
+            "titleInfo": "Node information",
             "addingNode": "Adding node",
             "updatingNode": "Updating node",
             "loadingNodeInfo": "Loading node info",
@@ -676,15 +671,42 @@
             "removeConfirmation": "Are you sure you want to remove this node?",
             "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
-                "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
-                "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features",
+                    "plugins": "Plugins"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
@@ -945,6 +967,7 @@
         "redo": "Redo",
         "cut": "Cut",
         "copy": "Copy",
+        "copyAllInformation": "Copy all information",
         "paste": "Paste",
         "selectAll": "Select All",
         "addAccount": "Add Wallet",
@@ -990,7 +1013,8 @@
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
-        "addPublicNote": "Add public note"
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
         "recipient": "Recipient",
@@ -1149,7 +1173,8 @@
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
-        "optionalPublicNote": "Optional public note"
+        "optionalPublicNote": "Optional public note",
+        "nodeList": "Node list"
     },
     "dates": {
         "today": "Today",

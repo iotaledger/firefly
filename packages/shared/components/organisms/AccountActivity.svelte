@@ -11,6 +11,7 @@
     import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
+    import featureFlags from 'shared/featureFlags.config'
     import { openPopup } from 'shared/lib/popup'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
@@ -64,11 +65,15 @@
         <div class="relative flex flex-1 flex-row justify-between">
             <div class="flex flex-row">
                 <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
-                <SyncSelectedAccountIconButton />
+                {#if featureFlags?.wallet?.activityHistory?.sync?.enabled}
+                    <SyncSelectedAccountIconButton />
+                {/if}
             </div>
-            <TogglableButton icon="search" bind:active={searchActive} />
+            {#if featureFlags?.wallet?.activityHistory?.search?.enabled}
+                <TogglableButton icon="search" bind:active={searchActive} />
+            {/if}
         </div>
-        {#if searchActive}
+        {#if featureFlags?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <TextInput
                     bind:inputElement
@@ -79,23 +84,6 @@
                     fontWeight={FontWeightText.medium}
                     color="gray-500"
                 />
-                <!-- TODO: Wait for screen design for these -->
-                <!-- <ul class="flex flex-row justify-between space-x-8">
-                    {#each filters as filter, i}
-                        <li on:click={() => (activeFilterIndex = i)}>
-                            <Text
-                                type="p"
-                                overrideColor
-                                classes="cursor-pointer
-                            {activeFilterIndex === i
-                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
-                            >
-                                {localize(`general.${filter}`)}
-                            </Text>
-                        </li>
-                    {/each}
-                </ul> -->
             </div>
         {/if}
     </div>

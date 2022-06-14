@@ -13,13 +13,14 @@
     const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
     const addressPrefix = network?.type === NetworkType.PrivateNet ? $nodeInfo?.protocol?.bech32HRP : network?.bech32Hrp
 
-    let inputElement
+    let inputElement: HTMLInputElement
     let modal: Modal
 
     let selectedAccount: IAccountState
     let value: string
     let error: string
     let hasFocus: boolean
+    let keepRecipientAccountSelectorOpen: boolean
 
     $: recipient = {
         type: selectedAccount ? 'account' : 'address',
@@ -29,10 +30,11 @@
     $: hasFocus && (error = '')
     $: hasFocus && modal?.open()
     $: value && modal?.open()
+    $: keepRecipientAccountSelectorOpen = hasFocus
 
     $: {
         if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.getAlias()
+            inputElement.value = selectedAccount?.name
         }
     }
     $: {
@@ -44,7 +46,9 @@
     export function validate(): Promise<void> {
         if (selectedAccount) {
             return Promise.resolve()
-        } else if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
+        }
+
+        if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
                     length: ADDRESS_LENGTH + addressPrefix.length,
@@ -56,13 +60,12 @@
 
         if (error) {
             return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
+        return Promise.resolve()
     }
 </script>
 
-<recipient-input class="w-full">
+<recipient-input class="w-full relative">
     <InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
         <TextInput
             bind:inputElement
@@ -77,5 +80,10 @@
             {...$$restProps}
         />
     </InputContainer>
-    <RecipientAccountSelector bind:modal bind:selected={selectedAccount} searchValue={value} />
+    <RecipientAccountSelector
+        bind:modal
+        bind:selected={selectedAccount}
+        searchValue={value}
+        disableOnClickOutside={keepRecipientAccountSelectorOpen}
+    />
 </recipient-input>

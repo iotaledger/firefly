@@ -5,19 +5,20 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
-        AdvancedSettings,
         AdvancedSettingsNoProfile,
         GeneralSettings,
         GeneralSettingsNoProfile,
         HelpAndInfo,
-        SecuritySettings,
         SettingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
         settingsRoute,
+        SecuritySettings,
+        AdvancedSettings,
     } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
+    import featureFlags from 'shared/featureFlags.config'
 
     const { loggedIn } = $activeProfile
 
@@ -41,18 +42,31 @@
 
     if ($loggedIn) {
         settings = {
-            generalSettings: GeneralSettings,
+            general: GeneralSettings,
             security: securitySettings,
-            advancedSettings: advancedSettings,
+            advanced: advancedSettings,
             helpAndInfo: HelpAndInfo,
         }
     } else {
         settings = {
-            generalSettings: GeneralSettingsNoProfile,
-            advancedSettings: AdvancedSettingsNoProfile,
+            general: GeneralSettingsNoProfile,
+            advanced: AdvancedSettingsNoProfile,
             helpAndInfo: HelpAndInfo,
         }
     }
+
+    $: Object.keys(featureFlags?.settings)?.forEach((group) => {
+        if (featureFlags?.settings?.[group]?.enabled) {
+            Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
+                if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
+                    const settingName = setting[0].toUpperCase() + setting.slice(1)
+                    delete settings?.[group]?.[settingName]
+                }
+            })
+        } else {
+            delete settings?.[group]
+        }
+    })
 
     function scrollIntoView(id: string, options = null) {
         if (id) {
@@ -97,11 +111,11 @@
                     {#if !$mobile}
                         <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
                     {/if}
-                    {#if $settingsRoute === SettingsRoute.GeneralSettings}
+                    {#if $settingsRoute === SettingsRoute.General}
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
-                    {:else if $settingsRoute === SettingsRoute.AdvancedSettings}
+                    {:else if $settingsRoute === SettingsRoute.Advanced}
                         <Advanced />
                     {:else if $settingsRoute === SettingsRoute.HelpAndInfo}
                         <Help />

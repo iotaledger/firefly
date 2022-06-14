@@ -48,7 +48,7 @@
         anchorBox.height = anchor?.offsetHeight ?? 0
     }
 
-    function refreshPosition(): void {
+    export function refreshPosition(): void {
         if (!tooltip) {
             return
         }

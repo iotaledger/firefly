@@ -47,16 +47,16 @@ export enum DashboardRoute {
 
 export enum SettingsRoute {
     Init = 'init',
-    GeneralSettings = 'generalSettings',
+    General = 'general',
     Security = 'security',
-    AdvancedSettings = 'advancedSettings',
+    Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
 }
 
 export enum SettingsRouteNoProfile {
     Init = 'init',
-    GeneralSettings = 'generalSettings',
-    AdvancedSettings = 'advancedSettings',
+    General = 'general',
+    Advanced = 'advanced',
     HelpAndInfo = 'helpAndInfo',
 }
 
@@ -102,7 +102,7 @@ export enum AdvancedSettingsNoProfile {
 
 export enum HelpAndInfo {
     Documentation = 'documentation',
-    FAQ = 'faq',
+    Faq = 'faq',
     Discord = 'discord',
     ReportAnIssue = 'reportAnIssue',
 }

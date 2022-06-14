@@ -65,7 +65,7 @@
     <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row">
         <div
             data-label="leftpane"
-            class="h-full flex justify-center p-10 bg-white dark:bg-gray-800"
+            class="h-full flex justify-center p-12 pt-8 bg-white dark:bg-gray-800"
             style="width: 38%;"
         >
             <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">

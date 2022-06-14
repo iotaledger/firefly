@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { AccountSwitcherModal, Icon, Modal } from 'shared/components'
     import { selectedAccount } from '@core/account'
-    import { updateActiveProfile } from '@core/profile'
     import { AccountLabel } from 'shared/components/atoms/'
 
     let modal: Modal
@@ -9,7 +8,6 @@
 
     function onClick(): void {
         modal?.toggle()
-        updateActiveProfile({ hasFinishedSingleAccountGuide: true })
     }
 </script>
 

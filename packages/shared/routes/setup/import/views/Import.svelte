@@ -49,7 +49,7 @@
                 <Text type="p" secondary smaller>{localize('views.import.importMnemonicDescription')}</Text>
             {/if}
         </Button>
-        <Button icon="doc" classes="w-full" secondary onClick={() => handleContinueClick(ProfileImportType.File)}>
+        <Button icon="file" classes="w-full" secondary onClick={() => handleContinueClick(ProfileImportType.File)}>
             {localize('views.import.importFile')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.import.importFileDescription')}</Text>
