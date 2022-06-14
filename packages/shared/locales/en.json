@@ -1,7 +1,10 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
+            "title": {
+                "iota": "Send, Receive & Manage your IOTA tokens",
+                "shimmer": "Send, Receive & Manage your Shimmer tokens"
+            },
             "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
