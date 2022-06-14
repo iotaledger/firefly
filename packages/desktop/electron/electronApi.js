@@ -392,6 +392,10 @@ const ElectronApi = {
      */
     hookErrorLogger,
     ledger,
+    /**
+     * Mock up method to open the native ActionSheet for mobile
+     */
+    showActionSheet: (title, options) => new Promise((resolve, reject) => resolve()),
 }
 
 module.exports = ElectronApi
