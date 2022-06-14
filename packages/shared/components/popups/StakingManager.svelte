@@ -281,7 +281,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.getBalance()}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balances}
                             •
                             <Text
                                 type="p"

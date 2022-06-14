@@ -1,6 +1,8 @@
+import { ClientOptions } from '@iota/wallet'
+
 import { INode } from './node.interface'
 
-export interface IClientOptions {
+export interface IClientOptions extends ClientOptions {
     node?: INode
     nodes?: INode[]
     network?: string

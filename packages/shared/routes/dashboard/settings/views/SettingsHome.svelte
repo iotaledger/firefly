@@ -57,9 +57,9 @@
                 group="general"
                 settings={GeneralSettings}
                 activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
-                title={localize('views.settings.generalSettings.title')}
+                title={localize('views.settings.general.title')}
                 description=""
-                onClick={(setting) => onSettingClick(SettingsRoute.GeneralSettings, setting)}
+                onClick={(setting) => onSettingClick(SettingsRoute.General, setting)}
             />
         {/if}
         {#if featureFlags?.settings?.security?.enabled}
@@ -83,9 +83,9 @@
                 group="advanced"
                 settings={advancedSettings}
                 activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
-                title={localize('views.settings.advancedSettings.title')}
+                title={localize('views.settings.advanced.title')}
                 description=""
-                onClick={(setting) => onSettingClick(SettingsRoute.AdvancedSettings, setting)}
+                onClick={(setting) => onSettingClick(SettingsRoute.Advanced, setting)}
             />
         {/if}
         {#if featureFlags?.settings?.helpAndInfo?.enabled}
