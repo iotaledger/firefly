@@ -5,16 +5,16 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
-        AdvancedSettings,
         AdvancedSettingsNoProfile,
         GeneralSettings,
         GeneralSettingsNoProfile,
         HelpAndInfo,
-        SecuritySettings,
         SettingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
         settingsRoute,
+        SecuritySettings,
+        AdvancedSettings,
     } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
@@ -111,11 +111,11 @@
                     {#if !$mobile}
                         <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
                     {/if}
-                    {#if $settingsRoute === SettingsRoute.GeneralSettings}
+                    {#if $settingsRoute === SettingsRoute.General}
                         <General />
                     {:else if $settingsRoute === SettingsRoute.Security}
                         <Security />
-                    {:else if $settingsRoute === SettingsRoute.AdvancedSettings}
+                    {:else if $settingsRoute === SettingsRoute.Advanced}
                         <Advanced />
                     {:else if $settingsRoute === SettingsRoute.HelpAndInfo}
                         <Help />
