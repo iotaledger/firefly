@@ -1,3 +1,4 @@
+import { IAccountState } from '@core/account'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Recipient, Sender } from '../types'
@@ -22,7 +23,7 @@ export interface IActivity {
     isClaimed?: boolean
     publicNote?: string
 
-    setFromTransaction(transactionId: string, transaction: Transaction, accountAddress: string): void
+    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

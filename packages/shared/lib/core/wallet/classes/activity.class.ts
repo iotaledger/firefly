@@ -23,6 +23,7 @@ import {
 } from '../constants'
 import { IMetadataFeature, ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
 import { IAccountState } from '@core/account'
+import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -90,19 +91,19 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromTransaction(transactionId: string, transaction: Transaction, accountAddress: string): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, accountAddress)
+    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
+        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isRecipientInternal(recipient))
-        this.id = ''
-        this.isHidden = false // TODO
+        this.id = transactionId
+        this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
 
         this.transactionId = transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
 
-        this.sender = getSenderFromTransaction(transaction, accountAddress)
+        this.sender = getSenderFromTransaction(transaction, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isInternal = isRecipientInternal(recipient)
@@ -114,31 +115,23 @@ export class Activity implements IActivity {
         this.tag = getTagFromOutput(output)
 
         this.storageDeposit = 0
-        this.expirationDate = undefined // TODO
+        this.expirationDate = getExpirationDateFromOutput(output)
         this.isAsync = false
         this.isClaimed = false
 
         return this
     }
 
-    setFromOutputData({
-        outputData,
-        accountAddress,
-        hidden,
-    }: {
-        outputData: OutputData
-        accountAddress: string
-        hidden: boolean
-    }): Activity {
+    setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
         const recipient = getRecipientFromOutput(outputData.output)
-        const isIncoming = recipientAddress === accountAddress
+        const isIncoming = recipientAddress === account.depositAddress
         // const isInternal = !!findAccountWithAddress(address)
         const isInternal = isRecipientInternal(recipient)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
-        this.isHidden = hidden // TODO
+        this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
@@ -153,6 +146,8 @@ export class Activity implements IActivity {
         this.outputId = outputData.outputId
         this.rawAmount = getAmountFromOutput(outputData.output)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+
+        this.expirationDate = getExpirationDateFromOutput(outputData.output)
 
         setAsyncDataForOutput(this, outputData.output, isIncoming)
         return this
@@ -218,7 +213,6 @@ function getAmountFromOutput(output: OutputTypes): number {
 }
 
 function getMetadataFromOutput(output: OutputTypes): string {
-    // TODO get the parsed data
     if (output.type !== OUTPUT_TYPE_TREASURY) {
         const metadataFeature: IMetadataFeature = <IMetadataFeature>(
             output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA)
@@ -229,7 +223,6 @@ function getMetadataFromOutput(output: OutputTypes): string {
 }
 
 function getTagFromOutput(output: OutputTypes): string {
-    // TODO get the parsed data
     if (output.type !== OUTPUT_TYPE_TREASURY) {
         const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
         return tagFeature?.tag
@@ -293,6 +286,19 @@ function getSenderFromOutput(output: OutputTypes): Sender {
                     type: 'address',
                     address: senderAddress,
                 }
+            }
+        }
+    }
+    return undefined
+}
+
+function getExpirationDateFromOutput(output: OutputTypes): Date {
+    if (output.type !== OUTPUT_TYPE_TREASURY) {
+        for (const unlockCondition of output.unlockConditions) {
+            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
+                return unlockCondition?.unixTime
+                    ? new Date(unlockCondition?.unixTime * MILLISECONDS_PER_SECOND)
+                    : undefined
             }
         }
     }
