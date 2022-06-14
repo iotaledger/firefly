@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { appRouter } from '@core/router'
-    import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { AppRoute, appRouter } from '@core/router'
+    import { Animation, Button, Checkbox, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
@@ -8,10 +8,21 @@
 
     export let locale: Locale
 
+    let checked = false
+    let sendCrashReports = false
+
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     function handleContinueClick(): void {
-        $appRouter.next()
+        if ($mobile) {
+            $appRouter.goTo(AppRoute.Setup)
+        } else {
+            $appRouter.next()
+        }
+    }
+
+    function handleLegalClick(): void {
+        $appRouter.goTo(AppRoute.Legal)
     }
 
     function handleLanguage(item: { value: string }): void {
@@ -21,16 +32,25 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class={$mobile && 'px-4'}>
         <div class="flex flex-col {$mobile && 'items-center text-center px-10'} space-y-4 mb-8">
             {#if !$mobile}
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             {/if}
             <Text type={$mobile ? 'h3' : 'h1'}>{locale('views.onboarding1.title')}</Text>
-            <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
+            {#if !$mobile}
+                <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
+            {/if}
         </div>
         {#if $mobile}
-            <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
+            <div class="flex flex-row items-center space-y-4 mb-1">
+                <Checkbox bind:checked />
+                <button on:click={handleLegalClick} class="text-left px-3.5">
+                    <Text highlighted clases="text-left">{locale('views.legal.checkbox')}</Text>
+                </button>
+            </div>
+            <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} classes="mb-8" />
+            <!-- <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
                 {#each languageList as language}
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
@@ -40,7 +60,8 @@
                         <Text type="p" smaller>{language?.label}</Text>
                     </button>
                 {/each}
-            </div>
+            </div> 
+        TODO use window.navigator.language to autodetect locale-->
         {:else}
             <Dropdown
                 sortItems={true}
@@ -50,11 +71,16 @@
             />
         {/if}
     </div>
-    <div slot="leftpane__action">
-        <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
+    <div slot="leftpane__action" class={$mobile && 'px-4'}>
+        <Button onClick={() => handleContinueClick()} classes="w-full" disabled={!checked}
+            >{locale('actions.continue')}</Button
+        >
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-blue dark:bg-gray-900'}"
+    >
+        <Animation classes="setup-anim-aspect-ratio {$mobile && '-mr-52'}" scaled animation="welcome-desktop" />
     </div>
 </OnboardingLayout>
 
