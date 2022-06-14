@@ -1,6 +1,5 @@
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
@@ -13,6 +12,7 @@ import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
 import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
+import { ADDRESS_TYPE_ED25519, OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_EXPIRATION } from '../constants'
 
 export class Activity implements IActivity {
     id: string
@@ -72,22 +72,26 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutput(
-        outputId: string,
-        output: OutputData,
-        accountAddress: string,
-        hidden: boolean,
+    setFromOutput({
+        output,
+        accountAddress,
+        hidden,
+        claimed,
+    }: {
+        output: OutputData
+        accountAddress: string
+        hidden: boolean
         claimed: boolean
-    ): Activity {
+    }): Activity {
         const address =
-            output?.address?.type === 0
+            output?.address?.type === ADDRESS_TYPE_ED25519
                 ? Bech32Helper.toBech32(0, Converter.hexToBytes(output.address.pubKeyHash.substring(2)), 'rms')
                 : ''
         const isIncoming = address === accountAddress
         // const isInternal = !!findAccountWithAddress(address)
         const isInternal = false
-        this.id = outputId
-        this.outputId = outputId
+        this.id = output.outputId
+        this.outputId = output.outputId
         this.time = new Date(output.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
         this.type = getActivityType(isIncoming, isInternal)
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
@@ -96,12 +100,13 @@ export class Activity implements IActivity {
         this.rawAmount = Number(output.amount)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        if (output.output.type !== 2) {
+        if (output.output.type !== OUTPUT_TYPE_TREASURY) {
             for (const unlockCondition of output.output.unlockConditions) {
                 if (isAsyncUnlockCondition(unlockCondition)) {
                     this.isAsync = true
                     this.isHidden = hidden
-                    this.expirationDate = unlockCondition.type === 3 ? new Date(unlockCondition.unixTime) : null
+                    this.expirationDate =
+                        unlockCondition.type === UNLOCK_CONDITION_EXPIRATION ? new Date(unlockCondition.unixTime) : null
                     this.isClaimed = claimed
                     break
                 }
