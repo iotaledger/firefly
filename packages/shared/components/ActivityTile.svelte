@@ -15,6 +15,8 @@
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
     import { onMount } from 'svelte'
+    import { activeProfile } from '@core/profile'
+    import { NETWORK } from '@core/network'
 
     export let activity: Activity
     export let onClick: () => void
@@ -43,7 +45,11 @@
         if (activity?.subject?.type === 'account') {
             subject = truncateString(activity?.subject?.account?.name, 13, 0)
         } else if (activity?.subject?.type === 'address') {
-            subject = truncateString(activity?.subject?.address, 6, 8)
+            subject = truncateString(
+                activity?.subject?.address,
+                NETWORK?.[$activeProfile.networkProtocol]?.[$activeProfile.networkType]?.bech32Hrp.length,
+                6
+            )
         } else {
             subject = localize('general.unknownAddress')
         }
@@ -99,33 +105,40 @@
             <div class="w-8 flex flex-row justify-center items-center">
                 <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
             </div>
-            <div class="flex flex-col ml-3.5">
-                <Text
-                    fontWeight={FontWeightText.semibold}
-                    lineHeight="140"
-                    classes="overflow-hidden overflow-ellipsis multiwrap-line2"
-                >
-                    {localize(title)}
-                </Text>
-                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
-                    {localize(
-                        activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                        { values: { account: subject } }
-                    )}
-                </Text>
-            </div>
-            <div class="flex-1 items-end flex flex-col ml-4">
-                <Text
-                    fontWeight={FontWeightText.semibold}
-                    lineHeight="140"
-                    color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
-                    classes="whitespace-nowrap"
-                >
-                    {activity.getFormattedAmount(true)}
-                </Text>
-                <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500" classes="whitespace-nowrap">
-                    {activity.getFiatAmount()}
-                </Text>
+            <div class="flex flex-col w-full ml-3.5">
+                <div class="flex flex-row justify-between space-x-1">
+                    <Text
+                        fontWeight={FontWeightText.semibold}
+                        lineHeight="140"
+                        classes="overflow-hidden overflow-ellipsis multiwrap-line2"
+                    >
+                        {localize(title)}
+                    </Text>
+                    <Text
+                        fontWeight={FontWeightText.semibold}
+                        lineHeight="140"
+                        color={activity.direction === ActivityDirection.In ? 'blue-700' : ''}
+                        classes="whitespace-nowrap"
+                    >
+                        {activity.getFormattedAmount(true)}
+                    </Text>
+                </div>
+                <div class="flex flex-row justify-between">
+                    <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
+                        {localize(
+                            activity.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
+                            { values: { account: subject } }
+                        )}
+                    </Text>
+                    <Text
+                        fontWeight={FontWeightText.medium}
+                        lineHeight="140"
+                        color="gray-500"
+                        classes="whitespace-nowrap"
+                    >
+                        {activity.getFiatAmount()}
+                    </Text>
+                </div>
             </div>
         </div>
     </button>
