@@ -20,6 +20,7 @@
     <div
         on:mouseenter={() => _showTooltip(true)}
         on:mouseleave={() => _showTooltip(false)}
+        on:mousewheel={() => _showTooltip(false)}
         bind:this={tooltipAnchor}
         class="absolute -right-1 -bottom-1"
     >
