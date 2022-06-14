@@ -10,7 +10,7 @@ import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } 
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
-import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
+import { formatTokenAmountBestMatch, getRecipientAddressFromOutput, isAsyncUnlockCondition } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
     ADDRESS_TYPE_ED25519,
@@ -87,8 +87,9 @@ export class Activity implements IActivity {
             accountAddress,
             transaction.incoming
         )
+        const recipient = getRecipientFromOutput(output)
 
-        this.type = ActivityType.Send // TODO
+        this.type = getActivityType(transaction.incoming, false)
         this.id = ''
         this.isHidden = false // TODO
 
@@ -96,8 +97,8 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
 
-        this.recipient = { type: 'address', address: 'Address unknown' } // TODO
-        this.isInternal = false
+        this.recipient = recipient
+        this.isInternal = isRecipientInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.rawAmount = getAmountFromOutput(output)
@@ -122,13 +123,11 @@ export class Activity implements IActivity {
         accountAddress: string
         hidden: boolean
     }): Activity {
-        const address =
-            outputData?.address?.type === ADDRESS_TYPE_ED25519
-                ? Bech32Helper.toBech32(0, Converter.hexToBytes(outputData.address.pubKeyHash.substring(2)), 'rms')
-                : ''
-        const isIncoming = address === accountAddress
+        const recipientAddress = getRecipientAddressFromOutput(outputData.output)
+        const recipient = getRecipientFromOutput(outputData.output)
+        const isIncoming = recipientAddress === accountAddress
         // const isInternal = !!findAccountWithAddress(address)
-        const isInternal = false
+        const isInternal = isRecipientInternal(recipient)
 
         this.type = getActivityType(isIncoming, isInternal)
         this.id = outputData.outputId
@@ -138,9 +137,7 @@ export class Activity implements IActivity {
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked)
 
-        if (!isIncoming) {
-            this.recipient = { type: 'address', address }
-        }
+        this.recipient = recipient
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -290,6 +287,7 @@ function getAmountFromOutput(output: OutputTypes): number {
 }
 
 function getMetadataFromOutput(output: OutputTypes): string {
+    // TODO get the parsed data
     if (output.type !== OUTPUT_TYPE_TREASURY) {
         const metadataFeature: IMetadataFeature = <IMetadataFeature>(
             output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA)
@@ -300,9 +298,24 @@ function getMetadataFromOutput(output: OutputTypes): string {
 }
 
 function getTagFromOutput(output: OutputTypes): string {
+    // TODO get the parsed data
     if (output.type !== OUTPUT_TYPE_TREASURY) {
         const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
         return tagFeature?.tag
     }
     return undefined
+}
+
+function getRecipientFromOutput(output: OutputTypes): Recipient {
+    const recipientAddress = getRecipientAddressFromOutput(output)
+    const recipientAccount = findAccountWithAddress(recipientAddress)
+    if (recipientAccount) {
+        return { type: 'account', account: recipientAccount }
+    } else {
+        return { type: 'address', address: recipientAddress }
+    }
+}
+
+function isRecipientInternal(recipient): boolean {
+    return recipient.type === 'account'
 }
