@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
-    import { ActionSheet, ActionSheetButtonStyle } from '@capacitor/action-sheet'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
@@ -22,6 +21,7 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRouter } from '@core/router'
@@ -456,34 +456,28 @@
     const selectInternal = async (evt: Event): Promise<void> => {
         const node = evt.target as HTMLElement
         const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccount.id)
-        const result = await ActionSheet.showActions({
+        const index = await Platform.showActionSheet({
             title: localize(`general.${SEND_TYPE.INTERNAL}`),
-            options: [
-                ...accountItems.map((item) => ({ title: item.alias })),
-                { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
-            ],
+            options: [...accountItems.map((item) => ({ title: item.alias })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
-        if (result.index == accountItems.length) {
+        if (index == accountItems.length) {
             node.blur()
             return
         }
 
-        to = accountItems[result.index]
+        to = accountItems[index]
 
         selectedSendType = SEND_TYPE.INTERNAL
     }
 
     const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
-        const result = await ActionSheet.showActions({
-            title: localize('general.units'),
-            options: [
-                ...units.map((unit) => ({ title: unit })),
-                { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
-            ],
+        const index = await Platform.showActionSheet({
+            title: localize('general.unit'),
+            options: [...units.map((unit) => ({ title: unit as string })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
-        callback(units[result.index])
+        callback(units[index])
     }
 
     onMount((): void => {
