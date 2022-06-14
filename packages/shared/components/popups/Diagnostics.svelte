@@ -8,6 +8,7 @@
 
     export let locale: Locale
 
+    const { loggedIn } = $activeProfile ?? {}
     let contentApp = ''
     let contentSystem = ''
 
@@ -17,26 +18,26 @@
     const appVars = [
         {
             label: '',
-            value: locale('views.dashboard.security.version.title', {
+            value: locale('general.version', {
                 values: { version: $appVersionDetails.currentVersion },
             }),
         },
     ]
 
-    if ($activeProfile) {
+    if ($activeProfile && $loggedIn) {
         appVars.push({
             label: 'views.settings.language.title',
             value: $appSettings.language,
         })
         appVars.push({
             label: 'views.settings.currency.title',
-            value: $activeProfile?.settings.currency,
+            value: $activeProfile?.settings?.currency,
         })
         appVars.push({
             label: 'views.settings.networkConfiguration.nodeConfiguration.title',
             value: locale(
                 `views.settings.networkConfiguration.nodeConfiguration.${
-                    $activeProfile?.settings.networkConfig.automaticNodeSelection ? 'automatic' : 'manual'
+                    $activeProfile?.settings?.networkConfig?.automaticNodeSelection ? 'automatic' : 'manual'
                 }`
             ),
         })
