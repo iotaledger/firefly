@@ -7,7 +7,7 @@ import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
-import { Recipient } from '../types'
+import { Recipient, Sender } from '../types'
 import {
     formatTokenAmountBestMatch,
     getRecipientAddressFromOutput,
@@ -21,7 +21,8 @@ import {
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
-import type { IMetadataFeature, ITagFeature, OutputTypes } from '@iota/types'
+import { IMetadataFeature, ITagFeature, OutputTypes, send } from '@iota/types'
+import { IAccountState } from '@core/account'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -32,6 +33,7 @@ export class Activity implements IActivity {
     inclusionState: InclusionState
     time: Date
 
+    sender: Sender
     recipient: Recipient
     isInternal: boolean
     direction: ActivityDirection
@@ -47,7 +49,12 @@ export class Activity implements IActivity {
     isAsync: boolean
     isClaimed?: boolean
 
-    setNewTransaction(transactionId: string, outputOptions: OutputOptions, output: OutputTypes): Activity {
+    setNewTransaction(
+        senderAccount: IAccountState,
+        transactionId: string,
+        outputOptions: OutputOptions,
+        output: OutputTypes
+    ): Activity {
         const account = findAccountWithAddress(outputOptions.recipientAddress)
         const isInternal = !!account
 
@@ -59,6 +66,7 @@ export class Activity implements IActivity {
         this.inclusionState = InclusionState.Pending
         this.time = new Date()
 
+        this.sender = { type: 'account', account: senderAccount }
         this.recipient = isInternal
             ? { type: 'account', account: account }
             : { type: 'address', address: outputOptions.recipientAddress }
