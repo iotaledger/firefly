@@ -5,7 +5,7 @@ export const MOCK_ACCOUNT_BALANCE: AccountBalance = {
     available: '9000',
     aliases: [],
     foundries: [],
-    nativeTokens: {},
+    nativeTokens: [],
     nfts: [],
     potentiallyLockedOutputs: {},
     requiredStorageDeposit: '0',

@@ -10,6 +10,7 @@ export * from './getNodeInfo'
 export * from './isStrongholdUnlocked'
 export * from './restoreBackup'
 export * from './setStrongholdPassword'
+export * from './setStrongholdPasswordClearInterval'
 export * from './storeMnmonic'
 export * from './verifyMnemonic'
 

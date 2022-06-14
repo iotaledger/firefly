@@ -1,3 +1,4 @@
+import { OutputTypes } from '@iota/types'
 import {
     AccountBalance,
     AccountMeta,
@@ -16,6 +17,7 @@ import {
     Transaction,
     TransactionResult,
     TransactionOptions,
+    OutputOptions,
 } from '@iota/wallet/out/types'
 
 export interface IAccount {
@@ -40,6 +42,7 @@ export interface IAccount {
         transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transferOptions?: TransactionOptions
