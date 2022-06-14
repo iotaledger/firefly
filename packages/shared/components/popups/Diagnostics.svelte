@@ -20,14 +20,14 @@
             {
                 label: '',
                 value: localize('general.version', {
-                    values: { version: $appVersionDetails.currentVersion },
+                    values: { version: $appVersionDetails?.currentVersion },
                 }),
             },
         ]
         if ($activeProfile && $loggedIn) {
             appVars.push({
                 label: 'views.settings.language.title',
-                value: $appSettings.language,
+                value: $appSettings?.language,
             })
             appVars.push({
                 label: 'views.settings.currency.title',
