@@ -1,7 +1,6 @@
-import { ClientOptions } from '@iota/wallet'
-import { INetwork, INode } from '../interfaces'
+import { IClientOptions, INetwork, INode } from '../interfaces'
 
-export function buildClientOptions(network: INetwork, nodes: INode[]): ClientOptions {
+export function buildClientOptions(network: INetwork, nodes: INode[]): IClientOptions {
     return {
         nodes,
     }

@@ -1,4 +1,4 @@
-import { getOfficialNetworkConfig, NetworkProtocol, NetworkType } from '@core/network'
+import { IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import { ClientOptions } from '@iota/wallet'
 import { AvailableExchangeRates } from '@lib/typings/currency'
 import { HistoryDataProps } from '@lib/typings/market'
@@ -12,7 +12,7 @@ import { IPersistedProfile } from '../interfaces'
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
- * @param {ClientOptions} clientOptions
+ * @param {IClientOptions} clientOptions
  * @param {string} name
  * @returns {IPersistedProfile}
  */
@@ -20,7 +20,7 @@ export function buildNewProfile(
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
-    clientOptions: ClientOptions,
+    clientOptions: IClientOptions,
     name: string = ''
 ): IPersistedProfile {
     return {
@@ -33,8 +33,10 @@ export function buildNewProfile(
         isDeveloperProfile,
         settings: {
             currency: AvailableExchangeRates.USD,
-            networkConfig: getOfficialNetworkConfig(networkProtocol, networkType),
-            clientOptions,
+            clientOptions: {
+                ...clientOptions,
+                automaticNodeSelection: true,
+            },
             lockScreenTimeoutInMinutes: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
