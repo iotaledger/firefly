@@ -7,6 +7,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { appRouter } from '@core/router'
     import { NetworkProtocol } from '@core/network'
+    import featurFlags from 'shared/featureFlags.config'
 
     export let locale: Locale
 
@@ -37,9 +38,24 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <Button
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            classes="w-full"
+            secondary
+            hidden={$newProfile?.networkProtocol !== NetworkProtocol.Shimmer}
+            disabled={!featurFlags?.onboarding?.shimmer?.claimRewards?.enabled}
+            onClick={() => {}}
+        >
+            {locale('actions.claimShimmer')}
+            {#if !$mobile}
+                <Text type="p" secondary smaller>{locale('actions.claimShimmerDescription')}</Text>
+            {/if}
+        </Button>
+        <Button
             icon="plus"
-            iconHeight="15"
-            iconWidth="15"
+            iconHeight="11"
+            iconWidth="11"
             classes="w-full"
             secondary
             onClick={() => handleContinueClick(SetupType.New)}

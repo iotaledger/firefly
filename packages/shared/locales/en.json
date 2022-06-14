@@ -965,6 +965,8 @@
             "iota": "Create a fresh wallet running on Chrysalis",
             "shimmer": "Create a fresh wallet running on Shimmer"
         },
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Set up PIN code",
