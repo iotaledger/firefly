@@ -8,6 +8,8 @@ import { Error } from './error'
 import { EventMap } from './events'
 import { IBarcodeManager } from './barcodeManager'
 
+import { ActionSheetOptions } from '@lib/typings/actionSheet'
+
 export enum Platforms {
     MOBILE = 'mobile',
     DESKTOP = 'desktop',
@@ -59,4 +61,7 @@ export interface IPlatform {
 
     onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)
     removeListenersForEvent<K extends keyof EventMap>(eventName: K)
+
+    // Capacitor Interface
+    showActionSheet(options: ActionSheetOptions): Promise<number>
 }

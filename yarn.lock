@@ -1099,6 +1099,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor-community/privacy-screen/-/privacy-screen-2.1.1.tgz#501b939ec832d0f03d43d196ca4b33683d995f5f"
   integrity sha512-KhUyMNOSHPXKpDF4HBU4T8mfLnbq6owMCZHt6Q2SAHn2zT7Zsl9Nkv6paFrgUD+WUD+iHERqsFJNbpmWzkdBtg==
 
+"@capacitor/action-sheet@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/action-sheet/-/action-sheet-1.0.8.tgz#8b53954e4d045c71cc1f00d3fecb654203fdd387"
+  integrity sha512-mC3/LhVMgdeJesB8iN/Kjd0QUDjVj8KKEaPm1baqn3VAZWY4JssdMHVox3l4m6zEmGt4+YyD4g6fijq07RZdbQ==
+
 "@capacitor/android@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.1.tgz#d4accc41c843927853d27c7f638487bd52633486"
