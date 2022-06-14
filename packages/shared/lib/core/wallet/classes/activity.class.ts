@@ -94,9 +94,9 @@ export class Activity implements IActivity {
 
         this.transactionId = transactionId
         this.inclusionState = transaction.inclusionState
-        this.time = new Date(Number(transaction.timestamp) * MILLISECONDS_PER_SECOND)
+        this.time = new Date(Number(transaction.timestamp))
 
-        this.recipient = { type: 'address', address: 'Address unknown' }
+        this.recipient = { type: 'address', address: 'Address unknown' } // TODO
         this.isInternal = false
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -132,11 +132,11 @@ export class Activity implements IActivity {
 
         this.type = getActivityType(isIncoming, isInternal)
         this.id = outputData.outputId
-        this.isHidden = false // TODO
+        this.isHidden = hidden // TODO
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
-        this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
+        this.time = new Date(outputData.metadata.milestoneTimestampBooked)
 
         if (!isIncoming) {
             this.recipient = { type: 'address', address }
@@ -292,7 +292,7 @@ function getAmountFromOutput(output: OutputTypes): number {
 function getMetadataFromOutput(output: OutputTypes): string {
     if (output.type !== OUTPUT_TYPE_TREASURY) {
         const metadataFeature: IMetadataFeature = <IMetadataFeature>(
-            output.features.find((feature) => feature.type === FEATURE_TYPE_METADATA)
+            output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA)
         )
         return metadataFeature?.data
     }
@@ -301,7 +301,7 @@ function getMetadataFromOutput(output: OutputTypes): string {
 
 function getTagFromOutput(output: OutputTypes): string {
     if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const tagFeature = <ITagFeature>output.features.find((feature) => feature.type === FEATURE_TYPE_TAG)
+        const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
         return tagFeature?.tag
     }
     return undefined
