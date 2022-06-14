@@ -1,13 +1,12 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { localize } from '@core/i18n'
     import { ProfileImportType } from '@core/profile'
-    import { ImportRouter } from '@core/router'
+    import { importType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
-    const { importType } = getContext<ImportRouter>('importRouter')
 
     function handleContinueClick(): void {
         dispatch('next')

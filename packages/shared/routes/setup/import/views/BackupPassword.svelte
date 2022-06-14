@@ -4,23 +4,32 @@
     import { localize } from '@core/i18n'
     import { createEventDispatcher, getContext } from 'svelte'
     import { ImportRouter } from '@core/router'
+    import { importType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
 
-    const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
+    const { importFile } = getContext<ImportRouter>('importRouter')
 
     let password = ''
 
     const dispatch = createEventDispatcher()
 
-    function handleContinue(): void {
+    async function handleContinue(): Promise<void> {
         if (password) {
-            dispatch('next', { password })
+            try {
+                await restoreBackupFromFile(importFile, password)
+                dispatch('next')
+            } catch (err) {
+                console.error(err)
+                error = localize('error.password.incorrect')
+            }
         }
     }
 
     function handleBackClick(): void {
+        // We are deliberately using "isGettingMigrationData"
+        // We do not want to display the spinner if stronghold is being imported.
         if (!busy && !$isGettingMigrationData) {
             dispatch('previous')
         }
