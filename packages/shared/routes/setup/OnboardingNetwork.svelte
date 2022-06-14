@@ -31,9 +31,10 @@
         <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        {#each Object.keys(NetworkType) as networkType}
+        {#each Object.keys(NetworkType) as networkType, index}
             <Button
                 icon={networkIcon[NetworkType[networkType]]}
+                iconColor={index === 0 ? `${$newProfile?.networkProtocol}-highlight` : ''}
                 classes="w-full"
                 secondary
                 disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
