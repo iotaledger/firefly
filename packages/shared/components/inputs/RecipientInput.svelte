@@ -20,6 +20,7 @@
     let value: string
     let error: string
     let hasFocus: boolean
+    let keepRecipientAccountSelectorOpen: boolean
 
     $: recipient = {
         type: selectedAccount ? 'account' : 'address',
@@ -29,6 +30,7 @@
     $: hasFocus && (error = '')
     $: hasFocus && modal?.open()
     $: value && modal?.open()
+    $: keepRecipientAccountSelectorOpen = hasFocus
 
     $: {
         if (inputElement && selectedAccount) {
@@ -63,7 +65,7 @@
     }
 </script>
 
-<recipient-input class="w-full">
+<recipient-input class="w-full relative">
     <InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
         <TextInput
             bind:inputElement
@@ -78,5 +80,10 @@
             {...$$restProps}
         />
     </InputContainer>
-    <RecipientAccountSelector bind:modal bind:selected={selectedAccount} searchValue={value} />
+    <RecipientAccountSelector
+        bind:modal
+        bind:selected={selectedAccount}
+        searchValue={value}
+        disableOnClickOutside={keepRecipientAccountSelectorOpen}
+    />
 </recipient-input>
