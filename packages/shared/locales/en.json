@@ -321,7 +321,7 @@
         },
         "settings": {
             "settings": "Settings",
-            "generalSettings": {
+            "general": {
                 "title": "General",
                 "description": "Configure your app's appearance and other general settings"
             },
@@ -329,7 +329,7 @@
                 "title": "Security",
                 "description": "Change your password and adjust security-related settings"
             },
-            "advancedSettings": {
+            "advanced": {
                 "title": "Advanced",
                 "description": "Tools and manual settings for technical users"
             },

@@ -3,8 +3,8 @@
     import { NetworkProtocol } from '@core/network'
 
     export let networkProtocol: NetworkProtocol
-    export let height = 24
-    export let width = 24
+    export let height = 22
+    export let width = 22
 
     let backgroundColor
     let iconColor
@@ -25,6 +25,8 @@
     }
 </script>
 
-<div class="rounded-full border-3 border-solid border-white dark:border-gray-900 bg-{backgroundColor}">
+<div
+    class="p-0.5 flex items-center justify-center rounded-full ring-2 ring-white dark:ring-gray-900 bg-{backgroundColor}"
+>
     <Icon {height} {width} icon={networkProtocol} classes="text-{iconColor}" />
 </div>
