@@ -42,7 +42,6 @@
     import WalletFinderPopup from './WalletFinderPopup.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
-    import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
@@ -133,7 +132,6 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
-        singleAccountGuide: SingleAccountGuide,
         receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
         sendConfirmation: SendConfirmationPopup,
