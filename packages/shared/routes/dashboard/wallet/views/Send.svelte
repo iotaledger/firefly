@@ -476,7 +476,7 @@
 
     const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
         const result = await ActionSheet.showActions({
-            title: localize('general.units'),
+            title: localize('general.unit'),
             options: [
                 ...units.map((unit) => ({ title: unit })),
                 { title: 'Cancel', style: ActionSheetButtonStyle.Destructive },
