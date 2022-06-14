@@ -24,7 +24,6 @@
     let expirationDate: Date
     let storageDeposit = 0
 
-    let output
     let preparedOutput: OutputTypes
 
     $: internal = recipient.type === 'account'
