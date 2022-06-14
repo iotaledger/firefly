@@ -1,8 +1,6 @@
 import { BASE_TOKEN } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
-import { Bech32Helper } from '@lib/bech32Helper'
-import { Converter } from '@lib/converter'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { findAccountWithAddress } from '@lib/wallet'
 import { get } from 'svelte/store'
@@ -10,15 +8,16 @@ import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } 
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient } from '../types'
-import { formatTokenAmountBestMatch, getRecipientAddressFromOutput, isAsyncUnlockCondition } from '../utils'
+import {
+    formatTokenAmountBestMatch,
+    getRecipientAddressFromOutput,
+    getRecipientAddressFromUnlockCondition,
+} from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
-    ADDRESS_TYPE_ED25519,
     FEATURE_TYPE_METADATA,
     FEATURE_TYPE_TAG,
-    OUTPUT_TYPE_BASIC,
     OUTPUT_TYPE_TREASURY,
-    UNLOCK_CONDITION_ADDRESS,
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
@@ -145,33 +144,8 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        if (outputData.output.type !== OUTPUT_TYPE_TREASURY) {
-            for (const unlockCondition of outputData.output.unlockConditions) {
-                if (isAsyncUnlockCondition(unlockCondition)) {
-                    this.isAsync = true
-                    this.isClaimed = false // TODO
-                }
-                if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
-                    this.expirationDate = new Date(unlockCondition.unixTime * MILLISECONDS_PER_SECOND)
-                }
-                if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
-                    this.storageDeposit = Number(unlockCondition.amount)
-                    if (isIncoming) {
-                        this.recipient = {
-                            type: 'address',
-                            ...(unlockCondition.returnAddress.type === ADDRESS_TYPE_ED25519 && {
-                                address: Bech32Helper.toBech32(
-                                    0,
-                                    Converter.hexToBytes(unlockCondition.returnAddress.pubKeyHash.substring(2)),
-                                    'rms'
-                                ),
-                            }),
-                        }
-                    }
-                }
-                return this
-            }
-        }
+        setAsyncDataForOutput(this, outputData.output, isIncoming)
+        return this
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
@@ -207,42 +181,6 @@ export class Activity implements IActivity {
     }
 }
 
-// TODO: move this back once we know how to get the type
-// function getActivityType(payload) {
-//     if (getInternalFlag(payload)) {
-//         return ActivityType.Transfer
-//     } else if (getIncomingFlag(payload)) {
-//         return ActivityType.Receive
-//     } else {
-//         return ActivityType.Send
-//     }
-// }
-
-// TODO: idem as above
-// function getRecipient(payload: ITransactionPayload, incoming: boolean, internal: boolean): Recipient {
-//     const senderAddress = sendAddressFromTransactionPayload(payload)
-
-//     // There can only be one sender address
-//     const senderAccount = findAccountWithAddress(senderAddress)
-
-//     if (incoming) {
-//         return senderAccount
-//             ? { type: 'account', account: senderAccount }
-//             : { type: 'address', address: sendAddressFromTransactionPayload(payload) }
-//     } else {
-//         const receiverAddresses = receiverAddressesFromTransactionPayload(payload)
-
-//         // For an incoming transaction there might be multiple receiver addresses
-//         // especially if there was a remainder, so if any account addresses match
-//         // we need to find the account details for our address match
-//         const receiverAccount = internal ? findAccountWithAnyAddress(receiverAddresses, senderAccount) : null
-
-//         return receiverAccount
-//             ? { type: 'account', account: receiverAccount }
-//             : { type: 'address', address: receiverAddressesFromTransactionPayload(payload)[0] }
-//     }
-// }
-
 function getActivityType(incoming: boolean, internal: boolean): ActivityType {
     if (internal) {
         return ActivityType.Transfer
@@ -260,18 +198,7 @@ function getNonRemainderOutputFromTransaction(
 ): OutputTypes {
     const outputs = transaction.payload.essence.outputs
     const nonRemainerOutputs = outputs.filter((output) => {
-        let recipientAddress = ''
-        if (
-            output.type === OUTPUT_TYPE_BASIC &&
-            output.unlockConditions[0].type === UNLOCK_CONDITION_ADDRESS &&
-            output.unlockConditions[0].address.type === ADDRESS_TYPE_ED25519
-        ) {
-            recipientAddress = Bech32Helper.toBech32(
-                0,
-                Converter.hexToBytes(output.unlockConditions[0].address.pubKeyHash.substring(2)),
-                'rms'
-            )
-        }
+        const recipientAddress = getRecipientAddressFromOutput(output)
 
         if (isIncoming) {
             return accountAddress === recipientAddress
@@ -318,4 +245,28 @@ function getRecipientFromOutput(output: OutputTypes): Recipient {
 
 function isRecipientInternal(recipient): boolean {
     return recipient.type === 'account'
+}
+
+function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncoming: boolean): void {
+    if (output.type !== OUTPUT_TYPE_TREASURY) {
+        for (const unlockCondition of output.unlockConditions) {
+            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
+                activity.isAsync = true
+                activity.isClaimed = false // TODO
+                activity.expirationDate = new Date(unlockCondition.unixTime * MILLISECONDS_PER_SECOND)
+            }
+            if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
+                activity.isAsync = true
+                activity.isClaimed = false // TODO
+                activity.storageDeposit = Number(unlockCondition.amount)
+                if (isIncoming) {
+                    const recipientAddress = getRecipientAddressFromUnlockCondition(unlockCondition)
+                    activity.recipient = {
+                        type: 'address',
+                        ...(recipientAddress && { address: recipientAddress }),
+                    }
+                }
+            }
+        }
+    }
 }
