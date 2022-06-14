@@ -6,7 +6,7 @@
 -->
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, tick } from 'svelte'
     import { flip } from 'svelte/animate'
     import * as easing from 'svelte/easing'
     import { fly, fade } from 'svelte/transition'
@@ -20,6 +20,8 @@
     export let tabs = ['all', 'incoming', 'outgoing']
 
     let current = tabs[selected]
+    let isSearching = false
+    let searchInput: HTMLInputElement
 
     const filterBy = (item) => item?.payload?.data?.essence?.data?.incoming
 
@@ -29,12 +31,20 @@
             (current === 'incoming' && filterBy(item)) ||
             (current === 'outgoing' && !filterBy(item))
     )
+    $: if (isSearching) {
+        focusInput()
+    }
 
-    let isSearching = false
+    async function focusInput() {
+        const untilFinishAnimation = (ms: number) => new Promise((r) => setTimeout(r, ms))
+        await untilFinishAnimation(500)
+        await tick()
+        searchInput.focus()
+    }
 </script>
 
-<div class="flex flex-auto flex-col h-full space-y-4 p-6">
-    <nav class="grid justify-around gap-4 items-center mt-7 mx-6">
+<div class="flex flex-auto flex-col h-full space-y-4 py-2 px-4">
+    <nav class="grid justify-around gap-4 items-center mt-7">
         <ul class="relative flex items-center p-0" style="border-radius: 11px;">
             {#each tabs as tab, i}
                 <li id="tab{i + 1}" class:selected={current === tab} class="z-10 relative">
@@ -58,21 +68,22 @@
         <span
             id="search"
             on:click={() => (isSearching = !isSearching)}
-            class="col-start-2 row-start-1 z-10 pr-4 rounded-xl bg-gray-100 dark:bg-gray-900"
+            class="col-start-2 row-start-1 z-10 pr-4 rounded-xl"
         />
         <div
             role="searchbox"
             class="z-10 absolute right-0 h-10 mr-8 rounded-xl bg-gray-100 dark:bg-gray-900"
-            style="width: {!isSearching
-                ? '0'
-                : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1.15) {!isSearching ? '0.4s' : '0.1s'};"
+            style="width: {!isSearching ? '0' : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1) {!isSearching
+                ? '0.4s'
+                : '0.1s'};"
         >
             <input
                 type="search"
                 spellcheck="false"
                 autocomplete="false"
+                bind:this={searchInput}
                 on:input={(e) => dispatch('search', e.data ?? 'BACKSPACE')}
-                class="h-10 w-11/12 pl-10 text-blue-500 dark:text-white"
+                class="text-13 h-10 w-11/12 pl-10 text-blue-500 dark:text-white"
                 style="-webkit-appearance: none; appearance: none; background: rgba(0,0,0,0); display: {!isSearching
                     ? 'none'
                     : 'block'}"
@@ -83,7 +94,7 @@
             height={icon.height}
             viewBox="0 0 {icon.width} {icon.height}"
             class="icon col-start-2 row-start-1 z-10 text-blue-500 dark:text-white"
-            style="margin-left: {isSearching ? '-72vw' : '8px'}; transform: rotate({!isSearching ? 0 : 90}deg);"
+            style="margin-left: {isSearching ? '-73vw' : '8px'}; transform: rotate({!isSearching ? 0 : 90}deg);"
         >
             <path
                 d={icon.path[0].d}
@@ -103,7 +114,7 @@
         {/if}
         <button id="search" on:click={() => (isSearching = !isSearching)} class="col-start-2 row-start-1 z-10" />
     </nav>
-    <main class="flex flex-auto flex-col overflow-y-auto space-y-2 h-1 pr-2">
+    <main class="flex flex-auto flex-col overflow-y-auto space-y-2 h-1">
         {#if filtered.length > 0}
             {#each filtered as transaction (transaction.timestamp)}
                 <div
