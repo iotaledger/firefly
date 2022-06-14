@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 
+import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
 import { BarcodeManager } from './lib/barcodeManager'
@@ -12,6 +13,7 @@ import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
+import { ActionSheetOptions } from '@lib/typings/actionSheet'
 
 import * as WalletBindings from './walletPluginApi'
 
@@ -317,6 +319,7 @@ export const CapacitorApi: IPlatform = {
      */
     hookErrorLogger,
     ledger: undefined,
+
     /**
      * Opens the native OS Share dialog
      * @param {string} text Set some text to share
@@ -325,6 +328,16 @@ export const CapacitorApi: IPlatform = {
         await Share.share({
             text,
         })
+    },
+
+    /**
+     * Opens the native action sheet
+     * @param {ActionSheetOptions} options Action sheet items
+     * @returns {number} Index of the selected item
+     */
+    showActionSheet: async (options: ActionSheetOptions) => {
+        const result = await ActionSheet.showActions(options as ShowActionsOptions)
+        return result.index
     },
 }
 
