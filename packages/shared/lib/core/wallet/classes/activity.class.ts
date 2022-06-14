@@ -11,7 +11,7 @@ import { Recipient, Sender } from '../types'
 import {
     formatTokenAmountBestMatch,
     getRecipientAddressFromOutput,
-    getRecipientAddressFromUnlockCondition,
+    getSenderAddressFromUnlockCondition,
 } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
@@ -268,10 +268,10 @@ function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncomi
                 activity.isClaimed = false // TODO
                 activity.storageDeposit = Number(unlockCondition.amount)
                 if (isIncoming) {
-                    const recipientAddress = getRecipientAddressFromUnlockCondition(unlockCondition)
-                    activity.recipient = {
+                    const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
+                    activity.sender = {
                         type: 'address',
-                        ...(recipientAddress && { address: recipientAddress }),
+                        ...(senderAddress && { address: senderAddress }),
                     }
                 }
             }
