@@ -1,19 +1,23 @@
-import { INetworkConfig, INode } from '../interfaces'
+import { IClientOptions, INode } from '../interfaces'
 import { NetworkProtocol, NetworkType } from '../enums'
 import { ensureSinglePrimaryNode } from './ensureSinglePrimaryNode'
 import { getOfficialNodes } from './getOfficialNodes'
+import { activeProfile } from '@core/profile'
+import { get } from 'svelte/store'
 
 /**
  * Determine the appropriate node candidates from a given network configuration.
- * @method getNodeCandiates
- * @param {INetworkConfig} config
+ * @method getNodeCandidates
+ * @param {IClientOptions} clientOptions
  * @returns {INode[]}
  */
-export function getNodeCandidates(config: INetworkConfig): INode[] {
-    if (!config) return []
+export function getNodeCandidates(clientOptions: IClientOptions): INode[] {
+    if (!clientOptions) return []
 
-    const useAutomaticSelection = config.nodes.length === 0 || config.automaticNodeSelection
-    const officialNodes = getOfficialNodes(config.network.protocol, config.network.type).map((n, idx) => ({
+    const { networkProtocol, networkType } = get(activeProfile)
+
+    const useAutomaticSelection = clientOptions.nodes.length === 0 || clientOptions.automaticNodeSelection
+    const officialNodes = getOfficialNodes(networkProtocol, networkType).map((n) => ({
         ...n,
         isPrimary: false,
     }))
@@ -22,9 +26,9 @@ export function getNodeCandidates(config: INetworkConfig): INode[] {
     if (useAutomaticSelection) {
         nodeCandidates = officialNodes
     } else {
-        nodeCandidates = config.includeOfficialNodes
-            ? addOfficialNodes(config.network.protocol, config.network.type, config.nodes)
-            : config.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
+        nodeCandidates = clientOptions.includeOfficialNodes
+            ? addOfficialNodes(networkProtocol, networkType, clientOptions.nodes)
+            : clientOptions.nodes.filter((n) => officialNodes.find((_n) => _n.url === n.url) === undefined)
     }
 
     return ensureSinglePrimaryNode(nodeCandidates)

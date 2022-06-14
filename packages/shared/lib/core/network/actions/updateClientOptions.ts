@@ -1,18 +1,19 @@
-import { getNodeCandidates, IClientOptions, INetworkConfig } from '@core/network'
+import { getNodeCandidates, IClientOptions } from '@core/network'
+import { setClientOptions } from '@core/profile-manager'
 
 /**
  * Update the client options for a profile.
  *
  * @method updateClientOptions
  *
- * @param {INetworkConfig} config
+ * @param {Partial<IClientOptions>} clientOptions
  *
  * @returns {void}
  */
 
-export function updateClientOptions(config: INetworkConfig): void {
-    const clientOptions = buildClientOptions(config)
-    if (!clientOptions.node) {
+export function updateClientOptions(clientOptions: Partial<IClientOptions>): void {
+    const builtClientOptions = buildClientOptions(clientOptions)
+    if (!builtClientOptions.node) {
         return
     }
 
@@ -26,23 +27,14 @@ export function updateClientOptions(config: INetworkConfig): void {
     //     return
     // }
 
-    // TODO: Replace with profileManager api
-    // api.setClientOptions(clientOptions, {
-    //     onSuccess() {
-    //         const { accounts } = get(activeProfile)
-    //         accounts.set(get(accounts).map((a) => ({ ...a, clientOptions })))
-    //     },
-    //     onError(err) {
-    //         console.error(err)
-    //     },
-    // })
+    setClientOptions(clientOptions)
 }
 
-function buildClientOptions(config: INetworkConfig): IClientOptions {
-    const nodes = getNodeCandidates(config).map((n) => ({ ...n, network: config.network }))
+function buildClientOptions(clientOptions: Partial<IClientOptions>): IClientOptions {
+    const nodes = getNodeCandidates(clientOptions).map((n) => ({ ...n, network: clientOptions.network }))
     return {
-        ...config,
+        ...clientOptions,
         nodes,
-        network: config.network.id,
+        network: clientOptions.network,
     }
 }
