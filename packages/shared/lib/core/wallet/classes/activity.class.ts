@@ -139,7 +139,7 @@ export class Activity implements IActivity {
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
-        this.time = new Date(outputData.metadata.milestoneTimestampBooked)
+        this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
 
         this.sender = getSenderFromOutput(outputData.output)
         this.recipient = recipient
