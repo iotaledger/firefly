@@ -56,7 +56,14 @@
             unit: { localeKey: 'baseToken.unit', nodeInfoPath: 'baseToken.unit' },
             subUnit: { localeKey: 'baseToken.subunit', nodeInfoPath: 'baseToken.subunit' },
             decimals: { localeKey: 'baseToken.decimals', nodeInfoPath: 'baseToken.decimals' },
-            useMetricPrefix: { localeKey: 'baseToken.useMetricPrefix', nodeInfoPath: 'baseToken.useMetricPrefix' },
+            /**
+             * TODO: Need a design fix.
+             * See: https://cdn.discordapp.com/attachments/948228742596161577/986252727430574140/Screenshot_2022-06-14_at_14.55.24.png
+             *
+             * Currently, it just shows an empty checkbox and upon clicking, it just display a toast notification that it was copied, which is wrong.
+             *
+             * useMetricPrefix: { localeKey: 'baseToken.useMetricPrefix', nodeInfoPath: 'baseToken.useMetricPrefix' },
+             */
         },
     }
 
