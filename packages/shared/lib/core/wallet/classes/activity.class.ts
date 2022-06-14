@@ -9,10 +9,10 @@ import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
-import { Recipient, Ed25519AddressType, ExpirationUnlockCondition } from '../types'
+import { Recipient } from '../types'
 import { formatTokenAmountBestMatch, isAsyncUnlockCondition } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
-import { TreasuryOutput } from '../types/output-type.type'
+import { ADDRESS_TYPE_ED25519, OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_EXPIRATION } from '../constants'
 
 export class Activity implements IActivity {
     id: string
@@ -78,7 +78,7 @@ export class Activity implements IActivity {
         claimed: boolean
     }): Activity {
         const address =
-            output?.address?.type === Ed25519AddressType
+            output?.address?.type === ADDRESS_TYPE_ED25519
                 ? Bech32Helper.toBech32(0, Converter.hexToBytes(output.address.pubKeyHash.substring(2)), 'rms')
                 : ''
         const isIncoming = address === accountAddress
@@ -94,13 +94,13 @@ export class Activity implements IActivity {
         this.rawAmount = Number(output.amount)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        if (output.output.type !== TreasuryOutput) {
+        if (output.output.type !== OUTPUT_TYPE_TREASURY) {
             for (const unlockCondition of output.output.unlockConditions) {
                 if (isAsyncUnlockCondition(unlockCondition)) {
                     this.isAsync = true
                     this.isHidden = hidden
                     this.expirationDate =
-                        unlockCondition.type === ExpirationUnlockCondition ? new Date(unlockCondition.unixTime) : null
+                        unlockCondition.type === UNLOCK_CONDITION_EXPIRATION ? new Date(unlockCondition.unixTime) : null
                     this.isClaimed = claimed
                     break
                 }
