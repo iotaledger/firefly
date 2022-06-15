@@ -29,6 +29,7 @@ import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { NETWORK } from '@core/network'
 import { truncateString } from '@lib/helpers'
 import { localize } from '@core/i18n'
+import { getNonRemainderOutputFromTransaction } from '../utils/transactions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -210,39 +211,49 @@ export class Activity implements IActivity {
         return undefined
     }
 
-    getTileInformation(): { title: string; icon: string; iconColor: string; subject: string } {
+    getTitle(): string {
         let title = ''
+        if (this.type === ActivityType.InternalTransaction) {
+            title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
+        } else if (this.type === ActivityType.ExternalTransaction) {
+            if (this.direction === ActivityDirection.In) {
+                title = this.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (this.direction === ActivityDirection.Out) {
+                title = this.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
+        }
+        return title
+    }
+
+    getIcon(): { icon: string; iconColor: string } {
         let icon = ''
         let iconColor = ''
-        let subject = ''
         if (this.type === ActivityType.InternalTransaction) {
             icon = 'transfer'
             iconColor = 'gray-600'
-            title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else if (this.type === ActivityType.ExternalTransaction) {
             if (this.direction === ActivityDirection.In) {
                 icon = 'chevron-down'
                 iconColor = 'blue-700'
-                title = this.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
             } else if (this.direction === ActivityDirection.Out) {
                 icon = 'chevron-up'
                 iconColor = 'blue-500'
-                title = this.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
             }
         }
+        return { icon, iconColor }
+    }
 
+    getFormattedSubject(): string {
+        let subject = ''
         if (this?.subject?.type === 'account') {
             subject = truncateString(this?.subject?.account?.name, 13, 0)
         } else if (this?.subject?.type === 'address') {
-            subject = truncateString(
-                this?.subject?.address,
-                NETWORK?.[get(activeProfile).networkProtocol]?.[get(activeProfile).networkType]?.bech32Hrp.length,
-                6
-            )
+            const hrp = NETWORK?.[get(activeProfile).networkProtocol]?.[get(activeProfile).networkType]?.bech32Hrp
+            subject = truncateString(this?.subject?.address, hrp.length, 6)
         } else {
             subject = localize('general.unknownAddress')
         }
-        return { title, icon, iconColor, subject }
+        return subject
     }
 }
 
@@ -252,20 +263,6 @@ function getActivityType(internal: boolean): ActivityType {
     } else {
         return ActivityType.ExternalTransaction
     }
-}
-
-function getNonRemainderOutputFromTransaction(transaction: Transaction, accountAddress: string): OutputTypes {
-    const outputs = transaction.payload.essence.outputs
-    const nonRemainerOutputs = outputs.filter((output) => {
-        const recipientAddress = getRecipientAddressFromOutput(output)
-
-        if (transaction.incoming) {
-            return accountAddress === recipientAddress
-        } else {
-            return accountAddress !== recipientAddress
-        }
-    })
-    return nonRemainerOutputs[0]
 }
 
 function getAmountFromOutput(output: OutputTypes): number {
