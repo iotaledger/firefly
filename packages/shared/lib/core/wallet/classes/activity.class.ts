@@ -2,7 +2,7 @@ import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
 import { BASE_TOKEN, NETWORK } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { ITagFeature, OutputTypes } from '@iota/types'
+import { OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
@@ -10,7 +10,6 @@ import { findAccountWithAddress } from '@lib/wallet'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import {
-    FEATURE_TYPE_TAG,
     OUTPUT_TYPE_TREASURY,
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
@@ -28,10 +27,10 @@ import {
     getRecipientAddressFromOutput,
     getSenderFromOutput,
     getStorageDepositFromOutput,
+    getTagFromOutput,
     isOutputAsync,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransactionInputs } from '../utils/transactions'
-
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -264,14 +263,6 @@ function getActivityType(internal: boolean): ActivityType {
     } else {
         return ActivityType.ExternalTransaction
     }
-}
-
-function getTagFromOutput(output: OutputTypes): string {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
-        return tagFeature?.tag
-    }
-    return undefined
 }
 
 function getRecipientFromOutput(output: OutputTypes): Recipient {
