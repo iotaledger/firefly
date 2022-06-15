@@ -1,16 +1,16 @@
 <script lang="typescript">
-	import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
+    import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { activeProfile, getColor } from 'shared/lib/profile'
     import { selectedAccount } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
-    import { 
-        profileRoute, 
-        profileRouter, 
-        ProfileRoute, 
-        settingsRoute, 
-        settingsRouter, 
-        SettingsRoute 
+    import {
+        profileRoute,
+        profileRouter,
+        ProfileRoute,
+        settingsRoute,
+        settingsRouter,
+        SettingsRoute,
     } from '@core/router'
     import { localize } from '@core/i18n'
 
@@ -20,7 +20,7 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
-    async function handleBackClick() {
+    function handleBackClick() {
         if ($profileRoute === ProfileRoute.ProfileActions) {
             drawer.close()
         } else if ($settingsRoute === SettingsRoute.Init) {
@@ -66,13 +66,10 @@
             </Text>
         </header>
         {#if $profileRoute === ProfileRoute.ProfileActions}
-            <ProfileActions 
-                {profileColor} {profileInitial} 
-                {handleSettingsClick} />
+            <ProfileActions {profileColor} {profileInitial} {handleSettingsClick} />
         {:else if $profileRoute === ProfileRoute.Settings}
             <Settings />
         {/if}
-        
     </div>
 </Drawer>
 
