@@ -14,6 +14,7 @@ export function getSenderFromOutput(output: OutputTypes): Sender {
                 }
             }
         }
+    } else {
+        return undefined
     }
-    return undefined
 }

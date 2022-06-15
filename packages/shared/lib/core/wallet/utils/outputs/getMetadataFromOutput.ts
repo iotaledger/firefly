@@ -7,6 +7,7 @@ export function getMetadataFromOutput(output: OutputTypes): string {
             output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA)
         )
         return metadataFeature?.data
+    } else {
+        return undefined
     }
-    return undefined
 }

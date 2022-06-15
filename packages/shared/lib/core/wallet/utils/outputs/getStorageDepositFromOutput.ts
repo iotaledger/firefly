@@ -8,6 +8,7 @@ export function getStorageDepositFromOutput(output: OutputTypes): number {
                 return Number(unlockCondition.amount)
             }
         }
+    } else {
+        return undefined
     }
-    return 0
 }
