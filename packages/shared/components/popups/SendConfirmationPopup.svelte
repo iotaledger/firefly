@@ -7,6 +7,7 @@
         ActivityType,
         calculateStorageDepositFromOutput,
         getOutputOptions,
+        IAsset,
         InclusionState,
         Recipient,
         trySendOutput,
@@ -19,13 +20,14 @@
     import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
 
-    export let internal = false
-    export let recipient: Recipient
-    export let rawAmount: number
-    export let amount: '0'
+    export let asset: IAsset
+    export let amount = '0'
     export let unit: string
+    export let rawAmount: number
+    export let recipient: Recipient
+    export let internal = false
     export let metadata: string
     export let tag: string
 
@@ -65,8 +67,20 @@
         return trySendOutput(outputOptions, preparedOutput)
     }
 
-    function onCancel(): void {
+    function onBack(): void {
         closePopup()
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+            props: {
+                asset,
+                amount,
+                unit,
+                recipient,
+                metadata,
+                tag,
+            },
+        })
     }
 
     $: formattedFiatValue =
@@ -98,7 +112,7 @@
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onCancel}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+        <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
+        <Button autofocus classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
     </popup-buttons>
 </send-confirmation-popup>
