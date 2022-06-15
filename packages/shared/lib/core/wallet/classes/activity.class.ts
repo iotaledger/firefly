@@ -10,6 +10,7 @@ import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { Recipient, Sender } from '../types'
 import {
     formatTokenAmountBestMatch,
+    getExpirationDateFromOutput,
     getRecipientAddressFromOutput,
     getSenderAddressFromUnlockCondition,
     getStorageDepositFromOutput,
@@ -344,19 +345,6 @@ function getSenderFromOutput(output: OutputTypes): Sender {
                     type: 'address',
                     address: senderAddress,
                 }
-            }
-        }
-    }
-    return undefined
-}
-
-function getExpirationDateFromOutput(output: OutputTypes): Date {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
-                return unlockCondition?.unixTime
-                    ? new Date(unlockCondition?.unixTime * MILLISECONDS_PER_SECOND)
-                    : undefined
             }
         }
     }
