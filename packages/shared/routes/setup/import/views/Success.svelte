@@ -11,13 +11,9 @@
     function handleContinueClick(): void {
         dispatch('next')
     }
-
-    function handleBackClick(): void {
-        dispatch('previous')
-    }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="title">
         <Text type="h2">{localize('views.importFromFile.title')}</Text>
     </div>
