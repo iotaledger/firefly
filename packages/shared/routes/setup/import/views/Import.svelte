@@ -2,14 +2,13 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
+    import { ProfileImportType, setNewProfileType } from '@core/profile'
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
 
     function handleContinueClick(importType: ProfileImportType) {
-        const profileType = importType === ProfileImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        setNewProfileType(profileType)
+        setNewProfileType(importType)
         dispatch('next', { importType })
     }
     function handleBackClick() {
