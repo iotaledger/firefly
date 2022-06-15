@@ -1,36 +1,33 @@
-import { BASE_TOKEN } from '@core/network'
+import { IAccountState } from '@core/account'
+import { localize } from '@core/i18n'
+import { BASE_TOKEN, NETWORK } from '@core/network'
 import { activeProfile } from '@core/profile'
+import { OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
+import { truncateString } from '@lib/helpers'
 import { findAccountWithAddress } from '@lib/wallet'
+import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
+import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Recipient, Sender } from '../types'
 import {
     formatTokenAmountBestMatch,
+    getAmountFromOutput,
+    getActivityType,
+    getExpirationDateFromOutput,
+    getMetadataFromOutput,
     getRecipientAddressFromOutput,
-    getSenderAddressFromUnlockCondition,
+    getRecipientFromOutput,
+    getSenderFromOutput,
     getStorageDepositFromOutput,
+    getTagFromOutput,
+    isOutputAsync,
 } from '../utils'
-import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
-import {
-    ASYNC_UNLOCK_CONDITION_TYPES,
-    FEATURE_TYPE_METADATA,
-    FEATURE_TYPE_TAG,
-    OUTPUT_TYPE_TREASURY,
-    UNLOCK_CONDITION_EXPIRATION,
-    UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-} from '../constants'
-import { IMetadataFeature, ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
-import { IAccountState } from '@core/account'
-import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
-import { NETWORK } from '@core/network'
-import { truncateString } from '@lib/helpers'
-import { localize } from '@core/i18n'
-import { getNonRemainderOutputFromTransaction } from '../utils/transactions'
-
+import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -156,8 +153,8 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
+        this.isClaimed = false
 
-        setAsyncDataForOutput(this, outputData.output, isIncoming)
         return this
     }
 
@@ -257,118 +254,6 @@ export class Activity implements IActivity {
     }
 }
 
-function getActivityType(internal: boolean): ActivityType {
-    if (internal) {
-        return ActivityType.InternalTransaction
-    } else {
-        return ActivityType.ExternalTransaction
-    }
-}
-
-function getAmountFromOutput(output: OutputTypes): number {
-    return Number(output?.amount ?? 0)
-}
-
-function getMetadataFromOutput(output: OutputTypes): string {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const metadataFeature: IMetadataFeature = <IMetadataFeature>(
-            output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA)
-        )
-        return metadataFeature?.data
-    }
-    return undefined
-}
-
-function getTagFromOutput(output: OutputTypes): string {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
-        return tagFeature?.tag
-    }
-    return undefined
-}
-
-function getRecipientFromOutput(output: OutputTypes): Recipient {
-    const recipientAddress = getRecipientAddressFromOutput(output)
-    const recipientAccount = findAccountWithAddress(recipientAddress)
-    if (recipientAccount) {
-        return { type: 'account', account: recipientAccount }
-    } else {
-        return { type: 'address', address: recipientAddress }
-    }
-}
-
 function isRecipientInternal(recipient): boolean {
     return recipient.type === 'account'
-}
-
-function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncoming: boolean): void {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
-                activity.isAsync = true
-                activity.isClaimed = false // TODO
-                activity.expirationDate = new Date(unlockCondition.unixTime * MILLISECONDS_PER_SECOND)
-            }
-            if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
-                activity.isAsync = true
-                activity.isClaimed = false // TODO
-                activity.storageDeposit = Number(unlockCondition.amount)
-            }
-        }
-    }
-}
-
-function getSenderFromTransaction(transaction: Transaction, accountAddress): Sender {
-    if (!transaction?.incoming) {
-        return { type: 'address', address: accountAddress }
-    } else if (transaction?.incoming) {
-        getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
-            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress))
-    } else {
-        return undefined
-    }
-}
-
-function getSenderFromTransactionInputs(inputs: IUTXOInput[]): Sender {
-    // TODO: Implement this when wallet.rs updates the transaction response
-    return undefined
-}
-
-function getSenderFromOutput(output: OutputTypes): Sender {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
-            if (senderAddress) {
-                return {
-                    type: 'address',
-                    address: senderAddress,
-                }
-            }
-        }
-    }
-    return undefined
-}
-
-function getExpirationDateFromOutput(output: OutputTypes): Date {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
-                return unlockCondition?.unixTime
-                    ? new Date(unlockCondition?.unixTime * MILLISECONDS_PER_SECOND)
-                    : undefined
-            }
-        }
-    }
-    return undefined
-}
-
-function isOutputAsync(output: OutputTypes): boolean {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (ASYNC_UNLOCK_CONDITION_TYPES.some((type) => type === unlockCondition.type)) {
-                return true
-            }
-        }
-    }
-    return false
 }
