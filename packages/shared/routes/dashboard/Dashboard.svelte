@@ -174,7 +174,7 @@
         }
         if (!$appSettings.deepLinking) {
             _redirect(DashboardRoute.Settings)
-            $settingsRouter.goToChildRoute(SettingsRoute.AdvancedSettings, AdvancedSettings.DeepLinks)
+            $settingsRouter.goToChildRoute(SettingsRoute.Advanced, AdvancedSettings.DeepLinks)
             showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
         } else {
             if ($accounts && $accounts.length > 0) {
@@ -230,7 +230,7 @@
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $activeProfile?.settings?.networkConfig.network.name },
+                    values: { networkName: $activeProfile?.settings?.clientOptions.network },
                 }),
             })
         }

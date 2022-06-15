@@ -26,11 +26,11 @@
         skipBackup = _skipBackup
 
         await storeMnemonic($mnemonic.join(' '))
-        if (!_skipBackup) {
+        if (skipBackup) {
+            dispatch('next', { skip: true })
+        } else {
             await backupInitialStronghold()
             dispatch('next')
-        } else {
-            dispatch('next', { skip: true })
         }
     }
 

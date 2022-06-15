@@ -1,17 +1,17 @@
 <script lang="typescript">
+    import { IAccountState } from '@core/account'
     import { Text } from 'shared/components/'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAccountState } from '@core/account'
 
     export let account: IAccountState
     export let selected = true
 </script>
 
-<div class="flex flex row items-center space-x-3">
+<div class="flex flex-row items-center space-x-3">
     <div class="circle" style="--account-color: {account?.color};" />
-    <Text type="h5" fontSize="base" classes={selected ? '' : 'opacity-50'} fontWeight={FontWeightText.medium}
-        >{account?.name}</Text
-    >
+    <Text fontSize="14" fontWeight={FontWeightText.semibold} classes={selected ? '' : 'opacity-50'}>
+        {account?.name}
+    </Text>
 </div>
 
 <style type="text/scss">

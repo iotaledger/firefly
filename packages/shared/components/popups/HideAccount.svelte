@@ -119,7 +119,7 @@
     <div class="flex w-full flex-row flex-wrap">
         <Text type="p" secondary classes="mb-3">{locale('popups.hideAccount.errorBody1')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {locale('popups.hideAccount.errorBody2', { values: { balance: $selectedAccount?.getBalance() } })}
+            {locale('popups.hideAccount.errorBody2', { values: { balance: $selectedAccount?.balances?.total } })}
         </Text>
         <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>
