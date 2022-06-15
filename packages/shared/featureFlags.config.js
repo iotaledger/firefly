@@ -22,7 +22,7 @@ const featureFlags = {
                 enabled: true,
             },
             'private-net': {
-                enabled: false,
+                enabled: true,
             },
         },
     },

@@ -1,17 +1,15 @@
 <script lang="typescript">
     import { appRouter } from '@core/router'
-    import { createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { NetworkProtocol } from '@core/network'
     import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
     import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { networkProtocol as networkProtocolStore } from '@contexts/onboarding'
     import featureFlags from 'shared/featureFlags.config'
 
-    const isDeveloperProfile = true // TODO: use real value
-
-    async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Devnet)
+    function onClick(networkProtocol: NetworkProtocol): Promise<void> {
+        networkProtocolStore.set(networkProtocol)
         $appRouter.next()
     }
     async function onBackClick(): Promise<void> {

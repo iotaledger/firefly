@@ -1,21 +1,26 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { newProfile } from '@core/profile'
-    import { NetworkType, updateNewProfileNetworkType } from '@core/network'
+    import { createNewProfile } from '@core/profile'
+    import { NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
+    import { networkProtocol } from '@contexts/onboarding'
     import featureFlags from 'shared/featureFlags.config'
 
     const networkIcon = {
-        [NetworkType.Mainnet]: $newProfile?.networkProtocol,
+        [NetworkType.Mainnet]: $networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',
     }
 
-    function onClick(networkType: NetworkType): void {
-        updateNewProfileNetworkType(networkType)
+    const isDeveloperProfile = true // TODO: use real value
+
+    async function onClick(networkType: NetworkType): Promise<void> {
+        if (networkType !== NetworkType.PrivateNet) {
+            await createNewProfile(isDeveloperProfile, $networkProtocol, networkType)
+        }
         $appRouter.next({ networkType })
     }
     function onBackClick(): void {
@@ -36,8 +41,7 @@
                 icon={networkIcon[NetworkType[networkType]]}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
-                    ?.enabled}
+                disabled={!featureFlags?.onboarding?.[$networkProtocol]?.[NetworkType[networkType]]?.enabled}
                 onClick={() => onClick(NetworkType[networkType])}
             >
                 {localize(`views.network.${NetworkType[networkType]}.title`)}
