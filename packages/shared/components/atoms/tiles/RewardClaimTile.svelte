@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Icon, TTile } from 'shared/components'
     import { IAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { Icon, Text, Tile } from 'shared/components'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
 
     export let account: IAccount
 
@@ -13,23 +14,27 @@
 </script>
 
 {#if account}
-    <TTile
-        applyBorder
-        icon="wallet"
-        iconLabel={alias}
-        tileText={formatTokenAmountBestMatch(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}
-        tileSubText={localize('general.amountClaimed', {
-            values: {
-                amount: formatTokenAmountBestMatch(claimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer]),
-            },
-        })}
-    >
-        <Icon
-            width="16"
-            height="16"
-            icon="success-check"
-            classes="mr-2 text-white bg-green-500 rounded-full"
-            slot="subText"
-        />
-    </TTile>
+    <Tile isGhost>
+        <div class="w-full flex flex-row justify-between items-center space-x-4">
+            <div class="flex flex-row items-center text-left space-x-2">
+                <Icon icon="wallet" width={24} height={24} classes="text-blue-500" />
+                <Text type={TextType.p}>{alias}</Text>
+            </div>
+            <div class="flex flex-col text-right">
+                <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
+                    {formatTokenAmountBestMatch(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}
+                </Text>
+                <div class="flex flex-row items-center space-x-2">
+                    <Icon width="16" height="16" icon="success-check" classes="text-white bg-green-500 rounded-full" />
+                    <Text type={TextType.p} secondary smaller classes="flex-grow">
+                        {localize('general.amountClaimed', {
+                            values: {
+                                amount: formatTokenAmountBestMatch(claimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer]),
+                            },
+                        })}
+                    </Text>
+                </div>
+            </div>
+        </div>
+    </Tile>
 {/if}
