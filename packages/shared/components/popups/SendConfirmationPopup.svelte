@@ -12,10 +12,9 @@
         trySendOutput,
     } from '@core/wallet'
     import type { OutputTypes } from '@iota/types'
-    import { OutputOptions } from '@iota/wallet'
+    import type { OutputOptions } from '@iota/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { MILLISECONDS_PER_SECOND } from '@lib/time'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
