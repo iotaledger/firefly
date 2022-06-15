@@ -6,8 +6,8 @@
     import { newProfile } from '@core/profile'
     import { SetupType } from 'shared/lib/typings/setup'
     import { appRouter } from '@core/router'
-    import { NetworkProtocol } from '@core/network'
-    import featurFlags from 'shared/featureFlags.config'
+    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import featureFlags from 'shared/featureFlags.config'
 
     export let locale: Locale
 
@@ -22,7 +22,11 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{locale(`views.setup.title.${$newProfile?.networkProtocol}`)}</Text>
+        <Text type="h2"
+            >{locale('views.setup.title', {
+                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__content" class:hidden={$newProfile?.networkProtocol !== NetworkProtocol.IOTA}>
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
@@ -44,7 +48,7 @@
             classes="w-full"
             secondary
             hidden={$newProfile?.networkProtocol !== NetworkProtocol.Shimmer}
-            disabled={!featurFlags?.onboarding?.shimmer?.claimRewards?.enabled}
+            disabled={!featureFlags?.onboarding?.shimmer?.claimRewards?.enabled}
             onClick={() => {}}
         >
             {locale('actions.claimShimmer')}
@@ -60,10 +64,12 @@
             secondary
             onClick={() => handleContinueClick(SetupType.New)}
         >
-            {locale(`actions.createWallet.${$newProfile?.networkProtocol}`)}
+            {locale('actions.createWallet', { values: { protocol: formatProtocolName($newProfile?.networkProtocol) } })}
             {#if !$mobile}
                 <Text type="p" secondary smaller
-                    >{locale(`actions.createWalletDescription.${$newProfile?.networkProtocol}`)}</Text
+                    >{locale('actions.createWalletDescription', {
+                        values: { protocol: $newProfile?.networkProtocol },
+                    })}</Text
                 >
             {/if}
         </Button>

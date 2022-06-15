@@ -1,10 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": {
-                "iota": "Send, Receive & Manage your IOTA tokens",
-                "shimmer": "Send, Receive & Manage your Shimmer tokens"
-            },
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
@@ -22,10 +19,7 @@
             "body": "Choose your app theme."
         },
         "profile": {
-            "title": {
-                "iota": "Create your IOTA profile",
-                "shimmer": "Create your Shimmer profile"
-            },
+            "title": "Create your {protocol} profile",
             "profileName": "Profile name",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": {
@@ -40,10 +34,7 @@
             }
         },
         "setup": {
-            "title": {
-                "iota": "Set up an IOTA profile",
-                "shimmer": "Set up a Shimmer profile"
-            },
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
@@ -957,14 +948,8 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
-        "createWallet": {
-            "iota": "Create new wallet",
-            "shimmer": "Create a new Shimmer profile"
-        },
-        "createWalletDescription": {
-            "iota": "Create a fresh wallet running on Chrysalis",
-            "shimmer": "Create a fresh wallet running on Shimmer"
-        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Save password",

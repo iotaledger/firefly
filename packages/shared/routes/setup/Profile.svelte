@@ -4,6 +4,7 @@
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { formatProtocolName } from '@core/network'
 
     let error = ''
     const busy = false
@@ -32,7 +33,11 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.profile.title.${$newProfile?.networkProtocol}`)}</Text>
+        <Text type="h2"
+            >{localize('views.profile.title', {
+                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{localize('views.profile.body1')}</Text>

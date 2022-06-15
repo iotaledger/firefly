@@ -31,22 +31,21 @@
         <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        {#each Object.keys(NetworkType) as networkType, index}
+        {#each Object.values(NetworkType) as networkType}
             <Button
-                icon={networkIcon[NetworkType[networkType]]}
-                iconColor={index === 0 ? `${$newProfile?.networkProtocol}-highlight` : ''}
+                icon={networkIcon[networkType]}
+                iconColor={networkType === NetworkType.Mainnet
+                    ? `${$newProfile?.networkProtocol}-highlight`
+                    : 'blue-500'}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[NetworkType[networkType]]
-                    ?.enabled}
-                onClick={() => onClick(NetworkType[networkType])}
+                disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.enabled}
+                onClick={() => onClick(networkType)}
             >
-                {localize(`views.network.${$newProfile?.networkProtocol}.${NetworkType[networkType]}.title`)}
+                {localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.title`)}
                 {#if !$mobile}
                     <Text secondary smaller
-                        >{localize(
-                            `views.network.${$newProfile?.networkProtocol}.${NetworkType[networkType]}.body`
-                        )}</Text
+                        >{localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.body`)}</Text
                     >
                 {/if}
             </Button>
