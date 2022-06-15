@@ -4,7 +4,7 @@
     export let buttonElement: HTMLButtonElement
     export let text: string
     export let open = false
-    export let onClick: () => unknown
+    export let onClick: () => void
 </script>
 
 {#if !open}

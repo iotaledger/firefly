@@ -3,7 +3,7 @@
 
     export let disabled = false
     export let classes = ''
-    export let onClick: () => unknown
+    export let onClick: () => void
 </script>
 
 <Tile

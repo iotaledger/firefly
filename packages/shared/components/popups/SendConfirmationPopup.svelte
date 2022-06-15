@@ -92,7 +92,7 @@
         type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
         direction: ActivityDirection.Out,
-        amount,
+        amount: amount?.length > 0 ? amount : '0',
         unit,
         subject: recipient,
         metadata,

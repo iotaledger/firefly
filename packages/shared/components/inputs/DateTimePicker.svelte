@@ -1,27 +1,31 @@
 <script lang="ts">
     // this is a wrapper component for svelty-picker
 
+    import { createEventDispatcher } from 'svelte'
     import SveltyPicker from 'svelty-picker'
     import { Tooltip, Button } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
     import { localize } from '@core/i18n'
 
     export let value: Date
 
     const dispatch = createEventDispatcher()
-    const DATE_NOW = new Date(Date.now())
-    const startDate = DATE_NOW.toLocaleString('sv')
+    const pickedDate = value ? new Date(value).toLocaleString('sv') : undefined
+    const startDate = getNowDate().toLocaleString('sv')
 
-    let rawValue: string = startDate
+    let rawValue: string = pickedDate ? pickedDate : startDate
     let tooltip: Tooltip
 
-    function handleCancelClick() {
+    function getNowDate(): Date {
+        return new Date(Date.now())
+    }
+
+    function handleCancelClick(): void {
         dispatch('cancel')
     }
 
-    function handleConfirmClick() {
+    function handleConfirmClick(): void {
+        value = new Date(rawValue)
         dispatch('confirm')
-        value = new Date(rawValue).getTime() >= DATE_NOW.getTime() ? new Date(rawValue) : DATE_NOW
     }
 </script>
 
