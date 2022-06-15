@@ -83,7 +83,7 @@ export class Activity implements IActivity {
         this.tag = outputOptions?.features.tag
 
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
-        this.expirationDate = new Date(outputOptions?.unlocks?.expiration?.unixTime * MILLISECONDS_PER_SECOND)
+        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expiration?.unixTime) * MILLISECONDS_PER_SECOND)
         this.isAsync =
             outputOptions?.storageDeposit > 0 ||
             !!(outputOptions?.unlocks?.expiration?.milestoneIndex || outputOptions?.unlocks?.expiration?.unixTime)
@@ -186,6 +186,24 @@ export class Activity implements IActivity {
         } else {
             return '-'
         }
+    }
+
+    getTimeDiffUntilExpirationTime(time: Date): string {
+        if (this.isAsync && !this.isClaimed && this?.expirationDate) {
+            const elapsedTime = this.expirationDate.getTime() - time.getTime()
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
+            const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
+            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
+
+            if (days > 0 || hours > 0) {
+                return `${days}d ${hours}h`
+            } else if (minutes > 0) {
+                return `${minutes}min`
+            } else {
+                return '-'
+            }
+        }
+        return undefined
     }
 }
 

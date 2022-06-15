@@ -59,23 +59,7 @@
     $: isIncomingActivityUnclaimed =
         activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    let timeDiff: string
-    $: {
-        if (activity.isAsync && !activity.isClaimed && activity?.expirationDate) {
-            const elapsedTime = activity.expirationDate.getTime() - $time.getTime()
-            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
-            const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
-            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
-
-            if (days > 0 || hours > 0) {
-                timeDiff = `${days}d ${hours}h`
-            } else if (minutes > 0) {
-                timeDiff = `${minutes}min`
-            } else {
-                timeDiff = '-'
-            }
-        }
-    }
+    $: timeDiff = activity.getTimeDiffUntilExpirationTime($time)
 </script>
 
 <div
