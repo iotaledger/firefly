@@ -8,22 +8,25 @@ import {
     validateAndCleanNodeData,
     buildNode,
     updateNewProfileNetworkClientOptions,
+    nodeInfo,
 } from '@core/network'
 
 export async function addNode(node: INode, profile: Writable<IPersistedProfile>): Promise<void> {
-    const cleanData = validateAndCleanNodeData(node)
-    const nodeInfoResponse = await getNodeInfo(cleanData.url, cleanData.auth)
+    const cleanedNodeData = validateAndCleanNodeData(node)
+    const nodeInfoResponse = await getNodeInfo(cleanedNodeData.url, cleanedNodeData.auth)
+    const oldNodeInfo = get(nodeInfo)
     updateNodeInfo(nodeInfoResponse?.nodeInfo)
-    const builtNode = buildNode(nodeInfoResponse, cleanData.auth)
-    if (!get(profile)?.settings?.clientOptions) {
-        updateNewProfileNetworkClientOptions(get(profile)?.networkProtocol, get(profile)?.networkType, [builtNode])
-    }
-    const error = checkNodeUrlValidity(
-        get(profile).settings?.clientOptions?.nodes,
-        builtNode?.url,
-        get(profile)?.isDeveloperProfile
-    )
-    if (!error) {
+    const builtNode = buildNode(nodeInfoResponse, cleanedNodeData.auth)
+
+    const hasValidUrl =
+        checkNodeUrlValidity(
+            get(profile).settings?.clientOptions?.nodes,
+            builtNode?.url,
+            get(profile)?.isDeveloperProfile
+        ) === undefined
+    const isInSameNetwork = oldNodeInfo.protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
+
+    if (hasValidUrl && isInSameNetwork) {
         if (!get(profile)?.settings?.clientOptions) {
             updateNewProfileNetworkClientOptions(get(profile)?.networkProtocol, get(profile)?.networkType, [builtNode])
         } else {
@@ -33,7 +36,13 @@ export async function addNode(node: INode, profile: Writable<IPersistedProfile>)
             )
             profile?.update((state) => ({
                 ...state,
-                settings: { ...state?.settings, nodes: [...nodes, node] },
+                settings: {
+                    ...state?.settings,
+                    clientOptions: {
+                        nodes: [...nodes, node],
+                        network: nodeInfoResponse.nodeInfo.name,
+                    },
+                },
             }))
         }
     }

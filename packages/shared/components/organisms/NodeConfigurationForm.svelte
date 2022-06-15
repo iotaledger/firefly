@@ -66,13 +66,10 @@
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={formError.address}
+        error={formError.error}
         disabled={isBusy}
         autofocus
     />
-    {#if formError.error}
-        <Text overrideColor classes="text-orange-500 mt-2">{formError.error}</Text>
-    {/if}
     <Input
         classes="mt-3"
         bind:value={node.auth.username}
