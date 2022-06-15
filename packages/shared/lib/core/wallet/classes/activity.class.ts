@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, NETWORK } from '@core/network'
+import { BASE_TOKEN, NETWORK, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
@@ -246,8 +246,7 @@ export class Activity implements IActivity {
         if (this?.subject?.type === 'account') {
             subject = truncateString(this?.subject?.account?.name, 13, 0)
         } else if (this?.subject?.type === 'address') {
-            const hrp = NETWORK?.[get(activeProfile).networkProtocol]?.[get(activeProfile).networkType]?.bech32Hrp
-            subject = truncateString(this?.subject?.address, hrp.length, 6)
+            subject = truncateString(this?.subject?.address, get(networkHrp).length, 6)
         } else {
             subject = localize('general.unknownAddress')
         }
