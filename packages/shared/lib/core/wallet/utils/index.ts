@@ -11,3 +11,5 @@ export * from './generateRawAmount'
 export * from './parseRawAmount'
 export * from './receiverAddressesFromTransactionPayload'
 export * from './sendAddressFromTransactionPayload'
+
+export * from './outputs'

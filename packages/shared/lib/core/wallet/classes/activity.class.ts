@@ -12,6 +12,7 @@ import {
     formatTokenAmountBestMatch,
     getRecipientAddressFromOutput,
     getSenderAddressFromUnlockCondition,
+    getStorageDepositFromOutput,
 } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
@@ -113,7 +114,7 @@ export class Activity implements IActivity {
         this.isInternal = isRecipientInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
-        this.storageDeposit = getStorageDepositForOutput(output)
+        this.storageDeposit = getStorageDepositFromOutput(output)
         this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
         this.metadata = getMetadataFromOutput(output)
@@ -150,7 +151,7 @@ export class Activity implements IActivity {
         this.outputId = outputData.outputId
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
-        this.storageDeposit = getStorageDepositForOutput(outputData.output)
+        this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
@@ -373,15 +374,4 @@ function isOutputAsync(output: OutputTypes): boolean {
         }
     }
     return false
-}
-
-function getStorageDepositForOutput(output: OutputTypes): number {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
-                return Number(unlockCondition.amount)
-            }
-        }
-    }
-    return 0
 }
