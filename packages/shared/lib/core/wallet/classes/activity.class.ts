@@ -9,11 +9,6 @@ import { truncateString } from '@lib/helpers'
 import { findAccountWithAddress } from '@lib/wallet'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import { get } from 'svelte/store'
-import {
-    OUTPUT_TYPE_TREASURY,
-    UNLOCK_CONDITION_EXPIRATION,
-    UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-} from '../constants'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
@@ -22,6 +17,7 @@ import { Recipient, Sender } from '../types'
 import {
     formatTokenAmountBestMatch,
     getAmountFromOutput,
+    getActivityType,
     getExpirationDateFromOutput,
     getMetadataFromOutput,
     getRecipientAddressFromOutput,
@@ -31,11 +27,7 @@ import {
     getTagFromOutput,
     isOutputAsync,
 } from '../utils'
-import {
-    getNonRemainderOutputFromTransaction,
-    getSenderFromTransaction,
-    getSenderFromTransactionInputs,
-} from '../utils/transactions'
+import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -259,14 +251,6 @@ export class Activity implements IActivity {
             subject = localize('general.unknownAddress')
         }
         return subject
-    }
-}
-
-function getActivityType(internal: boolean): ActivityType {
-    if (internal) {
-        return ActivityType.InternalTransaction
-    } else {
-        return ActivityType.ExternalTransaction
     }
 }
 
