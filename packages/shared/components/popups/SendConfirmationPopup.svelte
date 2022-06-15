@@ -24,7 +24,7 @@
     export let internal = false
     export let recipient: Recipient
     export let rawAmount: number
-    export let amount: '0'
+    export let amount = '0'
     export let unit: string
     export let metadata: string
     export let tag: string
@@ -78,7 +78,7 @@
         type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
         direction: ActivityDirection.Out,
-        amount,
+        amount: amount?.length > 0 ? amount : '0',
         unit,
         subject: recipient,
         metadata,

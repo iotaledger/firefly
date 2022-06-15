@@ -30,7 +30,7 @@
 
         async function validate(): Promise<void> {
             await Promise.allSettled([
-                assetAmountInput?.validate().then(
+                assetAmountInput?.validate(!!(metadata || tag)).then(
                     () => {},
                     () => {
                         valid = false
