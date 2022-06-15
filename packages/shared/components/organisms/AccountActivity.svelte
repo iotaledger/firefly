@@ -24,7 +24,6 @@
         })
     }
 
-    const filters = ['all', 'incoming', 'outgoing']
     $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
 
     let searchActive = false
