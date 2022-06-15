@@ -1,3 +1,4 @@
+export * from './calculateStoragetDepositFromOutput'
 export * from './getAmountFromOutput'
 export * from './getExpirationDateFromOutput'
 export * from './getMetadataFromOutput'
