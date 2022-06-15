@@ -25,6 +25,9 @@ import {
 import { IMetadataFeature, ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
 import { IAccountState } from '@core/account'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
+import { NETWORK } from '@core/network'
+import { truncateString } from '@lib/helpers'
+import { localize } from '@core/i18n'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -204,6 +207,41 @@ export class Activity implements IActivity {
             }
         }
         return undefined
+    }
+
+    getTileInformation(): { title: string; icon: string; iconColor: string; subject: string } {
+        let title = ''
+        let icon = ''
+        let iconColor = ''
+        let subject = ''
+        if (this.type === ActivityType.InternalTransaction) {
+            icon = 'transfer'
+            iconColor = 'gray-600'
+            title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
+        } else if (this.type === ActivityType.ExternalTransaction) {
+            if (this.direction === ActivityDirection.In) {
+                icon = 'chevron-down'
+                iconColor = 'blue-700'
+                title = this.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (this.direction === ActivityDirection.Out) {
+                icon = 'chevron-up'
+                iconColor = 'blue-500'
+                title = this.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
+        }
+
+        if (this?.subject?.type === 'account') {
+            subject = truncateString(this?.subject?.account?.name, 13, 0)
+        } else if (this?.subject?.type === 'address') {
+            subject = truncateString(
+                this?.subject?.address,
+                NETWORK?.[get(activeProfile).networkProtocol]?.[get(activeProfile).networkType]?.bech32Hrp.length,
+                6
+            )
+        } else {
+            subject = localize('general.unknownAddress')
+        }
+        return { title, icon, iconColor, subject }
     }
 }
 

@@ -5,56 +5,19 @@
     import {
         ActivityAsyncStatus,
         ActivityDirection,
-        ActivityType,
         Activity,
         InclusionState,
         hideActivity,
         claimActivity,
     } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
     import { time } from '@core/app'
-    import { activeProfile } from '@core/profile'
-    import { NETWORK } from '@core/network'
 
     export let activity: Activity
     export let onClick: () => void
 
-    let title = ''
-    let icon = ''
-    let iconColor = ''
-    let subject = ''
-    $: {
-        if (activity.type === ActivityType.InternalTransaction) {
-            icon = 'transfer'
-            iconColor = 'gray-600'
-            title = activity.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-        } else if (activity.type === ActivityType.ExternalTransaction) {
-            if (activity.direction === ActivityDirection.In) {
-                icon = 'chevron-down'
-                iconColor = 'blue-700'
-                title = activity.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-            } else if (activity.direction === ActivityDirection.Out) {
-                icon = 'chevron-up'
-                iconColor = 'blue-500'
-                title = activity.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
-            }
-        }
-
-        if (activity?.subject?.type === 'account') {
-            subject = truncateString(activity?.subject?.account?.name, 13, 0)
-        } else if (activity?.subject?.type === 'address') {
-            subject = truncateString(
-                activity?.subject?.address,
-                NETWORK?.[$activeProfile.networkProtocol]?.[$activeProfile.networkType]?.bech32Hrp.length,
-                6
-            )
-        } else {
-            subject = localize('general.unknownAddress')
-        }
-    }
-
+    $: ({ title, icon, iconColor, subject } = activity.getTileInformation())
     $: asyncStatus = activity.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
