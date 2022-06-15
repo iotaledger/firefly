@@ -17,16 +17,15 @@ import {
     isOutputAsync,
     getAmountFromOutput,
     getMetadataFromOutput,
+    getTagFromOutput,
 } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
-    ASYNC_UNLOCK_CONDITION_TYPES,
-    FEATURE_TYPE_TAG,
     OUTPUT_TYPE_TREASURY,
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
-import { ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
+import { IUTXOInput, OutputTypes } from '@iota/types'
 import { IAccountState } from '@core/account'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { NETWORK } from '@core/network'
@@ -266,14 +265,6 @@ function getActivityType(internal: boolean): ActivityType {
     } else {
         return ActivityType.ExternalTransaction
     }
-}
-
-function getTagFromOutput(output: OutputTypes): string {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        const tagFeature = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG)
-        return tagFeature?.tag
-    }
-    return undefined
 }
 
 function getRecipientFromOutput(output: OutputTypes): Recipient {
