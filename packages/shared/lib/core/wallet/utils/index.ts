@@ -6,6 +6,7 @@ export * from './getActivityType'
 export * from './getOutputOptions'
 export * from './getSenderAddressFromUnlockCondition'
 export * from './generateRawAmount'
+export * from './isSubjectInternal'
 export * from './parseRawAmount'
 
 export * from './outputs'
