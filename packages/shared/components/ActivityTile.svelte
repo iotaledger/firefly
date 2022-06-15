@@ -17,7 +17,9 @@
     export let activity: Activity
     export let onClick: () => void
 
-    $: ({ title, icon, iconColor, subject } = activity.getTileInformation())
+    $: title = activity.getTitle()
+    $: ({ icon, iconColor } = activity.getIcon())
+    $: subject = activity.getFormattedSubject()
     $: asyncStatus = activity.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
