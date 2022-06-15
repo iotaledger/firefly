@@ -1,4 +1,4 @@
-export * from './ed25519ToBech32'
+export * from './convertEd25519ToBech32'
 export * from './formatTokenAmountBestMatch'
 export * from './formatTokenAmountDefault'
 export * from './formatTokenAmountPrecise'
