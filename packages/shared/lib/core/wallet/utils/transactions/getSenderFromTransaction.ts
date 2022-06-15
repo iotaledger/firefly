@@ -8,8 +8,10 @@ export function getSenderFromTransaction(transaction: Transaction, accountAddres
     if (!transaction?.incoming) {
         return { type: 'address', address: accountAddress }
     } else if (transaction?.incoming) {
-        getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
+        return (
+            getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
             getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress))
+        )
     } else {
         return undefined
     }

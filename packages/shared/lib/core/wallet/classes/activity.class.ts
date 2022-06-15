@@ -25,6 +25,7 @@ import {
     getSenderFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
+    isSubjectInternal,
     isOutputAsync,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
@@ -98,7 +99,7 @@ export class Activity implements IActivity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
         const recipient = getRecipientFromOutput(output)
 
-        this.type = getActivityType(isRecipientInternal(recipient))
+        this.type = getActivityType(isSubjectInternal(recipient))
         this.id = transactionId
         this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
 
@@ -109,7 +110,7 @@ export class Activity implements IActivity {
         this.sender = getSenderFromTransaction(transaction, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
-        this.isInternal = isRecipientInternal(recipient)
+        this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -130,7 +131,7 @@ export class Activity implements IActivity {
         const recipient = getRecipientFromOutput(outputData.output)
         const isIncoming = recipientAddress === account.depositAddress
         // const isInternal = !!findAccountWithAddress(address)
-        const isInternal = isRecipientInternal(recipient)
+        const isInternal = isSubjectInternal(recipient)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
@@ -252,8 +253,4 @@ export class Activity implements IActivity {
         }
         return subject
     }
-}
-
-function isRecipientInternal(recipient): boolean {
-    return recipient.type === 'account'
 }

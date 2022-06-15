@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { isBright } from '@lib/helpers'
+    import { openPopup } from '@lib/popup'
     import { ClickableTile, Icon, StakingAssetTile, Text } from 'shared/components'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
 
@@ -10,7 +11,15 @@
 
     $: assetIconColor = isBright(asset?.metadata?.primaryColor) ? 'gray-800' : 'white'
 
-    function handleTileClick(): void {}
+    function handleTileClick(): void {
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+            props: {
+                asset,
+            },
+        })
+    }
 </script>
 
 {#if isStakingAsset}
