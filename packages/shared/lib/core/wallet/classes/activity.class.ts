@@ -161,8 +161,8 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
+        this.isClaimed = false
 
-        setAsyncDataForOutput(this, outputData.output, isIncoming)
         return this
     }
 
@@ -272,21 +272,4 @@ function getActivityType(internal: boolean): ActivityType {
 
 function isRecipientInternal(recipient): boolean {
     return recipient.type === 'account'
-}
-
-function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncoming: boolean): void {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
-                activity.isAsync = true
-                activity.isClaimed = false // TODO
-                activity.expirationDate = new Date(unlockCondition.unixTime * MILLISECONDS_PER_SECOND)
-            }
-            if (unlockCondition.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN) {
-                activity.isAsync = true
-                activity.isClaimed = false // TODO
-                activity.storageDeposit = Number(unlockCondition.amount)
-            }
-        }
-    }
 }
