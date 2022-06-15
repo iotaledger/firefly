@@ -3,7 +3,7 @@ import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/net
 import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
 import { ledgerSimulator } from '@lib/ledger'
 
-import { ProfileImportType, ProfileType } from '../enums'
+import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
 import { newProfile, updateNewProfile } from '../stores'
 import { getStorageDirectoryOfProfile, removeProfileFolder } from '../utils'
@@ -64,9 +64,7 @@ export async function deleteNewProfile(): Promise<void> {
  * @param {ProfileType} type
  * @returns {void}
  */
-export function setNewProfileType(importType: ProfileImportType): void {
-    const profileType = importType === ProfileImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
-    const isLedger = ledgerSimulator && profileType === ProfileType.Ledger
-    const type = isLedger ? ProfileType.Ledger : profileType
+export function setNewProfileType(type: ProfileType): void {
+    type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
     updateNewProfile({ type })
 }
