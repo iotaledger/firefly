@@ -13,6 +13,7 @@ import {
     getRecipientAddressFromOutput,
     getSenderAddressFromUnlockCondition,
     getStorageDepositFromOutput,
+    isOutputAsync,
 } from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import {
@@ -360,15 +361,4 @@ function getExpirationDateFromOutput(output: OutputTypes): Date {
         }
     }
     return undefined
-}
-
-function isOutputAsync(output: OutputTypes): boolean {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (ASYNC_UNLOCK_CONDITION_TYPES.some((type) => type === unlockCondition.type)) {
-                return true
-            }
-        }
-    }
-    return false
 }

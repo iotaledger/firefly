@@ -13,3 +13,4 @@ export * from './receiverAddressesFromTransactionPayload'
 export * from './sendAddressFromTransactionPayload'
 
 export * from './outputs'
+export * from './transactions'
