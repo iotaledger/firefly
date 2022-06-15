@@ -12,6 +12,7 @@ export function getRecipientAddressFromOutput(output: OutputTypes): string {
                 return ed25519ToBech32(unlockCondition.address.pubKeyHash)
             }
         }
+    } else {
+        return undefined
     }
-    return undefined
 }

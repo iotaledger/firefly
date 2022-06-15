@@ -11,6 +11,7 @@ export function getExpirationDateFromOutput(output: OutputTypes): Date {
                     : undefined
             }
         }
+    } else {
+        return undefined
     }
-    return undefined
 }
