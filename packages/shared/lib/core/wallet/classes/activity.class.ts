@@ -25,6 +25,7 @@ import {
     getExpirationDateFromOutput,
     getMetadataFromOutput,
     getRecipientAddressFromOutput,
+    getRecipientFromOutput,
     getSenderFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
@@ -266,16 +267,6 @@ function getActivityType(internal: boolean): ActivityType {
         return ActivityType.InternalTransaction
     } else {
         return ActivityType.ExternalTransaction
-    }
-}
-
-function getRecipientFromOutput(output: OutputTypes): Recipient {
-    const recipientAddress = getRecipientAddressFromOutput(output)
-    const recipientAccount = findAccountWithAddress(recipientAddress)
-    if (recipientAccount) {
-        return { type: 'account', account: recipientAccount }
-    } else {
-        return { type: 'address', address: recipientAddress }
     }
 }
 
