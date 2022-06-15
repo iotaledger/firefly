@@ -13,16 +13,17 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAsset, Recipient } from '@core/wallet'
 
-    let assetAmountInput: AssetAmountInput
-    let recipientInput: RecipientInput
+    export let asset: IAsset
 
-    let asset: IAsset
     let amount: string
     let rawAmount: number
     let unit: string
     let recipient: Recipient
     let metadata: string
     let tag: string
+
+    let assetAmountInput: AssetAmountInput
+    let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
         let valid = true
