@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from '@core/app'
+    import { Button, OnboardingLayout, Text } from 'shared/components'
     import { downloadRecoveryKit } from 'shared/lib/utils'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
@@ -34,7 +33,9 @@
         </Button>
         <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
+    <!-- Removed animation because this view will soon be combined with Recovery Phrase generation according to Figma docs -->
+    <!-- Freed up the animation to use it in OnboardingNetwork.svelte -->
+    <!-- <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="secure-desktop" />
-    </div>
+    </div> -->
 </OnboardingLayout>

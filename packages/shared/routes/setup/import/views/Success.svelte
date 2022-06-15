@@ -3,7 +3,6 @@
     import { mobile } from '@core/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import { localize } from '@core/i18n'
-    import { ProfileImportType } from '@core/profile'
     import { ImportRouter } from '@core/router'
 
     const dispatch = createEventDispatcher()
@@ -32,11 +31,6 @@
         <Button classes="w-full" onClick={() => handleContinueClick()}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation
-            classes="setup-anim-aspect-ratio"
-            animation={$importType === ProfileImportType.Seed || $importType === ProfileImportType.Mnemonic
-                ? 'import-from-text-success-desktop'
-                : 'import-from-file-success-desktop'}
-        />
+        <Animation classes="setup-anim-aspect-ratio" animation={'success-desktop'} />
     </div>
 </OnboardingLayout>

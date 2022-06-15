@@ -20,12 +20,12 @@
             darkmode: 'appearance-desktop-darkmode.json',
         },
         'onboarding-protocol-desktop': {
-            lightmode: 'import-from-text-success-desktop.json',
-            darkmode: 'import-from-text-success-desktop-darkmode.json',
+            lightmode: 'onboarding-protocol-desktop.json',
+            darkmode: 'onboarding-protocol-desktop-darkmode.json',
         },
         'onboarding-network-desktop': {
-            lightmode: 'secure-desktop.json',
-            darkmode: 'secure-desktop-darkmode.json',
+            lightmode: 'onboarding-network-desktop.json',
+            darkmode: 'onboarding-network-desktop-darkmode.json',
         },
         'profile-desktop': {
             lightmode: 'profile-desktop.json',
@@ -34,10 +34,6 @@
         'setup-desktop': {
             lightmode: 'setup-desktop.json',
             darkmode: 'setup-desktop-darkmode.json',
-        },
-        'secure-desktop': {
-            lightmode: 'secure-desktop.json',
-            darkmode: 'secure-desktop-darkmode.json',
         },
         'password-desktop': {
             lightmode: 'password-desktop.json',
@@ -79,13 +75,9 @@
             lightmode: 'import-from-file-password-desktop.json',
             darkmode: 'import-from-file-password-desktop-darkmode.json',
         },
-        'import-from-text-success-desktop': {
-            lightmode: 'import-from-text-success-desktop.json',
-            darkmode: 'import-from-text-success-desktop-darkmode.json',
-        },
-        'import-from-file-success-desktop': {
-            lightmode: 'import-from-file-success-desktop.json',
-            darkmode: 'import-from-file-success-desktop-darkmode.json',
+        'success-desktop': {
+            lightmode: 'success-desktop.json',
+            darkmode: 'success-desktop-darkmode.json',
         },
         'congratulations-desktop': {
             lightmode: 'congratulations-desktop.json',
