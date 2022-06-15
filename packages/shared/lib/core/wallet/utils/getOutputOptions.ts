@@ -1,5 +1,5 @@
 import type { OutputOptions } from '@iota/wallet'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { convertDateToUnixTimestamp } from '@core/utils'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -8,7 +8,7 @@ export function getOutputOptions(
     metadata: string,
     tag: string
 ): OutputOptions {
-    const unixTime = expirationDate ? Math.round(expirationDate.getTime() / MILLISECONDS_PER_SECOND) : undefined
+    const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate).toString() : undefined
     return {
         recipientAddress,
         amount: String(rawAmount),
