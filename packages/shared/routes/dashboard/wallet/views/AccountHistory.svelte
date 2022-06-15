@@ -219,12 +219,7 @@
                         : 'w-0'} overflow-hidden"
                 >
                     <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
-                    <Input
-                        bind:value={searchValue}
-                        classes="z-0"
-                        style="padding: 0.75rem  2.5rem;"
-                        bind:inputElement
-                    />
+                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" bind:inputElement />
                     <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
                         <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
                     </button>
