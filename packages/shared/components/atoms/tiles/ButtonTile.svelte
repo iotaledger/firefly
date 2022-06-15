@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Tile } from 'shared/components'
+    import { TTile } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let icon = ''
@@ -24,5 +24,5 @@
         : 'bg-gray-50 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700'}"
     on:click={onClick}
 >
-    <Tile {...$$props} />
+    <TTile {...$$props} />
 </button>

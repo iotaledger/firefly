@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Tile } from 'shared/components'
+    import { Icon, TTile } from 'shared/components'
     import { IAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
@@ -13,7 +13,7 @@
 </script>
 
 {#if account}
-    <Tile
+    <TTile
         applyBorder
         icon="wallet"
         iconLabel={alias}
@@ -31,5 +31,5 @@
             classes="mr-2 text-white bg-green-500 rounded-full"
             slot="subText"
         />
-    </Tile>
+    </TTile>
 {/if}
