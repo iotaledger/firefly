@@ -1,3 +1,5 @@
+export * from './getAmountFromOutput'
 export * from './getExpirationDateFromOutput'
+export * from './getMetadataFromOutput'
 export * from './getStorageDepositFromOutput'
 export * from './isOutputAsync'
