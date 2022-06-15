@@ -56,7 +56,7 @@
 </script>
 
 <script lang="typescript">
-    export let type: TextType = TextType.p
+    export let type = TextType.p
     export let fontSize = ''
     export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
     export let lineHeight = ''
@@ -150,58 +150,70 @@
         },
     }
 
+    $: formattedFontSize = fontSize ? TEXT_PREFIX + fontSize : ''
+    $: formattedLineHeight = lineHeight ? LEADING_PREFIX + lineHeight : ''
+    $: formattedColor = color ? TEXT_PREFIX + color : ''
+    $: formattedDarkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
+
+    let _fontSize
+    let _lineHeight
+    let _color
+    let _darkColor
+
     // Format custom inputs
-    fontSize = fontSize ? TEXT_PREFIX + fontSize : ''
-    lineHeight = lineHeight ? LEADING_PREFIX + lineHeight : ''
-    color = color ? TEXT_PREFIX + color : ''
-    darkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
+    function setCustomStyles() {
+        _fontSize = formattedFontSize
+        _lineHeight = formattedLineHeight
+        _color = formattedColor
+        _darkColor = formattedDarkColor
+    }
 
     // Adjust font for old override classes
     function adjustFont() {
         switch (type) {
             case TextType.p:
-                fontSize = bigger ? 'text-16' : smaller ? 'text-12' : fontSize
-                lineHeight = bigger ? 'leading-140' : smaller ? 'leading-120' : lineHeight
+                _fontSize = bigger ? 'text-16' : smaller ? 'text-12' : _fontSize
+                _lineHeight = bigger ? 'leading-140' : smaller ? 'leading-120' : _lineHeight
                 break
             case TextType.pre:
-                fontSize = bigger ? 'text-13' : smaller ? 'text-11' : fontSize
+                _fontSize = bigger ? 'text-13' : smaller ? 'text-11' : _fontSize
                 break
         }
 
         fontWeight = bold ? FontWeightText.bold : fontWeight
-        lineHeight = overrideLeading ? '' : lineHeight
+        _lineHeight = overrideLeading ? '' : _lineHeight
     }
-    $: smaller, bigger, adjustFont()
 
     // Adjust colours for old override classes
     function adjustColor() {
-        color = overrideColor ? '' : color
-        darkColor = overrideColor ? '' : darkColor
+        _color = overrideColor ? '' : _color
+        _darkColor = overrideColor ? '' : _darkColor
 
         if (error) {
-            color = ERROR_TEXT_COLOUR
-            darkColor = ERROR_TEXT_COLOUR
+            _color = ERROR_TEXT_COLOUR
+            _darkColor = ERROR_TEXT_COLOUR
         } else if (disabled) {
-            color = DISABLED_TEXT_COLOUR
-            darkColor = DISABLED_TEXT_DARK_COLOUR
+            _color = DISABLED_TEXT_COLOUR
+            _darkColor = DISABLED_TEXT_DARK_COLOUR
         } else if (highlighted) {
-            color = HIGHLIGHT_TEXT_COLOUR
-            darkColor = HIGHLIGHT_TEXT_COLOUR
+            _color = HIGHLIGHT_TEXT_COLOUR
+            _darkColor = HIGHLIGHT_TEXT_COLOUR
         } else if (secondary) {
-            color = SECONDARY_TEXT_COLOUR
-            darkColor = SECONDARY_TEXT_COLOUR
+            _color = SECONDARY_TEXT_COLOUR
+            _darkColor = SECONDARY_TEXT_COLOUR
         }
     }
-    $: error, disabled, highlighted, secondary, adjustColor()
+
+    $: $$props, setCustomStyles(), adjustFont(), adjustColor()
 
     let customClasses: ICustomClass
     $: customClasses = {
         ...DEFAULT_CLASSES_LIST[type],
-        ...(fontSize && { fontSize }),
+        ...(_fontSize && { fontSize: _fontSize }),
         ...(fontWeight && { fontWeight }),
-        ...(lineHeight && { lineHeight }),
-        ...(color && { color }),
-        ...(darkColor && { darkColor }),
+        ...(_lineHeight && { lineHeight: _lineHeight }),
+        ...((overrideColor || _color) && { color: _color }),
+        ...((overrideColor || _darkColor) && { darkColor: _darkColor }),
     }
 
     $: customClassesString = Object.values(customClasses).join(' ')
