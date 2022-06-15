@@ -1,38 +1,36 @@
-import { BASE_TOKEN } from '@core/network'
+import { IAccountState } from '@core/account'
+import { localize } from '@core/i18n'
+import { BASE_TOKEN, NETWORK } from '@core/network'
 import { activeProfile } from '@core/profile'
+import { ITagFeature, OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
+import { truncateString } from '@lib/helpers'
 import { findAccountWithAddress } from '@lib/wallet'
-import { get } from 'svelte/store'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { IActivity } from '../interfaces'
-import { ITokenMetadata } from '../interfaces/token-metadata.interface'
-import { Recipient, Sender } from '../types'
-import {
-    formatTokenAmountBestMatch,
-    getExpirationDateFromOutput,
-    getRecipientAddressFromOutput,
-    getSenderAddressFromUnlockCondition,
-    getStorageDepositFromOutput,
-    isOutputAsync,
-    getAmountFromOutput,
-    getMetadataFromOutput,
-} from '../utils'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
+import { get } from 'svelte/store'
 import {
-    ASYNC_UNLOCK_CONDITION_TYPES,
     FEATURE_TYPE_TAG,
     OUTPUT_TYPE_TREASURY,
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
-import { ITagFeature, IUTXOInput, OutputTypes } from '@iota/types'
-import { IAccountState } from '@core/account'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import { IActivity } from '../interfaces'
+import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
-import { NETWORK } from '@core/network'
-import { truncateString } from '@lib/helpers'
-import { localize } from '@core/i18n'
-import { getNonRemainderOutputFromTransaction } from '../utils/transactions'
+import { Recipient, Sender } from '../types'
+import {
+    formatTokenAmountBestMatch,
+    getAmountFromOutput,
+    getExpirationDateFromOutput,
+    getMetadataFromOutput,
+    getRecipientAddressFromOutput,
+    getSenderFromOutput,
+    getStorageDepositFromOutput,
+    isOutputAsync,
+} from '../utils'
+import { getNonRemainderOutputFromTransaction, getSenderFromTransactionInputs } from '../utils/transactions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -316,24 +314,4 @@ function getSenderFromTransaction(transaction: Transaction, accountAddress): Sen
     } else {
         return undefined
     }
-}
-
-function getSenderFromTransactionInputs(inputs: IUTXOInput[]): Sender {
-    // TODO: Implement this when wallet.rs updates the transaction response
-    return undefined
-}
-
-function getSenderFromOutput(output: OutputTypes): Sender {
-    if (output.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
-            if (senderAddress) {
-                return {
-                    type: 'address',
-                    address: senderAddress,
-                }
-            }
-        }
-    }
-    return undefined
 }
