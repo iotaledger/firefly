@@ -30,7 +30,11 @@ import {
     getTagFromOutput,
     isOutputAsync,
 } from '../utils'
-import { getNonRemainderOutputFromTransaction, getSenderFromTransactionInputs } from '../utils/transactions'
+import {
+    getNonRemainderOutputFromTransaction,
+    getSenderFromTransaction,
+    getSenderFromTransactionInputs,
+} from '../utils/transactions'
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -293,16 +297,5 @@ function setAsyncDataForOutput(activity: Activity, output: OutputTypes, isIncomi
                 activity.storageDeposit = Number(unlockCondition.amount)
             }
         }
-    }
-}
-
-function getSenderFromTransaction(transaction: Transaction, accountAddress): Sender {
-    if (!transaction?.incoming) {
-        return { type: 'address', address: accountAddress }
-    } else if (transaction?.incoming) {
-        getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
-            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress))
-    } else {
-        return undefined
     }
 }
