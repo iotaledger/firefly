@@ -5,7 +5,7 @@
         RecipientInput,
         AssetAmountInput,
         ClosableTextInput,
-        OptionalInputButton,
+        AddInputButton,
     } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
@@ -107,13 +107,13 @@
         />
         {#if !isMetadataInputOpen || !isTagInputOpen}
             <optional-input-buttons class="flex flex-row space-x-4">
-                <OptionalInputButton
+                <AddInputButton
                     bind:buttonElement={metadataButtonElement}
                     bind:open={isMetadataInputOpen}
                     text={localize('general.metadata')}
                     onClick={openMetadataInput}
                 />
-                <OptionalInputButton
+                <AddInputButton
                     bind:buttonElement={tagButtonElement}
                     bind:open={isTagInputOpen}
                     text={localize('general.tag')}
