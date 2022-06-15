@@ -28,6 +28,7 @@ import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { NETWORK } from '@core/network'
 import { truncateString } from '@lib/helpers'
 import { localize } from '@core/i18n'
+import { getNonRemainderOutputFromTransaction } from '../utils/transactions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -261,20 +262,6 @@ function getActivityType(internal: boolean): ActivityType {
     } else {
         return ActivityType.ExternalTransaction
     }
-}
-
-function getNonRemainderOutputFromTransaction(transaction: Transaction, accountAddress: string): OutputTypes {
-    const outputs = transaction.payload.essence.outputs
-    const nonRemainerOutputs = outputs.filter((output) => {
-        const recipientAddress = getRecipientAddressFromOutput(output)
-
-        if (transaction.incoming) {
-            return accountAddress === recipientAddress
-        } else {
-            return accountAddress !== recipientAddress
-        }
-    })
-    return nonRemainerOutputs[0]
 }
 
 function getAmountFromOutput(output: OutputTypes): number {
