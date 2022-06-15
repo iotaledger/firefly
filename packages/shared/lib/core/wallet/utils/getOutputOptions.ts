@@ -8,7 +8,7 @@ export function getOutputOptions(
     metadata: string,
     tag: string
 ): OutputOptions {
-    const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate).toString() : undefined
+    const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     return {
         recipientAddress,
         amount: String(rawAmount),
