@@ -14,7 +14,7 @@
     import { truncateString } from '@lib/helpers'
     import Hr from './HR.svelte'
     import ActivityAsyncStatusPill from './atoms/pills/ActivityAsyncStatusPill.svelte'
-    import { onMount } from 'svelte'
+    import { time } from '@core/app'
     import { activeProfile } from '@core/profile'
     import { NETWORK } from '@core/network'
 
@@ -55,27 +55,14 @@
         }
     }
 
-    let time = new Date()
-    onMount(() => {
-        if (activity.isAsync && activity.isClaimed) {
-            const interval = setInterval(() => {
-                time = new Date()
-            }, 1000)
-
-            return () => {
-                clearInterval(interval)
-            }
-        }
-    })
-
-    $: asyncStatus = activity.getAsyncStatus(time)
+    $: asyncStatus = activity.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let timeDiff: string
     $: {
         if (activity.isAsync && !activity.isClaimed && activity?.expirationDate) {
-            const elapsedTime = activity.expirationDate.getTime() - time.getTime()
+            const elapsedTime = activity.expirationDate.getTime() - $time.getTime()
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
             const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
             const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
