@@ -17,7 +17,7 @@ export function getOutputOptions(
             ...(tag && { tag }),
         },
         unlocks: {
-            ...(unixTime && { expiration: { unixTime } }),
+            ...(unixTime && { expiration: { unixTime: unixTime.toString() } }),
         },
     }
 }
