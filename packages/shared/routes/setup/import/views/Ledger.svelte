@@ -23,9 +23,11 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.importFromLedger.body')}</Text>
+    </div>
+    <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
             icon="settings"
-            classes="w-full mb-5"
+            classes="w-full"
             secondary
             onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}
         >
@@ -34,7 +36,7 @@
         </OnboardingButton>
         <OnboardingButton
             icon="settings"
-            classes="w-full mb-8"
+            classes="w-full"
             secondary
             hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
