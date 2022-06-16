@@ -5,7 +5,7 @@ import { hiddenActivities } from '../stores/hidden-activities.store'
 
 export function hideActivity(id: string): void {
     hiddenActivities.update((state) => {
-        if (!state[get(selectedAccount).id]) {
+        if (!state[get(selectedAccount).id] || !Array.isArray(state[get(selectedAccount).id])) {
             state[get(selectedAccount).id] = []
         }
         state[get(selectedAccount).id].push(id)
