@@ -86,24 +86,26 @@
             </div>
         {/if}
     </div>
-    <div class="overflow-y-auto flex-auto h-1 space-y-4 -mr-2 pr-2 scroll-secondary">
-        {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
-            <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if $groupedActivities.length}
-            {#each $groupedActivities as group}
-                <div class="space-y-2">
-                    <Text fontWeight={FontWeightText.semibold} color="gray-600">
-                        {group.date} • {group.activities.length}
-                    </Text>
-                    {#each group.activities as activity}
-                        <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
-                    {/each}
+    <div class="overflow-y-scroll overflow-x-visible flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
+        <div class="-mr-4 overflow-x-visible">
+            {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
+                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+            {:else if $groupedActivities.length}
+                {#each $groupedActivities as group}
+                    <div class="space-y-2">
+                        <Text fontWeight={FontWeightText.semibold} color="gray-600">
+                            {group.date} • {group.activities.length}
+                        </Text>
+                        {#each group.activities as activity}
+                            <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
+                        {/each}
+                    </div>
+                {/each}
+            {:else}
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
-            {/each}
-        {:else}
-            <div class="h-full flex flex-col items-center justify-center text-center">
-                <Text secondary>{localize('general.noRecentHistory')}</Text>
-            </div>
-        {/if}
+            {/if}
+        </div>
     </div>
 </div>
