@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { Recipient, Sender } from '../types'
+import { Subject } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
@@ -14,8 +14,8 @@ export interface IActivity {
     inclusionState: InclusionState
     isInternal: boolean
     rawAmount: number
-    sender: Sender
-    recipient: Recipient
+    sender: Subject
+    recipient: Subject
     token: ITokenMetadata
     isAsync: boolean
     expirationDate?: Date

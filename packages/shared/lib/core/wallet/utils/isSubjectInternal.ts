@@ -1,5 +1,5 @@
-import { Recipient, Sender } from '../types'
+import { Subject } from '../types'
 
-export function isSubjectInternal(subject: Recipient | Sender): boolean {
+export function isSubjectInternal(subject: Subject): boolean {
     return subject.type === 'account'
 }
