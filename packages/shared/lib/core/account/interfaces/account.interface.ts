@@ -10,23 +10,21 @@ import {
     AddressWithAmount,
     AddressWithMicroAmount,
     AddressWithUnspentOutputs,
+    BuildAliasOutputData,
+    BuildBasicOutputData,
+    BuildFoundryOutputData,
+    BuildNftOutputData,
     NativeTokenOptions,
     NftOptions,
     OutputData,
     OutputsToCollect,
+    SignedTransactionEssence,
     Transaction,
     TransactionResult,
     TransactionOptions,
     PreparedTransactionData,
     OutputOptions,
-} from '@iota/wallet/out/types'
-import {
-    BuildAliasOutputData,
-    BuildBasicOutputData,
-    BuildFoundryOutputData,
-    BuildNftOutputData,
-} from '@iota/wallet/out/types/buildOutputData'
-import { SignedTransactionEssence } from '@iota/wallet/out/types/signedTransactionEssence'
+} from '@iota/wallet'
 
 export interface IAccount {
     meta: AccountMeta
@@ -35,24 +33,26 @@ export interface IAccount {
     buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
     buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
     collectOutputs(outputIds: string[]): Promise<TransactionResult[]>
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<TransactionResult[]>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
-    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string>
+    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     listOutputs(): Promise<OutputData[]>
-    listUnspentOutputs(): Promise<OutputData[]>
     listPendingTransactions(): Promise<Transaction[]>
     listTransactions(): Promise<Transaction[]>
+    listUnspentOutputs(): Promise<OutputData[]>
+    minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
-        transferOptions?: TransactionOptions
-    ): Promise<TransactionResult[]>
-    mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
+        transactionOptions?: TransactionOptions
+    ): Promise<TransactionResult>
+    mintNfts(nftsOptions: NftOptions[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
     prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     prepareSendAmount(
         addressWithAmount: AddressWithAmount[],
@@ -76,6 +76,6 @@ export interface IAccount {
     setAlias(alias: string): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult>
-    sync(options?: AccountSyncOptions): Promise<void>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult>
+    sync(options?: AccountSyncOptions): Promise<AccountBalance>
+    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult[]>
 }

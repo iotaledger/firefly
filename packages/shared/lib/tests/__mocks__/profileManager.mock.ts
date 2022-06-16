@@ -1,4 +1,11 @@
-import type { AccountId, CreateAccountPayload, AccountSyncOptions, ClientOptions } from '@iota/wallet'
+import type {
+    AccountId,
+    CreateAccountPayload,
+    AccountSyncOptions,
+    ClientOptions,
+    EventType,
+    WalletEvent,
+} from '@iota/wallet'
 import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
@@ -13,6 +20,18 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
+    bech32ToHex(bech32Address: string): Promise<string> {
+        throw new Error('Method not implemented.')
+    }
+
+    changeStrongholdPassword(password: string): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
+    clearListeners(eventTypes: EventType[]): void {
+        throw new Error('Method not implemented.')
+    }
+
     clearStrongholdPassword(): Promise<void> {
         return Promise.resolve()
     }
@@ -21,12 +40,16 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(new AccountMock())
     }
 
-    deleteStorage(): Promise<void> {
+    deleteAccountsAndDatabase(): Promise<void> {
         return Promise.resolve()
     }
 
     destroy(): Promise<void> {
         return Promise.resolve()
+    }
+
+    emitTestEvent(event: WalletEvent): Promise<void> {
+        throw new Error('Method not implemented.')
     }
 
     generateMnemonic(): Promise<string> {
@@ -92,6 +115,10 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
+    hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {
+        throw new Error('Method not implemented.')
+    }
+
     isStrongholdPasswordAvailable(): Promise<boolean> {
         return Promise.resolve(true)
     }
@@ -102,6 +129,10 @@ export class ProfileManagerMock implements IProfileManager {
 
     recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
         return Promise.resolve([])
+    }
+
+    removeLatestAccount(): Promise<void> {
+        throw new Error('Method not implemented.')
     }
 
     restoreBackup(source: string, password: string): Promise<void> {
