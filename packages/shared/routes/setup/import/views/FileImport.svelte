@@ -11,7 +11,7 @@
     let filePath
     let dropping
 
-    const allowedExtensions = ['kdbx', 'stronghold', 'txt']
+    const allowedExtensions = ['kdbx', 'stronghold']
 
     const dispatch = createEventDispatcher()
 
