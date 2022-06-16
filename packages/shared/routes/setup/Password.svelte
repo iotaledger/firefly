@@ -8,8 +8,7 @@
     import zxcvbn from 'zxcvbn'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
-    import { profileManager, setStrongholdPassword } from '@core/profile-manager'
-    import { get } from 'svelte/store'
+    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
 
     export let locale: Locale
 
@@ -46,7 +45,7 @@
                 busy = true
                 if (existingPassword) {
                     // TODO: also pass in currentPassword
-                    await get(profileManager).changeStrongholdPassword(password)
+                    await changeStrongholdPassword(password)
                 } else {
                     await setStrongholdPassword(password)
                 }
@@ -86,7 +85,6 @@
                 showRevealToggle
                 showStrengthLevel
                 strength={passwordStrength.score}
-                {locale}
                 autofocus
                 disabled={busy}
             />
@@ -94,7 +92,6 @@
                 error={errorConfirm}
                 bind:value={confirmedPassword}
                 classes="mb-5"
-                {locale}
                 placeholder={locale('general.confirmPassword')}
                 showRevealToggle
                 disabled={busy}
