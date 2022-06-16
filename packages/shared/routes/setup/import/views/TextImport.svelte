@@ -27,7 +27,7 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{localize(`views.importFromText.${$importType}.enter`)}</Text>
-        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} {localize} />
+        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
