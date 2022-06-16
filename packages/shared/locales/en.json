@@ -1140,8 +1140,8 @@
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "fromAddress": "From {account}",
-        "toAddress": "To {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
@@ -1155,6 +1155,7 @@
         "version": "Version {version}",
         "yourWallets": "Your Wallets",
         "unknown": "Unknown",
+        "unknownAddress": "Unknown address",
         "none": "None",
         "staked": "Staked",
         "unstaked": "Unstaked",
@@ -1166,14 +1167,14 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "transactionTime": "Transaction time",
-        "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
-        "optionalPublicNote": "Optional public note",
+        "metadata": "Metadata",
+        "tag": "Tag",
         "nodeList": "Node list"
     },
     "dates": {
@@ -1353,6 +1354,9 @@
         "invalidTime": "INVALID TIME"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationTime": "The chosen expiration time is invalid."
+        },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
@@ -1417,24 +1421,33 @@
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+                "Pending": "staking for",
+                "Confirmed": "staked for",
+                "Conflicting": "failed to stake"
         },
-        "transfer": {
-            "Pending": "transferring to",
-            "Confirmed": "transferred to",
-            "Conflicting": "failed to transfer"
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
         },
-        "receive": {
-            "Pending": "receiving from",
-            "Confirmed": "received from",
-            "Conflicting": "failed to receive"
-        },
-        "send": {
-            "Pending": "sending to",
-            "Confirmed": "sent to",
-            "Conflicting": "failed to send"
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
         },
         "migrate": {
             "Pending": "migrating for",

@@ -1,4 +1,4 @@
-import { OutputTypes } from '@iota/types'
+import { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
 import {
     AccountBalance,
     AccountMeta,
@@ -17,12 +17,26 @@ import {
     Transaction,
     TransactionResult,
     TransactionOptions,
+    PreparedTransactionData,
     OutputOptions,
 } from '@iota/wallet/out/types'
+import {
+    BuildAliasOutputData,
+    BuildBasicOutputData,
+    BuildFoundryOutputData,
+    BuildNftOutputData,
+} from '@iota/wallet/out/types/buildOutputData'
+import { SignedTransactionEssence } from '@iota/wallet/out/types/signedTransactionEssence'
 
 export interface IAccount {
     meta: AccountMeta
+    buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput>
+    buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
+    buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
+    buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
     collectOutputs(outputIds: string[]): Promise<TransactionResult[]>
+    generateAddress(options?: AddressGenerationOptions): Promise<Address>
+    generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
@@ -34,28 +48,34 @@ export interface IAccount {
     listUnspentOutputs(): Promise<OutputData[]>
     listPendingTransactions(): Promise<Transaction[]>
     listTransactions(): Promise<Transaction[]>
-    sync(options?: AccountSyncOptions): Promise<void>
-    generateAddress(options?: AddressGenerationOptions): Promise<Address>
-    generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
         transferOptions?: TransactionOptions
     ): Promise<TransactionResult[]>
     mintNfts(nftOptions: NftOptions[], transferOptions?: TransactionOptions): Promise<TransactionResult[]>
-    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputData>
+    prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
+    prepareSendAmount(
+        addressWithAmount: AddressWithAmount[],
+        options?: TransactionOptions
+    ): Promise<PreparedTransactionData>
+    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
-        transferOptions?: TransactionOptions
+        transactionOptions?: TransactionOptions
     ): Promise<TransactionResult>
-    sendNft(addressesAndNftIds: AddressNftId[], transferOptions?: TransactionOptions): Promise<TransactionResult>
-    sendTransfer(outputs: OutputData[], transferOptions?: TransactionOptions): Promise<TransactionResult>
+    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    setAlias(alias: string): Promise<void>
+    signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
+    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult>
+    sync(options?: AccountSyncOptions): Promise<void>
     tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult>
 }

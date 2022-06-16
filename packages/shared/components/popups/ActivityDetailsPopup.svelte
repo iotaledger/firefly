@@ -14,36 +14,22 @@
         parseRawAmount,
     } from '@core/wallet'
     import { activeProfile } from '@core/profile'
-    import { onMount } from 'svelte'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { time } from '@core/app'
 
     export let activity: Activity
-
-    let time = new Date()
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
 
-    $: asyncStatus = activity.getAsyncStatus(time)
+    $: asyncStatus = activity.getAsyncStatus($time)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings?.currency]
     )
-
-    onMount(() => {
-        if (activity.isAsync && !activity.isClaimed) {
-            const interval = setInterval(() => {
-                time = new Date()
-            }, 1000)
-
-            return () => {
-                clearInterval(interval)
-            }
-        }
-    })
 
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)

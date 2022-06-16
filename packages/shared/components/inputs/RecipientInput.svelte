@@ -1,17 +1,15 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
-    import { RecipientAccountSelector, TextInput, InputContainer, Modal } from 'shared/components'
-    import { activeProfile } from '@core/profile'
-    import { getNetwork, NetworkType, nodeInfo } from '@core/network'
     import { IAccountState } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { networkHrp } from '@core/network'
     import { Recipient } from '@core/wallet'
+    import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
+    import { InputContainer, Modal, RecipientAccountSelector, TextInput } from 'shared/components'
 
     export let recipient: Recipient
     export let disabled = false
 
-    const network = getNetwork($activeProfile.networkProtocol, $activeProfile.networkType)
-    const addressPrefix = network?.type === NetworkType.PrivateNet ? $nodeInfo?.protocol?.bech32HRP : network?.bech32Hrp
+    const addressPrefix = $networkHrp
 
     let inputElement: HTMLInputElement
     let modal: Modal

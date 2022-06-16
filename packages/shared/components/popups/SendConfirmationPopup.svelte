@@ -1,24 +1,55 @@
 <script lang="typescript">
-    import { Button, Text, KeyValueBox, ExpirationTimePicker } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { TransactionDetails } from 'shared/components/molecules'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { promptUserToConnectLedger } from '@lib/ledger'
-    import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
+    import {
+        ActivityDirection,
+        ActivityType,
+        calculateStorageDepositFromOutput,
+        getOutputOptions,
+        InclusionState,
+        Recipient,
+        trySendOutput,
+    } from '@core/wallet'
+    import type { OutputTypes } from '@iota/types'
+    import type { OutputOptions } from '@iota/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { promptUserToConnectLedger } from '@lib/ledger'
     import { CurrencyTypes } from '@lib/typings/currency'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
+    import { TransactionDetails } from 'shared/components/molecules'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { closePopup } from 'shared/lib/popup'
 
     export let internal = false
     export let recipient: Recipient
     export let rawAmount: number
-    export let amount: '0'
+    export let amount = '0'
     export let unit: string
-    export let expireDate: Date
-    export let publicNote: string
+    export let metadata: string
+    export let tag: string
+
+    let expirationDate: Date
+    let storageDeposit = 0
+
+    let preparedOutput: OutputTypes
+    let outputOptions: OutputOptions
 
     $: internal = recipient.type === 'account'
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+
+    async function _prepareOutput() {
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
+        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
+            remainderValueStrategy: {
+                strategy: 'ReuseAddress',
+                value: null,
+            },
+        })
+        storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
+    }
+
+    $: $$props, expirationDate, _prepareOutput()
 
     function onConfirm(): void {
         closePopup()
@@ -31,8 +62,7 @@
     }
 
     function send(): Promise<void> {
-        const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-        return trySend(recipientAddress, rawAmount)
+        return trySendOutput(outputOptions, preparedOutput)
     }
 
     function onCancel(): void {
@@ -45,24 +75,26 @@
         ) || '-'
 
     $: transactionDetails = {
-        type: internal ? ActivityType.Transfer : ActivityType.Send,
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
-        amount,
+        direction: ActivityDirection.Out,
+        amount: amount?.length > 0 ? amount : '0',
         unit,
-        recipient,
-        expireDate,
-        publicNote,
+        subject: recipient,
+        metadata,
+        tag,
+        storageDeposit: storageDeposit,
     }
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
+    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker bind:expireDate slot="value" />
+            <ExpirationTimePicker slot="value" bind:value={expirationDate} />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

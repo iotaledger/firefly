@@ -212,11 +212,11 @@
             } ${overflow ? 'overflow' : ''} ${relative ? 'relative' : ''}`}
         >
             {#if !hideClose}
-                <button
-                    on:click={tryClosePopup}
-                    class="absolute top-6 right-8 text-gray-800 dark:text-white focus:text-blue-500"
-                >
-                    <Icon icon="close" />
+                <button on:click={tryClosePopup} class="absolute top-6 right-6 focus:text-blue-500">
+                    <Icon
+                        icon="close"
+                        classes="text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
+                    />
                 </button>
             {/if}
             <svelte:component this={types[type]} {...props} {locale} />
