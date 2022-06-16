@@ -12,15 +12,16 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAsset, Recipient } from '@core/wallet'
+    import { onMount } from 'svelte'
 
     export let asset: IAsset
+    export let amount: string
+    export let unit: string
+    export let recipient: Recipient
+    export let metadata: string
+    export let tag: string
 
-    let amount: string
     let rawAmount: number
-    let unit: string
-    let recipient: Recipient
-    let metadata: string
-    let tag: string
 
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
@@ -52,11 +53,12 @@
                 openPopup({
                     type: 'sendConfirmation',
                     props: {
-                        internal: false,
-                        rawAmount,
+                        asset,
                         amount,
                         unit,
+                        rawAmount,
                         recipient,
+                        internal: false,
                         metadata,
                         tag,
                     },
@@ -84,6 +86,19 @@
     function openTagInput() {
         isTagInputOpen = true
     }
+
+    let sendButtonElement: HTMLButtonElement
+    onMount(() => {
+        if (metadata) {
+            openMetadataInput()
+        }
+        if (tag) {
+            openTagInput()
+        }
+        if (amount && recipient) {
+            sendButtonElement.focus()
+        }
+    })
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -126,7 +141,7 @@
         <Button classes="w-full" secondary onClick={onCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onSend}>
+        <Button bind:buttonElement={sendButtonElement} classes="w-full" onClick={onSend}>
             {localize('actions.send')}
         </Button>
     </popup-buttons>
