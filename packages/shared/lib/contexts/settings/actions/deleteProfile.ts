@@ -24,7 +24,8 @@ export async function deleteProfile(): Promise<void> {
             return
         }
 
-        if (get(isSoftwareProfile) && !_activeProfile.isStrongholdLocked) {
+        const shouldLockStronghold = get(isSoftwareProfile) && !_activeProfile.isStrongholdLocked
+        if (shouldLockStronghold) {
             await lockStronghold()
         }
 
