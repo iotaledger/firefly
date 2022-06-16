@@ -2,11 +2,13 @@
     import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
-    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
+    import { get } from 'svelte/store'
+    import { profileManager } from '@core/profile-manager'
 
-    let exportStrongholdChecked
+    let exportStrongholdChecked: boolean
     let currentPassword = ''
     let currentPasswordError = ''
     let newPassword = ''
@@ -17,7 +19,7 @@
 
     $: passwordStrength = zxcvbn(newPassword)
 
-    function changePassword() {
+    async function changePassword(): Promise<void> {
         if (currentPassword && newPassword && confirmedPassword) {
             reset()
 
@@ -39,58 +41,40 @@
                 passwordChangeBusy = true
                 passwordChangeMessage = localize('general.passwordUpdating')
                 const busyStart = Date.now()
-                const _clearMessage = () => {
-                    setTimeout(() => (passwordChangeMessage = ''), 2000)
-                }
-                const _hideBusy = (message, timeout) => {
-                    const diff = Date.now() - busyStart
-                    if (diff < timeout) {
-                        setTimeout(() => {
-                            passwordChangeBusy = false
-                            passwordChangeMessage = message
-                            _clearMessage()
-                        }, timeout - diff)
-                    } else {
-                        passwordChangeBusy = false
-                        passwordChangeMessage = message
-                        _clearMessage()
-                    }
-                }
 
-                api.changeStrongholdPassword(currentPassword, newPassword, {
-                    onSuccess() {
-                        if (exportStrongholdChecked) {
-                            passwordChangeMessage = localize('general.exportingStronghold')
+                try {
+                    await get(profileManager).changeStrongholdPassword(newPassword)
 
-                            return exportStronghold(newPassword, (cancelled, err) => {
-                                if (cancelled) {
-                                    _hideBusy('', 0)
+                    if (exportStrongholdChecked) {
+                        passwordChangeMessage = localize('general.exportingStronghold')
+
+                        return exportStronghold(newPassword, (cancelled, err) => {
+                            if (cancelled) {
+                                hideBusy('', 0, busyStart)
+                            } else {
+                                if (err) {
+                                    currentPasswordError = localize(err)
+                                    hideBusy(localize('general.passwordFailed'), 0, busyStart)
                                 } else {
-                                    if (err) {
-                                        currentPasswordError = localize(err)
-                                        _hideBusy(localize('general.passwordFailed'), 0)
-                                    } else {
-                                        currentPassword = ''
-                                        newPassword = ''
-                                        confirmedPassword = ''
-                                        exportStrongholdChecked = false
-                                        _hideBusy(localize('general.passwordSuccess'), 2000)
-                                    }
+                                    currentPassword = ''
+                                    newPassword = ''
+                                    confirmedPassword = ''
+                                    exportStrongholdChecked = false
+                                    hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
                                 }
-                            })
-                        } else {
-                            currentPassword = ''
-                            newPassword = ''
-                            confirmedPassword = ''
-                            exportStrongholdChecked = false
-                            _hideBusy(localize('general.passwordSuccess'), 2000)
-                        }
-                    },
-                    onError(err) {
-                        currentPasswordError = localize(err.error)
-                        _hideBusy(localize('general.passwordFailed'), 0)
-                    },
-                })
+                            }
+                        })
+                    } else {
+                        currentPassword = ''
+                        newPassword = ''
+                        confirmedPassword = ''
+                        exportStrongholdChecked = false
+                        hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
+                    }
+                } catch (err) {
+                    currentPasswordError = localize(err.error)
+                    hideBusy(localize('general.passwordFailed'), 0, busyStart)
+                }
             }
         }
     }
@@ -100,6 +84,25 @@
         newPasswordError = ''
         passwordChangeBusy = false
         passwordChangeMessage = ''
+    }
+
+    function clearPasswordMessage(): void {
+        setTimeout(() => (passwordChangeMessage = ''), 2000)
+    }
+
+    function hideBusy(message: string, timeout: number, busyStart: number): void {
+        const diff = Date.now() - busyStart
+        if (diff < timeout) {
+            setTimeout(() => {
+                passwordChangeBusy = false
+                passwordChangeMessage = message
+                clearPasswordMessage()
+            }, timeout - diff)
+        } else {
+            passwordChangeBusy = false
+            passwordChangeMessage = message
+            clearPasswordMessage()
+        }
     }
 </script>
 
