@@ -25,19 +25,12 @@
         <Text type="p" secondary classes="mb-8">{localize('views.importFromLedger.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <OnboardingButton
-            icon="settings"
-            classes="w-full"
-            secondary
-            onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}
-        >
+        <OnboardingButton icon="settings" onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}>
             {localize('views.importFromLedger.haveFireflyLedger')}
             <Text type="p" secondary smaller>{localize('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
         </OnboardingButton>
         <OnboardingButton
             icon="settings"
-            classes="w-full"
-            secondary
             hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
         >

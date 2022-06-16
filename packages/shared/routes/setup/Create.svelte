@@ -26,8 +26,6 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
             icon="file"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.sofwareProfile?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
@@ -41,8 +39,6 @@
         </OnboardingButton>
         <OnboardingButton
             icon="chip"
-            classes="w-full mb-8"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.ledgerProfile?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile

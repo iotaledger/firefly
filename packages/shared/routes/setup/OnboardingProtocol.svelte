@@ -32,8 +32,6 @@
             <OnboardingButton
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
-                classes="w-full"
-                secondary
                 hidden={features?.onboarding?.[NetworkProtocol[protocol]]?.hidden}
                 disabled={!features?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}

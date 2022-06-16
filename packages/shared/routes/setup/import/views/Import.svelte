@@ -28,8 +28,6 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
             icon="seed"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
@@ -43,8 +41,6 @@
         </OnboardingButton>
         <OnboardingButton
             icon="language"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
@@ -58,8 +54,6 @@
         </OnboardingButton>
         <OnboardingButton
             icon="file"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
@@ -76,8 +70,6 @@
         {#if !$mobile}
             <OnboardingButton
                 icon="chip"
-                classes="w-full mb-8"
-                secondary
                 hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                     ?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]

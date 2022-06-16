@@ -45,8 +45,6 @@
             icon="tokens"
             iconHeight="24"
             iconWidth="24"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
@@ -62,8 +60,6 @@
             icon="plus"
             iconHeight="11"
             iconWidth="11"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
@@ -81,8 +77,6 @@
         </OnboardingButton>
         <OnboardingButton
             icon="transfer"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile

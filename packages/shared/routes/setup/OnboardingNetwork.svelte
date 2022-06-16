@@ -37,8 +37,6 @@
                 iconColor={networkType === NetworkType.Mainnet
                     ? `${$newProfile?.networkProtocol}-highlight`
                     : 'blue-500'}
-                classes="w-full"
-                secondary
                 hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.hidden}
                 disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
