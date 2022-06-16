@@ -4,7 +4,7 @@
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
     import ChangeProfileName from './ChangeProfileName.svelte'
     import { activeProfile } from '@core/profile'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const settings: {
         component: unknown
@@ -18,7 +18,7 @@
         { component: NetworkStatus, childRoute: GeneralSettings.NetworkStatus, requireLogin: true },
         { component: ChangeProfileName, childRoute: GeneralSettings.ChangeProfileName, requireLogin: true },
     ]
-    const visibleSettings = settings.filter((setting) => featureFlags?.settings?.general?.[setting.childRoute]?.enabled)
+    const visibleSettings = settings.filter((setting) => features?.settings?.general?.[setting.childRoute]?.enabled)
 
     const { loggedIn } = $activeProfile
 </script>

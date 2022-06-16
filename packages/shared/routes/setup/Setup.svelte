@@ -7,7 +7,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { appRouter } from '@core/router'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     export let locale: Locale
 
@@ -47,8 +47,10 @@
             iconWidth="24"
             classes="w-full"
             secondary
-            hidden={$newProfile?.networkProtocol !== NetworkProtocol.Shimmer}
-            disabled={!featureFlags?.onboarding?.shimmer?.claimRewards?.enabled}
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
+                ?.enabled}
             onClick={() => {}}
         >
             {locale('actions.claimShimmer')}
@@ -62,6 +64,10 @@
             iconWidth="11"
             classes="w-full"
             secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
+                ?.enabled}
             onClick={() => handleContinueClick(SetupType.New)}
         >
             {locale('actions.createWallet', { values: { protocol: formatProtocolName($newProfile?.networkProtocol) } })}
@@ -73,7 +79,16 @@
                 >
             {/if}
         </Button>
-        <Button icon="transfer" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.Import)}>
+        <Button
+            icon="transfer"
+            classes="w-full"
+            secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.enabled}
+            onClick={() => handleContinueClick(SetupType.Import)}
+        >
             {locale(`actions.restoreWallet.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}
                 <Text type="p" secondary smaller
