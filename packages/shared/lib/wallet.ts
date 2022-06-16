@@ -884,7 +884,7 @@ export const findAccountWithAddress = (address: string): IAccountState | undefin
         return
     }
     const accounts = get(activeAccounts)
-    return accounts.find((acc) => acc.depositAddress === address)
+    return accounts.find((account) => account.depositAddress === address)
 }
 
 /**

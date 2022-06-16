@@ -17,11 +17,13 @@ export async function loadAccounts(): Promise<void> {
             // optimise this so that we can load all account async and parralellise
             for (const account of accountsResponse) {
                 const accountState = await loadAccount(account)
-                loadAccountActivities(accountState)
                 loadedAccounts.push(accountState)
             }
             activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
+            for (const accountState of get(activeAccounts)) {
+                loadAccountActivities(accountState)
+            }
             hasLoadedAccounts.set(true)
         }
     } catch (err) {

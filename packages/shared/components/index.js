@@ -1,4 +1,3 @@
-export { default as ActivityTile } from './ActivityTile.svelte'
 export { default as Address } from './inputs/Address.svelte'
 export { default as Amount } from './inputs/Amount.svelte'
 export { default as Animation } from './Animation.svelte'

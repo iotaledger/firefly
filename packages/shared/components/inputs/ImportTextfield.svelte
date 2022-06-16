@@ -3,7 +3,7 @@
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
 
     enum Type {
@@ -11,11 +11,8 @@
         Mnemonic = 'mnemonic',
     }
 
-    export let locale: Locale
-
-    export let value = undefined
-    export let type: Type = Type.Seed
-
+    export let value: string
+    export let type = Type.Seed
     export let disabled = false
 
     let statusMessage = ''
@@ -25,20 +22,20 @@
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
-            return locale('error.backup.seedTooShort', {
+            return localize('error.backup.seedTooShort', {
                 values: {
                     length: value.length,
                 },
             })
         }
         if (!/^[9A-Z]+$/.test(value)) {
-            return locale('error.backup.seedCharacters')
+            return localize('error.backup.seedCharacters')
         }
     }
 
     const isMnemonic = (words: string[]): string | undefined => {
         if (words.length !== 24) {
-            return locale('error.backup.phraseWordCount', {
+            return localize('error.backup.phraseWordCount', {
                 values: {
                     length: words.length,
                 },
@@ -48,13 +45,13 @@
             const includesWord = english.includes(words[i])
             const includesWordOtherCase = english.includes(words[i].toLowerCase())
             if (!includesWord && includesWordOtherCase) {
-                return locale('error.backup.phraseCaseWord', {
+                return localize('error.backup.phraseCaseWord', {
                     values: {
                         word: words[i],
                     },
                 })
             } else if (!includesWord) {
-                return locale('error.backup.phraseUnrecognizedWord', {
+                return localize('error.backup.phraseUnrecognizedWord', {
                     values: {
                         word: words[i],
                     },
@@ -82,7 +79,7 @@
                     statusMessage = seedValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.importFromText.seedDetected')
+                    statusMessage = localize('views.importFromText.seedDetected')
                     value = trimmedContent
                     seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
@@ -94,12 +91,12 @@
                 } else {
                     try {
                         await verifyMnemonic(trimmedContent)
-                        statusMessage = locale('views.importFromText.phraseDetected')
+                        statusMessage = localize('views.importFromText.phraseDetected')
                         value = trimmedContent
                     } catch (err) {
                         error = true
                         console.error(err)
-                        statusMessage = locale(err.error)
+                        statusMessage = localize(err.error)
                     }
                 }
             }
@@ -124,7 +121,7 @@
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
         {#if seedChecksum}
             <div class="flex flex-row items-center ml-2">
-                <Text type="p" secondary classes="mr-1">{locale('views.importFromText.checksum')}:</Text>
+                <Text type="p" secondary classes="mr-1">{localize('views.importFromText.checksum')}:</Text>
                 <Text type="p" highlighted>{seedChecksum}</Text>
             </div>
         {/if}

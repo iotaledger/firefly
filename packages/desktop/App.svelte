@@ -138,10 +138,12 @@
             openPopup({ type: 'diagnostics' })
         })
         Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: false })
         })
