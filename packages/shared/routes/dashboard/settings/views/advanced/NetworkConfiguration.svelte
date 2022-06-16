@@ -10,25 +10,25 @@
         NetworkStatusDescription,
         networkStatus,
         NetworkHealth,
-        IClientOptions,
         getOfficialNodes,
         nodeInfo,
+        NetworkType,
     } from '@core/network'
     import { closePopup, openPopup } from '@lib/popup'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
-    let clientOptions: IClientOptions = $activeProfile?.settings.clientOptions
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
     let nodesContainer
 
-    if (clientOptions.nodes.length !== 0) {
-        clientOptions.nodes = getNodeCandidates(clientOptions)
-    }
+    $: clientOptions = $activeProfile?.settings.clientOptions
 
     $: {
         updateClientOptions(clientOptions)
         updateActiveProfileSettings({ clientOptions })
+        if (clientOptions?.nodes.length !== 0) {
+            clientOptions.nodes = getNodeCandidates(clientOptions)
+        }
     }
 
     function handleIncludeOfficialNodesClick() {
@@ -104,27 +104,29 @@
             </div>
         </div>
     {/if}
-    <HR classes="pb-5 mt-5 justify-center" />
-    <section id="nodeConfiguration">
-        <Text type="h5" classes="mb-3">
-            {localize('views.settings.networkConfiguration.nodeConfiguration.title')}
-        </Text>
-        <Text type="p" secondary classes="mb-5">
-            {localize('views.settings.networkConfiguration.nodeConfiguration.description')}
-        </Text>
-        <Radio
-            value={true}
-            bind:group={clientOptions.automaticNodeSelection}
-            label={localize('views.settings.networkConfiguration.nodeConfiguration.automatic')}
-            subLabel="Connect to official nodes from the IOTA Foundation"
-        />
-        <Radio
-            value={false}
-            bind:group={clientOptions.automaticNodeSelection}
-            label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
-            on:change={handleManualNodeSelection}
-        />
-    </section>
+    {#if $activeProfile?.networkType !== NetworkType.PrivateNet}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="nodeConfiguration">
+            <Text type="h5" classes="mb-3">
+                {localize('views.settings.networkConfiguration.nodeConfiguration.title')}
+            </Text>
+            <Text type="p" secondary classes="mb-5">
+                {localize('views.settings.networkConfiguration.nodeConfiguration.description')}
+            </Text>
+            <Radio
+                value={true}
+                bind:group={clientOptions.automaticNodeSelection}
+                label={localize('views.settings.networkConfiguration.nodeConfiguration.automatic')}
+                subLabel="Connect to official nodes from the IOTA Foundation"
+            />
+            <Radio
+                value={false}
+                bind:group={clientOptions.automaticNodeSelection}
+                label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
+                on:change={handleManualNodeSelection}
+            />
+        </section>
+    {/if}
     <HR classes="pb-5 mt-5 justify-center" />
     {#if !clientOptions.automaticNodeSelection}
         <section id="configureNodeList">
@@ -176,7 +178,8 @@
                         {localize('actions.addNode')}
                     </Button>
                     <Button
-                        disabled
+                        disabled={$activeProfile?.networkType === NetworkType.PrivateNet ||
+                            clientOptions?.nodes.length <= 1}
                         warning
                         medium
                         inlineStyle="min-width: 156px;"

@@ -7,7 +7,6 @@ import {
     updateNodeInfo,
     validateAndCleanNodeData,
     buildNode,
-    updateNewProfileNetworkClientOptions,
     nodeInfo,
 } from '@core/network'
 
@@ -27,23 +26,17 @@ export async function addNode(node: INode, profile: Writable<IPersistedProfile>)
     const isInSameNetwork = oldNodeInfo.protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
 
     if (hasValidUrl && isInSameNetwork) {
-        if (!get(profile)?.settings?.clientOptions) {
-            updateNewProfileNetworkClientOptions(get(profile)?.networkProtocol, get(profile)?.networkType, [builtNode])
-        } else {
-            const nodes: INode[] = get(profile)?.settings?.clientOptions?.nodes.reduce(
-                (acc, node) => (node.url !== builtNode?.url ? [...acc, node] : acc),
-                []
-            )
-            profile?.update((state) => ({
-                ...state,
-                settings: {
-                    ...state?.settings,
-                    clientOptions: {
-                        nodes: [...nodes, node],
-                        network: nodeInfoResponse.nodeInfo.name,
-                    },
+        const nodes = [...get(profile)?.settings?.clientOptions?.nodes, builtNode]
+
+        profile?.update((state) => ({
+            ...state,
+            settings: {
+                ...state?.settings,
+                clientOptions: {
+                    nodes,
+                    network: nodeInfoResponse.nodeInfo.name,
                 },
-            }))
-        }
+            },
+        }))
     }
 }

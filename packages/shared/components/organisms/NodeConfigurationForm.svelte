@@ -51,7 +51,7 @@
 
         if (!formError.error) {
             try {
-                if (!$newProfile?.settings?.clientOptions) {
+                if (!$profile?.settings?.clientOptions) {
                     const cleanedNode = validateAndCleanNodeData(node)
                     await createNewProfile(isDeveloperProfile, $networkProtocol, NetworkType.PrivateNet, cleanedNode)
                 } else {
@@ -99,7 +99,4 @@
         placeholder={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-    {#if $appRoute !== AppRoute.CustomNetwork}
-        <Checkbox label={localize('popups.node.setAsPrimaryNode')} disabled={isBusy} classes="mt-4 mb-8" />
-    {/if}
 </form>
