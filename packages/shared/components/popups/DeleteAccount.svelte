@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
@@ -60,7 +60,7 @@
         <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.body')}</Text>
         {#if $isSoftwareProfile}
             <Text type="p" secondary classes="mb-3">{locale('popups.deleteAccount.typePassword')}</Text>
-            <Password
+            <PasswordInput
                 {error}
                 classes="w-full mb-8"
                 bind:value={password}

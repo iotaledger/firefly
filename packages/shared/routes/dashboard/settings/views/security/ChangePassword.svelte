@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Password, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, PasswordInput, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -109,7 +109,7 @@
 <form id="form-change-password" on:submit={changePassword}>
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
-    <Password
+    <PasswordInput
         error={currentPasswordError}
         classes="mb-5"
         bind:value={currentPassword}
@@ -119,7 +119,7 @@
         disabled={passwordChangeBusy}
         submitHandler={changePassword}
     />
-    <Password
+    <PasswordInput
         error={newPasswordError}
         classes="mb-4"
         bind:value={newPassword}
@@ -132,7 +132,7 @@
         disabled={passwordChangeBusy}
         submitHandler={changePassword}
     />
-    <Password
+    <PasswordInput
         classes="mb-5"
         bind:value={confirmedPassword}
         showRevealToggle

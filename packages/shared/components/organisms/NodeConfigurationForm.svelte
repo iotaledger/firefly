@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Checkbox, Input, Password, Text } from 'shared/components'
+    import { Checkbox, Input, PasswordInput, Text } from 'shared/components'
     import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, newProfile, addNode } from '@core/profile'
@@ -79,13 +79,13 @@
         placeholder={localize('popups.node.optionalUsername')}
         disabled={isBusy}
     />
-    <Password
+    <PasswordInput
         classes="mt-3"
         bind:value={node.auth.password}
         placeholder={localize('popups.node.optionalPassword')}
         disabled={isBusy}
     />
-    <Password
+    <PasswordInput
         classes="mt-3"
         bind:value={node.auth.jwt}
         placeholder={localize('popups.node.optionalJwt')}

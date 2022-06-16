@@ -27,7 +27,7 @@
     import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import Password from './Password.svelte'
+    import PasswordPopup from './PasswordPopup.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
@@ -94,7 +94,7 @@
 
     const types = {
         qr: QR,
-        password: Password,
+        password: PasswordPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
         deleteAccount: DeleteAccount,

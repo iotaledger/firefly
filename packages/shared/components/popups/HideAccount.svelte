@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
@@ -76,7 +76,7 @@
             <Text type="p" secondary classes="mb-5">{locale('popups.hideAccount.body')}</Text>
             {#if $isSoftwareProfile}
                 <Text type="p" secondary classes="mb-3">{locale('popups.hideAccount.typePassword')}</Text>
-                <Password
+                <PasswordInput
                     {error}
                     classes="w-full mb-8"
                     bind:value={password}

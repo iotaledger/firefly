@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -78,7 +78,7 @@
         <form on:submit|preventDefault={handleContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
             <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
-            <Password
+            <PasswordInput
                 {error}
                 classes="mb-4"
                 bind:value={password}
@@ -90,7 +90,7 @@
                 autofocus
                 disabled={busy}
             />
-            <Password
+            <PasswordInput
                 error={errorConfirm}
                 bind:value={confirmedPassword}
                 classes="mb-5"
