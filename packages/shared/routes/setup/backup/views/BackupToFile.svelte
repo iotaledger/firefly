@@ -18,7 +18,7 @@
 
     $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
 
-    function handleBackClick(): void {
+    function handleBackClick() {
         dispatch('previous')
     }
 

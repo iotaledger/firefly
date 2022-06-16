@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Pane, AccountActivity } from 'shared/components'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 </script>
 
 <Pane>
-    {#if featureFlags?.wallet?.activityHistory?.enabled}
+    {#if features?.wallet?.activityHistory?.enabled}
         <AccountActivity />
     {/if}
 </Pane>

@@ -1,4 +1,4 @@
-import { activeAccounts } from '@core/profile'
+import { activeAccounts, updateActiveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { selectedAccount, selectedAccountId } from '../stores'
 
@@ -7,6 +7,7 @@ export function setSelectedAccount(id: string): void {
     if (account) {
         selectedAccountId.set(id)
         selectedAccount.set(account)
+        updateActiveProfile({ lastUsedAccountId: id })
     } else {
         throw new Error(`Account with ID ${id} cannot be found!`)
     }
