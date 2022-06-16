@@ -16,8 +16,8 @@ export async function checkStronghold(callback: () => unknown): Promise<void> {
     }
 
     try {
-        const response = await isStrongholdUnlocked()
-        if (!response) {
+        const strongholdUnlocked = await isStrongholdUnlocked()
+        if (!strongholdUnlocked) {
             openPopup(
                 {
                     type: 'password',
