@@ -12,10 +12,10 @@
 
     let busy = false
 
-    async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
+    function next(event: CustomEvent<FireflyEvent>): void {
         busy = true
         try {
-            await protectRouter.next(event?.detail)
+            protectRouter.next(event?.detail)
         } catch (err) {
             showAppNotification({
                 type: 'error',
