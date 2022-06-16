@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Platform } from 'shared/lib/platform'
-    import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Link, Logo, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
     import { newProfile } from '@core/profile'
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button
+        <OnboardingButton
             icon="tokens"
             iconHeight="24"
             iconWidth="24"
@@ -57,8 +57,8 @@
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('actions.claimShimmerDescription')}</Text>
             {/if}
-        </Button>
-        <Button
+        </OnboardingButton>
+        <OnboardingButton
             icon="plus"
             iconHeight="11"
             iconWidth="11"
@@ -78,8 +78,8 @@
                     })}</Text
                 >
             {/if}
-        </Button>
-        <Button
+        </OnboardingButton>
+        <OnboardingButton
             icon="transfer"
             classes="w-full"
             secondary
@@ -95,7 +95,7 @@
                     >{locale(`actions.restoreWalletDescription.${$newProfile?.networkProtocol}`)}</Text
                 >
             {/if}
-        </Button>
+        </OnboardingButton>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="setup-desktop" />

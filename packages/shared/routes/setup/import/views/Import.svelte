@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { newProfile, ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
@@ -26,7 +26,7 @@
         <Text type="p" secondary classes="mb-8">{localize(`views.import.body.${$newProfile?.networkProtocol}`)}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button
+        <OnboardingButton
             icon="seed"
             classes="w-full"
             secondary
@@ -40,8 +40,8 @@
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.import.importSeedDescription')}</Text>
             {/if}
-        </Button>
-        <Button
+        </OnboardingButton>
+        <OnboardingButton
             icon="language"
             classes="w-full"
             secondary
@@ -55,8 +55,8 @@
             {#if !$mobile}
                 <Text type="p" secondary smaller>{localize('views.import.importMnemonicDescription')}</Text>
             {/if}
-        </Button>
-        <Button
+        </OnboardingButton>
+        <OnboardingButton
             icon="file"
             classes="w-full"
             secondary
@@ -72,9 +72,9 @@
                     {localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)}
                 </Text>
             {/if}
-        </Button>
+        </OnboardingButton>
         {#if !$mobile}
-            <Button
+            <OnboardingButton
                 icon="chip"
                 classes="w-full mb-8"
                 secondary
@@ -90,7 +90,7 @@
                         {localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)}
                     </Text>
                 {/if}
-            </Button>
+            </OnboardingButton>
         {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">

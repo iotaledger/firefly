@@ -5,7 +5,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
 
     const isDeveloperProfile = true // TODO: use real value
@@ -29,7 +29,7 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkProtocol) as protocol}
-            <Button
+            <OnboardingButton
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 classes="w-full"
@@ -42,7 +42,7 @@
                 {#if !isDeveloperProfile}
                     <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
                 {/if}
-            </Button>
+            </OnboardingButton>
         {/each}
     </div>
 </OnboardingLayout>

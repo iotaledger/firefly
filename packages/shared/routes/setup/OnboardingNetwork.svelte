@@ -4,7 +4,7 @@
     import { newProfile } from '@core/profile'
     import { NetworkType, updateNewProfileNetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
 
@@ -32,7 +32,7 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
-            <Button
+            <OnboardingButton
                 icon={networkIcon[networkType]}
                 iconColor={networkType === NetworkType.Mainnet
                     ? `${$newProfile?.networkProtocol}-highlight`
@@ -49,7 +49,7 @@
                         >{localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.body`)}</Text
                     >
                 {/if}
-            </Button>
+            </OnboardingButton>
         {/each}
     </div>
 </OnboardingLayout>
