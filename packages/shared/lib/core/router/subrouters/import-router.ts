@@ -3,6 +3,7 @@ import { restoreBackup } from '@core/profile-manager'
 import { mnemonic } from '@contexts/onboarding'
 import { getMigrationData } from '@lib/migration'
 import { Platform } from '@lib/platform'
+import { NetworkProtocol } from '@core/network'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
@@ -35,6 +36,11 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 } else if (importType === ProfileImportType.File) {
                     nextRoute = ImportRoute.FileImport
                 } else if (importType === ProfileImportType.Ledger) {
+                    if (get(newProfile)?.networkProtocol === NetworkProtocol.Shimmer) {
+                        this.importType.set(ProfileImportType.FireflyLedger)
+                        get(appRouter).next({ importType: ProfileImportType.FireflyLedger })
+                        break
+                    }
                     nextRoute = ImportRoute.LedgerImport
                 }
                 break
