@@ -41,8 +41,6 @@
                 newPasswordError = localize(errKey)
                 return false
             } else {
-                passwordChangeBusy = true
-                passwordChangeMessage = localize('general.passwordUpdating')
                 return true
             }
         }
@@ -52,6 +50,8 @@
     async function changePassword(): Promise<void> {
         const isPasswordValid = checkPassword()
         if (isPasswordValid) {
+            passwordChangeBusy = true
+            passwordChangeMessage = localize('general.passwordUpdating')
             const busyStart = Date.now()
 
             try {
@@ -85,7 +85,8 @@
                     hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
                 }
             } catch (err) {
-                currentPasswordError = localize(err.error)
+                // TODO: this returns no key, what is the best thing to do here?
+                currentPasswordError = localize(JSON.parse(err).payload.error)
                 hideBusy(localize('general.passwordFailed'), 0, busyStart)
             }
         }
@@ -162,8 +163,6 @@
     <div class="flex flex-row items-center">
         <Button
             medium
-            form="form-change-password"
-            type="submit"
             disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}
             onClick={changePassword}
         >
