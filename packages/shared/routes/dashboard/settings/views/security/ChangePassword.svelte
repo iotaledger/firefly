@@ -19,9 +19,9 @@
 
     $: passwordStrength = zxcvbn(newPassword)
 
-    async function changePassword(): Promise<void> {
+    function checkPassword(): boolean {
         if (currentPassword && newPassword && confirmedPassword) {
-            reset()
+            resetErrors()
 
             if (newPassword.length > MAX_PASSWORD_LENGTH) {
                 newPasswordError = localize('error.password.length', {
@@ -29,57 +29,69 @@
                         length: MAX_PASSWORD_LENGTH,
                     },
                 })
+                return false
             } else if (newPassword !== confirmedPassword) {
                 newPasswordError = localize('error.password.doNotMatch')
+                return false
             } else if (passwordStrength.score !== 4) {
                 let errKey = 'error.password.tooWeak'
                 if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
                     errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
                 }
                 newPasswordError = localize(errKey)
+                return false
             } else {
                 passwordChangeBusy = true
                 passwordChangeMessage = localize('general.passwordUpdating')
-                const busyStart = Date.now()
+                return true
+            }
+        }
+        return false
+    }
 
-                try {
-                    await get(profileManager).changeStrongholdPassword(newPassword)
+    async function changePassword(): Promise<void> {
+        const isPasswordValid = checkPassword()
+        if (isPasswordValid) {
+            const busyStart = Date.now()
 
-                    if (exportStrongholdChecked) {
-                        passwordChangeMessage = localize('general.exportingStronghold')
+            try {
+                // TODO: also pass in currentPassword
+                await get(profileManager).changeStrongholdPassword(newPassword)
 
-                        return exportStronghold(newPassword, (cancelled, err) => {
-                            if (cancelled) {
-                                hideBusy('', 0, busyStart)
+                if (exportStrongholdChecked) {
+                    passwordChangeMessage = localize('general.exportingStronghold')
+
+                    return exportStronghold(newPassword, (cancelled, err) => {
+                        if (cancelled) {
+                            hideBusy('', 0, busyStart)
+                        } else {
+                            if (err) {
+                                currentPasswordError = localize(err)
+                                hideBusy(localize('general.passwordFailed'), 0, busyStart)
                             } else {
-                                if (err) {
-                                    currentPasswordError = localize(err)
-                                    hideBusy(localize('general.passwordFailed'), 0, busyStart)
-                                } else {
-                                    currentPassword = ''
-                                    newPassword = ''
-                                    confirmedPassword = ''
-                                    exportStrongholdChecked = false
-                                    hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
-                                }
+                                currentPassword = ''
+                                newPassword = ''
+                                confirmedPassword = ''
+                                exportStrongholdChecked = false
+                                hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
                             }
-                        })
-                    } else {
-                        currentPassword = ''
-                        newPassword = ''
-                        confirmedPassword = ''
-                        exportStrongholdChecked = false
-                        hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
-                    }
-                } catch (err) {
-                    currentPasswordError = localize(err.error)
-                    hideBusy(localize('general.passwordFailed'), 0, busyStart)
+                        }
+                    })
+                } else {
+                    currentPassword = ''
+                    newPassword = ''
+                    confirmedPassword = ''
+                    exportStrongholdChecked = false
+                    hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
                 }
+            } catch (err) {
+                currentPasswordError = localize(err.error)
+                hideBusy(localize('general.passwordFailed'), 0, busyStart)
             }
         }
     }
 
-    function reset() {
+    function resetErrors() {
         currentPasswordError = ''
         newPasswordError = ''
         passwordChangeBusy = false
@@ -106,7 +118,7 @@
     }
 </script>
 
-<form id="form-change-password" on:submit={changePassword}>
+<form id="form-change-password">
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
     <PasswordInput
@@ -117,7 +129,7 @@
         locale={localize}
         placeholder={localize('general.currentPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword}
+        submitHandler={checkPassword}
     />
     <PasswordInput
         error={newPasswordError}
@@ -130,7 +142,7 @@
         locale={localize}
         placeholder={localize('general.newPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword}
+        submitHandler={checkPassword}
     />
     <PasswordInput
         classes="mb-5"
@@ -139,7 +151,7 @@
         locale={localize}
         placeholder={localize('general.confirmNewPassword')}
         disabled={passwordChangeBusy}
-        submitHandler={changePassword}
+        submitHandler={checkPassword}
     />
     <Checkbox
         classes="mb-5"
@@ -153,6 +165,7 @@
             form="form-change-password"
             type="submit"
             disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}
+            onClick={changePassword}
         >
             {localize('views.settings.changePassword.title')}
         </Button>

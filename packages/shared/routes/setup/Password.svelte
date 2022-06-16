@@ -45,8 +45,8 @@
             try {
                 busy = true
                 if (existingPassword) {
+                    // TODO: also pass in currentPassword
                     await get(profileManager).changeStrongholdPassword(password)
-                    // await get(profileManager).changeStrongholdPassword(existingPassword, password)
                 } else {
                     await setStrongholdPassword(password)
                 }
