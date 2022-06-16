@@ -4,7 +4,7 @@
     import { appSettings, mobile } from '@core/app'
     import { SUPPORTED_LOCALES, setLanguage, localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
@@ -26,7 +26,7 @@
             <Text type={$mobile ? 'h3' : 'h1'}
                 >{localize('views.onboarding1.title', {
                     values: {
-                        protocol: featureFlags?.onboarding?.iota?.enabled
+                        protocol: features?.onboarding?.iota?.enabled
                             ? formatProtocolName(NetworkProtocol.IOTA)
                             : formatProtocolName(NetworkProtocol.Shimmer),
                     },

@@ -3,8 +3,8 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { newProfile, ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
-    import { NetworkProtocol } from '@core/network'
     import { createEventDispatcher } from 'svelte'
+    import features from 'shared/features/features'
 
     const dispatch = createEventDispatcher()
 
@@ -30,7 +30,10 @@
             icon="seed"
             classes="w-full"
             secondary
-            hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.migrateSeed?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.migrateSeed?.enabled}
             onClick={() => handleContinueClick(ProfileImportType.Seed)}
         >
             {localize('views.import.importSeed')}
@@ -42,6 +45,10 @@
             icon="language"
             classes="w-full"
             secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.recoveryPhrase?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.recoveryPhrase?.enabled}
             onClick={() => handleContinueClick(ProfileImportType.Mnemonic)}
         >
             {localize('views.import.importMnemonic')}
@@ -49,12 +56,21 @@
                 <Text type="p" secondary smaller>{localize('views.import.importMnemonicDescription')}</Text>
             {/if}
         </Button>
-        <Button icon="file" classes="w-full" secondary onClick={() => handleContinueClick(ProfileImportType.File)}>
+        <Button
+            icon="file"
+            classes="w-full"
+            secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.strongholdBackup?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.strongholdBackup?.enabled}
+            onClick={() => handleContinueClick(ProfileImportType.File)}
+        >
             {localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}
-                <Text type="p" secondary smaller
-                    >{localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)}</Text
-                >
+                <Text type="p" secondary smaller>
+                    {localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)}
+                </Text>
             {/if}
         </Button>
         {#if !$mobile}
@@ -62,13 +78,17 @@
                 icon="chip"
                 classes="w-full mb-8"
                 secondary
+                hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                    ?.ledgerBackup?.hidden}
+                disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]
+                    ?.restoreProfile?.ledgerBackup?.enabled}
                 onClick={() => handleContinueClick(ProfileImportType.Ledger)}
             >
                 {localize('views.import.importLedger')}
                 {#if !$mobile}
-                    <Text type="p" secondary smaller
-                        >{localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)}</Text
-                    >
+                    <Text type="p" secondary smaller>
+                        {localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)}
+                    </Text>
                 {/if}
             </Button>
         {/if}

@@ -6,7 +6,7 @@
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const networkIcon = {
         [NetworkType.Mainnet]: $newProfile?.networkProtocol,
@@ -39,7 +39,8 @@
                     : 'blue-500'}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.enabled}
+                hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.hidden}
+                disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
             >
                 {localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.title`)}

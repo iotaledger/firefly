@@ -30,7 +30,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -54,7 +54,7 @@
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
-        ...(featureFlags?.wallet?.enabled
+        ...(features?.wallet?.enabled
             ? [
                   {
                       icon: 'wallet',
@@ -64,7 +64,7 @@
                   },
               ]
             : []),
-        ...(featureFlags?.staking?.enabled
+        ...(features?.staking?.enabled
             ? [
                   {
                       icon: 'tokens',
