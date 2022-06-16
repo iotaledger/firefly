@@ -3,8 +3,11 @@
     import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { Locale } from '@core/i18n'
+    import { newProfile } from '@core/profile'
     import { SetupType } from 'shared/lib/typings/setup'
     import { appRouter } from '@core/router'
+    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import featureFlags from 'shared/featureFlags.config'
 
     export let locale: Locale
 
@@ -19,9 +22,13 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{locale('views.setup.title')}</Text>
+        <Text type="h2"
+            >{locale('views.setup.title', {
+                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class:hidden={$newProfile?.networkProtocol !== NetworkProtocol.IOTA}>
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
             <div class="absolute -top-14">
                 <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
@@ -35,22 +42,43 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <Button
+            icon="tokens"
+            iconHeight="24"
+            iconWidth="24"
+            classes="w-full"
+            secondary
+            hidden={$newProfile?.networkProtocol !== NetworkProtocol.Shimmer}
+            disabled={!featureFlags?.onboarding?.shimmer?.claimRewards?.enabled}
+            onClick={() => {}}
+        >
+            {locale('actions.claimShimmer')}
+            {#if !$mobile}
+                <Text type="p" secondary smaller>{locale('actions.claimShimmerDescription')}</Text>
+            {/if}
+        </Button>
+        <Button
             icon="plus"
-            iconHeight="15"
-            iconWidth="15"
+            iconHeight="11"
+            iconWidth="11"
             classes="w-full"
             secondary
             onClick={() => handleContinueClick(SetupType.New)}
         >
-            {locale('actions.createWallet')}
+            {locale('actions.createWallet', { values: { protocol: formatProtocolName($newProfile?.networkProtocol) } })}
             {#if !$mobile}
-                <Text type="p" secondary smaller>{locale('actions.createWalletDescription')}</Text>
+                <Text type="p" secondary smaller
+                    >{locale('actions.createWalletDescription', {
+                        values: { protocol: $newProfile?.networkProtocol },
+                    })}</Text
+                >
             {/if}
         </Button>
         <Button icon="transfer" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.Import)}>
-            {locale('actions.restoreWallet')}
+            {locale(`actions.restoreWallet.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}
-                <Text type="p" secondary smaller>{locale('actions.restoreWalletDescription')}</Text>
+                <Text type="p" secondary smaller
+                    >{locale(`actions.restoreWalletDescription.${$newProfile?.networkProtocol}`)}</Text
+                >
             {/if}
         </Button>
     </div>

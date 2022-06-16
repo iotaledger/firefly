@@ -15,6 +15,9 @@ const featureFlags = {
         },
         shimmer: {
             enabled: true,
+            claimRewards: {
+                enabled: false,
+            },
             mainnet: {
                 enabled: false,
             },

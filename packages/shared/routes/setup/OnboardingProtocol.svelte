@@ -38,7 +38,7 @@
                 onClick={() => onClick(NetworkProtocol[protocol])}
             >
                 {protocol}
-                {#if !$mobile}
+                {#if !isDeveloperProfile}
                     <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
                 {/if}
             </Button>
