@@ -11,13 +11,13 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAsset, Recipient } from '@core/wallet'
+    import { IAsset, Subject } from '@core/wallet'
     import { onMount } from 'svelte'
 
     export let asset: IAsset
     export let amount: string
     export let unit: string
-    export let recipient: Recipient
+    export let recipient: Subject
     export let metadata: string
     export let tag: string
 

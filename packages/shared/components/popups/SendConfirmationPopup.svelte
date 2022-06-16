@@ -9,7 +9,7 @@
         getOutputOptions,
         IAsset,
         InclusionState,
-        Recipient,
+        Subject,
         trySendOutput,
     } from '@core/wallet'
     import type { OutputTypes } from '@iota/types'
@@ -26,7 +26,7 @@
     export let amount = '0'
     export let unit: string
     export let rawAmount: number
-    export let recipient: Recipient
+    export let recipient: Subject
     export let internal = false
     export let metadata: string
     export let tag: string

@@ -1,7 +1,7 @@
 import { findAccountWithAddress } from '@lib/wallet'
-import { Recipient, Sender } from '../types'
+import { Subject } from '../types'
 
-export function getAccoutByAddress(address: string): Recipient | Sender {
+export function getSubjectFromAddress(address: string): Subject {
     const account = findAccountWithAddress(address)
     if (account) {
         return { type: 'account', account: account }

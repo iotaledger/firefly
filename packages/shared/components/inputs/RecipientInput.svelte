@@ -2,11 +2,11 @@
     import { IAccountState } from '@core/account'
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
-    import { Recipient } from '@core/wallet'
+    import { Subject } from '@core/wallet'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
     import { InputContainer, Modal, RecipientAccountSelector, TextInput } from 'shared/components'
 
-    export let recipient: Recipient
+    export let recipient: Subject
     export let disabled = false
 
     const addressPrefix = $networkHrp
