@@ -50,7 +50,6 @@
                 value = dateIn1Week
                 break
             case 'custom':
-                value = customDate
                 break
             default:
                 value = null
@@ -60,6 +59,8 @@
     function handleChooseExpirationTimeClick(_selected): void {
         if (_selected === 'custom') {
             canShowDateTimePicker = !canShowDateTimePicker
+        } else {
+            customDate = undefined
         }
         modal?.close()
         previouslySelected = selected
@@ -74,6 +75,7 @@
     }
 
     function handleExpirationTimeConfirmClick(): void {
+        value = customDate
         canShowDateTimePicker = false
     }
 </script>

@@ -1,4 +1,9 @@
 <script lang="typescript">
+    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
+    import { TransactionDetails } from 'shared/components/molecules'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import type { OutputTypes } from '@iota/types'
+    import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
@@ -12,15 +17,12 @@
         Subject,
         trySendOutput,
     } from '@core/wallet'
-    import type { OutputTypes } from '@iota/types'
-    import type { OutputOptions } from '@iota/wallet'
+    import { isValidExpirationDateTime } from '@core/utils'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { promptUserToConnectLedger } from '@lib/ledger'
+    import { showAppNotification } from '@lib/notifications'
+    import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
-    import { TransactionDetails } from 'shared/components/molecules'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
-    import { closePopup, openPopup } from 'shared/lib/popup'
 
     export let asset: IAsset
     export let amount = '0'
@@ -54,17 +56,37 @@
     $: $$props, expirationDate, _prepareOutput()
 
     function onConfirm(): void {
-        closePopup()
-
         if ($isSoftwareProfile) {
             void send()
         } else if ($isLedgerProfile) {
-            promptUserToConnectLedger(false, () => send(), undefined)
+            closePopup()
+            promptUserToConnectLedger(false, () => send(false), undefined)
         }
     }
 
-    function send(): Promise<void> {
-        return trySendOutput(outputOptions, preparedOutput)
+    function send(shouldClosePopup: boolean = true): Promise<void> {
+        function _send(): Promise<void> {
+            if (shouldClosePopup) {
+                closePopup()
+            }
+            return trySendOutput(outputOptions, preparedOutput)
+        }
+
+        if (expirationDate) {
+            if (isValidExpirationDateTime(expirationDate)) {
+                if (shouldClosePopup) {
+                    closePopup()
+                }
+                return _send()
+            } else {
+                showAppNotification({
+                    type: 'warning',
+                    message: localize('warning.transaction.invalidExpirationDateTime'),
+                })
+            }
+        } else {
+            return _send()
+        }
     }
 
     function onBack(): void {
