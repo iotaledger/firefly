@@ -31,7 +31,7 @@
 
     export let onClick: () => unknown
 
-    let buttonElement
+    export let buttonElement
     let darkModeEnabled
 
     $: darkModeEnabled = $appSettings.darkMode

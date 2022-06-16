@@ -20,11 +20,16 @@
     let hasFocus: boolean
     let keepRecipientAccountSelectorOpen: boolean
 
-    $: recipient = {
-        type: selectedAccount ? 'account' : 'address',
-        ...(selectedAccount && { account: selectedAccount }),
-        ...(!selectedAccount && { address: value }),
+    $: if (!selectedAccount && recipient?.type === 'account') {
+        selectedAccount = recipient?.account
+    } else {
+        recipient = {
+            type: selectedAccount ? 'account' : 'address',
+            ...(selectedAccount && { account: selectedAccount }),
+            ...(!selectedAccount && { address: value }),
+        }
     }
+
     $: hasFocus && (error = '')
     $: hasFocus && modal?.open()
     $: value && modal?.open()
