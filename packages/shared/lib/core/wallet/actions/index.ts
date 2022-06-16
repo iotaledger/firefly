@@ -1,5 +1,5 @@
 export * from './claimActivity'
-export * from './trySend'
+export * from './trySendOutput'
 export * from './filterQueriedActivities'
 export * from './hideActivity'
 export * from './searchQueriedActivities'

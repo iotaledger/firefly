@@ -14,7 +14,7 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const { loggedIn } = $activeProfile
 
@@ -49,7 +49,7 @@
         <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
     {/if}
     <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
-        {#if featureFlags?.settings?.general?.enabled}
+        {#if features?.settings?.general?.enabled}
             <SettingsMenu
                 icon="settings"
                 iconColor="bg-blue-500"
@@ -62,7 +62,7 @@
                 onClick={(setting) => onSettingClick(SettingsRoute.General, setting)}
             />
         {/if}
-        {#if featureFlags?.settings?.security?.enabled}
+        {#if features?.settings?.security?.enabled}
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
@@ -75,7 +75,7 @@
                 onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
             />
         {/if}
-        {#if featureFlags?.settings?.advanced?.enabled}
+        {#if features?.settings?.advanced?.enabled}
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"
@@ -88,7 +88,7 @@
                 onClick={(setting) => onSettingClick(SettingsRoute.Advanced, setting)}
             />
         {/if}
-        {#if featureFlags?.settings?.helpAndInfo?.enabled}
+        {#if features?.settings?.helpAndInfo?.enabled}
             <SettingsMenu
                 icon="info"
                 iconColor="bg-purple-500"

@@ -2,13 +2,14 @@
     import { appRouter } from '@core/router'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
-    import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { networkProtocol as networkProtocolStore } from '@contexts/onboarding'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
-    function onClick(networkProtocol: NetworkProtocol): Promise<void> {
+    const isDeveloperProfile = true // TODO: use real value
+
+    function onClick(networkProtocol: NetworkProtocol): void {
         networkProtocolStore.set(networkProtocol)
         $appRouter.next()
     }
@@ -32,11 +33,12 @@
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
+                hidden={features?.onboarding?.[NetworkProtocol[protocol]]?.hidden}
+                disabled={!features?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
             >
                 {protocol}
-                {#if !$mobile}
+                {#if !isDeveloperProfile}
                     <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
                 {/if}
             </Button>

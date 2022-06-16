@@ -2,7 +2,8 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileImportType } from '@core/profile'
+    import { newProfile, ProfileImportType } from '@core/profile'
+    import { NetworkProtocol } from '@core/network'
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
@@ -35,6 +36,7 @@
             icon="settings"
             classes="w-full mb-8"
             secondary
+            hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
         >
             {localize('views.importFromLedger.haveTrinityLedger')}

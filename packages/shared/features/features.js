@@ -1,31 +1,7 @@
-const featureFlags = {
-    onboarding: {
-        enabled: true,
-        iota: {
-            enabled: false,
-            mainnet: {
-                enabled: false,
-            },
-            devnet: {
-                enabled: false,
-            },
-            'private-net': {
-                enabled: false,
-            },
-        },
-        shimmer: {
-            enabled: true,
-            mainnet: {
-                enabled: false,
-            },
-            devnet: {
-                enabled: true,
-            },
-            'private-net': {
-                enabled: true,
-            },
-        },
-    },
+import onboardingFeatures from './onboardingFeatures'
+
+const features = {
+    onboarding: onboardingFeatures,
     settings: {
         enabled: true,
         general: {
@@ -142,4 +118,4 @@ const featureFlags = {
     },
 }
 
-export default featureFlags
+export default features
