@@ -105,7 +105,6 @@
                 classes="w-full mb-2"
                 bind:value={password}
                 showRevealToggle
-                locale={localize}
                 placeholder={localize('general.password')}
                 autofocus
                 submitHandler={() => handleExportTransactionHistory()}

@@ -65,7 +65,6 @@
                 classes="w-full mb-8"
                 bind:value={password}
                 showRevealToggle
-                {locale}
                 placeholder={locale('general.password')}
                 autofocus
                 submitHandler={() => handleDeleteClick()}

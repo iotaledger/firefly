@@ -127,7 +127,6 @@
         classes="mb-5"
         bind:value={currentPassword}
         showRevealToggle
-        locale={localize}
         placeholder={localize('general.currentPassword')}
         disabled={passwordChangeBusy}
         submitHandler={checkPassword}
@@ -140,7 +139,6 @@
         strengthLevels={4}
         showStrengthLevel
         strength={passwordStrength.score}
-        locale={localize}
         placeholder={localize('general.newPassword')}
         disabled={passwordChangeBusy}
         submitHandler={checkPassword}
@@ -149,7 +147,6 @@
         classes="mb-5"
         bind:value={confirmedPassword}
         showRevealToggle
-        locale={localize}
         placeholder={localize('general.confirmNewPassword')}
         disabled={passwordChangeBusy}
         submitHandler={checkPassword}

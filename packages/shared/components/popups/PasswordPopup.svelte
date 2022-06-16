@@ -42,7 +42,6 @@
         classes="w-full mb-5"
         bind:value={password}
         showRevealToggle
-        {localize}
         placeholder={localize('general.password')}
         autofocus
     />
