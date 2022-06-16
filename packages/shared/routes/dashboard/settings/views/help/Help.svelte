@@ -2,7 +2,7 @@
     import { HR } from 'shared/components'
     import { ExternalRoute, HelpAndInfo } from '@core/router'
     import HelpSection from './HelpSection.svelte'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const settings: {
         component: unknown
@@ -36,9 +36,7 @@
         },
     ]
 
-    const visibleSettings = settings.filter(
-        (setting) => featureFlags?.settings?.helpAndInfo?.[setting.childRoute]?.enabled
-    )
+    const visibleSettings = settings.filter((setting) => features?.settings?.helpAndInfo?.[setting.childRoute]?.enabled)
 </script>
 
 <div>

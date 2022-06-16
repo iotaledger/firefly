@@ -13,7 +13,7 @@ import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } 
 import { IActivity } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
-import { Recipient, Sender } from '../types'
+import { Subject } from '../types'
 import {
     formatTokenAmountBestMatch,
     getAmountFromOutput,
@@ -38,9 +38,9 @@ export class Activity implements IActivity {
     inclusionState: InclusionState
     time: Date
 
-    sender: Sender
-    recipient: Recipient
-    subject: Sender | Recipient
+    sender: Subject
+    recipient: Subject
+    subject: Subject
     isInternal: boolean
     direction: ActivityDirection
 

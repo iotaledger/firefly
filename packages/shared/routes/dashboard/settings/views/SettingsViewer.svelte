@@ -18,7 +18,7 @@
     } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const { loggedIn } = $activeProfile
 
@@ -55,10 +55,10 @@
         }
     }
 
-    $: Object.keys(featureFlags?.settings)?.forEach((group) => {
-        if (featureFlags?.settings?.[group]?.enabled) {
-            Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
-                if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
+    $: Object.keys(features?.settings)?.forEach((group) => {
+        if (features?.settings?.[group]?.enabled) {
+            Object.keys(features?.settings?.[group])?.forEach((setting) => {
+                if (!features?.settings?.[group]?.[setting]?.enabled) {
                     const settingName = setting[0].toUpperCase() + setting.slice(1)
                     delete settings?.[group]?.[settingName]
                 }

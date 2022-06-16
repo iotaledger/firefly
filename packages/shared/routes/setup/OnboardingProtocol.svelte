@@ -6,7 +6,7 @@
     import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
     import { Button, OnboardingLayout, Text } from 'shared/components'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const isDeveloperProfile = true // TODO: use real value
 
@@ -34,11 +34,12 @@
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
+                hidden={features?.onboarding?.[NetworkProtocol[protocol]]?.hidden}
+                disabled={!features?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
             >
                 {protocol}
-                {#if !$mobile}
+                {#if !isDeveloperProfile}
                     <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
                 {/if}
             </Button>

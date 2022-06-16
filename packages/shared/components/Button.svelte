@@ -8,6 +8,7 @@
 
     export let secondary = false
     export let disabled = false
+    export let hidden = false
     export let caution = false
     export let warning = false
     export let active = false
@@ -52,6 +53,7 @@
         on:click|stopPropagation={onClick}
         class:secondary
         class:active
+        class:hidden
         class:with-icon={icon}
         class:custom-icon-color={iconColor}
         class:darkmode={darkModeEnabled}
@@ -72,6 +74,7 @@
         use:bindEvents={events}
         on:click|stopPropagation={onClick}
         class:secondary
+        class:hidden
         class:caution
         class:warning
         class:medium

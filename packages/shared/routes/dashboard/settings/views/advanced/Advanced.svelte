@@ -12,7 +12,7 @@
         NetworkConfiguration,
         WalletFinder,
     } from './'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const settings: {
         component: unknown
@@ -29,9 +29,7 @@
         { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
         { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
     ]
-    const visibleSettings = settings.filter(
-        (setting) => featureFlags?.settings?.advanced?.[setting.childRoute]?.enabled
-    )
+    const visibleSettings = settings.filter((setting) => features?.settings?.advanced?.[setting.childRoute]?.enabled)
 
     const { loggedIn } = $activeProfile
 </script>

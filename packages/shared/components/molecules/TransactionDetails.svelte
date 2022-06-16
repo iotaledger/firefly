@@ -15,9 +15,8 @@
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
         ActivityType,
-        Recipient,
+        Subject,
         InclusionState,
-        Sender,
         ActivityDirection,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
@@ -34,7 +33,7 @@
     export let tag: string
     export let storageDeposit = 0
     export let expirationDate: Date
-    export let subject: Recipient | Sender
+    export let subject: Subject
 
     let transactionTime: string
     $: {

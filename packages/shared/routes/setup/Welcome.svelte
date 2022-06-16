@@ -3,6 +3,8 @@
     import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { appSettings, mobile } from '@core/app'
     import { SUPPORTED_LOCALES, setLanguage, localize } from '@core/i18n'
+    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import features from 'shared/features/features'
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
@@ -21,7 +23,15 @@
             {#if !$mobile}
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             {/if}
-            <Text type={$mobile ? 'h3' : 'h1'}>{localize('views.onboarding1.title')}</Text>
+            <Text type={$mobile ? 'h3' : 'h1'}
+                >{localize('views.onboarding1.title', {
+                    values: {
+                        protocol: features?.onboarding?.iota?.enabled
+                            ? formatProtocolName(NetworkProtocol.IOTA)
+                            : formatProtocolName(NetworkProtocol.Shimmer),
+                    },
+                })}</Text
+            >
             <Text type="p" secondary>{localize('views.onboarding1.body')}</Text>
         </div>
         {#if $mobile}

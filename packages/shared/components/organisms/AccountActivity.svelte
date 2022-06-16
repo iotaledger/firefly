@@ -11,7 +11,7 @@
     import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
     import { openPopup } from 'shared/lib/popup'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
@@ -64,15 +64,15 @@
         <div class="relative flex flex-1 flex-row justify-between">
             <div class="flex flex-row">
                 <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
-                {#if featureFlags?.wallet?.activityHistory?.sync?.enabled}
+                {#if features?.wallet?.activityHistory?.sync?.enabled}
                     <SyncSelectedAccountIconButton />
                 {/if}
             </div>
-            {#if featureFlags?.wallet?.activityHistory?.search?.enabled}
+            {#if features?.wallet?.activityHistory?.search?.enabled}
                 <TogglableButton icon="search" bind:active={searchActive} />
             {/if}
         </div>
-        {#if featureFlags?.wallet?.activityHistory?.search?.enabled && searchActive}
+        {#if features?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <TextInput
                     bind:inputElement
