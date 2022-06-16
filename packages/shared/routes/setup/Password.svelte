@@ -4,11 +4,12 @@
     import { strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { asyncChangeStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { Locale } from '@core/i18n'
     import { appRouter } from '@core/router'
-    import { setStrongholdPassword } from '@core/profile-manager'
+    import { profileManager, setStrongholdPassword } from '@core/profile-manager'
+    import { get } from 'svelte/store'
 
     export let locale: Locale
 
@@ -44,7 +45,8 @@
             try {
                 busy = true
                 if (existingPassword) {
-                    await asyncChangeStrongholdPassword(existingPassword, password)
+                    await get(profileManager).changeStrongholdPassword(password)
+                    // await get(profileManager).changeStrongholdPassword(existingPassword, password)
                 } else {
                     await setStrongholdPassword(password)
                 }
