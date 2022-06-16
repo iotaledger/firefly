@@ -37,8 +37,14 @@
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 classes="w-full"
                 secondary
-                hidden={features?.onboarding?.[NetworkProtocol[protocol]]?.hidden}
-                disabled={!features?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
+                hidden={isDeveloperProfile
+                    ? features?.onboarding?.[NetworkProtocol[protocol]]?.hidden
+                    : features?.onboarding?.[NetworkProtocol[protocol]]?.hidden ||
+                      features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.hidden}
+                disabled={isDeveloperProfile
+                    ? !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled
+                    : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
+                      !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
             >
                 {protocol}
