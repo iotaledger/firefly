@@ -2,6 +2,7 @@ import { Capacitor } from '@capacitor/core'
 
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
 import { SplashScreen } from '@capacitor/splash-screen'
+import { Share } from '@capacitor/share'
 import { BarcodeManager } from './lib/barcodeManager'
 import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
@@ -318,6 +319,22 @@ export const CapacitorApi: IPlatform = {
      */
     hookErrorLogger,
     ledger: undefined,
+
+    /**
+     * Opens the native OS Share dialog
+     * @param {string} text Set some text to share
+     */
+    share: async (title?: string, text?: string, url?: string) => {
+        await Share.share({
+            text,
+        })
+    },
+
+    /**
+     * Opens the native action sheet
+     * @param {ActionSheetOptions} options Action sheet items
+     * @returns {number} Index of the selected item
+     */
     showActionSheet: async (options: ActionSheetOptions) => {
         const result = await ActionSheet.showActions(options as ShowActionsOptions)
         return result.index

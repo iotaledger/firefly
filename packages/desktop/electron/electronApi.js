@@ -393,6 +393,11 @@ const ElectronApi = {
     hookErrorLogger,
     ledger,
     /**
+     * Mock up method to open the mobile native OS Share dialog
+     */
+    share: (text = '') => new Promise((resolve, reject) => resolve()),
+
+    /**
      * Mock up method to open the native ActionSheet for mobile
      */
     showActionSheet: (title, options) => new Promise((resolve, reject) => resolve()),

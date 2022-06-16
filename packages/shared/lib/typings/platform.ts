@@ -63,5 +63,6 @@ export interface IPlatform {
     removeListenersForEvent<K extends keyof EventMap>(eventName: K)
 
     // Capacitor Interface
+    share(text?: string): Promise<void>
     showActionSheet(options: ActionSheetOptions): Promise<number>
 }
