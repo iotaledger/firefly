@@ -5,10 +5,11 @@
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { get } from 'svelte/store'
-    import { profileManager } from '@core/profile-manager'
+    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
+    let startOfPasswordChange: number
+
     let currentPassword = ''
     let currentPasswordError = ''
     let newPassword = ''
@@ -19,11 +20,53 @@
 
     $: passwordStrength = zxcvbn(newPassword)
 
-    function checkPassword(): boolean {
+    async function changePassword(): Promise<void> {
+        const isPasswordValid = await checkPassword()
+        if (isPasswordValid) {
+            passwordChangeBusy = true
+            passwordChangeMessage = 'general.passwordUpdating'
+            startOfPasswordChange = Date.now()
+
+            try {
+                // TODO: also pass in currentPassword
+                await changeStrongholdPassword(newPassword)
+
+                if (exportStrongholdChecked) {
+                    passwordChangeMessage = 'general.exportingStronghold'
+                    void exportStronghold(newPassword, cancelStrongholdExport)
+                    return
+                }
+                resetPasswordsOnSuccess()
+            } catch (err) {
+                console.error(err)
+                currentPasswordError = localize('general.passwordFailed')
+                hideBusy(currentPasswordError, 0)
+            }
+        }
+    }
+
+    function cancelStrongholdExport(cancelled: boolean, err: string): void {
+        if (cancelled) {
+            hideBusy('', 0)
+            return
+        }
+
+        if (err) {
+            currentPasswordError = localize(err)
+            hideBusy('general.passwordFailed', 0)
+            return
+        }
+
+        resetPasswordsOnSuccess()
+    }
+
+    async function checkPassword(): Promise<boolean> {
         if (currentPassword && newPassword && confirmedPassword) {
             resetErrors()
 
-            if (newPassword.length > MAX_PASSWORD_LENGTH) {
+            if (await isCurrentPasswordIncorrect()) {
+                return false
+            } else if (newPassword.length > MAX_PASSWORD_LENGTH) {
                 newPasswordError = localize('error.password.length', {
                     values: {
                         length: MAX_PASSWORD_LENGTH,
@@ -40,82 +83,54 @@
                 }
                 newPasswordError = localize(errKey)
                 return false
-            } else {
-                return true
             }
+
+            return true
         }
         return false
     }
 
-    async function changePassword(): Promise<void> {
-        const isPasswordValid = checkPassword()
-        if (isPasswordValid) {
-            passwordChangeBusy = true
-            passwordChangeMessage = localize('general.passwordUpdating')
-            const busyStart = Date.now()
-
-            try {
-                // TODO: also pass in currentPassword
-                await get(profileManager).changeStrongholdPassword(newPassword)
-
-                if (exportStrongholdChecked) {
-                    passwordChangeMessage = localize('general.exportingStronghold')
-
-                    return exportStronghold(newPassword, (cancelled, err) => {
-                        if (cancelled) {
-                            hideBusy('', 0, busyStart)
-                        } else {
-                            if (err) {
-                                currentPasswordError = localize(err)
-                                hideBusy(localize('general.passwordFailed'), 0, busyStart)
-                            } else {
-                                currentPassword = ''
-                                newPassword = ''
-                                confirmedPassword = ''
-                                exportStrongholdChecked = false
-                                hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
-                            }
-                        }
-                    })
-                } else {
-                    currentPassword = ''
-                    newPassword = ''
-                    confirmedPassword = ''
-                    exportStrongholdChecked = false
-                    hideBusy(localize('general.passwordSuccess'), 2000, busyStart)
-                }
-            } catch (err) {
-                // TODO: this returns no key, what is the best thing to do here?
-                currentPasswordError = localize(JSON.parse(err).payload.error)
-                hideBusy(localize('general.passwordFailed'), 0, busyStart)
-            }
+    async function isCurrentPasswordIncorrect(): Promise<boolean> {
+        try {
+            await setStrongholdPassword(currentPassword)
+            return false
+        } catch (err) {
+            console.error(err)
+            currentPasswordError = localize('error.password.incorrect')
+            return true
         }
     }
 
-    function resetErrors() {
+    function resetErrors(): void {
         currentPasswordError = ''
         newPasswordError = ''
         passwordChangeBusy = false
         passwordChangeMessage = ''
     }
 
-    function clearPasswordMessage(): void {
-        setTimeout(() => (passwordChangeMessage = ''), 2000)
+    function resetPasswordsOnSuccess(): void {
+        currentPassword = ''
+        newPassword = ''
+        confirmedPassword = ''
+        exportStrongholdChecked = false
+        hideBusy('general.passwordSuccess', 2000)
     }
 
-    function hideBusy(message: string, timeout: number, busyStart: number): void {
-        const diff = Date.now() - busyStart
+    function hideBusy(message: string, timeout: number): void {
+        const diff = Date.now() - startOfPasswordChange
         if (diff < timeout) {
             setTimeout(() => {
-                passwordChangeBusy = false
-                passwordChangeMessage = message
-                clearPasswordMessage()
+                showPasswordMessage(message)
             }, timeout - diff)
         } else {
-            passwordChangeBusy = false
-            passwordChangeMessage = message
-            clearPasswordMessage()
+            showPasswordMessage(message)
         }
+    }
+
+    function showPasswordMessage(message: string): void {
+        passwordChangeBusy = false
+        passwordChangeMessage = localize(message)
+        setTimeout(() => (passwordChangeMessage = ''), 2000)
     }
 </script>
 
