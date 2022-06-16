@@ -132,118 +132,200 @@
     $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
 </script>
 
-<div class="flex flex-col h-full min-h-0">
-    <div
-        class="{$mobile
-            ? 'p-0 mt-8 w-11/12 self-center'
-            : 'p-4 pb-3.5'} visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
-            'opacity-50'}"
-    >
-        <div class="flex flex-col flex-wrap justify-center items-center text-center">
-            {#if senderAccount}
-                <div
-                    style="--account-color: {senderColor}"
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
-                    {isBright(senderColor) ? 'text-gray-900' : 'text-white'}"
-                >
-                    {getInitials(senderAccount.alias, 2)}
-                </div>
-                <Text smaller>{localize('general.you')}</Text>
-            {:else}
-                <Text smaller>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
-            {/if}
-        </div>
-        <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnitBestMatch(value, true, 2)}</Text>
-        <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <div class="flex flex-col flex-wrap justify-center items-center text-center">
-            {#if receiverAccount}
-                <div
-                    style="--account-color: {receiverColor}"
-                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
-                    {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}"
-                >
-                    {getInitials(receiverAccount.alias, 2)}
-                </div>
-                <Text smaller>{localize('general.you')}</Text>
-            {:else}
-                {#each receiverAddresses as address}
-                    <Text smaller>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
-                {/each}
-            {/if}
-        </div>
-    </div>
-    <div
-        class="{$mobile
-            ? 'flex flex-col px-6 h-full'
-            : 'pr-2 -mr-2 h-1 scroll-secondary mb-6'} overflow-y-auto flex-auto"
-    >
-        <div class="mb-5">
-            <Text secondary>{localize('general.status')}</Text>
-            <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
-        </div>
-        {#if date}
-            <div class="mb-5">
-                <Text secondary>{localize('general.date')}</Text>
-                <Text smaller>{date}</Text>
-            </div>
-        {/if}
-        {#if id}
-            <div class="mb-5">
-                <Text secondary>{localize('general.messageId')}</Text>
-                <div class="flex flex-row justify-between items-center">
-                    <Link onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}>
-                        <Text highlighted type="pre">{id}</Text>
-                    </Link>
-                    <CopyButton itemToCopy={id} />
-                </div>
-            </div>
-        {/if}
-        {#if senderAddress}
-            <div class="mb-5">
-                <Text secondary>{localize('general.inputAddress')}</Text>
-                <div class="flex flex-row justify-between items-center">
-                    <Text type="pre">{senderAddress}</Text>
-                    <CopyButton itemToCopy={senderAddress} />
-                </div>
-                <Text type="pre">
-                    {#if senderAccount}({senderAccount.alias}){/if}
-                </Text>
-            </div>
-        {/if}
-        {#if receiverAddresses.length > 0}
-            <div class="mb-5">
-                <Text secondary>{localize('general.receiveAddress')}</Text>
-                {#each receiverAddresses as receiver, idx}
-                    <div class="flex flex-row justify-between items-center">
-                        <Text type="pre">{receiver}</Text>
-                        <CopyButton itemToCopy={receiver} />
+{#if $mobile}
+    <div class="flex flex-col h-full min-h-0">
+        <div
+            class="p-0 mt-8 w-11/12 self-center visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+                'opacity-50'}"
+        >
+            <div class="flex flex-col flex-wrap justify-center items-center text-center">
+                {#if senderAccount}
+                    <div
+                        style="--account-color: {senderColor}"
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
+                        {isBright(senderColor) ? 'text-gray-900' : 'text-white'}"
+                    >
+                        {getInitials(senderAccount.alias, 2)}
                     </div>
-                    <Text type="pre" classes="mb-2 mt-0">
-                        {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
-                    </Text>
-                {/each}
+                    <Text smaller>{localize('general.you')}</Text>
+                {:else}
+                    <Text smaller>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
+                {/if}
             </div>
-        {/if}
-        {#if txPayload || milestonePayload}
-            <div class="mb-5">
-                <Text secondary>{localize('general.amount')}</Text>
-                <div class="flex flex-row">
-                    <Text bold>{formatUnitBestMatch(value)}</Text>
-                    &nbsp;
-                    <Text>({formatCurrency(currencyValue)})</Text>
-                </div>
+            <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
+            <Text bold smaller>{formatUnitBestMatch(value, true, 2)}</Text>
+            <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
+            <div class="flex flex-col flex-wrap justify-center items-center text-center">
+                {#if receiverAccount}
+                    <div
+                        style="--account-color: {receiverColor}"
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
+                        {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}"
+                    >
+                        {getInitials(receiverAccount.alias, 2)}
+                    </div>
+                    <Text smaller>{localize('general.you')}</Text>
+                {:else}
+                    {#each receiverAddresses as address}
+                        <Text smaller>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
+                    {/each}
+                {/if}
             </div>
-        {/if}
-    </div>
-    {#if !$mobile}
-        <div class="w-full flex justify-center">
-            <button on:click={onBackClick}><Text smaller highlighted>{localize('actions.hideDetails')}</Text></button>
         </div>
-    {/if}
-</div>
+        <div class="flex flex-col px-6 h-full overflow-y-auto flex-auto">
+            <div class="mb-5">
+                <Text secondary>{localize('general.status')}</Text>
+                <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
+            </div>
+            {#if date}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.date')}</Text>
+                    <Text smaller>{date}</Text>
+                </div>
+            {/if}
+            {#if senderAddress}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.inputAddress')}</Text>
+                    <div class="flex flex-row justify-between items-center">
+                        <Text type="pre">{senderAddress}</Text>
+                        <CopyButton itemToCopy={senderAddress} />
+                    </div>
+                    <Text type="pre">
+                        {#if senderAccount}({senderAccount.alias}){/if}
+                    </Text>
+                </div>
+            {/if}
+            {#if receiverAddresses.length > 0}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.receiveAddress')}</Text>
+                    {#each receiverAddresses as receiver, idx}
+                        <div class="flex flex-row justify-between items-center">
+                            <Text type="pre">{receiver}</Text>
+                            <CopyButton itemToCopy={receiver} />
+                        </div>
+                        <Text type="pre" classes="mb-2 mt-0">
+                            {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
+                        </Text>
+                    {/each}
+                </div>
+            {/if}
+            <div class="mb-5 flex justify-center">
+                <button
+                    class="mobile-explorer-button action p-3 w-full text-center rounded-lg font-semibold text-14 bg-white text-blue-500"
+                    on:click={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
+                >
+                    <Text smaller highlighted>{localize('general.viewExplorer')}</Text>
+                </button>
+            </div>
+        </div>
+    </div>
+{:else}
+    <div class="flex flex-col h-full min-h-0">
+        <div
+            class="p-4 pb-3.5 visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+                'opacity-50'}"
+        >
+            <div class="flex flex-col flex-wrap justify-center items-center text-center">
+                {#if senderAccount}
+                    <div
+                        style="--account-color: {senderColor}"
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
+                        {isBright(senderColor) ? 'text-gray-900' : 'text-white'}"
+                    >
+                        {getInitials(senderAccount.alias, 2)}
+                    </div>
+                    <Text smaller>{localize('general.you')}</Text>
+                {:else}
+                    <Text smaller>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
+                {/if}
+            </div>
+            <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
+            <Text bold smaller>{formatUnitBestMatch(value, true, 2)}</Text>
+            <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
+            <div class="flex flex-col flex-wrap justify-center items-center text-center">
+                {#if receiverAccount}
+                    <div
+                        style="--account-color: {receiverColor}"
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
+                        {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}"
+                    >
+                        {getInitials(receiverAccount.alias, 2)}
+                    </div>
+                    <Text smaller>{localize('general.you')}</Text>
+                {:else}
+                    {#each receiverAddresses as address}
+                        <Text smaller>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
+                    {/each}
+                {/if}
+            </div>
+        </div>
+        <div class="pr-2 -mr-2 h-1 scroll-secondary mb-6 overflow-y-auto flex-auto">
+            <div class="mb-5">
+                <Text secondary>{localize('general.status')}</Text>
+                <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
+            </div>
+            {#if date}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.date')}</Text>
+                    <Text smaller>{date}</Text>
+                </div>
+            {/if}
+            {#if id}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.messageId')}</Text>
+                    <div class="flex flex-row justify-between items-center">
+                        <Link onClick={() => Platform.openUrl(`${explorerLink}/message/${id}`)}>
+                            <Text highlighted type="pre">{id}</Text>
+                        </Link>
+                        <CopyButton itemToCopy={id} />
+                    </div>
+                </div>
+            {/if}
+            {#if senderAddress}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.inputAddress')}</Text>
+                    <div class="flex flex-row justify-between items-center">
+                        <Text type="pre">{senderAddress}</Text>
+                        <CopyButton itemToCopy={senderAddress} />
+                    </div>
+                    <Text type="pre">
+                        {#if senderAccount}({senderAccount.alias}){/if}
+                    </Text>
+                </div>
+            {/if}
+            {#if receiverAddresses.length > 0}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.receiveAddress')}</Text>
+                    {#each receiverAddresses as receiver, idx}
+                        <div class="flex flex-row justify-between items-center">
+                            <Text type="pre">{receiver}</Text>
+                            <CopyButton itemToCopy={receiver} />
+                        </div>
+                        <Text type="pre" classes="mb-2 mt-0">
+                            {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
+                        </Text>
+                    {/each}
+                </div>
+            {/if}
+            {#if txPayload || milestonePayload}
+                <div class="mb-5">
+                    <Text secondary>{localize('general.amount')}</Text>
+                    <div class="flex flex-row">
+                        <Text bold>{formatUnitBestMatch(value)}</Text>
+                        &nbsp;
+                        <Text>({formatCurrency(currencyValue)})</Text>
+                    </div>
+                </div>
+            {/if}
+        </div>
+    </div>
+{/if}
 
 <style type="text/scss">
+    .mobile-explorer-button {
+        /* Tailwind border classes doesn't have an effect */
+        border: 1px solid rgba(154, 173, 206, 0.25);
+    }
     .visualization {
         min-height: 84px;
     }
