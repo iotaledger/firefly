@@ -57,36 +57,32 @@
 
     function onConfirm(): void {
         if ($isSoftwareProfile) {
-            void send()
+            void sendIfValidExpirationTime()
         } else if ($isLedgerProfile) {
             closePopup()
-            promptUserToConnectLedger(false, () => send(false), undefined)
+            promptUserToConnectLedger(false, () => void sendIfValidExpirationTime(false), undefined)
         }
     }
 
-    function send(shouldClosePopup: boolean = true): Promise<void> {
-        function _send(): Promise<void> {
-            if (shouldClosePopup) {
-                closePopup()
-            }
-            return trySendOutput(outputOptions, preparedOutput)
-        }
-
+    function sendIfValidExpirationTime(shouldClosePopup = true): Promise<void> {
         if (expirationDate) {
             if (isValidExpirationDateTime(expirationDate)) {
-                if (shouldClosePopup) {
-                    closePopup()
-                }
-                return _send()
-            } else {
-                showAppNotification({
-                    type: 'warning',
-                    message: localize('warning.transaction.invalidExpirationDateTime'),
-                })
+                return closePopupAndSend(shouldClosePopup)
             }
-        } else {
-            return _send()
+            showAppNotification({
+                type: 'warning',
+                message: localize('warning.transaction.invalidExpirationDateTime'),
+            })
+            return
         }
+        return closePopupAndSend(shouldClosePopup)
+    }
+
+    function closePopupAndSend(shouldClosePopup: boolean): Promise<void> {
+        if (shouldClosePopup) {
+            closePopup()
+        }
+        return trySendOutput(outputOptions, preparedOutput)
     }
 
     function onBack(): void {
