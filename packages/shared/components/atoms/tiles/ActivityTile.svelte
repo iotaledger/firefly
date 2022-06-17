@@ -88,7 +88,7 @@
                         </button>
                         <button
                             class="action p-1 w-full text-center rounded-4 font-medium text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity?.id)}
+                            on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {localize('actions.claim')}
                         </button>
