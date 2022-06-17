@@ -10,10 +10,10 @@
     $: isDeveloperProfile = $newProfile?.isDeveloperProfile
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        if (!isDeveloperProfile) {
-            await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Mainnet)
-        } else {
+        if (isDeveloperProfile) {
             updateNewProfile({ networkProtocol })
+        } else {
+            await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Mainnet)
         }
         $appRouter.next()
     }

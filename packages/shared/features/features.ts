@@ -34,7 +34,7 @@ const features = {
                 enabled: true,
             },
             changePassword: {
-                enabled: false,
+                enabled: true,
             },
             changePincode: {
                 enabled: false,

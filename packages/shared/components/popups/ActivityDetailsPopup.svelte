@@ -17,6 +17,8 @@
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { time } from '@core/app'
+    import { setClipboard } from '@lib/utils'
+    import { truncateString } from '@lib/helpers'
 
     export let activity: Activity
 
@@ -34,6 +36,10 @@
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
     }
+
+    function handleTransactionIdClick(): void {
+        setClipboard(activity.transactionId)
+    }
 </script>
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -41,12 +47,19 @@
         <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
-        {#if activity.transactionId}
+        {#if explorerUrl && activity.transactionId}
             <button
                 class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleExplorerClick}
             >
                 {localize('general.viewOnExplorer')}
+            </button>
+        {:else if activity.transactionId}
+            <button
+                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                on:click={handleTransactionIdClick}
+            >
+                {truncateString(activity.transactionId, 12, 12)}
             </button>
         {/if}
     </div>
@@ -61,7 +74,7 @@
             </button>
             <button
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={() => claimActivity(activity.id)}
+                on:click={() => claimActivity(activity)}
             >
                 {localize('actions.claim')}
             </button>

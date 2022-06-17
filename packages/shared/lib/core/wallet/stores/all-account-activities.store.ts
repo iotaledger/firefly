@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { Activity } from '../classes'
 import { InclusionState } from '../enums'
-import { IAccountActivities } from '../interfaces'
+import { IAccountActivities, IActivity } from '../interfaces'
 
 export const allAccountActivities = writable<IAccountActivities[]>([])
 
@@ -69,4 +69,23 @@ export function updateActivityClaimStateByTransactionId(transactionId: string, i
             return _accountActivities
         })
     )
+}
+
+export function updateActivity(accountId: string, partialActivity: Partial<IActivity>): void {
+    if (partialActivity?.id) {
+        allAccountActivities.update((state) =>
+            state.map((_accountActivities) => {
+                if (_accountActivities.accountId === accountId) {
+                    const activity = _accountActivities.activities.find(
+                        (_activity) => _activity.id === partialActivity.id
+                    )
+
+                    if (activity) {
+                        activity.updateFromPartialActivity(partialActivity)
+                    }
+                }
+                return _accountActivities
+            })
+        )
+    }
 }

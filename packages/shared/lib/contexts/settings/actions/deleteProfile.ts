@@ -11,7 +11,7 @@ import {
     removeProfile,
     removeProfileFolder,
 } from '@core/profile'
-import { deleteAccountsAndDatabase, isStrongholdUnlocked } from '@core/profile-manager'
+import { deleteAccountsAndDatabase } from '@core/profile-manager'
 import { appRouter } from '@core/router'
 
 /**

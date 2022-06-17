@@ -8,7 +8,7 @@
 
 <Tile
     classes="
-        hover:bg-gray-200 dark:hover:bg-gray-700
+        hover:bg-gray-100 dark:hover:bg-gray-1000
         {disabled ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}
         {classes}
     "

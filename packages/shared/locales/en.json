@@ -936,6 +936,7 @@
         "close": "Close",
         "dismiss": "Dismiss",
         "claim": "Claim",
+        "claiming": "Claiming",
         "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -1208,13 +1209,15 @@
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
-        "nodeList": "Node list"
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in"
     },
     "dates": {
         "today": "Today",
@@ -1308,7 +1311,8 @@
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "syncing": "There was an error syncing your wallets.",
+            "cannotRemove": "Unable to remove wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
@@ -1394,7 +1398,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationTime": "The chosen expiration time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."

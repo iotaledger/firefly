@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, ExpirationTimePickerMenu, Modal } from 'shared/components'
+    import { Text, ExpirationTimePickerMenu } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
 
     export let value: Date

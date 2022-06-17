@@ -195,7 +195,7 @@
                     </div>
                 </div>
                 <Toggle
-                    active={!$isStrongholdLocked}
+                    active={$isStrongholdLocked}
                     onClick={() => handleStrongholdToggleClick()}
                     classes="cursor-pointer"
                 />

@@ -14,16 +14,16 @@
     $: {
         switch (inclusionState) {
             case InclusionState.Pending:
-                backgroundColor = 'blue-200'
-                darkBackgroundColor = 'blue-300'
+                backgroundColor = 'blue-100'
+                darkBackgroundColor = 'blue-100'
                 break
             case InclusionState.Confirmed:
-                backgroundColor = 'green-200'
+                backgroundColor = 'green-300'
                 darkBackgroundColor = 'green-300'
                 break
             case InclusionState.Conflicting:
                 backgroundColor = 'red-200'
-                darkBackgroundColor = 'red-300'
+                darkBackgroundColor = 'red-200'
                 break
         }
     }
