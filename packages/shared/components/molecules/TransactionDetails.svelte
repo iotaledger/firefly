@@ -38,7 +38,7 @@
     export let storageDeposit = 0
     export let expirationDate: Date
     export let subject: Subject
-    export let claimedTransactionId: string
+    export let claimingTransactionId: string
     export let claimedDate: Date
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -78,8 +78,8 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${claimedTransactionId}`)
-            : setClipboard(claimedTransactionId)
+            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            : setClipboard(claimingTransactionId)
     }
 </script>
 
@@ -123,14 +123,14 @@
             {#each Object.entries(detailsList) as [key, value]}
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
             {/each}
-            {#if claimedTransactionId}
-                <KeyValueBox keyText={localize('general.claimedTransactionId')}>
+            {#if claimingTransactionId}
+                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
                     <button
                         slot="value"
                         class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
                         on:click={handleTransactionIdClick}
                     >
-                        {truncateString(claimedTransactionId, 12, 12)}
+                        {truncateString(claimingTransactionId, 12, 12)}
                     </button>
                 </KeyValueBox>
             {/if}

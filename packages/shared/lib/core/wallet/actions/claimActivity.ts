@@ -7,7 +7,11 @@ export async function claimActivity(id: string): Promise<void> {
     try {
         const results = await get(selectedAccount).collectOutputs([id])
         if (results.length > 0) {
-            updateActivity({ isClaimed: true, claimedTransactionId: results[0].transactionId, claimedDate: new Date() })
+            updateActivity({
+                isClaimed: true,
+                claimingTransactionId: results[0].transactionId,
+                claimedDate: new Date(),
+            })
         }
     } catch (err) {
         console.error(err)

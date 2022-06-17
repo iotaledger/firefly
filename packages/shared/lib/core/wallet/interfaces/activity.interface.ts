@@ -22,7 +22,7 @@ export interface IActivity {
     isHidden?: boolean
     isClaimed?: boolean
     publicNote?: string
-    claimedTransactionId?: string
+    claimingTransactionId?: string
     claimedDate?: Date
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void

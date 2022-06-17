@@ -55,7 +55,7 @@ export class Activity implements IActivity {
     expirationDate?: Date
     isAsync: boolean
     isClaimed?: boolean
-    claimedTransactionId?: string
+    claimingTransactionId?: string
     claimedDate?: Date
 
     setNewTransaction(
