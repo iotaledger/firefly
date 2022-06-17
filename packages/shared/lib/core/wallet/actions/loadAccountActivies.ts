@@ -41,7 +41,7 @@ export function loadAccountActivities(account: IAccountState): void {
             if (inputs.length === 1 && ac && ac.isAsync && ac.direction === ActivityDirection.In) {
                 ac.claimedTransactionId = transactionId
                 ac.isClaimed = true
-                ac.claimedTime = new Date(Number(transaction.timestamp))
+                ac.claimedDate = new Date(Number(transaction.timestamp))
             }
         }
     })

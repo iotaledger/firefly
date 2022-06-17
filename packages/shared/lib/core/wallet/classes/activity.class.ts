@@ -56,7 +56,7 @@ export class Activity implements IActivity {
     isAsync: boolean
     isClaimed?: boolean
     claimedTransactionId: string
-    claimedTime: Date
+    claimedDate: Date
 
     setNewTransaction(
         senderAccount: IAccountState,

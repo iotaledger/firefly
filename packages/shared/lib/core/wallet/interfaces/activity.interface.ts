@@ -23,7 +23,7 @@ export interface IActivity {
     isClaimed?: boolean
     publicNote?: string
     claimedTransactionId: string
-    claimedTime: Date
+    claimedDate: Date
 
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus

@@ -10,7 +10,7 @@ export async function claimActivity(id: string): Promise<void> {
                 const activity = state.find((activity) => activity.id === id)
                 activity.isClaimed = true
                 activity.claimedTransactionId = results[0].transactionId
-                activity.claimedTime = new Date()
+                activity.claimedDate = new Date()
                 return state
             })
         }
