@@ -22,8 +22,8 @@
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { getFormattedMinimumRewards } from '@lib/participation'
     import { truncateString } from '@lib/helpers'
+    import { setClipboard } from '@lib/utils'
 
     export let amount: string
     export let unit: string
@@ -43,10 +43,6 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/block/${claimedTransactionId}`)
-    }
-
     $: transactionTime = getDateFormat(time)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
@@ -55,6 +51,15 @@
         storageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
+
+    $: detailsList = {
+        ...(transactionTime && { transactionTime }),
+        ...(metadata && { metadata }),
+        ...(tag && { tag }),
+        ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
+        ...(expirationTime && { expirationTime }),
+        ...(claimedTime && { claimedTime }),
+    }
 
     function getDateFormat(date: Date): string {
         try {
@@ -71,13 +76,10 @@
         }
     }
 
-    $: detailsList = {
-        ...(transactionTime && { transactionTime }),
-        ...(metadata && { metadata }),
-        ...(tag && { tag }),
-        ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
-        ...(expirationTime && { expirationTime }),
-        ...(claimedTime && { claimedTime }),
+    function handleTransactionIdClick(): void {
+        explorerUrl
+            ? Platform.openUrl(`${explorerUrl}/block/${claimedTransactionId}`)
+            : setClipboard(claimedTransactionId)
     }
 </script>
 
@@ -126,9 +128,9 @@
                     <button
                         slot="value"
                         class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-                        on:click={handleExplorerClick}
+                        on:click={handleTransactionIdClick}
                     >
-                        {truncateString(claimedTransactionId, 6, 6)}
+                        {truncateString(claimedTransactionId, 12, 12)}
                     </button>
                 </KeyValueBox>
             {/if}
