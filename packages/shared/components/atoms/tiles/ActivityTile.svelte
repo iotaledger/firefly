@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        {#if activity?.isAsync && !activity?.isClaimed}
+        {#if activity?.isAsync}
             <HR />
             <div class="flex w-full justify-between space-x-4">
                 <div class="flex flex-row justify-center items-center space-x-2">

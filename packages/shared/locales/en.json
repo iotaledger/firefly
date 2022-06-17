@@ -1216,7 +1216,8 @@
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
-        "nodeList": "Node list"
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in"
     },
     "dates": {
         "today": "Today",
