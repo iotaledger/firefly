@@ -9,13 +9,13 @@ export async function claimActivity(activity: Activity): Promise<void> {
         if (results.length > 0) {
             addClaimedActivity(get(selectedAccount).id, activity.transactionId, {
                 isClaimed: true,
-                claimedTransactionId: results[0].transactionId,
+                claimingTransactionId: results[0].transactionId,
                 claimedTimestamp: new Date().getTime(),
             })
             updateActivity({
                 id: activity.id,
                 isClaimed: true,
-                claimedTransactionId: results[0].transactionId,
+                claimingTransactionId: results[0].transactionId,
                 claimedDate: new Date(),
             })
         }

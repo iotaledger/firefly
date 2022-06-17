@@ -5,6 +5,6 @@ export interface IClaimedActivitiesPerAccount {
 
 export interface IClaimedActivities {
     isClaimed: boolean
-    claimedTransactionId: string
+    claimingTransactionId: string
     claimedTimestamp: number
 }
