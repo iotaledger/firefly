@@ -1,11 +1,16 @@
 <script lang="typescript">
-    import { Checkbox, Input, PasswordInput, Text } from 'shared/components'
-    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId } from '@core/network'
+    import { Input, PasswordInput } from 'shared/components'
+    import {
+        INode,
+        nodeInfo,
+        checkNodeUrlValidity,
+        checkNetworkId,
+        NetworkType,
+        validateAndCleanNodeData,
+    } from '@core/network'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile, newProfile, addNode } from '@core/profile'
+    import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { appRoute, AppRoute } from '@core/router'
-    import { addCustomNodeToNewProfile } from '@core/profile/actions/addCustomNodeToNewProfile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
@@ -13,6 +18,7 @@
 
     const profile = $newProfile ? newProfile : activeProfile
     const clientOptions = $profile.settings?.clientOptions
+    const isDeveloperProfile = true // TODO: use real value
 
     let formError = { error: '' }
 
@@ -24,13 +30,15 @@
             formError = { error: localize(errorUrlValidity) ?? '' }
         }
 
-        const errorNetworkId = checkNetworkId(
-            $nodeInfo?.protocol?.networkName,
-            clientOptions.network,
-            $profile.isDeveloperProfile
-        )
-        if (errorNetworkId) {
-            formError = { error: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '' }
+        if ($profile === $activeProfile) {
+            const errorNetworkId = checkNetworkId(
+                $nodeInfo?.protocol?.networkName,
+                clientOptions.network,
+                $profile.isDeveloperProfile
+            )
+            if (errorNetworkId) {
+                formError = { error: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '' }
+            }
         }
     }
 
@@ -41,8 +49,14 @@
 
         if (!formError.error) {
             try {
-                if ($newProfile) {
-                    await addCustomNodeToNewProfile(node)
+                if (!$profile?.settings?.clientOptions) {
+                    const cleanedNode = validateAndCleanNodeData(node)
+                    await createNewProfile(
+                        isDeveloperProfile,
+                        $newProfile.networkProtocol,
+                        NetworkType.PrivateNet,
+                        cleanedNode
+                    )
                 } else {
                     await addNode(node, profile)
                 }
@@ -66,13 +80,10 @@
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={formError.address}
+        error={formError.error}
         disabled={isBusy}
         autofocus
     />
-    {#if formError.error}
-        <Text overrideColor classes="text-orange-500 mt-2">{formError.error}</Text>
-    {/if}
     <Input
         classes="mt-3"
         bind:value={node.auth.username}
@@ -91,7 +102,4 @@
         placeholder={localize('popups.node.optionalJwt')}
         disabled={isBusy}
     />
-    {#if $appRoute !== AppRoute.CustomNetwork}
-        <Checkbox label={localize('popups.node.setAsPrimaryNode')} disabled={isBusy} classes="mt-4 mb-8" />
-    {/if}
 </form>

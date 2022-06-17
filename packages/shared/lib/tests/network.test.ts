@@ -138,8 +138,8 @@ describe('File: network.ts', () => {
             ],
         },
         [NetworkProtocol.Shimmer]: {
-            [NetworkType.Mainnet]: ['https://api.alphanet.iotaledger.net'],
-            [NetworkType.Devnet]: ['https://api.alphanet.iotaledger.net'],
+            [NetworkType.Mainnet]: [''],
+            [NetworkType.Devnet]: [''],
         },
     }
 

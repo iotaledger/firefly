@@ -9,14 +9,20 @@
     import features from 'shared/features/features'
     import { cleanupOnboarding } from '@contexts/onboarding'
 
+    const networkProtocol = $newProfile.networkProtocol
+
     const networkIcon = {
-        [NetworkType.Mainnet]: $newProfile?.networkProtocol,
+        [NetworkType.Mainnet]: networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',
     }
 
     async function onClick(networkType: NetworkType): Promise<void> {
-        await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
+        if (networkType === NetworkType.PrivateNet) {
+            updateNewProfile({ networkType })
+        } else {
+            await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
+        }
         $appRouter.next({ networkType })
     }
 
@@ -39,20 +45,16 @@
         {#each Object.values(NetworkType) as networkType}
             <Button
                 icon={networkIcon[networkType]}
-                iconColor={networkType === NetworkType.Mainnet
-                    ? `${$newProfile?.networkProtocol}-highlight`
-                    : 'blue-500'}
+                iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 classes="w-full"
                 secondary
-                hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.hidden}
-                disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[networkType]?.enabled}
+                hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
+                disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
             >
-                {localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.title`)}
+                {localize(`views.network.${networkProtocol}.${networkType}.title`)}
                 {#if !$mobile}
-                    <Text secondary smaller
-                        >{localize(`views.network.${$newProfile?.networkProtocol}.${networkType}.body`)}</Text
-                    >
+                    <Text secondary smaller>{localize(`views.network.${networkProtocol}.${networkType}.body`)}</Text>
                 {/if}
             </Button>
         {/each}
