@@ -15,13 +15,13 @@ export function updateActivityAsyncStateFromTransactions(account: IAccountState)
         for (const activity of accountActivities.activities) {
             if (activity.direction === ActivityDirection.In) {
                 const claimedActivity = get(claimedActivities)?.[account.id]?.[activity.transactionId]
-                // if (claimedActivity) {
-                //     updateActivity(account.id, {
-                //         ...claimedActivity,
-                //         claimedDate: new Date(claimedActivity.claimedTimestamp),
-                //     })
-                //     updateActivity(account.id, { id: activity.transactionId, isHidden: true })
-                if (
+                if (claimedActivity && claimedActivity.claimingTransactionId === transactionId) {
+                    updateActivity(account.id, {
+                        ...claimedActivity,
+                        claimedDate: new Date(claimedActivity.claimedTimestamp),
+                    })
+                    updateActivity(account.id, { id: transactionId, isHidden: true })
+                } else if (
                     transactionInputs.some(
                         (input) => input.transactionId === activity.transactionId && activity.isAsync
                     )
