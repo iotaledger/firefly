@@ -140,18 +140,6 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         })
     })
 
-export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.changeStrongholdPassword(currentPassword, newPassword, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
-
 export function setStoragePassword(password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
