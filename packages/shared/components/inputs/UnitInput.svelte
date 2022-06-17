@@ -7,7 +7,13 @@
     export let isFocused: boolean
     export let tokenMetadata: ITokenMetadata
 
-    $: unit = tokenMetadata?.unit
+    let previousTokenMetadata: ITokenMetadata = tokenMetadata
+
+    $: if (!unit) unit = tokenMetadata?.unit
+    $: if (tokenMetadata !== previousTokenMetadata) {
+        unit = tokenMetadata?.unit
+        previousTokenMetadata = tokenMetadata
+    }
 
     let items = []
     $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
