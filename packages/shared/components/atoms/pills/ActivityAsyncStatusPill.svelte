@@ -12,16 +12,16 @@
     $: {
         switch (asyncStatus) {
             case ActivityAsyncStatus.Unclaimed:
-                backgroundColor = 'yellow-200'
-                darkBackgroundColor = 'yellow-300'
+                backgroundColor = 'purple-200'
+                darkBackgroundColor = 'purple-200'
                 break
             case ActivityAsyncStatus.Claimed:
-                backgroundColor = 'purple-200'
-                darkBackgroundColor = 'purple-300'
+                backgroundColor = 'blue-200'
+                darkBackgroundColor = 'blue-300'
                 break
             case ActivityAsyncStatus.Expired:
                 backgroundColor = 'gray-200'
-                darkBackgroundColor = 'gray-300'
+                darkBackgroundColor = 'gray-200'
                 break
         }
     }
