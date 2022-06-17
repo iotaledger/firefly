@@ -80,20 +80,19 @@
                 </div>
                 <div class="flex justify-end flex-row w-2/4 space-x-2">
                     {#if isIncomingActivityUnclaimed}
-                        {#if !activity.isClaiming}
-                            <button
-                                class="action p-1 w-full text-center rounded-4 font-medium text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                                on:click|stopPropagation={() => hideActivity(activity?.id)}
-                            >
-                                {localize('actions.reject')}
-                            </button>
-                        {/if}
+                        <button
+                            disabled={activity.isClaiming}
+                            class="action p-1 w-full text-center rounded-4 font-medium text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                            on:click|stopPropagation={() => hideActivity(activity?.id)}
+                        >
+                            {localize('actions.reject')}
+                        </button>
                         <button
                             class="action p-1 w-full text-center rounded-4 font-medium text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {#if activity.isClaiming}
-                                <Spinner busy={true} message={localize('actions.claiming')} classes="justify-center" />
+                                <Spinner busy={true} classes="justify-center" />
                             {:else}
                                 {localize('actions.claim')}
                             {/if}
