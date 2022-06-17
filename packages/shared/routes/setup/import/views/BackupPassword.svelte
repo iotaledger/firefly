@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { createEventDispatcher, getContext } from 'svelte'
@@ -50,7 +50,7 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{localize('views.importBackupPassword.body1')}</Text>
         <Text type="p" secondary classes="mb-8">{localize('views.importBackupPassword.body2')}</Text>
-        <Password
+        <PasswordInput
             classes="mb-6"
             {error}
             bind:value={password}

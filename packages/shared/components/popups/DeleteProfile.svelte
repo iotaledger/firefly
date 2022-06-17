@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
@@ -28,7 +28,7 @@
     <Text classes="mb-3">{localize('popups.deleteProfile.confirmation')}</Text>
     {#if $isSoftwareProfile}
         <Text type="p" secondary classes="mb-3">{localize('popups.deleteProfile.typePassword')}</Text>
-        <Password
+        <PasswordInput
             {error}
             classes="w-full mb-8"
             bind:value={password}

@@ -20,9 +20,13 @@ export interface IActivity {
     isAsync: boolean
     expirationDate?: Date
     isHidden?: boolean
+    isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string
+    claimingTransactionId?: string
+    claimedDate?: Date
 
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string

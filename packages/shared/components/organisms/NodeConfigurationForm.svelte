@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Input, Password } from 'shared/components'
+    import { Input, PasswordInput } from 'shared/components'
     import {
         INode,
         nodeInfo,
@@ -90,13 +90,13 @@
         placeholder={localize('popups.node.optionalUsername')}
         disabled={isBusy}
     />
-    <Password
+    <PasswordInput
         classes="mt-3"
         bind:value={node.auth.password}
         placeholder={localize('popups.node.optionalPassword')}
         disabled={isBusy}
     />
-    <Password
+    <PasswordInput
         classes="mt-3"
         bind:value={node.auth.jwt}
         placeholder={localize('popups.node.optionalJwt')}
