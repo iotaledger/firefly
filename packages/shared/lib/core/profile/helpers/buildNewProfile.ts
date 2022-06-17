@@ -1,8 +1,9 @@
 import { IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-import { ClientOptions } from '@iota/wallet'
+import { PROFILE_VERSION } from '@core/profile'
 import { AvailableExchangeRates } from '@lib/typings/currency'
 import { HistoryDataProps } from '@lib/typings/market'
 import { generateRandomId } from '@lib/utils'
+
 import { IPersistedProfile } from '../interfaces'
 
 /**
@@ -20,13 +21,13 @@ export function buildNewProfile(
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
-    clientOptions: IClientOptions,
-    name: string = ''
+    clientOptions: IClientOptions
 ): IPersistedProfile {
     return {
         id: generateRandomId(),
-        name: name.trim(),
+        name: '',
         type: null,
+        version: PROFILE_VERSION,
         networkProtocol,
         networkType,
         lastStrongholdBackupTime: null,

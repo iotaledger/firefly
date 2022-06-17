@@ -1,21 +1,25 @@
 <script lang="typescript">
     import { appRouter } from '@core/router'
-    import { createNewProfile } from '@core/profile'
+    import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { mobile } from '@core/app'
     import { cleanupOnboarding } from '@contexts/onboarding'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
-    const isDeveloperProfile = true // TODO: use real value
+    $: isDeveloperProfile = $newProfile?.isDeveloperProfile
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Devnet)
+        if (isDeveloperProfile) {
+            updateNewProfile({ networkProtocol })
+        } else {
+            await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Mainnet)
+        }
         $appRouter.next()
     }
     async function onBackClick(): Promise<void> {
-        await cleanupOnboarding()
+        await cleanupOnboarding(true)
         $appRouter.previous()
     }
 </script>
@@ -34,11 +38,18 @@
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 classes="w-full"
                 secondary
-                disabled={!featureFlags?.onboarding?.[NetworkProtocol[protocol]]?.enabled}
+                hidden={isDeveloperProfile
+                    ? features?.onboarding?.[NetworkProtocol[protocol]]?.hidden
+                    : features?.onboarding?.[NetworkProtocol[protocol]]?.hidden ||
+                      features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.hidden}
+                disabled={isDeveloperProfile
+                    ? !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled
+                    : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
+                      !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
             >
                 {protocol}
-                {#if !$mobile}
+                {#if !isDeveloperProfile}
                     <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
                 {/if}
             </Button>

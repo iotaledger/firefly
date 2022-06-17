@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
-import { ledgerSimulator } from '@lib/ledger'
-import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+import { getDefaultClientOptions, IClientOptions, INode, NetworkProtocol, NetworkType } from '@core/network'
 import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
-import { cleanupSignup } from '@lib/app'
+import { ledgerSimulator } from '@lib/ledger'
 
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
@@ -15,22 +14,27 @@ import { getStorageDirectoryOfProfile, removeProfileFolder } from '../utils'
  * @param {boolean} isDeveloperProfile
  * @param {NetworkProtocol} networkProtocol
  * @param {NetworkType} networkType
- * @param {string} name
+ * @param {INode} node
  */
 export async function createNewProfile(
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
-    name: string = ''
+    node?: INode
 ): Promise<void> {
     if (get(profileManager)) {
         console.error('Profile is already created')
         return
     }
 
-    // TODO: build custom client options for custom network
-    const clientOptions = getDefaultClientOptions(networkProtocol, networkType)
-    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions, name)
+    let clientOptions: IClientOptions
+    if (networkType !== NetworkType.PrivateNet) {
+        clientOptions = await getDefaultClientOptions(networkProtocol, networkType)
+    } else {
+        clientOptions = { nodes: [node] }
+    }
+
+    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions)
     newProfile.set(profile)
     const path = await getStorageDirectoryOfProfile(get(newProfile).id)
 
@@ -50,7 +54,6 @@ export async function deleteNewProfile(): Promise<void> {
         try {
             // TODO: delete storage with new api when implemented
             // await asyncDeleteStorage()
-            cleanupSignup()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)

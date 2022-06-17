@@ -4,6 +4,10 @@ import { activeProfile } from './active-profile.store'
 
 export const activeAccounts = writable<IAccountState[]>([])
 
+export function removeAccountFromActiveAccounts(id: string): void {
+    activeAccounts?.update((state) => state.filter((account) => account.id !== id))
+}
+
 export function addAccountToActiveAccounts(account: IAccountState): void {
     activeAccounts?.update((state) => [...state, account])
 }

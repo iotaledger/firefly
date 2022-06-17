@@ -6,8 +6,8 @@
     import { newProfile } from '@core/profile'
     import { SetupType } from 'shared/lib/typings/setup'
     import { appRouter } from '@core/router'
-    import { NetworkProtocol } from '@core/network'
-    import featurFlags from 'shared/featureFlags.config'
+    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import features from 'shared/features/features'
 
     export let locale: Locale
 
@@ -22,7 +22,11 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{locale(`views.setup.title.${$newProfile?.networkProtocol}`)}</Text>
+        <Text type="h2"
+            >{locale('views.setup.title', {
+                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__content" class:hidden={$newProfile?.networkProtocol !== NetworkProtocol.IOTA}>
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
@@ -43,8 +47,10 @@
             iconWidth="24"
             classes="w-full"
             secondary
-            hidden={$newProfile?.networkProtocol !== NetworkProtocol.Shimmer}
-            disabled={!featurFlags?.onboarding?.shimmer?.claimRewards?.enabled}
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
+                ?.enabled}
             onClick={() => {}}
         >
             {locale('actions.claimShimmer')}
@@ -58,16 +64,31 @@
             iconWidth="11"
             classes="w-full"
             secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
+                ?.enabled}
             onClick={() => handleContinueClick(SetupType.New)}
         >
-            {locale(`actions.createWallet.${$newProfile?.networkProtocol}`)}
+            {locale('actions.createWallet', { values: { protocol: formatProtocolName($newProfile?.networkProtocol) } })}
             {#if !$mobile}
                 <Text type="p" secondary smaller
-                    >{locale(`actions.createWalletDescription.${$newProfile?.networkProtocol}`)}</Text
+                    >{locale('actions.createWalletDescription', {
+                        values: { protocol: $newProfile?.networkProtocol },
+                    })}</Text
                 >
             {/if}
         </Button>
-        <Button icon="transfer" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.Import)}>
+        <Button
+            icon="transfer"
+            classes="w-full"
+            secondary
+            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.hidden}
+            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
+                ?.enabled}
+            onClick={() => handleContinueClick(SetupType.Import)}
+        >
             {locale(`actions.restoreWallet.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}
                 <Text type="p" secondary smaller

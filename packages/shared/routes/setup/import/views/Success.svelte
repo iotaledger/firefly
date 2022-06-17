@@ -3,19 +3,17 @@
     import { mobile } from '@core/app'
     import { createEventDispatcher } from 'svelte'
     import { localize } from '@core/i18n'
+    import { ProfileImportType } from '@core/profile'
+    import { importType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
     function handleContinueClick(): void {
         dispatch('next')
     }
-
-    function handleBackClick(): void {
-        dispatch('previous')
-    }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
             <div class="bg-green-500 rounded-2xl relative -top-10">

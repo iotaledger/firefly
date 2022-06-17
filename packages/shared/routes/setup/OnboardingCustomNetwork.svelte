@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { INode } from '@core/network'
     import { appRouter } from '@core/router'
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
 
     let nodeConfigurationForm: NodeConfigurationForm
-    let nodeUrl: string
+    let node: INode
     let isBusy = false
 
     function onBackClick(): void {
@@ -23,7 +24,7 @@
         <Text type="p" secondary classes="mb-8">{localize('views.customNetwork.body')}</Text>
         <NodeConfigurationForm
             bind:this={nodeConfigurationForm}
-            bind:nodeUrl
+            bind:node
             bind:isBusy
             hideButtons
             hideCheckbox
@@ -32,7 +33,7 @@
     </div>
     <div slot="leftpane__action">
         <Button
-            disabled={!nodeUrl || isBusy}
+            disabled={!node?.url || isBusy}
             type="submit"
             form="node-config-form"
             classes="w-full"

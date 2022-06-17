@@ -3,23 +3,17 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { Platform } from 'shared/lib/platform'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import {
-        LOG_FILE_NAME,
-        migration,
-        migrationLog,
-        resetMigrationState,
-        totalMigratedBalance,
-    } from 'shared/lib/migration'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { Platform } from '@lib/platform'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from '@lib/migration'
     import { appRouter, ledgerRouter } from '@core/router'
-    import { LedgerAppName } from 'shared/lib/typings/ledger'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { walletSetupType } from 'shared/lib/wallet'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { LedgerAppName } from '@lib/typings/ledger'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { walletSetupType } from '@lib/wallet'
+    import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { localize } from '@core/i18n'
-    import { SetupType } from 'shared/lib/typings/setup'
+    import { SetupType } from '@lib/typings/setup'
     import {
         activeProfile,
         addNewProfile,
@@ -29,6 +23,7 @@
         getStorageDirectoryOfProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     const { didComplete } = $migration
 
@@ -37,30 +32,6 @@
     let localizedBody = 'body'
     let localizedValues = {}
     let logExported = false
-
-    onMount(async () => {
-        if (!wasMigrated) {
-            if ($walletSetupType === SetupType.FireflyLedger) {
-                localizedBody = 'fireflyLedgerBody'
-            }
-            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
-            // When this component mounts, ensure that the profile is persisted in the local storage.
-            addNewProfile($newProfile)
-            loadPersistedProfileIntoActiveProfile($newProfile.id)
-            newProfile.set(null)
-            await createNewAccount()
-            void login(true)
-        } else {
-            if ($walletSetupType === SetupType.TrinityLedger) {
-                localizedBody = 'trinityLedgerBody'
-                localizedValues = { legacy: LedgerAppName.IOTALegacy }
-
-                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
-            } else {
-                localizedBody = 'softwareMigratedBody'
-            }
-        }
-    })
 
     const fiatbalance = formatCurrency(
         convertToFiat(
@@ -72,17 +43,22 @@
         AvailableExchangeRates.USD
     )
 
-    const handleContinueClick = (): void => {
+    function advanceView(): void {
+        cleanupOnboarding()
+        $appRouter.next()
+    }
+
+    function handleContinueClick(): void {
         if (wasMigrated) {
             const _continue = () => {
+                /**
+                 * We check for the new Ledger IOTA app to be connected after migration
+                 * because the last app the user had open was the legacy one
+                 */
                 if ($walletSetupType === SetupType.TrinityLedger) {
-                    /**
-                     * We check for the new Ledger IOTA app to be connected after migration
-                     * because the last app the user had open was the legacy one
-                     */
-                    promptUserToConnectLedger(false, () => $appRouter.next())
+                    promptUserToConnectLedger(false, advanceView)
                 } else {
-                    $appRouter.next()
+                    advanceView()
                 }
             }
             const _exportMigrationLog = () => {
@@ -109,9 +85,33 @@
                 _exportMigrationLog()
             }
         } else {
-            $appRouter.next()
+            advanceView()
         }
     }
+
+    onMount(async () => {
+        if (!wasMigrated) {
+            if ($walletSetupType === SetupType.FireflyLedger) {
+                localizedBody = 'fireflyLedgerBody'
+            }
+            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
+            // When this component mounts, ensure that the profile is persisted in the local storage.
+            addNewProfile($newProfile)
+            loadPersistedProfileIntoActiveProfile($newProfile.id)
+            newProfile.set(null)
+            await createNewAccount()
+            void login(true)
+        } else {
+            if ($walletSetupType === SetupType.TrinityLedger) {
+                localizedBody = 'trinityLedgerBody'
+                localizedValues = { legacy: LedgerAppName.IOTALegacy }
+
+                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
+            } else {
+                localizedBody = 'softwareMigratedBody'
+            }
+        }
+    })
 
     onDestroy(() => {
         if (wasMigrated) {

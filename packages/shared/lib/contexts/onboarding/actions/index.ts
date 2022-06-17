@@ -1,1 +1,7 @@
+export * from './backupInitialStronghold'
 export * from './cleanupOnboarding'
+export * from './cleanupOnboardingStores'
+export * from './cleanupProtectionOnboarding'
+export * from './resetImportState'
+export * from './restoreBackupFromFile'
+export * from './storeAndCleanMnemonic'

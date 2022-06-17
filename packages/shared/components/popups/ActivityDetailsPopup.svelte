@@ -14,39 +14,31 @@
         parseRawAmount,
     } from '@core/wallet'
     import { activeProfile } from '@core/profile'
-    import { onMount } from 'svelte'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { time } from '@core/app'
+    import { setClipboard } from '@lib/utils'
+    import { truncateString } from '@lib/helpers'
 
     export let activity: Activity
-
-    let time = new Date()
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
 
-    $: asyncStatus = activity.getAsyncStatus(time)
+    $: asyncStatus = activity.getAsyncStatus($time)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings?.currency]
     )
 
-    onMount(() => {
-        if (activity.isAsync && !activity.isClaimed) {
-            const interval = setInterval(() => {
-                time = new Date()
-            }, 1000)
-
-            return () => {
-                clearInterval(interval)
-            }
-        }
-    })
-
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
+    }
+
+    function handleTransactionIdClick(): void {
+        setClipboard(activity.transactionId)
     }
 </script>
 
@@ -55,12 +47,19 @@
         <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
-        {#if activity.transactionId}
+        {#if explorerUrl && activity.transactionId}
             <button
                 class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={handleExplorerClick}
             >
                 {localize('general.viewOnExplorer')}
+            </button>
+        {:else if activity.transactionId}
+            <button
+                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                on:click={handleTransactionIdClick}
+            >
+                {truncateString(activity.transactionId, 12, 12)}
             </button>
         {/if}
     </div>
@@ -75,7 +74,7 @@
             </button>
             <button
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={() => claimActivity(activity.id)}
+                on:click={() => claimActivity(activity)}
             >
                 {localize('actions.claim')}
             </button>

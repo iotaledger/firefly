@@ -7,7 +7,7 @@ import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic } from './app'
+import { mnemonic } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
@@ -133,18 +133,6 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         api.getLegacySeedChecksum(seed, {
             onSuccess(response) {
                 resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
-
-export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.changeStrongholdPassword(currentPassword, newPassword, {
-            onSuccess() {
-                resolve()
             },
             onError(err) {
                 reject(err)
@@ -884,7 +872,7 @@ export const findAccountWithAddress = (address: string): IAccountState | undefin
         return
     }
     const accounts = get(activeAccounts)
-    return accounts.find((acc) => acc.depositAddress === address)
+    return accounts.find((account) => account.depositAddress === address)
 }
 
 /**

@@ -1,10 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": {
-                "iota": "Send, Receive & Manage your IOTA tokens",
-                "shimmer": "Send, Receive & Manage your Shimmer tokens"
-            },
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
@@ -22,10 +19,7 @@
             "body": "Choose your app theme."
         },
         "profile": {
-            "title": {
-                "iota": "Create your IOTA profile",
-                "shimmer": "Create your Shimmer profile"
-            },
+            "title": "Create your {protocol} profile",
             "profileName": "Profile name",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": {
@@ -40,10 +34,7 @@
             }
         },
         "setup": {
-            "title": {
-                "iota": "Set up an IOTA profile",
-                "shimmer": "Set up a Shimmer profile"
-            },
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
@@ -945,6 +936,7 @@
         "close": "Close",
         "dismiss": "Dismiss",
         "claim": "Claim",
+        "claiming": "Claiming",
         "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -957,14 +949,8 @@
             "iota": "Migrate to Chrysalis or restore an existing wallet",
             "shimmer": "Restore an existing Shimmer profile"
         },
-        "createWallet": {
-            "iota": "Create new wallet",
-            "shimmer": "Create a new Shimmer profile"
-        },
-        "createWalletDescription": {
-            "iota": "Create a fresh wallet running on Chrysalis",
-            "shimmer": "Create a fresh wallet running on Shimmer"
-        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Save password",
@@ -1046,7 +1032,7 @@
         "hideNetworkStatistics": "Hide network statistics",
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
-        "searchBalances": "Search for balances",
+        "search": "Search",
         "searchAgain": "Search again",
         "searching": "Searching",
         "closeFirefly": "Close Firefly",
@@ -1194,8 +1180,8 @@
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "fromAddress": "From {account}",
-        "toAddress": "To {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
@@ -1209,6 +1195,7 @@
         "version": "Version {version}",
         "yourWallets": "Your Wallets",
         "unknown": "Unknown",
+        "unknownAddress": "Unknown address",
         "none": "None",
         "staked": "Staked",
         "unstaked": "Unstaked",
@@ -1220,15 +1207,17 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "transactionTime": "Transaction time",
-        "publicNote": "Public note",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
-        "optionalPublicNote": "Optional public note",
-        "nodeList": "Node list"
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in"
     },
     "dates": {
         "today": "Today",
@@ -1322,7 +1311,8 @@
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "syncing": "There was an error syncing your wallets.",
+            "cannotRemove": "Unable to remove wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
@@ -1407,6 +1397,9 @@
         "invalidTime": "INVALID TIME"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
@@ -1471,24 +1464,33 @@
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+                "Pending": "staking for",
+                "Confirmed": "staked for",
+                "Conflicting": "failed to stake"
         },
-        "transfer": {
-            "Pending": "transferring to",
-            "Confirmed": "transferred to",
-            "Conflicting": "failed to transfer"
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
         },
-        "receive": {
-            "Pending": "receiving from",
-            "Confirmed": "received from",
-            "Conflicting": "failed to receive"
-        },
-        "send": {
-            "Pending": "sending to",
-            "Confirmed": "sent to",
-            "Conflicting": "failed to send"
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
         },
         "migrate": {
             "Pending": "migrating for",

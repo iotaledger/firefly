@@ -1,6 +1,7 @@
+import { IAccountState } from '@core/account'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { Recipient } from '../types'
+import { Subject } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
@@ -13,15 +14,20 @@ export interface IActivity {
     inclusionState: InclusionState
     isInternal: boolean
     rawAmount: number
-    recipient: Recipient
+    sender: Subject
+    recipient: Subject
     token: ITokenMetadata
     isAsync: boolean
     expirationDate?: Date
     isHidden?: boolean
+    isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string
+    claimingTransactionId?: string
+    claimedDate?: Date
 
-    setFromTransaction(transactionId: string, transaction: Transaction): void
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void
+    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

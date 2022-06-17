@@ -1,1 +1,1 @@
-export * from './recipient.type'
+export * from './subject.type'

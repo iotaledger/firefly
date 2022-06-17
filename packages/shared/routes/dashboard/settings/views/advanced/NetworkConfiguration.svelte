@@ -10,25 +10,25 @@
         NetworkStatusDescription,
         networkStatus,
         NetworkHealth,
-        IClientOptions,
         getOfficialNodes,
         nodeInfo,
+        NetworkType,
     } from '@core/network'
     import { closePopup, openPopup } from '@lib/popup'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
-    let clientOptions: IClientOptions = $activeProfile?.settings.clientOptions
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
     let nodesContainer
 
-    if (clientOptions.nodes.length !== 0) {
-        clientOptions.nodes = getNodeCandidates(clientOptions)
-    }
+    $: clientOptions = $activeProfile?.settings.clientOptions
 
     $: {
         updateClientOptions(clientOptions)
         updateActiveProfileSettings({ clientOptions })
+        if (clientOptions?.nodes.length !== 0) {
+            clientOptions.nodes = getNodeCandidates(clientOptions)
+        }
     }
 
     function handleIncludeOfficialNodesClick() {
@@ -172,17 +172,12 @@
             </div>
             {#if !clientOptions.automaticNodeSelection}
                 <div class="flex flex-row justify-between space-x-3 w-full mt-4">
-                    <Button
-                        disabled
-                        medium
-                        inlineStyle="min-width: 156px;"
-                        classes="w-1/2"
-                        onClick={handleAddNodeClick}
-                    >
+                    <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
                         {localize('actions.addNode')}
                     </Button>
                     <Button
-                        disabled
+                        disabled={$activeProfile?.networkType === NetworkType.PrivateNet ||
+                            clientOptions?.nodes.length <= 1}
                         warning
                         medium
                         inlineStyle="min-width: 156px;"

@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityStatus, ActivityType, InclusionState } from '@core/wallet'
+    import { ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
     import Pill from './Pill.svelte'
 
     export let type: ActivityType
+    export let direction: ActivityDirection
     export let inclusionState: InclusionState
 
     let backgroundColor = 'gray-200'
@@ -13,16 +14,16 @@
     $: {
         switch (inclusionState) {
             case InclusionState.Pending:
-                backgroundColor = 'blue-200'
-                darkBackgroundColor = 'blue-300'
+                backgroundColor = 'blue-100'
+                darkBackgroundColor = 'blue-100'
                 break
             case InclusionState.Confirmed:
-                backgroundColor = 'green-200'
+                backgroundColor = 'green-300'
                 darkBackgroundColor = 'green-300'
                 break
             case InclusionState.Conflicting:
                 backgroundColor = 'red-200'
-                darkBackgroundColor = 'red-300'
+                darkBackgroundColor = 'red-200'
                 break
         }
     }
@@ -30,6 +31,6 @@
 
 {#if type && inclusionState}
     <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
-        {localize('pills.' + type + '.' + inclusionState).toLowerCase()}
+        {localize('pills.' + type + '.' + direction + '.' + inclusionState).toLowerCase()}
     </Pill>
 {/if}

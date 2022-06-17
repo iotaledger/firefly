@@ -1,32 +1,47 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
-    import { mobile } from '@core/app'
     import { createEventDispatcher } from 'svelte'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
+    import { mobile } from '@core/app'
+    import { mnemonic } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
+    import { backupInitialStronghold } from '@contexts/onboarding'
+    import { storeMnemonic } from '@core/profile-manager'
 
     export let locale: Locale
     export let strongholdPassword
     export let busy = false
 
     let confirmPassword
-    let skipping = false
+    let skipBackup = false
 
     const dispatch = createEventDispatcher()
 
-    $: valid = strongholdPassword === confirmPassword
+    $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
 
-    function onSubmit() {
-        if (valid) {
-            skipping = false
-            dispatch('next')
-        }
-    }
     function handleBackClick() {
         dispatch('previous')
     }
-    function handleSkipBackup() {
-        skipping = true
-        dispatch('next', { skip: true })
+
+    async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
+        skipBackup = _skipBackup
+
+        await storeMnemonic($mnemonic.join(' '))
+        if (skipBackup) {
+            dispatch('next', { skip: true })
+        } else {
+            await backupInitialStronghold()
+            dispatch('next')
+        }
+    }
+
+    async function handleSkipBackupClick(): Promise<void> {
+        await onboardingBackupFileFunction(true)
+    }
+
+    async function handleSubmitClick(): Promise<void> {
+        if (isStrongholdPasswordValid) {
+            await onboardingBackupFileFunction()
+        }
     }
 </script>
 
@@ -35,9 +50,9 @@
         <Text type="h2">{locale('views.backupWallet.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={onSubmit} id="backup-form">
+        <form on:submit|preventDefault={handleSubmitClick} id="backup-form">
             <Text type="p" secondary classes="mb-8">{locale('views.backupWallet.body1')}</Text>
-            <Password bind:value={confirmPassword} {locale} autofocus disabled={busy} showRevealToggle classes="mb-8" />
+            <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
             <Text type="p" secondary classes="mb-4">{locale('views.backupWallet.body2')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason1')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason2')}</Text>
@@ -45,13 +60,13 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackup}>
-            {#if skipping && busy}
+        <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackupClick}>
+            {#if skipBackup && busy}
                 <Spinner busy={true} message={locale('general.creatingProfile')} classes="justify-center" />
             {:else}{locale('actions.skipBackup')}{/if}
         </Button>
-        <Button type="submit" form="backup-form" classes="w-full" disabled={!valid || busy}>
-            {#if !skipping && busy}
+        <Button type="submit" form="backup-form" classes="w-full" disabled={!isStrongholdPasswordValid || busy}>
+            {#if !skipBackup && busy}
                 <Spinner busy={true} message={locale('general.creatingProfile')} classes="justify-center" />
             {:else}{locale('actions.saveBackup')}{/if}
         </Button>

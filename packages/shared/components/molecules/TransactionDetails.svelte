@@ -15,52 +15,37 @@
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
         ActivityType,
-        Recipient,
+        Subject,
         InclusionState,
+        ActivityDirection,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
+    import { Platform } from 'shared/lib/platform'
+    import { truncateString } from '@lib/helpers'
+    import { setClipboard } from '@lib/utils'
 
     export let amount: string
     export let unit: string
     export let type: ActivityType
-    export let inclusionState: InclusionState
-    export let asyncStatus: ActivityAsyncStatus
+    export let direction: ActivityDirection
+    export let inclusionState: InclusionState = InclusionState.Pending
+    export let asyncStatus: ActivityAsyncStatus = undefined
     export let formattedFiatValue: string
     export let time: Date
-    export let publicNote: string
+    export let metadata: string
+    export let tag: string
     export let storageDeposit = 0
     export let expirationDate: Date
-    export let recipient: Recipient
+    export let subject: Subject
+    export let claimingTransactionId: string
+    export let claimedDate: Date
 
-    let transactionTime: string
-    $: {
-        try {
-            if (time) {
-                transactionTime = formatDate(time, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            }
-        } catch {
-            transactionTime = localize('error.invalidDate')
-        }
-    }
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let expirationTime: string
-    $: {
-        try {
-            if (expirationDate) {
-                expirationTime = formatDate(expirationDate, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            } else {
-                expirationTime = undefined
-            }
-        } catch {
-            expirationTime = undefined
-        }
-    }
+    $: transactionTime = getDateFormat(time)
+    $: expirationTime = getDateFormat(expirationDate)
+    $: claimedTime = getDateFormat(claimedDate)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -69,9 +54,32 @@
 
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
-        ...(publicNote && { publicNote }),
+        ...(metadata && { metadata }),
+        ...(tag && { tag }),
         ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
+        ...(claimedTime && { claimedTime }),
+    }
+
+    function getDateFormat(date: Date): string {
+        try {
+            if (date) {
+                return formatDate(date, {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
+                })
+            } else {
+                return undefined
+            }
+        } catch {
+            return undefined
+        }
+    }
+
+    function handleTransactionIdClick(): void {
+        explorerUrl
+            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            : setClipboard(claimingTransactionId)
     }
 </script>
 
@@ -90,18 +98,24 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState}
-                <ActivityStatusPill {type} {inclusionState} />
+                <ActivityStatusPill {type} {direction} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if recipient?.type === 'account'}
+        {#if subject?.type === 'account'}
             <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={recipient.account} />
+                <AccountLabel account={subject.account} />
             </Box>
-        {:else if recipient?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={recipient.address} />
+        {:else if subject?.type === 'address'}
+            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+        {:else}
+            <Box col clearBackground clearPadding>
+                <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
+                    {localize('general.unknownAddress')}
+                </Text>
+            </Box>
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
@@ -109,6 +123,17 @@
             {#each Object.entries(detailsList) as [key, value]}
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
             {/each}
+            {#if claimingTransactionId}
+                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
+                    <button
+                        slot="value"
+                        class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                        on:click={handleTransactionIdClick}
+                    >
+                        {truncateString(claimingTransactionId, 12, 12)}
+                    </button>
+                </KeyValueBox>
+            {/if}
         </details-list>
     {/if}
 </transaction-details>

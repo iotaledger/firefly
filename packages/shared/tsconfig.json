@@ -13,6 +13,6 @@
             "@lib/*": ["./lib/*"]
         }
     },
-    "include": ["./lib"],
+    "include": ["./lib", "./features"],
     "exclude": ["**/node_modules", "**/tests"]
 }

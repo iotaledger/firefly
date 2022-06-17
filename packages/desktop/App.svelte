@@ -1,6 +1,12 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, updateNewProfile } from '@core/profile'
+    import {
+        activeProfile,
+        cleanupEmptyProfiles,
+        isActiveProfileOutdated,
+        migrateActiveProfile,
+        updateNewProfile,
+    } from '@core/profile'
     import {
         accountRouter,
         AppRoute,
@@ -59,6 +65,12 @@
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn } = $activeProfile
+
+    $: if ($loggedIn) {
+        if (isActiveProfileOutdated($activeProfile?.version)) {
+            migrateActiveProfile()
+        }
+    }
 
     const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
         Electron.updateAppSettings({ sendCrashReports })
@@ -126,10 +138,12 @@
             openPopup({ type: 'diagnostics' })
         })
         Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: false })
         })

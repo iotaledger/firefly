@@ -1,5 +1,5 @@
 ---
-icon: stack
+icon: package-24
 ---
 
 # Dependencies
