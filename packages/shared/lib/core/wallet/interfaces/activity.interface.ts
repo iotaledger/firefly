@@ -20,6 +20,7 @@ export interface IActivity {
     isAsync: boolean
     expirationDate?: Date
     isHidden?: boolean
+    isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string
     claimingTransactionId?: string

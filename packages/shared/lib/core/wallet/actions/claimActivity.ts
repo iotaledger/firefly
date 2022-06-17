@@ -5,6 +5,7 @@ import { addClaimedActivity, updateActivity } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
     try {
+        updateActivity({ id: activity.id, isClaiming: true })
         const results = await get(selectedAccount).collectOutputs([activity.id])
         if (results.length > 0) {
             addClaimedActivity(get(selectedAccount).id, activity.transactionId, {
@@ -22,5 +23,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
         }
     } catch (err) {
         console.error(err)
+    } finally {
+        updateActivity({ id: activity.id, isClaiming: false })
     }
 }

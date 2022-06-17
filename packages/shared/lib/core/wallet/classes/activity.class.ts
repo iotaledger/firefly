@@ -54,6 +54,7 @@ export class Activity implements IActivity {
     storageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
+    isClaiming?: boolean = false
     isClaimed?: boolean
     claimingTransactionId?: string
     claimedDate?: Date

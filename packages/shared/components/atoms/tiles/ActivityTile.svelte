@@ -9,7 +9,7 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text } from 'shared/components'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
@@ -80,17 +80,23 @@
                 </div>
                 <div class="flex justify-end flex-row w-2/4 space-x-2">
                     {#if isIncomingActivityUnclaimed}
-                        <button
-                            class="action p-1 w-full text-center rounded-4 font-medium text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={() => hideActivity(activity?.id)}
-                        >
-                            {localize('actions.reject')}
-                        </button>
+                        {#if !activity.isClaiming}
+                            <button
+                                class="action p-1 w-full text-center rounded-4 font-medium text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                                on:click|stopPropagation={() => hideActivity(activity?.id)}
+                            >
+                                {localize('actions.reject')}
+                            </button>
+                        {/if}
                         <button
                             class="action p-1 w-full text-center rounded-4 font-medium text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={() => claimActivity(activity)}
                         >
-                            {localize('actions.claim')}
+                            {#if activity.isClaiming}
+                                <Spinner busy={true} message={localize('actions.claiming')} classes="justify-center" />
+                            {:else}
+                                {localize('actions.claim')}
+                            {/if}
                         </button>
                     {:else}
                         <ActivityAsyncStatusPill {asyncStatus} />
