@@ -12,8 +12,8 @@ export function loadAccountActivities(account: IAccountState): void {
     addEmptyAccountActivitiesToAllAccountActivities(account.id)
     loadAccountActivitiesFromTransactions(account)
     loadAccountActivitiesFromOutputs(account)
-    updateActivityAsyncStateFromTransactions(account)
-    updateActivityAsyncStateFromOutputs(account)
+    // updateActivityAsyncStateFromTransactions(account)
+    // updateActivityAsyncStateFromOutputs(account)
 
     // removeClaimedTransactionsFromAccountActivities(account.id)
     updateActivitiesWithClaimedTransactionInfo(account.id)
