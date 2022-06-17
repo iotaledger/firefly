@@ -1,6 +1,6 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { queriedActivities, updateActivity } from '../stores'
+import { updateActivity } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 
 export function hideActivity(id: string): void {

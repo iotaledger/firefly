@@ -1208,7 +1208,7 @@
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
-        "claimedTransactionId": "Claimed Transaction",
+        "claimingTransactionId": "Claimed Transaction",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",

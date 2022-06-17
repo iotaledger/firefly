@@ -75,9 +75,7 @@ export function updateActivity(partialActivity: Partial<IActivity>): void {
     if (partialActivity?.id) {
         allAccountActivities.update((state) =>
             state.map((_accountActivities) => {
-                const activity = _accountActivities.activities.find(
-                    (_activity) => _activity.transactionId === partialActivity.id
-                )
+                const activity = _accountActivities.activities.find((_activity) => _activity.id === partialActivity.id)
 
                 if (activity) {
                     activity.updateFromPartialActivity(partialActivity)
