@@ -67,22 +67,21 @@
             if (await isCurrentPasswordIncorrect()) {
                 return false
             } else if (newPassword.length > MAX_PASSWORD_LENGTH) {
-                (newPasswordError = 'error.password.length'),
-                    {
-                        values: {
-                            length: MAX_PASSWORD_LENGTH,
-                        },
-                    }
+                newPasswordError = localize('error.password.length', {
+                    values: {
+                        length: MAX_PASSWORD_LENGTH,
+                    },
+                })
                 return false
             } else if (newPassword !== confirmedPassword) {
-                newPasswordError = 'error.password.doNotMatch'
+                newPasswordError = localize('error.password.doNotMatch')
                 return false
             } else if (passwordStrength.score !== 4) {
                 let errorLocale = 'error.password.tooWeak'
                 if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
                     errorLocale = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
                 }
-                newPasswordError = errorLocale
+                newPasswordError = localize(errorLocale)
                 return false
             }
 
@@ -148,7 +147,7 @@
         submitHandler={checkPassword}
     />
     <PasswordInput
-        error={localize(newPasswordError)}
+        error={newPasswordError}
         classes="mb-4"
         bind:value={newPassword}
         showRevealToggle
