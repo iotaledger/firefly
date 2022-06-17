@@ -1,22 +1,18 @@
 <script lang="typescript">
-    import { selectedAccount, setSelectedAccount } from '@core/account'
-    import { localize } from '@core/i18n'
-    import { removeLatestAccount } from '@core/profile-manager'
-    import { activeAccounts, visibleActiveAccounts, removeAccountFromActiveAccounts } from '@core/profile'
-    import { resetWalletRoute } from '@core/router'
     import { HR, Modal, MenuItem, ToggleHiddenAccountMenuItem } from 'shared/components'
-    import { openPopup } from 'shared/lib/popup'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { showAppNotification } from '@lib/notifications'
+    import { selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
+    import { activeAccounts, visibleActiveAccounts } from '@core/profile'
+    import { deleteAccount } from '@core/profile-manager'
+    import { openPopup } from '@lib/popup'
+    import { SettingsIcons } from '@lib/typings/icons'
 
     export let modal: Modal
 
     const shouldDisableDelete = $selectedAccount.meta.index !== $activeAccounts?.length - 1
 
     const handleCustomiseAccountClick = () => {
-        openPopup({
-            type: 'manageAccount',
-        })
+        openPopup({ type: 'manageAccount' })
         modal.close()
     }
 
@@ -36,21 +32,7 @@
             props: {
                 account: selectedAccount,
                 hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
-                deleteAccount: (id: string) => {
-                    removeLatestAccount()
-                        .then(() => {
-                            removeAccountFromActiveAccounts(id)
-
-                            setSelectedAccount($visibleActiveAccounts?.[0]?.id ?? null)
-                            resetWalletRoute()
-                        })
-                        .catch((error) => {
-                            showAppNotification({
-                                type: 'error',
-                                message: localize(error.type),
-                            })
-                        })
-                },
+                deleteAccount,
             },
         })
         modal.close()
