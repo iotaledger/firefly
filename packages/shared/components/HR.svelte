@@ -7,5 +7,5 @@
 <hr
     class="border-t border-solid {hidden
         ? 'border-gray-100 dark:border-gray-800'
-        : !overrideColor && 'border-gray-200 dark:border-gray-700'} {classes}"
+        : !overrideColor && 'border-gray-200 dark:border-gray-800'} {classes}"
 />
