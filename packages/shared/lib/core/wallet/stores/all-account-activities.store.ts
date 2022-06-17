@@ -71,14 +71,18 @@ export function updateActivityClaimStateByTransactionId(transactionId: string, i
     )
 }
 
-export function updateActivity(partialActivity: Partial<IActivity>): void {
+export function updateActivity(accountId: string, partialActivity: Partial<IActivity>): void {
     if (partialActivity?.id) {
         allAccountActivities.update((state) =>
             state.map((_accountActivities) => {
-                const activity = _accountActivities.activities.find((_activity) => _activity.id === partialActivity.id)
+                if (_accountActivities.accountId === accountId) {
+                    const activity = _accountActivities.activities.find(
+                        (_activity) => _activity.id === partialActivity.id
+                    )
 
-                if (activity) {
-                    activity.updateFromPartialActivity(partialActivity)
+                    if (activity) {
+                        activity.updateFromPartialActivity(partialActivity)
+                    }
                 }
                 return _accountActivities
             })

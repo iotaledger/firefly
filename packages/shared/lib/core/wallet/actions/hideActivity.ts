@@ -4,13 +4,14 @@ import { updateActivity } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 
 export function hideActivity(id: string): void {
+    const accountId = get(selectedAccount).id
     hiddenActivities.update((state) => {
-        if (!state[get(selectedAccount).id] || !Array.isArray(state[get(selectedAccount).id])) {
-            state[get(selectedAccount).id] = []
+        if (!state[accountId] || !Array.isArray(state[accountId])) {
+            state[accountId] = []
         }
-        state[get(selectedAccount).id].push(id)
+        state[accountId].push(id)
         return state
     })
 
-    updateActivity({ id, isHidden: true })
+    updateActivity(accountId, { id, isHidden: true })
 }

@@ -4,17 +4,18 @@ import { Activity } from '../classes'
 import { addClaimedActivity, updateActivity } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
+    const account = get(selectedAccount)
     try {
-        updateActivity({ id: activity.id, isClaiming: true })
-        const results = await get(selectedAccount).collectOutputs([activity.id])
+        updateActivity(account.id, { id: activity.id, isClaiming: true })
+        const results = await account.collectOutputs([activity.id])
         if (results.length > 0) {
-            addClaimedActivity(get(selectedAccount).id, activity.transactionId, {
+            addClaimedActivity(account.id, activity.transactionId, {
                 id: activity.id,
                 isClaimed: true,
                 claimingTransactionId: results[0].transactionId,
                 claimedTimestamp: new Date().getTime(),
             })
-            updateActivity({
+            updateActivity(account.id, {
                 id: activity.id,
                 isClaimed: true,
                 claimingTransactionId: results[0].transactionId,
@@ -24,6 +25,6 @@ export async function claimActivity(activity: Activity): Promise<void> {
     } catch (err) {
         console.error(err)
     } finally {
-        updateActivity({ id: activity.id, isClaiming: false })
+        updateActivity(account.id, { id: activity.id, isClaiming: false })
     }
 }

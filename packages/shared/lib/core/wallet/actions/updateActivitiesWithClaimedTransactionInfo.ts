@@ -9,7 +9,7 @@ export function updateActivitiesWithClaimedTransactionInfo(accountId: string): v
     for (const activity of accountActivities.activities) {
         const claimedActivity = get(claimedActivities)[accountId]?.[activity.transactionId]
         if (claimedActivity) {
-            updateActivity({
+            updateActivity(accountId, {
                 ...claimedActivity,
                 id: activity.id,
                 claimedDate: new Date(claimedActivity.claimedTimestamp),

@@ -13,24 +13,26 @@ export function updateActivityAsyncStateFromTransactions(account: IAccountState)
         )
 
         for (const activity of accountActivities.activities) {
-            const claimedActivity = get(claimedActivities)?.[account.id]?.[activity.transactionId]
-            if (claimedActivity) {
-                updateActivity({
-                    ...claimedActivity,
-                    claimedDate: new Date(claimedActivity.claimedTimestamp),
-                })
-                updateActivity({ id: transactionId, isHidden: true })
-            } else if (
-                transactionInputs.some((input) => input.transactionId === activity.transactionId && activity.isAsync)
-            ) {
-                if (activity.direction === ActivityDirection.In) {
-                    updateActivity({
+            if (activity.direction === ActivityDirection.In) {
+                const claimedActivity = get(claimedActivities)?.[account.id]?.[activity.transactionId]
+                // if (claimedActivity) {
+                //     updateActivity(account.id, {
+                //         ...claimedActivity,
+                //         claimedDate: new Date(claimedActivity.claimedTimestamp),
+                //     })
+                //     updateActivity(account.id, { id: activity.transactionId, isHidden: true })
+                if (
+                    transactionInputs.some(
+                        (input) => input.transactionId === activity.transactionId && activity.isAsync
+                    )
+                ) {
+                    updateActivity(account.id, {
                         id: activity.id,
                         isClaimed: true,
                         claimedDate: new Date(Number(transaction.timestamp)),
                         claimingTransactionId: transactionId,
                     })
-                    updateActivity({ id: transactionId, isHidden: true })
+                    updateActivity(account.id, { id: transactionId, isHidden: true })
                 }
             }
         }
