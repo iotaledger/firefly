@@ -5,7 +5,7 @@
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
+    import { changeStrongholdPassword, clearStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -92,6 +92,8 @@
 
     async function isCurrentPasswordIncorrect(): Promise<boolean> {
         try {
+            // If password is still in memory, setStrongholdPassword throws an error
+            await clearStrongholdPassword()
             await setStrongholdPassword(currentPassword)
             return false
         } catch (err) {
