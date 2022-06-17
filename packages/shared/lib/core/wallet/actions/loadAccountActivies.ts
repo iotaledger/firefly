@@ -2,7 +2,11 @@ import { IAccountState } from '@core/account'
 import { addEmptyAccountActivitiesToAllAccountActivities } from '../stores'
 import { loadAccountActivitiesFromOutputs } from './loadAccountActivitiesFromOutputs'
 import { loadAccountActivitiesFromTransactions } from './loadAccountActivitiesFromTransactions'
-import { updateActivityAsyncStateFromTransactions, updateActivityAsyncStateFromOutputs } from './'
+import {
+    updateActivityAsyncStateFromTransactions,
+    updateActivityAsyncStateFromOutputs,
+    updateActivitiesWithClaimedTransactionInfo,
+} from './'
 
 export function loadAccountActivities(account: IAccountState): void {
     addEmptyAccountActivitiesToAllAccountActivities(account.id)
@@ -10,4 +14,7 @@ export function loadAccountActivities(account: IAccountState): void {
     loadAccountActivitiesFromOutputs(account)
     updateActivityAsyncStateFromTransactions(account)
     updateActivityAsyncStateFromOutputs(account)
+
+    // removeClaimedTransactionsFromAccountActivities(account.id)
+    updateActivitiesWithClaimedTransactionInfo(account.id)
 }

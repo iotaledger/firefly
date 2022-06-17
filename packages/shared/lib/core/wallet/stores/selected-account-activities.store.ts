@@ -34,19 +34,22 @@ export const queriedActivities: Readable<Activity[]> = derived(
             activityList = activityList.filter((activity) => activity.direction === ActivityDirection.Out)
         }
 
-        activityList = activityList.filter(
-            (activity) =>
-                (activity.recipient.type === 'account' && activity.recipient?.account?.name === $activitySearchTerm) ||
-                (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
-                activity?.id.toLowerCase() === $activitySearchTerm ||
-                ($activitySearchTerm[0] === '>' &&
-                    unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
-                ($activitySearchTerm[0] === '<' &&
-                    unitToValue($activitySearchTerm.substring(1)) > activity.rawAmount) ||
-                ($activitySearchTerm[1] === 'i' && isValueInUnitRange(activity.rawAmount, $activitySearchTerm)) ||
-                activity.rawAmount === unitToValue($activitySearchTerm) ||
-                formatUnitBestMatch(activity.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
-        )
+        if (activitySearchTerm) {
+            activityList = activityList.filter(
+                (activity) =>
+                    (activity.recipient.type === 'account' &&
+                        activity.recipient?.account?.name === $activitySearchTerm) ||
+                    (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
+                    activity?.id.toLowerCase() === $activitySearchTerm ||
+                    ($activitySearchTerm[0] === '>' &&
+                        unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
+                    ($activitySearchTerm[0] === '<' &&
+                        unitToValue($activitySearchTerm.substring(1)) > activity.rawAmount) ||
+                    ($activitySearchTerm[1] === 'i' && isValueInUnitRange(activity.rawAmount, $activitySearchTerm)) ||
+                    activity.rawAmount === unitToValue($activitySearchTerm) ||
+                    formatUnitBestMatch(activity.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
+            )
+        }
 
         return activityList
     }
