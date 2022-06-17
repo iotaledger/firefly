@@ -5,6 +5,7 @@
     import { appRouter } from '@core/router'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
     import { formatProtocolName } from '@core/network'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
     const busy = false
@@ -16,7 +17,11 @@
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 
-    function handleBackClick(): void {
+    async function handleBackClick(): Promise<void> {
+        const isDeveloperProfile = $newProfile.isDeveloperProfile
+        const networkProtocol = $newProfile.networkProtocol
+        await cleanupOnboarding(true)
+        updateNewProfile({ isDeveloperProfile, networkProtocol })
         $appRouter.previous()
     }
 
