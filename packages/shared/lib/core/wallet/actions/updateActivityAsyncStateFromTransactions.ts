@@ -11,9 +11,7 @@ export function updateActivityAsyncStateFromTransactions(account: IAccountState)
             (accountActivities) => accountActivities?.accountId === account.id
         )
         const linkedActivities = accountActivities.activities.filter((activity) =>
-            inputs.some((input) => {
-                input.transactionId === activity.transactionId
-            })
+            inputs.some((input) => input.transactionId === activity.transactionId && activity.isAsync)
         )
         if (linkedActivities.length > 0) {
             // TODO: hide activity with transactionsId
