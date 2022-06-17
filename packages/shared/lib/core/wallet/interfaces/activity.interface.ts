@@ -22,8 +22,8 @@ export interface IActivity {
     isHidden?: boolean
     isClaimed?: boolean
     publicNote?: string
-    claimedTransactionId: string
-    claimedDate: Date
+    claimedTransactionId?: string
+    claimedDate?: Date
 
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
