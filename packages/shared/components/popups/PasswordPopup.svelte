@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
@@ -37,12 +37,11 @@
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap">
-    <Password
+    <PasswordInput
         {error}
         classes="w-full mb-5"
         bind:value={password}
         showRevealToggle
-        {localize}
         placeholder={localize('general.password')}
         autofocus
     />

@@ -3,7 +3,7 @@
         generateTransactionHistoryCsvFromAccount,
         generateTransactionHistoryFileName,
     } from 'shared/lib/transactionHistory'
-    import { Button, Password, Spinner, Text } from 'shared/components'
+    import { Button, PasswordInput, Spinner, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -100,12 +100,11 @@
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
             <Text type="p" secondary classes="mb-3">{localize('popups.exportTransactionHistory.typePassword')}</Text>
-            <Password
+            <PasswordInput
                 {error}
                 classes="w-full mb-2"
                 bind:value={password}
                 showRevealToggle
-                locale={localize}
                 placeholder={localize('general.password')}
                 autofocus
                 submitHandler={() => handleExportTransactionHistory()}
