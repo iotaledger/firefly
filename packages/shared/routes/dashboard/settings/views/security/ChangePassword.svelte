@@ -5,7 +5,7 @@
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
+    import { changePasswordAndUnlockStronghold, setStrongholdPassword } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -29,7 +29,7 @@
 
             try {
                 // TODO: also pass in currentPassword
-                await changeStrongholdPassword(newPassword)
+                await changePasswordAndUnlockStronghold(newPassword)
 
                 if (exportStrongholdChecked) {
                     changeMessageLocale = 'general.exportingStronghold'
