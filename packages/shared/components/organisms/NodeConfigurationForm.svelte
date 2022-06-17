@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Checkbox, Input, Password, Text } from 'shared/components'
+    import { Input, Password } from 'shared/components'
     import {
         INode,
         nodeInfo,
@@ -11,7 +11,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { appRoute, AppRoute } from '@core/router'
     import { networkProtocol } from '@contexts/onboarding'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }

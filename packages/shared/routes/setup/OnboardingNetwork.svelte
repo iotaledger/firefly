@@ -6,12 +6,13 @@
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import { networkProtocol } from '@contexts/onboarding'
     import features from 'shared/features/features'
     import { cleanupOnboarding } from '@contexts/onboarding'
 
+    const networkProtocol = $newProfile.networkProtocol
+
     const networkIcon = {
-        [NetworkType.Mainnet]: $networkProtocol,
+        [NetworkType.Mainnet]: networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',
     }
@@ -44,16 +45,16 @@
         {#each Object.values(NetworkType) as networkType}
             <Button
                 icon={networkIcon[networkType]}
-                iconColor={networkType === NetworkType.Mainnet ? `${$networkProtocol}-highlight` : 'blue-500'}
+                iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 classes="w-full"
                 secondary
-                hidden={features?.onboarding?.[$networkProtocol]?.[networkType]?.hidden}
-                disabled={!features?.onboarding?.[$networkProtocol]?.[networkType]?.enabled}
+                hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
+                disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
             >
-                {localize(`views.network.${$networkProtocol}.${networkType}.title`)}
+                {localize(`views.network.${networkProtocol}.${networkType}.title`)}
                 {#if !$mobile}
-                    <Text secondary smaller>{localize(`views.network.${$networkProtocol}.${networkType}.body`)}</Text>
+                    <Text secondary smaller>{localize(`views.network.${networkProtocol}.${networkType}.body`)}</Text>
                 {/if}
             </Button>
         {/each}
