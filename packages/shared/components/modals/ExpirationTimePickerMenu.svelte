@@ -56,7 +56,7 @@
         }
     }
 
-    function handleChooseExpirationTimeClick(_selected): void {
+    function handleChooseExpirationTimeClick(_selected: ExpirationTimeSelection): void {
         if (_selected === 'custom') {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
