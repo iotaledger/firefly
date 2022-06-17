@@ -29,6 +29,7 @@ import {
     isOutputAsync,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -54,6 +55,8 @@ export class Activity implements IActivity {
     expirationDate?: Date
     isAsync: boolean
     isClaimed?: boolean
+    claimedTransactionId: string
+    claimedTime: Date
 
     setNewTransaction(
         senderAccount: IAccountState,
@@ -97,6 +100,7 @@ export class Activity implements IActivity {
 
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isSubjectInternal(recipient))

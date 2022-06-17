@@ -34,6 +34,8 @@
     export let storageDeposit = 0
     export let expirationDate: Date
     export let subject: Subject
+    export let claimedTransactionId: string
+    export let claimedTime: Date
 
     let transactionTime: string
     $: {
@@ -76,6 +78,8 @@
         ...(tag && { tag }),
         ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
+        ...(claimedTransactionId && { claimedTransactionId }),
+        ...(claimedTime && { claimedTime }),
     }
 </script>
 
