@@ -5,7 +5,7 @@
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { changeStrongholdPassword, clearStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
+    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -14,17 +14,17 @@
     let currentPasswordError = ''
     let newPassword = ''
     let confirmedPassword = ''
-    let passwordChangeBusy = false
+    let busy = false
     let newPasswordError = ''
-    let passwordChangeMessage = ''
+    let changeMessageLocale = ''
 
     $: passwordStrength = zxcvbn(newPassword)
 
     async function changePassword(): Promise<void> {
         const isPasswordValid = await checkPassword()
         if (isPasswordValid) {
-            passwordChangeBusy = true
-            passwordChangeMessage = 'general.passwordUpdating'
+            busy = true
+            changeMessageLocale = 'general.passwordUpdating'
             startOfPasswordChange = Date.now()
 
             try {
@@ -32,14 +32,14 @@
                 await changeStrongholdPassword(newPassword)
 
                 if (exportStrongholdChecked) {
-                    passwordChangeMessage = 'general.exportingStronghold'
+                    changeMessageLocale = 'general.exportingStronghold'
                     void exportStronghold(newPassword, cancelStrongholdExport)
                     return
                 }
                 resetPasswordsOnSuccess()
             } catch (err) {
                 console.error(err)
-                currentPasswordError = localize('general.passwordFailed')
+                currentPasswordError = 'general.passwordFailed'
                 hideBusy(currentPasswordError, 0)
             }
         }
@@ -52,7 +52,7 @@
         }
 
         if (err) {
-            currentPasswordError = localize(err)
+            currentPasswordError = err
             hideBusy('general.passwordFailed', 0)
             return
         }
@@ -67,21 +67,22 @@
             if (await isCurrentPasswordIncorrect()) {
                 return false
             } else if (newPassword.length > MAX_PASSWORD_LENGTH) {
-                newPasswordError = localize('error.password.length', {
-                    values: {
-                        length: MAX_PASSWORD_LENGTH,
-                    },
-                })
+                (newPasswordError = 'error.password.length'),
+                    {
+                        values: {
+                            length: MAX_PASSWORD_LENGTH,
+                        },
+                    }
                 return false
             } else if (newPassword !== confirmedPassword) {
-                newPasswordError = localize('error.password.doNotMatch')
+                newPasswordError = 'error.password.doNotMatch'
                 return false
             } else if (passwordStrength.score !== 4) {
-                let errKey = 'error.password.tooWeak'
+                let errorLocale = 'error.password.tooWeak'
                 if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
-                    errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+                    errorLocale = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
                 }
-                newPasswordError = localize(errKey)
+                newPasswordError = errorLocale
                 return false
             }
 
@@ -92,13 +93,11 @@
 
     async function isCurrentPasswordIncorrect(): Promise<boolean> {
         try {
-            // If password is still in memory, setStrongholdPassword throws an error
-            await clearStrongholdPassword()
             await setStrongholdPassword(currentPassword)
             return false
         } catch (err) {
             console.error(err)
-            currentPasswordError = localize('error.password.incorrect')
+            currentPasswordError = 'error.password.incorrect'
             return true
         }
     }
@@ -106,8 +105,8 @@
     function resetErrors(): void {
         currentPasswordError = ''
         newPasswordError = ''
-        passwordChangeBusy = false
-        passwordChangeMessage = ''
+        busy = false
+        changeMessageLocale = ''
     }
 
     function resetPasswordsOnSuccess(): void {
@@ -118,21 +117,21 @@
         hideBusy('general.passwordSuccess', 2000)
     }
 
-    function hideBusy(message: string, timeout: number): void {
+    function hideBusy(messageLocale: string, timeout: number): void {
         const diff = Date.now() - startOfPasswordChange
         if (diff < timeout) {
             setTimeout(() => {
-                showPasswordMessage(message)
+                showPasswordMessage(messageLocale)
             }, timeout - diff)
         } else {
-            showPasswordMessage(message)
+            showPasswordMessage(messageLocale)
         }
     }
 
     function showPasswordMessage(message: string): void {
-        passwordChangeBusy = false
-        passwordChangeMessage = localize(message)
-        setTimeout(() => (passwordChangeMessage = ''), 2000)
+        busy = false
+        changeMessageLocale = message
+        setTimeout(() => (changeMessageLocale = ''), 2000)
     }
 </script>
 
@@ -140,16 +139,16 @@
     <Text type="h4" classes="mb-3">{localize('views.settings.changePassword.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePassword.description')}</Text>
     <PasswordInput
-        error={currentPasswordError}
+        error={localize(currentPasswordError)}
         classes="mb-5"
         bind:value={currentPassword}
         showRevealToggle
         placeholder={localize('general.currentPassword')}
-        disabled={passwordChangeBusy}
+        disabled={busy}
         submitHandler={checkPassword}
     />
     <PasswordInput
-        error={newPasswordError}
+        error={localize(newPasswordError)}
         classes="mb-4"
         bind:value={newPassword}
         showRevealToggle
@@ -157,7 +156,7 @@
         showStrengthLevel
         strength={passwordStrength.score}
         placeholder={localize('general.newPassword')}
-        disabled={passwordChangeBusy}
+        disabled={busy}
         submitHandler={checkPassword}
     />
     <PasswordInput
@@ -165,23 +164,23 @@
         bind:value={confirmedPassword}
         showRevealToggle
         placeholder={localize('general.confirmNewPassword')}
-        disabled={passwordChangeBusy}
+        disabled={busy}
         submitHandler={checkPassword}
     />
     <Checkbox
         classes="mb-5"
         label={localize('actions.exportNewStronghold')}
         bind:checked={exportStrongholdChecked}
-        disabled={passwordChangeBusy}
+        disabled={busy}
     />
     <div class="flex flex-row items-center">
         <Button
             medium
-            disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}
+            disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
             onClick={changePassword}
         >
             {localize('views.settings.changePassword.title')}
         </Button>
-        <Spinner busy={passwordChangeBusy} message={passwordChangeMessage} classes="ml-2" />
+        <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />
     </div>
 </form>
