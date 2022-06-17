@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { createNewProfile } from '@core/profile'
+    import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
     import { NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { Button, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import { networkProtocol } from '@contexts/onboarding'
     import features from 'shared/features/features'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     const networkIcon = {
         [NetworkType.Mainnet]: $networkProtocol,
@@ -15,15 +16,19 @@
         [NetworkType.PrivateNet]: 'settings',
     }
 
-    const isDeveloperProfile = true // TODO: use real value
-
     async function onClick(networkType: NetworkType): Promise<void> {
-        if (networkType !== NetworkType.PrivateNet) {
-            await createNewProfile(isDeveloperProfile, $networkProtocol, networkType)
+        if (networkType === NetworkType.PrivateNet) {
+            updateNewProfile({ networkType })
+        } else {
+            await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
         }
         $appRouter.next({ networkType })
     }
-    function onBackClick(): void {
+
+    async function onBackClick(): Promise<void> {
+        const isDeveloperProfile = $newProfile.isDeveloperProfile
+        await cleanupOnboarding(true)
+        updateNewProfile({ isDeveloperProfile })
         $appRouter.previous()
     }
 </script>
