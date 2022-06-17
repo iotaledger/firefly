@@ -82,8 +82,8 @@ export class Activity implements IActivity {
 
         this.rawAmount = Number(outputOptions.amount)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this.metadata = outputOptions?.features.metadata
-        this.tag = outputOptions?.features.tag
+        this.metadata = outputOptions?.features?.metadata
+        this.tag = outputOptions?.features?.tag
 
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
         this.expirationDate = new Date(Number(outputOptions?.unlocks?.expiration?.unixTime) * MILLISECONDS_PER_SECOND)
