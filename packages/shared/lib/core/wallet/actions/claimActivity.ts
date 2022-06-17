@@ -8,6 +8,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
         const results = await get(selectedAccount).collectOutputs([activity.id])
         if (results.length > 0) {
             addClaimedActivity(get(selectedAccount).id, activity.transactionId, {
+                id: activity.id,
                 isClaimed: true,
                 claimingTransactionId: results[0].transactionId,
                 claimedTimestamp: new Date().getTime(),
