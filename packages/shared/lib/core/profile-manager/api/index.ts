@@ -15,6 +15,7 @@ export * from './setStrongholdPasswordClearInterval'
 export * from './startBackgroundSync'
 export * from './storeMnmonic'
 export * from './verifyMnemonic'
+export * from './removeLatestAccount'
 
 export * from './events/subscribe'
 export * from './recoverAccounts'

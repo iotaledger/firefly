@@ -1,18 +1,17 @@
 <script lang="typescript">
     import { selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeAccounts, visibleActiveAccounts } from '@core/profile'
+    import { removeLatestAccount } from '@core/profile-manager'
+    import { activeAccounts, visibleActiveAccounts, removeAccountFromActiveAccounts } from '@core/profile'
     import { resetWalletRoute } from '@core/router'
     import { HR, Modal, MenuItem, ToggleHiddenAccountMenuItem } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { showAppNotification } from '@lib/notifications'
 
     export let modal: Modal
 
-    const canDelete =
-        $selectedAccount.meta.index === $activeAccounts?.length - 1 &&
-        Number($selectedAccount?.balances.total) === 0 &&
-        $selectedAccount.messages?.length === 0
+    const shouldDisableDelete = $selectedAccount.meta.index !== $activeAccounts?.length - 1
 
     const handleCustomiseAccountClick = () => {
         openPopup({
@@ -38,11 +37,19 @@
                 account: selectedAccount,
                 hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
                 deleteAccount: (id: string) => {
-                    // TODO: Replace with new api when it is implemented
-                    // await asyncRemoveWalletAccount($selectedAccount?.id)
-                    // TODO: remove account from activeAccounts
-                    setSelectedAccount($visibleActiveAccounts?.[0]?.id ?? null)
-                    resetWalletRoute()
+                    removeLatestAccount()
+                        .then(() => {
+                            removeAccountFromActiveAccounts(id)
+
+                            setSelectedAccount($visibleActiveAccounts?.[0]?.id ?? null)
+                            resetWalletRoute()
+                        })
+                        .catch((error) => {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize(error.type),
+                            })
+                        })
                 },
             },
         })
@@ -72,7 +79,7 @@
             onClick={handleDeleteAccountClick}
             first
             last
-            disabled
+            disabled={shouldDisableDelete}
         />
     </div>
 </Modal>
