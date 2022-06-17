@@ -21,12 +21,11 @@ export function buildNewProfile(
     isDeveloperProfile: boolean,
     networkProtocol: NetworkProtocol,
     networkType: NetworkType,
-    clientOptions: IClientOptions,
-    name: string = ''
+    clientOptions: IClientOptions
 ): IPersistedProfile {
     return {
         id: generateRandomId(),
-        name: name.trim(),
+        name: '',
         type: null,
         version: PROFILE_VERSION,
         networkProtocol,

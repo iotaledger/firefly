@@ -118,6 +118,7 @@ const onboardingFeatures = {
                 enabled: false,
                 migrateSeed: {
                     enabled: false,
+                    hidden: true,
                 },
                 recoveryPhrase: {
                     enabled: false,
@@ -131,7 +132,7 @@ const onboardingFeatures = {
             },
         },
         devnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: false,
             },
@@ -162,33 +163,34 @@ const onboardingFeatures = {
             },
         },
         'private-net': {
-            enabled: false,
+            enabled: true,
             claimRewards: {
                 enabled: false,
                 hidden: true,
             },
             newProfile: {
-                enabled: false,
+                enabled: true,
                 sofwareProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerProfile: {
                     enabled: false,
                 },
             },
             restoreProfile: {
-                enabled: false,
+                enabled: true,
                 migrateSeed: {
                     enabled: false,
+                    hidden: true,
                 },
                 recoveryPhrase: {
-                    enabled: false,
+                    enabled: true,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },

@@ -1,3 +1,4 @@
+import { getAndUpdateNodeInfo } from '@core/network'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import {
     setStrongholdPasswordClearInterval,
@@ -17,6 +18,9 @@ import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 export async function login(firstTime: boolean = false): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
+        loggedIn.set(true)
+        await getAndUpdateNodeInfo()
+
         if (firstTime) {
             void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {
