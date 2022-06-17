@@ -2,6 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { DateTimePicker } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { isValidExpirationDateTime } from '@core/utils'
     import { showAppNotification } from '@lib/notifications'
 
     export let value: Date
@@ -15,17 +16,14 @@
     }
 
     function handleConfirmClick(): void {
-        const nowDate = new Date(Date.now())
         const pickedDate = new Date(rawValue)
-
-        const isValidExpirationTime = pickedDate.getTime() >= nowDate.getTime()
-        if (isValidExpirationTime) {
+        if (isValidExpirationDateTime(pickedDate)) {
             value = pickedDate
             dispatch('confirm')
         } else {
             showAppNotification({
                 type: 'warning',
-                message: localize('warning.transaction.invalidExpirationTime'),
+                message: localize('warning.transaction.invalidExpirationDateTime'),
             })
         }
     }
