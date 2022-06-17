@@ -3,9 +3,9 @@
     import { localize } from '@core/i18n'
     import {
         Activity,
-        filterQueriedActivities,
         groupedActivities,
-        searchQueriedActivities,
+        activitySearchTerm,
+        activityFilterIndex,
         selectedAccountActivities,
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
@@ -34,10 +34,10 @@
 
     $: if (searchActive && searchValue && $selectedAccountActivities) {
         debounce(() => {
-            searchQueriedActivities(searchValue)
+            $activitySearchTerm = searchValue
         })()
     } else {
-        filterQueriedActivities(activeFilterIndex)
+        $activityFilterIndex = activeFilterIndex
     }
 
     function shouldShowFirstSync(): boolean {

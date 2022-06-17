@@ -16,19 +16,16 @@ export function loadAccountActivities(account: IAccountState): void {
     loadAccountActivitiesFromOutputs(account)
 
     Object.keys(account.meta.transactions).forEach((transactionId) => {
-        if (account.id === '1') {
-            const transaction = account.meta.transactions?.[transactionId]
-            const inputs = transaction.payload.essence.inputs
-            const accountActivities = get(allAccountActivities).find(
-                (accountActivities) => accountActivities?.accountId === account.id
-            )
-            const ac = accountActivities.activities.find((act) => act.transactionId === inputs[0].transactionId)
-
-            if (inputs.length === 1 && ac && ac.isAsync && ac.direction === ActivityDirection.In) {
-                ac.claimedTransactionId = transactionId
-                ac.isClaimed = true
-                ac.claimedDate = new Date(Number(transaction.timestamp))
-            }
+        const transaction = account.meta.transactions?.[transactionId]
+        const inputs = transaction.payload.essence.inputs
+        const accountActivities = get(allAccountActivities).find(
+            (accountActivities) => accountActivities?.accountId === account.id
+        )
+        const ac = accountActivities.activities.find((act) => act.transactionId === inputs[0].transactionId)
+        if (inputs.length === 1 && ac && ac.isAsync && ac.direction === ActivityDirection.In) {
+            ac.claimedTransactionId = transactionId
+            ac.isClaimed = true
+            ac.claimedDate = new Date(Number(transaction.timestamp))
         }
     })
 }

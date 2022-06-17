@@ -1,6 +1,6 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { queriedActivities } from '../stores'
+import { queriedActivities, updateActivity } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 
 export function hideActivity(id: string): void {
@@ -12,9 +12,5 @@ export function hideActivity(id: string): void {
         return state
     })
 
-    queriedActivities.update((state) => {
-        const activity = state.find((activity) => activity.id === id)
-        activity.isHidden = true
-        return state
-    })
+    updateActivity({ id, isHidden: true })
 }

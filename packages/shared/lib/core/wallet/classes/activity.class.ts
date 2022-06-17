@@ -98,6 +98,10 @@ export class Activity implements IActivity {
         return this
     }
 
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
+        Object.assign(this, partialActivity)
+    }
+
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
 

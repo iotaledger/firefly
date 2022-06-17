@@ -25,6 +25,7 @@ export interface IActivity {
     claimedTransactionId?: string
     claimedDate?: Date
 
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
