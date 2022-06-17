@@ -936,6 +936,7 @@
         "close": "Close",
         "dismiss": "Dismiss",
         "claim": "Claim",
+        "claiming": "Claiming",
         "reject": "Reject",
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -1208,13 +1209,15 @@
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
-        "nodeList": "Node list"
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in"
     },
     "dates": {
         "today": "Today",

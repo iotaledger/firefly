@@ -20,6 +20,10 @@
         ActivityDirection,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
+    import { Platform } from 'shared/lib/platform'
+    import { truncateString } from '@lib/helpers'
+    import { setClipboard } from '@lib/utils'
 
     export let amount: string
     export let unit: string
@@ -34,36 +38,14 @@
     export let storageDeposit = 0
     export let expirationDate: Date
     export let subject: Subject
+    export let claimingTransactionId: string
+    export let claimedDate: Date
 
-    let transactionTime: string
-    $: {
-        try {
-            if (time) {
-                transactionTime = formatDate(time, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            }
-        } catch {
-            transactionTime = localize('error.invalidDate')
-        }
-    }
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let expirationTime: string
-    $: {
-        try {
-            if (expirationDate) {
-                expirationTime = formatDate(expirationDate, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            } else {
-                expirationTime = undefined
-            }
-        } catch {
-            expirationTime = undefined
-        }
-    }
+    $: transactionTime = getDateFormat(time)
+    $: expirationTime = getDateFormat(expirationDate)
+    $: claimedTime = getDateFormat(claimedDate)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -76,6 +58,28 @@
         ...(tag && { tag }),
         ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
+        ...(claimedTime && { claimedTime }),
+    }
+
+    function getDateFormat(date: Date): string {
+        try {
+            if (date) {
+                return formatDate(date, {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
+                })
+            } else {
+                return undefined
+            }
+        } catch {
+            return undefined
+        }
+    }
+
+    function handleTransactionIdClick(): void {
+        explorerUrl
+            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            : setClipboard(claimingTransactionId)
     }
 </script>
 
@@ -119,6 +123,17 @@
             {#each Object.entries(detailsList) as [key, value]}
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
             {/each}
+            {#if claimingTransactionId}
+                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
+                    <button
+                        slot="value"
+                        class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+                        on:click={handleTransactionIdClick}
+                    >
+                        {truncateString(claimingTransactionId, 12, 12)}
+                    </button>
+                </KeyValueBox>
+            {/if}
         </details-list>
     {/if}
 </transaction-details>

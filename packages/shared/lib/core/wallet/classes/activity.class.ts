@@ -29,6 +29,7 @@ import {
     isOutputAsync,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+
 export class Activity implements IActivity {
     type: ActivityType
     id: string
@@ -53,7 +54,10 @@ export class Activity implements IActivity {
     storageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
+    isClaiming?: boolean = false
     isClaimed?: boolean
+    claimingTransactionId?: string
+    claimedDate?: Date
 
     setNewTransaction(
         senderAccount: IAccountState,
@@ -82,8 +86,8 @@ export class Activity implements IActivity {
 
         this.rawAmount = Number(outputOptions.amount)
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this.metadata = outputOptions?.features.metadata
-        this.tag = outputOptions?.features.tag
+        this.metadata = outputOptions?.features?.metadata
+        this.tag = outputOptions?.features?.tag
 
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
         this.expirationDate = new Date(Number(outputOptions?.unlocks?.expiration?.unixTime) * MILLISECONDS_PER_SECOND)
@@ -95,8 +99,13 @@ export class Activity implements IActivity {
         return this
     }
 
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
+        Object.assign(this, partialActivity)
+    }
+
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isSubjectInternal(recipient))
