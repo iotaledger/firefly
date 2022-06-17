@@ -9,7 +9,7 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text } from 'shared/components'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
@@ -81,6 +81,7 @@
                 <div class="flex justify-end flex-row space-x-2">
                     {#if isIncomingActivityUnclaimed}
                         <button
+                            disabled={activity.isClaiming}
                             class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
                             on:click|stopPropagation={() => hideActivity(activity?.id)}
                         >
@@ -88,9 +89,13 @@
                         </button>
                         <button
                             class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity?.id)}
+                            on:click|stopPropagation={() => claimActivity(activity)}
                         >
-                            {localize('actions.claim')}
+                            {#if activity.isClaiming}
+                                <Spinner busy={true} classes="justify-center" />
+                            {:else}
+                                {localize('actions.claim')}
+                            {/if}
                         </button>
                     {:else}
                         <ActivityAsyncStatusPill {asyncStatus} />
