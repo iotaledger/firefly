@@ -11,7 +11,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { networkProtocol } from '@contexts/onboarding'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
@@ -52,7 +51,12 @@
             try {
                 if (!$profile?.settings?.clientOptions) {
                     const cleanedNode = validateAndCleanNodeData(node)
-                    await createNewProfile(isDeveloperProfile, $networkProtocol, NetworkType.PrivateNet, cleanedNode)
+                    await createNewProfile(
+                        isDeveloperProfile,
+                        $newProfile.networkProtocol,
+                        NetworkType.PrivateNet,
+                        cleanedNode
+                    )
                 } else {
                     await addNode(node, profile)
                 }
