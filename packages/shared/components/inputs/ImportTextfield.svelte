@@ -12,7 +12,7 @@
     }
 
     export let value: string
-    export let type = Type.Seed
+    export let type = Type.Mnemonic
     export let disabled = false
 
     let statusMessage = ''
