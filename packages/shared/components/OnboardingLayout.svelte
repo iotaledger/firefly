@@ -19,7 +19,7 @@
     let mobileTopContentHeight,
         leftpaneContentHeight = 0
 
-    $: isWelcomeMobile = $mobile && AppRoute.Welcome === $appRoute
+    $: isWelcome = $mobile && AppRoute.Welcome === $appRoute
 
     function handleWatchVideoClick() {
         openPopup({
@@ -37,9 +37,9 @@
 {#if $mobile}
     <div
         data-label="mobile-onboarding-layout"
-        class="relative h-full flex flex-col justify-between {isWelcomeMobile ? '' : 'px-5 '}"
+        class="relative h-full flex flex-col justify-between {isWelcome ? '' : 'px-5 '}"
     >
-        <header class="relative w-full flex justify-center px-8 py-3 {isWelcomeMobile && 'hidden'}">
+        <header class="relative w-full flex justify-center px-8 py-3 {isWelcome && 'hidden'}">
             <Text type="h4" classes="text-center">
                 <slot name="title" />
             </Text>
@@ -55,7 +55,7 @@
         <div
             bind:clientHeight={mobileTopContentHeight}
             data-label="mobile-top-content"
-            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5"
+            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome && 'pt-5'}"
         >
             <div class="h-full">
                 <slot name="rightpane" />
