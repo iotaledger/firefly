@@ -47,7 +47,7 @@
             </Button>
         {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-purple dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
     </div>
 </OnboardingLayout>
