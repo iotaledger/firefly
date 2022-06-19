@@ -13,7 +13,6 @@ import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
 import { showAppNotification } from './notifications'
 import { Platform } from './platform'
-import { WalletApi } from './shell/walletApi'
 import { SyncAccountOptions, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { CurrencyTypes } from './typings/currency'
@@ -22,8 +21,9 @@ import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
-import { IWalletApi } from './typings/walletApi'
 import { AccountBalance } from '@iota/wallet'
+
+export const api = undefined
 
 export const MAX_PASSWORD_LENGTH = 256
 
@@ -52,50 +52,6 @@ export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
-
-export const api: IWalletApi = new Proxy(
-    { ...WalletApi },
-    {
-        get: (target, propKey) => {
-            /* eslint-disable @typescript-eslint/no-explicit-any */
-            const _handleCallbackError = (err: any) => {
-                const title = `Callback Error ${propKey.toString()}`
-
-                console.error(title, err)
-                void Platform.unhandledException(title, { message: err?.message, stack: err?.stack })
-            }
-
-            /* eslint-disable @typescript-eslint/no-explicit-any */
-            const _handleCallbackResult = (args: any[], idx: number, result: 'onSuccess' | 'onError'): any[] => {
-                const originalResultFn = args[idx][result]
-
-                args[idx][result] = (payload) => {
-                    try {
-                        originalResultFn(payload)
-                    } catch (err) {
-                        _handleCallbackError(err)
-                    }
-                }
-
-                return args
-            }
-
-            const originalMethod = target[propKey]
-
-            return (...args) => {
-                for (let i = args.length - 1; i >= 0; i--) {
-                    if (args[i]?.onSuccess) {
-                        args = _handleCallbackResult(args, i, 'onSuccess')
-                    } else if (args[i]?.onError) {
-                        args = _handleCallbackResult(args, i, 'onError')
-                    }
-                }
-
-                return originalMethod.apply(target, args)
-            }
-        },
-    }
-)
 
 /**
  * Removes event listeners for active actor
@@ -128,17 +84,17 @@ export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
  *
  * @returns {Promise<Event<string>>}
  */
-export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
-    new Promise<string>((resolve, reject) => {
-        api.getLegacySeedChecksum(seed, {
-            onSuccess(response) {
-                resolve(response.payload)
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
+// export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
+//     new Promise<string>((resolve, reject) => {
+//         api.getLegacySeedChecksum(seed, {
+//             onSuccess(response) {
+//                 resolve(response.payload)
+//             },
+//             onError(err) {
+//                 reject(err)
+//             },
+//         })
+//     })
 
 export function setStoragePassword(password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -551,73 +507,74 @@ export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<v
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountBalanceHistory = (account: IAccountState, priceData: PriceData): BalanceHistory => {
-    const balanceHistory: BalanceHistory = {
-        [HistoryDataProps.ONE_HOUR]: [],
-        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-        [HistoryDataProps.SEVEN_DAYS]: [],
-        [HistoryDataProps.ONE_MONTH]: [],
-    }
-    if (priceData) {
-        const messages: Message[] =
-            account?.messages
-                ?.slice()
-                ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
-                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
-        // Calculate the variations for each account
-        let trackedBalance = Number(account.balances.total)
-        const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
-        messages.forEach((message) => {
-            const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
+export const getAccountBalanceHistory = (account: IAccountState, priceData: PriceData): BalanceHistory =>
+    // const balanceHistory: BalanceHistory = {
+    //     [HistoryDataProps.ONE_HOUR]: [],
+    //     [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+    //     [HistoryDataProps.SEVEN_DAYS]: [],
+    //     [HistoryDataProps.ONE_MONTH]: [],
+    // }
+    // if (priceData) {
+    //     const messages: Message[] =
+    //         account?.messages
+    //             ?.slice()
+    //             ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+    //             ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
+    //     // Calculate the variations for each account
+    //     let trackedBalance = Number(account.balances.total)
+    //     const accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
+    //     messages.forEach((message) => {
+    //         const essence = message.payload.type === 'Transaction' && message.payload.data.essence.data
 
-            if (essence && essence.incoming) {
-                trackedBalance -= essence.value || 0
-            } else {
-                trackedBalance += essence.value || 0
-            }
-            accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
-        })
-        // Calculate the balance in each market data timestamp
-        let balanceHistoryInTimeframe = []
-        Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-            // sort market data from newest to last
-            const sortedData = data.slice().sort((a, b) => b[0] - a[0])
-            balanceHistoryInTimeframe = []
-            // if there are no balance variations
-            if (accountBalanceVariations.length === 1) {
-                balanceHistoryInTimeframe = sortedData.map((_data) => ({
-                    timestamp: _data[0],
-                    balance: trackedBalance,
-                }))
-            } else {
-                let i = 0
-                sortedData.forEach((data) => {
-                    const marketTimestamp = new Date(data[0] * 1000).getTime()
-                    // find balance for each market data timepstamp
-                    for (i; i < accountBalanceVariations.length - 1; i++) {
-                        const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                        const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
-                        if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
-                            balanceHistoryInTimeframe.push({
-                                timestamp: data[0],
-                                balance: accountBalanceVariations[i].balance,
-                            })
-                            return
-                        } else if (
-                            marketTimestamp <= nextBalanceTimestamp &&
-                            i === accountBalanceVariations.length - 2
-                        ) {
-                            balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
-                            return
-                        }
-                    }
-                })
-            }
-            balanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
-        })
-    }
-    return balanceHistory
-}
+    //         if (essence && essence.incoming) {
+    //             trackedBalance -= essence.value || 0
+    //         } else {
+    //             trackedBalance += essence.value || 0
+    //         }
+    //         accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
+    //     })
+    //     // Calculate the balance in each market data timestamp
+    //     let balanceHistoryInTimeframe = []
+    //     Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
+    //         // sort market data from newest to last
+    //         const sortedData = data.slice().sort((a, b) => b[0] - a[0])
+    //         balanceHistoryInTimeframe = []
+    //         // if there are no balance variations
+    //         if (accountBalanceVariations.length === 1) {
+    //             balanceHistoryInTimeframe = sortedData.map((_data) => ({
+    //                 timestamp: _data[0],
+    //                 balance: trackedBalance,
+    //             }))
+    //         } else {
+    //             let i = 0
+    //             sortedData.forEach((data) => {
+    //                 const marketTimestamp = new Date(data[0] * 1000).getTime()
+    //                 // find balance for each market data timepstamp
+    //                 for (i; i < accountBalanceVariations.length - 1; i++) {
+    //                     const currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+    //                     const nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+    //                     if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+    //                         balanceHistoryInTimeframe.push({
+    //                             timestamp: data[0],
+    //                             balance: accountBalanceVariations[i].balance,
+    //                         })
+    //                         return
+    //                     } else if (
+    //                         marketTimestamp <= nextBalanceTimestamp &&
+    //                         i === accountBalanceVariations.length - 2
+    //                     ) {
+    //                         balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
+    //                         return
+    //                     }
+    //                 }
+    //             })
+    //         }
+    //         balanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
+    //     })
+    // }
+    // return balanceHistory
+     undefined
+
 
 export function getAccountMeta(accountId: string): Promise<{
     balance: number
@@ -625,26 +582,27 @@ export function getAccountMeta(accountId: string): Promise<{
     outgoing: number
     depositAddress: string
 }> {
-    return api.getBalance(accountId, {
-        onSuccess(balanceResponse) {
-            return api.latestAddress(accountId, {
-                onSuccess(latestAddressResponse) {
-                    return {
-                        balance: balanceResponse.payload.total,
-                        incoming: balanceResponse.payload.incoming,
-                        outgoing: balanceResponse.payload.outgoing,
-                        depositAddress: latestAddressResponse.payload.address,
-                    }
-                },
-                onError(error) {
-                    throw error
-                },
-            })
-        },
-        onError(error) {
-            throw error
-        },
-    })
+    // return api.getBalance(accountId, {
+    //     onSuccess(balanceResponse) {
+    //         return api.latestAddress(accountId, {
+    //             onSuccess(latestAddressResponse) {
+    //                 return {
+    //                     balance: balanceResponse.payload.total,
+    //                     incoming: balanceResponse.payload.incoming,
+    //                     outgoing: balanceResponse.payload.outgoing,
+    //                     depositAddress: latestAddressResponse.payload.address,
+    //                 }
+    //             },
+    //             onError(error) {
+    //                 throw error
+    //             },
+    //         })
+    //     },
+    //     onError(error) {
+    //         throw error
+    //     },
+    // })
+    return
 }
 
 export const prepareAccountInfo = (

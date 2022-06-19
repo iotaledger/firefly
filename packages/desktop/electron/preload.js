@@ -38,7 +38,6 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const WalletApi = require('firefly-actor-system-nodejs-bindings')
     const WalletStardustApi = require('@iota/wallet')
 
     if (process.env.NODE_ENV === 'development') {
@@ -52,11 +51,8 @@ try {
             ],
         })
 
-        WalletApi.initLogger(loggerOptions())
         WalletStardustApi.initLogger(loggerOptions('wallet-stardust.log'))
     }
-
-    contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
 
     // contextBridge doesn't allow passing custom properties & methods on prototype chain
     // https://www.electronjs.org/docs/latest/api/context-bridge
