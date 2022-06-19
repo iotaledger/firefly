@@ -3,20 +3,20 @@
     import { createEventDispatcher } from 'svelte'
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { mobile } from '@core/app'
     import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()
 
     const isAndroid = Platform.getOS() === 'android'
 
-    export let value = undefined
     export let classes = ''
     export let disabled = false
     export let autofocus = false
     export let glimpse = false
     export let smaller = false
-    export let error
+    export let value: string
+    export let error: string
 
     let inputs = new Array(PIN_LENGTH)
     $: {
@@ -25,13 +25,13 @@
         }
     }
 
-    let root
-    const inputElements = []
+    let root: HTMLElement
+    const inputElements: HTMLElement[] = []
 
-    const KEYBOARD = {
-        BACKSPACE: 8,
-        ENTER: 13,
-        TAB: 9,
+    enum KEYBOARD {
+        BACKSPACE = 8,
+        ENTER = 13,
+        TAB = 9,
     }
 
     onMount(() => {
@@ -40,7 +40,7 @@
         }
     })
 
-    const handleBackspace = () => {
+    function handleBackspace(): void {
         // Search for the last child with a value
         // and remove it
         for (let j = 1; j <= PIN_LENGTH; j++) {
@@ -53,27 +53,27 @@
         value = inputs.join('')
     }
 
-    const changeHandler = function (e, i) {
+    function changeHandler(event: KeyboardEvent): void {
         const regex = new RegExp(/^\d+$/)
 
-        if (e.keyCode == KEYBOARD.BACKSPACE) {
+        if (event.keyCode === KEYBOARD.BACKSPACE) {
             handleBackspace()
-        } else if (e.keyCode == KEYBOARD.ENTER) {
+        } else if (event.keyCode === KEYBOARD.ENTER) {
             if (validatePinFormat(inputs.join(''))) {
                 dispatch('submit')
             }
-        } else if (e.keyCode == KEYBOARD.TAB) {
+        } else if (event.keyCode === KEYBOARD.TAB) {
             // Do default tab handling by focusing the root
             // container and allow default processing to happen
             root.focus()
             return
         } else {
-            if (regex.test(e.key)) {
+            if (regex.test(event.key)) {
                 // Search from the first child to find the first
                 // empty value and start filling from there
                 for (let j = 0; j < PIN_LENGTH; j++) {
                     if (!inputs[j]) {
-                        inputs[j] = e.key
+                        inputs[j] = event.key
                         if (j < PIN_LENGTH - 1) {
                             inputElements[j + 1].focus()
                         }
@@ -83,7 +83,7 @@
                 value = inputs.join('')
             }
         }
-        e.preventDefault()
+        event.preventDefault()
     }
 
     /**
@@ -92,14 +92,15 @@
      * the auto-suggest feature or other event might follow
      * the keydown event and invalidate it.
      */
-    const changeHandlerHelper = (e, i: number) => {
-        if (!/^[0-9]$/.test(e.data)) {
-            inputs[i] = ''
+    function changeHandlerHelper(event: InputEventInit, index: number): void {
+        if (!/^[0-9]$/.test(event.data)) {
+            inputs[index] = ''
         } else {
-            inputElements[i + 1].focus()
+            inputElements[index + 1].focus()
         }
     }
-    const selectFirstEmpty = () => {
+
+    function selectFirstEmpty(): void {
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
                 inputElements[j].focus()
@@ -108,8 +109,8 @@
         }
     }
 
-    const selectFirstEmptyRoot = (e): void => {
-        if (e.target === root) {
+    function selectFirstEmptyRoot(event: KeyboardEvent): void {
+        if (event.target === root) {
             selectFirstEmpty()
         }
     }
@@ -133,10 +134,9 @@
 <div class="w-full {classes}">
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
-        class="{$mobile ? 'h-20 w-80' : 'w-full'}
-            flex items-center justify-between relative z-0 rounded-xl border border-solid
+        class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
-            {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'h-20 pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
+            ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}
         class:disabled
         bind:this={root}
         on:click={selectFirstEmptyRoot}
@@ -157,7 +157,7 @@
                             class:glimpse
                             {disabled}
                             on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:keydown={(event) => changeHandler(event)}
                             on:contextmenu|preventDefault
                         />
                     {:else}
@@ -170,7 +170,7 @@
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:keydown={(event) => changeHandler(event)}
                             on:contextmenu|preventDefault
                         />
                     {/if}
@@ -222,7 +222,6 @@
                 @apply cursor-pointer;
                 @apply text-center;
                 @apply text-18;
-                @apply rounded-none;
                 caret-color: transparent;
                 transition: opacity 1s, color 1s;
 
