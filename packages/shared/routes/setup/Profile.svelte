@@ -142,7 +142,7 @@
             {locale('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}">
         <Animation animation={$mobile ? 'password-desktop' : 'profile-desktop'} />
     </div>
 </OnboardingLayout>
