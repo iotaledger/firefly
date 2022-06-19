@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { mobile } from '@lib/app';
     import { Icon, Text } from 'shared/components'
 
     export let label = undefined
@@ -11,7 +12,7 @@
 
 <button
     data-label="checkbox-input"
-    class="flex items-center text-left cursor-pointer {classes}"
+    class="flex items-center text-left cursor-pointer {classes} {$mobile && 'p-2'}"
     type="button"
     {disabled}
     on:click={() => {
