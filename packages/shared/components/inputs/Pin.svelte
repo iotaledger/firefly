@@ -10,13 +10,13 @@
 
     const isAndroid = Platform.getOS() === 'android'
 
-    export let value = undefined
     export let classes = ''
     export let disabled = false
     export let autofocus = false
     export let glimpse = false
     export let smaller = false
-    export let error
+    export let value: string
+    export let error: string
 
     let inputs = new Array(PIN_LENGTH)
     $: {
@@ -25,13 +25,13 @@
         }
     }
 
-    let root
-    const inputElements = []
+    let root: HTMLElement
+    const inputElements: HTMLElement[] = []
 
-    const KEYBOARD = {
-        BACKSPACE: 8,
-        ENTER: 13,
-        TAB: 9,
+    enum KEYBOARD {
+        BACKSPACE = 'Backspace',
+        ENTER = 'Enter',
+        TAB = 'Tab',
     }
 
     onMount(() => {
@@ -39,80 +39,6 @@
             focus()
         }
     })
-
-    const handleBackspace = () => {
-        // Search for the last child with a value
-        // and remove it
-        for (let j = 1; j <= PIN_LENGTH; j++) {
-            if (j === PIN_LENGTH || !inputs[j]) {
-                inputs[j - 1] = ''
-                inputElements[j - 1].focus()
-                break
-            }
-        }
-        value = inputs.join('')
-    }
-
-    const changeHandler = function (e, i) {
-        const regex = new RegExp(/^\d+$/)
-
-        if (e.keyCode === KEYBOARD.BACKSPACE) {
-            handleBackspace()
-        } else if (e.keyCode === KEYBOARD.ENTER) {
-            if (validatePinFormat(inputs.join(''))) {
-                dispatch('submit')
-            }
-        } else if (e.keyCode === KEYBOARD.TAB) {
-            // Do default tab handling by focusing the root
-            // container and allow default processing to happen
-            root.focus()
-            return
-        } else {
-            if (regex.test(e.key)) {
-                // Search from the first child to find the first
-                // empty value and start filling from there
-                for (let j = 0; j < PIN_LENGTH; j++) {
-                    if (!inputs[j]) {
-                        inputs[j] = e.key
-                        if (j < PIN_LENGTH - 1) {
-                            inputElements[j + 1].focus()
-                        }
-                        break
-                    }
-                }
-                value = inputs.join('')
-            }
-        }
-        e.preventDefault()
-    }
-
-    /**
-     * for android mobile we need both onkeydown and oninput
-     * event listeners to the input and handle the old and the new value.
-     * the auto-suggest feature or other event might follow
-     * the keydown event and invalidate it.
-     */
-    const changeHandlerHelper = (e, i: number) => {
-        if (!/^[0-9]$/.test(e.data)) {
-            inputs[i] = ''
-        } else {
-            inputElements[i + 1].focus()
-        }
-    }
-    const selectFirstEmpty = () => {
-        for (let j = 0; j < PIN_LENGTH; j++) {
-            if (!inputs[j] || j === PIN_LENGTH - 1) {
-                inputElements[j].focus()
-                return
-            }
-        }
-    }
-
-    const selectFirstEmptyRoot = (e): void => {
-        if (e.target === root) {
-            selectFirstEmpty()
-        }
-    }
 
     export function focus(): void {
         if (!disabled) {
@@ -126,6 +52,80 @@
             selectFirstEmpty()
         } else {
             setTimeout(() => resetAndFocus(), 100)
+        }
+    }
+
+    function selectFirstEmpty(): void {
+        for (let j = 0; j < PIN_LENGTH; j++) {
+            if (!inputs[j] || j === PIN_LENGTH - 1) {
+                inputElements[j].focus()
+                return
+            }
+        }
+    }
+
+    function selectFirstEmptyRoot(event: KeyboardEvent): void {
+        if (event.target === root) {
+            selectFirstEmpty()
+        }
+    }
+
+    function handleBackspace(): void {
+        // Search for the last child with a value
+        // and remove it
+        for (let j = 1; j <= PIN_LENGTH; j++) {
+            if (j === PIN_LENGTH || !inputs[j]) {
+                inputs[j - 1] = ''
+                inputElements[j - 1].focus()
+                break
+            }
+        }
+        value = inputs.join('')
+    }
+
+    function changeHandler(event: KeyboardEvent): void {
+        const regex = new RegExp(/^\d+$/)
+        if (event.key === KEYBOARD.BACKSPACE) {
+            handleBackspace()
+        } else if (event.key === KEYBOARD.ENTER) {
+            if (validatePinFormat(inputs.join(''))) {
+                dispatch('submit')
+            }
+        } else if (event.key === KEYBOARD.TAB) {
+            // Do default tab handling by focusing the root
+            // container and allow default processing to happen
+            root.focus()
+            return
+        } else {
+            if (regex.test(event.key)) {
+                // Search from the first child to find the first
+                // empty value and start filling from there
+                for (let j = 0; j < PIN_LENGTH; j++) {
+                    if (!inputs[j]) {
+                        inputs[j] = event.key
+                        if (j < PIN_LENGTH - 1) {
+                            inputElements[j + 1].focus()
+                        }
+                        break
+                    }
+                }
+                value = inputs.join('')
+            }
+        }
+        event.preventDefault()
+    }
+
+    /**
+     * for android mobile we need both onkeydown and oninput
+     * event listeners to the input and handle the old and the new value.
+     * the auto-suggest feature or other event might follow
+     * the keydown event and invalidate it.
+     */
+    function changeHandlerHelper(event, index: number): void {
+        if (!/^[0-9]$/.test(event.data)) {
+            inputs[index] = ''
+        } else {
+            inputElements[index + 1].focus()
         }
     }
 </script>
@@ -144,32 +144,32 @@
     >
         <div class="flex flex-row inputs-wrapper">
             <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
-                {#each inputs as item, i}
+                {#each inputs as input, i}
                     {#if $mobile}
                         <input
-                            bind:value={inputs[i]}
+                            bind:value={input}
                             maxLength="1"
                             id={`input-${i}`}
                             type="tel"
                             bind:this={inputElements[i]}
-                            class:active={!inputs[i] || inputs[i].length === 0}
+                            class:active={!input || input.length === 0}
                             class:glimpse
                             {disabled}
                             on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:keydown={(event) => changeHandler(event)}
                             on:contextmenu|preventDefault
                         />
                     {:else}
                         <input
-                            bind:value={inputs[i]}
+                            bind:value={input}
                             maxLength="1"
                             id={`input-${i}`}
                             type="text"
                             bind:this={inputElements[i]}
-                            class:active={!inputs[i] || inputs[i].length === 0}
+                            class:active={!input || input.length === 0}
                             class:glimpse
                             {disabled}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:keydown={(event) => changeHandler(event)}
                             on:contextmenu|preventDefault
                         />
                     {/if}
@@ -178,8 +178,8 @@
             <div
                 class="input-decorator-wrapper items-center absolute w-full flex flex-row flex-no-wrap justify-between"
             >
-                {#each inputs as item, i}
-                    <input-decorator class:active={inputs[i] && inputs[i].length !== 0} class:disabled />
+                {#each inputs as input}
+                    <input-decorator class:active={input && input.length !== 0} class:disabled />
                 {/each}
             </div>
         </div>
