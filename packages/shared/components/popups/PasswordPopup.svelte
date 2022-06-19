@@ -36,7 +36,7 @@
     <Text type="h4">{localize('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
-<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap">
+<form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
     <PasswordInput
         {error}
         classes="w-full mb-5"
@@ -47,7 +47,7 @@
     />
     <div class="flex flex-row justify-between w-full space-x-4">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-        <Button classes="w-1/2" type="submit" onClick={handleSubmit} disabled={!password || password.length === 0}>
+        <Button classes="w-1/2" type="submit" disabled={!password || password.length === 0}>
             {localize('actions.unlock')}
         </Button>
     </div>
