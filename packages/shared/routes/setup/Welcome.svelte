@@ -45,9 +45,12 @@
         {#if $mobile}
             <div class="flex flex-row items-center space-y-4 mb-1">
                 <Checkbox bind:checked />
-                <button on:click={handleLegalClick} class="text-left px-3.5">
-                    <Text highlighted clases="text-left">{locale('views.legal.checkbox')}</Text>
-                </button>
+                <Text type="p" secondary classes="px-1">
+                    {locale('views.legal.checkboxMobile')}
+                    <span on:click={handleLegalClick} class="text-blue-500">
+                        {locale('views.legal.title')}
+                    </span>
+                </Text>
             </div>
             <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} classes="mb-8" />
             <!-- <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
