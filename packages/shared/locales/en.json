@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
