@@ -5,7 +5,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { openSettings } from '@core/router'
     import { api } from 'shared/lib/wallet'
     import { diffDates, getBackupWarningColor, isRecentDate } from 'shared/lib/helpers'
     import { versionDetails } from 'shared/lib/appUpdater'
@@ -96,7 +95,7 @@
     }
 </script>
 
-<div class="flex flex-col flex-1 overflow-auto">
+<div class="flex flex-col">
     <div class="grid justify-items-center w-full">
         <div
             class="w-16 h-16 flex items-center justify-center rounded-full leading-100"
@@ -110,10 +109,9 @@
         {#if $activeProfile?.isDeveloperProfile}
             <Chip label={localize('general.dev')} />
         {/if}
-
-        <button class="rounded-xl" on:click={handleLogoutClick}>
-            <Icon width="16" height="16" classes="text-gray-500 -mt-5" icon="logout" />
-            <Text type="p" classes="ml-1 -mt-5">
+        <button class="rounded-xl py-2 pl-2 pr-3 mb-6 flex justify-center" on:click={handleLogoutClick}>
+            <Icon width="16" height="16" classes="text-blue-500 mt-0.5 mr-1" icon="logout" />
+            <Text type="p" overrideColor classes="text-blue-500">
                 {localize('views.dashboard.profileModal.logout')}
             </Text>
         </button>
@@ -121,7 +119,7 @@
     {#if !isUpToDate}
         <button
             on:click={handleVersionUpdateClick}
-            class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+            class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
         >
             <Icon icon="warning" classes="row-span-3 text-blue-500" />
             <Text type="p" unwrapped classes="col-span-6">
@@ -142,7 +140,7 @@
     {/if}
     <button
         on:click={handleBackupClick}
-        class="bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
         <Icon icon="warning" classes="row-span-3 text-{backupWarningColor}-500" />
         <Text type="p" unwrapped classes="col-span-3">
@@ -168,7 +166,7 @@
     </button>
     <button
         on:click={handleNetworkStatusClick}
-        class="bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
         <Icon icon="network" classes="row-span-3 text-{healthStatusColor}-500" />
         <Text type="p" unwrapped classes="col-span-6">
@@ -186,7 +184,7 @@
     </button>
     <button
         on:click={handleStrongholdToggleClick}
-        class="bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
         <Icon icon={$isStrongholdLocked ? 'lock' : 'unlock'} classes="row-span-3 text-blue-500" />
         <Text type="p" unwrapped classes="col-span-6">
@@ -199,7 +197,7 @@
     </button>
     <button
         on:click={handleSettingsClick}
-        class="bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+        class="main-button bg-blue-50 dark:bg-blue-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
     >
         <Icon icon="settings" classes="row-span-3 text-blue-500" />
         <Text type="p" unwrapped classes="col-span-4">
@@ -218,7 +216,7 @@
 </div>
 
 <style lang="scss">
-    button {
+    .main-button {
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-auto-flow: column;
