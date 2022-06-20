@@ -18,7 +18,7 @@
     let errorConfirm = ''
     let busy = false
 
-    $: passwordStrength = checkPasswordStrength(password)
+    $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
     $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
 
     async function handleContinueClick(): Promise<void> {
