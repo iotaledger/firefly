@@ -1,4 +1,4 @@
-import { TouchInterpolationConfig } from '@lib/typings/actions'
+import { TouchInterpolationConfig } from './types'
 import { spring } from 'svelte/motion'
 
 /**
