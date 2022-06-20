@@ -53,12 +53,12 @@
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
     <div slot="title">
-        <Text type="h2">{localize('views.pin.title')}</Text>
+        <Text type="h2">{localize('views.setupPin.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <div class="flex flex-col mb-8">
-            <Text type="p" secondary classes="mb-4">{localize('views.pin.body1')}</Text>
-            <Text type="p" secondary highlighted>{localize('views.pin.body2')}</Text>
+            <Text type="p" secondary classes="mb-4">{localize('views.setupPin.body1')}</Text>
+            <Text type="p" secondary highlighted>{localize('views.setupPin.body2')}</Text>
         </div>
         <div class="flex flex-col">
             <PinInput

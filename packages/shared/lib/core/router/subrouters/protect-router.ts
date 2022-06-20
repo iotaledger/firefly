@@ -18,11 +18,11 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProtectRoute.Init:
+            case ProtectRoute.ChooseProtectionMethod:
                 if (protectionType === 'pin') {
                     nextRoute = ProtectRoute.SetupPin
                 } else if (protectionType === 'biometric') {
-                    nextRoute = ProtectRoute.Biometric
+                    nextRoute = ProtectRoute.SetupBiometric
                 }
                 break
 

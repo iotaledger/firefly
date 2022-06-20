@@ -115,7 +115,7 @@ export enum ExternalRoute {
 }
 
 export enum LoginRoute {
-    Init = 'init',
+    SelectProfile = 'selectProfile',
     EnterPin = 'enterPin',
 }
 
@@ -136,8 +136,8 @@ export enum ImportRoute {
 }
 
 export enum ProtectRoute {
-    Init = 'init',
-    Biometric = 'biometric',
+    ChooseProtectionMethod = 'chooseProtectionMethod',
+    SetupBiometric = 'setupBiometric',
     SetupPin = 'setupPin',
 }
 

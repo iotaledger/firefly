@@ -1,2 +1,2 @@
-export { default as Protect } from './Protect.svelte'
-export { default as SetupPin } from './SetupPin.svelte'
+export { default as ChooseProtectionMethodView } from './ChooseProtectionMethodView.svelte'
+export { default as SetupPinView } from './SetupPinView.svelte'

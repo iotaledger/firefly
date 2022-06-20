@@ -122,7 +122,7 @@
             "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Keep your PIN safe!"
         },
-        "pin": {
+        "setupPin": {
             "title": "Set up PIN code",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
             "body2": "Use numbers only"

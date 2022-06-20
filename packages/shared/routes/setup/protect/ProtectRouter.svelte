@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { SetupPin } from './views'
+    import { SetupPinView } from './views'
     import { localize } from '@core/i18n'
     import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoute } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
@@ -29,6 +29,6 @@
 
 {#if $protectRoute === ProtectRoute.SetupPin}
     <Transition>
-        <SetupPin {busy} on:next={next} on:previous={previous} />
+        <SetupPinView {busy} on:next={next} on:previous={previous} />
     </Transition>
 {/if}

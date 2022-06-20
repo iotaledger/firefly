@@ -1,11 +1,8 @@
 <script lang="typescript">
-    import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
-    import { Transition } from 'shared/components'
-    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
-    import { EnterPin, SelectProfile } from './views/'
-
-    export let locale: Locale
+    import { Transition } from 'shared/components'
+    import { EnterPinView, SelectProfileView } from './views'
+    import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
 
     let loginRouter: LoginRouter
 
@@ -17,12 +14,12 @@
     const previous = (): void => loginRouter.previous()
 </script>
 
-{#if $loginRoute === LoginRoute.Init}
+{#if $loginRoute === LoginRoute.SelectProfile}
     <Transition>
-        <SelectProfile on:next={next} on:previous={previous} />
+        <SelectProfileView on:next={next} on:previous={previous} />
     </Transition>
 {:else if $loginRoute === LoginRoute.EnterPin}
     <Transition>
-        <EnterPin on:next={next} on:previous={previous} {locale} />
+        <EnterPinView on:next={next} on:previous={previous} />
     </Transition>
 {/if}

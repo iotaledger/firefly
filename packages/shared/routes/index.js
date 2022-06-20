@@ -14,7 +14,7 @@ export { default as OnboardingNetwork } from 'shared/routes/setup/OnboardingNetw
 export { default as OnboardingCustomNetwork } from 'shared/routes/setup/OnboardingCustomNetwork.svelte'
 export { default as Ledger } from 'shared/routes/setup/ledger/Ledger.svelte'
 export { default as Password } from 'shared/routes/setup/Password.svelte'
-export { default as Protect } from 'shared/routes/setup/protect/Protect.svelte'
+export { default as ProtectRouter } from 'shared/routes/setup/protect/ProtectRouter.svelte'
 export { default as Backup } from 'shared/routes/setup/backup/Backup.svelte'
 export { default as Import } from 'shared/routes/setup/import/Import.svelte'
 export { default as Balance } from 'shared/routes/setup/Balance.svelte'
@@ -29,4 +29,4 @@ export { default as Settings } from 'shared/routes/dashboard/settings/Settings.s
 export { default as Staking } from 'shared/routes/dashboard/staking/Staking.svelte'
 
 // login
-export { default as Login } from 'shared/routes/login/Login.svelte'
+export { default as LoginRouter } from 'shared/routes/login/LoginRouter.svelte'
