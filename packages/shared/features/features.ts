@@ -94,7 +94,7 @@ const features = {
         activityHistory: {
             enabled: true,
             sync: {
-                enabled: false,
+                enabled: true,
             },
             search: {
                 enabled: true,
