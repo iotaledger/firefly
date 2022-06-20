@@ -4,18 +4,20 @@
     import { localize } from '@core/i18n'
     import { appRouter } from '@core/router'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { formatProtocolName } from '@core/network'
+    import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
-    const busy = false
-
     let profileName = $newProfile?.name ?? ''
-    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
-    $: nameChanged = $newProfile?.name !== profileName.trim()
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 
-    function handleBackClick(): void {
+    async function handleBackClick(): Promise<void> {
+        const isDeveloperProfile = $newProfile.isDeveloperProfile
+        const networkProtocol = $newProfile.networkProtocol
+        await cleanupOnboarding(true)
+        updateNewProfile({ isDeveloperProfile, networkProtocol })
         $appRouter.previous()
     }
 
@@ -32,7 +34,11 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.profile.title')}</Text>
+        <Text type="h2"
+            >{localize('views.profile.title', {
+                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{localize('views.profile.body1')}</Text>

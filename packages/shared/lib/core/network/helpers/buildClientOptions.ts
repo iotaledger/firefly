@@ -1,6 +1,6 @@
-import { IClientOptions, INetwork, INode } from '../interfaces'
+import { IClientOptions, INode } from '../interfaces'
 
-export function buildClientOptions(network: INetwork, nodes: INode[]): IClientOptions {
+export function buildClientOptions(nodes: INode[]): IClientOptions {
     return {
         nodes,
     }

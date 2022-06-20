@@ -5,6 +5,7 @@
     import { walletPin } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
     import { validatePinFormat } from '@lib/utils'
+    import { resetImportState } from '@contexts/onboarding'
 
     export let locale: Locale
     export let busy = false
@@ -23,7 +24,8 @@
             dispatch('next')
         }
     }
-    function handleBackClick(): void {
+    async function handleBackClick(): Promise<void> {
+        await resetImportState()
         dispatch('previous')
     }
 </script>

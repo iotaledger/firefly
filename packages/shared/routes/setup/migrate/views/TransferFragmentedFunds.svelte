@@ -121,7 +121,7 @@
     function setMigratingTransaction(transaction, status) {
         busy = true
         migrated = false
-        transactions = transactions.map((_transaction, i) => {
+        transactions = transactions.map((_transaction) => {
             if (_transaction.index === transaction.index) {
                 return { ..._transaction, status }
             }
@@ -147,7 +147,7 @@
             (promise, transaction, idx) =>
                 // @ts-ignore
                 promise
-                    .then((acc) => {
+                    .then(() => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Platform.ledger
@@ -243,7 +243,7 @@
                             displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
 
-                        transactions = transactions.map((_transaction, i) => {
+                        transactions = transactions.map((_transaction) => {
                             if (_transaction.index === transaction.index) {
                                 return {
                                     ..._transaction,
@@ -305,7 +305,7 @@
             (promise, transaction, idx) =>
                 // @ts-ignore
                 promise
-                    .then((acc) => {
+                    .then(() => {
                         if (legacyLedger) {
                             if (transaction.trytes && transaction.trytes.length) {
                                 return Platform.ledger
@@ -325,7 +325,7 @@
                                     .then(({ trytes, bundleHash }) => {
                                         closePopup(true) // close transaction popup
                                         setMigratingTransaction(transaction, 1)
-                                        transactions = transactions.map((_transaction, i) => {
+                                        transactions = transactions.map((_transaction) => {
                                             if (_transaction.index === transaction.index) {
                                                 return { ..._transaction, bundleHash }
                                             }
@@ -366,7 +366,7 @@
                                 .then(({ trytes, bundleHash }) => {
                                     closePopup(true) // close transaction popup
                                     setMigratingTransaction(transaction, 1)
-                                    transactions = transactions.map((_transaction, i) => {
+                                    transactions = transactions.map((_transaction) => {
                                         if (_transaction.index === transaction.index) {
                                             return { ..._transaction, bundleHash }
                                         }
@@ -404,7 +404,7 @@
 
                         return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
                             setMigratingTransaction(transaction, 1)
-                            transactions = transactions.map((_transaction, i) => {
+                            transactions = transactions.map((_transaction) => {
                                 if (_transaction.index === transaction.index) {
                                     return { ..._transaction, bundleHash: result.bundleHash }
                                 }
@@ -432,7 +432,7 @@
                             displayNotificationForLedgerProfile('error', false, true, false, true, error)
                         }
 
-                        transactions = transactions.map((_transaction, i) => {
+                        transactions = transactions.map((_transaction) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: 'Migration failed' }
                             }

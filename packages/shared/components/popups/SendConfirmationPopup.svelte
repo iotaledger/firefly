@@ -1,42 +1,111 @@
 <script lang="typescript">
-    import { Button, Text, KeyValueBox, ExpirationTimePicker } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
-    import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import type { OutputTypes } from '@iota/types'
+    import type { OutputOptions } from '@iota/wallet'
+    import { prepareOutput, selectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { promptUserToConnectLedger } from '@lib/ledger'
-    import { Recipient, trySend, ActivityType, InclusionState } from '@core/wallet'
+    import {
+        ActivityDirection,
+        ActivityType,
+        calculateStorageDepositFromOutput,
+        getOutputOptions,
+        IAsset,
+        InclusionState,
+        Subject,
+        trySendOutput,
+    } from '@core/wallet'
+    import { isValidExpirationDateTime } from '@core/utils'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { showAppNotification } from '@lib/notifications'
+    import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
 
-    export let internal = false
-    export let recipient: Recipient
-    export let rawAmount: number
-    export let amount: '0'
+    export let asset: IAsset
+    export let amount = '0'
     export let unit: string
-    export let expireDate: Date
-    export let publicNote: string
+    export let rawAmount: number
+    export let recipient: Subject
+    export let internal = false
+    export let metadata: string
+    export let tag: string
+
+    // If storage deposit is 0, then set expiration date to tomorrow
+    const defaultExpirationDate = new Date()
+    defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
+
+    let expirationDate: Date
+    let storageDeposit = 0
+
+    let preparedOutput: OutputTypes
+    let outputOptions: OutputOptions
 
     $: internal = recipient.type === 'account'
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
 
-    function onConfirm(): void {
-        closePopup()
-
-        if ($isSoftwareProfile) {
-            void send()
-        } else if ($isLedgerProfile) {
-            promptUserToConnectLedger(false, () => send(), undefined)
+    async function _prepareOutput(): Promise<void> {
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
+        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
+            remainderValueStrategy: {
+                strategy: 'ReuseAddress',
+                value: null,
+            },
+        })
+        storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
+        if (storageDeposit && !expirationDate) {
+            expirationDate = defaultExpirationDate
         }
     }
 
-    function send(): Promise<void> {
-        const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-        return trySend(recipientAddress, rawAmount)
+    $: $$props, expirationDate, void _prepareOutput()
+
+    function onConfirm(): void {
+        if ($isSoftwareProfile) {
+            void sendIfValidExpirationTime()
+        } else if ($isLedgerProfile) {
+            closePopup()
+            promptUserToConnectLedger(false, () => void sendIfValidExpirationTime(false), undefined)
+        }
     }
 
-    function onCancel(): void {
+    function sendIfValidExpirationTime(shouldClosePopup = true): Promise<void> {
+        if (expirationDate) {
+            if (isValidExpirationDateTime(expirationDate)) {
+                return closePopupAndSend(shouldClosePopup)
+            }
+            showAppNotification({
+                type: 'warning',
+                message: localize('warning.transaction.invalidExpirationDateTime'),
+            })
+            return
+        }
+        return closePopupAndSend(shouldClosePopup)
+    }
+
+    function closePopupAndSend(shouldClosePopup: boolean): Promise<void> {
+        if (shouldClosePopup) {
+            closePopup()
+        }
+        return trySendOutput(outputOptions, preparedOutput)
+    }
+
+    function onBack(): void {
         closePopup()
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+            props: {
+                asset,
+                amount,
+                unit,
+                recipient,
+                metadata,
+                tag,
+            },
+        })
     }
 
     $: formattedFiatValue =
@@ -45,28 +114,30 @@
         ) || '-'
 
     $: transactionDetails = {
-        type: internal ? ActivityType.Transfer : ActivityType.Send,
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
-        amount,
+        direction: ActivityDirection.Out,
+        amount: amount?.length > 0 ? amount : '0',
         unit,
-        recipient,
-        expireDate,
-        publicNote,
+        subject: recipient,
+        metadata,
+        tag,
+        storageDeposit: storageDeposit,
     }
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left"
+    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
         <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker bind:expireDate slot="value" />
+            <ExpirationTimePicker slot="value" bind:value={expirationDate} />
         </KeyValueBox>
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onCancel}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+        <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
+        <Button autofocus classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
     </popup-buttons>
 </send-confirmation-popup>

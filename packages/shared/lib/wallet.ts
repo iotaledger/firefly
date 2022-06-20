@@ -140,18 +140,6 @@ export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> =>
         })
     })
 
-export const asyncChangeStrongholdPassword = (currentPassword: string, newPassword: string): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-        api.changeStrongholdPassword(currentPassword, newPassword, {
-            onSuccess() {
-                resolve()
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
-
 export function setStoragePassword(password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
@@ -668,10 +656,9 @@ export const prepareAccountInfo = (
         depositAddress: string
     }
 ): IAccountState => {
-    const { index, alias } = account.meta
-    const { balance, depositAddress } = meta
+    const { index } = account.meta
+    const { depositAddress } = meta
 
-    const activeCurrency = get(activeProfile)?.settings?.currency ?? CurrencyTypes.USD
     // TODO: Hardcoded signer type
     return Object.assign<IAccountState, IAccount, Partial<IAccountState>>({} as IAccountState, account, {
         id: index.toString(),
@@ -680,6 +667,7 @@ export const prepareAccountInfo = (
     })
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
     // const { accounts } = get(activeProfile)
     // messages.forEach((message: Message) => {
@@ -819,6 +807,7 @@ export const receiverAddressesFromMilestonePayload = (payload: Payload): string[
  * Get the value of a milestone message
  * @returns
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getMilestoneMessageValue = (payload: Payload, accounts: IAccountState[]): number => {
     if (payload?.type === 'Milestone') {
         const { funds } = payload.data.essence.receipt.data
@@ -884,7 +873,7 @@ export const findAccountWithAddress = (address: string): IAccountState | undefin
         return
     }
     const accounts = get(activeAccounts)
-    return accounts.find((acc) => acc.depositAddress === address)
+    return accounts.find((account) => account.depositAddress === address)
 }
 
 /**

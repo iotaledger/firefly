@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { mnemonic } from '@contexts/onboarding'
     import { Locale } from '@core/i18n'
@@ -18,7 +18,7 @@
 
     $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
 
-    function handleBackClick(): void {
+    function handleBackClick() {
         dispatch('previous')
     }
 
@@ -52,7 +52,7 @@
     <div slot="leftpane__content">
         <form on:submit|preventDefault={handleSubmitClick} id="backup-form">
             <Text type="p" secondary classes="mb-8">{locale('views.backupWallet.body1')}</Text>
-            <Password bind:value={confirmPassword} {locale} autofocus disabled={busy} showRevealToggle classes="mb-8" />
+            <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
             <Text type="p" secondary classes="mb-4">{locale('views.backupWallet.body2')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason1')}</Text>
             <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason2')}</Text>

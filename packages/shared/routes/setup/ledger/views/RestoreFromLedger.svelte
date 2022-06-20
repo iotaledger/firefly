@@ -27,7 +27,7 @@
                                 signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
                             },
                             {
-                                onSuccess(createAccountResponse) {
+                                onSuccess() {
                                     restoring = false
                                     dispatch('next')
                                 },

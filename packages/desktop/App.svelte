@@ -29,7 +29,6 @@
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import {
@@ -138,10 +137,12 @@
             openPopup({ type: 'diagnostics' })
         })
         Electron.onEvent('menu-create-developer-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
+            get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
             updateNewProfile({ isDeveloperProfile: false })
         })

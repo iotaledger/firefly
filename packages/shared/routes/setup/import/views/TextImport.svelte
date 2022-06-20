@@ -1,14 +1,11 @@
 <script lang="typescript">
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { createEventDispatcher, getContext } from 'svelte'
-    import { Locale } from '@core/i18n'
-    import { ImportRouter } from '@core/router'
-
-    export let locale: Locale
+    import { createEventDispatcher } from 'svelte'
+    import { localize } from '@core/i18n'
+    import { importType, isGettingMigrationData } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
-    const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
     let input = ''
 
@@ -25,12 +22,12 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{locale(`views.importFromText.${$importType}.title`)}</Text>
+        <Text type="h2">{localize(`views.importFromText.${$importType}.title`)}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
-        <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
-        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} {locale} />
+        <Text type="p" secondary classes="mb-8">{localize(`views.importFromText.${$importType}.body`)}</Text>
+        <Text type="h5" classes="mb-3">{localize(`views.importFromText.${$importType}.enter`)}</Text>
+        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
@@ -41,10 +38,10 @@
             {#if $isGettingMigrationData}
                 <Spinner
                     busy={$isGettingMigrationData}
-                    message={locale('views.migrate.restoringWallet')}
+                    message={localize('views.migrate.restoringWallet')}
                     classes="justify-center"
                 />
-            {:else}{locale('actions.continue')}{/if}
+            {:else}{localize('actions.continue')}{/if}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">

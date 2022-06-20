@@ -8,6 +8,7 @@
 
     export let secondary = false
     export let disabled = false
+    export let hidden = false
     export let caution = false
     export let warning = false
     export let active = false
@@ -31,7 +32,7 @@
 
     export let onClick: () => unknown
 
-    let buttonElement
+    export let buttonElement
     let darkModeEnabled
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -49,9 +50,10 @@
         {form}
         class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
-        on:click={onClick}
+        on:click|stopPropagation={onClick}
         class:secondary
         class:active
+        class:hidden
         class:with-icon={icon}
         class:custom-icon-color={iconColor}
         class:darkmode={darkModeEnabled}
@@ -70,8 +72,9 @@
         {form}
         class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
         use:bindEvents={events}
-        on:click={onClick}
+        on:click|stopPropagation={onClick}
         class:secondary
+        class:hidden
         class:caution
         class:warning
         class:medium

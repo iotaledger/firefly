@@ -1,4 +1,4 @@
-import { activeProfile, IPersistedProfile, isActiveProfileOutdated, updateActiveProfile } from '@core/profile'
+import { activeProfile, IPersistedProfile, updateActiveProfile } from '@core/profile'
 import { buildNewProfile } from '@core/profile/helpers'
 import { migrateObjects } from '@lib/utils'
 import { get } from 'svelte/store'

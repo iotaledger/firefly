@@ -11,7 +11,7 @@ import {
     removeProfile,
     removeProfileFolder,
 } from '@core/profile'
-import { deleteStorage, isStrongholdUnlocked } from '@core/profile-manager'
+import { deleteAccountsAndDatabase } from '@core/profile-manager'
 import { appRouter } from '@core/router'
 
 /**
@@ -24,8 +24,8 @@ export async function deleteProfile(): Promise<void> {
             return
         }
 
-        const _isStrongholdUnlocked = await isStrongholdUnlocked()
-        if (get(isSoftwareProfile) && _isStrongholdUnlocked) {
+        const shouldLockStronghold = get(isSoftwareProfile) && !_activeProfile.isStrongholdLocked
+        if (shouldLockStronghold) {
             await lockStronghold()
         }
 
@@ -39,7 +39,7 @@ export async function deleteProfile(): Promise<void> {
          * to free the locks on the files within the profile folder (removed
          * later).
          */
-        await deleteStorage()
+        await deleteAccountsAndDatabase()
 
         /**
          * CAUTION: This removes the actual directory for the profile,

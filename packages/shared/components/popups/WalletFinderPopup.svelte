@@ -137,6 +137,10 @@
     <Button classes="w-full" onClick={handleFindBalances} disabled={isBusy}>
         {#if isBusy}
             <Spinner busy={true} message={localize('actions.searching')} classes="justify-center" />
-        {:else}{localize('actions.searchBalances')}{/if}
+        {:else if hasUsedWalletFinder}
+            {localize('actions.searchAgain')}
+        {:else}
+            {localize('actions.search')}
+        {/if}
     </Button>
 </div>

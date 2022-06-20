@@ -30,7 +30,7 @@
     } from '@core/router'
     import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -48,13 +48,13 @@
         $partiallyUnstakedAmount,
         manageUnstakedAmountNotification()
 
-    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    // $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
     let sidebarTabs: SidebarTabType[] = [
-        ...(featureFlags?.wallet?.enabled
+        ...(features?.wallet?.enabled
             ? [
                   {
                       icon: 'wallet',
@@ -64,7 +64,7 @@
                   },
               ]
             : []),
-        ...(featureFlags?.staking?.enabled
+        ...(features?.staking?.enabled
             ? [
                   {
                       icon: 'tokens',
@@ -76,18 +76,22 @@
             : []),
     ]
 
-    function updateSidebarNotification() {
-        sidebarTabs = sidebarTabs.map((tab) => {
-            if (DashboardRoute.Staking === tab.route) {
-                tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'error'
-                    : showStakingNotification
-                    ? 'warning'
-                    : null
-            }
-            return tab
-        })
+    function openStaking() {
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
+
+    // function updateSidebarNotification() {
+    //     sidebarTabs = sidebarTabs.map((tab) => {
+    //         if (DashboardRoute.Staking === tab.route) {
+    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
+    //                 ? 'error'
+    //                 : showStakingNotification
+    //                 ? 'warning'
+    //                 : null
+    //         }
+    //         return tab
+    //     })
+    // }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
@@ -112,10 +116,6 @@
         } else {
             $settingsRouter.previous()
         }
-    }
-
-    function openStaking() {
-        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 

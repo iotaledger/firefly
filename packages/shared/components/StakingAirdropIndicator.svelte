@@ -26,6 +26,7 @@
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
 
     $: isStaked = isStakedForAirdrop($selectedAccountParticipationOverview)
+    let showIndicator: boolean
     $: showIndicator =
         stakingEventState === ParticipationEventState.Commencing ||
         stakingEventState === ParticipationEventState.Holding

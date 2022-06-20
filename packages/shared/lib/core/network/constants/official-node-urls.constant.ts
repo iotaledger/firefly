@@ -13,7 +13,7 @@ export const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in
         ],
     },
     [NetworkProtocol.Shimmer]: {
-        [NetworkType.Mainnet]: ['https://api.alphanet.iotaledger.net'],
-        [NetworkType.Devnet]: ['https://api.alphanet.iotaledger.net'],
+        [NetworkType.Mainnet]: [''],
+        [NetworkType.Devnet]: [''],
     },
 }
