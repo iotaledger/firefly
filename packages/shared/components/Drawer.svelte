@@ -5,7 +5,7 @@
 	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
 	
 	@prop {boolean} [opened] - Opens drawer on load.
-	@prop {boolean} [fromLeft] - Slide from right side.
+	@prop {boolean} [fromLeft] - Slide from left side.
     @prop {boolean} [preventClose] - Prevent close the Drawer.
     @prop {string} [zIndex] - Main container Tailwind z-index. Ex. "z-40".
 	
