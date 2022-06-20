@@ -6,7 +6,7 @@ import { getSenderAddressFromUnlockCondition } from '../getSenderAddressFromUnlo
 
 export function getSenderFromOutput(output: OutputTypes): Subject {
     if (output?.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
+        for (const unlockCondition of output?.unlockConditions) {
             const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
             if (senderAddress) {
                 return getSubjectFromAddress(senderAddress)
