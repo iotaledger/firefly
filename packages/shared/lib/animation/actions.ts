@@ -3,7 +3,7 @@ import { spring } from 'svelte/motion'
 
 /**
  * Interpolates between the given start and end value through touch interaction with the bounded element.
- * If the touch intensity is greater or less than the threshold, the current value is either increased or decreased.
+ * Whether the touch movement is up or down, the value interpolates to either the start or end when the threshold is passed.
  */
 export function touchInterpolation(node: Element, options: TouchInterpolationConfig): void {
     const start = options.start ? options.start : 1
