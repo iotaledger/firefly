@@ -3,9 +3,9 @@ import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
 
 export function getExpirationDateFromOutput(output: OutputTypes): Date {
-    if (output?.type !== OUTPUT_TYPE_TREASURY) {
+    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
         for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition.type === UNLOCK_CONDITION_EXPIRATION) {
+            if (unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) {
                 return unlockCondition?.unixTime
                     ? new Date(unlockCondition?.unixTime * MILLISECONDS_PER_SECOND)
                     : undefined

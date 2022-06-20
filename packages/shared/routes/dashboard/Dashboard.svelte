@@ -139,6 +139,7 @@
             openPopup({
                 type: 'busy',
                 hideClose: true,
+                preventClose: true,
                 fullScreen: true,
                 transition: false,
             })
@@ -151,7 +152,7 @@
             const cancelBusyState = () => {
                 busy = false
                 if (get(popupState).type === 'busy') {
-                    closePopup()
+                    closePopup(true)
                 }
                 Platform.DeepLinkManager.checkDeepLinkRequestExists()
                 showTopNav = true

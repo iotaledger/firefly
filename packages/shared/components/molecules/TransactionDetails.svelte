@@ -30,16 +30,16 @@
     export let type: ActivityType
     export let direction: ActivityDirection
     export let inclusionState: InclusionState = InclusionState.Pending
-    export let asyncStatus: ActivityAsyncStatus = undefined
-    export let formattedFiatValue: string
-    export let time: Date
-    export let metadata: string
-    export let tag: string
+    export let asyncStatus: ActivityAsyncStatus = null
+    export let formattedFiatValue: string = null
+    export let time: Date = null
+    export let metadata: string = null
+    export let tag: string = null
     export let storageDeposit = 0
-    export let expirationDate: Date
-    export let subject: Subject
-    export let claimingTransactionId: string
-    export let claimedDate: Date
+    export let expirationDate: Date = null
+    export let subject: Subject = null
+    export let claimingTransactionId: string = null
+    export let claimedDate: Date = null
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 

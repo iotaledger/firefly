@@ -1266,7 +1266,6 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets."
     },
     "error": {

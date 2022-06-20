@@ -68,10 +68,10 @@ const modifyPopupState = (state: PopupState, forceClose: boolean = false): void 
      * be closed at some point though so we have the argument forceClose.
      */
     if (get(popupState).preventClose && !forceClose) {
-        showAppNotification({
+        /* showAppNotification({
             type: 'error',
             message: localize('error.popup.preventClose'),
-        })
+        }) */
     } else {
         popupState.set({ ...state })
     }
