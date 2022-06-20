@@ -267,7 +267,7 @@ export function initialiseListeners(): void {
                     completeCount++
 
                     if (completeCount === latestAccounts.length) {
-                        activeAccounts.update((_accounts) => walletAccounts.sort((a, b) => a.meta.index - b.meta.index))
+                        activeAccounts.set(walletAccounts.sort((a, b) => a.meta.index - b.meta.index))
 
                         updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                     }

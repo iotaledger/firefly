@@ -1,4 +1,3 @@
-import { migrateActiveProfile } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'

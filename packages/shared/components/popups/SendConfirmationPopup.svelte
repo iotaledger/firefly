@@ -60,7 +60,7 @@
         }
     }
 
-    $: $$props, expirationDate, _prepareOutput()
+    $: $$props, expirationDate, void _prepareOutput()
 
     function onConfirm(): void {
         if ($isSoftwareProfile) {

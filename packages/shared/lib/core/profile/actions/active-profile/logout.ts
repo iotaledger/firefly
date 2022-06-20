@@ -21,7 +21,7 @@ import { resetSelectedAccount } from '@core/account'
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { isStrongholdLocked, lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
+    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {

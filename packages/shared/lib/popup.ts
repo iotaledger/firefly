@@ -1,6 +1,4 @@
 import { get, writable } from 'svelte/store'
-import { showAppNotification } from './notifications'
-import { localize } from '@core/i18n'
 
 interface PopupState {
     active: boolean

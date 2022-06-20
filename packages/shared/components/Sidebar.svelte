@@ -48,7 +48,7 @@
         $partiallyUnstakedAmount,
         manageUnstakedAmountNotification()
 
-    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    // $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
@@ -76,18 +76,22 @@
             : []),
     ]
 
-    function updateSidebarNotification() {
-        sidebarTabs = sidebarTabs.map((tab) => {
-            if (DashboardRoute.Staking === tab.route) {
-                tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'error'
-                    : showStakingNotification
-                    ? 'warning'
-                    : null
-            }
-            return tab
-        })
+    function openStaking() {
+        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
+
+    // function updateSidebarNotification() {
+    //     sidebarTabs = sidebarTabs.map((tab) => {
+    //         if (DashboardRoute.Staking === tab.route) {
+    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
+    //                 ? 'error'
+    //                 : showStakingNotification
+    //                 ? 'warning'
+    //                 : null
+    //         }
+    //         return tab
+    //     })
+    // }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
@@ -112,10 +116,6 @@
         } else {
             $settingsRouter.previous()
         }
-    }
-
-    function openStaking() {
-        $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 </script>
 

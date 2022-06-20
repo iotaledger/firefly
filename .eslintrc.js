@@ -34,7 +34,7 @@ const eslintRules = {
     'no-underscore-dangle': 'off', // OFF b/c this syntax is used for defining local callback methods
     'no-unreachable': 'error',
     'no-unused-export-let': 'off', // OFF b/c troublesome with some .js files in packages/shared
-    'no-unused-vars': 'off', // OFF b/c there are simply too many and they're harmless
+    'no-unused-vars': 'off', // OFF b/c the typescript linter rule is used
     'no-var': 'error',
     'prefer-arrow-callback': 'warn',
     'prefer-const': 'warn',
@@ -73,7 +73,8 @@ const typescriptEslintRules = {
     '@typescript-eslint/no-unsafe-call': 'off', // OFF b/c used in Svelte components for UI logic
     '@typescript-eslint/no-unsafe-member-access': 'off', // OFF b/c there are simply too many linting errors
     '@typescript-eslint/no-unsafe-return': 'off', // OFF b/c used in Svelte components for UI logic
-    '@typescript-eslint/no-unused-vars': 'off', // OFF b/c there are simply too many and they're harmless
+    '@typescript-eslint/unused-export-let': 'off', // OFF b/c used in Svelte components for UI logic
+    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-var-requires': 'error',
     '@typescript-eslint/prefer-regexp-exec': 'error',
     '@typescript-eslint/restrict-plus-operands': 'off', // OFF b/c not entirely accurate despite proper typings

@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, NETWORK, networkHrp } from '@core/network'
+import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'

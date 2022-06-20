@@ -7,7 +7,7 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { IAppSettings, IAppVersionDetails } from '@core/app'
+import { IAppVersionDetails } from '@core/app'
 import { IPlatform } from '@lib/typings/platform'
 
 import * as WalletBindings from './walletPluginApi'
@@ -19,7 +19,7 @@ let activeProfileId = null
 export const nativeSplash = SplashScreen
 
 export const CapacitorApi: IPlatform = {
-    updateAppSettings(settings: Partial<IAppSettings>) {
+    updateAppSettings() {
         return new Promise((resolve) => resolve())
     },
 
@@ -31,11 +31,11 @@ export const CapacitorApi: IPlatform = {
         activeProfileId = id
     },
 
-    renameProfileFolder: (oldPath, newPath) => new Promise<void>((resolve, reject) => {}),
+    renameProfileFolder: () => new Promise<void>(() => {}),
 
-    removeProfileFolder: (profilePath) => new Promise<void>((resolve, reject) => {}),
+    removeProfileFolder: () => new Promise<void>(() => {}),
 
-    listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
+    listProfileFolders: () => new Promise<string[]>(() => {}),
 
     PincodeManager: PincodeManager,
 
@@ -45,94 +45,27 @@ export const CapacitorApi: IPlatform = {
 
     BarcodeManager: BarcodeManager,
 
-    getStrongholdBackupDestination: (defaultPath) => new Promise<string>((resolve, reject) => {}),
+    getStrongholdBackupDestination: () => new Promise<string>(() => {}),
 
-    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
+    exportTransactionHistory: async () => new Promise<string>(() => {}),
 
-    /**
-     * Exports migration log
-     *
-     * @method exportMigrationLog
-     *
-     * @param {string} sourcePath
-     * @param {string} defaultFileName
-     *
-     * @returns {Promise<boolean>}
-     */
-    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportMigrationLog: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Exports ledger migration log
-     *
-     * @method exportLedgerMigrationLog
-     *
-     * @param {string} content
-     * @param {string} defaultFileName
-     *
-     * @returns {Promise}
-     */
-    exportLedgerMigrationLog: (content, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportLedgerMigrationLog: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Imports legacy IOTA seed
-     *
-     * @method importLegacySeed
-     *
-     * @param {Buffer} buffer
-     * @param {string} password
-     *
-     * @returns {Promise<string>}
-     */
-    importLegacySeed: (buffer, password) => new Promise<string>((resolve, reject) => {}),
+    importLegacySeed: () => new Promise<string>(() => {}),
 
-    /**
-     * Validates Seed Vault
-     *
-     * @method validateSeedVault
-     *
-     * @param {Buffer} buffer
-     *
-     * @returns {boolean}
-     */
-    validateSeedVault: (buffer) => new Promise<boolean>((resolve, reject) => {}),
+    validateSeedVault: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Gets directory for app's configuration files
-     *
-     * @method getUserDataPath
-     *
-     * @returns {Promise}
-     */
     getUserDataPath: () =>
-        new Promise<string>((resolve, reject) => {
+        new Promise<string>((resolve) => {
             resolve('DATA')
         }),
 
-    /**
-     * Gets diagnostics information for the system
-     *
-     * @method getDiagnostics
-     *
-     * @returns {Promise}
-     */
-    getDiagnostics: () => new Promise<{ label: string; value: string }[]>((resolve, reject) => {}),
+    getDiagnostics: () => new Promise<{ label: string; value: string }[]>(() => {}),
 
-    /**
-     * Gets os information for the system
-     *
-     * @method getOS
-     *
-     * @returns {Promise}
-     */
     getOS: () => new Promise<string>((resolve) => resolve(Capacitor.getPlatform())),
 
-    /**
-     * Gets machine ID
-     *
-     * @method getMachineId
-     *
-     * @returns {Promise}
-     */
     getMachineId: () => new Promise<string>((resolve) => resolve('')),
 
     /**
@@ -142,7 +75,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    downloadAppUpdate: () => new Promise<void>((resolve, reject) => {}),
+    downloadAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Cancels an update of the application
@@ -151,7 +84,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    cancelAppUpdateDownload: () => new Promise<void>((resolve, reject) => {}),
+    cancelAppUpdateDownload: () => new Promise<void>(() => {}),
 
     /**
      * Install an update of the application
@@ -160,7 +93,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    installAppUpdate: () => new Promise<void>((resolve, reject) => {}),
+    installAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Check for an update of the application
@@ -169,7 +102,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    checkForAppUpdate: () => new Promise<void>((resolve, reject) => {}),
+    checkForAppUpdate: () => new Promise<void>(() => {}),
 
     /**
      * Get version details
@@ -178,86 +111,46 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getAppVersionDetails: () => new Promise<IAppVersionDetails>((resolve, reject) => {}),
+    getAppVersionDetails: () => new Promise<IAppVersionDetails>(() => {}),
 
     /**
      * Change menu state to determine what menu items to display
-     * @param {string} Attribute - Target attribute
-     * @param {any} Value - Target attribute value
      * @returns {undefined}
      */
-    updateMenu: (attribute, value) => new Promise<void>((resolve, reject) => {}),
+    updateMenu: () => new Promise<void>(() => {}),
 
     /**
      * Show the popup menu
      * @returns {undefined}
      */
-    popupMenu: () => new Promise<void>((resolve, reject) => {}),
+    popupMenu: () => new Promise<void>(() => {}),
 
-    /**
-     * Minimize the app
-     * @returns {undefined}
-     */
-    minimize: () => new Promise<void>((resolve, reject) => {}),
+    minimize: () => new Promise<void>(() => {}),
 
-    /**
-     * Maximize the app
-     * @returns {undefined}
-     */
-    maximize: () => new Promise<boolean>((resolve, reject) => {}),
+    maximize: () => new Promise<boolean>(() => {}),
 
-    /**
-     * Is the app maximized
-     * @returns {boolean}
-     */
-    isMaximized: () => new Promise<boolean>((resolve, reject) => {}),
+    isMaximized: () => new Promise<boolean>(() => {}),
 
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => new Promise<void>((resolve, reject) => {}),
+    close: () => new Promise<void>(() => {}),
 
-    /*
-     * Opens url and checks against acceptlist
-     * @param {string} url - Target url
-     * @returns {undefined}
-     */
-    openUrl: (url) => new Promise<void>((resolve, reject) => {}),
+    openUrl: () => new Promise<void>(() => {}),
 
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror
      * @param {Errir} error The error
      */
-    unhandledException: (errorType, error) => new Promise<void>((resolve, reject) => {}),
+    unhandledException: () => new Promise<void>(() => {}),
 
-    /**
-     * Add native window wallet event listener
-     * @param {string} event - Target event name
-     * @param {function} callback - Event trigger callback
-     * @returns {undefined}
-     */
-    onEvent: (event, callback) => new Promise<void>((resolve, reject) => {}),
+    onEvent: () => new Promise<void>(() => {}),
 
-    /**
-     * Remove native window wallet event listener
-     * @param {string} event - Target event name
-     * @param {function} callback - Event trigger callback
-     * @returns {undefined}
-     */
-    removeListenersForEvent: (event) => new Promise<void>((resolve, reject) => {}),
+    removeListenersForEvent: () => new Promise<void>(() => {}),
 
-    /**
-     * Save the recovery kit
-     * @returns
-     */
-    saveRecoveryKit: (recoverKitData) => new Promise<void>((resolve, reject) => {}),
-
-    /**
-     * Hook the logger
-     * @returns
-     */
+    saveRecoveryKit: () => new Promise<void>(() => {}),
     hookErrorLogger,
     ledger: undefined,
 }

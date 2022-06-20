@@ -2,7 +2,7 @@
     import { Box } from 'shared/components/atoms'
     import { Error } from 'shared/components/'
 
-    export let inputElement
+    export let inputElement: HTMLInputElement
 
     export let isFocused = false
     export let error = ''

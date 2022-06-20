@@ -1,14 +1,6 @@
 import Validator from 'shared/lib/validator'
-import {
-    CreatedAccountResponse,
-    LatestAddressResponse,
-    MessageResponse,
-    ReadAccountsResponse,
-    SetStrongholdPasswordResponse,
-    SyncAccountsResponse,
-} from '../typings/bridge'
+import { MessageResponse } from '../typings/bridge'
 import { ResponseTypes } from '../typings/bridge'
-import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
@@ -109,34 +101,34 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
+        onSuccess: (): void => {},
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (): void => {},
     },
     StrongholdPasswordClearIntervalSet: {
-        onSuccess: (response: Event<void>): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
 }
 

@@ -17,8 +17,8 @@
         os = await Platform.getOS()
     })
 
-    function isCorrectRoute(_: SettingsRoute): boolean {
-        return $settingsRoute !== SettingsRoute.Init
+    function isCorrectRoute(route: SettingsRoute): boolean {
+        return route !== SettingsRoute.Init
     }
 
     function handleBackClick(): void {

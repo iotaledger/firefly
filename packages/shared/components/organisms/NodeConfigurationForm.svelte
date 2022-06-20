@@ -14,7 +14,7 @@
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
-    export let onSuccess = (..._: any[]): void => {}
+    export let onSuccess: (..._: any[]) => void
 
     const profile = $newProfile ? newProfile : activeProfile
     const clientOptions = $profile.settings?.clientOptions

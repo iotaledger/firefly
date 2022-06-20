@@ -1387,10 +1387,10 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@^1.0.0-beta.4":
-  version "1.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.6.tgz#8d76f676ee36e059e2b5b2d18aec0f66cbb1b600"
-  integrity sha512-FTBINxg52/tkEjvGoXm4KxmY4Pljy9FYdVDErVZoGh/F/uJmoM03vr9d+aoCzW/3DTHIfMrRXc05q2GPH7AQWA==
+"@iota/types@^1.0.0-beta.7":
+  version "1.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.7.tgz#61225bb724636e2d5c17a0d584c5d1ab4ca8985b"
+  integrity sha512-ondZGY/2dSscAWCcGAhFUuUnjEDqm82TpNR0ZWJDha3UB7rJylbpcFrw86Wfro08y2pAFUJDI+lvVgeTlfB3Nw==
 
 "@iota/unit-converter@^1.0.0-beta.30":
   version "1.0.0-beta.30"

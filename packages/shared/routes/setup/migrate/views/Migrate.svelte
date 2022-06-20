@@ -85,7 +85,7 @@
                             singleMigrationBundleHash = bundleHash
                             return sendLedgerMigrationBundle(bundleHash, trytes)
                         })
-                        .then((data) => {
+                        .then(() => {
                             if ($newProfile) {
                                 // Save profile
                                 addNewProfile($newProfile)

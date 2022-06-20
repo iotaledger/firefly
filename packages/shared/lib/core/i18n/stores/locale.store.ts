@@ -20,7 +20,7 @@ export const isLocaleLoaded: Readable<boolean> = derived(
  */
 export const localeDirection: Readable<string> = derived(
     appSettings,
-    (_appSettings) =>
+    () =>
         // TODO: Implement RTL support
         // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
         'ltr'

@@ -1,9 +1,7 @@
 import { UnlockConditionTypes } from '@iota/types'
 import {
     ADDRESS_TYPE_ED25519,
-    UNLOCK_CONDITION_ADDRESS,
     UNLOCK_CONDITION_EXPIRATION,
-    UNLOCK_CONDITION_IMMUTABLE_ALIAS,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
 } from '../constants'
 import { convertEd25519ToBech32 } from './convertEd25519ToBech32'
