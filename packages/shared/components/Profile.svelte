@@ -44,7 +44,7 @@
                 <Text type="h3" classes="text-white">{getInitials()}</Text>
             {/if}
         </div>
-        <div class="flex flex-row items-baseline space-x-1.5 w-full">
+        <div class="flex flex-row items-baseline justify-center space-x-1.5 w-full">
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
