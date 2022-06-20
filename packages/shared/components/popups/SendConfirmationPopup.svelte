@@ -33,6 +33,10 @@
     export let metadata: string
     export let tag: string
 
+    // If storage deposit is 0, then set expiration date to tomorrow
+    const defaultExpirationDate = new Date()
+    defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
+
     let expirationDate: Date
     let storageDeposit = 0
 
@@ -42,7 +46,7 @@
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
 
-    async function _prepareOutput() {
+    async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
@@ -51,6 +55,9 @@
             },
         })
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
+        if (storageDeposit && !expirationDate) {
+            expirationDate = defaultExpirationDate
+        }
     }
 
     $: $$props, expirationDate, _prepareOutput()
