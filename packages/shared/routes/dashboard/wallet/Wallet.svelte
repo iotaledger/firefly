@@ -504,7 +504,7 @@
                                 <AccountAssets
                                     {scroll}
                                     {scrollDetection}
-                                    styles="padding-bottom: {bottomNavigation?.getHeight()}px"
+                                    bottomOffset="{bottomNavigation?.getHeight()}px"
                                 />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
@@ -513,7 +513,7 @@
                                     {scroll}
                                     {scrollDetection}
                                     transactions={getAccountMessages($selectedAccount)}
-                                    bottomOffset="{bottomNavigation?.getHeight() * 1.3}px"
+                                    transactionTabsOffset="{bottomNavigation?.getHeight() * 1.3}px"
                                 />
                             </div>
                         {/if}

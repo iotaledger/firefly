@@ -27,7 +27,7 @@
     export let classes = ''
     export let scroll = true
     export let scrollDetection = (node: Element): void => {}
-    export let bottomOffset = '0px'
+    export let transactionTabsOffset = '0px'
 
     let drawer: Drawer
 
@@ -193,7 +193,7 @@
         on:search={handleSearch}
         {scrollDetection}
         {scroll}
-        {bottomOffset}
+        {transactionTabsOffset}
     >
         <div slot="transaction" let:transaction>
             {#if $isSyncing && shouldShowFirstSync()}
