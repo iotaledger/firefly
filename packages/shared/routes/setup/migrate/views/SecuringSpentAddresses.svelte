@@ -29,7 +29,7 @@
     $: progressBarMessage = `${progressBarPercent}% completed`
 
     onMount(() => {
-        $selectedBundlesToMine.reduce(
+        void $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then(() => {
                     const _updateOnSuccess = () => {

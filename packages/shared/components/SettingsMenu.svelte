@@ -20,7 +20,6 @@
             delete settings?.[settingName]
         }
     })
-
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">
