@@ -72,8 +72,6 @@
     let developerProfileNotificationId
     let showTopNav = false
     let mobileMainMenuOpacity = 1
-    let mobileTopNavXTranslation = 0
-
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
@@ -412,7 +410,6 @@
 
     mobileHeaderAnimation.subscribe((curr) => {
         mobileMainMenuOpacity = curr - (1 - curr)
-        mobileTopNavXTranslation = 0
     })
 </script>
 
