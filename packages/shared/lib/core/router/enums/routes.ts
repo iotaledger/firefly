@@ -137,8 +137,8 @@ export enum ImportRoute {
 
 export enum ProtectRoute {
     ChooseProtectionMethod = 'chooseProtectionMethod',
-    SetupBiometric = 'setupBiometric',
-    SetupPin = 'setupPin',
+    SetupBiometricProtection = 'setupBiometricProtection',
+    SetupPinProtection = 'setupPinProtection',
 }
 
 export enum MigrateRoute {

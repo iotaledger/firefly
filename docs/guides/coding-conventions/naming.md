@@ -108,7 +108,7 @@ All TypeScript filenames are in `kebab-case`, e.g. `deep-link-handler.ts`. Some 
 
 Svelte component names / filenames use the following conventions:
 - **Must** be written in `PascalCase`
-- **Must** be suffixed with the component's type, e.g. `LedgerTransactionPopup` since it is a popup component.
+- **Must** be suffixed with the component's type, e.g. `LedgerTransactionPopup` since it is a popup component (this applies to all component types, i.e. routers, views, inputs, buttons, modals, etc.)
 
 ## Acronyms
 
