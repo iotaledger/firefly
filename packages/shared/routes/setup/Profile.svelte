@@ -139,6 +139,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation animation="profile-desktop" />
+        <Animation animation={$mobile ? 'password-desktop' : 'profile-desktop'} />
     </div>
 </OnboardingLayout>
