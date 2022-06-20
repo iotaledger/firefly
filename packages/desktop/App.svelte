@@ -32,7 +32,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import {
-        Appearance,
         Backup,
         Balance,
         ClaimRewards,
@@ -41,6 +40,7 @@
         Create,
         Dashboard,
         Import,
+        LanguageAndAppearanceView,
         Ledger,
         Legal,
         LoginRouter,
@@ -190,7 +190,7 @@
             />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome locale={$_} />
+            <Welcome />
         </Route>
         <Route route={AppRoute.Legal}>
             <Legal locale={$_} />
@@ -198,8 +198,8 @@
         <Route route={AppRoute.CrashReporting}>
             <CrashReporting locale={$_} />
         </Route>
-        <Route route={AppRoute.Appearance}>
-            <Appearance locale={$_} />
+        <Route route={AppRoute.LanguageAndAppearance}>
+            <LanguageAndAppearanceView />
         </Route>
         <Route route={AppRoute.Profile}>
             <Profile locale={$_} />

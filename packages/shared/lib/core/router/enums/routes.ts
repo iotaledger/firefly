@@ -2,7 +2,7 @@ export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
     CrashReporting = 'crashReporting',
-    Appearance = 'appearance',
+    LanguageAndAppearance = 'languageAndAppearance',
     Profile = 'profile',
     Setup = 'setup',
     // TODO: ledger replace create

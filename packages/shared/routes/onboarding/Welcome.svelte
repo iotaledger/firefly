@@ -1,19 +1,13 @@
 <script lang="typescript">
     import { appRouter } from '@core/router'
-    import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, mobile } from '@core/app'
-    import { SUPPORTED_LOCALES, setLanguage, localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { Animation, Button, Logo, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
-
-    $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
+    import { mobile } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { formatProtocolName, NetworkProtocol } from '@core/network'
 
     function handleContinueClick(): void {
         $appRouter.next()
-    }
-
-    function handleLanguage(item: { value: string }): void {
-        setLanguage(item)
     }
 </script>
 
@@ -34,29 +28,9 @@
             >
             <Text type="p" secondary>{localize('views.onboarding1.body')}</Text>
         </div>
-        {#if $mobile}
-            <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
-                {#each languageList as language}
-                    <button
-                        class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                        on:click={() => handleLanguage(language)}
-                        class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
-                    >
-                        <Text type="p" smaller>{language?.label}</Text>
-                    </button>
-                {/each}
-            </div>
-        {:else}
-            <Dropdown
-                sortItems={true}
-                onSelect={handleLanguage}
-                value={SUPPORTED_LOCALES[$appSettings.language]}
-                items={languageList}
-            />
-        {/if}
     </div>
     <div slot="leftpane__action">
-        <Button onClick={() => handleContinueClick()} classes="w-full">{localize('actions.continue')}</Button>
+        <Button onClick={handleContinueClick} classes="w-full">{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
