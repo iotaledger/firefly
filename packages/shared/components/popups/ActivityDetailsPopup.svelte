@@ -13,6 +13,7 @@
         hideActivity,
         parseRawAmount,
     } from '@core/wallet'
+    import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
@@ -76,7 +77,11 @@
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={() => claimActivity(activity)}
             >
-                {localize('actions.claim')}
+                {#if activity.isClaiming}
+                    <Spinner busy={true} classes="justify-center" />
+                {:else}
+                    {localize('actions.claim')}
+                {/if}
             </button>
         </div>
     {/if}
