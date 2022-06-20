@@ -211,7 +211,7 @@
             {/if}
             <div class="mb-5 flex justify-center">
                 <button
-                    class="mobile-explorer-button action p-3 w-full text-center rounded-lg font-semibold text-14 bg-white text-blue-500"
+                    class="mobile-explorer-button action p-3 w-full text-center rounded-lg font-semibold text-14 bg-white dark:bg-gray-800 text-blue-500"
                     on:click={() => Platform.openUrl(`${explorerLink}/message/${id}`)}
                 >
                     <Text smaller highlighted>{localize('general.viewExplorer')}</Text>
