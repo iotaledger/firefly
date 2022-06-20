@@ -47,7 +47,7 @@
         await logout()
     }
 
-    function handleNetworkStatusClick() {
+    function handleNetworkStatusClick(): void {
         openPopup({
             type: 'networkStatus',
             props: {
@@ -81,7 +81,7 @@
         }
     }
 
-    function handleBackupClick() {
+    function handleBackupClick(): void {
         openPopup({
             type: 'backup',
             props: {
@@ -91,7 +91,7 @@
         })
     }
 
-    function handleVersionUpdateClick() {
+    function handleVersionUpdateClick(): void {
         openPopup({ type: 'version' })
     }
 </script>
