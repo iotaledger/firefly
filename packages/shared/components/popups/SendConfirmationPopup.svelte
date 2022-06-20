@@ -121,7 +121,6 @@
         unit,
         subject: recipient,
         metadata,
-        expirationDate,
         tag,
         storageDeposit: storageDeposit,
     }
