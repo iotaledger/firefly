@@ -3,6 +3,7 @@ import { VersionDetails } from '../../typings/appUpdater'
 import { EventMap } from '../../typings/events'
 import { AppSettings } from '../../typings/app'
 import { Error } from '../../typings/error'
+import { ActionSheetOptions } from '../../typings/actionSheet'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,
@@ -93,6 +94,12 @@ const Platform: IPlatform = {
     updateMenu(attribute: string, value: unknown): void {},
     validateSeedVault(buffer: unknown): Promise<boolean> {
         return Promise.resolve(false)
+    },
+    share(text: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    showActionSheet(options: ActionSheetOptions): Promise<number> {
+        return Promise.resolve(0)
     },
 }
 
