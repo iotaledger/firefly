@@ -38,7 +38,7 @@
     defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
 
     let expirationDate: Date
-    let storageDeposit = 0
+    let storageDeposit: number
 
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
@@ -55,9 +55,6 @@
             },
         })
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
-        if (storageDeposit && !expirationDate) {
-            expirationDate = defaultExpirationDate
-        }
     }
 
     $: $$props, expirationDate, _prepareOutput()
@@ -132,9 +129,15 @@
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
-        <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" bind:value={expirationDate} />
-        </KeyValueBox>
+        {#if storageDeposit !== undefined}
+            <KeyValueBox keyText={localize('general.expirationTime')}>
+                <ExpirationTimePicker
+                    slot="value"
+                    bind:value={expirationDate}
+                    initialSelected={storageDeposit ? '1day' : 'none'}
+                />
+            </KeyValueBox>
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
