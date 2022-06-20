@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { Button, Pin, Spinner, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { Platform } from 'shared/lib/platform'
-    import { activeProfile } from '@core/profile'
-    import { PIN_LENGTH } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { Button, PinInput, Spinner, Text } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { activeProfile } from '@core/profile'
+    import { Platform } from '@lib/platform'
+    import { PIN_LENGTH } from '@lib/utils'
+    import { api } from '@lib/wallet'
 
     let currentPincode = ''
     let newPincode = ''
@@ -90,7 +90,7 @@
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.currentPincode')}</Text>
-    <Pin
+    <PinInput
         smaller
         error={currentPincodeError}
         classes="mb-4"
@@ -99,7 +99,7 @@
         on:submit={changePincode}
     />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text>
-    <Pin
+    <PinInput
         smaller
         error={newPincodeError}
         classes="mb-4"
@@ -108,7 +108,7 @@
         on:submit={changePincode}
     />
     <Text type="p" secondary smaller classes="mb-2">{localize('views.settings.changePincode.confirmNewPincode')}</Text>
-    <Pin
+    <PinInput
         smaller
         error={confirmationPincodeError}
         classes="mb-4"

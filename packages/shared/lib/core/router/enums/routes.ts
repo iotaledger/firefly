@@ -138,8 +138,7 @@ export enum ImportRoute {
 export enum ProtectRoute {
     Init = 'init',
     Biometric = 'biometric',
-    Pin = 'pin',
-    RepeatPin = 'repeatPin',
+    SetupPin = 'setupPin',
 }
 
 export enum MigrateRoute {

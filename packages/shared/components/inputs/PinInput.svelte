@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { createEventDispatcher } from 'svelte'
-    import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
-    import { Error, Icon } from 'shared/components'
+    import { Error, Icon, Text } from 'shared/components'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { mobile } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@lib/platform'
+    import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
 
     const dispatch = createEventDispatcher()
 
@@ -17,6 +16,7 @@
     export let smaller = false
     export let value: string
     export let error: string
+    export let label: string
 
     let inputs = new Array(PIN_LENGTH)
     $: {
@@ -131,6 +131,9 @@
 </script>
 
 <div class="w-full {classes}">
+    {#if label}
+        <Text type="p" secondary>{label}</Text>
+    {/if}
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
         class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
