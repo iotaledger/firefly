@@ -26,10 +26,11 @@
         ;({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
     }
 
-    export function validate(allowZeroOrNull: boolean = false): Promise<void> {
-        if (allowZeroOrNull && !amount) {
+    export function validate(allowZeroOrNull = false): Promise<void> {
+        const isAmountZeroOrNull = !Number(amount)
+        if (allowZeroOrNull && isAmountZeroOrNull) {
             return Promise.resolve()
-        } else if (!amount) {
+        } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
             (unit === asset?.metadata.subunit || (unit === asset?.metadata.unit && asset?.metadata.decimals === 0)) &&
