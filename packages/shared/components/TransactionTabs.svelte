@@ -36,13 +36,11 @@
     }
 
     async function focusInput() {
-        const untilFinishAnimation = (ms: number) => new Promise(r => setTimeout(r, ms))
+        const untilFinishAnimation = (ms: number) => new Promise((r) => setTimeout(r, ms))
         await untilFinishAnimation(500)
         await tick()
         searchInput.focus()
     }
-
-    
 </script>
 
 <div class="flex flex-auto flex-col h-full space-y-4 py-2 px-4">
@@ -75,9 +73,9 @@
         <div
             role="searchbox"
             class="z-10 absolute right-0 h-10 mr-8 rounded-xl bg-gray-100 dark:bg-gray-900"
-            style="width: {!isSearching
-                ? '0'
-                : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1) {!isSearching ? '0.4s' : '0.1s'};"
+            style="width: {!isSearching ? '0' : '86vw'}; transition: width 0.5s cubic-bezier(0, 0.5, 0, 1) {!isSearching
+                ? '0.4s'
+                : '0.1s'};"
         >
             <input
                 type="search"
